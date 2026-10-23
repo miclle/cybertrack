@@ -1,6 +1,6 @@
 {
   "validation_date": "2026-10-24",
-  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity, read-only capacity isolation and lossless offline replay-store migration, independent rollback-resistant anchor contract, atomic offline backend selection, guarded protocol attachment and non-reusable version reservation",
+  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity, read-only capacity isolation and lossless offline replay-store migration, independent rollback-resistant anchor contract, atomic offline backend selection, guarded protocol attachment and non-reusable version reservation, explicit local maintenance recovery from exact anchored snapshots, incomplete-history refusal and interrupted recovery simulations",
   "environment": {
     "os": "macOS arm64",
     "compiler": "Apple Clang 21.0.0",
@@ -13,7 +13,7 @@
     "ctest --test-dir build/firmware-host --output-on-failure"
   ],
   "ctest": {
-    "passed": 15,
+    "passed": 17,
     "failed": 0,
     "control_scenario_groups": 8,
     "protocol_test_methods": 24,
@@ -58,7 +58,9 @@
     "freshness_integration_groups": 5,
     "replay_migration_groups": 4,
     "replay_switch_groups": 6,
-    "switch_integration_groups": 5
+    "switch_integration_groups": 5,
+    "replay_recovery_groups": 5,
+    "recovery_integration_groups": 4
   },
   "sanitizers": {
     "address": "no error reported",
@@ -90,23 +92,23 @@
     "actual Flash/NVS durability, wear, latency and OTA migration",
     "authenticated producer stable intent lifecycle and retry mapping across sessions",
     "physical rollback-resistant atomic anchor, trusted device/backend identity, media independence and firmware downgrade prevention",
-    "maintenance recovery after incomplete version reservation; whole-anchor rollback or bypass by old firmware is outside the software guarantee"
+    "recovery when the current anchored snapshot is absent, requiring additional complete recovery evidence; whole-anchor rollback or bypass by old firmware is outside the software guarantee"
   ],
   "source_sha256": {
-    "firmware/CMakeLists.txt": "a919a748dbf613c7c090ffa82a7160f99b0c6645ac61af87529e845547c60115",
+    "firmware/CMakeLists.txt": "142e775602d0c888fdefaed82b34fb88cfd9d263a335538266ddf47673796676",
     "firmware/include/cybertrack/control.h": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a",
     "firmware/include/cybertrack/inbox.h": "dd4b0937734c038bab26974ed084d457adaae04f1041ee64ac165817a80f6398",
     "firmware/include/cybertrack/inputs.h": "6e0cf7dc7023c5c885e5a4d4740fb06a4aa92fc707b4bc321fa35cfce4366d64",
     "firmware/include/cybertrack/link.h": "7317688493f0dd0c101a74f000d3735a727db79e149abc76d6c53f3181226e5a",
     "firmware/include/cybertrack/protocol.h": "ef190de0101c97a4512b9bd48d55ba65daaa0e014f74ce7463e03d0b23f76d8e",
-    "firmware/include/cybertrack/replay_store.h": "d39a039092232a19296b2232785ba58abe2a91676b66cc8003ac2ecbe8510338",
+    "firmware/include/cybertrack/replay_store.h": "5efc92a16b8345ce15e7f9484650fc6a14ddac00b62338e2b3cc50b4f98436c1",
     "firmware/include/cybertrack/runtime.h": "15229b5b8e5efef30d6be680a3ed09976f2b7beb1817add732698abb1ad95724",
     "firmware/src/control.c": "2158325e95fa32622735ca7466a5580eaaac6dc23be142ee91b4e384adcf1ec9",
     "firmware/src/inbox.c": "aaf2fd321276b6abc26542b22cc353863f8701fb51aa04976f368ead2c16da25",
     "firmware/src/inputs.c": "e34b3b9815f3633ff81e2d52d259fbfee0c7558f86ae3080b4ce89c62a690679",
     "firmware/src/link.c": "3f8f12fae098d61db7cf449946e000a1c59a78d1d5edc3a43eb549a24e5a0510",
     "firmware/src/protocol.c": "0ee261d94a56ea64a7e4fd2ac218efc80f7cc9d2b90dd4cbad4163e80c12489b",
-    "firmware/src/replay_store.c": "85edf84adeb7252470cb614013d7f9c0baea6caf8c6808d07494f12c12397b19",
+    "firmware/src/replay_store.c": "de2cd668657ad553248c47963ceacb1951a9a29fb982258e0ccc93cc66e94f0d",
     "firmware/src/runtime.c": "7acbcc427afe253ee3b758173a17a35418e7e755a9efd75c5e10c8693376e9bb",
     "firmware/tests/control_test.c": "e6c287ba766f4e5b54369aca3491a82e012e844fb863b30c989c6fc0983714d1",
     "firmware/tests/fake_store.c": "e2c6624f327a4875730065d738a2951cd7802b7ebf44916ae9270ca58c24e4fe",
@@ -135,7 +137,9 @@
     "firmware/tests/fake_anchor.c": "18f8b19dca49d8990329023fa19138328b10ef95183e139bd23394b045088bb8",
     "firmware/tests/fake_anchor.h": "036e53ea9df58568315a612223b1b45cfe3de4e6b6824f8a656ba49ad8c2c5de",
     "firmware/tests/replay_switch_test.c": "5ee353d2d3125cd07c2724c32b643536e436e7dd500b16979b5b366bf4d6b433",
-    "firmware/tests/switch_integration_test.c": "557080d2cd6f940feaba897785adebfc1f1f3c6274eb27bb8e303d46c4da47e1"
+    "firmware/tests/switch_integration_test.c": "557080d2cd6f940feaba897785adebfc1f1f3c6274eb27bb8e303d46c4da47e1",
+    "firmware/tests/replay_recovery_test.c": "e051c25a83ffa163f8ab5d85b0ade02ddbf71afa7eaecc23bdd1b25b23b825b4",
+    "firmware/tests/recovery_integration_test.c": "8f8a83fa75a7584c4470e42a3ee385ae00b952909d6aeaecc1027985a1540e31"
   },
   "f2_status": "partial: portable runtime, input filter and inbox verified on host; real board adapter and qualification pending",
   "inbox_object_bytes_host": 8552,
@@ -442,7 +446,7 @@
       "cross-reset protection requires successful persistent store attachment",
       "real SDK mapping, cryptography and physical timing unverified"
     ],
-    "verification_runs": "final full 15/15 ASan/UBSan suite; Release libraries and test-symbol exclusion passed"
+    "verification_runs": "final full 17/17 ASan/UBSan suite; Release libraries and test-symbol exclusion passed"
   },
   "capacity": {
     "phase": "capacity optimization and offline migration verified",
@@ -550,9 +554,57 @@
     "known_limits": [
       "raw unanchored APIs retained only for offline compatibility",
       "first enrollment locally attests imported history; cannot establish pre-enrollment non-rollback",
-      "partial version reservation can lock actions until maintenance; no repair API",
+      "partial version reservation without an exact anchored snapshot remains locked; local maintenance can recover only complete matching history",
       "callbacks must be bounded and serialized; cannot preempt a blocked anchor/media operation",
       "whole-anchor rollback, forged trusted identity, data forgery with valid CRC or old firmware bypass require platform protection"
+    ]
+  },
+  "maintenance_recovery": {
+    "api": "ct_replay_store_recover",
+    "tests": [
+      "firmware/tests/replay_recovery_test.c",
+      "firmware/tests/recovery_integration_test.c"
+    ],
+    "storage_groups": 5,
+    "protocol_groups": 4,
+    "target_cut_cases": 168,
+    "anchor_cut_cases": 8,
+    "source_read_failures": 2,
+    "missing_or_conflicting_history_cases": 7,
+    "integration_recovery_cut_cases": 176,
+    "integration_original_write_cut_cases": 72,
+    "integration_original_anchor_cut_cases": 8,
+    "repeated_recoveries": 50,
+    "rejection_assertions": 1239,
+    "unexpected_replays": 0,
+    "source_mutations": 0,
+    "history_bits_removed": 0,
+    "new_heap_allocations": false,
+    "store_object_bytes_host": 65696,
+    "normal_boot_policy_changed": false,
+    "wire_format_changed": false,
+    "anchor_layout_changed": false,
+    "evidence": "complete valid snapshot on the currently selected trusted backend, exact anchored revision and session; reject valid contradictory companion history",
+    "repairable": "current snapshot is complete even if its companion is damaged/blank or the prior call returned failure",
+    "not_repairable": "anchor points to N while only N-1 or partial N survives; cannot distinguish interruption from rollback of accepted actions",
+    "order": [
+      "outputs off and all protocol owners retired",
+      "re-read anchor and source snapshot",
+      "check companion history and anchor again",
+      "recheck blank independent target",
+      "copy all bits/session to two fresh revisions and verify durable readback",
+      "atomically select target and read back anchor",
+      "new protocol/session and explicit local enable"
+    ],
+    "uncertain_selection": "reload and consult the actual anchor; never fall back to retired source",
+    "automatic_recovery": false,
+    "automatic_erase": false,
+    "remote_recovery_tool": false,
+    "physical_backend_verified": false,
+    "remaining": [
+      "independent complete recovery evidence for absent current snapshots",
+      "actual local maintenance authorization and board integration",
+      "physical anchor durability/rollback resistance, media isolation, latency and firmware downgrade protection"
     ]
   }
 }

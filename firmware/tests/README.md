@@ -11,7 +11,7 @@ cmake --build build/firmware-host
 ctest --test-dir build/firmware-host --output-on-failure
 ```
 
-结果：CTest 15/15 通过，包含八组控制场景、24 个协议测试方法（含参数子用例及 500 次确定性消息变异）、16 组运行层、5 组输入处理和 4 组接收队列场景，以及解析器内存测试的 17 类逐次扫描与 3 组配置／恢复检查，另有 14 组连接场景、376 个穷举切分用例及 5 组长时会话压力场景。项目 C 代码开启 `-Wall -Wextra -Wpedantic -Werror`，AddressSanitizer 与 UndefinedBehaviorSanitizer 本次运行未报告错误。断言不依赖 `assert`／`NDEBUG`。源码哈希和执行记录见[验证记录](verification.json)。
+结果：CTest 17/17 通过，包含八组控制场景、24 个协议测试方法（含参数子用例及 500 次确定性消息变异）、16 组运行层、5 组输入处理和 4 组接收队列场景，以及解析器内存测试的 17 类逐次扫描与 3 组配置／恢复检查，另有 14 组连接场景、376 个穷举切分用例及 5 组长时会话压力场景。项目 C 代码开启 `-Wall -Wextra -Wpedantic -Werror`，AddressSanitizer 与 UndefinedBehaviorSanitizer 本次运行未报告错误。断言不依赖 `assert`／`NDEBUG`。源码哈希和执行记录见[验证记录](verification.json)。
 
 另以 `cmake -S firmware -B build/firmware-library -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release` 配置并构建通过，确认仅编译 C 库不依赖 Python 或测试传输。
 
@@ -180,7 +180,7 @@ Python 黑盒测试另验证 FIFO 命中不延寿、淘汰后只读快照重算�
 
 旧回归用例通过测试专用 `synthetic_proof.h` 模拟新意图生产者；此便捷函数不得进入生产接收路径。长时压力生产者给同一动作保留稳定意图 ID。新鲜度集成测试独立保存创建时 proof，不在到达时刷新。真实网络认证、生产者生命周期和实际驱动延迟没有因此获得验收。
 
-复跑：`ctest --test-dir build/firmware-host -R 'freshness|persistence|link' --output-on-failure`。包含四条换 ID 丢响应断言的最终完整 15/15 主机回归和 Release 纯库构建通过。纯库符号检查未发现测试分配器、假存储或合成生产者入口。
+复跑：`ctest --test-dir build/firmware-host -R 'freshness|persistence|link' --output-on-failure`。包含四条换 ID 丢响应断言的最终完整 17/17 主机回归和 Release 纯库构建通过。纯库符号检查未发现测试分配器、假存储或合成生产者入口。
 
 容量优化对照与迁移边界见 [CAPACITY.md](../CAPACITY.md)。新增断言验证只读流量不增加位数／写入、驻留读取 ID 被改成动作后永久退役；已有历史清位仍由存储层拒绝。
 
@@ -190,7 +190,7 @@ Python 黑盒测试另验证 FIFO 命中不延寿、淘汰后只读快照重算�
 
 **50 次连续迁移、441 次迁移相关重放检查**通过；每轮新目标接受新意图后，再次恢复仍拒绝旧意图，换 RPC ID 不能恢复。测试核对源未擦写、复制时会话与每个历史位保留；旧版只读位也原样保留。子集清理请求在写入前被拒绝，重新加载仍保留原记录。目标非空、介质在 EMPTY 加载后被占用、源读取失败、源快照过时、同一对象／context、版本加法溢出均拒绝。
 
-迁移不改变双槽格式或介质大小；新增锚点字段后存储对象为 65696 字节，无新增堆分配。主机 15/15 ASan／UBSan 回归与 Release 纯库构建通过；真实 Flash 和持久化分区选择尚未验收。单独复跑：`ctest --test-dir build/firmware-host -R '^replay_migration$' --output-on-failure`。
+迁移不改变双槽格式或介质大小；新增锚点字段后存储对象为 65696 字节，无新增堆分配。主机 17/17 ASan／UBSan 回归与 Release 纯库构建通过；真实 Flash 和持久化分区选择尚未验收。单独复跑：`ctest --test-dir build/firmware-host -R '^replay_migration$' --output-on-failure`。
 
 ## 原子切换与回滚保护验证
 
@@ -200,4 +200,12 @@ Python 黑盒测试另验证 FIFO 命中不延寿、淘汰后只读快照重算�
 
 非零输出回调断言历史已经持久、锚点身份／版本／会话与当前对象一致；锚点写入期间停止、周期超时、新鲜度耗尽或输出失败均不恢复旧动作。查询与停止在故障锁定后不访问锚点。接受动作前每次历史更新都提交锚点，不存在迁移后继续写入而锚点永久停在旧版本的空档。
 
-复跑：`ctest --test-dir build/firmware-host -R '^(replay_switch|switch_integration)$' --output-on-failure`。完整 15/15 ASan／UBSan 回归、Release 纯库构建和测试符号排除通过。存储对象 65696 字节，比原实现增加 56 字节；协议对象仍为 137448 字节。假锚点只模拟完整旧／新记录原子替换；实际防回滚、原子写、设备绑定、寿命、时延和固件降级保护未验收，见[切换契约](../ATOMIC-SWITCH.md)。
+复跑：`ctest --test-dir build/firmware-host -R '^(replay_switch|switch_integration)$' --output-on-failure`。完整 17/17 ASan／UBSan 回归、Release 纯库构建和测试符号排除通过。存储对象 65696 字节，比原实现增加 56 字节；协议对象仍为 137448 字节。假锚点只模拟完整旧／新记录原子替换；实际防回滚、原子写、设备绑定、寿命、时延和固件降级保护未验收，见[切换契约](../ATOMIC-SWITCH.md)。
+
+## 中断维护恢复验证
+
+`replay_recovery_test.c` 的 5 组场景覆盖 168 次目标掉电／回调失败、8 次锚点失败、2 次源读取失败和 7 种历史缺失／冲突。正常启动拒绝单槽损坏；维护从当前锚点对应的完整快照恢复，逐字节保留位图且不擦写源。完整旧镜像、当前槽缺失／损坏、真实预留中断、有效未来历史、另一有效槽含额外位以及会话不符都拒绝，不写目标；空锚点、后端身份错误、非空目标和溢出也拒绝。
+
+`recovery_integration_test.c` 的 4 组场景包括 176 次恢复故障（168 次目标、8 次锚点）、72 次原始动作写入中断、8 次原始锚点失败、50 次连续恢复；1239 次拒绝检查未恢复旧动作。覆盖选择已提交却报错、重启后旧源禁止使用、再次维护、旧 RPC ID／稳定意图、丢响应、显式新会话和本地使能。缺失当前快照时恢复失败，查询和停止不再访问故障存储。
+
+单独运行：`ctest --test-dir build/firmware-host -R '^(replay_recovery|recovery_integration)$' --output-on-failure`。完整 17/17 ASan／UBSan 回归、Release 纯库构建与测试符号排除通过；45 项源文件 SHA-256 已更新。对象／介质布局未变，无新增动态分配。本轮没有板级 Flash 驱动、实际维护授权入口或真实断电验收；证据不足时继续锁定动作，见[恢复契约](../RECOVERY.md)。
