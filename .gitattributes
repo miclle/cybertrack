@@ -7,3 +7,6 @@
 *.pdf binary
 *.png binary
 *.jpg binary
+
+# Native generated assembly exchange data; review its readback report.
+/hardware/model/*.step -diff

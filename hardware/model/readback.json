@@ -1,0 +1,3141 @@
+{
+  "status": "preliminary_concept",
+  "design_revision": "0.7",
+  "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
+  "power_bank_dimensions_mm": {
+    "source": "user_measurement",
+    "length": 120,
+    "width": 73,
+    "thickness": 31.5,
+    "orientation": "length X, width Y, thickness Z; low horizontal placement retained from user-approved layout",
+    "envelope_center_z_mm": 48.75,
+    "mass_kg": null,
+    "reported_product_net_mass_kg": 0.373,
+    "mass_source": "P11; user-relayed product specification; not weighed",
+    "ports_and_cable_clearance_verified": false
+  },
+  "source_sha256": "178b308b0aba98859904a6e016541f75ca01a9bc7258633666c2f254743fb758",
+  "source_unchanged": true,
+  "drive_transform": {
+    "Left": [
+      14,
+      0,
+      0
+    ],
+    "Right": [
+      -14,
+      0,
+      0
+    ],
+    "scale": 1,
+    "method": "whole side translated, including motor, shaft, coupler and mount"
+  },
+  "drive_object_count": 30,
+  "track_module_count": 2,
+  "objects": [
+    {
+      "name": "TrackLeftRubberBand",
+      "label": "左侧连续橡胶履带",
+      "category": "drive",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 37367.41960436351,
+      "bbox_mm": [
+        69.99999999999999,
+        -70.22974593509691,
+        2.204409128110335,
+        112.0,
+        70.22974593509689,
+        87.84032084142676
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackLeftTreadPads",
+      "label": "左侧履带胎块底座（48节）",
+      "category": "drive",
+      "valid": true,
+      "solids": 48,
+      "volume_mm3": 7434.240000000018,
+      "bbox_mm": [
+        68.99999999999999,
+        -70.80664146655074,
+        1.713279367020743,
+        113.0,
+        70.7993257372576,
+        88.31763452160439
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackLeftChevronTreads",
+      "label": "左侧人字形抓地块（96块）",
+      "category": "drive",
+      "valid": true,
+      "solids": 96,
+      "volume_mm3": 10027.007999999983,
+      "bbox_mm": [
+        70.99999999999999,
+        -72.44587445204444,
+        -2.4891300132168226e-09,
+        111.0,
+        72.55412555288818,
+        89.99999999999167
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackLeftShoulderLugs",
+      "label": "左侧履带肩部胎块（96块）",
+      "category": "drive",
+      "valid": true,
+      "solids": 96,
+      "volume_mm3": 1710.720000000001,
+      "bbox_mm": [
+        67.99999999999999,
+        -72.12597832528955,
+        0.359209260891495,
+        114.0,
+        72.17161352821077,
+        89.657515644071
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackLeftWheelTires",
+      "label": "左侧驱动轮与导向轮橡胶轮组",
+      "category": "drive",
+      "valid": true,
+      "solids": 7,
+      "volume_mm3": 7934.370788786177,
+      "bbox_mm": [
+        102.5,
+        -63.69908313746223,
+        3.3000000000000007,
+        107.0,
+        63.699083137462246,
+        84.84032084142676
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackLeftWheelRims",
+      "label": "左侧金属轮圈",
+      "category": "drive",
+      "valid": true,
+      "solids": 14,
+      "volume_mm3": 6524.986468673523,
+      "bbox_mm": [
+        102.5,
+        -62.706374263364175,
+        4.300000000000001,
+        108.0,
+        62.70637426336419,
+        83.84032084142676
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackLeftWheelFaces",
+      "label": "左侧镂空轮盘",
+      "category": "drive",
+      "valid": true,
+      "solids": 7,
+      "volume_mm3": 9495.759033651344,
+      "bbox_mm": [
+        104.0,
+        -60.12533119070923,
+        6.9,
+        107.0,
+        60.125331190709254,
+        81.24032084142675
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackLeftWheelHubs",
+      "label": "左侧阶梯轮毂与垫圈",
+      "category": "drive",
+      "valid": true,
+      "solids": 15,
+      "volume_mm3": 2283.181679227195,
+      "bbox_mm": [
+        98.0,
+        -51.091680436416944,
+        9.0,
+        111.5,
+        51.09168043641696,
+        65.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackLeftSuspensionArms",
+      "label": "左侧悬挂支臂与轴套",
+      "category": "drive",
+      "valid": true,
+      "solids": 2,
+      "volume_mm3": 1941.7094169213185,
+      "bbox_mm": [
+        110.0,
+        -47.61719937707376,
+        24.916379699215803,
+        112.0,
+        47.61719937707377,
+        41.4
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackLeftRockerPlates",
+      "label": "左侧镂空承重轮摇臂板",
+      "category": "drive",
+      "valid": true,
+      "solids": 2,
+      "volume_mm3": 1714.7842922385612,
+      "bbox_mm": [
+        110.99999999999999,
+        -40.78814722383588,
+        8.2,
+        113.0,
+        40.788147223835885,
+        29.96761147615332
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackLeftFasteners",
+      "label": "左侧轮组及悬挂紧固件",
+      "category": "drive",
+      "valid": true,
+      "solids": 25,
+      "volume_mm3": 91.92244284404434,
+      "bbox_mm": [
+        108.0,
+        -58.09997522367543,
+        11.700961894323342,
+        113.0,
+        58.09997522367544,
+        80.79294878558964
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightRubberBand",
+      "label": "右侧连续橡胶履带",
+      "category": "drive",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 37367.41960436351,
+      "bbox_mm": [
+        -112.0,
+        -70.2297459350969,
+        2.204409128110335,
+        -69.99999999999999,
+        70.22974593509691,
+        87.84032084142676
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightTreadPads",
+      "label": "右侧履带胎块底座（48节）",
+      "category": "drive",
+      "valid": true,
+      "solids": 48,
+      "volume_mm3": 7434.240000000003,
+      "bbox_mm": [
+        -113.0,
+        -70.80664146655073,
+        1.713279367020743,
+        -68.99999999999999,
+        70.79932573725762,
+        88.31763452160439
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightChevronTreads",
+      "label": "右侧人字形抓地块（96块）",
+      "category": "drive",
+      "valid": true,
+      "solids": 96,
+      "volume_mm3": 10027.007999999983,
+      "bbox_mm": [
+        -111.0,
+        -72.44587445204442,
+        -2.4891300132168226e-09,
+        -70.99999999999999,
+        72.5541255528882,
+        89.99999999999167
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightShoulderLugs",
+      "label": "右侧履带肩部胎块（96块）",
+      "category": "drive",
+      "valid": true,
+      "solids": 96,
+      "volume_mm3": 1710.720000000003,
+      "bbox_mm": [
+        -114.0,
+        -72.12597832528954,
+        0.359209260891495,
+        -67.99999999999999,
+        72.1716135282108,
+        89.657515644071
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightWheelTires",
+      "label": "右侧驱动轮与导向轮橡胶轮组",
+      "category": "drive",
+      "valid": true,
+      "solids": 7,
+      "volume_mm3": 7934.370788786177,
+      "bbox_mm": [
+        -107.0,
+        -63.699083137462246,
+        3.3000000000000007,
+        -102.5,
+        63.69908313746223,
+        84.84032084142676
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightWheelRims",
+      "label": "右侧金属轮圈",
+      "category": "drive",
+      "valid": true,
+      "solids": 14,
+      "volume_mm3": 6524.98646867352,
+      "bbox_mm": [
+        -108.0,
+        -62.70637426336419,
+        4.300000000000001,
+        -102.5,
+        62.706374263364175,
+        83.84032084142676
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightWheelFaces",
+      "label": "右侧镂空轮盘",
+      "category": "drive",
+      "valid": true,
+      "solids": 7,
+      "volume_mm3": 9495.759033651342,
+      "bbox_mm": [
+        -107.0,
+        -60.12533119070925,
+        6.9,
+        -104.0,
+        60.12533119070924,
+        81.24032084142675
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightWheelHubs",
+      "label": "右侧阶梯轮毂与垫圈",
+      "category": "drive",
+      "valid": true,
+      "solids": 15,
+      "volume_mm3": 2283.1816792271943,
+      "bbox_mm": [
+        -111.5,
+        -51.09168043641696,
+        9.0,
+        -98.0,
+        51.091680436416944,
+        65.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightSuspensionArms",
+      "label": "右侧悬挂支臂与轴套",
+      "category": "drive",
+      "valid": true,
+      "solids": 2,
+      "volume_mm3": 1941.7094169213208,
+      "bbox_mm": [
+        -112.0,
+        -47.61719937707377,
+        24.916379699215803,
+        -110.0,
+        47.61719937707375,
+        41.4
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightRockerPlates",
+      "label": "右侧镂空承重轮摇臂板",
+      "category": "drive",
+      "valid": true,
+      "solids": 2,
+      "volume_mm3": 1714.7842922385607,
+      "bbox_mm": [
+        -113.0,
+        -40.788147223835885,
+        8.2,
+        -110.99999999999999,
+        40.78814722383588,
+        29.96761147615332
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackRightFasteners",
+      "label": "右侧轮组及悬挂紧固件",
+      "category": "drive",
+      "valid": true,
+      "solids": 25,
+      "volume_mm3": 91.92244284404437,
+      "bbox_mm": [
+        -113.0,
+        -58.09997522367544,
+        11.700961894323342,
+        -108.0,
+        58.09997522367543,
+        80.79294878558964
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MotorL",
+      "label": "左侧37R-520电机（尺寸占位）",
+      "category": "drive",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 44517.599327147764,
+      "bbox_mm": [
+        26.200000000000003,
+        -18.398655064313058,
+        31.5,
+        79.0,
+        18.398655064313058,
+        68.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MotorShaftL",
+      "label": "左侧Ø6偏心D形输出轴",
+      "category": "drive",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 584.8655604494376,
+      "bbox_mm": [
+        73.0,
+        -2.9999841913597285,
+        54.0,
+        95.0,
+        2.9999841913597294,
+        60.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "DriveCouplerL",
+      "label": "左侧黄铜六角联轴器（配合待测）",
+      "category": "drive",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1655.380827593807,
+      "bbox_mm": [
+        85.0,
+        -6.92820323027551,
+        51.0,
+        103.0,
+        6.928203230275511,
+        63.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackMountL",
+      "label": "左侧履带安装件参考",
+      "category": "drive",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4509.663155198775,
+      "bbox_mm": [
+        86.99999999999999,
+        -32.500000000000014,
+        33.0,
+        98.0,
+        32.499999999999986,
+        70.99888197181264
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MotorR",
+      "label": "右侧37R-520电机（尺寸占位）",
+      "category": "drive",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 44517.59932714777,
+      "bbox_mm": [
+        -79.0,
+        -18.39865506431305,
+        31.5,
+        -26.200000000000003,
+        18.39865506431306,
+        68.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MotorShaftR",
+      "label": "右侧Ø6偏心D形输出轴",
+      "category": "drive",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 584.8655604494376,
+      "bbox_mm": [
+        -95.0,
+        -2.9999841913597294,
+        54.0,
+        -73.0,
+        2.9999841913597285,
+        60.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "DriveCouplerR",
+      "label": "右侧黄铜六角联轴器（配合待测）",
+      "category": "drive",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1655.380827593807,
+      "bbox_mm": [
+        -103.0,
+        -6.928203230275511,
+        51.0,
+        -85.0,
+        6.92820323027551,
+        63.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TrackMountR",
+      "label": "右侧履带安装件参考",
+      "category": "drive",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4509.663155198778,
+      "bbox_mm": [
+        -98.0,
+        -32.500000000000014,
+        33.0,
+        -87.0,
+        32.499999999999986,
+        70.99888197181265
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "LowerTub",
+      "label": "低位电源前舱／上缘内收切面",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 111322.09946705098,
+      "bbox_mm": [
+        -66.0,
+        -101.0,
+        27.999999999999993,
+        66.0,
+        74.0,
+        94.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BatteryHatch",
+      "label": "低位平放电源底部维护盖",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 27214.079999999998,
+      "bbox_mm": [
+        -60.8,
+        -96.8,
+        28.0,
+        60.8,
+        -22.200000000000003,
+        31.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BatteryPadN54N90",
+      "label": "电源底部承托垫",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 49.999999999999986,
+      "bbox_mm": [
+        -56.5,
+        -92.5,
+        31.0,
+        -51.5,
+        -87.5,
+        33.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BatteryPadN54N29",
+      "label": "电源底部承托垫001",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 49.999999999999986,
+      "bbox_mm": [
+        -56.5,
+        -31.5,
+        31.0,
+        -51.5,
+        -26.5,
+        33.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BatteryPad54N90",
+      "label": "电源底部承托垫002",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 49.999999999999986,
+      "bbox_mm": [
+        51.5,
+        -92.5,
+        31.0,
+        56.5,
+        -87.5,
+        33.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BatteryPad54N29",
+      "label": "电源底部承托垫003",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 49.999999999999986,
+      "bbox_mm": [
+        51.5,
+        -31.5,
+        31.0,
+        56.5,
+        -26.5,
+        33.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "FrontBulkhead",
+      "label": "前部干舱隔板",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 10547.999999999998,
+      "bbox_mm": [
+        -45.0,
+        -21.0,
+        31.0,
+        45.0,
+        -19.0,
+        90.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "RearBulkhead",
+      "label": "后部湿舱隔板",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 11159.99999999998,
+      "bbox_mm": [
+        -45.0,
+        25.0,
+        31.0,
+        45.0,
+        27.0,
+        94.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BatteryRoof",
+      "label": "低位电源上方切边隔板",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 28194.0,
+      "bbox_mm": [
+        -63.0,
+        -98.0,
+        65.5,
+        63.0,
+        -21.0,
+        68.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WetDivider",
+      "label": "双液体舱中央隔板",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 5544.0,
+      "bbox_mm": [
+        -1.0,
+        27.0,
+        31.0,
+        1.0,
+        71.0,
+        94.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MountEarLFront",
+      "label": "左前外移动力安装耳",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1130.2460358497508,
+      "bbox_mm": [
+        66.0,
+        -32.1,
+        33.4,
+        87.0,
+        -24.1,
+        41.4
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MountEarLRear",
+      "label": "左后外移动力安装耳",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2099.0283522923933,
+      "bbox_mm": [
+        48.0,
+        24.1,
+        33.4,
+        87.0,
+        32.1,
+        41.4
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MountEarRFront",
+      "label": "右前外移动力安装耳",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1130.2460358497508,
+      "bbox_mm": [
+        -87.0,
+        -32.1,
+        33.4,
+        -66.0,
+        -24.1,
+        41.4
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MountEarRRear",
+      "label": "右后外移动力安装耳",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2099.0283522923933,
+      "bbox_mm": [
+        -87.0,
+        24.1,
+        33.4,
+        -48.0,
+        32.1,
+        41.4
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "KeelLid",
+      "label": "低鼻锥至颈架的折面顶盖",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 45251.67412397338,
+      "bbox_mm": [
+        -65.0,
+        -101.0,
+        69.0,
+        65.00000000000001,
+        74.0,
+        97.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckPedestal",
+      "label": "颈架八角基座／斜撑沉座",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 5920.9964865255115,
+      "bbox_mm": [
+        -17.0,
+        -17.0,
+        93.0,
+        17.0,
+        20.0,
+        98.00000000000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckYokeL",
+      "label": "左开窗前倾颈架",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 7464.699602255322,
+      "bbox_mm": [
+        18.0,
+        -28.0,
+        93.0,
+        25.0,
+        22.0,
+        136.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckOuterWebL",
+      "label": "左颈架外层加强板",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1903.5343587211057,
+      "bbox_mm": [
+        26.0,
+        -24.0,
+        96.0,
+        29.000000000000004,
+        17.0,
+        133.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckBearingL",
+      "label": "左固定横梁阶梯套",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 537.2123437638545,
+      "bbox_mm": [
+        29.0,
+        -21.962429423073367,
+        113.0,
+        32.0,
+        -0.037570576926629684,
+        135.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckCapL",
+      "label": "左横梁端部锁片",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 226.19467105846508,
+      "bbox_mm": [
+        32.0,
+        -16.994593797228088,
+        118.02161506874484,
+        34.0,
+        -5.005406202771912,
+        130.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckSpacerL104",
+      "label": "颈架层间连接柱 L 104",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 19.6349540849362,
+      "bbox_mm": [
+        25.0,
+        7.502252584488296,
+        97.50900627864368,
+        26.0,
+        12.497747415511704,
+        102.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckSpacerL136",
+      "label": "颈架层间连接柱 L 136",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 19.634954084936215,
+      "bbox_mm": [
+        25.0,
+        -22.497747415511704,
+        129.50900627864368,
+        26.0,
+        -17.502252584488296,
+        134.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckStayL",
+      "label": "左后斜撑芯杆",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 905.6372581142011,
+      "bbox_mm": [
+        9.22041515252545,
+        -0.5890986757292049,
+        97.93390054528797,
+        14.779584847474553,
+        18.589098675729204,
+        134.06609945471203
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckStaySleeveL",
+      "label": "左后斜撑固定套筒",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 667.2143881208706,
+      "bbox_mm": [
+        7.208120840297913,
+        6.271556371348946,
+        97.18475850584957,
+        16.791879159702088,
+        20.438454872678637,
+        113.74759906522061
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckYokeR",
+      "label": "右开窗前倾颈架",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 7464.699602255322,
+      "bbox_mm": [
+        -25.000000000000007,
+        -28.0,
+        93.0,
+        -18.0,
+        22.0,
+        136.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckOuterWebR",
+      "label": "右颈架外层加强板",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1903.5343587211057,
+      "bbox_mm": [
+        -29.0,
+        -24.0,
+        96.0,
+        -26.0,
+        17.0,
+        133.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckBearingR",
+      "label": "右固定横梁阶梯套",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 537.2123437638547,
+      "bbox_mm": [
+        -32.0,
+        -21.962429423073367,
+        113.0,
+        -29.0,
+        -0.037570576926629684,
+        135.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckCapR",
+      "label": "右横梁端部锁片",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 226.19467105846502,
+      "bbox_mm": [
+        -34.0,
+        -16.994593797228088,
+        118.0,
+        -32.0,
+        -5.005406202771912,
+        129.97838493125516
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckSpacerR104",
+      "label": "颈架层间连接柱 R 104",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 19.6349540849362,
+      "bbox_mm": [
+        -26.0,
+        7.502252584488296,
+        97.5,
+        -25.0,
+        12.497747415511704,
+        102.49099372135632
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckSpacerR136",
+      "label": "颈架层间连接柱 R 136",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 19.63495408493621,
+      "bbox_mm": [
+        -26.0,
+        -22.497747415511704,
+        129.5,
+        -25.0,
+        -17.502252584488296,
+        134.49099372135632
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckStayR",
+      "label": "右后斜撑芯杆",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 905.6372581142011,
+      "bbox_mm": [
+        -14.77958484747455,
+        -0.5890986757292049,
+        97.93390054528797,
+        -9.220415152525447,
+        18.589098675729204,
+        134.06609945471203
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckStaySleeveR",
+      "label": "右后斜撑固定套筒",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 667.2143881208706,
+      "bbox_mm": [
+        -16.791879159702088,
+        6.271556371348946,
+        97.18475850584957,
+        -7.208120840297913,
+        20.438454872678637,
+        113.74759906522061
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckCrossbar",
+      "label": "颈架固定横梁",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 11309.733552923257,
+      "bbox_mm": [
+        -32.0,
+        -18.445316555735403,
+        116.5,
+        32.0,
+        -3.554683444264593,
+        131.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckHeadSaddle",
+      "label": "头舱下方承托鞍座",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3353.947921595036,
+      "bbox_mm": [
+        -17.0,
+        -27.0,
+        133.0,
+        17.0,
+        6.0,
+        136.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "HeadShell",
+      "label": "切面头盔／收窄下颌与后掠顶壳",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 143573.44836211018,
+      "bbox_mm": [
+        -82.0,
+        -83.0,
+        136.0,
+        82.0,
+        29.0,
+        192.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "SensorMask",
+      "label": "内嵌楔形传感器面板",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 6068.51958466882,
+      "bbox_mm": [
+        -63.599999999999994,
+        -81.00000000000001,
+        153.0,
+        63.599999999999994,
+        -78.0,
+        174.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "VisorRim",
+      "label": "六边形前脸内框",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 6009.986620575904,
+      "bbox_mm": [
+        -70.8,
+        -85.00000000000001,
+        149.0,
+        70.8,
+        -81.0,
+        180.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BrowArmorL",
+      "label": "左折线眉甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1153.7999999999997,
+      "bbox_mm": [
+        0.0,
+        -88.0,
+        171.0,
+        70.8,
+        -85.0,
+        186.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CheekArmorL",
+      "label": "左斜切颊部护板",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1289.914999981927,
+      "bbox_mm": [
+        45.92093727122803,
+        -88.0,
+        139.0,
+        80.39999999999999,
+        -84.0,
+        167.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "UltrasonicRingL",
+      "label": "嵌入式超声波探头框 L",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 100.53096491487327,
+      "bbox_mm": [
+        20.529031809443303,
+        -83.0,
+        154.5,
+        37.47096819055669,
+        -81.0,
+        171.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "UltrasonicFaceL",
+      "label": "超声波探头暗面 L",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 176.7145867644259,
+      "bbox_mm": [
+        21.525616302449976,
+        -82.0,
+        155.5,
+        36.474383697550024,
+        -81.0,
+        170.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BrowArmorR",
+      "label": "右折线眉甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1153.8,
+      "bbox_mm": [
+        -70.8,
+        -88.0,
+        171.0,
+        0.0,
+        -85.0,
+        186.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CheekArmorR",
+      "label": "右斜切颊部护板",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1435.1999999999994,
+      "bbox_mm": [
+        -80.39999999999999,
+        -88.0,
+        139.0,
+        -43.199999999999996,
+        -84.0,
+        167.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "UltrasonicRingR",
+      "label": "嵌入式超声波探头框 R",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 100.53096491487327,
+      "bbox_mm": [
+        -37.4709681905567,
+        -83.0,
+        154.5,
+        -20.529031809443307,
+        -81.0,
+        171.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "UltrasonicFaceR",
+      "label": "超声波探头暗面 R",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 176.7145867644259,
+      "bbox_mm": [
+        -36.474383697550024,
+        -82.0,
+        155.5,
+        -21.525616302449976,
+        -81.0,
+        170.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "SensorStatusStrip",
+      "label": "前脸中部窄状态色条",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 9.999999999999998,
+      "bbox_mm": [
+        -10.0,
+        -81.5,
+        168.0,
+        10.0,
+        -81.0,
+        169.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterPort",
+      "label": "偏置短喷水口占位",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1119.1923828413637,
+      "bbox_mm": [
+        38.007700956973686,
+        -89.0,
+        139.03078405964862,
+        49.992299043026314,
+        -74.0,
+        151.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "JawArmor",
+      "label": "多面下颌中央护片",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2572.5,
+      "bbox_mm": [
+        -43.199999999999996,
+        -87.0,
+        136.0,
+        27.599999999999998,
+        -83.5,
+        148.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "JawAccent",
+      "label": "下颌偏侧识别片",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 25.199999999999996,
+      "bbox_mm": [
+        -34.8,
+        -87.5,
+        140.0,
+        -16.8,
+        -87.0,
+        143.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "AudioSideGuardL",
+      "label": "左多层音频侧舱护罩",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3582.5558955075744,
+      "bbox_mm": [
+        82.0,
+        -34.0,
+        141.0,
+        85.00000000000001,
+        17.0,
+        186.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "AudioEarRingL",
+      "label": "左侧舱阶梯环",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1206.3715789784808,
+      "bbox_mm": [
+        85.0,
+        -26.93852087412006,
+        145.0,
+        88.0,
+        8.938520874120059,
+        181.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "AudioEarGrilleL",
+      "label": "左侧舱条孔内芯",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 929.1105222334795,
+      "bbox_mm": [
+        85.0,
+        -22.453890655590044,
+        149.5,
+        87.0,
+        4.453890655590044,
+        176.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EarHubL",
+      "label": "左侧舱中心识别片",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 117.80972450961721,
+      "bbox_mm": [
+        88.0,
+        -13.982922465033349,
+        158.0,
+        89.5,
+        -4.01707753496665,
+        168.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownFinL",
+      "label": "左后掠顶部封闭脊翼",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1125.0,
+      "bbox_mm": [
+        49.0,
+        -10.0,
+        192.0,
+        54.0,
+        31.0,
+        203.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "AudioSideGuardR",
+      "label": "右多层音频侧舱护罩",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3582.5558955075753,
+      "bbox_mm": [
+        -85.0,
+        -34.0,
+        141.0,
+        -82.0,
+        17.0,
+        186.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "AudioEarRingR",
+      "label": "右侧舱阶梯环",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1206.3715789784808,
+      "bbox_mm": [
+        -88.0,
+        -26.93852087412006,
+        145.0,
+        -85.0,
+        8.938520874120059,
+        181.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "AudioEarGrilleR",
+      "label": "右侧舱条孔内芯",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 929.1105222334795,
+      "bbox_mm": [
+        -87.0,
+        -22.453890655590044,
+        149.5,
+        -85.0,
+        4.453890655590044,
+        176.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EarHubR",
+      "label": "右侧舱中心识别片",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 117.80972450961721,
+      "bbox_mm": [
+        -89.5,
+        -13.982922465033349,
+        158.0,
+        -88.0,
+        -4.01707753496665,
+        168.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownFinR",
+      "label": "右后掠顶部封闭脊翼",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1125.0,
+      "bbox_mm": [
+        -54.0,
+        -10.0,
+        192.0,
+        -49.0,
+        31.0,
+        203.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TempleGuardL",
+      "label": "左前伸太阳穴切面护板",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1395.0,
+      "bbox_mm": [
+        82.0,
+        -70.0,
+        152.0,
+        84.00000000000001,
+        -35.0,
+        177.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TempleGuardR",
+      "label": "右前伸太阳穴切面护板",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1395.0,
+      "bbox_mm": [
+        -84.00000000000001,
+        -70.0,
+        152.0,
+        -82.0,
+        -35.0,
+        177.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "HeadServiceHatch",
+      "label": "头顶阶梯隆起检修装甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 13206.000000000004,
+      "bbox_mm": [
+        -28.0,
+        -43.0,
+        192.0,
+        28.0,
+        3.0,
+        199.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownSpine",
+      "label": "顶冠中央低矮脊甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 328.00000000000006,
+      "bbox_mm": [
+        -4.0,
+        -33.0,
+        199.0,
+        4.0,
+        -8.0,
+        201.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownForePlate",
+      "label": "额顶切角斜面装甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3958.6666666666674,
+      "bbox_mm": [
+        -25.0,
+        -73.0,
+        192.0,
+        25.0,
+        -47.0,
+        196.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownSideArmorL",
+      "label": "左向外下倾分片顶甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 15709.31250000002,
+      "bbox_mm": [
+        32.0,
+        -70.0,
+        192.0,
+        70.0,
+        16.0,
+        200.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TempleCrestL",
+      "label": "左太阳穴上层折面护甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1258.5,
+      "bbox_mm": [
+        83.99999999999999,
+        -72.0,
+        170.0,
+        87.0,
+        -36.0,
+        186.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TempleLowerBladeL",
+      "label": "左太阳穴下层护片",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 526.25,
+      "bbox_mm": [
+        84.0,
+        -70.0,
+        150.0,
+        86.5,
+        -38.0,
+        158.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EarOuterArcL",
+      "label": "左耳舱半环外护弧",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 398.4206862759955,
+      "bbox_mm": [
+        85.0,
+        -10.000000000000004,
+        141.02273902416408,
+        87.0,
+        12.9761695340487,
+        185.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownSideArmorR",
+      "label": "右向外下倾分片顶甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 15709.31250000002,
+      "bbox_mm": [
+        -70.0,
+        -70.0,
+        192.0,
+        -32.0,
+        16.0,
+        200.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TempleCrestR",
+      "label": "右太阳穴上层折面护甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1258.5,
+      "bbox_mm": [
+        -87.0,
+        -72.0,
+        170.0,
+        -84.0,
+        -36.0,
+        186.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "TempleLowerBladeR",
+      "label": "右太阳穴下层护片",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 526.25,
+      "bbox_mm": [
+        -86.5,
+        -70.0,
+        150.0,
+        -84.0,
+        -38.0,
+        158.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EarOuterArcR",
+      "label": "右耳舱半环外护弧",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 398.4206862759955,
+      "bbox_mm": [
+        -87.0,
+        -10.000000000000004,
+        141.0,
+        -85.0,
+        12.9761695340487,
+        184.97726097583592
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownRearCassette",
+      "label": "顶冠后部封闭阶梯座",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2460.0000000000005,
+      "bbox_mm": [
+        -29.0,
+        7.0,
+        192.0,
+        29.0,
+        22.0,
+        195.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownRearBlade0",
+      "label": "顶冠后部错层饰片 0",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 115.50000000000001,
+      "bbox_mm": [
+        -21.0,
+        9.0,
+        195.0,
+        21.0,
+        11.0,
+        197.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownRearBlade1",
+      "label": "顶冠后部错层饰片 1",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 115.50000000000001,
+      "bbox_mm": [
+        -21.0,
+        13.0,
+        195.0,
+        21.0,
+        15.0,
+        197.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownRearBlade2",
+      "label": "顶冠后部错层饰片 2",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 115.50000000000001,
+      "bbox_mm": [
+        -21.0,
+        17.0,
+        195.0,
+        21.0,
+        19.0,
+        197.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalFrame",
+      "label": "后脑六边内嵌护框",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 7638.300000000005,
+      "bbox_mm": [
+        -56.349999999999994,
+        26.99999999999999,
+        146.0,
+        56.349999999999994,
+        33.0,
+        180.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalInset",
+      "label": "后脑内凹封闭衬板",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 6454.949999999999,
+      "bbox_mm": [
+        -49.449999999999996,
+        24.0,
+        151.0,
+        49.449999999999996,
+        27.0,
+        175.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalSpine",
+      "label": "后脑中央分层脊甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2060.8,
+      "bbox_mm": [
+        -8.049999999999999,
+        27.0,
+        151.0,
+        8.049999999999999,
+        34.0,
+        174.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalMark",
+      "label": "后脑纵向识别条",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 19.999999999999996,
+      "bbox_mm": [
+        -2.0,
+        34.0,
+        157.0,
+        2.0,
+        34.5,
+        167.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalBrowL",
+      "label": "左后脑折面上护甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 876.3000000000002,
+      "bbox_mm": [
+        0.0,
+        33.0,
+        172.0,
+        60.949999999999996,
+        36.0,
+        186.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalLouverL0",
+      "label": "后脑封闭格栅饰条 L0",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 185.4375,
+      "bbox_mm": [
+        12.649999999999999,
+        27.0,
+        156.0,
+        39.099999999999994,
+        30.0,
+        158.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalLouverL1",
+      "label": "后脑封闭格栅饰条 L1",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 185.4375,
+      "bbox_mm": [
+        12.649999999999999,
+        27.0,
+        162.0,
+        39.099999999999994,
+        30.0,
+        164.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalLouverL2",
+      "label": "后脑封闭格栅饰条 L2",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 185.4375,
+      "bbox_mm": [
+        12.649999999999999,
+        27.0,
+        168.0,
+        39.099999999999994,
+        30.0,
+        170.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalBrowR",
+      "label": "右后脑折面上护甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 876.3000000000002,
+      "bbox_mm": [
+        -60.949999999999996,
+        33.0,
+        172.0,
+        0.0,
+        36.0,
+        186.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalLouverR0",
+      "label": "后脑封闭格栅饰条 R0",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 185.4375,
+      "bbox_mm": [
+        -39.099999999999994,
+        27.0,
+        156.0,
+        -12.649999999999999,
+        30.0,
+        158.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalLouverR1",
+      "label": "后脑封闭格栅饰条 R1",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 185.4375,
+      "bbox_mm": [
+        -39.099999999999994,
+        27.0,
+        162.0,
+        -12.649999999999999,
+        30.0,
+        164.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "OccipitalLouverR2",
+      "label": "后脑封闭格栅饰条 R2",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 185.4375,
+      "bbox_mm": [
+        -39.099999999999994,
+        27.0,
+        168.0,
+        -12.649999999999999,
+        30.0,
+        170.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ShoulderRailL",
+      "label": "左斜面肩部承力梁",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4757.071428499001,
+      "bbox_mm": [
+        33.0,
+        -89.0,
+        73.428571429,
+        46.0,
+        -11.0,
+        97.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "KeelSideFrameL",
+      "label": "左镂空底座侧框",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2385.75,
+      "bbox_mm": [
+        66.0,
+        -99.0,
+        39.0,
+        67.5,
+        8.0,
+        90.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ShoulderRailR",
+      "label": "右斜面肩部承力梁",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4757.071428499,
+      "bbox_mm": [
+        -46.0,
+        -89.0,
+        73.428571429,
+        -33.0,
+        -11.0,
+        97.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "KeelSideFrameR",
+      "label": "右镂空底座侧框",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2385.75,
+      "bbox_mm": [
+        -67.5,
+        -99.0,
+        39.0,
+        -66.0,
+        8.0,
+        90.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterPod",
+      "label": "喷水背包内部独立液体舱",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 28594.77633297429,
+      "bbox_mm": [
+        -44.0,
+        29.0,
+        40.0,
+        -3.999999999999999,
+        69.0,
+        122.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterPodCap",
+      "label": "喷水内舱盖占位",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3769.9111843077517,
+      "bbox_mm": [
+        -44.0,
+        29.0683101398666,
+        122.0,
+        -3.999999999999999,
+        68.93168986013339,
+        125.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubblePod",
+      "label": "泡泡背包内部独立液体舱",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 27017.625317802544,
+      "bbox_mm": [
+        4.0,
+        29.0,
+        40.0,
+        44.0,
+        69.0,
+        122.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubblePodCap",
+      "label": "泡泡内舱盖占位",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3769.9111843077517,
+      "bbox_mm": [
+        4.0,
+        29.0683101398666,
+        122.0,
+        44.0,
+        68.93168986013339,
+        125.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BackpackShell",
+      "label": "双液体舱共用切面背包壳",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 27188.36579362469,
+      "bbox_mm": [
+        -52.0,
+        24.0,
+        97.0,
+        52.0,
+        81.0,
+        128.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterServiceLid",
+      "label": "喷水背包顶部独立切角维护盖",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 5394.0,
+      "bbox_mm": [
+        -45.0,
+        29.0,
+        128.0,
+        -3.0,
+        73.0,
+        131.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterCapGrip",
+      "label": "喷水低矮桥形维护握位",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 840.0,
+      "bbox_mm": [
+        -34.0,
+        42.0,
+        131.0,
+        -14.0,
+        58.0,
+        135.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterLidMark",
+      "label": "喷水维护盖分区色条",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 32.39999999999969,
+      "bbox_mm": [
+        -33.0,
+        64.0,
+        131.0,
+        -15.0,
+        67.0,
+        131.6
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleServiceLid",
+      "label": "泡泡背包顶部独立切角维护盖",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 5394.0,
+      "bbox_mm": [
+        3.0,
+        29.0,
+        128.0,
+        45.0,
+        73.0,
+        131.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleCapGrip",
+      "label": "泡泡低矮桥形维护握位",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 840.0000000000002,
+      "bbox_mm": [
+        14.0,
+        42.0,
+        131.0,
+        34.0,
+        58.0,
+        135.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleLidMark",
+      "label": "泡泡维护盖分区色条",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 32.39999999999969,
+      "bbox_mm": [
+        15.0,
+        64.0,
+        131.0,
+        33.0,
+        67.0,
+        131.6
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackFrameL",
+      "label": "左背包嵌板护框",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1400.0000000000002,
+      "bbox_mm": [
+        8.0,
+        78.99999999999999,
+        100.0,
+        43.0,
+        84.0,
+        123.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackInsetL",
+      "label": "左背包封闭内衬",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 949.9999999999999,
+      "bbox_mm": [
+        11.0,
+        77.0,
+        103.0,
+        40.0,
+        79.0,
+        120.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackLouverL0",
+      "label": "背包浅槽饰条 L0",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 88.0,
+      "bbox_mm": [
+        14.0,
+        79.0,
+        105.0,
+        37.0,
+        81.0,
+        107.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackLouverL1",
+      "label": "背包浅槽饰条 L1",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 88.0,
+      "bbox_mm": [
+        14.0,
+        79.0,
+        110.0,
+        37.0,
+        81.0,
+        112.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackLouverL2",
+      "label": "背包浅槽饰条 L2",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 88.0,
+      "bbox_mm": [
+        14.0,
+        79.0,
+        115.0,
+        37.0,
+        81.0,
+        117.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackMarkL",
+      "label": "背包液体区识别条 L",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 11.699999999999886,
+      "bbox_mm": [
+        19.0,
+        84.0,
+        100.5,
+        32.0,
+        84.6,
+        102.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackFrameR",
+      "label": "右背包嵌板护框",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1400.0000000000002,
+      "bbox_mm": [
+        -43.0,
+        78.99999999999999,
+        100.0,
+        -8.0,
+        84.0,
+        123.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackInsetR",
+      "label": "右背包封闭内衬",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 949.9999999999999,
+      "bbox_mm": [
+        -40.0,
+        77.0,
+        103.0,
+        -11.0,
+        79.0,
+        120.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackLouverR0",
+      "label": "背包浅槽饰条 R0",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 87.99999999999999,
+      "bbox_mm": [
+        -37.0,
+        79.0,
+        105.0,
+        -14.0,
+        81.0,
+        107.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackLouverR1",
+      "label": "背包浅槽饰条 R1",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 87.99999999999999,
+      "bbox_mm": [
+        -37.0,
+        79.0,
+        110.0,
+        -14.0,
+        81.0,
+        112.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackLouverR2",
+      "label": "背包浅槽饰条 R2",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 87.99999999999999,
+      "bbox_mm": [
+        -37.0,
+        79.0,
+        115.0,
+        -14.0,
+        81.0,
+        117.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PackMarkR",
+      "label": "背包液体区识别条 R",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 11.699999999999886,
+      "bbox_mm": [
+        -32.0,
+        84.0,
+        100.5,
+        -19.0,
+        84.6,
+        102.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BackpackSpine",
+      "label": "背包至底座的中央脊梁护甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3828.000000000001,
+      "bbox_mm": [
+        -6.0,
+        79.0,
+        60.0,
+        6.0,
+        85.0,
+        128.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "RearBaseArmor",
+      "label": "底座斜面后护甲／背包下支座",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 30228.47502762565,
+      "bbox_mm": [
+        -47.0,
+        74.0,
+        34.0,
+        47.0,
+        82.0,
+        97.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "RearBaseInset",
+      "label": "底座背部内凹检修饰板",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 771.4999999999999,
+      "bbox_mm": [
+        -37.0,
+        79.0,
+        59.0,
+        -10.0,
+        80.0,
+        89.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "RearBaseLouver0",
+      "label": "底座后部盲槽饰条 0",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 48.0,
+      "bbox_mm": [
+        -32.0,
+        80.0,
+        65.0,
+        -15.0,
+        81.5,
+        67.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "RearBaseLouver1",
+      "label": "底座后部盲槽饰条 1",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 48.0,
+      "bbox_mm": [
+        -32.0,
+        80.0,
+        72.0,
+        -15.0,
+        81.5,
+        74.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "RearBaseLouver2",
+      "label": "底座后部盲槽饰条 2",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 48.0,
+      "bbox_mm": [
+        -32.0,
+        80.0,
+        79.0,
+        -15.0,
+        81.5,
+        81.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleDuct",
+      "label": "后舱泡泡出口短颈",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1781.2830345854118,
+      "bbox_mm": [
+        12.0,
+        65.0,
+        64.0,
+        36.0,
+        74.0,
+        88.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleOutlet",
+      "label": "内嵌后向泡泡扩口",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 7690.618815987813,
+      "bbox_mm": [
+        9.063987355574481,
+        74.0,
+        61.0,
+        38.93601264442552,
+        91.0,
+        91.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleOutletBezel",
+      "label": "泡泡出口八角分层护框",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1432.6657332584575,
+      "bbox_mm": [
+        7.0,
+        81.99999999999997,
+        59.0,
+        41.0,
+        86.0,
+        93.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "RearDripLip",
+      "label": "后护甲下方折面滴液唇",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2060.0,
+      "bbox_mm": [
+        4.0,
+        79.0,
+        55.0,
+        44.0,
+        96.0,
+        60.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "RearLowerInset",
+      "label": "后底座内凹视觉分层",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 360.0,
+      "bbox_mm": [
+        -32.0,
+        82.0,
+        42.0,
+        32.0,
+        83.0,
+        48.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ChestAudioPanel",
+      "label": "低位前舱内嵌饰板",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3897.000000000001,
+      "bbox_mm": [
+        -35.0,
+        -104.00000000000003,
+        38.0,
+        35.0,
+        -101.0,
+        63.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ChestGuardL",
+      "label": "左低鼻锥折面侧甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1985.0,
+      "bbox_mm": [
+        36.0,
+        -106.0,
+        35.0,
+        63.0,
+        -101.0,
+        67.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ChestAccentL",
+      "label": "左前护甲嵌条",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.5,
+      "bbox_mm": [
+        53.0,
+        -106.5,
+        43.0,
+        57.0,
+        -106.0,
+        49.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ChestGuardR",
+      "label": "右低鼻锥折面侧甲",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1985.0,
+      "bbox_mm": [
+        -63.0,
+        -106.0,
+        35.0,
+        -36.0,
+        -101.0,
+        67.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ChestAccentR",
+      "label": "右前护甲嵌条",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.5,
+      "bbox_mm": [
+        -57.0,
+        -106.5,
+        43.0,
+        -53.0,
+        -106.0,
+        49.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "LowerChin",
+      "label": "前舱薄下缘护片",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 522.0,
+      "bbox_mm": [
+        -30.0,
+        -104.0,
+        32.0,
+        30.0,
+        -101.0,
+        35.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ChestBadge",
+      "label": "前舱上沿识别片",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 162.0,
+      "bbox_mm": [
+        -10.0,
+        -104.0,
+        64.0,
+        10.0,
+        -101.0,
+        67.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "StopPlinth",
+      "label": "本地停止操作区基台",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 868.6875000000002,
+      "bbox_mm": [
+        -42.0,
+        -29.0,
+        89.0,
+        -30.0,
+        -15.0,
+        100.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "StopControl",
+      "label": "后肩本地停止按钮占位",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 565.4866776461629,
+      "bbox_mm": [
+        -40.975845763971435,
+        -27.993958399247887,
+        100.0,
+        -29.0,
+        -16.006041600752113,
+        105.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PowerBank",
+      "label": "实测充电宝 120×73×31.5／前下方平放",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 275940.0,
+      "bbox_mm": [
+        -60.0,
+        -96.0,
+        33.0,
+        60.0,
+        -23.0,
+        64.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterModule",
+      "label": "后部喷水液体区占位 Ø32×70",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 56297.34035232908,
+      "bbox_mm": [
+        -40.0,
+        33.0,
+        43.0,
+        -8.0,
+        65.0,
+        113.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleModule",
+      "label": "后部泡泡液体区占位 Ø32×70",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 56297.34035232909,
+      "bbox_mm": [
+        8.0,
+        33.0,
+        43.0,
+        40.0,
+        65.0,
+        113.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "Electronics",
+      "label": "头舱主控／驱动／电源分配区 100×45×34",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 153000.0,
+      "bbox_mm": [
+        -50.0,
+        -38.0,
+        146.0,
+        50.0,
+        7.0,
+        180.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "AudioModule",
+      "label": "头舱前部音频区占位 72×36×21",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 54432.0,
+      "bbox_mm": [
+        -36.0,
+        -75.0,
+        146.0,
+        36.0,
+        -39.0,
+        167.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    }
+  ],
+  "assembly_size_xyz_mm": [
+    228.0,
+    202.5,
+    203.00000000248912
+  ],
+  "step_readback": {
+    "valid": true,
+    "solids": 769,
+    "expected_solids": 769,
+    "volume_difference_mm3": 1.0578932081116363,
+    "bbox_difference_mm": 8.952838470577262e-13,
+    "volume_comparison_tolerance_mm3": 0.01,
+    "volume_comparison_passed": false,
+    "geometry_equivalence_verified": false,
+    "usage": "layout_exchange_only; native FCStd is the geometry source"
+  },
+  "collision_check": {
+    "tolerance_mm3": 0.01,
+    "boolean_pairs_tested": 291,
+    "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
+    "overlaps": [],
+    "passed": true
+  },
+  "manufacturing_released": false,
+  "physical_fit_verified": false,
+  "assembly_paths_verified": false,
+  "electrical_verified": false,
+  "final_saved_audit": {
+    "native_objects_verified": 170,
+    "gui_visibility_verified": true
+  },
+  "previews_generated": true,
+  "files_sha256": {
+    "CyberTrack.FCStd": "bf4ed8580656c934fddf5a28a19376ee72ba544a76a7aa748d4c76db3269b042",
+    "CyberTrack.step": "426dc9209a753c4b5cd1eb8638d63a554e5055e66816dffe6673d7b15233c2f8",
+    "assembly.png": "9fa44c0ecb554303fa7d4e8b03fc5d13c2b17b5e7454111f63c7df9212e4e476",
+    "front.png": "0d6a1b281a767e6c7e04910d2dc216f033ae20c2b9112b242f9a9f260a3ed9d3",
+    "layout.png": "8a7e9661d131ff50967ed0e6fd51e30f0243537fac556261c074127d6dd33465",
+    "lower-layout.png": "86766595f2959d6ff67617060db8c0e6bbf17dd011a3929851b41a65e5a3565d",
+    "rear-assembly.png": "fabb67018fff1399a4e3334a837f995ddbe56c474563aef0107371676c2bb329",
+    "rear.png": "b3532a3f4ef715105d13e6ea842a09aac80e73c7646cfe7acc7c30b216139484",
+    "side.png": "1dc3a5563a4a698ab79d20049896ae887666d62417f301b6483fe64384ff85df",
+    "top.png": "a4e8fa84c3aad66eed4a12312e6611582075b977f67019948eeb50a0003df01d"
+  }
+}
