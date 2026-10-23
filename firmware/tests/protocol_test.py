@@ -391,7 +391,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(stopped["state"], FAULT)
         self.assertEqual(stopped["cache_count"], 16)
 
-    def test_evicted_rejected_and_read_ids_cannot_become_actions(self):
+    def test_evicted_action_ids_retire_but_pure_read_ids_do_not(self):
         d = self.device().start(enabled=False)
         self.tool(d.rpc(call("move", MOVE, "denied")), "not_ready", True)
         snapshot = d.rpc(call("get_status", request_id="snapshot"))
@@ -403,14 +403,27 @@ class ProtocolTests(unittest.TestCase):
         self.assertNotEqual(current["reply"], snapshot["reply"])
         for i in range(16):
             d.rpc(message("ping", request_id=f"evict-again-{i}"))
-        for old_id in ["denied", "snapshot", "init"]:
+        for old_id in ["denied"]:
             rejected = d.rpc(call("move", MOVE, old_id))
             self.error(rejected, -32002)
             self.off(rejected)
+        # Pure reads have no permanent action identity. A genuinely new intent
+        # may use their evicted ID; once attempted as an action it retires.
+        for old_id in ["snapshot", "init"]:
+            self.tool(d.rpc(call("move", MOVE, old_id)), "accepted")
+            d.now += 100
+            d.event(f"tick {d.now}")
         state = json.loads(self.tool(current))
         self.assertEqual(state["state"], "READY")
         self.assertEqual(state["replay_guard"]["scope"], "boot")
         self.assertEqual(state["replay_guard"]["bits_total"], 262144)
+        # A conflicting action attempt against a resident read DOES retire ID.
+        d2 = self.device().start()
+        d2.rpc(call("get_status", request_id="read"))
+        self.error(d2.rpc(call("move", MOVE, "read")), -32001)
+        for i in range(16):
+            d2.rpc(message("ping", request_id=f"flush-{i}"))
+        self.error(d2.rpc(call("move", MOVE, "read")), -32002)
 
     def test_retired_id_canonicalization_and_reconnect(self):
         for original, equivalent in [("move-id", '"move-\\u0069d"'), (0, '-0'),

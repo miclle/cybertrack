@@ -98,6 +98,7 @@ static void mixed_actions_and_retries(void)
 static void continuous_reads(void)
 {
     uint64_t sequence = protocol.sequence;
+    uint32_t bits = protocol.replay_bits_set;
     for (unsigned i = 0; i < READS; ++i) {
         now += 1000;
         status(i, i % 1000 == 0); /* Include 100 maximum-size frames. */
@@ -105,6 +106,7 @@ static void continuous_reads(void)
         CHECK(strstr(reply, "replay_guard") && !strstr(reply, "\"error\""));
         CHECK(protocol.sequence == sequence); off();
     }
+    CHECK(protocol.replay_bits_set == bits); /* Polling has zero permanent cost. */
     action(0); handle(frame);
     CHECK(strstr(reply, "\"code\":-32002") && protocol.sequence == sequence); off();
     ++replay_checks;
@@ -133,7 +135,7 @@ static void repeated_recovery(void)
         recovery_accepted += accepted_or_collision();
         ++now; CHECK(ct_tick(&control, now) == CT_OK); off();
     }
-    CHECK(recovery_accepted > 0);
+    CHECK(recovery_accepted > RECOVERIES * 9 / 10);
     printf("RECOVERY count=%u fresh_actions_accepted=%zu replay_checks=%zu\n", RECOVERIES, recovery_accepted, replay_checks);
 }
 

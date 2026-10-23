@@ -149,10 +149,15 @@ static void rejected_intents_and_read_checkpoints(void)
     CHECK(strstr(reply, "-32602")); off(&control);
     CHECK(boot()); call(next); CHECK(strstr(reply, "-32002")); off(&control); ++boot_replays;
     size_t calls = disk.calls;
+    uint32_t bits = protocol.replay_bits_set;
     call(status); CHECK(strstr(reply, "persistent"));
-    call(stop); CHECK(disk.calls == calls); /* Reads/stop do not wait for storage. */
+    call(stop); CHECK(disk.calls == calls && protocol.replay_bits_set == bits);
+    /* Reads/stop consume neither writes nor permanent replay bits. */
     CHECK(ct_local_enable(&control, 0) == CT_OK);
-    call(prior); CHECK(strstr(reply, "accepted")); /* Includes pending read/stop IDs. */
+    call(prior); CHECK(strstr(reply, "accepted")); /* Pure read/stop IDs do not consume persistent capacity. */
+    CHECK(boot());
+    call(WRAP("\"id\":\"status\",\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.water\",\"arguments\":{\"duration_ms\":1}}"));
+    CHECK(strstr(reply, "accepted")); /* New intent may use a pure read's old ID. */
     CHECK(boot());
     call(WRAP("\"id\":\"status\",\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.water\",\"arguments\":{\"duration_ms\":1}}"));
     CHECK(strstr(reply, "-32002")); off(&control); ++boot_replays;
