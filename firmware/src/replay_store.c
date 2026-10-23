@@ -176,11 +176,17 @@ bool ct_replay_store_save(ct_replay_store *s, const unsigned char *filter, uint6
     if (session == s->session && !memcmp(filter, s->filter, CT_REPLAY_BYTES)) return true;
     if (s->revision == UINT64_MAX || (s->anchor_bound && s->selected.epoch == UINT64_MAX))
         return fault(s);
+    if (s->anchor_bound) {
+        /* Reserve BEFORE touching media: an interrupted write must never leave
+         * an unanchored candidate revision that can be reused for other bits
+         * after restoring an older image. Otherwise two valid snapshots could
+         * share an anchored revision while containing different histories. */
+        ct_replay_anchor_record next = s->selected;
+        ++next.epoch; next.revision = s->revision + 1; next.session = session;
+        if (!advance_anchor(s, next)) return false;
+    }
     if (!write_slot(s, 1 - s->slot, s->revision + 1, session, filter)) return false;
-    if (!s->anchor_bound) return true;
-    ct_replay_anchor_record next = s->selected;
-    ++next.epoch; next.revision = s->revision; next.session = s->session;
-    return advance_anchor(s, next);
+    return ct_replay_store_check(s);
 }
 
 /* A migration is a lossless offline copy, not a chance to reconstruct or clear
@@ -216,7 +222,6 @@ bool ct_replay_store_migrate(const ct_replay_store *src, ct_replay_store *dst)
     dst->state = CT_STORE_READY;
     return true;
 }
-
 
 bool ct_replay_store_switch(ct_replay_store *src, ct_replay_store *dst, uint64_t id)
 {
