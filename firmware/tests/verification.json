@@ -87,7 +87,7 @@
     "whole valid storage-image rollback, device/partition binding and maintenance recovery"
   ],
   "source_sha256": {
-    "firmware/CMakeLists.txt": "431b6756ba7dcd02476244f4a9210f7458c5ecbbcdc7f017cd5977e0f40ef68d",
+    "firmware/CMakeLists.txt": "9958d0043c55447aa1dec72979beb2d0b83f9d03a78cf63bf441ecf2ef9bc901",
     "firmware/include/cybertrack/control.h": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a",
     "firmware/include/cybertrack/inbox.h": "dd4b0937734c038bab26974ed084d457adaae04f1041ee64ac165817a80f6398",
     "firmware/include/cybertrack/inputs.h": "6e0cf7dc7023c5c885e5a4d4740fb06a4aa92fc707b4bc321fa35cfce4366d64",
@@ -119,7 +119,10 @@
     "firmware/tests/runtime_test.c": "c64a7ab6c2d07f92c54653576b167df7d957c8c97e93d8dc880be61ed57281ee",
     "firmware/third_party/yyjson/LICENSE": "45e384d3d52c73cba3a64d6e6c25d47cd738cd8a55c30629e3201046eda62947",
     "firmware/third_party/yyjson/yyjson.c": "d2d58ef0a3b2267862dc363832c4f3185fd375aea933d5d3419d1a940d6ece2e",
-    "firmware/third_party/yyjson/yyjson.h": "ef803cda5c06b8962face6dfa39c3284b3bcf3e73f4d7317664690cc779679ca"
+    "firmware/third_party/yyjson/yyjson.h": "ef803cda5c06b8962face6dfa39c3284b3bcf3e73f4d7317664690cc779679ca",
+    "firmware/include/cybertrack/freshness.h": "11f9d48cb0234b87dfb1eaf14ed55eb065af82943189c6437763420d571e1ebe",
+    "firmware/src/freshness.c": "840034798a04efcecd7db8eb706c7ad95517e2e93e0de3d99ab87325ecf83900",
+    "firmware/tests/freshness_test.c": "4a99ca5e1c355c83f0cd66c7787e2fbab346f33483d4b1799a61f085050da17f"
   },
   "f2_status": "partial: portable runtime, input filter and inbox verified on host; real board adapter and qualification pending",
   "inbox_object_bytes_host": 8456,
@@ -393,5 +396,11 @@
       "no exactly-once completion promise",
       "no actual Flash/NVS qualification"
     ]
+  },
+  "freshness": {
+    "phase": "standalone window policy verified; protocol integration pending",
+    "test": "firmware/tests/freshness_test.c",
+    "authentication_implemented": false,
+    "wall_clock_required": false
   }
 }
