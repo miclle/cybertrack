@@ -187,6 +187,10 @@ static void ambiguous_and_unselected_evidence(void)
     prepare(); unsigned slot = selected_slot();
     memcpy(journal.durable[1-slot], journal.durable[slot], CT_REPLAY_LOG_SLOT_BYTES);
     CHECK(reload()); CHECK(recover() == CT_RECOVERY_HISTORY_UNAVAILABLE);
+    CHECK(reload()); CHECK(ct_replay_store_attach_log(&source, &log_store));
+    uint64_t epoch = anchor.durable.epoch; size_t calls = disk.calls;
+    bits[1] = 2; CHECK(!ct_replay_store_save(&source, bits, 1));
+    CHECK(epoch == anchor.durable.epoch && calls == disk.calls);
     prepare(); unsigned current = selected_slot();
     /* A complete bridge before CAS is NOT current history for another epoch. */
     anchor.fail_at = anchor.calls + 2;
@@ -203,7 +207,7 @@ int main(void)
     exact_and_independent(); interrupted_log(); interrupted_primary_and_anchor();
     failed_candidate_cannot_be_relabelled(); interrupted_recovery(); bad_evidence_and_configuration();
     repeated_preparation_and_relocation(); ambiguous_and_unselected_evidence();
-    printf("PASS: 8 log groups; log_cuts=%zu; primary_cuts=%zu; anchor_cuts=%zu; recovery_cuts=%zu; corruptions=%zu; store_bytes=%zu; log_bytes=%zu; lost_bits=0\n",
+    printf("PASS: 8 log groups; log_cuts=%zu; primary_cuts=%zu; anchor_cuts=%zu; recovery_cuts=%zu; corruptions=%zu; repeated_preparations=100; store_bytes=%zu; log_bytes=%zu; lost_bits=0\n",
            log_cuts, primary_cuts, anchor_cuts, recovery_cuts, corruptions, sizeof(source), sizeof(log_store));
     return 0;
 }

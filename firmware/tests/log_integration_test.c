@@ -20,6 +20,8 @@ static ct_protocol protocol;
 static ct_controller control;
 static char reply[CT_RPC_REPLY_CAP];
 static size_t rejections, recovery_cuts, write_cuts, log_cuts, anchor_cuts, open_cuts, cycles, runtime_cases;
+static size_t open_log_cuts, preparation_cycles, bridge_recovery_retries;
+static unsigned char retained_history[CT_REPLAY_BYTES];
 static void off(void)
 {
     CHECK(!control.output.water && !control.output.bubbles && !control.output.left_level &&
@@ -196,6 +198,71 @@ static void repeated_recovery(void)
         CHECK(boot(selected)); enable(); action(3000+i,1000+i,"-32002"); ++cycles;
     }
 }
+static void interrupted_open_logs(void)
+{
+    const size_t edges[] = {0,1,4,8,16,24,32,40,32808,32812,32816};
+    for (unsigned op = 1; op <= 16; ++op) for (unsigned durable = 0; durable < 2; ++durable)
+        for (size_t b = 0; b < sizeof(edges)/sizeof(edges[0]); ++b) {
+            prepare(); ct_protocol_close(&protocol, 0);
+            uint64_t session = anchor.durable.session;
+            memcpy(retained_history, stores[0].filter, sizeof(retained_history));
+            journal.fail_at = journal.calls + op; journal.cut_bytes = edges[b];
+            journal.persist_partial = durable != 0;
+            CHECK(ct_protocol_open(&protocol, 0)); CHECK(protocol.storage_fault); off();
+            CHECK(anchor.durable.session == session);
+            lose_primary(0); CHECK(recover(0) == CT_RECOVERY_OK);
+            CHECK(!memcmp(stores[1].filter, retained_history, sizeof(retained_history)));
+            CHECK(boot(1)); CHECK(protocol.session > session); enable(); retired(4);
+            ++open_log_cuts;
+        }
+}
+static void repeated_preparation_recovery(void)
+{
+    prepare(); unsigned selected = 0;
+    for (unsigned i = 0; i < 100; ++i) {
+        memcpy(retained_history, stores[selected].filter, sizeof(retained_history));
+        ct_replay_anchor_record before = anchor.durable;
+        ct_action_proof proof = {0}; CHECK(ct_protocol_issue_window(&protocol, 0, &proof));
+        proof.intent = 10000 + i;
+        ct_rpc_delivery old = {protocol.session, 0, control.enable_generation, proof};
+        char frame[256];
+        snprintf(frame, sizeof(frame), WRAP("\"id\":%u,\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.water\",\"arguments\":{\"duration_ms\":1}}"), 30000+i);
+        journal.fail_at = journal.calls + 9 + i % 8; /* After bridge selection. */
+        journal.cut_bytes = i % 3 == 0 ? 0 : CT_REPLAY_LOG_SLOT_BYTES;
+        journal.persist_partial = (i % 2) != 0;
+        CHECK(ct_protocol_handle(&protocol, frame, strlen(frame), old, 0, reply, sizeof(reply)) == CT_RPC_RESPONSE);
+        CHECK(strstr(reply, "-32005")); off(); ++rejections;
+        CHECK(anchor.durable.epoch == before.epoch + 1 && anchor.durable.revision == before.revision);
+        CHECK(anchor.durable.session == before.session);
+        lose_primary(selected); blank(1-selected); saved_journal = journal;
+        if (i % 4 == 0) {
+            disks[1-selected].fail_at = disks[1-selected].calls + 1 + i % 14;
+            disks[1-selected].cut_bytes = CT_REPLAY_SLOT_BYTES;
+            disks[1-selected].persist_partial = true;
+            CHECK(recover(selected) == CT_RECOVERY_DESTINATION_UNAVAILABLE);
+            CHECK(!memcmp(journal.durable, saved_journal.durable, sizeof(journal.durable)));
+            CHECK(!reload(selected)); blank(1-selected); ++bridge_recovery_retries;
+        }
+        CHECK(recover(selected) == CT_RECOVERY_OK);
+        CHECK(!memcmp(stores[1-selected].filter, retained_history, sizeof(retained_history)));
+        CHECK(!memcmp(journal.durable, saved_journal.durable, sizeof(journal.durable)));
+        CHECK(!boot(selected)); enable(); action(50000+i, 20, "-32005");
+        selected = 1-selected; CHECK(boot(selected)); CHECK(protocol.session > before.session);
+        CHECK(!control.enable_generation && !protocol.accepted_sequence); off();
+        CHECK(ct_protocol_handle(&protocol, frame, strlen(frame), old, 0, reply, sizeof(reply)) == CT_RPC_STALE_SESSION);
+        off(); ++rejections;
+        enable(); retired(60000+2*i);
+        if (i) action(70000+i, 20000+i-1, "-32002");
+        /* Relabelling the transport session cannot renew the producer proof. */
+        old.session = protocol.session; old.enable_generation = control.enable_generation;
+        CHECK(ct_protocol_handle(&protocol, frame, strlen(frame), old, 0, reply, sizeof(reply)) == CT_RPC_RESPONSE);
+        CHECK(strstr(reply, "freshness_unverified")); off(); ++rejections;
+        action(80000+i, 10000+i, "-32002");
+        action(40000+i, 20000+i, "accepted"); ct_stop(&control); enable();
+        ++preparation_cycles;
+    }
+}
+
 static ct_runtime runtime;
 static ct_runtime_response response;
 static ct_replay_io raw_log;
@@ -270,8 +337,9 @@ static void runtime_ordering(void)
 }
 int main(void)
 {
-    missing_primary_and_gates(); interrupted_saves(); interrupted_recovery(); repeated_recovery(); runtime_ordering();
-    printf("PASS: 5 log integration groups; log_cuts=%zu; primary_cuts=%zu; action_anchor_cuts=%zu; open_anchor_cuts=%zu; recovery_cuts=%zu; repeated_recoveries=%zu; runtime_cases=%zu; rejection_checks=%zu; unexpected_replays=0\n",
-           log_cuts,write_cuts,anchor_cuts,open_cuts,recovery_cuts,cycles,runtime_cases,rejections);
+    missing_primary_and_gates(); interrupted_saves(); interrupted_recovery(); repeated_recovery();
+    interrupted_open_logs(); repeated_preparation_recovery(); runtime_ordering();
+    printf("PASS: 7 log integration groups; log_cuts=%zu; primary_cuts=%zu; action_anchor_cuts=%zu; open_anchor_cuts=%zu; recovery_cuts=%zu; repeated_recoveries=%zu; runtime_cases=%zu; open_log_cuts=%zu; preparation_recoveries=%zu; bridge_recovery_retries=%zu; rejection_checks=%zu; unexpected_replays=0\n",
+           log_cuts,write_cuts,anchor_cuts,open_cuts,recovery_cuts,cycles,runtime_cases,open_log_cuts,preparation_cycles,bridge_recovery_retries,rejections);
     return 0;
 }
