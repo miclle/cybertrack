@@ -1,0 +1,195 @@
+{
+  "source_sha256": "aa82b36b51e7c999d1a1c44121a8380b009989c47869195f7648ee6fcaa33739",
+  "source_unchanged": true,
+  "output_sha256": "178b308b0aba98859904a6e016541f75ca01a9bc7258633666c2f254743fb758",
+  "objects": [
+    {
+      "name": "TrackLeftRubberBand",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 1
+    },
+    {
+      "name": "TrackLeftTreadPads",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 48
+    },
+    {
+      "name": "TrackLeftChevronTreads",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 96
+    },
+    {
+      "name": "TrackLeftShoulderLugs",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 96
+    },
+    {
+      "name": "TrackLeftWheelTires",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 7
+    },
+    {
+      "name": "TrackLeftWheelRims",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 14
+    },
+    {
+      "name": "TrackLeftWheelFaces",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 7
+    },
+    {
+      "name": "TrackLeftWheelHubs",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 15
+    },
+    {
+      "name": "TrackLeftSuspensionArms",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 2
+    },
+    {
+      "name": "TrackLeftRockerPlates",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 2
+    },
+    {
+      "name": "TrackLeftFasteners",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 25
+    },
+    {
+      "name": "TrackRightRubberBand",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 1
+    },
+    {
+      "name": "TrackRightTreadPads",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 48
+    },
+    {
+      "name": "TrackRightChevronTreads",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 96
+    },
+    {
+      "name": "TrackRightShoulderLugs",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 96
+    },
+    {
+      "name": "TrackRightWheelTires",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 7
+    },
+    {
+      "name": "TrackRightWheelRims",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 14
+    },
+    {
+      "name": "TrackRightWheelFaces",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 7
+    },
+    {
+      "name": "TrackRightWheelHubs",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 15
+    },
+    {
+      "name": "TrackRightSuspensionArms",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 2
+    },
+    {
+      "name": "TrackRightRockerPlates",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 2
+    },
+    {
+      "name": "TrackRightFasteners",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 25
+    },
+    {
+      "name": "MotorL",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 1
+    },
+    {
+      "name": "MotorShaftL",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 1
+    },
+    {
+      "name": "DriveCouplerL",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 1
+    },
+    {
+      "name": "TrackMountL",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 1
+    },
+    {
+      "name": "MotorR",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 1
+    },
+    {
+      "name": "MotorShaftR",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 1
+    },
+    {
+      "name": "DriveCouplerR",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 1
+    },
+    {
+      "name": "TrackMountR",
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "solids": 1
+    }
+  ],
+  "excluded": [
+    "ReferenceChassis",
+    "ReferenceServiceCover",
+    "TrackMountScrew*"
+  ],
+  "transform": "identity; X left, Y rear, Z up; mm",
+  "physical_fit_verified": false,
+  "manufacturing_released": false
+}
