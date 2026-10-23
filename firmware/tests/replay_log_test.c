@@ -13,6 +13,20 @@ static ct_replay_log log_store;
 static ct_test_anchor anchor;
 static unsigned char bits[CT_REPLAY_BYTES];
 static size_t log_cuts, primary_cuts, anchor_cuts, recovery_cuts, corruptions;
+static uint64_t le64(const unsigned char *p)
+{
+    uint64_t n = 0; for (unsigned i = 0; i < 8; ++i) n |= (uint64_t)p[i] << (8*i);
+    return n;
+}
+static unsigned selected_slot(void)
+{
+    for (unsigned i = 0; i < 2; ++i) {
+        const unsigned char *p = journal.durable[i];
+        if (le64(p+8) == anchor.durable.epoch && le64(p+16) == anchor.durable.backend_id &&
+            le64(p+24) == anchor.durable.revision && le64(p+32) == anchor.durable.session) return i;
+    }
+    CHECK(false); return 2;
+}
 static void blank_target(void)
 {
     ct_test_store_blank(&target_disk);
@@ -61,20 +75,23 @@ static void exact_and_independent(void)
 static void interrupted_log(void)
 {
     const size_t boundary[] = {0,1,4,8,16,24,32,40,32808,32812,32816};
-    for (unsigned op = 1; op <= 6; ++op) for (unsigned durable = 0; durable < 2; ++durable)
+    /* Both bridge and candidate: two selection reads and six write/readback
+     * operations each. Losing the primary cannot turn a candidate into proof. */
+    for (unsigned op = 1; op <= 16; ++op) for (unsigned durable = 0; durable < 2; ++durable)
         for (size_t b = 0; b < sizeof(boundary)/sizeof(boundary[0]); ++b) {
-            prepare(); old_journal = journal;
-            unsigned retained = (unsigned)((source.revision - 1) % 2);
-            uint64_t rev = source.revision;
-            size_t calls = disk.calls;
+            prepare(); old_journal = journal; uint64_t rev = source.revision;
+            unsigned retained = selected_slot(); size_t calls = disk.calls;
             journal.fail_at = journal.calls + op; journal.cut_bytes = boundary[b]; journal.persist_partial = durable != 0;
             bits[1] = 2; CHECK(!ct_replay_store_save(&source, bits, 1));
             CHECK(!log_store.ready && source.state == CT_STORE_FAULT && calls == disk.calls);
             CHECK(anchor.durable.revision == rev);
-            CHECK(!memcmp(journal.durable[retained], old_journal.durable[retained], CT_REPLAY_LOG_SLOT_BYTES));
+            if (op <= 8) CHECK(!memcmp(journal.durable[retained], old_journal.durable[retained], CT_REPLAY_LOG_SLOT_BYTES));
             CHECK(reload()); CHECK(source.filter[0] == 1 && source.filter[1] == 0);
-            CHECK(recover() == CT_RECOVERY_HISTORY_UNAVAILABLE); /* Unselected candidate isn't evidence. */
-            CHECK(!memcmp(disk.durable, before.durable, sizeof(disk.durable))); ++log_cuts;
+            CHECK(!memcmp(disk.durable, before.durable, sizeof(disk.durable)));
+            ct_test_store_blank(&disk); CHECK(!reload()); old_journal = journal;
+            CHECK(recover() == CT_RECOVERY_OK); /* Exact old/bridge record, never the new candidate. */
+            bits[1] = 0; CHECK(!memcmp(target.filter, bits, sizeof(bits)));
+            CHECK(!memcmp(journal.durable, old_journal.durable, sizeof(journal.durable))); ++log_cuts;
         }
 }
 static void interrupted_primary_and_anchor(void)
@@ -91,10 +108,11 @@ static void interrupted_primary_and_anchor(void)
         prepare(); bits[1] = 2; anchor.fail_at = anchor.calls + op; anchor.commit_on_failure = commit != 0;
         CHECK(!ct_replay_store_save(&source, bits, 1)); bool primary_ok = reload();
         bool new_record = op >= 5 || (op == 4 && commit);
-        bool old_record = op == 1 || (op == 2 && !commit);
         CHECK(primary_ok == (!new_record || op == 6));
-        CHECK(recover() == (new_record || old_record ? CT_RECOVERY_OK : CT_RECOVERY_HISTORY_UNAVAILABLE));
-        if (new_record || old_record) CHECK(target.filter[0] == 1 && target.filter[1] == (new_record ? 2 : 0));
+        ct_test_store_blank(&disk); CHECK(!reload());
+        CHECK(recover() == CT_RECOVERY_OK);
+        if (!new_record) bits[1] = 0;
+        CHECK(!memcmp(target.filter, bits, sizeof(bits)));
         ++anchor_cuts;
     }
 }
@@ -127,7 +145,7 @@ static void bad_evidence_and_configuration(void)
 {
     const size_t locations[] = {0,4,8,16,24,32,40,32807,32808,32812,32815};
     for (size_t i = 0; i < sizeof(locations)/sizeof(locations[0]); ++i) for (unsigned b = 0; b < 8; ++b) {
-        prepare(); unsigned slot = (unsigned)((anchor.durable.revision - 1) % 2);
+        prepare(); unsigned slot = selected_slot();
         journal.durable[slot][locations[i]] ^= (unsigned char)(1u << b);
         (void)reload(); CHECK(recover() == CT_RECOVERY_HISTORY_UNAVAILABLE); ++corruptions;
     }
@@ -142,11 +160,50 @@ static void bad_evidence_and_configuration(void)
     size_t calls = journal.calls; bits[1] = 2;
     CHECK(!ct_replay_store_save(&source, bits, 1) && calls == journal.calls);
 }
+static void repeated_preparation_and_relocation(void)
+{
+    prepare();
+    /* Old CTLG v1 placement remains readable; slot position is not evidence. */
+    memcpy(log_store.scratch, journal.durable[0], CT_REPLAY_LOG_SLOT_BYTES);
+    memcpy(journal.durable[0], journal.durable[1], CT_REPLAY_LOG_SLOT_BYTES);
+    memcpy(journal.durable[1], log_store.scratch, CT_REPLAY_LOG_SLOT_BYTES);
+    ct_test_store_blank(&disk); CHECK(!reload()); CHECK(recover() == CT_RECOVERY_OK);
+    CHECK(!memcmp(target.filter, bits, sizeof(bits)));
+    prepare();
+    for (unsigned i = 0; i < 100; ++i) {
+        CHECK(reload()); CHECK(ct_replay_store_attach_log(&source, &log_store));
+        uint64_t epoch = anchor.durable.epoch;
+        journal.fail_at = journal.calls + 12; journal.persist_partial = true;
+        journal.cut_bytes = CT_REPLAY_LOG_SLOT_BYTES;
+        bits[1] = (unsigned char)(1u << (i % 8));
+        CHECK(!ct_replay_store_save(&source, bits, 1));
+        CHECK(anchor.durable.epoch == epoch + 1);
+    }
+    ct_test_store_blank(&disk); CHECK(!reload()); CHECK(recover() == CT_RECOVERY_OK);
+    bits[1] = 0; CHECK(!memcmp(target.filter, bits, sizeof(bits)));
+}
+static void ambiguous_and_unselected_evidence(void)
+{
+    prepare(); unsigned slot = selected_slot();
+    memcpy(journal.durable[1-slot], journal.durable[slot], CT_REPLAY_LOG_SLOT_BYTES);
+    CHECK(reload()); CHECK(recover() == CT_RECOVERY_HISTORY_UNAVAILABLE);
+    prepare(); unsigned current = selected_slot();
+    /* A complete bridge before CAS is NOT current history for another epoch. */
+    anchor.fail_at = anchor.calls + 2;
+    bits[1] = 2; CHECK(!ct_replay_store_save(&source, bits, 1));
+    memset(journal.durable[current], 0xff, CT_REPLAY_LOG_SLOT_BYTES);
+    ct_test_store_blank(&disk); CHECK(!reload()); CHECK(recover() == CT_RECOVERY_HISTORY_UNAVAILABLE);
+    for (unsigned op = 1; op <= 2; ++op) {
+        prepare(); journal.fail_at = journal.calls + op;
+        CHECK(recover() == CT_RECOVERY_HISTORY_UNAVAILABLE);
+    }
+}
 int main(void)
 {
     exact_and_independent(); interrupted_log(); interrupted_primary_and_anchor();
     failed_candidate_cannot_be_relabelled(); interrupted_recovery(); bad_evidence_and_configuration();
-    printf("PASS: 6 log groups; log_cuts=%zu; primary_cuts=%zu; anchor_cuts=%zu; recovery_cuts=%zu; corruptions=%zu; store_bytes=%zu; log_bytes=%zu; lost_bits=0\n",
+    repeated_preparation_and_relocation(); ambiguous_and_unselected_evidence();
+    printf("PASS: 8 log groups; log_cuts=%zu; primary_cuts=%zu; anchor_cuts=%zu; recovery_cuts=%zu; corruptions=%zu; store_bytes=%zu; log_bytes=%zu; lost_bits=0\n",
            log_cuts, primary_cuts, anchor_cuts, recovery_cuts, corruptions, sizeof(source), sizeof(log_store));
     return 0;
 }

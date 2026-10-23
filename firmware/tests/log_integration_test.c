@@ -113,18 +113,18 @@ static void finish_failure(bool pending_retired, bool primary_ready)
     bool loaded=reload(0);
     if(loaded!=primary_ready) fprintf(stderr,"log=%zu write=%zu anchor=%zu expected=%d got=%d\n",log_cuts,write_cuts,anchor_cuts,primary_ready,loaded);
     CHECK(loaded == primary_ready);
-    if (pending_retired) {
-        /* The current primary may be half-written or absent. Only the selected
-         * independent evidence is allowed to reconstruct the entire history. */
-        ct_test_store_blank(&disks[0]); CHECK(!reload(0));
-        CHECK(recover(0) == CT_RECOVERY_OK); CHECK(boot(1));
-        enable(); retired(4); action(7, 30, "-32002"); action(3, 300, "-32002");
-    } else { CHECK(boot(0)); enable(); retired(4); }
+    /* Recover even before data reservation, with the primary entirely absent.
+     * The selected bridge retains old actions but not unselected new content. */
+    ct_test_store_blank(&disks[0]); CHECK(!reload(0));
+    CHECK(recover(0) == CT_RECOVERY_OK); CHECK(boot(1));
+    enable(); retired(4);
+    if (pending_retired) { action(7, 30, "-32002"); action(3, 300, "-32002"); }
+
 }
 static void interrupted_saves(void)
 {
     const size_t log_edges[] = {0,1,4,8,16,24,32,40,32808,32812,32816};
-    for (unsigned op=1; op<=6; ++op) for (unsigned durable=0; durable<2; ++durable)
+    for (unsigned op=1; op<=16; ++op) for (unsigned durable=0; durable<2; ++durable)
         for (size_t b=0; b<sizeof(log_edges)/sizeof(log_edges[0]); ++b) {
             prepare(); journal.fail_at=journal.calls+op; journal.cut_bytes=log_edges[b];
             journal.persist_partial=durable != 0;
@@ -155,10 +155,8 @@ static void interrupted_saves(void)
         anchor.fail_at=anchor.calls+op; anchor.commit_on_failure=commit != 0;
         CHECK(ct_protocol_open(&protocol,0)); CHECK(protocol.storage_fault); off();
         ct_protocol_close(&protocol,0); CHECK(reload(0) == (!reserved || op==6));
-        if (reserved) {
-            ct_test_store_blank(&disks[0]); CHECK(!reload(0));
-            CHECK(recover(0)==CT_RECOVERY_OK); CHECK(boot(1));
-        } else CHECK(boot(0));
+        ct_test_store_blank(&disks[0]); CHECK(!reload(0));
+        CHECK(recover(0)==CT_RECOVERY_OK); CHECK(boot(1));
         enable(); retired(4); ++open_cuts;
     }
 }
@@ -214,7 +212,10 @@ static bool board_output(void *ctx,const ct_output *out)
 {
     (void)ctx; CHECK(anchor.durable.revision==stores[0].revision && anchor.durable.backend_id==1);
     CHECK(anchor.durable.session==protocol.session);
-    const unsigned char *p=journal.durable[(anchor.durable.revision-1)%2];
+    const unsigned char *p = NULL;
+    for (unsigned i = 0; i < 2; ++i)
+        if (le64(journal.durable[i]+8) == anchor.durable.epoch) p = journal.durable[i];
+    CHECK(p);
     CHECK(le64(p+8)==anchor.durable.epoch && le64(p+16)==1);
     CHECK(le64(p+24)==anchor.durable.revision && le64(p+32)==protocol.session);
     CHECK(!memcmp(p+40,protocol.replay_filter,CT_REPLAY_BYTES));
@@ -245,7 +246,7 @@ static void runtime_ordering(void)
         prepare(); ct_protocol_close(&protocol,0); memset(&board,0,sizeof(board));
         raw_log=ct_test_log_io(&journal); log_store.io.sync=timed_sync;
         ct_board_io io={NULL,board_off,board_ok,board_clock,board_inputs,board_output,board_ok};
-        CHECK(ct_runtime_init(&runtime,&protocol,io,(ct_limits){10,10,10,1},mode==5?5:50,20));
+        CHECK(ct_runtime_init(&runtime,&protocol,io,(ct_limits){100,100,100,1},mode==5?5:50,20));
         CHECK(ct_protocol_attach_logged_store(&protocol,&stores[0]));
         CHECK(step(CT_EVENT_CONNECT,NULL)); CHECK(step(CT_EVENT_MESSAGE,initialize));
         board.inputs.enable_button=true; CHECK(step(CT_EVENT_IDLE,NULL));
@@ -255,7 +256,7 @@ static void runtime_ordering(void)
         if(mode==2) board.stop=true;
         if(mode==3) board.fail_output=true;
         if(mode==5) board.delay=3;
-        const char frame[]=WRAP("\"id\":9,\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.water\",\"arguments\":{\"duration_ms\":10}}");
+        const char frame[]=WRAP("\"id\":9,\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.water\",\"arguments\":{\"duration_ms\":100}}");
         bool ok=step(CT_EVENT_MESSAGE,frame);
         if(ok!=(mode==0 || mode==2 || mode==4)) fprintf(stderr,"runtime mode=%u ok=%d writes=%u faults=%u response=%s\n",mode,ok,board.writes,(unsigned)runtime.faults,response.reply);
         CHECK(ok==(mode==0 || mode==2 || mode==4));

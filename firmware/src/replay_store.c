@@ -188,23 +188,24 @@ bool ct_replay_store_save(ct_replay_store *s, const unsigned char *filter, uint6
         s->selected.epoch > UINT64_MAX - (s->log ? 2u : 1u)))
         return fault(s);
     if (s->anchor_bound) {
-        /* Reserve BEFORE touching media: an interrupted write must never leave
+        /* Reserve BEFORE touching primary media: an interrupted write must never leave
          * an unanchored candidate revision that can be reused for other bits
          * after restoring an older image. Otherwise two valid snapshots could
          * share an anchored revision while containing different histories. */
         if (s->log) {
             if (!s->log->ready) return fault(s);
-            /* Allocate an attempt BEFORE writing candidate evidence. The data
-             * revision stays unchanged, so interruption here can still boot
-             * the old complete primary. A retry cannot reuse a failed log's
-             * epoch/revision tuple for different history. */
+            /* Bridge the unchanged history to the attempt epoch BEFORE its
+             * reservation. Preserve this bridge while preparing new content,
+             * so losing the primary during preparation cannot lose history.
+             * A retry cannot reuse a candidate tuple for different history. */
             ct_replay_anchor_record attempt = s->selected;
             ++attempt.epoch;
+            if (!ct_replay_log_prepare(s->log, s->selected, attempt, s->filter)) return fault(s);
             if (!advance_anchor(s, attempt)) return false;
         }
         ct_replay_anchor_record next = s->selected;
         ++next.epoch; next.revision = s->revision + 1; next.session = session;
-        if (s->log && !ct_replay_log_prepare(s->log, next, filter)) return fault(s);
+        if (s->log && !ct_replay_log_prepare(s->log, s->selected, next, filter)) return fault(s);
         if (!advance_anchor(s, next)) return false;
     }
     if (!write_slot(s, 1 - s->slot, s->revision + 1, session, filter)) return false;

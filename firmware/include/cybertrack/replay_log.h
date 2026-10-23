@@ -20,7 +20,9 @@ bool ct_replay_log_init(ct_replay_log *log, ct_replay_io io);
 bool ct_replay_store_attach_log(ct_replay_store *store, ct_replay_log *log);
 /* Explicit local maintenance, all outputs off/owners retired, fresh EMPTY
  * independent destination. Exact current anchor record selects the journal
- * snapshot; primary bytes may be unavailable. Neither primary nor log is
+ * snapshot by scanning both slots; primary bytes may be unavailable. A durable
+ * unchanged-history bridge precedes each attempt epoch allocation, so it
+ * remains recoverable while the new candidate is incomplete. Neither primary nor log is
  * mutated. Returns the same recovery statuses as snapshot maintenance. */
 ct_replay_recovery_result ct_replay_store_recover_log(
     ct_replay_store *source, ct_replay_log *log, ct_replay_anchor_io anchor,
