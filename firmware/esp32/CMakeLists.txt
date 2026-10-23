@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 set(IDF_TARGET esp32s3)
-set(PROJECT_VER "0.1.0-board-check")
+set(PROJECT_VER "0.2.0-boot-stop-check")
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(cybertrack_board_check)
 idf_build_get_property(board_idf_version IDF_VER)

@@ -6,7 +6,8 @@
     "host_usb_enumeration",
     "rom_chip_and_flash_identification",
     "idf_application_boot",
-    "psram_initialization_and_pattern_read_write"
+    "psram_initialization_and_pattern_read_write",
+    "physical_boot_button_software_stop"
   ],
   "photos": [
     {
@@ -113,5 +114,11 @@
     "repeat_boots_passed": 3,
     "flash_written": true,
     "efuse_written": false
+  },
+  "boot_stop_validation": {
+    "date": "2026-10-24",
+    "report": "validation-2026-10-24-boot-stop/result.json",
+    "passed": true,
+    "actuator_cutoff_verified": false
   }
 }
