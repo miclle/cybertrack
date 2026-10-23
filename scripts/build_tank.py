@@ -12,6 +12,7 @@ from pathlib import Path
 import FreeCAD as App
 import Part
 from refine_assembly import refine, service_groups, check_service_paths
+from controller_layout import check_controller_spaces
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'hardware/model'
@@ -96,12 +97,12 @@ def render_views(doc, output):
         for _ in range(10): QtGui.QApplication.processEvents()
         view.saveImage(str(output/filename),1600,1200,'White')
     for o in doc.Objects:
-        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category!='envelope'
+        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('envelope','clearance')
     for filename,direction in [('assembly.png','iso'),('front.png','front'),
                                ('side.png','side'),('right.png','right'),('rear.png','rear'),('top.png','top'),('rear-assembly.png','rear_iso')]:
         render(filename,direction)
     for o in doc.Objects:
-        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category!='exterior'
+        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('exterior','clearance')
     render('layout.png','iso')
     for name in ('WaterModule','BubbleModule','Electronics','AudioModule','BatteryRoof','LowerTub','KeelLid'):
         doc.getObject(name).ViewObject.Visibility=False
@@ -109,7 +110,7 @@ def render_views(doc, output):
     # Service diagram: exploded rigid groups; screws and flexible routes removed first.
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=not o.Name.startswith(('PowerCableRoute','WaterHoseRoute')) and 'Screw' not in o.Name
+            o.ViewObject.Visibility=o.Category!='clearance' and not o.Name.startswith(('PowerCableRoute','WaterHoseRoute','ControllerWireRoute')) and 'Screw' not in o.Name
     original_shapes={}
     offsets={'cable_access':V(0,0,-25),'battery':V(0,0,-60),'crown':V(0,0,65),'electronics':V(0,0,35),'Water':V(0,12,40),'Bubble':V(0,12,40),'arc_left':V(-24.5,0,0),'arc_right':V(24.5,0,0)}
     for group,names in service_groups(doc).items():
@@ -120,12 +121,12 @@ def render_views(doc, output):
     for name,shape in original_shapes.items():doc.getObject(name).Shape=shape
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Category!='exterior'
+            o.ViewObject.Visibility=o.Category not in ('exterior','clearance')
             o.ViewObject.Transparency=75 if o.Category=='structure' else 0
     render('routing.png','rear_iso')
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Name in ('HeadShell','ElectronicsTray','Electronics','AudioModule','ArcModuleL','ArcModuleR')
+            o.ViewObject.Visibility=o.Name in ('HeadShell','ElectronicsTray','Electronics','AudioModule','ArcModuleL','ArcModuleR','ESP32Board') or (o.Name.startswith('Controller') and o.Category!='clearance')
             o.ViewObject.Transparency=80 if o.Name=='HeadShell' else 0
     render('arc-layout.png','iso')
     render('arc-top.png','top')
@@ -136,9 +137,28 @@ def render_views(doc, output):
     render('crown-effects.png','iso')
     render('crown-effects-top.png','top')
     for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=(o.Name in ('HeadShell','ElectronicsTray','Electronics','AudioModule','ESP32Board','ArcModuleL','ArcModuleR') or o.Name.startswith('Controller')) and o.Category!='clearance'
+            o.ViewObject.Transparency=80 if o.Name=='HeadShell' else 0
+    render('controller-layout.png','iso')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=(o.Name in ('ElectronicsTray','ESP32Board') or o.Name.startswith('Controller'))
+            o.ViewObject.Transparency=85 if o.Category=='clearance' else 0
+    render('controller-access.png','top')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Name=='ESP32Board' or (o.Name.startswith('Controller') and o.Category not in ('clearance','envelope') and not o.Name.startswith('ControllerMountInsert'))
+            o.ViewObject.Transparency=0
+    controller_shapes={}
+    for name,offset in [('ESP32Board',V(0,0,20)),('ControllerRetainer',V(0,0,40))]:
+        obj=doc.getObject(name);controller_shapes[name]=obj.Shape.copy();shape=obj.Shape.copy();shape.translate(offset);obj.Shape=shape
+    render('controller-service.png','iso')
+    for name,shape in controller_shapes.items():doc.getObject(name).Shape=shape
+    for o in doc.Objects:
         if hasattr(o,'Category'):o.ViewObject.Transparency=0
     for o in doc.Objects:
-        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category!='envelope'
+        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('envelope','clearance')
     view.setCameraOrientation(orientations['iso'].Q)
     view.fitAll()
 
@@ -155,11 +175,11 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.10'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.11'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
-                       ('exterior','03 角色头舱与功能外观'),('envelope','04 未实测部件占位')]:
+                       ('exterior','03 角色头舱与功能外观'),('envelope','04 实测与暂定部件包络'),('clearance','05 检修与天线预留空间')]:
         g = doc.addObject('App::DocumentObjectGroup', key.title())
         g.Label = label; groups[key] = g
 
@@ -517,11 +537,12 @@ def main():
         add('ArcModule'+side,('左' if sign>0 else '右')+'电弧模块预装占位 Ø20×80',
             Part.makeCylinder(10,80,V(sign*68.5,-66,158),V(0,1,0)),
             'envelope','accent','用户于 2026-10-24 指定预装尺寸 Ø20×80；非实测，仅被动机械包络，无高压引线、电极或驱动')
-    refine(doc,add)
+    controller_info=refine(doc,add)
     doc.recompute()
     if args.render:
         for g in groups.values(): g.ViewObject.Visibility=True
-        for o in groups['envelope'].Group: o.ViewObject.Visibility=False
+        for key in ('envelope','clearance'):
+            for o in groups[key].Group:o.ViewObject.Visibility=False
         Gui.activeDocument().activeView().viewAxonometric()
         Gui.activeDocument().activeView().fitAll()
     OUT.mkdir(exist_ok=True)
@@ -530,7 +551,7 @@ def main():
     shapes=[o for o in doc.Objects if hasattr(o,'Category')]
     expected={o.Name:o.Shape.copy() for o in shapes}
     # Exclude fictional equipment blocks from neutral exterior assembly export.
-    Part.export([o for o in shapes if o.Category!='envelope'],str(step))
+    Part.export([o for o in shapes if o.Category not in ('envelope','clearance')],str(step))
     App.closeDocument(doc.Name)
     saved=App.openDocument(str(cad))
     rows=[]
@@ -555,6 +576,7 @@ def main():
         common=a.Shape.common(b.Shape).Volume
         if common>0.01: collisions.append({'a':a.Name,'b':b.Name,'volume_mm3':common})
     service_check=check_service_paths(saved)
+    controller_check=check_controller_spaces(saved,service_groups(saved)['crown'])
     assembly=Part.makeCompound([o.Shape for o in drive+new]);bb=assembly.optimalBoundingBox(False)
     step_shape=Part.Shape();step_shape.read(str(step))
     step_delta=abs(step_shape.Volume-assembly.Volume)
@@ -590,9 +612,9 @@ def main():
                 name=provider.attrib['name']
                 if name in final_shapes:
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
-                    assert visible==(final_shapes[name].Category!='envelope'),name
+                    assert visible==(final_shapes[name].Category not in ('envelope','clearance')),name
     assert sha(source_path)==source_hash
-    report={'status':'preliminary_concept','design_revision':'0.10','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.11','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'bounding_box_method':'optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)',
             'power_bank_dimensions_mm':{'source':'user_measurement','length':120,'width':73,'thickness':31.5,
             'orientation':'length X, width Y, thickness Z; low horizontal placement retained from user-approved layout',
@@ -619,7 +641,7 @@ def main():
             'step_readback':step_check,'collision_check':{'tolerance_mm3':0.01,'boolean_pairs_tested':tested,
             'scope':'new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded',
             'overlaps':collisions,'passed':not collisions},
-            'service_paths':service_check,
+            'service_paths':service_check,'controller_layout':controller_info,'controller_clearance_check':controller_check,
             'manufacturing_released':False,'physical_fit_verified':False,
             'assembly_paths_verified':False,'electrical_verified':False,
             'final_saved_audit':{'native_objects_verified':len(final_shapes),'gui_visibility_verified':args.render},
@@ -634,7 +656,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if collisions or not service_check['passed']:
+    if collisions or not service_check['passed'] or not controller_check['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 

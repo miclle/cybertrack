@@ -5,6 +5,7 @@ No thread, seal performance, supplier fit or physical assembly is certified here
 """
 import FreeCAD as App
 import Part
+from controller_layout import build_controller, controller_members
 V=App.Vector
 
 
@@ -148,6 +149,7 @@ def refine(doc,add):
     for name in ('WaterPod','BackpackShell','HeadShell'):
         cut(name,hose_tool)
     add('WaterHoseRoute','喷水软管独立侧路 Ø4',hose,'envelope','water','路线与外径占位；一体商品是否允许外接、接头、压力及弯曲半径待核实')
+    controller_info=build_controller(doc,add,cut,fuse,fastener,insert)
     doc.getObject('HeadShell').Label='头舱固定下壳／托板及冠盖支座'
     doc.getObject('HeadServiceHatch').Label='中央隆起顶甲／随整体冠盖拆装'
     for group,names in service_groups(doc).items():
@@ -159,6 +161,7 @@ def refine(doc,add):
     for o in doc.Objects:
         if hasattr(o,'Category') and (o.Shape.isNull() or not o.Shape.isValid() or (o.Category!='drive' and len(o.Shape.Solids)!=1)):
             raise ValueError('Assembly refinement invalid: '+o.Name)
+    return controller_info
 
 
 def service_groups(doc):
@@ -167,30 +170,37 @@ def service_groups(doc):
     crown+=['HeadCrownShell','HeadServiceHatch']
     battery=['PowerBank','BatteryHatch','BatteryPullStrap']+[n for n in names if n.startswith('BatteryPad')]
     wet={name:[name+suffix for suffix in ('ServiceLid','CapGrip','LidMark','FillPlug','FillSeal')] for name in ('Water','Bubble')}
-    return {'cable_access':['CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule'],**wet,
+    return {'cable_access':['CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule']+controller_members(doc)+[n for n in names if n.startswith(('ControllerMountScrew','ControllerMountInsert'))],**wet,
             'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR']}
 
 
 def check_service_paths(doc):
     """Check discrete service poses, not continuous swept motion or flexible cables."""
-    groups=service_groups(doc);all_shapes=[o for o in doc.Objects if hasattr(o,'Category')]
+    groups=service_groups(doc);all_shapes=[o for o in doc.Objects if hasattr(o,'Category') and o.Category!='clearance']
     bounds={o.Name:o.Shape.optimalBoundingBox(False) for o in all_shapes}
     results=[]
     scenarios=[('cable_access',(0,0,-25),['AccessScrewL','AccessScrewR']),
                ('battery',(0,0,-60),[n.Name for n in all_shapes if n.Name.startswith('BatteryScrew')]+['PowerCableRoute','CableServiceCover','AccessScrewL','AccessScrewR']),
                ('crown',(0,0,65),[n.Name for n in all_shapes if n.Name.startswith('CrownScrew')]),
-               ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute']),
+               ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']),
                ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]),
                ('Bubble',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewBubble')])]
-    prerequisites=groups['crown']+groups['electronics']+[o.Name for o in all_shapes if o.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute']
+    prerequisites=groups['crown']+groups['electronics']+[o.Name for o in all_shapes if o.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']
     scenarios += [('arc_left',(-24.5,0,85),prerequisites),('arc_right',(24.5,0,85),prerequisites)]
+    crown_removed=groups['crown']+[o.Name for o in all_shapes if o.Name.startswith('CrownScrew')]+['ControllerWireRoute']
+    scenarios += [('controller',(0,0,65),crown_removed+[o.Name for o in all_shapes if o.Name.startswith('ControllerMountScrew')]),
+                  ('controller_retainer',(0,0,40),crown_removed+['ControllerRetainerScrewFront','ControllerRetainerScrewRear']),
+                  ('controller_board',(0,0,65),crown_removed+['ControllerRetainer','ControllerRetainerScrewFront','ControllerRetainerScrewRear']),
+                  ('usb_com',(-12,0,35),crown_removed),('usb_native',(-12,0,35),crown_removed)]
+    special={'controller':controller_members(doc),'controller_retainer':['ControllerRetainer'],
+             'controller_board':['ESP32Board'],'usb_com':['ControllerUSBCOM'],'usb_native':['ControllerUSBUSB']}
     for group,delta,removed in scenarios:
-        moving=groups[group];fixed=[o for o in all_shapes if o.Name not in moving+removed]
+        moving=special[group] if group in special else groups[group];fixed=[o for o in all_shapes if o.Name not in moving+removed]
         collisions=[];tested=0
         waypoints=[V(),V(*delta)]
         if group in ('Water','Bubble'):
             waypoints=[V(),V(0,0,6),V(0,12,6),V(0,12,40)]
-        if group.startswith('arc_'):
+        if group.startswith(('arc_','usb_')):
             waypoints=[V(),V(delta[0],0,0),V(*delta)]
         poses=[a+(b-a)*fraction for a,b in zip(waypoints,waypoints[1:]) for fraction in (0,0.05,0.1,0.2,0.4,0.6,0.8,1)]
         for pose_index,offset in enumerate(poses):
@@ -202,4 +212,4 @@ def check_service_paths(doc):
                     tested+=1;vol=shape.common(other.Shape).Volume
                     if vol>0.01:collisions.append({'moving':name,'fixed':other.Name,'pose_index':pose_index,'overlap_mm3':vol})
         results.append({'group':group,'waypoints_mm':[[p.x,p.y,p.z] for p in waypoints],'pose_count':len(poses),'removed_first':removed,'boolean_pairs_tested':tested,'overlaps':collisions,'passed':not collisions})
-    return {'method':'8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes move inward then up after tray removal; not continuous sweep or tool/hand access certification','scenarios':results,'passed':all(r['passed'] for r in results),'physical_assembly_verified':False}
+    return {'method':'8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes move inward then up after tray removal; USB plugs withdraw then lift with crown removed; not continuous sweep or tool/hand access certification','scenarios':results,'passed':all(r['passed'] for r in results),'physical_assembly_verified':False}
