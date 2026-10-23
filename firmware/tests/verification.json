@@ -1,0 +1,301 @@
+{
+  "validation_date": "2026-10-23",
+  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board",
+  "environment": {
+    "os": "macOS arm64",
+    "compiler": "Apple Clang 21.0.0",
+    "cmake": "4.4.3",
+    "python": "3.14.7"
+  },
+  "debug_configure": "cmake -S firmware -B build/firmware-host -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS='-fsanitize=address,undefined -fno-omit-frame-pointer'",
+  "build_and_test": [
+    "cmake --build build/firmware-host",
+    "ctest --test-dir build/firmware-host --output-on-failure"
+  ],
+  "ctest": {
+    "passed": 7,
+    "failed": 0,
+    "control_scenario_groups": 8,
+    "protocol_test_methods": 22,
+    "deterministic_mutations": 500,
+    "protocol_test_names": [
+      "test_cache_full_retains_old_responses_and_stop_bypasses",
+      "test_clock_overflow_and_small_buffer",
+      "test_default_capabilities_and_status",
+      "test_directions_and_effects",
+      "test_disconnect_reconnect_and_old_queue",
+      "test_duplicate_reordering_escaping_and_conflicts",
+      "test_exclusion_and_cached_rejections",
+      "test_freshness_queue_time_and_retry_do_not_refresh",
+      "test_ids_exact_echo_and_distinct_types",
+      "test_initialize_discovery_and_schema",
+      "test_invalid_integer_tokens_and_types",
+      "test_invalid_utf8_and_exact_frame_boundary",
+      "test_json_syntax_utf8_and_ambiguity",
+      "test_local_enable_and_fault_recovery",
+      "test_malformed_input_stress",
+      "test_missing_unknown_and_extra_parameters",
+      "test_notifications_never_start_or_reply",
+      "test_queued_request_cannot_cross_local_enable",
+      "test_status_cache_preserves_original_snapshot",
+      "test_stop_priority_including_reused_id_and_cached_stop",
+      "test_version_and_initialization_gates",
+      "test_wire_metadata_cannot_authorize_actions"
+    ],
+    "runtime_scenario_groups": 16,
+    "input_scenario_groups": 5,
+    "inbox_scenario_groups": 4,
+    "parser_allocation_sweeps": 17,
+    "parser_contract_recovery_groups": 3,
+    "link_scenario_groups": 13,
+    "link_exhaustive_split_cases": 376
+  },
+  "sanitizers": {
+    "address": "no error reported",
+    "undefined_behavior": "no error reported",
+    "leak_evidence": "test allocator ownership ledger empty after every handle; no standalone LeakSanitizer run"
+  },
+  "library_build": {
+    "configure": "cmake -S firmware -B build/firmware-library -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release",
+    "build": "cmake --build build/firmware-library",
+    "result": "passed",
+    "test_injector_symbols": "absent from all four Release library archives (nm checked)"
+  },
+  "protocol_object_bytes_host": 104592,
+  "physical_outputs": false,
+  "live_platform_connected": false,
+  "not_verified": [
+    "board build/flash and GPIO defaults",
+    "physical stop latency and independent power cut",
+    "real scheduling, GPIO polarity/debounce timing, ISR capture and cross-task synchronization",
+    "hardware watchdog and boot timeout",
+    "network freshness evidence",
+    "long-session resource qualification",
+    "live network/OTA",
+    "physical loads",
+    "MCU heap fragmentation/exhaustion and target stack/allocator budget",
+    "real SDK WebSocket event mapping, TLS/hello validation and live transport handoff",
+    "online idle heartbeat/liveness detection",
+    "actual socket close/send race and cross-task synchronization"
+  ],
+  "source_sha256": {
+    "firmware/CMakeLists.txt": "344c40dcb0ca060de4a52f9bf159e1705a15907a6875b14bdfeac2cd0bbe5f5f",
+    "firmware/include/cybertrack/control.h": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a",
+    "firmware/include/cybertrack/inbox.h": "dd4b0937734c038bab26974ed084d457adaae04f1041ee64ac165817a80f6398",
+    "firmware/include/cybertrack/inputs.h": "6e0cf7dc7023c5c885e5a4d4740fb06a4aa92fc707b4bc321fa35cfce4366d64",
+    "firmware/include/cybertrack/link.h": "2c8e3df0d3c6ec7956904935c3bef45e73d399147b915602341ffd29219a1695",
+    "firmware/include/cybertrack/protocol.h": "9137c5fe1f0059c4d28c3e53ecebc2f95be5c8cf138d5c9fde1ca65557dd3e4c",
+    "firmware/include/cybertrack/runtime.h": "39434f19e07f97f2c2aa411b1e868b7143127d25c0131182a69a971b006c3e0b",
+    "firmware/src/control.c": "2158325e95fa32622735ca7466a5580eaaac6dc23be142ee91b4e384adcf1ec9",
+    "firmware/src/inbox.c": "aaf2fd321276b6abc26542b22cc353863f8701fb51aa04976f368ead2c16da25",
+    "firmware/src/inputs.c": "e34b3b9815f3633ff81e2d52d259fbfee0c7558f86ae3080b4ce89c62a690679",
+    "firmware/src/link.c": "46994397effeec26761c4f61de070aff6eb0d826995635658bc454463147dc44",
+    "firmware/src/protocol.c": "d849e71cd7600c28d00057930238f2ebc41d756fca6dda6892536bd334aaab31",
+    "firmware/src/runtime.c": "b7790f27b023e92244d568381dc32eedabc5cceb10f26c16e8ff9b12a77fc81f",
+    "firmware/tests/control_test.c": "e6c287ba766f4e5b54369aca3491a82e012e844fb863b30c989c6fc0983714d1",
+    "firmware/tests/fault_allocator.c": "7fa1c7fa6a3e8114701769722cfdc449cc1c5033c8b1bde4211a3c24fb15ea1d",
+    "firmware/tests/fault_allocator.h": "de8d17e0fcf3bbfcc41ed7dfb0777e3d4546bb9e275c9824c1a7e057036b46e7",
+    "firmware/tests/inbox_test.c": "b3dc2b32fe4949a77ba5fd0dd9bd669400e0f35fc687fd3c3e0191ccff1363c0",
+    "firmware/tests/inputs_test.c": "82e8d2f779add574a6421369e0f6b654d502fe6e8d9bf0bf69110d87a0f13b2d",
+    "firmware/tests/link_test.c": "f0efdde8958524f70a239659155fa3e0c77f87cdfbb295a125725b2b0b49c7b3",
+    "firmware/tests/protocol_host.c": "e8bb1661ff139e38ebf1dec24094633898d521cb71d49781058938c5b5e4858b",
+    "firmware/tests/protocol_memory_test.c": "0c653b1c7936df625a36a361111c09c17d879c697078ae277caa69d554cf7dce",
+    "firmware/tests/protocol_test.py": "cb4090a6fa9d6ea1ba75aea600d3852db5ee5d2b156a526735f353108acba84b",
+    "firmware/tests/runtime_test.c": "bd9ae8da0edb640385160b8e4507ecffec0c2f3c433cdc8b19db3d2b1012ac77",
+    "firmware/third_party/yyjson/LICENSE": "45e384d3d52c73cba3a64d6e6c25d47cd738cd8a55c30629e3201046eda62947",
+    "firmware/third_party/yyjson/yyjson.c": "d2d58ef0a3b2267862dc363832c4f3185fd375aea933d5d3419d1a940d6ece2e",
+    "firmware/third_party/yyjson/yyjson.h": "ef803cda5c06b8962face6dfa39c3284b3bcf3e73f4d7317664690cc779679ca"
+  },
+  "f2_status": "partial: portable runtime, input filter and inbox verified on host; real board adapter and qualification pending",
+  "inbox_object_bytes_host": 8456,
+  "inbox_item_bytes_host": 2104,
+  "allocation_failure_injection": {
+    "allocator": "test-only per-instance allocator; default libc unchanged; vendored yyjson unchanged",
+    "modes": [
+      "fail nth allocation once",
+      "fail nth allocation and all subsequent allocations"
+    ],
+    "enumerated_allocation_positions": 69,
+    "sweep_injected_failures": 138,
+    "cache_read_failures": 36,
+    "resize_failures": 50,
+    "continuous_exhaustion_requests": 20,
+    "outstanding_blocks_after_each_handle": 0,
+    "outstanding_requested_bytes_after_each_handle": 0,
+    "peak_requested_bytes_in_test_samples": 41736,
+    "peak_excludes": [
+      "allocator overhead/alignment",
+      "stack",
+      "static cache",
+      "input/output buffers"
+    ],
+    "peak_is_universal_bound": false,
+    "checks": [
+      "internal error and ID availability",
+      "logical output cleared and manual enable required",
+      "cache bytes and sequence unchanged",
+      "temporary allocations freed",
+      "cached replies do not restart output",
+      "runtime shutdown and simultaneous shutdown failure"
+    ],
+    "baseline_cases": [
+      {
+        "name": "initialize",
+        "allocation_calls": 2,
+        "resize_calls": 0,
+        "peak_requested_bytes": 793
+      },
+      {
+        "name": "move",
+        "allocation_calls": 2,
+        "resize_calls": 0,
+        "peak_requested_bytes": 772
+      },
+      {
+        "name": "water",
+        "allocation_calls": 2,
+        "resize_calls": 0,
+        "peak_requested_bytes": 639
+      },
+      {
+        "name": "bubbles",
+        "allocation_calls": 2,
+        "resize_calls": 0,
+        "peak_requested_bytes": 641
+      },
+      {
+        "name": "status-active",
+        "allocation_calls": 2,
+        "resize_calls": 0,
+        "peak_requested_bytes": 532
+      },
+      {
+        "name": "stop-active",
+        "allocation_calls": 2,
+        "resize_calls": 0,
+        "peak_requested_bytes": 510
+      },
+      {
+        "name": "stop-notification",
+        "allocation_calls": 2,
+        "resize_calls": 0,
+        "peak_requested_bytes": 487
+      },
+      {
+        "name": "move-notification",
+        "allocation_calls": 2,
+        "resize_calls": 0,
+        "peak_requested_bytes": 749
+      },
+      {
+        "name": "cached-move",
+        "allocation_calls": 4,
+        "resize_calls": 0,
+        "peak_requested_bytes": 1544
+      },
+      {
+        "name": "conflicting-move",
+        "allocation_calls": 4,
+        "resize_calls": 0,
+        "peak_requested_bytes": 1545
+      },
+      {
+        "name": "cached-stop",
+        "allocation_calls": 4,
+        "resize_calls": 0,
+        "peak_requested_bytes": 1020
+      },
+      {
+        "name": "malformed-json",
+        "allocation_calls": 3,
+        "resize_calls": 1,
+        "peak_requested_bytes": 256
+      },
+      {
+        "name": "invalid-envelope",
+        "allocation_calls": 2,
+        "resize_calls": 0,
+        "peak_requested_bytes": 157
+      },
+      {
+        "name": "max-frame-initialize",
+        "allocation_calls": 5,
+        "resize_calls": 3,
+        "peak_requested_bytes": 20868
+      },
+      {
+        "name": "max-frame-cached",
+        "allocation_calls": 10,
+        "resize_calls": 6,
+        "peak_requested_bytes": 41736
+      },
+      {
+        "name": "pretty-max-initialize",
+        "allocation_calls": 7,
+        "resize_calls": 5,
+        "peak_requested_bytes": 18564
+      },
+      {
+        "name": "pretty-max-cached",
+        "allocation_calls": 14,
+        "resize_calls": 10,
+        "peak_requested_bytes": 37128
+      }
+    ]
+  },
+  "link_object_bytes_host": 21000,
+  "link_tx_copy_bytes_host": 4120,
+  "transport_simulation": {
+    "api": "ct_link; normalized frame chunks, not raw TCP or an actual SDK adapter",
+    "network_calls": false,
+    "platform_hello_validation_implemented": false,
+    "new_heap_allocations": false,
+    "split_fixture": "initialize with UTF-8 Chinese ID",
+    "exhaustive_two_part_splits": 376,
+    "boundaries": [
+      "same-frame callback chunks",
+      "TEXT/CONT message fragments",
+      "bytewise UTF-8 split",
+      "mixed two-level fragments",
+      "interleaved Ping/Pong",
+      "max 2048-byte message",
+      "gap/overlap/metadata drift rejection"
+    ],
+    "timeouts": [
+      "connect",
+      "trusted handshake completion",
+      "absolute partial message/control frame",
+      "response dispatch/completion"
+    ],
+    "reconnect": [
+      "explicit backoff",
+      "disconnect service and handle-close acknowledgement required",
+      "new attempt and protocol session",
+      "stale callbacks ignored",
+      "no automatic enable or replay"
+    ],
+    "send": [
+      "one pending owned copy",
+      "failure/short/over-reported send closes",
+      "no resend",
+      "stale ack isolation",
+      "timeout starts at response creation"
+    ],
+    "shutdown": "failure marks disconnect; next periodic service applies off; runtime callback deadline crossing rechecks disconnect before returning",
+    "synthetic_limits_ms": {
+      "connect": 30,
+      "handshake": 30,
+      "fragment": 15,
+      "send": 12,
+      "retry": 5,
+      "queue": 40,
+      "runtime_cycle": 20
+    },
+    "references": [
+      "https://docs.espressif.com/projects/esp-protocols/esp_websocket_client/docs/latest/index.html",
+      "https://github.com/espressif/esp-protocols/blob/master/components/esp_websocket_client/esp_websocket_client.c",
+      "https://linx.qiniu.com/docs/xrobot/platform/websocket"
+    ]
+  },
+  "f4_status": "partial: receive/lifecycle simulation verified offline; real SDK event mapping, TLS/hello, network binding, audio and freshness evidence pending"
+}
