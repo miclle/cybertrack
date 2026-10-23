@@ -236,12 +236,14 @@ static void status_result(ct_protocol *p, writer *w, const char *id)
     writer status = {text, sizeof(text), 0, false};
     append(&status, "{\"state\":\"%s\",\"fault\":\"%s\",\"logical_output\":{"
            "\"left_level\":%d,\"right_level\":%d,\"water\":%s,\"bubbles\":%s},"
-           "\"capabilities\":{\"move\":%s,\"water\":%s,\"bubbles\":%s},\"physical_feedback\":false}",
+           "\"capabilities\":{\"move\":%s,\"water\":%s,\"bubbles\":%s},\"physical_feedback\":false,"
+           "\"replay_guard\":{\"scope\":\"boot\",\"bits_set\":%" PRIu32 ",\"bits_total\":%u}}",
            state_name(c->state), fault_name(c->fault), c->output.left_level, c->output.right_level,
            c->output.water ? "true" : "false", c->output.bubbles ? "true" : "false",
            move_available(p) ? "true" : "false",
            p->max_queue_ms && c->limits.water_max_ms ? "true" : "false",
-           p->max_queue_ms && c->limits.bubbles_max_ms ? "true" : "false");
+           p->max_queue_ms && c->limits.bubbles_max_ms ? "true" : "false",
+           p->replay_bits_set, CT_RPC_REPLAY_BYTES * 8u);
     if (status.failed) { w->failed = true; return; }
     tool_result(w, id, false, text);
 }
@@ -392,6 +394,7 @@ uint64_t ct_protocol_open(ct_protocol *p, uint64_t now_ms)
     p->initialized = false;
     p->sequence = 0;
     p->cache_count = 0;
+    p->cache_next = 0;
     memset(p->cache, 0, sizeof(p->cache));
     return next;
 }
@@ -404,7 +407,43 @@ void ct_protocol_close(ct_protocol *p, uint64_t now_ms)
     p->session = 0;
     p->initialized = false;
     p->cache_count = 0;
+    p->cache_next = 0;
     memset(p->cache, 0, sizeof(p->cache));
+}
+
+/* Four positions in a fixed monotone Bloom filter. Hash collisions only deny
+ * actions: bits are never removed, aged, or cleared on a reconnect. This is not
+ * authentication or a defense against deliberate resource exhaustion. IDs use
+ * encode_id's canonical spelling, including escaped strings and numeric -0. */
+static bool remember_id(ct_protocol *p, const char *id)
+{
+    uint64_t hash = UINT64_C(14695981039346656037);
+    for (const unsigned char *s = (const unsigned char *)id; *s; ++s) {
+        hash ^= *s;
+        hash *= UINT64_C(1099511628211);
+    }
+    uint32_t position = (uint32_t)hash;
+    uint32_t step = (uint32_t)(hash >> 32) | 1u;
+    bool seen = true;
+    for (unsigned i = 0; i < 4; ++i, position += step) {
+        uint32_t bit = position % (CT_RPC_REPLAY_BYTES * 8u);
+        unsigned char mask = (unsigned char)(1u << (bit % 8));
+        if (!(p->replay_filter[bit / 8] & mask)) {
+            seen = false;
+            p->replay_filter[bit / 8] |= mask;
+            ++p->replay_bits_set;
+        }
+    }
+    return seen;
+}
+
+static bool replay_safe(const yyjson_val *payload)
+{
+    const yyjson_val *method = yyjson_obj_get(payload, "method");
+    return str_is(method, "initialize") || str_is(method, "ping") ||
+           str_is(method, "tools/list") ||
+           (str_is(method, "tools/call") &&
+            tool_call(yyjson_obj_get(payload, "params"), "self.tank.get_status", true));
 }
 
 ct_rpc_result ct_protocol_handle(ct_protocol *p, const char *frame, size_t length,
@@ -472,12 +511,12 @@ ct_rpc_result ct_protocol_handle(ct_protocol *p, const char *frame, size_t lengt
         yyjson_doc_free(doc);
         return CT_RPC_RESPONSE;
     }
-    if (p->cache_count == CT_RPC_CACHE_SLOTS && !stop) {
-        rpc_error(&w, id, -32002, "Session cache full; reconnect and locally re-enable");
-        yyjson_doc_free(doc);
-        return CT_RPC_RESPONSE;
-    }
+    /* Reserve before dispatch, including rejected requests. A resident retry
+     * above returns its original response without touching the FIFO/filter. */
+    bool seen = remember_id(p, id);
     if (stop) tool_result(&w, id, false, "logical_outputs_cleared; local_reenable_required");
+    else if (seen && !replay_safe(payload))
+        rpc_error(&w, id, -32002, "Action ID retired or replay filter collision; no action executed");
     else dispatch(p, &w, id, payload, delivery, now_ms, clock_ok);
     if (w.failed) {
         /* A response serialization failure after accepting a request must not
@@ -486,8 +525,10 @@ ct_rpc_result ct_protocol_handle(ct_protocol *p, const char *frame, size_t lengt
         w = (writer){reply, reply_cap, 0, false};
         rpc_error(&w, id, -32603, "Response capacity exceeded");
     }
-    if (p->cache_count < CT_RPC_CACHE_SLOTS) {
-        ct_rpc_cache_entry *entry = &p->cache[p->cache_count++];
+    {
+        ct_rpc_cache_entry *entry = &p->cache[p->cache_next];
+        p->cache_next = (p->cache_next + 1) % CT_RPC_CACHE_SLOTS;
+        if (p->cache_count < CT_RPC_CACHE_SLOTS) ++p->cache_count;
         memcpy(entry->id, id, strlen(id) + 1);
         memcpy(entry->frame, frame, length);
         entry->frame[length] = '\0';

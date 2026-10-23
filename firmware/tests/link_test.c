@@ -267,7 +267,7 @@ static void reconnect_and_stale_events(void)
     CHECK(!ct_link_connected(&link,link.attempt,0)); /* Duplicate callback cannot roll back clock. */
     CHECK(!ct_link_ready(&link,link.attempt,0));
     CHECK(link.state == CT_LINK_ONLINE && link.last_ms == 5);
-    exchange(initialize); exchange(move); CHECK(strstr(sent.frame,"not_ready")); off();
+    exchange(initialize); exchange(move); CHECK(strstr(sent.frame,"-32002")); off();
     CHECK(!chunk(CT_WS_CONT,true,0,1,"}",1,true)); CHECK(service()); off();
 }
 
@@ -301,6 +301,19 @@ static void send_failures_and_timeouts(void)
             CHECK(!ct_link_sent(&link,link.attempt,link.tx_generation,true,sent.length,12));
         }
         off(); CHECK(protocol.session == 0 && !link.tx_pending && protocol.cache_count == 0);
+        uint64_t failed = link.attempt;
+        ct_link_closed(&link, failed, board.now);
+        advance_to(board.now + budgets.retry_ms);
+        connect_ready(); exchange(initialize);
+        board.inputs.enable_button = true; CHECK(service());
+        board.inputs.enable_button = false; CHECK(service());
+        CHECK(runtime.control.state == CT_READY);
+        /* Even freshly tagged replay after a lost reply and manual re-enable
+         * cannot execute the previously accepted command. */
+        exchange(move); CHECK(strstr(sent.frame, "-32002")); off();
+        CHECK(protocol.sequence == 0);
+        exchange(WRAP("\"id\":4,\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.water\",\"arguments\":{\"duration_ms\":10}}"));
+        CHECK(strstr(sent.frame, "accepted") && board.applied.water);
     }
     armed(); CHECK(complete(move,true)); CHECK(service()); CHECK(ct_link_take_tx(&link,&sent,board.now));
     board.now = 12; CHECK(!ct_link_sent(&link,sent.attempt,sent.id,true,sent.length,12));

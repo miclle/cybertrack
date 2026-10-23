@@ -284,6 +284,10 @@ static void connection_and_enable_generations(void)
     board.inputs.enable_button = true;
     CHECK(step(CT_EVENT_IDLE));
     CHECK(message_with(move, old));
+    CHECK(strstr(response.reply, "-32002"));
+    /* A distinct intent still exercises the separate enable-generation gate. */
+    const char water[] = "{\"type\":\"mcp\",\"payload\":{\"jsonrpc\":\"2.0\",\"id\":3,\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.water\",\"arguments\":{\"duration_ms\":5}}}}";
+    CHECK(message_with(water, old));
     CHECK(strstr(response.reply, "stale_local_enable"));
     off();
 }
