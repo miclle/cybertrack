@@ -125,3 +125,37 @@ bool ct_replay_store_save(ct_replay_store *s, const unsigned char *filter, uint6
     if (s->revision == UINT64_MAX) return fault(s);
     return write_slot(s, 1 - s->slot, s->revision + 1, session, filter);
 }
+
+/* A migration is a lossless offline copy, not a chance to reconstruct or clear
+ * Bloom bits. Re-read both source slots to reject a stale caller snapshot. */
+bool ct_replay_store_migrate(const ct_replay_store *src, ct_replay_store *dst)
+{
+    if (!src || !dst || src == dst || src->state != CT_STORE_READY ||
+        dst->state != CT_STORE_EMPTY || src->io.context == dst->io.context) return false;
+    if (src->revision > UINT64_MAX - 2) return fault(dst);
+    for (unsigned slot = 0; slot < 2; ++slot) {
+        unsigned char *p = dst->scratch;
+        if (!src->io.read(src->io.context, slot, 0, p, sizeof(dst->scratch)) || !valid(p, slot))
+            return fault(dst);
+        uint64_t revision = get64(p + 8), session = get64(p + 16);
+        if (slot == src->slot) {
+            if (revision != src->revision || session != src->session ||
+                memcmp(p + FILTER_OFFSET, src->filter, CT_REPLAY_BYTES)) return fault(dst);
+        } else if (revision != src->revision - 1 || session > src->session ||
+                   src->session - session > 1 || !superset(src->filter, p + FILTER_OFFSET))
+            return fault(dst);
+    }
+    for (unsigned slot = 0; slot < 2; ++slot) {
+        if (!dst->io.read(dst->io.context, slot, 0, dst->scratch, sizeof(dst->scratch)) ||
+            !blank(dst->scratch)) return fault(dst);
+    }
+    /* Two complete copies form a valid pair. Each write syncs and reads back;
+     * a single complete slot can never be selected by normal boot recovery. */
+    for (uint64_t offset = 1; offset <= 2; ++offset) {
+        uint64_t revision = src->revision + offset;
+        if (!write_slot(dst, (unsigned)((revision - 1) % 2), revision, src->session, src->filter))
+            return false;
+    }
+    dst->state = CT_STORE_READY;
+    return true;
+}

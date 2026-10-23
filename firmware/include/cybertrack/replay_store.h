@@ -45,4 +45,14 @@ bool ct_replay_store_provision(ct_replay_store *s);
  * No-op saves do no I/O. UINT64_MAX revision cannot wrap. */
 bool ct_replay_store_save(ct_replay_store *s, const unsigned char *filter, uint64_t session);
 
+/* Offline copy to a freshly loaded EMPTY, physically independent pair. Outputs
+ * must be off and source writers stopped for the entire copy AND cutover.
+ * Revalidates source against its loaded snapshot and destination blankness.
+ * Copies ALL bits and session without changing v1 hash/format; never erases the
+ * source. Only true permits selecting the destination. False latches destination
+ * FAULT after I/O begins; ambiguous completion still requires reload/validation.
+ * Caller owns device binding and durable backend selection: after cutover never
+ * resume the stale source or auto-fallback to it. No online relocation/GC. */
+bool ct_replay_store_migrate(const ct_replay_store *source, ct_replay_store *destination);
+
 #endif
