@@ -237,12 +237,14 @@ static void status_result(ct_protocol *p, writer *w, const char *id)
     append(&status, "{\"state\":\"%s\",\"fault\":\"%s\",\"logical_output\":{"
            "\"left_level\":%d,\"right_level\":%d,\"water\":%s,\"bubbles\":%s},"
            "\"capabilities\":{\"move\":%s,\"water\":%s,\"bubbles\":%s},\"physical_feedback\":false,"
-           "\"replay_guard\":{\"scope\":\"boot\",\"bits_set\":%" PRIu32 ",\"bits_total\":%u}}",
+           "\"replay_guard\":{\"scope\":\"%s\",\"storage\":\"%s\",\"bits_set\":%" PRIu32 ",\"bits_total\":%u}}",
            state_name(c->state), fault_name(c->fault), c->output.left_level, c->output.right_level,
            c->output.water ? "true" : "false", c->output.bubbles ? "true" : "false",
            move_available(p) ? "true" : "false",
            p->max_queue_ms && c->limits.water_max_ms ? "true" : "false",
            p->max_queue_ms && c->limits.bubbles_max_ms ? "true" : "false",
+           p->store_bound ? "persistent" : "boot",
+           p->storage_fault ? "fault" : p->store_bound ? "ready" : "volatile",
            p->replay_bits_set, CT_RPC_REPLAY_BYTES * 8u);
     if (status.failed) { w->failed = true; return; }
     tool_result(w, id, false, text);
@@ -361,10 +363,37 @@ void ct_protocol_init(ct_protocol *p, ct_controller *control, uint32_t max_queue
 
 bool ct_protocol_set_allocator(ct_protocol *p, ct_rpc_allocator allocator)
 {
-    if (!p || !p->control || p->generation || p->session || p->cache_count ||
+    if (!p || !p->control || p->opened || p->session || p->cache_count ||
         !allocator.allocate || !allocator.resize || !allocator.release) return false;
     p->allocator = allocator;
     return true;
+}
+
+bool ct_protocol_attach_store(ct_protocol *p, ct_replay_store *store)
+{
+    if (!p || !p->control || p->opened || p->store_bound) return false;
+    p->store_bound = true;
+    p->store = store;
+    if (!store || store->state != CT_STORE_READY) {
+        p->storage_fault = true;
+        ct_stop(p->control);
+        return false;
+    }
+    p->generation = store->session;
+    memcpy(p->replay_filter, store->filter, sizeof(p->replay_filter));
+    p->replay_bits_set = 0;
+    for (size_t i = 0; i < sizeof(p->replay_filter); ++i)
+        for (unsigned j = 0; j < 8; ++j) p->replay_bits_set += (p->replay_filter[i] >> j) & 1u;
+    return true;
+}
+
+static bool persist(ct_protocol *p, uint64_t session)
+{
+    if (!p->store_bound) return true; /* Existing host-only volatile mode. */
+    if (!p->storage_fault && ct_replay_store_save(p->store, p->replay_filter, session)) return true;
+    p->storage_fault = true;
+    ct_stop(p->control);
+    return false;
 }
 
 static yyjson_doc *read_json(const ct_protocol *p, const char *frame, size_t length,
@@ -380,11 +409,15 @@ static yyjson_doc *read_json(const ct_protocol *p, const char *frame, size_t len
 
 uint64_t ct_protocol_open(ct_protocol *p, uint64_t now_ms)
 {
+    p->opened = true;
     if (p->generation == UINT64_MAX) {
         ct_protocol_close(p, now_ms);
         return 0;
     }
     uint64_t next = p->generation + 1;
+    /* Reserve before publishing a session. On a storage fault keep a local
+     * read/stop-only connection for diagnostics, never volatile action fallback. */
+    (void)persist(p, next);
     if (ct_set_session(p->control, next, now_ms) != CT_OK) {
         ct_protocol_close(p, now_ms);
         return 0;
@@ -515,6 +548,8 @@ ct_rpc_result ct_protocol_handle(ct_protocol *p, const char *frame, size_t lengt
      * above returns its original response without touching the FIFO/filter. */
     bool seen = remember_id(p, id);
     if (stop) tool_result(&w, id, false, "logical_outputs_cleared; local_reenable_required");
+    else if (!replay_safe(payload) && !persist(p, p->session))
+        rpc_error(&w, id, -32005, "Replay storage unavailable; actions locked");
     else if (seen && !replay_safe(payload))
         rpc_error(&w, id, -32002, "Action ID retired or replay filter collision; no action executed");
     else dispatch(p, &w, id, payload, delivery, now_ms, clock_ok);
