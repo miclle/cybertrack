@@ -17,7 +17,8 @@ static bool replace(void *ctx, const ct_replay_anchor_record *expected,
     bool failed = ++a->calls == a->fail_at;
     if (!same(a->durable, *expected) || expected->epoch == UINT64_MAX ||
         next->epoch != expected->epoch + 1 || !next->backend_id ||
-        next->revision <= expected->revision || next->session < expected->session ||
+        next->revision < expected->revision || next->session < expected->session ||
+        (next->revision == expected->revision && (next->backend_id != expected->backend_id || next->session != expected->session)) ||
         next->session >= next->revision) return false;
     if (!failed || a->commit_on_failure) { a->durable = *next; ++a->replacements; }
     return !failed;
