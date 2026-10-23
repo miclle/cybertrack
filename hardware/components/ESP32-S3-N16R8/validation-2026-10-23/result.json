@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-23",
+  "scope": "CyberTrack no-load control core boot and PSRAM; no actuator drivers",
+  "connection": "COM UART bridge, USB power only; motors excluded by user instruction",
+  "idf_version": "v5.5.1",
+  "idf_commit": "fcae32885b0296b32044cb99ecbdc50d98dddb83",
+  "app_version": "0.1.0-board-check",
+  "chip_target": "esp32s3",
+  "cpu_mhz": 160,
+  "flash": {
+    "size_mb": 16,
+    "mode": "dio",
+    "frequency_mhz": 40
+  },
+  "psram": {
+    "initialized": true,
+    "detected_bytes": 8388608,
+    "mode": "octal",
+    "frequency_mhz": 40,
+    "idf_startup_memtest_passed": true,
+    "application_test_bytes": 6291456,
+    "patterns": [
+      "00000000",
+      "ffffffff",
+      "aaaaaaaa",
+      "55555555",
+      "word_index * 2654435761 XOR 0x6d2b79f5",
+      "inverse address pattern"
+    ],
+    "passes_per_boot": 6,
+    "heap_integrity_passed": true,
+    "full_capacity_tested": false
+  },
+  "control": {
+    "boot_complete_state": "DISARMED",
+    "capability_limits": "all zero",
+    "logical_outputs": "all zero",
+    "gpio_pwm_implemented": false,
+    "nominal_tick_ms": 100,
+    "observed_ticks_per_boot": 600,
+    "heartbeat_interval_ms": 10000
+  },
+  "boots_passed": 3,
+  "boots": [
+    {
+      "path": "validation-2026-10-23/boot-1.log",
+      "sha256": "493916f0000a09b3536367dfe27b4c39db15b97df9748f85f7ada55e28382c70",
+      "passed": true,
+      "observed_until_uptime_ms": 72630,
+      "control_ticks": 600
+    },
+    {
+      "path": "validation-2026-10-23/boot-2.log",
+      "sha256": "493916f0000a09b3536367dfe27b4c39db15b97df9748f85f7ada55e28382c70",
+      "passed": true,
+      "observed_until_uptime_ms": 72630,
+      "control_ticks": 600
+    },
+    {
+      "path": "validation-2026-10-23/boot-3.log",
+      "sha256": "493916f0000a09b3536367dfe27b4c39db15b97df9748f85f7ada55e28382c70",
+      "passed": true,
+      "observed_until_uptime_ms": 72630,
+      "control_ticks": 600
+    }
+  ],
+  "reset_method": "COM RTS pulses EN; POWERON/reset_reason=1 is the chip report, not a physical cable power-cycle test",
+  "flash_operation": {
+    "tool": "esptool 5.6.0",
+    "baud": 115200,
+    "no_stub": true,
+    "write_hash_verified_images": 3,
+    "whole_chip_erased": false,
+    "efuse_written": false,
+    "backup_bytes": 1048576,
+    "backup_local_ignored_path": "build/board-validation-private/pre-validation-first-1MiB.bin",
+    "backup_committed": false,
+    "erased_ranges_exclusive": [
+      "0x0..0x6000",
+      "0x8000..0x9000",
+      "0x10000..0x46000"
+    ]
+  },
+  "failed_attempts": [
+    {
+      "operation": "full Flash backup using stub at 460800 baud",
+      "result": "Invalid head of packet (0x92) at about 32 KiB; no Flash write; root cause undetermined"
+    },
+    {
+      "operation": "full Flash backup using ROM at 115200 baud",
+      "result": "manually stopped due to duration; replaced by successful 1 MiB backup covering all rewritten sectors"
+    }
+  ],
+  "build_artifacts": [
+    {
+      "build_path": "build/firmware-esp32/bootloader/bootloader.bin",
+      "bytes": 21056,
+      "sha256": "78586aac396d031eaeef491c6eaad97226dac634431eb293bd394c145d8095c5"
+    },
+    {
+      "build_path": "build/firmware-esp32/partition_table/partition-table.bin",
+      "bytes": 3072,
+      "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    {
+      "build_path": "build/firmware-esp32/cybertrack_board_check.bin",
+      "bytes": 217776,
+      "sha256": "9fc84e6452b016394706efb29d0e47518e82d29430bbb899b2b91293724af875"
+    }
+  ],
+  "compiled_sources": [
+    {
+      "path": "firmware/esp32/CMakeLists.txt",
+      "sha256": "5417791157eed00b4f7e1fd76d4f0ea77c3e19056a7c13d62427cd995221908e"
+    },
+    {
+      "path": "firmware/esp32/main/CMakeLists.txt",
+      "sha256": "7f163e89b1ebfef5579e2b5104bc80ca37ff789ad90364e9ee6641eb6608c927"
+    },
+    {
+      "path": "firmware/esp32/main/board_check.c",
+      "sha256": "f4ea96c8aa9768a540a824919694995ecfe0e767bee39c095e1266207f1e8a88"
+    },
+    {
+      "path": "firmware/esp32/sdkconfig.defaults",
+      "sha256": "4648fc28ddf0342e7e77f24ddace4427a42b8ad055757a2b097439f1db8feb8c"
+    },
+    {
+      "path": "firmware/src/control.c",
+      "sha256": "2158325e95fa32622735ca7466a5580eaaac6dc23be142ee91b4e384adcf1ec9"
+    },
+    {
+      "path": "firmware/include/cybertrack/control.h",
+      "sha256": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a"
+    }
+  ],
+  "sdkconfig_sha256": "745970fc2d273c86c74232393ff93ac4b3d90dc362e64f934fe85eb65b37fbc1",
+  "not_verified": [
+    "full 8 MiB application memory coverage",
+    "long-duration memory stress",
+    "physical power removal and brownout",
+    "actuator GPIO levels and physical stop",
+    "watchdog fault injection",
+    "network/audio/full runtime adapter",
+    "full Flash read-write",
+    "power or thermal acceptance"
+  ],
+  "host_regression": {
+    "command": "cmake --build build/firmware-host && ctest --test-dir build/firmware-host --output-on-failure",
+    "tests_passed": 13,
+    "tests_failed": 0,
+    "source_head_before_board_commit": "2d5dfc04d3d463b08bcb78f464632c42c019c071"
+  }
+}
