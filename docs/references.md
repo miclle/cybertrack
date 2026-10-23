@@ -21,11 +21,13 @@
 
 | 入口 | 内容 | 证据级别 |
 |---|---|---|
-| [硬件采购清单](../hardware/procurement.md) | 十一项商品名称、链接及待补采购信息；P07 已更新天猫 SKU | P07 页面选项、本地资料、实物照片与无负载启动／PSRAM 已核对；其余京东及淘宝页面详情未取得 |
+| [硬件采购清单](../hardware/procurement.md) | 十一项商品名称、链接及待补采购信息；P07 已更新天猫 SKU | 十项商品页已读取，商家参数与实物验证分开；P08 淘宝详情被站点策略拦截 |
 | [ESP32-S3 N16R8](../hardware/components/ESP32-S3-N16R8/README.md) | 原理图、44 针表、图纸尺寸与[实物核对](../hardware/components/ESP32-S3-N16R8/physical-verification.md)：照片、实测外形、双 USB、ROM 识别及无负载启动／PSRAM 读写 | 区分供应商标称、用户测量、照片观察与设备读回；完整电气／安装验收未完成 |
 | [37R-520](../hardware/components/37R-520/README.md) | 参数、尺寸、编码器、联轴器与支架图片 | 商家图片标称；未重新实测 |
 | [DF-MD V1.3](../hardware/components/DF-MD-V1.3/README.md) | 原理图、数据手册及板卡图片 | 厂商资料；原理图标题栏 V1.4 |
 | [track-mount](../hardware/components/track-mount/README.md) | FCStd、STEP、图片和尺寸 JSON | 已有测量记录与形状假设；本次未重新测量 |
 | [资产校验清单](../hardware/reference/assets.json) | 部件资料文件的 SHA-256 | 可检查文件完整性，不证明参数正确 |
+
+2026-10-23 的[采购网页核对记录](../hardware/procurement-web-review.md)汇总选项、参数、来源冲突和设计影响；[原图／说明书来源清单](../hardware/reference/procurement-2026-10-23/sources.json)记录 18 个新保存文件及 SHA-256，独立于既有部件校验清单，不覆盖只读资产。P07 页面 PDF 已核对为芯片规格书 v2.2；P11 商品页说明书的单路／多端额定输出已读取，实物仍未验收。
 
 原始图片中的厂家名称与器件型号按原资料保留。
