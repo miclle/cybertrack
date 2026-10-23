@@ -1,3 +1,4 @@
+#include "synthetic_proof.h"
 #include "cybertrack/link.h"
 
 #include <stdio.h>
@@ -57,7 +58,11 @@ static void reset_at(uint64_t now)
 static void reset(void) { reset_at(0); }
 static bool chunk(ct_ws_opcode op, bool fin, size_t offset, size_t total, const char *data, size_t len, bool fresh)
 {
-    return ct_link_receive(&link, link.attempt, (ct_ws_chunk){op, fin, offset, total, len, data}, fresh, board.now);
+    ct_action_proof proof = {0};
+    if (op == CT_WS_TEXT && !offset && !link.message_open)
+        proof = ct_test_delivery(&protocol, protocol.session, board.now,
+            runtime.control.enable_generation, fresh).proof;
+    return ct_link_receive(&link, link.attempt, (ct_ws_chunk){op, fin, offset, total, len, data}, proof, board.now);
 }
 static bool complete(const char *frame, bool fresh)
 {
@@ -181,7 +186,7 @@ static void invalid_chunks(void)
     };
     for (size_t i = 0; i < sizeof(invalid)/sizeof(invalid[0]); ++i) {
         armed(); exchange(move);
-        CHECK(!ct_link_receive(&link, link.attempt, invalid[i], true, board.now));
+        CHECK(!ct_link_receive(&link, link.attempt, invalid[i], (ct_action_proof){0}, board.now));
         CHECK(link.close_required); CHECK(service()); off(); CHECK(protocol.session == 0);
     }
     const ct_ws_chunk changed[] = {
@@ -191,7 +196,7 @@ static void invalid_chunks(void)
     };
     for (size_t i = 0; i < sizeof(changed)/sizeof(changed[0]); ++i) {
         online(); CHECK(chunk(CT_WS_TEXT,true,0,4,"ab",2,false));
-        CHECK(!ct_link_receive(&link, link.attempt, changed[i], false, board.now));
+        CHECK(!ct_link_receive(&link, link.attempt, changed[i], (ct_action_proof){0}, board.now));
         CHECK(service()); off();
     }
     online(); CHECK(chunk(CT_WS_TEXT,false,0,1,"a",1,false));
@@ -259,7 +264,7 @@ static void reconnect_and_stale_events(void)
     CHECK(ct_link_begin(&link,5) == 0); /* Abort not acknowledged. */
     ct_link_closed(&link,old_attempt,5);
     connect_ready(); CHECK(link.attempt > old_attempt && protocol.session > old_session);
-    CHECK(!ct_link_receive(&link,old_attempt,(ct_ws_chunk){CT_WS_TEXT,true,0,1,1,"x"},true,0));
+    CHECK(!ct_link_receive(&link,old_attempt,(ct_ws_chunk){CT_WS_TEXT,true,0,1,1,"x"},(ct_action_proof){0},0));
     CHECK(!ct_link_connected(&link,old_attempt,0)); CHECK(!ct_link_ready(&link,old_attempt,0));
     CHECK(!ct_link_sent(&link,old_attempt,old_tx.id,false,0,0));
     ct_link_closed(&link,old_attempt,0);
@@ -280,7 +285,7 @@ static void disconnect_discards_queue_and_response(void)
     ct_link_closed(&link,old,0);
     CHECK(!link.tx_pending && link.inbox.count == 0 && !link.message_open);
     CHECK(ct_link_begin(&link,0) == 0); CHECK(service()); off();
-    CHECK(!ct_link_receive(&link,old,(ct_ws_chunk){CT_WS_TEXT,true,0,1,1,"x"},true,0));
+    CHECK(!ct_link_receive(&link,old,(ct_ws_chunk){CT_WS_TEXT,true,0,1,1,"x"},(ct_action_proof){0},0));
     CHECK(ct_link_begin(&link,4) == 0); board.now = 5; connect_ready(); exchange(initialize);
     CHECK(runtime.control.state != CT_READY); off();
     CHECK(!ct_link_sent(&link,old,sent.id,true,sent.length,0));
@@ -289,7 +294,9 @@ static void disconnect_discards_queue_and_response(void)
 static void send_failures_and_timeouts(void)
 {
     for (unsigned mode = 0; mode < 4; ++mode) {
-        armed(); CHECK(complete(move,true)); CHECK(service());
+        armed(); CHECK(complete(move,true));
+        ct_action_proof lost = link.inbox.items[link.inbox.head].delivery.proof;
+        CHECK(service());
         CHECK(board.applied.left_level == 2);
         if (mode < 2) {
             CHECK(ct_link_take_tx(&link,&sent,board.now));
@@ -311,6 +318,14 @@ static void send_failures_and_timeouts(void)
         /* Even freshly tagged replay after a lost reply and manual re-enable
          * cannot execute the previously accepted command. */
         exchange(move); CHECK(strstr(sent.frame, "-32002")); off();
+        CHECK(protocol.sequence == 0);
+        ct_action_proof retry_proof;
+        CHECK(ct_protocol_issue_window(&protocol, board.now, &retry_proof));
+        retry_proof.intent = lost.intent;
+        const char retry[] = WRAP("\"id\":777,\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.move\",\"arguments\":{\"direction\":\"forward\",\"speed_level\":2,\"duration_ms\":100}}");
+        CHECK(ct_link_receive(&link, link.attempt,
+            (ct_ws_chunk){CT_WS_TEXT,true,0,strlen(retry),strlen(retry),retry}, retry_proof, board.now));
+        CHECK(service()); ack(); CHECK(strstr(sent.frame, "-32002")); off();
         CHECK(protocol.sequence == 0);
         exchange(WRAP("\"id\":4,\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.water\",\"arguments\":{\"duration_ms\":10}}"));
         CHECK(strstr(sent.frame, "accepted") && board.applied.water);
@@ -364,7 +379,7 @@ static void runtime_delay_and_shutdown_failure(void)
 static void clock_and_counter_boundaries(void)
 {
     armed(); exchange(move); board.now = 1; CHECK(service());
-    CHECK(!ct_link_receive(&link,link.attempt,(ct_ws_chunk){CT_WS_PING,true,0,0,0,NULL},false,0));
+    CHECK(!ct_link_receive(&link,link.attempt,(ct_ws_chunk){CT_WS_PING,true,0,0,0,NULL},(ct_action_proof){0},0));
     CHECK(!service()); CHECK(link.state == CT_LINK_HALTED); off();
     reset_at(UINT64_MAX - 5); CHECK(ct_link_begin(&link,board.now));
     board.now = UINT64_MAX; CHECK(service()); CHECK(link.state == CT_LINK_CONNECTING);
@@ -376,8 +391,37 @@ static void clock_and_counter_boundaries(void)
     CHECK(link.error == CT_LINK_EXHAUSTED && protocol.session == 0); off();
 }
 
+static void origin_proof_survives_transport(void)
+{
+    armed();
+    ct_action_proof old;
+    CHECK(ct_protocol_issue_window(&protocol, 0, &old)); old.intent = 900001;
+    /* A producer created this at t=0. Late first ingress must not refresh it. */
+    board.now = 20; CHECK(service()); board.now = 40; CHECK(service());
+    CHECK(ct_link_receive(&link, link.attempt,
+        (ct_ws_chunk){CT_WS_TEXT,true,0,strlen(move),strlen(move),move}, old, board.now));
+    CHECK(service()); ack(); CHECK(strstr(sent.frame, "expired")); off();
+
+    armed(); CHECK(ct_protocol_issue_window(&protocol, 0, &old)); old.intent = 900002;
+    CHECK(ct_link_receive(&link, link.attempt,
+        (ct_ws_chunk){CT_WS_TEXT,true,0,strlen(move),10,move}, old, 0));
+    ct_action_proof renewed;
+    CHECK(ct_protocol_issue_window(&protocol, 1, &renewed)); renewed.intent = old.intent;
+    board.now = 1;
+    CHECK(ct_link_receive(&link, link.attempt,
+        (ct_ws_chunk){CT_WS_TEXT,true,10,strlen(move),strlen(move)-10,move+10}, renewed, 1));
+    CHECK(link.inbox.count == 1);
+    CHECK(service()); ack(); CHECK(strstr(sent.frame, "freshness_unverified")); off();
+    /* Same intent with a new request ID and current window remains retired. */
+    const char retry[] = WRAP("\"id\":999,\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.move\",\"arguments\":{\"direction\":\"forward\",\"speed_level\":2,\"duration_ms\":100}}");
+    CHECK(ct_link_receive(&link, link.attempt,
+        (ct_ws_chunk){CT_WS_TEXT,true,0,strlen(retry),strlen(retry),retry}, renewed, 1));
+    CHECK(service()); ack(); CHECK(strstr(sent.frame, "-32002")); off();
+}
+
 int main(void)
 {
+    origin_proof_survives_transport();
     configuration_and_handshake_gate();
     every_split_and_utf8();
     boundary_frames_and_notifications();
@@ -391,6 +435,6 @@ int main(void)
     backpressure_and_local_stop();
     runtime_delay_and_shutdown_failure();
     clock_and_counter_boundaries();
-    printf("PASS: 13 link scenario groups; %zu exhaustive split cases; link_bytes=%zu; tx_bytes=%zu (fake transport/board only)\n",split_cases,sizeof(link),sizeof(sent));
+    printf("PASS: 14 link scenario groups; %zu exhaustive split cases; link_bytes=%zu; tx_bytes=%zu (fake transport/board only)\n",split_cases,sizeof(link),sizeof(sent));
     return EXIT_SUCCESS;
 }

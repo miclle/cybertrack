@@ -1,3 +1,4 @@
+#include "synthetic_proof.h"
 #include "cybertrack/runtime.h"
 #include "fake_store.h"
 #include <stdio.h>
@@ -26,7 +27,7 @@ static void off(const ct_controller *c)
 }
 static void call(const char *frame)
 {
-    ct_rpc_delivery d = {protocol.session, 0, control.enable_generation, true};
+    ct_rpc_delivery d = ct_test_delivery(&protocol, protocol.session, 0, control.enable_generation, true);
     CHECK(ct_protocol_handle(&protocol, frame, strlen(frame), d, 0, reply, sizeof(reply)) == CT_RPC_RESPONSE);
 }
 static void new_media(void)
@@ -60,7 +61,7 @@ static void reboot_and_binding(void)
     setup_prior(); uint64_t old = protocol.session;
     call(prior); CHECK(strstr(reply, "accepted")); off(&control); /* Resident original reply. */
     CHECK(boot() && protocol.session > old && protocol.sequence == 0);
-    ct_rpc_delivery stale = {old, 0, control.enable_generation, true};
+    ct_rpc_delivery stale = ct_test_delivery(&protocol, old, 0, control.enable_generation, true);
     CHECK(ct_protocol_handle(&protocol, prior, strlen(prior), stale, 0, reply, sizeof(reply)) == CT_RPC_STALE_SESSION);
     call(prior); CHECK(strstr(reply, "-32002")); off(&control); ++boot_replays;
     CHECK(!ct_protocol_attach_store(&protocol, NULL) && !protocol.storage_fault);
@@ -183,15 +184,15 @@ static bool step(ct_event_kind kind, const char *text)
 {
     ct_runtime_event event = {0}; event.kind = kind; event.frame = text;
     if (text) event.length = strlen(text);
-    event.delivery = (ct_rpc_delivery){protocol.session, board.now, runtime.control.enable_generation, true};
+    event.delivery = ct_test_delivery(&protocol, protocol.session, board.now, runtime.control.enable_generation, true);
     return ct_runtime_step(&runtime, &event, &response);
 }
 static void runtime_ordering(void)
 {
-    for (unsigned mode = 0; mode < 5; ++mode) {
+    for (unsigned mode = 0; mode < 6; ++mode) {
         new_media(); memset(&board, 0, sizeof(board));
         ct_board_io io = {NULL, board_off, board_ok, board_clock, board_inputs, board_output, board_ok};
-        CHECK(ct_runtime_init(&runtime, &protocol, io, limits, 50, 20));
+        CHECK(ct_runtime_init(&runtime, &protocol, io, limits, mode == 5 ? 5 : 50, 20));
         raw_io = ct_test_store_io(&disk); ct_replay_io timed = raw_io; timed.sync = timed_sync;
         CHECK(ct_replay_store_load(&store, timed) == CT_STORE_READY);
         CHECK(ct_protocol_attach_store(&protocol, &store));
@@ -202,9 +203,11 @@ static void runtime_ordering(void)
         if (mode == 1) board.sync_delay = 11;
         if (mode == 2) board.stop_on_sync = true;
         if (mode == 3) board.fail_output = true;
+        if (mode == 5) { board.now = 4; board.sync_delay = 1; }
         bool ok = step(CT_EVENT_MESSAGE, prior);
         CHECK(ok == (mode == 0 || mode == 2 || mode == 4));
-        CHECK(board.writes == (mode >= 3 ? 1u : 0u));
+        CHECK(board.writes == (mode == 3 || mode == 4 ? 1u : 0u));
+        if (mode == 5) CHECK(runtime.faults & CT_RUNTIME_FRESHNESS);
         if (mode != 4) CHECK(!board.output.left_level);
         if (!ok) CHECK(!response.reply[0]);
         /* Simulate reset after the storage attempt, output attempt or lost reply. */

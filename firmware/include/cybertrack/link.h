@@ -69,10 +69,10 @@ bool ct_link_connected(ct_link *link, uint64_t attempt, uint64_t now_ms);
 bool ct_link_ready(ct_link *link, uint64_t attempt, uint64_t now_ms);
 /* Only this offline MCP text path is implemented. Binary/audio must be routed
  * separately by a future platform dispatcher; here it closes the connection.
- * freshness_verified is trusted evidence at FIRST chunk; never inferred from
+ * proof is authenticated origin evidence at FIRST chunk; never inferred from
  * connection or fragment completion. Pass false without actual evidence. */
 bool ct_link_receive(ct_link *link, uint64_t attempt, ct_ws_chunk chunk,
-                     bool freshness_verified, uint64_t now_ms);
+                     ct_action_proof proof, uint64_t now_ms);
 void ct_link_closed(ct_link *link, uint64_t attempt, uint64_t now_ms);
 /* Must run periodically even offline, during connect/backoff, partial receive
  * and pending send. Applies disconnect before queued messages and services the

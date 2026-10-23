@@ -1,3 +1,4 @@
+#include "synthetic_proof.h"
 /* Test-only line transport. Local control directives are not MCP methods and
  * must never be exposed to a network connection. No hardware is linked. */
 #include "cybertrack/protocol.h"
@@ -43,13 +44,13 @@ int main(int argc, char **argv)
             char *frame = strchr(line, '\t');
             if (!frame) return 2;
             ++frame;
-            ct_rpc_delivery delivery = {session, received, enable_generation, fresh != 0};
+            ct_rpc_delivery delivery = ct_test_delivery(&protocol, session, received, enable_generation, fresh != 0);
             result = ct_protocol_handle(&protocol, frame, strlen(frame), delivery, now, reply, sizeof(reply));
         } else if (strcmp(line, "small-buffer") == 0) {
-            ct_rpc_delivery delivery = {protocol.session, control.last_now_ms, control.enable_generation, true};
+            ct_rpc_delivery delivery = ct_test_delivery(&protocol, protocol.session, control.last_now_ms, control.enable_generation, true);
             result = ct_protocol_handle(&protocol, "{}", 2, delivery, control.last_now_ms, reply, 1);
         } else if (strcmp(line, "null-request") == 0) {
-            ct_rpc_delivery delivery = {protocol.session, control.last_now_ms, control.enable_generation, true};
+            ct_rpc_delivery delivery = ct_test_delivery(&protocol, protocol.session, control.last_now_ms, control.enable_generation, true);
             result = ct_protocol_handle(&protocol, NULL, 0, delivery, control.last_now_ms, reply, sizeof(reply));
         } else return 2;
         printf("{\"api_result\":%d,\"session\":%" PRIu64 ",\"state\":%d,\"fault\":%d,"

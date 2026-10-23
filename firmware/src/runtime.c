@@ -56,10 +56,12 @@ static bool sample_inputs(ct_runtime *r, bool allow_enable, uint64_t now)
 
 /* Poll safety inputs before a write and again after it. No enable is accepted
  * during these polls: a press overlapping a safety event must be released. */
-static bool finish_cycle(ct_runtime *r, uint64_t start)
+static bool finish_cycle(ct_runtime *r, uint64_t start, uint64_t start_deadline)
 {
     uint64_t now;
     if (!sample_inputs(r, false, r->control.last_now_ms) || !check_time(r, start, &now)) return false;
+    if (start_deadline && !is_off(r->control.output) && now >= start_deadline)
+        return fail(r, CT_RUNTIME_FRESHNESS);
     if (is_off(r->control.output)) {
         if (!force_off(r)) return fail(r, CT_RUNTIME_OFF_FAILED);
     } else {
@@ -102,7 +104,7 @@ bool ct_runtime_init(ct_runtime *r, ct_protocol *protocol, ct_board_io io,
     (void)ct_boot_complete(&r->control);
     /* Self-test ran with outputs off, before periodic control/watchdog service.
      * The platform must separately bound startup and configure its boot WDT. */
-    if (!finish_cycle(r, now)) return false;
+    if (!finish_cycle(r, now, 0)) return false;
     r->started = true;
     return true;
 }
@@ -124,6 +126,8 @@ bool ct_runtime_step(ct_runtime *r, const ct_runtime_event *event,
      * message. This off path is independent of cache or request validity. */
     if (is_off(r->control.output) && !force_off(r)) return fail(r, CT_RUNTIME_OFF_FAILED);
     if (!check_time(r, start, &now)) return false;
+    uint64_t start_deadline = 0;
+    uint64_t accepted_before = r->protocol->accepted_sequence;
     if (event) {
         switch (event->kind) {
         case CT_EVENT_IDLE:
@@ -138,13 +142,15 @@ bool ct_runtime_step(ct_runtime *r, const ct_runtime_event *event,
             if (!response || !event->frame) return fail(r, CT_RUNTIME_CONFIG);
             response->result = ct_protocol_handle(r->protocol, event->frame, event->length,
                 event->delivery, now, response->reply, sizeof(response->reply));
+            if (r->protocol->accepted_sequence != accepted_before)
+                start_deadline = r->protocol->freshness.expires_at_ms;
             if (response->result == CT_RPC_BAD_ARGUMENT) return fail(r, CT_RUNTIME_CONFIG);
             break;
         default:
             return fail(r, CT_RUNTIME_CONFIG);
         }
     }
-    if (finish_cycle(r, start)) return true;
+    if (finish_cycle(r, start, start_deadline)) return true;
     /* An accepted logical target is not an acknowledgement of a failed write.
      * fail() also closed the session and discarded cached acceptance replies. */
     if (response) {

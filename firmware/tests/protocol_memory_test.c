@@ -1,3 +1,4 @@
+#include "synthetic_proof.h"
 #include "cybertrack/protocol.h"
 #include "fault_allocator.h"
 
@@ -34,7 +35,7 @@ typedef struct {
 
 static ct_rpc_delivery delivery(void)
 {
-    return (ct_rpc_delivery){protocol.session, 0, control.enable_generation, true};
+    return ct_test_delivery(&protocol, protocol.session, 0, control.enable_generation, true);
 }
 
 static ct_rpc_result handle(const char *frame)

@@ -298,10 +298,6 @@ static void dispatch_action(ct_protocol *p, writer *w, const char *id,
         else if (str_is(direction, "right")) request.direction = CT_RIGHT;
         else { rpc_error(w, id, -32602, "Unknown direction"); return; }
     }
-    if (!p->max_queue_ms || !delivery.freshness_verified) {
-        tool_result(w, id, true, "freshness_unverified");
-        return;
-    }
     if (delivery.enable_generation != p->control->enable_generation) {
         tool_result(w, id, true, "stale_local_enable");
         return;
@@ -310,14 +306,25 @@ static void dispatch_action(ct_protocol *p, writer *w, const char *id,
         tool_result(w, id, true, "invalid_receive_time");
         return;
     }
+    if (!p->max_queue_ms || !delivery.proof.intent || !delivery.proof.window) {
+        tool_result(w, id, true, "freshness_unverified");
+        return;
+    }
+    ct_fresh_result fresh = ct_freshness_check(&p->freshness, delivery.proof, p->session,
+        p->control->enable_generation, delivery.received_at_ms, now);
+    if (fresh != CT_FRESH) {
+        tool_result(w, id, true, fresh == CT_FRESH_EXPIRED ? "expired" : "freshness_unverified");
+        return;
+    }
     if (p->sequence == UINT64_MAX) {
         tool_result(w, id, true, "sequence_exhausted");
         return;
     }
     request.session = p->session;
     request.sequence = ++p->sequence;
-    request.expires_at_ms = delivery.received_at_ms + p->max_queue_ms;
+    request.expires_at_ms = p->freshness.expires_at_ms;
     ct_result result = ct_submit(p->control, &request, now);
+    if (result == CT_OK) p->accepted_sequence = request.sequence;
     tool_result(w, id, result != CT_OK, result_name(result));
 }
 
@@ -407,6 +414,15 @@ static yyjson_doc *read_json(const ct_protocol *p, const char *frame, size_t len
                             allocator.malloc ? &allocator : NULL, error);
 }
 
+bool ct_protocol_issue_window(ct_protocol *p, uint64_t now, ct_action_proof *out)
+{
+    if (out) *out = (ct_action_proof){0};
+    if (!p || !p->control || !p->session || p->storage_fault || now < p->control->last_now_ms)
+        return false;
+    return ct_freshness_issue(&p->freshness, p->session, p->control->enable_generation,
+                              now, p->max_queue_ms, out);
+}
+
 uint64_t ct_protocol_open(ct_protocol *p, uint64_t now_ms)
 {
     p->opened = true;
@@ -426,6 +442,7 @@ uint64_t ct_protocol_open(ct_protocol *p, uint64_t now_ms)
     p->session = next;
     p->initialized = false;
     p->sequence = 0;
+    p->accepted_sequence = 0;
     p->cache_count = 0;
     p->cache_next = 0;
     memset(p->cache, 0, sizeof(p->cache));
@@ -468,6 +485,17 @@ static bool remember_id(ct_protocol *p, const char *id)
         }
     }
     return seen;
+}
+
+/* This prefix cannot be a canonical RPC ID (quoted string or decimal).
+ * Preserve the v1 RPC hash mapping and storage format: adding this namespace
+ * only sets additional monotone bits, so older durable IDs remain protected. */
+static bool remember_intent(ct_protocol *p, ct_action_proof proof)
+{
+    if (!proof.intent) return false;
+    char key[32];
+    (void)snprintf(key, sizeof(key), "intent:%016" PRIx64, proof.intent);
+    return remember_id(p, key);
 }
 
 static bool replay_safe(const yyjson_val *payload)
@@ -532,11 +560,18 @@ ct_rpc_result ct_protocol_handle(ct_protocol *p, const char *frame, size_t lengt
         ct_rpc_cache_entry *entry = &p->cache[i];
         if (strcmp(entry->id, id) != 0) continue;
         yyjson_doc *previous = read_json(p, entry->frame, strlen(entry->frame), &parse_error);
+        bool cache_storage_ok = true;
+        if (previous && !stop && !replay_safe(payload)) {
+            (void)remember_intent(p, delivery.proof);
+            cache_storage_ok = persist(p, p->session);
+        }
         if (!previous) {
             ct_stop(p->control);
             rpc_error(&w, id, -32603, parse_error.code == YYJSON_READ_ERROR_MEMORY_ALLOCATION
                 ? "Cache allocation failed" : "Cache parse failure");
         }
+        else if (!cache_storage_ok)
+            rpc_error(&w, id, -32005, "Replay storage unavailable; actions locked");
         else if (!yyjson_equals(payload, yyjson_obj_get(yyjson_doc_get_root(previous), "payload")))
             rpc_error(&w, id, -32001, "Request ID reused with different content");
         else memcpy(reply, entry->reply, strlen(entry->reply) + 1);
@@ -545,8 +580,12 @@ ct_rpc_result ct_protocol_handle(ct_protocol *p, const char *frame, size_t lengt
         return CT_RPC_RESPONSE;
     }
     /* Reserve before dispatch, including rejected requests. A resident retry
-     * above returns its original response without touching the FIFO/filter. */
+     * above preserves the FIFO and may reserve a newly supplied intent. */
     bool seen = remember_id(p, id);
+    bool unsafe = !stop && !replay_safe(payload);
+    /* Retire even rejected/expired intents before semantic dispatch, together
+     * with the RPC ID in ONE durable save. Changing the RPC ID cannot revive it. */
+    if (unsafe) seen = remember_intent(p, delivery.proof) || seen;
     if (stop) tool_result(&w, id, false, "logical_outputs_cleared; local_reenable_required");
     else if (!replay_safe(payload) && !persist(p, p->session))
         rpc_error(&w, id, -32005, "Replay storage unavailable; actions locked");

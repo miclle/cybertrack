@@ -31,7 +31,8 @@ typedef enum {
     CT_RUNTIME_INPUT = 1u << 4,
     CT_RUNTIME_OUTPUT = 1u << 5,
     CT_RUNTIME_OFF_FAILED = 1u << 6,
-    CT_RUNTIME_WATCHDOG = 1u << 7
+    CT_RUNTIME_WATCHDOG = 1u << 7,
+    CT_RUNTIME_FRESHNESS = 1u << 8
 } ct_runtime_fault;
 
 typedef enum { CT_EVENT_IDLE, CT_EVENT_CONNECT, CT_EVENT_DISCONNECT, CT_EVENT_MESSAGE } ct_event_kind;

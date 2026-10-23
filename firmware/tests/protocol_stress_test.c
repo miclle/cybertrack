@@ -1,3 +1,4 @@
+#include "synthetic_proof.h"
 #include "cybertrack/protocol.h"
 #include "fault_allocator.h"
 
@@ -28,7 +29,10 @@ static void off(void)
 
 static void handle(const char *text)
 {
-    ct_rpc_delivery delivery = {protocol.session, now, control.enable_generation, true};
+    ct_rpc_delivery delivery = ct_test_delivery(&protocol, protocol.session, now, control.enable_generation, true);
+    unsigned action_id;
+    if (sscanf(text, "{\"type\":\"mcp\",\"payload\":{\"jsonrpc\":\"2.0\",\"id\":\"action-%u", &action_id) == 1)
+        delivery.proof.intent = (uint64_t)action_id + 1; /* Synthetic producer's stable intent. */
     CHECK(ct_protocol_handle(&protocol, text, strlen(text), delivery, now, reply, sizeof(reply)) == CT_RPC_RESPONSE);
     ct_test_heap_empty(&heap);
     CHECK(protocol.cache_count <= CT_RPC_CACHE_SLOTS && protocol.cache_next < CT_RPC_CACHE_SLOTS);
@@ -118,7 +122,7 @@ static void repeated_recovery(void)
         CHECK(protocol.replay_bits_set == bits && protocol.cache_count == 0);
         off(); CHECK(control.state != CT_READY && !protocol.initialized);
         action(i);
-        ct_rpc_delivery stale = {old_session, now, control.enable_generation, true};
+        ct_rpc_delivery stale = ct_test_delivery(&protocol, old_session, now, control.enable_generation, true);
         CHECK(ct_protocol_handle(&protocol, frame, strlen(frame), stale, now, reply, sizeof(reply)) == CT_RPC_STALE_SESSION);
         handle(initialize);
         CHECK(protocol.initialized && ct_local_enable(&control, now) == CT_OK);

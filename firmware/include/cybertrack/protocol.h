@@ -3,6 +3,7 @@
 
 #include "cybertrack/control.h"
 #include "cybertrack/replay_store.h"
+#include "cybertrack/freshness.h"
 #include <stddef.h>
 
 #define CT_RPC_FRAME_MAX 2048
@@ -16,15 +17,14 @@ typedef enum {
     CT_RPC_RESPONSE, CT_RPC_NO_RESPONSE, CT_RPC_STALE_SESSION, CT_RPC_BAD_ARGUMENT
 } ct_rpc_result;
 
-/* Trusted transport metadata, NEVER populated from JSON arguments.
- * received_at_ms is the first local ingress time, not the dequeue/retry time.
- * freshness_verified requires evidence about pre-ingress command age. F1 tests
- * synthesize it; no production freshness mechanism is implemented yet. */
+/* Trusted origin proof plus local ingress metadata. Proof must be authenticated
+ * and bound to the command upstream; received_at_ms is first local ingress,
+ * never dequeue/retry time. No production authenticator is implemented. */
 typedef struct {
     uint64_t session;
     uint64_t received_at_ms;
     uint64_t enable_generation;
-    bool freshness_verified;
+    ct_action_proof proof;
 } ct_rpc_delivery;
 
 typedef struct {
@@ -52,7 +52,9 @@ typedef struct {
     uint64_t generation;
     uint64_t session;
     uint64_t sequence;
+    uint64_t accepted_sequence; /* Changes only on a new accepted target. */
     uint32_t max_queue_ms;
+    ct_freshness freshness;
     bool initialized;
     size_t cache_count;
     size_t cache_next;
@@ -78,6 +80,11 @@ bool ct_protocol_set_allocator(ct_protocol *p, ct_rpc_allocator allocator);
  * rebinding. The store must remain exclusively owned by this protocol. Real
  * action integration must bind durable storage AND verify network freshness. */
 bool ct_protocol_attach_store(ct_protocol *p, ct_replay_store *store);
+/* Issue a window for the authenticated producer BEFORE it creates an intent.
+ * Not a receive-time helper or public MCP tool. Uses max_queue_ms as the total
+ * issue-to-dispatch budget. A new window revokes the old one; never auto-renew
+ * evidence on retries. Does not enable outputs. Single protocol owner only. */
+bool ct_protocol_issue_window(ct_protocol *p, uint64_t now_ms, ct_action_proof *challenge);
 /* Open/reconnect revokes local enable and allocates a fresh generation. Returns
  * zero on failure. Tag queued deliveries with this value at ingress. Retains
  * the replay filter across close/open. After genuine boot, reload/attach the

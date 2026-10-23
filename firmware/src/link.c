@@ -105,7 +105,7 @@ static bool reject(ct_link *l, ct_link_error reason, uint64_t now)
     return false;
 }
 
-bool ct_link_receive(ct_link *l, uint64_t attempt, ct_ws_chunk c, bool fresh, uint64_t now)
+bool ct_link_receive(ct_link *l, uint64_t attempt, ct_ws_chunk c, ct_action_proof proof, uint64_t now)
 {
     if (!current(l, attempt) || l->state != CT_LINK_ONLINE || !advance(l, now)) return false;
     bool control = c.opcode == CT_WS_CLOSE || c.opcode == CT_WS_PING || c.opcode == CT_WS_PONG;
@@ -125,7 +125,7 @@ bool ct_link_receive(ct_link *l, uint64_t attempt, ct_ws_chunk c, bool fresh, ui
                 l->message_length = 0;
                 l->fragment_started_ms = now;
                 l->delivery = (ct_rpc_delivery){l->runtime->protocol->session, now,
-                                               l->runtime->control.enable_generation, fresh};
+                                               l->runtime->control.enable_generation, proof};
             }
             if (c.total > CT_RPC_FRAME_MAX - l->message_length) return reject(l, CT_LINK_OVERSIZE, now);
         }
