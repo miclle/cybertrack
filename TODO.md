@@ -37,6 +37,7 @@
 - [x] 命令新鲜度与跨会话意图：设备限时窗口、稳定意图 ID、双身份持久化与输出前复核；延迟／换 RPC ID／重连／复位及掉电模拟通过，见[契约](firmware/FRESHNESS.md)。
 - [x] 防重放容量与迁移：只读零永久开销，动作历史不删除；168 次迁移中断、50 次连续迁移及重放测试通过，真实后端切换另验收，见[容量策略](firmware/CAPACITY.md)。
 - [x] 持久化原子切换与回滚保护：独立锚点、精确版本绑定、掉电恢复、旧后端拒绝与 50 次连续切换联测完成；真实锚点／防降级另验收，见[契约](firmware/ATOMIC-SWITCH.md)。
+- [x] 中断维护恢复：只从当前锚点对应完整快照重建空白后端，缺失／矛盾历史继续锁定；176 次恢复故障、50 次连续恢复及协议联测通过，见[恢复契约](firmware/RECOVERY.md)。
 - [ ] 后续离线输入：对接服务端认证与稳定意图映射、真实存储与升级迁移契约和音频／升级方案，见[离线工作清单](firmware/PLAN.md#不依赖实物的后续工作)。
 - [x] F2b 无负载子项：建立 ESP-IDF v5.5.1 工程，实测启动、8 MB PSRAM 初始化、6 MiB 六模式读写及未使能逻辑输出，见[实物记录](hardware/components/ESP32-S3-N16R8/physical-verification.md)。
 - [x] F2b BOOT 停止子项：无电机条件下，实测两次按下锁定、松开不恢复及 RST 后未使能，见[按键记录](hardware/components/ESP32-S3-N16R8/boot-stop-verification.md)。
