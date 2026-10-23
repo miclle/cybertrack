@@ -1,0 +1,117 @@
+{
+  "recorded_on": "2026-10-23",
+  "evidence_types": [
+    "user_reported_physical_measurement",
+    "user_supplied_photos",
+    "host_usb_enumeration",
+    "rom_chip_and_flash_identification",
+    "idf_application_boot",
+    "psram_initialization_and_pattern_read_write"
+  ],
+  "photos": [
+    {
+      "path": "ESP32-S3-front.jpg",
+      "sha256": "a295bf8acb5b5748b50087127e12e3db91a6b28f215f524a79b40f9c288d56e6",
+      "bytes": 2651598
+    },
+    {
+      "path": "ESP32-S3-back.jpg",
+      "sha256": "7018aead0f1cb679d58b84670774446d7e9f3f6957f0390979c1910cb6fd7b42",
+      "bytes": 2423370
+    }
+  ],
+  "measurements_mm": {
+    "length_including_antenna": 63.6,
+    "width": 28.2,
+    "height_with_soldered_pins": 13.2,
+    "source": "user measurement",
+    "instrument_and_tolerance": null
+  },
+  "photo_observations": {
+    "module_shield_marking": "S3 N16R8",
+    "official_wroom_part_number_visible": false,
+    "pcb_marking": "ESP32-S3",
+    "pcb_revision_visible": false,
+    "antenna": "PCB antenna and coaxial connector both visible; selected RF path unverified",
+    "usb_port_labels": [
+      "COM",
+      "USB"
+    ],
+    "regulator_marking": "1117 3.3V",
+    "regulator_matches_schematic_part_marking": false,
+    "bridge_exact_part_number": "not confidently readable",
+    "header_labels": "visible sequence consistent with drawing; no continuity test"
+  },
+  "usb_checks": {
+    "native_usb": {
+      "product": "Espressif Device",
+      "vendor": "Espressif Systems",
+      "vid": "303a",
+      "pid": "4001",
+      "cdc_present": true,
+      "callout_port_seen": true,
+      "passive_read_seconds": 3,
+      "passive_bytes_received": 18,
+      "recognized_firmware_markers": [],
+      "raw_payload_saved": false
+    },
+    "com_initial": {
+      "usb_device_seen": false,
+      "callout_port_seen": false
+    },
+    "com_after_flip_and_reseat": {
+      "user_reported_power_led_on": true,
+      "product": "USB Single Serial",
+      "vid": "1a86",
+      "pid": "55d3",
+      "cdc_present": true,
+      "callout_port_seen": true
+    },
+    "orientation_issue_root_cause": "undetermined: no repeated A/B insertion test"
+  },
+  "rom_probe": {
+    "command": "esptool --chip esp32s3 --port <COM_PORT> --baud 115200 --no-stub --before default-reset --after hard-reset flash-id",
+    "returncode": 0,
+    "output": "esptool v5.6.0\nSerial port <COM_PORT>:\nConnecting....\nConnected to ESP32-S3 on <COM_PORT>:\nChip type:          ESP32-S3 (QFN56) (revision v0.2)\nFeatures:           Wi-Fi, BT 5 (LE), Dual Core + LP Core, 240MHz, Embedded PSRAM 8MB (AP_3v3)\nCrystal frequency:  40MHz\nMAC:                [redacted]\n\n\nEnabling default SPI flash mode...\nFlash Memory Information:\n=========================\nManufacturer: 68\nDevice: 4018\nDetected flash size: 16MB\nFlash type set in eFuse: quad (4 data lines)\nFlash voltage set by eFuse: 3.3V\n\nHard resetting via RTS pin...\n"
+  },
+  "identified_hardware": {
+    "chip": "ESP32-S3 (QFN56)",
+    "chip_revision": "v0.2",
+    "flash_mb": 16,
+    "flash_manufacturer_id": "68",
+    "flash_device_id": "4018",
+    "flash_data_lines": 4,
+    "flash_voltage_v": 3.3,
+    "embedded_psram_mb": 8,
+    "embedded_psram_type": "AP_3v3",
+    "crystal_mhz": 40
+  },
+  "verification_limits": {
+    "psram_read_write_test_passed": true,
+    "flash_full_read_write_test_passed": false,
+    "original_application_health_verified": false,
+    "board_revision_matches_v1_4": false,
+    "gpio_wiring_continuity_verified": false,
+    "electrical_acceptance": false,
+    "mechanical_installation_acceptance": false,
+    "psram_full_capacity_test_passed": false
+  },
+  "initial_rom_probe_actions": {
+    "rom_only": true,
+    "stub_uploaded": false,
+    "flash_written": false,
+    "flash_erased": false,
+    "efuse_written": false,
+    "reset_to_download_performed": true,
+    "hard_reset_requested_after_probe": true
+  },
+  "latest_validation": {
+    "report": "validation-2026-10-23/result.json",
+    "firmware_boot_passed": true,
+    "psram_initialization_passed": true,
+    "psram_read_write_bytes": 6291456,
+    "repeat_boots_passed": 3,
+    "flash_written": true,
+    "efuse_written": false
+  }
+}

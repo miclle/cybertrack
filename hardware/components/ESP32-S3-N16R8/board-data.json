@@ -1,6 +1,6 @@
 {
   "recorded_on": "2026-10-23",
-  "evidence_level": "supplier_documents_not_physical_measurement",
+  "evidence_level": "supplier_drawings_plus_user_measurements_photos_rom_and_no_load_runtime_validation",
   "product": {
     "item_id": "1004509737151",
     "sku_id": "5996933277834",
@@ -270,5 +270,50 @@
     "mounting_hole_diameter": null
   },
   "project_gpio_assignments": {},
-  "physical_acceptance": false
+  "physical_acceptance": false,
+  "measured_dimensions_mm": {
+    "length_including_antenna": 63.6,
+    "width": 28.2,
+    "height_with_soldered_pins": 13.2,
+    "source": "user measurement",
+    "instrument_and_tolerance": null,
+    "priority": "use for actual board envelope; retain supplier dimensions separately"
+  },
+  "physical_observations": {
+    "module_shield_marking": "S3 N16R8",
+    "official_wroom_part_number_visible": false,
+    "pcb_marking": "ESP32-S3",
+    "pcb_revision_visible": false,
+    "antenna": "PCB antenna and coaxial connector both visible; selected RF path unverified",
+    "usb_port_labels": [
+      "COM",
+      "USB"
+    ],
+    "regulator_marking": "1117 3.3V",
+    "regulator_matches_schematic_part_marking": false,
+    "bridge_exact_part_number": "not confidently readable",
+    "header_labels": "visible sequence consistent with drawing; no continuity test"
+  },
+  "identified_hardware": {
+    "chip": "ESP32-S3 (QFN56)",
+    "chip_revision": "v0.2",
+    "flash_mb": 16,
+    "flash_manufacturer_id": "68",
+    "flash_device_id": "4018",
+    "flash_data_lines": 4,
+    "flash_voltage_v": 3.3,
+    "embedded_psram_mb": 8,
+    "embedded_psram_type": "AP_3v3",
+    "crystal_mhz": 40
+  },
+  "physical_verification_report": "physical-verification.json",
+  "memory_identification": {
+    "flash_size_identified_mb": 16,
+    "embedded_psram_identified_mb": 8,
+    "quad_flash_efuse_verified": true,
+    "runtime_memory_test_passed": true,
+    "source": "physical-verification.json",
+    "runtime_test_bytes": 6291456,
+    "runtime_report": "validation-2026-10-23/result.json"
+  }
 }
