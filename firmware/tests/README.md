@@ -11,7 +11,7 @@ cmake --build build/firmware-host
 ctest --test-dir build/firmware-host --output-on-failure
 ```
 
-结果：CTest 8/8 通过，包含八组控制场景、24 个协议测试方法（含参数子用例及 500 次确定性消息变异）、16 组运行层、5 组输入处理和 4 组接收队列场景，以及解析器内存测试的 17 类逐次扫描与 3 组配置／恢复检查，另有 13 组连接场景、376 个穷举切分用例及 5 组长时会话压力场景。项目 C 代码开启 `-Wall -Wextra -Wpedantic -Werror`，AddressSanitizer 与 UndefinedBehaviorSanitizer 本次运行未报告错误。断言不依赖 `assert`／`NDEBUG`。源码哈希和执行记录见[验证记录](verification.json)。
+结果：CTest 9/9 通过，包含八组控制场景、24 个协议测试方法（含参数子用例及 500 次确定性消息变异）、16 组运行层、5 组输入处理和 4 组接收队列场景，以及解析器内存测试的 17 类逐次扫描与 3 组配置／恢复检查，另有 13 组连接场景、376 个穷举切分用例及 5 组长时会话压力场景。项目 C 代码开启 `-Wall -Wextra -Wpedantic -Werror`，AddressSanitizer 与 UndefinedBehaviorSanitizer 本次运行未报告错误。断言不依赖 `assert`／`NDEBUG`。源码哈希和执行记录见[验证记录](verification.json)。
 
 另以 `cmake -S firmware -B build/firmware-library -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release` 配置并构建通过，确认仅编译 C 库不依赖 Python 或测试传输。
 
@@ -147,3 +147,7 @@ python3 firmware/tests/protocol_test.py build/firmware-host/protocol_host -v
 Python 黑盒测试另验证 FIFO 命中不延寿、淘汰后只读快照重算、旧拒绝不恢复、只读 ID 改动作拒绝，以及跨重连的等价转义、UTF-8、空字符串与数字 `-0` 归一化。假传输测试新增四条丢响应恢复路径：显式失败、短写、无人取走、无确认；完成握手、本地重新使能后旧动作仍拒绝，新意图可执行。
 
 单独复跑：`ctest --test-dir build/firmware-host -R '^protocol_stress$' --output-on-failure`。保障限于同一次启动内、同一规范化 ID；不覆盖掉电后丢失 RAM、新 ID 包装的旧动作或从未到达设备的旧消息。尚无持久化恢复、新鲜度证据、真实 SDK／平台重试兼容及 MCU 长时资源验收。真实动作仍保持关闭。
+
+## 持久化存储接口
+
+独立 `replay_store_test.c` 的 4 组场景通过：278 次写入／建库中断、256 次单比特损坏、双槽恢复、会话与位图单调检查、空白介质显式建库、读取失败和不连续版本。假后端分别保存易失／持久字节；存储对象 65640 字节，两槽介质合计 65600 字节，无堆分配。协议接入为下一阶段；本阶段没有跨复位动作联测结论。见[持久化契约](../PERSISTENCE.md)。
