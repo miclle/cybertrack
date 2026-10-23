@@ -1,4 +1,5 @@
 #include "cybertrack/replay_store.h"
+#include "replay_log_internal.h"
 
 #include <string.h>
 
@@ -169,20 +170,42 @@ bool ct_replay_store_provision(ct_replay_store *s)
     return true;
 }
 
+bool ct_replay_store_attach_log(ct_replay_store *s, ct_replay_log *log)
+{
+    if (!s || s->log || !ct_replay_store_check(s)) return false;
+    if (!s->anchor_bound || !log || !log->ready || log->io.context == s->io.context ||
+        log->io.context == s->anchor.context) return fault(s);
+    s->log = log;
+    return true;
+}
+
 bool ct_replay_store_save(ct_replay_store *s, const unsigned char *filter, uint64_t session)
 {
     if (!ct_replay_store_check(s)) return false;
     if (!filter || session < s->session || session - s->session > 1 || !superset(filter, s->filter)) return fault(s);
     if (session == s->session && !memcmp(filter, s->filter, CT_REPLAY_BYTES)) return true;
-    if (s->revision == UINT64_MAX || (s->anchor_bound && s->selected.epoch == UINT64_MAX))
+    if (s->revision == UINT64_MAX || (s->anchor_bound &&
+        s->selected.epoch > UINT64_MAX - (s->log ? 2u : 1u)))
         return fault(s);
     if (s->anchor_bound) {
-        /* Reserve BEFORE touching media: an interrupted write must never leave
+        /* Reserve BEFORE touching primary media: an interrupted write must never leave
          * an unanchored candidate revision that can be reused for other bits
          * after restoring an older image. Otherwise two valid snapshots could
          * share an anchored revision while containing different histories. */
+        if (s->log) {
+            if (!s->log->ready) return fault(s);
+            /* Bridge the unchanged history to the attempt epoch BEFORE its
+             * reservation. Preserve this bridge while preparing new content,
+             * so losing the primary during preparation cannot lose history.
+             * A retry cannot reuse a candidate tuple for different history. */
+            ct_replay_anchor_record attempt = s->selected;
+            ++attempt.epoch;
+            if (!ct_replay_log_prepare(s->log, s->selected, attempt, s->filter)) return fault(s);
+            if (!advance_anchor(s, attempt)) return false;
+        }
         ct_replay_anchor_record next = s->selected;
         ++next.epoch; next.revision = s->revision + 1; next.session = session;
+        if (s->log && !ct_replay_log_prepare(s->log, s->selected, next, filter)) return fault(s);
         if (!advance_anchor(s, next)) return false;
     }
     if (!write_slot(s, 1 - s->slot, s->revision + 1, session, filter)) return false;
@@ -241,6 +264,30 @@ bool ct_replay_store_switch(ct_replay_store *src, ct_replay_store *dst, uint64_t
 }
 
 
+static ct_replay_recovery_result restore_snapshot(
+    ct_replay_store *src, ct_replay_anchor_io anchor, ct_replay_anchor_record selected,
+    ct_replay_store *dst, uint64_t destination_id)
+{
+    ct_replay_anchor_record current = {0};
+    if (!anchor.read(anchor.context, &current) || !same_record(selected, current))
+        return CT_RECOVERY_ANCHOR_UNAVAILABLE;
+
+    for (unsigned i = 0; i < 2; ++i) {
+        if (!dst->io.read(dst->io.context, i, 0, dst->scratch, sizeof(dst->scratch)) ||
+            !blank(dst->scratch)) return CT_RECOVERY_DESTINATION_UNAVAILABLE;
+    }
+    for (uint64_t offset = 1; offset <= 2; ++offset) {
+        uint64_t revision = selected.revision + offset;
+        if (!write_slot(dst, (unsigned)((revision - 1) % 2), revision, selected.session, src->filter))
+            return CT_RECOVERY_DESTINATION_UNAVAILABLE;
+    }
+    dst->anchor_bound = true; dst->anchor = anchor; dst->selected = selected;
+    ct_replay_anchor_record next = {selected.epoch + 1, destination_id, dst->revision, dst->session};
+    if (!advance_anchor(dst, next)) return CT_RECOVERY_SELECTION_UNCERTAIN;
+    dst->state = CT_STORE_READY;
+    return CT_RECOVERY_OK;
+}
+
 ct_replay_recovery_result ct_replay_store_recover(
     ct_replay_store *src, ct_replay_anchor_io anchor, uint64_t source_id,
     ct_replay_store *dst, uint64_t destination_id)
@@ -251,7 +298,7 @@ ct_replay_recovery_result ct_replay_store_recover(
         !source_id || !destination_id || source_id == destination_id ||
         src->io.context == dst->io.context) return CT_RECOVERY_BAD_ARGUMENT;
     fault(src); fault(dst); /* No operational owner survives a maintenance attempt. */
-    ct_replay_anchor_record selected = {0}, current = {0};
+    ct_replay_anchor_record selected = {0};
     if (!anchor.read(anchor.context, &selected) || !selected.epoch ||
         !selected.backend_id || selected.revision < 2 || selected.session >= selected.revision)
         return CT_RECOVERY_ANCHOR_UNAVAILABLE;
@@ -274,21 +321,27 @@ ct_replay_recovery_result ct_replay_store_recover(
     if (valid(p, 1 - slot) && (get64(p + 8) >= selected.revision ||
         get64(p + 16) > selected.session || !superset(src->filter, p + FILTER_OFFSET)))
         return CT_RECOVERY_HISTORY_CONFLICT;
-    if (!anchor.read(anchor.context, &current) || !same_record(selected, current))
-        return CT_RECOVERY_ANCHOR_UNAVAILABLE;
+    return restore_snapshot(src, anchor, selected, dst, destination_id);
+}
 
-    for (unsigned i = 0; i < 2; ++i) {
-        if (!dst->io.read(dst->io.context, i, 0, dst->scratch, sizeof(dst->scratch)) ||
-            !blank(dst->scratch)) return CT_RECOVERY_DESTINATION_UNAVAILABLE;
-    }
-    for (uint64_t offset = 1; offset <= 2; ++offset) {
-        uint64_t revision = selected.revision + offset;
-        if (!write_slot(dst, (unsigned)((revision - 1) % 2), revision, selected.session, src->filter))
-            return CT_RECOVERY_DESTINATION_UNAVAILABLE;
-    }
-    dst->anchor_bound = true; dst->anchor = anchor; dst->selected = selected;
-    ct_replay_anchor_record next = {selected.epoch + 1, destination_id, dst->revision, dst->session};
-    if (!advance_anchor(dst, next)) return CT_RECOVERY_SELECTION_UNCERTAIN;
-    dst->state = CT_STORE_READY;
-    return CT_RECOVERY_OK;
+ct_replay_recovery_result ct_replay_store_recover_log(
+    ct_replay_store *src, ct_replay_log *log, ct_replay_anchor_io anchor,
+    uint64_t source_id, ct_replay_store *dst, uint64_t destination_id)
+{
+    if (!src || !dst || !log || src == dst || !log->ready || !anchor.read || !anchor.replace ||
+        dst->state != CT_STORE_EMPTY || dst->anchor_bound || !dst->io.read || !dst->io.erase ||
+        !dst->io.write || !dst->io.sync || !source_id || !destination_id || source_id == destination_id ||
+        src->io.context == dst->io.context || log->io.context == src->io.context ||
+        log->io.context == dst->io.context || log->io.context == anchor.context)
+        return CT_RECOVERY_BAD_ARGUMENT;
+    fault(src); fault(dst);
+    ct_replay_anchor_record selected = {0};
+    if (!anchor.read(anchor.context, &selected) || !selected.epoch || !selected.backend_id ||
+        selected.revision < 2 || selected.session >= selected.revision)
+        return CT_RECOVERY_ANCHOR_UNAVAILABLE;
+    if (selected.backend_id != source_id) return CT_RECOVERY_WRONG_BACKEND;
+    if (selected.epoch == UINT64_MAX || selected.revision > UINT64_MAX - 2)
+        return CT_RECOVERY_EXHAUSTED;
+    if (!ct_replay_log_read(log, selected, src->filter)) return CT_RECOVERY_HISTORY_UNAVAILABLE;
+    return restore_snapshot(src, anchor, selected, dst, destination_id);
 }

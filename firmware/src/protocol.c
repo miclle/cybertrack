@@ -1,4 +1,5 @@
 #include "cybertrack/protocol.h"
+#include "cybertrack/replay_log.h"
 #include "yyjson.h"
 
 #include <inttypes.h>
@@ -376,12 +377,13 @@ bool ct_protocol_set_allocator(ct_protocol *p, ct_rpc_allocator allocator)
     return true;
 }
 
-static bool attach_store(ct_protocol *p, ct_replay_store *store, bool guarded)
+static bool attach_store(ct_protocol *p, ct_replay_store *store, bool guarded, bool logged)
 {
     if (!p || !p->control || p->opened || p->store_bound) return false;
     p->store_bound = true;
     p->store = store;
-    if (!store || (guarded && !store->anchor_bound) || !ct_replay_store_check(store)) {
+    if (!store || (guarded && !store->anchor_bound) ||
+        (logged && (!store->log || !store->log->ready)) || !ct_replay_store_check(store)) {
         p->storage_fault = true;
         ct_stop(p->control);
         return false;
@@ -396,12 +398,17 @@ static bool attach_store(ct_protocol *p, ct_replay_store *store, bool guarded)
 
 bool ct_protocol_attach_store(ct_protocol *p, ct_replay_store *store)
 {
-    return attach_store(p, store, false);
+    return attach_store(p, store, false, false);
 }
 
 bool ct_protocol_attach_guarded_store(ct_protocol *p, ct_replay_store *store)
 {
-    return attach_store(p, store, true);
+    return attach_store(p, store, true, false);
+}
+
+bool ct_protocol_attach_logged_store(ct_protocol *p, ct_replay_store *store)
+{
+    return attach_store(p, store, true, true);
 }
 
 static bool persist(ct_protocol *p, uint64_t session)

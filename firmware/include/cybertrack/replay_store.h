@@ -30,6 +30,8 @@ typedef struct {
  * record, volatile success, rollback or
  * erase is permitted. This is a backend contract, NOT a Flash implementation.
  * Backend IDs are nonzero, immutable trusted identities, not network input.
+ * Epoch-only advances with identical backend/revision/session allocate unique
+ * log attempts. CAS must support these and compare epoch as well as data fields.
  * One serialized owner covers the anchor and all stores through each operation. */
 typedef struct {
     uint64_t epoch, backend_id, revision, session;
@@ -41,10 +43,13 @@ typedef struct {
                     const ct_replay_anchor_record *next);
 } ct_replay_anchor_io;
 
+typedef struct ct_replay_log ct_replay_log;
+
 /* Single owner; use static/heap storage, not a small task stack. Wire encoding
  * is explicit little endian, never a dump of this struct. No dynamic memory. */
 typedef struct {
     ct_replay_io io;
+    ct_replay_log *log; /* Optional independent write-ahead evidence. */
     ct_store_state state;
     bool anchor_bound;
     ct_replay_anchor_io anchor;
@@ -66,6 +71,9 @@ bool ct_replay_store_provision(ct_replay_store *s);
  * Anchored saves reserve a never-reused version BEFORE media writes; success
  * requires full media readback and a final anchor match. Interrupted reservation
  * may lock actions until maintenance; no automatic rollback/repair.
+ * With a log, durably bridge unchanged history BEFORE allocating an attempt
+ * epoch, then prepare new evidence BEFORE reserving the data revision. Each
+ * preparation preserves the exact selected log record. See replay_log.h.
  * No-op saves read the anchor but do not write. UINT64_MAX revision cannot wrap. */
 bool ct_replay_store_save(ct_replay_store *s, const unsigned char *filter, uint64_t session);
 
