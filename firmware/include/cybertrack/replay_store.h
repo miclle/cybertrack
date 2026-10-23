@@ -25,8 +25,9 @@ typedef struct {
 
 /* Independent, device-bound rollback-resistant anchor. Zero record means NEVER
  * enrolled, not missing/corrupt/reset. read returns the durable record. replace
- * atomically compares ALL fields and durably installs next or leaves expected;
- * false may mean either outcome. No torn record, volatile success, rollback or
+ * atomically compares ALL fields and durably installs next; mismatch leaves
+ * the current record untouched. False may mean committed or unchanged. No torn
+ * record, volatile success, rollback or
  * erase is permitted. This is a backend contract, NOT a Flash implementation.
  * Backend IDs are nonzero, immutable trusted identities, not network input.
  * One serialized owner covers the anchor and all stores through each operation. */
@@ -62,7 +63,9 @@ ct_store_state ct_replay_store_load(ct_replay_store *s, ct_replay_io io);
 bool ct_replay_store_provision(ct_replay_store *s);
 /* Persist a monotone superset and the same/next session BEFORE using them.
  * Failure latches FAULT (even ambiguous completion); reboot/load is required.
- * Anchored saves checkpoint the new version only after media readback.
+ * Anchored saves reserve a never-reused version BEFORE media writes; success
+ * requires full media readback and a final anchor match. Interrupted reservation
+ * may lock actions until maintenance; no automatic rollback/repair.
  * No-op saves read the anchor but do not write. UINT64_MAX revision cannot wrap. */
 bool ct_replay_store_save(ct_replay_store *s, const unsigned char *filter, uint64_t session);
 

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define CHECK(x) do { if (!(x)) { fprintf(stderr, "%d: %s\n", __LINE__, #x); exit(1); } } while (0)
-static ct_test_store disks[2], old_disk;
+static ct_test_store disks[2], old_disk, candidate;
 static ct_replay_store stores[2], stale;
 static ct_test_anchor anchor;
 static unsigned char bits[CT_REPLAY_BYTES];
@@ -85,18 +85,32 @@ static void interrupted_save(void)
             CHECK(!ct_replay_store_save(&stores[0], bits, 1));
             load(0); ct_test_anchor_power_cut(&anchor);
             if (ct_replay_store_bind(&stores[0], ct_test_anchor_io(&anchor), 10))
-                CHECK(stores[0].filter[0] == 1 && stores[0].filter[1] == 0);
+                CHECK(stores[0].filter[0] == 1 && stores[0].filter[1] == 2);
             ++save_cuts;
         }
-    for (unsigned op = 1; op <= 3; ++op) for (unsigned commit = 0; commit < 2; ++commit) {
+    for (unsigned op = 1; op <= 4; ++op) for (unsigned commit = 0; commit < 2; ++commit) {
         prepare(); bits[1] = 2; anchor.fail_at = anchor.calls + op; anchor.commit_on_failure = commit != 0;
         CHECK(!ct_replay_store_save(&stores[0], bits, 1));
         load(0); ct_test_anchor_power_cut(&anchor);
         bool bound = ct_replay_store_bind(&stores[0], ct_test_anchor_io(&anchor), 10);
-        CHECK(bound == (op == 1 || op == 3 || commit));
-        if (bound) CHECK(stores[0].filter[0] == 1 && stores[0].filter[1] == (op == 1 ? 0 : 2));
+        CHECK(bound == (op == 1 || (op == 2 && !commit) || op == 4));
+        if (bound) CHECK(stores[0].filter[0] == 1 && stores[0].filter[1] == (op == 4 ? 2 : 0));
         ++anchor_cuts;
     }
+}
+/* Regress the same-version fork: a durable candidate with a failed return
+ * followed by restoring the previous image must NOT allow another write at
+ * that candidate's version. A version-only post-write anchor permits this. */
+static void candidate_version_cannot_be_reused(void)
+{
+    prepare(); bits[1] = 2; disks[0].fail_at = disks[0].calls + 6;
+    CHECK(!ct_replay_store_save(&stores[0], bits, 1)); candidate = disks[0];
+    disks[0] = old_disk; load(0);
+    CHECK(!ct_replay_store_bind(&stores[0], ct_test_anchor_io(&anchor), 10));
+    bits[1] = 4; CHECK(!ct_replay_store_save(&stores[0], bits, 1)); ++rollback_checks;
+    disks[0] = candidate; load(0);
+    CHECK(ct_replay_store_bind(&stores[0], ct_test_anchor_io(&anchor), 10));
+    CHECK(stores[0].filter[1] == 2);
 }
 static void invalid_and_enrollment(void)
 {
@@ -135,8 +149,8 @@ static void invalid_and_enrollment(void)
 }
 int main(void)
 {
-    selection_and_rollback(); interrupted_copy(); interrupted_selection(); interrupted_save(); invalid_and_enrollment();
-    printf("PASS: 5 switch groups; copy_cuts=%zu; save_cuts=%zu; anchor_cuts=%zu; rollback_checks=%zu; store_bytes=%zu\n",
+    selection_and_rollback(); interrupted_copy(); interrupted_selection(); interrupted_save(); candidate_version_cannot_be_reused(); invalid_and_enrollment();
+    printf("PASS: 6 switch groups; copy_cuts=%zu; save_cuts=%zu; anchor_cuts=%zu; rollback_checks=%zu; store_bytes=%zu\n",
            copy_cuts, save_cuts, anchor_cuts, rollback_checks, sizeof(ct_replay_store));
     return 0;
 }
