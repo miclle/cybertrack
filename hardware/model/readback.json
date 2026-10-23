@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.10",
+  "design_revision": "0.11",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
   "power_bank_dimensions_mm": {
@@ -3226,18 +3226,18 @@
     },
     {
       "name": "Electronics",
-      "label": "头舱主控／驱动／电源分配区 100×45×34",
+      "label": "前上方剩余电子分配区 70×25×13／非实物器件",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 153000.0,
+      "volume_mm3": 22750.000000000004,
       "bbox_mm": [
-        -50.0,
-        -38.0,
-        146.0,
-        50.0,
-        7.0,
-        180.0
+        -35.0,
+        -72.0,
+        168.0,
+        35.0,
+        -47.0,
+        181.0
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -3716,14 +3716,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 8294.89535095263,
+      "volume_mm3": 9414.476000345421,
       "bbox_mm": [
         -58.0,
         -74.0,
         144.5,
         58.0,
-        10.0,
-        145.5
+        17.0,
+        154.0
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -4177,6 +4177,438 @@
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ESP32Board",
+      "label": "实测 ESP32-S3 整板包络／内部层高为假设",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 12930.21312,
+      "bbox_mm": [
+        -39.6,
+        -23.1,
+        163.6,
+        24.0,
+        5.100000000000001,
+        176.79999999999998
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerCarrier",
+      "label": "非金属候选主控小托架／天线端悬出",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 5767.54106229156,
+      "bbox_mm": [
+        -44.0,
+        -31.0,
+        150.0,
+        17.4,
+        16.0,
+        156.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerMountInsert00",
+      "label": "嵌件候选 ControllerMountInsert00",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 32.15184461500145,
+      "bbox_mm": [
+        -43.0,
+        -30.0,
+        149.2,
+        -39.0,
+        -26.0,
+        153.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerMountScrew00",
+      "label": "M2.5 级紧固件候选 ControllerMountScrew00",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 43.76173957077889,
+      "bbox_mm": [
+        -43.2,
+        -30.2,
+        150.0,
+        -38.8,
+        -25.8,
+        157.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerMountInsert01",
+      "label": "嵌件候选 ControllerMountInsert01",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 32.15184461500145,
+      "bbox_mm": [
+        -43.0,
+        11.0,
+        149.2,
+        -39.0,
+        15.0,
+        153.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerMountScrew01",
+      "label": "M2.5 级紧固件候选 ControllerMountScrew01",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 43.761739570778886,
+      "bbox_mm": [
+        -43.2,
+        10.8,
+        150.0,
+        -38.8,
+        15.2,
+        157.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerMountInsert10",
+      "label": "嵌件候选 ControllerMountInsert10",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 32.15184461500146,
+      "bbox_mm": [
+        -2.0,
+        -30.0,
+        149.2,
+        2.0,
+        -26.0,
+        153.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerMountScrew10",
+      "label": "M2.5 级紧固件候选 ControllerMountScrew10",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 43.7617395707789,
+      "bbox_mm": [
+        -2.2,
+        -30.2,
+        150.0,
+        2.2,
+        -25.8,
+        157.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerMountInsert11",
+      "label": "嵌件候选 ControllerMountInsert11",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 32.15184461500145,
+      "bbox_mm": [
+        -2.0,
+        11.0,
+        149.2,
+        2.0,
+        15.0,
+        153.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerMountScrew11",
+      "label": "M2.5 级紧固件候选 ControllerMountScrew11",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 43.76173957077889,
+      "bbox_mm": [
+        -2.2,
+        10.8,
+        150.0,
+        2.2,
+        15.2,
+        157.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerSocketFront",
+      "label": "22 位排母承接区域 Front",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1754.6903999999968,
+      "bbox_mm": [
+        -38.99,
+        -23.099999999999998,
+        156.0,
+        16.949999999999996,
+        -20.3,
+        169.2
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerSocketRear",
+      "label": "22 位排母承接区域 Rear",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1754.6903999999993,
+      "bbox_mm": [
+        -38.99,
+        2.299999999999999,
+        156.0,
+        16.949999999999996,
+        5.1,
+        169.2
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerRetainerInsertFront",
+      "label": "嵌件候选 ControllerRetainerInsertFront",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 25.995108412128815,
+      "bbox_mm": [
+        -37.0,
+        -29.0,
+        150.1,
+        -33.0,
+        -25.0,
+        153.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerRetainerScrewFront",
+      "label": "M2.5 级紧固件候选 ControllerRetainerScrewFront",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 48.670478092012935,
+      "bbox_mm": [
+        -37.2,
+        -29.2,
+        151.0,
+        -32.8,
+        -24.8,
+        159.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerRetainerInsertRear",
+      "label": "嵌件候选 ControllerRetainerInsertRear",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 25.995108412128808,
+      "bbox_mm": [
+        -37.0,
+        7.0,
+        150.1,
+        -33.0,
+        11.0,
+        153.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerRetainerScrewRear",
+      "label": "M2.5 级紧固件候选 ControllerRetainerScrewRear",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 48.67047809201293,
+      "bbox_mm": [
+        -37.2,
+        6.8,
+        151.0,
+        -32.8,
+        11.2,
+        159.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerRetainer",
+      "label": "可拆防脱压架／组件包络上方0.5间隙",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 721.1256661176918,
+      "bbox_mm": [
+        -37.0,
+        -30.0,
+        156.0,
+        -27.0,
+        12.0,
+        178.8
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerWireGuide",
+      "label": "主控尾线导向环／孔Ø4.4候选",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 42.41150082346221,
+      "bbox_mm": [
+        -20.2,
+        -30.2,
+        156.0,
+        -13.8,
+        -23.8,
+        158.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerWireRoute",
+      "label": "主控尾线独立走线Ø3／不定义针序",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 443.57850000038684,
+      "bbox_mm": [
+        -18.5,
+        -28.5,
+        146.0,
+        1.5,
+        3.5,
+        162.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerUSBCOM",
+      "label": "COM直头插头候选18×10×8／开盖检修",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1440.0,
+      "bbox_mm": [
+        -57.6,
+        -7.5,
+        169.8,
+        -39.6,
+        2.5,
+        177.8
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerUSBLeadCOM",
+      "label": "COM线尾转向并向上出线空间",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2495.999999999997,
+      "bbox_mm": [
+        -65.6,
+        -7.5,
+        169.8,
+        -57.6,
+        2.5,
+        201.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerUSBUSB",
+      "label": "USB直头插头候选18×10×8／开盖检修",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1440.0,
+      "bbox_mm": [
+        -57.6,
+        -20.5,
+        169.8,
+        -39.6,
+        -10.5,
+        177.8
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerUSBLeadUSB",
+      "label": "USB线尾转向并向上出线空间",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2495.999999999997,
+      "bbox_mm": [
+        -65.6,
+        -20.5,
+        169.8,
+        -57.6,
+        -10.5,
+        201.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ControllerAntennaSpace",
+      "label": "天线端审查区／禁止布线与金属件",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 39357.16800000003,
+      "bbox_mm": [
+        17.6,
+        -38.1,
+        154.2,
+        39.0,
+        20.1,
+        185.8
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     }
   ],
   "assembly_size_xyz_mm": [
@@ -4186,9 +4618,9 @@
   ],
   "step_readback": {
     "valid": true,
-    "solids": 822,
-    "expected_solids": 822,
-    "volume_difference_mm3": 1.1504333746852353,
+    "solids": 839,
+    "expected_solids": 839,
+    "volume_difference_mm3": 1.1558477625949308,
     "bbox_difference_mm": 8.952838470577262e-13,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -4197,13 +4629,13 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 476,
+    "boolean_pairs_tested": 545,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
   },
   "service_paths": {
-    "method": "8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes move inward then up after tray removal; not continuous sweep or tool/hand access certification",
+    "method": "8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes move inward then up after tray removal; USB plugs withdraw then lift with crown removed; not continuous sweep or tool/hand access certification",
     "scenarios": [
       {
         "group": "cable_access",
@@ -4329,9 +4761,10 @@
           "TrayScrewL0",
           "TrayScrewL1",
           "PowerCableRoute",
-          "WaterHoseRoute"
+          "WaterHoseRoute",
+          "ControllerWireRoute"
         ],
-        "boolean_pairs_tested": 21,
+        "boolean_pairs_tested": 91,
         "overlaps": [],
         "passed": true
       },
@@ -4447,6 +4880,24 @@
           "ElectronicsTray",
           "Electronics",
           "AudioModule",
+          "ESP32Board",
+          "ControllerCarrier",
+          "ControllerSocketFront",
+          "ControllerSocketRear",
+          "ControllerRetainerInsertFront",
+          "ControllerRetainerScrewFront",
+          "ControllerRetainerInsertRear",
+          "ControllerRetainerScrewRear",
+          "ControllerRetainer",
+          "ControllerWireGuide",
+          "ControllerMountInsert00",
+          "ControllerMountScrew00",
+          "ControllerMountInsert01",
+          "ControllerMountScrew01",
+          "ControllerMountInsert10",
+          "ControllerMountScrew10",
+          "ControllerMountInsert11",
+          "ControllerMountScrew11",
           "CrownScrewLFront",
           "CrownScrewLRear",
           "CrownScrewRFront",
@@ -4456,7 +4907,8 @@
           "TrayScrewL0",
           "TrayScrewL1",
           "PowerCableRoute",
-          "WaterHoseRoute"
+          "WaterHoseRoute",
+          "ControllerWireRoute"
         ],
         "boolean_pairs_tested": 13,
         "overlaps": [],
@@ -4508,6 +4960,24 @@
           "ElectronicsTray",
           "Electronics",
           "AudioModule",
+          "ESP32Board",
+          "ControllerCarrier",
+          "ControllerSocketFront",
+          "ControllerSocketRear",
+          "ControllerRetainerInsertFront",
+          "ControllerRetainerScrewFront",
+          "ControllerRetainerInsertRear",
+          "ControllerRetainerScrewRear",
+          "ControllerRetainer",
+          "ControllerWireGuide",
+          "ControllerMountInsert00",
+          "ControllerMountScrew00",
+          "ControllerMountInsert01",
+          "ControllerMountScrew01",
+          "ControllerMountInsert10",
+          "ControllerMountScrew10",
+          "ControllerMountInsert11",
+          "ControllerMountScrew11",
           "CrownScrewLFront",
           "CrownScrewLRear",
           "CrownScrewRFront",
@@ -4517,7 +4987,267 @@
           "TrayScrewL0",
           "TrayScrewL1",
           "PowerCableRoute",
-          "WaterHoseRoute"
+          "WaterHoseRoute",
+          "ControllerWireRoute"
+        ],
+        "boolean_pairs_tested": 13,
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "group": "controller",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            65.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownSpine",
+          "CrownForePlate",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownRearCassette",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "OccipitalBrowL",
+          "OccipitalBrowR",
+          "CrownEffectInsetL",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectInsetR",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "ControllerWireRoute",
+          "ControllerMountScrew00",
+          "ControllerMountScrew01",
+          "ControllerMountScrew10",
+          "ControllerMountScrew11"
+        ],
+        "boolean_pairs_tested": 65,
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "group": "controller_retainer",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            40.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownSpine",
+          "CrownForePlate",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownRearCassette",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "OccipitalBrowL",
+          "OccipitalBrowR",
+          "CrownEffectInsetL",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectInsetR",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "ControllerWireRoute",
+          "ControllerRetainerScrewFront",
+          "ControllerRetainerScrewRear"
+        ],
+        "boolean_pairs_tested": 20,
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "group": "controller_board",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            65.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownSpine",
+          "CrownForePlate",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownRearCassette",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "OccipitalBrowL",
+          "OccipitalBrowR",
+          "CrownEffectInsetL",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectInsetR",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "ControllerWireRoute",
+          "ControllerRetainer",
+          "ControllerRetainerScrewFront",
+          "ControllerRetainerScrewRear"
+        ],
+        "boolean_pairs_tested": 8,
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "group": "usb_com",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            -12.0,
+            0.0,
+            0.0
+          ],
+          [
+            -12.0,
+            0.0,
+            35.0
+          ]
+        ],
+        "pose_count": 16,
+        "removed_first": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownSpine",
+          "CrownForePlate",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownRearCassette",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "OccipitalBrowL",
+          "OccipitalBrowR",
+          "CrownEffectInsetL",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectInsetR",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "ControllerWireRoute"
+        ],
+        "boolean_pairs_tested": 13,
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "group": "usb_native",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            -12.0,
+            0.0,
+            0.0
+          ],
+          [
+            -12.0,
+            0.0,
+            35.0
+          ]
+        ],
+        "pose_count": 16,
+        "removed_first": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownSpine",
+          "CrownForePlate",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownRearCassette",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "OccipitalBrowL",
+          "OccipitalBrowR",
+          "CrownEffectInsetL",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectInsetR",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "ControllerWireRoute"
         ],
         "boolean_pairs_tested": 13,
         "overlaps": [],
@@ -4527,32 +5257,239 @@
     "passed": true,
     "physical_assembly_verified": false
   },
+  "controller_layout": {
+    "board_source": "hardware/components/ESP32-S3-N16R8/board-data.json",
+    "board_source_sha256": "f9144bb0397310ede43025c8fbc233826ecb579ce289fd7e04bdb9a1c1fb91a0",
+    "measured_size_lwh_mm": [
+      63.6,
+      28.2,
+      13.2
+    ],
+    "board_bbox_mm": [
+      -39.6,
+      6,
+      163.6,
+      24.0,
+      9,
+      176.79999999999998
+    ],
+    "orientation": "component side +Z; length +X toward antenna, USB -X; width Y; J1 toward +Y, J2 toward -Y",
+    "header_row_spacing_mm": 25.4,
+    "header_span_mm": 53.34,
+    "header_evidence": "supplier drawing, not measured; continuous pin/socket slots are schematic",
+    "assumed_pcb_z_mm": [
+      169.2,
+      170.8
+    ],
+    "assumed_usb_plug_mm": [
+      18,
+      10,
+      8
+    ],
+    "usb_type": "straight; user confirmed",
+    "assumed_usb_centers_yz_mm": {
+      "COM": [
+        -2.5,
+        173.8
+      ],
+      "USB": [
+        -15.5,
+        173.8
+      ]
+    },
+    "usb_requires_crown_removal": true,
+    "carrier_outer_plan_mm": [
+      61.4,
+      47
+    ],
+    "additional_fasteners": 6,
+    "remaining_electronics_allocation_mm": [
+      70,
+      25,
+      13
+    ],
+    "rf_guideline": "https://docs.espressif.com/projects/esp-hardware-design-guidelines/en/latest/esp32s3/pcb-layout-design.html#general-principles-of-pcb-layout-for-modules-positioning-a-module-on-a-base-board",
+    "antenna_extent_assumed": true,
+    "rf_performance_verified": false,
+    "socket_fit_retention_and_cable_bend_verified": false,
+    "physical_fit_verified": false
+  },
+  "controller_clearance_check": {
+    "checks": [
+      {
+        "name": "ControllerUSBCOM",
+        "excluded": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownEffectInsetL",
+          "CrownEffectInsetR",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownForePlate",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "CrownRearCassette",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownSpine",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "OccipitalBrowL",
+          "OccipitalBrowR"
+        ],
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "name": "ControllerUSBUSB",
+        "excluded": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownEffectInsetL",
+          "CrownEffectInsetR",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownForePlate",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "CrownRearCassette",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownSpine",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "OccipitalBrowL",
+          "OccipitalBrowR"
+        ],
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "name": "ControllerUSBLeadCOM",
+        "excluded": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownEffectInsetL",
+          "CrownEffectInsetR",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownForePlate",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "CrownRearCassette",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownSpine",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "OccipitalBrowL",
+          "OccipitalBrowR"
+        ],
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "name": "ControllerUSBLeadUSB",
+        "excluded": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownEffectInsetL",
+          "CrownEffectInsetR",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownForePlate",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "CrownRearCassette",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownSpine",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "OccipitalBrowL",
+          "OccipitalBrowR"
+        ],
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "name": "ControllerAntennaSpace",
+        "excluded": [
+          "ESP32Board"
+        ],
+        "overlaps": [],
+        "passed": true
+      }
+    ],
+    "passed": true,
+    "scope": "USB with crown removed; antenna assumed external review region excludes host board",
+    "actual_plug_access_or_rf_verified": false
+  },
   "manufacturing_released": false,
   "physical_fit_verified": false,
   "assembly_paths_verified": false,
   "electrical_verified": false,
   "final_saved_audit": {
-    "native_objects_verified": 227,
+    "native_objects_verified": 251,
     "gui_visibility_verified": true
   },
   "previews_generated": true,
   "files_sha256": {
-    "CyberTrack.FCStd": "f973c32972efac1774d6f2add9bd32d441d39ac190c586bd4236d0ec78cb8a76",
-    "CyberTrack.step": "826d15fb454c20446621a43f67bcddb2b2dbc1a966b369da549447c5156a5965",
-    "arc-layout.png": "296c429250f8c5a501894cf7ca32fb70bf3bb9bb6efd8b7dad9a69e6d4ab9cad",
-    "arc-top.png": "7fb314c4c6c2624f43dfab51486d8fcff6910ca75eec3322ddbbe53a90726003",
-    "assembly.png": "89eeee31cba13d3153286dd7ec3869c9fdda224ca3d3040489deb58ce45a99ed",
-    "crown-effects-top.png": "f268bf8ce8a588f7cd189986f66d203b2e2e44fc5325a944826750a19c0f6610",
-    "crown-effects.png": "7e22f9ad434c1dc8701c5fb7b3da308188ea905f80a807c52c452d1aebdbc8c4",
-    "front.png": "799ff2bb31fafbffe8d2e6844e71b9d9c5848834d8d81d85c48019f5cc413895",
-    "layout.png": "0950bfe415f7416ccc8436aec78f2848b7f2823f6460a7d7a6b4a48ca3460011",
-    "lower-layout.png": "3f19cbd62c8bde66804e1c3dce407a49e1dd68a92305a40f6b938e0c15dc574d",
-    "rear-assembly.png": "f6a56920fa3f226160f162e193c142a63db2b9abce74e4b2a0aaf23706a1b90b",
-    "rear.png": "d529fe772935c95537f6ec95f4d80f6075f2ce3be6c080bad1733289478d63aa",
-    "right.png": "9456ff2f3fc2cd24cfefcf037f2f59a974e7b60d35c2b43bdc6c7399fbf95d6e",
-    "routing.png": "805fa0d789044f0773dd94f600784e6a929cb6956006039820fdd92112b933cb",
-    "service.png": "850e10553b30ee6de132e3b4e65c51781ff7befb765199800cbf8a08326f11ca",
-    "side.png": "8802ce4e3c68cdad09b692e68197365fd66e4508e3827dfd07ce7ada9a4275de",
-    "top.png": "a9d7d7f8b22589bb0e5103c5cc143f444620e460c6c66bda71827549a94b7234"
+    "CyberTrack.FCStd": "f9c3511581010b88c09e9231780cf15d1b5ee5e10a2b862d61fdcd32fa78f941",
+    "CyberTrack.step": "0ebf3e65153670d30b724a5ebf7dc1eefacda6cadec0483556dabaf37d249d5a",
+    "arc-layout.png": "628219db0acefda630cda813300c58eaa0f3b2c5db163e6594b73108e4931c51",
+    "arc-top.png": "beb9b2e2e7a08810e397e02dafb1bf4c19600b64d24d1f846a9275cea764a8d0",
+    "assembly.png": "58a4bed5093399fa524e72546e8b1e555e78132214aef093e23a831969e08fd5",
+    "controller-access.png": "2fb935f795f22a42c9d3dc933ca96bf13135f19931af332343e1f3dc10029f61",
+    "controller-layout.png": "be84c650dddfbfe81cc7da3d8dfc56ad9ec6c407c5c90f16786f752c9c3f1b3f",
+    "controller-service.png": "6388c1abd565f471db2cac8741e6855e6eb85fa0a000e74d535961047f6b11e2",
+    "crown-effects-top.png": "1413f6c87435e352aa112d2cb91026d7e605f8e019867b522187f94fad44483e",
+    "crown-effects.png": "782179efefb7fc7957eb30ac91ebb6ac3f5347776772743eab546d03547bed59",
+    "front.png": "c8cf77ca0fea603777d7ac689b66cdde0f30d8f669a4365dd204e219fd3fe66e",
+    "layout.png": "85291234685c79341be3d845504a712a9202c43588111562c13aac977cf6ec5d",
+    "lower-layout.png": "02f57f3128c3a3f7539bf514b4c96a6955ca6a64573b0647df7a586125c25cc6",
+    "rear-assembly.png": "52ef564835c8f9fe77ae5bb0a5f3fc7bb7f6cca72ed5b94161cc54a14a05ae93",
+    "rear.png": "e5f722806c5316f49dd629942207c5d2d012a12b2f1d214817e1ae49f7adb46d",
+    "right.png": "36cafaf86a766a319d5a2f2d758b14d23c2e8991a793e351c51040c442e63e0b",
+    "routing.png": "8a4c23d7f511cb4d958189cef5a8e17e325aec7f8cd2f85570b4fa7800bb0b9e",
+    "service.png": "7226dc483aac6e42a96f09b82409973483934c0d91dbbf967d2dc9a9b2db0232",
+    "side.png": "13d20254e7d69674c4eb3f00cac45116ebc5a31d05bbc8f9869f78f438c024bf",
+    "top.png": "63780ed21c062b1e81c925caeaea78dfde4c639acb17d4b5890b6c680ae3c7de"
   }
 }
