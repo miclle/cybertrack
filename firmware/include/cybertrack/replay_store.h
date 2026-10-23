@@ -88,6 +88,32 @@ bool ct_replay_store_check(ct_replay_store *s);
 bool ct_replay_store_switch(ct_replay_store *source, ct_replay_store *destination,
                             uint64_t destination_id);
 
+/* Explicit LOCAL maintenance, outputs off and ALL protocol owners retired.
+ * Unlike load, can use one complete current snapshot when its companion slot
+ * is damaged. Never uses an older revision to repair an advanced anchor: that
+ * is indistinguishable from rollback of already accepted action history.
+ * Source must have been load-initialized (FAULT allowed); destination must be
+ * freshly loaded EMPTY, independent, with a different trusted backend ID.
+ * Re-reads anchor and source bytes; ignores cached filter/selected fields.
+ * Retires both RAM objects once validation starts. Writes ONLY destination,
+ * copies full history at two fresh revisions, then atomically selects it.
+ * On failure no retry/rebind in-place: reboot/load and inspect anchor. Normal
+ * boot remains strict; no automatic recovery, erase, reset or remote tool. */
+typedef enum {
+    CT_RECOVERY_OK,
+    CT_RECOVERY_BAD_ARGUMENT,
+    CT_RECOVERY_ANCHOR_UNAVAILABLE,
+    CT_RECOVERY_WRONG_BACKEND,
+    CT_RECOVERY_HISTORY_UNAVAILABLE,
+    CT_RECOVERY_HISTORY_CONFLICT,
+    CT_RECOVERY_DESTINATION_UNAVAILABLE,
+    CT_RECOVERY_SELECTION_UNCERTAIN,
+    CT_RECOVERY_EXHAUSTED
+} ct_replay_recovery_result;
+ct_replay_recovery_result ct_replay_store_recover(
+    ct_replay_store *source, ct_replay_anchor_io anchor, uint64_t source_id,
+    ct_replay_store *destination, uint64_t destination_id);
+
 /* Offline copy to a freshly loaded EMPTY, physically independent pair. Outputs
  * must be off and source writers stopped for the entire copy AND cutover.
  * Revalidates source against its loaded snapshot and destination blankness.
