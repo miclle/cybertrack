@@ -562,6 +562,7 @@ ct_rpc_result ct_protocol_handle(ct_protocol *p, const char *frame, size_t lengt
         yyjson_doc *previous = read_json(p, entry->frame, strlen(entry->frame), &parse_error);
         bool cache_storage_ok = true;
         if (previous && !stop && !replay_safe(payload)) {
+            (void)remember_id(p, id);
             (void)remember_intent(p, delivery.proof);
             cache_storage_ok = persist(p, p->session);
         }
@@ -581,8 +582,10 @@ ct_rpc_result ct_protocol_handle(ct_protocol *p, const char *frame, size_t lengt
     }
     /* Reserve before dispatch, including rejected requests. A resident retry
      * above preserves the FIFO and may reserve a newly supplied intent. */
-    bool seen = remember_id(p, id);
     bool unsafe = !stop && !replay_safe(payload);
+    /* Read/stop traffic has no action to replay. Keep its ID only in the bounded
+     * response cache; never spend permanent history on polling/handshakes. */
+    bool seen = unsafe && remember_id(p, id);
     /* Retire even rejected/expired intents before semantic dispatch, together
      * with the RPC ID in ONE durable save. Changing the RPC ID cannot revive it. */
     if (unsafe) seen = remember_intent(p, delivery.proof) || seen;
