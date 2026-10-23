@@ -1,8 +1,8 @@
 # track-mount 履带安装件
 
-参考资产：[FCStd](TrackMount.FCStd)、[STEP](TrackMount.step)、[预览](preview.png)、[正视图](front.png)、[尺寸图](dimensions.jpg)、[尺寸记录](dimensions.json)、[本次回读](readback.json)。
+部件文件：[FCStd](TrackMount.FCStd)、[STEP](TrackMount.step)、[预览](preview.png)、[正视图](front.png)、[尺寸图](dimensions.jpg)、[尺寸记录](dimensions.json)、[本次回读](readback.json)。
 
-本项目需要左右各一件。这里保留既有尺寸记录与几何参考，本次未重新测量实物，不把过往测量等同于本次试配通过。
+本项目需要左右各一件。尺寸记录和模型几何用于布局，实物尺寸与安装配合仍待核对。
 
 | 类别 | 参数 |
 |---|---|
@@ -12,4 +12,4 @@
 | 建模假设 | 28 mm 高度按完整外圆直径解释；缺口按上下对称圆弧建立；未测过渡圆角省略 |
 | 未解决 | 缺口深度、缺口对称性、实际圆角、配合公差及承载 |
 
-JSON 中保留旧注释用于解释尺寸协调，但 `measured` 与 `derived`、`modeling_assumptions` 分开存放。后续以真实安装基准重新核对孔距、孔径、缺口和联轴器间隙，随后更新独立验证记录。
+JSON 中记录尺寸协调依据，`measured` 与 `derived`、`modeling_assumptions` 分开存放。后续以真实安装基准重新核对孔距、孔径、缺口和联轴器间隙，随后更新验证记录。
