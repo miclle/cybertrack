@@ -2,6 +2,7 @@
 #define CYBERTRACK_PROTOCOL_H
 
 #include "cybertrack/control.h"
+#include "cybertrack/replay_store.h"
 #include <stddef.h>
 
 #define CT_RPC_FRAME_MAX 2048
@@ -9,7 +10,7 @@
 #define CT_RPC_ID_MAX 64
 #define CT_RPC_ID_CAP (CT_RPC_ID_MAX * 6 + 3)
 #define CT_RPC_CACHE_SLOTS 16
-#define CT_RPC_REPLAY_BYTES 32768
+#define CT_RPC_REPLAY_BYTES CT_REPLAY_BYTES
 
 typedef enum {
     CT_RPC_RESPONSE, CT_RPC_NO_RESPONSE, CT_RPC_STALE_SESSION, CT_RPC_BAD_ARGUMENT
@@ -44,7 +45,8 @@ typedef struct {
 
 /* Single-owner, like ct_controller. Use static/heap storage on embedded targets;
  * complete replies are a session-local FIFO; the monotone replay filter belongs
- * to the boot, never to a connection. Collisions may reject new actions. */
+ * to the boot or attached durable store, never to a connection. Collisions may
+ * reject new actions. Volatile mode is retained for offline compatibility. */
 typedef struct {
     ct_controller *control;
     uint64_t generation;
@@ -56,6 +58,8 @@ typedef struct {
     size_t cache_next;
     uint32_t replay_bits_set;
     unsigned char replay_filter[CT_RPC_REPLAY_BYTES];
+    ct_replay_store *store;
+    bool store_bound, storage_fault, opened;
     ct_rpc_allocator allocator;
     ct_rpc_cache_entry cache[CT_RPC_CACHE_SLOTS];
 } ct_protocol;
@@ -68,9 +72,16 @@ void ct_protocol_init(ct_protocol *p, ct_controller *control, uint32_t max_queue
  * invalid/late changes return false without altering the current allocator.
  * Default remains libc heap allocation. No test injector is in the library. */
 bool ct_protocol_set_allocator(ct_protocol *p, ct_rpc_allocator allocator);
+/* Bind once before first open, after boot-time store load/provision with outputs
+ * off. Restores only replay history and session high-water mark. A failed bind
+ * latches storage_fault; it never falls back to volatile actions or allows
+ * rebinding. The store must remain exclusively owned by this protocol. Real
+ * action integration must bind durable storage AND verify network freshness. */
+bool ct_protocol_attach_store(ct_protocol *p, ct_replay_store *store);
 /* Open/reconnect revokes local enable and allocates a fresh generation. Returns
  * zero on failure. Tag queued deliveries with this value at ingress. Retains
- * the replay filter across close/open; only init at a genuine boot clears it. */
+ * the replay filter across close/open. After genuine boot, reload/attach the
+ * durable history before open. Storage faults allow read/stop only. */
 uint64_t ct_protocol_open(ct_protocol *p, uint64_t now_ms);
 void ct_protocol_close(ct_protocol *p, uint64_t now_ms);
 /* One complete {"type":"mcp","payload":{...}} frame. No network I/O or queue.
