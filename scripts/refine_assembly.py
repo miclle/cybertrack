@@ -1,0 +1,200 @@
+"""Serviceable assembly candidate, keeping the approved exterior proportions.
+
+All fasteners, insert fits, hoses and connector clearances are design allocations.
+No thread, seal performance, supplier fit or physical assembly is certified here.
+"""
+import FreeCAD as App
+import Part
+V=App.Vector
+
+
+def box(x0,y0,z0,x1,y1,z1):
+    return Part.makeBox(x1-x0,y1-y0,z1-z0,V(x0,y0,z0))
+
+
+def cylinder(r,z0,z1,x,y):
+    return Part.makeCylinder(r,z1-z0,V(x,y,z0))
+
+
+def tube(r,bore,z0,z1,x,y):
+    return cylinder(r,z0,z1,x,y).cut(cylinder(bore,z0,z1,x,y))
+
+
+def route(points,radius):
+    pieces=[]
+    for a,b in zip(points,points[1:]):
+        a,b=V(*a),V(*b);pieces.append(Part.makeCylinder(radius,(b-a).Length,a,b-a))
+    pieces += [Part.makeSphere(radius,V(*p)) for p in points[1:-1]]
+    return pieces[0].multiFuse(pieces[1:]).removeSplitter()
+
+
+def refine(doc,add):
+    def cut(name,tool):
+        obj=doc.getObject(name);obj.Shape=obj.Shape.cut(tool).removeSplitter()
+    def fuse(name,shape):
+        obj=doc.getObject(name);obj.Shape=obj.Shape.fuse(shape).removeSplitter()
+    def fastener(name,x,y,bottom,head_bottom,head_top):
+        bolt=cylinder(1.25,bottom,head_bottom,x,y).fuse(cylinder(2.2,head_bottom,head_top,x,y))
+        bolt=bolt.cut(box(x-1.4,y-0.4,head_top-0.4,x+1.4,y+0.4,head_top+0.1))
+        add(name,'M2.5 级紧固件候选 '+name,bolt,'structure','metal','简化非螺纹几何；长度、头型及采购规格未定')
+    def insert(name,x,y,z0,z1):
+        add(name,'嵌件候选 '+name,tube(2,1.35,z0,z1,x,y),'structure','power','设计占位 Ø4／孔 Ø2.7；材料、螺纹及压装参数待试验')
+
+    # Battery carrier: four recessed fasteners outside the battery envelope.
+    for side,sign in [('L',1),('R',-1)]:
+        for end,y in [('Front',-85),('Rear',-34)]:
+            x=sign*63.5;tag=side+end
+            tab=box(60.5 if sign>0 else -65.8,y-4,28,65.8 if sign>0 else -60.5,y+4,31)
+            fuse('BatteryHatch',tab)
+            cut('LowerTub',box(x-2.5,y-4.2,27,x+2.5,y+4.2,31.3))
+            boss=box(x-2.5,y-4,31.3,x+2.5,y+4,37)
+            fuse('LowerTub',boss)
+            cut('LowerTub',cylinder(2.1,31.2,35.9,x,y))
+            cut('BatteryHatch',cylinder(1.4,27,32,x,y))
+            cut('BatteryHatch',cylinder(2.4,27,29.4,x,y))
+            insert('BatteryInsert'+tag,x,y,31.3,35.8)
+            bolt=cylinder(1.25,29.2,35.7,x,y).fuse(cylinder(2.2,28.2,29.2,x,y))
+            bolt=bolt.cut(box(x-1.4,y-0.4,28.1,x+1.4,y+0.4,28.6))
+            add('BatteryScrew'+tag,'电源托盖下方沉头位紧固候选 '+tag,bolt,'structure','metal','M2.5 级候选；不是已选定沉头螺钉标准')
+    strap=box(-60.6,-63,32.2,60.6,-57,32.8)
+    for sign in (-1,1):
+        x0,x1=(60,60.6) if sign>0 else (-60.6,-60)
+        strap=strap.fuse(box(x0,-63,32.2,x1,-57,65.2))
+        x0,x1=(45,60.6) if sign>0 else (-60.6,-45)
+        strap=strap.fuse(box(x0,-63,64.6,x1,-57,65.2))
+    add('BatteryPullStrap','随电源托盖下取的柔性拉带占位',strap.removeSplitter(),'structure','accent','柔性件占位；材料、强度及固定方式待试验')
+    cut('FrontBulkhead',box(-20,-22,38,20,-18,61))
+
+    # A separate underside opening makes the connector reachable before dropping the battery.
+    cut('LowerTub',box(-15,-17,27,15,16,32))
+    access=box(-14.8,-16.8,28,14.8,15.8,30.8)
+    for side,sign in [('L',1),('R',-1)]:
+        x=sign*18;y=0
+        access=access.fuse(box(14.5 if sign>0 else -21,-4,28,21 if sign>0 else -14.5,4,30.8))
+        cut('LowerTub',box(15 if sign>0 else -21.2,-4.2,27,21.2 if sign>0 else -15,4.2,31.3))
+        fuse('LowerTub',box(15.2 if sign>0 else -23.5,-8,30.8,23.5 if sign>0 else -15.2,8,37))
+        cut('LowerTub',cylinder(2.1,30.7,35.9,x,y))
+        access=access.cut(cylinder(1.4,27,32,x,y)).cut(cylinder(2.4,27,29.4,x,y))
+        insert('AccessInsert'+side,x,y,31.3,35.8)
+        bolt=cylinder(1.25,29.2,35.7,x,y).fuse(cylinder(2.2,28.2,29.2,x,y))
+        bolt=bolt.cut(box(x-1.4,y-0.4,28.1,x+1.4,y+0.4,28.6))
+        add('AccessScrew'+side,'电源插头检修小盖紧固候选 '+side,bolt,'structure','metal','M2.5 级简化候选；实物长度和头型待核')
+    add('CableServiceCover','底部独立电源插头检修小盖',access.removeSplitter(),'structure','dark','30×33 mm 开口；手指、实际插头及工具空间尚未实测')
+
+    # The whole armored crown lifts, rather than expecting a board to pass the small hatch.
+    original=doc.getObject('HeadShell').Shape.copy()
+    doc.getObject('HeadShell').Shape=original.common(box(-100,-100,120,100,50,181))
+    crown=original.common(box(-100,-100,181.25,100,50,210))
+    add('HeadCrownShell','整体上取冠盖／0.25 mm 装配分缝',crown,'exterior','body')
+    for side,sign in [('L',1),('R',-1)]:
+        for end,y in [('Front',-52),('Rear',7)]:
+            x=sign*64;tag=side+end
+            x0,x1=(60,81) if sign>0 else (-81,-60)
+            ledge=box(x0,y-4.5,174,x1,y+4.5,181).common(original.fuse(box(-79,-80,140,79,26,181)))
+            fuse('HeadShell',ledge)
+            cut('HeadShell',cylinder(2.1,176,181.1,x,y))
+            insert('CrownInsert'+tag,x,y,176,180.5)
+            for name in ('HeadCrownShell','CrownSideArmor'+side):
+                cut(name,cylinder(1.5,181,201,x,y))
+                cut(name,cylinder(2.5,193.6,201,x,y))
+            fastener('CrownScrew'+tag,x,y,178,193.9,194.9)
+    # Separate locating keys at the front rim avoid relying on screw shanks for alignment.
+    for side,sign in [('L',1),('R',-1)]:
+        key=box(sign*45-2,-80,179.5,sign*45+2,-77.5,183)
+        cut('HeadCrownShell',box(sign*45-2.2,-80.2,181.1,sign*45+2.2,-77.3,183.2))
+        fuse('HeadShell',key)
+
+    # A removable tray carries both existing equipment allocations; no board hole pattern invented.
+    tray=box(-59,-39,144.5,59,10,145.5).fuse(box(-39,-74,144.5,39,-39,145.5))
+    add('ElectronicsTray','头舱电子及音频共用上取托板',tray.removeSplitter(),'structure','metal','托板轮廓候选；实际板卡安装孔、绝缘支柱及天线净空待整合')
+    for sign in (-1,1):
+        for i,y in enumerate((-30,0)):
+            x=sign*55;tag=('L' if sign>0 else 'R')+str(i)
+            fuse('HeadShell',cylinder(3.5,139,144.5,x,y))
+            cut('HeadShell',cylinder(2.1,140,144.6,x,y))
+            insert('TrayInsert'+tag,x,y,140,144.5)
+            cut('ElectronicsTray',cylinder(1.5,144,148,x,y))
+            fastener('TrayScrew'+tag,x,y,141,145.5,146.5)
+
+    # Wet module service lids lift independently; a neck passes the inner pod cap.
+    for name,cx in [('Water',-24),('Bubble',24)]:
+        cut(name+'PodCap',cylinder(7,121,129,cx,49))
+        fuse(name+'PodCap',tube(9,7,122,127.6,cx,49))
+        add(name+'FillPlug',('喷水' if name=='Water' else '泡泡')+'补液盖导向塞',cylinder(6.8,124.3,128,cx,49),'structure','dark','Ø14 补液孔候选；整套商品模块能否接入或拆分尚未确认')
+        add(name+'FillSeal',('喷水' if name=='Water' else '泡泡')+'补液口端面密封垫占位',tube(9,7,127.6,128,cx,49),'structure','accent','0.4 mm 占位；材质、压缩率及密封性能未验证')
+        for sign in (-1,1):
+            x=cx+sign*12;y=69;tag=name+('L' if sign>0 else 'R')
+            fuse('BackpackShell',box(x-3.5,66,125,x+3.5,76,128))
+            cut('BackpackShell',cylinder(2.1,125,128.1,x,y))
+            insert('FillInsert'+tag,x,y,125,128)
+            cut(name+'ServiceLid',cylinder(1.5,127,132,x,y))
+            cut(name+'ServiceLid',cylinder(2.4,129.5,132,x,y))
+            fastener('FillScrew'+tag,x,y,125.2,129.7,130.7)
+
+    # The long-side port faces +Y. Exact lateral position remains an explicit assumption.
+    wire_points=[(0,-14,50),(0,6,70),(0,6,142),(0,-5,142)]
+    wire=route(wire_points,3).fuse(box(-10,-23,42,10,-5,58)).removeSplitter()
+    wire_tool=route(wire_points,4.5)
+    for name in ('KeelLid','NeckPedestal','NeckHeadSaddle','HeadShell','ElectronicsTray'):
+        cut(name,wire_tool)
+    add('PowerCableRoute','电源插头候选及中央干区线束 Ø6',wire,'envelope','power','长侧面有输出口为用户确认；端口 X/Z、插头 20×18×16 与线束 Ø6 为假设，不表示实物可插入')
+    for name,z0,z1 in [('BaseCableGrommet',90,93),('HeadCableGrommet',133,139)]:
+        add(name,'中央干区线束护口 '+name,tube(4.4,3.4,z0,z1,0,6),'structure','dark','护口尺寸候选；线束规格、弯曲半径与磨损待测')
+    bridge=box(-18,-1,107,18,2,109).fuse(tube(4.5,3.5,107,109,0,6)).removeSplitter()
+    add('NeckCableBridge','固定颈架线束限位桥',bridge,'structure','dark','固定夹持候选；没有增加活动关节')
+
+    water_points=[(-24,39,116),(-24,22,116),(-39,15,119),(-39,-22,133),(-39,-30,141),(44,-30,141),(44,-71,145),(44,-76,145)]
+    hose=route(water_points,2);hose_tool=route(water_points,3)
+    for name in ('WaterPod','BackpackShell','HeadShell'):
+        cut(name,hose_tool)
+    add('WaterHoseRoute','喷水软管独立侧路 Ø4',hose,'envelope','water','路线与外径占位；一体商品是否允许外接、接头、压力及弯曲半径待核实')
+    doc.getObject('HeadShell').Label='头舱固定下壳／托板及冠盖支座'
+    doc.getObject('HeadServiceHatch').Label='中央隆起顶甲／随整体冠盖拆装'
+    for group,names in service_groups(doc).items():
+        for name in names:
+            obj=doc.getObject(name)
+            obj.addProperty('App::PropertyString','ServiceGroup','Assembly')
+            obj.ServiceGroup=group
+    doc.recompute()
+    for o in doc.Objects:
+        if hasattr(o,'Category') and (o.Shape.isNull() or not o.Shape.isValid() or (o.Category!='drive' and len(o.Shape.Solids)!=1)):
+            raise ValueError('Assembly refinement invalid: '+o.Name)
+
+
+def service_groups(doc):
+    names=[o.Name for o in doc.Objects if hasattr(o,'Category')]
+    crown=[n for n in names if n.startswith(('Crown','BrowArmor','OccipitalBrow')) and not n.startswith(('CrownScrew','CrownInsert'))]
+    crown+=['HeadCrownShell','HeadServiceHatch']
+    battery=['PowerBank','BatteryHatch','BatteryPullStrap']+[n for n in names if n.startswith('BatteryPad')]
+    wet={name:[name+suffix for suffix in ('ServiceLid','CapGrip','LidMark','FillPlug','FillSeal')] for name in ('Water','Bubble')}
+    return {'cable_access':['CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule'],**wet}
+
+
+def check_service_paths(doc):
+    """Check discrete service poses, not continuous swept motion or flexible cables."""
+    groups=service_groups(doc);all_shapes=[o for o in doc.Objects if hasattr(o,'Category')]
+    bounds={o.Name:o.Shape.optimalBoundingBox(False) for o in all_shapes}
+    results=[]
+    scenarios=[('cable_access',(0,0,-25),['AccessScrewL','AccessScrewR']),
+               ('battery',(0,0,-60),[n.Name for n in all_shapes if n.Name.startswith('BatteryScrew')]+['PowerCableRoute','CableServiceCover','AccessScrewL','AccessScrewR']),
+               ('crown',(0,0,65),[n.Name for n in all_shapes if n.Name.startswith('CrownScrew')]),
+               ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute']),
+               ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]),
+               ('Bubble',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewBubble')])]
+    for group,delta,removed in scenarios:
+        moving=groups[group];fixed=[o for o in all_shapes if o.Name not in moving+removed]
+        collisions=[];tested=0
+        waypoints=[V(),V(*delta)]
+        if group in ('Water','Bubble'):
+            waypoints=[V(),V(0,0,6),V(0,12,6),V(0,12,40)]
+        poses=[a+(b-a)*fraction for a,b in zip(waypoints,waypoints[1:]) for fraction in (0,0.05,0.1,0.2,0.4,0.6,0.8,1)]
+        for pose_index,offset in enumerate(poses):
+            for name in moving:
+                shape=doc.getObject(name).Shape.copy();shape.translate(offset)
+                moving_bounds=shape.optimalBoundingBox(False)
+                for other in fixed:
+                    if not moving_bounds.intersect(bounds[other.Name]):continue
+                    tested+=1;vol=shape.common(other.Shape).Volume
+                    if vol>0.01:collisions.append({'moving':name,'fixed':other.Name,'pose_index':pose_index,'overlap_mm3':vol})
+        results.append({'group':group,'waypoints_mm':[[p.x,p.y,p.z] for p in waypoints],'pose_count':len(poses),'removed_first':removed,'boolean_pairs_tested':tested,'overlaps':collisions,'passed':not collisions})
+    return {'method':'8 discrete poses per straight segment; wet caps use lift-back-lift; not continuous sweep or tool/hand access certification','scenarios':results,'passed':all(r['passed'] for r in results),'physical_assembly_verified':False}

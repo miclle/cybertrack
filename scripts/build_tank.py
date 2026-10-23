@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 import FreeCAD as App
 import Part
+from refine_assembly import refine, service_groups, check_service_paths
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'hardware/model'
@@ -65,7 +66,7 @@ def ring(radius, bore, height, origin, direction=V(0,0,1)):
 
 
 def describe(obj):
-    s = obj.Shape; b = s.BoundBox
+    s = obj.Shape; b = s.optimalBoundingBox(False)
     return {'name': obj.Name, 'label': obj.Label, 'category': obj.Category,
             'valid': s.isValid(), 'solids': len(s.Solids), 'volume_mm3': s.Volume,
             'bbox_mm': [b.XMin,b.YMin,b.ZMin,b.XMax,b.YMax,b.ZMax]}
@@ -88,6 +89,7 @@ def render_views(doc, output):
         'rear_iso': App.Rotation(V(-1,1,0),V(-1,-1,3),V(1,1,0.75),'ZXY'),
     }
     def render(filename, direction):
+        doc.recompute()
         view.setCameraOrientation(orientations[direction].Q)
         view.fitAll()
         for _ in range(10): QtGui.QApplication.processEvents()
@@ -103,6 +105,25 @@ def render_views(doc, output):
     for name in ('WaterModule','BubbleModule','Electronics','AudioModule','BatteryRoof','LowerTub','KeelLid'):
         doc.getObject(name).ViewObject.Visibility=False
     render('lower-layout.png','iso')
+    # Service diagram: exploded rigid groups; screws and flexible routes removed first.
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=not o.Name.startswith(('PowerCableRoute','WaterHoseRoute')) and 'Screw' not in o.Name
+    original_shapes={}
+    offsets={'cable_access':V(0,0,-25),'battery':V(0,0,-60),'crown':V(0,0,65),'electronics':V(0,0,35),'Water':V(0,12,40),'Bubble':V(0,12,40)}
+    for group,names in service_groups(doc).items():
+        for name in names:
+            obj=doc.getObject(name);original_shapes[name]=obj.Shape.copy()
+            shape=obj.Shape.copy();shape.translate(offsets[group]);obj.Shape=shape
+    render('service.png','iso')
+    for name,shape in original_shapes.items():doc.getObject(name).Shape=shape
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Category!='exterior'
+            o.ViewObject.Transparency=75 if o.Category=='structure' else 0
+    render('routing.png','rear_iso')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):o.ViewObject.Transparency=0
     for o in doc.Objects:
         if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category!='envelope'
     view.setCameraOrientation(orientations['iso'].Q)
@@ -121,7 +142,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 造型 0.7'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.8'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -147,7 +168,7 @@ def main():
     for src in source.Objects:
         color='dark' if any(k in src.Name for k in ['Rubber','Tread','Lugs','Tires']) else 'metal'
         if 'Coupler' in src.Name: color='power'
-        bounds=src.Shape.BoundBox
+        bounds=src.Shape.optimalBoundingBox(False)
         if bounds.XMin>0: dx=14
         elif bounds.XMax<0: dx=-14
         else: raise ValueError(f'Drive side is ambiguous: {src.Name}')
@@ -453,6 +474,7 @@ def main():
         basis=('用户提供外形 120×73×31.5 mm，确认较重；低位平放位置获用户认可，端口、重量与实物适配未验证'
                if name=='PowerBank' else '空间分配假设；不是所购物料尺寸，不构成整套装入结论')
         add(name,label,shape,'envelope',color,basis)
+    refine(doc,add)
     doc.recompute()
     if args.render:
         for g in groups.values(): g.ViewObject.Visibility=True
@@ -480,18 +502,20 @@ def main():
     drive=[o for o in saved.Objects if hasattr(o,'Category') and o.Category=='drive']
     new=[o for o in saved.Objects if hasattr(o,'Category') and o.Category in ('structure','exterior')]
     env=[o for o in saved.Objects if hasattr(o,'Category') and o.Category=='envelope']
+    bounds={o.Name:o.Shape.optimalBoundingBox(False) for o in drive+new+env}
     collisions=[];tested=0
     pairs=[(a,b) for a in new for b in drive]+[(a,b) for i,a in enumerate(new) for b in new[i+1:]]
     pairs += [(a,b) for a in env for b in drive+new]+[(a,b) for i,a in enumerate(env) for b in env[i+1:]]
     for a,b in pairs:
-        if not a.Shape.BoundBox.intersect(b.Shape.BoundBox): continue
+        if not bounds[a.Name].intersect(bounds[b.Name]): continue
         tested+=1
         common=a.Shape.common(b.Shape).Volume
         if common>0.01: collisions.append({'a':a.Name,'b':b.Name,'volume_mm3':common})
-    assembly=Part.makeCompound([o.Shape for o in drive+new]);bb=assembly.BoundBox
+    service_check=check_service_paths(saved)
+    assembly=Part.makeCompound([o.Shape for o in drive+new]);bb=assembly.optimalBoundingBox(False)
     step_shape=Part.Shape();step_shape.read(str(step))
     step_delta=abs(step_shape.Volume-assembly.Volume)
-    step_bbox_delta=max(abs(getattr(step_shape.BoundBox,k)-getattr(bb,k)) for k in ('XMin','YMin','ZMin','XMax','YMax','ZMax'))
+    step_bbox_delta=max(abs(getattr(step_shape.optimalBoundingBox(False),k)-getattr(bb,k)) for k in ('XMin','YMin','ZMin','XMax','YMax','ZMax'))
     step_check={'valid':step_shape.isValid(),'solids':len(step_shape.Solids),'expected_solids':len(assembly.Solids),
                 'volume_difference_mm3':step_delta,'bbox_difference_mm':step_bbox_delta,
                 'volume_comparison_tolerance_mm3':0.01,
@@ -509,6 +533,10 @@ def main():
     assert set(final_shapes)=={row['name'] for row in rows}
     for row in rows:
         obj=final_shapes[row['name']]
+        bbox=obj.Shape.optimalBoundingBox(False)
+        coords=[bbox.XMin,bbox.YMin,bbox.ZMin,bbox.XMax,bbox.YMax,bbox.ZMax]
+        if max(abs(a-b) for a,b in zip(coords,row['bbox_mm']))>1e-5:
+            raise ValueError(f"Final save placement differs: {obj.Name}")
         if (not obj.Shape.isValid() or len(obj.Shape.Solids)!=row['solids']
                 or abs(obj.Shape.Volume-row['volume_mm3'])>1e-5):
             raise ValueError(f"Final save differs: {obj.Name}")
@@ -521,11 +549,14 @@ def main():
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
                     assert visible==(final_shapes[name].Category!='envelope'),name
     assert sha(source_path)==source_hash
-    report={'status':'preliminary_concept','design_revision':'0.7','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.8','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+            'bounding_box_method':'optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)',
             'power_bank_dimensions_mm':{'source':'user_measurement','length':120,'width':73,'thickness':31.5,
             'orientation':'length X, width Y, thickness Z; low horizontal placement retained from user-approved layout',
             'envelope_center_z_mm':48.75,'mass_kg':None,
             'reported_product_net_mass_kg':0.373,'mass_source':'P11; user-relayed product specification; not weighed',
+            'port_face_source':'user confirmed 120 x 31.5 mm long side',
+            'port_orientation_design':'+Y; lateral position and connector envelope are assumptions',
             'ports_and_cable_clearance_verified':False},
             'source_sha256':source_hash,'source_unchanged':True,'drive_transform':{'Left':[14,0,0],'Right':[-14,0,0],'scale':1,'method':'whole side translated, including motor, shaft, coupler and mount'},
             'drive_object_count':len(drive),'track_module_count':2,'objects':rows,
@@ -533,13 +564,14 @@ def main():
             'step_readback':step_check,'collision_check':{'tolerance_mm3':0.01,'boolean_pairs_tested':tested,
             'scope':'new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded',
             'overlaps':collisions,'passed':not collisions},
+            'service_paths':service_check,
             'manufacturing_released':False,'physical_fit_verified':False,
             'assembly_paths_verified':False,'electrical_verified':False,
             'final_saved_audit':{'native_objects_verified':len(final_shapes),'gui_visibility_verified':args.render},
             'previews_generated':args.render,
             'files_sha256':{p.name:sha(p) for p in [cad,step]+(sorted(OUT.glob('*.png')) if args.render else [])}}
     (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
-    print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check')},ensure_ascii=False,indent=2))
+    print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check','service_paths')},ensure_ascii=False,indent=2))
     App.closeDocument(final.Name)
     if args.render:
         # Dispose delayed view widgets while Python and its GIL still exist.
@@ -547,8 +579,8 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if collisions:
-        raise ValueError('Static overlaps detected; inspect readback.json')
+    if collisions or not service_check['passed']:
+        raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 
 if __name__=='__main__':
