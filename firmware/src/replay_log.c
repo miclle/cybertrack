@@ -45,26 +45,50 @@ bool ct_replay_log_init(ct_replay_log *log, ct_replay_io io)
     log->ready = io.read && io.erase && io.write && io.sync;
     return log->ready;
 }
+/* A revision can now have several attempt epochs. Keep the uniquely selected
+ * slot, irrespective of revision parity; a candidate never overwrites it.
+ * Read both slots before mutation and reject ambiguous matching evidence. */
+static bool find_selected(ct_replay_log *log, ct_replay_anchor_record r,
+                          unsigned *selected, unsigned char *filter)
+{
+    *selected = 2;
+    for (unsigned slot = 0; slot < 2; ++slot) {
+        if (!log->io.read(log->io.context, slot, 0, log->scratch, sizeof(log->scratch)))
+            goto failure;
+        if (!matches(log->scratch, r)) continue;
+        if (*selected != 2) goto failure;
+        *selected = slot;
+        if (filter) memcpy(filter, log->scratch + FILTER_OFFSET, CT_REPLAY_BYTES);
+    }
+    return true;
+failure:
+    log->ready = false;
+    return false;
+}
 bool ct_replay_log_read(ct_replay_log *log, ct_replay_anchor_record r, unsigned char *filter)
 {
     if (!log || !log->ready || !filter || !record_valid(r)) return false;
-    unsigned slot = (unsigned)((r.revision - 1) % 2);
-    if (!log->io.read(log->io.context, slot, 0, log->scratch, sizeof(log->scratch)) ||
-        !matches(log->scratch, r)) { log->ready = false; return false; }
-    memcpy(filter, log->scratch + FILTER_OFFSET, CT_REPLAY_BYTES);
+    unsigned selected;
+    if (!find_selected(log, r, &selected, filter)) return false;
+    if (selected == 2) { log->ready = false; return false; }
     return true;
 }
-bool ct_replay_log_prepare(ct_replay_log *log, ct_replay_anchor_record next,
-                           const unsigned char *filter)
+bool ct_replay_log_prepare(ct_replay_log *log, ct_replay_anchor_record current,
+                           ct_replay_anchor_record next, const unsigned char *filter)
 {
-    if (!log || !log->ready || !filter || !record_valid(next)) return false;
+    if (!log || !log->ready || !filter || !record_valid(current) || !record_valid(next)) return false;
+    unsigned selected;
+    if (!find_selected(log, current, &selected, NULL)) return false;
+    /* First attachment/migration may have no current log yet. Its full primary
+     * is still authoritative; after this bridge is selected, exact evidence
+     * is maintained throughout every subsequent preparation. */
+    unsigned slot = selected == 2 ? 0 : 1 - selected;
     unsigned char *p = log->scratch;
     memcpy(p, magic, 8); put64(p+8, next.epoch); put64(p+16, next.backend_id);
     put64(p+24, next.revision); put64(p+32, next.session);
     memcpy(p + FILTER_OFFSET, filter, CT_REPLAY_BYTES);
     uint32_t crc = checksum(p);
     for (unsigned i = 0; i < 4; ++i) p[CRC_OFFSET+i] = (unsigned char)(crc >> (8*i));
-    unsigned slot = (unsigned)((next.revision - 1) % 2);
     if (!log->io.erase(log->io.context, slot) ||
         !log->io.write(log->io.context, slot, 0, p, MARK_OFFSET) ||
         !log->io.sync(log->io.context) ||

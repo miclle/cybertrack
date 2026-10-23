@@ -71,8 +71,9 @@ bool ct_replay_store_provision(ct_replay_store *s);
  * Anchored saves reserve a never-reused version BEFORE media writes; success
  * requires full media readback and a final anchor match. Interrupted reservation
  * may lock actions until maintenance; no automatic rollback/repair.
- * With a log, allocate a unique attempt epoch and durably prepare complete
- * evidence BEFORE reserving the data revision. See replay_log.h.
+ * With a log, durably bridge unchanged history BEFORE allocating an attempt
+ * epoch, then prepare new evidence BEFORE reserving the data revision. Each
+ * preparation preserves the exact selected log record. See replay_log.h.
  * No-op saves read the anchor but do not write. UINT64_MAX revision cannot wrap. */
 bool ct_replay_store_save(ct_replay_store *s, const unsigned char *filter, uint64_t session);
 
