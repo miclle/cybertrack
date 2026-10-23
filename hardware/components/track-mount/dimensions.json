@@ -1,0 +1,49 @@
+{
+  "units": "mm",
+  "status": "recorded_measurements_not_remeasured_for_this_project",
+  "measured": {
+    "overall_width": 65.0,
+    "overall_height": 38.0,
+    "plate_thickness": 4.9,
+    "post_width": 8.8,
+    "post_depth": 8.8,
+    "post_height_reported": 11.0,
+    "top_to_shoulder_datum": 28.0,
+    "upper_round_height": 28.0,
+    "mounting_hole_diameter": 3.2,
+    "arm_width": 9.8,
+    "mounting_holes_centered_in_posts": true,
+    "post_height_includes_plate": true,
+    "central_bore_diameter": 19.0,
+    "central_opening_total_height": 24.0,
+    "notch_width": 10.0
+  },
+  "unresolved": {
+    "notch_depth": null,
+    "notch_symmetry": null
+  },
+  "reference": "dimensions.jpg",
+  "datum_note": "Upper round height clarified as 28 mm; treating as full circle gives center Y=24 and bottom Y=10, 1.2 above post footprints.",
+  "derived": {
+    "outer_diameter": 28.0,
+    "bore_diameter": 19.0,
+    "circle_center_y": 24.0,
+    "mounting_hole_pitch": 56.2,
+    "notch_tip_offset": 12.0,
+    "radial_wall_from_bore": 4.5,
+    "post_extension_above_plate": 6.1
+  },
+  "modeling_assumptions": [
+    "Round height interpreted as full outer diameter.",
+    "Arms follow post-center to ring-center direction; unmeasured transition fillets omitted.",
+    "Symmetric upper/lower notch arcs on concentric diameter 24; notch width 10 is measured."
+  ],
+  "dimension_reconciliation": [
+    "Measured bore 19 supersedes inferred 19.2. Side wall becomes 4.5, versus original 4.4 annotation.",
+    "Concentric diameter 24 notch tips leave 2 mm top/bottom, superseding the 1.8 annotation for this draft. Width 10 is measured."
+  ],
+  "historical_measurements": {
+    "radial_wall": 4.4,
+    "top_ligament": 1.8
+  }
+}
