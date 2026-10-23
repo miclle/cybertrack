@@ -21,7 +21,7 @@
 
 | 入口 | 内容 | 证据级别 |
 |---|---|---|
-| [硬件采购清单](../hardware/procurement.md) | 十一项商品名称、链接及待补采购信息；P07 已更新天猫 SKU | 十项商品页已读取，商家参数与实物验证分开；P08 淘宝详情被站点策略拦截 |
+| [硬件采购清单](../hardware/procurement.md) | 十一项商品名称、链接及待补采购信息；P07 已更新天猫 SKU | 十项商品页已读取；P07 无负载启动／PSRAM 另列，商家参数与实物验证分开；P08 淘宝详情被站点策略拦截 |
 | [ESP32-S3 N16R8](../hardware/components/ESP32-S3-N16R8/README.md) | 原理图、44 针表、图纸尺寸与[实物核对](../hardware/components/ESP32-S3-N16R8/physical-verification.md)：照片、实测外形、双 USB、ROM 识别及无负载启动／PSRAM 读写 | 区分供应商标称、用户测量、照片观察与设备读回；完整电气／安装验收未完成 |
 | [37R-520](../hardware/components/37R-520/README.md) | 参数、尺寸、编码器、联轴器与支架图片 | 商家图片标称；未重新实测 |
 | [DF-MD V1.3](../hardware/components/DF-MD-V1.3/README.md) | 原理图、数据手册及板卡图片 | 厂商资料；原理图标题栏 V1.4 |
