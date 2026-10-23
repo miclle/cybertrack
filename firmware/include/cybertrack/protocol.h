@@ -78,13 +78,17 @@ bool ct_protocol_set_allocator(ct_protocol *p, ct_rpc_allocator allocator);
  * off. Restores only replay history and session high-water mark. A failed bind
  * latches storage_fault; it never falls back to volatile actions or allows
  * rebinding. The store must remain exclusively owned by this protocol. Real
- * action integration must use the guarded entry below AND verify freshness. */
+ * action integration must use the logged entry below AND verify freshness. */
 bool ct_protocol_attach_store(ct_protocol *p, ct_replay_store *store);
-/* Production-oriented entry: requires a successfully anchor-bound store and
+/* Anchor-only entry: requires a successfully anchor-bound store and
  * checks current selection before importing history. Same one-shot failure
  * latch as attach_store; unanchored legacy storage is rejected. Subsequent
  * saves verify and advance the anchor BEFORE session/action acceptance. */
 bool ct_protocol_attach_guarded_store(ct_protocol *p, ct_replay_store *store);
+/* Requires an anchor-bound store with a ready independent recovery log. Missing
+ * evidence configuration latches storage_fault with no legacy fallback. Attach
+ * before first open; store, log and anchor share one serialized owner. */
+bool ct_protocol_attach_logged_store(ct_protocol *p, ct_replay_store *store);
 /* Issue a window for the authenticated producer BEFORE it creates an intent.
  * Not a receive-time helper or public MCP tool. Uses max_queue_ms as the total
  * issue-to-dispatch budget. A new window revokes the old one; never auto-renew
