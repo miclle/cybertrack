@@ -1,6 +1,6 @@
 {
   "validation_date": "2026-10-23",
-  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity",
+  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity, read-only capacity isolation and lossless offline replay-store migration",
   "environment": {
     "os": "macOS arm64",
     "compiler": "Apple Clang 21.0.0",
@@ -13,7 +13,7 @@
     "ctest --test-dir build/firmware-host --output-on-failure"
   ],
   "ctest": {
-    "passed": 12,
+    "passed": 13,
     "failed": 0,
     "control_scenario_groups": 8,
     "protocol_test_methods": 24,
@@ -55,7 +55,8 @@
     "replay_store_groups": 4,
     "persistence_groups": 6,
     "freshness_window_tests": 1,
-    "freshness_integration_groups": 5
+    "freshness_integration_groups": 5,
+    "replay_migration_groups": 4
   },
   "sanitizers": {
     "address": "no error reported",
@@ -86,23 +87,24 @@
     "actual socket close/send race and cross-task synchronization",
     "actual Flash/NVS durability, wear, latency and OTA migration",
     "authenticated producer stable intent lifecycle and retry mapping across sessions",
-    "whole valid storage-image rollback, device/partition binding and maintenance recovery"
+    "whole valid storage-image rollback, device/partition binding and maintenance recovery",
+    "durable migration backend selector, physical media independence and rejection of fallback to retired source"
   ],
   "source_sha256": {
-    "firmware/CMakeLists.txt": "2a2d758d36ba6f5074fc8e1fb7693c9a44a4c7e22d46d046bcab9bf05e83400b",
+    "firmware/CMakeLists.txt": "f53a15f3d4e694d8ff35716b8b65827d64f6b556a2d5b232681f7d936a60542a",
     "firmware/include/cybertrack/control.h": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a",
     "firmware/include/cybertrack/inbox.h": "dd4b0937734c038bab26974ed084d457adaae04f1041ee64ac165817a80f6398",
     "firmware/include/cybertrack/inputs.h": "6e0cf7dc7023c5c885e5a4d4740fb06a4aa92fc707b4bc321fa35cfce4366d64",
     "firmware/include/cybertrack/link.h": "7317688493f0dd0c101a74f000d3735a727db79e149abc76d6c53f3181226e5a",
     "firmware/include/cybertrack/protocol.h": "37eb38f1517b10c947507506d8ed7f3648d30b6661a00d10b4c9957f6607745d",
-    "firmware/include/cybertrack/replay_store.h": "b37d5f12f69a8e53d86b733e54d674e68682ada4d88ff7e9b97305beb3ca156a",
+    "firmware/include/cybertrack/replay_store.h": "a0091d8309d7285328fed1212a9f7ddbf4f7a8a8a66512ae47239da64f8d68d5",
     "firmware/include/cybertrack/runtime.h": "15229b5b8e5efef30d6be680a3ed09976f2b7beb1817add732698abb1ad95724",
     "firmware/src/control.c": "2158325e95fa32622735ca7466a5580eaaac6dc23be142ee91b4e384adcf1ec9",
     "firmware/src/inbox.c": "aaf2fd321276b6abc26542b22cc353863f8701fb51aa04976f368ead2c16da25",
     "firmware/src/inputs.c": "e34b3b9815f3633ff81e2d52d259fbfee0c7558f86ae3080b4ce89c62a690679",
     "firmware/src/link.c": "3f8f12fae098d61db7cf449946e000a1c59a78d1d5edc3a43eb549a24e5a0510",
     "firmware/src/protocol.c": "41208d9c596c66ea9863426f4dbb5f037157e8b4ad676ae1175109e82b98ea80",
-    "firmware/src/replay_store.c": "d8e6b0a25fdaa3d64192e6b7d24be8f5f1c727bf9316ccdb3b8732ddd1f082a2",
+    "firmware/src/replay_store.c": "4547bf70e75f0fda4ef30e65dd4c5eef6f221018d8f7f4a931fae0af90e3c25b",
     "firmware/src/runtime.c": "7acbcc427afe253ee3b758173a17a35418e7e755a9efd75c5e10c8693376e9bb",
     "firmware/tests/control_test.c": "e6c287ba766f4e5b54369aca3491a82e012e844fb863b30c989c6fc0983714d1",
     "firmware/tests/fake_store.c": "e2c6624f327a4875730065d738a2951cd7802b7ebf44916ae9270ca58c24e4fe",
@@ -126,7 +128,8 @@
     "firmware/src/freshness.c": "840034798a04efcecd7db8eb706c7ad95517e2e93e0de3d99ab87325ecf83900",
     "firmware/tests/freshness_test.c": "4a99ca5e1c355c83f0cd66c7787e2fbab346f33483d4b1799a61f085050da17f",
     "firmware/tests/synthetic_proof.h": "a12fe955eca68f23b303f08638c975ab08ac38b891284005dcda74e88f1366d1",
-    "firmware/tests/freshness_integration_test.c": "c12f4bbac1317fc8c062856b06539ae4a5fb1bb26d660c4eea65e937c0ed9b2a"
+    "firmware/tests/freshness_integration_test.c": "c12f4bbac1317fc8c062856b06539ae4a5fb1bb26d660c4eea65e937c0ed9b2a",
+    "firmware/tests/replay_migration_test.c": "ebac5bacdd264d63bdb5e5c32473e7cbc59da78aabecde2b240d6e29cc9d134e"
   },
   "f2_status": "partial: portable runtime, input filter and inbox verified on host; real board adapter and qualification pending",
   "inbox_object_bytes_host": 8552,
@@ -433,15 +436,51 @@
       "cross-reset protection requires successful persistent store attachment",
       "real SDK mapping, cryptography and physical timing unverified"
     ],
-    "verification_runs": "final full 12/12 ASan/UBSan suite; Release libraries and test-symbol exclusion passed"
+    "verification_runs": "final full 13/13 ASan/UBSan suite; Release libraries and test-symbol exclusion passed"
   },
   "capacity": {
-    "phase": "read/stop capacity optimization verified; offline migration pending",
+    "phase": "capacity optimization and offline migration verified",
     "policy": "retain all action RPC IDs and stable intents; do not add pure read/stop IDs",
     "legacy_bits_removed": false,
     "readonly_new_bits": 0,
     "recovery_rejections_before": 413,
     "recovery_rejections_after": 34,
-    "new_empty_histories_compared": true
+    "new_empty_histories_compared": true,
+    "recovery_rejection_reduction_percent": 91.8,
+    "filter_bits_before": 230561,
+    "filter_bits_after": 120161,
+    "comparison_baseline_commit": "b65ef42",
+    "readonly_requests": 100000,
+    "legacy_saturated_history_reclaimed": false
+  },
+  "migration": {
+    "api": "ct_replay_store_migrate",
+    "test": "firmware/tests/replay_migration_test.c",
+    "groups": 4,
+    "target_failure_positions": 14,
+    "cut_boundaries_bytes": [
+      0,
+      1,
+      4,
+      24,
+      32796,
+      32800
+    ],
+    "durability_modes": 2,
+    "cut_cases": 168,
+    "repeated_migrations": 50,
+    "replay_checks": 441,
+    "unexpected_replays": 0,
+    "source_mutations": 0,
+    "history_bits_removed": 0,
+    "format_hash_changed": false,
+    "new_heap_allocations": false,
+    "source_checks": "both slots revalidated against loaded revision/session/filter before target access",
+    "destination": "freshly loaded EMPTY and rechecked blank; same object/context rejected",
+    "successful_target": "two complete readback-verified slots; source session and full filter, revision plus 1/2",
+    "failure": "destination fault; source unchanged; no single-slot fallback or auto-provision",
+    "cutover_precondition": "outputs off; source writer stopped for copy and switch; exclusive new backend after durable selection",
+    "real_backend_selection_implemented": false,
+    "cleaning": "cache only; store save rejects subsets without clearing durable history"
   }
 }

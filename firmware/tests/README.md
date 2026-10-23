@@ -11,7 +11,7 @@ cmake --build build/firmware-host
 ctest --test-dir build/firmware-host --output-on-failure
 ```
 
-结果：CTest 12/12 通过，包含八组控制场景、24 个协议测试方法（含参数子用例及 500 次确定性消息变异）、16 组运行层、5 组输入处理和 4 组接收队列场景，以及解析器内存测试的 17 类逐次扫描与 3 组配置／恢复检查，另有 14 组连接场景、376 个穷举切分用例及 5 组长时会话压力场景。项目 C 代码开启 `-Wall -Wextra -Wpedantic -Werror`，AddressSanitizer 与 UndefinedBehaviorSanitizer 本次运行未报告错误。断言不依赖 `assert`／`NDEBUG`。源码哈希和执行记录见[验证记录](verification.json)。
+结果：CTest 13/13 通过，包含八组控制场景、24 个协议测试方法（含参数子用例及 500 次确定性消息变异）、16 组运行层、5 组输入处理和 4 组接收队列场景，以及解析器内存测试的 17 类逐次扫描与 3 组配置／恢复检查，另有 14 组连接场景、376 个穷举切分用例及 5 组长时会话压力场景。项目 C 代码开启 `-Wall -Wextra -Wpedantic -Werror`，AddressSanitizer 与 UndefinedBehaviorSanitizer 本次运行未报告错误。断言不依赖 `assert`／`NDEBUG`。源码哈希和执行记录见[验证记录](verification.json)。
 
 另以 `cmake -S firmware -B build/firmware-library -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release` 配置并构建通过，确认仅编译 C 库不依赖 Python 或测试传输。
 
@@ -180,6 +180,14 @@ Python 黑盒测试另验证 FIFO 命中不延寿、淘汰后只读快照重算�
 
 旧回归用例通过测试专用 `synthetic_proof.h` 模拟新意图生产者；此便捷函数不得进入生产接收路径。长时压力生产者给同一动作保留稳定意图 ID。新鲜度集成测试独立保存创建时 proof，不在到达时刷新。真实网络认证、生产者生命周期和实际驱动延迟没有因此获得验收。
 
-复跑：`ctest --test-dir build/firmware-host -R 'freshness|persistence|link' --output-on-failure`。包含四条换 ID 丢响应断言的最终完整 12/12 主机回归和 Release 纯库构建通过。纯库符号检查未发现测试分配器、假存储或合成生产者入口。
+复跑：`ctest --test-dir build/firmware-host -R 'freshness|persistence|link' --output-on-failure`。包含四条换 ID 丢响应断言的最终完整 13/13 主机回归和 Release 纯库构建通过。纯库符号检查未发现测试分配器、假存储或合成生产者入口。
 
 容量优化对照与迁移边界见 [CAPACITY.md](../CAPACITY.md)。新增断言验证只读流量不增加位数／写入、驻留读取 ID 被改成动作后永久退役；已有历史清位仍由存储层拒绝。
+
+## 容量与离线迁移验证
+
+`replay_migration_test.c` 的 4 组场景覆盖完整复制／清位拒绝、目标中断、连续迁移及不合法源／目标。**168 次目标回调故障**涵盖两次空白复核和两个槽各 6 次操作；每个位置测试 0、1、4、24、32796、32800 字节切断及两种落盘模式。失败不写源；目标仅在完整双槽可恢复时允许正常启动，其余保持动作锁定。
+
+**50 次连续迁移、441 次迁移相关重放检查**通过；每轮新目标接受新意图后，再次恢复仍拒绝旧意图，换 RPC ID 不能恢复。测试核对源未擦写、复制时会话与每个历史位保留；旧版只读位也原样保留。子集清理请求在写入前被拒绝，重新加载仍保留原记录。目标非空、介质在 EMPTY 加载后被占用、源读取失败、源快照过时、同一对象／context、版本加法溢出均拒绝。
+
+固定对象和介质大小不变，无新增堆分配。主机 13/13 ASan／UBSan 回归与 Release 纯库构建通过；真实 Flash 和持久化分区选择尚未验收。单独复跑：`ctest --test-dir build/firmware-host -R '^replay_migration$' --output-on-failure`。
