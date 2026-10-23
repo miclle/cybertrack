@@ -1,0 +1,283 @@
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x3fce2820,len:0x158c
+load:0x403c8700,len:0xd24
+load:0x403cb700,len:0x2f34
+entry 0x403c8924
+I (29) boot: ESP-IDF v5.5.1 2nd stage bootloader
+I (30) boot: compile time Oct 23 2026 23:31:47
+I (30) boot: Multicore bootloader
+I (30) boot: chip revision: v0.2
+I (33) boot: efuse block revision: v1.4
+I (36) boot.esp32s3: Boot SPI Speed : 40MHz
+I (40) boot.esp32s3: SPI Mode       : DIO
+I (44) boot.esp32s3: SPI Flash Size : 16MB
+I (48) boot: Enabling RNG early entropy source...
+I (52) boot: Partition Table:
+I (55) boot: ## Label            Usage          Type ST Offset   Length
+I (61) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (68) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (74) boot:  2 factory          factory app      00 00 00010000 00100000
+I (81) boot: End of partition table
+I (84) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0af14h ( 44820) map
+I (102) esp_image: segment 1: paddr=0001af3c vaddr=3fc92f00 size=02e1ch ( 11804) load
+I (106) esp_image: segment 2: paddr=0001dd60 vaddr=40374000 size=022b8h (  8888) load
+I (109) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=19bd0h (105424) map
+I (140) esp_image: segment 4: paddr=00039bf8 vaddr=403762b8 size=0cbbch ( 52156) load
+I (155) esp_image: segment 5: paddr=000467bc vaddr=50000000 size=00020h (    32) load
+I (161) boot: Loaded app from partition at offset 0x10000
+I (161) boot: Disabling RNG early entropy source...
+I (173) octal_psram: vendor id    : 0x0d (AP)
+I (173) octal_psram: dev id       : 0x02 (generation 3)
+I (173) octal_psram: density      : 0x03 (64 Mbit)
+I (175) octal_psram: good-die     : 0x01 (Pass)
+I (180) octal_psram: Latency      : 0x01 (Fixed)
+I (184) octal_psram: VCC          : 0x01 (3V)
+I (188) octal_psram: SRF          : 0x01 (Fast Refresh)
+I (193) octal_psram: BurstType    : 0x01 (Hybrid Wrap)
+I (198) octal_psram: BurstLen     : 0x01 (32 Byte)
+I (202) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)
+I (208) octal_psram: DriveStrength: 0x00 (1/1)
+I (212) esp_psram: Found 8MB PSRAM device
+I (216) esp_psram: Speed: 40MHz
+I (219) cpu_start: Multicore app
+I (952) esp_psram: SPI SRAM memory test OK
+I (962) cpu_start: Pro cpu start user code
+I (962) cpu_start: cpu freq: 160000000 Hz
+I (962) app_init: Application information:
+I (962) app_init: Project name:     cybertrack_board_check
+I (967) app_init: App version:      0.2.0-boot-stop-check
+I (972) app_init: Compile time:     Oct 24 2026 00:02:14
+I (978) app_init: ELF file SHA256:  0d990c5c9...
+I (982) app_init: ESP-IDF:          v5.5.1
+I (986) efuse_init: Min chip rev:     v0.0
+I (989) efuse_init: Max chip rev:     v0.99
+I (993) efuse_init: Chip rev:         v0.2
+I (997) heap_init: Initializing. RAM available for dynamic allocation:
+I (1004) heap_init: At 3FC96650 len 000530C0 (332 KiB): RAM
+I (1009) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (1014) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (1019) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (1025) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator
+I (1033) spi_flash: detected chip: boya
+I (1035) spi_flash: flash io: dio
+I (1038) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (1045) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (1052) main_task: Started on CPU0
+I (1082) main_task: Calling app_main()
+I (1082) board_check: CyberTrack no-load boot version=0.2.0-boot-stop-check idf=v5.5.1 reset_reason=1
+I (1082) board_check: CONTROL state=BOOT capabilities=0 logical_outputs_off=1
+I (1092) board_check: PSRAM initialized=1 detected_bytes=8388608
+I (1092) board_check: PSRAM test_bytes=6291456 patterns=6
+I (3022) board_check: PSRAM pattern=0 PASS
+I (4942) board_check: PSRAM pattern=1 PASS
+I (6862) board_check: PSRAM pattern=2 PASS
+I (8782) board_check: PSRAM pattern=3 PASS
+I (10702) board_check: PSRAM pattern=4 PASS
+I (12622) board_check: PSRAM pattern=5 PASS
+I (12622) board_check: PSRAM heap_integrity=PASS
+I (12622) board_check: VALIDATION PASS state=DISARMED capabilities=0 logical_outputs_off=1
+I (12632) board_check: BOOT_STOP READY gpio=0 active_low=1 poll_ms=10 release_debounce_ms=30 held=0
+I (13642) board_check: HEARTBEAT ticks=100 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (14642) board_check: HEARTBEAT ticks=200 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (15642) board_check: HEARTBEAT ticks=300 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (16642) board_check: HEARTBEAT ticks=400 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (17642) board_check: HEARTBEAT ticks=500 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (18642) board_check: HEARTBEAT ticks=600 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (19642) board_check: HEARTBEAT ticks=700 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (20642) board_check: HEARTBEAT ticks=800 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (21642) board_check: HEARTBEAT ticks=900 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (22642) board_check: HEARTBEAT ticks=1000 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (23642) board_check: HEARTBEAT ticks=1100 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (24642) board_check: HEARTBEAT ticks=1200 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (25642) board_check: HEARTBEAT ticks=1300 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (26642) board_check: HEARTBEAT ticks=1400 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (27642) board_check: HEARTBEAT ticks=1500 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (28642) board_check: HEARTBEAT ticks=1600 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (29642) board_check: HEARTBEAT ticks=1700 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (30642) board_check: HEARTBEAT ticks=1800 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (31642) board_check: HEARTBEAT ticks=1900 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (32642) board_check: HEARTBEAT ticks=2000 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (33642) board_check: HEARTBEAT ticks=2100 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (34642) board_check: HEARTBEAT ticks=2200 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (35642) board_check: HEARTBEAT ticks=2300 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (36642) board_check: HEARTBEAT ticks=2400 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (37642) board_check: HEARTBEAT ticks=2500 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (38642) board_check: HEARTBEAT ticks=2600 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (39642) board_check: HEARTBEAT ticks=2700 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (40642) board_check: HEARTBEAT ticks=2800 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (41642) board_check: HEARTBEAT ticks=2900 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (42642) board_check: HEARTBEAT ticks=3000 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (43642) board_check: HEARTBEAT ticks=3100 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (44642) board_check: HEARTBEAT ticks=3200 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (45642) board_check: HEARTBEAT ticks=3300 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (46642) board_check: HEARTBEAT ticks=3400 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (47642) board_check: HEARTBEAT ticks=3500 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (48642) board_check: HEARTBEAT ticks=3600 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (49642) board_check: HEARTBEAT ticks=3700 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (50642) board_check: HEARTBEAT ticks=3800 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (51642) board_check: HEARTBEAT ticks=3900 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (52642) board_check: HEARTBEAT ticks=4000 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (53642) board_check: HEARTBEAT ticks=4100 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (54642) board_check: HEARTBEAT ticks=4200 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (55642) board_check: HEARTBEAT ticks=4300 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (55862) board_check: BOOT_STOP PRESSED presses=1 raw_low=1 held=1 state=FAULT fault=STOPPED logical_outputs_off=1 observed_to_apply_us=5
+I (56642) board_check: HEARTBEAT ticks=4400 state=FAULT held=1 presses=1 logical_outputs_off=1 max_poll_gap_us=10000
+I (57642) board_check: HEARTBEAT ticks=4500 state=FAULT held=1 presses=1 logical_outputs_off=1 max_poll_gap_us=10000
+I (57672) board_check: BOOT_STOP RELEASED presses=1 raw_low=0 held=0 state=FAULT fault=STOPPED logical_outputs_off=1 observed_to_apply_us=5
+I (58642) board_check: HEARTBEAT ticks=4600 state=FAULT held=0 presses=1 logical_outputs_off=1 max_poll_gap_us=10000
+I (59642) board_check: HEARTBEAT ticks=4700 state=FAULT held=0 presses=1 logical_outputs_off=1 max_poll_gap_us=10000
+I (60642) board_check: HEARTBEAT ticks=4800 state=FAULT held=0 presses=1 logical_outputs_off=1 max_poll_gap_us=10000
+I (61642) board_check: HEARTBEAT ticks=4900 state=FAULT held=0 presses=1 logical_outputs_off=1 max_poll_gap_us=10000
+I (62642) board_check: HEARTBEAT ticks=5000 state=FAULT held=0 presses=1 logical_outputs_off=1 max_poll_gap_us=10000
+I (63642) board_check: HEARTBEAT ticks=5100 state=FAULT held=0 presses=1 logical_outputs_off=1 max_poll_gap_us=10000
+I (64112) board_check: BOOT_STOP PRESSED presses=2 raw_low=1 held=1 state=FAULT fault=STOPPED logical_outputs_off=1 observed_to_apply_us=5
+I (64402) board_check: BOOT_STOP RELEASED presses=2 raw_low=0 held=0 state=FAULT fault=STOPPED logical_outputs_off=1 observed_to_apply_us=5
+I (64642) board_check: HEARTBEAT ticks=5200 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (65642) board_check: HEARTBEAT ticks=5300 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (66642) board_check: HEARTBEAT ticks=5400 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (67642) board_check: HEARTBEAT ticks=5500 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (68642) board_check: HEARTBEAT ticks=5600 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (69642) board_check: HEARTBEAT ticks=5700 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (70642) board_check: HEARTBEAT ticks=5800 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (71642) board_check: HEARTBEAT ticks=5900 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (72642) board_check: HEARTBEAT ticks=6000 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (73642) board_check: HEARTBEAT ticks=6100 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (74642) board_check: HEARTBEAT ticks=6200 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (75642) board_check: HEARTBEAT ticks=6300 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (76642) board_check: HEARTBEAT ticks=6400 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (77642) board_check: HEARTBEAT ticks=6500 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (78642) board_check: HEARTBEAT ticks=6600 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (79642) board_check: HEARTBEAT ticks=6700 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (80642) board_check: HEARTBEAT ticks=6800 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (81642) board_check: HEARTBEAT ticks=6900 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (82642) board_check: HEARTBEAT ticks=7000 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (83642) board_check: HEARTBEAT ticks=7100 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (84642) board_check: HEARTBEAT ticks=7200 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (85642) board_check: HEARTBEAT ticks=7300 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (86642) board_check: HEARTBEAT ticks=7400 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (87642) board_check: HEARTBEAT ticks=7500 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (88642) board_check: HEARTBEAT ticks=7600 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (89642) board_check: HEARTBEAT ticks=7700 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (90642) board_check: HEARTBEAT ticks=7800 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (91642) board_check: HEARTBEAT ticks=7900 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (92642) board_check: HEARTBEAT ticks=8000 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (93642) board_check: HEARTBEAT ticks=8100 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (94642) board_check: HEARTBEAT ticks=8200 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (95642) board_check: HEARTBEAT ticks=8300 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (96642) board_check: HEARTBEAT ticks=8400 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (97642) board_check: HEARTBEAT ticks=8500 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (98642) board_check: HEARTBEAT ticks=8600 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (99642) board_check: HEARTBEAT ticks=8700 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (100642) board_check: HEARTBEAT ticks=8800 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (101642) board_check: HEARTBEAT ticks=8900 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (102642) board_check: HEARTBEAT ticks=9000 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (103642) board_check: HEARTBEAT ticks=9100 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (104642) board_check: HEARTBEAT ticks=9200 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (105642) board_check: HEARTBEAT ticks=9300 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (106642) board_check: HEARTBEAT ticks=9400 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (107642) board_check: HEARTBEAT ticks=9500 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (108642) board_check: HEARTBEAT ticks=9600 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (109642) board_check: HEARTBEAT ticks=9700 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (110642) board_check: HEARTBEAT ticks=9800 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (111642) board_check: HEARTBEAT ticks=9900 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (112642) board_check: HEARTBEAT ticks=10000 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (113642) board_check: HEARTBEAT ticks=10100 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (114642) board_check: HEARTBEAT ticks=10200 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+I (115642) board_check: HEARTBEAT ticks=10300 state=FAULT held=0 presses=2 logical_outputs_off=1 max_poll_gap_us=10000
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x3fce2820,len:0x158c
+load:0x403c8700,len:0xd24
+load:0x403cb700,len:0x2f34
+entry 0x403c8924
+I (29) boot: ESP-IDF v5.5.1 2nd stage bootloader
+I (30) boot: compile time Oct 23 2026 23:31:47
+I (30) boot: Multicore bootloader
+I (30) boot: chip revision: v0.2
+I (33) boot: efuse block revision: v1.4
+I (36) boot.esp32s3: Boot SPI Speed : 40MHz
+I (40) boot.esp32s3: SPI Mode       : DIO
+I (44) boot.esp32s3: SPI Flash Size : 16MB
+I (48) boot: Enabling RNG early entropy source...
+I (52) boot: Partition Table:
+I (55) boot: ## Label            Usage          Type ST Offset   Length
+I (61) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (68) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (74) boot:  2 factory          factory app      00 00 00010000 00100000
+I (81) boot: End of partition table
+I (84) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=0af14h ( 44820) map
+I (102) esp_image: segment 1: paddr=0001af3c vaddr=3fc92f00 size=02e1ch ( 11804) load
+I (106) esp_image: segment 2: paddr=0001dd60 vaddr=40374000 size=022b8h (  8888) load
+I (109) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=19bd0h (105424) map
+I (140) esp_image: segment 4: paddr=00039bf8 vaddr=403762b8 size=0cbbch ( 52156) load
+I (155) esp_image: segment 5: paddr=000467bc vaddr=50000000 size=00020h (    32) load
+I (161) boot: Loaded app from partition at offset 0x10000
+I (161) boot: Disabling RNG early entropy source...
+I (173) octal_psram: vendor id    : 0x0d (AP)
+I (173) octal_psram: dev id       : 0x02 (generation 3)
+I (173) octal_psram: density      : 0x03 (64 Mbit)
+I (175) octal_psram: good-die     : 0x01 (Pass)
+I (180) octal_psram: Latency      : 0x01 (Fixed)
+I (184) octal_psram: VCC          : 0x01 (3V)
+I (188) octal_psram: SRF          : 0x01 (Fast Refresh)
+I (193) octal_psram: BurstType    : 0x01 (Hybrid Wrap)
+I (198) octal_psram: BurstLen     : 0x01 (32 Byte)
+I (202) octal_psram: Readlatency  : 0x02 (10 cycles@Fixed)
+I (208) octal_psram: DriveStrength: 0x00 (1/1)
+I (212) esp_psram: Found 8MB PSRAM device
+I (216) esp_psram: Speed: 40MHz
+I (219) cpu_start: Multicore app
+I (952) esp_psram: SPI SRAM memory test OK
+I (962) cpu_start: Pro cpu start user code
+I (962) cpu_start: cpu freq: 160000000 Hz
+I (962) app_init: Application information:
+I (962) app_init: Project name:     cybertrack_board_check
+I (967) app_init: App version:      0.2.0-boot-stop-check
+I (972) app_init: Compile time:     Oct 24 2026 00:02:14
+I (978) app_init: ELF file SHA256:  0d990c5c9...
+I (982) app_init: ESP-IDF:          v5.5.1
+I (986) efuse_init: Min chip rev:     v0.0
+I (989) efuse_init: Max chip rev:     v0.99
+I (993) efuse_init: Chip rev:         v0.2
+I (997) heap_init: Initializing. RAM available for dynamic allocation:
+I (1004) heap_init: At 3FC96650 len 000530C0 (332 KiB): RAM
+I (1009) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (1014) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (1019) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (1025) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator
+I (1033) spi_flash: detected chip: boya
+I (1035) spi_flash: flash io: dio
+I (1038) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (1045) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (1052) main_task: Started on CPU0
+I (1082) main_task: Calling app_main()
+I (1082) board_check: CyberTrack no-load boot version=0.2.0-boot-stop-check idf=v5.5.1 reset_reason=1
+I (1082) board_check: CONTROL state=BOOT capabilities=0 logical_outputs_off=1
+I (1092) board_check: PSRAM initialized=1 detected_bytes=8388608
+I (1092) board_check: PSRAM test_bytes=6291456 patterns=6
+I (3022) board_check: PSRAM pattern=0 PASS
+I (4942) board_check: PSRAM pattern=1 PASS
+I (6862) board_check: PSRAM pattern=2 PASS
+I (8782) board_check: PSRAM pattern=3 PASS
+I (10702) board_check: PSRAM pattern=4 PASS
+I (12622) board_check: PSRAM pattern=5 PASS
+I (12622) board_check: PSRAM heap_integrity=PASS
+I (12622) board_check: VALIDATION PASS state=DISARMED capabilities=0 logical_outputs_off=1
+I (12632) board_check: BOOT_STOP READY gpio=0 active_low=1 poll_ms=10 release_debounce_ms=30 held=0
+I (13642) board_check: HEARTBEAT ticks=100 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (14642) board_check: HEARTBEAT ticks=200 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (15642) board_check: HEARTBEAT ticks=300 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (16642) board_check: HEARTBEAT ticks=400 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (17642) board_check: HEARTBEAT ticks=500 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (18642) board_check: HEARTBEAT ticks=600 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (19642) board_check: HEARTBEAT ticks=700 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (20642) board_check: HEARTBEAT ticks=800 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (21642) board_check: HEARTBEAT ticks=900 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000
+I (22642) board_check: HEARTBEAT ticks=1000 state=DISARMED held=0 presses=0 logical_outputs_off=1 max_poll_gap_us=10000

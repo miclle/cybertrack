@@ -66,15 +66,19 @@ esptool --chip esp32s3 --port <COM_PORT> --baud 115200 --no-stub --before defaul
 
 配套验证：ESP-IDF 构建通过；最新主机回归 13/13 通过；源文件、日志和部件资产哈希及文档链接检查通过。
 
-三次日志：[第 1 轮](validation-2026-10-23/boot-1.log)、[第 2 轮](validation-2026-10-23/boot-2.log)、[第 3 轮](validation-2026-10-23/boot-3.log)。[机器记录](validation-2026-10-23/result.json)包含配置、源文件／镜像／日志哈希和未测范围。原始 Flash 备份仅在本机忽略目录 `build/board-validation-private/pre-validation-first-1MiB.bin`，大小 1048576 字节，覆盖全部改写扇区；不提交其内容。仅改写 bootloader、分区表和应用所需扇区，未全片擦除、未改写 eFuse。板上保留此无负载检查固件。
+三次日志：[第 1 轮](validation-2026-10-23/boot-1.log)、[第 2 轮](validation-2026-10-23/boot-2.log)、[第 3 轮](validation-2026-10-23/boot-3.log)。[机器记录](validation-2026-10-23/result.json)包含配置、源文件／镜像／日志哈希和未测范围。原始 Flash 备份仅在本机忽略目录 `build/board-validation-private/pre-validation-first-1MiB.bin`，大小 1048576 字节，覆盖全部改写扇区；不提交其内容。仅改写 bootloader、分区表和应用所需扇区，未全片擦除、未改写 eFuse。该阶段运行 0.1.0 检查固件；后续安装版本见下方 BOOT 停止记录。
 
 首次尝试用 RAM stub、460800 baud 备份整片 Flash，在约 32 KiB 时出现 `Invalid head of packet (0x92)`，未进入写入。随后 ROM 115200 整片读取因耗时主动终止，改为前 1 MiB 备份成功；后续低速 ROM 烧录与哈希验证通过。该高速串口问题未定位，不把它归因于 PSRAM，也不宣称高波特率可靠。
 
 本次 6 MiB 模式测试覆盖大于数据缓存的区域，先完整写入再读回；它不是全部 8 MiB 的应用级逐字节测试或长时老化。零逻辑输出也不代表实体引脚电平、负载关断或物理停止已通过。F2b 仅关闭无负载启动／内存子项，完整 F2b、供电／散热与整机验收仍开放。
 
+## 2026-10-24：BOOT 键本地停止补充
+
+用户授权后已安装 0.2.0-boot-stop-check；两次实体按下均锁定停止，松开不恢复，人工 RST 后回到未使能，结果见[BOOT 停止验证](boot-stop-verification.md)。这只验证无负载软件停止输入，不代表执行器电源切断。
+
 ## 后续剩余项
 
 - 仍需匹配实物板级版本、串口桥／稳压器完整型号、GPIO3 与 IN-OUT 焊装及通断；射频通路也需核对。
-- PSRAM 初始化及本次 6 MiB 测试、无负载启动与逻辑默认关闭已通过；全容量／长时内存测试、实体停止、引脚电平、调度时限与看门狗仍未验收。F2b 未完成。
+- PSRAM 初始化及本次 6 MiB 测试、无负载启动与逻辑默认关闭已通过；全容量／长时内存测试、专用停止输入／供能切断、执行器引脚电平、调度时限与看门狗仍未验收。F2b 未完成。
 - 安装孔／固定方式、USB 插头与线缆空间、天线净空、供电与散热尚未验收。
 - COM 插头方向／接触问题保留待复查；在不接负载时分别核对两方向。
