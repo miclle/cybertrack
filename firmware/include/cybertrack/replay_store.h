@@ -23,11 +23,31 @@ typedef struct {
     bool (*sync)(void *context);
 } ct_replay_io;
 
+/* Independent, device-bound rollback-resistant anchor. Zero record means NEVER
+ * enrolled, not missing/corrupt/reset. read returns the durable record. replace
+ * atomically compares ALL fields and durably installs next or leaves expected;
+ * false may mean either outcome. No torn record, volatile success, rollback or
+ * erase is permitted. This is a backend contract, NOT a Flash implementation.
+ * Backend IDs are nonzero, immutable trusted identities, not network input.
+ * One serialized owner covers the anchor and all stores through each operation. */
+typedef struct {
+    uint64_t epoch, backend_id, revision, session;
+} ct_replay_anchor_record;
+typedef struct {
+    void *context;
+    bool (*read)(void *context, ct_replay_anchor_record *record);
+    bool (*replace)(void *context, const ct_replay_anchor_record *expected,
+                    const ct_replay_anchor_record *next);
+} ct_replay_anchor_io;
+
 /* Single owner; use static/heap storage, not a small task stack. Wire encoding
  * is explicit little endian, never a dump of this struct. No dynamic memory. */
 typedef struct {
     ct_replay_io io;
     ct_store_state state;
+    bool anchor_bound;
+    ct_replay_anchor_io anchor;
+    ct_replay_anchor_record selected;
     uint64_t revision, session;
     unsigned slot;
     unsigned char filter[CT_REPLAY_BYTES];
@@ -42,8 +62,28 @@ ct_store_state ct_replay_store_load(ct_replay_store *s, ct_replay_io io);
 bool ct_replay_store_provision(ct_replay_store *s);
 /* Persist a monotone superset and the same/next session BEFORE using them.
  * Failure latches FAULT (even ambiguous completion); reboot/load is required.
- * No-op saves do no I/O. UINT64_MAX revision cannot wrap. */
+ * Anchored saves checkpoint the new version only after media readback.
+ * No-op saves read the anchor but do not write. UINT64_MAX revision cannot wrap. */
 bool ct_replay_store_save(ct_replay_store *s, const unsigned char *filter, uint64_t session);
+
+/* Bind an already loaded READY pair to its trusted backend identity and exact
+ * anchored revision/session. Once attempted, cannot rebind without load. Failure
+ * latches FAULT. enroll is explicit first-use/legacy enrollment with outputs off,
+ * a locally verified history, and an anchor attesting NEVER enrolled; NOT repair.
+ * bind/check/save never enroll or repair a missing anchor automatically. */
+bool ct_replay_store_bind(ct_replay_store *s, ct_replay_anchor_io anchor, uint64_t backend_id);
+bool ct_replay_store_enroll(ct_replay_store *s, ct_replay_anchor_io anchor, uint64_t backend_id);
+/* Re-read anchor to fence stale owners. Unanchored READY returns true for legacy
+ * tests only. All saves (including no-ops) check before any media mutation. */
+bool ct_replay_store_check(ct_replay_store *s);
+/* Offline lossless copy followed by atomic anchor selection; source must be
+ * anchored, destination EMPTY/unbound and physically independent. Outputs off,
+ * old protocol retired, no other writer until completion. Both RAM objects are
+ * faulted on failure after validation starts; reload/bind the anchor-selected
+ * backend after reboot. Success retires source and binds destination. Never
+ * fall back to another backend if selected media is missing or invalid. */
+bool ct_replay_store_switch(ct_replay_store *source, ct_replay_store *destination,
+                            uint64_t destination_id);
 
 /* Offline copy to a freshly loaded EMPTY, physically independent pair. Outputs
  * must be off and source writers stopped for the entire copy AND cutover.
