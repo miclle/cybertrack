@@ -1,6 +1,6 @@
 # DF-MD V1.3 驱动板参考
 
-计划复用一块双路有刷直流电机驱动板控制左右履带。官方入口：[DFRobot DRI0002](https://wiki.dfrobot.com/dri0002)，查阅于 2026-10-23。
+计划采用一块双路有刷直流电机驱动板控制左右履带。官方入口：[DFRobot DRI0002](https://wiki.dfrobot.com/dri0002)，查阅于 2026-10-23。
 
 ## 本地资料
 
@@ -9,7 +9,7 @@
 - [接线／外形参考图](reference/Dfrobot-dual-motor-controller-specifications-B.jpg)。
 - [板卡图片](reference/DRI0002_CD.jpg)。
 
-这些资料均未证明实物为同一修订版。未导入可直接运行的驱动示例，避免将旧板卡引脚编号误当 ESP32-S3 GPIO。
+这些资料均未证明实物为同一修订版。板卡接口编号与 ESP32-S3 GPIO 的映射待实物核对后确定。
 
 ## 已知接口与限制
 
