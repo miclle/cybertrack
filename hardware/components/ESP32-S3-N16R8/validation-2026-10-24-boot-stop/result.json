@@ -1,0 +1,175 @@
+{
+  "date": "2026-10-24",
+  "timezone": "Asia/Shanghai",
+  "scope": "board BOOT button software stop, no motor or actuator outputs",
+  "firmware_version": "0.2.0-boot-stop-check",
+  "idf_version": "v5.5.1",
+  "gpio": {
+    "number": 0,
+    "button": "BOOT",
+    "active_low": true,
+    "direction": "input",
+    "internal_pull_up": true,
+    "poll_ms": 10,
+    "release_debounce_ms": 30,
+    "gpio_interrupt_enabled": false,
+    "temporary_diagnostic_only": true
+  },
+  "capabilities": "all zero; no local enable, session, active command, PWM or actuator GPIO",
+  "capture": {
+    "passed": true,
+    "boots": 2,
+    "started_utc": "2026-10-23T16:03:39.798355+00:00",
+    "finished_utc": "2026-10-23T16:05:58.846277+00:00",
+    "log": "boot-stop.log"
+  },
+  "events": [
+    {
+      "uptime_ms": 55862,
+      "event": "PRESSED",
+      "press_count": 1,
+      "raw_low": true,
+      "held": true,
+      "state": "FAULT",
+      "fault": "STOPPED",
+      "logical_outputs_off": true,
+      "observed_to_apply_us": 5
+    },
+    {
+      "uptime_ms": 57672,
+      "event": "RELEASED",
+      "press_count": 1,
+      "raw_low": false,
+      "held": false,
+      "state": "FAULT",
+      "fault": "STOPPED",
+      "logical_outputs_off": true,
+      "observed_to_apply_us": 5
+    },
+    {
+      "uptime_ms": 64112,
+      "event": "PRESSED",
+      "press_count": 2,
+      "raw_low": true,
+      "held": true,
+      "state": "FAULT",
+      "fault": "STOPPED",
+      "logical_outputs_off": true,
+      "observed_to_apply_us": 5
+    },
+    {
+      "uptime_ms": 64402,
+      "event": "RELEASED",
+      "press_count": 2,
+      "raw_low": false,
+      "held": false,
+      "state": "FAULT",
+      "fault": "STOPPED",
+      "logical_outputs_off": true,
+      "observed_to_apply_us": 5
+    }
+  ],
+  "results": {
+    "two_presses_and_releases_passed": true,
+    "release_did_not_rearm": true,
+    "manual_rst_then_disarmed_passed": true,
+    "post_rst_ticks_observed": 1000,
+    "post_rst_observation_ms": 10000,
+    "psram_initialization_and_6mib_six_patterns_passed_each_boot": true,
+    "physical_power_cycle_tested": false
+  },
+  "max_observed_poll_gap_us": 10000,
+  "latency_limit": "observed_to_apply_us is software sample to state update only; no physical edge, actuator shutdown or mechanical stop measurement",
+  "flash": {
+    "tool": "esptool 5.6.0",
+    "port_role": "COM UART bridge",
+    "baud": 115200,
+    "no_stub": true,
+    "written_offset": "0x10000",
+    "written_bytes": 223232,
+    "erased_range_exclusive": "0x10000..0x47000",
+    "hash_verified": true,
+    "efuse_written": false,
+    "bootloader_or_partition_table_written": false
+  },
+  "host_checks": {
+    "tests": [
+      "control",
+      "runtime",
+      "inputs"
+    ],
+    "passed": 3,
+    "failed": 0
+  },
+  "compiled_sources": [
+    {
+      "path": "firmware/esp32/CMakeLists.txt",
+      "sha256": "ffaee03f88bba00764500cbaee9a4ea0fdf7e3e4c735ea0c2e70a8b98d51597e"
+    },
+    {
+      "path": "firmware/esp32/main/CMakeLists.txt",
+      "sha256": "90ffc8c19e3ac11b8f6440aae15f4e90d61b9139d9599101b83b8948011b139b"
+    },
+    {
+      "path": "firmware/esp32/main/board_check.c",
+      "sha256": "de61c07e525470ac4cf0797b7e418eb0f8254e1335067011c12c483ed82f82b4"
+    },
+    {
+      "path": "firmware/esp32/sdkconfig.defaults",
+      "sha256": "4648fc28ddf0342e7e77f24ddace4427a42b8ad055757a2b097439f1db8feb8c"
+    },
+    {
+      "path": "firmware/src/control.c",
+      "sha256": "2158325e95fa32622735ca7466a5580eaaac6dc23be142ee91b4e384adcf1ec9"
+    },
+    {
+      "path": "firmware/src/inputs.c",
+      "sha256": "e34b3b9815f3633ff81e2d52d259fbfee0c7558f86ae3080b4ce89c62a690679"
+    },
+    {
+      "path": "firmware/include/cybertrack/control.h",
+      "sha256": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a"
+    },
+    {
+      "path": "firmware/include/cybertrack/inputs.h",
+      "sha256": "6e0cf7dc7023c5c885e5a4d4740fb06a4aa92fc707b4bc321fa35cfce4366d64"
+    }
+  ],
+  "build_artifacts": [
+    {
+      "build_path": "build/firmware-esp32/bootloader/bootloader.bin",
+      "bytes": 21056,
+      "sha256": "78586aac396d031eaeef491c6eaad97226dac634431eb293bd394c145d8095c5"
+    },
+    {
+      "build_path": "build/firmware-esp32/partition_table/partition-table.bin",
+      "bytes": 3072,
+      "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    {
+      "build_path": "build/firmware-esp32/cybertrack_board_check.bin",
+      "bytes": 223232,
+      "sha256": "71cb6dd69092445742b5641a6167b0259fe4a8a54d8ef9e8045053d2fe385dc4"
+    }
+  ],
+  "capture_tool": {
+    "path": "firmware/esp32/tools/capture_stop.py",
+    "sha256": "ec2b7248e1f04c98c9d814910902fe8ab040c4952d76c01f2074791a2adf9e2d"
+  },
+  "log": {
+    "path": "boot-stop.log",
+    "sha256": "76cf5108a27c686303d555ba7af19f91f93fa6b64b95b6fa6b7e496d999af49a"
+  },
+  "not_verified": [
+    "ACTIVE command interruption",
+    "physical actuator GPIO shutdown",
+    "independent supply cutoff",
+    "separate local enable button",
+    "short pulses below polling interval",
+    "BOOT held during power-on or reset",
+    "stop input during PSRAM self-test",
+    "brownout",
+    "watchdog fault injection",
+    "full runtime integration"
+  ]
+}

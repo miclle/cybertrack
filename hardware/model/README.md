@@ -8,6 +8,7 @@
 
 - [CyberTrack.FCStd](CyberTrack.FCStd)：主要设计文件，中文对象树；设备包络默认隐藏。
 - [CyberTrack.step](CyberTrack.step)：不含设备包络的布局交换文件；严格体积比较未通过，以 FCStd 为几何依据，不宣称曲面等价。
+- [总装与检修图纸 PDF](CyberTrack-assembly-and-service.pdf)：9 页 A3 横向，包含前后轴测、正／背／左／右／俯／底六向视图、尺寸标注、维护爆炸、补液分解与走线说明；用于结构评审，不是加工图。
 - [保存回读报告](readback.json)：对象有效性、静态检查、导出与视图哈希、最终保存及显示状态。
 - [拆装示意](service.png) · [电线／软管路线](routing.png) · [装配说明](../../docs/assembly.md)。
 - [前方透视](assembly.png) · [后方透视](rear-assembly.png) · [正面](front.png) · [侧面](side.png) · [背面](rear.png) · [俯视](top.png) · [内部布局](layout.png) · [底层布局](lower-layout.png)。固定正交相机；前方 −Y，侧视沿 −X。
@@ -74,3 +75,15 @@ PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
 ```
 
 会更新模型、STEP、十张视图与报告；完整交付使用 `--render`。脚本重建会覆盖当前输出；手工修改 FCStd 前应保存副本，并同步参数、文档和验证。
+
+## PDF 图纸再生成
+
+图纸以当前保存的 FCStd 为依据，不改动模型。矢量正投影由 FreeCAD 的遮挡线消隐生成，曲线显示容差设为 0.08 mm；标注尺寸来自精确几何边界与已核对的固定点。每个视图独立标明方向与比例，按 A3 原尺寸打印；打印缩放后仍以标注数字为准。当前没有制造公差、螺纹或物料定版，不能据此加工。
+
+```sh
+PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
+/Applications/FreeCAD.app/Contents/Resources/bin/python scripts/export_drawing_geometry.py
+python3 scripts/build_drawing_pdf.py
+```
+
+第二步需要 ReportLab、Pillow 及 macOS 的 STHeiti 字体。矢量投影缓存写入 `tmp/pdfs/`，按原生模型 SHA-256 校验；PDF 脚本同时校验模型、STEP、十张预览图及关键标注。模型修订后需复核图纸文字、特征标注和版面，再更新脚本的修订检查。交付文件为 `hardware/model/CyberTrack-assembly-and-service.pdf`，与原生模型一同管理；文件名明确表示总装与检修图纸，临时生成文件继续忽略。

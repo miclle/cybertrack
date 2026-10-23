@@ -315,5 +315,14 @@
     "source": "physical-verification.json",
     "runtime_test_bytes": 6291456,
     "runtime_report": "validation-2026-10-23/result.json"
+  },
+  "temporary_diagnostic_gpio": {
+    "0": {
+      "role": "BOOT local software stop",
+      "active_low": true,
+      "input_pullup": true,
+      "report": "validation-2026-10-24-boot-stop/result.json",
+      "not_production_stop_assignment": true
+    }
   }
 }
