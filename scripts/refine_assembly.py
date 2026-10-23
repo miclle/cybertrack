@@ -105,7 +105,7 @@ def refine(doc,add):
         fuse('HeadShell',key)
 
     # A removable tray carries both existing equipment allocations; no board hole pattern invented.
-    tray=box(-59,-39,144.5,59,10,145.5).fuse(box(-39,-74,144.5,39,-39,145.5))
+    tray=box(-58,-39,144.5,58,10,145.5).fuse(box(-39,-74,144.5,39,-39,145.5))
     add('ElectronicsTray','头舱电子及音频共用上取托板',tray.removeSplitter(),'structure','metal','托板轮廓候选；实际板卡安装孔、绝缘支柱及天线净空待整合')
     for sign in (-1,1):
         for i,y in enumerate((-30,0)):
@@ -167,7 +167,8 @@ def service_groups(doc):
     crown+=['HeadCrownShell','HeadServiceHatch']
     battery=['PowerBank','BatteryHatch','BatteryPullStrap']+[n for n in names if n.startswith('BatteryPad')]
     wet={name:[name+suffix for suffix in ('ServiceLid','CapGrip','LidMark','FillPlug','FillSeal')] for name in ('Water','Bubble')}
-    return {'cable_access':['CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule'],**wet}
+    return {'cable_access':['CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule'],**wet,
+            'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR']}
 
 
 def check_service_paths(doc):
@@ -181,12 +182,16 @@ def check_service_paths(doc):
                ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute']),
                ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]),
                ('Bubble',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewBubble')])]
+    prerequisites=groups['crown']+groups['electronics']+[o.Name for o in all_shapes if o.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute']
+    scenarios += [('arc_left',(-24.5,0,85),prerequisites),('arc_right',(24.5,0,85),prerequisites)]
     for group,delta,removed in scenarios:
         moving=groups[group];fixed=[o for o in all_shapes if o.Name not in moving+removed]
         collisions=[];tested=0
         waypoints=[V(),V(*delta)]
         if group in ('Water','Bubble'):
             waypoints=[V(),V(0,0,6),V(0,12,6),V(0,12,40)]
+        if group.startswith('arc_'):
+            waypoints=[V(),V(delta[0],0,0),V(*delta)]
         poses=[a+(b-a)*fraction for a,b in zip(waypoints,waypoints[1:]) for fraction in (0,0.05,0.1,0.2,0.4,0.6,0.8,1)]
         for pose_index,offset in enumerate(poses):
             for name in moving:
@@ -197,4 +202,4 @@ def check_service_paths(doc):
                     tested+=1;vol=shape.common(other.Shape).Volume
                     if vol>0.01:collisions.append({'moving':name,'fixed':other.Name,'pose_index':pose_index,'overlap_mm3':vol})
         results.append({'group':group,'waypoints_mm':[[p.x,p.y,p.z] for p in waypoints],'pose_count':len(poses),'removed_first':removed,'boolean_pairs_tested':tested,'overlaps':collisions,'passed':not collisions})
-    return {'method':'8 discrete poses per straight segment; wet caps use lift-back-lift; not continuous sweep or tool/hand access certification','scenarios':results,'passed':all(r['passed'] for r in results),'physical_assembly_verified':False}
+    return {'method':'8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes move inward then up after tray removal; not continuous sweep or tool/hand access certification','scenarios':results,'passed':all(r['passed'] for r in results),'physical_assembly_verified':False}

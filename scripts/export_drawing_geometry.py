@@ -102,6 +102,8 @@ for o in objects:
 for view in ('front','rear','side','right','top','bottom'):
     project(view, [o.Name for o in visible], view)
 for key,names,view in [
+    ('crown_effect_plan',['CrownFinL','CrownEffectInsetL','CrownEffectMarkLFront','CrownEffectMarkLRear'],'top'),
+    ('arc_plan',['HeadShell','ElectronicsTray','Electronics','AudioModule','ArcModuleL','ArcModuleR'],'top'),
     ('battery',['BatteryHatch','PowerBank','BatteryPullStrap'],'bottom'),
     ('tray',['ElectronicsTray'],'top'),
     ('crown',[o.Name for o in objects if getattr(o,'ServiceGroup','')=='crown'],'top'),
