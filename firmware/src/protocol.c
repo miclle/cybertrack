@@ -376,12 +376,12 @@ bool ct_protocol_set_allocator(ct_protocol *p, ct_rpc_allocator allocator)
     return true;
 }
 
-bool ct_protocol_attach_store(ct_protocol *p, ct_replay_store *store)
+static bool attach_store(ct_protocol *p, ct_replay_store *store, bool guarded)
 {
     if (!p || !p->control || p->opened || p->store_bound) return false;
     p->store_bound = true;
     p->store = store;
-    if (!store || store->state != CT_STORE_READY) {
+    if (!store || (guarded && !store->anchor_bound) || !ct_replay_store_check(store)) {
         p->storage_fault = true;
         ct_stop(p->control);
         return false;
@@ -392,6 +392,16 @@ bool ct_protocol_attach_store(ct_protocol *p, ct_replay_store *store)
     for (size_t i = 0; i < sizeof(p->replay_filter); ++i)
         for (unsigned j = 0; j < 8; ++j) p->replay_bits_set += (p->replay_filter[i] >> j) & 1u;
     return true;
+}
+
+bool ct_protocol_attach_store(ct_protocol *p, ct_replay_store *store)
+{
+    return attach_store(p, store, false);
+}
+
+bool ct_protocol_attach_guarded_store(ct_protocol *p, ct_replay_store *store)
+{
+    return attach_store(p, store, true);
 }
 
 static bool persist(ct_protocol *p, uint64_t session)

@@ -54,6 +54,58 @@ static bool superset(const unsigned char *newer, const unsigned char *older)
 }
 static bool fault(ct_replay_store *s) { s->state = CT_STORE_FAULT; return false; }
 
+static bool same_record(ct_replay_anchor_record a, ct_replay_anchor_record b)
+{
+    return a.epoch == b.epoch && a.backend_id == b.backend_id &&
+           a.revision == b.revision && a.session == b.session;
+}
+
+bool ct_replay_store_check(ct_replay_store *s)
+{
+    if (!s || s->state != CT_STORE_READY) return false;
+    if (!s->anchor_bound) return true;
+    ct_replay_anchor_record current = {0};
+    if (!s->anchor.read || !s->anchor.replace || !s->selected.epoch ||
+        !s->selected.backend_id || s->selected.revision != s->revision ||
+        s->selected.session != s->session ||
+        !s->anchor.read(s->anchor.context, &current) || !same_record(current, s->selected))
+        return fault(s);
+    return true;
+}
+
+static bool advance_anchor(ct_replay_store *s, ct_replay_anchor_record next)
+{
+    ct_replay_anchor_record actual = {0};
+    if (!s->anchor.replace(s->anchor.context, &s->selected, &next) ||
+        !s->anchor.read(s->anchor.context, &actual) || !same_record(actual, next)) return fault(s);
+    s->selected = next;
+    return true;
+}
+
+static bool bind_anchor(ct_replay_store *s, ct_replay_anchor_io anchor,
+                        uint64_t id, bool enroll)
+{
+    if (!s || s->state != CT_STORE_READY || s->anchor_bound) return false;
+    s->anchor_bound = true; s->anchor = anchor;
+    if (!id || !anchor.read || !anchor.replace ||
+        !anchor.read(anchor.context, &s->selected)) return fault(s);
+    if (enroll) {
+        if (!same_record(s->selected, (ct_replay_anchor_record){0}) ||
+            !advance_anchor(s, (ct_replay_anchor_record){1, id, s->revision, s->session}))
+            return fault(s);
+    } else if (s->selected.backend_id != id) return fault(s);
+    return ct_replay_store_check(s);
+}
+
+bool ct_replay_store_bind(ct_replay_store *s, ct_replay_anchor_io anchor, uint64_t id)
+{
+    return bind_anchor(s, anchor, id, false);
+}
+bool ct_replay_store_enroll(ct_replay_store *s, ct_replay_anchor_io anchor, uint64_t id)
+{
+    return bind_anchor(s, anchor, id, true);
+}
+
 ct_store_state ct_replay_store_load(ct_replay_store *s, ct_replay_io io)
 {
     if (!s) return CT_STORE_FAULT;
@@ -119,11 +171,22 @@ bool ct_replay_store_provision(ct_replay_store *s)
 
 bool ct_replay_store_save(ct_replay_store *s, const unsigned char *filter, uint64_t session)
 {
-    if (!s || s->state != CT_STORE_READY) return false;
+    if (!ct_replay_store_check(s)) return false;
     if (!filter || session < s->session || session - s->session > 1 || !superset(filter, s->filter)) return fault(s);
     if (session == s->session && !memcmp(filter, s->filter, CT_REPLAY_BYTES)) return true;
-    if (s->revision == UINT64_MAX) return fault(s);
-    return write_slot(s, 1 - s->slot, s->revision + 1, session, filter);
+    if (s->revision == UINT64_MAX || (s->anchor_bound && s->selected.epoch == UINT64_MAX))
+        return fault(s);
+    if (s->anchor_bound) {
+        /* Reserve BEFORE touching media: an interrupted write must never leave
+         * an unanchored candidate revision that can be reused for other bits
+         * after restoring an older image. Otherwise two valid snapshots could
+         * share an anchored revision while containing different histories. */
+        ct_replay_anchor_record next = s->selected;
+        ++next.epoch; next.revision = s->revision + 1; next.session = session;
+        if (!advance_anchor(s, next)) return false;
+    }
+    if (!write_slot(s, 1 - s->slot, s->revision + 1, session, filter)) return false;
+    return ct_replay_store_check(s);
 }
 
 /* A migration is a lossless offline copy, not a chance to reconstruct or clear
@@ -158,4 +221,21 @@ bool ct_replay_store_migrate(const ct_replay_store *src, ct_replay_store *dst)
     }
     dst->state = CT_STORE_READY;
     return true;
+}
+
+bool ct_replay_store_switch(ct_replay_store *src, ct_replay_store *dst, uint64_t id)
+{
+    if (!src || !dst || src == dst || !src->anchor_bound ||
+        src->state != CT_STORE_READY || dst->state != CT_STORE_EMPTY || dst->anchor_bound ||
+        !id || id == src->selected.backend_id || src->io.context == dst->io.context) return false;
+    if (!ct_replay_store_check(src) || src->selected.epoch == UINT64_MAX ||
+        !ct_replay_store_migrate(src, dst)) {
+        fault(src); return fault(dst);
+    }
+    dst->anchor_bound = true; dst->anchor = src->anchor; dst->selected = src->selected;
+    ct_replay_anchor_record next = {src->selected.epoch + 1, id, dst->revision, dst->session};
+    /* Revoke the old in-memory owner even on ambiguous selection. Boot must
+     * consult the independent anchor; it cannot infer selection from a copy. */
+    fault(src);
+    return advance_anchor(dst, next);
 }
