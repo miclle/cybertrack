@@ -27,7 +27,7 @@ def capture(port, output, run):
                 continue
             line = re.sub(r"\b(?:[0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}\b", "[MAC redacted]", line)
             lines.append(line)
-            if "HEARTBEAT ticks=600 state=DISARMED logical_outputs_off=1" in line:
+            if "HEARTBEAT ticks=6000 state=DISARMED held=0 presses=0 logical_outputs_off=1" in line:
                 break
     output.mkdir(parents=True, exist_ok=True)
     text = "\n".join(lines) + "\n"
@@ -37,7 +37,7 @@ def capture(port, output, run):
         "PSRAM test_bytes=6291456 patterns=6",
         "PSRAM heap_integrity=PASS",
         "VALIDATION PASS state=DISARMED capabilities=0 logical_outputs_off=1",
-        "HEARTBEAT ticks=600 state=DISARMED logical_outputs_off=1",
+        "HEARTBEAT ticks=6000 state=DISARMED held=0 presses=0 logical_outputs_off=1",
     ] + [f"PSRAM pattern={index} PASS" for index in range(6)]
     passed = (
         all(marker in text for marker in required)
