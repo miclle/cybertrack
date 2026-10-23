@@ -9,6 +9,7 @@
 #define CT_RPC_ID_MAX 64
 #define CT_RPC_ID_CAP (CT_RPC_ID_MAX * 6 + 3)
 #define CT_RPC_CACHE_SLOTS 16
+#define CT_RPC_REPLAY_BYTES 32768
 
 typedef enum {
     CT_RPC_RESPONSE, CT_RPC_NO_RESPONSE, CT_RPC_STALE_SESSION, CT_RPC_BAD_ARGUMENT
@@ -42,7 +43,8 @@ typedef struct {
 } ct_rpc_allocator;
 
 /* Single-owner, like ct_controller. Use static/heap storage on embedded targets;
- * this prototype retains complete requests/responses for one bounded session. */
+ * complete replies are a session-local FIFO; the monotone replay filter belongs
+ * to the boot, never to a connection. Collisions may reject new actions. */
 typedef struct {
     ct_controller *control;
     uint64_t generation;
@@ -51,6 +53,9 @@ typedef struct {
     uint32_t max_queue_ms;
     bool initialized;
     size_t cache_count;
+    size_t cache_next;
+    uint32_t replay_bits_set;
+    unsigned char replay_filter[CT_RPC_REPLAY_BYTES];
     ct_rpc_allocator allocator;
     ct_rpc_cache_entry cache[CT_RPC_CACHE_SLOTS];
 } ct_protocol;
@@ -64,7 +69,8 @@ void ct_protocol_init(ct_protocol *p, ct_controller *control, uint32_t max_queue
  * Default remains libc heap allocation. No test injector is in the library. */
 bool ct_protocol_set_allocator(ct_protocol *p, ct_rpc_allocator allocator);
 /* Open/reconnect revokes local enable and allocates a fresh generation. Returns
- * zero on failure. Tag queued deliveries with this value at ingress. */
+ * zero on failure. Tag queued deliveries with this value at ingress. Retains
+ * the replay filter across close/open; only init at a genuine boot clears it. */
 uint64_t ct_protocol_open(ct_protocol *p, uint64_t now_ms);
 void ct_protocol_close(ct_protocol *p, uint64_t now_ms);
 /* One complete {"type":"mcp","payload":{...}} frame. No network I/O or queue.

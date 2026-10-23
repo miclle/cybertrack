@@ -22,6 +22,7 @@ static ct_controller control;
 static ct_test_heap heap;
 static char reply[CT_RPC_REPLY_CAP];
 static ct_rpc_cache_entry saved_cache[CT_RPC_CACHE_SLOTS];
+static unsigned char saved_filter[CT_RPC_REPLAY_BYTES];
 static size_t injections, cache_failures, resize_failures, peak_bytes;
 
 typedef enum { UNINITIALIZED, READY, ACTIVE, CACHED_STOP, CACHED_DENSE, CACHED_PRETTY } setup_kind;
@@ -104,10 +105,13 @@ static void sweep(const scenario *s)
         for (size_t nth = 1; nth <= calls; ++nth) {
             prepare(s->setup);
             size_t count = protocol.cache_count;
+            size_t next = protocol.cache_next;
+            uint32_t bits = protocol.replay_bits_set;
             uint64_t sequence = protocol.sequence, submitted = control.last_sequence;
             uint64_t generation = control.enable_generation, session = protocol.session;
             bool initialized = protocol.initialized;
             memcpy(saved_cache, protocol.cache, sizeof(saved_cache));
+            memcpy(saved_filter, protocol.replay_filter, sizeof(saved_filter));
             ct_test_heap_reset(&heap, nth, mode != 0);
             CHECK(handle(s->frame) == CT_RPC_RESPONSE);
             CHECK(heap.failures == 1 && heap.calls == nth); /* No fallback allocation for error response. */
@@ -122,6 +126,8 @@ static void sweep(const scenario *s)
             CHECK(control.state == CT_FAULT);
             off();
             CHECK(protocol.cache_count == count && !memcmp(protocol.cache, saved_cache, sizeof(saved_cache)));
+            CHECK(protocol.cache_next == next && protocol.replay_bits_set == bits);
+            CHECK(!memcmp(protocol.replay_filter, saved_filter, sizeof(saved_filter)));
             CHECK(protocol.sequence == sequence && control.last_sequence == submitted);
             CHECK(control.enable_generation == generation && protocol.session == session);
             CHECK(protocol.initialized == initialized);

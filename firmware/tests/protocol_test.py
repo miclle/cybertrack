@@ -346,8 +346,9 @@ class ProtocolTests(unittest.TestCase):
         self.off(result)
         self.assertFalse(result["initialized"])
         d.rpc(message("initialize", INIT, "init"), now=2)
-        self.tool(d.rpc(call("move", MOVE), now=2), "not_ready", True)
+        self.error(d.rpc(call("move", MOVE), now=2), -32002)
         d.event("enable 2")
+        self.off(d.rpc(call("move", MOVE), now=2))
         self.tool(d.rpc(call("move", MOVE, 3), now=2), "accepted")
         # A new open without close also revokes outputs and local enable.
         self.off(d.event("open 3"))
@@ -370,21 +371,63 @@ class ProtocolTests(unittest.TestCase):
         self.off(result)
         self.tool(d.rpc(call("move", MOVE, 5), now=1), "accepted")
 
-    def test_cache_full_retains_old_responses_and_stop_bypasses(self):
+    def test_fifo_eviction_preserves_replay_guard_and_stop(self):
         d = self.device().start()
         first = d.rpc(call("move", MOVE, "first"))
         for i in range(14):
             d.rpc(message("ping", request_id=f"ping-{i}"))
         full = d.rpc(call("move", MOVE, "new"), now=1)
         self.assertEqual(full["cache_count"], 16)
-        self.error(full, -32002)
+        self.tool(full, "busy", True)
         self.assertEqual(full["ends_at"], 100)
         self.assertEqual(d.rpc(call("move", MOVE, "first"), now=2)["reply"], first["reply"])
-        stopped = d.rpc(call("stop", request_id="stop"), now=3, received=0, fresh=False)
+        # A hit does not refresh FIFO age; another miss evicts the old action.
+        d.rpc(message("ping", request_id="evict"), now=2)
+        self.error(d.rpc(call("move", MOVE, "first"), now=100), -32002)
+        self.off(d.rpc(call("move", MOVE, "first"), now=100))
+        stopped = d.rpc(call("stop", request_id="stop"), now=101, received=0, fresh=False)
         self.tool(stopped, "logical_outputs_cleared; local_reenable_required")
         self.off(stopped)
         self.assertEqual(stopped["state"], FAULT)
         self.assertEqual(stopped["cache_count"], 16)
+
+    def test_evicted_rejected_and_read_ids_cannot_become_actions(self):
+        d = self.device().start(enabled=False)
+        self.tool(d.rpc(call("move", MOVE, "denied")), "not_ready", True)
+        snapshot = d.rpc(call("get_status", request_id="snapshot"))
+        d.event("enable 0")
+        for i in range(16):
+            d.rpc(message("ping", request_id=f"evict-{i}"))
+        # Evicted read-only responses are recomputed, rather than replayed.
+        current = d.rpc(call("get_status", request_id="snapshot"))
+        self.assertNotEqual(current["reply"], snapshot["reply"])
+        for i in range(16):
+            d.rpc(message("ping", request_id=f"evict-again-{i}"))
+        for old_id in ["denied", "snapshot", "init"]:
+            rejected = d.rpc(call("move", MOVE, old_id))
+            self.error(rejected, -32002)
+            self.off(rejected)
+        state = json.loads(self.tool(current))
+        self.assertEqual(state["state"], "READY")
+        self.assertEqual(state["replay_guard"]["scope"], "boot")
+        self.assertEqual(state["replay_guard"]["bits_total"], 262144)
+
+    def test_retired_id_canonicalization_and_reconnect(self):
+        for original, equivalent in [("move-id", '"move-\\u0069d"'), (0, '-0'),
+                                     ("水🚀", '"\\u6c34\\ud83d\\ude80"'), ("", '""')]:
+            with self.subTest(original=original):
+                d = self.device().start()
+                self.tool(d.rpc(call("move", MOVE, original)), "accepted")
+                d.event("close 1")
+                d.event("open 2")
+                d.rpc(message("initialize", INIT, "init"), now=2)
+                d.event("enable 2")
+                raw = json.dumps(call("water", {"duration_ms": 10}, "REPLACE"))
+                raw = raw.replace('"REPLACE"', equivalent)
+                result = d.rpc(raw, now=2)
+                self.error(result, -32002)
+                self.off(result)
+                self.assertEqual(result["sequence"], 0)
 
     def test_stop_priority_including_reused_id_and_cached_stop(self):
         d = self.device().start(initialized=False)
