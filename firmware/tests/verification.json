@@ -13,7 +13,7 @@
     "ctest --test-dir build/firmware-host --output-on-failure"
   ],
   "ctest": {
-    "passed": 8,
+    "passed": 9,
     "failed": 0,
     "control_scenario_groups": 8,
     "protocol_test_methods": 24,
@@ -51,7 +51,8 @@
     "parser_contract_recovery_groups": 3,
     "link_scenario_groups": 13,
     "link_exhaustive_split_cases": 376,
-    "protocol_stress_groups": 5
+    "protocol_stress_groups": 5,
+    "replay_store_groups": 4
   },
   "sanitizers": {
     "address": "no error reported",
@@ -84,20 +85,24 @@
     "server request ID uniqueness across reconnect and retry compatibility"
   ],
   "source_sha256": {
-    "firmware/CMakeLists.txt": "7bfe7af1b24c3a0ebb7f88d2d907169c0d52bf130787812ea070bbbe56ce2ae1",
+    "firmware/CMakeLists.txt": "fa43d4dae3cecc972fb026bd10d4b99f1ce21c5b31a39a99b6a07966f466bde6",
     "firmware/include/cybertrack/control.h": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a",
     "firmware/include/cybertrack/inbox.h": "dd4b0937734c038bab26974ed084d457adaae04f1041ee64ac165817a80f6398",
     "firmware/include/cybertrack/inputs.h": "6e0cf7dc7023c5c885e5a4d4740fb06a4aa92fc707b4bc321fa35cfce4366d64",
     "firmware/include/cybertrack/link.h": "2c8e3df0d3c6ec7956904935c3bef45e73d399147b915602341ffd29219a1695",
     "firmware/include/cybertrack/protocol.h": "24fb758b9761c775196c9fda290f81236d203579c7781823c3d9e232db78ed31",
+    "firmware/include/cybertrack/replay_store.h": "b37d5f12f69a8e53d86b733e54d674e68682ada4d88ff7e9b97305beb3ca156a",
     "firmware/include/cybertrack/runtime.h": "39434f19e07f97f2c2aa411b1e868b7143127d25c0131182a69a971b006c3e0b",
     "firmware/src/control.c": "2158325e95fa32622735ca7466a5580eaaac6dc23be142ee91b4e384adcf1ec9",
     "firmware/src/inbox.c": "aaf2fd321276b6abc26542b22cc353863f8701fb51aa04976f368ead2c16da25",
     "firmware/src/inputs.c": "e34b3b9815f3633ff81e2d52d259fbfee0c7558f86ae3080b4ce89c62a690679",
     "firmware/src/link.c": "46994397effeec26761c4f61de070aff6eb0d826995635658bc454463147dc44",
     "firmware/src/protocol.c": "54741eb348940a7f53cd1c4cb3d88ebfa0fac4e1cf898dda856da9a0d8bef924",
+    "firmware/src/replay_store.c": "d8e6b0a25fdaa3d64192e6b7d24be8f5f1c727bf9316ccdb3b8732ddd1f082a2",
     "firmware/src/runtime.c": "b7790f27b023e92244d568381dc32eedabc5cceb10f26c16e8ff9b12a77fc81f",
     "firmware/tests/control_test.c": "e6c287ba766f4e5b54369aca3491a82e012e844fb863b30c989c6fc0983714d1",
+    "firmware/tests/fake_store.c": "e2c6624f327a4875730065d738a2951cd7802b7ebf44916ae9270ca58c24e4fe",
+    "firmware/tests/fake_store.h": "10cd01a27e18a0815a2eaf76a4dada54e3c3ba873d144b38a7cddf80094642fb",
     "firmware/tests/fault_allocator.c": "7fa1c7fa6a3e8114701769722cfdc449cc1c5033c8b1bde4211a3c24fb15ea1d",
     "firmware/tests/fault_allocator.h": "de8d17e0fcf3bbfcc41ed7dfb0777e3d4546bb9e275c9824c1a7e057036b46e7",
     "firmware/tests/inbox_test.c": "b3dc2b32fe4949a77ba5fd0dd9bd669400e0f35fc687fd3c3e0191ccff1363c0",
@@ -107,6 +112,7 @@
     "firmware/tests/protocol_memory_test.c": "b45339a0f41ddb65dc4015f832e7598db4f512d51a238a19a27ccc09775924b2",
     "firmware/tests/protocol_stress_test.c": "ea9ab356bf34138580bb18fb78f81b165b915172bf4b315c4136e37d61584f2f",
     "firmware/tests/protocol_test.py": "ee7199310b90dca013919eb30eb9928cbc1ae714ec0bb934f893a45a5749ed92",
+    "firmware/tests/replay_store_test.c": "a33bb1b04cd52b4236e8a9171f74ce37159bf0b4964d3996680fbf4f112514ed",
     "firmware/tests/runtime_test.c": "c64a7ab6c2d07f92c54653576b167df7d957c8c97e93d8dc880be61ed57281ee",
     "firmware/third_party/yyjson/LICENSE": "45e384d3d52c73cba3a64d6e6c25d47cd738cd8a55c30629e3201046eda62947",
     "firmware/third_party/yyjson/yyjson.c": "d2d58ef0a3b2267862dc363832c4f3185fd375aea933d5d3419d1a940d6ece2e",
@@ -344,5 +350,15 @@
       "saturation permits read-only requests and stop",
       "no automatic retry, new-ID substitution, enable or filter reset"
     ]
+  },
+  "persistence": {
+    "phase": "standalone storage verified; protocol integration pending",
+    "store_object_bytes_host": 65640,
+    "slot_bytes": 32800,
+    "media_bytes": 65600,
+    "cut_cases": 278,
+    "bit_corruptions": 256,
+    "heap_allocations": false,
+    "real_storage_verified": false
   }
 }
