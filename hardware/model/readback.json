@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.8",
+  "design_revision": "0.10",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
   "power_bank_dimensions_mm": {
@@ -16,6 +16,62 @@
     "port_face_source": "user confirmed 120 x 31.5 mm long side",
     "port_orientation_design": "+Y; lateral position and connector envelope are assumptions",
     "ports_and_cable_clearance_verified": false
+  },
+  "arc_module_envelopes": {
+    "quantity": 2,
+    "diameter_mm": 20,
+    "length_mm": 80,
+    "basis": "user specified provisional envelope on 2026-10-24; not measured",
+    "axis": "+Y",
+    "axis_origins_mm": [
+      [
+        68.5,
+        -66,
+        158
+      ],
+      [
+        -68.5,
+        -66,
+        158
+      ]
+    ],
+    "tray_width_mm": 116,
+    "tray_hole_pattern_unchanged": true,
+    "mounts_and_leads_designed": false,
+    "electrical_clearance_verified": false,
+    "insulation_liquid_isolation_emc_verified": false
+  },
+  "crown_effect_locations": {
+    "quantity": 2,
+    "center_x_mm": [
+      51.5,
+      -51.5
+    ],
+    "outer_size_xyz_mm": [
+      16,
+      47,
+      11
+    ],
+    "y_range_mm": [
+      -16,
+      31
+    ],
+    "z_range_mm": [
+      192,
+      203
+    ],
+    "recess_plan_mm": [
+      8,
+      25
+    ],
+    "recess_y_range_mm": [
+      -5,
+      20
+    ],
+    "basis": "design allocation for passive appearance mockup; not supplier data",
+    "service_group": "crown",
+    "electrodes_or_wiring_designed": false,
+    "electrical_or_protective_function_verified": false
   },
   "source_sha256": "178b308b0aba98859904a6e016541f75ca01a9bc7258633666c2f254743fb758",
   "source_unchanged": true,
@@ -1532,16 +1588,16 @@
     },
     {
       "name": "CrownFinL",
-      "label": "左后掠顶部封闭脊翼",
+      "label": "左顶部电弧效果位／后掠凹槽护框",
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1125.0,
+      "volume_mm3": 4806.522727272726,
       "bbox_mm": [
-        49.0,
-        -10.0,
+        43.5,
+        -16.0,
         192.0,
-        54.0,
+        59.5,
         31.0,
         203.0
       ],
@@ -1622,16 +1678,16 @@
     },
     {
       "name": "CrownFinR",
-      "label": "右后掠顶部封闭脊翼",
+      "label": "右顶部电弧效果位／后掠凹槽护框",
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1125.0,
+      "volume_mm3": 4806.522727272726,
       "bbox_mm": [
-        -54.0,
-        -10.0,
+        -59.5,
+        -16.0,
         192.0,
-        -49.0,
+        -43.5,
         31.0,
         203.0
       ],
@@ -1734,7 +1790,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 15623.861179774874,
+      "volume_mm3": 13624.546839543089,
       "bbox_mm": [
         31.9999999,
         -70.0000001,
@@ -1806,7 +1862,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 15623.86117974106,
+      "volume_mm3": 13624.546839509607,
       "bbox_mm": [
         -70.0000001,
         -70.0000001,
@@ -2156,6 +2212,114 @@
         -12.649999999999999,
         30.0,
         170.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownEffectInsetL",
+      "label": "左效果槽封闭衬面",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 117.30000000000071,
+      "bbox_mm": [
+        47.5,
+        -5.0,
+        196.0,
+        55.5,
+        20.0,
+        196.6
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownEffectMarkLFront",
+      "label": "左效果位置橙色端部标识 Front",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 43.199999999999605,
+      "bbox_mm": [
+        45.5,
+        -15.0,
+        196.5,
+        57.5,
+        -9.0,
+        200.1
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownEffectMarkLRear",
+      "label": "左效果位置橙色端部标识 Rear",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 54.510000000000176,
+      "bbox_mm": [
+        49.2,
+        16.0,
+        196.6,
+        53.8,
+        19.0,
+        200.8
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownEffectInsetR",
+      "label": "右效果槽封闭衬面",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 117.30000000000071,
+      "bbox_mm": [
+        -55.5,
+        -5.000000000000001,
+        196.0,
+        -47.5,
+        20.0,
+        196.6
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownEffectMarkRFront",
+      "label": "右效果位置橙色端部标识 Front",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 43.1999999999996,
+      "bbox_mm": [
+        -57.5,
+        -15.0,
+        196.5,
+        -45.5,
+        -9.0,
+        200.1
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "CrownEffectMarkRRear",
+      "label": "右效果位置橙色端部标识 Rear",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 54.510000000000176,
+      "bbox_mm": [
+        -53.8,
+        16.0,
+        196.6,
+        -49.2,
+        19.0,
+        200.8
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -3097,6 +3261,42 @@
       "symmetric_difference_mm3": 0.0
     },
     {
+      "name": "ArcModuleL",
+      "label": "左电弧模块预装占位 Ø20×80",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 25132.741228718347,
+      "bbox_mm": [
+        58.5,
+        -66.0,
+        148.0,
+        78.5,
+        14.0,
+        168.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "ArcModuleR",
+      "label": "右电弧模块预装占位 Ø20×80",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 25132.741228718347,
+      "bbox_mm": [
+        -78.5,
+        -66.0,
+        148.0,
+        -58.5,
+        14.0,
+        168.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
       "name": "BatteryInsertLFront",
       "label": "嵌件候选 BatteryInsertLFront",
       "category": "structure",
@@ -3516,12 +3716,12 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 8392.89535095263,
+      "volume_mm3": 8294.89535095263,
       "bbox_mm": [
-        -59.0,
+        -58.0,
         -74.0,
         144.5,
-        59.0,
+        58.0,
         10.0,
         145.5
       ],
@@ -3986,9 +4186,9 @@
   ],
   "step_readback": {
     "valid": true,
-    "solids": 816,
-    "expected_solids": 816,
-    "volume_difference_mm3": 1.1499694858212024,
+    "solids": 822,
+    "expected_solids": 822,
+    "volume_difference_mm3": 1.1504333746852353,
     "bbox_difference_mm": 8.952838470577262e-13,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -3997,13 +4197,13 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 460,
+    "boolean_pairs_tested": 476,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
   },
   "service_paths": {
-    "method": "8 discrete poses per straight segment; wet caps use lift-back-lift; not continuous sweep or tool/hand access certification",
+    "method": "8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes move inward then up after tray removal; not continuous sweep or tool/hand access certification",
     "scenarios": [
       {
         "group": "cable_access",
@@ -4112,6 +4312,12 @@
           "CrownRearBlade2",
           "OccipitalBrowL",
           "OccipitalBrowR",
+          "CrownEffectInsetL",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectInsetR",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
           "HeadCrownShell",
           "HeadServiceHatch",
           "CrownScrewLFront",
@@ -4194,6 +4400,128 @@
         "boolean_pairs_tested": 34,
         "overlaps": [],
         "passed": true
+      },
+      {
+        "group": "arc_left",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            -24.5,
+            0.0,
+            0.0
+          ],
+          [
+            -24.5,
+            0.0,
+            85.0
+          ]
+        ],
+        "pose_count": 16,
+        "removed_first": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownSpine",
+          "CrownForePlate",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownRearCassette",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "OccipitalBrowL",
+          "OccipitalBrowR",
+          "CrownEffectInsetL",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectInsetR",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "ElectronicsTray",
+          "Electronics",
+          "AudioModule",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "TrayScrewR0",
+          "TrayScrewR1",
+          "TrayScrewL0",
+          "TrayScrewL1",
+          "PowerCableRoute",
+          "WaterHoseRoute"
+        ],
+        "boolean_pairs_tested": 13,
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "group": "arc_right",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            24.5,
+            0.0,
+            0.0
+          ],
+          [
+            24.5,
+            0.0,
+            85.0
+          ]
+        ],
+        "pose_count": 16,
+        "removed_first": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownSpine",
+          "CrownForePlate",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownRearCassette",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "OccipitalBrowL",
+          "OccipitalBrowR",
+          "CrownEffectInsetL",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectInsetR",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "ElectronicsTray",
+          "Electronics",
+          "AudioModule",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "TrayScrewR0",
+          "TrayScrewR1",
+          "TrayScrewL0",
+          "TrayScrewL1",
+          "PowerCableRoute",
+          "WaterHoseRoute"
+        ],
+        "boolean_pairs_tested": 13,
+        "overlaps": [],
+        "passed": true
       }
     ],
     "passed": true,
@@ -4204,22 +4532,27 @@
   "assembly_paths_verified": false,
   "electrical_verified": false,
   "final_saved_audit": {
-    "native_objects_verified": 219,
+    "native_objects_verified": 227,
     "gui_visibility_verified": true
   },
   "previews_generated": true,
   "files_sha256": {
-    "CyberTrack.FCStd": "ac1abb5669409cbaf516d3ae1b96a430061023b938673eebb60e528aa59e7fac",
-    "CyberTrack.step": "b05c6cc2f5d45f1976443ec435ca7e74c2c4189c2e4e4355b87032cc353fc47c",
-    "assembly.png": "4a90687e54bb3478f6f6417efdf0c630c8771c707a9daf12d9dde701e46b5152",
-    "front.png": "9808a802dd317186eca48d1f53797383b48f60a80d9091bf3c9ba1ac249b5413",
-    "layout.png": "d4ef1495c527ff0474fbf9d0b4c9222e56fbffd422f39e2a9aa9ac04cff7fea3",
-    "lower-layout.png": "b2b1809b5831ac620ad3fc37864316d71a6aa7aca1e95fa4b5ead7f284285ca0",
-    "rear-assembly.png": "7b93f36f03dee994cebec55347cbf7faac721a9e712df2e9f7783759d9f46a09",
-    "rear.png": "fdb2c30ce43c9354cefc493155b0ba62199f0af534705269627e3f146dad67e0",
-    "routing.png": "e71c8f3d0e4215510f376467d4865c264d0c4113ce196e91653af8eb6e8527fa",
-    "service.png": "d383ce507fbc5c8a703c86f997569c916401522cfd8983c0d511ad674b5aa331",
-    "side.png": "f5d73b68698b2db7481364377db0813bffe95c452d9ec33792174a928a05b91f",
-    "top.png": "e1f930948d97e8213c34dc25a48cf5df0c3b06acf1077a1d7c7ec379e3029b66"
+    "CyberTrack.FCStd": "f973c32972efac1774d6f2add9bd32d441d39ac190c586bd4236d0ec78cb8a76",
+    "CyberTrack.step": "826d15fb454c20446621a43f67bcddb2b2dbc1a966b369da549447c5156a5965",
+    "arc-layout.png": "296c429250f8c5a501894cf7ca32fb70bf3bb9bb6efd8b7dad9a69e6d4ab9cad",
+    "arc-top.png": "7fb314c4c6c2624f43dfab51486d8fcff6910ca75eec3322ddbbe53a90726003",
+    "assembly.png": "89eeee31cba13d3153286dd7ec3869c9fdda224ca3d3040489deb58ce45a99ed",
+    "crown-effects-top.png": "f268bf8ce8a588f7cd189986f66d203b2e2e44fc5325a944826750a19c0f6610",
+    "crown-effects.png": "7e22f9ad434c1dc8701c5fb7b3da308188ea905f80a807c52c452d1aebdbc8c4",
+    "front.png": "799ff2bb31fafbffe8d2e6844e71b9d9c5848834d8d81d85c48019f5cc413895",
+    "layout.png": "0950bfe415f7416ccc8436aec78f2848b7f2823f6460a7d7a6b4a48ca3460011",
+    "lower-layout.png": "3f19cbd62c8bde66804e1c3dce407a49e1dd68a92305a40f6b938e0c15dc574d",
+    "rear-assembly.png": "f6a56920fa3f226160f162e193c142a63db2b9abce74e4b2a0aaf23706a1b90b",
+    "rear.png": "d529fe772935c95537f6ec95f4d80f6075f2ce3be6c080bad1733289478d63aa",
+    "right.png": "9456ff2f3fc2cd24cfefcf037f2f59a974e7b60d35c2b43bdc6c7399fbf95d6e",
+    "routing.png": "805fa0d789044f0773dd94f600784e6a929cb6956006039820fdd92112b933cb",
+    "service.png": "850e10553b30ee6de132e3b4e65c51781ff7befb765199800cbf8a08326f11ca",
+    "side.png": "8802ce4e3c68cdad09b692e68197365fd66e4508e3827dfd07ce7ada9a4275de",
+    "top.png": "a9d7d7f8b22589bb0e5103c5cc143f444620e460c6c66bda71827549a94b7234"
   }
 }

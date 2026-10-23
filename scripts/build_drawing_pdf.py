@@ -25,11 +25,17 @@ for rel,digest in report['files_sha256'].items():
     path=ROOT/rel
     if not path.exists(): path=MODEL/Path(rel).name
     assert sha(path)==digest, f'Stale model artifact: {path}'
-assert report['design_revision']=='0.8', 'Review annotations for a new model revision'
+assert report['design_revision']=='0.10', 'Review annotations for a new model revision'
+assert report['collision_check']['passed'] and report['service_paths']['passed'], 'CAD checks failed'
 # Guard dimension callouts that describe named features, not just overall extents.
 expected = {
     'PowerBank': [-60,-96,33,60,-23,64.5],
-    'ElectronicsTray': [-59,-74,144.5,59,10,145.5],
+    'ElectronicsTray': [-58,-74,144.5,58,10,145.5],
+    'CrownFinL': [43.5,-16,192,59.5,31,203],
+    'CrownFinR': [-59.5,-16,192,-43.5,31,203],
+    'CrownEffectInsetL': [47.5,-5,196,55.5,20,196.6],
+    'ArcModuleL': [58.5,-66,148,78.5,14,168],
+    'ArcModuleR': [-78.5,-66,148,-58.5,14,168],
     'WaterFillPlug': [-30.8,42.2,124.3,-17.2,55.8,128],
     'WaterFillSeal': [-33,40,127.6,-15,58,128],
 }
@@ -50,7 +56,7 @@ pdfmetrics.registerFont(TTFont('ZHB','/System/Library/Fonts/STHeiti Medium.ttc',
 U=72/25.4
 INK='#1E303B'; MUTED='#536673'; ACCENT='#DF632B'; PALE='#EAF0F2'; BLUE='#287E96'
 c=canvas.Canvas(str(PDF),pagesize=(420*U,297*U),pageCompression=1)
-c.setTitle('CyberTrack 0.8 模型与装配图纸')
+c.setTitle('CyberTrack 0.10 模型与装配图纸')
 c.setAuthor('CyberTrack')
 c.setSubject('A3 design review drawings; dimensions in mm; not manufacturing release')
 page=0
@@ -80,12 +86,12 @@ def header(title,subtitle):
     page+=1
     c.setFillColor(INK);c.rect(0,278*U,420*U,19*U,fill=1,stroke=0)
     text(14,285,'CYBERTRACK',18,'#FFFFFF',True)
-    text(405,285,f'CT-08 / {page:02d}',11,'#FFFFFF',align='right')
+    text(405,285,f'CT-10 / {page:02d}',11,'#FFFFFF',align='right')
     text(14,265,title,21,bold=True);text(14,256,subtitle,10,MUTED)
     line(14,250,406,250,'#CAD5DB',.6)
     line(14,20,406,20,'#CAD5DB',.6)
-    text(14,13,'模型与装配评审图 | Rev 0.8 | 2026-10-23 | 单位：mm',9,MUTED)
-    text(406,13,f'未制造放行 · A3 横向 · {page} / 9',9,MUTED,align='right')
+    text(14,13,'模型与装配评审图 | Rev 0.10 | 图纸更新 2026-10-24 | 单位：mm',9,MUTED)
+    text(406,13,f'未制造放行 · A3 横向 · {page} / 13',9,MUTED,align='right')
 def end():c.showPage()
 def title(x,y,s,sub=''):
     text(x,y,s,12,bold=True)
@@ -153,7 +159,25 @@ box(14,29,392,33,PALE)
 text(20,51,'228 × 202.5 × 203',20,bold=True)
 text(20,37,'整机宽 × 长 × 高；模型几何外包络',9,MUTED)
 text(143,52,'图纸内容',11,bold=True)
-para(143,44,'02 正面 / 背面　03 左右侧视　04 俯视 / 底视　05 电源检修\n06 头舱检修　07 补液结构　08 总装爆炸　09 走线与装配',250,9,6)
+para(143,44,'02 彩色正背视图　03 彩色左右侧视　04 正背尺寸　05 左右尺寸\n06 俯视 / 底视　07 电源　08 头舱　09 补液　10 爆炸　11 走线　12 双模块预装　13 顶部效果位',250,9,6)
+end()
+
+header('正面与背面 · 彩色外观','当前保存模型的正交渲染图，用于查看装甲层次、配色和前后造型；不是实物照片，尺寸见第 4 页。')
+picture('front.png',20,65,180,174)
+picture('rear.png',220,65,180,174)
+text(110,54,'正面 / 沿 +Y 观察',12,bold=True,align='center')
+text(310,54,'背面 / 沿 -Y 观察',12,bold=True,align='center')
+text(110,42,'前脸、偏置喷口与低位电源前舱',10,MUTED,align='center')
+text(310,42,'后脑装甲、双液体背包与后向泡泡出口',10,MUTED,align='center')
+end()
+
+header('左侧与右侧 · 彩色外观','当前保存模型的正交渲染图，展示头舱、固定颈架、底座与履带之间的关系；尺寸见第 5 页。')
+picture('side.png',20,65,180,174)
+picture('right.png',220,65,180,174)
+text(110,54,'左侧 / 沿 -X 观察',12,bold=True,align='center')
+text(310,54,'右侧 / 沿 +X 观察',12,bold=True,align='center')
+text(110,42,'前方在左；+X 为机体左侧',10,MUTED,align='center')
+text(310,42,'前方在右；-X 为机体右侧',10,MUTED,align='center')
 end()
 
 header('正面与背面 · 主要外形尺寸','各视图独立标识观察方向；尺寸为模型几何值。矢量线稿使用遮挡线消隐，未显示隐藏线。')
@@ -232,13 +256,13 @@ vdim(p,-52,7,64,64,94,'59 孔距')
 text(29,94,'孔中心：X±64；Y=-52 / 7',9,MUTED)
 title(249,239,'共用托板俯视','4 处紧固；比例 1:1')
 p,b=drawing('tray',316,165,1)
-hdim(p,-59,59,-39,-39,-88,f(dim('ElectronicsTray',0))+' 外宽')
+hdim(p,-58,58,-39,-39,-88,f(dim('ElectronicsTray',0))+' 外宽')
 hdim(p,-55,55,0,0,28,'110 孔距')
 vdim(p,-30,0,55,55,72,'30 孔距')
 text(253,94,'孔中心：X±55；Y=-30 / 0；板厚 1',9,MUTED)
 box(14,29,392,54,PALE)
 para(21,72,'冠盖：卸下 4 颗顶面螺钉，整组上提 65；外壳分缝为 Z181…181.25，间隙 0.25。\n托板：先移去冠盖，断开线束与邻近软管，再卸下 4 颗螺钉，上提 85。',376,10,7)
-para(21,50,'电子区 100 × 45 × 34、音频区 72 × 36 × 21 均为空间分配，不是实测设备外形。\n冠盖饰片在 CAD 中分对象表达，一体成形或定位固定工艺未定；头部造型不在本图纸中重设计。',376,9,7)
+para(21,50,'电子区 100 × 45 × 34、音频区 72 × 36 × 21 均为空间分配，不是实测设备外形。\n冠盖饰片在 CAD 中分对象表达，一体成形或定位固定工艺未定；顶部效果护框与标识随冠盖移动，详见第 13 页。',376,9,7)
 end()
 
 header('背包补液结构 · 局部分解','两侧独立补液；以右侧喷水舱展示层次，左侧泡泡舱采用对应结构。示意分解间距不代表装配高度。')
@@ -264,10 +288,11 @@ end()
 header('总装爆炸与维护分组','按当前模型的维护组件分解；螺钉与柔性路线在主图中隐藏，以突出装配层次。')
 mappt=picture('service.png',15,28,240,214)
 for n,px,py in [(1,750,270),(2,745,457),(3,984,432),(4,655,1015),(5,845,685)]:badge(mappt(px,py),n)
-items=[('01 整体冠盖','4 颗紧固；上提 65。顶甲、脊翼、前后眉甲随盖移动。'),('02 电子 / 音频托板','4 颗紧固；断开线管后上提 85。图中仅错开 35，以便看清层次。'),('03 两个补液盖组','各 2 颗紧固；上 6、后 12、再上 34。左图一侧盖被部分遮挡。'),('04 电源 / 托盖 / 拉带','4 颗紧固；先拆底部插头小盖并拔线，再托住整组下移 60。'),('05 固定头舱 / 颈架 / 底座','保持组装；履带和驱动来源部件不在本次维护爆炸中分解。')]
+items=[('01 整体冠盖','4 颗紧固；上提 65。顶甲、效果护框与标识、前后眉甲随盖移动。'),('02 电子 / 音频托板','4 颗紧固；断开线管后上提 85。图中仅错开 35，以便看清层次。'),('03 两个补液盖组','各 2 颗紧固；上 6、后 12、再上 34。左图一侧盖被部分遮挡。'),('04 电源 / 托盖 / 拉带','4 颗紧固；先拆底部插头小盖并拔线，再托住整组下移 60。'),('05 固定头舱 / 颈架 / 底座','保持组装；履带和驱动来源部件不在本次维护爆炸中分解。')]
 y=236
 for heading,body in items:
     text(268,y,heading,12,bold=True);y=para(268,y-8,body,132,10,6)-10
+para(268,80,'电弧模块仅向内错开显示；取出前须先移去托板，详见第 12 页。',132,9,6)
 para(268,58,'紧固件共 18 处 M2.5 级占位：电源 4、插头盖 2、冠盖 4、托板 4、补液盖 4。无螺纹，采购长度和标准未定。',132,9,6)
 end()
 
@@ -276,11 +301,37 @@ picture('routing.png',14,91,205,151)
 title(23,78,'路线与维修关系')
 para(23,67,'电源线候选 Ø6，从中央干区经过固定颈架进入头舱。\n喷水管候选 Ø4，独立侧路进入头舱至偏置喷口。\n拆托板前先断开相关线管；未表达高压接线。',190,10,7)
 y=238
-for h,s in [('装配次序','动力与底座 → 电源托盖和插头检修 → 冠盖定位与设备托板 → 两液体舱单独试验 → 布线后复查维护动作。'),('当前 CAD 证据','219 个几何对象回读有效；460 对包络相交对象的布尔检查无超阈值重叠；6 组维护动作共 80 个离散姿态无超阈值重叠。'),('尺寸与图纸等级','蓝色尺寸为当前 CAD 设计值；充电宝 120 × 73 × 31.5 为用户提供。尺寸不含制造公差。未实测接口与紧固件只用于结构评审。'),('尚待实物确认','端口位置、手指与工具空间、连续拆卸路径、线管弯曲、真实设备固定、承载、密封排液和供电。未通过制造、电气或儿童使用验收。')]:
+for h,s in [('装配次序','动力与底座 → 电源托盖和插头检修 → 冠盖定位与设备托板 → 两液体舱单独试验 → 布线后复查维护动作。'),('当前 CAD 证据',f"{len(report['objects'])} 个几何对象回读有效；{report['collision_check']['boolean_pairs_tested']} 对包络相交对象的布尔检查无超阈值重叠；{len(report['service_paths']['scenarios'])} 组维护动作共 {sum(r['pose_count'] for r in report['service_paths']['scenarios'])} 个离散姿态无超阈值重叠。"),('尺寸与图纸等级','蓝色尺寸为当前 CAD 设计值；充电宝 120 × 73 × 31.5 为用户提供。尺寸不含制造公差。未实测接口与紧固件只用于结构评审。'),('尚待实物确认','端口位置、手指与工具空间、连续拆卸路径、线管弯曲、真实设备固定、承载、密封排液和供电。未通过制造、电气或儿童使用验收。')]:
     text(235,y,h,12,bold=True);y=para(235,y-8,s,167,10,6)-9
 box(14,25,392,16,PALE)
-text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及全部 10 张预览图哈希。',9)
+text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及全部 15 张预览图哈希。',9)
 text(20,29,'SHA-256：'+meta['source_sha256'],8,MUTED)
+end()
+header('双电弧模块 · 头舱预装包络','按用户指定的暂定外形：2 × Ø20 × 80 mm；橙色圆柱仅代表机械占位，不是实测或通电集成。')
+picture('arc-layout.png',14,107,199,135)
+text(110,94,'头舱透明示意 / 两侧纵向放置',11,bold=True,align='center')
+p,b=drawing('arc_plan',307,171,1)
+text(307,239,'俯视布局 / 比例 1:1',12,bold=True,align='center')
+vdim(p,-66,14,78.5,78.5,94,'80 暂定长度')
+hdim(p,58.5,78.5,-66,-66,-92,'20 暂定直径')
+leader(p(-68.5,-15),219,103,'右侧模块')
+leader(p(68.5,-15),354,103,'左侧模块')
+box(14,29,392,54,PALE)
+para(21,72,'位置：轴线 X=±68.5、Z=158，Y=-66…14；沿用外观比例与低位电源。托板主宽 118 → 116，原固定孔位不动。\n拆卸候选：先取冠盖和托板，再各向内移动 24.5、向上移动 85；每侧检查 16 个离散姿态。',375,10,7)
+para(21,50,'尺寸为用户指定预装值。固定夹持、引线、电极、绝缘隔舱与液体隔离未定；图中间隙不是电气安全间距。\n现有尺寸图和 STEP 仍以外观装配为主；两个模块占位保存在 FCStd 中，默认隐藏，可单独显示。',375,9,7)
+end()
+header('顶部双电弧效果位 · 脊翼造型占位','后掠护框 + 封闭凹槽 + 橙色端部标识；仅表达预期效果位置，不含电极或规定放电间隙。')
+picture('crown-effects.png',14,132,226,108)
+text(124,122,'冠盖局部轴测 / 左右各一处效果位',11,bold=True,align='center')
+p,b=drawing('crown_effect_plan',321,178,2.2)
+text(321,239,'左侧效果护框 / 俯视 2.2:1',12,bold=True,align='center')
+hdim(p,43.5,59.5,-16,-16,-23,'16 外宽')
+vdim(p,-16,31,59.5,59.5,68,'47 外长')
+leader(p(51.5,7.5),251,119,'封闭效果槽 8 × 25')
+box(14,29,392,80,PALE)
+para(21,97,'效果位置：两处中心线 X=±51.5，沿 Y 布置；位于原后掠脊翼区域，朝顶部开放。\n护框范围 Y=-16…31、Z=192…203；顶点保持 Z=203，整机外包络与头身比例不变。\n凹槽平面范围 X=中心线±4、Y=-5…20；槽底封闭，衬面 Z=196…196.6。',375,10,7)
+para(21,70,'装配：护框、衬面和橙色端部标识归入冠盖维护组，随冠盖整体上取；固定孔位及内部双模块保持原位。\nCAD 分对象便于评审，不代表已经完成独立紧固、材料、加工或实物装配设计。',375,10,7)
+para(21,49,'尺寸均为造型分配。橙色块是非通电视觉标识，不是电极；凹槽尺寸及标识间距不代表拉弧或绝缘间距。\n未建立高压引线、驱动、电极或与内部模块的功能连接；护框与封闭槽底未通过防护、绝缘或带液共存验收。',375,9,7)
 end()
 c.save()
 print(PDF)

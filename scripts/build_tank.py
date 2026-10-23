@@ -84,6 +84,7 @@ def render_views(doc, output):
         'front': App.Rotation(V(1,0,0),90),
         'rear': App.Rotation(V(0,0,1),180).multiply(App.Rotation(V(1,0,0),90)),
         'side': App.Rotation(V(0,1,0),V(0,0,1),V(1,0,0),'ZXY'),
+        'right': App.Rotation(V(0,-1,0),V(0,0,1),V(-1,0,0),'ZXY'),
         'top': App.Rotation(),
         'iso': App.Rotation(V(1,1,0),V(-1,1,3),V(1,-1,0.75),'ZXY'),
         'rear_iso': App.Rotation(V(-1,1,0),V(-1,-1,3),V(1,1,0.75),'ZXY'),
@@ -97,7 +98,7 @@ def render_views(doc, output):
     for o in doc.Objects:
         if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category!='envelope'
     for filename,direction in [('assembly.png','iso'),('front.png','front'),
-                               ('side.png','side'),('rear.png','rear'),('top.png','top'),('rear-assembly.png','rear_iso')]:
+                               ('side.png','side'),('right.png','right'),('rear.png','rear'),('top.png','top'),('rear-assembly.png','rear_iso')]:
         render(filename,direction)
     for o in doc.Objects:
         if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category!='exterior'
@@ -110,7 +111,7 @@ def render_views(doc, output):
         if hasattr(o,'Category'):
             o.ViewObject.Visibility=not o.Name.startswith(('PowerCableRoute','WaterHoseRoute')) and 'Screw' not in o.Name
     original_shapes={}
-    offsets={'cable_access':V(0,0,-25),'battery':V(0,0,-60),'crown':V(0,0,65),'electronics':V(0,0,35),'Water':V(0,12,40),'Bubble':V(0,12,40)}
+    offsets={'cable_access':V(0,0,-25),'battery':V(0,0,-60),'crown':V(0,0,65),'electronics':V(0,0,35),'Water':V(0,12,40),'Bubble':V(0,12,40),'arc_left':V(-24.5,0,0),'arc_right':V(24.5,0,0)}
     for group,names in service_groups(doc).items():
         for name in names:
             obj=doc.getObject(name);original_shapes[name]=obj.Shape.copy()
@@ -122,6 +123,18 @@ def render_views(doc, output):
             o.ViewObject.Visibility=o.Category!='exterior'
             o.ViewObject.Transparency=75 if o.Category=='structure' else 0
     render('routing.png','rear_iso')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Name in ('HeadShell','ElectronicsTray','Electronics','AudioModule','ArcModuleL','ArcModuleR')
+            o.ViewObject.Transparency=80 if o.Name=='HeadShell' else 0
+    render('arc-layout.png','iso')
+    render('arc-top.png','top')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=getattr(o,'ServiceGroup','')=='crown' or o.Name.startswith('CrownScrew')
+            o.ViewObject.Transparency=0
+    render('crown-effects.png','iso')
+    render('crown-effects-top.png','top')
     for o in doc.Objects:
         if hasattr(o,'Category'):o.ViewObject.Transparency=0
     for o in doc.Objects:
@@ -142,7 +155,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.8'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.10'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -375,6 +388,32 @@ def main():
     for obj in doc.Objects:
         if hasattr(obj,'Category') and obj.Name not in head_start:
             shape=obj.Shape.copy();shape.translate(V(0,0,-4));obj.Shape=shape
+    # Passive effect-location mockups: widen the existing swept ribs into recessed
+    # crown housings. No electrodes, conductor geometry or electrical gap is defined.
+    for side,sign in [('L',1),('R',-1)]:
+        cx=sign*51.5
+        outer=yz_prism([(-16,192),(18,192),(31,200),(25,203),(-8,200),(-16,196)],cx-8,cx+8)
+        pocket=Part.Face(footprint(4,-5,20,1.5,196)).extrude(V(0,0,15))
+        pocket.translate(V(cx,0,0))
+        fin=doc.getObject('CrownFin'+side)
+        fin.Shape=outer.cut(pocket).removeSplitter()
+        fin.Label=('左' if sign>0 else '右')+'顶部电弧效果位／后掠凹槽护框'
+        fin.EvidenceBasis='外观与被动结构占位；无电极、导体或规定放电间隙；不代表防护或绝缘性能'
+        armor=doc.getObject('CrownSideArmor'+side)
+        armor.Shape=armor.Shape.cut(outer).removeSplitter()
+        liner=pocket.common(box(cx-5,-6,196,cx+5,21,196.6))
+        add('CrownEffectInset'+side,('左' if sign>0 else '右')+'效果槽封闭衬面',liner,'exterior','metal',
+            '封闭槽底上的外观衬面；不是导电部件或已验证绝缘材料')
+        for end,y in [('Front',-15),('Rear',16)]:
+            if end=='Front':
+                # A contrasting strip follows the leading bevel so the location
+                # remains readable from the normal front isometric camera.
+                marker=yz_prism([(-15,196.5),(-9,199.5),(-9,200.1),(-15,197.1)],cx-6,cx+6)
+            else:
+                marker=yz_prism([(y,196.6),(y+3,196.6),(y+3,200.3),(y+1,200.8),(y,200.3)],cx-2.3,cx+2.3)
+            armor.Shape=armor.Shape.cut(marker).removeSplitter()
+            add('CrownEffectMark'+side+end,('左' if sign>0 else '右')+'效果位置橙色端部标识 '+end,
+                marker,'exterior','accent','不带电外观标识；不是电极，标识之间的距离不是拉弧间距')
     for side,sign in [('L',1),('R',-1)]:
         x0,x1=(33,46) if sign>0 else (-46,-33)
         shoulder=yz_prism([(-89,73.428571429),(-59,77),(-19,93),(-11,93),(-13,97),(-20,97),(-60,82),(-85,79)],x0,x1)
@@ -474,6 +513,10 @@ def main():
         basis=('用户提供外形 120×73×31.5 mm，确认较重；低位平放位置获用户认可，端口、重量与实物适配未验证'
                if name=='PowerBank' else '空间分配假设；不是所购物料尺寸，不构成整套装入结论')
         add(name,label,shape,'envelope',color,basis)
+    for side,sign in [('L',1),('R',-1)]:
+        add('ArcModule'+side,('左' if sign>0 else '右')+'电弧模块预装占位 Ø20×80',
+            Part.makeCylinder(10,80,V(sign*68.5,-66,158),V(0,1,0)),
+            'envelope','accent','用户于 2026-10-24 指定预装尺寸 Ø20×80；非实测，仅被动机械包络，无高压引线、电极或驱动')
     refine(doc,add)
     doc.recompute()
     if args.render:
@@ -549,7 +592,7 @@ def main():
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
                     assert visible==(final_shapes[name].Category!='envelope'),name
     assert sha(source_path)==source_hash
-    report={'status':'preliminary_concept','design_revision':'0.8','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.10','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'bounding_box_method':'optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)',
             'power_bank_dimensions_mm':{'source':'user_measurement','length':120,'width':73,'thickness':31.5,
             'orientation':'length X, width Y, thickness Z; low horizontal placement retained from user-approved layout',
@@ -558,6 +601,18 @@ def main():
             'port_face_source':'user confirmed 120 x 31.5 mm long side',
             'port_orientation_design':'+Y; lateral position and connector envelope are assumptions',
             'ports_and_cable_clearance_verified':False},
+            'arc_module_envelopes':{'quantity':2,'diameter_mm':20,'length_mm':80,
+                'basis':'user specified provisional envelope on 2026-10-24; not measured',
+                'axis':'+Y','axis_origins_mm':[[68.5,-66,158],[-68.5,-66,158]],
+                'tray_width_mm':116,'tray_hole_pattern_unchanged':True,
+                'mounts_and_leads_designed':False,'electrical_clearance_verified':False,
+                'insulation_liquid_isolation_emc_verified':False},
+            'crown_effect_locations':{'quantity':2,'center_x_mm':[51.5,-51.5],
+                'outer_size_xyz_mm':[16,47,11],'y_range_mm':[-16,31],'z_range_mm':[192,203],
+                'recess_plan_mm':[8,25],'recess_y_range_mm':[-5,20],
+                'basis':'design allocation for passive appearance mockup; not supplier data',
+                'service_group':'crown','electrodes_or_wiring_designed':False,
+                'electrical_or_protective_function_verified':False},
             'source_sha256':source_hash,'source_unchanged':True,'drive_transform':{'Left':[14,0,0],'Right':[-14,0,0],'scale':1,'method':'whole side translated, including motor, shaft, coupler and mount'},
             'drive_object_count':len(drive),'track_module_count':2,'objects':rows,
             'assembly_size_xyz_mm':[bb.XLength,bb.YLength,bb.ZLength],
