@@ -7,7 +7,7 @@
 #define CHECK(x) do { if (!(x)) { fprintf(stderr, "%s:%d: %s\n", __FILE__, __LINE__, #x); exit(EXIT_FAILURE); } } while (0)
 static ct_inbox inbox;
 static ct_inbox_item item;
-static ct_rpc_delivery delivery = {1, 123, 7, false};
+static ct_rpc_delivery delivery = {1, 123, 7, {1, 7, 9, 42}};
 
 static void init(void)
 {
@@ -29,7 +29,8 @@ static void copy_fifo_and_wrap(void)
             CHECK(item.length == 3 && item.frame[0] == 'a' + (char)i);
             CHECK(item.frame[1] == '\0' && item.frame[2] == 'z' && item.frame[3] == '\0');
             CHECK(item.delivery.session == 1 && item.delivery.received_at_ms == 123);
-            CHECK(item.delivery.enable_generation == 7 && !item.delivery.freshness_verified);
+            CHECK(item.delivery.enable_generation == 7 && item.delivery.proof.window == 9 && item.delivery.proof.intent == 42 &&
+                  item.delivery.proof.session == 1 && item.delivery.proof.enable_generation == 7);
         }
         CHECK(ct_inbox_take(&inbox, &item) == CT_EVENT_IDLE);
         /* Advance head by one to exercise every ring boundary. */

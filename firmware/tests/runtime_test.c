@@ -1,3 +1,4 @@
+#include "synthetic_proof.h"
 #include "cybertrack/runtime.h"
 #include "cybertrack/inputs.h"
 #include "cybertrack/inbox.h"
@@ -124,7 +125,7 @@ static bool message_with(const char *frame, ct_rpc_delivery delivery)
 
 static ct_rpc_delivery metadata(void)
 {
-    return (ct_rpc_delivery){protocol.session, board.now, runtime.control.enable_generation, true};
+    return ct_test_delivery(&protocol, protocol.session, board.now, runtime.control.enable_generation, true);
 }
 
 static bool message(const char *frame)
@@ -287,6 +288,7 @@ static void connection_and_enable_generations(void)
     CHECK(strstr(response.reply, "-32002"));
     /* A distinct intent still exercises the separate enable-generation gate. */
     const char water[] = "{\"type\":\"mcp\",\"payload\":{\"jsonrpc\":\"2.0\",\"id\":3,\"method\":\"tools/call\",\"params\":{\"name\":\"self.tank.water\",\"arguments\":{\"duration_ms\":5}}}}";
+    ++old.proof.intent; /* A genuinely distinct intent, with the old enable scope. */
     CHECK(message_with(water, old));
     CHECK(strstr(response.reply, "stale_local_enable"));
     off();

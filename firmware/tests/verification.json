@@ -1,6 +1,6 @@
 {
   "validation_date": "2026-10-23",
-  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation",
+  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity",
   "environment": {
     "os": "macOS arm64",
     "compiler": "Apple Clang 21.0.0",
@@ -13,7 +13,7 @@
     "ctest --test-dir build/firmware-host --output-on-failure"
   ],
   "ctest": {
-    "passed": 10,
+    "passed": 12,
     "failed": 0,
     "control_scenario_groups": 8,
     "protocol_test_methods": 24,
@@ -49,11 +49,13 @@
     "inbox_scenario_groups": 4,
     "parser_allocation_sweeps": 17,
     "parser_contract_recovery_groups": 3,
-    "link_scenario_groups": 13,
+    "link_scenario_groups": 14,
     "link_exhaustive_split_cases": 376,
     "protocol_stress_groups": 5,
     "replay_store_groups": 4,
-    "persistence_groups": 6
+    "persistence_groups": 6,
+    "freshness_window_tests": 1,
+    "freshness_integration_groups": 5
   },
   "sanitizers": {
     "address": "no error reported",
@@ -66,7 +68,7 @@
     "result": "passed",
     "test_injector_symbols": "absent from all four Release library archives (nm checked)"
   },
-  "protocol_object_bytes_host": 137392,
+  "protocol_object_bytes_host": 137448,
   "physical_outputs": false,
   "live_platform_connected": false,
   "not_verified": [
@@ -83,50 +85,52 @@
     "online idle heartbeat/liveness detection",
     "actual socket close/send race and cross-task synchronization",
     "actual Flash/NVS durability, wear, latency and OTA migration",
-    "server request ID uniqueness across reconnect and retry compatibility",
+    "authenticated producer stable intent lifecycle and retry mapping across sessions",
     "whole valid storage-image rollback, device/partition binding and maintenance recovery"
   ],
   "source_sha256": {
-    "firmware/CMakeLists.txt": "9958d0043c55447aa1dec72979beb2d0b83f9d03a78cf63bf441ecf2ef9bc901",
+    "firmware/CMakeLists.txt": "2a2d758d36ba6f5074fc8e1fb7693c9a44a4c7e22d46d046bcab9bf05e83400b",
     "firmware/include/cybertrack/control.h": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a",
     "firmware/include/cybertrack/inbox.h": "dd4b0937734c038bab26974ed084d457adaae04f1041ee64ac165817a80f6398",
     "firmware/include/cybertrack/inputs.h": "6e0cf7dc7023c5c885e5a4d4740fb06a4aa92fc707b4bc321fa35cfce4366d64",
-    "firmware/include/cybertrack/link.h": "2c8e3df0d3c6ec7956904935c3bef45e73d399147b915602341ffd29219a1695",
-    "firmware/include/cybertrack/protocol.h": "957df7abf49708a4d5169f4354da236e186de14050646a1319b568b236b382d2",
+    "firmware/include/cybertrack/link.h": "7317688493f0dd0c101a74f000d3735a727db79e149abc76d6c53f3181226e5a",
+    "firmware/include/cybertrack/protocol.h": "37eb38f1517b10c947507506d8ed7f3648d30b6661a00d10b4c9957f6607745d",
     "firmware/include/cybertrack/replay_store.h": "b37d5f12f69a8e53d86b733e54d674e68682ada4d88ff7e9b97305beb3ca156a",
-    "firmware/include/cybertrack/runtime.h": "39434f19e07f97f2c2aa411b1e868b7143127d25c0131182a69a971b006c3e0b",
+    "firmware/include/cybertrack/runtime.h": "15229b5b8e5efef30d6be680a3ed09976f2b7beb1817add732698abb1ad95724",
     "firmware/src/control.c": "2158325e95fa32622735ca7466a5580eaaac6dc23be142ee91b4e384adcf1ec9",
     "firmware/src/inbox.c": "aaf2fd321276b6abc26542b22cc353863f8701fb51aa04976f368ead2c16da25",
     "firmware/src/inputs.c": "e34b3b9815f3633ff81e2d52d259fbfee0c7558f86ae3080b4ce89c62a690679",
-    "firmware/src/link.c": "46994397effeec26761c4f61de070aff6eb0d826995635658bc454463147dc44",
-    "firmware/src/protocol.c": "29ba7444e91ba6cae0b2d3f994692c27e53f74427954fb03806e2c90801c3d16",
+    "firmware/src/link.c": "3f8f12fae098d61db7cf449946e000a1c59a78d1d5edc3a43eb549a24e5a0510",
+    "firmware/src/protocol.c": "65b2a6d598c163007eaed8ba41ec2ae5ee2e66fca8d17cb3948c7de2eef7beb4",
     "firmware/src/replay_store.c": "d8e6b0a25fdaa3d64192e6b7d24be8f5f1c727bf9316ccdb3b8732ddd1f082a2",
-    "firmware/src/runtime.c": "b7790f27b023e92244d568381dc32eedabc5cceb10f26c16e8ff9b12a77fc81f",
+    "firmware/src/runtime.c": "7acbcc427afe253ee3b758173a17a35418e7e755a9efd75c5e10c8693376e9bb",
     "firmware/tests/control_test.c": "e6c287ba766f4e5b54369aca3491a82e012e844fb863b30c989c6fc0983714d1",
     "firmware/tests/fake_store.c": "e2c6624f327a4875730065d738a2951cd7802b7ebf44916ae9270ca58c24e4fe",
     "firmware/tests/fake_store.h": "10cd01a27e18a0815a2eaf76a4dada54e3c3ba873d144b38a7cddf80094642fb",
     "firmware/tests/fault_allocator.c": "7fa1c7fa6a3e8114701769722cfdc449cc1c5033c8b1bde4211a3c24fb15ea1d",
     "firmware/tests/fault_allocator.h": "de8d17e0fcf3bbfcc41ed7dfb0777e3d4546bb9e275c9824c1a7e057036b46e7",
-    "firmware/tests/inbox_test.c": "b3dc2b32fe4949a77ba5fd0dd9bd669400e0f35fc687fd3c3e0191ccff1363c0",
+    "firmware/tests/inbox_test.c": "37b61faec40e08b5bbd0552e111ebb1c0a4109f0ce587194b590a7d32ca00136",
     "firmware/tests/inputs_test.c": "82e8d2f779add574a6421369e0f6b654d502fe6e8d9bf0bf69110d87a0f13b2d",
-    "firmware/tests/link_test.c": "579913223aabbd8cebfdfb86d2a2145d6c54083391ed5cf3553d2501324b40fb",
-    "firmware/tests/persistence_test.c": "fce4a4c1e18e1f29f5c801419c7862d3c950eab0d9e005453aecaf422dca7a74",
-    "firmware/tests/protocol_host.c": "e8bb1661ff139e38ebf1dec24094633898d521cb71d49781058938c5b5e4858b",
-    "firmware/tests/protocol_memory_test.c": "b45339a0f41ddb65dc4015f832e7598db4f512d51a238a19a27ccc09775924b2",
-    "firmware/tests/protocol_stress_test.c": "ea9ab356bf34138580bb18fb78f81b165b915172bf4b315c4136e37d61584f2f",
+    "firmware/tests/link_test.c": "2b172eee6ce29bf2d53e6eca96a2b819dcee8755d09071082237ebeb2affd66f",
+    "firmware/tests/persistence_test.c": "e46374280f9f8fc9560faaae2d2eff4af55f51fab999e624cc3eba80d572a807",
+    "firmware/tests/protocol_host.c": "886377ae47742d688cf526a7c1c8f479f38f270692f7aa9e3c063f65cd054748",
+    "firmware/tests/protocol_memory_test.c": "0b5ccb132d0287775136a40355161c06e75a1a753edd1a97bccb5d4115eacdf0",
+    "firmware/tests/protocol_stress_test.c": "d6a1f1bb7ebd0e6f9528a045eb5ab4d6984b603bc84580f2e3293530a457c379",
     "firmware/tests/protocol_test.py": "ee7199310b90dca013919eb30eb9928cbc1ae714ec0bb934f893a45a5749ed92",
     "firmware/tests/replay_store_test.c": "a33bb1b04cd52b4236e8a9171f74ce37159bf0b4964d3996680fbf4f112514ed",
-    "firmware/tests/runtime_test.c": "c64a7ab6c2d07f92c54653576b167df7d957c8c97e93d8dc880be61ed57281ee",
+    "firmware/tests/runtime_test.c": "1a62e5dd67b78d48a13b79838f5269539506b9d0351d9396bab09ca2fdcc9fcc",
     "firmware/third_party/yyjson/LICENSE": "45e384d3d52c73cba3a64d6e6c25d47cd738cd8a55c30629e3201046eda62947",
     "firmware/third_party/yyjson/yyjson.c": "d2d58ef0a3b2267862dc363832c4f3185fd375aea933d5d3419d1a940d6ece2e",
     "firmware/third_party/yyjson/yyjson.h": "ef803cda5c06b8962face6dfa39c3284b3bcf3e73f4d7317664690cc779679ca",
     "firmware/include/cybertrack/freshness.h": "11f9d48cb0234b87dfb1eaf14ed55eb065af82943189c6437763420d571e1ebe",
     "firmware/src/freshness.c": "840034798a04efcecd7db8eb706c7ad95517e2e93e0de3d99ab87325ecf83900",
-    "firmware/tests/freshness_test.c": "4a99ca5e1c355c83f0cd66c7787e2fbab346f33483d4b1799a61f085050da17f"
+    "firmware/tests/freshness_test.c": "4a99ca5e1c355c83f0cd66c7787e2fbab346f33483d4b1799a61f085050da17f",
+    "firmware/tests/synthetic_proof.h": "a12fe955eca68f23b303f08638c975ab08ac38b891284005dcda74e88f1366d1",
+    "firmware/tests/freshness_integration_test.c": "c12f4bbac1317fc8c062856b06539ae4a5fb1bb26d660c4eea65e937c0ed9b2a"
   },
   "f2_status": "partial: portable runtime, input filter and inbox verified on host; real board adapter and qualification pending",
-  "inbox_object_bytes_host": 8456,
-  "inbox_item_bytes_host": 2104,
+  "inbox_object_bytes_host": 8552,
+  "inbox_item_bytes_host": 2128,
   "allocation_failure_injection": {
     "allocator": "test-only per-instance allocator; default libc unchanged; vendored yyjson unchanged",
     "modes": [
@@ -262,7 +266,7 @@
       }
     ]
   },
-  "link_object_bytes_host": 21000,
+  "link_object_bytes_host": 21144,
   "link_tx_copy_bytes_host": 4120,
   "transport_simulation": {
     "api": "ct_link; normalized frame chunks, not raw TCP or an actual SDK adapter",
@@ -278,7 +282,8 @@
       "mixed two-level fragments",
       "interleaved Ping/Pong",
       "max 2048-byte message",
-      "gap/overlap/metadata drift rejection"
+      "gap/overlap/metadata drift rejection",
+      "origin proof copied at first chunk; later proof cannot upgrade or renew it"
     ],
     "timeouts": [
       "connect",
@@ -299,7 +304,7 @@
       "no resend",
       "stale ack isolation",
       "timeout starts at response creation",
-      "four lost-response recovery paths reject old action ID after handshake and manual enable"
+      "four lost-response recovery paths reject old RPC IDs and changed RPC IDs retaining stable intent after handshake and manual enable"
     ],
     "shutdown": "failure marks disconnect; next periodic service applies off; runtime callback deadline crossing rechecks disconnect before returning",
     "synthetic_limits_ms": {
@@ -317,20 +322,20 @@
       "https://linx.qiniu.com/docs/xrobot/platform/websocket"
     ]
   },
-  "f4_status": "partial: receive/lifecycle simulation verified offline; real SDK event mapping, TLS/hello, network binding, audio and freshness evidence pending",
+  "f4_status": "partial: receive/lifecycle and freshness/intent policy verified offline; real SDK, TLS/hello, authenticated proof producer, network binding and audio pending",
   "long_session_stress": {
     "test": "firmware/tests/protocol_stress_test.c",
     "groups": 5,
     "protocol_calls": 163522,
     "unique_action_intents": 20000,
-    "initial_actions_accepted": 19977,
-    "initial_filter_false_positives": 23,
+    "initial_actions_accepted": 19593,
+    "initial_filter_false_positives": 407,
     "continuous_status_requests": 100000,
     "max_size_status_frames": 100,
-    "filter_bits_after_reads": 219198,
+    "filter_bits_after_reads": 230561,
     "session_recoveries": 500,
-    "new_recovery_intents_accepted": 251,
-    "new_recovery_intents_rejected": 249,
+    "new_recovery_intents_accepted": 87,
+    "new_recovery_intents_rejected": 413,
     "replay_checks": 40502,
     "unexpected_action_replays": 0,
     "saturated_new_action_rejections": 1000,
@@ -343,7 +348,6 @@
     "response_eviction": "FIFO; hits do not refresh age",
     "replay_filter_bytes": 32768,
     "replay_filter_bits": 262144,
-    "replay_filter_positions_per_id": 4,
     "replay_filter_reset": "genuine boot only; never on close/open or local enable",
     "false_positives": "fail closed for actions; observed counts apply only to this deterministic corpus",
     "durable_across_reboot": false,
@@ -356,7 +360,9 @@
       "saturation permits read-only requests and stop",
       "no automatic retry, new-ID substitution, enable or filter reset"
     ],
-    "mode": "volatile compatibility mode; durable mode covered by persistence_test"
+    "mode": "volatile compatibility mode; durable mode covered by persistence_test",
+    "replay_filter_positions_per_identity": 4,
+    "identities": "canonical RPC ID and independent stable intent in shared monotone filter"
   },
   "persistence": {
     "phase": "storage and protocol/runtime integration verified with fake durable media",
@@ -368,9 +374,9 @@
     "heap_allocations": false,
     "real_storage_verified": false,
     "action_cut_cases": 264,
-    "cross_boot_replay_checks": 437,
+    "cross_boot_replay_checks": 438,
     "repeated_reset_cycles": 200,
-    "runtime_ordering_cases": 5,
+    "runtime_ordering_cases": 6,
     "unexpected_action_replays": 0,
     "readback_before_output": true,
     "restores_outputs_or_enable": false,
@@ -387,10 +393,11 @@
       "durable completion with error return",
       "slot corruption or absence",
       "output failure or lost response after durable reservation",
-      "runtime storage delay or local stop during sync"
+      "runtime storage delay or local stop during sync",
+      "durable reservation consumes freshness budget before physical-output callback"
     ],
     "limits": [
-      "same normalized request ID",
+      "same canonical RPC ID OR stable intent ID; authenticated origin proof required",
       "honest ordered durable sync backend",
       "no whole-image rollback or history erasure",
       "no exactly-once completion promise",
@@ -398,9 +405,34 @@
     ]
   },
   "freshness": {
-    "phase": "standalone window policy verified; protocol integration pending",
-    "test": "firmware/tests/freshness_test.c",
+    "phase": "protocol/link/runtime/persistence integration verified with synthetic producer and fake board/media",
+    "tests": [
+      "firmware/tests/freshness_test.c",
+      "firmware/tests/freshness_integration_test.c"
+    ],
+    "integration_groups": 5,
+    "protocol_calls": 435,
+    "rejection_assertions": 181,
+    "write_cut_cases": 72,
+    "unexpected_replays": 0,
+    "lost_response_new_rpc_id_paths": 4,
     "authentication_implemented": false,
-    "wall_clock_required": false
+    "wall_clock_required": false,
+    "new_heap_allocations": false,
+    "raw_boolean_authorization_removed": true,
+    "default_proof": "all zero; rejects actions",
+    "window_budget": "max_queue_ms from device issue to dispatch; output callback rechecked",
+    "intent_identity": "nonzero uint64 stable across RPC IDs, windows, reconnect and reboot",
+    "persistent_hash_namespace": "intent: plus 16 lowercase hex digits; v1 canonical RPC ID hashes unchanged",
+    "storage_format_changed": false,
+    "pre_upgrade_unrecorded_intents": "cannot reconstruct; old origin sessions rejected",
+    "known_limits": [
+      "producer must create intent AFTER receiving window",
+      "proof must be authenticated and bound to complete command/device by future adapter",
+      "old intent relabeled with new intent AND new valid window cannot be distinguished from a genuinely new command",
+      "cross-reset protection requires successful persistent store attachment",
+      "real SDK mapping, cryptography and physical timing unverified"
+    ],
+    "verification_runs": "final full 12/12 ASan/UBSan suite; Release libraries and test-symbol exclusion passed"
   }
 }
