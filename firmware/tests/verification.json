@@ -1,6 +1,6 @@
 {
   "validation_date": "2026-10-24",
-  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity, read-only capacity isolation and lossless offline replay-store migration, independent rollback-resistant anchor contract, atomic offline backend selection, guarded protocol attachment and non-reusable version reservation, explicit local maintenance recovery from exact anchored snapshots, incomplete-history refusal and interrupted recovery simulations",
+  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity, read-only capacity isolation and lossless offline replay-store migration, independent rollback-resistant anchor contract, atomic offline backend selection, guarded protocol attachment and non-reusable version reservation, explicit local maintenance recovery from exact anchored snapshots, incomplete-history refusal and interrupted recovery simulations, independent complete write-ahead recovery evidence with unique attempt epochs, missing-primary recovery, logged protocol attachment and interrupted journal simulations",
   "environment": {
     "os": "macOS arm64",
     "compiler": "Apple Clang 21.0.0",
@@ -13,7 +13,7 @@
     "ctest --test-dir build/firmware-host --output-on-failure"
   ],
   "ctest": {
-    "passed": 17,
+    "passed": 19,
     "failed": 0,
     "control_scenario_groups": 8,
     "protocol_test_methods": 24,
@@ -60,7 +60,9 @@
     "replay_switch_groups": 6,
     "switch_integration_groups": 5,
     "replay_recovery_groups": 5,
-    "recovery_integration_groups": 4
+    "recovery_integration_groups": 4,
+    "replay_log_groups": 6,
+    "log_integration_groups": 5
   },
   "sanitizers": {
     "address": "no error reported",
@@ -92,23 +94,24 @@
     "actual Flash/NVS durability, wear, latency and OTA migration",
     "authenticated producer stable intent lifecycle and retry mapping across sessions",
     "physical rollback-resistant atomic anchor, trusted device/backend identity, media independence and firmware downgrade prevention",
-    "recovery when the current anchored snapshot is absent, requiring additional complete recovery evidence; whole-anchor rollback or bypass by old firmware is outside the software guarantee"
+    "recovery without either an exact current primary snapshot or complete anchor-matching log; whole-anchor rollback or bypass by old firmware is outside the software guarantee",
+    "physical independent log isolation, epoch-only anchor CAS and journal wear/latency budget"
   ],
   "source_sha256": {
-    "firmware/CMakeLists.txt": "142e775602d0c888fdefaed82b34fb88cfd9d263a335538266ddf47673796676",
+    "firmware/CMakeLists.txt": "79eb195ade680d6cd88cbb396380de059dbb9528ea76c82574e286a646296f68",
     "firmware/include/cybertrack/control.h": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a",
     "firmware/include/cybertrack/inbox.h": "dd4b0937734c038bab26974ed084d457adaae04f1041ee64ac165817a80f6398",
     "firmware/include/cybertrack/inputs.h": "6e0cf7dc7023c5c885e5a4d4740fb06a4aa92fc707b4bc321fa35cfce4366d64",
     "firmware/include/cybertrack/link.h": "7317688493f0dd0c101a74f000d3735a727db79e149abc76d6c53f3181226e5a",
-    "firmware/include/cybertrack/protocol.h": "ef190de0101c97a4512b9bd48d55ba65daaa0e014f74ce7463e03d0b23f76d8e",
-    "firmware/include/cybertrack/replay_store.h": "5efc92a16b8345ce15e7f9484650fc6a14ddac00b62338e2b3cc50b4f98436c1",
+    "firmware/include/cybertrack/protocol.h": "38179d23096d2bfac65aad651d0d33d7273a9bd92551a3bed7cded360a733a60",
+    "firmware/include/cybertrack/replay_store.h": "caf27c2150b43d640b6dd59f6b6539a8043af0bfa5d32743adf52b59456f5756",
     "firmware/include/cybertrack/runtime.h": "15229b5b8e5efef30d6be680a3ed09976f2b7beb1817add732698abb1ad95724",
     "firmware/src/control.c": "2158325e95fa32622735ca7466a5580eaaac6dc23be142ee91b4e384adcf1ec9",
     "firmware/src/inbox.c": "aaf2fd321276b6abc26542b22cc353863f8701fb51aa04976f368ead2c16da25",
     "firmware/src/inputs.c": "e34b3b9815f3633ff81e2d52d259fbfee0c7558f86ae3080b4ce89c62a690679",
     "firmware/src/link.c": "3f8f12fae098d61db7cf449946e000a1c59a78d1d5edc3a43eb549a24e5a0510",
-    "firmware/src/protocol.c": "0ee261d94a56ea64a7e4fd2ac218efc80f7cc9d2b90dd4cbad4163e80c12489b",
-    "firmware/src/replay_store.c": "de2cd668657ad553248c47963ceacb1951a9a29fb982258e0ccc93cc66e94f0d",
+    "firmware/src/protocol.c": "3e1cc71cf996cfeab124fdca8578334e0528344e807ab70498c2282569649bfd",
+    "firmware/src/replay_store.c": "d9d32d3374fcbf38fb070828dde4496d907770671bf0cfe2602a2052f9191746",
     "firmware/src/runtime.c": "7acbcc427afe253ee3b758173a17a35418e7e755a9efd75c5e10c8693376e9bb",
     "firmware/tests/control_test.c": "e6c287ba766f4e5b54369aca3491a82e012e844fb863b30c989c6fc0983714d1",
     "firmware/tests/fake_store.c": "e2c6624f327a4875730065d738a2951cd7802b7ebf44916ae9270ca58c24e4fe",
@@ -134,12 +137,19 @@
     "firmware/tests/synthetic_proof.h": "a12fe955eca68f23b303f08638c975ab08ac38b891284005dcda74e88f1366d1",
     "firmware/tests/freshness_integration_test.c": "c12f4bbac1317fc8c062856b06539ae4a5fb1bb26d660c4eea65e937c0ed9b2a",
     "firmware/tests/replay_migration_test.c": "ebac5bacdd264d63bdb5e5c32473e7cbc59da78aabecde2b240d6e29cc9d134e",
-    "firmware/tests/fake_anchor.c": "18f8b19dca49d8990329023fa19138328b10ef95183e139bd23394b045088bb8",
+    "firmware/tests/fake_anchor.c": "acaa4d174659f536d89e711eba76e3415b3d6d3cba1527a80406421d1937718a",
     "firmware/tests/fake_anchor.h": "036e53ea9df58568315a612223b1b45cfe3de4e6b6824f8a656ba49ad8c2c5de",
     "firmware/tests/replay_switch_test.c": "5ee353d2d3125cd07c2724c32b643536e436e7dd500b16979b5b366bf4d6b433",
     "firmware/tests/switch_integration_test.c": "557080d2cd6f940feaba897785adebfc1f1f3c6274eb27bb8e303d46c4da47e1",
     "firmware/tests/replay_recovery_test.c": "e051c25a83ffa163f8ab5d85b0ade02ddbf71afa7eaecc23bdd1b25b23b825b4",
-    "firmware/tests/recovery_integration_test.c": "8f8a83fa75a7584c4470e42a3ee385ae00b952909d6aeaecc1027985a1540e31"
+    "firmware/tests/recovery_integration_test.c": "8f8a83fa75a7584c4470e42a3ee385ae00b952909d6aeaecc1027985a1540e31",
+    "firmware/include/cybertrack/replay_log.h": "3ac2543a1478b884ffee3ec407acd625424ea2fe42a7166b57b332a59bac9391",
+    "firmware/src/replay_log.c": "afbb22c1cdc9c2a6cee99a6757889d54af313f63f0768362adcc4798240864fd",
+    "firmware/src/replay_log_internal.h": "a7227d1c856f478021e2493e23c1ff19c7c3b406be3ad75857e283e878851e8d",
+    "firmware/tests/fake_log.c": "a37c90c0e4c6042bf86b8bea8ae3cc8a502fd50249edfd3d4232cdb9708169ef",
+    "firmware/tests/fake_log.h": "a0e00c9bd16393a88acc33bcc6fa887c07462c54c98c4c70de9ac28288d691f1",
+    "firmware/tests/replay_log_test.c": "bc9eb012330b121dd8a997358f9e7edcc67d39513b2fe20dbc19d3189831f867",
+    "firmware/tests/log_integration_test.c": "d8e55d17ed2d61063e485569a22358a4e0054d3f82ff7525149f360e68f6d782"
   },
   "f2_status": "partial: portable runtime, input filter and inbox verified on host; real board adapter and qualification pending",
   "inbox_object_bytes_host": 8552,
@@ -379,7 +389,7 @@
   },
   "persistence": {
     "phase": "storage and protocol/runtime integration verified with fake durable media",
-    "store_object_bytes_host": 65696,
+    "store_object_bytes_host": 65704,
     "slot_bytes": 32800,
     "media_bytes": 65600,
     "cut_cases": 278,
@@ -519,7 +529,7 @@
     "runtime_ordering_cases": 6,
     "rejection_assertions": 732,
     "unexpected_replays": 0,
-    "store_object_bytes_host": 65696,
+    "store_object_bytes_host": 65704,
     "additional_store_object_bytes_host": 56,
     "new_heap_allocations": false,
     "anchor_fields": [
@@ -527,13 +537,6 @@
       "backend_id",
       "revision",
       "session"
-    ],
-    "save_order": [
-      "read/compare anchor",
-      "atomically reserve never-reused next revision and read back anchor",
-      "write/sync/read back media",
-      "final anchor match",
-      "publish session or accept action"
     ],
     "switch_order": [
       "outputs off and source protocol retired",
@@ -554,9 +557,16 @@
     "known_limits": [
       "raw unanchored APIs retained only for offline compatibility",
       "first enrollment locally attests imported history; cannot establish pre-enrollment non-rollback",
-      "partial version reservation without an exact anchored snapshot remains locked; local maintenance can recover only complete matching history",
+      "partial version reservation requires either an exact current snapshot or independently persisted complete log matching all current anchor fields",
       "callbacks must be bounded and serialized; cannot preempt a blocked anchor/media operation",
       "whole-anchor rollback, forged trusted identity, data forgery with valid CRC or old firmware bypass require platform protection"
+    ],
+    "save_order_without_log": [
+      "read/compare anchor",
+      "atomically reserve never-reused next revision and read back anchor",
+      "write/sync/read back media",
+      "final anchor match",
+      "publish session or accept action"
     ]
   },
   "maintenance_recovery": {
@@ -580,13 +590,13 @@
     "source_mutations": 0,
     "history_bits_removed": 0,
     "new_heap_allocations": false,
-    "store_object_bytes_host": 65696,
+    "store_object_bytes_host": 65704,
     "normal_boot_policy_changed": false,
     "wire_format_changed": false,
     "anchor_layout_changed": false,
     "evidence": "complete valid snapshot on the currently selected trusted backend, exact anchored revision and session; reject valid contradictory companion history",
     "repairable": "current snapshot is complete even if its companion is damaged/blank or the prior call returned failure",
-    "not_repairable": "anchor points to N while only N-1 or partial N survives; cannot distinguish interruption from rollback of accepted actions",
+    "not_repairable": "anchor points to N while only N-1 or partial N survives; cannot distinguish interruption from rollback of accepted actions; see independent_recovery_log for the separate full-evidence recovery path",
     "order": [
       "outputs off and all protocol owners retired",
       "re-read anchor and source snapshot",
@@ -602,9 +612,80 @@
     "remote_recovery_tool": false,
     "physical_backend_verified": false,
     "remaining": [
-      "independent complete recovery evidence for absent current snapshots",
       "actual local maintenance authorization and board integration",
       "physical anchor durability/rollback resistance, media isolation, latency and firmware downgrade protection"
+    ]
+  },
+  "independent_recovery_log": {
+    "apis": [
+      "ct_replay_log_init",
+      "ct_replay_store_attach_log",
+      "ct_replay_store_recover_log",
+      "ct_protocol_attach_logged_store"
+    ],
+    "tests": [
+      "firmware/tests/replay_log_test.c",
+      "firmware/tests/log_integration_test.c"
+    ],
+    "storage_groups": 6,
+    "protocol_runtime_groups": 5,
+    "storage_log_cut_cases": 132,
+    "storage_primary_cut_cases": 72,
+    "storage_anchor_cut_cases": 12,
+    "storage_recovery_target_cut_cases": 168,
+    "single_bit_corruptions": 88,
+    "integration_log_cut_cases": 132,
+    "integration_primary_cut_cases": 72,
+    "integration_action_anchor_cut_cases": 12,
+    "integration_open_anchor_cut_cases": 12,
+    "integration_recovery_cut_cases": 176,
+    "repeated_missing_primary_recoveries": 100,
+    "runtime_ordering_cases": 6,
+    "rejection_assertions": 2280,
+    "unexpected_replays": 0,
+    "history_bits_lost": 0,
+    "source_and_log_unchanged_during_recovery": true,
+    "protocol_object_bytes_host": 137448,
+    "store_object_bytes_host": 65704,
+    "log_object_bytes_host": 32864,
+    "primary_media_bytes": 65600,
+    "log_slot_bytes": 32816,
+    "log_media_bytes": 65632,
+    "log_format": "CTLG v1: epoch/backend/revision/session, full 32768-byte filter, CRC32, DONE",
+    "primary_wire_format_changed": false,
+    "anchor_layout_changed": false,
+    "new_heap_allocations": false,
+    "anchor_contract_extension": "support epoch-only CAS with identical backend, revision and session; compare all four fields",
+    "save_order": [
+      "compare current anchor",
+      "CAS/readback unique attempt epoch with unchanged data identity",
+      "write/sync/commit/sync/readback full log for next epoch and data revision",
+      "CAS/readback selected data revision",
+      "write/sync/readback primary",
+      "final anchor match",
+      "publish session or accept action"
+    ],
+    "recovery_order": [
+      "outputs off and all owners retired",
+      "read anchor and validate source identity",
+      "read exact anchor-matching log; no primary reads",
+      "recheck anchor and blank independent target",
+      "copy complete history to two fresh revisions with durable readback",
+      "atomically select target and read back anchor",
+      "rebind target and log in a new protocol, persist new session, initialize and wait for local enable"
+    ],
+    "failed_candidate_regression": "different content after a failed candidate uses a new attempt epoch; old log cannot match the selected record even when its data revision is reused",
+    "preparation_limit": "after epoch-only allocation but before data revision reservation, primary remains unchanged/current; unselected candidates and prior-epoch logs are not recovery evidence if primary is also independently lost",
+    "automatic_recovery": false,
+    "automatic_erase": false,
+    "remote_recovery_tool": false,
+    "real_log_backend_implemented": false,
+    "physical_power_loss_tested": false,
+    "remaining": [
+      "board log/primary/anchor isolation",
+      "rollback-resistant epoch-only CAS and firmware downgrade protection",
+      "Flash durability, wear and bounded sync latency",
+      "local maintenance authorization and trusted source/target mapping"
     ]
   }
 }
