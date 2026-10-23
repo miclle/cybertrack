@@ -239,3 +239,56 @@ bool ct_replay_store_switch(ct_replay_store *src, ct_replay_store *dst, uint64_t
     fault(src);
     return advance_anchor(dst, next);
 }
+
+
+ct_replay_recovery_result ct_replay_store_recover(
+    ct_replay_store *src, ct_replay_anchor_io anchor, uint64_t source_id,
+    ct_replay_store *dst, uint64_t destination_id)
+{
+    if (!src || !dst || src == dst || !src->io.read || !anchor.read || !anchor.replace ||
+        dst->state != CT_STORE_EMPTY || dst->anchor_bound || !dst->io.read ||
+        !dst->io.erase || !dst->io.write || !dst->io.sync ||
+        !source_id || !destination_id || source_id == destination_id ||
+        src->io.context == dst->io.context) return CT_RECOVERY_BAD_ARGUMENT;
+    fault(src); fault(dst); /* No operational owner survives a maintenance attempt. */
+    ct_replay_anchor_record selected = {0}, current = {0};
+    if (!anchor.read(anchor.context, &selected) || !selected.epoch ||
+        !selected.backend_id || selected.revision < 2 || selected.session >= selected.revision)
+        return CT_RECOVERY_ANCHOR_UNAVAILABLE;
+    if (selected.backend_id != source_id) return CT_RECOVERY_WRONG_BACKEND;
+    if (selected.epoch == UINT64_MAX || selected.revision > UINT64_MAX - 2)
+        return CT_RECOVERY_EXHAUSTED;
+
+    /* An exact anchor match is the evidence. A merely adjacent older revision
+     * may omit an accepted action after image rollback and is never enough. */
+    unsigned slot = (unsigned)((selected.revision - 1) % 2);
+    unsigned char *p = src->scratch;
+    if (!src->io.read(src->io.context, slot, 0, p, sizeof(src->scratch)) ||
+        !valid(p, slot) || get64(p + 8) != selected.revision ||
+        get64(p + 16) != selected.session) return CT_RECOVERY_HISTORY_UNAVAILABLE;
+    memcpy(src->filter, p + FILTER_OFFSET, CT_REPLAY_BYTES);
+    if (!src->io.read(src->io.context, 1 - slot, 0, p, sizeof(src->scratch)))
+        return CT_RECOVERY_HISTORY_UNAVAILABLE;
+    /* A corrupt/blank companion is the repairable case. Readable valid history
+     * that is newer or contains missing bits is contradictory, not disposable. */
+    if (valid(p, 1 - slot) && (get64(p + 8) >= selected.revision ||
+        get64(p + 16) > selected.session || !superset(src->filter, p + FILTER_OFFSET)))
+        return CT_RECOVERY_HISTORY_CONFLICT;
+    if (!anchor.read(anchor.context, &current) || !same_record(selected, current))
+        return CT_RECOVERY_ANCHOR_UNAVAILABLE;
+
+    for (unsigned i = 0; i < 2; ++i) {
+        if (!dst->io.read(dst->io.context, i, 0, dst->scratch, sizeof(dst->scratch)) ||
+            !blank(dst->scratch)) return CT_RECOVERY_DESTINATION_UNAVAILABLE;
+    }
+    for (uint64_t offset = 1; offset <= 2; ++offset) {
+        uint64_t revision = selected.revision + offset;
+        if (!write_slot(dst, (unsigned)((revision - 1) % 2), revision, selected.session, src->filter))
+            return CT_RECOVERY_DESTINATION_UNAVAILABLE;
+    }
+    dst->anchor_bound = true; dst->anchor = anchor; dst->selected = selected;
+    ct_replay_anchor_record next = {selected.epoch + 1, destination_id, dst->revision, dst->session};
+    if (!advance_anchor(dst, next)) return CT_RECOVERY_SELECTION_UNCERTAIN;
+    dst->state = CT_STORE_READY;
+    return CT_RECOVERY_OK;
+}
