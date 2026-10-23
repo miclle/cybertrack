@@ -2,7 +2,7 @@
 
 固件可与机械设计并行推进。当前已实现可在电脑上编译的 C11 控制核心、F1 离线 MCP 协议适配，以及 F2a 与板型无关的启动／运行层、输入处理、有界接收队列、分片／连接流程模拟和假板卡测试，尚无可烧录的 ESP32 工程，未控制任何实体硬件。独立路线和退出条件见[实施计划](PLAN.md)，消息边界见[协议契约](PROTOCOL.md)，F2b 所需输入见[开发板资料清单](BOARD-INFO.md)。
 
-候选框架为 ESP-IDF，主控已指定 ESP32-S3 N16R8，见[采购记录 P07](../hardware/procurement.md)。具体开发板修订版、原理图、音频器件和 GPIO 尚未确定，Flash／PSRAM 配置需与实物核对；当前不锁定 SDK 版本、不创建 board 配置。
+候选框架为 ESP-IDF，主控已指定 ESP32-S3 N16R8，见[采购记录 P07](../hardware/procurement.md)。[COREBOARD 原理图、排针和尺寸](../hardware/components/ESP32-S3-N16R8/README.md)已整理；实物修订版、焊装、音频器件及项目 GPIO 分配待确定，Flash／PSRAM 标称 16 MB Quad SPI／8 MB Octal SPI，仍需与实物核对；当前不锁定 SDK 版本、不创建 board 配置。
 
 ## 本地编译与验证
 

@@ -21,7 +21,8 @@
 
 | 入口 | 内容 | 证据级别 |
 |---|---|---|
-| [硬件采购清单](../hardware/procurement.md) | 十项商品名称、链接及待补采购信息，含 ESP32-S3 N16R8、履带、水枪和泡泡机 | 用户提供；京东及淘宝详情未能读取，未独立核实规格 |
+| [硬件采购清单](../hardware/procurement.md) | 十一项商品名称、链接及待补采购信息；P07 已更新天猫 SKU | P07 页面选项及本地资料已读取，实物未核实；其余京东及淘宝页面详情未取得 |
+| [ESP32-S3 N16R8](../hardware/components/ESP32-S3-N16R8/README.md) | COREBOARD 原理图两版本、44 针表、毫米／mil 尺寸、存储与 USB 限制及 SHA-256 回读 | 用户提供的供应商资料；已回读，实物版本／焊装与电气验收未确认 |
 | [37R-520](../hardware/components/37R-520/README.md) | 参数、尺寸、编码器、联轴器与支架图片 | 商家图片标称；未重新实测 |
 | [DF-MD V1.3](../hardware/components/DF-MD-V1.3/README.md) | 原理图、数据手册及板卡图片 | 厂商资料；原理图标题栏 V1.4 |
 | [track-mount](../hardware/components/track-mount/README.md) | FCStd、STEP、图片和尺寸 JSON | 已有测量记录与形状假设；本次未重新测量 |
