@@ -37,7 +37,7 @@ int main() {
     a = g.Claim(10068, 1); assert(a);
     assert(is(g.Request(15068, a, 5000), "stale_request"));
     a = g.Claim(15069, 2); assert(a);
-    assert(is(g.Request(15069, a, 5001), "duration_must_match_5000ms_intent"));
+    assert(is(g.Request(15069, a, 30001), "duration_out_of_range"));
     assert(!g.policy.active);
     g.Tick(15070, true, false); g.Tick(14000, true, false);
     assert(g.policy.clock_fault && !g.Claim(15071, 3));
@@ -50,5 +50,31 @@ int main() {
     assert(!reboot.Claim(0, 1));
     reboot.Tick(40, true, false);
     assert(!reboot.policy.active && !reboot.policy.armed);
-    std::cout << "PASS: direct voice, deadline, busy/cooldown, BOOT/stop queue cancellation, reconnect, replay, expiry, clock fault\n";
+    for (int duration : {1, 500, 1000, 7000, 30000}) {
+        AudioWaterGuard timed; timed.Tick(0, true, false);
+        int t = timed.Claim(0, 1);
+        assert(is(timed.Request(0, t, duration), "accepted"));
+        assert(timed.last_duration_ms == static_cast<unsigned>(duration));
+        assert(timed.policy.ends_at == static_cast<unsigned>(duration));
+        assert(!timed.Claim(0, 2)); // New RPC cannot extend the running deadline.
+        assert(is(timed.Request(0, t, 30000), "cancelled_or_duplicate"));
+        timed.Tick(duration - 1, true, false); assert(timed.policy.active);
+        timed.Tick(duration, true, false); assert(!timed.policy.active);
+    }
+    for (int invalid : {0, -1, 30001, INT_MAX, INT_MIN}) {
+        AudioWaterGuard timed; timed.Tick(0, true, false);
+        int t = timed.Claim(0, 1);
+        assert(is(timed.Request(0, t, invalid), "duration_out_of_range"));
+        assert(!timed.policy.active && !timed.policy.armed && timed.policy.starts == 0);
+    }
+    for (bool offline : {false, true}) {
+        AudioWaterGuard timed; timed.Tick(0, true, false);
+        int t = timed.Claim(0, 1);
+        assert(is(timed.Request(0, t, 30000), "accepted"));
+        timed.Tick(1000, !offline, !offline);
+        assert(!timed.policy.active);
+        timed.Tick(2000, true, false);
+        assert(!timed.policy.active && !timed.policy.armed);
+    }
+    std::cout << "PASS: direct voice 1..30000ms, range rejection, deadline, busy/cooldown, BOOT/stop queue cancellation, reconnect, replay, expiry, clock fault\n";
 }

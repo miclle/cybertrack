@@ -56,3 +56,6 @@ Clang／GCC 可在首次配置时加 `-DCMAKE_C_FLAGS='-fsanitize=address,undefi
 
 
 独立音频板的[适配层](esp32-audio/README.md)保留“小D”的原语音、OLED 与绑定。ct2 状态／停止语音联调已通过；ct4 增加 GPIO18 五秒输出并取消逐次按键授权，BOOT 仅停止。功率断开信号检查与带载结果分开，此前未喷水已定位为控制端两线接反，用户纠正后反馈测试正常；带载 BOOT 提前停止及松开不恢复已获用户确认，见[音频板喷水记录](../docs/audio-water-validation.md)。
+
+
+2026-10-24 后续时长调整：音频板 ct5 改为按用户指定时长执行，单次最多 30 秒，保留 BOOT／语音停止及断线关断；未指定时长先询问，不循环补足超限请求。此调整仅适用于音频板，原固定五秒台架结果保留为历史证据；ct5 语音验证及 30 秒带载边界见[喷水记录](../docs/audio-water-validation.md)。

@@ -39,16 +39,19 @@ public:
             if (!r.pending) return "cancelled_or_duplicate";
             r.pending = false;
             if (now < r.received || now - r.received >= 5000) return "stale_request";
-            if (duration != WATER_MS) return "duration_must_match_5000ms_intent";
+            if (duration < 1 || duration > static_cast<int>(WATER_MAX_TIMED_MS)) return "duration_out_of_range";
             // Reuse the bounded policy atomically, without exposing a permit.
             char nonce[33];
             std::snprintf(nonce, sizeof(nonce), "%032x", static_cast<unsigned>(ticket));
             if (!water_arm(&policy, now, nonce)) return "not_ready_or_busy";
-            return water_request(&policy, now, nonce, duration);
+            const char* result = water_request_timed(&policy, now, nonce, duration);
+            if (policy.active) last_duration_ms = duration;
+            return result;
         }
         return "cancelled_or_duplicate";
     }
     water_policy policy{};
+    unsigned last_duration_ms = 0;
 private:
     struct RequestRecord { int rpc_id = 0, ticket = 0; uint64_t received = 0; bool pending = false; };
     // Fail closed if one audio session exhausts the replay table; never evict IDs.
