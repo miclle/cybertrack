@@ -145,6 +145,12 @@ static void interrupted_selection(void)
             CHECK(!anchor.durable.epoch); reboot(); enroll();
             lose_one_and_recover(op%2,history); ++enrollments;
         }
+    for(unsigned op=1;op<=4;++op) for(unsigned committed=0;committed<2;++committed) {
+        start(); anchor.fail_at=anchor.calls+op; anchor.commit_on_failure=committed!=0;
+        CHECK(!ct_replay_store_enroll_logged(&stores[0],&log_store,ct_test_anchor_io(&anchor),1));
+        reboot(); if(!anchor.durable.epoch) enroll();
+        lose_one_and_recover(op%2,history); ++anchor_cuts;
+    }
     baseline();
     for(unsigned mode=0;mode<2;++mode) for(unsigned op=5;op<=16;++op)
         for(unsigned durable=0;durable<2;++durable) for(size_t b=0;b<sizeof(edges)/sizeof(edges[0]);++b) {
