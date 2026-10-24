@@ -4,6 +4,8 @@
 
 无负载检查工程固定 ESP-IDF v5.5.1，主控已指定 ESP32-S3 N16R8，见[采购记录 P07](../hardware/procurement.md)。[COREBOARD 原理图、排针和尺寸](../hardware/components/ESP32-S3-N16R8/README.md)已整理；实物修订版、焊装、音频器件及项目 GPIO 分配待确定，Flash／PSRAM 已识别为 16 MB／8 MB，无负载配置为 Flash DIO 40 MHz、PSRAM Octal 40 MHz；具体实测结果见[实物核对](../hardware/components/ESP32-S3-N16R8/physical-verification.md)。
 
+2026-10-24 用户授权新增[DF-MD GPIO 台架工程](esp32-motor-bench/README.md)，用于本地串口人工触发单电机短脉冲；与上述无负载工程并列，不开放网络动作。GPIO4／5 为临时台架分配，已烧录并确认 BENCH READY，尚未带载验证，缺少外部下拉的复位与失电边界见工程说明。
+
 2026-10-24 新增[独立 MOS 台架工程](esp32-mos-bench/README.md)：GPIO4 持续高电平单次 5 秒（0.1.1，用户要求延长），串口 a／g 触发、s／BOOT 停止；主机策略测试和 ESP-IDF 编译通过，已烧录并在引脚空接下取得一次命令及关闭回执。与电机工程互斥使用 GPIO4；用户已观察控制端 0 V→约 3 点几伏→0 V，并确认一次 5 秒正常喷水及自动停止。带载参数、重复性与失电／复位边界仍待验证。
 
 ## 本地编译与验证
