@@ -15,6 +15,7 @@ from refine_assembly import refine, service_groups, check_service_paths
 from controller_layout import check_controller_spaces
 from water_gun_layout import add_water_gun, check_water_gun, check_other_service_sweeps
 from bubble_gun_layout import add_bubble_gun, check_bubble_gun
+from ultrasonic_layout import add_ultrasonic, check_ultrasonic, render_ultrasonic
 from speaker_layout import speaker_shape, check_speaker, render_speaker, LABEL as SPEAKER_LABEL, BASIS as SPEAKER_BASIS
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -248,7 +249,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.25'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.26'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -383,10 +384,6 @@ def main():
     rear_head_inner=[(-43,160),(-36,179),(36,179),(43,160),(31,155),(-31,155)]
     head=head.cut(rear_profile(rear_head_outer,21,40))
     add('HeadShell','切面头盔／收窄下颌与后掠顶壳',head,'exterior')
-    mask=face_profile(inner_mask,-65,-62)
-    for cx in (-29,29):
-        mask=mask.cut(Part.makeCylinder(8.5,6,V(cx,-84,167),V(0,1,0)))
-    add('SensorMask','内嵌楔形传感器面板',mask,'exterior','visor')
     rim=face_profile(outer_mask,-69,-65).cut(face_profile(inner_mask,-70,-64))
     add('VisorRim','六边形前脸内框',rim,'exterior','dark')
     for side,sign in [('L',1),('R',-1)]:
@@ -395,10 +392,6 @@ def main():
         cheek=[(sign*x,z) for x,z in [(39,151),(59,157),(64,171),(67,167),(64,151),(47,143),(36,143)]]
         cheek_shape=face_profile(cheek,-72,-68)
         add('CheekArmor'+side,('左' if sign>0 else '右')+'斜切颊部护板',cheek_shape,'exterior','metal')
-        cx=sign*29
-        add('UltrasonicRing'+side,'嵌入式超声波探头框 '+side,ring(8.5,7.5,2,V(cx,-83,167),V(0,1,0)),'exterior','metal','P04 位置及尺寸假设；不是已经选型的传感器')
-        add('UltrasonicFace'+side,'超声波探头暗面 '+side,Part.makeCylinder(7.5,1,V(cx,-82,167),V(0,1,0)),'exterior','dark')
-    add('SensorStatusStrip','前脸中部窄状态色条',box(-10,-81.5,172,10,-81,173),'exterior','signal','色块示意；不是已选定灯具')
     jaw=face_profile([(-33,143),(-36,150),(-20,152),(20,152),(23,144),(8,140),(-21,140)],-71,-67.5)
     add('JawArmor','多面下颌中央护片',jaw,'exterior','dark')
     add('JawAccent','下颌偏侧识别片',face_profile([(-28,144),(-29,147),(-15,147),(-14,144)],-71.5,-71),'exterior','accent')
@@ -477,6 +470,9 @@ def main():
     for obj in doc.Objects:
         if hasattr(obj,'Category') and obj.Name not in head_start:
             shape=obj.Shape.copy();shape.translate(V(0,0,-4));obj.Shape=shape
+    mask=face_profile(inner_mask,-65,-62)
+    mask.translate(V(0,0,-4))
+    add_ultrasonic(add,mask)
     # Passive effect-location mockups: widen the existing swept ribs into recessed
     # crown housings. No electrodes, conductor geometry or electrical gap is defined.
     for side,sign in [('L',1),('R',-1)]:
@@ -676,6 +672,7 @@ def main():
     if args.render:
         render_views(saved, OUT)
         render_speaker(saved, OUT)
+        render_ultrasonic(saved, OUT)
         saved.save()
     # Reopen the final saved file after GUI styling; verify geometry and visibility.
     App.closeDocument(saved.Name)
@@ -700,7 +697,7 @@ def main():
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
                     assert visible==(final_shapes[name].Category not in ('envelope','clearance')),name
     assert sha(source_path)==source_hash
-    report={'status':'preliminary_concept','design_revision':'0.25','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.26','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'rear_hose_pass_through':rear_hose_port,
             'bubble_pod_hose_pass_through':{'diameter_mm':bubble_hose_diameter,'axis_origin_mm':[24,50,76],
                 'axis_direction':[0,1,0],'former_outlet_diameter_mm':25,
@@ -738,11 +735,15 @@ def main():
             'bubble_gun_layout':bubble_info,'bubble_gun_check':bubble_check,'gun_pitch':pitch_info,
             'service_paths':service_check,'controller_layout':controller_info,'controller_clearance_check':controller_check,
             'speaker_check':check_speaker(final),
+            'ultrasonic_check':check_ultrasonic(final),
             'manufacturing_released':False,'physical_fit_verified':False,
             'assembly_paths_verified':False,'electrical_verified':False,
             'final_saved_audit':{'native_objects_verified':len(final_shapes),'gui_visibility_verified':args.render},
             'previews_generated':args.render,
             'files_sha256':{p.name:sha(p) for p in [cad,step]+(sorted(OUT.glob('*.png')) if args.render else [])}}
+    report['ultrasonic_check']['source_after_sha256']=sha(cad)
+    report['ultrasonic_check']['saved_and_reopened']=True
+    (OUT/'ultrasonic-fit-audit.json').write_text(json.dumps(report['ultrasonic_check'],ensure_ascii=False,indent=2)+'\n')
     report['speaker_check']['source_after_sha256']=sha(cad)
     report['speaker_check']['saved_and_reopened']=True
     (OUT/'speaker-fit-audit.json').write_text(json.dumps(report['speaker_check'],ensure_ascii=False,indent=2)+'\n')
@@ -755,7 +756,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if not report['speaker_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
+    if not report['ultrasonic_check']['passed'] or not report['speaker_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 

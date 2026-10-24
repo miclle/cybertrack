@@ -1,0 +1,228 @@
+{
+  "source": "hardware/components/ultrasonic/dimensions.json",
+  "diameter_mm": 16,
+  "outer_span_mm": 42,
+  "height_from_panel_mm": 10.3,
+  "derived_center_spacing_mm": 26,
+  "derived_gap_mm": 10,
+  "center_x_mm": [
+    -13.0,
+    13.0
+  ],
+  "center_z_mm": 163.0,
+  "panel_datum_y_mm": -81.0,
+  "probe_front_y_mm": -91.3,
+  "datum_is_assumption": true,
+  "datum_description": "robot front-panel outer face; user panel datum not confirmed",
+  "candidate_hole_diameter_mm": 16.6,
+  "nominal_radial_gap_mm": 0.3,
+  "panel_valid": true,
+  "panel_solids": 1,
+  "probes": [
+    {
+      "side": "L",
+      "bbox_mm": [
+        5.0,
+        -91.3,
+        155.0,
+        21.0,
+        -81.0,
+        171.0
+      ],
+      "valid": true,
+      "solids": 1,
+      "cylinder_difference_mm3": 0.0,
+      "visual_parts_overlap_mm3": 0.0
+    },
+    {
+      "side": "R",
+      "bbox_mm": [
+        -21.0,
+        -91.3,
+        155.0,
+        -5.0,
+        -81.0,
+        171.0
+      ],
+      "valid": true,
+      "solids": 1,
+      "cylinder_difference_mm3": 0.0,
+      "visual_parts_overlap_mm3": 0.0
+    }
+  ],
+  "overlap_tolerance_mm3": 0.01,
+  "static_boolean_pairs": 8,
+  "overlaps": [],
+  "reserved_space_overlaps": [],
+  "nearby_distances": [
+    {
+      "probe": "L",
+      "object": "SensorMask",
+      "category": "exterior",
+      "distance_mm": 0.30000000000001137
+    },
+    {
+      "probe": "R",
+      "object": "SensorMask",
+      "category": "exterior",
+      "distance_mm": 0.30000000000001137
+    },
+    {
+      "probe": "L",
+      "object": "VisorRim",
+      "category": "exterior",
+      "distance_mm": 2.0
+    },
+    {
+      "probe": "R",
+      "object": "VisorRim",
+      "category": "exterior",
+      "distance_mm": 2.0
+    },
+    {
+      "probe": "R",
+      "object": "SensorStatusStrip",
+      "category": "exterior",
+      "distance_mm": 2.735455276791933
+    },
+    {
+      "probe": "L",
+      "object": "SensorStatusStrip",
+      "category": "exterior",
+      "distance_mm": 2.735455276791934
+    },
+    {
+      "probe": "R",
+      "object": "BrowArmorR",
+      "category": "exterior",
+      "distance_mm": 4.88960957256605
+    },
+    {
+      "probe": "L",
+      "object": "BrowArmorL",
+      "category": "exterior",
+      "distance_mm": 4.889609572566055
+    },
+    {
+      "probe": "L",
+      "object": "HeadShell",
+      "category": "exterior",
+      "distance_mm": 6.0
+    },
+    {
+      "probe": "R",
+      "object": "HeadShell",
+      "category": "exterior",
+      "distance_mm": 6.0
+    },
+    {
+      "probe": "L",
+      "object": "JawArmor",
+      "category": "exterior",
+      "distance_mm": 7.0
+    },
+    {
+      "probe": "R",
+      "object": "JawArmor",
+      "category": "exterior",
+      "distance_mm": 7.0
+    },
+    {
+      "probe": "L",
+      "object": "AudioModule",
+      "category": "envelope",
+      "distance_mm": 8.25
+    },
+    {
+      "probe": "R",
+      "object": "AudioModule",
+      "category": "envelope",
+      "distance_mm": 8.25
+    },
+    {
+      "probe": "L",
+      "object": "Electronics",
+      "category": "envelope",
+      "distance_mm": 9.0
+    },
+    {
+      "probe": "R",
+      "object": "Electronics",
+      "category": "envelope",
+      "distance_mm": 9.0
+    },
+    {
+      "probe": "R",
+      "object": "BrowArmorL",
+      "category": "exterior",
+      "distance_mm": 9.691806012954133
+    },
+    {
+      "probe": "L",
+      "object": "BrowArmorR",
+      "category": "exterior",
+      "distance_mm": 9.691806012954135
+    },
+    {
+      "probe": "L",
+      "object": "UltrasonicRingR",
+      "category": "component",
+      "distance_mm": 10.0
+    },
+    {
+      "probe": "R",
+      "object": "UltrasonicRingL",
+      "category": "component",
+      "distance_mm": 10.0
+    },
+    {
+      "probe": "L",
+      "object": "HeadCrownShell",
+      "category": "exterior",
+      "distance_mm": 10.25
+    },
+    {
+      "probe": "R",
+      "object": "HeadCrownShell",
+      "category": "exterior",
+      "distance_mm": 10.25
+    },
+    {
+      "probe": "L",
+      "object": "UltrasonicFaceR",
+      "category": "component",
+      "distance_mm": 10.75
+    },
+    {
+      "probe": "R",
+      "object": "UltrasonicFaceL",
+      "category": "component",
+      "distance_mm": 10.75
+    },
+    {
+      "probe": "L",
+      "object": "ElectronicsTray",
+      "category": "structure",
+      "distance_mm": 11.800423721205947
+    },
+    {
+      "probe": "R",
+      "object": "ElectronicsTray",
+      "category": "structure",
+      "distance_mm": 11.800423721205947
+    },
+    {
+      "probe": "R",
+      "object": "JawAccent",
+      "category": "exterior",
+      "distance_mm": 12.615528128088298
+    }
+  ],
+  "passed": true,
+  "pcb_and_rear_components_modeled": false,
+  "mounting_verified": false,
+  "physical_fit_verified": false,
+  "acoustic_verified": false,
+  "source_after_sha256": "54f0950390a14b50561ae82bcc7cf38e97e05b85139ec9266166ca31995088b6",
+  "saved_and_reopened": true
+}

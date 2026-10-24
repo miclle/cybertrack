@@ -30,11 +30,14 @@ for rel,digest in report['files_sha256'].items():
     path=ROOT/rel
     if not path.exists(): path=MODEL/Path(rel).name
     assert sha(path)==digest, f'Stale model artifact: {path}'
-assert report['design_revision']=='0.25', 'Review annotations for a new model revision'
-cad_checks_passed=all(report[key]['passed'] for key in ('collision_check','service_paths','controller_clearance_check','water_gun_check','bubble_gun_check')) and report['water_gun_check']['removal']['passed']
+assert report['design_revision']=='0.26', 'Review annotations for a new model revision'
+cad_checks_passed=all(report[key]['passed'] for key in ('collision_check','service_paths','controller_clearance_check','water_gun_check','bubble_gun_check','ultrasonic_check','speaker_check')) and report['water_gun_check']['removal']['passed']
 assert cad_checks_passed or args.allow_review_conflicts, 'CAD checks failed; use --allow-review-conflicts only for a marked conflict review PDF'
 # Guard dimension callouts that describe named features, not just overall extents.
 expected = {
+    'UltrasonicRingL': [5,-91.3,155,21,-81,171],
+    'UltrasonicRingR': [-21,-91.3,155,-5,-81,171],
+    'SensorStatusStrip': [-8,-81.5,172.5,8,-81,173.5],
     'PowerBank': [-60,-96,33,60,-23,64.5],
     'ElectronicsTray': [-52,-74,144.5,52,17,154],
     'ESP32Board': [-39.6,-23.1,163.6,24,5.1,176.8],
@@ -61,6 +64,10 @@ assert report['water_gun_layout']['mount']['adhesive']['thickness_mm']==1
 assert report['bubble_pod_hose_pass_through']['diameter_mm']==9
 assert report['rear_hose_pass_through']['diameter_mm']==9
 assert report['rear_hose_pass_through']['axis_origin_mm']==[24,72,76]
+ultrasonic=report['ultrasonic_check']
+assert ultrasonic['derived_center_spacing_mm']==26
+assert ultrasonic['candidate_hole_diameter_mm']==16.6
+assert ultrasonic['panel_datum_y_mm']==-81 and ultrasonic['datum_is_assumption']
 pitch=report['gun_pitch']
 assert pitch['elevation_degrees']==5 and pitch['rotation_about_X_degrees']==-5
 assert report['bubble_gun_layout']['mount']['ring']['one_piece']
@@ -91,7 +98,7 @@ pdfmetrics.registerFont(TTFont('ZHB','/System/Library/Fonts/STHeiti Medium.ttc',
 U=72/25.4
 INK='#1E303B'; MUTED='#536673'; ACCENT='#DF632B'; PALE='#EAF0F2'; BLUE='#287E96'
 c=canvas.Canvas(str(PDF),pagesize=(420*U,297*U),pageCompression=1)
-c.setTitle('CyberTrack 0.25 模型与装配图纸')
+c.setTitle('CyberTrack 0.26 模型与装配图纸')
 c.setAuthor('CyberTrack')
 c.setSubject('A3 design review drawings; dimensions in mm; not manufacturing release')
 page=0
@@ -121,14 +128,14 @@ def header(title,subtitle):
     page+=1
     c.setFillColor(INK);c.rect(0,278*U,420*U,19*U,fill=1,stroke=0)
     text(14,285,'CYBERTRACK',18,'#FFFFFF',True)
-    text(405,285,f'CT-25 / {page:02d}',11,'#FFFFFF',align='right')
+    text(405,285,f'CT-26 / {page:02d}',11,'#FFFFFF',align='right')
     text(14,265,title,21,bold=True);text(14,256,subtitle,10,MUTED)
     if not cad_checks_passed:
         text(405,244,'尺寸修订待适配：静态／拆卸／USB 空间未通过',10,ACCENT,True,align='right')
     line(14,250,406,250,'#CAD5DB',.6)
     line(14,20,406,20,'#CAD5DB',.6)
-    text(14,13,'模型与装配评审图 | Rev 0.25 | 图纸更新 2026-10-24 | 单位：mm',9,MUTED)
-    text(406,13,f'未制造放行 · A3 横向 · {page} / 20',9,MUTED,align='right')
+    text(14,13,'模型与装配评审图 | Rev 0.26 | 图纸更新 2026-10-24 | 单位：mm',9,MUTED)
+    text(406,13,f'未制造放行 · A3 横向 · {page} / 21',9,MUTED,align='right')
 def end():c.showPage()
 def title(x,y,s,sub=''):
     text(x,y,s,12,bold=True)
@@ -208,7 +215,7 @@ box(14,29,392,33,PALE)
 text(20,51,' × '.join(f(v) for v in report['assembly_size_xyz_mm']),20,bold=True)
 text(20,37,'整机宽 × 长 × 高；模型几何外包络',9,MUTED)
 text(143,55,'图纸内容',11,bold=True)
-para(143,48,'02 彩色正背视图　03 彩色左右侧视　04 正背尺寸　05 左右尺寸\n06 俯视 / 底视　07 电源　08 头舱　09 补液　10 爆炸　11 走线　12 双模块预装　13 顶部效果位\n14 主控布局　15 主控拆装与 USB / 天线　16 实测水枪　17 水枪固定与拆装　18 线管预留　19 前置泡泡固定　20 泡泡拆装与线管',250,9,6)
+para(143,48,'02 彩色正背视图　03 彩色左右侧视　04 正背尺寸　05 左右尺寸\n06 俯视 / 底视　07 电源　08 头舱　09 补液　10 爆炸　11 走线　12 双模块预装　13 顶部效果位\n14 主控布局　15 主控拆装与 USB / 天线　16 实测水枪　17 水枪固定与拆装　18 线管预留　19 前置泡泡固定　20 泡泡拆装与线管　21 超声波双探头',250,9,6)
 end()
 
 header('正面与背面 · 彩色外观','当前保存模型的正交渲染图，用于查看装甲层次、配色和前后造型；不是实物照片，尺寸见第 4 页。')
@@ -216,7 +223,7 @@ picture('front.png',20,65,180,174)
 picture('rear.png',220,65,180,174)
 text(110,54,'正面 / 沿 +Y 观察',12,bold=True,align='center')
 text(310,54,'背面 / 沿 -Y 观察',12,bold=True,align='center')
-text(110,42,'正面看左泡泡、右水枪；低位电源前舱',10,MUTED,align='center')
+text(110,42,'双探头 Ø16、中心距26；正面左泡泡、右水枪',10,MUTED,align='center')
 text(310,42,'左右连续切面；液舱与护甲仅留 Ø9 管孔候选',10,MUTED,align='center')
 end()
 
@@ -498,6 +505,22 @@ para(21,105,'1 断电排液、清除辅助胶，先拔插头移开尾线，再�
 para(220,105,'泡泡管Ø4、尾线Ø3，均按中心R8、另留Ø8空间。\n接管沿模块后方拔25；16×10×10插头向-X拔16。\n前圆环为整体，不设分缝、衬垫或前环工具空间。\n基座工具在主体取出后使用；不包含整手与把手。',181,9,7)
 box(14,27,392,36,PALE)
 para(21,53,'主体每0.5°转动、每0.5后退／抬升、每2侧移检查示意实体；实物外形和采样之间的连续空间尚未证明。\n空托架、基座螺钉另做保守连续扫掠；前向Ø36×50通道随枪轴上仰。停止按钮保留前方Ø12指端空间。\n宽度、薄片偏置、前槽长度与前底轮廓待实测；胶粘保持、线管防磨、防拉脱、排液及制造均未验收。',375,9,7)
+end()
+header('超声波双探头 · 实测尺寸与前脸候选','圆柱尺寸来自用户；中心距为推导；Y=-81面板基准、Ø16.6开孔和端面分色均为设计假设。')
+title(26,235,'正面双探头','沿 +Y 观察；比例 2:1；中心 Z163')
+p,b=drawing('ultrasonic_front',110,190,2)
+hdim(p,-13,13,163,163,180,'26 中心距（推导）')
+hdim(p,-21,21,155,155,149,'42 外沿总宽')
+vdim(p,155,171,-21,-21,-29,'Ø16')
+title(235,235,'侧面突出高度','沿 -X 观察；比例 2:1；前方在左')
+p,b=drawing('ultrasonic_side',310,190,2)
+hdim(p,-91.3,-81,171,171,181,'10.3 离面板高度')
+leader(p(-81,155),337,158,'面板外表面 Y=-81（暂定）')
+picture('ultrasonic-layout.png',21,62,176,77)
+text(109,53,'前脸候选 / 非实物安装照片',10,MUTED,align='center')
+para(221,130,'输入：两圆柱Ø16、总宽42、离面板高10.3。\n推导：中心距26、圆柱净距10；中心X±13。\n面板：原孔补回，改为双Ø16.6贯穿候选孔。\n单边0.3间隙仅为设计值；PCB与背部空间未建模。\n状态色条移至探头上方，避免与圆柱相交。',178,10,8)
+box(14,27,392,19,PALE)
+para(21,39,'CAD检查使用完整实心圆柱包络，包含实体与预留空间。未确认的面板基准、整板／孔位／接头及声学性能仍需实物核对。',376,9,6)
 end()
 c.save()
 print(PDF)

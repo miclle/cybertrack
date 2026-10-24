@@ -1,6 +1,6 @@
 # CyberTrack 履带交互机器人模型
 
-2026-10-24 · **结构与装配候选 0.25**。水枪采用底部双面软胶、左右定位挡板与外侧前后双托管槽；尾线导向鞍／扎带槽已融合进底托同一实体；喷水管按用户实测外径5 mm重建。水管沿枪外侧向后接回液舱，取消底部横穿；顶部开放。按用户确认采用正面看左泡泡、右水枪的前置布局；两枪采用上仰5°候选，水枪旋转后前移10、下移4 mm避让头壳和底座。泡泡枪新增右肩梁支承托架、整体前圆环、两段阶梯槽、线管及工具预留，枪口朝前。宽度、分段固定面、线管与材料仍为候选，CAD检查不代表实物适配。
+2026-10-24 · **结构与装配候选 0.26**。双探头按 Ø16、中心距 26、离面板高 10.3 mm 更新，双孔 Ø16.6 为候选，状态条上移。水枪采用底部双面软胶、左右定位挡板与外侧前后双托管槽；尾线导向鞍／扎带槽已融合进底托同一实体；喷水管按用户实测外径5 mm重建。水管沿枪外侧向后接回液舱，取消底部横穿；顶部开放。按用户确认采用正面看左泡泡、右水枪的前置布局；两枪采用上仰5°候选，水枪旋转后前移10、下移4 mm避让头壳和底座。泡泡枪新增右肩梁支承托架、整体前圆环、两段阶梯槽、线管及工具预留，枪口朝前。宽度、分段固定面、线管与材料仍为候选，CAD检查不代表实物适配。
 
 ![前方外观](assembly.png)
 
@@ -12,11 +12,19 @@
 
 扬声器专项更新最初按新包络被旧包络包含沿用维护结果；后续0.25水枪双托槽／后引水管重建已纳入该尺寸，重新执行整机静态和维护检查，并同步PDF。STEP不包含设备占位包络。
 
+## 0.26 超声波双探头与前脸（2026-10-24）
+
+按[用户尺寸](../components/ultrasonic/README.md)更新双探头为 **Ø16 × 10.3 mm**，中心距 **26 mm**、外沿总宽 **42 mm**、净距 **10 mm**；中心 **X±13、Z163 mm**。高度基准暂按前脸面板外表面 **Y−81 mm**，圆柱前端 **Y−91.3 mm**。这是假定面板基准的机械候选；PCB、背面器件、固定孔及接头空间未建模。
+
+原中心距 58 mm 的孔补回，改为双 **Ø16.6 mm** 贯穿候选孔（单边 0.3 mm 名义间隙），状态条移至探头上方 **Z172.5…173.5 mm**。圆柱端面的金属／暗色分区仅为外观，合并后为完整实心圆柱；专项干涉检查使用完整包络。
+
+[前脸近景](ultrasonic-front.png) · [斜视](ultrasonic-layout.png) · [专项检查与回读](ultrasonic-fit-audit.json)。完整圆柱与实体／预留空间无超过 0.01 mm³ 的重叠；到孔壁 0.3、边框 2.0、状态条约 2.735、眉甲约 4.890、头壳 6.0、扬声器 8.25 mm。[逐对象对比](ultrasonic-change-audit.json)确认仅双探头的 4 个分色实体、前脸面板与状态条共 6 件几何变化，其余 286 件几何保持。整机 691 对静态、16 组 232 个维护姿态及主控／双枪／扬声器专项通过；这些是名义 CAD 检查，整模块安装、制造公差、声学效果和实物试配仍待验证。
+
 ## 文件与视图
 
 - [CyberTrack.FCStd](CyberTrack.FCStd)：主要设计文件，中文对象树；设备包络及服务／天线审查区默认隐藏。
 - [CyberTrack.step](CyberTrack.step)：不含设备包络及审查区的布局交换文件；严格体积比较未通过，以 FCStd 为几何依据，不宣称曲面等价。
-- [总装与检修图纸 PDF](CyberTrack-assembly-and-service.pdf)：20 页 A3 横向，新增正／背／左／右四幅彩色正交渲染图，包含前后轴测、正／背／左／右／俯／底六向视图、尺寸标注、维护爆炸、补液分解、走线说明、双模块预装布局、顶部效果位及主控布局／拆装详图及第 16–18 页水枪尺寸、固定拆装与线管预留及第 19–20 页泡泡枪前置固定、拆装与线管空间；总装、补液盖、主控、水枪和泡泡枪分解图均标注零件／维护组名称；用于结构评审，不是加工图。
+- [总装与检修图纸 PDF](CyberTrack-assembly-and-service.pdf)：21 页 A3 横向，新增正／背／左／右四幅彩色正交渲染图，包含前后轴测、正／背／左／右／俯／底六向视图、尺寸标注、维护爆炸、补液分解、走线说明、双模块预装布局、顶部效果位及主控布局／拆装详图及第 16–18 页水枪尺寸、固定拆装与线管预留及第 19–20 页泡泡枪前置固定、拆装与线管空间及第 21 页双探头尺寸与前脸候选；总装、补液盖、主控、水枪和泡泡枪分解图均标注零件／维护组名称；用于结构评审，不是加工图。
 - [主控布局](controller-layout.png) · [USB／天线预留](controller-access.png) · [主控局部分解](controller-service.png)：板卡总包络实测，内部层高、母座及插头为候选。
 - [保存回读报告](readback.json)：对象有效性、静态检查、导出与视图哈希、最终保存及显示状态。
 - [顶部效果位轴测](crown-effects.png) · [顶部效果位俯视](crown-effects-top.png)：两处后掠凹槽为效果位置占位，橙色块不是电极。
@@ -134,18 +142,18 @@
 
 [0.18与0.17原生文件逐对象比较（历史记录）](bubble-gun-change-audit.json)记录双枪刚性姿态、整体环、导入槽、肩梁承托和管线变化；两枪独立主体轮廓保持。旧独立部件与原图保留，新薄片版本单独生成并回读；模型、STEP和32张视图按哈希核对。
 
-STEP 回读有效，860 个实体及包络与原生装配一致，但体积差约 6.4333 mm³，超过 0.01 mm³ 严格阈值，仍仅供布局交换。独立水枪 STEP 的体积差在 0.01 mm³ 内；两者均不代替实物测量。上述检查不等于胶粘保持力、完整实物拆装、承载、供电或液体隔离验收。
+STEP 回读有效，860 个实体及包络与原生装配一致，但体积差约 6.4355 mm³，超过 0.01 mm³ 严格阈值，仍仅供布局交换。独立水枪 STEP 的体积差在 0.01 mm³ 内；两者均不代替实物测量。上述检查不等于胶粘保持力、完整实物拆装、承载、供电或液体隔离验收。
 
 ## 再生成
 
-生成入口为 [scripts/build_tank.py](../../scripts/build_tank.py)，检修结构与路径检查位于 [refine_assembly.py](../../scripts/refine_assembly.py)，主控托架与审查区位于 [controller_layout.py](../../scripts/controller_layout.py)，泡泡枪主体及空间检查位于 [bubble_gun_layout.py](../../scripts/bubble_gun_layout.py)，泡泡枪固定与线管候选位于 [bubble_gun_mount.py](../../scripts/bubble_gun_mount.py)，水枪固定与线管候选位于 [water_gun_mount.py](../../scripts/water_gun_mount.py)，当前 macOS 环境执行：
+双探头布局与完整圆柱检查位于 [ultrasonic_layout.py](../../scripts/ultrasonic_layout.py)。生成入口为 [scripts/build_tank.py](../../scripts/build_tank.py)，检修结构与路径检查位于 [refine_assembly.py](../../scripts/refine_assembly.py)，主控托架与审查区位于 [controller_layout.py](../../scripts/controller_layout.py)，泡泡枪主体及空间检查位于 [bubble_gun_layout.py](../../scripts/bubble_gun_layout.py)，泡泡枪固定与线管候选位于 [bubble_gun_mount.py](../../scripts/bubble_gun_mount.py)，水枪固定与线管候选位于 [water_gun_mount.py](../../scripts/water_gun_mount.py)，当前 macOS 环境执行：
 
 ```sh
 PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
 /Applications/FreeCAD.app/Contents/Resources/bin/python scripts/build_tank.py --render
 ```
 
-首次生成新的薄片版独立泡泡枪模型，随后校验并复用，保留旧三尺寸版本；会校验并保留独立水枪资产，更新整机模型、STEP、34 张视图（含扬声器专项两张）与报告；静态、维护路径、主控审查、水枪或泡泡枪专项失败时，脚本在写出报告后以非零状态退出。完整交付使用 `--render`。脚本重建会覆盖当前输出；手工修改 FCStd 前应保存副本，并同步参数、文档和验证。
+首次生成新的薄片版独立泡泡枪模型，随后校验并复用，保留旧三尺寸版本；会校验并保留独立水枪资产，更新整机模型、STEP、36 张视图（含扬声器、超声波专项各两张）与报告；静态、维护路径、主控审查、水枪、泡泡枪、扬声器或超声波专项失败时，脚本在写出报告后以非零状态退出。完整交付使用 `--render`。脚本重建会覆盖当前输出；手工修改 FCStd 前应保存副本，并同步参数、文档和验证。
 
 ## PDF 图纸再生成
 
@@ -157,7 +165,7 @@ PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
 python3 scripts/build_drawing_pdf.py
 ```
 
-当前图纸使用默认检查入口，要求静态、维护路径、主控审查、水枪及泡泡枪专项全部通过。`--allow-review-conflicts` 仅供生成明确标示失败的评审图，不会改变检查结果。第二步需要 ReportLab、Pillow 及 macOS 的 STHeiti 字体。矢量投影缓存写入 `tmp/pdfs/`，按原生模型 SHA-256 校验；PDF 脚本同时校验模型、STEP、34 张预览图及关键标注。模型修订后需复核图纸文字、特征标注和版面，再更新脚本的修订检查。交付文件为 `hardware/model/CyberTrack-assembly-and-service.pdf`，与原生模型一同管理；文件名明确表示总装与检修图纸，临时生成文件继续忽略。
+当前图纸使用默认检查入口，要求静态、维护路径、主控审查、水枪、泡泡枪、扬声器及超声波专项全部通过。`--allow-review-conflicts` 仅供生成明确标示失败的评审图，不会改变检查结果。第二步需要 ReportLab、Pillow 及 macOS 的 STHeiti 字体。矢量投影缓存写入 `tmp/pdfs/`，按原生模型 SHA-256 校验；PDF 脚本同时校验模型、STEP、36 张预览图及关键标注。模型修订后需复核图纸文字、特征标注和版面，再更新脚本的修订检查。交付文件为 `hardware/model/CyberTrack-assembly-and-service.pdf`，与原生模型一同管理；文件名明确表示总装与检修图纸，临时生成文件继续忽略。
 
 本轮依据见[0.25 双托管槽与一体尾线导向鞍](../../docs/mechanical.md#025-双托管槽与一体尾线导向鞍)及[变更核对](water-gun-routing-audit.json)。[0.23 胶粘固定核对](water-gun-adhesive-audit.json)为历史记录。尾线导向鞍已直接并入 `WaterGunCradle`，不再有独立 `WaterGunLeadGuide`。双托管座分别命名为 `WaterGunHoseSupport`／`WaterGunHoseSupportRear`，制造合并需包含三者。旧 `print-trials/gun-mounts-0.18` STL 带压盖，不能作为当前水枪底托输出。
 

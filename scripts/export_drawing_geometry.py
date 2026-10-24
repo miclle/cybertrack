@@ -102,6 +102,8 @@ for o in objects:
 for view in ('front','rear','side','right','top','bottom'):
     project(view, [o.Name for o in visible], view)
 for key,names,view in [
+    ('ultrasonic_front',['UltrasonicRingL','UltrasonicFaceL','UltrasonicRingR','UltrasonicFaceR','SensorStatusStrip'],'front'),
+    ('ultrasonic_side',['SensorMask','UltrasonicRingL','UltrasonicFaceL','UltrasonicRingR','UltrasonicFaceR'],'side'),
     ('controller_top',['ESP32Board','ControllerCarrier','ControllerSocketFront','ControllerSocketRear','ControllerRetainer'],'top'),
     ('controller_front',['ESP32Board','ControllerCarrier','ControllerSocketFront','ControllerSocketRear','ControllerRetainer'],'front'),
     ('crown_effect_plan',['CrownFinL','CrownEffectInsetL','CrownEffectMarkLFront','CrownEffectMarkLRear'],'top'),

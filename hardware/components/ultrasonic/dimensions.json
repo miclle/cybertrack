@@ -1,0 +1,36 @@
+{
+  "component": "ultrasonic-ranging-module",
+  "procurement_id": "P04",
+  "bom_id": "H19",
+  "recorded_date": "2026-10-24",
+  "unit": "mm",
+  "source": "User-provided dimensions, 2026-10-24",
+  "user_statement": "超声波测距模块，圆柱型元件的直径为 16mm，两个圆柱总宽为 42mm，离面板高度为 10.3mm",
+  "dimensions": {
+    "cylinder_diameter": 16,
+    "two_cylinders_overall_width": 42,
+    "height_from_panel": 10.3
+  },
+  "derived_dimensions": {
+    "center_spacing": 26,
+    "gap_between_cylinders": 10
+  },
+  "derivation_assumptions": [
+    "Two equal-diameter cylinders are side by side, with parallel axes and aligned centers along the measured width.",
+    "42 mm is the outer-edge to outer-edge span; center spacing = 42 - 16; gap = 42 - 2 * 16."
+  ],
+  "panel_datum": null,
+  "measurement_tool": null,
+  "measurement_uncertainty": null,
+  "pcb_dimensions": null,
+  "mounting_holes": null,
+  "connector_envelope": null,
+  "cad_updated": true,
+  "physical_fit_verified": false,
+  "notes": [
+    "10.3 mm preserves the user wording: height from panel; the panel datum is not identified as PCB or robot fascia.",
+    "Cylinder dimensions do not establish the complete module envelope or confirm the retail variant."
+  ],
+  "cad_revision": "0.26",
+  "cad_scope": "Two cylinders only; robot front-panel outer face Y=-81 is a provisional datum; PCB and rear components omitted."
+}
