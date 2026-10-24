@@ -1,0 +1,87 @@
+{
+  "measured_dimensions_mm": {
+    "length": 138.5,
+    "width": 33.2,
+    "thickness": 24.6,
+    "width_with_hose": 38.5
+  },
+  "coordinates": "+Y from nozzle tip to rear; +X across width toward inlet; +Z thickness",
+  "shape_assumptions": {
+    "nozzle_length": 8,
+    "nozzle_radii": [
+      2,
+      4
+    ],
+    "barrel_radius": 10.5,
+    "barrel_y_range": [
+      7,
+      45
+    ],
+    "body_y_range": [
+      43,
+      138.5
+    ],
+    "body_corner_chamfer": 3,
+    "inlet_axis_yz": [
+      24,
+      0
+    ],
+    "inlet_radius": 2.5,
+    "inlet_x_range": [
+      10.5,
+      21.9
+    ]
+  },
+  "objects": [
+    {
+      "name": "WaterGunBody",
+      "bbox_mm": [
+        -16.6,
+        0.0,
+        -12.3,
+        16.6,
+        138.5,
+        12.3
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunInlet",
+      "bbox_mm": [
+        10.5,
+        21.5,
+        -2.5,
+        21.9,
+        26.5,
+        2.5
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MeasuredMaximumEnvelope",
+      "bbox_mm": [
+        -16.6,
+        0.0,
+        -12.3,
+        21.9,
+        138.5,
+        12.3
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    }
+  ],
+  "step_readback": {
+    "valid": true,
+    "volume_difference_mm3": 5.384208634495735e-10
+  },
+  "source_photo_sha256": "6b20aa8c851ca7ffb4166abcb932f31e1ed641d8f9c30a0435ae98cb83cbc40e",
+  "files_sha256": {
+    "PulseWaterGun.FCStd": "f9fe3ccd3cd0188822d739faf8dfcc923b468c5148720f58abe1ecdc8647a4b9",
+    "PulseWaterGun.step": "8272b1d50faaf80385877be8a26b46daf9903958b232dc90c38b9bb849bbe9ca"
+  },
+  "interfaces_measured": false,
+  "physical_fit_verified": false
+}
