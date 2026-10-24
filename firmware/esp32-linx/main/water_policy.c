@@ -44,19 +44,31 @@ bool water_arm(water_policy *s, uint64_t now, const char token[WATER_TOKEN_LEN +
     return true;
 }
 
-const char *water_request(water_policy *s, uint64_t now, const char *token, uint32_t duration)
+static const char *request(water_policy *s, uint64_t now, const char *token, uint32_t duration, bool timed)
 {
     if (s->clock_fault || now < s->last_ms) return "clock_fault";
     if (!s->online || s->held) return "not_ready";
     if (!token || strcmp(token, s->token)) return "invalid_permit";
     if (s->used) return "permit_used";
     if (!s->armed || now >= s->permit_until) return "permit_expired_or_revoked";
-    if (duration != WATER_MS) return "duration_must_match_5000ms_intent";
+    if (!timed && duration != WATER_MS) return "duration_must_match_5000ms_intent";
+    if (timed && (duration == 0 || duration > WATER_MAX_TIMED_MS)) return "duration_out_of_range";
+    if (now > UINT64_MAX - duration) return "clock_fault";
     if (s->active || now < s->cooldown_until) return "busy";
     /* Consume before requesting a high output. No retry can extend this deadline. */
     s->used = true; s->armed = false; s->permit_until = 0;
-    s->ends_at = now + WATER_MS;
+    s->ends_at = now + duration;
     s->active = true;
     ++s->starts;
     return "accepted";
+}
+
+const char *water_request(water_policy *s, uint64_t now, const char *token, uint32_t duration)
+{
+    return request(s, now, token, duration, false);
+}
+
+const char *water_request_timed(water_policy *s, uint64_t now, const char *token, uint32_t duration)
+{
+    return request(s, now, token, duration, true);
 }

@@ -78,6 +78,8 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0) {
     }
     auto snap = guard.policy;
     const bool fault = output_fault;
+    const unsigned last_duration = guard.last_duration_ms;
+    const unsigned remaining = snap.active && snap.ends_at > now ? snap.ends_at - now : 0;
     portEXIT_CRITICAL(&lock);
     const auto uptime = Decimal(now);
     const char* state = snap.active ? "ACTIVE" : (fault || snap.clock_fault) ? "FAULT" : snap.stopped ? "STOPPED" : "DISARMED";
@@ -88,10 +90,10 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0) {
         "\"result\":\"%s\",\"state\":\"%s\",\"fault\":\"%s\",\"uptime_ms\":%s,"
         "\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":%s,\"bubbles\":false},"
         "\"capabilities\":{\"move\":false,\"water\":true,\"bubbles\":false},"
-        "\"local_authorization_required\":false,\"starts_this_boot\":%u,\"max_duration_ms\":5000,"
+        "\"local_authorization_required\":false,\"starts_this_boot\":%u,\"max_duration_ms\":30000,\"last_duration_ms\":%u,\"remaining_ms\":%u,"
         "\"actuator_backend\":\"bounded_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
         device_id.c_str(), boot_id.c_str(), ++sequence, operation, outcome, state, reason, uptime.c_str(),
-        snap.active ? "true" : "false", snap.starts);
+        snap.active ? "true" : "false", snap.starts, last_duration, remaining);
     result.assign(json);
     ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
     return result;
@@ -147,10 +149,10 @@ void InitializeCyberTrackTools() {
         "立即关闭水枪输出并取消排队动作，不关闭语音和屏幕。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("stop"); });
     server.AddTool("self.tank.water",
-        "用户明确要求喷水时直接调用，无需按键授权。duration_ms必须为5000；自动关闭，BOOT可提前停止。不得连续、延长或失败自动重试。成功仅表示控制输出已启动。",
-        PropertyList({Property("duration_ms", kPropertyTypeInteger, 5000, 5000)}),
+        "用户明确要求喷水时直接调用，无需按键授权。duration_ms按用户时长换算为整数毫秒，范围1到30000；超过30秒只执行30秒并说明，未说时长先询问。到期自动关闭，BOOT可提前停止。不得连续、延长或失败自动重试。成功仅表示控制输出已启动。",
+        PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 30000)}),
         [](const PropertyList& p) -> ReturnValue {
             return Reply("water", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
-    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water GPIO18=LOW BOOT=stop_only direct_voice=true max_ms=5000");
+    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water GPIO18=LOW BOOT=stop_only direct_voice=true max_ms=30000");
 }
