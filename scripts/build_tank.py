@@ -14,6 +14,7 @@ import Part
 from refine_assembly import refine, service_groups, check_service_paths
 from controller_layout import check_controller_spaces
 from water_gun_layout import add_water_gun, check_water_gun, check_other_service_sweeps
+from bubble_gun_layout import add_bubble_gun, check_bubble_gun
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'hardware/model'
@@ -112,12 +113,17 @@ def render_views(doc, output):
     for o in doc.Objects:
         if hasattr(o,'Category'):
             o.ViewObject.Visibility=o.Category!='clearance' and not o.Name.startswith(('PowerCableRoute','WaterHoseRoute','ControllerWireRoute','WaterGunLeadRoute','WaterGunLeadConnector')) and 'Screw' not in o.Name
+    from gun_pitch import moved,vector
+    from bubble_gun_mount import body_service_shape
+    def exploded(shape,group,offset):
+        if group=='bubble_gun':return moved(body_service_shape(moved(shape,'bubble',True),15,(-90,10,3)),'bubble')
+        s=shape.copy();s.translate(vector(tuple(offset)) if group.startswith('water_gun') else offset);return s
     original_shapes={}
-    offsets={'cable_access':V(0,0,-25),'battery':V(0,0,-60),'crown':V(0,0,65),'electronics':V(0,0,35),'Water':V(0,12,40),'Bubble':V(0,12,40),'arc_left':V(-24.5,0,2),'arc_right':V(24.5,0,2),'water_gun':V(0,-45,0),'water_gun_caps':V(45,0,0),'water_gun_cap_screws':V(20,0,0),'water_gun_cradle':V(0,0,0)}
+    offsets={'cable_access':V(0,0,-25),'battery':V(0,0,-60),'crown':V(0,0,65),'electronics':V(0,0,35),'Water':V(0,12,40),'Bubble':V(0,12,40),'arc_left':V(-24.5,0,2),'arc_right':V(24.5,0,2),'water_gun':V(0,-45,0),'water_gun_caps':V(45,0,0),'water_gun_cap_screws':V(20,0,0),'water_gun_cradle':V(0,0,0),'bubble_gun':V(0,-60,21),'bubble_gun_cradle':V()}
     for group,names in service_groups(doc).items():
         for name in names:
             obj=doc.getObject(name);original_shapes[name]=obj.Shape.copy()
-            shape=obj.Shape.copy();shape.translate(offsets[group]);obj.Shape=shape
+            obj.Shape=exploded(obj.Shape,group,offsets[group])
     render('service.png','iso')
     for name,shape in original_shapes.items():doc.getObject(name).Shape=shape
     for o in doc.Objects:
@@ -181,7 +187,7 @@ def render_views(doc, output):
     for group,offset in [('water_gun_caps',V(50,0,0)),('water_gun_cap_screws',V(70,0,0)),('water_gun',V(0,-65,0))]:
         for name in service_groups(doc)[group]:
             obj=doc.getObject(name);mount_shapes[name]=obj.Shape.copy()
-            moved=obj.Shape.copy();moved.translate(offset);obj.Shape=moved
+            obj.Shape=exploded(obj.Shape,group,offset)
     render('water-gun-service.png','iso')
     for name,shape in mount_shapes.items():doc.getObject(name).Shape=shape
     for o in doc.Objects:
@@ -189,6 +195,38 @@ def render_views(doc, output):
             o.ViewObject.Visibility=o.Name.startswith('WaterGun') or o.Name=='WaterHoseRoute'
             o.ViewObject.Transparency=85 if o.Category=='clearance' else 0
     render('water-gun-spaces.png','iso')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Name in ('BubbleGunShell','BubbleGunWheel','BubbleGunMotor','BubbleGunGearcase','BubbleGunMountingTab','BubbleGunFrontFoot')
+            o.ViewObject.Transparency=0
+    render('bubble-gun-component.png','iso')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Name.startswith('BubbleGun') or o.Name in ('BubblePod','BubbleModule','RearBaseArmor','RearDripLip','BackpackShell','BackpackSpine')
+            o.ViewObject.Transparency=85 if o.Category=='clearance' or o.Name=='BubblePod' else 0
+    render('bubble-gun-clearance.png','rear_iso')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Category not in ('envelope','clearance')
+            o.ViewObject.Transparency=0
+    render('bubble-gun-layout.png','iso')
+    render('bubble-gun-side.png','side')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Name.startswith('BubbleGun') and o.Category not in ('clearance','envelope')
+            o.ViewObject.Transparency=0
+    render('bubble-gun-mount.png','iso')
+    original={}
+    for group,offset in [('bubble_gun',V(-90,10,3))]:
+        for name in service_groups(doc)[group]:
+            obj=doc.getObject(name);original[name]=obj.Shape.copy();obj.Shape=exploded(obj.Shape,group,offset)
+    render('bubble-gun-service.png','iso')
+    for name,shape in original.items():doc.getObject(name).Shape=shape
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Name.startswith('BubbleGun') or o.Name in ('WaterHoseRoute','ShoulderRailR','StopControl')
+            o.ViewObject.Transparency=85 if o.Category=='clearance' else 0
+    render('bubble-gun-spaces.png','iso')
     for o in doc.Objects:
         if hasattr(o,'Category'):o.ViewObject.Transparency=0
     for o in doc.Objects:
@@ -209,7 +247,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.13'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.18'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -568,7 +606,21 @@ def main():
             Part.makeCylinder(12.75,70,V(sign*65.5,-66,156.5),V(0,1,0)),
             'envelope','accent','用户于 2026-10-24 指定预装尺寸 Ø25.5×70；非实测，仅被动机械包络，无高压引线、电极或驱动')
     controller_info=refine(doc,add)
+    rail_bases={n:doc.getObject(n).Shape.copy() for n in ('ShoulderRailL','ShoulderRailR')}
     water_info=add_water_gun(doc,add,args.render)
+    bubble_info=add_bubble_gun(doc,add,args.render)
+    from gun_pitch import apply_pitch,local_frame
+    pitch_info=apply_pitch(doc,rail_bases)
+    for kind,info in [('water',water_info),('bubble',bubble_info)]:
+        info['pre_pitch_origin_mm']=info['origin_mm']
+        info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
+        info['orientation']='frontward with5-degree upward elevation; +X unchanged'
+        info['pre_pitch_rotation_degrees']=info.pop('rotation_degrees')
+        info['placement_transform']='pre-pitch placement, then gun_pitch pivot rotation and translation'
+        info['mount']['coordinate_frame']='pre-pitch module frame; apply gun_pitch for installed world coordinates'
+        key='maximum_bbox_mm' if kind=='water' else 'inspection_bbox_mm'
+        info['pre_pitch_'+key]=info[key]
+        info[key]=describe(doc.getObject('WaterGunMaximumEnvelope' if kind=='water' else 'BubbleGunInspectionEnvelope'))['bbox_mm']
     doc.recompute()
     if args.render:
         for g in groups.values(): g.ViewObject.Visibility=True
@@ -606,9 +658,14 @@ def main():
         tested+=1
         common=a.Shape.common(b.Shape).Volume
         if common>0.01: collisions.append({'a':a.Name,'b':b.Name,'volume_mm3':common})
-    water_check=check_water_gun(saved)
     service_check=check_service_paths(saved)
-    water_check['other_service_sweeps']=check_other_service_sweeps(saved,service_check)
+    with local_frame(saved,'water',service_check) as local_service:
+        water_check=check_water_gun(saved)
+        water_check['other_service_sweeps']=check_other_service_sweeps(saved,local_service)
+    with local_frame(saved,'bubble',service_check) as local_service:
+        bubble_check=check_bubble_gun(saved,local_service)
+    for check in (water_check,bubble_check):
+        check['coordinate_frame']='checks evaluated in inverse-pitched module frame; dimensions and displacement vectors use pre-pitch axes; see gun_pitch for world transform'
     water_check['passed']=water_check['passed'] and water_check['other_service_sweeps']['passed']
     controller_check=check_controller_spaces(saved,service_groups(saved)['crown'])
     assembly=Part.makeCompound([o.Shape for o in drive+new]);bb=assembly.optimalBoundingBox(False)
@@ -648,7 +705,7 @@ def main():
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
                     assert visible==(final_shapes[name].Category not in ('envelope','clearance')),name
     assert sha(source_path)==source_hash
-    report={'status':'preliminary_concept','design_revision':'0.13','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.18','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'bounding_box_method':'optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)',
             'power_bank_dimensions_mm':{'source':'user_measurement','length':120,'width':73,'thickness':31.5,
             'orientation':'length X, width Y, thickness Z; low horizontal placement retained from user-approved layout',
@@ -678,6 +735,7 @@ def main():
             'scope':'new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded',
             'overlaps':collisions,'passed':not collisions},
             'water_gun_layout':water_info,'water_gun_check':water_check,
+            'bubble_gun_layout':bubble_info,'bubble_gun_check':bubble_check,'gun_pitch':pitch_info,
             'service_paths':service_check,'controller_layout':controller_info,'controller_clearance_check':controller_check,
             'manufacturing_released':False,'physical_fit_verified':False,
             'assembly_paths_verified':False,'electrical_verified':False,
@@ -693,7 +751,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
+    if not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 

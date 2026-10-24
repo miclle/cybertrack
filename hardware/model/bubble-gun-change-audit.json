@@ -1,0 +1,254 @@
+{
+  "baseline_revision": "0.17",
+  "baseline_sha256": "2ea704ebdaa6a209cb1c28cbf378c9a2e49cbce3205eecb31034375be3e01e95",
+  "current_revision": "0.18",
+  "native_sha256": "a38b18bcb14fd3eb59868f74f40af52e9a484ea466bee6da71f0ff6bc1fb6593",
+  "method": "category leaf objects; exact BREP or bidirectional solid difference <0.00001 mm^3; assembly display groups excluded",
+  "unchanged_count": 245,
+  "changed_existing_objects": [
+    "BubbleGunBaseInsert1",
+    "BubbleGunBaseInsert2",
+    "BubbleGunBaseScrew1",
+    "BubbleGunBaseScrew2",
+    "BubbleGunBaseTool1",
+    "BubbleGunBaseTool2",
+    "BubbleGunConnectorService",
+    "BubbleGunCradle",
+    "BubbleGunFrontFoot",
+    "BubbleGunGearcase",
+    "BubbleGunHoseClearance",
+    "BubbleGunHoseRoute",
+    "BubbleGunHoseService",
+    "BubbleGunInspectionEnvelope",
+    "BubbleGunLeadClearance",
+    "BubbleGunLeadConnector",
+    "BubbleGunLeadRoute",
+    "BubbleGunLowerPadRear",
+    "BubbleGunMotor",
+    "BubbleGunMountingTab",
+    "BubbleGunShell",
+    "BubbleGunSlotWall1",
+    "BubbleGunSlotWall2",
+    "BubbleGunSlotWall3",
+    "BubbleGunSlotWall4",
+    "BubbleGunSlotWall5",
+    "BubbleGunWheel",
+    "ShoulderRailL",
+    "ShoulderRailR",
+    "WaterGunBaseInsert1",
+    "WaterGunBaseInsert2",
+    "WaterGunBaseScrew1",
+    "WaterGunBaseScrew2",
+    "WaterGunBaseTool1",
+    "WaterGunBaseTool2",
+    "WaterGunBody",
+    "WaterGunCap1",
+    "WaterGunCap2",
+    "WaterGunCapInsert1",
+    "WaterGunCapInsert2",
+    "WaterGunCapScrew1",
+    "WaterGunCapScrew2",
+    "WaterGunCapTool1",
+    "WaterGunCapTool2",
+    "WaterGunConnectorService",
+    "WaterGunCradle",
+    "WaterGunHoseClearance",
+    "WaterGunHoseService",
+    "WaterGunInlet",
+    "WaterGunInnerPad1",
+    "WaterGunInnerPad2",
+    "WaterGunLeadClearance",
+    "WaterGunLeadConnector",
+    "WaterGunLeadGuide",
+    "WaterGunLeadRoute",
+    "WaterGunLowerPad1",
+    "WaterGunLowerPad2",
+    "WaterGunMaximumEnvelope",
+    "WaterGunUpperPad1",
+    "WaterGunUpperPad2",
+    "WaterHoseRoute"
+  ],
+  "removed_objects": [
+    "BubbleGunCapFront",
+    "BubbleGunCapInsertFrontInner",
+    "BubbleGunCapInsertFrontOuter",
+    "BubbleGunCapScrewFrontInner",
+    "BubbleGunCapScrewFrontOuter",
+    "BubbleGunCapToolFrontInner",
+    "BubbleGunCapToolFrontOuter",
+    "BubbleGunLowerPadFront",
+    "BubbleGunRingLower",
+    "BubbleGunUpperPadFront"
+  ],
+  "added_objects": [
+    "BubbleGunRing",
+    "BubbleGunSlotWall6"
+  ],
+  "non_gun_and_non_shoulder_geometry_unchanged": true,
+  "independent_body_shapes_preserved_under_rigid_transform": [
+    "BubbleGunShell",
+    "BubbleGunWheel",
+    "BubbleGunMotor",
+    "BubbleGunGearcase",
+    "BubbleGunMountingTab",
+    "BubbleGunFrontFoot",
+    "WaterGunBody",
+    "WaterGunInlet"
+  ],
+  "gun_pitch": {
+    "elevation_degrees": 5,
+    "candidate_not_measured": true,
+    "rotation_about_X_degrees": -5.0,
+    "pivot_world_mm": {
+      "water": [
+        42.5,
+        -18.0,
+        100.7
+      ],
+      "bubble": [
+        -40.0,
+        -62.0,
+        85.95
+      ]
+    },
+    "translation_world_mm": {
+      "water": [
+        0.0,
+        -10.0,
+        -4.0
+      ],
+      "bubble": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "muzzle_centres_world_mm": {
+      "water": [
+        55.0,
+        -137.15697288139694,
+        122.61226102388552
+      ],
+      "bubble": [
+        -55.0,
+        -126.64894915906577,
+        115.74791725319959
+      ]
+    },
+    "direction_world": [
+      0.0,
+      -0.9961946980917457,
+      0.08715574274765832
+    ],
+    "water_hose_points_world_mm": [
+      [
+        -24,
+        39,
+        118
+      ],
+      [
+        -24,
+        22,
+        118
+      ],
+      [
+        -39,
+        15,
+        119
+      ],
+      [
+        -51,
+        5,
+        119
+      ],
+      [
+        -51,
+        -46,
+        130
+      ],
+      [
+        -18,
+        -56,
+        130
+      ],
+      [
+        -18,
+        -90,
+        94
+      ],
+      [
+        90,
+        -90,
+        94
+      ],
+      [
+        90.0,
+        -88.34343267490141,
+        118.34162962925026
+      ],
+      [
+        90.0,
+        -113.24830012719505,
+        120.52052319794173
+      ],
+      [
+        76.9,
+        -113.24830012719505,
+        120.52052319794173
+      ]
+    ],
+    "bubble_hose_points_world_mm": [
+      [
+        24,
+        65,
+        76
+      ],
+      [
+        24,
+        96,
+        76
+      ],
+      [
+        24,
+        96,
+        104
+      ],
+      [
+        -90,
+        96,
+        104
+      ],
+      [
+        -90,
+        -45,
+        100
+      ],
+      [
+        -55.0,
+        -43.75299620408806,
+        99.46108257957059
+      ],
+      [
+        -55.0,
+        -60.688306071647744,
+        100.94273020628077
+      ]
+    ],
+    "support": "shoulder posts rebuilt with tilted bearing planes and coaxial bores",
+    "adhesive": "user plans hot-melt/glue as auxiliary; unspecified material/strength; remove adhesive before mechanical service"
+  },
+  "installed_envelopes_bbox_mm": [
+    -114.0,
+    -137.33128436689225,
+    -2.4891304786271016e-09,
+    114.0,
+    98.0000001,
+    203.0
+  ],
+  "installed_envelopes_size_xyz_mm": [
+    228.0,
+    235.33128446689224,
+    203.00000000248912
+  ],
+  "installed_envelopes_scope": "modelled non-clearance objects including routes and equipment; not physical acceptance"
+}

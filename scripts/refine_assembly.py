@@ -177,6 +177,7 @@ def service_groups(doc):
     wet={name:[name+suffix for suffix in ('ServiceLid','CapGrip','LidMark','FillPlug','FillSeal')] for name in ('Water','Bubble')}
     return {'cable_access':['CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule']+controller_members(doc)+[n for n in names if n.startswith(('ControllerMountScrew','ControllerMountInsert'))],**wet,
             'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR'],
+            **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('bubble_gun','bubble_gun_cradle')} if doc.getObject('BubbleGunShell') else {}),
             **({'water_gun':['WaterGunBody','WaterGunInlet']} if doc.getObject('WaterGunBody') else {}),
             **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('water_gun_caps','water_gun_cap_screws','water_gun_cradle')} if doc.getObject('WaterGunCradle') else {})}
 
@@ -209,6 +210,10 @@ def check_service_paths(doc):
                ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']),
                ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]),
                ('Bubble',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewBubble')])]
+    if 'bubble_gun' in groups:
+        from bubble_gun_mount import line_names
+        blines=line_names(doc)
+        scenarios += [('bubble_gun_cradle',(-90,0,6),blines+groups['bubble_gun']+['BubbleGunBaseScrew1','BubbleGunBaseScrew2'])]
     if 'water_gun' in groups:
         scenarios.append(('water_gun',(0,-150,0),['WaterHoseRoute','WaterGunLeadRoute','WaterGunLeadConnector']+groups.get('water_gun_caps',[])+groups.get('water_gun_cap_screws',[])))
     if 'water_gun_caps' in groups:
@@ -230,6 +235,8 @@ def check_service_paths(doc):
         moving=special[group] if group in special else groups[group];fixed=[o for o in all_shapes if o.Name not in moving+removed]
         collisions=[];tested=0
         waypoints=[V(),V(*delta)]
+        if group in ('bubble_gun','bubble_gun_cradle'):
+            waypoints=[V(),V(0,0,delta[2]),V(*delta)]
         if group=='water_gun_cradle':
             waypoints=[V(),V(0,0,2),V(60,0,2)]
         if group in ('Water','Bubble'):
@@ -239,6 +246,9 @@ def check_service_paths(doc):
             waypoints=[V(),V(0,0,2),V(delta[0],0,2),V(*delta)]
         elif group.startswith('usb_'):
             waypoints=[V(),V(delta[0],0,0),V(*delta)]
+        if group.startswith(('water_gun','bubble_gun')):
+            from gun_pitch import vector
+            waypoints=[vector(tuple(p)) for p in waypoints]
         poses=[a+(b-a)*fraction for a,b in zip(waypoints,waypoints[1:]) for fraction in (0,0.05,0.1,0.2,0.4,0.6,0.8,1)]
         for pose_index,offset in enumerate(poses):
             for name in moving:
