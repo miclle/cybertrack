@@ -1,0 +1,133 @@
+{
+  "user_dimensions_mm": {
+    "outermost_muzzle_circle_diameter": 31.5,
+    "overall_body_height": 35.8,
+    "overall_body_length": 67
+  },
+  "local_coordinates": "muzzle end centre at origin; +Y faces outward; body extends to -Y; +Z up",
+  "assumptions": {
+    "reserved_width_mm": 35.8,
+    "shell_length_mm": 23,
+    "shell_wall_mm": 1.5,
+    "wheel_ring_count": 5,
+    "wheel_ring_outer_radius_mm": 4.3,
+    "wheel_ring_inner_radius_mm": 3.3,
+    "wheel_ring_centres_radius_mm": 9.1,
+    "motor_radius_mm": 7,
+    "motor_length_mm": 25,
+    "motor_origin_mm": [
+      -3,
+      -48,
+      -1
+    ],
+    "case_width_mm": 23,
+    "case_height_mm": 12,
+    "side_case_size_xyz_mm": [
+      6,
+      22,
+      17
+    ],
+    "side_case_origin_mm": [
+      11.5,
+      -55,
+      -20.05
+    ],
+    "vent_slot_size_xyz_mm": [
+      4,
+      3,
+      7
+    ],
+    "vent_y_mm": [
+      -21,
+      -16,
+      -11
+    ],
+    "all_internal_dimensions_and_positions": "illustrative, not inferred measurements"
+  },
+  "objects": [
+    {
+      "name": "BubbleGunShell",
+      "bbox_mm": [
+        -15.75,
+        -23.0,
+        -15.75,
+        15.75,
+        0.0,
+        15.75
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleGunWheel",
+      "bbox_mm": [
+        -12.954614398285896,
+        -2.0000001,
+        -11.662054748812022,
+        12.954614398285896,
+        -0.4999999,
+        13.400000099999998
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleGunMotor",
+      "bbox_mm": [
+        -10.0,
+        -48.0,
+        -8.0,
+        4.0,
+        -23.0,
+        6.0
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleGunGearcase",
+      "bbox_mm": [
+        -11.5,
+        -67.0,
+        -20.049999999999997,
+        17.5,
+        -23.0,
+        -3.049999999999997
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    }
+  ],
+  "actual_model_bbox_mm": [
+    -15.75,
+    -67.0,
+    -20.049999999999997,
+    17.5,
+    0.0,
+    15.75
+  ],
+  "inspection_bbox_mm": [
+    -17.9,
+    -67.0,
+    -20.049999999999997,
+    17.9,
+    0.0,
+    15.75
+  ],
+  "step_readback": {
+    "valid": true,
+    "volume_difference_mm3": 0.0019057616336795036,
+    "solid_count": 4
+  },
+  "input_sha256": {
+    "dimensions.json": "a226b43327210930ce97e20bf6e5f9b923c0a36fada5c5105b8fc68883bd66d9",
+    "sources.json": "60977bfb918a679494d26dff1db7d84d9c82043fb2bc3b27f70b853199c267cc"
+  },
+  "files_sha256": {
+    "BubbleGun.FCStd": "554e490045b905ed52ce9f254772e786e84471495f56fdcf4dfcb5402572887d",
+    "BubbleGun.step": "3c8b0e0559324e6dd6d7d8b6ff63e002ed550052e41c9596856e8bb1dc8710d7"
+  },
+  "maximum_width_measured": false,
+  "mounts_designed": false,
+  "physical_fit_verified": false
+}
