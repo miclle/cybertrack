@@ -1,8 +1,10 @@
 # 固件
 
-固件可与机械设计并行推进。当前已实现可在电脑上编译的 C11 控制核心、F1 离线 MCP 协议适配，以及 F2a 与板型无关的启动／运行层、输入处理、有界接收队列、分片／连接流程模拟和假板卡测试，已新增可烧录的[ESP32-S3 无负载检查工程](esp32/README.md)，复用控制核心验证启动与 PSRAM，并接入板载 BOOT 的无负载停止输入；仍未控制执行器。独立路线和退出条件见[实施计划](PLAN.md)，消息边界见[协议契约](PROTOCOL.md)，F2b 所需输入见[开发板资料清单](BOARD-INFO.md)。
+固件可与机械设计并行推进。当前已实现可在电脑上编译的 C11 控制核心、F1 离线 MCP 协议适配，以及 F2a 与板型无关的启动／运行层、输入处理、有界接收队列、分片／连接流程模拟和假板卡测试，已新增可烧录的[ESP32-S3 无负载检查工程](esp32/README.md)，复用控制核心验证启动与 PSRAM，并接入板载 BOOT 的无负载停止输入；该无负载工程不控制执行器；另见下文独立 MOS 台架的水枪单次实测。独立路线和退出条件见[实施计划](PLAN.md)，消息边界见[协议契约](PROTOCOL.md)，F2b 所需输入见[开发板资料清单](BOARD-INFO.md)。
 
 无负载检查工程固定 ESP-IDF v5.5.1，主控已指定 ESP32-S3 N16R8，见[采购记录 P07](../hardware/procurement.md)。[COREBOARD 原理图、排针和尺寸](../hardware/components/ESP32-S3-N16R8/README.md)已整理；实物修订版、焊装、音频器件及项目 GPIO 分配待确定，Flash／PSRAM 已识别为 16 MB／8 MB，无负载配置为 Flash DIO 40 MHz、PSRAM Octal 40 MHz；具体实测结果见[实物核对](../hardware/components/ESP32-S3-N16R8/physical-verification.md)。
+
+2026-10-24 新增[独立 MOS 台架工程](esp32-mos-bench/README.md)：GPIO4 持续高电平单次 5 秒（0.1.1，用户要求延长），串口 a／g 触发、s／BOOT 停止；主机策略测试和 ESP-IDF 编译通过，已烧录并在引脚空接下取得一次命令及关闭回执。与电机工程互斥使用 GPIO4；用户已观察控制端 0 V→约 3 点几伏→0 V，并确认一次 5 秒正常喷水及自动停止。带载参数、重复性与失电／复位边界仍待验证。
 
 ## 本地编译与验证
 
