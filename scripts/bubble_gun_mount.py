@@ -10,8 +10,9 @@ from water_gun_layout import hits, bbox
 V=App.Vector
 BASE_Y=(-78,-62)
 RING_Y=-125.5
-HOSE_POINTS=[(24,65,76),(24,96,76),(24,96,104),(-90,96,104),
-             (-90,-45,104),(-55,-45,101),(-55,-62,101)]
+HOSE_FIXED_COUNT=6
+HOSE_POINTS=[(24,49,45),(24,49,161),(-99,49,161),(-99,10,161),(-99,10,100),
+             (-99,-45,100),(-55,-45,101),(-55,-62,101)]
 LEAD_POINTS=[(-44,-62,98),(-44,-44,98),(-58,-44,114),(-74,-44,114)]
 
 
@@ -91,7 +92,7 @@ def build_mount(doc,add):
     floor=box(-59.8,-105.7,88.95,-50.2,-87,89.55).fuse(box(-57.8,-87,88.95,-52.2,-62,89.55)).removeSplitter()
     feature('BubbleGunLowerPadRear','阶梯槽底0.6垫／承托平面Z89.55',floor,color='dark',group='bubble_gun_cradle')
     hose=rounded_route(HOSE_POINTS,2,8);hose_space=rounded_route(HOSE_POINTS,4,8)
-    feature('BubbleGunHoseRoute','泡泡液管候选 Ø4／R8／后部绕右侧',hose,category='envelope',color='water')
+    feature('BubbleGunHoseRoute','泡泡顶部吸液管候选 Ø4／R8／侧向接前枪',hose,category='envelope',color='water')
     feature('BubbleGunHoseClearance','泡泡液管 Ø8 路线预留',hose_space,category='clearance',color='water')
     feature('BubbleGunHoseService','泡泡后端接管向后拔出25／Ø12空间',cylinder(6,25,(-55,-62,101),(0,1,0)),category='clearance',color='water')
     feature('BubbleGunLeadRoute','泡泡尾线束候选 Ø3／R8',rounded_route(LEAD_POINTS,1.5,8),category='envelope',color='power')

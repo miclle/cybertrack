@@ -58,10 +58,10 @@ def rounded_route(points, radius, bend_radius):
 
 
 # Radius is a packaging assumption, not a supplier minimum bend specification.
-# First four points are fixed rear chassis coordinates. Remaining points
-# follow the gun tilt. The route never crosses underneath the gun/chassis.
-HOSE_POINTS=[(-24,39,118),(-24,22,118),(-4,20,130),(78.2,20,130),
-             (78.2,-4,117),(78.2,-75,117),(90,-90,117),(90,-105,117),(76.9,-105,117)]
+# Top-fed reservoir segment stays fixed; the final five points follow the gun tilt.
+HOSE_FIXED_COUNT=5
+HOSE_POINTS=[(-24,49,45),(-24,49,149),(-24,70,149),(99,70,149),(99,10,149),
+             (78.2,6,117),(78.2,-75,117),(90,-90,117),(90,-105,117),(76.9,-105,117)]
 LEAD_POINTS=[(55,9.5,117),(55,21.5,117),(83,21.5,117)]
 ADHESIVE_CENTRES=(-62,-10)
 BASE_CENTRES=(-60,-18)
@@ -169,7 +169,7 @@ def build_mount(doc,add):
             'side_walls':{'pairs':2,'centres_y_mm':list(ADHESIVE_CENTRES),'length_mm':12,
                 'height_above_base_mm':SIDE_WALL_HEIGHT,'thickness_mm':SIDE_WALL_THICKNESS,
                 'channel_width_mm':SIDE_X1-SIDE_X0,'nominal_side_gap_mm':SIDE_GAP,'top_lips_or_fasteners':False},
-            'hose':{'measured_od_mm':5,'measurement_source':'user 2026-10-24','routing':'outer side via two saddles to rear reservoir; no underside crossing','route_clearance_diameter_mm':8,'centreline_bend_radius_mm':8,'unplug_direction_mm':[30,0,0]},
+            'hose':{'measured_od_mm':5,'measurement_source':'user 2026-10-24','routing':'top-inserted suction tube via side route and two saddles; no rear-armor passage','route_clearance_diameter_mm':8,'centreline_bend_radius_mm':8,'unplug_direction_mm':[30,0,0]},
             'hose_support':{'attached_to':'front and rear outer side walls','quantity':2,'integral_with_cradle':True,
                 'centres_module_mm':[[78.2,y,117] for _,y in HOSE_SUPPORTS],'centre_spacing_mm':52,'flush_to_outer_wall':True,'support_arm':False,'axial_length_mm':6,'seat_diameter_mm':5.6,
                 'nominal_radial_gap_mm':.3,'outer_diameter_mm':8.6,'opening':'module +Z',

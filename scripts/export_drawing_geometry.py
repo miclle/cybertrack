@@ -37,7 +37,7 @@ def project(key, names, view):
     if cache.exists():
         previous = json.loads(cache.read_text())
         if (previous.get('source_sha256') == source_hash and
-                previous.get('projection_revision') == 2 and
+                previous.get('projection_revision') == 3 and
                 previous.get('view') == view and previous.get('names') == names):
             print(key, 'cached', flush=True)
             return
@@ -45,7 +45,10 @@ def project(key, names, view):
     for i,row in enumerate(matrices[view]):
         for j,value in enumerate(row): setattr(matrix, f'A{i+1}{j+1}', value)
     compound = Part.makeCompound([by_name[n].Shape for n in names])
-    transformed = compound.transformGeometry(matrix)
+    # All view matrices are rigid rotations. Preserve analytic pipe bends;
+    # transformGeometry unnecessarily converts tori to B-splines and may fail.
+    transformed = compound.copy()
+    transformed.transformShape(matrix)
     # project() omits outline edges of smooth surfaces in this FreeCAD build.
     # projectToSVG() includes the visible silhouettes as well as visible edges.
     svg = TechDraw.projectToSVG(transformed, V(0,0,1), 'Show', 0.08)
@@ -84,13 +87,41 @@ def project(key, names, view):
                     count=2 if command=='Q' else 3
                     control=[points[-1]]+[[float(tokens[i+2*j]),float(tokens[i+2*j+1])] for j in range(count)]
                     i+=2*count;bezier(control)
+                elif command == 'A':
+                    # SVG endpoint-form elliptical arc; sample to the same
+                    # 0.08 mm chord tolerance as native circles and ellipses.
+                    rx,ry,rotation,large,sweep,x2,y2=map(float,tokens[i:i+7]);i+=7
+                    x1,y1=points[-1];rx,ry=abs(rx),abs(ry)
+                    if not rx or not ry:
+                        points.append([x2,y2]);continue
+                    if math.hypot(x2-x1,y2-y1)<1e-12:continue
+                    phi=math.radians(rotation);co,si=math.cos(phi),math.sin(phi)
+                    dx,dy=(x1-x2)/2,(y1-y2)/2
+                    xp,yp=co*dx+si*dy,-si*dx+co*dy
+                    scale=max(1,math.sqrt((xp/rx)**2+(yp/ry)**2))
+                    rx*=scale;ry*=scale
+                    numerator=max(0,rx*rx*ry*ry-rx*rx*yp*yp-ry*ry*xp*xp)
+                    denominator=rx*rx*yp*yp+ry*ry*xp*xp
+                    factor=(-1 if bool(large)==bool(sweep) else 1)*math.sqrt(numerator/denominator)
+                    cxp,cyp=factor*rx*yp/ry,-factor*ry*xp/rx
+                    cx,cy=co*cxp-si*cyp+(x1+x2)/2,si*cxp+co*cyp+(y1+y2)/2
+                    start=math.atan2((yp-cyp)/ry,(xp-cxp)/rx)
+                    finish=math.atan2((-yp-cyp)/ry,(-xp-cxp)/rx)
+                    angle=(finish-start)%(2*math.pi)
+                    if not sweep:angle-=2*math.pi
+                    step=2*math.acos(max(-1,1-0.08/max(rx,ry)))
+                    count=max(1,math.ceil(abs(angle)/step))
+                    for j in range(1,count+1):
+                        t=start+angle*j/count;u,v=rx*math.cos(t),ry*math.sin(t)
+                        points.append([cx+co*u-si*v,cy+si*u+co*v])
+                    points[-1]=[x2,y2]
                 elif command in ('Z','z'):points.append(points[0])
                 else:raise ValueError(f'Unsupported SVG path command {command}')
             paths.append(points)
         elif element.tag not in ('svg','g'):
             raise ValueError(f'Unsupported SVG element {element.tag}')
     b=transformed.optimalBoundingBox(False)
-    result={'source_sha256':source_hash,'projection_revision':2,'view':view,'names':names,'bounds':[b.XMin,b.YMin,b.XMax,b.YMax], 'paths':paths}
+    result={'source_sha256':source_hash,'projection_revision':3,'view':view,'names':names,'bounds':[b.XMin,b.YMin,b.XMax,b.YMax], 'paths':paths}
     (OUT/f'{key}.json').write_text(json.dumps(result))
     print(key, len(paths), flush=True)
 
@@ -102,6 +133,10 @@ for o in objects:
 for view in ('front','rear','side','right','top','bottom'):
     project(view, [o.Name for o in visible], view)
 for key,names,view in [
+    ('top_feed_top',['WaterPod','BubblePod','WaterServiceLid','BubbleServiceLid','WaterCapGrip','BubbleCapGrip','WaterHoseRoute','BubbleGunHoseRoute'],'top'),
+    ('top_feed_side',['WaterPod','BubblePod','WaterServiceLid','BubbleServiceLid','WaterCapGrip','BubbleCapGrip','WaterHoseRoute','BubbleGunHoseRoute'],'side'),
+    ('rear_armor_rear',['RearBaseArmor'],'rear'),
+    ('rear_armor_side',['RearBaseArmor'],'side'),
     ('ultrasonic_front',['UltrasonicRingL','UltrasonicFaceL','UltrasonicRingR','UltrasonicFaceR','SensorStatusStrip'],'front'),
     ('ultrasonic_side',['SensorMask','UltrasonicRingL','UltrasonicFaceL','UltrasonicRingR','UltrasonicFaceR'],'side'),
     ('controller_top',['ESP32Board','ControllerCarrier','ControllerSocketFront','ControllerSocketRear','ControllerRetainer'],'top'),

@@ -1,0 +1,85 @@
+{
+  "source": "user confirmed both guns are self-priming and all liquid hoses enter from the top",
+  "self_priming_user_confirmed": {
+    "water": true,
+    "bubble": true
+  },
+  "top_insertion_only": true,
+  "reservoirs": [
+    {
+      "reservoir": "Water",
+      "top_axis_xy_mm": [
+        -24,
+        49
+      ],
+      "dip_end_z_mm": 45.0,
+      "nominal_bottom_reference_z_mm": 40,
+      "nominal_bottom_gap_mm": 5,
+      "top_passage_candidate_diameter_mm": 9.0,
+      "pod_side_wall_symmetric_difference_mm3": 0.0,
+      "vertical_dip_segment_missing_volume_mm3": 0.0,
+      "top_part_clearance_overlaps": [],
+      "top_part_clearance_gaps": [
+        {
+          "object": "WaterPodCap",
+          "distance_mm": 2.9999999999999973
+        },
+        {
+          "object": "WaterFillPlug",
+          "distance_mm": 0.4999999999999964
+        },
+        {
+          "object": "WaterServiceLid",
+          "distance_mm": 0.4999999999999961
+        },
+        {
+          "object": "WaterCapGrip",
+          "distance_mm": 0.4999999999999923
+        }
+      ],
+      "hose_maximum_y_mm": 72.5000001,
+      "passed": true
+    },
+    {
+      "reservoir": "Bubble",
+      "top_axis_xy_mm": [
+        24,
+        49
+      ],
+      "dip_end_z_mm": 45.0,
+      "nominal_bottom_reference_z_mm": 40,
+      "nominal_bottom_gap_mm": 5,
+      "top_passage_candidate_diameter_mm": 9.0,
+      "pod_side_wall_symmetric_difference_mm3": 0.0,
+      "vertical_dip_segment_missing_volume_mm3": 0.0,
+      "top_part_clearance_overlaps": [],
+      "top_part_clearance_gaps": [
+        {
+          "object": "BubblePodCap",
+          "distance_mm": 2.9999999999999973
+        },
+        {
+          "object": "BubbleFillPlug",
+          "distance_mm": 0.49999999999999706
+        },
+        {
+          "object": "BubbleServiceLid",
+          "distance_mm": 0.4999999999999957
+        },
+        {
+          "object": "BubbleCapGrip",
+          "distance_mm": 0.4999999999999923
+        }
+      ],
+      "hose_maximum_y_mm": 51.00000010000001,
+      "passed": true
+    }
+  ],
+  "former_rear_hole_missing_volume_mm3": 0.0,
+  "lid_service_prerequisite": "withdraw both suction hoses before opening either reservoir lid; flexible hose handling not validated",
+  "liquid_allocations": "original cylindrical fluid reservations minus the dip-tube review corridor; not measured capacity",
+  "suction_lift_air_seal_priming_and_physical_fit_verified": false,
+  "passed": true,
+  "source_sha256": "96293fa4088aaaa9786803c6e9734bbefe93cb2aa94efbd6a02918ccebe1ac62",
+  "saved_and_reopened": true
+}

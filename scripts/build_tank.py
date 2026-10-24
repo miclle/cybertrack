@@ -11,6 +11,8 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 import FreeCAD as App
 import Part
+from rear_armor import mirrored_profile, check_rear_armor
+from top_feed import finish_top_feed, check_top_feed
 from refine_assembly import refine, service_groups, check_service_paths
 from controller_layout import check_controller_spaces
 from water_gun_layout import add_water_gun, check_water_gun, check_other_service_sweeps
@@ -249,7 +251,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.26'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.28'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -508,11 +510,8 @@ def main():
         flank=flank.cut(yz_prism([(-89,48),(-72,48),(-56,65),(-67,66),(-90,63)],x0-1,x1+1))
         add('KeelSideFrame'+side,('左' if sign>0 else '右')+'镂空底座侧框',flank,'structure','metal')
     # Preserve wet allocations inside a single faceted backpack with two service lids.
-    bubble_hose_diameter=9
     for name,cx in [('Water',-24),('Bubble',24)]:
         pod=ring(20,17,82,V(cx,49,40))
-        if name=='Bubble':
-            pod=pod.cut(Part.makeCylinder(bubble_hose_diameter/2,45,V(24,50,76),V(0,1,0)))
         add(name+'Pod',('喷水' if name=='Water' else '泡泡')+'背包内部独立液体舱',pod,'structure','dark')
         add(name+'PodCap',('喷水' if name=='Water' else '泡泡')+'内舱盖占位',Part.makeCylinder(20,3,V(cx,49,122)),'structure','metal','内舱封盖占位；补液和拆卸接口待实测')
     pack=faceted_shell_volume([(48,25,76,6,97),(52,24,81,8,104),(49,25,79,8,128)])
@@ -549,19 +548,13 @@ def main():
         mark=[(sign*x,z) for x,z in [(19,100.5),(32,100.5),(32,102),(19,102)]]
         add('PackMark'+side,'背包液体区识别条 '+side,xz_prism(mark,84,84.6),'exterior',color)
     add('BackpackSpine','背包至底座的中央脊梁护甲',xz_prism(spine,79,85),'exterior','metal')
-    # Keep only a hose passage through the tapered rear armor; the gun is front-mounted.
-    rear_profile0=[(-39,34),(39,34),(47,42),(47,89),(39,97),(-39,97),(-47,89),(-47,42)]
-    rear_profile1=[(-34,40),(34,40),(42,48),(42,85),(34,93),(-34,93),(-42,85),(-42,48)]
+    # Closed, mirror-symmetric rear armor; both suction hoses enter from above.
+    rear_profile0=mirrored_profile([(39,34),(47,42),(47,89),(39,97)])
+    rear_profile1=mirrored_profile([(34,40),(42,48),(42,85),(34,93)])
     wires=[]
     for profile,y in [(rear_profile0,74),(rear_profile1,82)]:
         vs=[V(x,y,z) for x,z in profile];wires.append(Part.makePolygon(vs+[vs[0]]))
     rear_armor=Part.makeLoft(wires,True,True)
-    rear_hose_port={'diameter_mm':bubble_hose_diameter,'axis_origin_mm':[24,72,76],'axis_direction':[0,1,0],
-                    'armor_y_range_mm':[74,82],'hose_od_candidate_mm':4,
-                    'route_clearance_diameter_mm':8,'radial_margin_to_route_clearance_mm':0.5,
-                    'basis':'design candidate; existing hose route retained; grommet and seal not selected',
-                    'grommet_or_seal_fit_verified':False,'physical_fit_verified':False}
-    rear_armor=rear_armor.cut(Part.makeCylinder(rear_hose_port['diameter_mm']/2,25,V(*rear_hose_port['axis_origin_mm']),V(0,1,0)))
     rear_armor=rear_armor.cut(spine_seat)
     add('RearBaseArmor','底座斜面后护甲／背包下支座',rear_armor,'exterior','body')
     skid=xz_prism([(-32,42),(32,42),(28,48),(-28,48)],82,83)
@@ -601,6 +594,7 @@ def main():
     bubble_info=add_bubble_gun(doc,add,args.render)
     from gun_pitch import apply_pitch,local_frame
     pitch_info=apply_pitch(doc,rail_bases)
+    finish_top_feed(doc)
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
@@ -697,12 +691,9 @@ def main():
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
                     assert visible==(final_shapes[name].Category not in ('envelope','clearance')),name
     assert sha(source_path)==source_hash
-    report={'status':'preliminary_concept','design_revision':'0.26','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
-            'rear_hose_pass_through':rear_hose_port,
-            'bubble_pod_hose_pass_through':{'diameter_mm':bubble_hose_diameter,'axis_origin_mm':[24,50,76],
-                'axis_direction':[0,1,0],'former_outlet_diameter_mm':25,
-                'basis':'candidate passage through curved pod wall; existing hose route retained; no selected fluid fitting',
-                'fluid_fitting_or_seal_verified':False,'physical_fit_verified':False},
+    report={'status':'preliminary_concept','design_revision':'0.28','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+            'rear_armor_symmetry_check':check_rear_armor(final),
+            'top_feed_check':check_top_feed(final),
             'bounding_box_method':'optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)',
             'power_bank_dimensions_mm':{'source':'user_measurement','length':120,'width':73,'thickness':31.5,
             'orientation':'length X, width Y, thickness Z; low horizontal placement retained from user-approved layout',
@@ -741,6 +732,12 @@ def main():
             'final_saved_audit':{'native_objects_verified':len(final_shapes),'gui_visibility_verified':args.render},
             'previews_generated':args.render,
             'files_sha256':{p.name:sha(p) for p in [cad,step]+(sorted(OUT.glob('*.png')) if args.render else [])}}
+    report['top_feed_check']['source_sha256']=sha(cad)
+    report['top_feed_check']['saved_and_reopened']=True
+    (OUT/'top-feed-audit.json').write_text(json.dumps(report['top_feed_check'],ensure_ascii=False,indent=2)+'\n')
+    report['rear_armor_symmetry_check']['source_sha256']=sha(cad)
+    report['rear_armor_symmetry_check']['saved_and_reopened']=True
+    (OUT/'rear-armor-symmetry-audit.json').write_text(json.dumps(report['rear_armor_symmetry_check'],ensure_ascii=False,indent=2)+'\n')
     report['ultrasonic_check']['source_after_sha256']=sha(cad)
     report['ultrasonic_check']['saved_and_reopened']=True
     (OUT/'ultrasonic-fit-audit.json').write_text(json.dumps(report['ultrasonic_check'],ensure_ascii=False,indent=2)+'\n')
@@ -756,7 +753,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if not report['ultrasonic_check']['passed'] or not report['speaker_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
+    if not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not report['speaker_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 

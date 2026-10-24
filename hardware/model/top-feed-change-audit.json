@@ -1,0 +1,111 @@
+{
+  "baseline_revision": "0.27",
+  "candidate_revision": "0.28",
+  "baseline_sha256": "b47ba88b348ab1dfb6d6e98617c14d71fdc36ad55aa8167cf91c083d5712bd54",
+  "source_sha256": "96293fa4088aaaa9786803c6e9734bbefe93cb2aa94efbd6a02918ccebe1ac62",
+  "method": "saved native objects; unchanged scope: exact BRep match or bidirectional solid difference <= 1e-5 mm3; permitted changed objects: BRep difference and volumes",
+  "added": [],
+  "removed": [],
+  "changed": [
+    {
+      "name": "BackpackShell",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 27441.205721977323,
+      "candidate_volume_mm3": 27666.135285693174
+    },
+    {
+      "name": "BubbleCapGrip",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 840.0000000000002,
+      "candidate_volume_mm3": 712.108569264362
+    },
+    {
+      "name": "BubbleFillPlug",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 537.4888039173709,
+      "candidate_volume_mm3": 302.1049743471555
+    },
+    {
+      "name": "BubbleGunHoseClearance",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 17508.367186098734,
+      "candidate_volume_mm3": 21812.43807028265
+    },
+    {
+      "name": "BubbleGunHoseRoute",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 4377.091796524684,
+      "candidate_volume_mm3": 5453.109517570661
+    },
+    {
+      "name": "BubbleModule",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 56297.34035232909,
+      "candidate_volume_mm3": 52778.756580308516
+    },
+    {
+      "name": "BubblePod",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 28402.44163119237,
+      "candidate_volume_mm3": 28594.776332974303
+    },
+    {
+      "name": "BubbleServiceLid",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 5318.507528534236,
+      "candidate_volume_mm3": 5127.655774828657
+    },
+    {
+      "name": "RearBaseArmor",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 38363.816707118625,
+      "candidate_volume_mm3": 38872.75471700474
+    },
+    {
+      "name": "WaterCapGrip",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 840.0,
+      "candidate_volume_mm3": 712.108569264362
+    },
+    {
+      "name": "WaterFillPlug",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 537.4888039173709,
+      "candidate_volume_mm3": 302.1049743471554
+    },
+    {
+      "name": "WaterGunHoseClearance",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 13463.823436781842,
+      "candidate_volume_mm3": 23298.980683234877
+    },
+    {
+      "name": "WaterHoseRoute",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 5259.306029992907,
+      "candidate_volume_mm3": 9101.164329388619
+    },
+    {
+      "name": "WaterModule",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 56297.34035232908,
+      "candidate_volume_mm3": 52778.756580308516
+    },
+    {
+      "name": "WaterPod",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 28406.14636922607,
+      "candidate_volume_mm3": 28594.77633297429
+    },
+    {
+      "name": "WaterServiceLid",
+      "comparison": "BRep differs; permitted feature scope",
+      "baseline_volume_mm3": 5318.507528534236,
+      "candidate_volume_mm3": 5127.655774828657
+    }
+  ],
+  "unchanged_count": 276,
+  "unrelated_geometry_unchanged": true,
+  "physical_fit_verified": false,
+  "passed": true
+}

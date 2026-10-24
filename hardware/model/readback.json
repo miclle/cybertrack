@@ -1,46 +1,205 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.26",
+  "design_revision": "0.28",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
-  "rear_hose_pass_through": {
-    "diameter_mm": 9,
-    "axis_origin_mm": [
-      24,
-      72,
-      76
+  "rear_armor_symmetry_check": {
+    "object": "RearBaseArmor",
+    "mirror_plane": "X=0",
+    "method": "mirror complete closed armor, vertices and whole faces; no exclusions",
+    "excluded_feature": null,
+    "model_modified_by_check": false,
+    "solid_symmetric_difference_mm3": 0.0,
+    "maximum_mirrored_vertex_distance_mm": 8.881784197001252e-16,
+    "face_pairs": [
+      {
+        "face": 1,
+        "mirrored_face": 1,
+        "area_mm2": 729.9999999999999,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 2,
+        "mirrored_face": 2,
+        "area_mm2": 5794.000000000003,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 3,
+        "mirrored_face": 5,
+        "area_mm2": 126.237870704476,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 4,
+        "mirrored_face": 4,
+        "area_mm2": 3967.58490566038,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 5,
+        "mirrored_face": 3,
+        "area_mm2": 126.237870704476,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 6,
+        "mirrored_face": 10,
+        "area_mm2": 396.2272075463773,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 7,
+        "mirrored_face": 9,
+        "area_mm2": 115.65465835840769,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 8,
+        "mirrored_face": 8,
+        "area_mm2": 608.0417300337834,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 9,
+        "mirrored_face": 7,
+        "area_mm2": 115.65465835840769,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 10,
+        "mirrored_face": 6,
+        "area_mm2": 396.2272075463773,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 11,
+        "mirrored_face": 15,
+        "area_mm2": 104.07402136197834,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 12,
+        "mirrored_face": 14,
+        "area_mm2": 32.984845004941285,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 13,
+        "mirrored_face": 13,
+        "area_mm2": 32.0,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 14,
+        "mirrored_face": 12,
+        "area_mm2": 32.984845004941285,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 15,
+        "mirrored_face": 11,
+        "area_mm2": 104.0740213540115,
+        "symmetric_difference_mm2": 0.0
+      },
+      {
+        "face": 16,
+        "mirrored_face": 16,
+        "area_mm2": 376.4905660377358,
+        "symmetric_difference_mm2": 0.0
+      }
     ],
-    "axis_direction": [
-      0,
-      1,
-      0
-    ],
-    "armor_y_range_mm": [
-      74,
-      82
-    ],
-    "hose_od_candidate_mm": 4,
-    "route_clearance_diameter_mm": 8,
-    "radial_margin_to_route_clearance_mm": 0.5,
-    "basis": "design candidate; existing hose route retained; grommet and seal not selected",
-    "grommet_or_seal_fit_verified": false,
-    "physical_fit_verified": false
+    "tolerance_mm": 1e-05,
+    "tolerance_mm2": 1e-05,
+    "tolerance_mm3": 1e-05,
+    "passed": true,
+    "physical_or_manufacturing_verified": false,
+    "source_sha256": "96293fa4088aaaa9786803c6e9734bbefe93cb2aa94efbd6a02918ccebe1ac62",
+    "saved_and_reopened": true
   },
-  "bubble_pod_hose_pass_through": {
-    "diameter_mm": 9,
-    "axis_origin_mm": [
-      24,
-      50,
-      76
+  "top_feed_check": {
+    "source": "user confirmed both guns are self-priming and all liquid hoses enter from the top",
+    "self_priming_user_confirmed": {
+      "water": true,
+      "bubble": true
+    },
+    "top_insertion_only": true,
+    "reservoirs": [
+      {
+        "reservoir": "Water",
+        "top_axis_xy_mm": [
+          -24,
+          49
+        ],
+        "dip_end_z_mm": 45.0,
+        "nominal_bottom_reference_z_mm": 40,
+        "nominal_bottom_gap_mm": 5,
+        "top_passage_candidate_diameter_mm": 9.0,
+        "pod_side_wall_symmetric_difference_mm3": 0.0,
+        "vertical_dip_segment_missing_volume_mm3": 0.0,
+        "top_part_clearance_overlaps": [],
+        "top_part_clearance_gaps": [
+          {
+            "object": "WaterPodCap",
+            "distance_mm": 2.9999999999999973
+          },
+          {
+            "object": "WaterFillPlug",
+            "distance_mm": 0.4999999999999964
+          },
+          {
+            "object": "WaterServiceLid",
+            "distance_mm": 0.4999999999999961
+          },
+          {
+            "object": "WaterCapGrip",
+            "distance_mm": 0.4999999999999923
+          }
+        ],
+        "hose_maximum_y_mm": 72.5000001,
+        "passed": true
+      },
+      {
+        "reservoir": "Bubble",
+        "top_axis_xy_mm": [
+          24,
+          49
+        ],
+        "dip_end_z_mm": 45.0,
+        "nominal_bottom_reference_z_mm": 40,
+        "nominal_bottom_gap_mm": 5,
+        "top_passage_candidate_diameter_mm": 9.0,
+        "pod_side_wall_symmetric_difference_mm3": 0.0,
+        "vertical_dip_segment_missing_volume_mm3": 0.0,
+        "top_part_clearance_overlaps": [],
+        "top_part_clearance_gaps": [
+          {
+            "object": "BubblePodCap",
+            "distance_mm": 2.9999999999999973
+          },
+          {
+            "object": "BubbleFillPlug",
+            "distance_mm": 0.49999999999999706
+          },
+          {
+            "object": "BubbleServiceLid",
+            "distance_mm": 0.4999999999999957
+          },
+          {
+            "object": "BubbleCapGrip",
+            "distance_mm": 0.4999999999999923
+          }
+        ],
+        "hose_maximum_y_mm": 51.00000010000001,
+        "passed": true
+      }
     ],
-    "axis_direction": [
-      0,
-      1,
-      0
-    ],
-    "former_outlet_diameter_mm": 25,
-    "basis": "candidate passage through curved pod wall; existing hose route retained; no selected fluid fitting",
-    "fluid_fitting_or_seal_verified": false,
-    "physical_fit_verified": false
+    "former_rear_hole_missing_volume_mm3": 0.0,
+    "lid_service_prerequisite": "withdraw both suction hoses before opening either reservoir lid; flexible hose handling not validated",
+    "liquid_allocations": "original cylindrical fluid reservations minus the dip-tube review corridor; not measured capacity",
+    "suction_lift_air_seal_priming_and_physical_fit_verified": false,
+    "passed": true,
+    "source_sha256": "96293fa4088aaaa9786803c6e9734bbefe93cb2aa94efbd6a02918ccebe1ac62",
+    "saved_and_reopened": true
   },
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
   "power_bank_dimensions_mm": {
@@ -2444,14 +2603,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 28406.14636922607,
+      "volume_mm3": 28594.77633297429,
       "bbox_mm": [
-        -44.0000001,
-        28.999999899439214,
-        39.9999999,
-        -3.999999899999999,
-        69.0000001,
-        122.00000010000004
+        -44.0,
+        29.0,
+        40.0,
+        -3.9999999999999987,
+        69.0,
+        122.0
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -2480,14 +2639,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 28402.44163119237,
+      "volume_mm3": 28594.776332974303,
       "bbox_mm": [
-        3.9999999,
-        28.9999999,
-        39.9999999,
-        44.0000001,
-        69.00000010812255,
-        122.0000001
+        4.0,
+        29.0,
+        40.0,
+        44.0,
+        69.0,
+        122.0
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -2516,7 +2675,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 27441.205721977323,
+      "volume_mm3": 27666.135285693174,
       "bbox_mm": [
         -52.0000001,
         23.9999999,
@@ -2534,7 +2693,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 5318.507528534236,
+      "volume_mm3": 5127.655774828657,
       "bbox_mm": [
         -45.0,
         29.0,
@@ -2552,7 +2711,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 840.0,
+      "volume_mm3": 712.108569264362,
       "bbox_mm": [
         -34.0,
         42.0,
@@ -2588,7 +2747,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 5318.507528534236,
+      "volume_mm3": 5127.655774828657,
       "bbox_mm": [
         2.9999999999999987,
         29.0,
@@ -2606,7 +2765,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 840.0000000000002,
+      "volume_mm3": 712.108569264362,
       "bbox_mm": [
         14.0,
         42.0,
@@ -2876,7 +3035,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 38363.816707118625,
+      "volume_mm3": 38872.75471700474,
       "bbox_mm": [
         -47.0000001,
         73.9999999,
@@ -3088,11 +3247,11 @@
     },
     {
       "name": "WaterModule",
-      "label": "后部喷水液体区占位 Ø32×70",
+      "label": "喷水液体区占位／扣除顶部吸管预留",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 56297.34035232908,
+      "volume_mm3": 52778.756580308516,
       "bbox_mm": [
         -40.0,
         33.0,
@@ -3106,11 +3265,11 @@
     },
     {
       "name": "BubbleModule",
-      "label": "后部泡泡液体区占位 Ø32×70",
+      "label": "泡泡液体区占位／扣除顶部吸管预留",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 56297.34035232909,
+      "volume_mm3": 52778.756580308516,
       "bbox_mm": [
         8.0,
         33.0,
@@ -3776,7 +3935,7 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 537.4888039173709,
+      "volume_mm3": 302.1049743471554,
       "bbox_mm": [
         -30.8,
         42.2,
@@ -3884,7 +4043,7 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 537.4888039173709,
+      "volume_mm3": 302.1049743471555,
       "bbox_mm": [
         17.2,
         42.2,
@@ -4060,18 +4219,18 @@
     },
     {
       "name": "WaterHoseRoute",
-      "label": "喷水软管 Ø5 实测／R8 圆弧过渡至枪侧",
+      "label": "喷水顶部吸液管 Ø5 实测／R8／侧向接前枪",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 5259.306029992907,
+      "volume_mm3": 9101.164329388619,
       "bbox_mm": [
-        -26.500000099999998,
+        -26.500000100000005,
         -115.74830022719505,
-        109.40224739262055,
-        92.5000001,
-        39.0,
-        132.5000001
+        45.0,
+        101.5000001,
+        72.5000001,
+        151.5000001
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -4838,14 +4997,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 13463.823436781842,
+      "volume_mm3": 23298.980683234877,
       "bbox_mm": [
-        -28.0000001,
+        -28.000000100000005,
         -117.24830022719505,
-        107.90224739262055,
-        94.0000001,
-        39.0,
-        134.0000001
+        45.0,
+        103.0000001,
+        74.0000001,
+        153.0000001
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -5266,18 +5425,18 @@
     },
     {
       "name": "BubbleGunHoseRoute",
-      "label": "泡泡液管候选 Ø4／R8／后部绕右侧",
+      "label": "泡泡顶部吸液管候选 Ø4／R8／侧向接前枪",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 4377.091796524684,
+      "volume_mm3": 5453.109517570661,
       "bbox_mm": [
-        -92.0000001,
-        -60.86261755714306,
-        73.9999999,
-        26.000000100000005,
-        98.0000001,
-        106.0000001
+        -101.0000001,
+        -60.862617557143054,
+        45.0,
+        26.00000010000001,
+        51.00000010000001,
+        163.0000001
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -5288,14 +5447,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 17508.367186098734,
+      "volume_mm3": 21812.43807028265,
       "bbox_mm": [
-        -94.0000001,
-        -61.03692904263837,
-        71.9999999,
-        28.000000100000005,
-        100.0000001,
-        108.0000001
+        -103.0000001,
+        -61.03692904263836,
+        45.0,
+        28.00000010000001,
+        53.00000010000001,
+        165.0000001
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -5418,7 +5577,7 @@
     "valid": true,
     "solids": 860,
     "expected_solids": 860,
-    "volume_difference_mm3": 6.435526837594807,
+    "volume_difference_mm3": 0.8217841973528266,
     "bbox_difference_mm": 9.697487257653847e-11,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -5427,7 +5586,7 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 691,
+    "boolean_pairs_tested": 827,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
@@ -5503,7 +5662,7 @@
       "hose": {
         "measured_od_mm": 5,
         "measurement_source": "user 2026-10-24",
-        "routing": "outer side via two saddles to rear reservoir; no underside crossing",
+        "routing": "top-inserted suction tube via side route and two saddles; no rear-armor passage",
         "route_clearance_diameter_mm": 8,
         "centreline_bend_radius_mm": 8,
         "unplug_direction_mm": [
@@ -5905,7 +6064,7 @@
           "method": "exact continuous capsule sweep of 6 mm straight hose section only",
           "measured_hose_od_mm": 5,
           "seat_diameter_mm": 5.6,
-          "minimum_tube_support_gap_mm": 0.2999999999997949,
+          "minimum_tube_support_gap_mm": 0.29999999999999716,
           "overlaps": [],
           "passed": true
         },
@@ -5920,7 +6079,7 @@
           "method": "exact continuous capsule sweep of 6 mm straight hose section only",
           "measured_hose_od_mm": 5,
           "seat_diameter_mm": 5.6,
-          "minimum_tube_support_gap_mm": 0.29999999999994564,
+          "minimum_tube_support_gap_mm": 0.2999999999999567,
           "overlaps": [],
           "passed": true
         },
@@ -6213,28 +6372,33 @@
         "points_mm": [
           [
             24,
-            65,
-            76
+            49,
+            45
           ],
           [
             24,
-            96,
-            76
+            49,
+            161
           ],
           [
-            24,
-            96,
-            104
+            -99,
+            49,
+            161
           ],
           [
-            -90,
-            96,
-            104
+            -99,
+            10,
+            161
           ],
           [
-            -90,
+            -99,
+            10,
+            100
+          ],
+          [
+            -99,
             -45,
-            104
+            100
           ],
           [
             -55,
@@ -6759,28 +6923,33 @@
     "water_hose_points_world_mm": [
       [
         -24,
-        39,
-        118
+        49,
+        45
       ],
       [
         -24,
-        22,
-        118
+        49,
+        149
       ],
       [
-        -4,
-        20,
-        130
+        -24,
+        70,
+        149
       ],
       [
-        78.2,
-        20,
-        130
+        99,
+        70,
+        149
+      ],
+      [
+        99,
+        10,
+        149
       ],
       [
         78.20000000000002,
-        -12.63263561992873,
-        111.71779318042823
+        -2.6706886390112743,
+        110.84623575295166
       ],
       [
         78.20000000000002,
@@ -6806,26 +6975,31 @@
     "bubble_hose_points_world_mm": [
       [
         24,
-        65,
-        76
+        49,
+        45
       ],
       [
         24,
-        96,
-        76
+        49,
+        161
       ],
       [
-        24,
-        96,
-        104
+        -99,
+        49,
+        161
       ],
       [
-        -90,
-        96,
-        104
+        -99,
+        10,
+        161
       ],
       [
-        -90,
+        -99,
+        10,
+        100
+      ],
+      [
+        -99,
         -45,
         100
       ],
@@ -6895,7 +7069,7 @@
           "AccessScrewL",
           "AccessScrewR"
         ],
-        "boolean_pairs_tested": 22,
+        "boolean_pairs_tested": 38,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -6976,7 +7150,7 @@
           "WaterHoseRoute",
           "ControllerWireRoute"
         ],
-        "boolean_pairs_tested": 89,
+        "boolean_pairs_tested": 144,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -7008,9 +7182,11 @@
         "pose_count": 24,
         "removed_first": [
           "FillScrewWaterR",
-          "FillScrewWaterL"
+          "FillScrewWaterL",
+          "WaterHoseRoute",
+          "BubbleGunHoseRoute"
         ],
-        "boolean_pairs_tested": 25,
+        "boolean_pairs_tested": 19,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -7042,9 +7218,11 @@
         "pose_count": 24,
         "removed_first": [
           "FillScrewBubbleR",
-          "FillScrewBubbleL"
+          "FillScrewBubbleL",
+          "WaterHoseRoute",
+          "BubbleGunHoseRoute"
         ],
-        "boolean_pairs_tested": 25,
+        "boolean_pairs_tested": 19,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -7329,12 +7507,12 @@
           "WaterHoseRoute",
           "ControllerWireRoute"
         ],
-        "boolean_pairs_tested": 21,
+        "boolean_pairs_tested": 41,
         "overlaps": [],
         "continuous_translation_sweep": {
           "method": "exact capsule cross-section extruded along Y for each straight translation of the cylindrical envelope",
           "segment_count": 3,
-          "boolean_pairs_tested": 3,
+          "boolean_pairs_tested": 6,
           "overlaps": [],
           "passed": true,
           "scope": "bare cylindrical envelope after listed prerequisites; excludes mounts, leads and tools"
@@ -7389,7 +7567,7 @@
           "ControllerMountScrew10",
           "ControllerMountScrew11"
         ],
-        "boolean_pairs_tested": 65,
+        "boolean_pairs_tested": 94,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -7440,7 +7618,7 @@
           "ControllerRetainerScrewFront",
           "ControllerRetainerScrewRear"
         ],
-        "boolean_pairs_tested": 20,
+        "boolean_pairs_tested": 23,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -7834,7 +8012,7 @@
     "outside_original_allocation_mm3": 0.0,
     "outside_head_cavity_mm3": 0.0,
     "overlap_tolerance_mm3": 0.01,
-    "static_boolean_pairs": 2,
+    "static_boolean_pairs": 6,
     "overlaps": [],
     "reserved_space_overlaps": [],
     "nearby_distances": [
@@ -8129,6 +8307,11 @@
         "distance_mm": 44.278945335226766
       },
       {
+        "object": "BubbleGunHoseClearance",
+        "category": "clearance",
+        "distance_mm": 45.41124423471661
+      },
+      {
         "object": "TempleGuardL",
         "category": "exterior",
         "distance_mm": 47.25
@@ -8137,6 +8320,11 @@
         "object": "TempleGuardR",
         "category": "exterior",
         "distance_mm": 47.25
+      },
+      {
+        "object": "BubbleGunHoseRoute",
+        "category": "envelope",
+        "distance_mm": 47.404913586742246
       },
       {
         "object": "AudioSideGuardL",
@@ -8149,6 +8337,11 @@
         "distance_mm": 47.802981078589646
       },
       {
+        "object": "WaterGunHoseClearance",
+        "category": "clearance",
+        "distance_mm": 48.1901964158746
+      },
+      {
         "object": "TempleLowerBladeL",
         "category": "exterior",
         "distance_mm": 49.25
@@ -8157,6 +8350,11 @@
         "object": "TempleLowerBladeR",
         "category": "exterior",
         "distance_mm": 49.25
+      },
+      {
+        "object": "WaterHoseRoute",
+        "category": "envelope",
+        "distance_mm": 49.69019641587461
       },
       {
         "object": "TempleCrestL",
@@ -8222,7 +8420,7 @@
     "passed": true,
     "mounts_leads_acoustics_verified": false,
     "physical_fit_verified": false,
-    "source_after_sha256": "54f0950390a14b50561ae82bcc7cf38e97e05b85139ec9266166ca31995088b6",
+    "source_after_sha256": "96293fa4088aaaa9786803c6e9734bbefe93cb2aa94efbd6a02918ccebe1ac62",
     "saved_and_reopened": true
   },
   "ultrasonic_check": {
@@ -8450,7 +8648,7 @@
     "mounting_verified": false,
     "physical_fit_verified": false,
     "acoustic_verified": false,
-    "source_after_sha256": "54f0950390a14b50561ae82bcc7cf38e97e05b85139ec9266166ca31995088b6",
+    "source_after_sha256": "96293fa4088aaaa9786803c6e9734bbefe93cb2aa94efbd6a02918ccebe1ac62",
     "saved_and_reopened": true
   },
   "manufacturing_released": false,
@@ -8463,43 +8661,43 @@
   },
   "previews_generated": true,
   "files_sha256": {
-    "CyberTrack.FCStd": "54f0950390a14b50561ae82bcc7cf38e97e05b85139ec9266166ca31995088b6",
-    "CyberTrack.step": "1b543ebed198934b580e969451c5b7e8d2dddb0016c6c8ed9f0f23f56ee971d1",
-    "arc-layout.png": "c2a487ca4251f9cf9e127e6b5e4b5965c23d5981175048639ad08fa7c69e5bb7",
-    "arc-top.png": "099a3df74b539291c9fa46bf4cedb9d519d295d3238a8dbe5f23680112c6e516",
-    "assembly.png": "4c6786a187b1711c7ba9013425cfce0b2a1c6e1730b69b491b2ee8efbd885f9f",
-    "bubble-gun-clearance.png": "68c6f7d82ac0d8d0b83b2751ff9b737c78bcdfaa5826d31e97b799ce63cb5b69",
-    "bubble-gun-component.png": "67500faae55fe00939c5c5491ca435d41cbac99447ddbca41a067feeeec00c64",
-    "bubble-gun-layout.png": "68acf370882059419af37c000a6c2f14aa7d922051bdd19088ff634a59ccd890",
-    "bubble-gun-mount.png": "e4f7723f0b6134e75da11bd966f63d33534a2cbfee43b866ee60c082d916864c",
-    "bubble-gun-service.png": "6a4ef24e157135f1405a5028fad69183c4fb31ec37fd5f04402a837a7b965a10",
-    "bubble-gun-side.png": "4726d6ef5a7e40d48298bd2655cc638f99acaab12178dbb4e1d8cc26990ca18a",
-    "bubble-gun-spaces.png": "ed7fd97093dd9633ba85611b0d2a7b1f67266cb0566eb0b1b8d114f4c2a1c089",
-    "controller-access.png": "4bdd414a0042a66ab9ee827d9687db8fe696d107e69a4b2e3afccf518bb04985",
-    "controller-layout.png": "f49dc32503483b1e353869f54357fea17e2b6c7bac75476767574cf832be0647",
-    "controller-service.png": "c89e45fb04e97736de784e1a186f66900e51be249a0c9baf0957d5a5719974b4",
-    "crown-effects-top.png": "5781662e5828050bb0394e6f3102b5cab2650d6b0c488b001ad5c7adc47cfe44",
-    "crown-effects.png": "cc38c04ce7ab7f7527a4b5f239e52ce646c862c3635bb72d1855b0d27c347378",
-    "front.png": "efe51b8ea58bf8b694eca7a0326c9dc5042134946e049b0321cb15b698efbf33",
-    "layout.png": "8b30de10efad32cceaddb3d22edade9b0d6041c0864f6f8d7e5867de904162d0",
-    "lower-layout.png": "680497521af9347b1285fa6fd676b6bf31ed8196aed2677908e516186055399a",
-    "rear-assembly.png": "e753b94613d99e2608eab1bfb141405d81872e2f80037ed57b8b181037e594eb",
-    "rear.png": "1ee1f26f738b66793d261e8386139a338fe4cb81b47270cd0020782501725c8d",
-    "right.png": "64a6400ee57f1864a5dca6539f0bf7f2ecf5f0543f39aca706196d7a3509f9b2",
-    "routing.png": "bcab467f0519ae6d5d3954378868413f175935b430b4ca806e563d23c079682d",
-    "service.png": "25ad5aac9f25b57f6d81ab09535e2e0a88cc036ffb1e83978e614d976306e0c0",
-    "side.png": "c22bbb13c9ab6381baa56948abb99c1b63ac9a8b6becc60afc1ba4e54ef05013",
-    "speaker-layout.png": "13750642827d2ad726a535f5823dbe7721026016cc5180f39e95648a0aafe615",
-    "speaker-top.png": "2770d19654c58e4d4f770ee754f629721497dec2930c82b3c8670c5f4741782e",
-    "top.png": "64587a7808d07af438e2934f9ecdd9829472ee43bc0ddb9684a5d6980683ec7e",
-    "ultrasonic-front.png": "41ebd126acc2fa1cfab8d19235aa97dbfa01f70719990278711e8d70602d4bcf",
-    "ultrasonic-layout.png": "70e47ea1abd69126bb69a8efa13d2c5459fc631eeb37be300c304e81d554b3c3",
-    "water-gun-clearance.png": "3ef238402a0f8ce722850666a84142beee3866bda317e32356525f49b1fb3003",
-    "water-gun-component.png": "0385bd6a9c34e5423479e93ec042f0afbb505706d3ee7abe74ebfa7f2570cf26",
-    "water-gun-layout.png": "ed14833a3db1f1769a9b0862eb64e36949c689cf739a1a750c8868646dc62816",
-    "water-gun-mount.png": "1222a1b8809ef302fd9999b67fee156bd945620b8f3aa2aec327a8298668b2b7",
-    "water-gun-service.png": "30cbb855baec806f348d13e4b0440166436d840f57b992a2a681ebc62ec8e93b",
-    "water-gun-side.png": "92a31f834ea8876917d0be26377e5e0c3f08a694b5e0ae87c0afc36574b5249e",
-    "water-gun-spaces.png": "0d29eace744d726715f7b5944eba0fda62ed73cfc6eb1b3166720e78a63b016b"
+    "CyberTrack.FCStd": "96293fa4088aaaa9786803c6e9734bbefe93cb2aa94efbd6a02918ccebe1ac62",
+    "CyberTrack.step": "37090a994cf7cbed9026fee6cf69e2515f6583107ce2c1316b28947b5e123ae1",
+    "arc-layout.png": "2c0ea6e303d10bc03ed22140b1d7522a920ee74f68d5e474af1f876ffbe59829",
+    "arc-top.png": "e99c26547bdcda96fb2a8e04702be149286b5337aaf80672781377fbb439f5e3",
+    "assembly.png": "c0fc8e0a417e50c94b4a8501eb7b8504e04f44da0ba4b8bf165b287bdd4d443e",
+    "bubble-gun-clearance.png": "e0325b2ec374089591049cf4e5c2d1bc53fdd6347c91cd04fcec8580992c8306",
+    "bubble-gun-component.png": "9670a96b3d2d2c17d4e358c16a69f1ccf5bdf70c7c24d6440ddcc2820286d19b",
+    "bubble-gun-layout.png": "ce334ed1ed58b9ca23749caeea454b004a71d94e3be7129d24e49278fca42697",
+    "bubble-gun-mount.png": "6b9bf30aa4877ef37833aeb959ca78a331cfbc881924de915ad9ebaa1b623182",
+    "bubble-gun-service.png": "193e120eceb562742f5873ef3565888258f581800bd88d66fe3239f0f2711816",
+    "bubble-gun-side.png": "8308933cd6d532d0cb61218db352c7a587d04f38ca317b698baa5edb13d26c6f",
+    "bubble-gun-spaces.png": "b2c04284e987dbc413d2bf4e1baed93875b8d4f1b30e6947208436783c733648",
+    "controller-access.png": "6fcd0f734af200df70c92419a1a4d7483253820d63b47cb63838279e8739a9af",
+    "controller-layout.png": "12a37ecb2aaf814470c5c3890fb9d9b348a4e625b517ca9073fa67c53632fe78",
+    "controller-service.png": "f5c93e9845084b7ebe08026553cf8aa61ed160deadd778e81566ffecd8b5a477",
+    "crown-effects-top.png": "d061f8b39df1c9c35cbe304435640dc0cad1652a90e5b848a1cd8e3467b08bc5",
+    "crown-effects.png": "bc06c4f29d20614763256a56b0b29f18adc3f98ffeb36bccd47afd08cdb80114",
+    "front.png": "0e33577960ca62e10ddd43c6e0b64a3cfb98b89c36bdd9946b723d1ea1f19dac",
+    "layout.png": "ba59d242befdc208c7ec2b06b089c51d08630c7b8231766f6369b992f9fb0919",
+    "lower-layout.png": "77b227d5162b3769cacac4183c095f94b62af0a06f726b40959dc3527a50270a",
+    "rear-assembly.png": "c476356474fe2191638d2609d25c3d7912937813d88e9c7bd471eca101c2f0f3",
+    "rear.png": "c999f7c07e57e6cf7377fd561ca44f3e8295f4a0d54b256b888898570e5279bb",
+    "right.png": "b4ec71fb2d9961e744a7d0ceaa213a11847a32db62148dac0a6136c1186bf826",
+    "routing.png": "beaba6031a79956316c69db79413c107051a0ba5788408c5ed29fc0a3e87b0d8",
+    "service.png": "4994f3413c4099e43d2dcd2610a306071b60cb97e2ef895e93155edf0c282c34",
+    "side.png": "1f023c5fc545e9820bd25ffe38362bbc2df8086db6bc859b1ceb8fc5ec7db16f",
+    "speaker-layout.png": "901df5dcf149fe07a7bc6805994f9b09cc716f6aa89c35c85e2c0d46c43ca1a9",
+    "speaker-top.png": "5d6e4ee22d88038ca21aac3d5f48bbaacd4032ffaa41eaf18f9822b431f6dc34",
+    "top.png": "a0045ebf263c96804f017fcc4ff91e3d12d2c9f64cc7bf990e46cc98a0faf779",
+    "ultrasonic-front.png": "92d38d1c434e759bb8ce9a069cde280d9feba71d0c7d213a4730848c9c4707c1",
+    "ultrasonic-layout.png": "2a36281864e1221bc85a40857d2e6e2c241555fa41c93d4363a9525b87a9f0c1",
+    "water-gun-clearance.png": "4b58c4784b6f1729b3d3c95d729f90af5aadfd0e6097ba7af3c1193c27e2d5df",
+    "water-gun-component.png": "864f0f573faa4b7f12a3c8662d1ae7a5be4d31c8757d05e0bb13e0d9477391f5",
+    "water-gun-layout.png": "85c3255164c7f664f57d068fb999d6b2a5e9856698974cb2c029932e8cafd4b5",
+    "water-gun-mount.png": "7969b7595977c24b12250871ff736b8d7133635114770c8e4a232e2ceea823c9",
+    "water-gun-service.png": "858820afb5b54fefc95bd1d6c41100f9a69bb5135ce678499dd976ef89bffca8",
+    "water-gun-side.png": "bc9261a34849e7ef3fab7706fafc29133028710e6594997a4727bf3546e44482",
+    "water-gun-spaces.png": "073a78f5ac2efc26f4bf754e4eb70aa98c61633d913446d7ec6bb42f7154d7c9"
   }
 }
