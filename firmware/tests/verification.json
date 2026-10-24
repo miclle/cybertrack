@@ -1,6 +1,6 @@
 {
   "validation_date": "2026-10-24",
-  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity, read-only capacity isolation and lossless offline replay-store migration, independent rollback-resistant anchor contract, atomic offline backend selection, guarded protocol attachment and non-reusable version reservation, explicit local maintenance recovery from exact anchored snapshots, incomplete-history refusal and interrupted recovery simulations, independent complete write-ahead recovery evidence with unique attempt epochs, missing-primary recovery, logged protocol attachment and interrupted journal simulations, preparation continuity via durable unchanged-history bridges before attempt allocation, dual-slot exact selection and missing-primary recovery across action/session preparation cuts, initial logged enrollment and exact-history attachment seeding; durable target log before backend selection; immediate missing-primary recovery before the first bridge/session save",
+  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity, read-only capacity isolation and lossless offline replay-store migration, independent rollback-resistant anchor contract, atomic offline backend selection, guarded protocol attachment and non-reusable version reservation, explicit local maintenance recovery from exact anchored snapshots, incomplete-history refusal and interrupted recovery simulations, independent complete write-ahead recovery evidence with unique attempt epochs, missing-primary recovery, logged protocol attachment and interrupted journal simulations, preparation continuity via durable unchanged-history bridges before attempt allocation, dual-slot exact selection and missing-primary recovery across action/session preparation cuts, initial logged enrollment and exact-history attachment seeding; durable target log before backend selection; immediate missing-primary recovery before the first bridge/session save, explicit four-slot recovery journal redundancy with full-history replica comparison, exact-anchor surviving-replica recovery, rotation and repair interruptions combined with single-slot corruption",
   "environment": {
     "os": "macOS arm64",
     "compiler": "Apple Clang 21.0.0",
@@ -13,7 +13,7 @@
     "ctest --test-dir build/firmware-host --output-on-failure"
   ],
   "ctest": {
-    "passed": 21,
+    "passed": 23,
     "failed": 0,
     "control_scenario_groups": 8,
     "protocol_test_methods": 24,
@@ -67,16 +67,14 @@
     "selection_integration_groups": 4,
     "execution": {
       "full_run": {
-        "passed": 20,
-        "failed": 1
+        "passed": 23,
+        "failed": 0,
+        "elapsed_seconds": 258.96
       },
-      "fixture_correction": "selection integration reused an already retired intent, so replay rejection preceded the intended freshness assertion; each cycle now produces a distinct delayed intent before transition; product logic unchanged",
-      "rebuild": "cmake --build build/firmware-host --target selection_integration_test",
-      "rerun": "ctest --test-dir build/firmware-host --rerun-failed --output-on-failure",
-      "rerun_passed": 1,
-      "rerun_failed": 0,
-      "final_all_21_test_targets_passed": true
-    }
+      "command": "ctest --test-dir build/firmware-host --output-on-failure"
+    },
+    "replay_redundancy_groups": 6,
+    "redundancy_integration_groups": 4
   },
   "sanitizers": {
     "address": "no error reported",
@@ -112,13 +110,13 @@
     "physical independent log isolation, epoch-only anchor CAS and journal wear/latency budget"
   ],
   "source_sha256": {
-    "firmware/CMakeLists.txt": "64bd574dddfc4632dbe75ca4962db47d46970519c3ce9a721ae49317306b68d3",
+    "firmware/CMakeLists.txt": "ce946aa65733516200cca064cec5fc781acf1ac8a92e35a4a10b9c4db69b531a",
     "firmware/include/cybertrack/control.h": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a",
     "firmware/include/cybertrack/inbox.h": "dd4b0937734c038bab26974ed084d457adaae04f1041ee64ac165817a80f6398",
     "firmware/include/cybertrack/inputs.h": "6e0cf7dc7023c5c885e5a4d4740fb06a4aa92fc707b4bc321fa35cfce4366d64",
     "firmware/include/cybertrack/link.h": "7317688493f0dd0c101a74f000d3735a727db79e149abc76d6c53f3181226e5a",
     "firmware/include/cybertrack/protocol.h": "38179d23096d2bfac65aad651d0d33d7273a9bd92551a3bed7cded360a733a60",
-    "firmware/include/cybertrack/replay_store.h": "12f511501ca264eb4a0b53b45af47048ff4f97fb307c2b3787d365f490dcb244",
+    "firmware/include/cybertrack/replay_store.h": "c6795b049d428329c6b8575bde7d118928874e1fd3209eeffebb0b8e78102b2a",
     "firmware/include/cybertrack/runtime.h": "15229b5b8e5efef30d6be680a3ed09976f2b7beb1817add732698abb1ad95724",
     "firmware/src/control.c": "2158325e95fa32622735ca7466a5580eaaac6dc23be142ee91b4e384adcf1ec9",
     "firmware/src/inbox.c": "aaf2fd321276b6abc26542b22cc353863f8701fb51aa04976f368ead2c16da25",
@@ -157,15 +155,17 @@
     "firmware/tests/switch_integration_test.c": "557080d2cd6f940feaba897785adebfc1f1f3c6274eb27bb8e303d46c4da47e1",
     "firmware/tests/replay_recovery_test.c": "e051c25a83ffa163f8ab5d85b0ade02ddbf71afa7eaecc23bdd1b25b23b825b4",
     "firmware/tests/recovery_integration_test.c": "8f8a83fa75a7584c4470e42a3ee385ae00b952909d6aeaecc1027985a1540e31",
-    "firmware/include/cybertrack/replay_log.h": "4c33d0083f93a6c74445e789f0d2ed3efe0dd8d99d5f591c34870b03ce57d89e",
-    "firmware/src/replay_log.c": "33bb94f3016b34c601e276bab193cef969a1b9417d9efd56077ec19d7c8e09e3",
-    "firmware/src/replay_log_internal.h": "31609347567082baf3bfc9c02ffea13915853be77e61d0ac11ec73d2aa5f4e3d",
-    "firmware/tests/fake_log.c": "a37c90c0e4c6042bf86b8bea8ae3cc8a502fd50249edfd3d4232cdb9708169ef",
-    "firmware/tests/fake_log.h": "a0e00c9bd16393a88acc33bcc6fa887c07462c54c98c4c70de9ac28288d691f1",
+    "firmware/include/cybertrack/replay_log.h": "9c9247044b835eceff76fced082635b713ca5e463096012cfdcb9ad976e1eb05",
+    "firmware/src/replay_log.c": "00ad524c322af5b8a47fc50d7d6a4a2f677d9afb40fb6fa2f5ec4669fbab74cf",
+    "firmware/src/replay_log_internal.h": "8361bd49f65144990c491fcd9ef92150a0e92fc26590c604100fafad472117b7",
+    "firmware/tests/fake_log.c": "3fd94d2244551c20b8cdf544feecf5b08f5785d0c1dd38b62393f4bbaefb0201",
+    "firmware/tests/fake_log.h": "bb2cc23152bd02e843c91dad68eb08b9dfe01caf49550e446926d82e16310726",
     "firmware/tests/replay_log_test.c": "5da20e95227abf92a1c30a89599c9be34b4d312a6ed228a465bd1ca0592d2662",
     "firmware/tests/log_integration_test.c": "396b42a43d3f232370ff8418179c84e46b7ec56eabc75700a06567f873118046",
     "firmware/tests/replay_selection_test.c": "e63168be4d4d1d76c957a236a5215c10a15429025715642f7c9117b7d6b98c52",
-    "firmware/tests/selection_integration_test.c": "e442241312abe78b83e562dd5469181fb924bfb0ce421174a4a4bdcc7276aa6a"
+    "firmware/tests/selection_integration_test.c": "e442241312abe78b83e562dd5469181fb924bfb0ce421174a4a4bdcc7276aa6a",
+    "firmware/tests/replay_redundancy_test.c": "e131bf84b747c52424edf948ae5e204084b65b31269dc2da064d9156ec240bad",
+    "firmware/tests/redundancy_integration_test.c": "0e5cea9b77c04d913c1a65b63d876bdf718dbec8dc9a3abb5f29d0fdb0a60916"
   },
   "f2_status": "partial: portable runtime, input filter and inbox verified on host; real board adapter and qualification pending",
   "inbox_object_bytes_host": 8552,
@@ -666,7 +666,7 @@
     "history_bits_lost": 0,
     "protocol_object_bytes_host": 137448,
     "store_object_bytes_host": 65704,
-    "log_object_bytes_host": 32864,
+    "log_object_bytes_host": 32872,
     "primary_media_bytes": 65600,
     "log_slot_bytes": 32816,
     "log_media_bytes": 65632,
@@ -768,12 +768,90 @@
       "conflicting_seed_policy": "reject duplicate key or same key with different full filter",
       "target_log_failure_status": "CT_RECOVERY_LOG_UNAVAILABLE",
       "wire_layout_changed": false,
-      "object_sizes_changed": false,
       "new_heap_allocations": false,
       "physical_power_loss_tested": false,
       "integration_rejection_assertions": 6987,
       "unexpected_replays": 0,
-      "history_bits_lost": 0
-    }
+      "history_bits_lost": 0,
+      "store_and_protocol_object_sizes_changed": false
+    },
+    "mode": "legacy two-slot; see recovery_log_redundancy for explicit four-slot mode"
+  },
+  "recovery_log_redundancy": {
+    "api": "ct_replay_log_init_redundant",
+    "tests": [
+      "firmware/tests/replay_redundancy_test.c",
+      "firmware/tests/redundancy_integration_test.c"
+    ],
+    "storage_groups": 6,
+    "integration_groups": 4,
+    "physical_slots": 4,
+    "replica_pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ]
+    ],
+    "record_bytes": 32816,
+    "media_bytes": 131264,
+    "log_object_bytes_host": 32872,
+    "caller_workspace_bytes": 32768,
+    "combined_log_and_workspace_bytes_host": 65640,
+    "additional_log_pointer_bytes_host": 8,
+    "store_object_bytes_host": 65704,
+    "protocol_object_bytes_host": 137448,
+    "new_heap_allocations": false,
+    "write_order": [
+      "scan all four slots for current exact-anchor history",
+      "preserve current pair",
+      "write/sync/commit/sync/readback first target replica",
+      "write/sync/commit/sync/readback second target replica",
+      "only then allow anchor CAS and readback"
+    ],
+    "read_policy": "accept a surviving exact current-anchor replica; all readable valid exact-key replicas must agree byte-for-byte and belong to one pair; never fall back to an older or unselected record",
+    "write_policy": "all target replica writes and readbacks must succeed; permanent target read failure locks actions even when evidence was recovered from the healthy pair",
+    "repair_policy": "attach checks full bound primary history and repairs only missing/invalid current replicas while preserving surviving exact evidence; missing-primary maintenance writes a fresh target pair before selecting it",
+    "no_current_evidence": "lock; if any scan read fails and no current record matches, also refuse to seed over unknown evidence",
+    "log_records_per_changed_save": 4,
+    "log_syncs_per_changed_save": 8,
+    "anchor_replacements_per_changed_save": 2,
+    "log_records_per_enrollment_or_target_selection": 2,
+    "log_syncs_per_enrollment_or_target_selection": 4,
+    "single_replica_repair_log_syncs": 2,
+    "complete_pair_attach_writes": 0,
+    "record_wire_format_changed": false,
+    "primary_format_changed": false,
+    "anchor_layout_changed": false,
+    "legacy_mode": "explicit two-slot initializer and prior fault semantics retained; no automatic downgrade from four-slot mode",
+    "upgrade_boundary": "local adapter must verify four isolated slots and retain complete primary history and anchor before attaching; no automatic media expansion or unverified legacy driver reuse",
+    "physical_power_loss_tested": false,
+    "remaining": [
+      "four-slot physical erase/isolation and common-mode failures",
+      "Flash wear and worst-case durable sync latency",
+      "rollback-resistant anchor and firmware downgrade protection",
+      "real local maintenance authorization and trusted backend identity"
+    ],
+    "storage_single_bit_corruptions": 352,
+    "storage_rotation_cuts_with_single_replica_damage": 1056,
+    "storage_tolerated_read_failures": 20,
+    "storage_replica_repair_cuts": 264,
+    "storage_enrollment_cuts": 264,
+    "storage_target_log_cuts_with_damage": 528,
+    "storage_anchor_cuts_with_damage": 34,
+    "storage_repeated_recoveries": 100,
+    "integration_damage_cases": 8,
+    "integration_action_rotation_cuts": 288,
+    "integration_session_rotation_cuts": 288,
+    "integration_target_log_cuts": 144,
+    "integration_anchor_cuts": 24,
+    "integration_primary_cuts": 36,
+    "integration_repeated_double_recoveries": 100,
+    "integration_rejection_assertions": 7524,
+    "history_bits_lost": 0,
+    "unexpected_replays": 0
   }
 }

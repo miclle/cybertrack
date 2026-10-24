@@ -10,7 +10,8 @@
 
 typedef enum { CT_STORE_FAULT, CT_STORE_EMPTY, CT_STORE_READY } ct_store_state;
 
-/* Two isolated slots, each CT_REPLAY_SLOT_BYTES. Exact-length transfers: false
+/* Primary media: two isolated slots, each CT_REPLAY_SLOT_BYTES. Journals use
+ * their own slot count/size (see replay_log.h). Exact-length transfers: false
  * may mean partial completion. sync(true) guarantees all earlier mutations are
  * durable and ordered across power loss, not merely readable in a write cache.
  * erase affects ONLY the selected slot. Calls must be bounded/non-reentrant.
