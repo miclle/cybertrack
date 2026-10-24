@@ -13,6 +13,7 @@ import FreeCAD as App
 import Part
 from refine_assembly import refine, service_groups, check_service_paths
 from controller_layout import check_controller_spaces
+from water_gun_layout import add_water_gun, check_water_gun, check_other_service_sweeps
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'hardware/model'
@@ -110,9 +111,9 @@ def render_views(doc, output):
     # Service diagram: exploded rigid groups; screws and flexible routes removed first.
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Category!='clearance' and not o.Name.startswith(('PowerCableRoute','WaterHoseRoute','ControllerWireRoute')) and 'Screw' not in o.Name
+            o.ViewObject.Visibility=o.Category!='clearance' and not o.Name.startswith(('PowerCableRoute','WaterHoseRoute','ControllerWireRoute','WaterGunLeadRoute','WaterGunLeadConnector')) and 'Screw' not in o.Name
     original_shapes={}
-    offsets={'cable_access':V(0,0,-25),'battery':V(0,0,-60),'crown':V(0,0,65),'electronics':V(0,0,35),'Water':V(0,12,40),'Bubble':V(0,12,40),'arc_left':V(-24.5,0,0),'arc_right':V(24.5,0,0)}
+    offsets={'cable_access':V(0,0,-25),'battery':V(0,0,-60),'crown':V(0,0,65),'electronics':V(0,0,35),'Water':V(0,12,40),'Bubble':V(0,12,40),'arc_left':V(-24.5,0,2),'arc_right':V(24.5,0,2),'water_gun':V(0,-45,0),'water_gun_caps':V(45,0,0),'water_gun_cap_screws':V(20,0,0),'water_gun_cradle':V(0,0,0)}
     for group,names in service_groups(doc).items():
         for name in names:
             obj=doc.getObject(name);original_shapes[name]=obj.Shape.copy()
@@ -156,6 +157,39 @@ def render_views(doc, output):
     render('controller-service.png','iso')
     for name,shape in controller_shapes.items():doc.getObject(name).Shape=shape
     for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Category not in ('exterior','clearance') or o.Name=='HeadShell'
+            o.ViewObject.Transparency=85 if o.Name=='HeadShell' else 0
+    render('water-gun-layout.png','iso')
+    render('water-gun-side.png','side')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Name in ('WaterGunBody','WaterGunInlet','WaterGunMaximumEnvelope','NeckCapL','BackpackShell')
+            o.ViewObject.Transparency=85 if o.Name in ('WaterGunMaximumEnvelope','BackpackShell') else 0
+    render('water-gun-clearance.png','iso')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Name in ('WaterGunBody','WaterGunInlet')
+            o.ViewObject.Transparency=0
+    render('water-gun-component.png','iso')
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Name.startswith('WaterGun') and o.Category!='clearance'
+            o.ViewObject.Transparency=0
+    render('water-gun-mount.png','iso')
+    mount_shapes={}
+    for group,offset in [('water_gun_caps',V(50,0,0)),('water_gun_cap_screws',V(70,0,0)),('water_gun',V(0,-65,0))]:
+        for name in service_groups(doc)[group]:
+            obj=doc.getObject(name);mount_shapes[name]=obj.Shape.copy()
+            moved=obj.Shape.copy();moved.translate(offset);obj.Shape=moved
+    render('water-gun-service.png','iso')
+    for name,shape in mount_shapes.items():doc.getObject(name).Shape=shape
+    for o in doc.Objects:
+        if hasattr(o,'Category'):
+            o.ViewObject.Visibility=o.Name.startswith('WaterGun') or o.Name=='WaterHoseRoute'
+            o.ViewObject.Transparency=85 if o.Category=='clearance' else 0
+    render('water-gun-spaces.png','iso')
+    for o in doc.Objects:
         if hasattr(o,'Category'):o.ViewObject.Transparency=0
     for o in doc.Objects:
         if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('envelope','clearance')
@@ -175,11 +209,11 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.11'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.13'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
-                       ('exterior','03 角色头舱与功能外观'),('envelope','04 实测与暂定部件包络'),('clearance','05 检修与天线预留空间')]:
+                       ('exterior','03 角色头舱与功能外观'),('envelope','04 实测与暂定部件包络'),('clearance','05 检修与天线预留空间'),('component','06 实测部件／轮廓假设')]:
         g = doc.addObject('App::DocumentObjectGroup', key.title())
         g.Label = label; groups[key] = g
 
@@ -304,7 +338,6 @@ def main():
     outer_mask=[(-59,158),(-50,184),(50,184),(59,158),(40,153),(-40,153)]
     inner_mask=[(-53,160),(-47,178),(47,178),(53,160),(35,157),(-35,157)]
     head=head.cut(face_profile(outer_mask,-76,-60))
-    head=head.cut(Part.makeCylinder(6.3,24,V(44,-94,149),V(0,1,0)))
     head=head.cut(box(-8,-12,138,8,0,146))
     head=head.cut(box(-25,-40,191,25,0,199))
     rear_head_outer=[(-49,158),(-40,184),(40,184),(49,158),(34,150),(-34,150)]
@@ -316,20 +349,17 @@ def main():
         mask=mask.cut(Part.makeCylinder(8.5,6,V(cx,-84,167),V(0,1,0)))
     add('SensorMask','内嵌楔形传感器面板',mask,'exterior','visor')
     rim=face_profile(outer_mask,-69,-65).cut(face_profile(inner_mask,-70,-64))
-    rim=rim.cut(Part.makeCylinder(6.3,24,V(44,-94,149),V(0,1,0)))
     add('VisorRim','六边形前脸内框',rim,'exterior','dark')
     for side,sign in [('L',1),('R',-1)]:
         brow=[(sign*x,z) for x,z in [(0,179),(0,182),(50,190),(59,182),(56,175),(47,183)]]
         add('BrowArmor'+side,('左' if sign>0 else '右')+'折线眉甲',face_profile(brow,-72,-69),'exterior','body')
         cheek=[(sign*x,z) for x,z in [(39,151),(59,157),(64,171),(67,167),(64,151),(47,143),(36,143)]]
-        cheek_shape=face_profile(cheek,-72,-68).cut(Part.makeCylinder(6.3,24,V(44,-94,149),V(0,1,0)))
+        cheek_shape=face_profile(cheek,-72,-68)
         add('CheekArmor'+side,('左' if sign>0 else '右')+'斜切颊部护板',cheek_shape,'exterior','metal')
         cx=sign*29
         add('UltrasonicRing'+side,'嵌入式超声波探头框 '+side,ring(8.5,7.5,2,V(cx,-83,167),V(0,1,0)),'exterior','metal','P04 位置及尺寸假设；不是已经选型的传感器')
         add('UltrasonicFace'+side,'超声波探头暗面 '+side,Part.makeCylinder(7.5,1,V(cx,-82,167),V(0,1,0)),'exterior','dark')
     add('SensorStatusStrip','前脸中部窄状态色条',box(-10,-81.5,172,10,-81,173),'exterior','signal','色块示意；不是已选定灯具')
-    # Off-centre functional port avoids a smiling face while retaining forward water direction.
-    add('WaterPort','偏置短喷水口占位',ring(6,3.5,15,V(44,-89,149),V(0,1,0)),'exterior','dark','P09 外观分配；实际水压、管路与喷嘴尺寸未定')
     jaw=face_profile([(-33,143),(-36,150),(-20,152),(20,152),(23,144),(8,140),(-21,140)],-71,-67.5)
     add('JawArmor','多面下颌中央护片',jaw,'exterior','dark')
     add('JawAccent','下颌偏侧识别片',face_profile([(-28,144),(-29,147),(-15,147),(-14,144)],-71.5,-71),'exterior','accent')
@@ -534,10 +564,11 @@ def main():
                if name=='PowerBank' else '空间分配假设；不是所购物料尺寸，不构成整套装入结论')
         add(name,label,shape,'envelope',color,basis)
     for side,sign in [('L',1),('R',-1)]:
-        add('ArcModule'+side,('左' if sign>0 else '右')+'电弧模块预装占位 Ø20×80',
-            Part.makeCylinder(10,80,V(sign*68.5,-66,158),V(0,1,0)),
-            'envelope','accent','用户于 2026-10-24 指定预装尺寸 Ø20×80；非实测，仅被动机械包络，无高压引线、电极或驱动')
+        add('ArcModule'+side,('左' if sign>0 else '右')+'电弧模块预装占位 Ø25.5×70',
+            Part.makeCylinder(12.75,70,V(sign*65.5,-66,156.5),V(0,1,0)),
+            'envelope','accent','用户于 2026-10-24 指定预装尺寸 Ø25.5×70；非实测，仅被动机械包络，无高压引线、电极或驱动')
     controller_info=refine(doc,add)
+    water_info=add_water_gun(doc,add,args.render)
     doc.recompute()
     if args.render:
         for g in groups.values(): g.ViewObject.Visibility=True
@@ -564,7 +595,7 @@ def main():
         if not row['valid'] or diff>1e-5: raise ValueError(f'Saved geometry changed: {o.Name}')
         rows.append(row)
     drive=[o for o in saved.Objects if hasattr(o,'Category') and o.Category=='drive']
-    new=[o for o in saved.Objects if hasattr(o,'Category') and o.Category in ('structure','exterior')]
+    new=[o for o in saved.Objects if hasattr(o,'Category') and o.Category in ('structure','exterior','component')]
     env=[o for o in saved.Objects if hasattr(o,'Category') and o.Category=='envelope']
     bounds={o.Name:o.Shape.optimalBoundingBox(False) for o in drive+new+env}
     collisions=[];tested=0
@@ -575,7 +606,10 @@ def main():
         tested+=1
         common=a.Shape.common(b.Shape).Volume
         if common>0.01: collisions.append({'a':a.Name,'b':b.Name,'volume_mm3':common})
+    water_check=check_water_gun(saved)
     service_check=check_service_paths(saved)
+    water_check['other_service_sweeps']=check_other_service_sweeps(saved,service_check)
+    water_check['passed']=water_check['passed'] and water_check['other_service_sweeps']['passed']
     controller_check=check_controller_spaces(saved,service_groups(saved)['crown'])
     assembly=Part.makeCompound([o.Shape for o in drive+new]);bb=assembly.optimalBoundingBox(False)
     step_shape=Part.Shape();step_shape.read(str(step))
@@ -614,7 +648,7 @@ def main():
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
                     assert visible==(final_shapes[name].Category not in ('envelope','clearance')),name
     assert sha(source_path)==source_hash
-    report={'status':'preliminary_concept','design_revision':'0.11','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.13','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'bounding_box_method':'optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)',
             'power_bank_dimensions_mm':{'source':'user_measurement','length':120,'width':73,'thickness':31.5,
             'orientation':'length X, width Y, thickness Z; low horizontal placement retained from user-approved layout',
@@ -623,10 +657,12 @@ def main():
             'port_face_source':'user confirmed 120 x 31.5 mm long side',
             'port_orientation_design':'+Y; lateral position and connector envelope are assumptions',
             'ports_and_cable_clearance_verified':False},
-            'arc_module_envelopes':{'quantity':2,'diameter_mm':20,'length_mm':80,
+            'arc_module_envelopes':{'quantity':2,'diameter_mm':25.5,'length_mm':70,
                 'basis':'user specified provisional envelope on 2026-10-24; not measured',
-                'axis':'+Y','axis_origins_mm':[[68.5,-66,158],[-68.5,-66,158]],
-                'tray_width_mm':116,'tray_hole_pattern_unchanged':True,
+                'axis':'+Y','axis_origins_mm':[[65.5,-66,156.5],[-65.5,-66,156.5]],
+                'tray_width_mm':104,'tray_hole_pattern_unchanged':False,
+                'tray_hole_centers_x_mm':[-49.5,49.5], 'tray_hole_centers_y_mm':[-30,0],
+                'relocation_from_0_11_1_mm':{'left':[-3,0,-1.5],'right':[3,0,-1.5]},
                 'mounts_and_leads_designed':False,'electrical_clearance_verified':False,
                 'insulation_liquid_isolation_emc_verified':False},
             'crown_effect_locations':{'quantity':2,'center_x_mm':[51.5,-51.5],
@@ -641,6 +677,7 @@ def main():
             'step_readback':step_check,'collision_check':{'tolerance_mm3':0.01,'boolean_pairs_tested':tested,
             'scope':'new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded',
             'overlaps':collisions,'passed':not collisions},
+            'water_gun_layout':water_info,'water_gun_check':water_check,
             'service_paths':service_check,'controller_layout':controller_info,'controller_clearance_check':controller_check,
             'manufacturing_released':False,'physical_fit_verified':False,
             'assembly_paths_verified':False,'electrical_verified':False,
@@ -656,7 +693,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if collisions or not service_check['passed'] or not controller_check['passed']:
+    if collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 
