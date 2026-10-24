@@ -1,12 +1,12 @@
 # F1 离线协议契约
 
-状态：2026-10-23 已实现并通过主机测试。入口为 `ct_protocol_handle`，接收一条完整 JSON 消息，返回协议响应或“无响应”；没有网络连接、账号绑定、音频、GPIO 或实际执行器输出。
+状态：2026-10-23 已实现并通过主机测试。入口为 `ct_protocol_handle`，接收一条完整 JSON 消息，返回协议响应或“无响应”；该库本身不负责网络连接、账号绑定、音频、GPIO 或实际执行器输出。2026-10-24 状态／停止已由[独立联网工程](esp32-linx/README.md)接入真实平台，见[实测记录](../docs/linx-validation.md)。
 
 ## 依据与兼容范围
 
-本次复核[灵矽端侧 MCP](https://linx.qiniu.com/docs/xrobot/mcp/hardware-mcp)的 `type: mcp`／`payload` 封装、初始化、工具发现、调用及文本结果格式。传输建立和 `hello` 仍由后续[WebSocket 接入](https://linx.qiniu.com/docs/xrobot/platform/websocket)负责。
+本次复核[灵矽端侧 MCP](https://linx.qiniu.com/docs/xrobot/mcp/hardware-mcp)的 `type: mcp`／`payload` 封装、初始化、工具发现、调用及文本结果格式。传输建立和 `hello` 由独立联网工程按[WebSocket 接入](https://linx.qiniu.com/docs/xrobot/platform/websocket)负责。
 
-消息 ID 和通知响应遵循 [JSON-RPC 2.0](https://www.jsonrpc.org/specification)，工具结果区分协议错误与 `isError`，参照 [MCP 2024-11-05 tools](https://modelcontextprotocol.io/specification/2024-11-05/server/tools)。这是项目的有界端侧实现，不是完整通用 JSON-RPC 服务：不支持批请求、位置参数、任意扩展字段或其他 MCP 能力。真实平台兼容性仍待 F4 联调。
+消息 ID 和通知响应遵循 [JSON-RPC 2.0](https://www.jsonrpc.org/specification)，工具结果区分协议错误与 `isError`，参照 [MCP 2024-11-05 tools](https://modelcontextprotocol.io/specification/2024-11-05/server/tools)。这是项目的有界端侧实现，不是完整通用 JSON-RPC 服务：不支持批请求、位置参数、任意扩展字段或其他 MCP 能力。真实平台的初始化、发现及状态／停止兼容性已完成 F4 子项联调，动作兼容性与完整故障矩阵仍待验证。
 
 - 外层仅允许 `type` 和 `payload`；`payload` 仅允许 `jsonrpc`、`id`、`method`、`params`。连接会话由可信传输元数据绑定，不接受 JSON 自报的会话或使能状态。
 - 支持 `initialize`、`ping`、`tools/list`、`tools/call`。初始化要求 `protocolVersion: "2024-11-05"`、对象型 `capabilities`、含字符串 `name`／`version` 的 `clientInfo`；其他版本拒绝。`serverInfo.version: "0.1.0"` 仅标识本离线适配器，不锁定板级固件。
@@ -17,7 +17,7 @@
 
 ## 工具与参数
 
-以下名称为项目自定义工具，未向真实平台注册。所有参数对象拒绝额外字段；无参工具可省略 `arguments` 或传 `{}`，`null` 不代表空对象。
+以下名称为正式控制核心的项目自定义工具；状态／停止已被真实平台发现并调用，正式核心的动作工具未开放。`esp32-linx` 0.2.0 另以独立台架适配层开放本机单次授权喷水，额外要求 `permit` 且固定 `duration_ms=5000`；见[联网工程说明](esp32-linx/README.md)，不属于下述正式动作契约的验收。所有参数对象拒绝额外字段；无参工具可省略 `arguments` 或传 `{}`，`null` 不代表空对象。
 
 | 工具 | 参数 | 结果 |
 |---|---|---|
@@ -74,7 +74,7 @@
 | `enable_generation` | 首次接收时控制器的使能代次；每次本地使能递增，禁止使能前或停止前排队的命令跨代次执行 |
 | `proof` | 经认证并绑定完整内容的原始 `session`、`enable_generation`、`window` 和稳定 `intent`；默认全零拒绝动作，禁止在收到消息时制造证据 |
 
-未来接收任务与控制任务必须同步读取代次，或者在同一串行入口完成标记；本地停止与故障先于普通消息处理。F1 测试生产者使用合成证据；窗口策略不需要墙上时钟同步，认证和服务端意图生命周期仍未对接。因此，真实网络动作保持关闭；先实现只读状态和停止，待认证证据源与板级验收完成后再开放动作。
+未来接收任务与控制任务必须同步读取代次，或者在同一串行入口完成标记；本地停止与故障先于普通消息处理。F1 测试生产者使用合成证据；窗口策略不需要墙上时钟同步，认证和服务端意图生命周期仍未对接。因此，正式控制核心的真实网络动作保持关闭；待认证证据源与板级验收完成后再开放。0.2.0 单次喷水台架使用独立的本机授权策略，未放宽此处门槛。
 
 每次调用会先推进本地时钟，超时撤销逻辑目标；无消息期间仍必须周期调用 `ct_tick`。时钟回退进入故障，结束期限和接收期限加法溢出均拒绝。适配器不提供定时线程、优先队列或硬件关断，调度延迟仍需 F2 验证。
 
