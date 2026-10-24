@@ -1,0 +1,130 @@
+{
+  "revision": "0.25",
+  "baseline_revision": "0.24",
+  "native_sha256": "a7248a028adf15c0bf63867683340a8be0ea6e3ddef96d064a0f47ef145e24a5",
+  "baseline_native_sha256": "a1cc148de7d9ff831c27386780283ffac81dfe92de76d9ed817ea9505902ad5f",
+  "changed_existing_objects": [
+    "BackpackShell",
+    "WaterGunCradle",
+    "WaterGunHoseClearance",
+    "WaterHoseRoute"
+  ],
+  "equivalent_geometry_difference_mm3": {
+    "WaterPod": 0.0
+  },
+  "added_objects": [
+    "WaterGunHoseSupportRear"
+  ],
+  "removed_objects": [
+    "WaterGunLeadGuide"
+  ],
+  "tail_guide_merged_into_cradle": {
+    "solid_count": 1,
+    "difference_from_old_cradle_plus_guide_mm3": 0.0
+  },
+  "rear_saddle_matches_front_translated_52_mm": {
+    "symmetric_difference_mm3": 0.0
+  },
+  "complete_cradle_with_two_saddles_solid_count": 1,
+  "hose_passage_changes": {
+    "BackpackShell": {
+      "difference_mm3": 80.81150646990712,
+      "outside_old_new_hose_passages_mm3": 0.0
+    }
+  },
+  "hose_route_world_mm": [
+    [
+      -24,
+      39,
+      118
+    ],
+    [
+      -24,
+      22,
+      118
+    ],
+    [
+      -4,
+      20,
+      130
+    ],
+    [
+      78.2,
+      20,
+      130
+    ],
+    [
+      78.20000000000002,
+      -12.63263561992873,
+      111.71779318042823
+    ],
+    [
+      78.20000000000002,
+      -83.36245918444267,
+      117.90585091551198
+    ],
+    [
+      90.0,
+      -98.30537965581887,
+      119.21318705672685
+    ],
+    [
+      90.0,
+      -113.24830012719505,
+      120.52052319794173
+    ],
+    [
+      76.9,
+      -113.24830012719505,
+      120.52052319794173
+    ]
+  ],
+  "local_lifts": [
+    {
+      "operation": "hose_local_lift_from_saddle",
+      "support": "WaterGunHoseSupport",
+      "translation_module_mm": [
+        0,
+        0,
+        10
+      ],
+      "method": "exact continuous capsule sweep of 6 mm straight hose section only",
+      "measured_hose_od_mm": 5,
+      "seat_diameter_mm": 5.6,
+      "minimum_tube_support_gap_mm": 0.2999999999997949,
+      "overlaps": [],
+      "passed": true
+    },
+    {
+      "operation": "hose_local_lift_from_saddle",
+      "support": "WaterGunHoseSupportRear",
+      "translation_module_mm": [
+        0,
+        0,
+        10
+      ],
+      "method": "exact continuous capsule sweep of 6 mm straight hose section only",
+      "measured_hose_od_mm": 5,
+      "seat_diameter_mm": 5.6,
+      "minimum_tube_support_gap_mm": 0.29999999999994564,
+      "overlaps": [],
+      "passed": true
+    }
+  ],
+  "component_assets_unchanged": {
+    "hardware/components/pulse-water-gun/README.md": "1855607d14ed487f5de1b4579b70351332bf896ff4043b3f6033413f1cba51d0",
+    "hardware/components/pulse-water-gun/PulseWaterGun.step": "8272b1d50faaf80385877be8a26b46daf9903958b232dc90c38b9bb849bbe9ca",
+    "hardware/components/pulse-water-gun/PulseWaterGun.FCStd": "f9fe3ccd3cd0188822d739faf8dfcc923b468c5148720f58abe1ecdc8647a4b9",
+    "hardware/components/pulse-water-gun/readback.json": "14f59adf4df41884ff1d613605ba02ed2b276255560a19c4c51d3d1a846e80fb",
+    "hardware/components/pulse-water-gun/PulseWaterGun.20261024-130947.FCBak": "91d6db0b4766af579f46266a826f20e19cef4d9f593f1c2fb0b7b78a9ac0c8e7",
+    "hardware/components/pulse-water-gun/images/disassembled-2026-10-24.jpg": "6b20aa8c851ca7ffb4166abcb932f31e1ed641d8f9c30a0435ae98cb83cbc40e"
+  },
+  "geometry_checks_passed": true,
+  "physical_fit_or_hose_bend_verified": false,
+  "pdf_sha256": "1a303e3a53a0f88cf74a718cd1830bc9bacf0b2cef31cb1d04f65b9e729becd8",
+  "pdf_visual_review_pages": [
+    16,
+    17,
+    18
+  ]
+}

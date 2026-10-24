@@ -1,0 +1,50 @@
+{
+  "revision": "0.22",
+  "baseline_revision": "0.21",
+  "baseline_native_sha256": "6d20a53dd6085dc3494f49212bf19a98453f82f43544da1836ebf4e01b905655",
+  "native_sha256": "707065ae1438fc7ab0c0e1a71d8151d1596e6c5c55e15692f42f647e40a2156e",
+  "unchanged_existing_objects": 294,
+  "changed_existing_objects": [
+    "WaterGunCradle",
+    "WaterGunCap1",
+    "WaterGunCapInsert1",
+    "WaterGunCapScrew1",
+    "WaterGunCapTool1",
+    "WaterGunCap2",
+    "WaterGunCapInsert2",
+    "WaterGunCapScrew2",
+    "WaterGunCapTool2"
+  ],
+  "added_objects": [
+    "WaterGunOuterPad1",
+    "WaterGunOuterPad2"
+  ],
+  "method": "exact archived BRep bytes and document Placement equality, except rail checked by symmetric Boolean difference",
+  "component_assets_unchanged": {
+    "hardware/components/pulse-water-gun/README.md": "1855607d14ed487f5de1b4579b70351332bf896ff4043b3f6033413f1cba51d0",
+    "hardware/components/pulse-water-gun/PulseWaterGun.step": "8272b1d50faaf80385877be8a26b46daf9903958b232dc90c38b9bb849bbe9ca",
+    "hardware/components/pulse-water-gun/PulseWaterGun.FCStd": "f9fe3ccd3cd0188822d739faf8dfcc923b468c5148720f58abe1ecdc8647a4b9",
+    "hardware/components/pulse-water-gun/readback.json": "14f59adf4df41884ff1d613605ba02ed2b276255560a19c4c51d3d1a846e80fb",
+    "hardware/components/pulse-water-gun/PulseWaterGun.20261024-130947.FCBak": "91d6db0b4766af579f46266a826f20e19cef4d9f593f1c2fb0b7b78a9ac0c8e7",
+    "hardware/components/pulse-water-gun/images/disassembled-2026-10-24.jpg": "6b20aa8c851ca7ffb4166abcb932f31e1ed641d8f9c30a0435ae98cb83cbc40e"
+  },
+  "housing_fit_checks": [
+    {
+      "band": 1,
+      "width_between_pads_mm": 33.2,
+      "height_between_pads_mm": 24.60000000000001,
+      "passed": true
+    },
+    {
+      "band": 2,
+      "width_between_pads_mm": 33.2,
+      "height_between_pads_mm": 24.599999999999994,
+      "passed": true
+    }
+  ],
+  "rail_boolean_equivalence": {
+    "symmetric_difference_mm3": 0.0,
+    "equivalent_within_1e_5_mm3": true
+  },
+  "passed": true
+}

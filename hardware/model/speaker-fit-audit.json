@@ -1,0 +1,412 @@
+{
+  "source": "user-provided dimensions, 2026-10-24",
+  "size_xyz_mm": [
+    69.5,
+    31.5,
+    16.5
+  ],
+  "bbox_mm": [
+    -34.75,
+    -72.75,
+    146.0,
+    34.75,
+    -41.25,
+    162.5
+  ],
+  "orientation": "length X, width Y, height Z; old XY centre and bottom retained",
+  "shape_valid": true,
+  "solid_count": 1,
+  "outside_original_allocation_mm3": 0.0,
+  "outside_head_cavity_mm3": 0.0,
+  "overlap_tolerance_mm3": 0.01,
+  "static_boolean_pairs": 2,
+  "overlaps": [],
+  "reserved_space_overlaps": [],
+  "nearby_distances": [
+    {
+      "object": "ElectronicsTray",
+      "category": "structure",
+      "distance_mm": 0.5
+    },
+    {
+      "object": "HeadShell",
+      "category": "exterior",
+      "distance_mm": 2.4823879632321812
+    },
+    {
+      "object": "ControllerAntennaSpace",
+      "category": "clearance",
+      "distance_mm": 3.1499999999999986
+    },
+    {
+      "object": "SensorMask",
+      "category": "exterior",
+      "distance_mm": 5.25
+    },
+    {
+      "object": "Electronics",
+      "category": "envelope",
+      "distance_mm": 5.5
+    },
+    {
+      "object": "VisorRim",
+      "category": "exterior",
+      "distance_mm": 8.25
+    },
+    {
+      "object": "UltrasonicRingL",
+      "category": "exterior",
+      "distance_mm": 8.25
+    },
+    {
+      "object": "UltrasonicFaceL",
+      "category": "exterior",
+      "distance_mm": 8.25
+    },
+    {
+      "object": "UltrasonicRingR",
+      "category": "exterior",
+      "distance_mm": 8.25
+    },
+    {
+      "object": "UltrasonicFaceR",
+      "category": "exterior",
+      "distance_mm": 8.25
+    },
+    {
+      "object": "SensorStatusStrip",
+      "category": "exterior",
+      "distance_mm": 9.91526600752597
+    },
+    {
+      "object": "ControllerCarrier",
+      "category": "structure",
+      "distance_mm": 10.25
+    },
+    {
+      "object": "JawArmor",
+      "category": "exterior",
+      "distance_mm": 10.75
+    },
+    {
+      "object": "ControllerWireGuide",
+      "category": "structure",
+      "distance_mm": 11.049999999999997
+    },
+    {
+      "object": "ControllerMountScrew10",
+      "category": "structure",
+      "distance_mm": 11.05
+    },
+    {
+      "object": "ControllerMountInsert10",
+      "category": "structure",
+      "distance_mm": 11.25
+    },
+    {
+      "object": "ControllerRetainer",
+      "category": "structure",
+      "distance_mm": 11.25
+    },
+    {
+      "object": "ControllerRetainerScrewFront",
+      "category": "structure",
+      "distance_mm": 12.052192813739225
+    },
+    {
+      "object": "ControllerRetainerInsertFront",
+      "category": "structure",
+      "distance_mm": 12.252192813739223
+    },
+    {
+      "object": "ControllerMountScrew00",
+      "category": "structure",
+      "distance_mm": 12.45008532398361
+    },
+    {
+      "object": "ControllerMountInsert00",
+      "category": "structure",
+      "distance_mm": 12.65008532398361
+    },
+    {
+      "object": "ControllerWireRoute",
+      "category": "envelope",
+      "distance_mm": 12.75
+    },
+    {
+      "object": "JawAccent",
+      "category": "exterior",
+      "distance_mm": 14.562365879210699
+    },
+    {
+      "object": "CheekArmorL",
+      "category": "exterior",
+      "distance_mm": 15.44223778796998
+    },
+    {
+      "object": "CheekArmorR",
+      "category": "exterior",
+      "distance_mm": 15.44223778796998
+    },
+    {
+      "object": "TrayScrewR0",
+      "category": "structure",
+      "distance_mm": 16.350606459089146
+    },
+    {
+      "object": "TrayScrewL0",
+      "category": "structure",
+      "distance_mm": 16.35060645908915
+    },
+    {
+      "object": "TrayInsertL0",
+      "category": "structure",
+      "distance_mm": 16.61844078617616
+    },
+    {
+      "object": "TrayInsertR0",
+      "category": "structure",
+      "distance_mm": 16.618440786176166
+    },
+    {
+      "object": "BrowArmorL",
+      "category": "exterior",
+      "distance_mm": 17.50178562318714
+    },
+    {
+      "object": "BrowArmorR",
+      "category": "exterior",
+      "distance_mm": 17.50178562318714
+    },
+    {
+      "object": "ArcModuleL",
+      "category": "envelope",
+      "distance_mm": 18.0
+    },
+    {
+      "object": "ArcModuleR",
+      "category": "envelope",
+      "distance_mm": 18.0
+    },
+    {
+      "object": "ControllerSocketFront",
+      "category": "structure",
+      "distance_mm": 18.150000000000002
+    },
+    {
+      "object": "ESP32Board",
+      "category": "envelope",
+      "distance_mm": 19.2614355643602
+    },
+    {
+      "object": "HeadCrownShell",
+      "category": "exterior",
+      "distance_mm": 19.590000638080642
+    },
+    {
+      "object": "ControllerUSBUSB",
+      "category": "clearance",
+      "distance_mm": 22.524986126521814
+    },
+    {
+      "object": "HeadServiceHatch",
+      "category": "exterior",
+      "distance_mm": 29.5
+    },
+    {
+      "object": "CrownForePlate",
+      "category": "exterior",
+      "distance_mm": 29.5
+    },
+    {
+      "object": "CrownSideArmorL",
+      "category": "exterior",
+      "distance_mm": 29.5
+    },
+    {
+      "object": "CrownSideArmorR",
+      "category": "exterior",
+      "distance_mm": 29.5
+    },
+    {
+      "object": "CrownInsertLFront",
+      "category": "structure",
+      "distance_mm": 30.41073001425648
+    },
+    {
+      "object": "CrownInsertRFront",
+      "category": "structure",
+      "distance_mm": 30.41073001425648
+    },
+    {
+      "object": "ControllerUSBLeadUSB",
+      "category": "clearance",
+      "distance_mm": 31.717108947695724
+    },
+    {
+      "object": "CrownScrewLFront",
+      "category": "structure",
+      "distance_mm": 32.00390601161052
+    },
+    {
+      "object": "CrownScrewRFront",
+      "category": "structure",
+      "distance_mm": 32.00390601161052
+    },
+    {
+      "object": "ControllerUSBCOM",
+      "category": "clearance",
+      "distance_mm": 34.86939919184155
+    },
+    {
+      "object": "PowerCableRoute",
+      "category": "envelope",
+      "distance_mm": 36.26379048031245
+    },
+    {
+      "object": "CrownSpine",
+      "category": "exterior",
+      "distance_mm": 37.42074959163699
+    },
+    {
+      "object": "CrownFinL",
+      "category": "exterior",
+      "distance_mm": 39.80420832022664
+    },
+    {
+      "object": "CrownFinR",
+      "category": "exterior",
+      "distance_mm": 39.80420832022664
+    },
+    {
+      "object": "ControllerUSBLeadCOM",
+      "category": "clearance",
+      "distance_mm": 41.40621933961129
+    },
+    {
+      "object": "TrayScrewR1",
+      "category": "structure",
+      "distance_mm": 41.60781893680625
+    },
+    {
+      "object": "TrayScrewL1",
+      "category": "structure",
+      "distance_mm": 41.60781893680625
+    },
+    {
+      "object": "TrayInsertR1",
+      "category": "structure",
+      "distance_mm": 41.83471912482233
+    },
+    {
+      "object": "TrayInsertL1",
+      "category": "structure",
+      "distance_mm": 41.83471912482233
+    },
+    {
+      "object": "CrownEffectMarkLFront",
+      "category": "exterior",
+      "distance_mm": 44.278945335226766
+    },
+    {
+      "object": "CrownEffectMarkRFront",
+      "category": "exterior",
+      "distance_mm": 44.278945335226766
+    },
+    {
+      "object": "TempleGuardL",
+      "category": "exterior",
+      "distance_mm": 47.25
+    },
+    {
+      "object": "TempleGuardR",
+      "category": "exterior",
+      "distance_mm": 47.25
+    },
+    {
+      "object": "AudioSideGuardL",
+      "category": "exterior",
+      "distance_mm": 47.802981078589646
+    },
+    {
+      "object": "AudioSideGuardR",
+      "category": "exterior",
+      "distance_mm": 47.802981078589646
+    },
+    {
+      "object": "TempleLowerBladeL",
+      "category": "exterior",
+      "distance_mm": 49.25
+    },
+    {
+      "object": "TempleLowerBladeR",
+      "category": "exterior",
+      "distance_mm": 49.25
+    },
+    {
+      "object": "TempleCrestL",
+      "category": "exterior",
+      "distance_mm": 49.81779300611379
+    },
+    {
+      "object": "TempleCrestR",
+      "category": "exterior",
+      "distance_mm": 49.81779300611379
+    },
+    {
+      "object": "CrownEffectInsetL",
+      "category": "exterior",
+      "distance_mm": 51.37484793164842
+    },
+    {
+      "object": "CrownEffectInsetR",
+      "category": "exterior",
+      "distance_mm": 51.37484793164842
+    },
+    {
+      "object": "AudioEarRingL",
+      "category": "exterior",
+      "distance_mm": 52.23251356674574
+    },
+    {
+      "object": "AudioEarRingR",
+      "category": "exterior",
+      "distance_mm": 52.23251356674574
+    },
+    {
+      "object": "AudioEarGrilleL",
+      "category": "exterior",
+      "distance_mm": 53.635532579859856
+    },
+    {
+      "object": "AudioEarGrilleR",
+      "category": "exterior",
+      "distance_mm": 53.635532579859856
+    },
+    {
+      "object": "EarOuterArcL",
+      "category": "exterior",
+      "distance_mm": 59.20743498350229
+    },
+    {
+      "object": "EarOuterArcR",
+      "category": "exterior",
+      "distance_mm": 59.20743498350229
+    },
+    {
+      "object": "EarHubL",
+      "category": "exterior",
+      "distance_mm": 59.81919627209117
+    },
+    {
+      "object": "EarHubR",
+      "category": "exterior",
+      "distance_mm": 59.81919627209117
+    }
+  ],
+  "passed": true,
+  "mounts_leads_acoustics_verified": false,
+  "physical_fit_verified": false,
+  "source_after_sha256": "a7248a028adf15c0bf63867683340a8be0ea6e3ddef96d064a0f47ef145e24a5",
+  "saved_and_reopened": true
+}

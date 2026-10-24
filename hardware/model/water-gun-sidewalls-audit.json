@@ -1,0 +1,109 @@
+{
+  "revision": "0.24",
+  "baseline_revision": "0.23",
+  "baseline_native_sha256": "778597f7740b2363052a7e3f7dd976897febd0220a4d234579fb8e151ceff040",
+  "native_sha256": "a1cc148de7d9ff831c27386780283ffac81dfe92de76d9ed817ea9505902ad5f",
+  "unchanged_existing_objects": 286,
+  "preserved_concurrent_changes": {
+    "AudioModule": {
+      "symmetric_difference_mm3": 18309.375,
+      "source": "existing concurrent speaker_layout.py update; preserved",
+      "size_xyz_mm": [
+        69.5,
+        31.5,
+        16.5
+      ]
+    }
+  },
+  "changed_existing_objects": [
+    "ShoulderRailL",
+    "WaterHoseRoute",
+    "WaterGunCradle",
+    "WaterGunHoseClearance"
+  ],
+  "removed_objects": [],
+  "added_objects": [
+    "WaterGunHoseSupport"
+  ],
+  "method": "archived BRep bytes and Placement equality; boolean symmetric differences for regenerated mounting interface and hose passages",
+  "equivalent_geometry_difference_mm3": {},
+  "mount_interface_change": {
+    "symmetric_difference_mm3": 17.445409481108886,
+    "outside_old_and_new_cradle_footprint_mm3": 0.0
+  },
+  "cradle_and_hose_support_fused_solid_count": 1,
+  "component_assets_unchanged": {
+    "hardware/components/pulse-water-gun/README.md": "1855607d14ed487f5de1b4579b70351332bf896ff4043b3f6033413f1cba51d0",
+    "hardware/components/pulse-water-gun/PulseWaterGun.step": "8272b1d50faaf80385877be8a26b46daf9903958b232dc90c38b9bb849bbe9ca",
+    "hardware/components/pulse-water-gun/PulseWaterGun.FCStd": "f9fe3ccd3cd0188822d739faf8dfcc923b468c5148720f58abe1ecdc8647a4b9",
+    "hardware/components/pulse-water-gun/readback.json": "14f59adf4df41884ff1d613605ba02ed2b276255560a19c4c51d3d1a846e80fb",
+    "hardware/components/pulse-water-gun/PulseWaterGun.20261024-130947.FCBak": "91d6db0b4766af579f46266a826f20e19cef4d9f593f1c2fb0b7b78a9ac0c8e7",
+    "hardware/components/pulse-water-gun/images/disassembled-2026-10-24.jpg": "6b20aa8c851ca7ffb4166abcb932f31e1ed641d8f9c30a0435ae98cb83cbc40e"
+  },
+  "measured_inputs": {
+    "housing_length_width_thickness_mm": [
+      138.5,
+      33.2,
+      24.6
+    ],
+    "wet_width_mm": 38.5,
+    "hose_od_mm": 5
+  },
+  "side_walls": {
+    "pairs": 2,
+    "centres_y_mm": [
+      -62,
+      -10
+    ],
+    "length_mm": 12,
+    "height_above_base_mm": 20.0,
+    "thickness_mm": 2.0,
+    "channel_width_mm": 34.39999999999999,
+    "nominal_side_gap_mm": 0.6,
+    "top_lips_or_fasteners": false
+  },
+  "hose_support": {
+    "attached_to": "front outer side wall",
+    "integral_with_cradle": true,
+    "centre_module_mm": [
+      78.2,
+      -64,
+      117
+    ],
+    "flush_to_outer_wall": true,
+    "support_arm": false,
+    "axial_length_mm": 6,
+    "seat_diameter_mm": 5.6,
+    "nominal_radial_gap_mm": 0.3,
+    "outer_diameter_mm": 8.6,
+    "opening": "module +Z",
+    "retaining_clip_or_strain_relief_verified": false
+  },
+  "local_hose_lift": {
+    "operation": "hose_local_lift_from_saddle",
+    "translation_module_mm": [
+      0,
+      0,
+      10
+    ],
+    "method": "exact continuous capsule sweep of 6 mm straight hose section only",
+    "measured_hose_od_mm": 5,
+    "seat_diameter_mm": 5.6,
+    "minimum_tube_support_gap_mm": 0.29999999999998295,
+    "overlaps": [],
+    "passed": true
+  },
+  "geometry_checks_passed": true,
+  "adhesive_retention_hose_bend_or_physical_fit_verified": false,
+  "pdf_sha256": "0f3b7370ea6a41bb817051a2efc5d09718aa8ca7b52db0666d74fa0f79278aa9",
+  "pdf_visual_review_pages": [
+    16,
+    17,
+    18
+  ],
+  "water_check_recheck": {
+    "reason": "exclude own tube from external wet rectangular bound only; actual tube remains globally checked",
+    "native_sha256": "a1cc148de7d9ff831c27386780283ffac81dfe92de76d9ed817ea9505902ad5f",
+    "all_water_checks_rerun_on_saved_native": true
+  }
+}

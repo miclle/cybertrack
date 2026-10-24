@@ -132,7 +132,7 @@ def add_water_gun(doc, add, render=False):
         shape.translate(V(*ORIGIN))
         obj = add(name, '拆出发射枪／前细后粗示意' if name.endswith('Body') else '水枪侧接头／未测形状',
                   shape, 'component', 'accent' if name.endswith('Body') else 'power',
-                  '实测总长138.5／宽33.2／厚24.6／带管宽38.5；分段轮廓与接口为假设；夹持与引线为0.13候选')
+                  '实测总长138.5／宽33.2／厚24.6／带管宽38.5；分段轮廓与接口为假设；底部双面软胶固定；胶厚和线管为候选')
         obj.addProperty('App::PropertyString', 'ServiceGroup', 'Assembly')
         obj.ServiceGroup = 'water_gun'
     add('WaterGunMaximumEnvelope', '水枪最大尺寸审查包络／含管宽38.5',
@@ -150,28 +150,49 @@ def add_water_gun(doc, add, render=False):
 
 
 def check_water_gun(doc):
-    bound = doc.getObject('WaterGunMaximumEnvelope').Shape
-    excluded = {'WaterGunBody', 'WaterGunInlet', 'WaterGunMaximumEnvelope','WaterGunBaseTool1','WaterGunBaseTool2'}
-    obstacles = [o for o in doc.Objects if hasattr(o, 'Category') and o.Name not in excluded]
-    overlaps = hits(bound, obstacles)
-    # Distances are geometric, not allowances for manufacturing or electrical isolation.
-    clearances = sorted([{'object': o.Name, 'distance_mm': bound.distToShape(o.Shape)[0]}
-                         for o in obstacles if o.Name not in ('WaterHoseRoute','WaterGunLeadRoute') and 'Pad' not in o.Name and o.Category!='clearance'], key=lambda r: r['distance_mm'])
-    # Full conservative bound withdrawn straight forward by 150 mm.
-    sweep = Part.makeBox(WET_WIDTH, LENGTH+150, THICKNESS,
-                         V(ORIGIN[0]-WIDTH/2, ORIGIN[1]-150, ORIGIN[2]-THICKNESS/2))
-    from water_gun_mount import removable_line_names
-    removed=removable_line_names(doc)+[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','') in ('water_gun_caps','water_gun_cap_screws')]
-    removal_hits = hits(sweep, [o for o in obstacles if o.Name not in removed])
-    from water_gun_mount import check_mount
+    wet=doc.getObject('WaterGunMaximumEnvelope').Shape
+    excluded={'WaterGunBody','WaterGunInlet','WaterGunMaximumEnvelope','WaterGunBaseTool1','WaterGunBaseTool2'}
+    obstacles=[o for o in doc.Objects if hasattr(o,'Category') and o.Name not in excluded]
+    # The gun's own flexible hose is included in the wet size input, not an
+    # external assembly obstacle. Its actual solid is still checked against
+    # the complete bare housing here and every physical part globally.
+    external=[o for o in obstacles if not o.Name.startswith('WaterGun') and o.Name!='WaterHoseRoute']
+    origin=V(ORIGIN[0]-WIDTH/2,ORIGIN[1],ORIGIN[2]-THICKNESS/2)
+    body=Part.makeBox(WIDTH,LENGTH,THICKNESS,origin)
+    body_hits=hits(body,obstacles)
+    wet_hits=hits(wet,external)
+    inlet_hits=hits(doc.getObject('WaterGunInlet').Shape,obstacles)
+    overlaps=body_hits+wet_hits+inlet_hits
+    clearances=sorted([{'object':o.Name,'distance_mm':body.distToShape(o.Shape)[0]}
+                      for o in obstacles if o.Name not in ('WaterHoseRoute','WaterGunLeadRoute') and 'Pad' not in o.Name and o.Category!='clearance'],key=lambda r:r['distance_mm'])
+    from water_gun_mount import removable_line_names,check_mount
+    removed=removable_line_names(doc)
+    fixed=[o for o in obstacles if o.Name not in removed]
+    def lift_and_forward(width,length,height,start):
+        lift=Part.makeBox(width,length,height+2,start)
+        forward=Part.makeBox(width,length+150,height,start+V(0,-150,2))
+        return lift.fuse(forward)
+    # Fit the measured bare housing between the side walls. Keep the full wet
+    # rectangle for external obstacles, and check the front inlet separately.
+    body_sweep=lift_and_forward(WIDTH,LENGTH,THICKNESS,origin)
+    ib=bbox(doc.getObject('WaterGunInlet').Shape)
+    inlet_sweep=lift_and_forward(ib[3]-ib[0],ib[4]-ib[1],ib[5]-ib[2],V(*ib[:3]))
+    wet_sweep=lift_and_forward(WET_WIDTH,LENGTH,THICKNESS,origin)
+    removal_hits=hits(body_sweep,fixed)+hits(inlet_sweep,fixed)+hits(wet_sweep,[o for o in external if o.Name not in removed])
     mount_check=check_mount(doc)
-    return {'mount_check':mount_check,'method': 'full rectangular maximum measured dimensions along the entire length; not photo silhouette',
-            'tolerance_mm3': TOLERANCE, 'overlaps': overlaps, 'passed': not overlaps and mount_check['passed'],
-            'nearest_clearances': clearances[:12],
-            'removal': {'direction_mm': [0, -150, 0], 'method': 'continuous union of translated rectangular bound',
-                'removed_first': removed, 'overlaps': removal_hits, 'passed': not removal_hits,
-                'scope': 'maximum gun bound with caps and flexible lines removed; screw/tool and cap sweeps checked separately; not a flexible-cable simulation'},
-            'physical_fit_verified': False}
+    return {'mount_check':mount_check,
+            'method':'full 33.2 x 24.6 housing rectangle against mount and assembly; full 38.5 wet rectangle against external assembly; assumed front inlet checked separately',
+            'housing_bound':{'overlaps':body_hits,'passed':not body_hits},
+            'external_wet_bound':{'excluded_own_hose':'WaterHoseRoute; actual tube checked separately','overlaps':wet_hits,'passed':not wet_hits},
+            'inlet_candidate':{'overlaps':inlet_hits,'passed':not inlet_hits,'axial_location_measured':False},
+            'tolerance_mm3':TOLERANCE,'overlaps':overlaps,'passed':not overlaps and mount_check['passed'],
+            'nearest_clearances':clearances[:12],
+            'removal':{'waypoints_mm':[[0,0,0],[0,0,2],[0,-150,2]],
+                'method':'continuous housing box and inlet AABB lift/forward sweeps; full wet box sweep against external obstacles',
+                'removed_first':removed,'adhesive_bond_released_first':True,
+                'overlaps':removal_hits,'passed':not removal_hits,
+                'scope':'after adhesive release; inlet location unmeasured, no peel-force, debonding-tool or hand-access verification'},
+            'physical_fit_verified':False}
 
 
 def check_other_service_sweeps(doc, service_check):
