@@ -1,0 +1,389 @@
+# 固件能力与接口手册
+
+核对日期：2026-10-25。本文描述仓库当前实现，作为“有哪些能力、模块、接口，怎样传参和读取结果”的统一入口。板上实际版本须以启动日志为准；本文不表示所有工程已经合并为一个整机固件。源代码及各工程的验证记录是行为与验收依据。
+
+## 阅读导航
+
+- 看当前能做什么：[工程与能力](#工程与能力)。
+- 配置语音工具或读取回执：[音频板 ct5 接口](#音频板-ct5-接口)。
+- 对接另一块联网板：[联网水枪台架接口](#联网水枪台架接口)。
+- 开发正式控制固件：[正式控制核心的-mcp-接口](#正式控制核心的-mcp-接口)、[模块与数据流](#模块与数据流)、[内部-c-api](#内部-c-api)。
+- 做本地调试：[串口与板级接口](#串口与板级接口)。
+- 看证据和缺口：[验证与维护](#验证与维护)。
+
+## 工程与能力
+
+| 工程／版本 | 已实现能力 | 当前边界与证据 |
+|---|---|---|
+| 通用 C11 核心 `src/` | 行走／喷水／泡泡逻辑目标、限时互斥、停止锁定、MCP、运行层、输入滤波、队列、连接模拟、防重放及维护恢复 | [主机记录](tests/README.md)报告 23/23 CTest；没有完整生产板级后端，正式核心的真实网络动作未开放 |
+| [无负载工程](esp32/README.md) `0.2.0-boot-stop-check` | 启动、PSRAM 检查、周期控制核心、BOOT 停止输入 | 已有无负载实测；不驱动执行器，无网络／音频 |
+| [电机台架](esp32-motor-bench/README.md) | 单电机本地串口使能、正反转 PWM、期限、BOOT 停止 | 当前源码为 10 秒、约 40% PWM；不是整机行走接口。DF-MD 故障排查与后续条件见[电机记录](../docs/motor-bench.md)，不能据程序存在认定电机已通过 |
+| [MOS 台架](esp32-mos-bench/README.md) `0.1.1` | 本地串口单次 5 秒 GPIO4 输出、自动结束、BOOT／串口停止 | 已有一次正常喷水／到期停止及 BOOT 带载提前停止观察；完整供电与故障验收未完成 |
+| [联网板](esp32-linx/README.md) `0.2.0-linx-water-bench` | Wi-Fi、绑定、WSS、MCP 状态／停止、本机单次授权的 5 秒喷水 | 已有真实平台调用、喷水及 BOOT 功能检查；无音频，正式核心动作仍关闭 |
+| [音频板](esp32-audio/README.md) `2.0.3-ct5` | 保留语音／唤醒／OLED／音量／说话按键；状态、停止、GPIO18 可变时长喷水 | 当前语音路线。喷水 1–30000 ms；ct4 有 5 秒带载观察，ct5 有功率断开的时长语音核验，30 秒带载未验收 |
+
+行走与泡泡目前只有正式核心的逻辑实现，没有在当前音频板或联网台架开放。超声波测距／避障、编码器闭环、舵机动作、液位／水流／电量遥测及双板协同控制均未在这些项目接口中实现。高压驱动不属于当前实现范围。上游音频工程可能还发布其自带工具，本文只定义 CyberTrack 增加的 `self.tank.*`，不把上游工具视为本项目新增能力。
+
+以下三套同名工具不能混用：
+
+| 差异 | 音频板 ct5 | 联网板 0.2.0 | 正式核心 |
+|---|---|---|---|
+| `water` 参数 | `duration_ms` | `duration_ms` + `permit` | `duration_ms`，另须可信元数据 |
+| 时长 | 1–30000 ms | 必须 5000 ms | 受 `ct_limits` 限制；默认禁用 |
+| 启动门槛 | 新的明确指令、在线、非忙碌、按键释放且冷却结束 | 本机串口先签发一次性许可 | 本地使能、会话、时效、认证证据及存储门槛 |
+| 停止后再次启动 | 满足条件的新指令；不需逐次按键授权 | 新的本机许可 | 本地重新使能 |
+| 状态输出字段 | `logical_outputs.left/right` | `logical_output.left_level/right_level` | `logical_output.left_level/right_level` |
+| 防重放范围 | 当前音频会话内最多 128 个喷水 RPC ID | 单次许可，RAM 中保存 | RPC／意图过滤器，另有持久化抽象；真实后端待接入 |
+
+`accepted` 表示软件接受了本次请求，`water=true` 表示逻辑目标；二者均不证明已经有水流。三个接口均声明 `physical_feedback=false`。
+
+## 音频板 ct5 接口
+
+实现：[工具注册与回执](esp32-audio/cybertrack_tools.cc)、[MCP 校验补丁](esp32-audio/apply_overlay.py)、[队列保护](esp32-audio/water_guard.h)。传输和 MCP 基础服务由固定版本的小智上游工程承载，不使用下文正式核心的 `ct_protocol_handle`。
+
+### 工具入参
+
+| 工具 | 用途 | `arguments` | 输出 |
+|---|---|---|---|
+| `self.tank.get_status` | 查询本板当前策略与逻辑输出 | `{}`，也可省略；不接受额外参数 | 下表 JSON 状态，`operation=get_status`、`result=ok` |
+| `self.tank.stop` | 关闭水枪输出并取消待执行票据；不关闭语音／屏幕 | `{}`，也可省略 | 相同结构，`operation=stop`、`result=ok`；正常停止为 `STOPPED` |
+| `self.tank.water` | 接受一次定时喷水请求 | 必填 `duration_ms`：JSON number，整数值，1–30000，单位毫秒；对象只能含这一项 | 相同结构，`operation=water`，检查内部 `result` 判断是否接受 |
+
+建议始终发送普通整数，例如 `7000`。ct5 使用 cJSON 数值和整数值相等性校验，没有正式核心“必须十进制整数 token”的词法限制；不要假定两者对 `1000.0`／指数写法的处理相同。`_ct_ticket` 是固件插入的内部票据，不是云端参数，不能自行传入。
+
+平台角色负责秒数转毫秒；明确喷水但未指定时长的当前角色规则为 `1000` ms，超过 30 秒则请求 `30000` 并说明，不拆成循环。固件本身没有缺参默认值，也不会将越界值自动截断。现有工具描述仍保留“未说时长先询问”的旧建议，角色中的明确默认规则已覆盖它；默认一秒的端到端行为在[验证记录](../docs/audio-water-validation.md)中仍标为待验证。
+
+### 工具出参
+
+工具结果文本是 JSON 字符串。先解析 MCP 响应，再解析 `content` 中 `type=text` 的 `text`。下表为该 JSON 的全部字段，三项工具共用。
+
+| 字段 | 类型 | 含义 |
+|---|---|---|
+| `device_id` | string | 本板 MAC 标识，不代表另一块主控 |
+| `boot_id` | string | 本次启动生成的 16 位十六进制标识；重启变化 |
+| `request_sequence` | number | 本次启动的回执计数，非 RPC ID、非持久化动作序号 |
+| `operation` | string | `get_status`／`stop`／`water` |
+| `result` | string | 查询／停止为 `ok`；喷水为 `accepted` 或拒绝原因 |
+| `state` | string | `DISARMED`（空闲）、`ACTIVE`、`STOPPED` 或 `FAULT`；空闲不保证已过冷却 |
+| `fault` | string | `none`／`stopped`／`clock_fault`／`output_fault`；`stopped` 是主动停止状态 |
+| `uptime_ms` | number | 本地单调运行时间，毫秒 |
+| `logical_outputs` | object | `left:0`、`right:0`、`water:boolean`、`bubbles:false` |
+| `capabilities` | object | `move:false`、`water:true`、`bubbles:false`；能力存在不代表此刻可启动 |
+| `local_authorization_required` | boolean | 固定 `false`，无逐次按键授权门槛 |
+| `starts_this_boot` | number | 本次启动已接受的喷水次数，非水流检测次数 |
+| `max_duration_ms` | number | 固定 `30000` |
+| `last_duration_ms` | number | 最近一次接受的时长；尚无动作时为 `0` |
+| `remaining_ms` | number | 活动目标的剩余毫秒数；非活动为 `0` |
+| `actuator_backend` | string | 固定 `bounded_water_bench` |
+| `physical_feedback` | boolean | 固定 `false` |
+| `source` | string | 固定 `cybertrack_audio_board` |
+
+喷水不能仅凭外层 MCP 请求成功就判定成功：到达回调后的业务拒绝也会作为 JSON 文本返回，必须检查内部 `result == "accepted"`。参数校验或领取票据失败则走上游 `ReplyError`，没有上述完整状态对象。
+
+| 阶段／结果 | 含义 |
+|---|---|
+| `ReplyError`：`Water requires exactly integer duration_ms in 1..30000` | 缺参、额外字段、类型或范围错误 |
+| `ReplyError`：`Water request duplicate, busy, offline or queue full` | 接收时就无法领取票据；重复 RPC、忙碌、离线、按键／冷却／时钟条件不满足、128 项耗尽等 |
+| `cancelled_or_duplicate` | 票据不存在、已使用，或被停止／断线取消 |
+| `stale_request` | 从领取票据至执行已达 5000 ms，或时间回退 |
+| `duration_out_of_range` | 内部二次检查时长不合法 |
+| `not_ready_or_busy` | 执行时无法原子创建本次内部许可 |
+| `accepted` | 本次目标已接受，随后由控制任务应用 GPIO |
+
+共用策略还定义 `clock_fault`、`not_ready`、`invalid_permit`、`permit_used`、`permit_expired_or_revoked`、`busy` 等拒绝值；正常音频路径由票据与原子授权挡住其中多种情况。未知结果一律不当作接受，不自动重试。
+
+### 调用示例与时序
+
+以下仅展示 MCP JSON-RPC payload，不是本轮执行指令；外层封装由平台传输负责：
+
+```json
+{"jsonrpc":"2.0","id":101,"method":"tools/call","params":{"name":"self.tank.water","arguments":{"duration_ms":1000}}}
+```
+
+接收线程校验参数并领取内部票据 → 主任务执行回调 → 返回 JSON 文本（接受时 `result=accepted`）→ 独立控制任务应用 GPIO18 → 本地期限到达后关闭。随后使用新的请求 ID 查询：
+
+```json
+{"jsonrpc":"2.0","id":102,"method":"tools/call","params":{"name":"self.tank.get_status","arguments":{}}}
+```
+
+提前停止：
+
+```json
+{"jsonrpc":"2.0","id":103,"method":"tools/call","params":{"name":"self.tank.stop","arguments":{}}}
+```
+
+控制任务每 5 ms 检查期限、BOOT 和连接；BOOT 释放需稳定 30 ms，结束后冷却 1000 ms。活动期间不续时，同一音频会话重复喷水 ID 拒绝，128 项满后不淘汰旧记录。停止、已检测的断线会取消排队票据；释放按键／恢复网络不会自行喷水。新指令仍需满足执行条件。不存在跨启动持久化防重放保证，也没有“水流停止完成”事件。
+
+## 联网水枪台架接口
+
+实现：[water_mcp.c](esp32-linx/main/water_mcp.c)、[water_policy.c](esp32-linx/main/water_policy.c)。0.2.0 在能力全零的正式协议实例外增加独立水枪策略。
+
+| 工具 | 入参 | 出参／语义 |
+|---|---|---|
+| `self.tank.get_status` | 空参数 | MCP 文本内的 JSON；字段见下表 |
+| `self.tank.stop` | 空参数 | 正式协议的文本 `logical_outputs_cleared; local_reenable_required`；适配器同时撤销水枪许可并关断。这里再次喷水需新的本机许可，不能把该文本解释为存在云端使能接口 |
+| `self.tank.water` | `duration_ms`：整数，必须 `5000`；`permit`：32 个字符的字符串，使用本机签发的原始小写十六进制令牌 | `result.isError=false` + 文本 `accepted`；策略拒绝时 `isError=true` + 原因字符串 |
+
+喷水仅接收有 ID 的请求；此分支 ID 为非负安全整数或 1–64 UTF-8 字节非空字符串。必须已初始化且会话匹配；通知不启动。许可由本机串口 `water` 创建，30 秒有效、使用一次即消耗；更换 RPC ID 不能重用许可。非法参数回落正式解析器拒绝，不会启用正式核心动作。许可不是对外提供的获取／刷新接口。
+
+| 状态字段 | 类型／值 | 含义 |
+|---|---|---|
+| `state` | string：`ACTIVE`／`READY`／`FAULT`／`DISARMED` | 依次按活动、已授权、已停止、空闲选择 |
+| `fault` | string：`clock_fault`／`stopped`／`none` | 水枪策略故障或停止原因 |
+| `logical_output` | object | `left_level:0`、`right_level:0`、`water:boolean`、`bubbles:false` |
+| `capabilities` | object | `move:false`、`water:true`、`bubbles:false` |
+| `physical_feedback` | boolean：`false` | 无实体反馈 |
+| `water_bench.local_permit_armed` | boolean | 当前有待执行授权 |
+| `water_bench.permit_used` | boolean | 当前／最近许可已消耗 |
+| `water_bench.boot_held` | boolean | BOOT 按下或尚未稳定释放 |
+| `water_bench.max_duration_ms` | number：`5000` | 固定执行时长 |
+| `water_bench.starts_this_boot` | number | 本次启动接受次数 |
+| `water_bench.authorization` | string | 固定 `local_single_use_intent; no_autonomous_actions` |
+| `water_bench.completion` | string | `running`／`stopped_or_disconnected`／`deadline_elapsed`／`idle`，均为软件状态 |
+
+策略拒绝文本：`clock_fault`、`not_ready`、`invalid_permit`、`permit_used`、`permit_expired_or_revoked`、`duration_must_match_5000ms_intent`、`busy`。到期自动关闭、1 秒冷却及按键释放规则见[工程说明](esp32-linx/README.md)。
+
+## 正式控制核心的 MCP 接口
+
+实现：[protocol.c](src/protocol.c)；完整封装、去重、错误及资源契约见 [PROTOCOL.md](PROTOCOL.md)。这些动作已经过离线逻辑测试，但不代表目前设备能通过它们行走或吹泡泡。
+
+### 方法与工具
+
+外层为 `{"type":"mcp","payload":{...}}`，payload 使用 JSON-RPC `2.0`。ID 支持最长 64 UTF-8 字节字符串或绝对值不超过 `9007199254740991` 的十进制整数；数字与字符串 ID 不同。合法通知无响应；动作通知不执行，合法停止通知执行。
+
+| 方法 | 入参 `params` | 出参 |
+|---|---|---|
+| `initialize` | `protocolVersion:"2024-11-05"`、对象 `capabilities`、`clientInfo:{name:string,version:string}` | `protocolVersion`、`capabilities.tools:{}`、`serverInfo:{name:"CyberTrack offline adapter",version:"0.1.0"}` |
+| `ping` | 省略或 `{}` | `result:{}` |
+| `tools/list` | 省略或 `{}`；不接受分页 | `result.tools` 数组；每项含 `name`、`description`、`inputSchema`；无 `nextCursor` |
+| `tools/call` | `name:string`、工具规定的 `arguments` | `result:{isError:boolean,content:[{type:"text",text:string}]}`，或 JSON-RPC `error` |
+| `notifications/initialized` | 通知 | 忽略，无响应 |
+
+| 工具 | 入参 `arguments` | 正常出参文本 |
+|---|---|---|
+| `self.tank.get_status` | 省略或 `{}` | JSON 状态对象，见下表 |
+| `self.tank.stop` | 省略或 `{}` | `logical_outputs_cleared; local_reenable_required` |
+| `self.tank.move` | `direction`：`forward`／`backward`／`left`／`right`；`speed_level`：1–255 整数；`duration_ms`：1–4294967295 整数 | `accepted` |
+| `self.tank.water` | `duration_ms`：同上 | `accepted` |
+| `self.tank.bubbles` | `duration_ms`：同上 | `accepted` |
+
+动作时长与速度还须不超过 `ct_limits`，类型范围不是操作建议值。所有参数拒绝额外字段；`null` 不能代替空对象；数值必须普通十进制整数 token。`max_queue_ms=0` 时仅发现状态与停止；其他动作按非零能力配置发布。没有远程使能、任意 GPIO、高压或维护恢复工具。
+
+| 状态字段 | 类型／值 | 含义 |
+|---|---|---|
+| `state` | string：`BOOT`／`DISARMED`／`READY`／`ACTIVE`／`FAULT` | 控制状态；正常到期回 READY，停止锁定至本地重新使能 |
+| `fault` | string：`none`／`stopped`／`external_fault`／`session_lost`／`clock_fault` | 故障或停止原因 |
+| `logical_output` | object | `left_level`、`right_level` 为有符号档位；`water`、`bubbles` 为 boolean |
+| `capabilities` | object | `move`、`water`、`bubbles` 为 boolean，来自配置，不是实时就绪保证 |
+| `physical_feedback` | boolean：`false` | 仅逻辑状态 |
+| `replay_guard.scope` | string：`boot`／`persistent` | 当前防重放历史范围 |
+| `replay_guard.storage` | string：`volatile`／`ready`／`fault` | 存储绑定／故障状态，不是物理 Flash 验收结论 |
+| `replay_guard.bits_set`、`bits_total` | number | 过滤器已置位数／总位数（262144）；不是命令数，可能误拒绝新动作 |
+
+错误分三层：API 返回 `CT_RPC_*`（是否生成响应）、JSON-RPC `error.code/message`（协议错误）、工具 `result.isError/text`（业务拒绝）。常见业务拒绝为 `not_ready`、`unavailable`、`invalid`、`busy`、`session_mismatch`、`replay`、`expired`、`clock_error`、`stale_local_enable`、`invalid_receive_time`、`freshness_unverified`、`sequence_exhausted`。完整数值错误表见 [PROTOCOL.md](PROTOCOL.md#错误映射与资源边界)。
+
+单帧上限 2048 字节，响应缓冲至少 4096 字节，16 槽 FIFO 保存原响应。相同 ID／相同内容可能返回旧状态快照，读取当前状态要用新 ID。停止优先于动作时效及缓存检查。动作还须通过本地使能、原始会话／使能代次、设备预签发窗口、稳定意图与防重放门槛；这些可信证据不是可加入 JSON 的参数。
+
+## 模块与数据流
+
+| 模块 | 实现入口 | 职责 |
+|---|---|---|
+| 控制核心 | [control.h](include/cybertrack/control.h)／`src/control.c` | 状态机、动作互斥、限时及逻辑目标，不直接写 GPIO |
+| MCP | [protocol.h](include/cybertrack/protocol.h)／`src/protocol.c` | 封装、工具发现、参数校验、缓存、防重放及动作分派 |
+| 新鲜度 | [freshness.h](include/cybertrack/freshness.h)／`src/freshness.c` | 设备窗口与意图作用域检查；不执行认证 |
+| 运行层 | [runtime.h](include/cybertrack/runtime.h)／`src/runtime.c` | 本地事件优先、周期预算、输出回调、喂狗与故障锁定 |
+| 输入 | [inputs.h](include/cybertrack/inputs.h)／`src/inputs.c` | 停止／故障立即断言、释放去抖、已观察脉冲锁存 |
+| 收件队列 | [inbox.h](include/cybertrack/inbox.h)／`src/inbox.c` | 4 槽完整帧副本、元数据保持、断线优先、溢出关闭 |
+| 连接模拟 | [link.h](include/cybertrack/link.h)／`src/link.c` | WebSocket 分片组装、握手门槛、超时、发送完成与重连状态机；没有实际网络 I/O |
+| 防重放存储 | [replay_store.h](include/cybertrack/replay_store.h)／`src/replay_store.c` | 双槽历史、独立锚点、迁移、选择及维护恢复 |
+| 恢复日志 | [replay_log.h](include/cybertrack/replay_log.h)／`src/replay_log.c` | 独立完整证据、两槽或四槽冗余，支持缺失主快照的维护恢复 |
+| 联网工程 | [linx_main.c](esp32-linx/main/linx_main.c)、[linx_wire.h](esp32-linx/main/linx_wire.h) | 实际 Wi-Fi／网关／WSS、hello 与分片处理，独立台架入口 |
+| 水枪策略／适配 | [water_policy.h](esp32-linx/main/water_policy.h)、[water_mcp.h](esp32-linx/main/water_mcp.h) | 单次许可、截止、冷却及台架 MCP；音频板复用策略 |
+| 音频适配 | [cybertrack_tools.h](esp32-audio/cybertrack_tools.h)、[water_guard.h](esp32-audio/water_guard.h) | 上游工具注册、内部票据、GPIO18 控制任务、状态回执 |
+
+通用库的数据流是 SDK 事件 → `link` → `inbox` → `runtime` → `protocol` → `control` → 板级输出回调；本地停止／故障由运行层先处理。现有联网台架和音频适配各自实现板级循环，不能把这条通用库组合路线视为已经完整部署到它们。
+
+## 内部 C API
+
+本节列出公开头文件的接口、参数职责与返回结果；精确声明及生命周期约束见各表链接。`c/p/r/q/f` 等分别表示对应控制器、协议、运行层、队列或过滤器的指针，均由调用方提供；除明确标出的输出指针外，状态通过 API 原地更新。所有 `now`／`now_ms` 都是 `uint64_t` 本地单调毫秒，不是墙上日期。通用模块由单一任务串行拥有，无内部线程或锁；不得从 ISR 与网络任务并发调用。
+
+### 控制数据与入口
+
+| 类型 | 字段及用途 |
+|---|---|
+| `ct_limits` | `uint32_t move_max_ms/water_max_ms/bubbles_max_ms`：各动作最大毫秒数；`uint8_t max_speed_level`：最大档位；零表示不可用 |
+| `ct_request` | `uint64_t session/sequence/expires_at_ms`：会话、严格递增序号、最晚开始期限；`ct_action action`：MOVE/WATER/BUBBLES；`ct_direction direction`；`uint8_t speed_level`；`uint32_t duration_ms` |
+| `ct_output` | `int16_t left_level/right_level`、`bool water/bubbles`；左右正值均为车体向前，档位不是 PWM 百分比 |
+| `ct_action_proof` | 四个 `uint64_t`：`session/enable_generation/window/intent`；认证来源绑定命令，意图非零并跨重试稳定 |
+| `ct_rpc_delivery` | `uint64_t session/received_at_ms/enable_generation` + `ct_action_proof proof`；首次入队的可信元数据，出队或重试不得刷新 |
+
+[control.h](include/cybertrack/control.h)：
+
+| API | 入参 | 返回／副作用 |
+|---|---|---|
+| `ct_init` | `c, limits, now_ms` | `void`；清零控制器，进入 BOOT |
+| `ct_boot_complete` | `c` | `ct_result`；完成启动门槛，正常进 DISARMED；已有停止／故障进 FAULT |
+| `ct_tick` | `c, now_ms` | `ct_result`；推进时限，到期撤销目标；时钟回退锁定 |
+| `ct_set_session` | `c, uint64_t session, now_ms` | `ct_result`；0 表示断线，新会话撤销使能，活动中改变会话锁定 |
+| `ct_set_stop`／`ct_set_fault` | `c, bool held/present` | `void`；断言时撤销目标，解除输入不自动恢复 |
+| `ct_stop` | `c` | `void`；幂等停止，锁定为 STOPPED 原因 |
+| `ct_local_enable` | `c, now_ms` | `ct_result`；仅本地事件使用；满足条件进入 READY、增加使能代次 |
+| `ct_submit` | `c, const ct_request *request, now_ms` | `ct_result`；成功设置目标和结束期限；空请求拒绝，同会话有效新序号即使请求被拒也会消耗 |
+
+`ct_result`：`CT_OK`、`CT_NOT_READY`、`CT_UNAVAILABLE`、`CT_INVALID`、`CT_BUSY`、`CT_SESSION_MISMATCH`、`CT_REPLAY`、`CT_EXPIRED`、`CT_CLOCK_ERROR`。`CT_OK` 是本次 API 操作成功，不必然是接受动作；仅 `ct_submit` 的成功表示新目标接受。单独使用控制核心也必须周期 tick 并应用输出。
+
+### 协议与新鲜度
+
+[protocol.h](include/cybertrack/protocol.h)、[freshness.h](include/cybertrack/freshness.h)：
+
+| API | 入参 | 返回／出参 |
+|---|---|---|
+| `ct_protocol_init` | `p, ct_controller *control, uint32_t max_queue_ms` | `void`；每次启动初始化一次，零时效预算禁用动作 |
+| `ct_protocol_set_allocator` | `p, ct_rpc_allocator allocator` | `bool`；首次 open 前配置；allocator 含 `allocate(context,size)`、`resize(context,ptr,old_size,size)`、`release(context,ptr)` 及上下文 |
+| `ct_protocol_attach_store` | `p, ct_replay_store *store` | `bool`；绑定普通持久化抽象，用于兼容／离线 |
+| `ct_protocol_attach_guarded_store` | 同上 | `bool`；另要求已绑定独立锚点 |
+| `ct_protocol_attach_logged_store` | 同上 | `bool`；另要求独立恢复日志；真实动作集成必须走此入口并接入认证来源 |
+| `ct_protocol_issue_window` | `p, now_ms, ct_action_proof *challenge`（输出） | `bool`；签发窗口，不使能，challenge 的 intent 留零；必须在生产者创建意图之前调用 |
+| `ct_protocol_open` | `p, now_ms` | `uint64_t` 新会话代次；失败为 0；撤销原使能 |
+| `ct_protocol_close` | `p, now_ms` | `void`；关闭会话、取消动作 |
+| `ct_protocol_handle` | `p, const char *frame, size_t length, ct_rpc_delivery delivery, now_ms, char *reply, size_t reply_cap` | `ct_rpc_result`；只有 RESPONSE 时读取 reply；reply_cap 至少 4096 |
+| `ct_freshness_issue` | `ct_freshness *f, uint64_t session, uint64_t enable_generation, now_ms, uint32_t budget_ms, ct_action_proof *challenge`（输出） | `bool`；替换旧窗口，预算／计数／时间无效则失败 |
+| `ct_freshness_check` | `const ct_freshness *f, ct_action_proof proof, uint64_t session, uint64_t enable_generation, uint64_t received_at_ms, now_ms` | `CT_FRESH`／`CT_FRESH_MISSING`／`CT_FRESH_STALE`／`CT_FRESH_EXPIRED` |
+
+`ct_rpc_result` 为 `CT_RPC_RESPONSE`（有响应）、`CT_RPC_NO_RESPONSE`（通知）、`CT_RPC_STALE_SESSION`（旧连接，无响应）、`CT_RPC_BAD_ARGUMENT`（API 参数无效）。绑定必须在首次 open 前完成，失败锁定存储故障，不允许悄悄退回易失动作。认证证据不由 `issue_window` 或 `freshness_check` 自动产生，详见 [FRESHNESS.md](FRESHNESS.md)。
+
+### 运行层、输入与队列
+
+[runtime.h](include/cybertrack/runtime.h)、[inputs.h](include/cybertrack/inputs.h)、[inbox.h](include/cybertrack/inbox.h)：
+
+| API | 入参 | 返回／出参 |
+|---|---|---|
+| `ct_runtime_init` | `r, ct_protocol *protocol, ct_board_io io, ct_limits limits, uint32_t queue_ms, uint32_t max_cycle_ms` | `bool`；先 force_off 后自检；周期预算必须非零 |
+| `ct_runtime_step` | `r, const ct_runtime_event *event, ct_runtime_response *response` | `bool`；空 event 表示空闲 tick；MESSAGE 必须提供 response。true 表示运行基础健康，不代表动作接受；有效运行实例失败时尽力关断、锁定并抑制响应，不保证关断回调成功 |
+| `ct_inputs_init` | `ct_input_filter *f, uint32_t release_ms, uint32_t enable_ms, ct_local_inputs initial, now_ms` | `bool`；两个去抖时间须非零，上电按住使能不会使能 |
+| `ct_inputs_observe` | `f, ct_local_inputs raw, now_ms` | `bool`；锁存已观察的停止／故障，时钟回退使过滤器失效 |
+| `ct_inputs_read` | `f, ct_local_inputs *inputs`（输出） | `bool`；消费锁存事件，保留持续按下／去抖中的状态 |
+| `ct_inbox_init` | `ct_inbox *q` | `void`；启动时一次初始化 |
+| `ct_inbox_bind` | `q, uint64_t session` | `bool`；绑定严格递增的新会话，前一断线必须先应用 |
+| `ct_inbox_push` | `q, const char *frame, size_t length, ct_rpc_delivery delivery` | `CT_INBOX_OK`／`STALE`／`OVERFLOW`／`OVERSIZE`／`INVALID`（均有 `CT_INBOX_` 前缀）；复制完整帧 |
+| `ct_inbox_disconnect` | `q, uint64_t session` | `void`；标记断线并清除该会话排队消息 |
+| `ct_inbox_take` | `q, ct_inbox_item *item`（输出） | `ct_event_kind`；断线优先，空队列返回 IDLE |
+
+`ct_local_inputs` 含三个归一化布尔量 `stop/fault/enable_button`，true 表示有效。`ct_runtime_event` 含 `kind`（`CT_EVENT_IDLE/CONNECT/DISCONNECT/MESSAGE`）、`frame`、`length`、`delivery`；响应包含 `ct_rpc_result result` 和 `reply[4096]`。队列 item 拥有帧副本；普通远程停止仍在消息 FIFO 中，本地停止不经该 FIFO。
+
+板级 `ct_board_io` 的全部回调返回 bool；false 必须按运行层契约处理，回调成功不是物理反馈：
+
+| 回调 | 入参／出参 | 职责 |
+|---|---|---|
+| `force_off` | `void *context` | 请求所有执行器关闭；启动最先调用 |
+| `self_test` | `context` | 不启用执行器的自检 |
+| `now_ms` | `context, uint64_t *now`（输出） | 提供单调毫秒时钟 |
+| `read_inputs` | `context, ct_local_inputs *inputs`（输出） | 返回去抖与锁存后的本地输入 |
+| `write_outputs` | `context, const ct_output *output` | 映射逻辑目标至板级驱动 |
+| `watchdog_kick` | `context` | 本轮检查与输出成功后喂狗 |
+
+`r->faults` 为锁定故障位图：`CT_RUNTIME_CONFIG/SELF_TEST/CLOCK/SCHEDULING/INPUT/OUTPUT/OFF_FAILED/WATCHDOG/FRESHNESS`（每项均带 `CT_RUNTIME_` 前缀）。详情见 [RUNTIME.md](RUNTIME.md)，不能从网络清除这些故障。
+
+### 通用连接层
+
+[link.h](include/cybertrack/link.h)：所有操作携带原连接 attempt，禁止把旧 SDK 回调重新标成新连接。状态为 `DOWN/CONNECTING/HANDSHAKE/ONLINE/BACKOFF/HALTED`（`CT_LINK_` 前缀）。
+
+| API | 入参 | 返回／出参 |
+|---|---|---|
+| `ct_link_init` | `ct_link *link, ct_runtime *runtime, ct_link_limits limits` | `bool`；limits 的 `connect_ms/handshake_ms/fragment_ms/send_ms/retry_ms` 均为非零 uint32 毫秒 |
+| `ct_link_begin` | `link, now_ms` | `uint64_t attempt`，不满足启动条件返回 0 |
+| `ct_link_connected`／`ct_link_ready` | `link, uint64_t attempt, now_ms` | `bool`；ready 是可信适配器完成 TLS／认证／hello 后的信号，库本身不验证它们 |
+| `ct_link_receive` | `link, attempt, ct_ws_chunk chunk, ct_action_proof proof, now_ms` | `bool`；处理 SDK 给出的 WebSocket 分片，不接收原始 TCP；proof 来自首次分片的认证来源 |
+| `ct_link_closed` | `link, attempt, now_ms` | `void`；登记关闭 |
+| `ct_link_service` | `link, now_ms` | `bool`；周期处理本地输入、断线、消息与超时；false 表示已停止服务 |
+| `ct_link_take_tx` | `link, ct_link_tx *tx`（输出）, `now_ms` | `bool`；一次性复制待发响应至发送任务存储 |
+| `ct_link_sent` | `link, uint64_t attempt, uint64_t id, bool success, size_t bytes, now_ms` | `bool`；报告该响应的发送结果，不自动重发 |
+
+`ct_ws_chunk` 字段：`opcode`（CONT/TEXT/BINARY/CLOSE/PING/PONG）、`bool fin`、`size_t offset/total/length`、`const char *data`；offset/total 针对单个 WebSocket 帧，跨帧 continuation 另行组装。`ct_link_tx` 含 `attempt/id/length/frame`，id 是本地发送标识，不是 RPC ID。通用层目前只接 MCP 文本路径，二进制音频不能从这里处理。错误枚举覆盖连接／握手／分片／发送超时、格式／容量／队列／时钟／运行层等，详见头文件与 [TRANSPORT.md](TRANSPORT.md)。
+
+### 防重放存储与恢复
+
+这些是本地内部接口，不是远程工具。下列操作要求同一串行所有者；登记、迁移、切换与恢复必须关闭输出，恢复时退役协议所有者。所有 bool 失败都必须按专题契约处理，不能直接擦除历史重试。
+
+| API | 入参 | 返回／出参 |
+|---|---|---|
+| `ct_replay_store_load` | `ct_replay_store *s, ct_replay_io io` | `CT_STORE_FAULT/EMPTY/READY`；启动只读加载，双槽严格核验 |
+| `ct_replay_store_provision` | `s` | `bool`；明确的首次空白介质初始化，不是修复／重置 |
+| `ct_replay_store_save` | `s, const unsigned char *filter, uint64_t session` | `bool`；保存完整 32768 字节过滤器的单调超集及会话高水位，先持久化后接受动作 |
+| `ct_replay_store_bind`／`ct_replay_store_enroll` | `s, ct_replay_anchor_io anchor, uint64_t backend_id` | `bool`；前者绑定已登记锚点，后者仅首次登记；不可混用作故障恢复 |
+| `ct_replay_store_check` | `s` | `bool`；重读锚点，防止旧所有者继续写入 |
+| `ct_replay_store_migrate` | `const ct_replay_store *source, ct_replay_store *destination` | `bool`；向独立空白目标复制历史，不负责持久后端选择 |
+| `ct_replay_store_switch` | `source, destination, uint64_t destination_id` | `bool`；复制后原子选择新后端，成功退役源对象 |
+| `ct_replay_store_recover` | `source, anchor, uint64_t source_id, destination, destination_id` | `ct_replay_recovery_result`；从精确匹配当前锚点的完整主快照恢复至空白目标 |
+| `ct_replay_log_init` | `ct_replay_log *log, ct_replay_io io` | `bool`；配置两槽独立日志，不擦除／登记 |
+| `ct_replay_log_init_redundant` | `log, io, ct_replay_log_redundancy *workspace` | `bool`；显式四槽双副本模式，workspace 生命周期覆盖日志使用期 |
+| `ct_replay_store_attach_log` | `s, log` | `bool`；核验／补齐当前精确历史后绑定日志 |
+| `ct_replay_store_enroll_logged` | `s, log, anchor, backend_id` | `bool`；先准备日志，再首次登记锚点 |
+| `ct_replay_store_recover_log` | `source, log, anchor, source_id, destination, destination_id` | `ct_replay_recovery_result`；从独立日志恢复当前精确历史，可不依赖主快照 |
+
+后端回调来自 [replay_store.h](include/cybertrack/replay_store.h)：
+
+| 回调 | 入参／出参 | 契约 |
+|---|---|---|
+| `ct_replay_io.read` | `context, unsigned slot, size_t offset, void *data, size_t size` | bool；精确长度读入 data |
+| `ct_replay_io.erase` | `context, unsigned slot` | bool；仅擦除指定槽 |
+| `ct_replay_io.write` | `context, slot, offset, const void *data, size` | bool；精确长度写入；false 可能已经部分完成 |
+| `ct_replay_io.sync` | `context` | bool；成功必须保证前序变更持久且有序，不能只保证缓存可读 |
+| `ct_replay_anchor_io.read` | `context, ct_replay_anchor_record *record`（输出） | bool；读取独立、防回滚的持久记录 |
+| `ct_replay_anchor_io.replace` | `context, const record *expected, const record *next` | bool；全字段比较后原子持久替换，失败可能已经提交，需重新检查 |
+
+锚点 record 的四个字段均为 uint64：`epoch/backend_id/revision/session`；全零只能表示从未登记，不能把丢失或损坏当作全零。主存储槽大小为 32800 字节，日志槽大小为 32816 字节。恢复结果为 `CT_RECOVERY_OK` 或 `BAD_ARGUMENT/ANCHOR_UNAVAILABLE/WRONG_BACKEND/HISTORY_UNAVAILABLE/HISTORY_CONFLICT/DESTINATION_UNAVAILABLE/SELECTION_UNCERTAIN/EXHAUSTED/LOG_UNAVAILABLE`（各带 `CT_RECOVERY_` 前缀）。
+
+详细顺序与失败语义：[持久化](PERSISTENCE.md)、[容量与迁移](CAPACITY.md)、[原子切换](ATOMIC-SWITCH.md)、[恢复](RECOVERY.md)、[独立日志](RECOVERY-LOG.md)、[冗余](REDUNDANCY.md)。这些是经过假介质测试的抽象契约，尚无满足契约的真实 Flash／NVS／独立锚点实现。
+
+### 工程适配接口
+
+| API／模块 | 入参 | 返回／出参 |
+|---|---|---|
+| `water_tick` | `water_policy *s, now, bool online, bool boot_held` | void；处理期限、释放稳定期、断线和时钟异常 |
+| `water_stop` | `s, now` | void；取消活动及许可，活动被停止时进入冷却 |
+| `water_arm` | `s, now, const char token[33]` | bool；校验并登记调用方提供的 32 个小写十六进制字符，建立一次性许可；不生成随机令牌 |
+| `water_request`／`water_request_timed` | `s, now, const char *token, uint32_t duration` | `const char *`；分别要求 5000 或 1–30000 ms，返回 accepted 或拒绝文本 |
+| `water_mcp_handle` | `ct_protocol *p, frame, size, delivery, now, reply, cap, water_callbacks cb` | `ct_rpc_result`；cb 含 `snapshot()->water_policy`、`stop()->void`、`request(token,duration)->const char *`，回调须有界、串行 |
+| `linx_parse_gateway` | `const char *json, size_t size, linx_gateway *out` | bool；成功取得六位绑定 `code` 或 `token/url`，失败清零；令牌不得记录 |
+| `linx_parse_hello` | `json, size, char session[128]`（输出） | bool；校验 hello／websocket，提取可选会话字符串 |
+| `linx_text_feed` | `linx_text *s, int opcode, bool fin, size_t offset, total, const char *data, size_t size` | int：1 完整文本（读取 `s->text/used`）、0 未完成或控制／二进制帧、-1 非法 |
+| `InitializeCyberTrackTools` | 无 | void；音频板初始化 GPIO、控制任务、事件监听并注册工具 |
+| `CyberTrackWaterLink` | `bool online` | void；音频连接状态变化，离线取消票据并关断 |
+| `CyberTrackWaterStop` | 无 | void；即时取消／关断，不等待主任务回复 |
+| `CyberTrackWaterClaim` | `int rpc_id` | int；正数为内部票据，0 为拒绝 |
+| `AudioWaterGuard::Tick/Stop/Claim/Request` | 分别 `(now,online,pressed)`／`(now)`／`(now,rpc_id)`／`(now,ticket,duration)` | 前两者 void；Claim 返回票据或 0；Request 返回结果字符串。必须在适配器锁内执行 |
+| 两套台架的 `bench_tick/bench_stop/bench_receive` | 分别 `(bench_policy *state,now,bool stop_held)`／`(state,now)`／`(state,now,stop_held,const unsigned char *bytes,size_t count)` | void；原地更新 armed/active/deadline 等状态，由各自主循环写 GPIO／PWM |
+
+`cybertrack_state.h` 中的 `CyberTrackAudioState::Call(stop,now,device_id,boot_id)` 返回 ct2 只读 JSON，是保留的历史适配及测试对象；ct5 当前工具实际使用 `cybertrack_tools.cc` 的水枪状态，不能用 ct2 结构解析 ct5 回执。
+
+## 串口与板级接口
+
+以下是已实现的入口清单，不是自动执行脚本。各工程独立烧录，同一 GPIO 编号在不同板／镜像上的用途不同。
+
+| 工程 | 输入 | 输出／动作 |
+|---|---|---|
+| 无负载检查 | BOOT 按下／释放 | 逻辑 FAULT/stopped 与串口检查结果；释放不恢复，无执行器输出 |
+| 电机台架 | 串口单字符 `a`，随后单独 `f` 或 `r`；`s` 停止 | 使能窗口 3000 ms；当前源码正／反向目标最多 10000 ms；GPIO4 1 kHz、8 bit duty=102，GPIO5 方向；`BENCH` 文本状态 |
+| MOS 台架 | 串口单字符 `a`，随后单独 `g`；`s` 停止 | 使能窗口 3000 ms；GPIO4 单次高电平 5000 ms；`MOS` 文本状态 |
+| 联网板 | 私有串口配网；`status`／`stop`／`water`／`s` | 前三者向平台发送固定联调文本，water 同时创建本地许可；s 直接本地停止；`LINX RPC`／`WATER_OFF` 等诊断 |
+| 音频板 | 原唤醒／说话／音量按键、MCP 工具、BOOT | 本板 GPIO18 水枪输出；串口 `CT_AUDIO` 结果与关闭记录，不提供上述 a/g/f/r 调试命令 |
+
+两套单字符台架均忽略 CR/LF，批量多键、未知键、运行中收到键会停止／撤销使能；不能把多字符连发当作一次可靠动作请求。BOOT 是 GPIO0 软件停止输入，不等于独立断电开关。音频板 GPIO4 已用于麦克风，不能套用其他板的 GPIO4 水枪接线。
+
+## 验证与维护
+
+本文依据当前源码、公开头文件、工程 README 与已有实测记录整理，没有在本次文档更新中连接设备、烧录或触发动作，也没有重新执行历史测试。
+
+| 需要核对的内容 | 证据入口 |
+|---|---|
+| 通用核心／协议／运行层／存储模拟 | [主机测试记录](tests/README.md)及 `tests/verification.json` |
+| 无负载启动／PSRAM／BOOT | [实物检查](../hardware/components/ESP32-S3-N16R8/physical-verification.md)、[停止检查](../hardware/components/ESP32-S3-N16R8/boot-stop-verification.md) |
+| 电机与 MOS 台架 | [电机记录](../docs/motor-bench.md)、[MOS 记录](../docs/mos-bench.md) |
+| 联网绑定、工具与单次授权喷水 | [灵矽实测](../docs/linx-validation.md) |
+| 音频、屏幕、状态／停止 | [音频板实测](../docs/audio-board-validation.md) |
+| ct4 带载与 ct5 功率断开的时长验证 | [音频板喷水记录](../docs/audio-water-validation.md)；两类证据不得互相替代 |
+
+完整板级运行层、真实动作认证源、持久化与锚点后端、整机行走／泡泡／传感器集成、独立切断、失电／欠压／看门狗故障注入及完整带载验收仍按 [TODO](../TODO.md) 和[固件计划](PLAN.md)推进；不在本文另建一份完成清单。
+
+新增／修改工具、字段、范围、错误值、引脚或版本时，同步本文对应工程、该工程 README 及必要专题契约；新增实测只更新对应证据范围。部署版本与源码不一致时，先核对设备版本，不以本文推断设备已更新。
