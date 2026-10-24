@@ -84,27 +84,37 @@ static bool advance_anchor(ct_replay_store *s, ct_replay_anchor_record next)
 }
 
 static bool bind_anchor(ct_replay_store *s, ct_replay_anchor_io anchor,
-                        uint64_t id, bool enroll)
+                        uint64_t id, bool enroll, ct_replay_log *log)
 {
     if (!s || s->state != CT_STORE_READY || s->anchor_bound) return false;
     s->anchor_bound = true; s->anchor = anchor;
     if (!id || !anchor.read || !anchor.replace ||
         !anchor.read(anchor.context, &s->selected)) return fault(s);
     if (enroll) {
-        if (!same_record(s->selected, (ct_replay_anchor_record){0}) ||
-            !advance_anchor(s, (ct_replay_anchor_record){1, id, s->revision, s->session}))
-            return fault(s);
+        if (!same_record(s->selected, (ct_replay_anchor_record){0})) return fault(s);
+        ct_replay_anchor_record next = {1, id, s->revision, s->session};
+        if (log && !ct_replay_log_prepare(log, next, next, s->filter)) return fault(s);
+        s->log = log;
+        if (!advance_anchor(s, next)) return false;
     } else if (s->selected.backend_id != id) return fault(s);
     return ct_replay_store_check(s);
 }
 
 bool ct_replay_store_bind(ct_replay_store *s, ct_replay_anchor_io anchor, uint64_t id)
 {
-    return bind_anchor(s, anchor, id, false);
+    return bind_anchor(s, anchor, id, false, NULL);
 }
 bool ct_replay_store_enroll(ct_replay_store *s, ct_replay_anchor_io anchor, uint64_t id)
 {
-    return bind_anchor(s, anchor, id, true);
+    return bind_anchor(s, anchor, id, true, NULL);
+}
+
+bool ct_replay_store_enroll_logged(ct_replay_store *s, ct_replay_log *log,
+                                    ct_replay_anchor_io anchor, uint64_t id)
+{
+    if (!s || !log || !log->ready || log->io.context == s->io.context ||
+        log->io.context == anchor.context) return false;
+    return bind_anchor(s, anchor, id, true, log);
 }
 
 ct_store_state ct_replay_store_load(ct_replay_store *s, ct_replay_io io)
@@ -175,6 +185,8 @@ bool ct_replay_store_attach_log(ct_replay_store *s, ct_replay_log *log)
     if (!s || s->log || !ct_replay_store_check(s)) return false;
     if (!s->anchor_bound || !log || !log->ready || log->io.context == s->io.context ||
         log->io.context == s->anchor.context) return fault(s);
+    if (!ct_replay_log_prepare(log, s->selected, s->selected, s->filter) ||
+        !ct_replay_store_check(s)) return fault(s);
     s->log = log;
     return true;
 }
@@ -251,12 +263,17 @@ bool ct_replay_store_switch(ct_replay_store *src, ct_replay_store *dst, uint64_t
     if (!src || !dst || src == dst || !src->anchor_bound ||
         src->state != CT_STORE_READY || dst->state != CT_STORE_EMPTY || dst->anchor_bound ||
         !id || id == src->selected.backend_id || src->io.context == dst->io.context) return false;
-    if (!ct_replay_store_check(src) || src->selected.epoch == UINT64_MAX ||
+    if ((src->log && (!src->log->ready || src->log->io.context == dst->io.context)) ||
+        !ct_replay_store_check(src) || src->selected.epoch == UINT64_MAX ||
         !ct_replay_store_migrate(src, dst)) {
         fault(src); return fault(dst);
     }
     dst->anchor_bound = true; dst->anchor = src->anchor; dst->selected = src->selected;
     ct_replay_anchor_record next = {src->selected.epoch + 1, id, dst->revision, dst->session};
+    if (src->log && !ct_replay_log_prepare(src->log, src->selected, next, src->filter)) {
+        fault(src); return fault(dst);
+    }
+    dst->log = src->log;
     /* Revoke the old in-memory owner even on ambiguous selection. Boot must
      * consult the independent anchor; it cannot infer selection from a copy. */
     fault(src);
@@ -266,7 +283,7 @@ bool ct_replay_store_switch(ct_replay_store *src, ct_replay_store *dst, uint64_t
 
 static ct_replay_recovery_result restore_snapshot(
     ct_replay_store *src, ct_replay_anchor_io anchor, ct_replay_anchor_record selected,
-    ct_replay_store *dst, uint64_t destination_id)
+    ct_replay_store *dst, uint64_t destination_id, ct_replay_log *log)
 {
     ct_replay_anchor_record current = {0};
     if (!anchor.read(anchor.context, &current) || !same_record(selected, current))
@@ -283,6 +300,9 @@ static ct_replay_recovery_result restore_snapshot(
     }
     dst->anchor_bound = true; dst->anchor = anchor; dst->selected = selected;
     ct_replay_anchor_record next = {selected.epoch + 1, destination_id, dst->revision, dst->session};
+    if (log && !ct_replay_log_prepare(log, selected, next, src->filter))
+        return CT_RECOVERY_LOG_UNAVAILABLE;
+    dst->log = log;
     if (!advance_anchor(dst, next)) return CT_RECOVERY_SELECTION_UNCERTAIN;
     dst->state = CT_STORE_READY;
     return CT_RECOVERY_OK;
@@ -321,7 +341,7 @@ ct_replay_recovery_result ct_replay_store_recover(
     if (valid(p, 1 - slot) && (get64(p + 8) >= selected.revision ||
         get64(p + 16) > selected.session || !superset(src->filter, p + FILTER_OFFSET)))
         return CT_RECOVERY_HISTORY_CONFLICT;
-    return restore_snapshot(src, anchor, selected, dst, destination_id);
+    return restore_snapshot(src, anchor, selected, dst, destination_id, NULL);
 }
 
 ct_replay_recovery_result ct_replay_store_recover_log(
@@ -343,5 +363,5 @@ ct_replay_recovery_result ct_replay_store_recover_log(
     if (selected.epoch == UINT64_MAX || selected.revision > UINT64_MAX - 2)
         return CT_RECOVERY_EXHAUSTED;
     if (!ct_replay_log_read(log, selected, src->filter)) return CT_RECOVERY_HISTORY_UNAVAILABLE;
-    return restore_snapshot(src, anchor, selected, dst, destination_id);
+    return restore_snapshot(src, anchor, selected, dst, destination_id, log);
 }

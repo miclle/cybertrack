@@ -91,7 +91,8 @@ bool ct_replay_store_check(ct_replay_store *s);
  * anchored, destination EMPTY/unbound and physically independent. Outputs off,
  * old protocol retired, no other writer until completion. Both RAM objects are
  * faulted on failure after validation starts; reload/bind the anchor-selected
- * backend after reboot. Success retires source and binds destination. Never
+ * backend after reboot. With a log, prepares full target evidence BEFORE
+ * selection and transfers log ownership. Success retires source and binds destination. Never
  * fall back to another backend if selected media is missing or invalid. */
 bool ct_replay_store_switch(ct_replay_store *source, ct_replay_store *destination,
                             uint64_t destination_id);
@@ -116,7 +117,8 @@ typedef enum {
     CT_RECOVERY_HISTORY_CONFLICT,
     CT_RECOVERY_DESTINATION_UNAVAILABLE,
     CT_RECOVERY_SELECTION_UNCERTAIN,
-    CT_RECOVERY_EXHAUSTED
+    CT_RECOVERY_EXHAUSTED,
+    CT_RECOVERY_LOG_UNAVAILABLE
 } ct_replay_recovery_result;
 ct_replay_recovery_result ct_replay_store_recover(
     ct_replay_store *source, ct_replay_anchor_io anchor, uint64_t source_id,
