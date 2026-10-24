@@ -1,6 +1,6 @@
 {
   "validation_date": "2026-10-24",
-  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity, read-only capacity isolation and lossless offline replay-store migration, independent rollback-resistant anchor contract, atomic offline backend selection, guarded protocol attachment and non-reusable version reservation, explicit local maintenance recovery from exact anchored snapshots, incomplete-history refusal and interrupted recovery simulations, independent complete write-ahead recovery evidence with unique attempt epochs, missing-primary recovery, logged protocol attachment and interrupted journal simulations, preparation continuity via durable unchanged-history bridges before attempt allocation, dual-slot exact selection and missing-primary recovery across action/session preparation cuts",
+  "scope": "F0 control, F1 offline MCP/allocation failure injection, F2a runtime/input/inbox, normalized receive boundaries and connection lifecycle with fake transport/board, bounded response eviction and boot-lifetime replay guard stress, durable replay interface and reset/recovery fault simulation, device-issued freshness windows and stable cross-session intent identity, read-only capacity isolation and lossless offline replay-store migration, independent rollback-resistant anchor contract, atomic offline backend selection, guarded protocol attachment and non-reusable version reservation, explicit local maintenance recovery from exact anchored snapshots, incomplete-history refusal and interrupted recovery simulations, independent complete write-ahead recovery evidence with unique attempt epochs, missing-primary recovery, logged protocol attachment and interrupted journal simulations, preparation continuity via durable unchanged-history bridges before attempt allocation, dual-slot exact selection and missing-primary recovery across action/session preparation cuts, initial logged enrollment and exact-history attachment seeding; durable target log before backend selection; immediate missing-primary recovery before the first bridge/session save",
   "environment": {
     "os": "macOS arm64",
     "compiler": "Apple Clang 21.0.0",
@@ -13,7 +13,7 @@
     "ctest --test-dir build/firmware-host --output-on-failure"
   ],
   "ctest": {
-    "passed": 19,
+    "passed": 21,
     "failed": 0,
     "control_scenario_groups": 8,
     "protocol_test_methods": 24,
@@ -62,7 +62,21 @@
     "replay_recovery_groups": 5,
     "recovery_integration_groups": 4,
     "replay_log_groups": 8,
-    "log_integration_groups": 7
+    "log_integration_groups": 7,
+    "replay_selection_groups": 5,
+    "selection_integration_groups": 4,
+    "execution": {
+      "full_run": {
+        "passed": 20,
+        "failed": 1
+      },
+      "fixture_correction": "selection integration reused an already retired intent, so replay rejection preceded the intended freshness assertion; each cycle now produces a distinct delayed intent before transition; product logic unchanged",
+      "rebuild": "cmake --build build/firmware-host --target selection_integration_test",
+      "rerun": "ctest --test-dir build/firmware-host --rerun-failed --output-on-failure",
+      "rerun_passed": 1,
+      "rerun_failed": 0,
+      "final_all_21_test_targets_passed": true
+    }
   },
   "sanitizers": {
     "address": "no error reported",
@@ -98,20 +112,20 @@
     "physical independent log isolation, epoch-only anchor CAS and journal wear/latency budget"
   ],
   "source_sha256": {
-    "firmware/CMakeLists.txt": "79eb195ade680d6cd88cbb396380de059dbb9528ea76c82574e286a646296f68",
+    "firmware/CMakeLists.txt": "64bd574dddfc4632dbe75ca4962db47d46970519c3ce9a721ae49317306b68d3",
     "firmware/include/cybertrack/control.h": "189e11107c21bcc0197011a823dd3255500dc2381b06ce4d4ee1d4ad79317f4a",
     "firmware/include/cybertrack/inbox.h": "dd4b0937734c038bab26974ed084d457adaae04f1041ee64ac165817a80f6398",
     "firmware/include/cybertrack/inputs.h": "6e0cf7dc7023c5c885e5a4d4740fb06a4aa92fc707b4bc321fa35cfce4366d64",
     "firmware/include/cybertrack/link.h": "7317688493f0dd0c101a74f000d3735a727db79e149abc76d6c53f3181226e5a",
     "firmware/include/cybertrack/protocol.h": "38179d23096d2bfac65aad651d0d33d7273a9bd92551a3bed7cded360a733a60",
-    "firmware/include/cybertrack/replay_store.h": "3e4639d06b9f2fc715ba68d4ddc5161754f3abeaf07f070b0917d8b254755987",
+    "firmware/include/cybertrack/replay_store.h": "12f511501ca264eb4a0b53b45af47048ff4f97fb307c2b3787d365f490dcb244",
     "firmware/include/cybertrack/runtime.h": "15229b5b8e5efef30d6be680a3ed09976f2b7beb1817add732698abb1ad95724",
     "firmware/src/control.c": "2158325e95fa32622735ca7466a5580eaaac6dc23be142ee91b4e384adcf1ec9",
     "firmware/src/inbox.c": "aaf2fd321276b6abc26542b22cc353863f8701fb51aa04976f368ead2c16da25",
     "firmware/src/inputs.c": "e34b3b9815f3633ff81e2d52d259fbfee0c7558f86ae3080b4ce89c62a690679",
     "firmware/src/link.c": "3f8f12fae098d61db7cf449946e000a1c59a78d1d5edc3a43eb549a24e5a0510",
     "firmware/src/protocol.c": "3e1cc71cf996cfeab124fdca8578334e0528344e807ab70498c2282569649bfd",
-    "firmware/src/replay_store.c": "6029f96127012e476e243e64aa7447acbaa83476c933cb74bec43c908e56e66d",
+    "firmware/src/replay_store.c": "235fe581d5e3079a5f10128de85539609b6b5429aaf5b0329d5ce223b2136b4a",
     "firmware/src/runtime.c": "7acbcc427afe253ee3b758173a17a35418e7e755a9efd75c5e10c8693376e9bb",
     "firmware/tests/control_test.c": "e6c287ba766f4e5b54369aca3491a82e012e844fb863b30c989c6fc0983714d1",
     "firmware/tests/fake_store.c": "e2c6624f327a4875730065d738a2951cd7802b7ebf44916ae9270ca58c24e4fe",
@@ -143,13 +157,15 @@
     "firmware/tests/switch_integration_test.c": "557080d2cd6f940feaba897785adebfc1f1f3c6274eb27bb8e303d46c4da47e1",
     "firmware/tests/replay_recovery_test.c": "e051c25a83ffa163f8ab5d85b0ade02ddbf71afa7eaecc23bdd1b25b23b825b4",
     "firmware/tests/recovery_integration_test.c": "8f8a83fa75a7584c4470e42a3ee385ae00b952909d6aeaecc1027985a1540e31",
-    "firmware/include/cybertrack/replay_log.h": "3d3c6ec2f05dc2dfab395e1d3011dbc139be65ef9f10d4984d41a320a2a7aabe",
-    "firmware/src/replay_log.c": "08a2997b884fa808a8019dddfe53522291a9bf427b367651f4f10c99d8448f4a",
-    "firmware/src/replay_log_internal.h": "44302e913019bdacdcdf64a68a4c60f3f38d4af6b5dac3e576a2c939b0c1ec12",
+    "firmware/include/cybertrack/replay_log.h": "4c33d0083f93a6c74445e789f0d2ed3efe0dd8d99d5f591c34870b03ce57d89e",
+    "firmware/src/replay_log.c": "33bb94f3016b34c601e276bab193cef969a1b9417d9efd56077ec19d7c8e09e3",
+    "firmware/src/replay_log_internal.h": "31609347567082baf3bfc9c02ffea13915853be77e61d0ac11ec73d2aa5f4e3d",
     "firmware/tests/fake_log.c": "a37c90c0e4c6042bf86b8bea8ae3cc8a502fd50249edfd3d4232cdb9708169ef",
     "firmware/tests/fake_log.h": "a0e00c9bd16393a88acc33bcc6fa887c07462c54c98c4c70de9ac28288d691f1",
-    "firmware/tests/replay_log_test.c": "9aef4664306ae060816229210823c6655956454a30dac705bf818e005d2abeb8",
-    "firmware/tests/log_integration_test.c": "1f176a93a7cae2559f9f76a75cc7481a05cf3b041e782f265540da472a386966"
+    "firmware/tests/replay_log_test.c": "5da20e95227abf92a1c30a89599c9be34b4d312a6ed228a465bd1ca0592d2662",
+    "firmware/tests/log_integration_test.c": "396b42a43d3f232370ff8418179c84e46b7ec56eabc75700a06567f873118046",
+    "firmware/tests/replay_selection_test.c": "e63168be4d4d1d76c957a236a5215c10a15429025715642f7c9117b7d6b98c52",
+    "firmware/tests/selection_integration_test.c": "e442241312abe78b83e562dd5469181fb924bfb0ce421174a4a4bdcc7276aa6a"
   },
   "f2_status": "partial: portable runtime, input filter and inbox verified on host; real board adapter and qualification pending",
   "inbox_object_bytes_host": 8552,
@@ -510,7 +526,8 @@
       "ct_replay_store_bind",
       "ct_replay_store_check",
       "ct_replay_store_switch",
-      "ct_protocol_attach_guarded_store"
+      "ct_protocol_attach_guarded_store",
+      "ct_replay_store_enroll_logged"
     ],
     "tests": [
       "firmware/tests/replay_switch_test.c",
@@ -542,6 +559,7 @@
       "outputs off and source protocol retired",
       "validate selected source",
       "copy both target slots with full history and readback",
+      "when logged, preserve selected source record and persist/readback full target evidence before selection",
       "atomic compare-and-replace selection and readback",
       "retire old RAM owner; attach new protocol"
     ],
@@ -559,7 +577,8 @@
       "first enrollment locally attests imported history; cannot establish pre-enrollment non-rollback",
       "partial version reservation requires either an exact current snapshot or independently persisted complete log matching all current anchor fields",
       "callbacks must be bounded and serialized; cannot preempt a blocked anchor/media operation",
-      "whole-anchor rollback, forged trusted identity, data forgery with valid CRC or old firmware bypass require platform protection"
+      "whole-anchor rollback, forged trusted identity, data forgery with valid CRC or old firmware bypass require platform protection",
+      "unlogged enrollment/switch and snapshot-only recovery do not provide independent evidence continuity across selection"
     ],
     "save_order_without_log": [
       "read/compare anchor",
@@ -619,6 +638,7 @@
   "independent_recovery_log": {
     "apis": [
       "ct_replay_log_init",
+      "ct_replay_store_enroll_logged",
       "ct_replay_store_attach_log",
       "ct_replay_store_recover_log",
       "ct_protocol_attach_logged_store"
@@ -644,7 +664,6 @@
     "rejection_assertions": 5115,
     "unexpected_replays": 0,
     "history_bits_lost": 0,
-    "source_and_log_unchanged_during_recovery": true,
     "protocol_object_bytes_host": 137448,
     "store_object_bytes_host": 65704,
     "log_object_bytes_host": 32864,
@@ -673,11 +692,12 @@
       "scan both log slots for unique exact anchor match; no primary reads; reject read failure or duplicate matching records",
       "recheck anchor and blank independent target",
       "copy complete history to two fresh revisions with durable readback",
+      "preserve selected source log slot; write/sync/commit/sync/readback full target log before selection",
       "atomically select target and read back anchor",
       "rebind target and log in a new protocol, persist new session, initialize and wait for local enable"
     ],
     "failed_candidate_regression": "different content after a failed candidate uses a new attempt epoch; old log cannot match the selected record even when its data revision is reused",
-    "preparation_limit": "once a matching log or first selected bridge exists, every subsequent attempt-preparation cut retains selected full history independently of primary; first attachment/target selection before its first selected bridge still depends on complete primary snapshots",
+    "preparation_limit": "logged enrollment and logged target transitions persist target evidence before anchor selection; legacy unlogged storage still depends on complete primary until attach_log seeding succeeds; absent exact evidence remains locked",
     "automatic_recovery": false,
     "automatic_erase": false,
     "remote_recovery_tool": false,
@@ -704,6 +724,56 @@
       "log_syncs_per_changed_save": 4,
       "anchor_replacements_per_changed_save": 2,
       "additional_heap_allocations": false
+    },
+    "source_primary_and_selected_source_log_unchanged_during_recovery": true,
+    "selection_continuity": {
+      "tests": [
+        "firmware/tests/replay_selection_test.c",
+        "firmware/tests/selection_integration_test.c"
+      ],
+      "storage_groups": 5,
+      "integration_groups": 4,
+      "storage_enrollment_log_cuts": 176,
+      "storage_attachment_log_cuts": 176,
+      "storage_switch_log_cuts": 176,
+      "storage_recovery_log_cuts": 220,
+      "storage_anchor_cuts": 22,
+      "storage_immediate_recoveries_without_session_save": 100,
+      "integration_enrollment_log_cuts": 176,
+      "integration_switch_log_cuts": 176,
+      "integration_recovery_log_cuts": 220,
+      "integration_target_primary_cuts": 168,
+      "integration_anchor_cuts": 22,
+      "integration_repeated_switch_then_two_immediate_recoveries": 100,
+      "enrollment_order": [
+        "explicit local attestation of complete primary and never-enrolled zero anchor",
+        "persist and read back exact initial full log",
+        "CAS/readback initial anchor and final check"
+      ],
+      "attach_order": [
+        "verify bound primary against anchor",
+        "scan for unique exact key and compare entire filter; seed if absent",
+        "verify anchor again before attaching"
+      ],
+      "matching_attach_writes": 0,
+      "target_transition_order": [
+        "copy and read back two complete target snapshots",
+        "preserve source selected slot and persist/readback full target log",
+        "CAS/readback target selection; target inherits log"
+      ],
+      "log_records_per_enrollment_or_target_selection": 1,
+      "log_syncs_per_enrollment_or_target_selection": 2,
+      "legacy_seed_failure": "before successful seeding, missing primary and missing exact log cannot be recovered; no retroactive guarantee",
+      "zero_anchor_candidate_policy": "never automatically adopt a candidate; retry enrollment only after local revalidation of complete primary and actual never-enrolled anchor",
+      "conflicting_seed_policy": "reject duplicate key or same key with different full filter",
+      "target_log_failure_status": "CT_RECOVERY_LOG_UNAVAILABLE",
+      "wire_layout_changed": false,
+      "object_sizes_changed": false,
+      "new_heap_allocations": false,
+      "physical_power_loss_tested": false,
+      "integration_rejection_assertions": 6987,
+      "unexpected_replays": 0,
+      "history_bits_lost": 0
     }
   }
 }
