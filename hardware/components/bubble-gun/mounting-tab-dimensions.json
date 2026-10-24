@@ -1,0 +1,47 @@
+{
+  "component": "bubble-gun-rear-bottom-tab",
+  "recorded_date": "2026-10-24",
+  "unit": "mm",
+  "source": "User-provided rear-bottom tab dimensions, 2026-10-24",
+  "dimensions": {
+    "width": 6,
+    "length": 25,
+    "height": 6.8
+  },
+  "coordinate_orientation": {
+    "width": "across body, candidate interpretation",
+    "length": "along body, candidate interpretation",
+    "height": "height of rear-bottom thin section; user explicitly says not an extra downward protrusion"
+  },
+  "position_relative_to_muzzle": {
+    "status": "design assumption, not user-confirmed",
+    "centred_laterally": true,
+    "rear_end_flush_with_body_tail": true
+  },
+  "included_in_overall_height_35_8": true,
+  "measurement_uncertainty": null,
+  "requested_mount": "front circular ring plus rear tab locating slot",
+  "notes": [
+    "User correction: 6.8 mm is the height of the rear-bottom thin section, not an added downward tab.",
+    "Retain overall height35.8; narrow the bottom6.8 of the rear25 into a width6 tab; adjacent case profile remains illustrative.",
+    "Centred tab and flush rear end are design assumptions; no positions inferred from photo scale."
+  ],
+  "resting_plane_measurement": {
+    "muzzle_circle_bottom_above_plane_mm": 4.7,
+    "source": "user additional measurement,2026-10-24",
+    "candidate_muzzle_centre_above_plane_mm": 20.45,
+    "candidate_plane_to_muzzle_top_mm": 36.2,
+    "difference_from_reported_overall_height_mm": 0.4,
+    "interpretation": "Use new resting-plane measurement for mounting datum with muzzle axis horizontal; retain earlier overall35.8 as conflicting source, not corrected measurement."
+  },
+  "requested_stepped_slot": {
+    "rear_length_mm": 25,
+    "rear_nominal_width_mm": 6,
+    "front_nominal_width_mm": 10,
+    "front_length_mm": null,
+    "source": "User mount-design request: rear25 long/6 wide; front10 wide",
+    "front_length_candidate_mm": 19,
+    "front_length_basis": "illustrative67 overall minus23 front cylinder minus25 rear tab; not measured",
+    "total_width_clearance_candidate_mm": 0.4
+  }
+}
