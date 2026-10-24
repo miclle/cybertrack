@@ -30,8 +30,8 @@ for rel,digest in report['files_sha256'].items():
     path=ROOT/rel
     if not path.exists(): path=MODEL/Path(rel).name
     assert sha(path)==digest, f'Stale model artifact: {path}'
-assert report['design_revision']=='0.26', 'Review annotations for a new model revision'
-cad_checks_passed=all(report[key]['passed'] for key in ('collision_check','service_paths','controller_clearance_check','water_gun_check','bubble_gun_check','ultrasonic_check','speaker_check')) and report['water_gun_check']['removal']['passed']
+assert report['design_revision']=='0.28', 'Review annotations for a new model revision'
+cad_checks_passed=all(report[key]['passed'] for key in ('collision_check','service_paths','controller_clearance_check','water_gun_check','bubble_gun_check','ultrasonic_check','speaker_check','rear_armor_symmetry_check','top_feed_check')) and report['water_gun_check']['removal']['passed']
 assert cad_checks_passed or args.allow_review_conflicts, 'CAD checks failed; use --allow-review-conflicts only for a marked conflict review PDF'
 # Guard dimension callouts that describe named features, not just overall extents.
 expected = {
@@ -61,9 +61,8 @@ assert report['water_gun_layout']['mount']['hose_support']['quantity']==2
 assert report['water_gun_layout']['mount']['leads']['guide_integral_with_cradle']
 assert report['water_gun_layout']['mount']['cap_screws']==0
 assert report['water_gun_layout']['mount']['adhesive']['thickness_mm']==1
-assert report['bubble_pod_hose_pass_through']['diameter_mm']==9
-assert report['rear_hose_pass_through']['diameter_mm']==9
-assert report['rear_hose_pass_through']['axis_origin_mm']==[24,72,76]
+assert report['top_feed_check']['top_insertion_only']
+assert report['top_feed_check']['former_rear_hole_missing_volume_mm3'] <= 1e-5
 ultrasonic=report['ultrasonic_check']
 assert ultrasonic['derived_center_spacing_mm']==26
 assert ultrasonic['candidate_hole_diameter_mm']==16.6
@@ -98,7 +97,7 @@ pdfmetrics.registerFont(TTFont('ZHB','/System/Library/Fonts/STHeiti Medium.ttc',
 U=72/25.4
 INK='#1E303B'; MUTED='#536673'; ACCENT='#DF632B'; PALE='#EAF0F2'; BLUE='#287E96'
 c=canvas.Canvas(str(PDF),pagesize=(420*U,297*U),pageCompression=1)
-c.setTitle('CyberTrack 0.26 模型与装配图纸')
+c.setTitle('CyberTrack 0.28 模型与装配图纸')
 c.setAuthor('CyberTrack')
 c.setSubject('A3 design review drawings; dimensions in mm; not manufacturing release')
 page=0
@@ -128,14 +127,14 @@ def header(title,subtitle):
     page+=1
     c.setFillColor(INK);c.rect(0,278*U,420*U,19*U,fill=1,stroke=0)
     text(14,285,'CYBERTRACK',18,'#FFFFFF',True)
-    text(405,285,f'CT-26 / {page:02d}',11,'#FFFFFF',align='right')
+    text(405,285,f'CT-28 / {page:02d}',11,'#FFFFFF',align='right')
     text(14,265,title,21,bold=True);text(14,256,subtitle,10,MUTED)
     if not cad_checks_passed:
         text(405,244,'尺寸修订待适配：静态／拆卸／USB 空间未通过',10,ACCENT,True,align='right')
     line(14,250,406,250,'#CAD5DB',.6)
     line(14,20,406,20,'#CAD5DB',.6)
-    text(14,13,'模型与装配评审图 | Rev 0.26 | 图纸更新 2026-10-24 | 单位：mm',9,MUTED)
-    text(406,13,f'未制造放行 · A3 横向 · {page} / 21',9,MUTED,align='right')
+    text(14,13,'模型与装配评审图 | Rev 0.28 | 图纸更新 2026-10-24 | 单位：mm',9,MUTED)
+    text(406,13,f'未制造放行 · A3 横向 · {page} / 23',9,MUTED,align='right')
 def end():c.showPage()
 def title(x,y,s,sub=''):
     text(x,y,s,12,bold=True)
@@ -155,7 +154,7 @@ def picture(name,x,y,w,h):
 
 def drawing(key,cx,cy,scale=1):
     d=json.loads((DATA/f'{key}.json').read_text())
-    assert d['source_sha256']==meta['source_sha256'] and d['projection_revision']==2, f'Stale projection: {key}'
+    assert d['source_sha256']==meta['source_sha256'] and d['projection_revision']==3, f'Stale projection: {key}'
     b=d['bounds']
     mx,my=(b[0]+b[2])/2,(b[1]+b[3])/2
     def pt(x,y):return (cx+(x-mx)*scale,cy+(y-my)*scale)
@@ -215,7 +214,7 @@ box(14,29,392,33,PALE)
 text(20,51,' × '.join(f(v) for v in report['assembly_size_xyz_mm']),20,bold=True)
 text(20,37,'整机宽 × 长 × 高；模型几何外包络',9,MUTED)
 text(143,55,'图纸内容',11,bold=True)
-para(143,48,'02 彩色正背视图　03 彩色左右侧视　04 正背尺寸　05 左右尺寸\n06 俯视 / 底视　07 电源　08 头舱　09 补液　10 爆炸　11 走线　12 双模块预装　13 顶部效果位\n14 主控布局　15 主控拆装与 USB / 天线　16 实测水枪　17 水枪固定与拆装　18 线管预留　19 前置泡泡固定　20 泡泡拆装与线管　21 超声波双探头',250,9,6)
+para(143,48,'02 彩色正背视图　03 彩色左右侧视　04 正背尺寸　05 左右尺寸\n06 俯视 / 底视　07 电源　08 头舱　09 补液　10 爆炸　11 走线　12 双模块预装　13 顶部效果位\n14 主控布局　15 主控拆装与 USB / 天线　16 实测水枪　17 水枪固定与拆装　18 线管预留　19 前置泡泡固定　20 泡泡拆装与线管　21 超声波双探头　22 后护甲镜像核对　23 顶部自吸供液',250,9,6)
 end()
 
 header('正面与背面 · 彩色外观','当前保存模型的正交渲染图，用于查看装甲层次、配色和前后造型；不是实物照片，尺寸见第 4 页。')
@@ -224,7 +223,7 @@ picture('rear.png',220,65,180,174)
 text(110,54,'正面 / 沿 +Y 观察',12,bold=True,align='center')
 text(310,54,'背面 / 沿 -Y 观察',12,bold=True,align='center')
 text(110,42,'双探头 Ø16、中心距26；正面左泡泡、右水枪',10,MUTED,align='center')
-text(310,42,'左右连续切面；液舱与护甲仅留 Ø9 管孔候选',10,MUTED,align='center')
+text(310,42,'后护甲封闭且镜像对称；顶部吸管详见第23页',10,MUTED,align='center')
 end()
 
 header('左侧与右侧 · 彩色外观','当前保存模型的正交渲染图，展示头舱、固定颈架、底座与履带之间的关系；尺寸见第 5 页。')
@@ -247,7 +246,6 @@ title(227,239,'背面','沿 -Y 观察；左侧为 +X / 机体左侧；比例 1:1
 hdim(p,b[0],b[2],b[1],b[1],b[1]-15,f(b[2]-b[0]))
 leader(p(-24,131),232,165,'左舱补液盖')
 leader(p(24,131),350,165,'右舱补液盖')
-leader(p(-24,76),300,75,'液管穿板孔 Ø9 候选')
 box(14,29,392,38,PALE)
 para(20,56,'尺寸依据：整机最大宽度 228；整体高度 203；两侧耳部总宽 179。\n这些数值描述当前 CAD 外形，不含制造公差、线缆外伸、真实接头或变形。',210,10,7)
 para(247,56,'坐标：+X 向左，+Y 向后，+Z 向上。\nZ=0 为当前履带最低几何平面。\n颈架为固定结构；圆形装饰不代表活动关节。',150,9,6)
@@ -281,7 +279,7 @@ title(230,239,'底视图','沿 +Z 观察；+X 在左；比例 1:2')
 hdim(p,b[0],b[2],b[1],b[1],b[1]-15,f(b[2]-b[0]))
 vdim(p,b[1],b[3],b[2],b[2],b[2]+15,f(b[3]-b[1]))
 box(14,29,392,35,PALE)
-para(21,53,'俯视：后方两个补液盖独立拆卸；中部冠盖与顶甲整体上取。\n底视：前部大托盖承托电源；中部小检修盖用于先断开电源插头。',240,10,7)
+para(21,53,'俯视：先抽出两路顶部吸管，再独立拆补液盖；中部冠盖与顶甲整体上取。\n底视：前部大托盖承托电源；中部小检修盖用于先断开电源插头。',240,10,7)
 para(279,53,f"整机宽 {f(report['assembly_size_xyz_mm'][0])}；长 {f(report['assembly_size_xyz_mm'][1])}。\n底部维护前须垫高并托住电源。\n维护动作与固定点见后续详图。",120,9,6)
 end()
 
@@ -322,7 +320,7 @@ para(21,72,'冠盖：卸下 4 颗顶面螺钉，整组上提 65；外壳分缝�
 para(21,50,'主控使用实测总外包络 63.6 × 28.2 × 13.2；前上方剩余电子区 70 × 25 × 13 仍是假设；扬声器按用户提供 69.5 × 31.5 × 16.5 占位，固定和声孔待定。\n冠盖饰片在 CAD 中分对象表达，一体成形或定位固定工艺未定；顶部效果护框与标识随冠盖移动，详见第 13 页。',376,9,7)
 end()
 
-header('背包补液结构 · 局部分解','两侧独立补液；以右侧喷水舱展示层次，左侧泡泡舱采用对应结构。示意分解间距不代表装配高度。')
+header('背包补液结构 · 局部分解','先抽出两路顶部吸管后，两侧独立补液；以右侧喷水舱展示层次，左侧泡泡舱采用对应结构。示意分解间距不代表装配高度。')
 # Individual parts are drawn at true scale, independently spaced for legibility.
 entries=[('fill_lid',49,220,'01 外盖与把手'),('fill_plug',49,174,'02 导向塞'),('fill_seal',49,143,'03 端面密封垫'),('fill_cap',49,103,'04 内舱盖与补液孔')]
 for key,cx,cy,label in entries:
@@ -334,8 +332,8 @@ for key,cx,cy,label in entries:
 line(102,86,102,239,BLUE,.3,[4,3])
 box(249,122,157,120,PALE)
 text(257,230,'补液盖拆卸路径',13,bold=True)
-para(257,217,'卸下对应外盖的 2 颗螺钉后：\n① 向上 +Z 6\n② 向后 +Y 12\n③ 再向上 34，总抬升 40\n此路径用于避开后脑装甲。\n盖、塞、密封垫作为维护组移动；\n左图仅为结构分解，不是逐件拆卸顺序。',140,11,9)
-para(249,108,'补液孔 Ø14；密封垫外径 Ø18、内径 Ø14、厚 0.4，均为设计候选。每盖 2 处螺钉，中心间距 24；固定点 Y=69。\n断电补液，擦干外部再复装。密封压缩率、最低点排液、漏斗空间和商品模块可拆分性尚未验证。',157,10,7)
+para(257,217,'先抽出两路顶部吸管，再卸下该盖2颗螺钉：\n① 向上 +Z 6\n② 向后 +Y 12\n③ 再向上 34，总抬升 40\n此路径用于避开后脑装甲。\n盖、塞、密封垫作为维护组移动；\n左图仅为结构分解，不是逐件拆卸顺序。',140,11,9)
+para(249,108,'顶部贯通吸管孔 Ø9；内舱补液孔 Ø14；密封垫外径 Ø18、内径 Ø14、厚 0.4，均为设计候选。每盖 2 处螺钉，中心间距 24；固定点 Y=69。\n断电补液，擦干外部再复装。吸管孔护套、通气及防溅、密封压缩率、最低点排液和实物拆洗尚未验证。',157,10,7)
 p,b=drawing('fill_cap_top',185,61,1)
 text(185,87,'内舱盖俯视 1:1',9,MUTED,align='center')
 leader(p(-17,49),212,66,'Ø14')
@@ -359,7 +357,7 @@ for pixel,x,y,label,align in [
     ((733,929),19,80,'充电宝','left'),
     ((844,1006),19,44,'电源托盖／拉带','left')]:
     part_label(mappt,pixel,x,y,label,align)
-items=[('01 整体冠盖','4 颗紧固；上提 65。顶甲、效果护框与标识、前后眉甲随盖移动。'),('02 电子 / 音频托板','4 颗紧固；断开线管后上提 85。图中仅错开 35，以便看清层次。'),('03 两个补液盖组','各 2 颗紧固；上 6、后 12、再上 34。左图一侧盖被部分遮挡。'),('04 电源 / 托盖 / 拉带','4 颗紧固；先拆底部插头小盖并拔线，再托住整组下移 60。'),('05 固定头舱 / 颈架 / 底座','保持组装；履带和驱动来源部件不在本次维护爆炸中分解。'),('06 水枪与泡泡枪','水枪先脱胶、抬起再沿枪轴前抽；泡泡枪抬尾后退脱环、侧移取出。固定与拆装详见第17–20页。')]
+items=[('01 整体冠盖','4 颗紧固；上提 65。顶甲、效果护框与标识、前后眉甲随盖移动。'),('02 电子 / 音频托板','4 颗紧固；断开线管后上提 85。图中仅错开 35，以便看清层次。'),('03 两个补液盖组','先抽出两路吸管；各2颗紧固，上6、后12、再上34。左图一侧盖被部分遮挡。'),('04 电源 / 托盖 / 拉带','4 颗紧固；先拆底部插头小盖并拔线，再托住整组下移 60。'),('05 固定头舱 / 颈架 / 底座','保持组装；履带和驱动来源部件不在本次维护爆炸中分解。'),('06 水枪与泡泡枪','水枪先脱胶、抬起再沿枪轴前抽；泡泡枪抬尾后退脱环、侧移取出。固定与拆装详见第17–20页。')]
 y=236
 for heading,body in items:
     text(268,y,heading,11,bold=True);y=para(268,y-8,body,132,9,5)-8
@@ -370,12 +368,12 @@ end()
 header('内部路线、装配顺序与验证边界','黄色为电源线 / 插头包络；青色为喷水软管路线。另增主控 Ø3 尾线候选；路线均为设计分配，不是完整接线或已验收液路。')
 picture('routing.png',14,91,205,151)
 title(23,78,'路线与维修关系')
-para(23,67,'电源线候选 Ø6，从中央干区经过固定颈架进入头舱。\n喷水管实测 Ø5，沿枪外侧双托槽向后接液舱；主控尾线 Ø3。\n拆托板前先断开相关线管；未表达高压接线。',190,10,7)
+para(23,67,'电源线候选 Ø6，从中央干区经过固定颈架进入头舱。\n两枪自吸（用户确认），液管从液舱顶部插入，经两侧接前枪；主控尾线Ø3。\n拆托板前先断开相关线管；未表达高压接线。',190,10,7)
 y=238
 for h,s in [('装配次序','动力与底座 → 电源托盖和插头检修 → 冠盖定位与设备托板 → 两液体舱单独试验 → 布线后复查维护动作。'),('当前 CAD 证据',f"{len(report['objects'])} 个几何对象回读有效；{report['collision_check']['boolean_pairs_tested']} 对布尔检查发现 {len(report['collision_check']['overlaps'])} 对超阈值重叠；{len(report['service_paths']['scenarios'])} 组维护动作共 {sum(r['pose_count'] for r in report['service_paths']['scenarios'])} 个离散姿态，{sum(not r['passed'] for r in report['service_paths']['scenarios'])} 组未通过。"),('尺寸与图纸等级','蓝色尺寸为当前 CAD 设计值；充电宝 120 × 73 × 31.5 为用户提供。尺寸不含制造公差。未实测接口与紧固件只用于结构评审。'),('尚待实物确认','端口位置、手指与工具空间、连续拆卸路径、线管弯曲、真实设备固定、承载、密封排液和供电。未通过制造、电气或儿童使用验收。')]:
     text(235,y,h,12,bold=True);y=para(235,y-8,s,167,10,6)-9
 box(14,25,392,16,PALE)
-text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及全部 32 张预览图哈希。',9)
+text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及全部 36 张预览图哈希。',9)
 text(20,29,'SHA-256：'+meta['source_sha256'],8,MUTED)
 end()
 header('双电弧模块 · 头舱预装包络','按用户指定的暂定外形：2 × Ø25.5 × 70 mm；橙色圆柱仅代表机械占位，不是实测或通电集成。')
@@ -468,7 +466,7 @@ end()
 header('水管与尾部引线 · 路线及操作预留','青色为水管预留，黄色为线束、插头与工具预留；这些是空间假设，不是已选连接器或布线规格。')
 picture('water-gun-spaces.png',14,83,228,155)
 text(126,72,'半透明体为审查空间，实体接触按操作步骤区分',10,bold=True,align='center')
-para(251,236,'水管\n用户实测外径5；中心R8为假设，另留Ø8路线空间。\n湿舱通过孔候选 Ø9；侧接管沿 +X 拔出 30，操作包络 Ø16。\n前后双托槽Ø5.6×6、间距52；沿外侧向后接液舱，无底部横穿。',151,10,7)
+para(251,236,'水管\n用户实测外径5；中心R8为假设，另留Ø8路线空间。\n液舱顶部贯通孔候选Ø9；枪侧接管沿+X拔30，操作包络Ø16。\n前后双托槽Ø5.6×6、间距52；沿外侧接顶部吸管，无后护甲穿管。',151,10,7)
 para(251,174,'尾部引线\n模块坐标枪尾Y=9.5；Ø3线束随枪体倾斜后转至外侧；中心弯曲半径 8，路线预留 Ø8。\n插头候选 16×10×10，沿 +X 拔出 16；尾线导向鞍与扎带槽并入底托；扎带与抗拉待选。',151,10,7)
 para(251,112,'工具\n水枪取消压盖及对应工具空间。\n基座螺钉：先脱胶并取出枪体，再用朝前操作的短臂内六角；端部Ø3、杆部Ø6、前伸臂40。\n仅检查基座工具杆，不包括手掌、把手转动或脱胶工具。',151,9,6)
 box(14,27,392,31,PALE)
@@ -502,7 +500,7 @@ picture('bubble-gun-spaces.png',213,130,193,110)
 text(110,119,'抬尾15°，后退脱环，再向外取出',11,bold=True,align='center')
 text(310,119,'线管和基座工具预留 / 非实际接线',11,bold=True,align='center')
 para(21,105,'1 断电排液、清除辅助胶，先拔插头移开尾线，再断管。\n2 围绕圆环中心抬尾15°，沿模块后方退10，脱离圆环。\n3 沿模块上方抬3，再向车体右侧(-X)移90；安装反向。\n4 空托架卸2颗基座螺钉，沿底板法向抬6、向-X移90。',183,9,7)
-para(220,105,'泡泡管Ø4、尾线Ø3，均按中心R8、另留Ø8空间。\n接管沿模块后方拔25；16×10×10插头向-X拔16。\n前圆环为整体，不设分缝、衬垫或前环工具空间。\n基座工具在主体取出后使用；不包含整手与把手。',181,9,7)
+para(220,105,'泡泡管顶部插入液舱，沿侧面接前枪；Ø4管／Ø3尾线、中心R8及Ø8预留均为候选。\n接管沿模块后方拔25；16×10×10插头向-X拔16。\n前圆环为整体，不设分缝、衬垫或前环工具空间。\n基座工具在主体取出后使用；不包含整手与把手。',181,9,7)
 box(14,27,392,36,PALE)
 para(21,53,'主体每0.5°转动、每0.5后退／抬升、每2侧移检查示意实体；实物外形和采样之间的连续空间尚未证明。\n空托架、基座螺钉另做保守连续扫掠；前向Ø36×50通道随枪轴上仰。停止按钮保留前方Ø12指端空间。\n宽度、薄片偏置、前槽长度与前底轮廓待实测；胶粘保持、线管防磨、防拉脱、排液及制造均未验收。',375,9,7)
 end()
@@ -521,6 +519,33 @@ text(109,53,'前脸候选 / 非实物安装照片',10,MUTED,align='center')
 para(221,130,'输入：两圆柱Ø16、总宽42、离面板高10.3。\n推导：中心距26、圆柱净距10；中心X±13。\n面板：原孔补回，改为双Ø16.6贯穿候选孔。\n单边0.3间隙仅为设计值；PCB与背部空间未建模。\n状态色条移至探头上方，避免与圆柱相交。',178,10,8)
 box(14,27,392,19,PALE)
 para(21,39,'CAD检查使用完整实心圆柱包络，包含实体与预留空间。未确认的面板基准、整板／孔位／接头及声学性能仍需实物核对。',376,9,6)
+end()
+header('后护甲单体 · 镜像对称核对','底座斜面后护甲／背包下支座；仅显示 RearBaseArmor，排除相邻脊甲、饰条、背包与透视遮挡。')
+p,b=drawing('rear_armor_rear',110,170,1.8)
+title(25,239,'单体背视','沿 -Y 观察；比例 1.8:1；虚线为 X=0 镜像面')
+line(*p(0,30),*p(0,101),BLUE,.5,[3,2])
+hdim(p,-47,47,34,34,24,'94 最大宽度')
+vdim(p,34,97,-47,-47,-53,'63 最大高度')
+p,b=drawing('rear_armor_side',306,170,1.8)
+title(245,239,'单体侧视','沿 -X 观察；比例 1.8:1')
+hdim(p,74,82,34,40,24,'8 前后深度')
+para(333,196,'前截面 Y74\n最大宽94、高63\n后截面 Y82\n最大宽84、高53\n轮廓及斜面由\n单侧参数镜像生成',72,9,7)
+box(14,29,392,58,PALE)
+check=report['rear_armor_symmetry_check']
+para(21,75,f"保存回读核对：实际后护甲已封回全部液管孔，直接对完整实体关于 X=0 镜像。\n实体双向差集 {check['solid_symmetric_difference_mm3']:.6f} mm³；{len(check['face_pairs'])} 个完整表面逐一匹配（含斜面及中央脊甲座），面积差均≤0.00001 mm²。\n顶点镜像最大偏差 {check['maximum_mirrored_vertex_distance_mm']:.6f} mm；实际模型无单侧功能孔，轮廓和全部斜面统一镜像。\n这是名义CAD几何核对，不是加工公差、强度或实物验收。",375,10,10)
+end()
+header('双枪供液 · 全部从顶部插入','水枪和泡泡枪可自吸：用户于2026-10-24确认。后护甲和液舱侧壁均不设液管孔；以下为管路候选。')
+p,b=drawing('top_feed_top',111,170,0.75)
+title(21,240,'俯视 · 两路在顶部错开','沿 -Z 观察；比例 0.75:1；前方在下')
+leader(p(-24,49),21,225,'喷水入口 X−24／Y49')
+leader(p(24,49),132,212,'泡泡入口 X24／Y49')
+p,b=drawing('top_feed_side',305,170,0.8)
+title(223,240,'侧视 · 吸管伸入液舱','沿 -X 观察；比例 0.8:1；两舱投影重合')
+line(*p(49,45),*p(49,135),BLUE,.6,[3,2])
+text(331,132,'虚线：舱内吸管轴线',9,MUTED)
+part_label(lambda x,y:(x,y),p(49,45),264,109,'管端 Z45，距原舱底基准5')
+box(14,29,392,62,PALE)
+para(21,80,'两舱顶部贯通孔Ø9；喷水管Ø5为实测，泡泡管Ø4、中心弯曲R8及Ø8路线预留为候选。\n吸管沿舱轴垂直插入；喷水上段Z149，泡泡上段Z161，经两侧接前置枪体，不绕后护甲。\n开任一补液盖前：断电、处理残液、先抽出两路吸管，再拆对应盖；柔性抽管过程尚未验证。\n自吸能力不等于本布置已验收：实际吸程、首次引液、漏气、通气防溅、管口固定与离底距离需实测。',375,10,10)
 end()
 c.save()
 print(PDF)

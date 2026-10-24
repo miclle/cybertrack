@@ -147,13 +147,7 @@ def refine(doc,add):
 
     from water_gun_mount import hose_shapes
     hose,hose_space=hose_shapes()
-    # Water tube OD5 is user measured; review corridor OD8 remains a design choice.
-    # A 9 mm passage gives the review corridor 0.5 mm radial geometric clearance.
-    from water_gun_mount import rounded_route, HOSE_POINTS
-    hose_tool=rounded_route(HOSE_POINTS,4.5,8)
-    for name in ('WaterPod','BackpackShell'):
-        cut(name,hose_tool)
-    add('WaterHoseRoute','喷水软管 Ø5 实测／R8 圆弧过渡至枪侧',hose,'envelope','water','外径5为用户实测；中心弯曲半径8及接口位置为设计假设；不是供应商最小弯曲半径或已验收液路')
+    add('WaterHoseRoute','喷水顶部吸液管 Ø5 实测／R8／侧向接前枪',hose,'envelope','water','外径5为用户实测；中心弯曲半径8及接口位置为设计假设；不是供应商最小弯曲半径或已验收液路')
     controller_info=build_controller(doc,add,cut,fuse,fastener,insert)
     doc.getObject('HeadShell').Label='头舱固定下壳／托板及冠盖支座'
     doc.getObject('HeadServiceHatch').Label='中央隆起顶甲／随整体冠盖拆装'
@@ -208,8 +202,8 @@ def check_service_paths(doc):
                ('battery',(0,0,-60),[n.Name for n in all_shapes if n.Name.startswith('BatteryScrew')]+['PowerCableRoute','CableServiceCover','AccessScrewL','AccessScrewR']),
                ('crown',(0,0,65),[n.Name for n in all_shapes if n.Name.startswith('CrownScrew')]),
                ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']),
-               ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]),
-               ('Bubble',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewBubble')])]
+               ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]+['WaterHoseRoute','BubbleGunHoseRoute']),
+               ('Bubble',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewBubble')]+['WaterHoseRoute','BubbleGunHoseRoute'])]
     if 'bubble_gun' in groups:
         from bubble_gun_mount import line_names
         blines=line_names(doc)

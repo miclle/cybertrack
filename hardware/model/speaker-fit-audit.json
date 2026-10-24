@@ -19,7 +19,7 @@
   "outside_original_allocation_mm3": 0.0,
   "outside_head_cavity_mm3": 0.0,
   "overlap_tolerance_mm3": 0.01,
-  "static_boolean_pairs": 2,
+  "static_boolean_pairs": 6,
   "overlaps": [],
   "reserved_space_overlaps": [],
   "nearby_distances": [
@@ -314,6 +314,11 @@
       "distance_mm": 44.278945335226766
     },
     {
+      "object": "BubbleGunHoseClearance",
+      "category": "clearance",
+      "distance_mm": 45.41124423471661
+    },
+    {
       "object": "TempleGuardL",
       "category": "exterior",
       "distance_mm": 47.25
@@ -322,6 +327,11 @@
       "object": "TempleGuardR",
       "category": "exterior",
       "distance_mm": 47.25
+    },
+    {
+      "object": "BubbleGunHoseRoute",
+      "category": "envelope",
+      "distance_mm": 47.404913586742246
     },
     {
       "object": "AudioSideGuardL",
@@ -334,6 +344,11 @@
       "distance_mm": 47.802981078589646
     },
     {
+      "object": "WaterGunHoseClearance",
+      "category": "clearance",
+      "distance_mm": 48.1901964158746
+    },
+    {
       "object": "TempleLowerBladeL",
       "category": "exterior",
       "distance_mm": 49.25
@@ -342,6 +357,11 @@
       "object": "TempleLowerBladeR",
       "category": "exterior",
       "distance_mm": 49.25
+    },
+    {
+      "object": "WaterHoseRoute",
+      "category": "envelope",
+      "distance_mm": 49.69019641587461
     },
     {
       "object": "TempleCrestL",
@@ -407,6 +427,6 @@
   "passed": true,
   "mounts_leads_acoustics_verified": false,
   "physical_fit_verified": false,
-  "source_after_sha256": "54f0950390a14b50561ae82bcc7cf38e97e05b85139ec9266166ca31995088b6",
+  "source_after_sha256": "96293fa4088aaaa9786803c6e9734bbefe93cb2aa94efbd6a02918ccebe1ac62",
   "saved_and_reopened": true
 }

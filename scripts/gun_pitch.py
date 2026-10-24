@@ -23,8 +23,8 @@ def vector(p,inverse=False):
     return App.Rotation(V(1,0,0),-ANGLE if inverse else ANGLE).multVec(V(*p))
 
 def apply_pitch(doc,rail_bases):
-    from water_gun_mount import HOSE_POINTS as WATER_POINTS
-    from bubble_gun_mount import HOSE_POINTS as BUBBLE_POINTS
+    from water_gun_mount import HOSE_POINTS as WATER_POINTS, HOSE_FIXED_COUNT as WATER_FIXED
+    from bubble_gun_mount import HOSE_POINTS as BUBBLE_POINTS, HOSE_FIXED_COUNT as BUBBLE_FIXED
     # Base-tool envelopes rotate too; only the fixed stop-button approach stays world-aligned.
     exclusions={'BubbleGunStopAccess'}
     for o in doc.Objects:
@@ -46,8 +46,8 @@ def apply_pitch(doc,rail_bases):
             doc.getObject(rail).Shape.exportBrep('/tmp/cybertrack-pitch-'+rail+'.brep')
             raise ValueError((rail,doc.getObject(rail).Shape.isValid(),len(doc.getObject(rail).Shape.Solids),doc.getObject(rail).Shape.check(True)))
     # Reservoir ends remain fixed; only the gun-side endpoints follow elevation.
-    water=list(WATER_POINTS[:4])+[tuple(point(p,'water')) for p in WATER_POINTS[4:]]
-    bubble=list(BUBBLE_POINTS[:-3])+[(-90,-45,100)]+[tuple(point(p,'bubble')) for p in BUBBLE_POINTS[-2:]]
+    water=list(WATER_POINTS[:WATER_FIXED])+[tuple(point(p,'water')) for p in WATER_POINTS[WATER_FIXED:]]
+    bubble=list(BUBBLE_POINTS[:BUBBLE_FIXED])+[tuple(point(p,'bubble')) for p in BUBBLE_POINTS[BUBBLE_FIXED:]]
     for route,space,pts in [('WaterHoseRoute','WaterGunHoseClearance',water),('BubbleGunHoseRoute','BubbleGunHoseClearance',bubble)]:
         doc.getObject(route).Shape=rounded_route(pts,2.5 if route=='WaterHoseRoute' else 2,8)
         doc.getObject(space).Shape=rounded_route(pts,4,8)
