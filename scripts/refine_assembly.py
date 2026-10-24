@@ -3,6 +3,7 @@
 All fasteners, insert fits, hoses and connector clearances are design allocations.
 No thread, seal performance, supplier fit or physical assembly is certified here.
 """
+import math
 import FreeCAD as App
 import Part
 from controller_layout import build_controller, controller_members
@@ -106,11 +107,11 @@ def refine(doc,add):
         fuse('HeadShell',key)
 
     # A removable tray carries both existing equipment allocations; no board hole pattern invented.
-    tray=box(-58,-39,144.5,58,10,145.5).fuse(box(-39,-74,144.5,39,-39,145.5))
+    tray=box(-52,-39,144.5,52,10,145.5).fuse(box(-39,-74,144.5,39,-39,145.5))
     add('ElectronicsTray','头舱电子及音频共用上取托板',tray.removeSplitter(),'structure','metal','托板轮廓候选；实际板卡安装孔、绝缘支柱及天线净空待整合')
     for sign in (-1,1):
         for i,y in enumerate((-30,0)):
-            x=sign*55;tag=('L' if sign>0 else 'R')+str(i)
+            x=sign*49.5;tag=('L' if sign>0 else 'R')+str(i)
             fuse('HeadShell',cylinder(3.5,139,144.5,x,y))
             cut('HeadShell',cylinder(2.1,140,144.6,x,y))
             insert('TrayInsert'+tag,x,y,140,144.5)
@@ -144,11 +145,15 @@ def refine(doc,add):
     bridge=box(-18,-1,107,18,2,109).fuse(tube(4.5,3.5,107,109,0,6)).removeSplitter()
     add('NeckCableBridge','固定颈架线束限位桥',bridge,'structure','dark','固定夹持候选；没有增加活动关节')
 
-    water_points=[(-24,39,116),(-24,22,116),(-39,15,119),(-39,-22,133),(-39,-30,141),(44,-30,141),(44,-71,145),(44,-76,145)]
-    hose=route(water_points,2);hose_tool=route(water_points,3)
-    for name in ('WaterPod','BackpackShell','HeadShell'):
+    from water_gun_mount import hose_shapes
+    hose,hose_space=hose_shapes()
+    # Physical tube OD4 and review corridor OD8 are separate assumptions.
+    # A 9 mm passage gives the review corridor 0.5 mm radial geometric clearance.
+    from water_gun_mount import rounded_route, HOSE_POINTS
+    hose_tool=rounded_route(HOSE_POINTS,4.5,8)
+    for name in ('WaterPod','BackpackShell'):
         cut(name,hose_tool)
-    add('WaterHoseRoute','喷水软管独立侧路 Ø4',hose,'envelope','water','路线与外径占位；一体商品是否允许外接、接头、压力及弯曲半径待核实')
+    add('WaterHoseRoute','喷水软管候选 Ø4／R8 圆弧过渡至枪侧',hose,'envelope','water','外径4、中心弯曲半径8及接口位置均为设计假设；不是供应商最小弯曲半径或已验收液路')
     controller_info=build_controller(doc,add,cut,fuse,fastener,insert)
     doc.getObject('HeadShell').Label='头舱固定下壳／托板及冠盖支座'
     doc.getObject('HeadServiceHatch').Label='中央隆起顶甲／随整体冠盖拆装'
@@ -171,11 +176,30 @@ def service_groups(doc):
     battery=['PowerBank','BatteryHatch','BatteryPullStrap']+[n for n in names if n.startswith('BatteryPad')]
     wet={name:[name+suffix for suffix in ('ServiceLid','CapGrip','LidMark','FillPlug','FillSeal')] for name in ('Water','Bubble')}
     return {'cable_access':['CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule']+controller_members(doc)+[n for n in names if n.startswith(('ControllerMountScrew','ControllerMountInsert'))],**wet,
-            'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR']}
+            'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR'],
+            **({'water_gun':['WaterGunBody','WaterGunInlet']} if doc.getObject('WaterGunBody') else {}),
+            **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('water_gun_caps','water_gun_cap_screws','water_gun_cradle')} if doc.getObject('WaterGunCradle') else {})}
+
+
+def arc_translation_sweep(shape, delta):
+    """Exact straight sweep of a Y-axis cylinder; not a general part sweep."""
+    b=shape.optimalBoundingBox(False)
+    radius=b.XLength/2;length=b.YLength
+    assert abs(b.ZLength-2*radius)<1e-6 and abs(delta.y)<1e-9
+    assert abs(shape.Volume-math.pi*radius*radius*length)<1e-5
+    start=V((b.XMin+b.XMax)/2,b.YMin,(b.ZMin+b.ZMax)/2)
+    end=start+delta
+    normal=V(-delta.z,0,delta.x);normal.normalize();normal.multiply(radius)
+    corners=[start+normal,end+normal,end-normal,start-normal]
+    bridge=Part.Face(Part.makePolygon(corners+[corners[0]])).extrude(V(0,length,0))
+    moved=shape.copy();moved.translate(delta)
+    sweep=shape.fuse(moved).fuse(bridge).removeSplitter()
+    assert sweep.isValid() and len(sweep.Solids)==1
+    return sweep
 
 
 def check_service_paths(doc):
-    """Check discrete service poses, not continuous swept motion or flexible cables."""
+    """Check discrete service poses plus continuous sweeps of the two bare arc cylinders."""
     groups=service_groups(doc);all_shapes=[o for o in doc.Objects if hasattr(o,'Category') and o.Category!='clearance']
     bounds={o.Name:o.Shape.optimalBoundingBox(False) for o in all_shapes}
     results=[]
@@ -185,6 +209,14 @@ def check_service_paths(doc):
                ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']),
                ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]),
                ('Bubble',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewBubble')])]
+    if 'water_gun' in groups:
+        scenarios.append(('water_gun',(0,-150,0),['WaterHoseRoute','WaterGunLeadRoute','WaterGunLeadConnector']+groups.get('water_gun_caps',[])+groups.get('water_gun_cap_screws',[])))
+    if 'water_gun_caps' in groups:
+        lines=['WaterHoseRoute','WaterGunLeadRoute','WaterGunLeadConnector']
+        caps=groups['water_gun_caps'];screws=groups['water_gun_cap_screws']
+        scenarios += [('water_gun_cap_screws',(20,0,0),[]),
+                      ('water_gun_caps',(50,0,0),screws),
+                      ('water_gun_cradle',(60,0,2),lines+caps+screws+groups['water_gun']+['WaterGunBaseScrew1','WaterGunBaseScrew2'])]
     prerequisites=groups['crown']+groups['electronics']+[o.Name for o in all_shapes if o.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']
     scenarios += [('arc_left',(-24.5,0,85),prerequisites),('arc_right',(24.5,0,85),prerequisites)]
     crown_removed=groups['crown']+[o.Name for o in all_shapes if o.Name.startswith('CrownScrew')]+['ControllerWireRoute']
@@ -198,9 +230,14 @@ def check_service_paths(doc):
         moving=special[group] if group in special else groups[group];fixed=[o for o in all_shapes if o.Name not in moving+removed]
         collisions=[];tested=0
         waypoints=[V(),V(*delta)]
+        if group=='water_gun_cradle':
+            waypoints=[V(),V(0,0,2),V(60,0,2)]
         if group in ('Water','Bubble'):
             waypoints=[V(),V(0,0,6),V(0,12,6),V(0,12,40)]
-        if group.startswith(('arc_','usb_')):
+        if group.startswith('arc_'):
+            # Lift clear of the fixed tray supports before moving toward the centre.
+            waypoints=[V(),V(0,0,2),V(delta[0],0,2),V(*delta)]
+        elif group.startswith('usb_'):
             waypoints=[V(),V(delta[0],0,0),V(*delta)]
         poses=[a+(b-a)*fraction for a,b in zip(waypoints,waypoints[1:]) for fraction in (0,0.05,0.1,0.2,0.4,0.6,0.8,1)]
         for pose_index,offset in enumerate(poses):
@@ -211,5 +248,21 @@ def check_service_paths(doc):
                     if not moving_bounds.intersect(bounds[other.Name]):continue
                     tested+=1;vol=shape.common(other.Shape).Volume
                     if vol>0.01:collisions.append({'moving':name,'fixed':other.Name,'pose_index':pose_index,'overlap_mm3':vol})
-        results.append({'group':group,'waypoints_mm':[[p.x,p.y,p.z] for p in waypoints],'pose_count':len(poses),'removed_first':removed,'boolean_pairs_tested':tested,'overlaps':collisions,'passed':not collisions})
-    return {'method':'8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes move inward then up after tray removal; USB plugs withdraw then lift with crown removed; not continuous sweep or tool/hand access certification','scenarios':results,'passed':all(r['passed'] for r in results),'physical_assembly_verified':False}
+        swept_check=None
+        if group.startswith('arc_'):
+            swept_hits=[];swept_tested=0
+            for segment,(start,end) in enumerate(zip(waypoints,waypoints[1:])):
+                shape=doc.getObject(moving[0]).Shape.copy();shape.translate(start)
+                sweep=arc_translation_sweep(shape,end-start)
+                sweep_bounds=sweep.optimalBoundingBox(False)
+                for other in fixed:
+                    if not sweep_bounds.intersect(bounds[other.Name]):continue
+                    swept_tested+=1;vol=sweep.common(other.Shape).Volume
+                    if vol>0.01:swept_hits.append({'fixed':other.Name,'segment':segment,'overlap_mm3':vol})
+            swept_check={'method':'exact capsule cross-section extruded along Y for each straight translation of the cylindrical envelope',
+                         'segment_count':len(waypoints)-1,'boolean_pairs_tested':swept_tested,
+                         'overlaps':swept_hits,'passed':not swept_hits,
+                         'scope':'bare cylindrical envelope after listed prerequisites; excludes mounts, leads and tools'}
+        results.append({'group':group,'waypoints_mm':[[p.x,p.y,p.z] for p in waypoints],'pose_count':len(poses),'removed_first':removed,'boolean_pairs_tested':tested,'overlaps':collisions,'continuous_translation_sweep':swept_check,
+                        'passed':not collisions and (swept_check is None or swept_check['passed'])})
+    return {'method':'8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes lift 2 mm, move inward then up after tray removal, with continuous translation sweeps; USB plugs withdraw then lift with crown removed; other groups remain discrete; no tool/hand access certification','scenarios':results,'passed':all(r['passed'] for r in results),'physical_assembly_verified':False}

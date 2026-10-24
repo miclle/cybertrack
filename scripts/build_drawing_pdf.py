@@ -2,6 +2,7 @@
 First run export_drawing_geometry.py with FreeCAD Python; this script uses ReportLab.
 No CAD geometry is edited. The output is a design review pack, not shop drawings.
 """
+import argparse
 import hashlib
 import json
 import math
@@ -11,6 +12,10 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib.utils import ImageReader
+
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--allow-review-conflicts', action='store_true', help='Export an explicitly marked review PDF even when CAD fit checks fail')
+args=parser.parse_args()
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/'tmp/pdfs'
@@ -25,20 +30,23 @@ for rel,digest in report['files_sha256'].items():
     path=ROOT/rel
     if not path.exists(): path=MODEL/Path(rel).name
     assert sha(path)==digest, f'Stale model artifact: {path}'
-assert report['design_revision']=='0.11', 'Review annotations for a new model revision'
-assert report['collision_check']['passed'] and report['service_paths']['passed'], 'CAD checks failed'
-assert report['controller_clearance_check']['passed'], 'Controller review spaces obstructed'
+assert report['design_revision']=='0.13', 'Review annotations for a new model revision'
+cad_checks_passed=all(report[key]['passed'] for key in ('collision_check','service_paths','controller_clearance_check','water_gun_check')) and report['water_gun_check']['removal']['passed']
+assert cad_checks_passed or args.allow_review_conflicts, 'CAD checks failed; use --allow-review-conflicts only for a marked conflict review PDF'
 # Guard dimension callouts that describe named features, not just overall extents.
 expected = {
     'PowerBank': [-60,-96,33,60,-23,64.5],
-    'ElectronicsTray': [-58,-74,144.5,58,17,154],
+    'ElectronicsTray': [-52,-74,144.5,52,17,154],
     'ESP32Board': [-39.6,-23.1,163.6,24,5.1,176.8],
     'ControllerCarrier': [-44,-31,150,17.4,16,156],
     'CrownFinL': [43.5,-16,192,59.5,31,203],
     'CrownFinR': [-59.5,-16,192,-43.5,31,203],
     'CrownEffectInsetL': [47.5,-5,196,55.5,20,196.6],
-    'ArcModuleL': [58.5,-66,148,78.5,14,168],
-    'ArcModuleR': [-78.5,-66,148,-58.5,14,168],
+    'ArcModuleL': [52.75,-66,143.75,78.25,4,169.25],
+    'ArcModuleR': [-78.25,-66,143.75,-52.75,4,169.25],
+    'WaterGunMaximumEnvelope': [38.4,-129,104.7,76.9,9.5,129.3],
+    'WaterGunCradle': [35.8,-72,100.7,82,26,134],
+    'WaterGunCap1': [38,-67,122.5,83.5,-57,132.3],
     'WaterFillPlug': [-30.8,42.2,124.3,-17.2,55.8,128],
     'WaterFillSeal': [-33,40,127.6,-15,58,128],
 }
@@ -46,7 +54,7 @@ for name, values in expected.items():
     assert all(abs(a-b)<1e-5 for a,b in zip(meta['objects'][name]['bbox'],values)), name
 for prefix, xs, ys in [('BatteryScrew',[-63.5,63.5],[-85,-34]),
                        ('CrownScrew',[-64,64],[-52,7]),
-                       ('TrayScrew',[-55,55],[-30,0])]:
+                       ('TrayScrew',[-49.5,49.5],[-30,0])]:
     centres=[]
     for name,obj in meta['objects'].items():
         if name.startswith(prefix):
@@ -59,7 +67,7 @@ pdfmetrics.registerFont(TTFont('ZHB','/System/Library/Fonts/STHeiti Medium.ttc',
 U=72/25.4
 INK='#1E303B'; MUTED='#536673'; ACCENT='#DF632B'; PALE='#EAF0F2'; BLUE='#287E96'
 c=canvas.Canvas(str(PDF),pagesize=(420*U,297*U),pageCompression=1)
-c.setTitle('CyberTrack 0.11 模型与装配图纸')
+c.setTitle('CyberTrack 0.13 模型与装配图纸')
 c.setAuthor('CyberTrack')
 c.setSubject('A3 design review drawings; dimensions in mm; not manufacturing release')
 page=0
@@ -89,12 +97,14 @@ def header(title,subtitle):
     page+=1
     c.setFillColor(INK);c.rect(0,278*U,420*U,19*U,fill=1,stroke=0)
     text(14,285,'CYBERTRACK',18,'#FFFFFF',True)
-    text(405,285,f'CT-11 / {page:02d}',11,'#FFFFFF',align='right')
+    text(405,285,f'CT-13 / {page:02d}',11,'#FFFFFF',align='right')
     text(14,265,title,21,bold=True);text(14,256,subtitle,10,MUTED)
+    if not cad_checks_passed:
+        text(405,244,'尺寸修订待适配：静态／拆卸／USB 空间未通过',10,ACCENT,True,align='right')
     line(14,250,406,250,'#CAD5DB',.6)
     line(14,20,406,20,'#CAD5DB',.6)
-    text(14,13,'模型与装配评审图 | Rev 0.11 | 图纸更新 2026-10-24 | 单位：mm',9,MUTED)
-    text(406,13,f'未制造放行 · A3 横向 · {page} / 15',9,MUTED,align='right')
+    text(14,13,'模型与装配评审图 | Rev 0.13 | 图纸更新 2026-10-24 | 单位：mm',9,MUTED)
+    text(406,13,f'未制造放行 · A3 横向 · {page} / 18',9,MUTED,align='right')
 def end():c.showPage()
 def title(x,y,s,sub=''):
     text(x,y,s,12,bold=True)
@@ -159,10 +169,10 @@ picture('assembly.png',12,79,192,167)
 picture('rear-assembly.png',214,79,192,167)
 text(108,72,'前方轴测 / 前方为 -Y',11,align='center');text(310,72,'后方轴测 / 背包与补液盖',11,align='center')
 box(14,29,392,33,PALE)
-text(20,51,'228 × 202.5 × 203',20,bold=True)
+text(20,51,' × '.join(f(v) for v in report['assembly_size_xyz_mm']),20,bold=True)
 text(20,37,'整机宽 × 长 × 高；模型几何外包络',9,MUTED)
 text(143,55,'图纸内容',11,bold=True)
-para(143,48,'02 彩色正背视图　03 彩色左右侧视　04 正背尺寸　05 左右尺寸\n06 俯视 / 底视　07 电源　08 头舱　09 补液　10 爆炸　11 走线　12 双模块预装　13 顶部效果位\n14 主控布局　15 主控拆装与 USB / 天线',250,9,6)
+para(143,48,'02 彩色正背视图　03 彩色左右侧视　04 正背尺寸　05 左右尺寸\n06 俯视 / 底视　07 电源　08 头舱　09 补液　10 爆炸　11 走线　12 双模块预装　13 顶部效果位\n14 主控布局　15 主控拆装与 USB / 天线　16 实测水枪　17 水枪固定与拆装　18 线管预留',250,9,6)
 end()
 
 header('正面与背面 · 彩色外观','当前保存模型的正交渲染图，用于查看装甲层次、配色和前后造型；不是实物照片，尺寸见第 4 页。')
@@ -170,7 +180,7 @@ picture('front.png',20,65,180,174)
 picture('rear.png',220,65,180,174)
 text(110,54,'正面 / 沿 +Y 观察',12,bold=True,align='center')
 text(310,54,'背面 / 沿 -Y 观察',12,bold=True,align='center')
-text(110,42,'前脸、偏置喷口与低位电源前舱',10,MUTED,align='center')
+text(110,42,'前脸、颈架左侧水枪与低位电源前舱',10,MUTED,align='center')
 text(310,42,'后脑装甲、双液体背包与后向泡泡出口',10,MUTED,align='center')
 end()
 
@@ -228,7 +238,7 @@ hdim(p,b[0],b[2],b[1],b[1],b[1]-15,f(b[2]-b[0]))
 vdim(p,b[1],b[3],b[2],b[2],b[2]+15,f(b[3]-b[1]))
 box(14,29,392,35,PALE)
 para(21,53,'俯视：后方两个补液盖独立拆卸；中部冠盖与顶甲整体上取。\n底视：前部大托盖承托电源；中部小检修盖用于先断开电源插头。',240,10,7)
-para(279,53,'整机宽 228；长 202.5。\n底部维护前须垫高并托住电源。\n维护动作与固定点见后续详图。',120,9,6)
+para(279,53,f"整机宽 {f(report['assembly_size_xyz_mm'][0])}；长 {f(report['assembly_size_xyz_mm'][1])}。\n底部维护前须垫高并托住电源。\n维护动作与固定点见后续详图。",120,9,6)
 end()
 
 header('电源托盖与底部检修','充电宝：用户提供 120 × 73 × 31.5；长侧面的输出口在设计中朝后（+Y），具体端口位置待实测。')
@@ -259,10 +269,10 @@ vdim(p,-52,7,64,64,94,'59 孔距')
 text(29,94,'孔中心：X±64；Y=-52 / 7',9,MUTED)
 title(249,239,'共用托板俯视','4 处紧固；比例 1:1')
 p,b=drawing('tray',316,165,1)
-hdim(p,-58,58,-39,-39,-88,f(dim('ElectronicsTray',0))+' 外宽')
-hdim(p,-55,55,0,0,28,'110 孔距')
-vdim(p,-30,0,55,55,72,'30 孔距')
-text(253,94,'孔中心：X±55；Y=-30 / 0；基础板厚 1；新增支柱',9,MUTED)
+hdim(p,-52,52,-39,-39,-88,f(dim('ElectronicsTray',0))+' 外宽')
+hdim(p,-49.5,49.5,0,0,28,'99 孔距')
+vdim(p,-30,0,49.5,49.5,72,'30 孔距')
+text(253,94,'孔中心：X±49.5；Y=-30 / 0；基础板厚 1；新增支柱',9,MUTED)
 box(14,29,392,54,PALE)
 para(21,72,'冠盖：卸下 4 颗顶面螺钉，整组上提 65；外壳分缝为 Z181…181.25，间隙 0.25。\n托板：先移去冠盖，断开线束与邻近软管，再卸下 4 颗螺钉，上提 85。',376,10,7)
 para(21,50,'主控使用实测总外包络 63.6 × 28.2 × 13.2；前上方剩余电子区 70 × 25 × 13、音频区 72 × 36 × 21 仍是假设。\n冠盖饰片在 CAD 中分对象表达，一体成形或定位固定工艺未定；顶部效果护框与标识随冠盖移动，详见第 13 页。',376,9,7)
@@ -290,38 +300,38 @@ end()
 
 header('总装爆炸与维护分组','按当前模型的维护组件分解；螺钉与柔性路线在主图中隐藏，以突出装配层次。')
 mappt=picture('service.png',15,28,240,214)
-for n,px,py in [(1,750,270),(2,745,457),(3,984,432),(4,655,1015),(5,845,685)]:badge(mappt(px,py),n)
-items=[('01 整体冠盖','4 颗紧固；上提 65。顶甲、效果护框与标识、前后眉甲随盖移动。'),('02 电子 / 音频托板','4 颗紧固；断开线管后上提 85。图中仅错开 35，以便看清层次。'),('03 两个补液盖组','各 2 颗紧固；上 6、后 12、再上 34。左图一侧盖被部分遮挡。'),('04 电源 / 托盖 / 拉带','4 颗紧固；先拆底部插头小盖并拔线，再托住整组下移 60。'),('05 固定头舱 / 颈架 / 底座','保持组装；履带和驱动来源部件不在本次维护爆炸中分解。')]
+for n,px,py in [(1,750,270),(2,745,457),(3,984,432),(4,710,955),(5,650,535),(6,840,700)]:badge(mappt(px,py),n)
+items=[('01 整体冠盖','4 颗紧固；上提 65。顶甲、效果护框与标识、前后眉甲随盖移动。'),('02 电子 / 音频托板','4 颗紧固；断开线管后上提 85。图中仅错开 35，以便看清层次。'),('03 两个补液盖组','各 2 颗紧固；上 6、后 12、再上 34。左图一侧盖被部分遮挡。'),('04 电源 / 托盖 / 拉带','4 颗紧固；先拆底部插头小盖并拔线，再托住整组下移 60。'),('05 固定头舱 / 颈架 / 底座','保持组装；履带和驱动来源部件不在本次维护爆炸中分解。'),('06 拆出水枪','图中向前错开 45；断开线管、侧拆两道压盖后前抽 150；支架与工具空间见第 17–18 页。')]
 y=236
 for heading,body in items:
-    text(268,y,heading,12,bold=True);y=para(268,y-8,body,132,10,6)-10
-para(268,80,'电弧模块仅向内错开显示；取出前须先移去托板，详见第 12 页。',132,9,6)
-para(268,58,'紧固件共 24 处 M2.5 级占位：电源 4、插头盖 2、冠盖 4、托板 4、补液盖 4、主控托架 4、防脱压架 2。无螺纹，采购长度和标准未定。',132,9,6)
+    text(268,y,heading,11,bold=True);y=para(268,y-8,body,132,9,5)-8
+para(268,64,'电弧模块仅向内错开显示；取出前须先移去托板，详见第 12 页。',132,9,6)
+para(268,44,'原 24 处 M2.5 级占位保留，另增水枪基座 2、压盖 2 处 M3 级候选。共 28 处；无螺纹，采购长度、预紧及材料未定。',132,8,5)
 end()
 
 header('内部路线、装配顺序与验证边界','黄色为电源线 / 插头包络；青色为喷水软管路线。另增主控 Ø3 尾线候选；路线均为设计分配，不是完整接线或已验收液路。')
 picture('routing.png',14,91,205,151)
 title(23,78,'路线与维修关系')
-para(23,67,'电源线候选 Ø6，从中央干区经过固定颈架进入头舱。\n喷水管候选 Ø4，独立侧路进入头舱至偏置喷口；主控尾线 Ø3。\n拆托板前先断开相关线管；未表达高压接线。',190,10,7)
+para(23,67,'电源线候选 Ø6，从中央干区经过固定颈架进入头舱。\n喷水管候选 Ø4，沿颈架前下方转至左侧发射枪；主控尾线 Ø3。\n拆托板前先断开相关线管；未表达高压接线。',190,10,7)
 y=238
-for h,s in [('装配次序','动力与底座 → 电源托盖和插头检修 → 冠盖定位与设备托板 → 两液体舱单独试验 → 布线后复查维护动作。'),('当前 CAD 证据',f"{len(report['objects'])} 个几何对象回读有效；{report['collision_check']['boolean_pairs_tested']} 对包络相交对象的布尔检查无超阈值重叠；{len(report['service_paths']['scenarios'])} 组维护动作共 {sum(r['pose_count'] for r in report['service_paths']['scenarios'])} 个离散姿态无超阈值重叠。"),('尺寸与图纸等级','蓝色尺寸为当前 CAD 设计值；充电宝 120 × 73 × 31.5 为用户提供。尺寸不含制造公差。未实测接口与紧固件只用于结构评审。'),('尚待实物确认','端口位置、手指与工具空间、连续拆卸路径、线管弯曲、真实设备固定、承载、密封排液和供电。未通过制造、电气或儿童使用验收。')]:
+for h,s in [('装配次序','动力与底座 → 电源托盖和插头检修 → 冠盖定位与设备托板 → 两液体舱单独试验 → 布线后复查维护动作。'),('当前 CAD 证据',f"{len(report['objects'])} 个几何对象回读有效；{report['collision_check']['boolean_pairs_tested']} 对布尔检查发现 {len(report['collision_check']['overlaps'])} 对超阈值重叠；{len(report['service_paths']['scenarios'])} 组维护动作共 {sum(r['pose_count'] for r in report['service_paths']['scenarios'])} 个离散姿态，{sum(not r['passed'] for r in report['service_paths']['scenarios'])} 组未通过。"),('尺寸与图纸等级','蓝色尺寸为当前 CAD 设计值；充电宝 120 × 73 × 31.5 为用户提供。尺寸不含制造公差。未实测接口与紧固件只用于结构评审。'),('尚待实物确认','端口位置、手指与工具空间、连续拆卸路径、线管弯曲、真实设备固定、承载、密封排液和供电。未通过制造、电气或儿童使用验收。')]:
     text(235,y,h,12,bold=True);y=para(235,y-8,s,167,10,6)-9
 box(14,25,392,16,PALE)
-text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及全部 18 张预览图哈希。',9)
+text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及全部 25 张预览图哈希。',9)
 text(20,29,'SHA-256：'+meta['source_sha256'],8,MUTED)
 end()
-header('双电弧模块 · 头舱预装包络','按用户指定的暂定外形：2 × Ø20 × 80 mm；橙色圆柱仅代表机械占位，不是实测或通电集成。')
+header('双电弧模块 · 头舱预装包络','按用户指定的暂定外形：2 × Ø25.5 × 70 mm；橙色圆柱仅代表机械占位，不是实测或通电集成。')
 picture('arc-layout.png',14,107,199,135)
 text(110,94,'头舱透明示意 / 两侧纵向放置',11,bold=True,align='center')
 p,b=drawing('arc_plan',307,171,1)
 text(307,239,'俯视布局 / 比例 1:1',12,bold=True,align='center')
-vdim(p,-66,14,78.5,78.5,94,'80 暂定长度')
-hdim(p,58.5,78.5,-66,-66,-92,'20 暂定直径')
-leader(p(-68.5,-15),219,103,'右侧模块')
-leader(p(68.5,-15),354,103,'左侧模块')
+vdim(p,-66,4,78.25,78.25,94,'70 用户给定长度')
+hdim(p,52.75,78.25,-66,-66,-92,'25.5 用户给定直径')
+leader(p(-65.5,-15),219,103,'右侧模块')
+leader(p(65.5,-15),354,103,'左侧模块')
 box(14,29,392,54,PALE)
-para(21,72,'位置：轴线 X=±68.5、Z=158，Y=-66…14；沿用外观比例与低位电源。托板主宽 118 → 116，原固定孔位不动。\n拆卸候选：先取冠盖和托板，再各向内移动 24.5、向上移动 85；每侧检查 16 个离散姿态。',375,10,7)
-para(21,50,'尺寸为用户指定预装值。固定夹持、引线、电极、绝缘隔舱与液体隔离未定；图中间隙不是电气安全间距。\n现有尺寸图和 STEP 仍以外观装配为主；两个模块及主控占位保存在 FCStd 中，默认隐藏，可单独显示。',375,9,7)
+para(21,72,'位置：轴线 X=±65.5、Z=156.5，Y=-66…4；每侧内移 3、下移 1.5。托板宽 104；四孔 X±49.5、Y=-30 / 0。\n拆卸候选：先取冠盖和托板，再抬升 2、内移 24.5、继续上提 83（总上提 85）；每侧 24 姿态及三段连续扫掠通过。',375,10,7)
+para(21,50,'头壳、托板与 USB 线尾审查区无超阈值重叠；连续扫掠仅覆盖移去前置部件后的裸圆柱，不包含固定件、引线或工具。\n现有尺寸图和 STEP 仍以外观装配为主；两个模块及主控占位保存在 FCStd 中，默认隐藏，可单独显示。',375,9,7)
 end()
 header('顶部双电弧效果位 · 脊翼造型占位','后掠护框 + 封闭凹槽 + 橙色端部标识；仅表达预期效果位置，不含电极或规定放电间隙。')
 picture('crown-effects.png',14,132,226,108)
@@ -332,7 +342,7 @@ hdim(p,43.5,59.5,-16,-16,-23,'16 外宽')
 vdim(p,-16,31,59.5,59.5,68,'47 外长')
 leader(p(51.5,7.5),251,119,'封闭效果槽 8 × 25')
 box(14,29,392,80,PALE)
-para(21,97,'效果位置：两处中心线 X=±51.5，沿 Y 布置；位于原后掠脊翼区域，朝顶部开放。\n护框范围 Y=-16…31、Z=192…203；顶点保持 Z=203，整机外包络与头身比例不变。\n凹槽平面范围 X=中心线±4、Y=-5…20；槽底封闭，衬面 Z=196…196.6。',375,10,7)
+para(21,97,'效果位置：两处中心线 X=±51.5，沿 Y 布置；位于原后掠脊翼区域，朝顶部开放。\n护框范围 Y=-16…31、Z=192…203；顶点保持 Z=203；水枪前伸后的整机长度见第 1 页。\n凹槽平面范围 X=中心线±4、Y=-5…20；槽底封闭，衬面 Z=196…196.6。',375,10,7)
 para(21,70,'装配：护框、衬面和橙色端部标识归入冠盖维护组，随冠盖整体上取；固定孔位及内部双模块保持原位。\nCAD 分对象便于评审，不代表已经完成独立紧固、材料、加工或实物装配设计。',375,10,7)
 para(21,49,'尺寸均为造型分配。橙色块是非通电视觉标识，不是电极；凹槽尺寸及标识间距不代表拉弧或绝缘间距。\n未建立高压引线、驱动、电极或与内部模块的功能连接；护框与封闭槽底未通过防护、绝缘或带液共存验收。',375,9,7)
 end()
@@ -347,7 +357,7 @@ leader(p(-39.6,-9),238,121,'USB 朝 -X')
 leader(p(23,-9),354,121,'天线朝 +X')
 box(14,29,392,62,PALE)
 para(21,80,'实测总包络：X=-39.6…24，Y=-23.1…5.1，Z=163.6…176.8；总高 13.2。\n图纸排针资料：两排中心距 25.4，首末针距 53.34（22 针）；未确认独立螺钉孔，不在开发板上增孔。\n候选固定：双排母座承接排针，小托架 4 处紧固，防脱压架 2 处紧固；压架与最高包络保留 0.5 间隙。',375,10,7)
-para(21,54,'小托架平面 61.4 × 47、基础板厚 2，天线端悬出；主托板后缘局部延至 Y=17，增加支柱，原四孔不动。\nPCB 层高、针排条带、母座连续槽和插接高度均为设计假设；不能按简化槽直接加工或认定触点适配。\n原电子大占位已拆分：前上方另留 70 × 25 × 13 的待定区域，未证明驱动、升压及开关板全部可装入。',375,9,7)
+para(21,54,'小托架平面 61.4 × 47、基础板厚 2，天线端悬出；主托板后缘局部延至 Y=17，小托架支柱原位不动；大托板四孔已改为 X±49.5。\nPCB 层高、针排条带、母座连续槽和插接高度均为设计假设；不能按简化槽直接加工或认定触点适配。\n原电子大占位已拆分：前上方另留 70 × 25 × 13 的待定区域，未证明驱动、升压及开关板全部可装入。',375,9,7)
 end()
 header('主控拆装、USB 插拔与天线预留','仅表达机械候选；USB 调试采用开冠盖方式，未增加外壳开口，也不表示两口可同时供电。')
 picture('controller-service.png',14,125,190,114)
@@ -357,9 +367,40 @@ text(310,116,'黄色：开盖 USB 服务空间；青色：天线审查区',10,bo
 para(20,101,'主控拆装\n1. 断电、取冠盖、拔 USB 并断开主控尾线。\n2. 换板：卸压架 2 颗螺钉，压架上提，再沿 +Z 拔出板卡。\n3. 拆整组：卸小托架 4 颗螺钉，带母座和压架整体上提。\n图中错开距离仅供读图；板卡与整组各检查上提 65 的路径。',188,9,6)
 para(218,101,'USB 与走线\n用户确认直头；插头 18 × 10 × 8、端口中心及线尾转向空间待实测。\n候选拔插：先沿 -X 退出 12，再向上移 35；两口分别检查。\nØ3 尾线沿托架下方转至导向环，绕开天线区；未定义 GPIO、连接器针序或供电接线。',183,9,6)
 box(14,25,392,36,PALE)
-para(21,51,'天线：假设末端 X17.6…24 为辐射区域；审查区 X17.6…39、Y=-38.1…20.1、Z154.2…185.8。\n参考乐鑫净空建议，朝外、两侧及上下各留 15；馈电侧保留原板。实物天线边界、RF 通路、壳体材料与整机通信性能待核对。\n母座插入深度、防脱载荷、端口位置、线缆弯曲和手指空间均未实测；CAD 通过不等于实物装配或射频验收。',375,9,7)
+para(21,51,'天线：假设末端 X17.6…24 为辐射区域；审查区 X17.6…39、Y=-38.1…20.1、Z154.2…185.8。\n参考乐鑫净空建议，朝外、两侧及上下各留 15；馈电侧保留原板。实物天线边界、RF 通路、壳体材料与整机通信性能待核对。\n母座插入深度、防脱载荷、端口位置、线缆弯曲和手指空间均未实测；两处 USB 线尾空间及天线审查通过几何检查；不构成实物装配或射频验收。',375,9,7)
 text(21,29,'参考：乐鑫 ESP32-S3 硬件设计指南 · PCB Layout Design / Antenna clearance',8,MUTED)
 c.linkURL(report['controller_layout']['rf_guideline'],(21*U,27*U,220*U,32*U),relative=0,thickness=0)
+end()
+header('拆出水枪 · 实测尺寸与候选布局','长 138.5、最粗处宽 33.2、厚 24.6、带管宽 38.5；喷嘴、接头和前段轮廓为示意，不是接口测量。')
+picture('water-gun-component.png',14,140,185,99)
+picture('water-gun-layout.png',208,117,198,125)
+text(106,130,'独立总成 / 总尺寸实测，分段形状假设',10,bold=True,align='center')
+text(307,106,'头舱下方、颈架左侧 / 喷水朝 -Y',10,bold=True,align='center')
+para(20,114,'放置基准：喷嘴端中心 (55, -129, 117)。\n长度沿 +Y；宽度沿 X，厚度沿 Z，接管朝 +X。\n完整最大尺寸包络：X38.4…76.9、Y-129…9.5、Z104.7…129.3。',180,10,7)
+w=report['water_gun_check']
+nearest=w['nearest_clearances'][0]
+box(14,28,392,55,PALE)
+para(21,72,f"原前脸位置两种朝向均与头壳、托板、音频或左电弧模块相交；现将水枪下移至颈架侧面，其他设备位置不动。\n当前完整长方体包络与已建模实体、管线及 USB / 天线审查区无超阈值重叠；最小几何距离 {nearest['distance_mm']:.2f} mm（{nearest['object']}，不含有意接触的软垫和接管面）。\n断开软管及尾线、拆去两道压盖后，沿 -Y 抽出 150 mm 的完整包络连续扫掠通过。",375,9,7)
+para(21,45,'0.13 已新增托架、软垫、压盖及线管审查区；夹持面、材料、管径、真实弯曲半径和长度端点仍待核实。\n矩形包络沿全长检查，不利用照片缩径减小占用；名义垫片接触不等于预紧、摩擦保持力或实物固定通过。',375,9,6)
+end()
+header('水枪固定托架 · 侧拆压盖与前抽机构','固定位置与材料尺寸均为候选；不在水枪原壳钻孔，不将照片可见孔当作固定孔。')
+picture('water-gun-mount.png',14,123,193,119)
+picture('water-gun-service.png',213,123,193,119)
+text(110,113,'托架、双压盖及尾线导向鞍',11,bold=True,align='center')
+text(309,113,'压盖向外抽，枪体向前抽 / 分解示意',11,bold=True,align='center')
+para(20,99,'托架底板 Z100.7…103.7，夹持带中心 Y=-62 / -10。\n原左肩梁新增两处 Ø10 一体立柱；基座孔 X42.5、Y=-60 / -18。\n2 颗 M3 级基座紧固 + 2 颗 M3 级压盖横向紧固；采购规格未定。\n上、下软垫各 1，内侧垫 0.6；名义接触，未定义压缩率。',183,9,6)
+para(220,99,'拆装顺序\n1. 断电排液，断开水管和尾线插头，松开导向鞍的待选扎带。\n2. 外侧卸两颗压盖螺钉，沿 +X 退出 20。\n3. 两道压盖连上垫沿 +X 抽出 50，再将枪体沿 -Y 抽出 150。\n4. 若需拆托架，用短臂内六角拆基座两螺钉；上提 2，再外移 60。',180,9,6)
+box(14,27,392,32,PALE)
+para(21,49,'压盖所带上垫的抽出通道与外侧壁名义间隙 0.2；真实尺寸公差、垫片膨胀、打印变形及夹紧预载未计入。\n后止挡与枪尾名义间隙 0.5；前向保持依靠压盖软垫摩擦，须实测夹紧力、脉冲载荷和反复拆装后的防滑。\n螺钉、压盖与上垫连续扫掠，以及空托架分段保守扫掠通过；不代表手部空间、强度或制造放行。',375,9,7)
+end()
+header('水管与尾部引线 · 路线及操作预留','青色为水管预留，黄色为线束、插头与工具预留；这些是空间假设，不是已选连接器或布线规格。')
+picture('water-gun-spaces.png',14,83,228,155)
+text(126,72,'半透明体为审查空间，实体接触按操作步骤区分',10,bold=True,align='center')
+para(251,236,'水管\n候选外径 4，中心线转弯半径 8；另留 Ø8 路线审查空间。\n湿舱通过孔候选 Ø9；侧接管沿 +X 拔出 30，操作包络 Ø16。\n路线从颈架前下方横穿，避开托架和停止按钮。',151,10,7)
+para(251,174,'尾部引线\n枪尾 Y=9.5，候选 Ø3 线束向后转至外侧；中心弯曲半径 8，路线预留 Ø8。\n插头候选 16×10×10，沿 +X 拔出 16；导向鞍开口可放线，扎带与抗拉方式待选。',151,10,7)
+para(251,112,'工具\n压盖螺钉：外侧 Ø10×30 直线批头空间。\n基座螺钉：先取出枪体，再用朝前操作的短臂内六角；端部 Ø3、杆部 Ø6、前伸臂 40。\n仅检查工具杆包络，不包括手掌与转动把手。',151,9,6)
+box(14,27,392,31,PALE)
+para(21,48,'所有线管与工具预留均按其实际拆装前置条件检查。尾线预留在导向鞍处允许有意的夹持区域重叠，实际线束仍单独检查。\n软管压力、最小允许弯曲半径、线尾抗拉、插头保持力和带液工作未测；先核实实物并制作夹持试块，再确定材料与加工公差。',375,9,7)
 end()
 c.save()
 print(PDF)

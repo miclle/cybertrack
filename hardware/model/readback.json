@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.11",
+  "design_revision": "0.13",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
   "power_bank_dimensions_mm": {
@@ -19,24 +19,44 @@
   },
   "arc_module_envelopes": {
     "quantity": 2,
-    "diameter_mm": 20,
-    "length_mm": 80,
+    "diameter_mm": 25.5,
+    "length_mm": 70,
     "basis": "user specified provisional envelope on 2026-10-24; not measured",
     "axis": "+Y",
     "axis_origins_mm": [
       [
-        68.5,
+        65.5,
         -66,
-        158
+        156.5
       ],
       [
-        -68.5,
+        -65.5,
         -66,
-        158
+        156.5
       ]
     ],
-    "tray_width_mm": 116,
-    "tray_hole_pattern_unchanged": true,
+    "tray_width_mm": 104,
+    "tray_hole_pattern_unchanged": false,
+    "tray_hole_centers_x_mm": [
+      -49.5,
+      49.5
+    ],
+    "tray_hole_centers_y_mm": [
+      -30,
+      0
+    ],
+    "relocation_from_0_11_1_mm": {
+      "left": [
+        -3,
+        0,
+        -1.5
+      ],
+      "right": [
+        3,
+        0,
+        -1.5
+      ]
+    },
     "mounts_and_leads_designed": false,
     "electrical_clearance_verified": false,
     "insulation_liquid_isolation_emc_verified": false
@@ -1250,7 +1270,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 94235.26697392676,
+      "volume_mm3": 95111.4845905966,
       "bbox_mm": [
         -82.0000001,
         -83.0000001,
@@ -1286,11 +1306,11 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 6009.986620575904,
+      "volume_mm3": 6072.0,
       "bbox_mm": [
         -70.8,
         -85.00000000000001,
-        148.9999999999999,
+        149.0,
         70.8,
         -81.0,
         180.0
@@ -1322,11 +1342,11 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1289.914999981927,
+      "volume_mm3": 1435.1999999999998,
       "bbox_mm": [
-        45.92093727122803,
+        43.199999999999996,
         -88.0,
-        138.99999999999946,
+        139.0,
         80.39999999999999,
         -84.0,
         167.0
@@ -1456,24 +1476,6 @@
         10.0,
         -81.0,
         169.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "WaterPort",
-      "label": "偏置短喷水口占位",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 1119.1923828413637,
-      "bbox_mm": [
-        38.0,
-        -89.0,
-        139.0,
-        50.0,
-        -74.0,
-        151.0
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -2329,15 +2331,15 @@
       "label": "左斜面肩部承力梁",
       "category": "structure",
       "valid": true,
-      "solids": 1,
-      "volume_mm3": 4757.071428499001,
+      "solids": 2,
+      "volume_mm3": 6208.9143003126355,
       "bbox_mm": [
         33.0,
         -89.0,
         73.428571429,
-        46.0,
+        47.5,
         -11.0,
-        97.0
+        100.7
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -2402,14 +2404,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 28509.576788916464,
+      "volume_mm3": 28406.020686542794,
       "bbox_mm": [
         -44.0000001,
-        28.99999989791915,
+        28.9999999,
         39.9999999,
         -3.999999899999999,
         69.0000001,
-        122.0000001
+        122.00000010000001
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -2474,7 +2476,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 27595.46426553408,
+      "volume_mm3": 27508.62425181647,
       "bbox_mm": [
         -52.0000001,
         23.9999999,
@@ -3262,36 +3264,36 @@
     },
     {
       "name": "ArcModuleL",
-      "label": "左电弧模块预装占位 Ø20×80",
+      "label": "左电弧模块预装占位 Ø25.5×70",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 25132.741228718347,
+      "volume_mm3": 35749.360902443346,
       "bbox_mm": [
-        58.5,
+        52.75,
         -66.0,
-        148.0,
-        78.5,
-        14.0,
-        168.0
+        143.75,
+        78.25,
+        4.0,
+        169.25
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "ArcModuleR",
-      "label": "右电弧模块预装占位 Ø20×80",
+      "label": "右电弧模块预装占位 Ø25.5×70",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 25132.741228718347,
+      "volume_mm3": 35749.360902443346,
       "bbox_mm": [
-        -78.5,
+        -78.25,
         -66.0,
-        148.0,
-        -58.5,
-        14.0,
-        168.0
+        143.75,
+        -52.75,
+        4.0,
+        169.25
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -3716,12 +3718,12 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 9414.476000345421,
+      "volume_mm3": 8826.47600034542,
       "bbox_mm": [
-        -58.0,
+        -52.0,
         -74.0,
         144.5,
-        58.0,
+        52.0,
         17.0,
         154.0
       ],
@@ -3736,10 +3738,10 @@
       "solids": 1,
       "volume_mm3": 30.783681014362976,
       "bbox_mm": [
-        -57.0,
+        -51.5,
         -32.0,
         140.0,
-        -53.0,
+        -47.5,
         -28.0,
         144.5
       ],
@@ -3754,10 +3756,10 @@
       "solids": 1,
       "volume_mm3": 36.39863178892781,
       "bbox_mm": [
-        -57.2,
+        -51.7,
         -32.2,
         141.0,
-        -52.8,
+        -47.3,
         -27.8,
         146.5
       ],
@@ -3772,10 +3774,10 @@
       "solids": 1,
       "volume_mm3": 30.78368101436298,
       "bbox_mm": [
-        -57.0,
+        -51.5,
         -2.0,
         140.0,
-        -53.0,
+        -47.5,
         2.0,
         144.5
       ],
@@ -3790,10 +3792,10 @@
       "solids": 1,
       "volume_mm3": 36.3986317889278,
       "bbox_mm": [
-        -57.2,
+        -51.7,
         -2.2,
         141.0,
-        -52.8,
+        -47.3,
         2.2,
         146.5
       ],
@@ -3808,10 +3810,10 @@
       "solids": 1,
       "volume_mm3": 30.783681014362976,
       "bbox_mm": [
-        53.0,
+        47.5,
         -32.0,
         140.0,
-        57.0,
+        51.5,
         -28.0,
         144.5
       ],
@@ -3826,10 +3828,10 @@
       "solids": 1,
       "volume_mm3": 36.39863178892781,
       "bbox_mm": [
-        52.8,
+        47.3,
         -32.2,
         141.0,
-        57.2,
+        51.7,
         -27.8,
         146.5
       ],
@@ -3844,10 +3846,10 @@
       "solids": 1,
       "volume_mm3": 30.78368101436298,
       "bbox_mm": [
-        53.0,
+        47.5,
         -2.0,
         140.0,
-        57.0,
+        51.5,
         2.0,
         144.5
       ],
@@ -3862,10 +3864,10 @@
       "solids": 1,
       "volume_mm3": 36.3986317889278,
       "bbox_mm": [
-        52.8,
+        47.3,
         -2.2,
         141.0,
-        57.2,
+        51.7,
         2.2,
         146.5
       ],
@@ -4162,18 +4164,18 @@
     },
     {
       "name": "WaterHoseRoute",
-      "label": "喷水软管独立侧路 Ø4",
+      "label": "喷水软管候选 Ø4／R8 圆弧过渡至枪侧",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 2681.7846914007177,
+      "volume_mm3": 3869.4018861744894,
       "bbox_mm": [
-        -41.0,
-        -76.0,
-        114.0,
-        46.0,
+        -47.00000010000001,
+        -107.00000009999998,
+        97.49999989999993,
+        92.0000001,
         39.0,
-        147.0
+        121.0000001
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -4609,18 +4611,576 @@
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunBody",
+      "label": "拆出发射枪／前细后粗示意",
+      "category": "component",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 90210.32415391513,
+      "bbox_mm": [
+        38.4,
+        -129.0,
+        104.7,
+        71.6,
+        9.5,
+        129.3
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunInlet",
+      "label": "水枪侧接头／未测形状",
+      "category": "component",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 223.83847656827268,
+      "bbox_mm": [
+        65.5,
+        -107.5,
+        114.5,
+        76.9,
+        -102.5,
+        119.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunMaximumEnvelope",
+      "label": "水枪最大尺寸审查包络／含管宽38.5",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 131173.35000000006,
+      "bbox_mm": [
+        38.4,
+        -129.0,
+        104.7,
+        76.9,
+        9.5,
+        129.3
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunCradle",
+      "label": "水枪固定托架／前开口／后端双止挡",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 14331.43311469874,
+      "bbox_mm": [
+        35.8,
+        -72.0,
+        100.7,
+        82.0,
+        26.0,
+        134.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunBaseInsert1",
+      "label": "托架基座 M3 级嵌件候选 1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 39.39557187601595,
+      "bbox_mm": [
+        40.3,
+        -62.2,
+        95.0,
+        44.7,
+        -57.8,
+        100.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunBaseScrew1",
+      "label": "托架沉入式紧固候选 1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 64.55344584596304,
+      "bbox_mm": [
+        39.9,
+        -62.6,
+        96.2,
+        45.1,
+        -57.4,
+        103.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunBaseTool1",
+      "label": "空托架基座短臂内六角操作空间 1",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1374.1824023794936,
+      "bbox_mm": [
+        39.5,
+        -100.0,
+        103.5,
+        45.5,
+        -57.0,
+        118.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunBaseInsert2",
+      "label": "托架基座 M3 级嵌件候选 2",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 39.39557187601594,
+      "bbox_mm": [
+        40.3,
+        -20.2,
+        95.0,
+        44.7,
+        -15.8,
+        100.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunBaseScrew2",
+      "label": "托架沉入式紧固候选 2",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 64.55344584596304,
+      "bbox_mm": [
+        39.9,
+        -20.6,
+        96.2,
+        45.1,
+        -15.4,
+        103.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunBaseTool2",
+      "label": "空托架基座短臂内六角操作空间 2",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1374.1824023794916,
+      "bbox_mm": [
+        39.5,
+        -58.0,
+        103.5,
+        45.5,
+        -15.0,
+        118.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunLowerPad1",
+      "label": "水枪底部 1 mm 软垫候选 1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 283.7256661176918,
+      "bbox_mm": [
+        39.4,
+        -67.0,
+        103.7,
+        70.6,
+        -57.0,
+        104.7
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunInnerPad1",
+      "label": "内侧 0.6 mm 定位软垫候选 1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 84.00000000000017,
+      "bbox_mm": [
+        37.8,
+        -67.0,
+        110.0,
+        38.4,
+        -57.0,
+        124.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunCap1",
+      "label": "侧向抽出的水枪压盖 1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1119.872568420431,
+      "bbox_mm": [
+        38.0,
+        -67.0,
+        122.5,
+        83.5,
+        -57.0,
+        132.3
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunUpperPad1",
+      "label": "随压盖拆出的 1 mm 上垫 1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 311.99999999999994,
+      "bbox_mm": [
+        39.4,
+        -67.0,
+        129.3,
+        70.6,
+        -57.0,
+        130.3
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunCapInsert1",
+      "label": "压盖横向 M3 级嵌件候选 1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 20.055927500517285,
+      "bbox_mm": [
+        77.6,
+        -64.2,
+        123.3,
+        80.39999999999999,
+        -59.8,
+        127.7
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunCapScrew1",
+      "label": "压盖外侧操作紧固件 1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 74.98353345588117,
+      "bbox_mm": [
+        77.7,
+        -64.5,
+        123.0,
+        85.5,
+        -59.5,
+        128.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunCapTool1",
+      "label": "压盖批头工具直线空间 Ø10×30 1",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2356.1944901923443,
+      "bbox_mm": [
+        85.5,
+        -67.0,
+        120.5,
+        115.5,
+        -57.0,
+        130.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunLowerPad2",
+      "label": "水枪底部 1 mm 软垫候选 2",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 311.99999999999994,
+      "bbox_mm": [
+        39.4,
+        -15.0,
+        103.7,
+        70.6,
+        -5.0,
+        104.7
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunInnerPad2",
+      "label": "内侧 0.6 mm 定位软垫候选 2",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 84.00000000000017,
+      "bbox_mm": [
+        37.8,
+        -15.0,
+        110.0,
+        38.4,
+        -5.0,
+        124.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunCap2",
+      "label": "侧向抽出的水枪压盖 2",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1119.8725684204314,
+      "bbox_mm": [
+        38.0,
+        -15.0,
+        122.5,
+        83.5,
+        -5.0,
+        132.3
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunUpperPad2",
+      "label": "随压盖拆出的 1 mm 上垫 2",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 311.99999999999994,
+      "bbox_mm": [
+        39.4,
+        -15.0,
+        129.3,
+        70.6,
+        -5.0,
+        130.3
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunCapInsert2",
+      "label": "压盖横向 M3 级嵌件候选 2",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 20.055927500517306,
+      "bbox_mm": [
+        77.6,
+        -12.2,
+        123.3,
+        80.39999999999999,
+        -7.8,
+        127.7
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunCapScrew2",
+      "label": "压盖外侧操作紧固件 2",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 74.98353345588117,
+      "bbox_mm": [
+        77.7,
+        -12.5,
+        123.0,
+        85.5,
+        -7.5,
+        128.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunCapTool2",
+      "label": "压盖批头工具直线空间 Ø10×30 2",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2356.194490192345,
+      "bbox_mm": [
+        85.5,
+        -15.0,
+        120.5,
+        115.5,
+        -5.0,
+        130.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunLeadRoute",
+      "label": "水枪尾线束候选 Ø3／中心弯曲半径8",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 258.47244290365325,
+      "bbox_mm": [
+        53.4999999,
+        9.5,
+        115.4999999,
+        83.0,
+        23.000000100000005,
+        118.5000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunLeadClearance",
+      "label": "尾线 Ø8 走线审查区／不含手部",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1838.0262606481995,
+      "bbox_mm": [
+        50.9999999,
+        9.5,
+        112.9999999,
+        83.0,
+        25.500000100000005,
+        121.0000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunLeadConnector",
+      "label": "水枪可分离插头包络 16×10×10／型号未定",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1599.9999999999995,
+      "bbox_mm": [
+        83.0,
+        16.5,
+        112.0,
+        99.0,
+        26.5,
+        122.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunConnectorService",
+      "label": "尾线插头外拔16及侧面操作余量",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8319.999999999998,
+      "bbox_mm": [
+        82.5,
+        13.5,
+        109.0,
+        115.0,
+        29.5,
+        125.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunLeadGuide",
+      "label": "尾线开放导向鞍／扎带槽候选",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 850.2882691601544,
+      "bbox_mm": [
+        76.0,
+        16.5,
+        103.7,
+        82.0,
+        26.5,
+        120.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunHoseClearance",
+      "label": "水管 Ø8 路线预留／中心弯曲半径8候选",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 15477.607544697965,
+      "bbox_mm": [
+        -49.00000010000001,
+        -109.0000001,
+        95.49999989999993,
+        94.0000001,
+        39.0,
+        123.0000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterGunHoseService",
+      "label": "侧接管沿 +X 拔出30／操作直径16候选",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 6031.857894892403,
+      "bbox_mm": [
+        76.9,
+        -113.0,
+        109.0,
+        106.9,
+        -97.0,
+        125.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     }
   ],
   "assembly_size_xyz_mm": [
     228.0,
-    202.5,
+    225.0,
     203.00000000248912
   ],
   "step_readback": {
     "valid": true,
-    "solids": 839,
-    "expected_solids": 839,
-    "volume_difference_mm3": 1.1558477625949308,
+    "solids": 859,
+    "expected_solids": 859,
+    "volume_difference_mm3": 1.571606527781114,
     "bbox_difference_mm": 8.952838470577262e-13,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -4629,13 +5189,706 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 545,
+    "boolean_pairs_tested": 603,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
   },
+  "water_gun_layout": {
+    "source": "hardware/components/pulse-water-gun/README.md",
+    "local_model": "hardware/components/pulse-water-gun/PulseWaterGun.FCStd",
+    "origin_mm": [
+      55.0,
+      -129.0,
+      117.0
+    ],
+    "rotation_degrees": [
+      0,
+      0,
+      0
+    ],
+    "orientation": "length +Y toward rear, nozzle faces -Y; width X, thickness Z; inlet +X",
+    "maximum_bbox_mm": [
+      38.4,
+      -129.0,
+      104.7,
+      76.9,
+      9.5,
+      129.3
+    ],
+    "mount": {
+      "candidate_revision": "0.13",
+      "fixed_to": "ShoulderRailL; two integral 10 mm bosses with M3 candidate inserts",
+      "base_screws": 2,
+      "cap_screws": 2,
+      "cap_centres_y_mm": [
+        -62,
+        -10
+      ],
+      "base_screw_centres_xy_mm": [
+        [
+          42.5,
+          -60
+        ],
+        [
+          42.5,
+          -18
+        ]
+      ],
+      "padding_mm": {
+        "top": 1,
+        "bottom": 1,
+        "inner_side": 0.6
+      },
+      "gun_play_nominal_mm": {
+        "bare_inner_side": 0.6,
+        "top_with_pad": 0,
+        "bottom_with_pad": 0,
+        "rear_stop": 0.5
+      },
+      "hose": {
+        "assumed_od_mm": 4,
+        "route_clearance_diameter_mm": 8,
+        "centreline_bend_radius_mm": 8,
+        "unplug_direction_mm": [
+          30,
+          0,
+          0
+        ]
+      },
+      "leads": {
+        "assumed_bundle_diameter_mm": 3,
+        "route_clearance_diameter_mm": 8,
+        "centreline_bend_radius_mm": 8,
+        "connector_size_xyz_mm": [
+          16,
+          10,
+          10
+        ],
+        "connector_unplug_direction_mm": [
+          16,
+          0,
+          0
+        ]
+      },
+      "sequence": [
+        "power off and drain",
+        "withdraw hose +X 30, unplug tail connector +X 16, release guide tie and flexible lines",
+        "withdraw 2 cap screws +X 20",
+        "slide both caps and upper pads +X 50",
+        "pull gun forward -Y 150",
+        "optional: use short L-key from the front to remove 2 base screws, lift empty cradle +Z 2 then move +X 60"
+      ],
+      "contact_surfaces_fasteners_bends_and_materials_assumed": true,
+      "strength_clamp_load_strain_relief_and_physical_fit_verified": false
+    },
+    "original_face_position_checks": [
+      {
+        "width_along_x": false,
+        "origin_mm": [
+          44,
+          -89,
+          145
+        ],
+        "overlaps": [
+          {
+            "object": "NeckBearingL",
+            "label": "左固定横梁阶梯套",
+            "overlap_mm3": 18.61548797559381
+          },
+          {
+            "object": "NeckCapL",
+            "label": "左横梁端部锁片",
+            "overlap_mm3": 17.9289758004762
+          },
+          {
+            "object": "NeckCrossbar",
+            "label": "颈架固定横梁",
+            "overlap_mm3": 7.910331002191066
+          },
+          {
+            "object": "HeadShell",
+            "label": "头舱固定下壳／托板及冠盖支座",
+            "overlap_mm3": 9398.013811323624
+          },
+          {
+            "object": "SensorMask",
+            "label": "内嵌楔形传感器面板",
+            "overlap_mm3": 816.4056428517097
+          },
+          {
+            "object": "VisorRim",
+            "label": "六边形前脸内框",
+            "overlap_mm3": 420.1878654970756
+          },
+          {
+            "object": "CheekArmorL",
+            "label": "左斜切颊部护板",
+            "overlap_mm3": 406.725
+          },
+          {
+            "object": "UltrasonicRingL",
+            "label": "嵌入式超声波探头框 L",
+            "overlap_mm3": 27.773513219801767
+          },
+          {
+            "object": "UltrasonicFaceL",
+            "label": "超声波探头暗面 L",
+            "overlap_mm3": 41.71733466175165
+          },
+          {
+            "object": "OccipitalFrame",
+            "label": "后脑六边内嵌护框",
+            "overlap_mm3": 1143.0195020096226
+          },
+          {
+            "object": "OccipitalInset",
+            "label": "后脑内凹封闭衬板",
+            "overlap_mm3": 667.6681184210528
+          },
+          {
+            "object": "OccipitalLouverL0",
+            "label": "后脑封闭格栅饰条 L0",
+            "overlap_mm3": 42.56249999999998
+          },
+          {
+            "object": "OccipitalLouverL1",
+            "label": "后脑封闭格栅饰条 L1",
+            "overlap_mm3": 42.56249999999998
+          },
+          {
+            "object": "BubbleServiceLid",
+            "label": "泡泡背包顶部独立切角维护盖",
+            "overlap_mm3": 676.3899999999985
+          },
+          {
+            "object": "BubbleCapGrip",
+            "label": "泡泡低矮桥形维护握位",
+            "overlap_mm3": 59.800000000000004
+          },
+          {
+            "object": "AudioModule",
+            "label": "头舱前部音频区占位 72×36×21",
+            "overlap_mm3": 3235.3199999999997
+          },
+          {
+            "object": "ArcModuleL",
+            "label": "左电弧模块预装占位 Ø25.5×70",
+            "overlap_mm3": 3017.3330645472606
+          },
+          {
+            "object": "ElectronicsTray",
+            "label": "头舱电子及音频共用上取托板",
+            "overlap_mm3": 1236.0628330588456
+          },
+          {
+            "object": "TrayInsertL0",
+            "label": "嵌件候选 TrayInsertL0",
+            "overlap_mm3": 30.783681014362976
+          },
+          {
+            "object": "TrayScrewL0",
+            "label": "M2.5 级紧固件候选 TrayScrewL0",
+            "overlap_mm3": 36.39863178892781
+          },
+          {
+            "object": "TrayInsertL1",
+            "label": "嵌件候选 TrayInsertL1",
+            "overlap_mm3": 30.783681014362973
+          },
+          {
+            "object": "TrayScrewL1",
+            "label": "M2.5 级紧固件候选 TrayScrewL1",
+            "overlap_mm3": 36.3986317889278
+          },
+          {
+            "object": "ControllerAntennaSpace",
+            "label": "天线端审查区／禁止布线与金属件",
+            "overlap_mm3": 5395.722000000008
+          }
+        ]
+      },
+      {
+        "width_along_x": true,
+        "origin_mm": [
+          44,
+          -89,
+          145
+        ],
+        "overlaps": [
+          {
+            "object": "NeckOuterWebL",
+            "label": "左颈架外层加强板",
+            "overlap_mm3": 7.750632799093338
+          },
+          {
+            "object": "NeckBearingL",
+            "label": "左固定横梁阶梯套",
+            "overlap_mm3": 63.35048785378488
+          },
+          {
+            "object": "HeadShell",
+            "label": "头舱固定下壳／托板及冠盖支座",
+            "overlap_mm3": 14794.79433697672
+          },
+          {
+            "object": "SensorMask",
+            "label": "内嵌楔形传感器面板",
+            "overlap_mm3": 318.9014481264781
+          },
+          {
+            "object": "VisorRim",
+            "label": "六边形前脸内框",
+            "overlap_mm3": 645.9812982456132
+          },
+          {
+            "object": "CheekArmorL",
+            "label": "左斜切颊部护板",
+            "overlap_mm3": 780.4206862745106
+          },
+          {
+            "object": "UltrasonicRingL",
+            "label": "嵌入式超声波探头框 L",
+            "overlap_mm3": 15.654623123411138
+          },
+          {
+            "object": "UltrasonicFaceL",
+            "label": "超声波探头暗面 L",
+            "overlap_mm3": 8.794205729467846
+          },
+          {
+            "object": "JawArmor",
+            "label": "多面下颌中央护片",
+            "overlap_mm3": 0.17111111111111096
+          },
+          {
+            "object": "OccipitalFrame",
+            "label": "后脑六边内嵌护框",
+            "overlap_mm3": 911.462905870444
+          },
+          {
+            "object": "OccipitalInset",
+            "label": "后脑内凹封闭衬板",
+            "overlap_mm3": 312.1709605263147
+          },
+          {
+            "object": "OccipitalLouverL0",
+            "label": "后脑封闭格栅饰条 L0",
+            "overlap_mm3": 42.13169999999949
+          },
+          {
+            "object": "BubbleCapGrip",
+            "label": "泡泡低矮桥形维护握位",
+            "overlap_mm3": 82.59000000000046
+          },
+          {
+            "object": "AudioModule",
+            "label": "头舱前部音频区占位 72×36×21",
+            "overlap_mm3": 3498.479999999995
+          },
+          {
+            "object": "ArcModuleL",
+            "label": "左电弧模块预装占位 Ø25.5×70",
+            "overlap_mm3": 10030.212881081618
+          },
+          {
+            "object": "ElectronicsTray",
+            "label": "头舱电子及音频共用上取托板",
+            "overlap_mm3": 1597.2628330588457
+          },
+          {
+            "object": "TrayInsertL0",
+            "label": "嵌件候选 TrayInsertL0",
+            "overlap_mm3": 30.783681014362976
+          },
+          {
+            "object": "TrayScrewL0",
+            "label": "M2.5 级紧固件候选 TrayScrewL0",
+            "overlap_mm3": 36.39863178892781
+          },
+          {
+            "object": "TrayInsertL1",
+            "label": "嵌件候选 TrayInsertL1",
+            "overlap_mm3": 30.783681014362973
+          },
+          {
+            "object": "TrayScrewL1",
+            "label": "M2.5 级紧固件候选 TrayScrewL1",
+            "overlap_mm3": 36.3986317889278
+          },
+          {
+            "object": "ControllerAntennaSpace",
+            "label": "天线端审查区／禁止布线与金属件",
+            "overlap_mm3": 2092.8719999999967
+          }
+        ]
+      }
+    ],
+    "mounts_leads_tube_bend_and_physical_fit_verified": false
+  },
+  "water_gun_check": {
+    "mount_check": {
+      "service_spaces": [
+        {
+          "name": "WaterGunHoseClearance",
+          "excluded": [
+            "WaterHoseRoute"
+          ],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "name": "WaterGunLeadClearance",
+          "excluded": [
+            "WaterGunLeadRoute",
+            "WaterGunLeadGuide"
+          ],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "name": "WaterGunHoseService",
+          "excluded": [
+            "WaterHoseRoute"
+          ],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "name": "WaterGunConnectorService",
+          "excluded": [
+            "WaterGunLeadRoute",
+            "WaterGunLeadConnector"
+          ],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "name": "WaterGunCapTool1",
+          "excluded": [],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "name": "WaterGunCapTool2",
+          "excluded": [],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "name": "WaterGunBaseTool1",
+          "excluded": [
+            "WaterGunBody",
+            "WaterGunInlet",
+            "WaterHoseRoute",
+            "WaterGunLeadRoute",
+            "WaterGunLeadConnector",
+            "WaterGunCap1",
+            "WaterGunUpperPad1",
+            "WaterGunCapScrew1",
+            "WaterGunCap2",
+            "WaterGunUpperPad2",
+            "WaterGunCapScrew2"
+          ],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "name": "WaterGunBaseTool2",
+          "excluded": [
+            "WaterGunBody",
+            "WaterGunInlet",
+            "WaterHoseRoute",
+            "WaterGunLeadRoute",
+            "WaterGunLeadConnector",
+            "WaterGunCap1",
+            "WaterGunUpperPad1",
+            "WaterGunCapScrew1",
+            "WaterGunCap2",
+            "WaterGunUpperPad2",
+            "WaterGunCapScrew2"
+          ],
+          "overlaps": [],
+          "passed": true
+        }
+      ],
+      "continuous_service_sweeps": [
+        {
+          "operation": "cap_screw_1",
+          "delta_mm": [
+            20,
+            0,
+            0
+          ],
+          "method": "continuous axial shaft and head sweeps",
+          "moving": [
+            "WaterGunCapScrew1"
+          ],
+          "removed_first": [],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "operation": "cap_and_pad_1",
+          "delta_mm": [
+            50,
+            0,
+            0
+          ],
+          "method": "continuous union of unbored cap material primitives and upper pad",
+          "moving": [
+            "WaterGunCap1",
+            "WaterGunUpperPad1",
+            "WaterGunCap2",
+            "WaterGunUpperPad2"
+          ],
+          "removed_first": [
+            "WaterGunCapScrew1",
+            "WaterGunCapScrew2"
+          ],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "operation": "cap_screw_2",
+          "delta_mm": [
+            20,
+            0,
+            0
+          ],
+          "method": "continuous axial shaft and head sweeps",
+          "moving": [
+            "WaterGunCapScrew2"
+          ],
+          "removed_first": [],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "operation": "cap_and_pad_2",
+          "delta_mm": [
+            50,
+            0,
+            0
+          ],
+          "method": "continuous union of unbored cap material primitives and upper pad",
+          "moving": [
+            "WaterGunCap1",
+            "WaterGunUpperPad1",
+            "WaterGunCap2",
+            "WaterGunUpperPad2"
+          ],
+          "removed_first": [
+            "WaterGunCapScrew1",
+            "WaterGunCapScrew2"
+          ],
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "operation": "empty_cradle",
+          "waypoints_mm": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              60,
+              0,
+              2
+            ]
+          ],
+          "method": "conservative continuous AABB sweeps of individual material primitives",
+          "removed_first": [
+            "WaterGunCap1",
+            "WaterGunUpperPad1",
+            "WaterGunCap2",
+            "WaterGunUpperPad2",
+            "WaterGunCapScrew1",
+            "WaterGunCapScrew2",
+            "WaterHoseRoute",
+            "WaterGunLeadRoute",
+            "WaterGunLeadClearance",
+            "WaterGunLeadConnector",
+            "WaterGunConnectorService",
+            "WaterGunHoseClearance",
+            "WaterGunHoseService",
+            "WaterGunBody",
+            "WaterGunInlet",
+            "WaterGunBaseScrew1",
+            "WaterGunBaseScrew2"
+          ],
+          "overlaps": [],
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "intended_contacts": "upper/lower/inner pads contact nominal measured body faces; cap flange and saddle mounting faces contact without volume overlap",
+      "tool_scope": "cap screwdriver shank diameter 10, length 30; base short L-key tip diameter 3, shank diameter 6, front arm 40; hands not covered",
+      "hose_pressure_wire_flex_clamp_preload_strength_and_physical_fit_verified": false
+    },
+    "method": "full rectangular maximum measured dimensions along the entire length; not photo silhouette",
+    "tolerance_mm3": 0.01,
+    "overlaps": [],
+    "passed": true,
+    "nearest_clearances": [
+      {
+        "object": "WaterGunCradle",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "WaterGunCapInsert1",
+        "distance_mm": 0.6999999999999886
+      },
+      {
+        "object": "WaterGunCapInsert2",
+        "distance_mm": 0.6999999999999886
+      },
+      {
+        "object": "WaterGunCapScrew1",
+        "distance_mm": 0.7999999999999972
+      },
+      {
+        "object": "WaterGunCapScrew2",
+        "distance_mm": 0.7999999999999972
+      },
+      {
+        "object": "WaterGunCap1",
+        "distance_mm": 1.0
+      },
+      {
+        "object": "WaterGunCap2",
+        "distance_mm": 1.0
+      },
+      {
+        "object": "WaterGunBaseScrew1",
+        "distance_mm": 1.2000000000000028
+      },
+      {
+        "object": "WaterGunBaseScrew2",
+        "distance_mm": 1.2000000000000028
+      },
+      {
+        "object": "ShoulderRailL",
+        "distance_mm": 4.0
+      },
+      {
+        "object": "WaterGunBaseInsert1",
+        "distance_mm": 4.200000000000003
+      },
+      {
+        "object": "WaterGunBaseInsert2",
+        "distance_mm": 4.200000000000003
+      }
+    ],
+    "removal": {
+      "direction_mm": [
+        0,
+        -150,
+        0
+      ],
+      "method": "continuous union of translated rectangular bound",
+      "removed_first": [
+        "WaterHoseRoute",
+        "WaterGunLeadRoute",
+        "WaterGunLeadClearance",
+        "WaterGunLeadConnector",
+        "WaterGunConnectorService",
+        "WaterGunHoseClearance",
+        "WaterGunHoseService",
+        "WaterGunCap1",
+        "WaterGunUpperPad1",
+        "WaterGunCapScrew1",
+        "WaterGunCap2",
+        "WaterGunUpperPad2",
+        "WaterGunCapScrew2"
+      ],
+      "overlaps": [],
+      "passed": true,
+      "scope": "maximum gun bound with caps and flexible lines removed; screw/tool and cap sweeps checked separately; not a flexible-cable simulation"
+    },
+    "physical_fit_verified": false,
+    "other_service_sweeps": {
+      "method": "axis-aligned bounding box of each complete translation segment vs maximum water gun box",
+      "scenarios": [
+        {
+          "group": "cable_access",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "battery",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "crown",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "electronics",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "Water",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "Bubble",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "arc_left",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "arc_right",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "controller",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "controller_retainer",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "controller_board",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "usb_com",
+          "overlaps": [],
+          "passed": true
+        },
+        {
+          "group": "usb_native",
+          "overlaps": [],
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "scope": "conservative screening of modelled maintenance groups; not hands, tools or flexible leads"
+    }
+  },
   "service_paths": {
-    "method": "8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes move inward then up after tray removal; USB plugs withdraw then lift with crown removed; not continuous sweep or tool/hand access certification",
+    "method": "8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes lift 2 mm, move inward then up after tray removal, with continuous translation sweeps; USB plugs withdraw then lift with crown removed; other groups remain discrete; no tool/hand access certification",
     "scenarios": [
       {
         "group": "cable_access",
@@ -4658,6 +5911,7 @@
         ],
         "boolean_pairs_tested": 3,
         "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       },
       {
@@ -4687,6 +5941,7 @@
         ],
         "boolean_pairs_tested": 22,
         "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       },
       {
@@ -4712,6 +5967,7 @@
         ],
         "boolean_pairs_tested": 15,
         "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       },
       {
@@ -4764,8 +6020,9 @@
           "WaterHoseRoute",
           "ControllerWireRoute"
         ],
-        "boolean_pairs_tested": 91,
+        "boolean_pairs_tested": 89,
         "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       },
       {
@@ -4797,8 +6054,9 @@
           "FillScrewWaterR",
           "FillScrewWaterL"
         ],
-        "boolean_pairs_tested": 34,
+        "boolean_pairs_tested": 19,
         "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       },
       {
@@ -4830,8 +6088,125 @@
           "FillScrewBubbleR",
           "FillScrewBubbleL"
         ],
-        "boolean_pairs_tested": 34,
+        "boolean_pairs_tested": 19,
         "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "water_gun",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            -150.0,
+            0.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "WaterHoseRoute",
+          "WaterGunLeadRoute",
+          "WaterGunLeadConnector",
+          "WaterGunCap1",
+          "WaterGunUpperPad1",
+          "WaterGunCap2",
+          "WaterGunUpperPad2",
+          "WaterGunCapScrew1",
+          "WaterGunCapScrew2"
+        ],
+        "boolean_pairs_tested": 21,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "water_gun_cap_screws",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            20.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [],
+        "boolean_pairs_tested": 22,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "water_gun_caps",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            50.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "WaterGunCapScrew1",
+          "WaterGunCapScrew2"
+        ],
+        "boolean_pairs_tested": 68,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "water_gun_cradle",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            2.0
+          ],
+          [
+            60.0,
+            0.0,
+            2.0
+          ]
+        ],
+        "pose_count": 16,
+        "removed_first": [
+          "WaterHoseRoute",
+          "WaterGunLeadRoute",
+          "WaterGunLeadConnector",
+          "WaterGunCap1",
+          "WaterGunUpperPad1",
+          "WaterGunCap2",
+          "WaterGunUpperPad2",
+          "WaterGunCapScrew1",
+          "WaterGunCapScrew2",
+          "WaterGunBody",
+          "WaterGunInlet",
+          "WaterGunBaseScrew1",
+          "WaterGunBaseScrew2"
+        ],
+        "boolean_pairs_tested": 20,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       },
       {
@@ -4843,9 +6218,14 @@
             0.0
           ],
           [
+            0.0,
+            0.0,
+            2.0
+          ],
+          [
             -24.5,
             0.0,
-            0.0
+            2.0
           ],
           [
             -24.5,
@@ -4853,7 +6233,7 @@
             85.0
           ]
         ],
-        "pose_count": 16,
+        "pose_count": 24,
         "removed_first": [
           "BrowArmorL",
           "BrowArmorR",
@@ -4910,8 +6290,16 @@
           "WaterHoseRoute",
           "ControllerWireRoute"
         ],
-        "boolean_pairs_tested": 13,
+        "boolean_pairs_tested": 21,
         "overlaps": [],
+        "continuous_translation_sweep": {
+          "method": "exact capsule cross-section extruded along Y for each straight translation of the cylindrical envelope",
+          "segment_count": 3,
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "passed": true,
+          "scope": "bare cylindrical envelope after listed prerequisites; excludes mounts, leads and tools"
+        },
         "passed": true
       },
       {
@@ -4923,9 +6311,14 @@
             0.0
           ],
           [
+            0.0,
+            0.0,
+            2.0
+          ],
+          [
             24.5,
             0.0,
-            0.0
+            2.0
           ],
           [
             24.5,
@@ -4933,7 +6326,7 @@
             85.0
           ]
         ],
-        "pose_count": 16,
+        "pose_count": 24,
         "removed_first": [
           "BrowArmorL",
           "BrowArmorR",
@@ -4990,8 +6383,16 @@
           "WaterHoseRoute",
           "ControllerWireRoute"
         ],
-        "boolean_pairs_tested": 13,
+        "boolean_pairs_tested": 21,
         "overlaps": [],
+        "continuous_translation_sweep": {
+          "method": "exact capsule cross-section extruded along Y for each straight translation of the cylindrical envelope",
+          "segment_count": 3,
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "passed": true,
+          "scope": "bare cylindrical envelope after listed prerequisites; excludes mounts, leads and tools"
+        },
         "passed": true
       },
       {
@@ -5044,6 +6445,7 @@
         ],
         "boolean_pairs_tested": 65,
         "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       },
       {
@@ -5094,6 +6496,7 @@
         ],
         "boolean_pairs_tested": 20,
         "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       },
       {
@@ -5145,6 +6548,7 @@
         ],
         "boolean_pairs_tested": 8,
         "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       },
       {
@@ -5198,6 +6602,7 @@
         ],
         "boolean_pairs_tested": 13,
         "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       },
       {
@@ -5251,6 +6656,7 @@
         ],
         "boolean_pairs_tested": 13,
         "overlaps": [],
+        "continuous_translation_sweep": null,
         "passed": true
       }
     ],
@@ -5466,30 +6872,90 @@
   "assembly_paths_verified": false,
   "electrical_verified": false,
   "final_saved_audit": {
-    "native_objects_verified": 251,
+    "native_objects_verified": 281,
     "gui_visibility_verified": true
   },
   "previews_generated": true,
   "files_sha256": {
-    "CyberTrack.FCStd": "f9c3511581010b88c09e9231780cf15d1b5ee5e10a2b862d61fdcd32fa78f941",
-    "CyberTrack.step": "0ebf3e65153670d30b724a5ebf7dc1eefacda6cadec0483556dabaf37d249d5a",
-    "arc-layout.png": "628219db0acefda630cda813300c58eaa0f3b2c5db163e6594b73108e4931c51",
-    "arc-top.png": "beb9b2e2e7a08810e397e02dafb1bf4c19600b64d24d1f846a9275cea764a8d0",
-    "assembly.png": "58a4bed5093399fa524e72546e8b1e555e78132214aef093e23a831969e08fd5",
-    "controller-access.png": "2fb935f795f22a42c9d3dc933ca96bf13135f19931af332343e1f3dc10029f61",
-    "controller-layout.png": "be84c650dddfbfe81cc7da3d8dfc56ad9ec6c407c5c90f16786f752c9c3f1b3f",
-    "controller-service.png": "6388c1abd565f471db2cac8741e6855e6eb85fa0a000e74d535961047f6b11e2",
-    "crown-effects-top.png": "1413f6c87435e352aa112d2cb91026d7e605f8e019867b522187f94fad44483e",
-    "crown-effects.png": "782179efefb7fc7957eb30ac91ebb6ac3f5347776772743eab546d03547bed59",
-    "front.png": "c8cf77ca0fea603777d7ac689b66cdde0f30d8f669a4365dd204e219fd3fe66e",
-    "layout.png": "85291234685c79341be3d845504a712a9202c43588111562c13aac977cf6ec5d",
-    "lower-layout.png": "02f57f3128c3a3f7539bf514b4c96a6955ca6a64573b0647df7a586125c25cc6",
-    "rear-assembly.png": "52ef564835c8f9fe77ae5bb0a5f3fc7bb7f6cca72ed5b94161cc54a14a05ae93",
-    "rear.png": "e5f722806c5316f49dd629942207c5d2d012a12b2f1d214817e1ae49f7adb46d",
-    "right.png": "36cafaf86a766a319d5a2f2d758b14d23c2e8991a793e351c51040c442e63e0b",
-    "routing.png": "8a4c23d7f511cb4d958189cef5a8e17e325aec7f8cd2f85570b4fa7800bb0b9e",
-    "service.png": "7226dc483aac6e42a96f09b82409973483934c0d91dbbf967d2dc9a9b2db0232",
-    "side.png": "13d20254e7d69674c4eb3f00cac45116ebc5a31d05bbc8f9869f78f438c024bf",
-    "top.png": "63780ed21c062b1e81c925caeaea78dfde4c639acb17d4b5890b6c680ae3c7de"
+    "CyberTrack.FCStd": "0463a88a43b51032cff86def1e3edff12fa099f488f70b5844398d2e729a1377",
+    "CyberTrack.step": "833008d8cdacbb999902b1f52c181f4f11426f9493d0bd5b5b6581dd814c4cb3",
+    "arc-layout.png": "1f0252b394b602362fdab5a07a28cddc0e9f21b6ecd21ad81f5b9683219c47ba",
+    "arc-top.png": "6d120e909a01d5984f85aadb64ac316b208137022b2cc68657f5b4825fb74015",
+    "assembly.png": "5f7004a22316d113c11c521d7a413fadd25f7227ecc4aa73bf49849e7f2ff704",
+    "controller-access.png": "42729b47abd3ce988ae26fa7bd55c26a81aed063ebb088bbe4f9d646b8daaeef",
+    "controller-layout.png": "2ad8657bc3aba9a0d364e67b3d6d84d6d88e43281023f8a5c67746985b7a212a",
+    "controller-service.png": "2646b2209921fe5f9045b893e55bc9a719746e202faed145a363ba8b3441691d",
+    "crown-effects-top.png": "1a92f39b01b2cb471b0cfa0e3d5a56e729316c91bbe2d464ae542027a009ab1f",
+    "crown-effects.png": "c6d8fce44ffc5c7b9c62c913d7500c38255b55c6aef9b51907d41cea900d390e",
+    "front.png": "a74adb6ac529f862f1fcf4ce6599399512415933268189a6f803dac1687fed0c",
+    "layout.png": "54017f60254e5faabc35c5047b99c3e51ba88b749162dc727f873efb370096ed",
+    "lower-layout.png": "15f9f1f495a49f7902f6fe4b9ff1e53c67e845ccdff3394ccc3939dad3ecc730",
+    "rear-assembly.png": "ec78508b38b0aee2e5f821f9f71ea03be475a2fbb5db951b7766207e45aafdd9",
+    "rear.png": "91078dd6819d07dc81766de16c5ebc6a006d04f0d6dc8ceaf3629c2ecf2cbc60",
+    "right.png": "2246eadcc86ba8d85176e3dbebdf9d11d351b8ca1e18dcd3db160ad704a54d1b",
+    "routing.png": "6bed9392ce97559999bbd785eaccd41d0a885c48dbcdc5abc5c99eab0a106ae6",
+    "service.png": "6b65817e581ea6b434e1a6e36f974f252380e035adc14715a8bf94ba0bf3ccab",
+    "side.png": "b9da27d49656ec2a365b3012dd178581c099b43a7faf541f42843177695bf6f2",
+    "top.png": "3c63d204dc2d896f8a2e0cdc87f2fff4080937324cf6f81d55a1c199e8c2d2ad",
+    "water-gun-clearance.png": "ea31bc75c0155931050cb20caec00e6b386e0934c0cef068cd3b143e12ae1275",
+    "water-gun-component.png": "af9ded4664c021c4e20a579bc1341ca5ad19560a448f323157e817324c64643b",
+    "water-gun-layout.png": "f668978110a95371f0496a435f83b2d1932462cfa0726931d00d6e1c53b6ae54",
+    "water-gun-mount.png": "9f4b677ecdaccbdfafdbdeda087e805fc0888653d8ec6072b0a1058e1df32cf0",
+    "water-gun-service.png": "129aa02ff631a3877192ec3b6630ef8226f3160744d886fb514d4bf17aea4050",
+    "water-gun-side.png": "d91fa3970d534274975090f3e8ceb204c49587b95f41620340da88c7ac5cfe81",
+    "water-gun-spaces.png": "de389a6cdb5bc1f56eead9a7ac2dd63bd8fbb266c861d4bbaea0bca4325547e5"
+  },
+  "water_gun_mount_baseline_comparison": {
+    "baseline_revision": "0.12",
+    "baseline_native_sha256": "df76b36eab35c4bae66c3eefd0f3781b08fb98c9bc30f2168eff2419fef7a6d4",
+    "unchanged_existing_objects": 246,
+    "changed_existing_objects": [
+      "ShoulderRailL",
+      "WaterPod",
+      "BackpackShell",
+      "WaterHoseRoute",
+      "WaterGunBody",
+      "WaterGunInlet",
+      "WaterGunMaximumEnvelope"
+    ],
+    "added_objects": [
+      "WaterGunBaseInsert1",
+      "WaterGunBaseInsert2",
+      "WaterGunBaseScrew1",
+      "WaterGunBaseScrew2",
+      "WaterGunBaseTool1",
+      "WaterGunBaseTool2",
+      "WaterGunCap1",
+      "WaterGunCap2",
+      "WaterGunCapInsert1",
+      "WaterGunCapInsert2",
+      "WaterGunCapScrew1",
+      "WaterGunCapScrew2",
+      "WaterGunCapTool1",
+      "WaterGunCapTool2",
+      "WaterGunConnectorService",
+      "WaterGunCradle",
+      "WaterGunHoseClearance",
+      "WaterGunHoseService",
+      "WaterGunInnerPad1",
+      "WaterGunInnerPad2",
+      "WaterGunLeadClearance",
+      "WaterGunLeadConnector",
+      "WaterGunLeadGuide",
+      "WaterGunLeadRoute",
+      "WaterGunLowerPad1",
+      "WaterGunLowerPad2",
+      "WaterGunUpperPad1",
+      "WaterGunUpperPad2"
+    ],
+    "removed_objects": [],
+    "independent_component_files_unchanged": {
+      "hardware/components/pulse-water-gun/PulseWaterGun.step": "8272b1d50faaf80385877be8a26b46daf9903958b232dc90c38b9bb849bbe9ca",
+      "hardware/components/pulse-water-gun/PulseWaterGun.FCStd": "f9fe3ccd3cd0188822d739faf8dfcc923b468c5148720f58abe1ecdc8647a4b9",
+      "hardware/components/pulse-water-gun/readback.json": "14f59adf4df41884ff1d613605ba02ed2b276255560a19c4c51d3d1a846e80fb",
+      "hardware/components/pulse-water-gun/PulseWaterGun.20261024-130947.FCBak": "91d6db0b4766af579f46266a826f20e19cef4d9f593f1c2fb0b7b78a9ac0c8e7"
+    },
+    "method": "exact archived BRep bytes and document Placement property equality for unchanged existing objects",
+    "passed": true
   }
 }
