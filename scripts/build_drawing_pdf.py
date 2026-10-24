@@ -30,8 +30,8 @@ for rel,digest in report['files_sha256'].items():
     path=ROOT/rel
     if not path.exists(): path=MODEL/Path(rel).name
     assert sha(path)==digest, f'Stale model artifact: {path}'
-assert report['design_revision']=='0.13', 'Review annotations for a new model revision'
-cad_checks_passed=all(report[key]['passed'] for key in ('collision_check','service_paths','controller_clearance_check','water_gun_check')) and report['water_gun_check']['removal']['passed']
+assert report['design_revision']=='0.18', 'Review annotations for a new model revision'
+cad_checks_passed=all(report[key]['passed'] for key in ('collision_check','service_paths','controller_clearance_check','water_gun_check','bubble_gun_check')) and report['water_gun_check']['removal']['passed']
 assert cad_checks_passed or args.allow_review_conflicts, 'CAD checks failed; use --allow-review-conflicts only for a marked conflict review PDF'
 # Guard dimension callouts that describe named features, not just overall extents.
 expected = {
@@ -45,11 +45,25 @@ expected = {
     'ArcModuleL': [52.75,-66,143.75,78.25,4,169.25],
     'ArcModuleR': [-78.25,-66,143.75,-52.75,4,169.25],
     'WaterGunMaximumEnvelope': [38.4,-129,104.7,76.9,9.5,129.3],
-    'WaterGunCradle': [35.8,-72,100.7,82,26,134],
-    'WaterGunCap1': [38,-67,122.5,83.5,-57,132.3],
+    'BubbleGunInspectionEnvelope': [-72.9,-129,89.55,-37.1,-62,125.75],
+    'BubbleGunMountingTab': [-58,-87,89.55,-52,-62,96.35],
+    'BubbleGunFrontFoot': [-60,-106,89.55,-50,-87,96.35],
     'WaterFillPlug': [-30.8,42.2,124.3,-17.2,55.8,128],
     'WaterFillSeal': [-33,40,127.6,-15,58,128],
 }
+pitch=report['gun_pitch']
+assert pitch['elevation_degrees']==5 and pitch['rotation_about_X_degrees']==-5
+assert report['bubble_gun_layout']['mount']['ring']['one_piece']
+for name in ('WaterGunMaximumEnvelope','BubbleGunInspectionEnvelope','BubbleGunMountingTab','BubbleGunFrontFoot'):
+    kind='water' if name.startswith('Water') else 'bubble'
+    pivot=pitch['pivot_world_mm'][kind];offset=pitch['translation_world_mm'][kind]
+    b=expected[name];angle=math.radians(-5);points=[]
+    for x in (b[0],b[3]):
+        for y in (b[1],b[4]):
+            for z in (b[2],b[5]):
+                dy=y-pivot[1];dz=z-pivot[2]
+                points.append((x+offset[0],pivot[1]+dy*math.cos(angle)-dz*math.sin(angle)+offset[1],pivot[2]+dy*math.sin(angle)+dz*math.cos(angle)+offset[2]))
+    expected[name]=[min(v[i] for v in points) for i in range(3)]+[max(v[i] for v in points) for i in range(3)]
 for name, values in expected.items():
     assert all(abs(a-b)<1e-5 for a,b in zip(meta['objects'][name]['bbox'],values)), name
 for prefix, xs, ys in [('BatteryScrew',[-63.5,63.5],[-85,-34]),
@@ -67,7 +81,7 @@ pdfmetrics.registerFont(TTFont('ZHB','/System/Library/Fonts/STHeiti Medium.ttc',
 U=72/25.4
 INK='#1E303B'; MUTED='#536673'; ACCENT='#DF632B'; PALE='#EAF0F2'; BLUE='#287E96'
 c=canvas.Canvas(str(PDF),pagesize=(420*U,297*U),pageCompression=1)
-c.setTitle('CyberTrack 0.13 模型与装配图纸')
+c.setTitle('CyberTrack 0.18 模型与装配图纸')
 c.setAuthor('CyberTrack')
 c.setSubject('A3 design review drawings; dimensions in mm; not manufacturing release')
 page=0
@@ -97,14 +111,14 @@ def header(title,subtitle):
     page+=1
     c.setFillColor(INK);c.rect(0,278*U,420*U,19*U,fill=1,stroke=0)
     text(14,285,'CYBERTRACK',18,'#FFFFFF',True)
-    text(405,285,f'CT-13 / {page:02d}',11,'#FFFFFF',align='right')
+    text(405,285,f'CT-18 / {page:02d}',11,'#FFFFFF',align='right')
     text(14,265,title,21,bold=True);text(14,256,subtitle,10,MUTED)
     if not cad_checks_passed:
         text(405,244,'尺寸修订待适配：静态／拆卸／USB 空间未通过',10,ACCENT,True,align='right')
     line(14,250,406,250,'#CAD5DB',.6)
     line(14,20,406,20,'#CAD5DB',.6)
-    text(14,13,'模型与装配评审图 | Rev 0.13 | 图纸更新 2026-10-24 | 单位：mm',9,MUTED)
-    text(406,13,f'未制造放行 · A3 横向 · {page} / 18',9,MUTED,align='right')
+    text(14,13,'模型与装配评审图 | Rev 0.18 | 图纸更新 2026-10-24 | 单位：mm',9,MUTED)
+    text(406,13,f'未制造放行 · A3 横向 · {page} / 20',9,MUTED,align='right')
 def end():c.showPage()
 def title(x,y,s,sub=''):
     text(x,y,s,12,bold=True)
@@ -159,6 +173,18 @@ def leader(point,x,y,label):
 def badge(point,n):
     x,y=point;c.setFillColor(ACCENT);c.circle(x*U,y*U,3.4*U,fill=1,stroke=0)
     text(x,y-1.2,str(n),10,'#FFFFFF',True,'center')
+def part_label(mapping, pixel, x, y, label, align='left'):
+    """Named leader anchored to a pixel in the hash-verified CAD preview."""
+    size=8.5
+    width=pdfmetrics.stringWidth(label,'ZH',size)/U
+    left=x-width if align=='right' else x
+    px,py=mapping(*pixel)
+    edge=left if px<left else left+width if px>left+width else max(left,min(px,left+width))
+    line(px,py,edge,y+1,ACCENT,.5)
+    c.setFillColor(ACCENT);c.circle(px*U,py*U,.6*U,fill=1,stroke=0)
+    box(left-1,y-1,width+2,4.5,'#FFFFFF')
+    text(left,y,label,size,INK)
+
 def bbox(name):return meta['objects'][name]['bbox']
 def dim(name,axis):
     b=bbox(name);return b[axis+3]-b[axis]
@@ -172,7 +198,7 @@ box(14,29,392,33,PALE)
 text(20,51,' × '.join(f(v) for v in report['assembly_size_xyz_mm']),20,bold=True)
 text(20,37,'整机宽 × 长 × 高；模型几何外包络',9,MUTED)
 text(143,55,'图纸内容',11,bold=True)
-para(143,48,'02 彩色正背视图　03 彩色左右侧视　04 正背尺寸　05 左右尺寸\n06 俯视 / 底视　07 电源　08 头舱　09 补液　10 爆炸　11 走线　12 双模块预装　13 顶部效果位\n14 主控布局　15 主控拆装与 USB / 天线　16 实测水枪　17 水枪固定与拆装　18 线管预留',250,9,6)
+para(143,48,'02 彩色正背视图　03 彩色左右侧视　04 正背尺寸　05 左右尺寸\n06 俯视 / 底视　07 电源　08 头舱　09 补液　10 爆炸　11 走线　12 双模块预装　13 顶部效果位\n14 主控布局　15 主控拆装与 USB / 天线　16 实测水枪　17 水枪固定与拆装　18 线管预留　19 前置泡泡固定　20 泡泡拆装与线管',250,9,6)
 end()
 
 header('正面与背面 · 彩色外观','当前保存模型的正交渲染图，用于查看装甲层次、配色和前后造型；不是实物照片，尺寸见第 4 页。')
@@ -180,8 +206,8 @@ picture('front.png',20,65,180,174)
 picture('rear.png',220,65,180,174)
 text(110,54,'正面 / 沿 +Y 观察',12,bold=True,align='center')
 text(310,54,'背面 / 沿 -Y 观察',12,bold=True,align='center')
-text(110,42,'前脸、颈架左侧水枪与低位电源前舱',10,MUTED,align='center')
-text(310,42,'后脑装甲、双液体背包与后向泡泡出口',10,MUTED,align='center')
+text(110,42,'正面看左泡泡、右水枪；低位电源前舱',10,MUTED,align='center')
+text(310,42,'后脑装甲、双液体背包与液管通孔',10,MUTED,align='center')
 end()
 
 header('左侧与右侧 · 彩色外观','当前保存模型的正交渲染图，展示头舱、固定颈架、底座与履带之间的关系；尺寸见第 5 页。')
@@ -210,16 +236,16 @@ para(247,56,'坐标：+X 向左，+Y 向后，+Z 向上。\nZ=0 为当前履带�
 end()
 
 header('左右侧视 · 布局比例','保持前下方平放电源，头部与背包的外形比例沿用当前模型。')
-p,b=drawing('side',110,157,2/3)
-title(28,239,'左侧视图','沿 -X 观察；前方在左；比例 1:1.5')
+p,b=drawing('side',110,157,.5)
+title(28,239,'左侧视图','沿 -X 观察；前方在左；比例 1:2')
 hdim(p,b[0],b[2],b[1],b[1],b[1]-16,f(b[2]-b[0]))
 vdim(p,b[1],b[3],b[2],b[2],b[2]+15,f(b[3]-b[1]))
 # Exact allocated battery silhouette, dashed because it is inside the shell.
 ps=bbox('PowerBank');pts=[p(ps[1],ps[2]),p(ps[4],ps[2]),p(ps[4],ps[5]),p(ps[1],ps[5])]
 for a,bb in zip(pts,pts[1:]+pts[:1]):line(*a,*bb,ACCENT,.65,[3,2])
 leader(p(-60,49),35,82,'充电宝低位包络（虚线）')
-p,b=drawing('right',312,157,2/3)
-title(228,239,'右侧视图','沿 +X 观察；前方在右；比例 1:1.5')
+p,b=drawing('right',312,157,.5)
+title(228,239,'右侧视图','沿 +X 观察；前方在右；比例 1:2')
 hdim(p,b[0],b[2],b[1],b[1],b[1]-15,f(b[2]-b[0]))
 vdim(p,b[1],b[3],b[2],b[2],b[2]+15,f(b[3]-b[1]))
 box(14,29,392,35,PALE)
@@ -228,12 +254,12 @@ para(278,53,'头部壳体最大宽 164。\n底部前舱下部宽 132。\n全图�
 end()
 
 header('俯视与底视 · 装配位置','六向视图采用相同坐标基准；俯视与底视的左右方向不同，前方均位于图面下方。')
-p,b=drawing('top',110,159,2/3)
-title(28,239,'俯视图','沿 -Z 观察；+X 在右；比例 1:1.5')
+p,b=drawing('top',110,159,.5)
+title(28,239,'俯视图','沿 -Z 观察；+X 在右；比例 1:2')
 hdim(p,b[0],b[2],b[1],b[1],b[1]-15,f(b[2]-b[0]))
 vdim(p,b[1],b[3],b[2],b[2],b[2]+15,f(b[3]-b[1]))
-p,b=drawing('bottom',312,159,2/3)
-title(230,239,'底视图','沿 +Z 观察；+X 在左；比例 1:1.5')
+p,b=drawing('bottom',312,159,.5)
+title(230,239,'底视图','沿 +Z 观察；+X 在左；比例 1:2')
 hdim(p,b[0],b[2],b[1],b[1],b[1]-15,f(b[2]-b[0]))
 vdim(p,b[1],b[3],b[2],b[2],b[2]+15,f(b[3]-b[1]))
 box(14,29,392,35,PALE)
@@ -299,14 +325,28 @@ text(25,29,'局部侧投影：比例 1.7:1；各零件保持原形，分解间�
 end()
 
 header('总装爆炸与维护分组','按当前模型的维护组件分解；螺钉与柔性路线在主图中隐藏，以突出装配层次。')
-mappt=picture('service.png',15,28,240,214)
-for n,px,py in [(1,750,270),(2,745,457),(3,984,432),(4,710,955),(5,650,535),(6,840,700)]:badge(mappt(px,py),n)
-items=[('01 整体冠盖','4 颗紧固；上提 65。顶甲、效果护框与标识、前后眉甲随盖移动。'),('02 电子 / 音频托板','4 颗紧固；断开线管后上提 85。图中仅错开 35，以便看清层次。'),('03 两个补液盖组','各 2 颗紧固；上 6、后 12、再上 34。左图一侧盖被部分遮挡。'),('04 电源 / 托盖 / 拉带','4 颗紧固；先拆底部插头小盖并拔线，再托住整组下移 60。'),('05 固定头舱 / 颈架 / 底座','保持组装；履带和驱动来源部件不在本次维护爆炸中分解。'),('06 拆出水枪','图中向前错开 45；断开线管、侧拆两道压盖后前抽 150；支架与工具空间见第 17–18 页。')]
+mappt=picture('service.png',40,36,195,200)
+for pixel,x,y,label,align in [
+    ((850,315),19,236,'整体冠盖','left'),
+    ((797,462),19,214,'电子／音频托板组','left'),
+    ((1039,437),258,229,'补液盖组','right'),
+    ((507,541),19,190,'泡泡枪主体','left'),
+    ((575,621),19,165,'整体圆环／底槽','left'),
+    ((786,718),19,137,'水枪主体','left'),
+    ((1002,700),258,148,'水枪侧拆压盖','right'),
+    ((767,556),258,193,'固定头舱','right'),
+    ((742,643),258,171,'固定颈架','right'),
+    ((947,524),258,210,'电弧模块占位','right'),
+    ((1070,872),258,108,'履带动力组件','right'),
+    ((733,929),19,80,'充电宝','left'),
+    ((844,1006),19,44,'电源托盖／拉带','left')]:
+    part_label(mappt,pixel,x,y,label,align)
+items=[('01 整体冠盖','4 颗紧固；上提 65。顶甲、效果护框与标识、前后眉甲随盖移动。'),('02 电子 / 音频托板','4 颗紧固；断开线管后上提 85。图中仅错开 35，以便看清层次。'),('03 两个补液盖组','各 2 颗紧固；上 6、后 12、再上 34。左图一侧盖被部分遮挡。'),('04 电源 / 托盖 / 拉带','4 颗紧固；先拆底部插头小盖并拔线，再托住整组下移 60。'),('05 固定头舱 / 颈架 / 底座','保持组装；履带和驱动来源部件不在本次维护爆炸中分解。'),('06 水枪与泡泡枪','水枪沿枪轴前抽；泡泡枪抬尾后退脱环、侧移取出。固定与拆装详见第17–20页。')]
 y=236
 for heading,body in items:
     text(268,y,heading,11,bold=True);y=para(268,y-8,body,132,9,5)-8
 para(268,64,'电弧模块仅向内错开显示；取出前须先移去托板，详见第 12 页。',132,9,6)
-para(268,44,'原 24 处 M2.5 级占位保留，另增水枪基座 2、压盖 2 处 M3 级候选。共 28 处；无螺纹，采购长度、预紧及材料未定。',132,8,5)
+para(268,44,'原24处M2.5、水枪4处M3级候选保留，泡泡枪仅基座2处，共30处；整体前环无螺钉，采购长度与预紧未定。',132,8,5)
 end()
 
 header('内部路线、装配顺序与验证边界','黄色为电源线 / 插头包络；青色为喷水软管路线。另增主控 Ø3 尾线候选；路线均为设计分配，不是完整接线或已验收液路。')
@@ -317,7 +357,7 @@ y=238
 for h,s in [('装配次序','动力与底座 → 电源托盖和插头检修 → 冠盖定位与设备托板 → 两液体舱单独试验 → 布线后复查维护动作。'),('当前 CAD 证据',f"{len(report['objects'])} 个几何对象回读有效；{report['collision_check']['boolean_pairs_tested']} 对布尔检查发现 {len(report['collision_check']['overlaps'])} 对超阈值重叠；{len(report['service_paths']['scenarios'])} 组维护动作共 {sum(r['pose_count'] for r in report['service_paths']['scenarios'])} 个离散姿态，{sum(not r['passed'] for r in report['service_paths']['scenarios'])} 组未通过。"),('尺寸与图纸等级','蓝色尺寸为当前 CAD 设计值；充电宝 120 × 73 × 31.5 为用户提供。尺寸不含制造公差。未实测接口与紧固件只用于结构评审。'),('尚待实物确认','端口位置、手指与工具空间、连续拆卸路径、线管弯曲、真实设备固定、承载、密封排液和供电。未通过制造、电气或儿童使用验收。')]:
     text(235,y,h,12,bold=True);y=para(235,y-8,s,167,10,6)-9
 box(14,25,392,16,PALE)
-text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及全部 25 张预览图哈希。',9)
+text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及全部 32 张预览图哈希。',9)
 text(20,29,'SHA-256：'+meta['source_sha256'],8,MUTED)
 end()
 header('双电弧模块 · 头舱预装包络','按用户指定的暂定外形：2 × Ø25.5 × 70 mm；橙色圆柱仅代表机械占位，不是实测或通电集成。')
@@ -360,7 +400,14 @@ para(21,80,'实测总包络：X=-39.6…24，Y=-23.1…5.1，Z=163.6…176.8；�
 para(21,54,'小托架平面 61.4 × 47、基础板厚 2，天线端悬出；主托板后缘局部延至 Y=17，小托架支柱原位不动；大托板四孔已改为 X±49.5。\nPCB 层高、针排条带、母座连续槽和插接高度均为设计假设；不能按简化槽直接加工或认定触点适配。\n原电子大占位已拆分：前上方另留 70 × 25 × 13 的待定区域，未证明驱动、升压及开关板全部可装入。',375,9,7)
 end()
 header('主控拆装、USB 插拔与天线预留','仅表达机械候选；USB 调试采用开冠盖方式，未增加外壳开口，也不表示两口可同时供电。')
-picture('controller-service.png',14,125,190,114)
+mappt=picture('controller-service.png',36,128,146,108)
+for pixel,x,y,label,align in [
+    ((499,306),17,231,'防脱压架','left'),
+    ((830,515),202,211,'ESP32-S3 板卡','right'),
+    ((584,834),17,184,'双排母座','left'),
+    ((934,980),202,147,'主控小托架','right'),
+    ((398,841),17,151,'托架紧固螺钉','left')]:
+    part_label(mappt,pixel,x,y,label,align)
 text(109,116,'局部分解：板卡上移 20、压架上移 40',10,bold=True,align='center')
 picture('controller-access.png',213,125,193,114)
 text(310,116,'黄色：开盖 USB 服务空间；青色：天线审查区',10,bold=True,align='center')
@@ -375,21 +422,29 @@ header('拆出水枪 · 实测尺寸与候选布局','长 138.5、最粗处宽 3
 picture('water-gun-component.png',14,140,185,99)
 picture('water-gun-layout.png',208,117,198,125)
 text(106,130,'独立总成 / 总尺寸实测，分段形状假设',10,bold=True,align='center')
-text(307,106,'头舱下方、颈架左侧 / 喷水朝 -Y',10,bold=True,align='center')
-para(20,114,'放置基准：喷嘴端中心 (55, -129, 117)。\n长度沿 +Y；宽度沿 X，厚度沿 Z，接管朝 +X。\n完整最大尺寸包络：X38.4…76.9、Y-129…9.5、Z104.7…129.3。',180,10,7)
+text(307,106,'头舱下方、颈架左侧 / 前向上仰 5°',10,bold=True,align='center')
+para(20,114,'0.18 喷嘴端中心 (55, -137.16, 122.61)。\n两枪均上仰5°；水枪旋转后前移10、下移4，避让头壳与底座。\n原完整尺寸包络随枪体刚性变换；接管仍朝+X。',180,10,7)
 w=report['water_gun_check']
 nearest=w['nearest_clearances'][0]
 box(14,28,392,55,PALE)
-para(21,72,f"原前脸位置两种朝向均与头壳、托板、音频或左电弧模块相交；现将水枪下移至颈架侧面，其他设备位置不动。\n当前完整长方体包络与已建模实体、管线及 USB / 天线审查区无超阈值重叠；最小几何距离 {nearest['distance_mm']:.2f} mm（{nearest['object']}，不含有意接触的软垫和接管面）。\n断开软管及尾线、拆去两道压盖后，沿 -Y 抽出 150 mm 的完整包络连续扫掠通过。",375,9,7)
+para(21,72,f"0.18 两枪上仰5°，重建肩梁倾斜承托与同轴紧固孔，并调整软管路线。\n当前完整长方体包络与已建模实体、管线及 USB / 天线审查区无超阈值重叠；最小几何距离 {nearest['distance_mm']:.2f} mm（{nearest['object']}，不含有意接触的软垫和接管面）。\n断开软管及尾线、拆去两道压盖后，沿枪轴前方抽出150 mm（上仰5°）的完整包络连续扫掠通过。",375,9,7)
 para(21,45,'0.13 已新增托架、软垫、压盖及线管审查区；夹持面、材料、管径、真实弯曲半径和长度端点仍待核实。\n矩形包络沿全长检查，不利用照片缩径减小占用；名义垫片接触不等于预紧、摩擦保持力或实物固定通过。',375,9,6)
 end()
 header('水枪固定托架 · 侧拆压盖与前抽机构','固定位置与材料尺寸均为候选；不在水枪原壳钻孔，不将照片可见孔当作固定孔。')
 picture('water-gun-mount.png',14,123,193,119)
-picture('water-gun-service.png',213,123,193,119)
+mappt=picture('water-gun-service.png',222,140,174,85)
+for pixel,x,y,label,align in [
+    ((549,546),215,235,'水枪主体','left'),
+    ((842,480),311,242,'固定底托','left'),
+    ((1000,559),312,132,'压盖＋上软垫×2','left'),
+    ((1059,615),405,145,'压盖螺钉×2','right'),
+    ((1060,428),405,221,'尾线导向鞍','right'),
+    ((1122,440),405,238,'尾线插头占位','right')]:
+    part_label(mappt,pixel,x,y,label,align)
 text(110,113,'托架、双压盖及尾线导向鞍',11,bold=True,align='center')
 text(309,113,'压盖向外抽，枪体向前抽 / 分解示意',11,bold=True,align='center')
-para(20,99,'托架底板 Z100.7…103.7，夹持带中心 Y=-62 / -10。\n原左肩梁新增两处 Ø10 一体立柱；基座孔 X42.5、Y=-60 / -18。\n2 颗 M3 级基座紧固 + 2 颗 M3 级压盖横向紧固；采购规格未定。\n上、下软垫各 1，内侧垫 0.6；名义接触，未定义压缩率。',183,9,6)
-para(220,99,'拆装顺序\n1. 断电排液，断开水管和尾线插头，松开导向鞍的待选扎带。\n2. 外侧卸两颗压盖螺钉，沿 +X 退出 20。\n3. 两道压盖连上垫沿 +X 抽出 50，再将枪体沿 -Y 抽出 150。\n4. 若需拆托架，用短臂内六角拆基座两螺钉；上提 2，再外移 60。',180,9,6)
+para(20,99,'以下为上仰前的模块坐标，整体旋转-5°并前移10、下移4：\n托架底板Z100.7…103.7，夹持带Y=-62 / -10。\n原左肩梁新增两处 Ø10 一体立柱；基座孔 X42.5、Y=-60 / -18。\n2 颗 M3 级基座紧固 + 2 颗 M3 级压盖横向紧固；采购规格未定。\n上、下软垫各 1，内侧垫 0.6；名义接触，未定义压缩率。',183,9,6)
+para(220,99,'拆装顺序\n1. 断电排液，断开水管和尾线插头，松开导向鞍的待选扎带。\n2. 外侧卸两颗压盖螺钉，沿 +X 退出 20。\n3. 两道压盖连上垫沿+X抽50，再沿枪轴前方抽出150。\n4. 卸基座两螺钉；沿倾斜底板法向抬2，再外移60。',180,9,6)
 box(14,27,392,32,PALE)
 para(21,49,'压盖所带上垫的抽出通道与外侧壁名义间隙 0.2；真实尺寸公差、垫片膨胀、打印变形及夹紧预载未计入。\n后止挡与枪尾名义间隙 0.5；前向保持依靠压盖软垫摩擦，须实测夹紧力、脉冲载荷和反复拆装后的防滑。\n螺钉、压盖与上垫连续扫掠，以及空托架分段保守扫掠通过；不代表手部空间、强度或制造放行。',375,9,7)
 end()
@@ -397,10 +452,42 @@ header('水管与尾部引线 · 路线及操作预留','青色为水管预留�
 picture('water-gun-spaces.png',14,83,228,155)
 text(126,72,'半透明体为审查空间，实体接触按操作步骤区分',10,bold=True,align='center')
 para(251,236,'水管\n候选外径 4，中心线转弯半径 8；另留 Ø8 路线审查空间。\n湿舱通过孔候选 Ø9；侧接管沿 +X 拔出 30，操作包络 Ø16。\n路线从颈架前下方横穿，避开托架和停止按钮。',151,10,7)
-para(251,174,'尾部引线\n枪尾 Y=9.5，候选 Ø3 线束向后转至外侧；中心弯曲半径 8，路线预留 Ø8。\n插头候选 16×10×10，沿 +X 拔出 16；导向鞍开口可放线，扎带与抗拉方式待选。',151,10,7)
+para(251,174,'尾部引线\n模块坐标枪尾Y=9.5；Ø3线束随枪体倾斜后转至外侧；中心弯曲半径 8，路线预留 Ø8。\n插头候选 16×10×10，沿 +X 拔出 16；导向鞍开口可放线，扎带与抗拉方式待选。',151,10,7)
 para(251,112,'工具\n压盖螺钉：外侧 Ø10×30 直线批头空间。\n基座螺钉：先取出枪体，再用朝前操作的短臂内六角；端部 Ø3、杆部 Ø6、前伸臂 40。\n仅检查工具杆包络，不包括手掌与转动把手。',151,9,6)
 box(14,27,392,31,PALE)
 para(21,48,'所有线管与工具预留均按其实际拆装前置条件检查。尾线预留在导向鞍处允许有意的夹持区域重叠，实际线束仍单独检查。\n软管压力、最小允许弯曲半径、线尾抗拉、插头保持力和带液工作未测；先核实实物并制作夹持试块，再确定材料与加工公差。',375,9,7)
+end()
+header('前置双枪 · 上仰5°与整体圆环','正面看左泡泡、右水枪；5°为设计候选。新薄片部件独立保存，原始模型与照片保留。')
+picture('front.png',14,126,190,114)
+picture('bubble-gun-mount.png',213,126,193,114)
+text(109,115,'双枪微微上仰 / 水枪前移10、下移4',11,bold=True,align='center')
+text(309,115,'前圆环无分缝 / 后部两段底槽',11,bold=True,align='center')
+para(21,102,'泡泡枪口中心(-55,-126.65,115.75)。\n水枪口中心(55,-137.16,122.61)；两轴同为上仰5°。\n泡泡平放基准：圆底离平面4.7，薄片6×25×6.8。\n31.5+4.7=36.2与原总高35.8的0.4差异仍待核对。',184,9,7)
+para(220,102,'整体环孔34／外径39／厚3；径向间隙1.25。\n无前环螺钉；仅2颗M3级基座紧固候选。\n底槽名义后6宽×25长、前10宽，净宽6.4／10.4。\n前段长19为假设；槽端导入斜面、前后止挡与0.6底垫。',181,9,7)
+box(14,28,392,36,PALE)
+para(21,54,'用户拟用热熔胶／胶水辅助固定；圆环、阶梯槽与前后止挡定位。胶材、用量、粘接兼容性及保持力未确定。\n胶点需可接近清除，避开内部运动件；拆卸先清胶。前止挡依赖假设的前底轮廓，实物试配后再确定。\n5°不代表允许工作倾角；上仰时出泡、喷水、滴液／倒流、固定保持和真实拆装仍需实物验证。',375,9,7)
+end()
+header('泡泡枪拆装 · 整体环穿装与线管空间','主体含转动步骤，采用102个离散姿态检查；不宣称转动段已做连续扫掠。尺寸以模块自身坐标表达。')
+mappt=picture('bubble-gun-service.png',32,143,155,85)
+for pixel,x,y,label,align in [
+    ((475,457),17,237,'前筒壳体','left'),
+    ((377,535),17,218,'出泡转轮','left'),
+    ((598,433),201,238,'电机示意','right'),
+    ((713,474),201,222,'后部壳体','right'),
+    ((620,540),201,205,'后底薄片','right'),
+    ((560,578),17,197,'前底承托部（假设）','left'),
+    ((730,750),17,173,'整体前圆环','left'),
+    ((1039,832),201,183,'两段固定槽／止挡','right'),
+    ((1200,870),201,147,'支架底座','right'),
+    ((1115,910),201,132,'基座紧固／嵌件','right')]:
+    part_label(mappt,pixel,x,y,label,align)
+picture('bubble-gun-spaces.png',213,130,193,110)
+text(110,119,'抬尾15°，后退脱环，再向外取出',11,bold=True,align='center')
+text(310,119,'线管和基座工具预留 / 非实际接线',11,bold=True,align='center')
+para(21,105,'1 断电排液、清除辅助胶，先拔插头移开尾线，再断管。\n2 围绕圆环中心抬尾15°，沿模块后方退10，脱离圆环。\n3 沿模块上方抬3，再向车体右侧(-X)移90；安装反向。\n4 空托架卸2颗基座螺钉，沿底板法向抬6、向-X移90。',183,9,7)
+para(220,105,'泡泡管Ø4、尾线Ø3，均按中心R8、另留Ø8空间。\n接管沿模块后方拔25；16×10×10插头向-X拔16。\n前圆环为整体，不设分缝、衬垫或前环工具空间。\n基座工具在主体取出后使用；不包含整手与把手。',181,9,7)
+box(14,27,392,36,PALE)
+para(21,53,'主体每0.5°转动、每0.5后退／抬升、每2侧移检查示意实体；实物外形和采样之间的连续空间尚未证明。\n空托架、基座螺钉另做保守连续扫掠；前向Ø36×50通道随枪轴上仰。停止按钮保留前方Ø12指端空间。\n宽度、薄片偏置、前槽长度与前底轮廓待实测；胶粘保持、线管防磨、防拉脱、排液及制造均未验收。',375,9,7)
 end()
 c.save()
 print(PDF)
