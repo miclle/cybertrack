@@ -22,6 +22,21 @@ static char reply[CT_RPC_REPLY_CAP];
 static size_t rejections, recovery_cuts, write_cuts, log_cuts, anchor_cuts, open_cuts, cycles, runtime_cases;
 static size_t open_log_cuts, preparation_cycles, bridge_recovery_retries;
 static unsigned char retained_history[CT_REPLAY_BYTES];
+static uint64_t le64(const unsigned char *p)
+{
+    uint64_t v=0; for(unsigned i=0;i<8;++i) v|=(uint64_t)p[i]<<(8*i); return v;
+}
+static ct_replay_anchor_record recovery_from;
+static bool retained_evidence(const ct_test_log *before)
+{
+    for (unsigned i = 0; i < 2; ++i) {
+        const unsigned char *p = before->durable[i];
+        if (le64(p+8) == recovery_from.epoch && le64(p+16) == recovery_from.backend_id &&
+            le64(p+24) == recovery_from.revision && le64(p+32) == recovery_from.session)
+            return !memcmp(p, journal.durable[i], CT_REPLAY_LOG_SLOT_BYTES);
+    }
+    return false;
+}
 static void off(void)
 {
     CHECK(!control.output.water && !control.output.bubbles && !control.output.left_level &&
@@ -81,6 +96,7 @@ static void prepare(void)
 }
 static ct_replay_recovery_result recover(unsigned source)
 {
+    recovery_from = anchor.durable;
     return ct_replay_store_recover_log(&stores[source], &log_store, ct_test_anchor_io(&anchor),
                                       source + 1, &stores[1-source], 2-source);
 }
@@ -97,7 +113,7 @@ static void missing_primary_and_gates(void)
     prepare(); lose_primary(0); uint64_t session = anchor.durable.session;
     saved_journal = journal; size_t reads = disks[0].calls;
     CHECK(recover(0) == CT_RECOVERY_OK); CHECK(reads == disks[0].calls);
-    CHECK(!memcmp(journal.durable, saved_journal.durable, sizeof(journal.durable))); off();
+    CHECK(retained_evidence(&saved_journal)); off();
     CHECK(boot(1) && protocol.session > session); action(90, 90, NULL);
     enable(); retired(3); action(6, 30, "accepted"); ct_stop(&control);
     CHECK(boot(1)); enable(); action(7, 30, "-32002");
@@ -171,7 +187,7 @@ static void interrupted_recovery(void)
             disks[1].fail_at=disks[1].calls+op; disks[1].cut_bytes=edges[b];
             disks[1].persist_partial=durable != 0;
             CHECK(recover(0)==CT_RECOVERY_DESTINATION_UNAVAILABLE);
-            CHECK(!memcmp(journal.durable,saved_journal.durable,sizeof(journal.durable)));
+            CHECK(retained_evidence(&saved_journal));
             CHECK(!boot(1)); enable(); action(4,20,"-32005"); ct_protocol_close(&protocol,0);
             CHECK(!reload(0)); blank(1); CHECK(recover(0)==CT_RECOVERY_OK);
             CHECK(boot(1)); enable(); retired(4); ++recovery_cuts;
@@ -240,12 +256,12 @@ static void repeated_preparation_recovery(void)
             disks[1-selected].cut_bytes = CT_REPLAY_SLOT_BYTES;
             disks[1-selected].persist_partial = true;
             CHECK(recover(selected) == CT_RECOVERY_DESTINATION_UNAVAILABLE);
-            CHECK(!memcmp(journal.durable, saved_journal.durable, sizeof(journal.durable)));
+            CHECK(retained_evidence(&saved_journal));
             CHECK(!reload(selected)); blank(1-selected); ++bridge_recovery_retries;
         }
         CHECK(recover(selected) == CT_RECOVERY_OK);
         CHECK(!memcmp(stores[1-selected].filter, retained_history, sizeof(retained_history)));
-        CHECK(!memcmp(journal.durable, saved_journal.durable, sizeof(journal.durable)));
+        CHECK(retained_evidence(&saved_journal));
         CHECK(!boot(selected)); enable(); action(50000+i, 20, "-32005");
         selected = 1-selected; CHECK(boot(selected)); CHECK(protocol.session > before.session);
         CHECK(!control.enable_generation && !protocol.accepted_sequence); off();
@@ -271,10 +287,6 @@ static bool board_off(void *ctx) { (void)ctx; board.output=(ct_output){0}; retur
 static bool board_ok(void *ctx) { (void)ctx; return true; }
 static bool board_clock(void *ctx,uint64_t *now) { (void)ctx; *now=board.now; return true; }
 static bool board_inputs(void *ctx,ct_local_inputs *out) { (void)ctx; *out=board.inputs; return true; }
-static uint64_t le64(const unsigned char *p)
-{
-    uint64_t v=0; for(unsigned i=0;i<8;++i) v|=(uint64_t)p[i]<<(8*i); return v;
-}
 static bool board_output(void *ctx,const ct_output *out)
 {
     (void)ctx; CHECK(anchor.durable.revision==stores[0].revision && anchor.durable.backend_id==1);

@@ -49,14 +49,14 @@ bool ct_replay_log_init(ct_replay_log *log, ct_replay_io io)
  * slot, irrespective of revision parity; a candidate never overwrites it.
  * Read both slots before mutation and reject ambiguous matching evidence. */
 static bool find_selected(ct_replay_log *log, ct_replay_anchor_record r,
-                          unsigned *selected, unsigned char *filter)
+                          unsigned *selected, unsigned char *filter, const unsigned char *expected)
 {
     *selected = 2;
     for (unsigned slot = 0; slot < 2; ++slot) {
         if (!log->io.read(log->io.context, slot, 0, log->scratch, sizeof(log->scratch)))
             goto failure;
         if (!matches(log->scratch, r)) continue;
-        if (*selected != 2) goto failure;
+        if (*selected != 2 || (expected && memcmp(log->scratch + FILTER_OFFSET, expected, CT_REPLAY_BYTES))) goto failure;
         *selected = slot;
         if (filter) memcpy(filter, log->scratch + FILTER_OFFSET, CT_REPLAY_BYTES);
     }
@@ -69,7 +69,7 @@ bool ct_replay_log_read(ct_replay_log *log, ct_replay_anchor_record r, unsigned 
 {
     if (!log || !log->ready || !filter || !record_valid(r)) return false;
     unsigned selected;
-    if (!find_selected(log, r, &selected, filter)) return false;
+    if (!find_selected(log, r, &selected, filter, NULL)) return false;
     if (selected == 2) { log->ready = false; return false; }
     return true;
 }
@@ -77,11 +77,15 @@ bool ct_replay_log_prepare(ct_replay_log *log, ct_replay_anchor_record current,
                            ct_replay_anchor_record next, const unsigned char *filter)
 {
     if (!log || !log->ready || !filter || !record_valid(current) || !record_valid(next)) return false;
+    bool seed = current.epoch == next.epoch && current.backend_id == next.backend_id &&
+                current.revision == next.revision && current.session == next.session;
     unsigned selected;
-    if (!find_selected(log, current, &selected, NULL)) return false;
-    /* First attachment/migration may have no current log yet. Its full primary
-     * is still authoritative; after this bridge is selected, exact evidence
-     * is maintained throughout every subsequent preparation. */
+    if (!find_selected(log, current, &selected, NULL, seed ? filter : NULL)) return false;
+    /* Attaching/enrolling never creates a second matching record. An existing
+     * seed must contain exactly the attested full history, not just its key. */
+    if (seed && selected != 2) return true;
+    /* A seed imports attested primary history. Selection transitions preserve
+     * the old selected record while preparing the new target's full evidence. */
     unsigned slot = selected == 2 ? 0 : 1 - selected;
     unsigned char *p = log->scratch;
     memcpy(p, magic, 8); put64(p+8, next.epoch); put64(p+16, next.backend_id);
