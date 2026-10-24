@@ -55,28 +55,13 @@
     },
     {
       "object": "UltrasonicRingL",
-      "category": "exterior",
-      "distance_mm": 8.25
-    },
-    {
-      "object": "UltrasonicFaceL",
-      "category": "exterior",
+      "category": "component",
       "distance_mm": 8.25
     },
     {
       "object": "UltrasonicRingR",
-      "category": "exterior",
+      "category": "component",
       "distance_mm": 8.25
-    },
-    {
-      "object": "UltrasonicFaceR",
-      "category": "exterior",
-      "distance_mm": 8.25
-    },
-    {
-      "object": "SensorStatusStrip",
-      "category": "exterior",
-      "distance_mm": 9.91526600752597
     },
     {
       "object": "ControllerCarrier",
@@ -134,6 +119,11 @@
       "distance_mm": 12.75
     },
     {
+      "object": "SensorStatusStrip",
+      "category": "exterior",
+      "distance_mm": 12.963892162464173
+    },
+    {
       "object": "JawAccent",
       "category": "exterior",
       "distance_mm": 14.562365879210699
@@ -187,6 +177,16 @@
       "object": "ArcModuleR",
       "category": "envelope",
       "distance_mm": 18.0
+    },
+    {
+      "object": "UltrasonicFaceL",
+      "category": "component",
+      "distance_mm": 18.049999999999997
+    },
+    {
+      "object": "UltrasonicFaceR",
+      "category": "component",
+      "distance_mm": 18.049999999999997
     },
     {
       "object": "ControllerSocketFront",
@@ -407,6 +407,6 @@
   "passed": true,
   "mounts_leads_acoustics_verified": false,
   "physical_fit_verified": false,
-  "source_after_sha256": "a7248a028adf15c0bf63867683340a8be0ea6e3ddef96d064a0f47ef145e24a5",
+  "source_after_sha256": "54f0950390a14b50561ae82bcc7cf38e97e05b85139ec9266166ca31995088b6",
   "saved_and_reopened": true
 }

@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.25",
+  "design_revision": "0.26",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "rear_hose_pass_through": {
     "diameter_mm": 9,
@@ -1323,24 +1323,6 @@
       "symmetric_difference_mm3": 0.0
     },
     {
-      "name": "SensorMask",
-      "label": "内嵌楔形传感器面板",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 6068.51958466882,
-      "bbox_mm": [
-        -63.599999999999994,
-        -81.00000000000001,
-        153.0,
-        63.599999999999994,
-        -78.0,
-        174.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
       "name": "VisorRim",
       "label": "六边形前脸内框",
       "category": "exterior",
@@ -1395,42 +1377,6 @@
       "symmetric_difference_mm3": 0.0
     },
     {
-      "name": "UltrasonicRingL",
-      "label": "嵌入式超声波探头框 L",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 100.53096491487327,
-      "bbox_mm": [
-        20.5,
-        -83.0,
-        154.5,
-        37.5,
-        -81.0,
-        171.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "UltrasonicFaceL",
-      "label": "超声波探头暗面 L",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 176.7145867644259,
-      "bbox_mm": [
-        21.5,
-        -82.0,
-        155.5,
-        36.5,
-        -81.0,
-        170.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
       "name": "BrowArmorR",
       "label": "右折线眉甲",
       "category": "exterior",
@@ -1462,60 +1408,6 @@
         -43.199999999999996,
         -84.0,
         167.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "UltrasonicRingR",
-      "label": "嵌入式超声波探头框 R",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 100.53096491487327,
-      "bbox_mm": [
-        -37.5,
-        -83.0,
-        154.5,
-        -20.5,
-        -81.0,
-        171.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "UltrasonicFaceR",
-      "label": "超声波探头暗面 R",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 176.7145867644259,
-      "bbox_mm": [
-        -36.5,
-        -82.0,
-        155.5,
-        -21.5,
-        -81.0,
-        170.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "SensorStatusStrip",
-      "label": "前脸中部窄状态色条",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 9.999999999999998,
-      "bbox_mm": [
-        -10.0,
-        -81.5,
-        168.0,
-        10.0,
-        -81.0,
-        169.0
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -2254,6 +2146,114 @@
         -12.649999999999999,
         30.0,
         170.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "SensorMask",
+      "label": "前脸传感器面板／双Ø16.6候选孔",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 6131.854092565193,
+      "bbox_mm": [
+        -63.599999999999994,
+        -81.00000000000001,
+        153.0,
+        63.599999999999994,
+        -78.0,
+        174.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "UltrasonicRingL",
+      "label": "超声波圆柱主体 Ø16×10.3 L",
+      "category": "component",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1988.3728953192353,
+      "bbox_mm": [
+        5.0,
+        -91.3,
+        155.0,
+        21.0,
+        -81.0,
+        171.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "UltrasonicFaceL",
+      "label": "超声波探头端面 L",
+      "category": "component",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 82.56498192715677,
+      "bbox_mm": [
+        5.75,
+        -91.3,
+        155.75,
+        20.25,
+        -90.8,
+        170.25
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "UltrasonicRingR",
+      "label": "超声波圆柱主体 Ø16×10.3 R",
+      "category": "component",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1988.3728953192353,
+      "bbox_mm": [
+        -21.0,
+        -91.3,
+        155.0,
+        -5.0,
+        -81.0,
+        171.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "UltrasonicFaceR",
+      "label": "超声波探头端面 R",
+      "category": "component",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 82.56498192715677,
+      "bbox_mm": [
+        -20.25,
+        -91.3,
+        155.75,
+        -5.75,
+        -90.8,
+        170.25
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "SensorStatusStrip",
+      "label": "双探头上方窄状态色条",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 7.999999999999998,
+      "bbox_mm": [
+        -8.0,
+        -81.5,
+        172.5,
+        8.0,
+        -81.0,
+        173.5
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -5418,7 +5418,7 @@
     "valid": true,
     "solids": 860,
     "expected_solids": 860,
-    "volume_difference_mm3": 6.433253444032744,
+    "volume_difference_mm3": 6.435526837594807,
     "bbox_difference_mm": 9.697487257653847e-11,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -5427,7 +5427,7 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 695,
+    "boolean_pairs_tested": 691,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
@@ -5595,11 +5595,6 @@
             "overlap_mm3": 9398.013811323624
           },
           {
-            "object": "SensorMask",
-            "label": "内嵌楔形传感器面板",
-            "overlap_mm3": 816.4056428517097
-          },
-          {
             "object": "VisorRim",
             "label": "六边形前脸内框",
             "overlap_mm3": 420.1878654970756
@@ -5608,16 +5603,6 @@
             "object": "CheekArmorL",
             "label": "左斜切颊部护板",
             "overlap_mm3": 406.725
-          },
-          {
-            "object": "UltrasonicRingL",
-            "label": "嵌入式超声波探头框 L",
-            "overlap_mm3": 27.773513219801767
-          },
-          {
-            "object": "UltrasonicFaceL",
-            "label": "超声波探头暗面 L",
-            "overlap_mm3": 41.71733466175165
           },
           {
             "object": "OccipitalFrame",
@@ -5638,6 +5623,11 @@
             "object": "OccipitalLouverL1",
             "label": "后脑封闭格栅饰条 L1",
             "overlap_mm3": 42.56249999999998
+          },
+          {
+            "object": "SensorMask",
+            "label": "前脸传感器面板／双Ø16.6候选孔",
+            "overlap_mm3": 983.2179166666668
           },
           {
             "object": "BubbleServiceLid",
@@ -5715,11 +5705,6 @@
             "overlap_mm3": 14794.79433697672
           },
           {
-            "object": "SensorMask",
-            "label": "内嵌楔形传感器面板",
-            "overlap_mm3": 318.9014481264781
-          },
-          {
             "object": "VisorRim",
             "label": "六边形前脸内框",
             "overlap_mm3": 645.9812982456132
@@ -5728,16 +5713,6 @@
             "object": "CheekArmorL",
             "label": "左斜切颊部护板",
             "overlap_mm3": 780.4206862745106
-          },
-          {
-            "object": "UltrasonicRingL",
-            "label": "嵌入式超声波探头框 L",
-            "overlap_mm3": 15.654623123411138
-          },
-          {
-            "object": "UltrasonicFaceL",
-            "label": "超声波探头暗面 L",
-            "overlap_mm3": 8.794205729467846
           },
           {
             "object": "JawArmor",
@@ -5758,6 +5733,11 @@
             "object": "OccipitalLouverL0",
             "label": "后脑封闭格栅饰条 L0",
             "overlap_mm3": 42.13169999999949
+          },
+          {
+            "object": "SensorMask",
+            "label": "前脸传感器面板／双Ø16.6候选孔",
+            "overlap_mm3": 368.76599999999814
           },
           {
             "object": "BubbleCapGrip",
@@ -6941,7 +6921,7 @@
           "CrownScrewRFront",
           "CrownScrewRRear"
         ],
-        "boolean_pairs_tested": 15,
+        "boolean_pairs_tested": 17,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -7890,28 +7870,13 @@
       },
       {
         "object": "UltrasonicRingL",
-        "category": "exterior",
-        "distance_mm": 8.25
-      },
-      {
-        "object": "UltrasonicFaceL",
-        "category": "exterior",
+        "category": "component",
         "distance_mm": 8.25
       },
       {
         "object": "UltrasonicRingR",
-        "category": "exterior",
+        "category": "component",
         "distance_mm": 8.25
-      },
-      {
-        "object": "UltrasonicFaceR",
-        "category": "exterior",
-        "distance_mm": 8.25
-      },
-      {
-        "object": "SensorStatusStrip",
-        "category": "exterior",
-        "distance_mm": 9.91526600752597
       },
       {
         "object": "ControllerCarrier",
@@ -7969,6 +7934,11 @@
         "distance_mm": 12.75
       },
       {
+        "object": "SensorStatusStrip",
+        "category": "exterior",
+        "distance_mm": 12.963892162464173
+      },
+      {
         "object": "JawAccent",
         "category": "exterior",
         "distance_mm": 14.562365879210699
@@ -8022,6 +7992,16 @@
         "object": "ArcModuleR",
         "category": "envelope",
         "distance_mm": 18.0
+      },
+      {
+        "object": "UltrasonicFaceL",
+        "category": "component",
+        "distance_mm": 18.049999999999997
+      },
+      {
+        "object": "UltrasonicFaceR",
+        "category": "component",
+        "distance_mm": 18.049999999999997
       },
       {
         "object": "ControllerSocketFront",
@@ -8242,7 +8222,235 @@
     "passed": true,
     "mounts_leads_acoustics_verified": false,
     "physical_fit_verified": false,
-    "source_after_sha256": "a7248a028adf15c0bf63867683340a8be0ea6e3ddef96d064a0f47ef145e24a5",
+    "source_after_sha256": "54f0950390a14b50561ae82bcc7cf38e97e05b85139ec9266166ca31995088b6",
+    "saved_and_reopened": true
+  },
+  "ultrasonic_check": {
+    "source": "hardware/components/ultrasonic/dimensions.json",
+    "diameter_mm": 16,
+    "outer_span_mm": 42,
+    "height_from_panel_mm": 10.3,
+    "derived_center_spacing_mm": 26,
+    "derived_gap_mm": 10,
+    "center_x_mm": [
+      -13.0,
+      13.0
+    ],
+    "center_z_mm": 163.0,
+    "panel_datum_y_mm": -81.0,
+    "probe_front_y_mm": -91.3,
+    "datum_is_assumption": true,
+    "datum_description": "robot front-panel outer face; user panel datum not confirmed",
+    "candidate_hole_diameter_mm": 16.6,
+    "nominal_radial_gap_mm": 0.3,
+    "panel_valid": true,
+    "panel_solids": 1,
+    "probes": [
+      {
+        "side": "L",
+        "bbox_mm": [
+          5.0,
+          -91.3,
+          155.0,
+          21.0,
+          -81.0,
+          171.0
+        ],
+        "valid": true,
+        "solids": 1,
+        "cylinder_difference_mm3": 0.0,
+        "visual_parts_overlap_mm3": 0.0
+      },
+      {
+        "side": "R",
+        "bbox_mm": [
+          -21.0,
+          -91.3,
+          155.0,
+          -5.0,
+          -81.0,
+          171.0
+        ],
+        "valid": true,
+        "solids": 1,
+        "cylinder_difference_mm3": 0.0,
+        "visual_parts_overlap_mm3": 0.0
+      }
+    ],
+    "overlap_tolerance_mm3": 0.01,
+    "static_boolean_pairs": 8,
+    "overlaps": [],
+    "reserved_space_overlaps": [],
+    "nearby_distances": [
+      {
+        "probe": "L",
+        "object": "SensorMask",
+        "category": "exterior",
+        "distance_mm": 0.30000000000001137
+      },
+      {
+        "probe": "R",
+        "object": "SensorMask",
+        "category": "exterior",
+        "distance_mm": 0.30000000000001137
+      },
+      {
+        "probe": "L",
+        "object": "VisorRim",
+        "category": "exterior",
+        "distance_mm": 2.0
+      },
+      {
+        "probe": "R",
+        "object": "VisorRim",
+        "category": "exterior",
+        "distance_mm": 2.0
+      },
+      {
+        "probe": "R",
+        "object": "SensorStatusStrip",
+        "category": "exterior",
+        "distance_mm": 2.735455276791933
+      },
+      {
+        "probe": "L",
+        "object": "SensorStatusStrip",
+        "category": "exterior",
+        "distance_mm": 2.735455276791934
+      },
+      {
+        "probe": "R",
+        "object": "BrowArmorR",
+        "category": "exterior",
+        "distance_mm": 4.88960957256605
+      },
+      {
+        "probe": "L",
+        "object": "BrowArmorL",
+        "category": "exterior",
+        "distance_mm": 4.889609572566055
+      },
+      {
+        "probe": "L",
+        "object": "HeadShell",
+        "category": "exterior",
+        "distance_mm": 6.0
+      },
+      {
+        "probe": "R",
+        "object": "HeadShell",
+        "category": "exterior",
+        "distance_mm": 6.0
+      },
+      {
+        "probe": "L",
+        "object": "JawArmor",
+        "category": "exterior",
+        "distance_mm": 7.0
+      },
+      {
+        "probe": "R",
+        "object": "JawArmor",
+        "category": "exterior",
+        "distance_mm": 7.0
+      },
+      {
+        "probe": "L",
+        "object": "AudioModule",
+        "category": "envelope",
+        "distance_mm": 8.25
+      },
+      {
+        "probe": "R",
+        "object": "AudioModule",
+        "category": "envelope",
+        "distance_mm": 8.25
+      },
+      {
+        "probe": "L",
+        "object": "Electronics",
+        "category": "envelope",
+        "distance_mm": 9.0
+      },
+      {
+        "probe": "R",
+        "object": "Electronics",
+        "category": "envelope",
+        "distance_mm": 9.0
+      },
+      {
+        "probe": "R",
+        "object": "BrowArmorL",
+        "category": "exterior",
+        "distance_mm": 9.691806012954133
+      },
+      {
+        "probe": "L",
+        "object": "BrowArmorR",
+        "category": "exterior",
+        "distance_mm": 9.691806012954135
+      },
+      {
+        "probe": "L",
+        "object": "UltrasonicRingR",
+        "category": "component",
+        "distance_mm": 10.0
+      },
+      {
+        "probe": "R",
+        "object": "UltrasonicRingL",
+        "category": "component",
+        "distance_mm": 10.0
+      },
+      {
+        "probe": "L",
+        "object": "HeadCrownShell",
+        "category": "exterior",
+        "distance_mm": 10.25
+      },
+      {
+        "probe": "R",
+        "object": "HeadCrownShell",
+        "category": "exterior",
+        "distance_mm": 10.25
+      },
+      {
+        "probe": "L",
+        "object": "UltrasonicFaceR",
+        "category": "component",
+        "distance_mm": 10.75
+      },
+      {
+        "probe": "R",
+        "object": "UltrasonicFaceL",
+        "category": "component",
+        "distance_mm": 10.75
+      },
+      {
+        "probe": "L",
+        "object": "ElectronicsTray",
+        "category": "structure",
+        "distance_mm": 11.800423721205947
+      },
+      {
+        "probe": "R",
+        "object": "ElectronicsTray",
+        "category": "structure",
+        "distance_mm": 11.800423721205947
+      },
+      {
+        "probe": "R",
+        "object": "JawAccent",
+        "category": "exterior",
+        "distance_mm": 12.615528128088298
+      }
+    ],
+    "passed": true,
+    "pcb_and_rear_components_modeled": false,
+    "mounting_verified": false,
+    "physical_fit_verified": false,
+    "acoustic_verified": false,
+    "source_after_sha256": "54f0950390a14b50561ae82bcc7cf38e97e05b85139ec9266166ca31995088b6",
     "saved_and_reopened": true
   },
   "manufacturing_released": false,
@@ -8255,41 +8463,43 @@
   },
   "previews_generated": true,
   "files_sha256": {
-    "CyberTrack.FCStd": "a7248a028adf15c0bf63867683340a8be0ea6e3ddef96d064a0f47ef145e24a5",
-    "CyberTrack.step": "228c861418edfbbfbae7a4cc7a82ead591766ac481b175bc9b16ec721c3bffc2",
-    "arc-layout.png": "05f70222290fcbfe20a44ce016fae1acdc81457a01a1f752f6108e1999d46a44",
-    "arc-top.png": "4d8e77623c8922362d2bad54fdb974a2b91ae62a3648c1aeeba7e5f888bd6eaf",
-    "assembly.png": "180723debe53cd355b1c72044fa5d301b07438c397d029fb1269e24362e5f9fb",
-    "bubble-gun-clearance.png": "100301f33cd6f3135d068584c48c1971757169df61832384b4cfc40d53412f15",
-    "bubble-gun-component.png": "c71924613b0377beee366847fb00582b4a029f8141602ca57447aabb3db726ec",
-    "bubble-gun-layout.png": "7e59a2b76ee3f75a3c6b3a78db3b0ead13d9b5a7e3c08007a580c13dff23d07a",
-    "bubble-gun-mount.png": "c5793631a5d59c74bf9fe86855d5efd438602a997b0362214de9c0316e830704",
-    "bubble-gun-service.png": "0a9428491843128105f72f9fd25490c3b7b7931c59a26dd3a5750e05185f0294",
-    "bubble-gun-side.png": "5c6e5db11b6e2edcfabce094f615d5c0d1212c7521ab2301cd0a10f0ae4d94e2",
-    "bubble-gun-spaces.png": "976c46426cb2745761d2066251ffbe3fa266700be62d712ccaf263a2681e3501",
-    "controller-access.png": "03b0a55180a77c8c82685fed7228933166b282a3913db61cd6acb1b3cc88f36a",
-    "controller-layout.png": "02bb5f8fa414e7632ae59b9beecee4b1a4ab75a5f13f885694229863318e5b21",
-    "controller-service.png": "ce3e3bee6fb3c748fafad0b27e18354eeb655a370d240869c9659258cbfacd2c",
-    "crown-effects-top.png": "b205bc1f03970109d0cb8a0707ebdd2ac67791fef4c99405ea262f35db31776b",
-    "crown-effects.png": "fddb12782e4390ecd704ae671169c2550a11e4790fd8b8544366b3bfa5440b3c",
-    "front.png": "0789f99d256efa858b331e8e505f04389128333a341e41c8a6eabcd34db9725c",
-    "layout.png": "4e343e618d6fdcc6ea33699ba0e6440a34e9988c9ef7ca3c29b1627d09730835",
-    "lower-layout.png": "eb29c8e3ce87f0272f53d31cb446b831ea1ec11cd0e2fccf5a6e6aa41863ec81",
-    "rear-assembly.png": "a2e7d3bb8aed31f36b01a1b748550e70247ea75f15984d3ead6c2e7fdbc9b9bf",
-    "rear.png": "9b2ab4b7292bf8722cfb50b1b8a4e64f47047027b92dbfb52d4073fc1929198c",
-    "right.png": "f116ea2a8a20f224d6d5b78dc70c471bc3c3fff13538d6d84aceff3a859dc1a5",
-    "routing.png": "f09777e1a8c2bcbf5655aff3e74e8bbc4497c73a9902eb7b86aef6798c967712",
-    "service.png": "9fe6da953d3b4c5aebd038d134040adeb508906044b855a46a8ecf4bf3c4d6ad",
-    "side.png": "c03d905a84b2715fb830fd9baa69ee11137d54d7671817437f72ae2761c9f047",
-    "speaker-layout.png": "8d0f6063274db9f4680648a79bd0c9e437be7e69fddb37adda64864ac82ccb7a",
-    "speaker-top.png": "a3a184fdd990e59d253fbafa187c8d8ffff505ff23fe58de3b2cf8f1d5055146",
-    "top.png": "35e61913bcd73236f75bc0f5061e5944972d1da909b34e44da81079559dbdb8e",
-    "water-gun-clearance.png": "3ddc1953ea25a03585bbcf00d5bb47e10c75a1f899326aa1c12b12f207c85816",
-    "water-gun-component.png": "10724aecc1d4d4fb023861a4270a4b93467565f0ed83783088ebd5d11d799c42",
-    "water-gun-layout.png": "822b1003a6cb630b20a2c31b1d295601b348aa048f4bd72405660fff2cee885f",
-    "water-gun-mount.png": "c51d6f7ddcd4be3ea652e98aadaedde13842c43bcb8fcf7b3d7f506c049d2b47",
-    "water-gun-service.png": "ac797a1de6fc5615d6fc74edf16519cddc25170e1e2acbe0f0d50d8be7d5fe3b",
-    "water-gun-side.png": "5d6ee21a3c8be2517ab333f74a5e8a3b874c8d0337e8627f6a56323875754756",
-    "water-gun-spaces.png": "08a7e807fc23b943a9a0779586499cec869079b2ac8ed2eb2afad6bf136a68a5"
+    "CyberTrack.FCStd": "54f0950390a14b50561ae82bcc7cf38e97e05b85139ec9266166ca31995088b6",
+    "CyberTrack.step": "1b543ebed198934b580e969451c5b7e8d2dddb0016c6c8ed9f0f23f56ee971d1",
+    "arc-layout.png": "c2a487ca4251f9cf9e127e6b5e4b5965c23d5981175048639ad08fa7c69e5bb7",
+    "arc-top.png": "099a3df74b539291c9fa46bf4cedb9d519d295d3238a8dbe5f23680112c6e516",
+    "assembly.png": "4c6786a187b1711c7ba9013425cfce0b2a1c6e1730b69b491b2ee8efbd885f9f",
+    "bubble-gun-clearance.png": "68c6f7d82ac0d8d0b83b2751ff9b737c78bcdfaa5826d31e97b799ce63cb5b69",
+    "bubble-gun-component.png": "67500faae55fe00939c5c5491ca435d41cbac99447ddbca41a067feeeec00c64",
+    "bubble-gun-layout.png": "68acf370882059419af37c000a6c2f14aa7d922051bdd19088ff634a59ccd890",
+    "bubble-gun-mount.png": "e4f7723f0b6134e75da11bd966f63d33534a2cbfee43b866ee60c082d916864c",
+    "bubble-gun-service.png": "6a4ef24e157135f1405a5028fad69183c4fb31ec37fd5f04402a837a7b965a10",
+    "bubble-gun-side.png": "4726d6ef5a7e40d48298bd2655cc638f99acaab12178dbb4e1d8cc26990ca18a",
+    "bubble-gun-spaces.png": "ed7fd97093dd9633ba85611b0d2a7b1f67266cb0566eb0b1b8d114f4c2a1c089",
+    "controller-access.png": "4bdd414a0042a66ab9ee827d9687db8fe696d107e69a4b2e3afccf518bb04985",
+    "controller-layout.png": "f49dc32503483b1e353869f54357fea17e2b6c7bac75476767574cf832be0647",
+    "controller-service.png": "c89e45fb04e97736de784e1a186f66900e51be249a0c9baf0957d5a5719974b4",
+    "crown-effects-top.png": "5781662e5828050bb0394e6f3102b5cab2650d6b0c488b001ad5c7adc47cfe44",
+    "crown-effects.png": "cc38c04ce7ab7f7527a4b5f239e52ce646c862c3635bb72d1855b0d27c347378",
+    "front.png": "efe51b8ea58bf8b694eca7a0326c9dc5042134946e049b0321cb15b698efbf33",
+    "layout.png": "8b30de10efad32cceaddb3d22edade9b0d6041c0864f6f8d7e5867de904162d0",
+    "lower-layout.png": "680497521af9347b1285fa6fd676b6bf31ed8196aed2677908e516186055399a",
+    "rear-assembly.png": "e753b94613d99e2608eab1bfb141405d81872e2f80037ed57b8b181037e594eb",
+    "rear.png": "1ee1f26f738b66793d261e8386139a338fe4cb81b47270cd0020782501725c8d",
+    "right.png": "64a6400ee57f1864a5dca6539f0bf7f2ecf5f0543f39aca706196d7a3509f9b2",
+    "routing.png": "bcab467f0519ae6d5d3954378868413f175935b430b4ca806e563d23c079682d",
+    "service.png": "25ad5aac9f25b57f6d81ab09535e2e0a88cc036ffb1e83978e614d976306e0c0",
+    "side.png": "c22bbb13c9ab6381baa56948abb99c1b63ac9a8b6becc60afc1ba4e54ef05013",
+    "speaker-layout.png": "13750642827d2ad726a535f5823dbe7721026016cc5180f39e95648a0aafe615",
+    "speaker-top.png": "2770d19654c58e4d4f770ee754f629721497dec2930c82b3c8670c5f4741782e",
+    "top.png": "64587a7808d07af438e2934f9ecdd9829472ee43bc0ddb9684a5d6980683ec7e",
+    "ultrasonic-front.png": "41ebd126acc2fa1cfab8d19235aa97dbfa01f70719990278711e8d70602d4bcf",
+    "ultrasonic-layout.png": "70e47ea1abd69126bb69a8efa13d2c5459fc631eeb37be300c304e81d554b3c3",
+    "water-gun-clearance.png": "3ef238402a0f8ce722850666a84142beee3866bda317e32356525f49b1fb3003",
+    "water-gun-component.png": "0385bd6a9c34e5423479e93ec042f0afbb505706d3ee7abe74ebfa7f2570cf26",
+    "water-gun-layout.png": "ed14833a3db1f1769a9b0862eb64e36949c689cf739a1a750c8868646dc62816",
+    "water-gun-mount.png": "1222a1b8809ef302fd9999b67fee156bd945620b8f3aa2aec327a8298668b2b7",
+    "water-gun-service.png": "30cbb855baec806f348d13e4b0440166436d840f57b992a2a681ebc62ec8e93b",
+    "water-gun-side.png": "92a31f834ea8876917d0be26377e5e0c3f08a694b5e0ae87c0afc36574b5249e",
+    "water-gun-spaces.png": "0d29eace744d726715f7b5944eba0fda62ed73cfc6eb1b3166720e78a63b016b"
   }
 }
