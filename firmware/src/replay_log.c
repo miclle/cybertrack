@@ -45,6 +45,38 @@ bool ct_replay_log_init(ct_replay_log *log, ct_replay_io io)
     log->ready = io.read && io.erase && io.write && io.sync;
     return log->ready;
 }
+bool ct_replay_log_init_redundant(ct_replay_log *log, ct_replay_io io,
+                                  ct_replay_log_redundancy *workspace)
+{
+    if (!ct_replay_log_init(log, io)) return false;
+    if (!workspace) { log->ready = false; return false; }
+    log->redundancy = workspace;
+    return true;
+}
+/* One pair holds the selected history while the other prepares its successor.
+ * A bad/read-failed slot is not evidence. All readable exact-key replicas must
+ * agree byte-for-byte and belong to ONE pair; never choose an older key. */
+static bool find_replicas(ct_replay_log *log, ct_replay_anchor_record r,
+                          unsigned *mask, const unsigned char *expected)
+{
+    *mask = 0;
+    bool unreadable = false;
+    for (unsigned slot = 0; slot < CT_REPLAY_LOG_REDUNDANT_SLOTS; ++slot) {
+        if (!log->io.read(log->io.context, slot, 0, log->scratch, sizeof(log->scratch))) {
+            unreadable = true; continue;
+        }
+        if (!matches(log->scratch, r)) continue;
+        const unsigned char *bits = log->scratch + FILTER_OFFSET;
+        if ((*mask && memcmp(log->redundancy->filter, bits, CT_REPLAY_BYTES)) ||
+            (expected && memcmp(expected, bits, CT_REPLAY_BYTES))) goto failure;
+        if (!*mask) memcpy(log->redundancy->filter, bits, CT_REPLAY_BYTES);
+        *mask |= 1u << slot;
+    }
+    if (((*mask & 3u) && (*mask & 12u)) || (!*mask && unreadable)) goto failure;
+    return true;
+failure:
+    log->ready = false; return false;
+}
 /* A revision can now have several attempt epochs. Keep the uniquely selected
  * slot, irrespective of revision parity; a candidate never overwrites it.
  * Read both slots before mutation and reject ambiguous matching evidence. */
@@ -69,24 +101,19 @@ bool ct_replay_log_read(ct_replay_log *log, ct_replay_anchor_record r, unsigned 
 {
     if (!log || !log->ready || !filter || !record_valid(r)) return false;
     unsigned selected;
+    if (log->redundancy) {
+        if (!find_replicas(log, r, &selected, NULL)) return false;
+        if (!selected) { log->ready = false; return false; }
+        memcpy(filter, log->redundancy->filter, CT_REPLAY_BYTES);
+        return true;
+    }
     if (!find_selected(log, r, &selected, filter, NULL)) return false;
     if (selected == 2) { log->ready = false; return false; }
     return true;
 }
-bool ct_replay_log_prepare(ct_replay_log *log, ct_replay_anchor_record current,
-                           ct_replay_anchor_record next, const unsigned char *filter)
+static bool write_record(ct_replay_log *log, unsigned slot,
+                          ct_replay_anchor_record next, const unsigned char *filter)
 {
-    if (!log || !log->ready || !filter || !record_valid(current) || !record_valid(next)) return false;
-    bool seed = current.epoch == next.epoch && current.backend_id == next.backend_id &&
-                current.revision == next.revision && current.session == next.session;
-    unsigned selected;
-    if (!find_selected(log, current, &selected, NULL, seed ? filter : NULL)) return false;
-    /* Attaching/enrolling never creates a second matching record. An existing
-     * seed must contain exactly the attested full history, not just its key. */
-    if (seed && selected != 2) return true;
-    /* A seed imports attested primary history. Selection transitions preserve
-     * the old selected record while preparing the new target's full evidence. */
-    unsigned slot = selected == 2 ? 0 : 1 - selected;
     unsigned char *p = log->scratch;
     memcpy(p, magic, 8); put64(p+8, next.epoch); put64(p+16, next.backend_id);
     put64(p+24, next.revision); put64(p+32, next.session);
@@ -103,4 +130,26 @@ bool ct_replay_log_prepare(ct_replay_log *log, ct_replay_anchor_record current,
         log->ready = false; return false;
     }
     return true;
+}
+bool ct_replay_log_prepare(ct_replay_log *log, ct_replay_anchor_record current,
+                           ct_replay_anchor_record next, const unsigned char *filter)
+{
+    if (!log || !log->ready || !filter || !record_valid(current) || !record_valid(next)) return false;
+    bool seed = current.epoch == next.epoch && current.backend_id == next.backend_id &&
+                current.revision == next.revision && current.session == next.session;
+    unsigned selected;
+    if (log->redundancy) {
+        if (!find_replicas(log, current, &selected, seed ? filter : NULL)) return false;
+        unsigned pair = selected & 3u ? 0 : 2;
+        if (!selected) pair = 0; /* Only attested full primary may seed missing evidence. */
+        else if (!seed) pair = 2 - pair;
+        for (unsigned slot = pair; slot < pair + 2; ++slot) {
+            if (seed && (selected & (1u << slot))) continue;
+            if (!write_record(log, slot, next, filter)) return false;
+        }
+        return true;
+    }
+    if (!find_selected(log, current, &selected, NULL, seed ? filter : NULL)) return false;
+    if (seed && selected != 2) return true;
+    return write_record(log, selected == 2 ? 0 : 1 - selected, next, filter);
 }

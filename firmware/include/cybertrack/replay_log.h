@@ -3,20 +3,37 @@
 #include "cybertrack/replay_store.h"
 
 #define CT_REPLAY_LOG_SLOT_BYTES (CT_REPLAY_BYTES + 48u)
-/* Independent two-slot evidence journal. Same exact-transfer/durable-sync
+#define CT_REPLAY_LOG_REDUNDANT_SLOTS 4u
+
+/* Caller-owned comparison workspace for redundant mode. Static/heap lifetime,
+ * exclusive to one log; do not alias store history or the log scratch buffer. */
+typedef struct { unsigned char filter[CT_REPLAY_BYTES]; } ct_replay_log_redundancy;
+/* Independent evidence journal (legacy two-slot or explicit four-slot mode).
+ * Same exact-transfer/durable-sync
  * contract as ct_replay_io, but each slot is CT_REPLAY_LOG_SLOT_BYTES bytes.
  * Physically isolated from primary/repair media AND rollback-resistant anchor.
  * Single serialized owner; static/heap allocation, no internal heap use. */
 struct ct_replay_log {
     ct_replay_io io;
     bool ready;
+    ct_replay_log_redundancy *redundancy;
     unsigned char scratch[CT_REPLAY_LOG_SLOT_BYTES];
 };
 /* Configures callbacks only: does not erase, provision or trust existing data.
- * Failure during reads/writes latches !ready; reboot/init is required. */
+ * Two-slot mode fails closed on any read/write failure; reboot/init required. */
 bool ct_replay_log_init(ct_replay_log *log, ct_replay_io io);
+/* Explicit four-slot layout: replicas {0,1} and {2,3}, isolated erase domains.
+ * Same CTLG record bytes; adapter MUST expose all four slots. Never downgrade
+ * to two-slot mode after a failure. Init only configures, does not repair.
+ * Reads accept a surviving exact-anchor replica, including one unreadable or
+ * CRC-invalid slot; readable conflicting histories always fail closed.
+ * Writes/readbacks must complete BOTH target replicas before anchor selection.
+ * Attach repairs a missing current replica from verified full primary history;
+ * missing-primary maintenance rotates evidence into the other pair. */
+bool ct_replay_log_init_redundant(ct_replay_log *log, ct_replay_io io,
+                                  ct_replay_log_redundancy *workspace);
 /* Existing anchor: seed/verify its exact complete history before attaching.
- * Requires bound READY primary; no second matching record or silent conflict.
+ * Requires bound READY primary; no silent conflict (two-slot mode rejects duplicate records).
  * Only success establishes independent evidence. For first registration use
  * enroll_logged below so evidence exists BEFORE initial anchor selection. */
 bool ct_replay_store_attach_log(ct_replay_store *store, ct_replay_log *log);
