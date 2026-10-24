@@ -147,13 +147,13 @@ def refine(doc,add):
 
     from water_gun_mount import hose_shapes
     hose,hose_space=hose_shapes()
-    # Physical tube OD4 and review corridor OD8 are separate assumptions.
+    # Water tube OD5 is user measured; review corridor OD8 remains a design choice.
     # A 9 mm passage gives the review corridor 0.5 mm radial geometric clearance.
     from water_gun_mount import rounded_route, HOSE_POINTS
     hose_tool=rounded_route(HOSE_POINTS,4.5,8)
     for name in ('WaterPod','BackpackShell'):
         cut(name,hose_tool)
-    add('WaterHoseRoute','喷水软管候选 Ø4／R8 圆弧过渡至枪侧',hose,'envelope','water','外径4、中心弯曲半径8及接口位置均为设计假设；不是供应商最小弯曲半径或已验收液路')
+    add('WaterHoseRoute','喷水软管 Ø5 实测／R8 圆弧过渡至枪侧',hose,'envelope','water','外径5为用户实测；中心弯曲半径8及接口位置为设计假设；不是供应商最小弯曲半径或已验收液路')
     controller_info=build_controller(doc,add,cut,fuse,fastener,insert)
     doc.getObject('HeadShell').Label='头舱固定下壳／托板及冠盖支座'
     doc.getObject('HeadServiceHatch').Label='中央隆起顶甲／随整体冠盖拆装'
@@ -179,7 +179,7 @@ def service_groups(doc):
             'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR'],
             **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('bubble_gun','bubble_gun_cradle')} if doc.getObject('BubbleGunShell') else {}),
             **({'water_gun':['WaterGunBody','WaterGunInlet']} if doc.getObject('WaterGunBody') else {}),
-            **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('water_gun_caps','water_gun_cap_screws','water_gun_cradle')} if doc.getObject('WaterGunCradle') else {})}
+            **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('water_gun_cradle',)} if doc.getObject('WaterGunCradle') else {})}
 
 
 def arc_translation_sweep(shape, delta):
@@ -215,13 +215,9 @@ def check_service_paths(doc):
         blines=line_names(doc)
         scenarios += [('bubble_gun_cradle',(-90,0,6),blines+groups['bubble_gun']+['BubbleGunBaseScrew1','BubbleGunBaseScrew2'])]
     if 'water_gun' in groups:
-        scenarios.append(('water_gun',(0,-150,0),['WaterHoseRoute','WaterGunLeadRoute','WaterGunLeadConnector']+groups.get('water_gun_caps',[])+groups.get('water_gun_cap_screws',[])))
-    if 'water_gun_caps' in groups:
         lines=['WaterHoseRoute','WaterGunLeadRoute','WaterGunLeadConnector']
-        caps=groups['water_gun_caps'];screws=groups['water_gun_cap_screws']
-        scenarios += [('water_gun_cap_screws',(20,0,0),[]),
-                      ('water_gun_caps',(50,0,0),screws),
-                      ('water_gun_cradle',(60,0,2),lines+caps+screws+groups['water_gun']+['WaterGunBaseScrew1','WaterGunBaseScrew2'])]
+        scenarios.append(('water_gun',(0,-150,2),lines))
+        scenarios.append(('water_gun_cradle',(60,0,2),lines+groups['water_gun']+['WaterGunBaseScrew1','WaterGunBaseScrew2']))
     prerequisites=groups['crown']+groups['electronics']+[o.Name for o in all_shapes if o.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']
     scenarios += [('arc_left',(-24.5,0,85),prerequisites),('arc_right',(24.5,0,85),prerequisites)]
     crown_removed=groups['crown']+[o.Name for o in all_shapes if o.Name.startswith('CrownScrew')]+['ControllerWireRoute']
@@ -237,6 +233,8 @@ def check_service_paths(doc):
         waypoints=[V(),V(*delta)]
         if group in ('bubble_gun','bubble_gun_cradle'):
             waypoints=[V(),V(0,0,delta[2]),V(*delta)]
+        if group=='water_gun':
+            waypoints=[V(),V(0,0,2),V(0,-150,2)]
         if group=='water_gun_cradle':
             waypoints=[V(),V(0,0,2),V(60,0,2)]
         if group in ('Water','Bubble'):

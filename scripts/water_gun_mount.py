@@ -1,12 +1,23 @@
 """Reversible water-gun cradle and service space candidates; no release dimensions.
 
-Clamp locations, padding, fasteners, hose/cable sizes and bend radii are assumptions.
+Bottom double-sided soft adhesive is user selected; its thickness, footprint,
+fasteners, cable sizes and bend radii remain assumptions. Hose OD5 is user measured.
 The measured gun is never drilled or cut to manufacture a passing fit.
 """
 import math
 import FreeCAD as App
 import Part
+from water_gun_layout import ORIGIN, WIDTH, THICKNESS
 V = App.Vector
+
+# Keep the gun pose fixed when reviewing another adhesive thickness.
+ADHESIVE_THICKNESS = 1.0
+BODY_BOTTOM = ORIGIN[2]-THICKNESS/2
+CRADLE_TOP = BODY_BOTTOM-ADHESIVE_THICKNESS
+CRADLE_BOTTOM = CRADLE_TOP-3.0
+SIDE_GAP, SIDE_WALL_THICKNESS, SIDE_WALL_HEIGHT = 0.6, 2.0, 20.0
+SIDE_X0, SIDE_X1 = ORIGIN[0]-WIDTH/2-SIDE_GAP, ORIGIN[0]+WIDTH/2+SIDE_GAP
+BASE_X0, BASE_X1 = SIDE_X0-SIDE_WALL_THICKNESS, SIDE_X1+SIDE_WALL_THICKNESS
 
 
 def box(x0, y0, z0, x1, y1, z1):
@@ -47,15 +58,42 @@ def rounded_route(points, radius, bend_radius):
 
 
 # Radius is a packaging assumption, not a supplier minimum bend specification.
-HOSE_POINTS=[(-24,39,118),(-24,22,118),(-39,15,119),(-51,5,119),
-             (-51,-50,124),(-18,-63,124),(-18,-80,99.5),(90,-80,99.5),(90,-80,117),(90,-105,117),(76.9,-105,117)]
+# First four points are fixed rear chassis coordinates. Remaining points
+# follow the gun tilt. The route never crosses underneath the gun/chassis.
+HOSE_POINTS=[(-24,39,118),(-24,22,118),(-4,20,130),(78.2,20,130),
+             (78.2,-4,117),(78.2,-75,117),(90,-90,117),(90,-105,117),(76.9,-105,117)]
 LEAD_POINTS=[(55,9.5,117),(55,21.5,117),(83,21.5,117)]
-CAP_CENTRES=(-62,-10)
+ADHESIVE_CENTRES=(-62,-10)
 BASE_CENTRES=(-60,-18)
+HOSE_SUPPORTS=[('WaterGunHoseSupport',-64),('WaterGunHoseSupportRear',-12)]
 
 
 def hose_shapes():
-    return rounded_route(HOSE_POINTS,2,8), rounded_route(HOSE_POINTS,4,8)
+    return rounded_route(HOSE_POINTS,2.5,8), rounded_route(HOSE_POINTS,4,8)
+
+
+def lead_guide_shape():
+    guide=box(76,16.5,CRADLE_TOP,82,26.5,120.5)
+    guide=guide.cut(cylinder(2.3,7,(75.5,21.5,117),(1,0,0)))
+    guide=guide.cut(box(75.5,19.8,117,82.5,23.2,121))
+    # Slots for a future removable tie, not a claim of certified strain relief.
+    for y in (17.4,24.6):guide=guide.cut(box(75.5,y,106,82.5,y+.8,109))
+    return guide.removeSplitter()
+
+
+def cradle_primitives():
+    parts=[box(BASE_X0,-72,CRADLE_BOTTOM,BASE_X1,2,CRADLE_TOP),
+           box(70.6,-2,CRADLE_BOTTOM,82,26,CRADLE_TOP)]
+    # Front/rear pairs locate the housing laterally; no overhanging lip or
+    # screw holes. Adhesive remains the retention method.
+    for y in ADHESIVE_CENTRES:
+        parts += [box(BASE_X0,y-6,CRADLE_TOP,SIDE_X0,y+6,CRADLE_TOP+SIDE_WALL_HEIGHT),
+                  box(SIDE_X1,y-6,CRADLE_TOP,BASE_X1,y+6,CRADLE_TOP+SIDE_WALL_HEIGHT)]
+    for x0,x1 in ((39,47),(63,72)):
+        parts += [box(x0,1,CRADLE_BOTTOM,x1,12,CRADLE_TOP),
+                  box(x0,10,CRADLE_TOP,x1,12,CRADLE_TOP+8)]
+    parts.append(lead_guide_shape())
+    return parts
 
 
 def build_mount(doc,add):
@@ -63,64 +101,42 @@ def build_mount(doc,add):
         obj=doc.getObject(name);obj.Shape=obj.Shape.cut(tool).removeSplitter()
     def feature(name,label,shape,category='structure',color='metal',group=None):
         obj=add(name,label,shape,category,color,
-                '候选尺寸：夹持面、垫片、M3级紧固、管径与引线均未实测；不在原水枪上钻孔')
-        if group is None and name.startswith(('WaterGunCradle','WaterGunLowerPad','WaterGunInnerPad','WaterGunCapInsert','WaterGunLeadGuide')):
+                '候选尺寸：胶厚、粘接面、M3级基座紧固、引线均未实测；水管外径5为用户实测；不在原水枪上钻孔')
+        if group is None and name.startswith(('WaterGunCradle','WaterGunLowerPad','WaterGunHoseSupport')):
             group='water_gun_cradle'
         if group:
             obj.addProperty('App::PropertyString','ServiceGroup','Assembly');obj.ServiceGroup=group
         assert obj.Shape.isValid() and len(obj.Shape.Solids)==1,name
         return obj
-    base=box(35.8,-72,100.7,80.5,2,103.7)
-    # Narrow rear outrigger supports an open cable guide, away from the backpack.
-    base=base.fuse(box(76,-2,100.7,82,26,103.7))
-    for y in CAP_CENTRES:
-        inner=box(35.8,y-6,103.7,37.8,y+6,134)
-        lip=box(37.8,y-6,132.5,40.5,y+6,134)
-        outer=box(77.5,y-6,103.7,80.5,y+6,129.1)
-        base=base.fuse(inner).fuse(lip).fuse(outer)
-    # Rear stops leave the centre clear for the tail leads. Forward retention is
-    # by the padded clamps; no unmeasured front shoulder is treated as a datum.
-    for x0,x1 in ((39,47),(63,72)):
-        base=base.fuse(box(x0,1,100.7,x1,12,103.7)).fuse(box(x0,10,103.7,x1,12,111.7))
-    feature('WaterGunCradle','水枪固定托架／前开口／后端双止挡',base.removeSplitter())
+    parts=cradle_primitives()
+    base=parts[0]
+    for part in parts[1:]:base=base.fuse(part)
+    feature('WaterGunCradle','水枪一体底托／左右挡板／尾线导向鞍／前开口',base.removeSplitter())
     for index,y in enumerate(BASE_CENTRES):
         tag=str(index+1);x=42.5
         z0=84 if index==0 else 90
-        boss=cylinder(5,100.7-z0,(x,y,z0)).cut(doc.getObject('KeelLid').Shape).cut(doc.getObject('LowerTub').Shape)
+        boss=cylinder(5,CRADLE_BOTTOM-z0,(x,y,z0)).cut(doc.getObject('KeelLid').Shape).cut(doc.getObject('LowerTub').Shape)
         rail=doc.getObject('ShoulderRailL')
         rail.Shape=rail.Shape.fuse(boss).removeSplitter()
-        cut('ShoulderRailL',cylinder(2.3,6,(x,y,94.8)))
-        cut('WaterGunCradle',cylinder(1.6,4,(x,y,100.5)))
-        cut('WaterGunCradle',cylinder(2.8,2,(x,y,102)))
-        insert=cylinder(2.2,5.5,(x,y,95)).cut(cylinder(1.6,5.5,(x,y,95)))
+        cut('ShoulderRailL',cylinder(2.3,6,(x,y,CRADLE_BOTTOM-5.9)))
+        cut('WaterGunCradle',cylinder(1.6,4,(x,y,CRADLE_BOTTOM-.2)))
+        cut('WaterGunCradle',cylinder(2.8,2,(x,y,CRADLE_BOTTOM+1.3)))
+        insert=cylinder(2.2,5.5,(x,y,CRADLE_BOTTOM-5.7)).cut(cylinder(1.6,5.5,(x,y,CRADLE_BOTTOM-5.7)))
         feature('WaterGunBaseInsert'+tag,'托架基座 M3 级嵌件候选 '+tag,insert,color='power')
-        screw=cylinder(1.4,6,(x,y,96.2)).fuse(cylinder(2.6,1.3,(x,y,102.2)))
+        screw=cylinder(1.4,6,(x,y,CRADLE_BOTTOM-4.5)).fuse(cylinder(2.6,1.3,(x,y,CRADLE_BOTTOM+1.5)))
         feature('WaterGunBaseScrew'+tag,'托架沉入式紧固候选 '+tag,screw)
         # Short L-key: narrow tip through the pad, then a 6 mm shank corridor
-        # opening toward the front after the gun and caps have been removed.
-        tool=cylinder(1.5,3.5,(x,y,103.5)).fuse(cylinder(3,8,(x,y,107)))
-        tool=tool.fuse(cylinder(3,40,(x,y,115),(0,-1,0))).fuse(Part.makeSphere(3,V(x,y,115))).removeSplitter()
+        # opening toward the front after the gun has been detached and removed.
+        tool=cylinder(1.5,3.5,(x,y,CRADLE_BOTTOM+2.8)).fuse(cylinder(3,8,(x,y,CRADLE_BOTTOM+6.3)))
+        tool=tool.fuse(cylinder(3,40,(x,y,CRADLE_BOTTOM+14.3),(0,-1,0))).fuse(Part.makeSphere(3,V(x,y,CRADLE_BOTTOM+14.3))).removeSplitter()
         feature('WaterGunBaseTool'+tag,'空托架基座短臂内六角操作空间 '+tag,tool,category='clearance',color='power')
-    for index,y in enumerate(CAP_CENTRES):
+    for index,y in enumerate(ADHESIVE_CENTRES):
         tag=str(index+1)
-        bottom=box(39.4,y-5,103.7,70.6,y+5,104.7)
-        # Access to the base screw after the gun has been withdrawn.
-        for by in BASE_CENTRES:bottom=bottom.cut(cylinder(3,2,(42.5,by,103.5)))
-        feature('WaterGunLowerPad'+tag,'水枪底部 1 mm 软垫候选 '+tag,bottom,color='dark')
-        feature('WaterGunInnerPad'+tag,'内侧 0.6 mm 定位软垫候选 '+tag,
-                box(37.8,y-5,110,38.4,y+5,124),color='dark')
-        cap=box(38,y-5,130.3,83.5,y+5,132.3).fuse(box(80.5,y-5,122.5,83.5,y+5,130.3))
-        cap=cap.cut(cylinder(1.6,8,(77,y,125.5),(1,0,0)))
-        feature('WaterGunCap'+tag,'侧向抽出的水枪压盖 '+tag,cap.removeSplitter(),group='water_gun_caps')
-        feature('WaterGunUpperPad'+tag,'随压盖拆出的 1 mm 上垫 '+tag,
-                box(39.4,y-5,129.3,70.6,y+5,130.3),color='dark',group='water_gun_caps')
-        cut('WaterGunCradle',cylinder(2.3,3.1,(77.45,y,125.5),(1,0,0)))
-        insert=cylinder(2.2,2.8,(77.6,y,125.5),(1,0,0)).cut(cylinder(1.6,2.8,(77.6,y,125.5),(1,0,0)))
-        feature('WaterGunCapInsert'+tag,'压盖横向 M3 级嵌件候选 '+tag,insert,color='power')
-        screw=cylinder(1.4,5.8,(77.7,y,125.5),(1,0,0)).fuse(cylinder(2.5,2,(83.5,y,125.5),(1,0,0)))
-        feature('WaterGunCapScrew'+tag,'压盖外侧操作紧固件 '+tag,screw,group='water_gun_cap_screws')
-        feature('WaterGunCapTool'+tag,'压盖批头工具直线空间 Ø10×30 '+tag,
-                cylinder(5,30,(85.5,y,125.5),(1,0,0)),category='clearance',color='power')
+        bottom=box(39.4,y-10,CRADLE_TOP,70.6,y+10,BODY_BOTTOM)
+        # Leave the base screw accesses clear of tape. Adhesive release itself
+        # is a prerequisite, not simulated as a rigid-body motion.
+        for by in BASE_CENTRES:bottom=bottom.cut(cylinder(3,ADHESIVE_THICKNESS+.4,(42.5,by,CRADLE_TOP-.2)))
+        feature('WaterGunLowerPad'+tag,'底部双面软胶候选／厚度未测 '+tag,bottom,color='dark')
     lead=rounded_route(LEAD_POINTS,1.5,8)
     feature('WaterGunLeadRoute','水枪尾线束候选 Ø3／中心弯曲半径8',lead,category='envelope',color='power')
     feature('WaterGunLeadClearance','尾线 Ø8 走线审查区／不含手部',
@@ -129,29 +145,43 @@ def build_mount(doc,add):
     feature('WaterGunLeadConnector','水枪可分离插头包络 16×10×10／型号未定',connector,category='envelope',color='power')
     feature('WaterGunConnectorService','尾线插头外拔16及侧面操作余量',
             box(82.5,13.5,109,115,29.5,125),category='clearance',color='power')
-    guide=box(76,16.5,103.7,82,26.5,120.5)
-    guide=guide.cut(cylinder(2.3,7,(75.5,21.5,117),(1,0,0)))
-    guide=guide.cut(box(75.5,19.8,117,82.5,23.2,121))
-    # Slots for a future removable tie, not a claim of certified strain relief.
-    for y in (17.4,24.6):guide=guide.cut(box(75.5,y,106,82.5,y+.8,109))
-    feature('WaterGunLeadGuide','尾线开放导向鞍／扎带槽候选',guide.removeSplitter(),color='dark')
+    # Two open saddles sit flush against the outer locating walls.
+    for name,y in HOSE_SUPPORTS:
+        saddle=cylinder(4.3,6,(78.2,y-3,117),(0,1,0))
+        saddle=saddle.cut(cylinder(2.8,8,(78.2,y-4,117),(0,1,0)))
+        saddle=saddle.cut(box(75.4,y-4,117,81.0,y+4,123))
+        saddle=saddle.cut(box(70,y-4,110,BASE_X1,y+4,124))
+        feature(name,('外侧前' if y==-64 else '外侧后')+'挡板托管座／Ø5管／Ø5.6上开口',
+                saddle.removeSplitter(),color='metal')
     _,hose_space=hose_shapes()
     feature('WaterGunHoseClearance','水管 Ø8 路线预留／中心弯曲半径8候选',hose_space,category='clearance',color='water')
     feature('WaterGunHoseService','侧接管沿 +X 拔出30／操作直径16候选',
             cylinder(8,30,(76.9,-105,117),(1,0,0)),category='clearance',color='water')
-    return {'candidate_revision':'0.13','fixed_to':'ShoulderRailL; two integral 10 mm bosses with M3 candidate inserts',
-            'base_screws':2,'cap_screws':2,'cap_centres_y_mm':list(CAP_CENTRES),
+    return {'candidate_revision':'0.25','retention':'user-selected double-sided soft adhesive under gun; no mechanical top clamp',
+            'fixed_to':'ShoulderRailL; two integral 10 mm bosses with M3 candidate inserts',
+            'base_screws':2,'cap_screws':0,
             'base_screw_centres_xy_mm':[[42.5,y] for y in BASE_CENTRES],
-            'padding_mm':{'top':1,'bottom':1,'inner_side':.6},
-            'gun_play_nominal_mm':{'bare_inner_side':.6,'top_with_pad':0,'bottom_with_pad':0,'rear_stop':.5},
-            'hose':{'assumed_od_mm':4,'route_clearance_diameter_mm':8,'centreline_bend_radius_mm':8,'unplug_direction_mm':[30,0,0]},
-            'leads':{'assumed_bundle_diameter_mm':3,'route_clearance_diameter_mm':8,'centreline_bend_radius_mm':8,
+            'adhesive':{'thickness_mm':ADHESIVE_THICKNESS,'thickness_measured':False,
+                'patches':2,'patch_bbox_xy_mm':[31.2,20],'centres_y_mm':list(ADHESIVE_CENTRES),
+                'base_screw_access_cutouts_diameter_mm':6,'grade_or_strength_selected':False},
+            'base':{'main_width_mm':BASE_X1-BASE_X0,'main_length_mm':74,'thickness_mm':3,
+                'side_margin_to_maximum_housing_mm':SIDE_GAP+SIDE_WALL_THICKNESS,'rear_stop_gap_mm':.5},
+            'side_walls':{'pairs':2,'centres_y_mm':list(ADHESIVE_CENTRES),'length_mm':12,
+                'height_above_base_mm':SIDE_WALL_HEIGHT,'thickness_mm':SIDE_WALL_THICKNESS,
+                'channel_width_mm':SIDE_X1-SIDE_X0,'nominal_side_gap_mm':SIDE_GAP,'top_lips_or_fasteners':False},
+            'hose':{'measured_od_mm':5,'measurement_source':'user 2026-10-24','routing':'outer side via two saddles to rear reservoir; no underside crossing','route_clearance_diameter_mm':8,'centreline_bend_radius_mm':8,'unplug_direction_mm':[30,0,0]},
+            'hose_support':{'attached_to':'front and rear outer side walls','quantity':2,'integral_with_cradle':True,
+                'centres_module_mm':[[78.2,y,117] for _,y in HOSE_SUPPORTS],'centre_spacing_mm':52,'flush_to_outer_wall':True,'support_arm':False,'axial_length_mm':6,'seat_diameter_mm':5.6,
+                'nominal_radial_gap_mm':.3,'outer_diameter_mm':8.6,'opening':'module +Z',
+                'retaining_clip_or_strain_relief_verified':False},
+            'leads':{'guide_integral_with_cradle':True,'assumed_bundle_diameter_mm':3,'route_clearance_diameter_mm':8,'centreline_bend_radius_mm':8,
                      'connector_size_xyz_mm':[16,10,10],'connector_unplug_direction_mm':[16,0,0]},
-            'sequence':['power off and drain','withdraw hose +X 30, unplug tail connector +X 16, release guide tie and flexible lines',
-                        'withdraw 2 cap screws +X 20','slide both caps and upper pads +X 50','pull gun forward -Y 150',
+            'sequence':['power off and drain','withdraw hose +X 30 and lift hose out of both open saddles, unplug tail connector +X 16, release guide tie and flexible lines',
+                        'fully release adhesive bond; release method and access not verified',
+                        'lift gun along module +Z 2 then pull forward -Y 150',
                         'optional: use short L-key from the front to remove 2 base screws, lift empty cradle +Z 2 then move +X 60'],
             'contact_surfaces_fasteners_bends_and_materials_assumed':True,
-            'strength_clamp_load_strain_relief_and_physical_fit_verified':False}
+            'adhesive_retention_release_strain_relief_and_physical_fit_verified':False}
 
 
 def removable_line_names(doc):
@@ -161,50 +191,56 @@ def removable_line_names(doc):
 
 def check_mount(doc):
     from water_gun_layout import hits, bbox
+    fit=[]
+    body=doc.getObject('WaterGunBody').Shape
+    for tag in ('1','2'):
+        pad=doc.getObject('WaterGunLowerPad'+tag).Shape
+        pb=bbox(pad)
+        thickness=pb[5]-pb[2]
+        top=pad.common(Part.makePlane(100,150,V(20,-100,BODY_BOTTOM)))
+        area=top.Area
+        contact=top.common(body).Area
+        fit.append({'patch':int(tag),'thickness_mm':thickness,'nominal_top_area_mm2':area,
+                    'nominal_body_contact_area_mm2':contact,
+                    'passed':abs(thickness-ADHESIVE_THICKNESS)<1e-6 and area>0 and abs(area-contact)<1e-5})
     physical=[o for o in doc.Objects if hasattr(o,'Category') and o.Category!='clearance']
     spaces=[]
     exclusions={
-        'WaterGunHoseClearance':['WaterHoseRoute'],
-        'WaterGunLeadClearance':['WaterGunLeadRoute','WaterGunLeadGuide'],
+        'WaterGunHoseClearance':['WaterHoseRoute']+[name for name,_ in HOSE_SUPPORTS],
+        'WaterGunLeadClearance':['WaterGunLeadRoute'],
         'WaterGunHoseService':['WaterHoseRoute'],
         'WaterGunConnectorService':['WaterGunLeadRoute','WaterGunLeadConnector'],
-        'WaterGunCapTool1':[], 'WaterGunCapTool2':[],
     }
     removed_for_base=['WaterGunBody','WaterGunInlet','WaterHoseRoute','WaterGunLeadRoute','WaterGunLeadConnector']
-    removed_for_base += [o.Name for o in physical if getattr(o,'ServiceGroup','') in ('water_gun_caps','water_gun_cap_screws')]
     exclusions['WaterGunBaseTool1']=removed_for_base
     exclusions['WaterGunBaseTool2']=removed_for_base
     for name,excluded in exclusions.items():
-        overlaps=hits(doc.getObject(name).Shape,[o for o in physical if o.Name not in excluded])
-        spaces.append({'name':name,'excluded':excluded,'overlaps':overlaps,'passed':not overlaps})
+        space=doc.getObject(name).Shape
+        # Permit only the known guide material, not the rest of the now-integral cradle.
+        intentional=lead_guide_shape() if name=='WaterGunLeadClearance' else None
+        if intentional is not None:space=space.cut(intentional)
+        overlaps=hits(space,[o for o in physical if o.Name not in excluded])
+        spaces.append({'name':name,'excluded':excluded,
+                       'excluded_material':'integrated tail guide only' if intentional is not None else None,
+                       'overlaps':overlaps,'passed':not overlaps})
+    # Exact capsule sweeps through each open saddle. The remaining flexible
+    # hose is not treated as a rigid part or certified by these local checks.
     results=[]
-    caps=[o.Name for o in physical if getattr(o,'ServiceGroup','')=='water_gun_caps']
-    screws=[o.Name for o in physical if getattr(o,'ServiceGroup','')=='water_gun_cap_screws']
-    for index,y in enumerate(CAP_CENTRES):
-        # Exact axial sweeps of the simplified screw (shaft and head separately).
-        sweep=cylinder(1.4,25.8,(77.7,y,125.5),(1,0,0)).fuse(cylinder(2.5,22,(83.5,y,125.5),(1,0,0)))
-        overlap=hits(sweep,[o for o in physical if o.Name!='WaterGunCapScrew'+str(index+1)])
-        results.append({'operation':'cap_screw_'+str(index+1),'delta_mm':[20,0,0],
-                        'method':'continuous axial shaft and head sweeps','moving':['WaterGunCapScrew'+str(index+1)],'removed_first':[],
-                        'overlaps':overlap,'passed':not overlap})
-        # Unbored cap primitives form a conservative continuous sweep; avoids
-        # falsely filling the entire L-shaped cap with its rectangular bbox.
-        top=box(38,y-5,130.3,133.5,y+5,132.3)
-        leg=box(80.5,y-5,122.5,133.5,y+5,130.3)
-        pad=box(39.4,y-5,129.3,120.6,y+5,130.3)
-        overlap=hits(top.fuse(leg).fuse(pad),[o for o in physical if o.Name not in screws+caps])
-        results.append({'operation':'cap_and_pad_'+str(index+1),'delta_mm':[50,0,0],
-                        'method':'continuous union of unbored cap material primitives and upper pad',
-                        'moving':caps,'removed_first':screws,'overlaps':overlap,'passed':not overlap})
-    # Optional empty cradle removal: conservative bounds per material primitive.
-    parts=[box(35.8,-72,100.7,80.5,2,103.7),box(76,-2,100.7,82,26,103.7)]
-    for y in CAP_CENTRES:
-        parts += [box(35.8,y-6,103.7,37.8,y+6,134),box(37.8,y-6,132.5,40.5,y+6,134),
-                  box(77.5,y-6,103.7,80.5,y+6,129.1)]
-    for x0,x1 in ((39,47),(63,72)):parts.append(box(x0,1,100.7,x1,12,111.7))
+    tube=doc.getObject('WaterHoseRoute').Shape
+    for name,y in HOSE_SUPPORTS:
+        lift=cylinder(2.5,6,(78.2,y-3,117),(0,1,0)).fuse(cylinder(2.5,6,(78.2,y-3,127),(0,1,0)))
+        lift=lift.fuse(box(75.7,y-3,117,80.7,y+3,127)).removeSplitter()
+        overlaps=hits(lift,[o for o in physical if o.Name!='WaterHoseRoute'])
+        gap=tube.distToShape(doc.getObject(name).Shape)[0]
+        results.append({'operation':'hose_local_lift_from_saddle','support':name,'translation_module_mm':[0,0,10],
+              'method':'exact continuous capsule sweep of 6 mm straight hose section only',
+              'measured_hose_od_mm':5,'seat_diameter_mm':5.6,'minimum_tube_support_gap_mm':gap,
+              'overlaps':overlaps,'passed':not overlaps and gap>=.3-1e-5})
+    # Empty support after the gun is detached and removed.
+    parts=cradle_primitives()
     cradle=[o for o in physical if getattr(o,'ServiceGroup','')=='water_gun_cradle']
     parts += [o.Shape for o in cradle if o.Name!='WaterGunCradle']
-    removed=caps+screws+removable_line_names(doc)+['WaterGunBody','WaterGunInlet','WaterGunBaseScrew1','WaterGunBaseScrew2']
+    removed=removable_line_names(doc)+['WaterGunBody','WaterGunInlet','WaterGunBaseScrew1','WaterGunBaseScrew2']
     excluded=removed+[o.Name for o in cradle]
     obstacles=[o for o in physical if o.Name not in excluded]
     overlaps=[]
@@ -219,8 +255,8 @@ def check_mount(doc):
     results.append({'operation':'empty_cradle','waypoints_mm':[[0,0,0],[0,0,2],[60,0,2]],
                     'method':'conservative continuous AABB sweeps of individual material primitives',
                     'removed_first':removed,'overlaps':overlaps,'passed':not overlaps})
-    return {'service_spaces':spaces,'continuous_service_sweeps':results,
-            'passed':all(x['passed'] for x in spaces+results),
-            'intended_contacts':'upper/lower/inner pads contact nominal measured body faces; cap flange and saddle mounting faces contact without volume overlap',
-            'tool_scope':'cap screwdriver shank diameter 10, length 30; base short L-key tip diameter 3, shank diameter 6, front arm 40; hands not covered',
-            'hose_pressure_wire_flex_clamp_preload_strength_and_physical_fit_verified':False}
+    return {'adhesive_contact_checks':fit,'service_spaces':spaces,'continuous_service_sweeps':results,
+            'passed':all(x['passed'] for x in fit+spaces+results),
+            'intended_contacts':'adhesive nominally bridges gun bottom and support top; side walls and rear stops locate only and do not prove adhesive retention',
+            'tool_scope':'base short L-key tip diameter 3, shank diameter 6, front arm 40; hands not covered',
+            'adhesive_retention_release_hose_pressure_wire_flex_and_physical_fit_verified':False}

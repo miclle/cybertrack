@@ -17,7 +17,6 @@ COMPONENT = ROOT / 'hardware/components/bubble-gun'
 REVISION = COMPONENT / 'revisions/rear-tab-2026-10-24'
 ORIGIN = (-55.0, -129.0, 110.0)  # Muzzle end centre in assembly; body extends toward +Y after Z rotation.
 WIDTH = 35.8  # Reserved width, unmeasured.
-REMOVED = ('BubbleDuct', 'BubbleOutlet', 'BubbleOutletBezel')
 NAMES = ('BubbleGunShell', 'BubbleGunWheel', 'BubbleGunMotor', 'BubbleGunGearcase', 'BubbleGunMountingTab', 'BubbleGunFrontFoot')
 
 
@@ -140,9 +139,6 @@ def export_component(shapes, render=False):
 
 def add_bubble_gun(doc, add, render=False):
     shapes=local_shapes();export_component(shapes,render)
-    obstacles=[o for o in doc.Objects if hasattr(o,'Category') and o.Category!='clearance' and o.Name not in REMOVED]
-    original=hits(inspection_box((24,91,76), front_facing=False),obstacles)
-    for name in REMOVED:doc.removeObject(name)
     for name,shape in shapes.items():
         moved=shape.copy();moved.rotate(V(),V(0,0,1),180);moved.translate(V(*ORIGIN))
         obj=add(name,'泡泡枪主体／'+name.removeprefix('BubbleGun'),moved,'component',
@@ -156,8 +152,7 @@ def add_bubble_gun(doc, add, render=False):
     return {'source':'hardware/components/bubble-gun/README.md','origin_mm':list(ORIGIN),
             'rotation_degrees':[0,0,180],'orientation':'muzzle -Y; body toward +Y; front-view left / vehicle right',
             'inspection_bbox_mm':bbox(inspection_box()),'reserved_width_mm':WIDTH,
-            'original_outlet_position':{'origin_mm':[24,91,76],'overlaps':original,'passed':not original},
-            'removed_decorative_objects':list(REMOVED),'mount':mount,'mounts_and_hose_routes_designed':True}
+            'mount':mount,'mounts_and_hose_routes_designed':True}
 
 
 def check_bubble_gun(doc, service_check):

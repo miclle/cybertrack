@@ -3,7 +3,7 @@ from contextlib import contextmanager
 import copy
 import FreeCAD as App
 import Part
-from water_gun_mount import box,cylinder,rounded_route
+from water_gun_mount import box,cylinder,rounded_route,CRADLE_BOTTOM
 V=App.Vector
 ANGLE=-5.0
 PIVOTS={'water':V(42.5,-18,100.7),'bubble':V(-40,-62,85.95)}
@@ -32,7 +32,7 @@ def apply_pitch(doc,rail_bases):
         if o.Name.startswith('WaterGun'):o.Shape=moved(o.Shape,'water')
         elif o.Name.startswith('BubbleGun'):o.Shape=moved(o.Shape,'bubble')
     for kind,rail,x,ys,zs,basez,holez in [
-        ('water','ShoulderRailL',42.5,(-60,-18),(76,90),100.7,94.8),
+        ('water','ShoulderRailL',42.5,(-60,-18),(76,90),CRADLE_BOTTOM,CRADLE_BOTTOM-5.9),
         ('bubble','ShoulderRailR',-40,(-78,-62),(76,76),85.95,80)]:
         body=rail_bases[rail].copy()
         above=moved(box(-500,-500,basez,500,500,500),kind)
@@ -46,13 +46,10 @@ def apply_pitch(doc,rail_bases):
             doc.getObject(rail).Shape.exportBrep('/tmp/cybertrack-pitch-'+rail+'.brep')
             raise ValueError((rail,doc.getObject(rail).Shape.isValid(),len(doc.getObject(rail).Shape.Solids),doc.getObject(rail).Shape.check(True)))
     # Reservoir ends remain fixed; only the gun-side endpoints follow elevation.
-    water=list(WATER_POINTS)
-    water[4]=(-51,-46,130);water[5]=(-18,-56,130)
-    water[6]=(-18,-90,94);water[7]=(90,-90,94)
-    water=water[:-3]+[tuple(point(p,'water')) for p in water[-3:]]
+    water=list(WATER_POINTS[:4])+[tuple(point(p,'water')) for p in WATER_POINTS[4:]]
     bubble=list(BUBBLE_POINTS[:-3])+[(-90,-45,100)]+[tuple(point(p,'bubble')) for p in BUBBLE_POINTS[-2:]]
     for route,space,pts in [('WaterHoseRoute','WaterGunHoseClearance',water),('BubbleGunHoseRoute','BubbleGunHoseClearance',bubble)]:
-        doc.getObject(route).Shape=rounded_route(pts,2,8)
+        doc.getObject(route).Shape=rounded_route(pts,2.5 if route=='WaterHoseRoute' else 2,8)
         doc.getObject(space).Shape=rounded_route(pts,4,8)
     return {'elevation_degrees':5,'candidate_not_measured':True,'rotation_about_X_degrees':ANGLE,
         'pivot_world_mm':{k:list(v) for k,v in PIVOTS.items()},'translation_world_mm':{k:list(v) for k,v in OFFSETS.items()},

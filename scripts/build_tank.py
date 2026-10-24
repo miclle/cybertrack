@@ -15,11 +15,12 @@ from refine_assembly import refine, service_groups, check_service_paths
 from controller_layout import check_controller_spaces
 from water_gun_layout import add_water_gun, check_water_gun, check_other_service_sweeps
 from bubble_gun_layout import add_bubble_gun, check_bubble_gun
+from speaker_layout import speaker_shape, check_speaker, render_speaker, LABEL as SPEAKER_LABEL, BASIS as SPEAKER_BASIS
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'hardware/model'
 V = App.Vector
-COLORS = {'body': (0.24, 0.36, 0.43), 'dark': (0.075, 0.10, 0.12),
+COLORS = {'body': (0.25, 0.36, 0.43), 'dark': (0.075, 0.10, 0.12),
           'metal': (0.40, 0.48, 0.51), 'light': (0.82, 0.84, 0.80), 'accent': (0.98, 0.31, 0.07),
           'visor': (0.025, 0.055, 0.065), 'signal': (0.20, 0.87, 0.94),
           'water': (0.18, 0.68, 0.81), 'bubble': (0.49, 0.46, 0.77),
@@ -119,7 +120,7 @@ def render_views(doc, output):
         if group=='bubble_gun':return moved(body_service_shape(moved(shape,'bubble',True),15,(-90,10,3)),'bubble')
         s=shape.copy();s.translate(vector(tuple(offset)) if group.startswith('water_gun') else offset);return s
     original_shapes={}
-    offsets={'cable_access':V(0,0,-25),'battery':V(0,0,-60),'crown':V(0,0,65),'electronics':V(0,0,35),'Water':V(0,12,40),'Bubble':V(0,12,40),'arc_left':V(-24.5,0,2),'arc_right':V(24.5,0,2),'water_gun':V(0,-45,0),'water_gun_caps':V(45,0,0),'water_gun_cap_screws':V(20,0,0),'water_gun_cradle':V(0,0,0),'bubble_gun':V(0,-60,21),'bubble_gun_cradle':V()}
+    offsets={'cable_access':V(0,0,-25),'battery':V(0,0,-60),'crown':V(0,0,65),'electronics':V(0,0,35),'Water':V(0,12,40),'Bubble':V(0,12,40),'arc_left':V(-24.5,0,2),'arc_right':V(24.5,0,2),'water_gun':V(0,-45,0),'water_gun_cradle':V(0,0,0),'bubble_gun':V(0,-60,21),'bubble_gun_cradle':V()}
     for group,names in service_groups(doc).items():
         for name in names:
             obj=doc.getObject(name);original_shapes[name]=obj.Shape.copy()
@@ -184,7 +185,7 @@ def render_views(doc, output):
             o.ViewObject.Transparency=0
     render('water-gun-mount.png','iso')
     mount_shapes={}
-    for group,offset in [('water_gun_caps',V(50,0,0)),('water_gun_cap_screws',V(70,0,0)),('water_gun',V(0,-65,0))]:
+    for group,offset in [('water_gun',V(0,-110,2))]:
         for name in service_groups(doc)[group]:
             obj=doc.getObject(name);mount_shapes[name]=obj.Shape.copy()
             obj.Shape=exploded(obj.Shape,group,offset)
@@ -202,7 +203,7 @@ def render_views(doc, output):
     render('bubble-gun-component.png','iso')
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Name.startswith('BubbleGun') or o.Name in ('BubblePod','BubbleModule','RearBaseArmor','RearDripLip','BackpackShell','BackpackSpine')
+            o.ViewObject.Visibility=o.Name.startswith('BubbleGun') or o.Name in ('BubblePod','BubbleModule','RearBaseArmor','BackpackShell','BackpackSpine')
             o.ViewObject.Transparency=85 if o.Category=='clearance' or o.Name=='BubblePod' else 0
     render('bubble-gun-clearance.png','rear_iso')
     for o in doc.Objects:
@@ -247,7 +248,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.18'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.25'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -511,10 +512,11 @@ def main():
         flank=flank.cut(yz_prism([(-89,48),(-72,48),(-56,65),(-67,66),(-90,63)],x0-1,x1+1))
         add('KeelSideFrame'+side,('左' if sign>0 else '右')+'镂空底座侧框',flank,'structure','metal')
     # Preserve wet allocations inside a single faceted backpack with two service lids.
+    bubble_hose_diameter=9
     for name,cx in [('Water',-24),('Bubble',24)]:
         pod=ring(20,17,82,V(cx,49,40))
         if name=='Bubble':
-            pod=pod.cut(Part.makeCylinder(12.5,45,V(24,50,76),V(0,1,0)))
+            pod=pod.cut(Part.makeCylinder(bubble_hose_diameter/2,45,V(24,50,76),V(0,1,0)))
         add(name+'Pod',('喷水' if name=='Water' else '泡泡')+'背包内部独立液体舱',pod,'structure','dark')
         add(name+'PodCap',('喷水' if name=='Water' else '泡泡')+'内舱盖占位',Part.makeCylinder(20,3,V(cx,49,122)),'structure','metal','内舱封盖占位；补液和拆卸接口待实测')
     pack=faceted_shell_volume([(48,25,76,6,97),(52,24,81,8,104),(49,25,79,8,128)])
@@ -551,30 +553,21 @@ def main():
         mark=[(sign*x,z) for x,z in [(19,100.5),(32,100.5),(32,102),(19,102)]]
         add('PackMark'+side,'背包液体区识别条 '+side,xz_prism(mark,84,84.6),'exterior',color)
     add('BackpackSpine','背包至底座的中央脊梁护甲',xz_prism(spine,79,85),'exterior','metal')
-    # A tapered rear base replaces the flat back wall visually, with an integrated outlet.
+    # Keep only a hose passage through the tapered rear armor; the gun is front-mounted.
     rear_profile0=[(-39,34),(39,34),(47,42),(47,89),(39,97),(-39,97),(-47,89),(-47,42)]
     rear_profile1=[(-34,40),(34,40),(42,48),(42,85),(34,93),(-34,93),(-42,85),(-42,48)]
     wires=[]
     for profile,y in [(rear_profile0,74),(rear_profile1,82)]:
         vs=[V(x,y,z) for x,z in profile];wires.append(Part.makePolygon(vs+[vs[0]]))
     rear_armor=Part.makeLoft(wires,True,True)
-    rear_armor=rear_armor.cut(Part.makeCylinder(15.5,25,V(24,72,76),V(0,1,0)))
+    rear_hose_port={'diameter_mm':bubble_hose_diameter,'axis_origin_mm':[24,72,76],'axis_direction':[0,1,0],
+                    'armor_y_range_mm':[74,82],'hose_od_candidate_mm':4,
+                    'route_clearance_diameter_mm':8,'radial_margin_to_route_clearance_mm':0.5,
+                    'basis':'design candidate; existing hose route retained; grommet and seal not selected',
+                    'grommet_or_seal_fit_verified':False,'physical_fit_verified':False}
+    rear_armor=rear_armor.cut(Part.makeCylinder(rear_hose_port['diameter_mm']/2,25,V(*rear_hose_port['axis_origin_mm']),V(0,1,0)))
     rear_armor=rear_armor.cut(spine_seat)
-    left_inset=[(-37,63),(-32,59),(-13,59),(-10,63),(-10,85),(-15,89),(-32,89),(-37,84)]
-    rear_armor=rear_armor.cut(xz_prism(left_inset,79,86))
-    drip=yz_prism([(79,55),(94,55),(96,57),(96,60),(94,60),(94,58),(82,58),(79,57)],4,44)
-    rear_armor=rear_armor.cut(drip)
     add('RearBaseArmor','底座斜面后护甲／背包下支座',rear_armor,'exterior','body')
-    add('RearBaseInset','底座背部内凹检修饰板',xz_prism(left_inset,79,80),'exterior','dark','检修区域造型；紧固、密封与工具空间未验证')
-    for i,z in enumerate((65,72,79)):
-        add('RearBaseLouver'+str(i),'底座后部盲槽饰条 '+str(i),xz_prism([(-32,z),(-15,z),(-17,z+2),(-32,z+2)],80,81.5),'exterior','metal')
-    duct=ring(12,9,9,V(24,65,76),V(0,1,0))
-    add('BubbleDuct','后舱泡泡出口短颈',duct,'exterior','dark','P10 后向出口分配；风机和液路接口未定')
-    add('BubbleOutlet','内嵌后向泡泡扩口',ring(15,9,17,V(24,74,76),V(0,1,0)),'exterior','dark')
-    bezel=[(24+x,76+z) for x,z in [(-17,-11),(-11,-17),(11,-17),(17,-11),(17,11),(11,17),(-11,17),(-17,11)]]
-    bezel=xz_prism(bezel,82,86).cut(Part.makeCylinder(15.2,6,V(24,81,76),V(0,1,0)))
-    add('BubbleOutletBezel','泡泡出口八角分层护框',bezel,'exterior','metal')
-    add('RearDripLip','后护甲下方折面滴液唇',drip,'exterior','dark','排液轮廓候选；坡度、滴落与防倒流未验证')
     skid=xz_prism([(-32,42),(32,42),(28,48),(-28,48)],82,83)
     add('RearLowerInset','后底座内凹视觉分层',skid,'exterior','dark')
     # Compact low nose: the former chest audio volume is now inside the helmet.
@@ -596,10 +589,11 @@ def main():
                  ('WaterModule','后部喷水液体区占位 Ø32×70',Part.makeCylinder(16,70,V(-24,49,43)),'water'),
                  ('BubbleModule','后部泡泡液体区占位 Ø32×70',Part.makeCylinder(16,70,V(24,49,43)),'bubble'),
                  ('Electronics','头舱主控／驱动／电源分配区 100×45×34',box(-50,-38,146,50,7,180),'electronics'),
-                 ('AudioModule','头舱前部音频区占位 72×36×21',box(-36,-75,146,36,-39,167),'metal')]
+                 ('AudioModule',SPEAKER_LABEL,speaker_shape(),'metal')]
     for name,label,shape,color in allocations:
         basis=('用户提供外形 120×73×31.5 mm，确认较重；低位平放位置获用户认可，端口、重量与实物适配未验证'
                if name=='PowerBank' else '空间分配假设；不是所购物料尺寸，不构成整套装入结论')
+        if name=='AudioModule': basis=SPEAKER_BASIS
         add(name,label,shape,'envelope',color,basis)
     for side,sign in [('L',1),('R',-1)]:
         add('ArcModule'+side,('左' if sign>0 else '右')+'电弧模块预装占位 Ø25.5×70',
@@ -681,6 +675,7 @@ def main():
         raise ValueError(step_check)
     if args.render:
         render_views(saved, OUT)
+        render_speaker(saved, OUT)
         saved.save()
     # Reopen the final saved file after GUI styling; verify geometry and visibility.
     App.closeDocument(saved.Name)
@@ -705,7 +700,12 @@ def main():
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
                     assert visible==(final_shapes[name].Category not in ('envelope','clearance')),name
     assert sha(source_path)==source_hash
-    report={'status':'preliminary_concept','design_revision':'0.18','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.25','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+            'rear_hose_pass_through':rear_hose_port,
+            'bubble_pod_hose_pass_through':{'diameter_mm':bubble_hose_diameter,'axis_origin_mm':[24,50,76],
+                'axis_direction':[0,1,0],'former_outlet_diameter_mm':25,
+                'basis':'candidate passage through curved pod wall; existing hose route retained; no selected fluid fitting',
+                'fluid_fitting_or_seal_verified':False,'physical_fit_verified':False},
             'bounding_box_method':'optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)',
             'power_bank_dimensions_mm':{'source':'user_measurement','length':120,'width':73,'thickness':31.5,
             'orientation':'length X, width Y, thickness Z; low horizontal placement retained from user-approved layout',
@@ -737,11 +737,15 @@ def main():
             'water_gun_layout':water_info,'water_gun_check':water_check,
             'bubble_gun_layout':bubble_info,'bubble_gun_check':bubble_check,'gun_pitch':pitch_info,
             'service_paths':service_check,'controller_layout':controller_info,'controller_clearance_check':controller_check,
+            'speaker_check':check_speaker(final),
             'manufacturing_released':False,'physical_fit_verified':False,
             'assembly_paths_verified':False,'electrical_verified':False,
             'final_saved_audit':{'native_objects_verified':len(final_shapes),'gui_visibility_verified':args.render},
             'previews_generated':args.render,
             'files_sha256':{p.name:sha(p) for p in [cad,step]+(sorted(OUT.glob('*.png')) if args.render else [])}}
+    report['speaker_check']['source_after_sha256']=sha(cad)
+    report['speaker_check']['saved_and_reopened']=True
+    (OUT/'speaker-fit-audit.json').write_text(json.dumps(report['speaker_check'],ensure_ascii=False,indent=2)+'\n')
     (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check','service_paths')},ensure_ascii=False,indent=2))
     App.closeDocument(final.Name)
@@ -751,7 +755,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
+    if not report['speaker_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 
