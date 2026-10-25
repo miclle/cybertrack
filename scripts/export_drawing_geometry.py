@@ -15,6 +15,11 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'tmp/pdfs'
 OUT.mkdir(parents=True, exist_ok=True)
 source = ROOT / 'hardware/model/CyberTrack.FCStd'
+tree_path = ROOT / 'hardware/model/model-tree-audit.json'
+if tree_path.exists():
+    tree = json.loads(tree_path.read_text())
+    if tree['delivery_sha256'] == hashlib.sha256(source.read_bytes()).hexdigest():
+        source = ROOT / 'hardware/model' / tree['source_document']
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 source_hash = sha(source)
 doc = App.openDocument(str(source))
@@ -133,7 +138,7 @@ bounds={}
 for o in objects:
     b=o.Shape.optimalBoundingBox(False)
     bounds[o.Name]={'label':o.Label,'bbox':[b.XMin,b.YMin,b.ZMin,b.XMax,b.YMax,b.ZMax]}
-(OUT/'dimensions.json').write_text(json.dumps({'source_sha256':source_hash,'objects':bounds},ensure_ascii=False,indent=2))
+(OUT/'dimensions.json').write_text(json.dumps({'source_document':str(source.relative_to(ROOT/'hardware/model')),'source_sha256':source_hash,'objects':bounds},ensure_ascii=False,indent=2))
 for view in ('front','rear','side','right','top','bottom'):
     project(view, [o.Name for o in visible], view)
 for key,names,view in [

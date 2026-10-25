@@ -10,6 +10,7 @@
 
 # Native generated assembly exchange data; review its readback report.
 /hardware/model/*.step -diff
+/hardware/model/print-parts/*.step -diff
 /hardware/model/parts/L298N-carrier-0.34.step -diff
 /hardware/components/L298N/L298N-envelope.step -diff
 /hardware/components/MT3608/MT3608-envelope.step -diff

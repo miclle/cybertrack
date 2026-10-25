@@ -590,6 +590,8 @@ def main():
     ignition_mos_info=add_ignition_mos(doc,add)
     front_effects_info=add_front_effects(doc,add)
     ignition_routing_info=add_ignition_routing(doc,add)
+    from print_consolidation import connect_features, finalize as finalize_print_parts
+    print_connections=connect_features(doc)
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
@@ -797,15 +799,30 @@ def main():
     (OUT/'ignition-routing-audit.json').write_text(json.dumps(report['ignition_routing_check'],ensure_ascii=False,indent=2)+'\n')
     (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check','service_paths')},ensure_ascii=False,indent=2))
-    App.closeDocument(final.Name)
+    required_checks = ('ignition_mos_check', 'ignition_routing_check', 'front_effects_check',
+                       'mt3608_check', 'effects_mount_check', 'ultrasonic_integration_check',
+                       'head_lift_check', 'bottle_backpack_check', 'l298n_mount_check',
+                       'l298n_check', 'drive_mount_check', 'top_feed_check',
+                       'rear_armor_symmetry_check', 'ultrasonic_check', 'bubble_gun_check',
+                       'collision_check', 'service_paths', 'breadboard_check', 'water_gun_check')
+    if not all(report[key]['passed'] for key in required_checks) or not water_check['removal']['passed']:
+        raise ValueError('CAD checks failed; consolidated print export withheld')
+    # Source feature checks retain their identities; fused print objects are added only
+    # after those checks to avoid counting both a feature and its derived union.
+    finalize_print_parts(final, OUT, report, print_connections, args.render)
+    from model_tree import organize
+    organize(OUT, args.render)
+    from model_labels import normalize
+    normalize(OUT)
+    from model_order import reorder
+    reorder(OUT)
     if args.render:
         # Dispose delayed view widgets while Python and its GIL still exist.
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if not report['ignition_mos_check']['passed'] or not report['ignition_routing_check']['passed'] or not report['front_effects_check']['passed'] or not report['mt3608_check']['passed'] or not effects_check['passed'] or not report['ultrasonic_integration_check']['passed'] or not report['head_lift_check']['passed'] or not report['bottle_backpack_check']['passed'] or not report['l298n_mount_check']['passed'] or not report['l298n_check']['passed'] or not drive_mount_check['passed'] or not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not breadboard_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
-        raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
+
 
 
 if __name__=='__main__':
