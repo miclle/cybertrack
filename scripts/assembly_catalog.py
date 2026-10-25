@@ -19,7 +19,7 @@ SYSTEMS = OrderedDict([
  ('J', ('水枪与胶粘底托', '水枪尺寸 / 水枪固定 / 线管', '先装空底托两颗基座螺钉，再铺胶垫、装枪、放管和接线；拆枪先断管断线并解除粘接。')),
  ('K', ('泡泡枪与整体圆环底座', '前置双枪 / 泡泡枪拆装', '先固定空底座，再按拆卸路径逆序穿环、入槽并胶辅固定；前环无分缝，不增加环上螺钉。')),
  ('L', ('双瓶背包、绑带与顶部吸管', '双瓶背包 / 顶部供液', '先固定两底托和软垫，再放入成品瓶、合绑带、顶部插管；拆瓶先移开目标吸管并松绑带。')),
- ('N', ('背包本体夹持与效果板承板', '背包夹环 / 薄承板固定', '本体解除外半夹环后上取；承板先拆充电宝再从下方解除四点紧固。板卡固定与真实接线仍待实测。')),
+ ('N', ('背包本体夹持与效果板承板', '背包夹环 / 薄承板固定', '本体解除外半夹环后上取；承板先拆充电宝再从下方解除四点紧固。板边压框及局部接线空间为候选，真实接口与公差仍待实测。')),
  ('M', ('工具、接线与维护空间', '对应系统维护详图', '本组均为自由空间，不是实物零件，不计入采购或打印；装配时保持通道畅通。')),
 ])
 
@@ -61,12 +61,16 @@ def relation(name, obj, group):
         if name.startswith(('ArcLiner','ArcBottomPad')):return '夹环与本体接触界面','夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。'
         if name.startswith('ArcInsert'):return '一体内半夹环的盲孔','共8个M2.5级候选嵌件；与外侧螺钉配套，不作为已验证螺纹啮合或工艺参数。'
         if name.startswith('ArcScrew'):return '外半夹环 → 内半夹环嵌件','共8颗M2.5级候选，从外侧操作；取出路径35，工具杆只覆盖Ø3直杆。'
-        if name.startswith(('EffectMOS','EffectBuck')):return '底盘效果板薄承板','MOS 33×17×12（高暂定），降压板20×11×5（用户尺寸）。板孔、端子、支柱及板卡自身固定未定，不直接作为加工图。'
-        if name=='EffectTray':return '顶盖内侧四根一体支柱','主体74×33×2，孔X±39、Y−49/−29；先拆充电宝及底盖，再退出4螺钉，向下取100。'
+        if name.startswith(('EffectMOS','EffectBuck')):return '承板浅凹座与开窗压框','MOS33×17×12／降压20×11×5；PCB厚1.6、四边无元件区2.5假设。机外拆框后上取20，实际板边必须核对。'
+        if name.startswith('EffectSupport'):return 'PCB两条板边下方','0.5 mm垫放在1 mm深座内；板底中央0.5余量，焊脚、接触区、压缩及材料待实测。'
+        if name.startswith('EffectRetainerInsert'):return '承板压框支柱','8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。'
+        if name.startswith('EffectRetainerScrew'):return '开窗压框 → 承板支柱','每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。'
+        if name.startswith('EffectRetainer'):return 'PCB无元件边缘上方','4个独立开窗框；仅覆盖假设空白板边，顶间隙0.4。机外拆本框2螺钉后上取20，再提板。'
+        if name=='EffectTray':return '顶盖内侧四根一体支柱','低位凹座与四耳沉台，孔X±47、Y−49/−26.5；先拆充电宝及底盖，再退出4螺钉，向下取100。'
         if name.startswith('EffectInsert'):return '顶盖内柱向下开口盲孔','4个M2.5级候选嵌件；顶盖外表面不穿孔，配合、制造和强度待验。'
-        if name.startswith('EffectScrew'):return '承板四耳 → 顶盖内柱','4颗M2.5级候选，先拆充电宝再从下操作；头部与电源名义间隙0.5 mm，实物公差必须复核。'
+        if name.startswith('EffectScrew'):return '承板四耳 → 顶盖内柱','4颗M2.5级候选，先拆充电宝再从下操作；头部凹入耳内，距电源2.1 mm；盘底2 mm，公差仍须复核。'
     if name=='BackpackShell':return '双瓶护壳及外侧一体内半夹环','0.42新增两侧夹环支撑、底托和连接肋；原液瓶舱几何保持。夹持、材料、液体共存与制造未验收。'
-    if name=='KeelLid':return '底盘折面顶盖及内侧一体支柱','原前斜坡外表面保持；0.42新增薄承板4根内柱，底部螺钉固定，不穿透外表面。'
+    if name=='KeelLid':return '底盘折面顶盖及内侧一体支柱','原前斜坡外表面保持；0.43调整薄承板4根内柱，底部螺钉固定，不穿透外表面。'
     if name.startswith('TrackPair'): raise ValueError(name)
     if name.startswith(('TrackLeft','TrackRight')):
         return '对应侧成品履带总成', '成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。'
