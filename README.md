@@ -1,42 +1,84 @@
 # CyberTrack
 
-[ct12 局域网控制](docs/lan-control.md)：打开网页自动连接、长按显示计时，两路操作间隔 200 ms，行走与喷水独立操作，网页与语音可同时使用、同通道网页优先；配置保留，部署及验证见当前说明。
+双履带语音交互玩具机器人，将语音对话、履带行走、喷水和泡泡效果组合成有角色感的机械玩具。
 
-用户新增要求：喷水与行走可同时运行；ct7 源码与独立时限／组合启动说明见[并发更新](docs/concurrent-actions.md)，ct6 台架结果不等同于新版本同时负载验收。
+CyberTrack 采用 ESP32-S3 与灵矽语音交互，搭配切面头盔、分层固定颈架和双液体背包。充电宝位于前下方，电机支路通过 DC-DC 升压至 12 V，使用 L298N 驱动两台 37R-520 电机。
 
-2026-10-25 电机驱动选型为[何健弓 L298N](hardware/components/L298N/README.md)（H03／P13）。[台架 0.3.2](firmware/esp32-motor-bench/README.md)支持 A／B／AB 选择和 8 种组合，A=GPIO4／5／6，B=GPIO7／8／9，约 60% PWM、每次 10 秒，组间至少停 3 秒；启动默认未选通道，B 路接线及六脚上电前后静态关闭已获用户确认，此前 0.3.1 的 3 秒版 8 组空载组合已获用户确认：单路互不干扰、方向符合预期、正常停止且无异响或异常发热；随后一次双路 BOOT 提前停止及松开不恢复也获用户确认。用户已确认一次 200 ms 正转、两次 40%／10 秒反转正常停止，第二次反转时母线基本保持 12 V；60%／10 秒反转已获用户正常停止反馈，启动及运行母线约 12 V，比 40% 更快、更顺畅且无异常；电流／温升及带载验收待完成。旧 DF-MD 独立留档。 用户已确认双路 60%／10 秒空载正转正常启停，启动、运行中及临近停止母线均约 12 V，电机和 L298N 无明显发热、无异响或其他异常；这是万用表读数与主观发热观察，电流和定量温升仍未测。
+[模型与图纸](hardware/model/README.md) · [固件开发](firmware/README.md) · [局域网控制](docs/lan-control.md) · [接线总表](docs/wiring.md) · [待办](TODO.md)
 
-机械布局当前为 **0.43**：已补充四块效果板的开窗压框、局部接线预算与2 mm盘底余量；沿用[背包外侧本体夹持与底盘四点薄承板](docs/effects-mount.md)，保留原前斜坡和头壳；已合入[超声波向上出线候选](docs/ultrasonic-head.md)及托盘前缘让位，探头基准和接口仍待实测；[面包板浅托盘](docs/breadboard-tray.md)按100×85×36整组包络，保持头部外形；移除旧头舱主控／独立音频／电弧占位，整盘上取。保留0.39双枪15°及0.37加高布局：头舱整体上移25 mm，颈架与斜撑同步调整，头舱至两瓶名义净距由7.60增至18.62 mm；加高依据见[加高记录](docs/mechanical.md#037-头舱整体上移25-mm)；当前[装配图纸](hardware/model/CyberTrack-assembly-and-service.pdf)已精简重复内容，并逐项标注当前全部CAD对象，见[图纸索引说明](docs/assembly.md#全对象装配图纸2026-10-25)。保留0.36双瓶方案：双150 mL瓶背包降为90 mm低位护舱，上部包络外露30 mm；取消打印上盖，改用可释放绑带，并按对应枪侧布管，支持目标瓶单独上取，见[双瓶记录](docs/mechanical.md#036-低位开放双瓶护舱)。此前0.34的L298N 保持下部两电机之间竖装，新增顶盖一体吊架、开口可拆托框、可调侧压件和接线／通风预留。用户正反面原图已入库。结构、净距与拆装检查见[布局记录](hardware/model/README.md#034-l298n-支架与拆装)；PCB 接触区、实际接头、温升与实物安装未验收。
+![CyberTrack 整机 CAD 装配候选](hardware/model/assembly.png)
 
-CyberTrack 是一个双履带语音交互玩具机器人项目，将履带行走、语音、喷水和泡泡效果组合成有角色感的机械玩具。当前造型采用切面头盔、分层固定颈架、颈架左侧朝前水枪和共用双液体机甲背包，重充电宝在前下方平放，不要求传统坦克轮廓。
+*当前机械布局：0.43。图中为 CAD 装配候选，实物装配、制造与整机带载验收仍在推进。*
 
-项目采用 ESP32-S3 主控及充电宝供电。已完成灵矽设备绑定、状态／停止和本机单次授权喷水的[真实联调](docs/linx-validation.md)，包括 5 秒自动停止及 BOOT 提前停止；另已在沿用原“彩菊”（现名 CyberTrack）绑定的面包板上完成[状态／停止语音联调](docs/audio-board-validation.md)，音频及 OLED 回复正常；该板已增加 GPIO18 水枪控制，ct5 按指令时长执行且单次最多 30 秒，用户纠正控制线接反后，已完成 ct4 五秒配置的[直接语音喷水及 BOOT 提前停止联调](docs/audio-water-validation.md)；ct5 已通过功率断开的可变时长语音核验，30 秒带载未测试。同一面包板的 [ct6 双电机／水枪基本台架联调](docs/breadboard-integration.md)已完成部署迁线、四方向空载、喷水启停和 BOOT 停止分项；两路通电分别动作未观察到另一机构误动。收尾全关、两路功率已断开；断网延期，装车方向、定量供电／温升及整机带载仍待验收。
+## 功能与进度
 
-## 规划功能
+当前处于**机械设计与分项台架联调阶段**。已有语音、双电机和水枪的实测记录；泡泡效果与顶部效果仍待后续实现或评估。
 
-- **双履带行走**：前进、后退、差速转弯和停止。
-- **语音互动**：语音对话，以及行走、喷水和吹泡泡等动作控制。
-- **前部喷水**：自动水枪产生连续脉冲喷水效果。
-- **前部泡泡**：正面看左侧为泡泡枪、右侧为水枪，两者朝前微微上仰；泡泡枪使用自带风扇。
-- **顶部效果**：拟加入双火花视觉效果，方案尚待评估。
+| 模块 | 当前进展 | 验证边界与记录 |
+|---|---|---|
+| 语音交互 | 面包板保留“小D”的语音、OLED 和设备绑定，已联调状态查询、停止及动作指令 | [角色与提示词](docs/agent-role.md) · [语音联调](docs/audio-board-validation.md) |
+| 行走与喷水 | 已完成双电机四方向空载、水枪启停、BOOT 提前停止；ct7 已完成并发动作、独立截止及全停的核心台架回归 | [基本台架](docs/breadboard-integration.md) · [并发记录](docs/concurrent-actions.md)；落地带载与完整供电验收待完成 |
+| 局域网控制 | 当前面包板源码为 `2.0.3-ct12`：网页自动连接、长按行走与计时、独立喷水、语音并用，同通道冲突时网页优先 | [使用与验证](docs/lan-control.md)；ct12 已部署并完成实机无负载检查，200 ms 操作间隔尚未通过带载验收 |
+| 机械结构 | 0.43 包含面包板浅托盘、超声波共存候选、前部双枪、双瓶背包，以及效果模块夹持和四板固定结构 | [模型与检查报告](hardware/model/README.md) · [装配图纸](hardware/model/CyberTrack-assembly-and-service.pdf)；实物适配、线管与固定强度待验证 |
+| 泡泡效果 | 前部泡泡枪、储液瓶与管路已纳入布局，使用泡泡枪自带风扇 | [机械设计](docs/mechanical.md)；驱动联调、带液工作和实际出泡待验证 |
+| 顶部效果 | 保留双火花视觉效果需求及被动机械占位 | [结构边界](docs/effects-mount.md)；未实现高压接线或驱动，安全、绝缘、液体共存与 EMC 未验收 |
 
-## 项目进度
+主机测试、CAD 检查和短时台架结果各有适用范围，不能替代整机供电、温升、停止时延、制造或儿童使用验收。后续工作统一维护在 [TODO](TODO.md) 和[实施及验收计划](docs/verification-plan.md)。
 
-目前已整理硬件采购清单、部件资料和系统方案，并生成[整机模型及视图](hardware/model/README.md)。当前0.43新增四块效果板开窗防脱压框与局部接线预算，承板下方名义余量至少2 mm；保留面包板整组浅托盘及超声波共存候选，保留0.39双枪15°候选，承托与枪侧管路同步，保留头舱加高25 mm；实际射程与带液工作待验证。0.32将电机固定面直接并入底盘，取消独立端板、前干舱隔板、电源上内隔板和旧托座跨舱横梁；保留后湿舱隔板、一体底盖及电源承托。动力接口、左右各14 mm外移和132 mm等宽下部保持；换电机先取出电源内托架、移开本侧履带，再向下取电机，见[装配说明](docs/assembly.md#032-简化一体底盘与电机维护)。[固件](firmware/README.md)已完成控制核心、F1 离线 MCP 协议适配及 F2a 通用启动／运行层，通过主机与假板卡测试；另有[ESP32-S3 无负载检查工程](firmware/esp32/README.md)与[实物启动／PSRAM 记录](hardware/components/ESP32-S3-N16R8/physical-verification.md)；独立联网板和面包板的喷水子项已有联调记录，完整整机驱动、独立停止及故障验收仍待完成。当前功能与接口见[固件能力与接口手册](firmware/CAPABILITIES.md)。
+## 从这里开始
 
-下一步继续推进[不依赖实物的固件工作](firmware/PLAN.md#不依赖实物的后续工作)；F2b 继续按[清单](firmware/BOARD-INFO.md)补停止器件、板级焊装与外设信息。硬件侧继续核对尺寸和供电参数，用实测部件修订布局并开展单模块测试。具体任务见 [TODO](TODO.md)，阶段安排见[实施及验收计划](docs/verification-plan.md)与[固件计划](firmware/PLAN.md)。
+### 查看机械设计
 
-## 了解项目
+在[模型入口](hardware/model/README.md)查看整机视图、布局和拆装检查，使用 FreeCAD 打开 [CyberTrack.FCStd](hardware/model/CyberTrack.FCStd)。原生 FCStd 是几何依据；STEP 仅供布局交换，[装配 PDF](hardware/model/CyberTrack-assembly-and-service.pdf)用于结构评审，不是加工图。
 
-| 主题 | 文档 |
+### 开发固件
+
+控制核心可在电脑上构建和测试，无需连接设备。需要 C11 编译器、CMake ≥ 3.16 和 Python ≥ 3.9，在仓库根目录执行：
+
+```sh
+cmake -S firmware -B build/firmware-host -DCMAKE_BUILD_TYPE=Debug
+cmake --build build/firmware-host
+ctest --test-dir build/firmware-host --output-on-failure
+```
+
+这组命令验证通用控制核心及协议／运行层。面包板适配、ESP32 无负载检查和独立台架是不同工程，构建、GPIO 与工具语义须按对应版本查阅：
+
+- [固件总览](firmware/README.md)与[能力及接口手册](firmware/CAPABILITIES.md)：选择工程、了解接口和验证范围。
+- [面包板适配](firmware/esp32-audio/README.md)：语音、网页、双电机与水枪控制的构建和部署说明。
+- [ESP32 无负载检查](firmware/esp32/README.md)、[电机台架](firmware/esp32-motor-bench/README.md)与[MOS 台架](firmware/esp32-mos-bench/README.md)：各自的接线、版本和测试记录。
+
+### 使用局域网控制
+
+已部署对应面包板固件的设备与手机接入同一可互通局域网后，打开 `http://<设备 IP>:8080/`；设备 IP 可从 OLED 或串口读取。
+
+- 按住方向键行走，松开停止行走；喷水单独选择时长并启动，可与行走同时进行。
+- “全部停止”、BOOT 或语音停止会结束两路动作；停止后旧动作不自动恢复。
+- 网页与语音可同时使用，同通道冲突时网页优先；两路停止后的操作间隔均为 200 ms。
+
+完整操作、抢占规则和验证记录见[局域网控制说明](docs/lan-control.md)。当前网页没有用户身份认证，同局域网可访问设备的客户端可申请控制会话；页面状态为固件逻辑回执，没有轮速或水流反馈。
+
+## 文档导航
+
+| 想了解什么 | 入口 |
 |---|---|
-| 产品与需求 | [产品需求](docs/requirements.md) · [决策和待补资料](docs/decisions.md) |
-| 机械与硬件 | [机械设计](docs/mechanical.md) · [电源与接口](docs/power-and-interfaces.md) |
-| 接线查阅 | [整机接线总表](docs/wiring.md)：当前接法、历史台架接法与待确定项 |
-| 控制与语音 | [系统架构](docs/architecture.md) · [智能体角色与提示词](docs/agent-role.md) · [灵矽接入](docs/linx-integration.md) · [固件入口](firmware/README.md) · [固件能力与接口](firmware/CAPABILITIES.md) |
-| 物料与采购 | [BOM](hardware/BOM.md) · [采购清单](hardware/procurement.md) |
-| 技术资料 | [资料索引](docs/references.md) |
+| 产品目标与已确认决定 | [产品需求](docs/requirements.md) · [决策和待补资料](docs/decisions.md) |
+| 机械布局与装配维护 | [机械设计](docs/mechanical.md) · [模型与视图](hardware/model/README.md) · [装配说明](docs/assembly.md) |
+| 电源、接线与采购 | [电源与接口](docs/power-and-interfaces.md) · [接线总表](docs/wiring.md) · [BOM](hardware/BOM.md) · [采购清单](hardware/procurement.md) |
+| 控制架构与语音配置 | [系统架构](docs/architecture.md) · [智能体角色](docs/agent-role.md) · [灵矽接入](docs/linx-integration.md) |
+| 固件接口与后续开发 | [固件入口](firmware/README.md) · [能力与接口](firmware/CAPABILITIES.md) · [固件计划](firmware/PLAN.md) |
+| 当前待办与验收范围 | [TODO](TODO.md) · [实施及验收计划](docs/verification-plan.md) |
+| 部件资料与来源 | [资料索引](docs/references.md) · [部件资产](hardware/components/) |
+
+## 仓库结构
+
+```text
+docs/                  需求、决策、设计、接线与验证记录
+hardware/components/   独立部件模型、厂商资料与实测记录
+hardware/model/        整机 CAD、视图、装配图纸与检查报告
+firmware/              控制核心、板级工程、协议与测试
+scripts/               CAD 生成、布局检查与图纸生成脚本
+```
 
 ## 许可证
 
-项目许可证见 [LICENSE](LICENSE)。供应商图片、原理图及数据手册的权利归原权利人，归档不改变其授权条件。
+项目采用 [Apache License 2.0](LICENSE)。供应商图片、原理图及数据手册的权利归原权利人，归档不改变其授权条件。
