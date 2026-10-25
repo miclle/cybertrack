@@ -1,5 +1,5 @@
 #pragma once
 void InitializeCyberTrackTools();
-void CyberTrackWaterLink(bool online);
-void CyberTrackWaterStop();
-int CyberTrackWaterClaim(int rpc_id);
+void CyberTrackActionLink(bool online);
+void CyberTrackActionStop();
+int CyberTrackActionClaim(int rpc_id);

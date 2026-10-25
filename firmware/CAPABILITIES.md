@@ -5,7 +5,7 @@
 ## 阅读导航
 
 - 看当前能做什么：[工程与能力](#工程与能力)。
-- 配置语音工具或读取回执：[音频板 ct5 接口](#音频板-ct5-接口)。
+- 配置语音工具或读取回执：[面包板 ct6 接口](#面包板-ct6-接口)。
 - 对接另一块联网板：[联网水枪台架接口](#联网水枪台架接口)。
 - 开发正式控制固件：[正式控制核心的-mcp-接口](#正式控制核心的-mcp-接口)、[模块与数据流](#模块与数据流)、[内部-c-api](#内部-c-api)。
 - 做本地调试：[串口与板级接口](#串口与板级接口)。
@@ -20,75 +20,85 @@
 | [L298N 电机台架](esp32-motor-bench/README.md) `0.3.2-l298n-dual-10s` | A／B／AB 选择、本地使能、约 60% PWM／10 秒单次动作、BOOT 同停 | A=GPIO4／5／6，B=GPIO7／8／9；双路软件回归／编译通过，B 路接线及六脚静态关闭已获用户确认，此前 0.3.1 的 3 秒版 8 组空载组合已获用户确认：单路互不干扰、方向符合预期、正常停止且无异响或异常发热；随后一次双路 BOOT 提前停止及松开不恢复也获用户确认；用户已确认 40% 反转方向、约 10 秒停止及运行母线约 12 V；60%／10 秒反转获用户正常停止反馈，母线约 12 V，较 40% 更快、更顺畅且无异常；用户已确认双路 60%／10 秒空载正转正常启停，启动、运行中及临近停止母线均约 12 V，电机和 L298N 无明显发热、无异响或其他异常；这是万用表读数与主观发热观察，电流和定量温升仍未测；电流／温升和带载验收待完成；不是整机行走接口 |
 | [MOS 台架](esp32-mos-bench/README.md) `0.1.1` | 本地串口单次 5 秒 GPIO4 输出、自动结束、BOOT／串口停止 | 已有一次正常喷水／到期停止及 BOOT 带载提前停止观察；完整供电与故障验收未完成 |
 | [联网板](esp32-linx/README.md) `0.2.0-linx-water-bench` | Wi-Fi、绑定、WSS、MCP 状态／停止、本机单次授权的 5 秒喷水 | 已有真实平台调用、喷水及 BOOT 功能检查；无音频，正式核心动作仍关闭 |
-| [音频板](esp32-audio/README.md) `2.0.3-ct5` | 保留语音／唤醒／OLED／音量／说话按键；状态、停止、GPIO18 可变时长喷水 | 当前语音路线。喷水 1–30000 ms；ct4 有 5 秒带载观察，ct5 有功率断开的时长语音核验，30 秒带载未验收 |
+| [面包板](esp32-audio/README.md) `2.0.3-ct6` | 保留语音／唤醒／OLED／音量／说话按键；状态、统一停止、双路电机与 GPIO18 喷水互斥 | ct6 部署、平台同步、迁线及基本台架联调完成；断网、剩余语音回归和整机带载待验；行走 1–3000 ms、约 60%，喷水 1–30000 ms。ct4 带载／ct5 功率断开历史结果不转移为 ct6 验收 |
 
-行走与泡泡目前只有正式核心的逻辑实现，没有在当前音频板或联网台架开放。超声波测距／避障、编码器闭环、舵机动作、液位／水流／电量遥测及双板协同控制均未在这些项目接口中实现。高压驱动不属于当前实现范围。上游音频工程可能还发布其自带工具，本文只定义 CyberTrack 增加的 `self.tank.*`，不把上游工具视为本项目新增能力。
+面包板 ct6 已部署行走／转向与平台角色，迁线及基本台架语音验证完成，剩余回归见集成记录；泡泡仍只有正式核心逻辑实现，未在面包板或联网台架开放。超声波测距／避障、编码器闭环、舵机动作、液位／水流／电量遥测及双板协同控制均未在这些项目接口中实现。高压驱动不属于当前实现范围。上游音频工程可能还发布其自带工具，本文只定义 CyberTrack 增加的 `self.tank.*`，不把上游工具视为本项目新增能力。
 
 以下三套同名工具不能混用：
 
-| 差异 | 音频板 ct5 | 联网板 0.2.0 | 正式核心 |
+| 差异 | 面包板 ct6 | 联网板 0.2.0 | 正式核心 |
 |---|---|---|---|
 | `water` 参数 | `duration_ms` | `duration_ms` + `permit` | `duration_ms`，另须可信元数据 |
-| 时长 | 1–30000 ms | 必须 5000 ms | 受 `ct_limits` 限制；默认禁用 |
+| 时长 | 水枪 1–30000 ms；行走 1–3000 ms | 必须 5000 ms | 受 `ct_limits` 限制；默认禁用 |
 | 启动门槛 | 新的明确指令、在线、非忙碌、按键释放且冷却结束 | 本机串口先签发一次性许可 | 本地使能、会话、时效、认证证据及存储门槛 |
 | 停止后再次启动 | 满足条件的新指令；不需逐次按键授权 | 新的本机许可 | 本地重新使能 |
 | 状态输出字段 | `logical_outputs.left/right` | `logical_output.left_level/right_level` | `logical_output.left_level/right_level` |
-| 防重放范围 | 当前音频会话内最多 128 个喷水 RPC ID | 单次许可，RAM 中保存 | RPC／意图过滤器，另有持久化抽象；真实后端待接入 |
+| 防重放范围 | 当前音频会话内两类动作共用最多 128 个 RPC ID | 单次许可，RAM 中保存 | RPC／意图过滤器，另有持久化抽象；真实后端待接入 |
 
 `accepted` 表示软件接受了本次请求，`water=true` 表示逻辑目标；二者均不证明已经有水流。三个接口均声明 `physical_feedback=false`。
 
-## 音频板 ct5 接口
+<a id="音频板-ct5-接口"></a>
 
-实现：[工具注册与回执](esp32-audio/cybertrack_tools.cc)、[MCP 校验补丁](esp32-audio/apply_overlay.py)、[队列保护](esp32-audio/water_guard.h)。传输和 MCP 基础服务由固定版本的小智上游工程承载，不使用下文正式核心的 `ct_protocol_handle`。
+## 面包板 ct6 接口
+
+以下描述 ct6，已完成本面包板刷写及平台同步，迁线及本轮基本语音台架验证已完成，完整验收仍未完成。接线、刷写与平台同步状态见[集成记录](../docs/breadboard-integration.md)。ct5 仅有水枪；兼容保留旧锚点便于已有链接访问。
+
+实现：[工具注册与回执](esp32-audio/cybertrack_tools.cc)、[MCP 校验补丁](esp32-audio/apply_overlay.py)、[共享动作策略](esp32-audio/action_guard.h)、[输出驱动](esp32-audio/action_outputs.h)。传输和 MCP 基础服务由固定版本的小智上游工程承载，不使用下文正式核心的 `ct_protocol_handle`。
 
 ### 工具入参
 
 | 工具 | 用途 | `arguments` | 输出 |
 |---|---|---|---|
 | `self.tank.get_status` | 查询本板当前策略与逻辑输出 | `{}`，也可省略；不接受额外参数 | 下表 JSON 状态，`operation=get_status`、`result=ok` |
-| `self.tank.stop` | 关闭水枪输出并取消待执行票据；不关闭语音／屏幕 | `{}`，也可省略 | 相同结构，`operation=stop`、`result=ok`；正常停止为 `STOPPED` |
+| `self.tank.stop` | 同时关闭两路电机和水枪，取消全部待执行票据；不关闭语音／屏幕 | `{}`，也可省略 | 相同结构，`operation=stop`、`result=ok`；正常停止为 `STOPPED` |
 | `self.tank.water` | 接受一次定时喷水请求 | 必填 `duration_ms`：JSON number，整数值，1–30000，单位毫秒；对象只能含这一项 | 相同结构，`operation=water`，检查内部 `result` 判断是否接受 |
+| `self.tank.move` | 接受一次四方向定时动作 | 必填 `direction`：`forward/backward/left/right`；`duration_ms`：整数值 1–3000；只含这两项 | 相同结构，`operation=move`；固定约 60% PWM，不支持距离／角度闭环 |
 
-建议始终发送普通整数，例如 `7000`。ct5 使用 cJSON 数值和整数值相等性校验，没有正式核心“必须十进制整数 token”的词法限制；不要假定两者对 `1000.0`／指数写法的处理相同。`_ct_ticket` 是固件插入的内部票据，不是云端参数，不能自行传入。
+建议始终发送普通整数，例如 `7000`。ct6 使用 cJSON 数值和整数值相等性校验，没有正式核心“必须十进制整数 token”的词法限制；不要假定两者对 `1000.0`／指数写法的处理相同。`_ct_ticket` 是固件插入的内部票据，不是云端参数，不能自行传入。
 
-平台角色负责秒数转毫秒；明确喷水但未指定时长的当前角色规则为 `1000` ms，超过 30 秒则请求 `30000` 并说明，不拆成循环。固件本身没有缺参默认值，也不会将越界值自动截断。现有工具描述仍保留“未说时长先询问”的旧建议，角色中的明确默认规则已覆盖它；默认一秒的端到端行为在[验证记录](../docs/audio-water-validation.md)中仍标为待验证。
+平台角色负责秒数转毫秒；明确喷水但未指定时长的当前角色规则为 `1000` ms，超过 30 秒则请求 `30000` 并说明，不拆成循环。固件本身没有缺参默认值，也不会将越界值自动截断。ct6 工具描述已与角色统一；行走也默认 1000 ms，超过三秒请求 3000 并说明。指定时长等基本端到端行为已验证，默认时长和上限等剩余用例仍待按[集成步骤](../docs/breadboard-integration.md)验证。
 
 ### 工具出参
 
-工具结果文本是 JSON 字符串。先解析 MCP 响应，再解析 `content` 中 `type=text` 的 `text`。下表为该 JSON 的全部字段，三项工具共用。
+工具结果文本是 JSON 字符串。先解析 MCP 响应，再解析 `content` 中 `type=text` 的 `text`。下表为该 JSON 的全部字段，四项工具共用。
 
 | 字段 | 类型 | 含义 |
 |---|---|---|
 | `device_id` | string | 本板 MAC 标识，不代表另一块主控 |
 | `boot_id` | string | 本次启动生成的 16 位十六进制标识；重启变化 |
 | `request_sequence` | number | 本次启动的回执计数，非 RPC ID、非持久化动作序号 |
-| `operation` | string | `get_status`／`stop`／`water` |
-| `result` | string | 查询／停止为 `ok`；喷水为 `accepted` 或拒绝原因 |
+| `operation` | string | `get_status`／`stop`／`water`／`move` |
+| `result` | string | 查询／停止无故障时为 `ok`；动作为 `accepted` 或拒绝原因；输出错误为 `output_fault` |
 | `state` | string | `DISARMED`（空闲）、`ACTIVE`、`STOPPED` 或 `FAULT`；空闲不保证已过冷却 |
 | `fault` | string | `none`／`stopped`／`clock_fault`／`output_fault`；`stopped` 是主动停止状态 |
 | `uptime_ms` | number | 本地单调运行时间，毫秒 |
-| `logical_outputs` | object | `left:0`、`right:0`、`water:boolean`、`bubbles:false` |
-| `capabilities` | object | `move:false`、`water:true`、`bubbles:false`；能力存在不代表此刻可启动 |
+| `logical_outputs` | object | `left/right:-60/0/60`（逻辑方向与标称占空比）、`water:boolean`、`bubbles:false`；电机与水枪互斥 |
+| `capabilities` | object | `move:true`、`water:true`、`bubbles:false`；能力存在不代表此刻可启动 |
 | `local_authorization_required` | boolean | 固定 `false`，无逐次按键授权门槛 |
-| `starts_this_boot` | number | 本次启动已接受的喷水次数，非水流检测次数 |
-| `max_duration_ms` | number | 固定 `30000` |
+| `starts_this_boot` | number | 本次启动已接受的两类动作总数，非实体动作检测次数 |
+| `max_duration_ms` | number | 水枪上限，固定 `30000` |
+| `move_max_duration_ms` | number | 电机上限，固定 `3000` |
+| `move_direction` | string | 活动行走的 `forward/backward/left/right`，否则 `none` |
 | `last_duration_ms` | number | 最近一次接受的时长；尚无动作时为 `0` |
 | `remaining_ms` | number | 活动目标的剩余毫秒数；非活动为 `0` |
-| `actuator_backend` | string | 固定 `bounded_water_bench` |
+| `actuator_backend` | string | 固定 `bounded_motor_water_bench` |
 | `physical_feedback` | boolean | 固定 `false` |
 | `source` | string | 固定 `cybertrack_audio_board` |
 
-喷水不能仅凭外层 MCP 请求成功就判定成功：到达回调后的业务拒绝也会作为 JSON 文本返回，必须检查内部 `result == "accepted"`。参数校验或领取票据失败则走上游 `ReplyError`，没有上述完整状态对象。
+动作不能仅凭外层 MCP 请求成功就判定成功：到达回调后的业务拒绝也会作为 JSON 文本返回，必须检查内部 `result == "accepted"`。参数校验或领取票据失败则走上游 `ReplyError`，没有上述完整状态对象。
 
 | 阶段／结果 | 含义 |
 |---|---|
 | `ReplyError`：`Water requires exactly integer duration_ms in 1..30000` | 缺参、额外字段、类型或范围错误 |
-| `ReplyError`：`Water request duplicate, busy, offline or queue full` | 接收时就无法领取票据；重复 RPC、忙碌、离线、按键／冷却／时钟条件不满足、128 项耗尽等 |
+| `ReplyError`：`Action request duplicate, busy, offline or queue full` | 接收时就无法领取票据；重复 RPC、忙碌、离线、按键／冷却／时钟条件不满足、128 项耗尽等 |
+| `ReplyError`：`Move requires direction forward/backward/left/right and integer duration_ms in 1..3000` | 行走方向、时长、字段或类型错误 |
+| `cancelled_before_output` | 目标接受后、输出应用前被 BOOT／断线／时限取消 |
+| `output_fault` | GPIO／PWM API 出错，锁定并尝试全停 |
 | `cancelled_or_duplicate` | 票据不存在、已使用，或被停止／断线取消 |
 | `stale_request` | 从领取票据至执行已达 5000 ms，或时间回退 |
 | `duration_out_of_range` | 内部二次检查时长不合法 |
 | `not_ready_or_busy` | 执行时无法原子创建本次内部许可 |
-| `accepted` | 本次目标已接受，随后由控制任务应用 GPIO |
+| `accepted` | 本次目标已接受并尝试应用 GPIO／PWM；不证明物理动作 |
 
 共用策略还定义 `clock_fault`、`not_ready`、`invalid_permit`、`permit_used`、`permit_expired_or_revoked`、`busy` 等拒绝值；正常音频路径由票据与原子授权挡住其中多种情况。未知结果一律不当作接受，不自动重试。
 
@@ -100,7 +110,7 @@
 {"jsonrpc":"2.0","id":101,"method":"tools/call","params":{"name":"self.tank.water","arguments":{"duration_ms":1000}}}
 ```
 
-接收线程校验参数并领取内部票据 → 主任务执行回调 → 返回 JSON 文本（接受时 `result=accepted`）→ 独立控制任务应用 GPIO18 → 本地期限到达后关闭。随后使用新的请求 ID 查询：
+接收线程校验参数并领取内部票据 → 主任务执行回调，在共用锁内复核条件并应用 GPIO／PWM → 返回 JSON 文本（接受时 `result=accepted`）→ 独立控制任务检查本地期限并关闭。随后使用新的请求 ID 查询：
 
 ```json
 {"jsonrpc":"2.0","id":102,"method":"tools/call","params":{"name":"self.tank.get_status","arguments":{}}}
@@ -112,7 +122,7 @@
 {"jsonrpc":"2.0","id":103,"method":"tools/call","params":{"name":"self.tank.stop","arguments":{}}}
 ```
 
-控制任务每 5 ms 检查期限、BOOT 和连接；BOOT 释放需稳定 30 ms，结束后冷却 1000 ms。活动期间不续时，同一音频会话重复喷水 ID 拒绝，128 项满后不淘汰旧记录。停止、已检测的断线会取消排队票据；释放按键／恢复网络不会自行喷水。新指令仍需满足执行条件。不存在跨启动持久化防重放保证，也没有“水流停止完成”事件。
+控制任务每 5 ms 检查期限、BOOT 和连接；BOOT 释放需稳定 30 ms，喷水结束后冷却 1000 ms，电机结束后冷却 3000 ms。活动期间不续时／换向，两类动作互斥，同一音频会话重复动作 ID 拒绝，128 项满后不淘汰旧记录；一个请求被接受后取消其余已排队票据。停止、已检测的断线会取消排队票据；释放按键／恢复网络不会自行喷水。新指令仍需满足执行条件。不存在跨启动持久化防重放保证，也没有“水流停止完成”事件。
 
 ## 联网水枪台架接口
 
@@ -198,8 +208,8 @@
 | 防重放存储 | [replay_store.h](include/cybertrack/replay_store.h)／`src/replay_store.c` | 双槽历史、独立锚点、迁移、选择及维护恢复 |
 | 恢复日志 | [replay_log.h](include/cybertrack/replay_log.h)／`src/replay_log.c` | 独立完整证据、两槽或四槽冗余，支持缺失主快照的维护恢复 |
 | 联网工程 | [linx_main.c](esp32-linx/main/linx_main.c)、[linx_wire.h](esp32-linx/main/linx_wire.h) | 实际 Wi-Fi／网关／WSS、hello 与分片处理，独立台架入口 |
-| 水枪策略／适配 | [water_policy.h](esp32-linx/main/water_policy.h)、[water_mcp.h](esp32-linx/main/water_mcp.h) | 单次许可、截止、冷却及台架 MCP；音频板复用策略 |
-| 音频适配 | [cybertrack_tools.h](esp32-audio/cybertrack_tools.h)、[water_guard.h](esp32-audio/water_guard.h) | 上游工具注册、内部票据、GPIO18 控制任务、状态回执 |
+| 水枪策略／适配 | [water_policy.h](esp32-linx/main/water_policy.h)、[water_mcp.h](esp32-linx/main/water_mcp.h) | 单次许可、截止、冷却及台架 MCP；面包板复用策略 |
+| 面包板适配 | [cybertrack_tools.h](esp32-audio/cybertrack_tools.h)、[action_guard.h](esp32-audio/action_guard.h)、[action_outputs.h](esp32-audio/action_outputs.h) | 上游工具注册、共享票据／互斥策略、六路电机与 GPIO18 输出、统一停止和状态 |
 
 通用库的数据流是 SDK 事件 → `link` → `inbox` → `runtime` → `protocol` → `control` → 板级输出回调；本地停止／故障由运行层先处理。现有联网台架和音频适配各自实现板级循环，不能把这条通用库组合路线视为已经完整部署到它们。
 
@@ -348,14 +358,14 @@
 | `linx_parse_gateway` | `const char *json, size_t size, linx_gateway *out` | bool；成功取得六位绑定 `code` 或 `token/url`，失败清零；令牌不得记录 |
 | `linx_parse_hello` | `json, size, char session[128]`（输出） | bool；校验 hello／websocket，提取可选会话字符串 |
 | `linx_text_feed` | `linx_text *s, int opcode, bool fin, size_t offset, total, const char *data, size_t size` | int：1 完整文本（读取 `s->text/used`）、0 未完成或控制／二进制帧、-1 非法 |
-| `InitializeCyberTrackTools` | 无 | void；音频板初始化 GPIO、控制任务、事件监听并注册工具 |
-| `CyberTrackWaterLink` | `bool online` | void；音频连接状态变化，离线取消票据并关断 |
-| `CyberTrackWaterStop` | 无 | void；即时取消／关断，不等待主任务回复 |
-| `CyberTrackWaterClaim` | `int rpc_id` | int；正数为内部票据，0 为拒绝 |
+| `InitializeCyberTrackTools` | 无 | void；面包板初始化 GPIO、控制任务、事件监听并注册工具 |
+| `CyberTrackActionLink` | `bool online` | void；音频连接状态变化，离线取消票据并关断 |
+| `CyberTrackActionStop` | 无 | void；即时取消／关断，不等待主任务回复 |
+| `CyberTrackActionClaim` | `int rpc_id` | int；正数为内部票据，0 为拒绝 |
 | `AudioWaterGuard::Tick/Stop/Claim/Request` | 分别 `(now,online,pressed)`／`(now)`／`(now,rpc_id)`／`(now,ticket,duration)` | 前两者 void；Claim 返回票据或 0；Request 返回结果字符串。必须在适配器锁内执行 |
 | 两套台架的 `bench_tick/bench_stop/bench_receive` | 分别 `(bench_policy *state,now,bool stop_held)`／`(state,now)`／`(state,now,stop_held,const unsigned char *bytes,size_t count)` | void；原地更新 armed/active/deadline 等状态，由各自主循环写 GPIO／PWM |
 
-`cybertrack_state.h` 中的 `CyberTrackAudioState::Call(stop,now,device_id,boot_id)` 返回 ct2 只读 JSON，是保留的历史适配及测试对象；ct5 当前工具实际使用 `cybertrack_tools.cc` 的水枪状态，不能用 ct2 结构解析 ct5 回执。
+`cybertrack_state.h` 中的 `CyberTrackAudioState::Call(stop,now,device_id,boot_id)` 返回 ct2 只读 JSON，是保留的历史适配及测试对象；ct6 当前实际使用 `cybertrack_tools.cc` 的共享动作状态，不能用 ct2 结构解析 ct6 回执。
 
 ## 串口与板级接口
 
@@ -367,11 +377,11 @@
 | L298N 电机台架 `0.3.2` | 单独 `1`／`2`／`3` 选 A／B／AB，另发 `a` 后单独 `f`／`r`；AB 可用 `x`／`y` 请求两种反向组合；`s` 同停 | 默认 NONE；选择撤销使能，窗口 3000 ms，单次 10000 ms，冷却 3000 ms 且轴停稳；A=GPIO4／5／6，B=GPIO7／8／9，两路 PWM 共用 1 kHz、8 bit duty=154；关闭时六脚为低，状态包含 target |
 | MOS 台架 | 串口单字符 `a`，随后单独 `g`；`s` 停止 | 使能窗口 3000 ms；GPIO4 单次高电平 5000 ms；`MOS` 文本状态 |
 | 联网板 | 私有串口配网；`status`／`stop`／`water`／`s` | 前三者向平台发送固定联调文本，water 同时创建本地许可；s 直接本地停止；`LINX RPC`／`WATER_OFF` 等诊断 |
-| 音频板 | 原唤醒／说话／音量按键、MCP 工具、BOOT | 本板 GPIO18 水枪输出；串口 `CT_AUDIO` 结果与关闭记录，不提供上述 a/g/f/r 调试命令 |
+| 面包板 ct6 | 原唤醒／说话／音量按键、MCP 工具、BOOT | GPIO8–13 双路 L298N 与 GPIO18 水枪；串口 `CT_AUDIO` 结果与关闭记录，不提供上述 a/g/f/r 调试命令 |
 
-电机台架六路 GPIO 只适用于原 N16R8 台架板，不套用音频板接线；ENA／ENB 跳帽及两路控制按[接线说明](esp32-motor-bench/README.md)连接，空闲时两路保持禁用。
+电机台架六路 GPIO 只适用于原 N16R8 台架板，不套用面包板接线；ENA／ENB 跳帽及两路控制按[接线说明](esp32-motor-bench/README.md)连接，空闲时两路保持禁用。
 
-两套单字符台架均忽略 CR/LF，批量多键、未知键、运行中收到键会停止／撤销使能；不能把多字符连发当作一次可靠动作请求。BOOT 是 GPIO0 软件停止输入，不等于独立断电开关。音频板 GPIO4 已用于麦克风，不能套用其他板的 GPIO4 水枪接线。
+两套单字符台架均忽略 CR/LF，批量多键、未知键、运行中收到键会停止／撤销使能；不能把多字符连发当作一次可靠动作请求。BOOT 是 GPIO0 软件停止输入，不等于独立断电开关。面包板 GPIO4 已用于麦克风，不能套用其他板的 GPIO4 水枪接线。
 
 ## 验证与维护
 
@@ -389,3 +399,6 @@
 完整板级运行层、真实动作认证源、持久化与锚点后端、整机行走／泡泡／传感器集成、独立切断、失电／欠压／看门狗故障注入及完整带载验收仍按 [TODO](../TODO.md) 和[固件计划](PLAN.md)推进；不在本文另建一份完成清单。
 
 新增／修改工具、字段、范围、错误值、引脚或版本时，同步本文对应工程、该工程 README 及必要专题契约；新增实测只更新对应证据范围。部署版本与源码不一致时，先核对设备版本，不以本文推断设备已更新。
+
+
+ct6 软件验证及部署边界见[集成记录](../docs/breadboard-integration.md)和[软件报告](esp32-audio/verification-ct6.json)。

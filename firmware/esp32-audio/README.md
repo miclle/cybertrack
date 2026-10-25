@@ -1,12 +1,12 @@
-# CyberTrack 音频板：小D 语音与水枪控制
+# CyberTrack 面包板：小D 语音、电机与水枪控制
 
-此适配层用于现有 `bread-compact-wifi` 音频板，基于本机已验证的 `xiaozhi 2.0.3`，原 `2.0.3-ct2` 已完成无执行器状态／停止联调；当前 `2.0.3-ct5` 提供 GPIO18 按指令定时喷水台架（单次最多 30 秒），按用户要求取消逐次按键授权。沿用原“彩菊”（现名 CyberTrack）设备绑定，保留音频、OLED、唤醒词、音量和触摸说话按键；BOOT 仅用于本地提前停止。只控制本板接入的 MOS，不控制另一块 ESP32。喷水接线、策略和本轮验收见[音频板喷水记录](../../docs/audio-water-validation.md)。
+此适配层用于现有 `bread-compact-wifi` 面包板，基于本机已验证的 `xiaozhi 2.0.3`。当前 `2.0.3-ct6` 将双路 L298N 电机与 GPIO18 水枪接入同一灵矽设备，保留语音、OLED、唤醒词、音量和触摸说话按键。用户已确认迁至同一块面包板；已完成仅应用刷写、启动联网及平台角色同步，见[部署记录](startup-ct6.json)；迁线及基本台架四方向／喷水／BOOT 联调已完成，实际装车方向标定、断网及完整供电／故障验收仍未完成。接线、分阶段检查与最新状态见[电机／水枪集成](../../docs/breadboard-integration.md)。旧 ct4／ct5 水枪实测保留在[喷水记录](../../docs/audio-water-validation.md)。
 
 ## 来源与配置证据
 
 - 上游：[`78/xiaozhi-esp32`，`e8ed16bb42ed9b199cbc9376011653e5037de8d8`](https://github.com/78/xiaozhi-esp32/tree/e8ed16bb42ed9b199cbc9376011653e5037de8d8)。
-- 本机原构建 ELF SHA-256：`f7e8809ce981ee4182fb6c3eb15b20aa785111c7f1e4b1e2f059e4debc813b45`，与音频板完整 Flash 中的应用描述一致；原 `xiaozhi.bin` 的 2,531,056 bytes 也与备份 `0x20000` 起的数据逐字节一致。
-- 原 `sdkconfig` 固定在 `sdkconfig.baseline`，其有效配置与 ct2 构建逐项比较无差异；ct3 至 ct5 仅在导出源码配置中将 tick 改为 1000 Hz、任务看门狗改为 2 秒及 panic；原依赖版本在 `dependencies.lock` 中。使用本机原组件缓存的独立副本，避免下架组件引起依赖升级。
+- 本机原构建 ELF SHA-256：`f7e8809ce981ee4182fb6c3eb15b20aa785111c7f1e4b1e2f059e4debc813b45`，与面包板完整 Flash 中的应用描述一致；原 `xiaozhi.bin` 的 2,531,056 bytes 也与备份 `0x20000` 起的数据逐字节一致。
+- 原 `sdkconfig` 固定在 `sdkconfig.baseline`，其有效配置与 ct2 构建逐项比较无差异；ct3 至 ct6 仅在导出源码配置中将 tick 改为 1000 Hz、任务看门狗改为 2 秒及 panic；原依赖版本在 `dependencies.lock` 中。使用本机原组件缓存的独立副本，避免下架组件引起依赖升级。
 - ESP-IDF v5.5.1；ESP32-S3 N16R8；SSD1306 128×32；独立输入／输出 I2S；输入 16 kHz、输出 24 kHz；原唤醒模型保留。
 - 原上游 checkout 及其中已有 Kconfig 修改没有被改动。源码导出和构建都在本仓库忽略的 `build/` 下进行。
 
@@ -22,6 +22,8 @@
 | 板载 LED | 48 |
 | BOOT：本地停止 | 0 |
 | MOS TRIG/PWM（ct3 起） | 18 |
+| L298N A：ENA／IN1／IN2（ct6） | 8／9／10 |
+| L298N B：ENB／IN3／IN4（ct6） | 11／12／13 |
 | 按住说话按键 | 47 |
 | 音量增加／减少 | 40／39 |
 
@@ -37,7 +39,7 @@
 - 回执带本板 MAC、随机启动标识、单调递增请求序号及运行时间，便于对照平台真实工具调用。状态不会在重新开始对话时自动解除停止；重启后仍为不可动作的 DISARMED。
 - 复用 `firmware/src/control.c`，通过 `apply_overlay.py` 复制到临时构建目录，不另写一套动作状态机。
 
-## ct5 工具语义
+## ct5 历史工具语义
 
 - `self.tank.water` 只接受整数 `duration_ms`，范围 1–30000 ms；不再暴露 permit，不要求长按 BOOT。必须是明确的喷水指令；状态查询不会喷水。角色将秒数转换为毫秒，超过 30 秒按 30 秒执行并说明；明确要求喷水但未说明时长时由角色填写 1000 ms，不追问、不沿用历史请求。工具参数仍必须显式提供 duration_ms，固件不自行补默认值。固件拒绝零、负数、非整数和超出 30000 的参数，不自动分段。
 - `get_status` 与 `stop` 只接受空参数。状态报告本板水枪逻辑输出，`local_authorization_required=false`、`physical_feedback=false`。主动停止为 `STOPPED/fault=stopped`，不是硬件损坏；故障仍为 FAULT。
@@ -48,29 +50,41 @@
 
 ct3 的逐次物理授权流程和 ct4 的固定五秒要求已被用户明确取消，历史结果保留在[喷水验证记录](../../docs/audio-water-validation.md)。用户已确认控制线纠正后喷水测试正常，带载 BOOT 提前停止及松开不恢复也已确认。上述结果属于 ct4 五秒配置；ct5 已通过功率断开的 1／7 秒及 40 秒请求限为 30 秒的语音核验，用户确认音频／屏幕正常，不能推导 30 秒带载已通过。真实断网故障矩阵、独立硬件切断和完整供电验收仍未完成，软件输出回执本身不证明有水流。
 
+## ct6 当前工具与统一控制
+
+- 新增 `self.tank.move({"direction":"forward","duration_ms":1000})`。方向仅接受 `forward/backward/left/right`，整数时长 1–3000 ms，固定 1 kHz／8 bit duty=154（约 60%）。角色默认一秒，超三秒请求三秒并说明；不把距离或角度换算成时间。A 候选左、B 候选右，正负极须按车体前进方向核对，当前不是实车标定。
+- `self.tank.water` 保留 1–30000 ms，未说时长填 1000；工具描述与角色统一。两类动作互斥，共用 128 项会话 RPC 记录、内部票据与截止时间；接受一个动作即取消其他已排队票据，忙碌请求不延迟补做。
+- `self.tank.stop`、BOOT、已检测的 Wi-Fi／会话断开、重启／升级入口同时撤销两类动作和待执行票据。BOOT 松开稳定 30 ms 后也不恢复；电机停止后冷却 3000 ms，喷水停止后 1000 ms，必须另有新指令。
+- GPIO8–13 为本次面包板候选分配，与独立台架 GPIO4–9 不同。LEDC timer 2／channel 2、3 避开上游 LED／背光的 timer 0、1／channel 0；原 I2S、OLED 与 GPIO18 不变。
+- 切换方向前先关闭两路使能及水枪；任何 GPIO／PWM API 错误锁定 `output_fault`，尝试关闭全部输出并将使能重置为普通 GPIO 低，不自动重试动作。
+- 控制任务维持优先级 10、5 ms 周期，活动循环没有显示、网络、日志或堆分配。LEDC API 使用带优先级继承的互斥锁串行化，避免在自旋临界区调用可能取 RTOS 锁的驱动。
+- 四工具共用状态：`logical_outputs.left/right` 为 -60/0/60 的逻辑方向与标称占空比，`water` 独立布尔值；`move_direction` 为当前方向或 `none`。`remaining_ms` 和 `last_duration_ms` 对应共享动作，`starts_this_boot` 计两类动作；`max_duration_ms=30000` 保留水枪上限，`move_max_duration_ms=3000` 为电机上限。无编码器、水流或物理停止反馈。
+- 网络参数严格拒绝缺参、额外参数、非法方向、非整数值与越界时长。动作只有内部 `result=accepted` 才算接受；硬件 API 失败返回 `output_fault`，接受后尚未应用就被本地条件取消返回 `cancelled_before_output`。上游 MCP 外层成功不足以判定动作成功。
+
 ## 重现构建
 
-需保留原始源码 checkout、原构建 ELF 及组件缓存；不要求联网下载替代版本。`prepare.py` 要求一个尚不存在的 `build/xiaozhi-audio-src`，不会覆盖已有导出或修改原 checkout。
+需保留原始源码 checkout、原构建 ELF 及组件缓存；不要求联网下载替代版本。`prepare.py` 要求一个尚不存在的导出目录（默认 `build/xiaozhi-audio-src`，可用 `--target` 指定），不会覆盖已有导出或修改原 checkout。
 
 ```sh
 # 先激活 ESP-IDF v5.5.1 的 Python 环境与 export.sh。
-python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32
+python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct6-src
 sh firmware/esp32-audio/test.sh
-idf.py -C build/xiaozhi-audio-src -B "$PWD/build/firmware-audio" build
+python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct6-src
+idf.py -C build/xiaozhi-ct6-src -B "$PWD/build/firmware-ct6" build
 ```
 
 应用分区是 `ota_0`，起点 `0x20000`、大小 `0x3f0000`，与水枪台架分区不同。更新前需核对设备 MAC、分区表、OTA 选择及已有备份；本轮仅写该应用，不执行完整 `idf.py flash`，不覆盖引导、NVS、OTA 数据或 8 MB assets。
 
 ## 验证与观察
 
-`test.sh` 运行 ASan／UBSan 主机检查，验证 ct2 只读核心，以及 ct5 可变时长启动、截止边界与非法时长拒绝、忙碌／冷却拒绝、BOOT／停止取消排队请求、断线、复位、重复 RPC、队列过期和时钟故障。它不代表音频、实物停止或端到端语音通过。
+`test.sh` 运行 ASan／UBSan 主机检查，验证 ct2 只读核心，以及 ct5 可变时长启动、截止边界与非法时长拒绝、忙碌／冷却拒绝、BOOT／停止取消排队请求、断线、复位、重复 RPC、队列过期和时钟故障。ct6 另覆盖四方向、跨执行器互斥、排队取消和三秒冷却，以及真实输出类的每一处初始化／启动／停止 API 单故障注入。`run_mcp_tests.py` 从已导出源码提取实际 MCP 校验块，使用 ESP-IDF cJSON 检查参数边界。以上均不代表音频、实物停止或端到端语音通过。
 
 `monitor.py --port <设备串口> --log build/audio-private/session.jsonl` 只监听和筛选 CT_AUDIO 回执、运行状态及少量启动信息，不发送串口命令，不保存原始串口日志或录音。平台工具记录和用户现场音频／屏幕观察共同构成语音联调证据。详见[验证记录](../../docs/audio-board-validation.md)。
 
 
 ## 平台角色配置
 
-灵矽智能体管理名称为“CyberTrack”（原名“彩菊”），助手昵称为“小D”；设备绑定沿用。角色介绍以仓库中的 [role-prompt.txt](role-prompt.txt) 为唯一维护源，用于灵矽角色配置的“角色介绍”字段，昵称使用 `{{assistant_name}}`。角色为机灵、友好、利落的 CyberTrack 机器人小助手，聚焦动作与状态，通常一句话回答；去掉“开启／关闭输出”等工程话术，不接明显的背景谈话，不展开无关话题。喷水成功确认用“好，按X秒喷水”，停止用“收到，停止喷水”，空闲用“待命中”；均以真实工具回执为前提，未知能力不假装执行。音色和模型保持现有选择。平台提示保存后需重启设备生效；修改昵称不会更改固件唤醒词“你好小智”。提示词不是固件动作限制的替代品。
+灵矽智能体管理名称为“CyberTrack”（原名“彩菊”），助手昵称为“小D”；设备绑定沿用。角色介绍以仓库中的 [role-prompt.txt](role-prompt.txt) 为唯一维护源，用于灵矽角色配置的“角色介绍”字段，昵称使用 `{{assistant_name}}`。角色为机灵、友好、利落的 CyberTrack 机器人小助手，聚焦动作与状态，通常一句话回答；去掉“开启／关闭输出”等工程话术，不接明显的背景谈话，不展开无关话题。喷水成功确认用“好，按X秒喷水”，停止用“收到，全部停止”，空闲用“待命中”；均以真实工具回执为前提，未知能力不假装执行。音色和模型保持现有选择。平台提示保存后需重启设备生效；修改昵称不会更改固件唤醒词“你好小智”。提示词不是固件动作限制的替代品。
 
 维护、平台同步、回滚和语音回归要求见[智能体角色与提示词](../../docs/agent-role.md)。不要在其他文档复制整份角色介绍；此处仅概述行为。
 
