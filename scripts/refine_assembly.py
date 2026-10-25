@@ -44,7 +44,7 @@ def refine(doc,add):
 
     # Battery carrier: four recessed fasteners outside the battery envelope.
     for side,sign in [('L',1),('R',-1)]:
-        for end,y in [('Front',-85),('Rear',-34)]:
+        for end,y in [('Front',-85),('Rear',-40)]:
             x=sign*63.5;tag=side+end
             tab=box(60.5 if sign>0 else -65.8,y-4,28,65.8 if sign>0 else -60.5,y+4,31)
             fuse('BatteryHatch',tab)
@@ -167,9 +167,9 @@ def service_groups(doc):
     names=[o.Name for o in doc.Objects if hasattr(o,'Category')]
     crown=[n for n in names if n.startswith(('Crown','BrowArmor','OccipitalBrow')) and not n.startswith(('CrownScrew','CrownInsert'))]
     crown+=['HeadCrownShell','HeadServiceHatch']
-    battery=['PowerBank','BatteryHatch','BatteryPullStrap']+[n for n in names if n.startswith('BatteryPad')]
+    battery=['PowerBank','BatteryHatch','BatteryPullStrap']+[n for n in names if n.startswith(('BatteryPad','BatterySupportWasher'))]
     wet={name:[name+suffix for suffix in ('ServiceLid','CapGrip','LidMark','FillPlug','FillSeal')] for name in ('Water','Bubble')}
-    return {'cable_access':['CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule']+controller_members(doc)+[n for n in names if n.startswith(('ControllerMountScrew','ControllerMountInsert'))],**wet,
+    return {'cable_access':['BottomServiceCover' if doc.getObject('BottomServiceCover') else 'CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule']+controller_members(doc)+[n for n in names if n.startswith(('ControllerMountScrew','ControllerMountInsert'))],**wet,
             'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR'],
             **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('bubble_gun','bubble_gun_cradle')} if doc.getObject('BubbleGunShell') else {}),
             **({'water_gun':['WaterGunBody','WaterGunInlet']} if doc.getObject('WaterGunBody') else {}),
@@ -198,8 +198,10 @@ def check_service_paths(doc):
     groups=service_groups(doc);all_shapes=[o for o in doc.Objects if hasattr(o,'Category') and o.Category!='clearance']
     bounds={o.Name:o.Shape.optimalBoundingBox(False) for o in all_shapes}
     results=[]
-    scenarios=[('cable_access',(0,0,-25),['AccessScrewL','AccessScrewR']),
-               ('battery',(0,0,-60),[n.Name for n in all_shapes if n.Name.startswith('BatteryScrew')]+['PowerCableRoute','CableServiceCover','AccessScrewL','AccessScrewR']),
+    bottom_screws=[o.Name for o in all_shapes if o.Name.startswith('BottomCoverScrew')]
+    bottom_removed=groups['cable_access']+bottom_screws
+    scenarios=[('cable_access',(0,0,-80),bottom_screws if doc.getObject('BottomServiceCover') else ['AccessScrewL','AccessScrewR']),
+               ('battery',(0,0,-60),[n.Name for n in all_shapes if n.Name.startswith('BatteryScrew')]+['PowerCableRoute','CableServiceCover','AccessScrewL','AccessScrewR']+bottom_removed),
                ('crown',(0,0,65),[n.Name for n in all_shapes if n.Name.startswith('CrownScrew')]),
                ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']),
                ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]+['WaterHoseRoute','BubbleGunHoseRoute']),

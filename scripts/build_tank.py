@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'hardware/model'
 V = App.Vector
 COLORS = {'body': (0.25, 0.36, 0.43), 'dark': (0.075, 0.10, 0.12),
-          'metal': (0.40, 0.48, 0.51), 'light': (0.82, 0.84, 0.80), 'accent': (0.98, 0.31, 0.07),
+          'metal': (0.40, 0.48, 0.51), 'light': (0.82, 0.84, 0.80), 'accent': (0.98, 0.32, 0.07),
           'visor': (0.025, 0.055, 0.065), 'signal': (0.20, 0.87, 0.94),
           'water': (0.18, 0.68, 0.81), 'bubble': (0.49, 0.46, 0.77),
           'power': (0.91, 0.68, 0.22), 'electronics': (0.22, 0.61, 0.42)}
@@ -110,7 +110,7 @@ def render_views(doc, output):
     for o in doc.Objects:
         if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('exterior','clearance')
     render('layout.png','iso')
-    for name in ('WaterModule','BubbleModule','Electronics','AudioModule','BatteryRoof','LowerTub','KeelLid'):
+    for name in ('WaterModule','BubbleModule','Electronics','AudioModule','LowerTub','KeelLid'):
         doc.getObject(name).ViewObject.Visibility=False
     render('lower-layout.png','iso')
     # Service diagram: exploded rigid groups; screws and flexible routes removed first.
@@ -251,7 +251,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.28'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.32'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -595,6 +595,10 @@ def main():
     from gun_pitch import apply_pitch,local_frame
     pitch_info=apply_pitch(doc,rail_bases)
     finish_top_feed(doc)
+    from drive_mount import apply as apply_drive_mount
+    apply_drive_mount(doc,add)
+    from drive_service import apply as apply_drive_service
+    apply_drive_service(doc,add)
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
@@ -667,6 +671,8 @@ def main():
         render_views(saved, OUT)
         render_speaker(saved, OUT)
         render_ultrasonic(saved, OUT)
+        from drive_service import render_drive_views
+        render_drive_views(saved, OUT)
         saved.save()
     # Reopen the final saved file after GUI styling; verify geometry and visibility.
     App.closeDocument(saved.Name)
@@ -691,7 +697,10 @@ def main():
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
                     assert visible==(final_shapes[name].Category not in ('envelope','clearance')),name
     assert sha(source_path)==source_hash
-    report={'status':'preliminary_concept','design_revision':'0.28','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    from drive_service_check import check as check_drive_mount
+    drive_mount_check=check_drive_mount(final,verbose=True)
+    report={'status':'preliminary_concept','design_revision':'0.32','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+            'drive_mount_check':drive_mount_check,
             'rear_armor_symmetry_check':check_rear_armor(final),
             'top_feed_check':check_top_feed(final),
             'bounding_box_method':'optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)',
@@ -731,6 +740,7 @@ def main():
             'assembly_paths_verified':False,'electrical_verified':False,
             'final_saved_audit':{'native_objects_verified':len(final_shapes),'gui_visibility_verified':args.render},
             'previews_generated':args.render,
+            'drive_preview_note':'Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.',
             'files_sha256':{p.name:sha(p) for p in [cad,step]+(sorted(OUT.glob('*.png')) if args.render else [])}}
     report['top_feed_check']['source_sha256']=sha(cad)
     report['top_feed_check']['saved_and_reopened']=True
@@ -744,6 +754,9 @@ def main():
     report['speaker_check']['source_after_sha256']=sha(cad)
     report['speaker_check']['saved_and_reopened']=True
     (OUT/'speaker-fit-audit.json').write_text(json.dumps(report['speaker_check'],ensure_ascii=False,indent=2)+'\n')
+    report['drive_mount_check']['source_sha256']=sha(cad)
+    report['drive_mount_check']['saved_and_reopened']=True
+    (OUT/'drive-mount-audit.json').write_text(json.dumps(report['drive_mount_check'],ensure_ascii=False,indent=2)+'\n')
     (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check','service_paths')},ensure_ascii=False,indent=2))
     App.closeDocument(final.Name)
@@ -753,7 +766,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not report['speaker_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
+    if not drive_mount_check['passed'] or not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not report['speaker_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 

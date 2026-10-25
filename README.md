@@ -14,7 +14,7 @@ CyberTrack 是一个双履带语音交互玩具机器人项目，将履带行走
 
 ## 项目进度
 
-目前已整理硬件采购清单、部件资料和系统方案，并生成[初步整机模型及视图](hardware/model/README.md)。[固件](firmware/README.md)已完成控制核心、F1 离线 MCP 协议适配及 F2a 通用启动／运行层，通过主机与假板卡测试；另有[ESP32-S3 无负载检查工程](firmware/esp32/README.md)与[实物启动／PSRAM 记录](hardware/components/ESP32-S3-N16R8/physical-verification.md)；独立联网板和音频板的喷水子项已有联调记录，完整整机驱动、独立停止及故障验收仍待完成。当前功能与接口见[固件能力与接口手册](firmware/CAPABILITIES.md)。
+目前已整理硬件采购清单、部件资料和系统方案，并生成[整机模型及视图](hardware/model/README.md)。0.32将电机固定面直接并入底盘，取消独立端板、前干舱隔板、电源上内隔板和旧托座跨舱横梁；保留后湿舱隔板、一体底盖及电源承托。动力接口、左右各14 mm外移和132 mm等宽下部保持；换电机先取出电源内托架、移开本侧履带，再向下取电机，见[装配说明](docs/assembly.md#032-简化一体底盘与电机维护)。[固件](firmware/README.md)已完成控制核心、F1 离线 MCP 协议适配及 F2a 通用启动／运行层，通过主机与假板卡测试；另有[ESP32-S3 无负载检查工程](firmware/esp32/README.md)与[实物启动／PSRAM 记录](hardware/components/ESP32-S3-N16R8/physical-verification.md)；独立联网板和音频板的喷水子项已有联调记录，完整整机驱动、独立停止及故障验收仍待完成。当前功能与接口见[固件能力与接口手册](firmware/CAPABILITIES.md)。
 
 下一步继续推进[不依赖实物的固件工作](firmware/PLAN.md#不依赖实物的后续工作)；F2b 继续按[清单](firmware/BOARD-INFO.md)补停止器件、板级焊装与外设信息。硬件侧继续核对尺寸和供电参数，用实测部件修订布局并开展单模块测试。具体任务见 [TODO](TODO.md)，阶段安排见[实施及验收计划](docs/verification-plan.md)与[固件计划](firmware/PLAN.md)。
 
