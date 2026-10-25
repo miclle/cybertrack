@@ -18,9 +18,12 @@ ORIGINAL_ELF_SHA256 = "f7e8809ce981ee4182fb6c3eb15b20aa785111c7f1e4b1e2f059e4deb
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("upstream", type=Path)
+    parser.add_argument("--target", type=Path, default=ROOT / "build/xiaozhi-audio-src")
     args = parser.parse_args()
     upstream = args.upstream.resolve()
-    target = ROOT / "build/xiaozhi-audio-src"
+    target = args.target.resolve()
+    if not target.is_relative_to(ROOT / "build"):
+        parser.error("target must be inside this project's build/")
     if target.exists():
         parser.error("Build export already exists; use a fresh directory after preserving needed results")
     if hashlib.sha256((upstream / "build/xiaozhi.elf").read_bytes()).hexdigest() != ORIGINAL_ELF_SHA256:

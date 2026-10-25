@@ -1,0 +1,1225 @@
+{
+  "date": "2026-10-25",
+  "firmware": "2.0.3-ct6",
+  "status": "basic_integrated_bench_round_complete_power_branches_disconnected_extended_acceptance_open",
+  "power_confirmation": {
+    "source": "user",
+    "motor_12v_disconnected": true,
+    "mos_5v_disconnected": true,
+    "gpio_8_through_13_free": true,
+    "wiring_migrated": true,
+    "after_migration": "User confirms only breadboard USB reconnected; L298N 12 V and MOS 5 V remain disconnected"
+  },
+  "connection": {
+    "COM": "two RAM stub upload checksum errors; no flash write via COM",
+    "native_USB": "stub upload, read and application write succeeded"
+  },
+  "backup": {
+    "previous_version": "2.0.3-ct5",
+    "ota0_partition_bytes": 4128768,
+    "ota0_sha256": "180412973704da630bc4df5a8189320d334514bf07c824c1869a0818d05d1b40",
+    "previous_app_matches_saved_ct5": true,
+    "private_location": "secrets/ct6-20261025/"
+  },
+  "flash": {
+    "offset": "0x20000",
+    "bytes": 2551904,
+    "sha256": "44d4cf7107180382030934ecdab626b8c498f5c2f6794443c3875cf306eaab49",
+    "esptool_hash_verified": true,
+    "config_region": "0x8000..0x1ffff",
+    "config_bytes": 98304,
+    "config_identical": true,
+    "bootloader_assets_nvs_ota_not_written": true
+  },
+  "startup": {
+    "firmware_observed": true,
+    "display_driver_initialized": true,
+    "tools_registered": [
+      "get_status",
+      "stop",
+      "water",
+      "move"
+    ],
+    "network_acquired": true,
+    "idle_observed": true,
+    "error_in_observation": false,
+    "first_ready_at": "2026-10-25T12:27:26.555797+08:00",
+    "idle_at": "2026-10-25T12:27:31.702222+08:00",
+    "serial_log": "build/audio-private/ct6-session.jsonl"
+  },
+  "platform": {
+    "agent": "CyberTrack",
+    "prompt_saved_and_reopened_equal": true,
+    "role_sha256": "f9b6c86dea2f6cc45229fa75bcea6bdc7d098ab505cff075b1ba208f7ade58ff",
+    "nickname": "小D",
+    "voice": "少年梓辛/Brayan",
+    "model": "deepseek-v4-flash",
+    "intent_mode": "统一意图识别",
+    "device_version_observed": "2.0.3-ct6",
+    "binding_preserved": true,
+    "screenshot": "build/audio-private/ct6-role-saved.png"
+  },
+  "commands_sent": [],
+  "voice_validation": {
+    "get_status_receipts": [
+      {
+        "time": "2026-10-25T12:27:54.625317+08:00",
+        "operation": "get_status",
+        "result": "ok",
+        "state": "STOPPED",
+        "fault": "stopped",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false
+        },
+        "starts_this_boot": 0,
+        "capabilities": {
+          "move": true,
+          "water": true,
+          "bubbles": false
+        }
+      },
+      {
+        "time": "2026-10-25T12:28:03.808042+08:00",
+        "operation": "get_status",
+        "result": "ok",
+        "state": "STOPPED",
+        "fault": "stopped",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false
+        },
+        "starts_this_boot": 0,
+        "capabilities": {
+          "move": true,
+          "water": true,
+          "bubbles": false
+        }
+      }
+    ],
+    "user_audio_display_feedback": {
+      "source": "user",
+      "audio_normal": true,
+      "display_normal": true,
+      "reported_reply": "我是小 D，你的机器人小助手。",
+      "status_answer_confirmed": false
+    },
+    "action_commands": "not requested or observed",
+    "platform_conversation_check": {
+      "source": "Linx visible device conversation, 2026-10-25 12:27-12:28 Asia/Shanghai",
+      "greeting_reply": "我是小D，你的机器人小助手。",
+      "status_user_text": "检查一下状态。",
+      "status_requests_at": [
+        "12:27:54",
+        "12:28:03"
+      ],
+      "status_tool": "self_tank_get_status({})",
+      "status_ai_text": "待命中。",
+      "matches_device_receipts": true,
+      "scope": "platform text and tool receipts matched; audio/display normal per user, no action commands"
+    }
+  },
+  "physical_feedback": {
+    "user_observations": "multimeter control signals, unloaded motor directions and stops, actual spray and stops, audio/display observations recorded per test",
+    "device_has_physical_feedback": false
+  },
+  "remaining": [
+    "Network disconnect stop and reconnect without resume: explicitly deferred by user",
+    "Reverse mutual exclusion: water request while motors active; other documented voice boundary/replay/cooldown regressions not fully tested on device",
+    "Powered early voice stop and quantitative button-to-output/physical-stop latency; reset, brownout and controller-loss with powered loads; independent cutoff assessment",
+    "Installed chassis A/B and forward-direction calibration, tracks and ground/load tests",
+    "Integrated supply voltage/current/transients/backfeed, thermal rise and sustained/repeated operation, liquid/EMC interaction; no complete combined-power acceptance"
+  ],
+  "static_signal_check": {
+    "date": "2026-10-25",
+    "source": "user multimeter feedback",
+    "power": "breadboard USB only; L298N 12 V and MOS 5 V disconnected",
+    "L298N_ENA_IN1_IN2_ENB_IN3_IN4": "all near 0 V relative to L298N GND",
+    "MOS_TRIG_PWM": "near 0 V relative to MOS control GND",
+    "exact_voltages": "not provided",
+    "scope": "post-migration idle signals only; no dynamic or powered actuator acceptance"
+  },
+  "dynamic_signal_checks": [
+    {
+      "date": "2026-10-25",
+      "signal": "L298N ENA relative to L298N GND",
+      "user_observation": {
+        "voltage_v": 1.95,
+        "automatic_return_near_zero": "about 3 seconds",
+        "voice_reply": "好，前进三秒。",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T12:42:10.951974+08:00",
+        "direction": "forward",
+        "duration_ms": 3000,
+        "logical_left": 60,
+        "logical_right": 60,
+        "water": false,
+        "starts_this_boot": 1,
+        "off_at": "2026-10-25T12:42:13.910106+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 3000
+      },
+      "scope": "ENA multimeter signal and voice/tool/deadline check only; no PWM waveform, motor motion or powered-driver validation"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "L298N ENB relative to L298N GND",
+      "user_observation": {
+        "voltage_v": 1.95,
+        "automatic_return_near_zero": "about 3 seconds",
+        "voice_reply": "好，前进三秒。",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T12:43:28.147474+08:00",
+        "direction": "forward",
+        "duration_ms": 3000,
+        "logical_left": 60,
+        "logical_right": 60,
+        "water": false,
+        "starts_this_boot": 2,
+        "off_at": "2026-10-25T12:43:31.101253+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 3000
+      },
+      "scope": "ENB multimeter signal and voice/tool/deadline check only; no PWM waveform, motor motion or powered-driver validation"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "L298N IN1 relative to L298N GND",
+      "user_observation": {
+        "forward_voltage_v": 3.25,
+        "forward_return_near_zero": "after about 3 seconds",
+        "backward_voltage": "near 0 V throughout and afterward",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "forward_accepted_at": "2026-10-25T12:44:23.313768+08:00",
+        "direction": "forward",
+        "duration_ms": 3000,
+        "starts_this_boot": 3,
+        "off_at": "2026-10-25T12:44:26.272229+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 3000,
+        "backward_receipt": "not observed"
+      },
+      "platform_evidence": "Latest device conversation shows forward at 12:44:23; no backward transcription or tool call observed",
+      "result": {
+        "forward_signal": "passed for this observation",
+        "backward_signal": "user observed low, but command execution uncorroborated; pending one explicit backward check"
+      },
+      "scope": "power-disconnected signal check only"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "L298N IN1 relative to L298N GND",
+      "user_observation": {
+        "backward_voltage": "near 0 V throughout and afterward",
+        "voice_reply": "好，后退三秒。",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T12:46:47.324782+08:00",
+        "direction": "backward",
+        "duration_ms": 3000,
+        "logical_left": -60,
+        "logical_right": -60,
+        "water": false,
+        "starts_this_boot": 4,
+        "off_at": "2026-10-25T12:46:50.279675+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 3000
+      },
+      "result": "Backward execution corroborated; IN1 remained low as expected. Together with prior forward measurement, IN1 direction signal check passed for these observations.",
+      "scope": "power-disconnected multimeter signal and voice/tool/deadline check only; no powered-driver or motor motion validation"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "L298N IN2 relative to L298N GND",
+      "user_observation": {
+        "backward_voltage_v": 3.25,
+        "backward_return_near_zero": "after about 3 seconds",
+        "forward_voltage": "near 0 V throughout and afterward",
+        "voice_replies": [
+          "好，后退三秒。",
+          "好，前进三秒。"
+        ],
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": [
+        {
+          "accepted_at": "2026-10-25T12:48:45.054370+08:00",
+          "direction": "backward",
+          "duration_ms": 3000,
+          "logical_left": -60,
+          "logical_right": -60,
+          "water": false,
+          "fault": "none",
+          "starts_this_boot": 5,
+          "off_at": "2026-10-25T12:48:48.011608+08:00",
+          "off_reason": "deadline",
+          "software_on_ms": 3000
+        },
+        {
+          "accepted_at": "2026-10-25T12:48:58.451023+08:00",
+          "direction": "forward",
+          "duration_ms": 3000,
+          "logical_left": 60,
+          "logical_right": 60,
+          "water": false,
+          "fault": "none",
+          "starts_this_boot": 6,
+          "off_at": "2026-10-25T12:49:01.406686+08:00",
+          "off_reason": "deadline",
+          "software_on_ms": 3000
+        }
+      ],
+      "result": "Both executions corroborated; IN2 backward high then low and forward low throughout passed for these observations.",
+      "scope": "power-disconnected multimeter signal and voice/tool/deadline check only; no powered-driver or motor motion validation"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "L298N IN3 relative to L298N GND",
+      "user_observation": {
+        "forward_voltage_v": 3.25,
+        "forward_return_near_zero": "after about 3 seconds",
+        "backward_voltage": "near 0 V throughout and afterward",
+        "voice_replies": [
+          "好，前进三秒。",
+          "好，后退三秒。"
+        ],
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": [
+        {
+          "accepted_at": "2026-10-25T12:50:02.875307+08:00",
+          "direction": "forward",
+          "duration_ms": 3000,
+          "logical_left": 60,
+          "logical_right": 60,
+          "water": false,
+          "fault": "none",
+          "starts_this_boot": 7,
+          "off_at": "2026-10-25T12:50:05.832854+08:00",
+          "off_reason": "deadline",
+          "software_on_ms": 3000
+        },
+        {
+          "accepted_at": "2026-10-25T12:50:11.887628+08:00",
+          "direction": "backward",
+          "duration_ms": 3000,
+          "logical_left": -60,
+          "logical_right": -60,
+          "water": false,
+          "fault": "none",
+          "starts_this_boot": 8,
+          "off_at": "2026-10-25T12:50:14.843149+08:00",
+          "off_reason": "deadline",
+          "software_on_ms": 3000
+        }
+      ],
+      "result": "Both executions corroborated; IN3 forward high then low and backward low throughout passed for these observations.",
+      "scope": "power-disconnected multimeter signal and voice/tool/deadline check only; no powered-driver or motor motion validation"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "L298N IN4 relative to L298N GND",
+      "user_observation": {
+        "backward_voltage_v": 3.25,
+        "backward_return_near_zero": "after about 3 seconds",
+        "forward_voltage": "near 0 V throughout and afterward",
+        "voice_replies": [
+          "好，后退三秒。",
+          "好，前进三秒。"
+        ],
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": [
+        {
+          "accepted_at": "2026-10-25T12:50:54.440343+08:00",
+          "direction": "backward",
+          "duration_ms": 3000,
+          "logical_left": -60,
+          "logical_right": -60,
+          "water": false,
+          "fault": "none",
+          "starts_this_boot": 9,
+          "off_at": "2026-10-25T12:50:57.393732+08:00",
+          "off_reason": "deadline",
+          "software_on_ms": 2999
+        },
+        {
+          "accepted_at": "2026-10-25T12:51:06.033128+08:00",
+          "direction": "forward",
+          "duration_ms": 3000,
+          "logical_left": 60,
+          "logical_right": 60,
+          "water": false,
+          "fault": "none",
+          "starts_this_boot": 10,
+          "off_at": "2026-10-25T12:51:08.988916+08:00",
+          "off_reason": "deadline",
+          "software_on_ms": 3000
+        }
+      ],
+      "result": "Both executions corroborated; IN4 backward high then low and forward low throughout passed for these observations.",
+      "scope": "power-disconnected multimeter signal and voice/tool/deadline check only; no powered-driver or motor motion validation"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "MOS TRIG/PWM (GPIO18) relative to MOS control GND",
+      "user_observation": {
+        "idle_voltage": "near 0 V",
+        "active_voltage_v": 3.18,
+        "automatic_return_near_zero": "after about 3 seconds",
+        "voice_reply": "好，喷水三秒。",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T12:52:00.369538+08:00",
+        "operation": "water",
+        "duration_ms": 3000,
+        "logical_left": 0,
+        "logical_right": 0,
+        "water": true,
+        "fault": "none",
+        "starts_this_boot": 11,
+        "off_at": "2026-10-25T12:52:03.324998+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 3000
+      },
+      "result": "Water command and deadline corroborated; MOS control signal high then low passed for this observation.",
+      "scope": "power-disconnected multimeter signal and voice/tool/deadline check only; no powered-MOS or water-gun actuation validation"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "L298N IN1 relative to L298N GND",
+      "scenario": "left/right turns",
+      "user_observation": {
+        "left_turn_voltage": "near 0 V throughout and afterward",
+        "right_turn_voltage_v": 3.25,
+        "right_turn_return_near_zero": "after about 3 seconds",
+        "voice_replies": [
+          "好，左转三秒。",
+          "好，右转三秒。"
+        ],
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": [
+        {
+          "accepted_at": "2026-10-25T13:00:03.784578+08:00",
+          "direction": "left",
+          "duration_ms": 3000,
+          "logical_left": -60,
+          "logical_right": 60,
+          "water": false,
+          "fault": "none",
+          "starts_this_boot": 17,
+          "off_at": "2026-10-25T13:00:06.742810+08:00",
+          "off_reason": "deadline",
+          "software_on_ms": 3000
+        },
+        {
+          "accepted_at": "2026-10-25T13:00:15.875523+08:00",
+          "direction": "right",
+          "duration_ms": 3000,
+          "logical_left": 60,
+          "logical_right": -60,
+          "water": false,
+          "fault": "none",
+          "starts_this_boot": 18,
+          "off_at": "2026-10-25T13:00:18.833226+08:00",
+          "off_reason": "deadline",
+          "software_on_ms": 3000
+        }
+      ],
+      "result": "Both turn executions corroborated; IN1 left low and right high then low passed for these observations.",
+      "scope": "power-disconnected IN1 multimeter signal and voice/tool/deadline check only; B-channel turn signal and physical vehicle direction not verified by this check"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "L298N IN3 relative to L298N GND",
+      "scenario": "left/right turns",
+      "user_observation": {
+        "left_turn_voltage_v": 3.25,
+        "left_turn_return_near_zero": "after about 3 seconds",
+        "right_turn_voltage": "near 0 V throughout and afterward",
+        "voice_replies": [
+          "好，左转三秒。",
+          "好，右转三秒。"
+        ],
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": [
+        {
+          "accepted_at": "2026-10-25T13:01:02.695585+08:00",
+          "direction": "left",
+          "duration_ms": 3000,
+          "logical_left": -60,
+          "logical_right": 60,
+          "water": false,
+          "fault": "none",
+          "starts_this_boot": 19,
+          "off_at": "2026-10-25T13:01:05.649962+08:00",
+          "off_reason": "deadline",
+          "software_on_ms": 3000
+        },
+        {
+          "accepted_at": "2026-10-25T13:01:11.833644+08:00",
+          "direction": "right",
+          "duration_ms": 3000,
+          "logical_left": 60,
+          "logical_right": -60,
+          "water": false,
+          "fault": "none",
+          "starts_this_boot": 20,
+          "off_at": "2026-10-25T13:01:14.790207+08:00",
+          "off_reason": "deadline",
+          "software_on_ms": 3000
+        }
+      ],
+      "result": "Both turn executions corroborated; IN3 left high then low and right low throughout passed for these observations.",
+      "scope": "power-disconnected IN3 multimeter signal and voice/tool/deadline check only; physical vehicle direction and other turn pins not measured by this check"
+    }
+  ],
+  "stop_signal_checks": [
+    {
+      "date": "2026-10-25",
+      "signal": "MOS TRIG/PWM (GPIO18) relative to MOS control GND",
+      "stop_input": "BOOT",
+      "user_observation": {
+        "voice_reply": "好，喷水五秒。",
+        "on_press": "voltage returned near 0 V when BOOT was pressed after voltage rose",
+        "after_release": "remained near 0 V beyond original five-second duration; no resume",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T12:53:18.142680+08:00",
+        "operation": "water",
+        "duration_ms": 5000,
+        "logical_left": 0,
+        "logical_right": 0,
+        "water": true,
+        "fault": "none",
+        "starts_this_boot": 12,
+        "off_at": "2026-10-25T12:53:19.351452+08:00",
+        "off_reason": "BOOT",
+        "software_on_ms": 1250,
+        "outputs": "OFF",
+        "log_tail_time_at_review": "2026-10-25T12:53:21.199183+08:00",
+        "subsequent_start_receipt_at_review": false
+      },
+      "result": "BOOT early stop corroborated; no-resume beyond original deadline is user multimeter evidence.",
+      "scope": "power-disconnected MOS control signal only; software_on_ms is action duration, not measured BOOT response latency; no loaded stop or motor enable stop validation"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "L298N ENA relative to L298N GND",
+      "stop_input": "BOOT",
+      "user_observation": {
+        "voice_reply": "好，前进三秒。",
+        "on_press": "voltage returned near 0 V when BOOT was pressed after voltage rose",
+        "after_release": "remained near 0 V beyond original three-second duration; no resume",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T12:55:14.465258+08:00",
+        "operation": "move",
+        "direction": "forward",
+        "duration_ms": 3000,
+        "logical_left": 60,
+        "logical_right": 60,
+        "water": false,
+        "fault": "none",
+        "starts_this_boot": 13,
+        "off_at": "2026-10-25T12:55:15.933472+08:00",
+        "off_reason": "BOOT",
+        "software_on_ms": 1515,
+        "outputs": "OFF",
+        "log_tail_time_at_review": "2026-10-25T12:55:17.251183+08:00",
+        "subsequent_start_receipt_at_review": false
+      },
+      "result": "BOOT early stop corroborated; ENA no-resume beyond original deadline is user multimeter evidence.",
+      "scope": "power-disconnected ENA control signal only; software_on_ms is action duration, not measured BOOT response latency; no motor motion or ENB physical stop validation"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "L298N ENB relative to L298N GND",
+      "stop_input": "BOOT",
+      "user_observation": {
+        "voice_reply": "好，前进三秒。",
+        "on_press": "voltage returned near 0 V when BOOT was pressed after voltage rose",
+        "after_release": "remained near 0 V beyond original three-second duration; no resume",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T12:56:02.610512+08:00",
+        "operation": "move",
+        "direction": "forward",
+        "duration_ms": 3000,
+        "logical_left": 60,
+        "logical_right": 60,
+        "water": false,
+        "fault": "none",
+        "starts_this_boot": 14,
+        "off_at": "2026-10-25T12:56:03.709447+08:00",
+        "off_reason": "BOOT",
+        "software_on_ms": 1145,
+        "outputs": "OFF",
+        "log_tail_time_at_review": "2026-10-25T12:56:05.901604+08:00",
+        "subsequent_start_receipt_at_review": false
+      },
+      "result": "BOOT early stop corroborated; ENB no-resume beyond original deadline is user multimeter evidence.",
+      "scope": "power-disconnected ENB control signal only; software_on_ms is action duration, not measured BOOT response latency; no motor motion validation"
+    },
+    {
+      "date": "2026-10-25",
+      "signal": "MOS TRIG/PWM (GPIO18) relative to MOS control GND",
+      "stop_input": "voice self.tank.stop",
+      "user_observation": {
+        "voice_replies": [
+          "好，喷水十秒。",
+          "已停止。"
+        ],
+        "on_stop": "MOS voltage returned near 0 V before the ten-second deadline",
+        "after_stop": "remained near 0 V without resume",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T12:56:53.769098+08:00",
+        "operation": "water",
+        "duration_ms": 10000,
+        "starts_this_boot": 15,
+        "stop_rpc_at": "2026-10-25T12:57:01.945712+08:00",
+        "stop_result_at": "2026-10-25T12:57:01.992459+08:00",
+        "stop_result": "ok",
+        "stop_state": "STOPPED",
+        "stop_fault": "stopped",
+        "logical_left_after_stop": 0,
+        "logical_right_after_stop": 0,
+        "water_after_stop": false,
+        "starts_this_boot_after_stop": 15,
+        "off_at": "2026-10-25T12:57:02.000057+08:00",
+        "off_reason": "stop",
+        "software_on_ms": 8221,
+        "outputs": "OFF",
+        "log_tail_time_at_review": "2026-10-25T12:57:05.158355+08:00",
+        "subsequent_start_receipt_at_review": false
+      },
+      "result": "Actual stop tool invocation and early output shutdown corroborated; user observed no resume.",
+      "scope": "power-disconnected MOS control signal only; action duration is not voice-stop response latency; no loaded stop validation"
+    }
+  ],
+  "mutual_exclusion_checks": [
+    {
+      "date": "2026-10-25",
+      "scenario": "forward request during active water",
+      "measured_signal": "L298N ENA relative to L298N GND",
+      "user_observation": {
+        "voice_replies": [
+          "好，喷水二十秒。",
+          "正在喷水，不能同时行走（用户概述）",
+          "已停止。"
+        ],
+        "ena_voltage": "near 0 V throughout and beyond original twenty-second deadline",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "water_accepted_at": "2026-10-25T12:58:08.849290+08:00",
+        "water_duration_ms": 20000,
+        "starts_this_boot": 16,
+        "move_rpc_at": "2026-10-25T12:58:19.028197+08:00",
+        "move_rpc_id": 20,
+        "move_accepted_result_observed": false,
+        "off_at": "2026-10-25T12:58:28.805858+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 20001,
+        "stop_result_at": "2026-10-25T12:58:37.849410+08:00",
+        "stop_result": "ok",
+        "logical_outputs_after_stop": {
+          "left": 0,
+          "right": 0,
+          "water": false
+        },
+        "starts_this_boot_after_stop": 16,
+        "log_tail_time_at_review": "2026-10-25T12:58:40.829021+08:00"
+      },
+      "platform_evidence": {
+        "move_arguments": {
+          "direction": "forward",
+          "duration_ms": 3000
+        },
+        "move_result_display": "MCP工具调用失败",
+        "reply": "现在正在喷水，行走和喷水要分开操作，暂时不能前进。",
+        "detailed_busy_error_visible": false
+      },
+      "interpretation": "Move reached firmware while water active, failed at tool layer, did not increase action count, and ENA stayed low. Consistent with firmware busy claim rejection; platform does not expose a specific busy code. No queued move observed. Stop arrived after natural water deadline.",
+      "scope": "one direction of mutual exclusion with ENA measured; reverse direction and ENB measurement not covered; power disconnected"
+    }
+  ],
+  "negative_command_checks": [
+    {
+      "date": "2026-10-25",
+      "utterance": "不要喷水，也不要前进",
+      "measured_signal": "MOS TRIG/PWM relative to MOS control GND",
+      "user_observation": {
+        "negative_reply": "不会执行（用户概述）",
+        "status_reply": "待命中。",
+        "voltage": "near 0 V throughout",
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "device_evidence": {
+        "review_window_after": "2026-10-25T13:01:15+08:00",
+        "status_at": "2026-10-25T13:02:11.549823+08:00",
+        "operation": "get_status",
+        "result": "ok",
+        "state": "DISARMED",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false
+        },
+        "fault": "none",
+        "starts_this_boot_before": 20,
+        "starts_this_boot_after": 20,
+        "action_rpc_observed": false,
+        "log_tail_time_at_review": "2026-10-25T13:02:13.539902+08:00"
+      },
+      "result": "No action call observed in this window; unchanged start count and MOS low corroborate no action for this utterance.",
+      "scope": "one negative utterance and MOS multimeter observation, not comprehensive language or all-pin waveform validation"
+    }
+  ],
+  "power_cycle_checks": [
+    {
+      "date": "2026-10-25",
+      "scenario": "USB removed for five seconds then reconnected; power branches remain disconnected",
+      "user_observation": {
+        "mos_control_voltage": "near 0 V throughout startup to online idle",
+        "audio_normal": true,
+        "display_normal": true,
+        "motor_12v_and_mos_5v_disconnected": true
+      },
+      "observer_evidence": {
+        "log": "build/audio-private/ct6-repower-session.jsonl",
+        "port": "/dev/cu.usbmodem1101",
+        "opened_at": "2026-10-25T13:04:21.115103+08:00",
+        "firmware": "2.0.3-ct6",
+        "display": "SSD1306 driver installed",
+        "ready_observed_at": "2026-10-25T13:04:21.475847+08:00",
+        "ready": "status,stop,water,move; GPIO18=LOW; BOOT=stop_all",
+        "network_observed_at": "2026-10-25T13:04:25.770565+08:00",
+        "idle_observed_at": "2026-10-25T13:04:26.783649+08:00",
+        "serial_application_commands_sent": []
+      },
+      "result": "New boot ID confirmed; status query returned all outputs off, no action starts, and zero remaining time. STOPPED/stopped denotes normal stopped state, not an output fault. User observed MOS low during power cycle.",
+      "scope": "MOS multimeter observation and startup logs only; timestamps are observer receipt times; no short-glitch exclusion or other-pin power-cycle measurements",
+      "status_query": {
+        "user_reply": "待命中。",
+        "received_at": "2026-10-25T13:05:03.453786+08:00",
+        "boot_id": "9a70ce8ecf859bbd",
+        "previous_boot_id": "17957fcb941ef355",
+        "operation": "get_status",
+        "result": "ok",
+        "state": "STOPPED",
+        "fault": "stopped",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false
+        },
+        "starts_this_boot": 0,
+        "remaining_ms": 0
+      }
+    }
+  ],
+  "test_sequence_decisions": [
+    {
+      "date": "2026-10-25",
+      "source": "user",
+      "decision": "Defer network-disconnect test; proceed to staged motor and water-gun powered bench tests.",
+      "network_disconnect_test": "deferred, not passed",
+      "next_test": "Only L298N 12 V on, MOS 5 V remains off; fixed unloaded motors, one forward 1000 ms command after idle check.",
+      "following_test": "Disconnect motor 12 V before powering the original MOS/water branch; separate one-second water test.",
+      "actual_power_state": "Last confirmed both power branches disconnected; subsequent energizing not yet reported.",
+      "scope": "No combined-power or ground-driving acceptance; reverse mutual exclusion and other incomplete checks remain open."
+    },
+    {
+      "date": "2026-10-25",
+      "source": "user cabling constraint and confirmed power-off preparation",
+      "decision": "Prepare testing with both power branches energized but actions sequential and mutually exclusive, after observer recovery and closed-output status confirmation.",
+      "reported_supply_paths": [
+        "Type-C to 12 V boost to L298N",
+        "Type-C to MOS 5 V water branch; retain original 3.7 V downstream converter"
+      ],
+      "current_preparation": "User confirmed power branches disconnected and breadboard connected to computer.",
+      "combined_power_acceptance": "not yet tested",
+      "network_disconnect_test": "still deferred"
+    }
+  ],
+  "powered_branch_checks": [
+    {
+      "date": "2026-10-25",
+      "branch": "L298N dual motors",
+      "test": "one forward 1000 ms command",
+      "user_observation": {
+        "motor_12v_connected": true,
+        "mos_5v_disconnected": true,
+        "idle_no_motor_motion": true,
+        "both_motors_rotated": true,
+        "both_motors_stopped": "after about one second",
+        "voice_reply": "好，前进一秒。",
+        "audio_normal": true,
+        "display_normal": true,
+        "no_restart_reported": true,
+        "individual_rotation_directions": "not provided"
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T13:08:18.404626+08:00",
+        "boot_id": "9a70ce8ecf859bbd",
+        "boot_id_unchanged": true,
+        "operation": "move",
+        "direction": "forward",
+        "duration_ms": 1000,
+        "logical_left": 60,
+        "logical_right": 60,
+        "water": false,
+        "fault": "none",
+        "starts_this_boot": 1,
+        "off_at": "2026-10-25T13:08:19.361085+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 1000,
+        "outputs": "OFF"
+      },
+      "result": "Both motors started and stopped in the powered bench observation, matching accepted command and deadline; audio/display remained normal.",
+      "scope": "single short powered motor test after integration; actual chassis-forward direction, loaded travel, current, temperature and combined power not established"
+    },
+    {
+      "date": "2026-10-25",
+      "branch": "MOS water gun",
+      "test": "one-second actual spray and deadline stop",
+      "user_observation": {
+        "motor_12v_disconnected": true,
+        "mos_5v_connected": true,
+        "idle_no_spray": true,
+        "actual_spray_normal": true,
+        "stopped": "after about one second",
+        "voice_reply": "好，喷水一秒。",
+        "audio_normal": true,
+        "display_normal": true,
+        "no_restart_reported": true
+      },
+      "device_evidence": [
+        {
+          "accepted_at": "2026-10-25T13:09:17.942882+08:00",
+          "boot_id": "9a70ce8ecf859bbd",
+          "duration_ms": 1000,
+          "starts_this_boot": 2,
+          "fault": "none",
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false
+          },
+          "off_at": "2026-10-25T13:09:18.898143+08:00",
+          "off_record": "ACTION_OFF reason=deadline software_on_ms=1000 outputs=OFF starts=2"
+        },
+        {
+          "accepted_at": "2026-10-25T13:09:42.373925+08:00",
+          "boot_id": "9a70ce8ecf859bbd",
+          "duration_ms": 1000,
+          "starts_this_boot": 3,
+          "fault": "none",
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false
+          },
+          "off_at": "2026-10-25T13:09:43.330501+08:00",
+          "off_record": "ACTION_OFF reason=deadline software_on_ms=1000 outputs=OFF starts=3"
+        },
+        {
+          "accepted_at": "2026-10-25T13:13:41.382078+08:00",
+          "boot_id": "9a70ce8ecf859bbd",
+          "duration_ms": 1000,
+          "starts_this_boot": 4,
+          "fault": "none",
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false
+          },
+          "off_at": "2026-10-25T13:13:42.339665+08:00",
+          "off_record": "ACTION_OFF reason=deadline software_on_ms=1000 outputs=OFF starts=4"
+        },
+        {
+          "accepted_at": "2026-10-25T13:14:23.438272+08:00",
+          "boot_id": "9a70ce8ecf859bbd",
+          "duration_ms": 1000,
+          "starts_this_boot": 5,
+          "fault": "none",
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false
+          },
+          "off_at": "2026-10-25T13:14:24.392336+08:00",
+          "off_record": "ACTION_OFF reason=deadline software_on_ms=1000 outputs=OFF starts=5"
+        },
+        {
+          "accepted_at": "2026-10-25T13:15:47.496360+08:00",
+          "boot_id": "9a70ce8ecf859bbd",
+          "duration_ms": 1000,
+          "starts_this_boot": 6,
+          "fault": "none",
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false
+          },
+          "off_at": "2026-10-25T13:15:48.451008+08:00",
+          "off_record": "ACTION_OFF reason=deadline software_on_ms=1000 outputs=OFF starts=6"
+        }
+      ],
+      "platform_evidence": "Each of the five water calls at 13:09:17, 13:09:42, 13:13:41, 13:14:23 and 13:15:47 follows a separate transcribed 喷水一秒 command; all duration_ms=1000. No automatic retry inferred.",
+      "result": "User reported actual one-second spray and stop; all five observed one-second tool calls ended at deadline with unchanged boot ID.",
+      "scope": "User physical feedback not separately attributed to each of five calls; no quantified repeatability, current, temperature, pressure or longer-duration acceptance."
+    },
+    {
+      "date": "2026-10-25",
+      "branch": "MOS water gun",
+      "test": "BOOT early stop during actual spray",
+      "user_observation": {
+        "motor_12v_disconnected": true,
+        "mos_5v_connected": true,
+        "actual_spray_normal": true,
+        "boot_pressed": "about one second after spray began",
+        "on_press": "spray stopped",
+        "after_release": "no resume beyond original three-second duration",
+        "audio_normal": true,
+        "display_normal": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T14:26:40.201608+08:00",
+        "operation": "water",
+        "duration_ms": 3000,
+        "boot_id": "9a70ce8ecf859bbd",
+        "starts_this_boot": 7,
+        "logical_left": 0,
+        "logical_right": 0,
+        "water": true,
+        "fault": "none",
+        "off_at": "2026-10-25T14:26:40.829683+08:00",
+        "off_reason": "BOOT",
+        "software_on_ms": 670,
+        "outputs": "OFF",
+        "log_tail_time_at_review": "2026-10-25T14:26:42.977788+08:00",
+        "subsequent_start_receipt_at_review": false
+      },
+      "result": "Actual spray stopped on BOOT and did not resume according to user; firmware corroborates BOOT early stop.",
+      "scope": "One powered water stop observation; 670 ms is software action duration, not button response latency. No quantitative spray-stop timing or combined-power validation."
+    },
+    {
+      "date": "2026-10-25",
+      "branch": "L298N dual motors",
+      "test": "attempted BOOT early stop during forward motion",
+      "user_observation": {
+        "motor_12v_connected": true,
+        "mos_5v_disconnected": true,
+        "both_motors_rotated": true,
+        "on_press": "both motors stopped early according to user",
+        "after_release": "no resume beyond original three-second duration",
+        "audio_normal": true,
+        "display_normal": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T14:28:00.932239+08:00",
+        "operation": "move",
+        "direction": "forward",
+        "duration_ms": 3000,
+        "boot_id": "9a70ce8ecf859bbd",
+        "starts_this_boot": 8,
+        "logical_left": 60,
+        "logical_right": 60,
+        "water": false,
+        "fault": "none",
+        "off_at": "2026-10-25T14:28:03.886208+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 2996,
+        "outputs": "OFF",
+        "log_tail_time_at_review": "2026-10-25T14:30:43.923787+08:00",
+        "subsequent_start_receipt_at_review": false
+      },
+      "result": "Physical stop and no resume reported, but logged cause is deadline, not BOOT; powered motor BOOT early-stop acceptance remains pending.",
+      "scope": "Do not attribute this stop to BOOT or infer a hardware failure; repeat once with BOOT pressed immediately when motion begins."
+    },
+    {
+      "date": "2026-10-25",
+      "branch": "L298N dual motors",
+      "test": "repeat BOOT immediately on motor start",
+      "user_observation": {
+        "motor_12v_connected": true,
+        "mos_5v_disconnected": true,
+        "both_motors_rotated": true,
+        "on_press": "both immediately stopped when BOOT pressed as motion began",
+        "after_release": "no resume beyond original three-second duration",
+        "audio_normal": true,
+        "display_normal": true
+      },
+      "device_evidence": {
+        "new_action_receipt_available": false,
+        "last_saved_log_event": "2026-10-25T14:30:43.923787+08:00",
+        "observer_exited": true,
+        "observer_exit_code": 1,
+        "observer_error": "serial.serialutil.SerialException: read failed: [Errno 6] Device not configured",
+        "port_present_at_review": "/dev/cu.usbmodem1101"
+      },
+      "result": "User reports successful physical early stop and no resume; new BOOT stop cause cannot be corroborated because observer exited. Previous deadline record belongs to previous attempt, not this repeat.",
+      "scope": "Missing receipt is an observation gap, not proof of motor/BOOT failure. Reconnect observer only after motor power is disconnected."
+    },
+    {
+      "date": "2026-10-25",
+      "branch": "both power branches energized; motor action only",
+      "test": "dual motor BOOT early stop with water inactive",
+      "user_observation": {
+        "motor_12v_connected": true,
+        "mos_5v_connected": true,
+        "usb_remained_connected_to_computer": true,
+        "idle_no_motor_motion": true,
+        "idle_no_spray": true,
+        "both_motors_rotated": true,
+        "on_press": "both stopped immediately when BOOT pressed as motion began",
+        "after_release": "no resume beyond original three-second duration",
+        "water_never_sprayed": true,
+        "audio_normal": true,
+        "display_normal": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T14:39:19.080996+08:00",
+        "operation": "move",
+        "direction": "forward",
+        "duration_ms": 3000,
+        "boot_id": "de51ee2dde9cd107",
+        "starts_this_boot": 1,
+        "logical_left": 60,
+        "logical_right": 60,
+        "water": false,
+        "fault": "none",
+        "off_at": "2026-10-25T14:39:19.496449+08:00",
+        "off_reason": "BOOT",
+        "software_on_ms": 460,
+        "outputs": "OFF",
+        "log_tail_time_at_review": "2026-10-25T14:39:21.465027+08:00",
+        "subsequent_start_receipt_at_review": false
+      },
+      "result": "BOOT early stop corroborated for this powered motor test; user confirms both motors stopped, no resume and no unintended spray.",
+      "scope": "Single short motor action with both supplies on; 460 ms is action duration, not button-to-stop latency; no current, thermal, loaded travel or simultaneous-action acceptance."
+    },
+    {
+      "date": "2026-10-25",
+      "branch": "both power branches energized; water action only",
+      "test": "one-second spray with both motors stationary",
+      "user_observation": {
+        "motor_12v_connected": true,
+        "mos_5v_connected": true,
+        "usb_remained_connected_to_computer": true,
+        "voice_reply": "好，喷水一秒。",
+        "spray_normal": true,
+        "spray_stopped": "after about one second",
+        "both_motors_stationary_throughout": true,
+        "audio_normal": true,
+        "display_normal": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T14:40:02.527043+08:00",
+        "operation": "water",
+        "duration_ms": 1000,
+        "boot_id": "de51ee2dde9cd107",
+        "starts_this_boot": 2,
+        "logical_left": 0,
+        "logical_right": 0,
+        "water": true,
+        "fault": "none",
+        "off_at": "2026-10-25T14:40:03.482346+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 1000,
+        "outputs": "OFF"
+      },
+      "result": "One-second actual spray and deadline stop corroborated; both motors remained stationary per user, matching zero motor commands.",
+      "scope": "Single water action with both supplies on; no simultaneous motion request, complete power-budget, thermal or long-duration validation."
+    },
+    {
+      "date": "2026-10-25",
+      "branch": "both power branches energized; motor action only",
+      "test": "one-second backward with per-motor direction comparison",
+      "user_observation": {
+        "motor_12v_connected": true,
+        "mos_5v_connected": true,
+        "usb_remained_connected_to_computer": true,
+        "voice_reply": "好，后退一秒。",
+        "both_motor_directions": "each opposite its own prior forward direction",
+        "both_motors_stopped": "after about one second",
+        "water_never_sprayed": true,
+        "audio_normal": true,
+        "display_normal": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T14:43:05.019651+08:00",
+        "operation": "move",
+        "direction": "backward",
+        "duration_ms": 1000,
+        "boot_id": "de51ee2dde9cd107",
+        "starts_this_boot": 3,
+        "logical_left": -60,
+        "logical_right": -60,
+        "water": false,
+        "fault": "none",
+        "off_at": "2026-10-25T14:43:05.975549+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 1000,
+        "outputs": "OFF"
+      },
+      "result": "Both motors reversed relative to their own forward observations and stopped at about one second; command and deadline corroborated, water stayed inactive.",
+      "scope": "Fixed unloaded bench directional comparison only; chassis forward orientation, ground travel, current, thermal and comprehensive combined-power validation remain unverified."
+    },
+    {
+      "date": "2026-10-25",
+      "branch": "both power branches energized; motor action only",
+      "test": "one-second left turn with A/B direction comparison",
+      "user_observation": {
+        "motor_12v_connected": true,
+        "mos_5v_connected": true,
+        "usb_remained_connected_to_computer": true,
+        "voice_reply": "好，左转一秒。",
+        "motor_a_direction": "opposite its prior forward direction",
+        "motor_b_direction": "same as its prior forward direction",
+        "both_motors_stopped": "after about one second",
+        "water_never_sprayed": true,
+        "audio_normal": true,
+        "display_normal": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T14:44:42.239163+08:00",
+        "operation": "move",
+        "direction": "left",
+        "duration_ms": 1000,
+        "boot_id": "de51ee2dde9cd107",
+        "starts_this_boot": 4,
+        "logical_left": -60,
+        "logical_right": 60,
+        "water": false,
+        "fault": "none",
+        "off_at": "2026-10-25T14:44:43.197448+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 1000,
+        "outputs": "OFF"
+      },
+      "result": "A reversed and B retained its forward direction, both stopped at about one second; command and deadline corroborated with no unintended spray.",
+      "scope": "Fixed unloaded bench direction combination only; no chassis left-turn, angle accuracy or ground-travel acceptance."
+    },
+    {
+      "date": "2026-10-25",
+      "branch": "both power branches energized; motor action only",
+      "test": "one-second right turn with A/B direction comparison",
+      "user_observation": {
+        "motor_12v_connected": true,
+        "mos_5v_connected": true,
+        "usb_remained_connected_to_computer": true,
+        "voice_reply": "好，右转一秒。",
+        "motor_a_direction": "same as its prior forward direction",
+        "motor_b_direction": "opposite its prior forward direction",
+        "both_motors_stopped": "after about one second",
+        "water_never_sprayed": true,
+        "audio_normal": true,
+        "display_normal": true
+      },
+      "device_evidence": {
+        "accepted_at": "2026-10-25T14:45:13.929847+08:00",
+        "operation": "move",
+        "direction": "right",
+        "duration_ms": 1000,
+        "boot_id": "de51ee2dde9cd107",
+        "starts_this_boot": 5,
+        "logical_left": 60,
+        "logical_right": -60,
+        "water": false,
+        "fault": "none",
+        "off_at": "2026-10-25T14:45:14.887909+08:00",
+        "off_reason": "deadline",
+        "software_on_ms": 1000,
+        "outputs": "OFF"
+      },
+      "result": "A retained its forward direction and B reversed, both stopped at about one second; command and deadline corroborated with no unintended spray.",
+      "scope": "Fixed unloaded bench direction combination only; no chassis right-turn, angle accuracy or ground-travel acceptance."
+    }
+  ],
+  "latest_user_reported_power_state": {
+    "motor_12v_disconnected": true,
+    "mos_5v_disconnected": true,
+    "breadboard_usb_connected_to_computer": true,
+    "source": "user closing confirmation after status query"
+  },
+  "observer_recoveries": [
+    {
+      "date": "2026-10-25",
+      "power_branches_disconnected_confirmed": true,
+      "port": "/dev/cu.usbmodem1101",
+      "log": "build/audio-private/ct6-dual-power-session.jsonl",
+      "opened_at": "2026-10-25T14:37:56.794357+08:00",
+      "firmware_observed": "2.0.3-ct6",
+      "display_observed": "SSD1306 driver installed",
+      "ready_at": "2026-10-25T14:37:57.155488+08:00",
+      "ready": "status,stop,water,move; GPIO18=LOW; BOOT=stop_all",
+      "network_at": "2026-10-25T14:38:01.087092+08:00",
+      "idle_at": "2026-10-25T14:38:02.043080+08:00",
+      "serial_application_commands_sent": [],
+      "status_query": {
+        "received_at": "2026-10-25T14:38:37.108647+08:00",
+        "user_reply": "待命中。",
+        "boot_id": "de51ee2dde9cd107",
+        "operation": "get_status",
+        "result": "ok",
+        "state": "STOPPED",
+        "fault": "stopped",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false
+        },
+        "starts_this_boot": 0,
+        "remaining_ms": 0
+      },
+      "result": "New boot confirmed; all outputs off and zero action starts. Observer still running before paired-power motor BOOT test."
+    }
+  ],
+  "closing_status": {
+    "received_at": "2026-10-25T14:45:51.163377+08:00",
+    "user_reply": "待命中。",
+    "boot_id": "de51ee2dde9cd107",
+    "operation": "get_status",
+    "result": "ok",
+    "state": "DISARMED",
+    "fault": "none",
+    "logical_outputs": {
+      "left": 0,
+      "right": 0,
+      "water": false,
+      "bubbles": false
+    },
+    "remaining_ms": 0,
+    "starts_this_boot": 5,
+    "count_unchanged_by_status_query": true
+  }
+}

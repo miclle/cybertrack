@@ -14,3 +14,15 @@ c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/water_guard_test.cc \
   build/audio-host/water_policy.o -o build/audio-host/water_guard_test
 build/audio-host/water_guard_test
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
+  -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/action_test.cc \
+  build/audio-host/water_policy.o -o build/audio-host/action_test
+build/audio-host/action_test
+mkdir -p build/audio-host/stubs/driver
+for header in gpio ledc; do
+  echo '#include "output_stub.h"' > "build/audio-host/stubs/driver/$header.h"
+done
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
+  -Ibuild/audio-host/stubs -Ifirmware/esp32-audio/tests -Ifirmware/esp32-audio \
+  firmware/esp32-audio/tests/output_test.cc -o build/audio-host/output_test
+build/audio-host/output_test

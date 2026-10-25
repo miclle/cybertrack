@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-25",
+  "version": "2.0.3-ct6",
+  "status": "software_candidate_not_deployed",
+  "board": "bread-compact-wifi",
+  "idf_version": "v5.5.1",
+  "upstream_revision": "e8ed16bb42ed9b199cbc9376011653e5037de8d8",
+  "host_checks": {
+    "asan_ubsan": [
+      "historical_state",
+      "water_guard",
+      "action_guard_four_directions_and_exclusion",
+      "actual_output_driver_all_init_start_stop_api_single_failures",
+      "generated_mcp_argument_checks_with_idf_cjson"
+    ],
+    "result": "passed"
+  },
+  "cross_build": {
+    "result": "passed",
+    "application_bytes": 2551904,
+    "application_sha256": "44d4cf7107180382030934ecdab626b8c498f5c2f6794443c3875cf306eaab49",
+    "application_path": "build/firmware-ct6/xiaozhi.bin",
+    "source_export": "build/xiaozhi-ct6-src",
+    "app_partition_offset": "0x20000",
+    "app_partition_size": "0x3f0000"
+  },
+  "candidate_pins": {
+    "L298N_A_ENA_IN1_IN2": [
+      8,
+      9,
+      10
+    ],
+    "L298N_B_ENB_IN3_IN4": [
+      11,
+      12,
+      13
+    ],
+    "MOS": 18,
+    "BOOT": 0
+  },
+  "limits": {
+    "move_max_ms": 3000,
+    "water_max_ms": 30000,
+    "move_cooldown_ms": 3000,
+    "water_cooldown_ms": 1000,
+    "pwm_hz": 1000,
+    "pwm_8bit_duty": 154,
+    "mutually_exclusive": true
+  },
+  "source_sha256": {
+    "firmware/esp32-audio/action_guard.h": "794bf51693458c8b175ab3673b7494671f6e1bab0c35e6e7a771ab98e71ddc99",
+    "firmware/esp32-audio/action_outputs.h": "384519994037f0f8a870229202a2d7cd33c2ea963f6272de56fb3956bbf06cf4",
+    "firmware/esp32-audio/apply_overlay.py": "33d25e8599202cc904d06d150b722c3dc211ba695558bf49cc0ffbdc20833d17",
+    "firmware/esp32-audio/cybertrack_tools.cc": "9b44c811ccc87ee7379c1dce3b62889330d282102f883c5a3a746c1661666c1b",
+    "firmware/esp32-audio/cybertrack_tools.h": "f9c443f7594c41f0c291ecfad3a29f66cb28a3c128a8dd1ef3beb6c74888ad9c",
+    "firmware/esp32-audio/prepare.py": "aeead287db5349ebde853caccc4a760f6b1a15a9f703dab9929b35f6e021080e",
+    "firmware/esp32-audio/role-prompt.txt": "f9b6c86dea2f6cc45229fa75bcea6bdc7d098ab505cff075b1ba208f7ade58ff",
+    "firmware/esp32-audio/test.sh": "feca514a0d9e1737cedef5069e66e4803c7f32b2b419b1b7e4611de8376fcda4",
+    "firmware/esp32-audio/tests/action_test.cc": "fb53a531fd118fcb716b784eb402995965f3eaaca851ada723e4708a1219846c",
+    "firmware/esp32-audio/tests/mcp_arguments_test.cc": "3e334601ff62d1b97655866095f07645a3699a57bff66fa40b38a71b4fc871de",
+    "firmware/esp32-audio/tests/output_stub.h": "175a7b44ba659d46dda3b74065a3afcad9af089a4e8593fd9f288c03a7584fd8",
+    "firmware/esp32-audio/tests/output_test.cc": "630a27303a6907a64f94bb0352632621b27af5964e4bf1fc25b021a5d4828dad",
+    "firmware/esp32-audio/tests/run_mcp_tests.py": "f81b05bb51fe49dc57c06d98e492c0784fe0437e0164f753eea0be86a5ce285b",
+    "firmware/esp32-audio/water_guard.h": "088309c542a1e06dbfc3d49994ad0b8793c5e6868fef2e5c238b6cf0deec5379"
+  },
+  "not_verified": [
+    "new wiring and idle voltages",
+    "device flash and startup",
+    "platform prompt readback",
+    "voice integration",
+    "chassis direction mapping",
+    "physical stop latency",
+    "network failure on device",
+    "motor and water supply interaction",
+    "current and quantitative temperature",
+    "loaded driving"
+  ],
+  "flash_performed": false,
+  "platform_updated": false,
+  "physical_action_triggered": false,
+  "report_scope": "Pre-deployment software verification snapshot; later deployment and bench results are recorded in startup-ct6.json. The not_verified list and false deployment flags describe this snapshot only."
+}

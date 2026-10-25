@@ -1,5 +1,8 @@
 #include "cybertrack_tools.h"
-#include "water_guard.h"
+#include "action_guard.h"
+#include "action_outputs.h"
+#include <freertos/FreeRTOS.h>
+#include <freertos/semphr.h>
 #include "mcp_server.h"
 #include "system_info.h"
 #include <cstring>
@@ -14,13 +17,13 @@
 #include <driver/gpio.h>
 
 namespace {
-constexpr gpio_num_t output_pin = GPIO_NUM_18;
 constexpr gpio_num_t stop_pin = GPIO_NUM_0;
-portMUX_TYPE lock = portMUX_INITIALIZER_UNLOCKED;
-AudioWaterGuard guard;
+StaticSemaphore_t lock_storage;
+SemaphoreHandle_t lock = xSemaphoreCreateMutexStatic(&lock_storage);
+AudioActionGuard guard;
+AudioActionOutputs outputs;
 bool link_online = false;
 bool initialized = false;
-bool output_fault = false;
 unsigned sequence = 0;
 std::string device_id, boot_id;
 uint64_t Now() { return esp_timer_get_time() / 1000; }
@@ -35,28 +38,26 @@ void Token(char (&token)[33]) {
     token[32] = 0;
 }
 void TickLocked(uint64_t now) {
-    guard.Tick(now, link_online && !output_fault, gpio_get_level(stop_pin) == 0);
+    guard.Tick(now, link_online && !outputs.fault, gpio_get_level(stop_pin) == 0);
 }
 void SafetyTask(void*) {
     ESP_ERROR_CHECK(esp_task_wdt_add(nullptr));
     bool was_on = false;
     uint64_t started = 0;
     for (;;) {
-        portENTER_CRITICAL(&lock);
+        xSemaphoreTake(lock, portMAX_DELAY);
         auto now = Now();
         TickLocked(now);
-        bool active = guard.policy.active;
-        if (gpio_set_level(output_pin, active ? 1 : 0) != ESP_OK) {
-            output_fault = true; guard.Stop(now); active = false;
-            (void)gpio_set_level(output_pin, 0);
-        }
-        const auto snap = guard.policy;
-        portEXIT_CRITICAL(&lock);
+        if (!outputs.Apply(guard.Watering(), guard.Moving() ? guard.left : 0,
+                           guard.Moving() ? guard.right : 0)) guard.Stop(now);
+        bool active = guard.bounded.policy.active;
+        const auto snap = guard.bounded.policy;
+        xSemaphoreGive(lock);
         if (active && !was_on) started = now;
         // No serial, display, network, or allocation in the active-output path.
         if (!active && was_on) {
             auto elapsed = Decimal(now - started);
-            ESP_LOGI("CT_AUDIO", "WATER_OFF reason=%s software_on_ms=%s outputs=OFF starts=%u",
+            ESP_LOGI("CT_AUDIO", "ACTION_OFF reason=%s software_on_ms=%s outputs=OFF starts=%u",
                      snap.held ? "BOOT" : !snap.online ? "link_lost" : snap.stopped ? "stop" : "deadline",
                      elapsed.c_str(), snap.starts);
         }
@@ -65,22 +66,35 @@ void SafetyTask(void*) {
         vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
-std::string Reply(const char* operation, int ticket = 0, int duration = 0) {
+std::string Reply(const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr) {
     // Reserve before accepting an action.
     std::string result; result.reserve(1400);
-    portENTER_CRITICAL(&lock);
+    xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
     const char* outcome = "ok";
     if (!strcmp(operation, "stop")) {
-        guard.Stop(now); (void)gpio_set_level(output_pin, 0);
+        guard.Stop(now);
     } else if (!strcmp(operation, "water")) {
-        outcome = guard.Request(now, ticket, duration);
+        outcome = guard.Water(now, ticket, duration);
+    } else if (!strcmp(operation, "move")) {
+        outcome = guard.Move(now, ticket, duration, direction);
     }
-    auto snap = guard.policy;
-    const bool fault = output_fault;
-    const unsigned last_duration = guard.last_duration_ms;
+    // Apply before replying. Stop/BOOT/link and this path share one mutex.
+    now = Now(); TickLocked(now);
+    if (!strcmp(outcome, "accepted") && !guard.bounded.policy.active)
+        outcome = "cancelled_before_output";
+    if (!outputs.Apply(guard.Watering(), guard.Moving() ? guard.left : 0,
+                       guard.Moving() ? guard.right : 0)) {
+        guard.Stop(Now()); outcome = "output_fault";
+    }
+    const bool watering = guard.Watering(), moving = guard.Moving();
+    const int left = moving ? guard.left : 0, right = moving ? guard.right : 0;
+    const char* move_direction = moving ? guard.direction : "none";
+    auto snap = guard.bounded.policy;
+    const bool fault = outputs.fault;
+    const unsigned last_duration = guard.bounded.last_duration_ms;
     const unsigned remaining = snap.active && snap.ends_at > now ? snap.ends_at - now : 0;
-    portEXIT_CRITICAL(&lock);
+    xSemaphoreGive(lock);
     const auto uptime = Decimal(now);
     const char* state = snap.active ? "ACTIVE" : (fault || snap.clock_fault) ? "FAULT" : snap.stopped ? "STOPPED" : "DISARMED";
     const char* reason = fault ? "output_fault" : snap.clock_fault ? "clock_fault" : snap.stopped ? "stopped" : "none";
@@ -88,47 +102,44 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0) {
     std::snprintf(json, sizeof(json),
         "{\"device_id\":\"%s\",\"boot_id\":\"%s\",\"request_sequence\":%u,\"operation\":\"%s\","
         "\"result\":\"%s\",\"state\":\"%s\",\"fault\":\"%s\",\"uptime_ms\":%s,"
-        "\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":%s,\"bubbles\":false},"
-        "\"capabilities\":{\"move\":false,\"water\":true,\"bubbles\":false},"
+        "\"logical_outputs\":{\"left\":%d,\"right\":%d,\"water\":%s,\"bubbles\":false},"
+        "\"capabilities\":{\"move\":true,\"water\":true,\"bubbles\":false},"
         "\"local_authorization_required\":false,\"starts_this_boot\":%u,\"max_duration_ms\":30000,\"last_duration_ms\":%u,\"remaining_ms\":%u,"
-        "\"actuator_backend\":\"bounded_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
+        "\"move_max_duration_ms\":3000,\"move_direction\":\"%s\",\"actuator_backend\":\"bounded_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
         device_id.c_str(), boot_id.c_str(), ++sequence, operation, outcome, state, reason, uptime.c_str(),
-        snap.active ? "true" : "false", snap.starts, last_duration, remaining);
+        left, right, watering ? "true" : "false", snap.starts, last_duration, remaining, move_direction);
     result.assign(json);
     ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
     return result;
 }
 }
 
-int CyberTrackWaterClaim(int rpc_id) {
-    portENTER_CRITICAL(&lock);
+int CyberTrackActionClaim(int rpc_id) {
+    xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
     int ticket = guard.Claim(now, rpc_id);
-    portEXIT_CRITICAL(&lock);
+    xSemaphoreGive(lock);
     return ticket;
 }
-void CyberTrackWaterStop() {
-    portENTER_CRITICAL(&lock);
+void CyberTrackActionStop() {
+    xSemaphoreTake(lock, portMAX_DELAY);
     guard.Stop(Now());
-    if (initialized) (void)gpio_set_level(output_pin, 0);
-    portEXIT_CRITICAL(&lock);
+    if (initialized) (void)outputs.Apply(false, 0, 0);
+    xSemaphoreGive(lock);
 }
-void CyberTrackWaterLink(bool online) {
-    portENTER_CRITICAL(&lock);
+void CyberTrackActionLink(bool online) {
+    xSemaphoreTake(lock, portMAX_DELAY);
     link_online = online;
     if (initialized) TickLocked(Now());
     if (!online) {
         guard.Stop(Now());
-        if (initialized) (void)gpio_set_level(output_pin, 0);
+        if (initialized) (void)outputs.Apply(false, 0, 0);
     }
-    portEXIT_CRITICAL(&lock);
+    xSemaphoreGive(lock);
 }
 void InitializeCyberTrackTools() {
-    (void)gpio_set_level(output_pin, 0);
-    gpio_config_t output{}; output.pin_bit_mask = 1ULL << output_pin;
-    output.mode = GPIO_MODE_OUTPUT; output.pull_down_en = GPIO_PULLDOWN_ENABLE;
-    ESP_ERROR_CHECK(gpio_config(&output));
-    ESP_ERROR_CHECK(gpio_set_level(output_pin, 0));
+    // Initialization errors latch an unavailable backend; never reboot into a retry.
+    (void)outputs.Init();
     gpio_config_t input{}; input.pin_bit_mask = 1ULL << stop_pin;
     input.mode = GPIO_MODE_INPUT; input.pull_up_en = GPIO_PULLUP_ENABLE;
     ESP_ERROR_CHECK(gpio_config(&input));
@@ -137,22 +148,29 @@ void InitializeCyberTrackTools() {
     char token[33]; Token(token); boot_id.assign(token,16);
     // Wi-Fi loss cancels immediately, even before a socket disconnect is reported.
     ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, WIFI_EVENT_STA_DISCONNECTED,
-        [](void*, esp_event_base_t, int32_t, void*) { CyberTrackWaterLink(false); }, nullptr));
-    if (xTaskCreate(SafetyTask, "audio_water", 4096, nullptr, 10, nullptr) != pdPASS) {
-        CyberTrackWaterStop(); ESP_ERROR_CHECK(ESP_ERR_NO_MEM);
+        [](void*, esp_event_base_t, int32_t, void*) { CyberTrackActionLink(false); }, nullptr));
+    if (xTaskCreate(SafetyTask, "audio_actions", 4096, nullptr, 10, nullptr) != pdPASS) {
+        CyberTrackActionStop(); ESP_ERROR_CHECK(ESP_ERR_NO_MEM);
     }
     auto& server = McpServer::GetInstance();
     server.AddTool("self.tank.get_status",
-        "查询CyberTrack当前输出状态。只报告回执中的状态，没有水流反馈。",
+        "查询CyberTrack电机与水枪状态。只有逻辑状态，没有轮速或水流反馈。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("get_status"); });
     server.AddTool("self.tank.stop",
-        "立即关闭水枪输出并取消排队动作，不关闭语音和屏幕。",
+        "立即停止两台电机和水枪并取消全部排队动作，不关闭语音和屏幕。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("stop"); });
     server.AddTool("self.tank.water",
-        "用户明确要求喷水时直接调用，无需按键授权。duration_ms按用户时长换算为整数毫秒，范围1到30000；超过30秒只执行30秒并说明，未说时长先询问。到期自动关闭，BOOT可提前停止。不得连续、延长或失败自动重试。成功仅表示控制输出已启动。",
+        "用户明确要求喷水时直接调用，无需按键授权。duration_ms按用户时长换算为整数毫秒，范围1到30000；超过30秒只执行30秒并说明，明确要求喷水但未说时长时传1000。到期自动关闭，BOOT可提前停止。不得连续、延长或失败自动重试。与行走互斥，不排队补做。成功仅表示控制请求已接受。",
         PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 30000)}),
         [](const PropertyList& p) -> ReturnValue {
             return Reply("water", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
-    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water GPIO18=LOW BOOT=stop_only direct_voice=true max_ms=30000");
+    server.AddTool("self.tank.move",
+        "仅在明确要求行走或转向时调用。direction只能为forward前进、backward后退、left向左原地转、right向右原地转。duration_ms为1到3000的整数毫秒；未说时长默认1000，超过三秒只请求3000并说明，不分段补足。不支持角度或距离精确控制。固定约60%速度，与喷水互斥，结束后至少等待三秒。不得续时、自动重试或排队补做。BOOT或停止工具同时停止所有动作。回执不是实际移动反馈。",
+        PropertyList({Property("direction", kPropertyTypeString), Property("duration_ms", kPropertyTypeInteger, 1, 3000)}),
+        [](const PropertyList& p) -> ReturnValue {
+            return Reply("move", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>(),
+                         p["direction"].value<std::string>().c_str());
+        });
+    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water,move motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW BOOT=stop_all move_max_ms=3000 water_max_ms=30000");
 }

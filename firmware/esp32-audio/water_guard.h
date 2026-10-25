@@ -45,7 +45,10 @@ public:
             std::snprintf(nonce, sizeof(nonce), "%032x", static_cast<unsigned>(ticket));
             if (!water_arm(&policy, now, nonce)) return "not_ready_or_busy";
             const char* result = water_request_timed(&policy, now, nonce, duration);
-            if (policy.active) last_duration_ms = duration;
+            if (policy.active) {
+                last_duration_ms = duration;
+                CancelPending(); // A burst must never turn into delayed sequential actions.
+            }
             return result;
         }
         return "cancelled_or_duplicate";
