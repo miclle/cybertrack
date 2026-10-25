@@ -196,9 +196,11 @@ def check_water_gun(doc):
 
 
 def check_other_service_sweeps(doc, service_check):
-    """Conservative AABB sweep of every existing maintenance group vs gun bound."""
+    """Exact axial bottle sweeps; conservative AABBs for other maintenance groups."""
     from refine_assembly import service_groups
     from controller_layout import controller_members
+    from bottle_backpack import RADIUS, HEIGHT, BOTTOM, CENTRES, cyl
+    from gun_pitch import moved, vector
     groups = service_groups(doc)
     special = {'controller': controller_members(doc), 'controller_retainer': ['ControllerRetainer'],
                'controller_board': ['ESP32Board'], 'usb_com': ['ControllerUSBCOM'],
@@ -211,17 +213,31 @@ def check_other_service_sweeps(doc, service_check):
             continue
         names = special[group] if group in special else groups[group]
         overlaps = []
+        method = 'axis-aligned bounding box of each complete translation segment'
         for start, end in zip(scenario['waypoints_mm'], scenario['waypoints_mm'][1:]):
             for name in names:
-                b = bbox(doc.getObject(name).Shape)
-                low = [b[i]+min(start[i], end[i]) for i in range(3)]
-                high = [b[i+3]+max(start[i], end[i]) for i in range(3)]
-                sweep = Part.makeBox(*(high[i]-low[i] for i in range(3)), V(*low))
+                if group in dict(CENTRES) and name == group+'Module':
+                    # An AABB in the tilted gun frame falsely widens a vertical
+                    # bottle path toward the gun. Verify the full cylinder, then
+                    # sweep it analytically along its world Z axis instead.
+                    x = dict(CENTRES)[group]
+                    expected = moved(cyl(RADIUS,BOTTOM,BOTTOM+HEIGHT,x),'water',True)
+                    actual = doc.getObject(name).Shape
+                    assert expected.cut(actual).Volume+actual.cut(expected).Volume < 1e-5
+                    a,b = vector(start),vector(end)
+                    assert max(abs(a.x),abs(a.y),abs(b.x),abs(b.y)) < 1e-5
+                    sweep = moved(cyl(RADIUS,BOTTOM+min(a.z,b.z),BOTTOM+HEIGHT+max(a.z,b.z),x),'water',True)
+                    method = 'exact continuous full-cylinder axial sweep in world Z, transformed to gun frame'
+                else:
+                    b = bbox(doc.getObject(name).Shape)
+                    low = [b[i]+min(start[i], end[i]) for i in range(3)]
+                    high = [b[i+3]+max(start[i], end[i]) for i in range(3)]
+                    sweep = Part.makeBox(*(high[i]-low[i] for i in range(3)), V(*low))
                 volume = sweep.common(bound).Volume
                 if volume > TOLERANCE:
                     overlaps.append({'moving': name, 'overlap_mm3': volume})
-        results.append({'group': group, 'overlaps': overlaps, 'passed': not overlaps})
-    return {'method': 'axis-aligned bounding box of each complete translation segment vs maximum water gun box',
+        results.append({'group': group, 'method': method, 'overlaps': overlaps, 'passed': not overlaps})
+    return {'method': 'exact axial bottle cylinders; other complete translation segments use conservative AABBs; against maximum water gun box',
             'scenarios': results, 'passed': all(r['passed'] for r in results),
             'scope': 'conservative screening of modelled maintenance groups; not hands, tools or flexible leads'}
 

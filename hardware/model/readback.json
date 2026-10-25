@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.37",
+  "design_revision": "0.39",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "drive_mount_check": {
     "tolerance_mm3": 1e-05,
@@ -1985,7 +1985,7 @@
       "No material, strength, fatigue, thread, tolerance, sealing or manufacturing acceptance."
     ],
     "passed": true,
-    "source_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+    "source_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
     "saved_and_reopened": true
   },
   "head_lift_check": {
@@ -2205,7 +2205,8 @@
     "limits": "CAD nominal clearances and prescribed rigid service envelopes only; actual cap diameter, flexible hose withdrawal/parking, hand access, stiffness and stability unverified",
     "physical_fit_verified": false,
     "manufacturing_released": false,
-    "source_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+    "assembly_revision": "0.39",
+    "source_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
     "saved_and_reopened": true
   },
   "rear_armor_symmetry_check": {
@@ -2259,7 +2260,7 @@
     "tolerance_mm3": 1e-05,
     "passed": true,
     "physical_or_manufacturing_verified": false,
-    "source_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+    "source_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
     "saved_and_reopened": true
   },
   "top_feed_check": {
@@ -2337,7 +2338,7 @@
     "internal_hose_is_clearance_only": true,
     "suction_lift_air_seal_priming_and_physical_fit_verified": false,
     "passed": true,
-    "source_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+    "source_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
     "saved_and_reopened": true
   },
   "bottle_backpack": {
@@ -2533,7 +2534,7 @@
     "no_tools_for_routine_refill_design_intent": true,
     "physical_retention_seal_venting_material_fit_verified": false,
     "manufacturing_released": false,
-    "source_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+    "source_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
     "saved_and_reopened": true
   },
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
@@ -4758,14 +4759,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 6180.528221899346,
+      "volume_mm3": 7948.261566199254,
       "bbox_mm": [
         33.0,
         -89.0,
         73.428571429,
         47.5,
         -11.0,
-        100.81196718571844
+        116.29361204426276
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -4794,7 +4795,7 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 5347.459879784232,
+      "volume_mm3": 5568.9926465784765,
       "bbox_mm": [
         -46.0,
         -89.0,
@@ -5640,11 +5641,11 @@
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 6106.452833907988,
+      "volume_mm3": 6031.677875054436,
       "bbox_mm": [
         25.49999989999999,
-        -115.74830022719503,
-        108.87787971425243,
+        -110.3167965519778,
+        112.44598689501633,
         101.5000001,
         67.5000001,
         176.5000001
@@ -6090,14 +6091,14 @@
       "category": "component",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 90210.32415391521,
+      "volume_mm3": 90210.32415391509,
       "bbox_mm": [
-        38.39999999999999,
-        -137.33128436689225,
-        98.2879958668064,
-        71.60000000000001,
-        1.8880084401060386,
-        132.46221515461522
+        38.400000000000006,
+        -131.51665437312053,
+        100.44617956483691,
+        71.6,
+        5.965184912881462,
+        156.50399283520917
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6108,14 +6109,14 @@
       "category": "component",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 223.838476568273,
+      "volume_mm3": 223.83847656827277,
       "bbox_mm": [
         65.5,
-        -115.74830012719504,
-        118.02052319794171,
+        -110.31679645197784,
+        139.4618478924311,
         76.9,
-        -110.74830012719504,
-        123.02052319794171
+        -105.31679645197784,
+        144.4618478924311
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6126,14 +6127,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 131173.35000000015,
+      "volume_mm3": 131173.35,
       "bbox_mm": [
-        38.400000000000006,
-        -138.2289885171932,
-        98.28799586680641,
-        76.90000000000002,
-        1.888008440106006,
-        134.865455810414
+        38.39999999999999,
+        -134.18249053767641,
+        100.44617956483691,
+        76.9,
+        5.965184912881535,
+        160.05439263824715
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6144,14 +6145,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 12844.835534683796,
+      "volume_mm3": 12844.835534683785,
       "bbox_mm": [
-        35.800000000000004,
-        -81.79451369695428,
-        92.86514731910307,
-        82.00000000000001,
-        18.056347771486294,
-        123.97026519349306
+        35.79999999999999,
+        -80.15999461960963,
+        92.31196201548904,
+        81.99999999999999,
+        20.108316362893483,
+        138.8572462597746
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6162,14 +6163,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 39.395571876015964,
+      "volume_mm3": 39.395571876015936,
       "bbox_mm": [
-        40.300000000000004,
-        -72.52859338931684,
-        94.49048878223387,
-        44.70000000000001,
-        -67.66598013260104,
-        100.35304488982815
+        40.29999999999999,
+        -72.16919007906115,
+        108.49522078523263,
+        44.699999999999996,
+        -66.49561169532538,
+        114.94661662827359
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6180,14 +6181,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 64.55344584596307,
+      "volume_mm3": 64.55344584596304,
       "bbox_mm": [
-        39.900000000000006,
-        -72.2995499207704,
-        95.75564701414208,
-        45.10000000000001,
-        -67.00603502512136,
-        103.37649128120245
+        39.89999999999999,
+        -71.08586656390688,
+        109.86138701286153,
+        45.099999999999994,
+        -65.3327842295022,
+        117.9479217251818
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6198,14 +6199,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1374.1824023794943,
+      "volume_mm3": 1374.182402379493,
       "bbox_mm": [
-        39.50000000000001,
-        -108.70310535047464,
-        103.01915273593706,
-        45.50000000000001,
-        -65.59385019856184,
-        121.08093918229517
+        39.49999999999999,
+        -104.28126254604507,
+        116.88676364026146,
+        45.49999999999999,
+        -61.86777235917478,
+        141.63367849320755
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6216,14 +6217,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 39.39557187601598,
+      "volume_mm3": 39.39557187601594,
       "bbox_mm": [
-        40.300000000000004,
-        -30.68841606946351,
-        90.82994758683223,
-        44.70000000000001,
-        -25.825802812747714,
-        96.69250369442652
+        40.29999999999999,
+        -31.600305374920282,
+        97.62482089092674,
+        44.699999999999996,
+        -25.926726991184523,
+        104.0762167339677
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6234,14 +6235,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 64.55344584596307,
+      "volume_mm3": 64.55344584596301,
       "bbox_mm": [
-        39.900000000000006,
-        -30.45937260091707,
-        92.09510581874045,
-        45.10000000000001,
-        -25.16585770526804,
-        99.71595008580081
+        39.89999999999999,
+        -30.516981859766005,
+        98.99098711855565,
+        45.099999999999994,
+        -24.76389952536133,
+        107.07752183087592
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6252,14 +6253,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1374.1824023794923,
+      "volume_mm3": 1374.182402379491,
       "bbox_mm": [
-        39.50000000000001,
-        -66.86292803062132,
-        99.35861154053542,
-        45.50000000000001,
-        -23.753672878708514,
-        117.42039798689353
+        39.49999999999999,
+        -63.71237784190421,
+        106.01636374595559,
+        45.49999999999999,
+        -21.298887655033916,
+        130.7632785989017
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6272,12 +6273,12 @@
       "solids": 1,
       "volume_mm3": 595.7256661176917,
       "bbox_mm": [
-        39.400000000000006,
-        -81.53304646871132,
-        102.65187934769563,
-        70.60000000000001,
-        -61.521996764128744,
-        105.39118890074053
+        39.39999999999999,
+        -79.38353748430208,
+        115.39762501235289,
+        70.6,
+        -59.80620191341819,
+        121.5399317406924
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6288,14 +6289,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 598.8231481978033,
+      "volume_mm3": 598.8231481978032,
       "bbox_mm": [
-        39.400000000000006,
-        -29.730922167940538,
-        98.11978072481742,
-        70.60000000000001,
-        -9.719872463357966,
-        100.85909027786232
+        39.39999999999999,
+        -29.15539451727054,
+        101.9390346670218,
+        70.6,
+        -9.578058946386653,
+        108.08134139536129
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6306,14 +6307,14 @@
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 258.47244290365336,
+      "volume_mm3": 258.47244290365313,
       "bbox_mm": [
-        53.49999990000001,
-        0.6852591901883243,
-        107.99532164036299,
-        83.00000000000001,
-        14.270329281410765,
-        112.0354827004725
+        53.49999989999999,
+        2.393482090466714,
+        107.7212385869622,
+        83.0,
+        15.872820673589322,
+        113.77595596762606
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6324,14 +6325,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1838.0262606482006,
+      "volume_mm3": 1838.026260648199,
       "bbox_mm": [
-        50.99999990000001,
-        0.46736983331917925,
-        105.49532164036297,
-        83.00000000000001,
-        16.770329281410767,
-        114.52596944570186
+        50.99999989999999,
+        1.7464344777104113,
+        105.2212385869622,
+        83.0,
+        18.372820673589317,
+        116.19077053334874
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6342,14 +6343,14 @@
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1600.000000000001,
+      "volume_mm3": 1599.9999999999998,
       "bbox_mm": [
-        83.00000000000001,
-        7.353576977213745,
-        104.07856953616596,
-        99.00000000000003,
-        18.187081385607783,
-        114.91207394456
+        82.99999999999999,
+        8.249096216631365,
+        103.09751433000426,
+        98.99999999999999,
+        20.496544930547262,
+        115.34496304392016
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6360,14 +6361,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 8320.000000000005,
+      "volume_mm3": 8319.999999999996,
       "bbox_mm": [
-        82.50000000000001,
-        4.103525654695531,
-        100.82851821364775,
-        115.00000000000003,
-        21.43713270812599,
-        118.16212526707821
+        82.49999999999999,
+        4.5748616024566005,
+        99.4232797158295,
+        114.99999999999999,
+        24.17077954472203,
+        119.01919765809492
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6378,14 +6379,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 137.32868880062432,
+      "volume_mm3": 137.328688800624,
       "bbox_mm": [
-        74.2,
-        -75.76767129352368,
-        112.40203331525026,
-        82.50000000000001,
-        -69.13130641664122,
-        120.45962039717762
+        74.19999999999997,
+        -72.22453694693404,
+        126.42032885487718,
+        82.49999999999999,
+        -64.47142128200909,
+        135.27895914362787
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6396,14 +6397,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 137.3286888006242,
+      "volume_mm3": 137.32868880062415,
       "bbox_mm": [
-        74.2,
-        -23.965546992752888,
-        107.86993469237204,
-        82.50000000000001,
-        -17.329182115870452,
-        115.92752177429941
+        74.19999999999997,
+        -21.99639397990251,
+        112.96173850954611,
+        82.49999999999999,
+        -14.243278314977559,
+        121.82036879829678
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6414,11 +6415,11 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 15632.519254804449,
+      "volume_mm3": 15441.095360139348,
       "bbox_mm": [
         23.99999989999999,
-        -117.24830022719505,
-        107.37787971425243,
+        -111.8167965519778,
+        110.94598689501633,
         103.0000001,
         69.0000001,
         178.0000001
@@ -6432,14 +6433,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 6031.857894892408,
+      "volume_mm3": 6031.857894892399,
       "bbox_mm": [
-        76.90000000000002,
-        -121.24830012719508,
-        112.52052319794171,
-        106.90000000000003,
-        -105.24830012719508,
-        128.5205231979417
+        76.89999999999999,
+        -115.81679645197778,
+        133.9618478924311,
+        106.89999999999999,
+        -99.81679645197778,
+        149.9618478924311
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6450,14 +6451,14 @@
       "category": "component",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 3060.7852888035086,
+      "volume_mm3": 3060.785288803514,
       "bbox_mm": [
         -70.75,
-        -128.0216521073414,
-        98.05326867505843,
-        -39.25,
-        -102.36376815468002,
-        131.43798374814457
+        -124.56883228701666,
+        105.35522234271015,
+        -39.24999999999999,
+        -94.19973836163865,
+        141.7347239081738
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6468,14 +6469,14 @@
       "category": "component",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 251.29232915812213,
+      "volume_mm3": 251.29232915812239,
       "bbox_mm": [
         -67.9546143982859,
-        -127.16726694490089,
-        103.95592865770153,
+        -123.02783136164635,
+        114.7390741810339,
         -42.045385601714095,
-        -123.48867271006368,
-        129.05334843625513
+        -115.09240536970003,
+        139.33538879384324
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6486,14 +6487,14 @@
       "category": "component",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 3848.4510006474998,
+      "volume_mm3": 3848.4510006475025,
       "bbox_mm": [
         -59.0,
-        -104.4337170449369,
-        103.59488401657802,
+        -100.34669068282354,
+        106.37067136888741,
         -45.0,
-        -78.30866919417602,
-        119.72050335855391
+        -72.57507839416152,
+        126.36410906449738
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6504,14 +6505,14 @@
       "category": "component",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 6608.800000000002,
+      "volume_mm3": 6608.8000000000075,
       "bbox_mm": [
         -72.5,
-        -104.92614699146117,
-        96.31042486015414,
+        -101.80901828765278,
+        95.99562859340627,
         -43.49999999999999,
-        -60.64037041313652,
-        109.43490603411034
+        -57.962422896400646,
+        114.64791955504049
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6522,14 +6523,14 @@
       "category": "component",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1020.0000000000009,
+      "volume_mm3": 1020.0000000000014,
       "bbox_mm": [
         -58.0,
-        -86.59110677840206,
-        89.53630091313028,
+        -85.21639709485763,
+        89.4273329746406,
         -52.0,
-        -61.093580275424344,
-        98.4893184288456
+        -59.30828193093375,
+        102.4661047209693
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6540,14 +6541,14 @@
       "category": "component",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1292.0000000000007,
+      "volume_mm3": 1292.000000000002,
       "bbox_mm": [
         -60.0,
-        -105.51880604214523,
-        91.71519448182173,
+        -103.56898779434992,
+        95.89780910220362,
         -50.0,
-        -85.99844772771799,
-        100.14527754105112
+        -83.45642758816047,
+        107.3836665779172
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6558,14 +6559,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 86829.32000000005,
+      "volume_mm3": 86829.31999999996,
       "bbox_mm": [
-        -72.90000000000002,
-        -128.43128409825545,
-        89.53630091313028,
-        -37.100000000000016,
-        -58.531201438643244,
-        131.43798374814457
+        -72.89999999999999,
+        -125.78528179899844,
+        89.42733297464063,
+        -37.099999999999994,
+        -51.69900200491961,
+        141.7347239081738
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6576,14 +6577,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 6048.66478736581,
+      "volume_mm3": 6048.664787365806,
       "bbox_mm": [
-        -80.00000000000001,
-        -126.75265537596351,
-        85.68853277175702,
-        -30.000000000000007,
-        -58.74994867748182,
-        94.60370737287302
+        -79.99999999999999,
+        -124.78517870878939,
+        85.17354286469244,
+        -29.999999999999986,
+        -58.325765385825186,
+        105.67101541053107
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6596,12 +6597,12 @@
       "solids": 1,
       "volume_mm3": 39.395571876015865,
       "bbox_mm": [
-        -42.20000000000001,
-        -80.62753123893145,
-        81.47443947079474,
-        -37.800000000000004,
-        -75.76491798221565,
-        87.33699557838902
+        -42.199999999999996,
+        -81.05511859554537,
+        84.0159256125671,
+        -37.79999999999999,
+        -75.38154021180961,
+        90.46732145560806
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6612,14 +6613,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 62.4297292121364,
+      "volume_mm3": 62.429729212136365,
       "bbox_mm": [
-        -42.60000000000001,
-        -80.39412998324764,
-        82.78940743760754,
-        -37.400000000000006,
-        -75.10933066187336,
-        90.31063223485874
+        -42.599999999999994,
+        -79.95885412813595,
+        85.43038813151044,
+        -37.39999999999999,
+        -74.23165369824154,
+        93.42033026120183
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6630,14 +6631,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1972.3311378318424,
+      "volume_mm3": 1972.3311378318413,
       "bbox_mm": [
-        -44.00000000000001,
-        -81.57527099084432,
-        89.86613794684568,
-        -36.00000000000001,
-        -70.2284283746386,
-        130.28043819837526
+        -43.99999999999999,
+        -80.28324034537124,
+        92.10035313117898,
+        -35.99999999999999,
+        -62.526595737336,
+        132.41970997590803
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6648,14 +6649,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 39.39557187601592,
+      "volume_mm3": 39.39557187601591,
       "bbox_mm": [
-        -42.20000000000001,
-        -64.68841606946353,
-        80.0799475868322,
-        -37.800000000000004,
-        -59.825802812747725,
-        85.94250369442649
+        -42.199999999999996,
+        -65.60030537492028,
+        79.87482089092676,
+        -37.79999999999999,
+        -59.926726991184516,
+        86.32621673396771
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6666,14 +6667,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 62.42972921213641,
+      "volume_mm3": 62.42972921213639,
       "bbox_mm": [
-        -42.60000000000001,
-        -64.4550148137797,
-        81.394915553645,
-        -37.400000000000006,
-        -59.17021549240543,
-        88.91614035089621
+        -42.599999999999994,
+        -64.50404090751087,
+        81.28928340987011,
+        -37.39999999999999,
+        -58.776840477616446,
+        89.27922553956148
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6684,14 +6685,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1972.3311378318426,
+      "volume_mm3": 1972.33113783184,
       "bbox_mm": [
-        -44.00000000000001,
-        -65.63615582137638,
-        88.47164606288315,
-        -36.00000000000001,
-        -54.28931320517067,
-        128.88594631441273
+        -43.99999999999999,
+        -64.82842712474614,
+        87.95924840953863,
+        -35.99999999999999,
+        -47.07178251671092,
+        128.27860525426772
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6702,14 +6703,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 912.9859965524593,
+      "volume_mm3": 912.9859965524583,
       "bbox_mm": [
-        -74.50000000000001,
-        -126.49118814772054,
-        94.34224014463004,
-        -35.500000000000014,
-        -119.96843868502776,
-        134.9994023804933
+        -74.49999999999999,
+        -124.00872157348182,
+        104.8945582752235,
+        -35.5,
+        -110.6158318157074,
+        144.83930766655277
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6720,14 +6721,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 300.28124999999994,
+      "volume_mm3": 300.28124999999966,
       "bbox_mm": [
-        -62.70000000000002,
-        -105.27224107836635,
-        91.0913309401424,
-        -60.20000000000002,
-        -85.7257360411148,
-        99.42371377929746
+        -62.699999999999996,
+        -103.43450147352468,
+        95.24060789289946,
+        -60.19999999999999,
+        -83.24429555380448,
+        105.83861646128328
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6738,14 +6739,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 300.2812500000002,
+      "volume_mm3": 300.28124999999966,
       "bbox_mm": [
-        -49.80000000000001,
-        -105.27224107836635,
-        91.0913309401424,
-        -47.300000000000004,
-        -85.7257360411148,
-        99.42371377929746
+        -49.79999999999999,
+        -103.43450147352468,
+        95.24060789289946,
+        -47.29999999999998,
+        -83.24429555380448,
+        105.83861646128328
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6756,14 +6757,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 406.78125000000006,
+      "volume_mm3": 406.7812499999996,
       "bbox_mm": [
-        -60.70000000000002,
-        -86.34454181462317,
-        88.91243737145093,
-        -58.20000000000002,
-        -60.82086858882116,
-        97.76775466709195
+        -60.699999999999996,
+        -85.0819107740324,
+        88.77013176533643,
+        -58.19999999999999,
+        -59.09614989657778,
+        100.92105460433538
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6774,14 +6775,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 406.7812500000001,
+      "volume_mm3": 406.78124999999955,
       "bbox_mm": [
-        -51.80000000000001,
-        -86.34454181462317,
-        88.91243737145093,
-        -49.30000000000001,
-        -60.82086858882116,
-        97.76775466709195
+        -51.79999999999999,
+        -85.0819107740324,
+        88.77013176533643,
+        -49.29999999999998,
+        -59.09614989657778,
+        100.92105460433538
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6792,14 +6793,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 67.99285714285716,
+      "volume_mm3": 67.99285714285702,
       "bbox_mm": [
-        -60.70000000000002,
-        -61.439674362329534,
-        88.69454801458178,
-        -49.30000000000001,
-        -58.58562366163851,
-        92.85010304090737
+        -60.699999999999996,
+        -60.933765116805674,
+        88.12308415258013,
+        -49.29999999999998,
+        -57.439305391512484,
+        92.15237474224311
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6810,14 +6811,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 126.24999999999994,
+      "volume_mm3": 126.24999999999979,
       "bbox_mm": [
-        -60.000000000000014,
-        -108.36044464245076,
-        92.7995834979965,
-        -50.000000000000014,
-        -105.42982139634573,
-        98.04825608022895
+        -59.99999999999999,
+        -106.42887153502078,
+        100.31346117690887,
+        -49.99999999999999,
+        -102.70702079153038,
+        105.83843421242497
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6828,14 +6829,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 191.71200000000005,
+      "volume_mm3": 191.71199999999936,
       "bbox_mm": [
-        -59.80000000000001,
-        -105.27224107836635,
-        88.93858409427523,
-        -50.20000000000002,
-        -61.686239326108456,
-        93.34500687120295
+        -59.79999999999999,
+        -103.43450147352468,
+        88.84777747886719,
+        -50.199999999999996,
+        -61.06825143763088,
+        100.73772524562081
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6846,11 +6847,11 @@
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 3951.4282291547393,
+      "volume_mm3": 4020.1185092136566,
       "bbox_mm": [
         -101.0000001,
-        -60.862617557143054,
-        97.55506243546688,
+        -58.622411461412106,
+        91.9999999,
         -25.99999989999999,
         67.0000001,
         176.0000001
@@ -6864,11 +6865,11 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 15805.712916618966,
+      "volume_mm3": 16080.474036854628,
       "bbox_mm": [
         -103.0000001,
-        -61.03692904263836,
-        95.55506243546688,
+        -59.14004955161716,
+        89.9999999,
         -23.99999989999999,
         69.0000001,
         178.0000001
@@ -6882,14 +6883,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 2827.433388230814,
+      "volume_mm3": 2827.433388230812,
       "bbox_mm": [
-        -61.000000000000014,
-        -61.21124052813373,
-        92.78666844903886,
-        -49.000000000000014,
-        -35.26050416286818,
-        106.91989839483126
+        -60.99999999999999,
+        -59.65768764182214,
+        88.22115260035302,
+        -48.99999999999999,
+        -32.403713443365184,
+        106.28273864338487
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6900,14 +6901,14 @@
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 363.1986714502311,
+      "volume_mm3": 363.1986714502307,
       "bbox_mm": [
-        -74.00000000000001,
-        -61.08050691401224,
-        95.54219642503146,
-        -42.499999900000006,
-        -40.1237767502768,
-        113.82445801201563
+        -74.0,
+        -59.26945907416836,
+        93.14360853239934,
+        -42.49999989999999,
+        -35.85346081167101,
+        109.88547671556297
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6918,14 +6919,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 2582.746108090534,
+      "volume_mm3": 2582.7461080905314,
       "bbox_mm": [
-        -74.00000000000001,
-        -61.29839627088138,
-        93.04219642503146,
-        -39.999999900000006,
-        -37.6237767502768,
-        116.32445801201563
+        -74.0,
+        -59.91650668692466,
+        90.64360853239934,
+        -39.99999989999999,
+        -33.35346081167101,
+        112.38547671556297
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6936,14 +6937,14 @@
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1600.0000000000007,
+      "volume_mm3": 1599.9999999999995,
       "bbox_mm": [
-        -90.00000000000001,
-        -47.040529054473815,
-        106.90770570781861,
-        -74.00000000000001,
-        -36.20702464607978,
-        117.74121011621266
+        -89.99999999999999,
+        -43.477185268628965,
+        102.26175225860503,
+        -73.99999999999999,
+        -31.22973655471307,
+        114.50920097252093
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6954,14 +6955,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 9088.000000000005,
+      "volume_mm3": 9087.999999999996,
       "bbox_mm": [
-        -109.00000000000003,
-        -50.290580376992025,
-        103.6576543853004,
-        -73.50000000000001,
-        -32.95697332356157,
-        120.99126143873086
+        -108.99999999999999,
+        -47.15141988280374,
+        98.58751764443026,
+        -73.49999999999999,
+        -27.5555019405383,
+        118.18343558669568
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -8553,15 +8554,15 @@
   ],
   "assembly_size_xyz_mm": [
     228.0,
-    234.33128436689225,
+    228.51665437312053,
     228.00000000248912
   ],
   "step_readback": {
     "valid": true,
     "solids": 882,
     "expected_solids": 882,
-    "volume_difference_mm3": 0.24752856674604118,
-    "bbox_difference_mm": 9.697487257653847e-11,
+    "volume_difference_mm3": 0.24656521994620562,
+    "bbox_difference_mm": 1.4580336937797256e-11,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
     "geometry_equivalence_verified": false,
@@ -8569,7 +8570,7 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 889,
+    "boolean_pairs_tested": 899,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
@@ -8579,17 +8580,17 @@
     "local_model": "hardware/components/pulse-water-gun/PulseWaterGun.FCStd",
     "origin_mm": [
       55.0,
-      -137.15697288139694,
-      122.61226102388552
+      -130.99901628291548,
+      148.1735049748916
     ],
-    "orientation": "frontward with5-degree upward elevation; +X unchanged",
+    "orientation": "frontward with 15-degree upward elevation; +X unchanged",
     "maximum_bbox_mm": [
       38.4,
-      -138.22898851719313,
-      98.28799586680638,
+      -134.18249053767647,
+      100.44617956483694,
       76.9,
-      1.888008440106026,
-      134.865455810414
+      5.965184912881494,
+      160.05439263824718
     ],
     "mount": {
       "candidate_revision": "0.25",
@@ -8966,15 +8967,15 @@
         {
           "patch": 1,
           "thickness_mm": 1.0,
-          "nominal_top_area_mm2": 595.7256661176918,
-          "nominal_body_contact_area_mm2": 595.7256661176918,
+          "nominal_top_area_mm2": 595.7256661176917,
+          "nominal_body_contact_area_mm2": 595.7256661176917,
           "passed": true
         },
         {
           "patch": 2,
           "thickness_mm": 1.0,
-          "nominal_top_area_mm2": 598.8231481978039,
-          "nominal_body_contact_area_mm2": 598.8231481978039,
+          "nominal_top_area_mm2": 598.8231481978038,
+          "nominal_body_contact_area_mm2": 598.8231481978038,
           "passed": true
         }
       ],
@@ -9057,7 +9058,7 @@
           "method": "exact continuous capsule sweep of 6 mm straight hose section only",
           "measured_hose_od_mm": 5,
           "seat_diameter_mm": 5.6,
-          "minimum_tube_support_gap_mm": 0.2999999999998045,
+          "minimum_tube_support_gap_mm": 0.29999999999999716,
           "overlaps": [],
           "passed": true
         },
@@ -9072,7 +9073,7 @@
           "method": "exact continuous capsule sweep of 6 mm straight hose section only",
           "measured_hose_od_mm": 5,
           "seat_diameter_mm": 5.6,
-          "minimum_tube_support_gap_mm": 0.2999999999999468,
+          "minimum_tube_support_gap_mm": 0.29999999999999716,
           "overlaps": [],
           "passed": true
         },
@@ -9139,51 +9140,51 @@
     "nearest_clearances": [
       {
         "object": "WaterGunCradle",
-        "distance_mm": 0.4999999999999787
+        "distance_mm": 0.4999999999999929
       },
       {
         "object": "WaterGunBaseScrew2",
-        "distance_mm": 1.1999999999999886
-      },
-      {
-        "object": "WaterGunBaseScrew1",
         "distance_mm": 1.2000000000000028
       },
       {
+        "object": "WaterGunBaseScrew1",
+        "distance_mm": 1.200000000000017
+      },
+      {
         "object": "WaterGunHoseSupport",
-        "distance_mm": 2.6000000000000085
+        "distance_mm": 2.5999999999999943
       },
       {
         "object": "WaterGunHoseSupportRear",
-        "distance_mm": 2.6000000000000085
+        "distance_mm": 2.5999999999999943
       },
       {
         "object": "ShoulderRailL",
-        "distance_mm": 3.5341624933460856
-      },
-      {
-        "object": "WaterGunBaseInsert2",
-        "distance_mm": 4.199999999999974
+        "distance_mm": 4.0
       },
       {
         "object": "WaterGunBaseInsert1",
-        "distance_mm": 4.199999999999989
+        "distance_mm": 4.200000000000003
+      },
+      {
+        "object": "WaterGunBaseInsert2",
+        "distance_mm": 4.200000000000017
       },
       {
         "object": "KeelLid",
-        "distance_mm": 5.287995866806395
+        "distance_mm": 7.44617956483695
+      },
+      {
+        "object": "NeckOuterWebL",
+        "distance_mm": 9.399999999999991
       },
       {
         "object": "LowerTub",
-        "distance_mm": 8.287995866806384
+        "distance_mm": 10.446179564836942
       },
       {
         "object": "KeelSideFrameL",
-        "distance_mm": 8.287995866806384
-      },
-      {
-        "object": "TrackLeftChevronTreads",
-        "distance_mm": 8.321731214525537
+        "distance_mm": 10.446179564836957
       }
     ],
     "removal": {
@@ -9221,75 +9222,89 @@
     },
     "physical_fit_verified": false,
     "other_service_sweeps": {
-      "method": "axis-aligned bounding box of each complete translation segment vs maximum water gun box",
+      "method": "exact axial bottle cylinders; other complete translation segments use conservative AABBs; against maximum water gun box",
       "scenarios": [
         {
           "group": "cable_access",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "battery",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "crown",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "electronics",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "Water",
+          "method": "exact continuous full-cylinder axial sweep in world Z, transformed to gun frame",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "Bubble",
+          "method": "exact continuous full-cylinder axial sweep in world Z, transformed to gun frame",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "bubble_gun_cradle",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "arc_left",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "arc_right",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "controller",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "controller_retainer",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "controller_board",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "usb_com",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         },
         {
           "group": "usb_native",
+          "method": "axis-aligned bounding box of each complete translation segment",
           "overlaps": [],
           "passed": true
         }
@@ -9303,17 +9318,17 @@
     "source": "hardware/components/bubble-gun/README.md",
     "origin_mm": [
       -55.0,
-      -126.64894915906577,
-      115.74791725319959
+      -120.49243232665194,
+      126.52139214412098
     ],
-    "orientation": "frontward with5-degree upward elevation; +X unchanged",
+    "orientation": "frontward with 15-degree upward elevation; +X unchanged",
     "inspection_bbox_mm": [
       -72.9,
-      -128.4312840982554,
-      89.53630091313028,
+      -125.7852817989985,
+      89.42733297464063,
       -37.10000000000001,
-      -58.53120143864321,
-      131.43798374814457
+      -51.699002004919656,
+      141.7347239081738
     ],
     "reserved_width_mm": 35.8,
     "mount": {
@@ -9386,12 +9401,12 @@
           [
             -99,
             10,
-            100
+            94
           ],
           [
             -99,
             -45,
-            100
+            94
           ],
           [
             -55,
@@ -9695,32 +9710,32 @@
       {
         "object": "BubbleGunRing",
         "label": "前圆环整体／无分缝无紧固耳",
-        "overlap_mm3": 651.2872186618602
+        "overlap_mm3": 651.2872186618588
       },
       {
         "object": "BubbleGunSlotWall1",
         "label": "两段槽壁／后止挡 1",
-        "overlap_mm3": 271.78125000000057
+        "overlap_mm3": 271.78125
       },
       {
         "object": "BubbleGunSlotWall2",
         "label": "两段槽壁／后止挡 2",
-        "overlap_mm3": 271.78125000000097
+        "overlap_mm3": 271.78125
       },
       {
         "object": "BubbleGunSlotWall3",
         "label": "两段槽壁／后止挡 3",
-        "overlap_mm3": 364.40625000000074
+        "overlap_mm3": 364.4062500000001
       },
       {
         "object": "BubbleGunSlotWall4",
         "label": "两段槽壁／后止挡 4",
-        "overlap_mm3": 364.40625000000074
+        "overlap_mm3": 364.40625
       },
       {
         "object": "BubbleGunSlotWall6",
         "label": "两段槽壁／后止挡 6",
-        "overlap_mm3": 111.25000000000034
+        "overlap_mm3": 111.25000000000006
       }
     ],
     "method": "reserved box vs external obstacles; contact pads/caps use actual mockup geometry and assumed contact profiles, not measured surfaces",
@@ -9728,12 +9743,12 @@
     "overlaps": [],
     "nearest_clearances": [
       {
-        "object": "BubbleGunLeadRoute",
+        "object": "BubbleGunHoseRoute",
         "distance_mm": 0.0
       },
       {
-        "object": "BubbleGunHoseRoute",
-        "distance_mm": 1.4210854715202004e-14
+        "object": "BubbleGunLeadRoute",
+        "distance_mm": 7.105427357601002e-15
       },
       {
         "object": "BubbleGunCradle",
@@ -9741,7 +9756,7 @@
       },
       {
         "object": "BubbleGunBaseScrew1",
-        "distance_mm": 0.8499999999999943
+        "distance_mm": 0.8499999999999801
       },
       {
         "object": "BubbleGunBaseScrew2",
@@ -9749,11 +9764,11 @@
       },
       {
         "object": "ShoulderRailR",
-        "distance_mm": 3.59999999999998
+        "distance_mm": 3.599999999999966
       },
       {
         "object": "BubbleGunBaseInsert1",
-        "distance_mm": 3.799999999999997
+        "distance_mm": 3.799999999999983
       },
       {
         "object": "BubbleGunBaseInsert2",
@@ -9761,19 +9776,19 @@
       },
       {
         "object": "KeelLid",
-        "distance_mm": 12.637307427937458
+        "distance_mm": 12.306618297115694
       },
       {
         "object": "BubbleGunLeadConnector",
-        "distance_mm": 13.046455457326338
+        "distance_mm": 13.046455457326324
       },
       {
         "object": "KeelSideFrameR",
-        "distance_mm": 14.140146843294302
+        "distance_mm": 13.811885274829299
       },
       {
         "object": "LowerTub",
-        "distance_mm": 15.422737500593247
+        "distance_mm": 15.092048369771472
       }
     ],
     "removal": {
@@ -9869,9 +9884,9 @@
     "coordinate_frame": "checks evaluated in inverse-pitched module frame; dimensions and displacement vectors use pre-pitch axes; see gun_pitch for world transform"
   },
   "gun_pitch": {
-    "elevation_degrees": 5,
+    "elevation_degrees": 15.0,
     "candidate_not_measured": true,
-    "rotation_about_X_degrees": -5.0,
+    "rotation_about_X_degrees": -15.0,
     "pivot_world_mm": {
       "water": [
         42.5,
@@ -9888,7 +9903,7 @@
       "water": [
         0.0,
         -10.0,
-        -4.0
+        3.0
       ],
       "bubble": [
         0.0,
@@ -9899,19 +9914,19 @@
     "muzzle_centres_world_mm": {
       "water": [
         55.0,
-        -137.15697288139694,
-        122.61226102388552
+        -130.99901628291548,
+        148.1735049748916
       ],
       "bubble": [
         -55.0,
-        -126.64894915906577,
-        115.74791725319959
+        -120.49243232665194,
+        126.52139214412098
       ]
     },
     "direction_world": [
       0.0,
-      -0.9961946980917457,
-      0.08715574274765832
+      -0.9659258262890682,
+      0.25881904510252074
     ],
     "water_hose_points_world_mm": [
       [
@@ -9935,29 +9950,29 @@
         149
       ],
       [
-        78.20000000000002,
-        -2.6706886390112743,
-        110.84623575295166
+        78.2,
+        -0.5990297338912747,
+        113.23293388605131
       ],
       [
-        78.20000000000002,
-        -83.36245918444267,
-        117.90585091551198
-      ],
-      [
-        90.0,
-        -98.30537965581887,
-        119.21318705672685
+        78.2,
+        -78.8390216633058,
+        134.1972765393555
       ],
       [
         90.0,
-        -113.24830012719505,
-        120.52052319794173
+        -93.32790905764182,
+        138.0795622158933
+      ],
+      [
+        90.0,
+        -107.81679645197785,
+        141.9618478924311
       ],
       [
         76.9,
-        -113.24830012719505,
-        120.52052319794173
+        -107.81679645197785,
+        141.9618478924311
       ]
     ],
     "bubble_hose_points_world_mm": [
@@ -9984,22 +9999,22 @@
       [
         -99,
         10,
-        100
+        94
       ],
       [
         -99,
         -45,
-        100
+        94
       ],
       [
         -55.0,
-        -43.75299620408806,
-        99.46108257957059
+        -41.6840343242929,
+        96.08725991890762
       ],
       [
         -55.0,
-        -60.688306071647744,
-        100.94273020628077
+        -58.10477337120707,
+        100.48718368565048
       ]
     ],
     "support": "shoulder posts rebuilt with tilted bearing planes and coaxial bores",
@@ -10214,13 +10229,13 @@
           ],
           [
             0.0,
-            0.5229344564859499,
-            5.977168188550474
+            1.5529142706151244,
+            5.795554957734409
           ],
           [
-            -90.00000000000001,
-            0.5229344564859499,
-            5.977168188550474
+            -90.0,
+            1.5529142706151244,
+            5.795554957734409
           ]
         ],
         "pose_count": 16,
@@ -10241,7 +10256,7 @@
           "BubbleGunBaseScrew1",
           "BubbleGunBaseScrew2"
         ],
-        "boolean_pairs_tested": 164,
+        "boolean_pairs_tested": 162,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -10256,13 +10271,13 @@
           ],
           [
             0.0,
-            0.17431148549531664,
-            1.9923893961834913
+            0.5176380902050415,
+            1.9318516525781364
           ],
           [
             0.0,
-            -149.25489322826655,
-            15.065750808332238
+            -144.37123585315518,
+            40.75470841795625
           ]
         ],
         "pose_count": 16,
@@ -10271,7 +10286,7 @@
           "WaterGunLeadRoute",
           "WaterGunLeadConnector"
         ],
-        "boolean_pairs_tested": 70,
+        "boolean_pairs_tested": 107,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -10286,13 +10301,13 @@
           ],
           [
             0.0,
-            0.17431148549531664,
-            1.9923893961834913
+            0.5176380902050415,
+            1.9318516525781364
           ],
           [
-            60.000000000000014,
-            0.17431148549531664,
-            1.9923893961834913
+            60.0,
+            0.5176380902050415,
+            1.9318516525781364
           ]
         ],
         "pose_count": 16,
@@ -10305,7 +10320,7 @@
           "WaterGunBaseScrew1",
           "WaterGunBaseScrew2"
         ],
-        "boolean_pairs_tested": 62,
+        "boolean_pairs_tested": 79,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -11259,7 +11274,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "thermal_verified": false,
-    "source_after_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+    "source_after_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
     "saved_and_reopened": true
   },
   "l298n_mount": {
@@ -11504,7 +11519,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "passed": true,
-    "source_after_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+    "source_after_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
     "saved_and_reopened": true,
     "carrier_export": {
       "coordinate_frame": "assembly coordinates, no scale or relocation",
@@ -11525,8 +11540,8 @@
         }
       ],
       "files_sha256": {
-        "hardware/model/parts/L298N-carrier-0.34.FCStd": "3dbea821cdfc86c93a9332f4169aa155a9eacfc6c459e654b3f93962d98b1bbb",
-        "hardware/model/parts/L298N-carrier-0.34.step": "bc1d3a9a28837cf7ba68d8637e902886d497d8784b85537b1664584b51c2735d"
+        "hardware/model/parts/L298N-carrier-0.34.FCStd": "9b3e7cf9dc9cf51e578e96f286e68fdf832eb702ce155315a5fb2736bdc746a8",
+        "hardware/model/parts/L298N-carrier-0.34.step": "04afc1aa4431d03a06f959a0fbd9402aa027bbcd4f213eabbfd4b71b2a0891a1"
       },
       "passed": true,
       "manufacturing_released": false
@@ -11778,6 +11793,16 @@
         "distance_mm": 22.94724936019609
       },
       {
+        "object": "WaterGunMaximumEnvelope",
+        "category": "clearance",
+        "distance_mm": 25.091553112949157
+      },
+      {
+        "object": "WaterGunBody",
+        "category": "component",
+        "distance_mm": 25.091553112949192
+      },
+      {
         "object": "NeckBearingL",
         "category": "structure",
         "distance_mm": 26.404043899022472
@@ -11858,9 +11883,19 @@
         "distance_mm": 36.26379048031245
       },
       {
+        "object": "WaterGunBaseTool1",
+        "category": "clearance",
+        "distance_mm": 36.88484918700533
+      },
+      {
         "object": "CrownSpine",
         "category": "exterior",
         "distance_mm": 37.42074959163699
+      },
+      {
+        "object": "BubbleGunInspectionEnvelope",
+        "category": "clearance",
+        "distance_mm": 39.639407320751694
       },
       {
         "object": "CrownFinL",
@@ -11918,6 +11953,11 @@
         "distance_mm": 44.278945335226766
       },
       {
+        "object": "BubbleGunShell",
+        "category": "component",
+        "distance_mm": 44.69216866606614
+      },
+      {
         "object": "TempleGuardL",
         "category": "exterior",
         "distance_mm": 47.25
@@ -11946,6 +11986,11 @@
         "object": "TempleLowerBladeR",
         "category": "exterior",
         "distance_mm": 49.25
+      },
+      {
+        "object": "BubbleGunRing",
+        "category": "structure",
+        "distance_mm": 49.28986382370729
       },
       {
         "object": "TempleCrestL",
@@ -11978,6 +12023,16 @@
         "distance_mm": 52.23251356674574
       },
       {
+        "object": "WaterGunInlet",
+        "category": "component",
+        "distance_mm": 52.88725494750771
+      },
+      {
+        "object": "WaterGunHoseClearance",
+        "category": "clearance",
+        "distance_mm": 53.453473562631224
+      },
+      {
         "object": "AudioEarGrilleL",
         "category": "exterior",
         "distance_mm": 53.635532579859856
@@ -11986,6 +12041,16 @@
         "object": "AudioEarGrilleR",
         "category": "exterior",
         "distance_mm": 53.635532579859856
+      },
+      {
+        "object": "WaterHoseRoute",
+        "category": "envelope",
+        "distance_mm": 54.953473562631224
+      },
+      {
+        "object": "WaterGunHoseService",
+        "category": "clearance",
+        "distance_mm": 56.436266479327905
       },
       {
         "object": "EarOuterArcL",
@@ -12008,30 +12073,20 @@
         "distance_mm": 59.81919627209117
       },
       {
-        "object": "WaterGunHoseClearance",
-        "category": "clearance",
-        "distance_mm": 65.1677453920669
-      },
-      {
-        "object": "WaterHoseRoute",
-        "category": "envelope",
-        "distance_mm": 66.66774539206692
-      },
-      {
         "object": "BubbleGunHoseClearance",
         "category": "clearance",
-        "distance_mm": 68.93923739843314
+        "distance_mm": 69.48871194354304
       },
       {
         "object": "BubbleGunHoseRoute",
         "category": "envelope",
-        "distance_mm": 70.93221432091752
+        "distance_mm": 71.42581274490495
       }
     ],
     "passed": true,
     "mounts_leads_acoustics_verified": false,
     "physical_fit_verified": false,
-    "source_after_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+    "source_after_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
     "saved_and_reopened": true
   },
   "ultrasonic_check": {
@@ -12259,7 +12314,7 @@
     "mounting_verified": false,
     "physical_fit_verified": false,
     "acoustic_verified": false,
-    "source_after_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+    "source_after_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
     "saved_and_reopened": true
   },
   "manufacturing_released": false,
@@ -12273,57 +12328,57 @@
   "previews_generated": true,
   "drive_preview_note": "Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.",
   "files_sha256": {
-    "CyberTrack.FCStd": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
-    "CyberTrack.step": "3b73f8696131f7bb4210e9674913a01666c4a5513425e656c972d0513e636a8b",
-    "arc-layout.png": "61132e7d175dd5512abeb34e53eb3e859d9ce035ec5ca0a25b2889bf4c31cb74",
-    "arc-top.png": "79650273a5e4baa19626af622f062d8c5874086577bf3e2ee868db4ca2ebcf39",
-    "assembly.png": "a63b333dc409a6bf71ae1b320d5b16a85a4d73affa7c33676458bcc92d2e9037",
-    "bottle-backpack-layout.png": "b977f42b62684d6acfa07cb54516361c39733dc15a0ba8af6d1f79ce4e092007",
-    "bottle-backpack-service.png": "5c1c87c3f8b264bbc25824b50feb00fd09b119efdeb56470a7e6f4602725435e",
-    "bottle-backpack-spaces.png": "ba469425d5a5b69a814ccf865f7cd37150a5fe857d072c1d875ab97b36465855",
-    "bubble-gun-clearance.png": "4675bd23448e9b281a8cac2df0797bfa711cc56a7d21762c0730508467434ceb",
-    "bubble-gun-component.png": "3f91d48daae0829ff90a4f9a3dcaa57a7f5917e152312ce0d88fb0366f15ac42",
-    "bubble-gun-layout.png": "f2a2b4b30b8408005106c0fb333c3c5bba7bf014052c6165744d7aa4f2713626",
-    "bubble-gun-mount.png": "8db01b14b40e518d5d0a9b4fd1cfb180c2ab17b95d2560bdd220dbdb06c7b657",
-    "bubble-gun-service.png": "59c7937391c58c77afdd24ea5478a66257b877861d9dd78a713daf318f22d90d",
-    "bubble-gun-side.png": "10ba1a7504916acaa1c319e57b4aa296da35b67d7bd2e0bd4e263011829ef751",
-    "bubble-gun-spaces.png": "59c7755a7dbb399b8d94ed3d31285d46906d0945b7f2c39f475af46bf753c6cf",
-    "controller-access.png": "44c201d71334aa87546e5f8ed8d6568e75e194a9701fc8995d48f419393e1f38",
-    "controller-layout.png": "45a801c449be9720bd31ed5e7de0198aeff81911d5a75cd5eb9a5bba2d43465b",
-    "controller-service.png": "9956988138d017eb460ebafe0fd8906f4cc3578ef8499ced648b19fddac0c5b9",
-    "crown-effects-top.png": "6c668e23fe3ad1e66bdfe113bf1eb4adf0200a1d27e172c6ff67de0599514be5",
-    "crown-effects.png": "ebf3fd0581f57efec72651bf6e0fff437c09aff3fc48c904440fbcda9b8315aa",
-    "drive-bottom.png": "e0ec295ab67c108d5832cf94c340f0d7ccad786bcea1e946f911db0776836fe8",
-    "drive-frame.png": "5b4d82009168181afa8364a32b1502b9a51b8797848e20d6bd95f06cd60af22b",
-    "drive-integrated-face.png": "36e03b29ebd8ee14106dcf81204c2295164de6986b549669e9f505612b5fbe28",
-    "drive-mount.png": "3f20f42bbf7fa07adfe1eb29af36e24e7e0904b20b8636e8bd579ca02c4d38d8",
-    "drive-service.png": "1e90d4b4331f7794f873c36ab87d0f6b6371f3a80d95f63a3fb3b0f724f9f6f6",
-    "front.png": "c4b8cc637178245e665fabc7ddbdfc99222460b1a6cbc338d17f180d2993d9e6",
-    "l298n-carrier.png": "8cdd380e5937c87268b941fb6551818ab3c2351316c8595fe5cd6ac13ae275df",
-    "l298n-layout.png": "4df06e720a51226d0d1e96a4164cd4383c0880ef8ae606c45e2fc35f9d9fa952",
-    "l298n-service.png": "849174c1a27a4290511a97676ddc38f9b0daf7717b45c4c1216c845db83e6662",
-    "l298n-side.png": "471439eeb3b1b3dde8eda7a46c406b3796bbdabb40f909ba275cb08248e0ca52",
-    "l298n-spaces.png": "3fd236b0398739467cde88b23e0c55417c7126014a507314293959266243570c",
-    "l298n-top.png": "be321934f0126fcaf53f6b45b01cffbd3684931455671d082f3e59f0f07c237d",
-    "layout.png": "e042c7714a653a568eaf9fa5a27f25aa53b19fb8e08b2a47dabad65f36102e4d",
-    "lower-layout.png": "c3723bd30bdf341741312de1a919e0ed1a31101533c258eeef8b2887894dd087",
-    "rear-assembly.png": "a543c9a67a1ee411521235a89245f7b33b422a5a3f6de0abc3b0f5a81d413785",
-    "rear.png": "84c84ea880bad0a88fad1a5f4dc91320febd10be377773b3d210c470950affad",
-    "right.png": "3061121e5ec8133ba681e77ea9b505e4ada95bf23deda0dd3a57de4fb5187c5a",
-    "routing.png": "db83884de1c12ff79acb2a67ba140ae806a7046c13f9104c13e0f025f7704f9f",
-    "service.png": "5be7397f0acd6482895b852179e66f8a9df5bdd8b01f3edea5b8315b40cdec91",
-    "side.png": "c428b41d59f76aa1fda03db119055199955f4a21e68c65de7ea773628ee76a40",
-    "speaker-layout.png": "b58fc7a78c1d7cc27d15ab5c045332c974b3200f6a6cab6eb4b24e2283242985",
-    "speaker-top.png": "dd583ea677beb42e5280e32685a773676ccaf8f2036a35d424aacc77fc96e623",
-    "top.png": "fe0cf2dfbfc056173a023052d20c90ef0037bf43394fca36f900f94d6739bd68",
-    "ultrasonic-front.png": "8d1becfa2e2b9bef0f144fe5878606d9dd7d89f67e06eb7e1e4213e645326f96",
-    "ultrasonic-layout.png": "9fd10734a78dd38b9d5b9824de531dc74a8524a8af69d3cbefa07e90489e108e",
-    "water-gun-clearance.png": "93e44b09d0c73e6a70d41a678abd3382ff9c8b37b16907b06820fae01979e6eb",
-    "water-gun-component.png": "e824dffa7696f3f53648869627e31b83e04595e74f3ff68537bd5d62c3799cb7",
-    "water-gun-layout.png": "d37a7eec77e8e67c1c94355f4c167da141b32c6921c765443b23946a8689d594",
-    "water-gun-mount.png": "18211a8b1b7834f8a34f0ff8ffeb88084a21e6dae48ce408515b340151dd844e",
-    "water-gun-service.png": "5abe83da6032da8753af04c3c291f7016963d6182882bfc79d32eb44b19b5b8f",
-    "water-gun-side.png": "621a089cb4206a7050f1662f060d2496fe7e4924c25e40d635a82af1400c45dc",
-    "water-gun-spaces.png": "5bf5a343e2e4aba6f8987176cdfa07ef553370701d2fda84e9e5d02c68374081"
+    "CyberTrack.FCStd": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
+    "CyberTrack.step": "a75713be986a66a155b3f54d7c289d1aebb32a456b50ce295ebaec08c716cada",
+    "arc-layout.png": "e27454f8facc3623f672af0a0b5e35b3e85e9ab2b6d66b4d16404aacf2c29aaa",
+    "arc-top.png": "f3669557afd47c106c47f7c2c6be8d16e5410e95d14258fb1e6de602ac097789",
+    "assembly.png": "d669ec9d999bce5e9d56a9e15a967a7c5599a50c129911ef97831fcc7f676f31",
+    "bottle-backpack-layout.png": "1f6bb2aac87993266ab694d0265f7fe5fb26e74f6e5679f4c16fb73a2dcd8934",
+    "bottle-backpack-service.png": "abf78d9f3df215b163b625c5270220806bfb8d743a135ed969db2dee1d7513a1",
+    "bottle-backpack-spaces.png": "266d5f46df1d14c5008b2bde6147a87a382e135e6adb0f6d329bac366ddb67d8",
+    "bubble-gun-clearance.png": "67e0ab52712a327d263dffd77f93c16402fd0db939cc68631b46279dda8a17fd",
+    "bubble-gun-component.png": "b70de3534c8bbbd9fedd57f5eefe8e6dce322cce0645359934bcf414c5d54018",
+    "bubble-gun-layout.png": "1f6d8b69978f295c8fb035fdb2adbf88cd75ac96e7eea84b2bb30a42d7b6591d",
+    "bubble-gun-mount.png": "3f21e62715b4a58a7c4d5c376c7ee4574cd54508eaa359a32fc4038493fca903",
+    "bubble-gun-service.png": "c39a3c41471d660701d03ce73f9793e2f9f386454644a9245b63aba660cf5b5e",
+    "bubble-gun-side.png": "b5a527161362c5f7b39ed2b369125478293b8cb5e4f8877c889ab79ec3830abb",
+    "bubble-gun-spaces.png": "25d809e01e0a75dc235ed5c058a83c87e6d384e3186cab6298e78970a17e2557",
+    "controller-access.png": "0e105504c4eea6440fb48e970513e5f653adb002448cf3e60a4cb0ce4f39c3c9",
+    "controller-layout.png": "ecfad75aaad076baf2d4c19651277473eadea62ddabe75fcf6e7d00b51d2009b",
+    "controller-service.png": "4e8f461f2b4ea52e2980369530ea7e005e2e6dc7189b12f0d2ac0ee6255f0873",
+    "crown-effects-top.png": "39d8b9f56793a60ed5b1614db35e686ae4b433b3bfcf9d0f3cd3eb2397d794f6",
+    "crown-effects.png": "77b2a565235593864482b8225a7751339d2150f76d212035645ffac77af08379",
+    "drive-bottom.png": "8a9f95324c5f9e63e9e905a368eae67cf6d6c8b8ee5d80d79131827faf381c0a",
+    "drive-frame.png": "7846e3e20c2f1b7209be1ab5b41a70a3e7de8622bcc9688f7283721ea8a2990d",
+    "drive-integrated-face.png": "48a3c3ace87ca791363cd461148fae20d0a64ec2e43a8bc1a85a6046320ed849",
+    "drive-mount.png": "e41da75359aec2a7ef1671d90a3b5c81e7ee276f37975f540ec0541c56137312",
+    "drive-service.png": "aef173ba5429f0ffd1b0704bc99347115bcb79429479a146d4459b90e310d4fb",
+    "front.png": "3404c16e3e5e733712e2c944171447e43ac5702b68f7f7a5c465ff0b9a26ed56",
+    "l298n-carrier.png": "92506dbf41be5fe828f21aeb07cc90073d0f1e900e26dee9a1fa31e717449f50",
+    "l298n-layout.png": "32224d68cb35d3e17670d5e04eaf5f8079b87223ff65b2bf7f6a0d26f1d95c55",
+    "l298n-service.png": "d64cc77bd2541b1995d8f33caab010e4bd03360c06547cda6271c0dce4259b94",
+    "l298n-side.png": "ef2feb7642f694bf3444ad7c442e8f9f29cffef4666e9150f2614e8f7216a98f",
+    "l298n-spaces.png": "32e991952a94c3c16d6c1a0b9cc1fe57f8339b277df1974876e713dc86253e6e",
+    "l298n-top.png": "a80908910a9ebf645b68b9225fac21b8c2edb58f8c7160f3faf89082003d5068",
+    "layout.png": "01e9c455db972ddec3ace76c68ca280fcb52d8e0ba402de76e42664173d66711",
+    "lower-layout.png": "ba89a4e364e76619e232ea5136f86caff84a342de47e751f5c1b4ab42cf990f4",
+    "rear-assembly.png": "a6a94f60ad9942307330b3501c764595bc7735c2eecd24aeaae6fa145c6c61ae",
+    "rear.png": "e4142af48351784ee4c49edc3a45ada5dbd9e90fcaf6b881cfc434d32f48ea63",
+    "right.png": "29b656577dba0ccbb7e503a07aa3c75e29f04aa1b2eadf7bd85daab7272423a8",
+    "routing.png": "d9d6883d1174208cbbeb51fc0bb8c3519a4510463b39c84b7446b9b6cb8d30e9",
+    "service.png": "decadc2e8b2301b2d846fd3791651fede3e99d9149ccf48181130748ed15b446",
+    "side.png": "ea271530591fdbe71543ca250afbf871292c8d4538a9855a5873eb8cffbe4799",
+    "speaker-layout.png": "969fc33cfdb380ef21314e8f0305fc6687660c12f50cd25d2ca160ba710076d7",
+    "speaker-top.png": "235479c2639d760e7623bded315a0d390bc9414a64ae09d91fa22d1f664e8346",
+    "top.png": "b18231c1422c5bb192c4581e867eb2a0d66512c5095a5b0febc9e101d38af89b",
+    "ultrasonic-front.png": "53c0e220dbb505a4eff195fef781e5e209c72b8ce8d7252991837d3055ef35d4",
+    "ultrasonic-layout.png": "a3bfb777ca642f0f2d1d974cc0533b812906f099f61d3662bb29cf71d143c2ee",
+    "water-gun-clearance.png": "530da93f46eaddf1ec0845a9740f1cb74e5d35bfc6560cd1efdb295af1fa0a48",
+    "water-gun-component.png": "3eaa63db0327a8b3736e01552a64dd947e938a69342ead2913f4530aa600f27f",
+    "water-gun-layout.png": "845764d707072d30e8801e6565d9c446a8e15c6d318f35dc83f0baffedf955f8",
+    "water-gun-mount.png": "27eaadbd61360c70552b0cedce11aae4e3945a0d6ed19409b9103f32eaf9b6d4",
+    "water-gun-service.png": "ad8b85ef82ba4e89ba8bb80ed4ef13c0ab59cb52f83a5ad2baeb5cd5c020794a",
+    "water-gun-side.png": "0181c142394c97a709b7659edbc8abc27aab6b905650ba0a35c175ac1b469256",
+    "water-gun-spaces.png": "fa820648f2acb1c0f9bc1b4e678c0b74d9a9fec544a9030bb702d6955bf0b0b5"
   }
 }

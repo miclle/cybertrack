@@ -257,7 +257,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.37'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.39'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -577,7 +577,7 @@ def main():
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
-        info['orientation']='frontward with5-degree upward elevation; +X unchanged'
+        info['orientation']=f"frontward with {pitch_info['elevation_degrees']:g}-degree upward elevation; +X unchanged"
         info['pre_pitch_rotation_degrees']=info.pop('rotation_degrees')
         info['placement_transform']='pre-pitch placement, then gun_pitch pivot rotation and translation'
         info['mount']['coordinate_frame']='pre-pitch module frame; apply gun_pitch for installed world coordinates'
@@ -686,7 +686,7 @@ def main():
     from drive_service_check import check as check_drive_mount
     print('Final readback; drive and bottle checks',flush=True)
     drive_mount_check=check_drive_mount(final,verbose=True)
-    report={'status':'preliminary_concept','design_revision':'0.37','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.39','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'drive_mount_check':drive_mount_check,
             'head_lift_check':check_head_lift(final),
             'rear_armor_symmetry_check':check_rear_armor(final),
@@ -758,6 +758,7 @@ def main():
     report['bottle_backpack_check']['source_sha256']=sha(cad)
     report['bottle_backpack_check']['saved_and_reopened']=True
     (OUT/'bottle-backpack-audit.json').write_text(json.dumps(report['bottle_backpack_check'],ensure_ascii=False,indent=2)+'\n')
+    report['head_lift_check']['assembly_revision']=report['design_revision']
     report['head_lift_check']['source_sha256']=sha(cad)
     report['head_lift_check']['saved_and_reopened']=True
     (OUT/'head-lift-audit.json').write_text(json.dumps(report['head_lift_check'],ensure_ascii=False,indent=2)+'\n')

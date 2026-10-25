@@ -244,6 +244,16 @@
       "distance_mm": 22.94724936019609
     },
     {
+      "object": "WaterGunMaximumEnvelope",
+      "category": "clearance",
+      "distance_mm": 25.091553112949157
+    },
+    {
+      "object": "WaterGunBody",
+      "category": "component",
+      "distance_mm": 25.091553112949192
+    },
+    {
       "object": "NeckBearingL",
       "category": "structure",
       "distance_mm": 26.404043899022472
@@ -324,9 +334,19 @@
       "distance_mm": 36.26379048031245
     },
     {
+      "object": "WaterGunBaseTool1",
+      "category": "clearance",
+      "distance_mm": 36.88484918700533
+    },
+    {
       "object": "CrownSpine",
       "category": "exterior",
       "distance_mm": 37.42074959163699
+    },
+    {
+      "object": "BubbleGunInspectionEnvelope",
+      "category": "clearance",
+      "distance_mm": 39.639407320751694
     },
     {
       "object": "CrownFinL",
@@ -384,6 +404,11 @@
       "distance_mm": 44.278945335226766
     },
     {
+      "object": "BubbleGunShell",
+      "category": "component",
+      "distance_mm": 44.69216866606614
+    },
+    {
       "object": "TempleGuardL",
       "category": "exterior",
       "distance_mm": 47.25
@@ -412,6 +437,11 @@
       "object": "TempleLowerBladeR",
       "category": "exterior",
       "distance_mm": 49.25
+    },
+    {
+      "object": "BubbleGunRing",
+      "category": "structure",
+      "distance_mm": 49.28986382370729
     },
     {
       "object": "TempleCrestL",
@@ -444,6 +474,16 @@
       "distance_mm": 52.23251356674574
     },
     {
+      "object": "WaterGunInlet",
+      "category": "component",
+      "distance_mm": 52.88725494750771
+    },
+    {
+      "object": "WaterGunHoseClearance",
+      "category": "clearance",
+      "distance_mm": 53.453473562631224
+    },
+    {
       "object": "AudioEarGrilleL",
       "category": "exterior",
       "distance_mm": 53.635532579859856
@@ -452,6 +492,16 @@
       "object": "AudioEarGrilleR",
       "category": "exterior",
       "distance_mm": 53.635532579859856
+    },
+    {
+      "object": "WaterHoseRoute",
+      "category": "envelope",
+      "distance_mm": 54.953473562631224
+    },
+    {
+      "object": "WaterGunHoseService",
+      "category": "clearance",
+      "distance_mm": 56.436266479327905
     },
     {
       "object": "EarOuterArcL",
@@ -474,29 +524,19 @@
       "distance_mm": 59.81919627209117
     },
     {
-      "object": "WaterGunHoseClearance",
-      "category": "clearance",
-      "distance_mm": 65.1677453920669
-    },
-    {
-      "object": "WaterHoseRoute",
-      "category": "envelope",
-      "distance_mm": 66.66774539206692
-    },
-    {
       "object": "BubbleGunHoseClearance",
       "category": "clearance",
-      "distance_mm": 68.93923739843314
+      "distance_mm": 69.48871194354304
     },
     {
       "object": "BubbleGunHoseRoute",
       "category": "envelope",
-      "distance_mm": 70.93221432091752
+      "distance_mm": 71.42581274490495
     }
   ],
   "passed": true,
   "mounts_leads_acoustics_verified": false,
   "physical_fit_verified": false,
-  "source_after_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+  "source_after_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
   "saved_and_reopened": true
 }
