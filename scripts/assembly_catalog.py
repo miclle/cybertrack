@@ -26,7 +26,7 @@ SYSTEMS = OrderedDict([
 
 def system(name, obj):
     if obj['category'] == 'clearance': return 'M'
-    if name.startswith(('BackpackArc','ArcClamp','ArcLiner','ArcBottomPad','ArcInsert','ArcScrew','Effect')): return 'N'
+    if name.startswith(('BackpackArc','ArcClamp','ArcLiner','ArcBottomPad','ArcInsert','ArcScrew','Effect','FrontEffect')): return 'N'
     if name.startswith(('Track','Motor','DriveCoupler')): return 'A'
     if name.startswith(('Battery','BottomCover','BottomService','PowerBank')): return 'C'
     if name.startswith(('L298N','MT3608')): return 'D'
@@ -56,6 +56,7 @@ def relation(name, obj, group):
     if group == 'M':
         return '所示机构的检修 / 接线区域', '仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。'
     if group=='N':
+        if name.startswith('FrontEffect'):return '底盘左右前护甲外侧','0.45每侧两根封闭端外观线与根部护套；纯造型假设，无穿壳孔、内部高压路径、电极或固定工艺，不用于接线或制造。'
         if name.startswith('BackpackArc'):return '背包外侧两道夹环及底托','Ø25.5×70规划本体；先拆本侧4螺钉及两外半夹环，再上取90。非实测，无高压引线或通电集成。'
         if name.startswith('ArcClamp'):return '背包一体内半夹环','每半环两颗外侧M2.5级候选螺钉；上环带顶部限位，拆螺钉后外移35。间隙、材料、强度和手部操作待验。'
         if name.startswith(('ArcLiner','ArcBottomPad')):return '夹环与本体接触界面','夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。'

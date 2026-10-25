@@ -1,0 +1,142 @@
+{
+  "objects": [
+    {
+      "name": "FrontEffectSleeveL1",
+      "valid": true,
+      "solids": 1,
+      "bbox_mm": [
+        41.0,
+        -109.0,
+        59.0,
+        47.0,
+        -106.0,
+        65.0
+      ]
+    },
+    {
+      "name": "FrontEffectLeadL1",
+      "valid": true,
+      "solids": 1,
+      "bbox_mm": [
+        42.5,
+        -138.5,
+        60.46340925711785,
+        45.5,
+        -109.0,
+        69.72222222222223
+      ]
+    },
+    {
+      "name": "FrontEffectSleeveL2",
+      "valid": true,
+      "solids": 1,
+      "bbox_mm": [
+        51.0,
+        -109.0,
+        50.0,
+        57.0,
+        -106.0,
+        56.0
+      ]
+    },
+    {
+      "name": "FrontEffectLeadL2",
+      "valid": true,
+      "solids": 1,
+      "bbox_mm": [
+        52.5,
+        -138.5,
+        51.46340925711785,
+        55.5,
+        -109.0,
+        60.72222222222222
+      ]
+    },
+    {
+      "name": "FrontEffectSleeveR1",
+      "valid": true,
+      "solids": 1,
+      "bbox_mm": [
+        -47.0,
+        -109.0,
+        59.0,
+        -41.0,
+        -106.0,
+        65.0
+      ]
+    },
+    {
+      "name": "FrontEffectLeadR1",
+      "valid": true,
+      "solids": 1,
+      "bbox_mm": [
+        -45.5,
+        -138.5,
+        60.46340925711785,
+        -42.5,
+        -109.0,
+        69.72222222222223
+      ]
+    },
+    {
+      "name": "FrontEffectSleeveR2",
+      "valid": true,
+      "solids": 1,
+      "bbox_mm": [
+        -57.0,
+        -109.0,
+        50.0,
+        -51.0,
+        -106.0,
+        56.0
+      ]
+    },
+    {
+      "name": "FrontEffectLeadR2",
+      "valid": true,
+      "solids": 1,
+      "bbox_mm": [
+        -55.5,
+        -138.5,
+        51.46340925711785,
+        -52.5,
+        -109.0,
+        60.72222222222222
+      ]
+    }
+  ],
+  "boolean_pairs_tested": 8,
+  "overlaps": [],
+  "visual_root_contacts": [
+    {
+      "side": "L",
+      "index": 1,
+      "guard_distance_mm": 7.105427357601002e-15,
+      "lead_distance_mm": 0.0
+    },
+    {
+      "side": "L",
+      "index": 2,
+      "guard_distance_mm": 1.4210854715202004e-14,
+      "lead_distance_mm": 0.0
+    },
+    {
+      "side": "R",
+      "index": 1,
+      "guard_distance_mm": 7.105427357601002e-15,
+      "lead_distance_mm": 0.0
+    },
+    {
+      "side": "R",
+      "index": 2,
+      "guard_distance_mm": 1.4210854715202004e-14,
+      "lead_distance_mm": 0.0
+    }
+  ],
+  "passed": true,
+  "scope": "Static visual solids and root contact only; not electrical spacing or fixture validation",
+  "physical_fit_verified": false,
+  "electrical_verified": false,
+  "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+  "saved_and_reopened": true
+}

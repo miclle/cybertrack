@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.44",
+  "design_revision": "0.46",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "drive_mount_check": {
     "tolerance_mm3": 1e-05,
@@ -1985,7 +1985,7 @@
       "No material, strength, fatigue, thread, tolerance, sealing or manufacturing acceptance."
     ],
     "passed": true,
-    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true
   },
   "head_lift_check": {
@@ -2186,8 +2186,8 @@
     "limits": "CAD nominal clearances and prescribed rigid service envelopes only; actual cap diameter, flexible hose withdrawal/parking, hand access, stiffness and stability unverified",
     "physical_fit_verified": false,
     "manufacturing_released": false,
-    "assembly_revision": "0.44",
-    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "assembly_revision": "0.46",
+    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true
   },
   "rear_armor_symmetry_check": {
@@ -2241,7 +2241,7 @@
     "tolerance_mm3": 1e-05,
     "passed": true,
     "physical_or_manufacturing_verified": false,
-    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true
   },
   "top_feed_check": {
@@ -2319,7 +2319,7 @@
     "internal_hose_is_clearance_only": true,
     "suction_lift_air_seal_priming_and_physical_fit_verified": false,
     "passed": true,
-    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true
   },
   "bottle_backpack": {
@@ -2515,7 +2515,7 @@
     "no_tools_for_routine_refill_design_intent": true,
     "physical_retention_seal_venting_material_fit_verified": false,
     "manufacturing_released": false,
-    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true
   },
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
@@ -2538,6 +2538,7 @@
     "status": "passive backpack-side body candidates; no HV leads, electrode or drive"
   },
   "crown_effect_locations": {
+    "status": "historical crown decoration; active effect location request moved to front chassis in 0.45",
     "quantity": 2,
     "center_x_mm": [
       51.5,
@@ -10003,19 +10004,163 @@
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "FrontEffectSleeveL1",
+      "label": "左前方效果线1／根部护套外观",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 84.8230016469244,
+      "bbox_mm": [
+        41.0,
+        -109.0,
+        59.0,
+        47.0,
+        -106.0,
+        65.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "FrontEffectLeadL1",
+      "label": "左前方效果线1／封闭端外观占位",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 209.8169551610783,
+      "bbox_mm": [
+        42.5,
+        -138.5,
+        60.46340925711785,
+        45.5,
+        -109.0,
+        69.72222222222223
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "FrontEffectSleeveL2",
+      "label": "左前方效果线2／根部护套外观",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 84.82300164692438,
+      "bbox_mm": [
+        51.0,
+        -109.0,
+        50.0,
+        57.0,
+        -106.0,
+        56.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "FrontEffectLeadL2",
+      "label": "左前方效果线2／封闭端外观占位",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 209.81695516107663,
+      "bbox_mm": [
+        52.5,
+        -138.5,
+        51.46340925711785,
+        55.5,
+        -109.0,
+        60.72222222222222
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "FrontEffectSleeveR1",
+      "label": "右前方效果线1／根部护套外观",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 84.8230016469244,
+      "bbox_mm": [
+        -47.0,
+        -109.0,
+        59.0,
+        -41.0,
+        -106.0,
+        65.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "FrontEffectLeadR1",
+      "label": "右前方效果线1／封闭端外观占位",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 209.8169551610783,
+      "bbox_mm": [
+        -45.5,
+        -138.5,
+        60.46340925711785,
+        -42.5,
+        -109.0,
+        69.72222222222223
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "FrontEffectSleeveR2",
+      "label": "右前方效果线2／根部护套外观",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 84.82300164692438,
+      "bbox_mm": [
+        -57.0,
+        -109.0,
+        50.0,
+        -51.0,
+        -106.0,
+        56.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "FrontEffectLeadR2",
+      "label": "右前方效果线2／封闭端外观占位",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 209.81695516107663,
+      "bbox_mm": [
+        -55.5,
+        -138.5,
+        51.46340925711785,
+        -52.5,
+        -109.0,
+        60.72222222222222
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     }
   ],
   "assembly_size_xyz_mm": [
     228.0,
-    239.01665447312052,
+    246.0000001,
     228.00000000248912
   ],
   "step_readback": {
     "valid": true,
-    "solids": 934,
-    "expected_solids": 934,
-    "volume_difference_mm3": 3.0834228268358856,
-    "bbox_difference_mm": 1.4580336937797256e-11,
+    "solids": 942,
+    "expected_solids": 942,
+    "volume_difference_mm3": 3.1103784698061645,
+    "bbox_difference_mm": 8.952838470577262e-13,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
     "geometry_equivalence_verified": false,
@@ -10023,7 +10168,7 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 1111,
+    "boolean_pairs_tested": 1119,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
@@ -12114,7 +12259,7 @@
     "board_anti_lift_retention_verified": false,
     "physical_fit_verified": false,
     "limits": "Envelope and rigid tray only. No individual audio/display/USB/RF fit, hand access, flexible harness service, material strength or anti-lift retention acceptance.",
-    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true
   },
   "l298n_layout": {
@@ -12244,7 +12389,7 @@
     "placement_difference_mm3": 0.0,
     "outside_central_dry_bay_mm3": 0.0,
     "overlap_tolerance_mm3": 0.01,
-    "objects_checked": 411,
+    "objects_checked": 419,
     "overlaps": [],
     "reserved_space_overlaps": [],
     "nearby_distances": [
@@ -12407,7 +12552,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "thermal_verified": false,
-    "source_after_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "source_after_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true
   },
   "l298n_mount": {
@@ -12652,7 +12797,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "passed": true,
-    "source_after_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "source_after_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true,
     "carrier_export": {
       "coordinate_frame": "assembly coordinates, no scale or relocation",
@@ -12943,7 +13088,7 @@
     "mounting_verified": false,
     "physical_fit_verified": false,
     "acoustic_verified": false,
-    "source_after_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "source_after_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true
   },
   "ultrasonic_layout": {
@@ -13382,14 +13527,215 @@
     },
     "evidence_sha256": {
       "hardware/components/ultrasonic/dimensions.json": "e4ae80b552546871049e01d81841d9cd98e4e13aa5f24dd6e10f0a38a9b132b1",
-      "hardware/procurement-web-review.md": "5d9517d0900ac7dda5a4863cda07c66b4678e52fc9d31f546e2b60e9172df70d"
+      "hardware/procurement-web-review.md": "33bfc4eee45f8f5e643247e41fc7ac95acd987b2443c086493341dd5ffff7d5b"
     },
     "passed": true,
     "mounting_designed": false,
     "physical_fit_verified": false,
     "electrical_verified": false,
     "limits": "Unmeasured PCB, datum, rear height, header, connector, wire bend and board endpoint. No mounts or hand access acceptance.",
-    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314"
+    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6"
+  },
+  "front_effects_layout": {
+    "quantity": 4,
+    "groups": 2,
+    "leads_per_group": 2,
+    "basis": "用户2026-10-25指定底盘前方左右各两根线；位置、线径、长度及护套均为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
+    "appearance_only": true,
+    "root_centres_mm": [
+      [
+        44,
+        -109,
+        62
+      ],
+      [
+        54,
+        -109,
+        53
+      ],
+      [
+        -44,
+        -109,
+        62
+      ],
+      [
+        -54,
+        -109,
+        53
+      ]
+    ],
+    "tip_centres_mm": [
+      [
+        44,
+        -137,
+        68.22222222222223
+      ],
+      [
+        54,
+        -137,
+        59.22222222222222
+      ],
+      [
+        -44,
+        -137,
+        68.22222222222223
+      ],
+      [
+        -54,
+        -137,
+        59.22222222222222
+      ]
+    ],
+    "forward_projection_mm": 28,
+    "rise_mm": 6.222222222222222,
+    "visual_diameter_mm": 3,
+    "sleeve_visual_diameter_mm": 6,
+    "internal_wiring_designed": false,
+    "electrodes_designed": false,
+    "physical_fit_verified": false,
+    "electrical_verified": false
+  },
+  "front_effects_check": {
+    "objects": [
+      {
+        "name": "FrontEffectSleeveL1",
+        "valid": true,
+        "solids": 1,
+        "bbox_mm": [
+          41.0,
+          -109.0,
+          59.0,
+          47.0,
+          -106.0,
+          65.0
+        ]
+      },
+      {
+        "name": "FrontEffectLeadL1",
+        "valid": true,
+        "solids": 1,
+        "bbox_mm": [
+          42.5,
+          -138.5,
+          60.46340925711785,
+          45.5,
+          -109.0,
+          69.72222222222223
+        ]
+      },
+      {
+        "name": "FrontEffectSleeveL2",
+        "valid": true,
+        "solids": 1,
+        "bbox_mm": [
+          51.0,
+          -109.0,
+          50.0,
+          57.0,
+          -106.0,
+          56.0
+        ]
+      },
+      {
+        "name": "FrontEffectLeadL2",
+        "valid": true,
+        "solids": 1,
+        "bbox_mm": [
+          52.5,
+          -138.5,
+          51.46340925711785,
+          55.5,
+          -109.0,
+          60.72222222222222
+        ]
+      },
+      {
+        "name": "FrontEffectSleeveR1",
+        "valid": true,
+        "solids": 1,
+        "bbox_mm": [
+          -47.0,
+          -109.0,
+          59.0,
+          -41.0,
+          -106.0,
+          65.0
+        ]
+      },
+      {
+        "name": "FrontEffectLeadR1",
+        "valid": true,
+        "solids": 1,
+        "bbox_mm": [
+          -45.5,
+          -138.5,
+          60.46340925711785,
+          -42.5,
+          -109.0,
+          69.72222222222223
+        ]
+      },
+      {
+        "name": "FrontEffectSleeveR2",
+        "valid": true,
+        "solids": 1,
+        "bbox_mm": [
+          -57.0,
+          -109.0,
+          50.0,
+          -51.0,
+          -106.0,
+          56.0
+        ]
+      },
+      {
+        "name": "FrontEffectLeadR2",
+        "valid": true,
+        "solids": 1,
+        "bbox_mm": [
+          -55.5,
+          -138.5,
+          51.46340925711785,
+          -52.5,
+          -109.0,
+          60.72222222222222
+        ]
+      }
+    ],
+    "boolean_pairs_tested": 8,
+    "overlaps": [],
+    "visual_root_contacts": [
+      {
+        "side": "L",
+        "index": 1,
+        "guard_distance_mm": 7.105427357601002e-15,
+        "lead_distance_mm": 0.0
+      },
+      {
+        "side": "L",
+        "index": 2,
+        "guard_distance_mm": 1.4210854715202004e-14,
+        "lead_distance_mm": 0.0
+      },
+      {
+        "side": "R",
+        "index": 1,
+        "guard_distance_mm": 7.105427357601002e-15,
+        "lead_distance_mm": 0.0
+      },
+      {
+        "side": "R",
+        "index": 2,
+        "guard_distance_mm": 1.4210854715202004e-14,
+        "lead_distance_mm": 0.0
+      }
+    ],
+    "passed": true,
+    "scope": "Static visual solids and root contact only; not electrical spacing or fixture validation",
+    "physical_fit_verified": false,
+    "electrical_verified": false,
+    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "saved_and_reopened": true
   },
   "mt3608_layout": {
     "size_lwt_mm": [
@@ -13433,7 +13779,7 @@
       88.0
     ],
     "placement_difference_mm3": 0.0,
-    "objects_checked": 409,
+    "objects_checked": 417,
     "overlaps": [],
     "nearby_distances": [
       {
@@ -13550,7 +13896,7 @@
       "End spaces are design budgets, not a complete wiring or adjustment path.",
       "Service requires driver and left motor removal; fixture and physical handling remain unresolved."
     ],
-    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true
   },
   "effects_layout": {
@@ -20591,7 +20937,7 @@
     "passed": true,
     "physical_fit_verified": false,
     "limits": "Cap release sampled; bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
-    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
     "saved_and_reopened": true
   },
   "manufacturing_released": false,
@@ -20599,7 +20945,7 @@
   "assembly_paths_verified": false,
   "electrical_verified": false,
   "final_saved_audit": {
-    "native_objects_verified": 412,
+    "native_objects_verified": 420,
     "gui_visibility_verified": true
   },
   "previews_generated": true,
@@ -20614,68 +20960,70 @@
   ],
   "drive_preview_note": "Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.",
   "files_sha256": {
-    "CyberTrack.FCStd": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
-    "CyberTrack.step": "0a1bbe0533d22da95f1bd44e68f3e91b6fc4e540b560a6a9cc198b7b4b5857e4",
-    "assembly.png": "ec0a13ccd85db40523f0ef3ad8c5db7086389d8d2a21cb3f83f27ad50f1fa561",
-    "bottle-backpack-layout.png": "ef045cfa4582fd8f85a1e328ed91b2318acadc1f71e751492e9a7de2ba688dca",
-    "bottle-backpack-service.png": "b34e98c4b683d5b21c91c11c0b53b7bf0828907301c75fbea45534099f63df87",
-    "bottle-backpack-spaces.png": "e494ecb3f0386430134b10cd9f2fc1b34ea198563003b1aaff8b1b0c40a3d570",
-    "breadboard-access.png": "5162e3e0567c5aa7d5a167a9950ee2bc3104dafe774ed755c41a80a99cb32d00",
-    "breadboard-layout.png": "c6a8d822f5aea22c16e21e87d50c5ff71942617d0a1a7f47b5e4c636dd42b234",
-    "breadboard-service.png": "0d1e4d1f91376f4f75ea48028fb5940f7fb340c1898dc175f29d48796bfd1314",
-    "breadboard-top.png": "bf6e7e1a7b0428b28a0e77ae7320281b89c73a61d63d9b4336c1d6527036ea5a",
-    "breadboard-tray.png": "bc9b25163c7d5ecd5837a27eec4f6c7532f0344f063366e0135ffd6c9fcf8e04",
-    "bubble-gun-clearance.png": "17aa9db1f863d82825febb5e5eb3eef6a3ab64e8f49f455a9d86d96b09051346",
-    "bubble-gun-component.png": "8f8b65ac87f04ffbbc55daf3c5d6844c278690466d585caf7c820f4cffc1584f",
-    "bubble-gun-layout.png": "56b3a19b1a3552ec2356bf6e271a7e742f6730010cbc7d703078d8afdb3bb9fc",
-    "bubble-gun-mount.png": "cfbb0949e23126ab16f6c4d2f5d3e51373781642e19168a0645547bdc945d4a9",
-    "bubble-gun-service.png": "f7d5443be996ddca173f6e08b75933d34d00bbaffac9aeedfa41cace3c7b0bcd",
-    "bubble-gun-side.png": "9726573ad682c7ecbb9de0a7a1e5a19f8badc114aac332a9a13926dd2761ca1c",
-    "bubble-gun-spaces.png": "80f6dbf8cc0070472133e2d5b28638ef4e9d7daa5631013c562dda8be53ce4b0",
-    "crown-effects-top.png": "b82918ff2f9dc6cccd6d18d7a5003c8061d149a6ab76332120d1637010b18e71",
-    "crown-effects.png": "bbceb9e8dea0f3bf04ff258535713f03406f0b2fdfa0ee59e604f28253505aca",
-    "drive-bottom.png": "054f0d1d85fb624db6e371425ca69c1916413db10e524044c32cf8e6a393d1e2",
-    "drive-frame.png": "7b047e00310381700247738adfcd4e98e0fb307e4ced4c0e9a4684784d9bb63d",
-    "drive-integrated-face.png": "dadfd6ad2cd4ca6cff964d9fb5a49b303ff7c83402d561315f2e3f272a20ab10",
-    "drive-mount.png": "84fe905fb064c3b2b368ec3990f96a4cfe0143f014d735c2fe352f7b8b4a7bdb",
-    "drive-service.png": "2f3a41e002c873a3cc8e06e2a1a79ef0e268c3a26586609a751455bce58ea07f",
-    "effects-backpack.png": "4cce4b5fe38f7700f7094eedf69ae5eaec96fd3ac883d2d64fde215dd9f2d70a",
-    "effects-board-mount.png": "12edb5722abba7d7022db69a7e459ef3c4136dc86a586279a8a84c70bb82321a",
-    "effects-board-service.png": "e227a7fec6560aa556f66c7926c88c6f0291e96f1a5544c78d3fd4f0b9cc05a2",
-    "effects-board-wiring.png": "6c92d8ab0aab68033ec545dea55c21e57276ea20202fd2fe6a6ea91ea5ea9303",
-    "effects-clamp.png": "f42e59b0b82bc1571b1403dfe225315e2883e7767acec31bf4ddcec044d1f7fe",
-    "effects-service.png": "ce4d55ffbab926a1213772a2815274fe7a0ce548cfe21a515d64b7677260314c",
-    "effects-tray-bottom.png": "f80f446578567bd6efce86d981b030c57e8428bd664bb741d0a5360f42c75b6c",
-    "effects-tray-service.png": "6ebd8d3e903a3add5cfdbf63b859c231fd6ebf604f3a3e0bb76981b3597d50af",
-    "effects-tray.png": "1b3432181601c77aca13cac4b96a5d663a3389d3cf12d6daa4c22b0f0e1d6b33",
-    "front.png": "7a6f8e1d0c9791816d4095528fe2040b125a32e18499f532365e1881d70166bd",
-    "l298n-carrier.png": "ff9e370cecd93211c8c573d5f244c27f2b3e56556d1b5f882c23f743c1d5ff49",
-    "l298n-layout.png": "727354ec953a40a76dd1f85a6c382802ae77a94a1c73e1edc361075c3c06ada8",
-    "l298n-service.png": "d76f5e8a6636e66badd68e0116bc85d16820b73592f260e44da63a7bfd17dcbd",
-    "l298n-side.png": "5062e7526200a99f1749fac4e2b9437e70819e85841da9e0bc9d255bf185da84",
-    "l298n-spaces.png": "197d3b6bcf4632740aec2831f3ccdab26c450e817e70a7b64fa5e8f80e89f62b",
-    "l298n-top.png": "1f8025ba8a2dd403c6ecf0d8ed76d6c30b62ad35fcc88a8efbd18963a4648bbf",
-    "layout.png": "a893899a16f8403c9ce392d5155a21b251c68d1c07b9fc4b1e7ee0820d51c1a3",
-    "lower-layout.png": "69241b9da7e5fdb2467d7bd88f515c901289e7272fb143a2f81610ba07f47858",
-    "mt3608-layout.png": "149a860e91c61fab8b8d72c6e25e41b1a996f229368d049c8f7cb459dfe62b2f",
-    "rear-assembly.png": "ad4e0d6815b20e6e8a9e039c2bb725a6d54f2b5da2af5e172c8e9f58038cebfa",
-    "rear.png": "ae4d23e566f3910c06a4d79e7636dda7ce3e235bc1b9c9a5b83b40a603001256",
-    "right.png": "8c3dc2457facd730f753c965d3ab13a3a78f2b92a2cb7883b27e16ef15b0607f",
-    "routing.png": "39b0d37c20990cce6cbce4751a132f30b3c5a37f0e550c3b5392c659b5d47bb3",
-    "service.png": "9eff97e1140d85404b4c5fdd4a1fe76f3d71a5f5fab88481688612358941e346",
-    "side.png": "a634468321b913c05543890a049404fb4dfb296ff1f652ff63578fc18f9e0e42",
-    "top.png": "e0b2bc2ba9a7f4210c42a86e6bdb205dbbc0ab2d3ac431f42d284b2875c173f4",
-    "ultrasonic-coexistence.png": "5e30df212ee14824d883458e586120a3121263825116830d844e5933486b97cb",
-    "ultrasonic-front.png": "b4561a016d0baaa06963af18530a2ff8557a85ec707fdbab0d8b494a49a03954",
-    "ultrasonic-layout.png": "6bcba3122d62bd157b255c3b98f0a5f9d1ae46a0adbc004e81d2b4ca54515b29",
-    "ultrasonic-service.png": "d6045e3f201efb7783ebd70611e833d6717778d8798665f1836e58d1b6d66d68",
-    "ultrasonic-side.png": "66c0ebfe806ca923670846d16e0598eae09fda70729ecf747d5ae4545256223a",
-    "water-gun-clearance.png": "dd09b38059a22073d0a026384cc81ff6f059b2fec6eff8524bd9c8dc630d4ed6",
-    "water-gun-component.png": "b56ef7c75716792d535fd69f387db9fa35bbe3b4e5d52135e9acaad0a419a3c3",
-    "water-gun-layout.png": "1f686adba2933d09c1ab0d5bb8cc641a304cd97bae0031469645f955c0c70f0d",
-    "water-gun-mount.png": "4d4ed31da456f9817fcdb02634e28c0e95c88ad452a2a4619adf7a98bc9efe0d",
-    "water-gun-service.png": "9323bf4521f78476922a2950057157b0103e4e434ca4315dedcee0b8ef03ae81",
-    "water-gun-side.png": "8c6556c084da9126b09a11a51cab1f42e3c626297a183da7b616b47c65eaccb1",
-    "water-gun-spaces.png": "4578825b038b32f4b4d4a5fc14f3507661d2bed33003ba05b5c4201648c1471e"
+    "CyberTrack.FCStd": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "CyberTrack.step": "83e08bb1acd6be0b8999ffccc925595120b1115c7d863aae8edb74056b28e18b",
+    "assembly.png": "a6c870d092583946bbcd6e87f25dedfeedb1121e5af09d13a673f0ce0e75b9f2",
+    "bottle-backpack-layout.png": "1994bc629212746b876d53407546a2a08758e511d84e9971ceab14793a1716ee",
+    "bottle-backpack-service.png": "57bca16936d69b72885ae6b13fc8448bfc72c4fdcc61c0cdee9a39bc9bb25e72",
+    "bottle-backpack-spaces.png": "23e84c5954b614bece69c6d85fd79fc8868c6a82ff2ece0f6ce5b4d99eeb8332",
+    "breadboard-access.png": "8ea5f0a447a5c51eeabae4e08d9a79d6f10847c5f3a0f30455c11dfeeba93db4",
+    "breadboard-layout.png": "39b091d8fe8826b5763446fc4ee6c81e0027503959fdfc9600913b85b953bbe8",
+    "breadboard-service.png": "4b1e2f1d5809fbc8779298bf93bd26931a5affbdb73511520bab6d0f8af17da1",
+    "breadboard-top.png": "96e3bfa81ae7c76b16c1cc6635d6fec56f6815ad8b7448e922997f52fdbdcc1c",
+    "breadboard-tray.png": "e7dc5869c534264bbd1b166ed9b05fe5f7cefa3d5d5d39648b81599dc6bfba69",
+    "bubble-gun-clearance.png": "562fda3e38db8d15bdc46b4d96922bda632a4d80658f9b41ee44a66f1c88733c",
+    "bubble-gun-component.png": "0bd97b0aca2f24bad5e211ec15801405005fa43c77b50f74614d1dfa0cbb9964",
+    "bubble-gun-layout.png": "ed8530fb4152c576137f8eb4e7565c6a8e5a6f182a899a45b172059086712d8f",
+    "bubble-gun-mount.png": "79982ff948b2298f454109c7c9de4fc14b7e8f38ecf51f1531e1b47706b3e696",
+    "bubble-gun-service.png": "494311b5d11688a548b341f6e6bbb2bd2b19b5537d117e8caab5bcb4596a46a1",
+    "bubble-gun-side.png": "da3879305ade39590c57e29e46525b0676f76f3ae61b4c4d7c33ba7c2cd8fa74",
+    "bubble-gun-spaces.png": "fc6e83c0e49049576e1815333ac91b390b8aa345350ab39c4062d17fca3297f4",
+    "crown-effects-top.png": "d8de675aee988b04a6bc554fdbe47f08a166dc812412b8deea06bb681c731c84",
+    "crown-effects.png": "efc5199bb4595fa348f36b926ed4220e10c65bea7939cd2c8aba7fe337c3c9e9",
+    "drive-bottom.png": "abe12c4314f87998b0d2abb0889e857ae920b4bb4c87c795289ffda1bdeb6430",
+    "drive-frame.png": "1efb8b18ce1f4776d73f56161c5f5e4736728e95fdc731c6534cf39971e8aaa5",
+    "drive-integrated-face.png": "01d17164214ff5042a5cefa17ba4d38f6b20c4f28b5edeb318525d5904d22801",
+    "drive-mount.png": "7450d90a4d6d82b7d4b820490fd424603c63ebeed88bd346ca796cedc85d32f1",
+    "drive-service.png": "d653613216763b99908aafe322c769284f5de1911295ad260775ebafe4faf946",
+    "effects-backpack.png": "ba7f30f1ba4426bd19bd8c9c7ff2f81a59583e8fa706851b5e25440c7d36c830",
+    "effects-board-mount.png": "0f68363c6e7867c3f6422102a9986f627041a974fea2e5d6ebc70c1868d58e48",
+    "effects-board-service.png": "c5419965da0a213c543a6a5a6dad1578bf9557b4bfc256377c30851d8d1afc04",
+    "effects-board-wiring.png": "d859f19f5c44aa1f6fa9f735fe2ecc1c14c5beb3e498d690aef1a1b02e0b892a",
+    "effects-clamp.png": "6d8b7d6be301b3f9eed58481b9090e36f7c0c67dd477364606e031d330105726",
+    "effects-service.png": "8234a01ea51a0a68e765bc60a53f7b252c37d6489764b052944328191d604f05",
+    "effects-tray-bottom.png": "13be4325c67721c04c1abd3681e09251931bc6c92bda717215fe7eb581d71f0f",
+    "effects-tray-service.png": "f52b818f20528487cbabd9492a65a16fed4e88a9ae8b889e269d8f13f3d1a944",
+    "effects-tray.png": "447aff900e9fa8d57ac3abb4040e7e5cde77072bdc1747ebe8224f2063972f26",
+    "front-effects-front.png": "2f1a975c21d9bc14ae8bba0387d8f52edb33cf3b64f1d909d9ee36942757bdc5",
+    "front-effects.png": "852debe5299418ffd41a482a227d4d5156c312c79f42159bcb4dfb50f5f2605d",
+    "front.png": "92fed2895e7b8e15a93ab49035d184bea97c7f543ca0f1a659ae50bca4e5945a",
+    "l298n-carrier.png": "bf363a74034ca1195ccb44e3290b1acfe496a3c46589f77845dfc01a727dd5ff",
+    "l298n-layout.png": "392820aa25d83642fe36722b960c55100f3a11eb2ea8e0f34d416589a0aaa7f2",
+    "l298n-service.png": "bc3c889a2200de396ffc17ab0f317258621ebe5f5eef3892eccd5a0560b33f0e",
+    "l298n-side.png": "39822abc04ca1b4741b29c0300fcc14a55ef90533a470e220e12e99efa3d980e",
+    "l298n-spaces.png": "714f0d256171abbdaa8b2a179a9a183a5fc990f6eddfc68038107067cabe78bb",
+    "l298n-top.png": "44491fcfb849369902cdf4361a8087ee643936c9cca8e40aaab2172d96686fc1",
+    "layout.png": "733c4ad9f05643abe68bc0c8af5c27d0f79392d3978db54ec4a7af44108e8f7c",
+    "lower-layout.png": "1949b0951809897618d0d1d3ca2ce62f1c556088704f373db41c9e1636d1d921",
+    "mt3608-layout.png": "d12ee1a2e4b49b9cc1d7b01c51799149fc7e7cefcdc188001d56c0dcc3034acd",
+    "rear-assembly.png": "73a28a2970496ea2299c7a26ecb4189542f120124f63751a473f625af8aa4ea7",
+    "rear.png": "de64186b7fc4554cb7c80e00436c3b86ee84ac153c2d6ee6956a288636616593",
+    "right.png": "352b98c3d2ee25bf9eddfc223b5c0af19bc5ad160a2142c48ff4ccb0721d81dd",
+    "routing.png": "a4f96de07a4f6092cb6e47dc4936a5a4643ee4ca50f6527d53de63e43920d283",
+    "service.png": "ee3b8122b0b8b05be474aead92d50713be5cc7f14f90ec56f822f34d64edb7d9",
+    "side.png": "859c5f59f2c68c9ec59c28397149405cc497b86d7b88513f5d61098365792315",
+    "top.png": "853372ad5234ced25b3c2e260104a3ffbe13ab76d5f4857d15a7c21eb7ef84e6",
+    "ultrasonic-coexistence.png": "7b2c8df940efa86c4a4031a5573d5f965fe05218e59eeee7b4bca437c0528c84",
+    "ultrasonic-front.png": "92cf71a462452217948d1d20b7ebd0aa825ed1aef60a15435203fcddd749c2d5",
+    "ultrasonic-layout.png": "5fbdad72629c45d17ead56dffc51682768136ec92d10dc8b420c64e520a9babd",
+    "ultrasonic-service.png": "b2c193962b6fd60d5fe429375cdfabcc8e59fa89f5e6b9e6e3a441f5b45b0607",
+    "ultrasonic-side.png": "a240ce89a13157d2e09445b26989f10abd7188d7ce642cd91696d9e26e837976",
+    "water-gun-clearance.png": "8f2116acadb6eedbdfcda7b41e149b67d32c1fc1ef19af9e695b4d2228b7efa4",
+    "water-gun-component.png": "d17967cb4b288d436ae990ea7179ea51da33467447a405fa4649dbaff7192673",
+    "water-gun-layout.png": "5b375db6234dbd081e58623ddf2fab52edee50f04c43c2fa714aaac1016a6bee",
+    "water-gun-mount.png": "5464acd9bfaf3cd4720cb0bd0dda6e06adf9a721ef479dff5d3fda93ac6b8368",
+    "water-gun-service.png": "a808a4647feac6be59f24d379bd21d728186875395be1bc06844ba391c34498a",
+    "water-gun-side.png": "68c28e7ff5a24ab6917bec930b4db7bcba14621b2ba156e7611d7c6805d406e4",
+    "water-gun-spaces.png": "c88a747ed86a9e4de88e451b4dbacde8733d115a01bb9310ace5be7723fe3ef7"
   }
 }
