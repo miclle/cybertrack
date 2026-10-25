@@ -406,8 +406,8 @@
 | 无负载启动／PSRAM／BOOT | [实物检查](../hardware/components/ESP32-S3-N16R8/physical-verification.md)、[停止检查](../hardware/components/ESP32-S3-N16R8/boot-stop-verification.md) |
 | 电机与 MOS 台架 | [电机记录](../docs/motor-bench.md)、[MOS 记录](../docs/mos-bench.md) |
 | 联网绑定、工具与单次授权喷水 | [灵矽实测](../docs/linx-validation.md) |
-| 音频、屏幕、状态／停止 | [音频板实测](../docs/audio-board-validation.md) |
-| ct4 带载与 ct5 功率断开的时长验证 | [音频板喷水记录](../docs/audio-water-validation.md)；两类证据不得互相替代 |
+| 音频、屏幕、状态／停止 | [面包板实测](../docs/audio-board-validation.md) |
+| ct4 带载与 ct5 功率断开的时长验证 | [面包板喷水记录](../docs/audio-water-validation.md)；两类证据不得互相替代 |
 
 完整板级运行层、真实动作认证源、持久化与锚点后端、整机行走／泡泡／传感器集成、独立切断、失电／欠压／看门狗故障注入及完整带载验收仍按 [TODO](../TODO.md) 和[固件计划](PLAN.md)推进；不在本文另建一份完成清单。
 

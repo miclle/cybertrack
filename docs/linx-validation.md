@@ -100,4 +100,4 @@
 
 用户随后明确要求脱离 Mac，且不提供专用云服务。该草稿停止推进，移至本机忽略目录 `build/linx-private/usb-bridge-draft/`；本轮固件源码修改已撤回。设备应用恢复为先前保留的 `publish-ee322d0.bin`（0.2.0，SHA-256 `64a1940b2bb9b4b2a6c02e747c403651dd989d14e33fa4974e3fdba2ef6e72c0`），仅写 0x10000 应用区，写入及哈希校验通过，未覆盖 NVS／引导／分区。日志为 `restore-0.2.0.log`；这是恢复记录，不是新增带载验收。
 
-符合当前部署约束的设备端音频路径为麦克风 → ESP32 WSS 音频 → 灵矽 → 同一 ESP32 会话中的 MCP 工具。官方[WebSocket 协议](https://linx.qiniu.com/docs/xrobot/platform/websocket)支持音频与 MCP 同连接。原水枪板缺少音频硬件和固件链路，不能只插入麦克风就算完成；完整语音对话还需音频输出与扬声器。随后使用已带麦克风、扬声器和 OLED 的独立音频板，保留“彩菊”绑定并配置“小D”，已完成本板状态／停止语音联调，见[音频板记录](audio-board-validation.md)。该结果不代表网页跨设备路由通过，也不扩大喷水授权。
+符合当前部署约束的设备端音频路径为麦克风 → ESP32 WSS 音频 → 灵矽 → 同一 ESP32 会话中的 MCP 工具。官方[WebSocket 协议](https://linx.qiniu.com/docs/xrobot/platform/websocket)支持音频与 MCP 同连接。原水枪板缺少音频硬件和固件链路，不能只插入麦克风就算完成；完整语音对话还需音频输出与扬声器。随后使用已带麦克风、扬声器和 OLED 的面包板，保留“彩菊”绑定并配置“小D”，已完成本板状态／停止语音联调，见[面包板记录](audio-board-validation.md)。该结果不代表网页跨设备路由通过，也不扩大喷水授权。
