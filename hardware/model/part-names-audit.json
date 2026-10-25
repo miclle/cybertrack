@@ -1,0 +1,1521 @@
+{
+  "delivery_document": "CyberTrack.FCStd",
+  "before_sha256": "a29c94cd282134293f106eee2f2ce4ccff4c3d263a69361826b8a131b5c6849d",
+  "delivery_sha256": "43fb9f2998f0f23edda77ccc80b23bbcb5c18ce0f851a355036cd67ba33ff17f",
+  "source_document": "source/CyberTrack-design.FCStd",
+  "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+  "part_count": 301,
+  "unique_labels": 301,
+  "renamed_count": 295,
+  "geometry_and_gui_entries_byte_identical": true,
+  "other_document_properties_unchanged": true,
+  "native_readback_passed": true,
+  "passed": true,
+  "objects": [
+    {
+      "name": "TrackLeftRubberBand",
+      "label": "履带 · 连续橡胶履带 · 左",
+      "description": "左侧连续橡胶履带"
+    },
+    {
+      "name": "TrackLeftTreadPads",
+      "label": "履带 · 胎块底座 · 左",
+      "description": "左侧履带胎块底座（48节）"
+    },
+    {
+      "name": "TrackLeftChevronTreads",
+      "label": "履带 · 人字形抓地块 · 左",
+      "description": "左侧人字形抓地块（96块）"
+    },
+    {
+      "name": "TrackLeftShoulderLugs",
+      "label": "履带 · 肩部胎块 · 左",
+      "description": "左侧履带肩部胎块（96块）"
+    },
+    {
+      "name": "TrackLeftWheelTires",
+      "label": "履带 · 橡胶轮组 · 左",
+      "description": "左侧驱动轮与导向轮橡胶轮组"
+    },
+    {
+      "name": "TrackLeftWheelRims",
+      "label": "履带 · 金属轮圈 · 左",
+      "description": "左侧金属轮圈"
+    },
+    {
+      "name": "TrackLeftWheelFaces",
+      "label": "履带 · 镂空轮盘 · 左",
+      "description": "左侧镂空轮盘"
+    },
+    {
+      "name": "TrackLeftWheelHubs",
+      "label": "履带 · 轮毂与垫圈 · 左",
+      "description": "左侧阶梯轮毂与垫圈"
+    },
+    {
+      "name": "TrackLeftSuspensionArms",
+      "label": "履带 · 悬挂支臂与轴套 · 左",
+      "description": "左侧悬挂支臂与轴套"
+    },
+    {
+      "name": "TrackLeftRockerPlates",
+      "label": "履带 · 承重轮摇臂板 · 左",
+      "description": "左侧镂空承重轮摇臂板"
+    },
+    {
+      "name": "TrackLeftFasteners",
+      "label": "履带 · 轮组与悬挂紧固件 · 左",
+      "description": "左侧轮组及悬挂紧固件"
+    },
+    {
+      "name": "TrackRightRubberBand",
+      "label": "履带 · 连续橡胶履带 · 右",
+      "description": "右侧连续橡胶履带"
+    },
+    {
+      "name": "TrackRightTreadPads",
+      "label": "履带 · 胎块底座 · 右",
+      "description": "右侧履带胎块底座（48节）"
+    },
+    {
+      "name": "TrackRightChevronTreads",
+      "label": "履带 · 人字形抓地块 · 右",
+      "description": "右侧人字形抓地块（96块）"
+    },
+    {
+      "name": "TrackRightShoulderLugs",
+      "label": "履带 · 肩部胎块 · 右",
+      "description": "右侧履带肩部胎块（96块）"
+    },
+    {
+      "name": "TrackRightWheelTires",
+      "label": "履带 · 橡胶轮组 · 右",
+      "description": "右侧驱动轮与导向轮橡胶轮组"
+    },
+    {
+      "name": "TrackRightWheelRims",
+      "label": "履带 · 金属轮圈 · 右",
+      "description": "右侧金属轮圈"
+    },
+    {
+      "name": "TrackRightWheelFaces",
+      "label": "履带 · 镂空轮盘 · 右",
+      "description": "右侧镂空轮盘"
+    },
+    {
+      "name": "TrackRightWheelHubs",
+      "label": "履带 · 轮毂与垫圈 · 右",
+      "description": "右侧阶梯轮毂与垫圈"
+    },
+    {
+      "name": "TrackRightSuspensionArms",
+      "label": "履带 · 悬挂支臂与轴套 · 右",
+      "description": "右侧悬挂支臂与轴套"
+    },
+    {
+      "name": "TrackRightRockerPlates",
+      "label": "履带 · 承重轮摇臂板 · 右",
+      "description": "右侧镂空承重轮摇臂板"
+    },
+    {
+      "name": "TrackRightFasteners",
+      "label": "履带 · 轮组与悬挂紧固件 · 右",
+      "description": "右侧轮组及悬挂紧固件"
+    },
+    {
+      "name": "MotorL",
+      "label": "动力 · 37R-520 电机（占位） · 左",
+      "description": "左侧37R-520电机（尺寸占位）"
+    },
+    {
+      "name": "MotorR",
+      "label": "动力 · 37R-520 电机（占位） · 右",
+      "description": "右侧37R-520电机（尺寸占位）"
+    },
+    {
+      "name": "MotorShaftL",
+      "label": "动力 · D 形输出轴 · 左",
+      "description": "左侧Ø6偏心D形输出轴"
+    },
+    {
+      "name": "MotorShaftR",
+      "label": "动力 · D 形输出轴 · 右",
+      "description": "右侧Ø6偏心D形输出轴"
+    },
+    {
+      "name": "DriveCouplerL",
+      "label": "动力 · 六角联轴器（配合待测） · 左",
+      "description": "左侧黄铜六角联轴器（配合待测）"
+    },
+    {
+      "name": "DriveCouplerR",
+      "label": "动力 · 六角联轴器（配合待测） · 右",
+      "description": "右侧黄铜六角联轴器（配合待测）"
+    },
+    {
+      "name": "TrackMountL",
+      "label": "动力 · 履带安装件（参考） · 左",
+      "description": "左侧履带安装件参考"
+    },
+    {
+      "name": "TrackMountR",
+      "label": "动力 · 履带安装件（参考） · 右",
+      "description": "右侧履带安装件参考"
+    },
+    {
+      "name": "BatteryHatch",
+      "label": "电源 · 承托架",
+      "description": "独立内部电源承托架／开底盖时保留"
+    },
+    {
+      "name": "KeelLid",
+      "label": "底盘 · 折面顶盖",
+      "description": "低鼻锥至颈架的折面顶盖"
+    },
+    {
+      "name": "HeadShell",
+      "label": "头舱 · 固定下壳",
+      "description": "头舱固定下壳／托板及冠盖支座"
+    },
+    {
+      "name": "VisorRim",
+      "label": "前脸 · 内框",
+      "description": "六边形前脸内框"
+    },
+    {
+      "name": "JawArmor",
+      "label": "下颌 · 中央护甲",
+      "description": "多面下颌中央护片"
+    },
+    {
+      "name": "JawAccent",
+      "label": "下颌 · 识别片",
+      "description": "下颌偏侧识别片"
+    },
+    {
+      "name": "OccipitalFrame",
+      "label": "后脑 · 护框",
+      "description": "后脑六边内嵌护框"
+    },
+    {
+      "name": "OccipitalInset",
+      "label": "后脑 · 衬板",
+      "description": "后脑内凹封闭衬板"
+    },
+    {
+      "name": "OccipitalSpine",
+      "label": "后脑 · 中央脊甲",
+      "description": "后脑中央分层脊甲"
+    },
+    {
+      "name": "OccipitalMark",
+      "label": "后脑 · 识别条",
+      "description": "后脑纵向识别条"
+    },
+    {
+      "name": "SensorMask",
+      "label": "前脸 · 传感器面板",
+      "description": "前脸传感器面板／双Ø16.6候选孔"
+    },
+    {
+      "name": "SensorStatusStrip",
+      "label": "前脸 · 状态色条",
+      "description": "双探头上方窄状态色条"
+    },
+    {
+      "name": "ChestAudioPanel",
+      "label": "前舱 · 内嵌饰板",
+      "description": "低位前舱内嵌饰板"
+    },
+    {
+      "name": "LowerChin",
+      "label": "前舱 · 下缘护片",
+      "description": "前舱薄下缘护片"
+    },
+    {
+      "name": "ChestBadge",
+      "label": "前舱 · 识别片",
+      "description": "前舱上沿识别片"
+    },
+    {
+      "name": "StopPlinth",
+      "label": "停止按钮 · 基座",
+      "description": "本地停止操作区基台"
+    },
+    {
+      "name": "StopControl",
+      "label": "停止按钮 · 本体（占位）",
+      "description": "后肩本地停止按钮占位"
+    },
+    {
+      "name": "PowerBank",
+      "label": "电源 · 辰克 5 V 电池包（占位）",
+      "description": "辰克5 V电池包116×70.5×19.5／前下方平放候选"
+    },
+    {
+      "name": "BatteryPullStrap",
+      "label": "电源 · 拉带（占位）",
+      "description": "随电源托盖下取的柔性拉带占位"
+    },
+    {
+      "name": "ElectronicsTray",
+      "label": "面包板 · 浅托盘",
+      "description": "面包板浅托盘／105×90主体、122侧耳总宽"
+    },
+    {
+      "name": "PowerCableRoute",
+      "label": "电源 · 低压线束（规划）",
+      "description": "中央低压线束预算／新电池端接待确认"
+    },
+    {
+      "name": "BaseCableGrommet",
+      "label": "底盘 · 线束护口",
+      "description": "中央干区线束护口 BaseCableGrommet"
+    },
+    {
+      "name": "HeadCableGrommet",
+      "label": "头舱 · 线束护口",
+      "description": "中央干区线束护口 HeadCableGrommet"
+    },
+    {
+      "name": "NeckCableBridge",
+      "label": "颈架 · 线束限位桥",
+      "description": "固定颈架线束限位桥"
+    },
+    {
+      "name": "WaterHoseRoute",
+      "label": "水枪 · 供液管（规划）",
+      "description": "喷水顶部吸液管 Ø5 实测／R8／侧向接前枪"
+    },
+    {
+      "name": "WaterGunBody",
+      "label": "水枪 · 本体",
+      "description": "拆出发射枪／前细后粗示意"
+    },
+    {
+      "name": "WaterGunInlet",
+      "label": "水枪 · 进水接头（占位）",
+      "description": "水枪侧接头／未测形状"
+    },
+    {
+      "name": "WaterGunLeadRoute",
+      "label": "水枪 · 尾线束（规划）",
+      "description": "水枪尾线束候选 Ø3／中心弯曲半径8"
+    },
+    {
+      "name": "WaterGunLeadConnector",
+      "label": "水枪 · 插头（占位）",
+      "description": "水枪可分离插头包络 16×10×10／型号未定"
+    },
+    {
+      "name": "BubbleGunLowerPadRear",
+      "label": "泡泡枪 · 后槽软垫",
+      "description": "阶梯槽底0.6垫／承托平面Z89.55"
+    },
+    {
+      "name": "BubbleGunHoseRoute",
+      "label": "泡泡枪 · 供液管（规划）",
+      "description": "泡泡顶部吸液管候选 Ø4／R8／侧向接前枪"
+    },
+    {
+      "name": "BubbleGunLeadRoute",
+      "label": "泡泡枪 · 尾线束（规划）",
+      "description": "泡泡尾线束候选 Ø3／R8"
+    },
+    {
+      "name": "BubbleGunLeadConnector",
+      "label": "泡泡枪 · 插头（占位）",
+      "description": "泡泡插头候选16×10×10"
+    },
+    {
+      "name": "BottomServiceCover",
+      "label": "底盘 · 底部检修盖",
+      "description": "一体底部检修盖／6颗螺钉"
+    },
+    {
+      "name": "L298NEnvelope",
+      "label": "L298N · 驱动板（占位）",
+      "description": "L298N 驱动板竖装包络／46.2×43.5×27.5"
+    },
+    {
+      "name": "L298NCarrier",
+      "label": "L298N · 可拆托框",
+      "description": "L298N 开口可拆托框／四点侧压"
+    },
+    {
+      "name": "BreadboardEnvelope",
+      "label": "面包板 · 整组包络（占位）",
+      "description": "面包板整组规划包络 100×85×36"
+    },
+    {
+      "name": "UltrasonicPCBEnvelope",
+      "label": "超声波 · PCB（占位）",
+      "description": "候选超声波PCB 45×20×1.6"
+    },
+    {
+      "name": "UltrasonicRearEnvelope",
+      "label": "超声波 · 背面元件（占位）",
+      "description": "候选超声波背面元件 45×20×4"
+    },
+    {
+      "name": "UltrasonicTopConnector",
+      "label": "超声波 · 顶部接头（占位）",
+      "description": "候选超声波向上接头 12×6×8"
+    },
+    {
+      "name": "UltrasonicWireSpace",
+      "label": "超声波 · 线束（规划）",
+      "description": "候选超声波Ø4线束空间／板端待定"
+    },
+    {
+      "name": "EffectTray",
+      "label": "效果板 · 承板",
+      "description": "效果板低位承板／凹座、防脱压框与四点沉台"
+    },
+    {
+      "name": "MT3608Envelope",
+      "label": "MT3608 · 升压板（占位）",
+      "description": "P06 MT3608 升压板／37×18×6 实测包络"
+    },
+    {
+      "name": "IgnitionMOSBoard",
+      "label": "点火 MOS · 控制板（占位）",
+      "description": "点火P01独立安装位／Board"
+    },
+    {
+      "name": "IgnitionMOSSupport",
+      "label": "点火 MOS · 板边垫",
+      "description": "点火P01独立安装位／Support"
+    },
+    {
+      "name": "IgnitionMOSRetainer",
+      "label": "点火 MOS · 压框",
+      "description": "点火P01独立安装位／Retainer"
+    },
+    {
+      "name": "IgnitionMOSCarrier",
+      "label": "点火 MOS · 独立托架",
+      "description": "点火P01前舱独立可拆托架／两点吊装"
+    },
+    {
+      "name": "BatteryPadN54N90",
+      "label": "电源 · 承托垫 · 右前",
+      "description": "电源底部承托垫"
+    },
+    {
+      "name": "BatteryPadN54N29",
+      "label": "电源 · 承托垫 · 右后",
+      "description": "电源底部承托垫001"
+    },
+    {
+      "name": "BatteryPad54N90",
+      "label": "电源 · 承托垫 · 左前",
+      "description": "电源底部承托垫002"
+    },
+    {
+      "name": "BatteryPad54N29",
+      "label": "电源 · 承托垫 · 左后",
+      "description": "电源底部承托垫003"
+    },
+    {
+      "name": "CheekArmorL",
+      "label": "颊部 · 护甲 · 左",
+      "description": "左斜切颊部护板"
+    },
+    {
+      "name": "CheekArmorR",
+      "label": "颊部 · 护甲 · 右",
+      "description": "右斜切颊部护板"
+    },
+    {
+      "name": "AudioSideGuardL",
+      "label": "耳舱 · 侧护罩 · 左",
+      "description": "左多层音频侧舱护罩"
+    },
+    {
+      "name": "AudioSideGuardR",
+      "label": "耳舱 · 侧护罩 · 右",
+      "description": "右多层音频侧舱护罩"
+    },
+    {
+      "name": "AudioEarRingL",
+      "label": "耳舱 · 阶梯环 · 左",
+      "description": "左侧舱阶梯环"
+    },
+    {
+      "name": "AudioEarRingR",
+      "label": "耳舱 · 阶梯环 · 右",
+      "description": "右侧舱阶梯环"
+    },
+    {
+      "name": "AudioEarGrilleL",
+      "label": "耳舱 · 格栅 · 左",
+      "description": "左侧舱条孔内芯"
+    },
+    {
+      "name": "AudioEarGrilleR",
+      "label": "耳舱 · 格栅 · 右",
+      "description": "右侧舱条孔内芯"
+    },
+    {
+      "name": "EarHubL",
+      "label": "耳舱 · 中心饰片 · 左",
+      "description": "左侧舱中心识别片"
+    },
+    {
+      "name": "EarHubR",
+      "label": "耳舱 · 中心饰片 · 右",
+      "description": "右侧舱中心识别片"
+    },
+    {
+      "name": "TempleGuardL",
+      "label": "太阳穴 · 护板 · 左",
+      "description": "左前伸太阳穴切面护板"
+    },
+    {
+      "name": "TempleGuardR",
+      "label": "太阳穴 · 护板 · 右",
+      "description": "右前伸太阳穴切面护板"
+    },
+    {
+      "name": "TempleCrestL",
+      "label": "太阳穴 · 上护甲 · 左",
+      "description": "左太阳穴上层折面护甲"
+    },
+    {
+      "name": "TempleCrestR",
+      "label": "太阳穴 · 上护甲 · 右",
+      "description": "右太阳穴上层折面护甲"
+    },
+    {
+      "name": "TempleLowerBladeL",
+      "label": "太阳穴 · 下护甲 · 左",
+      "description": "左太阳穴下层护片"
+    },
+    {
+      "name": "TempleLowerBladeR",
+      "label": "太阳穴 · 下护甲 · 右",
+      "description": "右太阳穴下层护片"
+    },
+    {
+      "name": "EarOuterArcL",
+      "label": "耳舱 · 外护弧 · 左",
+      "description": "左耳舱半环外护弧"
+    },
+    {
+      "name": "EarOuterArcR",
+      "label": "耳舱 · 外护弧 · 右",
+      "description": "右耳舱半环外护弧"
+    },
+    {
+      "name": "UltrasonicRingL",
+      "label": "超声波 · 探头主体 · 左",
+      "description": "超声波圆柱主体 Ø16×10.3 L"
+    },
+    {
+      "name": "UltrasonicRingR",
+      "label": "超声波 · 探头主体 · 右",
+      "description": "超声波圆柱主体 Ø16×10.3 R"
+    },
+    {
+      "name": "UltrasonicFaceL",
+      "label": "超声波 · 探头端面 · 左",
+      "description": "超声波探头端面 L"
+    },
+    {
+      "name": "UltrasonicFaceR",
+      "label": "超声波 · 探头端面 · 右",
+      "description": "超声波探头端面 R"
+    },
+    {
+      "name": "ShoulderRailL",
+      "label": "肩部 · 承力梁 · 左",
+      "description": "左斜面肩部承力梁"
+    },
+    {
+      "name": "ShoulderRailR",
+      "label": "肩部 · 承力梁 · 右",
+      "description": "右斜面肩部承力梁"
+    },
+    {
+      "name": "KeelSideFrameL",
+      "label": "底盘 · 镂空侧框 · 左",
+      "description": "左镂空底座侧框"
+    },
+    {
+      "name": "KeelSideFrameR",
+      "label": "底盘 · 镂空侧框 · 右",
+      "description": "右镂空底座侧框"
+    },
+    {
+      "name": "ChestGuardL",
+      "label": "前舱 · 侧甲 · 左",
+      "description": "左低鼻锥折面侧甲"
+    },
+    {
+      "name": "ChestGuardR",
+      "label": "前舱 · 侧甲 · 右",
+      "description": "右低鼻锥折面侧甲"
+    },
+    {
+      "name": "ChestAccentL",
+      "label": "前舱 · 嵌条 · 左",
+      "description": "左前护甲嵌条"
+    },
+    {
+      "name": "ChestAccentR",
+      "label": "前舱 · 嵌条 · 右",
+      "description": "右前护甲嵌条"
+    },
+    {
+      "name": "L298NBottomPadL",
+      "label": "L298N · 底部承托垫 · 左",
+      "description": "PCB下沿承托垫候选 L"
+    },
+    {
+      "name": "L298NBottomPadR",
+      "label": "L298N · 底部承托垫 · 右",
+      "description": "PCB下沿承托垫候选 R"
+    },
+    {
+      "name": "L298NMountInsertL",
+      "label": "L298N · 托框嵌件 · 左",
+      "description": "吊架盲孔嵌件候选 L"
+    },
+    {
+      "name": "L298NMountInsertR",
+      "label": "L298N · 托框嵌件 · 右",
+      "description": "吊架盲孔嵌件候选 R"
+    },
+    {
+      "name": "L298NMountScrewL",
+      "label": "L298N · 托框锁紧螺钉 · 左",
+      "description": "底部托框锁紧螺钉 L"
+    },
+    {
+      "name": "L298NMountScrewR",
+      "label": "L298N · 托框锁紧螺钉 · 右",
+      "description": "底部托框锁紧螺钉 R"
+    },
+    {
+      "name": "BackpackArcL",
+      "label": "点火模块 · 本体（占位） · 左",
+      "description": "背包外侧本体候选 Ø25.5×70 L"
+    },
+    {
+      "name": "BackpackArcR",
+      "label": "点火模块 · 本体（占位） · 右",
+      "description": "背包外侧本体候选 Ø25.5×70 R"
+    },
+    {
+      "name": "ArcBottomPadL",
+      "label": "点火模块 · 底垫 · 左",
+      "description": "本体底托1 mm软垫候选 L"
+    },
+    {
+      "name": "ArcBottomPadR",
+      "label": "点火模块 · 底垫 · 右",
+      "description": "本体底托1 mm软垫候选 R"
+    },
+    {
+      "name": "IgnitionMOSMountInsertL",
+      "label": "点火 MOS · 托架嵌件 · 左",
+      "description": "点火MOS托架吊柱嵌件候选 L"
+    },
+    {
+      "name": "IgnitionMOSMountInsertR",
+      "label": "点火 MOS · 托架嵌件 · 右",
+      "description": "点火MOS托架吊柱嵌件候选 R"
+    },
+    {
+      "name": "IgnitionMOSMountScrewL",
+      "label": "点火 MOS · 托架固定螺钉 · 左",
+      "description": "点火MOS独立托架底部M2.5级候选螺钉 L"
+    },
+    {
+      "name": "IgnitionMOSMountScrewR",
+      "label": "点火 MOS · 托架固定螺钉 · 右",
+      "description": "点火MOS独立托架底部M2.5级候选螺钉 R"
+    },
+    {
+      "name": "IgnitionRouteL",
+      "label": "点火走线 · 双线走廊（审查区） · 左",
+      "description": "底盘上表面内收至前舱的双线走廊 IgnitionRouteL"
+    },
+    {
+      "name": "IgnitionRouteR",
+      "label": "点火走线 · 双线走廊（审查区） · 右",
+      "description": "底盘上表面内收至前舱的双线走廊 IgnitionRouteR"
+    },
+    {
+      "name": "BatteryInsertLFront",
+      "label": "电源 · 承托架嵌件 · 左前",
+      "description": "嵌件候选 BatteryInsertLFront"
+    },
+    {
+      "name": "BatteryInsertLRear",
+      "label": "电源 · 承托架嵌件 · 左后",
+      "description": "嵌件候选 BatteryInsertLRear"
+    },
+    {
+      "name": "BatteryInsertRFront",
+      "label": "电源 · 承托架嵌件 · 右前",
+      "description": "嵌件候选 BatteryInsertRFront"
+    },
+    {
+      "name": "BatteryInsertRRear",
+      "label": "电源 · 承托架嵌件 · 右后",
+      "description": "嵌件候选 BatteryInsertRRear"
+    },
+    {
+      "name": "BatteryScrewLFront",
+      "label": "电源 · 承托架固定螺钉 · 左前",
+      "description": "电源托盖下方沉头位紧固候选 LFront"
+    },
+    {
+      "name": "BatteryScrewLRear",
+      "label": "电源 · 承托架固定螺钉 · 左后",
+      "description": "电源托盖下方沉头位紧固候选 LRear"
+    },
+    {
+      "name": "BatteryScrewRFront",
+      "label": "电源 · 承托架固定螺钉 · 右前",
+      "description": "电源托盖下方沉头位紧固候选 RFront"
+    },
+    {
+      "name": "BatteryScrewRRear",
+      "label": "电源 · 承托架固定螺钉 · 右后",
+      "description": "电源托盖下方沉头位紧固候选 RRear"
+    },
+    {
+      "name": "CrownInsertLFront",
+      "label": "冠盖 · 嵌件 · 左前",
+      "description": "嵌件候选 CrownInsertLFront"
+    },
+    {
+      "name": "CrownInsertLRear",
+      "label": "冠盖 · 嵌件 · 左后",
+      "description": "嵌件候选 CrownInsertLRear"
+    },
+    {
+      "name": "CrownInsertRFront",
+      "label": "冠盖 · 嵌件 · 右前",
+      "description": "嵌件候选 CrownInsertRFront"
+    },
+    {
+      "name": "CrownInsertRRear",
+      "label": "冠盖 · 嵌件 · 右后",
+      "description": "嵌件候选 CrownInsertRRear"
+    },
+    {
+      "name": "CrownScrewLFront",
+      "label": "冠盖 · 固定螺钉 · 左前",
+      "description": "M2.5 级紧固件候选 CrownScrewLFront"
+    },
+    {
+      "name": "CrownScrewLRear",
+      "label": "冠盖 · 固定螺钉 · 左后",
+      "description": "M2.5 级紧固件候选 CrownScrewLRear"
+    },
+    {
+      "name": "CrownScrewRFront",
+      "label": "冠盖 · 固定螺钉 · 右前",
+      "description": "M2.5 级紧固件候选 CrownScrewRFront"
+    },
+    {
+      "name": "CrownScrewRRear",
+      "label": "冠盖 · 固定螺钉 · 右后",
+      "description": "M2.5 级紧固件候选 CrownScrewRRear"
+    },
+    {
+      "name": "TrackMountScrewLFront",
+      "label": "履带 · 安装件固定螺钉 · 左前",
+      "description": "履带安装件 M3 级固定螺钉 LFront"
+    },
+    {
+      "name": "TrackMountScrewLRear",
+      "label": "履带 · 安装件固定螺钉 · 左后",
+      "description": "履带安装件 M3 级固定螺钉 LRear"
+    },
+    {
+      "name": "TrackMountScrewRFront",
+      "label": "履带 · 安装件固定螺钉 · 右前",
+      "description": "履带安装件 M3 级固定螺钉 RFront"
+    },
+    {
+      "name": "TrackMountScrewRRear",
+      "label": "履带 · 安装件固定螺钉 · 右后",
+      "description": "履带安装件 M3 级固定螺钉 RRear"
+    },
+    {
+      "name": "BatterySupportWasherLFront",
+      "label": "电源 · 承压垫圈 · 左前",
+      "description": "电源内托架承压垫圈 LFront"
+    },
+    {
+      "name": "BatterySupportWasherLRear",
+      "label": "电源 · 承压垫圈 · 左后",
+      "description": "电源内托架承压垫圈 LRear"
+    },
+    {
+      "name": "BatterySupportWasherRFront",
+      "label": "电源 · 承压垫圈 · 右前",
+      "description": "电源内托架承压垫圈 RFront"
+    },
+    {
+      "name": "BatterySupportWasherRRear",
+      "label": "电源 · 承压垫圈 · 右后",
+      "description": "电源内托架承压垫圈 RRear"
+    },
+    {
+      "name": "OccipitalLouverL0",
+      "label": "后脑 · 格栅饰条 · 左1",
+      "description": "后脑封闭格栅饰条 L0"
+    },
+    {
+      "name": "OccipitalLouverL1",
+      "label": "后脑 · 格栅饰条 · 左2",
+      "description": "后脑封闭格栅饰条 L1"
+    },
+    {
+      "name": "OccipitalLouverL2",
+      "label": "后脑 · 格栅饰条 · 左3",
+      "description": "后脑封闭格栅饰条 L2"
+    },
+    {
+      "name": "MotorFaceScrewL0",
+      "label": "动力 · 电机端面螺钉 · 左1",
+      "description": "电机端面 M3 级固定螺钉 L0"
+    },
+    {
+      "name": "MotorFaceScrewL1",
+      "label": "动力 · 电机端面螺钉 · 左2",
+      "description": "电机端面 M3 级固定螺钉 L1"
+    },
+    {
+      "name": "MotorFaceScrewL2",
+      "label": "动力 · 电机端面螺钉 · 左3",
+      "description": "电机端面 M3 级固定螺钉 L2"
+    },
+    {
+      "name": "MotorFaceScrewL3",
+      "label": "动力 · 电机端面螺钉 · 左4",
+      "description": "电机端面 M3 级固定螺钉 L3"
+    },
+    {
+      "name": "L298NClampNutL0",
+      "label": "L298N · 侧压螺母（占位） · 左1",
+      "description": "M2级侧压螺母占位 L0"
+    },
+    {
+      "name": "L298NClampScrewL0",
+      "label": "L298N · 侧压螺钉 · 左1",
+      "description": "M2级可调侧压螺钉 L0"
+    },
+    {
+      "name": "L298NSidePadL0",
+      "label": "L298N · 侧压垫 · 左1",
+      "description": "绝缘侧压垫候选 L0"
+    },
+    {
+      "name": "L298NRearPadL0",
+      "label": "L298N · 后挡软垫 · 左1",
+      "description": "四角后挡软垫候选 L0"
+    },
+    {
+      "name": "ArcLinerInnerL0",
+      "label": "点火模块 · 内侧衬垫 · 左1",
+      "description": "环带0.5 mm软衬候选 InnerL0"
+    },
+    {
+      "name": "ArcLinerOuterL0",
+      "label": "点火模块 · 外侧衬垫 · 左1",
+      "description": "环带0.5 mm软衬候选 OuterL0"
+    },
+    {
+      "name": "FrontEffectSleeveL1",
+      "label": "前舱效果线 · 根部护套（外观示意） · 左1",
+      "description": "左前方效果线1／根部护套外观"
+    },
+    {
+      "name": "FrontEffectLeadL1",
+      "label": "前舱效果线 · 线体（外观占位） · 左1",
+      "description": "左前方效果线1／封闭端外观占位"
+    },
+    {
+      "name": "IgnitionRouteBranchL1",
+      "label": "点火走线 · 单线接近区（审查区） · 左1",
+      "description": "前端单线接近区 IgnitionRouteBranchL1"
+    },
+    {
+      "name": "L298NClampNutL1",
+      "label": "L298N · 侧压螺母（占位） · 左2",
+      "description": "M2级侧压螺母占位 L1"
+    },
+    {
+      "name": "L298NClampScrewL1",
+      "label": "L298N · 侧压螺钉 · 左2",
+      "description": "M2级可调侧压螺钉 L1"
+    },
+    {
+      "name": "L298NSidePadL1",
+      "label": "L298N · 侧压垫 · 左2",
+      "description": "绝缘侧压垫候选 L1"
+    },
+    {
+      "name": "L298NRearPadL1",
+      "label": "L298N · 后挡软垫 · 左2",
+      "description": "四角后挡软垫候选 L1"
+    },
+    {
+      "name": "ArcLinerInnerL1",
+      "label": "点火模块 · 内侧衬垫 · 左2",
+      "description": "环带0.5 mm软衬候选 InnerL1"
+    },
+    {
+      "name": "ArcLinerOuterL1",
+      "label": "点火模块 · 外侧衬垫 · 左2",
+      "description": "环带0.5 mm软衬候选 OuterL1"
+    },
+    {
+      "name": "FrontEffectSleeveL2",
+      "label": "前舱效果线 · 根部护套（外观示意） · 左2",
+      "description": "左前方效果线2／根部护套外观"
+    },
+    {
+      "name": "FrontEffectLeadL2",
+      "label": "前舱效果线 · 线体（外观占位） · 左2",
+      "description": "左前方效果线2／封闭端外观占位"
+    },
+    {
+      "name": "IgnitionRouteBranchL2",
+      "label": "点火走线 · 单线接近区（审查区） · 左2",
+      "description": "前端单线接近区 IgnitionRouteBranchL2"
+    },
+    {
+      "name": "OccipitalLouverR0",
+      "label": "后脑 · 格栅饰条 · 右1",
+      "description": "后脑封闭格栅饰条 R0"
+    },
+    {
+      "name": "OccipitalLouverR1",
+      "label": "后脑 · 格栅饰条 · 右2",
+      "description": "后脑封闭格栅饰条 R1"
+    },
+    {
+      "name": "OccipitalLouverR2",
+      "label": "后脑 · 格栅饰条 · 右3",
+      "description": "后脑封闭格栅饰条 R2"
+    },
+    {
+      "name": "MotorFaceScrewR0",
+      "label": "动力 · 电机端面螺钉 · 右1",
+      "description": "电机端面 M3 级固定螺钉 R0"
+    },
+    {
+      "name": "MotorFaceScrewR1",
+      "label": "动力 · 电机端面螺钉 · 右2",
+      "description": "电机端面 M3 级固定螺钉 R1"
+    },
+    {
+      "name": "MotorFaceScrewR2",
+      "label": "动力 · 电机端面螺钉 · 右3",
+      "description": "电机端面 M3 级固定螺钉 R2"
+    },
+    {
+      "name": "MotorFaceScrewR3",
+      "label": "动力 · 电机端面螺钉 · 右4",
+      "description": "电机端面 M3 级固定螺钉 R3"
+    },
+    {
+      "name": "L298NClampNutR0",
+      "label": "L298N · 侧压螺母（占位） · 右1",
+      "description": "M2级侧压螺母占位 R0"
+    },
+    {
+      "name": "L298NClampScrewR0",
+      "label": "L298N · 侧压螺钉 · 右1",
+      "description": "M2级可调侧压螺钉 R0"
+    },
+    {
+      "name": "L298NSidePadR0",
+      "label": "L298N · 侧压垫 · 右1",
+      "description": "绝缘侧压垫候选 R0"
+    },
+    {
+      "name": "L298NRearPadR0",
+      "label": "L298N · 后挡软垫 · 右1",
+      "description": "四角后挡软垫候选 R0"
+    },
+    {
+      "name": "ArcLinerInnerR0",
+      "label": "点火模块 · 内侧衬垫 · 右1",
+      "description": "环带0.5 mm软衬候选 InnerR0"
+    },
+    {
+      "name": "ArcLinerOuterR0",
+      "label": "点火模块 · 外侧衬垫 · 右1",
+      "description": "环带0.5 mm软衬候选 OuterR0"
+    },
+    {
+      "name": "FrontEffectSleeveR1",
+      "label": "前舱效果线 · 根部护套（外观示意） · 右1",
+      "description": "右前方效果线1／根部护套外观"
+    },
+    {
+      "name": "FrontEffectLeadR1",
+      "label": "前舱效果线 · 线体（外观占位） · 右1",
+      "description": "右前方效果线1／封闭端外观占位"
+    },
+    {
+      "name": "IgnitionRouteBranchR1",
+      "label": "点火走线 · 单线接近区（审查区） · 右1",
+      "description": "前端单线接近区 IgnitionRouteBranchR1"
+    },
+    {
+      "name": "L298NClampNutR1",
+      "label": "L298N · 侧压螺母（占位） · 右2",
+      "description": "M2级侧压螺母占位 R1"
+    },
+    {
+      "name": "L298NClampScrewR1",
+      "label": "L298N · 侧压螺钉 · 右2",
+      "description": "M2级可调侧压螺钉 R1"
+    },
+    {
+      "name": "L298NSidePadR1",
+      "label": "L298N · 侧压垫 · 右2",
+      "description": "绝缘侧压垫候选 R1"
+    },
+    {
+      "name": "L298NRearPadR1",
+      "label": "L298N · 后挡软垫 · 右2",
+      "description": "四角后挡软垫候选 R1"
+    },
+    {
+      "name": "ArcLinerInnerR1",
+      "label": "点火模块 · 内侧衬垫 · 右2",
+      "description": "环带0.5 mm软衬候选 InnerR1"
+    },
+    {
+      "name": "ArcLinerOuterR1",
+      "label": "点火模块 · 外侧衬垫 · 右2",
+      "description": "环带0.5 mm软衬候选 OuterR1"
+    },
+    {
+      "name": "FrontEffectSleeveR2",
+      "label": "前舱效果线 · 根部护套（外观示意） · 右2",
+      "description": "右前方效果线2／根部护套外观"
+    },
+    {
+      "name": "FrontEffectLeadR2",
+      "label": "前舱效果线 · 线体（外观占位） · 右2",
+      "description": "右前方效果线2／封闭端外观占位"
+    },
+    {
+      "name": "IgnitionRouteBranchR2",
+      "label": "点火走线 · 单线接近区（审查区） · 右2",
+      "description": "前端单线接近区 IgnitionRouteBranchR2"
+    },
+    {
+      "name": "WaterGunBaseInsert1",
+      "label": "水枪 · 底座嵌件 · 1",
+      "description": "托架基座 M3 级嵌件候选 1"
+    },
+    {
+      "name": "WaterGunBaseInsert2",
+      "label": "水枪 · 底座嵌件 · 2",
+      "description": "托架基座 M3 级嵌件候选 2"
+    },
+    {
+      "name": "WaterGunBaseScrew1",
+      "label": "水枪 · 底座固定螺钉 · 1",
+      "description": "托架沉入式紧固候选 1"
+    },
+    {
+      "name": "WaterGunBaseScrew2",
+      "label": "水枪 · 底座固定螺钉 · 2",
+      "description": "托架沉入式紧固候选 2"
+    },
+    {
+      "name": "BubbleGunBaseInsert1",
+      "label": "泡泡枪 · 底座嵌件 · 1",
+      "description": "泡泡托架 M3 级嵌件 1"
+    },
+    {
+      "name": "BubbleGunBaseInsert2",
+      "label": "泡泡枪 · 底座嵌件 · 2",
+      "description": "泡泡托架 M3 级嵌件 2"
+    },
+    {
+      "name": "BubbleGunBaseScrew1",
+      "label": "泡泡枪 · 底座固定螺钉 · 1",
+      "description": "泡泡托架沉头位紧固候选 1"
+    },
+    {
+      "name": "BubbleGunBaseScrew2",
+      "label": "泡泡枪 · 底座固定螺钉 · 2",
+      "description": "泡泡托架沉头位紧固候选 2"
+    },
+    {
+      "name": "WaterGunLowerPad1",
+      "label": "水枪 · 底部软胶垫 · 1",
+      "description": "底部双面软胶候选／厚度未测 1"
+    },
+    {
+      "name": "WaterGunLowerPad2",
+      "label": "水枪 · 底部软胶垫 · 2",
+      "description": "底部双面软胶候选／厚度未测 2"
+    },
+    {
+      "name": "BubbleGunShell",
+      "label": "泡泡枪 · 枪壳",
+      "description": "泡泡枪主体／Shell"
+    },
+    {
+      "name": "BubbleGunWheel",
+      "label": "泡泡枪 · 泡泡转轮",
+      "description": "泡泡枪主体／Wheel"
+    },
+    {
+      "name": "BubbleGunMotor",
+      "label": "泡泡枪 · 电机",
+      "description": "泡泡枪主体／Motor"
+    },
+    {
+      "name": "BubbleGunGearcase",
+      "label": "泡泡枪 · 齿轮箱",
+      "description": "泡泡枪主体／Gearcase"
+    },
+    {
+      "name": "BubbleGunMountingTab",
+      "label": "泡泡枪 · 安装片",
+      "description": "泡泡枪主体／MountingTab"
+    },
+    {
+      "name": "BubbleGunFrontFoot",
+      "label": "泡泡枪 · 前支脚",
+      "description": "泡泡枪主体／FrontFoot"
+    },
+    {
+      "name": "BottomCoverScrew0",
+      "label": "底盘 · 检修盖固定螺钉 · 1",
+      "description": "一体底盖 M2.5 级示意螺钉 0"
+    },
+    {
+      "name": "BottomCoverScrew1",
+      "label": "底盘 · 检修盖固定螺钉 · 2",
+      "description": "一体底盖 M2.5 级示意螺钉 1"
+    },
+    {
+      "name": "BottomCoverScrew2",
+      "label": "底盘 · 检修盖固定螺钉 · 3",
+      "description": "一体底盖 M2.5 级示意螺钉 2"
+    },
+    {
+      "name": "BottomCoverScrew3",
+      "label": "底盘 · 检修盖固定螺钉 · 4",
+      "description": "一体底盖 M2.5 级示意螺钉 3"
+    },
+    {
+      "name": "BottomCoverScrew4",
+      "label": "底盘 · 检修盖固定螺钉 · 5",
+      "description": "一体底盖 M2.5 级示意螺钉 4"
+    },
+    {
+      "name": "BottomCoverScrew5",
+      "label": "底盘 · 检修盖固定螺钉 · 6",
+      "description": "一体底盖 M2.5 级示意螺钉 5"
+    },
+    {
+      "name": "WaterModule",
+      "label": "清水瓶 · 瓶体含盖（占位）",
+      "description": "清水成品瓶完整含盖包络 Ø48.8×114／150 mL"
+    },
+    {
+      "name": "WaterPod",
+      "label": "清水瓶 · 底托",
+      "description": "清水开窗底托／前部绑带导槽／双M3固定"
+    },
+    {
+      "name": "WaterBottomPad",
+      "label": "清水瓶 · 底垫",
+      "description": "清水底部软垫候选1 mm"
+    },
+    {
+      "name": "WaterRetentionBand",
+      "label": "清水瓶 · 绑带",
+      "description": "清水可释放环绕绑带候选12×1／张紧防滑未验"
+    },
+    {
+      "name": "WaterStrapClosure",
+      "label": "清水瓶 · 绑带搭接片",
+      "description": "清水魔术贴搭接及后拉片候选／非刚性卡扣"
+    },
+    {
+      "name": "WaterLidMark",
+      "label": "清水瓶 · 识别条",
+      "description": "清水低位护舱识别条"
+    },
+    {
+      "name": "WaterPodInsertL",
+      "label": "清水瓶 · 底托嵌件 · 左",
+      "description": "清水底托M3嵌件候选"
+    },
+    {
+      "name": "WaterPodInsertR",
+      "label": "清水瓶 · 底托嵌件 · 右",
+      "description": "清水底托M3嵌件候选001"
+    },
+    {
+      "name": "WaterPodScrewL",
+      "label": "清水瓶 · 底托固定螺钉 · 左",
+      "description": "清水底托M3候选沉孔螺钉"
+    },
+    {
+      "name": "WaterPodScrewR",
+      "label": "清水瓶 · 底托固定螺钉 · 右",
+      "description": "清水底托M3候选沉孔螺钉001"
+    },
+    {
+      "name": "WaterSidePad0",
+      "label": "清水瓶 · 环形侧垫 · 1",
+      "description": "清水环形侧垫候选1 mm"
+    },
+    {
+      "name": "WaterSidePad1",
+      "label": "清水瓶 · 环形侧垫 · 2",
+      "description": "清水环形侧垫候选1 mm001"
+    },
+    {
+      "name": "BubbleModule",
+      "label": "泡泡液瓶 · 瓶体含盖（占位）",
+      "description": "泡泡液成品瓶完整含盖包络 Ø48.8×114／150 mL"
+    },
+    {
+      "name": "BubblePod",
+      "label": "泡泡液瓶 · 底托",
+      "description": "泡泡液开窗底托／前部绑带导槽／双M3固定"
+    },
+    {
+      "name": "BubbleBottomPad",
+      "label": "泡泡液瓶 · 底垫",
+      "description": "泡泡液底部软垫候选1 mm"
+    },
+    {
+      "name": "BubbleRetentionBand",
+      "label": "泡泡液瓶 · 绑带",
+      "description": "泡泡液可释放环绕绑带候选12×1／张紧防滑未验"
+    },
+    {
+      "name": "BubbleStrapClosure",
+      "label": "泡泡液瓶 · 绑带搭接片",
+      "description": "泡泡液魔术贴搭接及后拉片候选／非刚性卡扣"
+    },
+    {
+      "name": "BubbleLidMark",
+      "label": "泡泡液瓶 · 识别条",
+      "description": "泡泡液低位护舱识别条"
+    },
+    {
+      "name": "BubblePodInsertL",
+      "label": "泡泡液瓶 · 底托嵌件 · 左",
+      "description": "泡泡液底托M3嵌件候选"
+    },
+    {
+      "name": "BubblePodInsertR",
+      "label": "泡泡液瓶 · 底托嵌件 · 右",
+      "description": "泡泡液底托M3嵌件候选001"
+    },
+    {
+      "name": "BubblePodScrewL",
+      "label": "泡泡液瓶 · 底托固定螺钉 · 左",
+      "description": "泡泡液底托M3候选沉孔螺钉"
+    },
+    {
+      "name": "BubblePodScrewR",
+      "label": "泡泡液瓶 · 底托固定螺钉 · 右",
+      "description": "泡泡液底托M3候选沉孔螺钉001"
+    },
+    {
+      "name": "BubbleSidePad0",
+      "label": "泡泡液瓶 · 环形侧垫 · 1",
+      "description": "泡泡液环形侧垫候选1 mm"
+    },
+    {
+      "name": "BubbleSidePad1",
+      "label": "泡泡液瓶 · 环形侧垫 · 2",
+      "description": "泡泡液环形侧垫候选1 mm001"
+    },
+    {
+      "name": "BreadboardInsert0",
+      "label": "面包板 · 托板嵌件 · 1",
+      "description": "浅托盘嵌件候选 1"
+    },
+    {
+      "name": "BreadboardInsert1",
+      "label": "面包板 · 托板嵌件 · 2",
+      "description": "浅托盘嵌件候选 2"
+    },
+    {
+      "name": "BreadboardInsert2",
+      "label": "面包板 · 托板嵌件 · 3",
+      "description": "浅托盘嵌件候选 3"
+    },
+    {
+      "name": "BreadboardInsert3",
+      "label": "面包板 · 托板嵌件 · 4",
+      "description": "浅托盘嵌件候选 4"
+    },
+    {
+      "name": "BreadboardScrew0",
+      "label": "面包板 · 托板固定螺钉 · 1",
+      "description": "浅托盘侧耳螺钉候选 1"
+    },
+    {
+      "name": "BreadboardScrew1",
+      "label": "面包板 · 托板固定螺钉 · 2",
+      "description": "浅托盘侧耳螺钉候选 2"
+    },
+    {
+      "name": "BreadboardScrew2",
+      "label": "面包板 · 托板固定螺钉 · 3",
+      "description": "浅托盘侧耳螺钉候选 3"
+    },
+    {
+      "name": "BreadboardScrew3",
+      "label": "面包板 · 托板固定螺钉 · 4",
+      "description": "浅托盘侧耳螺钉候选 4"
+    },
+    {
+      "name": "EffectInsert0",
+      "label": "效果板 · 托板嵌件 · 1",
+      "description": "承板内柱M2.5级嵌件候选 0"
+    },
+    {
+      "name": "EffectInsert1",
+      "label": "效果板 · 托板嵌件 · 2",
+      "description": "承板内柱M2.5级嵌件候选 1"
+    },
+    {
+      "name": "EffectInsert2",
+      "label": "效果板 · 托板嵌件 · 3",
+      "description": "承板内柱M2.5级嵌件候选 2"
+    },
+    {
+      "name": "EffectInsert3",
+      "label": "效果板 · 托板嵌件 · 4",
+      "description": "承板内柱M2.5级嵌件候选 3"
+    },
+    {
+      "name": "EffectScrew0",
+      "label": "效果板 · 托板固定螺钉 · 1",
+      "description": "承板凹入式M2.5级螺钉候选 0"
+    },
+    {
+      "name": "EffectScrew1",
+      "label": "效果板 · 托板固定螺钉 · 2",
+      "description": "承板凹入式M2.5级螺钉候选 1"
+    },
+    {
+      "name": "EffectScrew2",
+      "label": "效果板 · 托板固定螺钉 · 3",
+      "description": "承板凹入式M2.5级螺钉候选 2"
+    },
+    {
+      "name": "EffectScrew3",
+      "label": "效果板 · 托板固定螺钉 · 4",
+      "description": "承板凹入式M2.5级螺钉候选 3"
+    },
+    {
+      "name": "EffectMOSL",
+      "label": "效果 MOS 板 · 本体（占位） · 左",
+      "description": "MOS板／PCB与元件区候选 L"
+    },
+    {
+      "name": "EffectSupportLMOS",
+      "label": "效果 MOS 板 · 板边垫 · 左",
+      "description": "两条0.5 mm板边垫候选 LMOS"
+    },
+    {
+      "name": "EffectRetainerLMOS",
+      "label": "效果 MOS 板 · 压框 · 左",
+      "description": "单板开窗防脱压框候选 LMOS"
+    },
+    {
+      "name": "EffectRetainerInsertLMOSInner",
+      "label": "效果 MOS 板 · 压框嵌件 · 左内",
+      "description": "压框M2级短嵌件候选 LMOSInner"
+    },
+    {
+      "name": "EffectRetainerScrewLMOSInner",
+      "label": "效果 MOS 板 · 压框螺钉 · 左内",
+      "description": "压框M2级螺钉候选 LMOSInner"
+    },
+    {
+      "name": "EffectRetainerInsertLMOSOuter",
+      "label": "效果 MOS 板 · 压框嵌件 · 左外",
+      "description": "压框M2级短嵌件候选 LMOSOuter"
+    },
+    {
+      "name": "EffectRetainerScrewLMOSOuter",
+      "label": "效果 MOS 板 · 压框螺钉 · 左外",
+      "description": "压框M2级螺钉候选 LMOSOuter"
+    },
+    {
+      "name": "EffectBuckL",
+      "label": "效果降压板 · 本体（占位） · 左",
+      "description": "Buck板／PCB与元件区候选 L"
+    },
+    {
+      "name": "EffectSupportLBuck",
+      "label": "效果降压板 · 板边垫 · 左",
+      "description": "两条0.5 mm板边垫候选 LBuck"
+    },
+    {
+      "name": "EffectRetainerLBuck",
+      "label": "效果降压板 · 压框 · 左",
+      "description": "单板开窗防脱压框候选 LBuck"
+    },
+    {
+      "name": "EffectRetainerInsertLBuckInner",
+      "label": "效果降压板 · 压框嵌件 · 左内",
+      "description": "压框M2级短嵌件候选 LBuckInner"
+    },
+    {
+      "name": "EffectRetainerScrewLBuckInner",
+      "label": "效果降压板 · 压框螺钉 · 左内",
+      "description": "压框M2级螺钉候选 LBuckInner"
+    },
+    {
+      "name": "EffectRetainerInsertLBuckOuter",
+      "label": "效果降压板 · 压框嵌件 · 左外",
+      "description": "压框M2级短嵌件候选 LBuckOuter"
+    },
+    {
+      "name": "EffectRetainerScrewLBuckOuter",
+      "label": "效果降压板 · 压框螺钉 · 左外",
+      "description": "压框M2级螺钉候选 LBuckOuter"
+    },
+    {
+      "name": "EffectMOSR",
+      "label": "效果 MOS 板 · 本体（占位） · 右",
+      "description": "MOS板／PCB与元件区候选 R"
+    },
+    {
+      "name": "EffectSupportRMOS",
+      "label": "效果 MOS 板 · 板边垫 · 右",
+      "description": "两条0.5 mm板边垫候选 RMOS"
+    },
+    {
+      "name": "EffectRetainerRMOS",
+      "label": "效果 MOS 板 · 压框 · 右",
+      "description": "单板开窗防脱压框候选 RMOS"
+    },
+    {
+      "name": "EffectRetainerInsertRMOSInner",
+      "label": "效果 MOS 板 · 压框嵌件 · 右内",
+      "description": "压框M2级短嵌件候选 RMOSInner"
+    },
+    {
+      "name": "EffectRetainerScrewRMOSInner",
+      "label": "效果 MOS 板 · 压框螺钉 · 右内",
+      "description": "压框M2级螺钉候选 RMOSInner"
+    },
+    {
+      "name": "EffectRetainerInsertRMOSOuter",
+      "label": "效果 MOS 板 · 压框嵌件 · 右外",
+      "description": "压框M2级短嵌件候选 RMOSOuter"
+    },
+    {
+      "name": "EffectRetainerScrewRMOSOuter",
+      "label": "效果 MOS 板 · 压框螺钉 · 右外",
+      "description": "压框M2级螺钉候选 RMOSOuter"
+    },
+    {
+      "name": "EffectBuckR",
+      "label": "效果降压板 · 本体（占位） · 右",
+      "description": "Buck板／PCB与元件区候选 R"
+    },
+    {
+      "name": "EffectSupportRBuck",
+      "label": "效果降压板 · 板边垫 · 右",
+      "description": "两条0.5 mm板边垫候选 RBuck"
+    },
+    {
+      "name": "EffectRetainerRBuck",
+      "label": "效果降压板 · 压框 · 右",
+      "description": "单板开窗防脱压框候选 RBuck"
+    },
+    {
+      "name": "EffectRetainerInsertRBuckInner",
+      "label": "效果降压板 · 压框嵌件 · 右内",
+      "description": "压框M2级短嵌件候选 RBuckInner"
+    },
+    {
+      "name": "EffectRetainerScrewRBuckInner",
+      "label": "效果降压板 · 压框螺钉 · 右内",
+      "description": "压框M2级螺钉候选 RBuckInner"
+    },
+    {
+      "name": "EffectRetainerInsertRBuckOuter",
+      "label": "效果降压板 · 压框嵌件 · 右外",
+      "description": "压框M2级短嵌件候选 RBuckOuter"
+    },
+    {
+      "name": "EffectRetainerScrewRBuckOuter",
+      "label": "效果降压板 · 压框螺钉 · 右外",
+      "description": "压框M2级螺钉候选 RBuckOuter"
+    },
+    {
+      "name": "IgnitionMOSRetainerInsertInner",
+      "label": "点火 MOS · 压框嵌件 · 内侧",
+      "description": "点火P01独立安装位／RetainerInsertInner"
+    },
+    {
+      "name": "IgnitionMOSRetainerScrewInner",
+      "label": "点火 MOS · 压框螺钉 · 内侧",
+      "description": "点火P01独立安装位／RetainerScrewInner"
+    },
+    {
+      "name": "IgnitionMOSRetainerInsertOuter",
+      "label": "点火 MOS · 压框嵌件 · 外侧",
+      "description": "点火P01独立安装位／RetainerInsertOuter"
+    },
+    {
+      "name": "IgnitionMOSRetainerScrewOuter",
+      "label": "点火 MOS · 压框螺钉 · 外侧",
+      "description": "点火P01独立安装位／RetainerScrewOuter"
+    },
+    {
+      "name": "PrintWaterCradle",
+      "label": "PP01 水枪一体底托",
+      "description": ""
+    },
+    {
+      "name": "PrintBubbleCradle",
+      "label": "PP02 泡泡枪一体圆环底座",
+      "description": ""
+    },
+    {
+      "name": "PrintBackpack",
+      "label": "PP03 双瓶背包一体外壳及桶座",
+      "description": ""
+    },
+    {
+      "name": "PrintLowerTub",
+      "label": "PP04 一体底盘及湿舱隔板",
+      "description": ""
+    },
+    {
+      "name": "PrintCrown",
+      "label": "PP05 一体冠盖及装甲饰件",
+      "description": ""
+    },
+    {
+      "name": "PrintNeck",
+      "label": "PP06 一体固定颈架",
+      "description": ""
+    }
+  ]
+}

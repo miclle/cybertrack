@@ -1,0 +1,381 @@
+{
+  "revision": "0.51",
+  "changes": {
+    "HeadCrownShell": {
+      "added_volume_mm3": 222.2945844332539,
+      "removed_volume_mm3": 0.0,
+      "added_material_collisions_including_reserved_spaces": []
+    },
+    "NeckCrossbar": {
+      "added_volume_mm3": 1558.2299561805412,
+      "removed_volume_mm3": 0.0,
+      "added_material_collisions_including_reserved_spaces": []
+    },
+    "RearBulkhead": {
+      "added_volume_mm3": 17.535035249963578,
+      "removed_volume_mm3": 0.0,
+      "added_material_collisions_including_reserved_spaces": []
+    },
+    "NeckOuterWebL": {
+      "added_volume_mm3": 4.264514275790185,
+      "removed_volume_mm3": 0.0,
+      "added_material_collisions_including_reserved_spaces": []
+    },
+    "NeckOuterWebR": {
+      "added_volume_mm3": 4.264514275790185,
+      "removed_volume_mm3": 0.0,
+      "added_material_collisions_including_reserved_spaces": []
+    }
+  },
+  "crown_ties": {
+    "quantity": 4,
+    "width_mm": 6,
+    "height_mm": 2,
+    "z_mm": [
+      207,
+      209
+    ],
+    "front_centres_x_mm": [
+      -48,
+      48
+    ],
+    "rear_centres_x_mm": [
+      -44,
+      44
+    ]
+  },
+  "fixed_crossbar": {
+    "old_radius_mm": 7.5,
+    "new_radius_mm": 8,
+    "length_mm": 64
+  },
+  "neck_bore_webs": {
+    "quantity": 2,
+    "thickness_mm": 0.4,
+    "y_mm": [
+      -14,
+      -8
+    ],
+    "z_mm": [
+      157.6,
+      158
+    ]
+  },
+  "wet_seam_ties": {
+    "quantity": 2,
+    "x_ranges_mm": [
+      [
+        -37.5,
+        -9.3
+      ],
+      [
+        9.3,
+        37.5
+      ]
+    ],
+    "y_mm": [
+      25,
+      25.4
+    ],
+    "z_mm": [
+      37,
+      37.8
+    ],
+    "dry_side_unchanged": true
+  },
+  "physical_fit_verified": false,
+  "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+  "parts": [
+    {
+      "id": "PP01",
+      "name": "PrintWaterCradle",
+      "label": "PP01 水枪一体底托",
+      "members": [
+        "WaterGunCradle",
+        "WaterGunHoseSupport",
+        "WaterGunHoseSupportRear"
+      ],
+      "feature_count": 3,
+      "solids": 1,
+      "valid": true,
+      "volume_mm3": 13119.492912285032,
+      "size_xyz_mm": [
+        46.7,
+        100.26831098250312,
+        46.54528424428557
+      ],
+      "stl_translation_xyz_mm": [
+        -59.15,
+        30.025839128358054,
+        -92.31196201548906
+      ],
+      "stl_closed": true,
+      "stl_connected_components": 1,
+      "cad_boundary_shells": 1,
+      "stl_nonmanifold": false,
+      "stl_facets": 2614,
+      "step_volume_difference_mm3": 4.94765117764473e-09,
+      "step_volume_comparison_passed": true,
+      "missing_source_volume_mm3": 0.0,
+      "extra_volume_mm3": 0.0,
+      "files": {
+        "PP01-WaterCradle.step": "c8f54c46118da9f1e4502e20cea04a1f22b3f4d1966bd1c99b12bef4eb6553e0",
+        "PP01-WaterCradle.stl": "be0e64070927c7c40243337676fd4be7010d04372605477fcc4d50332c27aaa1"
+      },
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+    },
+    {
+      "id": "PP02",
+      "name": "PrintBubbleCradle",
+      "label": "PP02 泡泡枪一体圆环底座",
+      "members": [
+        "BubbleGunCradle",
+        "BubbleGunRing",
+        "BubbleGunSlotWall1",
+        "BubbleGunSlotWall2",
+        "BubbleGunSlotWall3",
+        "BubbleGunSlotWall4",
+        "BubbleGunSlotWall5",
+        "BubbleGunSlotWall6"
+      ],
+      "feature_count": 8,
+      "solids": 1,
+      "valid": true,
+      "volume_mm3": 8570.018641060673,
+      "size_xyz_mm": [
+        50.0,
+        67.34587331727691,
+        59.66576480186038
+      ],
+      "stl_translation_xyz_mm": [
+        55.0,
+        91.11224205015094,
+        -85.17354286469245
+      ],
+      "stl_closed": true,
+      "stl_connected_components": 1,
+      "cad_boundary_shells": 1,
+      "stl_nonmanifold": false,
+      "stl_facets": 2156,
+      "step_volume_difference_mm3": 6.621121428906918e-10,
+      "step_volume_comparison_passed": true,
+      "missing_source_volume_mm3": 0.0,
+      "extra_volume_mm3": 0.0,
+      "files": {
+        "PP02-BubbleCradle.step": "325fb8c7d66bd841801f01c2260e0fb8a26865bcb7235383744fa84e0c5f7536",
+        "PP02-BubbleCradle.stl": "5a7a816b63a00bd774c5cdf81757067471415faa87382f2dc94f2532ff8dd00a"
+      },
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+    },
+    {
+      "id": "PP03",
+      "name": "PrintBackpack",
+      "label": "PP03 双瓶背包一体外壳及桶座",
+      "members": [
+        "BackpackShell",
+        "RearBaseArmor",
+        "BackpackSpine"
+      ],
+      "feature_count": 3,
+      "solids": 1,
+      "valid": true,
+      "volume_mm3": 117436.38179485023,
+      "size_xyz_mm": [
+        179.5000001,
+        72.5000001,
+        90.00000019999999
+      ],
+      "stl_translation_xyz_mm": [
+        4.999999703159119e-08,
+        -71.25000005,
+        -33.9999999
+      ],
+      "stl_closed": true,
+      "stl_connected_components": 1,
+      "cad_boundary_shells": 1,
+      "stl_nonmanifold": false,
+      "stl_facets": 5310,
+      "step_volume_difference_mm3": 34.68688506021863,
+      "step_volume_comparison_passed": false,
+      "missing_source_volume_mm3": 0.0,
+      "extra_volume_mm3": 0.0,
+      "files": {
+        "PP03-Backpack.step": "17cd9a9a2a80070d4ea24ad142e88656203888c1617ce55a4019088ed6ae7ad2",
+        "PP03-Backpack.stl": "5543c7c8e84176066d3ce59598583102a1484125795c5f3ad3c8356039e846b5"
+      },
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+    },
+    {
+      "id": "PP04",
+      "name": "PrintLowerTub",
+      "label": "PP04 一体底盘及湿舱隔板",
+      "members": [
+        "LowerTub",
+        "RearBulkhead",
+        "WetDivider"
+      ],
+      "feature_count": 3,
+      "solids": 1,
+      "valid": true,
+      "volume_mm3": 142516.6581570777,
+      "size_xyz_mm": [
+        174.0,
+        196.0,
+        66.0
+      ],
+      "stl_translation_xyz_mm": [
+        -0.0,
+        3.0,
+        -27.999999999999993
+      ],
+      "stl_closed": true,
+      "stl_connected_components": 3,
+      "cad_boundary_shells": 3,
+      "stl_nonmanifold": false,
+      "stl_facets": 23900,
+      "step_volume_difference_mm3": 2.5757559342309833e-05,
+      "step_volume_comparison_passed": true,
+      "missing_source_volume_mm3": 0.0,
+      "extra_volume_mm3": 0.0,
+      "files": {
+        "PP04-LowerTub.step": "803ed8d5dc0209ee0612996af8a919e140429f79c31a6a84816cb7da2a0c574c",
+        "PP04-LowerTub.stl": "00835a548c338567200cc2e77dda745804b7ce35085599b992755dc991eda799"
+      },
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+    },
+    {
+      "id": "PP05",
+      "name": "PrintCrown",
+      "label": "PP05 一体冠盖及装甲饰件",
+      "members": [
+        "BrowArmorL",
+        "BrowArmorR",
+        "CrownFinL",
+        "CrownFinR",
+        "HeadServiceHatch",
+        "CrownSpine",
+        "CrownForePlate",
+        "CrownSideArmorL",
+        "CrownSideArmorR",
+        "CrownRearCassette",
+        "CrownRearBlade0",
+        "CrownRearBlade1",
+        "CrownRearBlade2",
+        "OccipitalBrowL",
+        "OccipitalBrowR",
+        "CrownEffectInsetL",
+        "CrownEffectMarkLFront",
+        "CrownEffectMarkLRear",
+        "CrownEffectInsetR",
+        "CrownEffectMarkRFront",
+        "CrownEffectMarkRRear",
+        "HeadCrownShell"
+      ],
+      "feature_count": 22,
+      "solids": 1,
+      "valid": true,
+      "volume_mm3": 115132.06053724306,
+      "size_xyz_mm": [
+        162.33333353333336,
+        124.0,
+        32.000000099999994
+      ],
+      "stl_translation_xyz_mm": [
+        -7.105427357601002e-15,
+        26.0,
+        -196.0
+      ],
+      "stl_closed": true,
+      "stl_connected_components": 1,
+      "cad_boundary_shells": 1,
+      "stl_nonmanifold": false,
+      "stl_facets": 3662,
+      "step_volume_difference_mm3": 4.358286418573698,
+      "step_volume_comparison_passed": false,
+      "missing_source_volume_mm3": 0.0,
+      "extra_volume_mm3": 0.0,
+      "files": {
+        "PP05-Crown.step": "000110fe70736b595a0c1a43e9ec7448df4eaf81b15c67ad7323d1aadd2225b1",
+        "PP05-Crown.stl": "3fb7b98607ec68bc0f33b265c5c1854d36c0b73278f99a0b21d7b15103f9e4ad"
+      },
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+    },
+    {
+      "id": "PP06",
+      "name": "PrintNeck",
+      "label": "PP06 一体固定颈架",
+      "members": [
+        "NeckPedestal",
+        "NeckYokeL",
+        "NeckOuterWebL",
+        "NeckBearingL",
+        "NeckCapL",
+        "NeckSpacerL104",
+        "NeckSpacerL136",
+        "NeckStayL",
+        "NeckStaySleeveL",
+        "NeckYokeR",
+        "NeckOuterWebR",
+        "NeckBearingR",
+        "NeckCapR",
+        "NeckSpacerR104",
+        "NeckSpacerR136",
+        "NeckStayR",
+        "NeckStaySleeveR",
+        "NeckCrossbar",
+        "NeckHeadSaddle"
+      ],
+      "feature_count": 19,
+      "solids": 1,
+      "valid": true,
+      "volume_mm3": 59691.27717491472,
+      "size_xyz_mm": [
+        68.0,
+        50.0,
+        68.00000000000003
+      ],
+      "stl_translation_xyz_mm": [
+        -0.0,
+        3.0,
+        -92.99999999999997
+      ],
+      "stl_closed": true,
+      "stl_connected_components": 1,
+      "cad_boundary_shells": 1,
+      "stl_nonmanifold": false,
+      "stl_facets": 6562,
+      "step_volume_difference_mm3": 0.00021914618992013857,
+      "step_volume_comparison_passed": true,
+      "missing_source_volume_mm3": 0.0,
+      "extra_volume_mm3": 0.0,
+      "files": {
+        "PP06-Neck.step": "797f4287697e49720875da43041c4b3255a33f6d4fde0cfdc70e7fa2f7819742",
+        "PP06-Neck.stl": "484f6ffdd99c1655fdbda4eb7f5bb68f7fec2207a7dd1b3af19ae56d2c36e4c8"
+      },
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+    }
+  ],
+  "source_feature_count": 58,
+  "merged_print_part_count": 6,
+  "saved_and_reopened": true,
+  "passed": true,
+  "manufacturing_released": false,
+  "checks_on_design_features_equivalent_to_union": true,
+  "limits": "CAD solid connectivity, nominal interference and existing service checks; no slicing, strength, material, tolerance or physical acceptance.",
+  "scope_audit": "print-consolidation-change-audit.json",
+  "passed_checks": [
+    "CAD single solids",
+    "source coverage",
+    "STL closed manifold boundaries matching CAD shells",
+    "native saved readback"
+  ],
+  "step_geometry_equivalence_verified": false,
+  "source_document": "source/CyberTrack-design.FCStd",
+  "equivalent_delivery_audit": "model-tree-audit.json"
+}

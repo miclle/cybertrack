@@ -25,7 +25,7 @@ PDF=MODEL/'CyberTrack-assembly-and-service.pdf'
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 meta=json.loads((DATA/'dimensions.json').read_text())
 report=json.loads((MODEL/'readback.json').read_text())
-assert sha(MODEL/'CyberTrack.FCStd')==meta['source_sha256'], 'Stale CAD projections'
+assert sha(MODEL/meta.get('source_document','CyberTrack.FCStd'))==meta['source_sha256'], 'Stale CAD projections'
 # A stale PNG must never silently be packaged with a newer CAD drawing.
 for rel,digest in report['files_sha256'].items():
     path=ROOT/rel
@@ -393,7 +393,7 @@ y=238
 for h,s in [('装配次序','动力与底座 → 电源内托架和一体底盖 → 冠盖定位与设备托板 → 两液体舱单独试验 → 布线后复查维护动作。'),('当前 CAD 证据',f"{len(report['objects'])} 个几何对象回读有效；{report['collision_check']['boolean_pairs_tested']} 对布尔检查发现 {len(report['collision_check']['overlaps'])} 对超阈值重叠；{len(report['service_paths']['scenarios'])} 组维护动作共 {sum(r['pose_count'] for r in report['service_paths']['scenarios'])} 个离散姿态，{sum(not r['passed'] for r in report['service_paths']['scenarios'])} 组未通过。"),('尺寸与图纸等级','蓝色尺寸为当前 CAD 设计值；充电宝 120 × 73 × 31.5 为用户提供。尺寸不含制造公差。未实测接口与紧固件只用于结构评审。'),('尚待实物确认','端口位置、手指与工具空间、连续拆卸路径、线管弯曲、真实设备固定、承载、密封排液和供电。未通过制造、电气或儿童使用验收。')]:
     text(235,y,h,12,bold=True);y=para(235,y-8,s,167,10,6)-9
 box(14,25,392,16,PALE)
-text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及本轮预览图哈希。',9)
+text(20,35,'几何源：hardware/model/'+meta.get('source_document','CyberTrack.FCStd')+' · 生成时核对源模型与预览图哈希。',9)
 text(20,29,'SHA-256：'+meta['source_sha256'],8,MUTED)
 end()
 header('面包板整组 · 头部原外形内布局','沿用0.41：用户指定100×85×36规划包络；不拆分假造内部设备位置，头舱不布置点火模块。')

@@ -1,0 +1,87 @@
+{
+  "revision": "0.51",
+  "baseline_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
+  "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+  "source_feature_count": 412,
+  "expected_saved_geometry_checks": [
+    {
+      "name": "NeckOuterWebL",
+      "expected_geometry_difference_mm3": 0.0
+    },
+    {
+      "name": "RearBulkhead",
+      "expected_geometry_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckCrossbar",
+      "expected_geometry_difference_mm3": 0.0
+    },
+    {
+      "name": "HeadCrownShell",
+      "expected_geometry_difference_mm3": 0.0
+    },
+    {
+      "name": "NeckOuterWebR",
+      "expected_geometry_difference_mm3": 0.0
+    }
+  ],
+  "changed_source_features": [
+    {
+      "name": "RearBulkhead",
+      "added_mm3": 17.535035249963588,
+      "removed_mm3": 0.0
+    },
+    {
+      "name": "NeckOuterWebL",
+      "added_mm3": 4.264514275790185,
+      "removed_mm3": 0.0
+    },
+    {
+      "name": "NeckOuterWebR",
+      "added_mm3": 4.264514275790185,
+      "removed_mm3": 0.0
+    },
+    {
+      "name": "NeckCrossbar",
+      "added_mm3": 1558.2299561805412,
+      "removed_mm3": 0.0
+    },
+    {
+      "name": "HeadCrownShell",
+      "added_mm3": 223.14746871200256,
+      "removed_mm3": 0.0
+    }
+  ],
+  "unchanged_source_features": 407,
+  "merged_part_bbox_changes": [
+    {
+      "part": "PrintWaterCradle",
+      "maximum_bbox_change_mm": 0.0
+    },
+    {
+      "part": "PrintBubbleCradle",
+      "maximum_bbox_change_mm": 0.0
+    },
+    {
+      "part": "PrintBackpack",
+      "maximum_bbox_change_mm": 0.0
+    },
+    {
+      "part": "PrintLowerTub",
+      "maximum_bbox_change_mm": 0.0
+    },
+    {
+      "part": "PrintCrown",
+      "maximum_bbox_change_mm": 9.999999406318238e-08
+    },
+    {
+      "part": "PrintNeck",
+      "maximum_bbox_change_mm": 0.0
+    }
+  ],
+  "passed": true,
+  "scope": "Only crown ties, fixed crossbar gap filling and internal wet-bay seam ties and neck bore webs add material; six groups retain exact exterior bounds. Appearance checked separately in renders.",
+  "physical_fit_verified": false,
+  "source_document": "source/CyberTrack-design.FCStd",
+  "equivalent_delivery_audit": "model-tree-audit.json"
+}
