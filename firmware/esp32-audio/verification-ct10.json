@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-25",
+  "firmware": "2.0.3-ct10",
+  "build": {
+    "esp_idf": "v5.5.1",
+    "bytes": 2586480,
+    "sha256": "1257affbdebf951a640006488298cc1a0240ed72b9a0ae15d522416278840088",
+    "application_partition_bytes": 4128768,
+    "full_and_final_incremental_compile": "passed",
+    "upstream_component_warnings": "3 preexisting linux ioctl macro redefinition warnings in pinned esp_video component"
+  },
+  "host_checks": {
+    "ASan_UBSan": "passed",
+    "source_isolation_web_priority_cooldown_voice_queue": "passed",
+    "existing_deadline_replay_stop_and_output_driver": "passed",
+    "actual_MCP_JSON_HTTP_handlers": "passed",
+    "actual_page_script": "passed",
+    "page_cases": [
+      "automatic connect",
+      "fresh start window",
+      "held drive then water",
+      "water then drive enabled",
+      "release before acknowledgement",
+      "release before fresh window",
+      "stop with renewal in flight",
+      "voice preemption cooldown without queued restart",
+      "pointer cancellations",
+      "background/offline stop",
+      "automatic reconnect without action replay"
+    ]
+  },
+  "role_prompt_sha256": "8d2238dcafc1b7e04d3d63a3095d48789861d96c9e6da402cb71861dfa710acc",
+  "page_sha256": "2921df73b11f0f021573182f9e5d829904fc7c0cb04ea605af51e3da7e764141",
+  "deployment_record": "startup-ct10.json",
+  "physical_acceptance": false
+}

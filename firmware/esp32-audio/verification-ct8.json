@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-25",
+  "firmware": "2.0.3-ct8",
+  "status": "software_verified_not_deployed",
+  "build": {
+    "esp_idf": "v5.5.1",
+    "source": "build/xiaozhi-ct8-src",
+    "output": "build/firmware-ct8/xiaozhi.bin",
+    "bytes": 2589024,
+    "sha256": "e2c9ff90979381875e24c1937901c01ceb8bcaed3b63598998eb6a6e0d1627c3",
+    "app_partition_bytes": 4128768,
+    "app_partition_free_bytes": 1539744,
+    "export_matches_repository": true,
+    "full_compile_and_final_incremental_compile": "passed"
+  },
+  "host_checks": {
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "state_water_concurrency_outputs": "passed",
+    "web_session_ownership_deadlines_replay": "passed",
+    "generated_mcp_argument_validation": "passed",
+    "actual_web_json_parser": "passed",
+    "actual_http_handlers_with_transport_display_stubs": "passed",
+    "shipped_page_script_with_dom_fetch_stubs": "passed",
+    "python_syntax_and_git_diff_check": "passed"
+  },
+  "browser_fixture_checks": [
+    "incorrect_pair_code",
+    "pair_and_control_acquisition",
+    "3s_move_10s_water_combined_status",
+    "busy_buttons_disabled",
+    "stop_and_cooldown",
+    "release",
+    "390px_mobile_layout",
+    "backend_loss_disables_actions_and_shows_unknown_without_reconnect"
+  ],
+  "browser_fixture_is_physical_validation": false,
+  "page_utf8_bytes": 25603,
+  "page_sha256": "08d1a7f7409da6212eeae6c91451d6f71c1eff2439b7f87d209b7eeb5a121cd3",
+  "role_prompt_sha256": "0fde2e98884d0104963b46934c3cfaa2ae16e3daf4c1abad97e7a2c62923fd1f",
+  "deployment": {
+    "flashed": false,
+    "platform_role_synced": false,
+    "serial_opened": false,
+    "physical_actions_commanded": false
+  },
+  "remaining": [
+    "device startup and OLED address/PIN readability",
+    "real mobile Safari/Chrome and lock/background/Wi-Fi loss",
+    "voice and web coexistence on board",
+    "internal heap, task stack high water, socket peak and actual stop latency",
+    "power/load and full physical acceptance"
+  ]
+}

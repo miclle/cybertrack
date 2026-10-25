@@ -23,3 +23,20 @@ subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
                 str(Path(__file__).with_name('mcp_arguments_test.cc')), str(build/'cJSON.o'),
                 '-o', str(build/'mcp_arguments_test')], check=True)
 subprocess.run([str(build/'mcp_arguments_test')], check=True)
+subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson),
+                '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
+                str(Path(__file__).with_name('web_request_test.cc')), str(build/'cJSON.o'),
+                '-o', str(build/'web_request_test')], check=True)
+subprocess.run([str(build/'web_request_test')], check=True)
+stubs = build/'web-stubs'
+stubs.mkdir(exist_ok=True)
+for name in ('application.h', 'board.h', 'display/display.h', 'esp_http_server.h',
+             'esp_event.h', 'esp_netif.h', 'esp_timer.h', 'esp_random.h', 'esp_log.h', 'web_page.h'):
+    path = stubs/name
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text('#include "web_server_stubs.h"\n')
+subprocess.run(['c++', '-std=c++17', *flags, '-I', str(stubs), '-I', str(cjson),
+                '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
+                '-I', str(Path(__file__).parent), str(Path(__file__).with_name('web_server_test.cc')),
+                str(build/'cJSON.o'), '-o', str(build/'web_server_test')], check=True)
+subprocess.run([str(build/'web_server_test')], check=True)

@@ -1,0 +1,296 @@
+{
+  "date": "2026-10-25",
+  "firmware": "2.0.3-ct9",
+  "status": "deployed_no_load_http_and_desktop_browser_passed_phone_voice_pending",
+  "power_confirmation": {
+    "source": "User confirmed both power branches disconnected and USB connected before flashing",
+    "motor_12v_disconnected": true,
+    "mos_5v_disconnected": true,
+    "usb_connected_to_computer": true
+  },
+  "backup": {
+    "private_directory": "secrets/ct9-20261025",
+    "ota0_bytes": 4128768,
+    "ota0_sha256": "3916e81aabf69ea40a9c61467bee4259011b7d7f783201293b2d3c995a3bdd1d",
+    "application_prefix_matches_ct7": true,
+    "header_bytes": 131072,
+    "header_sha256": "352de22aa24cd9f54a82559bf5a52d243a9e61fddd1542ae748dbbdf235de9a2",
+    "board_identity_and_partition_selection_verified": true
+  },
+  "flash": {
+    "only_application_written": true,
+    "offset": "0x20000",
+    "bytes": 2595280,
+    "sha256": "7c1b86d99285d500ab406cfcc2cf2ceee6e84006c6186806928c15b60cf91654",
+    "esptool_hash_verified": true,
+    "initial_flash_header_before_after_identical": true,
+    "final_bootloader_partition_otadata_phy_unchanged": true,
+    "nvs_semantic_comparison": "All 59 other decoded entries identical; websocket token refreshed by normal startup cloud configuration after first boot. No token contents included.",
+    "nvs_bootloader_otadata_assets_written_by_flash": false,
+    "no_pin_flash_header_before_after_identical": true
+  },
+  "platform": {
+    "role_saved_and_reopened_equal": true,
+    "role_sha256": "f5c8a9f83e7b469296b59509e1eb71ec8c6c9643731016a11f1028042d7164ec",
+    "nickname": "小D",
+    "voice": "少年梓辛/Brayan",
+    "model": "deepseek-v4-flash",
+    "other_configuration_preserved": true,
+    "screenshot": "build/ct9-ui/platform-saved.png"
+  },
+  "startup": {
+    "log": "build/audio-private/ct9-session.jsonl",
+    "port": "/dev/cu.usbmodem1101",
+    "events": [
+      {
+        "time": "2026-10-25T16:10:34.007630+08:00",
+        "firmware": "2.0.3-ct9"
+      },
+      {
+        "time": "2026-10-25T16:10:34.009064+08:00",
+        "display": "SSD1306 driver installed"
+      },
+      {
+        "time": "2026-10-25T16:10:34.009450+08:00",
+        "cybertrack": "READY tools=status,stop,water,move,move_and_water concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW BOOT=stop_all move_max_ms=3000 water_max_ms=30000\r"
+      },
+      {
+        "time": "2026-10-25T16:10:34.009657+08:00",
+        "application_state": "starting"
+      },
+      {
+        "time": "2026-10-25T16:10:38.253776+08:00",
+        "web": "LAN URL observed; no PIN required"
+      },
+      {
+        "time": "2026-10-25T16:10:38.254002+08:00",
+        "network": "IP acquired; address withheld"
+      },
+      {
+        "time": "2026-10-25T16:10:38.316388+08:00",
+        "application_state": "activating"
+      },
+      {
+        "time": "2026-10-25T16:10:39.104091+08:00",
+        "application_state": "idle"
+      }
+    ]
+  },
+  "device_found_fix": {
+    "original_image_sha256": "9471160c556251e5af0e804156ff425860588a70b4cdd12a1a60e5a40f5bc168",
+    "symptom": "First action not_ready_or_busy, no outputs started",
+    "cause": "newlib nano unsupported 64-bit printf generated invalid internal output permit",
+    "resolution": "Direct hexadecimal encoding; host/HTTP tests, rebuild and real-device retest passed"
+  },
+  "http_checks": {
+    "evidence": "build/ct9-ui/http-device-checks.json",
+    "held_over_four_seconds_single_start": "passed",
+    "release_stops_only_movement_while_timed_water_remains": "passed",
+    "stop_closes_both": "passed",
+    "missing_renew_stops_both": "passed",
+    "late_renew_cannot_restart": "passed",
+    "final_control_released": true,
+    "no_pin_retest": "passed"
+  },
+  "desktop_browser": {
+    "actual_device_not_simulator": true,
+    "pair_and_realtime_state": "passed",
+    "held_four_seconds_release_receipt": "passed; ~4 s browser press, 3892 ms firmware output interval",
+    "screenshot": "build/ct9-ui/device-web.png",
+    "no_pin_connect_and_release": "passed"
+  },
+  "software_output_stop_events": [
+    {
+      "time": "2026-10-25T16:10:44.101904+08:00",
+      "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=4219 move=OFF water=ON starts=2\r"
+    },
+    {
+      "time": "2026-10-25T16:10:44.223257+08:00",
+      "cybertrack": "ACTION_OFF channel=water reason=stop software_on_ms=4341 move=OFF water=OFF starts=2\r"
+    },
+    {
+      "time": "2026-10-25T16:10:48.190001+08:00",
+      "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=600 move=OFF water=OFF starts=4\r"
+    },
+    {
+      "time": "2026-10-25T16:10:48.196960+08:00",
+      "cybertrack": "ACTION_OFF channel=water reason=stop software_on_ms=600 move=OFF water=OFF starts=4\r"
+    },
+    {
+      "time": "2026-10-25T16:10:52.100638+08:00",
+      "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=101 move=OFF water=OFF starts=6\r"
+    },
+    {
+      "time": "2026-10-25T16:10:52.187491+08:00",
+      "cybertrack": "ACTION_OFF channel=water reason=stop software_on_ms=101 move=OFF water=OFF starts=6\r"
+    }
+  ],
+  "phone_checks": {
+    "status": "user_reports_operation_and_display_normal_short_actions_confirmed_hold_background_unconfirmed",
+    "user_report": "操作、显示正常，但因为没有接通功率，看不出有没有真的生效",
+    "browser": "awaiting_user",
+    "evidence": [
+      {
+        "time": "2026-10-25T16:16:36.774724+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":90,\"operation\":\"drive_start\",\"result\":\"stale_request\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":362948,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":6,\"max_duration_ms\":30000,\"last_duration_ms\":10000,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":63,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:16:36.880117+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":91,\"operation\":\"release\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":363058,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":6,\"max_duration_ms\":30000,\"last_duration_ms\":10000,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"none\",\"window\":63,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:16:48.239167+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":98,\"operation\":\"drive_start\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":374416,\"logical_outputs\":{\"left\":60,\"right\":60,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":7,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":600,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":600,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":69,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":1,\"drive_renewal\":1,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:16:48.261233+08:00",
+        "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=92 move=OFF water=OFF starts=7\r"
+      },
+      {
+        "time": "2026-10-25T16:16:48.340634+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":99,\"operation\":\"drive_stop\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":374508,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":7,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":69,\"move_cooldown_ms\":3000,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:16:57.944532+08:00",
+        "application_state": "connecting"
+      },
+      {
+        "time": "2026-10-25T16:16:58.323684+08:00",
+        "application_state": "listening"
+      },
+      {
+        "time": "2026-10-25T16:16:59.653872+08:00",
+        "application_state": "speaking"
+      },
+      {
+        "time": "2026-10-25T16:17:00.283256+08:00",
+        "application_state": "listening"
+      },
+      {
+        "time": "2026-10-25T16:17:03.662712+08:00",
+        "application_state": "speaking"
+      },
+      {
+        "time": "2026-10-25T16:17:04.070248+08:00",
+        "cybertrack": "RPC id=5 tool=self.tank.move\r"
+      },
+      {
+        "time": "2026-10-25T16:17:07.547163+08:00",
+        "application_state": "listening"
+      },
+      {
+        "time": "2026-10-25T16:17:14.076180+08:00",
+        "cybertrack": "RPC id=6 tool=self.tank.get_status\r"
+      },
+      {
+        "time": "2026-10-25T16:17:14.149735+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":146,\"operation\":\"get_status\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":400323,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":7,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":115,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:15.446157+08:00",
+        "application_state": "speaking"
+      },
+      {
+        "time": "2026-10-25T16:17:18.836213+08:00",
+        "application_state": "listening"
+      },
+      {
+        "time": "2026-10-25T16:17:27.362472+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":171,\"operation\":\"drive_start\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":413538,\"logical_outputs\":{\"left\":60,\"right\":-60,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":8,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":600,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":600,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"right\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":139,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":2,\"drive_renewal\":1,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:27.399823+08:00",
+        "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=108 move=OFF water=OFF starts=8\r"
+      },
+      {
+        "time": "2026-10-25T16:17:27.477891+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":172,\"operation\":\"drive_stop\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":413646,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":8,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":139,\"move_cooldown_ms\":3000,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:33.503453+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":184,\"operation\":\"drive_start\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":419679,\"logical_outputs\":{\"left\":-60,\"right\":60,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":9,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":600,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":600,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"left\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":150,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":3,\"drive_renewal\":1,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:33.514751+08:00",
+        "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=82 move=OFF water=OFF starts=9\r"
+      },
+      {
+        "time": "2026-10-25T16:17:33.592798+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":185,\"operation\":\"drive_stop\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":419761,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":9,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":150,\"move_cooldown_ms\":3000,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:39.057079+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":196,\"operation\":\"drive_start\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":425232,\"logical_outputs\":{\"left\":-60,\"right\":-60,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":10,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":600,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":600,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"backward\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":160,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":4,\"drive_renewal\":1,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:39.070683+08:00",
+        "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=84 move=OFF water=OFF starts=10\r"
+      },
+      {
+        "time": "2026-10-25T16:17:39.148800+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":197,\"operation\":\"drive_stop\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":425316,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":10,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":160,\"move_cooldown_ms\":3000,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:45.487501+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":210,\"operation\":\"water\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":431663,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":true,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":11,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":600,\"water_last_duration_ms\":1000,\"move_remaining_ms\":0,\"water_remaining_ms\":1000,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":172,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:46.417792+08:00",
+        "cybertrack": "ACTION_OFF channel=water reason=deadline software_on_ms=1000 move=OFF water=OFF starts=11\r"
+      },
+      {
+        "time": "2026-10-25T16:17:49.650747+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":219,\"operation\":\"drive_start\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":435826,\"logical_outputs\":{\"left\":60,\"right\":60,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":12,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":600,\"move_last_duration_ms\":600,\"water_last_duration_ms\":1000,\"move_remaining_ms\":600,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":180,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":6,\"drive_renewal\":1,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:49.737084+08:00",
+        "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=156 move=OFF water=OFF starts=12\r"
+      },
+      {
+        "time": "2026-10-25T16:17:49.815282+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":220,\"operation\":\"drive_stop\",\"result\":\"ok\",\"state\":\"DISARMED\",\"fault\":\"none\",\"uptime_ms\":435982,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":12,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":1000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":180,\"move_cooldown_ms\":3000,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:55.703721+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":232,\"operation\":\"water\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":441880,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":true,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":13,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":600,\"water_last_duration_ms\":1000,\"move_remaining_ms\":0,\"water_remaining_ms\":1000,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"web\",\"window\":191,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:17:56.637034+08:00",
+        "cybertrack": "ACTION_OFF channel=water reason=deadline software_on_ms=1002 move=OFF water=OFF starts=13\r"
+      },
+      {
+        "time": "2026-10-25T16:18:26.492517+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"f243da0db4c3143e\",\"request_sequence\":289,\"operation\":\"release\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":472669,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":13,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":1000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":247,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      }
+    ],
+    "observed": "One stale start rejected; four directions accepted with 82–156 ms software intervals, explicit drive_stop receipts; two 1000 ms water requests stopped at 1000/1002 ms; no powered observation",
+    "held_four_seconds": "not_established",
+    "background_stop": "not_established"
+  },
+  "voice_checks": {
+    "status": "status_query_passed_move_attempt_during_web_ownership_did_not_start",
+    "observed": "listening/speaking states and self.tank.move RPC observed, but no accepted move; status query returned all outputs off with control_owner=web; later release returned control_owner=voice",
+    "release_then_voice_move": "awaiting_user",
+    "actual_spoken_reply_and_audio": "awaiting_explicit_user_feedback"
+  },
+  "physical_validation": {
+    "power_branches_off": true,
+    "gpio_waveform_or_powered_movement_measured": false,
+    "actual_mechanical_stop_latency_measured": false
+  },
+  "remaining": [
+    "real phone touch/background/offline and voice coexistence results",
+    "GPIO and physical stopping timing",
+    "Wi-Fi AP disconnect/reconnect",
+    "heap/stack/socket peaks under concurrent audio and webpage",
+    "sustained load current/temperature and whole-robot acceptance"
+  ],
+  "no_pin_update": {
+    "requested_by_user": true,
+    "pin_generation_display_validation_removed": true,
+    "one_click_connection_verified_on_device": true,
+    "session_exclusivity_and_stop_rules_retained": true,
+    "previous_with_pin_sha256": "c7743c2d85557a87f71e0207e9b4a359d4d7ca660fed02497471126f44b74133",
+    "screenshot": "build/ct9-ui/device-no-pin.png"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-25",
+  "firmware": "2.0.3-ct11",
+  "scope": "Web hold-duration display only; version updated; control backend unchanged from ct10",
+  "build": {
+    "esp_idf": "v5.5.1",
+    "bytes": 2586880,
+    "sha256": "af6be3239e5ac4fbd2ade4b3f3ac8f13ae6ee2d6d7f517a607962b2ba934b646",
+    "passed": true
+  },
+  "web_checks": {
+    "regressions": "passed",
+    "elapsed_time_monotonic_and_100ms_refresh": "passed",
+    "release_freezes_despite_late_stop_receipt": "passed",
+    "background_offline_and_global_stop_cancel_timer": "passed",
+    "browser_fixture_press_ms": 2500,
+    "browser_fixture_display": "本次按住 2.6 秒"
+  },
+  "backend_source_byte_identical_to_ct10": true,
+  "role_changed": false,
+  "prior_backend_and_voice_evidence": "startup-ct10.json",
+  "page_sha256": "7e5ffc6303a03bdc44bd6eb0e59a86891602836a24434d37bef8792c770e79ee",
+  "deployment_record": "startup-ct11.json",
+  "duration_is": "Browser input duration including request preparation/network delay, not actuator or mechanical movement duration"
+}

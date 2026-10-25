@@ -69,7 +69,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct7")')
+                 'set(PROJECT_VER "2.0.3-ct12")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
@@ -98,7 +98,7 @@ def main():
                  '    // Use main thread to call the tool',
                  '    if (tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water") {\n'
                  '        int ticket = CyberTrackActionClaim(id, tool_name.c_str());\n'
-                 '        if (!ticket) { ReplyError(id, "Action request duplicate, busy, offline or queue full"); return; }\n'
+                 '        if (!ticket) { ReplyError(id, "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"); return; }\n'
                  '        arguments.AddProperty(Property("_ct_ticket", kPropertyTypeInteger, ticket));\n'
                  '    }\n'
                  '    // Use main thread to call the tool')
@@ -115,17 +115,21 @@ def main():
     replace_once(app, '    protocol_->OnAudioChannelClosed([this, &board]() {',
                  '    protocol_->OnAudioChannelClosed([this, &board]() {\n        CyberTrackActionLink(false);')
     replace_once(app, 'void Application::Reboot() {',
-                 'void Application::Reboot() {\n    CyberTrackActionLink(false);')
+                 'void Application::Reboot() {\n    CyberTrackShutdown();')
     replace_once(app, 'bool Application::UpgradeFirmware(Ota& ota, const std::string& url) {',
-                 'bool Application::UpgradeFirmware(Ota& ota, const std::string& url) {\n    CyberTrackActionLink(false);')
+                 'bool Application::UpgradeFirmware(Ota& ota, const std::string& url) {\n    CyberTrackShutdown();')
     replace_once(source / "main/protocols/websocket_protocol.cc", '#include "websocket_protocol.h"',
                  '#include "websocket_protocol.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"')
     replace_once(source / "main/protocols/websocket_protocol.cc", 'void WebsocketProtocol::CloseAudioChannel() {',
                  'void WebsocketProtocol::CloseAudioChannel() {\n    CyberTrackActionLink(false);')
     for name in ("water_policy.h", "water_policy.c"):
         shutil.copy2(ROOT / "firmware/esp32-linx/main" / name, board / name)
-    for name in ("cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_outputs.h"):
+    for name in ("cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
         shutil.copy2(HERE / name, board / name)
+    page = (HERE / "web/index.html").read_text()
+    if ')CTWEB"' in page:
+        raise SystemExit("Page contains reserved raw-string delimiter")
+    (board / "web_page.h").write_text('#pragma once\nstatic const char CyberTrackPage[] = R"CTWEB(' + page + ')CTWEB";\n')
     (board / "cybertrack").mkdir(exist_ok=True)
     shutil.copy2(ROOT / "firmware/include/cybertrack/control.h", board / "cybertrack/control.h")
     shutil.copy2(ROOT / "firmware/src/control.c", board / "cybertrack_control.c")

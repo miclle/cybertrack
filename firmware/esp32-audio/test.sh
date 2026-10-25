@@ -18,6 +18,10 @@ c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/action_test.cc \
   build/audio-host/water_policy.o -o build/audio-host/action_test
 build/audio-host/action_test
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
+  -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/sessions_test.cc \
+  build/audio-host/water_policy.o -o build/audio-host/sessions_test
+build/audio-host/sessions_test
 mkdir -p build/audio-host/stubs/driver
 for header in gpio ledc; do
   echo '#include "output_stub.h"' > "build/audio-host/stubs/driver/$header.h"

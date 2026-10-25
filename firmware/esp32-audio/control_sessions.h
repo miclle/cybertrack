@@ -1,0 +1,161 @@
+#pragma once
+#include "action_guard.h"
+
+// All methods run under the adapter mutex, including the 5 ms deadline tick.
+// One expiring web session coexists with voice; active web lanes have priority.
+class ControlSessions {
+public:
+    static constexpr uint64_t LeaseMs = 2000, WindowMs = 1500;
+    static constexpr unsigned DriveLeaseMs = 600;
+    AudioActionGuard guard;
+    bool wifi = false, voice = false, shutdown = false;
+    uint32_t owner = 0, window = 0;
+    uint32_t drive_id = 0, drive_renewal = 0;
+
+    void Tick(uint64_t now, bool pressed, bool output_fault = false) {
+        if (owner && (now < heartbeat_ || now - heartbeat_ >= LeaseMs || !wifi || shutdown)) {
+            owner = 0;
+            StopWeb(now);
+        }
+        if (pressed && !pressed_) Stop(now);
+        if (drive_id && (now >= drive_until_ || now < drive_started_)) StopWeb(now);
+        pressed_ = pressed;
+        guard.Tick(now, !shutdown && !output_fault && wifi && (owner || voice), pressed, false);
+        if (drive_id && !guard.Moving()) StopWeb(now);
+        if (!guard.Moving()) web_targets_ &= ~AudioActionGuard::MoveOnly;
+        if (!guard.Watering()) web_targets_ &= ~AudioActionGuard::WaterOnly;
+    }
+    void Stop(uint64_t now) {
+        guard.Stop(now);
+        web_targets_ = 0;
+        window_valid_ = false;
+        drive_id = drive_renewal = 0;
+    }
+    void VoiceLink(uint64_t now, bool online) {
+        if (online && !voice) guard.NewVoiceSession();
+        voice = online;
+        if (!online) {
+            guard.CancelPending();
+            if (!(web_targets_ & AudioActionGuard::MoveOnly)) guard.StopMove(now);
+            if (!(web_targets_ & AudioActionGuard::WaterOnly)) guard.StopWater(now);
+        }
+    }
+    void WifiLink(uint64_t now, bool online) {
+        wifi = online;
+        if (!online) { voice = false; owner = 0; Stop(now); }
+    }
+    void Shutdown(uint64_t now) {
+        shutdown = true; owner = 0; voice = false; Stop(now);
+    }
+    uint32_t Acquire(uint64_t now) {
+        if (owner || !wifi || shutdown || generation_ == UINT32_MAX)
+            return 0;
+        window_valid_ = false; // Opening a page must not interrupt voice work.
+        owner = ++generation_;
+        heartbeat_ = now;
+        window_issued_ = now;
+        sequence_ = 0;
+        return owner;
+    }
+    bool Owns(uint32_t session) const { return session && owner == session; }
+    bool Heartbeat(uint64_t now, uint32_t session) {
+        if (!Owns(session) || now < heartbeat_ || now - heartbeat_ >= LeaseMs || window == UINT32_MAX)
+            return false;
+        heartbeat_ = now;
+        ++window;
+        window_issued_ = now;
+        window_valid_ = guard.motion.online && !guard.motion.held && !guard.motion.clock_fault && !guard.spray.clock_fault;
+        return true;
+    }
+    bool Release(uint64_t now, uint32_t session) {
+        if (!Owns(session)) return false;
+        owner = 0;
+        StopWeb(now);
+        return true;
+    }
+    int VoiceClaim(uint64_t now, int rpc, AudioActionGuard::Target target) {
+        return wifi && voice && !shutdown && !(web_targets_ & target) ? guard.Claim(now, rpc, target) : 0;
+    }
+    const char* WebAction(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window,
+                          AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction) {
+        const char* error = Consume(now, session, seq, command_window, WindowMs);
+        if (error) return error;
+        return StartWeb(now, target, move_ms, water_ms, direction);
+    }
+    const char* DriveStart(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window,
+                           const char* direction, int water_ms) {
+        const char* error = Consume(now, session, seq, command_window, DriveLeaseMs);
+        if (error) return error;
+        const char* result = StartWeb(now, water_ms ? AudioActionGuard::Both : AudioActionGuard::MoveOnly,
+                                             DriveLeaseMs, water_ms, direction);
+        if (!std::strcmp(result, "accepted")) {
+            drive_id = seq; drive_renewal = 1;
+            drive_started_ = now; drive_until_ = now + DriveLeaseMs;
+        }
+        return result;
+    }
+    const char* DriveRenew(uint64_t now, uint32_t session, uint32_t id, uint32_t renewal) {
+        if (!Owns(session)) return "session_expired";
+        if (!id || id != drive_id || !renewal || renewal != drive_renewal || renewal == UINT32_MAX)
+            return "drive_cancelled";
+        if (now >= drive_until_ || !guard.RenewWebMove(now, DriveLeaseMs)) {
+            StopWeb(now); return "drive_cancelled";
+        }
+        ++drive_renewal; // A response is required before the next renewal. Duplicates cannot extend motion.
+        drive_until_ = now + DriveLeaseMs;
+        heartbeat_ = now; // Renew ownership, but never refresh an old action window.
+        return "renewed";
+    }
+    const char* DriveStop(uint64_t now, uint32_t session, uint32_t id) {
+        if (!Owns(session)) return "session_expired";
+        if (!id) return "invalid_request";
+        // Tombstone even an unseen start: release may overtake a delayed pointer-down request.
+        if (id > sequence_) sequence_ = id;
+        if (drive_id && id >= drive_id) {
+            guard.StopMove(now);
+            web_targets_ &= ~AudioActionGuard::MoveOnly;
+            drive_id = drive_renewal = 0;
+        }
+        return "ok";
+    }
+    const char* MoveSource() const { return !guard.Moving() ? "none" : (web_targets_ & AudioActionGuard::MoveOnly) ? "web" : "voice"; }
+    const char* WaterSource() const { return !guard.Watering() ? "none" : (web_targets_ & AudioActionGuard::WaterOnly) ? "web" : "voice"; }
+private:
+    unsigned web_targets_ = 0;
+    void StopWeb(uint64_t now) {
+        if (web_targets_ & AudioActionGuard::MoveOnly) guard.StopMove(now);
+        if (web_targets_ & AudioActionGuard::WaterOnly) guard.StopWater(now);
+        web_targets_ = 0;
+        drive_id = drive_renewal = 0;
+        window_valid_ = false;
+    }
+    const char* StartWeb(uint64_t now, AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction) {
+        if (const char* error = AudioActionGuard::Validate(target, move_ms, water_ms, direction)) return error;
+        // Cancel only conflicting queued voice work. Never resume it after web control ends.
+        guard.CancelPending(target);
+        bool preempted = false;
+        if ((target & AudioActionGuard::MoveOnly) && guard.Moving() && !(web_targets_ & AudioActionGuard::MoveOnly)) {
+            guard.StopMove(now); preempted = true;
+        }
+        if ((target & AudioActionGuard::WaterOnly) && guard.Watering() && !(web_targets_ & AudioActionGuard::WaterOnly)) {
+            guard.StopWater(now); preempted = true;
+        }
+        // Keep the configured operation interval; the user must press again after cooling, never queue a restart.
+        if (preempted) return "voice_preempted";
+        const char* result = guard.WebRequest(now, target, move_ms, water_ms, direction);
+        if (!std::strcmp(result, "accepted")) web_targets_ |= target;
+        return result;
+    }
+    const char* Consume(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window, uint64_t max_age) {
+        if (!Owns(session)) return "session_expired";
+        if (!seq || seq <= sequence_) return "duplicate_request";
+        sequence_ = seq; // Failed requests are consumed too; never retry an action.
+        if (!window_valid_ || command_window != window || now < window_issued_ || now - window_issued_ >= max_age)
+            return "stale_request";
+        window_valid_ = false; // One command per device-issued window, including rejected commands.
+        return nullptr;
+    }
+    uint64_t heartbeat_ = 0, window_issued_ = 0, drive_until_ = 0, drive_started_ = 0;
+    uint32_t generation_ = 0, sequence_ = 0;
+    bool pressed_ = false, window_valid_ = false;
+};

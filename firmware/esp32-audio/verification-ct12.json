@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-25",
+  "firmware": "2.0.3-ct12",
+  "scope": "Audio-board movement and water cooldowns unified to 200 ms; adaptive web polling; matching voice rules",
+  "build": {
+    "esp_idf": "v5.5.1",
+    "bytes": 2587088,
+    "sha256": "d4e0c5695325fa41772e21b81bfafe9b5b5cf8e8cf493c0f70f8c2347aa1f276",
+    "passed": true
+  },
+  "host_checks": {
+    "asan_ubsan_state_action_sessions_outputs": "passed",
+    "both_lanes_199ms_reject_200ms_accept_all_stop_paths": "passed",
+    "repeated_stop_does_not_extend_interval": "passed",
+    "actual_mcp_json_http_handlers": "passed",
+    "web_short_cooldown_poll_and_existing_hold_timer_regressions": "passed"
+  },
+  "role": {
+    "sha256": "357ed1e57b78daa6dfa3680859a6987cab0b8d5908777028ce8a21c99d1c311b",
+    "platform_saved_reopened_exact_readback": true,
+    "other_settings_preserved": true,
+    "screenshot": "build/ct12-ui/role-saved.png"
+  },
+  "limitations": [
+    "200 ms is an interaction interval, not thermal protection or measured mechanical stopping time",
+    "Standalone water firmware policy unchanged",
+    "No powered acceptance or new spoken end-to-end regression yet"
+  ],
+  "deployment_record": "startup-ct12.json",
+  "device_checks": "passed; see startup-ct12.json",
+  "page_sha256": "c277dcac9a863f8ea8449f0fdac127da66584537015579dbc7b2797cade655a5"
+}

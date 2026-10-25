@@ -17,9 +17,27 @@ int main() {
         assert(!g.Claim(1,4,G::MoveOnly) && !g.Claim(1,5,G::WaterOnly));
         g.Tick(3000,true,false); assert(!g.Moving() && g.Watering());
         assert(G::Remaining(g.spray,3000)==2000);
+        assert(!g.Claim(3199,6,G::MoveOnly));
+        g.Tick(3200,true,false); assert(g.Claim(3200,7,G::MoveOnly));
         g.Tick(5000,true,false); assert(!g.Watering());
-        assert(!g.Claim(5999,6,G::MoveOnly));
-        g.Tick(6000,true,false); assert(g.Claim(6000,7,G::MoveOnly) && g.Claim(6000,8,G::WaterOnly));
+        assert(!g.Claim(5199,8,G::WaterOnly));
+        g.Tick(5200,true,false); assert(g.Claim(5200,9,G::WaterOnly));
+    }
+    // Both lanes use the same 200 ms interval for every stop path.
+    for(G::Target lane : {G::MoveOnly,G::WaterOnly}) for(int mode=0;mode<5;++mode) {
+        G g;g.Tick(0,true,false);
+        int ticket=g.Claim(0,1,lane);
+        if(lane==G::MoveOnly) assert(is(g.Move(0,ticket,100,"forward"),"accepted"));
+        else assert(is(g.Water(0,ticket,100),"accepted"));
+        if(mode==0) g.Tick(100,true,false);
+        else if(mode==1) {if(lane==G::MoveOnly)g.StopMove(100);else g.StopWater(100);}
+        else if(mode==2)g.Stop(100);
+        else g.Tick(100,mode!=3,mode==4);
+        assert(!g.Moving()&&!g.Watering());
+        g.Tick(150,true,false);g.Stop(150); // Repeated stop must not extend the interval.
+        assert(g.Claim(150,2,lane==G::MoveOnly?G::WaterOnly:G::MoveOnly));
+        g.Tick(299,true,false);assert(!g.Claim(299,3,lane));
+        g.Tick(300,true,false);assert(g.Claim(300,4,lane));
     }
     for (bool water_first : {false,true}) {
         G g; g.Tick(0,true,false);
