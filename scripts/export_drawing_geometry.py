@@ -25,6 +25,7 @@ V = App.Vector
 # Columns of each matrix define an explicit world-to-page mapping. Front page
 # horizontal is +X; side is +Y; top has rear (+Y) at the top of the sheet.
 matrices = {
+    'iso': ((2**-.5,2**-.5,0),(-6**-.5,6**-.5,(2/3)**.5),(3**-.5,-3**-.5,3**-.5)),
     'front': ((1,0,0),(0,0,1),(0,-1,0)),
     'rear': ((-1,0,0),(0,0,1),(0,1,0)),
     'side': ((0,1,0),(0,0,1),(1,0,0)),
@@ -161,6 +162,20 @@ for key,names,view in [
 project('drive_face',['LowerTub'],'side',clip=[73.3,-36,28,87.01,36,73])
 project('drive_bottom',['LowerTub','BottomServiceCover']+[o.Name for o in objects if o.Name.startswith('BottomCoverScrew')],'bottom')
 project('drive_cover',['BottomServiceCover'],'bottom')
+
+# Individually isolated, hidden-line-removed shapes for exhaustive assembly cards.
+# Preserve CAD object identity: a compound is not a procurement quantity.
+details = {}
+for o in objects:
+    project('part_'+o.Name, [o.Name], 'iso')
+    details[o.Name] = {
+        **bounds[o.Name], 'category': o.Category, 'solids': len(o.Shape.Solids),
+        'evidence': getattr(o, 'EvidenceBasis', ''),
+        'service_group': getattr(o, 'ServiceGroup', ''),
+    }
+(OUT/'assembly-details.json').write_text(json.dumps({
+    'source_sha256': source_hash, 'objects': details,
+}, ensure_ascii=False, indent=2))
 
 assert source_hash==sha(source), 'Source CAD changed during readback'
 App.closeDocument(doc.Name)
