@@ -30,7 +30,7 @@
 
 [L298N 台架程序与完整接线说明](../firmware/esp32-motor-bench/README.md)现为 **0.2.2-l298n-bench**：原 ESP32-S3 N16R8 台架板 GPIO4→ENA、GPIO5→IN1、GPIO6→IN2；ENB 接 GND，IN3／IN4 本轮留空且 B 路不接电机，两路常高使能跳帽取下；独立板载稳压跳帽保留，+5V 不连接 ESP32。
 
-程序每次先 `a`，3 秒内单独 `f`／`r` 请求一次 1 kHz、约 60% PWM、**10 秒**动作，之后冷却 1 秒且须等轴完全停稳；BOOT／s 停止、松开不恢复，先撤销 ENA 再改变双方向输入。10 秒来自用户在 200 ms 首测后的观察需求，不是新板持续负载能力验收。以上引脚仅为此独立台架分配，不冻结整机 GPIO，也不适用于现有音频板。
+程序每次先 `a`，3 秒内单独 `f`／`r` 请求一次 1 kHz、约 60% PWM、**10 秒**动作，之后冷却 1 秒且须等轴完全停稳；BOOT／s 停止、松开不恢复，先撤销 ENA 再改变双方向输入。10 秒来自用户在 200 ms 首测后的观察需求，不是新板持续负载能力验收。以上引脚仅为此独立台架分配，不冻结整机 GPIO，也不适用于现有面包板。
 
 2026-10-25 用户报告：驱动独立及恢复控制线后的 +12V 约 12 V、+5V 约 5 V；ENA／IN1／IN2／ENB 均接近 0 V。0.2.0 发送一次 a／f 后收到自动关闭回执，用户确认电机短暂转动后停下、无异响或其他异常，并断开 12 V，见[首测记录](../firmware/esp32-motor-bench/first-pulse-verification.json)。随后按用户要求将期限改为 10 秒，0.2.1 主机 ASan／UBSan 策略、实际任务模拟 I/O、早期／第 9 秒停止及五处 API 故障回归和 ESP-IDF v5.5.1 编译通过，见[软件验证](../firmware/esp32-motor-bench/verification-10s.json)。0.2.1 已在驱动断电时完成[应用烧录及启动／s 关闭检查](../firmware/esp32-motor-bench/startup-verification-10s.json)，串口保持连接。随后用户已确认两次 40%／10 秒反转正常停止，首次方向与正转相反、无异响／异常发热／重启；第二次启动和运行母线基本保持 12 V，见[40% 反转记录](../firmware/esp32-motor-bench/reverse-40pct-verification.json)。按请求升级 0.2.2 至约 60% PWM，主机回归／编译以及[驱动断电下的烧录／启动／s 关闭检查](../firmware/esp32-motor-bench/startup-verification-60pct.json)均通过；随后完成一次 60%／10 秒反转，用户确认启动及运行母线约 12 V、较 40% 更快更顺畅并正常停止，无异响、异常发热或重启，且已断开 12 V，见[60% 记录](../firmware/esp32-motor-bench/reverse-60pct-verification.json)。带载 BOOT、电流／温升、扭矩和复位默认关闭未验收。
 
