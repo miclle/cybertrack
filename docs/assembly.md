@@ -217,7 +217,7 @@ USB 调试在冠盖拆下状态下进行，线尾从上方引出；未增加外�
 
 盖、盖螺钉、电机连轴、端面螺钉、履带螺钉均做连续保守实体扫掠；履带总成外抽检查0…60 mm共61个姿态／侧。工具检查只覆盖电机Ø2批头／Ø4杆及履带Ø4直杆，不覆盖手掌和把手。编码器尾部、线缆、柔性过程、实物螺纹啮合和制造公差均不在这次几何通过结论内。
 
-[固定结构](../hardware/model/drive-mount.png) · [底视](../hardware/model/drive-bottom.png) · [分解示意](../hardware/model/drive-service.png) · [报告](../hardware/model/drive-mount-0.29-audit.json)。分解图同时错开零件仅为读图，不能替代上述顺序。图纸第24–26页给出接口与拆装说明。
+[固定结构](../hardware/model/drive-mount.png) · [底视](../hardware/model/drive-bottom.png) · [分解示意](../hardware/model/drive-service.png) · [报告](../hardware/model/archive/reports/drive-mount-0.29-audit.json)。分解图同时错开零件仅为读图，不能替代上述顺序。图纸第24–26页给出接口与拆装说明。
 
 ## 0.32 简化一体底盘与电机维护
 
