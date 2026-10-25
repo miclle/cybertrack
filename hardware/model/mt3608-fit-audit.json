@@ -1,0 +1,135 @@
+{
+  "size_lwt_mm": [
+    37,
+    18,
+    6
+  ],
+  "bbox_mm": [
+    25.0,
+    -17.0,
+    82.0,
+    43.0,
+    20.0,
+    88.0
+  ],
+  "placement_difference_mm3": 0.0,
+  "objects_checked": 409,
+  "overlaps": [],
+  "nearby_distances": [
+    {
+      "object": "LowerTub",
+      "distance_mm": 1.9999999999999716
+    },
+    {
+      "object": "KeelLid",
+      "distance_mm": 2.0
+    },
+    {
+      "object": "L298NCarrier",
+      "distance_mm": 3.8327535793473566
+    },
+    {
+      "object": "RearBulkhead",
+      "distance_mm": 4.9999999999999964
+    },
+    {
+      "object": "NeckYokeL",
+      "distance_mm": 5.0
+    },
+    {
+      "object": "ShoulderRailL",
+      "distance_mm": 5.0
+    },
+    {
+      "object": "L298NEnvelope",
+      "distance_mm": 5.00024999375031
+    },
+    {
+      "object": "L298NClampNutL1",
+      "distance_mm": 5.338408002391722
+    },
+    {
+      "object": "L298NClampScrewL1",
+      "distance_mm": 5.8034531628727795
+    },
+    {
+      "object": "L298NSidePadL1",
+      "distance_mm": 6.600189391222043
+    },
+    {
+      "object": "L298NRearPadL1",
+      "distance_mm": 7.778174593052026
+    },
+    {
+      "object": "WaterGunCradle",
+      "distance_mm": 7.9354286469243505
+    },
+    {
+      "object": "NeckOuterWebL",
+      "distance_mm": 8.0
+    },
+    {
+      "object": "NeckPedestal",
+      "distance_mm": 9.433981132056603
+    },
+    {
+      "object": "EffectMOSL",
+      "distance_mm": 9.46374661537385
+    }
+  ],
+  "bare_board_removal": {
+    "method": "exact rectangular continuous sweep 90 mm down",
+    "removed_first": [
+      "BottomCoverScrew0",
+      "BottomCoverScrew1",
+      "BottomCoverScrew2",
+      "BottomCoverScrew3",
+      "BottomCoverScrew4",
+      "BottomCoverScrew5",
+      "BottomServiceCover",
+      "L298NBottomPadL",
+      "L298NBottomPadR",
+      "L298NCarrier",
+      "L298NClampNutL0",
+      "L298NClampNutL1",
+      "L298NClampNutR0",
+      "L298NClampNutR1",
+      "L298NClampScrewL0",
+      "L298NClampScrewL1",
+      "L298NClampScrewR0",
+      "L298NClampScrewR1",
+      "L298NEnvelope",
+      "L298NMountScrewL",
+      "L298NMountScrewR",
+      "L298NRearPadL0",
+      "L298NRearPadL1",
+      "L298NRearPadR0",
+      "L298NRearPadR1",
+      "L298NSidePadL0",
+      "L298NSidePadL1",
+      "L298NSidePadR0",
+      "L298NSidePadR1",
+      "MotorFaceScrewL0",
+      "MotorFaceScrewL1",
+      "MotorFaceScrewL2",
+      "MotorFaceScrewL3",
+      "MotorL"
+    ],
+    "disconnect_first": "MT3608 leads and left-motor/driver wiring; release future fixture",
+    "prerequisite": "Follow existing left motor and L298N removal procedures, including power tray and left track removal.",
+    "overlaps": [],
+    "left_motor_retained_negative_control_mm3": 13511.361684558982,
+    "passed": true
+  },
+  "passed": true,
+  "physical_fit_verified": false,
+  "thermal_verified": false,
+  "mounting_complete": false,
+  "limits": [
+    "Overall measured box only; PCB contacts, terminals and adjustment position unmeasured.",
+    "End spaces are design budgets, not a complete wiring or adjustment path.",
+    "Service requires driver and left motor removal; fixture and physical handling remain unresolved."
+  ],
+  "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+  "saved_and_reopened": true
+}

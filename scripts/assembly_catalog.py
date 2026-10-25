@@ -10,7 +10,7 @@ SYSTEMS = OrderedDict([
  ('A', ('履带与传动', '动力固定 / 接口 / 维护', '先核对成品履带接口，再装电机、联轴器及履带；电机维护先移去本侧履带与电源。')),
  ('B', ('底盘、外甲与停止操作区', '外形尺寸 / 动力固定', '底盘电机固定面为一体；外甲分件固定工艺未定。停止按钮仅占位，不表示已接入切断电路。')),
  ('C', ('充电宝与底部检修', '电源承托架 / 动力维护', '先铺垫、安放电源和拉带，再装内托架4点紧固；最后合底盖6点。拆底盖不要求先取电源。')),
- ('D', ('L298N 驱动板托框', '驱动板布局 / 固定与拆装', '机外装垫、螺母和侧压件，核实安全接触边后装板；托框从底部装入，两颗螺钉固定。')),
+ ('D', ('L298N 托框与 MT3608 升压板', '驱动板布局 / 固定与拆装', '机外装垫、螺母和侧压件，核实安全接触边后装板；托框从底部装入，两颗螺钉固定。')),
  ('E', ('固定颈架与线束导向', '总装爆炸 / 内部路线', '固定颈架承托头舱；层板、套筒、横梁并非已验证活动关节。结构连接工艺仍需细化。')),
  ('F', ('头部下壳、面罩与侧甲', '头舱冠盖 / 总装爆炸', '以头壳为位置基准；面罩、耳部和后脑饰件的分体固定工艺未定；侧格栅不代表扬声器已定位。')),
  ('G', ('冠盖及随盖饰件', '头舱冠盖 / 整板上取', '冠盖组件由4颗候选螺钉固定在头壳上；拆时上提65。图卡内饰件随盖移动，工艺未定。')),
@@ -29,7 +29,7 @@ def system(name, obj):
     if name.startswith(('BackpackArc','ArcClamp','ArcLiner','ArcBottomPad','ArcInsert','ArcScrew','Effect')): return 'N'
     if name.startswith(('Track','Motor','DriveCoupler')): return 'A'
     if name.startswith(('Battery','BottomCover','BottomService','PowerBank')): return 'C'
-    if name.startswith('L298N'): return 'D'
+    if name.startswith(('L298N','MT3608')): return 'D'
     if name.startswith('Breadboard') or name == 'ElectronicsTray': return 'H'
     if name.startswith('Ultrasonic'): return 'I'
     if name.startswith('WaterGun'): return 'J'
@@ -106,6 +106,8 @@ def relation(name, obj, group):
         return '电源及内部承托架', '柔性拉带占位，随内托架下取；固定端、材料和承载待实物确认。'
     if name == 'BottomServiceCover' or name.startswith('BottomCoverScrew'):
         return '底盘底部检修口', '一体底盖用6颗M2.5级候选螺钉；拆下可检修驱动板，电源内托架保持。'
+    if name=='MT3608Envelope':
+        return 'L298N左上方干舱／固定待设计','37×18×6用户实测包络；先拆L298N托框及左电机后裸板下取90；接头、固定及散热待验。'
     if name.startswith('L298N'):
         target = 'L298N开口托框'
         note = '在机外装配侧压组件；板边安全接触位置、材料及压紧量须核实，不使用未测PCB孔。'

@@ -4313,7 +4313,7 @@
       "passed": true
     },
     "KeelLid": {
-      "boolean_pairs_tested": 121,
+      "boolean_pairs_tested": 122,
       "overlaps": [],
       "nearby": [
         {
@@ -4462,6 +4462,10 @@
         },
         {
           "object": "ChestBadge",
+          "distance_mm": 2.0
+        },
+        {
+          "object": "MT3608Envelope",
           "distance_mm": 2.0
         },
         {
@@ -6927,6 +6931,6 @@
   "passed": true,
   "physical_fit_verified": false,
   "limits": "Cap release sampled; bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
-  "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+  "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
   "saved_and_reopened": true
 }
