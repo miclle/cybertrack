@@ -1,11 +1,12 @@
 {
-  "revision": "0.42",
-  "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
-  "pdf_sha256": "5d72143d32db2dc54f3fcf44a19f429dc949063a8804729ecca9f6e9a32c28a4",
-  "page_count": 61,
-  "object_count": 366,
-  "annotated_object_count": 366,
-  "nonphysical_space_count": 44,
+  "revision": "0.43",
+  "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+  "pdf_sha256": "dbd1605d49fecee467cc9bc4ebca243b6ffc3cb03f52376098db93c8af94b9d5",
+  "page_count": 70,
+  "card_count": 240,
+  "object_count": 409,
+  "annotated_object_count": 409,
+  "nonphysical_space_count": 63,
   "missing_objects": [],
   "removed_old_pages": [
     2,
@@ -17,80 +18,87 @@
     31
   ],
   "geometry_modified_by_pdf_generator": false,
-  "geometry_change_audit_sha256": "72ab9220275ba8ef67f8579946157bc3d44f6f19b065a3be3e6b13e33319d658",
+  "geometry_change_audit_sha256": "0a64c22fd202468d6c08295f89b396a158a1653ab496592c0e941cf973324e16",
   "physical_fit_verified": false,
   "system_page_ranges": {
     "A": [
-      29,
-      30,
-      31
+      31,
+      32,
+      33
     ],
     "B": [
-      32,
-      33,
-      34
+      34,
+      35,
+      36
     ],
     "C": [
-      34,
-      35
-    ],
-    "D": [
-      35,
       36,
       37
     ],
-    "E": [
+    "D": [
       37,
       38,
       39
     ],
-    "F": [
+    "E": [
       39,
       40,
+      41
+    ],
+    "F": [
       41,
       42,
-      43
-    ],
-    "G": [
       43,
       44,
       45
     ],
-    "H": [
+    "G": [
       45,
-      46
-    ],
-    "I": [
       46,
       47
     ],
-    "J": [
+    "H": [
       47,
       48
     ],
-    "K": [
+    "I": [
       48,
-      49,
-      50,
-      51
+      49
     ],
-    "L": [
+    "J": [
+      49,
+      50
+    ],
+    "K": [
+      50,
       51,
       52,
+      53
+    ],
+    "L": [
       53,
-      54
+      54,
+      55,
+      56
     ],
     "N": [
-      55,
-      56,
-      57
-    ],
-    "M": [
       57,
       58,
       59,
       60,
-      61
+      61,
+      62,
+      63
+    ],
+    "M": [
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70
     ]
   },
   "entries": {
@@ -108,12 +116,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "夹环与本体接触界面",
       "assembly_note": "夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。",
-      "page": 55
+      "page": 57
     },
     "ArcBottomPadR": {
       "id": "CT002",
@@ -129,12 +137,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "夹环与本体接触界面",
       "assembly_note": "夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。",
-      "page": 55
+      "page": 57
     },
     "ArcClampOuterL0": {
       "id": "CT003",
@@ -150,12 +158,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "背包一体内半夹环",
       "assembly_note": "每半环两颗外侧M2.5级候选螺钉；上环带顶部限位，拆螺钉后外移35。间隙、材料、强度和手部操作待验。",
-      "page": 55
+      "page": 57
     },
     "ArcClampOuterL1": {
       "id": "CT004",
@@ -171,12 +179,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "背包一体内半夹环",
       "assembly_note": "每半环两颗外侧M2.5级候选螺钉；上环带顶部限位，拆螺钉后外移35。间隙、材料、强度和手部操作待验。",
-      "page": 55
+      "page": 57
     },
     "ArcClampOuterR0": {
       "id": "CT005",
@@ -192,12 +200,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "背包一体内半夹环",
       "assembly_note": "每半环两颗外侧M2.5级候选螺钉；上环带顶部限位，拆螺钉后外移35。间隙、材料、强度和手部操作待验。",
-      "page": 55
+      "page": 57
     },
     "ArcClampOuterR1": {
       "id": "CT006",
@@ -213,12 +221,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "背包一体内半夹环",
       "assembly_note": "每半环两颗外侧M2.5级候选螺钉；上环带顶部限位，拆螺钉后外移35。间隙、材料、强度和手部操作待验。",
-      "page": 55
+      "page": 57
     },
     "ArcInsertL00": {
       "id": "CT007",
@@ -234,12 +242,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "一体内半夹环的盲孔",
       "assembly_note": "共8个M2.5级候选嵌件；与外侧螺钉配套，不作为已验证螺纹啮合或工艺参数。",
-      "page": 55
+      "page": 57
     },
     "ArcInsertL01": {
       "id": "CT008",
@@ -255,12 +263,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "一体内半夹环的盲孔",
       "assembly_note": "共8个M2.5级候选嵌件；与外侧螺钉配套，不作为已验证螺纹啮合或工艺参数。",
-      "page": 55
+      "page": 57
     },
     "ArcInsertL10": {
       "id": "CT009",
@@ -276,12 +284,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "一体内半夹环的盲孔",
       "assembly_note": "共8个M2.5级候选嵌件；与外侧螺钉配套，不作为已验证螺纹啮合或工艺参数。",
-      "page": 55
+      "page": 57
     },
     "ArcInsertL11": {
       "id": "CT010",
@@ -297,12 +305,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "一体内半夹环的盲孔",
       "assembly_note": "共8个M2.5级候选嵌件；与外侧螺钉配套，不作为已验证螺纹啮合或工艺参数。",
-      "page": 55
+      "page": 57
     },
     "ArcInsertR00": {
       "id": "CT011",
@@ -318,12 +326,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "一体内半夹环的盲孔",
       "assembly_note": "共8个M2.5级候选嵌件；与外侧螺钉配套，不作为已验证螺纹啮合或工艺参数。",
-      "page": 55
+      "page": 57
     },
     "ArcInsertR01": {
       "id": "CT012",
@@ -339,12 +347,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "一体内半夹环的盲孔",
       "assembly_note": "共8个M2.5级候选嵌件；与外侧螺钉配套，不作为已验证螺纹啮合或工艺参数。",
-      "page": 55
+      "page": 57
     },
     "ArcInsertR10": {
       "id": "CT013",
@@ -360,12 +368,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "一体内半夹环的盲孔",
       "assembly_note": "共8个M2.5级候选嵌件；与外侧螺钉配套，不作为已验证螺纹啮合或工艺参数。",
-      "page": 55
+      "page": 57
     },
     "ArcInsertR11": {
       "id": "CT014",
@@ -381,12 +389,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "一体内半夹环的盲孔",
       "assembly_note": "共8个M2.5级候选嵌件；与外侧螺钉配套，不作为已验证螺纹啮合或工艺参数。",
-      "page": 55
+      "page": 57
     },
     "ArcLinerInnerL0": {
       "id": "CT015",
@@ -407,7 +415,7 @@
       "system": "N",
       "target": "夹环与本体接触界面",
       "assembly_note": "夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。",
-      "page": 55
+      "page": 57
     },
     "ArcLinerInnerL1": {
       "id": "CT016",
@@ -428,7 +436,7 @@
       "system": "N",
       "target": "夹环与本体接触界面",
       "assembly_note": "夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。",
-      "page": 55
+      "page": 57
     },
     "ArcLinerInnerR0": {
       "id": "CT017",
@@ -449,7 +457,7 @@
       "system": "N",
       "target": "夹环与本体接触界面",
       "assembly_note": "夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。",
-      "page": 55
+      "page": 57
     },
     "ArcLinerInnerR1": {
       "id": "CT018",
@@ -470,7 +478,7 @@
       "system": "N",
       "target": "夹环与本体接触界面",
       "assembly_note": "夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。",
-      "page": 55
+      "page": 57
     },
     "ArcLinerOuterL0": {
       "id": "CT019",
@@ -491,7 +499,7 @@
       "system": "N",
       "target": "夹环与本体接触界面",
       "assembly_note": "夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。",
-      "page": 55
+      "page": 57
     },
     "ArcLinerOuterL1": {
       "id": "CT020",
@@ -512,7 +520,7 @@
       "system": "N",
       "target": "夹环与本体接触界面",
       "assembly_note": "夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。",
-      "page": 55
+      "page": 57
     },
     "ArcLinerOuterR0": {
       "id": "CT021",
@@ -533,7 +541,7 @@
       "system": "N",
       "target": "夹环与本体接触界面",
       "assembly_note": "夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。",
-      "page": 55
+      "page": 57
     },
     "ArcLinerOuterR1": {
       "id": "CT022",
@@ -554,7 +562,7 @@
       "system": "N",
       "target": "夹环与本体接触界面",
       "assembly_note": "夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。",
-      "page": 55
+      "page": 57
     },
     "ArcScrewL00": {
       "id": "CT023",
@@ -570,12 +578,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "外半夹环 → 内半夹环嵌件",
       "assembly_note": "共8颗M2.5级候选，从外侧操作；取出路径35，工具杆只覆盖Ø3直杆。",
-      "page": 56
+      "page": 58
     },
     "ArcScrewL01": {
       "id": "CT024",
@@ -591,12 +599,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "外半夹环 → 内半夹环嵌件",
       "assembly_note": "共8颗M2.5级候选，从外侧操作；取出路径35，工具杆只覆盖Ø3直杆。",
-      "page": 56
+      "page": 58
     },
     "ArcScrewL10": {
       "id": "CT025",
@@ -612,12 +620,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "外半夹环 → 内半夹环嵌件",
       "assembly_note": "共8颗M2.5级候选，从外侧操作；取出路径35，工具杆只覆盖Ø3直杆。",
-      "page": 56
+      "page": 58
     },
     "ArcScrewL11": {
       "id": "CT026",
@@ -633,12 +641,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "外半夹环 → 内半夹环嵌件",
       "assembly_note": "共8颗M2.5级候选，从外侧操作；取出路径35，工具杆只覆盖Ø3直杆。",
-      "page": 56
+      "page": 58
     },
     "ArcScrewR00": {
       "id": "CT027",
@@ -654,12 +662,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "外半夹环 → 内半夹环嵌件",
       "assembly_note": "共8颗M2.5级候选，从外侧操作；取出路径35，工具杆只覆盖Ø3直杆。",
-      "page": 56
+      "page": 58
     },
     "ArcScrewR01": {
       "id": "CT028",
@@ -675,12 +683,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "外半夹环 → 内半夹环嵌件",
       "assembly_note": "共8颗M2.5级候选，从外侧操作；取出路径35，工具杆只覆盖Ø3直杆。",
-      "page": 56
+      "page": 58
     },
     "ArcScrewR10": {
       "id": "CT029",
@@ -696,12 +704,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "外半夹环 → 内半夹环嵌件",
       "assembly_note": "共8颗M2.5级候选，从外侧操作；取出路径35，工具杆只覆盖Ø3直杆。",
-      "page": 56
+      "page": 58
     },
     "ArcScrewR11": {
       "id": "CT030",
@@ -717,12 +725,12 @@
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "外半夹环 → 内半夹环嵌件",
       "assembly_note": "共8颗M2.5级候选，从外侧操作；取出路径35，工具杆只覆盖Ø3直杆。",
-      "page": 56
+      "page": 58
     },
     "ArcToolL00": {
       "id": "CT031",
@@ -743,7 +751,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "ArcToolL01": {
       "id": "CT032",
@@ -764,7 +772,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "ArcToolL10": {
       "id": "CT033",
@@ -785,7 +793,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "ArcToolL11": {
       "id": "CT034",
@@ -806,7 +814,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "ArcToolR00": {
       "id": "CT035",
@@ -827,7 +835,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "ArcToolR01": {
       "id": "CT036",
@@ -848,7 +856,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "ArcToolR10": {
       "id": "CT037",
@@ -869,7 +877,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "ArcToolR11": {
       "id": "CT038",
@@ -890,7 +898,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "AudioEarGrilleL": {
       "id": "CT039",
@@ -911,7 +919,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 39
+      "page": 41
     },
     "AudioEarGrilleR": {
       "id": "CT040",
@@ -932,7 +940,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 39
+      "page": 41
     },
     "AudioEarRingL": {
       "id": "CT041",
@@ -953,7 +961,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 39
+      "page": 41
     },
     "AudioEarRingR": {
       "id": "CT042",
@@ -974,7 +982,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 39
+      "page": 41
     },
     "AudioSideGuardL": {
       "id": "CT043",
@@ -995,7 +1003,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 40
+      "page": 42
     },
     "AudioSideGuardR": {
       "id": "CT044",
@@ -1016,7 +1024,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 40
+      "page": 42
     },
     "BackpackArcL": {
       "id": "CT045",
@@ -1037,7 +1045,7 @@
       "system": "N",
       "target": "背包外侧两道夹环及底托",
       "assembly_note": "Ø25.5×70规划本体；先拆本侧4螺钉及两外半夹环，再上取90。非实测，无高压引线或通电集成。",
-      "page": 56
+      "page": 58
     },
     "BackpackArcR": {
       "id": "CT046",
@@ -1058,7 +1066,7 @@
       "system": "N",
       "target": "背包外侧两道夹环及底托",
       "assembly_note": "Ø25.5×70规划本体；先拆本侧4螺钉及两外半夹环，再上取90。非实测，无高压引线或通电集成。",
-      "page": 56
+      "page": 58
     },
     "BackpackShell": {
       "id": "CT047",
@@ -1079,7 +1087,7 @@
       "system": "L",
       "target": "双瓶护壳及外侧一体内半夹环",
       "assembly_note": "0.42新增两侧夹环支撑、底托和连接肋；原液瓶舱几何保持。夹持、材料、液体共存与制造未验收。",
-      "page": 51
+      "page": 53
     },
     "BackpackSpine": {
       "id": "CT048",
@@ -1100,7 +1108,7 @@
       "system": "L",
       "target": "低位双瓶背包 / 对应护舱",
       "assembly_note": "护壳、后护甲及识别饰条按模型位置装配；连接、分体或一体制造方式尚未细化。",
-      "page": 51
+      "page": 53
     },
     "BaseCableGrommet": {
       "id": "CT049",
@@ -1121,7 +1129,7 @@
       "system": "E",
       "target": "底盘中央干区 → 颈架 → 头舱后槽",
       "assembly_note": "线束经护口和限位桥进入托盘后缘；Ø6为规划。拆托盘先断开对外线束，真实弯曲待验。",
-      "page": 37
+      "page": 39
     },
     "BatteryHatch": {
       "id": "CT050",
@@ -1142,7 +1150,7 @@
       "system": "C",
       "target": "底盘四处电源固定点",
       "assembly_note": "配4垫圈、4颗M2.5级候选螺钉及嵌件；先托住电源，再紧固；底盖可独立拆卸。",
-      "page": 34
+      "page": 36
     },
     "BatteryInsertLFront": {
       "id": "CT051",
@@ -1163,7 +1171,7 @@
       "system": "C",
       "target": "底盘电源固定柱",
       "assembly_note": "4处M2.5级配套嵌件候选；安装工艺和孔配合待定，不指定压装或热熔参数。",
-      "page": 34
+      "page": 36
     },
     "BatteryInsertLRear": {
       "id": "CT052",
@@ -1184,7 +1192,7 @@
       "system": "C",
       "target": "底盘电源固定柱",
       "assembly_note": "4处M2.5级配套嵌件候选；安装工艺和孔配合待定，不指定压装或热熔参数。",
-      "page": 34
+      "page": 36
     },
     "BatteryInsertRFront": {
       "id": "CT053",
@@ -1205,7 +1213,7 @@
       "system": "C",
       "target": "底盘电源固定柱",
       "assembly_note": "4处M2.5级配套嵌件候选；安装工艺和孔配合待定，不指定压装或热熔参数。",
-      "page": 34
+      "page": 36
     },
     "BatteryInsertRRear": {
       "id": "CT054",
@@ -1226,7 +1234,7 @@
       "system": "C",
       "target": "底盘电源固定柱",
       "assembly_note": "4处M2.5级配套嵌件候选；安装工艺和孔配合待定，不指定压装或热熔参数。",
-      "page": 34
+      "page": 36
     },
     "BatteryPad54N29": {
       "id": "CT055",
@@ -1247,7 +1255,7 @@
       "system": "C",
       "target": "电源内托架 → 充电宝底面",
       "assembly_note": "四处承托垫；先铺垫再放电源。材料、压缩量与胶粘方式待核。",
-      "page": 34
+      "page": 36
     },
     "BatteryPad54N90": {
       "id": "CT056",
@@ -1268,7 +1276,7 @@
       "system": "C",
       "target": "电源内托架 → 充电宝底面",
       "assembly_note": "四处承托垫；先铺垫再放电源。材料、压缩量与胶粘方式待核。",
-      "page": 34
+      "page": 36
     },
     "BatteryPadN54N29": {
       "id": "CT057",
@@ -1289,7 +1297,7 @@
       "system": "C",
       "target": "电源内托架 → 充电宝底面",
       "assembly_note": "四处承托垫；先铺垫再放电源。材料、压缩量与胶粘方式待核。",
-      "page": 34
+      "page": 36
     },
     "BatteryPadN54N90": {
       "id": "CT058",
@@ -1310,7 +1318,7 @@
       "system": "C",
       "target": "电源内托架 → 充电宝底面",
       "assembly_note": "四处承托垫；先铺垫再放电源。材料、压缩量与胶粘方式待核。",
-      "page": 34
+      "page": 36
     },
     "BatteryPullStrap": {
       "id": "CT059",
@@ -1331,7 +1339,7 @@
       "system": "C",
       "target": "电源及内部承托架",
       "assembly_note": "柔性拉带占位，随内托架下取；固定端、材料和承载待实物确认。",
-      "page": 34
+      "page": 36
     },
     "BatteryScrewLFront": {
       "id": "CT060",
@@ -1352,7 +1360,7 @@
       "system": "C",
       "target": "内托架固定耳 → 底盘嵌件",
       "assembly_note": "从下方紧固，4颗M2.5级候选；须先托住电源；沉孔与头型未采购定型。",
-      "page": 34
+      "page": 36
     },
     "BatteryScrewLRear": {
       "id": "CT061",
@@ -1373,7 +1381,7 @@
       "system": "C",
       "target": "内托架固定耳 → 底盘嵌件",
       "assembly_note": "从下方紧固，4颗M2.5级候选；须先托住电源；沉孔与头型未采购定型。",
-      "page": 34
+      "page": 36
     },
     "BatteryScrewRFront": {
       "id": "CT062",
@@ -1394,7 +1402,7 @@
       "system": "C",
       "target": "内托架固定耳 → 底盘嵌件",
       "assembly_note": "从下方紧固，4颗M2.5级候选；须先托住电源；沉孔与头型未采购定型。",
-      "page": 34
+      "page": 36
     },
     "BatteryScrewRRear": {
       "id": "CT063",
@@ -1415,7 +1423,7 @@
       "system": "C",
       "target": "内托架固定耳 → 底盘嵌件",
       "assembly_note": "从下方紧固，4颗M2.5级候选；须先托住电源；沉孔与头型未采购定型。",
-      "page": 34
+      "page": 36
     },
     "BatterySupportWasherLFront": {
       "id": "CT064",
@@ -1436,7 +1444,7 @@
       "system": "C",
       "target": "电源内托架固定耳承压面",
       "assembly_note": "与对应电源螺钉配套定位；承压、材质和实际垫圈标准待核。",
-      "page": 35
+      "page": 37
     },
     "BatterySupportWasherLRear": {
       "id": "CT065",
@@ -1457,7 +1465,7 @@
       "system": "C",
       "target": "电源内托架固定耳承压面",
       "assembly_note": "与对应电源螺钉配套定位；承压、材质和实际垫圈标准待核。",
-      "page": 35
+      "page": 37
     },
     "BatterySupportWasherRFront": {
       "id": "CT066",
@@ -1478,7 +1486,7 @@
       "system": "C",
       "target": "电源内托架固定耳承压面",
       "assembly_note": "与对应电源螺钉配套定位；承压、材质和实际垫圈标准待核。",
-      "page": 35
+      "page": 37
     },
     "BatterySupportWasherRRear": {
       "id": "CT067",
@@ -1499,7 +1507,7 @@
       "system": "C",
       "target": "电源内托架固定耳承压面",
       "assembly_note": "与对应电源螺钉配套定位；承压、材质和实际垫圈标准待核。",
-      "page": 35
+      "page": 37
     },
     "BottomCoverScrew0": {
       "id": "CT068",
@@ -1520,7 +1528,7 @@
       "system": "C",
       "target": "底盘底部检修口",
       "assembly_note": "一体底盖用6颗M2.5级候选螺钉；拆下可检修驱动板，电源内托架保持。",
-      "page": 35
+      "page": 37
     },
     "BottomCoverScrew1": {
       "id": "CT069",
@@ -1541,7 +1549,7 @@
       "system": "C",
       "target": "底盘底部检修口",
       "assembly_note": "一体底盖用6颗M2.5级候选螺钉；拆下可检修驱动板，电源内托架保持。",
-      "page": 35
+      "page": 37
     },
     "BottomCoverScrew2": {
       "id": "CT070",
@@ -1562,7 +1570,7 @@
       "system": "C",
       "target": "底盘底部检修口",
       "assembly_note": "一体底盖用6颗M2.5级候选螺钉；拆下可检修驱动板，电源内托架保持。",
-      "page": 35
+      "page": 37
     },
     "BottomCoverScrew3": {
       "id": "CT071",
@@ -1583,7 +1591,7 @@
       "system": "C",
       "target": "底盘底部检修口",
       "assembly_note": "一体底盖用6颗M2.5级候选螺钉；拆下可检修驱动板，电源内托架保持。",
-      "page": 35
+      "page": 37
     },
     "BottomCoverScrew4": {
       "id": "CT072",
@@ -1604,7 +1612,7 @@
       "system": "C",
       "target": "底盘底部检修口",
       "assembly_note": "一体底盖用6颗M2.5级候选螺钉；拆下可检修驱动板，电源内托架保持。",
-      "page": 35
+      "page": 37
     },
     "BottomCoverScrew5": {
       "id": "CT073",
@@ -1625,7 +1633,7 @@
       "system": "C",
       "target": "底盘底部检修口",
       "assembly_note": "一体底盖用6颗M2.5级候选螺钉；拆下可检修驱动板，电源内托架保持。",
-      "page": 35
+      "page": 37
     },
     "BottomServiceCover": {
       "id": "CT074",
@@ -1646,7 +1654,7 @@
       "system": "C",
       "target": "底盘底部检修口",
       "assembly_note": "一体底盖用6颗M2.5级候选螺钉；拆下可检修驱动板，电源内托架保持。",
-      "page": 35
+      "page": 37
     },
     "BreadboardEnvelope": {
       "id": "CT075",
@@ -1667,7 +1675,7 @@
       "system": "H",
       "target": "浅托盘101×86内区",
       "assembly_note": "整组100×85×36规划，包含扬声器/麦克风/屏幕/ESP32及线束；内部位置、总高和防脱未实测。",
-      "page": 45
+      "page": 47
     },
     "BreadboardInsert0": {
       "id": "CT076",
@@ -1688,7 +1696,7 @@
       "system": "H",
       "target": "头壳四支柱",
       "assembly_note": "M2.5级嵌件候选，配托盘侧耳螺钉；嵌件规格、安装工艺及柱根强度待验。",
-      "page": 45
+      "page": 47
     },
     "BreadboardInsert1": {
       "id": "CT077",
@@ -1709,7 +1717,7 @@
       "system": "H",
       "target": "头壳四支柱",
       "assembly_note": "M2.5级嵌件候选，配托盘侧耳螺钉；嵌件规格、安装工艺及柱根强度待验。",
-      "page": 45
+      "page": 47
     },
     "BreadboardInsert2": {
       "id": "CT078",
@@ -1730,7 +1738,7 @@
       "system": "H",
       "target": "头壳四支柱",
       "assembly_note": "M2.5级嵌件候选，配托盘侧耳螺钉；嵌件规格、安装工艺及柱根强度待验。",
-      "page": 45
+      "page": 47
     },
     "BreadboardInsert3": {
       "id": "CT079",
@@ -1751,7 +1759,7 @@
       "system": "H",
       "target": "头壳四支柱",
       "assembly_note": "M2.5级嵌件候选，配托盘侧耳螺钉；嵌件规格、安装工艺及柱根强度待验。",
-      "page": 45
+      "page": 47
     },
     "BreadboardScrew0": {
       "id": "CT080",
@@ -1772,7 +1780,7 @@
       "system": "H",
       "target": "托盘侧耳 → 头壳四支柱",
       "assembly_note": "孔位X±57、Y−40/−5；4颗M2.5级候选，上方直杆操作。长度及扭矩待核。",
-      "page": 45
+      "page": 47
     },
     "BreadboardScrew1": {
       "id": "CT081",
@@ -1793,7 +1801,7 @@
       "system": "H",
       "target": "托盘侧耳 → 头壳四支柱",
       "assembly_note": "孔位X±57、Y−40/−5；4颗M2.5级候选，上方直杆操作。长度及扭矩待核。",
-      "page": 45
+      "page": 47
     },
     "BreadboardScrew2": {
       "id": "CT082",
@@ -1814,7 +1822,7 @@
       "system": "H",
       "target": "托盘侧耳 → 头壳四支柱",
       "assembly_note": "孔位X±57、Y−40/−5；4颗M2.5级候选，上方直杆操作。长度及扭矩待核。",
-      "page": 45
+      "page": 47
     },
     "BreadboardScrew3": {
       "id": "CT083",
@@ -1835,7 +1843,7 @@
       "system": "H",
       "target": "托盘侧耳 → 头壳四支柱",
       "assembly_note": "孔位X±57、Y−40/−5；4颗M2.5级候选，上方直杆操作。长度及扭矩待核。",
-      "page": 45
+      "page": 47
     },
     "BreadboardTool0": {
       "id": "CT084",
@@ -1856,7 +1864,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "BreadboardTool1": {
       "id": "CT085",
@@ -1877,7 +1885,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "BreadboardTool2": {
       "id": "CT086",
@@ -1898,7 +1906,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "BreadboardTool3": {
       "id": "CT087",
@@ -1919,7 +1927,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "BrowArmorL": {
       "id": "CT088",
@@ -1940,7 +1948,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "BrowArmorR": {
       "id": "CT089",
@@ -1961,7 +1969,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "BubbleBottleRemovalSpace": {
       "id": "CT090",
@@ -1982,7 +1990,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 57
+      "page": 63
     },
     "BubbleBottomPad": {
       "id": "CT091",
@@ -2003,7 +2011,7 @@
       "system": "L",
       "target": "对应瓶底面 / 侧壁与底托之间",
       "assembly_note": "1 mm候选软垫；先铺垫再放瓶，压缩量和防滑保持力待验。",
-      "page": 51
+      "page": 53
     },
     "BubbleDipTubeSpace": {
       "id": "CT092",
@@ -2024,7 +2032,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 58
+      "page": 64
     },
     "BubbleFingerSpace": {
       "id": "CT093",
@@ -2045,7 +2053,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 58
+      "page": 64
     },
     "BubbleGunBaseInsert1": {
       "id": "CT094",
@@ -2066,7 +2074,7 @@
       "system": "K",
       "target": "泡泡枪空底托 → 对应侧肩梁",
       "assembly_note": "每侧2套M3级嵌件及基座螺钉候选；先固定空底托再装枪，孔轴随15°安装面。",
-      "page": 48
+      "page": 50
     },
     "BubbleGunBaseInsert2": {
       "id": "CT095",
@@ -2087,7 +2095,7 @@
       "system": "K",
       "target": "泡泡枪空底托 → 对应侧肩梁",
       "assembly_note": "每侧2套M3级嵌件及基座螺钉候选；先固定空底托再装枪，孔轴随15°安装面。",
-      "page": 48
+      "page": 50
     },
     "BubbleGunBaseScrew1": {
       "id": "CT096",
@@ -2108,7 +2116,7 @@
       "system": "K",
       "target": "泡泡枪空底托 → 对应侧肩梁",
       "assembly_note": "每侧2套M3级嵌件及基座螺钉候选；先固定空底托再装枪，孔轴随15°安装面。",
-      "page": 48
+      "page": 50
     },
     "BubbleGunBaseScrew2": {
       "id": "CT097",
@@ -2129,7 +2137,7 @@
       "system": "K",
       "target": "泡泡枪空底托 → 对应侧肩梁",
       "assembly_note": "每侧2套M3级嵌件及基座螺钉候选；先固定空底托再装枪，孔轴随15°安装面。",
-      "page": 48
+      "page": 50
     },
     "BubbleGunBaseTool1": {
       "id": "CT098",
@@ -2150,7 +2158,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 58
+      "page": 64
     },
     "BubbleGunBaseTool2": {
       "id": "CT099",
@@ -2171,7 +2179,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 58
+      "page": 64
     },
     "BubbleGunConnectorService": {
       "id": "CT100",
@@ -2192,7 +2200,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 58
+      "page": 64
     },
     "BubbleGunCradle": {
       "id": "CT101",
@@ -2213,7 +2221,7 @@
       "system": "K",
       "target": "泡泡枪同一底座组件",
       "assembly_note": "整体圆环和两段槽随底座拆装；前环无分缝无螺钉。分对象表达特征，制造合并范围须核对。",
-      "page": 49
+      "page": 51
     },
     "BubbleGunFrontFoot": {
       "id": "CT102",
@@ -2234,7 +2242,7 @@
       "system": "K",
       "target": "泡泡枪成品模块 → 圆环 / 阶梯槽",
       "assembly_note": "成品内部示意或外形包络，非新增采购件；整枪穿整体环入槽、胶辅助固定，槽面与最大宽待核。",
-      "page": 49
+      "page": 51
     },
     "BubbleGunGearcase": {
       "id": "CT103",
@@ -2255,7 +2263,7 @@
       "system": "K",
       "target": "泡泡枪成品模块 → 圆环 / 阶梯槽",
       "assembly_note": "成品内部示意或外形包络，非新增采购件；整枪穿整体环入槽、胶辅助固定，槽面与最大宽待核。",
-      "page": 49
+      "page": 51
     },
     "BubbleGunHoseClearance": {
       "id": "CT104",
@@ -2276,7 +2284,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 58
+      "page": 64
     },
     "BubbleGunHoseRoute": {
       "id": "CT105",
@@ -2297,7 +2305,7 @@
       "system": "L",
       "target": "对应瓶顶部 → 对应枪接头",
       "assembly_note": "清水管Ø5实测、泡泡管Ø4候选；从瓶顶插入，不穿后护甲或侧壁。接头、密封与管长待核。",
-      "page": 51
+      "page": 53
     },
     "BubbleGunHoseService": {
       "id": "CT106",
@@ -2318,7 +2326,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 58
+      "page": 64
     },
     "BubbleGunInspectionEnvelope": {
       "id": "CT107",
@@ -2339,7 +2347,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 59
+      "page": 65
     },
     "BubbleGunLeadClearance": {
       "id": "CT108",
@@ -2360,7 +2368,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 59
+      "page": 65
     },
     "BubbleGunLeadConnector": {
       "id": "CT109",
@@ -2381,7 +2389,7 @@
       "system": "K",
       "target": "对应枪尾端 → 干区线束",
       "assembly_note": "线束Ø3、插头16×10×10为候选；先解除固定再拔插。端子、固定与应力释放待定。",
-      "page": 49
+      "page": 51
     },
     "BubbleGunLeadRoute": {
       "id": "CT110",
@@ -2402,7 +2410,7 @@
       "system": "K",
       "target": "对应枪尾端 → 干区线束",
       "assembly_note": "线束Ø3、插头16×10×10为候选；先解除固定再拔插。端子、固定与应力释放待定。",
-      "page": 49
+      "page": 51
     },
     "BubbleGunLowerPadRear": {
       "id": "CT111",
@@ -2423,7 +2431,7 @@
       "system": "K",
       "target": "泡泡枪阶梯槽底",
       "assembly_note": "0.6厚候选垫承托薄片底面；胶辅助固定，材料与粘接方式待验。",
-      "page": 49
+      "page": 51
     },
     "BubbleGunMotor": {
       "id": "CT112",
@@ -2444,7 +2452,7 @@
       "system": "K",
       "target": "泡泡枪成品模块 → 圆环 / 阶梯槽",
       "assembly_note": "成品内部示意或外形包络，非新增采购件；整枪穿整体环入槽、胶辅助固定，槽面与最大宽待核。",
-      "page": 50
+      "page": 52
     },
     "BubbleGunMountingTab": {
       "id": "CT113",
@@ -2465,7 +2473,7 @@
       "system": "K",
       "target": "泡泡枪成品模块 → 圆环 / 阶梯槽",
       "assembly_note": "成品内部示意或外形包络，非新增采购件；整枪穿整体环入槽、胶辅助固定，槽面与最大宽待核。",
-      "page": 50
+      "page": 52
     },
     "BubbleGunRing": {
       "id": "CT114",
@@ -2486,7 +2494,7 @@
       "system": "K",
       "target": "泡泡枪同一底座组件",
       "assembly_note": "整体圆环和两段槽随底座拆装；前环无分缝无螺钉。分对象表达特征，制造合并范围须核对。",
-      "page": 50
+      "page": 52
     },
     "BubbleGunShell": {
       "id": "CT115",
@@ -2507,7 +2515,7 @@
       "system": "K",
       "target": "泡泡枪成品模块 → 圆环 / 阶梯槽",
       "assembly_note": "成品内部示意或外形包络，非新增采购件；整枪穿整体环入槽、胶辅助固定，槽面与最大宽待核。",
-      "page": 50
+      "page": 52
     },
     "BubbleGunSlotWall1": {
       "id": "CT116",
@@ -2528,7 +2536,7 @@
       "system": "K",
       "target": "泡泡枪同一底座组件",
       "assembly_note": "整体圆环和两段槽随底座拆装；前环无分缝无螺钉。分对象表达特征，制造合并范围须核对。",
-      "page": 50
+      "page": 52
     },
     "BubbleGunSlotWall2": {
       "id": "CT117",
@@ -2549,7 +2557,7 @@
       "system": "K",
       "target": "泡泡枪同一底座组件",
       "assembly_note": "整体圆环和两段槽随底座拆装；前环无分缝无螺钉。分对象表达特征，制造合并范围须核对。",
-      "page": 50
+      "page": 52
     },
     "BubbleGunSlotWall3": {
       "id": "CT118",
@@ -2570,7 +2578,7 @@
       "system": "K",
       "target": "泡泡枪同一底座组件",
       "assembly_note": "整体圆环和两段槽随底座拆装；前环无分缝无螺钉。分对象表达特征，制造合并范围须核对。",
-      "page": 50
+      "page": 52
     },
     "BubbleGunSlotWall4": {
       "id": "CT119",
@@ -2591,7 +2599,7 @@
       "system": "K",
       "target": "泡泡枪同一底座组件",
       "assembly_note": "整体圆环和两段槽随底座拆装；前环无分缝无螺钉。分对象表达特征，制造合并范围须核对。",
-      "page": 50
+      "page": 52
     },
     "BubbleGunSlotWall5": {
       "id": "CT120",
@@ -2612,7 +2620,7 @@
       "system": "K",
       "target": "泡泡枪同一底座组件",
       "assembly_note": "整体圆环和两段槽随底座拆装；前环无分缝无螺钉。分对象表达特征，制造合并范围须核对。",
-      "page": 50
+      "page": 52
     },
     "BubbleGunSlotWall6": {
       "id": "CT121",
@@ -2633,7 +2641,7 @@
       "system": "K",
       "target": "泡泡枪同一底座组件",
       "assembly_note": "整体圆环和两段槽随底座拆装；前环无分缝无螺钉。分对象表达特征，制造合并范围须核对。",
-      "page": 50
+      "page": 52
     },
     "BubbleGunStopAccess": {
       "id": "CT122",
@@ -2654,7 +2662,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 59
+      "page": 65
     },
     "BubbleGunWheel": {
       "id": "CT123",
@@ -2675,7 +2683,7 @@
       "system": "K",
       "target": "泡泡枪成品模块 → 圆环 / 阶梯槽",
       "assembly_note": "成品内部示意或外形包络，非新增采购件；整枪穿整体环入槽、胶辅助固定，槽面与最大宽待核。",
-      "page": 51
+      "page": 53
     },
     "BubbleLidMark": {
       "id": "CT124",
@@ -2696,7 +2704,7 @@
       "system": "L",
       "target": "低位双瓶背包 / 对应护舱",
       "assembly_note": "护壳、后护甲及识别饰条按模型位置装配；连接、分体或一体制造方式尚未细化。",
-      "page": 51
+      "page": 53
     },
     "BubbleModule": {
       "id": "CT125",
@@ -2717,7 +2725,7 @@
       "system": "L",
       "target": "对应开窗底托 / 绑带",
       "assembly_note": "成品瓶含盖Ø48.8×114、150 mL；不拆分打印瓶盖。顶部插管；松绑带后整瓶上取150。",
-      "page": 52
+      "page": 54
     },
     "BubblePod": {
       "id": "CT126",
@@ -2738,7 +2746,7 @@
       "system": "L",
       "target": "对应瓶底托 → 湿舱底部",
       "assembly_note": "每个开窗底托2套M3级候选嵌件/螺钉固定；先装空底托，再放软垫、瓶与绑带。",
-      "page": 52
+      "page": 54
     },
     "BubblePodInsertL": {
       "id": "CT127",
@@ -2759,7 +2767,7 @@
       "system": "L",
       "target": "对应瓶底托 → 湿舱底部",
       "assembly_note": "每个开窗底托2套M3级候选嵌件/螺钉固定；先装空底托，再放软垫、瓶与绑带。",
-      "page": 52
+      "page": 54
     },
     "BubblePodInsertR": {
       "id": "CT128",
@@ -2780,7 +2788,7 @@
       "system": "L",
       "target": "对应瓶底托 → 湿舱底部",
       "assembly_note": "每个开窗底托2套M3级候选嵌件/螺钉固定；先装空底托，再放软垫、瓶与绑带。",
-      "page": 52
+      "page": 54
     },
     "BubblePodScrewL": {
       "id": "CT129",
@@ -2801,7 +2809,7 @@
       "system": "L",
       "target": "对应瓶底托 → 湿舱底部",
       "assembly_note": "每个开窗底托2套M3级候选嵌件/螺钉固定；先装空底托，再放软垫、瓶与绑带。",
-      "page": 52
+      "page": 54
     },
     "BubblePodScrewR": {
       "id": "CT130",
@@ -2822,7 +2830,7 @@
       "system": "L",
       "target": "对应瓶底托 → 湿舱底部",
       "assembly_note": "每个开窗底托2套M3级候选嵌件/螺钉固定；先装空底托，再放软垫、瓶与绑带。",
-      "page": 52
+      "page": 54
     },
     "BubbleRetentionBand": {
       "id": "CT131",
@@ -2843,7 +2851,7 @@
       "system": "L",
       "target": "对应瓶底托导槽 / 瓶体外侧",
       "assembly_note": "12×1候选可释放绑带与魔术贴搭接；后侧拉片释放，非刚性卡扣。张紧及防滑待验。",
-      "page": 52
+      "page": 54
     },
     "BubbleSidePad0": {
       "id": "CT132",
@@ -2864,7 +2872,7 @@
       "system": "L",
       "target": "对应瓶底面 / 侧壁与底托之间",
       "assembly_note": "1 mm候选软垫；先铺垫再放瓶，压缩量和防滑保持力待验。",
-      "page": 52
+      "page": 54
     },
     "BubbleSidePad1": {
       "id": "CT133",
@@ -2885,7 +2893,7 @@
       "system": "L",
       "target": "对应瓶底面 / 侧壁与底托之间",
       "assembly_note": "1 mm候选软垫；先铺垫再放瓶，压缩量和防滑保持力待验。",
-      "page": 52
+      "page": 54
     },
     "BubbleStrapAccessSpace": {
       "id": "CT134",
@@ -2906,7 +2914,7 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 59
+      "page": 65
     },
     "BubbleStrapClosure": {
       "id": "CT135",
@@ -2927,7 +2935,7 @@
       "system": "L",
       "target": "对应瓶底托导槽 / 瓶体外侧",
       "assembly_note": "12×1候选可释放绑带与魔术贴搭接；后侧拉片释放，非刚性卡扣。张紧及防滑待验。",
-      "page": 53
+      "page": 55
     },
     "CheekArmorL": {
       "id": "CT136",
@@ -2948,7 +2956,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 40
+      "page": 42
     },
     "CheekArmorR": {
       "id": "CT137",
@@ -2969,7 +2977,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 40
+      "page": 42
     },
     "ChestAccentL": {
       "id": "CT138",
@@ -2990,7 +2998,7 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 32
+      "page": 34
     },
     "ChestAccentR": {
       "id": "CT139",
@@ -3011,7 +3019,7 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 32
+      "page": 34
     },
     "ChestAudioPanel": {
       "id": "CT140",
@@ -3032,7 +3040,7 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 32
+      "page": 34
     },
     "ChestBadge": {
       "id": "CT141",
@@ -3053,7 +3061,7 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 32
+      "page": 34
     },
     "ChestGuardL": {
       "id": "CT142",
@@ -3074,7 +3082,7 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 32
+      "page": 34
     },
     "ChestGuardR": {
       "id": "CT143",
@@ -3095,7 +3103,7 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 32
+      "page": 34
     },
     "CrownEffectInsetL": {
       "id": "CT144",
@@ -3116,7 +3124,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "CrownEffectInsetR": {
       "id": "CT145",
@@ -3137,7 +3145,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "CrownEffectMarkLFront": {
       "id": "CT146",
@@ -3158,7 +3166,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "CrownEffectMarkLRear": {
       "id": "CT147",
@@ -3179,7 +3187,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "CrownEffectMarkRFront": {
       "id": "CT148",
@@ -3200,7 +3208,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "CrownEffectMarkRRear": {
       "id": "CT149",
@@ -3221,7 +3229,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "CrownFinL": {
       "id": "CT150",
@@ -3242,7 +3250,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "CrownFinR": {
       "id": "CT151",
@@ -3263,7 +3271,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "CrownForePlate": {
       "id": "CT152",
@@ -3284,7 +3292,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 43
+      "page": 45
     },
     "CrownInsertLFront": {
       "id": "CT153",
@@ -3305,7 +3313,7 @@
       "system": "G",
       "target": "头壳四处冠盖支座",
       "assembly_note": "配冠盖4颗M2.5级候选螺钉；嵌件孔配合及安装工艺待实物确认。",
-      "page": 44
+      "page": 46
     },
     "CrownInsertLRear": {
       "id": "CT154",
@@ -3326,7 +3334,7 @@
       "system": "G",
       "target": "头壳四处冠盖支座",
       "assembly_note": "配冠盖4颗M2.5级候选螺钉；嵌件孔配合及安装工艺待实物确认。",
-      "page": 44
+      "page": 46
     },
     "CrownInsertRFront": {
       "id": "CT155",
@@ -3347,7 +3355,7 @@
       "system": "G",
       "target": "头壳四处冠盖支座",
       "assembly_note": "配冠盖4颗M2.5级候选螺钉；嵌件孔配合及安装工艺待实物确认。",
-      "page": 44
+      "page": 46
     },
     "CrownInsertRRear": {
       "id": "CT156",
@@ -3368,7 +3376,7 @@
       "system": "G",
       "target": "头壳四处冠盖支座",
       "assembly_note": "配冠盖4颗M2.5级候选螺钉；嵌件孔配合及安装工艺待实物确认。",
-      "page": 44
+      "page": 46
     },
     "CrownRearBlade0": {
       "id": "CT157",
@@ -3389,7 +3397,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 44
+      "page": 46
     },
     "CrownRearBlade1": {
       "id": "CT158",
@@ -3410,7 +3418,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 44
+      "page": 46
     },
     "CrownRearBlade2": {
       "id": "CT159",
@@ -3431,7 +3439,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 44
+      "page": 46
     },
     "CrownRearCassette": {
       "id": "CT160",
@@ -3452,7 +3460,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 44
+      "page": 46
     },
     "CrownScrewLFront": {
       "id": "CT161",
@@ -3473,7 +3481,7 @@
       "system": "G",
       "target": "冠盖 → 头壳四处支座",
       "assembly_note": "4颗M2.5级候选；先对齐冠盖，确认无夹线再紧固；拆卸后冠盖上提65。",
-      "page": 44
+      "page": 46
     },
     "CrownScrewLRear": {
       "id": "CT162",
@@ -3494,7 +3502,7 @@
       "system": "G",
       "target": "冠盖 → 头壳四处支座",
       "assembly_note": "4颗M2.5级候选；先对齐冠盖，确认无夹线再紧固；拆卸后冠盖上提65。",
-      "page": 44
+      "page": 46
     },
     "CrownScrewRFront": {
       "id": "CT163",
@@ -3515,7 +3523,7 @@
       "system": "G",
       "target": "冠盖 → 头壳四处支座",
       "assembly_note": "4颗M2.5级候选；先对齐冠盖，确认无夹线再紧固；拆卸后冠盖上提65。",
-      "page": 44
+      "page": 46
     },
     "CrownScrewRRear": {
       "id": "CT164",
@@ -3536,7 +3544,7 @@
       "system": "G",
       "target": "冠盖 → 头壳四处支座",
       "assembly_note": "4颗M2.5级候选；先对齐冠盖，确认无夹线再紧固；拆卸后冠盖上提65。",
-      "page": 44
+      "page": 46
     },
     "CrownSideArmorL": {
       "id": "CT165",
@@ -3557,7 +3565,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 44
+      "page": 46
     },
     "CrownSideArmorR": {
       "id": "CT166",
@@ -3578,7 +3586,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 44
+      "page": 46
     },
     "CrownSpine": {
       "id": "CT167",
@@ -3599,7 +3607,7 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 44
+      "page": 46
     },
     "DriveCouplerL": {
       "id": "CT168",
@@ -3620,7 +3628,7 @@
       "system": "A",
       "target": "电机D轴 ↔ 履带驱动端",
       "assembly_note": "黄铜六角联轴器参考；装配长度、孔形和锁紧未实测，不据图指定顶丝。",
-      "page": 29
+      "page": 31
     },
     "DriveCouplerR": {
       "id": "CT169",
@@ -3641,7 +3649,7 @@
       "system": "A",
       "target": "电机D轴 ↔ 履带驱动端",
       "assembly_note": "黄铜六角联轴器参考；装配长度、孔形和锁紧未实测，不据图指定顶丝。",
-      "page": 29
+      "page": 31
     },
     "EarHubL": {
       "id": "CT170",
@@ -3662,7 +3670,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 40
+      "page": 42
     },
     "EarHubR": {
       "id": "CT171",
@@ -3683,7 +3691,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 40
+      "page": 42
     },
     "EarOuterArcL": {
       "id": "CT172",
@@ -3704,7 +3712,7 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 40
+      "page": 42
     },
     "EarOuterArcR": {
       "id": "CT173",
@@ -3725,367 +3733,1270 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 40
+      "page": 42
     },
     "EffectBuckL": {
       "id": "CT174",
       "name": "EffectBuckL",
-      "label": "降压板用户尺寸20×11×5 L",
+      "label": "Buck板／PCB与元件区候选 L",
       "bbox": [
         8.5,
-        -54.0,
-        68.5,
+        -55.25,
+        68.0,
         28.5,
-        -43.0,
-        73.5
+        -44.25,
+        73.0
       ],
       "category": "envelope",
       "solids": 1,
-      "evidence": "用户提供20×11×5，焊锡／端子／出线范围未单独确认；一效果一板为数量假设",
+      "evidence": "外包络MOS33×17×12（高假设）／降压20×11×5（用户）；PCB厚1.6、四边2.5无元件区均为新增假设，必须实测。",
       "service_group": "",
       "system": "N",
-      "target": "底盘效果板薄承板",
-      "assembly_note": "MOS 33×17×12（高暂定），降压板20×11×5（用户尺寸）。板孔、端子、支柱及板卡自身固定未定，不直接作为加工图。",
-      "page": 56
+      "target": "承板浅凹座与开窗压框",
+      "assembly_note": "MOS33×17×12／降压20×11×5；PCB厚1.6、四边无元件区2.5假设。机外拆框后上取20，实际板边必须核对。",
+      "page": 58
     },
     "EffectBuckR": {
       "id": "CT175",
       "name": "EffectBuckR",
-      "label": "降压板用户尺寸20×11×5 R",
+      "label": "Buck板／PCB与元件区候选 R",
       "bbox": [
         -28.5,
-        -54.0,
-        68.5,
+        -55.25,
+        68.0,
         -8.5,
-        -43.0,
-        73.5
+        -44.25,
+        73.0
       ],
       "category": "envelope",
       "solids": 1,
-      "evidence": "用户提供20×11×5，焊锡／端子／出线范围未单独确认；一效果一板为数量假设",
+      "evidence": "外包络MOS33×17×12（高假设）／降压20×11×5（用户）；PCB厚1.6、四边2.5无元件区均为新增假设，必须实测。",
       "service_group": "",
       "system": "N",
-      "target": "底盘效果板薄承板",
-      "assembly_note": "MOS 33×17×12（高暂定），降压板20×11×5（用户尺寸）。板孔、端子、支柱及板卡自身固定未定，不直接作为加工图。",
-      "page": 56
+      "target": "承板浅凹座与开窗压框",
+      "assembly_note": "MOS33×17×12／降压20×11×5；PCB厚1.6、四边无元件区2.5假设。机外拆框后上取20，实际板边必须核对。",
+      "page": 58
     },
     "EffectInsert0": {
       "id": "CT176",
       "name": "EffectInsert0",
-      "label": "薄承板M2.5级嵌件候选 0",
+      "label": "承板内柱M2.5级嵌件候选 0",
       "bbox": [
-        -41.0,
+        -49.0,
         -51.0,
-        69.0,
-        -37.0,
+        71.0,
+        -45.0,
         -47.0,
-        74.0
+        75.5
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "顶盖内柱向下开口盲孔",
       "assembly_note": "4个M2.5级候选嵌件；顶盖外表面不穿孔，配合、制造和强度待验。",
-      "page": 56
+      "page": 58
     },
     "EffectInsert1": {
       "id": "CT177",
       "name": "EffectInsert1",
-      "label": "薄承板M2.5级嵌件候选 1",
+      "label": "承板内柱M2.5级嵌件候选 1",
       "bbox": [
-        -41.0,
-        -31.0,
-        69.0,
-        -37.0,
-        -27.0,
-        74.0
+        -49.0,
+        -28.5,
+        71.0,
+        -45.0,
+        -24.5,
+        75.5
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "顶盖内柱向下开口盲孔",
       "assembly_note": "4个M2.5级候选嵌件；顶盖外表面不穿孔，配合、制造和强度待验。",
-      "page": 56
+      "page": 58
     },
     "EffectInsert2": {
       "id": "CT178",
       "name": "EffectInsert2",
-      "label": "薄承板M2.5级嵌件候选 2",
+      "label": "承板内柱M2.5级嵌件候选 2",
       "bbox": [
-        37.0,
+        45.0,
         -51.0,
-        69.0,
-        41.0,
+        71.0,
+        49.0,
         -47.0,
-        74.0
+        75.5
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "顶盖内柱向下开口盲孔",
       "assembly_note": "4个M2.5级候选嵌件；顶盖外表面不穿孔，配合、制造和强度待验。",
-      "page": 56
+      "page": 58
     },
     "EffectInsert3": {
       "id": "CT179",
       "name": "EffectInsert3",
-      "label": "薄承板M2.5级嵌件候选 3",
+      "label": "承板内柱M2.5级嵌件候选 3",
       "bbox": [
-        37.0,
-        -31.0,
-        69.0,
-        41.0,
-        -27.0,
-        74.0
+        45.0,
+        -28.5,
+        71.0,
+        49.0,
+        -24.5,
+        75.5
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "顶盖内柱向下开口盲孔",
       "assembly_note": "4个M2.5级候选嵌件；顶盖外表面不穿孔，配合、制造和强度待验。",
-      "page": 56
+      "page": 58
     },
     "EffectMOSL": {
       "id": "CT180",
       "name": "EffectMOSL",
-      "label": "效果MOS候选 33×17×12 L",
+      "label": "MOS板／PCB与元件区候选 L",
       "bbox": [
-        2.0,
-        -40.0,
-        68.5,
-        35.0,
-        -23.0,
-        80.5
+        6.5,
+        -40.75,
+        68.0,
+        39.5,
+        -23.75,
+        80.0
       ],
       "category": "envelope",
       "solids": 1,
-      "evidence": "通用图33×17，高12为预算；实际端子及可接触板边未测，未虚构PCB安装孔",
+      "evidence": "外包络MOS33×17×12（高假设）／降压20×11×5（用户）；PCB厚1.6、四边2.5无元件区均为新增假设，必须实测。",
       "service_group": "",
       "system": "N",
-      "target": "底盘效果板薄承板",
-      "assembly_note": "MOS 33×17×12（高暂定），降压板20×11×5（用户尺寸）。板孔、端子、支柱及板卡自身固定未定，不直接作为加工图。",
-      "page": 56
+      "target": "承板浅凹座与开窗压框",
+      "assembly_note": "MOS33×17×12／降压20×11×5；PCB厚1.6、四边无元件区2.5假设。机外拆框后上取20，实际板边必须核对。",
+      "page": 58
     },
     "EffectMOSR": {
       "id": "CT181",
       "name": "EffectMOSR",
-      "label": "效果MOS候选 33×17×12 R",
+      "label": "MOS板／PCB与元件区候选 R",
       "bbox": [
-        -35.0,
-        -40.0,
-        68.5,
-        -2.0,
-        -23.0,
-        80.5
+        -39.5,
+        -40.75,
+        68.0,
+        -6.5,
+        -23.75,
+        80.0
       ],
       "category": "envelope",
       "solids": 1,
-      "evidence": "通用图33×17，高12为预算；实际端子及可接触板边未测，未虚构PCB安装孔",
+      "evidence": "外包络MOS33×17×12（高假设）／降压20×11×5（用户）；PCB厚1.6、四边2.5无元件区均为新增假设，必须实测。",
       "service_group": "",
       "system": "N",
-      "target": "底盘效果板薄承板",
-      "assembly_note": "MOS 33×17×12（高暂定），降压板20×11×5（用户尺寸）。板孔、端子、支柱及板卡自身固定未定，不直接作为加工图。",
-      "page": 56
+      "target": "承板浅凹座与开窗压框",
+      "assembly_note": "MOS33×17×12／降压20×11×5；PCB厚1.6、四边无元件区2.5假设。机外拆框后上取20，实际板边必须核对。",
+      "page": 58
+    },
+    "EffectPortLBuckInner": {
+      "id": "CT182",
+      "name": "EffectPortLBuckInner",
+      "label": "板端接线空间候选 LBuckInner",
+      "bbox": [
+        4.5,
+        -51.75,
+        73.0,
+        8.5,
+        -47.75,
+        75.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "接线空间位置、方向和4 mm外伸均假设；不是选定连接器，不替代真实端子、针序及工具核对。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 65
+    },
+    "EffectPortLBuckOuter": {
+      "id": "CT183",
+      "name": "EffectPortLBuckOuter",
+      "label": "板端接线空间候选 LBuckOuter",
+      "bbox": [
+        28.5,
+        -51.75,
+        73.0,
+        32.5,
+        -47.75,
+        75.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "接线空间位置、方向和4 mm外伸均假设；不是选定连接器，不替代真实端子、针序及工具核对。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 65
+    },
+    "EffectPortLMOSInner": {
+      "id": "CT184",
+      "name": "EffectPortLMOSInner",
+      "label": "板端接线空间候选 LMOSInner",
+      "bbox": [
+        2.5,
+        -36.25,
+        73.0,
+        6.5,
+        -28.25,
+        77.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "接线空间位置、方向和4 mm外伸均假设；不是选定连接器，不替代真实端子、针序及工具核对。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 66
+    },
+    "EffectPortLMOSOuter": {
+      "id": "CT185",
+      "name": "EffectPortLMOSOuter",
+      "label": "板端接线空间候选 LMOSOuter",
+      "bbox": [
+        39.5,
+        -34.25,
+        73.0,
+        43.5,
+        -30.25,
+        77.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "接线空间位置、方向和4 mm外伸均假设；不是选定连接器，不替代真实端子、针序及工具核对。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 66
+    },
+    "EffectPortRBuckInner": {
+      "id": "CT186",
+      "name": "EffectPortRBuckInner",
+      "label": "板端接线空间候选 RBuckInner",
+      "bbox": [
+        -8.5000001,
+        -51.7500001,
+        72.9999999,
+        -4.4999999,
+        -47.7499999,
+        75.5000001
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "接线空间位置、方向和4 mm外伸均假设；不是选定连接器，不替代真实端子、针序及工具核对。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 66
+    },
+    "EffectPortRBuckOuter": {
+      "id": "CT187",
+      "name": "EffectPortRBuckOuter",
+      "label": "板端接线空间候选 RBuckOuter",
+      "bbox": [
+        -32.5000001,
+        -51.7500001,
+        72.9999999,
+        -28.4999999,
+        -47.7499999,
+        75.5000001
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "接线空间位置、方向和4 mm外伸均假设；不是选定连接器，不替代真实端子、针序及工具核对。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 66
+    },
+    "EffectPortRMOSInner": {
+      "id": "CT188",
+      "name": "EffectPortRMOSInner",
+      "label": "板端接线空间候选 RMOSInner",
+      "bbox": [
+        -6.5000001,
+        -36.2500001,
+        72.9999999,
+        -2.4999999,
+        -28.2499999,
+        77.5000001
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "接线空间位置、方向和4 mm外伸均假设；不是选定连接器，不替代真实端子、针序及工具核对。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 66
+    },
+    "EffectPortRMOSOuter": {
+      "id": "CT189",
+      "name": "EffectPortRMOSOuter",
+      "label": "板端接线空间候选 RMOSOuter",
+      "bbox": [
+        -43.5000001,
+        -34.2500001,
+        72.9999999,
+        -39.4999999,
+        -30.2499999,
+        77.5000001
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "接线空间位置、方向和4 mm外伸均假设；不是选定连接器，不替代真实端子、针序及工具核对。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 66
+    },
+    "EffectRetainerInsertLBuckInner": {
+      "id": "CT190",
+      "name": "EffectRetainerInsertLBuckInner",
+      "label": "压框M2级短嵌件候选 LBuckInner",
+      "bbox": [
+        3.1,
+        -51.15,
+        67.0,
+        5.9,
+        -48.35,
+        69.9
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "承板压框支柱",
+      "assembly_note": "8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。",
+      "page": 59
+    },
+    "EffectRetainerInsertLBuckOuter": {
+      "id": "CT191",
+      "name": "EffectRetainerInsertLBuckOuter",
+      "label": "压框M2级短嵌件候选 LBuckOuter",
+      "bbox": [
+        31.1,
+        -51.15,
+        67.0,
+        33.9,
+        -48.35,
+        69.9
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "承板压框支柱",
+      "assembly_note": "8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。",
+      "page": 59
+    },
+    "EffectRetainerInsertLMOSInner": {
+      "id": "CT192",
+      "name": "EffectRetainerInsertLMOSInner",
+      "label": "压框M2级短嵌件候选 LMOSInner",
+      "bbox": [
+        1.1,
+        -33.65,
+        67.0,
+        3.9,
+        -30.85,
+        69.9
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "承板压框支柱",
+      "assembly_note": "8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。",
+      "page": 59
+    },
+    "EffectRetainerInsertLMOSOuter": {
+      "id": "CT193",
+      "name": "EffectRetainerInsertLMOSOuter",
+      "label": "压框M2级短嵌件候选 LMOSOuter",
+      "bbox": [
+        42.1,
+        -33.65,
+        67.0,
+        44.9,
+        -30.85,
+        69.9
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "承板压框支柱",
+      "assembly_note": "8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。",
+      "page": 59
+    },
+    "EffectRetainerInsertRBuckInner": {
+      "id": "CT194",
+      "name": "EffectRetainerInsertRBuckInner",
+      "label": "压框M2级短嵌件候选 RBuckInner",
+      "bbox": [
+        -5.9,
+        -51.15,
+        67.0,
+        -3.0999999999999996,
+        -48.35,
+        69.9
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "承板压框支柱",
+      "assembly_note": "8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。",
+      "page": 59
+    },
+    "EffectRetainerInsertRBuckOuter": {
+      "id": "CT195",
+      "name": "EffectRetainerInsertRBuckOuter",
+      "label": "压框M2级短嵌件候选 RBuckOuter",
+      "bbox": [
+        -33.9,
+        -51.15,
+        67.0,
+        -31.099999999999998,
+        -48.35,
+        69.9
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "承板压框支柱",
+      "assembly_note": "8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。",
+      "page": 59
+    },
+    "EffectRetainerInsertRMOSInner": {
+      "id": "CT196",
+      "name": "EffectRetainerInsertRMOSInner",
+      "label": "压框M2级短嵌件候选 RMOSInner",
+      "bbox": [
+        -3.9,
+        -33.65,
+        67.0,
+        -1.1,
+        -30.85,
+        69.9
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "承板压框支柱",
+      "assembly_note": "8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。",
+      "page": 60
+    },
+    "EffectRetainerInsertRMOSOuter": {
+      "id": "CT197",
+      "name": "EffectRetainerInsertRMOSOuter",
+      "label": "压框M2级短嵌件候选 RMOSOuter",
+      "bbox": [
+        -44.9,
+        -33.65,
+        67.0,
+        -42.1,
+        -30.85,
+        69.9
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "承板压框支柱",
+      "assembly_note": "8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。",
+      "page": 60
+    },
+    "EffectRetainerLBuck": {
+      "id": "CT198",
+      "name": "EffectRetainerLBuck",
+      "label": "单板开窗防脱压框候选 LBuck",
+      "bbox": [
+        2.2,
+        -56.75,
+        70.0,
+        34.8,
+        -42.75,
+        71.2
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "机外拆两颗M2级螺钉后上取压框，再提板；框只覆盖假设无元件的板边，PCB上方留0.4，不压紧元件。",
+      "service_group": "",
+      "system": "N",
+      "target": "PCB无元件边缘上方",
+      "assembly_note": "4个独立开窗框；仅覆盖假设空白板边，顶间隙0.4。机外拆本框2螺钉后上取20，再提板。",
+      "page": 60
+    },
+    "EffectRetainerLMOS": {
+      "id": "CT199",
+      "name": "EffectRetainerLMOS",
+      "label": "单板开窗防脱压框候选 LMOS",
+      "bbox": [
+        0.20000000000000018,
+        -42.25,
+        70.0,
+        45.8,
+        -22.25,
+        71.2
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "机外拆两颗M2级螺钉后上取压框，再提板；框只覆盖假设无元件的板边，PCB上方留0.4，不压紧元件。",
+      "service_group": "",
+      "system": "N",
+      "target": "PCB无元件边缘上方",
+      "assembly_note": "4个独立开窗框；仅覆盖假设空白板边，顶间隙0.4。机外拆本框2螺钉后上取20，再提板。",
+      "page": 60
+    },
+    "EffectRetainerRBuck": {
+      "id": "CT200",
+      "name": "EffectRetainerRBuck",
+      "label": "单板开窗防脱压框候选 RBuck",
+      "bbox": [
+        -34.8,
+        -56.75,
+        70.0,
+        -2.2,
+        -42.75,
+        71.2
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "机外拆两颗M2级螺钉后上取压框，再提板；框只覆盖假设无元件的板边，PCB上方留0.4，不压紧元件。",
+      "service_group": "",
+      "system": "N",
+      "target": "PCB无元件边缘上方",
+      "assembly_note": "4个独立开窗框；仅覆盖假设空白板边，顶间隙0.4。机外拆本框2螺钉后上取20，再提板。",
+      "page": 60
+    },
+    "EffectRetainerRMOS": {
+      "id": "CT201",
+      "name": "EffectRetainerRMOS",
+      "label": "单板开窗防脱压框候选 RMOS",
+      "bbox": [
+        -45.8,
+        -42.25,
+        70.0,
+        -0.20000000000000018,
+        -22.25,
+        71.2
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "机外拆两颗M2级螺钉后上取压框，再提板；框只覆盖假设无元件的板边，PCB上方留0.4，不压紧元件。",
+      "service_group": "",
+      "system": "N",
+      "target": "PCB无元件边缘上方",
+      "assembly_note": "4个独立开窗框；仅覆盖假设空白板边，顶间隙0.4。机外拆本框2螺钉后上取20，再提板。",
+      "page": 60
+    },
+    "EffectRetainerScrewLBuckInner": {
+      "id": "CT202",
+      "name": "EffectRetainerScrewLBuckInner",
+      "label": "压框M2级螺钉候选 LBuckInner",
+      "bbox": [
+        2.7,
+        -51.55,
+        67.1,
+        6.3,
+        -47.95,
+        72.5
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "开窗压框 → 承板支柱",
+      "assembly_note": "每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。",
+      "page": 61
+    },
+    "EffectRetainerScrewLBuckOuter": {
+      "id": "CT203",
+      "name": "EffectRetainerScrewLBuckOuter",
+      "label": "压框M2级螺钉候选 LBuckOuter",
+      "bbox": [
+        30.7,
+        -51.55,
+        67.1,
+        34.3,
+        -47.95,
+        72.5
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "开窗压框 → 承板支柱",
+      "assembly_note": "每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。",
+      "page": 61
+    },
+    "EffectRetainerScrewLMOSInner": {
+      "id": "CT204",
+      "name": "EffectRetainerScrewLMOSInner",
+      "label": "压框M2级螺钉候选 LMOSInner",
+      "bbox": [
+        0.7,
+        -34.05,
+        67.1,
+        4.3,
+        -30.45,
+        72.5
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "开窗压框 → 承板支柱",
+      "assembly_note": "每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。",
+      "page": 61
+    },
+    "EffectRetainerScrewLMOSOuter": {
+      "id": "CT205",
+      "name": "EffectRetainerScrewLMOSOuter",
+      "label": "压框M2级螺钉候选 LMOSOuter",
+      "bbox": [
+        41.7,
+        -34.05,
+        67.1,
+        45.3,
+        -30.45,
+        72.5
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "开窗压框 → 承板支柱",
+      "assembly_note": "每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。",
+      "page": 61
+    },
+    "EffectRetainerScrewRBuckInner": {
+      "id": "CT206",
+      "name": "EffectRetainerScrewRBuckInner",
+      "label": "压框M2级螺钉候选 RBuckInner",
+      "bbox": [
+        -6.3,
+        -51.55,
+        67.1,
+        -2.6999999999999997,
+        -47.95,
+        72.5
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "开窗压框 → 承板支柱",
+      "assembly_note": "每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。",
+      "page": 61
+    },
+    "EffectRetainerScrewRBuckOuter": {
+      "id": "CT207",
+      "name": "EffectRetainerScrewRBuckOuter",
+      "label": "压框M2级螺钉候选 RBuckOuter",
+      "bbox": [
+        -34.3,
+        -51.55,
+        67.1,
+        -30.699999999999996,
+        -47.95,
+        72.5
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "开窗压框 → 承板支柱",
+      "assembly_note": "每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。",
+      "page": 61
+    },
+    "EffectRetainerScrewRMOSInner": {
+      "id": "CT208",
+      "name": "EffectRetainerScrewRMOSInner",
+      "label": "压框M2级螺钉候选 RMOSInner",
+      "bbox": [
+        -4.3,
+        -34.05,
+        67.1,
+        -0.6999999999999998,
+        -30.45,
+        72.5
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "开窗压框 → 承板支柱",
+      "assembly_note": "每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。",
+      "page": 62
+    },
+    "EffectRetainerScrewRMOSOuter": {
+      "id": "CT209",
+      "name": "EffectRetainerScrewRMOSOuter",
+      "label": "压框M2级螺钉候选 RMOSOuter",
+      "bbox": [
+        -45.3,
+        -34.05,
+        67.1,
+        -41.7,
+        -30.45,
+        72.5
+      ],
+      "category": "structure",
+      "solids": 1,
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "service_group": "",
+      "system": "N",
+      "target": "开窗压框 → 承板支柱",
+      "assembly_note": "每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。",
+      "page": 62
+    },
+    "EffectRetainerToolLBuckInner": {
+      "id": "CT210",
+      "name": "EffectRetainerToolLBuckInner",
+      "label": "机外压框Ø3工具杆 LBuckInner",
+      "bbox": [
+        3.0,
+        -51.25,
+        72.5,
+        6.0,
+        -48.25,
+        112.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "仅整盘取出后的直工具杆预算，不表示底盘内可拆压框。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 67
+    },
+    "EffectRetainerToolLBuckOuter": {
+      "id": "CT211",
+      "name": "EffectRetainerToolLBuckOuter",
+      "label": "机外压框Ø3工具杆 LBuckOuter",
+      "bbox": [
+        31.0,
+        -51.25,
+        72.5,
+        34.0,
+        -48.25,
+        112.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "仅整盘取出后的直工具杆预算，不表示底盘内可拆压框。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 67
+    },
+    "EffectRetainerToolLMOSInner": {
+      "id": "CT212",
+      "name": "EffectRetainerToolLMOSInner",
+      "label": "机外压框Ø3工具杆 LMOSInner",
+      "bbox": [
+        1.0,
+        -33.75,
+        72.5,
+        4.0,
+        -30.75,
+        112.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "仅整盘取出后的直工具杆预算，不表示底盘内可拆压框。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 67
+    },
+    "EffectRetainerToolLMOSOuter": {
+      "id": "CT213",
+      "name": "EffectRetainerToolLMOSOuter",
+      "label": "机外压框Ø3工具杆 LMOSOuter",
+      "bbox": [
+        42.0,
+        -33.75,
+        72.5,
+        45.0,
+        -30.75,
+        112.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "仅整盘取出后的直工具杆预算，不表示底盘内可拆压框。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 67
+    },
+    "EffectRetainerToolRBuckInner": {
+      "id": "CT214",
+      "name": "EffectRetainerToolRBuckInner",
+      "label": "机外压框Ø3工具杆 RBuckInner",
+      "bbox": [
+        -6.0,
+        -51.25,
+        72.5,
+        -2.9999999999999996,
+        -48.25,
+        112.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "仅整盘取出后的直工具杆预算，不表示底盘内可拆压框。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 67
+    },
+    "EffectRetainerToolRBuckOuter": {
+      "id": "CT215",
+      "name": "EffectRetainerToolRBuckOuter",
+      "label": "机外压框Ø3工具杆 RBuckOuter",
+      "bbox": [
+        -34.0,
+        -51.25,
+        72.5,
+        -30.999999999999996,
+        -48.25,
+        112.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "仅整盘取出后的直工具杆预算，不表示底盘内可拆压框。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 67
+    },
+    "EffectRetainerToolRMOSInner": {
+      "id": "CT216",
+      "name": "EffectRetainerToolRMOSInner",
+      "label": "机外压框Ø3工具杆 RMOSInner",
+      "bbox": [
+        -4.0,
+        -33.75,
+        72.5,
+        -1.0,
+        -30.75,
+        112.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "仅整盘取出后的直工具杆预算，不表示底盘内可拆压框。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 68
+    },
+    "EffectRetainerToolRMOSOuter": {
+      "id": "CT217",
+      "name": "EffectRetainerToolRMOSOuter",
+      "label": "机外压框Ø3工具杆 RMOSOuter",
+      "bbox": [
+        -45.0,
+        -33.75,
+        72.5,
+        -42.0,
+        -30.75,
+        112.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "仅整盘取出后的直工具杆预算，不表示底盘内可拆压框。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 68
     },
     "EffectScrew0": {
-      "id": "CT182",
+      "id": "CT218",
       "name": "EffectScrew0",
-      "label": "薄承板底部M2.5级螺钉候选 0",
+      "label": "承板凹入式M2.5级螺钉候选 0",
       "bbox": [
-        -41.4,
+        -49.4,
         -51.4,
-        65.0,
-        -36.6,
+        66.6,
+        -44.6,
         -46.6,
-        73.5
+        75.1
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "承板四耳 → 顶盖内柱",
-      "assembly_note": "4颗M2.5级候选，先拆充电宝再从下操作；头部与电源名义间隙0.5 mm，实物公差必须复核。",
-      "page": 57
+      "assembly_note": "4颗M2.5级候选，先拆充电宝再从下操作；头部凹入耳内，距电源2.1 mm；盘底2 mm，公差仍须复核。",
+      "page": 62
     },
     "EffectScrew1": {
-      "id": "CT183",
+      "id": "CT219",
       "name": "EffectScrew1",
-      "label": "薄承板底部M2.5级螺钉候选 1",
+      "label": "承板凹入式M2.5级螺钉候选 1",
       "bbox": [
-        -41.4,
-        -31.4,
-        65.0,
-        -36.6,
-        -26.6,
-        73.5
+        -49.4,
+        -28.9,
+        66.6,
+        -44.6,
+        -24.1,
+        75.1
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "承板四耳 → 顶盖内柱",
-      "assembly_note": "4颗M2.5级候选，先拆充电宝再从下操作；头部与电源名义间隙0.5 mm，实物公差必须复核。",
-      "page": 57
+      "assembly_note": "4颗M2.5级候选，先拆充电宝再从下操作；头部凹入耳内，距电源2.1 mm；盘底2 mm，公差仍须复核。",
+      "page": 62
     },
     "EffectScrew2": {
-      "id": "CT184",
+      "id": "CT220",
       "name": "EffectScrew2",
-      "label": "薄承板底部M2.5级螺钉候选 2",
+      "label": "承板凹入式M2.5级螺钉候选 2",
       "bbox": [
-        36.6,
+        44.6,
         -51.4,
-        65.0,
-        41.4,
+        66.6,
+        49.4,
         -46.6,
-        73.5
+        75.1
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "承板四耳 → 顶盖内柱",
-      "assembly_note": "4颗M2.5级候选，先拆充电宝再从下操作；头部与电源名义间隙0.5 mm，实物公差必须复核。",
-      "page": 57
+      "assembly_note": "4颗M2.5级候选，先拆充电宝再从下操作；头部凹入耳内，距电源2.1 mm；盘底2 mm，公差仍须复核。",
+      "page": 62
     },
     "EffectScrew3": {
-      "id": "CT185",
+      "id": "CT221",
       "name": "EffectScrew3",
-      "label": "薄承板底部M2.5级螺钉候选 3",
+      "label": "承板凹入式M2.5级螺钉候选 3",
       "bbox": [
-        36.6,
-        -31.4,
-        65.0,
-        41.4,
-        -26.6,
-        73.5
+        44.6,
+        -28.9,
+        66.6,
+        49.4,
+        -24.1,
+        75.1
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "N",
       "target": "承板四耳 → 顶盖内柱",
-      "assembly_note": "4颗M2.5级候选，先拆充电宝再从下操作；头部与电源名义间隙0.5 mm，实物公差必须复核。",
-      "page": 57
+      "assembly_note": "4颗M2.5级候选，先拆充电宝再从下操作；头部凹入耳内，距电源2.1 mm；盘底2 mm，公差仍须复核。",
+      "page": 62
+    },
+    "EffectSupportLBuck": {
+      "id": "CT222",
+      "name": "EffectSupportLBuck",
+      "label": "两条0.5 mm板边垫候选 LBuck",
+      "bbox": [
+        9.5,
+        -55.05,
+        67.5,
+        27.5,
+        -44.45,
+        68.0
+      ],
+      "category": "structure",
+      "solids": 2,
+      "evidence": "只在假设无焊脚的板边承托；板底中央留0.5，焊脚／材料／散热／压缩未验，不是绝缘等级。",
+      "service_group": "",
+      "system": "N",
+      "target": "PCB两条板边下方",
+      "assembly_note": "0.5 mm垫放在1 mm深座内；板底中央0.5余量，焊脚、接触区、压缩及材料待实测。",
+      "page": 62
+    },
+    "EffectSupportLMOS": {
+      "id": "CT223",
+      "name": "EffectSupportLMOS",
+      "label": "两条0.5 mm板边垫候选 LMOS",
+      "bbox": [
+        7.5,
+        -40.55,
+        67.5,
+        38.5,
+        -23.95,
+        68.0
+      ],
+      "category": "structure",
+      "solids": 2,
+      "evidence": "只在假设无焊脚的板边承托；板底中央留0.5，焊脚／材料／散热／压缩未验，不是绝缘等级。",
+      "service_group": "",
+      "system": "N",
+      "target": "PCB两条板边下方",
+      "assembly_note": "0.5 mm垫放在1 mm深座内；板底中央0.5余量，焊脚、接触区、压缩及材料待实测。",
+      "page": 62
+    },
+    "EffectSupportRBuck": {
+      "id": "CT224",
+      "name": "EffectSupportRBuck",
+      "label": "两条0.5 mm板边垫候选 RBuck",
+      "bbox": [
+        -27.5,
+        -55.05,
+        67.5,
+        -9.5,
+        -44.45,
+        68.0
+      ],
+      "category": "structure",
+      "solids": 2,
+      "evidence": "只在假设无焊脚的板边承托；板底中央留0.5，焊脚／材料／散热／压缩未验，不是绝缘等级。",
+      "service_group": "",
+      "system": "N",
+      "target": "PCB两条板边下方",
+      "assembly_note": "0.5 mm垫放在1 mm深座内；板底中央0.5余量，焊脚、接触区、压缩及材料待实测。",
+      "page": 62
+    },
+    "EffectSupportRMOS": {
+      "id": "CT225",
+      "name": "EffectSupportRMOS",
+      "label": "两条0.5 mm板边垫候选 RMOS",
+      "bbox": [
+        -38.5,
+        -40.55,
+        67.5,
+        -7.5,
+        -23.95,
+        68.0
+      ],
+      "category": "structure",
+      "solids": 2,
+      "evidence": "只在假设无焊脚的板边承托；板底中央留0.5，焊脚／材料／散热／压缩未验，不是绝缘等级。",
+      "service_group": "",
+      "system": "N",
+      "target": "PCB两条板边下方",
+      "assembly_note": "0.5 mm垫放在1 mm深座内；板底中央0.5余量，焊脚、接触区、压缩及材料待实测。",
+      "page": 63
     },
     "EffectTool0": {
-      "id": "CT186",
+      "id": "CT226",
       "name": "EffectTool0",
-      "label": "取充电宝后薄承板工具杆 0",
+      "label": "取电源后承板底部Ø3工具杆 0",
       "bbox": [
-        -40.5,
+        -48.5,
         -50.5,
         -12.0,
-        -37.5,
+        -45.5,
         -47.5,
-        65.0
+        66.6
       ],
       "category": "clearance",
       "solids": 1,
-      "evidence": "先取充电宝及底盖；仅Ø3直杆空间，手部／手柄与真实工具未验证",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 59
+      "page": 68
     },
     "EffectTool1": {
-      "id": "CT187",
+      "id": "CT227",
       "name": "EffectTool1",
-      "label": "取充电宝后薄承板工具杆 1",
+      "label": "取电源后承板底部Ø3工具杆 1",
       "bbox": [
-        -40.5,
-        -30.5,
+        -48.5,
+        -28.0,
         -12.0,
-        -37.5,
-        -27.5,
-        65.0
+        -45.5,
+        -25.0,
+        66.6
       ],
       "category": "clearance",
       "solids": 1,
-      "evidence": "先取充电宝及底盖；仅Ø3直杆空间，手部／手柄与真实工具未验证",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 59
+      "page": 68
     },
     "EffectTool2": {
-      "id": "CT188",
+      "id": "CT228",
       "name": "EffectTool2",
-      "label": "取充电宝后薄承板工具杆 2",
+      "label": "取电源后承板底部Ø3工具杆 2",
       "bbox": [
-        37.5,
+        45.5,
         -50.5,
         -12.0,
-        40.5,
+        48.5,
         -47.5,
-        65.0
+        66.6
       ],
       "category": "clearance",
       "solids": 1,
-      "evidence": "先取充电宝及底盖；仅Ø3直杆空间，手部／手柄与真实工具未验证",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 59
+      "page": 68
     },
     "EffectTool3": {
-      "id": "CT189",
+      "id": "CT229",
       "name": "EffectTool3",
-      "label": "取充电宝后薄承板工具杆 3",
+      "label": "取电源后承板底部Ø3工具杆 3",
       "bbox": [
-        37.5,
-        -30.5,
+        45.5,
+        -28.0,
         -12.0,
-        40.5,
-        -27.5,
-        65.0
+        48.5,
+        -25.0,
+        66.6
       ],
       "category": "clearance",
       "solids": 1,
-      "evidence": "先取充电宝及底盖；仅Ø3直杆空间，手部／手柄与真实工具未验证",
+      "evidence": "0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
       "service_group": "",
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 59
+      "page": 68
     },
     "EffectTray": {
-      "id": "CT190",
+      "id": "CT230",
       "name": "EffectTray",
-      "label": "底盘效果板四点薄承板／候选",
+      "label": "效果板低位承板／凹座、防脱压框与四点沉台",
       "bbox": [
-        -43.0,
-        -56.0,
+        -50.7,
+        -56.75,
         66.5,
-        43.0,
-        -23.0,
-        68.5
+        50.7,
+        -22.0,
+        70.5
       ],
       "category": "structure",
       "solids": 1,
-      "evidence": "主体74×33×2，四耳孔X±39/Y-49,-29；固定到顶盖内柱，先拆电源再向下取；板卡自身固定待实测",
+      "evidence": "底Z66.5，上Z68.5；板座下凹1、四耳厚4、螺钉头底66.6；下方至少2 mm候选，公差与强度待验。",
       "service_group": "",
       "system": "N",
       "target": "顶盖内侧四根一体支柱",
-      "assembly_note": "主体74×33×2，孔X±39、Y−49/−29；先拆充电宝及底盖，再退出4螺钉，向下取100。",
-      "page": 57
+      "assembly_note": "低位凹座与四耳沉台，孔X±47、Y−49/−26.5；先拆充电宝及底盖，再退出4螺钉，向下取100。",
+      "page": 63
+    },
+    "EffectWireCentre": {
+      "id": "CT231",
+      "name": "EffectWireCentre",
+      "label": "中央低压线束交接通道候选",
+      "bbox": [
+        -2.5,
+        -51.0,
+        72.0,
+        2.5,
+        -36.0,
+        76.0
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "5×4共享通道，板端另留接线预算；实际供电／控制分配、线数、针序及设备端接待定。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 68
+    },
+    "EffectWireSideL": {
+      "id": "CT232",
+      "name": "EffectWireSideL",
+      "label": "板间侧向Ø3线束预算 L",
+      "bbox": [
+        32.5,
+        -51.25,
+        73.0,
+        43.5,
+        -30.75,
+        76.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "仅侧廊连接预算；不是真实弯曲半径、线径、接头针序或完整外部线束。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 68
+    },
+    "EffectWireSideR": {
+      "id": "CT233",
+      "name": "EffectWireSideR",
+      "label": "板间侧向Ø3线束预算 R",
+      "bbox": [
+        -43.5,
+        -51.25,
+        73.0,
+        -32.5,
+        -30.75,
+        76.5
+      ],
+      "category": "clearance",
+      "solids": 1,
+      "evidence": "仅侧廊连接预算；不是真实弯曲半径、线径、接头针序或完整外部线束。",
+      "service_group": "",
+      "system": "M",
+      "target": "所示机构的检修 / 接线区域",
+      "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
+      "page": 68
     },
     "ElectronicsTray": {
-      "id": "CT191",
+      "id": "CT234",
       "name": "ElectronicsTray",
       "label": "面包板浅托盘／105×90主体、122侧耳总宽",
       "bbox": [
@@ -4103,10 +5014,10 @@
       "system": "H",
       "target": "头壳内部四支柱承台",
       "assembly_note": "4颗M2.5级侧耳螺钉；前缘49×2让位朝超声波，后槽走线；拆冠盖、断线后上提85。",
-      "page": 46
+      "page": 48
     },
     "HeadCableGrommet": {
-      "id": "CT192",
+      "id": "CT235",
       "name": "HeadCableGrommet",
       "label": "中央干区线束护口 HeadCableGrommet",
       "bbox": [
@@ -4124,10 +5035,10 @@
       "system": "E",
       "target": "底盘中央干区 → 颈架 → 头舱后槽",
       "assembly_note": "线束经护口和限位桥进入托盘后缘；Ø6为规划。拆托盘先断开对外线束，真实弯曲待验。",
-      "page": 37
+      "page": 39
     },
     "HeadCrownShell": {
-      "id": "CT193",
+      "id": "CT236",
       "name": "HeadCrownShell",
       "label": "整体上取冠盖／0.25 mm 装配分缝",
       "bbox": [
@@ -4145,10 +5056,10 @@
       "system": "G",
       "target": "头壳四处冠盖支座",
       "assembly_note": "4颗M2.5级候选螺钉固定；0.25装配分缝为设计值，合盖前检查夹线，拆盖整体上提65。",
-      "page": 45
+      "page": 47
     },
     "HeadServiceHatch": {
-      "id": "CT194",
+      "id": "CT237",
       "name": "HeadServiceHatch",
       "label": "中央隆起顶甲／随整体冠盖拆装",
       "bbox": [
@@ -4166,10 +5077,10 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 45
+      "page": 47
     },
     "HeadShell": {
-      "id": "CT195",
+      "id": "CT238",
       "name": "HeadShell",
       "label": "头舱固定下壳／托板及冠盖支座",
       "bbox": [
@@ -4187,10 +5098,10 @@
       "system": "F",
       "target": "固定颈架的头舱承托鞍座",
       "assembly_note": "内部托盘支柱与头壳一体；承托面Z171.5。头壳与颈架连接工艺尚未细化。",
-      "page": 40
+      "page": 42
     },
     "JawAccent": {
-      "id": "CT196",
+      "id": "CT239",
       "name": "JawAccent",
       "label": "下颌偏侧识别片",
       "bbox": [
@@ -4208,10 +5119,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 40
+      "page": 42
     },
     "JawArmor": {
-      "id": "CT197",
+      "id": "CT240",
       "name": "JawArmor",
       "label": "多面下颌中央护片",
       "bbox": [
@@ -4229,10 +5140,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 41
+      "page": 43
     },
     "KeelLid": {
-      "id": "CT198",
+      "id": "CT241",
       "name": "KeelLid",
       "label": "低鼻锥至颈架的折面顶盖",
       "bbox": [
@@ -4244,16 +5155,16 @@
         97.0
       ],
       "category": "structure",
-      "solids": 1,
+      "solids": 3,
       "evidence": "0.34增加两根干舱吊柱与顶部止挡，吊柱与顶盖一体；两个干区排风口，不贯通后湿舱隔板；材料与承载未验",
       "service_group": "",
       "system": "B",
       "target": "底盘折面顶盖及内侧一体支柱",
-      "assembly_note": "原前斜坡外表面保持；0.42新增薄承板4根内柱，底部螺钉固定，不穿透外表面。",
-      "page": 32
+      "assembly_note": "原前斜坡外表面保持；0.43调整薄承板4根内柱，底部螺钉固定，不穿透外表面。",
+      "page": 34
     },
     "KeelSideFrameL": {
-      "id": "CT199",
+      "id": "CT242",
       "name": "KeelSideFrameL",
       "label": "左镂空底座侧框",
       "bbox": [
@@ -4271,10 +5182,10 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 32
+      "page": 34
     },
     "KeelSideFrameR": {
-      "id": "CT200",
+      "id": "CT243",
       "name": "KeelSideFrameR",
       "label": "右镂空底座侧框",
       "bbox": [
@@ -4292,10 +5203,10 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 32
+      "page": 34
     },
     "L298NAirSpaceL": {
-      "id": "CT201",
+      "id": "CT244",
       "name": "L298NAirSpaceL",
       "label": "进风及上排风几何预留 L",
       "bbox": [
@@ -4313,10 +5224,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 59
+      "page": 68
     },
     "L298NAirSpaceR": {
-      "id": "CT202",
+      "id": "CT245",
       "name": "L298NAirSpaceR",
       "label": "进风及上排风几何预留 R",
       "bbox": [
@@ -4334,10 +5245,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 59
+      "page": 68
     },
     "L298NBottomPadL": {
-      "id": "CT203",
+      "id": "CT246",
       "name": "L298NBottomPadL",
       "label": "PCB下沿承托垫候选 L",
       "bbox": [
@@ -4355,10 +5266,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "两处0.8厚候选垫承托PCB下沿；安装前核实下沿安全接触区。",
-      "page": 35
+      "page": 37
     },
     "L298NBottomPadR": {
-      "id": "CT204",
+      "id": "CT247",
       "name": "L298NBottomPadR",
       "label": "PCB下沿承托垫候选 R",
       "bbox": [
@@ -4376,10 +5287,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "两处0.8厚候选垫承托PCB下沿；安装前核实下沿安全接触区。",
-      "page": 35
+      "page": 37
     },
     "L298NCarrier": {
-      "id": "CT205",
+      "id": "CT248",
       "name": "L298NCarrier",
       "label": "L298N 开口可拆托框／四点侧压",
       "bbox": [
@@ -4397,10 +5308,10 @@
       "system": "D",
       "target": "顶盖吊柱下端",
       "assembly_note": "先在机外装板与侧压件，再将整框上装；2颗底部锁紧螺钉固定。",
-      "page": 36
+      "page": 38
     },
     "L298NClampNutL0": {
-      "id": "CT206",
+      "id": "CT249",
       "name": "L298NClampNutL0",
       "label": "M2级侧压螺母占位 L0",
       "bbox": [
@@ -4418,10 +5329,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处M2级候选螺母从托框槽口放入；配侧压螺钉，真实防转及防松待验。",
-      "page": 36
+      "page": 38
     },
     "L298NClampNutL1": {
-      "id": "CT207",
+      "id": "CT250",
       "name": "L298NClampNutL1",
       "label": "M2级侧压螺母占位 L1",
       "bbox": [
@@ -4439,10 +5350,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处M2级候选螺母从托框槽口放入；配侧压螺钉，真实防转及防松待验。",
-      "page": 36
+      "page": 38
     },
     "L298NClampNutR0": {
-      "id": "CT208",
+      "id": "CT251",
       "name": "L298NClampNutR0",
       "label": "M2级侧压螺母占位 R0",
       "bbox": [
@@ -4460,10 +5371,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处M2级候选螺母从托框槽口放入；配侧压螺钉，真实防转及防松待验。",
-      "page": 36
+      "page": 38
     },
     "L298NClampNutR1": {
-      "id": "CT209",
+      "id": "CT252",
       "name": "L298NClampNutR1",
       "label": "M2级侧压螺母占位 R1",
       "bbox": [
@@ -4481,10 +5392,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处M2级候选螺母从托框槽口放入；配侧压螺钉，真实防转及防松待验。",
-      "page": 36
+      "page": 38
     },
     "L298NClampScrewL0": {
-      "id": "CT210",
+      "id": "CT253",
       "name": "L298NClampScrewL0",
       "label": "M2级可调侧压螺钉 L0",
       "bbox": [
@@ -4502,10 +5413,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处M2级候选侧压螺钉配绝缘垫；在机外调整，不让金属件压焊脚或元件。",
-      "page": 36
+      "page": 38
     },
     "L298NClampScrewL1": {
-      "id": "CT211",
+      "id": "CT254",
       "name": "L298NClampScrewL1",
       "label": "M2级可调侧压螺钉 L1",
       "bbox": [
@@ -4523,10 +5434,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处M2级候选侧压螺钉配绝缘垫；在机外调整，不让金属件压焊脚或元件。",
-      "page": 36
+      "page": 38
     },
     "L298NClampScrewR0": {
-      "id": "CT212",
+      "id": "CT255",
       "name": "L298NClampScrewR0",
       "label": "M2级可调侧压螺钉 R0",
       "bbox": [
@@ -4544,10 +5455,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处M2级候选侧压螺钉配绝缘垫；在机外调整，不让金属件压焊脚或元件。",
-      "page": 36
+      "page": 38
     },
     "L298NClampScrewR1": {
-      "id": "CT213",
+      "id": "CT256",
       "name": "L298NClampScrewR1",
       "label": "M2级可调侧压螺钉 R1",
       "bbox": [
@@ -4565,10 +5476,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处M2级候选侧压螺钉配绝缘垫；在机外调整，不让金属件压焊脚或元件。",
-      "page": 36
+      "page": 38
     },
     "L298NConnectorSpace": {
-      "id": "CT214",
+      "id": "CT257",
       "name": "L298NConnectorSpace",
       "label": "下沿电源与控制接线区候选",
       "bbox": [
@@ -4586,10 +5497,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 60
+      "page": 69
     },
     "L298NEnvelope": {
-      "id": "CT215",
+      "id": "CT258",
       "name": "L298NEnvelope",
       "label": "L298N 驱动板竖装包络／46.2×43.5×27.5",
       "bbox": [
@@ -4607,10 +5518,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "46.2×43.5×27.5用户外形包络；竖装、下沿承托、四点侧压，真实器件位置未建模。",
-      "page": 36
+      "page": 38
     },
     "L298NMotorWireSpaceL": {
-      "id": "CT216",
+      "id": "CT259",
       "name": "L298NMotorWireSpaceL",
       "label": "电机端子引线侧廊候选 L",
       "bbox": [
@@ -4628,10 +5539,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 60
+      "page": 69
     },
     "L298NMotorWireSpaceR": {
-      "id": "CT217",
+      "id": "CT260",
       "name": "L298NMotorWireSpaceR",
       "label": "电机端子引线侧廊候选 R",
       "bbox": [
@@ -4649,10 +5560,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 60
+      "page": 69
     },
     "L298NMountInsertL": {
-      "id": "CT218",
+      "id": "CT261",
       "name": "L298NMountInsertL",
       "label": "吊架盲孔嵌件候选 L",
       "bbox": [
@@ -4670,10 +5581,10 @@
       "system": "D",
       "target": "顶盖一体吊柱盲孔",
       "assembly_note": "2处M2.5级候选嵌件；盲孔不贯穿顶盖，配合及安装工艺待定。",
-      "page": 36
+      "page": 38
     },
     "L298NMountInsertR": {
-      "id": "CT219",
+      "id": "CT262",
       "name": "L298NMountInsertR",
       "label": "吊架盲孔嵌件候选 R",
       "bbox": [
@@ -4691,10 +5602,10 @@
       "system": "D",
       "target": "顶盖一体吊柱盲孔",
       "assembly_note": "2处M2.5级候选嵌件；盲孔不贯穿顶盖，配合及安装工艺待定。",
-      "page": 36
+      "page": 38
     },
     "L298NMountScrewL": {
-      "id": "CT220",
+      "id": "CT263",
       "name": "L298NMountScrewL",
       "label": "底部托框锁紧螺钉 L",
       "bbox": [
@@ -4712,10 +5623,10 @@
       "system": "D",
       "target": "托框 → 顶盖两根吊柱",
       "assembly_note": "2颗M2.5级候选；从底部紧固，拆时托住托框、断线，再退出螺钉。",
-      "page": 36
+      "page": 38
     },
     "L298NMountScrewR": {
-      "id": "CT221",
+      "id": "CT264",
       "name": "L298NMountScrewR",
       "label": "底部托框锁紧螺钉 R",
       "bbox": [
@@ -4733,10 +5644,10 @@
       "system": "D",
       "target": "托框 → 顶盖两根吊柱",
       "assembly_note": "2颗M2.5级候选；从底部紧固，拆时托住托框、断线，再退出螺钉。",
-      "page": 36
+      "page": 38
     },
     "L298NRearPadL0": {
-      "id": "CT222",
+      "id": "CT265",
       "name": "L298NRearPadL0",
       "label": "四角后挡软垫候选 L0",
       "bbox": [
@@ -4754,10 +5665,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四角后挡软垫；背面中央避空，不代表已避开实际焊脚。",
-      "page": 37
+      "page": 39
     },
     "L298NRearPadL1": {
-      "id": "CT223",
+      "id": "CT266",
       "name": "L298NRearPadL1",
       "label": "四角后挡软垫候选 L1",
       "bbox": [
@@ -4775,10 +5686,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四角后挡软垫；背面中央避空，不代表已避开实际焊脚。",
-      "page": 37
+      "page": 39
     },
     "L298NRearPadR0": {
-      "id": "CT224",
+      "id": "CT267",
       "name": "L298NRearPadR0",
       "label": "四角后挡软垫候选 R0",
       "bbox": [
@@ -4796,10 +5707,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四角后挡软垫；背面中央避空，不代表已避开实际焊脚。",
-      "page": 37
+      "page": 39
     },
     "L298NRearPadR1": {
-      "id": "CT225",
+      "id": "CT268",
       "name": "L298NRearPadR1",
       "label": "四角后挡软垫候选 R1",
       "bbox": [
@@ -4817,10 +5728,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四角后挡软垫；背面中央避空，不代表已避开实际焊脚。",
-      "page": 37
+      "page": 39
     },
     "L298NSidePadL0": {
-      "id": "CT226",
+      "id": "CT269",
       "name": "L298NSidePadL0",
       "label": "绝缘侧压垫候选 L0",
       "bbox": [
@@ -4838,10 +5749,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处0.5厚候选绝缘侧压垫，位于侧压螺钉与板边之间；接触位置待测。",
-      "page": 37
+      "page": 39
     },
     "L298NSidePadL1": {
-      "id": "CT227",
+      "id": "CT270",
       "name": "L298NSidePadL1",
       "label": "绝缘侧压垫候选 L1",
       "bbox": [
@@ -4859,10 +5770,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处0.5厚候选绝缘侧压垫，位于侧压螺钉与板边之间；接触位置待测。",
-      "page": 37
+      "page": 39
     },
     "L298NSidePadR0": {
-      "id": "CT228",
+      "id": "CT271",
       "name": "L298NSidePadR0",
       "label": "绝缘侧压垫候选 R0",
       "bbox": [
@@ -4880,10 +5791,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处0.5厚候选绝缘侧压垫，位于侧压螺钉与板边之间；接触位置待测。",
-      "page": 37
+      "page": 39
     },
     "L298NSidePadR1": {
-      "id": "CT229",
+      "id": "CT272",
       "name": "L298NSidePadR1",
       "label": "绝缘侧压垫候选 R1",
       "bbox": [
@@ -4901,10 +5812,10 @@
       "system": "D",
       "target": "L298N开口托框",
       "assembly_note": "四处0.5厚候选绝缘侧压垫，位于侧压螺钉与板边之间；接触位置待测。",
-      "page": 37
+      "page": 39
     },
     "LowerChin": {
-      "id": "CT230",
+      "id": "CT273",
       "name": "LowerChin",
       "label": "前舱薄下缘护片",
       "bbox": [
@@ -4922,10 +5833,10 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 33
+      "page": 35
     },
     "LowerTub": {
-      "id": "CT231",
+      "id": "CT274",
       "name": "LowerTub",
       "label": "等宽一体底盘／电机固定面、开放干舱及底部检修",
       "bbox": [
@@ -4943,10 +5854,10 @@
       "system": "B",
       "target": "整机底部承载基体",
       "assembly_note": "电机固定面与底盘一体，无独立端板；先核实孔位和电源、驱动板维护空间。",
-      "page": 33
+      "page": 35
     },
     "MotorFaceScrewL0": {
-      "id": "CT232",
+      "id": "CT275",
       "name": "MotorFaceScrewL0",
       "label": "电机端面 M3 级固定螺钉 L0",
       "bbox": [
@@ -4964,10 +5875,10 @@
       "system": "A",
       "target": "电机端面 → 底盘一体固定面",
       "assembly_note": "每侧4颗M3级候选；保持原孔轴。端面螺纹深度、螺钉长度及扭矩待核。",
-      "page": 29
+      "page": 31
     },
     "MotorFaceScrewL1": {
-      "id": "CT233",
+      "id": "CT276",
       "name": "MotorFaceScrewL1",
       "label": "电机端面 M3 级固定螺钉 L1",
       "bbox": [
@@ -4985,10 +5896,10 @@
       "system": "A",
       "target": "电机端面 → 底盘一体固定面",
       "assembly_note": "每侧4颗M3级候选；保持原孔轴。端面螺纹深度、螺钉长度及扭矩待核。",
-      "page": 29
+      "page": 31
     },
     "MotorFaceScrewL2": {
-      "id": "CT234",
+      "id": "CT277",
       "name": "MotorFaceScrewL2",
       "label": "电机端面 M3 级固定螺钉 L2",
       "bbox": [
@@ -5006,10 +5917,10 @@
       "system": "A",
       "target": "电机端面 → 底盘一体固定面",
       "assembly_note": "每侧4颗M3级候选；保持原孔轴。端面螺纹深度、螺钉长度及扭矩待核。",
-      "page": 29
+      "page": 31
     },
     "MotorFaceScrewL3": {
-      "id": "CT235",
+      "id": "CT278",
       "name": "MotorFaceScrewL3",
       "label": "电机端面 M3 级固定螺钉 L3",
       "bbox": [
@@ -5027,10 +5938,10 @@
       "system": "A",
       "target": "电机端面 → 底盘一体固定面",
       "assembly_note": "每侧4颗M3级候选；保持原孔轴。端面螺纹深度、螺钉长度及扭矩待核。",
-      "page": 29
+      "page": 31
     },
     "MotorFaceScrewR0": {
-      "id": "CT236",
+      "id": "CT279",
       "name": "MotorFaceScrewR0",
       "label": "电机端面 M3 级固定螺钉 R0",
       "bbox": [
@@ -5048,10 +5959,10 @@
       "system": "A",
       "target": "电机端面 → 底盘一体固定面",
       "assembly_note": "每侧4颗M3级候选；保持原孔轴。端面螺纹深度、螺钉长度及扭矩待核。",
-      "page": 29
+      "page": 31
     },
     "MotorFaceScrewR1": {
-      "id": "CT237",
+      "id": "CT280",
       "name": "MotorFaceScrewR1",
       "label": "电机端面 M3 级固定螺钉 R1",
       "bbox": [
@@ -5069,10 +5980,10 @@
       "system": "A",
       "target": "电机端面 → 底盘一体固定面",
       "assembly_note": "每侧4颗M3级候选；保持原孔轴。端面螺纹深度、螺钉长度及扭矩待核。",
-      "page": 29
+      "page": 31
     },
     "MotorFaceScrewR2": {
-      "id": "CT238",
+      "id": "CT281",
       "name": "MotorFaceScrewR2",
       "label": "电机端面 M3 级固定螺钉 R2",
       "bbox": [
@@ -5090,10 +6001,10 @@
       "system": "A",
       "target": "电机端面 → 底盘一体固定面",
       "assembly_note": "每侧4颗M3级候选；保持原孔轴。端面螺纹深度、螺钉长度及扭矩待核。",
-      "page": 29
+      "page": 31
     },
     "MotorFaceScrewR3": {
-      "id": "CT239",
+      "id": "CT282",
       "name": "MotorFaceScrewR3",
       "label": "电机端面 M3 级固定螺钉 R3",
       "bbox": [
@@ -5111,10 +6022,10 @@
       "system": "A",
       "target": "电机端面 → 底盘一体固定面",
       "assembly_note": "每侧4颗M3级候选；保持原孔轴。端面螺纹深度、螺钉长度及扭矩待核。",
-      "page": 29
+      "page": 31
     },
     "MotorL": {
-      "id": "CT240",
+      "id": "CT283",
       "name": "MotorL",
       "label": "左侧37R-520电机（尺寸占位）",
       "bbox": [
@@ -5132,10 +6043,10 @@
       "system": "A",
       "target": "底盘一体电机固定面",
       "assembly_note": "端面4颗候选螺钉固定；拆时先移电源和本侧履带，再退端面螺钉、向下取电机。",
-      "page": 29
+      "page": 31
     },
     "MotorR": {
-      "id": "CT241",
+      "id": "CT284",
       "name": "MotorR",
       "label": "右侧37R-520电机（尺寸占位）",
       "bbox": [
@@ -5153,10 +6064,10 @@
       "system": "A",
       "target": "底盘一体电机固定面",
       "assembly_note": "端面4颗候选螺钉固定；拆时先移电源和本侧履带，再退端面螺钉、向下取电机。",
-      "page": 29
+      "page": 31
     },
     "MotorShaftL": {
-      "id": "CT242",
+      "id": "CT285",
       "name": "MotorShaftL",
       "label": "左侧Ø6偏心D形输出轴",
       "bbox": [
@@ -5174,10 +6085,10 @@
       "system": "A",
       "target": "电机输出端 → 六角联轴器",
       "assembly_note": "电机附属轴几何，不是额外独立安装轴；Ø6偏心D形接口与锁紧方式待实物核对。",
-      "page": 29
+      "page": 31
     },
     "MotorShaftR": {
-      "id": "CT243",
+      "id": "CT286",
       "name": "MotorShaftR",
       "label": "右侧Ø6偏心D形输出轴",
       "bbox": [
@@ -5195,10 +6106,10 @@
       "system": "A",
       "target": "电机输出端 → 六角联轴器",
       "assembly_note": "电机附属轴几何，不是额外独立安装轴；Ø6偏心D形接口与锁紧方式待实物核对。",
-      "page": 29
+      "page": 31
     },
     "NeckBearingL": {
-      "id": "CT244",
+      "id": "CT287",
       "name": "NeckBearingL",
       "label": "固定横梁阶梯套 L",
       "bbox": [
@@ -5216,10 +6127,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 37
+      "page": 39
     },
     "NeckBearingR": {
-      "id": "CT245",
+      "id": "CT288",
       "name": "NeckBearingR",
       "label": "固定横梁阶梯套 R",
       "bbox": [
@@ -5237,10 +6148,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 37
+      "page": 39
     },
     "NeckCableBridge": {
-      "id": "CT246",
+      "id": "CT289",
       "name": "NeckCableBridge",
       "label": "固定颈架线束限位桥",
       "bbox": [
@@ -5258,10 +6169,10 @@
       "system": "E",
       "target": "底盘中央干区 → 颈架 → 头舱后槽",
       "assembly_note": "线束经护口和限位桥进入托盘后缘；Ø6为规划。拆托盘先断开对外线束，真实弯曲待验。",
-      "page": 37
+      "page": 39
     },
     "NeckCapL": {
-      "id": "CT247",
+      "id": "CT290",
       "name": "NeckCapL",
       "label": "横梁端部锁片 L",
       "bbox": [
@@ -5279,10 +6190,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckCapR": {
-      "id": "CT248",
+      "id": "CT291",
       "name": "NeckCapR",
       "label": "横梁端部锁片 R",
       "bbox": [
@@ -5300,10 +6211,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckCrossbar": {
-      "id": "CT249",
+      "id": "CT292",
       "name": "NeckCrossbar",
       "label": "加高固定横梁",
       "bbox": [
@@ -5321,10 +6232,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckHeadSaddle": {
-      "id": "CT250",
+      "id": "CT293",
       "name": "NeckHeadSaddle",
       "label": "加高头舱承托鞍座",
       "bbox": [
@@ -5342,10 +6253,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckOuterWebL": {
-      "id": "CT251",
+      "id": "CT294",
       "name": "NeckOuterWebL",
       "label": "加高颈架外层加强板 L",
       "bbox": [
@@ -5363,10 +6274,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckOuterWebR": {
-      "id": "CT252",
+      "id": "CT295",
       "name": "NeckOuterWebR",
       "label": "加高颈架外层加强板 R",
       "bbox": [
@@ -5384,10 +6295,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckPedestal": {
-      "id": "CT253",
+      "id": "CT296",
       "name": "NeckPedestal",
       "label": "颈架八角基座／斜撑沉座",
       "bbox": [
@@ -5405,10 +6316,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckSpacerL104": {
-      "id": "CT254",
+      "id": "CT297",
       "name": "NeckSpacerL104",
       "label": "颈架层间连接柱 L 104",
       "bbox": [
@@ -5426,10 +6337,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckSpacerL136": {
-      "id": "CT255",
+      "id": "CT298",
       "name": "NeckSpacerL136",
       "label": "颈架层间连接柱 L 136",
       "bbox": [
@@ -5447,10 +6358,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckSpacerR104": {
-      "id": "CT256",
+      "id": "CT299",
       "name": "NeckSpacerR104",
       "label": "颈架层间连接柱 R 104",
       "bbox": [
@@ -5468,10 +6379,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckSpacerR136": {
-      "id": "CT257",
+      "id": "CT300",
       "name": "NeckSpacerR136",
       "label": "颈架层间连接柱 R 136",
       "bbox": [
@@ -5489,10 +6400,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 38
+      "page": 40
     },
     "NeckStayL": {
-      "id": "CT258",
+      "id": "CT301",
       "name": "NeckStayL",
       "label": "加长后斜撑芯杆 L",
       "bbox": [
@@ -5510,10 +6421,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 39
+      "page": 41
     },
     "NeckStayR": {
-      "id": "CT259",
+      "id": "CT302",
       "name": "NeckStayR",
       "label": "加长后斜撑芯杆 R",
       "bbox": [
@@ -5531,10 +6442,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 39
+      "page": 41
     },
     "NeckStaySleeveL": {
-      "id": "CT260",
+      "id": "CT303",
       "name": "NeckStaySleeveL",
       "label": "同轴后斜撑固定套筒 L",
       "bbox": [
@@ -5552,10 +6463,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 39
+      "page": 41
     },
     "NeckStaySleeveR": {
-      "id": "CT261",
+      "id": "CT304",
       "name": "NeckStaySleeveR",
       "label": "同轴后斜撑固定套筒 R",
       "bbox": [
@@ -5573,10 +6484,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 39
+      "page": 41
     },
     "NeckYokeL": {
-      "id": "CT262",
+      "id": "CT305",
       "name": "NeckYokeL",
       "label": "加高25 mm开窗固定颈架 L",
       "bbox": [
@@ -5594,10 +6505,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 39
+      "page": 41
     },
     "NeckYokeR": {
-      "id": "CT263",
+      "id": "CT306",
       "name": "NeckYokeR",
       "label": "加高25 mm开窗固定颈架 R",
       "bbox": [
@@ -5615,10 +6526,10 @@
       "system": "E",
       "target": "固定颈架 / 头舱承托结构",
       "assembly_note": "按图中世界坐标定位；固定结构，不提供关节运动。杆套与层板的连接及装配工艺尚未细化。",
-      "page": 39
+      "page": 41
     },
     "OccipitalBrowL": {
-      "id": "CT264",
+      "id": "CT307",
       "name": "OccipitalBrowL",
       "label": "左后脑折面上护甲",
       "bbox": [
@@ -5636,10 +6547,10 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 45
+      "page": 47
     },
     "OccipitalBrowR": {
-      "id": "CT265",
+      "id": "CT308",
       "name": "OccipitalBrowR",
       "label": "右后脑折面上护甲",
       "bbox": [
@@ -5657,10 +6568,10 @@
       "system": "G",
       "target": "整体冠盖组件",
       "assembly_note": "随整体冠盖上提65；分对象用于造型识别，饰件独立固定或合并成形工艺未定。效果件不含高压器件。",
-      "page": 45
+      "page": 47
     },
     "OccipitalFrame": {
-      "id": "CT266",
+      "id": "CT309",
       "name": "OccipitalFrame",
       "label": "后脑六边内嵌护框",
       "bbox": [
@@ -5678,10 +6589,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 41
+      "page": 43
     },
     "OccipitalInset": {
-      "id": "CT267",
+      "id": "CT310",
       "name": "OccipitalInset",
       "label": "后脑内凹封闭衬板",
       "bbox": [
@@ -5699,10 +6610,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 41
+      "page": 43
     },
     "OccipitalLouverL0": {
-      "id": "CT268",
+      "id": "CT311",
       "name": "OccipitalLouverL0",
       "label": "后脑封闭格栅饰条 L0",
       "bbox": [
@@ -5720,10 +6631,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 41
+      "page": 43
     },
     "OccipitalLouverL1": {
-      "id": "CT269",
+      "id": "CT312",
       "name": "OccipitalLouverL1",
       "label": "后脑封闭格栅饰条 L1",
       "bbox": [
@@ -5741,10 +6652,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 41
+      "page": 43
     },
     "OccipitalLouverL2": {
-      "id": "CT270",
+      "id": "CT313",
       "name": "OccipitalLouverL2",
       "label": "后脑封闭格栅饰条 L2",
       "bbox": [
@@ -5762,10 +6673,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 41
+      "page": 43
     },
     "OccipitalLouverR0": {
-      "id": "CT271",
+      "id": "CT314",
       "name": "OccipitalLouverR0",
       "label": "后脑封闭格栅饰条 R0",
       "bbox": [
@@ -5783,10 +6694,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 41
+      "page": 43
     },
     "OccipitalLouverR1": {
-      "id": "CT272",
+      "id": "CT315",
       "name": "OccipitalLouverR1",
       "label": "后脑封闭格栅饰条 R1",
       "bbox": [
@@ -5804,10 +6715,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 41
+      "page": 43
     },
     "OccipitalLouverR2": {
-      "id": "CT273",
+      "id": "CT316",
       "name": "OccipitalLouverR2",
       "label": "后脑封闭格栅饰条 R2",
       "bbox": [
@@ -5825,10 +6736,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 41
+      "page": 43
     },
     "OccipitalMark": {
-      "id": "CT274",
+      "id": "CT317",
       "name": "OccipitalMark",
       "label": "后脑纵向识别条",
       "bbox": [
@@ -5846,10 +6757,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 41
+      "page": 43
     },
     "OccipitalSpine": {
-      "id": "CT275",
+      "id": "CT318",
       "name": "OccipitalSpine",
       "label": "后脑中央分层脊甲",
       "bbox": [
@@ -5867,10 +6778,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 42
+      "page": 44
     },
     "PowerBank": {
-      "id": "CT276",
+      "id": "CT319",
       "name": "PowerBank",
       "label": "实测充电宝 120×73×31.5／前下方平放",
       "bbox": [
@@ -5888,10 +6799,10 @@
       "system": "C",
       "target": "电源内托架上的四处承托垫",
       "assembly_note": "120×73×31.5实测外形；端口面朝+Y。先核对插头，内托架向下取出60。",
-      "page": 35
+      "page": 37
     },
     "PowerCableRoute": {
-      "id": "CT277",
+      "id": "CT320",
       "name": "PowerCableRoute",
       "label": "电源插头及中央线束／电机维护时拔下并移开",
       "bbox": [
@@ -5909,10 +6820,10 @@
       "system": "E",
       "target": "底盘中央干区 → 颈架 → 头舱后槽",
       "assembly_note": "线束经护口和限位桥进入托盘后缘；Ø6为规划。拆托盘先断开对外线束，真实弯曲待验。",
-      "page": 39
+      "page": 41
     },
     "RearBaseArmor": {
-      "id": "CT278",
+      "id": "CT321",
       "name": "RearBaseArmor",
       "label": "双瓶背包下后护甲／X镜面对称",
       "bbox": [
@@ -5930,10 +6841,10 @@
       "system": "L",
       "target": "低位双瓶背包 / 对应护舱",
       "assembly_note": "护壳、后护甲及识别饰条按模型位置装配；连接、分体或一体制造方式尚未细化。",
-      "page": 53
+      "page": 55
     },
     "RearBulkhead": {
-      "id": "CT279",
+      "id": "CT322",
       "name": "RearBulkhead",
       "label": "后部湿舱隔板",
       "bbox": [
@@ -5951,10 +6862,10 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 33
+      "page": 35
     },
     "SensorMask": {
-      "id": "CT280",
+      "id": "CT323",
       "name": "SensorMask",
       "label": "前脸传感器面板／双Ø16.6候选孔",
       "bbox": [
@@ -5972,10 +6883,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 42
+      "page": 44
     },
     "SensorStatusStrip": {
-      "id": "CT281",
+      "id": "CT324",
       "name": "SensorStatusStrip",
       "label": "双探头上方窄状态色条",
       "bbox": [
@@ -5993,10 +6904,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 42
+      "page": 44
     },
     "ShoulderRailL": {
-      "id": "CT282",
+      "id": "CT325",
       "name": "ShoulderRailL",
       "label": "左斜面肩部承力梁",
       "bbox": [
@@ -6014,10 +6925,10 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 33
+      "page": 35
     },
     "ShoulderRailR": {
-      "id": "CT283",
+      "id": "CT326",
       "name": "ShoulderRailR",
       "label": "右斜面肩部承力梁",
       "bbox": [
@@ -6035,10 +6946,10 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 33
+      "page": 35
     },
     "StopControl": {
-      "id": "CT284",
+      "id": "CT327",
       "name": "StopControl",
       "label": "后肩本地停止按钮占位",
       "bbox": [
@@ -6056,10 +6967,10 @@
       "system": "B",
       "target": "后肩本地停止操作区",
       "assembly_note": "按钮及基台为位置占位；选型、固定和切断电路未设计，不能视为已可用的停止机构。",
-      "page": 33
+      "page": 35
     },
     "StopPlinth": {
-      "id": "CT285",
+      "id": "CT328",
       "name": "StopPlinth",
       "label": "本地停止操作区基台",
       "bbox": [
@@ -6077,10 +6988,10 @@
       "system": "B",
       "target": "后肩本地停止操作区",
       "assembly_note": "按钮及基台为位置占位；选型、固定和切断电路未设计，不能视为已可用的停止机构。",
-      "page": 33
+      "page": 35
     },
     "TempleCrestL": {
-      "id": "CT286",
+      "id": "CT329",
       "name": "TempleCrestL",
       "label": "左太阳穴上层折面护甲",
       "bbox": [
@@ -6098,10 +7009,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 42
+      "page": 44
     },
     "TempleCrestR": {
-      "id": "CT287",
+      "id": "CT330",
       "name": "TempleCrestR",
       "label": "右太阳穴上层折面护甲",
       "bbox": [
@@ -6119,10 +7030,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 42
+      "page": 44
     },
     "TempleGuardL": {
-      "id": "CT288",
+      "id": "CT331",
       "name": "TempleGuardL",
       "label": "左前伸太阳穴切面护板",
       "bbox": [
@@ -6140,10 +7051,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 42
+      "page": 44
     },
     "TempleGuardR": {
-      "id": "CT289",
+      "id": "CT332",
       "name": "TempleGuardR",
       "label": "右前伸太阳穴切面护板",
       "bbox": [
@@ -6161,10 +7072,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 42
+      "page": 44
     },
     "TempleLowerBladeL": {
-      "id": "CT290",
+      "id": "CT333",
       "name": "TempleLowerBladeL",
       "label": "左太阳穴下层护片",
       "bbox": [
@@ -6182,10 +7093,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 42
+      "page": 44
     },
     "TempleLowerBladeR": {
-      "id": "CT291",
+      "id": "CT334",
       "name": "TempleLowerBladeR",
       "label": "右太阳穴下层护片",
       "bbox": [
@@ -6203,10 +7114,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 42
+      "page": 44
     },
     "TrackLeftChevronTreads": {
-      "id": "CT292",
+      "id": "CT335",
       "name": "TrackLeftChevronTreads",
       "label": "左侧人字形抓地块（96块）",
       "bbox": [
@@ -6224,10 +7135,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 29
+      "page": 31
     },
     "TrackLeftFasteners": {
-      "id": "CT293",
+      "id": "CT336",
       "name": "TrackLeftFasteners",
       "label": "左侧轮组及悬挂紧固件",
       "bbox": [
@@ -6245,10 +7156,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackLeftRockerPlates": {
-      "id": "CT294",
+      "id": "CT337",
       "name": "TrackLeftRockerPlates",
       "label": "左侧镂空承重轮摇臂板",
       "bbox": [
@@ -6266,10 +7177,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackLeftRubberBand": {
-      "id": "CT295",
+      "id": "CT338",
       "name": "TrackLeftRubberBand",
       "label": "左侧连续橡胶履带",
       "bbox": [
@@ -6287,10 +7198,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackLeftShoulderLugs": {
-      "id": "CT296",
+      "id": "CT339",
       "name": "TrackLeftShoulderLugs",
       "label": "左侧履带肩部胎块（96块）",
       "bbox": [
@@ -6308,10 +7219,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackLeftSuspensionArms": {
-      "id": "CT297",
+      "id": "CT340",
       "name": "TrackLeftSuspensionArms",
       "label": "左侧悬挂支臂与轴套",
       "bbox": [
@@ -6329,10 +7240,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackLeftTreadPads": {
-      "id": "CT298",
+      "id": "CT341",
       "name": "TrackLeftTreadPads",
       "label": "左侧履带胎块底座（48节）",
       "bbox": [
@@ -6350,10 +7261,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackLeftWheelFaces": {
-      "id": "CT299",
+      "id": "CT342",
       "name": "TrackLeftWheelFaces",
       "label": "左侧镂空轮盘",
       "bbox": [
@@ -6371,10 +7282,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 31
+      "page": 33
     },
     "TrackLeftWheelHubs": {
-      "id": "CT300",
+      "id": "CT343",
       "name": "TrackLeftWheelHubs",
       "label": "左侧阶梯轮毂与垫圈",
       "bbox": [
@@ -6392,10 +7303,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 31
+      "page": 33
     },
     "TrackLeftWheelRims": {
-      "id": "CT301",
+      "id": "CT344",
       "name": "TrackLeftWheelRims",
       "label": "左侧金属轮圈",
       "bbox": [
@@ -6413,10 +7324,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 31
+      "page": 33
     },
     "TrackLeftWheelTires": {
-      "id": "CT302",
+      "id": "CT345",
       "name": "TrackLeftWheelTires",
       "label": "左侧驱动轮与导向轮橡胶轮组",
       "bbox": [
@@ -6434,10 +7345,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 31
+      "page": 33
     },
     "TrackMountL": {
-      "id": "CT303",
+      "id": "CT346",
       "name": "TrackMountL",
       "label": "左侧履带安装件参考",
       "bbox": [
@@ -6455,10 +7366,10 @@
       "system": "A",
       "target": "对应侧履带 → 底盘",
       "assembly_note": "按来源安装件对齐底盘两点；与联轴器同轴关系、孔距和实物配合待核。",
-      "page": 31
+      "page": 33
     },
     "TrackMountR": {
-      "id": "CT304",
+      "id": "CT347",
       "name": "TrackMountR",
       "label": "右侧履带安装件参考",
       "bbox": [
@@ -6476,10 +7387,10 @@
       "system": "A",
       "target": "对应侧履带 → 底盘",
       "assembly_note": "按来源安装件对齐底盘两点；与联轴器同轴关系、孔距和实物配合待核。",
-      "page": 31
+      "page": 33
     },
     "TrackMountScrewLFront": {
-      "id": "CT305",
+      "id": "CT348",
       "name": "TrackMountScrewLFront",
       "label": "履带安装件 M3 级固定螺钉 LFront",
       "bbox": [
@@ -6497,10 +7408,10 @@
       "system": "A",
       "target": "履带安装件 → 底盘侧面",
       "assembly_note": "每侧2颗M3级候选；先对齐安装件孔位，再固定。长度、螺纹啮合及防松待定。",
-      "page": 31
+      "page": 33
     },
     "TrackMountScrewLRear": {
-      "id": "CT306",
+      "id": "CT349",
       "name": "TrackMountScrewLRear",
       "label": "履带安装件 M3 级固定螺钉 LRear",
       "bbox": [
@@ -6518,10 +7429,10 @@
       "system": "A",
       "target": "履带安装件 → 底盘侧面",
       "assembly_note": "每侧2颗M3级候选；先对齐安装件孔位，再固定。长度、螺纹啮合及防松待定。",
-      "page": 31
+      "page": 33
     },
     "TrackMountScrewRFront": {
-      "id": "CT307",
+      "id": "CT350",
       "name": "TrackMountScrewRFront",
       "label": "履带安装件 M3 级固定螺钉 RFront",
       "bbox": [
@@ -6539,10 +7450,10 @@
       "system": "A",
       "target": "履带安装件 → 底盘侧面",
       "assembly_note": "每侧2颗M3级候选；先对齐安装件孔位，再固定。长度、螺纹啮合及防松待定。",
-      "page": 31
+      "page": 33
     },
     "TrackMountScrewRRear": {
-      "id": "CT308",
+      "id": "CT351",
       "name": "TrackMountScrewRRear",
       "label": "履带安装件 M3 级固定螺钉 RRear",
       "bbox": [
@@ -6560,10 +7471,10 @@
       "system": "A",
       "target": "履带安装件 → 底盘侧面",
       "assembly_note": "每侧2颗M3级候选；先对齐安装件孔位，再固定。长度、螺纹啮合及防松待定。",
-      "page": 31
+      "page": 33
     },
     "TrackRightChevronTreads": {
-      "id": "CT309",
+      "id": "CT352",
       "name": "TrackRightChevronTreads",
       "label": "右侧人字形抓地块（96块）",
       "bbox": [
@@ -6581,10 +7492,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 29
+      "page": 31
     },
     "TrackRightFasteners": {
-      "id": "CT310",
+      "id": "CT353",
       "name": "TrackRightFasteners",
       "label": "右侧轮组及悬挂紧固件",
       "bbox": [
@@ -6602,10 +7513,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackRightRockerPlates": {
-      "id": "CT311",
+      "id": "CT354",
       "name": "TrackRightRockerPlates",
       "label": "右侧镂空承重轮摇臂板",
       "bbox": [
@@ -6623,10 +7534,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackRightRubberBand": {
-      "id": "CT312",
+      "id": "CT355",
       "name": "TrackRightRubberBand",
       "label": "右侧连续橡胶履带",
       "bbox": [
@@ -6644,10 +7555,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackRightShoulderLugs": {
-      "id": "CT313",
+      "id": "CT356",
       "name": "TrackRightShoulderLugs",
       "label": "右侧履带肩部胎块（96块）",
       "bbox": [
@@ -6665,10 +7576,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackRightSuspensionArms": {
-      "id": "CT314",
+      "id": "CT357",
       "name": "TrackRightSuspensionArms",
       "label": "右侧悬挂支臂与轴套",
       "bbox": [
@@ -6686,10 +7597,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackRightTreadPads": {
-      "id": "CT315",
+      "id": "CT358",
       "name": "TrackRightTreadPads",
       "label": "右侧履带胎块底座（48节）",
       "bbox": [
@@ -6707,10 +7618,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 30
+      "page": 32
     },
     "TrackRightWheelFaces": {
-      "id": "CT316",
+      "id": "CT359",
       "name": "TrackRightWheelFaces",
       "label": "右侧镂空轮盘",
       "bbox": [
@@ -6728,10 +7639,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 31
+      "page": 33
     },
     "TrackRightWheelHubs": {
-      "id": "CT317",
+      "id": "CT360",
       "name": "TrackRightWheelHubs",
       "label": "右侧阶梯轮毂与垫圈",
       "bbox": [
@@ -6749,10 +7660,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 31
+      "page": 33
     },
     "TrackRightWheelRims": {
-      "id": "CT318",
+      "id": "CT361",
       "name": "TrackRightWheelRims",
       "label": "右侧金属轮圈",
       "bbox": [
@@ -6770,10 +7681,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 31
+      "page": 33
     },
     "TrackRightWheelTires": {
-      "id": "CT319",
+      "id": "CT362",
       "name": "TrackRightWheelTires",
       "label": "右侧驱动轮与导向轮橡胶轮组",
       "bbox": [
@@ -6791,10 +7702,10 @@
       "system": "A",
       "target": "对应侧成品履带总成",
       "assembly_note": "成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。",
-      "page": 31
+      "page": 33
     },
     "UltrasonicFaceL": {
-      "id": "CT320",
+      "id": "CT363",
       "name": "UltrasonicFaceL",
       "label": "超声波探头端面 L",
       "bbox": [
@@ -6812,10 +7723,10 @@
       "system": "I",
       "target": "超声波探头端面",
       "assembly_note": "仅为探头端面的分色几何，不是额外采购的端盖；与对应圆柱一起随模块拆装。",
-      "page": 46
+      "page": 48
     },
     "UltrasonicFaceR": {
-      "id": "CT321",
+      "id": "CT364",
       "name": "UltrasonicFaceR",
       "label": "超声波探头端面 R",
       "bbox": [
@@ -6833,10 +7744,10 @@
       "system": "I",
       "target": "超声波探头端面",
       "assembly_note": "仅为探头端面的分色几何，不是额外采购的端盖；与对应圆柱一起随模块拆装。",
-      "page": 46
+      "page": 48
     },
     "UltrasonicPCBEnvelope": {
-      "id": "CT322",
+      "id": "CT365",
       "name": "UltrasonicPCBEnvelope",
       "label": "候选超声波PCB 45×20×1.6",
       "bbox": [
@@ -6854,10 +7765,10 @@
       "system": "I",
       "target": "超声波整模块后部 / 顶部",
       "assembly_note": "PCB、背面器件及向上接头均为未实测包络；与探头共同拆装，不能按此图采购或钻固定孔。",
-      "page": 46
+      "page": 48
     },
     "UltrasonicRearEnvelope": {
-      "id": "CT323",
+      "id": "CT366",
       "name": "UltrasonicRearEnvelope",
       "label": "候选超声波背面元件 45×20×4",
       "bbox": [
@@ -6875,10 +7786,10 @@
       "system": "I",
       "target": "超声波整模块后部 / 顶部",
       "assembly_note": "PCB、背面器件及向上接头均为未实测包络；与探头共同拆装，不能按此图采购或钻固定孔。",
-      "page": 46
+      "page": 48
     },
     "UltrasonicRingL": {
-      "id": "CT324",
+      "id": "CT367",
       "name": "UltrasonicRingL",
       "label": "超声波圆柱主体 Ø16×10.3 L",
       "bbox": [
@@ -6896,10 +7807,10 @@
       "system": "I",
       "target": "前脸双Ø16.6孔 → 模块PCB",
       "assembly_note": "Ø16×10.3用户尺寸；中心距26为推导。双探头属于同一模块，固定方式未设计。",
-      "page": 46
+      "page": 48
     },
     "UltrasonicRingR": {
-      "id": "CT325",
+      "id": "CT368",
       "name": "UltrasonicRingR",
       "label": "超声波圆柱主体 Ø16×10.3 R",
       "bbox": [
@@ -6917,10 +7828,10 @@
       "system": "I",
       "target": "前脸双Ø16.6孔 → 模块PCB",
       "assembly_note": "Ø16×10.3用户尺寸；中心距26为推导。双探头属于同一模块，固定方式未设计。",
-      "page": 46
+      "page": 48
     },
     "UltrasonicTopConnector": {
-      "id": "CT326",
+      "id": "CT369",
       "name": "UltrasonicTopConnector",
       "label": "候选超声波向上接头 12×6×8",
       "bbox": [
@@ -6938,10 +7849,10 @@
       "system": "I",
       "target": "超声波整模块后部 / 顶部",
       "assembly_note": "PCB、背面器件及向上接头均为未实测包络；与探头共同拆装，不能按此图采购或钻固定孔。",
-      "page": 46
+      "page": 48
     },
     "UltrasonicWireSpace": {
-      "id": "CT327",
+      "id": "CT370",
       "name": "UltrasonicWireSpace",
       "label": "候选超声波Ø4线束空间／板端待定",
       "bbox": [
@@ -6959,10 +7870,10 @@
       "system": "I",
       "target": "模块顶部接头 → 面包板侧边交接区",
       "assembly_note": "Ø4线束路线为候选，板端接口未定；取托盘或超声波前先断开并收置线束，折线不代表真实弯曲半径。",
-      "page": 47
+      "page": 49
     },
     "VisorRim": {
-      "id": "CT328",
+      "id": "CT371",
       "name": "VisorRim",
       "label": "六边形前脸内框",
       "bbox": [
@@ -6980,10 +7891,10 @@
       "system": "F",
       "target": "头壳 / 前脸 / 对应侧外甲",
       "assembly_note": "按模型位置识别；分件固定、胶粘或合并成形方式未定。耳部饰件不能证明扬声器出声通道。",
-      "page": 43
+      "page": 45
     },
     "WaterBottleRemovalSpace": {
-      "id": "CT329",
+      "id": "CT372",
       "name": "WaterBottleRemovalSpace",
       "label": "清水整瓶向上150 mm连续抽出空间",
       "bbox": [
@@ -7001,10 +7912,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 60
+      "page": 69
     },
     "WaterBottomPad": {
-      "id": "CT330",
+      "id": "CT373",
       "name": "WaterBottomPad",
       "label": "清水底部软垫候选1 mm",
       "bbox": [
@@ -7022,10 +7933,10 @@
       "system": "L",
       "target": "对应瓶底面 / 侧壁与底托之间",
       "assembly_note": "1 mm候选软垫；先铺垫再放瓶，压缩量和防滑保持力待验。",
-      "page": 53
+      "page": 55
     },
     "WaterDipTubeSpace": {
-      "id": "CT331",
+      "id": "CT374",
       "name": "WaterDipTubeSpace",
       "label": "清水瓶内吸管Ø8候选通道／非瓶壁开孔",
       "bbox": [
@@ -7043,10 +7954,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 60
+      "page": 69
     },
     "WaterFingerSpace": {
-      "id": "CT332",
+      "id": "CT375",
       "name": "WaterFingerSpace",
       "label": "清水后侧指槽18×22.4×28预留",
       "bbox": [
@@ -7064,10 +7975,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 60
+      "page": 69
     },
     "WaterGunBaseInsert1": {
-      "id": "CT333",
+      "id": "CT376",
       "name": "WaterGunBaseInsert1",
       "label": "托架基座 M3 级嵌件候选 1",
       "bbox": [
@@ -7085,10 +7996,10 @@
       "system": "J",
       "target": "水枪空底托 → 对应侧肩梁",
       "assembly_note": "每侧2套M3级嵌件及基座螺钉候选；先固定空底托再装枪，孔轴随15°安装面。",
-      "page": 47
+      "page": 49
     },
     "WaterGunBaseInsert2": {
-      "id": "CT334",
+      "id": "CT377",
       "name": "WaterGunBaseInsert2",
       "label": "托架基座 M3 级嵌件候选 2",
       "bbox": [
@@ -7106,10 +8017,10 @@
       "system": "J",
       "target": "水枪空底托 → 对应侧肩梁",
       "assembly_note": "每侧2套M3级嵌件及基座螺钉候选；先固定空底托再装枪，孔轴随15°安装面。",
-      "page": 47
+      "page": 49
     },
     "WaterGunBaseScrew1": {
-      "id": "CT335",
+      "id": "CT378",
       "name": "WaterGunBaseScrew1",
       "label": "托架沉入式紧固候选 1",
       "bbox": [
@@ -7127,10 +8038,10 @@
       "system": "J",
       "target": "水枪空底托 → 对应侧肩梁",
       "assembly_note": "每侧2套M3级嵌件及基座螺钉候选；先固定空底托再装枪，孔轴随15°安装面。",
-      "page": 47
+      "page": 49
     },
     "WaterGunBaseScrew2": {
-      "id": "CT336",
+      "id": "CT379",
       "name": "WaterGunBaseScrew2",
       "label": "托架沉入式紧固候选 2",
       "bbox": [
@@ -7148,10 +8059,10 @@
       "system": "J",
       "target": "水枪空底托 → 对应侧肩梁",
       "assembly_note": "每侧2套M3级嵌件及基座螺钉候选；先固定空底托再装枪，孔轴随15°安装面。",
-      "page": 47
+      "page": 49
     },
     "WaterGunBaseTool1": {
-      "id": "CT337",
+      "id": "CT380",
       "name": "WaterGunBaseTool1",
       "label": "空托架基座短臂内六角操作空间 1",
       "bbox": [
@@ -7169,10 +8080,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 60
+      "page": 69
     },
     "WaterGunBaseTool2": {
-      "id": "CT338",
+      "id": "CT381",
       "name": "WaterGunBaseTool2",
       "label": "空托架基座短臂内六角操作空间 2",
       "bbox": [
@@ -7190,10 +8101,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 60
+      "page": 69
     },
     "WaterGunBody": {
-      "id": "CT339",
+      "id": "CT382",
       "name": "WaterGunBody",
       "label": "拆出发射枪／前细后粗示意",
       "bbox": [
@@ -7211,10 +8122,10 @@
       "system": "J",
       "target": "水枪胶粘底托 / 侧接软管",
       "assembly_note": "成品枪体与未测接头示意；最大包络含管宽38.5。拆时脱胶、局部+Z抬2、−Y前抽150。",
-      "page": 47
+      "page": 49
     },
     "WaterGunConnectorService": {
-      "id": "CT340",
+      "id": "CT383",
       "name": "WaterGunConnectorService",
       "label": "尾线插头外拔16及侧面操作余量",
       "bbox": [
@@ -7232,10 +8143,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 61
+      "page": 70
     },
     "WaterGunCradle": {
-      "id": "CT341",
+      "id": "CT384",
       "name": "WaterGunCradle",
       "label": "水枪一体底托／左右挡板／尾线导向鞍／前开口",
       "bbox": [
@@ -7253,10 +8164,10 @@
       "system": "J",
       "target": "水枪侧肩梁15°承托面",
       "assembly_note": "两颗基座螺钉固定；尾线导向鞍已一体，前后托管槽制造时合并；枪体靠底部软胶。",
-      "page": 47
+      "page": 49
     },
     "WaterGunHoseClearance": {
-      "id": "CT342",
+      "id": "CT385",
       "name": "WaterGunHoseClearance",
       "label": "水管 Ø8 路线预留／中心弯曲半径8候选",
       "bbox": [
@@ -7274,10 +8185,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 61
+      "page": 70
     },
     "WaterGunHoseService": {
-      "id": "CT343",
+      "id": "CT386",
       "name": "WaterGunHoseService",
       "label": "侧接管沿 +X 拔出30／操作直径16候选",
       "bbox": [
@@ -7295,10 +8206,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 61
+      "page": 70
     },
     "WaterGunHoseSupport": {
-      "id": "CT344",
+      "id": "CT387",
       "name": "WaterGunHoseSupport",
       "label": "外侧前挡板托管座／Ø5管／Ø5.6上开口",
       "bbox": [
@@ -7316,10 +8227,10 @@
       "system": "J",
       "target": "水枪底托外侧前 / 后挡板",
       "assembly_note": "两处上开口Ø5.6托槽承托Ø5实测软管；制造合并须纳入底托，不作为独立紧固件或防拉夹。",
-      "page": 47
+      "page": 49
     },
     "WaterGunHoseSupportRear": {
-      "id": "CT345",
+      "id": "CT388",
       "name": "WaterGunHoseSupportRear",
       "label": "外侧后挡板托管座／Ø5管／Ø5.6上开口",
       "bbox": [
@@ -7337,10 +8248,10 @@
       "system": "J",
       "target": "水枪底托外侧前 / 后挡板",
       "assembly_note": "两处上开口Ø5.6托槽承托Ø5实测软管；制造合并须纳入底托，不作为独立紧固件或防拉夹。",
-      "page": 47
+      "page": 49
     },
     "WaterGunInlet": {
-      "id": "CT346",
+      "id": "CT389",
       "name": "WaterGunInlet",
       "label": "水枪侧接头／未测形状",
       "bbox": [
@@ -7358,10 +8269,10 @@
       "system": "J",
       "target": "水枪胶粘底托 / 侧接软管",
       "assembly_note": "成品枪体与未测接头示意；最大包络含管宽38.5。拆时脱胶、局部+Z抬2、−Y前抽150。",
-      "page": 48
+      "page": 50
     },
     "WaterGunLeadClearance": {
-      "id": "CT347",
+      "id": "CT390",
       "name": "WaterGunLeadClearance",
       "label": "尾线 Ø8 走线审查区／不含手部",
       "bbox": [
@@ -7379,10 +8290,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 61
+      "page": 70
     },
     "WaterGunLeadConnector": {
-      "id": "CT348",
+      "id": "CT391",
       "name": "WaterGunLeadConnector",
       "label": "水枪可分离插头包络 16×10×10／型号未定",
       "bbox": [
@@ -7400,10 +8311,10 @@
       "system": "J",
       "target": "对应枪尾端 → 干区线束",
       "assembly_note": "线束Ø3、插头16×10×10为候选；先解除固定再拔插。端子、固定与应力释放待定。",
-      "page": 48
+      "page": 50
     },
     "WaterGunLeadRoute": {
-      "id": "CT349",
+      "id": "CT392",
       "name": "WaterGunLeadRoute",
       "label": "水枪尾线束候选 Ø3／中心弯曲半径8",
       "bbox": [
@@ -7421,10 +8332,10 @@
       "system": "J",
       "target": "对应枪尾端 → 干区线束",
       "assembly_note": "线束Ø3、插头16×10×10为候选；先解除固定再拔插。端子、固定与应力释放待定。",
-      "page": 48
+      "page": 50
     },
     "WaterGunLowerPad1": {
-      "id": "CT350",
+      "id": "CT393",
       "name": "WaterGunLowerPad1",
       "label": "底部双面软胶候选／厚度未测 1",
       "bbox": [
@@ -7442,10 +8353,10 @@
       "system": "J",
       "target": "水枪底面 ↔ 一体底托",
       "assembly_note": "两处1 mm双面软胶候选；不钻原枪体。胶厚、材质和保持力待验；拆枪前完全解除粘接。",
-      "page": 48
+      "page": 50
     },
     "WaterGunLowerPad2": {
-      "id": "CT351",
+      "id": "CT394",
       "name": "WaterGunLowerPad2",
       "label": "底部双面软胶候选／厚度未测 2",
       "bbox": [
@@ -7463,10 +8374,10 @@
       "system": "J",
       "target": "水枪底面 ↔ 一体底托",
       "assembly_note": "两处1 mm双面软胶候选；不钻原枪体。胶厚、材质和保持力待验；拆枪前完全解除粘接。",
-      "page": 48
+      "page": 50
     },
     "WaterGunMaximumEnvelope": {
-      "id": "CT352",
+      "id": "CT395",
       "name": "WaterGunMaximumEnvelope",
       "label": "水枪最大尺寸审查包络／含管宽38.5",
       "bbox": [
@@ -7484,10 +8395,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 61
+      "page": 70
     },
     "WaterHoseRoute": {
-      "id": "CT353",
+      "id": "CT396",
       "name": "WaterHoseRoute",
       "label": "喷水顶部吸液管 Ø5 实测／R8／侧向接前枪",
       "bbox": [
@@ -7505,10 +8416,10 @@
       "system": "L",
       "target": "对应瓶顶部 → 对应枪接头",
       "assembly_note": "清水管Ø5实测、泡泡管Ø4候选；从瓶顶插入，不穿后护甲或侧壁。接头、密封与管长待核。",
-      "page": 53
+      "page": 55
     },
     "WaterLidMark": {
-      "id": "CT354",
+      "id": "CT397",
       "name": "WaterLidMark",
       "label": "清水低位护舱识别条",
       "bbox": [
@@ -7526,10 +8437,10 @@
       "system": "L",
       "target": "低位双瓶背包 / 对应护舱",
       "assembly_note": "护壳、后护甲及识别饰条按模型位置装配；连接、分体或一体制造方式尚未细化。",
-      "page": 53
+      "page": 55
     },
     "WaterModule": {
-      "id": "CT355",
+      "id": "CT398",
       "name": "WaterModule",
       "label": "清水成品瓶完整含盖包络 Ø48.8×114／150 mL",
       "bbox": [
@@ -7547,10 +8458,10 @@
       "system": "L",
       "target": "对应开窗底托 / 绑带",
       "assembly_note": "成品瓶含盖Ø48.8×114、150 mL；不拆分打印瓶盖。顶部插管；松绑带后整瓶上取150。",
-      "page": 53
+      "page": 55
     },
     "WaterPod": {
-      "id": "CT356",
+      "id": "CT399",
       "name": "WaterPod",
       "label": "清水开窗底托／前部绑带导槽／双M3固定",
       "bbox": [
@@ -7568,10 +8479,10 @@
       "system": "L",
       "target": "对应瓶底托 → 湿舱底部",
       "assembly_note": "每个开窗底托2套M3级候选嵌件/螺钉固定；先装空底托，再放软垫、瓶与绑带。",
-      "page": 54
+      "page": 56
     },
     "WaterPodInsertL": {
-      "id": "CT357",
+      "id": "CT400",
       "name": "WaterPodInsertL",
       "label": "清水底托M3嵌件候选",
       "bbox": [
@@ -7589,10 +8500,10 @@
       "system": "L",
       "target": "对应瓶底托 → 湿舱底部",
       "assembly_note": "每个开窗底托2套M3级候选嵌件/螺钉固定；先装空底托，再放软垫、瓶与绑带。",
-      "page": 54
+      "page": 56
     },
     "WaterPodInsertR": {
-      "id": "CT358",
+      "id": "CT401",
       "name": "WaterPodInsertR",
       "label": "清水底托M3嵌件候选001",
       "bbox": [
@@ -7610,10 +8521,10 @@
       "system": "L",
       "target": "对应瓶底托 → 湿舱底部",
       "assembly_note": "每个开窗底托2套M3级候选嵌件/螺钉固定；先装空底托，再放软垫、瓶与绑带。",
-      "page": 54
+      "page": 56
     },
     "WaterPodScrewL": {
-      "id": "CT359",
+      "id": "CT402",
       "name": "WaterPodScrewL",
       "label": "清水底托M3候选沉孔螺钉",
       "bbox": [
@@ -7631,10 +8542,10 @@
       "system": "L",
       "target": "对应瓶底托 → 湿舱底部",
       "assembly_note": "每个开窗底托2套M3级候选嵌件/螺钉固定；先装空底托，再放软垫、瓶与绑带。",
-      "page": 54
+      "page": 56
     },
     "WaterPodScrewR": {
-      "id": "CT360",
+      "id": "CT403",
       "name": "WaterPodScrewR",
       "label": "清水底托M3候选沉孔螺钉001",
       "bbox": [
@@ -7652,10 +8563,10 @@
       "system": "L",
       "target": "对应瓶底托 → 湿舱底部",
       "assembly_note": "每个开窗底托2套M3级候选嵌件/螺钉固定；先装空底托，再放软垫、瓶与绑带。",
-      "page": 54
+      "page": 56
     },
     "WaterRetentionBand": {
-      "id": "CT361",
+      "id": "CT404",
       "name": "WaterRetentionBand",
       "label": "清水可释放环绕绑带候选12×1／张紧防滑未验",
       "bbox": [
@@ -7673,10 +8584,10 @@
       "system": "L",
       "target": "对应瓶底托导槽 / 瓶体外侧",
       "assembly_note": "12×1候选可释放绑带与魔术贴搭接；后侧拉片释放，非刚性卡扣。张紧及防滑待验。",
-      "page": 54
+      "page": 56
     },
     "WaterSidePad0": {
-      "id": "CT362",
+      "id": "CT405",
       "name": "WaterSidePad0",
       "label": "清水环形侧垫候选1 mm",
       "bbox": [
@@ -7694,10 +8605,10 @@
       "system": "L",
       "target": "对应瓶底面 / 侧壁与底托之间",
       "assembly_note": "1 mm候选软垫；先铺垫再放瓶，压缩量和防滑保持力待验。",
-      "page": 54
+      "page": 56
     },
     "WaterSidePad1": {
-      "id": "CT363",
+      "id": "CT406",
       "name": "WaterSidePad1",
       "label": "清水环形侧垫候选1 mm001",
       "bbox": [
@@ -7715,10 +8626,10 @@
       "system": "L",
       "target": "对应瓶底面 / 侧壁与底托之间",
       "assembly_note": "1 mm候选软垫；先铺垫再放瓶，压缩量和防滑保持力待验。",
-      "page": 54
+      "page": 56
     },
     "WaterStrapAccessSpace": {
-      "id": "CT364",
+      "id": "CT407",
       "name": "WaterStrapAccessSpace",
       "label": "清水后拉片20×23.8×20操作预留",
       "bbox": [
@@ -7736,10 +8647,10 @@
       "system": "M",
       "target": "所示机构的检修 / 接线区域",
       "assembly_note": "仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。",
-      "page": 61
+      "page": 70
     },
     "WaterStrapClosure": {
-      "id": "CT365",
+      "id": "CT408",
       "name": "WaterStrapClosure",
       "label": "清水魔术贴搭接及后拉片候选／非刚性卡扣",
       "bbox": [
@@ -7757,10 +8668,10 @@
       "system": "L",
       "target": "对应瓶底托导槽 / 瓶体外侧",
       "assembly_note": "12×1候选可释放绑带与魔术贴搭接；后侧拉片释放，非刚性卡扣。张紧及防滑待验。",
-      "page": 54
+      "page": 56
     },
     "WetDivider": {
-      "id": "CT366",
+      "id": "CT409",
       "name": "WetDivider",
       "label": "双液体舱中央隔板",
       "bbox": [
@@ -7778,7 +8689,7 @@
       "system": "B",
       "target": "底盘 / 顶盖 / 对应侧结构",
       "assembly_note": "按模型定位；肩梁承托双枪，湿舱隔板分隔空间。分体连接、密封与制造工艺未定。",
-      "page": 34
+      "page": 36
     }
   }
 }

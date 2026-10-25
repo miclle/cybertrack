@@ -35,11 +35,13 @@ pitch_audit=json.loads((MODEL/'gun-pitch-audit.json').read_text())
 breadboard_audit=json.loads((MODEL/'breadboard-change-audit.json').read_text())
 integration_audit=json.loads((MODEL/'ultrasonic-integration-change-audit.json').read_text())
 effects_audit=json.loads((MODEL/'effects-change-audit.json').read_text())
-assert effects_audit['passed'] and effects_audit['source_sha256']==meta['source_sha256']
+board_audit=json.loads((MODEL/'effect-board-change-audit.json').read_text())
+assert board_audit['passed'] and board_audit['source_sha256']==meta['source_sha256']
+assert effects_audit['passed'] and effects_audit['source_sha256']==board_audit['baseline_sha256']
 assert integration_audit['passed'] and integration_audit['source_sha256']==effects_audit['baseline_sha256']
 assert breadboard_audit['passed'] and breadboard_audit['source_sha256']==integration_audit['baseline_sha256']
 assert pitch_audit['passed'] and pitch_audit['source_sha256']==breadboard_audit['baseline_sha256']
-assert report['design_revision']=='0.42', 'Review annotations for a new model revision'
+assert report['design_revision']=='0.43', 'Review annotations for a new model revision'
 cad_checks_passed=all(report[key]['passed'] for key in ('effects_mount_check','collision_check','service_paths','breadboard_check','water_gun_check','bubble_gun_check','ultrasonic_check','ultrasonic_integration_check','rear_armor_symmetry_check','top_feed_check','drive_mount_check','l298n_check','l298n_mount_check','bottle_backpack_check','head_lift_check')) and report['water_gun_check']['removal']['passed']
 assert cad_checks_passed or args.allow_review_conflicts, 'CAD checks failed; use --allow-review-conflicts only for a marked conflict review PDF'
 # Guard dimension callouts that describe named features, not just overall extents.
@@ -111,7 +113,7 @@ pdfmetrics.registerFont(TTFont('ZHB','/System/Library/Fonts/STHeiti Medium.ttc',
 U=72/25.4
 INK='#1E303B'; MUTED='#536673'; ACCENT='#DF632B'; PALE='#EAF0F2'; BLUE='#287E96'
 c=canvas.Canvas(str(PDF),pagesize=(420*U,297*U),pageCompression=1)
-c.setTitle('CyberTrack 0.42 模型与装配图纸')
+c.setTitle('CyberTrack 0.43 模型与装配图纸')
 c.setAuthor('CyberTrack')
 c.setSubject('A3 design review drawings; dimensions in mm; not manufacturing release')
 page=0
@@ -119,8 +121,8 @@ DETAILS=json.loads((DATA/'assembly-details.json').read_text())
 assert DETAILS['source_sha256']==meta['source_sha256'], 'Stale assembly details'
 assert set(DETAILS['objects'])==set(meta['objects'])=={o['name'] for o in report['objects']}
 CATALOG, CATALOG_SHEETS=build_catalog(DETAILS['objects'])
-TOTAL_PAGES=28+len(CATALOG_SHEETS)
-SYSTEM_PAGE_REFS={'A':'20-22','B':'2-4、20-22','C':'5、22','D':'23-24','E':'8-9','F':'6、8','G':'6、12','H':'10-12','I':'18、25','J':'13-15','K':'16-17','L':'7、19','N':'26-27','M':'各系统检修'}
+TOTAL_PAGES=30+len(CATALOG_SHEETS)
+SYSTEM_PAGE_REFS={'A':'20-22','B':'2-4、20-22','C':'5、22','D':'23-24','E':'8-9','F':'6、8','G':'6、12','H':'10-12','I':'18、25','J':'13-15','K':'16-17','L':'7、19','N':'26-29','M':'各系统检修'}
 
 def text(x,y,s,size=10,color=INK,bold=False,align='left'):
     c.setFillColor(color);c.setFont('ZHB' if bold else 'ZH',size)
@@ -149,13 +151,13 @@ def header(title,subtitle):
     c.addOutlineEntry(f'{page:02d} {title}',f'page-{page}',level=0)
     c.setFillColor(INK);c.rect(0,278*U,420*U,19*U,fill=1,stroke=0)
     text(14,285,'CYBERTRACK',18,'#FFFFFF',True)
-    text(405,285,f'CT-42 / {page:02d}',11,'#FFFFFF',align='right')
+    text(405,285,f'CT-43 / {page:02d}',11,'#FFFFFF',align='right')
     text(14,265,title,21,bold=True);text(14,256,subtitle,10,MUTED)
     if not cad_checks_passed:
         text(405,244,'尺寸修订待适配：静态／拆卸／USB 空间未通过',10,ACCENT,True,align='right')
     line(14,250,406,250,'#CAD5DB',.6)
     line(14,20,406,20,'#CAD5DB',.6)
-    text(14,13,'模型与装配评审图 | Rev 0.42 | 图纸更新 2026-10-25 | 单位：mm',9,MUTED)
+    text(14,13,'模型与装配评审图 | Rev 0.43 | 图纸更新 2026-10-25 | 单位：mm',9,MUTED)
     text(406,13,f'未制造放行 · A3 横向 · {page} / {TOTAL_PAGES}',9,MUTED,align='right')
 def end():c.showPage()
 def title(x,y,s,sub=''):
@@ -232,7 +234,7 @@ def labeled_picture(name,x,y,w,h,labels):
         part_label(mapping,pixel,tx,ty,label,align)
     return mapping
 
-header('模型总览与图纸索引','0.42：背包外侧本体夹持与底盘四点薄承板合入；头壳与原前斜坡保持；未实测部分继续标注候选。')
+header('模型总览与图纸索引','0.43：四块低压板增加开窗防脱压框和局部接线预算；承板下方至少2 mm名义间隙；头壳、前斜坡与背包保持。')
 labeled_picture('assembly.png',28,87,170,146,[
     ((740,260),18,239,'顶部效果护框／冠盖','left'),
     ((630,460),18,218,'超声波双探头','left'),
@@ -251,7 +253,7 @@ box(14,29,392,33,PALE)
 text(20,51,' × '.join(f(v) for v in report['assembly_size_xyz_mm']),20,bold=True)
 text(20,37,'整机宽 × 长 × 高；模型几何外包络',9,MUTED)
 text(143,55,'图纸内容',11,bold=True)
-para(143,49,'02-04 六向尺寸　05 电源　06 头舱　07 双瓶　08 爆炸　09 走线\n10 面包板布局　11 浅托盘固定　12 整盘检修　13-15 水枪与线管\n16-17 泡泡枪　18 双探头　19 顶部供液　20-22 动力固定与维护\n23 L298N布局　24 支架与拆装　25 超声波共存\n26-27 夹环与效果板固定　28 全对象索引　29起 分系统逐项装配图卡',250,8.5,4.5)
+para(143,49,'02-04 六向尺寸　05 电源　06 头舱　07 双瓶　08 爆炸　09 走线\n10 面包板布局　11 浅托盘固定　12 整盘检修　13-15 水枪与线管\n16-17 泡泡枪　18 双探头　19 顶部供液　20-22 动力固定与维护\n23 L298N布局　24 支架与拆装　25 超声波共存\n26-27 夹环与承板　28 板卡固定　29 接线与余量　30 全对象索引　31起 逐项图卡',250,8.5,4.5)
 end()
 
 header('正面与背面 · 主要外形尺寸','各视图独立标识观察方向；尺寸为模型几何值。矢量线稿使用遮挡线消隐，未显示隐藏线。')
@@ -605,26 +607,50 @@ box(14,27,392,16,PALE)
 para(21,37,'模型无干涉不等于夹持可靠或绝缘通过。不得把软垫厚度、机械间隙、与液瓶的距离作为高压安全参数。',376,9,6)
 end()
 
-header('底盘效果板 · 薄承板四点固定','0.42：原顶盖内侧增加一体盲孔支柱，外斜坡不抬高、不穿孔；板卡与实际线束仍为候选。')
+header('底盘效果板 · 承板固定与下取','0.43：底盘前斜坡不变；四耳加厚并开沉台，螺钉头收进承板底面以内。')
 picture('effects-tray.png',18,136,188,107)
 picture('effects-tray-bottom.png',215,136,188,107)
-text(110,126,'充电宝上方：MOS与降压板占位',10,bold=True,align='center')
-text(310,126,'四点：X±39 / Y−49、−29',10,bold=True,align='center')
+text(110,126,'充电宝上方：四板凹座及防脱压框',10,bold=True,align='center')
+text(310,126,'四点：X±47 / Y−49、−26.5',10,bold=True,align='center')
 picture('effects-tray-service.png',18,35,183,83)
-para(215,115,'主体74×33×2；加四耳后最大宽86。\n承板Z66.5…68.5；螺钉从下方操作。\n4颗M2.5级候选螺钉／4嵌件，孔距78×20。\n先拆底盖和充电宝，收置中央电源线，\n托住承板、退出4螺钉，再向下取100。\n充电宝或承板螺钉未拆都会阻挡取盘。\n螺钉头最低Z65，距电源顶面名义0.5。\nMOS 33×17×12（高暂定），降压板20×11×5。\n板孔、端子、支柱与板卡自身固定仍待实测；\n不能直接在现有包络上增加安装件并沿用结论。',188,9.5,7.5)
+para(215,115,'主底板Z66.5…68.5；四耳厚4。\n固定孔距94×22.5，4颗M2.5级候选螺钉。\n螺钉头底Z66.6，比盘底收进0.1。\n先拆底盖、充电宝及托架，收置中央电源线。\n断开整盘对外接线，托住承板、退出4螺钉。\n承板连四板、压框及局部线束向下取100。\n局部线束退出采用分段保守扫掠。\n先取整盘，才能在机外拆压框及板卡。\n工具仅检查直杆，不含手掌或手柄。\n下取到下壳最近0.8，需核对装配偏差。',188,9.5,8)
 text(110,29,'向下取盘示意：充电宝已移除',9,align='center')
+end()
+
+header('四块板 · 独立开窗防脱压框','0.43候选：不虚构PCB安装孔；固定方式依赖未实测的板厚及无元件边缘。')
+picture('effects-board-mount.png',18,131,188,112)
+picture('effects-board-service.png',215,131,188,112)
+text(110,121,'四个凹座 / 四个独立压框 / 八颗M2级螺钉',10,bold=True,align='center')
+text(310,121,'机外先拆框，再向上取板',10,bold=True,align='center')
+para(21,108,'MOS外包络33×17×12，高12仍为预算。\n降压板20×11×5采用用户尺寸。\nPCB厚1.6、四边2.5无元件区均为假设。\n板底Z68，PCB上表面Z69.6。\n1 mm深浅座，底部剩1 mm结构厚度。\n两条0.5板边垫；中央板底余量0.5。\n侧向余量0.5；压框与PCB上方留0.4。\n框到固定耳0.5／内柱约0.7，待试配。',183,10,8)
+para(220,108,'先整盘取出，断开／收置本板接线。\n退出本框两颗M2级螺钉，上退20。\n压框上取20，随后板卡上取20。\n图示爆炸距离用于分辨对象，不是同步动作。\n保留压框、保留螺钉均作为阻挡反例。\n元件占满板边时会碰框：不能忽略该前提。\n压框不预紧元件；真实保持力及公差待验。',183,10,8)
+box(14,27,392,16,PALE)
+para(21,37,'实测无元件／无焊脚区、端子位置和板厚后才能定型；不能把候选边缘空白当作供应商尺寸。',376,9,6)
+end()
+
+header('接线空间与装配余量','0.43：局部低压布线预算，不定义针序、线径额定值或实际连接器；未涉及高压接线。')
+picture('effects-board-wiring.png',18,110,192,133)
+text(114,101,'半透明：板端接线区与线束通道',10,bold=True,align='center')
+para(220,233,'每板内／外端各一处接线空间，外伸4。\nMOS预算4×8×4.5及4×4×4.5。\n降压板两端各4×4×2.5，方向未实测。\n中央5×4共享通道；两侧Ø3线路预算。\n端部重叠属于同一接线分配，不当作多条\n独立已布线回路；实际供电／控制须复核。\n外部主控、枪体及电源端接尚未完整布置。\n线路下取到顶盖约0.557，需核对真实线束。',183,10,8)
+box(225,83,171,58,PALE)
+text(233,129,'承板下方最小名义间隙：2.0 mm',12,bold=True)
+text(233,115,'螺钉头：66.6 − 64.5 = 2.1 mm',10)
+text(233,101,'承板底：66.5 − 64.5 = 2.0 mm',10)
+text(233,89,'旧0.42螺钉头间隙为0.5 mm，已替代',9)
+para(21,79,'余量是设计预算，尚不是实物保证。需核实充电宝真实最大厚度、打印／加工尺寸、承板翘曲、装配偏差，\n以及垫片／贴膜等叠加量；按最不利组合重新计算剩余间隙，并用实物试装确认。不得另加垫片后沿用2 mm结论。\n抬高整盘会挤占顶盖与L298N空间，因此采用凹入紧固件和低位板边固定；不扩大底盘外形。',376,10,8)
 end()
 catalog_result=render_catalog(globals(), CATALOG, CATALOG_SHEETS)
 assert page==TOTAL_PAGES, 'Drawing index and total page count differ'
 c.save()
 (MODEL/'assembly-annotation-audit.json').write_text(json.dumps({
-    'revision':'0.42', 'source_sha256':meta['source_sha256'],
+    'revision':'0.43', 'source_sha256':meta['source_sha256'],
     'pdf_sha256':sha(PDF), 'page_count':page,
+    'card_count':sum(len(sheet['cards']) for sheet in CATALOG_SHEETS),
     'object_count':len(CATALOG), 'annotated_object_count':len(catalog_result['entries']),
     'nonphysical_space_count':sum(e['category']=='clearance' for e in CATALOG.values()),
     'missing_objects':sorted(set(meta['objects'])-set(CATALOG)),
     'removed_old_pages':[2,3,13,22,27,30,31],
-    'geometry_modified_by_pdf_generator':False, 'geometry_change_audit_sha256':sha(MODEL/'effects-change-audit.json'), 'physical_fit_verified':False,
+    'geometry_modified_by_pdf_generator':False, 'geometry_change_audit_sha256':sha(MODEL/'effect-board-change-audit.json'), 'physical_fit_verified':False,
     **catalog_result,
 },ensure_ascii=False,indent=2))
 print(PDF)
