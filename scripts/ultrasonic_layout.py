@@ -12,18 +12,19 @@ SPAN = DIMENSIONS['two_cylinders_overall_width']
 HEIGHT = DIMENSIONS['height_from_panel']
 PITCH = SPAN - DIAMETER
 PANEL_Y = -81.0
+PROBE_DATUM_Y = -77.5
 CENTER_Z = 163.0
 RADIAL_GAP = 0.3
 NAMES = ('SensorMask', 'SensorStatusStrip', 'UltrasonicRingL', 'UltrasonicFaceL',
          'UltrasonicRingR', 'UltrasonicFaceR')
 V = App.Vector
 BASIS = ('用户尺寸：圆柱Ø16、双圆柱总宽42、离面板高10.3 mm；中心距26为推导；'
-         '临时将面板解释为前脸外表面Y=-81，中心Z=163；不含PCB、背面元件和接头')
+         '0.41假设10.3从PCB前面Y=-77.5计，探头较0.40内退3.5；实际基准待确认')
 
 
 def probe_shape(sign):
     return Part.makeCylinder(DIAMETER / 2, HEIGHT,
-                             V(sign * PITCH / 2, PANEL_Y, CENTER_Z), V(0, -1, 0))
+                             V(sign * PITCH / 2, PROBE_DATUM_Y, CENTER_Z), V(0, -1, 0))
 
 
 def add_ultrasonic(add, panel):
@@ -37,7 +38,7 @@ def add_ultrasonic(add, panel):
         full = probe_shape(sign)
         # Face division is only a colour detail; the union is the complete cylinder.
         face = Part.makeCylinder(7.25, 0.5,
-                                V(sign * PITCH / 2, PANEL_Y - HEIGHT, CENTER_Z), V(0, 1, 0))
+                                V(sign * PITCH / 2, PROBE_DATUM_Y - HEIGHT, CENTER_Z), V(0, 1, 0))
         add('UltrasonicRing' + side, '超声波圆柱主体 Ø16×10.3 ' + side,
             full.cut(face), 'component', 'metal', BASIS + '；端面分色为外观假设')
         add('UltrasonicFace' + side, '超声波探头端面 ' + side,
@@ -86,8 +87,8 @@ def check_ultrasonic(doc):
             'diameter_mm': DIAMETER, 'outer_span_mm': SPAN, 'height_from_panel_mm': HEIGHT,
             'derived_center_spacing_mm': PITCH, 'derived_gap_mm': SPAN - 2 * DIAMETER,
             'center_x_mm': [-PITCH / 2, PITCH / 2], 'center_z_mm': CENTER_Z+lift,
-            'panel_datum_y_mm': PANEL_Y, 'probe_front_y_mm': PANEL_Y - HEIGHT,
-            'datum_is_assumption': True, 'datum_description': 'robot front-panel outer face; user panel datum not confirmed',
+            'panel_datum_y_mm': PROBE_DATUM_Y, 'robot_fascia_outer_y_mm': PANEL_Y, 'probe_front_y_mm': PROBE_DATUM_Y - HEIGHT,
+            'datum_is_assumption': True, 'datum_description': 'candidate PCB front face; user panel datum not confirmed',
             'candidate_hole_diameter_mm': DIAMETER + 2 * RADIAL_GAP,
             'nominal_radial_gap_mm': RADIAL_GAP,
             'panel_valid': panel.isValid(), 'panel_solids': len(panel.Solids),
@@ -96,7 +97,7 @@ def check_ultrasonic(doc):
             'passed': valid and len(panel.Solids) == 1 and not overlaps and not reserved
                       and all(p['valid'] and p['solids'] == 1 and p['cylinder_difference_mm3'] < 1e-5
                               and p['visual_parts_overlap_mm3'] < 1e-5 for p in probes),
-            'pcb_and_rear_components_modeled': False, 'mounting_verified': False,
+            'pcb_and_rear_components_modeled': True, 'pcb_and_rear_are_candidates': True, 'mounting_verified': False,
             'physical_fit_verified': False, 'acoustic_verified': False}
 
 
@@ -109,7 +110,7 @@ def render_ultrasonic(doc, output):
     camera = view.getCameraOrientation()
     try:
         for obj in objects:
-            obj.ViewObject.Visibility = obj.Name in NAMES or obj.Name.startswith(
+            obj.ViewObject.Visibility = obj.Name in NAMES or obj.Name in ('UltrasonicPCBEnvelope','UltrasonicRearEnvelope','UltrasonicTopConnector') or obj.Name.startswith(
                 ('VisorRim', 'BrowArmor', 'CheekArmor', 'Jaw'))
         for name, rotation in [('ultrasonic-front', App.Rotation(V(1, 0, 0), 90)),
                                ('ultrasonic-layout', App.Rotation(V(1, 1, 0), V(-1, 1, 3), V(1, -1, 0.75), 'ZXY'))]:

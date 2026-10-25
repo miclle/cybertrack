@@ -1,0 +1,122 @@
+{
+  "revision": "0.41",
+  "removed": [
+    {
+      "path": "hardware/model/studies/ultrasonic-breadboard/side-section.png",
+      "sha256": "343052da1d5bed1985385eeb66adf63c0b60f2adc0667f2203b8d2498bad1687",
+      "bytes": 57392,
+      "reason": "superseded independent study"
+    },
+    {
+      "path": "hardware/model/studies/ultrasonic-breadboard/Ultrasonic-breadboard-study.20261025-163351.FCBak",
+      "sha256": "8c310ce400c64807147ba58b8514d0ccd02da47300beb0f0fb2ce9270727bbc8",
+      "bytes": 1732229,
+      "reason": "superseded independent study"
+    },
+    {
+      "path": "hardware/model/studies/ultrasonic-breadboard/Ultrasonic-breadboard-study.FCStd",
+      "sha256": "0c0a222b9a74d8f7244df2a786437a053fa066193e5a56dd646b2a8ee4863f17",
+      "bytes": 1732179,
+      "reason": "superseded independent study"
+    },
+    {
+      "path": "hardware/model/studies/ultrasonic-breadboard/tray-relief.png",
+      "sha256": "6c7c9612acdc6d78647e77559ee8de3e44b0228609aa0c627618bf4ca8ba099e",
+      "bytes": 67303,
+      "reason": "superseded independent study"
+    },
+    {
+      "path": "hardware/model/studies/ultrasonic-breadboard/coexistence.png",
+      "sha256": "4040b8fa3a0b7cc32edbdce92dbba76e894bee908aa84c4692bb59277107e545",
+      "bytes": 130929,
+      "reason": "superseded independent study"
+    },
+    {
+      "path": "hardware/model/studies/ultrasonic-breadboard/README.md",
+      "sha256": "d400bb58c01bcda3b2bb4ec0304cadd073df787bb64e3cf291c522bbb3d6c7bc",
+      "bytes": 6609,
+      "reason": "superseded independent study"
+    },
+    {
+      "path": "hardware/model/studies/ultrasonic-breadboard/rear-connector-conflict.png",
+      "sha256": "14fa758df17c63fe43649fa2a75574a756be507be7dbe4c217fa1d7d4e7cf4f6",
+      "bytes": 68401,
+      "reason": "superseded independent study"
+    },
+    {
+      "path": "hardware/model/studies/ultrasonic-breadboard/tray-service.png",
+      "sha256": "affd8e7b0f6ce87eb6aa198326a91158c60ad951310e4d666faae8800591c122",
+      "bytes": 114287,
+      "reason": "superseded independent study"
+    },
+    {
+      "path": "hardware/model/studies/ultrasonic-breadboard/coexistence-audit.json",
+      "sha256": "3c2d4a458386713862c927eacdcfb914a830d08ab982e810424af01b4c1330b2",
+      "bytes": 54203,
+      "reason": "superseded independent study"
+    },
+    {
+      "path": "scripts/study_ultrasonic_breadboard.py",
+      "sha256": "3960181a996a14036e13763ce176b400c66d9510936a37c45ae43a885972b89e",
+      "bytes": 16196,
+      "reason": "superseded independent study"
+    },
+    {
+      "path": "hardware/model/arc-layout.png",
+      "sha256": "e27454f8facc3623f672af0a0b5e35b3e85e9ab2b6d66b4d16404aacf2c29aaa",
+      "bytes": 85227,
+      "reason": "obsolete pre-breadboard head preview"
+    },
+    {
+      "path": "hardware/model/arc-top.png",
+      "sha256": "f3669557afd47c106c47f7c2c6be8d16e5410e95d14258fb1e6de602ac097789",
+      "bytes": 23453,
+      "reason": "obsolete pre-breadboard head preview"
+    },
+    {
+      "path": "hardware/model/controller-layout.png",
+      "sha256": "ecfad75aaad076baf2d4c19651277473eadea62ddabe75fcf6e7d00b51d2009b",
+      "bytes": 85233,
+      "reason": "obsolete pre-breadboard head preview"
+    },
+    {
+      "path": "hardware/model/controller-access.png",
+      "sha256": "0e105504c4eea6440fb48e970513e5f653adb002448cf3e60a4cb0ce4f39c3c9",
+      "bytes": 14186,
+      "reason": "obsolete pre-breadboard head preview"
+    },
+    {
+      "path": "hardware/model/controller-service.png",
+      "sha256": "4e8f461f2b4ea52e2980369530ea7e005e2e6dc7189b12f0d2ac0ee6255f0873",
+      "bytes": 29483,
+      "reason": "obsolete pre-breadboard head preview"
+    },
+    {
+      "path": "hardware/model/speaker-layout.png",
+      "sha256": "969fc33cfdb380ef21314e8f0305fc6687660c12f50cd25d2ca160ba710076d7",
+      "bytes": 87237,
+      "reason": "obsolete pre-breadboard head preview"
+    },
+    {
+      "path": "hardware/model/speaker-top.png",
+      "sha256": "235479c2639d760e7623bded315a0d390bc9414a64ae09d91fa22d1f664e8346",
+      "bytes": 23379,
+      "reason": "obsolete pre-breadboard head preview"
+    },
+    {
+      "path": "hardware/model/CyberTrack.20261025-164835.FCBak",
+      "sha256": "cbfb2b2730ddc75792bd59b0a1b1409316241fbdd3f871c2cca7d395963e4d2b",
+      "bytes": 1630125,
+      "reason": "automatic backup superseded by verified current native file"
+    },
+    {
+      "path": "hardware/model/parts/L298N-carrier-0.34.20261025-160407.FCBak",
+      "sha256": "14c8160cb4a74a78cdefa7ea1769479081f79dbc9ba94cc4ddd5b41a9bce18ab",
+      "bytes": 79033,
+      "reason": "automatic backup superseded by verified current native file"
+    }
+  ],
+  "replacement": "docs/ultrasonic-head.md; scripts/ultrasonic_integration.py; main FCStd and integration audits",
+  "original_component_assets_preserved": true,
+  "unrelated_studies_preserved": true
+}

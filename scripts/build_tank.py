@@ -16,16 +16,20 @@ from rear_armor import mirrored_profile, check_rear_armor
 from top_feed import check_top_feed
 from bottle_backpack import apply as add_bottle_backpack, check as check_bottle_backpack, render as render_bottle_backpack
 from refine_assembly import refine, service_groups, check_service_paths
-from controller_layout import check_controller_spaces
+from breadboard_layout import apply as add_breadboard, check as check_breadboard, render as render_breadboard
 from water_gun_layout import add_water_gun, check_water_gun, check_other_service_sweeps
 from bubble_gun_layout import add_bubble_gun, check_bubble_gun
 from ultrasonic_layout import add_ultrasonic, check_ultrasonic, render_ultrasonic
+from ultrasonic_integration import apply as integrate_ultrasonic, check as check_ultrasonic_integration, render as render_ultrasonic_integration
+from effects_mount import apply as add_effects_mount, check as check_effects_mount, render as render_effects_mount
 from l298n_layout import add_l298n, check_l298n, render_l298n
 from l298n_mount import apply as add_l298n_mount, check as check_l298n_mount, render as render_l298n_mount, export_carrier
-from speaker_layout import speaker_shape, check_speaker, render_speaker, LABEL as SPEAKER_LABEL, BASIS as SPEAKER_BASIS
+from speaker_layout import speaker_shape, LABEL as SPEAKER_LABEL, BASIS as SPEAKER_BASIS
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'hardware/model'
+LEGACY_PREVIEWS = {'arc-layout.png','arc-top.png','controller-layout.png',
+                   'controller-access.png','controller-service.png','speaker-layout.png','speaker-top.png'}
 V = App.Vector
 COLORS = {'body': (0.25, 0.36, 0.43), 'dark': (0.075, 0.10, 0.12),
           'metal': (0.40, 0.48, 0.51), 'light': (0.82, 0.84, 0.80), 'accent': (0.98, 0.32, 0.07),
@@ -108,7 +112,7 @@ def render_views(doc, output):
         view.saveImage(str(output/filename),1600,1200,'White')
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule')
+            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
             o.ViewObject.Transparency=40 if o.Name in ('WaterModule','BubbleModule') else 0
     for filename,direction in [('assembly.png','iso'),('front.png','front'),
                                ('side.png','side'),('right.png','right'),('rear.png','rear'),('top.png','top'),('rear-assembly.png','rear_iso')]:
@@ -117,7 +121,7 @@ def render_views(doc, output):
         if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('exterior','clearance')
     render('layout.png','iso')
     for name in ('WaterModule','BubbleModule','Electronics','AudioModule','LowerTub','KeelLid'):
-        doc.getObject(name).ViewObject.Visibility=False
+        if doc.getObject(name): doc.getObject(name).ViewObject.Visibility=False
     render('lower-layout.png','iso')
     # Service diagram: exploded rigid groups; screws and flexible routes removed first.
     for o in doc.Objects:
@@ -143,35 +147,11 @@ def render_views(doc, output):
     render('routing.png','rear_iso')
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Name in ('HeadShell','ElectronicsTray','Electronics','AudioModule','ArcModuleL','ArcModuleR','ESP32Board') or (o.Name.startswith('Controller') and o.Category!='clearance')
-            o.ViewObject.Transparency=80 if o.Name=='HeadShell' else 0
-    render('arc-layout.png','iso')
-    render('arc-top.png','top')
-    for o in doc.Objects:
-        if hasattr(o,'Category'):
             o.ViewObject.Visibility=getattr(o,'ServiceGroup','')=='crown' or o.Name.startswith('CrownScrew')
             o.ViewObject.Transparency=0
     render('crown-effects.png','iso')
     render('crown-effects-top.png','top')
-    for o in doc.Objects:
-        if hasattr(o,'Category'):
-            o.ViewObject.Visibility=(o.Name in ('HeadShell','ElectronicsTray','Electronics','AudioModule','ESP32Board','ArcModuleL','ArcModuleR') or o.Name.startswith('Controller')) and o.Category!='clearance'
-            o.ViewObject.Transparency=80 if o.Name=='HeadShell' else 0
-    render('controller-layout.png','iso')
-    for o in doc.Objects:
-        if hasattr(o,'Category'):
-            o.ViewObject.Visibility=(o.Name in ('ElectronicsTray','ESP32Board') or o.Name.startswith('Controller'))
-            o.ViewObject.Transparency=85 if o.Category=='clearance' else 0
-    render('controller-access.png','top')
-    for o in doc.Objects:
-        if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Name=='ESP32Board' or (o.Name.startswith('Controller') and o.Category not in ('clearance','envelope') and not o.Name.startswith('ControllerMountInsert'))
-            o.ViewObject.Transparency=0
-    controller_shapes={}
-    for name,offset in [('ESP32Board',V(0,0,20)),('ControllerRetainer',V(0,0,40))]:
-        obj=doc.getObject(name);controller_shapes[name]=obj.Shape.copy();shape=obj.Shape.copy();shape.translate(offset);obj.Shape=shape
-    render('controller-service.png','iso')
-    for name,shape in controller_shapes.items():doc.getObject(name).Shape=shape
+    render_breadboard(doc, output)
     for o in doc.Objects:
         if hasattr(o,'Category'):
             o.ViewObject.Visibility=o.Category not in ('exterior','clearance') or o.Name=='HeadShell'
@@ -217,7 +197,7 @@ def render_views(doc, output):
     render('bubble-gun-clearance.png','rear_iso')
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule')
+            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
             o.ViewObject.Transparency=0
     render('bubble-gun-layout.png','iso')
     render('bubble-gun-side.png','side')
@@ -240,7 +220,7 @@ def render_views(doc, output):
     for o in doc.Objects:
         if hasattr(o,'Category'):o.ViewObject.Transparency=40 if o.Name in ('WaterModule','BubbleModule') else 0
     for o in doc.Objects:
-        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule')
+        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
     view.setCameraOrientation(orientations['iso'].Q)
     view.fitAll()
 
@@ -257,7 +237,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.39'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.42'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -574,6 +554,9 @@ def main():
     l298n_mount_info=add_l298n_mount(doc,add)
     bottle_info=add_bottle_backpack(doc,add)
     lift_head(doc,controller_info,l298n_info)
+    breadboard_info=add_breadboard(doc,add)
+    ultrasonic_info=integrate_ultrasonic(doc,add,args.render)
+    effects_info=add_effects_mount(doc,add)
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
@@ -632,8 +615,8 @@ def main():
     for check in (water_check,bubble_check):
         check['coordinate_frame']='checks evaluated in inverse-pitched module frame; dimensions and displacement vectors use pre-pitch axes; see gun_pitch for world transform'
     water_check['passed']=water_check['passed'] and water_check['other_service_sweeps']['passed']
-    print('Gun checks complete; controller and export',flush=True)
-    controller_check=check_controller_spaces(saved,service_groups(saved)['crown'])
+    print('Gun checks complete; breadboard and export',flush=True)
+    breadboard_check=check_breadboard(saved)
     assembly=Part.makeCompound([o.Shape for o in drive+new]);bb=assembly.optimalBoundingBox(False)
     step_shape=Part.Shape();step_shape.read(str(step))
     step_delta=abs(step_shape.Volume-assembly.Volume)
@@ -648,8 +631,9 @@ def main():
     if args.render:
         render_views(saved, OUT)
         render_bottle_backpack(saved, OUT)
-        render_speaker(saved, OUT)
         render_ultrasonic(saved, OUT)
+        render_ultrasonic_integration(saved, OUT)
+        render_effects_mount(saved, OUT)
         render_l298n(saved, OUT)
         render_l298n_mount(saved, OUT)
         from drive_service import render_drive_views
@@ -657,7 +641,7 @@ def main():
         # Keep the exposed bottle envelopes visible in the saved assembly.
         for o in saved.Objects:
             if hasattr(o,'Category'):
-                o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule')
+                o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
                 o.ViewObject.Transparency=40 if o.Name in ('WaterModule','BubbleModule') else 0
         saved.save()
     # Reopen the final saved file after GUI styling; verify geometry and visibility.
@@ -681,12 +665,13 @@ def main():
                 name=provider.attrib['name']
                 if name in final_shapes:
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
-                    assert visible==(final_shapes[name].Category not in ('envelope','clearance') or name in ('WaterModule','BubbleModule')),name
+                    assert visible==(final_shapes[name].Category not in ('envelope','clearance') or name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')),name
     assert sha(source_path)==source_hash
     from drive_service_check import check as check_drive_mount
     print('Final readback; drive and bottle checks',flush=True)
     drive_mount_check=check_drive_mount(final,verbose=True)
-    report={'status':'preliminary_concept','design_revision':'0.39','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    effects_check=check_effects_mount(final)
+    report={'status':'preliminary_concept','design_revision':'0.42','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'drive_mount_check':drive_mount_check,
             'head_lift_check':check_head_lift(final),
             'rear_armor_symmetry_check':check_rear_armor(final),
@@ -700,14 +685,7 @@ def main():
             'port_face_source':'user confirmed 120 x 31.5 mm long side',
             'port_orientation_design':'+Y; lateral position and connector envelope are assumptions',
             'ports_and_cable_clearance_verified':False},
-            'arc_module_envelopes':{'quantity':2,'diameter_mm':25.5,'length_mm':70,
-                'basis':'user specified provisional envelope on 2026-10-24; not measured',
-                'axis':'+Y','axis_origins_mm':[[65.5,-66,156.5+LIFT],[-65.5,-66,156.5+LIFT]],
-                'tray_width_mm':104,'tray_hole_pattern_unchanged':False,
-                'tray_hole_centers_x_mm':[-49.5,49.5], 'tray_hole_centers_y_mm':[-30,0],
-                'relocation_from_0_11_1_mm':{'left':[-3,0,-1.5],'right':[3,0,-1.5]},
-                'mounts_and_leads_designed':False,'electrical_clearance_verified':False,
-                'insulation_liquid_isolation_emc_verified':False},
+            'arc_module_envelopes':{'quantity':2,'status':'passive backpack-side body candidates; no HV leads, electrode or drive'},
             'crown_effect_locations':{'quantity':2,'center_x_mm':[51.5,-51.5],
                 'outer_size_xyz_mm':[16,47,11],'y_range_mm':[-16,31],'z_range_mm':[192+LIFT,203+LIFT],
                 'recess_plan_mm':[8,25],'recess_y_range_mm':[-5,20],
@@ -722,18 +700,23 @@ def main():
             'overlaps':collisions,'passed':not collisions},
             'water_gun_layout':water_info,'water_gun_check':water_check,
             'bubble_gun_layout':bubble_info,'bubble_gun_check':bubble_check,'gun_pitch':pitch_info,
-            'service_paths':service_check,'controller_layout':controller_info,'controller_clearance_check':controller_check,
+            'service_paths':service_check,'breadboard_layout':breadboard_info,'breadboard_check':breadboard_check,
             'l298n_layout':l298n_info, 'l298n_check':check_l298n(final),
             'l298n_mount':l298n_mount_info, 'l298n_mount_check':check_l298n_mount(final),
-            'speaker_check':check_speaker(final),
             'ultrasonic_check':check_ultrasonic(final),
+            'ultrasonic_layout':ultrasonic_info,'ultrasonic_integration_check':check_ultrasonic_integration(final),
+            'effects_layout':effects_info,'effects_mount_check':effects_check,
             'manufacturing_released':False,'physical_fit_verified':False,
             'assembly_paths_verified':False,'electrical_verified':False,
             'final_saved_audit':{'native_objects_verified':len(final_shapes),'gui_visibility_verified':args.render},
             'previews_generated':args.render,
+            'historical_previews_not_current':sorted(LEGACY_PREVIEWS),
             'drive_preview_note':'Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.',
-            'files_sha256':{p.name:sha(p) for p in [cad,step]+(sorted(OUT.glob('*.png')) if args.render else [])}}
+            'files_sha256':{p.name:sha(p) for p in [cad,step]+([p for p in sorted(OUT.glob('*.png')) if p.name not in LEGACY_PREVIEWS] if args.render else [])}}
     report['top_feed_check']['source_sha256']=sha(cad)
+    report['effects_mount_check']['source_sha256']=sha(cad)
+    report['effects_mount_check']['saved_and_reopened']=True
+    (OUT/'effects-mount-audit.json').write_text(json.dumps(report['effects_mount_check'],ensure_ascii=False,indent=2)+'\n')
     report['top_feed_check']['saved_and_reopened']=True
     (OUT/'top-feed-audit.json').write_text(json.dumps(report['top_feed_check'],ensure_ascii=False,indent=2)+'\n')
     report['rear_armor_symmetry_check']['source_sha256']=sha(cad)
@@ -742,9 +725,11 @@ def main():
     report['ultrasonic_check']['source_after_sha256']=sha(cad)
     report['ultrasonic_check']['saved_and_reopened']=True
     (OUT/'ultrasonic-fit-audit.json').write_text(json.dumps(report['ultrasonic_check'],ensure_ascii=False,indent=2)+'\n')
-    report['speaker_check']['source_after_sha256']=sha(cad)
-    report['speaker_check']['saved_and_reopened']=True
-    (OUT/'speaker-fit-audit.json').write_text(json.dumps(report['speaker_check'],ensure_ascii=False,indent=2)+'\n')
+    report['ultrasonic_integration_check']['source_sha256']=sha(cad)
+    (OUT/'ultrasonic-integration-audit.json').write_text(json.dumps(report['ultrasonic_integration_check'],ensure_ascii=False,indent=2)+'\n')
+    report['breadboard_check']['source_sha256']=sha(cad)
+    report['breadboard_check']['saved_and_reopened']=True
+    (OUT/'breadboard-fit-audit.json').write_text(json.dumps(report['breadboard_check'],ensure_ascii=False,indent=2)+'\n')
     report['drive_mount_check']['source_sha256']=sha(cad)
     report['drive_mount_check']['saved_and_reopened']=True
     (OUT/'drive-mount-audit.json').write_text(json.dumps(report['drive_mount_check'],ensure_ascii=False,indent=2)+'\n')
@@ -771,7 +756,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if not report['head_lift_check']['passed'] or not report['bottle_backpack_check']['passed'] or not report['l298n_mount_check']['passed'] or not report['l298n_check']['passed'] or not drive_mount_check['passed'] or not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not report['speaker_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
+    if not effects_check['passed'] or not report['ultrasonic_integration_check']['passed'] or not report['head_lift_check']['passed'] or not report['bottle_backpack_check']['passed'] or not report['l298n_mount_check']['passed'] or not report['l298n_check']['passed'] or not drive_mount_check['passed'] or not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not breadboard_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 

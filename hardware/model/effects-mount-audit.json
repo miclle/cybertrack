@@ -1,0 +1,3849 @@
+{
+  "revision": "0.42",
+  "static": {
+    "BackpackArcL": {
+      "boolean_pairs_tested": 10,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcBottomPadL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerOuterL0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerOuterL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 0.4999999999999872
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.4999999999999926
+        },
+        {
+          "object": "LowerTub",
+          "distance_mm": 3.1065578579161786
+        },
+        {
+          "object": "ArcInsertL00",
+          "distance_mm": 3.780275254816541
+        },
+        {
+          "object": "ArcInsertL01",
+          "distance_mm": 3.780275254816541
+        },
+        {
+          "object": "ArcInsertL10",
+          "distance_mm": 3.780275254816541
+        },
+        {
+          "object": "ArcInsertL11",
+          "distance_mm": 3.780275254816541
+        },
+        {
+          "object": "ArcScrewL00",
+          "distance_mm": 4.445638982020991
+        },
+        {
+          "object": "ArcScrewL01",
+          "distance_mm": 4.445638982020991
+        },
+        {
+          "object": "ArcScrewL10",
+          "distance_mm": 4.445638982020991
+        },
+        {
+          "object": "ArcScrewL11",
+          "distance_mm": 4.445638982020991
+        }
+      ],
+      "passed": true
+    },
+    "ArcBottomPadL": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": true
+    },
+    "ArcInsertL00": {
+      "boolean_pairs_tested": 7,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcScrewL00",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.09999999999998936
+        },
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 1.2999999999999972
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 3.280275254816541
+        },
+        {
+          "object": "ArcLinerOuterL0",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 3.780275254816541
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewL00": {
+      "boolean_pairs_tested": 8,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertL00",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcLinerOuterL0",
+          "distance_mm": 3.9456389820209914
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 4.445638982020991
+        }
+      ],
+      "passed": true
+    },
+    "ArcInsertL01": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcScrewL01",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.09999999999998936
+        },
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 1.2999999999999972
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 3.280275254816541
+        },
+        {
+          "object": "ArcLinerOuterL0",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 3.780275254816541
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewL01": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertL01",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcLinerOuterL0",
+          "distance_mm": 3.9456389820209914
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 4.445638982020991
+        }
+      ],
+      "passed": true
+    },
+    "ArcClampOuterL0": {
+      "boolean_pairs_tested": 10,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcScrewL00",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcScrewL01",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerOuterL0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 0.4999999999999872
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertL00",
+          "distance_mm": 1.2999999999999972
+        },
+        {
+          "object": "ArcInsertL01",
+          "distance_mm": 1.2999999999999972
+        }
+      ],
+      "passed": true
+    },
+    "ArcLinerInnerL0": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerOuterL0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertL00",
+          "distance_mm": 3.280275254816541
+        },
+        {
+          "object": "ArcInsertL01",
+          "distance_mm": 3.280275254816541
+        },
+        {
+          "object": "ArcScrewL00",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "ArcScrewL01",
+          "distance_mm": 4.053396661785328
+        }
+      ],
+      "passed": true
+    },
+    "ArcLinerOuterL0": {
+      "boolean_pairs_tested": 6,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertL00",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "ArcInsertL01",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "ArcScrewL00",
+          "distance_mm": 3.9456389820209914
+        },
+        {
+          "object": "ArcScrewL01",
+          "distance_mm": 3.9456389820209914
+        }
+      ],
+      "passed": true
+    },
+    "ArcInsertL10": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcScrewL10",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.09999999999998936
+        },
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 1.2999999999999972
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 3.280275254816541
+        },
+        {
+          "object": "ArcLinerOuterL1",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 3.780275254816541
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewL10": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertL10",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcLinerOuterL1",
+          "distance_mm": 3.9456389820209914
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 4.445638982020991
+        }
+      ],
+      "passed": true
+    },
+    "ArcInsertL11": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcScrewL11",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.09999999999998936
+        },
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 1.2999999999999972
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 3.280275254816541
+        },
+        {
+          "object": "ArcLinerOuterL1",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 3.780275254816541
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewL11": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertL11",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcLinerOuterL1",
+          "distance_mm": 3.9456389820209914
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 4.445638982020991
+        }
+      ],
+      "passed": true
+    },
+    "ArcClampOuterL1": {
+      "boolean_pairs_tested": 6,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcScrewL10",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcScrewL11",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerOuterL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertL10",
+          "distance_mm": 1.2999999999999972
+        },
+        {
+          "object": "ArcInsertL11",
+          "distance_mm": 1.2999999999999972
+        }
+      ],
+      "passed": true
+    },
+    "ArcLinerInnerL1": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerOuterL1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertL10",
+          "distance_mm": 3.280275254816541
+        },
+        {
+          "object": "ArcInsertL11",
+          "distance_mm": 3.280275254816541
+        },
+        {
+          "object": "ArcScrewL10",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "ArcScrewL11",
+          "distance_mm": 4.053396661785328
+        }
+      ],
+      "passed": true
+    },
+    "ArcLinerOuterL1": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertL10",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "ArcInsertL11",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "ArcScrewL10",
+          "distance_mm": 3.9456389820209914
+        },
+        {
+          "object": "ArcScrewL11",
+          "distance_mm": 3.9456389820209914
+        }
+      ],
+      "passed": true
+    },
+    "EffectMOSL": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "EffectInsert3",
+          "distance_mm": 2.0
+        },
+        {
+          "object": "EffectScrew3",
+          "distance_mm": 2.5612496949731405
+        },
+        {
+          "object": "EffectBuckL",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "ShoulderRailL",
+          "distance_mm": 3.806754432629555
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 4.0
+        },
+        {
+          "object": "EffectMOSR",
+          "distance_mm": 4.0
+        }
+      ],
+      "passed": true
+    },
+    "EffectBuckL": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 2.3211917272131535
+        },
+        {
+          "object": "EffectMOSL",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 4.0
+        }
+      ],
+      "passed": true
+    },
+    "BackpackArcR": {
+      "boolean_pairs_tested": 10,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcBottomPadR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerOuterR0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerOuterR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.4999999999999701
+        },
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 0.4999999999999754
+        },
+        {
+          "object": "LowerTub",
+          "distance_mm": 3.1065578579161786
+        },
+        {
+          "object": "ArcInsertR00",
+          "distance_mm": 3.7802752548165195
+        },
+        {
+          "object": "ArcInsertR01",
+          "distance_mm": 3.7802752548165346
+        },
+        {
+          "object": "ArcInsertR10",
+          "distance_mm": 3.7802752548165355
+        },
+        {
+          "object": "ArcInsertR11",
+          "distance_mm": 3.780275254816548
+        },
+        {
+          "object": "ArcScrewR11",
+          "distance_mm": 4.445638982020995
+        },
+        {
+          "object": "ArcScrewR00",
+          "distance_mm": 4.445638982021
+        },
+        {
+          "object": "ArcScrewR01",
+          "distance_mm": 4.445638982021
+        },
+        {
+          "object": "ArcScrewR10",
+          "distance_mm": 4.445638982021
+        }
+      ],
+      "passed": true
+    },
+    "ArcBottomPadR": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": true
+    },
+    "ArcInsertR00": {
+      "boolean_pairs_tested": 7,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcScrewR00",
+          "distance_mm": 0.04999999999999702
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.09999999999995979
+        },
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 1.299999999999983
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 3.280275254816518
+        },
+        {
+          "object": "ArcLinerOuterR0",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 3.7802752548165195
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR00": {
+      "boolean_pairs_tested": 8,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertR00",
+          "distance_mm": 0.04999999999999702
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999726
+        },
+        {
+          "object": "ArcLinerOuterR0",
+          "distance_mm": 3.9456389820209794
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 4.445638982021
+        }
+      ],
+      "passed": true
+    },
+    "ArcInsertR01": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcScrewR01",
+          "distance_mm": 0.04999999999995304
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.09999999999996821
+        },
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 1.2999999999999972
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 3.2802752548165324
+        },
+        {
+          "object": "ArcLinerOuterR0",
+          "distance_mm": 3.5035110730402774
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 3.7802752548165346
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR01": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertR01",
+          "distance_mm": 0.04999999999995304
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999747
+        },
+        {
+          "object": "ArcLinerOuterR0",
+          "distance_mm": 3.945638982021006
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 4.053396661785342
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 4.445638982021
+        }
+      ],
+      "passed": true
+    },
+    "ArcClampOuterR0": {
+      "boolean_pairs_tested": 10,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcScrewR00",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcScrewR01",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerOuterR0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 0.4999999999999754
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertR00",
+          "distance_mm": 1.299999999999983
+        },
+        {
+          "object": "ArcInsertR01",
+          "distance_mm": 1.2999999999999972
+        }
+      ],
+      "passed": true
+    },
+    "ArcLinerInnerR0": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerOuterR0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertR00",
+          "distance_mm": 3.280275254816518
+        },
+        {
+          "object": "ArcInsertR01",
+          "distance_mm": 3.2802752548165324
+        },
+        {
+          "object": "ArcScrewR00",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "ArcScrewR01",
+          "distance_mm": 4.053396661785342
+        }
+      ],
+      "passed": true
+    },
+    "ArcLinerOuterR0": {
+      "boolean_pairs_tested": 6,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertR01",
+          "distance_mm": 3.5035110730402774
+        },
+        {
+          "object": "ArcInsertR00",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "ArcScrewR00",
+          "distance_mm": 3.9456389820209794
+        },
+        {
+          "object": "ArcScrewR01",
+          "distance_mm": 3.945638982021006
+        }
+      ],
+      "passed": true
+    },
+    "ArcInsertR10": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcScrewR10",
+          "distance_mm": 0.04999999999997258
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.09999999999997766
+        },
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 1.299999999999983
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 3.280275254816534
+        },
+        {
+          "object": "ArcLinerOuterR1",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 3.7802752548165355
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR10": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertR10",
+          "distance_mm": 0.04999999999997258
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999726
+        },
+        {
+          "object": "ArcLinerOuterR1",
+          "distance_mm": 3.9456389820209794
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 4.053396661785342
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 4.445638982021
+        }
+      ],
+      "passed": true
+    },
+    "ArcInsertR11": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcScrewR11",
+          "distance_mm": 0.04999999999997044
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.09999999999997455
+        },
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 1.299999999999983
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 3.2802752548165466
+        },
+        {
+          "object": "ArcLinerOuterR1",
+          "distance_mm": 3.5035110730402774
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 3.780275254816548
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR11": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertR11",
+          "distance_mm": 0.04999999999997044
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999793
+        },
+        {
+          "object": "ArcLinerOuterR1",
+          "distance_mm": 3.945638982021006
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 4.053396661785342
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 4.445638982020995
+        }
+      ],
+      "passed": true
+    },
+    "ArcClampOuterR1": {
+      "boolean_pairs_tested": 6,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcScrewR10",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcScrewR11",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerOuterR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertR10",
+          "distance_mm": 1.299999999999983
+        },
+        {
+          "object": "ArcInsertR11",
+          "distance_mm": 1.299999999999983
+        }
+      ],
+      "passed": true
+    },
+    "ArcLinerInnerR1": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerOuterR1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertR10",
+          "distance_mm": 3.280275254816534
+        },
+        {
+          "object": "ArcInsertR11",
+          "distance_mm": 3.2802752548165466
+        },
+        {
+          "object": "ArcScrewR10",
+          "distance_mm": 4.053396661785342
+        },
+        {
+          "object": "ArcScrewR11",
+          "distance_mm": 4.053396661785342
+        }
+      ],
+      "passed": true
+    },
+    "ArcLinerOuterR1": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcInsertR11",
+          "distance_mm": 3.5035110730402774
+        },
+        {
+          "object": "ArcInsertR10",
+          "distance_mm": 3.5035110730402903
+        },
+        {
+          "object": "ArcScrewR10",
+          "distance_mm": 3.9456389820209794
+        },
+        {
+          "object": "ArcScrewR11",
+          "distance_mm": 3.945638982021006
+        }
+      ],
+      "passed": true
+    },
+    "EffectMOSR": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "EffectInsert1",
+          "distance_mm": 2.0
+        },
+        {
+          "object": "EffectScrew1",
+          "distance_mm": 2.5612496949731405
+        },
+        {
+          "object": "EffectBuckR",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "ShoulderRailR",
+          "distance_mm": 3.806754432629555
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 4.0
+        },
+        {
+          "object": "EffectMOSL",
+          "distance_mm": 4.0
+        }
+      ],
+      "passed": true
+    },
+    "EffectBuckR": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 2.3211917272131535
+        },
+        {
+          "object": "EffectMOSR",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 4.0
+        }
+      ],
+      "passed": true
+    },
+    "EffectInsert0": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectScrew0",
+          "distance_mm": 0.04999999999999662
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.09999999999999583
+        },
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 4.5
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew0": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectInsert0",
+          "distance_mm": 0.04999999999999662
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.8999999999999958
+        }
+      ],
+      "passed": true
+    },
+    "EffectInsert1": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectScrew1",
+          "distance_mm": 0.04999999999999443
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.09999999999999427
+        },
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "EffectMOSR",
+          "distance_mm": 2.0
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 4.5
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew1": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectInsert1",
+          "distance_mm": 0.04999999999999443
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.899999999999997
+        },
+        {
+          "object": "EffectMOSR",
+          "distance_mm": 2.5612496949731405
+        }
+      ],
+      "passed": true
+    },
+    "EffectInsert2": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectScrew2",
+          "distance_mm": 0.04999999999999662
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.09999999999999583
+        },
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 4.5
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew2": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectInsert2",
+          "distance_mm": 0.04999999999999662
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.8999999999999958
+        }
+      ],
+      "passed": true
+    },
+    "EffectInsert3": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectScrew3",
+          "distance_mm": 0.04999999999999443
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.09999999999999427
+        },
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "EffectMOSL",
+          "distance_mm": 2.0
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 4.5
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew3": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectInsert3",
+          "distance_mm": 0.04999999999999443
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.899999999999997
+        },
+        {
+          "object": "EffectMOSL",
+          "distance_mm": 2.5612496949731405
+        }
+      ],
+      "passed": true
+    },
+    "EffectTray": {
+      "boolean_pairs_tested": 11,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectMOSL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectBuckL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectMOSR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectBuckR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectScrew0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectScrew1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectScrew2",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectScrew3",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectInsert0",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "EffectInsert1",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "EffectInsert2",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "EffectInsert3",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 2.0
+        },
+        {
+          "object": "LowerTub",
+          "distance_mm": 4.47213595499958
+        },
+        {
+          "object": "BatteryPullStrap",
+          "distance_mm": 4.657252408878007
+        }
+      ],
+      "passed": true
+    },
+    "KeelLid": {
+      "boolean_pairs_tested": 97,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "LowerTub",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "RearBulkhead",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "WetDivider",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "NeckPedestal",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "NeckYokeL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "NeckYokeR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ShoulderRailL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ShoulderRailR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "StopPlinth",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "L298NCarrier",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectInsert1",
+          "distance_mm": 0.09999999999999427
+        },
+        {
+          "object": "EffectInsert3",
+          "distance_mm": 0.09999999999999427
+        },
+        {
+          "object": "EffectInsert0",
+          "distance_mm": 0.09999999999999583
+        },
+        {
+          "object": "EffectInsert2",
+          "distance_mm": 0.09999999999999583
+        },
+        {
+          "object": "BaseCableGrommet",
+          "distance_mm": 0.0999999999999973
+        },
+        {
+          "object": "L298NMountInsertR",
+          "distance_mm": 0.09999999999999809
+        },
+        {
+          "object": "L298NMountInsertL",
+          "distance_mm": 0.09999999999999809
+        },
+        {
+          "object": "L298NMountScrewR",
+          "distance_mm": 0.1999999645686206
+        },
+        {
+          "object": "L298NMountScrewL",
+          "distance_mm": 0.19999999999999912
+        },
+        {
+          "object": "EffectMOSL",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "EffectMOSR",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "L298NEnvelope",
+          "distance_mm": 0.7999999999999972
+        },
+        {
+          "object": "EffectScrew0",
+          "distance_mm": 0.8999999999999958
+        },
+        {
+          "object": "EffectScrew2",
+          "distance_mm": 0.8999999999999958
+        },
+        {
+          "object": "EffectScrew1",
+          "distance_mm": 0.899999999999997
+        },
+        {
+          "object": "EffectScrew3",
+          "distance_mm": 0.899999999999997
+        },
+        {
+          "object": "KeelSideFrameL",
+          "distance_mm": 0.9999999999999858
+        },
+        {
+          "object": "KeelSideFrameR",
+          "distance_mm": 1.0
+        },
+        {
+          "object": "PowerCableRoute",
+          "distance_mm": 1.5
+        },
+        {
+          "object": "ChestGuardL",
+          "distance_mm": 2.0
+        },
+        {
+          "object": "ChestGuardR",
+          "distance_mm": 2.0
+        },
+        {
+          "object": "ChestBadge",
+          "distance_mm": 2.0
+        },
+        {
+          "object": "EffectBuckL",
+          "distance_mm": 2.3211917272131535
+        },
+        {
+          "object": "EffectBuckR",
+          "distance_mm": 2.3211917272131535
+        },
+        {
+          "object": "BottomServiceCover",
+          "distance_mm": 2.3999999999999986
+        },
+        {
+          "object": "NeckStaySleeveL",
+          "distance_mm": 2.9262764285493716
+        },
+        {
+          "object": "NeckStaySleeveR",
+          "distance_mm": 2.9262764285493716
+        },
+        {
+          "object": "WaterGunCradle",
+          "distance_mm": 2.9354286469243505
+        },
+        {
+          "object": "NeckOuterWebL",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "NeckOuterWebR",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "L298NSidePadL1",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "L298NRearPadL1",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "L298NSidePadR1",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "L298NRearPadR1",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "BubbleGunBaseInsert2",
+          "distance_mm": 3.132491120662171
+        },
+        {
+          "object": "MotorL",
+          "distance_mm": 3.200000000000003
+        },
+        {
+          "object": "MotorR",
+          "distance_mm": 3.200000000000003
+        },
+        {
+          "object": "NeckStayL",
+          "distance_mm": 3.373661249987137
+        },
+        {
+          "object": "NeckStayR",
+          "distance_mm": 3.373661249987137
+        },
+        {
+          "object": "L298NClampScrewL1",
+          "distance_mm": 3.5999999999999943
+        },
+        {
+          "object": "L298NClampScrewR1",
+          "distance_mm": 3.5999999999999943
+        },
+        {
+          "object": "L298NClampNutL1",
+          "distance_mm": 3.8776410354750457
+        },
+        {
+          "object": "L298NClampNutR1",
+          "distance_mm": 3.8776410354750457
+        },
+        {
+          "object": "PowerBank",
+          "distance_mm": 4.0
+        },
+        {
+          "object": "NeckSpacerL104",
+          "distance_mm": 4.5
+        },
+        {
+          "object": "NeckSpacerR104",
+          "distance_mm": 4.5
+        },
+        {
+          "object": "BubbleGunBaseScrew2",
+          "distance_mm": 4.590139038789882
+        }
+      ],
+      "passed": true
+    },
+    "BackpackShell": {
+      "boolean_pairs_tested": 72,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "LowerTub",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "WetDivider",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "RearBaseArmor",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackSpine",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "WaterLidMark",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BubbleLidMark",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcBottomPadL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcBottomPadR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertR00",
+          "distance_mm": 0.09999999999995979
+        },
+        {
+          "object": "ArcInsertR01",
+          "distance_mm": 0.09999999999996821
+        },
+        {
+          "object": "ArcInsertR11",
+          "distance_mm": 0.09999999999997455
+        },
+        {
+          "object": "ArcInsertR10",
+          "distance_mm": 0.09999999999997766
+        },
+        {
+          "object": "ArcInsertL00",
+          "distance_mm": 0.09999999999998936
+        },
+        {
+          "object": "ArcInsertL01",
+          "distance_mm": 0.09999999999998936
+        },
+        {
+          "object": "ArcInsertL10",
+          "distance_mm": 0.09999999999998936
+        },
+        {
+          "object": "ArcInsertL11",
+          "distance_mm": 0.09999999999998936
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 0.4999999999999701
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 0.4999999999999891
+        },
+        {
+          "object": "WaterPod",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "BubblePod",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerOuterL0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerOuterL1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerOuterR0",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcLinerOuterR1",
+          "distance_mm": 0.5999999999999943
+        },
+        {
+          "object": "ArcScrewR00",
+          "distance_mm": 0.8999999999999726
+        },
+        {
+          "object": "ArcScrewR10",
+          "distance_mm": 0.8999999999999726
+        },
+        {
+          "object": "ArcScrewR01",
+          "distance_mm": 0.8999999999999747
+        },
+        {
+          "object": "ArcScrewR11",
+          "distance_mm": 0.8999999999999793
+        },
+        {
+          "object": "ArcScrewL00",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcScrewL01",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcScrewL10",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcScrewL11",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "WaterSidePad1",
+          "distance_mm": 1.5999999999999943
+        },
+        {
+          "object": "BubbleSidePad1",
+          "distance_mm": 1.5999999999999943
+        },
+        {
+          "object": "WaterSidePad0",
+          "distance_mm": 1.6000000000000014
+        },
+        {
+          "object": "WaterRetentionBand",
+          "distance_mm": 1.6000000000000014
+        },
+        {
+          "object": "BubbleSidePad0",
+          "distance_mm": 1.6000000000000014
+        },
+        {
+          "object": "BubbleRetentionBand",
+          "distance_mm": 1.6000000000000014
+        },
+        {
+          "object": "WaterModule",
+          "distance_mm": 2.5999999999999943
+        },
+        {
+          "object": "BubbleModule",
+          "distance_mm": 2.5999999999999943
+        },
+        {
+          "object": "WaterBottomPad",
+          "distance_mm": 2.6000000000000014
+        },
+        {
+          "object": "BubbleBottomPad",
+          "distance_mm": 2.6000000000000014
+        },
+        {
+          "object": "BottomCoverScrew2",
+          "distance_mm": 3.8990195135927816
+        },
+        {
+          "object": "BottomCoverScrew5",
+          "distance_mm": 3.8990195135927816
+        },
+        {
+          "object": "WaterStrapClosure",
+          "distance_mm": 4.8731655650547445
+        },
+        {
+          "object": "BubbleStrapClosure",
+          "distance_mm": 4.8731655650547445
+        }
+      ],
+      "passed": true
+    }
+  },
+  "reserved_spaces": {
+    "BackpackArcL": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcBottomPadL": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcInsertL00": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcScrewL00": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcInsertL01": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcScrewL01": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcClampOuterL0": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcLinerInnerL0": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcLinerOuterL0": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcInsertL10": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcScrewL10": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcInsertL11": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcScrewL11": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcClampOuterL1": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcLinerInnerL1": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcLinerOuterL1": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectMOSL": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "L298NAirSpaceL",
+          "distance_mm": 1.0
+        }
+      ],
+      "passed": true
+    },
+    "EffectBuckL": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "BackpackArcR": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcBottomPadR": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcInsertR00": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcScrewR00": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcInsertR01": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcScrewR01": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcClampOuterR0": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcLinerInnerR0": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcLinerOuterR0": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcInsertR10": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcScrewR10": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcInsertR11": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcScrewR11": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcClampOuterR1": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcLinerInnerR1": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "ArcLinerOuterR1": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectMOSR": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "L298NAirSpaceR",
+          "distance_mm": 1.0
+        }
+      ],
+      "passed": true
+    },
+    "EffectBuckR": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectInsert0": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectScrew0": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectInsert1": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectScrew1": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectInsert2": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectScrew2": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectInsert3": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectScrew3": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "EffectTray": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "L298NAirSpaceL",
+          "distance_mm": 1.0
+        },
+        {
+          "object": "L298NAirSpaceR",
+          "distance_mm": 1.0
+        }
+      ],
+      "passed": true
+    }
+  },
+  "outer_caps": {
+    "L0": {
+      "method": "21 discrete poses, outward X35; no continuous claim",
+      "poses": [
+        {
+          "boolean_pairs_tested": 7,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 0.5999999999999943
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 7,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.16026723193596842
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 2.3499999999999943
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 7,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.550845837765355
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 4.099999999999994
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 7,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 1.1523379328802075
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 1.9388563203538738
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 2.882498200863472
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 3.9566603484957437
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 5,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 4,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    "L1": {
+      "method": "21 discrete poses, outward X35; no continuous claim",
+      "poses": [
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 0.5999999999999943
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 2.3499999999999943
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 4.099999999999994
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcL",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    "R0": {
+      "method": "21 discrete poses, outward X35; no continuous claim",
+      "poses": [
+        {
+          "boolean_pairs_tested": 7,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 0.5999999999999943
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 7,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.16026723193596842
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 2.3499999999999943
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 7,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.5508458377653509
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 4.099999999999994
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 7,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 1.1523379328802075
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 1.9388563203538667
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 2.882498200863472
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 3.956660348495733
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 6,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 5,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 4,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    "R1": {
+      "method": "21 discrete poses, outward X35; no continuous claim",
+      "poses": [
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 0.5999999999999943
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 2.3499999999999943
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "BackpackShell",
+              "distance_mm": 4.09999999999998
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "BackpackArcR",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 1,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        },
+        {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [],
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  },
+  "arc_up_90": {
+    "L": {
+      "boolean_pairs_tested": 6,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcBottomPadL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.49999999999998884
+        },
+        {
+          "object": "LowerTub",
+          "distance_mm": 3.1065578579161786
+        },
+        {
+          "object": "ArcInsertL00",
+          "distance_mm": 3.780275254816541
+        },
+        {
+          "object": "ArcInsertL01",
+          "distance_mm": 3.780275254816541
+        },
+        {
+          "object": "ArcInsertL10",
+          "distance_mm": 3.780275254816541
+        },
+        {
+          "object": "ArcInsertL11",
+          "distance_mm": 3.780275254816541
+        },
+        {
+          "object": "WaterHoseRoute",
+          "distance_mm": 4.75
+        }
+      ],
+      "passed": true
+    },
+    "R": {
+      "boolean_pairs_tested": 6,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcBottomPadR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.4999999999999701
+        },
+        {
+          "object": "LowerTub",
+          "distance_mm": 3.1065578579161786
+        },
+        {
+          "object": "ArcInsertR00",
+          "distance_mm": 3.7802752548165195
+        },
+        {
+          "object": "ArcInsertR01",
+          "distance_mm": 3.7802752548165346
+        },
+        {
+          "object": "ArcInsertR10",
+          "distance_mm": 3.7802752548165355
+        },
+        {
+          "object": "ArcInsertR11",
+          "distance_mm": 3.780275254816548
+        }
+      ],
+      "passed": true
+    }
+  },
+  "tray_down_100": {
+    "boolean_pairs_tested": 8,
+    "overlaps": [],
+    "nearby": [
+      {
+        "object": "KeelLid",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "EffectInsert0",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "EffectInsert1",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "EffectInsert2",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "EffectInsert3",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "LowerTub",
+        "distance_mm": 2.8284271247461903
+      },
+      {
+        "object": "ShoulderRailL",
+        "distance_mm": 3.806754432629555
+      },
+      {
+        "object": "ShoulderRailR",
+        "distance_mm": 3.806754432629555
+      }
+    ],
+    "passed": true
+  },
+  "tray_removed_first": [
+    "BatteryHatch",
+    "BatteryPad54N29",
+    "BatteryPad54N90",
+    "BatteryPadN54N29",
+    "BatteryPadN54N90",
+    "BatteryPullStrap",
+    "BatteryScrewLFront",
+    "BatteryScrewLRear",
+    "BatteryScrewRFront",
+    "BatteryScrewRRear",
+    "BatterySupportWasherLFront",
+    "BatterySupportWasherLRear",
+    "BatterySupportWasherRFront",
+    "BatterySupportWasherRRear",
+    "BottomCoverScrew0",
+    "BottomCoverScrew1",
+    "BottomCoverScrew2",
+    "BottomCoverScrew3",
+    "BottomCoverScrew4",
+    "BottomCoverScrew5",
+    "BottomServiceCover",
+    "PowerBank",
+    "PowerCableRoute",
+    "EffectScrew0",
+    "EffectScrew1",
+    "EffectScrew2",
+    "EffectScrew3"
+  ],
+  "screw_continuous_sweeps": {
+    "ArcScrewL00": {
+      "boolean_pairs_tested": 8,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertL00",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcLinerOuterL0",
+          "distance_mm": 3.9456389820209914
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 4.445638982020991
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewL01": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertL01",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcLinerOuterL0",
+          "distance_mm": 3.9456389820209914
+        },
+        {
+          "object": "ArcLinerInnerL0",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 4.445638982020991
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewL10": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertL10",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcLinerOuterL1",
+          "distance_mm": 3.9456389820209914
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 4.445638982020991
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewL11": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertL11",
+          "distance_mm": 0.049999999999989574
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999883
+        },
+        {
+          "object": "ArcLinerOuterL1",
+          "distance_mm": 3.9456389820209914
+        },
+        {
+          "object": "ArcLinerInnerL1",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "BackpackArcL",
+          "distance_mm": 4.445638982020991
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR00": {
+      "boolean_pairs_tested": 10,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertR00",
+          "distance_mm": 0.04999999999998295
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999467
+        },
+        {
+          "object": "ArcLinerOuterR0",
+          "distance_mm": 3.9456389820209794
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 4.053396661785328
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 4.445638982021
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR01": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertR01",
+          "distance_mm": 0.04999999999995304
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999747
+        },
+        {
+          "object": "ArcLinerOuterR0",
+          "distance_mm": 3.945638982021006
+        },
+        {
+          "object": "ArcLinerInnerR0",
+          "distance_mm": 4.053396661785342
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 4.445638982021
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR10": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertR10",
+          "distance_mm": 0.04999999999997258
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999726
+        },
+        {
+          "object": "ArcLinerOuterR1",
+          "distance_mm": 3.9456389820209794
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 4.053396661785342
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 4.445638982021
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR11": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcInsertR11",
+          "distance_mm": 0.04999999999997044
+        },
+        {
+          "object": "BackpackShell",
+          "distance_mm": 0.8999999999999793
+        },
+        {
+          "object": "ArcLinerOuterR1",
+          "distance_mm": 3.945638982021006
+        },
+        {
+          "object": "ArcLinerInnerR1",
+          "distance_mm": 4.053396661785342
+        },
+        {
+          "object": "BackpackArcR",
+          "distance_mm": 4.445638982020995
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew0": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectInsert0",
+          "distance_mm": 0.04999999999999662
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.8999999999999964
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew1": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectInsert1",
+          "distance_mm": 0.049999999999995055
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.8999999999999972
+        },
+        {
+          "object": "EffectMOSR",
+          "distance_mm": 2.5612496949731405
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew2": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectInsert2",
+          "distance_mm": 0.04999999999999662
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.8999999999999964
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew3": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectInsert3",
+          "distance_mm": 0.049999999999995055
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.8999999999999972
+        },
+        {
+          "object": "EffectMOSL",
+          "distance_mm": 2.5612496949731405
+        }
+      ],
+      "passed": true
+    }
+  },
+  "tool_rods": {
+    "ArcScrewL00": {
+      "boolean_pairs_tested": 6,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 2.0
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewL01": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL0",
+          "distance_mm": 2.0
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewL10": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 2.0
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewL11": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterL1",
+          "distance_mm": 2.0
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR00": {
+      "boolean_pairs_tested": 6,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 1.9999999999999858
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR01": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR0",
+          "distance_mm": 1.9999999999999858
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR10": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 2.0
+        }
+      ],
+      "passed": true
+    },
+    "ArcScrewR11": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "ArcClampOuterR1",
+          "distance_mm": 2.0
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew0": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 1.5
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 3.551056180912941
+        },
+        {
+          "object": "EffectInsert0",
+          "distance_mm": 4.0
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew1": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 1.5
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 3.551056180912941
+        },
+        {
+          "object": "EffectInsert1",
+          "distance_mm": 4.0
+        },
+        {
+          "object": "EffectMOSR",
+          "distance_mm": 4.301162633521313
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew2": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 1.5
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 3.551056180912941
+        },
+        {
+          "object": "EffectInsert2",
+          "distance_mm": 4.0
+        }
+      ],
+      "passed": true
+    },
+    "EffectScrew3": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "EffectTray",
+          "distance_mm": 1.5
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 3.551056180912941
+        },
+        {
+          "object": "EffectInsert3",
+          "distance_mm": 4.0
+        },
+        {
+          "object": "EffectMOSL",
+          "distance_mm": 4.301162633521313
+        }
+      ],
+      "passed": true
+    }
+  },
+  "negative_controls": {
+    "upper_stop_retained_L": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [
+        {
+          "object": "upper_cap",
+          "overlap_mm3": 195.80236521039063
+        }
+      ],
+      "nearby": [
+        {
+          "object": "upper_cap",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": false
+    },
+    "upper_stop_retained_R": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [
+        {
+          "object": "upper_cap",
+          "overlap_mm3": 195.80236526245875
+        }
+      ],
+      "nearby": [
+        {
+          "object": "upper_cap",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": false
+    },
+    "battery_retained": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [
+        {
+          "object": "PowerBank",
+          "overlap_mm3": 49203.0
+        }
+      ],
+      "nearby": [
+        {
+          "object": "PowerBank",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": false
+    },
+    "tray_screws_retained": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [
+        {
+          "object": "EffectScrew0",
+          "overlap_mm3": 33.951147369354416
+        },
+        {
+          "object": "EffectScrew1",
+          "overlap_mm3": 33.951147369354416
+        },
+        {
+          "object": "EffectScrew2",
+          "overlap_mm3": 33.95114736935441
+        },
+        {
+          "object": "EffectScrew3",
+          "overlap_mm3": 33.95114736935441
+        }
+      ],
+      "nearby": [
+        {
+          "object": "EffectScrew0",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectScrew1",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectScrew2",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "EffectScrew3",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": false
+    },
+    "cap_screws_retained_L": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [
+        {
+          "object": "ArcScrewL00",
+          "overlap_mm3": 6.738716241950104
+        },
+        {
+          "object": "ArcScrewL01",
+          "overlap_mm3": 6.738716241950104
+        }
+      ],
+      "nearby": [
+        {
+          "object": "ArcScrewL00",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcScrewL01",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": false
+    },
+    "cap_screws_retained_R": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [
+        {
+          "object": "ArcScrewR00",
+          "overlap_mm3": 6.79547103333045
+        },
+        {
+          "object": "ArcScrewR01",
+          "overlap_mm3": 6.7954702294461775
+        }
+      ],
+      "nearby": [
+        {
+          "object": "ArcScrewR00",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "ArcScrewR01",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": false
+    }
+  },
+  "nominal_contact_areas_mm2": {
+    "bottom_pad_L": 96.0,
+    "liner_InnerL0": 236.7315057369035,
+    "liner_OuterL0": 236.7315057369035,
+    "liner_InnerL1": 236.7315057369035,
+    "liner_OuterL1": 236.7315057369035,
+    "bottom_pad_R": 96.0,
+    "liner_InnerR0": 236.73150573440142,
+    "liner_OuterR0": 236.73150573511856,
+    "liner_InnerR1": 236.7315057331276,
+    "liner_OuterR1": 236.7315057394398,
+    "tray_to_posts": 98.52034561657587
+  },
+  "passed": true,
+  "physical_fit_verified": false,
+  "limits": "Cap release sampled; bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
+  "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+  "saved_and_reopened": true
+}
