@@ -5,7 +5,7 @@
 ## 阅读导航
 
 - 看当前能做什么：[工程与能力](#工程与能力)。
-- 配置语音工具或读取回执：[面包板 ct6 接口](#面包板-ct6-接口)。
+- 配置语音工具或读取回执：[面包板 ct7 接口](#面包板-ct7-接口)。
 - 对接另一块联网板：[联网水枪台架接口](#联网水枪台架接口)。
 - 开发正式控制固件：[正式控制核心的-mcp-接口](#正式控制核心的-mcp-接口)、[模块与数据流](#模块与数据流)、[内部-c-api](#内部-c-api)。
 - 做本地调试：[串口与板级接口](#串口与板级接口)。
@@ -20,7 +20,8 @@
 | [L298N 电机台架](esp32-motor-bench/README.md) `0.3.2-l298n-dual-10s` | A／B／AB 选择、本地使能、约 60% PWM／10 秒单次动作、BOOT 同停 | A=GPIO4／5／6，B=GPIO7／8／9；双路软件回归／编译通过，B 路接线及六脚静态关闭已获用户确认，此前 0.3.1 的 3 秒版 8 组空载组合已获用户确认：单路互不干扰、方向符合预期、正常停止且无异响或异常发热；随后一次双路 BOOT 提前停止及松开不恢复也获用户确认；用户已确认 40% 反转方向、约 10 秒停止及运行母线约 12 V；60%／10 秒反转获用户正常停止反馈，母线约 12 V，较 40% 更快、更顺畅且无异常；用户已确认双路 60%／10 秒空载正转正常启停，启动、运行中及临近停止母线均约 12 V，电机和 L298N 无明显发热、无异响或其他异常；这是万用表读数与主观发热观察，电流和定量温升仍未测；电流／温升和带载验收待完成；不是整机行走接口 |
 | [MOS 台架](esp32-mos-bench/README.md) `0.1.1` | 本地串口单次 5 秒 GPIO4 输出、自动结束、BOOT／串口停止 | 已有一次正常喷水／到期停止及 BOOT 带载提前停止观察；完整供电与故障验收未完成 |
 | [联网板](esp32-linx/README.md) `0.2.0-linx-water-bench` | Wi-Fi、绑定、WSS、MCP 状态／停止、本机单次授权的 5 秒喷水 | 已有真实平台调用、喷水及 BOOT 功能检查；无音频，正式核心动作仍关闭 |
-| [面包板](esp32-audio/README.md) `2.0.3-ct6` | 保留语音／唤醒／OLED／音量／说话按键；状态、统一停止、双路电机与 GPIO18 喷水互斥 | ct6 部署、平台同步、迁线及基本台架联调完成；断网、剩余语音回归和整机带载待验；行走 1–3000 ms、约 60%，喷水 1–30000 ms。ct4 带载／ct5 功率断开历史结果不转移为 ct6 验收 |
+| [面包板 ct7](../docs/concurrent-actions.md) `2.0.3-ct7` | 行走与喷水独立计时、可同时运行，新增组合启动工具，统一停止 | 主机测试、编译、应用刷写与平台同步已通过，实物并发及同时负载待验，见 ct7 记录；历史 ct6 互斥测试不作为并发验收 |
+| [面包板历史版](esp32-audio/README.md) `2.0.3-ct6` | 保留语音／唤醒／OLED／音量／说话按键；状态、统一停止、双路电机与 GPIO18 喷水互斥 | ct6 部署、平台同步、迁线及基本台架联调完成；断网、剩余语音回归和整机带载待验；行走 1–3000 ms、约 60%，喷水 1–30000 ms。ct4 带载／ct5 功率断开历史结果不转移为 ct6 验收 |
 
 面包板 ct6 已部署行走／转向与平台角色，迁线及基本台架语音验证完成，剩余回归见集成记录；泡泡仍只有正式核心逻辑实现，未在面包板或联网台架开放。超声波测距／避障、编码器闭环、舵机动作、液位／水流／电量遥测及双板协同控制均未在这些项目接口中实现。高压驱动不属于当前实现范围。上游音频工程可能还发布其自带工具，本文只定义 CyberTrack 增加的 `self.tank.*`，不把上游工具视为本项目新增能力。
 
@@ -39,7 +40,19 @@
 
 <a id="音频板-ct5-接口"></a>
 
-## 面包板 ct6 接口
+## 面包板 ct7 接口
+
+当前源码新增并发动作，完整语义与部署状态见[ct7 说明](../docs/concurrent-actions.md)。单项 `move`／`water` 原参数和上限保持，允许同时活动，分别截止和冷却；停止仍全停。
+
+新增 `self.tank.move_and_water({"direction":"forward","move_duration_ms":1000,"water_duration_ms":3000})`：仅接受上述三个字段，方向四选一，行走整数 1–3000 ms、喷水整数 1–30000 ms。两路全部就绪才接受；忙碌时整体拒绝不部分执行。共享票据绑定目标通道，类型不符返回 `ticket_target_mismatch`；内部非法移动参数返回 `invalid_move`。单路启动只取消与自己重叠的排队票据。参数错误走 ReplyError。
+
+状态增加 `capabilities.move_and_water=true`、`move_last_duration_ms`、`water_last_duration_ms`、`move_remaining_ms`、`water_remaining_ms`、`log_events_dropped`。两路输出可同时活动，汇总 remaining_ms 取最大剩余时间，last_duration_ms 为最近请求时长（组合取最大），starts_this_boot 按启动的通道数累计，组合加 2。actuator_backend 改为 concurrent_motor_water_bench。细分日志为 ACTION_OFF channel=move/water；软件策略、输出驱动和平台角色须一并更新，ct6 设备不支持新工具。
+
+下节保留 ct6 旧接口及历史语义，ct7 以上述差异和当前源码为准；通用核心、独立联网板与台架不随此次改动变为并发。
+
+<a id="面包板-ct6-接口"></a>
+
+## 面包板 ct6 历史接口
 
 以下描述 ct6，已完成本面包板刷写及平台同步，迁线及本轮基本语音台架验证已完成，完整验收仍未完成。接线、刷写与平台同步状态见[集成记录](../docs/breadboard-integration.md)。ct5 仅有水枪；兼容保留旧锚点便于已有链接访问。
 
@@ -209,7 +222,7 @@
 | 恢复日志 | [replay_log.h](include/cybertrack/replay_log.h)／`src/replay_log.c` | 独立完整证据、两槽或四槽冗余，支持缺失主快照的维护恢复 |
 | 联网工程 | [linx_main.c](esp32-linx/main/linx_main.c)、[linx_wire.h](esp32-linx/main/linx_wire.h) | 实际 Wi-Fi／网关／WSS、hello 与分片处理，独立台架入口 |
 | 水枪策略／适配 | [water_policy.h](esp32-linx/main/water_policy.h)、[water_mcp.h](esp32-linx/main/water_mcp.h) | 单次许可、截止、冷却及台架 MCP；面包板复用策略 |
-| 面包板适配 | [cybertrack_tools.h](esp32-audio/cybertrack_tools.h)、[action_guard.h](esp32-audio/action_guard.h)、[action_outputs.h](esp32-audio/action_outputs.h) | 上游工具注册、共享票据／互斥策略、六路电机与 GPIO18 输出、统一停止和状态 |
+| 面包板适配 | [cybertrack_tools.h](esp32-audio/cybertrack_tools.h)、[action_guard.h](esp32-audio/action_guard.h)、[action_outputs.h](esp32-audio/action_outputs.h) | 上游工具注册、共享票据／独立并发策略、六路电机与 GPIO18 输出、统一停止和状态 |
 
 通用库的数据流是 SDK 事件 → `link` → `inbox` → `runtime` → `protocol` → `control` → 板级输出回调；本地停止／故障由运行层先处理。现有联网台架和音频适配各自实现板级循环，不能把这条通用库组合路线视为已经完整部署到它们。
 
@@ -361,7 +374,7 @@
 | `InitializeCyberTrackTools` | 无 | void；面包板初始化 GPIO、控制任务、事件监听并注册工具 |
 | `CyberTrackActionLink` | `bool online` | void；音频连接状态变化，离线取消票据并关断 |
 | `CyberTrackActionStop` | 无 | void；即时取消／关断，不等待主任务回复 |
-| `CyberTrackActionClaim` | `int rpc_id` | int；正数为内部票据，0 为拒绝 |
+| `CyberTrackActionClaim` | `int rpc_id, const char* operation` | int；正数为内部票据，0 为拒绝 |
 | `AudioWaterGuard::Tick/Stop/Claim/Request` | 分别 `(now,online,pressed)`／`(now)`／`(now,rpc_id)`／`(now,ticket,duration)` | 前两者 void；Claim 返回票据或 0；Request 返回结果字符串。必须在适配器锁内执行 |
 | 两套台架的 `bench_tick/bench_stop/bench_receive` | 分别 `(bench_policy *state,now,bool stop_held)`／`(state,now)`／`(state,now,stop_held,const unsigned char *bytes,size_t count)` | void；原地更新 armed/active/deadline 等状态，由各自主循环写 GPIO／PWM |
 

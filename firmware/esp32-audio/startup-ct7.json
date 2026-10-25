@@ -1,0 +1,858 @@
+{
+  "date": "2026-10-25",
+  "firmware": "2.0.3-ct7",
+  "status": "core_concurrency_bench_regression_closed_remaining_acceptance_open",
+  "power_confirmation": {
+    "source": "Historical power-off confirmation used for deployment; current powered bench state is recorded in powered_checks.",
+    "motor_12v_disconnected": true,
+    "mos_5v_disconnected": true,
+    "usb_connected_to_computer": true
+  },
+  "backup": {
+    "private_directory": "secrets/ct7-20261025",
+    "ota0_bytes": 4128768,
+    "ota0_sha256": "66e1045d28c39b30d742b4028ffeeacedabe0382011a3c5b26bf678dc6aaec5a",
+    "application_prefix_matches_ct6": true,
+    "config_bytes": 98304,
+    "config_sha256": "efd7bdee5721d436b931c84077031be0306985623c255347f7fe45865d2ef566",
+    "board_identity_matches_ct6": true,
+    "partition_and_ota_selection_match_ct6": true,
+    "initial_slow_read": "interrupted before completion; repeated successfully at 460800 baud"
+  },
+  "flash": {
+    "only_application_written": true,
+    "offset": "0x20000",
+    "bytes": 2555424,
+    "sha256": "6f30ef4e12636b4f4aaddd1478a48a9a9d104c66d9cfe6605d02cc21a30a9fce",
+    "esptool_hash_verified": true,
+    "config_before_after_identical": true,
+    "nvs_bootloader_otadata_assets_written": false
+  },
+  "platform": {
+    "role_saved_and_reopened_equal": true,
+    "role_sha256": "abe532fe83e95d92d2e77221041a70d993c2b86a8525e479f85de1f35338d0fd",
+    "nickname": "小D",
+    "voice": "少年梓辛/Brayan",
+    "model": "deepseek-v4-flash",
+    "other_configuration_preserved": true
+  },
+  "startup": {
+    "log": "build/audio-private/ct7-session.jsonl",
+    "port": "/dev/cu.usbmodem1101",
+    "version_observed_at": "2026-10-25T14:59:11.517915+08:00",
+    "version": "2.0.3-ct7",
+    "display": "SSD1306 driver installed",
+    "ready_at": "2026-10-25T14:59:11.780798+08:00",
+    "tools": [
+      "status",
+      "stop",
+      "water",
+      "move",
+      "move_and_water"
+    ],
+    "concurrent": true,
+    "idle_at": "2026-10-25T14:59:17.456325+08:00"
+  },
+  "serial_action_commands_sent": [],
+  "physical_concurrent_load_tested": true,
+  "remaining": [
+    "same-channel busy/cooldown refusal and remaining voice boundaries on hardware (host checks passed)",
+    "network disconnect/reconnect tests remain deferred",
+    "ct7 reset/brownout/power-loss behavior and independent power cutoff",
+    "supply/current/temperature/repeated load and ground-travel acceptance",
+    "full 30-second powered spray endurance not established (30-second request stopped at 12712 ms)"
+  ],
+  "voice_checks": [
+    {
+      "time": "2026-10-25T15:05:56.393591+08:00",
+      "boot_id": "2ab7aa942de75849",
+      "request_sequence": 1,
+      "rpc_id": 5,
+      "operation": "move_and_water",
+      "result": "accepted",
+      "direction": "forward",
+      "move_duration_ms": 1000,
+      "water_duration_ms": 3000,
+      "accepted_logical_outputs": {
+        "left": 60,
+        "right": 60,
+        "water": true
+      },
+      "starts_this_boot": 2,
+      "fault": "none",
+      "log_events_dropped_at_acceptance": 0,
+      "stop_events": [
+        {
+          "time": "2026-10-25T15:05:57.335787+08:00",
+          "channel": "move",
+          "reason": "deadline",
+          "software_on_ms": 1003,
+          "move": "OFF",
+          "water": "ON"
+        },
+        {
+          "time": "2026-10-25T15:05:59.335907+08:00",
+          "channel": "water",
+          "reason": "deadline",
+          "software_on_ms": 3003,
+          "move": "OFF",
+          "water": "OFF"
+        }
+      ],
+      "user_observation": {
+        "reply": "好，前进一秒，同时喷水三秒。",
+        "both_power_branches_disconnected": true,
+        "usb_connected": true,
+        "audio_and_display_normal": true
+      },
+      "evidence_boundary": "Firmware acceptance and commanded-output stop logs only; no GPIO continuity measurement or simultaneous powered load verified."
+    },
+    {
+      "time": "2026-10-25T15:06:40.561481+08:00",
+      "boot_id": "2ab7aa942de75849",
+      "request_sequence": 2,
+      "rpc_id": 6,
+      "operation": "move_and_water",
+      "result": "accepted",
+      "direction": "forward",
+      "move_duration_ms": 3000,
+      "water_duration_ms": 1000,
+      "accepted_logical_outputs": {
+        "left": 60,
+        "right": 60,
+        "water": true
+      },
+      "starts_this_boot": 4,
+      "fault": "none",
+      "log_events_dropped_at_acceptance": 0,
+      "stop_events": [
+        {
+          "time": "2026-10-25T15:06:41.501098+08:00",
+          "channel": "water",
+          "reason": "deadline",
+          "software_on_ms": 1001,
+          "move": "ON",
+          "water": "OFF"
+        },
+        {
+          "time": "2026-10-25T15:06:43.502223+08:00",
+          "channel": "move",
+          "reason": "deadline",
+          "software_on_ms": 3002,
+          "move": "OFF",
+          "water": "OFF"
+        }
+      ],
+      "user_observation": {
+        "reply": "好，前进三秒，同时喷水一秒。",
+        "both_power_branches_disconnected": true,
+        "usb_connected": true,
+        "audio_and_display_normal": true
+      },
+      "evidence_boundary": "Firmware acceptance and commanded-output stop logs only; no GPIO continuity measurement or simultaneous powered load verified."
+    }
+  ],
+  "powered_checks": [
+    {
+      "time": "2026-10-25T15:09:07.475742+08:00",
+      "receipt": {
+        "device_id": "30:ed:a0:a1:97:7c",
+        "boot_id": "2ab7aa942de75849",
+        "request_sequence": 3,
+        "operation": "move_and_water",
+        "result": "accepted",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 595834,
+        "logical_outputs": {
+          "left": 60,
+          "right": 60,
+          "water": true,
+          "bubbles": false
+        },
+        "capabilities": {
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": false
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 6,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 1000,
+        "remaining_ms": 1000,
+        "move_last_duration_ms": 1000,
+        "water_last_duration_ms": 1000,
+        "move_remaining_ms": 1000,
+        "water_remaining_ms": 1000,
+        "move_max_duration_ms": 3000,
+        "move_direction": "forward",
+        "log_events_dropped": 0,
+        "actuator_backend": "concurrent_motor_water_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board"
+      },
+      "stop_events": [
+        {
+          "time": "2026-10-25T15:09:08.416770+08:00",
+          "event": "ACTION_OFF channel=move reason=deadline software_on_ms=1002 move=OFF water=OFF starts=6"
+        },
+        {
+          "time": "2026-10-25T15:09:08.424754+08:00",
+          "event": "ACTION_OFF channel=water reason=deadline software_on_ms=1002 move=OFF water=OFF starts=6"
+        }
+      ],
+      "user_observation": {
+        "both_power_branches_on": true,
+        "idle_no_motion_or_spray": true,
+        "both_motors_and_water_operated_together": true,
+        "all_stopped_after_about_one_second": true,
+        "reply": "好，前进一秒，同时喷水一秒。",
+        "audio_and_display_normal": true,
+        "no_reboot": true,
+        "usb_connected": true
+      },
+      "evidence_boundary": "One short simultaneous powered bench action; no current, supply waveform, temperature or ground-travel measurements."
+    },
+    {
+      "time": "2026-10-25T15:09:46.305098+08:00",
+      "receipt": {
+        "device_id": "30:ed:a0:a1:97:7c",
+        "boot_id": "2ab7aa942de75849",
+        "request_sequence": 4,
+        "operation": "move_and_water",
+        "result": "accepted",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 634663,
+        "logical_outputs": {
+          "left": 60,
+          "right": 60,
+          "water": true,
+          "bubbles": false
+        },
+        "capabilities": {
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": false
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 8,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 3000,
+        "remaining_ms": 3000,
+        "move_last_duration_ms": 3000,
+        "water_last_duration_ms": 3000,
+        "move_remaining_ms": 3000,
+        "water_remaining_ms": 3000,
+        "move_max_duration_ms": 3000,
+        "move_direction": "forward",
+        "log_events_dropped": 0,
+        "actuator_backend": "concurrent_motor_water_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board"
+      },
+      "stop_events": [
+        {
+          "time": "2026-10-25T15:09:46.632444+08:00",
+          "event": "ACTION_OFF channel=move reason=BOOT software_on_ms=388 move=OFF water=OFF starts=8"
+        },
+        {
+          "time": "2026-10-25T15:09:46.639549+08:00",
+          "event": "ACTION_OFF channel=water reason=BOOT software_on_ms=388 move=OFF water=OFF starts=8"
+        }
+      ],
+      "user_observation": {
+        "both_power_branches_on": true,
+        "both_motors_and_water_operated_together": true,
+        "BOOT_stopped_all_early": true,
+        "no_resume_after_release_or_original_deadline": true,
+        "audio_and_display_normal": true,
+        "usb_connected": true
+      },
+      "evidence_boundary": "Two BOOT stop events and user-observed physical stop/no-resume; 388 ms is software action duration, not BOOT response latency.",
+      "log_observation_end": "2026-10-25T15:09:50.194609+08:00",
+      "later_action_acceptances_in_observed_log": 0
+    },
+    {
+      "time": "2026-10-25T15:10:57.607253+08:00",
+      "receipt": {
+        "device_id": "30:ed:a0:a1:97:7c",
+        "boot_id": "2ab7aa942de75849",
+        "request_sequence": 5,
+        "operation": "move_and_water",
+        "result": "accepted",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 705964,
+        "logical_outputs": {
+          "left": 60,
+          "right": 60,
+          "water": true,
+          "bubbles": false
+        },
+        "capabilities": {
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": false
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 10,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 3000,
+        "remaining_ms": 3000,
+        "move_last_duration_ms": 1000,
+        "water_last_duration_ms": 3000,
+        "move_remaining_ms": 1000,
+        "water_remaining_ms": 3000,
+        "move_max_duration_ms": 3000,
+        "move_direction": "forward",
+        "log_events_dropped": 0,
+        "actuator_backend": "concurrent_motor_water_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board"
+      },
+      "stop_events": [
+        {
+          "time": "2026-10-25T15:10:58.552149+08:00",
+          "event": "ACTION_OFF channel=move reason=deadline software_on_ms=1002 move=OFF water=ON starts=10"
+        },
+        {
+          "time": "2026-10-25T15:11:00.548512+08:00",
+          "event": "ACTION_OFF channel=water reason=deadline software_on_ms=3002 move=OFF water=OFF starts=10"
+        }
+      ],
+      "user_observation": {
+        "both_power_branches_on": true,
+        "both_motors_stopped_after_about_one_second": true,
+        "water_continued_until_about_three_seconds": true,
+        "reply": "好，前进一秒，同时喷水三秒。",
+        "audio_and_display_normal": true,
+        "usb_connected": true
+      },
+      "evidence_boundary": "User-observed powered continuity when motors stop first, supported by firmware deadline receipts; no waveform/current/temperature measurement."
+    },
+    {
+      "time": "2026-10-25T15:11:55.865934+08:00",
+      "receipt": {
+        "device_id": "30:ed:a0:a1:97:7c",
+        "boot_id": "2ab7aa942de75849",
+        "request_sequence": 6,
+        "operation": "move_and_water",
+        "result": "accepted",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 764221,
+        "logical_outputs": {
+          "left": 60,
+          "right": 60,
+          "water": true,
+          "bubbles": false
+        },
+        "capabilities": {
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": false
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 12,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 3000,
+        "remaining_ms": 3000,
+        "move_last_duration_ms": 3000,
+        "water_last_duration_ms": 1000,
+        "move_remaining_ms": 3000,
+        "water_remaining_ms": 1000,
+        "move_max_duration_ms": 3000,
+        "move_direction": "forward",
+        "log_events_dropped": 0,
+        "actuator_backend": "concurrent_motor_water_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board"
+      },
+      "stop_events": [
+        {
+          "time": "2026-10-25T15:11:56.804573+08:00",
+          "event": "ACTION_OFF channel=water reason=deadline software_on_ms=1000 move=ON water=OFF starts=12"
+        },
+        {
+          "time": "2026-10-25T15:11:58.804671+08:00",
+          "event": "ACTION_OFF channel=move reason=deadline software_on_ms=3000 move=OFF water=OFF starts=12"
+        }
+      ],
+      "user_observation": {
+        "both_power_branches_on": true,
+        "water_stopped_after_about_one_second": true,
+        "both_motors_continued_until_about_three_seconds": true,
+        "reply": "好，前进三秒，同时喷水一秒。",
+        "audio_and_display_normal": true,
+        "usb_connected": true
+      },
+      "evidence_boundary": "User-observed powered continuity when water stops first, supported by firmware deadline receipts; no waveform/current/temperature measurement."
+    }
+  ],
+  "separate_command_checks": {
+    "receipts": [
+      {
+        "time": "2026-10-25T15:12:40.647295+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "2ab7aa942de75849",
+          "request_sequence": 7,
+          "operation": "water",
+          "result": "accepted",
+          "state": "ACTIVE",
+          "fault": "none",
+          "uptime_ms": 809004,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false
+          },
+          "capabilities": {
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": false
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 13,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 10000,
+          "remaining_ms": 10000,
+          "move_last_duration_ms": 3000,
+          "water_last_duration_ms": 10000,
+          "move_remaining_ms": 0,
+          "water_remaining_ms": 10000,
+          "move_max_duration_ms": 3000,
+          "move_direction": "none",
+          "log_events_dropped": 0,
+          "actuator_backend": "concurrent_motor_water_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      },
+      {
+        "time": "2026-10-25T15:12:48.728039+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "2ab7aa942de75849",
+          "request_sequence": 8,
+          "operation": "move",
+          "result": "accepted",
+          "state": "ACTIVE",
+          "fault": "none",
+          "uptime_ms": 817084,
+          "logical_outputs": {
+            "left": 60,
+            "right": 60,
+            "water": true,
+            "bubbles": false
+          },
+          "capabilities": {
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": false
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 14,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 1000,
+          "remaining_ms": 1920,
+          "move_last_duration_ms": 1000,
+          "water_last_duration_ms": 10000,
+          "move_remaining_ms": 1000,
+          "water_remaining_ms": 1920,
+          "move_max_duration_ms": 3000,
+          "move_direction": "forward",
+          "log_events_dropped": 0,
+          "actuator_backend": "concurrent_motor_water_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      },
+      {
+        "time": "2026-10-25T15:13:18.245486+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "2ab7aa942de75849",
+          "request_sequence": 9,
+          "operation": "water",
+          "result": "accepted",
+          "state": "ACTIVE",
+          "fault": "none",
+          "uptime_ms": 846601,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false
+          },
+          "capabilities": {
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": false
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 15,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 10000,
+          "remaining_ms": 10000,
+          "move_last_duration_ms": 1000,
+          "water_last_duration_ms": 10000,
+          "move_remaining_ms": 0,
+          "water_remaining_ms": 10000,
+          "move_max_duration_ms": 3000,
+          "move_direction": "none",
+          "log_events_dropped": 0,
+          "actuator_backend": "concurrent_motor_water_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      },
+      {
+        "time": "2026-10-25T15:13:24.933419+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "2ab7aa942de75849",
+          "request_sequence": 10,
+          "operation": "move",
+          "result": "accepted",
+          "state": "ACTIVE",
+          "fault": "none",
+          "uptime_ms": 853289,
+          "logical_outputs": {
+            "left": 60,
+            "right": 60,
+            "water": true,
+            "bubbles": false
+          },
+          "capabilities": {
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": false
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 16,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 1000,
+          "remaining_ms": 3312,
+          "move_last_duration_ms": 1000,
+          "water_last_duration_ms": 10000,
+          "move_remaining_ms": 1000,
+          "water_remaining_ms": 3312,
+          "move_max_duration_ms": 3000,
+          "move_direction": "forward",
+          "log_events_dropped": 0,
+          "actuator_backend": "concurrent_motor_water_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      },
+      {
+        "time": "2026-10-25T15:13:41.420259+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "2ab7aa942de75849",
+          "request_sequence": 11,
+          "operation": "water",
+          "result": "accepted",
+          "state": "ACTIVE",
+          "fault": "none",
+          "uptime_ms": 869775,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false
+          },
+          "capabilities": {
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": false
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 17,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 10000,
+          "remaining_ms": 10000,
+          "move_last_duration_ms": 1000,
+          "water_last_duration_ms": 10000,
+          "move_remaining_ms": 0,
+          "water_remaining_ms": 10000,
+          "move_max_duration_ms": 3000,
+          "move_direction": "none",
+          "log_events_dropped": 0,
+          "actuator_backend": "concurrent_motor_water_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      },
+      {
+        "time": "2026-10-25T15:13:48.733712+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "2ab7aa942de75849",
+          "request_sequence": 12,
+          "operation": "move",
+          "result": "accepted",
+          "state": "ACTIVE",
+          "fault": "none",
+          "uptime_ms": 877089,
+          "logical_outputs": {
+            "left": 60,
+            "right": 60,
+            "water": true,
+            "bubbles": false
+          },
+          "capabilities": {
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": false
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 18,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 1000,
+          "remaining_ms": 2686,
+          "move_last_duration_ms": 1000,
+          "water_last_duration_ms": 10000,
+          "move_remaining_ms": 999,
+          "water_remaining_ms": 2686,
+          "move_max_duration_ms": 3000,
+          "move_direction": "forward",
+          "log_events_dropped": 0,
+          "actuator_backend": "concurrent_motor_water_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      },
+      {
+        "time": "2026-10-25T15:14:04.824185+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "2ab7aa942de75849",
+          "request_sequence": 13,
+          "operation": "water",
+          "result": "accepted",
+          "state": "ACTIVE",
+          "fault": "none",
+          "uptime_ms": 893179,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false
+          },
+          "capabilities": {
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": false
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 19,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 30000,
+          "remaining_ms": 30000,
+          "move_last_duration_ms": 1000,
+          "water_last_duration_ms": 30000,
+          "move_remaining_ms": 0,
+          "water_remaining_ms": 30000,
+          "move_max_duration_ms": 3000,
+          "move_direction": "none",
+          "log_events_dropped": 0,
+          "actuator_backend": "concurrent_motor_water_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      },
+      {
+        "time": "2026-10-25T15:14:10.865919+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "2ab7aa942de75849",
+          "request_sequence": 14,
+          "operation": "move",
+          "result": "accepted",
+          "state": "ACTIVE",
+          "fault": "none",
+          "uptime_ms": 899220,
+          "logical_outputs": {
+            "left": 60,
+            "right": 60,
+            "water": true,
+            "bubbles": false
+          },
+          "capabilities": {
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": false
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 20,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 1000,
+          "remaining_ms": 23959,
+          "move_last_duration_ms": 1000,
+          "water_last_duration_ms": 30000,
+          "move_remaining_ms": 1000,
+          "water_remaining_ms": 23959,
+          "move_max_duration_ms": 3000,
+          "move_direction": "forward",
+          "log_events_dropped": 0,
+          "actuator_backend": "concurrent_motor_water_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      },
+      {
+        "time": "2026-10-25T15:14:17.536511+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "2ab7aa942de75849",
+          "request_sequence": 15,
+          "operation": "stop",
+          "result": "ok",
+          "state": "STOPPED",
+          "fault": "stopped",
+          "uptime_ms": 905892,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false
+          },
+          "capabilities": {
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": false
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 20,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 1000,
+          "remaining_ms": 0,
+          "move_last_duration_ms": 1000,
+          "water_last_duration_ms": 30000,
+          "move_remaining_ms": 0,
+          "water_remaining_ms": 0,
+          "move_max_duration_ms": 3000,
+          "move_direction": "none",
+          "log_events_dropped": 0,
+          "actuator_backend": "concurrent_motor_water_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      }
+    ],
+    "stop_events": [
+      {
+        "time": "2026-10-25T15:12:49.671478+08:00",
+        "event": "ACTION_OFF channel=move reason=deadline software_on_ms=1003 move=OFF water=ON starts=14"
+      },
+      {
+        "time": "2026-10-25T15:12:50.591499+08:00",
+        "event": "ACTION_OFF channel=water reason=deadline software_on_ms=10003 move=OFF water=OFF starts=14"
+      },
+      {
+        "time": "2026-10-25T15:13:25.877205+08:00",
+        "event": "ACTION_OFF channel=move reason=deadline software_on_ms=1003 move=OFF water=ON starts=16"
+      },
+      {
+        "time": "2026-10-25T15:13:28.187216+08:00",
+        "event": "ACTION_OFF channel=water reason=deadline software_on_ms=10001 move=OFF water=OFF starts=16"
+      },
+      {
+        "time": "2026-10-25T15:13:49.677579+08:00",
+        "event": "ACTION_OFF channel=move reason=deadline software_on_ms=1003 move=OFF water=ON starts=18"
+      },
+      {
+        "time": "2026-10-25T15:13:51.362679+08:00",
+        "event": "ACTION_OFF channel=water reason=deadline software_on_ms=10002 move=OFF water=OFF starts=18"
+      },
+      {
+        "time": "2026-10-25T15:14:11.808066+08:00",
+        "event": "ACTION_OFF channel=move reason=deadline software_on_ms=1002 move=OFF water=ON starts=20"
+      },
+      {
+        "time": "2026-10-25T15:14:17.545876+08:00",
+        "event": "ACTION_OFF channel=water reason=stop software_on_ms=12712 move=OFF water=OFF starts=20"
+      }
+    ],
+    "user_report": "十秒喷水期间受语音／网络请求延迟影响，来不及说停止就已结束；改说喷水三十秒后，后续行为符合预期。用户未逐项重复音频、屏幕或功率状态确认。",
+    "conclusions": {
+      "ten_second_trials": 3,
+      "all_movement_accepted_while_spraying": true,
+      "ten_second_spray_stops": "deadline",
+      "thirty_second_request_stopped_by": "stop",
+      "thirty_second_request_actual_software_on_ms": 12712,
+      "final_logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false
+      },
+      "final_starts_this_boot": 20,
+      "boot_id_unchanged": true,
+      "final_log_events_dropped": 0
+    },
+    "evidence_boundary": "Thirty seconds was the requested ceiling, not actual continuous powered run time. Conversation latency attribution is user-reported, not a measured network-only delay."
+  },
+  "closeout": {
+    "time": "2026-10-25T15:16:46.020418+08:00",
+    "receipt": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "2ab7aa942de75849",
+      "request_sequence": 16,
+      "operation": "get_status",
+      "result": "ok",
+      "state": "STOPPED",
+      "fault": "stopped",
+      "uptime_ms": 1054372,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false
+      },
+      "capabilities": {
+        "move": true,
+        "water": true,
+        "move_and_water": true,
+        "bubbles": false
+      },
+      "local_authorization_required": false,
+      "starts_this_boot": 20,
+      "max_duration_ms": 30000,
+      "last_duration_ms": 1000,
+      "remaining_ms": 0,
+      "move_last_duration_ms": 1000,
+      "water_last_duration_ms": 30000,
+      "move_remaining_ms": 0,
+      "water_remaining_ms": 0,
+      "move_max_duration_ms": 3000,
+      "move_direction": "none",
+      "log_events_dropped": 0,
+      "actuator_backend": "concurrent_motor_water_bench",
+      "physical_feedback": false,
+      "source": "cybertrack_audio_board"
+    },
+    "user_observation": {
+      "both_power_branches_disconnected": true,
+      "usb_connected": true,
+      "reply": "已停止，正在待命。"
+    },
+    "interpretation": "STOPPED/fault=stopped is the retained explicit stop state, not a new output fault. Logical outputs and both remaining durations are zero; physical power removal is user-confirmed."
+  }
+}

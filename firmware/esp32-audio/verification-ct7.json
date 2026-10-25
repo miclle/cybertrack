@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-25",
+  "version": "2.0.3-ct7",
+  "status": "core_concurrency_bench_regression_closed_remaining_acceptance_open",
+  "host_checks": {
+    "asan_ubsan": "passed",
+    "generated_mcp_checks": "passed",
+    "coverage": [
+      "independent concurrent deadlines and cooldowns",
+      "both start orders and atomic combined requests",
+      "same-lane refusal and cancellation; shared replay and ticket targets",
+      "BOOT/stop/offline/clock cancellation",
+      "output transition matrix, unchanged-lane continuity, every init/transition API fault"
+    ]
+  },
+  "cross_build": {
+    "result": "passed",
+    "idf_version": "v5.5.1",
+    "application_bytes": 2555424,
+    "application_sha256": "6f30ef4e12636b4f4aaddd1478a48a9a9d104c66d9cfe6605d02cc21a30a9fce",
+    "application_path": "build/firmware-ct7/xiaozhi.bin",
+    "source_export": "build/xiaozhi-ct7-src",
+    "app_partition_offset": "0x20000"
+  },
+  "source_sha256": {
+    "firmware/esp32-audio/action_guard.h": "dd545d974b76fea6b7d0f8b5a52f4d82b0c6ac6b66967ad4a9f703fc92ac22a3",
+    "firmware/esp32-audio/action_outputs.h": "6b902eceaff9174ef9b928bbdee8cce8d639dc7c9008a853df3a35db3d8f28af",
+    "firmware/esp32-audio/apply_overlay.py": "5f6d83e5fadef737fcd142e2dbf039ff8e84146bff369a87eebff8468b483ed4",
+    "firmware/esp32-audio/cybertrack_tools.cc": "d3273f3129bf4e9e332957fbc00b18d242325ad560bf424ad9866eb790bf0b89",
+    "firmware/esp32-audio/cybertrack_tools.h": "51889c05719fd6b52aac281a6815e1eb7a4a331eeb4d9e4d087062cfd3af609e",
+    "firmware/esp32-audio/prepare.py": "aeead287db5349ebde853caccc4a760f6b1a15a9f703dab9929b35f6e021080e",
+    "firmware/esp32-audio/role-prompt.txt": "abe532fe83e95d92d2e77221041a70d993c2b86a8525e479f85de1f35338d0fd",
+    "firmware/esp32-audio/tests/action_test.cc": "5a856387dbfc08705c192af192fefa9c023cae3707e0c48d57969bfa50460b6e",
+    "firmware/esp32-audio/tests/output_test.cc": "6795f7b1ed57e571f86ce4db5a700124dc8f9ad40c6e3a8d32d3d646427c47f5",
+    "firmware/esp32-audio/tests/output_stub.h": "175a7b44ba659d46dda3b74065a3afcad9af089a4e8593fd9f288c03a7584fd8",
+    "firmware/esp32-audio/tests/mcp_arguments_test.cc": "62d71ddb7c785eae8d101644e3979f9cdde37b4ba8c6e30f0032ce0132100876",
+    "firmware/esp32-audio/tests/run_mcp_tests.py": "f81b05bb51fe49dc57c06d98e492c0784fe0437e0164f753eea0be86a5ce285b",
+    "firmware/esp32-audio/test.sh": "feca514a0d9e1737cedef5069e66e4803c7f32b2b419b1b7e4611de8376fcda4",
+    "firmware/esp32-audio/water_guard.h": "088309c542a1e06dbfc3d49994ad0b8793c5e6868fef2e5c238b6cf0deec5379"
+  },
+  "physical_concurrent_load_tested": true,
+  "remaining": [
+    "same-channel busy/cooldown refusal and remaining voice boundaries on hardware (host checks passed)",
+    "network disconnect/reconnect tests remain deferred",
+    "ct7 reset/brownout/power-loss behavior and independent power cutoff",
+    "supply/current/temperature/repeated load and ground-travel acceptance",
+    "full 30-second powered spray endurance not established (30-second request stopped at 12712 ms)"
+  ],
+  "deployment_record": "startup-ct7.json",
+  "device_voice_checks": {
+    "both_combined_deadline_orders": "passed_firmware_receipts_only",
+    "record": "startup-ct7.json",
+    "gpio_continuity_measured": false
+  },
+  "physical_concurrent_load_scope": "User-observed combined actions, both independent deadline orders, BOOT stop/no resume, and expected separate-command behavior. Receipts confirm movement during active spray and voice stop after 12712 ms of a 30000 ms spray request; not a full 30-second load test.",
+  "closeout": {
+    "record": "startup-ct7.json",
+    "time": "2026-10-25T15:16:46.020418+08:00",
+    "all_logical_outputs_off": true,
+    "both_remaining_ms_zero": true,
+    "starts_this_boot": 20,
+    "boot_id_unchanged": true,
+    "log_events_dropped": 0,
+    "user_confirmed_both_power_branches_disconnected": true
+  }
+}

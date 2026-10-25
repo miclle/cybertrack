@@ -2,4 +2,4 @@
 void InitializeCyberTrackTools();
 void CyberTrackActionLink(bool online);
 void CyberTrackActionStop();
-int CyberTrackActionClaim(int rpc_id);
+int CyberTrackActionClaim(int rpc_id, const char* operation);
