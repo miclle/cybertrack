@@ -18,12 +18,12 @@
       "valid": true,
       "solids": 1,
       "bbox_mm": [
-        42.5,
-        -138.5,
-        60.46340925711785,
-        45.5,
+        43.25,
+        -137.75,
+        61.23170462855892,
+        44.75,
         -109.0,
-        69.72222222222223
+        68.97222222222223
       ]
     },
     {
@@ -44,12 +44,12 @@
       "valid": true,
       "solids": 1,
       "bbox_mm": [
-        52.5,
-        -138.5,
-        51.46340925711785,
-        55.5,
+        53.25,
+        -137.75,
+        52.23170462855892,
+        54.75,
         -109.0,
-        60.72222222222222
+        59.97222222222222
       ]
     },
     {
@@ -70,12 +70,12 @@
       "valid": true,
       "solids": 1,
       "bbox_mm": [
-        -45.5,
-        -138.5,
-        60.46340925711785,
-        -42.5,
+        -44.75,
+        -137.75,
+        61.23170462855892,
+        -43.25,
         -109.0,
-        69.72222222222223
+        68.97222222222223
       ]
     },
     {
@@ -96,12 +96,12 @@
       "valid": true,
       "solids": 1,
       "bbox_mm": [
-        -55.5,
-        -138.5,
-        51.46340925711785,
-        -52.5,
+        -54.75,
+        -137.75,
+        52.23170462855892,
+        -53.25,
         -109.0,
-        60.72222222222222
+        59.97222222222222
       ]
     }
   ],
@@ -112,31 +112,31 @@
       "side": "L",
       "index": 1,
       "guard_distance_mm": 7.105427357601002e-15,
-      "lead_distance_mm": 0.0
+      "lead_distance_mm": 0.5190431782391358
     },
     {
       "side": "L",
       "index": 2,
       "guard_distance_mm": 1.4210854715202004e-14,
-      "lead_distance_mm": 0.0
+      "lead_distance_mm": 0.5190431782391358
     },
     {
       "side": "R",
       "index": 1,
       "guard_distance_mm": 7.105427357601002e-15,
-      "lead_distance_mm": 0.0
+      "lead_distance_mm": 0.5190431782391358
     },
     {
       "side": "R",
       "index": 2,
       "guard_distance_mm": 1.4210854715202004e-14,
-      "lead_distance_mm": 0.0
+      "lead_distance_mm": 0.5190431782391358
     }
   ],
   "passed": true,
-  "scope": "Static visual solids and root contact only; not electrical spacing or fixture validation",
+  "scope": "Static visual solids; guard contact and lead within 2.6 mm exit bore budget; not electrical spacing or fixture validation",
   "physical_fit_verified": false,
   "electrical_verified": false,
-  "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+  "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
   "saved_and_reopened": true
 }

@@ -3,18 +3,18 @@
   "tolerance_mm3": 0.01,
   "static": {
     "ElectronicsTray": {
-      "boolean_pairs_tested": 9,
+      "boolean_pairs_tested": 8,
       "overlaps": [],
       "passed": true
     },
     "BreadboardEnvelope": {
-      "boolean_pairs_tested": 7,
+      "boolean_pairs_tested": 6,
       "overlaps": [],
       "passed": true
     }
   },
   "board_to_crown_mm": 4.0,
-  "tray_to_harness_mm": 2.220153254455275,
+  "tray_to_harness_mm": 1.5,
   "tray_removal": {
     "boolean_pairs_tested": 5,
     "overlaps": [],
@@ -310,6 +310,6 @@
   "board_anti_lift_retention_verified": false,
   "physical_fit_verified": false,
   "limits": "Envelope and rigid tray only. No individual audio/display/USB/RF fit, hand access, flexible harness service, material strength or anti-lift retention acceptance.",
-  "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+  "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
   "saved_and_reopened": true
 }

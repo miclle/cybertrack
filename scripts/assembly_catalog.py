@@ -9,7 +9,7 @@ from collections import OrderedDict
 SYSTEMS = OrderedDict([
  ('A', ('履带与传动', '动力固定 / 接口 / 维护', '先核对成品履带接口，再装电机、联轴器及履带；电机维护先移去本侧履带与电源。')),
  ('B', ('底盘、外甲与停止操作区', '外形尺寸 / 动力固定', '底盘电机固定面为一体；外甲分件固定工艺未定。停止按钮仅占位，不表示已接入切断电路。')),
- ('C', ('充电宝与底部检修', '电源承托架 / 动力维护', '先铺垫、安放电源和拉带，再装内托架4点紧固；最后合底盖6点。拆底盖不要求先取电源。')),
+ ('C', ('电池包与底部检修', '电源承托架 / 动力维护', '先铺垫、安放电源和拉带，再装内托架4点紧固；最后合底盖6点。拆底盖不要求先取电源。')),
  ('D', ('L298N 托框与 MT3608 升压板', '驱动板布局 / 固定与拆装', '机外装垫、螺母和侧压件，核实安全接触边后装板；托框从底部装入，两颗螺钉固定。')),
  ('E', ('固定颈架与线束导向', '总装爆炸 / 内部路线', '固定颈架承托头舱；层板、套筒、横梁并非已验证活动关节。结构连接工艺仍需细化。')),
  ('F', ('头部下壳、面罩与侧甲', '头舱冠盖 / 总装爆炸', '以头壳为位置基准；面罩、耳部和后脑饰件的分体固定工艺未定；侧格栅不代表扬声器已定位。')),
@@ -26,7 +26,7 @@ SYSTEMS = OrderedDict([
 
 def system(name, obj):
     if obj['category'] == 'clearance': return 'M'
-    if name.startswith(('BackpackArc','ArcClamp','ArcLiner','ArcBottomPad','ArcInsert','ArcScrew','Effect','FrontEffect')): return 'N'
+    if name.startswith(('BackpackArc','ArcClamp','ArcLiner','ArcBottomPad','ArcInsert','ArcScrew','Effect','FrontEffect','IgnitionMOS')): return 'N'
     if name.startswith(('Track','Motor','DriveCoupler')): return 'A'
     if name.startswith(('Battery','BottomCover','BottomService','PowerBank')): return 'C'
     if name.startswith(('L298N','MT3608')): return 'D'

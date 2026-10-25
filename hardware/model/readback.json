@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.46",
+  "design_revision": "0.49",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "drive_mount_check": {
     "tolerance_mm3": 1e-05,
@@ -1985,7 +1985,7 @@
       "No material, strength, fatigue, thread, tolerance, sealing or manufacturing acceptance."
     ],
     "passed": true,
-    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "head_lift_check": {
@@ -2186,8 +2186,8 @@
     "limits": "CAD nominal clearances and prescribed rigid service envelopes only; actual cap diameter, flexible hose withdrawal/parking, hand access, stiffness and stability unverified",
     "physical_fit_verified": false,
     "manufacturing_released": false,
-    "assembly_revision": "0.46",
-    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "assembly_revision": "0.49",
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "rear_armor_symmetry_check": {
@@ -2241,7 +2241,7 @@
     "tolerance_mm3": 1e-05,
     "passed": true,
     "physical_or_manufacturing_verified": false,
-    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "top_feed_check": {
@@ -2319,7 +2319,7 @@
     "internal_hose_is_clearance_only": true,
     "suction_lift_air_seal_priming_and_physical_fit_verified": false,
     "passed": true,
-    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "bottle_backpack": {
@@ -2515,23 +2515,178 @@
     "no_tools_for_routine_refill_design_intent": true,
     "physical_retention_seal_venting_material_fit_verified": false,
     "manufacturing_released": false,
-    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
-  "power_bank_dimensions_mm": {
-    "source": "user_measurement",
-    "length": 120,
-    "width": 73,
-    "thickness": 31.5,
-    "orientation": "length X, width Y, thickness Z; low horizontal placement retained from user-approved layout",
-    "envelope_center_z_mm": 48.75,
-    "mass_kg": null,
-    "reported_product_net_mass_kg": 0.373,
-    "mass_source": "P11; user-relayed product specification; not weighed",
-    "port_face_source": "user confirmed 120 x 31.5 mm long side",
-    "port_orientation_design": "+Y; lateral position and connector envelope are assumptions",
-    "ports_and_cable_clearance_verified": false
+  "battery_layout": {
+    "component_readback": {
+      "size_lwh_mm": [
+        116,
+        70.5,
+        19.5
+      ],
+      "source": "user dimensions and original photo, 2026-10-25",
+      "local_axes": "length X, width Y, height Z; origin at minimum corner",
+      "checks": [
+        {
+          "format": "FCStd",
+          "valid": true,
+          "solids": 1,
+          "difference_mm3": 0.0,
+          "passed": true
+        },
+        {
+          "format": "STEP",
+          "valid": true,
+          "solids": 1,
+          "difference_mm3": 0.0,
+          "passed": true
+        }
+      ],
+      "saved_and_reopened": true,
+      "files_sha256": {
+        "Battery-envelope.FCStd": "78a32252090f5a440c0969b8180e2e1c4c94dd3edb00615c9f590838c0036955",
+        "Battery-envelope.step": "eb39120a461b1df01b50a8c2ce8657901db536d41f2364b6648da010a192a87b",
+        "reference/physical-20261025.jpg": "2a8007265f1c077ae19c43fb8b47cdc56acfd1038fad4ce292c3835de31a7000"
+      },
+      "passed": true,
+      "physical_fit_verified": false
+    },
+    "size_lwh_mm": [
+      116,
+      70.5,
+      19.5
+    ],
+    "origin_mm": [
+      -58,
+      -94.75,
+      33
+    ],
+    "top_z_mm": 52.5,
+    "centre_z_mm": 42.75,
+    "placement_assumption": "same low horizontal bay; length X, width Y, thickness Z",
+    "port_orientation_verified": false,
+    "cable_connection_complete": false,
+    "mass_kg": null
+  },
+  "ignition_mos_layout": {
+    "board_quantity": 1,
+    "controlled_modules": 2,
+    "controller": "ESP32-S3; pin unassigned",
+    "board_lwh_mm": [
+      33,
+      17,
+      12
+    ],
+    "height_and_edge_geometry_assumed": true,
+    "board_bbox_mm": [
+      -16.5,
+      -89,
+      56,
+      16.5,
+      -72,
+      68
+    ],
+    "carrier_floor_z_mm": [
+      54.5,
+      56.5
+    ],
+    "mount_centres_xy_mm": [
+      [
+        23,
+        -88
+      ],
+      [
+        -23,
+        -88
+      ]
+    ],
+    "battery_top_z_mm": 52.5,
+    "battery_to_carrier_mm": 2,
+    "battery_to_mount_screw_mm": 2.1,
+    "removal": "remove bottom cover and battery; disconnect low-voltage leads, remove two mount screws; lower complete carrier",
+    "electrical_design_implemented": false,
+    "physical_fit_verified": false
+  },
+  "ignition_mos_check": {
+    "valid": true,
+    "static": {
+      "IgnitionMOSBoard": [],
+      "IgnitionMOSSupport": [],
+      "IgnitionMOSRetainer": [],
+      "IgnitionMOSRetainerInsertInner": [],
+      "IgnitionMOSRetainerScrewInner": [],
+      "IgnitionMOSRetainerInsertOuter": [],
+      "IgnitionMOSRetainerScrewOuter": [],
+      "IgnitionMOSMountInsertL": [],
+      "IgnitionMOSMountScrewL": [],
+      "IgnitionMOSMountInsertR": [],
+      "IgnitionMOSMountScrewR": [],
+      "IgnitionMOSCarrier": [],
+      "IgnitionMOSPortL": [],
+      "IgnitionMOSPortR": []
+    },
+    "reserved_spaces": {
+      "IgnitionMOSBoard": [],
+      "IgnitionMOSSupport": [],
+      "IgnitionMOSRetainer": [],
+      "IgnitionMOSRetainerInsertInner": [],
+      "IgnitionMOSRetainerScrewInner": [],
+      "IgnitionMOSRetainerInsertOuter": [],
+      "IgnitionMOSRetainerScrewOuter": [],
+      "IgnitionMOSMountInsertL": [],
+      "IgnitionMOSMountScrewL": [],
+      "IgnitionMOSMountInsertR": [],
+      "IgnitionMOSMountScrewR": [],
+      "IgnitionMOSCarrier": []
+    },
+    "carrier_down_80": {
+      "IgnitionMOSBoard": [],
+      "IgnitionMOSSupport": [],
+      "IgnitionMOSRetainer": [],
+      "IgnitionMOSRetainerInsertInner": [],
+      "IgnitionMOSRetainerScrewInner": [],
+      "IgnitionMOSRetainerInsertOuter": [],
+      "IgnitionMOSRetainerScrewOuter": [],
+      "IgnitionMOSCarrier": []
+    },
+    "removal_prerequisites": [
+      "BatteryHatch",
+      "BatteryInsertLFront",
+      "BatteryInsertLRear",
+      "BatteryInsertRFront",
+      "BatteryInsertRRear",
+      "BatteryPad54N29",
+      "BatteryPad54N90",
+      "BatteryPadN54N29",
+      "BatteryPadN54N90",
+      "BatteryPullStrap",
+      "BatteryScrewLFront",
+      "BatteryScrewLRear",
+      "BatteryScrewRFront",
+      "BatteryScrewRRear",
+      "BatterySupportWasherLFront",
+      "BatterySupportWasherLRear",
+      "BatterySupportWasherRFront",
+      "BatterySupportWasherRRear",
+      "BottomCoverScrew0",
+      "BottomCoverScrew1",
+      "BottomCoverScrew2",
+      "BottomCoverScrew3",
+      "BottomCoverScrew4",
+      "BottomCoverScrew5",
+      "BottomServiceCover",
+      "IgnitionMOSMountScrewL",
+      "IgnitionMOSMountScrewR",
+      "PowerBank",
+      "PowerCableRoute"
+    ],
+    "passed": true,
+    "physical_fit_verified": false,
+    "electrical_verified": false,
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "saved_and_reopened": true
   },
   "arc_module_envelopes": {
     "quantity": 2,
@@ -3135,7 +3290,7 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 126757.62528611711,
+      "volume_mm3": 126525.31165580255,
       "bbox_mm": [
         -87.0,
         -101.0,
@@ -3153,7 +3308,7 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 5415.728071842562,
+      "volume_mm3": 5430.128071842565,
       "bbox_mm": [
         -65.8,
         -96.8,
@@ -3279,7 +3434,7 @@
       "category": "structure",
       "valid": true,
       "solids": 3,
-      "volume_mm3": 47312.19037070234,
+      "volume_mm3": 47762.845547851415,
       "bbox_mm": [
         -65.0,
         -101.00000000000001,
@@ -4719,13 +4874,13 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 2385.75,
+      "volume_mm3": 2970.750000000001,
       "bbox_mm": [
-        66.0,
+        65.99999999999999,
         -99.0,
         39.0,
         67.5,
-        8.000000000000002,
+        38.0,
         90.0
       ],
       "native_brep_matches": false,
@@ -4755,13 +4910,13 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 2385.75,
+      "volume_mm3": 2970.7500000000005,
       "bbox_mm": [
         -67.5,
         -99.0,
         39.0,
-        -66.0,
-        8.000000000000002,
+        -65.99999999999999,
+        38.0,
         90.0
       ],
       "native_brep_matches": false,
@@ -4791,10 +4946,10 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1985.0,
+      "volume_mm3": 1931.907084154332,
       "bbox_mm": [
         36.0,
-        -106.0,
+        -106.00000000000001,
         35.0,
         63.0,
         -101.0,
@@ -4827,10 +4982,10 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 1985.0,
+      "volume_mm3": 1931.9070841543326,
       "bbox_mm": [
         -63.0,
-        -106.0,
+        -106.00000000000001,
         35.0,
         -36.0,
         -101.0,
@@ -4931,18 +5086,18 @@
     },
     {
       "name": "PowerBank",
-      "label": "实测充电宝 120×73×31.5／前下方平放",
+      "label": "辰克5 V电池包116×70.5×19.5／前下方平放候选",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 275940.0,
+      "volume_mm3": 159471.0,
       "bbox_mm": [
-        -60.0,
-        -96.0,
+        -58.0,
+        -94.75,
         33.0,
-        60.0,
-        -23.0,
-        64.5
+        58.0,
+        -24.25,
+        52.5
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -5097,14 +5252,14 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 777.6000000000008,
+      "volume_mm3": 662.3999999999996,
       "bbox_mm": [
-        -60.6,
+        -58.6,
         -63.0,
         32.2,
-        60.6,
+        58.6,
         -57.0,
-        65.2
+        53.2
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -5291,18 +5446,18 @@
     },
     {
       "name": "PowerCableRoute",
-      "label": "电源插头及中央线束／电机维护时拔下并移开",
+      "label": "中央低压线束预算／新电池端接待确认",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 10394.362427534375,
+      "volume_mm3": 4161.424381385517,
       "bbox_mm": [
-        -10.0,
-        -23.0,
-        42.0,
-        10.0,
-        22.0,
-        190.0
+        -3.0,
+        -17.0,
+        50.0,
+        3.0,
+        9.0,
+        170.0
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -10006,12 +10161,264 @@
       "symmetric_difference_mm3": 0.0
     },
     {
+      "name": "IgnitionMOSBoard",
+      "label": "点火P01独立安装位／Board",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4391.999999999999,
+      "bbox_mm": [
+        -16.5,
+        -89.0,
+        56.0,
+        16.5,
+        -72.0,
+        68.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSSupport",
+      "label": "点火P01独立安装位／Support",
+      "category": "structure",
+      "valid": true,
+      "solids": 2,
+      "volume_mm3": 49.599999999999895,
+      "bbox_mm": [
+        -15.5,
+        -88.8,
+        55.5,
+        15.5,
+        -72.2,
+        56.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSRetainer",
+      "label": "点火P01独立安装位／Retainer",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 469.76969498710486,
+      "bbox_mm": [
+        -22.8,
+        -90.5,
+        58.0,
+        22.799999999999997,
+        -70.5,
+        59.2
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSRetainerInsertInner",
+      "label": "点火P01独立安装位／RetainerInsertInner",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.746193947594012,
+      "bbox_mm": [
+        -21.9,
+        -81.9,
+        55.0,
+        -19.1,
+        -79.1,
+        57.900000000000006
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSRetainerScrewInner",
+      "label": "点火P01独立安装位／RetainerScrewInner",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 23.80106647336584,
+      "bbox_mm": [
+        -22.3,
+        -82.3,
+        55.099999999999994,
+        -18.7,
+        -78.7,
+        60.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSRetainerInsertOuter",
+      "label": "点火P01独立安装位／RetainerInsertOuter",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.746193947594008,
+      "bbox_mm": [
+        19.1,
+        -81.9,
+        55.0,
+        21.9,
+        -79.1,
+        57.900000000000006
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSRetainerScrewOuter",
+      "label": "点火P01独立安装位／RetainerScrewOuter",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 23.80106647336584,
+      "bbox_mm": [
+        18.7,
+        -82.3,
+        55.099999999999994,
+        22.3,
+        -78.7,
+        60.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSMountInsertL",
+      "label": "点火MOS托架吊柱嵌件候选 L",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 37.52239725631305,
+      "bbox_mm": [
+        21.0,
+        -90.0,
+        58.6,
+        25.0,
+        -86.0,
+        63.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSMountScrewL",
+      "label": "点火MOS独立托架底部M2.5级候选螺钉 L",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 57.4106144752009,
+      "bbox_mm": [
+        20.6,
+        -90.4,
+        54.6,
+        25.4,
+        -85.6,
+        63.1
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSMountInsertR",
+      "label": "点火MOS托架吊柱嵌件候选 R",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 37.52239725631305,
+      "bbox_mm": [
+        -25.0,
+        -90.0,
+        58.6,
+        -21.0,
+        -86.0,
+        63.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSMountScrewR",
+      "label": "点火MOS独立托架底部M2.5级候选螺钉 R",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 57.410614475200894,
+      "bbox_mm": [
+        -25.4,
+        -90.4,
+        54.6,
+        -20.6,
+        -85.6,
+        63.1
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSCarrier",
+      "label": "点火P01前舱独立可拆托架／两点吊装",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1286.3246087698121,
+      "bbox_mm": [
+        -25.8,
+        -90.8,
+        54.5,
+        25.8,
+        -70.5,
+        58.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSPortL",
+      "label": "点火P01板端接线空间假设 L",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 144.0,
+      "bbox_mm": [
+        16.5,
+        -84.5,
+        61.0,
+        20.5,
+        -76.5,
+        65.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionMOSPortR",
+      "label": "点火P01板端接线空间假设 R",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 144.0,
+      "bbox_mm": [
+        -20.5,
+        -84.5,
+        61.0,
+        -16.5,
+        -76.5,
+        65.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
       "name": "FrontEffectSleeveL1",
       "label": "左前方效果线1／根部护套外观",
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 84.8230016469244,
+      "volume_mm3": 68.89512689322413,
       "bbox_mm": [
         41.0,
         -109.0,
@@ -10029,14 +10436,14 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 209.8169551610783,
+      "volume_mm3": 51.57066591705156,
       "bbox_mm": [
-        42.5,
-        -138.5,
-        60.46340925711785,
-        45.5,
+        43.25,
+        -137.75,
+        61.23170462855892,
+        44.75,
         -109.0,
-        69.72222222222223
+        68.97222222222223
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -10047,7 +10454,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 84.82300164692438,
+      "volume_mm3": 68.89512689322412,
       "bbox_mm": [
         51.0,
         -109.0,
@@ -10065,14 +10472,14 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 209.81695516107663,
+      "volume_mm3": 51.570665917052104,
       "bbox_mm": [
-        52.5,
-        -138.5,
-        51.46340925711785,
-        55.5,
+        53.25,
+        -137.75,
+        52.23170462855892,
+        54.75,
         -109.0,
-        60.72222222222222
+        59.97222222222222
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -10083,7 +10490,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 84.8230016469244,
+      "volume_mm3": 68.89512689322413,
       "bbox_mm": [
         -47.0,
         -109.0,
@@ -10101,14 +10508,14 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 209.8169551610783,
+      "volume_mm3": 51.57066591705156,
       "bbox_mm": [
-        -45.5,
-        -138.5,
-        60.46340925711785,
-        -42.5,
+        -44.75,
+        -137.75,
+        61.23170462855892,
+        -43.25,
         -109.0,
-        69.72222222222223
+        68.97222222222223
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -10119,7 +10526,7 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 84.82300164692438,
+      "volume_mm3": 68.89512689322412,
       "bbox_mm": [
         -57.0,
         -109.0,
@@ -10137,14 +10544,122 @@
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 209.81695516107663,
+      "volume_mm3": 51.570665917052104,
       "bbox_mm": [
-        -55.5,
-        -138.5,
-        51.46340925711785,
-        -52.5,
+        -54.75,
+        -137.75,
+        52.23170462855892,
+        -53.25,
         -109.0,
-        60.72222222222222
+        59.97222222222222
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionRouteL",
+      "label": "底盘上表面内收至前舱的双线走廊 IgnitionRouteL",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2705.5459610156827,
+      "bbox_mm": [
+        53.0,
+        -86.0,
+        57.0,
+        74.76923076923077,
+        86.84615384615384,
+        132.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionRouteBranchL1",
+      "label": "前端单线接近区 IgnitionRouteBranchL1",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 95.25355640179495,
+      "bbox_mm": [
+        43.0,
+        -111.0,
+        58.02155941848062,
+        55.65310051627616,
+        -85.21507086684477,
+        63.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionRouteBranchL2",
+      "label": "前端单线接近区 IgnitionRouteBranchL2",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 87.41815808123758,
+      "bbox_mm": [
+        53.0,
+        -111.0,
+        52.0,
+        55.989949493661165,
+        -85.85857864376268,
+        60.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionRouteR",
+      "label": "底盘上表面内收至前舱的双线走廊 IgnitionRouteR",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2705.545964070583,
+      "bbox_mm": [
+        -74.76923076923077,
+        -86.0,
+        57.0,
+        -53.0,
+        86.84615384615384,
+        132.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionRouteBranchR1",
+      "label": "前端单线接近区 IgnitionRouteBranchR1",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 95.25355481732635,
+      "bbox_mm": [
+        -55.65310051627616,
+        -111.0,
+        58.02155941848062,
+        -43.0,
+        -85.21507086684477,
+        63.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "IgnitionRouteBranchR2",
+      "label": "前端单线接近区 IgnitionRouteBranchR2",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 87.418158081149,
+      "bbox_mm": [
+        -55.989949493661165,
+        -111.0,
+        52.0,
+        -53.0,
+        -85.85857864376268,
+        60.0
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -10152,14 +10667,14 @@
   ],
   "assembly_size_xyz_mm": [
     228.0,
-    246.0000001,
+    245.2500001,
     228.00000000248912
   ],
   "step_readback": {
     "valid": true,
-    "solids": 942,
-    "expected_solids": 942,
-    "volume_difference_mm3": 3.1103784698061645,
+    "solids": 954,
+    "expected_solids": 954,
+    "volume_difference_mm3": 3.105533025227487,
     "bbox_difference_mm": 8.952838470577262e-13,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -10168,7 +10683,7 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 1119,
+    "boolean_pairs_tested": 1156,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
@@ -11615,7 +12130,7 @@
           "BottomCoverScrew4",
           "BottomCoverScrew5"
         ],
-        "boolean_pairs_tested": 49,
+        "boolean_pairs_tested": 45,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -11952,18 +12467,18 @@
     "tolerance_mm3": 0.01,
     "static": {
       "ElectronicsTray": {
-        "boolean_pairs_tested": 9,
+        "boolean_pairs_tested": 8,
         "overlaps": [],
         "passed": true
       },
       "BreadboardEnvelope": {
-        "boolean_pairs_tested": 7,
+        "boolean_pairs_tested": 6,
         "overlaps": [],
         "passed": true
       }
     },
     "board_to_crown_mm": 4.0,
-    "tray_to_harness_mm": 2.220153254455275,
+    "tray_to_harness_mm": 1.5,
     "tray_removal": {
       "boolean_pairs_tested": 5,
       "overlaps": [],
@@ -12259,7 +12774,7 @@
     "board_anti_lift_retention_verified": false,
     "physical_fit_verified": false,
     "limits": "Envelope and rigid tray only. No individual audio/display/USB/RF fit, hand access, flexible harness service, material strength or anti-lift retention acceptance.",
-    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "l298n_layout": {
@@ -12389,7 +12904,7 @@
     "placement_difference_mm3": 0.0,
     "outside_central_dry_bay_mm3": 0.0,
     "overlap_tolerance_mm3": 0.01,
-    "objects_checked": 419,
+    "objects_checked": 439,
     "overlaps": [],
     "reserved_space_overlaps": [],
     "nearby_distances": [
@@ -12484,13 +12999,13 @@
         "distance_mm": 0.7999999999999972
       },
       {
-        "object": "PowerCableRoute",
-        "category": "envelope",
-        "distance_mm": 1.0
-      },
-      {
         "object": "RearBulkhead",
         "category": "structure",
+        "distance_mm": 1.5
+      },
+      {
+        "object": "L298NConnectorSpace",
+        "category": "clearance",
         "distance_mm": 1.5
       }
     ],
@@ -12552,7 +13067,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "thermal_verified": false,
-    "source_after_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_after_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "l298n_mount": {
@@ -12739,11 +13254,11 @@
       },
       {
         "object": "PowerBank",
-        "distance_mm": 6.26418390534633
+        "distance_mm": 7.470107094279171
       },
       {
         "object": "PowerCableRoute",
-        "distance_mm": 1.0
+        "distance_mm": 2.799999999999997
       },
       {
         "object": "BottomServiceCover",
@@ -12797,7 +13312,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "passed": true,
-    "source_after_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_after_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true,
     "carrier_export": {
       "coordinate_frame": "assembly coordinates, no scale or relocation",
@@ -13088,7 +13603,7 @@
     "mounting_verified": false,
     "physical_fit_verified": false,
     "acoustic_verified": false,
-    "source_after_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_after_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "ultrasonic_layout": {
@@ -13534,13 +14049,935 @@
     "physical_fit_verified": false,
     "electrical_verified": false,
     "limits": "Unmeasured PCB, datum, rear height, header, connector, wire bend and board endpoint. No mounts or hand access acceptance.",
-    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6"
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a"
+  },
+  "ignition_routing_layout": {
+    "revision": "0.48",
+    "wire_outer_diameter_mm": 1.5,
+    "diameter_source": "user supplied",
+    "wires_per_side": 2,
+    "location": "inboard over motor deck; enters front bay at shoulder, exits front face",
+    "allocations": [
+      {
+        "name": "IgnitionRouteL",
+        "points_mm": [
+          [
+            74,
+            85,
+            130
+          ],
+          [
+            62,
+            80,
+            130
+          ],
+          [
+            60,
+            30,
+            100
+          ],
+          [
+            58,
+            28,
+            79
+          ],
+          [
+            58,
+            -17,
+            79
+          ],
+          [
+            55,
+            -29,
+            59
+          ],
+          [
+            55,
+            -86,
+            59
+          ]
+        ],
+        "allocation_diameter_mm": 4,
+        "polyline_length_mm": 218.0493807162861,
+        "intended_front_overlap": null
+      },
+      {
+        "name": "IgnitionRouteBranchL1",
+        "points_mm": [
+          [
+            55,
+            -86,
+            59
+          ],
+          [
+            44,
+            -95,
+            62
+          ],
+          [
+            44,
+            -111,
+            62
+          ]
+        ],
+        "allocation_diameter_mm": 2,
+        "polyline_length_mm": 30.52583904633395,
+        "intended_front_overlap": "FrontEffectLeadL1"
+      },
+      {
+        "name": "IgnitionRouteBranchL2",
+        "points_mm": [
+          [
+            55,
+            -86,
+            59
+          ],
+          [
+            54,
+            -93,
+            59
+          ],
+          [
+            54,
+            -97,
+            53
+          ],
+          [
+            54,
+            -111,
+            53
+          ]
+        ],
+        "allocation_diameter_mm": 2,
+        "polyline_length_mm": 28.282170362793455,
+        "intended_front_overlap": "FrontEffectLeadL2"
+      },
+      {
+        "name": "IgnitionRouteR",
+        "points_mm": [
+          [
+            -74,
+            85,
+            130
+          ],
+          [
+            -62,
+            80,
+            130
+          ],
+          [
+            -60,
+            30,
+            100
+          ],
+          [
+            -58,
+            28,
+            79
+          ],
+          [
+            -58,
+            -17,
+            79
+          ],
+          [
+            -55,
+            -29,
+            59
+          ],
+          [
+            -55,
+            -86,
+            59
+          ]
+        ],
+        "allocation_diameter_mm": 4,
+        "polyline_length_mm": 218.0493807162861,
+        "intended_front_overlap": null
+      },
+      {
+        "name": "IgnitionRouteBranchR1",
+        "points_mm": [
+          [
+            -55,
+            -86,
+            59
+          ],
+          [
+            -44,
+            -95,
+            62
+          ],
+          [
+            -44,
+            -111,
+            62
+          ]
+        ],
+        "allocation_diameter_mm": 2,
+        "polyline_length_mm": 30.52583904633395,
+        "intended_front_overlap": "FrontEffectLeadR1"
+      },
+      {
+        "name": "IgnitionRouteBranchR2",
+        "points_mm": [
+          [
+            -55,
+            -86,
+            59
+          ],
+          [
+            -54,
+            -93,
+            59
+          ],
+          [
+            -54,
+            -97,
+            53
+          ],
+          [
+            -54,
+            -111,
+            53
+          ]
+        ],
+        "allocation_diameter_mm": 2,
+        "polyline_length_mm": 28.282170362793455,
+        "intended_front_overlap": "FrontEffectLeadR2"
+      }
+    ],
+    "front_passage_cuts": [
+      {
+        "route": "IgnitionRouteL",
+        "object": "LowerTub",
+        "removed_mm3": 84.30105778701545,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchL1",
+        "object": "LowerTub",
+        "removed_mm3": 15.927870895844535,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchL1",
+        "object": "ChestGuardL",
+        "removed_mm3": 26.546457922833497,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchL1",
+        "object": "FrontEffectSleeveL1",
+        "removed_mm3": 15.927874753700266,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchL2",
+        "object": "LowerTub",
+        "removed_mm3": 15.927870905114105,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchL2",
+        "object": "ChestGuardL",
+        "removed_mm3": 26.546457922834406,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchL2",
+        "object": "FrontEffectSleeveL2",
+        "removed_mm3": 15.927874753700266,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteR",
+        "object": "LowerTub",
+        "removed_mm3": 84.30108484230004,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchR1",
+        "object": "LowerTub",
+        "removed_mm3": 15.927872746717185,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchR1",
+        "object": "ChestGuardR",
+        "removed_mm3": 26.546457922833497,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchR1",
+        "object": "FrontEffectSleeveR1",
+        "removed_mm3": 15.927874753700266,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchR2",
+        "object": "LowerTub",
+        "removed_mm3": 15.92787313759618,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchR2",
+        "object": "ChestGuardR",
+        "removed_mm3": 26.54645792283395,
+        "valid": true,
+        "solids": 1
+      },
+      {
+        "route": "IgnitionRouteBranchR2",
+        "object": "FrontEffectSleeveR2",
+        "removed_mm3": 15.927874753700266,
+        "valid": true,
+        "solids": 1
+      }
+    ],
+    "basis": "用户给定单线外径1.5 mm、每侧两根；背包附近向内收，经电机顶面内侧，从前舱肩部入壳并从前脸出线；走廊是空间预算，不是实际线束或绝缘规格。模块出线端、弯曲半径、固定护盖及实物穿线仍待验证",
+    "main_entry_bore_budget_mm": 4.8,
+    "front_exit_bore_budget_mm": 2.6,
+    "lengths_are_cut_lengths": false,
+    "bend_radius_verified": false,
+    "module_exit_verified": false,
+    "physical_fit_verified": false,
+    "protective_cover_designed": false,
+    "electrical_verified": false
+  },
+  "ignition_routing_check": {
+    "scope": "geometric allocation only; no electrical or installation acceptance",
+    "objects": 6,
+    "representation": "connected straight clearance segments; not manufactured parts",
+    "valid": true,
+    "unexpected_overlaps": [],
+    "planned_front_interfaces": [
+      {
+        "route": "IgnitionRouteBranchL1",
+        "object": "FrontEffectLeadL1",
+        "volume_mm3": 3.5246377618342715,
+        "distance_mm": 0.0
+      },
+      {
+        "route": "IgnitionRouteBranchL2",
+        "object": "FrontEffectLeadL2",
+        "volume_mm3": 3.524637761834124,
+        "distance_mm": 0.0
+      },
+      {
+        "route": "IgnitionRouteBranchR1",
+        "object": "FrontEffectLeadR1",
+        "volume_mm3": 3.5246377618342715,
+        "distance_mm": 0.0
+      },
+      {
+        "route": "IgnitionRouteBranchR2",
+        "object": "FrontEffectLeadR2",
+        "volume_mm3": 3.524637761834124,
+        "distance_mm": 0.0
+      }
+    ],
+    "nearest_geometry": [
+      {
+        "route": "IgnitionRouteL",
+        "nearest": [
+          {
+            "object": "BackpackShell",
+            "category": "exterior",
+            "distance_mm": 0.3181462242345486
+          },
+          {
+            "object": "LowerTub",
+            "category": "structure",
+            "distance_mm": 0.32557798373549224
+          },
+          {
+            "object": "ArcClampOuterL1",
+            "category": "structure",
+            "distance_mm": 2.019508549556679
+          },
+          {
+            "object": "BackpackArcL",
+            "category": "envelope",
+            "distance_mm": 2.2543378499745605
+          },
+          {
+            "object": "EffectTray",
+            "category": "structure",
+            "distance_mm": 3.469229106000558
+          },
+          {
+            "object": "BatteryPullStrap",
+            "category": "structure",
+            "distance_mm": 3.799999999999997
+          },
+          {
+            "object": "PowerBank",
+            "category": "envelope",
+            "distance_mm": 4.5
+          },
+          {
+            "object": "EffectTool2",
+            "category": "clearance",
+            "distance_mm": 4.5
+          }
+        ]
+      },
+      {
+        "route": "IgnitionRouteBranchL1",
+        "nearest": [
+          {
+            "object": "LowerTub",
+            "category": "structure",
+            "distance_mm": 0.29999999999999294
+          },
+          {
+            "object": "FrontEffectSleeveL1",
+            "category": "exterior",
+            "distance_mm": 0.29999999999999505
+          },
+          {
+            "object": "ChestGuardL",
+            "category": "exterior",
+            "distance_mm": 0.2999999999999951
+          },
+          {
+            "object": "PowerBank",
+            "category": "envelope",
+            "distance_mm": 5.521559418480621
+          },
+          {
+            "object": "KeelLid",
+            "category": "structure",
+            "distance_mm": 6.0
+          },
+          {
+            "object": "FrontEffectSleeveL2",
+            "category": "exterior",
+            "distance_mm": 9.453624047073708
+          },
+          {
+            "object": "FrontEffectLeadL2",
+            "category": "exterior",
+            "distance_mm": 11.2886637182536
+          }
+        ]
+      },
+      {
+        "route": "IgnitionRouteBranchL2",
+        "nearest": [
+          {
+            "object": "LowerTub",
+            "category": "structure",
+            "distance_mm": 0.29999999999999566
+          },
+          {
+            "object": "ChestGuardL",
+            "category": "exterior",
+            "distance_mm": 0.2999999999999959
+          },
+          {
+            "object": "FrontEffectSleeveL2",
+            "category": "exterior",
+            "distance_mm": 0.29999999999999716
+          },
+          {
+            "object": "PowerBank",
+            "category": "envelope",
+            "distance_mm": 1.1494632603727652
+          },
+          {
+            "object": "ChestAccentL",
+            "category": "exterior",
+            "distance_mm": 3.0
+          },
+          {
+            "object": "KeelLid",
+            "category": "structure",
+            "distance_mm": 9.882456866375623
+          }
+        ]
+      },
+      {
+        "route": "IgnitionRouteR",
+        "nearest": [
+          {
+            "object": "BackpackShell",
+            "category": "exterior",
+            "distance_mm": 0.3181462242345486
+          },
+          {
+            "object": "LowerTub",
+            "category": "structure",
+            "distance_mm": 0.325577983735485
+          },
+          {
+            "object": "ArcClampOuterR1",
+            "category": "structure",
+            "distance_mm": 2.019508549556679
+          },
+          {
+            "object": "BackpackArcR",
+            "category": "envelope",
+            "distance_mm": 2.254337849974557
+          },
+          {
+            "object": "EffectTray",
+            "category": "structure",
+            "distance_mm": 3.469229106000558
+          },
+          {
+            "object": "BatteryPullStrap",
+            "category": "structure",
+            "distance_mm": 3.799999999999997
+          },
+          {
+            "object": "PowerBank",
+            "category": "envelope",
+            "distance_mm": 4.5
+          },
+          {
+            "object": "EffectTool0",
+            "category": "clearance",
+            "distance_mm": 4.5
+          }
+        ]
+      },
+      {
+        "route": "IgnitionRouteBranchR1",
+        "nearest": [
+          {
+            "object": "FrontEffectSleeveR1",
+            "category": "exterior",
+            "distance_mm": 0.29999999999999377
+          },
+          {
+            "object": "LowerTub",
+            "category": "structure",
+            "distance_mm": 0.2999999999999957
+          },
+          {
+            "object": "ChestGuardR",
+            "category": "exterior",
+            "distance_mm": 0.29999999999999716
+          },
+          {
+            "object": "PowerBank",
+            "category": "envelope",
+            "distance_mm": 5.521559418480621
+          },
+          {
+            "object": "KeelLid",
+            "category": "structure",
+            "distance_mm": 6.0
+          },
+          {
+            "object": "FrontEffectSleeveR2",
+            "category": "exterior",
+            "distance_mm": 9.45362404707371
+          },
+          {
+            "object": "FrontEffectLeadR2",
+            "category": "exterior",
+            "distance_mm": 11.2886637182536
+          }
+        ]
+      },
+      {
+        "route": "IgnitionRouteBranchR2",
+        "nearest": [
+          {
+            "object": "LowerTub",
+            "category": "structure",
+            "distance_mm": 0.29999999999999566
+          },
+          {
+            "object": "ChestGuardR",
+            "category": "exterior",
+            "distance_mm": 0.2999999999999959
+          },
+          {
+            "object": "FrontEffectSleeveR2",
+            "category": "exterior",
+            "distance_mm": 0.29999999999999716
+          },
+          {
+            "object": "PowerBank",
+            "category": "envelope",
+            "distance_mm": 1.1494632603727652
+          },
+          {
+            "object": "ChestAccentR",
+            "category": "exterior",
+            "distance_mm": 3.0
+          },
+          {
+            "object": "KeelLid",
+            "category": "structure",
+            "distance_mm": 9.882456866375623
+          }
+        ]
+      }
+    ],
+    "branch_connections": [
+      {
+        "side": "L",
+        "branch": 1,
+        "overlap_mm3": 0.8445743885542338
+      },
+      {
+        "side": "L",
+        "branch": 2,
+        "overlap_mm3": 0.0952380951400971
+      },
+      {
+        "side": "R",
+        "branch": 1,
+        "overlap_mm3": 0.8445743888335091
+      },
+      {
+        "side": "R",
+        "branch": 2,
+        "overlap_mm3": 0.09523809526062128
+      }
+    ],
+    "sampled_service_with_corridors": {
+      "method": "8 discrete poses per straight segment; whole breadboard continuous tray/fastener/tool checks are reported separately in breadboard_check; legacy arc/USB scenarios only exist when those objects are present; no hand access certification",
+      "scenarios": [
+        {
+          "group": "cable_access",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -80.0
+            ]
+          ],
+          "pose_count": 8,
+          "removed_first": [
+            "BottomCoverScrew0",
+            "BottomCoverScrew1",
+            "BottomCoverScrew2",
+            "BottomCoverScrew3",
+            "BottomCoverScrew4",
+            "BottomCoverScrew5"
+          ],
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "battery",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -60.0
+            ]
+          ],
+          "pose_count": 8,
+          "removed_first": [
+            "BatteryScrewLFront",
+            "BatteryScrewLRear",
+            "BatteryScrewRFront",
+            "BatteryScrewRRear",
+            "PowerCableRoute",
+            "CableServiceCover",
+            "AccessScrewL",
+            "AccessScrewR",
+            "BottomServiceCover",
+            "BottomCoverScrew0",
+            "BottomCoverScrew1",
+            "BottomCoverScrew2",
+            "BottomCoverScrew3",
+            "BottomCoverScrew4",
+            "BottomCoverScrew5"
+          ],
+          "boolean_pairs_tested": 47,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "crown",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              65.0
+            ]
+          ],
+          "pose_count": 8,
+          "removed_first": [
+            "CrownScrewLFront",
+            "CrownScrewLRear",
+            "CrownScrewRFront",
+            "CrownScrewRRear"
+          ],
+          "boolean_pairs_tested": 20,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "electronics",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              85.0
+            ]
+          ],
+          "pose_count": 8,
+          "removed_first": [
+            "BrowArmorL",
+            "BrowArmorR",
+            "CrownFinL",
+            "CrownFinR",
+            "CrownSpine",
+            "CrownForePlate",
+            "CrownSideArmorL",
+            "CrownSideArmorR",
+            "CrownRearCassette",
+            "CrownRearBlade0",
+            "CrownRearBlade1",
+            "CrownRearBlade2",
+            "OccipitalBrowL",
+            "OccipitalBrowR",
+            "CrownEffectInsetL",
+            "CrownEffectMarkLFront",
+            "CrownEffectMarkLRear",
+            "CrownEffectInsetR",
+            "CrownEffectMarkRFront",
+            "CrownEffectMarkRRear",
+            "HeadCrownShell",
+            "HeadServiceHatch",
+            "CrownScrewLFront",
+            "CrownScrewLRear",
+            "CrownScrewRFront",
+            "CrownScrewRRear",
+            "BreadboardScrew0",
+            "BreadboardScrew1",
+            "BreadboardScrew2",
+            "BreadboardScrew3",
+            "PowerCableRoute",
+            "WaterHoseRoute",
+            "ControllerWireRoute",
+            "UltrasonicWireSpace"
+          ],
+          "boolean_pairs_tested": 17,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "Water",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              150.0
+            ]
+          ],
+          "pose_count": 8,
+          "removed_first": [
+            "WaterRetentionBand",
+            "WaterStrapClosure",
+            "WaterHoseRoute"
+          ],
+          "boolean_pairs_tested": 23,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "Bubble",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              150.0
+            ]
+          ],
+          "pose_count": 8,
+          "removed_first": [
+            "BubbleRetentionBand",
+            "BubbleStrapClosure",
+            "BubbleGunHoseRoute"
+          ],
+          "boolean_pairs_tested": 23,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "bubble_gun_cradle",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.5529142706151244,
+              5.795554957734409
+            ],
+            [
+              -90.0,
+              1.5529142706151244,
+              5.795554957734409
+            ]
+          ],
+          "pose_count": 16,
+          "removed_first": [
+            "BubbleGunHoseRoute",
+            "BubbleGunHoseClearance",
+            "BubbleGunHoseService",
+            "BubbleGunLeadRoute",
+            "BubbleGunLeadClearance",
+            "BubbleGunLeadConnector",
+            "BubbleGunConnectorService",
+            "BubbleGunShell",
+            "BubbleGunWheel",
+            "BubbleGunMotor",
+            "BubbleGunGearcase",
+            "BubbleGunMountingTab",
+            "BubbleGunFrontFoot",
+            "BubbleGunBaseScrew1",
+            "BubbleGunBaseScrew2"
+          ],
+          "boolean_pairs_tested": 227,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "water_gun",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.5176380902050415,
+              1.9318516525781364
+            ],
+            [
+              0.0,
+              -144.37123585315518,
+              40.75470841795625
+            ]
+          ],
+          "pose_count": 16,
+          "removed_first": [
+            "WaterHoseRoute",
+            "WaterGunLeadRoute",
+            "WaterGunLeadConnector"
+          ],
+          "boolean_pairs_tested": 119,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "water_gun_cradle",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.5176380902050415,
+              1.9318516525781364
+            ],
+            [
+              60.0,
+              0.5176380902050415,
+              1.9318516525781364
+            ]
+          ],
+          "pose_count": 16,
+          "removed_first": [
+            "WaterHoseRoute",
+            "WaterGunLeadRoute",
+            "WaterGunLeadConnector",
+            "WaterGunBody",
+            "WaterGunInlet",
+            "WaterGunBaseScrew1",
+            "WaterGunBaseScrew2"
+          ],
+          "boolean_pairs_tested": 137,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "physical_assembly_verified": false
+    },
+    "service_with_corridors_passed": true,
+    "passed": true,
+    "routing_ready_for_installation": false,
+    "module_terminal_connection_complete": false,
+    "protective_cover_designed": false,
+    "bend_radius_verified": false,
+    "electrical_verified": false,
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "saved_and_reopened": true
   },
   "front_effects_layout": {
     "quantity": 4,
     "groups": 2,
     "leads_per_group": 2,
-    "basis": "用户2026-10-25指定底盘前方左右各两根线；位置、线径、长度及护套均为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
+    "basis": "用户2026-10-25指定底盘前方左右各两根线，并补充单线外径1.5 mm；位置、长度及护套仍为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
     "appearance_only": true,
     "root_centres_mm": [
       [
@@ -13588,7 +15025,7 @@
     ],
     "forward_projection_mm": 28,
     "rise_mm": 6.222222222222222,
-    "visual_diameter_mm": 3,
+    "visual_diameter_mm": 1.5,
     "sleeve_visual_diameter_mm": 6,
     "internal_wiring_designed": false,
     "electrodes_designed": false,
@@ -13615,12 +15052,12 @@
         "valid": true,
         "solids": 1,
         "bbox_mm": [
-          42.5,
-          -138.5,
-          60.46340925711785,
-          45.5,
+          43.25,
+          -137.75,
+          61.23170462855892,
+          44.75,
           -109.0,
-          69.72222222222223
+          68.97222222222223
         ]
       },
       {
@@ -13641,12 +15078,12 @@
         "valid": true,
         "solids": 1,
         "bbox_mm": [
-          52.5,
-          -138.5,
-          51.46340925711785,
-          55.5,
+          53.25,
+          -137.75,
+          52.23170462855892,
+          54.75,
           -109.0,
-          60.72222222222222
+          59.97222222222222
         ]
       },
       {
@@ -13667,12 +15104,12 @@
         "valid": true,
         "solids": 1,
         "bbox_mm": [
-          -45.5,
-          -138.5,
-          60.46340925711785,
-          -42.5,
+          -44.75,
+          -137.75,
+          61.23170462855892,
+          -43.25,
           -109.0,
-          69.72222222222223
+          68.97222222222223
         ]
       },
       {
@@ -13693,12 +15130,12 @@
         "valid": true,
         "solids": 1,
         "bbox_mm": [
-          -55.5,
-          -138.5,
-          51.46340925711785,
-          -52.5,
+          -54.75,
+          -137.75,
+          52.23170462855892,
+          -53.25,
           -109.0,
-          60.72222222222222
+          59.97222222222222
         ]
       }
     ],
@@ -13709,32 +15146,32 @@
         "side": "L",
         "index": 1,
         "guard_distance_mm": 7.105427357601002e-15,
-        "lead_distance_mm": 0.0
+        "lead_distance_mm": 0.5190431782391358
       },
       {
         "side": "L",
         "index": 2,
         "guard_distance_mm": 1.4210854715202004e-14,
-        "lead_distance_mm": 0.0
+        "lead_distance_mm": 0.5190431782391358
       },
       {
         "side": "R",
         "index": 1,
         "guard_distance_mm": 7.105427357601002e-15,
-        "lead_distance_mm": 0.0
+        "lead_distance_mm": 0.5190431782391358
       },
       {
         "side": "R",
         "index": 2,
         "guard_distance_mm": 1.4210854715202004e-14,
-        "lead_distance_mm": 0.0
+        "lead_distance_mm": 0.5190431782391358
       }
     ],
     "passed": true,
-    "scope": "Static visual solids and root contact only; not electrical spacing or fixture validation",
+    "scope": "Static visual solids; guard contact and lead within 2.6 mm exit bore budget; not electrical spacing or fixture validation",
     "physical_fit_verified": false,
     "electrical_verified": false,
-    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "mt3608_layout": {
@@ -13779,7 +15216,7 @@
       88.0
     ],
     "placement_difference_mm3": 0.0,
-    "objects_checked": 417,
+    "objects_checked": 437,
     "overlaps": [],
     "nearby_distances": [
       {
@@ -13896,7 +15333,7 @@
       "End spaces are design budgets, not a complete wiring or adjustment path.",
       "Service requires driver and left motor removal; fixture and physical handling remain unresolved."
     ],
-    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "effects_layout": {
@@ -13982,10 +15419,10 @@
           -26.5
         ]
       ],
-      "power_top_z_mm": 64.5,
+      "power_top_z_mm": 52.5,
       "minimum_undertray_gap_target_mm": 2,
       "screw_head_bottom_z_mm": 66.6,
-      "screw_head_gap_mm": 2.1,
+      "screw_head_gap_mm": 14.099999999999994,
       "board_bottom_z_mm": 68,
       "pcb_thickness_assumed_mm": 1.6,
       "component_free_edge_assumed_mm": 2.5,
@@ -15495,8 +16932,8 @@
           "passed": false
         }
       },
-      "tray_to_power_mm": 2.0,
-      "screw_head_to_power_mm": 2.0999999999999943,
+      "tray_to_power_mm": 14.0,
+      "screw_head_to_power_mm": 14.099999999999994,
       "roof_distances_mm": {
         "EffectMOSL": 2.135496389036094,
         "EffectSupportLMOS": 5.637555823439678,
@@ -16719,10 +18156,6 @@
             "distance_mm": 0.5
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.0999999999999943
-          },
-          {
             "object": "LowerTub",
             "distance_mm": 3.3234018715767752
           }
@@ -16779,10 +18212,6 @@
           {
             "object": "KeelLid",
             "distance_mm": 0.5
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 2.0999999999999943
           },
           {
             "object": "EffectRetainerRMOS",
@@ -16847,10 +18276,6 @@
             "distance_mm": 0.5
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.0999999999999943
-          },
-          {
             "object": "LowerTub",
             "distance_mm": 3.3234018715767806
           }
@@ -16907,10 +18332,6 @@
           {
             "object": "KeelLid",
             "distance_mm": 0.5
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 2.0999999999999943
           },
           {
             "object": "EffectRetainerLMOS",
@@ -16972,10 +18393,6 @@
             "distance_mm": 2.720294101747096
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 3.5
-          },
-          {
             "object": "EffectBuckL",
             "distance_mm": 3.5
           },
@@ -17009,10 +18426,6 @@
           {
             "object": "EffectRetainerLBuck",
             "distance_mm": 2.973213749463703
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 3.0
           },
           {
             "object": "EffectBuckL",
@@ -17054,10 +18467,6 @@
             "distance_mm": 2.2203603311174502
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.5
-          },
-          {
             "object": "EffectMOSL",
             "distance_mm": 2.6
           }
@@ -17093,10 +18502,6 @@
             "distance_mm": 2.2203603311174502
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.5999999999999943
-          },
-          {
             "object": "EffectMOSL",
             "distance_mm": 2.720294101747094
           }
@@ -17122,10 +18527,6 @@
           {
             "object": "KeelLid",
             "distance_mm": 1.927234057555625
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 2.5
           },
           {
             "object": "EffectMOSL",
@@ -17163,10 +18564,6 @@
             "distance_mm": 1.43145600891813
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.5999999999999943
-          },
-          {
             "object": "EffectMOSL",
             "distance_mm": 2.720294101747096
           },
@@ -17182,7 +18579,7 @@
         "passed": true
       },
       "EffectRetainerLMOS": {
-        "boolean_pairs_tested": 9,
+        "boolean_pairs_tested": 8,
         "overlaps": [],
         "nearby": [
           {
@@ -17297,10 +18694,6 @@
             "distance_mm": 3.2496684180984103
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 3.5
-          },
-          {
             "object": "EffectMOSL",
             "distance_mm": 3.5
           },
@@ -17330,10 +18723,6 @@
           {
             "object": "EffectRetainerLMOS",
             "distance_mm": 2.973213749463703
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 3.0
           },
           {
             "object": "EffectMOSL",
@@ -17371,10 +18760,6 @@
             "distance_mm": 0.09999999999999432
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.5
-          },
-          {
             "object": "EffectBuckL",
             "distance_mm": 2.5999999999999996
           },
@@ -17400,10 +18785,6 @@
           {
             "object": "EffectTray",
             "distance_mm": 0.19999999999998863
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 2.5999999999999943
           },
           {
             "object": "EffectBuckL",
@@ -17437,10 +18818,6 @@
             "distance_mm": 0.09999999999999432
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.5
-          },
-          {
             "object": "EffectBuckL",
             "distance_mm": 2.6000000000000014
           },
@@ -17466,10 +18843,6 @@
           {
             "object": "EffectTray",
             "distance_mm": 0.19999999999998863
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 2.5999999999999943
           },
           {
             "object": "EffectBuckL",
@@ -17582,10 +18955,6 @@
             "distance_mm": 2.720294101747096
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 3.5
-          },
-          {
             "object": "EffectBuckR",
             "distance_mm": 3.5
           },
@@ -17619,10 +18988,6 @@
           {
             "object": "EffectRetainerRBuck",
             "distance_mm": 2.973213749463703
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 3.0
           },
           {
             "object": "EffectBuckR",
@@ -17664,10 +19029,6 @@
             "distance_mm": 2.2203603311174502
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.5
-          },
-          {
             "object": "EffectMOSR",
             "distance_mm": 2.6
           }
@@ -17703,10 +19064,6 @@
             "distance_mm": 2.2203603311174502
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.5999999999999943
-          },
-          {
             "object": "EffectMOSR",
             "distance_mm": 2.720294101747094
           }
@@ -17732,10 +19089,6 @@
           {
             "object": "KeelLid",
             "distance_mm": 1.9272340575556222
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 2.5
           },
           {
             "object": "EffectMOSR",
@@ -17773,10 +19126,6 @@
             "distance_mm": 1.431456008918127
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.5999999999999943
-          },
-          {
             "object": "EffectMOSR",
             "distance_mm": 2.720294101747096
           },
@@ -17792,7 +19141,7 @@
         "passed": true
       },
       "EffectRetainerRMOS": {
-        "boolean_pairs_tested": 9,
+        "boolean_pairs_tested": 8,
         "overlaps": [],
         "nearby": [
           {
@@ -17907,10 +19256,6 @@
             "distance_mm": 3.2496684180984103
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 3.5
-          },
-          {
             "object": "EffectMOSR",
             "distance_mm": 3.5
           },
@@ -17940,10 +19285,6 @@
           {
             "object": "EffectRetainerRMOS",
             "distance_mm": 2.973213749463703
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 3.0
           },
           {
             "object": "EffectMOSR",
@@ -17981,10 +19322,6 @@
             "distance_mm": 0.09999999999999432
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.5
-          },
-          {
             "object": "EffectBuckR",
             "distance_mm": 2.5999999999999996
           },
@@ -18010,10 +19347,6 @@
           {
             "object": "EffectTray",
             "distance_mm": 0.19999999999998863
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 2.5999999999999943
           },
           {
             "object": "EffectBuckR",
@@ -18047,10 +19380,6 @@
             "distance_mm": 0.09999999999999432
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 2.5
-          },
-          {
             "object": "EffectBuckR",
             "distance_mm": 2.599999999999998
           },
@@ -18076,10 +19405,6 @@
           {
             "object": "EffectTray",
             "distance_mm": 0.19999999999998863
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 2.5999999999999943
           },
           {
             "object": "EffectBuckR",
@@ -18152,7 +19477,7 @@
         "passed": true
       },
       "EffectTray": {
-        "boolean_pairs_tested": 35,
+        "boolean_pairs_tested": 34,
         "overlaps": [],
         "nearby": [
           {
@@ -18306,20 +19631,12 @@
           {
             "object": "LowerTub",
             "distance_mm": 1.8000000000000007
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 2.0
-          },
-          {
-            "object": "BatteryPullStrap",
-            "distance_mm": 2.586503431275511
           }
         ],
         "passed": true
       },
       "KeelLid": {
-        "boolean_pairs_tested": 122,
+        "boolean_pairs_tested": 134,
         "overlaps": [],
         "nearby": [
           {
@@ -18365,6 +19682,18 @@
           {
             "object": "EffectTray",
             "distance_mm": 0.0
+          },
+          {
+            "object": "IgnitionMOSCarrier",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "IgnitionMOSMountInsertL",
+            "distance_mm": 0.09999999999999186
+          },
+          {
+            "object": "IgnitionMOSMountInsertR",
+            "distance_mm": 0.09999999999999186
           },
           {
             "object": "EffectInsert1",
@@ -18419,6 +19748,14 @@
             "distance_mm": 0.5
           },
           {
+            "object": "IgnitionMOSMountScrewL",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "IgnitionMOSMountScrewR",
+            "distance_mm": 0.5
+          },
+          {
             "object": "EffectRetainerLMOS",
             "distance_mm": 0.6999999999999303
           },
@@ -18432,11 +19769,11 @@
           },
           {
             "object": "KeelSideFrameL",
-            "distance_mm": 0.9999999999999858
+            "distance_mm": 0.9999999999999716
           },
           {
             "object": "KeelSideFrameR",
-            "distance_mm": 1.0
+            "distance_mm": 0.9999999999999858
           },
           {
             "object": "EffectRetainerScrewRMOSOuter",
@@ -18448,7 +19785,11 @@
           },
           {
             "object": "PowerCableRoute",
-            "distance_mm": 1.5
+            "distance_mm": 1.4999999999999984
+          },
+          {
+            "object": "IgnitionMOSRetainer",
+            "distance_mm": 1.7044422518220823
           },
           {
             "object": "EffectRetainerInsertRMOSOuter",
@@ -18485,6 +19826,10 @@
           {
             "object": "BottomServiceCover",
             "distance_mm": 2.3999999999999986
+          },
+          {
+            "object": "IgnitionMOSBoard",
+            "distance_mm": 2.7070751760790697
           },
           {
             "object": "NeckStaySleeveL",
@@ -18543,6 +19888,14 @@
             "distance_mm": 3.2496684180984103
           },
           {
+            "object": "IgnitionMOSRetainerScrewInner",
+            "distance_mm": 3.3056941504209387
+          },
+          {
+            "object": "IgnitionMOSRetainerScrewOuter",
+            "distance_mm": 3.3056941504209423
+          },
+          {
             "object": "NeckStayL",
             "distance_mm": 3.373661249987137
           },
@@ -18565,6 +19918,14 @@
           {
             "object": "L298NClampScrewR1",
             "distance_mm": 3.5999999999999943
+          },
+          {
+            "object": "IgnitionMOSRetainerInsertInner",
+            "distance_mm": 3.753953800523386
+          },
+          {
+            "object": "IgnitionMOSRetainerInsertOuter",
+            "distance_mm": 3.753953800523386
           },
           {
             "object": "L298NClampNutL1",
@@ -18606,7 +19967,7 @@
         "passed": true
       },
       "BackpackShell": {
-        "boolean_pairs_tested": 72,
+        "boolean_pairs_tested": 74,
         "overlaps": [],
         "nearby": [
           {
@@ -18831,9 +20192,14 @@
     },
     "reserved_spaces": {
       "BackpackArcL": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
-        "nearby": [],
+        "nearby": [
+          {
+            "object": "IgnitionRouteL",
+            "distance_mm": 2.2543378499745605
+          }
+        ],
         "passed": true
       },
       "ArcBottomPadL": {
@@ -18843,13 +20209,13 @@
         "passed": true
       },
       "ArcInsertL00": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "ArcScrewL00": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
@@ -18867,31 +20233,31 @@
         "passed": true
       },
       "ArcClampOuterL0": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "ArcLinerInnerL0": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "ArcLinerOuterL0": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "ArcInsertL10": {
-        "boolean_pairs_tested": 1,
+        "boolean_pairs_tested": 2,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "ArcScrewL10": {
-        "boolean_pairs_tested": 1,
+        "boolean_pairs_tested": 2,
         "overlaps": [],
         "nearby": [],
         "passed": true
@@ -18909,27 +20275,37 @@
         "passed": true
       },
       "ArcClampOuterL1": {
+        "boolean_pairs_tested": 2,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "IgnitionRouteL",
+            "distance_mm": 2.019508549556679
+          }
+        ],
+        "passed": true
+      },
+      "ArcLinerInnerL1": {
         "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
-      "ArcLinerInnerL1": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
       "ArcLinerOuterL1": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "BackpackArcR": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
-        "nearby": [],
+        "nearby": [
+          {
+            "object": "IgnitionRouteR",
+            "distance_mm": 2.254337849974557
+          }
+        ],
         "passed": true
       },
       "ArcBottomPadR": {
@@ -18939,13 +20315,13 @@
         "passed": true
       },
       "ArcInsertR00": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "ArcScrewR00": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
@@ -18963,31 +20339,31 @@
         "passed": true
       },
       "ArcClampOuterR0": {
-        "boolean_pairs_tested": 1,
+        "boolean_pairs_tested": 2,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "ArcLinerInnerR0": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "ArcLinerOuterR0": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "ArcInsertR10": {
-        "boolean_pairs_tested": 1,
+        "boolean_pairs_tested": 2,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
       "ArcScrewR10": {
-        "boolean_pairs_tested": 1,
+        "boolean_pairs_tested": 2,
         "overlaps": [],
         "nearby": [],
         "passed": true
@@ -19005,19 +20381,24 @@
         "passed": true
       },
       "ArcClampOuterR1": {
+        "boolean_pairs_tested": 2,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "IgnitionRouteR",
+            "distance_mm": 2.019508549556679
+          }
+        ],
+        "passed": true
+      },
+      "ArcLinerInnerR1": {
         "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
       },
-      "ArcLinerInnerR1": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
       "ArcLinerOuterR1": {
-        "boolean_pairs_tested": 0,
+        "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
         "passed": true
@@ -19043,7 +20424,12 @@
       "EffectScrew1": {
         "boolean_pairs_tested": 0,
         "overlaps": [],
-        "nearby": [],
+        "nearby": [
+          {
+            "object": "IgnitionRouteR",
+            "distance_mm": 4.758700107447097
+          }
+        ],
         "passed": true
       },
       "EffectInsert2": {
@@ -19067,7 +20453,12 @@
       "EffectScrew3": {
         "boolean_pairs_tested": 0,
         "overlaps": [],
-        "nearby": [],
+        "nearby": [
+          {
+            "object": "IgnitionRouteL",
+            "distance_mm": 4.758700107447097
+          }
+        ],
         "passed": true
       },
       "EffectMOSL": {
@@ -19279,6 +20670,14 @@
           {
             "object": "L298NAirSpaceR",
             "distance_mm": 0.0
+          },
+          {
+            "object": "IgnitionRouteL",
+            "distance_mm": 3.469229106000558
+          },
+          {
+            "object": "IgnitionRouteR",
+            "distance_mm": 3.469229106000558
           }
         ],
         "passed": true
@@ -20821,7 +22220,7 @@
         "overlaps": [
           {
             "object": "PowerBank",
-            "overlap_mm3": 96604.11750123555
+            "overlap_mm3": 57486.9324888596
           }
         ],
         "nearby": [
@@ -20937,7 +22336,7 @@
     "passed": true,
     "physical_fit_verified": false,
     "limits": "Cap release sampled; bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
-    "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
     "saved_and_reopened": true
   },
   "manufacturing_released": false,
@@ -20945,7 +22344,7 @@
   "assembly_paths_verified": false,
   "electrical_verified": false,
   "final_saved_audit": {
-    "native_objects_verified": 420,
+    "native_objects_verified": 440,
     "gui_visibility_verified": true
   },
   "previews_generated": true,
@@ -20960,70 +22359,211 @@
   ],
   "drive_preview_note": "Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.",
   "files_sha256": {
-    "CyberTrack.FCStd": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
-    "CyberTrack.step": "83e08bb1acd6be0b8999ffccc925595120b1115c7d863aae8edb74056b28e18b",
-    "assembly.png": "a6c870d092583946bbcd6e87f25dedfeedb1121e5af09d13a673f0ce0e75b9f2",
-    "bottle-backpack-layout.png": "1994bc629212746b876d53407546a2a08758e511d84e9971ceab14793a1716ee",
-    "bottle-backpack-service.png": "57bca16936d69b72885ae6b13fc8448bfc72c4fdcc61c0cdee9a39bc9bb25e72",
-    "bottle-backpack-spaces.png": "23e84c5954b614bece69c6d85fd79fc8868c6a82ff2ece0f6ce5b4d99eeb8332",
-    "breadboard-access.png": "8ea5f0a447a5c51eeabae4e08d9a79d6f10847c5f3a0f30455c11dfeeba93db4",
-    "breadboard-layout.png": "39b091d8fe8826b5763446fc4ee6c81e0027503959fdfc9600913b85b953bbe8",
-    "breadboard-service.png": "4b1e2f1d5809fbc8779298bf93bd26931a5affbdb73511520bab6d0f8af17da1",
-    "breadboard-top.png": "96e3bfa81ae7c76b16c1cc6635d6fec56f6815ad8b7448e922997f52fdbdcc1c",
-    "breadboard-tray.png": "e7dc5869c534264bbd1b166ed9b05fe5f7cefa3d5d5d39648b81599dc6bfba69",
-    "bubble-gun-clearance.png": "562fda3e38db8d15bdc46b4d96922bda632a4d80658f9b41ee44a66f1c88733c",
-    "bubble-gun-component.png": "0bd97b0aca2f24bad5e211ec15801405005fa43c77b50f74614d1dfa0cbb9964",
-    "bubble-gun-layout.png": "ed8530fb4152c576137f8eb4e7565c6a8e5a6f182a899a45b172059086712d8f",
-    "bubble-gun-mount.png": "79982ff948b2298f454109c7c9de4fc14b7e8f38ecf51f1531e1b47706b3e696",
-    "bubble-gun-service.png": "494311b5d11688a548b341f6e6bbb2bd2b19b5537d117e8caab5bcb4596a46a1",
-    "bubble-gun-side.png": "da3879305ade39590c57e29e46525b0676f76f3ae61b4c4d7c33ba7c2cd8fa74",
-    "bubble-gun-spaces.png": "fc6e83c0e49049576e1815333ac91b390b8aa345350ab39c4062d17fca3297f4",
-    "crown-effects-top.png": "d8de675aee988b04a6bc554fdbe47f08a166dc812412b8deea06bb681c731c84",
-    "crown-effects.png": "efc5199bb4595fa348f36b926ed4220e10c65bea7939cd2c8aba7fe337c3c9e9",
-    "drive-bottom.png": "abe12c4314f87998b0d2abb0889e857ae920b4bb4c87c795289ffda1bdeb6430",
-    "drive-frame.png": "1efb8b18ce1f4776d73f56161c5f5e4736728e95fdc731c6534cf39971e8aaa5",
-    "drive-integrated-face.png": "01d17164214ff5042a5cefa17ba4d38f6b20c4f28b5edeb318525d5904d22801",
-    "drive-mount.png": "7450d90a4d6d82b7d4b820490fd424603c63ebeed88bd346ca796cedc85d32f1",
-    "drive-service.png": "d653613216763b99908aafe322c769284f5de1911295ad260775ebafe4faf946",
-    "effects-backpack.png": "ba7f30f1ba4426bd19bd8c9c7ff2f81a59583e8fa706851b5e25440c7d36c830",
-    "effects-board-mount.png": "0f68363c6e7867c3f6422102a9986f627041a974fea2e5d6ebc70c1868d58e48",
-    "effects-board-service.png": "c5419965da0a213c543a6a5a6dad1578bf9557b4bfc256377c30851d8d1afc04",
-    "effects-board-wiring.png": "d859f19f5c44aa1f6fa9f735fe2ecc1c14c5beb3e498d690aef1a1b02e0b892a",
-    "effects-clamp.png": "6d8b7d6be301b3f9eed58481b9090e36f7c0c67dd477364606e031d330105726",
-    "effects-service.png": "8234a01ea51a0a68e765bc60a53f7b252c37d6489764b052944328191d604f05",
-    "effects-tray-bottom.png": "13be4325c67721c04c1abd3681e09251931bc6c92bda717215fe7eb581d71f0f",
-    "effects-tray-service.png": "f52b818f20528487cbabd9492a65a16fed4e88a9ae8b889e269d8f13f3d1a944",
-    "effects-tray.png": "447aff900e9fa8d57ac3abb4040e7e5cde77072bdc1747ebe8224f2063972f26",
-    "front-effects-front.png": "2f1a975c21d9bc14ae8bba0387d8f52edb33cf3b64f1d909d9ee36942757bdc5",
-    "front-effects.png": "852debe5299418ffd41a482a227d4d5156c312c79f42159bcb4dfb50f5f2605d",
-    "front.png": "92fed2895e7b8e15a93ab49035d184bea97c7f543ca0f1a659ae50bca4e5945a",
-    "l298n-carrier.png": "bf363a74034ca1195ccb44e3290b1acfe496a3c46589f77845dfc01a727dd5ff",
-    "l298n-layout.png": "392820aa25d83642fe36722b960c55100f3a11eb2ea8e0f34d416589a0aaa7f2",
-    "l298n-service.png": "bc3c889a2200de396ffc17ab0f317258621ebe5f5eef3892eccd5a0560b33f0e",
-    "l298n-side.png": "39822abc04ca1b4741b29c0300fcc14a55ef90533a470e220e12e99efa3d980e",
-    "l298n-spaces.png": "714f0d256171abbdaa8b2a179a9a183a5fc990f6eddfc68038107067cabe78bb",
-    "l298n-top.png": "44491fcfb849369902cdf4361a8087ee643936c9cca8e40aaab2172d96686fc1",
-    "layout.png": "733c4ad9f05643abe68bc0c8af5c27d0f79392d3978db54ec4a7af44108e8f7c",
-    "lower-layout.png": "1949b0951809897618d0d1d3ca2ce62f1c556088704f373db41c9e1636d1d921",
-    "mt3608-layout.png": "d12ee1a2e4b49b9cc1d7b01c51799149fc7e7cefcdc188001d56c0dcc3034acd",
-    "rear-assembly.png": "73a28a2970496ea2299c7a26ecb4189542f120124f63751a473f625af8aa4ea7",
-    "rear.png": "de64186b7fc4554cb7c80e00436c3b86ee84ac153c2d6ee6956a288636616593",
-    "right.png": "352b98c3d2ee25bf9eddfc223b5c0af19bc5ad160a2142c48ff4ccb0721d81dd",
-    "routing.png": "a4f96de07a4f6092cb6e47dc4936a5a4643ee4ca50f6527d53de63e43920d283",
-    "service.png": "ee3b8122b0b8b05be474aead92d50713be5cc7f14f90ec56f822f34d64edb7d9",
-    "side.png": "859c5f59f2c68c9ec59c28397149405cc497b86d7b88513f5d61098365792315",
-    "top.png": "853372ad5234ced25b3c2e260104a3ffbe13ab76d5f4857d15a7c21eb7ef84e6",
-    "ultrasonic-coexistence.png": "7b2c8df940efa86c4a4031a5573d5f965fe05218e59eeee7b4bca437c0528c84",
-    "ultrasonic-front.png": "92cf71a462452217948d1d20b7ebd0aa825ed1aef60a15435203fcddd749c2d5",
-    "ultrasonic-layout.png": "5fbdad72629c45d17ead56dffc51682768136ec92d10dc8b420c64e520a9babd",
-    "ultrasonic-service.png": "b2c193962b6fd60d5fe429375cdfabcc8e59fa89f5e6b9e6e3a441f5b45b0607",
-    "ultrasonic-side.png": "a240ce89a13157d2e09445b26989f10abd7188d7ce642cd91696d9e26e837976",
-    "water-gun-clearance.png": "8f2116acadb6eedbdfcda7b41e149b67d32c1fc1ef19af9e695b4d2228b7efa4",
-    "water-gun-component.png": "d17967cb4b288d436ae990ea7179ea51da33467447a405fa4649dbaff7192673",
-    "water-gun-layout.png": "5b375db6234dbd081e58623ddf2fab52edee50f04c43c2fa714aaac1016a6bee",
-    "water-gun-mount.png": "5464acd9bfaf3cd4720cb0bd0dda6e06adf9a721ef479dff5d3fda93ac6b8368",
-    "water-gun-service.png": "a808a4647feac6be59f24d379bd21d728186875395be1bc06844ba391c34498a",
-    "water-gun-side.png": "68c28e7ff5a24ab6917bec930b4db7bcba14621b2ba156e7611d7c6805d406e4",
-    "water-gun-spaces.png": "c88a747ed86a9e4de88e451b4dbacde8733d115a01bb9310ace5be7723fe3ef7"
+    "CyberTrack.FCStd": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "CyberTrack.step": "2f545f6e0d65ee6cb6680e1e897686551fe81cfe59f5e452118bb09cbb5179b4",
+    "assembly.png": "8dd541b1042f91ac18e53d3045640d7d04b3e781080ba11594c0a521e7e9242a",
+    "bottle-backpack-layout.png": "09304827259b60ccfb5d0d8d833174287fb5308a30c128c52e383fef54e178aa",
+    "bottle-backpack-service.png": "3a338421ffb48376ba4c91f71c7bbd861af8b9067cd5c6a0b92c585aa34e6231",
+    "bottle-backpack-spaces.png": "40bdb329edf6a1adfec4fb147f40a06026db3077d982498af48b0a72b4e67835",
+    "breadboard-access.png": "449686c7a6d69890a6d0ff5251e50bb5ae5f38c2bcf5d35474efc8d59a10ea38",
+    "breadboard-layout.png": "9d794ebc98d5511a461aec6c87549adece71940e60b6705d52b1312eb59b563f",
+    "breadboard-service.png": "c4941df8e96bcb92828a3740b0ea748f2109d33098d0da7e355a7d52da3fccec",
+    "breadboard-top.png": "b2c4b5bcb26f7db6788fe54694b2a3800557b6598067babe25c4e07db82016ef",
+    "breadboard-tray.png": "9a01385037a66bd9e34b7236088a103fade72a419ec19bba3d4bb09831d6af88",
+    "bubble-gun-clearance.png": "6487d82f190a92e52858cc6c9b7ec59d8df178f832f23295b7a7f666b9da6ad2",
+    "bubble-gun-component.png": "9cd8329f3480eb2fe2bd515a17cdadfae42b0abaa88295b20d8d2f601f673f11",
+    "bubble-gun-layout.png": "d1bb9a71bcd4c4b26f765be681bfad10cbfb95c4d2cad798ace4e9c996b610be",
+    "bubble-gun-mount.png": "9ff353b1c0a12b7fc8b633fa8999ad6ce7264385db1cd0182a5f6a1e16eabf9c",
+    "bubble-gun-service.png": "e3935cc3fe43c1b7d54ec2a66e3aecd1248bb99e4bd57812c4a8653a19002fe4",
+    "bubble-gun-side.png": "49651778a0491a8cbc3fd24b5254dae075964eb3ea96a02806ecb6582326ba9b",
+    "bubble-gun-spaces.png": "3a5de943f4fc0720b308c0a4b42a7157fde73d031d62d05ac920a182eb021de2",
+    "crown-effects-top.png": "a44ed086fa074e8c73300306f7ad25ba0ebb3b63ce36cd2be7ee0a2e414b54ac",
+    "crown-effects.png": "5382e101b5137bb3c82eb6f99f8dd5d4ff1f9b7a75bb308acf9f21249cbbca15",
+    "drive-bottom.png": "1225c48c61c8d6e021fa17531ee16acf05c81342cea1f546b9795aa46c840300",
+    "drive-frame.png": "8c0459e5c3940e7313ac97e5c7aaf6164a499ee8958b1fe164134ffe7edab7ba",
+    "drive-integrated-face.png": "cb276d6e8d4c7b8c379ae0e482c260562aac091eda28fe6ec8f794860f26da54",
+    "drive-mount.png": "17cdf9d3847fec41656a63251ccccd6b968c5f62ce1c0799bac064ffc29706ba",
+    "drive-service.png": "202eef9a5ab86966b3f634f9b6a0e7bfddd5e51082c8b342264679c38a1900a1",
+    "effects-backpack.png": "163eb3c7a65cb069cd2122a4eea9dd6bbf43649ee19e1ae7ec4d24acfaaef419",
+    "effects-board-mount.png": "2b4225f2976e3fe1ab4225565326c885119eb9928e31051bafc96804c5cb16ff",
+    "effects-board-service.png": "490bb902404f1001835500ac592a89a96a7672ad1dc4a286a190bbfbf465b674",
+    "effects-board-wiring.png": "3c12f80eb7a8a74749cc3d974ae84ad6d883d7387e58966ad9eb69ef167d803b",
+    "effects-clamp.png": "20014e05054d72fe36a790ea63798e55ef3814443e98dee25fcc57ea2240588a",
+    "effects-service.png": "83c4c324cd7587834d0acc1369ecc760cb64677a3469a7cae8fc32010590cde9",
+    "effects-tray-bottom.png": "1245133d930a897529d193f843e62400bed729129458fcc1dd0a40c411e2f333",
+    "effects-tray-service.png": "d6719f1b6dd4422f74ec833a9db41c0f59aae2c6341a3b6f9b5d333df672fa70",
+    "effects-tray.png": "c851bb2d9fadb539b341e8ce540e825a4c5ca9840c9bf65ee3737911238f1d04",
+    "front-effects-front.png": "115b81df183d33b3e7b21ee31cf9efe07f9d8b1547fbc6755b40590df57197c6",
+    "front-effects.png": "0913085bafbfa625873b01079c825f316d5f2eb386dd670a61f598c5cb964a8b",
+    "front.png": "30229cad605517e4a81a6f09ec44ea56cdcedd21687e43d2b02f5d4ced4a63f3",
+    "ignition-mos-layout.png": "39cfae0c60205167fb2132598699cde7b17081034ceacbfde0ff4fc2dd48426a",
+    "ignition-routing-rear.png": "74c2b95e05c31899f683b610845b0b9e4178f3625fa59f203084832454528185",
+    "ignition-routing-top.png": "47b5f33f1f275a552f1236fd96fe1a68186da0fe1b33a9cf7b8c93252ccd5d92",
+    "ignition-routing-visible.png": "8bcbe58cb3f4044d7d3fb818605fc3cd7566c2e5b98a79c00c594f54b5cc8f97",
+    "ignition-routing.png": "82f55bb7f0fc51c16367bd7f49288882c697ac32339fd38c0d76fdbcb648a73b",
+    "l298n-carrier.png": "679c8724b8153c3a90edb3e320d14186282461c2864f15afed7375e098eaa867",
+    "l298n-layout.png": "6230c32002ca7e2ca829907877e9a79e3e34ae3676a0e220c713f35a3f85d2d5",
+    "l298n-service.png": "006f751fba1ad0a79b40792b3041f54516d1e4ac084933cf6a43f8438cadae9b",
+    "l298n-side.png": "08de2ff8e42979af525d461c8d72fd03d297a06570ef46d8098675c3e342c23d",
+    "l298n-spaces.png": "55008d981b2af64b3744d96cb5b88c7d4d328b777b8c806cfd13dd6fddbc0fdb",
+    "l298n-top.png": "fd3335ba09ceb88f57e760ca3cc5fb60db7f942a53d29a22704f9c192cdd0958",
+    "layout.png": "d49607f73aae13e4bd37c7a4f06c033050c55ee10f021f4a934b0e62b5b32d8e",
+    "lower-layout.png": "35eaf94cd09de0b228eadf478c1d409a5f8c7c26ab135d4ee64f1c37313fe243",
+    "mt3608-layout.png": "c2e138f7e72de57f142b5cee7c03007f468f121701cad4652cf06299a0807444",
+    "rear-assembly.png": "8844a614cdd938333b3e4be8acc814d8c85931978528a4ab0848b47b96d2b092",
+    "rear.png": "08276bebf9db3fbf41ba22763a3c97a5780b934074d7aa83cfe6fc1d52c21948",
+    "right.png": "b82531ce89244f899342d502a5bd1226ac91fba5fedd526740ab1ed01865683a",
+    "routing.png": "a18a596703940788f2015bcfa6b1c1e3bc69ada3cbc5fc5acac8969b944e103c",
+    "service.png": "cd6d16174f3128dd2ac5d350e8b3fbee21a8ad2593e42deeba7e883f13fc6465",
+    "side-frame-extension-side.png": "6de04fb5b2bcd05018aee6ba30c13c71f189646bcfaf20d3dddd5b4f1b5b58ee",
+    "side-frame-extension.png": "8022e86806d8e0a60a1a89e2bf0401b1502973dd328cdd00f773a0770e8129b0",
+    "side.png": "144e77d55c60cdcb7055c6b0934fd7a5728ea00f3ba6973e7622dd199515ea5b",
+    "top.png": "c4adae145e20d58e8f41b17d6688ce785e463a7026b2f208bd2ea8df7057f951",
+    "ultrasonic-coexistence.png": "1b948a1e18d30c8cfe5e03a7c4a688c4157fff8621b635836db526fe4004e63c",
+    "ultrasonic-front.png": "a9c762c4dd48d8a11513837419451645a2633facb8a28c4a68a2e3e5da6cd134",
+    "ultrasonic-layout.png": "94b62dea7a26715259b675df14d8051206571c419e0093ea9e1c7a5a5c00b715",
+    "ultrasonic-service.png": "54bfe93eb80ff72810e16863e0b2dff94a08c13989709cfdb144e4a6ba84e974",
+    "ultrasonic-side.png": "cd33fcded637d106f00de80b4efabf1bfe59dcf7ae2bef84be12b4b76bb8a41e",
+    "water-gun-clearance.png": "5a1e55e293e757b69b313e94cca52e9971e8bfa7030b47e3a6041b11178605de",
+    "water-gun-component.png": "1b37abac64027613fdb5f75f1fe22f13c0fdf6e5a5a630802c35bf1a5d54607e",
+    "water-gun-layout.png": "303d6a0540bd0d1347108f9829225fa771d47ddd1a1eed38c642a86c126562e5",
+    "water-gun-mount.png": "1628ba0ef31a2cc0269e463f33c96f891841991402248fc317ff5e68a65ce7b0",
+    "water-gun-service.png": "88c2b827100b781b2f51f14adcf8d0c4fd93def01bbd43150c0ee72b72839285",
+    "water-gun-side.png": "9b07801a082e26bf8734d3ec1e8254b4f14ab5967a434c80e4925fdaa7c4d4b3",
+    "water-gun-spaces.png": "282cef7a17de8b2eea2f4aba64cca18a81f5d7ddb8d1f8adaadb916ace59f850"
+  },
+  "side_frame_extension": {
+    "revision": "0.49",
+    "baseline_revision": "0.48",
+    "baseline_sha256": "87e840cb7eb6925bca893bfce53cc220202b95ec3509218bf6f1455b6c82896a",
+    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "added": [],
+    "removed": [],
+    "unchanged_objects": 438,
+    "changed": [
+      "KeelSideFrameL",
+      "KeelSideFrameR"
+    ],
+    "frames": [
+      {
+        "name": "KeelSideFrameL",
+        "old_rear_y_mm": 8.000000000000002,
+        "new_rear_y_mm": 38.0,
+        "extension_mm": 30.0,
+        "original_material_removed_mm3": 0.0,
+        "added_volume_mm3": 585.0000000000001,
+        "thickness_mm": 1.5000000000000142,
+        "max_z_mm": 90.0,
+        "valid": true,
+        "solids": 1,
+        "unexpected_overlaps": [],
+        "nearest_to_added_material": [
+          {
+            "object": "TrackLeftShoulderLugs",
+            "category": "drive",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "TrackLeftTreadPads",
+            "category": "drive",
+            "distance_mm": 1.5
+          },
+          {
+            "object": "TrackLeftRubberBand",
+            "category": "drive",
+            "distance_mm": 2.5
+          },
+          {
+            "object": "TrackLeftChevronTreads",
+            "category": "drive",
+            "distance_mm": 3.5
+          },
+          {
+            "object": "WaterGunCradle",
+            "category": "structure",
+            "distance_mm": 3.8671912754690743
+          },
+          {
+            "object": "LowerTub",
+            "category": "structure",
+            "distance_mm": 4.242640687119285
+          },
+          {
+            "object": "IgnitionRouteL",
+            "category": "clearance",
+            "distance_mm": 4.921063761843668
+          },
+          {
+            "object": "BackpackShell",
+            "category": "exterior",
+            "distance_mm": 8.0
+          }
+        ],
+        "passed": true,
+        "old_lug_clearance_mm": 0.5,
+        "new_lug_clearance_mm": 0.5
+      },
+      {
+        "name": "KeelSideFrameR",
+        "old_rear_y_mm": 8.000000000000002,
+        "new_rear_y_mm": 38.0,
+        "extension_mm": 30.0,
+        "original_material_removed_mm3": 0.0,
+        "added_volume_mm3": 585.0,
+        "thickness_mm": 1.5000000000000142,
+        "max_z_mm": 90.0,
+        "valid": true,
+        "solids": 1,
+        "unexpected_overlaps": [],
+        "nearest_to_added_material": [
+          {
+            "object": "TrackRightShoulderLugs",
+            "category": "drive",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "TrackRightTreadPads",
+            "category": "drive",
+            "distance_mm": 1.5
+          },
+          {
+            "object": "TrackRightRubberBand",
+            "category": "drive",
+            "distance_mm": 2.5
+          },
+          {
+            "object": "TrackRightChevronTreads",
+            "category": "drive",
+            "distance_mm": 3.5
+          },
+          {
+            "object": "LowerTub",
+            "category": "structure",
+            "distance_mm": 4.242640687119285
+          },
+          {
+            "object": "IgnitionRouteR",
+            "category": "clearance",
+            "distance_mm": 4.921063761843668
+          },
+          {
+            "object": "BackpackShell",
+            "category": "exterior",
+            "distance_mm": 8.0
+          },
+          {
+            "object": "KeelLid",
+            "category": "structure",
+            "distance_mm": 10.165300454651277
+          }
+        ],
+        "passed": true,
+        "old_lug_clearance_mm": 0.4999999999999858,
+        "new_lug_clearance_mm": 0.5
+      }
+    ],
+    "physical_fit_verified": false,
+    "structural_strength_verified": false,
+    "passed": true
   }
 }

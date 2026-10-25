@@ -2,7 +2,7 @@
 
 [历史 CAD 报告归档](archive/README.md)：旧报告按原字节保留；当前生成与图纸检查使用的报告仍位于本目录。
 
-当前整机为 **0.46 前方效果线加长候选**；四根线前伸由18增至28 mm，根部、护套及上翘角度保持，见[本轮布局](#046-前方效果线加长)。沿用[0.44 MT3608布局](#044-mt3608-升压板包络)。沿用0.43四板固定、接线空间与承板装配余量候选，见[结构与拆装](../../docs/effects-mount.md)。保留0.41头部共存结构。新增PCB／背面／向上接头／线束包络及托盘前缘49×2让位，详见[集成记录](../../docs/ultrasonic-head.md)。整组100×85×36规划包络，头部外形保持，旧头舱主控／独立扬声器／电弧占位撤出头部布局，详见[浅托盘记录](../../docs/breadboard-tray.md)。保留0.39双枪15°：泡泡枪与水枪由10°上调至15°，肩梁承托、孔轴及枪侧管路同步调整，见[仰角记录](../../docs/mechanical.md#039-双枪上仰15)及[范围与净距检查](gun-pitch-audit.json)。保留0.37头舱整体上移25 mm方案：头壳底面Z161、顶部Z228；颈架和斜撑同步延伸，中央电源线束接至新头舱入口。双瓶与底盘保持，详见[加高记录](../../docs/mechanical.md#037-头舱整体上移25-mm)、[间隙检查](head-lift-audit.json)及[范围核对](head-lift-change-audit.json)。沿用0.36双瓶护舱：护舱高90 mm，完整瓶包络Ø48.8×114含盖、上部外露30 mm，固定和独立拆装见[机械记录](../../docs/mechanical.md#036-低位开放双瓶护舱)、[专项检查](bottle-backpack-audit.json)及[变更范围](bottle-backpack-change-audit.json)。此前0.34驱动板结构保留。
+当前整机为 **0.49 两侧镂空底座侧框后伸候选**：左右后端各延长30 mm，见[侧框说明](../../docs/mechanical.md#049-左右镂空底座侧框后伸)。保留0.48前舱入线与点火MOS安装；采用新电池包116×70.5×19.5，取消外沿／履带上方走线，改为前肩入舱、前脸四孔，新增第三块P01独立托架，见[本轮布局](../../docs/ignition-routing.md)。沿用[0.44 MT3608布局](#044-mt3608-升压板包络)。沿用0.43四板固定、接线空间与承板装配余量候选，见[结构与拆装](../../docs/effects-mount.md)。保留0.41头部共存结构。新增PCB／背面／向上接头／线束包络及托盘前缘49×2让位，详见[集成记录](../../docs/ultrasonic-head.md)。整组100×85×36规划包络，头部外形保持，旧头舱主控／独立扬声器／电弧占位撤出头部布局，详见[浅托盘记录](../../docs/breadboard-tray.md)。保留0.39双枪15°：泡泡枪与水枪由10°上调至15°，肩梁承托、孔轴及枪侧管路同步调整，见[仰角记录](../../docs/mechanical.md#039-双枪上仰15)及[范围与净距检查](gun-pitch-audit.json)。保留0.37头舱整体上移25 mm方案：头壳底面Z161、顶部Z228；颈架和斜撑同步延伸，中央电源线束接至新头舱入口。双瓶与底盘保持，详见[加高记录](../../docs/mechanical.md#037-头舱整体上移25-mm)、[间隙检查](head-lift-audit.json)及[范围核对](head-lift-change-audit.json)。沿用0.36双瓶护舱：护舱高90 mm，完整瓶包络Ø48.8×114含盖、上部外露30 mm，固定和独立拆装见[机械记录](../../docs/mechanical.md#036-低位开放双瓶护舱)、[专项检查](bottle-backpack-audit.json)及[变更范围](bottle-backpack-change-audit.json)。此前0.34驱动板结构保留。
 
 2026-10-25 · **装配候选 0.34**：保持 [L298N 独立包络](../components/L298N/README.md)及下部竖装位置，增加顶盖一体吊架、独立开口托框、可调侧压件和接线／通风空间。两张用户正反面原图已保存。完整托框组件的连续下取、批头通道和干涉检查见[支架专项](l298n-mount-audit.json)；实际 PCB 接触、插头、温升和制造未验收。
 
@@ -32,7 +32,7 @@
 
 - [0.41 超声波 PCB／接线与面包板共存集成](../../docs/ultrasonic-head.md)：已合入主模型和PDF；独立副本已清理。保留头壳外形；在探头内退3.5 mm的待确认基准下，比较后插头冲突、向上出线及托盘前缘让位后的拆装。PCB、接头和固定接口未实测。
 
-- [CyberTrack.FCStd](CyberTrack.FCStd)：主要设计文件，中文对象树；设备包络及服务／天线审查区默认隐藏。
+- [CyberTrack.FCStd](CyberTrack.FCStd)：主要设计文件，中文对象树；设备包络及服务／天线审查区默认隐藏；点火走线例外，单列“07 点火线走线（橙色空间）”组并默认显示。
 - [CyberTrack.step](CyberTrack.step)：不含设备包络及审查区的布局交换文件；严格体积比较未通过，以 FCStd 为几何依据，不宣称曲面等价。
 - [总装与检修图纸 PDF](CyberTrack-assembly-and-service.pdf)：72页A3横向；第1–29页为当前装配／检修图，第30页为MT3608专页，第31页为可点击系统索引，第32–72页为242张图卡，逐项覆盖412个CAD对象（含65个非实体空间）。每项含CT编号、独立消隐轴测图、CAD名称、安装位置／说明及坐标；对称件和重复紧固件合并。清理7页重复展示或历史对比，固定方式未定处明确保留，详见[装配说明](../../docs/assembly.md#全对象装配图纸2026-10-25)及[覆盖记录](assembly-annotation-audit.json)。用于结构评审，不是加工图。
 - [面包板布局](breadboard-layout.png) · [俯视](breadboard-top.png) · [浅托盘](breadboard-tray.png) · [工具入口](breadboard-access.png) · [整盘上提](breadboard-service.png)：整组规划包络，组内元件与防脱保持待实测。
@@ -381,3 +381,21 @@ CAD检查不证明安装保持力、材料与公差、实际接线、调节、�
 本轮仅改变四根线体，护套及其他对象保持，见[范围审计](front-effects-length-change-audit.json)与[静态回读](front-effects-fit-audit.json)。本页前方效果线预览显示当前0.46；PDF仍为0.44。
 
 0.46范围审计确认仅4根线体改形，其余416个对象保持；1,119对静态候选检查、现有拆装路径及保存回读通过。整机包络为228×246×228 mm，前后长度比0.45增加约6.98 mm。STEP严格体积差约3.1104 mm³仍未通过0.01 mm³阈值，以FCStd为几何依据；没有新增电气或实物验收结论。
+
+## 0.48 前舱入线与第三块 MOS
+
+[详细布局](../../docs/ignition-routing.md)、[新电池资料](../components/ck-5v-battery/README.md)、[走线检查](ignition-routing-audit.json)、[MOS检查](ignition-mos-audit.json)及[范围审计](ignition-routing-change-audit.json)共同描述本轮。旧0.47外沿候选已撤销。前伸仍为28 mm、单线外径1.5 mm；新增实体穿孔仅限前肩、前壁、前护甲和护套。模块真实输出端、护口与固定及完整端接仍待核。
+
+![前舱入线](ignition-routing.png)
+
+![新增MOS安装位](ignition-mos-layout.png)
+
+FCStd为几何依据，STEP仅作布局交换；现有装配PDF仍为0.44，未同步0.45–0.48。
+
+## 0.49 镂空侧框向后延长
+
+左右侧框后端Y8→38，保持1.5 mm厚、Z90顶高及原镂空；后伸30 mm为本轮设计候选。
+
+![侧框后伸，履带半透明](side-frame-extension.png)
+
+[侧视](side-frame-extension-side.png) · [范围与空间检查](side-frame-extension-audit.json)。原点火走线组仍默认可见。当前PDF仍为0.44；FCStd为几何依据。

@@ -22,6 +22,9 @@ from bubble_gun_layout import add_bubble_gun, check_bubble_gun
 from ultrasonic_layout import add_ultrasonic, check_ultrasonic, render_ultrasonic
 from ultrasonic_integration import apply as integrate_ultrasonic, check as check_ultrasonic_integration, render as render_ultrasonic_integration
 from effects_mount import apply as add_effects_mount, check as check_effects_mount, render as render_effects_mount
+from battery_layout import apply as apply_battery
+from ignition_mos import apply as add_ignition_mos, check as check_ignition_mos, render as render_ignition_mos
+from ignition_routing import apply as add_ignition_routing, check as check_ignition_routing, render as render_ignition_routing, show_default as show_ignition_routes
 from front_effects import apply as add_front_effects, check as check_front_effects, render as render_front_effects
 from mt3608_layout import apply as add_mt3608, check as check_mt3608, render as render_mt3608
 from l298n_layout import add_l298n, check_l298n, render_l298n
@@ -114,7 +117,7 @@ def render_views(doc, output):
         view.saveImage(str(output/filename),1600,1200,'White')
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
+            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith('IgnitionRoute') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
             o.ViewObject.Transparency=40 if o.Name in ('WaterModule','BubbleModule') else 0
     for filename,direction in [('assembly.png','iso'),('front.png','front'),
                                ('side.png','side'),('right.png','right'),('rear.png','rear'),('top.png','top'),('rear-assembly.png','rear_iso')]:
@@ -199,7 +202,7 @@ def render_views(doc, output):
     render('bubble-gun-clearance.png','rear_iso')
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
+            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith('IgnitionRoute') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
             o.ViewObject.Transparency=0
     render('bubble-gun-layout.png','iso')
     render('bubble-gun-side.png','side')
@@ -222,9 +225,32 @@ def render_views(doc, output):
     for o in doc.Objects:
         if hasattr(o,'Category'):o.ViewObject.Transparency=40 if o.Name in ('WaterModule','BubbleModule') else 0
     for o in doc.Objects:
-        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
+        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith('IgnitionRoute') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
     view.setCameraOrientation(orientations['iso'].Q)
     view.fitAll()
+
+
+def render_side_frames(doc, output):
+    """Ghost the tracks to expose the inboard side-frame tail extension."""
+    import FreeCADGui as Gui
+    from PySide import QtGui
+    objects=[o for o in doc.Objects if hasattr(o,'Category')]
+    old={o.Name:(o.ViewObject.Visibility,o.ViewObject.Transparency,o.ViewObject.ShapeColor) for o in objects}
+    view=Gui.activeDocument().activeView();rotation=view.getCameraOrientation()
+    try:
+        for o in objects:
+            o.ViewObject.Visibility=(o.Category not in ('envelope','clearance') and o.Shape.BoundBox.ZMax<=132) or o.Name.startswith('IgnitionRoute')
+            o.ViewObject.Transparency=85 if o.Name.startswith('Track') else 0
+            if o.Name.startswith('KeelSideFrame'):o.ViewObject.ShapeColor=(.98,.38,.03)
+        for filename,orientation in [
+            ('side-frame-extension.png',App.Rotation(V(1,1,0),V(-1,1,3),V(1,-1,.75),'ZXY')),
+            ('side-frame-extension-side.png',App.Rotation(V(0,1,0),V(0,0,1),V(1,0,0),'ZXY'))]:
+            view.setCameraOrientation(orientation.Q);view.fitAll()
+            for _ in range(10):QtGui.QApplication.processEvents()
+            view.saveImage(str(output/filename),1600,1200,'White')
+    finally:
+        for o in objects:o.ViewObject.Visibility,o.ViewObject.Transparency,o.ViewObject.ShapeColor=old[o.Name]
+        view.setCameraOrientation(rotation.Q);view.fitAll()
 
 
 def main():
@@ -239,7 +265,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.46'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.49'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -460,9 +486,9 @@ def main():
         shoulder=yz_prism([(-89,73.428571429),(-59,77),(-19,93),(-11,93),(-13,97),(-20,97),(-60,82),(-85,79)],x0,x1)
         add('ShoulderRail'+side,('左' if sign>0 else '右')+'斜面肩部承力梁',shoulder,'structure','body')
         x0,x1=(66,67.5) if sign>0 else (-67.5,-66)
-        flank=yz_prism([(-95,39),(-69,39),(-50,62),(-17,80),(8,90),(-22,90),(-60,75),(-93,72),(-99,62)],x0,x1)
+        flank=yz_prism([(-95,39),(-69,39),(-50,62),(-17,80),(31,80),(38,90),(-22,90),(-60,75),(-93,72),(-99,62)],x0,x1)
         flank=flank.cut(yz_prism([(-89,48),(-72,48),(-56,65),(-67,66),(-90,63)],x0-1,x1+1))
-        add('KeelSideFrame'+side,('左' if sign>0 else '右')+'镂空底座侧框',flank,'structure','metal')
+        add('KeelSideFrame'+side,('左' if sign>0 else '右')+'镂空底座侧框',flank,'structure','metal','0.49保持原镂空和前段，后端沿+Y由8延至38 mm；厚1.5及最高Z90保持，结构强度与制造待验')
     # Preserve wet allocations inside a single faceted backpack with two service lids.
     for name,cx in [('Water',-24),('Bubble',24)]:
         pod=ring(20,17,82,V(cx,49,40))
@@ -528,13 +554,13 @@ def main():
     plinth=yz_prism([(-29,89),(-19,93),(-15,93),(-15,100),(-29,100)],-42,-30).cut(doc.getObject('ShoulderRailR').Shape)
     add('StopPlinth','本地停止操作区基台',plinth,'exterior','dark')
     add('StopControl','后肩本地停止按钮占位',Part.makeCylinder(6,5,V(-35,-22,100)),'exterior','accent','位置假设；型号与切断电路未设计')
-    allocations=[('PowerBank','实测充电宝 120×73×31.5／前下方平放',box(-60,-96,33,60,-23,64.5),'power'),
+    allocations=[('PowerBank','新电池包116×70.5×19.5／前下方平放候选',box(-58,-94.75,33,58,-24.25,52.5),'power'),
                  ('WaterModule','后部喷水液体区占位 Ø32×70',Part.makeCylinder(16,70,V(-24,49,43)),'water'),
                  ('BubbleModule','后部泡泡液体区占位 Ø32×70',Part.makeCylinder(16,70,V(24,49,43)),'bubble'),
                  ('Electronics','头舱主控／驱动／电源分配区 100×45×34',box(-50,-38,146,50,7,180),'electronics'),
                  ('AudioModule',SPEAKER_LABEL,speaker_shape(),'metal')]
     for name,label,shape,color in allocations:
-        basis=('用户提供外形 120×73×31.5 mm，确认较重；低位平放位置获用户认可，端口、重量与实物适配未验证'
+        basis=('用户提供替换电池包116×70.5×19.5 mm；保留低位平放为设计假设，接头与质量待核'
                if name=='PowerBank' else '空间分配假设；不是所购物料尺寸，不构成整套装入结论')
         if name=='AudioModule': basis=SPEAKER_BASIS
         add(name,label,shape,'envelope',color,basis)
@@ -560,7 +586,10 @@ def main():
     ultrasonic_info=integrate_ultrasonic(doc,add,args.render)
     effects_info=add_effects_mount(doc,add)
     mt3608_info=add_mt3608(doc,add)
+    battery_info=apply_battery(doc)
+    ignition_mos_info=add_ignition_mos(doc,add)
     front_effects_info=add_front_effects(doc,add)
+    ignition_routing_info=add_ignition_routing(doc,add)
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
@@ -576,6 +605,7 @@ def main():
         for g in groups.values(): g.ViewObject.Visibility=True
         for key in ('envelope','clearance'):
             for o in groups[key].Group:o.ViewObject.Visibility=False
+        show_ignition_routes(doc)
         Gui.activeDocument().activeView().viewAxonometric()
         Gui.activeDocument().activeView().fitAll()
     OUT.mkdir(exist_ok=True)
@@ -641,14 +671,18 @@ def main():
         render_l298n(saved, OUT)
         render_mt3608(saved, OUT)
         render_front_effects(saved, OUT)
+        render_ignition_routing(saved, OUT)
+        render_ignition_mos(saved, OUT)
+        render_side_frames(saved, OUT)
         render_l298n_mount(saved, OUT)
         from drive_service import render_drive_views
         render_drive_views(saved, OUT)
         # Keep the exposed bottle envelopes visible in the saved assembly.
         for o in saved.Objects:
             if hasattr(o,'Category'):
-                o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
+                o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith('IgnitionRoute') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
                 o.ViewObject.Transparency=40 if o.Name in ('WaterModule','BubbleModule') else 0
+        show_ignition_routes(saved)
         saved.save()
     # Reopen the final saved file after GUI styling; verify geometry and visibility.
     App.closeDocument(saved.Name)
@@ -671,26 +705,21 @@ def main():
                 name=provider.attrib['name']
                 if name in final_shapes:
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
-                    assert visible==(final_shapes[name].Category not in ('envelope','clearance') or name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')),name
+                    assert visible==(final_shapes[name].Category not in ('envelope','clearance') or name.startswith('IgnitionRoute') or name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')),name
     assert sha(source_path)==source_hash
     from drive_service_check import check as check_drive_mount
     print('Final readback; drive and bottle checks',flush=True)
     drive_mount_check=check_drive_mount(final,verbose=True)
     effects_check=check_effects_mount(final)
-    report={'status':'preliminary_concept','design_revision':'0.46','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.49','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'drive_mount_check':drive_mount_check,
             'head_lift_check':check_head_lift(final),
             'rear_armor_symmetry_check':check_rear_armor(final),
             'top_feed_check':check_top_feed(final),
             'bottle_backpack':bottle_info,'bottle_backpack_check':check_bottle_backpack(final),
             'bounding_box_method':'optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)',
-            'power_bank_dimensions_mm':{'source':'user_measurement','length':120,'width':73,'thickness':31.5,
-            'orientation':'length X, width Y, thickness Z; low horizontal placement retained from user-approved layout',
-            'envelope_center_z_mm':48.75,'mass_kg':None,
-            'reported_product_net_mass_kg':0.373,'mass_source':'P11; user-relayed product specification; not weighed',
-            'port_face_source':'user confirmed 120 x 31.5 mm long side',
-            'port_orientation_design':'+Y; lateral position and connector envelope are assumptions',
-            'ports_and_cable_clearance_verified':False},
+            'battery_layout':battery_info,
+            'ignition_mos_layout':ignition_mos_info,'ignition_mos_check':check_ignition_mos(final),
             'arc_module_envelopes':{'quantity':2,'status':'passive backpack-side body candidates; no HV leads, electrode or drive'},
             'crown_effect_locations':{'status':'historical crown decoration; active effect location request moved to front chassis in 0.45','quantity':2,'center_x_mm':[51.5,-51.5],
                 'outer_size_xyz_mm':[16,47,11],'y_range_mm':[-16,31],'z_range_mm':[192+LIFT,203+LIFT],
@@ -711,6 +740,7 @@ def main():
             'l298n_mount':l298n_mount_info, 'l298n_mount_check':check_l298n_mount(final),
             'ultrasonic_check':check_ultrasonic(final),
             'ultrasonic_layout':ultrasonic_info,'ultrasonic_integration_check':check_ultrasonic_integration(final),
+            'ignition_routing_layout':ignition_routing_info,'ignition_routing_check':check_ignition_routing(final),
             'front_effects_layout':front_effects_info,'front_effects_check':check_front_effects(final),
             'mt3608_layout':mt3608_info,'mt3608_check':check_mt3608(final),
             'effects_layout':effects_info,'effects_mount_check':effects_check,
@@ -761,6 +791,10 @@ def main():
     (OUT/'mt3608-fit-audit.json').write_text(json.dumps(report['mt3608_check'],ensure_ascii=False,indent=2)+'\n')
     report['front_effects_check'].update(source_sha256=sha(cad),saved_and_reopened=True)
     (OUT/'front-effects-fit-audit.json').write_text(json.dumps(report['front_effects_check'],ensure_ascii=False,indent=2)+'\n')
+    report['ignition_mos_check'].update(source_sha256=sha(cad),saved_and_reopened=True)
+    (OUT/'ignition-mos-audit.json').write_text(json.dumps(report['ignition_mos_check'],ensure_ascii=False,indent=2)+'\n')
+    report['ignition_routing_check'].update(source_sha256=sha(cad),saved_and_reopened=True)
+    (OUT/'ignition-routing-audit.json').write_text(json.dumps(report['ignition_routing_check'],ensure_ascii=False,indent=2)+'\n')
     (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check','service_paths')},ensure_ascii=False,indent=2))
     App.closeDocument(final.Name)
@@ -770,7 +804,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if not report['front_effects_check']['passed'] or not report['mt3608_check']['passed'] or not effects_check['passed'] or not report['ultrasonic_integration_check']['passed'] or not report['head_lift_check']['passed'] or not report['bottle_backpack_check']['passed'] or not report['l298n_mount_check']['passed'] or not report['l298n_check']['passed'] or not drive_mount_check['passed'] or not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not breadboard_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
+    if not report['ignition_mos_check']['passed'] or not report['ignition_routing_check']['passed'] or not report['front_effects_check']['passed'] or not report['mt3608_check']['passed'] or not effects_check['passed'] or not report['ultrasonic_integration_check']['passed'] or not report['head_lift_check']['passed'] or not report['bottle_backpack_check']['passed'] or not report['l298n_mount_check']['passed'] or not report['l298n_check']['passed'] or not drive_mount_check['passed'] or not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not breadboard_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 
