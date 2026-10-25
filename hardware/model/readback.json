@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.42",
+  "design_revision": "0.43",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "drive_mount_check": {
     "tolerance_mm3": 1e-05,
@@ -1985,7 +1985,7 @@
       "No material, strength, fatigue, thread, tolerance, sealing or manufacturing acceptance."
     ],
     "passed": true,
-    "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
     "saved_and_reopened": true
   },
   "head_lift_check": {
@@ -2186,8 +2186,8 @@
     "limits": "CAD nominal clearances and prescribed rigid service envelopes only; actual cap diameter, flexible hose withdrawal/parking, hand access, stiffness and stability unverified",
     "physical_fit_verified": false,
     "manufacturing_released": false,
-    "assembly_revision": "0.42",
-    "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+    "assembly_revision": "0.43",
+    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
     "saved_and_reopened": true
   },
   "rear_armor_symmetry_check": {
@@ -2241,7 +2241,7 @@
     "tolerance_mm3": 1e-05,
     "passed": true,
     "physical_or_manufacturing_verified": false,
-    "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
     "saved_and_reopened": true
   },
   "top_feed_check": {
@@ -2319,7 +2319,7 @@
     "internal_hose_is_clearance_only": true,
     "suction_lift_air_seal_priming_and_physical_fit_verified": false,
     "passed": true,
-    "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
     "saved_and_reopened": true
   },
   "bottle_backpack": {
@@ -2515,7 +2515,7 @@
     "no_tools_for_routine_refill_design_intent": true,
     "physical_retention_seal_venting_material_fit_verified": false,
     "manufacturing_released": false,
-    "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
     "saved_and_reopened": true
   },
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
@@ -3277,8 +3277,8 @@
       "label": "低鼻锥至颈架的折面顶盖",
       "category": "structure",
       "valid": true,
-      "solids": 1,
-      "volume_mm3": 47855.15239941703,
+      "solids": 3,
+      "volume_mm3": 47312.19037070234,
       "bbox_mm": [
         -65.0,
         -101.00000000000001,
@@ -8511,42 +8511,6 @@
       "symmetric_difference_mm3": 0.0
     },
     {
-      "name": "EffectMOSL",
-      "label": "效果MOS候选 33×17×12 L",
-      "category": "envelope",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 6732.0,
-      "bbox_mm": [
-        2.0,
-        -40.0,
-        68.5,
-        35.0,
-        -23.0,
-        80.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "EffectBuckL",
-      "label": "降压板用户尺寸20×11×5 L",
-      "category": "envelope",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 1100.0,
-      "bbox_mm": [
-        8.5,
-        -54.0,
-        68.5,
-        28.5,
-        -43.0,
-        73.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
       "name": "BackpackArcR",
       "label": "背包外侧本体候选 Ø25.5×70 R",
       "category": "envelope",
@@ -8907,271 +8871,1081 @@
       "symmetric_difference_mm3": 0.0
     },
     {
-      "name": "EffectMOSR",
-      "label": "效果MOS候选 33×17×12 R",
-      "category": "envelope",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 6732.0,
-      "bbox_mm": [
-        -35.0,
-        -40.0,
-        68.5,
-        -2.0,
-        -23.0,
-        80.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "EffectBuckR",
-      "label": "降压板用户尺寸20×11×5 R",
-      "category": "envelope",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 1100.0,
-      "bbox_mm": [
-        -28.5,
-        -54.0,
-        68.5,
-        -8.5,
-        -43.0,
-        73.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
       "name": "EffectInsert0",
-      "label": "薄承板M2.5级嵌件候选 0",
+      "label": "承板内柱M2.5级嵌件候选 0",
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 38.28816046562561,
+      "volume_mm3": 34.45934441906306,
       "bbox_mm": [
-        -41.0,
+        -49.0,
         -51.0,
-        69.0,
-        -37.0,
+        71.0,
+        -45.0,
         -47.0,
-        74.0
+        75.5
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectScrew0",
-      "label": "薄承板底部M2.5级螺钉候选 0",
+      "label": "承板凹入式M2.5级螺钉候选 0",
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 56.57061447520091,
+      "volume_mm3": 56.570614475200884,
       "bbox_mm": [
-        -41.4,
+        -49.4,
         -51.4,
-        65.0,
-        -36.6,
+        66.6,
+        -44.6,
         -46.6,
-        73.5
+        75.1
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectTool0",
-      "label": "取充电宝后薄承板工具杆 0",
+      "label": "取电源后承板底部Ø3工具杆 0",
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 544.2809272344317,
+      "volume_mm3": 555.590660787355,
       "bbox_mm": [
-        -40.5,
+        -48.5,
         -50.5,
         -12.0,
-        -37.5,
+        -45.5,
         -47.5,
-        65.0
+        66.6
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectInsert1",
-      "label": "薄承板M2.5级嵌件候选 1",
+      "label": "承板内柱M2.5级嵌件候选 1",
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 38.28816046562562,
+      "volume_mm3": 34.459344419063065,
       "bbox_mm": [
-        -41.0,
-        -31.0,
-        69.0,
-        -37.0,
-        -27.0,
-        74.0
+        -49.0,
+        -28.5,
+        71.0,
+        -45.0,
+        -24.5,
+        75.5
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectScrew1",
-      "label": "薄承板底部M2.5级螺钉候选 1",
+      "label": "承板凹入式M2.5级螺钉候选 1",
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 56.57061447520093,
+      "volume_mm3": 56.5706144752009,
       "bbox_mm": [
-        -41.4,
-        -31.4,
-        65.0,
-        -36.6,
-        -26.6,
-        73.5
+        -49.4,
+        -28.9,
+        66.6,
+        -44.6,
+        -24.1,
+        75.1
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectTool1",
-      "label": "取充电宝后薄承板工具杆 1",
+      "label": "取电源后承板底部Ø3工具杆 1",
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 544.2809272344315,
+      "volume_mm3": 555.5906607873548,
       "bbox_mm": [
-        -40.5,
-        -30.5,
+        -48.5,
+        -28.0,
         -12.0,
-        -37.5,
-        -27.5,
-        65.0
+        -45.5,
+        -25.0,
+        66.6
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectInsert2",
-      "label": "薄承板M2.5级嵌件候选 2",
+      "label": "承板内柱M2.5级嵌件候选 2",
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 38.28816046562561,
+      "volume_mm3": 34.45934441906306,
       "bbox_mm": [
-        37.0,
+        45.0,
         -51.0,
-        69.0,
-        41.0,
+        71.0,
+        49.0,
         -47.0,
-        74.0
+        75.5
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectScrew2",
-      "label": "薄承板底部M2.5级螺钉候选 2",
+      "label": "承板凹入式M2.5级螺钉候选 2",
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 56.57061447520091,
+      "volume_mm3": 56.570614475200884,
       "bbox_mm": [
-        36.6,
+        44.6,
         -51.4,
-        65.0,
-        41.4,
+        66.6,
+        49.4,
         -46.6,
-        73.5
+        75.1
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectTool2",
-      "label": "取充电宝后薄承板工具杆 2",
+      "label": "取电源后承板底部Ø3工具杆 2",
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 544.2809272344317,
+      "volume_mm3": 555.590660787355,
       "bbox_mm": [
-        37.5,
+        45.5,
         -50.5,
         -12.0,
-        40.5,
+        48.5,
         -47.5,
-        65.0
+        66.6
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectInsert3",
-      "label": "薄承板M2.5级嵌件候选 3",
+      "label": "承板内柱M2.5级嵌件候选 3",
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 38.28816046562562,
+      "volume_mm3": 34.459344419063065,
       "bbox_mm": [
-        37.0,
-        -31.0,
-        69.0,
-        41.0,
-        -27.0,
-        74.0
+        45.0,
+        -28.5,
+        71.0,
+        49.0,
+        -24.5,
+        75.5
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectScrew3",
-      "label": "薄承板底部M2.5级螺钉候选 3",
+      "label": "承板凹入式M2.5级螺钉候选 3",
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 56.57061447520093,
+      "volume_mm3": 56.5706144752009,
       "bbox_mm": [
-        36.6,
-        -31.4,
-        65.0,
-        41.4,
-        -26.6,
-        73.5
+        44.6,
+        -28.9,
+        66.6,
+        49.4,
+        -24.1,
+        75.1
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectTool3",
-      "label": "取充电宝后薄承板工具杆 3",
+      "label": "取电源后承板底部Ø3工具杆 3",
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 544.2809272344315,
+      "volume_mm3": 555.5906607873548,
       "bbox_mm": [
-        37.5,
-        -30.5,
+        45.5,
+        -28.0,
         -12.0,
-        40.5,
+        48.5,
+        -25.0,
+        66.6
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectMOSL",
+      "label": "MOS板／PCB与元件区候选 L",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4391.999999999999,
+      "bbox_mm": [
+        6.5,
+        -40.75,
+        68.0,
+        39.5,
+        -23.75,
+        80.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectSupportLMOS",
+      "label": "两条0.5 mm板边垫候选 LMOS",
+      "category": "structure",
+      "valid": true,
+      "solids": 2,
+      "volume_mm3": 49.599999999999916,
+      "bbox_mm": [
+        7.5,
+        -40.55,
+        67.5,
+        38.5,
+        -23.95,
+        68.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerInsertLMOSInner",
+      "label": "压框M2级短嵌件候选 LMOSInner",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.746193947594008,
+      "bbox_mm": [
+        1.1,
+        -33.65,
+        67.0,
+        3.9,
+        -30.85,
+        69.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerScrewLMOSInner",
+      "label": "压框M2级螺钉候选 LMOSInner",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 23.801066473365847,
+      "bbox_mm": [
+        0.7,
+        -34.05,
+        67.1,
+        4.3,
+        -30.45,
+        72.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerToolLMOSInner",
+      "label": "机外压框Ø3工具杆 LMOSInner",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 282.7433388230814,
+      "bbox_mm": [
+        1.0,
+        -33.75,
+        72.5,
+        4.0,
+        -30.75,
+        112.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerInsertLMOSOuter",
+      "label": "压框M2级短嵌件候选 LMOSOuter",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.746193947594001,
+      "bbox_mm": [
+        42.1,
+        -33.65,
+        67.0,
+        44.9,
+        -30.85,
+        69.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerScrewLMOSOuter",
+      "label": "压框M2级螺钉候选 LMOSOuter",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 23.801066473365847,
+      "bbox_mm": [
+        41.7,
+        -34.05,
+        67.1,
+        45.3,
+        -30.45,
+        72.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerToolLMOSOuter",
+      "label": "机外压框Ø3工具杆 LMOSOuter",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 282.74333882308133,
+      "bbox_mm": [
+        42.0,
+        -33.75,
+        72.5,
+        45.0,
+        -30.75,
+        112.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerLMOS",
+      "label": "单板开窗防脱压框候选 LMOS",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 469.7696949871049,
+      "bbox_mm": [
+        0.20000000000000018,
+        -42.25,
+        70.0,
+        45.8,
+        -22.25,
+        71.2
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectPortLMOSInner",
+      "label": "板端接线空间候选 LMOSInner",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 144.0,
+      "bbox_mm": [
+        2.5,
+        -36.25,
+        73.0,
+        6.5,
+        -28.25,
+        77.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectPortLMOSOuter",
+      "label": "板端接线空间候选 LMOSOuter",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 72.0,
+      "bbox_mm": [
+        39.5,
+        -34.25,
+        73.0,
+        43.5,
+        -30.25,
+        77.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectBuckL",
+      "label": "Buck板／PCB与元件区候选 L",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 657.9999999999993,
+      "bbox_mm": [
+        8.5,
+        -55.25,
+        68.0,
+        28.5,
+        -44.25,
+        73.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectSupportLBuck",
+      "label": "两条0.5 mm板边垫候选 LBuck",
+      "category": "structure",
+      "valid": true,
+      "solids": 2,
+      "volume_mm3": 28.79999999999989,
+      "bbox_mm": [
+        9.5,
+        -55.05,
+        67.5,
+        27.5,
+        -44.45,
+        68.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerInsertLBuckInner",
+      "label": "压框M2级短嵌件候选 LBuckInner",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.746193947594016,
+      "bbox_mm": [
+        3.1,
+        -51.15,
+        67.0,
+        5.9,
+        -48.35,
+        69.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerScrewLBuckInner",
+      "label": "压框M2级螺钉候选 LBuckInner",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 23.801066473365847,
+      "bbox_mm": [
+        2.7,
+        -51.55,
+        67.1,
+        6.3,
+        -47.95,
+        72.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerToolLBuckInner",
+      "label": "机外压框Ø3工具杆 LBuckInner",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 282.74333882308144,
+      "bbox_mm": [
+        3.0,
+        -51.25,
+        72.5,
+        6.0,
+        -48.25,
+        112.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerInsertLBuckOuter",
+      "label": "压框M2级短嵌件候选 LBuckOuter",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.746193947594008,
+      "bbox_mm": [
+        31.1,
+        -51.15,
+        67.0,
+        33.9,
+        -48.35,
+        69.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerScrewLBuckOuter",
+      "label": "压框M2级螺钉候选 LBuckOuter",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 23.80106647336584,
+      "bbox_mm": [
+        30.7,
+        -51.55,
+        67.1,
+        34.3,
+        -47.95,
+        72.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerToolLBuckOuter",
+      "label": "机外压框Ø3工具杆 LBuckOuter",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 282.74333882308144,
+      "bbox_mm": [
+        31.0,
+        -51.25,
+        72.5,
+        34.0,
+        -48.25,
+        112.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerLBuck",
+      "label": "单板开窗防脱压框候选 LBuck",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 311.9968149339748,
+      "bbox_mm": [
+        2.2,
+        -56.75,
+        70.0,
+        34.8,
+        -42.75,
+        71.2
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectPortLBuckInner",
+      "label": "板端接线空间候选 LBuckInner",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 39.99999999999999,
+      "bbox_mm": [
+        4.5,
+        -51.75,
+        73.0,
+        8.5,
+        -47.75,
+        75.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectPortLBuckOuter",
+      "label": "板端接线空间候选 LBuckOuter",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 39.99999999999999,
+      "bbox_mm": [
+        28.5,
+        -51.75,
+        73.0,
+        32.5,
+        -47.75,
+        75.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectMOSR",
+      "label": "MOS板／PCB与元件区候选 R",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4391.999999999999,
+      "bbox_mm": [
+        -39.5,
+        -40.75,
+        68.0,
+        -6.5,
+        -23.75,
+        80.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectSupportRMOS",
+      "label": "两条0.5 mm板边垫候选 RMOS",
+      "category": "structure",
+      "valid": true,
+      "solids": 2,
+      "volume_mm3": 49.599999999999916,
+      "bbox_mm": [
+        -38.5,
+        -40.55,
+        67.5,
+        -7.5,
+        -23.95,
+        68.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerInsertRMOSInner",
+      "label": "压框M2级短嵌件候选 RMOSInner",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.746193947594008,
+      "bbox_mm": [
+        -3.9,
+        -33.65,
+        67.0,
+        -1.1,
+        -30.85,
+        69.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerScrewRMOSInner",
+      "label": "压框M2级螺钉候选 RMOSInner",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 23.801066473365847,
+      "bbox_mm": [
+        -4.3,
+        -34.05,
+        67.1,
+        -0.6999999999999998,
+        -30.45,
+        72.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerToolRMOSInner",
+      "label": "机外压框Ø3工具杆 RMOSInner",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 282.7433388230814,
+      "bbox_mm": [
+        -4.0,
+        -33.75,
+        72.5,
+        -1.0,
+        -30.75,
+        112.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerInsertRMOSOuter",
+      "label": "压框M2级短嵌件候选 RMOSOuter",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.746193947594001,
+      "bbox_mm": [
+        -44.9,
+        -33.65,
+        67.0,
+        -42.1,
+        -30.85,
+        69.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerScrewRMOSOuter",
+      "label": "压框M2级螺钉候选 RMOSOuter",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 23.801066473365843,
+      "bbox_mm": [
+        -45.3,
+        -34.05,
+        67.1,
+        -41.7,
+        -30.45,
+        72.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerToolRMOSOuter",
+      "label": "机外压框Ø3工具杆 RMOSOuter",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 282.74333882308133,
+      "bbox_mm": [
+        -45.0,
+        -33.75,
+        72.5,
+        -42.0,
+        -30.75,
+        112.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerRMOS",
+      "label": "单板开窗防脱压框候选 RMOS",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 469.76969498710866,
+      "bbox_mm": [
+        -45.8,
+        -42.25,
+        70.0,
+        -0.20000000000000018,
+        -22.25,
+        71.2
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectPortRMOSInner",
+      "label": "板端接线空间候选 RMOSInner",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 144.0,
+      "bbox_mm": [
+        -6.5000001,
+        -36.2500001,
+        72.9999999,
+        -2.4999999,
+        -28.2499999,
+        77.5000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectPortRMOSOuter",
+      "label": "板端接线空间候选 RMOSOuter",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 72.0,
+      "bbox_mm": [
+        -43.5000001,
+        -34.2500001,
+        72.9999999,
+        -39.4999999,
+        -30.2499999,
+        77.5000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectBuckR",
+      "label": "Buck板／PCB与元件区候选 R",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 657.9999999999993,
+      "bbox_mm": [
+        -28.5,
+        -55.25,
+        68.0,
+        -8.5,
+        -44.25,
+        73.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectSupportRBuck",
+      "label": "两条0.5 mm板边垫候选 RBuck",
+      "category": "structure",
+      "valid": true,
+      "solids": 2,
+      "volume_mm3": 28.79999999999989,
+      "bbox_mm": [
         -27.5,
-        65.0
+        -55.05,
+        67.5,
+        -9.5,
+        -44.45,
+        68.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerInsertRBuckInner",
+      "label": "压框M2级短嵌件候选 RBuckInner",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.746193947594016,
+      "bbox_mm": [
+        -5.9,
+        -51.15,
+        67.0,
+        -3.0999999999999996,
+        -48.35,
+        69.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerScrewRBuckInner",
+      "label": "压框M2级螺钉候选 RBuckInner",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 23.80106647336585,
+      "bbox_mm": [
+        -6.3,
+        -51.55,
+        67.1,
+        -2.6999999999999997,
+        -47.95,
+        72.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerToolRBuckInner",
+      "label": "机外压框Ø3工具杆 RBuckInner",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 282.74333882308144,
+      "bbox_mm": [
+        -6.0,
+        -51.25,
+        72.5,
+        -2.9999999999999996,
+        -48.25,
+        112.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerInsertRBuckOuter",
+      "label": "压框M2级短嵌件候选 RBuckOuter",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 8.746193947594001,
+      "bbox_mm": [
+        -33.9,
+        -51.15,
+        67.0,
+        -31.099999999999998,
+        -48.35,
+        69.9
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerScrewRBuckOuter",
+      "label": "压框M2级螺钉候选 RBuckOuter",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 23.801066473365843,
+      "bbox_mm": [
+        -34.3,
+        -51.55,
+        67.1,
+        -30.699999999999996,
+        -47.95,
+        72.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerToolRBuckOuter",
+      "label": "机外压框Ø3工具杆 RBuckOuter",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 282.7433388230814,
+      "bbox_mm": [
+        -34.0,
+        -51.25,
+        72.5,
+        -30.999999999999996,
+        -48.25,
+        112.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectRetainerRBuck",
+      "label": "单板开窗防脱压框候选 RBuck",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 311.9968149339748,
+      "bbox_mm": [
+        -34.8,
+        -56.75,
+        70.0,
+        -2.2,
+        -42.75,
+        71.2
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectPortRBuckInner",
+      "label": "板端接线空间候选 RBuckInner",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 39.99999999999999,
+      "bbox_mm": [
+        -8.5000001,
+        -51.7500001,
+        72.9999999,
+        -4.4999999,
+        -47.7499999,
+        75.5000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectPortRBuckOuter",
+      "label": "板端接线空间候选 RBuckOuter",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 39.99999999999999,
+      "bbox_mm": [
+        -32.5000001,
+        -51.7500001,
+        72.9999999,
+        -28.4999999,
+        -47.7499999,
+        75.5000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectWireCentre",
+      "label": "中央低压线束交接通道候选",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 300.0,
+      "bbox_mm": [
+        -2.5,
+        -51.0,
+        72.0,
+        2.5,
+        -36.0,
+        76.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectWireSideL",
+      "label": "板间侧向Ø3线束预算 L",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 199.5736972439444,
+      "bbox_mm": [
+        32.5,
+        -51.25,
+        73.0,
+        43.5,
+        -30.75,
+        76.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "EffectWireSideR",
+      "label": "板间侧向Ø3线束预算 R",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 199.57369520156305,
+      "bbox_mm": [
+        -43.5,
+        -51.25,
+        73.0,
+        -32.5,
+        -30.75,
+        76.5
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
     },
     {
       "name": "EffectTray",
-      "label": "底盘效果板四点薄承板／候选",
+      "label": "效果板低位承板／凹座、防脱压框与四点沉台",
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 5218.739827191711,
+      "volume_mm3": 5124.497752377159,
       "bbox_mm": [
-        -43.0,
-        -56.0,
+        -50.7,
+        -56.75,
         66.5,
-        43.0,
-        -23.0,
-        68.5
+        50.7,
+        -22.0,
+        70.5
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -9184,9 +9958,9 @@
   ],
   "step_readback": {
     "valid": true,
-    "solids": 904,
-    "expected_solids": 904,
-    "volume_difference_mm3": 3.0516372418496758,
+    "solids": 934,
+    "expected_solids": 934,
+    "volume_difference_mm3": 3.0834228268358856,
     "bbox_difference_mm": 1.4580336937797256e-11,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -9195,7 +9969,7 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 1008,
+    "boolean_pairs_tested": 1108,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
@@ -9683,7 +10457,7 @@
           "method": "exact continuous capsule sweep of 6 mm straight hose section only",
           "measured_hose_od_mm": 5,
           "seat_diameter_mm": 5.6,
-          "minimum_tube_support_gap_mm": 0.29999999999999716,
+          "minimum_tube_support_gap_mm": 0.29999999999998295,
           "overlaps": [],
           "passed": true
         },
@@ -9698,7 +10472,7 @@
           "method": "exact continuous capsule sweep of 6 mm straight hose section only",
           "measured_hose_od_mm": 5,
           "seat_diameter_mm": 5.6,
-          "minimum_tube_support_gap_mm": 0.29999999999999716,
+          "minimum_tube_support_gap_mm": 0.29999999999998295,
           "overlaps": [],
           "passed": true
         },
@@ -9744,6 +10518,17 @@
       "tool_scope": "base short L-key tip diameter 3, shank diameter 6, front arm 40; hands not covered",
       "adhesive_retention_release_hose_pressure_wire_flex_and_physical_fit_verified": false
     },
+    "excluded_off_machine_tools": [
+      "EffectRetainerToolLBuckInner",
+      "EffectRetainerToolLBuckOuter",
+      "EffectRetainerToolLMOSInner",
+      "EffectRetainerToolLMOSOuter",
+      "EffectRetainerToolRBuckInner",
+      "EffectRetainerToolRBuckOuter",
+      "EffectRetainerToolRMOSInner",
+      "EffectRetainerToolRMOSOuter"
+    ],
+    "off_machine_tool_basis": "Effect retainer tools are checked against the extracted tray in effect_board_mount.check; not available in the assembled chassis.",
     "method": "full 33.2 x 24.6 housing rectangle against mount and assembly; full 38.5 wet rectangle against external assembly; assumed front inlet checked separately",
     "housing_bound": {
       "overlaps": [],
@@ -9765,23 +10550,23 @@
     "nearest_clearances": [
       {
         "object": "WaterGunCradle",
-        "distance_mm": 0.4999999999999929
-      },
-      {
-        "object": "WaterGunBaseScrew2",
-        "distance_mm": 1.2000000000000028
+        "distance_mm": 0.5
       },
       {
         "object": "WaterGunBaseScrew1",
-        "distance_mm": 1.200000000000017
+        "distance_mm": 1.1999999999999744
+      },
+      {
+        "object": "WaterGunBaseScrew2",
+        "distance_mm": 1.1999999999999744
       },
       {
         "object": "WaterGunHoseSupport",
-        "distance_mm": 2.5999999999999943
+        "distance_mm": 2.6000000000000085
       },
       {
         "object": "WaterGunHoseSupportRear",
-        "distance_mm": 2.5999999999999943
+        "distance_mm": 2.6000000000000085
       },
       {
         "object": "ShoulderRailL",
@@ -9789,11 +10574,11 @@
       },
       {
         "object": "WaterGunBaseInsert1",
-        "distance_mm": 4.200000000000003
+        "distance_mm": 4.199999999999974
       },
       {
         "object": "WaterGunBaseInsert2",
-        "distance_mm": 4.200000000000017
+        "distance_mm": 4.199999999999989
       },
       {
         "object": "KeelLid",
@@ -9895,7 +10680,12 @@
       "passed": true,
       "scope": "conservative screening of modelled maintenance groups; not hands, tools or flexible leads"
     },
-    "coordinate_frame": "checks evaluated in inverse-pitched module frame; dimensions and displacement vectors use pre-pitch axes; see gun_pitch for world transform"
+    "coordinate_frame": "checks evaluated in inverse-pitched module frame; dimensions and displacement vectors use pre-pitch axes; see gun_pitch for world transform",
+    "off_machine_scope_negative_control": {
+      "tool_treated_as_physical_detected": true,
+      "source_unchanged": true,
+      "object": "EffectRetainerToolLMOSOuter"
+    }
   },
   "bubble_gun_layout": {
     "source": "hardware/components/bubble-gun/README.md",
@@ -11275,7 +12065,7 @@
     "board_anti_lift_retention_verified": false,
     "physical_fit_verified": false,
     "limits": "Envelope and rigid tray only. No individual audio/display/USB/RF fit, hand access, flexible harness service, material strength or anti-lift retention acceptance.",
-    "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
     "saved_and_reopened": true
   },
   "l298n_layout": {
@@ -11405,7 +12195,7 @@
     "placement_difference_mm3": 0.0,
     "outside_central_dry_bay_mm3": 0.0,
     "overlap_tolerance_mm3": 0.01,
-    "objects_checked": 365,
+    "objects_checked": 408,
     "overlaps": [],
     "reserved_space_overlaps": [],
     "nearby_distances": [
@@ -11568,7 +12358,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "thermal_verified": false,
-    "source_after_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+    "source_after_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
     "saved_and_reopened": true
   },
   "l298n_mount": {
@@ -11813,7 +12603,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "passed": true,
-    "source_after_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+    "source_after_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
     "saved_and_reopened": true,
     "carrier_export": {
       "coordinate_frame": "assembly coordinates, no scale or relocation",
@@ -11834,8 +12624,8 @@
         }
       ],
       "files_sha256": {
-        "hardware/model/parts/L298N-carrier-0.34.FCStd": "f3de43a10213bde7dc5715110127e6acf59a608052a77bb48290ea82be384a69",
-        "hardware/model/parts/L298N-carrier-0.34.step": "e7e1a60f7df38988f9f789a6b4c01f59eba5dbaeb44120174634e1322fd22635"
+        "hardware/model/parts/L298N-carrier-0.34.FCStd": "27be84925d0ab00eaee90eef3bc33f6c6ac435d8224183832d6d8fc7e0d622ea",
+        "hardware/model/parts/L298N-carrier-0.34.step": "47bfcbcf4bf949278803d295a21cd8feafaf4d4aca3677c04ed21248e7f93b92"
       },
       "passed": true,
       "manufacturing_released": false
@@ -12104,7 +12894,7 @@
     "mounting_verified": false,
     "physical_fit_verified": false,
     "acoustic_verified": false,
-    "source_after_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+    "source_after_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
     "saved_and_reopened": true
   },
   "ultrasonic_layout": {
@@ -12550,10 +13340,10 @@
     "physical_fit_verified": false,
     "electrical_verified": false,
     "limits": "Unmeasured PCB, datum, rear height, header, connector, wire bend and board endpoint. No mounts or hand access acceptance.",
-    "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a"
+    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5"
   },
   "effects_layout": {
-    "revision": "0.42",
+    "revision": "0.43",
     "arc_body_diameter_length_mm": [
       25.5,
       70
@@ -12582,20 +13372,20 @@
     "effect_tray_screw_quantity": 4,
     "effect_mount_xy_mm": [
       [
-        -39,
+        -47,
         -49
       ],
       [
-        -39,
-        -29
+        -47,
+        -26.5
       ],
       [
-        39,
+        47,
         -49
       ],
       [
-        39,
-        -29
+        47,
+        -26.5
       ]
     ],
     "MOS_lwh_mm": [
@@ -12611,11 +13401,1578 @@
     ],
     "quantity_assumption": "one MOS and one buck per effect",
     "board_mounting_complete": false,
+    "board_mounting_candidate": {
+      "revision": "0.43",
+      "tray_floor_z_mm": [
+        66.5,
+        68.5
+      ],
+      "tray_mount_xy_mm": [
+        [
+          -47,
+          -49
+        ],
+        [
+          -47,
+          -26.5
+        ],
+        [
+          47,
+          -49
+        ],
+        [
+          47,
+          -26.5
+        ]
+      ],
+      "power_top_z_mm": 64.5,
+      "minimum_undertray_gap_target_mm": 2,
+      "screw_head_bottom_z_mm": 66.6,
+      "screw_head_gap_mm": 2.1,
+      "board_bottom_z_mm": 68,
+      "pcb_thickness_assumed_mm": 1.6,
+      "component_free_edge_assumed_mm": 2.5,
+      "seat_depth_mm": 1,
+      "remaining_seat_floor_mm": 1,
+      "board_edge_pad_mm": 0.5,
+      "board_side_allowance_mm": 0.5,
+      "board_lip_vertical_allowance_mm": 0.4,
+      "retainer_screws": 8,
+      "tray_ear_thickness_mm": 4,
+      "port_and_wire_positions_measured": false,
+      "board_mounting_candidate_modeled": true,
+      "board_contact_and_retention_verified": false,
+      "physical_fit_verified": false
+    },
     "physical_fit_verified": false,
     "electrical_or_insulation_verified": false
   },
   "effects_mount_check": {
-    "revision": "0.42",
+    "revision": "0.43",
+    "board_mount": {
+      "revision": "0.43",
+      "wire_spaces": {
+        "EffectPortLMOSInner": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewLMOSInner",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 1.7999999999999972
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 3.0
+            },
+            {
+              "object": "EffectRetainerInsertLMOSInner",
+              "distance_mm": 3.0999999999999943
+            },
+            {
+              "object": "EffectRetainerScrewRMOSInner",
+              "distance_mm": 3.23882694814033
+            },
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 3.244996147917589
+            },
+            {
+              "object": "EffectRetainerInsertRMOSInner",
+              "distance_mm": 4.750789408087877
+            }
+          ],
+          "passed": true
+        },
+        "EffectPortLMOSOuter": {
+          "boolean_pairs_tested": 4,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewLMOSOuter",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "KeelLid",
+              "distance_mm": 1.6295711321707993
+            },
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 1.7999999999999972
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.879873889936173
+            },
+            {
+              "object": "EffectRetainerInsertLMOSOuter",
+              "distance_mm": 3.0999999999999943
+            },
+            {
+              "object": "EffectInsert3",
+              "distance_mm": 3.129571132170796
+            },
+            {
+              "object": "EffectScrew3",
+              "distance_mm": 3.929571132170796
+            },
+            {
+              "object": "LowerTub",
+              "distance_mm": 4.949747468305833
+            }
+          ],
+          "passed": true
+        },
+        "EffectPortLBuckInner": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewLBuckInner",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "KeelLid",
+              "distance_mm": 1.2998673672393684
+            },
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 1.7999999999999972
+            },
+            {
+              "object": "EffectBuckL",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 3.0
+            },
+            {
+              "object": "EffectRetainerInsertLBuckInner",
+              "distance_mm": 3.0999999999999943
+            }
+          ],
+          "passed": true
+        },
+        "EffectPortLBuckOuter": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewLBuckOuter",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "KeelLid",
+              "distance_mm": 1.2998673672393684
+            },
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 1.7999999999999972
+            },
+            {
+              "object": "EffectBuckL",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 3.0
+            },
+            {
+              "object": "EffectRetainerInsertLBuckOuter",
+              "distance_mm": 3.0999999999999943
+            },
+            {
+              "object": "ShoulderRailL",
+              "distance_mm": 4.115781234761361
+            }
+          ],
+          "passed": true
+        },
+        "EffectPortRMOSInner": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewRMOSInner",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 1.7999999999999972
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 3.0
+            },
+            {
+              "object": "EffectRetainerInsertRMOSInner",
+              "distance_mm": 3.0999999999999943
+            },
+            {
+              "object": "EffectRetainerScrewLMOSInner",
+              "distance_mm": 3.23882694814033
+            },
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 3.244996147917589
+            },
+            {
+              "object": "EffectRetainerInsertLMOSInner",
+              "distance_mm": 4.750789408087877
+            }
+          ],
+          "passed": true
+        },
+        "EffectPortRMOSOuter": {
+          "boolean_pairs_tested": 4,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewRMOSOuter",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "KeelLid",
+              "distance_mm": 1.6295711321707993
+            },
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 1.7999999999999972
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.879873889936172
+            },
+            {
+              "object": "EffectRetainerInsertRMOSOuter",
+              "distance_mm": 3.0999999999999943
+            },
+            {
+              "object": "EffectInsert1",
+              "distance_mm": 3.129571132170796
+            },
+            {
+              "object": "EffectScrew1",
+              "distance_mm": 3.929571132170796
+            },
+            {
+              "object": "LowerTub",
+              "distance_mm": 4.949747468305833
+            }
+          ],
+          "passed": true
+        },
+        "EffectPortRBuckInner": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewRBuckInner",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "KeelLid",
+              "distance_mm": 1.2998673672393684
+            },
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 1.7999999999999972
+            },
+            {
+              "object": "EffectBuckR",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 3.0
+            },
+            {
+              "object": "EffectRetainerInsertRBuckInner",
+              "distance_mm": 3.0999999999999943
+            }
+          ],
+          "passed": true
+        },
+        "EffectPortRBuckOuter": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewRBuckOuter",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "KeelLid",
+              "distance_mm": 1.2998673672393684
+            },
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 1.7999999999999972
+            },
+            {
+              "object": "EffectBuckR",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 3.0
+            },
+            {
+              "object": "EffectRetainerInsertRBuckOuter",
+              "distance_mm": 3.0999999999999943
+            },
+            {
+              "object": "ShoulderRailR",
+              "distance_mm": 4.115781234761361
+            }
+          ],
+          "passed": true
+        },
+        "EffectWireCentre": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewRBuckInner",
+              "distance_mm": 0.19999999999999973
+            },
+            {
+              "object": "EffectRetainerScrewLBuckInner",
+              "distance_mm": 0.20000000000000018
+            },
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 0.7999999999999972
+            },
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 0.7999999999999972
+            },
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 1.0965856099730633
+            },
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 1.0965856099730633
+            },
+            {
+              "object": "KeelLid",
+              "distance_mm": 1.1141720290623058
+            },
+            {
+              "object": "EffectRetainerScrewLMOSInner",
+              "distance_mm": 1.9500000000000028
+            },
+            {
+              "object": "EffectRetainerScrewRMOSInner",
+              "distance_mm": 1.9500000000000028
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.0
+            },
+            {
+              "object": "EffectRetainerInsertLBuckInner",
+              "distance_mm": 2.1840329667841503
+            },
+            {
+              "object": "EffectRetainerInsertRBuckInner",
+              "distance_mm": 2.1840329667841503
+            },
+            {
+              "object": "EffectRetainerInsertLMOSInner",
+              "distance_mm": 3.1515869018638822
+            },
+            {
+              "object": "EffectRetainerInsertRMOSInner",
+              "distance_mm": 3.1515869018638822
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 4.664761515876243
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 4.664761515876243
+            }
+          ],
+          "passed": true
+        },
+        "EffectWireSideL": {
+          "boolean_pairs_tested": 4,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewLBuckOuter",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectRetainerScrewLMOSOuter",
+              "distance_mm": 1.0
+            },
+            {
+              "object": "KeelLid",
+              "distance_mm": 1.4711254108328247
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 1.5
+            },
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 1.7999999999999972
+            },
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 2.0128521895618663
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 3.0
+            },
+            {
+              "object": "EffectRetainerInsertLBuckOuter",
+              "distance_mm": 3.0999999999999943
+            },
+            {
+              "object": "EffectInsert2",
+              "distance_mm": 3.5000000000000004
+            },
+            {
+              "object": "EffectInsert3",
+              "distance_mm": 3.5056788863863098
+            },
+            {
+              "object": "EffectRetainerInsertLMOSOuter",
+              "distance_mm": 3.5999999999999943
+            },
+            {
+              "object": "ShoulderRailL",
+              "distance_mm": 4.25655548348861
+            },
+            {
+              "object": "EffectScrew2",
+              "distance_mm": 4.299999999999997
+            },
+            {
+              "object": "EffectScrew3",
+              "distance_mm": 4.30567888638631
+            }
+          ],
+          "passed": true
+        },
+        "EffectWireSideR": {
+          "boolean_pairs_tested": 4,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewRBuckOuter",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectRetainerScrewRMOSOuter",
+              "distance_mm": 1.0
+            },
+            {
+              "object": "KeelLid",
+              "distance_mm": 1.4711254108328213
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 1.5
+            },
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 1.7999999999999972
+            },
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 2.0128521895618663
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 3.0
+            },
+            {
+              "object": "EffectRetainerInsertRBuckOuter",
+              "distance_mm": 3.0999999999999943
+            },
+            {
+              "object": "EffectInsert0",
+              "distance_mm": 3.5
+            },
+            {
+              "object": "EffectInsert1",
+              "distance_mm": 3.5056788863863098
+            },
+            {
+              "object": "EffectRetainerInsertRMOSOuter",
+              "distance_mm": 3.5999999999999943
+            },
+            {
+              "object": "ShoulderRailR",
+              "distance_mm": 4.256555483488603
+            },
+            {
+              "object": "EffectScrew0",
+              "distance_mm": 4.299999999999997
+            },
+            {
+              "object": "EffectScrew1",
+              "distance_mm": 4.30567888638631
+            }
+          ],
+          "passed": true
+        }
+      },
+      "bench_removal": {
+        "frame_LMOS": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertLMOSInner",
+              "distance_mm": 0.09999999999999432
+            },
+            {
+              "object": "EffectRetainerInsertLMOSOuter",
+              "distance_mm": 0.09999999999999432
+            },
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 0.4
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 0.4000000000000057
+            },
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectRetainerScrewRMOSInner",
+              "distance_mm": 0.9
+            },
+            {
+              "object": "EffectRetainerInsertRMOSInner",
+              "distance_mm": 1.3038404810405295
+            },
+            {
+              "object": "EffectSupportLMOS",
+              "distance_mm": 2.000000000000014
+            },
+            {
+              "object": "EffectBuckL",
+              "distance_mm": 2.039607805437115
+            },
+            {
+              "object": "EffectSupportLBuck",
+              "distance_mm": 2.973213749463703
+            }
+          ],
+          "passed": true
+        },
+        "board_LMOS": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectSupportLMOS",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 2.000000000000007
+            },
+            {
+              "object": "EffectRetainerInsertLMOSInner",
+              "distance_mm": 2.6
+            },
+            {
+              "object": "EffectRetainerInsertLMOSOuter",
+              "distance_mm": 2.6000000000000014
+            },
+            {
+              "object": "EffectBuckL",
+              "distance_mm": 3.5
+            },
+            {
+              "object": "EffectSupportLBuck",
+              "distance_mm": 3.700000000000003
+            }
+          ],
+          "passed": true
+        },
+        "frame_LBuck": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertLBuckInner",
+              "distance_mm": 0.09999999999999432
+            },
+            {
+              "object": "EffectRetainerInsertLBuckOuter",
+              "distance_mm": 0.09999999999999432
+            },
+            {
+              "object": "EffectBuckL",
+              "distance_mm": 0.4000000000000057
+            },
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectSupportLBuck",
+              "distance_mm": 2.000000000000014
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 2.039607805437115
+            },
+            {
+              "object": "EffectSupportLMOS",
+              "distance_mm": 2.973213749463703
+            },
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 4.4
+            },
+            {
+              "object": "EffectRetainerScrewRBuckInner",
+              "distance_mm": 4.9
+            }
+          ],
+          "passed": true
+        },
+        "board_LBuck": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectSupportLBuck",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 2.0
+            },
+            {
+              "object": "EffectRetainerInsertLBuckInner",
+              "distance_mm": 2.599999999999998
+            },
+            {
+              "object": "EffectRetainerInsertLBuckOuter",
+              "distance_mm": 2.599999999999998
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 3.5
+            },
+            {
+              "object": "EffectSupportLMOS",
+              "distance_mm": 3.700000000000003
+            }
+          ],
+          "passed": true
+        },
+        "frame_RMOS": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertRMOSInner",
+              "distance_mm": 0.09999999999999432
+            },
+            {
+              "object": "EffectRetainerInsertRMOSOuter",
+              "distance_mm": 0.09999999999999432
+            },
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 0.4
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 0.4000000000000057
+            },
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectRetainerScrewLMOSInner",
+              "distance_mm": 0.9
+            },
+            {
+              "object": "EffectRetainerInsertLMOSInner",
+              "distance_mm": 1.3038404810405295
+            },
+            {
+              "object": "EffectSupportRMOS",
+              "distance_mm": 2.0
+            },
+            {
+              "object": "EffectBuckR",
+              "distance_mm": 2.039607805437115
+            },
+            {
+              "object": "EffectSupportRBuck",
+              "distance_mm": 2.973213749463703
+            }
+          ],
+          "passed": true
+        },
+        "board_RMOS": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectSupportRMOS",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 2.000000000000007
+            },
+            {
+              "object": "EffectRetainerInsertRMOSInner",
+              "distance_mm": 2.6
+            },
+            {
+              "object": "EffectRetainerInsertRMOSOuter",
+              "distance_mm": 2.6000000000000014
+            },
+            {
+              "object": "EffectBuckR",
+              "distance_mm": 3.5
+            },
+            {
+              "object": "EffectSupportRBuck",
+              "distance_mm": 3.700000000000003
+            }
+          ],
+          "passed": true
+        },
+        "frame_RBuck": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertRBuckInner",
+              "distance_mm": 0.09999999999999432
+            },
+            {
+              "object": "EffectRetainerInsertRBuckOuter",
+              "distance_mm": 0.09999999999999432
+            },
+            {
+              "object": "EffectBuckR",
+              "distance_mm": 0.4000000000000057
+            },
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectSupportRBuck",
+              "distance_mm": 2.000000000000014
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 2.039607805437115
+            },
+            {
+              "object": "EffectSupportRMOS",
+              "distance_mm": 2.973213749463703
+            },
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 4.4
+            },
+            {
+              "object": "EffectRetainerScrewLBuckInner",
+              "distance_mm": 4.9
+            }
+          ],
+          "passed": true
+        },
+        "board_RBuck": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectSupportRBuck",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.5
+            },
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 2.0
+            },
+            {
+              "object": "EffectRetainerInsertRBuckOuter",
+              "distance_mm": 2.5999999999999943
+            },
+            {
+              "object": "EffectRetainerInsertRBuckInner",
+              "distance_mm": 2.599999999999998
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 3.5
+            },
+            {
+              "object": "EffectSupportRMOS",
+              "distance_mm": 3.700000000000003
+            }
+          ],
+          "passed": true
+        }
+      },
+      "bench_screw_sweeps": {
+        "EffectRetainerScrewLMOSInner": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertLMOSInner",
+              "distance_mm": 0.04999999999999955
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.19999999999998863
+            },
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 0.9000000000000001
+            },
+            {
+              "object": "EffectRetainerScrewRMOSInner",
+              "distance_mm": 1.4
+            },
+            {
+              "object": "EffectRetainerInsertRMOSInner",
+              "distance_mm": 2.2203603311174502
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 2.720294101747094
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewLMOSOuter": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertLMOSOuter",
+              "distance_mm": 0.049999999999996665
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.19999999999998863
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 2.720294101747096
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewLBuckInner": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertLBuckInner",
+              "distance_mm": 0.04999999999999617
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.19999999999998863
+            },
+            {
+              "object": "EffectBuckL",
+              "distance_mm": 2.720294101747094
+            },
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 4.9
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewLBuckOuter": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertLBuckOuter",
+              "distance_mm": 0.049999999999996166
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.19999999999998863
+            },
+            {
+              "object": "EffectBuckL",
+              "distance_mm": 2.720294101747093
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewRMOSInner": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertRMOSInner",
+              "distance_mm": 0.04999999999999679
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.19999999999998863
+            },
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 0.9
+            },
+            {
+              "object": "EffectRetainerScrewLMOSInner",
+              "distance_mm": 1.4
+            },
+            {
+              "object": "EffectRetainerInsertLMOSInner",
+              "distance_mm": 2.22036033111745
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 2.720294101747094
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewRMOSOuter": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertRMOSOuter",
+              "distance_mm": 0.049999999999996665
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.19999999999997442
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 2.720294101747096
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewRBuckInner": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertRBuckInner",
+              "distance_mm": 0.049999999999998206
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.19999999999998863
+            },
+            {
+              "object": "EffectBuckR",
+              "distance_mm": 2.720294101747094
+            },
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 4.9
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewRBuckOuter": {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerInsertRBuckOuter",
+              "distance_mm": 0.04999999999999777
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 0.19999999999998863
+            },
+            {
+              "object": "EffectBuckR",
+              "distance_mm": 2.7202941017470903
+            }
+          ],
+          "passed": true
+        }
+      },
+      "bench_tools": {
+        "EffectRetainerScrewLMOSInner": {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 1.2999999999999972
+            },
+            {
+              "object": "EffectRetainerScrewRMOSInner",
+              "distance_mm": 1.7
+            },
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 1.7691806012954112
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectRetainerInsertLMOSInner",
+              "distance_mm": 2.5999999999999943
+            },
+            {
+              "object": "EffectRetainerInsertRMOSInner",
+              "distance_mm": 3.342154993413676
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 3.8288379438153335
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewLMOSOuter": {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 1.2999999999999972
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectRetainerInsertLMOSOuter",
+              "distance_mm": 2.5999999999999943
+            },
+            {
+              "object": "EffectMOSL",
+              "distance_mm": 3.8288379438153335
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewLBuckInner": {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 1.2999999999999972
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectRetainerInsertLBuckInner",
+              "distance_mm": 2.5999999999999943
+            },
+            {
+              "object": "EffectBuckL",
+              "distance_mm": 3.8288379438153335
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewLBuckOuter": {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 1.2999999999999972
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectRetainerInsertLBuckOuter",
+              "distance_mm": 2.5999999999999943
+            },
+            {
+              "object": "EffectBuckL",
+              "distance_mm": 3.8288379438153335
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewRMOSInner": {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 1.2999999999999972
+            },
+            {
+              "object": "EffectRetainerScrewLMOSInner",
+              "distance_mm": 1.7
+            },
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 1.7691806012954112
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectRetainerInsertRMOSInner",
+              "distance_mm": 2.5999999999999943
+            },
+            {
+              "object": "EffectRetainerInsertLMOSInner",
+              "distance_mm": 3.342154993413676
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 3.8288379438153335
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewRMOSOuter": {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 1.2999999999999972
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectRetainerInsertRMOSOuter",
+              "distance_mm": 2.5999999999999943
+            },
+            {
+              "object": "EffectMOSR",
+              "distance_mm": 3.8288379438153335
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewRBuckInner": {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 1.2999999999999972
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectRetainerInsertRBuckInner",
+              "distance_mm": 2.5999999999999943
+            },
+            {
+              "object": "EffectBuckR",
+              "distance_mm": 3.8288379438153335
+            }
+          ],
+          "passed": true
+        },
+        "EffectRetainerScrewRBuckOuter": {
+          "boolean_pairs_tested": 0,
+          "overlaps": [],
+          "nearby": [
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 1.2999999999999972
+            },
+            {
+              "object": "EffectTray",
+              "distance_mm": 2.5
+            },
+            {
+              "object": "EffectRetainerInsertRBuckOuter",
+              "distance_mm": 2.5999999999999943
+            },
+            {
+              "object": "EffectBuckR",
+              "distance_mm": 3.8288379438153313
+            }
+          ],
+          "passed": true
+        }
+      },
+      "negative_controls": {
+        "frame_screws_LMOS": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [
+            {
+              "object": "EffectRetainerScrewLMOSInner",
+              "overlap_mm3": 8.26690536089988
+            },
+            {
+              "object": "EffectRetainerScrewLMOSOuter",
+              "overlap_mm3": 8.266905360899866
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewLMOSInner",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerScrewLMOSOuter",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "frame_retained_LMOS": {
+          "boolean_pairs_tested": 1,
+          "overlaps": [
+            {
+              "object": "EffectRetainerLMOS",
+              "overlap_mm3": 220.7999999999818
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "no_free_component_edge_LMOS": {
+          "boolean_pairs_tested": 1,
+          "overlaps": [
+            {
+              "object": "EffectRetainerLMOS",
+              "overlap_mm3": 220.7999999999819
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerLMOS",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "frame_screws_LBuck": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [
+            {
+              "object": "EffectRetainerScrewLBuckInner",
+              "overlap_mm3": 8.266905360899873
+            },
+            {
+              "object": "EffectRetainerScrewLBuckOuter",
+              "overlap_mm3": 8.266905360899868
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewLBuckInner",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerScrewLBuckOuter",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "frame_retained_LBuck": {
+          "boolean_pairs_tested": 1,
+          "overlaps": [
+            {
+              "object": "EffectRetainerLBuck",
+              "overlap_mm3": 129.59999999999772
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "no_free_component_edge_LBuck": {
+          "boolean_pairs_tested": 1,
+          "overlaps": [
+            {
+              "object": "EffectRetainerLBuck",
+              "overlap_mm3": 129.59999999999766
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerLBuck",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "frame_screws_RMOS": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [
+            {
+              "object": "EffectRetainerScrewRMOSInner",
+              "overlap_mm3": 8.266905360899882
+            },
+            {
+              "object": "EffectRetainerScrewRMOSOuter",
+              "overlap_mm3": 8.266905360899868
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewRMOSInner",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerScrewRMOSOuter",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "frame_retained_RMOS": {
+          "boolean_pairs_tested": 1,
+          "overlaps": [
+            {
+              "object": "EffectRetainerRMOS",
+              "overlap_mm3": 220.79999999999407
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "no_free_component_edge_RMOS": {
+          "boolean_pairs_tested": 1,
+          "overlaps": [
+            {
+              "object": "EffectRetainerRMOS",
+              "overlap_mm3": 220.7999999999943
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerRMOS",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "frame_screws_RBuck": {
+          "boolean_pairs_tested": 2,
+          "overlaps": [
+            {
+              "object": "EffectRetainerScrewRBuckInner",
+              "overlap_mm3": 8.26690536089987
+            },
+            {
+              "object": "EffectRetainerScrewRBuckOuter",
+              "overlap_mm3": 8.266905360899871
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerScrewRBuckInner",
+              "distance_mm": 0.0
+            },
+            {
+              "object": "EffectRetainerScrewRBuckOuter",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "frame_retained_RBuck": {
+          "boolean_pairs_tested": 1,
+          "overlaps": [
+            {
+              "object": "EffectRetainerRBuck",
+              "overlap_mm3": 129.59999999999772
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        },
+        "no_free_component_edge_RBuck": {
+          "boolean_pairs_tested": 1,
+          "overlaps": [
+            {
+              "object": "EffectRetainerRBuck",
+              "overlap_mm3": 129.59999999999766
+            }
+          ],
+          "nearby": [
+            {
+              "object": "EffectRetainerRBuck",
+              "distance_mm": 0.0
+            }
+          ],
+          "passed": false
+        }
+      },
+      "tray_to_power_mm": 2.0,
+      "screw_head_to_power_mm": 2.0999999999999943,
+      "roof_distances_mm": {
+        "EffectMOSL": 2.135496389036094,
+        "EffectSupportLMOS": 5.637555823439678,
+        "EffectRetainerInsertLMOSInner": 13.221508078206092,
+        "EffectRetainerScrewLMOSInner": 10.658912411362778,
+        "EffectRetainerInsertLMOSOuter": 1.927234057555625,
+        "EffectRetainerScrewLMOSOuter": 1.43145600891813,
+        "EffectRetainerLMOS": 0.6999999999999303,
+        "EffectBuckL": 3.2496684180984103,
+        "EffectSupportLBuck": 7.037853316910272,
+        "EffectRetainerInsertLBuckInner": 6.7221712420092725,
+        "EffectRetainerScrewLBuckInner": 4.159575575165958,
+        "EffectRetainerInsertLBuckOuter": 6.7221712420092725,
+        "EffectRetainerScrewLBuckOuter": 4.159575575165958,
+        "EffectRetainerLBuck": 3.4353637562754593,
+        "EffectMOSR": 2.135496389036094,
+        "EffectSupportRMOS": 5.637555823439678,
+        "EffectRetainerInsertRMOSInner": 13.221508078206092,
+        "EffectRetainerScrewRMOSInner": 10.658912411362778,
+        "EffectRetainerInsertRMOSOuter": 1.9272340575556222,
+        "EffectRetainerScrewRMOSOuter": 1.431456008918127,
+        "EffectRetainerRMOS": 0.6999999999999781,
+        "EffectBuckR": 3.2496684180984103,
+        "EffectSupportRBuck": 7.037853316910272,
+        "EffectRetainerInsertRBuckInner": 6.7221712420092725,
+        "EffectRetainerScrewRBuckInner": 4.159575575165958,
+        "EffectRetainerInsertRBuckOuter": 6.7221712420092725,
+        "EffectRetainerScrewRBuckOuter": 4.159575575165958,
+        "EffectRetainerRBuck": 3.4353637562754593
+      },
+      "passed": true,
+      "limits": "Local candidate wiring only; PCB edges, components, compression, tolerance stack, complete harness and hand access unverified. Frame/board removal is off-machine after tray extraction."
+    },
     "static": {
       "BackpackArcL": {
         "boolean_pairs_tested": 10,
@@ -13189,68 +15546,6 @@
         ],
         "passed": true
       },
-      "EffectMOSL": {
-        "boolean_pairs_tested": 5,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "EffectTray",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "KeelLid",
-            "distance_mm": 0.5
-          },
-          {
-            "object": "EffectInsert3",
-            "distance_mm": 2.0
-          },
-          {
-            "object": "EffectScrew3",
-            "distance_mm": 2.5612496949731405
-          },
-          {
-            "object": "EffectBuckL",
-            "distance_mm": 3.0
-          },
-          {
-            "object": "ShoulderRailL",
-            "distance_mm": 3.806754432629555
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 4.0
-          },
-          {
-            "object": "EffectMOSR",
-            "distance_mm": 4.0
-          }
-        ],
-        "passed": true
-      },
-      "EffectBuckL": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "EffectTray",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "KeelLid",
-            "distance_mm": 2.3211917272131535
-          },
-          {
-            "object": "EffectMOSL",
-            "distance_mm": 3.0
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 4.0
-          }
-        ],
-        "passed": true
-      },
       "BackpackArcR": {
         "boolean_pairs_tested": 10,
         "overlaps": [],
@@ -13823,87 +16118,29 @@
         ],
         "passed": true
       },
-      "EffectMOSR": {
-        "boolean_pairs_tested": 5,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "EffectTray",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "KeelLid",
-            "distance_mm": 0.5
-          },
-          {
-            "object": "EffectInsert1",
-            "distance_mm": 2.0
-          },
-          {
-            "object": "EffectScrew1",
-            "distance_mm": 2.5612496949731405
-          },
-          {
-            "object": "EffectBuckR",
-            "distance_mm": 3.0
-          },
-          {
-            "object": "ShoulderRailR",
-            "distance_mm": 3.806754432629555
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 4.0
-          },
-          {
-            "object": "EffectMOSL",
-            "distance_mm": 4.0
-          }
-        ],
-        "passed": true
-      },
-      "EffectBuckR": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "EffectTray",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "KeelLid",
-            "distance_mm": 2.3211917272131535
-          },
-          {
-            "object": "EffectMOSR",
-            "distance_mm": 3.0
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 4.0
-          }
-        ],
-        "passed": true
-      },
       "EffectInsert0": {
         "boolean_pairs_tested": 4,
         "overlaps": [],
         "nearby": [
           {
             "object": "EffectScrew0",
-            "distance_mm": 0.04999999999999662
+            "distance_mm": 0.04999999999999666
           },
           {
             "object": "KeelLid",
-            "distance_mm": 0.09999999999999583
+            "distance_mm": 0.09999999999999432
           },
           {
             "object": "EffectTray",
             "distance_mm": 0.5
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 4.5
+            "object": "LowerTub",
+            "distance_mm": 2.4748737341529163
+          },
+          {
+            "object": "ShoulderRailR",
+            "distance_mm": 4.415453357965238
           }
         ],
         "passed": true
@@ -13918,26 +16155,30 @@
           },
           {
             "object": "EffectInsert0",
-            "distance_mm": 0.04999999999999662
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 0.5
+            "distance_mm": 0.04999999999999666
           },
           {
             "object": "KeelLid",
-            "distance_mm": 0.8999999999999958
+            "distance_mm": 0.5
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.0999999999999943
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 3.3234018715767752
           }
         ],
         "passed": true
       },
       "EffectInsert1": {
-        "boolean_pairs_tested": 4,
+        "boolean_pairs_tested": 5,
         "overlaps": [],
         "nearby": [
           {
             "object": "EffectScrew1",
-            "distance_mm": 0.04999999999999443
+            "distance_mm": 0.049999999999995125
           },
           {
             "object": "KeelLid",
@@ -13948,18 +16189,26 @@
             "distance_mm": 0.5
           },
           {
-            "object": "EffectMOSR",
-            "distance_mm": 2.0
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 2.199999999999977
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 4.5
+            "object": "LowerTub",
+            "distance_mm": 2.4748737341529163
+          },
+          {
+            "object": "EffectRetainerScrewRMOSOuter",
+            "distance_mm": 2.93145600891813
+          },
+          {
+            "object": "EffectRetainerInsertRMOSOuter",
+            "distance_mm": 3.5083613182448428
           }
         ],
         "passed": true
       },
       "EffectScrew1": {
-        "boolean_pairs_tested": 5,
+        "boolean_pairs_tested": 6,
         "overlaps": [],
         "nearby": [
           {
@@ -13968,19 +16217,31 @@
           },
           {
             "object": "EffectInsert1",
-            "distance_mm": 0.04999999999999443
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 0.5
+            "distance_mm": 0.049999999999995125
           },
           {
             "object": "KeelLid",
-            "distance_mm": 0.899999999999997
+            "distance_mm": 0.5
           },
           {
-            "object": "EffectMOSR",
-            "distance_mm": 2.5612496949731405
+            "object": "PowerBank",
+            "distance_mm": 2.0999999999999943
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 2.617250465660469
+          },
+          {
+            "object": "EffectRetainerInsertRMOSOuter",
+            "distance_mm": 2.9314560089181283
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 3.1000000000000014
+          },
+          {
+            "object": "EffectRetainerScrewRMOSOuter",
+            "distance_mm": 3.381456008918127
           }
         ],
         "passed": true
@@ -13991,19 +16252,23 @@
         "nearby": [
           {
             "object": "EffectScrew2",
-            "distance_mm": 0.04999999999999662
+            "distance_mm": 0.04999999999999666
           },
           {
             "object": "KeelLid",
-            "distance_mm": 0.09999999999999583
+            "distance_mm": 0.09999999999999432
           },
           {
             "object": "EffectTray",
             "distance_mm": 0.5
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 4.5
+            "object": "LowerTub",
+            "distance_mm": 2.4748737341529163
+          },
+          {
+            "object": "ShoulderRailL",
+            "distance_mm": 4.415453357965238
           }
         ],
         "passed": true
@@ -14018,26 +16283,30 @@
           },
           {
             "object": "EffectInsert2",
-            "distance_mm": 0.04999999999999662
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 0.5
+            "distance_mm": 0.04999999999999666
           },
           {
             "object": "KeelLid",
-            "distance_mm": 0.8999999999999958
+            "distance_mm": 0.5
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.0999999999999943
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 3.3234018715767806
           }
         ],
         "passed": true
       },
       "EffectInsert3": {
-        "boolean_pairs_tested": 4,
+        "boolean_pairs_tested": 5,
         "overlaps": [],
         "nearby": [
           {
             "object": "EffectScrew3",
-            "distance_mm": 0.04999999999999443
+            "distance_mm": 0.049999999999995125
           },
           {
             "object": "KeelLid",
@@ -14048,18 +16317,26 @@
             "distance_mm": 0.5
           },
           {
-            "object": "EffectMOSL",
-            "distance_mm": 2.0
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 2.1999999999999322
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 4.5
+            "object": "LowerTub",
+            "distance_mm": 2.4748737341529163
+          },
+          {
+            "object": "EffectRetainerScrewLMOSOuter",
+            "distance_mm": 2.9314560089181296
+          },
+          {
+            "object": "EffectRetainerInsertLMOSOuter",
+            "distance_mm": 3.5083613182448428
           }
         ],
         "passed": true
       },
       "EffectScrew3": {
-        "boolean_pairs_tested": 5,
+        "boolean_pairs_tested": 6,
         "overlaps": [],
         "nearby": [
           {
@@ -14068,45 +16345,1261 @@
           },
           {
             "object": "EffectInsert3",
-            "distance_mm": 0.04999999999999443
-          },
-          {
-            "object": "PowerBank",
-            "distance_mm": 0.5
+            "distance_mm": 0.049999999999995125
           },
           {
             "object": "KeelLid",
-            "distance_mm": 0.899999999999997
+            "distance_mm": 0.5
           },
           {
-            "object": "EffectMOSL",
-            "distance_mm": 2.5612496949731405
+            "object": "PowerBank",
+            "distance_mm": 2.0999999999999943
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 2.6172504656604354
+          },
+          {
+            "object": "EffectRetainerInsertLMOSOuter",
+            "distance_mm": 2.9314560089181283
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 3.1000000000000014
+          },
+          {
+            "object": "EffectRetainerScrewLMOSOuter",
+            "distance_mm": 3.381456008918129
           }
         ],
         "passed": true
       },
-      "EffectTray": {
-        "boolean_pairs_tested": 11,
+      "EffectMOSL": {
+        "boolean_pairs_tested": 6,
         "overlaps": [],
         "nearby": [
           {
-            "object": "KeelLid",
+            "object": "EffectSupportLMOS",
             "distance_mm": 0.0
           },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 0.4000000000000057
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 2.039607805437115
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 2.135496389036094
+          },
+          {
+            "object": "EffectRetainerInsertLMOSInner",
+            "distance_mm": 2.6
+          },
+          {
+            "object": "EffectRetainerInsertLMOSOuter",
+            "distance_mm": 2.6000000000000014
+          },
+          {
+            "object": "EffectRetainerScrewLMOSInner",
+            "distance_mm": 2.720294101747094
+          },
+          {
+            "object": "EffectRetainerScrewLMOSOuter",
+            "distance_mm": 2.720294101747096
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 3.5
+          },
+          {
+            "object": "EffectBuckL",
+            "distance_mm": 3.5
+          },
+          {
+            "object": "EffectSupportLBuck",
+            "distance_mm": 3.700000000000003
+          },
+          {
+            "object": "ShoulderRailL",
+            "distance_mm": 4.920926461691875
+          }
+        ],
+        "passed": true
+      },
+      "EffectSupportLMOS": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
           {
             "object": "EffectMOSL",
             "distance_mm": 0.0
           },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 2.000000000000014
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 2.973213749463703
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 3.0
+          },
+          {
+            "object": "EffectBuckL",
+            "distance_mm": 3.700000000000003
+          },
+          {
+            "object": "EffectSupportLBuck",
+            "distance_mm": 3.9000000000000057
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerInsertLMOSInner": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewLMOSInner",
+            "distance_mm": 0.04999999999999955
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.09999999999999379
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 1.3038404810405295
+          },
+          {
+            "object": "EffectRetainerInsertRMOSInner",
+            "distance_mm": 2.2
+          },
+          {
+            "object": "EffectRetainerScrewRMOSInner",
+            "distance_mm": 2.2203603311174502
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5
+          },
+          {
+            "object": "EffectMOSL",
+            "distance_mm": 2.6
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerScrewLMOSInner": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertLMOSInner",
+            "distance_mm": 0.04999999999999955
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 0.9000000000000001
+          },
+          {
+            "object": "EffectRetainerScrewRMOSInner",
+            "distance_mm": 1.4
+          },
+          {
+            "object": "EffectRetainerInsertRMOSInner",
+            "distance_mm": 2.2203603311174502
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5999999999999943
+          },
+          {
+            "object": "EffectMOSL",
+            "distance_mm": 2.720294101747094
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerInsertLMOSOuter": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewLMOSOuter",
+            "distance_mm": 0.049999999999996665
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.09999999999999423
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 1.927234057555625
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5
+          },
+          {
+            "object": "EffectMOSL",
+            "distance_mm": 2.6000000000000014
+          },
+          {
+            "object": "EffectScrew3",
+            "distance_mm": 2.9314560089181283
+          },
+          {
+            "object": "EffectInsert3",
+            "distance_mm": 3.5083613182448428
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerScrewLMOSOuter": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertLMOSOuter",
+            "distance_mm": 0.049999999999996665
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 1.43145600891813
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5999999999999943
+          },
+          {
+            "object": "EffectMOSL",
+            "distance_mm": 2.720294101747096
+          },
+          {
+            "object": "EffectInsert3",
+            "distance_mm": 2.9314560089181296
+          },
+          {
+            "object": "EffectScrew3",
+            "distance_mm": 3.381456008918129
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerLMOS": {
+        "boolean_pairs_tested": 9,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewLMOSInner",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerScrewLMOSOuter",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertLMOSInner",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerInsertLMOSOuter",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 0.4
+          },
+          {
+            "object": "EffectMOSL",
+            "distance_mm": 0.4000000000000057
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 0.6999999999999303
+          },
+          {
+            "object": "EffectRetainerScrewRMOSInner",
+            "distance_mm": 0.9000000000000001
+          },
+          {
+            "object": "EffectRetainerInsertRMOSInner",
+            "distance_mm": 1.3038404810405295
+          },
+          {
+            "object": "EffectSupportLMOS",
+            "distance_mm": 2.000000000000014
+          },
+          {
+            "object": "EffectBuckL",
+            "distance_mm": 2.039607805437115
+          },
+          {
+            "object": "EffectInsert3",
+            "distance_mm": 2.1999999999999322
+          },
+          {
+            "object": "EffectScrew3",
+            "distance_mm": 2.6172504656604354
+          },
+          {
+            "object": "EffectSupportLBuck",
+            "distance_mm": 2.973213749463703
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 4.000312487793924
+          }
+        ],
+        "passed": true
+      },
+      "EffectBuckL": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectSupportLBuck",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 0.4000000000000057
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 2.039607805437115
+          },
+          {
+            "object": "EffectRetainerInsertLBuckInner",
+            "distance_mm": 2.5999999999999996
+          },
+          {
+            "object": "EffectRetainerInsertLBuckOuter",
+            "distance_mm": 2.6000000000000014
+          },
+          {
+            "object": "EffectRetainerScrewLBuckOuter",
+            "distance_mm": 2.720294101747093
+          },
+          {
+            "object": "EffectRetainerScrewLBuckInner",
+            "distance_mm": 2.720294101747094
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 3.2496684180984103
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 3.5
+          },
+          {
+            "object": "EffectMOSL",
+            "distance_mm": 3.5
+          },
+          {
+            "object": "EffectSupportLMOS",
+            "distance_mm": 3.700000000000003
+          }
+        ],
+        "passed": true
+      },
+      "EffectSupportLBuck": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
           {
             "object": "EffectBuckL",
             "distance_mm": 0.0
           },
           {
+            "object": "EffectTray",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 2.000000000000014
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 2.973213749463703
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 3.0
+          },
+          {
+            "object": "EffectMOSL",
+            "distance_mm": 3.700000000000003
+          },
+          {
+            "object": "EffectSupportLMOS",
+            "distance_mm": 3.9000000000000057
+          },
+          {
+            "object": "EffectRetainerInsertLBuckInner",
+            "distance_mm": 4.820128616033594
+          },
+          {
+            "object": "EffectRetainerInsertLBuckOuter",
+            "distance_mm": 4.820128616033594
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerInsertLBuckInner": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewLBuckInner",
+            "distance_mm": 0.04999999999999617
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5
+          },
+          {
+            "object": "EffectBuckL",
+            "distance_mm": 2.5999999999999996
+          },
+          {
+            "object": "EffectSupportLBuck",
+            "distance_mm": 4.820128616033594
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerScrewLBuckInner": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertLBuckInner",
+            "distance_mm": 0.04999999999999617
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5999999999999943
+          },
+          {
+            "object": "EffectBuckL",
+            "distance_mm": 2.720294101747094
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 4.159575575165958
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 4.9
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerInsertLBuckOuter": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewLBuckOuter",
+            "distance_mm": 0.04999999999999716
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5
+          },
+          {
+            "object": "EffectBuckL",
+            "distance_mm": 2.6000000000000014
+          },
+          {
+            "object": "EffectSupportLBuck",
+            "distance_mm": 4.820128616033594
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerScrewLBuckOuter": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertLBuckOuter",
+            "distance_mm": 0.049999999999996166
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5999999999999943
+          },
+          {
+            "object": "EffectBuckL",
+            "distance_mm": 2.720294101747093
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 4.159575575165958
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerLBuck": {
+        "boolean_pairs_tested": 6,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewLBuckInner",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerScrewLBuckOuter",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertLBuckInner",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerInsertLBuckOuter",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectBuckL",
+            "distance_mm": 0.4000000000000057
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectSupportLBuck",
+            "distance_mm": 2.000000000000014
+          },
+          {
+            "object": "EffectMOSL",
+            "distance_mm": 2.039607805437115
+          },
+          {
+            "object": "EffectSupportLMOS",
+            "distance_mm": 2.973213749463703
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 3.4353637562754593
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 4.4
+          },
+          {
+            "object": "EffectRetainerScrewRBuckInner",
+            "distance_mm": 4.9
+          }
+        ],
+        "passed": true
+      },
+      "EffectMOSR": {
+        "boolean_pairs_tested": 6,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectSupportRMOS",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 0.4000000000000057
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 2.039607805437115
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 2.135496389036094
+          },
+          {
+            "object": "EffectRetainerInsertRMOSInner",
+            "distance_mm": 2.6
+          },
+          {
+            "object": "EffectRetainerInsertRMOSOuter",
+            "distance_mm": 2.6000000000000014
+          },
+          {
+            "object": "EffectRetainerScrewRMOSInner",
+            "distance_mm": 2.720294101747094
+          },
+          {
+            "object": "EffectRetainerScrewRMOSOuter",
+            "distance_mm": 2.720294101747096
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 3.5
+          },
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 3.5
+          },
+          {
+            "object": "EffectSupportRBuck",
+            "distance_mm": 3.700000000000003
+          },
+          {
+            "object": "ShoulderRailR",
+            "distance_mm": 4.920926461691875
+          }
+        ],
+        "passed": true
+      },
+      "EffectSupportRMOS": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
+          {
             "object": "EffectMOSR",
             "distance_mm": 0.0
           },
           {
+            "object": "EffectTray",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 2.0
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 2.973213749463703
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 3.0
+          },
+          {
             "object": "EffectBuckR",
+            "distance_mm": 3.700000000000003
+          },
+          {
+            "object": "EffectSupportRBuck",
+            "distance_mm": 3.9000000000000057
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerInsertRMOSInner": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewRMOSInner",
+            "distance_mm": 0.04999999999999679
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.09999999999999379
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 1.3038404810405295
+          },
+          {
+            "object": "EffectRetainerInsertLMOSInner",
+            "distance_mm": 2.2
+          },
+          {
+            "object": "EffectRetainerScrewLMOSInner",
+            "distance_mm": 2.2203603311174502
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5
+          },
+          {
+            "object": "EffectMOSR",
+            "distance_mm": 2.6
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerScrewRMOSInner": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertRMOSInner",
+            "distance_mm": 0.04999999999999679
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 0.9000000000000001
+          },
+          {
+            "object": "EffectRetainerScrewLMOSInner",
+            "distance_mm": 1.4
+          },
+          {
+            "object": "EffectRetainerInsertLMOSInner",
+            "distance_mm": 2.2203603311174502
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5999999999999943
+          },
+          {
+            "object": "EffectMOSR",
+            "distance_mm": 2.720294101747094
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerInsertRMOSOuter": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewRMOSOuter",
+            "distance_mm": 0.049999999999996665
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.0999999999999801
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 1.9272340575556222
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5
+          },
+          {
+            "object": "EffectMOSR",
+            "distance_mm": 2.6000000000000014
+          },
+          {
+            "object": "EffectScrew1",
+            "distance_mm": 2.9314560089181283
+          },
+          {
+            "object": "EffectInsert1",
+            "distance_mm": 3.5083613182448428
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerScrewRMOSOuter": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertRMOSOuter",
+            "distance_mm": 0.049999999999996665
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.19999999999997442
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 1.431456008918127
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5999999999999943
+          },
+          {
+            "object": "EffectMOSR",
+            "distance_mm": 2.720294101747096
+          },
+          {
+            "object": "EffectInsert1",
+            "distance_mm": 2.93145600891813
+          },
+          {
+            "object": "EffectScrew1",
+            "distance_mm": 3.381456008918127
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerRMOS": {
+        "boolean_pairs_tested": 9,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewRMOSInner",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerScrewRMOSOuter",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertRMOSInner",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerInsertRMOSOuter",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 0.4
+          },
+          {
+            "object": "EffectMOSR",
+            "distance_mm": 0.4000000000000057
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 0.6999999999999781
+          },
+          {
+            "object": "EffectRetainerScrewLMOSInner",
+            "distance_mm": 0.9000000000000001
+          },
+          {
+            "object": "EffectRetainerInsertLMOSInner",
+            "distance_mm": 1.3038404810405295
+          },
+          {
+            "object": "EffectSupportRMOS",
+            "distance_mm": 2.0
+          },
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 2.039607805437115
+          },
+          {
+            "object": "EffectInsert1",
+            "distance_mm": 2.199999999999977
+          },
+          {
+            "object": "EffectScrew1",
+            "distance_mm": 2.617250465660469
+          },
+          {
+            "object": "EffectSupportRBuck",
+            "distance_mm": 2.973213749463703
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 4.000312487793924
+          }
+        ],
+        "passed": true
+      },
+      "EffectBuckR": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectSupportRBuck",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 0.4000000000000057
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 2.039607805437115
+          },
+          {
+            "object": "EffectRetainerInsertRBuckOuter",
+            "distance_mm": 2.599999999999998
+          },
+          {
+            "object": "EffectRetainerInsertRBuckInner",
+            "distance_mm": 2.5999999999999996
+          },
+          {
+            "object": "EffectRetainerScrewRBuckOuter",
+            "distance_mm": 2.7202941017470903
+          },
+          {
+            "object": "EffectRetainerScrewRBuckInner",
+            "distance_mm": 2.720294101747094
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 3.2496684180984103
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 3.5
+          },
+          {
+            "object": "EffectMOSR",
+            "distance_mm": 3.5
+          },
+          {
+            "object": "EffectSupportRMOS",
+            "distance_mm": 3.700000000000003
+          }
+        ],
+        "passed": true
+      },
+      "EffectSupportRBuck": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 2.000000000000014
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 2.973213749463703
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 3.0
+          },
+          {
+            "object": "EffectMOSR",
+            "distance_mm": 3.700000000000003
+          },
+          {
+            "object": "EffectSupportRMOS",
+            "distance_mm": 3.9000000000000057
+          },
+          {
+            "object": "EffectRetainerInsertRBuckInner",
+            "distance_mm": 4.820128616033594
+          },
+          {
+            "object": "EffectRetainerInsertRBuckOuter",
+            "distance_mm": 4.820128616033594
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerInsertRBuckInner": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewRBuckInner",
+            "distance_mm": 0.049999999999998206
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5
+          },
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 2.5999999999999996
+          },
+          {
+            "object": "EffectSupportRBuck",
+            "distance_mm": 4.820128616033594
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerScrewRBuckInner": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertRBuckInner",
+            "distance_mm": 0.049999999999998206
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5999999999999943
+          },
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 2.720294101747094
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 4.159575575165958
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 4.9
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerInsertRBuckOuter": {
+        "boolean_pairs_tested": 4,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewRBuckOuter",
+            "distance_mm": 0.049999999999995555
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5
+          },
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 2.599999999999998
+          },
+          {
+            "object": "EffectSupportRBuck",
+            "distance_mm": 4.820128616033594
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerScrewRBuckOuter": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertRBuckOuter",
+            "distance_mm": 0.04999999999999777
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "PowerBank",
+            "distance_mm": 2.5999999999999943
+          },
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 2.7202941017470903
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 4.159575575165958
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerRBuck": {
+        "boolean_pairs_tested": 6,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "EffectRetainerScrewRBuckInner",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerScrewRBuckOuter",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectTray",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertRBuckInner",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerInsertRBuckOuter",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 0.4000000000000057
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectSupportRBuck",
+            "distance_mm": 2.000000000000014
+          },
+          {
+            "object": "EffectMOSR",
+            "distance_mm": 2.039607805437115
+          },
+          {
+            "object": "EffectSupportRMOS",
+            "distance_mm": 2.973213749463703
+          },
+          {
+            "object": "KeelLid",
+            "distance_mm": 3.4353637562754593
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 4.4
+          },
+          {
+            "object": "EffectRetainerScrewLBuckInner",
+            "distance_mm": 4.9
+          }
+        ],
+        "passed": true
+      },
+      "EffectTray": {
+        "boolean_pairs_tested": 35,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "KeelLid",
             "distance_mm": 0.0
           },
           {
@@ -14126,6 +17619,102 @@
             "distance_mm": 0.0
           },
           {
+            "object": "EffectSupportLMOS",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectSupportLBuck",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectSupportRMOS",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectSupportRBuck",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectRetainerInsertRMOSOuter",
+            "distance_mm": 0.0999999999999801
+          },
+          {
+            "object": "EffectRetainerInsertLMOSInner",
+            "distance_mm": 0.09999999999999379
+          },
+          {
+            "object": "EffectRetainerInsertRMOSInner",
+            "distance_mm": 0.09999999999999379
+          },
+          {
+            "object": "EffectRetainerInsertLMOSOuter",
+            "distance_mm": 0.09999999999999423
+          },
+          {
+            "object": "EffectRetainerInsertLBuckInner",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerInsertLBuckOuter",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerInsertRBuckInner",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerInsertRBuckOuter",
+            "distance_mm": 0.09999999999999432
+          },
+          {
+            "object": "EffectRetainerScrewRMOSOuter",
+            "distance_mm": 0.19999999999997442
+          },
+          {
+            "object": "EffectRetainerScrewLMOSInner",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "EffectRetainerScrewLMOSOuter",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "EffectRetainerScrewLBuckInner",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "EffectRetainerScrewLBuckOuter",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "EffectRetainerScrewRMOSInner",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "EffectRetainerScrewRBuckInner",
+            "distance_mm": 0.19999999999998863
+          },
+          {
+            "object": "EffectRetainerScrewRBuckOuter",
+            "distance_mm": 0.19999999999998863
+          },
+          {
             "object": "EffectInsert0",
             "distance_mm": 0.5
           },
@@ -14142,22 +17731,38 @@
             "distance_mm": 0.5
           },
           {
+            "object": "EffectMOSL",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectBuckL",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectMOSR",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 1.8000000000000007
+          },
+          {
             "object": "PowerBank",
             "distance_mm": 2.0
           },
           {
-            "object": "LowerTub",
-            "distance_mm": 4.47213595499958
-          },
-          {
             "object": "BatteryPullStrap",
-            "distance_mm": 4.657252408878007
+            "distance_mm": 2.586503431275511
           }
         ],
         "passed": true
       },
       "KeelLid": {
-        "boolean_pairs_tested": 97,
+        "boolean_pairs_tested": 121,
         "overlaps": [],
         "nearby": [
           {
@@ -14214,11 +17819,11 @@
           },
           {
             "object": "EffectInsert0",
-            "distance_mm": 0.09999999999999583
+            "distance_mm": 0.09999999999999432
           },
           {
             "object": "EffectInsert2",
-            "distance_mm": 0.09999999999999583
+            "distance_mm": 0.09999999999999432
           },
           {
             "object": "BaseCableGrommet",
@@ -14241,32 +17846,32 @@
             "distance_mm": 0.19999999999999912
           },
           {
-            "object": "EffectMOSL",
+            "object": "EffectScrew0",
             "distance_mm": 0.5
           },
           {
-            "object": "EffectMOSR",
+            "object": "EffectScrew1",
             "distance_mm": 0.5
+          },
+          {
+            "object": "EffectScrew2",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectScrew3",
+            "distance_mm": 0.5
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 0.6999999999999303
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 0.6999999999999781
           },
           {
             "object": "L298NEnvelope",
             "distance_mm": 0.7999999999999972
-          },
-          {
-            "object": "EffectScrew0",
-            "distance_mm": 0.8999999999999958
-          },
-          {
-            "object": "EffectScrew2",
-            "distance_mm": 0.8999999999999958
-          },
-          {
-            "object": "EffectScrew1",
-            "distance_mm": 0.899999999999997
-          },
-          {
-            "object": "EffectScrew3",
-            "distance_mm": 0.899999999999997
           },
           {
             "object": "KeelSideFrameL",
@@ -14277,8 +17882,24 @@
             "distance_mm": 1.0
           },
           {
+            "object": "EffectRetainerScrewRMOSOuter",
+            "distance_mm": 1.431456008918127
+          },
+          {
+            "object": "EffectRetainerScrewLMOSOuter",
+            "distance_mm": 1.43145600891813
+          },
+          {
             "object": "PowerCableRoute",
             "distance_mm": 1.5
+          },
+          {
+            "object": "EffectRetainerInsertRMOSOuter",
+            "distance_mm": 1.9272340575556222
+          },
+          {
+            "object": "EffectRetainerInsertLMOSOuter",
+            "distance_mm": 1.927234057555623
           },
           {
             "object": "ChestGuardL",
@@ -14293,12 +17914,12 @@
             "distance_mm": 2.0
           },
           {
-            "object": "EffectBuckL",
-            "distance_mm": 2.3211917272131535
+            "object": "EffectMOSL",
+            "distance_mm": 2.135496389036094
           },
           {
-            "object": "EffectBuckR",
-            "distance_mm": 2.3211917272131535
+            "object": "EffectMOSR",
+            "distance_mm": 2.135496389036094
           },
           {
             "object": "BottomServiceCover",
@@ -14353,12 +17974,28 @@
             "distance_mm": 3.200000000000003
           },
           {
+            "object": "EffectBuckL",
+            "distance_mm": 3.2496684180984103
+          },
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 3.2496684180984103
+          },
+          {
             "object": "NeckStayL",
             "distance_mm": 3.373661249987137
           },
           {
             "object": "NeckStayR",
             "distance_mm": 3.373661249987137
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 3.4353637562754593
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 3.4353637562754593
           },
           {
             "object": "L298NClampScrewL1",
@@ -14377,8 +18014,20 @@
             "distance_mm": 3.8776410354750457
           },
           {
-            "object": "PowerBank",
-            "distance_mm": 4.0
+            "object": "EffectRetainerScrewLBuckInner",
+            "distance_mm": 4.159575575165958
+          },
+          {
+            "object": "EffectRetainerScrewLBuckOuter",
+            "distance_mm": 4.159575575165958
+          },
+          {
+            "object": "EffectRetainerScrewRBuckInner",
+            "distance_mm": 4.159575575165958
+          },
+          {
+            "object": "EffectRetainerScrewRBuckOuter",
+            "distance_mm": 4.159575575165958
           },
           {
             "object": "NeckSpacerL104",
@@ -14716,23 +18365,6 @@
         "nearby": [],
         "passed": true
       },
-      "EffectMOSL": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "L298NAirSpaceL",
-            "distance_mm": 1.0
-          }
-        ],
-        "passed": true
-      },
-      "EffectBuckL": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
       "BackpackArcR": {
         "boolean_pairs_tested": 0,
         "overlaps": [],
@@ -14829,23 +18461,6 @@
         "nearby": [],
         "passed": true
       },
-      "EffectMOSR": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "L298NAirSpaceR",
-            "distance_mm": 1.0
-          }
-        ],
-        "passed": true
-      },
-      "EffectBuckR": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
       "EffectInsert0": {
         "boolean_pairs_tested": 0,
         "overlaps": [],
@@ -14894,17 +18509,215 @@
         "nearby": [],
         "passed": true
       },
-      "EffectTray": {
+      "EffectMOSL": {
         "boolean_pairs_tested": 0,
         "overlaps": [],
         "nearby": [
           {
             "object": "L298NAirSpaceL",
-            "distance_mm": 1.0
+            "distance_mm": 1.75
+          }
+        ],
+        "passed": true
+      },
+      "EffectSupportLMOS": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "L298NAirSpaceL",
+            "distance_mm": 1.9499999999999993
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerInsertLMOSInner": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerScrewLMOSInner": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerInsertLMOSOuter": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerScrewLMOSOuter": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerLMOS": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "L298NAirSpaceL",
+            "distance_mm": 0.25
+          }
+        ],
+        "passed": true
+      },
+      "EffectBuckL": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectSupportLBuck": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerInsertLBuckInner": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerScrewLBuckInner": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerInsertLBuckOuter": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerScrewLBuckOuter": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerLBuck": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectMOSR": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "L298NAirSpaceR",
+            "distance_mm": 1.75
+          }
+        ],
+        "passed": true
+      },
+      "EffectSupportRMOS": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "L298NAirSpaceR",
+            "distance_mm": 1.9499999999999993
+          }
+        ],
+        "passed": true
+      },
+      "EffectRetainerInsertRMOSInner": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerScrewRMOSInner": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerInsertRMOSOuter": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerScrewRMOSOuter": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerRMOS": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "L298NAirSpaceR",
+            "distance_mm": 0.25
+          }
+        ],
+        "passed": true
+      },
+      "EffectBuckR": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectSupportRBuck": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerInsertRBuckInner": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerScrewRBuckInner": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerInsertRBuckOuter": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerScrewRBuckOuter": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectRetainerRBuck": {
+        "boolean_pairs_tested": 0,
+        "overlaps": [],
+        "nearby": [],
+        "passed": true
+      },
+      "EffectTray": {
+        "boolean_pairs_tested": 2,
+        "overlaps": [],
+        "nearby": [
+          {
+            "object": "L298NAirSpaceL",
+            "distance_mm": 0.0
           },
           {
             "object": "L298NAirSpaceR",
-            "distance_mm": 1.0
+            "distance_mm": 0.0
           }
         ],
         "passed": true
@@ -15756,15 +19569,62 @@
         },
         {
           "object": "LowerTub",
-          "distance_mm": 2.8284271247461903
+          "distance_mm": 0.8000000000000007
+        },
+        {
+          "object": "MotorL",
+          "distance_mm": 4.546211251235321
+        },
+        {
+          "object": "MotorR",
+          "distance_mm": 4.546211251235321
         },
         {
           "object": "ShoulderRailL",
-          "distance_mm": 3.806754432629555
+          "distance_mm": 4.920926461691875
         },
         {
           "object": "ShoulderRailR",
-          "distance_mm": 3.806754432629555
+          "distance_mm": 4.920926461691875
+        }
+      ],
+      "passed": true
+    },
+    "disconnected_local_wires_down_100": {
+      "boolean_pairs_tested": 6,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "KeelLid",
+          "distance_mm": 0.5570860145311582
+        },
+        {
+          "object": "EffectInsert1",
+          "distance_mm": 2.6970735570139834
+        },
+        {
+          "object": "EffectInsert3",
+          "distance_mm": 2.6970735570139834
+        },
+        {
+          "object": "ShoulderRailR",
+          "distance_mm": 3.342516087186928
+        },
+        {
+          "object": "ShoulderRailL",
+          "distance_mm": 3.342516087186944
+        },
+        {
+          "object": "EffectInsert0",
+          "distance_mm": 3.5
+        },
+        {
+          "object": "EffectInsert2",
+          "distance_mm": 3.5
+        },
+        {
+          "object": "LowerTub",
+          "distance_mm": 4.596194077712559
         }
       ],
       "passed": true
@@ -16057,17 +19917,21 @@
           },
           {
             "object": "EffectInsert0",
-            "distance_mm": 0.04999999999999662
+            "distance_mm": 0.04999999999999666
           },
           {
             "object": "KeelLid",
-            "distance_mm": 0.8999999999999964
+            "distance_mm": 0.5
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 3.3234018715767752
           }
         ],
         "passed": true
       },
       "EffectScrew1": {
-        "boolean_pairs_tested": 5,
+        "boolean_pairs_tested": 6,
         "overlaps": [],
         "nearby": [
           {
@@ -16076,15 +19940,27 @@
           },
           {
             "object": "EffectInsert1",
-            "distance_mm": 0.049999999999995055
+            "distance_mm": 0.049999999999995125
           },
           {
             "object": "KeelLid",
-            "distance_mm": 0.8999999999999972
+            "distance_mm": 0.5
           },
           {
-            "object": "EffectMOSR",
-            "distance_mm": 2.5612496949731405
+            "object": "LowerTub",
+            "distance_mm": 2.1000000000000014
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 2.617250465660469
+          },
+          {
+            "object": "EffectRetainerInsertRMOSOuter",
+            "distance_mm": 2.9314560089181287
+          },
+          {
+            "object": "EffectRetainerScrewRMOSOuter",
+            "distance_mm": 3.381456008918129
           }
         ],
         "passed": true
@@ -16099,17 +19975,21 @@
           },
           {
             "object": "EffectInsert2",
-            "distance_mm": 0.04999999999999662
+            "distance_mm": 0.04999999999999666
           },
           {
             "object": "KeelLid",
-            "distance_mm": 0.8999999999999964
+            "distance_mm": 0.5
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 3.3234018715767806
           }
         ],
         "passed": true
       },
       "EffectScrew3": {
-        "boolean_pairs_tested": 5,
+        "boolean_pairs_tested": 6,
         "overlaps": [],
         "nearby": [
           {
@@ -16118,15 +19998,27 @@
           },
           {
             "object": "EffectInsert3",
-            "distance_mm": 0.049999999999995055
+            "distance_mm": 0.049999999999995125
           },
           {
             "object": "KeelLid",
-            "distance_mm": 0.8999999999999972
+            "distance_mm": 0.5
           },
           {
-            "object": "EffectMOSL",
-            "distance_mm": 2.5612496949731405
+            "object": "LowerTub",
+            "distance_mm": 2.1000000000000014
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 2.6172504656604354
+          },
+          {
+            "object": "EffectRetainerInsertLMOSOuter",
+            "distance_mm": 2.931456008918128
+          },
+          {
+            "object": "EffectRetainerScrewLMOSOuter",
+            "distance_mm": 3.381456008918129
           }
         ],
         "passed": true
@@ -16222,85 +20114,109 @@
         "passed": true
       },
       "EffectScrew0": {
-        "boolean_pairs_tested": 2,
+        "boolean_pairs_tested": 3,
         "overlaps": [],
         "nearby": [
           {
             "object": "EffectTray",
-            "distance_mm": 1.5
+            "distance_mm": 1.0999999999999945
           },
           {
             "object": "KeelLid",
-            "distance_mm": 3.551056180912941
+            "distance_mm": 3.945883931389777
           },
           {
             "object": "EffectInsert0",
-            "distance_mm": 4.0
+            "distance_mm": 4.400000000000006
           }
         ],
         "passed": true
       },
       "EffectScrew1": {
-        "boolean_pairs_tested": 2,
+        "boolean_pairs_tested": 3,
         "overlaps": [],
         "nearby": [
           {
             "object": "EffectTray",
-            "distance_mm": 1.5
+            "distance_mm": 1.099999999999999
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 3.0
+          },
+          {
+            "object": "EffectRetainerInsertRMOSOuter",
+            "distance_mm": 3.8522792147344185
           },
           {
             "object": "KeelLid",
-            "distance_mm": 3.551056180912941
+            "distance_mm": 3.945883931389777
+          },
+          {
+            "object": "EffectRetainerScrewRMOSOuter",
+            "distance_mm": 4.310552813306104
+          },
+          {
+            "object": "EffectRetainerRMOS",
+            "distance_mm": 4.341658669218473
           },
           {
             "object": "EffectInsert1",
-            "distance_mm": 4.0
-          },
-          {
-            "object": "EffectMOSR",
-            "distance_mm": 4.301162633521313
+            "distance_mm": 4.400000000000006
           }
         ],
         "passed": true
       },
       "EffectScrew2": {
-        "boolean_pairs_tested": 2,
+        "boolean_pairs_tested": 3,
         "overlaps": [],
         "nearby": [
           {
             "object": "EffectTray",
-            "distance_mm": 1.5
+            "distance_mm": 1.0999999999999945
           },
           {
             "object": "KeelLid",
-            "distance_mm": 3.551056180912941
+            "distance_mm": 3.945883931389777
           },
           {
             "object": "EffectInsert2",
-            "distance_mm": 4.0
+            "distance_mm": 4.400000000000006
           }
         ],
         "passed": true
       },
       "EffectScrew3": {
-        "boolean_pairs_tested": 2,
+        "boolean_pairs_tested": 3,
         "overlaps": [],
         "nearby": [
           {
             "object": "EffectTray",
-            "distance_mm": 1.5
+            "distance_mm": 1.099999999999999
+          },
+          {
+            "object": "LowerTub",
+            "distance_mm": 3.0
+          },
+          {
+            "object": "EffectRetainerInsertLMOSOuter",
+            "distance_mm": 3.852279214734422
           },
           {
             "object": "KeelLid",
-            "distance_mm": 3.551056180912941
+            "distance_mm": 3.945883931389777
+          },
+          {
+            "object": "EffectRetainerScrewLMOSOuter",
+            "distance_mm": 4.310552813306102
+          },
+          {
+            "object": "EffectRetainerLMOS",
+            "distance_mm": 4.341658669218442
           },
           {
             "object": "EffectInsert3",
-            "distance_mm": 4.0
-          },
-          {
-            "object": "EffectMOSL",
-            "distance_mm": 4.301162633521313
+            "distance_mm": 4.400000000000006
           }
         ],
         "passed": true
@@ -16344,7 +20260,7 @@
         "overlaps": [
           {
             "object": "PowerBank",
-            "overlap_mm3": 49203.0
+            "overlap_mm3": 96604.11750123555
           }
         ],
         "nearby": [
@@ -16360,19 +20276,19 @@
         "overlaps": [
           {
             "object": "EffectScrew0",
-            "overlap_mm3": 33.951147369354416
+            "overlap_mm3": 17.85850371787842
           },
           {
             "object": "EffectScrew1",
-            "overlap_mm3": 33.951147369354416
+            "overlap_mm3": 17.85850371787815
           },
           {
             "object": "EffectScrew2",
-            "overlap_mm3": 33.95114736935441
+            "overlap_mm3": 17.85850371787787
           },
           {
             "object": "EffectScrew3",
-            "overlap_mm3": 33.95114736935441
+            "overlap_mm3": 17.85850371787815
           }
         ],
         "nearby": [
@@ -16455,12 +20371,12 @@
       "liner_OuterR0": 236.73150573511856,
       "liner_InnerR1": 236.7315057331276,
       "liner_OuterR1": 236.7315057394398,
-      "tray_to_posts": 98.52034561657587
+      "tray_to_posts": 98.52034561657584
     },
     "passed": true,
     "physical_fit_verified": false,
     "limits": "Cap release sampled; bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
-    "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
     "saved_and_reopened": true
   },
   "manufacturing_released": false,
@@ -16468,7 +20384,7 @@
   "assembly_paths_verified": false,
   "electrical_verified": false,
   "final_saved_audit": {
-    "native_objects_verified": 366,
+    "native_objects_verified": 409,
     "gui_visibility_verified": true
   },
   "previews_generated": true,
@@ -16483,64 +20399,67 @@
   ],
   "drive_preview_note": "Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.",
   "files_sha256": {
-    "CyberTrack.FCStd": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
-    "CyberTrack.step": "7e35f7dabfc01d66a32982740cba1e877e3a366142e0532fc5685298e8c1514c",
-    "assembly.png": "42496808ce714590b882b6c593e351e69c6678ae08a85312c791d87234ebb1db",
-    "bottle-backpack-layout.png": "c95d8dc3b38a71295cacdc959a1fe9acfd45af982fd8ad3099f95fb240e3eaa6",
-    "bottle-backpack-service.png": "4786c32ff089d5fd0e9f5ad7f12be714e4db94317ada717683cce2edf9ae0402",
-    "bottle-backpack-spaces.png": "8334adf1fce1390607b6df244b8915a9a87223d7068105f4d5ead4878c439d99",
-    "breadboard-access.png": "4ec60739d4768720e904175ea1df65c1050db2e17db90f03735f8eb67772ce11",
-    "breadboard-layout.png": "5c0da3e6a2255c90dfffbd49dc9b6a427c1e8bd46bd50ec16a466890f5c4144f",
-    "breadboard-service.png": "fcd888f8aff812ffb4e60a044538b509623ef1309899f60b613a2aa9c5db3de6",
-    "breadboard-top.png": "c60b4b747dfefcb3072e660862fc1ccc3cbc6ad6b58e5996f95d474481dc6bbb",
-    "breadboard-tray.png": "531ab8b97bc0169a558d86c6089af6da61d58b81ec49ee43afc279688df7ca3c",
-    "bubble-gun-clearance.png": "509056c4a7ca55f84f103dbfada9b06e20abc5597577c98bd24e3e9fd5cc73e9",
-    "bubble-gun-component.png": "27f5cde36f0a3867b872a7e59be89342bd6585157d40d672c98ea886bddd6e12",
-    "bubble-gun-layout.png": "23007403e5df40e7a83141353013b986164825a0bb02bec9eb6f5b100703cf9d",
-    "bubble-gun-mount.png": "d458aee497a4022972c1dfcc0e76ec039437a60c8d926bdb81665b077d325969",
-    "bubble-gun-service.png": "234416ef19282ee50d76f3738dc975c5deb3688bec7678b0a3e814a716efa266",
-    "bubble-gun-side.png": "6fbe99ea3674e9685b9db5704c5e5e6651fb23db1909c8d850d9bc353231192d",
-    "bubble-gun-spaces.png": "17e90b924b064c21e52bb1e7b64504d47e482556736d9961b5d2ef5e98951604",
-    "crown-effects-top.png": "c554425bd5763eb67a5519de7eda778c9b8d4582bfa01ae769c3214b795973b3",
-    "crown-effects.png": "86bdc5329d3a35102f19243547325eedbc1865c7cfdfa3d37e8f4efe9708631a",
-    "drive-bottom.png": "5f1038ea9c0abd17a05b589df150d52c49e4e72a105aadc99caf2bc9ba816414",
-    "drive-frame.png": "ed613de73172c3271a7550c5b0afa574fadf9f2c204dabb636ba90bfe3086589",
-    "drive-integrated-face.png": "7ef8b85c7bca0dcbca3602b1e503f6a245de5c0efa606fe4d9558a66c6d5859f",
-    "drive-mount.png": "445401d2aedbb7ce22fe99db0e038c3d21b66f99b3f69825c8137cc9f2ba9391",
-    "drive-service.png": "155e0d34efb782d7668a041059c746abda5f626a37022ac2b5857379f48bad85",
-    "effects-backpack.png": "7e3f9c20f3d6989b9bfbc64e9f2e5017965de9d570929ef82ccae09391a26e8b",
-    "effects-clamp.png": "93b01fa6d747a4eda55bd1bfd36adfacc11a8a5cc510f04303285fe087546d19",
-    "effects-service.png": "a9f0d040c0e2852c335f47f19e2d3904abe902ec35b0f90f5032e0800ce6e689",
-    "effects-tray-bottom.png": "993000dd112303d34a84750262230dde9d7411cde527e4f4611872b83b3e3c19",
-    "effects-tray-service.png": "ffadd8ce897e1f08c16b83e766e03a47aee6ed99328bd05db46c5a07b687f4d4",
-    "effects-tray.png": "b118a6df7cf75a56a7f171b5cf481b7476adc36b1911db9353931e096cd79db5",
-    "front.png": "464781b71e7af9044963281f5f906f8354be612ede7e942f219156f182321582",
-    "l298n-carrier.png": "41c0286c311af13325ada564e824f24c85e2a661173862ea54a4c661025ea7a1",
-    "l298n-layout.png": "f7049ab7f53496809f442998fb49180755fd87e9cab3db4616cf132a22114c2b",
-    "l298n-service.png": "c98860da1c43b7cb4627f30f16727879c6010fb099a910606ef96b00b3fc3faf",
-    "l298n-side.png": "c02ee06d7f7584fb1560fc07af84255dad35bf25c23d02c7189967e9c19be51e",
-    "l298n-spaces.png": "3360f70f6fb52107d85b9c03589cc279241898e2793e5ae3931753d9a8921d6f",
-    "l298n-top.png": "40ba656ad85eedca8000256539fd3f82331a35ca2f20c2bdc81a0734fae6f7da",
-    "layout.png": "0f8bc2f74d812e7514da311e71c5158f450502f81734d5a7faccffa8e0d9e3b6",
-    "lower-layout.png": "1bcf579a04397de86d19fa6ef960f4fa67a25cbdac1971ef651cb1889437c368",
-    "rear-assembly.png": "7ebd2efabb86f93d5e7d26fe3ff716cc996e63f759494ef9204e01def56a7011",
-    "rear.png": "d2dc6c8f481885040bd5f737a726b01fed883611ef895056228a9af8981e6d5c",
-    "right.png": "292ba6a2a3ba8f55a8e503ca5445baea7320fe81d2c844788c130c500f50fdfb",
-    "routing.png": "7e73f0751f311d5f5307a8fdaa0d8abbe31f82c7c5c79fdcb035e1ec516297b7",
-    "service.png": "befb7a5aba6b2dfc6dc675074857ed4bab7fca4e1c41bc23b7d8eef835044777",
-    "side.png": "99dcb2f42dc073cf24b15cc89edac27334791814e530a117783c990f1d510a66",
-    "top.png": "d5eaf36100a6523ca1c51fefe9320891a0d180ba823dcb1d0c0154f9f1057cd9",
-    "ultrasonic-coexistence.png": "e18e3dc375d584e79bb8d1ac50a21bec394e72ffb9e4ac4e7daae79861114704",
-    "ultrasonic-front.png": "870dd95158a71e7850b22b21be39fe3e85990d2d6b3c0fd553063ab93c1deb75",
-    "ultrasonic-layout.png": "1cd09260f858c51024ba0631a2043d7fd6b08a20df48180fa8093b2bb023a95b",
-    "ultrasonic-service.png": "120212bbae726e2ecae379ece750212985f9aff0f32e7c383b4a0f084f013cbd",
-    "ultrasonic-side.png": "549fe09a2a28ebe58f3cdb094585b12fd65df36f9f6bf52fd7100e189c94fe03",
-    "water-gun-clearance.png": "2b26698e00e2cdecc78aae2006323bc8a437f4b81a5c47903d74fe3028040ffb",
-    "water-gun-component.png": "9bcc2c83a4ec562c5f2e8cb297d441ec36e9275e7a9ca68bf01dedb359eee956",
-    "water-gun-layout.png": "649fc5c1f9212306ddf4443db890e29cea80169d37167d36b896514bfa6c56e0",
-    "water-gun-mount.png": "f476e37c7fce8e7610a765c5af7da4a6a9350693836f592ce7a4277eef1cc528",
-    "water-gun-service.png": "1136acecc070cff06c827b6629b1eea375a0cd868eb83fd72345c36fe0fa5b06",
-    "water-gun-side.png": "0513520000eb58ce176d76733c943c71c023f850bcb43da56cf33b8bf9880699",
-    "water-gun-spaces.png": "9e6aa52d003cd78fd343634db9b72a9ebca1b4c4b9deaab10c899338b45d32da"
+    "CyberTrack.FCStd": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "CyberTrack.step": "1e8d70a5da7f134dbd5b28ffb29b5388386788d18e143cda9a07e9884a8782df",
+    "assembly.png": "3654839c5ac83f14b96d36a90ee35f4293d76c44bed00b3b7a581af29ffbef2d",
+    "bottle-backpack-layout.png": "7ab68ba16ca54789612e632478a80488575f14318a228167e0f16b29ce58894c",
+    "bottle-backpack-service.png": "69ef8198e4bb78f20aa302fa27e9f9827b481836ba8f344356597ec2055f587a",
+    "bottle-backpack-spaces.png": "397316a56dee96e5ec53e567361260fb187d49ba0d1ec996d15f44916341f968",
+    "breadboard-access.png": "e0099bcd023b6a3b8dbc12d90bbd47dc2e5dd5a1565ddcb9b50eeab43cfc2de0",
+    "breadboard-layout.png": "243c544d2ff551b06d91d31dfc4387ad68fd04385af63b6ededa047eb1bc71fc",
+    "breadboard-service.png": "f06b6b29568830bf60df20eb3a50bfbee78fb35a687f3ea05770d1aaa78405e9",
+    "breadboard-top.png": "220b14b1486dd8fd5ea6ea9747a1eb3409a6739f8012f934d528acd985ea1507",
+    "breadboard-tray.png": "6ff8280d31c37f1fa92cb4d13fe3a68a1f0fe2d118b541f1e9f9b8a56c7b731a",
+    "bubble-gun-clearance.png": "d09aaf8df380c31f95d069e6431a3eb859e134fedb9dc9eb3074659bbf73a904",
+    "bubble-gun-component.png": "c1b6b665609b1086b399fc44955cfbf27a623412e0cf58260854135827148350",
+    "bubble-gun-layout.png": "63be054f12ea818b89035dbf55fff8e9066bfb68d0ca9549b4e4afcb9d0f9d2d",
+    "bubble-gun-mount.png": "651968e63c48f7c036c556632730b1e314160674aa3181fafbbb3a1841d4c2d3",
+    "bubble-gun-service.png": "fb1fd08c714f3d460de03fb4401b0f6bc6e5077fd5fa5ba4172d863747d02ac6",
+    "bubble-gun-side.png": "05a169160fa614cd433cf341616f6c05b8dfcf7ec477284e42545f7b13adf34d",
+    "bubble-gun-spaces.png": "f60b0559a354b2db898d887ddb517d987be03930486a9aba4b2a085b9c476415",
+    "crown-effects-top.png": "5f2caed5435b14d4a2adfc98de14f39d227a50238e2b82eddaddf2523c38175a",
+    "crown-effects.png": "c18a430f4976a947bf4bb68ec5324be97520b8875d9b73b6af28caf85b4a7e68",
+    "drive-bottom.png": "3d5179b2afaf07322b15eeec1abbf29862601fd74958c2625fa62b2364687e84",
+    "drive-frame.png": "a2c69b37b9a6e65d2f73d3c72a6fe170d0d9ea4f88691f71910c147d56502d13",
+    "drive-integrated-face.png": "9b99ccb27b5310b33f171e092adc5a09c310c27d170e26961ec5c3b2f86a3cad",
+    "drive-mount.png": "2a121356610f02fe6f5dcc249c1bd55fbe4464e586c3ebf6a6a3bbe76b8d9548",
+    "drive-service.png": "300870657e14b817d71b79e1613ea10fd4c8f21b8f9d2207f3782ae171904428",
+    "effects-backpack.png": "65304ffe0d4a9766f8835a3cb9dd8f2ea0be4141a8811e7a97432712ccff9dec",
+    "effects-board-mount.png": "e7beef2fd7f4da149f1054dcbd409b5105c667ed231ef35f070528ad35619dea",
+    "effects-board-service.png": "5e45406622ef7ab04ab0d257c5d1092921a0a64ff5c36b456eae2bafea29d19c",
+    "effects-board-wiring.png": "7e376531807a0197eb2a30765b25ba672b273648e0d1cd491d1f74aa7035a68b",
+    "effects-clamp.png": "387ced967dc64bf53a5776ef89ef6ea75b3e17ed5d0b1ff67ba1decd048274a1",
+    "effects-service.png": "95d3a78c3ec9f06448a7d0cdc948ca27f9462c207bf9fc23dbb3a442e32d826d",
+    "effects-tray-bottom.png": "5568018881e38685a77458ab22facbd3cadeaa6d2e12987bda468d3cf44cd3cf",
+    "effects-tray-service.png": "694d055bd7e5ac340ff5b1a44cd4e0bc9663b332047b1580ac5b2fa6a7b62ba8",
+    "effects-tray.png": "deea08c5f235a50b2321d5283658f940b55ec41421c7bc7d692e84d19ee9609c",
+    "front.png": "d78b7c38ff9622a73412d68672637efb1daa550615af6dbe5f550e722cc9a9d9",
+    "l298n-carrier.png": "4d160b1f4c588864914a30c571c0f4be39eb75af1f7d83e9ecb82b53100e4047",
+    "l298n-layout.png": "34a921547776c75c39815128b412a30de8eedc863928e0ddd2d83e2f43adb73f",
+    "l298n-service.png": "544b2245eba057906d290d60bb5ee08e622e2d6ea6fffe5490ce2dfda3ac4b0c",
+    "l298n-side.png": "cf34b1f84726d7d898bf1e48a88b84f5f5d7d41fa695a8ad28616686f2d0afa2",
+    "l298n-spaces.png": "1a3de6400517314fcc8ee497188e128f78bf2e81d086bacc4fb15f594220e5c8",
+    "l298n-top.png": "29e3f9864426403e6e610345bc0cf436831186e6cadfc41272226cb220103260",
+    "layout.png": "2e0e0f8122738536c5dd412eb5110f7d5634c0f05e0043f372e4b333236957a7",
+    "lower-layout.png": "b39a8e5189bfaf61ffe2cba00ade6049ec064f22360e1a5ceea4c8295c1ed6fd",
+    "rear-assembly.png": "1e616de01550c8a4c887df6101ea6a2d8d32407a192d5efdaf2bc5540dfccdee",
+    "rear.png": "19272a87d5b1f450c3cdc46096daa62a65577cfebf6d35b6de7ff382017ffd49",
+    "right.png": "8dec1684585271f5488d8e8ee94f642ada1d9f70204123be892aff60ab282deb",
+    "routing.png": "a50324326b1278781c3edb1f3b40fe5c928a1a9ba4378bb1ed13ca22bd6879f4",
+    "service.png": "6a1f40114efb6698bf95f451de12d59f290a538c81635b72aac79d5a148cb949",
+    "side.png": "8c8b60f2724461fe42f8e834a7c91f4ddf941fdbceb437a09f37ca23869c2603",
+    "top.png": "f8e08a0aa5683924b8d2e5a333544429aa2f0a01cc73772d630af77131d157c8",
+    "ultrasonic-coexistence.png": "0c631dec142739b085e516daa14607832742b19adfcebb4fd3bc6c4d0dd0c43d",
+    "ultrasonic-front.png": "70750337f2c0193a351b41bf15f959d37ac2051158a4273f4a576cec322ca072",
+    "ultrasonic-layout.png": "42407801099fa897dfc4dad006bb0eaadca89c438c4b244d01a5b42884921233",
+    "ultrasonic-service.png": "f03ba3cbc6025d556c0b29a85c979aac3076739d2bbc109db5ba79dd0658335d",
+    "ultrasonic-side.png": "e400e1b259f33ef034c6e4a1a21b25240c8d77e8d39fa15ac0b3b239fffe85ec",
+    "water-gun-clearance.png": "0fb3d41ad8aed715f4d403434625462383aa04703718a873816737709a919beb",
+    "water-gun-component.png": "b7d7206fcca1501a01ede1c38555fdc071362292db6b34ee415688322d00636d",
+    "water-gun-layout.png": "bbd380a2d92c3f0a63bd78dbc939716b1b50f6c6b517dc13828bda352432a4c9",
+    "water-gun-mount.png": "3c2f1d941b3881a9b73070017ed262fe35e562951dce80c094dd7336a7a9ce35",
+    "water-gun-service.png": "b17716744ffc297be2c71f8360ef4bdd7ff88af99b418f3ee218174200c24196",
+    "water-gun-side.png": "f09f675f3f5a3296ab015bdc2e4311fa66abbbe38a2fe6b0de98550b5bf8355d",
+    "water-gun-spaces.png": "117c9d8c7aeffea84e9bc45056b306482ca2361995fde62be2d0d12960ded4b8"
   }
 }

@@ -152,7 +152,11 @@ def add_water_gun(doc, add, render=False):
 def check_water_gun(doc):
     wet=doc.getObject('WaterGunMaximumEnvelope').Shape
     excluded={'WaterGunBody','WaterGunInlet','WaterGunMaximumEnvelope','WaterGunBaseTool1','WaterGunBaseTool2'}
-    obstacles=[o for o in doc.Objects if hasattr(o,'Category') and o.Name not in excluded]
+    # These rods are used on the bench only after extracting the effect tray.
+    # Keep all physical objects and every other in-machine clearance in scope.
+    bench_tools={o.Name for o in doc.Objects if o.Name.startswith('EffectRetainerTool')
+                 and getattr(o,'Category','')=='clearance'}
+    obstacles=[o for o in doc.Objects if hasattr(o,'Category') and o.Name not in excluded|bench_tools]
     # The gun's own flexible hose is included in the wet size input, not an
     # external assembly obstacle. Its actual solid is still checked against
     # the complete bare housing here and every physical part globally.
@@ -181,6 +185,8 @@ def check_water_gun(doc):
     removal_hits=hits(body_sweep,fixed)+hits(inlet_sweep,fixed)+hits(wet_sweep,[o for o in external if o.Name not in removed])
     mount_check=check_mount(doc)
     return {'mount_check':mount_check,
+            'excluded_off_machine_tools':sorted(bench_tools),
+            'off_machine_tool_basis':'Effect retainer tools are checked against the extracted tray in effect_board_mount.check; not available in the assembled chassis.',
             'method':'full 33.2 x 24.6 housing rectangle against mount and assembly; full 38.5 wet rectangle against external assembly; assumed front inlet checked separately',
             'housing_bound':{'overlaps':body_hits,'passed':not body_hits},
             'external_wet_bound':{'excluded_own_hose':'WaterHoseRoute; actual tube checked separately','overlaps':wet_hits,'passed':not wet_hits},

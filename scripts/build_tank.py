@@ -237,7 +237,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.42'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.43'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -671,7 +671,7 @@ def main():
     print('Final readback; drive and bottle checks',flush=True)
     drive_mount_check=check_drive_mount(final,verbose=True)
     effects_check=check_effects_mount(final)
-    report={'status':'preliminary_concept','design_revision':'0.42','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.43','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'drive_mount_check':drive_mount_check,
             'head_lift_check':check_head_lift(final),
             'rear_armor_symmetry_check':check_rear_armor(final),
@@ -717,6 +717,8 @@ def main():
     report['effects_mount_check']['source_sha256']=sha(cad)
     report['effects_mount_check']['saved_and_reopened']=True
     (OUT/'effects-mount-audit.json').write_text(json.dumps(report['effects_mount_check'],ensure_ascii=False,indent=2)+'\n')
+    board_audit={**effects_check['board_mount'],'source_sha256':sha(cad),'saved_and_reopened':True}
+    (OUT/'effect-board-fit-audit.json').write_text(json.dumps(board_audit,ensure_ascii=False,indent=2)+'\n')
     report['top_feed_check']['saved_and_reopened']=True
     (OUT/'top-feed-audit.json').write_text(json.dumps(report['top_feed_check'],ensure_ascii=False,indent=2)+'\n')
     report['rear_armor_symmetry_check']['source_sha256']=sha(cad)
