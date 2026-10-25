@@ -24,6 +24,8 @@ public:
         if (drive_id && !guard.Moving()) StopWeb(now);
         if (!guard.Moving()) web_targets_ &= ~AudioActionGuard::MoveOnly;
         if (!guard.Watering()) web_targets_ &= ~AudioActionGuard::WaterOnly;
+        if (!guard.Bubbling()) web_targets_ &= ~AudioActionGuard::BubblesOnly;
+        if (!guard.Igniting()) web_targets_ &= ~AudioActionGuard::IgnitionOnly;
     }
     void Stop(uint64_t now) {
         guard.Stop(now);
@@ -38,6 +40,8 @@ public:
             guard.CancelPending();
             if (!(web_targets_ & AudioActionGuard::MoveOnly)) guard.StopMove(now);
             if (!(web_targets_ & AudioActionGuard::WaterOnly)) guard.StopWater(now);
+            if (!(web_targets_ & AudioActionGuard::BubblesOnly)) guard.StopBubbles(now);
+            if (!(web_targets_ & AudioActionGuard::IgnitionOnly)) guard.StopIgnition(now);
         }
     }
     void WifiLink(uint64_t now, bool online) {
@@ -64,7 +68,7 @@ public:
         heartbeat_ = now;
         ++window;
         window_issued_ = now;
-        window_valid_ = guard.motion.online && !guard.motion.held && !guard.motion.clock_fault && !guard.spray.clock_fault;
+        window_valid_ = guard.motion.online && !guard.motion.held && !guard.motion.clock_fault && !guard.spray.clock_fault && !guard.bubbles.clock_fault && !guard.ignition.clock_fault;
         return true;
     }
     bool Release(uint64_t now, uint32_t session) {
@@ -77,10 +81,10 @@ public:
         return wifi && voice && !shutdown && !(web_targets_ & target) ? guard.Claim(now, rpc, target) : 0;
     }
     const char* WebAction(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window,
-                          AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction) {
+                          AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction, int bubbles_ms = 0, int ignition_ms = 0) {
         const char* error = Consume(now, session, seq, command_window, WindowMs);
         if (error) return error;
-        return StartWeb(now, target, move_ms, water_ms, direction);
+        return StartWeb(now, target, move_ms, water_ms, direction, bubbles_ms, ignition_ms);
     }
     const char* DriveStart(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window,
                            const char* direction, int water_ms) {
@@ -120,17 +124,21 @@ public:
     }
     const char* MoveSource() const { return !guard.Moving() ? "none" : (web_targets_ & AudioActionGuard::MoveOnly) ? "web" : "voice"; }
     const char* WaterSource() const { return !guard.Watering() ? "none" : (web_targets_ & AudioActionGuard::WaterOnly) ? "web" : "voice"; }
+    const char* BubblesSource() const { return !guard.Bubbling() ? "none" : (web_targets_ & AudioActionGuard::BubblesOnly) ? "web" : "voice"; }
+    const char* IgnitionSource() const { return !guard.Igniting() ? "none" : (web_targets_ & AudioActionGuard::IgnitionOnly) ? "web" : "voice"; }
 private:
     unsigned web_targets_ = 0;
     void StopWeb(uint64_t now) {
         if (web_targets_ & AudioActionGuard::MoveOnly) guard.StopMove(now);
         if (web_targets_ & AudioActionGuard::WaterOnly) guard.StopWater(now);
+        if (web_targets_ & AudioActionGuard::BubblesOnly) guard.StopBubbles(now);
+        if (web_targets_ & AudioActionGuard::IgnitionOnly) guard.StopIgnition(now);
         web_targets_ = 0;
         drive_id = drive_renewal = 0;
         window_valid_ = false;
     }
-    const char* StartWeb(uint64_t now, AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction) {
-        if (const char* error = AudioActionGuard::Validate(target, move_ms, water_ms, direction)) return error;
+    const char* StartWeb(uint64_t now, AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction, int bubbles_ms = 0, int ignition_ms = 0) {
+        if (const char* error = AudioActionGuard::Validate(target, move_ms, water_ms, direction, bubbles_ms, ignition_ms)) return error;
         // Cancel only conflicting queued voice work. Never resume it after web control ends.
         guard.CancelPending(target);
         bool preempted = false;
@@ -140,9 +148,15 @@ private:
         if ((target & AudioActionGuard::WaterOnly) && guard.Watering() && !(web_targets_ & AudioActionGuard::WaterOnly)) {
             guard.StopWater(now); preempted = true;
         }
+        if (target == AudioActionGuard::BubblesOnly && guard.Bubbling() && !(web_targets_ & AudioActionGuard::BubblesOnly)) {
+            guard.StopBubbles(now); preempted = true;
+        }
+        if (target == AudioActionGuard::IgnitionOnly && guard.Igniting() && !(web_targets_ & AudioActionGuard::IgnitionOnly)) {
+            guard.StopIgnition(now); preempted = true;
+        }
         // Keep the configured operation interval; the user must press again after cooling, never queue a restart.
         if (preempted) return "voice_preempted";
-        const char* result = guard.WebRequest(now, target, move_ms, water_ms, direction);
+        const char* result = guard.WebRequest(now, target, move_ms, water_ms, direction, bubbles_ms, ignition_ms);
         if (!std::strcmp(result, "accepted")) web_targets_ |= target;
         return result;
     }
