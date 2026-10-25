@@ -1,0 +1,97 @@
+{
+  "checked_on": "2026-10-25",
+  "scope": "dual-channel software simulation and build only; no dual physical run",
+  "version": "0.3.0-l298n-dual-bench",
+  "target": "esp32s3",
+  "idf_version": "v5.5.1",
+  "gpio": {
+    "ENA": 4,
+    "IN1": 5,
+    "IN2": 6,
+    "ENB": 7,
+    "IN3": 8,
+    "IN4": 9,
+    "BOOT_stop": 0
+  },
+  "pwm": {
+    "frequency_hz": 1000,
+    "resolution_bits": 8,
+    "duty": 154,
+    "pulse_ms": 200,
+    "arm_ms": 3000,
+    "cooldown_ms": 1000
+  },
+  "host_tests": {
+    "command": "python3 firmware/esp32-motor-bench/tests/run_host_tests.py",
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "policy_test": "passed",
+    "adapter_test": "passed",
+    "actual_task_tested": "main/motor_bench.c",
+    "simulated_boundaries": [
+      "six GPIOs",
+      "two LEDC channels",
+      "UART",
+      "clock",
+      "BOOT",
+      "RTOS wait"
+    ],
+    "injected_api_failures": [
+      "timer initialization",
+      "A/B channel initialization",
+      "A/B direction input",
+      "A/B set duty",
+      "A/B update after activation",
+      "A/B stop",
+      "persistent A/B stop failure with both GPIO enables reclaimed"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "log": "build/motor-bench-l298n-host/host-tests-dual.log",
+    "log_sha256": "7c29e5fee732ac79bc4bb7ff29ea42a02046db4b8676c0212aef108fdfc8ec62"
+  },
+  "build": {
+    "status": "passed",
+    "directory": "build/firmware-l298n-dual-bench",
+    "log": "build/motor-bench-l298n-host/idf-build-dual.log",
+    "log_sha256": "e6ec8b997b4d36e033a96bce773e6734f70a96bb3e8edef294a8b95082eb47be",
+    "application": "build/firmware-l298n-dual-bench/cybertrack_motor_bench.bin",
+    "application_size_bytes": 245888,
+    "application_sha256": "aa87121675643bdb9b38b5479994cc8605de57733dff70bb4681f4055a35597c",
+    "partition_table_sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "partition_matches_previous_local_df_md_bench": true
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "b4ff852b506f746b297dbc443c54e2225ecf4f1c8871a759c6827db6c2e50d95",
+    "sdkconfig.defaults": "e26842171e57aa370c6569f8968aba42ea4a4fd8215ad856b9ad08727a8fea86",
+    "main/CMakeLists.txt": "8e5e091d330e9c43bd71e7bfe2a24f9690502e64f49d35d4746ca27e69a8e48f",
+    "main/motor_bench.c": "092ea41bd967b459f7fd2e7e07e4a3b572dae98aad47ee55e946fac07bdfc589",
+    "main/bench_policy.c": "7eb49f6a4aca95a0f2d79f5ba4a60976b6495b46db4c84923fbeaecfeb01e866",
+    "main/bench_policy.h": "3cd240e1c03af3866a3d72cd1a1101c958a2832a9e14b08d52d1e6a869b91658",
+    "tests/policy_test.c": "ac5709eb158a41afffa9e015f0ddddb8ad27681189578d7093ab56f51a9436ce",
+    "tests/adapter_test.c": "e68568a245a81db4412bcaf8df626d5706309ef2c481bf8c5a579767c6a215cb",
+    "tests/idf_stub.h": "974e6132efe9fece5e2873c1168c502db12ec84d64672fa0927ec1c926ba4ebd",
+    "tests/run_host_tests.py": "b39dc9613193e9523d512256c72e97d2f5e5887291ae496317f38d8fb9ced4c0"
+  },
+  "flashed": false,
+  "motor_commands_sent": false,
+  "physical_tests_performed": false,
+  "unverified": [
+    "new B-channel wiring and voltage levels",
+    "A/B isolation on hardware",
+    "dual motor startup and stopping",
+    "physical BOOT stop with either or both motors",
+    "dual supply/current/thermal behavior",
+    "loaded torque and tracks",
+    "reset/power-loss defaults"
+  ],
+  "channel_selection": {
+    "boot": "NONE",
+    "1": "A",
+    "2": "B",
+    "3": "AB",
+    "selection_disarms": true,
+    "new_arm_required_for_every_pulse": true
+  }
+}

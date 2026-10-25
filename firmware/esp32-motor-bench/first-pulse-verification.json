@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-25",
+  "version": "0.2.0-l298n-bench",
+  "configured_pulse_ms": 200,
+  "pwm_hz": 1000,
+  "duty": 102,
+  "resolution_bits": 8,
+  "command_sequence": [
+    "a",
+    "f"
+  ],
+  "automatic_off_ack_seen": true,
+  "command_started_at": "2026-10-25T03:02:28.607Z",
+  "command_finished_at": "2026-10-25T03:02:30.327Z",
+  "user_reported": {
+    "esp32_3v3_v_approx": 3.3,
+    "isolated_driver_12v_v_approx": 12,
+    "isolated_driver_5v_v_approx": 5,
+    "driver_powered_12v_v_approx": 12,
+    "driver_powered_5v_v_approx": 5,
+    "ENA_IN1_IN2_ENB_v_approx": 0,
+    "motor_fixed": true,
+    "shaft_unloaded": true,
+    "motor_moved_briefly_then_stopped": true,
+    "abnormal_sound_or_other_anomaly": false,
+    "driver_12v_disconnected_after_test": true
+  },
+  "private_receipt_sha256": "853b3ed9881e6f99eaebba9a893849b549a408f9a52b9b880e208e2b7e95c4bd",
+  "unverified": [
+    "reverse rotation",
+    "10-second motor run",
+    "physical BOOT stop under motor load",
+    "exact pulse waveform and mechanical stop latency",
+    "current and temperature",
+    "reset or USB loss with driver powered",
+    "B channel and tracks"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "checked_on": "2026-10-25",
+  "scope": "eight-combination software simulation and build only; no combination motor run",
+  "version": "0.3.1-l298n-combo-bench",
+  "target": "esp32s3",
+  "idf_version": "v5.5.1",
+  "gpio": {
+    "ENA": 4,
+    "IN1": 5,
+    "IN2": 6,
+    "ENB": 7,
+    "IN3": 8,
+    "IN4": 9,
+    "BOOT_stop": 0
+  },
+  "pwm": {
+    "frequency_hz": 1000,
+    "resolution_bits": 8,
+    "duty": 154,
+    "pulse_ms": 3000,
+    "arm_ms": 3000,
+    "cooldown_ms": 3000
+  },
+  "host_tests": {
+    "command": "python3 firmware/esp32-motor-bench/tests/run_host_tests.py",
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "policy_test": "passed",
+    "adapter_test": "passed",
+    "actual_task_tested": "main/motor_bench.c",
+    "simulated_boundaries": [
+      "six GPIOs",
+      "two LEDC channels",
+      "UART",
+      "clock",
+      "BOOT",
+      "RTOS wait"
+    ],
+    "injected_api_failures": [
+      "timer initialization",
+      "A/B channel initialization",
+      "A/B direction input",
+      "A/B set duty",
+      "A/B update after activation",
+      "A/B stop",
+      "persistent A/B stop failure with both GPIO enables reclaimed"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "log": "build/motor-bench-l298n-host/host-tests-combo.log",
+    "log_sha256": "5e6005c597e762b5a4387d63ec2508216c6b02707241562917a78ca25ab55da2",
+    "additional_coverage": [
+      "eight combinations and off-channel isolation",
+      "3-second deadline and cooldown",
+      "mixed-direction commands rejected for A/B selection",
+      "late s/BOOT stop",
+      "BOOT event observable while idle"
+    ],
+    "prior_failed_attempt": "build/motor-bench-l298n-host/host-tests-combo-initial-timestamp-error.log; corrected test timestamp accidentally changed from 1401 to 13201 during duration update"
+  },
+  "build": {
+    "status": "passed",
+    "directory": "build/firmware-l298n-combo-bench",
+    "log": "build/motor-bench-l298n-host/idf-build-combo.log",
+    "log_sha256": "3f9d5ce1a7e3c8bb0f736d2f3ae98896f9716b7d0241d8d9c136d4b6bd34909a",
+    "application": "build/firmware-l298n-combo-bench/cybertrack_motor_bench.bin",
+    "application_size_bytes": 245984,
+    "application_sha256": "774551772fa2b924c9bf1e0a4c1a59b08c092cc4d909457f64214fa2cc105c12",
+    "partition_table_sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "partition_matches_previous_local_df_md_bench": true
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "5034fc7d6dfa3f78f768aff65fd6b8682b4e95eae233e55bacd3511a9cb58701",
+    "sdkconfig.defaults": "e26842171e57aa370c6569f8968aba42ea4a4fd8215ad856b9ad08727a8fea86",
+    "main/CMakeLists.txt": "8e5e091d330e9c43bd71e7bfe2a24f9690502e64f49d35d4746ca27e69a8e48f",
+    "main/motor_bench.c": "ae379ea43f41784cc864b1223eae44823049a7375bcf057b4291757d4476f605",
+    "main/bench_policy.c": "2f4252aec4f870242b1c5da8f099381f2bd04b844c5e9acc70f69bbeefcdf02f",
+    "main/bench_policy.h": "b290f7d85427c3f2a213876ccbc3dbccea130c1203e7b63e199691190d05b96e",
+    "tests/policy_test.c": "b8f49138a36be5c64ee6aca026b70b0e43be9991f82b4cc28200d543d9a27c43",
+    "tests/adapter_test.c": "772e52275258bb7506d68335ff40e0144ea66b7bb6329262d9522523bb6283b2",
+    "tests/idf_stub.h": "974e6132efe9fece5e2873c1168c502db12ec84d64672fa0927ec1c926ba4ebd",
+    "tests/run_host_tests.py": "b39dc9613193e9523d512256c72e97d2f5e5887291ae496317f38d8fb9ced4c0"
+  },
+  "flashed": false,
+  "motor_commands_sent": false,
+  "physical_tests_performed": false,
+  "unverified": [
+    "eight physical motor combinations",
+    "A/B physical isolation during motion",
+    "physical BOOT stop and controller sequence abort",
+    "dual supply/current/thermal behavior",
+    "loaded torque and tracks",
+    "reset/power-loss defaults"
+  ],
+  "channel_selection": {
+    "boot": "NONE",
+    "1": "A",
+    "2": "B",
+    "3": "AB",
+    "selection_disarms": true,
+    "new_arm_required_for_every_pulse": true
+  },
+  "direction_commands": {
+    "f": "selected forward",
+    "r": "selected reverse",
+    "x": "AB only: A forward, B reverse",
+    "y": "AB only: A reverse, B forward"
+  }
+}

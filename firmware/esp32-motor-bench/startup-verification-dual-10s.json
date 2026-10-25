@@ -1,0 +1,56 @@
+{
+  "checked_at": "2026-10-25T11:44:16.488385+08:00",
+  "version": "0.3.2-l298n-dual-10s",
+  "scope": "application flash and driver-disconnected startup/stop for dual 10-second firmware; no motor motion",
+  "user_reported_setup": {
+    "driver_12v_disconnected": true,
+    "com_usb_connected": true,
+    "two_matching_12v_100rpm_motors_fixed_and_unloaded": true,
+    "old_ENB_ground_wire_removed": true,
+    "ENB": "GPIO7",
+    "IN3": "GPIO8",
+    "IN4": "GPIO9",
+    "motor_B": "OUT3/OUT4"
+  },
+  "flash": {
+    "tool": "esptool 4.12.dev2",
+    "baud": 115200,
+    "no_stub": true,
+    "offset": "0x10000",
+    "application_bytes": 245968,
+    "application_sha256": "a811c4f1fb1b2b9d038808e3b4ee1bf0d2acdf282c1dafa1f3bc8de0bf0a79fb",
+    "hash_verified": true,
+    "live_partition_matches_build": true,
+    "application_sector_backup_bytes": 249856,
+    "bootloader_written": false,
+    "partition_table_written": false,
+    "efuse_written": false
+  },
+  "observed": {
+    "startup": "BENCH READY 0.3.2-l298n-dual-10s A=4/5/6 B=7/8/9 PWM=1000Hz/60% pulse=10000ms",
+    "uart_commands_sent": [
+      "s"
+    ],
+    "stop_reply": "BENCH DISARMED outputs=OFF target=NONE",
+    "post_stop_observation_seconds": 5,
+    "arm_or_motion_commands_sent": false,
+    "serial_port_closed_after_check": false
+  },
+  "private_evidence_directory": "build/l298n-bench-private/20261025-dual-10s-startup",
+  "evidence_sha256": {
+    "partition-before.bin": "b9118aa3840f7c042a4dea8dae339d07a6e69f3716102174cc87b18046276295",
+    "application-sectors-before.bin": "8e8f14a5a024ccdfd42f35a0d1ecbb460cb3c4bced383396586c50145c5cb32e",
+    "read-partition.log": "391cee95ca841ed69c646a06b874091141e8ac488340cfb4798fe1cd17e1e2c2",
+    "backup.log": "cddb41219b99e622ce4e605a5a13f816291e99e975dbfa32e3dd22ab8d03b0fa",
+    "flash.log": "e4339751aadde91a92d21ba6e6536f80c1a22623f753d1dec79443316a902134",
+    "serial.log": "d9343f34054fe65b3ebe825d6ef3fba3e5e86be3ee6a936c68bb46609aef73fb",
+    "result.json": "ce4b9fcaf4391e1d845dc6abd32604145dc07b78b3b229ef24f6d210032aba7e"
+  },
+  "new_B_channel_voltage_measured": false,
+  "A_B_isolation_tested_on_hardware": false,
+  "dual_motor_test_performed": false,
+  "full_default_off_or_stop_acceptance": false,
+  "prior_version_user_reported_six_pin_checks": "dual-wiring-verification.json; not a new measurement after this flash",
+  "eight_combination_motion_test_performed": false,
+  "dual_10s_motor_test_performed": false
+}

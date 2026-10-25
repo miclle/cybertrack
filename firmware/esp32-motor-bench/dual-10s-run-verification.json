@@ -1,0 +1,83 @@
+{
+  "checked_at": "2026-10-25T11:54:16.813838+08:00",
+  "version": "0.3.2-l298n-dual-10s",
+  "scope": "one dual-motor forward 60 percent 10-second no-load run; UART receipts plus user-reported operation, bus voltage and qualitative heating observations",
+  "user_reported_12v_on_meter_ready": true,
+  "pwm": {
+    "frequency_hz": 1000,
+    "duty": 154,
+    "resolution_bits": 8,
+    "approx_percent": 60,
+    "pulse_ms": 10000
+  },
+  "target": "AB",
+  "direction": "forward electrical direction",
+  "commands": [
+    {
+      "command": "s",
+      "requested_at": 1792900419.32085
+    },
+    {
+      "command": "3",
+      "requested_at": 1792900419.9485881
+    },
+    {
+      "command": "a",
+      "requested_at": 1792900420.573759
+    },
+    {
+      "command": "f",
+      "requested_at": 1792900421.20114
+    },
+    {
+      "command": "s",
+      "requested_at": 1792900431.781549
+    }
+  ],
+  "observed": {
+    "automatic_stop_reply": "BENCH DISARMED outputs=OFF target=AB",
+    "host_command_to_stop_log_seconds": 10.085862159729004,
+    "final_stop_reply": "BENCH DISARMED outputs=OFF target=AB",
+    "boot_or_error_or_reset_seen": false,
+    "motion_commands_sent": 1,
+    "retries": 0
+  },
+  "timing_note": "Host command request to log observer timestamp; not measured physical run duration or exact stop latency.",
+  "user_feedback": {
+    "both_motors_ran_normally": true,
+    "both_motors_stopped_normally": true,
+    "startup_bus_voltage_v": 12,
+    "running_bus_voltage_v": 12,
+    "near_stop_bus_voltage_v": 12,
+    "motor_heating": "no obvious heating reported; no temperature measurement",
+    "driver_heating": "no obvious heating reported; no temperature measurement",
+    "abnormal_noise_or_reset": false,
+    "driver_12v_disconnected_after_test": true,
+    "usb_remains_connected": true,
+    "voltage_values_approximate": true,
+    "measurement": "user multimeter reading at L298N +12V relative to GND",
+    "reported_on": "2026-10-25",
+    "verbatim": "12 V 已断开，USB 保持连接。启动、运行中和临近停止时电压都基本保持在 12 V，两台电机正常转动并停下，电机和 L298N 没有明显发热，也没有异响或其他异常。"
+  },
+  "physical_acceptance": true,
+  "serial_connection_kept_open": true,
+  "private_evidence_directory": "build/l298n-bench-private/20261025-dual-10s-run",
+  "evidence_sha256": {
+    "start.json": "cc04a0a5c9c1fc691fd87aba75aac55450e03fd4f8477382c0fba8218cf62421",
+    "timed-observation.jsonl": "7387d161c52f131bd8cd345540bfb99d03b6d787311e5d0e9faf0bd0ce2b2ffb",
+    "commands.jsonl": "1d2b4290440530c27c9be831b82d13817ba6bfcfa34dc9d05bed4ee94b046fd0",
+    "monitor-after-check.log": "bbc9780a76df2512d5387e39115246dcc0b99f7237efb3d22d0cfe152b5eb385"
+  },
+  "acceptance_scope": "This one 60 percent, 10-second dual-motor no-load functional run only.",
+  "full_physical_acceptance": false,
+  "quantitative_temperature_measurement": false,
+  "current_measurement": false,
+  "unverified": [
+    "transient bus voltage waveform",
+    "motor-terminal voltage and current",
+    "quantitative temperature rise and thermal steady state",
+    "repeated or longer operation",
+    "loaded torque, tracks and loaded stopping",
+    "reset, power loss and undervoltage defaults"
+  ]
+}

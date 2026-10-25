@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-25",
+  "version": "0.3.0-l298n-dual-bench",
+  "source": "user voltage readings and observation; not waveform measurements",
+  "driver_unpowered": {
+    "recorded_at": "2026-10-25T11:24:41.675254+08:00",
+    "source": "user multimeter report",
+    "driver_12v_disconnected": true,
+    "usb_connected": true,
+    "voltage_to_driver_ground": {
+      "ENA": "near 0 V",
+      "IN1": "near 0 V",
+      "IN2": "near 0 V",
+      "ENB": "near 0 V",
+      "IN3": "near 0 V",
+      "IN4": "near 0 V"
+    },
+    "serial_connection_live": true,
+    "last_reply": "BENCH DISARMED outputs=OFF target=NONE",
+    "new_uart_commands_sent": [],
+    "driver_powered_check_pending": true
+  },
+  "driver_powered": {
+    "recorded_at": "2026-10-25T11:26:13.107859+08:00",
+    "source": "user multimeter and physical observation",
+    "during_driver_power_on": {
+      "driver_12v_v_approx": 12,
+      "driver_5v_v_approx": 5,
+      "control_voltage_to_ground": {
+        "ENA": "near 0 V",
+        "IN1": "near 0 V",
+        "IN2": "near 0 V",
+        "ENB": "near 0 V",
+        "IN3": "near 0 V",
+        "IN4": "near 0 V"
+      },
+      "both_motors_stationary": true,
+      "abnormalities_observed": false
+    },
+    "driver_12v_disconnected_after_check": true,
+    "new_uart_commands_sent": [],
+    "A_B_isolation_and_dual_motion_pending": true
+  },
+  "motor_motion_tested": false
+}

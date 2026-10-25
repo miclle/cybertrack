@@ -1,0 +1,82 @@
+{
+  "checked_on": "2026-10-25",
+  "scope": "L298N single-motor bench software; host simulation and ESP-IDF build only",
+  "version": "0.2.1-l298n-bench",
+  "target": "esp32s3",
+  "idf_version": "v5.5.1",
+  "gpio": {
+    "ENA": 4,
+    "IN1": 5,
+    "IN2": 6,
+    "BOOT_stop": 0
+  },
+  "pwm": {
+    "frequency_hz": 1000,
+    "resolution_bits": 8,
+    "duty": 102,
+    "pulse_ms": 10000,
+    "arm_ms": 3000,
+    "cooldown_ms": 1000
+  },
+  "host_tests": {
+    "command": "python3 firmware/esp32-motor-bench/tests/run_host_tests.py",
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "policy_test": "passed",
+    "adapter_test": "passed",
+    "actual_task_tested": "main/motor_bench.c",
+    "simulated_boundaries": [
+      "GPIO",
+      "LEDC",
+      "UART",
+      "clock",
+      "BOOT",
+      "RTOS wait",
+      "late s and BOOT stop at 9000 ms into a 10000 ms pulse"
+    ],
+    "injected_api_failures": [
+      "LEDC timer initialization",
+      "IN2 set high",
+      "LEDC set duty",
+      "LEDC update duty after activation",
+      "LEDC stop"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)"
+  },
+  "build": {
+    "status": "passed",
+    "directory": "build/firmware-l298n-bench-10s",
+    "log": "build/motor-bench-l298n-host/idf-build-10s.log",
+    "log_sha256": "c10deb970eb0dc8604d46eb38accb4130a44e8d4bae563e8a89f05aa3e9c8445",
+    "application": "build/firmware-l298n-bench-10s/cybertrack_motor_bench.bin",
+    "application_size_bytes": 245360,
+    "application_sha256": "4a1dd3724ed57c7a3dbc8352cdbc4568d350f37ffa5c552439d3795eb916f222",
+    "partition_table_sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "partition_matches_previous_local_df_md_bench": true
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "442c961dbf2f974856c2ee5b2f244fca78442cc4201ddf283eddcd7efd3149fd",
+    "sdkconfig.defaults": "e26842171e57aa370c6569f8968aba42ea4a4fd8215ad856b9ad08727a8fea86",
+    "main/CMakeLists.txt": "8e5e091d330e9c43bd71e7bfe2a24f9690502e64f49d35d4746ca27e69a8e48f",
+    "main/motor_bench.c": "50acdbc7e562be948a883c789225651e5e018bfd37a02b42aa2d3b72bb0a8d7d",
+    "main/bench_policy.c": "c2dc9707ff02a772da90239f8222a443cab627aa2390d029f45153becf034132",
+    "main/bench_policy.h": "9134eb8d0e31636bef6f27e868f4628150610974cd8ae847506f8719b8bdb86e",
+    "tests/policy_test.c": "028cd1dd8efcfa34bb07e5f96f5f1c338d00e249abeeb58bf631a5183ec6a298",
+    "tests/adapter_test.c": "873f4b333feb516c3de869bcd4fa85b4d57244428a2e4b313114309c48f4cbae",
+    "tests/idf_stub.h": "f4d185f8fae26a54a2555e9db881247cd1dab8656afb43ad72874b0abb827ce3",
+    "tests/run_host_tests.py": "b39dc9613193e9523d512256c72e97d2f5e5887291ae496317f38d8fb9ced4c0"
+  },
+  "flashed": false,
+  "motor_commands_sent": false,
+  "physical_tests_performed": false,
+  "unverified": [
+    "10-second motor run",
+    "reverse rotation",
+    "physical BOOT stop under motor load",
+    "reset/download/power-loss defaults",
+    "PWM waveform and stopping latency",
+    "current and thermal behavior"
+  ]
+}

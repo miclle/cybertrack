@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-25T11:06:14.571710+08:00",
+  "version": "0.2.1-l298n-bench",
+  "scope": "application flash and driver-disconnected startup/stop only; no 10-second motion",
+  "user_reported_setup": {
+    "driver_12v_disconnected": true,
+    "esp32_com_usb_connected": true,
+    "ENB": "GND",
+    "IN3": "unconnected",
+    "IN4": "unconnected",
+    "motor_connected": true,
+    "motor_fixed": true,
+    "shaft_unloaded": true
+  },
+  "flash": {
+    "tool": "esptool 4.12.dev2",
+    "baud": 115200,
+    "no_stub": true,
+    "offset": "0x10000",
+    "application_bytes": 245360,
+    "application_sha256": "4a1dd3724ed57c7a3dbc8352cdbc4568d350f37ffa5c552439d3795eb916f222",
+    "hash_verified": true,
+    "live_partition_matches_build": true,
+    "application_sector_backup_bytes": 245760,
+    "bootloader_written": false,
+    "partition_table_written": false,
+    "efuse_written": false
+  },
+  "observed": {
+    "startup": "BENCH READY 0.2.1-l298n-bench GPIO4=ENA GPIO5=IN1 GPIO6=IN2 PWM=1000Hz/40% pulse=10000ms",
+    "uart_commands_sent": [
+      "s"
+    ],
+    "stop_reply": "BENCH DISARMED outputs=OFF",
+    "post_stop_observation_seconds": 5,
+    "arm_or_motion_commands_sent": false,
+    "serial_port_closed_after_check": false
+  },
+  "private_evidence_directory": "build/l298n-bench-private/20261025-10s-startup",
+  "evidence_sha256": {
+    "partition-before.bin": "b9118aa3840f7c042a4dea8dae339d07a6e69f3716102174cc87b18046276295",
+    "application-sectors-before.bin": "30006dd97e8823d3bdf3a87804f307223b37809fdd6683630391fb8f90eecc40",
+    "read-partition.log": "1a7a62b33a24e4c033253c4671e16104cf6306dceac978c401babf053251c5b2",
+    "backup.log": "e1871833319cc5b8ec6104d5bc49b6f0ccb012b8f8f7cd746e339c7fa92d2104",
+    "flash.log": "aa5efc166974d0bcd38e1d533dc93b30ab0e351709f25c1867c2ec9c3e141f74",
+    "serial.log": "77f89453c90ece155f0da5748dd681c562f8db73c70905e9b167a6e91ed693a5",
+    "result.json": "e9f63b54f11598f964733af8d5c0806012fd3aa38b3a62ef326070630e03a995"
+  },
+  "gpio_voltage_measured": false,
+  "motor_test_performed": false,
+  "driver_power_test_performed": false,
+  "full_default_off_or_stop_acceptance": false
+}

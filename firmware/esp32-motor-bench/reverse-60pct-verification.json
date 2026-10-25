@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-25",
+  "version": "0.2.2-l298n-bench",
+  "command_started_at": "2026-10-25T03:14:43.127Z",
+  "command_finished_at": "2026-10-25T03:14:54.848Z",
+  "commands": [
+    "a",
+    "r"
+  ],
+  "configured_pulse_ms": 10000,
+  "pwm_hz": 1000,
+  "duty": 154,
+  "resolution_bits": 8,
+  "off_ack_seen": true,
+  "user_reported": {
+    "source": "user report",
+    "driver_12v_disconnected_after_test": true,
+    "startup_driver_voltage_v_approx": 12,
+    "running_driver_voltage_v_approx": 12,
+    "rotation_faster_and_smoother_than_40_percent": true,
+    "stopped_normally": true,
+    "abnormal_sound_observed": false,
+    "abnormal_heating_observed": false,
+    "restart_observed": false
+  },
+  "private_receipt": "build/l298n-bench-private/20261025-60pct-startup/reverse-60pct-receipt.json",
+  "private_receipt_sha256": "4d37ed6603dae69dd3a20fa688681795482ef22411e7ae995f805f6e503be88e",
+  "unverified": [
+    "fast supply transients",
+    "current and measured temperature rise",
+    "output torque or loaded performance",
+    "physical BOOT stop under motor load",
+    "60 percent forward run",
+    "B channel and dual-motor operation",
+    "reset or power-loss defaults"
+  ]
+}

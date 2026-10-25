@@ -1,0 +1,50 @@
+{
+  "checked_at": "2026-10-25T10:40:53.214943+08:00",
+  "version": "0.2.0-l298n-bench",
+  "scope": "application flash and unpowered-driver boot/stop acknowledgement only",
+  "user_reported_setup": {
+    "driver_12v_disconnected": true,
+    "esp32_com_usb_connected": true,
+    "ENB": "GND",
+    "IN3": "unconnected",
+    "IN4": "unconnected"
+  },
+  "flash": {
+    "tool": "esptool 4.12.dev2",
+    "baud": 115200,
+    "no_stub": true,
+    "offset": "0x10000",
+    "application_bytes": 245360,
+    "application_sha256": "b3ae50ea8183dd1c3d8e75915466b442c4f828252f0574609cadca242f36c9ed",
+    "hash_verified": true,
+    "live_partition_matches_build": true,
+    "application_sector_backup_bytes": 245760,
+    "bootloader_written": false,
+    "partition_table_written": false,
+    "efuse_written": false
+  },
+  "observed": {
+    "startup": "BENCH READY 0.2.0-l298n-bench GPIO4=ENA GPIO5=IN1 GPIO6=IN2 PWM=1000Hz/40% pulse=200ms",
+    "uart_commands_sent": [
+      "s"
+    ],
+    "stop_reply": "BENCH DISARMED outputs=OFF",
+    "post_stop_observation_seconds": 5,
+    "arm_or_motion_commands_sent": false,
+    "serial_port_closed_after_check": true
+  },
+  "private_evidence_directory": "build/l298n-bench-private/20261025-startup",
+  "evidence_sha256": {
+    "partition-before.bin": "b9118aa3840f7c042a4dea8dae339d07a6e69f3716102174cc87b18046276295",
+    "application-sectors-before.bin": "196c9c0844b51711ba1a0f6b6bb6067a2053878197e0ea4a059086df7648eead",
+    "read-partition.log": "60d9c8cdfe3588873fae700d065e3a685cce1ebf06a9ba2273d14dbf84623204",
+    "backup.log": "6d06175ec85258b0a237bf20bc93e16dfd515b58d0e1e76c14c909825cdd0109",
+    "flash.log": "753733133d8297f5bf8b22fce85b85e5984dc02446b49cee72857375ca57a9fd",
+    "serial.log": "b91209a576ca179caf1083dd56f7ae8cde8ab96fe34344b8df686a3f02bb9561",
+    "result.json": "6c0ee3423d6bead78955007ba0a6199782730d57516ecd67db63c6eaf4958984"
+  },
+  "gpio_voltage_measured": false,
+  "motor_test_performed": false,
+  "driver_power_test_performed": false,
+  "full_default_off_or_stop_acceptance": false
+}

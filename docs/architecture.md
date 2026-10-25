@@ -13,7 +13,7 @@ flowchart TD
   MCU --> GATE[本地命令校验与限时控制]
   STOP[本地物理停止] --> CUT[执行器供能切断]
   STOP --> GATE
-  GATE --> DRIVE[DF-MD V1.3]
+  GATE --> DRIVE[何健弓 L298N 电机驱动板]
   DRIVE --> L[左侧 37R-520 与履带]
   DRIVE --> R[右侧 37R-520 与履带]
   GATE --> WATER[前部自动脉冲水枪]
