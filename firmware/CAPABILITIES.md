@@ -447,3 +447,11 @@ ct6 软件验证及部署边界见[集成记录](../docs/breadboard-integration.
 ## ct14 持续喷水／泡泡
 
 新增网页 `water_start/renew/stop` 与 `bubbles_start/renew/stop`，每路独立 600 ms 租期、一次一回执续租，松开本路停止，可与行走长按及定时点火并行。页面每路 1／3／5／10／30 秒和按住持续共六个按钮。泡泡 MCP／HTTP 定时范围扩大为 1–30000 ms；点火上限 5000 ms、间隔 3000 ms 不变，无点火持续接口。新能力与状态字段见[接口说明](../docs/lan-control.md#ct14-喷水泡泡六按钮与长按)。
+
+### ct17 网页狂暴模式
+
+`ControlSessions::FrenzyStart` 接收一次有序窗口请求，`AudioActionGuard::Frenzy` 检查四路后原子启动有界组合；总时长 1–30000 ms，网页预设 5／10／30 秒，左转／喷水／泡泡持续，点火脉冲最多 1000 ms、关闭后等长间隔。模式状态和停止由原会话及故障路径管理；不新增 MCP 启动工具。普通点火也改为等实际软件 ON 时长间隔；原固定 3000 ms 为历史。协议与证据见[局域网控制](../docs/lan-control.md#ct17-狂暴模式)。
+
+### ct18 语音狂暴模式
+
+新增 MCP `self.tank.frenzy`：仅 `duration_ms` 整数 1–30000，描述规定未指定时长为 5000。`AudioActionGuard::VoiceFrenzy` 消费绑定模式的内部票据；`ControlSessions::VoiceFrenzy` 建立语音来源和固定截止，复用与网页相同的脉冲调度。回执新增 `frenzy_source`、`frenzy_last_duration_ms`。状态和停止工具覆盖模式，普通动作不隐式升级为狂暴模式。

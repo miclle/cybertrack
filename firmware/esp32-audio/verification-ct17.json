@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-25",
+  "version": "2.0.3-ct17",
+  "scope": "Bounded web frenzy mode and equal elapsed ON-time ignition cooldown",
+  "application_bytes": 2605712,
+  "application_sha256": "e50e762e7dc814525e39be48ef0e943404f0511c99a6200c4fef9dfaee6e3b69",
+  "sources": {
+    "web/index.html": "b4f4376a987537d9695874725a214aa9e4aec5f71921a8b93c0a2c3c288b7017",
+    "apply_overlay.py": "908c2fe23be845ee3a1f86bc2dafe969ae2ada3a9699af3bb8022c7a07258533",
+    "action_guard.h": "0ce182e3f59caab9999829624ea02cfa79da5b83d108aff70b8b4370bace57a2",
+    "control_sessions.h": "aaf77260df9a18d9a620e09c639dff6b686a0b20298b89ef2290f6f3233858a5",
+    "cybertrack_tools.cc": "fd3505ad1e039dc03e3bb274b014e890df918a52bd76df7401bfa850c0af4817",
+    "web_request.h": "5f6cea50e8976c4599aecd763fbcac831492bf436a0d465b92f9f96b6502fed3",
+    "role-prompt.txt": "d2c078f1f49b8fbad41bb27de3b529221cefde9eac220ccb2d45412eed25f19c"
+  },
+  "checks": {
+    "host": "passed ASan/UBSan: 1/5000/10000/30000ms, pulse phases, no extension, atomic admission, stop/BOOT/link/release/shutdown/output fault/clock rollback/lease expiry, source reservation, delayed OFF and early-stop cooldown",
+    "web_script": "passed existing suite and frenzy 5/10/30 payloads, remaining time, capability gating and blur release",
+    "mcp_http": "passed generated MCP, actual JSON parser and HTTP handler suite",
+    "idf_build": "passed ESP-IDF v5.5.1",
+    "mobile_layout": [
+      {
+        "height": 800,
+        "minButton": 48,
+        "scrollHeight": 800,
+        "scrollWidth": 412,
+        "stopBottom": 742,
+        "width": 412
+      },
+      {
+        "height": 740,
+        "minButton": 44,
+        "scrollHeight": 740,
+        "scrollWidth": 412,
+        "stopBottom": 658,
+        "width": 412
+      },
+      {
+        "height": 760,
+        "minButton": 44,
+        "scrollHeight": 760,
+        "scrollWidth": 393,
+        "stopBottom": 658,
+        "width": 393
+      },
+      {
+        "height": 640,
+        "minButton": 44,
+        "scrollHeight": 640,
+        "scrollWidth": 360,
+        "stopBottom": 608,
+        "width": 360
+      },
+      {
+        "height": 640,
+        "minButton": 44,
+        "scrollHeight": 640,
+        "scrollWidth": 320,
+        "stopBottom": 608,
+        "width": 320
+      }
+    ]
+  },
+  "limitations": [
+    "Host tests and viewport emulation are not physical actuation or phone acceptance.",
+    "No new loaded/powered ignition, thermal, EMC or physical cutoff validation."
+  ]
+}

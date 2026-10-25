@@ -8,6 +8,8 @@
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px system-ui,-apple-system,sans-serif}main{max-width:440px;margin:auto;padding:24px 20px calc(24px + env(safe-area-inset-bottom))}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}h1{font-size:22px;letter-spacing:-.8px;margin:0}.badge{font-size:12px;color:#777}.badge.on{color:#3b641d}.badge.on:before{content:"●";margin-right:6px;font-size:9px}.status{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--line);padding:16px 0;gap:16px}.status article:nth-child(even){border-left:1px solid var(--line);padding-left:16px}.status strong{font-size:17px;display:block;margin-bottom:5px}.status small{color:#686e65;font-size:12px}.status span{margin-right:6px}.hint{text-align:center;color:#777;font-size:12px;margin:22px 0 12px} #hold-time{font-variant-numeric:tabular-nums}#hold-time.timing{color:var(--ink);font-weight:650}.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:340px;margin:auto}button,select{font:inherit;border:1px solid var(--line);border-radius:13px;color:var(--ink);background:#fff}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:48px}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #789324;outline-offset:3px}button:disabled{opacity:.35;cursor:default}.pad button{height:76px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;font-size:14px}.pad button b{display:block;font-size:24px;font-weight:400;line-height:26px;margin-bottom:3px}.pad button.held{background:var(--accent);border-color:#a8c33f}.forward{grid-column:2}.left{grid-column:1;grid-row:2}.backward{grid-column:2;grid-row:2}.right{grid-column:3;grid-row:2}.stop{margin-top:12px;width:100%;background:#b63831;color:white;border:0;font-weight:650;font-size:18px;min-height:58px}#message{min-height:34px;line-height:1.5;font-size:12px;margin:12px 0 0;color:#686e65;text-align:center}#message.error{color:#a9322b}
 .effect-controls{margin:24px 0}.effect-controls h2{font-size:15px;margin:0 0 10px}.effect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.effect-grid button{min-height:64px;background:#edf1e5;font-variant-numeric:tabular-nums}.effect-grid .effect-hold{background:transparent;border-color:#a8b49b;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px}.effect-hold strong{font-size:14px}.effect-hold span{font-size:10px;color:#686e65;white-space:nowrap}.effect-grid .effect-hold.held{background:var(--accent);border-color:#a8c33f}.effect-hold.held span{color:var(--ink)}
 
+.frenzy-controls h2{display:flex;justify-content:space-between;align-items:center}.frenzy-controls h2 span{font-size:11px;font-weight:400;color:#686e65}.frenzy-controls button{background:#f3e6d3;border-color:#dbbe94}
+
 /* Fit portrait phone browser viewports without clipping controls or disabling zoom. */
 @media (max-width:600px) {
   main{display:flex;flex-direction:column;gap:8px;padding:12px 14px max(10px,env(safe-area-inset-bottom));width:100%}
@@ -39,6 +41,12 @@
   .pad button{height:44px;min-height:44px}
   .effect-grid button{min-height:44px}
   .effect-controls h2{margin-bottom:4px}
+}
+@media (max-width:600px) and (max-height:700px) {
+  .pad{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .pad button{grid-column:auto;grid-row:auto;font-size:12px;padding:2px}
+  .pad button b{font-size:19px;margin-right:4px}
+  #message{min-height:14px}
 }
 </style>
 </head>
@@ -76,6 +84,11 @@
 <button id="ignition-3" data-effect="ignition" data-duration="3000" aria-label="点火3秒" disabled>3 秒</button>
 <button id="ignition-5" data-effect="ignition" data-duration="5000" aria-label="点火5秒" disabled>5 秒</button>
 </div></section>
+<section class="effect-controls frenzy-controls" aria-label="狂暴模式控制"><h2>狂暴模式 <span id="frenzy-time">最长 30 秒</span></h2><div class="effect-grid">
+<button id="frenzy-5" data-effect="frenzy" data-duration="5000" aria-label="狂暴模式5秒" disabled>5 秒</button>
+<button id="frenzy-10" data-effect="frenzy" data-duration="10000" aria-label="狂暴模式10秒" disabled>10 秒</button>
+<button id="frenzy-30" data-effect="frenzy" data-duration="30000" aria-label="狂暴模式30秒" disabled>30 秒</button>
+</div></section>
 <button id="stop" class="stop" disabled>全部停止</button>
 <p id="message" role="status" aria-live="polite"></p>
 </main><script>
@@ -96,6 +109,7 @@
         snapshot = null,
         pending = false,
         effectPending = false,
+        followingActivity = false,
         polling = false,
         timer,
         holds = { move: null, water: null, bubbles: null },
@@ -115,9 +129,19 @@
         hold_cancelled: "长按已结束，请松开后重新按住。",
         drive_cancelled: "行走续租已取消，请松开后重新按住。",
       };
-      function message(text, error = false) {
+      function message(text, error = false, followActivity = false) {
+        followingActivity = followActivity;
         $("message").textContent = text;
         $("message").className = error ? "error" : "";
+      }
+      function activityMessage(s) {
+        if (s.state === "FAULT") { message("设备故障，动作已停止。", true); return; }
+        if (s.boot_held) { message("BOOT 已按下，动作已停止。"); return; }
+        const active = s.frenzy_remaining_ms > 0 ? ["狂暴模式"] :
+          [["move", directions[s.move_direction] || "行走"], ["water", "喷水"],
+           ["bubbles", "吹泡泡"], ["ignition", "点火"]]
+            .filter(([kind]) => s[kind + "_remaining_ms"] > 0).map(([, label]) => label);
+        message(active.length ? "正在" + active.join("、") + "。" : "动作已结束。", false, active.length > 0);
       }
       function controls() {
         const ready =
@@ -126,7 +150,7 @@
           !pending &&
           !document.hidden &&
           !snapshot.boot_held &&
-          snapshot.state !== "FAULT";
+          snapshot.state !== "FAULT" && !snapshot.frenzy_remaining_ms;
         const move =
           ready && (!snapshot?.move_remaining_ms || snapshot?.move_source === "voice") && !snapshot?.move_cooldown_ms;
         document.querySelectorAll("[data-direction]").forEach((b) => {
@@ -151,6 +175,10 @@
             b.setAttribute("aria-pressed", String(!!h));
           }
         }
+        const frenzyReady = ready && snapshot?.capabilities?.frenzy === true && !effectPending &&
+          !Object.values(holds).some(Boolean) && ["move", "water", "bubbles", "ignition"].every(kind =>
+            !snapshot?.[kind + "_remaining_ms"] && !snapshot?.[kind + "_cooldown_ms"]);
+        document.querySelectorAll('[data-effect="frenzy"]').forEach(b => { b.disabled = !frenzyReady; });
         $("stop").disabled = !token;
       }
       function render(s) {
@@ -158,6 +186,8 @@
         latest = s.request_sequence;
         snapshot = s;
         windowId = s.window;
+        $("frenzy-time").textContent = s.frenzy_remaining_ms > 0
+          ? "剩余 " + (s.frenzy_remaining_ms / 1000).toFixed(1) + " 秒" : "最长 30 秒";
         for (const kind of ["move", "water", "bubbles", "ignition"]) {
           const active = s[kind + "_remaining_ms"] > 0,
             cool = s[kind + "_cooldown_ms"];
@@ -183,6 +213,7 @@
           : "水枪";
         $("bubbles-label").textContent = s.logical_outputs.bubbles ? "吹泡泡中" : "泡泡枪";
         $("ignition-label").textContent = s.logical_outputs.ignition ? "点火中" : "点火线圈";
+        if (followingActivity) activityMessage(s);
         controls();
       }
       async function request(path, body = {}, auth = token, timeoutMs = 1100) {
@@ -222,6 +253,7 @@
       }
       function disconnect(text) {
         clearAllHolds();
+        $("frenzy-time").textContent = "最长 30 秒";
         const old = token;
         token = "";
         epoch++;
@@ -324,9 +356,10 @@
         return next;
       }
       async function action(kind = "water", duration = 1000) {
-        if (!["water", "bubbles", "ignition"].includes(kind)) return;
-        const label = { water: "喷水", bubbles: "吹泡泡", ignition: "点火" }[kind];
-        if (!token || pending || effectPending || holds[kind] || !snapshot) return;
+        if (!["water", "bubbles", "ignition", "frenzy"].includes(kind)) return;
+        const label = { water: "喷水", bubbles: "吹泡泡", ignition: "点火", frenzy: "狂暴模式" }[kind];
+        if (!token || pending || effectPending || holds[kind] || !snapshot || snapshot.frenzy_remaining_ms) return;
+        if (kind === "frenzy" && (snapshot.capabilities?.frenzy !== true || Object.values(holds).some(Boolean))) return;
         const e = epoch;
         effectPending = true;
         controls();
@@ -344,7 +377,8 @@
           });
           if (e !== epoch) return;
           render(s);
-          message(s.result === "accepted" ? "正在" + label + "。" : reasons[s.result] || label + "未接受。", s.result !== "accepted");
+          if (s.result === "accepted") activityMessage(snapshot);
+          else message(reasons[s.result] || label + "未接受。", true);
           });
         } catch (err) {
           if (e === epoch) disconnect("操作未确认，网页动作已请求停止。");
@@ -587,7 +621,7 @@
         else connect();
       });
       window.addEventListener("blur", () => {
-        if (Object.values(holds).some(Boolean)) disconnect("页面失去焦点，已请求停止并释放。");
+        if (Object.values(holds).some(Boolean) || snapshot?.frenzy_remaining_ms || effectPending) disconnect("页面失去焦点，已请求停止并释放。");
       });
       window.addEventListener("pagehide", () => disconnect("页面已关闭。"));
       window.addEventListener("offline", () => {

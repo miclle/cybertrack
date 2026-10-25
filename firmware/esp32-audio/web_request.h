@@ -8,6 +8,7 @@ struct WebCommand {
     AudioActionGuard::Target target = AudioActionGuard::Both;
     uint32_t sequence = 0, window = 0;
     uint32_t hold_id = 0, renewal = 0;
+    int frenzy_ms = 0;
     int move_ms = 0, water_ms = 0, bubbles_ms = 0, ignition_ms = 0;
     const char* operation = nullptr;
     const char* direction = nullptr;
@@ -54,6 +55,15 @@ inline bool ParseWebCommand(const cJSON* root, WebCommand& cmd) {
         return true;
     }
     if (!WebInteger(seq, 1, UINT32_MAX) || !WebInteger(window, 1, UINT32_MAX)) return false;
+    if (!strcmp(op->valuestring, "frenzy")) {
+        const auto duration = get("duration_ms");
+        if (cJSON_GetArraySize(root) != 4 || !WebInteger(duration, 1, 30000)) return false;
+        cmd.operation = "frenzy";
+        cmd.sequence = static_cast<uint32_t>(seq->valuedouble);
+        cmd.window = static_cast<uint32_t>(window->valuedouble);
+        cmd.frenzy_ms = duration->valueint;
+        return true;
+    }
     if (!strcmp(op->valuestring, "drive_start")) {
         const auto direction = get("direction"), water = get("water_duration_ms");
         int left, right;

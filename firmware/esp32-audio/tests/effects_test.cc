@@ -25,9 +25,9 @@ int main() {
     s.Tick(3000,false); assert(!s.guard.Watering() && s.guard.Bubbling() && s.guard.Igniting());
     s.Tick(4000,false); assert(!s.guard.Bubbling() && s.guard.Igniting());
     s.Tick(5000,false); off(s);
-    assert(s.guard.ignition.cooldown_until==8000);
-    assert(!s.VoiceClaim(7999,6,G::IgnitionOnly));
-    s.Tick(8000,false); assert(s.VoiceClaim(8000,7,G::IgnitionOnly));
+    assert(s.guard.ignition.cooldown_until==10000);
+    assert(!s.VoiceClaim(9999,6,G::IgnitionOnly));
+    s.Tick(10000,false); assert(s.VoiceClaim(10000,7,G::IgnitionOnly));
     // The interval starts at OFF, including early stops, and applies to both entry points.
     for(int cause=0;cause<3;++cause) {
         ControlSessions x; ready(x);
@@ -35,14 +35,14 @@ int main() {
         if(cause==0) x.Tick(10,false);
         if(cause==1) x.Stop(10);
         if(cause==2) x.guard.StopIgnition(10);
-        assert(x.guard.ignition.cooldown_until==3010);
-        x.Stop(20); // Repeated stop cannot shorten or restart the interval.
-        assert(x.guard.ignition.cooldown_until==3010);
-        assert(!x.VoiceClaim(3009,2,G::IgnitionOnly));
-        assert(!accepted(x.guard.WebRequest(3009,G::IgnitionOnly,0,0,nullptr,0,1000)));
-        assert(accepted(x.guard.WebRequest(3009,G::BubblesOnly,0,0,nullptr,1000)));
-        x.Tick(3010,false);
-        assert(accepted(x.guard.WebRequest(3010,G::IgnitionOnly,0,0,nullptr,0,1000)));
+        assert(x.guard.ignition.cooldown_until==20);
+        x.Stop(11); // Repeated stop cannot shorten or restart the interval.
+        assert(x.guard.ignition.cooldown_until==20);
+        assert(!x.VoiceClaim(19,2,G::IgnitionOnly));
+        assert(!accepted(x.guard.WebRequest(19,G::IgnitionOnly,0,0,nullptr,0,1000)));
+        assert(accepted(x.guard.WebRequest(19,G::BubblesOnly,0,0,nullptr,1000)));
+        x.Tick(20,false);
+        assert(accepted(x.guard.WebRequest(20,G::IgnitionOnly,0,0,nullptr,0,1000)));
         assert(x.guard.Bubbling() && x.guard.Igniting());
     }
     // Every stop path cancels pending tickets too; reconnect/release never restarts.

@@ -13,6 +13,9 @@ public:
     bool wifi = false, voice = false, shutdown = false;
     uint32_t owner = 0, window = 0;
     uint32_t drive_id = 0, drive_renewal = 0;
+    uint64_t frenzy_until = 0;
+    unsigned frenzy_duration_ms = 0;
+    const char* FrenzySource() const { return !frenzy_until ? "none" : frenzy_web_ ? "web" : "voice"; }
 
     void Tick(uint64_t now, bool pressed, bool output_fault = false) {
         if (owner && (now < heartbeat_ || now - heartbeat_ >= LeaseMs || !wifi || shutdown)) {
@@ -27,13 +30,22 @@ public:
         }
         pressed_ = pressed;
         guard.Tick(now, !shutdown && !output_fault && wifi && (owner || voice), pressed, false);
+        if (frenzy_until) {
+            if (now < frenzy_started_ || now >= frenzy_until || (frenzy_web_ ? !owner : !voice) || output_fault ||
+                !guard.Moving() || !guard.Watering() || !guard.Bubbling() || guard.ignition.clock_fault || guard.ignition.held) {
+                Stop(now);
+            } else if (!guard.Igniting() && now >= guard.ignition.cooldown_until) {
+                const int pulse = frenzy_until - now < 1000 ? frenzy_until - now : 1000;
+                if (std::strcmp(guard.WebRequest(now, AudioActionGuard::IgnitionOnly, 0, 0, nullptr, 0, pulse), "accepted")) Stop(now);
+            }
+        }
         if (drive_id && !guard.Moving()) StopWeb(now);
         if (!guard.Watering()) water_hold = {};
         if (!guard.Bubbling()) bubbles_hold = {};
         if (!guard.Moving()) web_targets_ &= ~AudioActionGuard::MoveOnly;
         if (!guard.Watering()) web_targets_ &= ~AudioActionGuard::WaterOnly;
         if (!guard.Bubbling()) web_targets_ &= ~AudioActionGuard::BubblesOnly;
-        if (!guard.Igniting()) web_targets_ &= ~AudioActionGuard::IgnitionOnly;
+        if (!guard.Igniting() && !frenzy_until) web_targets_ &= ~AudioActionGuard::IgnitionOnly;
     }
     void Stop(uint64_t now) {
         guard.Stop(now);
@@ -41,11 +53,13 @@ public:
         window_valid_ = false;
         drive_id = drive_renewal = 0;
         water_hold = {}; bubbles_hold = {};
+        frenzy_until = 0;
     }
     void VoiceLink(uint64_t now, bool online) {
         if (online && !voice) guard.NewVoiceSession();
         voice = online;
         if (!online) {
+            if (frenzy_until && !frenzy_web_) Stop(now);
             guard.CancelPending();
             if (!(web_targets_ & AudioActionGuard::MoveOnly)) guard.StopMove(now);
             if (!(web_targets_ & AudioActionGuard::WaterOnly)) guard.StopWater(now);
@@ -87,13 +101,38 @@ public:
         return true;
     }
     int VoiceClaim(uint64_t now, int rpc, AudioActionGuard::Target target) {
-        return wifi && voice && !shutdown && !(web_targets_ & target) ? guard.Claim(now, rpc, target) : 0;
+        const unsigned lanes = target == AudioActionGuard::FrenzyMode ? AudioActionGuard::All : target;
+        return wifi && voice && !shutdown && !frenzy_until && !(web_targets_ & lanes) ? guard.Claim(now, rpc, target) : 0;
     }
     const char* WebAction(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window,
                           AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction, int bubbles_ms = 0, int ignition_ms = 0) {
         const char* error = Consume(now, session, seq, command_window, WindowMs);
         if (error) return error;
         return StartWeb(now, target, move_ms, water_ms, direction, bubbles_ms, ignition_ms);
+    }
+    const char* FrenzyStart(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window, int duration) {
+        const char* error = Consume(now, session, seq, command_window, WindowMs);
+        if (error) return error;
+        if (frenzy_until) {
+            if (!frenzy_web_) { Stop(now); return "voice_preempted"; }
+            return "not_ready_or_busy";
+        }
+        const char* result = guard.Frenzy(now, duration);
+        if (!std::strcmp(result, "accepted")) {
+            frenzy_started_ = now; frenzy_until = now + duration;
+            frenzy_duration_ms = duration; frenzy_web_ = true;
+            web_targets_ = AudioActionGuard::All;
+        }
+        return result;
+    }
+    const char* VoiceFrenzy(uint64_t now, int ticket, int duration) {
+        if (!wifi || !voice || shutdown || frenzy_until || web_targets_) return "not_ready_or_busy";
+        const char* result = guard.VoiceFrenzy(now, ticket, duration);
+        if (!std::strcmp(result, "accepted")) {
+            frenzy_started_ = now; frenzy_until = now + duration;
+            frenzy_duration_ms = duration; frenzy_web_ = false;
+        }
+        return result;
     }
     const char* DriveStart(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window,
                            const char* direction, int water_ms) {
@@ -187,9 +226,14 @@ private:
         web_targets_ = 0;
         drive_id = drive_renewal = 0;
         water_hold = {}; bubbles_hold = {};
+        if (frenzy_web_) frenzy_until = 0;
         window_valid_ = false;
     }
     const char* StartWeb(uint64_t now, AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction, int bubbles_ms = 0, int ignition_ms = 0) {
+        if (frenzy_until) {
+            if (!frenzy_web_) { Stop(now); return "voice_preempted"; }
+            return "not_ready_or_busy";
+        }
         if (const char* error = AudioActionGuard::Validate(target, move_ms, water_ms, direction, bubbles_ms, ignition_ms)) return error;
         // Cancel only conflicting queued voice work. Never resume it after web control ends.
         guard.CancelPending(target);
@@ -221,7 +265,8 @@ private:
         window_valid_ = false; // One command per device-issued window, including rejected commands.
         return nullptr;
     }
+    uint64_t frenzy_started_ = 0;
     uint64_t heartbeat_ = 0, window_issued_ = 0, drive_until_ = 0, drive_started_ = 0;
     uint32_t generation_ = 0, sequence_ = 0;
-    bool pressed_ = false, window_valid_ = false;
+    bool pressed_ = false, window_valid_ = false, frenzy_web_ = false;
 };

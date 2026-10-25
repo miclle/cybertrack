@@ -15,7 +15,7 @@ function harness(){
  const events={},pending=[],sent=[],timers=new Map();let timerId=0, clock=0;
  for(const kind of ['water','bubbles']) ids[kind+'-hold'].dataset={hold:kind};
  const effectButtons=[];
- for(const kind of ['water','bubbles','ignition']) for(const sec of (kind==='ignition'?[1,3,5]:[1,3,5,10,30])) {
+ for(const kind of ['water','bubbles','ignition','frenzy']) for(const sec of (kind==='frenzy'?[5,10,30]:kind==='ignition'?[1,3,5]:[1,3,5,10,30])) {
    const b=ids[sec===1?kind:kind+'-'+sec];b.dataset={effect:kind,duration:String(sec*1000)};effectButtons.push(b);
  }
  const document={hidden:false,getElementById:id=>ids[id],querySelectorAll:q=>q.includes('[data-hold]')?[...buttons,ids['water-hold'],ids['bubbles-hold']]:q==='[data-effect]'?effectButtons:q.startsWith('[data-effect=')?effectButtons.filter(b=>q.includes(b.dataset.effect)):buttons,addEventListener:(n,f)=>events[n]=f};
@@ -27,7 +27,7 @@ function harness(){
  const respond=(c,body,ok=true)=>c.resolve({ok,json:async()=>body});
  const status=(seq=1,extra={})=>({result:'ok',request_sequence:seq,window:seq,move_remaining_ms:0,water_remaining_ms:0,
   move_cooldown_ms:0,water_cooldown_ms:0,move_last_duration_ms:600,water_last_duration_ms:1000,
-  capabilities:{move:true,water:true,bubbles:true,ignition:true,water_hold:true,bubbles_hold:true},drive_hold_id:0,drive_renewal:0,move_direction:'none',move_source:'none',water_source:'none',logical_outputs:{water:false},boot_held:false,state:'STOPPED',fault:'none',...extra});
+  capabilities:{frenzy:true,move:true,water:true,bubbles:true,ignition:true,water_hold:true,bubbles_hold:true},drive_hold_id:0,drive_renewal:0,move_direction:'none',move_source:'none',water_source:'none',logical_outputs:{water:false},boot_held:false,state:'STOPPED',fault:'none',...extra});
  async function connect(){const c=take('/api/pair');assert.equal(c.options.body,'{}');respond(c,{result:'ok',token:'session'});await flush();respond(take('/api/state'),status());await flush();assert(!buttons[0].disabled);}
  async function start(){const promise=ctx.beginHold(buttons[0],1);await flush();respond(take('/api/state'),status(2));await flush();return {promise,call:take('/api/action')};}
  async function hold(){const {promise,call}=await start();respond(call,status(3,{result:'accepted',drive_hold_id:1,drive_renewal:1,move_remaining_ms:600,move_source:'web',state:'ACTIVE'}));await promise;}
@@ -165,7 +165,7 @@ console.log('PASS: bubbles/ignition controls, four-lane concurrent display, inde
 
 {
  const h=harness();await h.connect();
- h.ctx.render(h.status(2,{capabilities:{move:true,water:true,bubbles:false}}));
+ h.ctx.render(h.status(2,{capabilities:{frenzy:true,move:true,water:true,bubbles:false}}));
  assert(h.ids.bubbles.disabled && h.ids.ignition.disabled && !h.ids.water.disabled);
 }
 console.log('PASS: new effect controls require explicit firmware capabilities');
@@ -234,7 +234,7 @@ for(const kind of ['water','bubbles']) {
  assert(![...h.timers.values()].some(t=>t.ms===150)); // Late start receipt never renews a released hold.
 }
 {
- const h=harness();await h.connect();h.ctx.render(h.status(2,{capabilities:{move:true,water:true,bubbles:true,ignition:true}}));
+ const h=harness();await h.connect();h.ctx.render(h.status(2,{capabilities:{frenzy:true,move:true,water:true,bubbles:true,ignition:true}}));
  assert(h.ids['water-hold'].disabled&&h.ids['bubbles-hold'].disabled&&!h.ids.water.disabled&&!h.ids.bubbles.disabled);
 }
 console.log('PASS: five one-tap durations per lane, independent held water/bubbles, three simultaneous holds, serialized starts, per-lane release, multitouch focus, cancel/offline/stop, late receipts and capability gating');
@@ -252,3 +252,59 @@ for(const seconds of [1,3,5]) {
 }
 assert(!html.includes('ignition-duration') && !html.includes('ignition-hold'));
 console.log('PASS: ignition 1/3/5-second buttons map to exact durations, all disabled while active/cooling; no hold or dropdown');
+
+for (const seconds of [5,10,30]) {
+ const h=harness();await h.connect();assert(!h.ids['frenzy-'+seconds].disabled);
+ const start=h.ids['frenzy-'+seconds].events.click();await flush();
+ h.respond(h.take('/api/state'),h.status(2));await flush();
+ const call=h.take('/api/action');assert.deepEqual(JSON.parse(call.options.body),{sequence:1,window:2,operation:'frenzy',duration_ms:seconds*1000});
+ h.respond(call,h.status(3,{result:'accepted',frenzy_remaining_ms:seconds*1000}));await start;await flush();
+ assert.equal(h.ids['frenzy-time'].textContent,'剩余 '+seconds.toFixed(1)+' 秒');
+ assert(h.ids['frenzy-5'].disabled && h.ids.water.disabled && h.ids['ignition-3'].disabled && h.buttons[0].disabled);
+ assert(!h.ids.stop.disabled);
+ h.events.windowblur();assert(h.sent.some(c=>c.path==='/api/release'));
+}
+{
+ const h=harness();await h.connect();h.ctx.render(h.status(2,{capabilities:{water:true}}));
+ assert(h.ids['frenzy-5'].disabled);
+ await h.ctx.action('frenzy',5000);assert(!h.sent.some(c=>c.path==='/api/action'));
+}
+console.log('PASS: frenzy 5/10/30-second payloads, countdown, capability gating and blur release');
+
+for(const [kind,label] of [['water','喷水'],['bubbles','吹泡泡'],['ignition','点火'],['frenzy','狂暴模式']]) {
+ const h=harness();await h.connect();const start=h.ctx.action(kind,5000);await flush();
+ h.respond(h.take('/api/state'),h.status(2));await flush();
+ h.respond(h.take('/api/action'),h.status(3,{result:'accepted',[kind+'_remaining_ms']:5000}));await start;
+ assert.equal(h.ids.message.textContent,'正在'+label+'。');
+ // Completion comes from the device, not a local timeout; cooling is no longer running.
+ h.respond(h.take('/api/state'),h.status(4,{[kind+'_cooldown_ms']:1000}));await flush();
+ assert.equal(h.ids.message.textContent,'动作已结束。');
+ h.ctx.render(h.status(3,{[kind+'_remaining_ms']:4000}));
+ assert.equal(h.ids.message.textContent,'动作已结束。'); // stale running state cannot restore the banner
+}
+{
+ const h=harness();await h.connect();const start=h.ctx.action('water',1000);await flush();
+ h.respond(h.take('/api/state'),h.status(2));await flush();
+ h.respond(h.take('/api/action'),h.status(3,{result:'accepted',water_remaining_ms:1000,bubbles_remaining_ms:3000}));await start;
+ assert.equal(h.ids.message.textContent,'正在喷水、吹泡泡。');
+ h.respond(h.take('/api/state'),h.status(4,{bubbles_remaining_ms:2000}));await flush();
+ assert.equal(h.ids.message.textContent,'正在吹泡泡。');
+ h.ctx.render(h.status(5));assert.equal(h.ids.message.textContent,'动作已结束。');
+}
+{
+ const h=harness();await h.connect();h.ctx.activityMessage(h.status(2,{frenzy_remaining_ms:4000,ignition_remaining_ms:0}));
+ h.ctx.render(h.status(3,{frenzy_remaining_ms:3000,ignition_remaining_ms:0}));
+ assert.equal(h.ids.message.textContent,'正在狂暴模式。'); // ignition OFF phase does not finish the mode
+ h.ctx.render(h.status(4,{state:'FAULT'}));assert.equal(h.ids.message.className,'error');
+ h.ctx.render(h.status(5));assert.equal(h.ids.message.textContent,'设备故障，动作已停止。');
+ h.ctx.message('全部停止。');h.ctx.render(h.status(6));assert.equal(h.ids.message.textContent,'全部停止。');
+ h.ctx.message('请求被拒绝。',true);h.ctx.render(h.status(7));assert.equal(h.ids.message.textContent,'请求被拒绝。');
+}
+{
+ const h=harness();await h.connect();const start=h.ctx.action('water',1);await flush();
+ h.respond(h.take('/api/state'),h.status(2));await flush();const late=h.take('/api/action');
+ h.ctx.render(h.status(5)); // newer state arrives before the accepted response
+ h.respond(late,h.status(3,{result:'accepted',water_remaining_ms:1}));await start;
+ assert.equal(h.ids.message.textContent,'动作已结束。');
+}
+console.log('PASS: live action notices finish on device state, retain concurrent activity, ignore stale receipts and preserve stop/error messages');
