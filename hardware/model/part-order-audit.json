@@ -1,12 +1,12 @@
 {
   "delivery_document": "CyberTrack.FCStd",
-  "before_sha256": "9d4138be0a9601b3855dc5291f6fc98c99274f17bf32a1412ff619d3914c92ae",
-  "delivery_sha256": "8474a47c13543be80023cad0cce11ee53c575633567c7795dd38d328b371f77b",
+  "before_sha256": "d8140fd9466b124059cef56c74dbdb4709716b1bbc3eb4e531d57f795c212042",
+  "delivery_sha256": "24b224c7f8ea146f0bbd8c0a26ef621064be9d11d54a0280f7c99c30d64c2cf6",
   "source_document": "source/CyberTrack-design.FCStd",
-  "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+  "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
   "method": "Assembly median height descending; members by Z descending, Y ascending, X descending",
-  "root_count": 272,
-  "part_count": 301,
+  "root_count": 276,
+  "part_count": 305,
   "root_order": [
     "PrintCrown",
     "CrownScrewLFront",
@@ -116,9 +116,13 @@
     "ArcBottomPadL",
     "ArcBottomPadR",
     "MT3608Envelope",
-    "PrintBackpack",
     "BaseCableGrommet",
+    "PowerSwitchLever",
+    "PowerSwitchScrew1",
+    "PowerSwitchScrew0",
+    "PowerSwitchBody",
     "KeelLid",
+    "PrintBackpack",
     "EffectInsert2",
     "EffectInsert0",
     "EffectInsert3",
@@ -525,18 +529,22 @@
       ]
     },
     {
+      "assembly": "底盘顶盖",
+      "height_mm": 79.39999999999999,
+      "members": [
+        "BaseCableGrommet",
+        "PowerSwitchLever",
+        "PowerSwitchScrew1",
+        "PowerSwitchScrew0",
+        "PowerSwitchBody",
+        "KeelLid"
+      ]
+    },
+    {
       "assembly": "背包",
       "height_mm": 79.0,
       "members": [
         "PrintBackpack"
-      ]
-    },
-    {
-      "assembly": "底盘顶盖",
-      "height_mm": 77.79999997499999,
-      "members": [
-        "BaseCableGrommet",
-        "KeelLid"
       ]
     },
     {
@@ -788,8 +796,5 @@
   "geometry_entries_byte_identical": true,
   "document_properties_except_group_order_unchanged": true,
   "gui_properties_except_tree_rank_unchanged": true,
-  "rank_metadata_verified": true,
-  "gui_tree_readback_passed": true,
-  "hidden_part_count": 20,
-  "passed": true
+  "rank_metadata_verified": true
 }

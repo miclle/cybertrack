@@ -1,5 +1,7 @@
 # 0.51 合并打印件
 
+0.53新增[电源开关安装](power-switch.md)，只改变六件合并范围之外的折面顶盖；PP01–PP06几何及58个源特征划分保持。
+
 2026-10-26，按用户减少细碎打印零件的要求，先落实六组整合。原生 [CyberTrack.FCStd](../hardware/model/CyberTrack.FCStd) 是日常查看与打印几何依据；[检查报告](../hardware/model/print-consolidation-audit.json)记录连接、融合、STL与保存回读，尺寸与材料仍为候选。
 
 ## 打印划分

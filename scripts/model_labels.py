@@ -130,7 +130,10 @@ def part_labels():
     labels.update({'PrintWaterCradle':'PP01 水枪一体底托','PrintBubbleCradle':'PP02 泡泡枪一体圆环底座',
                    'PrintBackpack':'PP03 双瓶背包一体外壳及桶座','PrintLowerTub':'PP04 一体底盘及湿舱隔板',
                    'PrintCrown':'PP05 一体冠盖及装甲饰件','PrintNeck':'PP06 一体固定颈架'})
-    assert len(labels)==301 and len(set(labels.values()))==301
+    add('PowerSwitchBody','电源开关','本体与挂耳（占位）')
+    add('PowerSwitchLever','电源开关','拨柄')
+    numbered('PowerSwitchScrew','电源开关','固定螺钉',2)
+    assert len(labels)==305 and len(set(labels.values()))==305
     return labels
 
 
@@ -184,7 +187,7 @@ def normalize(out):
         with zipfile.ZipFile(temp) as archive:
             assert all(archive.read(info.filename)==data for info,data in entries if info.filename!='Document.xml')
         doc=App.openDocument(temp)
-        assert len(doc.Objects)==302 and doc.Drive.Label=='01 双履带与动力参考'
+        assert len(doc.Objects)==306 and doc.Drive.Label=='01 双履带与动力参考'
         for row in rows:
             obj=doc.getObject(row['name'])
             assert obj.Label==row['label'] and obj.Label2==row['description'],row['name']
@@ -199,7 +202,7 @@ def normalize(out):
     after_sha=sha(cad)
     audit={'delivery_document':'CyberTrack.FCStd','before_sha256':before_sha,'delivery_sha256':after_sha,
            'source_document':tree['source_document'],'source_sha256':tree['source_sha256'],
-           'part_count':301,'unique_labels':301,'renamed_count':changed,
+           'part_count':305,'unique_labels':305,'renamed_count':changed,
            'geometry_and_gui_entries_byte_identical':True,'other_document_properties_unchanged':True,
            'native_readback_passed':True,'passed':True,'objects':rows}
     tree['delivery_sha256']=after_sha

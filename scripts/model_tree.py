@@ -51,7 +51,12 @@ def organize(out, render=False):
     for name in removed:
         assert all(p.Name in union_names or p.isDerivedFrom('App::DocumentObjectGroup') for p in doc.getObject(name).InList),name
     assert all(not getattr(o,'ExpressionEngine',[]) for o in doc.Objects), 'Inspect expressions before removing inputs'
-    before={o.Name:o.Shape.copy() for o in physical_objects(doc) if o.Name not in removed}
+    retained=[o for o in physical_objects(doc) if o.Name not in removed]
+    before={o.Name:o.Shape.copy() for o in retained}
+    # Tessellation can change on save or display without changing the exact BRep.
+    # Capture serialization before copy(), which may also change topology flags.
+    before_brep={o.Name:o.Shape.exportBrepToString() for o in retained}
+    before_cleaned={o.Name:o.Shape.cleaned().exportBrepToString() for o in retained}
     labels={o.Name:o.Label for o in physical_objects(doc) if o.Name not in removed}
     visual={}
     if render:
@@ -103,14 +108,16 @@ def organize(out, render=False):
     rows=[]
     for obj in objects:
         name=obj.Name;old=before[name];shape=obj.Shape
-        same=old.exportBrepToString()==shape.exportBrepToString()
-        delta=0.0 if same else old.cut(shape).Volume+shape.cut(old).Volume
+        same=before_brep[name]==shape.exportBrepToString()
+        cleaned_same=before_cleaned[name]==shape.cleaned().exportBrepToString()
+        delta=0.0 if same or cleaned_same else old.cut(shape).Volume+shape.cut(old).Volume
         assert shape.isValid() and delta<1e-5 and len(shape.Solids)==len(old.Solids),name
         assert obj.Label==labels[name]
         assert [o.Name for o in obj.InList]==(['Drive'] if name in drive_members else []),name
         if render:
             assert all(getattr(obj.ViewObject,p)==v for p,v in visual[name].items()),name
-        rows.append({'name':name,'symmetric_difference_mm3':delta,'native_brep_matches':same})
+        rows.append({'name':name,'symmetric_difference_mm3':delta,'native_brep_matches':same,
+                     'brep_without_display_mesh_matches':cleaned_same})
     assert not any(saved.getObject(n) for n in removed)
     actual=[]
     report=json.loads((root/'readback.json').read_text())

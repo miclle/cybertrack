@@ -12,7 +12,7 @@ import Mesh
 import MeshPart
 
 V = App.Vector
-REVISION = '0.51'
+REVISION = '0.53'
 
 
 def groups(doc):
@@ -162,7 +162,7 @@ def finalize(doc, out, report, connection_check, render=False):
             obj.ViewObject.DisplayMode = 'Flat Lines'
             for source in obj.Shapes:
                 source.ViewObject.Visibility = False
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.51'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.53'
     if render:
         group.ViewObject.Visibility = True
         for row in rows:

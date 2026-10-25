@@ -88,12 +88,12 @@
       "overlaps": [],
       "nearby": [
         {
-          "object": "EffectRetainerScrewLBuckInner",
-          "distance_mm": 0.5
+          "object": "KeelLid",
+          "distance_mm": 0.25
         },
         {
-          "object": "KeelLid",
-          "distance_mm": 1.2998673672393684
+          "object": "EffectRetainerScrewLBuckInner",
+          "distance_mm": 0.5
         },
         {
           "object": "EffectRetainerLBuck",
@@ -236,12 +236,12 @@
       "overlaps": [],
       "nearby": [
         {
-          "object": "EffectRetainerScrewRBuckInner",
-          "distance_mm": 0.5
+          "object": "KeelLid",
+          "distance_mm": 0.25
         },
         {
-          "object": "KeelLid",
-          "distance_mm": 1.2998673672393684
+          "object": "EffectRetainerScrewRBuckInner",
+          "distance_mm": 0.5
         },
         {
           "object": "EffectRetainerRBuck",
@@ -318,16 +318,16 @@
           "distance_mm": 0.7999999999999972
         },
         {
+          "object": "KeelLid",
+          "distance_mm": 1.0
+        },
+        {
           "object": "EffectRetainerLMOS",
           "distance_mm": 1.0965856099730633
         },
         {
           "object": "EffectRetainerRMOS",
           "distance_mm": 1.0965856099730633
-        },
-        {
-          "object": "KeelLid",
-          "distance_mm": 1.1141720290623058
         },
         {
           "object": "EffectRetainerScrewLMOSInner",
@@ -1497,13 +1497,13 @@
     "EffectRetainerInsertLMOSOuter": 1.927234057555625,
     "EffectRetainerScrewLMOSOuter": 1.43145600891813,
     "EffectRetainerLMOS": 0.6999999999999303,
-    "EffectBuckL": 3.2496684180984103,
-    "EffectSupportLBuck": 7.037853316910272,
-    "EffectRetainerInsertLBuckInner": 6.7221712420092725,
-    "EffectRetainerScrewLBuckInner": 4.159575575165958,
+    "EffectBuckL": 0.0,
+    "EffectSupportLBuck": 5.0,
+    "EffectRetainerInsertLBuckInner": 3.2144206320890807,
+    "EffectRetainerScrewLBuckInner": 0.6726812023536874,
     "EffectRetainerInsertLBuckOuter": 6.7221712420092725,
     "EffectRetainerScrewLBuckOuter": 4.159575575165958,
-    "EffectRetainerLBuck": 3.4353637562754593,
+    "EffectRetainerLBuck": 1.7999999999999972,
     "EffectMOSR": 2.135496389036094,
     "EffectSupportRMOS": 5.637555823439678,
     "EffectRetainerInsertRMOSInner": 13.221508078206092,
@@ -1511,16 +1511,18 @@
     "EffectRetainerInsertRMOSOuter": 1.9272340575556222,
     "EffectRetainerScrewRMOSOuter": 1.431456008918127,
     "EffectRetainerRMOS": 0.6999999999999781,
-    "EffectBuckR": 3.2496684180984103,
-    "EffectSupportRBuck": 7.037853316910272,
-    "EffectRetainerInsertRBuckInner": 6.7221712420092725,
-    "EffectRetainerScrewRBuckInner": 4.159575575165958,
+    "EffectBuckR": 0.0,
+    "EffectSupportRBuck": 5.0,
+    "EffectRetainerInsertRBuckInner": 3.2144206320890807,
+    "EffectRetainerScrewRBuckInner": 0.6726812023536874,
     "EffectRetainerInsertRBuckOuter": 6.7221712420092725,
     "EffectRetainerScrewRBuckOuter": 4.159575575165958,
-    "EffectRetainerRBuck": 3.4353637562754593
+    "EffectRetainerRBuck": 1.7999999999999972
   },
   "passed": true,
   "limits": "Local candidate wiring only; PCB edges, components, compression, tolerance stack, complete harness and hand access unverified. Frame/board removal is off-machine after tray extraction.",
-  "source_sha256": "5d7269ad3463676df67b7257057e3d714d0b7b8d2983301c8c77c70dd904988f",
-  "saved_and_reopened": true
+  "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+  "saved_and_reopened": true,
+  "source_document": "source/CyberTrack-design.FCStd",
+  "equivalent_delivery_audit": "model-tree-audit.json"
 }

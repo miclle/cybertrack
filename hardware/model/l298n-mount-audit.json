@@ -207,9 +207,33 @@
   "physical_fit_verified": false,
   "manufacturing_released": false,
   "passed": true,
-  "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
-  "saved_and_reopened": false,
-  "equivalent_saved_source_geometry_verified_by": "print-consolidation-change-audit.json",
+  "source_after_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+  "saved_and_reopened": true,
+  "carrier_export": {
+    "coordinate_frame": "assembly coordinates, no scale or relocation",
+    "checks": [
+      {
+        "format": "FCStd",
+        "valid": true,
+        "solids": 1,
+        "symmetric_difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "format": "STEP",
+        "valid": true,
+        "solids": 1,
+        "symmetric_difference_mm3": 0.0,
+        "passed": true
+      }
+    ],
+    "files_sha256": {
+      "hardware/model/parts/L298N-carrier-0.34.FCStd": "79d214d9afc1e623f071866422f358bfe68c3be6c0d3724be0b33578b70d3612",
+      "hardware/model/parts/L298N-carrier-0.34.step": "c92c5ede55b10a8d5073ba3a641566d2fd9c3ea75147f34929dd6fb986868cd3"
+    },
+    "passed": true,
+    "manufacturing_released": false
+  },
   "source_document": "source/CyberTrack-design.FCStd",
   "equivalent_delivery_audit": "model-tree-audit.json"
 }

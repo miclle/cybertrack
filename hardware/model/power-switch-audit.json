@@ -1,0 +1,121 @@
+{
+  "static": {
+    "PowerSwitchBody": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 5
+    },
+    "PowerSwitchLever": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 3
+    },
+    "PowerSwitchScrew0": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 3
+    },
+    "PowerSwitchScrew1": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 3
+    }
+  },
+  "continuous_slider_travel": {
+    "passed": true,
+    "overlaps": [],
+    "boolean_pairs": 3
+  },
+  "finger_approach": {
+    "passed": true,
+    "overlaps": [],
+    "boolean_pairs": 2
+  },
+  "local_wire_budget": {
+    "passed": true,
+    "overlaps": [],
+    "boolean_pairs": 2
+  },
+  "tools": [
+    {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 2
+    },
+    {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 2
+    }
+  ],
+  "upward_switch_removal": {
+    "passed": true,
+    "overlaps": [],
+    "boolean_pairs": 2,
+    "removed_first": [
+      "PowerSwitchScrew0",
+      "PowerSwitchScrew1"
+    ],
+    "battery_retained": true,
+    "method": "continuous conservative envelope"
+  },
+  "upward_screw_removal": [
+    {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 3
+    },
+    {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 3
+    }
+  ],
+  "negative_controls": {
+    "slider_obstruction_detected": true,
+    "oversized_finger_hits_guards": true,
+    "retained_screws_block_extraction": true
+  },
+  "finger_envelope_xyz_mm": [
+    26,
+    20,
+    30
+  ],
+  "wire_budget_xyz_mm": [
+    12,
+    7,
+    6
+  ],
+  "physical_fit_verified": false,
+  "electrical_verified": false,
+  "limits": "Nominal solid geometry only; finger envelope is an assumption, not ergonomic acceptance. Harness route/connectors and actual terminals are unverified.",
+  "passed": true,
+  "source_document": "source/CyberTrack-design.FCStd",
+  "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+  "delivery_sha256": "24b224c7f8ea146f0bbd8c0a26ef621064be9d11d54a0280f7c99c30d64c2cf6",
+  "saved_and_reopened": true,
+  "layout": {
+    "centre_xyz_mm": [
+      0.0,
+      -64.0,
+      81.1
+    ],
+    "flange_contact_plane_z_mm": 81.1,
+    "lever_tip_z_mm": 85.1,
+    "guard_top_z_mm": 86.1,
+    "body_opening_xy_mm": [
+      11.2,
+      6.4
+    ],
+    "pilot_holes_diameter_mm": 1.6,
+    "pilot_depth_mm": 6,
+    "screw_hole_pitch_mm": 14.8,
+    "nominal_engagement_depth_mm": 5.5,
+    "pilot_to_body_opening_wall_mm": 1.0,
+    "fasteners": "2 candidate diameter-2 x 6 plastic self-tapping screws; core only, no threads modeled",
+    "flange_thickness_assumed_mm": 0.5,
+    "service": "disconnect leads; unscrew from above; extract switch upwards without removing battery or bottom cover",
+    "physical_fit_verified": false,
+    "electrical_verified": false
+  }
+}

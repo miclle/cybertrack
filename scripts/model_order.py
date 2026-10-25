@@ -23,6 +23,7 @@ def ordered_parts(report, drive_members):
         section=obj['label'].split(' · ')[0]
         cluster=overrides.get(name,section)
         if name in overrides:pass
+        elif name.startswith('PowerSwitch'):cluster='底盘顶盖'
         elif name.startswith('BottomCoverScrew'):cluster='底部检修盖'
         elif section in ('履带','动力'):cluster='履带与动力'
         elif section=='底盘':cluster='底盘结构'
@@ -53,7 +54,7 @@ def ordered_parts(report, drive_members):
     for name in roots:
         full.append(name)
         if name=='Drive':full.extend(drive)
-    assert len(roots)==272 and len(full)==302 and len(set(full))==302
+    assert len(roots)==276 and len(full)==306 and len(set(full))==306
     return roots,drive,full,blocks
 
 
@@ -109,7 +110,7 @@ def reorder(out):
     audit={'delivery_document':'CyberTrack.FCStd','before_sha256':before,'delivery_sha256':after,
            'source_document':tree['source_document'],'source_sha256':tree['source_sha256'],
            'method':'Assembly median height descending; members by Z descending, Y ascending, X descending',
-           'root_count':272,'part_count':301,'root_order':roots,'drive_display_order':drive,'assemblies':blocks,
+           'root_count':276,'part_count':305,'root_order':roots,'drive_display_order':drive,'assemblies':blocks,
            'geometry_entries_byte_identical':True,'document_properties_except_group_order_unchanged':True,
            'gui_properties_except_tree_rank_unchanged':True,
            'rank_metadata_verified':True}
