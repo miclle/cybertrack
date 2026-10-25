@@ -30,6 +30,7 @@ CyberTrack 是一个双履带语音交互玩具机器人项目，将履带行走
 |---|---|
 | 产品与需求 | [产品需求](docs/requirements.md) · [决策和待补资料](docs/decisions.md) |
 | 机械与硬件 | [机械设计](docs/mechanical.md) · [电源与接口](docs/power-and-interfaces.md) |
+| 接线查阅 | [整机接线总表](docs/wiring.md)：当前接法、历史台架接法与待确定项 |
 | 控制与语音 | [系统架构](docs/architecture.md) · [智能体角色与提示词](docs/agent-role.md) · [灵矽接入](docs/linx-integration.md) · [固件入口](firmware/README.md) · [固件能力与接口](firmware/CAPABILITIES.md) |
 | 物料与采购 | [BOM](hardware/BOM.md) · [采购清单](hardware/procurement.md) |
 | 技术资料 | [资料索引](docs/references.md) |
