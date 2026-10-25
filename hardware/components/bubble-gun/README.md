@@ -81,6 +81,6 @@
 
 泡泡管 Ø4、线束 Ø3，中心弯曲半径 8，各留 Ø8 空间。后端接管沿模块后方拔 25，另留 Ø12 空间；插头候选 16×10×10，向 −X 拔 16。前环不需工具，基座工具在主体取出后使用。原停止按钮保留前方 Ø12 指端空间；不包括整手或把手。水管储液端不动，枪侧路线随上仰重新衔接；实际管径、接口及弯曲限制待测。
 
-最新几何结果见[整机回读](../../model/readback.json)与[变更核对](../../model/bubble-gun-change-audit.json)。5°为设计候选，工作倾角、出泡、滴液／倒流须实物验证。0.4 mm 高度冲突、薄片偏置、前底轮廓、胶粘保持、紧固及强度仍未验收。
+最新几何结果见[整机回读](../../model/readback.json)与[变更核对](../../model/archive/reports/bubble-gun-change-audit.json)。5°为设计候选，工作倾角、出泡、滴液／倒流须实物验证。0.4 mm 高度冲突、薄片偏置、前底轮廓、胶粘保持、紧固及强度仍未验收。
 
 生成入口为 `scripts/build_tank.py --render`；主体位于 `scripts/bubble_gun_layout.py`，支架及检查位于 `scripts/bubble_gun_mount.py`，双枪姿态和承托变换位于 `scripts/gun_pitch.py`。独立薄片版本按哈希复用，4 张原图保持；整机 STEP 只供布局交换，以 FCStd 为几何依据。
