@@ -1,13 +1,13 @@
-"""Candidate5-degree elevation of gun modules; preserve independent component assets."""
+"""Candidate 15-degree elevation of gun modules; preserve independent component assets."""
 from contextlib import contextmanager
 import copy
 import FreeCAD as App
 import Part
 from water_gun_mount import box,cylinder,rounded_route,CRADLE_BOTTOM
 V=App.Vector
-ANGLE=-5.0
+ANGLE=-15.0
 PIVOTS={'water':V(42.5,-18,100.7),'bubble':V(-40,-62,85.95)}
-OFFSETS={'water':V(0,-10,-4),'bubble':V()}
+OFFSETS={'water':V(0,-10,3),'bubble':V()}
 
 def moved(shape,kind,inverse=False):
     s=shape.copy()
@@ -51,7 +51,7 @@ def apply_pitch(doc,rail_bases):
     for route,space,pts in [('WaterHoseRoute','WaterGunHoseClearance',water),('BubbleGunHoseRoute','BubbleGunHoseClearance',bubble)]:
         doc.getObject(route).Shape=rounded_route(pts,2.5 if route=='WaterHoseRoute' else 2,8)
         doc.getObject(space).Shape=rounded_route(pts,4,8)
-    return {'elevation_degrees':5,'candidate_not_measured':True,'rotation_about_X_degrees':ANGLE,
+    return {'elevation_degrees':-ANGLE,'candidate_not_measured':True,'rotation_about_X_degrees':ANGLE,
         'pivot_world_mm':{k:list(v) for k,v in PIVOTS.items()},'translation_world_mm':{k:list(v) for k,v in OFFSETS.items()},
         'muzzle_centres_world_mm':{'water':list(point((55,-129,117),'water')),'bubble':list(point((-55,-129,110),'bubble'))},
         'direction_world':list(vector((0,-1,0))),

@@ -11,8 +11,8 @@ V=App.Vector
 BASE_Y=(-78,-62)
 RING_Y=-125.5
 HOSE_FIXED_COUNT=6
-HOSE_POINTS=[(-28,65,154.5),(-28,65,174),(-99,65,174),(-99,10,174),(-99,10,100),
-             (-99,-45,100),(-55,-45,101),(-55,-62,101)]
+HOSE_POINTS=[(-28,65,154.5),(-28,65,174),(-99,65,174),(-99,10,174),(-99,10,94),
+             (-99,-45,94),(-55,-45,101),(-55,-62,101)]
 LEAD_POINTS=[(-44,-62,98),(-44,-44,98),(-58,-44,114),(-74,-44,114)]
 
 
@@ -34,7 +34,7 @@ def ring_shape():
 
 
 def body_service_poses():
-    # Local module coordinates before the5-degree elevation transform.
+    # Local module coordinates before the assembly elevation transform.
     poses=[]
     for i in range(31):poses.append((i*.5,(0,0,0)))
     for i in range(1,21):poses.append((15,(0,i*.5,0)))
