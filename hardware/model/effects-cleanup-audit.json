@@ -1,0 +1,147 @@
+{
+  "revision": "0.42",
+  "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+  "pdf_sha256": "5d72143d32db2dc54f3fcf44a19f429dc949063a8804729ecca9f6e9a32c28a4",
+  "reason": "User-authorized cleanup after backpack-side clamps and chassis tray mounts were integrated and checked. A02 was rejected for bulk; A03 bare-body study is superseded by 0.42.",
+  "replacements": [
+    "hardware/model/CyberTrack.FCStd",
+    "scripts/effects_mount.py",
+    "docs/effects-mount.md",
+    "hardware/model/effects-mount-audit.json"
+  ],
+  "historical_studies": [
+    {
+      "study": "A02",
+      "baseline_revision": "0.41",
+      "source_sha256": "d02b139870e879277dd11634d2cc9df31bc57aaee2cb6fe91fdda4a77ddb77ca",
+      "source_unchanged": true,
+      "unchanged_objects": 308,
+      "outside_allowed_zone_difference_mm3": 0.0,
+      "passed": true,
+      "physical_fit_verified": false,
+      "fastening_complete": false,
+      "electrical_or_insulation_verified": false,
+      "limits": "Passive body allocation. No HV leads/electrodes/driver, insulation or EMC clearance, thermal acceptance, actual terminal positions or fastening. MT3608 and remaining small power hardware not newly allocated."
+    },
+    {
+      "study": "A03",
+      "baseline_revision": "0.41",
+      "source_sha256": "d02b139870e879277dd11634d2cc9df31bc57aaee2cb6fe91fdda4a77ddb77ca",
+      "source_unchanged": true,
+      "prior_A02_rejected_by_user": "front bay looks bulky; use outside of both backpacks",
+      "MOS_height_assumed": true,
+      "two_MOS_two_bucks_are_quantity_assumptions": true,
+      "unchanged_baseline_objects": 309,
+      "new_objects": 7,
+      "physical_fit_verified": false,
+      "mounting_complete": false,
+      "electrical_or_insulation_verified": false,
+      "limits": "Bare bodies only, no HV leads/electrodes/driver or insulation/EMC/thermal/liquid acceptance. No actual MOS/buck wires, terminal access, standoffs or fastening; other power hardware not newly allocated.",
+      "passed": true
+    }
+  ],
+  "removed_files": [
+    {
+      "path": "hardware/model/studies/front-bay/Front-bay-candidate.FCStd",
+      "sha256": "fe191ac85d276f400b8f16350d3580478f9489db1e8d93efc61754d606683ae0",
+      "bytes": 1763718
+    },
+    {
+      "path": "hardware/model/studies/front-bay/README.md",
+      "sha256": "77eb96effe23e75a9d5582f7be452433006e0f194a1eac3c4869c42d37cc9046",
+      "bytes": 5781
+    },
+    {
+      "path": "hardware/model/studies/front-bay/fit-audit.json",
+      "sha256": "a78ac83948d84eb460213dabfcb4d47d3a42e1a4debd033cbdaac8dcb19b04d1",
+      "bytes": 144041
+    },
+    {
+      "path": "hardware/model/studies/front-bay/internal.png",
+      "sha256": "4e13167df0a2640df7b9ccbb99a2bfa7ce1a89d157b3ae96f09c7746fa187919",
+      "bytes": 117980
+    },
+    {
+      "path": "hardware/model/studies/front-bay/overall.png",
+      "sha256": "a04dec489301d1c7fc1f9840373e91ea7c8e436f33f2c44133856fc51a0aa8a0",
+      "bytes": 126042
+    },
+    {
+      "path": "hardware/model/studies/front-bay/service.png",
+      "sha256": "db79210ad621b1bcd1d5f1acf4940bc493004f231c67be2ccc41683c7f6b3cc9",
+      "bytes": 106051
+    },
+    {
+      "path": "hardware/model/studies/front-bay/side.png",
+      "sha256": "4691944d9b7a7aa8c1a8763c7d932374dfea14b3d44fb557f8f5b3bbf528e506",
+      "bytes": 73378
+    },
+    {
+      "path": "hardware/model/studies/front-bay/upper-tray.png",
+      "sha256": "71ad11987b5324ba499461cd0d94120e9b95decc4665921fe1fd8b5514e0396e",
+      "bytes": 29685
+    },
+    {
+      "path": "hardware/model/studies/backpack-sides/Backpack-sides-candidate.FCStd",
+      "sha256": "bcfbfa69fe10bd2be55f1e116221eb65f4286b67446bdb9b1658ed13a1c66324",
+      "bytes": 1741400
+    },
+    {
+      "path": "hardware/model/studies/backpack-sides/README.md",
+      "sha256": "d3fd034cdd85cfb2a74dd57cde4f70dab4240d6ed2bd5fc7772b6fae8d5aee06",
+      "bytes": 4353
+    },
+    {
+      "path": "hardware/model/studies/backpack-sides/electronics-service.png",
+      "sha256": "7fa4fb6292f6fb4e8cb2e9c87c5efcd23fe94aab5c6efd18c32dfe315225444f",
+      "bytes": 118482
+    },
+    {
+      "path": "hardware/model/studies/backpack-sides/electronics.png",
+      "sha256": "13f3bca19932a186a388351ecd658e05c1fff54ce6f8b89efeafb5e9c66725d5",
+      "bytes": 119737
+    },
+    {
+      "path": "hardware/model/studies/backpack-sides/fit-audit.json",
+      "sha256": "f1de43b79edf06e66185d209ec0302282f2ca3a2892eb3244c68028e52e20aa9",
+      "bytes": 139015
+    },
+    {
+      "path": "hardware/model/studies/backpack-sides/front.png",
+      "sha256": "07e5b17474edfac41e45daf861a7624d7888d88ea55cafc73f2074b1aefcbbbd",
+      "bytes": 130185
+    },
+    {
+      "path": "hardware/model/studies/backpack-sides/placement.png",
+      "sha256": "da7eb3e25ff4d4d6cf4fee91c0157ad02560fe1dd81e9295219ebe5f4a3bcfc0",
+      "bytes": 97449
+    },
+    {
+      "path": "hardware/model/studies/backpack-sides/rear.png",
+      "sha256": "b10054e1e6bbb2350035adceef3610b55691e86155dd55de283a4bff347ff75d",
+      "bytes": 124476
+    },
+    {
+      "path": "hardware/model/studies/backpack-sides/service.png",
+      "sha256": "742e2414cee02467c335769c85cdc0eb7928262b7393f527ec94575a3975c697",
+      "bytes": 74705
+    },
+    {
+      "path": "scripts/study_front_bay.py",
+      "sha256": "38ae6d30b64b60c27ec4b71a72d2e7a04973bf752d0404e32909453cca764096",
+      "bytes": 14743
+    },
+    {
+      "path": "scripts/study_backpack_sides.py",
+      "sha256": "eb9ac06589486d076cb1015e62ca27f6b5f9a7765832f5897e63a26cdc088389",
+      "bytes": 11605
+    },
+    {
+      "path": "hardware/model/CyberTrack.20261025-181329.FCBak",
+      "sha256": "256d2064d72318dbe4de7c4362e5acf8087188c88edae98bf48737b667e8fec1",
+      "bytes": 1783328
+    }
+  ],
+  "removal_verified": true,
+  "removed_file_count": 20
+}

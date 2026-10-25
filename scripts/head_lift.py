@@ -5,7 +5,7 @@ V = A.Vector
 LIFT = 25.0
 HEAD_PREFIXES = ('Head', 'Visor', 'BrowArmor', 'CheekArmor', 'Jaw', 'Audio',
                  'Ear', 'Crown', 'Temple', 'Occipital', 'Sensor', 'Ultrasonic',
-                 'Electronics', 'ArcModule', 'Tray', 'ESP32', 'Controller')
+                 'Electronics', 'ArcModule', 'Tray', 'ESP32', 'Controller', 'Breadboard')
 
 
 def head_members(doc):

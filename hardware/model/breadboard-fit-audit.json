@@ -1,0 +1,315 @@
+{
+  "revision": "0.41",
+  "tolerance_mm3": 0.01,
+  "static": {
+    "ElectronicsTray": {
+      "boolean_pairs_tested": 9,
+      "overlaps": [],
+      "passed": true
+    },
+    "BreadboardEnvelope": {
+      "boolean_pairs_tested": 7,
+      "overlaps": [],
+      "passed": true
+    }
+  },
+  "board_to_crown_mm": 4.0,
+  "tray_to_harness_mm": 2.220153254455275,
+  "tray_removal": {
+    "boolean_pairs_tested": 5,
+    "overlaps": [],
+    "passed": true,
+    "method": "continuous conservative vertical prism union",
+    "translation_mm": [
+      0,
+      0,
+      85
+    ],
+    "removed_first": [
+      "BreadboardScrew0",
+      "BreadboardScrew1",
+      "BreadboardScrew2",
+      "BreadboardScrew3",
+      "BrowArmorL",
+      "BrowArmorR",
+      "CrownEffectInsetL",
+      "CrownEffectInsetR",
+      "CrownEffectMarkLFront",
+      "CrownEffectMarkLRear",
+      "CrownEffectMarkRFront",
+      "CrownEffectMarkRRear",
+      "CrownFinL",
+      "CrownFinR",
+      "CrownForePlate",
+      "CrownRearBlade0",
+      "CrownRearBlade1",
+      "CrownRearBlade2",
+      "CrownRearCassette",
+      "CrownScrewLFront",
+      "CrownScrewLRear",
+      "CrownScrewRFront",
+      "CrownScrewRRear",
+      "CrownSideArmorL",
+      "CrownSideArmorR",
+      "CrownSpine",
+      "HeadCrownShell",
+      "HeadServiceHatch",
+      "OccipitalBrowL",
+      "OccipitalBrowR",
+      "PowerCableRoute",
+      "UltrasonicWireSpace"
+    ],
+    "moving": [
+      "ElectronicsTray",
+      "BreadboardEnvelope"
+    ],
+    "excludes_flexible_harness_and_hands": true
+  },
+  "tool_access": [
+    {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "passed": true,
+      "name": "BreadboardTool0",
+      "diameter_mm": 8,
+      "length_mm": 90
+    },
+    {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "passed": true,
+      "name": "BreadboardTool1",
+      "diameter_mm": 8,
+      "length_mm": 90
+    },
+    {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "passed": true,
+      "name": "BreadboardTool2",
+      "diameter_mm": 8,
+      "length_mm": 90
+    },
+    {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "passed": true,
+      "name": "BreadboardTool3",
+      "diameter_mm": 8,
+      "length_mm": 90
+    }
+  ],
+  "screw_removal": [
+    {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "passed": true,
+      "name": "BreadboardScrew0",
+      "translation_mm": [
+        0,
+        0,
+        20
+      ],
+      "method": "continuous shaft/head cylinder union"
+    },
+    {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "passed": true,
+      "name": "BreadboardScrew1",
+      "translation_mm": [
+        0,
+        0,
+        20
+      ],
+      "method": "continuous shaft/head cylinder union"
+    },
+    {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "passed": true,
+      "name": "BreadboardScrew2",
+      "translation_mm": [
+        0,
+        0,
+        20
+      ],
+      "method": "continuous shaft/head cylinder union"
+    },
+    {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "passed": true,
+      "name": "BreadboardScrew3",
+      "translation_mm": [
+        0,
+        0,
+        20
+      ],
+      "method": "continuous shaft/head cylinder union"
+    }
+  ],
+  "seats": [
+    {
+      "xy": [
+        -57,
+        -40
+      ],
+      "seat_area_mm2": 24.630086404143977,
+      "distance_to_tray_mm": 0.0
+    },
+    {
+      "xy": [
+        -57,
+        -5
+      ],
+      "seat_area_mm2": 24.630086404143977,
+      "distance_to_tray_mm": 0.0
+    },
+    {
+      "xy": [
+        57,
+        -40
+      ],
+      "seat_area_mm2": 24.630086404143977,
+      "distance_to_tray_mm": 0.0
+    },
+    {
+      "xy": [
+        57,
+        -5
+      ],
+      "seat_area_mm2": 24.630086404143977,
+      "distance_to_tray_mm": 0.0
+    }
+  ],
+  "negative_controls": [
+    {
+      "case": "closed crown blocks removal",
+      "detected": true,
+      "expected_obstacle_prefixes": [
+        "HeadCrownShell",
+        "Crown"
+      ],
+      "hits": [
+        {
+          "object": "CrownFinL",
+          "volume_mm3": 2356.374999999997
+        },
+        {
+          "object": "CrownFinR",
+          "volume_mm3": 2356.374999999996
+        },
+        {
+          "object": "HeadServiceHatch",
+          "volume_mm3": 13206.000000000004
+        },
+        {
+          "object": "CrownSpine",
+          "volume_mm3": 328.00000000000006
+        },
+        {
+          "object": "CrownForePlate",
+          "volume_mm3": 3833.666666666667
+        },
+        {
+          "object": "CrownSideArmorL",
+          "volume_mm3": 9829.022465277792
+        },
+        {
+          "object": "CrownSideArmorR",
+          "volume_mm3": 9829.022465277798
+        },
+        {
+          "object": "CrownRearCassette",
+          "volume_mm3": 1751.2499999999998
+        },
+        {
+          "object": "CrownRearBlade0",
+          "volume_mm3": 115.50000000000001
+        },
+        {
+          "object": "CrownRearBlade1",
+          "volume_mm3": 115.50000000000001
+        },
+        {
+          "object": "CrownRearBlade2",
+          "volume_mm3": 21.0
+        },
+        {
+          "object": "CrownEffectInsetL",
+          "volume_mm3": 73.35000000000123
+        },
+        {
+          "object": "CrownEffectMarkLFront",
+          "volume_mm3": 25.199999999999726
+        },
+        {
+          "object": "CrownEffectMarkLRear",
+          "volume_mm3": 19.861875000000015
+        },
+        {
+          "object": "CrownEffectInsetR",
+          "volume_mm3": 73.35000000000124
+        },
+        {
+          "object": "CrownEffectMarkRFront",
+          "volume_mm3": 25.19999999999972
+        },
+        {
+          "object": "CrownEffectMarkRRear",
+          "volume_mm3": 19.86187500000006
+        },
+        {
+          "object": "HeadCrownShell",
+          "volume_mm3": 22872.0
+        }
+      ]
+    },
+    {
+      "case": "retained tray screws block removal",
+      "detected": true,
+      "expected_obstacle_prefixes": [
+        "BreadboardScrew"
+      ],
+      "hits": [
+        {
+          "object": "BreadboardScrew0",
+          "volume_mm3": 26.35715474645972
+        },
+        {
+          "object": "BreadboardScrew1",
+          "volume_mm3": 26.357154746459724
+        },
+        {
+          "object": "BreadboardScrew2",
+          "volume_mm3": 26.35715474645972
+        },
+        {
+          "object": "BreadboardScrew3",
+          "volume_mm3": 26.357154746459724
+        }
+      ]
+    },
+    {
+      "case": "height increased by 5 mm hits crown",
+      "detected": true,
+      "expected_obstacle_prefixes": [
+        "HeadCrownShell",
+        "Crown"
+      ],
+      "hits": [
+        {
+          "object": "HeadCrownShell",
+          "volume_mm3": 6500.000000000001
+        }
+      ]
+    }
+  ],
+  "passed": true,
+  "board_anti_lift_retention_verified": false,
+  "physical_fit_verified": false,
+  "limits": "Envelope and rigid tray only. No individual audio/display/USB/RF fit, hand access, flexible harness service, material strength or anti-lift retention acceptance.",
+  "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
+  "saved_and_reopened": true
+}

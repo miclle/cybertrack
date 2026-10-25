@@ -10,10 +10,11 @@
     13.0
   ],
   "center_z_mm": 188.0,
-  "panel_datum_y_mm": -81.0,
-  "probe_front_y_mm": -91.3,
+  "panel_datum_y_mm": -77.5,
+  "robot_fascia_outer_y_mm": -81.0,
+  "probe_front_y_mm": -87.8,
   "datum_is_assumption": true,
-  "datum_description": "robot front-panel outer face; user panel datum not confirmed",
+  "datum_description": "candidate PCB front face; user panel datum not confirmed",
   "candidate_hole_diameter_mm": 16.6,
   "nominal_radial_gap_mm": 0.3,
   "panel_valid": true,
@@ -23,10 +24,10 @@
       "side": "L",
       "bbox_mm": [
         5.0,
-        -91.3,
+        -87.8,
         180.0,
         21.0,
-        -81.0,
+        -77.5,
         196.0
       ],
       "valid": true,
@@ -38,10 +39,10 @@
       "side": "R",
       "bbox_mm": [
         -21.0,
-        -91.3,
+        -87.8,
         180.0,
         -5.0,
-        -81.0,
+        -77.5,
         196.0
       ],
       "valid": true,
@@ -51,21 +52,45 @@
     }
   ],
   "overlap_tolerance_mm3": 0.01,
-  "static_boolean_pairs": 8,
+  "static_boolean_pairs": 10,
   "overlaps": [],
   "reserved_space_overlaps": [],
   "nearby_distances": [
     {
       "probe": "L",
+      "object": "UltrasonicPCBEnvelope",
+      "category": "envelope",
+      "distance_mm": 0.0
+    },
+    {
+      "probe": "R",
+      "object": "UltrasonicPCBEnvelope",
+      "category": "envelope",
+      "distance_mm": 0.0
+    },
+    {
+      "probe": "L",
       "object": "SensorMask",
       "category": "exterior",
-      "distance_mm": 0.30000000000001137
+      "distance_mm": 0.29999999999999905
     },
     {
       "probe": "R",
       "object": "SensorMask",
       "category": "exterior",
-      "distance_mm": 0.30000000000001137
+      "distance_mm": 0.30000000000000193
+    },
+    {
+      "probe": "L",
+      "object": "UltrasonicRearEnvelope",
+      "category": "envelope",
+      "distance_mm": 1.5999999999999943
+    },
+    {
+      "probe": "R",
+      "object": "UltrasonicRearEnvelope",
+      "category": "envelope",
+      "distance_mm": 1.5999999999999943
     },
     {
       "probe": "L",
@@ -92,16 +117,28 @@
       "distance_mm": 2.735455276791934
     },
     {
+      "probe": "L",
+      "object": "UltrasonicTopConnector",
+      "category": "envelope",
+      "distance_mm": 4.206555615733701
+    },
+    {
       "probe": "R",
-      "object": "BrowArmorR",
-      "category": "exterior",
-      "distance_mm": 4.88960957256605
+      "object": "UltrasonicTopConnector",
+      "category": "envelope",
+      "distance_mm": 4.206555615733701
     },
     {
       "probe": "L",
       "object": "BrowArmorL",
       "category": "exterior",
-      "distance_mm": 4.889609572566055
+      "distance_mm": 4.889609572566043
+    },
+    {
+      "probe": "R",
+      "object": "BrowArmorR",
+      "category": "exterior",
+      "distance_mm": 4.8896095725660516
     },
     {
       "probe": "L",
@@ -129,27 +166,27 @@
     },
     {
       "probe": "L",
-      "object": "AudioModule",
+      "object": "BreadboardEnvelope",
       "category": "envelope",
-      "distance_mm": 8.25
+      "distance_mm": 7.5
     },
     {
       "probe": "R",
-      "object": "AudioModule",
+      "object": "BreadboardEnvelope",
       "category": "envelope",
-      "distance_mm": 8.25
+      "distance_mm": 7.5
     },
     {
       "probe": "L",
-      "object": "Electronics",
-      "category": "envelope",
-      "distance_mm": 9.0
+      "object": "ElectronicsTray",
+      "category": "structure",
+      "distance_mm": 9.219544457292887
     },
     {
       "probe": "R",
-      "object": "Electronics",
-      "category": "envelope",
-      "distance_mm": 9.0
+      "object": "ElectronicsTray",
+      "category": "structure",
+      "distance_mm": 9.219544457292887
     },
     {
       "probe": "R",
@@ -162,6 +199,12 @@
       "object": "BrowArmorR",
       "category": "exterior",
       "distance_mm": 9.691806012954135
+    },
+    {
+      "probe": "L",
+      "object": "UltrasonicWireSpace",
+      "category": "envelope",
+      "distance_mm": 9.704699910719626
     },
     {
       "probe": "L",
@@ -200,29 +243,24 @@
       "distance_mm": 10.75
     },
     {
-      "probe": "L",
-      "object": "ElectronicsTray",
-      "category": "structure",
-      "distance_mm": 11.800423721205947
-    },
-    {
-      "probe": "R",
-      "object": "ElectronicsTray",
-      "category": "structure",
-      "distance_mm": 11.800423721205947
-    },
-    {
       "probe": "R",
       "object": "JawAccent",
       "category": "exterior",
       "distance_mm": 12.615528128088298
+    },
+    {
+      "probe": "R",
+      "object": "UltrasonicWireSpace",
+      "category": "envelope",
+      "distance_mm": 13.565220814617716
     }
   ],
   "passed": true,
-  "pcb_and_rear_components_modeled": false,
+  "pcb_and_rear_components_modeled": true,
+  "pcb_and_rear_are_candidates": true,
   "mounting_verified": false,
   "physical_fit_verified": false,
   "acoustic_verified": false,
-  "source_after_sha256": "e8e64e7721dc0d49f2f3e6e9080f2602201f4a1152f46143a8f9386ef822c76d",
+  "source_after_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a",
   "saved_and_reopened": true
 }

@@ -169,8 +169,8 @@ def service_groups(doc):
     crown+=['HeadCrownShell','HeadServiceHatch']
     battery=['PowerBank','BatteryHatch','BatteryPullStrap']+[n for n in names if n.startswith(('BatteryPad','BatterySupportWasher'))]
     wet={name:([name+'Module'] if doc.getObject(name+'RetentionBand') else [name+suffix for suffix in (('ServiceLid','CapGrip','LidMark','TopPad') if doc.getObject(name+'TopPad') else ('ServiceLid','CapGrip','LidMark','FillPlug','FillSeal'))]) for name in ('Water','Bubble')}
-    return {'cable_access':['BottomServiceCover' if doc.getObject('BottomServiceCover') else 'CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule']+controller_members(doc)+[n for n in names if n.startswith(('ControllerMountScrew','ControllerMountInsert'))],**wet,
-            'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR'],
+    return {'cable_access':['BottomServiceCover' if doc.getObject('BottomServiceCover') else 'CableServiceCover'],'battery':battery,'crown':crown,'electronics':(['ElectronicsTray','BreadboardEnvelope'] if doc.getObject('BreadboardEnvelope') else ['ElectronicsTray','Electronics','AudioModule']+controller_members(doc)+[n for n in names if n.startswith(('ControllerMountScrew','ControllerMountInsert'))]),**wet,
+            **({'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR']} if doc.getObject('ArcModuleL') else {}),
             **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('bubble_gun','bubble_gun_cradle')} if doc.getObject('BubbleGunShell') else {}),
             **({'water_gun':['WaterGunBody','WaterGunInlet']} if doc.getObject('WaterGunBody') else {}),
             **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('water_gun_cradle',)} if doc.getObject('WaterGunCradle') else {})}
@@ -203,7 +203,7 @@ def check_service_paths(doc):
     scenarios=[('cable_access',(0,0,-80),bottom_screws if doc.getObject('BottomServiceCover') else ['AccessScrewL','AccessScrewR']),
                ('battery',(0,0,-60),[n.Name for n in all_shapes if n.Name.startswith('BatteryScrew')]+['PowerCableRoute','CableServiceCover','AccessScrewL','AccessScrewR']+bottom_removed),
                ('crown',(0,0,65),[n.Name for n in all_shapes if n.Name.startswith('CrownScrew')]),
-               ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']),
+               ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew','BreadboardScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute','UltrasonicWireSpace']),
                ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]+['WaterHoseRoute','BubbleGunHoseRoute']),
                ('Bubble',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewBubble')]+['WaterHoseRoute','BubbleGunHoseRoute'])]
     if doc.getObject('WaterRetentionBand'):
@@ -216,7 +216,7 @@ def check_service_paths(doc):
         lines=['WaterHoseRoute','WaterGunLeadRoute','WaterGunLeadConnector']
         scenarios.append(('water_gun',(0,-150,2),lines))
         scenarios.append(('water_gun_cradle',(60,0,2),lines+groups['water_gun']+['WaterGunBaseScrew1','WaterGunBaseScrew2']))
-    prerequisites=groups['crown']+groups['electronics']+[o.Name for o in all_shapes if o.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']
+    prerequisites=groups['crown']+groups['electronics']+[o.Name for o in all_shapes if o.Name.startswith(('CrownScrew','TrayScrew','BreadboardScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute','UltrasonicWireSpace']
     scenarios += [('arc_left',(-24.5,0,85),prerequisites),('arc_right',(24.5,0,85),prerequisites)]
     crown_removed=groups['crown']+[o.Name for o in all_shapes if o.Name.startswith('CrownScrew')]+['ControllerWireRoute']
     scenarios += [('controller',(0,0,65),crown_removed+[o.Name for o in all_shapes if o.Name.startswith('ControllerMountScrew')]),
@@ -225,6 +225,8 @@ def check_service_paths(doc):
                   ('usb_com',(-12,0,35),crown_removed),('usb_native',(-12,0,35),crown_removed)]
     special={'controller':controller_members(doc),'controller_retainer':['ControllerRetainer'],
              'controller_board':['ESP32Board'],'usb_com':['ControllerUSBCOM'],'usb_native':['ControllerUSBUSB']}
+    if doc.getObject('BreadboardEnvelope'):
+        scenarios=[row for row in scenarios if not row[0].startswith(('arc_', 'controller', 'usb_'))]
     for group,delta,removed in scenarios:
         moving=special[group] if group in special else groups[group];fixed=[o for o in all_shapes if o.Name not in moving+removed]
         collisions=[];tested=0
@@ -271,4 +273,4 @@ def check_service_paths(doc):
                          'scope':'bare cylindrical envelope after listed prerequisites; excludes mounts, leads and tools'}
         results.append({'group':group,'waypoints_mm':[[p.x,p.y,p.z] for p in waypoints],'pose_count':len(poses),'removed_first':removed,'boolean_pairs_tested':tested,'overlaps':collisions,'continuous_translation_sweep':swept_check,
                         'passed':not collisions and (swept_check is None or swept_check['passed'])})
-    return {'method':'8 discrete poses per straight segment; wet caps use lift-back-lift; arc envelopes lift 2 mm, move inward then up after tray removal, with continuous translation sweeps; USB plugs withdraw then lift with crown removed; other groups remain discrete; no tool/hand access certification','scenarios':results,'passed':all(r['passed'] for r in results),'physical_assembly_verified':False}
+    return {'method':'8 discrete poses per straight segment; whole breadboard continuous tray/fastener/tool checks are reported separately in breadboard_check; legacy arc/USB scenarios only exist when those objects are present; no hand access certification','scenarios':results,'passed':all(r['passed'] for r in results),'physical_assembly_verified':False}

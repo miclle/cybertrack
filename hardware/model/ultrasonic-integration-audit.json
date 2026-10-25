@@ -1,0 +1,417 @@
+{
+  "revision": "0.41",
+  "candidate_static": {
+    "UltrasonicPCBEnvelope": {
+      "boolean_pairs_tested": 5,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "UltrasonicRingL",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "UltrasonicRingR",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "UltrasonicRearEnvelope",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "UltrasonicTopConnector",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "SensorMask",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "SensorStatusStrip",
+          "distance_mm": 3.5
+        },
+        {
+          "object": "VisorRim",
+          "distance_mm": 3.500000000000014
+        },
+        {
+          "object": "ElectronicsTray",
+          "distance_mm": 4.069397989875165
+        },
+        {
+          "object": "HeadShell",
+          "distance_mm": 4.716990566028302
+        }
+      ],
+      "passed": true
+    },
+    "UltrasonicRearEnvelope": {
+      "boolean_pairs_tested": 3,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "UltrasonicPCBEnvelope",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "UltrasonicTopConnector",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "UltrasonicRingL",
+          "distance_mm": 1.5999999999999943
+        },
+        {
+          "object": "UltrasonicRingR",
+          "distance_mm": 1.5999999999999943
+        },
+        {
+          "object": "BreadboardEnvelope",
+          "distance_mm": 1.9000000000000057
+        },
+        {
+          "object": "SensorMask",
+          "distance_mm": 2.0999999999999943
+        },
+        {
+          "object": "ElectronicsTray",
+          "distance_mm": 2.23606797749979
+        }
+      ],
+      "passed": true
+    },
+    "UltrasonicTopConnector": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "UltrasonicPCBEnvelope",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "UltrasonicRearEnvelope",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "UltrasonicWireSpace",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "SensorMask",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "HeadCrownShell",
+          "distance_mm": 0.9011551125709375
+        },
+        {
+          "object": "HeadShell",
+          "distance_mm": 1.0999999999999943
+        },
+        {
+          "object": "BreadboardEnvelope",
+          "distance_mm": 1.5
+        },
+        {
+          "object": "VisorRim",
+          "distance_mm": 3.5
+        },
+        {
+          "object": "SensorStatusStrip",
+          "distance_mm": 3.5
+        },
+        {
+          "object": "UltrasonicRingL",
+          "distance_mm": 4.206555615733701
+        },
+        {
+          "object": "UltrasonicRingR",
+          "distance_mm": 4.206555615733701
+        }
+      ],
+      "passed": true
+    },
+    "UltrasonicWireSpace": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "UltrasonicTopConnector",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "BreadboardEnvelope",
+          "distance_mm": 1.5
+        },
+        {
+          "object": "HeadCrownShell",
+          "distance_mm": 1.6046204502837706
+        },
+        {
+          "object": "HeadShell",
+          "distance_mm": 2.0
+        }
+      ],
+      "passed": true
+    }
+  },
+  "tool_access": {
+    "BreadboardTool0": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "BreadboardTool1": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "BreadboardTool2": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    },
+    "BreadboardTool3": {
+      "boolean_pairs_tested": 0,
+      "overlaps": [],
+      "nearby": [],
+      "passed": true
+    }
+  },
+  "module_removal": {
+    "rear": {
+      "boolean_pairs_tested": 4,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "SensorMask",
+          "distance_mm": 0.299999999999977
+        },
+        {
+          "object": "HeadShell",
+          "distance_mm": 1.0999999999999943
+        },
+        {
+          "object": "VisorRim",
+          "distance_mm": 2.0
+        },
+        {
+          "object": "SensorStatusStrip",
+          "distance_mm": 2.735455276791933
+        }
+      ],
+      "passed": true
+    },
+    "up": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "SensorMask",
+          "distance_mm": 1.2000000000000028
+        },
+        {
+          "object": "HeadShell",
+          "distance_mm": 1.7999999999999972
+        },
+        {
+          "object": "VisorRim",
+          "distance_mm": 4.200000000000003
+        },
+        {
+          "object": "SensorStatusStrip",
+          "distance_mm": 4.200000000000003
+        }
+      ],
+      "passed": true
+    },
+    "rear_translation_mm": [
+      0,
+      11,
+      0
+    ],
+    "up_translation_mm": [
+      0,
+      0,
+      70
+    ],
+    "removed_first": [
+      "BreadboardEnvelope",
+      "BreadboardScrew0",
+      "BreadboardScrew1",
+      "BreadboardScrew2",
+      "BreadboardScrew3",
+      "BrowArmorL",
+      "BrowArmorR",
+      "CrownEffectInsetL",
+      "CrownEffectInsetR",
+      "CrownEffectMarkLFront",
+      "CrownEffectMarkLRear",
+      "CrownEffectMarkRFront",
+      "CrownEffectMarkRRear",
+      "CrownFinL",
+      "CrownFinR",
+      "CrownForePlate",
+      "CrownRearBlade0",
+      "CrownRearBlade1",
+      "CrownRearBlade2",
+      "CrownRearCassette",
+      "CrownScrewLFront",
+      "CrownScrewLRear",
+      "CrownScrewRFront",
+      "CrownScrewRRear",
+      "CrownSideArmorL",
+      "CrownSideArmorR",
+      "CrownSpine",
+      "ElectronicsTray",
+      "HeadCrownShell",
+      "HeadServiceHatch",
+      "OccipitalBrowL",
+      "OccipitalBrowR",
+      "PowerCableRoute",
+      "UltrasonicWireSpace"
+    ],
+    "method": "continuous box sweeps for cuboids; exact axial/capsule sweeps for full probe cylinders",
+    "mounts_and_hands_not_modeled": true
+  },
+  "negative_controls": {
+    "rear_connector_10_mm": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [
+        {
+          "object": "BreadboardEnvelope",
+          "overlap_mm3": 972.0000000000001
+        }
+      ],
+      "nearby": [
+        {
+          "object": "BreadboardEnvelope",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": false
+    },
+    "pcb_at_old_probe_datum": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [
+        {
+          "object": "SensorMask",
+          "overlap_mm3": 747.4421827014298
+        }
+      ],
+      "nearby": [
+        {
+          "object": "SensorMask",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": false
+    },
+    "unrelieved_tray": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [
+        {
+          "object": "UltrasonicRearEnvelope",
+          "overlap_mm3": 539.9999999999949
+        },
+        {
+          "object": "UltrasonicTopConnector",
+          "overlap_mm3": 96.0
+        }
+      ],
+      "nearby": [
+        {
+          "object": "UltrasonicRearEnvelope",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "UltrasonicTopConnector",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "UltrasonicPCBEnvelope",
+          "distance_mm": 3.4000000000000057
+        }
+      ],
+      "passed": false
+    },
+    "wire_not_parked": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [
+        {
+          "object": "UltrasonicWireSpace",
+          "overlap_mm3": 81.11459291645588
+        }
+      ],
+      "nearby": [
+        {
+          "object": "UltrasonicWireSpace",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": false
+    },
+    "module_before_breadboard": {
+      "boolean_pairs_tested": 1,
+      "overlaps": [
+        {
+          "object": "BreadboardEnvelope",
+          "overlap_mm3": 2319.4335088082285
+        }
+      ],
+      "nearby": [
+        {
+          "object": "BreadboardEnvelope",
+          "distance_mm": 0.0
+        }
+      ],
+      "passed": false
+    }
+  },
+  "candidate_bounds_mm": {
+    "UltrasonicPCBEnvelope": [
+      -22.5,
+      -77.5,
+      178.0,
+      22.5,
+      -75.9,
+      198.0
+    ],
+    "UltrasonicRearEnvelope": [
+      -22.5,
+      -75.9,
+      178.0,
+      22.5,
+      -71.9,
+      198.0
+    ],
+    "UltrasonicTopConnector": [
+      -6.0,
+      -77.5,
+      198.0,
+      6.0,
+      -71.5,
+      206.0
+    ],
+    "UltrasonicWireSpace": [
+      -2.0,
+      -75.5,
+      205.0,
+      56.0,
+      -58.0,
+      209.0
+    ]
+  },
+  "evidence_sha256": {
+    "hardware/components/ultrasonic/dimensions.json": "e4ae80b552546871049e01d81841d9cd98e4e13aa5f24dd6e10f0a38a9b132b1",
+    "hardware/procurement-web-review.md": "c164607b48d14a67f473f2142094aad81cb9367d411ad0a16d98b7bc1ebc301d"
+  },
+  "passed": true,
+  "mounting_designed": false,
+  "physical_fit_verified": false,
+  "electrical_verified": false,
+  "limits": "Unmeasured PCB, datum, rear height, header, connector, wire bend and board endpoint. No mounts or hand access acceptance.",
+  "source_sha256": "efca74946c9fa52dfabe72a5f09e3866edebabfc9de3c9537f13f9d1b5c8e64a"
+}
