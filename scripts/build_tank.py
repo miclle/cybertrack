@@ -29,6 +29,7 @@ from front_effects import apply as add_front_effects, check as check_front_effec
 from mt3608_layout import apply as add_mt3608, check as check_mt3608, render as render_mt3608
 from l298n_layout import add_l298n, check_l298n, render_l298n
 from l298n_mount import apply as add_l298n_mount, check as check_l298n_mount, render as render_l298n_mount, export_carrier
+from power_switch import apply as add_power_switch, check as check_power_switch, render as render_power_switch, export_component as export_power_switch
 from speaker_layout import speaker_shape, LABEL as SPEAKER_LABEL, BASIS as SPEAKER_BASIS
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -261,6 +262,7 @@ def main():
         import FreeCADGui as Gui
         from PySide import QtCore, QtGui
         Gui.showMainWindow()
+    export_power_switch(ROOT)
     source_path = ROOT/'hardware/components/drive-layout/DriveLayout.FCStd'
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
@@ -592,6 +594,7 @@ def main():
     ignition_routing_info=add_ignition_routing(doc,add)
     from print_consolidation import connect_features, finalize as finalize_print_parts
     print_connections=connect_features(doc)
+    power_switch_info=add_power_switch(doc,add)
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
@@ -676,6 +679,7 @@ def main():
         render_ignition_routing(saved, OUT)
         render_ignition_mos(saved, OUT)
         render_side_frames(saved, OUT)
+        render_power_switch(saved, OUT)
         render_l298n_mount(saved, OUT)
         from drive_service import render_drive_views
         render_drive_views(saved, OUT)
@@ -721,6 +725,7 @@ def main():
             'bottle_backpack':bottle_info,'bottle_backpack_check':check_bottle_backpack(final),
             'bounding_box_method':'optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)',
             'battery_layout':battery_info,
+            'power_switch_layout':power_switch_info,'power_switch_check':check_power_switch(final),
             'ignition_mos_layout':ignition_mos_info,'ignition_mos_check':check_ignition_mos(final),
             'arc_module_envelopes':{'quantity':2,'status':'passive backpack-side body candidates; no HV leads, electrode or drive'},
             'crown_effect_locations':{'status':'historical crown decoration; active effect location request moved to front chassis in 0.45','quantity':2,'center_x_mm':[51.5,-51.5],
@@ -799,7 +804,7 @@ def main():
     (OUT/'ignition-routing-audit.json').write_text(json.dumps(report['ignition_routing_check'],ensure_ascii=False,indent=2)+'\n')
     (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check','service_paths')},ensure_ascii=False,indent=2))
-    required_checks = ('ignition_mos_check', 'ignition_routing_check', 'front_effects_check',
+    required_checks = ('power_switch_check', 'ignition_mos_check', 'ignition_routing_check', 'front_effects_check',
                        'mt3608_check', 'effects_mount_check', 'ultrasonic_integration_check',
                        'head_lift_check', 'bottle_backpack_check', 'l298n_mount_check',
                        'l298n_check', 'drive_mount_check', 'top_feed_check',
@@ -816,6 +821,9 @@ def main():
     normalize(OUT)
     from model_order import reorder
     reorder(OUT)
+    switch_report=report['power_switch_check']
+    switch_report.update(source_document='source/CyberTrack-design.FCStd',source_sha256=sha(OUT/'source/CyberTrack-design.FCStd'),delivery_sha256=sha(cad),saved_and_reopened=True,layout=power_switch_info)
+    (OUT/'power-switch-audit.json').write_text(json.dumps(switch_report,ensure_ascii=False,indent=2)+'\n')
     if args.render:
         # Dispose delayed view widgets while Python and its GIL still exist.
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)

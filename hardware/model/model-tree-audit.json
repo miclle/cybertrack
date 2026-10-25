@@ -1,8 +1,8 @@
 {
   "source_document": "source/CyberTrack-design.FCStd",
-  "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+  "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
   "delivery_document": "CyberTrack.FCStd",
-  "delivery_sha256": "8474a47c13543be80023cad0cce11ee53c575633567c7795dd38d328b371f77b",
+  "delivery_sha256": "24b224c7f8ea146f0bbd8c0a26ef621064be9d11d54a0280f7c99c30d64c2cf6",
   "kept_group": "01 双履带与动力参考",
   "drive_members": [
     "DriveCouplerL",
@@ -188,1514 +188,1839 @@
     "WaterStrapAccessSpace"
   ],
   "retained_hidden_envelope_count": 20,
-  "root_part_count": 271,
-  "part_count": 301,
+  "root_part_count": 275,
+  "part_count": 305,
   "geometry_scope": "Retained objects; removed only duplicate inputs and hidden nonphysical check spaces",
   "shape_checks": [
     {
       "name": "TrackLeftRubberBand",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackLeftTreadPads",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackLeftChevronTreads",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "TrackLeftShoulderLugs",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "TrackLeftWheelTires",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackLeftWheelRims",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackLeftWheelFaces",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackLeftWheelHubs",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackLeftSuspensionArms",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackLeftRockerPlates",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackLeftFasteners",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackRightRubberBand",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackRightTreadPads",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackRightChevronTreads",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "TrackRightShoulderLugs",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "TrackRightWheelTires",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackRightWheelRims",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackRightWheelFaces",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackRightWheelHubs",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackRightSuspensionArms",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackRightRockerPlates",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackRightFasteners",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorShaftL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "DriveCouplerL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackMountL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorShaftR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "DriveCouplerR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackMountR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryHatch",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryPadN54N90",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryPadN54N29",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryPad54N90",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryPad54N29",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "KeelLid",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "HeadShell",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "VisorRim",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "CheekArmorL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "CheekArmorR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "JawArmor",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "JawAccent",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "AudioSideGuardL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "AudioEarRingL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "AudioEarGrilleL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EarHubL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "AudioSideGuardR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "AudioEarRingR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "AudioEarGrilleR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EarHubR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TempleGuardL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TempleGuardR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TempleCrestL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TempleLowerBladeL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EarOuterArcL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TempleCrestR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TempleLowerBladeR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EarOuterArcR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "OccipitalFrame",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "OccipitalInset",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "OccipitalSpine",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "OccipitalMark",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "OccipitalLouverL0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "OccipitalLouverL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "OccipitalLouverL2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "OccipitalLouverR0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "OccipitalLouverR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "OccipitalLouverR2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "SensorMask",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "UltrasonicRingL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "UltrasonicFaceL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "UltrasonicRingR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "UltrasonicFaceR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "SensorStatusStrip",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ShoulderRailL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "KeelSideFrameL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ShoulderRailR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "KeelSideFrameR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ChestAudioPanel",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ChestGuardL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ChestAccentL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ChestGuardR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ChestAccentR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "LowerChin",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ChestBadge",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "StopPlinth",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "StopControl",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "PowerBank",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryInsertLFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryScrewLFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryInsertLRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryScrewLRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryInsertRFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryScrewRFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryInsertRRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryScrewRRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatteryPullStrap",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "CrownInsertLFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "CrownScrewLFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "CrownInsertLRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "CrownScrewLRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "CrownInsertRFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "CrownScrewRFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "CrownInsertRRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "CrownScrewRRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ElectronicsTray",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "PowerCableRoute",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BaseCableGrommet",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "HeadCableGrommet",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "NeckCableBridge",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterHoseRoute",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "WaterGunBody",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterGunInlet",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterGunBaseInsert1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterGunBaseScrew1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterGunBaseInsert2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterGunBaseScrew2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterGunLowerPad1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterGunLowerPad2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterGunLeadRoute",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterGunLeadConnector",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunShell",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunWheel",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunMotor",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunGearcase",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunMountingTab",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunFrontFoot",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunBaseInsert1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunBaseScrew1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunBaseInsert2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunBaseScrew2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunLowerPadRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunHoseRoute",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "BubbleGunLeadRoute",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleGunLeadConnector",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackMountScrewLFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackMountScrewLRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorFaceScrewL0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorFaceScrewL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorFaceScrewL2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorFaceScrewL3",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackMountScrewRFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "TrackMountScrewRRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorFaceScrewR0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorFaceScrewR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorFaceScrewR2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MotorFaceScrewR3",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatterySupportWasherRFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatterySupportWasherRRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatterySupportWasherLFront",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BatterySupportWasherLRear",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BottomCoverScrew0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BottomCoverScrew1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BottomCoverScrew2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BottomCoverScrew3",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BottomCoverScrew4",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BottomCoverScrew5",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BottomServiceCover",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NEnvelope",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NClampNutL0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NClampScrewL0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NSidePadL0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NRearPadL0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NClampNutL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NClampScrewL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NSidePadL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NRearPadL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NBottomPadL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NClampNutR0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NClampScrewR0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NSidePadR0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NRearPadR0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NClampNutR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NClampScrewR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NSidePadR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NRearPadR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NBottomPadR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NCarrier",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NMountInsertR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NMountScrewR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NMountInsertL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "L298NMountScrewL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterModule",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterPodInsertL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterPodScrewL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterPodInsertR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterPodScrewR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterPod",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterBottomPad",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterSidePad0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterSidePad1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterRetentionBand",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterStrapClosure",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "WaterLidMark",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleModule",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubblePodInsertL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubblePodScrewL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubblePodInsertR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubblePodScrewR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubblePod",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleBottomPad",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleSidePad0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleSidePad1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleRetentionBand",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleStrapClosure",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BubbleLidMark",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BreadboardInsert0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BreadboardScrew0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BreadboardInsert1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BreadboardScrew1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BreadboardInsert2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BreadboardScrew2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BreadboardInsert3",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BreadboardScrew3",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BreadboardEnvelope",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "UltrasonicPCBEnvelope",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "UltrasonicRearEnvelope",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "UltrasonicTopConnector",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "UltrasonicWireSpace",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BackpackArcL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ArcBottomPadL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ArcLinerInnerL0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ArcLinerOuterL0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ArcLinerInnerL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ArcLinerOuterL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "BackpackArcR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ArcBottomPadR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ArcLinerInnerR0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ArcLinerOuterR0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ArcLinerInnerR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "ArcLinerOuterR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectInsert0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectScrew0",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectInsert1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectScrew1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectInsert2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectScrew2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectInsert3",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectScrew3",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectMOSL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectSupportLMOS",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerInsertLMOSInner",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerScrewLMOSInner",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerInsertLMOSOuter",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerScrewLMOSOuter",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerLMOS",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectBuckL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectSupportLBuck",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerInsertLBuckInner",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerScrewLBuckInner",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerInsertLBuckOuter",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerScrewLBuckOuter",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerLBuck",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectMOSR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectSupportRMOS",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerInsertRMOSInner",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerScrewRMOSInner",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerInsertRMOSOuter",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerScrewRMOSOuter",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerRMOS",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectBuckR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectSupportRBuck",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerInsertRBuckInner",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerScrewRBuckInner",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerInsertRBuckOuter",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerScrewRBuckOuter",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectRetainerRBuck",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "EffectTray",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "MT3608Envelope",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSBoard",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSSupport",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSRetainer",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSRetainerInsertInner",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSRetainerScrewInner",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSRetainerInsertOuter",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSRetainerScrewOuter",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSMountInsertL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSMountScrewL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSMountInsertR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSMountScrewR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionMOSCarrier",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "FrontEffectSleeveL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "FrontEffectLeadL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "FrontEffectSleeveL2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "FrontEffectLeadL2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "FrontEffectSleeveR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "FrontEffectLeadR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "FrontEffectSleeveR2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "FrontEffectLeadR2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "IgnitionRouteL",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "IgnitionRouteBranchL1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "IgnitionRouteBranchL2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "IgnitionRouteR",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "IgnitionRouteBranchR1",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "IgnitionRouteBranchR2",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
+    },
+    {
+      "name": "PowerSwitchBody",
+      "symmetric_difference_mm3": 0.0,
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
+    },
+    {
+      "name": "PowerSwitchLever",
+      "symmetric_difference_mm3": 0.0,
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
+    },
+    {
+      "name": "PowerSwitchScrew0",
+      "symmetric_difference_mm3": 0.0,
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
+    },
+    {
+      "name": "PowerSwitchScrew1",
+      "symmetric_difference_mm3": 0.0,
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "PrintBackpack",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": true
     },
     {
       "name": "PrintBubbleCradle",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "PrintCrown",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "PrintLowerTub",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "PrintNeck",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     },
     {
       "name": "PrintWaterCradle",
       "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": false
+      "native_brep_matches": false,
+      "brep_without_display_mesh_matches": false
     }
   ],
   "geometry_unchanged": true,

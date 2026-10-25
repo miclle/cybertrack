@@ -1,12 +1,12 @@
 {
   "delivery_document": "CyberTrack.FCStd",
-  "before_sha256": "a29c94cd282134293f106eee2f2ce4ccff4c3d263a69361826b8a131b5c6849d",
-  "delivery_sha256": "43fb9f2998f0f23edda77ccc80b23bbcb5c18ce0f851a355036cd67ba33ff17f",
+  "before_sha256": "1ab1ac1b80bd031161eb32000ea3939522a29d6dc50a37063642fe7e8c7214b1",
+  "delivery_sha256": "d8140fd9466b124059cef56c74dbdb4709716b1bbc3eb4e531d57f795c212042",
   "source_document": "source/CyberTrack-design.FCStd",
-  "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
-  "part_count": 301,
-  "unique_labels": 301,
-  "renamed_count": 295,
+  "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+  "part_count": 305,
+  "unique_labels": 305,
+  "renamed_count": 299,
   "geometry_and_gui_entries_byte_identical": true,
   "other_document_properties_unchanged": true,
   "native_readback_passed": true,
@@ -1516,6 +1516,26 @@
       "name": "PrintNeck",
       "label": "PP06 一体固定颈架",
       "description": ""
+    },
+    {
+      "name": "PowerSwitchBody",
+      "label": "电源开关 · 本体与挂耳（占位）",
+      "description": "电源开关／实测包络与挂耳"
+    },
+    {
+      "name": "PowerSwitchLever",
+      "label": "电源开关 · 拨柄",
+      "description": "电源开关／拨柄／中间行程展示"
+    },
+    {
+      "name": "PowerSwitchScrew0",
+      "label": "电源开关 · 固定螺钉 · 1",
+      "description": "电源开关／Ø2×6塑料用自攻螺钉候选 1"
+    },
+    {
+      "name": "PowerSwitchScrew1",
+      "label": "电源开关 · 固定螺钉 · 2",
+      "description": "电源开关／Ø2×6塑料用自攻螺钉候选 2"
     }
   ]
 }

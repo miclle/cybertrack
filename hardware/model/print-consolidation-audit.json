@@ -1,5 +1,5 @@
 {
-  "revision": "0.51",
+  "revision": "0.53",
   "changes": {
     "HeadCrownShell": {
       "added_volume_mm3": 222.2945844332539,
@@ -84,7 +84,7 @@
     "dry_side_unchanged": true
   },
   "physical_fit_verified": false,
-  "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+  "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
   "parts": [
     {
       "id": "PP01",
@@ -114,16 +114,16 @@
       "cad_boundary_shells": 1,
       "stl_nonmanifold": false,
       "stl_facets": 2614,
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry",
       "step_volume_difference_mm3": 4.94765117764473e-09,
       "step_volume_comparison_passed": true,
       "missing_source_volume_mm3": 0.0,
       "extra_volume_mm3": 0.0,
       "files": {
-        "PP01-WaterCradle.step": "c8f54c46118da9f1e4502e20cea04a1f22b3f4d1966bd1c99b12bef4eb6553e0",
+        "PP01-WaterCradle.step": "adddd7ee0a898740dd5aa2c71536b29ec607876aaa385310b3c92ad13676e7e9",
         "PP01-WaterCradle.stl": "be0e64070927c7c40243337676fd4be7010d04372605477fcc4d50332c27aaa1"
-      },
-      "step_geometry_equivalence_verified": false,
-      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+      }
     },
     {
       "id": "PP02",
@@ -158,16 +158,16 @@
       "cad_boundary_shells": 1,
       "stl_nonmanifold": false,
       "stl_facets": 2156,
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry",
       "step_volume_difference_mm3": 6.621121428906918e-10,
       "step_volume_comparison_passed": true,
       "missing_source_volume_mm3": 0.0,
       "extra_volume_mm3": 0.0,
       "files": {
-        "PP02-BubbleCradle.step": "325fb8c7d66bd841801f01c2260e0fb8a26865bcb7235383744fa84e0c5f7536",
+        "PP02-BubbleCradle.step": "b43a003bd75ef44f97dc920f824cb4b724fa1ec0e7f4ac2eb7d9cb47c26a88a0",
         "PP02-BubbleCradle.stl": "5a7a816b63a00bd774c5cdf81757067471415faa87382f2dc94f2532ff8dd00a"
-      },
-      "step_geometry_equivalence_verified": false,
-      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+      }
     },
     {
       "id": "PP03",
@@ -197,16 +197,16 @@
       "cad_boundary_shells": 1,
       "stl_nonmanifold": false,
       "stl_facets": 5310,
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry",
       "step_volume_difference_mm3": 34.68688506021863,
       "step_volume_comparison_passed": false,
       "missing_source_volume_mm3": 0.0,
       "extra_volume_mm3": 0.0,
       "files": {
-        "PP03-Backpack.step": "17cd9a9a2a80070d4ea24ad142e88656203888c1617ce55a4019088ed6ae7ad2",
+        "PP03-Backpack.step": "f50bd5a86b90e888bb1fd7670e5415ad5ef77ed7ef3f71cb91acde0394b970af",
         "PP03-Backpack.stl": "5543c7c8e84176066d3ce59598583102a1484125795c5f3ad3c8356039e846b5"
-      },
-      "step_geometry_equivalence_verified": false,
-      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+      }
     },
     {
       "id": "PP04",
@@ -236,16 +236,16 @@
       "cad_boundary_shells": 3,
       "stl_nonmanifold": false,
       "stl_facets": 23900,
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry",
       "step_volume_difference_mm3": 2.5757559342309833e-05,
       "step_volume_comparison_passed": true,
       "missing_source_volume_mm3": 0.0,
       "extra_volume_mm3": 0.0,
       "files": {
-        "PP04-LowerTub.step": "803ed8d5dc0209ee0612996af8a919e140429f79c31a6a84816cb7da2a0c574c",
-        "PP04-LowerTub.stl": "00835a548c338567200cc2e77dda745804b7ce35085599b992755dc991eda799"
-      },
-      "step_geometry_equivalence_verified": false,
-      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+        "PP04-LowerTub.step": "23b694802d2baea55032f8777b952aa0540678a6a8deb944645767dfd2311147",
+        "PP04-LowerTub.stl": "cc68a505a7ca1a9d2d482af46e896d90c2aa8737ecba11962c95c7b4c4310478"
+      }
     },
     {
       "id": "PP05",
@@ -294,16 +294,16 @@
       "cad_boundary_shells": 1,
       "stl_nonmanifold": false,
       "stl_facets": 3662,
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry",
       "step_volume_difference_mm3": 4.358286418573698,
       "step_volume_comparison_passed": false,
       "missing_source_volume_mm3": 0.0,
       "extra_volume_mm3": 0.0,
       "files": {
-        "PP05-Crown.step": "000110fe70736b595a0c1a43e9ec7448df4eaf81b15c67ad7323d1aadd2225b1",
-        "PP05-Crown.stl": "3fb7b98607ec68bc0f33b265c5c1854d36c0b73278f99a0b21d7b15103f9e4ad"
-      },
-      "step_geometry_equivalence_verified": false,
-      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+        "PP05-Crown.step": "d6cf42c7c2d01f0c037b8cd0b04d93ef41a4b0e0e90ac0efcde1e06271eea196",
+        "PP05-Crown.stl": "562af82a9a90cd93b8d25c8cf19b6d25fe4fba1aae30cf456aafaa94095f0ce9"
+      }
     },
     {
       "id": "PP06",
@@ -349,16 +349,16 @@
       "cad_boundary_shells": 1,
       "stl_nonmanifold": false,
       "stl_facets": 6562,
+      "step_geometry_equivalence_verified": false,
+      "step_usage": "layout_exchange_only; use native FCStd for geometry",
       "step_volume_difference_mm3": 0.00021914618992013857,
       "step_volume_comparison_passed": true,
       "missing_source_volume_mm3": 0.0,
       "extra_volume_mm3": 0.0,
       "files": {
-        "PP06-Neck.step": "797f4287697e49720875da43041c4b3255a33f6d4fde0cfdc70e7fa2f7819742",
-        "PP06-Neck.stl": "484f6ffdd99c1655fdbda4eb7f5bb68f7fec2207a7dd1b3af19ae56d2c36e4c8"
-      },
-      "step_geometry_equivalence_verified": false,
-      "step_usage": "layout_exchange_only; use native FCStd for geometry"
+        "PP06-Neck.step": "a03dcbabbb5302d37fccad40c3e2ecc25125f3fe0207bb73cad51315e961bb97",
+        "PP06-Neck.stl": "9e6738d9a99053a63f8ac82914502ea89617a7a0672124ac2021108968ab1966"
+      }
     }
   ],
   "source_feature_count": 58,
@@ -368,14 +368,6 @@
   "manufacturing_released": false,
   "checks_on_design_features_equivalent_to_union": true,
   "limits": "CAD solid connectivity, nominal interference and existing service checks; no slicing, strength, material, tolerance or physical acceptance.",
-  "scope_audit": "print-consolidation-change-audit.json",
-  "passed_checks": [
-    "CAD single solids",
-    "source coverage",
-    "STL closed manifold boundaries matching CAD shells",
-    "native saved readback"
-  ],
-  "step_geometry_equivalence_verified": false,
   "source_document": "source/CyberTrack-design.FCStd",
   "equivalent_delivery_audit": "model-tree-audit.json"
 }

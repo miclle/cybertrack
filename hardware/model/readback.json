@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.51",
+  "design_revision": "0.53",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "drive_mount_check": {
     "tolerance_mm3": 1e-05,
@@ -1985,9 +1985,8 @@
       "No material, strength, fatigue, thread, tolerance, sealing or manufacturing acceptance."
     ],
     "passed": true,
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
-    "saved_and_reopened": false,
-    "equivalent_saved_source_geometry_verified_by": "print-consolidation-change-audit.json"
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+    "saved_and_reopened": true
   },
   "head_lift_check": {
     "revision": "0.37",
@@ -2187,7 +2186,9 @@
     "limits": "CAD nominal clearances and prescribed rigid service envelopes only; actual cap diameter, flexible hose withdrawal/parking, hand access, stiffness and stability unverified",
     "physical_fit_verified": false,
     "manufacturing_released": false,
-    "assembly_revision": "0.51"
+    "assembly_revision": "0.53",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+    "saved_and_reopened": true
   },
   "rear_armor_symmetry_check": {
     "object": "RearBaseArmor",
@@ -2240,7 +2241,7 @@
     "tolerance_mm3": 1e-05,
     "passed": true,
     "physical_or_manufacturing_verified": false,
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "top_feed_check": {
@@ -2318,7 +2319,7 @@
     "internal_hose_is_clearance_only": true,
     "suction_lift_air_seal_priming_and_physical_fit_verified": false,
     "passed": true,
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "bottle_backpack": {
@@ -2514,7 +2515,7 @@
     "no_tools_for_routine_refill_design_intent": true,
     "physical_retention_seal_venting_material_fit_verified": false,
     "manufacturing_released": false,
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
@@ -2568,6 +2569,123 @@
     "port_orientation_verified": false,
     "cable_connection_complete": false,
     "mass_kg": null
+  },
+  "power_switch_layout": {
+    "centre_xyz_mm": [
+      0.0,
+      -64.0,
+      81.1
+    ],
+    "flange_contact_plane_z_mm": 81.1,
+    "lever_tip_z_mm": 85.1,
+    "guard_top_z_mm": 86.1,
+    "body_opening_xy_mm": [
+      11.2,
+      6.4
+    ],
+    "pilot_holes_diameter_mm": 1.6,
+    "pilot_depth_mm": 6,
+    "screw_hole_pitch_mm": 14.8,
+    "nominal_engagement_depth_mm": 5.5,
+    "pilot_to_body_opening_wall_mm": 1.0,
+    "fasteners": "2 candidate diameter-2 x 6 plastic self-tapping screws; core only, no threads modeled",
+    "flange_thickness_assumed_mm": 0.5,
+    "service": "disconnect leads; unscrew from above; extract switch upwards without removing battery or bottom cover",
+    "physical_fit_verified": false,
+    "electrical_verified": false
+  },
+  "power_switch_check": {
+    "static": {
+      "PowerSwitchBody": {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 5
+      },
+      "PowerSwitchLever": {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 3
+      },
+      "PowerSwitchScrew0": {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 3
+      },
+      "PowerSwitchScrew1": {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 3
+      }
+    },
+    "continuous_slider_travel": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 3
+    },
+    "finger_approach": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 2
+    },
+    "local_wire_budget": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 2
+    },
+    "tools": [
+      {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 2
+      },
+      {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 2
+      }
+    ],
+    "upward_switch_removal": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 2,
+      "removed_first": [
+        "PowerSwitchScrew0",
+        "PowerSwitchScrew1"
+      ],
+      "battery_retained": true,
+      "method": "continuous conservative envelope"
+    },
+    "upward_screw_removal": [
+      {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 3
+      },
+      {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 3
+      }
+    ],
+    "negative_controls": {
+      "slider_obstruction_detected": true,
+      "oversized_finger_hits_guards": true,
+      "retained_screws_block_extraction": true
+    },
+    "finger_envelope_xyz_mm": [
+      26,
+      20,
+      30
+    ],
+    "wire_budget_xyz_mm": [
+      12,
+      7,
+      6
+    ],
+    "physical_fit_verified": false,
+    "electrical_verified": false,
+    "limits": "Nominal solid geometry only; finger envelope is an assumption, not ergonomic acceptance. Harness route/connectors and actual terminals are unverified.",
+    "passed": true
   },
   "ignition_mos_layout": {
     "board_quantity": 1,
@@ -2684,7 +2802,7 @@
     "passed": true,
     "physical_fit_verified": false,
     "electrical_verified": false,
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "arc_module_envelopes": {
@@ -4788,23 +4906,6 @@
       "description": "P06 MT3608 升压板／37×18×6 实测包络"
     },
     {
-      "name": "PrintBackpack",
-      "label": "PP03 双瓶背包一体外壳及桶座",
-      "category": "merged_print_part",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 117436.38179485023,
-      "bbox_mm": [
-        -89.7500001,
-        35.0,
-        33.9999999,
-        89.75,
-        107.5000001,
-        124.0000001
-      ],
-      "description": ""
-    },
-    {
       "name": "BaseCableGrommet",
       "label": "底盘 · 线束护口",
       "category": "structure",
@@ -4824,12 +4925,88 @@
       "description": "中央干区线束护口 BaseCableGrommet"
     },
     {
+      "name": "PowerSwitchLever",
+      "label": "电源开关 · 拨柄",
+      "category": "component",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 29.43500000000002,
+      "bbox_mm": [
+        -1.45,
+        -65.45,
+        81.6,
+        1.45,
+        -62.55,
+        85.1
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "description": "电源开关／拨柄／中间行程展示"
+    },
+    {
+      "name": "PowerSwitchScrew1",
+      "label": "电源开关 · 固定螺钉 · 2",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 28.349732105994292,
+      "bbox_mm": [
+        5.6000000000000005,
+        -65.8,
+        75.6,
+        9.200000000000001,
+        -62.2,
+        83.19999999999999
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "description": "电源开关／Ø2×6塑料用自攻螺钉候选 2"
+    },
+    {
+      "name": "PowerSwitchScrew0",
+      "label": "电源开关 · 固定螺钉 · 1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 28.349732105994292,
+      "bbox_mm": [
+        -9.200000000000001,
+        -65.8,
+        75.6,
+        -5.6000000000000005,
+        -62.2,
+        83.19999999999999
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "description": "电源开关／Ø2×6塑料用自攻螺钉候选 1"
+    },
+    {
+      "name": "PowerSwitchBody",
+      "label": "电源开关 · 本体与挂耳（占位）",
+      "category": "component",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 561.5247084154332,
+      "bbox_mm": [
+        -9.75,
+        -66.9,
+        72.8,
+        9.75,
+        -61.1,
+        81.6
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0,
+      "description": "电源开关／实测包络与挂耳"
+    },
+    {
       "name": "KeelLid",
       "label": "底盘 · 折面顶盖",
       "category": "structure",
       "valid": true,
       "solids": 3,
-      "volume_mm3": 47762.845547851415,
+      "volume_mm3": 51128.57678204799,
       "bbox_mm": [
         -65.0,
         -101.00000000000001,
@@ -4841,6 +5018,23 @@
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0,
       "description": "低鼻锥至颈架的折面顶盖"
+    },
+    {
+      "name": "PrintBackpack",
+      "label": "PP03 双瓶背包一体外壳及桶座",
+      "category": "merged_print_part",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 117436.38179485023,
+      "bbox_mm": [
+        -89.7500001,
+        35.0,
+        33.9999999,
+        89.75,
+        107.5000001,
+        124.0000001
+      ],
+      "description": ""
     },
     {
       "name": "EffectInsert2",
@@ -8458,9 +8652,9 @@
   ],
   "step_readback": {
     "valid": true,
-    "solids": 882,
-    "expected_solids": 882,
-    "volume_difference_mm3": 59.87536581559107,
+    "solids": 886,
+    "expected_solids": 886,
+    "volume_difference_mm3": 59.737906778696924,
     "bbox_difference_mm": 8.952838470577262e-13,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -8469,18 +8663,10 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 1080,
+    "boolean_pairs_tested": 1091,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
-    "passed": true,
-    "changed_features_rechecked": [
-      "HeadCrownShell",
-      "NeckCrossbar",
-      "RearBulkhead",
-      "NeckOuterWebL",
-      "NeckOuterWebR"
-    ],
-    "changed_feature_overlaps": []
+    "passed": true
   },
   "water_gun_layout": {
     "source": "hardware/components/pulse-water-gun/README.md",
@@ -10568,7 +10754,7 @@
     "board_anti_lift_retention_verified": false,
     "physical_fit_verified": false,
     "limits": "Envelope and rigid tray only. No individual audio/display/USB/RF fit, hand access, flexible harness service, material strength or anti-lift retention acceptance.",
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "l298n_layout": {
@@ -10698,7 +10884,7 @@
     "placement_difference_mm3": 0.0,
     "outside_central_dry_bay_mm3": 0.0,
     "overlap_tolerance_mm3": 0.01,
-    "objects_checked": 411,
+    "objects_checked": 415,
     "overlaps": [],
     "reserved_space_overlaps": [],
     "nearby_distances": [
@@ -10861,7 +11047,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "thermal_verified": false,
-    "source_after_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_after_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "l298n_mount": {
@@ -11106,9 +11292,33 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "passed": true,
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
-    "saved_and_reopened": false,
-    "equivalent_saved_source_geometry_verified_by": "print-consolidation-change-audit.json"
+    "source_after_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+    "saved_and_reopened": true,
+    "carrier_export": {
+      "coordinate_frame": "assembly coordinates, no scale or relocation",
+      "checks": [
+        {
+          "format": "FCStd",
+          "valid": true,
+          "solids": 1,
+          "symmetric_difference_mm3": 0.0,
+          "passed": true
+        },
+        {
+          "format": "STEP",
+          "valid": true,
+          "solids": 1,
+          "symmetric_difference_mm3": 0.0,
+          "passed": true
+        }
+      ],
+      "files_sha256": {
+        "hardware/model/parts/L298N-carrier-0.34.FCStd": "79d214d9afc1e623f071866422f358bfe68c3be6c0d3724be0b33578b70d3612",
+        "hardware/model/parts/L298N-carrier-0.34.step": "c92c5ede55b10a8d5073ba3a641566d2fd9c3ea75147f34929dd6fb986868cd3"
+      },
+      "passed": true,
+      "manufacturing_released": false
+    }
   },
   "ultrasonic_check": {
     "source": "hardware/components/ultrasonic/dimensions.json",
@@ -11373,7 +11583,7 @@
     "mounting_verified": false,
     "physical_fit_verified": false,
     "acoustic_verified": false,
-    "source_after_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_after_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "ultrasonic_layout": {
@@ -11819,7 +12029,7 @@
     "physical_fit_verified": false,
     "electrical_verified": false,
     "limits": "Unmeasured PCB, datum, rear height, header, connector, wire bend and board endpoint. No mounts or hand access acceptance.",
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058"
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a"
   },
   "ignition_routing_layout": {
     "revision": "0.48",
@@ -12740,7 +12950,7 @@
     "protective_cover_designed": false,
     "bend_radius_verified": false,
     "electrical_verified": false,
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "front_effects_layout": {
@@ -12941,7 +13151,7 @@
     "scope": "Static visual solids; guard contact and lead within 2.6 mm exit bore budget; not electrical spacing or fixture validation",
     "physical_fit_verified": false,
     "electrical_verified": false,
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "mt3608_layout": {
@@ -12986,7 +13196,7 @@
       88.0
     ],
     "placement_difference_mm3": 0.0,
-    "objects_checked": 409,
+    "objects_checked": 413,
     "overlaps": [],
     "nearby_distances": [
       {
@@ -13103,7 +13313,7 @@
       "End spaces are design budgets, not a complete wiring or adjustment path.",
       "Service requires driver and left motor removal; fixture and physical handling remain unresolved."
     ],
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "effects_layout": {
@@ -13318,12 +13528,12 @@
           "overlaps": [],
           "nearby": [
             {
-              "object": "EffectRetainerScrewLBuckInner",
-              "distance_mm": 0.5
+              "object": "KeelLid",
+              "distance_mm": 0.25
             },
             {
-              "object": "KeelLid",
-              "distance_mm": 1.2998673672393684
+              "object": "EffectRetainerScrewLBuckInner",
+              "distance_mm": 0.5
             },
             {
               "object": "EffectRetainerLBuck",
@@ -13466,12 +13676,12 @@
           "overlaps": [],
           "nearby": [
             {
-              "object": "EffectRetainerScrewRBuckInner",
-              "distance_mm": 0.5
+              "object": "KeelLid",
+              "distance_mm": 0.25
             },
             {
-              "object": "KeelLid",
-              "distance_mm": 1.2998673672393684
+              "object": "EffectRetainerScrewRBuckInner",
+              "distance_mm": 0.5
             },
             {
               "object": "EffectRetainerRBuck",
@@ -13548,16 +13758,16 @@
               "distance_mm": 0.7999999999999972
             },
             {
+              "object": "KeelLid",
+              "distance_mm": 1.0
+            },
+            {
               "object": "EffectRetainerLMOS",
               "distance_mm": 1.0965856099730633
             },
             {
               "object": "EffectRetainerRMOS",
               "distance_mm": 1.0965856099730633
-            },
-            {
-              "object": "KeelLid",
-              "distance_mm": 1.1141720290623058
             },
             {
               "object": "EffectRetainerScrewLMOSInner",
@@ -14727,13 +14937,13 @@
         "EffectRetainerInsertLMOSOuter": 1.927234057555625,
         "EffectRetainerScrewLMOSOuter": 1.43145600891813,
         "EffectRetainerLMOS": 0.6999999999999303,
-        "EffectBuckL": 3.2496684180984103,
-        "EffectSupportLBuck": 7.037853316910272,
-        "EffectRetainerInsertLBuckInner": 6.7221712420092725,
-        "EffectRetainerScrewLBuckInner": 4.159575575165958,
+        "EffectBuckL": 0.0,
+        "EffectSupportLBuck": 5.0,
+        "EffectRetainerInsertLBuckInner": 3.2144206320890807,
+        "EffectRetainerScrewLBuckInner": 0.6726812023536874,
         "EffectRetainerInsertLBuckOuter": 6.7221712420092725,
         "EffectRetainerScrewLBuckOuter": 4.159575575165958,
-        "EffectRetainerLBuck": 3.4353637562754593,
+        "EffectRetainerLBuck": 1.7999999999999972,
         "EffectMOSR": 2.135496389036094,
         "EffectSupportRMOS": 5.637555823439678,
         "EffectRetainerInsertRMOSInner": 13.221508078206092,
@@ -14741,13 +14951,13 @@
         "EffectRetainerInsertRMOSOuter": 1.9272340575556222,
         "EffectRetainerScrewRMOSOuter": 1.431456008918127,
         "EffectRetainerRMOS": 0.6999999999999781,
-        "EffectBuckR": 3.2496684180984103,
-        "EffectSupportRBuck": 7.037853316910272,
-        "EffectRetainerInsertRBuckInner": 6.7221712420092725,
-        "EffectRetainerScrewRBuckInner": 4.159575575165958,
+        "EffectBuckR": 0.0,
+        "EffectSupportRBuck": 5.0,
+        "EffectRetainerInsertRBuckInner": 3.2144206320890807,
+        "EffectRetainerScrewRBuckInner": 0.6726812023536874,
         "EffectRetainerInsertRBuckOuter": 6.7221712420092725,
         "EffectRetainerScrewRBuckOuter": 4.159575575165958,
-        "EffectRetainerRBuck": 3.4353637562754593
+        "EffectRetainerRBuck": 1.7999999999999972
       },
       "passed": true,
       "limits": "Local candidate wiring only; PCB edges, components, compression, tolerance stack, complete harness and hand access unverified. Frame/board removal is off-machine after tray extraction."
@@ -15551,6 +15761,10 @@
         "overlaps": [],
         "nearby": [
           {
+            "object": "KeelLid",
+            "distance_mm": 0.0
+          },
+          {
             "object": "EffectSupportLBuck",
             "distance_mm": 0.0
           },
@@ -15581,10 +15795,6 @@
           {
             "object": "EffectRetainerScrewLBuckInner",
             "distance_mm": 2.720294101747094
-          },
-          {
-            "object": "KeelLid",
-            "distance_mm": 3.2496684180984103
           },
           {
             "object": "EffectMOSL",
@@ -15657,6 +15867,10 @@
             "distance_mm": 2.5999999999999996
           },
           {
+            "object": "KeelLid",
+            "distance_mm": 3.2144206320890807
+          },
+          {
             "object": "EffectSupportLBuck",
             "distance_mm": 4.820128616033594
           }
@@ -15680,12 +15894,12 @@
             "distance_mm": 0.19999999999998863
           },
           {
-            "object": "EffectBuckL",
-            "distance_mm": 2.720294101747094
+            "object": "KeelLid",
+            "distance_mm": 0.6726812023536874
           },
           {
-            "object": "KeelLid",
-            "distance_mm": 4.159575575165958
+            "object": "EffectBuckL",
+            "distance_mm": 2.720294101747094
           },
           {
             "object": "EffectRetainerRBuck",
@@ -15781,6 +15995,10 @@
             "distance_mm": 0.5
           },
           {
+            "object": "KeelLid",
+            "distance_mm": 1.7999999999999972
+          },
+          {
             "object": "EffectSupportLBuck",
             "distance_mm": 2.000000000000014
           },
@@ -15793,16 +16011,16 @@
             "distance_mm": 2.973213749463703
           },
           {
-            "object": "KeelLid",
-            "distance_mm": 3.4353637562754593
-          },
-          {
             "object": "EffectRetainerRBuck",
             "distance_mm": 4.4
           },
           {
             "object": "EffectRetainerScrewRBuckInner",
             "distance_mm": 4.9
+          },
+          {
+            "object": "PowerSwitchBody",
+            "distance_mm": 4.936851223198852
           }
         ],
         "passed": true
@@ -16113,6 +16331,10 @@
         "overlaps": [],
         "nearby": [
           {
+            "object": "KeelLid",
+            "distance_mm": 0.0
+          },
+          {
             "object": "EffectSupportRBuck",
             "distance_mm": 0.0
           },
@@ -16143,10 +16365,6 @@
           {
             "object": "EffectRetainerScrewRBuckInner",
             "distance_mm": 2.720294101747094
-          },
-          {
-            "object": "KeelLid",
-            "distance_mm": 3.2496684180984103
           },
           {
             "object": "EffectMOSR",
@@ -16219,6 +16437,10 @@
             "distance_mm": 2.5999999999999996
           },
           {
+            "object": "KeelLid",
+            "distance_mm": 3.2144206320890807
+          },
+          {
             "object": "EffectSupportRBuck",
             "distance_mm": 4.820128616033594
           }
@@ -16242,12 +16464,12 @@
             "distance_mm": 0.19999999999998863
           },
           {
-            "object": "EffectBuckR",
-            "distance_mm": 2.720294101747094
+            "object": "KeelLid",
+            "distance_mm": 0.6726812023536874
           },
           {
-            "object": "KeelLid",
-            "distance_mm": 4.159575575165958
+            "object": "EffectBuckR",
+            "distance_mm": 2.720294101747094
           },
           {
             "object": "EffectRetainerLBuck",
@@ -16343,6 +16565,10 @@
             "distance_mm": 0.5
           },
           {
+            "object": "KeelLid",
+            "distance_mm": 1.7999999999999972
+          },
+          {
             "object": "EffectSupportRBuck",
             "distance_mm": 2.000000000000014
           },
@@ -16355,16 +16581,16 @@
             "distance_mm": 2.973213749463703
           },
           {
-            "object": "KeelLid",
-            "distance_mm": 3.4353637562754593
-          },
-          {
             "object": "EffectRetainerLBuck",
             "distance_mm": 4.4
           },
           {
             "object": "EffectRetainerScrewLBuckInner",
             "distance_mm": 4.9
+          },
+          {
+            "object": "PowerSwitchBody",
+            "distance_mm": 4.936851223198851
           }
         ],
         "passed": true
@@ -16529,7 +16755,7 @@
         "passed": true
       },
       "KeelLid": {
-        "boolean_pairs_tested": 134,
+        "boolean_pairs_tested": 138,
         "overlaps": [],
         "nearby": [
           {
@@ -16573,11 +16799,31 @@
             "distance_mm": 0.0
           },
           {
+            "object": "EffectBuckL",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "EffectBuckR",
+            "distance_mm": 0.0
+          },
+          {
             "object": "EffectTray",
             "distance_mm": 0.0
           },
           {
             "object": "IgnitionMOSCarrier",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "PowerSwitchBody",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "PowerSwitchScrew0",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "PowerSwitchScrew1",
             "distance_mm": 0.0
           },
           {
@@ -16649,6 +16895,14 @@
             "distance_mm": 0.5
           },
           {
+            "object": "EffectRetainerScrewLBuckInner",
+            "distance_mm": 0.6726812023536874
+          },
+          {
+            "object": "EffectRetainerScrewRBuckInner",
+            "distance_mm": 0.6726812023536874
+          },
+          {
             "object": "EffectRetainerLMOS",
             "distance_mm": 0.6999999999999303
           },
@@ -16683,6 +16937,18 @@
           {
             "object": "IgnitionMOSRetainer",
             "distance_mm": 1.7044422518220823
+          },
+          {
+            "object": "EffectRetainerLBuck",
+            "distance_mm": 1.7999999999999972
+          },
+          {
+            "object": "EffectRetainerRBuck",
+            "distance_mm": 1.7999999999999972
+          },
+          {
+            "object": "PowerSwitchLever",
+            "distance_mm": 1.8200274723201295
           },
           {
             "object": "EffectRetainerInsertRMOSOuter",
@@ -16773,12 +17039,12 @@
             "distance_mm": 3.200000000000003
           },
           {
-            "object": "EffectBuckL",
-            "distance_mm": 3.2496684180984103
+            "object": "EffectRetainerInsertLBuckInner",
+            "distance_mm": 3.2144206320890807
           },
           {
-            "object": "EffectBuckR",
-            "distance_mm": 3.2496684180984103
+            "object": "EffectRetainerInsertRBuckInner",
+            "distance_mm": 3.2144206320890807
           },
           {
             "object": "IgnitionMOSRetainerScrewInner",
@@ -16795,14 +17061,6 @@
           {
             "object": "NeckStayR",
             "distance_mm": 3.373661249987137
-          },
-          {
-            "object": "EffectRetainerLBuck",
-            "distance_mm": 3.4353637562754593
-          },
-          {
-            "object": "EffectRetainerRBuck",
-            "distance_mm": 3.4353637562754593
           },
           {
             "object": "L298NClampScrewL1",
@@ -16829,15 +17087,7 @@
             "distance_mm": 3.8776410354750457
           },
           {
-            "object": "EffectRetainerScrewLBuckInner",
-            "distance_mm": 4.159575575165958
-          },
-          {
             "object": "EffectRetainerScrewLBuckOuter",
-            "distance_mm": 4.159575575165958
-          },
-          {
-            "object": "EffectRetainerScrewRBuckInner",
             "distance_mm": 4.159575575165958
           },
           {
@@ -17488,6 +17738,10 @@
         {
           "object": "ShoulderRailR",
           "distance_mm": 4.920926461691875
+        },
+        {
+          "object": "PowerSwitchBody",
+          "distance_mm": 4.936851223198851
         }
       ],
       "passed": true
@@ -17498,7 +17752,7 @@
       "nearby": [
         {
           "object": "KeelLid",
-          "distance_mm": 0.5570860145311582
+          "distance_mm": 0.24999989999999883
         },
         {
           "object": "EffectInsert1",
@@ -17894,7 +18148,7 @@
     "passed": true,
     "physical_fit_verified": false,
     "limits": "Module slides up 90 mm after releasing and parking its leads; integrated rings stay fixed. No upward hard stop; friction retention unverified. Bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "saved_and_reopened": true
   },
   "manufacturing_released": false,
@@ -17902,11 +18156,10 @@
   "assembly_paths_verified": false,
   "electrical_verified": false,
   "final_saved_audit": {
-    "native_objects_verified": 412,
+    "native_objects_verified": 416,
     "gui_visibility_verified": true,
     "print_parts_saved_and_reopened": 6,
-    "source_scope_audit": "print-consolidation-change-audit.json",
-    "delivery_objects_verified": 301,
+    "delivery_objects_verified": 305,
     "model_tree_verified": true
   },
   "previews_generated": true,
@@ -17921,98 +18174,88 @@
   ],
   "drive_preview_note": "Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.",
   "files_sha256": {
-    "CyberTrack.FCStd": "8474a47c13543be80023cad0cce11ee53c575633567c7795dd38d328b371f77b",
-    "CyberTrack.step": "e276ccfbbfb7474fed32581761d998dbb5ff24a554800b2fc42a6a130242cdcc",
-    "assembly.png": "979457d1583a1f35619f5af746522df9c108cc67cc2e6fdee64ded5fd96cf394",
-    "bottle-backpack-layout.png": "6752ea3b10cfd8c094aee12cf741d0d9ca5389619464d73c6ed730f50f6632c7",
-    "bottle-backpack-service.png": "e849261481281d0d6a9302aeffdf078281d4356ae849659536d449d1d32c41cb",
-    "bottle-backpack-spaces.png": "da2d3b03f963565fe937e063aaccbc2edba421b267b31a9b855fe34a5c324ffc",
-    "breadboard-access.png": "984773a4fb68e26e673a66ad120c3ec6d5e5fa818e4fa925de23e54cfae5fb57",
-    "breadboard-layout.png": "652cdd3d7d7d1cecd2e1ec30f5b893571918358e7aa50f4a9bd8537d33063445",
-    "breadboard-service.png": "8a447add5da47d3c403798369dbd4959ba2d71fe728d0c252d05bc393bb0a879",
-    "breadboard-top.png": "47d4fc450b7daf5b50d7b75f0e347fc704f78877d2ba6919e4268d1355a7671f",
-    "breadboard-tray.png": "09cfc5d6fc7e660a1c59099a75859070d9822f024e6f3ddbd3400d846d54f900",
-    "bubble-gun-clearance.png": "3e45d9fa4f25d5461db99e250ab16d7743196c800ce1d88f92983700515de447",
-    "bubble-gun-component.png": "46137bc9b01799623b12444a46b61aa26169b07e41145c0b7d02faedb9bfd8c6",
-    "bubble-gun-layout.png": "9bbd2b15583c151e4bce41819371a45aa71cc8cc452e8aa8ee02f8b18efd97a5",
-    "bubble-gun-mount.png": "6304138e8a975c9878b9833bd7d2f391d8ac00f2f5e13a28dcee0e2df6e9669d",
-    "bubble-gun-service.png": "a44627c67d916203ff2bf122288dbf41570b5e3badb226f6e86c0019c33b5c1f",
-    "bubble-gun-side.png": "9305052e7e8d16c461626a101fd2359f4737a418fd17e3bd1162c10e07ef6a44",
-    "bubble-gun-spaces.png": "c591224d9dd8aeb49420aba8a3ff96d8e12d41f75c09f7e5642e2af521d0a571",
-    "crown-effects-top.png": "dc7f5be9ff81728f5574d0ce52fa76ac1cc27a2de924b94cac0287b3a1750665",
-    "crown-effects.png": "c99dc24ff11c4dc784b552a262f6c4249fea9198eb6b66c2a43c1c72f1ec3eb8",
-    "drive-bottom.png": "d3d7dd21458314dd4f9224e41866c6386b64ca085c4875747ffcca15ddbce6e1",
-    "drive-frame.png": "c5367896eddcc59d093516901928208c7735040f88a0c739a13bbb24cf7cb10d",
-    "drive-integrated-face.png": "706921543248bd5495b7fd0f08aa4a64ee1d5ab40686f69ab34cebed4183476f",
-    "drive-mount.png": "851686639eae623fe2eb14b707360bca20c6e413d202423dcbfbe8b08588df92",
-    "drive-service.png": "867e11abc9838bfd8f470ae19c49fb495f47a2c9e67e57ae36cc06cff324b7f0",
-    "effects-backpack.png": "a6f5bc76990cae3c82df9b144e925622248ee312ec805fa4dc51a264b770b221",
-    "effects-board-mount.png": "af85d53cbe9a4acb7fde4a30091d02dc8542c40738f366138e778d97f105092c",
-    "effects-board-service.png": "5c4d14e3d51e0ef3cd000297724e1fd9598767b6a2481c4787cf2e34b5c886ca",
-    "effects-board-wiring.png": "159e96f686af905b01e1dafeba957519281016559bcf6b36566c1e2d263854aa",
-    "effects-clamp.png": "1f15a170a34abbd30e6f549b77439b0c637ddc65d924ffa36057d95ba28b05bc",
-    "effects-housing.png": "1660d676c7091787f2bbc73538c7c48e83fe56d4a7ac9b2478f05dd299a9f413",
-    "effects-service.png": "484fbe1416aafe04cdc1c271a48cc9a36be09695169aa96fc5d58e7bf759ff41",
-    "effects-tray-bottom.png": "f85d76a946c53e5631fb115201f6e46548be4a529bd68daa79f90594b94d409c",
-    "effects-tray-service.png": "8cd3fcf3c72e9b1dee7340b3739f3bbda847513b8fc5b5360fc34c92d1eb710b",
-    "effects-tray.png": "5deb2660694e66323cd41131235695020a1d268f2a35c5295fda227bfc660dc0",
-    "front-effects-front.png": "69a4598886a00d04dfe7789dc98ab52aca243d6e1a397119252912a96c29f9c0",
-    "front-effects.png": "3363aa7962b5d4aab95b817e16873f8051fab31698ab5d63982dbb91b3b04aab",
-    "front.png": "ae79984eb1ee05d41e8aede10cb10bdd079ab0c69506cbcb25e3a15e3da5ba17",
-    "ignition-mos-layout.png": "fa88e2e7c080b96f589504386458417db0ae448ca6b732dcb3ba7a9eaf62aa05",
-    "ignition-routing-rear.png": "bcc53882d49c8f0ec9b84fdc51144a728ca6fc0761a5969490501a1cc58cc5ce",
-    "ignition-routing-top.png": "ae744c65103c21351ef0f56f50c891b6b3458bd83d427d3860939fcb6a66f626",
+    "CyberTrack.FCStd": "24b224c7f8ea146f0bbd8c0a26ef621064be9d11d54a0280f7c99c30d64c2cf6",
+    "CyberTrack.step": "b61475fff4c90f52ef2fdfc4575e72eca186dc5e82af3f491796d8ce1c1f2081",
+    "assembly.png": "e0ecacf48d069e30fd3698e5baa69add380efeab269b1b066cd189ef0405408a",
+    "bottle-backpack-layout.png": "01e74f8e387a40407d91675a7a26a796613d2adf60ba4da4960a489c31ba5ef7",
+    "bottle-backpack-service.png": "945fcb745ce76306b2960c17b5d50c9d093eab39c02b9c58b4c6f062dc3be145",
+    "bottle-backpack-spaces.png": "693fc2271e4b2f92e68b7d2ef64ce60dd340b34703886b23267831c70907dcd1",
+    "breadboard-access.png": "e6d56e67e41d9101077e5514abcf4176da30b5397b3d45191b99653f43ae3eb2",
+    "breadboard-layout.png": "57a60a20453b6df50e3d329f04a4d0f3216defe228f41a9df7c379f07695458c",
+    "breadboard-service.png": "5972bd1bfebc83ef346fb1429e5b867973df0089aa176aaa7d1b2506743facc4",
+    "breadboard-top.png": "27381d03955cc78edd33a0b69897147f325b0d20c2d43bda3d63e4863dc8fcad",
+    "breadboard-tray.png": "2608724d551946285076b166f83e517317c8915049acc20d13ab4b3a05b569bb",
+    "bubble-gun-clearance.png": "1167b25e13469e284c423fd9a38b1b43a5696d87a39191cda3daa7bbe1405fe7",
+    "bubble-gun-component.png": "28d5239543b665d8852e2f20923743c66de73303fcd31ffa3557a56881e6afe1",
+    "bubble-gun-layout.png": "a65c83a365064bd225f451f55ee59a7aefd7e362b25613693e77102269966c75",
+    "bubble-gun-mount.png": "ffa970c182573a85cb4ef23475ca782425903db5d4b0efd9c871171ff13d6860",
+    "bubble-gun-service.png": "496e87ecd182969a6c411115b7de8e8a1e3bd72c16b7fbd46ccf4f910c02d82a",
+    "bubble-gun-side.png": "bd38a37183b01c94dcf973cc0915f7aafe5c42cb6908a82bd61af1a4f06f1755",
+    "bubble-gun-spaces.png": "381e365a564b3c2386cabc91d30af9428bc700841d8ae2e32f103760541cfd42",
+    "crown-effects-top.png": "90f8d9d3cdc45b559b4ff41de3807a66b550b662a2986af7fbd9b921aa03ed87",
+    "crown-effects.png": "619e86b59668da894ca72a2808d462700e09a863d519a0d6adda5c6c60c32eca",
+    "drive-bottom.png": "27185fb67752e2f4ca1ed4ad1a148da0301a874961ed9cdf85e070a898c7b48d",
+    "drive-frame.png": "0ebcb3f16d1091792473a95dba456f98c688063bdafefb4a30379fc5106f99bd",
+    "drive-integrated-face.png": "140635baa075dd3f7d7a7f772660d11937907360d003d8980cd93222fcf111a3",
+    "drive-mount.png": "8f4ebdac71b1204b0d1f13315349a279c6d1f9fd8f552cf277626e86ea674bae",
+    "drive-service.png": "dc330d95bd05ab172df65ff3884c0df744f8fda42f9867596d313b5a0ef4f0f2",
+    "effects-backpack.png": "aa4ffeedd725395012e4f2b39f8035d218e6d6528cea6f891f68856a3a2c3b85",
+    "effects-board-mount.png": "31520b29aa7977bc4c2ae19ea8de8abb55343cadab22a0ed80eda7a97a7c6c5a",
+    "effects-board-service.png": "d7685dfb88230b8a6f812c1aa30322334e1f11f044cbd00137d31999411018ba",
+    "effects-board-wiring.png": "22b22ff3bb3cba718c5f819e09d3f192d179540389107d98b38a67fccdab8948",
+    "effects-clamp.png": "265b6bf7d4ae9196846a30adf50da1b9306eba3ab02507c96a0c07adbfc7db0b",
+    "effects-housing.png": "64ce35c87343b8c982734ed5bb77db35dec209f064daaf4fc3886e50472e97d9",
+    "effects-service.png": "8d2fdba2c7fdefe88c2e5560acfb2efedb6f89bef1e6a98487bb96ee6ebad8f9",
+    "effects-tray-bottom.png": "68c674af84c567c473180c01c51937b99f6f3976cde0c22737498703f55093ab",
+    "effects-tray-service.png": "238158c04f3763402f6d55f4d307c688cfc7c987ed1b59145a19cec06e4e6e76",
+    "effects-tray.png": "c53b6f4375326b19568182559210541b85ade967555302a7810d6a9837b178a3",
+    "front-effects-front.png": "9ffd019e00c6651a35569310e99d0dc98eaa38f84c24910caaf7abd973ef04bb",
+    "front-effects.png": "aa9c251034e3736ddcaef17ddaf9c905ad483dc3b0810f1efb35ad27e97966a1",
+    "front.png": "749577124b4ba91d607467cc3c69afa290e1053a3c292e3ccef87d7fcf368065",
+    "ignition-mos-layout.png": "03f41c88bb0ccce6693b8f620824e1f4b100fa95d2454bf6c7808b468122a2ab",
+    "ignition-routing-rear.png": "68ec6ececc76b0f2d7df1f99e12646b292486bdadbc68a0132bbf2eafec8a314",
+    "ignition-routing-top.png": "99e7c2c067b1be7514d26211c2d414da7476804f8555736871aec305cf5edf49",
     "ignition-routing-visible.png": "336b71c146e885b198c5bd3c9087346cd07a05b4a78587a941bfb1360d488764",
-    "ignition-routing.png": "3c1e841c1d5ff9ed448975f9662da98469b02006542349d13abf132cd45cd623",
-    "l298n-carrier.png": "9188a60940dd73b28913b18ce966b9945e34b06824d0b4cd0ad2269f1c627589",
-    "l298n-layout.png": "e92c585395a9b01bb6e9e5eec1558c4d0d28cf33ec769eb8bfe66a12a82cfb16",
-    "l298n-service.png": "12d9c5a166ae4aa395cfdd87cc1c8d3ecabb1729f2c659e973f869618264c638",
-    "l298n-side.png": "b340055c1cd47b37a9586076b8b464ae762dc2036f1e657c2cff21870b64b19a",
-    "l298n-spaces.png": "dfc9f367320ea39f54f2b44f0c2c98ef42f6438c9042b392d3644c0d4cc635fe",
-    "l298n-top.png": "9c73b231d8f611036db2326fe81e7facc6d772dcdd9e6b704b5146166e8e35e4",
-    "layout.png": "32a3d2c4f198dc1316a591ea7d244df027ce0a338e2fb6870d7334de88d16236",
-    "lower-layout.png": "4328eae192bc43b47e0d3c4af18102bb13c03893cb0ceb86012a06b851185c9a",
-    "mt3608-layout.png": "fbbc206ac61b3086d1840ae60dc1bbee6937718eae0913c9eb8382e8568980a6",
-    "rear-assembly.png": "ba0face213bc754aca1d77d834227310b588a224b890581ba4656c064c822fd6",
-    "rear.png": "26dcf7bd2a9dd65ec2aaf81c4df53e4cd6e79d74e5f02ec2a15292ed9bab553a",
-    "right.png": "6b67cd2b4f775eedf3b3a549fffde24e44eadc941a856fe7c29c00dde13ff9aa",
-    "routing.png": "929a030765c99830c3b9931467de4b4ebe1ff477624533caa65944e267966d79",
-    "service.png": "3906f43ec3a0334d80069814a0002b4229dce568223ac4990254a9c616e6e119",
-    "side-frame-extension-side.png": "a78fb881f4fa93cc0bae1df7e10fc5995abbd7489985e85fb436d2e8b2ab7132",
-    "side-frame-extension.png": "d437b856d3e0b1a3e87dcd5ddbdc835000c2559ed789638b9f43418bb3f6e81d",
-    "side.png": "d4a9e7ecf114b45b8be47ffa86d990b66916791c637e2dc8876bca1ff1d91c47",
-    "top.png": "14fb0c66ac8551ac82ac23e3e05f342db617a032b5bfc9d508572cbd94bfce95",
-    "ultrasonic-coexistence.png": "0007f168a1ad8035c4f1029504529a302824e791c442a8b58a4b8ee62fd17a22",
-    "ultrasonic-front.png": "f212ca78063e049f505b00832a0606f7516e206f56b030c83f8e70cab5e5f801",
-    "ultrasonic-layout.png": "481dc36ce3723782c26218e909d0ce975f38055ca27fea4aae397eaa91d4baca",
-    "ultrasonic-service.png": "32727573597d73e1767821b260b2845fde6d541c29734451754176ae6cabae48",
-    "ultrasonic-side.png": "66c06b13be8fdfba5adddc72773d839d9c548f89a46c7be4f31ef95e2f37335d",
-    "water-gun-clearance.png": "0197c9d065fc0c8d46559c70d337eb86cbdc3c6fe6d0c63a96d2f41df830e7bb",
-    "water-gun-component.png": "ef85cfd3dc3d9fbe4d812fd31d2b7bb7b7922ef5568d256eed98626d2f8b29e8",
-    "water-gun-layout.png": "640d0a8f47eeb9fad009a18b9465a82c92624a4c04473d5438bdc8b65b06a36b",
-    "water-gun-mount.png": "430ccffceb18275813a50547820ac3bed16813ce33e23d964edb882102cd5f73",
-    "water-gun-service.png": "91e06602f527c55b6a5286939fb294379333735f0e8a7f3baf845362ae536ec5",
-    "water-gun-side.png": "f862ed32bb5de9cd0dfdce96f13abbd6ef9ee4058921c7183989865b0dabdaa0",
-    "water-gun-spaces.png": "f71a8be6a20244153046a0c68c3f41716fd73971777945eba491f08bac1dcf5a",
-    "print-parts/PP01.png": "d18f5ee6b40ccaeb99bc6e72ad0b91a417f3957bbe41cf13585f4560e4d89d70",
-    "print-parts/PP02.png": "80a6804ddcb7816ad6ab673e2d2cf5c6464bae862de23a2510778a43d9452f70",
-    "print-parts/PP03.png": "ca00d06e83a7d5acec7f9b4e98df4cb277b49356d3f66dca2c195520daf38a94",
-    "print-parts/PP04.png": "55d539c78397ec5466e4f693518d2b4070cf820bb815e3477bf03fecac3a0f03",
-    "print-parts/PP05.png": "40d1dddcb1859a67b4f7952a57d839c1bbf053617a8ef4f4e677e634d91b0ce3",
-    "print-parts/PP06.png": "d00eb24a1a7c112928467db669b1fc1baed1dd6c639a0f07c49582f3554ac0d7",
-    "source/CyberTrack-design.FCStd": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058"
-  },
-  "targeted_seam_revalidation": {
-    "changed_features": [
-      "RearBulkhead",
-      "NeckOuterWebL",
-      "NeckOuterWebR"
-    ],
-    "service_paths": true,
-    "drive_mount_check": true,
-    "l298n_mount_check": true,
-    "added_material_reserved_space_check": true,
-    "other_checks_retained_from_same_geometry_outside_seam": true
+    "ignition-routing.png": "55ffd0ce0b14c64088259141c8e4a8d80f8329cafb991678715be6cd97e0223b",
+    "l298n-carrier.png": "18c112b6cde88246850ab2213c5533090823a000c5a73eb8abf9995769b0ff22",
+    "l298n-layout.png": "fd2ff51410c744ea4c584e1bd6c8dafc6c62da1db45029678dcd208659395766",
+    "l298n-service.png": "2108bb2f3af7eb468ec50b611f914d9ca2faeb03f5e6f2b757282d73a47b4507",
+    "l298n-side.png": "3a1a63cb43fccf530c0f60bdbe5804208ac27f0cfe613a728062d78c8afd9745",
+    "l298n-spaces.png": "75b1899e2d373613a27137f6458896c7af4e5c47529bb136fc98b1d6ce4a63c6",
+    "l298n-top.png": "d235f0ae1f7e0f133e3e9564548f284265249f7c4059471c7d3531c7639da938",
+    "layout.png": "24f8030312bf1a99952eebd3c2c23d4fbd83217d59294fccb7b5ffc83db5f312",
+    "lower-layout.png": "d0db3ad6c25eb94b3fe002060fcd13630ded18885f85fe75c7b556628ff9e57e",
+    "mt3608-layout.png": "f68d53d55bc69092210e649566313b34baeb859f7b5193c3e84276bea167dcc6",
+    "power-switch-layout.png": "4b7c19094ee43a931596d935b9da1d135ea671442372507014ee5f287ab83206",
+    "power-switch-top.png": "90b4788650d55256b797c0ebca81ce5e04e0872d169be4b930856a686a4ed9c9",
+    "rear-assembly.png": "f68c7ddaa6da464d85dadb1872c5d947e853fdc65706c40239d4e23ee92b41fe",
+    "rear.png": "df78f7e15211e285a3f12d90391a137b3d33ede0f86eb91a87e435210edaf814",
+    "right.png": "4aa4033fd00811bc79da41cadc00376ad88ccb4eb259d9f037152b15decba51a",
+    "routing.png": "9e2d719d3601d3f23a165af64a1e5b053818e6ca7c24e0e5b00101005e8d3444",
+    "service.png": "8d95bcc7c995def5e44da263ad877831d29d9945018a3465113d62a65104e20b",
+    "side-frame-extension-side.png": "fa4707eabd4d786a0e1760569944554adfceb99e6e5a53bcec6c2cff20e76721",
+    "side-frame-extension.png": "e713909c6274cc2e131eff05b332c84d85f307c72b123d6e63385504db7a2b29",
+    "side.png": "35fd578f7488f07932c0ec036d616925243fe324137ab47a633e4ca2ed5bf8ef",
+    "top.png": "3e0aca5ee6604149e82245b86a1abe4f371c1d4c12a913df399ab62a7a06b2ee",
+    "ultrasonic-coexistence.png": "0ec61b46323ebe8b0f1cb9419cbbca7dbc6876cf1d84fb0a2214eed596863f82",
+    "ultrasonic-front.png": "a9e2e59d6063eeeff65d495d8ba04b19a30af6c25bd411a1dad23743755ff669",
+    "ultrasonic-layout.png": "d9de53e16d977dea3049e06850f8d8fc4b439d22f5f481d037aeeacdfff10208",
+    "ultrasonic-service.png": "214845c82665f20f07abe76c28b40025ce5b6c4eb89baf9c9ecc9a62f41a5d90",
+    "ultrasonic-side.png": "7af02c8160d9f360592da368f4fc3c1f46b81bfe4b3fcda35cc9bf2f7e325504",
+    "water-gun-clearance.png": "958ad1b38e9e37c9501ade90891f5722dcf502777d0e1c3cf1ea0b097df426ae",
+    "water-gun-component.png": "111fcb56bc3ca2061a132dc7ca8b3da2c02e3178d3392562cd23777acf745988",
+    "water-gun-layout.png": "d66df9b64321bc16d716aa0c17c1050fe73f793e2ff095dffe3fce1f2ee2989e",
+    "water-gun-mount.png": "63e3e6c273e9e0393308490df6b29de045a1fa7b3b9b43968ec2079a87109a72",
+    "water-gun-service.png": "82bea96a73249659fe8685ceef8bd14aaa679ea7fbc2f2930a097d0edd4a41cb",
+    "water-gun-side.png": "26a990cca7e034d6fc78de9d4e4c27518b6cf6f644a75ba2065ff43d2a7c37b6",
+    "water-gun-spaces.png": "d191c4548f90756b5cf8c8d205c0d87fc3e14ce39916fa3c6a2faa2807fa9618",
+    "print-parts/PP01.png": "9808331c8a6e3b5969ecf9b5fd3c65311bed9507a26f83cc792a42fccf25ef3b",
+    "print-parts/PP02.png": "dcf8838034ba602875ea31a6af14cdeb8b4474a8aebb88ac72a2ea2e4a164816",
+    "print-parts/PP03.png": "a9857c52d6abcee7e8b71593529f29984cf5387637490048b7d215871bdb6e5f",
+    "print-parts/PP04.png": "68f665b84a38b102ba17613abb403ae7dda9b823a9fbdedef077770d457fbbce",
+    "print-parts/PP05.png": "ba2dadf07cea1070f4993189d3b0b2538d0871fb4cbd6496605d25e87398d1f1",
+    "print-parts/PP06.png": "f6db1dade158f723047a36a1a4529c59fac302aa9294f8feffe861332578c65a",
+    "source/CyberTrack-design.FCStd": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a"
   },
   "print_consolidation": {
     "feature_count": 58,
@@ -18047,16 +18290,16 @@
         "cad_boundary_shells": 1,
         "stl_nonmanifold": false,
         "stl_facets": 2614,
+        "step_geometry_equivalence_verified": false,
+        "step_usage": "layout_exchange_only; use native FCStd for geometry",
         "step_volume_difference_mm3": 4.94765117764473e-09,
         "step_volume_comparison_passed": true,
         "missing_source_volume_mm3": 0.0,
         "extra_volume_mm3": 0.0,
         "files": {
-          "PP01-WaterCradle.step": "c8f54c46118da9f1e4502e20cea04a1f22b3f4d1966bd1c99b12bef4eb6553e0",
+          "PP01-WaterCradle.step": "adddd7ee0a898740dd5aa2c71536b29ec607876aaa385310b3c92ad13676e7e9",
           "PP01-WaterCradle.stl": "be0e64070927c7c40243337676fd4be7010d04372605477fcc4d50332c27aaa1"
-        },
-        "step_geometry_equivalence_verified": false,
-        "step_usage": "layout_exchange_only; use native FCStd for geometry"
+        }
       },
       {
         "id": "PP02",
@@ -18091,16 +18334,16 @@
         "cad_boundary_shells": 1,
         "stl_nonmanifold": false,
         "stl_facets": 2156,
+        "step_geometry_equivalence_verified": false,
+        "step_usage": "layout_exchange_only; use native FCStd for geometry",
         "step_volume_difference_mm3": 6.621121428906918e-10,
         "step_volume_comparison_passed": true,
         "missing_source_volume_mm3": 0.0,
         "extra_volume_mm3": 0.0,
         "files": {
-          "PP02-BubbleCradle.step": "325fb8c7d66bd841801f01c2260e0fb8a26865bcb7235383744fa84e0c5f7536",
+          "PP02-BubbleCradle.step": "b43a003bd75ef44f97dc920f824cb4b724fa1ec0e7f4ac2eb7d9cb47c26a88a0",
           "PP02-BubbleCradle.stl": "5a7a816b63a00bd774c5cdf81757067471415faa87382f2dc94f2532ff8dd00a"
-        },
-        "step_geometry_equivalence_verified": false,
-        "step_usage": "layout_exchange_only; use native FCStd for geometry"
+        }
       },
       {
         "id": "PP03",
@@ -18130,16 +18373,16 @@
         "cad_boundary_shells": 1,
         "stl_nonmanifold": false,
         "stl_facets": 5310,
+        "step_geometry_equivalence_verified": false,
+        "step_usage": "layout_exchange_only; use native FCStd for geometry",
         "step_volume_difference_mm3": 34.68688506021863,
         "step_volume_comparison_passed": false,
         "missing_source_volume_mm3": 0.0,
         "extra_volume_mm3": 0.0,
         "files": {
-          "PP03-Backpack.step": "17cd9a9a2a80070d4ea24ad142e88656203888c1617ce55a4019088ed6ae7ad2",
+          "PP03-Backpack.step": "f50bd5a86b90e888bb1fd7670e5415ad5ef77ed7ef3f71cb91acde0394b970af",
           "PP03-Backpack.stl": "5543c7c8e84176066d3ce59598583102a1484125795c5f3ad3c8356039e846b5"
-        },
-        "step_geometry_equivalence_verified": false,
-        "step_usage": "layout_exchange_only; use native FCStd for geometry"
+        }
       },
       {
         "id": "PP04",
@@ -18169,16 +18412,16 @@
         "cad_boundary_shells": 3,
         "stl_nonmanifold": false,
         "stl_facets": 23900,
+        "step_geometry_equivalence_verified": false,
+        "step_usage": "layout_exchange_only; use native FCStd for geometry",
         "step_volume_difference_mm3": 2.5757559342309833e-05,
         "step_volume_comparison_passed": true,
         "missing_source_volume_mm3": 0.0,
         "extra_volume_mm3": 0.0,
         "files": {
-          "PP04-LowerTub.step": "803ed8d5dc0209ee0612996af8a919e140429f79c31a6a84816cb7da2a0c574c",
-          "PP04-LowerTub.stl": "00835a548c338567200cc2e77dda745804b7ce35085599b992755dc991eda799"
-        },
-        "step_geometry_equivalence_verified": false,
-        "step_usage": "layout_exchange_only; use native FCStd for geometry"
+          "PP04-LowerTub.step": "23b694802d2baea55032f8777b952aa0540678a6a8deb944645767dfd2311147",
+          "PP04-LowerTub.stl": "cc68a505a7ca1a9d2d482af46e896d90c2aa8737ecba11962c95c7b4c4310478"
+        }
       },
       {
         "id": "PP05",
@@ -18227,16 +18470,16 @@
         "cad_boundary_shells": 1,
         "stl_nonmanifold": false,
         "stl_facets": 3662,
+        "step_geometry_equivalence_verified": false,
+        "step_usage": "layout_exchange_only; use native FCStd for geometry",
         "step_volume_difference_mm3": 4.358286418573698,
         "step_volume_comparison_passed": false,
         "missing_source_volume_mm3": 0.0,
         "extra_volume_mm3": 0.0,
         "files": {
-          "PP05-Crown.step": "000110fe70736b595a0c1a43e9ec7448df4eaf81b15c67ad7323d1aadd2225b1",
-          "PP05-Crown.stl": "3fb7b98607ec68bc0f33b265c5c1854d36c0b73278f99a0b21d7b15103f9e4ad"
-        },
-        "step_geometry_equivalence_verified": false,
-        "step_usage": "layout_exchange_only; use native FCStd for geometry"
+          "PP05-Crown.step": "d6cf42c7c2d01f0c037b8cd0b04d93ef41a4b0e0e90ac0efcde1e06271eea196",
+          "PP05-Crown.stl": "562af82a9a90cd93b8d25c8cf19b6d25fe4fba1aae30cf456aafaa94095f0ce9"
+        }
       },
       {
         "id": "PP06",
@@ -18282,16 +18525,16 @@
         "cad_boundary_shells": 1,
         "stl_nonmanifold": false,
         "stl_facets": 6562,
+        "step_geometry_equivalence_verified": false,
+        "step_usage": "layout_exchange_only; use native FCStd for geometry",
         "step_volume_difference_mm3": 0.00021914618992013857,
         "step_volume_comparison_passed": true,
         "missing_source_volume_mm3": 0.0,
         "extra_volume_mm3": 0.0,
         "files": {
-          "PP06-Neck.step": "797f4287697e49720875da43041c4b3255a33f6d4fde0cfdc70e7fa2f7819742",
-          "PP06-Neck.stl": "484f6ffdd99c1655fdbda4eb7f5bb68f7fec2207a7dd1b3af19ae56d2c36e4c8"
-        },
-        "step_geometry_equivalence_verified": false,
-        "step_usage": "layout_exchange_only; use native FCStd for geometry"
+          "PP06-Neck.step": "a03dcbabbb5302d37fccad40c3e2ecc25125f3fe0207bb73cad51315e961bb97",
+          "PP06-Neck.stl": "9e6738d9a99053a63f8ac82914502ea89617a7a0672124ac2021108968ab1966"
+        }
       }
     ],
     "design_features_in_separate_source": true,
@@ -18961,9 +19204,8 @@
         27.000000000000014,
         94.0
       ],
-      "native_brep_matches": null,
-      "symmetric_difference_mm3": 0.0,
-      "geometry_verified_against_regenerated_candidate": true
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     },
     {
       "name": "WetDivider",
@@ -18989,7 +19231,7 @@
       "category": "structure",
       "valid": true,
       "solids": 3,
-      "volume_mm3": 47762.845547851415,
+      "volume_mm3": 51128.57678204799,
       "bbox_mm": [
         -65.0,
         -101.00000000000001,
@@ -19052,9 +19294,8 @@
         17.0,
         158.0
       ],
-      "native_brep_matches": null,
-      "symmetric_difference_mm3": 0.0,
-      "geometry_verified_against_regenerated_candidate": true
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     },
     {
       "name": "NeckBearingL",
@@ -19197,9 +19438,8 @@
         17.0,
         158.0
       ],
-      "native_brep_matches": null,
-      "symmetric_difference_mm3": 0.0,
-      "geometry_verified_against_regenerated_candidate": true
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     },
     {
       "name": "NeckBearingR",
@@ -19324,9 +19564,8 @@
         -3.0,
         157.0
       ],
-      "native_brep_matches": null,
-      "symmetric_difference_mm3": 0.0,
-      "geometry_verified_against_regenerated_candidate": true
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     },
     {
       "name": "NeckHeadSaddle",
@@ -20837,9 +21076,8 @@
         33.0000001,
         217.0000001
       ],
-      "native_brep_matches": null,
-      "symmetric_difference_mm3": 0.0,
-      "geometry_verified_against_regenerated_candidate": true
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     },
     {
       "name": "CrownInsertLFront",
@@ -25718,14 +25956,86 @@
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PowerSwitchBody",
+      "label": "电源开关／实测包络与挂耳",
+      "category": "component",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 561.5247084154332,
+      "bbox_mm": [
+        -9.75,
+        -66.9,
+        72.8,
+        9.75,
+        -61.1,
+        81.6
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PowerSwitchLever",
+      "label": "电源开关／拨柄／中间行程展示",
+      "category": "component",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 29.43500000000002,
+      "bbox_mm": [
+        -1.45,
+        -65.45,
+        81.6,
+        1.45,
+        -62.55,
+        85.1
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PowerSwitchScrew0",
+      "label": "电源开关／Ø2×6塑料用自攻螺钉候选 1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 28.349732105994292,
+      "bbox_mm": [
+        -9.200000000000001,
+        -65.8,
+        75.6,
+        -5.6000000000000005,
+        -62.2,
+        83.19999999999999
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "PowerSwitchScrew1",
+      "label": "电源开关／Ø2×6塑料用自攻螺钉候选 2",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 28.349732105994292,
+      "bbox_mm": [
+        5.6000000000000005,
+        -65.8,
+        75.6,
+        9.200000000000001,
+        -62.2,
+        83.19999999999999
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     }
   ],
   "check_source_document": "source/CyberTrack-design.FCStd",
   "model_tree": {
     "source_document": "source/CyberTrack-design.FCStd",
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "delivery_document": "CyberTrack.FCStd",
-    "delivery_sha256": "8474a47c13543be80023cad0cce11ee53c575633567c7795dd38d328b371f77b",
+    "delivery_sha256": "24b224c7f8ea146f0bbd8c0a26ef621064be9d11d54a0280f7c99c30d64c2cf6",
     "kept_group": "01 双履带与动力参考",
     "drive_members": [
       "DriveCouplerL",
@@ -25911,8 +26221,8 @@
       "WaterStrapAccessSpace"
     ],
     "retained_hidden_envelope_count": 20,
-    "root_part_count": 271,
-    "part_count": 301,
+    "root_part_count": 275,
+    "part_count": 305,
     "geometry_scope": "Retained objects; removed only duplicate inputs and hidden nonphysical check spaces",
     "geometry_unchanged": true,
     "appearance_properties_unchanged": true,
@@ -25923,13 +26233,13 @@
   },
   "part_names": {
     "delivery_document": "CyberTrack.FCStd",
-    "before_sha256": "a29c94cd282134293f106eee2f2ce4ccff4c3d263a69361826b8a131b5c6849d",
-    "delivery_sha256": "43fb9f2998f0f23edda77ccc80b23bbcb5c18ce0f851a355036cd67ba33ff17f",
+    "before_sha256": "1ab1ac1b80bd031161eb32000ea3939522a29d6dc50a37063642fe7e8c7214b1",
+    "delivery_sha256": "d8140fd9466b124059cef56c74dbdb4709716b1bbc3eb4e531d57f795c212042",
     "source_document": "source/CyberTrack-design.FCStd",
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
-    "part_count": 301,
-    "unique_labels": 301,
-    "renamed_count": 295,
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+    "part_count": 305,
+    "unique_labels": 305,
+    "renamed_count": 299,
     "geometry_and_gui_entries_byte_identical": true,
     "other_document_properties_unchanged": true,
     "native_readback_passed": true,
@@ -25937,19 +26247,16 @@
   },
   "part_order": {
     "delivery_document": "CyberTrack.FCStd",
-    "before_sha256": "9d4138be0a9601b3855dc5291f6fc98c99274f17bf32a1412ff619d3914c92ae",
-    "delivery_sha256": "8474a47c13543be80023cad0cce11ee53c575633567c7795dd38d328b371f77b",
+    "before_sha256": "d8140fd9466b124059cef56c74dbdb4709716b1bbc3eb4e531d57f795c212042",
+    "delivery_sha256": "24b224c7f8ea146f0bbd8c0a26ef621064be9d11d54a0280f7c99c30d64c2cf6",
     "source_document": "source/CyberTrack-design.FCStd",
-    "source_sha256": "fcb11ad8f3905581c347a7d91314065ce1e0b20017515da81875cc7911f5c058",
+    "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
     "method": "Assembly median height descending; members by Z descending, Y ascending, X descending",
-    "root_count": 272,
-    "part_count": 301,
+    "root_count": 276,
+    "part_count": 305,
     "geometry_entries_byte_identical": true,
     "document_properties_except_group_order_unchanged": true,
     "gui_properties_except_tree_rank_unchanged": true,
-    "rank_metadata_verified": true,
-    "gui_tree_readback_passed": true,
-    "hidden_part_count": 20,
-    "passed": true
+    "rank_metadata_verified": true
   }
 }
