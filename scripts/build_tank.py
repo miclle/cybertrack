@@ -22,6 +22,7 @@ from bubble_gun_layout import add_bubble_gun, check_bubble_gun
 from ultrasonic_layout import add_ultrasonic, check_ultrasonic, render_ultrasonic
 from ultrasonic_integration import apply as integrate_ultrasonic, check as check_ultrasonic_integration, render as render_ultrasonic_integration
 from effects_mount import apply as add_effects_mount, check as check_effects_mount, render as render_effects_mount
+from front_effects import apply as add_front_effects, check as check_front_effects, render as render_front_effects
 from mt3608_layout import apply as add_mt3608, check as check_mt3608, render as render_mt3608
 from l298n_layout import add_l298n, check_l298n, render_l298n
 from l298n_mount import apply as add_l298n_mount, check as check_l298n_mount, render as render_l298n_mount, export_carrier
@@ -238,7 +239,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.44'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.46'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -559,6 +560,7 @@ def main():
     ultrasonic_info=integrate_ultrasonic(doc,add,args.render)
     effects_info=add_effects_mount(doc,add)
     mt3608_info=add_mt3608(doc,add)
+    front_effects_info=add_front_effects(doc,add)
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
@@ -638,6 +640,7 @@ def main():
         render_effects_mount(saved, OUT)
         render_l298n(saved, OUT)
         render_mt3608(saved, OUT)
+        render_front_effects(saved, OUT)
         render_l298n_mount(saved, OUT)
         from drive_service import render_drive_views
         render_drive_views(saved, OUT)
@@ -674,7 +677,7 @@ def main():
     print('Final readback; drive and bottle checks',flush=True)
     drive_mount_check=check_drive_mount(final,verbose=True)
     effects_check=check_effects_mount(final)
-    report={'status':'preliminary_concept','design_revision':'0.44','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.46','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'drive_mount_check':drive_mount_check,
             'head_lift_check':check_head_lift(final),
             'rear_armor_symmetry_check':check_rear_armor(final),
@@ -689,7 +692,7 @@ def main():
             'port_orientation_design':'+Y; lateral position and connector envelope are assumptions',
             'ports_and_cable_clearance_verified':False},
             'arc_module_envelopes':{'quantity':2,'status':'passive backpack-side body candidates; no HV leads, electrode or drive'},
-            'crown_effect_locations':{'quantity':2,'center_x_mm':[51.5,-51.5],
+            'crown_effect_locations':{'status':'historical crown decoration; active effect location request moved to front chassis in 0.45','quantity':2,'center_x_mm':[51.5,-51.5],
                 'outer_size_xyz_mm':[16,47,11],'y_range_mm':[-16,31],'z_range_mm':[192+LIFT,203+LIFT],
                 'recess_plan_mm':[8,25],'recess_y_range_mm':[-5,20],
                 'basis':'design allocation for passive appearance mockup; not supplier data',
@@ -708,6 +711,7 @@ def main():
             'l298n_mount':l298n_mount_info, 'l298n_mount_check':check_l298n_mount(final),
             'ultrasonic_check':check_ultrasonic(final),
             'ultrasonic_layout':ultrasonic_info,'ultrasonic_integration_check':check_ultrasonic_integration(final),
+            'front_effects_layout':front_effects_info,'front_effects_check':check_front_effects(final),
             'mt3608_layout':mt3608_info,'mt3608_check':check_mt3608(final),
             'effects_layout':effects_info,'effects_mount_check':effects_check,
             'manufacturing_released':False,'physical_fit_verified':False,
@@ -755,6 +759,8 @@ def main():
     (OUT/'head-lift-audit.json').write_text(json.dumps(report['head_lift_check'],ensure_ascii=False,indent=2)+'\n')
     report['mt3608_check'].update(source_sha256=sha(cad),saved_and_reopened=True)
     (OUT/'mt3608-fit-audit.json').write_text(json.dumps(report['mt3608_check'],ensure_ascii=False,indent=2)+'\n')
+    report['front_effects_check'].update(source_sha256=sha(cad),saved_and_reopened=True)
+    (OUT/'front-effects-fit-audit.json').write_text(json.dumps(report['front_effects_check'],ensure_ascii=False,indent=2)+'\n')
     (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check','service_paths')},ensure_ascii=False,indent=2))
     App.closeDocument(final.Name)
@@ -764,7 +770,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if not report['mt3608_check']['passed'] or not effects_check['passed'] or not report['ultrasonic_integration_check']['passed'] or not report['head_lift_check']['passed'] or not report['bottle_backpack_check']['passed'] or not report['l298n_mount_check']['passed'] or not report['l298n_check']['passed'] or not drive_mount_check['passed'] or not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not breadboard_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
+    if not report['front_effects_check']['passed'] or not report['mt3608_check']['passed'] or not effects_check['passed'] or not report['ultrasonic_integration_check']['passed'] or not report['head_lift_check']['passed'] or not report['bottle_backpack_check']['passed'] or not report['l298n_mount_check']['passed'] or not report['l298n_check']['passed'] or not drive_mount_check['passed'] or not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not breadboard_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 
