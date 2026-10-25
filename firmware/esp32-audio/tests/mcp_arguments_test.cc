@@ -42,6 +42,23 @@ int main() {
     for(const char* j : {"{}","[]","null","{\"duration_ms\":30001}","{\"duration_ms\":-1}",
         "{\"duration_ms\":0.5}","{\"duration_ms\":\"1000\"}","{\"duration_ms\":1000,\"direction\":\"forward\"}"})
         check("self.tank.water",j,false);
+    for (const char* d : {"forward","backward","left","right"}) {
+        auto j=std::string("{\"direction\":\"")+d+"\",\"move_duration_ms\":3000,\"water_duration_ms\":30000}";
+        check("self.tank.move_and_water",j.c_str(),true);
+    }
+    for(const char* j : {"{}","null","[]",
+        "{\"direction\":\"forward\",\"move_duration_ms\":1000}",
+        "{\"direction\":\"forward\",\"move_duration_ms\":3001,\"water_duration_ms\":1000}",
+        "{\"direction\":\"forward\",\"move_duration_ms\":1000,\"water_duration_ms\":30001}",
+        "{\"direction\":\"forward\",\"move_duration_ms\":0,\"water_duration_ms\":1000}",
+        "{\"direction\":\"forward\",\"move_duration_ms\":1000,\"water_duration_ms\":-1}",
+        "{\"direction\":\"forward\",\"move_duration_ms\":true,\"water_duration_ms\":1000}",
+        "{\"direction\":\"forward\",\"move_duration_ms\":1000,\"water_duration_ms\":1.5}",
+        "{\"direction\":\"spin\",\"move_duration_ms\":1000,\"water_duration_ms\":1000}",
+        "{\"direction\":\"forward\",\"move_duration_ms\":1000,\"water_duration_ms\":1000,\"_ct_ticket\":1}",
+        "{\"direction\":\"forward\",\"move_duration_ms\":1000,\"move_duration_ms\":1000}"})
+        check("self.tank.move_and_water",j,false);
+    check("self.tank.move_and_water",nullptr,false);
     for(const char* tool : {"self.tank.stop","self.tank.get_status"}) {
         check(tool,"{}",true); check(tool,nullptr,true);
         for(const char* j : {"[]","null","{\"duration_ms\":1000}"}) check(tool,j,false);

@@ -1,6 +1,9 @@
 # CyberTrack 面包板：小D 语音、电机与水枪控制
 
-此适配层用于现有 `bread-compact-wifi` 面包板，基于本机已验证的 `xiaozhi 2.0.3`。当前 `2.0.3-ct6` 将双路 L298N 电机与 GPIO18 水枪接入同一灵矽设备，保留语音、OLED、唤醒词、音量和触摸说话按键。用户已确认迁至同一块面包板；已完成仅应用刷写、启动联网及平台角色同步，见[部署记录](startup-ct6.json)；迁线及基本台架四方向／喷水／BOOT 联调已完成，实际装车方向标定、断网及完整供电／故障验收仍未完成。接线、分阶段检查与最新状态见[电机／水枪集成](../../docs/breadboard-integration.md)。旧 ct4／ct5 水枪实测保留在[喷水记录](../../docs/audio-water-validation.md)。
+此适配层用于现有 `bread-compact-wifi` 面包板，基于本机已验证的 `xiaozhi 2.0.3`。已完成历史联调的 `2.0.3-ct6` 将双路 L298N 电机与 GPIO18 水枪接入同一灵矽设备，保留语音、OLED、唤醒词、音量和触摸说话按键。用户已确认迁至同一块面包板；已完成仅应用刷写、启动联网及平台角色同步，见[部署记录](startup-ct6.json)；迁线及基本台架四方向／喷水／BOOT 联调已完成，实际装车方向标定、断网及完整供电／故障验收仍未完成。接线、分阶段检查与最新状态见[电机／水枪集成](../../docs/breadboard-integration.md)。旧 ct4／ct5 水枪实测保留在[喷水记录](../../docs/audio-water-validation.md)。
+
+
+**ct7 更新**：用户已要求行走和喷水可同时进行。当前源码为 `2.0.3-ct7`，独立计时／冷却，增加 `move_and_water` 同时启动工具；BOOT 和停止仍全停。ct7 已仅应用刷写、平台角色回读并重启联网，核心并发台架回归与断功率收尾完成，完整供电／整机验收仍待完成；软件与部署证据见[并发动作说明](../../docs/concurrent-actions.md)。上段 ct6 及以下历史验收不能替代 ct7 并发实测。
 
 ## 来源与配置证据
 
@@ -50,7 +53,7 @@
 
 ct3 的逐次物理授权流程和 ct4 的固定五秒要求已被用户明确取消，历史结果保留在[喷水验证记录](../../docs/audio-water-validation.md)。用户已确认控制线纠正后喷水测试正常，带载 BOOT 提前停止及松开不恢复也已确认。上述结果属于 ct4 五秒配置；ct5 已通过功率断开的 1／7 秒及 40 秒请求限为 30 秒的语音核验，用户确认音频／屏幕正常，不能推导 30 秒带载已通过。真实断网故障矩阵、独立硬件切断和完整供电验收仍未完成，软件输出回执本身不证明有水流。
 
-## ct6 当前工具与统一控制
+## ct6 历史工具与统一控制
 
 - 新增 `self.tank.move({"direction":"forward","duration_ms":1000})`。方向仅接受 `forward/backward/left/right`，整数时长 1–3000 ms，固定 1 kHz／8 bit duty=154（约 60%）。角色默认一秒，超三秒请求三秒并说明；不把距离或角度换算成时间。A 候选左、B 候选右，正负极须按车体前进方向核对，当前不是实车标定。
 - `self.tank.water` 保留 1–30000 ms，未说时长填 1000；工具描述与角色统一。两类动作互斥，共用 128 项会话 RPC 记录、内部票据与截止时间；接受一个动作即取消其他已排队票据，忙碌请求不延迟补做。
@@ -67,17 +70,17 @@ ct3 的逐次物理授权流程和 ct4 的固定五秒要求已被用户明确�
 
 ```sh
 # 先激活 ESP-IDF v5.5.1 的 Python 环境与 export.sh。
-python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct6-src
+python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct7-src
 sh firmware/esp32-audio/test.sh
-python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct6-src
-idf.py -C build/xiaozhi-ct6-src -B "$PWD/build/firmware-ct6" build
+python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct7-src
+idf.py -C build/xiaozhi-ct7-src -B "$PWD/build/firmware-ct7" build
 ```
 
 应用分区是 `ota_0`，起点 `0x20000`、大小 `0x3f0000`，与水枪台架分区不同。更新前需核对设备 MAC、分区表、OTA 选择及已有备份；本轮仅写该应用，不执行完整 `idf.py flash`，不覆盖引导、NVS、OTA 数据或 8 MB assets。
 
 ## 验证与观察
 
-`test.sh` 运行 ASan／UBSan 主机检查，验证 ct2 只读核心，以及 ct5 可变时长启动、截止边界与非法时长拒绝、忙碌／冷却拒绝、BOOT／停止取消排队请求、断线、复位、重复 RPC、队列过期和时钟故障。ct6 另覆盖四方向、跨执行器互斥、排队取消和三秒冷却，以及真实输出类的每一处初始化／启动／停止 API 单故障注入。`run_mcp_tests.py` 从已导出源码提取实际 MCP 校验块，使用 ESP-IDF cJSON 检查参数边界。以上均不代表音频、实物停止或端到端语音通过。
+`test.sh` 运行 ASan／UBSan 主机检查，验证 ct2 只读核心，以及 ct5 可变时长启动、截止边界与非法时长拒绝、忙碌／冷却拒绝、BOOT／停止取消排队请求、断线、复位、重复 RPC、队列过期和时钟故障。ct7 覆盖独立并发计时／冷却、组合原子拒绝、同路排队取消、另一通道输出连续性，以及实际输出类全部初始化／组合状态转换 API 单故障注入。`run_mcp_tests.py` 从已导出源码提取实际 MCP 校验块，使用 ESP-IDF cJSON 检查参数边界。以上均不代表音频、实物停止或端到端语音通过。
 
 `monitor.py --port <设备串口> --log build/audio-private/session.jsonl` 只监听和筛选 CT_AUDIO 回执、运行状态及少量启动信息，不发送串口命令，不保存原始串口日志或录音。平台工具记录和用户现场音频／屏幕观察共同构成语音联调证据。详见[验证记录](../../docs/audio-board-validation.md)。
 

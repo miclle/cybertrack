@@ -4,17 +4,18 @@
 #include <iostream>
 static std::array<int,49> levels;
 static std::array<int,4> pwm, duty;
-static unsigned calls, fail_at;
+static unsigned calls, fail_at, motor_writes, water_writes;
 static bool fail() { return ++calls == fail_at; }
 esp_err_t gpio_set_level(int pin, uint32_t v) {
     if (fail()) return -1;
     // Never change direction while either bridge is enabled.
     if (pin==9 || pin==10 || pin==12 || pin==13) assert(!pwm[2] && !pwm[3]);
-    if (pin==18 && v) assert(!pwm[2] && !pwm[3]);
+    if (pin==18) ++water_writes; else ++motor_writes;
     levels[pin]=v; return 0;
 }
 esp_err_t gpio_set_direction(int pin, int) {
     if (fail()) return -1;
+    ++motor_writes;
     if (pin==8) pwm[2]=0;
     if (pin==11) pwm[3]=0;
     return 0;
@@ -29,47 +30,49 @@ esp_err_t ledc_channel_config(const ledc_channel_config_t* c) {
     assert((c->gpio_num==8 && c->channel==2)||(c->gpio_num==11 && c->channel==3));
     return fail() ? -1 : 0;
 }
-esp_err_t ledc_stop(int, int ch, uint32_t) { if(fail()) return -1; pwm[ch]=0; return 0; }
+esp_err_t ledc_stop(int, int ch, uint32_t) { if(fail()) return -1; ++motor_writes; pwm[ch]=0; return 0; }
 esp_err_t ledc_set_duty(int, int ch, uint32_t d) {
     if(fail()) return -1;
-    assert(!pwm[2] && !pwm[3] && d==154); duty[ch]=d; return 0;
+    assert(!pwm[2] && !pwm[3] && d==154); ++motor_writes; duty[ch]=d; return 0;
 }
 esp_err_t ledc_update_duty(int, int ch) {
     if(fail()) return -1;
-    assert(!levels[18]); pwm[ch]=duty[ch]; return 0;
+    ++motor_writes; pwm[ch]=duty[ch]; return 0;
 }
-static void reset() { levels.fill(0); pwm.fill(0); duty.fill(0); calls=fail_at=0; }
+static void reset() { levels.fill(0); pwm.fill(0); duty.fill(0); calls=fail_at=motor_writes=water_writes=0; }
 static void off() {
     for(int p : {8,9,10,11,12,13,18}) assert(!levels[p]);
     assert(!pwm[2] && !pwm[3]);
 }
+struct State { bool water; int left, right; };
 int main() {
     reset(); AudioActionOutputs a; assert(a.Init()); off();
     const unsigned init_calls=calls;
-    for (int l : {-60,60}) for (int r : {-60,60}) {
-        assert(a.Apply(false,l,r));
-        assert(pwm[2]==154 && pwm[3]==154);
-        assert(levels[9]==(l>0) && levels[10]==(l<0));
-        assert(levels[12]==(r>0) && levels[13]==(r<0));
-        assert(a.Apply(false,0,0)); off();
-    }
-    assert(a.Apply(true,0,0) && levels[18]);
-    assert(a.Apply(false,0,0)); off();
-    calls=0; assert(a.Apply(false,60,60)); unsigned start_calls=calls;
-    calls=0; assert(a.Apply(false,0,0)); unsigned stop_calls=calls;
-    // Fail each startup API and every API in a start/stop transition once.
     for(unsigned at=1;at<=init_calls;++at) {
-        reset(); fail_at=at; AudioActionOutputs x; assert(!x.Init() && x.fault); off();
-        assert(!x.Apply(false,60,60)); off();
+        reset();fail_at=at;AudioActionOutputs x;assert(!x.Init()&&x.fault);off();
+        assert(!x.Apply(true,60,60));off();
     }
-    for(bool stopping : {false,true}) for(unsigned at=1;at<=(stopping?stop_calls:start_calls);++at) {
-        reset(); AudioActionOutputs x; assert(x.Init());
-        if(stopping) assert(x.Apply(false,60,60));
-        calls=0; fail_at=at;
-        assert(!x.Apply(false,stopping?0:60,stopping?0:60)); assert(x.fault); off();
-        assert(!x.Apply(true,0,0)); off();
+    const State states[]={{false,0,0},{true,0,0},{false,60,60},{true,60,60},
+        {false,-60,-60},{true,-60,60},{true,60,-60}};
+    for(const auto& from:states) for(const auto& to:states) {
+        reset();AudioActionOutputs x;assert(x.Init());assert(x.Apply(from.water,from.left,from.right));
+        calls=motor_writes=water_writes=0;
+        assert(x.Apply(to.water,to.left,to.right));
+        const unsigned transition_calls=calls;
+        assert(levels[18]==to.water);
+        assert(pwm[2]==(to.left?154:0)&&pwm[3]==(to.right?154:0));
+        assert(levels[9]==(to.left>0)&&levels[10]==(to.left<0));
+        assert(levels[12]==(to.right>0)&&levels[13]==(to.right<0));
+        if(from.left==to.left&&from.right==to.right) assert(motor_writes==0);
+        if(from.water==to.water) assert(water_writes==0);
+        for(unsigned at=1;at<=transition_calls;++at) {
+            reset();AudioActionOutputs y;assert(y.Init());assert(y.Apply(from.water,from.left,from.right));
+            calls=0;fail_at=at;
+            assert(!y.Apply(to.water,to.left,to.right)&&y.fault);off();
+            assert(!y.Apply(true,60,60));off();
+        }
     }
-    reset(); AudioActionOutputs x; assert(x.Init());
-    assert(!x.Apply(true,60,60) && x.fault); off();
-    std::cout << "PASS: actual output driver, six pins, four directions, disable-before-direction, mutual exclusion, every init/start/stop API failure, latched shutdown\n";
+    reset();AudioActionOutputs x;assert(x.Init());assert(x.Apply(true,60,60));
+    assert(!x.Apply(true,30,60)&&x.fault);off();
+    std::cout << "PASS: actual output driver concurrent transition matrix, untouched-lane continuity, disable-before-direction, all init/transition API failures and latched global shutdown\n";
 }

@@ -34,8 +34,22 @@ ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.water") {
             return;
         }
     }
+    if (tool_name == "self.tank.move_and_water") {
+        const cJSON* move = cJSON_GetObjectItemCaseSensitive(tool_arguments, "move_duration_ms");
+        const cJSON* water = cJSON_GetObjectItemCaseSensitive(tool_arguments, "water_duration_ms");
+        const cJSON* direction = cJSON_GetObjectItemCaseSensitive(tool_arguments, "direction");
+        if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 3 ||
+            !cJSON_IsNumber(move) || !(move->valuedouble >= 1 && move->valuedouble <= 3000) || move->valuedouble != move->valueint ||
+            !cJSON_IsNumber(water) || !(water->valuedouble >= 1 && water->valuedouble <= 30000) || water->valuedouble != water->valueint ||
+            !cJSON_IsString(direction) ||
+            (strcmp(direction->valuestring, "forward") && strcmp(direction->valuestring, "backward") &&
+             strcmp(direction->valuestring, "left") && strcmp(direction->valuestring, "right"))) {
+            ReplyError(id, "Combined action requires direction, integer move_duration_ms in 1..3000 and water_duration_ms in 1..30000");
+            return;
+        }
+    }
     if (tool_name == "self.tank.stop") CyberTrackActionStop();
-    if (cybertrack || tool_name == "self.tank.water" || tool_name == "self.tank.move")
+    if (cybertrack || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water")
         ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());'''
 
 
@@ -55,7 +69,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct6")')
+                 'set(PROJECT_VER "2.0.3-ct7")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
@@ -64,7 +78,7 @@ def main():
     replace_once(source / "main/mcp_server.h",
                  'cJSON_AddItemToObject(input_schema, "properties", properties);',
                  'cJSON_AddItemToObject(input_schema, "properties", properties);\n'
-                 '        if (name_ == "self.tank.get_status" || name_ == "self.tank.stop" || name_ == "self.tank.water" || name_ == "self.tank.move") {\n'
+                 '        if (name_ == "self.tank.get_status" || name_ == "self.tank.stop" || name_ == "self.tank.water" || name_ == "self.tank.move" || name_ == "self.tank.move_and_water") {\n'
                  '            cJSON_AddBoolToObject(input_schema, "additionalProperties", false);\n'
                  '        }')
     replace_once(source / "main/mcp_server.cc", '    PropertyList arguments = (*tool_iter)->properties();',
@@ -82,8 +96,8 @@ def main():
                  ACTION_ARGUMENT_CHECK)
     replace_once(source / "main/mcp_server.cc",
                  '    // Use main thread to call the tool',
-                 '    if (tool_name == "self.tank.water" || tool_name == "self.tank.move") {\n'
-                 '        int ticket = CyberTrackActionClaim(id);\n'
+                 '    if (tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water") {\n'
+                 '        int ticket = CyberTrackActionClaim(id, tool_name.c_str());\n'
                  '        if (!ticket) { ReplyError(id, "Action request duplicate, busy, offline or queue full"); return; }\n'
                  '        arguments.AddProperty(Property("_ct_ticket", kPropertyTypeInteger, ticket));\n'
                  '    }\n'

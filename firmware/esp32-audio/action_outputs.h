@@ -37,23 +37,25 @@ public:
     }
     bool Apply(bool water, int left, int right) {
         if (fault) { EmergencyOff(); return false; }
-        if ((water && (left || right)) || (left != 0 && left != 60 && left != -60) ||
+        if ((left != 0 && left != 60 && left != -60) ||
             (right != 0 && right != 60 && right != -60)) return Check(-1);
-        if (water == water_on && left == applied_left && right == applied_right && applied) return true;
-        // Disable BOTH bridges and water before altering any direction.
-        bool ok = gpio_set_level(WaterPin, 0) == ESP_OK;
-        for (const auto& b : bridges) ok = (ledc_stop(LEDC_LOW_SPEED_MODE, b.channel, 0) == ESP_OK) && ok;
-        if (!ok) return Check(-1);
-        const int values[] = {left, right};
-        for (unsigned i = 0; i < 2; ++i) {
-            const auto& b = bridges[i];
-            if (!Check(gpio_set_level(b.in1, values[i] > 0)) ||
-                !Check(gpio_set_level(b.in2, values[i] < 0))) return false;
-            if (values[i] && !Check(ledc_set_duty(LEDC_LOW_SPEED_MODE, b.channel, Duty))) return false;
+        // Touch only the changing lane: starting/stopping water must not pulse
+        // motor enables, and motor transitions must not interrupt water.
+        if (!applied || left != applied_left || right != applied_right) {
+            bool ok = true;
+            for (const auto& b : bridges) ok = (ledc_stop(LEDC_LOW_SPEED_MODE, b.channel, 0) == ESP_OK) && ok;
+            if (!ok) return Check(-1);
+            const int values[] = {left, right};
+            for (unsigned i = 0; i < 2; ++i) {
+                const auto& b = bridges[i];
+                if (!Check(gpio_set_level(b.in1, values[i] > 0)) ||
+                    !Check(gpio_set_level(b.in2, values[i] < 0))) return false;
+                if (values[i] && !Check(ledc_set_duty(LEDC_LOW_SPEED_MODE, b.channel, Duty))) return false;
+            }
+            for (unsigned i = 0; i < 2; ++i)
+                if (values[i] && !Check(ledc_update_duty(LEDC_LOW_SPEED_MODE, bridges[i].channel))) return false;
         }
-        for (unsigned i = 0; i < 2; ++i)
-            if (values[i] && !Check(ledc_update_duty(LEDC_LOW_SPEED_MODE, bridges[i].channel))) return false;
-        if (!Check(gpio_set_level(WaterPin, water))) return false;
+        if ((!applied || water != water_on) && !Check(gpio_set_level(WaterPin, water))) return false;
         water_on = water; applied_left = left; applied_right = right; applied = true;
         return true;
     }
