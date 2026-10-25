@@ -32,37 +32,40 @@ for rel,digest in report['files_sha256'].items():
     if not path.exists(): path=MODEL/Path(rel).name
     assert sha(path)==digest, f'Stale model artifact: {path}'
 pitch_audit=json.loads((MODEL/'gun-pitch-audit.json').read_text())
-assert pitch_audit['passed'] and pitch_audit['source_sha256']==meta['source_sha256']
-assert report['design_revision']=='0.39', 'Review annotations for a new model revision'
-cad_checks_passed=all(report[key]['passed'] for key in ('collision_check','service_paths','controller_clearance_check','water_gun_check','bubble_gun_check','ultrasonic_check','speaker_check','rear_armor_symmetry_check','top_feed_check','drive_mount_check','l298n_check','l298n_mount_check','bottle_backpack_check','head_lift_check')) and report['water_gun_check']['removal']['passed']
+breadboard_audit=json.loads((MODEL/'breadboard-change-audit.json').read_text())
+integration_audit=json.loads((MODEL/'ultrasonic-integration-change-audit.json').read_text())
+effects_audit=json.loads((MODEL/'effects-change-audit.json').read_text())
+assert effects_audit['passed'] and effects_audit['source_sha256']==meta['source_sha256']
+assert integration_audit['passed'] and integration_audit['source_sha256']==effects_audit['baseline_sha256']
+assert breadboard_audit['passed'] and breadboard_audit['source_sha256']==integration_audit['baseline_sha256']
+assert pitch_audit['passed'] and pitch_audit['source_sha256']==breadboard_audit['baseline_sha256']
+assert report['design_revision']=='0.42', 'Review annotations for a new model revision'
+cad_checks_passed=all(report[key]['passed'] for key in ('effects_mount_check','collision_check','service_paths','breadboard_check','water_gun_check','bubble_gun_check','ultrasonic_check','ultrasonic_integration_check','rear_armor_symmetry_check','top_feed_check','drive_mount_check','l298n_check','l298n_mount_check','bottle_backpack_check','head_lift_check')) and report['water_gun_check']['removal']['passed']
 assert cad_checks_passed or args.allow_review_conflicts, 'CAD checks failed; use --allow-review-conflicts only for a marked conflict review PDF'
 # Guard dimension callouts that describe named features, not just overall extents.
 expected = {
     'BottomServiceCover': [-65.8,-96.8,26,65.8,40,28.8],
     'TrackMountL': [87,-32.5,33,98,32.5,71],
     'TrackMountR': [-98,-32.5,33,-87,32.5,71],
-    'UltrasonicRingL': [5,-91.3,155,21,-81,171],
-    'UltrasonicRingR': [-21,-91.3,155,-5,-81,171],
+    'UltrasonicRingL': [5,-87.8,155,21,-77.5,171],
+    'UltrasonicRingR': [-21,-87.8,155,-5,-77.5,171],
     'SensorStatusStrip': [-8,-81.5,172.5,8,-81,173.5],
     'PowerBank': [-60,-96,33,60,-23,64.5],
     'L298NCarrier': [-28.75,-17,29.2,28.75,24.5,78.2],
     'L298NEnvelope': [-21.75,-4,32,21.75,23.5,78.2],
-    'ElectronicsTray': [-52,-74,144.5,52,17,154],
-    'ESP32Board': [-39.6,-23.1,163.6,24,5.1,176.8],
-    'ControllerCarrier': [-44,-31,150,17.4,16,156],
+    'ElectronicsTray': [-61,-72.5,171.5,61,17.5,177],
+    'BreadboardEnvelope': [-50,-70,174,50,15,210],
     'CrownFinL': [43.5,-16,192,59.5,31,203],
     'CrownFinR': [-59.5,-16,192,-43.5,31,203],
     'CrownEffectInsetL': [47.5,-5,196,55.5,20,196.6],
-    'ArcModuleL': [52.75,-66,143.75,78.25,4,169.25],
-    'ArcModuleR': [-78.25,-66,143.75,-52.75,4,169.25],
     'WaterGunMaximumEnvelope': [38.4,-129,104.7,76.9,9.5,129.3],
     'BubbleGunInspectionEnvelope': [-72.9,-129,89.55,-37.1,-62,125.75],
     'BubbleGunMountingTab': [-58,-87,89.55,-52,-62,96.35],
     'BubbleGunFrontFoot': [-60,-106,89.55,-50,-87,96.35],
     'WaterModule': [3.6,40.6,40,52.4,89.4,154],
-    'BackpackShell': [-58,35,34,58,95,124],
+    'BackpackShell': [-80,35,34,80,107.5,124],
 }
-for name in ('UltrasonicRingL','UltrasonicRingR','SensorStatusStrip','ElectronicsTray','ESP32Board','ControllerCarrier','CrownFinL','CrownFinR','CrownEffectInsetL','ArcModuleL','ArcModuleR'):
+for name in ('UltrasonicRingL','UltrasonicRingR','SensorStatusStrip','CrownFinL','CrownFinR','CrownEffectInsetL'):
     expected[name][2] += 25
     expected[name][5] += 25
 assert abs(report['water_gun_layout']['mount']['side_walls']['channel_width_mm']-34.4)<1e-6
@@ -77,7 +80,7 @@ assert report['top_feed_check']['bottle_envelope_uncut']
 ultrasonic=report['ultrasonic_check']
 assert ultrasonic['derived_center_spacing_mm']==26
 assert ultrasonic['candidate_hole_diameter_mm']==16.6
-assert ultrasonic['panel_datum_y_mm']==-81 and ultrasonic['datum_is_assumption']
+assert ultrasonic['panel_datum_y_mm']==-77.5 and ultrasonic['datum_is_assumption']
 pitch=report['gun_pitch']
 assert pitch['elevation_degrees']==15 and pitch['rotation_about_X_degrees']==-15
 assert report['bubble_gun_layout']['mount']['ring']['one_piece']
@@ -95,7 +98,7 @@ for name, values in expected.items():
     assert all(abs(a-b)<1e-5 for a,b in zip(meta['objects'][name]['bbox'],values)), name
 for prefix, xs, ys in [('BatteryScrew',[-63.5,63.5],[-85,-40]),
                        ('CrownScrew',[-64,64],[-52,7]),
-                       ('TrayScrew',[-49.5,49.5],[-30,0])]:
+                       ('BreadboardScrew',[-57,57],[-40,-5])]:
     centres=[]
     for name,obj in meta['objects'].items():
         if name.startswith(prefix):
@@ -108,7 +111,7 @@ pdfmetrics.registerFont(TTFont('ZHB','/System/Library/Fonts/STHeiti Medium.ttc',
 U=72/25.4
 INK='#1E303B'; MUTED='#536673'; ACCENT='#DF632B'; PALE='#EAF0F2'; BLUE='#287E96'
 c=canvas.Canvas(str(PDF),pagesize=(420*U,297*U),pageCompression=1)
-c.setTitle('CyberTrack 0.39 模型与装配图纸')
+c.setTitle('CyberTrack 0.42 模型与装配图纸')
 c.setAuthor('CyberTrack')
 c.setSubject('A3 design review drawings; dimensions in mm; not manufacturing release')
 page=0
@@ -116,8 +119,8 @@ DETAILS=json.loads((DATA/'assembly-details.json').read_text())
 assert DETAILS['source_sha256']==meta['source_sha256'], 'Stale assembly details'
 assert set(DETAILS['objects'])==set(meta['objects'])=={o['name'] for o in report['objects']}
 CATALOG, CATALOG_SHEETS=build_catalog(DETAILS['objects'])
-TOTAL_PAGES=25+len(CATALOG_SHEETS)
-SYSTEM_PAGE_REFS={'A':'20-22','B':'2-4、20-22','C':'5、22','D':'23-24','E':'8-9','F':'6、8','G':'6、10','H':'6、10-12','I':'18','J':'13-15','K':'16-17','L':'7、19','M':'各系统检修'}
+TOTAL_PAGES=28+len(CATALOG_SHEETS)
+SYSTEM_PAGE_REFS={'A':'20-22','B':'2-4、20-22','C':'5、22','D':'23-24','E':'8-9','F':'6、8','G':'6、12','H':'10-12','I':'18、25','J':'13-15','K':'16-17','L':'7、19','N':'26-27','M':'各系统检修'}
 
 def text(x,y,s,size=10,color=INK,bold=False,align='left'):
     c.setFillColor(color);c.setFont('ZHB' if bold else 'ZH',size)
@@ -146,13 +149,13 @@ def header(title,subtitle):
     c.addOutlineEntry(f'{page:02d} {title}',f'page-{page}',level=0)
     c.setFillColor(INK);c.rect(0,278*U,420*U,19*U,fill=1,stroke=0)
     text(14,285,'CYBERTRACK',18,'#FFFFFF',True)
-    text(405,285,f'CT-39 / {page:02d}',11,'#FFFFFF',align='right')
+    text(405,285,f'CT-42 / {page:02d}',11,'#FFFFFF',align='right')
     text(14,265,title,21,bold=True);text(14,256,subtitle,10,MUTED)
     if not cad_checks_passed:
         text(405,244,'尺寸修订待适配：静态／拆卸／USB 空间未通过',10,ACCENT,True,align='right')
     line(14,250,406,250,'#CAD5DB',.6)
     line(14,20,406,20,'#CAD5DB',.6)
-    text(14,13,'模型与装配评审图 | Rev 0.39 | 图纸更新 2026-10-25 | 单位：mm',9,MUTED)
+    text(14,13,'模型与装配评审图 | Rev 0.42 | 图纸更新 2026-10-25 | 单位：mm',9,MUTED)
     text(406,13,f'未制造放行 · A3 横向 · {page} / {TOTAL_PAGES}',9,MUTED,align='right')
 def end():c.showPage()
 def title(x,y,s,sub=''):
@@ -229,7 +232,7 @@ def labeled_picture(name,x,y,w,h,labels):
         part_label(mapping,pixel,tx,ty,label,align)
     return mapping
 
-header('模型总览与图纸索引','两枪仰角由10°调整为15°，承托与枪侧管路同步；保留头舱加高25 mm及双瓶布局；以保存的原生模型为几何依据。')
+header('模型总览与图纸索引','0.42：背包外侧本体夹持与底盘四点薄承板合入；头壳与原前斜坡保持；未实测部分继续标注候选。')
 labeled_picture('assembly.png',28,87,170,146,[
     ((740,260),18,239,'顶部效果护框／冠盖','left'),
     ((630,460),18,218,'超声波双探头','left'),
@@ -248,7 +251,7 @@ box(14,29,392,33,PALE)
 text(20,51,' × '.join(f(v) for v in report['assembly_size_xyz_mm']),20,bold=True)
 text(20,37,'整机宽 × 长 × 高；模型几何外包络',9,MUTED)
 text(143,55,'图纸内容',11,bold=True)
-para(143,49,'02-04 六向尺寸　05 电源　06 头舱　07 双瓶　08 爆炸　09 走线\n10 头舱模块　11 主控布局　12 主控检修　13-15 水枪与线管\n16-17 泡泡枪　18 双探头　19 顶部供液　20-22 动力固定与维护\n23 L298N布局　24 支架与拆装\n25 全对象索引　26起 分系统逐项装配图卡（含包络和维护空间）',250,8.5,4.5)
+para(143,49,'02-04 六向尺寸　05 电源　06 头舱　07 双瓶　08 爆炸　09 走线\n10 面包板布局　11 浅托盘固定　12 整盘检修　13-15 水枪与线管\n16-17 泡泡枪　18 双探头　19 顶部供液　20-22 动力固定与维护\n23 L298N布局　24 支架与拆装　25 超声波共存\n26-27 夹环与效果板固定　28 全对象索引　29起 分系统逐项装配图卡',250,8.5,4.5)
 end()
 
 header('正面与背面 · 主要外形尺寸','各视图独立标识观察方向；尺寸为模型几何值。矢量线稿使用遮挡线消隐，未显示隐藏线。')
@@ -319,7 +322,7 @@ box(198,29,208,72,PALE)
 para(205,90,'电源原位保留：Z33…64.5；内托架Z31…32.8。\n四个0.2厚候选垫保持电源高度；底盖下表面Z26。\n电源整组下取60；更换电机前需先拆电源内托架，再移开本侧履带。\n实际垫高还须增加手部、工具和安全承托空间。\n螺钉、嵌件、孔径和拉带均为候选，未作加工放行。\n前隔板取消；实际插头与线缆仍需确认可达及拔插。',194,9,7)
 end()
 
-header('头舱冠盖与电子托板','整体冠盖上取；中央顶甲随冠盖拆装。主控小托架及服务空间见第11-12页；真实母座、插头和装配接口仍需核对。')
+header('头舱冠盖与电子托板','整体冠盖上取；中央顶甲随冠盖拆装。整板浅托盘与服务空间见第11-12页；面包板含元件／线束按100×85×36规划。')
 title(25,239,'整体冠盖俯视','4 处紧固；比例 1:1')
 p,b=drawing('crown',109,165,1)
 hdim(p,-64,64,7,7,39,'128 孔距')
@@ -327,13 +330,13 @@ vdim(p,-52,7,64,64,94,'59 孔距')
 text(29,94,'孔中心：X±64；Y=-52 / 7',9,MUTED)
 title(249,239,'共用托板俯视','4 处紧固；比例 1:1')
 p,b=drawing('tray',316,165,1)
-hdim(p,-52,52,-39,-39,-88,f(dim('ElectronicsTray',0))+' 外宽')
-hdim(p,-49.5,49.5,0,0,28,'99 孔距')
-vdim(p,-30,0,49.5,49.5,72,'30 孔距')
-text(253,94,'孔中心：X±49.5；Y=-30 / 0；基础板厚 1；新增支柱',9,MUTED)
+hdim(p,-61,61,-40,-40,-88,'122 侧耳总宽')
+hdim(p,-57,57,-5,-5,28,'114 孔距')
+vdim(p,-40,-5,57,57,75,'35 孔距')
+text(253,94,'孔中心：X±57；Y=-40 / -5；底厚2.5；围边高3',9,MUTED)
 box(14,29,392,54,PALE)
 para(21,72,'冠盖：卸下 4 颗顶面螺钉，整组上提 65；外壳分缝为 Z206…206.25，间隙 0.25。\n托板：先移去冠盖，断开线束与邻近软管，再卸下 4 颗螺钉，上提 85。',376,10,7)
-para(21,50,'主控使用实测总外包络 63.6 × 28.2 × 13.2；前上方剩余电子区 70 × 25 × 13 仍是假设；扬声器按用户提供 69.5 × 31.5 × 16.5 占位，固定和声孔待定。\n冠盖饰片在 CAD 中分对象表达，一体成形或定位固定工艺未定；顶部效果护框与标识随冠盖移动，详见后附G组冠盖图卡。',376,9,7)
+para(21,50,'面包板整组包络100×85×36为用户规划尺寸，替代旧裸板、母座、独立扬声器与剩余电子占位；不是整组实测。\n冠盖饰片在 CAD 中分对象表达，一体成形或定位固定工艺未定；顶部效果护框与标识随冠盖移动，详见后附G组冠盖图卡。',376,9,7)
 end()
 
 header('150 mL 双瓶背包 · 90 mm 低位护舱','用户指定两瓶 Ø48.8 × 114（含盖），各150 mL；完整外包络不削切，不以圆柱体积冒充液体容量。')
@@ -358,7 +361,6 @@ for pixel,x,y,label,align in [
     ((855,825),258,148,'水枪胶粘底托','right'),
     ((870,585),258,193,'固定头舱','right'),
     ((970,645),258,171,'固定颈架','right'),
-    ((940,530),258,210,'电弧模块占位','right'),
     ((1100,885),258,108,'履带动力组件','right'),
     ((760,955),19,80,'充电宝','left'),
     ((850,1040),19,44,'电源内托架／拉带','left')]:
@@ -367,13 +369,13 @@ items=[('01 整体冠盖','4 颗紧固；上提 65。顶甲、效果护框与标
 y=236
 for heading,body in items:
     text(268,y,heading,11,bold=True);y=para(268,y-8,body,132,9,5)-8
-para(268,64,'电弧模块仅向内错开显示；取出前须先移去托板，详见第10页。',132,9,6)
-para(268,44,'整机50处候选结构紧固点（取消4颗瓶盖螺钉）；不含动力参考包内部紧固件。底盖6颗；电机固定面与底盘一体，无端板锁紧螺钉。',132,8,5)
+para(268,64,'点火本体移至背包外侧，见26页。头部电子组为100×85×36整板包络，独立元件位置待核。',132,9,6)
+para(268,44,'浅托盘4颗侧耳螺钉；旧主控小托架及压架6颗紧固件取消。底盖6颗；电机固定面与底盘一体，无端板锁紧螺钉。',132,8,5)
 end()
 
-header('内部路线、装配顺序与验证边界','黄色为电源线 / 插头包络；青色为喷水软管路线。另增主控 Ø3 尾线候选；路线均为设计分配，不是完整接线或已验收液路。')
+header('内部路线、装配顺序与验证边界','黄色为电源线 / 插头包络；青色为喷水软管路线。头端电源线改经托盘后缘；路线为设计分配，不是完整接线或已验收液路。')
 labeled_picture('routing.png',30,102,173,130,[
-    ((868,402),20,240,'ESP32-S3 主控','left'),
+    ((868,402),20,240,'面包板整组包络','left'),
     ((855,510),219,221,'电源线／颈部导向','right'),
     ((1146,395),219,201,'泡泡液管（候选）','right'),
     ((672,620),20,180,'喷水管（Ø5实测）','left'),
@@ -382,71 +384,44 @@ labeled_picture('routing.png',30,102,173,130,[
     ((1055,790),219,119,'泡泡液瓶包络','right'),
     ((555,733),20,103,'充电宝包络','left')])
 title(23,78,'路线与维修关系')
-para(23,67,'电源线候选 Ø6，从中央干区经过固定颈架进入头舱。\n两枪自吸（用户确认），液管从液舱顶部插入，经两侧接前枪；主控尾线Ø3。\n拆托板前先断开相关线管；未表达高压接线。',190,10,7)
+para(23,67,'电源线候选 Ø6，从中央干区经过固定颈架进入头舱。\n两枪自吸（用户确认），液管从液舱顶部插入，经两侧接前枪；头端Ø6候选线束经托盘后缘开口。\n拆托板前先断开相关线管；未表达高压接线。',190,10,7)
 y=238
 for h,s in [('装配次序','动力与底座 → 电源内托架和一体底盖 → 冠盖定位与设备托板 → 两液体舱单独试验 → 布线后复查维护动作。'),('当前 CAD 证据',f"{len(report['objects'])} 个几何对象回读有效；{report['collision_check']['boolean_pairs_tested']} 对布尔检查发现 {len(report['collision_check']['overlaps'])} 对超阈值重叠；{len(report['service_paths']['scenarios'])} 组维护动作共 {sum(r['pose_count'] for r in report['service_paths']['scenarios'])} 个离散姿态，{sum(not r['passed'] for r in report['service_paths']['scenarios'])} 组未通过。"),('尺寸与图纸等级','蓝色尺寸为当前 CAD 设计值；充电宝 120 × 73 × 31.5 为用户提供。尺寸不含制造公差。未实测接口与紧固件只用于结构评审。'),('尚待实物确认','端口位置、手指与工具空间、连续拆卸路径、线管弯曲、真实设备固定、承载、密封排液和供电。未通过制造、电气或儿童使用验收。')]:
     text(235,y,h,12,bold=True);y=para(235,y-8,s,167,10,6)-9
 box(14,25,392,16,PALE)
-text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及全部 50 张预览图哈希。',9)
+text(20,35,'几何源：hardware/model/CyberTrack.FCStd · 图纸生成时核对原生模型及本轮预览图哈希。',9)
 text(20,29,'SHA-256：'+meta['source_sha256'],8,MUTED)
 end()
-header('双电弧模块 · 头舱预装包络','按用户指定的暂定外形：2 × Ø25.5 × 70 mm；橙色圆柱仅代表机械占位，不是实测或通电集成。')
-labeled_picture('arc-layout.png',27,116,174,118,[
-    ((485,480),18,237,'右侧电弧模块占位','left'),
-    ((1140,795),211,113,'左侧电弧模块占位','right')])
-text(110,94,'头舱透明示意 / 两侧纵向放置',11,bold=True,align='center')
-p,b=drawing('arc_plan',307,171,1)
-text(307,239,'俯视布局 / 比例 1:1',12,bold=True,align='center')
-vdim(p,-66,4,78.25,78.25,94,'70 用户给定长度')
-hdim(p,52.75,78.25,-66,-66,-92,'25.5 用户给定直径')
-leader(p(-65.5,-15),219,103,'右侧模块')
-leader(p(65.5,-15),354,103,'左侧模块')
-box(14,29,392,54,PALE)
-para(21,72,'位置：轴线 X=±65.5、Z=181.5，Y=-66…4；头舱整体上移25，模块相对头舱原位。托板宽 104；四孔 X±49.5、Y=-30 / 0。\n拆卸候选：先取冠盖和托板，再抬升 2、内移 24.5、继续上提 83（总上提 85）；每侧 24 姿态及三段连续扫掠通过。',375,10,7)
-para(21,50,'头壳、托板与 USB 线尾审查区无超阈值重叠；连续扫掠仅覆盖移去前置部件后的裸圆柱，不包含固定件、引线或工具。\n现有尺寸图和 STEP 仍以外观装配为主；两个模块及主控占位保存在 FCStd 中，默认隐藏，可单独显示。',375,9,7)
+header('面包板整组 · 头部原外形内布局','沿用0.41：用户指定100×85×36规划包络；不拆分假造内部设备位置，头舱不布置点火模块。')
+picture('breadboard-layout.png',18,105,188,134)
+picture('breadboard-top.png',216,105,188,134)
+text(110,95,'透明头壳／整板与浅托盘',11,bold=True,align='center')
+text(310,95,'俯视／100沿左右、85沿前后',11,bold=True,align='center')
+box(14,29,392,56,PALE)
+para(21,74,'整组包络：X=-50…50；Y=-70…15；Z=174…210。左右100、前后85、高36。\n距冠盖最小4；头部外形、冠盖分缝及冠盖四孔保持，内部支柱局部重建。\n旧裸ESP32小托架、排母、防脱架、独立扬声器及前上方剩余电子占位由整组包络替代。',375,10,7)
+para(21,46,'36为包含底板、元件、插头和线束的规划总高，不是实测。屏幕视窗、收音／出声、USB与天线仍需按实物复核。\n整板向上防脱压片需先确认塑料底座可接触边缘，本轮不假定元件顶面能够承压。',375,9,7)
 end()
-header('ESP32-S3 · 实测包络与主控托架','元件面朝 +Z，USB 朝 -X（机体右侧），天线朝 +X；实测总外形与假设内部层高分开表达。')
-labeled_picture('speaker-layout.png',28,128,178,103,[
-    ((845,479),219,236,'ESP32-S3 主控板','right'),
-    ((750,405),18,241,'防脱压架','left'),
-    ((662,580),18,217,'剩余电子预留区','left'),
-    ((675,734),18,119,'扬声器包络','left'),
-    ((949,627),219,130,'主控小托架／母座','right'),
-    ((1130,740),219,113,'电弧模块占位','right')])
-text(116,103,'去冠盖的头舱布局 / 外壳透明显示',11,bold=True,align='center')
-p,b=drawing('controller_top',318,186,1.8)
-title(253,239,'主控小托架俯视','比例 1.8:1；+X 在右，+Y 在上')
-hdim(p,-39.6,24,-23.1,-23.1,-39,'63.6 实测总长')
-vdim(p,-23.1,5.1,24,24,30,'28.2 实测宽')
-leader(p(-39.6,-9),238,121,'USB 朝 -X')
-leader(p(23,-9),354,121,'天线朝 +X')
-text(318,184,'ESP32-S3',10,INK,True,align='center')
-box(14,29,392,62,PALE)
-para(21,80,'实测总包络：X=-39.6…24，Y=-23.1…5.1，Z=188.6…201.8；总高 13.2。\n图纸排针资料：两排中心距 25.4，首末针距 53.34（22 针）；未确认独立螺钉孔，不在开发板上增孔。\n候选固定：双排母座承接排针，小托架 4 处紧固，防脱压架 2 处紧固；压架与最高包络保留 0.5 间隙。',375,10,7)
-para(21,54,'小托架平面 61.4 × 47、基础板厚 2，天线端悬出；主托板后缘局部延至 Y=17，小托架支柱原位不动；大托板四孔已改为 X±49.5。\nPCB 层高、针排条带、母座连续槽和插接高度均为设计假设；不能按简化槽直接加工或认定触点适配。\n原电子大占位已拆分：前上方另留 70 × 25 × 13 的待定区域，L298N 布置见第23页，其余板卡待适配。',375,9,7)
+header('浅托盘 · 侧耳固定与内部承托','主体105×90、内区101×86；四周单边0.5是设计余量，非已验证制造公差。')
+picture('breadboard-tray.png',20,112,180,125)
+p,b=drawing('tray',310,171,1.1)
+title(242,239,'托盘俯视／比例1.1:1')
+hdim(p,-61,61,-40,-40,-87,'122 含侧耳')
+hdim(p,-24.5,24.5,-70.5,-70.5,-78,'49 前缘让位／深2')
+hdim(p,-57,57,-5,-5,29,'114 孔距')
+vdim(p,-40,-5,57,57,76,'35 孔距')
+box(14,29,392,65,PALE)
+para(21,83,'托盘底面Z171.5、承托面Z174；底厚2.5，围边到Z177，高3。主体105×90，内区101×86。\n侧耳四孔X±57、Y=-40 / -5；Ø3通孔与M2.5级螺钉／嵌件均为候选。\n内部四柱Ø7；上承台Z171.5。支柱与头壳融合，外壳外轮廓保持。后缘留宽10线槽；前缘中央49×2让位。',375,10,7)
+para(21,55,'围边只限制水平滑动；塑料底座边缘、压片接触位置和向上防脱保持力待实测。\n后缘Ø6候选线束与托盘／面包板分别检查；折线路线不等于实际弯曲半径或接头装配通过。\n材料、打印方向、柱根强度、嵌件保持力、线束应力释放和防松未验收。',375,9,7)
 end()
-header('主控拆装、USB 插拔与天线预留','仅表达机械候选；USB 调试采用开冠盖方式，未增加外壳开口，也不表示两口可同时供电。')
-mappt=picture('controller-service.png',36,128,146,108)
-for pixel,x,y,label,align in [
-    ((499,306),17,231,'防脱压架','left'),
-    ((830,515),202,211,'ESP32-S3 板卡','right'),
-    ((584,834),17,184,'双排母座','left'),
-    ((934,980),202,147,'主控小托架','right'),
-    ((398,841),17,151,'托架紧固螺钉','left')]:
-    part_label(mappt,pixel,x,y,label,align)
-text(109,116,'局部分解：板卡上移 20、压架上移 40',10,bold=True,align='center')
-labeled_picture('controller-access.png',228,140,164,85,[
-    ((520,420),215,239,'COM 直头插头预留','left'),
-    ((520,520),215,129,'USB 直头插头预留','left'),
-    ((1080,470),405,239,'天线净空审查区','right'),
-    ((721,615),405,129,'尾线导向环','right')])
-text(310,116,'黄色：开盖 USB 服务空间；青色：天线审查区',10,bold=True,align='center')
-para(20,101,'主控拆装\n1. 断电、取冠盖、拔 USB 并断开主控尾线。\n2. 换板：卸压架 2 颗螺钉，压架上提，再沿 +Z 拔出板卡。\n3. 拆整组：卸小托架 4 颗螺钉，带母座和压架整体上提。\n图中错开距离仅供读图；板卡与整组各检查上提 65 的路径。',188,9,6)
-para(218,101,'USB 与走线\n用户确认直头；插头 18 × 10 × 8、端口中心及线尾转向空间待实测。\n候选拔插：先沿 -X 退出 12，再向上移 35；两口分别检查。\nØ3 尾线沿托架下方转至导向环，绕开天线区；未定义 GPIO、连接器针序或供电接线。',183,9,6)
-box(14,25,392,36,PALE)
-para(21,51,'天线：假设末端 X17.6…24 为辐射区域；审查区 X17.6…39、Y=-38.1…20.1、Z179.2…210.8。\n参考乐鑫净空建议，朝外、两侧及上下各留 15；馈电侧保留原板。实物天线边界、RF 通路、壳体材料与整机通信性能待核对。\n母座插入深度、防脱载荷、端口位置、线缆弯曲和手指空间均未实测；两处 USB 线尾空间及天线审查通过几何检查；不构成实物装配或射频验收。',375,9,7)
-text(21,29,'参考：乐鑫 ESP32-S3 硬件设计指南 · PCB Layout Design / Antenna clearance',8,MUTED)
-c.linkURL(report['controller_layout']['rf_guideline'],(21*U,27*U,220*U,32*U),relative=0,thickness=0)
+header('整板上取 · 螺钉、工具与拆装路径','先断电、拆冠盖、断开并收置对外线束；板内跳线可保留，手指与柔性线束操作另验。')
+picture('breadboard-service.png',18,113,188,126)
+picture('breadboard-access.png',216,113,188,126)
+text(110,103,'托盘连整组包络上提85',11,bold=True,align='center')
+text(310,103,'四处Ø8直工具杆审查',11,bold=True,align='center')
+para(21,88,'1. 断电，卸冠盖4颗螺钉，冠盖整体上取。\n2. 断开并收置超声波及对外线束，保留板内接线。\n3. 卸浅托盘4颗侧耳螺钉，各沿+Z退出20。\n4. 前缘让位托盘连组件沿+Z上提85。\n不得拉住跳线提取；实际抓取位置仍需试装。',183,10,7)
+para(220,88,'已检查：整盘连续保守棱柱扫掠、四颗螺钉连续退出、四处Ø8×90直工具杆。\n反例：保留冠盖、保留托盘螺钉均应阻挡拆出；组件增加5高度应碰冠盖。\nUSB插拔、屏幕／音频位置和天线净空未建模，不沿用旧裸板检查结果。',179,10,7)
+box(14,25,392,18,PALE)
+text(21,36,'通过仅指规定包络与刚性路径；不代表实物装配、振动保持、强度、声学或射频通过。',9,MUTED)
 end()
 header('拆出水枪 · 实测尺寸与候选布局','长 138.5、最粗处宽 33.2、厚 24.6、带管宽 38.5；喷嘴、接头和前段轮廓为示意，不是接口测量。')
 picture('water-gun-component.png',14,140,185,99)
@@ -530,7 +505,7 @@ para(220,105,'泡泡管顶部插入液舱，沿侧面接前枪；Ø4管／Ø3尾
 box(14,27,392,36,PALE)
 para(21,53,'主体每0.5°转动、每0.5后退／抬升、每2侧移检查示意实体；实物外形和采样之间的连续空间尚未证明。\n空托架、基座螺钉另做保守连续扫掠；前向Ø36×50通道随枪轴上仰。停止按钮保留前方Ø12指端空间。\n宽度、薄片偏置、前槽长度与前底轮廓待实测；胶粘保持、线管防磨、防拉脱、排液及制造均未验收。',375,9,7)
 end()
-header('超声波双探头 · 实测尺寸与前脸候选','圆柱尺寸来自用户；中心距为推导；Y=-81面板基准、Ø16.6开孔和端面分色均为设计假设。')
+header('超声波双探头 · 实测尺寸与前脸候选','圆柱尺寸来自用户；中心距为推导；PCB面Y=-77.5基准、Ø16.6开孔和端面分色均为候选。')
 title(26,235,'正面双探头','沿 +Y 观察；比例 2:1；中心 Z188')
 p,b=drawing('ultrasonic_front',110,190,2)
 hdim(p,-13,13,188,188,205,'26 中心距（推导）')
@@ -538,13 +513,13 @@ hdim(p,-21,21,180,180,174,'42 外沿总宽')
 vdim(p,180,196,-21,-21,-29,'Ø16')
 title(235,235,'侧面突出高度','沿 -X 观察；比例 2:1；前方在左')
 p,b=drawing('ultrasonic_side',310,190,2)
-hdim(p,-91.3,-81,196,196,206,'10.3 离面板高度')
-leader(p(-81,180),337,158,'面板外表面 Y=-81（暂定）')
+hdim(p,-87.8,-77.5,196,196,206,'10.3 从候选PCB面计')
+leader(p(-81,180),337,158,'前脸外表面 Y=-81')
 picture('ultrasonic-layout.png',21,62,176,77)
 text(109,53,'前脸候选 / 非实物安装照片',10,MUTED,align='center')
-para(221,130,'输入：两圆柱Ø16、总宽42、离面板高10.3。\n推导：中心距26、圆柱净距10；中心X±13。\n面板：原孔补回，改为双Ø16.6贯穿候选孔。\n单边0.3间隙仅为设计值；PCB与背部空间未建模。\n状态色条移至探头上方，避免与圆柱相交。',178,10,8)
+para(221,130,'输入：两圆柱Ø16、总宽42、离面板高10.3。\n推导：中心距26、圆柱净距10；中心X±13。\n面板：原孔补回，改为双Ø16.6贯穿候选孔。\n单边0.3为设计值；PCB／背面占位见第25页。\n探头内退3.5，露出前脸6.8；实际基准待确认。',178,10,8)
 box(14,27,392,19,PALE)
-para(21,39,'CAD检查使用完整实心圆柱包络，包含实体与预留空间。未确认的面板基准、整板／孔位／接头及声学性能仍需实物核对。',376,9,6)
+para(21,39,'CAD检查使用完整实心圆柱包络，包含实体与预留空间。PCB／接头尺寸、安装基准、固定件及声学性能仍需实物核对。',376,9,6)
 end()
 header('双枪供液 · 全部从顶部插入','水枪和泡泡枪可自吸：用户于2026-10-24确认。后护甲和液舱侧壁均不设液管孔；以下为管路候选。')
 p,b=drawing('top_feed_top',111,162,0.6)
@@ -609,17 +584,47 @@ box(14,28,392,47,PALE)
 para(21,65,'检查：保存回读、静态干涉、托框连续下取、锁紧螺钉退出、底部接线入口和通风开口。\n边界：空气空间不是实体风管或热性能证明；孔口未做防水，后湿舱隔板保持。\n照片只能确认器件拓扑，不能提供精确接触面；PCB边缘、真实接头、线弯、手指及工具手柄仍待试配。\n本页及独立托框文件用于结构评审；材料、螺纹、强度、公差与温升未验收，不是加工放行。',378,10,9)
 end()
 
+header('超声波与面包板 · 候选共存及拆装','沿用0.41：头壳、前脸孔、冠盖保持；PCB、背面、向上接头及线束均明确为未实测候选。')
+picture('ultrasonic-coexistence.png',16,129,190,112)
+picture('ultrasonic-service.png',215,129,190,112)
+text(110,120,'蓝：PCB／橙：背面／紫：接头／黄：线束',10,bold=True,align='center')
+text(310,120,'先收置线束，整盘上提85',10,bold=True,align='center')
+para(21,108,'PCB：左右45×上下20×厚1.6；背面深4。\n45×20借用通用整模块资料，其余为布局假设。\n向上接头：左右12×前后6×高8；线束Ø4。\n到面包板：背面1.9、接头／线束1.5。\n接头到冠盖约0.90，须实测与公差复核。\n若接头向后伸10，将侵入面包板8.1。',183,10,8)
+para(220,108,'托盘前缘中央49×2让位，四孔及后槽保持。\n原前缘会扫到模块；线束未收置也会阻挡。\n取盘后释放待设计固定件，超声波先后退11，\n使探头脱孔，再上提70；连续刚性扫掠通过。\n10.3暂从PCB面计，探头内退3.5、外露6.8。\n真实接头、板端、固定与手部操作仍待确认。',181,10,8)
+box(14,27,392,22,PALE)
+para(21,41,'本页包络来自候选空间分配，不能当作供应商接口或实物安装通过。线束折线不代表真实弯曲半径，\n末端只到侧边交接区；尚未确定面包板实际接口。头部外壳几何保持，探头突出量改变。',376,9,6)
+end()
+header('背包外侧本体 · 分体夹环与拆装','0.42：仅被动机械本体与夹持候选；无高压引线、电极或驱动。头壳和前斜坡保持。')
+picture('effects-clamp.png',18,132,186,111)
+picture('effects-service.png',215,132,188,111)
+text(110,122,'单侧：两道夹环 / 底托 / 上限位',11,bold=True,align='center')
+text(310,122,'取下外半夹环后，本体向上90',11,bold=True,align='center')
+para(21,109,'本体Ø25.5×70；中心X±74、Y85，Z54…124。\n夹环中心Z86、114；外径31.5，衬垫座孔26.5。\n软衬0.5、底垫1 mm；名义接触，未建压缩。\n内半夹环、底托和连接肋与背包护壳一体。\n每半环2颗M2.5级候选螺钉，全机8颗／8嵌件。\n外半夹环分缝0.6；上环带顶部限位。\n固定件最后侧Y107.5，比原脊条后伸10.5。\n两侧最外X±89.75，仍收在履带X±114内。',184,9.5,8)
+para(220,109,'先断电、解除实际线束并托住本体。\n本侧4颗螺钉向外退出35；取下两外半夹环。\n夹环向外35以21个姿态检查；并非连续验证。\n本体向上90及螺钉退出用连续扫掠检查。\n上夹环未拆时，顶部限位会阻挡本体上取。\n液瓶按原步骤上取150，本体夹具保持原位。\n工具检查只覆盖Ø3直杆，不含手柄／手掌。\n端部、真实夹持区、紧固力及材料均待实测。',182,9.5,8)
+box(14,27,392,16,PALE)
+para(21,37,'模型无干涉不等于夹持可靠或绝缘通过。不得把软垫厚度、机械间隙、与液瓶的距离作为高压安全参数。',376,9,6)
+end()
+
+header('底盘效果板 · 薄承板四点固定','0.42：原顶盖内侧增加一体盲孔支柱，外斜坡不抬高、不穿孔；板卡与实际线束仍为候选。')
+picture('effects-tray.png',18,136,188,107)
+picture('effects-tray-bottom.png',215,136,188,107)
+text(110,126,'充电宝上方：MOS与降压板占位',10,bold=True,align='center')
+text(310,126,'四点：X±39 / Y−49、−29',10,bold=True,align='center')
+picture('effects-tray-service.png',18,35,183,83)
+para(215,115,'主体74×33×2；加四耳后最大宽86。\n承板Z66.5…68.5；螺钉从下方操作。\n4颗M2.5级候选螺钉／4嵌件，孔距78×20。\n先拆底盖和充电宝，收置中央电源线，\n托住承板、退出4螺钉，再向下取100。\n充电宝或承板螺钉未拆都会阻挡取盘。\n螺钉头最低Z65，距电源顶面名义0.5。\nMOS 33×17×12（高暂定），降压板20×11×5。\n板孔、端子、支柱与板卡自身固定仍待实测；\n不能直接在现有包络上增加安装件并沿用结论。',188,9.5,7.5)
+text(110,29,'向下取盘示意：充电宝已移除',9,align='center')
+end()
 catalog_result=render_catalog(globals(), CATALOG, CATALOG_SHEETS)
 assert page==TOTAL_PAGES, 'Drawing index and total page count differ'
 c.save()
 (MODEL/'assembly-annotation-audit.json').write_text(json.dumps({
-    'revision':report['design_revision'], 'source_sha256':meta['source_sha256'],
+    'revision':'0.42', 'source_sha256':meta['source_sha256'],
     'pdf_sha256':sha(PDF), 'page_count':page,
     'object_count':len(CATALOG), 'annotated_object_count':len(catalog_result['entries']),
     'nonphysical_space_count':sum(e['category']=='clearance' for e in CATALOG.values()),
     'missing_objects':sorted(set(meta['objects'])-set(CATALOG)),
     'removed_old_pages':[2,3,13,22,27,30,31],
-    'geometry_modified':False, 'physical_fit_verified':False,
+    'geometry_modified_by_pdf_generator':False, 'geometry_change_audit_sha256':sha(MODEL/'effects-change-audit.json'), 'physical_fit_verified':False,
     **catalog_result,
 },ensure_ascii=False,indent=2))
 print(PDF)
