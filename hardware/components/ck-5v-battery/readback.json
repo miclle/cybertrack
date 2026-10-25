@@ -1,0 +1,33 @@
+{
+  "size_lwh_mm": [
+    116,
+    70.5,
+    19.5
+  ],
+  "source": "user dimensions and original photo, 2026-10-25",
+  "local_axes": "length X, width Y, height Z; origin at minimum corner",
+  "checks": [
+    {
+      "format": "FCStd",
+      "valid": true,
+      "solids": 1,
+      "difference_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "format": "STEP",
+      "valid": true,
+      "solids": 1,
+      "difference_mm3": 0.0,
+      "passed": true
+    }
+  ],
+  "saved_and_reopened": true,
+  "files_sha256": {
+    "Battery-envelope.FCStd": "78a32252090f5a440c0969b8180e2e1c4c94dd3edb00615c9f590838c0036955",
+    "Battery-envelope.step": "eb39120a461b1df01b50a8c2ce8657901db536d41f2364b6648da010a192a87b",
+    "reference/physical-20261025.jpg": "2a8007265f1c077ae19c43fb8b47cdc56acfd1038fad4ce292c3835de31a7000"
+  },
+  "passed": true,
+  "physical_fit_verified": false
+}
