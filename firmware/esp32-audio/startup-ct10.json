@@ -1,0 +1,270 @@
+{
+  "date": "2026-10-25",
+  "firmware": "2.0.3-ct10",
+  "status": "deployed_no_load_phone_voice_concurrency_and_web_priority_verified",
+  "power_confirmation": {
+    "source": "User explicitly confirmed both power branches disconnected and USB connected before ct10 deployment",
+    "motor_12v_disconnected": true,
+    "water_5v_disconnected": true,
+    "usb_connected": true
+  },
+  "backup": {
+    "private_directory": "secrets/ct10-20261025",
+    "ota0_bytes": 4128768,
+    "ota0_sha256": "dbb39ff0aacbbbbe659bc64bd15d9c0d1d8c30de60b76b2d5ddf6b4cb4aef25d",
+    "application_prefix_matches_ct9": true,
+    "board_identity_partition_and_ota_selection_verified": true
+  },
+  "flash": {
+    "only_application_written": true,
+    "offset": "0x20000",
+    "bytes": 2586480,
+    "sha256": "1257affbdebf951a640006488298cc1a0240ed72b9a0ae15d522416278840088",
+    "esptool_hash_verified": true,
+    "header_128k_before_after_identical": true,
+    "bootloader_nvs_partition_otadata_phy_assets_written": false
+  },
+  "platform": {
+    "role_saved_and_reopened_equal": true,
+    "role_sha256": "8d2238dcafc1b7e04d3d63a3095d48789861d96c9e6da402cb71861dfa710acc",
+    "nickname": "小D",
+    "voice": "少年梓辛/Brayan",
+    "model": "deepseek-v4-flash",
+    "other_settings_preserved": true,
+    "screenshot": "build/ct10-ui/platform-saved.png"
+  },
+  "startup": {
+    "log": "build/audio-private/ct10-session.jsonl",
+    "events": [
+      {
+        "time": "2026-10-25T16:35:59.903889+08:00",
+        "firmware": "2.0.3-ct10"
+      },
+      {
+        "time": "2026-10-25T16:35:59.904621+08:00",
+        "display": "SSD1306 driver installed"
+      },
+      {
+        "time": "2026-10-25T16:35:59.904858+08:00",
+        "cybertrack": "READY tools=status,stop,water,move,move_and_water concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW BOOT=stop_all move_max_ms=3000 water_max_ms=30000\r"
+      },
+      {
+        "time": "2026-10-25T16:35:59.904953+08:00",
+        "application_state": "starting"
+      },
+      {
+        "time": "2026-10-25T16:36:04.170399+08:00",
+        "web": "LAN URL observed; no PIN required"
+      },
+      {
+        "time": "2026-10-25T16:36:04.170455+08:00",
+        "network": "IP acquired; address withheld"
+      },
+      {
+        "time": "2026-10-25T16:36:04.223777+08:00",
+        "application_state": "activating"
+      },
+      {
+        "time": "2026-10-25T16:36:05.010522+08:00",
+        "application_state": "idle"
+      }
+    ]
+  },
+  "http_checks": {
+    "evidence": "build/ct10-ui/http-device-checks.json",
+    "no_pin_automatic_session": "passed",
+    "water_then_held_drive": "passed",
+    "held_drive_then_water": "passed",
+    "release_only_stops_move": "passed",
+    "water_deadline_preserves_held_move": "passed",
+    "no_renew_stops_web_actions": "passed",
+    "all_stop": "passed",
+    "sources_report_web_per_lane": "passed"
+  },
+  "desktop_browser": {
+    "actual_device_not_simulator": true,
+    "auto_connect": "passed",
+    "compact_controls_without_takeover_or_combined_switch": "passed",
+    "held_move_release_and_global_stop": "passed",
+    "screenshot": "build/ct10-ui/device-control.png",
+    "test_tab_closed_for_phone": true
+  },
+  "software_stop_events": [
+    {
+      "time": "2026-10-25T16:36:14.455124+08:00",
+      "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=1314 move=OFF water=ON starts=2\r"
+    },
+    {
+      "time": "2026-10-25T16:36:14.568358+08:00",
+      "cybertrack": "ACTION_OFF channel=water reason=stop software_on_ms=1561 move=OFF water=OFF starts=2\r"
+    },
+    {
+      "time": "2026-10-25T16:36:19.179913+08:00",
+      "cybertrack": "ACTION_OFF channel=water reason=deadline software_on_ms=1001 move=ON water=OFF starts=4\r"
+    },
+    {
+      "time": "2026-10-25T16:36:19.791324+08:00",
+      "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=1913 move=OFF water=OFF starts=4\r"
+    },
+    {
+      "time": "2026-10-25T16:36:23.690002+08:00",
+      "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=603 move=OFF water=OFF starts=6\r"
+    },
+    {
+      "time": "2026-10-25T16:36:23.696967+08:00",
+      "cybertrack": "ACTION_OFF channel=water reason=stop software_on_ms=355 move=OFF water=OFF starts=6\r"
+    },
+    {
+      "time": "2026-10-25T16:36:57.035436+08:00",
+      "cybertrack": "ACTION_OFF channel=water reason=deadline software_on_ms=5004 move=OFF water=OFF starts=7\r"
+    },
+    {
+      "time": "2026-10-25T16:36:58.664360+08:00",
+      "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=1530 move=OFF water=OFF starts=8\r"
+    }
+  ],
+  "phone_and_voice": {
+    "status": "phone_auto_connect_voice_with_web_and_cross_source_concurrency_passed",
+    "user_report": "网页是自动连接，语音回复和两路状态符合预期",
+    "evidence": [
+      {
+        "time": "2026-10-25T16:38:10.299287+08:00",
+        "application_state": "connecting"
+      },
+      {
+        "time": "2026-10-25T16:38:10.693774+08:00",
+        "application_state": "listening"
+      },
+      {
+        "time": "2026-10-25T16:38:11.989233+08:00",
+        "application_state": "speaking"
+      },
+      {
+        "time": "2026-10-25T16:38:12.620357+08:00",
+        "application_state": "listening"
+      },
+      {
+        "time": "2026-10-25T16:38:20.725951+08:00",
+        "cybertrack": "RPC id=5 tool=self.tank.move\r"
+      },
+      {
+        "time": "2026-10-25T16:38:20.804062+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"e6eae1dc1964daae\",\"request_sequence\":150,\"operation\":\"move\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":141073,\"logical_outputs\":{\"left\":60,\"right\":60,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":9,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":1000,\"water_last_duration_ms\":5000,\"move_remaining_ms\":1000,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"shared\",\"window\":116,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:38:21.726931+08:00",
+        "cybertrack": "ACTION_OFF channel=move reason=deadline software_on_ms=1000 move=OFF water=OFF starts=9\r"
+      },
+      {
+        "time": "2026-10-25T16:38:21.852845+08:00",
+        "application_state": "speaking"
+      },
+      {
+        "time": "2026-10-25T16:38:22.963510+08:00",
+        "application_state": "listening"
+      },
+      {
+        "time": "2026-10-25T16:38:28.338448+08:00",
+        "cybertrack": "RPC id=6 tool=self.tank.water\r"
+      },
+      {
+        "time": "2026-10-25T16:38:28.416798+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"e6eae1dc1964daae\",\"request_sequence\":165,\"operation\":\"water\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":148686,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":true,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":10,\"max_duration_ms\":30000,\"last_duration_ms\":10000,\"remaining_ms\":10000,\"move_last_duration_ms\":1000,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":10000,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"shared\",\"window\":130,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"voice\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:38:29.494034+08:00",
+        "application_state": "speaking"
+      },
+      {
+        "time": "2026-10-25T16:38:30.843615+08:00",
+        "application_state": "listening"
+      },
+      {
+        "time": "2026-10-25T16:38:31.811508+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"e6eae1dc1964daae\",\"request_sequence\":172,\"operation\":\"drive_start\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":152083,\"logical_outputs\":{\"left\":60,\"right\":60,\"water\":true,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":11,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":6603,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":600,\"water_remaining_ms\":6603,\"move_max_duration_ms\":3000,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"shared\",\"window\":136,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"web\",\"water_source\":\"voice\",\"drive_hold_id\":1,\"drive_renewal\":1,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:38:34.100556+08:00",
+        "cybertrack": "ACTION_OFF channel=move reason=stop software_on_ms=2364 move=OFF water=ON starts=11\r"
+      },
+      {
+        "time": "2026-10-25T16:38:34.182938+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"e6eae1dc1964daae\",\"request_sequence\":184,\"operation\":\"drive_stop\",\"result\":\"ok\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":154447,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":true,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":11,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":4239,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":4239,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"shared\",\"window\":136,\"move_cooldown_ms\":3000,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"voice\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:38:36.120650+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"e6eae1dc1964daae\",\"request_sequence\":189,\"operation\":\"stop\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":156393,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":11,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"shared\",\"window\":140,\"move_cooldown_ms\":1054,\"water_cooldown_ms\":1000,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-25T16:38:36.129927+08:00",
+        "cybertrack": "ACTION_OFF channel=water reason=stop software_on_ms=7707 move=OFF water=OFF starts=11\r"
+      },
+      {
+        "time": "2026-10-25T16:39:06.417306+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"e6eae1dc1964daae\",\"request_sequence\":245,\"operation\":\"release\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":186690,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":11,\"max_duration_ms\":30000,\"last_duration_ms\":600,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":195,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      }
+    ],
+    "voice_move_while_page_connected": {
+      "result": "accepted",
+      "duration_ms": 1000,
+      "software_on_ms": 1000,
+      "control_owner": "shared"
+    },
+    "voice_water_plus_web_move": {
+      "both_active_sources": {
+        "move": "web",
+        "water": "voice"
+      },
+      "web_held_software_on_ms": 2364,
+      "release_stops_only_move": true,
+      "global_stop_closes_both": true,
+      "water_software_on_ms_until_stop": 7707
+    },
+    "boot_id_unchanged": true,
+    "log_events_dropped": 0,
+    "power_branches_off": true,
+    "physical_movement_or_spray_established": false,
+    "same_lane_web_priority": {
+      "status": "passed_preemption",
+      "user_report": "操作后网页上显示“已停止该通道的语音xxx”",
+      "evidence": [
+        {
+          "time": "2026-10-25T16:40:22.854633+08:00",
+          "cybertrack": "RPC id=7 tool=self.tank.water\r"
+        },
+        {
+          "time": "2026-10-25T16:40:22.932799+08:00",
+          "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"e6eae1dc1964daae\",\"request_sequence\":271,\"operation\":\"water\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":263200,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":true,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":12,\"max_duration_ms\":30000,\"last_duration_ms\":10000,\"remaining_ms\":10000,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":10000,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"shared\",\"window\":219,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"voice\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+        },
+        {
+          "time": "2026-10-25T16:40:23.971529+08:00",
+          "application_state": "speaking"
+        },
+        {
+          "time": "2026-10-25T16:40:25.320392+08:00",
+          "application_state": "listening"
+        },
+        {
+          "time": "2026-10-25T16:40:28.020324+08:00",
+          "cybertrack": "ACTION_OFF channel=water reason=stop software_on_ms=5165 move=OFF water=OFF starts=12\r"
+        },
+        {
+          "time": "2026-10-25T16:40:28.107856+08:00",
+          "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"e6eae1dc1964daae\",\"request_sequence\":282,\"operation\":\"water\",\"result\":\"voice_preempted\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":268365,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false},\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},\"local_authorization_required\":false,\"starts_this_boot\":12,\"max_duration_ms\":30000,\"last_duration_ms\":10000,\"remaining_ms\":0,\"move_last_duration_ms\":600,\"water_last_duration_ms\":10000,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"move_max_duration_ms\":3000,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"shared\",\"window\":229,\"move_cooldown_ms\":0,\"water_cooldown_ms\":1000,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+        }
+      ],
+      "voice_water_requested_ms": 10000,
+      "stopped_by_web_at_software_on_ms": 5165,
+      "web_result": "voice_preempted",
+      "water_cooldown_ms": 1000,
+      "automatic_web_restart": false,
+      "second_manual_click_after_cooldown": "not_reported"
+    }
+  },
+  "remaining": [
+    "real phone multitouch/background and automatic return without replay",
+    "real voice while web connected and cross-source concurrency",
+    "actual GPIO/physical stop latency and powered behavior",
+    "load current/temperature, heap/stack/socket peaks and whole-robot acceptance"
+  ]
+}

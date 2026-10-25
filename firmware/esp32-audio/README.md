@@ -1,9 +1,11 @@
 # CyberTrack 面包板：小D 语音、电机与水枪控制
 
+**当前源码：`2.0.3-ct12`**。打开网页自动连接、长按显示计时，没有接管／释放按钮或组合开关；行走和喷水独立、网页与语音并用，冲突网页优先，两路停止后均间隔 200 ms。部署与验证见[局域网控制说明](../../docs/lan-control.md)。
+
 此适配层用于现有 `bread-compact-wifi` 面包板，基于本机已验证的 `xiaozhi 2.0.3`。已完成历史联调的 `2.0.3-ct6` 将双路 L298N 电机与 GPIO18 水枪接入同一灵矽设备，保留语音、OLED、唤醒词、音量和触摸说话按键。用户已确认迁至同一块面包板；已完成仅应用刷写、启动联网及平台角色同步，见[部署记录](startup-ct6.json)；迁线及基本台架四方向／喷水／BOOT 联调已完成，实际装车方向标定、断网及完整供电／故障验收仍未完成。接线、分阶段检查与最新状态见[电机／水枪集成](../../docs/breadboard-integration.md)。旧 ct4／ct5 水枪实测保留在[喷水记录](../../docs/audio-water-validation.md)。
 
 
-**ct7 更新**：用户已要求行走和喷水可同时进行。当前源码为 `2.0.3-ct7`，独立计时／冷却，增加 `move_and_water` 同时启动工具；BOOT 和停止仍全停。ct7 已仅应用刷写、平台角色回读并重启联网，核心并发台架回归与断功率收尾完成，完整供电／整机验收仍待完成；软件与部署证据见[并发动作说明](../../docs/concurrent-actions.md)。上段 ct6 及以下历史验收不能替代 ct7 并发实测。
+**ct7 更新**：用户已要求行走和喷水可同时进行。该版本为 `2.0.3-ct7`，独立计时／冷却，增加 `move_and_water` 同时启动工具；BOOT 和停止仍全停。ct7 已仅应用刷写、平台角色回读并重启联网，核心并发台架回归与断功率收尾完成，完整供电／整机验收仍待完成；软件与部署证据见[并发动作说明](../../docs/concurrent-actions.md)。上段 ct6 及以下历史验收不能替代 ct7 并发实测。
 
 ## 来源与配置证据
 
@@ -57,7 +59,7 @@ ct3 的逐次物理授权流程和 ct4 的固定五秒要求已被用户明确�
 
 - 新增 `self.tank.move({"direction":"forward","duration_ms":1000})`。方向仅接受 `forward/backward/left/right`，整数时长 1–3000 ms，固定 1 kHz／8 bit duty=154（约 60%）。角色默认一秒，超三秒请求三秒并说明；不把距离或角度换算成时间。A 候选左、B 候选右，正负极须按车体前进方向核对，当前不是实车标定。
 - `self.tank.water` 保留 1–30000 ms，未说时长填 1000；工具描述与角色统一。两类动作互斥，共用 128 项会话 RPC 记录、内部票据与截止时间；接受一个动作即取消其他已排队票据，忙碌请求不延迟补做。
-- `self.tank.stop`、BOOT、已检测的 Wi-Fi／会话断开、重启／升级入口同时撤销两类动作和待执行票据。BOOT 松开稳定 30 ms 后也不恢复；电机停止后冷却 3000 ms，喷水停止后 1000 ms，必须另有新指令。
+- `self.tank.stop`、BOOT、已检测的 Wi-Fi／会话断开、重启／升级入口同时撤销两类动作和待执行票据。BOOT 松开稳定 30 ms 后也不恢复；ct6 原电机停止后冷却 3000 ms、喷水停止后 1000 ms；ct12 将面包板两路统一为 200 ms，必须另有新指令。
 - GPIO8–13 为本次面包板候选分配，与独立台架 GPIO4–9 不同。LEDC timer 2／channel 2、3 避开上游 LED／背光的 timer 0、1／channel 0；原 I2S、OLED 与 GPIO18 不变。
 - 切换方向前先关闭两路使能及水枪；任何 GPIO／PWM API 错误锁定 `output_fault`，尝试关闭全部输出并将使能重置为普通 GPIO 低，不自动重试动作。
 - 控制任务维持优先级 10、5 ms 周期，活动循环没有显示、网络、日志或堆分配。LEDC API 使用带优先级继承的互斥锁串行化，避免在自旋临界区调用可能取 RTOS 锁的驱动。
@@ -66,14 +68,15 @@ ct3 的逐次物理授权流程和 ct4 的固定五秒要求已被用户明确�
 
 ## 重现构建
 
-需保留原始源码 checkout、原构建 ELF 及组件缓存；不要求联网下载替代版本。`prepare.py` 要求一个尚不存在的导出目录（默认 `build/xiaozhi-audio-src`，可用 `--target` 指定），不会覆盖已有导出或修改原 checkout。
+源码导出使用支持 tarfile data filter 的 Python（本轮为 3.14）；ESP-IDF 仍固定 v5.5.1。需保留原始源码 checkout、原构建 ELF 及组件缓存；不要求联网下载替代版本。`prepare.py` 要求一个尚不存在的导出目录（默认 `build/xiaozhi-audio-src`，可用 `--target` 指定），不会覆盖已有导出或修改原 checkout。
 
 ```sh
 # 先激活 ESP-IDF v5.5.1 的 Python 环境与 export.sh。
-python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct7-src
+python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct12-src
 sh firmware/esp32-audio/test.sh
-python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct7-src
-idf.py -C build/xiaozhi-ct7-src -B "$PWD/build/firmware-ct7" build
+node firmware/esp32-audio/tests/web_ui_test.mjs
+python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct12-src
+idf.py -C build/xiaozhi-ct12-src -B "$PWD/build/firmware-ct12" build
 ```
 
 应用分区是 `ota_0`，起点 `0x20000`、大小 `0x3f0000`，与水枪台架分区不同。更新前需核对设备 MAC、分区表、OTA 选择及已有备份；本轮仅写该应用，不执行完整 `idf.py flash`，不覆盖引导、NVS、OTA 数据或 8 MB assets。
@@ -92,3 +95,7 @@ idf.py -C build/xiaozhi-ct7-src -B "$PWD/build/firmware-ct7" build
 维护、平台同步、回滚和语音回归要求见[智能体角色与提示词](../../docs/agent-role.md)。不要在其他文档复制整份角色介绍；此处仅概述行为。
 
 平台意图识别已由分离模式调整为统一模式，用于让聊天模型直接选择工具；原分离模式下泛称“查询状态”曾误选通用设备信息工具。统一模式下相同说法已正确调用 CyberTrack 工具，停止和停止后查询也已实测通过；详见验证记录。这是本轮有限样本结果，不保证所有表达方式。
+
+ct8 另覆盖网页租约／控制权、来源切换与语音防重放、短时动作窗口、HTTP Host／Origin／鉴权／限流／读取边界与发送失败释放，以及页面模拟设备交互。测试使用实际会话类、JSON 解析器和 HTTP 处理函数；HTTP 传输／显示由桩替代，不能证明真实 Wi-Fi、手机后台或声音连续性。见[当前记录](../../docs/lan-control.md)。
+
+ct9 新增长按 15 秒的软件连续性、600 ms 截止、续租／松开乱序与重放、BOOT 期间不可签发动作窗口、滑出／指针取消／后台及在途请求取消。语音仍限三秒；长按持续带载与真实松开停止时延尚未验收。

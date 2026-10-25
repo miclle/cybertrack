@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CyberTrack</title>
+<style>
+:root{color-scheme:light;--ink:#242b29;--paper:#faf9f5;--line:#deded5;--accent:#d5ee65}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px system-ui,-apple-system,sans-serif}main{max-width:440px;margin:auto;padding:24px 20px calc(24px + env(safe-area-inset-bottom))}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}h1{font-size:22px;letter-spacing:-.8px;margin:0}.badge{font-size:12px;color:#777}.badge.on{color:#3b641d}.badge.on:before{content:"●";margin-right:6px;font-size:9px}.status{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--line);padding:16px 0;gap:16px}.status article+article{border-left:1px solid var(--line);padding-left:16px}.status strong{font-size:17px;display:block;margin-bottom:5px}.status small{color:#686e65;font-size:12px}.status span{margin-right:6px}.hint{text-align:center;color:#777;font-size:12px;margin:22px 0 12px} #hold-time{font-variant-numeric:tabular-nums}#hold-time.timing{color:var(--ink);font-weight:650}.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:340px;margin:auto}button,select{font:inherit;border:1px solid var(--line);border-radius:13px;color:var(--ink);background:#fff}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:48px}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #789324;outline-offset:3px}button:disabled{opacity:.35;cursor:default}.pad button{height:76px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;font-size:14px}.pad button b{display:block;font-size:24px;font-weight:400;line-height:26px;margin-bottom:3px}.pad button.held{background:var(--accent);border-color:#a8c33f}.forward{grid-column:2}.left{grid-column:1;grid-row:2}.backward{grid-column:2;grid-row:2}.right{grid-column:3;grid-row:2}.water-row{display:flex;gap:10px;margin:25px 0}.water-row select{width:105px;padding:10px}.water-row button{flex:1;background:#edf1e5}.stop{width:100%;background:#b63831;color:white;border:0;font-weight:650;font-size:18px;min-height:58px}#message{min-height:34px;line-height:1.5;font-size:12px;margin:12px 0 0;color:#686e65;text-align:center}#message.error{color:#a9322b}
+</style>
+</head>
+<body><main>
+<header><h1>CyberTrack</h1><span id="connection" class="badge" role="status">连接中</span></header>
+<section class="status" aria-label="实时状态">
+<article><strong id="direction">行走</strong><small><span id="move-state">等待连接</span><span id="move-time">—</span></small></article>
+<article><strong id="water-label">水枪</strong><small><span id="water-state">等待连接</span><span id="water-time">—</span></small></article>
+</section>
+<p id="hold-time" class="hint">按住行走，松开停止</p>
+<div class="pad" aria-label="行走方向">
+<button class="forward" data-direction="forward" aria-label="前进" disabled><b aria-hidden="true">↑</b>前进</button>
+<button class="left" data-direction="left" aria-label="左转" disabled><b aria-hidden="true">←</b>左转</button>
+<button class="backward" data-direction="backward" aria-label="后退" disabled><b aria-hidden="true">↓</b>后退</button>
+<button class="right" data-direction="right" aria-label="右转" disabled><b aria-hidden="true">→</b>右转</button>
+</div>
+<div class="water-row"><select id="water-duration" aria-label="喷水时长"><option value="1000">1 秒</option><option value="3000">3 秒</option><option value="5000">5 秒</option><option value="10000">10 秒</option><option value="30000">30 秒</option></select><button id="water" disabled>喷水 <span id="water-action-time">1 秒 →</span></button></div>
+<button id="stop" class="stop" disabled>全部停止</button>
+<p id="message" role="status" aria-live="polite"></p>
+</main><script>
+      "use strict";
+      const $ = (id) => document.getElementById(id),
+        directions = {
+          forward: "前进",
+          backward: "后退",
+          left: "左转",
+          right: "右转",
+          none: "待命",
+        };
+      let token = "",
+        epoch = 0,
+        sequence = 0,
+        windowId = 0,
+        latest = -1,
+        snapshot = null,
+        pending = false,
+        waterPending = false,
+        polling = false,
+        timer,
+        hold = null,
+        pollWait = Promise.resolve();
+      const reasons = {
+        voice_preempted: "已停止语音动作，稍后可重新操作。",
+        control_busy: "另一网页正在使用，等待连接。",
+        pair_rate_limited: "操作太快，请稍后再连接。",
+        session_expired: "连接已失效，正在重连。",
+        not_ready_or_busy: "该动作正在运行、冷却或暂不可用。",
+        stale_request: "请求已过期或被停止取消，请确认状态后重新操作。",
+        duplicate_request: "重复请求已拒绝。",
+        output_fault: "设备输出故障，请检查设备。",
+        invalid_request: "参数无效，未执行。",
+        cancelled_before_output: "动作已被停止或断连取消。",
+        drive_cancelled: "行走续租已取消，请松开后重新按住。",
+      };
+      function message(text, error = false) {
+        $("message").textContent = text;
+        $("message").className = error ? "error" : "";
+      }
+      function controls() {
+        const ready =
+          !!token &&
+          !!snapshot &&
+          !pending &&
+          !document.hidden &&
+          !snapshot.boot_held &&
+          snapshot.state !== "FAULT";
+        const move =
+          ready && (!snapshot?.move_remaining_ms || snapshot?.move_source === "voice") && !snapshot?.move_cooldown_ms;
+        const water =
+          ready &&
+          (!snapshot?.water_remaining_ms || snapshot?.water_source === "voice") &&
+          !snapshot?.water_cooldown_ms;
+        document.querySelectorAll("[data-direction]").forEach((b) => {
+          const active = hold && hold.button === b;
+          b.disabled = hold
+            ? !active
+            : !(move && !waterPending);
+          b.classList.toggle("held", !!active);
+          b.setAttribute("aria-pressed", String(!!active));
+        });
+        $("water").disabled = !water || waterPending || (!!hold && !hold.renewal);
+        $("stop").disabled = !token;
+      }
+      function render(s) {
+        if (s.request_sequence <= latest) return;
+        latest = s.request_sequence;
+        snapshot = s;
+        windowId = s.window;
+        for (const kind of ["move", "water"]) {
+          const active = s[kind + "_remaining_ms"] > 0,
+            cool = s[kind + "_cooldown_ms"];
+          $(kind + "-time").textContent =
+            kind === "move" && s.drive_hold_id
+              ? "按住行走"
+              : active
+                ? (s[kind + "_remaining_ms"] / 1000).toFixed(1) + " s"
+                : "";
+          $(kind + "-state").textContent = active
+            ? (s[kind + "_source"] === "voice" ? "语音" : "网页")
+            : s.boot_held
+              ? "BOOT 已按下"
+              : s.state === "FAULT"
+                ? "设备故障 · 不可操作"
+                : cool
+                  ? "冷却 " + (cool / 1000).toFixed(1) + " 秒"
+                  : "待命";
+        }
+        $("direction").textContent = s.move_direction && s.move_direction !== "none" ? "行走 · " + directions[s.move_direction] : "行走";
+        $("water-label").textContent = s.logical_outputs.water
+          ? "喷水中"
+          : "水枪";
+        controls();
+      }
+      async function request(path, body = {}, auth = token, timeoutMs = 1100) {
+        const abort = new AbortController(),
+          timeout = setTimeout(() => abort.abort(), timeoutMs);
+        try {
+          const response = await fetch(path, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CyberTrack-Client": "1",
+              ...(auth ? { "X-CyberTrack-Token": auth } : {}),
+            },
+            body: JSON.stringify(body),
+            cache: "no-store",
+            signal: abort.signal,
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.result || "request_failed");
+          return data;
+        } finally {
+          clearTimeout(timeout);
+        }
+      }
+      function bestEffortRelease(auth) {
+        if (auth)
+          fetch("/api/release", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CyberTrack-Client": "1",
+              "X-CyberTrack-Token": auth,
+            },
+            body: "{}",
+            keepalive: true,
+          }).catch(() => {});
+      }
+      function disconnect(text) {
+        clearHold();
+        const old = token;
+        token = "";
+        epoch++;
+        clearTimeout(timer);
+        pending = false;
+        waterPending = false;
+        snapshot = null;
+        latest = -1;
+        windowId = 0;
+        $("connection").textContent = "未连接";
+        $("connection").className = "badge";
+        clearTimeout(reconnectTimer);
+        connecting = false;
+        for (const kind of ["move", "water"]) {
+          $(kind + "-time").textContent = "—";
+          $(kind + "-state").textContent = "状态未知";
+
+        }
+        $("direction").textContent = "行走";
+        $("water-label").textContent = "水枪";
+
+        controls();
+        message(text, true);
+        bestEffortRelease(old);
+        scheduleConnect();
+      }
+      async function poll() {
+        clearTimeout(timer);
+        if (!token || document.hidden || hold) return;
+        if (polling || pending || waterPending) {
+          timer = setTimeout(poll, 100);
+          return;
+        }
+        polling = true;
+        let finishPoll;
+        pollWait = new Promise((resolve) => {
+          finishPoll = resolve;
+        });
+        const e = epoch;
+        try {
+          const s = await request("/api/state");
+          if (e !== epoch) return;
+          if (s.result !== "ok") throw new Error(s.result);
+          render(s);
+        } catch (err) {
+          if (e === epoch)
+            disconnect(
+              reasons[err.message] ||
+                "连接中断，动作状态未知。请确认设备已停止后重新接管。",
+            );
+        } finally {
+          polling = false;
+          finishPoll();
+          if (e === epoch && token) {
+            const cooling = [snapshot?.move_cooldown_ms, snapshot?.water_cooldown_ms].filter(ms => ms > 0);
+            timer = setTimeout(poll, cooling.length ? Math.min(500, ...cooling) : 500);
+          }
+        }
+      }
+      let reconnectTimer = null, connecting = false, online = true;
+      function scheduleConnect() {
+        clearTimeout(reconnectTimer);
+        if (!document.hidden && online && !token)
+          reconnectTimer = setTimeout(connect, 1500);
+      }
+      async function connect() {
+        clearTimeout(reconnectTimer);
+        if (document.hidden || !online || token || connecting) return;
+        connecting = true;
+        const e = ++epoch;
+        $("connection").textContent = "连接中";
+        try {
+          const s = await request("/api/pair", {}, "");
+          if (e !== epoch || document.hidden || !online) {
+            bestEffortRelease(s.token);
+            return;
+          }
+          token = s.token;
+          sequence = 0;
+          latest = -1;
+          $("connection").textContent = "已连接";
+          $("connection").className = "badge on";
+          message("");
+          controls();
+          await poll();
+        } catch (err) {
+          if (e === epoch) {
+            $("connection").textContent = "未连接";
+            message(reasons[err.message] || "连接中断，正在重连。", true);
+          }
+        } finally {
+          if (e === epoch) { connecting = false; scheduleConnect(); }
+        }
+      }
+      async function action() {
+        if (!token || pending || waterPending || (hold && !hold.renewal) || !snapshot) return;
+        const e = epoch;
+        waterPending = true;
+        controls();
+        try {
+          await pollWait;
+          if (e !== epoch || document.hidden) return;
+          const fresh = await request("/api/state");
+          if (e !== epoch || document.hidden) return;
+          if (fresh.result !== "ok") throw new Error(fresh.result);
+          render(fresh);
+          const s = await request("/api/action", {
+            sequence: ++sequence, window: fresh.window, operation: "water",
+            duration_ms: Number($("water-duration").value),
+          });
+          if (e !== epoch) return;
+          render(s);
+          message(s.result === "accepted" ? "正在喷水。" : reasons[s.result] || "喷水未接受。", s.result !== "accepted");
+        } catch (err) {
+          if (e === epoch) disconnect("操作未确认，网页动作已请求停止。");
+        } finally {
+          if (e === epoch) { waterPending = false; controls(); poll(); }
+        }
+      }
+      function holdSeconds(h) {
+        return (Math.max(0, performance.now() - h.startedAt) / 1000).toFixed(1);
+      }
+      function updateHoldTime(h) {
+        if (hold !== h || document.hidden || h.epoch !== epoch) return;
+        $("hold-time").textContent = "已按住 " + holdSeconds(h) + " 秒";
+        h.clockTimer = setTimeout(() => updateHoldTime(h), 100);
+      }
+      function clearHold() {
+        const previous = hold;
+        hold = null;
+        if (previous) {
+          clearTimeout(previous.timer);
+          clearTimeout(previous.clockTimer);
+          $("hold-time").textContent = "本次按住 " + holdSeconds(previous) + " 秒";
+          $("hold-time").className = "hint";
+          if (
+            previous.pointer !== null &&
+            previous.button.hasPointerCapture(previous.pointer)
+          )
+            previous.button.releasePointerCapture(previous.pointer);
+        }
+        return previous;
+      }
+      async function endHold() {
+        const h = clearHold();
+        if (!h || !token) return;
+        const e = epoch;
+        pending = true;
+        controls();
+        message("正在停止行走…");
+        try {
+          const s = await request(
+            "/api/action",
+            { operation: "drive_stop", hold_id: h.id },
+            token,
+            400,
+          );
+          if (e !== epoch) return;
+          if (s.result !== "ok") throw new Error(s.result);
+          render(s);
+          message("行走已停止。");
+        } catch (err) {
+          if (e === epoch)
+            disconnect(
+              "停止回执未确认，已停止续租并请求全部停止。请检查设备。",
+            );
+        } finally {
+          if (e === epoch) {
+            pending = false;
+            controls();
+            poll();
+          }
+        }
+      }
+      async function renewHold(h) {
+        if (hold !== h || document.hidden || h.epoch !== epoch) return;
+        try {
+          const s = await request(
+            "/api/action",
+            { operation: "drive_renew", hold_id: h.id, renewal: h.renewal },
+            token,
+            400,
+          );
+          if (hold !== h || h.epoch !== epoch) return;
+          if (s.result !== "renewed" || s.drive_hold_id !== h.id)
+            throw new Error(s.result);
+          h.renewal = s.drive_renewal;
+          render(s);
+          h.timer = setTimeout(() => renewHold(h), 150);
+        } catch (err) {
+          if (hold === h && h.epoch === epoch)
+            disconnect(
+              "行走续租中断，已停止续租并请求全部停止；不会自动恢复。",
+            );
+        }
+      }
+      async function beginHold(button, pointer = null) {
+        if (!token || pending || waterPending || hold || button.disabled || document.hidden)
+          return;
+        const h = {
+          id: ++sequence,
+          button,
+          pointer,
+          epoch,
+          renewal: 0,
+          startedAt: performance.now(),
+          clockTimer: null,
+          timer: null,
+        };
+        hold = h;
+        $("hold-time").className = "hint timing";
+        updateHoldTime(h);
+        clearTimeout(timer);
+        if (pointer !== null) {
+          try {
+            button.setPointerCapture(pointer);
+          } catch {
+            endHold();
+            return;
+          }
+        }
+        controls();
+        // Finish any preceding status request so it cannot supersede the start window.
+        await pollWait;
+        if (hold !== h || h.epoch !== epoch || document.hidden) return;
+        try {
+          const fresh = await request("/api/state", {}, token, 400);
+          if (hold !== h || h.epoch !== epoch || document.hidden) return;
+          if (fresh.result !== "ok") throw new Error(fresh.result);
+          render(fresh);
+        } catch (err) {
+          if (hold === h && h.epoch === epoch) disconnect("连接中断，行走已取消。");
+          return;
+        }
+        const body = {
+          operation: "drive_start",
+          sequence: h.id,
+          window: windowId,
+          direction: button.dataset.direction,
+        };
+        try {
+          const s = await request("/api/action", body, token, 400);
+          if (hold !== h || h.epoch !== epoch) return;
+          if (s.result === "voice_preempted" || s.result === "not_ready_or_busy") {
+            clearHold(); render(s); message(reasons[s.result]); controls(); poll(); return;
+          }
+          if (s.result !== "accepted" || s.drive_hold_id !== h.id)
+            throw new Error(s.result);
+          h.renewal = s.drive_renewal;
+          render(s);
+          message(
+            "正在" +
+              directions[button.dataset.direction] +
+              "，松开方向键停止。",
+          );
+          h.timer = setTimeout(() => renewHold(h), 150);
+        } catch (err) {
+          if (hold === h && h.epoch === epoch)
+            disconnect(
+              reasons[err.message] || "行走未确认，已停止续租并请求全部停止。",
+            );
+        }
+      }
+      document.querySelectorAll("[data-direction]").forEach((button) => {
+        button.addEventListener("pointerdown", (event) => {
+          if (event.button !== 0 || event.isPrimary === false) return;
+          event.preventDefault();
+          beginHold(button, event.pointerId);
+        });
+        button.addEventListener("pointerup", (event) => {
+          if (hold?.pointer === event.pointerId) {
+            event.preventDefault();
+            endHold();
+          }
+        });
+        for (const event of ["pointercancel", "lostpointercapture"])
+          button.addEventListener(event, (e) => {
+            if (hold?.pointer === e.pointerId) endHold();
+          });
+        button.addEventListener("pointermove", (event) => {
+          if (hold?.pointer !== event.pointerId) return;
+          const r = button.getBoundingClientRect();
+          if (
+            event.clientX < r.left ||
+            event.clientX > r.right ||
+            event.clientY < r.top ||
+            event.clientY > r.bottom
+          )
+            endHold();
+        });
+        button.addEventListener("keydown", (event) => {
+          if (event.key !== " " && event.key !== "Enter") return;
+          event.preventDefault();
+          if (!event.repeat) beginHold(button);
+        });
+        button.addEventListener("keyup", (event) => {
+          if (
+            (event.key === " " || event.key === "Enter") &&
+            hold?.button === button &&
+            hold.pointer === null
+          ) {
+            event.preventDefault();
+            endHold();
+          }
+        });
+        button.addEventListener("blur", () => {
+          if (hold?.button === button) endHold();
+        });
+        for (const event of ["click", "contextmenu"])
+          button.addEventListener(event, (e) => e.preventDefault());
+      });
+      $("water").addEventListener("click", () => action(null));
+      $("water-duration").addEventListener(
+        "change",
+        () =>
+          ($("water-action-time").textContent =
+            Number($("water-duration").value) / 1000 + " 秒 →"),
+      );
+      $("stop").addEventListener("click", async () => {
+        if (!token) return;
+        clearHold();
+        const e = ++epoch;
+        pending = true;
+        controls();
+        message("正在请求全部停止…");
+        try {
+          const s = await request("/api/stop");
+          if (e !== epoch) return;
+          render(s);
+          if (s.result !== "ok") throw new Error(s.result);
+          message("全部停止。");
+        } catch (err) {
+          if (e === epoch)
+            disconnect("停止回执未确认。请使用设备 BOOT 按键确认停止。");
+        } finally {
+          if (e === epoch) {
+            pending = false;
+            controls();
+            poll();
+          }
+        }
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden)
+          disconnect("页面已离开，网页动作已请求停止。");
+        else connect();
+      });
+      window.addEventListener("blur", () => {
+        if (hold) disconnect("页面失去焦点，已请求停止并释放。");
+      });
+      window.addEventListener("pagehide", () => disconnect("页面已关闭。"));
+      window.addEventListener("offline", () => {
+        online = false; disconnect("网络已断开，网页动作已请求停止。");
+      });
+      window.addEventListener("online", () => { online = true; connect(); });
+      connect();
+    </script></body></html>

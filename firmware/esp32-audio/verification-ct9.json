@@ -1,0 +1,87 @@
+{
+  "date": "2026-10-25",
+  "firmware": "2.0.3-ct9",
+  "status": "deployed_no_load_web_verified_phone_voice_pending",
+  "build": {
+    "esp_idf": "v5.5.1",
+    "output": "build/firmware-ct9/xiaozhi.bin",
+    "bytes": 2595280,
+    "sha256": "7c1b86d99285d500ab406cfcc2cf2ceee6e84006c6186806928c15b60cf91654",
+    "app_partition_bytes": 4128768,
+    "app_partition_free_bytes": 1533488,
+    "export_matches_repository": true,
+    "full_compile_and_final_incremental_compile": "passed"
+  },
+  "behavior": {
+    "web_drive": "hold_to_run_release_to_stop",
+    "renew_interval_after_ack_ms": 150,
+    "drive_deadline_ms": 600,
+    "web_ownership_timeout_ms": 2000,
+    "move_cooldown_ms": 3000,
+    "release_stops": "movement_only",
+    "drive_timeout_or_background_stops": "movement_and_water",
+    "voice_move_limit_ms": 3000,
+    "water_limit_ms": 30000,
+    "web_pairing_code_required": false,
+    "web_acquire": "Open page and click connect; /api/pair receives {}"
+  },
+  "host_checks": {
+    "sanitizers": [
+      "ASan",
+      "UBSan"
+    ],
+    "existing_voice_and_output_regressions": "passed",
+    "held_15s_single_start": "passed",
+    "lease_deadline_replay_reorder_and_boot_window": "passed",
+    "actual_json_and_http_handlers": "passed",
+    "actual_page_script_with_dom_fetch_stubs": "passed",
+    "page_cases": [
+      "start_ack_after_release",
+      "renew_ack_after_stop",
+      "pointerup",
+      "pointercancel",
+      "lostpointercapture",
+      "drag_out",
+      "button_blur",
+      "keyboard_release",
+      "keyboard_repeat_ignored",
+      "background",
+      "offline",
+      "window_blur",
+      "no_auto_retry_or_restart"
+    ],
+    "python_syntax_and_diff_check": "passed",
+    "no_pin_acquisition_with_exclusive_session": "passed"
+  },
+  "browser_simulation": {
+    "keyboard_hold_ms_observed": 1814,
+    "mouse_hold_ms_observed": 4011,
+    "mouse_test": "4s held movement plus 10s timed water; release stopped movement while water had about 6s remaining",
+    "screenshot": "build/ct9-ui/control-preview.png",
+    "physical_validation": false
+  },
+  "role_prompt_sha256": "f5c8a9f83e7b469296b59509e1eb71ec8c6c9643731016a11f1028042d7164ec",
+  "page_sha256": "b99204e24f9d30dc061a3bc221e44f81eb393d22ced915a238e1cdb3e04f25e6",
+  "deployment": {
+    "flashed": true,
+    "platform_role_synced": true,
+    "serial_opened": true,
+    "logical_actions_commanded_with_power_disconnected": true,
+    "record": "startup-ct9.json"
+  },
+  "remaining": [
+    "device startup and screen/readback",
+    "real phone touch/multitouch/lock/background/Wi-Fi tests",
+    "actual stop latency and mechanical stopping distance",
+    "voice/audio coexistence, heap/stack/socket peaks",
+    "sustained load current, temperature and whole-robot validation"
+  ],
+  "device_found_fix": {
+    "initial_binary_sha256": "9471160c556251e5af0e804156ff425860588a70b4cdd12a1a60e5a40f5bc168",
+    "symptom": "First web action rejected not_ready_or_busy with no output starts",
+    "cause": "newlib nano does not support %032llx, yielding an invalid internal output permit",
+    "fix": "Direct fixed-width hexadecimal encoding; full uint64 monotonic counter preserved",
+    "host_and_http_regressions": "passed",
+    "device_retest": "passed"
+  }
+}
