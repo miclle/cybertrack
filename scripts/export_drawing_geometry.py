@@ -19,7 +19,7 @@ sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 source_hash = sha(source)
 doc = App.openDocument(str(source))
 objects = [o for o in doc.Objects if hasattr(o, 'Category')]
-visible = [o for o in objects if o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule')]
+visible = [o for o in objects if o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')]
 by_name = {o.Name: o for o in objects}
 V = App.Vector
 # Columns of each matrix define an explicit world-to-page mapping. Front page
@@ -142,11 +142,11 @@ for key,names,view in [
     ('rear_armor_rear',['RearBaseArmor'],'rear'),
     ('rear_armor_side',['RearBaseArmor'],'side'),
     ('ultrasonic_front',['UltrasonicRingL','UltrasonicFaceL','UltrasonicRingR','UltrasonicFaceR','SensorStatusStrip'],'front'),
-    ('ultrasonic_side',['SensorMask','UltrasonicRingL','UltrasonicFaceL','UltrasonicRingR','UltrasonicFaceR'],'side'),
-    ('controller_top',['ESP32Board','ControllerCarrier','ControllerSocketFront','ControllerSocketRear','ControllerRetainer'],'top'),
-    ('controller_front',['ESP32Board','ControllerCarrier','ControllerSocketFront','ControllerSocketRear','ControllerRetainer'],'front'),
+    ('ultrasonic_side',['SensorMask','UltrasonicRingL','UltrasonicFaceL','UltrasonicRingR','UltrasonicFaceR','UltrasonicPCBEnvelope','UltrasonicRearEnvelope','UltrasonicTopConnector'],'side'),
+    ('controller_top',['BreadboardEnvelope','ElectronicsTray'],'top'),
+    ('controller_front',['BreadboardEnvelope','ElectronicsTray'],'front'),
     ('crown_effect_plan',['CrownFinL','CrownEffectInsetL','CrownEffectMarkLFront','CrownEffectMarkLRear'],'top'),
-    ('arc_plan',['HeadShell','ElectronicsTray','Electronics','AudioModule','ArcModuleL','ArcModuleR','ESP32Board'],'top'),
+    ('breadboard_plan',['HeadShell','ElectronicsTray','BreadboardEnvelope'],'top'),
     ('battery',['BatteryHatch','PowerBank','BatteryPullStrap'],'bottom'),
     ('tray',['ElectronicsTray'],'top'),
     ('crown',[o.Name for o in objects if getattr(o,'ServiceGroup','')=='crown'],'top'),

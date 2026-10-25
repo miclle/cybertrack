@@ -19,13 +19,14 @@ SYSTEMS = OrderedDict([
  ('J', ('水枪与胶粘底托', '水枪尺寸 / 水枪固定 / 线管', '先装空底托两颗基座螺钉，再铺胶垫、装枪、放管和接线；拆枪先断管断线并解除粘接。')),
  ('K', ('泡泡枪与整体圆环底座', '前置双枪 / 泡泡枪拆装', '先固定空底座，再按拆卸路径逆序穿环、入槽并胶辅固定；前环无分缝，不增加环上螺钉。')),
  ('L', ('双瓶背包、绑带与顶部吸管', '双瓶背包 / 顶部供液', '先固定两底托和软垫，再放入成品瓶、合绑带、顶部插管；拆瓶先移开目标吸管并松绑带。')),
+ ('N', ('背包本体夹持与效果板承板', '背包夹环 / 薄承板固定', '本体解除外半夹环后上取；承板先拆充电宝再从下方解除四点紧固。板卡固定与真实接线仍待实测。')),
  ('M', ('工具、接线与维护空间', '对应系统维护详图', '本组均为自由空间，不是实物零件，不计入采购或打印；装配时保持通道畅通。')),
 ])
 
 
 def system(name, obj):
     if obj['category'] == 'clearance': return 'M'
-    if name in ('Electronics','AudioModule','ESP32Board') or name.startswith(('Controller','TrayInsert','TrayScrew','ArcModule')): return 'H'
+    if name.startswith(('BackpackArc','ArcClamp','ArcLiner','ArcBottomPad','ArcInsert','ArcScrew','Effect')): return 'N'
     if name.startswith(('Track','Motor','DriveCoupler')): return 'A'
     if name.startswith(('Battery','BottomCover','BottomService','PowerBank')): return 'C'
     if name.startswith('L298N'): return 'D'
@@ -54,25 +55,18 @@ def relation(name, obj, group):
     """Return assembly target and scope-limited installation note from current design."""
     if group == 'M':
         return '所示机构的检修 / 接线区域', '仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。'
-    if name.startswith('ArcModule'):
-        return '头舱两侧的被动预装区域', '仅为圆柱占位，无固定或通电集成；先取冠盖和托板，再抬2、内移24.5、上提83，固定件与引线未建模。'
-    if name=='Electronics':
-        return '头舱前上方剩余分配区', '70×25×13规划空间，非实物器件；具体元件、安装与接口未定，不计为可采购组件。'
-    if name=='AudioModule':
-        return '头舱前部电子托板上方', '69.5×31.5×16.5用户尺寸，仅表示扬声器外包络；固定、功放、接线和声孔尚未定型。'
-    if name=='ESP32Board':
-        return '主控小托架的两排母座', '整板63.6×28.2×13.2用户尺寸；元件面+Z、USB朝−X。排母承接排针，压架限位，不在板上增孔。'
-    if name.startswith(('TrayInsert','TrayScrew')):
-        return '大电子托板 → 头壳支座', '四处M2.5级候选紧固点；X±49.5、Y−30/0。先断线并托住整组，再拆螺钉、向上取托板。'
-    if name.startswith('Controller'):
-        target='主控小托架组件'
-        note='候选固定与接口；内部尺寸须按实物核对，跟随主控组件拆装，不能按示意几何认定配合通过。'
-        if name.startswith('ControllerMount'): target,note='主控小托架 → 大电子托板','四处嵌件与螺钉候选；从上方拆装小托架，实际螺纹、长度与工具操作待核。'
-        elif name.startswith('ControllerRetainer'): target,note='防脱压架 → 小托架两端','两处候选螺钉及嵌件固定压架；最高包络上方留0.5设计间隙，实际接触区与保持力待核。'
-        elif name.startswith('ControllerSocket'): target,note='ESP32两排针 → 小托架母座区域','两条22位排母承接区；槽、层高和插接高度为候选，不能作为已选连接器接口。'
-        elif name=='ControllerCarrier': target,note='大电子托板','非金属小托架四点固定，天线端悬出；装配时按主控详图布置排母和可拆压架。'
-        elif name.startswith('ControllerWire'): target,note='主控尾端 → 独立导向区','导向环及Ø3线束为候选，不定义针序；拆主控前断开并收置线束，实际弯曲及应力释放待核。'
-        return target,note
+    if group=='N':
+        if name.startswith('BackpackArc'):return '背包外侧两道夹环及底托','Ø25.5×70规划本体；先拆本侧4螺钉及两外半夹环，再上取90。非实测，无高压引线或通电集成。'
+        if name.startswith('ArcClamp'):return '背包一体内半夹环','每半环两颗外侧M2.5级候选螺钉；上环带顶部限位，拆螺钉后外移35。间隙、材料、强度和手部操作待验。'
+        if name.startswith(('ArcLiner','ArcBottomPad')):return '夹环与本体接触界面','夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。'
+        if name.startswith('ArcInsert'):return '一体内半夹环的盲孔','共8个M2.5级候选嵌件；与外侧螺钉配套，不作为已验证螺纹啮合或工艺参数。'
+        if name.startswith('ArcScrew'):return '外半夹环 → 内半夹环嵌件','共8颗M2.5级候选，从外侧操作；取出路径35，工具杆只覆盖Ø3直杆。'
+        if name.startswith(('EffectMOS','EffectBuck')):return '底盘效果板薄承板','MOS 33×17×12（高暂定），降压板20×11×5（用户尺寸）。板孔、端子、支柱及板卡自身固定未定，不直接作为加工图。'
+        if name=='EffectTray':return '顶盖内侧四根一体支柱','主体74×33×2，孔X±39、Y−49/−29；先拆充电宝及底盖，再退出4螺钉，向下取100。'
+        if name.startswith('EffectInsert'):return '顶盖内柱向下开口盲孔','4个M2.5级候选嵌件；顶盖外表面不穿孔，配合、制造和强度待验。'
+        if name.startswith('EffectScrew'):return '承板四耳 → 顶盖内柱','4颗M2.5级候选，先拆充电宝再从下操作；头部与电源名义间隙0.5 mm，实物公差必须复核。'
+    if name=='BackpackShell':return '双瓶护壳及外侧一体内半夹环','0.42新增两侧夹环支撑、底托和连接肋；原液瓶舱几何保持。夹持、材料、液体共存与制造未验收。'
+    if name=='KeelLid':return '底盘折面顶盖及内侧一体支柱','原前斜坡外表面保持；0.42新增薄承板4根内柱，底部螺钉固定，不穿透外表面。'
     if name.startswith('TrackPair'): raise ValueError(name)
     if name.startswith(('TrackLeft','TrackRight')):
         return '对应侧成品履带总成', '成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。'
@@ -171,16 +165,9 @@ def relation(name, obj, group):
 def build_catalog(objects):
     groups = {k: OrderedDict() for k in SYSTEMS}
     entries = {}
-    separate_devices = 'BreadboardEnvelope' not in objects
     for index, (name, obj) in enumerate(sorted(objects.items()), 1):
         group=system(name,obj)
         target,note=relation(name,obj,group)
-        if separate_devices and name=='ElectronicsTray':
-            target,note='头壳四处托板支座','大电子托板四点紧固，孔X±49.5、Y−30/0；移去冠盖、断线和四颗螺钉后，整组上提85。'
-        elif separate_devices and name=='HeadShell':
-            target,note='固定颈架的头舱承托鞍座','下壳承托电子托板与冠盖；头壳和颈架的分体连接工艺待定，按头舱详图核对。'
-        elif separate_devices and name in ('PowerCableRoute','BaseCableGrommet','HeadCableGrommet','NeckCableBridge'):
-            target,note='底盘中央干区 → 固定颈架 → 头舱','按来源模型经过护口和限位桥；Ø6线束为规划，拆相关设备前先断线，真实接头与弯曲待验。'
         entries[name]={'id':f'CT{index:03d}', 'name':name, **obj,
                        'system':group,'target':target,'assembly_note':note}
         # Different instructions or targets must never be combined merely by name.
@@ -204,14 +191,8 @@ def render_catalog(api, entries, sheets):
     text,para,box,line=(api[n] for n in ('text','para','box','line'))
     header,end,drawing=(api[n] for n in ('header','end','drawing'))
     ink,muted,accent,pale=(api[n] for n in ('INK','MUTED','ACCENT','PALE'))
-    index_page=api['page']+1
-    start=index_page+1
-    systems=OrderedDict(SYSTEMS)
-    if 'BreadboardEnvelope' not in entries:
-        systems['H']=('主控、托板与独立设备','头舱布局 / 主控拆装','按来源模型保留独立主控、扬声器与被动模块占位；先拆冠盖、断开线束，再按对应维护路径拆装。')
-        systems['I']=('超声波前脸接口','双探头尺寸','双探头按用户尺寸占位；模块整体固定、接线与拆装须按实物确认。')
-    systems=OrderedDict((g,v) for g,v in systems.items() if any(e['system']==g for e in entries.values()))
-    ranges={g:[start+i for i,s in enumerate(sheets) if any(card[0]['system']==g for card in s['cards'])] for g in systems}
+    start=api['page']+2
+    ranges={g:[start+i for i,s in enumerate(sheets) if any(card[0]['system']==g for card in s['cards'])] for g in SYSTEMS}
     header('全对象装配索引 · 按系统查零件','每个当前CAD对象均有唯一CT编号；对称件与重复紧固件合并图卡，保留各自外形与世界坐标。')
     text(20,238,'系统 / 装配位置',11,bold=True)
     text(154,238,'当前装配图',11,bold=True)
@@ -220,7 +201,7 @@ def render_catalog(api, entries, sheets):
     # Page references are supplied by the retained front matter, not hard-coded
     # assumptions about how many appendix cards happen to exist.
     system_pages=api['SYSTEM_PAGE_REFS']
-    for i,(g,(name,_,_)) in enumerate(systems.items()):
+    for i,(g,(name,_,_)) in enumerate(SYSTEMS.items()):
         y=224-i*11.5
         if i%2==0: box(14,y-3.5,392,11.5,pale)
         text(20,y,f'{g}  {name}',10,bold=True)
@@ -230,19 +211,18 @@ def render_catalog(api, entries, sheets):
         api['c'].linkRect('',f'page-{ranges[g][0]}',
                           (14*api['U'],(y-3.5)*api['U'],406*api['U'],(y+8)*api['U']),relative=0,thickness=0)
     para(20,64,'读图：图卡小图是保存模型的独立消隐轴测图，不是爆炸位移或实际比例。每项C为世界包围盒中心，S为世界包围盒尺寸X×Y×Z，均为mm；斜放件S不等于零件自身长宽高。',378,9,5)
-    equipment_note=('扬声器等面包板组内设备没有独立模型，仅由整组规划包络覆盖。' if 'BreadboardEnvelope' in entries else '独立设备包络只表示空间分配，接口与固定仍按来源模型的待验项处理。')
-    para(20,48,f"数量：{len(entries)}个CAD对象包含{sum(e['category']=='clearance' for e in entries.values())}个非实体空间；复合履带对象内有多实体，探头端面含分色对象。对象数和实体数均不直接作为采购数量。"+equipment_note,378,9,5)
+    para(20,48,f"数量：{len(entries)}个CAD对象包含{sum(e['category']=='clearance' for e in entries.values())}个非实体空间；复合履带对象内有多实体，探头端面含分色对象。对象数和实体数均不直接作为采购数量。扬声器等面包板组内设备没有独立模型，仅由整组规划包络覆盖。",378,9,5)
     text(20,29,'蓝 / 橙色编号对应对象；固定方式未定处明确留项。几何覆盖完整不等于装配工艺、制造或实物验收完整。',9,muted)
     end()
     categories={'drive':'成品参考','structure':'结构候选','exterior':'外形候选','envelope':'包络 / 路线','component':'部件参考','clearance':'非实体空间'}
     for sheet in sheets:
         groups=list(dict.fromkeys(card[0]['system'] for card in sheet['cards']))
         if len(groups)==1:
-            group=groups[0];name,refs,sequence=systems[group]
+            group=groups[0];name,refs,sequence=SYSTEMS[group]
             header(f'{group} · {name} · 逐项装配图卡',sequence)
         else:
             header('逐项装配图卡 · '+' / '.join(groups),
-                   '；'.join(g+' '+systems[g][0] for g in groups)+f'。按卡片系统字母与第{index_page}页索引查找总装图。')
+                   '；'.join(g+' '+SYSTEMS[g][0] for g in groups)+f'。按卡片系统字母与第{start-1}页索引查找总装图。')
         text(15,240,'对应装配图：'+'；'.join(g+' '+system_pages[g]+'页' for g in groups)+'。小图分别缩放，尺寸以数值为准。',9,muted)
         for slot,members in enumerate(sheet['cards']):
             x=14+(slot%2)*199;y=28+(2-slot//2)*69
