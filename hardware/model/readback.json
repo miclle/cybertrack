@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.49",
+  "design_revision": "0.50",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "drive_mount_check": {
     "tolerance_mm3": 1e-05,
@@ -1985,7 +1985,7 @@
       "No material, strength, fatigue, thread, tolerance, sealing or manufacturing acceptance."
     ],
     "passed": true,
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "head_lift_check": {
@@ -2186,8 +2186,8 @@
     "limits": "CAD nominal clearances and prescribed rigid service envelopes only; actual cap diameter, flexible hose withdrawal/parking, hand access, stiffness and stability unverified",
     "physical_fit_verified": false,
     "manufacturing_released": false,
-    "assembly_revision": "0.49",
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "assembly_revision": "0.50",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "rear_armor_symmetry_check": {
@@ -2241,7 +2241,7 @@
     "tolerance_mm3": 1e-05,
     "passed": true,
     "physical_or_manufacturing_verified": false,
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "top_feed_check": {
@@ -2319,7 +2319,7 @@
     "internal_hose_is_clearance_only": true,
     "suction_lift_air_seal_priming_and_physical_fit_verified": false,
     "passed": true,
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "bottle_backpack": {
@@ -2515,7 +2515,7 @@
     "no_tools_for_routine_refill_design_intent": true,
     "physical_retention_seal_venting_material_fit_verified": false,
     "manufacturing_released": false,
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
@@ -2685,7 +2685,7 @@
     "passed": true,
     "physical_fit_verified": false,
     "electrical_verified": false,
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "arc_module_envelopes": {
@@ -7372,16 +7372,16 @@
     },
     {
       "name": "BackpackShell",
-      "label": "150 mL双瓶低位护舱／90 mm高／绑带操作缺口",
+      "label": "双瓶背包／一体点火模块桶座与上导环",
       "category": "exterior",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 73696.35491206696,
+      "volume_mm3": 95756.67424602773,
       "bbox_mm": [
-        -80.0000001,
+        -89.7500001,
         35.0,
         33.9999999,
-        80.0,
+        89.75,
         107.5000001,
         124.0000001
       ],
@@ -8343,134 +8343,8 @@
       "symmetric_difference_mm3": 0.0
     },
     {
-      "name": "ArcInsertL00",
-      "label": "夹环M2.5级盲孔嵌件候选 L00",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 38.28816046562558,
-      "bbox_mm": [
-        68.0,
-        64.5,
-        84.0,
-        73.0,
-        68.5,
-        88.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcScrewL00",
-      "label": "夹环外侧M2.5级螺钉候选 L00",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.14990382908546,
-      "bbox_mm": [
-        69.0,
-        64.0,
-        83.5,
-        82.3,
-        69.0,
-        88.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcToolL00",
-      "label": "夹环外侧工具轴线候选 L00",
-      "category": "clearance",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 301.8285141936395,
-      "bbox_mm": [
-        82.3,
-        65.0,
-        84.5,
-        125.0,
-        68.0,
-        87.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcInsertL01",
-      "label": "夹环M2.5级盲孔嵌件候选 L01",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 38.28816046562558,
-      "bbox_mm": [
-        68.0,
-        101.5,
-        84.0,
-        73.0,
-        105.5,
-        88.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcScrewL01",
-      "label": "夹环外侧M2.5级螺钉候选 L01",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.14990382908545,
-      "bbox_mm": [
-        69.0,
-        101.0,
-        83.5,
-        82.3,
-        106.0,
-        88.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcToolL01",
-      "label": "夹环外侧工具轴线候选 L01",
-      "category": "clearance",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 301.8285141936395,
-      "bbox_mm": [
-        82.3,
-        102.0,
-        84.5,
-        125.0,
-        105.0,
-        87.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcClampOuterL0",
-      "label": "分体夹环外半／上环带轴向限位 L0",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 1516.5033663114746,
-      "bbox_mm": [
-        74.3,
-        62.5,
-        82.0,
-        89.75,
-        107.5,
-        90.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
       "name": "ArcLinerInnerL0",
-      "label": "夹环0.5 mm软衬候选 InnerL0",
+      "label": "环带0.5 mm软衬候选 InnerL0",
       "category": "structure",
       "valid": true,
       "solids": 1,
@@ -8488,7 +8362,7 @@
     },
     {
       "name": "ArcLinerOuterL0",
-      "label": "夹环0.5 mm软衬候选 OuterL0",
+      "label": "环带0.5 mm软衬候选 OuterL0",
       "category": "structure",
       "valid": true,
       "solids": 1,
@@ -8505,134 +8379,8 @@
       "symmetric_difference_mm3": 0.0
     },
     {
-      "name": "ArcInsertL10",
-      "label": "夹环M2.5级盲孔嵌件候选 L10",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 38.288160465625566,
-      "bbox_mm": [
-        68.0,
-        64.5,
-        112.0,
-        73.0,
-        68.5,
-        116.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcScrewL10",
-      "label": "夹环外侧M2.5级螺钉候选 L10",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.14990382908543,
-      "bbox_mm": [
-        69.0,
-        64.0,
-        111.5,
-        82.3,
-        69.0,
-        116.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcToolL10",
-      "label": "夹环外侧工具轴线候选 L10",
-      "category": "clearance",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 301.8285141936395,
-      "bbox_mm": [
-        82.3,
-        65.0,
-        112.5,
-        125.0,
-        68.0,
-        115.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcInsertL11",
-      "label": "夹环M2.5级盲孔嵌件候选 L11",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 38.288160465625566,
-      "bbox_mm": [
-        68.0,
-        101.5,
-        112.0,
-        73.0,
-        105.5,
-        116.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcScrewL11",
-      "label": "夹环外侧M2.5级螺钉候选 L11",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.14990382908545,
-      "bbox_mm": [
-        69.0,
-        101.0,
-        111.5,
-        82.3,
-        106.0,
-        116.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcToolL11",
-      "label": "夹环外侧工具轴线候选 L11",
-      "category": "clearance",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 301.8285141936395,
-      "bbox_mm": [
-        82.3,
-        102.0,
-        112.5,
-        125.0,
-        105.0,
-        115.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcClampOuterL1",
-      "label": "分体夹环外半／上环带轴向限位 L1",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 1865.1750214989288,
-      "bbox_mm": [
-        74.3,
-        62.5,
-        110.0,
-        89.75,
-        107.5,
-        126.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
       "name": "ArcLinerInnerL1",
-      "label": "夹环0.5 mm软衬候选 InnerL1",
+      "label": "环带0.5 mm软衬候选 InnerL1",
       "category": "structure",
       "valid": true,
       "solids": 1,
@@ -8650,7 +8398,7 @@
     },
     {
       "name": "ArcLinerOuterL1",
-      "label": "夹环0.5 mm软衬候选 OuterL1",
+      "label": "环带0.5 mm软衬候选 OuterL1",
       "category": "structure",
       "valid": true,
       "solids": 1,
@@ -8703,134 +8451,8 @@
       "symmetric_difference_mm3": 0.0
     },
     {
-      "name": "ArcInsertR00",
-      "label": "夹环M2.5级盲孔嵌件候选 R00",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 38.605686621104454,
-      "bbox_mm": [
-        -73.00000010000001,
-        64.4999999,
-        83.9999999,
-        -67.99999989999999,
-        68.5000001,
-        88.0000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcScrewR00",
-      "label": "夹环外侧M2.5级螺钉候选 R00",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.8569809937318,
-      "bbox_mm": [
-        -82.3000001,
-        63.9999999,
-        83.49999990000002,
-        -68.99999989999999,
-        69.0000001,
-        88.50000010000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcToolR00",
-      "label": "夹环外侧工具轴线候选 R00",
-      "category": "clearance",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 304.42888512016077,
-      "bbox_mm": [
-        -125.00000010000001,
-        64.9999999,
-        84.49999989999999,
-        -82.29999989999999,
-        68.0000001,
-        87.5000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcInsertR01",
-      "label": "夹环M2.5级盲孔嵌件候选 R01",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 38.605686621104354,
-      "bbox_mm": [
-        -73.00000010000001,
-        101.4999999,
-        83.9999999,
-        -67.99999989999999,
-        105.50000010000001,
-        88.0000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcScrewR01",
-      "label": "夹环外侧M2.5级螺钉候选 R01",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.85698099373131,
-      "bbox_mm": [
-        -82.3000001,
-        100.9999999,
-        83.49999989999999,
-        -68.99999989999999,
-        106.0000001,
-        88.50000010000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcToolR01",
-      "label": "夹环外侧工具轴线候选 R01",
-      "category": "clearance",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 304.4288851201614,
-      "bbox_mm": [
-        -125.00000010000001,
-        101.99999989999999,
-        84.49999989999999,
-        -82.29999989999999,
-        105.0000001,
-        87.5000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcClampOuterR0",
-      "label": "分体夹环外半／上环带轴向限位 R0",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 1516.0803351045402,
-      "bbox_mm": [
-        -89.7500001,
-        62.4999999,
-        81.99999989999999,
-        -74.29999989999999,
-        107.5000001,
-        90.00000010000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
       "name": "ArcLinerInnerR0",
-      "label": "夹环0.5 mm软衬候选 InnerR0",
+      "label": "环带0.5 mm软衬候选 InnerR0",
       "category": "structure",
       "valid": true,
       "solids": 1,
@@ -8848,7 +8470,7 @@
     },
     {
       "name": "ArcLinerOuterR0",
-      "label": "夹环0.5 mm软衬候选 OuterR0",
+      "label": "环带0.5 mm软衬候选 OuterR0",
       "category": "structure",
       "valid": true,
       "solids": 1,
@@ -8865,134 +8487,8 @@
       "symmetric_difference_mm3": 0.0
     },
     {
-      "name": "ArcInsertR10",
-      "label": "夹环M2.5级盲孔嵌件候选 R10",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 38.605686621104454,
-      "bbox_mm": [
-        -73.00000010000001,
-        64.49999989999999,
-        111.99999990000002,
-        -67.9999999,
-        68.5000001,
-        116.0000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcScrewR10",
-      "label": "夹环外侧M2.5级螺钉候选 R10",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.8569809937317,
-      "bbox_mm": [
-        -82.3000001,
-        63.9999999,
-        111.4999999,
-        -68.9999999,
-        69.0000001,
-        116.5000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcToolR10",
-      "label": "夹环外侧工具轴线候选 R10",
-      "category": "clearance",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 304.42888512016236,
-      "bbox_mm": [
-        -125.00000010000001,
-        64.9999999,
-        112.4999999,
-        -82.29999989999999,
-        68.0000001,
-        115.5000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcInsertR11",
-      "label": "夹环M2.5级盲孔嵌件候选 R11",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 38.60568662110455,
-      "bbox_mm": [
-        -73.00000010000001,
-        101.4999999,
-        111.99999990000002,
-        -67.9999999,
-        105.5000001,
-        116.0000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcScrewR11",
-      "label": "夹环外侧M2.5级螺钉候选 R11",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.85698099373171,
-      "bbox_mm": [
-        -82.3000001,
-        100.9999999,
-        111.4999999,
-        -68.9999999,
-        106.0000001,
-        116.5000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcToolR11",
-      "label": "夹环外侧工具轴线候选 R11",
-      "category": "clearance",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 304.42888512016305,
-      "bbox_mm": [
-        -125.00000010000001,
-        101.9999999,
-        112.4999999,
-        -82.29999989999999,
-        105.0000001,
-        115.5000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "ArcClampOuterR1",
-      "label": "分体夹环外半／上环带轴向限位 R1",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 1864.5675592897894,
-      "bbox_mm": [
-        -89.75000010000001,
-        62.4999999,
-        109.99999989999999,
-        -74.29999989999999,
-        107.5000001,
-        126.0000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
       "name": "ArcLinerInnerR1",
-      "label": "夹环0.5 mm软衬候选 InnerR1",
+      "label": "环带0.5 mm软衬候选 InnerR1",
       "category": "structure",
       "valid": true,
       "solids": 1,
@@ -9010,7 +8506,7 @@
     },
     {
       "name": "ArcLinerOuterR1",
-      "label": "夹环0.5 mm软衬候选 OuterR1",
+      "label": "环带0.5 mm软衬候选 OuterR1",
       "category": "structure",
       "valid": true,
       "solids": 1,
@@ -10672,9 +10168,9 @@
   ],
   "step_readback": {
     "valid": true,
-    "solids": 954,
-    "expected_solids": 954,
-    "volume_difference_mm3": 3.105533025227487,
+    "solids": 934,
+    "expected_solids": 934,
+    "volume_difference_mm3": 69.5374537773896,
     "bbox_difference_mm": 8.952838470577262e-13,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -10683,7 +10179,7 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 1156,
+    "boolean_pairs_tested": 1076,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
@@ -12774,7 +12270,7 @@
     "board_anti_lift_retention_verified": false,
     "physical_fit_verified": false,
     "limits": "Envelope and rigid tray only. No individual audio/display/USB/RF fit, hand access, flexible harness service, material strength or anti-lift retention acceptance.",
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "l298n_layout": {
@@ -12904,7 +12400,7 @@
     "placement_difference_mm3": 0.0,
     "outside_central_dry_bay_mm3": 0.0,
     "overlap_tolerance_mm3": 0.01,
-    "objects_checked": 439,
+    "objects_checked": 411,
     "overlaps": [],
     "reserved_space_overlaps": [],
     "nearby_distances": [
@@ -13067,7 +12563,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "thermal_verified": false,
-    "source_after_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_after_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "l298n_mount": {
@@ -13312,7 +12808,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "passed": true,
-    "source_after_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_after_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true,
     "carrier_export": {
       "coordinate_frame": "assembly coordinates, no scale or relocation",
@@ -13603,7 +13099,7 @@
     "mounting_verified": false,
     "physical_fit_verified": false,
     "acoustic_verified": false,
-    "source_after_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_after_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "ultrasonic_layout": {
@@ -14049,7 +13545,7 @@
     "physical_fit_verified": false,
     "electrical_verified": false,
     "limits": "Unmeasured PCB, datum, rear height, header, connector, wire bend and board endpoint. No mounts or hand access acceptance.",
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a"
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8"
   },
   "ignition_routing_layout": {
     "revision": "0.48",
@@ -14404,11 +13900,6 @@
             "distance_mm": 0.32557798373549224
           },
           {
-            "object": "ArcClampOuterL1",
-            "category": "structure",
-            "distance_mm": 2.019508549556679
-          },
-          {
             "object": "BackpackArcL",
             "category": "envelope",
             "distance_mm": 2.2543378499745605
@@ -14432,6 +13923,11 @@
             "object": "EffectTool2",
             "category": "clearance",
             "distance_mm": 4.5
+          },
+          {
+            "object": "KeelLid",
+            "category": "structure",
+            "distance_mm": 4.7547321183251565
           }
         ]
       },
@@ -14524,11 +14020,6 @@
             "distance_mm": 0.325577983735485
           },
           {
-            "object": "ArcClampOuterR1",
-            "category": "structure",
-            "distance_mm": 2.019508549556679
-          },
-          {
             "object": "BackpackArcR",
             "category": "envelope",
             "distance_mm": 2.254337849974557
@@ -14552,6 +14043,11 @@
             "object": "EffectTool0",
             "category": "clearance",
             "distance_mm": 4.5
+          },
+          {
+            "object": "KeelLid",
+            "category": "structure",
+            "distance_mm": 4.7547321183251565
           }
         ]
       },
@@ -14970,7 +14466,7 @@
     "protective_cover_designed": false,
     "bend_radius_verified": false,
     "electrical_verified": false,
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "front_effects_layout": {
@@ -15171,7 +14667,7 @@
     "scope": "Static visual solids; guard contact and lead within 2.6 mm exit bore budget; not electrical spacing or fixture validation",
     "physical_fit_verified": false,
     "electrical_verified": false,
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "mt3608_layout": {
@@ -15216,7 +14712,7 @@
       88.0
     ],
     "placement_difference_mm3": 0.0,
-    "objects_checked": 437,
+    "objects_checked": 409,
     "overlaps": [],
     "nearby_distances": [
       {
@@ -15333,11 +14829,11 @@
       "End spaces are design budgets, not a complete wiring or adjustment path.",
       "Service requires driver and left motor removal; fixture and physical handling remain unresolved."
     ],
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "effects_layout": {
-    "revision": "0.43",
+    "revision": "0.50",
     "arc_body_diameter_length_mm": [
       25.5,
       70
@@ -15356,13 +14852,27 @@
       54,
       124
     ],
-    "clamp_z_centres_mm": [
+    "band_z_centres_mm": [
       86,
       114
     ],
-    "split_gap_mm": 0.6,
     "liner_thickness_mm": 0.5,
-    "arc_clamp_screw_quantity": 8,
+    "integrated_object": "BackpackShell",
+    "cup_z_mm": [
+      51.5,
+      90
+    ],
+    "cup_outer_inner_diameter_mm": [
+      31.5,
+      26.5
+    ],
+    "cup_floor_thickness_mm": 1.5,
+    "upper_ring_z_mm": [
+      110,
+      118
+    ],
+    "top_axial_stop": false,
+    "arc_clamp_screw_quantity": 0,
     "effect_tray_screw_quantity": 4,
     "effect_mount_xy_mm": [
       [
@@ -15393,7 +14903,7 @@
       11,
       5
     ],
-    "quantity_assumption": "one MOS and one buck per effect",
+    "quantity_assumption": "one MOS and one buck per water/bubble effect; shared ignition MOS is separate",
     "board_mounting_complete": false,
     "board_mounting_candidate": {
       "revision": "0.43",
@@ -15438,11 +14948,12 @@
       "board_contact_and_retention_verified": false,
       "physical_fit_verified": false
     },
+    "axial_retention_verified": false,
     "physical_fit_verified": false,
     "electrical_or_insulation_verified": false
   },
   "effects_mount_check": {
-    "revision": "0.43",
+    "revision": "0.50",
     "board_mount": {
       "revision": "0.43",
       "wire_spaces": {
@@ -16969,7 +16480,7 @@
     },
     "static": {
       "BackpackArcL": {
-        "boolean_pairs_tested": 10,
+        "boolean_pairs_tested": 8,
         "overlaps": [],
         "nearby": [
           {
@@ -16985,10 +16496,6 @@
             "distance_mm": 0.0
           },
           {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 0.0
-          },
-          {
             "object": "ArcLinerInnerL1",
             "distance_mm": 0.0
           },
@@ -16997,48 +16504,12 @@
             "distance_mm": 0.0
           },
           {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 0.4999999999999872
-          },
-          {
             "object": "BackpackShell",
-            "distance_mm": 0.4999999999999926
+            "distance_mm": 0.49999999999998646
           },
           {
             "object": "LowerTub",
             "distance_mm": 3.1065578579161786
-          },
-          {
-            "object": "ArcInsertL00",
-            "distance_mm": 3.780275254816541
-          },
-          {
-            "object": "ArcInsertL01",
-            "distance_mm": 3.780275254816541
-          },
-          {
-            "object": "ArcInsertL10",
-            "distance_mm": 3.780275254816541
-          },
-          {
-            "object": "ArcInsertL11",
-            "distance_mm": 3.780275254816541
-          },
-          {
-            "object": "ArcScrewL00",
-            "distance_mm": 4.445638982020991
-          },
-          {
-            "object": "ArcScrewL01",
-            "distance_mm": 4.445638982020991
-          },
-          {
-            "object": "ArcScrewL10",
-            "distance_mm": 4.445638982020991
-          },
-          {
-            "object": "ArcScrewL11",
-            "distance_mm": 4.445638982020991
           }
         ],
         "passed": true
@@ -17058,169 +16529,6 @@
         ],
         "passed": true
       },
-      "ArcInsertL00": {
-        "boolean_pairs_tested": 7,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcScrewL00",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.09999999999998936
-          },
-          {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 1.2999999999999972
-          },
-          {
-            "object": "ArcLinerInnerL0",
-            "distance_mm": 3.280275254816541
-          },
-          {
-            "object": "ArcLinerOuterL0",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 3.780275254816541
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewL00": {
-        "boolean_pairs_tested": 8,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertL00",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcLinerOuterL0",
-            "distance_mm": 3.9456389820209914
-          },
-          {
-            "object": "ArcLinerInnerL0",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 4.445638982020991
-          }
-        ],
-        "passed": true
-      },
-      "ArcInsertL01": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcScrewL01",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.09999999999998936
-          },
-          {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 1.2999999999999972
-          },
-          {
-            "object": "ArcLinerInnerL0",
-            "distance_mm": 3.280275254816541
-          },
-          {
-            "object": "ArcLinerOuterL0",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 3.780275254816541
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewL01": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertL01",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcLinerOuterL0",
-            "distance_mm": 3.9456389820209914
-          },
-          {
-            "object": "ArcLinerInnerL0",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 4.445638982020991
-          }
-        ],
-        "passed": true
-      },
-      "ArcClampOuterL0": {
-        "boolean_pairs_tested": 10,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcScrewL00",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcScrewL01",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcLinerOuterL0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 0.4999999999999872
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcLinerInnerL0",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertL00",
-            "distance_mm": 1.2999999999999972
-          },
-          {
-            "object": "ArcInsertL01",
-            "distance_mm": 1.2999999999999972
-          }
-        ],
-        "passed": true
-      },
       "ArcLinerInnerL0": {
         "boolean_pairs_tested": 5,
         "overlaps": [],
@@ -17234,230 +16542,27 @@
             "distance_mm": 0.0
           },
           {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 0.5999999999999943
-          },
-          {
             "object": "ArcLinerOuterL0",
             "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertL00",
-            "distance_mm": 3.280275254816541
-          },
-          {
-            "object": "ArcInsertL01",
-            "distance_mm": 3.280275254816541
-          },
-          {
-            "object": "ArcScrewL00",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "ArcScrewL01",
-            "distance_mm": 4.053396661785328
           }
         ],
         "passed": true
       },
       "ArcLinerOuterL0": {
-        "boolean_pairs_tested": 6,
+        "boolean_pairs_tested": 5,
         "overlaps": [],
         "nearby": [
           {
+            "object": "BackpackShell",
+            "distance_mm": 0.0
+          },
+          {
             "object": "BackpackArcL",
             "distance_mm": 0.0
-          },
-          {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.5999999999999943
           },
           {
             "object": "ArcLinerInnerL0",
             "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertL00",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "ArcInsertL01",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "ArcScrewL00",
-            "distance_mm": 3.9456389820209914
-          },
-          {
-            "object": "ArcScrewL01",
-            "distance_mm": 3.9456389820209914
-          }
-        ],
-        "passed": true
-      },
-      "ArcInsertL10": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcScrewL10",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.09999999999998936
-          },
-          {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 1.2999999999999972
-          },
-          {
-            "object": "ArcLinerInnerL1",
-            "distance_mm": 3.280275254816541
-          },
-          {
-            "object": "ArcLinerOuterL1",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 3.780275254816541
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewL10": {
-        "boolean_pairs_tested": 4,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertL10",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcLinerOuterL1",
-            "distance_mm": 3.9456389820209914
-          },
-          {
-            "object": "ArcLinerInnerL1",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 4.445638982020991
-          }
-        ],
-        "passed": true
-      },
-      "ArcInsertL11": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcScrewL11",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.09999999999998936
-          },
-          {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 1.2999999999999972
-          },
-          {
-            "object": "ArcLinerInnerL1",
-            "distance_mm": 3.280275254816541
-          },
-          {
-            "object": "ArcLinerOuterL1",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 3.780275254816541
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewL11": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertL11",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcLinerOuterL1",
-            "distance_mm": 3.9456389820209914
-          },
-          {
-            "object": "ArcLinerInnerL1",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 4.445638982020991
-          }
-        ],
-        "passed": true
-      },
-      "ArcClampOuterL1": {
-        "boolean_pairs_tested": 6,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcScrewL10",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcScrewL11",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcLinerOuterL1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcLinerInnerL1",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertL10",
-            "distance_mm": 1.2999999999999972
-          },
-          {
-            "object": "ArcInsertL11",
-            "distance_mm": 1.2999999999999972
           }
         ],
         "passed": true
@@ -17475,73 +16580,33 @@
             "distance_mm": 0.0
           },
           {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 0.5999999999999943
-          },
-          {
             "object": "ArcLinerOuterL1",
             "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertL10",
-            "distance_mm": 3.280275254816541
-          },
-          {
-            "object": "ArcInsertL11",
-            "distance_mm": 3.280275254816541
-          },
-          {
-            "object": "ArcScrewL10",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "ArcScrewL11",
-            "distance_mm": 4.053396661785328
           }
         ],
         "passed": true
       },
       "ArcLinerOuterL1": {
-        "boolean_pairs_tested": 3,
+        "boolean_pairs_tested": 2,
         "overlaps": [],
         "nearby": [
+          {
+            "object": "BackpackShell",
+            "distance_mm": 0.0
+          },
           {
             "object": "BackpackArcL",
             "distance_mm": 0.0
           },
           {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.5999999999999943
-          },
-          {
             "object": "ArcLinerInnerL1",
             "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertL10",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "ArcInsertL11",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "ArcScrewL10",
-            "distance_mm": 3.9456389820209914
-          },
-          {
-            "object": "ArcScrewL11",
-            "distance_mm": 3.9456389820209914
           }
         ],
         "passed": true
       },
       "BackpackArcR": {
-        "boolean_pairs_tested": 10,
+        "boolean_pairs_tested": 8,
         "overlaps": [],
         "nearby": [
           {
@@ -17557,10 +16622,6 @@
             "distance_mm": 0.0
           },
           {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 0.0
-          },
-          {
             "object": "ArcLinerInnerR1",
             "distance_mm": 0.0
           },
@@ -17570,47 +16631,11 @@
           },
           {
             "object": "BackpackShell",
-            "distance_mm": 0.4999999999999701
-          },
-          {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 0.4999999999999754
+            "distance_mm": 0.4999999999999694
           },
           {
             "object": "LowerTub",
             "distance_mm": 3.1065578579161786
-          },
-          {
-            "object": "ArcInsertR00",
-            "distance_mm": 3.7802752548165195
-          },
-          {
-            "object": "ArcInsertR01",
-            "distance_mm": 3.7802752548165346
-          },
-          {
-            "object": "ArcInsertR10",
-            "distance_mm": 3.7802752548165355
-          },
-          {
-            "object": "ArcInsertR11",
-            "distance_mm": 3.780275254816548
-          },
-          {
-            "object": "ArcScrewR11",
-            "distance_mm": 4.445638982020995
-          },
-          {
-            "object": "ArcScrewR00",
-            "distance_mm": 4.445638982021
-          },
-          {
-            "object": "ArcScrewR01",
-            "distance_mm": 4.445638982021
-          },
-          {
-            "object": "ArcScrewR10",
-            "distance_mm": 4.445638982021
           }
         ],
         "passed": true
@@ -17630,169 +16655,6 @@
         ],
         "passed": true
       },
-      "ArcInsertR00": {
-        "boolean_pairs_tested": 7,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcScrewR00",
-            "distance_mm": 0.04999999999999702
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.09999999999995979
-          },
-          {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 1.299999999999983
-          },
-          {
-            "object": "ArcLinerInnerR0",
-            "distance_mm": 3.280275254816518
-          },
-          {
-            "object": "ArcLinerOuterR0",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 3.7802752548165195
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR00": {
-        "boolean_pairs_tested": 8,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertR00",
-            "distance_mm": 0.04999999999999702
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999726
-          },
-          {
-            "object": "ArcLinerOuterR0",
-            "distance_mm": 3.9456389820209794
-          },
-          {
-            "object": "ArcLinerInnerR0",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 4.445638982021
-          }
-        ],
-        "passed": true
-      },
-      "ArcInsertR01": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcScrewR01",
-            "distance_mm": 0.04999999999995304
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.09999999999996821
-          },
-          {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 1.2999999999999972
-          },
-          {
-            "object": "ArcLinerInnerR0",
-            "distance_mm": 3.2802752548165324
-          },
-          {
-            "object": "ArcLinerOuterR0",
-            "distance_mm": 3.5035110730402774
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 3.7802752548165346
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR01": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertR01",
-            "distance_mm": 0.04999999999995304
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999747
-          },
-          {
-            "object": "ArcLinerOuterR0",
-            "distance_mm": 3.945638982021006
-          },
-          {
-            "object": "ArcLinerInnerR0",
-            "distance_mm": 4.053396661785342
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 4.445638982021
-          }
-        ],
-        "passed": true
-      },
-      "ArcClampOuterR0": {
-        "boolean_pairs_tested": 10,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcScrewR00",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcScrewR01",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcLinerOuterR0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 0.4999999999999754
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcLinerInnerR0",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertR00",
-            "distance_mm": 1.299999999999983
-          },
-          {
-            "object": "ArcInsertR01",
-            "distance_mm": 1.2999999999999972
-          }
-        ],
-        "passed": true
-      },
       "ArcLinerInnerR0": {
         "boolean_pairs_tested": 5,
         "overlaps": [],
@@ -17806,34 +16668,14 @@
             "distance_mm": 0.0
           },
           {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 0.5999999999999943
-          },
-          {
             "object": "ArcLinerOuterR0",
             "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertR00",
-            "distance_mm": 3.280275254816518
-          },
-          {
-            "object": "ArcInsertR01",
-            "distance_mm": 3.2802752548165324
-          },
-          {
-            "object": "ArcScrewR00",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "ArcScrewR01",
-            "distance_mm": 4.053396661785342
           }
         ],
         "passed": true
       },
       "ArcLinerOuterR0": {
-        "boolean_pairs_tested": 6,
+        "boolean_pairs_tested": 5,
         "overlaps": [],
         "nearby": [
           {
@@ -17841,195 +16683,12 @@
             "distance_mm": 0.0
           },
           {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 0.0
-          },
-          {
             "object": "BackpackShell",
-            "distance_mm": 0.5999999999999943
+            "distance_mm": 1.4210854715202004e-14
           },
           {
             "object": "ArcLinerInnerR0",
             "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertR01",
-            "distance_mm": 3.5035110730402774
-          },
-          {
-            "object": "ArcInsertR00",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "ArcScrewR00",
-            "distance_mm": 3.9456389820209794
-          },
-          {
-            "object": "ArcScrewR01",
-            "distance_mm": 3.945638982021006
-          }
-        ],
-        "passed": true
-      },
-      "ArcInsertR10": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcScrewR10",
-            "distance_mm": 0.04999999999997258
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.09999999999997766
-          },
-          {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 1.299999999999983
-          },
-          {
-            "object": "ArcLinerInnerR1",
-            "distance_mm": 3.280275254816534
-          },
-          {
-            "object": "ArcLinerOuterR1",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 3.7802752548165355
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR10": {
-        "boolean_pairs_tested": 4,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertR10",
-            "distance_mm": 0.04999999999997258
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999726
-          },
-          {
-            "object": "ArcLinerOuterR1",
-            "distance_mm": 3.9456389820209794
-          },
-          {
-            "object": "ArcLinerInnerR1",
-            "distance_mm": 4.053396661785342
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 4.445638982021
-          }
-        ],
-        "passed": true
-      },
-      "ArcInsertR11": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcScrewR11",
-            "distance_mm": 0.04999999999997044
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.09999999999997455
-          },
-          {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 1.299999999999983
-          },
-          {
-            "object": "ArcLinerInnerR1",
-            "distance_mm": 3.2802752548165466
-          },
-          {
-            "object": "ArcLinerOuterR1",
-            "distance_mm": 3.5035110730402774
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 3.780275254816548
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR11": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertR11",
-            "distance_mm": 0.04999999999997044
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999793
-          },
-          {
-            "object": "ArcLinerOuterR1",
-            "distance_mm": 3.945638982021006
-          },
-          {
-            "object": "ArcLinerInnerR1",
-            "distance_mm": 4.053396661785342
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 4.445638982020995
-          }
-        ],
-        "passed": true
-      },
-      "ArcClampOuterR1": {
-        "boolean_pairs_tested": 6,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcScrewR10",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcScrewR11",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcLinerOuterR1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcLinerInnerR1",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertR10",
-            "distance_mm": 1.299999999999983
-          },
-          {
-            "object": "ArcInsertR11",
-            "distance_mm": 1.299999999999983
           }
         ],
         "passed": true
@@ -18047,67 +16706,27 @@
             "distance_mm": 0.0
           },
           {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 0.5999999999999943
-          },
-          {
             "object": "ArcLinerOuterR1",
             "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertR10",
-            "distance_mm": 3.280275254816534
-          },
-          {
-            "object": "ArcInsertR11",
-            "distance_mm": 3.2802752548165466
-          },
-          {
-            "object": "ArcScrewR10",
-            "distance_mm": 4.053396661785342
-          },
-          {
-            "object": "ArcScrewR11",
-            "distance_mm": 4.053396661785342
           }
         ],
         "passed": true
       },
       "ArcLinerOuterR1": {
-        "boolean_pairs_tested": 3,
+        "boolean_pairs_tested": 2,
         "overlaps": [],
         "nearby": [
+          {
+            "object": "BackpackShell",
+            "distance_mm": 0.0
+          },
           {
             "object": "BackpackArcR",
             "distance_mm": 0.0
           },
           {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.5999999999999943
-          },
-          {
             "object": "ArcLinerInnerR1",
             "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcInsertR11",
-            "distance_mm": 3.5035110730402774
-          },
-          {
-            "object": "ArcInsertR10",
-            "distance_mm": 3.5035110730402903
-          },
-          {
-            "object": "ArcScrewR10",
-            "distance_mm": 3.9456389820209794
-          },
-          {
-            "object": "ArcScrewR11",
-            "distance_mm": 3.945638982021006
           }
         ],
         "passed": true
@@ -19967,7 +18586,7 @@
         "passed": true
       },
       "BackpackShell": {
-        "boolean_pairs_tested": 74,
+        "boolean_pairs_tested": 54,
         "overlaps": [],
         "nearby": [
           {
@@ -20003,7 +18622,15 @@
             "distance_mm": 0.0
           },
           {
+            "object": "ArcLinerOuterL0",
+            "distance_mm": 0.0
+          },
+          {
             "object": "ArcLinerInnerL1",
+            "distance_mm": 0.0
+          },
+          {
+            "object": "ArcLinerOuterL1",
             "distance_mm": 0.0
           },
           {
@@ -20019,44 +18646,20 @@
             "distance_mm": 0.0
           },
           {
-            "object": "ArcInsertR00",
-            "distance_mm": 0.09999999999995979
+            "object": "ArcLinerOuterR1",
+            "distance_mm": 0.0
           },
           {
-            "object": "ArcInsertR01",
-            "distance_mm": 0.09999999999996821
-          },
-          {
-            "object": "ArcInsertR11",
-            "distance_mm": 0.09999999999997455
-          },
-          {
-            "object": "ArcInsertR10",
-            "distance_mm": 0.09999999999997766
-          },
-          {
-            "object": "ArcInsertL00",
-            "distance_mm": 0.09999999999998936
-          },
-          {
-            "object": "ArcInsertL01",
-            "distance_mm": 0.09999999999998936
-          },
-          {
-            "object": "ArcInsertL10",
-            "distance_mm": 0.09999999999998936
-          },
-          {
-            "object": "ArcInsertL11",
-            "distance_mm": 0.09999999999998936
+            "object": "ArcLinerOuterR0",
+            "distance_mm": 1.4210854715202004e-14
           },
           {
             "object": "BackpackArcR",
-            "distance_mm": 0.4999999999999701
+            "distance_mm": 0.4999999999999694
           },
           {
             "object": "BackpackArcL",
-            "distance_mm": 0.4999999999999891
+            "distance_mm": 0.49999999999998646
           },
           {
             "object": "WaterPod",
@@ -20065,70 +18668,6 @@
           {
             "object": "BubblePod",
             "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcLinerOuterL0",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcLinerOuterL1",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcLinerOuterR0",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcLinerOuterR1",
-            "distance_mm": 0.5999999999999943
-          },
-          {
-            "object": "ArcScrewR00",
-            "distance_mm": 0.8999999999999726
-          },
-          {
-            "object": "ArcScrewR10",
-            "distance_mm": 0.8999999999999726
-          },
-          {
-            "object": "ArcScrewR01",
-            "distance_mm": 0.8999999999999747
-          },
-          {
-            "object": "ArcScrewR11",
-            "distance_mm": 0.8999999999999793
-          },
-          {
-            "object": "ArcScrewL00",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcScrewL01",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcScrewL10",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcScrewL11",
-            "distance_mm": 0.8999999999999883
           },
           {
             "object": "WaterSidePad1",
@@ -20208,36 +18747,6 @@
         "nearby": [],
         "passed": true
       },
-      "ArcInsertL00": {
-        "boolean_pairs_tested": 1,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcScrewL00": {
-        "boolean_pairs_tested": 1,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcInsertL01": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcScrewL01": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcClampOuterL0": {
-        "boolean_pairs_tested": 1,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
       "ArcLinerInnerL0": {
         "boolean_pairs_tested": 1,
         "overlaps": [],
@@ -20248,41 +18757,6 @@
         "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
-        "passed": true
-      },
-      "ArcInsertL10": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcScrewL10": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcInsertL11": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcScrewL11": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcClampOuterL1": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "IgnitionRouteL",
-            "distance_mm": 2.019508549556679
-          }
-        ],
         "passed": true
       },
       "ArcLinerInnerL1": {
@@ -20314,36 +18788,6 @@
         "nearby": [],
         "passed": true
       },
-      "ArcInsertR00": {
-        "boolean_pairs_tested": 1,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcScrewR00": {
-        "boolean_pairs_tested": 1,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcInsertR01": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcScrewR01": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcClampOuterR0": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
       "ArcLinerInnerR0": {
         "boolean_pairs_tested": 1,
         "overlaps": [],
@@ -20354,41 +18798,6 @@
         "boolean_pairs_tested": 1,
         "overlaps": [],
         "nearby": [],
-        "passed": true
-      },
-      "ArcInsertR10": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcScrewR10": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcInsertR11": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcScrewR11": {
-        "boolean_pairs_tested": 0,
-        "overlaps": [],
-        "nearby": [],
-        "passed": true
-      },
-      "ArcClampOuterR1": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "IgnitionRouteR",
-            "distance_mm": 2.019508549556679
-          }
-        ],
         "passed": true
       },
       "ArcLinerInnerR1": {
@@ -20683,737 +19092,9 @@
         "passed": true
       }
     },
-    "outer_caps": {
-      "L0": {
-        "method": "21 discrete poses, outward X35; no continuous claim",
-        "poses": [
-          {
-            "boolean_pairs_tested": 7,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.0
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 0.5999999999999943
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 7,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.16026723193596842
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 2.3499999999999943
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 7,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.550845837765355
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 4.099999999999994
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 7,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 1.1523379328802075
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 1.9388563203538738
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 2.882498200863472
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 3.9566603484957437
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 5,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 4,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          }
-        ],
-        "passed": true
-      },
-      "L1": {
-        "method": "21 discrete poses, outward X35; no continuous claim",
-        "poses": [
-          {
-            "boolean_pairs_tested": 3,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.0
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 0.5999999999999943
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 3,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.0
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 2.3499999999999943
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 3,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.0
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 4.099999999999994
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 3,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.0
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 2,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.0
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 2,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.0
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 2,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.0
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 2,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcL",
-                "distance_mm": 0.0
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 0,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 0,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 0,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 0,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          }
-        ],
-        "passed": true
-      },
-      "R0": {
-        "method": "21 discrete poses, outward X35; no continuous claim",
-        "poses": [
-          {
-            "boolean_pairs_tested": 7,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.0
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 0.5999999999999943
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 7,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.16026723193596842
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 2.3499999999999943
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 7,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.5508458377653509
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 4.099999999999994
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 7,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 1.1523379328802075
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 1.9388563203538667
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 2.882498200863472
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 3.956660348495733
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 6,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 5,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 4,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          }
-        ],
-        "passed": true
-      },
-      "R1": {
-        "method": "21 discrete poses, outward X35; no continuous claim",
-        "poses": [
-          {
-            "boolean_pairs_tested": 3,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.0
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 0.5999999999999943
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 3,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.0
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 2.3499999999999943
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 3,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.0
-              },
-              {
-                "object": "BackpackShell",
-                "distance_mm": 4.09999999999998
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 3,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.0
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 2,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.0
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 2,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.0
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 2,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.0
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 2,
-            "overlaps": [],
-            "nearby": [
-              {
-                "object": "BackpackArcR",
-                "distance_mm": 0.0
-              }
-            ],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 1,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 0,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 0,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 0,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 0,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          },
-          {
-            "boolean_pairs_tested": 0,
-            "overlaps": [],
-            "nearby": [],
-            "passed": true
-          }
-        ],
-        "passed": true
-      }
-    },
     "arc_up_90": {
       "L": {
-        "boolean_pairs_tested": 6,
+        "boolean_pairs_tested": 8,
         "overlaps": [],
         "nearby": [
           {
@@ -21425,32 +19106,24 @@
             "distance_mm": 0.0
           },
           {
+            "object": "ArcLinerOuterL0",
+            "distance_mm": 0.0
+          },
+          {
             "object": "ArcLinerInnerL1",
             "distance_mm": 0.0
           },
           {
+            "object": "ArcLinerOuterL1",
+            "distance_mm": 0.0
+          },
+          {
             "object": "BackpackShell",
-            "distance_mm": 0.49999999999998884
+            "distance_mm": 0.49999999999998573
           },
           {
             "object": "LowerTub",
             "distance_mm": 3.1065578579161786
-          },
-          {
-            "object": "ArcInsertL00",
-            "distance_mm": 3.780275254816541
-          },
-          {
-            "object": "ArcInsertL01",
-            "distance_mm": 3.780275254816541
-          },
-          {
-            "object": "ArcInsertL10",
-            "distance_mm": 3.780275254816541
-          },
-          {
-            "object": "ArcInsertL11",
-            "distance_mm": 3.780275254816541
           },
           {
             "object": "WaterHoseRoute",
@@ -21460,7 +19133,7 @@
         "passed": true
       },
       "R": {
-        "boolean_pairs_tested": 6,
+        "boolean_pairs_tested": 8,
         "overlaps": [],
         "nearby": [
           {
@@ -21472,37 +19145,32 @@
             "distance_mm": 0.0
           },
           {
+            "object": "ArcLinerOuterR0",
+            "distance_mm": 0.0
+          },
+          {
             "object": "ArcLinerInnerR1",
             "distance_mm": 0.0
           },
           {
+            "object": "ArcLinerOuterR1",
+            "distance_mm": 0.0
+          },
+          {
             "object": "BackpackShell",
-            "distance_mm": 0.4999999999999701
+            "distance_mm": 0.4999999999999694
           },
           {
             "object": "LowerTub",
             "distance_mm": 3.1065578579161786
-          },
-          {
-            "object": "ArcInsertR00",
-            "distance_mm": 3.7802752548165195
-          },
-          {
-            "object": "ArcInsertR01",
-            "distance_mm": 3.7802752548165346
-          },
-          {
-            "object": "ArcInsertR10",
-            "distance_mm": 3.7802752548165355
-          },
-          {
-            "object": "ArcInsertR11",
-            "distance_mm": 3.780275254816548
           }
         ],
         "passed": true
       }
     },
+    "housing_single_solid": true,
+    "top_axial_stop": false,
+    "axial_retention_verified": false,
     "tray_down_100": {
       "boolean_pairs_tested": 8,
       "overlaps": [],
@@ -21619,254 +19287,6 @@
       "EffectScrew3"
     ],
     "screw_continuous_sweeps": {
-      "ArcScrewL00": {
-        "boolean_pairs_tested": 8,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertL00",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcLinerOuterL0",
-            "distance_mm": 3.9456389820209914
-          },
-          {
-            "object": "ArcLinerInnerL0",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 4.445638982020991
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewL01": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertL01",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcLinerOuterL0",
-            "distance_mm": 3.9456389820209914
-          },
-          {
-            "object": "ArcLinerInnerL0",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 4.445638982020991
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewL10": {
-        "boolean_pairs_tested": 4,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertL10",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcLinerOuterL1",
-            "distance_mm": 3.9456389820209914
-          },
-          {
-            "object": "ArcLinerInnerL1",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 4.445638982020991
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewL11": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertL11",
-            "distance_mm": 0.049999999999989574
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999883
-          },
-          {
-            "object": "ArcLinerOuterL1",
-            "distance_mm": 3.9456389820209914
-          },
-          {
-            "object": "ArcLinerInnerL1",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "BackpackArcL",
-            "distance_mm": 4.445638982020991
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR00": {
-        "boolean_pairs_tested": 10,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertR00",
-            "distance_mm": 0.04999999999998295
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999467
-          },
-          {
-            "object": "ArcLinerOuterR0",
-            "distance_mm": 3.9456389820209794
-          },
-          {
-            "object": "ArcLinerInnerR0",
-            "distance_mm": 4.053396661785328
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 4.445638982021
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR01": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertR01",
-            "distance_mm": 0.04999999999995304
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999747
-          },
-          {
-            "object": "ArcLinerOuterR0",
-            "distance_mm": 3.945638982021006
-          },
-          {
-            "object": "ArcLinerInnerR0",
-            "distance_mm": 4.053396661785342
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 4.445638982021
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR10": {
-        "boolean_pairs_tested": 4,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertR10",
-            "distance_mm": 0.04999999999997258
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999726
-          },
-          {
-            "object": "ArcLinerOuterR1",
-            "distance_mm": 3.9456389820209794
-          },
-          {
-            "object": "ArcLinerInnerR1",
-            "distance_mm": 4.053396661785342
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 4.445638982021
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR11": {
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcInsertR11",
-            "distance_mm": 0.04999999999997044
-          },
-          {
-            "object": "BackpackShell",
-            "distance_mm": 0.8999999999999793
-          },
-          {
-            "object": "ArcLinerOuterR1",
-            "distance_mm": 3.945638982021006
-          },
-          {
-            "object": "ArcLinerInnerR1",
-            "distance_mm": 4.053396661785342
-          },
-          {
-            "object": "BackpackArcR",
-            "distance_mm": 4.445638982020995
-          }
-        ],
-        "passed": true
-      },
       "EffectScrew0": {
         "boolean_pairs_tested": 5,
         "overlaps": [],
@@ -21985,94 +19405,6 @@
       }
     },
     "tool_rods": {
-      "ArcScrewL00": {
-        "boolean_pairs_tested": 6,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 2.0
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewL01": {
-        "boolean_pairs_tested": 1,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL0",
-            "distance_mm": 2.0
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewL10": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 2.0
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewL11": {
-        "boolean_pairs_tested": 1,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterL1",
-            "distance_mm": 2.0
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR00": {
-        "boolean_pairs_tested": 6,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 1.9999999999999858
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR01": {
-        "boolean_pairs_tested": 1,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR0",
-            "distance_mm": 1.9999999999999858
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR10": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 2.0
-          }
-        ],
-        "passed": true
-      },
-      "ArcScrewR11": {
-        "boolean_pairs_tested": 1,
-        "overlaps": [],
-        "nearby": [
-          {
-            "object": "ArcClampOuterR1",
-            "distance_mm": 2.0
-          }
-        ],
-        "passed": true
-      },
       "EffectScrew0": {
         "boolean_pairs_tested": 3,
         "overlaps": [],
@@ -22183,33 +19515,33 @@
       }
     },
     "negative_controls": {
-      "upper_stop_retained_L": {
+      "floor_blocks_down_L": {
         "boolean_pairs_tested": 1,
         "overlaps": [
           {
-            "object": "upper_cap",
-            "overlap_mm3": 195.80236521039063
+            "object": "BackpackShell",
+            "overlap_mm3": 766.0577336237752
           }
         ],
         "nearby": [
           {
-            "object": "upper_cap",
+            "object": "BackpackShell",
             "distance_mm": 0.0
           }
         ],
         "passed": false
       },
-      "upper_stop_retained_R": {
+      "floor_blocks_down_R": {
         "boolean_pairs_tested": 1,
         "overlaps": [
           {
-            "object": "upper_cap",
-            "overlap_mm3": 195.80236526245875
+            "object": "BackpackShell",
+            "overlap_mm3": 766.0586547853256
           }
         ],
         "nearby": [
           {
-            "object": "upper_cap",
+            "object": "BackpackShell",
             "distance_mm": 0.0
           }
         ],
@@ -22270,54 +19602,6 @@
           }
         ],
         "passed": false
-      },
-      "cap_screws_retained_L": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [
-          {
-            "object": "ArcScrewL00",
-            "overlap_mm3": 6.738716241950104
-          },
-          {
-            "object": "ArcScrewL01",
-            "overlap_mm3": 6.738716241950104
-          }
-        ],
-        "nearby": [
-          {
-            "object": "ArcScrewL00",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcScrewL01",
-            "distance_mm": 0.0
-          }
-        ],
-        "passed": false
-      },
-      "cap_screws_retained_R": {
-        "boolean_pairs_tested": 2,
-        "overlaps": [
-          {
-            "object": "ArcScrewR00",
-            "overlap_mm3": 6.79547103333045
-          },
-          {
-            "object": "ArcScrewR01",
-            "overlap_mm3": 6.7954702294461775
-          }
-        ],
-        "nearby": [
-          {
-            "object": "ArcScrewR00",
-            "distance_mm": 0.0
-          },
-          {
-            "object": "ArcScrewR01",
-            "distance_mm": 0.0
-          }
-        ],
-        "passed": false
       }
     },
     "nominal_contact_areas_mm2": {
@@ -22335,8 +19619,8 @@
     },
     "passed": true,
     "physical_fit_verified": false,
-    "limits": "Cap release sampled; bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+    "limits": "Module slides up 90 mm after releasing and parking its leads; integrated rings stay fixed. No upward hard stop; friction retention unverified. Bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
+    "source_sha256": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
     "saved_and_reopened": true
   },
   "manufacturing_released": false,
@@ -22344,7 +19628,7 @@
   "assembly_paths_verified": false,
   "electrical_verified": false,
   "final_saved_audit": {
-    "native_objects_verified": 440,
+    "native_objects_verified": 412,
     "gui_visibility_verified": true
   },
   "previews_generated": true,
@@ -22359,211 +19643,78 @@
   ],
   "drive_preview_note": "Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.",
   "files_sha256": {
-    "CyberTrack.FCStd": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
-    "CyberTrack.step": "2f545f6e0d65ee6cb6680e1e897686551fe81cfe59f5e452118bb09cbb5179b4",
-    "assembly.png": "8dd541b1042f91ac18e53d3045640d7d04b3e781080ba11594c0a521e7e9242a",
-    "bottle-backpack-layout.png": "09304827259b60ccfb5d0d8d833174287fb5308a30c128c52e383fef54e178aa",
-    "bottle-backpack-service.png": "3a338421ffb48376ba4c91f71c7bbd861af8b9067cd5c6a0b92c585aa34e6231",
-    "bottle-backpack-spaces.png": "40bdb329edf6a1adfec4fb147f40a06026db3077d982498af48b0a72b4e67835",
-    "breadboard-access.png": "449686c7a6d69890a6d0ff5251e50bb5ae5f38c2bcf5d35474efc8d59a10ea38",
-    "breadboard-layout.png": "9d794ebc98d5511a461aec6c87549adece71940e60b6705d52b1312eb59b563f",
-    "breadboard-service.png": "c4941df8e96bcb92828a3740b0ea748f2109d33098d0da7e355a7d52da3fccec",
-    "breadboard-top.png": "b2c4b5bcb26f7db6788fe54694b2a3800557b6598067babe25c4e07db82016ef",
-    "breadboard-tray.png": "9a01385037a66bd9e34b7236088a103fade72a419ec19bba3d4bb09831d6af88",
-    "bubble-gun-clearance.png": "6487d82f190a92e52858cc6c9b7ec59d8df178f832f23295b7a7f666b9da6ad2",
-    "bubble-gun-component.png": "9cd8329f3480eb2fe2bd515a17cdadfae42b0abaa88295b20d8d2f601f673f11",
-    "bubble-gun-layout.png": "d1bb9a71bcd4c4b26f765be681bfad10cbfb95c4d2cad798ace4e9c996b610be",
-    "bubble-gun-mount.png": "9ff353b1c0a12b7fc8b633fa8999ad6ce7264385db1cd0182a5f6a1e16eabf9c",
-    "bubble-gun-service.png": "e3935cc3fe43c1b7d54ec2a66e3aecd1248bb99e4bd57812c4a8653a19002fe4",
-    "bubble-gun-side.png": "49651778a0491a8cbc3fd24b5254dae075964eb3ea96a02806ecb6582326ba9b",
-    "bubble-gun-spaces.png": "3a5de943f4fc0720b308c0a4b42a7157fde73d031d62d05ac920a182eb021de2",
-    "crown-effects-top.png": "a44ed086fa074e8c73300306f7ad25ba0ebb3b63ce36cd2be7ee0a2e414b54ac",
-    "crown-effects.png": "5382e101b5137bb3c82eb6f99f8dd5d4ff1f9b7a75bb308acf9f21249cbbca15",
-    "drive-bottom.png": "1225c48c61c8d6e021fa17531ee16acf05c81342cea1f546b9795aa46c840300",
-    "drive-frame.png": "8c0459e5c3940e7313ac97e5c7aaf6164a499ee8958b1fe164134ffe7edab7ba",
-    "drive-integrated-face.png": "cb276d6e8d4c7b8c379ae0e482c260562aac091eda28fe6ec8f794860f26da54",
-    "drive-mount.png": "17cdf9d3847fec41656a63251ccccd6b968c5f62ce1c0799bac064ffc29706ba",
-    "drive-service.png": "202eef9a5ab86966b3f634f9b6a0e7bfddd5e51082c8b342264679c38a1900a1",
-    "effects-backpack.png": "163eb3c7a65cb069cd2122a4eea9dd6bbf43649ee19e1ae7ec4d24acfaaef419",
-    "effects-board-mount.png": "2b4225f2976e3fe1ab4225565326c885119eb9928e31051bafc96804c5cb16ff",
-    "effects-board-service.png": "490bb902404f1001835500ac592a89a96a7672ad1dc4a286a190bbfbf465b674",
-    "effects-board-wiring.png": "3c12f80eb7a8a74749cc3d974ae84ad6d883d7387e58966ad9eb69ef167d803b",
-    "effects-clamp.png": "20014e05054d72fe36a790ea63798e55ef3814443e98dee25fcc57ea2240588a",
-    "effects-service.png": "83c4c324cd7587834d0acc1369ecc760cb64677a3469a7cae8fc32010590cde9",
-    "effects-tray-bottom.png": "1245133d930a897529d193f843e62400bed729129458fcc1dd0a40c411e2f333",
-    "effects-tray-service.png": "d6719f1b6dd4422f74ec833a9db41c0f59aae2c6341a3b6f9b5d333df672fa70",
-    "effects-tray.png": "c851bb2d9fadb539b341e8ce540e825a4c5ca9840c9bf65ee3737911238f1d04",
-    "front-effects-front.png": "115b81df183d33b3e7b21ee31cf9efe07f9d8b1547fbc6755b40590df57197c6",
-    "front-effects.png": "0913085bafbfa625873b01079c825f316d5f2eb386dd670a61f598c5cb964a8b",
-    "front.png": "30229cad605517e4a81a6f09ec44ea56cdcedd21687e43d2b02f5d4ced4a63f3",
-    "ignition-mos-layout.png": "39cfae0c60205167fb2132598699cde7b17081034ceacbfde0ff4fc2dd48426a",
-    "ignition-routing-rear.png": "74c2b95e05c31899f683b610845b0b9e4178f3625fa59f203084832454528185",
-    "ignition-routing-top.png": "47b5f33f1f275a552f1236fd96fe1a68186da0fe1b33a9cf7b8c93252ccd5d92",
-    "ignition-routing-visible.png": "8bcbe58cb3f4044d7d3fb818605fc3cd7566c2e5b98a79c00c594f54b5cc8f97",
-    "ignition-routing.png": "82f55bb7f0fc51c16367bd7f49288882c697ac32339fd38c0d76fdbcb648a73b",
-    "l298n-carrier.png": "679c8724b8153c3a90edb3e320d14186282461c2864f15afed7375e098eaa867",
-    "l298n-layout.png": "6230c32002ca7e2ca829907877e9a79e3e34ae3676a0e220c713f35a3f85d2d5",
-    "l298n-service.png": "006f751fba1ad0a79b40792b3041f54516d1e4ac084933cf6a43f8438cadae9b",
-    "l298n-side.png": "08de2ff8e42979af525d461c8d72fd03d297a06570ef46d8098675c3e342c23d",
-    "l298n-spaces.png": "55008d981b2af64b3744d96cb5b88c7d4d328b777b8c806cfd13dd6fddbc0fdb",
-    "l298n-top.png": "fd3335ba09ceb88f57e760ca3cc5fb60db7f942a53d29a22704f9c192cdd0958",
-    "layout.png": "d49607f73aae13e4bd37c7a4f06c033050c55ee10f021f4a934b0e62b5b32d8e",
-    "lower-layout.png": "35eaf94cd09de0b228eadf478c1d409a5f8c7c26ab135d4ee64f1c37313fe243",
-    "mt3608-layout.png": "c2e138f7e72de57f142b5cee7c03007f468f121701cad4652cf06299a0807444",
-    "rear-assembly.png": "8844a614cdd938333b3e4be8acc814d8c85931978528a4ab0848b47b96d2b092",
-    "rear.png": "08276bebf9db3fbf41ba22763a3c97a5780b934074d7aa83cfe6fc1d52c21948",
-    "right.png": "b82531ce89244f899342d502a5bd1226ac91fba5fedd526740ab1ed01865683a",
-    "routing.png": "a18a596703940788f2015bcfa6b1c1e3bc69ada3cbc5fc5acac8969b944e103c",
-    "service.png": "cd6d16174f3128dd2ac5d350e8b3fbee21a8ad2593e42deeba7e883f13fc6465",
-    "side-frame-extension-side.png": "6de04fb5b2bcd05018aee6ba30c13c71f189646bcfaf20d3dddd5b4f1b5b58ee",
-    "side-frame-extension.png": "8022e86806d8e0a60a1a89e2bf0401b1502973dd328cdd00f773a0770e8129b0",
-    "side.png": "144e77d55c60cdcb7055c6b0934fd7a5728ea00f3ba6973e7622dd199515ea5b",
-    "top.png": "c4adae145e20d58e8f41b17d6688ce785e463a7026b2f208bd2ea8df7057f951",
-    "ultrasonic-coexistence.png": "1b948a1e18d30c8cfe5e03a7c4a688c4157fff8621b635836db526fe4004e63c",
-    "ultrasonic-front.png": "a9c762c4dd48d8a11513837419451645a2633facb8a28c4a68a2e3e5da6cd134",
-    "ultrasonic-layout.png": "94b62dea7a26715259b675df14d8051206571c419e0093ea9e1c7a5a5c00b715",
-    "ultrasonic-service.png": "54bfe93eb80ff72810e16863e0b2dff94a08c13989709cfdb144e4a6ba84e974",
-    "ultrasonic-side.png": "cd33fcded637d106f00de80b4efabf1bfe59dcf7ae2bef84be12b4b76bb8a41e",
-    "water-gun-clearance.png": "5a1e55e293e757b69b313e94cca52e9971e8bfa7030b47e3a6041b11178605de",
-    "water-gun-component.png": "1b37abac64027613fdb5f75f1fe22f13c0fdf6e5a5a630802c35bf1a5d54607e",
-    "water-gun-layout.png": "303d6a0540bd0d1347108f9829225fa771d47ddd1a1eed38c642a86c126562e5",
-    "water-gun-mount.png": "1628ba0ef31a2cc0269e463f33c96f891841991402248fc317ff5e68a65ce7b0",
-    "water-gun-service.png": "88c2b827100b781b2f51f14adcf8d0c4fd93def01bbd43150c0ee72b72839285",
-    "water-gun-side.png": "9b07801a082e26bf8734d3ec1e8254b4f14ab5967a434c80e4925fdaa7c4d4b3",
-    "water-gun-spaces.png": "282cef7a17de8b2eea2f4aba64cca18a81f5d7ddb8d1f8adaadb916ace59f850"
-  },
-  "side_frame_extension": {
-    "revision": "0.49",
-    "baseline_revision": "0.48",
-    "baseline_sha256": "87e840cb7eb6925bca893bfce53cc220202b95ec3509218bf6f1455b6c82896a",
-    "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
-    "added": [],
-    "removed": [],
-    "unchanged_objects": 438,
-    "changed": [
-      "KeelSideFrameL",
-      "KeelSideFrameR"
-    ],
-    "frames": [
-      {
-        "name": "KeelSideFrameL",
-        "old_rear_y_mm": 8.000000000000002,
-        "new_rear_y_mm": 38.0,
-        "extension_mm": 30.0,
-        "original_material_removed_mm3": 0.0,
-        "added_volume_mm3": 585.0000000000001,
-        "thickness_mm": 1.5000000000000142,
-        "max_z_mm": 90.0,
-        "valid": true,
-        "solids": 1,
-        "unexpected_overlaps": [],
-        "nearest_to_added_material": [
-          {
-            "object": "TrackLeftShoulderLugs",
-            "category": "drive",
-            "distance_mm": 0.5
-          },
-          {
-            "object": "TrackLeftTreadPads",
-            "category": "drive",
-            "distance_mm": 1.5
-          },
-          {
-            "object": "TrackLeftRubberBand",
-            "category": "drive",
-            "distance_mm": 2.5
-          },
-          {
-            "object": "TrackLeftChevronTreads",
-            "category": "drive",
-            "distance_mm": 3.5
-          },
-          {
-            "object": "WaterGunCradle",
-            "category": "structure",
-            "distance_mm": 3.8671912754690743
-          },
-          {
-            "object": "LowerTub",
-            "category": "structure",
-            "distance_mm": 4.242640687119285
-          },
-          {
-            "object": "IgnitionRouteL",
-            "category": "clearance",
-            "distance_mm": 4.921063761843668
-          },
-          {
-            "object": "BackpackShell",
-            "category": "exterior",
-            "distance_mm": 8.0
-          }
-        ],
-        "passed": true,
-        "old_lug_clearance_mm": 0.5,
-        "new_lug_clearance_mm": 0.5
-      },
-      {
-        "name": "KeelSideFrameR",
-        "old_rear_y_mm": 8.000000000000002,
-        "new_rear_y_mm": 38.0,
-        "extension_mm": 30.0,
-        "original_material_removed_mm3": 0.0,
-        "added_volume_mm3": 585.0,
-        "thickness_mm": 1.5000000000000142,
-        "max_z_mm": 90.0,
-        "valid": true,
-        "solids": 1,
-        "unexpected_overlaps": [],
-        "nearest_to_added_material": [
-          {
-            "object": "TrackRightShoulderLugs",
-            "category": "drive",
-            "distance_mm": 0.5
-          },
-          {
-            "object": "TrackRightTreadPads",
-            "category": "drive",
-            "distance_mm": 1.5
-          },
-          {
-            "object": "TrackRightRubberBand",
-            "category": "drive",
-            "distance_mm": 2.5
-          },
-          {
-            "object": "TrackRightChevronTreads",
-            "category": "drive",
-            "distance_mm": 3.5
-          },
-          {
-            "object": "LowerTub",
-            "category": "structure",
-            "distance_mm": 4.242640687119285
-          },
-          {
-            "object": "IgnitionRouteR",
-            "category": "clearance",
-            "distance_mm": 4.921063761843668
-          },
-          {
-            "object": "BackpackShell",
-            "category": "exterior",
-            "distance_mm": 8.0
-          },
-          {
-            "object": "KeelLid",
-            "category": "structure",
-            "distance_mm": 10.165300454651277
-          }
-        ],
-        "passed": true,
-        "old_lug_clearance_mm": 0.4999999999999858,
-        "new_lug_clearance_mm": 0.5
-      }
-    ],
-    "physical_fit_verified": false,
-    "structural_strength_verified": false,
-    "passed": true
+    "CyberTrack.FCStd": "f18a3f88e8cc4255c9af163f82f83048c1d40b1fcff7511fbf8426e8d7bdc3a8",
+    "CyberTrack.step": "7c8aade45e79e55bfd661d5f13f38830011863d3ae13f1486ece122743096fd3",
+    "assembly.png": "f1b16635736ac0117046152e24ae2b07cdc821b38ee7d1c07bcec0a752087f89",
+    "bottle-backpack-layout.png": "29c1d38b7dee97253a6cb44580631de96a25470542ec78c96d14eaeb8f356297",
+    "bottle-backpack-service.png": "86977a4ec71bc95c07e6894d233e61e64b12fe06e3be6f3e283ab307d09ccb68",
+    "bottle-backpack-spaces.png": "2c58c6327949353600f1f2ca42fc9594f214a245e5773c479f79ad70bd40c987",
+    "breadboard-access.png": "ee92704024316dec8df283175d27198a8a4bbac899b7599eb85b93d21a7b3528",
+    "breadboard-layout.png": "0d48df68936d59bfef40bee3e5290de850c5fc88e6aa98c7e04401a3b593a3b4",
+    "breadboard-service.png": "3343dbefbd941ab65e8660995669a598a888b52b82fa1db8919b6ff81adb5039",
+    "breadboard-top.png": "e75aba7e1a8f4b90f94564ead02d0282ce79be601011243275ce233350162303",
+    "breadboard-tray.png": "0652a19b53cf70a758bfa72e3a034eb4ae1b664d725cdf882cdf3234feaba16c",
+    "bubble-gun-clearance.png": "5b11b6d8b951bb3c35c14441d21051751f55c4998865868cc4f62d562ec38839",
+    "bubble-gun-component.png": "e334b5f419fff2ed0ebc3aafd67b7e7712c0fe254f86a9ce1c3810b5a4a88b64",
+    "bubble-gun-layout.png": "fa4fd5b3f1a12f55e4bf0d4e4e33f29fa2951c2b0e875de60005678609dfa9af",
+    "bubble-gun-mount.png": "a930bb6c06a99ae970dd66d3173617e3502538d65ded338802b49d6dd570549f",
+    "bubble-gun-service.png": "fc31f6c9aec43172fe98a0b2adcf7800fb60d80be78ce915053aeb146ba832b1",
+    "bubble-gun-side.png": "49b469a96b23e8470177177c330fe4e14cb02d261980b3d5f4d5492ebb7391a6",
+    "bubble-gun-spaces.png": "1aea8f424c815acfe66bc4dc386d08f50b1e7f6413ad362d7f70f13a30d0e60a",
+    "crown-effects-top.png": "e5caad7ad11cb26a7e79345b0a5fe109ce054208e1e53fb4dd2c13f43c4fb570",
+    "crown-effects.png": "f17200fd083d1f37d8dcebcc03b2613a8f0f74913a20e9bf9a496c81a823830a",
+    "drive-bottom.png": "76a6b7c7b128c9c31489d794e1ac82d3c0b1bcaaa1bae2736ecf0b571bcc72b3",
+    "drive-frame.png": "f5d2b0fbf5a322a793517fdfbdae07a8b0564af4273011e3d25b769a61322ecd",
+    "drive-integrated-face.png": "1607c635853aa072cc7e10a3e8c9421b506b14223e551fc922333f11ad907dd1",
+    "drive-mount.png": "a99991fe1f522c98cce49cfb8995904209cfee7517b1df4c48fffa7e4cd2cd0b",
+    "drive-service.png": "fb1953a30759c2f2f6ee473b3d34e6e4cff16b145843ce24f46c4a3abdeff4f1",
+    "effects-backpack.png": "c835d97b2a7819e6a081d5ad79ad25d389822004ff96d8e0ad984bcaff3b682b",
+    "effects-board-mount.png": "4f8171ada7e572ad55bac1f78e247d3248f775d97f4a96d340c6a705e94d2366",
+    "effects-board-service.png": "729f7dfbba222b99908ba9adc43e21d6cf4a547e53fe093715815d6f2ae408e4",
+    "effects-board-wiring.png": "7ff5513487281ef59826c7b4d0d08cf012bec5ed36545fa661c1d3721024d0e4",
+    "effects-clamp.png": "40fcaadc5a7e336f49fb8e796c319842f3a559940654887ae9df78e29a9115bb",
+    "effects-service.png": "97269bcb1e4caad5aaf9c40f3cabd127d395bfa4b3e36c05b73503aba1d094fa",
+    "effects-tray-bottom.png": "9bd9a8d93eee638c07f0c8fd9318d1a99372eaa66f10a98bd1ce15dec4e084cd",
+    "effects-tray-service.png": "5c11f73073462ea14dbfd05541eac4e71d998c04b626ccd189929f0a528a2801",
+    "effects-tray.png": "e686a1773828dfa4d0869d85db709cb119bf08e5d8de17d921fa9aed3e07f133",
+    "front-effects-front.png": "1d4cd5af91904d6a095b81ca219a6fe9ff4f9f1cd8b7fa6e3f8b99d99098f4fb",
+    "front-effects.png": "a085fcc8ad652416df84dd71e211040bffbe8f3c2ac2fd1bb0c6600e799a4de1",
+    "front.png": "6699655335b0690dd59c60bbcaa84e2ea715391801236f60006ebd9b160a8e59",
+    "ignition-mos-layout.png": "db08ca4de76cdaa31d2f517d6a02c4fc49d0baacc839c13ed8ea19d1d5d9a406",
+    "ignition-routing-rear.png": "58d47905f332bcc30751dcee439fbedf2b99e2e7a2d5c1c808a27e636e639e24",
+    "ignition-routing-top.png": "1314654ac9f3e755a46af50fb2fe484b0744edfa5bd117422f94b2f3ebb91ea6",
+    "ignition-routing-visible.png": "336b71c146e885b198c5bd3c9087346cd07a05b4a78587a941bfb1360d488764",
+    "ignition-routing.png": "8a404434181edd2e3339aff4ebb88c35ed3c07c0ea4fd8de2de96e9bd5997762",
+    "l298n-carrier.png": "16911ea5a4c765b93b017e0a544527ea16fde5d0d9288c4dbe2ff9511995d8ab",
+    "l298n-layout.png": "53225df4fc2e4bd5d8ef8a9fbbee2f0410a8a81b8fbeaec34fcb148073f89138",
+    "l298n-service.png": "c41b48c01f80e509be1668eb4db56a23239403cde7f29171748671304f5d182a",
+    "l298n-side.png": "c1ae996a435a6c693093275a436fbecf9ec4340a9fe7201b57479339fb203b2d",
+    "l298n-spaces.png": "3a7b152e0933fa278a8934e4f340b88ca3f693809e0d53a8f1a79595042de9d6",
+    "l298n-top.png": "ddc7a19fedb1079e00aee4294f0fd8aba66505ad9550a389e5267149cdc48482",
+    "layout.png": "f789b9fc8f40e7bf5b7de0a44404d9cd1f418a077609d6140c7db39bfdb43b0e",
+    "lower-layout.png": "a60adb1e74a98324af4447669577529660d3e98ed4dda6890b7c681ad5a9f609",
+    "mt3608-layout.png": "526e85bd6debcf562aef8958795fe9a2026d85d061b0b9fe4784f404d7da2872",
+    "rear-assembly.png": "85572ab9fb52ac5146ac0358e869270c1ec9c980d8c03e7cfbf045f9896bc82e",
+    "rear.png": "062c6ddd2e790518d47ab02448d009d1deec494c0dc9a3405f5f018b4e8e6002",
+    "right.png": "f8b5aba8b945a72737cea2556158156434542a0a4b15c691dfe23882771e46b7",
+    "routing.png": "6afeeee177c4c4746e1276859ec4b20b21cd18e077f16edfbd019ee4e5f4d305",
+    "service.png": "1376551cdf97f2fd8fd7f9abf55fe2f39970d35434546b00ea6b0c150d2032c0",
+    "side-frame-extension-side.png": "a717ccc7f81f1acbc670a407349c074a58b23ff110a2a879e65a4920ac7e56f1",
+    "side-frame-extension.png": "bee3980aa3327c05ae348d4623f02dcdb436465ad62e33e5456929e97af3b9b4",
+    "side.png": "d8752c541d042d161619b78e78ce722e7b4e4955636ae22f2a66f02d1c141fc4",
+    "top.png": "866f3aa3029375d308f428f58cf190c0f5645d9cba044d38643a43157cca65b8",
+    "ultrasonic-coexistence.png": "49fb8e46a4dd0285cbb4c2da839a4043c401ce70f22ca22747e91957e7c81c87",
+    "ultrasonic-front.png": "c79c94b0308faf99ed1d450ca8c184720e3669318990b2700d25020860fa32c9",
+    "ultrasonic-layout.png": "852cb276cb1019778ce5e88c46e297f341348011b6dcfeaa13e6147dbf75833d",
+    "ultrasonic-service.png": "720703c3d15a289ede314f2d8aa8bab693a5bfd03ca238587f45ae40523bd2cf",
+    "ultrasonic-side.png": "3d5ce9ea8d4a4e397a11d9c6811ba691424da4d2c15e9a7cdac9392a25bc7e70",
+    "water-gun-clearance.png": "0ab64aafd044fbb2223fd7fda01135330ae6edb6bc774aa21a5f53f625a70b13",
+    "water-gun-component.png": "c06f87bdcb9ce6a54b518f6503e07df8c7bf75513ac90643a7c66501103594f1",
+    "water-gun-layout.png": "95bc5727a34d97dd7299940360413b0688deffc24872272d665cd75c3b06e642",
+    "water-gun-mount.png": "0d37203725083d7559e0a4b18db24ea44834d8649eee0a061c18010d124d85f4",
+    "water-gun-service.png": "c1d410ba14cf8355660ae551666f194d2c7e69b208ddbc56919ab6b1e83dab16",
+    "water-gun-side.png": "5493bc84231a2979dbf534eccdf75b29e9fd0f80701341b7989a69f0adb8db53",
+    "water-gun-spaces.png": "c6bcac38bccef18790291f7874954323cc59f5124369cb39171a327a3e901cf0",
+    "effects-housing.png": "d03621216c4f95cfe255cbdf5a6031dc975672ad9be6ecde0cc65fc4aa04da37"
   }
 }
