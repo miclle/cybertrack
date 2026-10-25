@@ -1,0 +1,42 @@
+{
+  "assets": [
+    {
+      "path": "reference/user-front-20261025.png",
+      "source": "user attachment in this chat, 2026-10-25",
+      "original_filename": "codex-clipboard-d791a36a-44b8-4a96-a964-80ea2bfb80b4.png",
+      "size_bytes": 11335927,
+      "image_size_px": [
+        2250,
+        4000
+      ],
+      "sha256": "60c612ea3e93f96d0dc9c074a37198f0c653a474421a1430ce23888b6298bbf2",
+      "unmodified_copy": true
+    },
+    {
+      "path": "reference/user-back-20261025.png",
+      "source": "user attachment in this chat, 2026-10-25",
+      "original_filename": "codex-clipboard-038ebb71-95e5-4a06-9960-0a02c743db11.png",
+      "size_bytes": 11614323,
+      "image_size_px": [
+        2250,
+        4000
+      ],
+      "sha256": "7b3a4319ced5d652e040fd0270f3a19d573903b0b472bbc1634677854a5d15c5",
+      "unmodified_copy": true
+    }
+  ],
+  "observed": [
+    "Four corner mounting holes",
+    "Heat sink at the upper end in the front photograph",
+    "Two motor terminal blocks at opposite side edges",
+    "Power screw terminal and control header at lower edge",
+    "Solder pins and joints protrude from PCB back"
+  ],
+  "not_measured": [
+    "Hole diameter and centre spacing",
+    "PCB outline and thickness",
+    "Heat sink and terminal coordinates",
+    "Backside protrusion height"
+  ],
+  "rule": "Do not infer interface dimensions from perspective photo scale."
+}

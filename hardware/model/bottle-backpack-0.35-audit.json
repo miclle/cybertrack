@@ -1,0 +1,235 @@
+{
+  "revision": "0.35",
+  "tolerance_mm3": 0.01,
+  "bottles": [
+    {
+      "bottle": "Water",
+      "dimensions_mm": [
+        48.8,
+        48.800000000000004,
+        114.0
+      ],
+      "static_overlaps": [],
+      "bottle_removal": {
+        "method": "exact vertical cylinder sweep, 150 mm upward",
+        "removed_first": [
+          "WaterServiceLid",
+          "WaterTopPad",
+          "WaterCapGrip",
+          "WaterLidMark",
+          "FillScrewWaterL",
+          "FillScrewWaterR",
+          "WaterHoseRoute",
+          "BubbleGunHoseRoute"
+        ],
+        "overlaps": [],
+        "installed_lid_blocks_removal": true
+      },
+      "lid_removal": {
+        "method": "50 mm upward conservative prism sweeps",
+        "overlaps": []
+      },
+      "screws_and_tools": [
+        {
+          "screw": "FillScrewWaterL",
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        },
+        {
+          "screw": "FillScrewWaterR",
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        }
+      ],
+      "pod_screws_and_tools": [
+        {
+          "screw": "WaterPodScrewL",
+          "removed_first": [
+            "WaterServiceLid",
+            "WaterTopPad",
+            "WaterCapGrip",
+            "WaterLidMark",
+            "FillScrewWaterL",
+            "FillScrewWaterR",
+            "WaterHoseRoute",
+            "BubbleGunHoseRoute",
+            "WaterModule",
+            "WaterBottomPad",
+            "WaterPodScrewL"
+          ],
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        },
+        {
+          "screw": "WaterPodScrewR",
+          "removed_first": [
+            "WaterServiceLid",
+            "WaterTopPad",
+            "WaterCapGrip",
+            "WaterLidMark",
+            "FillScrewWaterL",
+            "FillScrewWaterR",
+            "WaterHoseRoute",
+            "BubbleGunHoseRoute",
+            "WaterModule",
+            "WaterBottomPad",
+            "WaterPodScrewR"
+          ],
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        }
+      ],
+      "nominal_support_contact_areas": {
+        "pod_to_floor_mm2": 2161.85556864128,
+        "bottom_pad_to_bottle_mm2": 1870.378602241219,
+        "top_pad_to_bottle_mm2": 939.336203423348
+      },
+      "rear_finger_space_overlaps": [],
+      "nearby_distances": [
+        {
+          "object": "HeadShell",
+          "distance_mm": 12.236363636363645
+        },
+        {
+          "object": "RearBulkhead",
+          "distance_mm": 13.600000000000001
+        },
+        {
+          "object": "WetDivider",
+          "distance_mm": 2.600000000000001
+        },
+        {
+          "object": "L298NEnvelope",
+          "distance_mm": 17.56799375714784
+        },
+        {
+          "object": "LowerTub",
+          "distance_mm": 5.600000000000001
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 12.600000000000001
+        }
+      ],
+      "passed": true
+    },
+    {
+      "bottle": "Bubble",
+      "dimensions_mm": [
+        48.8,
+        48.800000000000004,
+        114.0
+      ],
+      "static_overlaps": [],
+      "bottle_removal": {
+        "method": "exact vertical cylinder sweep, 150 mm upward",
+        "removed_first": [
+          "BubbleServiceLid",
+          "BubbleTopPad",
+          "BubbleCapGrip",
+          "BubbleLidMark",
+          "FillScrewBubbleL",
+          "FillScrewBubbleR",
+          "WaterHoseRoute",
+          "BubbleGunHoseRoute"
+        ],
+        "overlaps": [],
+        "installed_lid_blocks_removal": true
+      },
+      "lid_removal": {
+        "method": "50 mm upward conservative prism sweeps",
+        "overlaps": []
+      },
+      "screws_and_tools": [
+        {
+          "screw": "FillScrewBubbleL",
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        },
+        {
+          "screw": "FillScrewBubbleR",
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        }
+      ],
+      "pod_screws_and_tools": [
+        {
+          "screw": "BubblePodScrewL",
+          "removed_first": [
+            "BubbleServiceLid",
+            "BubbleTopPad",
+            "BubbleCapGrip",
+            "BubbleLidMark",
+            "FillScrewBubbleL",
+            "FillScrewBubbleR",
+            "WaterHoseRoute",
+            "BubbleGunHoseRoute",
+            "BubbleModule",
+            "BubbleBottomPad",
+            "BubblePodScrewL"
+          ],
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        },
+        {
+          "screw": "BubblePodScrewR",
+          "removed_first": [
+            "BubbleServiceLid",
+            "BubbleTopPad",
+            "BubbleCapGrip",
+            "BubbleLidMark",
+            "FillScrewBubbleL",
+            "FillScrewBubbleR",
+            "WaterHoseRoute",
+            "BubbleGunHoseRoute",
+            "BubbleModule",
+            "BubbleBottomPad",
+            "BubblePodScrewR"
+          ],
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        }
+      ],
+      "nominal_support_contact_areas": {
+        "pod_to_floor_mm2": 2161.85556864128,
+        "bottom_pad_to_bottle_mm2": 1870.378602241219,
+        "top_pad_to_bottle_mm2": 939.336203423348
+      },
+      "rear_finger_space_overlaps": [],
+      "nearby_distances": [
+        {
+          "object": "HeadShell",
+          "distance_mm": 12.236363636363645
+        },
+        {
+          "object": "RearBulkhead",
+          "distance_mm": 13.600000000000001
+        },
+        {
+          "object": "WetDivider",
+          "distance_mm": 2.6000000000000014
+        },
+        {
+          "object": "L298NEnvelope",
+          "distance_mm": 17.56799375714784
+        },
+        {
+          "object": "LowerTub",
+          "distance_mm": 5.600000000000001
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 12.600000000000001
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "capacity_source": "user stated 150 mL per bottle; cylinder volume is exterior displacement, not fluid capacity",
+  "service_prerequisite": "power off; withdraw and park both hoses; remove two screws and the serviced lid with its pad; lift bottle vertically 150 mm; refill and clean off robot",
+  "physical_retention_seal_venting_material_fit_verified": false,
+  "manufacturing_released": false,
+  "source_sha256": "75b052fc19ce4e108d9e7d2edbf69f517c2ff4135bec918ec3d1f0eb64b8be5e",
+  "saved_and_reopened": true
+}

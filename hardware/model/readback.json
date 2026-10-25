@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.32",
+  "design_revision": "0.36",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "drive_mount_check": {
     "tolerance_mm3": 1e-05,
@@ -1985,7 +1985,7 @@
       "No material, strength, fatigue, thread, tolerance, sealing or manufacturing acceptance."
     ],
     "passed": true,
-    "source_sha256": "47d2b4770dd0fa009eebb576525d40cd9dd2f4fc6fd677a4db3d39c483922723",
+    "source_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
     "saved_and_reopened": true
   },
   "rear_armor_symmetry_check": {
@@ -1995,102 +1995,42 @@
     "excluded_feature": null,
     "model_modified_by_check": false,
     "solid_symmetric_difference_mm3": 0.0,
-    "maximum_mirrored_vertex_distance_mm": 8.881784197001252e-16,
+    "maximum_mirrored_vertex_distance_mm": 0.0,
     "face_pairs": [
       {
         "face": 1,
-        "mirrored_face": 1,
-        "area_mm2": 729.9999999999999,
+        "mirrored_face": 2,
+        "area_mm2": 188.99999999999997,
         "symmetric_difference_mm2": 0.0
       },
       {
         "face": 2,
-        "mirrored_face": 2,
-        "area_mm2": 5794.000000000003,
+        "mirrored_face": 1,
+        "area_mm2": 188.99999999999997,
         "symmetric_difference_mm2": 0.0
       },
       {
         "face": 3,
-        "mirrored_face": 5,
-        "area_mm2": 126.237870704476,
+        "mirrored_face": 3,
+        "area_mm2": 6929.999999999999,
         "symmetric_difference_mm2": 0.0
       },
       {
         "face": 4,
         "mirrored_face": 4,
-        "area_mm2": 3967.58490566038,
+        "area_mm2": 6929.999999999999,
         "symmetric_difference_mm2": 0.0
       },
       {
         "face": 5,
-        "mirrored_face": 3,
-        "area_mm2": 126.237870704476,
+        "mirrored_face": 5,
+        "area_mm2": 329.99999999999994,
         "symmetric_difference_mm2": 0.0
       },
       {
         "face": 6,
-        "mirrored_face": 10,
-        "area_mm2": 396.2272075463773,
-        "symmetric_difference_mm2": 0.0
-      },
-      {
-        "face": 7,
-        "mirrored_face": 9,
-        "area_mm2": 115.65465835840769,
-        "symmetric_difference_mm2": 0.0
-      },
-      {
-        "face": 8,
-        "mirrored_face": 8,
-        "area_mm2": 608.0417300337834,
-        "symmetric_difference_mm2": 0.0
-      },
-      {
-        "face": 9,
-        "mirrored_face": 7,
-        "area_mm2": 115.65465835840769,
-        "symmetric_difference_mm2": 0.0
-      },
-      {
-        "face": 10,
         "mirrored_face": 6,
-        "area_mm2": 396.2272075463773,
-        "symmetric_difference_mm2": 0.0
-      },
-      {
-        "face": 11,
-        "mirrored_face": 15,
-        "area_mm2": 104.07402136197834,
-        "symmetric_difference_mm2": 0.0
-      },
-      {
-        "face": 12,
-        "mirrored_face": 14,
-        "area_mm2": 32.984845004941285,
-        "symmetric_difference_mm2": 0.0
-      },
-      {
-        "face": 13,
-        "mirrored_face": 13,
-        "area_mm2": 32.0,
-        "symmetric_difference_mm2": 0.0
-      },
-      {
-        "face": 14,
-        "mirrored_face": 12,
-        "area_mm2": 32.984845004941285,
-        "symmetric_difference_mm2": 0.0
-      },
-      {
-        "face": 15,
-        "mirrored_face": 11,
-        "area_mm2": 104.0740213540115,
-        "symmetric_difference_mm2": 0.0
-      },
-      {
-        "face": 16,
-        "mirrored_face": 16,
-        "area_mm2": 376.4905660377358,
+        "area_mm2": 329.99999999999994,
         "symmetric_difference_mm2": 0.0
       }
     ],
@@ -2099,11 +2039,11 @@
     "tolerance_mm3": 1e-05,
     "passed": true,
     "physical_or_manufacturing_verified": false,
-    "source_sha256": "47d2b4770dd0fa009eebb576525d40cd9dd2f4fc6fd677a4db3d39c483922723",
+    "source_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
     "saved_and_reopened": true
   },
   "top_feed_check": {
-    "source": "user confirmed both guns are self-priming and all liquid hoses enter from the top",
+    "source": "user specified two capped 150 mL bottles OD48.8 x114; top hose entry retained",
     "self_priming_user_confirmed": {
       "water": true,
       "bubble": true
@@ -2113,78 +2053,267 @@
       {
         "reservoir": "Water",
         "top_axis_xy_mm": [
-          -24,
-          49
+          28.0,
+          65.0
         ],
-        "dip_end_z_mm": 45.0,
-        "nominal_bottom_reference_z_mm": 40,
-        "nominal_bottom_gap_mm": 5,
-        "top_passage_candidate_diameter_mm": 9.0,
-        "pod_side_wall_symmetric_difference_mm3": 0.0,
-        "vertical_dip_segment_missing_volume_mm3": 0.0,
+        "external_hose_start_z_mm": 154.5,
+        "internal_dip_space_z_mm": [
+          45,
+          154.5
+        ],
+        "printed_lid_present": false,
         "top_part_clearance_overlaps": [],
         "top_part_clearance_gaps": [
           {
-            "object": "WaterPodCap",
-            "distance_mm": 2.9999999999999973
+            "object": "WaterPod",
+            "distance_mm": 38.37199499635118
           },
           {
-            "object": "WaterFillPlug",
-            "distance_mm": 0.4999999999999964
+            "object": "WaterRetentionBand",
+            "distance_mm": 40.08004491015448
           },
           {
-            "object": "WaterServiceLid",
-            "distance_mm": 0.4999999999999961
-          },
-          {
-            "object": "WaterCapGrip",
-            "distance_mm": 0.4999999999999923
+            "object": "WaterStrapClosure",
+            "distance_mm": 40.598152667332045
           }
         ],
-        "hose_maximum_y_mm": 72.5000001,
+        "vertical_entry_missing_volume_mm3": 0.0,
         "passed": true
       },
       {
         "reservoir": "Bubble",
         "top_axis_xy_mm": [
-          24,
-          49
+          -28.0,
+          65.0
         ],
-        "dip_end_z_mm": 45.0,
-        "nominal_bottom_reference_z_mm": 40,
-        "nominal_bottom_gap_mm": 5,
-        "top_passage_candidate_diameter_mm": 9.0,
-        "pod_side_wall_symmetric_difference_mm3": 0.0,
-        "vertical_dip_segment_missing_volume_mm3": 0.0,
+        "external_hose_start_z_mm": 154.5,
+        "internal_dip_space_z_mm": [
+          45,
+          154.5
+        ],
+        "printed_lid_present": false,
         "top_part_clearance_overlaps": [],
         "top_part_clearance_gaps": [
           {
-            "object": "BubblePodCap",
-            "distance_mm": 2.9999999999999973
+            "object": "BubblePod",
+            "distance_mm": 38.37199499635118
           },
           {
-            "object": "BubbleFillPlug",
-            "distance_mm": 0.49999999999999706
+            "object": "BubbleRetentionBand",
+            "distance_mm": 40.08004491015448
           },
           {
-            "object": "BubbleServiceLid",
-            "distance_mm": 0.4999999999999957
-          },
-          {
-            "object": "BubbleCapGrip",
-            "distance_mm": 0.4999999999999923
+            "object": "BubbleStrapClosure",
+            "distance_mm": 40.598152667332045
           }
         ],
-        "hose_maximum_y_mm": 51.00000010000001,
+        "vertical_entry_missing_volume_mm3": 0.0,
         "passed": true
       }
     ],
-    "former_rear_hole_missing_volume_mm3": 0.0,
-    "lid_service_prerequisite": "withdraw both suction hoses before opening either reservoir lid; flexible hose handling not validated",
-    "liquid_allocations": "original cylindrical fluid reservations minus the dip-tube review corridor; not measured capacity",
+    "lid_service_prerequisite": "withdraw and park target hose, open and park target band, lift target bottle; opposite bottle and hose stay installed",
+    "bottle_envelope_uncut": true,
+    "bottle_cap_fitting_and_vent_not_designed": true,
+    "internal_hose_is_clearance_only": true,
     "suction_lift_air_seal_priming_and_physical_fit_verified": false,
     "passed": true,
-    "source_sha256": "47d2b4770dd0fa009eebb576525d40cd9dd2f4fc6fd677a4db3d39c483922723",
+    "source_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
+    "saved_and_reopened": true
+  },
+  "bottle_backpack": {
+    "component_readback": {
+      "source": "user specified product dimensions on 2026-10-25; not independently measured",
+      "diameter_mm": 48.8,
+      "height_with_cap_mm": 114,
+      "nominal_capacity_ml": 150,
+      "local_axes": "cylinder axis +Z, bottom centre origin; no scale",
+      "cap_neck_shoulder_and_material_known": false,
+      "saved_and_reopened": true,
+      "checks": [
+        {
+          "format": "FCStd",
+          "valid": true,
+          "solids": 1,
+          "symmetric_difference_mm3": 0.0,
+          "passed": true
+        },
+        {
+          "format": "STEP",
+          "valid": true,
+          "solids": 1,
+          "symmetric_difference_mm3": 0.0,
+          "passed": true
+        }
+      ],
+      "files_sha256": {
+        "Bottle150ml-envelope.FCStd": "257f1ab6d44dda9d5100b694645ff89318e012b11f24c9500e923820419a2e1a",
+        "Bottle150ml-envelope.step": "64bb204d93836e387a397ae1b490b443986b2d51c6413dca62b2778da8fe8bbc"
+      },
+      "passed": true,
+      "physical_fit_verified": false
+    },
+    "capacity_ml_each": 150,
+    "quantity": 2,
+    "bottle_diameter_mm": 48.8,
+    "height_with_cap_mm": 114,
+    "basis": "user specified product dimensions, not independently measured; maximum diameter including cap assumed",
+    "centres_xy_mm": [
+      [
+        28.0,
+        65.0
+      ],
+      [
+        -28.0,
+        65.0
+      ]
+    ],
+    "bottle_z_range_mm": [
+      40,
+      154
+    ],
+    "shell_z_range_mm": [
+      34,
+      124.0
+    ],
+    "shell_height_mm": 90.0,
+    "exposed_envelope_height_mm": 30.0,
+    "retention": "releasable hook-and-loop band candidate, friction-based; holding force not verified",
+    "physical_fit_verified": false,
+    "manufacturing_released": false
+  },
+  "bottle_backpack_check": {
+    "revision": "0.36",
+    "tolerance_mm3": 0.01,
+    "bottles": [
+      {
+        "bottle": "Water",
+        "dimensions_mm": [
+          48.8,
+          48.800000000000004,
+          114.0
+        ],
+        "static_overlaps": [],
+        "bottle_removal": {
+          "method": "exact vertical cylinder sweep, 150 mm upward",
+          "removed_first": [
+            "WaterRetentionBand",
+            "WaterStrapClosure",
+            "WaterHoseRoute"
+          ],
+          "opposite_bottle_and_hose_retained": true,
+          "opposite_hose_distance_mm": 29.599999999999998,
+          "overlaps": [],
+          "own_connected_hose_blocks_removal": true
+        },
+        "rear_finger_space_overlaps": [],
+        "strap_release_access_overlaps": [],
+        "pod_screws_and_tools": [
+          {
+            "screw": "WaterPodScrewL",
+            "removed_first": [
+              "WaterRetentionBand",
+              "WaterStrapClosure",
+              "WaterHoseRoute",
+              "WaterModule",
+              "WaterBottomPad",
+              "WaterPodScrewL"
+            ],
+            "tool_overlaps": [],
+            "removal_overlaps": []
+          },
+          {
+            "screw": "WaterPodScrewR",
+            "removed_first": [
+              "WaterRetentionBand",
+              "WaterStrapClosure",
+              "WaterHoseRoute",
+              "WaterModule",
+              "WaterBottomPad",
+              "WaterPodScrewR"
+            ],
+            "tool_overlaps": [],
+            "removal_overlaps": []
+          }
+        ],
+        "nominal_support_contact_areas": {
+          "pod_to_floor_mm2": 2161.85556864128,
+          "bottom_pad_to_bottle_mm2": 1870.378602241219
+        },
+        "retention": "band tension and friction, not a geometric upward stop; flexible peeling/parking and holding force unverified",
+        "passed": true
+      },
+      {
+        "bottle": "Bubble",
+        "dimensions_mm": [
+          48.8,
+          48.800000000000004,
+          114.0
+        ],
+        "static_overlaps": [],
+        "bottle_removal": {
+          "method": "exact vertical cylinder sweep, 150 mm upward",
+          "removed_first": [
+            "BubbleRetentionBand",
+            "BubbleStrapClosure",
+            "BubbleGunHoseRoute"
+          ],
+          "opposite_bottle_and_hose_retained": true,
+          "opposite_hose_distance_mm": 29.1,
+          "overlaps": [],
+          "own_connected_hose_blocks_removal": true
+        },
+        "rear_finger_space_overlaps": [],
+        "strap_release_access_overlaps": [],
+        "pod_screws_and_tools": [
+          {
+            "screw": "BubblePodScrewL",
+            "removed_first": [
+              "BubbleRetentionBand",
+              "BubbleStrapClosure",
+              "BubbleGunHoseRoute",
+              "BubbleModule",
+              "BubbleBottomPad",
+              "BubblePodScrewL"
+            ],
+            "tool_overlaps": [],
+            "removal_overlaps": []
+          },
+          {
+            "screw": "BubblePodScrewR",
+            "removed_first": [
+              "BubbleRetentionBand",
+              "BubbleStrapClosure",
+              "BubbleGunHoseRoute",
+              "BubbleModule",
+              "BubbleBottomPad",
+              "BubblePodScrewR"
+            ],
+            "tool_overlaps": [],
+            "removal_overlaps": []
+          }
+        ],
+        "nominal_support_contact_areas": {
+          "pod_to_floor_mm2": 2161.85556864128,
+          "bottom_pad_to_bottle_mm2": 1870.378602241219
+        },
+        "retention": "band tension and friction, not a geometric upward stop; flexible peeling/parking and holding force unverified",
+        "passed": true
+      }
+    ],
+    "shell_height_mm": 90.0,
+    "shell_z_range_mm": [
+      34.0,
+      124.0
+    ],
+    "exposed_bottle_envelope_height_mm": 30.0,
+    "removed_lid_hardware_remaining": [],
+    "passed": true,
+    "capacity_source": "150 mL from product image; 48.8 is lower diameter, maximum capped envelope remains provisional",
+    "service_prerequisite": "power off; withdraw and park only the target hose; peel/open and park only the target band; lift target bottle 150 mm; opposite bottle/hose stay installed; refill off robot",
+    "no_tools_for_routine_refill_design_intent": true,
+    "physical_retention_seal_venting_material_fit_verified": false,
+    "manufacturing_released": false,
+    "source_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
     "saved_and_reopened": true
   },
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
@@ -2843,13 +2972,13 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 134098.4208176048,
+      "volume_mm3": 126757.62528611711,
       "bbox_mm": [
         -87.0,
         -101.0,
         27.999999999999993,
         87.0,
-        74.0,
+        95.0,
         94.0
       ],
       "native_brep_matches": false,
@@ -2987,13 +3116,13 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 45060.82237026778,
+      "volume_mm3": 46112.95222881814,
       "bbox_mm": [
         -65.0,
         -101.00000000000001,
-        69.0,
+        31.199999899999998,
         65.00000000000003,
-        74.0,
+        28.0,
         97.0
       ],
       "native_brep_matches": false,
@@ -4476,474 +4605,6 @@
       "symmetric_difference_mm3": 0.0
     },
     {
-      "name": "WaterPod",
-      "label": "喷水背包内部独立液体舱",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 28594.77633297429,
-      "bbox_mm": [
-        -44.0,
-        29.0,
-        40.0,
-        -3.9999999999999987,
-        69.0,
-        122.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "WaterPodCap",
-      "label": "喷水内舱盖占位",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 3569.477573008722,
-      "bbox_mm": [
-        -44.0,
-        29.0,
-        121.9999999,
-        -3.9999999999999987,
-        69.0,
-        127.60000009999999
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BubblePod",
-      "label": "泡泡背包内部独立液体舱",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 28594.776332974303,
-      "bbox_mm": [
-        4.0,
-        29.0,
-        40.0,
-        44.0,
-        69.0,
-        122.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BubblePodCap",
-      "label": "泡泡内舱盖占位",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 3569.477573008722,
-      "bbox_mm": [
-        4.0,
-        29.0,
-        121.9999999,
-        44.0,
-        69.0,
-        127.60000009999999
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BackpackShell",
-      "label": "双液体舱共用切面背包壳",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 27666.135285693174,
-      "bbox_mm": [
-        -52.0000001,
-        23.9999999,
-        96.9999999,
-        52.0000001,
-        81.0000001,
-        128.0000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "WaterServiceLid",
-      "label": "喷水背包顶部独立切角维护盖",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 5127.655774828657,
-      "bbox_mm": [
-        -45.0,
-        29.0,
-        128.0,
-        -2.9999999999999987,
-        73.0,
-        131.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "WaterCapGrip",
-      "label": "喷水低矮桥形维护握位",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 712.108569264362,
-      "bbox_mm": [
-        -34.0,
-        42.0,
-        131.0,
-        -14.0,
-        58.0,
-        135.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "WaterLidMark",
-      "label": "喷水维护盖分区色条",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 32.39999999999969,
-      "bbox_mm": [
-        -33.0,
-        64.0,
-        131.0,
-        -15.0,
-        67.0,
-        131.6
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BubbleServiceLid",
-      "label": "泡泡背包顶部独立切角维护盖",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 5127.655774828657,
-      "bbox_mm": [
-        2.9999999999999987,
-        29.0,
-        128.0,
-        45.0,
-        73.0,
-        131.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BubbleCapGrip",
-      "label": "泡泡低矮桥形维护握位",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 712.108569264362,
-      "bbox_mm": [
-        14.0,
-        42.0,
-        131.0,
-        34.0,
-        58.0,
-        135.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BubbleLidMark",
-      "label": "泡泡维护盖分区色条",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 32.39999999999969,
-      "bbox_mm": [
-        15.0,
-        64.0,
-        131.0,
-        33.0,
-        67.0,
-        131.6
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackFrameL",
-      "label": "左背包嵌板护框",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 1400.0000000000002,
-      "bbox_mm": [
-        7.999999999999999,
-        78.99999999999999,
-        100.0,
-        43.0,
-        84.0,
-        123.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackInsetL",
-      "label": "左背包封闭内衬",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 949.9999999999999,
-      "bbox_mm": [
-        11.0,
-        77.0,
-        103.0,
-        40.0,
-        79.0,
-        120.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackLouverL0",
-      "label": "背包浅槽饰条 L0",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.0,
-      "bbox_mm": [
-        14.0,
-        79.0,
-        105.0,
-        37.0,
-        81.0,
-        107.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackLouverL1",
-      "label": "背包浅槽饰条 L1",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.0,
-      "bbox_mm": [
-        14.0,
-        79.0,
-        110.0,
-        37.0,
-        81.0,
-        112.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackLouverL2",
-      "label": "背包浅槽饰条 L2",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 88.0,
-      "bbox_mm": [
-        14.0,
-        79.0,
-        115.0,
-        37.0,
-        81.0,
-        117.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackMarkL",
-      "label": "背包液体区识别条 L",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 11.699999999999886,
-      "bbox_mm": [
-        19.0,
-        84.0,
-        100.5,
-        32.0,
-        84.6,
-        102.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackFrameR",
-      "label": "右背包嵌板护框",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 1400.0000000000002,
-      "bbox_mm": [
-        -43.0,
-        78.99999999999999,
-        100.0,
-        -7.999999999999999,
-        84.0,
-        123.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackInsetR",
-      "label": "右背包封闭内衬",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 949.9999999999999,
-      "bbox_mm": [
-        -40.0,
-        77.0,
-        103.0,
-        -11.0,
-        79.0,
-        120.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackLouverR0",
-      "label": "背包浅槽饰条 R0",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 87.99999999999999,
-      "bbox_mm": [
-        -37.0,
-        79.0,
-        105.0,
-        -14.0,
-        81.0,
-        107.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackLouverR1",
-      "label": "背包浅槽饰条 R1",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 87.99999999999999,
-      "bbox_mm": [
-        -37.0,
-        79.0,
-        110.0,
-        -14.0,
-        81.0,
-        112.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackLouverR2",
-      "label": "背包浅槽饰条 R2",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 87.99999999999999,
-      "bbox_mm": [
-        -37.0,
-        79.0,
-        115.0,
-        -14.0,
-        81.0,
-        117.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "PackMarkR",
-      "label": "背包液体区识别条 R",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 11.699999999999886,
-      "bbox_mm": [
-        -32.0,
-        84.0,
-        100.5,
-        -19.0,
-        84.6,
-        102.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BackpackSpine",
-      "label": "背包至底座的中央脊梁护甲",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 3828.000000000001,
-      "bbox_mm": [
-        -6.0,
-        79.0,
-        60.0,
-        6.0,
-        85.0,
-        128.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "RearBaseArmor",
-      "label": "底座斜面后护甲／背包下支座",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 38872.75471700474,
-      "bbox_mm": [
-        -47.0000001,
-        73.9999999,
-        33.9999999,
-        47.0000001,
-        82.0000001,
-        97.0000001
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "RearLowerInset",
-      "label": "后底座内凹视觉分层",
-      "category": "exterior",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 360.0,
-      "bbox_mm": [
-        -32.0,
-        82.0,
-        42.0,
-        32.0,
-        83.0,
-        48.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
       "name": "ChestAudioPanel",
       "label": "低位前舱内嵌饰板",
       "category": "exterior",
@@ -5119,42 +4780,6 @@
         60.0,
         -23.0,
         64.5
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "WaterModule",
-      "label": "喷水液体区占位／扣除顶部吸管预留",
-      "category": "envelope",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 52778.756580308516,
-      "bbox_mm": [
-        -40.0,
-        33.0,
-        43.0,
-        -7.999999999999998,
-        65.0,
-        113.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BubbleModule",
-      "label": "泡泡液体区占位／扣除顶部吸管预留",
-      "category": "envelope",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 52778.756580308516,
-      "bbox_mm": [
-        8.0,
-        33.0,
-        43.0,
-        40.0,
-        65.0,
-        113.0
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -5718,228 +5343,12 @@
       "symmetric_difference_mm3": 0.0
     },
     {
-      "name": "WaterFillPlug",
-      "label": "喷水补液盖导向塞",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 302.1049743471554,
-      "bbox_mm": [
-        -30.8,
-        42.2,
-        124.3,
-        -17.2,
-        55.8,
-        128.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "WaterFillSeal",
-      "label": "喷水补液口端面密封垫占位",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 40.21238596594994,
-      "bbox_mm": [
-        -33.0,
-        40.0,
-        127.6,
-        -14.999999999999998,
-        58.0,
-        128.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "FillInsertWaterR",
-      "label": "嵌件候选 FillInsertWaterR",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 20.52245400957529,
-      "bbox_mm": [
-        -38.0,
-        67.0,
-        125.0,
-        -34.0,
-        71.0,
-        128.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "FillScrewWaterR",
-      "label": "M2.5 级紧固件候选 FillScrewWaterR",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 36.3986317889277,
-      "bbox_mm": [
-        -38.2,
-        66.8,
-        125.2,
-        -33.8,
-        71.2,
-        130.7
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "FillInsertWaterL",
-      "label": "嵌件候选 FillInsertWaterL",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 20.522454009575306,
-      "bbox_mm": [
-        -14.0,
-        67.0,
-        125.0,
-        -10.0,
-        71.0,
-        128.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "FillScrewWaterL",
-      "label": "M2.5 级紧固件候选 FillScrewWaterL",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 36.398631788927716,
-      "bbox_mm": [
-        -14.2,
-        66.8,
-        125.2,
-        -9.8,
-        71.2,
-        130.7
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BubbleFillPlug",
-      "label": "泡泡补液盖导向塞",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 302.1049743471555,
-      "bbox_mm": [
-        17.2,
-        42.2,
-        124.3,
-        30.8,
-        55.8,
-        128.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BubbleFillSeal",
-      "label": "泡泡补液口端面密封垫占位",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 40.21238596594994,
-      "bbox_mm": [
-        15.0,
-        40.0,
-        127.6,
-        33.0,
-        58.0,
-        128.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "FillInsertBubbleR",
-      "label": "嵌件候选 FillInsertBubbleR",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 20.5224540095753,
-      "bbox_mm": [
-        10.0,
-        67.0,
-        125.0,
-        14.0,
-        71.0,
-        128.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "FillScrewBubbleR",
-      "label": "M2.5 级紧固件候选 FillScrewBubbleR",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 36.398631788927716,
-      "bbox_mm": [
-        9.8,
-        66.8,
-        125.2,
-        14.2,
-        71.2,
-        130.7
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "FillInsertBubbleL",
-      "label": "嵌件候选 FillInsertBubbleL",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 20.52245400957529,
-      "bbox_mm": [
-        34.0,
-        67.0,
-        125.0,
-        38.0,
-        71.0,
-        128.0
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "FillScrewBubbleL",
-      "label": "M2.5 级紧固件候选 FillScrewBubbleL",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 36.3986317889277,
-      "bbox_mm": [
-        33.8,
-        66.8,
-        125.2,
-        38.2,
-        71.2,
-        130.7
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
       "name": "PowerCableRoute",
       "label": "电源插头及中央线束／电机维护时拔下并移开",
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 8597.093945761788,
+      "volume_mm3": 8988.371370802108,
       "bbox_mm": [
         -10.0,
         -23.0,
@@ -6011,14 +5420,14 @@
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 9101.164329388619,
+      "volume_mm3": 6106.452833907988,
       "bbox_mm": [
-        -26.500000100000005,
-        -115.74830022719505,
-        45.0,
+        25.49999989999999,
+        -115.74830022719503,
+        108.87787971425243,
         101.5000001,
-        72.5000001,
-        151.5000001
+        67.5000001,
+        176.5000001
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -6785,14 +6194,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 23298.980683234877,
+      "volume_mm3": 15632.519254804449,
       "bbox_mm": [
-        -28.000000100000005,
+        23.99999989999999,
         -117.24830022719505,
-        45.0,
+        107.37787971425243,
         103.0000001,
-        74.0000001,
-        153.0000001
+        69.0000001,
+        178.0000001
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -7217,14 +6626,14 @@
       "category": "envelope",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 5453.109517570661,
+      "volume_mm3": 3951.4282291547393,
       "bbox_mm": [
         -101.0000001,
         -60.862617557143054,
-        45.0,
-        26.00000010000001,
-        51.00000010000001,
-        163.0000001
+        97.55506243546688,
+        -25.99999989999999,
+        67.0000001,
+        176.0000001
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -7235,14 +6644,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 21812.43807028265,
+      "volume_mm3": 15805.712916618966,
       "bbox_mm": [
         -103.0000001,
         -61.03692904263836,
-        45.0,
-        28.00000010000001,
-        53.00000010000001,
-        165.0000001
+        95.55506243546688,
+        -23.99999989999999,
+        69.0000001,
+        178.0000001
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -7757,7 +7166,7 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 50161.3610120989,
+      "volume_mm3": 49883.43252823574,
       "bbox_mm": [
         -65.8,
         -96.8,
@@ -7768,18 +7177,1170 @@
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NEnvelope",
+      "label": "L298N 驱动板竖装包络／46.2×43.5×27.5",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 55266.75,
+      "bbox_mm": [
+        -21.75,
+        -4.0,
+        32.0,
+        21.75,
+        23.5,
+        78.2
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NClampNutL0",
+      "label": "M2级侧压螺母占位 L0",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 17.155202908500264,
+      "bbox_mm": [
+        26.199999999999996,
+        19.249481317257946,
+        34.69,
+        27.8,
+        23.250518682742054,
+        39.31
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NClampScrewL0",
+      "label": "M2级可调侧压螺钉 L0",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 30.12876134880333,
+      "bbox_mm": [
+        22.25,
+        19.45,
+        35.2,
+        30.9,
+        23.05,
+        38.8
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NSidePadL0",
+      "label": "绝缘侧压垫候选 L0",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4.5,
+      "bbox_mm": [
+        21.75,
+        19.75,
+        35.5,
+        22.25,
+        22.75,
+        38.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NRearPadL0",
+      "label": "四角后挡软垫候选 L0",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4.5,
+      "bbox_mm": [
+        18.5,
+        23.5,
+        35.5,
+        21.5,
+        24.0,
+        38.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NClampNutL1",
+      "label": "M2级侧压螺母占位 L1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 17.15520290850026,
+      "bbox_mm": [
+        26.199999999999996,
+        19.249481317257946,
+        72.19,
+        27.8,
+        23.250518682742054,
+        76.81
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NClampScrewL1",
+      "label": "M2级可调侧压螺钉 L1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 30.128761348803287,
+      "bbox_mm": [
+        22.25,
+        19.45,
+        72.7,
+        30.9,
+        23.05,
+        76.3
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NSidePadL1",
+      "label": "绝缘侧压垫候选 L1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4.5,
+      "bbox_mm": [
+        21.75,
+        19.75,
+        73.0,
+        22.25,
+        22.75,
+        76.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NRearPadL1",
+      "label": "四角后挡软垫候选 L1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4.5,
+      "bbox_mm": [
+        18.5,
+        23.5,
+        73.0,
+        21.5,
+        24.0,
+        76.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NBottomPadL",
+      "label": "PCB下沿承托垫候选 L",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 7.000000000000006,
+      "bbox_mm": [
+        18.0,
+        21.0,
+        31.2,
+        21.5,
+        23.5,
+        32.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NClampNutR0",
+      "label": "M2级侧压螺母占位 R0",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 17.12362745231,
+      "bbox_mm": [
+        -27.800000100000002,
+        19.249481217257944,
+        34.6899999,
+        -26.19999989999999,
+        23.250518782742056,
+        39.3100001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NClampScrewR0",
+      "label": "M2级可调侧压螺钉 R0",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 30.385545682889678,
+      "bbox_mm": [
+        -30.900000100000003,
+        19.449999899999998,
+        35.1999999,
+        -22.249999899999995,
+        23.050000100000002,
+        38.8000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NSidePadR0",
+      "label": "绝缘侧压垫候选 R0",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4.5,
+      "bbox_mm": [
+        -22.2500001,
+        19.7499999,
+        35.4999999,
+        -21.7499999,
+        22.7500001,
+        38.5000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NRearPadR0",
+      "label": "四角后挡软垫候选 R0",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4.5,
+      "bbox_mm": [
+        -21.5000001,
+        23.4999999,
+        35.4999999,
+        -18.4999999,
+        24.0000001,
+        38.5000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NClampNutR1",
+      "label": "M2级侧压螺母占位 R1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 17.12362745231002,
+      "bbox_mm": [
+        -27.800000100000002,
+        19.249481217257944,
+        72.1899999,
+        -26.19999989999999,
+        23.250518782742056,
+        76.8100001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NClampScrewR1",
+      "label": "M2级可调侧压螺钉 R1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 30.38554568284444,
+      "bbox_mm": [
+        -30.900000100000003,
+        19.449999899999995,
+        72.69999990000001,
+        -22.249999899999995,
+        23.050000100000005,
+        76.30000009999999
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NSidePadR1",
+      "label": "绝缘侧压垫候选 R1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4.5,
+      "bbox_mm": [
+        -22.2500001,
+        19.7499999,
+        72.9999999,
+        -21.7499999,
+        22.7500001,
+        76.0000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NRearPadR1",
+      "label": "四角后挡软垫候选 R1",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 4.5,
+      "bbox_mm": [
+        -21.5000001,
+        23.4999999,
+        72.9999999,
+        -18.4999999,
+        24.0000001,
+        76.0000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NBottomPadR",
+      "label": "PCB下沿承托垫候选 R",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 7.000000000000006,
+      "bbox_mm": [
+        -21.5000001,
+        20.9999999,
+        31.199999899999998,
+        -17.9999999,
+        23.5000001,
+        32.0000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NCarrier",
+      "label": "L298N 开口可拆托框／四点侧压",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3220.6053513417464,
+      "bbox_mm": [
+        -28.75000010000001,
+        -17.0000001,
+        29.19999989999999,
+        28.75,
+        24.5000001,
+        78.2000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NMountInsertR",
+      "label": "吊架盲孔嵌件候选 R",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 40.639642566837495,
+      "bbox_mm": [
+        -22.0,
+        -14.0,
+        34.2,
+        -18.0,
+        -10.0,
+        39.8
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NMountScrewR",
+      "label": "底部托框锁紧螺钉 R",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 68.63437470297617,
+      "bbox_mm": [
+        -22.2,
+        -14.2,
+        27.6,
+        -17.8,
+        -9.8,
+        39.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NMountInsertL",
+      "label": "吊架盲孔嵌件候选 L",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 40.639642566837495,
+      "bbox_mm": [
+        18.0,
+        -14.0,
+        34.2,
+        22.0,
+        -10.0,
+        39.8
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NMountScrewL",
+      "label": "底部托框锁紧螺钉 L",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 68.63437470297617,
+      "bbox_mm": [
+        17.8,
+        -14.2,
+        27.6,
+        22.2,
+        -9.8,
+        39.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NAirSpaceL",
+      "label": "进风及上排风几何预留 L",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3057.4999999999995,
+      "bbox_mm": [
+        11.0,
+        -22.0,
+        28.8,
+        16.0,
+        24.0,
+        104.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NMotorWireSpaceL",
+      "label": "电机端子引线侧廊候选 L",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2411.5,
+      "bbox_mm": [
+        22.25,
+        -7.0,
+        42.0,
+        25.5,
+        19.5,
+        70.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NAirSpaceR",
+      "label": "进风及上排风几何预留 R",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3057.5,
+      "bbox_mm": [
+        -16.0,
+        -22.0,
+        28.8,
+        -11.0,
+        24.0,
+        104.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NMotorWireSpaceR",
+      "label": "电机端子引线侧廊候选 R",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 2411.5,
+      "bbox_mm": [
+        -25.5000001,
+        -7.0000001,
+        41.9999999,
+        -22.2499999,
+        19.5000001,
+        70.0000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "L298NConnectorSpace",
+      "label": "下沿电源与控制接线区候选",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3679.999999999999,
+      "bbox_mm": [
+        -16.0,
+        -17.0,
+        31.5,
+        16.0,
+        -5.5,
+        41.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BackpackShell",
+      "label": "150 mL双瓶低位护舱／90 mm高／绑带操作缺口",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 64998.00000000007,
+      "bbox_mm": [
+        -58.0,
+        35.0,
+        34.0,
+        58.0,
+        95.0,
+        124.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "RearBaseArmor",
+      "label": "双瓶背包下后护甲／X镜面对称",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 20790.0,
+      "bbox_mm": [
+        -55.0,
+        92.0,
+        34.0,
+        55.0,
+        95.0,
+        97.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BackpackSpine",
+      "label": "背包后中央识别脊条",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 888.0,
+      "bbox_mm": [
+        -3.0,
+        95.0,
+        50.0,
+        3.0,
+        97.0,
+        124.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterModule",
+      "label": "清水成品瓶完整含盖包络 Ø48.8×114／150 mL",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 213223.16065549897,
+      "bbox_mm": [
+        3.6000000000000014,
+        40.6,
+        40.0,
+        52.4,
+        89.4,
+        154.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterPodInsertL",
+      "label": "清水底托M3嵌件候选",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 20.35752039526187,
+      "bbox_mm": [
+        42.9,
+        62.9,
+        31.0,
+        47.1,
+        67.1,
+        34.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterPodScrewL",
+      "label": "清水底托M3候选沉孔螺钉",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 76.64778081346793,
+      "bbox_mm": [
+        42.2,
+        62.2,
+        32.0,
+        47.8,
+        67.8,
+        39.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterPodInsertR",
+      "label": "清水底托M3嵌件候选001",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 20.357520395261865,
+      "bbox_mm": [
+        8.9,
+        62.9,
+        31.0,
+        13.1,
+        67.1,
+        34.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterPodScrewR",
+      "label": "清水底托M3候选沉孔螺钉001",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 76.64778081346795,
+      "bbox_mm": [
+        8.2,
+        62.2,
+        32.0,
+        13.8,
+        67.8,
+        39.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterPod",
+      "label": "清水开窗底托／前部绑带导槽／双M3固定",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 17522.26493252445,
+      "bbox_mm": [
+        1.5999999000000014,
+        38.5999999,
+        33.9999999,
+        54.4000001,
+        91.4000001,
+        122.0000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterBottomPad",
+      "label": "清水底部软垫候选1 mm",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1870.3786022412191,
+      "bbox_mm": [
+        3.6000000000000014,
+        40.6,
+        39.0,
+        52.4,
+        89.4,
+        40.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterSidePad0",
+      "label": "清水环形侧垫候选1 mm",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1564.5131414877196,
+      "bbox_mm": [
+        2.6000000000000014,
+        39.6,
+        50.0,
+        53.4,
+        90.4,
+        60.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterSidePad1",
+      "label": "清水环形侧垫候选1 mm001",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1564.5131414877196,
+      "bbox_mm": [
+        2.6000000000000014,
+        39.6,
+        90.0,
+        53.4,
+        90.4,
+        100.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterRetentionBand",
+      "label": "清水可释放环绕绑带候选12×1／张紧防滑未验",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1877.4157697852643,
+      "bbox_mm": [
+        2.6000000000000014,
+        39.6,
+        108.0,
+        53.4,
+        90.4,
+        120.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterStrapClosure",
+      "label": "清水魔术贴搭接及后拉片候选／非刚性卡扣",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 317.9065365922452,
+      "bbox_mm": [
+        18.0,
+        88.34866163187945,
+        108.0,
+        38.00000000000001,
+        96.0,
+        120.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterLidMark",
+      "label": "清水低位护舱识别条",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 28.799999999999713,
+      "bbox_mm": [
+        20.0,
+        95.0,
+        96.0,
+        36.0,
+        95.6,
+        99.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterStrapAccessSpace",
+      "label": "清水后拉片20×23.8×20操作预留",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 9519.999999999998,
+      "bbox_mm": [
+        18.0,
+        96.2,
+        104.0,
+        38.0,
+        120.0,
+        124.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterBottleRemovalSpace",
+      "label": "清水整瓶向上150 mm连续抽出空间",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 493779.9509916819,
+      "bbox_mm": [
+        3.6000000000000014,
+        40.6,
+        40.0,
+        52.4,
+        89.4,
+        304.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterFingerSpace",
+      "label": "清水后侧指槽18×22.4×28预留",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 11289.600000000004,
+      "bbox_mm": [
+        19.0,
+        89.6,
+        128.0,
+        37.0,
+        112.0,
+        156.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "WaterDipTubeSpace",
+      "label": "清水瓶内吸管Ø8候选通道／非瓶壁开孔",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 5504.070329089318,
+      "bbox_mm": [
+        24.0,
+        61.0,
+        45.0,
+        32.0,
+        69.0,
+        154.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleModule",
+      "label": "泡泡液成品瓶完整含盖包络 Ø48.8×114／150 mL",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 213223.16065549897,
+      "bbox_mm": [
+        -52.4,
+        40.6,
+        40.0,
+        -3.6000000000000014,
+        89.4,
+        154.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubblePodInsertL",
+      "label": "泡泡液底托M3嵌件候选",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 20.357520395261865,
+      "bbox_mm": [
+        -13.1,
+        62.9,
+        31.0,
+        -8.9,
+        67.1,
+        34.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubblePodScrewL",
+      "label": "泡泡液底托M3候选沉孔螺钉",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 76.64778081346795,
+      "bbox_mm": [
+        -13.8,
+        62.2,
+        32.0,
+        -8.2,
+        67.8,
+        39.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubblePodInsertR",
+      "label": "泡泡液底托M3嵌件候选001",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 20.35752039526187,
+      "bbox_mm": [
+        -47.1,
+        62.9,
+        31.0,
+        -42.9,
+        67.1,
+        34.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubblePodScrewR",
+      "label": "泡泡液底托M3候选沉孔螺钉001",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 76.64778081346792,
+      "bbox_mm": [
+        -47.8,
+        62.2,
+        32.0,
+        -42.2,
+        67.8,
+        39.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubblePod",
+      "label": "泡泡液开窗底托／前部绑带导槽／双M3固定",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 17522.26493252445,
+      "bbox_mm": [
+        -54.4000001,
+        38.5999999,
+        33.9999999,
+        -1.5999999000000014,
+        91.4000001,
+        122.0000001
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleBottomPad",
+      "label": "泡泡液底部软垫候选1 mm",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1870.3786022412191,
+      "bbox_mm": [
+        -52.4,
+        40.6,
+        39.0,
+        -3.5999999999999996,
+        89.4,
+        40.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleSidePad0",
+      "label": "泡泡液环形侧垫候选1 mm",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1564.5131414877196,
+      "bbox_mm": [
+        -53.4,
+        39.6,
+        50.0,
+        -2.5999999999999996,
+        90.4,
+        60.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleSidePad1",
+      "label": "泡泡液环形侧垫候选1 mm001",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1564.5131414877196,
+      "bbox_mm": [
+        -53.4,
+        39.6,
+        90.0,
+        -2.5999999999999996,
+        90.4,
+        100.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleRetentionBand",
+      "label": "泡泡液可释放环绕绑带候选12×1／张紧防滑未验",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 1877.415769785268,
+      "bbox_mm": [
+        -53.4,
+        39.6,
+        108.0,
+        -2.5999999999999996,
+        90.4,
+        120.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleStrapClosure",
+      "label": "泡泡液魔术贴搭接及后拉片候选／非刚性卡扣",
+      "category": "structure",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 317.9065365922452,
+      "bbox_mm": [
+        -38.0,
+        88.34866163187945,
+        108.0,
+        -17.999999999999993,
+        96.0,
+        120.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleLidMark",
+      "label": "泡泡液低位护舱识别条",
+      "category": "exterior",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 28.799999999999713,
+      "bbox_mm": [
+        -36.0,
+        95.0,
+        96.0,
+        -20.0,
+        95.6,
+        99.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleStrapAccessSpace",
+      "label": "泡泡液后拉片20×23.8×20操作预留",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 9519.999999999998,
+      "bbox_mm": [
+        -38.0,
+        96.2,
+        104.0,
+        -18.0,
+        120.0,
+        124.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleBottleRemovalSpace",
+      "label": "泡泡液整瓶向上150 mm连续抽出空间",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 493779.9509916819,
+      "bbox_mm": [
+        -52.4,
+        40.6,
+        40.0,
+        -3.5999999999999996,
+        89.4,
+        304.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleFingerSpace",
+      "label": "泡泡液后侧指槽18×22.4×28预留",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 11289.600000000004,
+      "bbox_mm": [
+        -37.0,
+        89.6,
+        128.0,
+        -19.0,
+        112.0,
+        156.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleDipTubeSpace",
+      "label": "泡泡液瓶内吸管Ø8候选通道／非瓶壁开孔",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 5504.070329089318,
+      "bbox_mm": [
+        -32.0,
+        61.0,
+        45.0,
+        -24.0,
+        69.0,
+        154.5
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     }
   ],
   "assembly_size_xyz_mm": [
     228.0,
-    222.33128436689225,
+    234.33128436689225,
     203.00000000248912
   ],
   "step_readback": {
     "valid": true,
-    "solids": 872,
-    "expected_solids": 872,
-    "volume_difference_mm3": 0.8230783210601658,
+    "solids": 882,
+    "expected_solids": 882,
+    "volume_difference_mm3": 0.2627964233979583,
     "bbox_difference_mm": 9.697487257653847e-11,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -7788,7 +8349,7 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 911,
+    "boolean_pairs_tested": 909,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
@@ -8266,7 +8827,7 @@
           "method": "exact continuous capsule sweep of 6 mm straight hose section only",
           "measured_hose_od_mm": 5,
           "seat_diameter_mm": 5.6,
-          "minimum_tube_support_gap_mm": 0.29999999999999716,
+          "minimum_tube_support_gap_mm": 0.2999999999998045,
           "overlaps": [],
           "passed": true
         },
@@ -8281,7 +8842,7 @@
           "method": "exact continuous capsule sweep of 6 mm straight hose section only",
           "measured_hose_od_mm": 5,
           "seat_diameter_mm": 5.6,
-          "minimum_tube_support_gap_mm": 0.2999999999999567,
+          "minimum_tube_support_gap_mm": 0.2999999999999468,
           "overlaps": [],
           "passed": true
         },
@@ -8573,24 +9134,24 @@
         "bend_centreline_radius_mm": 8,
         "points_mm": [
           [
-            24,
-            49,
-            45
+            -28,
+            65,
+            154.5
           ],
           [
-            24,
-            49,
-            161
+            -28,
+            65,
+            174
           ],
           [
             -99,
-            49,
-            161
+            65,
+            174
           ],
           [
             -99,
             10,
-            161
+            174
           ],
           [
             -99,
@@ -9124,24 +9685,19 @@
     ],
     "water_hose_points_world_mm": [
       [
-        -24,
-        49,
-        45
+        28,
+        65,
+        154.5
       ],
       [
-        -24,
-        49,
-        149
-      ],
-      [
-        -24,
-        70,
-        149
+        28,
+        65,
+        174
       ],
       [
         99,
-        70,
-        149
+        65,
+        174
       ],
       [
         99,
@@ -9176,24 +9732,24 @@
     ],
     "bubble_hose_points_world_mm": [
       [
-        24,
-        49,
-        45
+        -28,
+        65,
+        154.5
       ],
       [
-        24,
-        49,
-        161
+        -28,
+        65,
+        174
       ],
       [
         -99,
-        49,
-        161
+        65,
+        174
       ],
       [
         -99,
         10,
-        161
+        174
       ],
       [
         -99,
@@ -9245,7 +9801,7 @@
           "BottomCoverScrew4",
           "BottomCoverScrew5"
         ],
-        "boolean_pairs_tested": 1,
+        "boolean_pairs_tested": 3,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -9282,7 +9838,7 @@
           "BottomCoverScrew4",
           "BottomCoverScrew5"
         ],
-        "boolean_pairs_tested": 50,
+        "boolean_pairs_tested": 49,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -9308,7 +9864,7 @@
           "CrownScrewRFront",
           "CrownScrewRRear"
         ],
-        "boolean_pairs_tested": 17,
+        "boolean_pairs_tested": 23,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -9363,7 +9919,7 @@
           "WaterHoseRoute",
           "ControllerWireRoute"
         ],
-        "boolean_pairs_tested": 144,
+        "boolean_pairs_tested": 150,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -9379,27 +9935,16 @@
           [
             0.0,
             0.0,
-            6.0
-          ],
-          [
-            0.0,
-            12.0,
-            6.0
-          ],
-          [
-            0.0,
-            12.0,
-            40.0
+            150.0
           ]
         ],
-        "pose_count": 24,
+        "pose_count": 8,
         "removed_first": [
-          "FillScrewWaterR",
-          "FillScrewWaterL",
-          "WaterHoseRoute",
-          "BubbleGunHoseRoute"
+          "WaterRetentionBand",
+          "WaterStrapClosure",
+          "WaterHoseRoute"
         ],
-        "boolean_pairs_tested": 19,
+        "boolean_pairs_tested": 23,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -9415,27 +9960,16 @@
           [
             0.0,
             0.0,
-            6.0
-          ],
-          [
-            0.0,
-            12.0,
-            6.0
-          ],
-          [
-            0.0,
-            12.0,
-            40.0
+            150.0
           ]
         ],
-        "pose_count": 24,
+        "pose_count": 8,
         "removed_first": [
-          "FillScrewBubbleR",
-          "FillScrewBubbleL",
-          "WaterHoseRoute",
+          "BubbleRetentionBand",
+          "BubbleStrapClosure",
           "BubbleGunHoseRoute"
         ],
-        "boolean_pairs_tested": 19,
+        "boolean_pairs_tested": 23,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -9780,7 +10314,7 @@
           "ControllerMountScrew10",
           "ControllerMountScrew11"
         ],
-        "boolean_pairs_tested": 94,
+        "boolean_pairs_tested": 101,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -9831,7 +10365,7 @@
           "ControllerRetainerScrewFront",
           "ControllerRetainerScrewRear"
         ],
-        "boolean_pairs_tested": 23,
+        "boolean_pairs_tested": 25,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -9883,7 +10417,7 @@
           "ControllerRetainerScrewFront",
           "ControllerRetainerScrewRear"
         ],
-        "boolean_pairs_tested": 8,
+        "boolean_pairs_tested": 11,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -9937,7 +10471,7 @@
           "CrownScrewRRear",
           "ControllerWireRoute"
         ],
-        "boolean_pairs_tested": 13,
+        "boolean_pairs_tested": 24,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -9991,7 +10525,7 @@
           "CrownScrewRRear",
           "ControllerWireRoute"
         ],
-        "boolean_pairs_tested": 13,
+        "boolean_pairs_tested": 24,
         "overlaps": [],
         "continuous_translation_sweep": null,
         "passed": true
@@ -10203,6 +10737,569 @@
     "passed": true,
     "scope": "USB with crown removed; antenna assumed external review region excludes host board",
     "actual_plug_access_or_rf_verified": false
+  },
+  "l298n_layout": {
+    "component_readback": {
+      "source": "user-provided dimensions, 2026-10-25",
+      "product_url": "https://item.jd.com/10231029535273.html",
+      "size_lwh_mm": [
+        46.2,
+        43.5,
+        27.5
+      ],
+      "local_axes": "length X, width Y, height Z; origin at minimum corner",
+      "geometry": "single full rectangular envelope; no inferred holes or internal details",
+      "saved_and_reopened": true,
+      "checks": [
+        {
+          "format": "FCStd",
+          "valid": true,
+          "solid_count": 1,
+          "bbox_mm": [
+            0.0,
+            0.0,
+            0.0,
+            46.2,
+            43.5,
+            27.5
+          ],
+          "symmetric_difference_mm3": 0.0,
+          "passed": true
+        },
+        {
+          "format": "STEP",
+          "valid": true,
+          "solid_count": 1,
+          "bbox_mm": [
+            0.0,
+            0.0,
+            0.0,
+            46.2,
+            43.5,
+            27.5
+          ],
+          "symmetric_difference_mm3": 0.0,
+          "passed": true
+        }
+      ],
+      "files_sha256": {
+        "L298N-envelope.FCStd": "b627c619bb240b4050dbcd73c3b0144d5f8721c21cce2130d0e5a8174a0d80bd",
+        "L298N-envelope.step": "2f3c4be3069e5dd0359a970b4f5d814ac1d966be8ae40c0b27e7f4d4317a0a6b"
+      },
+      "passed": true,
+      "physical_fit_verified": false
+    },
+    "origin_world_mm": [
+      21.75,
+      23.5,
+      32.0
+    ],
+    "local_to_world_axes": [
+      "+Z",
+      "-X",
+      "-Y"
+    ],
+    "scale": 1,
+    "placement_rotation_xyzw": [
+      0.5,
+      -0.5,
+      0.5,
+      0.5
+    ],
+    "bbox_mm": [
+      -21.75,
+      -4.0,
+      32.0,
+      21.75,
+      23.5,
+      78.2
+    ],
+    "cable_route_points_mm": [
+      [
+        0,
+        -14,
+        50
+      ],
+      [
+        0,
+        -14,
+        84
+      ],
+      [
+        0,
+        6,
+        84
+      ],
+      [
+        0,
+        6,
+        142
+      ],
+      [
+        0,
+        -5,
+        142
+      ]
+    ],
+    "mounting": "vertical candidate between motors; removable cassette added by l298n_mount; PCB contact still unverified",
+    "hole_pattern_assumed": false,
+    "thermal_verified": false,
+    "physical_fit_verified": false
+  },
+  "l298n_check": {
+    "size_lwh_mm": [
+      46.2,
+      43.5,
+      27.5
+    ],
+    "bbox_mm": [
+      -21.75,
+      -4.0,
+      32.0,
+      21.75,
+      23.5,
+      78.2
+    ],
+    "shape_valid": true,
+    "solid_count": 1,
+    "placement_difference_mm3": 0.0,
+    "outside_central_dry_bay_mm3": 0.0,
+    "overlap_tolerance_mm3": 0.01,
+    "objects_checked": 327,
+    "overlaps": [],
+    "reserved_space_overlaps": [],
+    "nearby_distances": [
+      {
+        "object": "L298NSidePadL0",
+        "category": "structure",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "L298NRearPadL0",
+        "category": "structure",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "L298NSidePadL1",
+        "category": "structure",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "L298NRearPadL1",
+        "category": "structure",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "L298NBottomPadL",
+        "category": "structure",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "L298NSidePadR0",
+        "category": "structure",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "L298NRearPadR0",
+        "category": "structure",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "L298NSidePadR1",
+        "category": "structure",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "L298NRearPadR1",
+        "category": "structure",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "L298NBottomPadR",
+        "category": "structure",
+        "distance_mm": 0.0
+      },
+      {
+        "object": "L298NClampScrewR0",
+        "category": "structure",
+        "distance_mm": 0.49999999999999645
+      },
+      {
+        "object": "L298NClampScrewR1",
+        "category": "structure",
+        "distance_mm": 0.49999999999999645
+      },
+      {
+        "object": "L298NClampScrewL0",
+        "category": "structure",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "L298NClampScrewL1",
+        "category": "structure",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "L298NCarrier",
+        "category": "structure",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "L298NMotorWireSpaceL",
+        "category": "clearance",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "L298NMotorWireSpaceR",
+        "category": "clearance",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "KeelLid",
+        "category": "structure",
+        "distance_mm": 0.7999999999999972
+      },
+      {
+        "object": "PowerCableRoute",
+        "category": "envelope",
+        "distance_mm": 1.0
+      },
+      {
+        "object": "RearBulkhead",
+        "category": "structure",
+        "distance_mm": 1.5
+      }
+    ],
+    "removal": {
+      "method": "exact rectangular continuous sweep, 80 mm down",
+      "removed_first": [
+        "BottomServiceCover",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "L298NMountScrewR",
+        "L298NMountScrewL"
+      ],
+      "co_moving_excluded_from_obstacles": [
+        "L298NCarrier",
+        "L298NClampNutL0",
+        "L298NClampScrewL0",
+        "L298NSidePadL0",
+        "L298NRearPadL0",
+        "L298NClampNutL1",
+        "L298NClampScrewL1",
+        "L298NSidePadL1",
+        "L298NRearPadL1",
+        "L298NBottomPadL",
+        "L298NClampNutR0",
+        "L298NClampScrewR0",
+        "L298NSidePadR0",
+        "L298NRearPadR0",
+        "L298NClampNutR1",
+        "L298NClampScrewR1",
+        "L298NSidePadR1",
+        "L298NRearPadR1",
+        "L298NBottomPadR"
+      ],
+      "disconnect_first": "actual driver leads; release modeled cassette mounting screws when present",
+      "existing_power_route_retained_as_obstacle": true,
+      "sweep_bbox_mm": [
+        -21.75,
+        -4.0,
+        -48.0,
+        21.75,
+        23.5,
+        78.2
+      ],
+      "overlaps": [],
+      "passed": true,
+      "closed_cover_negative_control_mm3": 3349.4999999999986,
+      "closed_cover_blocks": true
+    },
+    "passed": true,
+    "limits": [
+      "Dimensions inclusion, PCB corner contacts and exact terminal positions remain unverified.",
+      "Minimum nominal gaps are not thermal, insulation, tolerance or physical acceptance.",
+      "Bare envelope checked with co-moving cassette removed from obstacles; see mount check for complete cassette, screws and tool shafts; real wires/fingers remain unverified."
+    ],
+    "physical_fit_verified": false,
+    "manufacturing_released": false,
+    "thermal_verified": false,
+    "source_after_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
+    "saved_and_reopened": true
+  },
+  "l298n_mount": {
+    "revision": "0.34",
+    "photo_manifest": "hardware/components/L298N/reference/photos.json",
+    "mount_method": "open cassette with four adjustable edge-pressure pads; no assumed PCB mounting-hole pattern",
+    "interface_assumptions": [
+      "PCB lower-edge and corner contact regions require actual confirmation.",
+      "Overall supplied height may or may not include solder tails; no protrusion height inferred.",
+      "Screw sizes, pad thicknesses and connector corridors are proposed design values."
+    ],
+    "mount_screw_centres_xy_mm": [
+      [
+        -20,
+        -12
+      ],
+      [
+        20,
+        -12
+      ]
+    ],
+    "mount_screw_type": "2 x M2.5-class candidate",
+    "clamp_screw_type": "4 x M2-class candidate",
+    "upper_stop_gap_mm": 0.8,
+    "vent_open_area_mm2": {
+      "bottom_total": 50,
+      "top_total": 30
+    },
+    "rear_wet_bulkhead_perforated": false,
+    "bottom_cover_carries_driver": false,
+    "mount_holes_verified": false,
+    "pcb_contact_verified": false,
+    "thermal_verified": false,
+    "physical_fit_verified": false
+  },
+  "l298n_mount_check": {
+    "revision": "0.34",
+    "tolerance_mm3": 0.01,
+    "spaces": [
+      {
+        "name": "L298NAirSpaceL",
+        "bbox_mm": [
+          11.0,
+          -22.0,
+          28.8,
+          16.0,
+          24.0,
+          104.0
+        ],
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "name": "L298NMotorWireSpaceL",
+        "bbox_mm": [
+          22.25,
+          -7.0,
+          42.0,
+          25.5,
+          19.5,
+          70.0
+        ],
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "name": "L298NAirSpaceR",
+        "bbox_mm": [
+          -16.0,
+          -22.0,
+          28.8,
+          -11.0,
+          24.0,
+          104.0
+        ],
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "name": "L298NMotorWireSpaceR",
+        "bbox_mm": [
+          -25.5000001,
+          -7.0000001,
+          41.9999999,
+          -22.2499999,
+          19.5000001,
+          70.0000001
+        ],
+        "overlaps": [],
+        "passed": true
+      },
+      {
+        "name": "L298NConnectorSpace",
+        "bbox_mm": [
+          -16.0,
+          -17.0,
+          31.5,
+          16.0,
+          -5.5,
+          41.5
+        ],
+        "overlaps": [],
+        "passed": true
+      }
+    ],
+    "cassette_removal": {
+      "method": "80 mm downward continuous conservative union of primitive boxes; all final carrier material contained",
+      "moving": [
+        "L298NEnvelope",
+        "L298NCarrier",
+        "L298NClampNutL0",
+        "L298NClampScrewL0",
+        "L298NSidePadL0",
+        "L298NRearPadL0",
+        "L298NClampNutL1",
+        "L298NClampScrewL1",
+        "L298NSidePadL1",
+        "L298NRearPadL1",
+        "L298NBottomPadL",
+        "L298NClampNutR0",
+        "L298NClampScrewR0",
+        "L298NSidePadR0",
+        "L298NRearPadR0",
+        "L298NClampNutR1",
+        "L298NClampScrewR1",
+        "L298NSidePadR1",
+        "L298NRearPadR1",
+        "L298NBottomPadR"
+      ],
+      "removed_first": [
+        "BottomServiceCover",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "L298NMountScrewR",
+        "L298NMountScrewL"
+      ],
+      "disconnect_first": "motor, power and control wires; connectors and flexible service loops are not measured",
+      "overlaps": [],
+      "closed_cover_blocks": true,
+      "passed": true
+    },
+    "mount_screws_and_tools": [
+      {
+        "name": "L298NMountScrewR",
+        "sweep_overlaps": [],
+        "tool_overlaps": [],
+        "tool_diameter_mm": 3.6,
+        "passed": true
+      },
+      {
+        "name": "L298NMountScrewL",
+        "sweep_overlaps": [],
+        "tool_overlaps": [],
+        "tool_diameter_mm": 3.6,
+        "passed": true
+      }
+    ],
+    "connector_access": {
+      "overlaps": [],
+      "passed": true
+    },
+    "vent_wire_reservation_overlap_mm3": 0.0,
+    "bench_board_removal": {
+      "method": "80 mm up after cassette removed from robot and side pads released",
+      "overlaps": [],
+      "passed": true
+    },
+    "cassette_nearby_distances": [
+      {
+        "object": "MotorL",
+        "distance_mm": 2.9567718883945053
+      },
+      {
+        "object": "MotorR",
+        "distance_mm": 2.9567718883945053
+      },
+      {
+        "object": "RearBulkhead",
+        "distance_mm": 0.5
+      },
+      {
+        "object": "PowerBank",
+        "distance_mm": 6.26418390534633
+      },
+      {
+        "object": "PowerCableRoute",
+        "distance_mm": 1.0
+      },
+      {
+        "object": "BottomServiceCover",
+        "distance_mm": 0.399999999999995
+      }
+    ],
+    "interfaces": {
+      "carrier_to_hanger_contact_area_mm2": 83.68494446807327,
+      "screw_head_contacts": [
+        {
+          "name": "L298NMountScrewR",
+          "area_mm2": 9.047768469787897
+        },
+        {
+          "name": "L298NMountScrewL",
+          "area_mm2": 9.04778684233862
+        }
+      ],
+      "passed": true
+    },
+    "sweep_carrier_uncovered_volume_mm3": 0.0,
+    "vent_openings": [
+      {
+        "side": -1,
+        "opening": "intake",
+        "remaining_material_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "side": -1,
+        "opening": "exhaust",
+        "remaining_material_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "side": 1,
+        "opening": "intake",
+        "remaining_material_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "side": 1,
+        "opening": "exhaust",
+        "remaining_material_mm3": 0.0,
+        "passed": true
+      }
+    ],
+    "pcb_corner_contact_verified": false,
+    "connector_fit_verified": false,
+    "thermal_verified": false,
+    "physical_fit_verified": false,
+    "manufacturing_released": false,
+    "passed": true,
+    "source_after_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
+    "saved_and_reopened": true,
+    "carrier_export": {
+      "coordinate_frame": "assembly coordinates, no scale or relocation",
+      "checks": [
+        {
+          "format": "FCStd",
+          "valid": true,
+          "solids": 1,
+          "symmetric_difference_mm3": 0.0,
+          "passed": true
+        },
+        {
+          "format": "STEP",
+          "valid": true,
+          "solids": 1,
+          "symmetric_difference_mm3": 0.0,
+          "passed": true
+        }
+      ],
+      "files_sha256": {
+        "hardware/model/parts/L298N-carrier-0.34.FCStd": "2cc1c928301ee71d02be3da2c71febabfbc61e4619855198860dd7263d4824b8",
+        "hardware/model/parts/L298N-carrier-0.34.step": "d8a0e502d22b74ca6655839c7176947428823ff4b95e8a32ee48157d8c72e1ec"
+      },
+      "passed": true,
+      "manufacturing_released": false
+    }
   },
   "speaker_check": {
     "source": "user-provided dimensions, 2026-10-24",
@@ -10633,7 +11730,7 @@
     "passed": true,
     "mounts_leads_acoustics_verified": false,
     "physical_fit_verified": false,
-    "source_after_sha256": "47d2b4770dd0fa009eebb576525d40cd9dd2f4fc6fd677a4db3d39c483922723",
+    "source_after_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
     "saved_and_reopened": true
   },
   "ultrasonic_check": {
@@ -10861,7 +11958,7 @@
     "mounting_verified": false,
     "physical_fit_verified": false,
     "acoustic_verified": false,
-    "source_after_sha256": "47d2b4770dd0fa009eebb576525d40cd9dd2f4fc6fd677a4db3d39c483922723",
+    "source_after_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
     "saved_and_reopened": true
   },
   "manufacturing_released": false,
@@ -10869,54 +11966,63 @@
   "assembly_paths_verified": false,
   "electrical_verified": false,
   "final_saved_audit": {
-    "native_objects_verified": 304,
+    "native_objects_verified": 328,
     "gui_visibility_verified": true
   },
   "previews_generated": true,
   "drive_preview_note": "Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.",
   "files_sha256": {
-    "CyberTrack.FCStd": "47d2b4770dd0fa009eebb576525d40cd9dd2f4fc6fd677a4db3d39c483922723",
-    "CyberTrack.step": "f678a583c0a055ea25e691b5a82e2d7ab63ce79a61ee64c4aee37fbb5578de4f",
-    "arc-layout.png": "4a403a147351846042674c9a42cba7f7e05f74f90de738d776929bbcb0530246",
-    "arc-top.png": "d3d3140ebd50b51a8c8b9d5bf54f7fefc81b8e5447c7f625b9e25b341b798b2c",
-    "assembly.png": "fbb243f3d18da904547330a81164cabf11dd91c56206e71ef62d262d84621737",
-    "bubble-gun-clearance.png": "fec75df45a07e4e521a4d7403c50875e5c6eb078ea43a493a7fa0e31ce587b95",
-    "bubble-gun-component.png": "b2ebf26653314b32e2671b82b047ab4ed7fadcbf563a2e86327d554d873fd7e8",
-    "bubble-gun-layout.png": "433ce73937282715ef950b1224ac8d05e75d550d4a1d946fbdbb5af15030fd04",
-    "bubble-gun-mount.png": "31d4e80b29da97c5859ed813fd86034b2d724bfcc91b2191a2431e752dfa0b88",
-    "bubble-gun-service.png": "52db6571f4b7028e57efc879361b0b1122286435d0a3388c3ede1bd44b63c93d",
-    "bubble-gun-side.png": "2fc6c97385a0d4fc73073058dd37af41aa62fb60505060718ad3f9393f002b79",
-    "bubble-gun-spaces.png": "f4bdcdb699a0dbb9cd38a1d3ab94bc1a7d3c8aae1c5531ae5f469634a278397c",
-    "controller-access.png": "3d7c89a66f6fc607578defbad2a3ba3f244392893b0abcad674d731bf155d45b",
-    "controller-layout.png": "c075837dba72d87887d82af421221b027380de7ace8a5b532fee8b7458ff1dcb",
-    "controller-service.png": "8e78b09fb32a141f011e06681a79226d09151dfa96ee6bc64b316b05db238066",
-    "crown-effects-top.png": "80a7e7f53d5c0f1ad7cc336fbc3cc60fae1af83521e974fc0dc196ff42e2d690",
-    "crown-effects.png": "2b25f9135ba713887eef1f2fa4cdf1c7c8c95082cfbf8b5a0602509a710b3166",
-    "drive-bottom.png": "b6462b47ff857291070424825526a7dcacfada8eb81f6800f6b3c6f1f834a1e0",
-    "drive-frame.png": "76f8fc3927d4525a03447cca466b2fac74c2389bedeb1596f4f1197250ed71c8",
-    "drive-integrated-face.png": "54c48ea437da9eb25955a9eb8784be0111d579ebc382820b918aa8b45cc122d3",
-    "drive-mount.png": "dc0ddf76cec44672305fbbf9d1a92c660cd072246391437adbc57b91655204af",
-    "drive-service.png": "2909dfdca1796866b1f21befb934ba39e7d0f37de9ddbb070b4ce490b48e8ce9",
-    "front.png": "e6fdc5a706064e8dd704b992ff413e9272866bfa8564b8196fe8af18d4e6155c",
-    "layout.png": "a2c285b021e547e62d40001e2f8ff7cb8263c2016c589ed02df1bd6d07021e25",
-    "lower-layout.png": "a9213dc8870623ad6ef5c0aa324c8b0bc1332276db5a63f57f0222ca63f6defd",
-    "rear-assembly.png": "a16fedf12749aad53dcdce875d2769fe0923fcbe082f13f757da323a0f3f538e",
-    "rear.png": "86032619e4874e5512f75f537943f7cdfaecef64349acd1b0b94612aed90ab59",
-    "right.png": "47d5087d2750432bf97c08751924196092f891fe11d0e4ef2a1d06705f86f66c",
-    "routing.png": "1afd876fb4d0bdb144274c0e18b4f9b50ff25761c40cbf66bbff359cacc06f55",
-    "service.png": "f4028bc65ee717977ac0b0d60f38828a604d75d6e1af160ececc1859fa6b6e47",
-    "side.png": "7642c5c2a3f01daa5353b0ffaefb819ade8b7b7695dd7ca1439c52acbe59da67",
-    "speaker-layout.png": "891428e8268de79a6b1ca0fb573e1d90f682867bb719e46b9a41f4b639199589",
-    "speaker-top.png": "56f91f1b66b27a68e1aae1572ac69ea207fb356d99bffd2a1aff28aebf2b8313",
-    "top.png": "90b4d37999daef5176fc036cbf3fb2094d9324e8b608e3c3a187cde8c7aebbb9",
-    "ultrasonic-front.png": "04702e200b9361834d8f805aad2509085756dbc7e9ce9bbbcdfeac991090c37b",
-    "ultrasonic-layout.png": "ee27a5c03fe71ad4421266a2f5a1967f1c86eb11c052937d4a0f98dba323c197",
-    "water-gun-clearance.png": "81094b468cdb07790b04048434234a512b2c72dc311766172480870168123d9c",
-    "water-gun-component.png": "88193f60c58537e2767cc67cc3cc1e6719b9928a6864110aba6f23e5f2e6a17f",
-    "water-gun-layout.png": "6055372825bf9d8e73dfe9fe5ce96434bd143895412045e6e50ce548c1906177",
-    "water-gun-mount.png": "01f98a92729bc77dee7715c030e87dae88547fe202b871f869bc87c56577e0b8",
-    "water-gun-service.png": "8f98444179abde9aa6caa2fb6bf742a72a1af0a5b4b3c5952dbdd4fad7007e8f",
-    "water-gun-side.png": "84bb1f044bbcf665697a7e14e5b497f3e047a6ef4b1c8c44de380588fb06369f",
-    "water-gun-spaces.png": "3cbf393f8d0de1abfa682eb67ccab1d50ccd2bf1508596c0768f785e79c0c153"
+    "CyberTrack.FCStd": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
+    "CyberTrack.step": "c3852aaf6631c331f02b394f65229ba041a463188238097e4534292b695bba52",
+    "arc-layout.png": "569176eb7184988dcc9882fc6621927c2e92d010bb77bc51b4b5cf6901e39676",
+    "arc-top.png": "1c9c1f243586e03f47933fcae0e47fdb30ff1018c2136dc4d40622c93e23d218",
+    "assembly.png": "9047f0e9591ce572b976f81503b718b4188a2d5b38e99efdd570375fc685f6fe",
+    "bottle-backpack-layout.png": "c57441ab04ccb66f7b5ab38dfa3eeb8a89d470f33f1bb5cfd06ca64deb9851cc",
+    "bottle-backpack-service.png": "74f59e6f2329686f6b68e83ea09850d9d25c5475ef0ef6eeab03237e7c1cc78f",
+    "bottle-backpack-spaces.png": "f729bb1b68c0834f32856814fef2cf1734cbd1c72acfeabb0d0c0691d4feb8aa",
+    "bubble-gun-clearance.png": "d497dd211bc69b4ab779b6c3216184b13a04b9177f40e5f7916cbada2a657ff4",
+    "bubble-gun-component.png": "d27e10a3458941d3036b8dcf9ed675d44aacd2a3620e6f0e2a5cf54818fe8220",
+    "bubble-gun-layout.png": "a23b43d65533dc83dd892852c8af0cfe73c7bed97461b5cbfc8ceef1c5b265e0",
+    "bubble-gun-mount.png": "b47df1c611cff59fc289b9e66239b7572f44abb0ed40d8bfc4dddb8dc0ed47c9",
+    "bubble-gun-service.png": "0c9e4c2ecafbaa1721bd158372409894c143695667d65e24f00ff59792846ae2",
+    "bubble-gun-side.png": "2a0810e40862d9e2d838d92c2332e07a86d237814a81d34402e886395356d576",
+    "bubble-gun-spaces.png": "9f41a1c15309ec4e18114c5685e7fc1c20b386a01c529fcdb30baee830722884",
+    "controller-access.png": "ce7168945023b4b8e2065080b7b08ae10c8f5ac5a0baef6896db21f6c3729478",
+    "controller-layout.png": "a4ab22ade6345ef5969a47788e226927b262b8509d80d5de703f00be3866148f",
+    "controller-service.png": "82ef29d6e0cd0fa0c1cb962a53f45f82bd2e978b57778e099c9c2cc587821b07",
+    "crown-effects-top.png": "e69bb86c13c7d47e22bd7d367b40c6be4a73fb12805d7691165f2f1a53a0d178",
+    "crown-effects.png": "5260382d8534f26ff93f5dcf2660f978904fc7b4486eb66db259685ce5191b49",
+    "drive-bottom.png": "224ea4b2bdb7bab854a9e67eb7b4d3ca9eb903ba2389d0afdcd15c1007d58624",
+    "drive-frame.png": "941623acbbb13e40a1d875dfba4ecea158a1976a5875f7869388d46cf4d5b6ab",
+    "drive-integrated-face.png": "3b15a21d1ecddce1e3a2684763bf5f952586dc34994c3aad9325782a584f73cd",
+    "drive-mount.png": "293c3cc400fdf60414eaf41045bea848ec25cbf901727055b32ea30ee2cd771a",
+    "drive-service.png": "cc50b42a39120b538ce88f5d66cd85ffea4cb8c0f1d91d111f1e039dfd40455d",
+    "front.png": "93547e416e1ed837e8af0e7a1e9f1b51bcf087d834c3312242a4f26a9fa0ed1e",
+    "l298n-carrier.png": "ed05bdb8ffb82398052bad6f621bafd27bdad3919d56a54f0d1cac7b92cc5e62",
+    "l298n-layout.png": "7bc4dd8735ca56a90857354be0b08fa6b3c96f440e7af6054c465af1276c9ede",
+    "l298n-service.png": "13d8015bdfe49b859ff53a246affa56d6210e13c2b8da0865e3aca4199b6deba",
+    "l298n-side.png": "e00c78850893928d19a4bc5b15c634ff26e473a237e88b485449a63bc2f27d9e",
+    "l298n-spaces.png": "4eb12e57c6ceceaf1ecbfa2092619782493d423e06532479f19f497102093f26",
+    "l298n-top.png": "79b00ed34c7770ef8437fc8d305b6d1d48debb673b619e80e7f5f0e2130a42b9",
+    "layout.png": "9494bd94b5be7147029b6b359f7ee4d8b531edd7f377a25e56d6e30808ca1dc0",
+    "lower-layout.png": "6ddfc1abb19208aa0820eb2bf0d0823d50a8ac23e50270ad09b5a648d481a692",
+    "rear-assembly.png": "2d053cf920189cc932d420c41bcfb6390fb155b9384b211cf4bbc64af208dbd9",
+    "rear.png": "d970e4aafdb3b64c0f3c23f1c0b67086a2ba19c5bf6fbc23c157c3b6fe1dd15c",
+    "right.png": "733c2c26bb4e105a5d921a4e31b9511b39f6e4171d335338117b8924b972745e",
+    "routing.png": "76d01717cb81bc735ac87b8acc64dd81d4893f50407850ffa44fec7939e8605f",
+    "service.png": "af8e73c46d9d21c18dd2d79b3a3ecb90c50480cfda6dbd15eec87b4597a9e134",
+    "side.png": "268fe2dcf4bf4f90dd4bdc4efc9cf086f1b53dc7777cfca933969b0ccbea5a6f",
+    "speaker-layout.png": "05dc8c7af23085fb60f1fe9f6e40c10804e99de2ad961620759f79f158c2af30",
+    "speaker-top.png": "9959c4621e71d3851f6ed2947bb4081feb41ca1b7eacf0cd0ba2c641e50b5e1d",
+    "top.png": "3b8724d007908eb305478956efca04eabcb86d3ab4894547484686b0b43b4148",
+    "ultrasonic-front.png": "a4d4d004b505ebf957b1f2c68846cfecd21d72035ef9a5c8f3bc084c475ae3c6",
+    "ultrasonic-layout.png": "17cbc11426c7a3915cf4ce390561f7d7144b89b048d0d0a4568bbf633bc675c8",
+    "water-gun-clearance.png": "791ea4581f894be1e61eece7214b2310900264c4018df6839b17ee46e6ef90b2",
+    "water-gun-component.png": "15845150e06e4be5f8c435697fb508b6e21984c3d3ce2198685364c4c49b8073",
+    "water-gun-layout.png": "bb0d91f2af83ddc03a7f577d6b080c02707ccfb1927eebc0503b55ea425b8b62",
+    "water-gun-mount.png": "7ad616793462f18763e7c9188cbeec932f5ffcfc113b6d5d237084edc5e630a7",
+    "water-gun-service.png": "2ea71aaf32e080179820a41c98d56d27711d13896a4ec1be2b2d8164b37a41ef",
+    "water-gun-side.png": "9b0575c6dd5613676c877eae9fc49fa9cbead19b5ebb77578f17d97be59f6315",
+    "water-gun-spaces.png": "4c75dc20306c323f0badc8434358f139461ced1a7d397b496ca0b7570d64d87e"
   }
 }

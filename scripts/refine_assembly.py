@@ -168,7 +168,7 @@ def service_groups(doc):
     crown=[n for n in names if n.startswith(('Crown','BrowArmor','OccipitalBrow')) and not n.startswith(('CrownScrew','CrownInsert'))]
     crown+=['HeadCrownShell','HeadServiceHatch']
     battery=['PowerBank','BatteryHatch','BatteryPullStrap']+[n for n in names if n.startswith(('BatteryPad','BatterySupportWasher'))]
-    wet={name:[name+suffix for suffix in ('ServiceLid','CapGrip','LidMark','FillPlug','FillSeal')] for name in ('Water','Bubble')}
+    wet={name:([name+'Module'] if doc.getObject(name+'RetentionBand') else [name+suffix for suffix in (('ServiceLid','CapGrip','LidMark','TopPad') if doc.getObject(name+'TopPad') else ('ServiceLid','CapGrip','LidMark','FillPlug','FillSeal'))]) for name in ('Water','Bubble')}
     return {'cable_access':['BottomServiceCover' if doc.getObject('BottomServiceCover') else 'CableServiceCover'],'battery':battery,'crown':crown,'electronics':['ElectronicsTray','Electronics','AudioModule']+controller_members(doc)+[n for n in names if n.startswith(('ControllerMountScrew','ControllerMountInsert'))],**wet,
             'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR'],
             **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('bubble_gun','bubble_gun_cradle')} if doc.getObject('BubbleGunShell') else {}),
@@ -206,6 +206,8 @@ def check_service_paths(doc):
                ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute']),
                ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]+['WaterHoseRoute','BubbleGunHoseRoute']),
                ('Bubble',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewBubble')]+['WaterHoseRoute','BubbleGunHoseRoute'])]
+    if doc.getObject('WaterRetentionBand'):
+        scenarios=[(group,(0,0,150),[group+'RetentionBand',group+'StrapClosure','WaterHoseRoute' if group=='Water' else 'BubbleGunHoseRoute']) if group in ('Water','Bubble') else (group,delta,removed) for group,delta,removed in scenarios]
     if 'bubble_gun' in groups:
         from bubble_gun_mount import line_names
         blines=line_names(doc)
@@ -234,7 +236,7 @@ def check_service_paths(doc):
         if group=='water_gun_cradle':
             waypoints=[V(),V(0,0,2),V(60,0,2)]
         if group in ('Water','Bubble'):
-            waypoints=[V(),V(0,0,6),V(0,12,6),V(0,12,40)]
+            waypoints=[V(),V(0,0,150)] if doc.getObject(group+'RetentionBand') else [V(),V(0,0,40)] if doc.getObject(group+'TopPad') else [V(),V(0,0,6),V(0,12,6),V(0,12,40)]
         if group.startswith('arc_'):
             # Lift clear of the fixed tray supports before moving toward the centre.
             waypoints=[V(),V(0,0,2),V(delta[0],0,2),V(*delta)]

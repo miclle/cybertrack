@@ -1,0 +1,50 @@
+{
+  "source": "user-provided dimensions, 2026-10-25",
+  "product_url": "https://item.jd.com/10231029535273.html",
+  "size_lwh_mm": [
+    46.2,
+    43.5,
+    27.5
+  ],
+  "local_axes": "length X, width Y, height Z; origin at minimum corner",
+  "geometry": "single full rectangular envelope; no inferred holes or internal details",
+  "saved_and_reopened": true,
+  "checks": [
+    {
+      "format": "FCStd",
+      "valid": true,
+      "solid_count": 1,
+      "bbox_mm": [
+        0.0,
+        0.0,
+        0.0,
+        46.2,
+        43.5,
+        27.5
+      ],
+      "symmetric_difference_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "format": "STEP",
+      "valid": true,
+      "solid_count": 1,
+      "bbox_mm": [
+        0.0,
+        0.0,
+        0.0,
+        46.2,
+        43.5,
+        27.5
+      ],
+      "symmetric_difference_mm3": 0.0,
+      "passed": true
+    }
+  ],
+  "files_sha256": {
+    "L298N-envelope.FCStd": "b627c619bb240b4050dbcd73c3b0144d5f8721c21cce2130d0e5a8174a0d80bd",
+    "L298N-envelope.step": "2f3c4be3069e5dd0359a970b4f5d814ac1d966be8ae40c0b27e7f4d4317a0a6b"
+  },
+  "passed": true,
+  "physical_fit_verified": false
+}
