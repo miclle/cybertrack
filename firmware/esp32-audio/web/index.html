@@ -5,7 +5,7 @@
 <title>CyberTrack</title>
 <style>
 :root{color-scheme:light;--ink:#242b29;--paper:#faf9f5;--line:#deded5;--accent:#d5ee65}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px system-ui,-apple-system,sans-serif}main{max-width:440px;margin:auto;padding:24px 20px calc(24px + env(safe-area-inset-bottom))}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}h1{font-size:22px;letter-spacing:-.8px;margin:0}.badge{font-size:12px;color:#777}.badge.on{color:#3b641d}.badge.on:before{content:"●";margin-right:6px;font-size:9px}.status{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--line);padding:16px 0;gap:16px}.status article+article{border-left:1px solid var(--line);padding-left:16px}.status strong{font-size:17px;display:block;margin-bottom:5px}.status small{color:#686e65;font-size:12px}.status span{margin-right:6px}.hint{text-align:center;color:#777;font-size:12px;margin:22px 0 12px} #hold-time{font-variant-numeric:tabular-nums}#hold-time.timing{color:var(--ink);font-weight:650}.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:340px;margin:auto}button,select{font:inherit;border:1px solid var(--line);border-radius:13px;color:var(--ink);background:#fff}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:48px}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #789324;outline-offset:3px}button:disabled{opacity:.35;cursor:default}.pad button{height:76px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;font-size:14px}.pad button b{display:block;font-size:24px;font-weight:400;line-height:26px;margin-bottom:3px}.pad button.held{background:var(--accent);border-color:#a8c33f}.forward{grid-column:2}.left{grid-column:1;grid-row:2}.backward{grid-column:2;grid-row:2}.right{grid-column:3;grid-row:2}.water-row{display:flex;gap:10px;margin:25px 0}.water-row select{width:105px;padding:10px}.water-row button{flex:1;background:#edf1e5}.stop{width:100%;background:#b63831;color:white;border:0;font-weight:650;font-size:18px;min-height:58px}#message{min-height:34px;line-height:1.5;font-size:12px;margin:12px 0 0;color:#686e65;text-align:center}#message.error{color:#a9322b}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px system-ui,-apple-system,sans-serif}main{max-width:440px;margin:auto;padding:24px 20px calc(24px + env(safe-area-inset-bottom))}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}h1{font-size:22px;letter-spacing:-.8px;margin:0}.badge{font-size:12px;color:#777}.badge.on{color:#3b641d}.badge.on:before{content:"●";margin-right:6px;font-size:9px}.status{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--line);padding:16px 0;gap:16px}.status article:nth-child(even){border-left:1px solid var(--line);padding-left:16px}.status strong{font-size:17px;display:block;margin-bottom:5px}.status small{color:#686e65;font-size:12px}.status span{margin-right:6px}.hint{text-align:center;color:#777;font-size:12px;margin:22px 0 12px} #hold-time{font-variant-numeric:tabular-nums}#hold-time.timing{color:var(--ink);font-weight:650}.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:340px;margin:auto}button,select{font:inherit;border:1px solid var(--line);border-radius:13px;color:var(--ink);background:#fff}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:48px}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #789324;outline-offset:3px}button:disabled{opacity:.35;cursor:default}.pad button{height:76px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;font-size:14px}.pad button b{display:block;font-size:24px;font-weight:400;line-height:26px;margin-bottom:3px}.pad button.held{background:var(--accent);border-color:#a8c33f}.forward{grid-column:2}.left{grid-column:1;grid-row:2}.backward{grid-column:2;grid-row:2}.right{grid-column:3;grid-row:2}.water-row{display:flex;gap:10px;margin:25px 0}.water-row select{width:105px;padding:10px}.water-row button{flex:1;background:#edf1e5}.stop{width:100%;background:#b63831;color:white;border:0;font-weight:650;font-size:18px;min-height:58px}#message{min-height:34px;line-height:1.5;font-size:12px;margin:12px 0 0;color:#686e65;text-align:center}#message.error{color:#a9322b}
 </style>
 </head>
 <body><main>
@@ -13,6 +13,8 @@
 <section class="status" aria-label="实时状态">
 <article><strong id="direction">行走</strong><small><span id="move-state">等待连接</span><span id="move-time">—</span></small></article>
 <article><strong id="water-label">水枪</strong><small><span id="water-state">等待连接</span><span id="water-time">—</span></small></article>
+<article><strong id="bubbles-label">泡泡枪</strong><small><span id="bubbles-state">等待连接</span><span id="bubbles-time">—</span></small></article>
+<article><strong id="ignition-label">点火线圈</strong><small><span id="ignition-state">等待连接</span><span id="ignition-time">—</span></small></article>
 </section>
 <p id="hold-time" class="hint">按住行走，松开停止</p>
 <div class="pad" aria-label="行走方向">
@@ -22,6 +24,8 @@
 <button class="right" data-direction="right" aria-label="右转" disabled><b aria-hidden="true">→</b>右转</button>
 </div>
 <div class="water-row"><select id="water-duration" aria-label="喷水时长"><option value="1000">1 秒</option><option value="3000">3 秒</option><option value="5000">5 秒</option><option value="10000">10 秒</option><option value="30000">30 秒</option></select><button id="water" disabled>喷水 <span id="water-action-time">1 秒 →</span></button></div>
+<div class="water-row"><select id="bubbles-duration" aria-label="吹泡泡时长"><option value="1000">1 秒</option><option value="3000">3 秒</option><option value="5000">5 秒</option></select><button id="bubbles" disabled>吹泡泡 <span id="bubbles-action-time">1 秒 →</span></button></div>
+<div class="water-row"><select id="ignition-duration" aria-label="点火时长"><option value="1000">1 秒</option><option value="3000">3 秒</option><option value="5000">5 秒</option></select><button id="ignition" disabled>点火 <span id="ignition-action-time">1 秒 →</span></button></div>
 <button id="stop" class="stop" disabled>全部停止</button>
 <p id="message" role="status" aria-live="polite"></p>
 </main><script>
@@ -41,7 +45,7 @@
         latest = -1,
         snapshot = null,
         pending = false,
-        waterPending = false,
+        effectPending = false,
         polling = false,
         timer,
         hold = null,
@@ -73,19 +77,20 @@
           snapshot.state !== "FAULT";
         const move =
           ready && (!snapshot?.move_remaining_ms || snapshot?.move_source === "voice") && !snapshot?.move_cooldown_ms;
-        const water =
-          ready &&
-          (!snapshot?.water_remaining_ms || snapshot?.water_source === "voice") &&
-          !snapshot?.water_cooldown_ms;
         document.querySelectorAll("[data-direction]").forEach((b) => {
           const active = hold && hold.button === b;
           b.disabled = hold
             ? !active
-            : !(move && !waterPending);
+            : !(move && !effectPending);
           b.classList.toggle("held", !!active);
           b.setAttribute("aria-pressed", String(!!active));
         });
-        $("water").disabled = !water || waterPending || (!!hold && !hold.renewal);
+        for (const kind of ["water", "bubbles", "ignition"]) {
+          const available = ready && snapshot?.capabilities?.[kind] === true &&
+            (!snapshot?.[kind + "_remaining_ms"] || snapshot?.[kind + "_source"] === "voice") &&
+            !snapshot?.[kind + "_cooldown_ms"];
+          $(kind).disabled = !available || effectPending || (!!hold && !hold.renewal);
+        }
         $("stop").disabled = !token;
       }
       function render(s) {
@@ -93,7 +98,7 @@
         latest = s.request_sequence;
         snapshot = s;
         windowId = s.window;
-        for (const kind of ["move", "water"]) {
+        for (const kind of ["move", "water", "bubbles", "ignition"]) {
           const active = s[kind + "_remaining_ms"] > 0,
             cool = s[kind + "_cooldown_ms"];
           $(kind + "-time").textContent =
@@ -116,6 +121,8 @@
         $("water-label").textContent = s.logical_outputs.water
           ? "喷水中"
           : "水枪";
+        $("bubbles-label").textContent = s.logical_outputs.bubbles ? "吹泡泡中" : "泡泡枪";
+        $("ignition-label").textContent = s.logical_outputs.ignition ? "点火中" : "点火线圈";
         controls();
       }
       async function request(path, body = {}, auth = token, timeoutMs = 1100) {
@@ -160,7 +167,7 @@
         epoch++;
         clearTimeout(timer);
         pending = false;
-        waterPending = false;
+        effectPending = false;
         snapshot = null;
         latest = -1;
         windowId = 0;
@@ -168,13 +175,15 @@
         $("connection").className = "badge";
         clearTimeout(reconnectTimer);
         connecting = false;
-        for (const kind of ["move", "water"]) {
+        for (const kind of ["move", "water", "bubbles", "ignition"]) {
           $(kind + "-time").textContent = "—";
           $(kind + "-state").textContent = "状态未知";
 
         }
         $("direction").textContent = "行走";
         $("water-label").textContent = "水枪";
+        $("bubbles-label").textContent = "泡泡枪";
+        $("ignition-label").textContent = "点火线圈";
 
         controls();
         message(text, true);
@@ -184,7 +193,7 @@
       async function poll() {
         clearTimeout(timer);
         if (!token || document.hidden || hold) return;
-        if (polling || pending || waterPending) {
+        if (polling || pending || effectPending) {
           timer = setTimeout(poll, 100);
           return;
         }
@@ -209,7 +218,7 @@
           polling = false;
           finishPoll();
           if (e === epoch && token) {
-            const cooling = [snapshot?.move_cooldown_ms, snapshot?.water_cooldown_ms].filter(ms => ms > 0);
+            const cooling = [snapshot?.move_cooldown_ms, snapshot?.water_cooldown_ms, snapshot?.bubbles_cooldown_ms, snapshot?.ignition_cooldown_ms].filter(ms => ms > 0);
             timer = setTimeout(poll, cooling.length ? Math.min(500, ...cooling) : 500);
           }
         }
@@ -249,10 +258,12 @@
           if (e === epoch) { connecting = false; scheduleConnect(); }
         }
       }
-      async function action() {
-        if (!token || pending || waterPending || (hold && !hold.renewal) || !snapshot) return;
+      async function action(kind = "water") {
+        if (!["water", "bubbles", "ignition"].includes(kind)) return;
+        const label = { water: "喷水", bubbles: "吹泡泡", ignition: "点火" }[kind];
+        if (!token || pending || effectPending || (hold && !hold.renewal) || !snapshot) return;
         const e = epoch;
-        waterPending = true;
+        effectPending = true;
         controls();
         try {
           await pollWait;
@@ -262,16 +273,16 @@
           if (fresh.result !== "ok") throw new Error(fresh.result);
           render(fresh);
           const s = await request("/api/action", {
-            sequence: ++sequence, window: fresh.window, operation: "water",
-            duration_ms: Number($("water-duration").value),
+            sequence: ++sequence, window: fresh.window, operation: kind,
+            duration_ms: Number($(kind + "-duration").value),
           });
           if (e !== epoch) return;
           render(s);
-          message(s.result === "accepted" ? "正在喷水。" : reasons[s.result] || "喷水未接受。", s.result !== "accepted");
+          message(s.result === "accepted" ? "正在" + label + "。" : reasons[s.result] || label + "未接受。", s.result !== "accepted");
         } catch (err) {
           if (e === epoch) disconnect("操作未确认，网页动作已请求停止。");
         } finally {
-          if (e === epoch) { waterPending = false; controls(); poll(); }
+          if (e === epoch) { effectPending = false; controls(); poll(); }
         }
       }
       function holdSeconds(h) {
@@ -352,7 +363,7 @@
         }
       }
       async function beginHold(button, pointer = null) {
-        if (!token || pending || waterPending || hold || button.disabled || document.hidden)
+        if (!token || pending || effectPending || hold || button.disabled || document.hidden)
           return;
         const h = {
           id: ++sequence,
@@ -466,17 +477,17 @@
         for (const event of ["click", "contextmenu"])
           button.addEventListener(event, (e) => e.preventDefault());
       });
-      $("water").addEventListener("click", () => action(null));
-      $("water-duration").addEventListener(
-        "change",
-        () =>
-          ($("water-action-time").textContent =
-            Number($("water-duration").value) / 1000 + " 秒 →"),
-      );
+      for (const kind of ["water", "bubbles", "ignition"]) {
+        $(kind).addEventListener("click", () => action(kind));
+        $(kind + "-duration").addEventListener("change", () => {
+          $(kind + "-action-time").textContent = Number($(kind + "-duration").value) / 1000 + " 秒 →";
+        });
+      }
       $("stop").addEventListener("click", async () => {
         if (!token) return;
         clearHold();
         const e = ++epoch;
+        effectPending = false;
         pending = true;
         controls();
         message("正在请求全部停止…");

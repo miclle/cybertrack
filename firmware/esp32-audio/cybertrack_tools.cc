@@ -48,37 +48,41 @@ struct OffEvent {
     const char* reason;
     uint64_t elapsed;
     unsigned starts;
-    bool moving, watering;
+    bool moving, watering, bubbling, igniting;
 };
 StaticQueue_t event_queue_storage;
 uint8_t event_queue_bytes[16 * sizeof(OffEvent)];
 QueueHandle_t event_queue = xQueueCreateStatic(16, sizeof(OffEvent), event_queue_bytes, &event_queue_storage);
 unsigned dropped_events = 0;
-bool applied_move = false, applied_water = false;
-uint64_t move_started = 0, water_started = 0;
+bool applied_move = false, applied_water = false, applied_bubbles = false, applied_ignition = false;
+uint64_t move_started = 0, water_started = 0, bubbles_started = 0, ignition_started = 0;
 void OffRecord(const char* channel, uint64_t started, uint64_t now, const water_policy& policy) {
     OffEvent event{channel, outputs.fault ? "output_fault" : policy.held ? "BOOT" :
         !policy.online ? "link_lost" : policy.clock_fault ? "clock_fault" : policy.stopped ? "stop" : "deadline",
-        now - started, guard.Starts(), guard.Moving(), guard.Watering()};
+        now - started, guard.Starts(), guard.Moving(), guard.Watering(), guard.Bubbling(), guard.Igniting()};
     if (xQueueSend(event_queue, &event, 0) != pdTRUE) ++dropped_events;
 }
 void ApplyLocked(uint64_t now) {
     if (!outputs.Apply(guard.Watering(), guard.Moving() ? guard.left : 0,
-                       guard.Moving() ? guard.right : 0)) guard.Stop(now);
-    const bool moving = guard.Moving(), watering = guard.Watering();
+                       guard.Moving() ? guard.right : 0, guard.Bubbling(), guard.Igniting())) guard.Stop(now);
+    const bool moving = guard.Moving(), watering = guard.Watering(), bubbling = guard.Bubbling(), igniting = guard.Igniting();
     if (moving && !applied_move) move_started = now;
     if (watering && !applied_water) water_started = now;
     if (!moving && applied_move) OffRecord("move", move_started, now, guard.motion);
     if (!watering && applied_water) OffRecord("water", water_started, now, guard.spray);
-    applied_move = moving; applied_water = watering;
+    if (bubbling && !applied_bubbles) bubbles_started = now;
+    if (igniting && !applied_ignition) ignition_started = now;
+    if (!bubbling && applied_bubbles) OffRecord("bubbles", bubbles_started, now, guard.bubbles);
+    if (!igniting && applied_ignition) OffRecord("ignition", ignition_started, now, guard.ignition);
+    applied_move = moving; applied_water = watering; applied_bubbles = bubbling; applied_ignition = igniting;
 }
 void LogTask(void*) {
     OffEvent event{};
     for (;;) if (xQueueReceive(event_queue, &event, portMAX_DELAY) == pdTRUE) {
         auto elapsed = Decimal(event.elapsed);
-        ESP_LOGI("CT_AUDIO", "ACTION_OFF channel=%s reason=%s software_on_ms=%s move=%s water=%s starts=%u",
+        ESP_LOGI("CT_AUDIO", "ACTION_OFF channel=%s reason=%s software_on_ms=%s move=%s water=%s bubbles=%s ignition=%s starts=%u",
                  event.channel, event.reason, elapsed.c_str(), event.moving ? "ON" : "OFF",
-                 event.watering ? "ON" : "OFF", event.starts);
+                 event.watering ? "ON" : "OFF", event.bubbling ? "ON" : "OFF", event.igniting ? "ON" : "OFF", event.starts);
     }
 }
 void SafetyTask(void*) {
@@ -96,7 +100,7 @@ void SafetyTask(void*) {
 std::string Reply(const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
                   uint32_t web_session = 0, const WebCommand* command = nullptr) {
     // Reserve before accepting an action.
-    std::string result; result.reserve(1400);
+    std::string result; result.reserve(3000);
     xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
     const char* outcome = "ok";
@@ -117,10 +121,14 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
             outcome = sessions.DriveStop(now, web_session, command->hold_id);
         else
             outcome = sessions.WebAction(now, web_session, command->sequence, command->window,
-                                         command->target, duration, water_duration, direction);
+                                         command->target, duration, water_duration, direction, command->bubbles_ms, command->ignition_ms);
 
     } else if (!strcmp(operation, "water")) {
         outcome = guard.Water(now, ticket, duration);
+    } else if (!strcmp(operation, "bubbles")) {
+        outcome = guard.Bubbles(now, ticket, duration);
+    } else if (!strcmp(operation, "ignition")) {
+        outcome = guard.Ignition(now, ticket, duration);
     } else if (!strcmp(operation, "move")) {
         outcome = guard.Move(now, ticket, duration, direction);
     } else if (!strcmp(operation, "move_and_water")) {
@@ -130,23 +138,32 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     now = Now(); TickLocked(now);
     const bool requested_active = !strcmp(operation, "drive_start") ? guard.Moving() && (!water_duration || guard.Watering()) :
         (!strcmp(operation, "move") || !strcmp(operation, "drive_renew")) ? guard.Moving() :
-        !strcmp(operation, "water") ? guard.Watering() : guard.Moving() && guard.Watering();
+        !strcmp(operation, "water") ? guard.Watering() :
+        !strcmp(operation, "bubbles") ? guard.Bubbling() :
+        !strcmp(operation, "ignition") ? guard.Igniting() : guard.Moving() && guard.Watering();
     if ((!strcmp(outcome, "accepted") || !strcmp(outcome, "renewed")) && !requested_active) {
         if (!strcmp(operation, "move_and_water") || !strcmp(operation, "drive_start")) sessions.Stop(now);
         outcome = "cancelled_before_output";
     }
     ApplyLocked(now);
     if (outputs.fault) outcome = "output_fault";
-    const bool watering = guard.Watering(), moving = guard.Moving();
+    const bool watering = guard.Watering(), moving = guard.Moving(), bubbling = guard.Bubbling(), igniting = guard.Igniting();
     const int left = moving ? guard.left : 0, right = moving ? guard.right : 0;
     const char* move_direction = moving ? guard.direction : "none";
-    const bool fault = outputs.fault, clock_fault = guard.motion.clock_fault || guard.spray.clock_fault;
-    const bool stopped = guard.motion.stopped && guard.spray.stopped;
+    const bool fault = outputs.fault, clock_fault = guard.motion.clock_fault || guard.spray.clock_fault || guard.bubbles.clock_fault || guard.ignition.clock_fault;
+    const bool stopped = guard.motion.stopped && guard.spray.stopped && guard.bubbles.stopped && guard.ignition.stopped;
     const unsigned starts = guard.Starts(), seq = ++sequence, lost = dropped_events;
     const unsigned last_duration = guard.last_duration_ms;
     const unsigned move_duration = guard.move_duration_ms, water_ms = guard.water_duration_ms;
     const unsigned move_remaining = AudioActionGuard::Remaining(guard.motion, now);
     const unsigned water_remaining = AudioActionGuard::Remaining(guard.spray, now);
+    const unsigned bubbles_ms = guard.bubbles_duration_ms, ignition_ms = guard.ignition_duration_ms;
+    const unsigned bubbles_remaining = AudioActionGuard::Remaining(guard.bubbles, now);
+    const unsigned ignition_remaining = AudioActionGuard::Remaining(guard.ignition, now);
+    const char* bubbles_source = sessions.BubblesSource();
+    const char* ignition_source = sessions.IgnitionSource();
+    const unsigned bubbles_cooldown = guard.bubbles.cooldown_until > now ? guard.bubbles.cooldown_until - now : 0;
+    const unsigned ignition_cooldown = guard.ignition.cooldown_until > now ? guard.ignition.cooldown_until - now : 0;
     const unsigned window = sessions.window;
     const char* owner = sessions.owner ? (sessions.voice ? "shared" : "web") : sessions.voice ? "voice" : "none";
     const char* move_source = sessions.MoveSource();
@@ -157,24 +174,29 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     const unsigned drive_id = sessions.drive_id, drive_renewal = sessions.drive_renewal;
     xSemaphoreGive(lock);
     const auto uptime = Decimal(now);
-    const char* state = (fault || clock_fault) ? "FAULT" : (moving || watering) ? "ACTIVE" : stopped ? "STOPPED" : "DISARMED";
+    const char* state = (fault || clock_fault) ? "FAULT" : (moving || watering || bubbling || igniting) ? "ACTIVE" : stopped ? "STOPPED" : "DISARMED";
     const char* reason = fault ? "output_fault" : clock_fault ? "clock_fault" : stopped ? "stopped" : "none";
-    char json[2200];
+    char json[3000];
     std::snprintf(json, sizeof(json),
         "{\"device_id\":\"%s\",\"boot_id\":\"%s\",\"request_sequence\":%u,\"operation\":\"%s\","
         "\"result\":\"%s\",\"state\":\"%s\",\"fault\":\"%s\",\"uptime_ms\":%s,"
-        "\"logical_outputs\":{\"left\":%d,\"right\":%d,\"water\":%s,\"bubbles\":false},"
-        "\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":false},"
+        "\"logical_outputs\":{\"left\":%d,\"right\":%d,\"water\":%s,\"bubbles\":%s,\"ignition\":%s},"
+        "\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
         "\"local_authorization_required\":false,\"starts_this_boot\":%u,\"max_duration_ms\":30000,\"last_duration_ms\":%u,\"remaining_ms\":%u,"
         "\"move_last_duration_ms\":%u,\"water_last_duration_ms\":%u,\"move_remaining_ms\":%u,\"water_remaining_ms\":%u,"
         "\"move_max_duration_ms\":3000,\"move_direction\":\"%s\",\"log_events_dropped\":%u,"
         "\"control_owner\":\"%s\",\"window\":%u,\"move_cooldown_ms\":%u,\"water_cooldown_ms\":%u,\"boot_held\":%s,"
         "\"move_source\":\"%s\",\"water_source\":\"%s\",\"drive_hold_id\":%u,\"drive_renewal\":%u,\"drive_lease_ms\":600,"
-        "\"actuator_backend\":\"concurrent_motor_water_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
+        "\"bubbles_last_duration_ms\":%u,\"ignition_last_duration_ms\":%u,\"bubbles_remaining_ms\":%u,\"ignition_remaining_ms\":%u,"
+        "\"bubbles_max_duration_ms\":5000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":%u,\"ignition_cooldown_ms\":%u,"
+        "\"bubbles_source\":\"%s\",\"ignition_source\":\"%s\","
+        "\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
         device_id.c_str(), boot_id.c_str(), seq, operation, outcome, state, reason, uptime.c_str(),
-        left, right, watering ? "true" : "false", starts, last_duration, std::max(move_remaining, water_remaining),
+        left, right, watering ? "true" : "false", bubbling ? "true" : "false", igniting ? "true" : "false",
+        starts, last_duration, std::max({move_remaining, water_remaining, bubbles_remaining, ignition_remaining}),
         move_duration, water_ms, move_remaining, water_remaining, move_direction, lost,
-        owner, window, move_cooldown, water_cooldown, held ? "true" : "false", move_source, water_source, drive_id, drive_renewal);
+        owner, window, move_cooldown, water_cooldown, held ? "true" : "false", move_source, water_source, drive_id, drive_renewal,
+        bubbles_ms, ignition_ms, bubbles_remaining, ignition_remaining, bubbles_cooldown, ignition_cooldown, bubbles_source, ignition_source);
     result.assign(json);
     if (!web_session || (strcmp(operation, "get_status") && strcmp(operation, "drive_renew")))
         ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
@@ -186,7 +208,10 @@ int CyberTrackActionClaim(int rpc_id, const char* operation) {
     xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
     const auto target = !strcmp(operation, "self.tank.move") ? AudioActionGuard::MoveOnly :
-        !strcmp(operation, "self.tank.water") ? AudioActionGuard::WaterOnly : AudioActionGuard::Both;
+        !strcmp(operation, "self.tank.water") ? AudioActionGuard::WaterOnly :
+        !strcmp(operation, "self.tank.bubbles") ? AudioActionGuard::BubblesOnly :
+        !strcmp(operation, "self.tank.ignition") ? AudioActionGuard::IgnitionOnly :
+        !strcmp(operation, "self.tank.move_and_water") ? AudioActionGuard::Both : static_cast<AudioActionGuard::Target>(0);
     int ticket = sessions.VoiceClaim(now, rpc_id, target);
     xSemaphoreGive(lock);
     return ticket;
@@ -249,16 +274,28 @@ void InitializeCyberTrackTools() {
     InitializeCyberTrackWeb();
     auto& server = McpServer::GetInstance();
     server.AddTool("self.tank.get_status",
-        "查询CyberTrack电机与水枪状态。网页与语音可同时使用，move_source/water_source 表示各通道动作来源；网页指令优先，全部停止始终有效。只有逻辑状态，没有轮速或水流反馈。",
+        "查询CyberTrack行走、水枪、泡泡与点火状态。网页与语音可同时使用，move_source/water_source/bubbles_source/ignition_source 表示各通道动作来源；网页指令优先，全部停止始终有效。只有逻辑状态，没有轮速或水流反馈。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("get_status"); });
     server.AddTool("self.tank.stop",
-        "立即停止两台电机和水枪并取消全部排队动作，不关闭语音和屏幕。",
+        "立即停止两台电机、水枪、泡泡和点火并取消全部排队动作，不关闭语音和屏幕。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("stop"); });
     server.AddTool("self.tank.water",
         "用户明确要求喷水时直接调用，无需按键授权。duration_ms按用户时长换算为整数毫秒，范围1到30000；超过30秒只执行30秒并说明，明确要求喷水但未说时长时传1000。到期自动关闭，BOOT可提前停止。不得连续、延长或失败自动重试。可与行走同时执行、分别计时。同路正在执行时拒绝，结束后至少等待200毫秒，不排队补做。成功仅表示控制请求已接受。",
         PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 30000)}),
         [](const PropertyList& p) -> ReturnValue {
             return Reply("water", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
+        });
+    server.AddTool("self.tank.bubbles",
+        "仅在用户明确要求吹泡泡时调用。duration_ms是1到5000的整数毫秒；未说时长传1000，超过五秒只请求5000并说明，不分段。与行走、喷水和点火独立并行；同路不续时、不排队，停止后间隔200毫秒。不自动重试。BOOT和停止工具全停。接受回执不代表实际出泡。",
+        PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 5000)}),
+        [](const PropertyList& p) -> ReturnValue {
+            return Reply("bubbles", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
+        });
+    server.AddTool("self.tank.ignition",
+        "仅在用户明确要求点火或火花效果时调用，不从喷水、泡泡或行走指令推断点火。一个通道同时控制两只模块。duration_ms是1到5000的整数毫秒；未说时长传1000，超过五秒只请求5000并说明，不分段、不循环、不续时、不自动重试。与其他动作独立并行，停止后至少间隔3000毫秒且必须新指令。BOOT和停止工具全停。接受回执仅为逻辑状态，不代表实际火花或硬件验收。",
+        PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 5000)}),
+        [](const PropertyList& p) -> ReturnValue {
+            return Reply("ignition", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
     server.AddTool("self.tank.move",
         "仅在明确要求行走或转向时调用。direction只能为forward前进、backward后退、left向左原地转、right向右原地转。duration_ms为1到3000的整数毫秒；未说时长默认1000，超过三秒只请求3000并说明，不分段补足。不支持角度或距离精确控制。固定约60%速度，可与喷水同时执行、分别计时；同路运行中不续时或换向，行走结束后至少等待200毫秒。不得续时、自动重试或排队补做。BOOT或停止工具同时停止所有动作。回执不是实际移动反馈。",
@@ -275,5 +312,5 @@ void InitializeCyberTrackTools() {
             return Reply("move_and_water", p["_ct_ticket"].value<int>(), p["move_duration_ms"].value<int>(),
                          p["direction"].value<std::string>().c_str(), p["water_duration_ms"].value<int>());
         });
-    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water,move,move_and_water concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW BOOT=stop_all move_max_ms=3000 water_max_ms=30000");
+    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water,bubbles,ignition,move,move_and_water concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=3000 water_max_ms=30000 bubbles_max_ms=5000 ignition_max_ms=5000");
 }

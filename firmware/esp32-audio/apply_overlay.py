@@ -12,7 +12,16 @@ ROOT = HERE.parents[1]
 
 
 BOOT_CALLBACK = '        boot_button_.OnClick([this]() {\n            auto& app = Application::GetInstance();\n            if (app.GetDeviceState() == kDeviceStateStarting && !WifiStation::GetInstance().IsConnected()) {\n                ResetWifiConfiguration();\n            }\n            app.ToggleChatState();\n        });\n'
-ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.water") {
+ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition") {
+        const cJSON* duration = cJSON_GetObjectItemCaseSensitive(tool_arguments, "duration_ms");
+        if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 1 ||
+            !cJSON_IsNumber(duration) || !(duration->valuedouble >= 1 && duration->valuedouble <= 5000) ||
+            duration->valuedouble != duration->valueint) {
+            ReplyError(id, "Effect requires exactly integer duration_ms in 1..5000");
+            return;
+        }
+    }
+    if (tool_name == "self.tank.water") {
         const cJSON* duration = cJSON_GetObjectItemCaseSensitive(tool_arguments, "duration_ms");
         if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 1 ||
             !cJSON_IsNumber(duration) ||
@@ -49,7 +58,7 @@ ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.water") {
         }
     }
     if (tool_name == "self.tank.stop") CyberTrackActionStop();
-    if (cybertrack || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water")
+    if (cybertrack || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition")
         ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());'''
 
 
@@ -69,7 +78,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct12")')
+                 'set(PROJECT_VER "2.0.3-ct13")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
@@ -78,7 +87,7 @@ def main():
     replace_once(source / "main/mcp_server.h",
                  'cJSON_AddItemToObject(input_schema, "properties", properties);',
                  'cJSON_AddItemToObject(input_schema, "properties", properties);\n'
-                 '        if (name_ == "self.tank.get_status" || name_ == "self.tank.stop" || name_ == "self.tank.water" || name_ == "self.tank.move" || name_ == "self.tank.move_and_water") {\n'
+                 '        if (name_ == "self.tank.get_status" || name_ == "self.tank.stop" || name_ == "self.tank.water" || name_ == "self.tank.move" || name_ == "self.tank.move_and_water" || name_ == "self.tank.bubbles" || name_ == "self.tank.ignition") {\n'
                  '            cJSON_AddBoolToObject(input_schema, "additionalProperties", false);\n'
                  '        }')
     replace_once(source / "main/mcp_server.cc", '    PropertyList arguments = (*tool_iter)->properties();',
@@ -96,7 +105,7 @@ def main():
                  ACTION_ARGUMENT_CHECK)
     replace_once(source / "main/mcp_server.cc",
                  '    // Use main thread to call the tool',
-                 '    if (tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water") {\n'
+                 '    if (tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition") {\n'
                  '        int ticket = CyberTrackActionClaim(id, tool_name.c_str());\n'
                  '        if (!ticket) { ReplyError(id, "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"); return; }\n'
                  '        arguments.AddProperty(Property("_ct_ticket", kPropertyTypeInteger, ticket));\n'
@@ -137,7 +146,7 @@ def main():
     replace_once(config, 'CONFIG_FREERTOS_HZ=100\n', 'CONFIG_FREERTOS_HZ=1000\n')
     replace_once(config, '# CONFIG_ESP_TASK_WDT_PANIC is not set', 'CONFIG_ESP_TASK_WDT_PANIC=y')
     replace_once(config, 'CONFIG_ESP_TASK_WDT_TIMEOUT_S=10', 'CONFIG_ESP_TASK_WDT_TIMEOUT_S=2')
-    print("Applied bounded motor + water bench; BOOT stops all; audio/display pins unchanged")
+    print("Applied bounded motor + water/bubbles/ignition bench; BOOT stops all; audio/display pins unchanged")
 
 
 if __name__ == "__main__":

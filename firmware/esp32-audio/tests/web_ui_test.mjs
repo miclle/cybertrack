@@ -22,7 +22,7 @@ function harness(){
  const respond=(c,body,ok=true)=>c.resolve({ok,json:async()=>body});
  const status=(seq=1,extra={})=>({result:'ok',request_sequence:seq,window:seq,move_remaining_ms:0,water_remaining_ms:0,
   move_cooldown_ms:0,water_cooldown_ms:0,move_last_duration_ms:600,water_last_duration_ms:1000,
-  drive_hold_id:0,drive_renewal:0,move_direction:'none',move_source:'none',water_source:'none',logical_outputs:{water:false},boot_held:false,state:'STOPPED',fault:'none',...extra});
+  capabilities:{move:true,water:true,bubbles:true,ignition:true},drive_hold_id:0,drive_renewal:0,move_direction:'none',move_source:'none',water_source:'none',logical_outputs:{water:false},boot_held:false,state:'STOPPED',fault:'none',...extra});
  async function connect(){const c=take('/api/pair');assert.equal(c.options.body,'{}');respond(c,{result:'ok',token:'session'});await flush();respond(take('/api/state'),status());await flush();assert(!buttons[0].disabled);}
  async function start(){const promise=ctx.beginHold(buttons[0],1);await flush();respond(take('/api/state'),status(2));await flush();return {promise,call:take('/api/action')};}
  async function hold(){const {promise,call}=await start();respond(call,status(3,{result:'accepted',drive_hold_id:1,drive_renewal:1,move_remaining_ms:600,move_source:'web',state:'ACTIVE'}));await promise;}
@@ -125,3 +125,44 @@ for(const trigger of ['visibilitychange','offline','stop']){
  assert(![...h.timers.values()].some(t=>t.ms===100));
 }
 console.log('PASS: elapsed hold timer uses monotonic time, freezes at release despite delayed receipt, cancels on background/offline/global stop');
+
+for (const kind of ['bubbles','ignition']) {
+ const h=harness();await h.connect();await h.hold();
+ // All four may be active. Starting a timed effect leaves held movement intact.
+ h.ctx.render(h.status(4,{water_remaining_ms:10000,water_source:'web',bubbles_remaining_ms:kind==='ignition'?4000:0,
+   bubbles_source:'web',ignition_remaining_ms:kind==='bubbles'?5000:0,ignition_source:'web',
+   drive_hold_id:1,drive_renewal:1,move_remaining_ms:600,logical_outputs:{water:true,bubbles:kind==='ignition',ignition:kind==='bubbles'}}));
+ assert(!h.ids[kind].disabled && !h.buttons[0].disabled);
+ h.ids[kind+'-duration'].value='5000';h.ids[kind+'-duration'].events.change();
+ assert.equal(h.ids[kind+'-action-time'].textContent,'5 秒 →');
+ const effect=h.ctx.action(kind);await flush();h.respond(h.take('/api/state'),h.status(5,{drive_hold_id:1,move_remaining_ms:600}));await flush();
+ const call=h.take('/api/action');assert.equal(JSON.parse(call.options.body).operation,kind);assert.equal(JSON.parse(call.options.body).duration_ms,5000);
+ h.respond(call,h.status(6,{result:'accepted',drive_hold_id:1,drive_renewal:1,move_remaining_ms:600,water_remaining_ms:10000,
+   bubbles_remaining_ms:4000,ignition_remaining_ms:5000,move_source:'web',water_source:'web',bubbles_source:'web',ignition_source:'web',
+   logical_outputs:{water:true,bubbles:true,ignition:true}}));await effect;
+ assert.equal(h.ids['bubbles-label'].textContent,'吹泡泡中');assert.equal(h.ids['ignition-label'].textContent,'点火中');
+ assert(h.ids.bubbles.disabled && h.ids.ignition.disabled);assert(!h.buttons[0].disabled);
+ const stop=h.ctx.endHold();h.respond(h.take('/api/action'),h.status(7,{bubbles_remaining_ms:3500,ignition_remaining_ms:4500,logical_outputs:{bubbles:true,ignition:true}}));await stop;
+ assert.equal(h.ids['bubbles-time'].textContent,'3.5 s');assert.equal(h.ids['ignition-time'].textContent,'4.5 s');
+}
+for (const kind of ['bubbles','ignition']) {
+ const h=harness();await h.connect();const effect=h.ctx.action(kind);await flush();const fresh=h.take('/api/state');
+ const stop=h.ids.stop.events.click();h.respond(h.take('/api/stop'),h.status(4));await stop;
+ h.respond(fresh,h.status(2));await effect;
+ assert(!h.sent.some(c=>c.path==='/api/action')); // Stop while acquiring a window cannot send delayed ignition.
+ h.respond(h.take('/api/state'),h.status(5));await flush();assert(!h.ids[kind].disabled);
+}
+{
+ const h=harness();await h.connect();
+ h.ctx.render(h.status(2,{ignition_cooldown_ms:3000,bubbles_cooldown_ms:200}));
+ assert(h.ids.ignition.disabled && h.ids.bubbles.disabled && !h.ids.water.disabled && !h.buttons[0].disabled);
+ h.ctx.render(h.status(3,{ignition_cooldown_ms:2800}));assert(h.ids.ignition.disabled && !h.ids.bubbles.disabled);
+}
+console.log('PASS: bubbles/ignition controls, four-lane concurrent display, independent intervals, held-motion continuity and global-stop versus pending effect race');
+
+{
+ const h=harness();await h.connect();
+ h.ctx.render(h.status(2,{capabilities:{move:true,water:true,bubbles:false}}));
+ assert(h.ids.bubbles.disabled && h.ids.ignition.disabled && !h.ids.water.disabled);
+}
+console.log('PASS: new effect controls require explicit firmware capabilities');

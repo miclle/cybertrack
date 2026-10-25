@@ -7,7 +7,7 @@ struct WebCommand {
     AudioActionGuard::Target target = AudioActionGuard::Both;
     uint32_t sequence = 0, window = 0;
     uint32_t hold_id = 0, renewal = 0;
-    int move_ms = 0, water_ms = 0;
+    int move_ms = 0, water_ms = 0, bubbles_ms = 0, ignition_ms = 0;
     const char* operation = nullptr;
     const char* direction = nullptr;
 };
@@ -44,9 +44,11 @@ inline bool ParseWebCommand(const cJSON* root, WebCommand& cmd) {
         return true;
     }
     const bool move = !strcmp(op->valuestring, "move"), water = !strcmp(op->valuestring, "water");
+    const bool bubbles = !strcmp(op->valuestring, "bubbles");
+    const bool ignition = !strcmp(op->valuestring, "ignition");
     const bool both = !strcmp(op->valuestring, "move_and_water");
-    if (!move && !water && !both) return false;
-    if (cJSON_GetArraySize(root) != (both ? 6 : water ? 4 : 5)) return false;
+    if (!move && !water && !both && !bubbles && !ignition) return false;
+    if (cJSON_GetArraySize(root) != (both ? 6 : (water || bubbles || ignition) ? 4 : 5)) return false;
     const auto duration = get("duration_ms"), direction = get("direction");
     const auto move_duration = both ? get("move_duration_ms") : duration;
     const auto water_duration = both ? get("water_duration_ms") : duration;
@@ -54,13 +56,17 @@ inline bool ParseWebCommand(const cJSON* root, WebCommand& cmd) {
     if ((move || both) && (!WebInteger(move_duration, 1, 3000) || !cJSON_IsString(direction) ||
                           !AudioActionGuard::Direction(direction->valuestring, left, right))) return false;
     if ((water || both) && !WebInteger(water_duration, 1, 30000)) return false;
+    if (bubbles && !WebInteger(duration, 1, AudioActionGuard::BubblesMaxMs)) return false;
+    if (ignition && !WebInteger(duration, 1, AudioActionGuard::IgnitionMaxMs)) return false;
     // Count plus all required unique keys rejects duplicates and unknown fields.
     cmd.sequence = static_cast<uint32_t>(seq->valuedouble);
     cmd.window = static_cast<uint32_t>(window->valuedouble);
-    cmd.target = both ? AudioActionGuard::Both : move ? AudioActionGuard::MoveOnly : AudioActionGuard::WaterOnly;
-    cmd.operation = both ? "move_and_water" : move ? "move" : "water";
+    cmd.target = ignition ? AudioActionGuard::IgnitionOnly : bubbles ? AudioActionGuard::BubblesOnly : both ? AudioActionGuard::Both : move ? AudioActionGuard::MoveOnly : AudioActionGuard::WaterOnly;
+    cmd.operation = ignition ? "ignition" : bubbles ? "bubbles" : both ? "move_and_water" : move ? "move" : "water";
     cmd.direction = (move || both) ? direction->valuestring : nullptr;
     cmd.move_ms = (move || both) ? move_duration->valueint : 0;
     cmd.water_ms = (water || both) ? water_duration->valueint : 0;
+    cmd.ignition_ms = ignition ? duration->valueint : 0;
+    cmd.bubbles_ms = bubbles ? duration->valueint : 0;
     return true;
 }

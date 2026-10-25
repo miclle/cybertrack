@@ -1,0 +1,124 @@
+{
+  "date": "2026-10-25",
+  "version": "2.0.3-ct13",
+  "status": "software_candidate_not_deployed",
+  "user_requirements": {
+    "concurrent_lanes": [
+      "move",
+      "water",
+      "bubbles",
+      "ignition"
+    ],
+    "cross_lane_interlock": false,
+    "ignition_modules": 2,
+    "ignition_mos_channels": 1,
+    "ignition_input_v_user_specified": 5,
+    "ignition_max_ms": 5000
+  },
+  "pins": {
+    "water": 18,
+    "bubbles_candidate": 17,
+    "ignition_candidate": 21,
+    "physical_wiring_verified": false
+  },
+  "limits": {
+    "bubbles_max_ms": 5000,
+    "ignition_max_ms": 5000,
+    "default_effect_ms_role": 1000,
+    "bubbles_interval_ms": 200,
+    "ignition_interval_ms": 3000,
+    "interval_is_thermal_validation": false
+  },
+  "checks": {
+    "host_sanitizers": {
+      "command": "sh firmware/esp32-audio/test.sh",
+      "result": "passed",
+      "coverage": [
+        "existing state/water/action/session suites",
+        "four-lane concurrent expiry",
+        "effects duration limits and intervals",
+        "BOOT/stop/offline/shutdown/output fault/clock fault",
+        "source isolation and web preemption"
+      ]
+    },
+    "output_driver": {
+      "result": "passed",
+      "states": 40,
+      "from_to_pairs": 1600,
+      "coverage": "all five motion states times all eight effect combinations; untouched-lane continuity; each init/transition API failure; latched all-off"
+    },
+    "mcp_http": {
+      "command": "python3 firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct13-src",
+      "result": "passed",
+      "coverage": "actual generated MCP validation, actual web parser and HTTP handlers; effect bounds/type/extra/duplicate parameters"
+    },
+    "web_script": {
+      "command": "node firmware/esp32-audio/tests/web_ui_test.mjs",
+      "result": "passed",
+      "coverage": "four lanes, per-effect duration/status, hold continuity, independent intervals, stop versus pending effect race, explicit capability gating"
+    },
+    "source_export_match": "passed",
+    "diff_whitespace": "passed",
+    "visual_browser": "not_completed; browser URL security policy rejected file:// preview; no workaround attempted",
+    "ignition_interval_boundary": {
+      "result": "passed",
+      "off_relative_reject_ms": 2999,
+      "off_relative_accept_ms": 3000,
+      "paths": [
+        "deadline",
+        "global stop",
+        "single-lane stop"
+      ],
+      "entry_points": [
+        "voice claim",
+        "web request"
+      ],
+      "repeat_stop_does_not_extend": true,
+      "other_lanes_independent": true
+    }
+  },
+  "build": {
+    "idf": "v5.5.1",
+    "source": "build/xiaozhi-ct13-src",
+    "directory": "build/firmware-ct13",
+    "result": "passed",
+    "binary": "build/firmware-ct13/xiaozhi.bin",
+    "binary_bytes": 2594416,
+    "app_partition_bytes": 4128768,
+    "binary_sha256": "921f4e1b41fb804238a0d8ac83300c5cf6e513f195bdfb3e23c8d5964cb9c1c3",
+    "warnings": "3 ioctl macro redefinition warnings in pinned esp_video component; no project compile errors",
+    "latest_build_log": "build/firmware-ct13-interval3-build.log"
+  },
+  "source_sha256": {
+    "action_guard.h": "6bfd908b86d2db6a399d132241f6447667d31120272d2e1d2f5848ae6b665b02",
+    "action_outputs.h": "1511055cda1cb7d1df6626ece7e2eb299e2e80bb88d20d7256592c063328c185",
+    "control_sessions.h": "d55fff895decf2d7af614210bdc341b322ee902d7697360c564b46a9aa72e963",
+    "cybertrack_tools.cc": "a8cfeaacb0f995aa93501eba838f3d88d2f2b2d3c07a08fc2e4faf36b58ec5a6",
+    "web_request.h": "6709e139f129654218df8617e1d8a6b56b4017ddaa0f6bd9a147db864d22959d",
+    "apply_overlay.py": "90b509509e863c414170208cfc2491fbdaa6a0fef923f9e5b14a2877593d2329",
+    "web/index.html": "1439ecaa872457932fb49a3194f513b52576ed3b417b5eb3cd28dfdea3843aa6",
+    "role-prompt.txt": "40aaf5cfc89613f0bb8ae75e775696fb33e2fd6f8f5c4156d25e04d372018871",
+    "tests/effects_test.cc": "98e41e02814c2cd5d009d5a96e56cc0a5af397ab89f3a04075d29e530b8b96de",
+    "tests/output_test.cc": "73ba17b2ca3b0d3caa224f84263dbb127fa52cb0f47d76382dab49b62f014e4f",
+    "tests/mcp_arguments_test.cc": "e0ad1782ec2a722c2193311fe425548b6b3d4403b2a1941b874df318edfd0305",
+    "tests/web_request_test.cc": "0295afe6741c8cb064b1ed6b130c235836278286d2c678c85ac72cd2375fa70b",
+    "tests/web_ui_test.mjs": "f1ad16711002a6caf1f547e5869f81cadc5d8f87853e7af65693d45610b6fece"
+  },
+  "deployment": {
+    "flashed": false,
+    "platform_role_synced": false,
+    "loads_energized": false,
+    "board_gpio_waveforms_verified": false,
+    "physical_acceptance": false
+  },
+  "open_items": [
+    "physical pin and connector confirmation",
+    "unloaded startup/reset/stop GPIO checks",
+    "role save/readback and voice regression after deployment",
+    "bubble power/current/actual output and stop",
+    "two-coil MOS current/transients/protection and shutdown suitability",
+    "HV insulation/liquid coexistence/EMC and independent cutoff",
+    "new battery and concurrent total-load budget",
+    "device stack/heap and timing measurements"
+  ]
+}

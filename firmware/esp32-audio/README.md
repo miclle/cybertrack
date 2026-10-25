@@ -1,6 +1,6 @@
 # CyberTrack 面包板：小D 语音、电机与水枪控制
 
-**当前源码：`2.0.3-ct12`**。打开网页自动连接、长按显示计时，没有接管／释放按钮或组合开关；行走和喷水独立、网页与语音并用，冲突网页优先，两路停止后均间隔 200 ms。部署与验证见[局域网控制说明](../../docs/lan-control.md)。
+**当前源码候选：`2.0.3-ct13`，尚未部署**。新增泡泡 GPIO17 和双点火共用 GPIO21，两路各最多五秒，四路可独立并行；见[ct13 效果控制](../../docs/effects-control.md)。已部署基线仍为 ct12。以下 ct12 操作说明保留：打开网页自动连接、长按显示计时，没有接管／释放按钮或组合开关；行走和喷水独立、网页与语音并用，冲突网页优先，两路停止后均间隔 200 ms。部署与验证见[局域网控制说明](../../docs/lan-control.md)。
 
 此适配层用于现有 `bread-compact-wifi` 面包板，基于本机已验证的 `xiaozhi 2.0.3`。已完成历史联调的 `2.0.3-ct6` 将双路 L298N 电机与 GPIO18 水枪接入同一灵矽设备，保留语音、OLED、唤醒词、音量和触摸说话按键。用户已确认迁至同一块面包板；已完成仅应用刷写、启动联网及平台角色同步，见[部署记录](startup-ct6.json)；迁线及基本台架四方向／喷水／BOOT 联调已完成，实际装车方向标定、断网及完整供电／故障验收仍未完成。接线、分阶段检查与最新状态见[电机／水枪集成](../../docs/breadboard-integration.md)。旧 ct4／ct5 水枪实测保留在[喷水记录](../../docs/audio-water-validation.md)。
 
@@ -26,7 +26,9 @@
 | OLED SDA／SCL | 41／42 |
 | 板载 LED | 48 |
 | BOOT：本地停止 | 0 |
-| MOS TRIG/PWM（ct3 起） | 18 |
+| 水枪 MOS TRIG/PWM（ct3 起） | 18 |
+| 泡泡 MOS 候选（ct13，未接线验证） | 17 |
+| 双点火共用 MOS 候选（ct13，未接线验证） | 21 |
 | L298N A：ENA／IN1／IN2（ct6） | 8／9／10 |
 | L298N B：ENB／IN3／IN4（ct6） | 11／12／13 |
 | 按住说话按键 | 47 |
@@ -72,11 +74,11 @@ ct3 的逐次物理授权流程和 ct4 的固定五秒要求已被用户明确�
 
 ```sh
 # 先激活 ESP-IDF v5.5.1 的 Python 环境与 export.sh。
-python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct12-src
+python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct13-src
 sh firmware/esp32-audio/test.sh
 node firmware/esp32-audio/tests/web_ui_test.mjs
-python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct12-src
-idf.py -C build/xiaozhi-ct12-src -B "$PWD/build/firmware-ct12" build
+python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct13-src
+idf.py -C build/xiaozhi-ct13-src -B "$PWD/build/firmware-ct13" build
 ```
 
 应用分区是 `ota_0`，起点 `0x20000`、大小 `0x3f0000`，与水枪台架分区不同。更新前需核对设备 MAC、分区表、OTA 选择及已有备份；本轮仅写该应用，不执行完整 `idf.py flash`，不覆盖引导、NVS、OTA 数据或 8 MB assets。
