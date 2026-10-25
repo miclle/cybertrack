@@ -1,0 +1,781 @@
+{
+  "tolerance_mm3": 1e-05,
+  "interfaces": [
+    {
+      "kind": "cover_clamping_land",
+      "index": 0,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "cover_clamping_land",
+      "index": 1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "cover_clamping_land",
+      "index": 2,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "cover_clamping_land",
+      "index": 3,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "cover_clamping_land",
+      "index": 4,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "cover_clamping_land",
+      "index": 5,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "carrier_clamping_land",
+      "side": "L",
+      "index": 0,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "carrier_clamping_land",
+      "side": "L",
+      "index": 1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "axial_stop_contact",
+      "side": "L",
+      "index": 0,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "axial_stop_contact",
+      "side": "L",
+      "index": 1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "motor_seat",
+      "side": "L",
+      "hole": 0,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "motor_seat",
+      "side": "L",
+      "hole": 1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "motor_seat",
+      "side": "L",
+      "hole": 2,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "motor_seat",
+      "side": "L",
+      "hole": 3,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "track_post",
+      "side": "L",
+      "y": -28.1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "track_post",
+      "side": "L",
+      "y": 28.1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "carrier_clamping_land",
+      "side": "R",
+      "index": 0,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "carrier_clamping_land",
+      "side": "R",
+      "index": 1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "axial_stop_contact",
+      "side": "R",
+      "index": 0,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "axial_stop_contact",
+      "side": "R",
+      "index": 1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "motor_seat",
+      "side": "R",
+      "hole": 0,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "motor_seat",
+      "side": "R",
+      "hole": 1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "motor_seat",
+      "side": "R",
+      "hole": 2,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "motor_seat",
+      "side": "R",
+      "hole": 3,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "track_post",
+      "side": "R",
+      "y": -28.1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "track_post",
+      "side": "R",
+      "y": 28.1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "battery_washer_bearing",
+      "side": "L",
+      "end": "Front",
+      "tray_contact_mm2": 20.239167368562057,
+      "screw_head_contact_mm2": 9.047786842338649,
+      "passed": true
+    },
+    {
+      "kind": "battery_washer_bearing",
+      "side": "L",
+      "end": "Rear",
+      "tray_contact_mm2": 20.239167368562043,
+      "screw_head_contact_mm2": 9.047786842338649,
+      "passed": true
+    },
+    {
+      "kind": "battery_washer_bearing",
+      "side": "R",
+      "end": "Front",
+      "tray_contact_mm2": 20.239167368562256,
+      "screw_head_contact_mm2": 9.047786842338649,
+      "passed": true
+    },
+    {
+      "kind": "battery_washer_bearing",
+      "side": "R",
+      "end": "Rear",
+      "tray_contact_mm2": 20.23916736856225,
+      "screw_head_contact_mm2": 9.047786842338649,
+      "passed": true
+    }
+  ],
+  "paths": [
+    {
+      "name": "unified_cover",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm down; battery and both drives remain installed",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_0",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew0"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_1",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew1"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_2",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew2"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_3",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew3"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_4",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew4"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_5",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew5"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "cassette_inward_L",
+      "method": "continuous conservative solid sweep",
+      "description": "28mm toward centre; coupling released; complete tracks and battery retained",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "MotorCarrierL",
+        "MotorCarrierScrewL0",
+        "MotorCarrierScrewL1",
+        "MotorFaceScrewL0",
+        "MotorFaceScrewL1",
+        "MotorFaceScrewL2",
+        "MotorFaceScrewL3",
+        "MotorL",
+        "MotorShaftL",
+        "PowerCableRoute"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "cassette_down_L",
+      "method": "continuous conservative solid sweep",
+      "description": "After inward28mm,80mm down; complete tracks and battery retained; reverse path is assembly",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "MotorCarrierL",
+        "MotorCarrierScrewL0",
+        "MotorCarrierScrewL1",
+        "MotorFaceScrewL0",
+        "MotorFaceScrewL1",
+        "MotorFaceScrewL2",
+        "MotorFaceScrewL3",
+        "MotorL",
+        "MotorShaftL",
+        "PowerCableRoute"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "carrier_screw_L0",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm down after only the unified cover is removed",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "MotorCarrierScrewL0"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "carrier_screw_L1",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm down after only the unified cover is removed",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "MotorCarrierScrewL1"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "cassette_inward_R",
+      "method": "continuous conservative solid sweep",
+      "description": "28mm toward centre; coupling released; complete tracks and battery retained",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "MotorCarrierR",
+        "MotorCarrierScrewR0",
+        "MotorCarrierScrewR1",
+        "MotorFaceScrewR0",
+        "MotorFaceScrewR1",
+        "MotorFaceScrewR2",
+        "MotorFaceScrewR3",
+        "MotorR",
+        "MotorShaftR",
+        "PowerCableRoute"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "cassette_down_R",
+      "method": "continuous conservative solid sweep",
+      "description": "After inward28mm,80mm down; complete tracks and battery retained; reverse path is assembly",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "MotorCarrierR",
+        "MotorCarrierScrewR0",
+        "MotorCarrierScrewR1",
+        "MotorFaceScrewR0",
+        "MotorFaceScrewR1",
+        "MotorFaceScrewR2",
+        "MotorFaceScrewR3",
+        "MotorR",
+        "MotorShaftR",
+        "PowerCableRoute"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "carrier_screw_R0",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm down after only the unified cover is removed",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "MotorCarrierScrewR0"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "carrier_screw_R1",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm down after only the unified cover is removed",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "MotorCarrierScrewR1"
+      ],
+      "collisions": [],
+      "passed": true
+    }
+  ],
+  "tools": [
+    {
+      "name": "bottom_bit_0",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_bit_1",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_bit_2",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_bit_3",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_bit_4",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_bit_5",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "carrier_bit_L0",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "carrier_bit_L1",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "carrier_bit_R0",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "carrier_bit_R1",
+      "collisions": [],
+      "passed": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "name": "short_retraction_L",
+      "collisions": [
+        {
+          "moving": "shaft",
+          "fixed": "DriveCouplerL",
+          "volume_mm3": 58.869593098332885
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "12mm_retraction_hits_tread_L",
+      "collisions": [
+        {
+          "moving": "shaft",
+          "fixed": "TrackLeftRubberBand",
+          "volume_mm3": 24.1977277920065
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "closed_floor_L",
+      "collision_mm3": 3792.397357792727,
+      "passed": true
+    },
+    {
+      "name": "short_retraction_R",
+      "collisions": [
+        {
+          "moving": "shaft",
+          "fixed": "DriveCouplerR",
+          "volume_mm3": 58.869593098332885
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "12mm_retraction_hits_tread_R",
+      "collisions": [
+        {
+          "moving": "shaft",
+          "fixed": "TrackRightRubberBand",
+          "volume_mm3": 24.197727792006503
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "closed_floor_R",
+      "collision_mm3": 3792.3973577927272,
+      "passed": true
+    }
+  ],
+  "coupling_release": "Conditional: existing coupling unlocked and motor lead and power connector disconnected; flexible power lead parked clear; actual locking screw and encoder tail not modeled.",
+  "retained_for_motor_service": [
+    "PowerBank",
+    "BatteryHatch",
+    "BatteryPullStrap",
+    "both complete track assemblies",
+    "both TrackMounts",
+    "both DriveCouplers",
+    "opposite motor"
+  ],
+  "drive_preservation": {
+    "objects": [
+      {
+        "name": "TrackLeftRubberBand",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftTreadPads",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftChevronTreads",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftShoulderLugs",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftWheelTires",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftWheelRims",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftWheelFaces",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftWheelHubs",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftSuspensionArms",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftRockerPlates",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftFasteners",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightRubberBand",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightTreadPads",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightChevronTreads",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightShoulderLugs",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightWheelTires",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightWheelRims",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightWheelFaces",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightWheelHubs",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightSuspensionArms",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightRockerPlates",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightFasteners",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "MotorL",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "MotorShaftL",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "DriveCouplerL",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackMountL",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "MotorR",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "MotorShaftR",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "DriveCouplerR",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackMountR",
+        "difference_mm3": 0.0,
+        "passed": true
+      }
+    ],
+    "translation_mm": {
+      "L": [
+        14,
+        0,
+        0
+      ],
+      "R": [
+        -14,
+        0,
+        0
+      ]
+    },
+    "passed": true
+  },
+  "single_chassis": {
+    "valid": true,
+    "solids": 1,
+    "passed": true
+  },
+  "lower_width": {
+    "stations": [
+      {
+        "y": -50,
+        "z": 40,
+        "width_mm": 132.00000000000006
+      },
+      {
+        "y": 50,
+        "z": 40,
+        "width_mm": 132.00000000000006
+      }
+    ],
+    "passed": true
+  },
+  "shaft_after_retraction": {
+    "outer_x_abs_mm": 67.0,
+    "track_inner_x_abs_mm": 68,
+    "nominal_lateral_clearance_mm": 1.0
+  },
+  "limits": [
+    "No real coupling-lock or encoder-tail dimensions; coupling release and motor lead disconnection remain required prerequisites.",
+    "Tool probes cover straight bit/shaft only, not hand/handle.",
+    "No load, thread, tolerance, print or physical assembly acceptance."
+  ],
+  "passed": true,
+  "source_sha256": "f3da091219f3ccbe54c23d49dba55def0faa87ec7d5538c931a5396a7c2ea2e9",
+  "saved_and_reopened": true
+}

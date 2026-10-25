@@ -32,19 +32,22 @@ matrices = {
     'top': ((1,0,0),(0,1,0),(0,0,1)),
     'bottom': ((-1,0,0),(0,1,0),(0,0,-1)),
 }
-def project(key, names, view):
+def project(key, names, view, clip=None):
     cache = OUT / f'{key}.json'
     if cache.exists():
         previous = json.loads(cache.read_text())
         if (previous.get('source_sha256') == source_hash and
                 previous.get('projection_revision') == 3 and
-                previous.get('view') == view and previous.get('names') == names):
+                previous.get('view') == view and previous.get('names') == names and previous.get('clip') == clip):
             print(key, 'cached', flush=True)
             return
     matrix = App.Matrix()
     for i,row in enumerate(matrices[view]):
         for j,value in enumerate(row): setattr(matrix, f'A{i+1}{j+1}', value)
     compound = Part.makeCompound([by_name[n].Shape for n in names])
+    if clip:
+        x0,y0,z0,x1,y1,z1=clip
+        compound=compound.common(Part.makeBox(x1-x0,y1-y0,z1-z0,V(x0,y0,z0)))
     # All view matrices are rigid rotations. Preserve analytic pipe bends;
     # transformGeometry unnecessarily converts tori to B-splines and may fail.
     transformed = compound.copy()
@@ -121,7 +124,7 @@ def project(key, names, view):
         elif element.tag not in ('svg','g'):
             raise ValueError(f'Unsupported SVG element {element.tag}')
     b=transformed.optimalBoundingBox(False)
-    result={'source_sha256':source_hash,'projection_revision':3,'view':view,'names':names,'bounds':[b.XMin,b.YMin,b.XMax,b.YMax], 'paths':paths}
+    result={'source_sha256':source_hash,'projection_revision':3,'view':view,'names':names,'clip':clip,'bounds':[b.XMin,b.YMin,b.XMax,b.YMax], 'paths':paths}
     (OUT/f'{key}.json').write_text(json.dumps(result))
     print(key, len(paths), flush=True)
 
@@ -152,8 +155,12 @@ for key,names,view in [
     ('fill_cap',['WaterPodCap'],'side'),
     ('fill_cap_top',['WaterPodCap'],'top'),
     ('fill',['WaterPodCap','WaterFillPlug','WaterFillSeal','WaterServiceLid','WaterCapGrip'],'side'),
-    ('power_side',['PowerBank','BatteryHatch','BatteryPullStrap','FrontBulkhead','CableServiceCover'],'side'),
+    ('power_side',['PowerBank','BatteryHatch','BatteryPullStrap','BottomServiceCover'],'side'),
 ]:
     project(key,names,view)
+project('drive_face',['LowerTub'],'side',clip=[73.3,-36,28,87.01,36,73])
+project('drive_bottom',['LowerTub','BottomServiceCover']+[o.Name for o in objects if o.Name.startswith('BottomCoverScrew')],'bottom')
+project('drive_cover',['BottomServiceCover'],'bottom')
+
 assert source_hash==sha(source), 'Source CAD changed during readback'
 App.closeDocument(doc.Name)
