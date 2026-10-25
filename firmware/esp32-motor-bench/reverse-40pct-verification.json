@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-25",
+  "version": "0.2.1-l298n-bench",
+  "pwm_hz": 1000,
+  "duty": 102,
+  "resolution_bits": 8,
+  "configured_pulse_ms": 10000,
+  "runs": [
+    {
+      "private_receipt": "build/l298n-bench-private/20261025-10s-startup/reverse-10s-receipt.json",
+      "sha256": "5ec2be869e45416c532c96e01ef40e3262a3c5df87110bd957d5c78997084cdd",
+      "started_at": "2026-10-25T03:07:17.949Z",
+      "finished_at": "2026-10-25T03:07:29.660Z",
+      "commands": [
+        "a",
+        "r"
+      ],
+      "off_ack_seen": true
+    },
+    {
+      "private_receipt": "build/l298n-bench-private/20261025-10s-startup/reverse-voltage-check-receipt.json",
+      "sha256": "f9b8eb784e3d1c328a808ac8e8ed6a7fd02a267d315701a43c665ba89d840074",
+      "started_at": "2026-10-25T03:10:25.312Z",
+      "finished_at": "2026-10-25T03:10:37.027Z",
+      "commands": [
+        "a",
+        "r"
+      ],
+      "off_ack_seen": true
+    }
+  ],
+  "user_reported": {
+    "first_reverse": "opposite direction to prior forward pulse; about 10 seconds then stopped",
+    "first_reverse_abnormal_sound_heat_or_restart": false,
+    "second_reverse_startup_driver_voltage_v_approx": 12,
+    "second_reverse_running_driver_voltage_v_approx": 12,
+    "second_reverse_stopped_normally": true,
+    "second_reverse_abnormalities": false,
+    "driver_12v_disconnected_after_each_run": true,
+    "perceived_torque_insufficient_at_40_percent": true
+  },
+  "measurement_limits": [
+    "multimeter may miss brief voltage dips",
+    "torque/current/temperature not measured",
+    "software deadlines are not waveform or mechanical stop timing measurements"
+  ],
+  "unverified": [
+    "60 percent operation",
+    "physical BOOT stop under motor load",
+    "loaded torque and dual-channel behavior",
+    "reset/power-loss defaults"
+  ]
+}

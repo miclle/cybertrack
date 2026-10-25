@@ -1,0 +1,109 @@
+{
+  "checked_on": "2026-10-25",
+  "scope": "dual-motor 10-second software simulation and build only; no 10-second dual motor run",
+  "version": "0.3.2-l298n-dual-10s",
+  "target": "esp32s3",
+  "idf_version": "v5.5.1",
+  "gpio": {
+    "ENA": 4,
+    "IN1": 5,
+    "IN2": 6,
+    "ENB": 7,
+    "IN3": 8,
+    "IN4": 9,
+    "BOOT_stop": 0
+  },
+  "pwm": {
+    "frequency_hz": 1000,
+    "resolution_bits": 8,
+    "duty": 154,
+    "pulse_ms": 10000,
+    "arm_ms": 3000,
+    "cooldown_ms": 3000
+  },
+  "host_tests": {
+    "command": "python3 firmware/esp32-motor-bench/tests/run_host_tests.py",
+    "sanitizers": [
+      "address",
+      "undefined"
+    ],
+    "policy_test": "passed",
+    "adapter_test": "passed",
+    "actual_task_tested": "main/motor_bench.c",
+    "simulated_boundaries": [
+      "six GPIOs",
+      "two LEDC channels",
+      "UART",
+      "clock",
+      "BOOT",
+      "RTOS wait"
+    ],
+    "injected_api_failures": [
+      "timer initialization",
+      "A/B channel initialization",
+      "A/B direction input",
+      "A/B set duty",
+      "A/B update after activation",
+      "A/B stop",
+      "persistent A/B stop failure with both GPIO enables reclaimed"
+    ],
+    "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "log": "build/motor-bench-l298n-host/host-tests-dual-10s.log",
+    "log_sha256": "81f2088355fb9ad51eca4d601e0838ac5f1c6f03250c3b676557e0474eea33d8",
+    "additional_coverage": [
+      "eight combinations with 10-second deadline and off-channel isolation",
+      "3-second arm window and 3-second cooldown",
+      "both-channel BOOT and serial stop at the ninth second with release not restarting",
+      "mixed commands rejected for single-channel selection",
+      "either-channel failures disable both bridges"
+    ]
+  },
+  "build": {
+    "status": "passed",
+    "directory": "build/firmware-l298n-dual-10s",
+    "log": "build/motor-bench-l298n-host/idf-build-dual-10s.log",
+    "log_sha256": "ecca0bacbc5114dce493fa2827dded2e17884abb6c3cfa117ef14ec50e82bd86",
+    "application": "build/firmware-l298n-dual-10s/cybertrack_motor_bench.bin",
+    "application_size_bytes": 245968,
+    "application_sha256": "a811c4f1fb1b2b9d038808e3b4ee1bf0d2acdf282c1dafa1f3bc8de0bf0a79fb",
+    "partition_table_sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "partition_matches_previous_local_df_md_bench": true
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "a03fe956d664a7671d99f7e99eecbcc0ba90cc2386fd03f53077ed7ba8497cf7",
+    "sdkconfig.defaults": "e26842171e57aa370c6569f8968aba42ea4a4fd8215ad856b9ad08727a8fea86",
+    "main/CMakeLists.txt": "8e5e091d330e9c43bd71e7bfe2a24f9690502e64f49d35d4746ca27e69a8e48f",
+    "main/motor_bench.c": "66c2ffb822b8569210f5bea32c473f5f153a02bb26eb5fe80edbc0ee031e512e",
+    "main/bench_policy.c": "2f4252aec4f870242b1c5da8f099381f2bd04b844c5e9acc70f69bbeefcdf02f",
+    "main/bench_policy.h": "f670a930355b2819133aefafe0ce3fdf1e4b54473de8511350103c7eb26e2741",
+    "tests/policy_test.c": "2e35f667db6533495a111333dc4c971a992ca8950469ff22451194404fb9021e",
+    "tests/adapter_test.c": "f893be3c3d626cdbeeb8920af9f6231e88a653519276902d10face0d8454991b",
+    "tests/idf_stub.h": "974e6132efe9fece5e2873c1168c502db12ec84d64672fa0927ec1c926ba4ebd",
+    "tests/run_host_tests.py": "b39dc9613193e9523d512256c72e97d2f5e5887291ae496317f38d8fb9ced4c0"
+  },
+  "flashed": false,
+  "motor_commands_sent": false,
+  "physical_tests_performed": false,
+  "unverified": [
+    "dual-motor 10-second physical operation",
+    "dual running supply and current",
+    "quantitative temperature rise and sustained operation",
+    "10-second-version physical BOOT stop",
+    "loaded torque and tracks",
+    "reset and controller power loss defaults"
+  ],
+  "channel_selection": {
+    "boot": "NONE",
+    "1": "A",
+    "2": "B",
+    "3": "AB",
+    "selection_disarms": true,
+    "new_arm_required_for_every_pulse": true
+  },
+  "direction_commands": {
+    "f": "selected forward",
+    "r": "selected reverse",
+    "x": "AB only: A forward, B reverse",
+    "y": "AB only: A reverse, B forward"
+  }
+}

@@ -37,12 +37,17 @@ void bench_receive(bench_policy *state, uint64_t now, bool stop_held,
         bench_stop(state, now);
         return;
     }
-    if (key == 'a') {
+    if (key >= '1' && key <= '3') {
+        bench_stop(state, now);
+        state->channels = key - '0';
+    } else if (key == 'a' && state->channels != 0) {
         state->armed = true;
         state->deadline_ms = now + BENCH_ARM_MS;
-    } else if ((key == 'f' || key == 'r') && state->armed) {
+    } else if (state->armed && ((key == 'f' || key == 'r') ||
+               ((key == 'x' || key == 'y') && state->channels == BENCH_CHANNEL_BOTH))) {
         state->armed = false;
-        state->reverse = key == 'r';
+        state->reverse = key == 'r' || key == 'y';
+        state->reverse_b = key == 'r' || key == 'x';
         state->active = true;
         state->deadline_ms = now + BENCH_PULSE_MS;
     } else {

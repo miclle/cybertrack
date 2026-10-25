@@ -4,11 +4,14 @@
 #include <stddef.h>
 #include <stdint.h>
 
-enum { BENCH_ARM_MS = 3000, BENCH_PULSE_MS = 10000, BENCH_COOLDOWN_MS = 1000 };
+enum { BENCH_ARM_MS = 3000, BENCH_PULSE_MS = 10000, BENCH_COOLDOWN_MS = 3000 };
+enum { BENCH_CHANNEL_A = 1, BENCH_CHANNEL_B = 2, BENCH_CHANNEL_BOTH = 3 };
 typedef struct {
     bool armed;
     bool active;
     bool reverse;
+    bool reverse_b;
+    unsigned channels; /* 0 after boot; explicit 1/2/3 selection is required. */
     uint64_t last_ms;
     uint64_t deadline_ms;
     uint64_t cooldown_until_ms;

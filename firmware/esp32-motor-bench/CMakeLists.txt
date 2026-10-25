@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 set(IDF_TARGET esp32s3)
-set(PROJECT_VER "0.1.2-motor-bench")
+set(PROJECT_VER "0.3.2-l298n-dual-10s")
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(cybertrack_motor_bench)
 idf_build_get_property(bench_idf_version IDF_VER)

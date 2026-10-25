@@ -1,0 +1,180 @@
+{
+  "checked_on": "2026-10-25",
+  "version": "0.3.1-l298n-combo-bench",
+  "scope": "eight no-load combinations: UART commands and stop receipts plus user-reported physical observations",
+  "pwm": {
+    "frequency_hz": 1000,
+    "duty": 154,
+    "resolution_bits": 8,
+    "approx_percent": 60,
+    "pulse_ms": 3000,
+    "cooldown_ms": 3000
+  },
+  "user_reported_before_test": {
+    "driver_12v_on": true,
+    "both_motors_stationary": true,
+    "no_anomaly": true,
+    "fixed_unloaded_no_tracks": "confirmed earlier in this session"
+  },
+  "groups": [
+    {
+      "group": 1,
+      "select": "1",
+      "target": "A",
+      "key": "f",
+      "stop_reply": "BENCH DISARMED outputs=OFF target=A",
+      "host_timing": {
+        "last_command": {
+          "command": "f",
+          "requested_at": 1792899281.2885718
+        },
+        "off_log_delay_seconds": 3.0281715393066406,
+        "checked_at": 1792899286.951636
+      }
+    },
+    {
+      "group": 2,
+      "select": "1",
+      "target": "A",
+      "key": "r",
+      "stop_reply": "BENCH DISARMED outputs=OFF target=A",
+      "host_timing": {
+        "last_command": {
+          "command": "r",
+          "requested_at": 1792899296.5982678
+        },
+        "off_log_delay_seconds": 3.0101354122161865,
+        "checked_at": 1792899302.253815
+      }
+    },
+    {
+      "group": 3,
+      "select": "2",
+      "target": "B",
+      "key": "f",
+      "stop_reply": "BENCH DISARMED outputs=OFF target=B",
+      "host_timing": {
+        "last_command": {
+          "command": "f",
+          "requested_at": 1792899314.550605
+        },
+        "off_log_delay_seconds": 3.022792339324951,
+        "checked_at": 1792899320.254138
+      }
+    },
+    {
+      "group": 4,
+      "select": "2",
+      "target": "B",
+      "key": "r",
+      "stop_reply": "BENCH DISARMED outputs=OFF target=B",
+      "host_timing": {
+        "last_command": {
+          "command": "r",
+          "requested_at": 1792899329.858479
+        },
+        "off_log_delay_seconds": 3.02333402633667,
+        "checked_at": 1792899335.556329
+      }
+    },
+    {
+      "group": 5,
+      "select": "3",
+      "target": "AB",
+      "key": "f",
+      "stop_reply": "BENCH DISARMED outputs=OFF target=AB",
+      "host_timing": {
+        "last_command": {
+          "command": "f",
+          "requested_at": 1792899347.3612301
+        },
+        "off_log_delay_seconds": 3.0184061527252197,
+        "checked_at": 1792899353.009701
+      }
+    },
+    {
+      "group": 6,
+      "select": "3",
+      "target": "AB",
+      "key": "r",
+      "stop_reply": "BENCH DISARMED outputs=OFF target=AB",
+      "host_timing": {
+        "last_command": {
+          "command": "r",
+          "requested_at": 1792899362.574454
+        },
+        "off_log_delay_seconds": 3.0425899028778076,
+        "checked_at": 1792899368.301175
+      }
+    },
+    {
+      "group": 7,
+      "select": "3",
+      "target": "AB",
+      "key": "x",
+      "stop_reply": "BENCH DISARMED outputs=OFF target=AB",
+      "host_timing": {
+        "last_command": {
+          "command": "x",
+          "requested_at": 1792899380.478058
+        },
+        "off_log_delay_seconds": 3.027122974395752,
+        "checked_at": 1792899386.205719
+      }
+    },
+    {
+      "group": 8,
+      "select": "3",
+      "target": "AB",
+      "key": "y",
+      "stop_reply": "BENCH DISARMED outputs=OFF target=AB",
+      "host_timing": {
+        "last_command": {
+          "command": "y",
+          "requested_at": 1792899395.8534882
+        },
+        "off_log_delay_seconds": 3.018923282623291,
+        "checked_at": 1792899401.506623
+      }
+    }
+  ],
+  "final_command": "s",
+  "final_stop_reply": "BENCH DISARMED outputs=OFF target=AB",
+  "unexpected_boot_error_or_reset_observed": false,
+  "serial_connection_kept_open": true,
+  "physical_results": {
+    "rotation_of_each_channel": true,
+    "off_channel_stationary": true,
+    "opposite_direction_combinations": true,
+    "physical_stop": true,
+    "supply_voltage_under_dual_load": null,
+    "driver_12v_disconnected_after_suite": true,
+    "usb_connected_after_suite": true,
+    "all_eight_directions_as_expected": true,
+    "abnormal_noise": false,
+    "abnormal_heating_observed": false
+  },
+  "timing_note": "Host command request to serial log modification time, not physical rotation duration or exact electrical stop latency.",
+  "private_evidence_directory": "build/l298n-bench-private/20261025-eight-combinations",
+  "full_physical_acceptance": false,
+  "evidence_sha256": {
+    "start.json": "79f75dd988d17b75b7f96a277d04c14d1b210956af735a9766bacc506dfe80a8",
+    "commands.jsonl": "c9bac43e017c62f9b727cd25fcd8875f03501343fa58ad1e7eaae4896f3b5fed",
+    "monitor-after-check.log": "190de5ff2bc1ce00a5feb94b83e8d7967433ff8982d0f02063cd29b718278be9"
+  },
+  "minimum_command_to_next_motion_seconds": 15.213223934173584,
+  "snapshot_checked_at": 1792899420.2692192,
+  "user_feedback": {
+    "reported_on": "2026-10-25",
+    "source": "user observation in this conversation",
+    "verbatim": "12 V 已断开，USB 保持连接。8 组测试都正常，单路测试时另一台不转，各组转向符合预期，两台都正常停下，没有异响或异常发热。"
+  },
+  "bounded_no_load_combination_check_passed": true,
+  "remaining_unverified": [
+    "BOOT early stop and no restart after release during dual motor motion",
+    "dual motor running bus voltage and current",
+    "quantitative temperature rise and sustained operation",
+    "loaded torque and tracks",
+    "reset or controller power loss defaults"
+  ]
+}

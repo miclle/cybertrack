@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-10-25T11:40:10.235538+08:00",
+  "version": "0.3.1-l298n-combo-bench",
+  "scope": "one AB forward 60 percent no-load action interrupted by BOOT; UART evidence and user physical observations",
+  "user_reported_before_test": {
+    "driver_12v_on": true,
+    "ready_for_boot_test": true,
+    "motors_fixed_unloaded": "confirmed earlier"
+  },
+  "commands": [
+    {
+      "command": "s",
+      "requested_at": 1792899575.721539
+    },
+    {
+      "command": "a",
+      "requested_at": 1792899576.350511
+    },
+    {
+      "command": "f",
+      "requested_at": 1792899576.982452
+    },
+    {
+      "command": "s",
+      "requested_at": 1792899589.767356
+    }
+  ],
+  "pwm_duty": 154,
+  "pwm_frequency_hz": 1000,
+  "automatic_deadline_ms": 3000,
+  "observed": {
+    "boot_stop_reply": "BENCH DISARMED outputs=OFF target=AB BOOT held",
+    "release_reply": "BENCH DISARMED outputs=OFF target=AB",
+    "command_to_boot_stop_receipt_seconds": 0.6469969749450684,
+    "boot_stop_before_automatic_deadline": true,
+    "release_to_final_stop_command_seconds": 11.933878898620605,
+    "no_rearm_or_direction_command_after_boot": true,
+    "final_stop_reply": "BENCH DISARMED outputs=OFF target=AB",
+    "unexpected_error_or_reset": false
+  },
+  "timing_note": "Host requested-command and log observer timestamps; not button-to-output latency or motor stop time. Press duration is not established by the requested hold time.",
+  "user_observed_both_motors_stopped_on_boot": true,
+  "user_observed_no_restart_after_release": true,
+  "user_reported_driver_12v_disconnected_after_test": true,
+  "physical_boot_stop_acceptance": true,
+  "serial_connection_kept_open": true,
+  "private_evidence_directory": "build/l298n-bench-private/20261025-dual-boot-stop",
+  "evidence_sha256": {
+    "preparation.json": "69f939186e7eefdd2c561c34dcdf8a934404b1924f6ae5c2b303c98c440ee05d",
+    "observation-start.json": "604c08abc959c7b5d4c538af82d4691488bc076ad31c39435f06fd78055fa066",
+    "timed-observation.jsonl": "52548a63899cb7a635016eac6d79668ce579d2cf3cd2efe48e277e4a301a00b8",
+    "commands.jsonl": "dd966f1cacff43e1d95fa3d43283c93fdebef4b366ccc7255ea976a654164725",
+    "monitor-after-check.log": "57e4c57300c0ea9c07ac9926ea1964aecf73b2923579335983fd0684f25b2ac7"
+  },
+  "acceptance_scope": "This single dual-motor no-load BOOT interruption and no automatic restart after release only; not full stop-system acceptance.",
+  "user_feedback": {
+    "reported_on": "2026-10-25",
+    "source": "user observation in this conversation",
+    "verbatim": "12 V 已断开，USB 保持连接。两台电机都在按 BOOT 后提前停止，松开后持续不转，没有异常。",
+    "usb_remains_connected": true,
+    "no_anomaly_reported": true
+  },
+  "remaining_unverified": [
+    "precise button-to-output stop latency and motor coast time",
+    "repeatability and other directions or loads",
+    "serial stop during motion",
+    "reset, controller power loss and undervoltage behavior",
+    "dual running supply/current and quantitative temperature rise"
+  ]
+}
