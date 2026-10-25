@@ -1,0 +1,2178 @@
+{
+  "baseline_revision": "0.36",
+  "revision": "0.37",
+  "baseline_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
+  "source_after_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+  "head_lift_mm": 25.0,
+  "rigid_head_count": 106,
+  "unchanged_count": 202,
+  "redesigned_or_repositioned_neck_and_cable": [
+    "NeckBearingL",
+    "NeckBearingR",
+    "NeckCapL",
+    "NeckCapR",
+    "NeckCrossbar",
+    "NeckHeadSaddle",
+    "NeckOuterWebL",
+    "NeckOuterWebR",
+    "NeckPedestal",
+    "NeckSpacerL104",
+    "NeckSpacerL136",
+    "NeckSpacerR104",
+    "NeckSpacerR136",
+    "NeckStayL",
+    "NeckStayR",
+    "NeckStaySleeveL",
+    "NeckStaySleeveR",
+    "NeckYokeL",
+    "NeckYokeR",
+    "PowerCableRoute"
+  ],
+  "added": [],
+  "removed": [],
+  "clearances_before": [
+    {
+      "object": "WaterModule",
+      "distance_to_head_mm": 7.600000000000001,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleModule",
+      "distance_to_head_mm": 7.600000000000001,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterHoseRoute",
+      "distance_to_head_mm": 6.806144748268312,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleGunHoseRoute",
+      "distance_to_head_mm": 9.045361017187261,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterGunHoseClearance",
+      "distance_to_head_mm": 5.306144748268313,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleGunHoseClearance",
+      "distance_to_head_mm": 7.045361017187261,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterBottleRemovalSpace",
+      "distance_to_head_mm": 4.600000000000001,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleBottleRemovalSpace",
+      "distance_to_head_mm": 4.600000000000001,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterFingerSpace",
+      "distance_to_head_mm": 56.599999999999994,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleFingerSpace",
+      "distance_to_head_mm": 56.599999999999994,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterStrapAccessSpace",
+      "distance_to_head_mm": 66.9196533164959,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleStrapAccessSpace",
+      "distance_to_head_mm": 66.9196533164959,
+      "overlap_mm3": 0.0
+    }
+  ],
+  "clearances_after": [
+    {
+      "object": "WaterModule",
+      "distance_to_head_mm": 18.62149295840696,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleModule",
+      "distance_to_head_mm": 18.62149295840696,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterHoseRoute",
+      "distance_to_head_mm": 20.7308250580282,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleGunHoseRoute",
+      "distance_to_head_mm": 10.934876417184666,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterGunHoseClearance",
+      "distance_to_head_mm": 19.230825058028206,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleGunHoseClearance",
+      "distance_to_head_mm": 8.934876417184672,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterBottleRemovalSpace",
+      "distance_to_head_mm": 4.600000000000001,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleBottleRemovalSpace",
+      "distance_to_head_mm": 4.600000000000001,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterFingerSpace",
+      "distance_to_head_mm": 58.55390678682337,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleFingerSpace",
+      "distance_to_head_mm": 58.55390678682337,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterStrapAccessSpace",
+      "distance_to_head_mm": 78.760650073498,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleStrapAccessSpace",
+      "distance_to_head_mm": 78.760650073498,
+      "overlap_mm3": 0.0
+    }
+  ],
+  "support_face_contacts": [
+    {
+      "a": "NeckYokeL",
+      "b": "NeckHeadSaddle",
+      "nominal_contact_area_mm2": 75.1875,
+      "passed": true
+    },
+    {
+      "a": "NeckYokeR",
+      "b": "NeckHeadSaddle",
+      "nominal_contact_area_mm2": 75.1875,
+      "passed": true
+    },
+    {
+      "a": "NeckStayL",
+      "b": "NeckHeadSaddle",
+      "nominal_contact_area_mm2": 15.913731722000838,
+      "passed": true
+    },
+    {
+      "a": "NeckStayR",
+      "b": "NeckHeadSaddle",
+      "nominal_contact_area_mm2": 15.913731722000838,
+      "passed": true
+    },
+    {
+      "a": "NeckStaySleeveL",
+      "b": "NeckPedestal",
+      "nominal_contact_area_mm2": 59.48317203427138,
+      "passed": true
+    },
+    {
+      "a": "NeckStaySleeveR",
+      "b": "NeckPedestal",
+      "nominal_contact_area_mm2": 59.48317200943458,
+      "passed": true
+    },
+    {
+      "a": "NeckHeadSaddle",
+      "b": "HeadShell",
+      "nominal_contact_area_mm2": 964.1913743824034,
+      "passed": true
+    },
+    {
+      "a": "NeckPedestal",
+      "b": "KeelLid",
+      "nominal_contact_area_mm2": 1122.3827487648066,
+      "passed": true
+    }
+  ],
+  "objects": [
+    {
+      "name": "ArcModuleL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ArcModuleR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "AudioEarGrilleL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "AudioEarGrilleR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "AudioEarRingL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "AudioEarRingR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "AudioModule",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "AudioSideGuardL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "AudioSideGuardR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BackpackShell",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BackpackSpine",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BaseCableGrommet",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryHatch",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryInsertLFront",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryInsertLRear",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryInsertRFront",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryInsertRRear",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryPad54N29",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryPad54N90",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryPadN54N29",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryPadN54N90",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryPullStrap",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryScrewLFront",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryScrewLRear",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryScrewRFront",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatteryScrewRRear",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatterySupportWasherLFront",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatterySupportWasherLRear",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatterySupportWasherRFront",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BatterySupportWasherRRear",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BottomCoverScrew0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BottomCoverScrew1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BottomCoverScrew2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BottomCoverScrew3",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BottomCoverScrew4",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BottomCoverScrew5",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BottomServiceCover",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BrowArmorL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BrowArmorR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleBottleRemovalSpace",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleBottomPad",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleDipTubeSpace",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleFingerSpace",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunBaseInsert1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunBaseInsert2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunBaseScrew1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunBaseScrew2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunBaseTool1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunBaseTool2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunConnectorService",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunCradle",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunFrontFoot",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunGearcase",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunHoseClearance",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunHoseRoute",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunHoseService",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunInspectionEnvelope",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunLeadClearance",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunLeadConnector",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunLeadRoute",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunLowerPadRear",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunMotor",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunMountingTab",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunRing",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunShell",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunSlotWall1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunSlotWall2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunSlotWall3",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunSlotWall4",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunSlotWall5",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunSlotWall6",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunStopAccess",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleGunWheel",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleLidMark",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleModule",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubblePod",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubblePodInsertL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubblePodInsertR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubblePodScrewL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubblePodScrewR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleRetentionBand",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleSidePad0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleSidePad1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleStrapAccessSpace",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "BubbleStrapClosure",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CheekArmorL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CheekArmorR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ChestAccentL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ChestAccentR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ChestAudioPanel",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ChestBadge",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ChestGuardL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ChestGuardR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerAntennaSpace",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerCarrier",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerMountInsert00",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerMountInsert01",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerMountInsert10",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerMountInsert11",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerMountScrew00",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerMountScrew01",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerMountScrew10",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerMountScrew11",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerRetainer",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerRetainerInsertFront",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerRetainerInsertRear",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerRetainerScrewFront",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerRetainerScrewRear",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerSocketFront",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerSocketRear",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerUSBCOM",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerUSBLeadCOM",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerUSBLeadUSB",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerUSBUSB",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerWireGuide",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ControllerWireRoute",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownEffectInsetL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownEffectInsetR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownEffectMarkLFront",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownEffectMarkLRear",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownEffectMarkRFront",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownEffectMarkRRear",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownFinL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownFinR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownForePlate",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownInsertLFront",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownInsertLRear",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownInsertRFront",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownInsertRRear",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownRearBlade0",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownRearBlade1",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownRearBlade2",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownRearCassette",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownScrewLFront",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownScrewLRear",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownScrewRFront",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownScrewRRear",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownSideArmorL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownSideArmorR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "CrownSpine",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "DriveCouplerL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "DriveCouplerR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ESP32Board",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "EarHubL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "EarHubR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "EarOuterArcL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "EarOuterArcR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "Electronics",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ElectronicsTray",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "HeadCableGrommet",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "HeadCrownShell",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "HeadServiceHatch",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "HeadShell",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "JawAccent",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "JawArmor",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "KeelLid",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "KeelSideFrameL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "KeelSideFrameR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NAirSpaceL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NAirSpaceR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NBottomPadL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NBottomPadR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NCarrier",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NClampNutL0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NClampNutL1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NClampNutR0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NClampNutR1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NClampScrewL0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NClampScrewL1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NClampScrewR0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NClampScrewR1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NConnectorSpace",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NEnvelope",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NMotorWireSpaceL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NMotorWireSpaceR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NMountInsertL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NMountInsertR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NMountScrewL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NMountScrewR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NRearPadL0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NRearPadL1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NRearPadR0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NRearPadR1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NSidePadL0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NSidePadL1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NSidePadR0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "L298NSidePadR1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "LowerChin",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "LowerTub",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorFaceScrewL0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorFaceScrewL1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorFaceScrewL2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorFaceScrewL3",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorFaceScrewR0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorFaceScrewR1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorFaceScrewR2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorFaceScrewR3",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorShaftL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "MotorShaftR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "NeckBearingL",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 1074.424687527709,
+      "passed": true
+    },
+    {
+      "name": "NeckBearingR",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 1074.4246875277092,
+      "passed": true
+    },
+    {
+      "name": "NeckCableBridge",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "NeckCapL",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 452.38934211693015,
+      "passed": true
+    },
+    {
+      "name": "NeckCapR",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 452.3893421169301,
+      "passed": true
+    },
+    {
+      "name": "NeckCrossbar",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 22619.467105846514,
+      "passed": true
+    },
+    {
+      "name": "NeckHeadSaddle",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 6720.37861577426,
+      "passed": true
+    },
+    {
+      "name": "NeckOuterWebL",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 2655.2175387196235,
+      "passed": true
+    },
+    {
+      "name": "NeckOuterWebR",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 2655.217538719623,
+      "passed": true
+    },
+    {
+      "name": "NeckPedestal",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 123.81624557392782,
+      "passed": true
+    },
+    {
+      "name": "NeckSpacerL104",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "NeckSpacerL136",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 39.26990816987242,
+      "passed": true
+    },
+    {
+      "name": "NeckSpacerR104",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "NeckSpacerR136",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 39.26990816987242,
+      "passed": true
+    },
+    {
+      "name": "NeckStayL",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 1606.2248484996746,
+      "passed": true
+    },
+    {
+      "name": "NeckStayR",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 1606.2248484996746,
+      "passed": true
+    },
+    {
+      "name": "NeckStaySleeveL",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 796.9849247280245,
+      "passed": true
+    },
+    {
+      "name": "NeckStaySleeveR",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 796.9849247280247,
+      "passed": true
+    },
+    {
+      "name": "NeckYokeL",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 8510.059271357433,
+      "passed": true
+    },
+    {
+      "name": "NeckYokeR",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 8510.059271357435,
+      "passed": true
+    },
+    {
+      "name": "OccipitalBrowL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalBrowR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalFrame",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalInset",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalLouverL0",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalLouverL1",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalLouverL2",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalLouverR0",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalLouverR1",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalLouverR2",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalMark",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "OccipitalSpine",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "PowerBank",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "PowerCableRoute",
+      "expectation": "neck/cable redesign",
+      "difference_from_expected_mm3": 1184.8937127011836,
+      "passed": true
+    },
+    {
+      "name": "RearBaseArmor",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "RearBulkhead",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "SensorMask",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "SensorStatusStrip",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ShoulderRailL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "ShoulderRailR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "StopControl",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "StopPlinth",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TempleCrestL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TempleCrestR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TempleGuardL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TempleGuardR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TempleLowerBladeL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TempleLowerBladeR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftChevronTreads",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftFasteners",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftRockerPlates",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftRubberBand",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftShoulderLugs",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftSuspensionArms",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftTreadPads",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftWheelFaces",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftWheelHubs",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftWheelRims",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackLeftWheelTires",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackMountL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackMountR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackMountScrewLFront",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackMountScrewLRear",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackMountScrewRFront",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackMountScrewRRear",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightChevronTreads",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightFasteners",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightRockerPlates",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightRubberBand",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightShoulderLugs",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightSuspensionArms",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightTreadPads",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightWheelFaces",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightWheelHubs",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightWheelRims",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrackRightWheelTires",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrayInsertL0",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrayInsertL1",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrayInsertR0",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrayInsertR1",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrayScrewL0",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrayScrewL1",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrayScrewR0",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "TrayScrewR1",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "UltrasonicFaceL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "UltrasonicFaceR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "UltrasonicRingL",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "UltrasonicRingR",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "VisorRim",
+      "expectation": "rigid +25 Z",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterBottleRemovalSpace",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterBottomPad",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterDipTubeSpace",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterFingerSpace",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunBaseInsert1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunBaseInsert2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunBaseScrew1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunBaseScrew2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunBaseTool1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunBaseTool2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunBody",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunConnectorService",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunCradle",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunHoseClearance",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunHoseService",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunHoseSupport",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunHoseSupportRear",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunInlet",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunLeadClearance",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunLeadConnector",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunLeadRoute",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunLowerPad1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunLowerPad2",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterGunMaximumEnvelope",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterHoseRoute",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterLidMark",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterModule",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterPod",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterPodInsertL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterPodInsertR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterPodScrewL",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterPodScrewR",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterRetentionBand",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterSidePad0",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterSidePad1",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterStrapAccessSpace",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WaterStrapClosure",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "WetDivider",
+      "expectation": "unchanged",
+      "difference_from_expected_mm3": 0.0,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

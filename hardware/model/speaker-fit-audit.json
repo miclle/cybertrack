@@ -8,12 +8,12 @@
   "bbox_mm": [
     -34.75,
     -72.75,
-    146.0,
+    171.0,
     34.75,
     -41.25,
-    162.5
+    187.5
   ],
-  "orientation": "length X, width Y, height Z; old XY centre and bottom retained",
+  "orientation": "length X, width Y, height Z; original allocation shifted with head by 25 mm",
   "shape_valid": true,
   "solid_count": 1,
   "outside_original_allocation_mm3": 0.0,
@@ -159,6 +159,11 @@
       "distance_mm": 16.618440786176166
     },
     {
+      "object": "NeckHeadSaddle",
+      "category": "structure",
+      "distance_mm": 17.408690358553685
+    },
+    {
       "object": "BrowArmorL",
       "category": "exterior",
       "distance_mm": 17.50178562318714
@@ -194,6 +199,16 @@
       "distance_mm": 18.150000000000002
     },
     {
+      "object": "NeckYokeL",
+      "category": "structure",
+      "distance_mm": 19.080421903092184
+    },
+    {
+      "object": "NeckYokeR",
+      "category": "structure",
+      "distance_mm": 19.080421903092184
+    },
+    {
       "object": "ESP32Board",
       "category": "envelope",
       "distance_mm": 19.2614355643602
@@ -204,9 +219,39 @@
       "distance_mm": 19.590000638080642
     },
     {
+      "object": "NeckOuterWebL",
+      "category": "structure",
+      "distance_mm": 22.40675121475668
+    },
+    {
+      "object": "NeckOuterWebR",
+      "category": "structure",
+      "distance_mm": 22.40675121475668
+    },
+    {
       "object": "ControllerUSBUSB",
       "category": "clearance",
       "distance_mm": 22.524986126521814
+    },
+    {
+      "object": "NeckSpacerL136",
+      "category": "structure",
+      "distance_mm": 22.94724936019609
+    },
+    {
+      "object": "NeckSpacerR136",
+      "category": "structure",
+      "distance_mm": 22.94724936019609
+    },
+    {
+      "object": "NeckBearingL",
+      "category": "structure",
+      "distance_mm": 26.404043899022472
+    },
+    {
+      "object": "NeckBearingR",
+      "category": "structure",
+      "distance_mm": 26.404043899022472
     },
     {
       "object": "HeadServiceHatch",
@@ -229,6 +274,11 @@
       "distance_mm": 29.5
     },
     {
+      "object": "NeckCrossbar",
+      "category": "structure",
+      "distance_mm": 29.904043899022476
+    },
+    {
       "object": "CrownInsertLFront",
       "category": "structure",
       "distance_mm": 30.41073001425648
@@ -237,6 +287,16 @@
       "object": "CrownInsertRFront",
       "category": "structure",
       "distance_mm": 30.41073001425648
+    },
+    {
+      "object": "NeckCapR",
+      "category": "structure",
+      "distance_mm": 31.40404389902247
+    },
+    {
+      "object": "NeckCapL",
+      "category": "structure",
+      "distance_mm": 31.404043899022472
     },
     {
       "object": "ControllerUSBLeadUSB",
@@ -304,6 +364,16 @@
       "distance_mm": 41.83471912482233
     },
     {
+      "object": "NeckStayL",
+      "category": "structure",
+      "distance_mm": 42.750727554846364
+    },
+    {
+      "object": "NeckStayR",
+      "category": "structure",
+      "distance_mm": 42.750727554846364
+    },
+    {
       "object": "CrownEffectMarkLFront",
       "category": "exterior",
       "distance_mm": 44.278945335226766
@@ -312,11 +382,6 @@
       "object": "CrownEffectMarkRFront",
       "category": "exterior",
       "distance_mm": 44.278945335226766
-    },
-    {
-      "object": "BubbleGunHoseClearance",
-      "category": "clearance",
-      "distance_mm": 45.41124423471661
     },
     {
       "object": "TempleGuardL",
@@ -329,11 +394,6 @@
       "distance_mm": 47.25
     },
     {
-      "object": "BubbleGunHoseRoute",
-      "category": "envelope",
-      "distance_mm": 47.404913586742246
-    },
-    {
       "object": "AudioSideGuardL",
       "category": "exterior",
       "distance_mm": 47.802981078589646
@@ -344,11 +404,6 @@
       "distance_mm": 47.802981078589646
     },
     {
-      "object": "WaterGunHoseClearance",
-      "category": "clearance",
-      "distance_mm": 48.1901964158746
-    },
-    {
       "object": "TempleLowerBladeL",
       "category": "exterior",
       "distance_mm": 49.25
@@ -357,11 +412,6 @@
       "object": "TempleLowerBladeR",
       "category": "exterior",
       "distance_mm": 49.25
-    },
-    {
-      "object": "WaterHoseRoute",
-      "category": "envelope",
-      "distance_mm": 49.69019641587461
     },
     {
       "object": "TempleCrestL",
@@ -422,11 +472,31 @@
       "object": "EarHubR",
       "category": "exterior",
       "distance_mm": 59.81919627209117
+    },
+    {
+      "object": "WaterGunHoseClearance",
+      "category": "clearance",
+      "distance_mm": 65.1677453920669
+    },
+    {
+      "object": "WaterHoseRoute",
+      "category": "envelope",
+      "distance_mm": 66.66774539206692
+    },
+    {
+      "object": "BubbleGunHoseClearance",
+      "category": "clearance",
+      "distance_mm": 68.93923739843314
+    },
+    {
+      "object": "BubbleGunHoseRoute",
+      "category": "envelope",
+      "distance_mm": 70.93221432091752
     }
   ],
   "passed": true,
   "mounts_leads_acoustics_verified": false,
   "physical_fit_verified": false,
-  "source_after_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
+  "source_after_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
   "saved_and_reopened": true
 }

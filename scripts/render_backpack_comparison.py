@@ -6,6 +6,7 @@ Run with FreeCAD's bundled Python; supply the archived pre-change FCStd.
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 
 import FreeCAD as A
@@ -16,6 +17,8 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('before', type=Path)
 parser.add_argument('--after', type=Path, default=Path('hardware/model/CyberTrack.FCStd'))
 parser.add_argument('--output', type=Path, default=Path('hardware/model/comparisons/0.35-to-0.36'))
+parser.add_argument('--before-label', default='0.35 before')
+parser.add_argument('--after-label', default='0.36 after')
 args = parser.parse_args()
 args.output.mkdir(parents=True, exist_ok=True)
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
@@ -44,7 +47,7 @@ views = {
 }
 report = {'before_sha256': hashes[0], 'after_sha256': hashes[1],
           'before_source': str(sources[0]), 'after_source': str(sources[1]),
-          'left': '0.35 before', 'right': '0.36 after',
+          'left': args.before_label, 'right': args.after_label,
           'bottles': 'complete provisional capped cylinders, not actual shoulder/cap shapes',
           'hose_routes_hidden_in_both': True, 'geometry_scaled': False,
           'camera': 'orthographic', 'views': {}}
@@ -68,13 +71,15 @@ for name, (rotation, offsets) in views.items():
     view.setCameraOrientation(rotation.Q)
     view.fitAll()
     camera = view.getCameraOrientation()
-    camera_node = view.getCameraNode()
-    camera_node.height.setValue(250.0)
+    camera_text = view.getCamera()
+    camera_text, count = re.subn(r'(\bheight\s+)[-+\d.eE]+', r'\g<1>250.0', camera_text)
+    assert count == 1, 'Expected one orthographic height field'
+    view.setCamera(camera_text)
     for _ in range(10):
         QtGui.QApplication.processEvents()
     output = args.output / (name + '-before-after.png')
     view.saveImage(str(output.resolve()), 2400, 1000, 'White')
-    report['views'][name] = {'camera_height_mm': float(camera_node.height.getValue()),
+    report['views'][name] = {'camera_height_mm': float(re.search(r'\bheight\s+([-+\d.eE]+)',view.getCamera()).group(1)),
                               'camera_orientation': list(camera.Q),
                               'offsets_mm': [list(v) for v in offsets],
                               'output_sha256': sha(output)}

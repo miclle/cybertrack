@@ -51,10 +51,12 @@ def check_ultrasonic(doc):
     objects = [o for o in doc.Objects if hasattr(o, 'Category')]
     probes, overlaps, reserved, nearby = [], [], [], []
     tested = 0
+    lift = float(doc.getObject('SensorMask').HeadLift)
     for side, sign in [('L', 1), ('R', -1)]:
         names = ('UltrasonicRing' + side, 'UltrasonicFace' + side)
         parts = [doc.getObject(n).Shape for n in names]
         full = probe_shape(sign)
+        full.translate(V(0,0,lift))
         actual = parts[0].fuse(parts[1]).removeSplitter()
         difference = actual.cut(full).Volume + full.cut(actual).Volume
         b = actual.optimalBoundingBox(False)
@@ -83,7 +85,7 @@ def check_ultrasonic(doc):
     return {'source': str(SOURCE.relative_to(SOURCE.parents[3])),
             'diameter_mm': DIAMETER, 'outer_span_mm': SPAN, 'height_from_panel_mm': HEIGHT,
             'derived_center_spacing_mm': PITCH, 'derived_gap_mm': SPAN - 2 * DIAMETER,
-            'center_x_mm': [-PITCH / 2, PITCH / 2], 'center_z_mm': CENTER_Z,
+            'center_x_mm': [-PITCH / 2, PITCH / 2], 'center_z_mm': CENTER_Z+lift,
             'panel_datum_y_mm': PANEL_Y, 'probe_front_y_mm': PANEL_Y - HEIGHT,
             'datum_is_assumption': True, 'datum_description': 'robot front-panel outer face; user panel datum not confirmed',
             'candidate_hole_diameter_mm': DIAMETER + 2 * RADIAL_GAP,

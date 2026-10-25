@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 import FreeCAD as App
 import Part
+from head_lift import LIFT, add_neck, apply as lift_head, check as check_head_lift
 from rear_armor import mirrored_profile, check_rear_armor
 from top_feed import check_top_feed
 from bottle_backpack import apply as add_bottle_backpack, check as check_bottle_backpack, render as render_bottle_backpack
@@ -256,7 +257,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.36'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.37'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -336,41 +337,7 @@ def main():
     for cx in (-24,24):
         lid=lid.cut(Part.makeCylinder(20.5,6,V(cx,49,92)))
     add('KeelLid','低鼻锥至颈架的折面顶盖',lid,'structure','metal')
-    # Fixed twin yokes, machined-looking bearing stacks and rear diagonal stays.
-    # These are static concept members, with no actuator or movement claim.
-    pedestal=Part.Face(footprint(17,-17,20,6,97)).extrude(V(0,0,5))
-    for sign in (-1,1):
-        pedestal=pedestal.cut(strut(4.8,(sign*12,16,103),(sign*12,10.68,115.92)))
-    add('NeckPedestal','颈架八角基座／斜撑沉座',pedestal,'structure','dark')
-    for side,sign in [('L',1),('R',-1)]:
-        x0,x1=(18,25) if sign>0 else (-25,-18)
-        profile=[(-9,97),(19,97),(22,105),(7,134),(-3,140),(-25,140),(-28,132),(-16,106)]
-        neck=yz_prism(profile,x0,x1)
-        neck=neck.cut(Part.makeCylinder(8,60,V(-30,-11,128),V(1,0,0)))
-        neck=neck.cut(yz_prism([(-9,107),(8,107),(-1,122),(-16,122)],x0-1,x1+1))
-        add('NeckYoke'+side,('左' if sign>0 else '右')+'开窗前倾颈架',neck,'structure','metal')
-        # A thinner outer plate leaves the inner web visible around its perimeter.
-        ax0,ax1=(26,29) if sign>0 else (-29,-26)
-        plate=yz_prism([(-7,100),(17,100),(17,105),(4,131),(-4,137),(-23,137),(-24,132),(-13,106)],ax0,ax1)
-        plate=plate.cut(Part.makeCylinder(9,70,V(-35,-11,128),V(1,0,0)))
-        plate=plate.cut(yz_prism([(-8,109),(5,109),(-2,120),(-13,120)],ax0-1,ax1+1))
-        add('NeckOuterWeb'+side,('左' if sign>0 else '右')+'颈架外层加强板',plate,'structure','accent')
-        add('NeckBearing'+side,('左' if sign>0 else '右')+'固定横梁阶梯套',ring(11,8,3,V(sign*29,-11,128),V(sign,0,0)),'structure','dark')
-        add('NeckCap'+side,('左' if sign>0 else '右')+'横梁端部锁片',Part.makeCylinder(6,2,V(sign*32,-11,128),V(sign,0,0)),'structure','accent')
-        # Axial stand-offs bridge the deliberate 1 mm layer spacing.
-        for y,z in [(10,104),(-20,136)]:
-            add('NeckSpacer'+side+str(z),'颈架层间连接柱 '+side+' '+str(z),Part.makeCylinder(2.5,1,V(sign*25,y,z),V(sign,0,0)),'structure','dark')
-        add('NeckStay'+side,('左' if sign>0 else '右')+'后斜撑芯杆',strut(2.8,(sign*12,16,103),(sign*12,2,137)),'structure','metal')
-        sleeve=strut(4.8,(sign*12,16,103),(sign*12,10.68,115.92)).cut(strut(2.8,(sign*12,16,103),(sign*12,10.68,115.92)))
-        add('NeckStaySleeve'+side,('左' if sign>0 else '右')+'后斜撑固定套筒',sleeve,'structure','dark','固定外观支撑；不是液压或电动推杆')
-    add('NeckCrossbar','颈架固定横梁',Part.makeCylinder(7.5,64,V(-32,-11,128),V(1,0,0)),'structure','metal')
-    saddle=box(-17,-27,137,17,6,140)
-    for sign in (-1,1):
-        saddle=saddle.cut(strut(2.8,(sign*12,16,103),(sign*12,2,137)))
-    add('NeckHeadSaddle','头舱下方承托鞍座',saddle,'structure','dark')
-    for obj in groups['structure'].Group:
-        if obj.Name.startswith('Neck'):
-            shape=obj.Shape.copy();shape.translate(V(0,0,-4));obj.Shape=shape
+    add_neck(doc,add)
     head_start=set(o.Name for o in doc.Objects)
     def face_profile(points, ymin, ymax):
         return xz_prism([(x*1.2,z) for x,z in points],ymin-16,ymax-16)
@@ -606,6 +573,7 @@ def main():
     l298n_info=add_l298n(doc,add)
     l298n_mount_info=add_l298n_mount(doc,add)
     bottle_info=add_bottle_backpack(doc,add)
+    lift_head(doc,controller_info,l298n_info)
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
@@ -718,8 +686,9 @@ def main():
     from drive_service_check import check as check_drive_mount
     print('Final readback; drive and bottle checks',flush=True)
     drive_mount_check=check_drive_mount(final,verbose=True)
-    report={'status':'preliminary_concept','design_revision':'0.36','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.37','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'drive_mount_check':drive_mount_check,
+            'head_lift_check':check_head_lift(final),
             'rear_armor_symmetry_check':check_rear_armor(final),
             'top_feed_check':check_top_feed(final),
             'bottle_backpack':bottle_info,'bottle_backpack_check':check_bottle_backpack(final),
@@ -733,14 +702,14 @@ def main():
             'ports_and_cable_clearance_verified':False},
             'arc_module_envelopes':{'quantity':2,'diameter_mm':25.5,'length_mm':70,
                 'basis':'user specified provisional envelope on 2026-10-24; not measured',
-                'axis':'+Y','axis_origins_mm':[[65.5,-66,156.5],[-65.5,-66,156.5]],
+                'axis':'+Y','axis_origins_mm':[[65.5,-66,156.5+LIFT],[-65.5,-66,156.5+LIFT]],
                 'tray_width_mm':104,'tray_hole_pattern_unchanged':False,
                 'tray_hole_centers_x_mm':[-49.5,49.5], 'tray_hole_centers_y_mm':[-30,0],
                 'relocation_from_0_11_1_mm':{'left':[-3,0,-1.5],'right':[3,0,-1.5]},
                 'mounts_and_leads_designed':False,'electrical_clearance_verified':False,
                 'insulation_liquid_isolation_emc_verified':False},
             'crown_effect_locations':{'quantity':2,'center_x_mm':[51.5,-51.5],
-                'outer_size_xyz_mm':[16,47,11],'y_range_mm':[-16,31],'z_range_mm':[192,203],
+                'outer_size_xyz_mm':[16,47,11],'y_range_mm':[-16,31],'z_range_mm':[192+LIFT,203+LIFT],
                 'recess_plan_mm':[8,25],'recess_y_range_mm':[-5,20],
                 'basis':'design allocation for passive appearance mockup; not supplier data',
                 'service_group':'crown','electrodes_or_wiring_designed':False,
@@ -789,6 +758,9 @@ def main():
     report['bottle_backpack_check']['source_sha256']=sha(cad)
     report['bottle_backpack_check']['saved_and_reopened']=True
     (OUT/'bottle-backpack-audit.json').write_text(json.dumps(report['bottle_backpack_check'],ensure_ascii=False,indent=2)+'\n')
+    report['head_lift_check']['source_sha256']=sha(cad)
+    report['head_lift_check']['saved_and_reopened']=True
+    (OUT/'head-lift-audit.json').write_text(json.dumps(report['head_lift_check'],ensure_ascii=False,indent=2)+'\n')
     (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check','service_paths')},ensure_ascii=False,indent=2))
     App.closeDocument(final.Name)
@@ -798,7 +770,7 @@ def main():
         Gui.getMainWindow().close()
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
         QtGui.QApplication.processEvents()
-    if not report['bottle_backpack_check']['passed'] or not report['l298n_mount_check']['passed'] or not report['l298n_check']['passed'] or not drive_mount_check['passed'] or not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not report['speaker_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
+    if not report['head_lift_check']['passed'] or not report['bottle_backpack_check']['passed'] or not report['l298n_mount_check']['passed'] or not report['l298n_check']['passed'] or not drive_mount_check['passed'] or not report['top_feed_check']['passed'] or not report['rear_armor_symmetry_check']['passed'] or not report['ultrasonic_check']['passed'] or not report['speaker_check']['passed'] or not bubble_check['passed'] or collisions or not service_check['passed'] or not controller_check['passed'] or not water_check['passed'] or not water_check['removal']['passed']:
         raise ValueError('Static or sampled service overlaps detected; inspect readback.json')
 
 
