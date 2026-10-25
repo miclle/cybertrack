@@ -1,4 +1,4 @@
-"""0.42 passive backpack body clamps and chassis effect-board carrier.
+"""0.43 passive backpack body clamps and chassis effect-board carrier.
 
 Contact, pads, M2.5-class hardware and actual boards remain candidates. This
 module defines no HV wiring, electrode, drive, insulation or protective rating.
@@ -8,7 +8,7 @@ import Part
 from breadboard_layout import box
 from ultrasonic_integration import inspect as inspect_exact,box_sweep,bounds
 V=A.Vector
-MOUNTS=[(x,y) for x in (-39,39) for y in (-49,-29)]
+from effect_board_mount import MOUNTS, apply as add_board_mount, check as check_board_mount, vertical_sweep, SIDE_WIRE_POINTS
 PREFIXES=('BackpackArc','ArcClamp','ArcLiner','ArcBottomPad','ArcInsert','ArcScrew','ArcTool','Effect')
 
 
@@ -34,7 +34,7 @@ def apply(doc,add):
     fixed=doc.getObject('BackpackShell').Shape.copy()
     lid=doc.getObject('KeelLid').Shape.copy()
     def put(n,label,s,category='structure',color='metal',basis=None):
-        return add(n,label,s.removeSplitter(),category,color,basis or '0.42机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳')
+        return add(n,label,s.removeSplitter(),category,color,basis or '0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳')
     for side,sign in [('L',1),('R',-1)]:
         put('BackpackArc'+side,'背包外侧本体候选 Ø25.5×70 '+side,zc(12.75,54,124,sign*74,85),'envelope','accent',
             '历史用户规划Ø25.5×70，非实测；不含端部、引线、电极、驱动、绝缘或屏蔽验收')
@@ -68,34 +68,14 @@ def apply(doc,add):
                     mirror(lining.common(box(x0,60,z-4,x1,110,z+4)),sign),'structure','dark',
                     '名义接触不建压缩；材料、夹持力、灌封壳接触区域与温升均待实测')
         fixed=fixed.fuse(mirror(spine,sign))
-        x=sign*18.5
-        put('EffectMOS'+side,'效果MOS候选 33×17×12 '+side,box(x-16.5,-40,68.5,x+16.5,-23,80.5),'envelope','electronics',
-            '通用图33×17，高12为预算；实际端子及可接触板边未测，未虚构PCB安装孔')
-        put('EffectBuck'+side,'降压板用户尺寸20×11×5 '+side,box(x-10,-54,68.5,x+10,-43,73.5),'envelope','bubble',
-            '用户提供20×11×5，焊锡／端子／出线范围未单独确认；一效果一板为数量假设')
     doc.getObject('BackpackShell').Shape=fixed.removeSplitter()
-    tray=box(-37,-56,66.5,37,-23,68.5)
-    for i,(x,y) in enumerate(MOUNTS):
-        tray=tray.fuse(box(x-4,y-4,66.5,x+4,y+4,68.5)).cut(zc(1.4,66.4,68.6,x,y))
-        # Blind insert sockets open downward; the original roof skin stays whole.
-        post=zc(3.5,68.5,79 if y==-49 else 87,x,y).cut(zc(2.1,68.4,74.5,x,y))
-        post=post.cut(doc.getObject('LowerTub').Shape)
-        lid=lid.fuse(post)
-        put('EffectInsert'+str(i),'薄承板M2.5级嵌件候选 '+str(i),zc(2,69,74,x,y).cut(zc(1.25,68.9,74.1,x,y)))
-        screw=zc(1.2,66.5,73.5,x,y).fuse(zc(2.4,65,66.5,x,y))
-        screw=screw.cut(box(x-1.4,y-.5,64.9,x+1.4,y+.5,65.8))
-        put('EffectScrew'+str(i),'薄承板底部M2.5级螺钉候选 '+str(i),screw)
-        put('EffectTool'+str(i),'取充电宝后薄承板工具杆 '+str(i),zc(1.5,-12,65,x,y),'clearance','accent',
-            '先取充电宝及底盖；仅Ø3直杆空间，手部／手柄与真实工具未验证')
-    doc.getObject('KeelLid').Shape=lid.removeSplitter()
-    put('EffectTray','底盘效果板四点薄承板／候选',tray,'structure','metal',
-        '主体74×33×2，四耳孔X±39/Y-49,-29；固定到顶盖内柱，先拆电源再向下取；板卡自身固定待实测')
+    board_info=add_board_mount(doc,put)
     doc.recompute()
-    return {'revision':'0.42','arc_body_diameter_length_mm':[25.5,70],'arc_centres_xy_mm':[[74,85],[-74,85]],
+    return {'revision':'0.43','arc_body_diameter_length_mm':[25.5,70],'arc_centres_xy_mm':[[74,85],[-74,85]],
         'arc_body_z_mm':[54,124],'clamp_z_centres_mm':[86,114],'split_gap_mm':.6,'liner_thickness_mm':.5,
         'arc_clamp_screw_quantity':8,'effect_tray_screw_quantity':4,'effect_mount_xy_mm':MOUNTS,
         'MOS_lwh_mm':[33,17,12],'MOS_height_assumed':True,'buck_lwh_mm':[20,11,5],
-        'quantity_assumption':'one MOS and one buck per effect','board_mounting_complete':False,
+        'quantity_assumption':'one MOS and one buck per effect','board_mounting_complete':False,'board_mounting_candidate':board_info,
         'physical_fit_verified':False,'electrical_or_insulation_verified':False}
 
 
@@ -129,15 +109,24 @@ def check(doc):
             tool_checks[n]=inspect(doc.getObject(n.replace('Screw','Tool')).Shape,{m:s for m,s in physical.items() if m!=n})
     removed={'PowerBank','BatteryHatch','BatteryPullStrap','BottomServiceCover','PowerCableRoute'}
     removed|={o.Name for o in doc.Objects if o.Name.startswith(('BatteryPad','BatterySupportWasher','BatteryScrew','BottomCoverScrew'))}
-    names=['EffectTray','EffectMOSL','EffectMOSR','EffectBuckL','EffectBuckR']
+    names=[n for n in physical if n.startswith('Effect') and not n.startswith(('EffectScrew','EffectInsert'))]
     bolts=[n for n in selected if n.startswith('EffectScrew')]
-    tray_sweep=Part.makeCompound([box_sweep(physical[n],(0,0,-100)) for n in names])
+    tray_sweep=Part.makeCompound([vertical_sweep(physical[n],-100) for n in names])
+    tray_sweep=tray_sweep.Solids[0].multiFuse(tray_sweep.Solids[1:]).removeSplitter()
     tray=inspect(tray_sweep,{n:s for n,s in physical.items() if n not in removed and n not in names+bolts})
+    wire_parts=[o.Shape for o in doc.Objects if o.Name.startswith(('EffectPort','EffectWireCentre'))]
+    for sign in (-1,1):
+        points=[(sign*x,y,z) for x,y,z in SIDE_WIRE_POINTS]
+        for a,b in zip(points,points[1:]):
+            wire_parts.append(box(*[min(a[i],b[i])-1.5 for i in range(3)],*[max(a[i],b[i])+1.5 for i in range(3)]))
+    wire_sweep=Part.makeCompound([box_sweep(s,(0,0,-100)) for s in wire_parts])
+    wire_sweep=wire_sweep.Solids[0].multiFuse(wire_sweep.Solids[1:]).removeSplitter()
+    wire_service=inspect(wire_sweep,{n:s for n,s in physical.items() if n not in removed and n not in names+bolts})
     negative['battery_retained']=inspect(tray_sweep,{'PowerBank':physical['PowerBank']})
     negative['tray_screws_retained']=inspect(tray_sweep,{n:physical[n] for n in bolts})
     for i,(x,y) in enumerate(MOUNTS):
         n='EffectScrew'+str(i)
-        swept=zc(1.2,41.5,73.5,x,y).fuse(zc(2.4,40,66.5,x,y))
+        swept=zc(1.2,43.1,75.1,x,y).fuse(zc(2.4,41.6,68.1,x,y))
         obstacles={m:s for m,s in physical.items() if m not in removed and m!=n}
         screw_checks[n]=inspect(swept,obstacles)
         tool_checks[n]=inspect(doc.getObject('EffectTool'+str(i)).Shape,obstacles)
@@ -153,16 +142,18 @@ def check(doc):
         moved=physical['ArcClampOuter'+side+'0'].copy();moved.translate(V(sign*.5,0,0))
         negative['cap_screws_retained_'+side]=inspect(moved,{n:s for n,s in physical.items() if n.startswith('ArcScrew'+side+'0')})
     contacts['tray_to_posts']=face_contact(physical['EffectTray'],physical['KeelLid'])
-    return {'revision':'0.42','static':static,'reserved_spaces':spaces,'outer_caps':cap_checks,'arc_up_90':arc_checks,
-        'tray_down_100':tray,'tray_removed_first':sorted(removed)+bolts,'screw_continuous_sweeps':screw_checks,'tool_rods':tool_checks,
+    boards=check_board_mount(doc,inspect)
+    return {'revision':'0.43','board_mount':boards,'static':static,'reserved_spaces':spaces,'outer_caps':cap_checks,'arc_up_90':arc_checks,
+        'tray_down_100':tray,'disconnected_local_wires_down_100':wire_service,'tray_removed_first':sorted(removed)+bolts,'screw_continuous_sweeps':screw_checks,'tool_rods':tool_checks,
         'negative_controls':negative,'nominal_contact_areas_mm2':contacts,'passed':all(r['passed'] for section in (static,spaces,cap_checks,arc_checks,screw_checks,tool_checks) for r in section.values())
-            and tray['passed'] and all(not r['passed'] for r in negative.values()) and all(area>10 for area in contacts.values()),
+            and boards['passed'] and tray['passed'] and wire_service['passed'] and all(not r['passed'] for r in negative.values()) and all(area>10 for area in contacts.values()),
         'physical_fit_verified':False,'limits':'Cap release sampled; bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.'}
 
 
 def render(doc,output):
     import FreeCADGui as G
     from PySide import QtGui
+    from pivy import coin  # Register the camera-node SWIG wrappers.
     A.setActiveDocument(doc.Name)
     objects=[o for o in doc.Objects if hasattr(o,'Category')]
     saved={o.Name:(o.Shape.copy(),o.ViewObject.Visibility,o.ViewObject.Transparency) for o in objects}
@@ -177,7 +168,9 @@ def render(doc,output):
     view=G.activeDocument().activeView();view.setCameraType('Orthographic')
     views=[('effects-backpack',rear,arc|packs),('effects-clamp',rear,left|{'BackpackShell'}),
            ('effects-service',rear,arc|packs),('effects-tray',front,effect|{'KeelLid','LowerTub','PowerBank'}),
-           ('effects-tray-bottom',bottom,effect),('effects-tray-service',front,effect|{'KeelLid','LowerTub'})]
+           ('effects-tray-bottom',bottom,effect),('effects-tray-service',front,effect|{'KeelLid','LowerTub'}),
+           ('effects-board-mount',front,effect),('effects-board-wiring',front,effect|{o.Name for o in objects if o.Name.startswith(('EffectPort','EffectWire'))}),
+           ('effects-board-service',front,effect)]
     try:
         for name,rotation,visible in views:
             for o in objects:
@@ -200,7 +193,23 @@ def render(doc,output):
                     if n.startswith(('EffectScrew','EffectInsert')):doc.getObject(n).ViewObject.Visibility=False
                     else:
                         s=doc.getObject(n).Shape.copy();s.translate(V(0,0,-100));doc.getObject(n).Shape=s
+            if name.startswith('effects-board'):
+                for n in effect:
+                    if n.startswith(('EffectInsert','EffectScrew')):doc.getObject(n).ViewObject.Visibility=False
+            if name=='effects-board-service':
+                for n in effect:
+                    o=doc.getObject(n)
+                    if n.startswith('EffectRetainerScrew'):o.ViewObject.Visibility=False
+                    elif n in ('EffectRetainerLMOS','EffectRetainerRMOS','EffectRetainerLBuck','EffectRetainerRBuck'):
+                        s=o.Shape.copy();s.translate(V(0,0,42));o.Shape=s
+                    elif n in ('EffectMOSL','EffectMOSR','EffectBuckL','EffectBuckR'):
+                        s=o.Shape.copy();s.translate(V(0,0,20));o.Shape=s
+            if name=='effects-board-wiring':
+                for o in objects:
+                    if o.Name.startswith(('EffectPort','EffectWire')):o.ViewObject.Transparency=45
             doc.recompute();view.setCameraOrientation(rotation.Q);view.fitAll()
+            if name=='effects-board-service':
+                camera=view.getCameraNode();camera.height.setValue(camera.height.getValue()*1.18)
             for _ in range(10):QtGui.QApplication.processEvents()
             view.saveImage(str(output/(name+'.png')),1600,1200,'White')
     finally:
