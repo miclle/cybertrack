@@ -159,5 +159,74 @@ int main() {
     boot.Tick(1,true); assert(boot.Heartbeat(1,boot_id)); auto boot_window=boot.window;
     boot.Tick(32,false);
     assert(is(boot.DriveStart(32,boot_id,1,boot_window,"forward",0),"stale_request"));
+    // Three independent held lanes can continue beyond all timed limits without restarting.
+    ControlSessions held; auto hs=pair(held,0);
+    assert(is(held.DriveStart(0,hs,1,held.window,"forward",0),"accepted"));
+    assert(held.Heartbeat(0,hs));
+    assert(is(held.EffectStart(0,hs,2,held.window,Target::WaterOnly),"accepted"));
+    assert(held.Heartbeat(0,hs));
+    assert(is(held.EffectStart(0,hs,3,held.window,Target::BubblesOnly),"accepted"));
+    assert(held.Heartbeat(0,hs));
+    assert(is(held.WebAction(0,hs,4,held.window,Target::IgnitionOnly,0,0,nullptr,0,5000),"accepted"));
+    for(unsigned t=150;t<=45000;t+=150) {
+        held.Tick(t,false);
+        assert(is(held.DriveRenew(t,hs,1,held.drive_renewal),"renewed"));
+        assert(is(held.EffectRenew(t,hs,Target::WaterOnly,2,held.water_hold.renewal),"renewed"));
+        assert(is(held.EffectRenew(t,hs,Target::BubblesOnly,3,held.bubbles_hold.renewal),"renewed"));
+        assert(held.guard.Moving() && held.guard.Watering() && held.guard.Bubbling());
+        assert(held.guard.Starts()==4);
+        if(t>=5100) assert(!held.guard.Igniting());
+    }
+    assert(is(held.EffectStop(45001,hs,Target::WaterOnly,2),"ok"));
+    assert(!held.guard.Watering() && held.guard.Bubbling() && held.guard.Moving());
+    assert(is(held.EffectRenew(45002,hs,Target::WaterOnly,2,held.water_hold.renewal),"hold_cancelled"));
+    assert(is(held.DriveStop(45003,hs,1),"ok"));
+    assert(!held.guard.Moving() && held.guard.Bubbling());
+    assert(is(held.EffectStop(45004,hs,Target::BubblesOnly,3),"ok"));
+    assert(!held.guard.Bubbling() && !held.bubbles_hold.id);
+
+    for(auto target:{Target::WaterOnly,Target::BubblesOnly}) {
+        ControlSessions x;auto sid=pair(x,0);
+        assert(is(x.EffectStop(1,sid,target,1),"ok"));
+        assert(is(x.EffectStart(2,sid,1,x.window,target),"duplicate_request"));
+        assert(x.Heartbeat(3,sid));
+        assert(is(x.EffectStart(3,sid,2,x.window,target),"accepted"));
+        assert(is(x.EffectRenew(150,sid,target,2,1),"renewed"));
+        assert(is(x.EffectRenew(151,sid,target,2,1),"hold_cancelled")); // Replay never extends.
+        assert(is(x.EffectStop(152,sid,target,1),"ok")); // Old stop cannot stop newer hold.
+        assert(x.guard.Watering() || x.guard.Bubbling());
+        // Timed request / status heartbeat cannot prolong a held lane.
+        assert(x.Heartbeat(500,sid));
+        assert(is(x.WebAction(500,sid,3,x.window,target,0,target==Target::WaterOnly?30000:0,nullptr,
+                              target==Target::BubblesOnly?30000:0),"not_ready_or_busy"));
+        assert(x.Heartbeat(749,sid));x.Tick(749,false);assert(x.guard.Watering() || x.guard.Bubbling());
+        x.Tick(750,false);assert(!x.guard.Watering() && !x.guard.Bubbling());
+        assert(is(x.EffectRenew(750,sid,target,2,2),"hold_cancelled"));
+        assert(!x.guard.RenewWebEffect(751,Target::IgnitionOnly,600));
+        assert(is(x.EffectStart(751,sid,4,x.window,Target::IgnitionOnly),"invalid_request"));
+        assert(x.Heartbeat(949,sid));
+        assert(is(x.EffectStart(949,sid,4,x.window,target),"not_ready_or_busy"));
+        x.Tick(950,false);assert(x.Heartbeat(950,sid));
+        assert(is(x.EffectStart(950,sid,5,x.window,target),"accepted"));
+        // Expiry affects its lane, not a separately renewed effect.
+        auto other=target==Target::WaterOnly?Target::BubblesOnly:Target::WaterOnly;
+        assert(x.Heartbeat(950,sid));assert(is(x.EffectStart(950,sid,6,x.window,other),"accepted"));
+        assert(is(x.EffectRenew(1400,sid,other,6,1),"renewed"));x.Tick(1550,false);
+        assert(target==Target::WaterOnly?!x.guard.Watering()&&x.guard.Bubbling():x.guard.Watering()&&!x.guard.Bubbling());
+    }
+    for(int cause=0;cause<7;++cause) {
+        ControlSessions x;auto sid=pair(x,100);
+        assert(is(x.EffectStart(100,sid,1,x.window,Target::WaterOnly),"accepted"));
+        assert(x.Heartbeat(100,sid));assert(is(x.EffectStart(100,sid,2,x.window,Target::BubblesOnly),"accepted"));
+        if(cause==0)x.Stop(101);
+        if(cause==1)x.Release(101,sid);
+        if(cause==2)x.WifiLink(101,false);
+        if(cause==3)x.Shutdown(101);
+        x.Tick(cause==6?99:101,cause==4,cause==5);
+        assert(!x.guard.Watering()&&!x.guard.Bubbling()&&!x.water_hold.id&&!x.bubbles_hold.id);
+        assert(!is(x.EffectRenew(102,sid,Target::WaterOnly,1,1),"renewed"));
+        assert(!is(x.EffectRenew(102,sid,Target::BubblesOnly,2,1),"renewed"));
+    }
+    std::cout << "PASS: held water/bubbles: 45 s concurrent continuity, per-lane release/expiry, nonce replay, late release/start, cooldown, no ignition lease, all stop/fault paths\n";
     std::cout << "PASS: web ownership/replay and held drive: 15 s continuous run, single start, release/renew reorder, 600 ms boundary, no heartbeat-only renewal, per-lane release, global cancellation and cooldown\n";
 }

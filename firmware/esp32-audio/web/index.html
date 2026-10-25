@@ -5,7 +5,41 @@
 <title>CyberTrack</title>
 <style>
 :root{color-scheme:light;--ink:#242b29;--paper:#faf9f5;--line:#deded5;--accent:#d5ee65}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px system-ui,-apple-system,sans-serif}main{max-width:440px;margin:auto;padding:24px 20px calc(24px + env(safe-area-inset-bottom))}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}h1{font-size:22px;letter-spacing:-.8px;margin:0}.badge{font-size:12px;color:#777}.badge.on{color:#3b641d}.badge.on:before{content:"●";margin-right:6px;font-size:9px}.status{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--line);padding:16px 0;gap:16px}.status article:nth-child(even){border-left:1px solid var(--line);padding-left:16px}.status strong{font-size:17px;display:block;margin-bottom:5px}.status small{color:#686e65;font-size:12px}.status span{margin-right:6px}.hint{text-align:center;color:#777;font-size:12px;margin:22px 0 12px} #hold-time{font-variant-numeric:tabular-nums}#hold-time.timing{color:var(--ink);font-weight:650}.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:340px;margin:auto}button,select{font:inherit;border:1px solid var(--line);border-radius:13px;color:var(--ink);background:#fff}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:48px}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #789324;outline-offset:3px}button:disabled{opacity:.35;cursor:default}.pad button{height:76px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;font-size:14px}.pad button b{display:block;font-size:24px;font-weight:400;line-height:26px;margin-bottom:3px}.pad button.held{background:var(--accent);border-color:#a8c33f}.forward{grid-column:2}.left{grid-column:1;grid-row:2}.backward{grid-column:2;grid-row:2}.right{grid-column:3;grid-row:2}.water-row{display:flex;gap:10px;margin:25px 0}.water-row select{width:105px;padding:10px}.water-row button{flex:1;background:#edf1e5}.stop{width:100%;background:#b63831;color:white;border:0;font-weight:650;font-size:18px;min-height:58px}#message{min-height:34px;line-height:1.5;font-size:12px;margin:12px 0 0;color:#686e65;text-align:center}#message.error{color:#a9322b}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px system-ui,-apple-system,sans-serif}main{max-width:440px;margin:auto;padding:24px 20px calc(24px + env(safe-area-inset-bottom))}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}h1{font-size:22px;letter-spacing:-.8px;margin:0}.badge{font-size:12px;color:#777}.badge.on{color:#3b641d}.badge.on:before{content:"●";margin-right:6px;font-size:9px}.status{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--line);padding:16px 0;gap:16px}.status article:nth-child(even){border-left:1px solid var(--line);padding-left:16px}.status strong{font-size:17px;display:block;margin-bottom:5px}.status small{color:#686e65;font-size:12px}.status span{margin-right:6px}.hint{text-align:center;color:#777;font-size:12px;margin:22px 0 12px} #hold-time{font-variant-numeric:tabular-nums}#hold-time.timing{color:var(--ink);font-weight:650}.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:340px;margin:auto}button,select{font:inherit;border:1px solid var(--line);border-radius:13px;color:var(--ink);background:#fff}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:48px}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #789324;outline-offset:3px}button:disabled{opacity:.35;cursor:default}.pad button{height:76px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;font-size:14px}.pad button b{display:block;font-size:24px;font-weight:400;line-height:26px;margin-bottom:3px}.pad button.held{background:var(--accent);border-color:#a8c33f}.forward{grid-column:2}.left{grid-column:1;grid-row:2}.backward{grid-column:2;grid-row:2}.right{grid-column:3;grid-row:2}.stop{margin-top:12px;width:100%;background:#b63831;color:white;border:0;font-weight:650;font-size:18px;min-height:58px}#message{min-height:34px;line-height:1.5;font-size:12px;margin:12px 0 0;color:#686e65;text-align:center}#message.error{color:#a9322b}
+.effect-controls{margin:24px 0}.effect-controls h2{font-size:15px;margin:0 0 10px}.effect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.effect-grid button{min-height:64px;background:#edf1e5;font-variant-numeric:tabular-nums}.effect-grid .effect-hold{background:transparent;border-color:#a8b49b;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px}.effect-hold strong{font-size:14px}.effect-hold span{font-size:10px;color:#686e65;white-space:nowrap}.effect-grid .effect-hold.held{background:var(--accent);border-color:#a8c33f}.effect-hold.held span{color:var(--ink)}
+
+/* Fit portrait phone browser viewports without clipping controls or disabling zoom. */
+@media (max-width:600px) {
+  main{display:flex;flex-direction:column;gap:8px;padding:12px 14px max(10px,env(safe-area-inset-bottom));width:100%}
+  header{margin:0;min-height:26px}h1{font-size:20px}
+  .status{grid-template-columns:repeat(4,minmax(0,1fr));padding:8px 0;gap:8px}
+  .status article{min-width:0}
+  .status article:nth-child(even){padding-left:0;border-left:0}
+  .status article+article{border-left:1px solid var(--line);padding-left:8px}
+  .status strong{font-size:13px;line-height:18px;margin:0 0 2px}
+  .status small{display:block;font-size:11px;line-height:14px}
+  .status span{display:block;min-height:14px;margin:0}
+  .hint{font-size:11px;line-height:16px;margin:0}
+  .pad{width:100%;max-width:none;margin:0;gap:6px}
+  .pad button{height:48px;min-height:48px;font-size:13px}
+  .pad button b{display:inline;font-size:21px;line-height:1;margin:0 6px 0 0;vertical-align:-1px}
+  .effect-controls{margin:0}
+  .effect-controls h2{font-size:13px;line-height:18px;margin:0 0 6px}
+  .effect-grid{gap:6px}
+  .effect-grid button{min-height:48px;font-size:14px;border-radius:10px}
+  .effect-grid .effect-hold{padding:4px 2px;gap:1px}
+  .effect-hold strong{font-size:12px}.effect-hold span{font-size:10px;line-height:13px}
+  .stop{min-height:48px;font-size:17px;border-radius:11px}
+  #message{min-height:28px;font-size:11px;line-height:14px;margin:0;overflow-wrap:anywhere}
+}
+@media (max-width:600px) and (max-height:780px) {
+  main{gap:4px;padding-top:8px;padding-bottom:max(8px,env(safe-area-inset-bottom))}
+  header{min-height:24px}.status{padding:6px 0}
+  .hint{line-height:14px}
+  .pad button{height:44px;min-height:44px}
+  .effect-grid button{min-height:44px}
+  .effect-controls h2{margin-bottom:4px}
+}
 </style>
 </head>
 <body><main>
@@ -23,9 +57,25 @@
 <button class="backward" data-direction="backward" aria-label="后退" disabled><b aria-hidden="true">↓</b>后退</button>
 <button class="right" data-direction="right" aria-label="右转" disabled><b aria-hidden="true">→</b>右转</button>
 </div>
-<div class="water-row"><select id="water-duration" aria-label="喷水时长"><option value="1000">1 秒</option><option value="3000">3 秒</option><option value="5000">5 秒</option><option value="10000">10 秒</option><option value="30000">30 秒</option></select><button id="water" disabled>喷水 <span id="water-action-time">1 秒 →</span></button></div>
-<div class="water-row"><select id="bubbles-duration" aria-label="吹泡泡时长"><option value="1000">1 秒</option><option value="3000">3 秒</option><option value="5000">5 秒</option></select><button id="bubbles" disabled>吹泡泡 <span id="bubbles-action-time">1 秒 →</span></button></div>
-<div class="water-row"><select id="ignition-duration" aria-label="点火时长"><option value="1000">1 秒</option><option value="3000">3 秒</option><option value="5000">5 秒</option></select><button id="ignition" disabled>点火 <span id="ignition-action-time">1 秒 →</span></button></div>
+<section class="effect-controls" aria-label="喷水控制"><h2>喷水</h2><div class="effect-grid">
+<button id="water" data-effect="water" data-duration="1000" aria-label="喷水1秒" disabled>1 秒</button>
+<button id="water-3" data-effect="water" data-duration="3000" aria-label="喷水3秒" disabled>3 秒</button>
+<button id="water-5" data-effect="water" data-duration="5000" aria-label="喷水5秒" disabled>5 秒</button>
+<button id="water-10" data-effect="water" data-duration="10000" aria-label="喷水10秒" disabled>10 秒</button>
+<button id="water-30" data-effect="water" data-duration="30000" aria-label="喷水30秒" disabled>30 秒</button>
+<button id="water-hold" class="effect-hold" data-hold="water" aria-label="按住喷水，松开停止" disabled><strong>按住持续</strong><span id="water-hold-time">松开停止</span></button></div></section>
+<section class="effect-controls" aria-label="吹泡泡控制"><h2>吹泡泡</h2><div class="effect-grid">
+<button id="bubbles" data-effect="bubbles" data-duration="1000" aria-label="吹泡泡1秒" disabled>1 秒</button>
+<button id="bubbles-3" data-effect="bubbles" data-duration="3000" aria-label="吹泡泡3秒" disabled>3 秒</button>
+<button id="bubbles-5" data-effect="bubbles" data-duration="5000" aria-label="吹泡泡5秒" disabled>5 秒</button>
+<button id="bubbles-10" data-effect="bubbles" data-duration="10000" aria-label="吹泡泡10秒" disabled>10 秒</button>
+<button id="bubbles-30" data-effect="bubbles" data-duration="30000" aria-label="吹泡泡30秒" disabled>30 秒</button>
+<button id="bubbles-hold" class="effect-hold" data-hold="bubbles" aria-label="按住吹泡泡，松开停止" disabled><strong>按住持续</strong><span id="bubbles-hold-time">松开停止</span></button></div></section>
+<section class="effect-controls" aria-label="点火控制"><h2>点火</h2><div class="effect-grid">
+<button id="ignition" data-effect="ignition" data-duration="1000" aria-label="点火1秒" disabled>1 秒</button>
+<button id="ignition-3" data-effect="ignition" data-duration="3000" aria-label="点火3秒" disabled>3 秒</button>
+<button id="ignition-5" data-effect="ignition" data-duration="5000" aria-label="点火5秒" disabled>5 秒</button>
+</div></section>
 <button id="stop" class="stop" disabled>全部停止</button>
 <p id="message" role="status" aria-live="polite"></p>
 </main><script>
@@ -48,7 +98,8 @@
         effectPending = false,
         polling = false,
         timer,
-        hold = null,
+        holds = { move: null, water: null, bubbles: null },
+        startQueue = Promise.resolve(),
         pollWait = Promise.resolve();
       const reasons = {
         voice_preempted: "已停止语音动作，稍后可重新操作。",
@@ -61,6 +112,7 @@
         output_fault: "设备输出故障，请检查设备。",
         invalid_request: "参数无效，未执行。",
         cancelled_before_output: "动作已被停止或断连取消。",
+        hold_cancelled: "长按已结束，请松开后重新按住。",
         drive_cancelled: "行走续租已取消，请松开后重新按住。",
       };
       function message(text, error = false) {
@@ -78,6 +130,7 @@
         const move =
           ready && (!snapshot?.move_remaining_ms || snapshot?.move_source === "voice") && !snapshot?.move_cooldown_ms;
         document.querySelectorAll("[data-direction]").forEach((b) => {
+          const hold = holds.move;
           const active = hold && hold.button === b;
           b.disabled = hold
             ? !active
@@ -89,7 +142,14 @@
           const available = ready && snapshot?.capabilities?.[kind] === true &&
             (!snapshot?.[kind + "_remaining_ms"] || snapshot?.[kind + "_source"] === "voice") &&
             !snapshot?.[kind + "_cooldown_ms"];
-          $(kind).disabled = !available || effectPending || (!!hold && !hold.renewal);
+          const disabled = !available || effectPending || !!holds[kind];
+          document.querySelectorAll('[data-effect="' + kind + '"]').forEach(b => { b.disabled = disabled; });
+          if (kind !== "ignition") {
+            const h = holds[kind], b = $(kind + "-hold");
+            b.disabled = h ? false : !available || snapshot?.capabilities?.[kind + "_hold"] !== true;
+            b.classList.toggle("held", !!h);
+            b.setAttribute("aria-pressed", String(!!h));
+          }
         }
         $("stop").disabled = !token;
       }
@@ -102,8 +162,8 @@
           const active = s[kind + "_remaining_ms"] > 0,
             cool = s[kind + "_cooldown_ms"];
           $(kind + "-time").textContent =
-            kind === "move" && s.drive_hold_id
-              ? "按住行走"
+            s[(kind === "move" ? "drive" : kind) + "_hold_id"]
+              ? "按住" + ({move:"行走",water:"喷水",bubbles:"吹泡泡"}[kind] || "")
               : active
                 ? (s[kind + "_remaining_ms"] / 1000).toFixed(1) + " s"
                 : "";
@@ -161,7 +221,7 @@
           }).catch(() => {});
       }
       function disconnect(text) {
-        clearHold();
+        clearAllHolds();
         const old = token;
         token = "";
         epoch++;
@@ -192,7 +252,7 @@
       }
       async function poll() {
         clearTimeout(timer);
-        if (!token || document.hidden || hold) return;
+        if (!token || document.hidden || Object.values(holds).some(Boolean)) return;
         if (polling || pending || effectPending) {
           timer = setTimeout(poll, 100);
           return;
@@ -258,14 +318,20 @@
           if (e === epoch) { connecting = false; scheduleConnect(); }
         }
       }
-      async function action(kind = "water") {
+      function queueStart(work) {
+        const next = startQueue.then(work);
+        startQueue = next.catch(() => {});
+        return next;
+      }
+      async function action(kind = "water", duration = 1000) {
         if (!["water", "bubbles", "ignition"].includes(kind)) return;
         const label = { water: "喷水", bubbles: "吹泡泡", ignition: "点火" }[kind];
-        if (!token || pending || effectPending || (hold && !hold.renewal) || !snapshot) return;
+        if (!token || pending || effectPending || holds[kind] || !snapshot) return;
         const e = epoch;
         effectPending = true;
         controls();
         try {
+          await queueStart(async () => {
           await pollWait;
           if (e !== epoch || document.hidden) return;
           const fresh = await request("/api/state");
@@ -274,11 +340,12 @@
           render(fresh);
           const s = await request("/api/action", {
             sequence: ++sequence, window: fresh.window, operation: kind,
-            duration_ms: Number($(kind + "-duration").value),
+            duration_ms: duration,
           });
           if (e !== epoch) return;
           render(s);
           message(s.result === "accepted" ? "正在" + label + "。" : reasons[s.result] || label + "未接受。", s.result !== "accepted");
+          });
         } catch (err) {
           if (e === epoch) disconnect("操作未确认，网页动作已请求停止。");
         } finally {
@@ -289,44 +356,46 @@
         return (Math.max(0, performance.now() - h.startedAt) / 1000).toFixed(1);
       }
       function updateHoldTime(h) {
-        if (hold !== h || document.hidden || h.epoch !== epoch) return;
-        $("hold-time").textContent = "已按住 " + holdSeconds(h) + " 秒";
+        if (holds[h.kind] !== h || document.hidden || h.epoch !== epoch) return;
+        $(h.kind === "move" ? "hold-time" : h.kind + "-hold-time").textContent = "已按住 " + holdSeconds(h) + " 秒";
         h.clockTimer = setTimeout(() => updateHoldTime(h), 100);
       }
-      function clearHold() {
-        const previous = hold;
-        hold = null;
+      function clearHold(kind = "move") {
+        const previous = holds[kind];
+        holds[kind] = null;
         if (previous) {
           clearTimeout(previous.timer);
           clearTimeout(previous.clockTimer);
-          $("hold-time").textContent = "本次按住 " + holdSeconds(previous) + " 秒";
-          $("hold-time").className = "hint";
-          if (
-            previous.pointer !== null &&
-            previous.button.hasPointerCapture(previous.pointer)
-          )
+          const display = $(kind === "move" ? "hold-time" : kind + "-hold-time");
+          display.textContent = "本次按住 " + holdSeconds(previous) + " 秒";
+          display.className = kind === "move" ? "hint" : "";
+          if (previous.pointer !== null && previous.button.hasPointerCapture(previous.pointer))
             previous.button.releasePointerCapture(previous.pointer);
         }
         return previous;
       }
-      async function endHold() {
-        const h = clearHold();
+      function clearAllHolds() {
+        for (const kind of ["move", "water", "bubbles"]) clearHold(kind);
+      }
+      async function endHold(kind = "move") {
+        const h = clearHold(kind);
         if (!h || !token) return;
+        if (!h.id) { controls(); poll(); return; }
         const e = epoch;
         pending = true;
         controls();
-        message("正在停止行走…");
+        message("正在停止" + h.label + "…");
         try {
           const s = await request(
             "/api/action",
-            { operation: "drive_stop", hold_id: h.id },
+            { operation: h.prefix + "_stop", hold_id: h.id },
             token,
             400,
           );
           if (e !== epoch) return;
           if (s.result !== "ok") throw new Error(s.result);
           render(s);
-          message("行走已停止。");
+          message(h.label + "已停止。");
         } catch (err) {
           if (e === epoch)
             disconnect(
@@ -341,32 +410,36 @@
         }
       }
       async function renewHold(h) {
-        if (hold !== h || document.hidden || h.epoch !== epoch) return;
+        if (holds[h.kind] !== h || document.hidden || h.epoch !== epoch) return;
         try {
           const s = await request(
             "/api/action",
-            { operation: "drive_renew", hold_id: h.id, renewal: h.renewal },
+            { operation: h.prefix + "_renew", hold_id: h.id, renewal: h.renewal },
             token,
             400,
           );
-          if (hold !== h || h.epoch !== epoch) return;
-          if (s.result !== "renewed" || s.drive_hold_id !== h.id)
+          if (holds[h.kind] !== h || h.epoch !== epoch) return;
+          if (s.result !== "renewed" || s[h.prefix + "_hold_id"] !== h.id)
             throw new Error(s.result);
-          h.renewal = s.drive_renewal;
+          h.renewal = s[h.prefix + "_renewal"];
           render(s);
           h.timer = setTimeout(() => renewHold(h), 150);
         } catch (err) {
-          if (hold === h && h.epoch === epoch)
+          if (holds[h.kind] === h && h.epoch === epoch)
             disconnect(
-              "行走续租中断，已停止续租并请求全部停止；不会自动恢复。",
+              "长按连接中断，已请求停止；不会自动恢复。",
             );
         }
       }
       async function beginHold(button, pointer = null) {
-        if (!token || pending || effectPending || hold || button.disabled || document.hidden)
+        const kind = button.dataset.hold || "move";
+        if (!token || pending || holds[kind] || button.disabled || document.hidden)
           return;
         const h = {
-          id: ++sequence,
+          id: 0,
+          kind,
+          prefix: kind === "move" ? "drive" : kind,
+          label: {move:"行走",water:"喷水",bubbles:"吹泡泡"}[kind],
           button,
           pointer,
           epoch,
@@ -375,78 +448,80 @@
           clockTimer: null,
           timer: null,
         };
-        hold = h;
-        $("hold-time").className = "hint timing";
+        holds[kind] = h;
+        $(h.kind === "move" ? "hold-time" : h.kind + "-hold-time").className = h.kind === "move" ? "hint timing" : "timing";
         updateHoldTime(h);
         clearTimeout(timer);
         if (pointer !== null) {
           try {
             button.setPointerCapture(pointer);
           } catch {
-            endHold();
+            endHold(kind);
             return;
           }
         }
         controls();
         // Finish any preceding status request so it cannot supersede the start window.
+        await queueStart(async () => {
         await pollWait;
-        if (hold !== h || h.epoch !== epoch || document.hidden) return;
+        if (holds[h.kind] !== h || h.epoch !== epoch || document.hidden) return;
         try {
           const fresh = await request("/api/state", {}, token, 400);
-          if (hold !== h || h.epoch !== epoch || document.hidden) return;
+          if (holds[h.kind] !== h || h.epoch !== epoch || document.hidden) return;
           if (fresh.result !== "ok") throw new Error(fresh.result);
           render(fresh);
         } catch (err) {
-          if (hold === h && h.epoch === epoch) disconnect("连接中断，行走已取消。");
+          if (holds[h.kind] === h && h.epoch === epoch) disconnect("连接中断，长按已取消。");
           return;
         }
+        h.id = ++sequence;
         const body = {
-          operation: "drive_start",
-          sequence: h.id,
-          window: windowId,
-          direction: button.dataset.direction,
+          operation: h.prefix + "_start", sequence: h.id, window: windowId,
+          ...(kind === "move" ? {direction: button.dataset.direction} : {}),
         };
         try {
           const s = await request("/api/action", body, token, 400);
-          if (hold !== h || h.epoch !== epoch) return;
+          if (holds[h.kind] !== h || h.epoch !== epoch) return;
           if (s.result === "voice_preempted" || s.result === "not_ready_or_busy") {
-            clearHold(); render(s); message(reasons[s.result]); controls(); poll(); return;
+            clearHold(kind); render(s); message(reasons[s.result]); controls(); poll(); return;
           }
-          if (s.result !== "accepted" || s.drive_hold_id !== h.id)
+          if (s.result !== "accepted" || s[h.prefix + "_hold_id"] !== h.id)
             throw new Error(s.result);
-          h.renewal = s.drive_renewal;
+          h.renewal = s[h.prefix + "_renewal"];
           render(s);
           message(
             "正在" +
-              directions[button.dataset.direction] +
-              "，松开方向键停止。",
+              (kind === "move" ? directions[button.dataset.direction] : h.label) +
+              "，松开停止。",
           );
           h.timer = setTimeout(() => renewHold(h), 150);
         } catch (err) {
-          if (hold === h && h.epoch === epoch)
+          if (holds[h.kind] === h && h.epoch === epoch)
             disconnect(
-              reasons[err.message] || "行走未确认，已停止续租并请求全部停止。",
+              reasons[err.message] || "长按未确认，已停止续租并请求全部停止。",
             );
         }
+        });
       }
-      document.querySelectorAll("[data-direction]").forEach((button) => {
+      document.querySelectorAll("[data-direction], [data-hold]").forEach((button) => {
+        const kind = button.dataset.hold || "move";
         button.addEventListener("pointerdown", (event) => {
-          if (event.button !== 0 || event.isPrimary === false) return;
+          if (event.button !== 0) return;
           event.preventDefault();
           beginHold(button, event.pointerId);
         });
         button.addEventListener("pointerup", (event) => {
-          if (hold?.pointer === event.pointerId) {
+          if (holds[kind]?.pointer === event.pointerId) {
             event.preventDefault();
-            endHold();
+            endHold(kind);
           }
         });
         for (const event of ["pointercancel", "lostpointercapture"])
           button.addEventListener(event, (e) => {
-            if (hold?.pointer === e.pointerId) endHold();
+            if (holds[kind]?.pointer === e.pointerId) endHold(kind);
           });
         button.addEventListener("pointermove", (event) => {
-          if (hold?.pointer !== event.pointerId) return;
+          if (holds[kind]?.pointer !== event.pointerId) return;
           const r = button.getBoundingClientRect();
           if (
             event.clientX < r.left ||
@@ -454,7 +529,7 @@
             event.clientY < r.top ||
             event.clientY > r.bottom
           )
-            endHold();
+            endHold(kind);
         });
         button.addEventListener("keydown", (event) => {
           if (event.key !== " " && event.key !== "Enter") return;
@@ -464,28 +539,25 @@
         button.addEventListener("keyup", (event) => {
           if (
             (event.key === " " || event.key === "Enter") &&
-            hold?.button === button &&
-            hold.pointer === null
+            holds[kind]?.button === button &&
+            holds[kind].pointer === null
           ) {
             event.preventDefault();
-            endHold();
+            endHold(kind);
           }
         });
         button.addEventListener("blur", () => {
-          if (hold?.button === button) endHold();
+          if (holds[kind]?.button === button && holds[kind].pointer === null) endHold(kind);
         });
         for (const event of ["click", "contextmenu"])
           button.addEventListener(event, (e) => e.preventDefault());
       });
-      for (const kind of ["water", "bubbles", "ignition"]) {
-        $(kind).addEventListener("click", () => action(kind));
-        $(kind + "-duration").addEventListener("change", () => {
-          $(kind + "-action-time").textContent = Number($(kind + "-duration").value) / 1000 + " 秒 →";
-        });
-      }
+      document.querySelectorAll("[data-effect]").forEach(button => {
+        button.addEventListener("click", () => action(button.dataset.effect, Number(button.dataset.duration)));
+      });
       $("stop").addEventListener("click", async () => {
         if (!token) return;
-        clearHold();
+        clearAllHolds();
         const e = ++epoch;
         effectPending = false;
         pending = true;
@@ -515,7 +587,7 @@
         else connect();
       });
       window.addEventListener("blur", () => {
-        if (hold) disconnect("页面失去焦点，已请求停止并释放。");
+        if (Object.values(holds).some(Boolean)) disconnect("页面失去焦点，已请求停止并释放。");
       });
       window.addEventListener("pagehide", () => disconnect("页面已关闭。"));
       window.addEventListener("offline", () => {

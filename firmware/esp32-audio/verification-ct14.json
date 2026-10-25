@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-25",
+  "version": "2.0.3-ct14",
+  "status": "software_verified",
+  "application_bytes": 2601184,
+  "application_sha256": "45849bf18d496e4e634b37720b2615e31d325957dbce1c6fb5f833a847b872ed",
+  "sources": {
+    "action_guard.h": "4e675fb47d761e0b116003a114350178e37294cabff082be6dd83a2dd075699f",
+    "control_sessions.h": "8854f5a97facc012fb3f6b84d09e42d99a0ac9b6b0d207bd5da59134119b7ad5",
+    "cybertrack_tools.cc": "ac3be74802ff0ede02bbfa4beb9c8ad9d3cd3cfbc8945a7262134594add80693",
+    "web_request.h": "dda689ff9c19afca9ec8ffb0e4365ad55fc886c7ca2c1310fcc6b33d7268155e",
+    "apply_overlay.py": "f6b60db429954bb9dc55c8f65cb46700ed71538e8a8f9a67d0243138f174913d",
+    "role-prompt.txt": "5f3551c5adc0f1581a9d866c4e6775424efa9cdd3273a51d674023f73a757925",
+    "web/index.html": "cde4744ad68c4686fb3db44f59984f20d7de56876423f3e34745156173108028"
+  },
+  "checks": {
+    "host_asan_ubsan": "passed; 45 s three-lane held continuity and unchanged ignition limit, per-lane expiry/release, replay, start/stop races and global fault paths",
+    "mcp_http": "passed; actual generated MCP validation and web parser/handlers, bubbles 1..30000, ignition 1..5000, no ignition hold",
+    "web_script": "passed; five presets plus hold per lane, simultaneous starts, release/stop races, three independent holds, pointer cancel/background/offline/keyboard blur and elapsed display",
+    "esp_idf_build": "passed; v5.5.1"
+  },
+  "limitations": [
+    "Software/no-load only; continuous powered operation, thermal/current and real GPIO timing unverified.",
+    "Touch events tested by host harness, not physical multi-touch acceptance.",
+    "ct13 observed ignition 5002 ms on a 5000 ms request; strict physical cutoff still unverified."
+  ]
+}

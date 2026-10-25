@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-25",
+  "version": "2.0.3-ct15",
+  "scope": "Responsive CSS only plus firmware version; action script and backend byte-identical to ct14",
+  "application_bytes": 2603152,
+  "application_sha256": "5b5c4bf1379d71fcf661408f0f92c1a90ebae8b1336b4d3effde3fed355b7d9f",
+  "sources": {
+    "web/index.html": "4b2f10b5bde5254482ffc43d512e28a5492de8b413ee8635c1e889e233eb8c3d",
+    "apply_overlay.py": "410b904226ed699f0323f20f3e91c0241bcc82ccf4cc9b576bc248983a8a2e69",
+    "action_guard.h": "4e675fb47d761e0b116003a114350178e37294cabff082be6dd83a2dd075699f",
+    "control_sessions.h": "8854f5a97facc012fb3f6b84d09e42d99a0ac9b6b0d207bd5da59134119b7ad5",
+    "cybertrack_tools.cc": "ac3be74802ff0ede02bbfa4beb9c8ad9d3cd3cfbc8945a7262134594add80693",
+    "web_request.h": "dda689ff9c19afca9ec8ffb0e4365ad55fc886c7ca2c1310fcc6b33d7268155e",
+    "role-prompt.txt": "5f3551c5adc0f1581a9d866c4e6775424efa9cdd3273a51d674023f73a757925"
+  },
+  "checks": {
+    "web_script": "passed existing complete regression suite",
+    "idf_build": "passed ESP-IDF v5.5.1",
+    "mobile_layout": [
+      {
+        "contentHeight": 668,
+        "height": 800,
+        "minButtonHeight": 44,
+        "scrollHeight": 800,
+        "scrollWidth": 412,
+        "stopBottom": 622,
+        "width": 412
+      },
+      {
+        "contentHeight": 594,
+        "height": 740,
+        "minButtonHeight": 44,
+        "scrollHeight": 740,
+        "scrollWidth": 412,
+        "stopBottom": 554,
+        "width": 412
+      },
+      {
+        "contentHeight": 594,
+        "height": 760,
+        "minButtonHeight": 44,
+        "scrollHeight": 760,
+        "scrollWidth": 393,
+        "stopBottom": 554,
+        "width": 393
+      },
+      {
+        "contentHeight": 594,
+        "height": 640,
+        "minButtonHeight": 44,
+        "scrollHeight": 640,
+        "scrollWidth": 360,
+        "stopBottom": 554,
+        "width": 360
+      },
+      {
+        "contentHeight": 594,
+        "height": 640,
+        "minButtonHeight": 44,
+        "scrollHeight": 640,
+        "scrollWidth": 320,
+        "stopBottom": 554,
+        "width": 320
+      }
+    ],
+    "old_412x800_layout": {
+      "content_height": 1038.5,
+      "stop_bottom": 968.5
+    },
+    "small_viewport_fallback": {
+      "width": 320,
+      "height": 500,
+      "scroll_height": 594,
+      "overflow": "visible"
+    }
+  },
+  "limits": "No overflow hiding or disabled zoom; small/zoomed viewports may scroll to preserve accessible controls."
+}

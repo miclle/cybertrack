@@ -13,7 +13,12 @@ function harness(){
  const ids=Object.fromEntries([...html.matchAll(/id="([^"]+)"/g)].map(m=>[m[1],element()]));
  const buttons=['forward','backward','left','right'].map(direction=>({...element(),dataset:{direction}}));
  const events={},pending=[],sent=[],timers=new Map();let timerId=0, clock=0;
- const document={hidden:false,getElementById:id=>ids[id],querySelectorAll:()=>buttons,addEventListener:(n,f)=>events[n]=f};
+ for(const kind of ['water','bubbles']) ids[kind+'-hold'].dataset={hold:kind};
+ const effectButtons=[];
+ for(const kind of ['water','bubbles','ignition']) for(const sec of (kind==='ignition'?[1,3,5]:[1,3,5,10,30])) {
+   const b=ids[sec===1?kind:kind+'-'+sec];b.dataset={effect:kind,duration:String(sec*1000)};effectButtons.push(b);
+ }
+ const document={hidden:false,getElementById:id=>ids[id],querySelectorAll:q=>q.includes('[data-hold]')?[...buttons,ids['water-hold'],ids['bubbles-hold']]:q==='[data-effect]'?effectButtons:q.startsWith('[data-effect=')?effectButtons.filter(b=>q.includes(b.dataset.effect)):buttons,addEventListener:(n,f)=>events[n]=f};
  const ctx=vm.createContext({document,window:{addEventListener:(n,f)=>events[n==='blur'?'windowblur':n]=f},AbortController,performance:{now:()=>clock},
   setTimeout:(fn,ms)=>{const id=++timerId;timers.set(id,{fn,ms});return id;},clearTimeout:id=>timers.delete(id),
   fetch:(path,options)=>new Promise((resolve,reject)=>{const c={path,options,resolve,reject};pending.push(c);sent.push(c);})});
@@ -22,7 +27,7 @@ function harness(){
  const respond=(c,body,ok=true)=>c.resolve({ok,json:async()=>body});
  const status=(seq=1,extra={})=>({result:'ok',request_sequence:seq,window:seq,move_remaining_ms:0,water_remaining_ms:0,
   move_cooldown_ms:0,water_cooldown_ms:0,move_last_duration_ms:600,water_last_duration_ms:1000,
-  capabilities:{move:true,water:true,bubbles:true,ignition:true},drive_hold_id:0,drive_renewal:0,move_direction:'none',move_source:'none',water_source:'none',logical_outputs:{water:false},boot_held:false,state:'STOPPED',fault:'none',...extra});
+  capabilities:{move:true,water:true,bubbles:true,ignition:true,water_hold:true,bubbles_hold:true},drive_hold_id:0,drive_renewal:0,move_direction:'none',move_source:'none',water_source:'none',logical_outputs:{water:false},boot_held:false,state:'STOPPED',fault:'none',...extra});
  async function connect(){const c=take('/api/pair');assert.equal(c.options.body,'{}');respond(c,{result:'ok',token:'session'});await flush();respond(take('/api/state'),status());await flush();assert(!buttons[0].disabled);}
  async function start(){const promise=ctx.beginHold(buttons[0],1);await flush();respond(take('/api/state'),status(2));await flush();return {promise,call:take('/api/action')};}
  async function hold(){const {promise,call}=await start();respond(call,status(3,{result:'accepted',drive_hold_id:1,drive_renewal:1,move_remaining_ms:600,move_source:'web',state:'ACTIVE'}));await promise;}
@@ -38,7 +43,7 @@ function harness(){
 }
 {
  const h=harness();await h.connect();const start=h.ctx.beginHold(h.buttons[0],1);await flush();const fresh=h.take('/api/state');
- const stop=h.ctx.endHold();h.respond(h.take('/api/action'),h.status(3));await stop;
+ const stop=h.ctx.endHold();await stop;
  h.respond(fresh,h.status(2));await start;
  assert(!h.sent.some(c=>JSON.parse(c.options.body).operation==='drive_start')); // Released before fresh window, never start.
 }
@@ -78,7 +83,7 @@ function harness(){
  h.respond(h.take('/api/state'),h.status(6));await flush();h.respond(late,h.status(4,{result:'renewed',drive_hold_id:1,drive_renewal:2,move_remaining_ms:600}));await renewal;
  assert.equal(h.ids['move-time'].textContent,'');assert(![...h.timers.values()].some(t=>t.ms===150));
 }
-for(const trigger of ['pointerup','pointercancel','lostpointercapture','pointermove','blur','keyup','visibilitychange','offline','windowblur']){
+for(const trigger of ['pointerup','pointercancel','lostpointercapture','pointermove','keyup','visibilitychange','offline','windowblur']){
  const h=harness();await h.connect();await h.hold();
  if(trigger==='visibilitychange'){h.document.hidden=true;h.events.visibilitychange();}
  else if(trigger==='offline'||trigger==='windowblur')h.events[trigger]();
@@ -133,9 +138,7 @@ for (const kind of ['bubbles','ignition']) {
    bubbles_source:'web',ignition_remaining_ms:kind==='bubbles'?5000:0,ignition_source:'web',
    drive_hold_id:1,drive_renewal:1,move_remaining_ms:600,logical_outputs:{water:true,bubbles:kind==='ignition',ignition:kind==='bubbles'}}));
  assert(!h.ids[kind].disabled && !h.buttons[0].disabled);
- h.ids[kind+'-duration'].value='5000';h.ids[kind+'-duration'].events.change();
- assert.equal(h.ids[kind+'-action-time'].textContent,'5 秒 →');
- const effect=h.ctx.action(kind);await flush();h.respond(h.take('/api/state'),h.status(5,{drive_hold_id:1,move_remaining_ms:600}));await flush();
+ const effect=h.ctx.action(kind,5000);await flush();h.respond(h.take('/api/state'),h.status(5,{drive_hold_id:1,move_remaining_ms:600}));await flush();
  const call=h.take('/api/action');assert.equal(JSON.parse(call.options.body).operation,kind);assert.equal(JSON.parse(call.options.body).duration_ms,5000);
  h.respond(call,h.status(6,{result:'accepted',drive_hold_id:1,drive_renewal:1,move_remaining_ms:600,water_remaining_ms:10000,
    bubbles_remaining_ms:4000,ignition_remaining_ms:5000,move_source:'web',water_source:'web',bubbles_source:'web',ignition_source:'web',
@@ -166,3 +169,86 @@ console.log('PASS: bubbles/ignition controls, four-lane concurrent display, inde
  assert(h.ids.bubbles.disabled && h.ids.ignition.disabled && !h.ids.water.disabled);
 }
 console.log('PASS: new effect controls require explicit firmware capabilities');
+
+for(const kind of ['water','bubbles']) for(const seconds of [1,3,5,10,30]) {
+ const h=harness();await h.connect();
+ const b=h.ids[seconds===1?kind:kind+'-'+seconds];assert(!b.disabled);
+ const action=b.events.click();await flush();h.respond(h.take('/api/state'),h.status(2));await flush();
+ const call=h.take('/api/action');assert.equal(JSON.parse(call.options.body).duration_ms,seconds*1000);
+ assert.equal(JSON.parse(call.options.body).operation,kind);
+ h.respond(call,h.status(3,{result:'accepted',[kind+'_remaining_ms']:seconds*1000,[kind+'_source']:'web'}));await action;
+ assert([1,3,5,10,30].every(s=>h.ids[s===1?kind:kind+'-'+s].disabled));
+ assert(h.ids[kind+'-hold'].disabled);
+ h.respond(h.take('/api/state'),h.status(4));await flush();
+}
+async function effectHold(h,kind,id=1,seq=2,pointer=2) {
+ const p=h.ctx.beginHold(h.ids[kind+'-hold'],pointer);await flush();
+ h.respond(h.take('/api/state'),h.status(seq));await flush();
+ const call=h.take('/api/action');assert.deepEqual(JSON.parse(call.options.body),{operation:kind+'_start',sequence:id,window:seq});
+ h.respond(call,h.status(seq+1,{result:'accepted',[kind+'_hold_id']:id,[kind+'_renewal']:1,[kind+'_remaining_ms']:600,[kind+'_source']:'web'}));await p;
+}
+for(const kind of ['water','bubbles']) {
+ const h=harness();await h.connect();await effectHold(h,kind);
+ assert.equal(h.ids[kind+'-time'].textContent,'按住'+(kind==='water'?'喷水':'吹泡泡'));
+ const timer=[...h.timers.entries()].find(([,t])=>t.ms===150);assert(timer);h.timers.delete(timer[0]);
+ const renew=timer[1].fn();const call=h.take('/api/action');assert.equal(JSON.parse(call.options.body).operation,kind+'_renew');
+ h.respond(call,h.status(4,{result:'renewed',[kind+'_hold_id']:1,[kind+'_renewal']:2,[kind+'_remaining_ms']:600}));await renew;
+ h.advance(1234);const stop=h.ctx.endHold(kind);assert.equal(h.ids[kind+'-hold-time'].textContent,'本次按住 1.2 秒');
+ const sc=h.take('/api/action');assert.deepEqual(JSON.parse(sc.options.body),{operation:kind+'_stop',hold_id:1});
+ h.respond(sc,h.status(5));await stop;assert(![...h.timers.values()].some(t=>t.ms===150));
+}
+{
+ const h=harness();await h.connect();await h.hold();
+ // Two additional fingers can begin together; start window transactions serialize.
+ const water=h.ctx.beginHold(h.ids['water-hold'],2),bubbles=h.ctx.beginHold(h.ids['bubbles-hold'],3);
+ await flush();h.respond(h.take('/api/state'),h.status(4,{drive_hold_id:1,move_remaining_ms:600}));await flush();
+ const wc=h.take('/api/action');assert.equal(JSON.parse(wc.options.body).sequence,2);
+ h.respond(wc,h.status(5,{result:'accepted',water_hold_id:2,water_renewal:1,water_remaining_ms:600,drive_hold_id:1,move_remaining_ms:600}));await water;await flush();
+ h.respond(h.take('/api/state'),h.status(6,{water_hold_id:2,water_remaining_ms:600,drive_hold_id:1,move_remaining_ms:600}));await flush();
+ const bc=h.take('/api/action');assert.equal(JSON.parse(bc.options.body).sequence,3);
+ h.respond(bc,h.status(7,{result:'accepted',bubbles_hold_id:3,bubbles_renewal:1,bubbles_remaining_ms:600,water_hold_id:2,water_remaining_ms:600,drive_hold_id:1,move_remaining_ms:600}));await bubbles;
+ assert.equal([...h.timers.values()].filter(t=>t.ms===150).length,3);
+ // Moving focus between touch buttons must not release a still-held finger.
+ h.buttons[0].events.blur();h.ids['water-hold'].events.blur();assert.equal(h.pending.length,0);
+ const stop=h.ctx.endHold('water');const sc=h.take('/api/action');assert.equal(JSON.parse(sc.options.body).operation,'water_stop');
+ h.respond(sc,h.status(8,{bubbles_hold_id:3,bubbles_remaining_ms:600,drive_hold_id:1,move_remaining_ms:600}));await stop;
+ assert.equal([...h.timers.values()].filter(t=>t.ms===150).length,2);
+ const all=h.ids.stop.events.click();h.respond(h.take('/api/stop'),h.status(9));await all;
+ assert(![...h.timers.values()].some(t=>t.ms===150||t.ms===100));
+}
+for(const kind of ['water','bubbles']) for(const trigger of ['pointerup','pointercancel','lostpointercapture','pointermove','keyboardblur','visibilitychange','offline','windowblur']) {
+ const h=harness();await h.connect();await effectHold(h,kind,1,2,trigger==='keyboardblur'?null:2);
+ const b=h.ids[kind+'-hold'];
+ if(trigger==='visibilitychange'){h.document.hidden=true;h.events.visibilitychange();}
+ else if(trigger==='offline'||trigger==='windowblur')h.events[trigger]();
+ else if(trigger==='keyboardblur')b.events.blur();
+ else b.events[trigger]({pointerId:2,clientX:101,clientY:50,preventDefault(){}});
+ assert(h.pending.some(c=>c.path==='/api/release'||JSON.parse(c.options.body).operation===kind+'_stop'),kind+trigger);
+ assert(![...h.timers.values()].some(t=>t.ms===150));
+}
+for(const kind of ['water','bubbles']) {
+ const h=harness();await h.connect();const p=h.ctx.beginHold(h.ids[kind+'-hold'],2);await flush();
+ h.respond(h.take('/api/state'),h.status(2));await flush();const late=h.take('/api/action');
+ const stop=h.ctx.endHold(kind);h.respond(h.take('/api/action'),h.status(4));await stop;
+ h.respond(late,h.status(3,{result:'accepted',[kind+'_hold_id']:1,[kind+'_renewal']:1,[kind+'_remaining_ms']:600}));await p;
+ assert(![...h.timers.values()].some(t=>t.ms===150)); // Late start receipt never renews a released hold.
+}
+{
+ const h=harness();await h.connect();h.ctx.render(h.status(2,{capabilities:{move:true,water:true,bubbles:true,ignition:true}}));
+ assert(h.ids['water-hold'].disabled&&h.ids['bubbles-hold'].disabled&&!h.ids.water.disabled&&!h.ids.bubbles.disabled);
+}
+console.log('PASS: five one-tap durations per lane, independent held water/bubbles, three simultaneous holds, serialized starts, per-lane release, multitouch focus, cancel/offline/stop, late receipts and capability gating');
+
+for(const seconds of [1,3,5]) {
+ const h=harness();await h.connect();
+ const action=h.ids[seconds===1?'ignition':'ignition-'+seconds].events.click();
+ await flush();h.respond(h.take('/api/state'),h.status(2));await flush();
+ const call=h.take('/api/action');assert.deepEqual(JSON.parse(call.options.body),{sequence:1,window:2,operation:'ignition',duration_ms:seconds*1000});
+ h.respond(call,h.status(3,{result:'accepted',ignition_remaining_ms:seconds*1000,ignition_source:'web'}));await action;
+ assert([1,3,5].every(s=>h.ids[s===1?'ignition':'ignition-'+s].disabled));
+ h.respond(h.take('/api/state'),h.status(4,{ignition_cooldown_ms:3000}));await flush();
+ assert([1,3,5].every(s=>h.ids[s===1?'ignition':'ignition-'+s].disabled));
+ h.ctx.render(h.status(5));assert([1,3,5].every(s=>!h.ids[s===1?'ignition':'ignition-'+s].disabled));
+}
+assert(!html.includes('ignition-duration') && !html.includes('ignition-hold'));
+console.log('PASS: ignition 1/3/5-second buttons map to exact durations, all disabled while active/cooling; no hold or dropdown');

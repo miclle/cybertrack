@@ -119,6 +119,12 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
             outcome = sessions.DriveRenew(now, web_session, command->hold_id, command->renewal);
         else if (!strcmp(operation, "drive_stop"))
             outcome = sessions.DriveStop(now, web_session, command->hold_id);
+        else if (!strcmp(operation, "water_start") || !strcmp(operation, "bubbles_start"))
+            outcome = sessions.EffectStart(now, web_session, command->sequence, command->window, command->target);
+        else if (!strcmp(operation, "water_renew") || !strcmp(operation, "bubbles_renew"))
+            outcome = sessions.EffectRenew(now, web_session, command->target, command->hold_id, command->renewal);
+        else if (!strcmp(operation, "water_stop") || !strcmp(operation, "bubbles_stop"))
+            outcome = sessions.EffectStop(now, web_session, command->target, command->hold_id);
         else
             outcome = sessions.WebAction(now, web_session, command->sequence, command->window,
                                          command->target, duration, water_duration, direction, command->bubbles_ms, command->ignition_ms);
@@ -138,8 +144,8 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     now = Now(); TickLocked(now);
     const bool requested_active = !strcmp(operation, "drive_start") ? guard.Moving() && (!water_duration || guard.Watering()) :
         (!strcmp(operation, "move") || !strcmp(operation, "drive_renew")) ? guard.Moving() :
-        !strcmp(operation, "water") ? guard.Watering() :
-        !strcmp(operation, "bubbles") ? guard.Bubbling() :
+        (!strcmp(operation, "water") || !strcmp(operation, "water_start") || !strcmp(operation, "water_renew")) ? guard.Watering() :
+        (!strcmp(operation, "bubbles") || !strcmp(operation, "bubbles_start") || !strcmp(operation, "bubbles_renew")) ? guard.Bubbling() :
         !strcmp(operation, "ignition") ? guard.Igniting() : guard.Moving() && guard.Watering();
     if ((!strcmp(outcome, "accepted") || !strcmp(outcome, "renewed")) && !requested_active) {
         if (!strcmp(operation, "move_and_water") || !strcmp(operation, "drive_start")) sessions.Stop(now);
@@ -172,6 +178,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     const unsigned water_cooldown = guard.spray.cooldown_until > now ? guard.spray.cooldown_until - now : 0;
     const bool held = guard.motion.held;
     const unsigned drive_id = sessions.drive_id, drive_renewal = sessions.drive_renewal;
+    const auto water_hold = sessions.water_hold, bubbles_hold = sessions.bubbles_hold;
     xSemaphoreGive(lock);
     const auto uptime = Decimal(now);
     const char* state = (fault || clock_fault) ? "FAULT" : (moving || watering || bubbling || igniting) ? "ACTIVE" : stopped ? "STOPPED" : "DISARMED";
@@ -181,14 +188,15 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         "{\"device_id\":\"%s\",\"boot_id\":\"%s\",\"request_sequence\":%u,\"operation\":\"%s\","
         "\"result\":\"%s\",\"state\":\"%s\",\"fault\":\"%s\",\"uptime_ms\":%s,"
         "\"logical_outputs\":{\"left\":%d,\"right\":%d,\"water\":%s,\"bubbles\":%s,\"ignition\":%s},"
-        "\"capabilities\":{\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
+        "\"capabilities\":{\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
         "\"local_authorization_required\":false,\"starts_this_boot\":%u,\"max_duration_ms\":30000,\"last_duration_ms\":%u,\"remaining_ms\":%u,"
         "\"move_last_duration_ms\":%u,\"water_last_duration_ms\":%u,\"move_remaining_ms\":%u,\"water_remaining_ms\":%u,"
         "\"move_max_duration_ms\":3000,\"move_direction\":\"%s\",\"log_events_dropped\":%u,"
         "\"control_owner\":\"%s\",\"window\":%u,\"move_cooldown_ms\":%u,\"water_cooldown_ms\":%u,\"boot_held\":%s,"
         "\"move_source\":\"%s\",\"water_source\":\"%s\",\"drive_hold_id\":%u,\"drive_renewal\":%u,\"drive_lease_ms\":600,"
+        "\"water_hold_id\":%u,\"water_renewal\":%u,\"bubbles_hold_id\":%u,\"bubbles_renewal\":%u,\"effect_lease_ms\":600,"
         "\"bubbles_last_duration_ms\":%u,\"ignition_last_duration_ms\":%u,\"bubbles_remaining_ms\":%u,\"ignition_remaining_ms\":%u,"
-        "\"bubbles_max_duration_ms\":5000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":%u,\"ignition_cooldown_ms\":%u,"
+        "\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":%u,\"ignition_cooldown_ms\":%u,"
         "\"bubbles_source\":\"%s\",\"ignition_source\":\"%s\","
         "\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
         device_id.c_str(), boot_id.c_str(), seq, operation, outcome, state, reason, uptime.c_str(),
@@ -196,9 +204,11 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         starts, last_duration, std::max({move_remaining, water_remaining, bubbles_remaining, ignition_remaining}),
         move_duration, water_ms, move_remaining, water_remaining, move_direction, lost,
         owner, window, move_cooldown, water_cooldown, held ? "true" : "false", move_source, water_source, drive_id, drive_renewal,
+        static_cast<unsigned>(water_hold.id), static_cast<unsigned>(water_hold.renewal),
+        static_cast<unsigned>(bubbles_hold.id), static_cast<unsigned>(bubbles_hold.renewal),
         bubbles_ms, ignition_ms, bubbles_remaining, ignition_remaining, bubbles_cooldown, ignition_cooldown, bubbles_source, ignition_source);
     result.assign(json);
-    if (!web_session || (strcmp(operation, "get_status") && strcmp(operation, "drive_renew")))
+    if (!web_session || (strcmp(operation, "get_status") && strcmp(operation, "drive_renew") && strcmp(operation, "water_renew") && strcmp(operation, "bubbles_renew")))
         ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
     return result;
 }
@@ -286,8 +296,8 @@ void InitializeCyberTrackTools() {
             return Reply("water", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
     server.AddTool("self.tank.bubbles",
-        "仅在用户明确要求吹泡泡时调用。duration_ms是1到5000的整数毫秒；未说时长传1000，超过五秒只请求5000并说明，不分段。与行走、喷水和点火独立并行；同路不续时、不排队，停止后间隔200毫秒。不自动重试。BOOT和停止工具全停。接受回执不代表实际出泡。",
-        PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 5000)}),
+        "仅在用户明确要求吹泡泡时调用。duration_ms是1到30000的整数毫秒；未说时长传1000，超过三十秒只请求30000并说明，不分段。与行走、喷水和点火独立并行；同路不续时、不排队，停止后间隔200毫秒。不自动重试。BOOT和停止工具全停。接受回执不代表实际出泡。",
+        PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 30000)}),
         [](const PropertyList& p) -> ReturnValue {
             return Reply("bubbles", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
@@ -312,5 +322,5 @@ void InitializeCyberTrackTools() {
             return Reply("move_and_water", p["_ct_ticket"].value<int>(), p["move_duration_ms"].value<int>(),
                          p["direction"].value<std::string>().c_str(), p["water_duration_ms"].value<int>());
         });
-    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water,bubbles,ignition,move,move_and_water concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=3000 water_max_ms=30000 bubbles_max_ms=5000 ignition_max_ms=5000");
+    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water,bubbles,ignition,move,move_and_water concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=3000 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000");
 }

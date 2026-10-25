@@ -14,10 +14,11 @@ ROOT = HERE.parents[1]
 BOOT_CALLBACK = '        boot_button_.OnClick([this]() {\n            auto& app = Application::GetInstance();\n            if (app.GetDeviceState() == kDeviceStateStarting && !WifiStation::GetInstance().IsConnected()) {\n                ResetWifiConfiguration();\n            }\n            app.ToggleChatState();\n        });\n'
 ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition") {
         const cJSON* duration = cJSON_GetObjectItemCaseSensitive(tool_arguments, "duration_ms");
+        const int max_ms = tool_name == "self.tank.bubbles" ? 30000 : 5000;
         if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 1 ||
-            !cJSON_IsNumber(duration) || !(duration->valuedouble >= 1 && duration->valuedouble <= 5000) ||
+            !cJSON_IsNumber(duration) || !(duration->valuedouble >= 1 && duration->valuedouble <= max_ms) ||
             duration->valuedouble != duration->valueint) {
-            ReplyError(id, "Effect requires exactly integer duration_ms in 1..5000");
+            ReplyError(id, "Effect requires exactly integer duration_ms within its limit");
             return;
         }
     }
@@ -78,7 +79,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct13")')
+                 'set(PROJECT_VER "2.0.3-ct16")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',

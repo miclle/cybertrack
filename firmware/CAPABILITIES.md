@@ -443,3 +443,7 @@ ct6 软件验证及部署边界见[集成记录](../docs/breadboard-integration.
 ## ct13 泡泡与点火候选（未部署）
 
 面包板适配新增 `self.tank.bubbles`、`self.tank.ignition` 以及对应 HTTP 操作，整数 `duration_ms` 1–5000。四路独立并行与全停，泡泡 GPIO17、双点火共用 GPIO21 为候选。状态能力与每路计时／来源／间隔均已扩展，详见[效果控制](../docs/effects-control.md)。本文此前“泡泡未开放／高压驱动不属于实现”指已部署和旧版本范围；ct13 仅完成低压 MOS 控制源码，未刷写、未平台同步、未实现高压接线或完成通电验证。
+
+## ct14 持续喷水／泡泡
+
+新增网页 `water_start/renew/stop` 与 `bubbles_start/renew/stop`，每路独立 600 ms 租期、一次一回执续租，松开本路停止，可与行走长按及定时点火并行。页面每路 1／3／5／10／30 秒和按住持续共六个按钮。泡泡 MCP／HTTP 定时范围扩大为 1–30000 ms；点火上限 5000 ms、间隔 3000 ms 不变，无点火持续接口。新能力与状态字段见[接口说明](../docs/lan-control.md#ct14-喷水泡泡六按钮与长按)。

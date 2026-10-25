@@ -23,9 +23,24 @@ int main() {
             assert((!strcmp(op,"bubbles")?cmd.bubbles_ms:cmd.ignition_ms)==atoi(ms));
             cJSON_Delete(root);
         }
-        for(const char* ms : {"0","-1","5001","1.5","true","\"1000\"","1,\"duration_ms\":1","1,\"extra\":0"})
+        for(const char* ms : {"0","-1","30001","1.5","true","\"1000\"","1,\"duration_ms\":1","1,\"extra\":0"})
             assert(!parse((prefix+ms+"}").c_str()));
     }
+    for(const std::string kind:{"water","bubbles"}) {
+        for(const std::string action:{"start","renew","stop"}) {
+            const auto prefix=std::string("{\"operation\":\"")+kind+"_"+action+"\",";
+            const auto args=action=="start"?"\"sequence\":1,\"window\":1":action=="renew"?"\"hold_id\":1,\"renewal\":1":"\"hold_id\":1";
+            auto json=prefix+args+"}";auto root=cJSON_Parse(json.c_str());WebCommand cmd;
+            assert(ParseWebCommand(root,cmd));assert(cmd.target==(kind=="water"?AudioActionGuard::WaterOnly:AudioActionGuard::BubblesOnly));
+            assert(std::string(cmd.operation)==kind+"_"+action);cJSON_Delete(root);
+            assert(!parse((prefix+args+",\"extra\":1}").c_str()));
+            assert(!parse((prefix+"\"hold_id\":0}").c_str()));
+        }
+    }
+    assert(!parse(R"({"operation":"ignition_start","sequence":1,"window":1})"));
+    assert(!parse(R"({"operation":"water_start","sequence":1,"sequence":1})"));
+    assert(!parse(R"({"operation":"water_renew","hold_id":1,"renewal":1.5})"));
+    assert(!parse(R"({"operation":"bubbles_stop","hold_id":1,"hold_id":2})"));
     const char* bad[]={
         "null", "[]", "{}",
         R"({"operation":"drive_start","sequence":1,"window":1,"direction":"left","duration_ms":1000})",
@@ -52,6 +67,8 @@ int main() {
         R"({"operation":"move_and_water","sequence":1,"window":1,"direction":"left","move_duration_ms":1})",
         R"({"operation":"move_and_water","sequence":1,"window":1,"direction":"left","move_duration_ms":1,"water_duration_ms":-1})"
     };
+    assert(parse(R"({"operation":"bubbles","sequence":1,"window":1,"duration_ms":30000})"));
+    assert(!parse(R"({"operation":"ignition","sequence":1,"window":1,"duration_ms":5001})"));
     for (const auto text:bad) assert(!parse(text));
     std::cout << "PASS: actual web JSON parser, action schemas, integer/sequence bounds, missing/extra/duplicate fields\n";
 }
