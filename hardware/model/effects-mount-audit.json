@@ -1489,8 +1489,8 @@
         "passed": false
       }
     },
-    "tray_to_power_mm": 2.0,
-    "screw_head_to_power_mm": 2.0999999999999943,
+    "tray_to_power_mm": 14.0,
+    "screw_head_to_power_mm": 14.099999999999994,
     "roof_distances_mm": {
       "EffectMOSL": 2.135496389036094,
       "EffectSupportLMOS": 5.637555823439678,
@@ -2713,10 +2713,6 @@
           "distance_mm": 0.5
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.0999999999999943
-        },
-        {
           "object": "LowerTub",
           "distance_mm": 3.3234018715767752
         }
@@ -2773,10 +2769,6 @@
         {
           "object": "KeelLid",
           "distance_mm": 0.5
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 2.0999999999999943
         },
         {
           "object": "EffectRetainerRMOS",
@@ -2841,10 +2833,6 @@
           "distance_mm": 0.5
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.0999999999999943
-        },
-        {
           "object": "LowerTub",
           "distance_mm": 3.3234018715767806
         }
@@ -2901,10 +2889,6 @@
         {
           "object": "KeelLid",
           "distance_mm": 0.5
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 2.0999999999999943
         },
         {
           "object": "EffectRetainerLMOS",
@@ -2966,10 +2950,6 @@
           "distance_mm": 2.720294101747096
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 3.5
-        },
-        {
           "object": "EffectBuckL",
           "distance_mm": 3.5
         },
@@ -3003,10 +2983,6 @@
         {
           "object": "EffectRetainerLBuck",
           "distance_mm": 2.973213749463703
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 3.0
         },
         {
           "object": "EffectBuckL",
@@ -3048,10 +3024,6 @@
           "distance_mm": 2.2203603311174502
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.5
-        },
-        {
           "object": "EffectMOSL",
           "distance_mm": 2.6
         }
@@ -3087,10 +3059,6 @@
           "distance_mm": 2.2203603311174502
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.5999999999999943
-        },
-        {
           "object": "EffectMOSL",
           "distance_mm": 2.720294101747094
         }
@@ -3116,10 +3084,6 @@
         {
           "object": "KeelLid",
           "distance_mm": 1.927234057555625
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 2.5
         },
         {
           "object": "EffectMOSL",
@@ -3157,10 +3121,6 @@
           "distance_mm": 1.43145600891813
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.5999999999999943
-        },
-        {
           "object": "EffectMOSL",
           "distance_mm": 2.720294101747096
         },
@@ -3176,7 +3136,7 @@
       "passed": true
     },
     "EffectRetainerLMOS": {
-      "boolean_pairs_tested": 9,
+      "boolean_pairs_tested": 8,
       "overlaps": [],
       "nearby": [
         {
@@ -3291,10 +3251,6 @@
           "distance_mm": 3.2496684180984103
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 3.5
-        },
-        {
           "object": "EffectMOSL",
           "distance_mm": 3.5
         },
@@ -3324,10 +3280,6 @@
         {
           "object": "EffectRetainerLMOS",
           "distance_mm": 2.973213749463703
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 3.0
         },
         {
           "object": "EffectMOSL",
@@ -3365,10 +3317,6 @@
           "distance_mm": 0.09999999999999432
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.5
-        },
-        {
           "object": "EffectBuckL",
           "distance_mm": 2.5999999999999996
         },
@@ -3394,10 +3342,6 @@
         {
           "object": "EffectTray",
           "distance_mm": 0.19999999999998863
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 2.5999999999999943
         },
         {
           "object": "EffectBuckL",
@@ -3431,10 +3375,6 @@
           "distance_mm": 0.09999999999999432
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.5
-        },
-        {
           "object": "EffectBuckL",
           "distance_mm": 2.6000000000000014
         },
@@ -3460,10 +3400,6 @@
         {
           "object": "EffectTray",
           "distance_mm": 0.19999999999998863
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 2.5999999999999943
         },
         {
           "object": "EffectBuckL",
@@ -3576,10 +3512,6 @@
           "distance_mm": 2.720294101747096
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 3.5
-        },
-        {
           "object": "EffectBuckR",
           "distance_mm": 3.5
         },
@@ -3613,10 +3545,6 @@
         {
           "object": "EffectRetainerRBuck",
           "distance_mm": 2.973213749463703
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 3.0
         },
         {
           "object": "EffectBuckR",
@@ -3658,10 +3586,6 @@
           "distance_mm": 2.2203603311174502
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.5
-        },
-        {
           "object": "EffectMOSR",
           "distance_mm": 2.6
         }
@@ -3697,10 +3621,6 @@
           "distance_mm": 2.2203603311174502
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.5999999999999943
-        },
-        {
           "object": "EffectMOSR",
           "distance_mm": 2.720294101747094
         }
@@ -3726,10 +3646,6 @@
         {
           "object": "KeelLid",
           "distance_mm": 1.9272340575556222
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 2.5
         },
         {
           "object": "EffectMOSR",
@@ -3767,10 +3683,6 @@
           "distance_mm": 1.431456008918127
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.5999999999999943
-        },
-        {
           "object": "EffectMOSR",
           "distance_mm": 2.720294101747096
         },
@@ -3786,7 +3698,7 @@
       "passed": true
     },
     "EffectRetainerRMOS": {
-      "boolean_pairs_tested": 9,
+      "boolean_pairs_tested": 8,
       "overlaps": [],
       "nearby": [
         {
@@ -3901,10 +3813,6 @@
           "distance_mm": 3.2496684180984103
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 3.5
-        },
-        {
           "object": "EffectMOSR",
           "distance_mm": 3.5
         },
@@ -3934,10 +3842,6 @@
         {
           "object": "EffectRetainerRMOS",
           "distance_mm": 2.973213749463703
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 3.0
         },
         {
           "object": "EffectMOSR",
@@ -3975,10 +3879,6 @@
           "distance_mm": 0.09999999999999432
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.5
-        },
-        {
           "object": "EffectBuckR",
           "distance_mm": 2.5999999999999996
         },
@@ -4004,10 +3904,6 @@
         {
           "object": "EffectTray",
           "distance_mm": 0.19999999999998863
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 2.5999999999999943
         },
         {
           "object": "EffectBuckR",
@@ -4041,10 +3937,6 @@
           "distance_mm": 0.09999999999999432
         },
         {
-          "object": "PowerBank",
-          "distance_mm": 2.5
-        },
-        {
           "object": "EffectBuckR",
           "distance_mm": 2.599999999999998
         },
@@ -4070,10 +3962,6 @@
         {
           "object": "EffectTray",
           "distance_mm": 0.19999999999998863
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 2.5999999999999943
         },
         {
           "object": "EffectBuckR",
@@ -4146,7 +4034,7 @@
       "passed": true
     },
     "EffectTray": {
-      "boolean_pairs_tested": 35,
+      "boolean_pairs_tested": 34,
       "overlaps": [],
       "nearby": [
         {
@@ -4300,20 +4188,12 @@
         {
           "object": "LowerTub",
           "distance_mm": 1.8000000000000007
-        },
-        {
-          "object": "PowerBank",
-          "distance_mm": 2.0
-        },
-        {
-          "object": "BatteryPullStrap",
-          "distance_mm": 2.586503431275511
         }
       ],
       "passed": true
     },
     "KeelLid": {
-      "boolean_pairs_tested": 122,
+      "boolean_pairs_tested": 134,
       "overlaps": [],
       "nearby": [
         {
@@ -4359,6 +4239,18 @@
         {
           "object": "EffectTray",
           "distance_mm": 0.0
+        },
+        {
+          "object": "IgnitionMOSCarrier",
+          "distance_mm": 0.0
+        },
+        {
+          "object": "IgnitionMOSMountInsertL",
+          "distance_mm": 0.09999999999999186
+        },
+        {
+          "object": "IgnitionMOSMountInsertR",
+          "distance_mm": 0.09999999999999186
         },
         {
           "object": "EffectInsert1",
@@ -4413,6 +4305,14 @@
           "distance_mm": 0.5
         },
         {
+          "object": "IgnitionMOSMountScrewL",
+          "distance_mm": 0.5
+        },
+        {
+          "object": "IgnitionMOSMountScrewR",
+          "distance_mm": 0.5
+        },
+        {
           "object": "EffectRetainerLMOS",
           "distance_mm": 0.6999999999999303
         },
@@ -4426,11 +4326,11 @@
         },
         {
           "object": "KeelSideFrameL",
-          "distance_mm": 0.9999999999999858
+          "distance_mm": 0.9999999999999716
         },
         {
           "object": "KeelSideFrameR",
-          "distance_mm": 1.0
+          "distance_mm": 0.9999999999999858
         },
         {
           "object": "EffectRetainerScrewRMOSOuter",
@@ -4442,7 +4342,11 @@
         },
         {
           "object": "PowerCableRoute",
-          "distance_mm": 1.5
+          "distance_mm": 1.4999999999999984
+        },
+        {
+          "object": "IgnitionMOSRetainer",
+          "distance_mm": 1.7044422518220823
         },
         {
           "object": "EffectRetainerInsertRMOSOuter",
@@ -4479,6 +4383,10 @@
         {
           "object": "BottomServiceCover",
           "distance_mm": 2.3999999999999986
+        },
+        {
+          "object": "IgnitionMOSBoard",
+          "distance_mm": 2.7070751760790697
         },
         {
           "object": "NeckStaySleeveL",
@@ -4537,6 +4445,14 @@
           "distance_mm": 3.2496684180984103
         },
         {
+          "object": "IgnitionMOSRetainerScrewInner",
+          "distance_mm": 3.3056941504209387
+        },
+        {
+          "object": "IgnitionMOSRetainerScrewOuter",
+          "distance_mm": 3.3056941504209423
+        },
+        {
           "object": "NeckStayL",
           "distance_mm": 3.373661249987137
         },
@@ -4559,6 +4475,14 @@
         {
           "object": "L298NClampScrewR1",
           "distance_mm": 3.5999999999999943
+        },
+        {
+          "object": "IgnitionMOSRetainerInsertInner",
+          "distance_mm": 3.753953800523386
+        },
+        {
+          "object": "IgnitionMOSRetainerInsertOuter",
+          "distance_mm": 3.753953800523386
         },
         {
           "object": "L298NClampNutL1",
@@ -4600,7 +4524,7 @@
       "passed": true
     },
     "BackpackShell": {
-      "boolean_pairs_tested": 72,
+      "boolean_pairs_tested": 74,
       "overlaps": [],
       "nearby": [
         {
@@ -4825,9 +4749,14 @@
   },
   "reserved_spaces": {
     "BackpackArcL": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
-      "nearby": [],
+      "nearby": [
+        {
+          "object": "IgnitionRouteL",
+          "distance_mm": 2.2543378499745605
+        }
+      ],
       "passed": true
     },
     "ArcBottomPadL": {
@@ -4837,13 +4766,13 @@
       "passed": true
     },
     "ArcInsertL00": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "ArcScrewL00": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
@@ -4861,31 +4790,31 @@
       "passed": true
     },
     "ArcClampOuterL0": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "ArcLinerInnerL0": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "ArcLinerOuterL0": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "ArcInsertL10": {
-      "boolean_pairs_tested": 1,
+      "boolean_pairs_tested": 2,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "ArcScrewL10": {
-      "boolean_pairs_tested": 1,
+      "boolean_pairs_tested": 2,
       "overlaps": [],
       "nearby": [],
       "passed": true
@@ -4903,27 +4832,37 @@
       "passed": true
     },
     "ArcClampOuterL1": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "IgnitionRouteL",
+          "distance_mm": 2.019508549556679
+        }
+      ],
+      "passed": true
+    },
+    "ArcLinerInnerL1": {
       "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
-    "ArcLinerInnerL1": {
-      "boolean_pairs_tested": 0,
-      "overlaps": [],
-      "nearby": [],
-      "passed": true
-    },
     "ArcLinerOuterL1": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "BackpackArcR": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
-      "nearby": [],
+      "nearby": [
+        {
+          "object": "IgnitionRouteR",
+          "distance_mm": 2.254337849974557
+        }
+      ],
       "passed": true
     },
     "ArcBottomPadR": {
@@ -4933,13 +4872,13 @@
       "passed": true
     },
     "ArcInsertR00": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "ArcScrewR00": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
@@ -4957,31 +4896,31 @@
       "passed": true
     },
     "ArcClampOuterR0": {
-      "boolean_pairs_tested": 1,
+      "boolean_pairs_tested": 2,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "ArcLinerInnerR0": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "ArcLinerOuterR0": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "ArcInsertR10": {
-      "boolean_pairs_tested": 1,
+      "boolean_pairs_tested": 2,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
     "ArcScrewR10": {
-      "boolean_pairs_tested": 1,
+      "boolean_pairs_tested": 2,
       "overlaps": [],
       "nearby": [],
       "passed": true
@@ -4999,19 +4938,24 @@
       "passed": true
     },
     "ArcClampOuterR1": {
+      "boolean_pairs_tested": 2,
+      "overlaps": [],
+      "nearby": [
+        {
+          "object": "IgnitionRouteR",
+          "distance_mm": 2.019508549556679
+        }
+      ],
+      "passed": true
+    },
+    "ArcLinerInnerR1": {
       "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
     },
-    "ArcLinerInnerR1": {
-      "boolean_pairs_tested": 0,
-      "overlaps": [],
-      "nearby": [],
-      "passed": true
-    },
     "ArcLinerOuterR1": {
-      "boolean_pairs_tested": 0,
+      "boolean_pairs_tested": 1,
       "overlaps": [],
       "nearby": [],
       "passed": true
@@ -5037,7 +4981,12 @@
     "EffectScrew1": {
       "boolean_pairs_tested": 0,
       "overlaps": [],
-      "nearby": [],
+      "nearby": [
+        {
+          "object": "IgnitionRouteR",
+          "distance_mm": 4.758700107447097
+        }
+      ],
       "passed": true
     },
     "EffectInsert2": {
@@ -5061,7 +5010,12 @@
     "EffectScrew3": {
       "boolean_pairs_tested": 0,
       "overlaps": [],
-      "nearby": [],
+      "nearby": [
+        {
+          "object": "IgnitionRouteL",
+          "distance_mm": 4.758700107447097
+        }
+      ],
       "passed": true
     },
     "EffectMOSL": {
@@ -5273,6 +5227,14 @@
         {
           "object": "L298NAirSpaceR",
           "distance_mm": 0.0
+        },
+        {
+          "object": "IgnitionRouteL",
+          "distance_mm": 3.469229106000558
+        },
+        {
+          "object": "IgnitionRouteR",
+          "distance_mm": 3.469229106000558
         }
       ],
       "passed": true
@@ -6815,7 +6777,7 @@
       "overlaps": [
         {
           "object": "PowerBank",
-          "overlap_mm3": 96604.11750123555
+          "overlap_mm3": 57486.9324888596
         }
       ],
       "nearby": [
@@ -6931,6 +6893,6 @@
   "passed": true,
   "physical_fit_verified": false,
   "limits": "Cap release sampled; bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
-  "source_sha256": "d041b3b15c3eb635d606666041b831cfa067efe4524531317006e6a2d04460c6",
+  "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
   "saved_and_reopened": true
 }

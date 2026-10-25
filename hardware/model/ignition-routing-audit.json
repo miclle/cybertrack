@@ -1,0 +1,616 @@
+{
+  "scope": "geometric allocation only; no electrical or installation acceptance",
+  "objects": 6,
+  "representation": "connected straight clearance segments; not manufactured parts",
+  "valid": true,
+  "unexpected_overlaps": [],
+  "planned_front_interfaces": [
+    {
+      "route": "IgnitionRouteBranchL1",
+      "object": "FrontEffectLeadL1",
+      "volume_mm3": 3.5246377618342715,
+      "distance_mm": 0.0
+    },
+    {
+      "route": "IgnitionRouteBranchL2",
+      "object": "FrontEffectLeadL2",
+      "volume_mm3": 3.524637761834124,
+      "distance_mm": 0.0
+    },
+    {
+      "route": "IgnitionRouteBranchR1",
+      "object": "FrontEffectLeadR1",
+      "volume_mm3": 3.5246377618342715,
+      "distance_mm": 0.0
+    },
+    {
+      "route": "IgnitionRouteBranchR2",
+      "object": "FrontEffectLeadR2",
+      "volume_mm3": 3.524637761834124,
+      "distance_mm": 0.0
+    }
+  ],
+  "nearest_geometry": [
+    {
+      "route": "IgnitionRouteL",
+      "nearest": [
+        {
+          "object": "BackpackShell",
+          "category": "exterior",
+          "distance_mm": 0.3181462242345486
+        },
+        {
+          "object": "LowerTub",
+          "category": "structure",
+          "distance_mm": 0.32557798373549224
+        },
+        {
+          "object": "ArcClampOuterL1",
+          "category": "structure",
+          "distance_mm": 2.019508549556679
+        },
+        {
+          "object": "BackpackArcL",
+          "category": "envelope",
+          "distance_mm": 2.2543378499745605
+        },
+        {
+          "object": "EffectTray",
+          "category": "structure",
+          "distance_mm": 3.469229106000558
+        },
+        {
+          "object": "BatteryPullStrap",
+          "category": "structure",
+          "distance_mm": 3.799999999999997
+        },
+        {
+          "object": "PowerBank",
+          "category": "envelope",
+          "distance_mm": 4.5
+        },
+        {
+          "object": "EffectTool2",
+          "category": "clearance",
+          "distance_mm": 4.5
+        }
+      ]
+    },
+    {
+      "route": "IgnitionRouteBranchL1",
+      "nearest": [
+        {
+          "object": "LowerTub",
+          "category": "structure",
+          "distance_mm": 0.29999999999999294
+        },
+        {
+          "object": "FrontEffectSleeveL1",
+          "category": "exterior",
+          "distance_mm": 0.29999999999999505
+        },
+        {
+          "object": "ChestGuardL",
+          "category": "exterior",
+          "distance_mm": 0.2999999999999951
+        },
+        {
+          "object": "PowerBank",
+          "category": "envelope",
+          "distance_mm": 5.521559418480621
+        },
+        {
+          "object": "KeelLid",
+          "category": "structure",
+          "distance_mm": 6.0
+        },
+        {
+          "object": "FrontEffectSleeveL2",
+          "category": "exterior",
+          "distance_mm": 9.453624047073708
+        },
+        {
+          "object": "FrontEffectLeadL2",
+          "category": "exterior",
+          "distance_mm": 11.2886637182536
+        }
+      ]
+    },
+    {
+      "route": "IgnitionRouteBranchL2",
+      "nearest": [
+        {
+          "object": "LowerTub",
+          "category": "structure",
+          "distance_mm": 0.29999999999999566
+        },
+        {
+          "object": "ChestGuardL",
+          "category": "exterior",
+          "distance_mm": 0.2999999999999959
+        },
+        {
+          "object": "FrontEffectSleeveL2",
+          "category": "exterior",
+          "distance_mm": 0.29999999999999716
+        },
+        {
+          "object": "PowerBank",
+          "category": "envelope",
+          "distance_mm": 1.1494632603727652
+        },
+        {
+          "object": "ChestAccentL",
+          "category": "exterior",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "KeelLid",
+          "category": "structure",
+          "distance_mm": 9.882456866375623
+        }
+      ]
+    },
+    {
+      "route": "IgnitionRouteR",
+      "nearest": [
+        {
+          "object": "BackpackShell",
+          "category": "exterior",
+          "distance_mm": 0.3181462242345486
+        },
+        {
+          "object": "LowerTub",
+          "category": "structure",
+          "distance_mm": 0.325577983735485
+        },
+        {
+          "object": "ArcClampOuterR1",
+          "category": "structure",
+          "distance_mm": 2.019508549556679
+        },
+        {
+          "object": "BackpackArcR",
+          "category": "envelope",
+          "distance_mm": 2.254337849974557
+        },
+        {
+          "object": "EffectTray",
+          "category": "structure",
+          "distance_mm": 3.469229106000558
+        },
+        {
+          "object": "BatteryPullStrap",
+          "category": "structure",
+          "distance_mm": 3.799999999999997
+        },
+        {
+          "object": "PowerBank",
+          "category": "envelope",
+          "distance_mm": 4.5
+        },
+        {
+          "object": "EffectTool0",
+          "category": "clearance",
+          "distance_mm": 4.5
+        }
+      ]
+    },
+    {
+      "route": "IgnitionRouteBranchR1",
+      "nearest": [
+        {
+          "object": "FrontEffectSleeveR1",
+          "category": "exterior",
+          "distance_mm": 0.29999999999999377
+        },
+        {
+          "object": "LowerTub",
+          "category": "structure",
+          "distance_mm": 0.2999999999999957
+        },
+        {
+          "object": "ChestGuardR",
+          "category": "exterior",
+          "distance_mm": 0.29999999999999716
+        },
+        {
+          "object": "PowerBank",
+          "category": "envelope",
+          "distance_mm": 5.521559418480621
+        },
+        {
+          "object": "KeelLid",
+          "category": "structure",
+          "distance_mm": 6.0
+        },
+        {
+          "object": "FrontEffectSleeveR2",
+          "category": "exterior",
+          "distance_mm": 9.45362404707371
+        },
+        {
+          "object": "FrontEffectLeadR2",
+          "category": "exterior",
+          "distance_mm": 11.2886637182536
+        }
+      ]
+    },
+    {
+      "route": "IgnitionRouteBranchR2",
+      "nearest": [
+        {
+          "object": "LowerTub",
+          "category": "structure",
+          "distance_mm": 0.29999999999999566
+        },
+        {
+          "object": "ChestGuardR",
+          "category": "exterior",
+          "distance_mm": 0.2999999999999959
+        },
+        {
+          "object": "FrontEffectSleeveR2",
+          "category": "exterior",
+          "distance_mm": 0.29999999999999716
+        },
+        {
+          "object": "PowerBank",
+          "category": "envelope",
+          "distance_mm": 1.1494632603727652
+        },
+        {
+          "object": "ChestAccentR",
+          "category": "exterior",
+          "distance_mm": 3.0
+        },
+        {
+          "object": "KeelLid",
+          "category": "structure",
+          "distance_mm": 9.882456866375623
+        }
+      ]
+    }
+  ],
+  "branch_connections": [
+    {
+      "side": "L",
+      "branch": 1,
+      "overlap_mm3": 0.8445743885542338
+    },
+    {
+      "side": "L",
+      "branch": 2,
+      "overlap_mm3": 0.0952380951400971
+    },
+    {
+      "side": "R",
+      "branch": 1,
+      "overlap_mm3": 0.8445743888335091
+    },
+    {
+      "side": "R",
+      "branch": 2,
+      "overlap_mm3": 0.09523809526062128
+    }
+  ],
+  "sampled_service_with_corridors": {
+    "method": "8 discrete poses per straight segment; whole breadboard continuous tray/fastener/tool checks are reported separately in breadboard_check; legacy arc/USB scenarios only exist when those objects are present; no hand access certification",
+    "scenarios": [
+      {
+        "group": "cable_access",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            -80.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "BottomCoverScrew0",
+          "BottomCoverScrew1",
+          "BottomCoverScrew2",
+          "BottomCoverScrew3",
+          "BottomCoverScrew4",
+          "BottomCoverScrew5"
+        ],
+        "boolean_pairs_tested": 3,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "battery",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            -60.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "BatteryScrewLFront",
+          "BatteryScrewLRear",
+          "BatteryScrewRFront",
+          "BatteryScrewRRear",
+          "PowerCableRoute",
+          "CableServiceCover",
+          "AccessScrewL",
+          "AccessScrewR",
+          "BottomServiceCover",
+          "BottomCoverScrew0",
+          "BottomCoverScrew1",
+          "BottomCoverScrew2",
+          "BottomCoverScrew3",
+          "BottomCoverScrew4",
+          "BottomCoverScrew5"
+        ],
+        "boolean_pairs_tested": 47,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "crown",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            65.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear"
+        ],
+        "boolean_pairs_tested": 20,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "electronics",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            85.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownSpine",
+          "CrownForePlate",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownRearCassette",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "OccipitalBrowL",
+          "OccipitalBrowR",
+          "CrownEffectInsetL",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectInsetR",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "BreadboardScrew0",
+          "BreadboardScrew1",
+          "BreadboardScrew2",
+          "BreadboardScrew3",
+          "PowerCableRoute",
+          "WaterHoseRoute",
+          "ControllerWireRoute",
+          "UltrasonicWireSpace"
+        ],
+        "boolean_pairs_tested": 17,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "Water",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            150.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "WaterRetentionBand",
+          "WaterStrapClosure",
+          "WaterHoseRoute"
+        ],
+        "boolean_pairs_tested": 23,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "Bubble",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            150.0
+          ]
+        ],
+        "pose_count": 8,
+        "removed_first": [
+          "BubbleRetentionBand",
+          "BubbleStrapClosure",
+          "BubbleGunHoseRoute"
+        ],
+        "boolean_pairs_tested": 23,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "bubble_gun_cradle",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.5529142706151244,
+            5.795554957734409
+          ],
+          [
+            -90.0,
+            1.5529142706151244,
+            5.795554957734409
+          ]
+        ],
+        "pose_count": 16,
+        "removed_first": [
+          "BubbleGunHoseRoute",
+          "BubbleGunHoseClearance",
+          "BubbleGunHoseService",
+          "BubbleGunLeadRoute",
+          "BubbleGunLeadClearance",
+          "BubbleGunLeadConnector",
+          "BubbleGunConnectorService",
+          "BubbleGunShell",
+          "BubbleGunWheel",
+          "BubbleGunMotor",
+          "BubbleGunGearcase",
+          "BubbleGunMountingTab",
+          "BubbleGunFrontFoot",
+          "BubbleGunBaseScrew1",
+          "BubbleGunBaseScrew2"
+        ],
+        "boolean_pairs_tested": 227,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "water_gun",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.5176380902050415,
+            1.9318516525781364
+          ],
+          [
+            0.0,
+            -144.37123585315518,
+            40.75470841795625
+          ]
+        ],
+        "pose_count": 16,
+        "removed_first": [
+          "WaterHoseRoute",
+          "WaterGunLeadRoute",
+          "WaterGunLeadConnector"
+        ],
+        "boolean_pairs_tested": 119,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      },
+      {
+        "group": "water_gun_cradle",
+        "waypoints_mm": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.5176380902050415,
+            1.9318516525781364
+          ],
+          [
+            60.0,
+            0.5176380902050415,
+            1.9318516525781364
+          ]
+        ],
+        "pose_count": 16,
+        "removed_first": [
+          "WaterHoseRoute",
+          "WaterGunLeadRoute",
+          "WaterGunLeadConnector",
+          "WaterGunBody",
+          "WaterGunInlet",
+          "WaterGunBaseScrew1",
+          "WaterGunBaseScrew2"
+        ],
+        "boolean_pairs_tested": 137,
+        "overlaps": [],
+        "continuous_translation_sweep": null,
+        "passed": true
+      }
+    ],
+    "passed": true,
+    "physical_assembly_verified": false
+  },
+  "service_with_corridors_passed": true,
+  "passed": true,
+  "routing_ready_for_installation": false,
+  "module_terminal_connection_complete": false,
+  "protective_cover_designed": false,
+  "bend_radius_verified": false,
+  "electrical_verified": false,
+  "source_sha256": "b89e2e7659250d435fe9ae539401cc10e053ec76a7cedd3aa4342a7b1b41e91a",
+  "saved_and_reopened": true
+}

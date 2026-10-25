@@ -58,12 +58,12 @@ def refine(doc,add):
             bolt=cylinder(1.25,29.2,35.7,x,y).fuse(cylinder(2.2,28.2,29.2,x,y))
             bolt=bolt.cut(box(x-1.4,y-0.4,28.1,x+1.4,y+0.4,28.6))
             add('BatteryScrew'+tag,'电源托盖下方沉头位紧固候选 '+tag,bolt,'structure','metal','M2.5 级候选；不是已选定沉头螺钉标准')
-    strap=box(-60.6,-63,32.2,60.6,-57,32.8)
+    strap=box(-58.6,-63,32.2,58.6,-57,32.8)
     for sign in (-1,1):
-        x0,x1=(60,60.6) if sign>0 else (-60.6,-60)
-        strap=strap.fuse(box(x0,-63,32.2,x1,-57,65.2))
-        x0,x1=(45,60.6) if sign>0 else (-60.6,-45)
-        strap=strap.fuse(box(x0,-63,64.6,x1,-57,65.2))
+        x0,x1=(58,58.6) if sign>0 else (-58.6,-58)
+        strap=strap.fuse(box(x0,-63,32.2,x1,-57,53.2))
+        x0,x1=(45,58.6) if sign>0 else (-58.6,-45)
+        strap=strap.fuse(box(x0,-63,52.6,x1,-57,53.2))
     add('BatteryPullStrap','随电源托盖下取的柔性拉带占位',strap.removeSplitter(),'structure','accent','柔性件占位；材料、强度及固定方式待试验')
     cut('FrontBulkhead',box(-20,-22,38,20,-18,61))
 

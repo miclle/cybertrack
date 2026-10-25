@@ -5,9 +5,10 @@ import Part
 V = App.Vector
 PREFIX = 'FrontEffect'
 ROOTS_XZ = ((44, 62), (54, 53))
+WIRE_DIAMETER = 1.5
 FORWARD_LENGTH = 28
 RISE = FORWARD_LENGTH * 4 / 18  # Retain the 0.45 visual slope.
-BASIS = ('用户2026-10-25指定底盘前方左右各两根线；位置、线径、长度及护套均为外观假设，'
+BASIS = ('用户2026-10-25指定底盘前方左右各两根线，并补充单线外径1.5 mm；位置、长度及护套仍为外观假设，'
          '不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线')
 
 
@@ -26,10 +27,10 @@ def apply(doc, add):
                 Part.makeCylinder(3, 3, root, V(0, 1, 0)), 'exterior', 'dark', BASIS)
             # Trim the oblique cylinder against the sleeve's front plane so it
             # meets the sleeve without a modeled solid overlap or cutting the shell.
-            rod = Part.makeCylinder(1.5, direction.Length+1, root-direction*(1/direction.Length), direction)
+            rod = Part.makeCylinder(WIRE_DIAMETER/2, direction.Length+1, root-direction*(1/direction.Length), direction)
             rod = rod.common(Part.makeBox(140, FORWARD_LENGTH+4, 40, V(-70, -113-FORWARD_LENGTH, 45)))
             # Rounded closed tip is a visual wire end, not a stripped conductor.
-            rod = rod.fuse(Part.makeSphere(1.5, tip)).removeSplitter()
+            rod = rod.fuse(Part.makeSphere(WIRE_DIAMETER/2, tip)).removeSplitter()
             obj = add(f'{PREFIX}Lead{side}{index}', f'{label}前方效果线{index}／封闭端外观占位',
                       rod, 'exterior', 'accent', BASIS)
             obj.addProperty('App::PropertyBool', 'ElectricalDesign', 'Evidence')
@@ -39,14 +40,15 @@ def apply(doc, add):
                 root_centres_mm=[[s*x, -109, z] for s in (1, -1) for x, z in ROOTS_XZ],
                 tip_centres_mm=[[s*x, -109-FORWARD_LENGTH, z+RISE] for s in (1, -1) for x, z in ROOTS_XZ],
                 forward_projection_mm=FORWARD_LENGTH, rise_mm=RISE,
-                visual_diameter_mm=3, sleeve_visual_diameter_mm=6,
+                visual_diameter_mm=WIRE_DIAMETER, sleeve_visual_diameter_mm=6,
                 internal_wiring_designed=False, electrodes_designed=False,
                 physical_fit_verified=False, electrical_verified=False)
 
 
 def check(doc):
     selected = [o for o in doc.Objects if o.Name.startswith(PREFIX)]
-    others = [o for o in doc.Objects if hasattr(o, 'Category') and not o.Name.startswith(PREFIX)]
+    # Proposed route/lead interfaces are checked explicitly by ignition_routing.
+    others = [o for o in doc.Objects if hasattr(o, 'Category') and not o.Name.startswith((PREFIX, 'IgnitionRoute'))]
     overlaps = []
     pairs = [(a, b) for a in selected for b in others]
     pairs += [(a, b) for i, a in enumerate(selected) for b in selected[i+1:]]
@@ -70,8 +72,8 @@ def check(doc):
     return dict(objects=rows, boolean_pairs_tested=tested, overlaps=overlaps,
                 visual_root_contacts=contact,
                 passed=len(rows)==8 and all(r['valid'] and r['solids']==1 for r in rows)
-                    and not overlaps and all(r['guard_distance_mm']<1e-5 and r['lead_distance_mm']<1e-5 for r in contact),
-                scope='Static visual solids and root contact only; not electrical spacing or fixture validation',
+                    and not overlaps and all(r['guard_distance_mm']<1e-5 and r['lead_distance_mm']<.7 for r in contact),
+                scope='Static visual solids; guard contact and lead within 2.6 mm exit bore budget; not electrical spacing or fixture validation',
                 physical_fit_verified=False, electrical_verified=False)
 
 

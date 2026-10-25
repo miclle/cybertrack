@@ -123,8 +123,8 @@ def apply(doc,put):
     put('EffectTray','效果板低位承板／凹座、防脱压框与四点沉台',tray,'structure','metal',
         '底Z66.5，上Z68.5；板座下凹1、四耳厚4、螺钉头底66.6；下方至少2 mm候选，公差与强度待验。')
     return {'revision':'0.43','tray_floor_z_mm':[66.5,68.5],'tray_mount_xy_mm':MOUNTS,
-            'power_top_z_mm':64.5,'minimum_undertray_gap_target_mm':2,'screw_head_bottom_z_mm':66.6,
-            'screw_head_gap_mm':2.1,'board_bottom_z_mm':68,'pcb_thickness_assumed_mm':1.6,
+            'power_top_z_mm':doc.PowerBank.Shape.BoundBox.ZMax,'minimum_undertray_gap_target_mm':2,'screw_head_bottom_z_mm':66.6,
+            'screw_head_gap_mm':66.6-doc.PowerBank.Shape.BoundBox.ZMax,'board_bottom_z_mm':68,'pcb_thickness_assumed_mm':1.6,
             'component_free_edge_assumed_mm':2.5,'seat_depth_mm':1,'remaining_seat_floor_mm':1,
             'board_edge_pad_mm':.5,'board_side_allowance_mm':.5,'board_lip_vertical_allowance_mm':.4,
             'retainer_screws':8,'tray_ear_thickness_mm':4,'port_and_wire_positions_measured':False,
