@@ -1,6 +1,6 @@
 {
   "status": "preliminary_concept",
-  "design_revision": "0.43",
+  "design_revision": "0.44",
   "coordinate_system": "mm; +X left, +Y rear, +Z up; front -Y",
   "drive_mount_check": {
     "tolerance_mm3": 1e-05,
@@ -1985,7 +1985,7 @@
       "No material, strength, fatigue, thread, tolerance, sealing or manufacturing acceptance."
     ],
     "passed": true,
-    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
     "saved_and_reopened": true
   },
   "head_lift_check": {
@@ -2186,8 +2186,8 @@
     "limits": "CAD nominal clearances and prescribed rigid service envelopes only; actual cap diameter, flexible hose withdrawal/parking, hand access, stiffness and stability unverified",
     "physical_fit_verified": false,
     "manufacturing_released": false,
-    "assembly_revision": "0.43",
-    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "assembly_revision": "0.44",
+    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
     "saved_and_reopened": true
   },
   "rear_armor_symmetry_check": {
@@ -2241,7 +2241,7 @@
     "tolerance_mm3": 1e-05,
     "passed": true,
     "physical_or_manufacturing_verified": false,
-    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
     "saved_and_reopened": true
   },
   "top_feed_check": {
@@ -2319,7 +2319,7 @@
     "internal_hose_is_clearance_only": true,
     "suction_lift_air_seal_priming_and_physical_fit_verified": false,
     "passed": true,
-    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
     "saved_and_reopened": true
   },
   "bottle_backpack": {
@@ -2515,7 +2515,7 @@
     "no_tools_for_routine_refill_design_intent": true,
     "physical_retention_seal_venting_material_fit_verified": false,
     "manufacturing_released": false,
-    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
     "saved_and_reopened": true
   },
   "bounding_box_method": "optimalBoundingBox(useTriangulation=False, useShapeTolerance=False)",
@@ -9949,6 +9949,60 @@
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MT3608Envelope",
+      "label": "P06 MT3608 升压板／37×18×6 实测包络",
+      "category": "envelope",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3996.0,
+      "bbox_mm": [
+        25.0,
+        -17.0,
+        82.0,
+        43.0,
+        20.0,
+        88.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MT3608WireSpaceFront",
+      "label": "MT3608 板端4 mm接线预算 Front",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 576.0,
+      "bbox_mm": [
+        25.0,
+        -21.0,
+        81.0,
+        43.0,
+        -17.0,
+        89.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "MT3608WireSpaceRear",
+      "label": "MT3608 板端4 mm接线预算 Rear",
+      "category": "clearance",
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 576.0,
+      "bbox_mm": [
+        25.0,
+        20.0,
+        81.0,
+        43.0,
+        24.0,
+        89.0
+      ],
+      "native_brep_matches": false,
+      "symmetric_difference_mm3": 0.0
     }
   ],
   "assembly_size_xyz_mm": [
@@ -9969,7 +10023,7 @@
   },
   "collision_check": {
     "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 1108,
+    "boolean_pairs_tested": 1111,
     "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
     "overlaps": [],
     "passed": true
@@ -10457,7 +10511,7 @@
           "method": "exact continuous capsule sweep of 6 mm straight hose section only",
           "measured_hose_od_mm": 5,
           "seat_diameter_mm": 5.6,
-          "minimum_tube_support_gap_mm": 0.29999999999998295,
+          "minimum_tube_support_gap_mm": 0.29999999999999716,
           "overlaps": [],
           "passed": true
         },
@@ -10472,7 +10526,7 @@
           "method": "exact continuous capsule sweep of 6 mm straight hose section only",
           "measured_hose_od_mm": 5,
           "seat_diameter_mm": 5.6,
-          "minimum_tube_support_gap_mm": 0.29999999999998295,
+          "minimum_tube_support_gap_mm": 0.29999999999999716,
           "overlaps": [],
           "passed": true
         },
@@ -10550,23 +10604,23 @@
     "nearest_clearances": [
       {
         "object": "WaterGunCradle",
-        "distance_mm": 0.5
-      },
-      {
-        "object": "WaterGunBaseScrew1",
-        "distance_mm": 1.1999999999999744
+        "distance_mm": 0.4999999999999929
       },
       {
         "object": "WaterGunBaseScrew2",
-        "distance_mm": 1.1999999999999744
+        "distance_mm": 1.2000000000000028
+      },
+      {
+        "object": "WaterGunBaseScrew1",
+        "distance_mm": 1.200000000000017
       },
       {
         "object": "WaterGunHoseSupport",
-        "distance_mm": 2.6000000000000085
+        "distance_mm": 2.5999999999999943
       },
       {
         "object": "WaterGunHoseSupportRear",
-        "distance_mm": 2.6000000000000085
+        "distance_mm": 2.5999999999999943
       },
       {
         "object": "ShoulderRailL",
@@ -10574,11 +10628,11 @@
       },
       {
         "object": "WaterGunBaseInsert1",
-        "distance_mm": 4.199999999999974
+        "distance_mm": 4.200000000000003
       },
       {
         "object": "WaterGunBaseInsert2",
-        "distance_mm": 4.199999999999989
+        "distance_mm": 4.200000000000017
       },
       {
         "object": "KeelLid",
@@ -10680,12 +10734,7 @@
       "passed": true,
       "scope": "conservative screening of modelled maintenance groups; not hands, tools or flexible leads"
     },
-    "coordinate_frame": "checks evaluated in inverse-pitched module frame; dimensions and displacement vectors use pre-pitch axes; see gun_pitch for world transform",
-    "off_machine_scope_negative_control": {
-      "tool_treated_as_physical_detected": true,
-      "source_unchanged": true,
-      "object": "EffectRetainerToolLMOSOuter"
-    }
+    "coordinate_frame": "checks evaluated in inverse-pitched module frame; dimensions and displacement vectors use pre-pitch axes; see gun_pitch for world transform"
   },
   "bubble_gun_layout": {
     "source": "hardware/components/bubble-gun/README.md",
@@ -12065,7 +12114,7 @@
     "board_anti_lift_retention_verified": false,
     "physical_fit_verified": false,
     "limits": "Envelope and rigid tray only. No individual audio/display/USB/RF fit, hand access, flexible harness service, material strength or anti-lift retention acceptance.",
-    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
     "saved_and_reopened": true
   },
   "l298n_layout": {
@@ -12195,7 +12244,7 @@
     "placement_difference_mm3": 0.0,
     "outside_central_dry_bay_mm3": 0.0,
     "overlap_tolerance_mm3": 0.01,
-    "objects_checked": 408,
+    "objects_checked": 411,
     "overlaps": [],
     "reserved_space_overlaps": [],
     "nearby_distances": [
@@ -12358,7 +12407,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "thermal_verified": false,
-    "source_after_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "source_after_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
     "saved_and_reopened": true
   },
   "l298n_mount": {
@@ -12603,7 +12652,7 @@
     "physical_fit_verified": false,
     "manufacturing_released": false,
     "passed": true,
-    "source_after_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "source_after_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
     "saved_and_reopened": true,
     "carrier_export": {
       "coordinate_frame": "assembly coordinates, no scale or relocation",
@@ -12624,8 +12673,8 @@
         }
       ],
       "files_sha256": {
-        "hardware/model/parts/L298N-carrier-0.34.FCStd": "27be84925d0ab00eaee90eef3bc33f6c6ac435d8224183832d6d8fc7e0d622ea",
-        "hardware/model/parts/L298N-carrier-0.34.step": "47bfcbcf4bf949278803d295a21cd8feafaf4d4aca3677c04ed21248e7f93b92"
+        "hardware/model/parts/L298N-carrier-0.34.FCStd": "57927bd5744ce8e24e4341d344c315e43bac1f20346e922921a77c30ac0e316e",
+        "hardware/model/parts/L298N-carrier-0.34.step": "2241b0308a262cf6d5aa77ad8d2117c3c40f61bc482effbdae59c7ee61e7520a"
       },
       "passed": true,
       "manufacturing_released": false
@@ -12894,7 +12943,7 @@
     "mounting_verified": false,
     "physical_fit_verified": false,
     "acoustic_verified": false,
-    "source_after_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "source_after_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
     "saved_and_reopened": true
   },
   "ultrasonic_layout": {
@@ -13333,14 +13382,176 @@
     },
     "evidence_sha256": {
       "hardware/components/ultrasonic/dimensions.json": "e4ae80b552546871049e01d81841d9cd98e4e13aa5f24dd6e10f0a38a9b132b1",
-      "hardware/procurement-web-review.md": "c164607b48d14a67f473f2142094aad81cb9367d411ad0a16d98b7bc1ebc301d"
+      "hardware/procurement-web-review.md": "5d9517d0900ac7dda5a4863cda07c66b4678e52fc9d31f546e2b60e9172df70d"
     },
     "passed": true,
     "mounting_designed": false,
     "physical_fit_verified": false,
     "electrical_verified": false,
     "limits": "Unmeasured PCB, datum, rear height, header, connector, wire bend and board endpoint. No mounts or hand access acceptance.",
-    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5"
+    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314"
+  },
+  "mt3608_layout": {
+    "size_lwt_mm": [
+      37,
+      18,
+      6
+    ],
+    "origin_mm": [
+      43,
+      -17,
+      82
+    ],
+    "local_to_world_axes": [
+      "+Y",
+      "-X",
+      "+Z"
+    ],
+    "bbox_mm": [
+      25.0,
+      -17.0,
+      82.0,
+      43.00000000000001,
+      20.000000000000007,
+      88.0
+    ],
+    "mounting": "allocation only; no fixture or hole pattern inferred",
+    "physical_fit_verified": false
+  },
+  "mt3608_check": {
+    "size_lwt_mm": [
+      37,
+      18,
+      6
+    ],
+    "bbox_mm": [
+      25.0,
+      -17.0,
+      82.0,
+      43.0,
+      20.0,
+      88.0
+    ],
+    "placement_difference_mm3": 0.0,
+    "objects_checked": 409,
+    "overlaps": [],
+    "nearby_distances": [
+      {
+        "object": "LowerTub",
+        "distance_mm": 1.9999999999999716
+      },
+      {
+        "object": "KeelLid",
+        "distance_mm": 2.0
+      },
+      {
+        "object": "L298NCarrier",
+        "distance_mm": 3.8327535793473566
+      },
+      {
+        "object": "RearBulkhead",
+        "distance_mm": 4.9999999999999964
+      },
+      {
+        "object": "NeckYokeL",
+        "distance_mm": 5.0
+      },
+      {
+        "object": "ShoulderRailL",
+        "distance_mm": 5.0
+      },
+      {
+        "object": "L298NEnvelope",
+        "distance_mm": 5.00024999375031
+      },
+      {
+        "object": "L298NClampNutL1",
+        "distance_mm": 5.338408002391722
+      },
+      {
+        "object": "L298NClampScrewL1",
+        "distance_mm": 5.8034531628727795
+      },
+      {
+        "object": "L298NSidePadL1",
+        "distance_mm": 6.600189391222043
+      },
+      {
+        "object": "L298NRearPadL1",
+        "distance_mm": 7.778174593052026
+      },
+      {
+        "object": "WaterGunCradle",
+        "distance_mm": 7.9354286469243505
+      },
+      {
+        "object": "NeckOuterWebL",
+        "distance_mm": 8.0
+      },
+      {
+        "object": "NeckPedestal",
+        "distance_mm": 9.433981132056603
+      },
+      {
+        "object": "EffectMOSL",
+        "distance_mm": 9.46374661537385
+      }
+    ],
+    "bare_board_removal": {
+      "method": "exact rectangular continuous sweep 90 mm down",
+      "removed_first": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "L298NBottomPadL",
+        "L298NBottomPadR",
+        "L298NCarrier",
+        "L298NClampNutL0",
+        "L298NClampNutL1",
+        "L298NClampNutR0",
+        "L298NClampNutR1",
+        "L298NClampScrewL0",
+        "L298NClampScrewL1",
+        "L298NClampScrewR0",
+        "L298NClampScrewR1",
+        "L298NEnvelope",
+        "L298NMountScrewL",
+        "L298NMountScrewR",
+        "L298NRearPadL0",
+        "L298NRearPadL1",
+        "L298NRearPadR0",
+        "L298NRearPadR1",
+        "L298NSidePadL0",
+        "L298NSidePadL1",
+        "L298NSidePadR0",
+        "L298NSidePadR1",
+        "MotorFaceScrewL0",
+        "MotorFaceScrewL1",
+        "MotorFaceScrewL2",
+        "MotorFaceScrewL3",
+        "MotorL"
+      ],
+      "disconnect_first": "MT3608 leads and left-motor/driver wiring; release future fixture",
+      "prerequisite": "Follow existing left motor and L298N removal procedures, including power tray and left track removal.",
+      "overlaps": [],
+      "left_motor_retained_negative_control_mm3": 13511.361684558982,
+      "passed": true
+    },
+    "passed": true,
+    "physical_fit_verified": false,
+    "thermal_verified": false,
+    "mounting_complete": false,
+    "limits": [
+      "Overall measured box only; PCB contacts, terminals and adjustment position unmeasured.",
+      "End spaces are design budgets, not a complete wiring or adjustment path.",
+      "Service requires driver and left motor removal; fixture and physical handling remain unresolved."
+    ],
+    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "saved_and_reopened": true
   },
   "effects_layout": {
     "revision": "0.43",
@@ -17762,7 +17973,7 @@
         "passed": true
       },
       "KeelLid": {
-        "boolean_pairs_tested": 121,
+        "boolean_pairs_tested": 122,
         "overlaps": [],
         "nearby": [
           {
@@ -17911,6 +18122,10 @@
           },
           {
             "object": "ChestBadge",
+            "distance_mm": 2.0
+          },
+          {
+            "object": "MT3608Envelope",
             "distance_mm": 2.0
           },
           {
@@ -20376,7 +20591,7 @@
     "passed": true,
     "physical_fit_verified": false,
     "limits": "Cap release sampled; bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
-    "source_sha256": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
+    "source_sha256": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
     "saved_and_reopened": true
   },
   "manufacturing_released": false,
@@ -20384,7 +20599,7 @@
   "assembly_paths_verified": false,
   "electrical_verified": false,
   "final_saved_audit": {
-    "native_objects_verified": 409,
+    "native_objects_verified": 412,
     "gui_visibility_verified": true
   },
   "previews_generated": true,
@@ -20399,67 +20614,68 @@
   ],
   "drive_preview_note": "Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.",
   "files_sha256": {
-    "CyberTrack.FCStd": "5f55b48d58068b1a82a5b084a3e0839af3cb60fea4b6beacfe35c99a8089aed5",
-    "CyberTrack.step": "1e8d70a5da7f134dbd5b28ffb29b5388386788d18e143cda9a07e9884a8782df",
-    "assembly.png": "3654839c5ac83f14b96d36a90ee35f4293d76c44bed00b3b7a581af29ffbef2d",
-    "bottle-backpack-layout.png": "7ab68ba16ca54789612e632478a80488575f14318a228167e0f16b29ce58894c",
-    "bottle-backpack-service.png": "69ef8198e4bb78f20aa302fa27e9f9827b481836ba8f344356597ec2055f587a",
-    "bottle-backpack-spaces.png": "397316a56dee96e5ec53e567361260fb187d49ba0d1ec996d15f44916341f968",
-    "breadboard-access.png": "e0099bcd023b6a3b8dbc12d90bbd47dc2e5dd5a1565ddcb9b50eeab43cfc2de0",
-    "breadboard-layout.png": "243c544d2ff551b06d91d31dfc4387ad68fd04385af63b6ededa047eb1bc71fc",
-    "breadboard-service.png": "f06b6b29568830bf60df20eb3a50bfbee78fb35a687f3ea05770d1aaa78405e9",
-    "breadboard-top.png": "220b14b1486dd8fd5ea6ea9747a1eb3409a6739f8012f934d528acd985ea1507",
-    "breadboard-tray.png": "6ff8280d31c37f1fa92cb4d13fe3a68a1f0fe2d118b541f1e9f9b8a56c7b731a",
-    "bubble-gun-clearance.png": "d09aaf8df380c31f95d069e6431a3eb859e134fedb9dc9eb3074659bbf73a904",
-    "bubble-gun-component.png": "c1b6b665609b1086b399fc44955cfbf27a623412e0cf58260854135827148350",
-    "bubble-gun-layout.png": "63be054f12ea818b89035dbf55fff8e9066bfb68d0ca9549b4e4afcb9d0f9d2d",
-    "bubble-gun-mount.png": "651968e63c48f7c036c556632730b1e314160674aa3181fafbbb3a1841d4c2d3",
-    "bubble-gun-service.png": "fb1fd08c714f3d460de03fb4401b0f6bc6e5077fd5fa5ba4172d863747d02ac6",
-    "bubble-gun-side.png": "05a169160fa614cd433cf341616f6c05b8dfcf7ec477284e42545f7b13adf34d",
-    "bubble-gun-spaces.png": "f60b0559a354b2db898d887ddb517d987be03930486a9aba4b2a085b9c476415",
-    "crown-effects-top.png": "5f2caed5435b14d4a2adfc98de14f39d227a50238e2b82eddaddf2523c38175a",
-    "crown-effects.png": "c18a430f4976a947bf4bb68ec5324be97520b8875d9b73b6af28caf85b4a7e68",
-    "drive-bottom.png": "3d5179b2afaf07322b15eeec1abbf29862601fd74958c2625fa62b2364687e84",
-    "drive-frame.png": "a2c69b37b9a6e65d2f73d3c72a6fe170d0d9ea4f88691f71910c147d56502d13",
-    "drive-integrated-face.png": "9b99ccb27b5310b33f171e092adc5a09c310c27d170e26961ec5c3b2f86a3cad",
-    "drive-mount.png": "2a121356610f02fe6f5dcc249c1bd55fbe4464e586c3ebf6a6a3bbe76b8d9548",
-    "drive-service.png": "300870657e14b817d71b79e1613ea10fd4c8f21b8f9d2207f3782ae171904428",
-    "effects-backpack.png": "65304ffe0d4a9766f8835a3cb9dd8f2ea0be4141a8811e7a97432712ccff9dec",
-    "effects-board-mount.png": "e7beef2fd7f4da149f1054dcbd409b5105c667ed231ef35f070528ad35619dea",
-    "effects-board-service.png": "5e45406622ef7ab04ab0d257c5d1092921a0a64ff5c36b456eae2bafea29d19c",
-    "effects-board-wiring.png": "7e376531807a0197eb2a30765b25ba672b273648e0d1cd491d1f74aa7035a68b",
-    "effects-clamp.png": "387ced967dc64bf53a5776ef89ef6ea75b3e17ed5d0b1ff67ba1decd048274a1",
-    "effects-service.png": "95d3a78c3ec9f06448a7d0cdc948ca27f9462c207bf9fc23dbb3a442e32d826d",
-    "effects-tray-bottom.png": "5568018881e38685a77458ab22facbd3cadeaa6d2e12987bda468d3cf44cd3cf",
-    "effects-tray-service.png": "694d055bd7e5ac340ff5b1a44cd4e0bc9663b332047b1580ac5b2fa6a7b62ba8",
-    "effects-tray.png": "deea08c5f235a50b2321d5283658f940b55ec41421c7bc7d692e84d19ee9609c",
-    "front.png": "d78b7c38ff9622a73412d68672637efb1daa550615af6dbe5f550e722cc9a9d9",
-    "l298n-carrier.png": "4d160b1f4c588864914a30c571c0f4be39eb75af1f7d83e9ecb82b53100e4047",
-    "l298n-layout.png": "34a921547776c75c39815128b412a30de8eedc863928e0ddd2d83e2f43adb73f",
-    "l298n-service.png": "544b2245eba057906d290d60bb5ee08e622e2d6ea6fffe5490ce2dfda3ac4b0c",
-    "l298n-side.png": "cf34b1f84726d7d898bf1e48a88b84f5f5d7d41fa695a8ad28616686f2d0afa2",
-    "l298n-spaces.png": "1a3de6400517314fcc8ee497188e128f78bf2e81d086bacc4fb15f594220e5c8",
-    "l298n-top.png": "29e3f9864426403e6e610345bc0cf436831186e6cadfc41272226cb220103260",
-    "layout.png": "2e0e0f8122738536c5dd412eb5110f7d5634c0f05e0043f372e4b333236957a7",
-    "lower-layout.png": "b39a8e5189bfaf61ffe2cba00ade6049ec064f22360e1a5ceea4c8295c1ed6fd",
-    "rear-assembly.png": "1e616de01550c8a4c887df6101ea6a2d8d32407a192d5efdaf2bc5540dfccdee",
-    "rear.png": "19272a87d5b1f450c3cdc46096daa62a65577cfebf6d35b6de7ff382017ffd49",
-    "right.png": "8dec1684585271f5488d8e8ee94f642ada1d9f70204123be892aff60ab282deb",
-    "routing.png": "a50324326b1278781c3edb1f3b40fe5c928a1a9ba4378bb1ed13ca22bd6879f4",
-    "service.png": "6a1f40114efb6698bf95f451de12d59f290a538c81635b72aac79d5a148cb949",
-    "side.png": "8c8b60f2724461fe42f8e834a7c91f4ddf941fdbceb437a09f37ca23869c2603",
-    "top.png": "f8e08a0aa5683924b8d2e5a333544429aa2f0a01cc73772d630af77131d157c8",
-    "ultrasonic-coexistence.png": "0c631dec142739b085e516daa14607832742b19adfcebb4fd3bc6c4d0dd0c43d",
-    "ultrasonic-front.png": "70750337f2c0193a351b41bf15f959d37ac2051158a4273f4a576cec322ca072",
-    "ultrasonic-layout.png": "42407801099fa897dfc4dad006bb0eaadca89c438c4b244d01a5b42884921233",
-    "ultrasonic-service.png": "f03ba3cbc6025d556c0b29a85c979aac3076739d2bbc109db5ba79dd0658335d",
-    "ultrasonic-side.png": "e400e1b259f33ef034c6e4a1a21b25240c8d77e8d39fa15ac0b3b239fffe85ec",
-    "water-gun-clearance.png": "0fb3d41ad8aed715f4d403434625462383aa04703718a873816737709a919beb",
-    "water-gun-component.png": "b7d7206fcca1501a01ede1c38555fdc071362292db6b34ee415688322d00636d",
-    "water-gun-layout.png": "bbd380a2d92c3f0a63bd78dbc939716b1b50f6c6b517dc13828bda352432a4c9",
-    "water-gun-mount.png": "3c2f1d941b3881a9b73070017ed262fe35e562951dce80c094dd7336a7a9ce35",
-    "water-gun-service.png": "b17716744ffc297be2c71f8360ef4bdd7ff88af99b418f3ee218174200c24196",
-    "water-gun-side.png": "f09f675f3f5a3296ab015bdc2e4311fa66abbbe38a2fe6b0de98550b5bf8355d",
-    "water-gun-spaces.png": "117c9d8c7aeffea84e9bc45056b306482ca2361995fde62be2d0d12960ded4b8"
+    "CyberTrack.FCStd": "de92aba0f21c744004f67019c3274185d9cc5c2b065d7927019ad95a47a7d314",
+    "CyberTrack.step": "0a1bbe0533d22da95f1bd44e68f3e91b6fc4e540b560a6a9cc198b7b4b5857e4",
+    "assembly.png": "ec0a13ccd85db40523f0ef3ad8c5db7086389d8d2a21cb3f83f27ad50f1fa561",
+    "bottle-backpack-layout.png": "ef045cfa4582fd8f85a1e328ed91b2318acadc1f71e751492e9a7de2ba688dca",
+    "bottle-backpack-service.png": "b34e98c4b683d5b21c91c11c0b53b7bf0828907301c75fbea45534099f63df87",
+    "bottle-backpack-spaces.png": "e494ecb3f0386430134b10cd9f2fc1b34ea198563003b1aaff8b1b0c40a3d570",
+    "breadboard-access.png": "5162e3e0567c5aa7d5a167a9950ee2bc3104dafe774ed755c41a80a99cb32d00",
+    "breadboard-layout.png": "c6a8d822f5aea22c16e21e87d50c5ff71942617d0a1a7f47b5e4c636dd42b234",
+    "breadboard-service.png": "0d1e4d1f91376f4f75ea48028fb5940f7fb340c1898dc175f29d48796bfd1314",
+    "breadboard-top.png": "bf6e7e1a7b0428b28a0e77ae7320281b89c73a61d63d9b4336c1d6527036ea5a",
+    "breadboard-tray.png": "bc9b25163c7d5ecd5837a27eec4f6c7532f0344f063366e0135ffd6c9fcf8e04",
+    "bubble-gun-clearance.png": "17aa9db1f863d82825febb5e5eb3eef6a3ab64e8f49f455a9d86d96b09051346",
+    "bubble-gun-component.png": "8f8b65ac87f04ffbbc55daf3c5d6844c278690466d585caf7c820f4cffc1584f",
+    "bubble-gun-layout.png": "56b3a19b1a3552ec2356bf6e271a7e742f6730010cbc7d703078d8afdb3bb9fc",
+    "bubble-gun-mount.png": "cfbb0949e23126ab16f6c4d2f5d3e51373781642e19168a0645547bdc945d4a9",
+    "bubble-gun-service.png": "f7d5443be996ddca173f6e08b75933d34d00bbaffac9aeedfa41cace3c7b0bcd",
+    "bubble-gun-side.png": "9726573ad682c7ecbb9de0a7a1e5a19f8badc114aac332a9a13926dd2761ca1c",
+    "bubble-gun-spaces.png": "80f6dbf8cc0070472133e2d5b28638ef4e9d7daa5631013c562dda8be53ce4b0",
+    "crown-effects-top.png": "b82918ff2f9dc6cccd6d18d7a5003c8061d149a6ab76332120d1637010b18e71",
+    "crown-effects.png": "bbceb9e8dea0f3bf04ff258535713f03406f0b2fdfa0ee59e604f28253505aca",
+    "drive-bottom.png": "054f0d1d85fb624db6e371425ca69c1916413db10e524044c32cf8e6a393d1e2",
+    "drive-frame.png": "7b047e00310381700247738adfcd4e98e0fb307e4ced4c0e9a4684784d9bb63d",
+    "drive-integrated-face.png": "dadfd6ad2cd4ca6cff964d9fb5a49b303ff7c83402d561315f2e3f272a20ab10",
+    "drive-mount.png": "84fe905fb064c3b2b368ec3990f96a4cfe0143f014d735c2fe352f7b8b4a7bdb",
+    "drive-service.png": "2f3a41e002c873a3cc8e06e2a1a79ef0e268c3a26586609a751455bce58ea07f",
+    "effects-backpack.png": "4cce4b5fe38f7700f7094eedf69ae5eaec96fd3ac883d2d64fde215dd9f2d70a",
+    "effects-board-mount.png": "12edb5722abba7d7022db69a7e459ef3c4136dc86a586279a8a84c70bb82321a",
+    "effects-board-service.png": "e227a7fec6560aa556f66c7926c88c6f0291e96f1a5544c78d3fd4f0b9cc05a2",
+    "effects-board-wiring.png": "6c92d8ab0aab68033ec545dea55c21e57276ea20202fd2fe6a6ea91ea5ea9303",
+    "effects-clamp.png": "f42e59b0b82bc1571b1403dfe225315e2883e7767acec31bf4ddcec044d1f7fe",
+    "effects-service.png": "ce4d55ffbab926a1213772a2815274fe7a0ce548cfe21a515d64b7677260314c",
+    "effects-tray-bottom.png": "f80f446578567bd6efce86d981b030c57e8428bd664bb741d0a5360f42c75b6c",
+    "effects-tray-service.png": "6ebd8d3e903a3add5cfdbf63b859c231fd6ebf604f3a3e0bb76981b3597d50af",
+    "effects-tray.png": "1b3432181601c77aca13cac4b96a5d663a3389d3cf12d6daa4c22b0f0e1d6b33",
+    "front.png": "7a6f8e1d0c9791816d4095528fe2040b125a32e18499f532365e1881d70166bd",
+    "l298n-carrier.png": "ff9e370cecd93211c8c573d5f244c27f2b3e56556d1b5f882c23f743c1d5ff49",
+    "l298n-layout.png": "727354ec953a40a76dd1f85a6c382802ae77a94a1c73e1edc361075c3c06ada8",
+    "l298n-service.png": "d76f5e8a6636e66badd68e0116bc85d16820b73592f260e44da63a7bfd17dcbd",
+    "l298n-side.png": "5062e7526200a99f1749fac4e2b9437e70819e85841da9e0bc9d255bf185da84",
+    "l298n-spaces.png": "197d3b6bcf4632740aec2831f3ccdab26c450e817e70a7b64fa5e8f80e89f62b",
+    "l298n-top.png": "1f8025ba8a2dd403c6ecf0d8ed76d6c30b62ad35fcc88a8efbd18963a4648bbf",
+    "layout.png": "a893899a16f8403c9ce392d5155a21b251c68d1c07b9fc4b1e7ee0820d51c1a3",
+    "lower-layout.png": "69241b9da7e5fdb2467d7bd88f515c901289e7272fb143a2f81610ba07f47858",
+    "mt3608-layout.png": "149a860e91c61fab8b8d72c6e25e41b1a996f229368d049c8f7cb459dfe62b2f",
+    "rear-assembly.png": "ad4e0d6815b20e6e8a9e039c2bb725a6d54f2b5da2af5e172c8e9f58038cebfa",
+    "rear.png": "ae4d23e566f3910c06a4d79e7636dda7ce3e235bc1b9c9a5b83b40a603001256",
+    "right.png": "8c3dc2457facd730f753c965d3ab13a3a78f2b92a2cb7883b27e16ef15b0607f",
+    "routing.png": "39b0d37c20990cce6cbce4751a132f30b3c5a37f0e550c3b5392c659b5d47bb3",
+    "service.png": "9eff97e1140d85404b4c5fdd4a1fe76f3d71a5f5fab88481688612358941e346",
+    "side.png": "a634468321b913c05543890a049404fb4dfb296ff1f652ff63578fc18f9e0e42",
+    "top.png": "e0b2bc2ba9a7f4210c42a86e6bdb205dbbc0ab2d3ac431f42d284b2875c173f4",
+    "ultrasonic-coexistence.png": "5e30df212ee14824d883458e586120a3121263825116830d844e5933486b97cb",
+    "ultrasonic-front.png": "b4561a016d0baaa06963af18530a2ff8557a85ec707fdbab0d8b494a49a03954",
+    "ultrasonic-layout.png": "6bcba3122d62bd157b255c3b98f0a5f9d1ae46a0adbc004e81d2b4ca54515b29",
+    "ultrasonic-service.png": "d6045e3f201efb7783ebd70611e833d6717778d8798665f1836e58d1b6d66d68",
+    "ultrasonic-side.png": "66c0ebfe806ca923670846d16e0598eae09fda70729ecf747d5ae4545256223a",
+    "water-gun-clearance.png": "dd09b38059a22073d0a026384cc81ff6f059b2fec6eff8524bd9c8dc630d4ed6",
+    "water-gun-component.png": "b56ef7c75716792d535fd69f387db9fa35bbe3b4e5d52135e9acaad0a419a3c3",
+    "water-gun-layout.png": "1f686adba2933d09c1ab0d5bb8cc641a304cd97bae0031469645f955c0c70f0d",
+    "water-gun-mount.png": "4d4ed31da456f9817fcdb02634e28c0e95c88ad452a2a4619adf7a98bc9efe0d",
+    "water-gun-service.png": "9323bf4521f78476922a2950057157b0103e4e434ca4315dedcee0b8ef03ae81",
+    "water-gun-side.png": "8c6556c084da9126b09a11a51cab1f42e3c626297a183da7b616b47c65eaccb1",
+    "water-gun-spaces.png": "4578825b038b32f4b4d4a5fc14f3507661d2bed33003ba05b5c4201648c1471e"
   }
 }

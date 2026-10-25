@@ -1,0 +1,45 @@
+{
+  "size_lwt_mm": [
+    37,
+    18,
+    6
+  ],
+  "evidence": "用户2026-10-25实测长37×宽18×厚6 mm；完整外包络，无推定PCB、孔位、焊脚或电位器位置",
+  "saved_and_reopened": true,
+  "checks": [
+    {
+      "format": "FCStd",
+      "valid": true,
+      "bbox_mm": [
+        0.0,
+        0.0,
+        0.0,
+        37.0,
+        18.0,
+        6.0
+      ],
+      "difference_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "format": "STEP",
+      "valid": true,
+      "bbox_mm": [
+        0.0,
+        0.0,
+        0.0,
+        37.0,
+        18.0,
+        6.0
+      ],
+      "difference_mm3": 0.0,
+      "passed": true
+    }
+  ],
+  "files_sha256": {
+    "MT3608-envelope.FCStd": "600848564220f6651af739e5500d72f4b002153dd149346b349914d7a25833e9",
+    "MT3608-envelope.step": "10dd5696efa084af91588cc23b2763fd179f40fbff33671c0e6f5f6b63a1e0d2"
+  },
+  "passed": true,
+  "physical_fit_verified": false
+}
