@@ -53,7 +53,8 @@ def check_speaker(doc):
     # Original helmet cavity from build_tank, including its -4 mm Z translation.
     cavity = faceted_shell_volume([(65,-67,20,10,143),(79,-80,26,10,152),
                                   (79,-80,26,10,183),(72,-73,22,10,193)])
-    cavity.translate(App.Vector(0,0,-4))
+    lift = float(doc.getObject('AudioModule').HeadLift)
+    cavity.translate(App.Vector(0,0,-4+lift))
     outside = speaker.cut(cavity).Volume
     overlaps, reserved_overlaps, nearby = [], [], []
     tested = 0
@@ -72,10 +73,10 @@ def check_speaker(doc):
             nearby.append({'object':obj.Name, 'category':obj.Category,
                            'distance_mm':speaker.distToShape(other)[0]})
     nearby.sort(key=lambda row: row['distance_mm'])
-    old = box(-36,-75,146,36,-39,167)
+    old = box(-36,-75,146+lift,36,-39,167+lift)
     return {'source':'user-provided dimensions, 2026-10-24',
             'size_xyz_mm':list(SIZE), 'bbox_mm':[b.XMin,b.YMin,b.ZMin,b.XMax,b.YMax,b.ZMax],
-            'orientation':'length X, width Y, height Z; old XY centre and bottom retained',
+            'orientation':'length X, width Y, height Z; original allocation shifted with head by 25 mm',
             'shape_valid':speaker.isValid(), 'solid_count':len(speaker.Solids),
             'outside_original_allocation_mm3':speaker.cut(old).Volume,
             'outside_head_cavity_mm3':outside, 'overlap_tolerance_mm3':0.01,

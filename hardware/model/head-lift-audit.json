@@ -1,0 +1,220 @@
+{
+  "revision": "0.37",
+  "head_lift_mm": 25.0,
+  "head_members": [
+    "HeadShell",
+    "VisorRim",
+    "BrowArmorL",
+    "CheekArmorL",
+    "BrowArmorR",
+    "CheekArmorR",
+    "JawArmor",
+    "JawAccent",
+    "AudioSideGuardL",
+    "AudioEarRingL",
+    "AudioEarGrilleL",
+    "EarHubL",
+    "CrownFinL",
+    "AudioSideGuardR",
+    "AudioEarRingR",
+    "AudioEarGrilleR",
+    "EarHubR",
+    "CrownFinR",
+    "TempleGuardL",
+    "TempleGuardR",
+    "HeadServiceHatch",
+    "CrownSpine",
+    "CrownForePlate",
+    "CrownSideArmorL",
+    "TempleCrestL",
+    "TempleLowerBladeL",
+    "EarOuterArcL",
+    "CrownSideArmorR",
+    "TempleCrestR",
+    "TempleLowerBladeR",
+    "EarOuterArcR",
+    "CrownRearCassette",
+    "CrownRearBlade0",
+    "CrownRearBlade1",
+    "CrownRearBlade2",
+    "OccipitalFrame",
+    "OccipitalInset",
+    "OccipitalSpine",
+    "OccipitalMark",
+    "OccipitalBrowL",
+    "OccipitalLouverL0",
+    "OccipitalLouverL1",
+    "OccipitalLouverL2",
+    "OccipitalBrowR",
+    "OccipitalLouverR0",
+    "OccipitalLouverR1",
+    "OccipitalLouverR2",
+    "SensorMask",
+    "UltrasonicRingL",
+    "UltrasonicFaceL",
+    "UltrasonicRingR",
+    "UltrasonicFaceR",
+    "SensorStatusStrip",
+    "CrownEffectInsetL",
+    "CrownEffectMarkLFront",
+    "CrownEffectMarkLRear",
+    "CrownEffectInsetR",
+    "CrownEffectMarkRFront",
+    "CrownEffectMarkRRear",
+    "Electronics",
+    "AudioModule",
+    "ArcModuleL",
+    "ArcModuleR",
+    "HeadCrownShell",
+    "CrownInsertLFront",
+    "CrownScrewLFront",
+    "CrownInsertLRear",
+    "CrownScrewLRear",
+    "CrownInsertRFront",
+    "CrownScrewRFront",
+    "CrownInsertRRear",
+    "CrownScrewRRear",
+    "ElectronicsTray",
+    "TrayInsertR0",
+    "TrayScrewR0",
+    "TrayInsertR1",
+    "TrayScrewR1",
+    "TrayInsertL0",
+    "TrayScrewL0",
+    "TrayInsertL1",
+    "TrayScrewL1",
+    "HeadCableGrommet",
+    "ESP32Board",
+    "ControllerCarrier",
+    "ControllerMountInsert00",
+    "ControllerMountScrew00",
+    "ControllerMountInsert01",
+    "ControllerMountScrew01",
+    "ControllerMountInsert10",
+    "ControllerMountScrew10",
+    "ControllerMountInsert11",
+    "ControllerMountScrew11",
+    "ControllerSocketFront",
+    "ControllerSocketRear",
+    "ControllerRetainerInsertFront",
+    "ControllerRetainerScrewFront",
+    "ControllerRetainerInsertRear",
+    "ControllerRetainerScrewRear",
+    "ControllerRetainer",
+    "ControllerWireGuide",
+    "ControllerWireRoute",
+    "ControllerUSBCOM",
+    "ControllerUSBLeadCOM",
+    "ControllerUSBUSB",
+    "ControllerUSBLeadUSB",
+    "ControllerAntennaSpace"
+  ],
+  "head_shell_bottom_z_mm": 160.9999999,
+  "bottle_top_z_mm": 154.0,
+  "vertical_datum_difference_mm": 6.999999900000006,
+  "clearances": [
+    {
+      "object": "WaterModule",
+      "distance_to_head_mm": 18.62149295840696,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleModule",
+      "distance_to_head_mm": 18.62149295840696,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterHoseRoute",
+      "distance_to_head_mm": 20.7308250580282,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleGunHoseRoute",
+      "distance_to_head_mm": 10.934876417184666,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterGunHoseClearance",
+      "distance_to_head_mm": 19.230825058028206,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleGunHoseClearance",
+      "distance_to_head_mm": 8.934876417184672,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterBottleRemovalSpace",
+      "distance_to_head_mm": 4.600000000000001,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleBottleRemovalSpace",
+      "distance_to_head_mm": 4.600000000000001,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterFingerSpace",
+      "distance_to_head_mm": 58.55390678682337,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleFingerSpace",
+      "distance_to_head_mm": 58.55390678682337,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterStrapAccessSpace",
+      "distance_to_head_mm": 78.760650073498,
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleStrapAccessSpace",
+      "distance_to_head_mm": 78.760650073498,
+      "overlap_mm3": 0.0
+    }
+  ],
+  "support_contacts": [
+    {
+      "a": "NeckHeadSaddle",
+      "b": "HeadShell",
+      "distance_mm": 0.0
+    },
+    {
+      "a": "NeckYokeL",
+      "b": "NeckHeadSaddle",
+      "distance_mm": 0.0
+    },
+    {
+      "a": "NeckYokeR",
+      "b": "NeckHeadSaddle",
+      "distance_mm": 0.0
+    },
+    {
+      "a": "NeckStayL",
+      "b": "NeckHeadSaddle",
+      "distance_mm": 0.0
+    },
+    {
+      "a": "NeckStayR",
+      "b": "NeckHeadSaddle",
+      "distance_mm": 0.0
+    },
+    {
+      "a": "NeckStaySleeveL",
+      "b": "NeckPedestal",
+      "distance_mm": 0.0
+    },
+    {
+      "a": "NeckStaySleeveR",
+      "b": "NeckPedestal",
+      "distance_mm": 0.0
+    }
+  ],
+  "passed": true,
+  "limits": "CAD nominal clearances and prescribed rigid service envelopes only; actual cap diameter, flexible hose withdrawal/parking, hand access, stiffness and stability unverified",
+  "physical_fit_verified": false,
+  "manufacturing_released": false,
+  "source_sha256": "c6f74f79752cfb05862ebb8b4ffd4562ea8ac2fff18179d1261cd1b9d7579352",
+  "saved_and_reopened": true
+}
