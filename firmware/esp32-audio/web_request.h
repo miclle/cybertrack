@@ -2,6 +2,7 @@
 #include "action_guard.h"
 #include "cJSON.h"
 #include <cmath>
+#include <string>
 
 struct WebCommand {
     AudioActionGuard::Target target = AudioActionGuard::Both;
@@ -20,6 +21,28 @@ inline bool ParseWebCommand(const cJSON* root, WebCommand& cmd) {
     auto get = [root](const char* key) { return cJSON_GetObjectItemCaseSensitive(root, key); };
     const auto op = get("operation"), seq = get("sequence"), window = get("window");
     if (!cJSON_IsString(op)) return false;
+    for (const auto kind : {"water", "bubbles"}) {
+        const auto target = !strcmp(kind, "water") ? AudioActionGuard::WaterOnly : AudioActionGuard::BubblesOnly;
+        const std::string prefix(kind), value(op->valuestring);
+        const bool start = value == prefix + "_start", renew = value == prefix + "_renew", stop = value == prefix + "_stop";
+        if (!start && !renew && !stop) continue;
+        if (start) {
+            if (cJSON_GetArraySize(root) != 3 || !WebInteger(seq, 1, UINT32_MAX) || !WebInteger(window, 1, UINT32_MAX)) return false;
+            cmd.sequence = static_cast<uint32_t>(seq->valuedouble);
+            cmd.window = static_cast<uint32_t>(window->valuedouble);
+        } else {
+            const auto id = get("hold_id"), nonce = get("renewal");
+            if (cJSON_GetArraySize(root) != (renew ? 3 : 2) || !WebInteger(id, 1, UINT32_MAX) ||
+                (renew && !WebInteger(nonce, 1, UINT32_MAX))) return false;
+            cmd.hold_id = static_cast<uint32_t>(id->valuedouble);
+            cmd.renewal = renew ? static_cast<uint32_t>(nonce->valuedouble) : 0;
+        }
+        cmd.target = target;
+        cmd.operation = target == AudioActionGuard::WaterOnly ?
+            (start ? "water_start" : renew ? "water_renew" : "water_stop") :
+            (start ? "bubbles_start" : renew ? "bubbles_renew" : "bubbles_stop");
+        return true;
+    }
     const bool renew = !strcmp(op->valuestring, "drive_renew"), stop = !strcmp(op->valuestring, "drive_stop");
     if (renew || stop) {
         const auto id = get("hold_id"), nonce = get("renewal");

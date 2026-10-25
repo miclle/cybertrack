@@ -45,6 +45,14 @@ int main() {
     assert(Api(&r)==ESP_OK && last_operation=="drive_renew");
     r=api("/api/action",R"({"operation":"drive_stop","hold_id":2})");
     assert(Api(&r)==ESP_OK && last_operation=="drive_stop");
+    for(const std::string kind:{"water","bubbles"}) {
+        for(const std::string action:{"start","renew","stop"}) {
+            const auto op=kind+"_"+action;
+            const auto args=action=="start"?"\"sequence\":3,\"window\":1":action=="renew"?"\"hold_id\":3,\"renewal\":1":"\"hold_id\":3";
+            r=api("/api/action","{\"operation\":\""+op+"\","+args+"}");
+            assert(Api(&r)==ESP_OK && last_operation==op);
+        }
+    }
     unsigned before=calls;
     for(const auto bad:{"[]","null","{", "{} {}", "{\"extra\":0}"}) {
         r=api("/api/stop",bad); assert(Api(&r)==ESP_FAIL); assert(calls==before);

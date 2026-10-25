@@ -7,6 +7,8 @@ class ControlSessions {
 public:
     static constexpr uint64_t LeaseMs = 2000, WindowMs = 1500;
     static constexpr unsigned DriveLeaseMs = 600;
+    struct EffectHold { uint32_t id = 0, renewal = 0; uint64_t started = 0, until = 0; };
+    EffectHold water_hold, bubbles_hold;
     AudioActionGuard guard;
     bool wifi = false, voice = false, shutdown = false;
     uint32_t owner = 0, window = 0;
@@ -19,9 +21,15 @@ public:
         }
         if (pressed && !pressed_) Stop(now);
         if (drive_id && (now >= drive_until_ || now < drive_started_)) StopWeb(now);
+        for (auto target : {AudioActionGuard::WaterOnly, AudioActionGuard::BubblesOnly}) {
+            auto& h = Hold(target);
+            if (h.id && (now >= h.until || now < h.started)) StopEffect(now, target);
+        }
         pressed_ = pressed;
         guard.Tick(now, !shutdown && !output_fault && wifi && (owner || voice), pressed, false);
         if (drive_id && !guard.Moving()) StopWeb(now);
+        if (!guard.Watering()) water_hold = {};
+        if (!guard.Bubbling()) bubbles_hold = {};
         if (!guard.Moving()) web_targets_ &= ~AudioActionGuard::MoveOnly;
         if (!guard.Watering()) web_targets_ &= ~AudioActionGuard::WaterOnly;
         if (!guard.Bubbling()) web_targets_ &= ~AudioActionGuard::BubblesOnly;
@@ -32,6 +40,7 @@ public:
         web_targets_ = 0;
         window_valid_ = false;
         drive_id = drive_renewal = 0;
+        water_hold = {}; bubbles_hold = {};
     }
     void VoiceLink(uint64_t now, bool online) {
         if (online && !voice) guard.NewVoiceSession();
@@ -122,12 +131,54 @@ public:
         }
         return "ok";
     }
+    const char* EffectStart(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window,
+                            AudioActionGuard::Target target) {
+        if (!EffectTarget(target)) return "invalid_request";
+        const char* error = Consume(now, session, seq, command_window, DriveLeaseMs);
+        if (error) return error;
+        const char* result = StartWeb(now, target, 0, target == AudioActionGuard::WaterOnly ? DriveLeaseMs : 0,
+                                     nullptr, target == AudioActionGuard::BubblesOnly ? DriveLeaseMs : 0);
+        if (!std::strcmp(result, "accepted")) Hold(target) = {seq, 1, now, now + DriveLeaseMs};
+        return result;
+    }
+    const char* EffectRenew(uint64_t now, uint32_t session, AudioActionGuard::Target target,
+                            uint32_t id, uint32_t renewal) {
+        if (!EffectTarget(target)) return "invalid_request";
+        if (!Owns(session)) return "session_expired";
+        auto& h = Hold(target);
+        if (!id || h.id != id || !renewal || h.renewal != renewal || renewal == UINT32_MAX)
+            return "hold_cancelled";
+        if (now >= h.until || !guard.RenewWebEffect(now, target, DriveLeaseMs)) {
+            StopEffect(now, target); return "hold_cancelled";
+        }
+        ++h.renewal; h.until = now + DriveLeaseMs; heartbeat_ = now;
+        return "renewed";
+    }
+    const char* EffectStop(uint64_t now, uint32_t session, AudioActionGuard::Target target, uint32_t id) {
+        if (!EffectTarget(target)) return "invalid_request";
+        if (!Owns(session)) return "session_expired";
+        if (!id) return "invalid_request";
+        if (id > sequence_) sequence_ = id; // A release can arrive before its start.
+        if (Hold(target).id && id >= Hold(target).id) StopEffect(now, target);
+        return "ok";
+    }
     const char* MoveSource() const { return !guard.Moving() ? "none" : (web_targets_ & AudioActionGuard::MoveOnly) ? "web" : "voice"; }
     const char* WaterSource() const { return !guard.Watering() ? "none" : (web_targets_ & AudioActionGuard::WaterOnly) ? "web" : "voice"; }
     const char* BubblesSource() const { return !guard.Bubbling() ? "none" : (web_targets_ & AudioActionGuard::BubblesOnly) ? "web" : "voice"; }
     const char* IgnitionSource() const { return !guard.Igniting() ? "none" : (web_targets_ & AudioActionGuard::IgnitionOnly) ? "web" : "voice"; }
 private:
     unsigned web_targets_ = 0;
+    static bool EffectTarget(AudioActionGuard::Target t) {
+        return t == AudioActionGuard::WaterOnly || t == AudioActionGuard::BubblesOnly;
+    }
+    EffectHold& Hold(AudioActionGuard::Target t) {
+        return t == AudioActionGuard::WaterOnly ? water_hold : bubbles_hold;
+    }
+    void StopEffect(uint64_t now, AudioActionGuard::Target t) {
+        if (t == AudioActionGuard::WaterOnly) guard.StopWater(now); else guard.StopBubbles(now);
+        web_targets_ &= ~t;
+        Hold(t) = {};
+    }
     void StopWeb(uint64_t now) {
         if (web_targets_ & AudioActionGuard::MoveOnly) guard.StopMove(now);
         if (web_targets_ & AudioActionGuard::WaterOnly) guard.StopWater(now);
@@ -135,6 +186,7 @@ private:
         if (web_targets_ & AudioActionGuard::IgnitionOnly) guard.StopIgnition(now);
         web_targets_ = 0;
         drive_id = drive_renewal = 0;
+        water_hold = {}; bubbles_hold = {};
         window_valid_ = false;
     }
     const char* StartWeb(uint64_t now, AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction, int bubbles_ms = 0, int ignition_ms = 0) {

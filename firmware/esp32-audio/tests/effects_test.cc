@@ -59,16 +59,17 @@ int main() {
     }
     for(auto target:{G::BubblesOnly,G::IgnitionOnly}) {
         ControlSessions x; ready(x);
-        for(int ms:{0,-1,5001,30000}) {
+        const int maximum = target == G::BubblesOnly ? 30000 : 5000;
+        for(int ms:{0,-1,maximum+1,60000}) {
             const auto r=x.guard.WebRequest(0,target,0,0,nullptr,target==G::BubblesOnly?ms:0,target==G::IgnitionOnly?ms:0);
             assert(!accepted(r)); off(x);
         }
-        // 1 ms lower boundary and 5000 ms upper boundary.
+        // Per-lane lower and upper duration boundaries.
         assert(accepted(x.guard.WebRequest(0,target,0,0,nullptr,target==G::BubblesOnly?1:0,target==G::IgnitionOnly?1:0)));
         x.Tick(1,false); off(x);
         x.Tick(5001,false);
-        assert(accepted(x.guard.WebRequest(5001,target,0,0,nullptr,target==G::BubblesOnly?5000:0,target==G::IgnitionOnly?5000:0)));
-        x.Tick(10001,false); off(x);
+        assert(accepted(x.guard.WebRequest(5001,target,0,0,nullptr,target==G::BubblesOnly?maximum:0,target==G::IgnitionOnly?maximum:0)));
+        x.Tick(5001+maximum,false); off(x);
         // Voice effect survives unrelated web release; web effect survives voice loss.
         ControlSessions y; ready(y); auto web=y.Acquire(0); y.Tick(0,false); assert(y.Heartbeat(0,web));
         assert(accepted(y.guard.WebRequest(0,target,0,0,nullptr,target==G::BubblesOnly?5000:0,target==G::IgnitionOnly?5000:0)));
@@ -86,5 +87,5 @@ int main() {
         ControlSessions z; ready(z); auto ticket=z.VoiceClaim(0,1,target); assert(ticket); z.Stop(1);
         assert(!accepted(target==G::BubblesOnly?z.guard.Bubbles(2,ticket,1000):z.guard.Ignition(2,ticket,1000)));
     }
-    std::cout << "PASS: four concurrent lanes, independent expiry, 1..5000 boundaries, no extension, ignition interval, all stop/fault paths, effect source isolation and preemption\n";
+    std::cout << "PASS: four concurrent lanes, independent expiry, per-lane duration boundaries, no extension, ignition interval, all stop/fault paths, effect source isolation and preemption\n";
 }

@@ -8,7 +8,7 @@ class AudioActionGuard {
 public:
     enum Target { MoveOnly = 1, WaterOnly = 2, Both = 3, BubblesOnly = 4, IgnitionOnly = 8, All = 15 };
     static constexpr int MoveMaxMs = 3000;
-    static constexpr int BubblesMaxMs = 5000;
+    static constexpr int BubblesMaxMs = 30000;
     static constexpr int IgnitionMaxMs = 5000;
     static constexpr unsigned IgnitionCooldownMs = 3000;
     static constexpr unsigned CooldownMs = 200;
@@ -89,6 +89,16 @@ public:
             now < motion.last_ms || now >= motion.ends_at || now > UINT64_MAX - lease_ms)
             return false;
         motion.ends_at = now + lease_ms;
+        return true;
+    }
+    bool RenewWebEffect(uint64_t now, Target target, unsigned lease_ms) {
+        // Only the two explicitly supported hold lanes can bypass timed-action duration limits.
+        if (target != WaterOnly && target != BubblesOnly) return false;
+        auto& lane = target == WaterOnly ? spray : bubbles;
+        if (!lane.active || !lane.online || lane.held || lane.clock_fault ||
+            now < lane.last_ms || now >= lane.ends_at || now > UINT64_MAX - lease_ms)
+            return false;
+        lane.ends_at = now + lease_ms;
         return true;
     }
     int Claim(uint64_t now, int rpc, Target target) {

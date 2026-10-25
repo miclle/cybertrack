@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-25",
+  "version": "2.0.3-ct16",
+  "scope": "Ignition preset buttons/title and stop spacing; device control logic unchanged from ct15",
+  "application_bytes": 2602656,
+  "application_sha256": "d8434ba97ae2e8115970ebf1332fad4ba41cc0e8290f44773a2348f716dad813",
+  "sources": {
+    "web/index.html": "8bf8f2aab6c9f8dc26685843813523a8e501de36abd3d9dda590186be4ac2bd2",
+    "apply_overlay.py": "baf41ed37c088953b690ab867be0b5eb33b56e62d872a59656141dc6cefa362c",
+    "action_guard.h": "4e675fb47d761e0b116003a114350178e37294cabff082be6dd83a2dd075699f",
+    "control_sessions.h": "8854f5a97facc012fb3f6b84d09e42d99a0ac9b6b0d207bd5da59134119b7ad5",
+    "cybertrack_tools.cc": "ac3be74802ff0ede02bbfa4beb9c8ad9d3cd3cfbc8945a7262134594add80693",
+    "web_request.h": "dda689ff9c19afca9ec8ffb0e4365ad55fc886c7ca2c1310fcc6b33d7268155e",
+    "role-prompt.txt": "5f3551c5adc0f1581a9d866c4e6775424efa9cdd3273a51d674023f73a757925"
+  },
+  "checks": {
+    "web_script": "passed existing suite plus ignition 1/3/5-second exact payload, busy/cooldown disabling, no hold/dropdown",
+    "idf_build": "passed ESP-IDF v5.5.1",
+    "mobile_layout": [
+      {
+        "contentHeight": 708,
+        "height": 800,
+        "ignitionButtons": [
+          "1 秒",
+          "3 秒",
+          "5 秒"
+        ],
+        "minButtonHeight": 48,
+        "scrollHeight": 800,
+        "scrollWidth": 412,
+        "stopBottom": 662,
+        "stopGap": 20,
+        "width": 412
+      },
+      {
+        "contentHeight": 628,
+        "height": 740,
+        "ignitionButtons": [
+          "1 秒",
+          "3 秒",
+          "5 秒"
+        ],
+        "minButtonHeight": 44,
+        "scrollHeight": 740,
+        "scrollWidth": 412,
+        "stopBottom": 588,
+        "stopGap": 16,
+        "width": 412
+      },
+      {
+        "contentHeight": 628,
+        "height": 760,
+        "ignitionButtons": [
+          "1 秒",
+          "3 秒",
+          "5 秒"
+        ],
+        "minButtonHeight": 44,
+        "scrollHeight": 760,
+        "scrollWidth": 393,
+        "stopBottom": 588,
+        "stopGap": 16,
+        "width": 393
+      },
+      {
+        "contentHeight": 628,
+        "height": 640,
+        "ignitionButtons": [
+          "1 秒",
+          "3 秒",
+          "5 秒"
+        ],
+        "minButtonHeight": 44,
+        "scrollHeight": 640,
+        "scrollWidth": 360,
+        "stopBottom": 588,
+        "stopGap": 16,
+        "width": 360
+      },
+      {
+        "contentHeight": 628,
+        "height": 640,
+        "ignitionButtons": [
+          "1 秒",
+          "3 秒",
+          "5 秒"
+        ],
+        "minButtonHeight": 44,
+        "scrollHeight": 640,
+        "scrollWidth": 320,
+        "stopBottom": 588,
+        "stopGap": 16,
+        "width": 320
+      }
+    ]
+  }
+}

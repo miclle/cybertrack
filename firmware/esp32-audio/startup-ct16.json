@@ -1,0 +1,204 @@
+{
+  "date": "2026-10-25",
+  "version": "2.0.3-ct16",
+  "scope": "Web ignition presets/title and stop spacing; no actuator actions sent for layout inspection",
+  "device_id": "30:ed:a0:a1:97:7c",
+  "boot_id": "e547da5def890376",
+  "flash": {
+    "offset": "0x20000",
+    "bytes": 2602656,
+    "sha256": "d8434ba97ae2e8115970ebf1332fad4ba41cc0e8290f44773a2348f716dad813",
+    "esptool_hash_verified": true,
+    "first_128_kib_backup_and_unchanged": true,
+    "assets_written": false
+  },
+  "startup": [
+    {
+      "time": "2026-10-25T23:44:30.252070+08:00",
+      "firmware": "2.0.3-ct16"
+    },
+    {
+      "time": "2026-10-25T23:44:30.252761+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-10-25T23:44:30.252938+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,move,move_and_water concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=3000 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000\r"
+    },
+    {
+      "time": "2026-10-25T23:44:30.252995+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-10-25T23:44:34.478917+08:00",
+      "web": "LAN URL observed; no PIN required"
+    },
+    {
+      "time": "2026-10-25T23:44:34.479064+08:00",
+      "network": "IP acquired; address withheld"
+    },
+    {
+      "time": "2026-10-25T23:44:34.548059+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-10-25T23:44:35.360244+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "checks": {
+    "served_page_matches_source": true,
+    "backend_matches_ct15": true,
+    "role_unchanged": true,
+    "viewport_results": [
+      {
+        "contentHeight": 708,
+        "height": 800,
+        "ignitionButtons": [
+          "1 秒",
+          "3 秒",
+          "5 秒"
+        ],
+        "minButtonHeight": 48,
+        "scrollHeight": 800,
+        "scrollWidth": 412,
+        "stopBottom": 662,
+        "stopGap": 20,
+        "width": 412
+      },
+      {
+        "contentHeight": 628,
+        "height": 740,
+        "ignitionButtons": [
+          "1 秒",
+          "3 秒",
+          "5 秒"
+        ],
+        "minButtonHeight": 44,
+        "scrollHeight": 740,
+        "scrollWidth": 412,
+        "stopBottom": 588,
+        "stopGap": 16,
+        "width": 412
+      },
+      {
+        "contentHeight": 628,
+        "height": 760,
+        "ignitionButtons": [
+          "1 秒",
+          "3 秒",
+          "5 秒"
+        ],
+        "minButtonHeight": 44,
+        "scrollHeight": 760,
+        "scrollWidth": 393,
+        "stopBottom": 588,
+        "stopGap": 16,
+        "width": 393
+      },
+      {
+        "contentHeight": 628,
+        "height": 640,
+        "ignitionButtons": [
+          "1 秒",
+          "3 秒",
+          "5 秒"
+        ],
+        "minButtonHeight": 44,
+        "scrollHeight": 640,
+        "scrollWidth": 360,
+        "stopBottom": 588,
+        "stopGap": 16,
+        "width": 360
+      },
+      {
+        "contentHeight": 628,
+        "height": 640,
+        "ignitionButtons": [
+          "1 秒",
+          "3 秒",
+          "5 秒"
+        ],
+        "minButtonHeight": 44,
+        "scrollHeight": 640,
+        "scrollWidth": 320,
+        "stopBottom": 588,
+        "stopGap": 16,
+        "width": 320
+      }
+    ],
+    "screenshot": "build/ct16-ui/mobile-412x800.png",
+    "test_tab_closed": true,
+    "browser_viewport_reset": true,
+    "final_release": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "e547da5def890376",
+      "request_sequence": 11,
+      "operation": "release",
+      "result": "ok",
+      "state": "STOPPED",
+      "fault": "stopped",
+      "uptime_ms": 19406,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "capabilities": {
+        "water_hold": true,
+        "bubbles_hold": true,
+        "move": true,
+        "water": true,
+        "move_and_water": true,
+        "bubbles": true,
+        "ignition": true
+      },
+      "local_authorization_required": false,
+      "starts_this_boot": 0,
+      "max_duration_ms": 30000,
+      "last_duration_ms": 0,
+      "remaining_ms": 0,
+      "move_last_duration_ms": 0,
+      "water_last_duration_ms": 0,
+      "move_remaining_ms": 0,
+      "water_remaining_ms": 0,
+      "move_max_duration_ms": 3000,
+      "move_direction": "none",
+      "log_events_dropped": 0,
+      "control_owner": "none",
+      "window": 10,
+      "move_cooldown_ms": 0,
+      "water_cooldown_ms": 0,
+      "boot_held": false,
+      "move_source": "none",
+      "water_source": "none",
+      "drive_hold_id": 0,
+      "drive_renewal": 0,
+      "drive_lease_ms": 600,
+      "water_hold_id": 0,
+      "water_renewal": 0,
+      "bubbles_hold_id": 0,
+      "bubbles_renewal": 0,
+      "effect_lease_ms": 600,
+      "bubbles_last_duration_ms": 0,
+      "ignition_last_duration_ms": 0,
+      "bubbles_remaining_ms": 0,
+      "ignition_remaining_ms": 0,
+      "bubbles_max_duration_ms": 30000,
+      "ignition_max_duration_ms": 5000,
+      "bubbles_cooldown_ms": 0,
+      "ignition_cooldown_ms": 0,
+      "bubbles_source": "none",
+      "ignition_source": "none",
+      "actuator_backend": "concurrent_motor_effects_bench",
+      "physical_feedback": false,
+      "source": "cybertrack_audio_board"
+    }
+  },
+  "limitations": [
+    "Viewport emulation is not physical phone acceptance.",
+    "No new powered or physical actuation acceptance."
+  ]
+}
