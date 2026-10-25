@@ -48,7 +48,7 @@
 
 ## 与整机及验证衔接（0.18）
 
-当前使用[薄片修订版FreeCAD模型](revisions/rear-tab-2026-10-24/BubbleGun.FCStd)、[STEP](revisions/rear-tab-2026-10-24/BubbleGun.step)及[回读记录](revisions/rear-tab-2026-10-24/readback.json)。保留[原三尺寸模型](BubbleGun.FCStd)及其[原报告](readback.json)，没有覆盖原资产。新版本收窄后底部并分出6×25×6.8薄片，不在旧外形下方再加一块；其余不规则壳体、前段承托部和接口仍为示意。
+当前使用[薄片修订版FreeCAD模型](revisions/rear-tab-2026-10-24/BubbleGun.FCStd)、[STEP](revisions/rear-tab-2026-10-24/BubbleGun.step)及[回读记录](revisions/rear-tab-2026-10-24/readback.json)。原三尺寸模型及其 STEP／回读报告已于 2026-10-25 从工作树移除，可从 Git 提交 `b83c388` 查阅；原始照片、测量数据与薄片修订版继续保留。新版本收窄后底部并分出6×25×6.8薄片，不在旧外形下方再加一块；其余不规则壳体、前段承托部和接口仍为示意。
 
 正面看左泡泡、右水枪；两枪均采用上仰 5° 候选。泡泡枪口中心为 (−55, −126.65, 115.75) mm，水枪为 (55, −137.16, 122.61) mm。水枪旋转后另前移 10、下移 4 mm，以避让头壳；左右位置不交换。两支独立部件模型不改变，只在整机内作刚性变换。
 
@@ -83,4 +83,4 @@
 
 最新几何结果见[整机回读](../../model/readback.json)与[变更核对](../../model/bubble-gun-change-audit.json)。5°为设计候选，工作倾角、出泡、滴液／倒流须实物验证。0.4 mm 高度冲突、薄片偏置、前底轮廓、胶粘保持、紧固及强度仍未验收。
 
-生成入口为 `scripts/build_tank.py --render`；主体位于 `scripts/bubble_gun_layout.py`，支架及检查位于 `scripts/bubble_gun_mount.py`，双枪姿态和承托变换位于 `scripts/gun_pitch.py`。独立薄片版本按哈希复用，旧模型和 4 张原图保持；整机 STEP 只供布局交换，以 FCStd 为几何依据。
+生成入口为 `scripts/build_tank.py --render`；主体位于 `scripts/bubble_gun_layout.py`，支架及检查位于 `scripts/bubble_gun_mount.py`，双枪姿态和承托变换位于 `scripts/gun_pitch.py`。独立薄片版本按哈希复用，4 张原图保持；整机 STEP 只供布局交换，以 FCStd 为几何依据。
