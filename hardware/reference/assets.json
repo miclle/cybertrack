@@ -1,6 +1,6 @@
 {
   "recorded_on": "2026-10-23",
-  "note": "Component asset checksums; no physical acceptance implied. Manufacturer documents retain their original rights and revision labels.",
+  "note": "Component asset checksums; no physical acceptance implied. Manufacturer documents retain their original rights and revision labels. Retired DF-MD references were removed from the current manifest on 2026-10-25; original files and checksums remain in Git history.",
   "assets": [
     {
       "path": "hardware/components/37R-520/images/vendor-brass-hex-coupler-dimensions.png",
@@ -30,30 +30,6 @@
       "path": "hardware/components/37R-520/images/vendor-mounting-bracket-dimensions.png",
       "sha256": "81b278fa22506dd8d1e6bc04a4f8994b35b7ab594d608cc56a0a00614b25432b",
       "kind": "vendor_reference_image",
-      "verified_against_local_input": true
-    },
-    {
-      "path": "hardware/components/DF-MD-V1.3/reference/DF-MD-schematic.pdf",
-      "sha256": "1aad5e2d66d7824bb2edfab01b86b4f89656e778acbfa6bf7d480b806530deac",
-      "kind": "vendor_reference",
-      "verified_against_local_input": true
-    },
-    {
-      "path": "hardware/components/DF-MD-V1.3/reference/L298 datasheet.pdf",
-      "sha256": "54419a0a0fde6f6042f63c8f205f27c2bd59280bcb3bf739dc3978585e579886",
-      "kind": "vendor_reference",
-      "verified_against_local_input": true
-    },
-    {
-      "path": "hardware/components/DF-MD-V1.3/reference/Dfrobot-dual-motor-controller-specifications-B.jpg",
-      "sha256": "809b8632d788bdd543bd1540ab1de2b720fcead324fb8c0f6219f70d0c8b73ad",
-      "kind": "vendor_reference",
-      "verified_against_local_input": true
-    },
-    {
-      "path": "hardware/components/DF-MD-V1.3/reference/DRI0002_CD.jpg",
-      "sha256": "24267ba901e6db5c9869dc105459c1f95f35e9ae070e2592dc42a3528655bc77",
-      "kind": "vendor_reference",
       "verified_against_local_input": true
     },
     {
@@ -140,5 +116,6 @@
       "kind": "user_physical_board_photo",
       "verified_against_local_input": true
     }
-  ]
+  ],
+  "updated_on": "2026-10-25"
 }
