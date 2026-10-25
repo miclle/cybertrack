@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-26",
+  "version": "2.0.3-ct19",
+  "scope": "Web activity notice follows latest device state; backend and role unchanged from ct18",
+  "application_bytes": 2608480,
+  "application_sha256": "fb9faccad0f9859f6b9212651b4713b856f7829746b8af3bba3331264ef9e0df",
+  "sources": {
+    "web/index.html": "dce89aa3651e792b8e714fba628166ff8db5396039145e9e400a13b27e5166ae",
+    "apply_overlay.py": "72ac81223b87fb6e155bb5afdb5e2992360f26410c91db452e17378b76db2e9b",
+    "action_guard.h": "1426a7f0a0e8a234ea023a4b847f50022e1dd3b70881ad3111e031705b39dd2c",
+    "control_sessions.h": "666274621e0b305c3ef9426f7d34643115e4e072f4ff3ce18cb51ee5d37e5a1c",
+    "cybertrack_tools.cc": "18fd72d605018829e413384b043f33492005295e05368d8679a60bb0137b50e2",
+    "web_request.h": "5f6cea50e8976c4599aecd763fbcac831492bf436a0d465b92f9f96b6502fed3",
+    "role-prompt.txt": "545cb152fa889c03c1043db0da55e15ef51be1ee76195677ac6ff0550c39b23d"
+  },
+  "checks": {
+    "web_script": "passed existing suite and completion, concurrent remaining actions, frenzy OFF phase, stale accepted/status receipts, fault/error/stop notice preservation",
+    "browser_simulation": [
+      {
+        "button": "喷水1秒",
+        "running": "正在喷水。",
+        "finished": "动作已结束。"
+      },
+      {
+        "button": "吹泡泡1秒",
+        "running": "正在吹泡泡。",
+        "finished": "动作已结束。"
+      },
+      {
+        "button": "点火1秒",
+        "running": "正在点火。",
+        "finished": "动作已结束。"
+      },
+      {
+        "button": "狂暴模式5秒",
+        "running": "正在狂暴模式。",
+        "finished": "动作已结束。"
+      }
+    ],
+    "idf_build": "passed ESP-IDF v5.5.1",
+    "control_backend": "byte-identical to ct18 source",
+    "role": "unchanged from saved ct18 source"
+  },
+  "limitations": [
+    "Browser actions used a local simulated device; no physical actuators were triggered."
+  ]
+}

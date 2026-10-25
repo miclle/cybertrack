@@ -6,11 +6,10 @@
 // Called only under the adapter mutex. Tickets are bound to their target lanes.
 class AudioActionGuard {
 public:
-    enum Target { MoveOnly = 1, WaterOnly = 2, Both = 3, BubblesOnly = 4, IgnitionOnly = 8, All = 15 };
+    enum Target { MoveOnly = 1, WaterOnly = 2, Both = 3, BubblesOnly = 4, IgnitionOnly = 8, All = 15, FrenzyMode = 16 };
     static constexpr int MoveMaxMs = 3000;
     static constexpr int BubblesMaxMs = 30000;
     static constexpr int IgnitionMaxMs = 5000;
-    static constexpr unsigned IgnitionCooldownMs = 3000;
     static constexpr unsigned CooldownMs = 200;
     water_policy motion{}, spray{}, bubbles{}, ignition{};
     unsigned move_duration_ms = 0, water_duration_ms = 0, bubbles_duration_ms = 0, ignition_duration_ms = 0, last_duration_ms = 0;
@@ -27,7 +26,7 @@ public:
         FinishLane(motion, now, moving);
         FinishLane(spray, now, watering);
         FinishLane(bubbles, now, bubbling);
-        FinishLane(ignition, now, igniting, IgnitionCooldownMs);
+        FinishIgnition(now, igniting);
         if (!online || motion.held || motion.clock_fault || spray.clock_fault || bubbles.clock_fault || ignition.clock_fault) Cancel(All);
     }
     void NewVoiceSession() { count_ = 0; Cancel(All); }
@@ -58,7 +57,7 @@ public:
         FinishLane(motion, now, moving);
         FinishLane(spray, now, watering);
         FinishLane(bubbles, now, bubbling);
-        FinishLane(ignition, now, igniting, IgnitionCooldownMs);
+        FinishIgnition(now, igniting);
     }
     void StopMove(uint64_t now) {
         const bool moving = Moving();
@@ -82,7 +81,25 @@ public:
         const bool igniting = Igniting();
         Cancel(IgnitionOnly);
         water_stop(&ignition, now);
-        FinishLane(ignition, now, igniting, IgnitionCooldownMs);
+        FinishIgnition(now, igniting);
+    }
+    const char* VoiceFrenzy(uint64_t now, int ticket, int duration) {
+        return Request(now, ticket, FrenzyMode, duration, 0, nullptr);
+    }
+    const char* Frenzy(uint64_t now, int duration) {
+        if (duration < 1 || duration > 30000 || now > UINT64_MAX - duration) return "duration_out_of_range";
+        if (!Ready(now, Both) || !Ready(now, BubblesOnly) || !Ready(now, IgnitionOnly)) return "not_ready_or_busy";
+        // Preflight all lanes before changing any output; the caller applies once under its mutex.
+        Cancel(All);
+        const int pulse = duration < 1000 ? duration : 1000;
+        if (std::strcmp(Execute(now, Both, pulse, duration, "left"), "accepted") ||
+            std::strcmp(Execute(now, BubblesOnly, 0, 0, nullptr, duration), "accepted") ||
+            std::strcmp(Execute(now, IgnitionOnly, 0, 0, nullptr, 0, pulse), "accepted")) {
+            Stop(now); return "not_ready_or_busy";
+        }
+        motion.ends_at = now + duration; // Only this bounded mode extends timed motion beyond 3 s.
+        move_duration_ms = last_duration_ms = duration;
+        return "accepted";
     }
     bool RenewWebMove(uint64_t now, unsigned lease_ms) {
         if (!motion.active || !motion.online || motion.held || motion.clock_fault ||
@@ -147,12 +164,13 @@ private:
     std::array<RequestRecord, 128> requests_{};
     unsigned count_ = 0;
     int next_ticket_ = 0;
-    uint64_t next_output_nonce_ = 0;
+    uint64_t next_output_nonce_ = 0, ignition_started_ = 0;
     static bool LaneReady(const water_policy& p, uint64_t now) {
         return p.online && !p.held && !p.clock_fault && !p.active && !p.armed &&
                now >= p.last_ms && now >= p.cooldown_until && now <= UINT64_MAX - WATER_PERMIT_MS;
     }
     bool Ready(uint64_t now, Target target) const {
+        if (target == FrenzyMode) return Ready(now, Both) && Ready(now, BubblesOnly) && Ready(now, IgnitionOnly);
         return (target == MoveOnly || target == WaterOnly || target == Both || target == BubblesOnly || target == IgnitionOnly) &&
                (!(target & MoveOnly) || LaneReady(motion, now)) &&
                (!(target & WaterOnly) || LaneReady(spray, now)) &&
@@ -161,7 +179,7 @@ private:
     }
     void Cancel(Target target) {
         for (unsigned i = 0; i < count_; ++i)
-            if (requests_[i].target & target) requests_[i].pending = false;
+            if ((requests_[i].target & target) || requests_[i].target == FrenzyMode || target == FrenzyMode) requests_[i].pending = false;
     }
     const char* Request(uint64_t now, int ticket, Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int ignition_ms = 0) {
         RequestRecord* r = nullptr;
@@ -170,6 +188,7 @@ private:
         r->pending = false;
         if (r->target != target) return "ticket_target_mismatch";
         if (now < r->received || now - r->received >= 5000) return "stale_request";
+        if (target == FrenzyMode) return Frenzy(now, move_ms);
         return Execute(now, target, move_ms, water_ms, value, bubbles_ms, ignition_ms);
     }
     const char* Execute(uint64_t now, Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int ignition_ms = 0) {
@@ -211,11 +230,18 @@ private:
             if (!water_arm(&ignition, now, nonce) || std::strcmp(water_request_timed(&ignition, now, nonce, ignition_ms), "accepted")) {
                 Stop(now); return "not_ready_or_busy";
             }
+            ignition_started_ = now;
             ignition_duration_ms = ignition_ms;
         }
         last_duration_ms = target == IgnitionOnly ? ignition_ms : target == BubblesOnly ? bubbles_ms : target == MoveOnly ? move_ms : target == WaterOnly ? water_ms : (move_ms > water_ms ? move_ms : water_ms);
         Cancel(target); // Cancel same-lane bursts; independent queued lane remains eligible.
         return "accepted";
+    }
+    void FinishIgnition(uint64_t now, bool was_active) {
+        if (!was_active || ignition.active) return;
+        // Use elapsed software ON time, including an early stop or a delayed deadline tick.
+        const uint64_t elapsed = now >= ignition_started_ ? now - ignition_started_ : UINT64_MAX;
+        ignition.cooldown_until = now <= UINT64_MAX - elapsed ? now + elapsed : UINT64_MAX;
     }
     static void FinishLane(water_policy& lane, uint64_t now, bool was_active, unsigned interval = CooldownMs) {
         // Audio-board interaction interval; leave the standalone water policy unchanged.

@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-26",
+  "version": "2.0.3-ct18",
+  "scope": "Voice frenzy tool, source-bound lifetime and replay-safe ticket; ct17 web mode retained",
+  "application_bytes": 2607680,
+  "application_sha256": "fad00da5f2302d3594607dcccf1fba216f71f75bc5c030b45907eb6a91e2dde2",
+  "sources": {
+    "web/index.html": "b4f4376a987537d9695874725a214aa9e4aec5f71921a8b93c0a2c3c288b7017",
+    "apply_overlay.py": "1a5fa092cbe13864dcd822521a8bb40654bb073c2a96356a64c364d77d579b40",
+    "action_guard.h": "1426a7f0a0e8a234ea023a4b847f50022e1dd3b70881ad3111e031705b39dd2c",
+    "control_sessions.h": "666274621e0b305c3ef9426f7d34643115e4e072f4ff3ce18cb51ee5d37e5a1c",
+    "cybertrack_tools.cc": "18fd72d605018829e413384b043f33492005295e05368d8679a60bb0137b50e2",
+    "web_request.h": "5f6cea50e8976c4599aecd763fbcac831492bf436a0d465b92f9f96b6502fed3",
+    "role-prompt.txt": "545cb152fa889c03c1043db0da55e15ef51be1ee76195677ac6ff0550c39b23d"
+  },
+  "checks": {
+    "host": "passed ASan/UBSan including voice 5/10/30s without web heartbeat, source isolation, web preemption, pulse cadence, cancellation, ticket replay/expiry, no extension",
+    "mcp_http": "passed actual generated MCP parameter validation and HTTP parser/handler suite; frenzy additionalProperties=false and internal ticket insertion verified",
+    "idf_build": "passed ESP-IDF v5.5.1",
+    "web_page": "unchanged from ct17 verified layout and script",
+    "role_platform": "saved and reopened; source matches ignoring trailing newline"
+  },
+  "limitations": [
+    "No real spoken or loaded actuation regression; host tests do not prove model interpretation or physical timing."
+  ]
+}

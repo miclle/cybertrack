@@ -41,6 +41,14 @@ int main() {
     assert(!parse(R"({"operation":"water_start","sequence":1,"sequence":1})"));
     assert(!parse(R"({"operation":"water_renew","hold_id":1,"renewal":1.5})"));
     assert(!parse(R"({"operation":"bubbles_stop","hold_id":1,"hold_id":2})"));
+    for (const char* ms : {"1", "5000", "10000", "30000"}) {
+        const auto json = std::string(R"({"operation":"frenzy","sequence":1,"window":1,"duration_ms":)") + ms + "}";
+        auto root = cJSON_Parse(json.c_str()); WebCommand cmd;
+        assert(ParseWebCommand(root, cmd) && cmd.frenzy_ms == atoi(ms));
+        assert(std::string(cmd.operation) == "frenzy"); cJSON_Delete(root);
+    }
+    for (const char* ms : {"0", "-1", "30001", "1.5", "true", "\"5000\"", "5000,\"duration_ms\":5000", "5000,\"extra\":1"})
+        assert(!parse((std::string(R"({"operation":"frenzy","sequence":1,"window":1,"duration_ms":)") + ms + "}").c_str()));
     const char* bad[]={
         "null", "[]", "{}",
         R"({"operation":"drive_start","sequence":1,"window":1,"direction":"left","duration_ms":1000})",

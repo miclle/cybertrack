@@ -21,7 +21,7 @@ static void check(const char* tool, const char* json, bool valid) {
     cJSON_Delete(args);
 }
 int main() {
-    for(const char* tool : {"self.tank.bubbles","self.tank.ignition"}) {
+    for(const char* tool : {"self.tank.bubbles","self.tank.ignition","self.tank.frenzy"}) {
         for(const char* j : {R"({"duration_ms":1})", R"({"duration_ms":1000})", R"({"duration_ms":5000})"}) check(tool,j,true);
         for(const char* j : {"{}","[]","null",R"({"duration_ms":0})",R"({"duration_ms":-1})",
             R"({"duration_ms":30001})",R"({"duration_ms":0.5})",R"({"duration_ms":true})",R"({"duration_ms":"1000"})",
@@ -29,6 +29,7 @@ int main() {
         check(tool,nullptr,false);
     }
     check("self.tank.bubbles",R"({"duration_ms":30000})",true);
+    check("self.tank.frenzy",R"({"duration_ms":30000})",true);
     check("self.tank.ignition",R"({"duration_ms":5001})",false);
     for (const char* d : {"forward","backward","left","right"})
         for (int ms : {1,500,1000,3000}) {
