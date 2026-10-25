@@ -1,4 +1,4 @@
-"""0.43 passive backpack body clamps and chassis effect-board carrier.
+"""0.50 integrated backpack body pockets and chassis effect-board carrier.
 
 Contact, pads, M2.5-class hardware and actual boards remain candidates. This
 module defines no HV wiring, electrode, drive, insulation or protective rating.
@@ -6,7 +6,7 @@ module defines no HV wiring, electrode, drive, insulation or protective rating.
 import FreeCAD as A
 import Part
 from breadboard_layout import box
-from ultrasonic_integration import inspect as inspect_exact,box_sweep,bounds
+from ultrasonic_integration import inspect as inspect_exact,box_sweep
 V=A.Vector
 from effect_board_mount import MOUNTS, apply as add_board_mount, check as check_board_mount, vertical_sweep, SIDE_WIRE_POINTS
 PREFIXES=('BackpackArc','ArcClamp','ArcLiner','ArcBottomPad','ArcInsert','ArcScrew','ArcTool','Effect')
@@ -26,87 +26,75 @@ def mirror(shape,sign):
 
 
 def zc(r,z0,z1,x,y):return Part.makeCylinder(r,z1-z0,V(x,y,z0))
-def xc(r,x0,x1,y,z):return Part.makeCylinder(r,x1-x0,V(x0,y,z),V(1,0,0))
 def ring(ro,ri,z0,z1):return zc(ro,z0,z1,74,85).cut(zc(ri,z0-.1,z1+.1,74,85))
+
+
+def housing():
+    """Right-handed master: closed lower cup and open upper guide, one solid.
+
+    Keep the old band/ear silhouette, but bridge the split and remove fasteners
+    and the overhanging axial stop. The module is inserted vertically.
+    """
+    body=box(57,81,51.5,60.5,89,118)
+    body=body.fuse(zc(15.75,51.5,90,74,85).cut(zc(13.25,53,91,74,85)))
+    for z in (86,114):
+        band=ring(15.75,13.25,z-4,z+4)
+        band=band.fuse(box(57,81,z-4,60.5,89,z+4))
+        for y in (66.5,103.5):
+            band=band.fuse(box(67,y-4,z-4,80.3,y+4,z+4))
+        body=body.fuse(band)
+    # Relief at the inner/front bottom corner keeps the chassis unchanged.
+    body=body.cut(box(60.5,60,50,64.5,74.75,54))
+    return body.removeSplitter()
 
 
 def apply(doc,add):
     fixed=doc.getObject('BackpackShell').Shape.copy()
-    lid=doc.getObject('KeelLid').Shape.copy()
     def put(n,label,s,category='structure',color='metal',basis=None):
-        return add(n,label,s.removeSplitter(),category,color,basis or '0.43机械候选；夹持面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳')
+        return add(n,label,s.removeSplitter(),category,color,basis or '0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳')
     for side,sign in [('L',1),('R',-1)]:
         put('BackpackArc'+side,'背包外侧本体候选 Ø25.5×70 '+side,zc(12.75,54,124,sign*74,85),'envelope','accent',
             '历史用户规划Ø25.5×70，非实测；不含端部、引线、电极、驱动、绝缘或屏蔽验收')
-        spine=box(57,81,51.5,60.5,89,118).fuse(box(57,81,51.5,80,89,53))
         put('ArcBottomPad'+side,'本体底托1 mm软垫候选 '+side,mirror(box(68,81,53,80,89,54),sign),'structure','dark')
         for i,z in enumerate((86,114)):
-            collar=ring(15.75,13.25,z-4,z+4)
-            inner=collar.common(box(50,60,z-5,73.7,110,z+5))
-            outer=collar.common(box(74.3,60,z-5,95,110,z+5))
-            inner=inner.fuse(box(57,81,z-4,60.5,89,z+4))
-            for j,y in enumerate((66.5,103.5)):
-                inner=inner.fuse(box(67,y-4,z-4,73.7,y+4,z+4))
-                outer=outer.fuse(box(74.3,y-4,z-4,80.3,y+4,z+4))
-                inner=inner.cut(xc(2.1,67.8,73.8,y,z))
-                outer=outer.cut(xc(1.4,74.2,80.4,y,z))
-                suffix=side+str(i)+str(j)
-                put('ArcInsert'+suffix,'夹环M2.5级盲孔嵌件候选 '+suffix,
-                    mirror(xc(2,68,73,y,z).cut(xc(1.25,67.9,73.1,y,z)),sign))
-                screw=xc(1.2,69,80.3,y,z).fuse(xc(2.5,80.3,82.3,y,z))
-                screw=screw.cut(box(81.5,y-1.4,z-.5,82.4,y+1.4,z+.5))
-                put('ArcScrew'+suffix,'夹环外侧M2.5级螺钉候选 '+suffix,mirror(screw,sign))
-                put('ArcTool'+suffix,'夹环外侧工具轴线候选 '+suffix,mirror(xc(1.5,82.3,125,y,z),sign),'clearance','accent',
-                    '仅Ø3直工具杆，未覆盖手掌／手柄／驱动头配合；不表示规定采购工具规格')
-            if i==1:
-                outer=outer.fuse(box(87.75,81,114,89.75,89,126)).fuse(box(74.3,81,124,89.75,89,126))
-            spine=spine.fuse(inner)
-            put('ArcClampOuter'+side+str(i),'分体夹环外半／上环带轴向限位 '+side+str(i),mirror(outer,sign))
             lining=ring(13.25,12.75,z-3,z+3)
             for part,x0,x1 in [('Inner',50,73.7),('Outer',74.3,95)]:
-                put('ArcLiner'+part+side+str(i),'夹环0.5 mm软衬候选 '+part+side+str(i),
+                put('ArcLiner'+part+side+str(i),'环带0.5 mm软衬候选 '+part+side+str(i),
                     mirror(lining.common(box(x0,60,z-4,x1,110,z+4)),sign),'structure','dark',
-                    '名义接触不建压缩；材料、夹持力、灌封壳接触区域与温升均待实测')
-        fixed=fixed.fuse(mirror(spine,sign))
-    doc.getObject('BackpackShell').Shape=fixed.removeSplitter()
+                    '名义接触不建压缩；材料、摩擦保持力、灌封壳接触区域与温升均待实测')
+        fixed=fixed.fuse(mirror(housing(),sign))
+    shell=doc.getObject('BackpackShell')
+    shell.Shape=fixed.removeSplitter()
+    shell.Label='双瓶背包／一体点火模块桶座与上导环'
+    shell.EvidenceBasis='0.50双侧桶座、完整上下环带及连接耳与双瓶护舱融合为一个实体；无顶部倒L压件及分体夹环紧固件；未验证防脱保持力、制造或绝缘'
+    assert shell.Shape.isValid() and len(shell.Shape.Solids)==1
     board_info=add_board_mount(doc,put)
     doc.recompute()
-    return {'revision':'0.43','arc_body_diameter_length_mm':[25.5,70],'arc_centres_xy_mm':[[74,85],[-74,85]],
-        'arc_body_z_mm':[54,124],'clamp_z_centres_mm':[86,114],'split_gap_mm':.6,'liner_thickness_mm':.5,
-        'arc_clamp_screw_quantity':8,'effect_tray_screw_quantity':4,'effect_mount_xy_mm':MOUNTS,
+    return {'revision':'0.50','arc_body_diameter_length_mm':[25.5,70],'arc_centres_xy_mm':[[74,85],[-74,85]],
+        'arc_body_z_mm':[54,124],'band_z_centres_mm':[86,114],'liner_thickness_mm':.5,
+        'integrated_object':'BackpackShell','cup_z_mm':[51.5,90],'cup_outer_inner_diameter_mm':[31.5,26.5],
+        'cup_floor_thickness_mm':1.5,'upper_ring_z_mm':[110,118],'top_axial_stop':False,
+        'arc_clamp_screw_quantity':0,'effect_tray_screw_quantity':4,'effect_mount_xy_mm':MOUNTS,
         'MOS_lwh_mm':[33,17,12],'MOS_height_assumed':True,'buck_lwh_mm':[20,11,5],
-        'quantity_assumption':'one MOS and one buck per effect','board_mounting_complete':False,'board_mounting_candidate':board_info,
-        'physical_fit_verified':False,'electrical_or_insulation_verified':False}
+        'quantity_assumption':'one MOS and one buck per water/bubble effect; shared ignition MOS is separate',
+        'board_mounting_complete':False,'board_mounting_candidate':board_info,
+        'axial_retention_verified':False,'physical_fit_verified':False,'electrical_or_insulation_verified':False}
 
 
 def check(doc):
     physical={o.Name:o.Shape for o in doc.Objects if hasattr(o,'Category') and o.Category!='clearance'}
-    def hits(shape,obstacles):
-        return inspect(shape,{n:s for n,s in obstacles.items() if shape.BoundBox.intersect(s.BoundBox)})
     selected={n:s for n,s in physical.items() if n.startswith(PREFIXES)}
     reserved={o.Name:o.Shape for o in doc.Objects if getattr(o,'Category','')=='clearance' and not o.Name.startswith(PREFIXES)}
     changed={**selected,**{n:physical[n] for n in ('KeelLid','BackpackShell')}}
     static={n:inspect(s,{m:t for m,t in physical.items() if m!=n}) for n,s in changed.items()}
     spaces={n:inspect(s,reserved) for n,s in selected.items()}
-    cap_checks={};arc_checks={};screw_checks={};tool_checks={};negative={}
+    arc_checks={};screw_checks={};tool_checks={};negative={}
     for side,sign in [('L',1),('R',-1)]:
-        screws=[n for n in selected if n.startswith('ArcScrew'+side)]
-        caps=[n for n in selected if n.startswith(('ArcClampOuter'+side,'ArcLinerOuter'+side))]
-        for i in (0,1):
-            names=['ArcClampOuter'+side+str(i),'ArcLinerOuter'+side+str(i)]
-            samples=[]
-            for step in range(21):
-                moving=Part.makeCompound([physical[n] for n in names]);moving.translate(V(sign*35*step/20,0,0))
-                samples.append(hits(moving,{n:s for n,s in physical.items() if n not in names+screws}))
-            cap_checks[side+str(i)]={'method':'21 discrete poses, outward X35; no continuous claim','poses':samples,'passed':all(r['passed'] for r in samples)}
         sweep=zc(12.75,54,214,sign*74,85)
-        arc_checks[side]=inspect(sweep,{n:s for n,s in physical.items() if n not in caps+screws+['BackpackArc'+side]})
-        negative['upper_stop_retained_'+side]=inspect(sweep,{'upper_cap':physical['ArcClampOuter'+side+'1']})
-        for n in screws:
-            b=bounds(physical[n]);y=(b[1]+b[4])/2;z=(b[2]+b[5])/2
-            swept=mirror(xc(1.2,69,115.3,y,z).fuse(xc(2.5,80.3,117.3,y,z)),sign)
-            screw_checks[n]=inspect(swept,{m:s for m,s in physical.items() if m!=n})
-            tool_checks[n]=inspect(doc.getObject(n.replace('Screw','Tool')).Shape,{m:s for m,s in physical.items() if m!=n})
+        arc_checks[side]=inspect(sweep,{n:s for n,s in physical.items() if n!='BackpackArc'+side})
+        # The integrated floor must block downward motion, while the top stays open.
+        negative['floor_blocks_down_'+side]=inspect(zc(12.75,50,124,sign*74,85),
+                                                  {'BackpackShell':physical['BackpackShell']})
     removed={'PowerBank','BatteryHatch','BatteryPullStrap','BottomServiceCover','PowerCableRoute'}
     removed|={o.Name for o in doc.Objects if o.Name.startswith(('BatteryPad','BatterySupportWasher','BatteryScrew','BottomCoverScrew'))}
     names=[n for n in physical if n.startswith('Effect') and not n.startswith(('EffectScrew','EffectInsert'))]
@@ -139,15 +127,14 @@ def check(doc):
         for i in (0,1):
             for part in ('Inner','Outer'):
                 contacts['liner_'+part+side+str(i)]=face_contact(body,physical['ArcLiner'+part+side+str(i)])
-        moved=physical['ArcClampOuter'+side+'0'].copy();moved.translate(V(sign*.5,0,0))
-        negative['cap_screws_retained_'+side]=inspect(moved,{n:s for n,s in physical.items() if n.startswith('ArcScrew'+side+'0')})
     contacts['tray_to_posts']=face_contact(physical['EffectTray'],physical['KeelLid'])
     boards=check_board_mount(doc,inspect)
-    return {'revision':'0.43','board_mount':boards,'static':static,'reserved_spaces':spaces,'outer_caps':cap_checks,'arc_up_90':arc_checks,
+    return {'revision':'0.50','board_mount':boards,'static':static,'reserved_spaces':spaces,'arc_up_90':arc_checks,
+        'housing_single_solid':len(physical['BackpackShell'].Solids)==1,'top_axial_stop':False,'axial_retention_verified':False,
         'tray_down_100':tray,'disconnected_local_wires_down_100':wire_service,'tray_removed_first':sorted(removed)+bolts,'screw_continuous_sweeps':screw_checks,'tool_rods':tool_checks,
-        'negative_controls':negative,'nominal_contact_areas_mm2':contacts,'passed':all(r['passed'] for section in (static,spaces,cap_checks,arc_checks,screw_checks,tool_checks) for r in section.values())
-            and boards['passed'] and tray['passed'] and wire_service['passed'] and all(not r['passed'] for r in negative.values()) and all(area>10 for area in contacts.values()),
-        'physical_fit_verified':False,'limits':'Cap release sampled; bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.'}
+        'negative_controls':negative,'nominal_contact_areas_mm2':contacts,'passed':all(r['passed'] for section in (static,spaces,arc_checks,screw_checks,tool_checks) for r in section.values())
+            and len(physical['BackpackShell'].Solids)==1 and boards['passed'] and tray['passed'] and wire_service['passed'] and all(not r['passed'] for r in negative.values()) and all(area>10 for area in contacts.values()),
+        'physical_fit_verified':False,'limits':'Module slides up 90 mm after releasing and parking its leads; integrated rings stay fixed. No upward hard stop; friction retention unverified. Bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.'}
 
 
 def render(doc,output):
@@ -166,7 +153,8 @@ def render(doc,output):
     # Explicit names avoid treating the L in "Liner" as the side identifier.
     left={n for n in arc if n in ('BackpackArcL','ArcBottomPadL') or any(n.startswith(p+'L') for p in ('ArcClampOuter','ArcLinerInner','ArcLinerOuter','ArcInsert','ArcScrew'))}
     view=G.activeDocument().activeView();view.setCameraType('Orthographic')
-    views=[('effects-backpack',rear,arc|packs),('effects-clamp',rear,left|{'BackpackShell'}),
+    views=[('effects-backpack',rear,arc|packs),('effects-housing',rear,{'BackpackShell'}),
+           ('effects-clamp',rear,left|{'BackpackShell'}),
            ('effects-service',rear,arc|packs),('effects-tray',front,effect|{'KeelLid','LowerTub','PowerBank'}),
            ('effects-tray-bottom',bottom,effect),('effects-tray-service',front,effect|{'KeelLid','LowerTub'}),
            ('effects-board-mount',front,effect),('effects-board-wiring',front,effect|{o.Name for o in objects if o.Name.startswith(('EffectPort','EffectWire'))}),
@@ -180,10 +168,8 @@ def render(doc,output):
                 doc.getObject('BackpackShell').Shape=saved['BackpackShell'][0].common(box(56,60,50,91,109,127))
             if name=='effects-service':
                 for n in arc:
-                    o=doc.getObject(n);s=o.Shape.copy();sign=1 if n in left else -1
-                    if n.startswith('ArcScrew'):o.ViewObject.Visibility=False
-                    elif n.startswith(('ArcClampOuter','ArcLinerOuter')):s.translate(V(sign*35,0,0));o.Shape=s
-                    elif n.startswith('BackpackArc'):s.translate(V(0,0,90));o.Shape=s
+                    o=doc.getObject(n);s=o.Shape.copy()
+                    if n.startswith('BackpackArc'):s.translate(V(0,0,90));o.Shape=s
             if name=='effects-tray-bottom':
                 for n in effect:
                     if n.startswith('EffectScrew'):
