@@ -44,6 +44,10 @@ def check(doc,verbose=False):
     cover_sweep=box(-65.8,-96.8,-54,65.8,40,28.8)
     for sign in (-1,1):
         for y in (-85,-40):cover_sweep=cover_sweep.cut(cz(2.5,28.8,30,sign*63.5,y))
+    if doc.getObject('L298NCarrier'):
+        # The carrier fastener heads remain in place while the independent cover
+        # is removed. Its actual new head-clearance holes continue through the sweep.
+        for x in (-20,20):cover_sweep=cover_sweep.cut(cz(2.8,-54.1,28.9,x,-12))
     swept('unified_cover',{'cover':cover_sweep},cover+cs,'80mm down; power bank and both drives still installed')
     for i,(x,y) in enumerate(COVER_POINTS):
         swept('bottom_screw_'+str(i),{'screw':union([cz(2.2,-53.5,28,x,y),cz(1.2,-52,35.8,x,y)])},[cs[i]],'80mm downward')

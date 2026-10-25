@@ -10,6 +10,9 @@
 
 # Native generated assembly exchange data; review its readback report.
 /hardware/model/*.step -diff
+/hardware/model/parts/L298N-carrier-0.34.step -diff
+/hardware/components/L298N/L298N-envelope.step -diff
+/hardware/components/bottle-150ml/Bottle150ml-envelope.step -diff
 
 # Immutable CAD interface exports; preserve bytes and review the readback report.
 /hardware/components/drive-interface/*.brep -text -diff

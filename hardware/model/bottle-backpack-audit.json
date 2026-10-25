@@ -1,0 +1,135 @@
+{
+  "revision": "0.36",
+  "tolerance_mm3": 0.01,
+  "bottles": [
+    {
+      "bottle": "Water",
+      "dimensions_mm": [
+        48.8,
+        48.800000000000004,
+        114.0
+      ],
+      "static_overlaps": [],
+      "bottle_removal": {
+        "method": "exact vertical cylinder sweep, 150 mm upward",
+        "removed_first": [
+          "WaterRetentionBand",
+          "WaterStrapClosure",
+          "WaterHoseRoute"
+        ],
+        "opposite_bottle_and_hose_retained": true,
+        "opposite_hose_distance_mm": 29.599999999999998,
+        "overlaps": [],
+        "own_connected_hose_blocks_removal": true
+      },
+      "rear_finger_space_overlaps": [],
+      "strap_release_access_overlaps": [],
+      "pod_screws_and_tools": [
+        {
+          "screw": "WaterPodScrewL",
+          "removed_first": [
+            "WaterRetentionBand",
+            "WaterStrapClosure",
+            "WaterHoseRoute",
+            "WaterModule",
+            "WaterBottomPad",
+            "WaterPodScrewL"
+          ],
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        },
+        {
+          "screw": "WaterPodScrewR",
+          "removed_first": [
+            "WaterRetentionBand",
+            "WaterStrapClosure",
+            "WaterHoseRoute",
+            "WaterModule",
+            "WaterBottomPad",
+            "WaterPodScrewR"
+          ],
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        }
+      ],
+      "nominal_support_contact_areas": {
+        "pod_to_floor_mm2": 2161.85556864128,
+        "bottom_pad_to_bottle_mm2": 1870.378602241219
+      },
+      "retention": "band tension and friction, not a geometric upward stop; flexible peeling/parking and holding force unverified",
+      "passed": true
+    },
+    {
+      "bottle": "Bubble",
+      "dimensions_mm": [
+        48.8,
+        48.800000000000004,
+        114.0
+      ],
+      "static_overlaps": [],
+      "bottle_removal": {
+        "method": "exact vertical cylinder sweep, 150 mm upward",
+        "removed_first": [
+          "BubbleRetentionBand",
+          "BubbleStrapClosure",
+          "BubbleGunHoseRoute"
+        ],
+        "opposite_bottle_and_hose_retained": true,
+        "opposite_hose_distance_mm": 29.1,
+        "overlaps": [],
+        "own_connected_hose_blocks_removal": true
+      },
+      "rear_finger_space_overlaps": [],
+      "strap_release_access_overlaps": [],
+      "pod_screws_and_tools": [
+        {
+          "screw": "BubblePodScrewL",
+          "removed_first": [
+            "BubbleRetentionBand",
+            "BubbleStrapClosure",
+            "BubbleGunHoseRoute",
+            "BubbleModule",
+            "BubbleBottomPad",
+            "BubblePodScrewL"
+          ],
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        },
+        {
+          "screw": "BubblePodScrewR",
+          "removed_first": [
+            "BubbleRetentionBand",
+            "BubbleStrapClosure",
+            "BubbleGunHoseRoute",
+            "BubbleModule",
+            "BubbleBottomPad",
+            "BubblePodScrewR"
+          ],
+          "tool_overlaps": [],
+          "removal_overlaps": []
+        }
+      ],
+      "nominal_support_contact_areas": {
+        "pod_to_floor_mm2": 2161.85556864128,
+        "bottom_pad_to_bottle_mm2": 1870.378602241219
+      },
+      "retention": "band tension and friction, not a geometric upward stop; flexible peeling/parking and holding force unverified",
+      "passed": true
+    }
+  ],
+  "shell_height_mm": 90.0,
+  "shell_z_range_mm": [
+    34.0,
+    124.0
+  ],
+  "exposed_bottle_envelope_height_mm": 30.0,
+  "removed_lid_hardware_remaining": [],
+  "passed": true,
+  "capacity_source": "150 mL from product image; 48.8 is lower diameter, maximum capped envelope remains provisional",
+  "service_prerequisite": "power off; withdraw and park only the target hose; peel/open and park only the target band; lift target bottle 150 mm; opposite bottle/hose stay installed; refill off robot",
+  "no_tools_for_routine_refill_design_intent": true,
+  "physical_retention_seal_venting_material_fit_verified": false,
+  "manufacturing_released": false,
+  "source_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
+  "saved_and_reopened": true
+}

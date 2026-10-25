@@ -59,8 +59,8 @@ def rounded_route(points, radius, bend_radius):
 
 # Radius is a packaging assumption, not a supplier minimum bend specification.
 # Top-fed reservoir segment stays fixed; the final five points follow the gun tilt.
-HOSE_FIXED_COUNT=5
-HOSE_POINTS=[(-24,49,45),(-24,49,149),(-24,70,149),(99,70,149),(99,10,149),
+HOSE_FIXED_COUNT=4
+HOSE_POINTS=[(28,65,154.5),(28,65,174),(99,65,174),(99,10,149),
              (78.2,6,117),(78.2,-75,117),(90,-90,117),(90,-105,117),(76.9,-105,117)]
 LEAD_POINTS=[(55,9.5,117),(55,21.5,117),(83,21.5,117)]
 ADHESIVE_CENTRES=(-62,-10)

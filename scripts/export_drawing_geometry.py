@@ -19,7 +19,7 @@ sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 source_hash = sha(source)
 doc = App.openDocument(str(source))
 objects = [o for o in doc.Objects if hasattr(o, 'Category')]
-visible = [o for o in objects if o.Category not in ('envelope','clearance')]
+visible = [o for o in objects if o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule')]
 by_name = {o.Name: o for o in objects}
 V = App.Vector
 # Columns of each matrix define an explicit world-to-page mapping. Front page
@@ -136,8 +136,8 @@ for o in objects:
 for view in ('front','rear','side','right','top','bottom'):
     project(view, [o.Name for o in visible], view)
 for key,names,view in [
-    ('top_feed_top',['WaterPod','BubblePod','WaterServiceLid','BubbleServiceLid','WaterCapGrip','BubbleCapGrip','WaterHoseRoute','BubbleGunHoseRoute'],'top'),
-    ('top_feed_side',['WaterPod','BubblePod','WaterServiceLid','BubbleServiceLid','WaterCapGrip','BubbleCapGrip','WaterHoseRoute','BubbleGunHoseRoute'],'side'),
+    ('top_feed_top',['WaterModule','BubbleModule','WaterPod','BubblePod','BackpackShell','WaterRetentionBand','BubbleRetentionBand','WaterHoseRoute','BubbleGunHoseRoute'],'top'),
+    ('top_feed_side',['WaterModule','BubbleModule','WaterPod','BubblePod','BackpackShell','WaterRetentionBand','BubbleRetentionBand','WaterHoseRoute','BubbleGunHoseRoute'],'side'),
     ('rear_armor_rear',['RearBaseArmor'],'rear'),
     ('rear_armor_side',['RearBaseArmor'],'side'),
     ('ultrasonic_front',['UltrasonicRingL','UltrasonicFaceL','UltrasonicRingR','UltrasonicFaceR','SensorStatusStrip'],'front'),
@@ -149,12 +149,12 @@ for key,names,view in [
     ('battery',['BatteryHatch','PowerBank','BatteryPullStrap'],'bottom'),
     ('tray',['ElectronicsTray'],'top'),
     ('crown',[o.Name for o in objects if getattr(o,'ServiceGroup','')=='crown'],'top'),
-    ('fill_lid',['WaterServiceLid','WaterCapGrip'],'side'),
-    ('fill_plug',['WaterFillPlug'],'side'),
-    ('fill_seal',['WaterFillSeal'],'side'),
-    ('fill_cap',['WaterPodCap'],'side'),
-    ('fill_cap_top',['WaterPodCap'],'top'),
-    ('fill',['WaterPodCap','WaterFillPlug','WaterFillSeal','WaterServiceLid','WaterCapGrip'],'side'),
+    ('fill_lid',['WaterRetentionBand','WaterStrapClosure'],'side'),
+    ('fill_plug',['WaterModule'],'side'),
+    ('fill_seal',['WaterBottomPad'],'side'),
+    ('fill_cap',['WaterPod'],'side'),
+    ('fill_cap_top',['WaterPod'],'top'),
+    ('fill',['WaterPod','WaterModule','WaterBottomPad','WaterRetentionBand','WaterStrapClosure'],'side'),
     ('power_side',['PowerBank','BatteryHatch','BatteryPullStrap','BottomServiceCover'],'side'),
 ]:
     project(key,names,view)

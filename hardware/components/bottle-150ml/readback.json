@@ -1,0 +1,31 @@
+{
+  "source": "user specified product dimensions on 2026-10-25; not independently measured",
+  "diameter_mm": 48.8,
+  "height_with_cap_mm": 114,
+  "nominal_capacity_ml": 150,
+  "local_axes": "cylinder axis +Z, bottom centre origin; no scale",
+  "cap_neck_shoulder_and_material_known": false,
+  "saved_and_reopened": true,
+  "checks": [
+    {
+      "format": "FCStd",
+      "valid": true,
+      "solids": 1,
+      "symmetric_difference_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "format": "STEP",
+      "valid": true,
+      "solids": 1,
+      "symmetric_difference_mm3": 0.0,
+      "passed": true
+    }
+  ],
+  "files_sha256": {
+    "Bottle150ml-envelope.FCStd": "257f1ab6d44dda9d5100b694645ff89318e012b11f24c9500e923820419a2e1a",
+    "Bottle150ml-envelope.step": "64bb204d93836e387a397ae1b490b443986b2d51c6413dca62b2778da8fe8bbc"
+  },
+  "passed": true,
+  "physical_fit_verified": false
+}

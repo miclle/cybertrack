@@ -1,5 +1,5 @@
 {
-  "source": "user confirmed both guns are self-priming and all liquid hoses enter from the top",
+  "source": "user specified two capped 150 mL bottles OD48.8 x114; top hose entry retained",
   "self_priming_user_confirmed": {
     "water": true,
     "bubble": true
@@ -9,77 +9,70 @@
     {
       "reservoir": "Water",
       "top_axis_xy_mm": [
-        -24,
-        49
+        28.0,
+        65.0
       ],
-      "dip_end_z_mm": 45.0,
-      "nominal_bottom_reference_z_mm": 40,
-      "nominal_bottom_gap_mm": 5,
-      "top_passage_candidate_diameter_mm": 9.0,
-      "pod_side_wall_symmetric_difference_mm3": 0.0,
-      "vertical_dip_segment_missing_volume_mm3": 0.0,
+      "external_hose_start_z_mm": 154.5,
+      "internal_dip_space_z_mm": [
+        45,
+        154.5
+      ],
+      "printed_lid_present": false,
       "top_part_clearance_overlaps": [],
       "top_part_clearance_gaps": [
         {
-          "object": "WaterPodCap",
-          "distance_mm": 2.9999999999999973
+          "object": "WaterPod",
+          "distance_mm": 38.37199499635118
         },
         {
-          "object": "WaterFillPlug",
-          "distance_mm": 0.4999999999999964
+          "object": "WaterRetentionBand",
+          "distance_mm": 40.08004491015448
         },
         {
-          "object": "WaterServiceLid",
-          "distance_mm": 0.4999999999999961
-        },
-        {
-          "object": "WaterCapGrip",
-          "distance_mm": 0.4999999999999923
+          "object": "WaterStrapClosure",
+          "distance_mm": 40.598152667332045
         }
       ],
-      "hose_maximum_y_mm": 72.5000001,
+      "vertical_entry_missing_volume_mm3": 0.0,
       "passed": true
     },
     {
       "reservoir": "Bubble",
       "top_axis_xy_mm": [
-        24,
-        49
+        -28.0,
+        65.0
       ],
-      "dip_end_z_mm": 45.0,
-      "nominal_bottom_reference_z_mm": 40,
-      "nominal_bottom_gap_mm": 5,
-      "top_passage_candidate_diameter_mm": 9.0,
-      "pod_side_wall_symmetric_difference_mm3": 0.0,
-      "vertical_dip_segment_missing_volume_mm3": 0.0,
+      "external_hose_start_z_mm": 154.5,
+      "internal_dip_space_z_mm": [
+        45,
+        154.5
+      ],
+      "printed_lid_present": false,
       "top_part_clearance_overlaps": [],
       "top_part_clearance_gaps": [
         {
-          "object": "BubblePodCap",
-          "distance_mm": 2.9999999999999973
+          "object": "BubblePod",
+          "distance_mm": 38.37199499635118
         },
         {
-          "object": "BubbleFillPlug",
-          "distance_mm": 0.49999999999999706
+          "object": "BubbleRetentionBand",
+          "distance_mm": 40.08004491015448
         },
         {
-          "object": "BubbleServiceLid",
-          "distance_mm": 0.4999999999999957
-        },
-        {
-          "object": "BubbleCapGrip",
-          "distance_mm": 0.4999999999999923
+          "object": "BubbleStrapClosure",
+          "distance_mm": 40.598152667332045
         }
       ],
-      "hose_maximum_y_mm": 51.00000010000001,
+      "vertical_entry_missing_volume_mm3": 0.0,
       "passed": true
     }
   ],
-  "former_rear_hole_missing_volume_mm3": 0.0,
-  "lid_service_prerequisite": "withdraw both suction hoses before opening either reservoir lid; flexible hose handling not validated",
-  "liquid_allocations": "original cylindrical fluid reservations minus the dip-tube review corridor; not measured capacity",
+  "lid_service_prerequisite": "withdraw and park target hose, open and park target band, lift target bottle; opposite bottle and hose stay installed",
+  "bottle_envelope_uncut": true,
+  "bottle_cap_fitting_and_vent_not_designed": true,
+  "internal_hose_is_clearance_only": true,
   "suction_lift_air_seal_priming_and_physical_fit_verified": false,
   "passed": true,
-  "source_sha256": "47d2b4770dd0fa009eebb576525d40cd9dd2f4fc6fd677a4db3d39c483922723",
+  "source_sha256": "d4e9ea70eaba355da1b6031d07489ce081875e5a82d1b72bd346e2c8601cfb54",
   "saved_and_reopened": true
 }
