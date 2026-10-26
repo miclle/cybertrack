@@ -4629,14 +4629,14 @@
       "category": "component",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 6608.8000000000075,
+      "volume_mm3": 37221.148999352554,
       "bbox_mm": [
         -72.5,
         -101.80901828765278,
         95.99562859340627,
         -43.49999999999999,
-        -57.962422896400646,
-        114.64791955504049
+        -50.01667821175326,
+        142.06040374169476
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0,
@@ -8828,7 +8828,7 @@
     "valid": true,
     "solids": 887,
     "expected_solids": 887,
-    "volume_difference_mm3": 59.179241113131866,
+    "volume_difference_mm3": 59.15363326622173,
     "bbox_difference_mm": 8.952838470577262e-13,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -9575,8 +9575,8 @@
       -125.7852817989985,
       89.42733297464063,
       -37.10000000000001,
-      -51.699002004919656,
-      141.7347239081738
+      -50.01667821175329,
+      148.01324177905275
     ],
     "reserved_width_mm": 35.8,
     "mount": {
@@ -9585,7 +9585,6 @@
       "mount_scheme": "one-piece full front ring plus stepped slot; adhesive-assisted locating candidate",
       "mounting_plane_z_mm": 89.55,
       "muzzle_circle_bottom_above_plane_mm": 4.7,
-      "height_conflict_mm": 0.4,
       "candidate_plane_to_muzzle_top_mm": 36.2,
       "ring": {
         "outer_diameter_mm": 39,
@@ -9741,7 +9740,10 @@
         "optional base screws +Z12; empty cradle +Z6 then -X90"
       ],
       "clamp_load_materials_strain_relief_and_physical_fit_verified": false,
-      "coordinate_frame": "pre-pitch module frame; apply gun_pitch for installed world coordinates"
+      "coordinate_frame": "pre-pitch module frame; apply gun_pitch for installed world coordinates",
+      "tail_shell_height_mm": 35.9,
+      "support_to_tail_top_mm": 42.7,
+      "historical_height_conflict_mm": 0.4
     },
     "mounts_and_hose_routes_designed": true,
     "pre_pitch_origin_mm": [
@@ -9762,11 +9764,15 @@
       -37.10000000000001,
       -62.0,
       125.75
-    ]
+    ],
+    "tail_shell_height_mm": 35.9,
+    "bottom_tab_height_mm": 6.8,
+    "support_to_tail_top_mm": 42.7,
+    "component_revision": "components/bubble-gun/revisions/tail-height-2026-10-26"
   },
   "bubble_gun_check": {
     "passed": false,
-    "current_validation": "superseded for PP02; see pp02-adjustment-audit.json",
+    "current_validation": "Tail static geometry checked; original ring conflict retained; removal not revalidated. See bubble-tail-height-audit.json",
     "baseline_source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
     "baseline_result": {
       "mount_check": {
@@ -10257,7 +10263,7 @@
   },
   "service_paths": {
     "passed": false,
-    "current_validation": "superseded for PP02; see pp02-adjustment-audit.json",
+    "current_validation": "Tail height changed; removal paths not revalidated. See bubble-tail-height-audit.json",
     "baseline_source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
     "baseline_result": {
       "method": "8 discrete poses per straight segment; whole breadboard continuous tray/fastener/tool checks are reported separately in breadboard_check; legacy arc/USB scenarios only exist when those objects are present; no hand access certification",
@@ -18383,9 +18389,9 @@
   ],
   "drive_preview_note": "Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.",
   "files_sha256": {
-    "CyberTrack.FCStd": "a2f863a8b2e3dbd2dda314586d2dfbb0f02b62b303c8c1f062eeadfeb708cc86",
-    "CyberTrack.step": "f30402ef9b0a313d4cf077c624262b80e2afb9f3b1a83d22755cdf80f0539853",
-    "assembly.png": "63b01c6c33555ef8cc8dbc66f856271e9fff7c73595c1ab3413f23d0fe7b7732",
+    "CyberTrack.FCStd": "f4d01de42c2fa3abc3f9901597ec373d30088fc7465308a571f0b1cdd6bf5bcc",
+    "CyberTrack.step": "bebb7025a4f3cc0c17e7718da31aa53ab721daa26cdb719d65cf19c64bdfe858",
+    "assembly.png": "122ac14f5464b233783bb35651b5fe3929d035191751fed6c5a2898ad90d2250",
     "boot-button-route.png": "85f97ca59171591aa90d8f4c9147454ecdbbc0b9d1d1d9706356f886925f487d",
     "boot-button-seat.png": "7bcfb122acf62ed1522c83ebc9c6eff0185a5108f7c99f671f01534d2f8a5841",
     "bottle-backpack-layout.png": "0955731215425cb224741c38874bd919b62844e67a5085b906b24edc631bc9af",
@@ -18465,7 +18471,8 @@
     "print-parts/PP04.png": "729e519899640bcb357b3a912c9d8331d5b9194a9520a2b1842d283418284415",
     "print-parts/PP05.png": "746cc9079b2578039b38b9a2e2ff6a91bfa8e813adb6d6978f873328021ed96e",
     "print-parts/PP06.png": "96e016c53338b3cd6915ed8389e04dd7b8cc0ae864a4614a847d4b756aff03c3",
-    "source/CyberTrack-design.FCStd": "6e23dc04aa6373d5b17067e34b847769f029b634a9cc095887700f79eaa543db"
+    "source/CyberTrack-design.FCStd": "9bc18b1a59777f05225d02513b2841d92ee98be380d1a608a54ed3b5e55fd366",
+    "bubble-gun-tail-height.png": "7bd925df09e4dd5046aace1cab1d0fecf1c4d2c1a3aec78a8f6aae110edaa2b1"
   },
   "print_consolidation": {
     "feature_count": 56,
@@ -21943,14 +21950,14 @@
       "category": "component",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 6608.8000000000075,
+      "volume_mm3": 37221.148999352554,
       "bbox_mm": [
         -72.5,
         -101.80901828765278,
         95.99562859340627,
         -43.49999999999999,
-        -57.962422896400646,
-        114.64791955504049
+        -50.01667821175326,
+        142.06040374169476
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -21997,14 +22004,14 @@
       "category": "clearance",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 86829.31999999996,
+      "volume_mm3": 102420.21999999994,
       "bbox_mm": [
         -72.89999999999999,
         -125.78528179899844,
         89.42733297464063,
         -37.099999999999994,
-        -51.69900200491961,
-        141.7347239081738
+        -50.016678211753224,
+        148.01324177905275
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -26243,9 +26250,9 @@
   "check_source_document": "source/CyberTrack-design.FCStd",
   "model_tree": {
     "source_document": "source/CyberTrack-design.FCStd",
-    "source_sha256": "6e23dc04aa6373d5b17067e34b847769f029b634a9cc095887700f79eaa543db",
+    "source_sha256": "9bc18b1a59777f05225d02513b2841d92ee98be380d1a608a54ed3b5e55fd366",
     "delivery_document": "CyberTrack.FCStd",
-    "delivery_sha256": "a2f863a8b2e3dbd2dda314586d2dfbb0f02b62b303c8c1f062eeadfeb708cc86",
+    "delivery_sha256": "f4d01de42c2fa3abc3f9901597ec373d30088fc7465308a571f0b1cdd6bf5bcc",
     "kept_group": "01 双履带与动力参考",
     "drive_members": [
       "DriveCouplerL",
@@ -26431,7 +26438,7 @@
     "retained_hidden_envelope_count": 20,
     "root_part_count": 277,
     "part_count": 307,
-    "geometry_scope": "Localized cable passage update; saved source/delivery changed shape signatures agree; see cable-passage-audit.json",
+    "geometry_scope": "Only tail shell and inspection envelope changed; source/delivery signatures and unchanged gun pieces checked in bubble-tail-height-audit.json",
     "geometry_unchanged": false,
     "appearance_properties_unchanged": true,
     "saved_and_reopened": true,
@@ -26439,7 +26446,8 @@
     "label_audit": "part-names-audit.json",
     "order_audit": "part-order-audit.json",
     "local_change_audit": "pp02-adjustment-audit.json",
-    "cable_passage_change_audit": "cable-passage-audit.json"
+    "cable_passage_change_audit": "cable-passage-audit.json",
+    "bubble_tail_height_audit": "bubble-tail-height-audit.json"
   },
   "part_names": {
     "delivery_document": "CyberTrack.FCStd",
@@ -26469,7 +26477,7 @@
     "gui_properties_except_tree_rank_unchanged": true,
     "rank_metadata_verified": true
   },
-  "local_revision": "0.55-cable10+PP02-review",
+  "local_revision": "0.56-tail35.9+PP02-review",
   "pp02_adjustment": {
     "date": "2026-10-26",
     "scope": "PP02 only",
@@ -26538,7 +26546,7 @@
       "PP02-BubbleCradle.stl": "d0e44b1ce8fbecf8ba418104c004f6cc521f6e6111b81634ed09e13e21c9017c"
     }
   },
-  "current_preview_scope": "cable-passage-layout/head.png and PP06.png are current; other previews retain their stated revision",
+  "current_preview_scope": "assembly.png and bubble-gun-tail-height.png updated for tail35.9; other previews retain their stated revision",
   "cable_passage_layout": {
     "revision": "0.55",
     "conductor_count": 15,
@@ -27090,5 +27098,105 @@
     "passed": true,
     "limits": "Continuous geometric swept corridor and rigid maintenance checks only; flexible threading, wall strength, connectors and electrical operation remain unverified."
   },
-  "cable_passage_audit": "cable-passage-audit.json"
+  "cable_passage_audit": "cable-passage-audit.json",
+  "bubble_tail_height_audit": "bubble-tail-height-audit.json",
+  "bubble_tail_height": {
+    "date": "2026-10-26",
+    "revision": "0.56",
+    "baseline_files": {
+      "source/CyberTrack-design.FCStd": "6e23dc04aa6373d5b17067e34b847769f029b634a9cc095887700f79eaa543db",
+      "CyberTrack.FCStd": "a2f863a8b2e3dbd2dda314586d2dfbb0f02b62b303c8c1f062eeadfeb708cc86"
+    },
+    "source_document": "source/CyberTrack-design.FCStd",
+    "source_sha256": "9bc18b1a59777f05225d02513b2841d92ee98be380d1a608a54ed3b5e55fd366",
+    "delivery_sha256": "f4d01de42c2fa3abc3f9901597ec373d30088fc7465308a571f0b1cdd6bf5bcc",
+    "measurement": {
+      "component": "bubble-gun-tail-shell",
+      "date": "2026-10-26",
+      "unit": "mm",
+      "source": "User confirmed tail shell height 35.9 mm excluding the bottom tab, then requested updating the formal model while keeping the 6.8 mm tab unchanged.",
+      "tail_shell_height_mm": 35.9,
+      "includes_bottom_tab": false,
+      "bottom_tab_height_mm": 6.8,
+      "derived_support_to_tail_top_mm": 42.7,
+      "measurement_uncertainty_mm": null,
+      "model_interpretation": "Height is along the gun-local up direction, starting at the top of the existing bottom thin section. Retain current support datum, muzzle location, 15-degree assembly pitch and illustrative tail footprint.",
+      "retained_assumptions": {
+        "main_case_width_mm": 23,
+        "main_case_length_mm": 44,
+        "outer_side_extension_width_mm": 6,
+        "outer_side_extension_length_mm": 22,
+        "tab_centred_and_rear_flush": true
+      },
+      "historical_height": "The original overall height 35.8 mm is retained in ../../dimensions.json as historical input; it no longer determines the current tail envelope.",
+      "physical_fit_verified": false
+    },
+    "changed_source": [
+      "BubbleGunGearcase",
+      "BubbleGunInspectionEnvelope"
+    ],
+    "changed_delivery": [
+      "BubbleGunGearcase"
+    ],
+    "unchanged_signature_counts": {
+      "CyberTrack_design": 420,
+      "CyberTrack": 306
+    },
+    "unchanged_method": "All other object volume/area/topology/bounds signatures match; other gun pieces also compared by Boolean symmetric difference.",
+    "bottom_tab_unchanged": true,
+    "muzzle_and_mounts_unchanged": true,
+    "saved_and_reopened": true,
+    "local_case_bbox_mm": [
+      -11.5,
+      -67.0,
+      -13.650000000000002,
+      17.5,
+      -23.0,
+      22.249999999999993
+    ],
+    "world_case_bbox_mm": [
+      -72.5,
+      -101.80901828765279,
+      95.99562859340628,
+      -43.49999999999999,
+      -50.01667821175329,
+      142.06040374169476
+    ],
+    "shell_height_mm": 35.9,
+    "tab_height_mm": 6.8,
+    "support_to_tail_top_mm": 42.7,
+    "tail_solid_valid": true,
+    "tail_solids": 1,
+    "physical_collisions": [],
+    "equipment_route_overlaps": [],
+    "service_space_overlaps": [
+      {
+        "object": "BubbleGunBaseTool1",
+        "volume_mm3": 42.315330435912166
+      },
+      {
+        "object": "BubbleGunBaseTool2",
+        "volume_mm3": 21.15766521795549
+      }
+    ],
+    "clearances_mm": {
+      "PrintBubbleCradle": 0.2999999999999244,
+      "HeadShell": 24.38099994727695,
+      "ShoulderRailR": 10.399999999999963,
+      "KeelLid": 17.75149141252853,
+      "StopBody": 27.044481776296895,
+      "BubbleGunStopAccess": 1.499999999999993,
+      "PrintNeck": 32.35589532823164
+    },
+    "reserved_width_finger_space_overlap_mm3": 159.69320324990633,
+    "existing_muzzle_conflict_mm3": 65.1131815957141,
+    "geometry_and_export_checks_passed": true,
+    "assembly_fit_passed": false,
+    "service_paths_revalidated": false,
+    "physical_fit_verified": false,
+    "manufacturing_released": false,
+    "independent_revision": "components/bubble-gun/revisions/tail-height-2026-10-26",
+    "independent_readback_sha256": "f7997efea3ca8028d157da7c1f8b1c88987db7ec11392663833c606cd513b07b",
+    "historical_component_assets_unchanged": true
+  }
 }

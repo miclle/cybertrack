@@ -1,0 +1,229 @@
+{
+  "historical_user_dimensions_mm": {
+    "outermost_muzzle_circle_diameter": 31.5,
+    "overall_body_height": 35.8,
+    "overall_body_length": 67
+  },
+  "tail_height_revision": {
+    "component": "bubble-gun-tail-shell",
+    "date": "2026-10-26",
+    "unit": "mm",
+    "source": "User confirmed tail shell height 35.9 mm excluding the bottom tab, then requested updating the formal model while keeping the 6.8 mm tab unchanged.",
+    "tail_shell_height_mm": 35.9,
+    "includes_bottom_tab": false,
+    "bottom_tab_height_mm": 6.8,
+    "derived_support_to_tail_top_mm": 42.7,
+    "measurement_uncertainty_mm": null,
+    "model_interpretation": "Height is along the gun-local up direction, starting at the top of the existing bottom thin section. Retain current support datum, muzzle location, 15-degree assembly pitch and illustrative tail footprint.",
+    "retained_assumptions": {
+      "main_case_width_mm": 23,
+      "main_case_length_mm": 44,
+      "outer_side_extension_width_mm": 6,
+      "outer_side_extension_length_mm": 22,
+      "tab_centred_and_rear_flush": true
+    },
+    "historical_height": "The original overall height 35.8 mm is retained in ../../dimensions.json as historical input; it no longer determines the current tail envelope.",
+    "physical_fit_verified": false
+  },
+  "rear_bottom_tab": {
+    "component": "bubble-gun-rear-bottom-tab",
+    "recorded_date": "2026-10-24",
+    "unit": "mm",
+    "source": "User-provided rear-bottom tab dimensions, 2026-10-24",
+    "dimensions": {
+      "width": 6,
+      "length": 25,
+      "height": 6.8
+    },
+    "coordinate_orientation": {
+      "width": "across body, candidate interpretation",
+      "length": "along body, candidate interpretation",
+      "height": "height of rear-bottom thin section; user explicitly says not an extra downward protrusion"
+    },
+    "position_relative_to_muzzle": {
+      "status": "design assumption, not user-confirmed",
+      "centred_laterally": true,
+      "rear_end_flush_with_body_tail": true
+    },
+    "included_in_overall_height_35_8": true,
+    "measurement_uncertainty": null,
+    "requested_mount": "front circular ring plus rear tab locating slot",
+    "notes": [
+      "User correction: 6.8 mm is the height of the rear-bottom thin section, not an added downward tab.",
+      "Retain overall height35.8; narrow the bottom6.8 of the rear25 into a width6 tab; adjacent case profile remains illustrative.",
+      "Centred tab and flush rear end are design assumptions; no positions inferred from photo scale."
+    ],
+    "resting_plane_measurement": {
+      "muzzle_circle_bottom_above_plane_mm": 4.7,
+      "source": "user additional measurement,2026-10-24",
+      "candidate_muzzle_centre_above_plane_mm": 20.45,
+      "candidate_plane_to_muzzle_top_mm": 36.2,
+      "difference_from_reported_overall_height_mm": 0.4,
+      "interpretation": "Use new resting-plane measurement for mounting datum with muzzle axis horizontal; retain earlier overall35.8 as conflicting source, not corrected measurement."
+    },
+    "requested_stepped_slot": {
+      "rear_length_mm": 25,
+      "rear_nominal_width_mm": 6,
+      "front_nominal_width_mm": 10,
+      "front_length_mm": null,
+      "source": "User mount-design request: rear25 long/6 wide; front10 wide",
+      "front_length_candidate_mm": 19,
+      "front_length_basis": "illustrative67 overall minus23 front cylinder minus25 rear tab; not measured",
+      "total_width_clearance_candidate_mm": 0.4
+    }
+  },
+  "local_coordinates": "muzzle end centre at origin; +Y faces outward; body extends to -Y; +Z up",
+  "assumptions": {
+    "reserved_width_mm": 35.8,
+    "shell_length_mm": 23,
+    "shell_wall_mm": 1.5,
+    "wheel_ring_count": 5,
+    "wheel_ring_outer_radius_mm": 4.3,
+    "wheel_ring_inner_radius_mm": 3.3,
+    "wheel_ring_centres_radius_mm": 9.1,
+    "motor_radius_mm": 7,
+    "motor_length_mm": 25,
+    "motor_origin_mm": [
+      -3,
+      -48,
+      -1
+    ],
+    "case_width_mm": 23,
+    "case_shell_height_mm": 35.9,
+    "side_case_shell_size_xyz_mm": [
+      6,
+      22,
+      35.9
+    ],
+    "side_case_shell_origin_mm": [
+      11.5,
+      -55,
+      -13.65
+    ],
+    "vent_slot_size_xyz_mm": [
+      4,
+      3,
+      7
+    ],
+    "vent_y_mm": [
+      -21,
+      -16,
+      -11
+    ],
+    "all_internal_dimensions_and_positions": "Except the user-confirmed tail height, widths, lengths and internal geometry remain illustrative, not inferred measurements."
+  },
+  "objects": [
+    {
+      "name": "BubbleGunShell",
+      "bbox_mm": [
+        -15.75,
+        -23.0,
+        -15.75,
+        15.75,
+        0.0,
+        15.75
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleGunWheel",
+      "bbox_mm": [
+        -12.954614398285896,
+        -2.0000001,
+        -11.662054748812022,
+        12.954614398285896,
+        -0.4999999,
+        13.400000099999998
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleGunMotor",
+      "bbox_mm": [
+        -10.0,
+        -48.0,
+        -8.0,
+        4.0,
+        -23.0,
+        6.0
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleGunGearcase",
+      "bbox_mm": [
+        -11.5,
+        -67.0,
+        -13.650000000000002,
+        17.5,
+        -23.0,
+        22.249999999999993
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleGunMountingTab",
+      "bbox_mm": [
+        -3.0,
+        -67.0,
+        -20.450000000000003,
+        3.0,
+        -42.0,
+        -13.650000000000002
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    },
+    {
+      "name": "BubbleGunFrontFoot",
+      "bbox_mm": [
+        -5.0,
+        -42.0,
+        -20.450000000000003,
+        5.0,
+        -23.0,
+        -13.650000000000002
+      ],
+      "valid": true,
+      "symmetric_difference_mm3": 0.0
+    }
+  ],
+  "actual_model_bbox_mm": [
+    -15.75,
+    -67.0,
+    -20.450000000000003,
+    17.5,
+    0.0,
+    22.249999999999993
+  ],
+  "inspection_bbox_mm": [
+    -17.9,
+    -67.0,
+    -20.450000000000003,
+    17.9,
+    0.0,
+    22.249999999999993
+  ],
+  "step_readback": {
+    "valid": true,
+    "volume_difference_mm3": 0.0015551936885458417,
+    "solid_count": 6
+  },
+  "input_sha256": {
+    "../../dimensions.json": "a226b43327210930ce97e20bf6e5f9b923c0a36fada5c5105b8fc68883bd66d9",
+    "../../sources.json": "60977bfb918a679494d26dff1db7d84d9c82043fb2bc3b27f70b853199c267cc",
+    "../../mounting-tab-dimensions.json": "66676ded572e134ae109bff2b46d93b98b94b133d0ff5d4b17ef71102fbc4d94",
+    "dimensions.json": "1570092ed9b41dcdcf2b33ce2afb75f39924fd82000a8d8a209e521f3465aed2"
+  },
+  "files_sha256": {
+    "BubbleGun.FCStd": "fea38ca57b5a724d2e50474a1f8fe943fdde058128c7e4389cb14a10fd05117c",
+    "BubbleGun.step": "98eeee4caa6e6c8a75be7a33971a2284b592b7fa2729890b6d3f3a97b7a965e1"
+  },
+  "maximum_width_measured": false,
+  "mounts_designed": false,
+  "physical_fit_verified": false
+}

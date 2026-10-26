@@ -27,8 +27,28 @@ pp02=json.loads((MODEL/'pp02-adjustment-audit.json').read_text())
 DETAILS=json.loads((DATA/'assembly-details.json').read_text())
 source=MODEL/meta['source_document']
 delivery=MODEL/'CyberTrack.FCStd'
-assert sha(source)==meta['source_sha256']==DETAILS['source_sha256']==pp02['source_sha256']
-assert sha(delivery)==pp02['delivery_sha256']
+assert sha(source)==meta['source_sha256']==DETAILS['source_sha256']
+delivery_hash=sha(delivery)
+tail=None
+pre_tail_source,pre_tail_delivery=meta['source_sha256'],delivery_hash
+if report.get('bubble_tail_height_audit'):
+    tail=json.loads((MODEL/report['bubble_tail_height_audit']).read_text())
+    assert tail['geometry_and_export_checks_passed'] and tail['bottom_tab_unchanged'] and tail['saved_and_reopened']
+    assert tail['source_sha256']==meta['source_sha256'] and tail['delivery_sha256']==delivery_hash
+    assert tail['shell_height_mm']==35.9 and tail['tab_height_mm']==6.8
+    assert set(tail['changed_source'])=={'BubbleGunGearcase','BubbleGunInspectionEnvelope'}
+    pre_tail_source=tail['baseline_files'][meta['source_document']]
+    pre_tail_delivery=tail['baseline_files']['CyberTrack.FCStd']
+cable=None
+if report.get('cable_passage_audit'):
+    cable=json.loads((MODEL/report['cable_passage_audit']).read_text())
+    assert cable['scope_passed'] and cable['saved_and_reopened'] and cable['checks']['passed']
+    assert cable['source_sha256']==pre_tail_source and cable['delivery_sha256']==pre_tail_delivery
+    assert cable['baseline_files'][meta['source_document']]==pp02['source_sha256']
+    assert cable['baseline_files']['CyberTrack.FCStd']==pp02['delivery_sha256']
+    assert not any(n.startswith(('Bubble','PrintBubble')) for n in cable['changed_source'])
+else:
+    assert pre_tail_source==pp02['source_sha256'] and pre_tail_delivery==pp02['delivery_sha256']
 assert pp02['geometry_and_export_checks_passed']
 assert pp02['ring']['bore_diameter_mm']==32 and pp02['ring']['notch_width_mm']==7.5
 assert pp02['ring']['notch_depth_mm']==2.3 and pp02['ring']['foot_width_mm']==20
@@ -37,7 +57,7 @@ assert cad_checks_passed or args.allow_review_conflicts,'Use --allow-review-conf
 expected_names={o['name'] for o in report['source_feature_objects']}|{o['name'] for o in report['print_consolidation']['parts']}
 assert set(DETAILS['objects'])==set(meta['objects'])==expected_names
 assert not {'BubbleGunSlotWall1','BubbleGunSlotWall6'} & expected_names
-CATALOG,CATALOG_SHEETS=build_catalog(DETAILS['objects'])
+CATALOG,CATALOG_SHEETS=build_catalog(DETAILS['objects'],cable_passage=bool(cable),tail_height=bool(tail))
 # 7 overview/dimension pages, 14 system pages, 2 control details, 1 evidence page.
 FRONT_PAGES=24
 TOTAL_PAGES=FRONT_PAGES+1+len(CATALOG_SHEETS)
@@ -55,6 +75,8 @@ c.setAuthor('CyberTrack')
 c.setSubject('Current native CAD review; known PP02 fit conflict; not manufacturing release')
 page=0
 projection_keys=set()
+color_views=json.loads((DATA/'colors/manifest.json').read_text())
+assert color_views['source_sha256']==meta['source_sha256']
 def text(x,y,s,size=10,color=INK,bold=False,align='left'):
     c.setFillColor(color);c.setFont('ZHB' if bold else 'ZH',size)
     getattr(c,{'left':'drawString','center':'drawCentredString','right':'drawRightString'}[align])(x*U,y*U,s)
@@ -91,13 +113,13 @@ def drawing(key,cx,cy,scale=1):
     b=d['bounds']
     mx,my=(b[0]+b[2])/2,(b[1]+b[3])/2
     def pt(x,y):return (cx+(x-mx)*scale,cy+(y-my)*scale)
-    c.setStrokeColor(INK);c.setLineWidth(.35)
-    for path in d['paths']:
-        if len(path)<2:continue
-        p=c.beginPath();x,y=pt(*path[0]);p.moveTo(x*U,y*U)
-        for v in path[1:]:
-            x,y=pt(*v);p.lineTo(x*U,y*U)
-        c.drawPath(p)
+    color=color_views['views'][key]
+    image_path=DATA/color['image']
+    assert color['source_sha256']==meta['source_sha256'] and color['render_revision']==2
+    assert color['projection_sha256']==sha(DATA/f'{key}.json')
+    assert color['image_sha256']==sha(image_path), f'Stale colour image: {key}'
+    x0,y0=pt(*color['bounds'][:2]);x1,y1=pt(*color['bounds'][2:])
+    c.drawImage(str(image_path),x0*U,y0*U,(x1-x0)*U,(y1-y0)*U)
     return pt,b
 
 def arrow(x,y,angle,color=BLUE):
@@ -159,12 +181,12 @@ def block(x,y,heading,body,w=180):
     text(x,y,heading,12,bold=True)
     return para(x,y-9,body,w,10,6)-8
 
-header('整机装配与维护 · 当前模型','从当前保存的原生 CAD 重建全部线稿与逐项图卡；图纸用作结构评审，尺寸不含制造公差。')
+header('整机装配与维护 · 当前模型','从当前保存的原生 CAD 重建彩色实体视图与逐项图卡；图纸用作结构评审，尺寸不含制造公差。')
 fitted('iso',116,149,186,171)
 text(116,48,'整机轴测 · +X 向左 / +Y 向后 / +Z 向上',9,MUTED,align='center')
 y=233
-y=block(224,y,'本版状态','主模型：0.54 + PP02-2026-10-26。\n已包含辰克5 V电池包、六件合并打印件、\n顶盖电源开关、肩梁BOOT按钮及最新PP02。',176)
-y=block(224,y,'关键更新','PP02：孔Ø32，孔心局部上移1.3；\n支脚宽20；底部贯穿缺口7.5×2.3。\n删除指定前长槽壁与横挡块，对侧保留。',176)
+y=block(224,y,'本版状态',('主模型：0.56 + PP02配合待解决。\n已含尾壳35.9、15芯净径10通道、\n六件合并打印件、电源开关和BOOT按钮。' if tail else '主模型：0.55 + PP02配合待解决。\n已含15芯净径10通道、六件合并打印件、\n顶盖电源开关、肩梁BOOT按钮及最新PP02。' if cable else '主模型：0.54 + PP02-2026-10-26。\n已包含辰克5 V电池包、六件合并打印件、\n顶盖电源开关、肩梁BOOT按钮及最新PP02。'),176)
+y=block(224,y,'关键更新',('尾壳35.9不含底部薄片6.8；\n承托面至尾顶42.7为推导，15°姿态保持。\nPP02偏心孔Ø32及7.5×2.3缺口保持。' if tail else 'PP02：孔Ø32，孔心局部上移1.3；\n支脚宽20；底部贯穿缺口7.5×2.3。\n删除指定前长槽壁与横挡块，对侧保留。'),176)
 y=block(224,y,'配合状态','CAD实体和导出检查通过；PP02仍与现有\n泡泡枪示意外壳相交。装拆路径未重新通过，\n不得以此图册作为配合或制造放行。',176)
 block(224,y,'读图顺序',f'2-4 六向尺寸；5 打印划分；6-7 PP02详图。\n8-21 分系统装配；22-23 开关与BOOT。\n24 证据与维护边界；25 索引；26起逐项图卡。',176)
 end()
@@ -173,7 +195,7 @@ for a,b,title_text,suba,subb in [
     ('front','rear','正面与背面 · 整机几何尺寸','正面：沿+Y观察；+X在右','背面：沿-Y观察；+X在左'),
     ('side','right','左右侧视 · 当前设备布局','左侧：沿-X观察；前方在左','右侧：沿+X观察；前方在右'),
     ('top','bottom','俯视与底视 · 当前装配位置','俯视：沿-Z观察；前方在下','底视：沿+Z观察；前方在下')]:
-    header(title_text,'六个方向均从当前源档消隐投影；合并打印件只出现一次，不重复叠加其源特征。')
+    header(title_text,'六个方向均保留当前源档零件颜色与透明度；合并打印件只出现一次，不重复叠加其源特征。')
     fitted(a,112,153,164,153,True);fitted(b,312,153,164,153,True)
     text(112,235,suba,11,bold=True,align='center');text(312,235,subb,11,bold=True,align='center')
     box(14,29,392,25,PALE)
@@ -233,6 +255,12 @@ NOTES={
 'N': [('一体桶座','两侧Ø25.5×70模块规划本体置于PP03一体桶座和完整环带。已取消分体夹环、夹环螺钉及顶部倒L压件；上取90，防脱保持待验。'),('效果承板','四板承板连接顶盖内柱；先拆底盖和电池、断开引线，再退4颗承板螺钉，整组下取100。机外退每个压框2颗螺钉后取板。'),('第三块P01','点火低压MOS位于前舱独立托架，两点吊装；先拆底盖和电池，断线并退2颗吊装螺钉后整组下取80。'),('证据边界','PCB厚度、无元件边、端子与固定强度仍为候选；本图仅描述机械装拆，不提供高压接线或通电试验步骤。')],
 'M': [('空间分类','本组表示工具、接线、避让和维护区域，不是采购或打印零件；部分路线用扫掠体表示，不能当作真实线缆。'),('当前可见路线','示意包含BOOT双线走廊及点火模块的预留路线。后者只记录路径空间，不是导线、电极或绝缘护罩。'),('维护','断开相关接口并收置柔性线路后再移动模块；整手、完整工具、线尾与端子尚未全部建模。'),('未完成','弯曲半径、护套、夹持、末端连接、线束填充和电气隔离需按实物补齐；不得把几何余量当作安全距离。')]
 }
+if cable:
+    NOTES['E'][1]=('走线','主线束从底盘中央净径10通道上行，在托盘下方向左转，再由面包板左侧上行；15芯预算已包含BOOT双线，上护口随弯道成形。')
+    NOTES['H'][1]=('浅托盘','主体105×90，内区101×86，底厚2.5；四孔中心X±57、Y-40/-5。前缘49×2让位；新增侧缘让位，主线束不再沿原后槽上行。')
+    NOTES['M'][1]=('当前可见路线','中央Ø10总空间预算包含15根导线，BOOT双线计入其中。点火预留路线单独显示；高压输出线不属于中央通道，图中空间不是实体线缆。')
+if tail:
+    NOTES['K'][1]=('尾壳与薄片','尾壳高35.9不含底部薄片6.8；承托至尾顶42.7为推导。枪口、薄片、底座与15°姿态保持。尾壳距槽壁0.30；实际宽度及BOOT指端空间仍须核对。')
 for group,(name,_,sequence) in SYSTEMS.items():
     header(group+' · '+name,sequence)
     fitted('system_'+group+'_iso',112,161,177,145)
@@ -291,9 +319,13 @@ audit=dict(revision=REVISION,date='2026-10-26',source_document=meta['source_docu
     merged_print_parts=6,merged_source_features=sum(bool(o.get('merged_into')) for o in CATALOG.values()),
     missing_objects=sorted(expected_names-set(CATALOG)),projection_count=len(projection_keys),
     all_projections_current=True,historical_raster_previews_used=False,
+    color_view_count=len(projection_keys),colors_from="native CAD face materials",
+    color_manifest_sha256=sha(DATA/"colors/manifest.json"),
+    cable_passage_audit_sha256=sha(MODEL/report['cable_passage_audit']) if cable else None,
+    bubble_tail_height_audit_sha256=sha(MODEL/report['bubble_tail_height_audit']) if tail else None,
     geometry_modified_by_pdf_generator=False,assembly_fit_passed=cad_checks_passed,
     pp02_adjustment_audit_sha256=sha(MODEL/'pp02-adjustment-audit.json'),
     physical_fit_verified=False,manufacturing_released=False,**catalog_result)
 (MODEL/'assembly-annotation-audit.json').write_text(json.dumps(audit,ensure_ascii=False,indent=2)+'\n')
-assert sha(source)==meta['source_sha256'] and sha(delivery)==pp02['delivery_sha256']
+assert sha(source)==meta['source_sha256'] and sha(delivery)==delivery_hash
 print(PDF);print('Pages:',page,'Cards:',audit['card_count'],'Objects:',len(CATALOG))

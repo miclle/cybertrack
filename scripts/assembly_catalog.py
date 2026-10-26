@@ -55,8 +55,16 @@ def family(name):
     return re.sub(r'[LR]$', '', name)
 
 
-def relation(name, obj, group):
+def relation(name, obj, group, cable_passage=False, tail_height=False):
     """Return assembly target and scope-limited installation note from current design."""
+    if tail_height and name=='BubbleGunGearcase':
+        return '泡泡枪尾部 → 底部薄片上缘','尾壳35.9不含薄片6.8，承托至尾顶42.7为推导；宽长轮廓仍为假设，枪口与15°姿态保持。尾壳距槽壁0.30；原圆环配合冲突保留。'
+    if tail_height and name=='BubbleGunInspectionEnvelope':
+        return '泡泡枪安装审查空间','高42.7为尾壳35.9加薄片6.8；宽35.8与全长等截面是假设。此预留包络占用BOOT指端空间，不代表实物尾壳相交。'
+    if cable_passage and name in ('PowerCableRoute','BaseCableGrommet','HeadCableGrommet','NeckCableBridge'):
+        return '底盘中央 → 颈架 → 板下左转 → 面包板左侧', '净径10通道按15芯预算（含BOOT双线）；上护口随弯道。先断开收置线束再取托盘，真实束径和接头穿越待验。'
+    if cable_passage and name=='ElectronicsTray':
+        return '头壳内部四支柱承台','4颗M2.5级侧耳螺钉；前缘49×2让位，主线束从板下转至左侧上行；先断线并收置，再上提85。'
     if obj.get('print_part_id'):
         notes={'PP01':'水枪底托与两处托管槽一体；枪体、软垫与肩梁独立。',
                'PP02':'偏心孔Ø32、孔心上移1.3；缺口7.5×2.3；支脚宽20。枪壳配合未通过。',
@@ -184,12 +192,12 @@ def relation(name, obj, group):
     raise ValueError('Missing assembly relationship: '+name)
 
 
-def build_catalog(objects):
+def build_catalog(objects, cable_passage=False, tail_height=False):
     groups = {k: OrderedDict() for k in SYSTEMS}
     entries = {}
     for index, (name, obj) in enumerate(sorted(objects.items()), 1):
         group=system(name,obj)
-        target,note=relation(name,obj,group)
+        target,note=relation(name,obj,group,cable_passage,tail_height)
         entries[name]={'id':f'CT{index:03d}', 'name':name, **obj,
                        'system':group,'target':target,'assembly_note':note}
         # Different instructions or targets must never be combined merely by name.
@@ -232,7 +240,7 @@ def render_catalog(api, entries, sheets):
         text(339,y,f'{ranges[g][0]}-{ranges[g][-1]}',10)
         api['c'].linkRect('',f'page-{ranges[g][0]}',
                           (14*api['U'],(y-3.5)*api['U'],406*api['U'],(y+8)*api['U']),relative=0,thickness=0)
-    para(20,64,'读图：图卡小图是保存模型的独立消隐轴测图，不是爆炸位移或实际比例。每项C为世界包围盒中心，S为世界包围盒尺寸X×Y×Z，均为mm；斜放件S不等于零件自身长宽高。',378,9,5)
+    para(20,64,'读图：图卡小图是保存模型的独立彩色轴测图，不是爆炸位移或实际比例。每项C为世界包围盒中心，S为世界包围盒尺寸X×Y×Z，均为mm；斜放件S不等于零件自身长宽高。',378,9,5)
     para(20,48,f"数量：{len(entries)}个CAD对象包含{sum(e['category']=='clearance' for e in entries.values())}个非实体空间；复合履带对象内有多实体，探头端面含分色对象。对象数和实体数均不直接作为采购数量。扬声器等面包板组内设备没有独立模型，仅由整组规划包络覆盖。",378,9,5)
     text(20,29,'蓝 / 橙色编号对应对象；固定方式未定处明确留项。几何覆盖完整不等于装配工艺、制造或实物验收完整。',9,muted)
     end()

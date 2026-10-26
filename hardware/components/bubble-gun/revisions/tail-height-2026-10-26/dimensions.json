@@ -1,0 +1,21 @@
+{
+  "component": "bubble-gun-tail-shell",
+  "date": "2026-10-26",
+  "unit": "mm",
+  "source": "User confirmed tail shell height 35.9 mm excluding the bottom tab, then requested updating the formal model while keeping the 6.8 mm tab unchanged.",
+  "tail_shell_height_mm": 35.9,
+  "includes_bottom_tab": false,
+  "bottom_tab_height_mm": 6.8,
+  "derived_support_to_tail_top_mm": 42.7,
+  "measurement_uncertainty_mm": null,
+  "model_interpretation": "Height is along the gun-local up direction, starting at the top of the existing bottom thin section. Retain current support datum, muzzle location, 15-degree assembly pitch and illustrative tail footprint.",
+  "retained_assumptions": {
+    "main_case_width_mm": 23,
+    "main_case_length_mm": 44,
+    "outer_side_extension_width_mm": 6,
+    "outer_side_extension_length_mm": 22,
+    "tab_centred_and_rear_flush": true
+  },
+  "historical_height": "The original overall height 35.8 mm is retained in ../../dimensions.json as historical input; it no longer determines the current tail envelope.",
+  "physical_fit_verified": false
+}
