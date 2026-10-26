@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-27",
+  "version": "2.0.3-ct21",
+  "scope": "Correct reversed assembled-chassis turns by mapping logical left to bridge B and right to A",
+  "basis": "User reports assembly mostly complete, turns reversed, other behavior normal; bridge identity inferred, not physically traced",
+  "motor_mapping": {
+    "left": {
+      "bridge": "B",
+      "gpio": [
+        11,
+        12,
+        13
+      ],
+      "ledc_channel": 3
+    },
+    "right": {
+      "bridge": "A",
+      "gpio": [
+        8,
+        9,
+        10
+      ],
+      "ledc_channel": 2
+    }
+  },
+  "motor_pwm": {
+    "duty": 204,
+    "resolution_bits": 8,
+    "frequency_hz": 1000,
+    "logical_output_magnitude": 80
+  },
+  "checks": {
+    "regression_rejects_old_mapping": "passed (output_test assertion failed before driver fix)",
+    "host_sanitizers": "passed",
+    "output_transition_and_fault_matrix": "passed (56 states, including independent left/right outputs)",
+    "web_ui": "passed",
+    "mcp_arguments_and_http_handlers": "passed",
+    "exported_driver_and_guard_match": "passed",
+    "esp_idf_build": "passed (ESP-IDF v5.5.1)"
+  },
+  "source_sha256": {
+    "action_outputs.h": "b03261e3b145b4282a1ebec49ac8ea04ac481daff8b4714ec5bd0abbad48446f",
+    "action_guard.h": "c24414da6900f73271afabf69ed41a5c490b1d41515a5379c54163cb39a69c50",
+    "apply_overlay.py": "e374f9fee4aa69967c95c30d446b8358eff23f226904a261c2847a895c6a3b6a",
+    "tests/output_test.cc": "e4ca4cfefb4be93ca04be70e44b9aa0f0549115219eb7f7d6063d99351e0d836"
+  },
+  "flashed": true,
+  "physical_actuation_tested": true,
+  "limitations": [
+    "Four-direction behavior confirmed by user observation; no independent instrumentation.",
+    "User report is not quantitative load, stop-distance, current, thermal or full-system acceptance."
+  ],
+  "artifact": {
+    "path": "build/firmware-ct21/xiaozhi.bin",
+    "bytes": 2608496,
+    "sha256": "95e9d4fbaad03f00791612c6624fb21ea267e41202c673907d43769d96f8f4b1"
+  },
+  "deployment_record": "startup-ct21.json",
+  "physical_validation": {
+    "date": "2026-10-27",
+    "evidence_type": "user_reported_physical_observation",
+    "user_report": "测试了，现在左转和右转都正常了，前进后退也没问题。",
+    "results": {
+      "left": "passed",
+      "right": "passed",
+      "forward": "passed",
+      "backward": "passed"
+    },
+    "limitations": [
+      "No quantified stopping distance, current or thermal measurements were provided.",
+      "Bridge identity was not independently traced."
+    ]
+  }
+}

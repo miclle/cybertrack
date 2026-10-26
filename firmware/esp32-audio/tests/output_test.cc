@@ -53,7 +53,8 @@ int main() {
         reset();fail_at=at;AudioActionOutputs x;assert(!x.Init()&&x.fault);off();
         assert(!x.Apply(true,80,80));off();
     }
-    const State base_states[]={{false,0,0},{true,0,0},{false,80,80},{true,80,80},
+    const State base_states[]={{false,80,0},{false,0,80},{false,-80,0},{false,0,-80},
+        {false,0,0},{true,0,0},{false,80,80},{true,80,80},
         {false,-80,-80},{true,-80,-80},{false,-80,80},{true,-80,80},{false,80,-80},{true,80,-80}};
     std::vector<State> states;
     for(auto state:base_states) for(bool b:{false,true}) for(bool i:{false,true}) {
@@ -65,9 +66,10 @@ int main() {
         assert(x.Apply(to.water,to.left,to.right,to.bubbles,to.ignition));
         const unsigned transition_calls=calls;
         assert(levels[18]==to.water && levels[17]==to.bubbles && levels[21]==to.ignition);
-        assert(pwm[2]==(to.left?204:0)&&pwm[3]==(to.right?204:0));
-        assert(levels[9]==(to.left>0)&&levels[10]==(to.left<0));
-        assert(levels[12]==(to.right>0)&&levels[13]==(to.right<0));
+        // Assembled chassis: A drives right, B drives left; positive stays forward.
+        assert(pwm[2]==(to.right?204:0)&&pwm[3]==(to.left?204:0));
+        assert(levels[9]==(to.right>0)&&levels[10]==(to.right<0));
+        assert(levels[12]==(to.left>0)&&levels[13]==(to.left<0));
         if(from.left==to.left&&from.right==to.right) assert(motor_writes==0);
         if(from.water==to.water) assert(water_writes==0);
         if(from.bubbles==to.bubbles) assert(bubbles_writes==0);
@@ -81,5 +83,5 @@ int main() {
     }
     reset();AudioActionOutputs x;assert(x.Init());assert(x.Apply(true,80,80));
     assert(!x.Apply(true,30,80)&&x.fault);off();
-    std::cout << "PASS: actual output driver 40-state concurrent transition matrix, untouched-lane continuity, disable-before-direction, all init/transition API failures and latched global shutdown\n";
+    std::cout << "PASS: actual output driver 56-state concurrent transition matrix, A/right B/left mapping, untouched-lane continuity, disable-before-direction, all init/transition API failures and latched global shutdown\n";
 }
