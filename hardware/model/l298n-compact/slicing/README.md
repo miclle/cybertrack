@@ -1,8 +1,10 @@
 # 14 件底盘配套件共盘打印
 
-**当前打印入口：** [34 件六盘项目](../../print-ready/README.md)。本页为优化过程记录；重复独立工程和原始 G-code 已清理，参数、对比结果和检查报告保留。
+本页 14 件清单与 Generic PLA 耗时为历史快照；4 个效果板压框已取消，现行 Lean 第 2 盘为 10 件，使用 PLA Basic。旧压框导出已清理，历史参数及检查结果保留。
 
-使用 Accessories-14parts-P2S-PLA-FAST.3mf（历史中间文件 `Accessories-14parts-P2S-PLA-FAST.3mf`，已清理）。2026-10-26 从当前正式模型导出，原生几何未修改，零件保留独立对象，可在切片器中分别选择。
+**当前打印入口：** [29 件 Lean 六盘项目](../../lean-print/README.md)。本页为优化过程记录；重复独立工程和原始 G-code 已清理，参数、对比结果和检查报告保留。
+
+历史候选 Accessories-14parts-P2S-PLA-FAST.3mf（历史中间文件 `Accessories-14parts-P2S-PLA-FAST.3mf`，已清理）。2026-10-26 从当时正式模型导出，原生几何未修改，零件保留独立对象，可在切片器中分别选择。
 
 **一盘 14 件，预计 4 小时 58 分钟、148.42 g PLA。** 同一排版的普通配置为约 5 小时 22 分钟、159.29 g；优化节省约 23 分钟（7.2%）、10.88 g。底盖翻面、沉孔朝上，减少沉孔内支撑；仍保留原有固定壁线方式。树状支撑候选与颈架／L298N 托架冲突，未采用。
 
@@ -20,10 +22,10 @@
 | 8 | 左肩梁 | 1 | [STL](print-stls/ShoulderRailL.stl) |
 | 9 | 右肩梁（含 BOOT 安装座） | 1 | [STL](print-stls/ShoulderRailR.stl) |
 | 10 | 颈部线束限位桥 | 1 | [STL](print-stls/NeckCableBridge.stl) |
-| 11 | 左 MOS 板压框 | 1 | [STL](print-stls/EffectRetainerLMOS.stl) |
-| 12 | 左降压板压框 | 1 | [STL](print-stls/EffectRetainerLBuck.stl) |
-| 13 | 右 MOS 板压框 | 1 | [STL](print-stls/EffectRetainerRMOS.stl) |
-| 14 | 右降压板压框 | 1 | [STL](print-stls/EffectRetainerRBuck.stl) |
+| 11 | 左 MOS 板压框 | 1 | `EffectRetainerLMOS.stl`（历史文件已清理，可从对应 Git 修订恢复） |
+| 12 | 左降压板压框 | 1 | `EffectRetainerLBuck.stl`（历史文件已清理，可从对应 Git 修订恢复） |
+| 13 | 右 MOS 板压框 | 1 | `EffectRetainerRMOS.stl`（历史文件已清理，可从对应 Git 修订恢复） |
+| 14 | 右降压板压框 | 1 | `EffectRetainerRBuck.stl`（历史文件已清理，可从对应 Git 修订恢复） |
 
 电池内托板内部放入 4 个独立压框，原生实体检查净距分别为 3.2／4.0 mm，没有材料相交；这些零件仍各自打印，不融合成一体。拆除 brim 后分开。压框对应现有低压板卡的机械安装候选，接触位置与实际板边仍需试装；不包含软垫、金属螺母、嵌件或任何接线。
 
@@ -41,7 +43,7 @@
 
 已查看下方首层工具路径图，并核对 14 件均生成模型挤出及末层高度。4 个名义厚 1.2 mm 小压框的末层为 1.16 mm（层高离散误差 0.04 mm）；其他零件末层与网格总高一致至约 0.001 mm。未进行 GUI 全层巡视；这些检查不证明实物强度、层间结合、螺纹配合或支撑可拆性，薄侧框拆 brim 时应托住。
 
-底盘主体 PP04 继续使用原快速版独立一盘（历史中间文件 `PP04-P2S-PLA-FAST.3mf`，已清理）。本盘未装入头壳、冠盖、背包和水枪底托等较大件；泡泡枪底座 PP02 有已知配合问题，顶盖 LC04 保留三个实体，均未混入。成品履带与电机、金属紧固件、柔性衬垫和纯检查包络不作为 PLA 打印件。
+底盘主体 PP04 继续使用原快速版独立一盘（历史中间文件 `PP04-P2S-PLA-FAST.3mf`，已清理）。该历史盘未装入头壳、冠盖、背包和水枪底托等较大件；当时 PP02 有配合问题，LC04 有三个实体，均未混入；后续[四件修正](../../remaining-print/README.md)已消除 PP02 名义静态干涉并将 LC04 连成单实体，现已纳入 Lean。成品履带与电机、金属紧固件、柔性衬垫和纯检查包络不作为 PLA 打印件。
 
 CLI 沿用的 P2S 官方结束代码仍产生 T65535 诊断，与此前 VF01／PP04 配置一致；切片返回成功。本次没有发送或启动打印。
 
