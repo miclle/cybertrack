@@ -10,6 +10,7 @@ from pathlib import Path
 import FreeCAD as App
 import Part
 import TechDraw
+from assembly_catalog import system
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'tmp/pdfs'
@@ -23,8 +24,10 @@ if tree_path.exists():
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 source_hash = sha(source)
 doc = App.openDocument(str(source))
-objects = [o for o in doc.Objects if hasattr(o, 'Category')]
-visible = [o for o in objects if o.Category not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')]
+objects = [o for o in doc.Objects if hasattr(o, 'Category') or hasattr(o,'PrintPartID')]
+consumed={s.Name:o.PrintPartID for o in objects if hasattr(o,'PrintPartID') for s in o.Shapes}
+def category(o):return getattr(o,'Category','merged_print_part')
+visible = [o for o in objects if o.Name not in consumed and (category(o) not in ('envelope','clearance') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR'))]
 by_name = {o.Name: o for o in objects}
 V = App.Vector
 # Columns of each matrix define an explicit world-to-page mapping. Front page
@@ -139,48 +142,32 @@ for o in objects:
     b=o.Shape.optimalBoundingBox(False)
     bounds[o.Name]={'label':o.Label,'bbox':[b.XMin,b.YMin,b.ZMin,b.XMax,b.YMax,b.ZMax]}
 (OUT/'dimensions.json').write_text(json.dumps({'source_document':str(source.relative_to(ROOT/'hardware/model')),'source_sha256':source_hash,'objects':bounds},ensure_ascii=False,indent=2))
-for view in ('front','rear','side','right','top','bottom'):
-    project(view, [o.Name for o in visible], view)
-for key,names,view in [
-    ('top_feed_top',['WaterModule','BubbleModule','WaterPod','BubblePod','BackpackShell','WaterRetentionBand','BubbleRetentionBand','WaterHoseRoute','BubbleGunHoseRoute'],'top'),
-    ('top_feed_side',['WaterModule','BubbleModule','WaterPod','BubblePod','BackpackShell','WaterRetentionBand','BubbleRetentionBand','WaterHoseRoute','BubbleGunHoseRoute'],'side'),
-    ('rear_armor_rear',['RearBaseArmor'],'rear'),
-    ('rear_armor_side',['RearBaseArmor'],'side'),
-    ('ultrasonic_front',['UltrasonicRingL','UltrasonicFaceL','UltrasonicRingR','UltrasonicFaceR','SensorStatusStrip'],'front'),
-    ('ultrasonic_side',['SensorMask','UltrasonicRingL','UltrasonicFaceL','UltrasonicRingR','UltrasonicFaceR','UltrasonicPCBEnvelope','UltrasonicRearEnvelope','UltrasonicTopConnector'],'side'),
-    ('controller_top',['BreadboardEnvelope','ElectronicsTray'],'top'),
-    ('controller_front',['BreadboardEnvelope','ElectronicsTray'],'front'),
-    ('crown_effect_plan',['CrownFinL','CrownEffectInsetL','CrownEffectMarkLFront','CrownEffectMarkLRear'],'top'),
-    ('breadboard_plan',['HeadShell','ElectronicsTray','BreadboardEnvelope'],'top'),
-    ('battery',['BatteryHatch','PowerBank','BatteryPullStrap'],'bottom'),
-    ('tray',['ElectronicsTray'],'top'),
-    ('crown',[o.Name for o in objects if getattr(o,'ServiceGroup','')=='crown'],'top'),
-    ('fill_lid',['WaterRetentionBand','WaterStrapClosure'],'side'),
-    ('fill_plug',['WaterModule'],'side'),
-    ('fill_seal',['WaterBottomPad'],'side'),
-    ('fill_cap',['WaterPod'],'side'),
-    ('fill_cap_top',['WaterPod'],'top'),
-    ('fill',['WaterPod','WaterModule','WaterBottomPad','WaterRetentionBand','WaterStrapClosure'],'side'),
-    ('power_side',['PowerBank','BatteryHatch','BatteryPullStrap','BottomServiceCover'],'side'),
-]:
-    project(key,names,view)
-project('drive_face',['LowerTub'],'side',clip=[73.3,-36,28,87.01,36,73])
-project('drive_bottom',['LowerTub','BottomServiceCover']+[o.Name for o in objects if o.Name.startswith('BottomCoverScrew')],'bottom')
-project('drive_cover',['BottomServiceCover'],'bottom')
-
-# Individually isolated, hidden-line-removed shapes for exhaustive assembly cards.
-# Preserve CAD object identity: a compound is not a procurement quantity.
-details = {}
+for view in ('iso','front','rear','side','right','top','bottom'):
+    project(view,[o.Name for o in visible],view)
+# Current subassemblies use the merged print part once, with separate equipment.
+for group in 'ABCDEFGHIJKLNM':
+    names=[o.Name for o in objects if o.Name not in consumed and system(o.Name,{'category':category(o)})==group
+           and (category(o)!='clearance' or o.Name.startswith(('IgnitionRoute','StopSignalRoute')))]
+    if group=='N':names += ['PrintBackpack']
+    if not names:continue
+    for view in ('iso','top'):
+        project('system_'+group+'_'+view,names,view)
+for view in ('front','side','top','iso'):
+    project('pp02_'+view,['PrintBubbleCradle'],view)
+# Unpitch only the projection copy for direct ring/notch dimensions.
+from gun_pitch import moved
+ring_before=doc.BubbleGunRing.Shape.copy()
+try:
+    doc.BubbleGunRing.Shape=moved(ring_before,'bubble',inverse=True)
+    project('pp02_ring_local',['BubbleGunRing'],'front')
+finally:doc.BubbleGunRing.Shape=ring_before
+# Every source feature and every merged part gets an isolated current CAD card.
+details={}
 for o in objects:
-    project('part_'+o.Name, [o.Name], 'iso')
-    details[o.Name] = {
-        **bounds[o.Name], 'category': o.Category, 'solids': len(o.Shape.Solids),
-        'evidence': getattr(o, 'EvidenceBasis', ''),
-        'service_group': getattr(o, 'ServiceGroup', ''),
-    }
-(OUT/'assembly-details.json').write_text(json.dumps({
-    'source_sha256': source_hash, 'objects': details,
-}, ensure_ascii=False, indent=2))
-
-assert source_hash==sha(source), 'Source CAD changed during readback'
+    project('part_'+o.Name,[o.Name],'iso')
+    details[o.Name]={**bounds[o.Name],'category':category(o),'solids':len(o.Shape.Solids),
+                     'evidence':getattr(o,'EvidenceBasis',''),'service_group':getattr(o,'ServiceGroup',''),
+                     'print_part_id':getattr(o,'PrintPartID',''),'merged_into':consumed.get(o.Name,'')}
+(OUT/'assembly-details.json').write_text(json.dumps({'source_sha256':source_hash,'objects':details},ensure_ascii=False,indent=2))
+assert source_hash==sha(source),'Source CAD changed during readback'
 App.closeDocument(doc.Name)

@@ -44,7 +44,7 @@
 
 - [CyberTrack.FCStd](CyberTrack.FCStd)：主要设计文件，中文对象树；设备包络及服务／天线审查区默认隐藏；点火走线例外，单列“07 点火线走线（橙色空间）”组并默认显示。
 - [CyberTrack.step](CyberTrack.step)：不含设备包络及审查区的布局交换文件；严格体积比较未通过，以 FCStd 为几何依据，不宣称曲面等价。
-- [0.50 总装与检修图纸 PDF](CyberTrack-assembly-and-service.pdf)：保留为合并前的特征级参考，0.51打印边界与连接筋见[合并打印图册](print-parts/print-parts.pdf)。72页A3横向；第1–29页为当前装配／检修图，第30页为MT3608专页，第31页为可点击系统索引，第32–72页为242张图卡，逐项覆盖412个CAD对象（含65个非实体空间）。每项含CT编号、独立消隐轴测图、CAD名称、安装位置／说明及坐标；对称件和重复紧固件合并。清理7页重复展示或历史对比，固定方式未定处明确保留，详见[装配说明](../../docs/assembly.md#全对象装配图纸2026-10-25)及[覆盖记录](assembly-annotation-audit.json)。用于结构评审，不是加工图。
+- [当前整机装配与维护 PDF](CyberTrack-assembly-and-service.pdf)：0.54 + PP02-2026-10-26，69页A3横向。全部线稿从当前原生源档重建，包含六向尺寸、六件合并打印、PP02冲突详图、分系统维护、电源开关和BOOT；第25页可点击索引，第26–69页为260张图卡，覆盖416个源对象与6个合并件（共422项，含66个非实体空间）。56个已合并源特征明确标记不可重复打印。PP02配合仍未通过；详见[装配说明](../../docs/assembly.md#全对象装配图纸2026-10-26)和[覆盖记录](assembly-annotation-audit.json)。
 - [面包板布局](breadboard-layout.png) · [俯视](breadboard-top.png) · [浅托盘](breadboard-tray.png) · [工具入口](breadboard-access.png) · [整盘上提](breadboard-service.png)：整组规划包络，组内元件与防脱保持待实测。
 - [保存回读报告](readback.json)：对象有效性、静态检查、导出与视图哈希、最终保存及显示状态。
 - [顶部效果位轴测](crown-effects.png) · [顶部效果位俯视](crown-effects-top.png)：两处后掠凹槽为效果位置占位，橙色块不是电极。
@@ -240,21 +240,21 @@ PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
 
 首次生成新的薄片版独立泡泡枪模型，随后校验并复用，保留旧三尺寸版本；会校验并保留独立水枪资产，更新整机模型、STEP、当前视图（含5张面包板专项；旧arc／controller／speaker预览已清理）与报告；静态、维护路径、面包板专项、水枪、泡泡枪、超声波、后护甲镜像、顶部供液、动力固定、双瓶或 L298N 专项失败时，脚本在写出报告后以非零状态退出。完整交付使用 `--render`。脚本重建会覆盖当前输出；手工修改 FCStd 前应保存副本，并同步参数、文档和验证。
 
-当前装配PDF仍为0.44，未包含0.45新增的8个前方效果线外观对象；当前外观以FCStd及本轮预览为准。
+当前装配PDF已按0.54 + PP02-2026-10-26的保存源档完整更新，包括前方效果外观、第三块P01托架、开关与BOOT；图纸本身不修改CAD或解除现有配合冲突。
 
 ## PDF 图纸再生成
 
-以下为旧装配图册的生成说明；`build_drawing_pdf.py`仍带0.44历史基线断言，不能用于直接重建0.51图册。本轮六件补充使用 `python3 scripts/build_print_parts_pdf.py`，在整机 `--render`生成和检查成功后运行。旧图册保留为0.50特征级参考。
-
-旧图纸以其生成时保存的 FCStd 为依据，不改动模型。矢量正投影由 FreeCAD 的遮挡线消隐生成，曲线显示容差设为 0.08 mm；标注尺寸来自精确几何边界与已核对的固定点。每个视图独立标明方向与比例，按 A3 原尺寸打印；打印缩放后仍以标注数字为准。当前没有制造公差、螺纹或物料定版，不能据此加工。
+整机图册与六件打印补充图册分别生成。整机图册只读取已保存模型，不运行整机几何重建；从`source/CyberTrack-design.FCStd`读取可编辑源特征与合并件，通过`model-tree-audit.json`和当前检查报告核对来源哈希。合并件在总装图中只出现一次，源特征另列图卡供识别。
 
 ```sh
 PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
 /Applications/FreeCAD.app/Contents/Resources/bin/python scripts/export_drawing_geometry.py
-python3 scripts/build_drawing_pdf.py
+python3 scripts/build_drawing_pdf.py --allow-review-conflicts
 ```
 
-当前图纸使用默认检查入口，要求静态、维护路径、面包板专项、水枪、泡泡枪、超声波、后护甲镜像、顶部供液、动力固定及 L298N 专项全部通过。`--allow-review-conflicts` 仅供生成明确标示失败的评审图，不会改变检查结果。第二步需要 ReportLab、Pillow 及 macOS 的 STHeiti 字体。矢量投影缓存写入 `tmp/pdfs/`，按原生模型 SHA-256 校验；PDF 脚本同时校验模型、STEP、本轮预览图及关键标注。模型修订后需复核图纸文字、特征标注和版面，再更新脚本的修订检查。交付文件为 `hardware/model/CyberTrack-assembly-and-service.pdf`，与原生模型一同管理；文件名明确表示总装与检修图纸，临时生成文件继续忽略。
+当前PP02与枪壳仍有干涉，因此必须显式使用`--allow-review-conflicts`生成标示失败的评审图册；默认入口会拒绝把它输出为全部检查通过的图册。此选项不会改变几何或检查结果。第二步使用ReportLab与macOS STHeiti字体。矢量消隐容差0.08 mm；投影缓存位于`tmp/pdfs/`，逐视图核对当前源档哈希。图册含书签、可点击系统索引和全对象图卡，覆盖／来源记录写入`assembly-annotation-audit.json`。
+
+交付文件为`CyberTrack-assembly-and-service.pdf`。生成后须渲染核对尺寸页、装拆说明和全部图卡，更新目录与页码。图纸无制造公差、材料及紧固件定版，不是加工放行；已合并源特征不重复打印。六件打印补充图册仍用`python3 scripts/build_print_parts_pdf.py`生成。
 
 本轮依据见[0.25 双托管槽与一体尾线导向鞍](../../docs/mechanical.md#025-双托管槽与一体尾线导向鞍)及[变更核对](archive/reports/water-gun-routing-audit.json)。[0.23 胶粘固定核对](archive/reports/water-gun-adhesive-audit.json)为历史记录。尾线导向鞍已直接并入 `WaterGunCradle`，不再有独立 `WaterGunLeadGuide`。双托管座分别命名为 `WaterGunHoseSupport`／`WaterGunHoseSupportRear`，制造合并需包含三者。旧 0.18 支架 STL 带压盖，不能作为当前水枪底托输出；试打包及专用导出脚本已移除。仓库当前没有可用于现行双枪支架的试打 STL 包，需按当前模型重新导出并验证。
 
