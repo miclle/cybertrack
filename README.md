@@ -6,6 +6,16 @@ CyberTrack 采用 ESP32-S3 面包板与灵矽语音交互，支持手机局域�
 
 [模型与图纸](hardware/model/README.md) · [打印候选](hardware/model/print-parts/README.md) · [面包板固件](firmware/esp32-audio/README.md) · [局域网控制](docs/lan-control.md) · [待办](TODO.md)
 
+## 样机演示
+
+**6 分钟实拍**：样机在地面上的移动、转向与泡泡效果展示。点击下方播放器即可播放。
+
+https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
+
+[下载原始视频](artifact/cybertrack-prototype-demo-6min.mp4) · [制作过程与全部素材](artifact/README.md)
+
+影像记录了制作与演示时的样机状态；具体固件、供电配置与工程验收以对应验证记录为准。
+
 ![CyberTrack 整机 CAD 装配候选](hardware/model/assembly.png)
 
 *0.53 CAD 装配候选；实物适配、打印工艺与整机带载尚未验收。*
@@ -82,6 +92,7 @@ ctest --test-dir build/firmware-host --output-on-failure
 ## 仓库结构
 
 ```text
+artifact/              制作过程照片、样机演示视频与素材索引
 docs/                  需求、决策、设计、接线与验证记录
 hardware/components/   独立部件模型、厂商资料与实测记录
 hardware/model/        整机 CAD、视图、装配图纸与检查报告
