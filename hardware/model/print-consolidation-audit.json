@@ -84,7 +84,7 @@
     "dry_side_unchanged": true
   },
   "physical_fit_verified": false,
-  "source_sha256": "b19c371fba3be2ac726707370cbdee50b6b57a9ae231ed87abe92b00eaf6af46",
+  "source_sha256": "6e23dc04aa6373d5b17067e34b847769f029b634a9cc095887700f79eaa543db",
   "parts": [
     {
       "id": "PP01",
@@ -332,11 +332,11 @@
       "feature_count": 19,
       "solids": 1,
       "valid": true,
-      "volume_mm3": 59691.27717491472,
+      "volume_mm3": 59240.620771303875,
       "size_xyz_mm": [
         68.0,
         50.0,
-        68.00000000000003
+        68.00000010000002
       ],
       "stl_translation_xyz_mm": [
         -0.0,
@@ -347,17 +347,18 @@
       "stl_connected_components": 1,
       "cad_boundary_shells": 1,
       "stl_nonmanifold": false,
-      "stl_facets": 6562,
+      "stl_facets": 7744,
       "step_geometry_equivalence_verified": false,
       "step_usage": "layout_exchange_only; use native FCStd for geometry",
-      "step_volume_difference_mm3": 0.00021914618992013857,
+      "step_volume_difference_mm3": 0.0003400131972739473,
       "step_volume_comparison_passed": true,
       "missing_source_volume_mm3": 0.0,
       "extra_volume_mm3": 0.0,
       "files": {
-        "PP06-Neck.step": "d3abc9738d67c857c978290b202a75406b696db223fd5fceedda132f7ffddb60",
-        "PP06-Neck.stl": "9e6738d9a99053a63f8ac82914502ea89617a7a0672124ac2021108968ab1966"
-      }
+        "PP06-Neck.step": "eeb832fb543ffe79e5762963b51181a2b8d04d6275f8d3e893330fc6b324a946",
+        "PP06-Neck.stl": "9be7b87874df7628f6e974dff1758945aa6765f642c02737bedb736cf4635f51"
+      },
+      "local_change_audit": "cable-passage-audit.json"
     }
   ],
   "source_feature_count": 56,
@@ -370,5 +371,6 @@
   "source_document": "source/CyberTrack-design.FCStd",
   "equivalent_delivery_audit": "model-tree-audit.json",
   "local_change_audit": "pp02-adjustment-audit.json",
-  "assembly_fit_passed": false
+  "assembly_fit_passed": false,
+  "cable_passage_change_audit": "cable-passage-audit.json"
 }

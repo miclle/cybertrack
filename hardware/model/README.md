@@ -1,5 +1,7 @@
 # CyberTrack 履带交互机器人模型
 
+**当前局部更新：0.55／15芯净径10通道。** 上下护口、颈架桥、板下至左侧路线及PP06已更新，见[说明](../../docs/cable-passage.md)和[专项](cable-passage-audit.json)。保留PP02既有配合冲突；其他历史预览以各自版本为准。
+
 当前整机为 **0.54 外接BOOT停止按钮候选**：右肩梁新增一体安装座、后插螺母腔、后护边和扎带鞍座，移除原独立StopPlinth；GPIO0/GND走廊经颈架后缘进入头舱后槽。按钮尚未选型，尺寸为设计预算，见[安装与走线说明](../../docs/boot-button.md)、[专项回读](boot-button-audit.json)及[范围审计](boot-button-change-audit.json)。
 
 沿用 **0.53 折面顶盖中央电源开关候选**：新增一体安装座、本体通孔、前后护边和两颗Ø2×6塑料用自攻螺丝候选；用户明确不放左右侧面，头部几何保持。见[安装说明](../../docs/power-switch.md)、[专项回读](power-switch-audit.json)及[变更范围](power-switch-change-audit.json)。沿用0.51六组合并打印：58个设计特征归并为6个单实体；冠盖新增四处连接筋，固定颈架横梁填平配合间隙。主模型只保留“01 双履带与动力参考”分组，其他对象全部一级显示；58个重复融合输入和59个隐藏检查空间仅在独立[设计源档](source/CyberTrack-design.FCStd)保留，主模型保留20个默认隐藏的设备／线管占位，见[树结构检查](model-tree-audit.json)。见[合并说明](../../docs/print-consolidation.md)、[打印文件](print-parts/README.md)及[检查报告](print-consolidation-audit.json)。下述0.50说明记录此前基线。

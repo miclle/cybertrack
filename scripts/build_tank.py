@@ -597,6 +597,11 @@ def main():
     print_connections=connect_features(doc)
     power_switch_info=add_power_switch(doc,add)
     boot_button_info=add_boot_button(doc,add)
+    from cable_passage import apply as apply_cable_passage
+    cable_passage_info=apply_cable_passage(doc)
+    boot_button_info.update(wire_route_points_mm=cable_passage_info['boot_points_mm'],
+        routed_length_mm=cable_passage_info['boot_routed_length_mm'],
+        shared_trunk='15芯净径10通道；BOOT包含于总预算', board_endpoint='X60/Y6/Z194；板内末段待实物')
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
@@ -720,7 +725,8 @@ def main():
     print('Final readback; drive and bottle checks',flush=True)
     drive_mount_check=check_drive_mount(final,verbose=True)
     effects_check=check_effects_mount(final)
-    report={'status':'preliminary_concept','design_revision':'0.54','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.55','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+            'cable_passage_layout':cable_passage_info,
             'boot_button_layout':boot_button_info,'boot_button_check':check_boot_button(final),
             'drive_mount_check':drive_mount_check,
             'head_lift_check':check_head_lift(final),
@@ -808,7 +814,10 @@ def main():
     (OUT/'ignition-routing-audit.json').write_text(json.dumps(report['ignition_routing_check'],ensure_ascii=False,indent=2)+'\n')
     (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check','service_paths')},ensure_ascii=False,indent=2))
-    required_checks = ('boot_button_check', 'power_switch_check', 'ignition_mos_check', 'ignition_routing_check', 'front_effects_check',
+    from cable_passage import check as check_cable_passage
+    report['cable_passage_check']=check_cable_passage(final)
+    (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+    required_checks = ('cable_passage_check', 'boot_button_check', 'power_switch_check', 'ignition_mos_check', 'ignition_routing_check', 'front_effects_check',
                        'mt3608_check', 'effects_mount_check', 'ultrasonic_integration_check',
                        'head_lift_check', 'bottle_backpack_check', 'l298n_mount_check',
                        'l298n_check', 'drive_mount_check', 'top_feed_check',
