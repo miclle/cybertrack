@@ -1,0 +1,645 @@
+{
+  "date": "2026-10-26",
+  "revision": "0.55",
+  "baseline_files": {
+    "source/CyberTrack-design.FCStd": "b19c371fba3be2ac726707370cbdee50b6b57a9ae231ed87abe92b00eaf6af46",
+    "CyberTrack.FCStd": "dd1e18c3a10c56b32c136921989db5e5318e0800a0317eb4facbe5414973dbf6"
+  },
+  "source_document": "source/CyberTrack-design.FCStd",
+  "source_sha256": "6e23dc04aa6373d5b17067e34b847769f029b634a9cc095887700f79eaa543db",
+  "delivery_sha256": "a2f863a8b2e3dbd2dda314586d2dfbb0f02b62b303c8c1f062eeadfeb708cc86",
+  "layout": {
+    "revision": "0.55",
+    "conductor_count": 15,
+    "net_diameter_mm": 10,
+    "lower_grommet": {
+      "bore_mm": 10,
+      "outer_mm": 12.4,
+      "seat_hole_mm": 12.6,
+      "z_mm": [
+        90,
+        93
+      ]
+    },
+    "head_grommet": {
+      "bore_along_path_mm": 10,
+      "wall_mm": 1.2,
+      "seat_radial_gap_mm": 0.1,
+      "z_clip_mm": [
+        158,
+        164
+      ]
+    },
+    "neck_bridge": {
+      "bore_mm": 10,
+      "outer_mm": 12.4,
+      "z_mm": [
+        107,
+        109
+      ]
+    },
+    "head_points_mm": [
+      [
+        0,
+        6,
+        84
+      ],
+      [
+        0,
+        6,
+        166
+      ],
+      [
+        60,
+        6,
+        166
+      ],
+      [
+        60,
+        6,
+        194
+      ]
+    ],
+    "head_centreline_bend_radius_mm": 10,
+    "chassis_endpoint_mm": [
+      0,
+      6,
+      84
+    ],
+    "tray_clearance_diameter_mm": 10.6,
+    "board_endpoint_mm": [
+      60,
+      6,
+      194
+    ],
+    "boot_points_mm": [
+      [
+        -36,
+        -22,
+        102
+      ],
+      [
+        -36,
+        22,
+        102
+      ],
+      [
+        -36,
+        22,
+        113
+      ],
+      [
+        0,
+        22,
+        113
+      ],
+      [
+        0,
+        6,
+        113
+      ],
+      [
+        0,
+        6,
+        166
+      ],
+      [
+        60,
+        6,
+        166
+      ],
+      [
+        60,
+        6,
+        194
+      ]
+    ],
+    "boot_included_in_total": true,
+    "connector_passage_verified": false,
+    "physical_fit_verified": false,
+    "scope": "Lower route begins at an existing allocation, not at verified battery/MOS terminals; upper route ends outside the board envelope.",
+    "boot_routed_length_mm": 237.69911184307745
+  },
+  "checks": {
+    "net_diameter_mm": 10,
+    "static_overlaps": {
+      "KeelLid": [],
+      "NeckPedestal": [],
+      "NeckHeadSaddle": [],
+      "HeadShell": [],
+      "BaseCableGrommet": [],
+      "HeadCableGrommet": [],
+      "NeckCableBridge": [],
+      "ElectronicsTray": [],
+      "PowerCableRoute": []
+    },
+    "continuous_corridor_overlaps": [],
+    "negative_control_10_2_mm_blocked": {
+      "BaseCableGrommet": true,
+      "HeadCableGrommet": true,
+      "NeckCableBridge": true
+    },
+    "shapes": {
+      "KeelLid": {
+        "valid": true,
+        "solids": 3
+      },
+      "NeckPedestal": {
+        "valid": true,
+        "solids": 1
+      },
+      "NeckHeadSaddle": {
+        "valid": true,
+        "solids": 1
+      },
+      "HeadShell": {
+        "valid": true,
+        "solids": 1
+      },
+      "BaseCableGrommet": {
+        "valid": true,
+        "solids": 1
+      },
+      "HeadCableGrommet": {
+        "valid": true,
+        "solids": 1
+      },
+      "NeckCableBridge": {
+        "valid": true,
+        "solids": 1
+      },
+      "ElectronicsTray": {
+        "valid": true,
+        "solids": 1
+      },
+      "PowerCableRoute": {
+        "valid": true,
+        "solids": 1
+      },
+      "StopSignalRoute": {
+        "valid": true,
+        "solids": 1
+      }
+    },
+    "tray": {
+      "revision": "0.41",
+      "tolerance_mm3": 0.01,
+      "static": {
+        "ElectronicsTray": {
+          "boolean_pairs_tested": 9,
+          "overlaps": [],
+          "passed": true
+        },
+        "BreadboardEnvelope": {
+          "boolean_pairs_tested": 7,
+          "overlaps": [],
+          "passed": true
+        }
+      },
+      "board_to_crown_mm": 4.0,
+      "tray_to_harness_mm": 0.2999999698039472,
+      "tray_removal": {
+        "boolean_pairs_tested": 5,
+        "overlaps": [],
+        "passed": true,
+        "method": "continuous conservative vertical prism union",
+        "translation_mm": [
+          0,
+          0,
+          85
+        ],
+        "removed_first": [
+          "BreadboardScrew0",
+          "BreadboardScrew1",
+          "BreadboardScrew2",
+          "BreadboardScrew3",
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownEffectInsetL",
+          "CrownEffectInsetR",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "CrownFinL",
+          "CrownFinR",
+          "CrownForePlate",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "CrownRearCassette",
+          "CrownScrewLFront",
+          "CrownScrewLRear",
+          "CrownScrewRFront",
+          "CrownScrewRRear",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownSpine",
+          "HeadCrownShell",
+          "HeadServiceHatch",
+          "OccipitalBrowL",
+          "OccipitalBrowR",
+          "PowerCableRoute",
+          "UltrasonicWireSpace"
+        ],
+        "moving": [
+          "ElectronicsTray",
+          "BreadboardEnvelope"
+        ],
+        "excludes_flexible_harness_and_hands": true
+      },
+      "tool_access": [
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "passed": true,
+          "name": "BreadboardTool0",
+          "diameter_mm": 8,
+          "length_mm": 90
+        },
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "passed": true,
+          "name": "BreadboardTool1",
+          "diameter_mm": 8,
+          "length_mm": 90
+        },
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "passed": true,
+          "name": "BreadboardTool2",
+          "diameter_mm": 8,
+          "length_mm": 90
+        },
+        {
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "passed": true,
+          "name": "BreadboardTool3",
+          "diameter_mm": 8,
+          "length_mm": 90
+        }
+      ],
+      "screw_removal": [
+        {
+          "boolean_pairs_tested": 4,
+          "overlaps": [],
+          "passed": true,
+          "name": "BreadboardScrew0",
+          "translation_mm": [
+            0,
+            0,
+            20
+          ],
+          "method": "continuous shaft/head cylinder union"
+        },
+        {
+          "boolean_pairs_tested": 4,
+          "overlaps": [],
+          "passed": true,
+          "name": "BreadboardScrew1",
+          "translation_mm": [
+            0,
+            0,
+            20
+          ],
+          "method": "continuous shaft/head cylinder union"
+        },
+        {
+          "boolean_pairs_tested": 4,
+          "overlaps": [],
+          "passed": true,
+          "name": "BreadboardScrew2",
+          "translation_mm": [
+            0,
+            0,
+            20
+          ],
+          "method": "continuous shaft/head cylinder union"
+        },
+        {
+          "boolean_pairs_tested": 4,
+          "overlaps": [],
+          "passed": true,
+          "name": "BreadboardScrew3",
+          "translation_mm": [
+            0,
+            0,
+            20
+          ],
+          "method": "continuous shaft/head cylinder union"
+        }
+      ],
+      "seats": [
+        {
+          "xy": [
+            -57,
+            -40
+          ],
+          "seat_area_mm2": 24.630086404143977,
+          "distance_to_tray_mm": 0.0
+        },
+        {
+          "xy": [
+            -57,
+            -5
+          ],
+          "seat_area_mm2": 24.630086404143977,
+          "distance_to_tray_mm": 0.0
+        },
+        {
+          "xy": [
+            57,
+            -40
+          ],
+          "seat_area_mm2": 24.630086404143977,
+          "distance_to_tray_mm": 0.0
+        },
+        {
+          "xy": [
+            57,
+            -5
+          ],
+          "seat_area_mm2": 24.630086404143977,
+          "distance_to_tray_mm": 0.0
+        }
+      ],
+      "negative_controls": [
+        {
+          "case": "closed crown blocks removal",
+          "detected": true,
+          "expected_obstacle_prefixes": [
+            "HeadCrownShell",
+            "Crown"
+          ],
+          "hits": [
+            {
+              "object": "CrownFinL",
+              "volume_mm3": 2356.374999999997
+            },
+            {
+              "object": "CrownFinR",
+              "volume_mm3": 2356.374999999996
+            },
+            {
+              "object": "HeadServiceHatch",
+              "volume_mm3": 13206.000000000004
+            },
+            {
+              "object": "CrownSpine",
+              "volume_mm3": 328.00000000000006
+            },
+            {
+              "object": "CrownForePlate",
+              "volume_mm3": 3833.666666666667
+            },
+            {
+              "object": "CrownSideArmorL",
+              "volume_mm3": 9829.022465277792
+            },
+            {
+              "object": "CrownSideArmorR",
+              "volume_mm3": 9829.022465277798
+            },
+            {
+              "object": "CrownRearCassette",
+              "volume_mm3": 1751.2499999999998
+            },
+            {
+              "object": "CrownRearBlade0",
+              "volume_mm3": 115.50000000000001
+            },
+            {
+              "object": "CrownRearBlade1",
+              "volume_mm3": 115.50000000000001
+            },
+            {
+              "object": "CrownRearBlade2",
+              "volume_mm3": 21.0
+            },
+            {
+              "object": "CrownEffectInsetL",
+              "volume_mm3": 73.35000000000123
+            },
+            {
+              "object": "CrownEffectMarkLFront",
+              "volume_mm3": 25.199999999999726
+            },
+            {
+              "object": "CrownEffectMarkLRear",
+              "volume_mm3": 19.861875000000015
+            },
+            {
+              "object": "CrownEffectInsetR",
+              "volume_mm3": 73.35000000000124
+            },
+            {
+              "object": "CrownEffectMarkRFront",
+              "volume_mm3": 25.19999999999972
+            },
+            {
+              "object": "CrownEffectMarkRRear",
+              "volume_mm3": 19.86187500000006
+            },
+            {
+              "object": "HeadCrownShell",
+              "volume_mm3": 22872.0
+            }
+          ]
+        },
+        {
+          "case": "retained tray screws block removal",
+          "detected": true,
+          "expected_obstacle_prefixes": [
+            "BreadboardScrew"
+          ],
+          "hits": [
+            {
+              "object": "BreadboardScrew0",
+              "volume_mm3": 26.35715474645972
+            },
+            {
+              "object": "BreadboardScrew1",
+              "volume_mm3": 26.357154746459724
+            },
+            {
+              "object": "BreadboardScrew2",
+              "volume_mm3": 26.35715474645972
+            },
+            {
+              "object": "BreadboardScrew3",
+              "volume_mm3": 26.357154746459724
+            }
+          ]
+        },
+        {
+          "case": "height increased by 5 mm hits crown",
+          "detected": true,
+          "expected_obstacle_prefixes": [
+            "HeadCrownShell",
+            "Crown"
+          ],
+          "hits": [
+            {
+              "object": "HeadCrownShell",
+              "volume_mm3": 6500.000000000001
+            }
+          ]
+        }
+      ],
+      "passed": true,
+      "board_anti_lift_retention_verified": false,
+      "physical_fit_verified": false,
+      "limits": "Envelope and rigid tray only. No individual audio/display/USB/RF fit, hand access, flexible harness service, material strength or anti-lift retention acceptance."
+    },
+    "boot": {
+      "static": {
+        "StopControl": {
+          "passed": true,
+          "overlaps": [],
+          "boolean_pairs": 3
+        },
+        "StopBody": {
+          "passed": true,
+          "overlaps": [],
+          "boolean_pairs": 4
+        },
+        "StopNut": {
+          "passed": true,
+          "overlaps": [],
+          "boolean_pairs": 3
+        }
+      },
+      "finger_approach_and_press": {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 2
+      },
+      "cap_travel": {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 2
+      },
+      "wiring": {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 36
+      },
+      "intentional_shared_bundle_overlap_mm3": 866.9785965320358,
+      "body_upward_12mm_removal": {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 2
+      },
+      "body_forward_30mm_removal": {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 2
+      },
+      "nut_rearward_removal": {
+        "passed": true,
+        "overlaps": [],
+        "boolean_pairs": 2
+      },
+      "nearest_ignition_corridor_mm": 22.4933069457768,
+      "negative_controls": {
+        "oversize_shank_blocked": true,
+        "nut_30deg_rotation_blocked": true,
+        "oversize_finger_hits_guard": true
+      },
+      "physical_fit_verified": false,
+      "electrical_verified": false,
+      "limits": "Candidate hardware only. Thread disengagement, whole hand, solder tails, board-internal routing, harness packing, EMC and actual flex/retention unverified.",
+      "passed": true
+    },
+    "board_clearance_mm": 3.0,
+    "tray_clearance_mm": 0.2999999698039472,
+    "passed": true,
+    "limits": "Continuous geometric swept corridor and rigid maintenance checks only; flexible threading, wall strength, connectors and electrical operation remain unverified."
+  },
+  "changed_source": [
+    "BaseCableGrommet",
+    "ElectronicsTray",
+    "HeadCableGrommet",
+    "HeadShell",
+    "KeelLid",
+    "NeckCableBridge",
+    "NeckHeadSaddle",
+    "NeckPedestal",
+    "PowerCableRoute",
+    "PrintNeck",
+    "StopSignalRoute"
+  ],
+  "changed_delivery": [
+    "BaseCableGrommet",
+    "ElectronicsTray",
+    "HeadCableGrommet",
+    "HeadShell",
+    "KeelLid",
+    "NeckCableBridge",
+    "PowerCableRoute",
+    "PrintNeck",
+    "StopSignalRoute"
+  ],
+  "geometry_deltas": {
+    "PrintNeck": {
+      "removed_mm3": 450.6556529978243,
+      "added_mm3": 0.0
+    },
+    "HeadCableGrommet": {
+      "removed_mm3": 126.62660532734743,
+      "added_mm3": 495.71354999187304
+    },
+    "PowerCableRoute": {
+      "removed_mm3": 1782.2137821324325,
+      "added_mm3": 10298.36587699332
+    },
+    "NeckPedestal": {
+      "removed_mm3": 305.362805928928,
+      "added_mm3": 0.0
+    },
+    "ElectronicsTray": {
+      "removed_mm3": 0.5923408021921142,
+      "added_mm3": 0.0
+    },
+    "HeadShell": {
+      "removed_mm3": 1735.794466051174,
+      "added_mm3": 0.0
+    },
+    "BaseCableGrommet": {
+      "removed_mm3": 73.51326809400115,
+      "added_mm3": 126.66901579274042
+    },
+    "StopSignalRoute": {
+      "removed_mm3": 212.49481508986713,
+      "added_mm3": 526.5288622662224
+    },
+    "NeckCableBridge": {
+      "removed_mm3": 55.65972928832474,
+      "added_mm3": 63.665844016759024
+    },
+    "NeckHeadSaddle": {
+      "removed_mm3": 145.29274189213749,
+      "added_mm3": 0.0
+    },
+    "KeelLid": {
+      "removed_mm3": 183.21768355735682,
+      "added_mm3": 0.0
+    }
+  },
+  "unchanged_source_signature_count": 411,
+  "unchanged_delivery_signature_count": 298,
+  "unchanged_method": "volume, area, topology counts and optimal bounding box; not full assembly Boolean equivalence",
+  "saved_and_reopened": true,
+  "source_delivery_changed_geometry_agrees": true,
+  "pp06_step_symmetric_difference_mm3": 0.0,
+  "pp06_stl_closed": true,
+  "pp06_stl_nonmanifold": false,
+  "scope_passed": true,
+  "whole_assembly_passed": false,
+  "prior_conflict_retained": "PP02 vs BubbleGunShell; see pp02-adjustment-audit.json",
+  "physical_fit_verified": false,
+  "manufacturing_released": false
+}

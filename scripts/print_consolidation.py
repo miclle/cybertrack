@@ -12,7 +12,7 @@ import Mesh
 import MeshPart
 
 V = App.Vector
-REVISION = '0.54'
+REVISION = '0.55'
 
 
 def groups(doc):
