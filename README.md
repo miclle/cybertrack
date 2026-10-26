@@ -37,9 +37,22 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 [查看全部 33 张照片与 2 段视频](artifact/README.md)
 
-![CyberTrack CAD 布局参考](hardware/model/assembly.png)
+## CAD 模型
 
-*历史 CAD 布局视图；当前样机见上方实拍，最新几何与局部修订见[模型入口](hardware/model/README.md)。装配、打印工艺与持续带载的完整验收仍待完成。*
+以下视图于 **2026-10-27** 从当前 [CyberTrack.FCStd](hardware/model/CyberTrack.FCStd) 导出，展示整机外形、双枪与履带布局，以及背部双瓶结构。点击图片可查看大图。
+
+<table>
+  <tr>
+    <td width="50%" valign="top"><a href="hardware/model/readme-views/front-iso.png"><img src="hardware/model/readme-views/front-iso.png" alt="CyberTrack CAD 前侧整体视图：头壳、双枪与双履带" width="100%"></a><br>前侧整体视图</td>
+    <td width="50%" valign="top"><a href="hardware/model/readme-views/front.png"><img src="hardware/model/readme-views/front.png" alt="CyberTrack CAD 正面视图：超声波探头与双枪布局" width="100%"></a><br>正面布局</td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top"><a href="hardware/model/readme-views/side.png"><img src="hardware/model/readme-views/side.png" alt="CyberTrack CAD 侧面视图：履带、颈架与背包" width="100%"></a><br>侧面结构</td>
+    <td width="50%" valign="top"><a href="hardware/model/readme-views/rear-iso.png"><img src="hardware/model/readme-views/rear-iso.png" alt="CyberTrack CAD 后侧视图：双瓶背包与管路" width="100%"></a><br>后侧与双瓶背包</td>
+  </tr>
+</table>
+
+*以上为 CAD 模型视图，颜色用于区分零件，不代表实物材料或打印配色；样机状态见上方实拍。模型修订见[模型入口](hardware/model/README.md)，装配、打印工艺与持续带载的完整验收仍待完成。*
 
 ## 当前状态
 
