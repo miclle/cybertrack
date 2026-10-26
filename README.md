@@ -16,6 +16,27 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 影像记录了制作与演示时的样机状态；具体固件、供电配置与工程验收以对应验证记录为准。
 
+## 制作过程与样机照片
+
+从双电机台架、底盘装配到头部电子件安装，再看样机的正面、侧面和背面。点击照片可查看原图。
+
+<table>
+  <tr>
+    <td width="50%" valign="top"><a href="artifact/03-dual-motor-bench.jpg"><img src="artifact/previews/03-dual-motor-bench.jpg" alt="双电机台架接线" width="100%"></a><br>双电机台架接线</td>
+    <td width="50%" valign="top"><a href="artifact/19-chassis-assembly-14.jpg"><img src="artifact/previews/19-chassis-assembly-14.jpg" alt="底盘装配与接线" width="100%"></a><br>底盘装配与接线</td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top"><a href="artifact/26-head-breadboard-installation.jpg"><img src="artifact/previews/26-head-breadboard-installation.jpg" alt="头部面包板与扬声器安装" width="100%"></a><br>头部面包板与扬声器安装</td>
+    <td width="50%" valign="top"><a href="artifact/27-prototype-front-workbench.jpg"><img src="artifact/previews/27-prototype-front-workbench.jpg" alt="样机正面：超声波模块与双枪布局" width="100%"></a><br>样机正面：超声波模块与双枪布局</td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top"><a href="artifact/28-prototype-water-gun-side.jpg"><img src="artifact/previews/28-prototype-water-gun-side.jpg" alt="样机侧面：履带、颈架与水枪" width="100%"></a><br>样机侧面：履带、颈架与水枪</td>
+    <td width="50%" valign="top"><a href="artifact/29-prototype-rear-reservoirs.jpg"><img src="artifact/previews/29-prototype-rear-reservoirs.jpg" alt="样机背面：双液体瓶与管路" width="100%"></a><br>样机背面：双液体瓶与管路</td>
+  </tr>
+</table>
+
+[查看全部 33 张照片与 2 段视频](artifact/README.md)
+
 ![CyberTrack 整机 CAD 装配候选](hardware/model/assembly.png)
 
 *0.53 CAD 装配候选；实物适配、打印工艺与整机带载尚未验收。*

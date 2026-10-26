@@ -251,5 +251,15 @@
     "source": "cybertrack-prototype-demo-6min.mp4",
     "attachment_url": "https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7",
     "processing": "Stream copy, MP4 faststart, H.264 level metadata 3.1; no re-encoding."
+  },
+  "bench_video": {
+    "source": "breadboard-water-gun-bench-16s.mp4",
+    "attachment_url": "https://github.com/user-attachments/assets/1ba10a7c-4fc7-466d-b656-b33c0fb86081",
+    "processing": "HEVC to H.264 High level 3.1, CRF 23; 1280x720 at 30 fps; AAC stream copy; MP4 faststart."
+  },
+  "photo_previews": {
+    "directory": "previews",
+    "filenames": "Same filenames as the 33 original JPEG photographs.",
+    "processing": "EXIF orientation applied; proportional resize within 1200x900, no crop; JPEG quality 82; original files unchanged."
   }
 }
