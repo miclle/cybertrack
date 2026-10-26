@@ -1,0 +1,388 @@
+{
+  "project": "hardware/model/lean-print/CyberTrack-Lean-6plates.3mf",
+  "project_sha256": "0def9d04eb3b7d18ec0e902c3820282dc5c88ef05fd92e652a351f494678dab7",
+  "original_project_sha256": "aa53bac408cfa8f8289c48bfbee61ee6e9af5d6756091a1b8b1fc9027d263553",
+  "plates": [
+    {
+      "plate": 1,
+      "original_plate": 1,
+      "name": "01 Drive chassis",
+      "parts": 1,
+      "seconds": 14353.0,
+      "grams": 164.39,
+      "old_seconds": 14353.0,
+      "old_grams": 164.39
+    },
+    {
+      "plate": 2,
+      "original_plate": 2,
+      "name": "02 Drive and control mounts",
+      "parts": 10,
+      "seconds": 15079.0,
+      "grams": 148.83,
+      "old_seconds": 15406.0,
+      "old_grams": 150.81
+    },
+    {
+      "plate": 3,
+      "original_plate": 6,
+      "name": "03 Gun mounts MOS carriers bottles and trim",
+      "parts": 13,
+      "seconds": 7201.0,
+      "grams": 80.51,
+      "old_seconds": 5398.0,
+      "old_grams": 59.87
+    },
+    {
+      "plate": 4,
+      "original_plate": 4,
+      "name": "04 Controller tray and crown",
+      "parts": 2,
+      "seconds": 12232.0,
+      "grams": 154.04,
+      "old_seconds": 12232.0,
+      "old_grams": 154.04
+    },
+    {
+      "plate": 5,
+      "original_plate": 3,
+      "name": "05 Head shell",
+      "parts": 1,
+      "seconds": 14956.0,
+      "grams": 154.22,
+      "old_seconds": 14956.0,
+      "old_grams": 154.22
+    },
+    {
+      "plate": 6,
+      "original_plate": 5,
+      "name": "06 LAST Backpack and lid",
+      "parts": 2,
+      "seconds": 17338.0,
+      "grams": 240.59,
+      "old_seconds": 19447.0,
+      "old_grams": 264.39
+    }
+  ],
+  "ordinary_print_parts": 29,
+  "removed": [
+    "EffectRetainerLBuck",
+    "EffectRetainerLMOS",
+    "EffectRetainerRBuck",
+    "EffectRetainerRMOS",
+    "IgnitionMOSRetainer"
+  ],
+  "modified_geometry": [
+    "EffectTray",
+    "IgnitionMOSCarrier"
+  ],
+  "unchanged_gcode_original_plates": [
+    1,
+    3,
+    4
+  ],
+  "process_and_material_settings_preserved": true,
+  "moved_parts": [
+    "PP01-base",
+    "PP02-base",
+    "IgnitionMOSCarrier"
+  ],
+  "saved_seconds": 633.0,
+  "saved_grams": 5.139999999999965,
+  "GUI_verified": true,
+  "verified_native_geometry_objects": 236,
+  "verified_inventory_parts": 29,
+  "preserved_meshes_including_modifiers": 31,
+  "gcode_sha256": {
+    "1": "25ac7aff9e6947e6aa4453f843b9e62e79a8fb6db8491c735aaecc1003b04517",
+    "2": "4b85d9aacf62ad8afc9b1a684225d194a4758648067a016dba6bbfcee5130a0c",
+    "3": "2ed947d8733557a0d167b65d4d7970bd64083ab1fcedb90040da8d4d07b682f8",
+    "4": "e22fae19dd02c0f9f6d29b29ca8552530ac0b0d1616aa8700c5a4bd333a3afa1",
+    "5": "0a017fdac32bcaa68d9dd2266f6486e606a852546f733a7e10fdd98a546fa780",
+    "6": "81df91167fa323e41b4a10ae7e1f34cc91b1f2c5af2555c5a7b29b1a83a1d915"
+  },
+  "all_layer_bounds_mm": {
+    "2": [
+      3.3,
+      3.3,
+      248.95,
+      253.5
+    ],
+    "3": [
+      18.687,
+      4.037,
+      246.864,
+      224.114
+    ],
+    "6": [
+      4.025,
+      10.136,
+      219.52526682086386,
+      240.082
+    ]
+  },
+  "checked_native_sections": [
+    {
+      "part": "EffectTray",
+      "height": 0.2,
+      "coverage": 0.9791838417147568,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "EffectTray",
+      "height": 0.76,
+      "coverage": 0.9991214491904782,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "EffectTray",
+      "height": 1.32,
+      "coverage": 0.9977333488318029,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "EffectTray",
+      "height": 2.16,
+      "coverage": 0.9992006394884093,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "EffectTray",
+      "height": 2.72,
+      "coverage": 0.9986296676944159,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "EffectTray",
+      "height": 3.744,
+      "coverage": 0.9981065728969435,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "IgnitionMOSCarrier",
+      "height": 0.2,
+      "coverage": 0.9685972756576895,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "IgnitionMOSCarrier",
+      "height": 0.76,
+      "coverage": 0.9953727773734012,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "IgnitionMOSCarrier",
+      "height": 1.32,
+      "coverage": 0.9783934926283681,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "IgnitionMOSCarrier",
+      "height": 2.16,
+      "coverage": 0.9950944321805248,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "IgnitionMOSCarrier",
+      "height": 2.72,
+      "coverage": 0.9950944321805248,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "IgnitionMOSCarrier",
+      "height": 3.744,
+      "coverage": 0.9854756717501816,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP01-base",
+      "height": 1.6,
+      "coverage": 0.2781148323017834,
+      "minimum": 0.2,
+      "passed": true
+    },
+    {
+      "part": "PP01-base",
+      "height": 3.56,
+      "coverage": 0.9954,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP01-base",
+      "height": 4.96,
+      "coverage": 0.9954,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP01-base",
+      "height": 8.04,
+      "coverage": 0.9945378151260504,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP01-base",
+      "height": 15.88,
+      "coverage": 0.9960372960372961,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP01-base",
+      "height": 20.92,
+      "coverage": 0.996969696969697,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP02-base",
+      "height": 1.6,
+      "coverage": 0.31094940125147436,
+      "minimum": 0.2,
+      "passed": true
+    },
+    {
+      "part": "PP02-base",
+      "height": 4.4,
+      "coverage": 0.9989192527404662,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP02-base",
+      "height": 8.04,
+      "coverage": 0.9771084337349397,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP02-base",
+      "height": 24.0,
+      "coverage": 0.9956989247311828,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP02-base",
+      "height": 36.88,
+      "coverage": 0.9962962962962963,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP02-base",
+      "height": 41.92,
+      "coverage": 0.9983739837398374,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP03-base",
+      "height": 1.6,
+      "coverage": 0.9895424328422034,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP03-base",
+      "height": 18.12,
+      "coverage": 0.9988115083040069,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP03-base",
+      "height": 22.6,
+      "coverage": 0.9989816154794448,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP03-base",
+      "height": 40.52,
+      "coverage": 0.9988208179235676,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP03-base",
+      "height": 78.6,
+      "coverage": 0.8749326271881518,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "PP03-base",
+      "height": 86.44,
+      "coverage": 0.9866414850983463,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "LC04-flipped",
+      "height": 2.44,
+      "coverage": 0.9995108230402348,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "LC04-flipped",
+      "height": 8.88,
+      "coverage": 0.998666898510404,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "LC04-flipped",
+      "height": 11.96,
+      "coverage": 0.9995190920457825,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "LC04-flipped",
+      "height": 15.04,
+      "coverage": 0.997433126182113,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "LC04-flipped",
+      "height": 17.0,
+      "coverage": 0.9988628484260158,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "LC04-flipped",
+      "height": 24.0,
+      "coverage": 0.9295135238459333,
+      "minimum": 0.55,
+      "passed": true
+    },
+    {
+      "part": "LC04-flipped",
+      "height": 27.08,
+      "coverage": 0.9993589515296128,
+      "minimum": 0.55,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "limits": "CAD and sampled paths only; adhesive retention and physical fit unverified.",
+  "GUI_evidence": "Bambu Studio loaded CyberTrack-Lean-6plates; visually checked six plate labels and placement, gun seats on plate 3 and only backpack/lid on plate 6. No printer action sent."
+}

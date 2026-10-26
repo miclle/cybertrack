@@ -1,0 +1,224 @@
+{
+    "error_string": "Success.",
+    "layer_height": 0.2800000011920929,
+    "peak_rss_mb": 510.875,
+    "plate_index": 2,
+    "return_code": 0,
+    "sliced_plates": [
+        {
+            "feature_type_times": {
+                "Bottom surface": 879.9050903320313,
+                "Bridge": 1029.9520263671875,
+                "Brim": 226.0322723388672,
+                "Custom": 400.5928955078125,
+                "Flush": 26.0,
+                "Gap infill": 360.0596618652344,
+                "Inner wall": 2024.853515625,
+                "Internal solid infill": 2350.51220703125,
+                "Outer wall": 1640.4013671875,
+                "Overhang wall": 459.00518798828125,
+                "Sparse infill": 455.9178466796875,
+                "Support": 1587.8260498046875,
+                "Support interface": 371.90667724609375,
+                "Support transition": 149.39730834960938,
+                "Top surface": 636.7477416992188,
+                "Travel": 2486.561279296875,
+                "Undefined": 2481.995361328125
+            },
+            "filament_change_times": 0,
+            "filaments": [
+                {
+                    "filament_id": "GFA00",
+                    "id": 1,
+                    "main_used_g": 148.8323516845703,
+                    "total_used_g": 148.8323516845703
+                }
+            ],
+            "id": 2,
+            "layer_filament_change": 0,
+            "main_predication": 14631.02734375,
+            "obj_cached_cnt": 0,
+            "objects": [
+                {
+                    "bbox": {
+                        "depth": 136.8000030517578,
+                        "height": 2.799999952316284,
+                        "width": 131.59999084472656,
+                        "x": 312.20001220703125,
+                        "y": 4.999998569488525,
+                        "z": 3.8418579428878274e-09
+                    },
+                    "id": 9,
+                    "name": "LC03-BottomServiceCover-flipped",
+                    "triangle_count": 6812
+                },
+                {
+                    "bbox": {
+                        "depth": 50.999996185302734,
+                        "height": 1.5,
+                        "width": 136.99998474121094,
+                        "x": 312.20001220703125,
+                        "y": 145.8000030517578,
+                        "z": 0.0
+                    },
+                    "id": 13,
+                    "name": "KeelSideFrameL",
+                    "triangle_count": 60
+                },
+                {
+                    "bbox": {
+                        "depth": 50.999996185302734,
+                        "height": 1.5,
+                        "width": 136.99998474121094,
+                        "x": 312.20001220703125,
+                        "y": 200.8000030517578,
+                        "z": 0.0
+                    },
+                    "id": 17,
+                    "name": "KeelSideFrameR",
+                    "triangle_count": 60
+                },
+                {
+                    "bbox": {
+                        "depth": 131.60000610351563,
+                        "height": 1.7999999523162842,
+                        "width": 73.60001373291016,
+                        "x": 456.79998779296875,
+                        "y": 4.999997138977051,
+                        "z": -1.5814205500674916e-10
+                    },
+                    "id": 21,
+                    "name": "BatteryHatch",
+                    "triangle_count": 2332
+                },
+                {
+                    "bbox": {
+                        "depth": 49.99999237060547,
+                        "height": 68.0,
+                        "width": 68.00001525878906,
+                        "x": 456.79998779296875,
+                        "y": 142.60000610351563,
+                        "z": 0.0
+                    },
+                    "id": 25,
+                    "name": "PrintNeck",
+                    "triangle_count": 10256
+                },
+                {
+                    "bbox": {
+                        "depth": 47.49999237060547,
+                        "height": 59.0,
+                        "width": 33.5000114440918,
+                        "x": 456.79998779296875,
+                        "y": 198.60000610351563,
+                        "z": 0.0
+                    },
+                    "id": 29,
+                    "name": "LC01-Carrier-upright",
+                    "triangle_count": 2096
+                },
+                {
+                    "bbox": {
+                        "depth": 43.74999237060547,
+                        "height": 5.5,
+                        "width": 29.000011444091797,
+                        "x": 496.29998779296875,
+                        "y": 198.60000610351563,
+                        "z": 0.0
+                    },
+                    "id": 33,
+                    "name": "LC02-TopRetainer-flat",
+                    "triangle_count": 1668
+                },
+                {
+                    "bbox": {
+                        "depth": 78.0,
+                        "height": 42.86503982543945,
+                        "width": 14.499975204467773,
+                        "x": 538.6500244140625,
+                        "y": 5.0,
+                        "z": -1.2719727493504251e-08
+                    },
+                    "id": 37,
+                    "name": "ShoulderRailL",
+                    "triangle_count": 1898
+                },
+                {
+                    "bbox": {
+                        "depth": 83.0,
+                        "height": 46.07143020629883,
+                        "width": 16.999975204467773,
+                        "x": 537.4000244140625,
+                        "y": 95.0,
+                        "z": -3.149413174696747e-09
+                    },
+                    "id": 41,
+                    "name": "ShoulderRailR",
+                    "triangle_count": 2384
+                },
+                {
+                    "bbox": {
+                        "depth": 36.0,
+                        "height": 2.0,
+                        "width": 13.197994232177734,
+                        "x": 537.4010009765625,
+                        "y": 185.0,
+                        "z": 0.0
+                    },
+                    "id": 45,
+                    "name": "NeckCableBridge",
+                    "triangle_count": 752
+                }
+            ],
+            "times": {
+                "conflict_check_time": 137,
+                "detect_overhangs_time": 42,
+                "export_gcode_time": 1501,
+                "flush_plan_time": 0,
+                "generate_support_material_time": 1480,
+                "infill_generate_time": 205,
+                "infill_time": 570,
+                "ironing_time": 0,
+                "make_perimeters_time": 823,
+                "multifilament_segment_2d_time": 0,
+                "other_slice_time": 1,
+                "prepare_infill_time": 365,
+                "region_split_time": 0,
+                "skirt_brim_time": 34,
+                "slice_layers_time": 224,
+                "sliced_time": 4692,
+                "sliced_time_with_cache": 1535,
+                "support_detect_time": 237,
+                "support_interface_time": 15,
+                "support_normal_generate_time": 1525,
+                "support_toolpath_time": 48,
+                "support_tree_generate_time": 0,
+                "toolpath_time": 95,
+                "wall_time": 599,
+                "wipe_tower_time": 6
+            },
+            "total_predication": 15079.0546875,
+            "triangle_count": 28318,
+            "warning_message": ""
+        }
+    ],
+    "sparse_infill_density": 8.0,
+    "times": {
+        "export_3mf_time": 0,
+        "export_slicedata_time": 0,
+        "export_time": 0,
+        "import_time": 242,
+        "load_slicedata_time": 0,
+        "prepare_time": 243
+    },
+    "upward_compatible_machine": [
+        "Bambu Lab A1 0.4 nozzle",
+        "Bambu Lab H2S 0.4 nozzle",
+        "Bambu Lab H2D 0.4 nozzle",
+        "Bambu Lab H2D Pro 0.4 nozzle",
+        "Bambu Lab H2C 0.4 nozzle",
+        "Bambu Lab X2D 0.4 nozzle",
+        "Bambu Lab A2L 0.4 nozzle"
+    ],
+    "wall_loops": 2
+}

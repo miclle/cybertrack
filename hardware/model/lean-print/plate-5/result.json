@@ -1,0 +1,119 @@
+{
+    "error_string": "Success.",
+    "layer_height": 0.2800000011920929,
+    "peak_rss_mb": 447.484375,
+    "plate_index": 5,
+    "return_code": 0,
+    "sliced_plates": [
+        {
+            "feature_type_times": {
+                "Bridge": 910.951416015625,
+                "Brim": 100.84441375732422,
+                "Custom": 399.41558837890625,
+                "Flush": 26.0,
+                "Gap infill": 5.263020038604736,
+                "Inner wall": 4046.114990234375,
+                "Internal solid infill": 1213.378173828125,
+                "Outer wall": 2587.143798828125,
+                "Overhang wall": 1311.5792236328125,
+                "Sparse infill": 91.17413330078125,
+                "Support": 3511.307861328125,
+                "Support interface": 758.981689453125,
+                "Support transition": 423.26361083984375,
+                "Top surface": 258.31591796875,
+                "Travel": 1699.953125,
+                "Undefined": 1696.4871826171875
+            },
+            "filament_change_times": 0,
+            "filaments": [
+                {
+                    "filament_id": "GFA00",
+                    "id": 1,
+                    "main_used_g": 240.58602905273438,
+                    "total_used_g": 240.58602905273438
+                }
+            ],
+            "id": 5,
+            "layer_filament_change": 0,
+            "main_predication": 16890.640625,
+            "obj_cached_cnt": 0,
+            "objects": [
+                {
+                    "bbox": {
+                        "depth": 72.50001525878906,
+                        "height": 90.0,
+                        "width": 179.49998474121094,
+                        "x": 345.45001220703125,
+                        "y": -294.45001220703125,
+                        "z": 0.0
+                    },
+                    "id": 61,
+                    "name": "PP03-base",
+                    "triangle_count": 6774
+                },
+                {
+                    "bbox": {
+                        "depth": 129.0,
+                        "height": 38.5,
+                        "width": 129.99998474121094,
+                        "x": 315.20001220703125,
+                        "y": -197.6999969482422,
+                        "z": 0.0
+                    },
+                    "id": 65,
+                    "name": "LC04-flipped",
+                    "triangle_count": 7598
+                }
+            ],
+            "times": {
+                "conflict_check_time": 148,
+                "detect_overhangs_time": 22,
+                "export_gcode_time": 1539,
+                "flush_plan_time": 0,
+                "generate_support_material_time": 708,
+                "infill_generate_time": 70,
+                "infill_time": 332,
+                "ironing_time": 0,
+                "make_perimeters_time": 1020,
+                "multifilament_segment_2d_time": 0,
+                "other_slice_time": 1,
+                "prepare_infill_time": 262,
+                "region_split_time": 0,
+                "skirt_brim_time": 6,
+                "slice_layers_time": 90,
+                "sliced_time": 3831,
+                "sliced_time_with_cache": 1545,
+                "support_detect_time": 151,
+                "support_interface_time": 7,
+                "support_normal_generate_time": 747,
+                "support_toolpath_time": 32,
+                "support_tree_generate_time": 0,
+                "toolpath_time": 46,
+                "wall_time": 930,
+                "wipe_tower_time": 7
+            },
+            "total_predication": 17338.58984375,
+            "triangle_count": 14372,
+            "warning_message": ""
+        }
+    ],
+    "sparse_infill_density": 8.0,
+    "times": {
+        "export_3mf_time": 0,
+        "export_slicedata_time": 0,
+        "export_time": 0,
+        "import_time": 239,
+        "load_slicedata_time": 0,
+        "prepare_time": 242
+    },
+    "upward_compatible_machine": [
+        "Bambu Lab A1 0.4 nozzle",
+        "Bambu Lab H2S 0.4 nozzle",
+        "Bambu Lab H2D 0.4 nozzle",
+        "Bambu Lab H2D Pro 0.4 nozzle",
+        "Bambu Lab H2C 0.4 nozzle",
+        "Bambu Lab X2D 0.4 nozzle",
+        "Bambu Lab A2L 0.4 nozzle"
+    ],
+    "wall_loops": 2
+}
