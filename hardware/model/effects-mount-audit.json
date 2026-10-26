@@ -265,7 +265,7 @@
         "passed": true
       },
       "EffectPortRBuckOuter": {
-        "boolean_pairs_tested": 3,
+        "boolean_pairs_tested": 4,
         "overlaps": [],
         "nearby": [
           {
@@ -483,7 +483,7 @@
           },
           {
             "object": "ShoulderRailR",
-            "distance_mm": 4.256555483488603
+            "distance_mm": 4.256555483488583
           },
           {
             "object": "EffectScrew0",
@@ -2637,7 +2637,7 @@
         },
         {
           "object": "ShoulderRailR",
-          "distance_mm": 4.920926461691875
+          "distance_mm": 4.920926461691861
         }
       ],
       "passed": true
@@ -3317,7 +3317,7 @@
       "passed": true
     },
     "KeelLid": {
-      "boolean_pairs_tested": 138,
+      "boolean_pairs_tested": 137,
       "overlaps": [],
       "nearby": [
         {
@@ -3350,10 +3350,6 @@
         },
         {
           "object": "ShoulderRailR",
-          "distance_mm": 0.0
-        },
-        {
-          "object": "StopPlinth",
           "distance_mm": 0.0
         },
         {
@@ -4294,11 +4290,11 @@
         "distance_mm": 4.546211251235321
       },
       {
-        "object": "ShoulderRailL",
-        "distance_mm": 4.920926461691875
+        "object": "ShoulderRailR",
+        "distance_mm": 4.920926461691861
       },
       {
-        "object": "ShoulderRailR",
+        "object": "ShoulderRailL",
         "distance_mm": 4.920926461691875
       },
       {
@@ -4326,7 +4322,7 @@
       },
       {
         "object": "ShoulderRailR",
-        "distance_mm": 3.342516087186928
+        "distance_mm": 3.3425160871869126
       },
       {
         "object": "ShoulderRailL",
@@ -4710,7 +4706,7 @@
   "passed": true,
   "physical_fit_verified": false,
   "limits": "Module slides up 90 mm after releasing and parking its leads; integrated rings stay fixed. No upward hard stop; friction retention unverified. Bare body/tray/screws swept continuously. No hand, real wire, pad deformation, screw torque, thermal, HV or liquid acceptance.",
-  "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+  "source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
   "saved_and_reopened": true,
   "source_document": "source/CyberTrack-design.FCStd",
   "equivalent_delivery_audit": "model-tree-audit.json"

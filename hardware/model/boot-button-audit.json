@@ -1,0 +1,140 @@
+{
+  "static": {
+    "StopControl": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 3
+    },
+    "StopBody": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 4
+    },
+    "StopNut": {
+      "passed": true,
+      "overlaps": [],
+      "boolean_pairs": 3
+    }
+  },
+  "finger_approach_and_press": {
+    "passed": true,
+    "overlaps": [],
+    "boolean_pairs": 2
+  },
+  "cap_travel": {
+    "passed": true,
+    "overlaps": [],
+    "boolean_pairs": 2
+  },
+  "wiring": {
+    "passed": true,
+    "overlaps": [],
+    "boolean_pairs": 20
+  },
+  "intentional_shared_bundle_overlap_mm3": 357.1414312035383,
+  "body_upward_12mm_removal": {
+    "passed": true,
+    "overlaps": [],
+    "boolean_pairs": 2
+  },
+  "body_forward_30mm_removal": {
+    "passed": true,
+    "overlaps": [],
+    "boolean_pairs": 2
+  },
+  "nut_rearward_removal": {
+    "passed": true,
+    "overlaps": [],
+    "boolean_pairs": 2
+  },
+  "nearest_ignition_corridor_mm": 22.4933069457768,
+  "negative_controls": {
+    "oversize_shank_blocked": true,
+    "nut_30deg_rotation_blocked": true,
+    "oversize_finger_hits_guard": true
+  },
+  "physical_fit_verified": false,
+  "electrical_verified": false,
+  "limits": "Candidate hardware only. Thread disengagement, whole hand, solder tails, board-internal routing, harness packing, EMC and actual flex/retention unverified.",
+  "passed": true,
+  "source_document": "source/CyberTrack-design.FCStd",
+  "source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
+  "delivery_sha256": "d774df9e6200a37cbc47b2df47fe00b6932f07a6177bdc73323609f8e0d96bd0",
+  "saved_and_reopened": true,
+  "layout": {
+    "revision": "0.54",
+    "centre_xyz_mm": [
+      -36.0,
+      -22.0,
+      114.0
+    ],
+    "old_centre_xyz_mm": [
+      -35,
+      -22,
+      100
+    ],
+    "location": "right inner shoulder; 1 mm outward, flange 14 mm above former cap base",
+    "seat": "integral ShoulderRailR; former StopPlinth removed",
+    "mounting_hole_mm": 7.3,
+    "panel_thickness_mm": 2,
+    "guard_top_z_mm": 119.5,
+    "nut_across_flats_mm": 10,
+    "nut_thickness_mm": 2,
+    "rear_pocket_width_mm": 10.4,
+    "strap_slots_mm": [
+      3,
+      1.5
+    ],
+    "button_press_assumed_mm": 1.5,
+    "wire_route_points_mm": [
+      [
+        -36,
+        -22,
+        102
+      ],
+      [
+        -36,
+        22,
+        102
+      ],
+      [
+        -36,
+        22,
+        113
+      ],
+      [
+        0,
+        22,
+        113
+      ],
+      [
+        0,
+        6,
+        113
+      ],
+      [
+        0,
+        6,
+        170
+      ],
+      [
+        0,
+        19,
+        170
+      ],
+      [
+        0,
+        19,
+        190
+      ]
+    ],
+    "wire_corridor_diameter_mm": 2.8,
+    "minimum_centreline_bend_assumed_mm": 4.0,
+    "routed_length_mm": 186.69911184307742,
+    "shared_trunk": "PowerCableRoute; BOOT pair included within the existing diameter-6 allocation",
+    "board_endpoint": "rear tray opening at (0,19,190); final GPIO0/GND tails not geometrically resolved",
+    "hardware_selected": false,
+    "physical_fit_verified": false,
+    "electrical_verified": false
+  }
+}

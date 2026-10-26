@@ -203,7 +203,7 @@ def check_service_paths(doc):
     scenarios=[('cable_access',(0,0,-80),bottom_screws if doc.getObject('BottomServiceCover') else ['AccessScrewL','AccessScrewR']),
                ('battery',(0,0,-60),[n.Name for n in all_shapes if n.Name.startswith('BatteryScrew')]+['PowerCableRoute','CableServiceCover','AccessScrewL','AccessScrewR']+bottom_removed),
                ('crown',(0,0,65),[n.Name for n in all_shapes if n.Name.startswith('CrownScrew')]),
-               ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew','BreadboardScrew'))]+['PowerCableRoute','WaterHoseRoute','ControllerWireRoute','UltrasonicWireSpace']),
+               ('electronics',(0,0,85),groups['crown']+[n.Name for n in all_shapes if n.Name.startswith(('CrownScrew','TrayScrew','BreadboardScrew'))]+['PowerCableRoute','StopSignalRoute','WaterHoseRoute','ControllerWireRoute','UltrasonicWireSpace']),
                ('Water',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewWater')]+['WaterHoseRoute','BubbleGunHoseRoute']),
                ('Bubble',(0,0,40),[n.Name for n in all_shapes if n.Name.startswith('FillScrewBubble')]+['WaterHoseRoute','BubbleGunHoseRoute'])]
     if doc.getObject('WaterRetentionBand'):
