@@ -11,6 +11,11 @@ V=App.Vector
 BASE_Y=(-78,-62)
 RING_Y=-125.5
 HOSE_FIXED_COUNT=6
+RING_BORE_MM=32.0
+RING_BORE_RISE_MM=1.3  # Keeps the lower bore edge 2.3 mm above the former Ø34 bore.
+RING_NOTCH_WIDTH_MM=7.5
+RING_NOTCH_DEPTH_MM=2.3
+SLOT_WALL_IDS=(2,3,4,5)  # User removed the -X front wall (1) and front stop (6).
 HOSE_POINTS=[(-28,65,154.5),(-28,65,174),(-99,65,174),(-99,10,174),(-99,10,94),
              (-99,-45,94),(-55,-45,101),(-55,-62,101)]
 LEAD_POINTS=[(-44,-62,98),(-44,-44,98),(-58,-44,114),(-74,-44,114)]
@@ -27,10 +32,15 @@ def cradle_primitives():
 
 
 def ring_shape():
-    # One continuous ring, no parting line, ears or ring screws. Bore clearance
-    # supports the tilted insertion path; glue is not included as a rigid CAD solid.
-    ring=cylinder(19.5,3,(-55,-127,110),(0,1,0)).cut(cylinder(17,3,(-55,-127,110),(0,1,0)))
-    return ring.fuse(box(-60,-127,88.95,-50,-124,92.5)).removeSplitter()
+    # User's 2026-10-26 eccentric bore and centred bottom notch. Dimensions are
+    # in the unpitched cradle frame; nominal and physical fit are checked separately.
+    ring=cylinder(19.5,3,(-55,-127,110),(0,1,0)).cut(
+        cylinder(RING_BORE_MM/2,3,(-55,-127,110+RING_BORE_RISE_MM),(0,1,0)))
+    ring=ring.fuse(box(-65,-127,88.95,-45,-124,92.5))
+    bore_bottom=110+RING_BORE_RISE_MM-RING_BORE_MM/2
+    notch=box(-55-RING_NOTCH_WIDTH_MM/2,-127,bore_bottom-RING_NOTCH_DEPTH_MM,
+              -55+RING_NOTCH_WIDTH_MM/2,-124,110+RING_BORE_RISE_MM)
+    return ring.cut(notch).removeSplitter()
 
 
 def body_service_poses():
@@ -88,6 +98,7 @@ def build_mount(doc,add):
         feature('BubbleGunBaseTool'+tag,'空托架基座批头空间 '+tag,cylinder(2.5,1.25,(x,y,88.7)).fuse(cylinder(4,38.75,(x,y,89.95))),category='clearance',color='power')
     feature('BubbleGunRing','前圆环整体／无分缝无紧固耳',ring_shape(),group='bubble_gun_cradle')
     for i,part in enumerate(slot_primitives(),1):
+        if i not in SLOT_WALL_IDS:continue
         feature('BubbleGunSlotWall'+str(i),'两段槽壁／后止挡 '+str(i),part,group='bubble_gun_cradle')
     floor=box(-59.8,-105.7,88.95,-50.2,-87,89.55).fuse(box(-57.8,-87,88.95,-52.2,-62,89.55)).removeSplitter()
     feature('BubbleGunLowerPadRear','阶梯槽底0.6垫／承托平面Z89.55',floor,color='dark',group='bubble_gun_cradle')
@@ -105,8 +116,15 @@ def build_mount(doc,add):
         'mount_scheme':'one-piece full front ring plus stepped slot; adhesive-assisted locating candidate',
         'mounting_plane_z_mm':89.55,'muzzle_circle_bottom_above_plane_mm':4.7,
         'height_conflict_mm':0.4,'candidate_plane_to_muzzle_top_mm':36.2,
-        'ring':{'bore_mm':34,'outer_diameter_mm':39,'axial_width_mm':3,'radial_clearance_mm':1.25,'one_piece':True,'ring_fasteners':0},
+        'ring':{'bore_mm':RING_BORE_MM,'bore_centre_rise_local_z_mm':RING_BORE_RISE_MM,
+                'bore_lower_edge_rise_local_z_mm':2.3,'outer_diameter_mm':39,'axial_width_mm':3,
+                'foot_width_mm':20,'foot_matches_front_base_width':True,
+                'bottom_notch_width_mm':RING_NOTCH_WIDTH_MM,'bottom_notch_depth_mm':RING_NOTCH_DEPTH_MM,
+                'notch_depth_reference':'down from the lowest point of the circular bore; through full axial thickness',
+                'concentric':False,'one_piece':True,'ring_fasteners':0,
+                'fit_note':'Eccentric bore requested 2026-10-26; nominal muzzle fit must be rechecked.'},
         'slot':{'rear_user_length_mm':25,'rear_user_width_mm':6,'front_user_nominal_width_mm':10,
+                'retained_wall_ids':list(SLOT_WALL_IDS),'removed_wall_ids':[1,6],
                 'rear_clear_width_mm':6.4,'front_clear_width_mm':10.4,'front_length_candidate_mm':19,
                 'tab_height_mm':6.8,'lateral_clearance_each_side_mm':0.2,'floor_padding_mm':0.6,
                 'centred_and_tail_flush':'assumed, not confirmed','front_foot_profile':'10x19x6.8 candidate; not measured'},

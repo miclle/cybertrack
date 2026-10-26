@@ -84,7 +84,7 @@
     "dry_side_unchanged": true
   },
   "physical_fit_verified": false,
-  "source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
+  "source_sha256": "b19c371fba3be2ac726707370cbdee50b6b57a9ae231ed87abe92b00eaf6af46",
   "parts": [
     {
       "id": "PP01",
@@ -132,17 +132,15 @@
       "members": [
         "BubbleGunCradle",
         "BubbleGunRing",
-        "BubbleGunSlotWall1",
         "BubbleGunSlotWall2",
         "BubbleGunSlotWall3",
         "BubbleGunSlotWall4",
-        "BubbleGunSlotWall5",
-        "BubbleGunSlotWall6"
+        "BubbleGunSlotWall5"
       ],
-      "feature_count": 8,
+      "feature_count": 6,
       "solids": 1,
       "valid": true,
-      "volume_mm3": 8570.018641060673,
+      "volume_mm3": 8489.899509844481,
       "size_xyz_mm": [
         50.0,
         67.34587331727691,
@@ -157,17 +155,18 @@
       "stl_connected_components": 1,
       "cad_boundary_shells": 1,
       "stl_nonmanifold": false,
-      "stl_facets": 2156,
+      "stl_facets": 2082,
       "step_geometry_equivalence_verified": false,
       "step_usage": "layout_exchange_only; use native FCStd for geometry",
-      "step_volume_difference_mm3": 6.621121428906918e-10,
+      "step_volume_difference_mm3": 9.307768777944148e-09,
       "step_volume_comparison_passed": true,
       "missing_source_volume_mm3": 0.0,
       "extra_volume_mm3": 0.0,
       "files": {
-        "PP02-BubbleCradle.step": "1c47987932c64deeb9fa315d094a9df186b79e00c4cc2840e1618a011da49439",
-        "PP02-BubbleCradle.stl": "5a7a816b63a00bd774c5cdf81757067471415faa87382f2dc94f2532ff8dd00a"
-      }
+        "PP02-BubbleCradle.step": "4a8a442b7d43de9fe19d5e09c56132b9a59e4a7a69010466cf2d17c86598c7cc",
+        "PP02-BubbleCradle.stl": "d0e44b1ce8fbecf8ba418104c004f6cc521f6e6111b81634ed09e13e21c9017c"
+      },
+      "local_change_audit": "pp02-adjustment-audit.json"
     },
     {
       "id": "PP03",
@@ -361,13 +360,15 @@
       }
     }
   ],
-  "source_feature_count": 58,
+  "source_feature_count": 56,
   "merged_print_part_count": 6,
   "saved_and_reopened": true,
   "passed": true,
   "manufacturing_released": false,
   "checks_on_design_features_equivalent_to_union": true,
-  "limits": "CAD solid connectivity, nominal interference and existing service checks; no slicing, strength, material, tolerance or physical acceptance.",
+  "limits": "Solid fusion/export checks only. PP02 changed 2026-10-26; assembly fit is separately recorded in pp02-adjustment-audit.json",
   "source_document": "source/CyberTrack-design.FCStd",
-  "equivalent_delivery_audit": "model-tree-audit.json"
+  "equivalent_delivery_audit": "model-tree-audit.json",
+  "local_change_audit": "pp02-adjustment-audit.json",
+  "assembly_fit_passed": false
 }

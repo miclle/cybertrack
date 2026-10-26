@@ -41,7 +41,8 @@ def organize(out, render=False):
     else:
         assert all(o.TypeId=='Part::MultiFuse' for o in unions)
         consumed={s.Name for o in unions for s in o.Shapes}
-        assert len(consumed)==58
+        from print_consolidation import groups
+        assert consumed=={n for _,_,members in groups(doc) for n in members}
     assert len(spaces)==59, 'Review changed clearance inventory before removing it'
     if render:
         assert all(not doc.getObject(n).ViewObject.Visibility for n in spaces)

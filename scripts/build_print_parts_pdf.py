@@ -16,7 +16,7 @@ OUT=MODEL/'print-parts'
 audit=json.loads((MODEL/'print-consolidation-audit.json').read_text())
 assert audit['passed'] and audit['source_sha256']==hashlib.sha256((MODEL/audit.get('source_document','CyberTrack.FCStd')).read_bytes()).hexdigest()
 report=json.loads((MODEL/'readback.json').read_text())
-assert report['design_revision']=='0.51'
+revision=report.get('local_revision',report['design_revision'])
 for r in audit['parts']:
     for filename,digest in r['files'].items():
         assert hashlib.sha256((OUT/filename).read_bytes()).hexdigest()==digest
@@ -27,7 +27,7 @@ pdfmetrics.registerFont(TTFont('ZH','/System/Library/Fonts/STHeiti Light.ttc',su
 U=72/25.4
 W,H=297*U,210*U
 c=canvas.Canvas(str(OUT/'print-parts.pdf'),pagesize=(W,H))
-c.setTitle('CyberTrack 0.51 合并打印图册')
+c.setTitle('CyberTrack '+revision+' 合并打印图册')
 c.setAuthor('CyberTrack')
 INK='#173643';MUTED='#52666F';ACCENT='#D66C30';PALE='#EEF3F5'
 style=ParagraphStyle('body',fontName='ZH',fontSize=9,leading=13,textColor=INK,wordWrap='CJK')
@@ -47,23 +47,23 @@ def pic(path,x,y,width,height):
 def frame(title,page):
     c.setFillColor(PALE);c.rect(0,182*U,W,28*U,fill=1,stroke=0)
     text(14,193,title,19)
-    text(14,184,'CYBERTRACK  /  0.51  /  2026-10-26',9,MUTED)
+    text(14,184,'CYBERTRACK  /  '+revision+'  /  2026-10-26',9,MUTED)
     c.setStrokeColorRGB(.8,.85,.87);c.line(14*U,15*U,283*U,15*U)
     text(14,9,'CAD连通性与装配评审；材料、层向、支撑、公差与实物验收未完成。',8,MUTED)
     text(266,9,f'{page} / 4',8,MUTED)
 
 frame('六组合并打印 · 保留原有机甲层次',1)
 pic(MODEL/'assembly.png',6,32,151,144)
-text(162,164,'58个源特征 → 6个单实体候选',16,ACCENT)
+text(162,164,f"{audit['source_feature_count']}个源特征 → 6个单实体候选",16,ACCENT)
 text(162,153,'本轮六件，不是全机打印BOM。',10)
 for i,row in enumerate(audit['parts']):
     text(162,139-i*11,row['label'],11)
-para(162,65,'双枪与背包保持原材料外形；冠盖增加背侧连接筋，颈架填平横梁间隙并补孔顶薄桥，底盘补湿舱内侧接缝。装甲台阶、凹槽、脊翼、主要外轮廓和检修分界保留。',119)
-para(162,38,'原0.50装配图册用于识别源特征；本图册与0.51分件清单决定本轮打印范围。',119)
+para(162,65,'PP02按2026-10-26要求调整，见第2页。其余五件几何保持；冠盖、颈架及底盘保留原合并连接。左侧整机图为此前布局示意，PP02以当前分件图为准。',119)
+para(162,38,'原装配图册仅作历史参考。PP02与现有枪壳仍有名义干涉，装拆未重新通过；本图册不构成制造放行。',119)
 c.showPage()
 notes=[
  '底托、两处托管槽合为一件。枪体、胶垫及肩梁独立，保留两颗基座螺钉。',
- '底座、前圆环、六段槽壁合为一件。保留穿环入槽与底座可拆路径，软垫独立。',
+ '偏心孔Ø32／上移1.3；支脚宽20；孔底缺口7.5×2.3 mm。删除近侧前壁与前挡块。与现有枪壳仍相交，装拆未通过。',
  '背包壳、下后护甲和脊条融合；桶座原已一体。瓶底托、绑带、软垫和设备不并入。',
  '底盘与湿舱隔板融合并补内侧接缝；保留两处原有封闭内腔。底盖、电源内托架、顶盖和电子托框独立。',
  '四条宽6、高2 mm的背侧连接筋连接前后护甲。四颗冠盖螺钉保持，整体上取。',
