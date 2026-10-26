@@ -69,9 +69,11 @@ public:
     }
 private:
     struct Bridge { gpio_num_t enable, in1, in2; ledc_channel_t channel; };
+    // Logical left/right order. Assembly feedback: forward/backward work,
+    // but turns are reversed with the former A/left, B/right assignment.
     static constexpr Bridge bridges[] = {
-        {GPIO_NUM_8, GPIO_NUM_9, GPIO_NUM_10, LEDC_CHANNEL_2},  // A / left candidate
-        {GPIO_NUM_11, GPIO_NUM_12, GPIO_NUM_13, LEDC_CHANNEL_3}, // B / right candidate
+        {GPIO_NUM_11, GPIO_NUM_12, GPIO_NUM_13, LEDC_CHANNEL_3}, // B / left
+        {GPIO_NUM_8, GPIO_NUM_9, GPIO_NUM_10, LEDC_CHANNEL_2},  // A / right
     };
     unsigned ready_mask = 0;
     bool water_on = false, bubbles_on = false, ignition_on = false, applied = false;
