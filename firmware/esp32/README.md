@@ -4,6 +4,8 @@
 
 Flash 为 16 MB、DIO 40 MHz；PSRAM 为 Octal 40 MHz，启动初始化及 ESP-IDF 内置内存检查开启，初始化失败不允许忽略。采用显式 `MALLOC_CAP_SPIRAM` 分配，普通堆仍留在内部 RAM。DIO 是本次固件访问模式，不改变此前识别到的 Flash quad 硬件能力。
 
+核对日期：2026-10-27。本工程是独立 COREBOARD 的无负载启动／BOOT 检查，保留自身源码版本 `0.2.0-boot-stop-check`。存储读写和 BOOT 分项通过不等于通用 F2b 或整机验收。现用样机为[面包板 ct21](../esp32-audio/README.md)，其应用偏移与固件配置不同，不套用下方独立板首次全量烧录命令。
+
 ## 构建、烧录与读取
 
 在仓库根目录，先激活已安装的 ESP-IDF v5.5.1 环境：
