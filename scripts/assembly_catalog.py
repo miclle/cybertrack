@@ -17,14 +17,18 @@ SYSTEMS = OrderedDict([
  ('H', ('面包板整组与浅托盘', '面包板布局 / 浅托盘 / 整板上取', '保留面包板内部接线；托盘4点固定在头壳支柱。装回前收置超声波线束，避免夹线。')),
  ('I', ('超声波与前脸接口', '双探头 / 超声波共存', '探头与PCB作为整模块处理；拆时先断线，后退11、上提70。PCB固定和接头仍是候选。')),
  ('J', ('水枪与胶粘底托', '水枪尺寸 / 水枪固定 / 线管', '先装空底托两颗基座螺钉，再铺胶垫、装枪、放管和接线；拆枪先断管断线并解除粘接。')),
- ('K', ('泡泡枪与整体圆环底座', '前置双枪 / 泡泡枪拆装', '先固定空底座，再按拆卸路径逆序穿环、入槽并胶辅固定；前环无分缝，不增加环上螺钉。')),
+ ('K', ('泡泡枪与整体圆环底座', '前置双枪 / 泡泡枪拆装', 'PP02孔形已调整；当前与枪壳仍相交。先解决配合，再重新验证穿环、入槽与取枪；不得沿用旧路径通过结论。')),
  ('L', ('双瓶背包、绑带与顶部吸管', '双瓶背包 / 顶部供液', '先固定两底托和软垫，再放入成品瓶、合绑带、顶部插管；拆瓶先移开目标吸管并松绑带。')),
- ('N', ('背包本体夹持与效果板承板', '背包夹环 / 薄承板固定', '本体解除并收置引线后从一体桶座上取；承板先拆电池再从下方解除四点紧固。板边压框及局部接线空间为候选，真实接口与公差仍待实测。')),
+ ('N', ('背包一体桶座与效果板承板', '一体桶座 / 薄承板固定', '本体解除并收置引线后从一体桶座上取；承板先拆电池再从下方解除四点紧固。板边压框及局部接线空间为候选，真实接口与公差仍待实测。')),
  ('M', ('工具、接线与维护空间', '对应系统维护详图', '本组均为自由空间，不是实物零件，不计入采购或打印；装配时保持通道畅通。')),
 ])
 
 
 def system(name, obj):
+    if name.startswith('PowerSwitch'): return 'B'
+    if name.startswith('Print'):
+        return {'PrintWaterCradle':'J','PrintBubbleCradle':'K','PrintBackpack':'L',
+                'PrintLowerTub':'B','PrintCrown':'G','PrintNeck':'E'}[name]
     if obj['category'] == 'clearance': return 'M'
     if name.startswith(('BackpackArc','ArcClamp','ArcLiner','ArcBottomPad','ArcInsert','ArcScrew','Effect','FrontEffect','IgnitionMOS')): return 'N'
     if name.startswith(('Track','Motor','DriveCoupler')): return 'A'
@@ -53,22 +57,36 @@ def family(name):
 
 def relation(name, obj, group):
     """Return assembly target and scope-limited installation note from current design."""
+    if obj.get('print_part_id'):
+        notes={'PP01':'水枪底托与两处托管槽一体；枪体、软垫与肩梁独立。',
+               'PP02':'偏心孔Ø32、孔心上移1.3；缺口7.5×2.3；支脚宽20。枪壳配合未通过。',
+               'PP03':'双瓶护壳、桶座、下后护甲与脊条一体；瓶托、软垫、绑带独立。',
+               'PP04':'底盘与湿舱隔板一体；底盖、内托架和顶盖独立拆装。',
+               'PP05':'冠盖及饰件一体；4颗螺钉固定，整体上提65，实际操作待验。',
+               'PP06':'固定颈架一体；无活动关节，中央走线与限位桥保持独立边界。'}
+        return obj['print_part_id']+' 合并打印候选',notes[obj['print_part_id']]
+    if obj.get('merged_into'):
+        return obj['merged_into']+' 内部源特征','已合入同一打印实体；本图卡仅用于识别设计特征，不独立装配或重复打印。'
+    if name.startswith('PowerSwitch'):
+        return '折面顶盖中央开关座','先断开电源与引线，再从上方退两颗候选螺钉、上取开关；触点、电流承载与实物操作待验。'
     if group == 'M':
         return '所示机构的检修 / 接线区域', '仅用于避让审查，不安装。形状与坐标表示预留范围；工具、手指、软线仍须实物核对。'
     if group=='N':
+        if name.startswith('IgnitionMOS'):
+            return '前舱第三块P01独立托架','先拆底盖与电池包、断开低压引线，退2颗吊装螺钉后整组下取80；板边、连接器与保持力待验。'
         if name.startswith('FrontEffect'):return '底盘左右前护甲外侧','0.45每侧两根封闭端外观线与根部护套；纯造型假设，无穿壳孔、内部高压路径、电极或固定工艺，不用于接线或制造。'
         if name.startswith('BackpackArc'):return '双瓶背包一体桶座与上导环','Ø25.5×70规划本体；先解除并收置引线，再上取90。上方无硬限位，摩擦保持力与实物装配待验。'
-        if name.startswith(('ArcLiner','ArcBottomPad')):return '夹环与本体接触界面','夹环软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。'
+        if name.startswith(('ArcLiner','ArcBottomPad')):return '一体桶座与本体接触界面','环带软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。'
         if name.startswith(('EffectMOS','EffectBuck')):return '承板浅凹座与开窗压框','MOS33×17×12／降压20×11×5；PCB厚1.6、四边无元件区2.5假设。机外拆框后上取20，实际板边必须核对。'
         if name.startswith('EffectSupport'):return 'PCB两条板边下方','0.5 mm垫放在1 mm深座内；板底中央0.5余量，焊脚、接触区、压缩及材料待实测。'
         if name.startswith('EffectRetainerInsert'):return '承板压框支柱','8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。'
         if name.startswith('EffectRetainerScrew'):return '开窗压框 → 承板支柱','每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。'
         if name.startswith('EffectRetainer'):return 'PCB无元件边缘上方','4个独立开窗框；仅覆盖假设空白板边，顶间隙0.4。机外拆本框2螺钉后上取20，再提板。'
-        if name=='EffectTray':return '顶盖内侧四根一体支柱','低位凹座与四耳沉台，孔X±47、Y−49/−26.5；先拆充电宝及底盖，再退出4螺钉，向下取100。'
+        if name=='EffectTray':return '顶盖内侧四根一体支柱','低位凹座与四耳沉台，孔X±47、Y−49/−26.5；先拆电池包及底盖，再退出4螺钉，向下取100。'
         if name.startswith('EffectInsert'):return '顶盖内柱向下开口盲孔','4个M2.5级候选嵌件；顶盖外表面不穿孔，配合、制造和强度待验。'
-        if name.startswith('EffectScrew'):return '承板四耳 → 顶盖内柱','4颗M2.5级候选，先拆充电宝再从下操作；头部凹入耳内，距电源2.1 mm；盘底2 mm，公差仍须复核。'
+        if name.startswith('EffectScrew'):return '承板四耳 → 顶盖内柱','4颗M2.5级候选，先拆电池包再从下操作；头部凹入耳内。新电池包较薄，旧电源间隙值不沿用。'
     if name=='BackpackShell':return '双瓶护壳及两侧一体点火模块桶座','0.50桶座、完整环带及连接耳融合为一个实体；顶部倒L压件及夹环螺钉／嵌件撤销。模块上取90，防脱保持力、材料和制造待验。'
-    if name=='KeelLid':return '底盘折面顶盖及内侧一体支柱','原前斜坡外表面保持；0.43调整薄承板4根内柱，底部螺钉固定，不穿透外表面。'
+    if name=='KeelLid':return '底盘折面顶盖及内侧一体支柱','内侧承板吊柱与顶盖一体；外侧中央增加电源开关座、开孔和护边。按当前形状核对，不能沿用旧无开孔说明。'
     if name.startswith('TrackPair'): raise ValueError(name)
     if name.startswith(('TrackLeft','TrackRight')):
         return '对应侧成品履带总成', '成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。'
@@ -89,11 +107,11 @@ def relation(name, obj, group):
     if name.startswith('Stop'):
         return '右肩内侧 BOOT 软件停止操作区', '0.54肩梁一体座／后插防转螺母；按钮从上方旋入，拆时断线后上提12再向前取出30；型号、螺纹、端子和实物配合待核。'
     if name == 'PowerBank':
-        return '电源内托架上的四处承托垫', '120×73×31.5实测外形；端口面朝+Y。先核对插头，内托架向下取出60。'
+        return '电源内托架上的四处承托垫', '辰克5 V电池包116×70.5×19.5；用户尺寸。端口与线尾未确认，断线后内托架下取60。'
     if name == 'BatteryHatch':
         return '底盘四处电源固定点', '配4垫圈、4颗M2.5级候选螺钉及嵌件；先托住电源，再紧固；底盖可独立拆卸。'
     if name.startswith('BatteryPad'):
-        return '电源内托架 → 充电宝底面', '四处承托垫；先铺垫再放电源。材料、压缩量与胶粘方式待核。'
+        return '电源内托架 → 电池包底面', '四处承托垫；先铺垫再放电源。材料、压缩量与胶粘方式待核。'
     if name.startswith('BatterySupportWasher'):
         return '电源内托架固定耳承压面', '与对应电源螺钉配套定位；承压、材质和实际垫圈标准待核。'
     if name.startswith('BatteryInsert'):
@@ -149,7 +167,7 @@ def relation(name, obj, group):
     if name in ('WaterGunBody','WaterGunInlet','WaterGunMaximumEnvelope'):
         return '水枪胶粘底托 / 侧接软管','成品枪体与未测接头示意；最大包络含管宽38.5。拆时脱胶、局部+Z抬2、−Y前抽150。'
     if name in ('BubbleGunShell','BubbleGunWheel','BubbleGunMotor','BubbleGunGearcase','BubbleGunMountingTab','BubbleGunFrontFoot','BubbleGunInspectionEnvelope'):
-        return '泡泡枪成品模块 → 圆环 / 阶梯槽','成品内部示意或外形包络，非新增采购件；整枪穿整体环入槽、胶辅助固定，槽面与最大宽待核。'
+        return '泡泡枪成品模块 → 圆环 / 阶梯槽','成品内部示意或外形包络，非新增采购件；当前与PP02有干涉，穿环与取枪路径须重新验证。'
     if name.startswith(('BubbleGunRing','BubbleGunSlotWall')) or name=='BubbleGunCradle':
         return '泡泡枪同一底座组件','整体圆环和两段槽随底座拆装；前环无分缝无螺钉。分对象表达特征，制造合并范围须核对。'
     if name=='BubbleGunLowerPadRear': return '泡泡枪阶梯槽底','0.6厚候选垫承托薄片底面；胶辅助固定，材料与粘接方式待验。'
@@ -218,7 +236,7 @@ def render_catalog(api, entries, sheets):
     para(20,48,f"数量：{len(entries)}个CAD对象包含{sum(e['category']=='clearance' for e in entries.values())}个非实体空间；复合履带对象内有多实体，探头端面含分色对象。对象数和实体数均不直接作为采购数量。扬声器等面包板组内设备没有独立模型，仅由整组规划包络覆盖。",378,9,5)
     text(20,29,'蓝 / 橙色编号对应对象；固定方式未定处明确留项。几何覆盖完整不等于装配工艺、制造或实物验收完整。',9,muted)
     end()
-    categories={'drive':'成品参考','structure':'结构候选','exterior':'外形候选','envelope':'包络 / 路线','component':'部件参考','clearance':'非实体空间'}
+    categories={'drive':'成品参考','structure':'结构候选','exterior':'外形候选','envelope':'包络 / 路线','component':'部件参考','clearance':'非实体空间','merged_print_part':'合并打印候选'}
     for sheet in sheets:
         groups=list(dict.fromkeys(card[0]['system'] for card in sheet['cards']))
         if len(groups)==1:

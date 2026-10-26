@@ -51,7 +51,7 @@
 - [print-parts](../hardware/model/print-parts/README.md)提供每件独立STL及STEP。STL仅平移到XY居中、最低点Z=0，保留整机轴向，尚未指定最优打印朝向；平移量与网格检查写入报告。
 - FCStd融合件按源特征表面保留分色显示；STL不携带颜色，如需实物保留配色，应在切片或后处理阶段安排。
 - 整机STEP对六组使用融合件替换源特征，不重复导出两套材料。STEP仍仅用于布局交换；以FCStd为几何依据。
-- [合并打印图册](../hardware/model/print-parts/print-parts.pdf)用于识别本轮六个打印件。原[0.50全对象装配图册](../hardware/model/CyberTrack-assembly-and-service.pdf)保留为特征级参考，其中58个源特征的独立图卡不再意味着逐件打印；本轮连接筋和打印分件以新图册及本页为准。
+- [合并打印图册](../hardware/model/print-parts/print-parts.pdf)用于识别本轮六个打印件。[当前整机装配与维护图册](../hardware/model/CyberTrack-assembly-and-service.pdf)已同步最新模型，并同时列出6个合并件与56个源特征的归属；源特征图卡仅供识别，不意味着逐件打印。PP02配合限制以本页顶部和整机图册第6–7页为准。
 
 生成入口仍为 `scripts/build_tank.py --render`，连接与合并实现位于 `scripts/print_consolidation.py`。合并及主模型树整理都是生成流程的一部分，不靠手工导出后修改STL。`scripts/model_tree.py`在几何检查完成后保留设计源档、清除主模型重复输入及隐藏检查空间并展平分组。整机生成成功后执行 `python3 scripts/build_print_parts_pdf.py`刷新六件图册；`audit_print_consolidation.py <修改前FCStd>`核对五对象变更范围。
 
