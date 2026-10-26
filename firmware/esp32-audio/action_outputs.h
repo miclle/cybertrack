@@ -9,7 +9,7 @@ public:
     static constexpr gpio_num_t WaterPin = GPIO_NUM_18;
     static constexpr gpio_num_t BubblesPin = GPIO_NUM_17; // Board-config free; physical wiring pending.
     static constexpr gpio_num_t IgnitionPin = GPIO_NUM_21; // One MOS for both modules; wiring pending.
-    static constexpr unsigned Duty = 154; // ~60%, 8 bit, same as the tested bench.
+    static constexpr unsigned Duty = 204; // ~80%, 8 bit; increased from 154 after slow-motion feedback.
     bool fault = false;
     bool Init() {
         uint64_t mask = (1ULL << WaterPin) | (1ULL << BubblesPin) | (1ULL << IgnitionPin);
@@ -39,8 +39,8 @@ public:
     }
     bool Apply(bool water, int left, int right, bool bubbles = false, bool ignition = false) {
         if (fault) { EmergencyOff(); return false; }
-        if ((left != 0 && left != 60 && left != -60) ||
-            (right != 0 && right != 60 && right != -60)) return Check(-1);
+        if ((left != 0 && left != 80 && left != -80) ||
+            (right != 0 && right != 80 && right != -80)) return Check(-1);
         // Change only requested lanes; stopping any one must not pulse the others.
         if ((!applied || ignition != ignition_on) && !ignition && !Check(gpio_set_level(IgnitionPin, 0))) return false;
         // Touch only the changing lane: starting/stopping water must not pulse

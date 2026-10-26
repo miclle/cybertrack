@@ -144,10 +144,10 @@ public:
     }
     static bool Direction(const char* value, int& a, int& b) {
         if (!value) return false;
-        if (!std::strcmp(value, "forward")) { a = 60; b = 60; }
-        else if (!std::strcmp(value, "backward")) { a = -60; b = -60; }
-        else if (!std::strcmp(value, "left")) { a = -60; b = 60; }
-        else if (!std::strcmp(value, "right")) { a = 60; b = -60; }
+        if (!std::strcmp(value, "forward")) { a = 80; b = 80; }
+        else if (!std::strcmp(value, "backward")) { a = -80; b = -80; }
+        else if (!std::strcmp(value, "left")) { a = -80; b = 80; }
+        else if (!std::strcmp(value, "right")) { a = 80; b = -80; }
         else return false;
         return true;
     }

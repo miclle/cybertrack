@@ -14,7 +14,7 @@
 |---|---|---|
 | 主电源 | [辰克 CK18650-1234S-NP](../hardware/components/ck-5v-battery/README.md)，标注 5 V，用户尺寸 116 × 70.5 × 19.5 mm | 输出电流、接头用途／极性及保护未知；不沿用旧 A110M 参数，不设计电芯充电电路 |
 | 主控 | 现用 `bread-compact-wifi` 面包板 | 按实物丝印接线；独立 COREBOARD 的排针图不直接作为面包板封装依据 |
-| 固件 | [apply_overlay.py](../firmware/esp32-audio/apply_overlay.py) 为 `2.0.3-ct19`；[输出实现](../firmware/esp32-audio/action_outputs.h)及[控制实现](../firmware/esp32-audio/cybertrack_tools.cc) | 固件引脚有源码依据；部署证据见 [ct19 记录](../firmware/esp32-audio/startup-ct19.json)，不等于新 PCB 验收 |
+| 固件 | [apply_overlay.py](../firmware/esp32-audio/apply_overlay.py) 为 `2.0.3-ct20`（80% PWM，已刷写）；[输出实现](../firmware/esp32-audio/action_outputs.h)及[控制实现](../firmware/esp32-audio/cybertrack_tools.cc) | 固件引脚有源码依据；部署证据见 [ct20 记录](../firmware/esp32-audio/startup-ct20.json)，不等于新 PCB 验收 |
 | 行走 | MT3608 目标 12 V → P13 L298N → 两台 37R-520 | 保留外置功率模块；核算升压输入、启动电流、驱动损耗及回灌 |
 | 水枪／泡泡 | 用户确认均为 3.7 V；每路独立 MOS 和降压板 | 不能并成一个受控输出；保留两路独立回流 |
 | 点火低压控制 | GPIO21 控制共用的一块 MOS；用户指定 5 V、单次最多 5 秒 | 只定义低压接口和禁用状态；不画高压输出、接线、电极及放电结构，不安排高压通电测试 |

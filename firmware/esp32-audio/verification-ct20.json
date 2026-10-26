@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-26",
+  "version": "2.0.3-ct20",
+  "scope": "Raise fixed motor PWM after user reported slow movement",
+  "motor_pwm": {
+    "previous_duty": 154,
+    "duty": 204,
+    "resolution_bits": 8,
+    "frequency_hz": 1000,
+    "logical_output_magnitude": 80
+  },
+  "checks": {
+    "host_sanitizers": "passed",
+    "output_transition_and_fault_matrix": "passed",
+    "web_ui": "passed",
+    "mcp_arguments_and_http_handlers": "passed",
+    "esp_idf_build": "passed"
+  },
+  "artifact": {
+    "path": "build/firmware-ct20/xiaozhi.bin",
+    "bytes": 2608496,
+    "sha256": "768b711d5efe69ed639d10b1bcd2b3f54eba8786ad496947ecda5461f3760f82"
+  },
+  "flashed": true,
+  "physical_actuation_tested": false,
+  "limitations": [
+    "New duty speed, current, supply voltage and thermal behavior remain unverified.",
+    "Historical 60% observations do not validate the new duty."
+  ],
+  "deployment_record": "startup-ct20.json"
+}
