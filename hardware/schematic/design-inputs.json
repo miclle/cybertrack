@@ -1,0 +1,66 @@
+{
+  "revision": "A1",
+  "date": "2026-10-26",
+  "controller_header": {
+    "orientation": "Component side facing observer; antenna up; both USB connectors down",
+    "numbering": "L/R are drawing-local row names; count 1 to 22 from antenna toward USB. Not a new connector footprint.",
+    "evidence": "hardware/components/breadboard/front-20261025.jpg",
+    "evidence_kind": "Visible silkscreen / row position, cross-checked against the supplier drawing; not a continuity or pad-dimension test",
+    "positions": {
+      "5Vin": "L21", "GND": "L22", "IO0": "R14",
+      "IO8": "L12", "IO9": "L15", "IO10": "L16",
+      "IO11": "L17", "IO12": "L18", "IO13": "L19",
+      "IO18": "L11", "IO17": "L10", "IO21": "R18",
+      "IO4": "L04", "IO5": "L05", "IO6": "L06",
+      "IO7": "L07", "IO15": "L08", "IO16": "L09",
+      "IO41": "R07", "IO42": "R06", "IO47": "R17",
+      "IO40": "R08", "IO39": "R09"
+    }
+  },
+  "motor_pulldowns": {
+    "references": ["R1", "R2", "R3", "R4", "R5", "R6"],
+    "value": "10k 1%",
+    "resistance_ohm": 10000,
+    "tolerance": 0.01,
+    "minimum_power_w": 0.1,
+    "package_target": "0603 (1608 metric); footprint not assigned",
+    "status": "Design value selected for direct L298 TTL inputs; actual P13 bias, power sequencing and default-off must still be verified",
+    "datasheet": "https://www.st.com/resource/en/datasheet/l298.pdf",
+    "datasheet_revision": "DS0218 Rev 5, October 2023, Table 4 page 5 and Table 5 page 8",
+    "logic_low_max_v": 1.5,
+    "logic_high_min_v": 2.3,
+    "low_input_current_magnitude_a": 0.00001,
+    "high_input_current_max_a": 0.0001,
+    "calculation_limits": "Uses chip table conditions and input-current magnitude for sizing; not a guaranteed module bound over all temperatures. ESP32-S3 unloaded VOH specification is not treated as a loaded-VOH guarantee.",
+    "placement": "At L298N receiver inputs; ENA/ENB always-on jumpers removed"
+  },
+  "actuator_isolation": {
+    "reference": "SW2",
+    "scope": "Actuator 5 V bus only; controller branch remains powered",
+    "status": "User confirmed 2026-10-26",
+    "device_rating_status": "TBD from measured power budget",
+    "rearm_and_residual_energy_status": "Not validated"
+  },
+  "boot_button": {
+    "reference": "SW3",
+    "contact": "Normally open, momentary, unlit dry contact",
+    "connection": "GPIO0 to GND_SYS, parallel with the on-board BOOT contact",
+    "external_rc": "No additional pull-up or capacitor selected; retain existing board and firmware bias",
+    "part_number_status": "Pending mechanical / low-current contact selection"
+  },
+  "module_terminal_evidence": {
+    "L298N": {
+      "front_view": "Heatsink up, power/control connectors down",
+      "control_columns_left_to_right": ["ENA", "IN1", "IN2", "IN3", "IN4", "ENB"],
+      "limit": "ENA/ENB jumper columns each contain supply and signal contacts; photograph does not assign which contact is the signal. Confirm continuity before choosing a physical footprint.",
+      "evidence": "hardware/components/L298N/reference/user-front-20261025.png"
+    },
+    "JZ_MOS": {
+      "known_terminals": ["VIN+", "VIN-", "VOUT+", "VOUT-", "TRIG/PWM", "GND"],
+      "control_holes": "Two repeated TRIG contacts and two repeated GND contacts; one controlled channel",
+      "evidence": ["hardware/components/jz-mos/physical-front-20261024.jpg", "hardware/components/jz-mos/physical-back-20261024.jpg"],
+      "unresolved": "Internal bias, exact MOS parts, current capability, protection and unpowered state"
+    }
+  },
+  "manufacturing_ready": false
+}

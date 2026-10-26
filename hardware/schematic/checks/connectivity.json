@@ -1,0 +1,428 @@
+{
+  "passed": true,
+  "net_count": 51,
+  "checks": [
+    {
+      "check": "Motor GPIO8 -> ENA",
+      "net": "MOTOR_A_EN",
+      "passed": true
+    },
+    {
+      "check": "Motor GPIO9 -> IN1",
+      "net": "MOTOR_A_IN1",
+      "passed": true
+    },
+    {
+      "check": "Motor GPIO10 -> IN2",
+      "net": "MOTOR_A_IN2",
+      "passed": true
+    },
+    {
+      "check": "Motor GPIO11 -> ENB",
+      "net": "MOTOR_B_EN",
+      "passed": true
+    },
+    {
+      "check": "Motor GPIO12 -> IN3",
+      "net": "MOTOR_B_IN1",
+      "passed": true
+    },
+    {
+      "check": "Motor GPIO13 -> IN4",
+      "net": "MOTOR_B_IN2",
+      "passed": true
+    },
+    {
+      "check": "Effect GPIO18 -> U6",
+      "net": "WATER_EN",
+      "passed": true
+    },
+    {
+      "check": "Effect GPIO17 -> U8",
+      "net": "BUBBLE_EN",
+      "passed": true
+    },
+    {
+      "check": "Effect GPIO21 -> U10",
+      "net": "IGNITION_EN",
+      "passed": true
+    },
+    {
+      "check": "BOOT dry contact",
+      "net": "/ESP32-S3 and BOOT/BOOT_STOP_N",
+      "passed": true
+    },
+    {
+      "check": "BOOT ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "Controller external 5 V service link",
+      "net": "5V_CTRL",
+      "passed": true
+    },
+    {
+      "check": "12 V stays on motor supply",
+      "net": "12V_MOTOR",
+      "passed": true
+    },
+    {
+      "check": "Controller is not connected to motor 12 V",
+      "passed": true
+    },
+    {
+      "check": "U6 switched positive -> buck",
+      "net": "/Water and bubbles/WATER_SW_P",
+      "passed": true
+    },
+    {
+      "check": "U6 switched return -> buck and load",
+      "net": "/Water and bubbles/WATER_SW_N",
+      "passed": true
+    },
+    {
+      "check": "U7 3.7 V -> load",
+      "net": "/Water and bubbles/3V7_WATER",
+      "passed": true
+    },
+    {
+      "check": "U6 power and control reference",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "U8 switched positive -> buck",
+      "net": "/Water and bubbles/BUBBLE_SW_P",
+      "passed": true
+    },
+    {
+      "check": "U8 switched return -> buck and load",
+      "net": "/Water and bubbles/BUBBLE_SW_N",
+      "passed": true
+    },
+    {
+      "check": "U9 3.7 V -> load",
+      "net": "/Water and bubbles/3V7_BUBBLE",
+      "passed": true
+    },
+    {
+      "check": "U8 power and control reference",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "All switched returns remain separate",
+      "passed": true
+    },
+    {
+      "check": "OUT1 -> M1.A",
+      "net": "Net-(M1-PadA)",
+      "passed": true
+    },
+    {
+      "check": "OUT2 -> M1.B",
+      "net": "Net-(M1-PadB)",
+      "passed": true
+    },
+    {
+      "check": "OUT3 -> M2.A",
+      "net": "Net-(M2-PadA)",
+      "passed": true
+    },
+    {
+      "check": "OUT4 -> M2.B",
+      "net": "Net-(M2-PadB)",
+      "passed": true
+    },
+    {
+      "check": "Four H-bridge terminals are not tied together or grounded",
+      "passed": true
+    },
+    {
+      "check": "L298N +5V has no external connection",
+      "passed": true
+    },
+    {
+      "check": "Ignition disconnect supply side",
+      "net": "5V_IGN_FUSED",
+      "passed": true
+    },
+    {
+      "check": "Ignition disconnect load side",
+      "net": "5V_IGN_ISOLATED",
+      "passed": true
+    },
+    {
+      "check": "Ignition disconnect not bypassed",
+      "passed": true
+    },
+    {
+      "check": "Ignition LV output positive",
+      "net": "/Reserved ignition LV/IGNITION_SW_P",
+      "passed": true
+    },
+    {
+      "check": "Ignition LV output return",
+      "net": "/Reserved ignition LV/IGNITION_SW_N",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO4",
+      "net": "Net-(U1B-MIC_WS_[L04])",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO5",
+      "net": "Net-(U1B-MIC_SCK_[L05])",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO6",
+      "net": "Net-(U1B-MIC_DATA_[L06])",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO7",
+      "net": "Net-(U1B-AMP_DATA_[L07])",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO15",
+      "net": "Net-(U1B-AMP_BCLK_[L08])",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO16",
+      "net": "Net-(U1B-AMP_LRCK_[L09])",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO41",
+      "net": "Net-(U1B-OLED_SDA_[R07])",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO42",
+      "net": "Net-(U1B-OLED_SCL_[R06])",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO47",
+      "net": "Net-(U1B-TALK_INPUT_[R17])",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO40",
+      "net": "Net-(U1B-VOLUME_UP_[R08])",
+      "passed": true
+    },
+    {
+      "check": "Retained GPIO39",
+      "net": "Net-(U1B-VOLUME_DOWN_[R09])",
+      "passed": true
+    },
+    {
+      "check": "R1 returns to system ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "R2 returns to system ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "R3 returns to system ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "R4 returns to system ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "R5 returns to system ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "R6 returns to system ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "R7 returns to system ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "R8 returns to system ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "R9 returns to system ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "Controller and actuator branches start before SW2",
+      "net": "5V_SYS",
+      "passed": true
+    },
+    {
+      "check": "Controller fuse feeds service link",
+      "net": "Net-(F2-Pad2)",
+      "passed": true
+    },
+    {
+      "check": "Actuator fuse feeds SW2",
+      "net": "Net-(F3-Pad2)",
+      "passed": true
+    },
+    {
+      "check": "SW2 output feeds all actuator fuses",
+      "net": "5V_ACT",
+      "passed": true
+    },
+    {
+      "check": "SW2 is not bypassed by controller supply",
+      "passed": true
+    },
+    {
+      "check": "R1 value 10k 1%",
+      "passed": true
+    },
+    {
+      "check": "R2 value 10k 1%",
+      "passed": true
+    },
+    {
+      "check": "R3 value 10k 1%",
+      "passed": true
+    },
+    {
+      "check": "R4 value 10k 1%",
+      "passed": true
+    },
+    {
+      "check": "R5 value 10k 1%",
+      "passed": true
+    },
+    {
+      "check": "R6 value 10k 1%",
+      "passed": true
+    },
+    {
+      "check": "R7 value TBD",
+      "passed": true
+    },
+    {
+      "check": "R8 value TBD",
+      "passed": true
+    },
+    {
+      "check": "R9 value TBD",
+      "passed": true
+    },
+    {
+      "check": "U1 5Vin photo position L21",
+      "passed": true
+    },
+    {
+      "check": "U1 GND photo position L22",
+      "passed": true
+    },
+    {
+      "check": "U1 IO0 photo position R14",
+      "passed": true
+    },
+    {
+      "check": "U1 IO8 photo position L12",
+      "passed": true
+    },
+    {
+      "check": "U1 IO9 photo position L15",
+      "passed": true
+    },
+    {
+      "check": "U1 IO10 photo position L16",
+      "passed": true
+    },
+    {
+      "check": "U1 IO11 photo position L17",
+      "passed": true
+    },
+    {
+      "check": "U1 IO12 photo position L18",
+      "passed": true
+    },
+    {
+      "check": "U1 IO13 photo position L19",
+      "passed": true
+    },
+    {
+      "check": "U1 IO18 photo position L11",
+      "passed": true
+    },
+    {
+      "check": "U1 IO17 photo position L10",
+      "passed": true
+    },
+    {
+      "check": "U1 IO21 photo position R18",
+      "passed": true
+    },
+    {
+      "check": "U1 IO4 photo position L04",
+      "passed": true
+    },
+    {
+      "check": "U1 IO5 photo position L05",
+      "passed": true
+    },
+    {
+      "check": "U1 IO6 photo position L06",
+      "passed": true
+    },
+    {
+      "check": "U1 IO7 photo position L07",
+      "passed": true
+    },
+    {
+      "check": "U1 IO15 photo position L08",
+      "passed": true
+    },
+    {
+      "check": "U1 IO16 photo position L09",
+      "passed": true
+    },
+    {
+      "check": "U1 IO41 photo position R07",
+      "passed": true
+    },
+    {
+      "check": "U1 IO42 photo position R06",
+      "passed": true
+    },
+    {
+      "check": "U1 IO47 photo position R17",
+      "passed": true
+    },
+    {
+      "check": "U1 IO40 photo position R08",
+      "passed": true
+    },
+    {
+      "check": "U1 IO39 photo position R09",
+      "passed": true
+    },
+    {
+      "check": "Actuator assignments match current firmware",
+      "passed": true
+    }
+  ],
+  "evidence": "KiCad-exported electrical netlist; not a physical wiring or power test"
+}

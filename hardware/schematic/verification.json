@@ -1,0 +1,128 @@
+{
+  "revision": "A1",
+  "date": "2026-10-26",
+  "kicad_version": "10.0.7",
+  "scope": "module-level electrical schematic; existing ESP32-S3 development board retained",
+  "source_format": "KiCad native editable schematic with project-local symbol library",
+  "pdf_origin": "Native kicad-cli export from the delivered root schematic and four child sheets",
+  "erc": {
+    "violations": 0,
+    "added_exclusions": 0,
+    "default_ignored_checks": [
+      {
+        "description": "Global label only appears once in the schematic",
+        "key": "single_global_label"
+      },
+      {
+        "description": "Four connection points are joined together",
+        "key": "four_way_junction"
+      },
+      {
+        "description": "SPICE model issue",
+        "key": "simulation_model_issue"
+      },
+      {
+        "description": "Assigned footprint doesn't match footprint filters",
+        "key": "footprint_filter"
+      }
+    ],
+    "report": "checks/erc.json"
+  },
+  "netlist_checks": {
+    "passed": true,
+    "count": 92,
+    "nets": 51,
+    "report": "checks/connectivity.json"
+  },
+  "pdf": {
+    "pages": [
+      {
+        "page": 1,
+        "width_pt": 1190.52,
+        "height_pt": 841.896,
+        "render_review": "passed"
+      },
+      {
+        "page": 2,
+        "width_pt": 1190.52,
+        "height_pt": 841.896,
+        "render_review": "passed"
+      },
+      {
+        "page": 3,
+        "width_pt": 1190.52,
+        "height_pt": 841.896,
+        "render_review": "passed"
+      },
+      {
+        "page": 4,
+        "width_pt": 1190.52,
+        "height_pt": 841.896,
+        "render_review": "passed"
+      },
+      {
+        "page": 5,
+        "width_pt": 1190.52,
+        "height_pt": 841.896,
+        "render_review": "passed"
+      }
+    ],
+    "visual_scope": "All five pages rendered and reviewed; revised pages rechecked"
+  },
+  "manufacturing_ready": false,
+  "physical_pin_map_frozen": false,
+  "hardware_test_performed": false,
+  "open_design_items": [
+    "U2 input protection implementation",
+    "U3 master power implementation",
+    "F1-F7 ratings",
+    "R7-R9 values; R1-R6 actual module bias and default-off verification",
+    "switch and connector ratings / physical mapping",
+    "power budget and module electrical validation",
+    "PCB footprints and placement"
+  ],
+  "sha256": {
+    ".gitignore": "09b6e0c5d96e2225ab3f27cbb9247e94c38b9e109b8a2d869bbcab331b6aafa9",
+    "CyberTrack-schematic.pdf": "48358f3ede4d4bf18eb713754065e3c48e69b95999c554b17fadc11a4f414092",
+    "CyberTrack.kicad_pro": "22db8ff9a4c1311b743dc4da5ceef0e4ed0ade962a5f6a4580f0c71645c32316",
+    "CyberTrack.kicad_sch": "499018617ebc4eda14bfb0ed27624125c647ccc23d934846f7c6b809552043da",
+    "CyberTrack.kicad_sym": "ecddf9e4afff12a4624ab37ac986af1a419a34f0a581dec907f3b25bdcc84806",
+    "README.md": "89d3cd6c4f128d5cad8e62622392bd22f1aa15b8e414b04080c2dd37df166d3c",
+    "checks/CyberTrack.net.xml": "53b8a928b8376ffea6b1332ffd44e2fc3250dd2959f14220ef97371252065f8d",
+    "checks/connectivity.json": "908e3b395d11b536af2f8461b250682cebb99f38d331cfe51fc4410f69f7323c",
+    "checks/design-values.json": "a0e7a1e5579bf287f41393f55feb2edab75f45d30f33ff27f9cfb2a9c942c8ec",
+    "checks/erc.json": "b557dc6ab596ea91295c9a586d3e26dba49a34b32278541aea226cfe72bfbb0a",
+    "control.kicad_sch": "074d988fe5e68cc9e2927b20730c0a1279e1effaf4ddcedf20a8abb0be9a5a17",
+    "design-inputs.json": "98bec99cdf5a17ed3d93f2be0aecc99affd53ba5faff816854f531fe6be3056a",
+    "drive.kicad_sch": "f80beff2deada1519b57eb8d6af7dc7c1b112d21b3f7dc75fb13a772118aebe0",
+    "effects.kicad_sch": "5f663a546217b7dd01afc38756f21810b4ffa344106efba2d22401f4a53bb73f",
+    "ignition-lv.kicad_sch": "7bfd92cb43172885a59e64b4d434224f4982beb2843d9c02bef2149047a04232",
+    "logical-components.json": "bf9e2261dcdbe9b5666762ed538d8ea46d4674533c868691affc8820ca78a21e",
+    "parameter-confirmation.md": "71cf7c49c9b781fd51884d0090f1ab3ef439d1a978b5e211238ffdac6db6f193",
+    "sym-lib-table": "2899e28c17cd11a6b0863eef3cb838721483ac9cf6b4d3e9be44f3a5f586313b"
+  },
+  "source_evidence_sha256": {
+    "firmware/esp32-audio/action_outputs.h": "1511055cda1cb7d1df6626ece7e2eb299e2e80bb88d20d7256592c063328c185",
+    "firmware/esp32-audio/cybertrack_tools.cc": "18fd72d605018829e413384b043f33492005295e05368d8679a60bb0137b50e2",
+    "hardware/components/ESP32-S3-N16R8/ESP32-S3-SCH-V1.4.pdf": "440f8a078c0a43588638b78089e21fa77fcd2ba4a9eb66df8153959fec17c8e8",
+    "hardware/components/breadboard/front-20261025.jpg": "c9e655b45ef52ec002579f7c48717ccaefce72f30182035489584614ed6861f4",
+    "hardware/components/L298N/reference/user-front-20261025.png": "60c612ea3e93f96d0dc9c074a37198f0c653a474421a1430ce23888b6298bbf2",
+    "hardware/components/jz-mos/physical-front-20261024.jpg": "109134ea2e19a56705077d292f1733acce9f9b7fc32969b11165e36b85ee0324",
+    "hardware/components/jz-mos/physical-back-20261024.jpg": "eb586ae99b9db908fa7e1d3ba396831e1bfe226cdf84d1ed5eb7cfd38fdb9243",
+    "scripts/generate_schematic.py": "5f372d9e765c6017f0650f5af5b4846a7d2aa6e79528aa33412390bb1ddb71f7",
+    "scripts/check_schematic_netlist.py": "6be716694ada171a6da469fdc8233654c2f43af024ff16c7fee9c3b5de005001",
+    "docs/schematic-and-pcb.md": "54629fc418ffe1bdc7f7e648d671dfeb08f717874393473e81062e897dec18ed"
+  },
+  "design_values": {
+    "report": "checks/design-values.json",
+    "status": "calculated, module verification pending"
+  },
+  "confirmed_user_requirements": [
+    "SW2 cuts actuator supply only; controller remains powered"
+  ],
+  "photo_pin_positions": {
+    "count": 23,
+    "continuity_verified": false,
+    "source": "design-inputs.json"
+  }
+}

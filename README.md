@@ -72,6 +72,7 @@ ctest --test-dir build/firmware-host --output-on-failure
 | 产品目标与已确认决定 | [产品需求](docs/requirements.md) · [决策和待补资料](docs/decisions.md) |
 | 机械布局、打印与装配 | [机械设计](docs/mechanical.md) · [模型与视图](hardware/model/README.md) · [合并打印](docs/print-consolidation.md) · [装配说明](docs/assembly.md) |
 | 电源、接线与采购 | [电源与接口](docs/power-and-interfaces.md) · [接线总表](docs/wiring.md) · [BOM](hardware/BOM.md) · [采购清单](hardware/procurement.md) |
+| 原理图设计与 PCB 打板 | [KiCad 原理图工程](hardware/schematic/README.md) · [五页原理图 PDF](hardware/schematic/CyberTrack-schematic.pdf) · [设计与制板要求](docs/schematic-and-pcb.md)；A1 已补引脚位置及电机下拉；[待确认参数](hardware/schematic/parameter-confirmation.md) |
 | 控制架构与语音配置 | [系统架构](docs/architecture.md) · [智能体角色](docs/agent-role.md) · [灵矽接入](docs/linx-integration.md) |
 | 网页操作与效果控制 | [局域网控制](docs/lan-control.md) · [泡泡与点火](docs/effects-control.md) · [面包板固件](firmware/esp32-audio/README.md) |
 | 固件接口与后续开发 | [固件入口](firmware/README.md) · [能力与接口](firmware/CAPABILITIES.md) · [固件计划](firmware/PLAN.md) |
