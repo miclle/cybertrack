@@ -1,8 +1,10 @@
 # L298N 紧凑固定与接线候选（0.57）
 
+当前打印使用 [29 件 Lean 六盘项目](../lean-print/README.md)。0.57 是本支架局部修订号，旧顶盖吊架方案已替代；以下局部证据不等于整机实物验收。
+
 2026-10-26。适用于两电机尾部净距 **30 mm**、两台安装面至尾部均 **57 mm**，以及用户新测的 **L298N 插上控制线后最大总厚度 28.5 mm**。取较小的直接净距，未把 CAD 面距推导的 32 mm 当成可用空间。原来的 27.5 mm 裸包络检查已经被本次接线包络取代。
 
-正式总装与设计源档同步为此候选；电机、履带及其固定接口保持。当前完成的是几何、紧固方式和接线空间设计，仍需局部实物试配。
+正式总装与设计源档同步为此候选；电机、履带及其固定接口保持。本专项证据涵盖几何、紧固方式和接线空间设计；虽已有整机样机实拍与运行视频，板卡接触面、夹持保持、温升和带线检修仍需逐项实物验证。
 
 ## 固定方式
 
@@ -43,11 +45,11 @@ PCB 孔位没有实测，故未使用假设孔距。软垫均为候选接触位�
 - [主总装](../CyberTrack.FCStd)、[设计源档](../source/CyberTrack-design.FCStd)。旧独立 L298N 裸包络保留，新[28.5 mm 接线包络](../../components/L298N/revisions/connected-28.5-2026-10-26/L298N-connected-envelope.FCStd)单独建档。
 - [局部评审模型](L298N-compact-review.FCStd)、[安装视图](installed.png)、[分解视图](exploded.png)、[接线空间视图](wiring.png)。红色电机尾部检查盒的 Y/Z 范围仍沿用旧电机径向包络，并非编码器实测轮廓。
 - LC01 [托架 STL](LC01-Carrier.stl)／[STEP](LC01-Carrier.step)，LC02 [上压框 STL](LC02-TopRetainer.stl)／[STEP](LC02-TopRetainer.step)。
-- LC03 [更新底盖 STL](LC03-BottomServiceCover.stl)／[STEP](LC03-BottomServiceCover.step)，LC04 [更新顶盖 STL](LC04-KeelLid.stl)／[STEP](LC04-KeelLid.step)。**LC04 已在后续打印修正中增加两根连接筋，现为单实体，并加入第 5 盘；见[当前交付](../remaining-print/README.md)**；LC01、LC02、LC03 为单实体。这些是正式底盘的配套件，VF01 框架本身没有底盖六孔，不能直接宣称整组可以锁在 VF01 上。
-- [完整审计](../l298n-compact-audit.json)、[打印件回读](parts-readback.json)、[动力接口与维护回归](drive-regression.json)。LC01、LC02、LC03 已加入最新 [14 件共盘项目](slicing/README.md)，完成方向、支撑、切片与时间优化；LC04 顶盖另在新增第 5 盘。独立原始 STL 不保存打印参数。
+- LC03 [更新底盖 STL](LC03-BottomServiceCover.stl)／[STEP](LC03-BottomServiceCover.step)，LC04 [更新顶盖 STL](LC04-KeelLid.stl)／[STEP](LC04-KeelLid.step)。**LC04 已在后续打印修正中增加两根连接筋，现为单实体，曾加入历史第 5 盘，现位于 Lean 第 6 盘；见[修正记录](../remaining-print/README.md)**；LC01、LC02、LC03 为单实体。这些是正式底盘的配套件，VF01 框架本身没有底盖六孔，不能直接宣称整组可以锁在 VF01 上。
+- [完整审计](../l298n-compact-audit.json)、[打印件回读](parts-readback.json)、[动力接口与维护回归](drive-regression.json)。LC01、LC02、LC03 曾加入 [历史 14 件共盘项目](slicing/README.md)，完成方向、支撑、切片与时间优化；当前 LC01–LC03 在 Lean 第 2 盘，LC04 在第 6 盘。独立原始 STL 不保存打印参数。
 
 已核对本组件内部及周边实体、接线与排气空间、整组 80 mm 连续下取、螺钉退出与工具杆、机外拆压框及板卡上取、保存回读、STEP 和 STL。原六件 PP 合并打印件、履带和电机几何不变。全机此前独立的配合问题不因本次局部检查通过而关闭；旧总装 PDF 的 L298N 章节不适用于本候选，以本目录及原生 CAD 为准。
 
-## 最新共盘打印
+## 当前打印入口与历史共盘
 
 14 件共盘 3MF（历史中间文件 `Accessories-14parts-P2S-PLA-FAST.3mf`，已清理） 包含底盖、L298N 托架和上压框，以及电池托板、左右侧框、固定颈架、左右肩梁、线束桥和 4 个控制板压框。预计 4 小时 58 分钟、148.42 g；详见[打印清单与检查](slicing/README.md)。

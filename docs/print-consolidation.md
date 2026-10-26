@@ -1,4 +1,6 @@
-# 0.51 合并打印件
+# 合并打印件演进与当前入口
+
+**现行交付：** [29 件 Lean 六盘项目](../hardware/model/lean-print/README.md)。已有[样机实拍与运行视频](../artifact/README.md)，当前处于联调与整机验证阶段。0.51 为六组合并历史基线，0.58 为头部局部修订；PP 编号数量不等于全机打印件数。下列历史合并、导出和检查记录保留原范围，实物验收项不变。
 
 ## 0.58：新增 PP07 头部下壳整体打印
 
@@ -6,7 +8,7 @@
 
 ## 2026-10-26：剩余四件打印修正
 
-后续用户授权为打印修复模型：PP02 增加同心 Ø32.8 下缘避让，与原 Ø32 偏心孔形成复合孔口，枪壳静态间隙 0.65 mm；缺口底面和安装孔位不动。LC04 增加两根 3 mm 内向连接筋，将三实体顶盖并为一体。PP01、PP03 几何不改。四件已完成方向、支撑及路径检查，共用第 5 盘；见[当前交付](../hardware/model/remaining-print/README.md)。以下 PP02 原始调整及冲突记录保留为历史，不再代表当前静态配合状态。
+后续用户授权为打印修复模型：PP02 增加同心 Ø32.8 下缘避让，与原 Ø32 偏心孔形成复合孔口，枪壳静态间隙 0.65 mm；缺口底面和安装孔位不动。LC04 增加两根 3 mm 内向连接筋，将三实体顶盖并为一体。PP01、PP03 几何不改。四件已完成方向、支撑及路径检查，当时共用第 5 盘，现已分入 Lean 第 3、6 盘；见[修正记录](../hardware/model/remaining-print/README.md)。以下 PP02 原始调整及冲突记录保留为历史，不再代表当前静态配合状态。
 
 ## 2026-10-26：PP02 原始局部调整
 
@@ -22,6 +24,8 @@
 局部更新入口为 `scripts/update_pp02.py --render`（FreeCAD Python 环境）。常规整机生成的静态／维护检查仍保留；不能为通过本次指定孔形而忽略枪体碰撞。
 
 ## 0.51 合并基线
+
+以下至补齐记录之前均描述 0.51 阶段，包括源特征数量、初次导出朝向和检查结果；后续头壳、分件与板卡固定变更以本页顶部专项为准。
 
 0.53新增[电源开关安装](power-switch.md)，只改变六件合并范围之外的折面顶盖；PP01–PP06几何及58个源特征划分保持。
 
@@ -59,11 +63,13 @@
 - [print-parts](../hardware/model/print-parts/README.md)提供每件独立STL及STEP。STL仅平移到XY居中、最低点Z=0，保留整机轴向，尚未指定最优打印朝向；平移量与网格检查写入报告。
 - FCStd融合件按源特征表面保留分色显示；STL不携带颜色，如需实物保留配色，应在切片或后处理阶段安排。
 - 整机STEP对六组使用融合件替换源特征，不重复导出两套材料。STEP仍仅用于布局交换；以FCStd为几何依据。
-- [合并打印图册](../hardware/model/print-parts/print-parts.pdf)用于识别本轮六个打印件。[当前整机装配与维护图册](../hardware/model/CyberTrack-assembly-and-service.pdf)已同步最新模型，并同时列出6个合并件与56个源特征的归属；源特征图卡仅供识别，不意味着逐件打印。PP02配合限制以本页顶部和整机图册第6–7页为准。
+- [合并打印图册](../hardware/model/print-parts/print-parts.pdf)用于识别本轮六个打印件。[历史整机装配与维护图册](../hardware/model/CyberTrack-assembly-and-service.pdf)记录 0.56 阶段模型，并同时列出6个合并件与56个源特征的归属；源特征图卡仅供识别，不意味着逐件打印。现行 PP02 修正以本页顶部专项为准，图册第6–7页仅记录修正前冲突。
 
-生成入口仍为 `scripts/build_tank.py --render`，连接与合并实现位于 `scripts/print_consolidation.py`。合并及主模型树整理都是生成流程的一部分，不靠手工导出后修改STL。`scripts/model_tree.py`在几何检查完成后保留设计源档、清除主模型重复输入及隐藏检查空间并展平分组。整机生成成功后执行 `python3 scripts/build_print_parts_pdf.py`刷新六件图册；`audit_print_consolidation.py <修改前FCStd>`核对五对象变更范围。
+历史六组合并生成入口为 `scripts/build_tank.py --render`，连接与合并实现位于 `scripts/print_consolidation.py`。合并及主模型树整理都是生成流程的一部分，不靠手工导出后修改STL。`scripts/model_tree.py`在几何检查完成后保留设计源档、清除主模型重复输入及隐藏检查空间并展平分组。整机生成成功后执行 `python3 scripts/build_print_parts_pdf.py`刷新六件图册；`audit_print_consolidation.py <修改前FCStd>`核对五对象变更范围。
 
 ## 保留与后续验证
+
+本节记录 0.51 当时未合并内容；头壳已由后续 PP07 合并，前舱外观件由补齐方案处理，5 个板卡压框在 Lean 中取消。以下未完成的实物验证不因此关闭。
 
 头部下壳的侧甲／后脑饰件、前舱饰板和左右镂空侧框尚未并入本轮六件：它们需要另行设计连接及比较支撑代价。头壳与冠盖、电子浅托盘、板卡压框、电源内托架、底盖和驱动托框继续分别拆装。软垫、绑带、软管、护套、金属紧固件及采购设备不合入刚性打印件。
 
@@ -84,4 +90,4 @@ PP06基座/鞍座随净径10通道调整，其STEP/STL及PP06.png同步；其余
 
 ### 2026-10-26 遗漏件补齐
 
-前舱左右侧甲与对应嵌条分别合为 PrintChestGuardL/R，各为单实体；其余遗漏件独立打印，共新增 12 件一盘。EffectTray 与 IgnitionMOSCarrier 的相切连接已补实，STL 闭合/连通与切片路径检查完成。用户取消两个线束护口。当前制造入口为[34 件六盘项目](../hardware/model/print-ready/README.md)，本轮[详单](../hardware/model/completion-print/README.md)取代上述前舱饰件尚未处理的历史状态。
+前舱左右侧甲与对应嵌条分别合为 PrintChestGuardL/R，各为单实体；其余遗漏件独立打印，共新增 12 件一盘。EffectTray 与 IgnitionMOSCarrier 的相切连接已补实，STL 闭合/连通与切片路径检查完成。用户取消两个线束护口。当时形成 34 件六盘基线，当前制造入口为[29 件 Lean 六盘项目](../hardware/model/lean-print/README.md)，本轮[详单](../hardware/model/completion-print/README.md)取代上述前舱饰件尚未处理的历史状态。
