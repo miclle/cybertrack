@@ -1,5 +1,7 @@
 # 0.51 六组合并打印候选
 
+**PP02 已于 2026-10-26 局部更新**：Ø32 mm 偏心孔、孔心上移 1.3 mm、底部 7.5 × 2.3 mm 缺口、20 mm 宽支脚，删除近侧前长槽壁和前横挡块。其余打印件保持。最新尺寸与配合限制见[调整说明](../../../docs/print-consolidation.md)及[报告](../pp02-adjustment-audit.json)；缺口两侧与现有枪体模型仍相交，暂不作为配合通过的打印定版。
+
 完整说明见[合并设计](../../../docs/print-consolidation.md)，回读与来源映射见[检查报告](../print-consolidation-audit.json)，[图册](print-parts.pdf)展示六件外形。
 
 | 编号 | 打印件 | STL | STEP |

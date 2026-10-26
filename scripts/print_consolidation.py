@@ -16,13 +16,14 @@ REVISION = '0.54'
 
 
 def groups(doc):
+    from bubble_gun_mount import SLOT_WALL_IDS
     crown = [o.Name for o in doc.Objects
              if o.Name.startswith(('Crown', 'BrowArmor', 'OccipitalBrow', 'HeadCrown', 'HeadService'))
              and not o.Name.startswith(('CrownScrew', 'CrownInsert'))]
     neck = [o.Name for o in doc.Objects if o.Name.startswith('Neck') and o.Name != 'NeckCableBridge']
     return [
         ('PrintWaterCradle', 'PP01 水枪一体底托', ['WaterGunCradle', 'WaterGunHoseSupport', 'WaterGunHoseSupportRear']),
-        ('PrintBubbleCradle', 'PP02 泡泡枪一体圆环底座', ['BubbleGunCradle', 'BubbleGunRing'] + ['BubbleGunSlotWall'+str(i) for i in range(1, 7)]),
+        ('PrintBubbleCradle', 'PP02 泡泡枪一体圆环底座', ['BubbleGunCradle', 'BubbleGunRing'] + ['BubbleGunSlotWall'+str(i) for i in SLOT_WALL_IDS]),
         ('PrintBackpack', 'PP03 双瓶背包一体外壳及桶座', ['BackpackShell', 'RearBaseArmor', 'BackpackSpine']),
         ('PrintLowerTub', 'PP04 一体底盘及湿舱隔板', ['LowerTub', 'RearBulkhead', 'WetDivider']),
         ('PrintCrown', 'PP05 一体冠盖及装甲饰件', crown),

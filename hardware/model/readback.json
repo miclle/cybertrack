@@ -4593,7 +4593,7 @@
       "category": "merged_print_part",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 8570.01864106067,
+      "volume_mm3": 8489.899509844487,
       "bbox_mm": [
         -79.99999999999999,
         -124.78517870878939,
@@ -8828,7 +8828,7 @@
     "valid": true,
     "solids": 887,
     "expected_solids": 887,
-    "volume_difference_mm3": 59.429878507042304,
+    "volume_difference_mm3": 59.47634777147323,
     "bbox_difference_mm": 8.952838470577262e-13,
     "volume_comparison_tolerance_mm3": 0.01,
     "volume_comparison_passed": false,
@@ -8836,11 +8836,23 @@
     "usage": "layout_exchange_only; native FCStd is the geometry source"
   },
   "collision_check": {
-    "tolerance_mm3": 0.01,
-    "boolean_pairs_tested": 1094,
-    "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
-    "overlaps": [],
-    "passed": true
+    "passed": false,
+    "current_validation": "superseded for PP02; see pp02-adjustment-audit.json",
+    "baseline_source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
+    "baseline_result": {
+      "tolerance_mm3": 0.01,
+      "boolean_pairs_tested": 1094,
+      "scope": "new-to-drive, new-to-new, envelope-to-all; drive internal contacts excluded",
+      "overlaps": [],
+      "passed": true
+    },
+    "overlaps": [
+      {
+        "object": "BubbleGunShell",
+        "volume_mm3": 65.11318159571593
+      }
+    ],
+    "scope": "Current PP02 against installed physical source features"
   },
   "water_gun_layout": {
     "source": "hardware/components/pulse-water-gun/README.md",
@@ -9576,12 +9588,19 @@
       "height_conflict_mm": 0.4,
       "candidate_plane_to_muzzle_top_mm": 36.2,
       "ring": {
-        "bore_mm": 34,
         "outer_diameter_mm": 39,
+        "bore_diameter_mm": 32.0,
+        "bore_centre_local_z_mm": 111.3,
+        "bore_centre_rise_local_z_mm": 1.3,
+        "bore_bottom_before_notch_local_z_mm": 95.3,
+        "bore_lower_edge_rise_mm": 2.3,
         "axial_width_mm": 3,
-        "radial_clearance_mm": 1.25,
-        "one_piece": true,
-        "ring_fasteners": 0
+        "foot_width_mm": 20,
+        "notch_width_mm": 7.5,
+        "notch_depth_mm": 2.3,
+        "notch_floor_local_z_mm": 93.0,
+        "notch_through_axial_width": true,
+        "coordinate_frame": "unpitched cradle; final assembly retains 15 degree elevation"
       },
       "slot": {
         "rear_user_length_mm": 25,
@@ -9594,7 +9613,17 @@
         "lateral_clearance_each_side_mm": 0.2,
         "floor_padding_mm": 0.6,
         "centred_and_tail_flush": "assumed, not confirmed",
-        "front_foot_profile": "10x19x6.8 candidate; not measured"
+        "front_foot_profile": "10x19x6.8 candidate; not measured",
+        "retained_wall_ids": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "removed_wall_ids": [
+          1,
+          6
+        ]
       },
       "base_screw_centres_xy_mm": [
         [
@@ -9736,353 +9765,358 @@
     ]
   },
   "bubble_gun_check": {
-    "mount_check": {
-      "service_spaces": [
+    "passed": false,
+    "current_validation": "superseded for PP02; see pp02-adjustment-audit.json",
+    "baseline_source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
+    "baseline_result": {
+      "mount_check": {
+        "service_spaces": [
+          {
+            "name": "BubbleGunStopAccess",
+            "excluded": [
+              "StopControl"
+            ],
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "name": "BubbleGunHoseClearance",
+            "excluded": [
+              "BubbleGunHoseRoute"
+            ],
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "name": "BubbleGunLeadClearance",
+            "excluded": [
+              "BubbleGunLeadRoute"
+            ],
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "name": "BubbleGunHoseService",
+            "excluded": [
+              "BubbleGunHoseRoute",
+              "BubbleGunLeadRoute"
+            ],
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "name": "BubbleGunConnectorService",
+            "excluded": [
+              "BubbleGunLeadRoute",
+              "BubbleGunLeadConnector"
+            ],
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "name": "BubbleGunBaseTool1",
+            "excluded": [
+              "BubbleGunShell",
+              "BubbleGunWheel",
+              "BubbleGunMotor",
+              "BubbleGunGearcase",
+              "BubbleGunMountingTab",
+              "BubbleGunFrontFoot",
+              "BubbleGunHoseRoute",
+              "BubbleGunHoseClearance",
+              "BubbleGunHoseService",
+              "BubbleGunLeadRoute",
+              "BubbleGunLeadClearance",
+              "BubbleGunLeadConnector",
+              "BubbleGunConnectorService"
+            ],
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "name": "BubbleGunBaseTool2",
+            "excluded": [
+              "BubbleGunShell",
+              "BubbleGunWheel",
+              "BubbleGunMotor",
+              "BubbleGunGearcase",
+              "BubbleGunMountingTab",
+              "BubbleGunFrontFoot",
+              "BubbleGunHoseRoute",
+              "BubbleGunHoseClearance",
+              "BubbleGunHoseService",
+              "BubbleGunLeadRoute",
+              "BubbleGunLeadClearance",
+              "BubbleGunLeadConnector",
+              "BubbleGunConnectorService"
+            ],
+            "overlaps": [],
+            "passed": true
+          }
+        ],
+        "continuous_service_sweeps": [
+          {
+            "operation": "body_install_remove",
+            "method": "sampled actual schematic solids;0.5-degree rotation,0.5 mm rear/lift,2 mm lateral steps; not a continuous rotation proof",
+            "removed_or_moving": [
+              "BubbleGunShell",
+              "BubbleGunWheel",
+              "BubbleGunMotor",
+              "BubbleGunGearcase",
+              "BubbleGunMountingTab",
+              "BubbleGunFrontFoot",
+              "BubbleGunHoseRoute",
+              "BubbleGunHoseClearance",
+              "BubbleGunHoseService",
+              "BubbleGunLeadRoute",
+              "BubbleGunLeadClearance",
+              "BubbleGunLeadConnector",
+              "BubbleGunConnectorService"
+            ],
+            "pose_count": 102,
+            "continuous": false,
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "operation": "base_screw_1",
+            "method": "+Z12 after body removal",
+            "removed_or_moving": [
+              "BubbleGunShell",
+              "BubbleGunWheel",
+              "BubbleGunMotor",
+              "BubbleGunGearcase",
+              "BubbleGunMountingTab",
+              "BubbleGunFrontFoot",
+              "BubbleGunHoseRoute",
+              "BubbleGunHoseClearance",
+              "BubbleGunHoseService",
+              "BubbleGunLeadRoute",
+              "BubbleGunLeadClearance",
+              "BubbleGunLeadConnector",
+              "BubbleGunConnectorService",
+              "BubbleGunBaseScrew1"
+            ],
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "operation": "base_screw_2",
+            "method": "+Z12 after body removal",
+            "removed_or_moving": [
+              "BubbleGunShell",
+              "BubbleGunWheel",
+              "BubbleGunMotor",
+              "BubbleGunGearcase",
+              "BubbleGunMountingTab",
+              "BubbleGunFrontFoot",
+              "BubbleGunHoseRoute",
+              "BubbleGunHoseClearance",
+              "BubbleGunHoseService",
+              "BubbleGunLeadRoute",
+              "BubbleGunLeadClearance",
+              "BubbleGunLeadConnector",
+              "BubbleGunConnectorService",
+              "BubbleGunBaseScrew2"
+            ],
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "operation": "empty_cradle",
+            "method": "per-material conservative boxes +Z6 then -X90",
+            "removed_or_moving": [
+              "BubbleGunShell",
+              "BubbleGunWheel",
+              "BubbleGunMotor",
+              "BubbleGunGearcase",
+              "BubbleGunMountingTab",
+              "BubbleGunFrontFoot",
+              "BubbleGunHoseRoute",
+              "BubbleGunHoseClearance",
+              "BubbleGunHoseService",
+              "BubbleGunLeadRoute",
+              "BubbleGunLeadClearance",
+              "BubbleGunLeadConnector",
+              "BubbleGunConnectorService",
+              "BubbleGunCradle",
+              "BubbleGunRing",
+              "BubbleGunSlotWall1",
+              "BubbleGunSlotWall2",
+              "BubbleGunSlotWall3",
+              "BubbleGunSlotWall4",
+              "BubbleGunSlotWall5",
+              "BubbleGunSlotWall6",
+              "BubbleGunLowerPadRear",
+              "BubbleGunBaseScrew1",
+              "BubbleGunBaseScrew2"
+            ],
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "operation": "front_outlet_clearance",
+            "method": "diameter36 x50 forward corridor; not flow validation",
+            "removed_or_moving": [
+              "BubbleGunShell",
+              "BubbleGunWheel",
+              "BubbleGunMotor",
+              "BubbleGunGearcase",
+              "BubbleGunMountingTab",
+              "BubbleGunFrontFoot"
+            ],
+            "overlaps": [],
+            "passed": true
+          }
+        ],
+        "passed": true,
+        "tool_scope": "no front-ring tools; base tip5x1.25 then8x38.75 after body removal; no complete hands/handles",
+        "stop_access_scope": "diameter12 fingertip from front; current BOOT seat also checks 1.5 mm press; not whole-hand acceptance",
+        "contact_and_removal_profiles_assumed": true,
+        "physical_fit_verified": false
+      },
+      "nominal_mount_intrusions": [
         {
-          "name": "BubbleGunStopAccess",
-          "excluded": [
-            "StopControl"
-          ],
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunRing",
+          "label": "前圆环整体／无分缝无紧固耳",
+          "overlap_mm3": 651.2872186618588
         },
         {
-          "name": "BubbleGunHoseClearance",
-          "excluded": [
-            "BubbleGunHoseRoute"
-          ],
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunSlotWall1",
+          "label": "两段槽壁／后止挡 1",
+          "overlap_mm3": 271.78125
         },
         {
-          "name": "BubbleGunLeadClearance",
-          "excluded": [
-            "BubbleGunLeadRoute"
-          ],
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunSlotWall2",
+          "label": "两段槽壁／后止挡 2",
+          "overlap_mm3": 271.78125
         },
         {
-          "name": "BubbleGunHoseService",
-          "excluded": [
-            "BubbleGunHoseRoute",
-            "BubbleGunLeadRoute"
-          ],
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunSlotWall3",
+          "label": "两段槽壁／后止挡 3",
+          "overlap_mm3": 364.4062500000001
         },
         {
-          "name": "BubbleGunConnectorService",
-          "excluded": [
-            "BubbleGunLeadRoute",
-            "BubbleGunLeadConnector"
-          ],
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunSlotWall4",
+          "label": "两段槽壁／后止挡 4",
+          "overlap_mm3": 364.40625
         },
         {
-          "name": "BubbleGunBaseTool1",
-          "excluded": [
-            "BubbleGunShell",
-            "BubbleGunWheel",
-            "BubbleGunMotor",
-            "BubbleGunGearcase",
-            "BubbleGunMountingTab",
-            "BubbleGunFrontFoot",
-            "BubbleGunHoseRoute",
-            "BubbleGunHoseClearance",
-            "BubbleGunHoseService",
-            "BubbleGunLeadRoute",
-            "BubbleGunLeadClearance",
-            "BubbleGunLeadConnector",
-            "BubbleGunConnectorService"
-          ],
-          "overlaps": [],
-          "passed": true
-        },
-        {
-          "name": "BubbleGunBaseTool2",
-          "excluded": [
-            "BubbleGunShell",
-            "BubbleGunWheel",
-            "BubbleGunMotor",
-            "BubbleGunGearcase",
-            "BubbleGunMountingTab",
-            "BubbleGunFrontFoot",
-            "BubbleGunHoseRoute",
-            "BubbleGunHoseClearance",
-            "BubbleGunHoseService",
-            "BubbleGunLeadRoute",
-            "BubbleGunLeadClearance",
-            "BubbleGunLeadConnector",
-            "BubbleGunConnectorService"
-          ],
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunSlotWall6",
+          "label": "两段槽壁／后止挡 6",
+          "overlap_mm3": 111.25000000000006
         }
       ],
-      "continuous_service_sweeps": [
-        {
-          "operation": "body_install_remove",
-          "method": "sampled actual schematic solids;0.5-degree rotation,0.5 mm rear/lift,2 mm lateral steps; not a continuous rotation proof",
-          "removed_or_moving": [
-            "BubbleGunShell",
-            "BubbleGunWheel",
-            "BubbleGunMotor",
-            "BubbleGunGearcase",
-            "BubbleGunMountingTab",
-            "BubbleGunFrontFoot",
-            "BubbleGunHoseRoute",
-            "BubbleGunHoseClearance",
-            "BubbleGunHoseService",
-            "BubbleGunLeadRoute",
-            "BubbleGunLeadClearance",
-            "BubbleGunLeadConnector",
-            "BubbleGunConnectorService"
-          ],
-          "pose_count": 102,
-          "continuous": false,
-          "overlaps": [],
-          "passed": true
-        },
-        {
-          "operation": "base_screw_1",
-          "method": "+Z12 after body removal",
-          "removed_or_moving": [
-            "BubbleGunShell",
-            "BubbleGunWheel",
-            "BubbleGunMotor",
-            "BubbleGunGearcase",
-            "BubbleGunMountingTab",
-            "BubbleGunFrontFoot",
-            "BubbleGunHoseRoute",
-            "BubbleGunHoseClearance",
-            "BubbleGunHoseService",
-            "BubbleGunLeadRoute",
-            "BubbleGunLeadClearance",
-            "BubbleGunLeadConnector",
-            "BubbleGunConnectorService",
-            "BubbleGunBaseScrew1"
-          ],
-          "overlaps": [],
-          "passed": true
-        },
-        {
-          "operation": "base_screw_2",
-          "method": "+Z12 after body removal",
-          "removed_or_moving": [
-            "BubbleGunShell",
-            "BubbleGunWheel",
-            "BubbleGunMotor",
-            "BubbleGunGearcase",
-            "BubbleGunMountingTab",
-            "BubbleGunFrontFoot",
-            "BubbleGunHoseRoute",
-            "BubbleGunHoseClearance",
-            "BubbleGunHoseService",
-            "BubbleGunLeadRoute",
-            "BubbleGunLeadClearance",
-            "BubbleGunLeadConnector",
-            "BubbleGunConnectorService",
-            "BubbleGunBaseScrew2"
-          ],
-          "overlaps": [],
-          "passed": true
-        },
-        {
-          "operation": "empty_cradle",
-          "method": "per-material conservative boxes +Z6 then -X90",
-          "removed_or_moving": [
-            "BubbleGunShell",
-            "BubbleGunWheel",
-            "BubbleGunMotor",
-            "BubbleGunGearcase",
-            "BubbleGunMountingTab",
-            "BubbleGunFrontFoot",
-            "BubbleGunHoseRoute",
-            "BubbleGunHoseClearance",
-            "BubbleGunHoseService",
-            "BubbleGunLeadRoute",
-            "BubbleGunLeadClearance",
-            "BubbleGunLeadConnector",
-            "BubbleGunConnectorService",
-            "BubbleGunCradle",
-            "BubbleGunRing",
-            "BubbleGunSlotWall1",
-            "BubbleGunSlotWall2",
-            "BubbleGunSlotWall3",
-            "BubbleGunSlotWall4",
-            "BubbleGunSlotWall5",
-            "BubbleGunSlotWall6",
-            "BubbleGunLowerPadRear",
-            "BubbleGunBaseScrew1",
-            "BubbleGunBaseScrew2"
-          ],
-          "overlaps": [],
-          "passed": true
-        },
-        {
-          "operation": "front_outlet_clearance",
-          "method": "diameter36 x50 forward corridor; not flow validation",
-          "removed_or_moving": [
-            "BubbleGunShell",
-            "BubbleGunWheel",
-            "BubbleGunMotor",
-            "BubbleGunGearcase",
-            "BubbleGunMountingTab",
-            "BubbleGunFrontFoot"
-          ],
-          "overlaps": [],
-          "passed": true
-        }
-      ],
-      "passed": true,
-      "tool_scope": "no front-ring tools; base tip5x1.25 then8x38.75 after body removal; no complete hands/handles",
-      "stop_access_scope": "diameter12 fingertip from front; current BOOT seat also checks 1.5 mm press; not whole-hand acceptance",
-      "contact_and_removal_profiles_assumed": true,
-      "physical_fit_verified": false
-    },
-    "nominal_mount_intrusions": [
-      {
-        "object": "BubbleGunRing",
-        "label": "前圆环整体／无分缝无紧固耳",
-        "overlap_mm3": 651.2872186618588
-      },
-      {
-        "object": "BubbleGunSlotWall1",
-        "label": "两段槽壁／后止挡 1",
-        "overlap_mm3": 271.78125
-      },
-      {
-        "object": "BubbleGunSlotWall2",
-        "label": "两段槽壁／后止挡 2",
-        "overlap_mm3": 271.78125
-      },
-      {
-        "object": "BubbleGunSlotWall3",
-        "label": "两段槽壁／后止挡 3",
-        "overlap_mm3": 364.4062500000001
-      },
-      {
-        "object": "BubbleGunSlotWall4",
-        "label": "两段槽壁／后止挡 4",
-        "overlap_mm3": 364.40625
-      },
-      {
-        "object": "BubbleGunSlotWall6",
-        "label": "两段槽壁／后止挡 6",
-        "overlap_mm3": 111.25000000000006
-      }
-    ],
-    "method": "reserved box vs external obstacles; contact pads/caps use actual mockup geometry and assumed contact profiles, not measured surfaces",
-    "tolerance_mm3": 0.01,
-    "overlaps": [],
-    "nearest_clearances": [
-      {
-        "object": "BubbleGunHoseRoute",
-        "distance_mm": 0.0
-      },
-      {
-        "object": "BubbleGunLeadRoute",
-        "distance_mm": 7.105427357601002e-15
-      },
-      {
-        "object": "BubbleGunCradle",
-        "distance_mm": 0.5999999999999801
-      },
-      {
-        "object": "BubbleGunBaseScrew1",
-        "distance_mm": 0.8499999999999801
-      },
-      {
-        "object": "BubbleGunBaseScrew2",
-        "distance_mm": 0.8499999999999943
-      },
-      {
-        "object": "ShoulderRailR",
-        "distance_mm": 3.599999999999966
-      },
-      {
-        "object": "BubbleGunBaseInsert1",
-        "distance_mm": 3.799999999999983
-      },
-      {
-        "object": "BubbleGunBaseInsert2",
-        "distance_mm": 3.799999999999997
-      },
-      {
-        "object": "KeelLid",
-        "distance_mm": 12.306618297115694
-      },
-      {
-        "object": "BubbleGunLeadConnector",
-        "distance_mm": 13.046455457326324
-      },
-      {
-        "object": "KeelSideFrameR",
-        "distance_mm": 13.811885274829299
-      },
-      {
-        "object": "LowerTub",
-        "distance_mm": 15.092048369771472
-      }
-    ],
-    "removal": {
-      "method": "tail-up15deg, rear10, lift3, outboard90 in tilted module frame; sampled CAD path",
-      "preconditions": "remove adhesive; disconnect connector then hose and move flexible routes",
+      "method": "reserved box vs external obstacles; contact pads/caps use actual mockup geometry and assumed contact profiles, not measured surfaces",
+      "tolerance_mm3": 0.01,
       "overlaps": [],
-      "passed": true
-    },
-    "other_service_sweeps": {
-      "method": "conservative per-object AABB of every straight path segment vs bubble reserved box",
-      "scenarios": [
+      "nearest_clearances": [
         {
-          "group": "cable_access",
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunHoseRoute",
+          "distance_mm": 0.0
         },
         {
-          "group": "battery",
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunLeadRoute",
+          "distance_mm": 7.105427357601002e-15
         },
         {
-          "group": "crown",
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunCradle",
+          "distance_mm": 0.5999999999999801
         },
         {
-          "group": "electronics",
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunBaseScrew1",
+          "distance_mm": 0.8499999999999801
         },
         {
-          "group": "Water",
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunBaseScrew2",
+          "distance_mm": 0.8499999999999943
         },
         {
-          "group": "Bubble",
-          "overlaps": [],
-          "passed": true
+          "object": "ShoulderRailR",
+          "distance_mm": 3.599999999999966
         },
         {
-          "group": "water_gun",
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunBaseInsert1",
+          "distance_mm": 3.799999999999983
         },
         {
-          "group": "water_gun_cradle",
-          "overlaps": [],
-          "passed": true
+          "object": "BubbleGunBaseInsert2",
+          "distance_mm": 3.799999999999997
+        },
+        {
+          "object": "KeelLid",
+          "distance_mm": 12.306618297115694
+        },
+        {
+          "object": "BubbleGunLeadConnector",
+          "distance_mm": 13.046455457326324
+        },
+        {
+          "object": "KeelSideFrameR",
+          "distance_mm": 13.811885274829299
+        },
+        {
+          "object": "LowerTub",
+          "distance_mm": 15.092048369771472
         }
       ],
-      "passed": true
-    },
-    "passed": true,
-    "width_and_interfaces_measured": false,
-    "physical_fit_verified": false,
-    "coordinate_frame": "checks evaluated in inverse-pitched module frame; dimensions and displacement vectors use pre-pitch axes; see gun_pitch for world transform"
+      "removal": {
+        "method": "tail-up15deg, rear10, lift3, outboard90 in tilted module frame; sampled CAD path",
+        "preconditions": "remove adhesive; disconnect connector then hose and move flexible routes",
+        "overlaps": [],
+        "passed": true
+      },
+      "other_service_sweeps": {
+        "method": "conservative per-object AABB of every straight path segment vs bubble reserved box",
+        "scenarios": [
+          {
+            "group": "cable_access",
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "group": "battery",
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "group": "crown",
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "group": "electronics",
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "group": "Water",
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "group": "Bubble",
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "group": "water_gun",
+            "overlaps": [],
+            "passed": true
+          },
+          {
+            "group": "water_gun_cradle",
+            "overlaps": [],
+            "passed": true
+          }
+        ],
+        "passed": true
+      },
+      "passed": true,
+      "width_and_interfaces_measured": false,
+      "physical_fit_verified": false,
+      "coordinate_frame": "checks evaluated in inverse-pitched module frame; dimensions and displacement vectors use pre-pitch axes; see gun_pitch for world transform"
+    }
   },
   "gun_pitch": {
     "elevation_degrees": 15.0,
@@ -10222,315 +10256,320 @@
     "adhesive": "user plans hot-melt/glue as auxiliary; unspecified material/strength; remove adhesive before mechanical service"
   },
   "service_paths": {
-    "method": "8 discrete poses per straight segment; whole breadboard continuous tray/fastener/tool checks are reported separately in breadboard_check; legacy arc/USB scenarios only exist when those objects are present; no hand access certification",
-    "scenarios": [
-      {
-        "group": "cable_access",
-        "waypoints_mm": [
-          [
-            0.0,
-            0.0,
-            0.0
+    "passed": false,
+    "current_validation": "superseded for PP02; see pp02-adjustment-audit.json",
+    "baseline_source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
+    "baseline_result": {
+      "method": "8 discrete poses per straight segment; whole breadboard continuous tray/fastener/tool checks are reported separately in breadboard_check; legacy arc/USB scenarios only exist when those objects are present; no hand access certification",
+      "scenarios": [
+        {
+          "group": "cable_access",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -80.0
+            ]
           ],
-          [
-            0.0,
-            0.0,
-            -80.0
-          ]
-        ],
-        "pose_count": 8,
-        "removed_first": [
-          "BottomCoverScrew0",
-          "BottomCoverScrew1",
-          "BottomCoverScrew2",
-          "BottomCoverScrew3",
-          "BottomCoverScrew4",
-          "BottomCoverScrew5"
-        ],
-        "boolean_pairs_tested": 3,
-        "overlaps": [],
-        "continuous_translation_sweep": null,
-        "passed": true
-      },
-      {
-        "group": "battery",
-        "waypoints_mm": [
-          [
-            0.0,
-            0.0,
-            0.0
+          "pose_count": 8,
+          "removed_first": [
+            "BottomCoverScrew0",
+            "BottomCoverScrew1",
+            "BottomCoverScrew2",
+            "BottomCoverScrew3",
+            "BottomCoverScrew4",
+            "BottomCoverScrew5"
           ],
-          [
-            0.0,
-            0.0,
-            -60.0
-          ]
-        ],
-        "pose_count": 8,
-        "removed_first": [
-          "BatteryScrewLFront",
-          "BatteryScrewLRear",
-          "BatteryScrewRFront",
-          "BatteryScrewRRear",
-          "PowerCableRoute",
-          "CableServiceCover",
-          "AccessScrewL",
-          "AccessScrewR",
-          "BottomServiceCover",
-          "BottomCoverScrew0",
-          "BottomCoverScrew1",
-          "BottomCoverScrew2",
-          "BottomCoverScrew3",
-          "BottomCoverScrew4",
-          "BottomCoverScrew5"
-        ],
-        "boolean_pairs_tested": 45,
-        "overlaps": [],
-        "continuous_translation_sweep": null,
-        "passed": true
-      },
-      {
-        "group": "crown",
-        "waypoints_mm": [
-          [
-            0.0,
-            0.0,
-            0.0
+          "boolean_pairs_tested": 3,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "battery",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -60.0
+            ]
           ],
-          [
-            0.0,
-            0.0,
-            65.0
-          ]
-        ],
-        "pose_count": 8,
-        "removed_first": [
-          "CrownScrewLFront",
-          "CrownScrewLRear",
-          "CrownScrewRFront",
-          "CrownScrewRRear"
-        ],
-        "boolean_pairs_tested": 20,
-        "overlaps": [],
-        "continuous_translation_sweep": null,
-        "passed": true
-      },
-      {
-        "group": "electronics",
-        "waypoints_mm": [
-          [
-            0.0,
-            0.0,
-            0.0
+          "pose_count": 8,
+          "removed_first": [
+            "BatteryScrewLFront",
+            "BatteryScrewLRear",
+            "BatteryScrewRFront",
+            "BatteryScrewRRear",
+            "PowerCableRoute",
+            "CableServiceCover",
+            "AccessScrewL",
+            "AccessScrewR",
+            "BottomServiceCover",
+            "BottomCoverScrew0",
+            "BottomCoverScrew1",
+            "BottomCoverScrew2",
+            "BottomCoverScrew3",
+            "BottomCoverScrew4",
+            "BottomCoverScrew5"
           ],
-          [
-            0.0,
-            0.0,
-            85.0
-          ]
-        ],
-        "pose_count": 8,
-        "removed_first": [
-          "BrowArmorL",
-          "BrowArmorR",
-          "CrownFinL",
-          "CrownFinR",
-          "CrownSpine",
-          "CrownForePlate",
-          "CrownSideArmorL",
-          "CrownSideArmorR",
-          "CrownRearCassette",
-          "CrownRearBlade0",
-          "CrownRearBlade1",
-          "CrownRearBlade2",
-          "OccipitalBrowL",
-          "OccipitalBrowR",
-          "CrownEffectInsetL",
-          "CrownEffectMarkLFront",
-          "CrownEffectMarkLRear",
-          "CrownEffectInsetR",
-          "CrownEffectMarkRFront",
-          "CrownEffectMarkRRear",
-          "HeadCrownShell",
-          "HeadServiceHatch",
-          "CrownScrewLFront",
-          "CrownScrewLRear",
-          "CrownScrewRFront",
-          "CrownScrewRRear",
-          "BreadboardScrew0",
-          "BreadboardScrew1",
-          "BreadboardScrew2",
-          "BreadboardScrew3",
-          "PowerCableRoute",
-          "StopSignalRoute",
-          "WaterHoseRoute",
-          "ControllerWireRoute",
-          "UltrasonicWireSpace"
-        ],
-        "boolean_pairs_tested": 17,
-        "overlaps": [],
-        "continuous_translation_sweep": null,
-        "passed": true
-      },
-      {
-        "group": "Water",
-        "waypoints_mm": [
-          [
-            0.0,
-            0.0,
-            0.0
+          "boolean_pairs_tested": 45,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "crown",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              65.0
+            ]
           ],
-          [
-            0.0,
-            0.0,
-            150.0
-          ]
-        ],
-        "pose_count": 8,
-        "removed_first": [
-          "WaterRetentionBand",
-          "WaterStrapClosure",
-          "WaterHoseRoute"
-        ],
-        "boolean_pairs_tested": 23,
-        "overlaps": [],
-        "continuous_translation_sweep": null,
-        "passed": true
-      },
-      {
-        "group": "Bubble",
-        "waypoints_mm": [
-          [
-            0.0,
-            0.0,
-            0.0
+          "pose_count": 8,
+          "removed_first": [
+            "CrownScrewLFront",
+            "CrownScrewLRear",
+            "CrownScrewRFront",
+            "CrownScrewRRear"
           ],
-          [
-            0.0,
-            0.0,
-            150.0
-          ]
-        ],
-        "pose_count": 8,
-        "removed_first": [
-          "BubbleRetentionBand",
-          "BubbleStrapClosure",
-          "BubbleGunHoseRoute"
-        ],
-        "boolean_pairs_tested": 23,
-        "overlaps": [],
-        "continuous_translation_sweep": null,
-        "passed": true
-      },
-      {
-        "group": "bubble_gun_cradle",
-        "waypoints_mm": [
-          [
-            0.0,
-            0.0,
-            0.0
+          "boolean_pairs_tested": 20,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "electronics",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              85.0
+            ]
           ],
-          [
-            0.0,
-            1.5529142706151244,
-            5.795554957734409
+          "pose_count": 8,
+          "removed_first": [
+            "BrowArmorL",
+            "BrowArmorR",
+            "CrownFinL",
+            "CrownFinR",
+            "CrownSpine",
+            "CrownForePlate",
+            "CrownSideArmorL",
+            "CrownSideArmorR",
+            "CrownRearCassette",
+            "CrownRearBlade0",
+            "CrownRearBlade1",
+            "CrownRearBlade2",
+            "OccipitalBrowL",
+            "OccipitalBrowR",
+            "CrownEffectInsetL",
+            "CrownEffectMarkLFront",
+            "CrownEffectMarkLRear",
+            "CrownEffectInsetR",
+            "CrownEffectMarkRFront",
+            "CrownEffectMarkRRear",
+            "HeadCrownShell",
+            "HeadServiceHatch",
+            "CrownScrewLFront",
+            "CrownScrewLRear",
+            "CrownScrewRFront",
+            "CrownScrewRRear",
+            "BreadboardScrew0",
+            "BreadboardScrew1",
+            "BreadboardScrew2",
+            "BreadboardScrew3",
+            "PowerCableRoute",
+            "StopSignalRoute",
+            "WaterHoseRoute",
+            "ControllerWireRoute",
+            "UltrasonicWireSpace"
           ],
-          [
-            -90.0,
-            1.5529142706151244,
-            5.795554957734409
-          ]
-        ],
-        "pose_count": 16,
-        "removed_first": [
-          "BubbleGunHoseRoute",
-          "BubbleGunHoseClearance",
-          "BubbleGunHoseService",
-          "BubbleGunLeadRoute",
-          "BubbleGunLeadClearance",
-          "BubbleGunLeadConnector",
-          "BubbleGunConnectorService",
-          "BubbleGunShell",
-          "BubbleGunWheel",
-          "BubbleGunMotor",
-          "BubbleGunGearcase",
-          "BubbleGunMountingTab",
-          "BubbleGunFrontFoot",
-          "BubbleGunBaseScrew1",
-          "BubbleGunBaseScrew2"
-        ],
-        "boolean_pairs_tested": 162,
-        "overlaps": [],
-        "continuous_translation_sweep": null,
-        "passed": true
-      },
-      {
-        "group": "water_gun",
-        "waypoints_mm": [
-          [
-            0.0,
-            0.0,
-            0.0
+          "boolean_pairs_tested": 17,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "Water",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              150.0
+            ]
           ],
-          [
-            0.0,
-            0.5176380902050415,
-            1.9318516525781364
+          "pose_count": 8,
+          "removed_first": [
+            "WaterRetentionBand",
+            "WaterStrapClosure",
+            "WaterHoseRoute"
           ],
-          [
-            0.0,
-            -144.37123585315518,
-            40.75470841795625
-          ]
-        ],
-        "pose_count": 16,
-        "removed_first": [
-          "WaterHoseRoute",
-          "WaterGunLeadRoute",
-          "WaterGunLeadConnector"
-        ],
-        "boolean_pairs_tested": 105,
-        "overlaps": [],
-        "continuous_translation_sweep": null,
-        "passed": true
-      },
-      {
-        "group": "water_gun_cradle",
-        "waypoints_mm": [
-          [
-            0.0,
-            0.0,
-            0.0
+          "boolean_pairs_tested": 23,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "Bubble",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              150.0
+            ]
           ],
-          [
-            0.0,
-            0.5176380902050415,
-            1.9318516525781364
+          "pose_count": 8,
+          "removed_first": [
+            "BubbleRetentionBand",
+            "BubbleStrapClosure",
+            "BubbleGunHoseRoute"
           ],
-          [
-            60.0,
-            0.5176380902050415,
-            1.9318516525781364
-          ]
-        ],
-        "pose_count": 16,
-        "removed_first": [
-          "WaterHoseRoute",
-          "WaterGunLeadRoute",
-          "WaterGunLeadConnector",
-          "WaterGunBody",
-          "WaterGunInlet",
-          "WaterGunBaseScrew1",
-          "WaterGunBaseScrew2"
-        ],
-        "boolean_pairs_tested": 79,
-        "overlaps": [],
-        "continuous_translation_sweep": null,
-        "passed": true
-      }
-    ],
-    "passed": true,
-    "physical_assembly_verified": false
+          "boolean_pairs_tested": 23,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "bubble_gun_cradle",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.5529142706151244,
+              5.795554957734409
+            ],
+            [
+              -90.0,
+              1.5529142706151244,
+              5.795554957734409
+            ]
+          ],
+          "pose_count": 16,
+          "removed_first": [
+            "BubbleGunHoseRoute",
+            "BubbleGunHoseClearance",
+            "BubbleGunHoseService",
+            "BubbleGunLeadRoute",
+            "BubbleGunLeadClearance",
+            "BubbleGunLeadConnector",
+            "BubbleGunConnectorService",
+            "BubbleGunShell",
+            "BubbleGunWheel",
+            "BubbleGunMotor",
+            "BubbleGunGearcase",
+            "BubbleGunMountingTab",
+            "BubbleGunFrontFoot",
+            "BubbleGunBaseScrew1",
+            "BubbleGunBaseScrew2"
+          ],
+          "boolean_pairs_tested": 162,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "water_gun",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.5176380902050415,
+              1.9318516525781364
+            ],
+            [
+              0.0,
+              -144.37123585315518,
+              40.75470841795625
+            ]
+          ],
+          "pose_count": 16,
+          "removed_first": [
+            "WaterHoseRoute",
+            "WaterGunLeadRoute",
+            "WaterGunLeadConnector"
+          ],
+          "boolean_pairs_tested": 105,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        },
+        {
+          "group": "water_gun_cradle",
+          "waypoints_mm": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.5176380902050415,
+              1.9318516525781364
+            ],
+            [
+              60.0,
+              0.5176380902050415,
+              1.9318516525781364
+            ]
+          ],
+          "pose_count": 16,
+          "removed_first": [
+            "WaterHoseRoute",
+            "WaterGunLeadRoute",
+            "WaterGunLeadConnector",
+            "WaterGunBody",
+            "WaterGunInlet",
+            "WaterGunBaseScrew1",
+            "WaterGunBaseScrew2"
+          ],
+          "boolean_pairs_tested": 79,
+          "overlaps": [],
+          "continuous_translation_sweep": null,
+          "passed": true
+        }
+      ],
+      "passed": true,
+      "physical_assembly_verified": false
+    }
   },
   "breadboard_layout": {
     "revision": "0.41",
@@ -18346,8 +18385,8 @@
   ],
   "drive_preview_note": "Drive-only views use lighter technical colors; geometry is from the same final saved FCStd. Bottom view has front -Y downward.",
   "files_sha256": {
-    "CyberTrack.FCStd": "d774df9e6200a37cbc47b2df47fe00b6932f07a6177bdc73323609f8e0d96bd0",
-    "CyberTrack.step": "7a6853db8b505750e8b229a02417127028bf936817aba17edd36c76ba2aa81f8",
+    "CyberTrack.FCStd": "dd1e18c3a10c56b32c136921989db5e5318e0800a0317eb4facbe5414973dbf6",
+    "CyberTrack.step": "1d97f9303a2aededa5590d3d91f02bd043b149cd781d48d60d0ac90c481d6c93",
     "assembly.png": "63b01c6c33555ef8cc8dbc66f856271e9fff7c73595c1ab3413f23d0fe7b7732",
     "boot-button-route.png": "85f97ca59171591aa90d8f4c9147454ecdbbc0b9d1d1d9706356f886925f487d",
     "boot-button-seat.png": "7bcfb122acf62ed1522c83ebc9c6eff0185a5108f7c99f671f01534d2f8a5841",
@@ -18423,15 +18462,15 @@
     "water-gun-side.png": "8d8b3ef784d287739da17bb37d0602ce317b49ceb14aa2f0e55ab52fe1b58963",
     "water-gun-spaces.png": "00aa4757a82bbe36388b68d829c0312643faee3cf15c120a247ac089fce6b0a4",
     "print-parts/PP01.png": "4e19fba5ea362667bb06b9a8821f11c07644795cab4dd7e92d780353c251d0e6",
-    "print-parts/PP02.png": "bf897064ae0b4f0a7ea893670c178f0e7ed5f539f3b1a4a6d783b8f8fa84ec28",
+    "print-parts/PP02.png": "2b5a70529ab9ea4f3cc1785763e5d6ccd5e2f7c4b5847b81d69b32e3b85a4280",
     "print-parts/PP03.png": "1b5a33467557ed999d07336725942d03822ff84bb02001b70f3d3599956ceb1f",
     "print-parts/PP04.png": "729e519899640bcb357b3a912c9d8331d5b9194a9520a2b1842d283418284415",
     "print-parts/PP05.png": "746cc9079b2578039b38b9a2e2ff6a91bfa8e813adb6d6978f873328021ed96e",
     "print-parts/PP06.png": "96e016c53338b3cd6915ed8389e04dd7b8cc0ae864a4614a847d4b756aff03c3",
-    "source/CyberTrack-design.FCStd": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540"
+    "source/CyberTrack-design.FCStd": "b19c371fba3be2ac726707370cbdee50b6b57a9ae231ed87abe92b00eaf6af46"
   },
   "print_consolidation": {
-    "feature_count": 58,
+    "feature_count": 56,
     "print_part_count": 6,
     "design_features_are_hidden_sources": false,
     "parts": [
@@ -18481,17 +18520,15 @@
         "members": [
           "BubbleGunCradle",
           "BubbleGunRing",
-          "BubbleGunSlotWall1",
           "BubbleGunSlotWall2",
           "BubbleGunSlotWall3",
           "BubbleGunSlotWall4",
-          "BubbleGunSlotWall5",
-          "BubbleGunSlotWall6"
+          "BubbleGunSlotWall5"
         ],
-        "feature_count": 8,
+        "feature_count": 6,
         "solids": 1,
         "valid": true,
-        "volume_mm3": 8570.018641060673,
+        "volume_mm3": 8489.899509844481,
         "size_xyz_mm": [
           50.0,
           67.34587331727691,
@@ -18506,17 +18543,18 @@
         "stl_connected_components": 1,
         "cad_boundary_shells": 1,
         "stl_nonmanifold": false,
-        "stl_facets": 2156,
+        "stl_facets": 2082,
         "step_geometry_equivalence_verified": false,
         "step_usage": "layout_exchange_only; use native FCStd for geometry",
-        "step_volume_difference_mm3": 6.621121428906918e-10,
+        "step_volume_difference_mm3": 9.307768777944148e-09,
         "step_volume_comparison_passed": true,
         "missing_source_volume_mm3": 0.0,
         "extra_volume_mm3": 0.0,
         "files": {
-          "PP02-BubbleCradle.step": "1c47987932c64deeb9fa315d094a9df186b79e00c4cc2840e1618a011da49439",
-          "PP02-BubbleCradle.stl": "5a7a816b63a00bd774c5cdf81757067471415faa87382f2dc94f2532ff8dd00a"
-        }
+          "PP02-BubbleCradle.step": "4a8a442b7d43de9fe19d5e09c56132b9a59e4a7a69010466cf2d17c86598c7cc",
+          "PP02-BubbleCradle.stl": "d0e44b1ce8fbecf8ba418104c004f6cc521f6e6111b81634ed09e13e21c9017c"
+        },
+        "local_change_audit": "pp02-adjustment-audit.json"
       },
       {
         "id": "PP03",
@@ -22104,7 +22142,7 @@
       "category": "structure",
       "valid": true,
       "solids": 1,
-      "volume_mm3": 912.9859965524583,
+      "volume_mm3": 1259.3981153357263,
       "bbox_mm": [
         -74.49999999999999,
         -124.00872157348182,
@@ -22112,24 +22150,6 @@
         -35.5,
         -110.6158318157074,
         144.83930766655277
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BubbleGunSlotWall1",
-      "label": "两段槽壁／后止挡 1",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 300.28124999999966,
-      "bbox_mm": [
-        -62.699999999999996,
-        -103.43450147352468,
-        95.24060789289946,
-        -60.19999999999999,
-        -83.24429555380448,
-        105.83861646128328
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -22202,24 +22222,6 @@
         -49.29999999999998,
         -57.439305391512484,
         92.15237474224311
-      ],
-      "native_brep_matches": false,
-      "symmetric_difference_mm3": 0.0
-    },
-    {
-      "name": "BubbleGunSlotWall6",
-      "label": "两段槽壁／后止挡 6",
-      "category": "structure",
-      "valid": true,
-      "solids": 1,
-      "volume_mm3": 126.24999999999979,
-      "bbox_mm": [
-        -59.99999999999999,
-        -106.42887153502078,
-        100.31346117690887,
-        -49.99999999999999,
-        -102.70702079153038,
-        105.83843421242497
       ],
       "native_brep_matches": false,
       "symmetric_difference_mm3": 0.0
@@ -26242,9 +26244,9 @@
   "check_source_document": "source/CyberTrack-design.FCStd",
   "model_tree": {
     "source_document": "source/CyberTrack-design.FCStd",
-    "source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
+    "source_sha256": "b19c371fba3be2ac726707370cbdee50b6b57a9ae231ed87abe92b00eaf6af46",
     "delivery_document": "CyberTrack.FCStd",
-    "delivery_sha256": "d774df9e6200a37cbc47b2df47fe00b6932f07a6177bdc73323609f8e0d96bd0",
+    "delivery_sha256": "dd1e18c3a10c56b32c136921989db5e5318e0800a0317eb4facbe5414973dbf6",
     "kept_group": "01 双履带与动力参考",
     "drive_members": [
       "DriveCouplerL",
@@ -26315,12 +26317,10 @@
       "BrowArmorR",
       "BubbleGunCradle",
       "BubbleGunRing",
-      "BubbleGunSlotWall1",
       "BubbleGunSlotWall2",
       "BubbleGunSlotWall3",
       "BubbleGunSlotWall4",
       "BubbleGunSlotWall5",
-      "BubbleGunSlotWall6",
       "CrownEffectInsetL",
       "CrownEffectInsetR",
       "CrownEffectMarkLFront",
@@ -26432,13 +26432,14 @@
     "retained_hidden_envelope_count": 20,
     "root_part_count": 277,
     "part_count": 307,
-    "geometry_scope": "Retained objects; removed only duplicate inputs and hidden nonphysical check spaces",
-    "geometry_unchanged": true,
+    "geometry_scope": "Updated delivery/source geometry signatures agree; PP02 Boolean union equality separately checked in pp02-adjustment-audit.json",
+    "geometry_unchanged": false,
     "appearance_properties_unchanged": true,
     "saved_and_reopened": true,
     "passed": true,
     "label_audit": "part-names-audit.json",
-    "order_audit": "part-order-audit.json"
+    "order_audit": "part-order-audit.json",
+    "local_change_audit": "pp02-adjustment-audit.json"
   },
   "part_names": {
     "delivery_document": "CyberTrack.FCStd",
@@ -26467,5 +26468,75 @@
     "document_properties_except_group_order_unchanged": true,
     "gui_properties_except_tree_rank_unchanged": true,
     "rank_metadata_verified": true
-  }
+  },
+  "local_revision": "PP02-2026-10-26",
+  "pp02_adjustment": {
+    "date": "2026-10-26",
+    "scope": "PP02 only",
+    "baseline": {
+      "source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
+      "delivery_sha256": "d774df9e6200a37cbc47b2df47fe00b6932f07a6177bdc73323609f8e0d96bd0"
+    },
+    "source_document": "source/CyberTrack-design.FCStd",
+    "source_sha256": "b19c371fba3be2ac726707370cbdee50b6b57a9ae231ed87abe92b00eaf6af46",
+    "delivery_sha256": "dd1e18c3a10c56b32c136921989db5e5318e0800a0317eb4facbe5414973dbf6",
+    "removed_source_features": [
+      "BubbleGunSlotWall1",
+      "BubbleGunSlotWall6"
+    ],
+    "members": [
+      "BubbleGunCradle",
+      "BubbleGunRing",
+      "BubbleGunSlotWall2",
+      "BubbleGunSlotWall3",
+      "BubbleGunSlotWall4",
+      "BubbleGunSlotWall5"
+    ],
+    "ring": {
+      "outer_diameter_mm": 39,
+      "bore_diameter_mm": 32.0,
+      "bore_centre_local_z_mm": 111.3,
+      "bore_centre_rise_local_z_mm": 1.3,
+      "bore_bottom_before_notch_local_z_mm": 95.3,
+      "bore_lower_edge_rise_mm": 2.3,
+      "axial_width_mm": 3,
+      "foot_width_mm": 20,
+      "notch_width_mm": 7.5,
+      "notch_depth_mm": 2.3,
+      "notch_floor_local_z_mm": 93.0,
+      "notch_through_axial_width": true,
+      "coordinate_frame": "unpitched cradle; final assembly retains 15 degree elevation"
+    },
+    "changed_source_features": [
+      "BubbleGunRing",
+      "PrintBubbleCradle"
+    ],
+    "unchanged_source_signature_count": 420,
+    "unchanged_delivery_signature_count": 306,
+    "unchanged_check_method": "volume, area, topology counts and exact bounding box, tolerance 1e-5",
+    "valid": true,
+    "solids": 1,
+    "saved_and_reopened": true,
+    "geometry_and_export_checks_passed": true,
+    "assembly_fit_passed": false,
+    "assembly_overlaps": [
+      {
+        "object": "BubbleGunShell",
+        "volume_mm3": 65.11318159571593
+      }
+    ],
+    "service_paths_revalidated": false,
+    "manufacturing_released": false,
+    "physical_fit_verified": false,
+    "limits": "Requested geometry retained. Existing gun/body/service acceptance is not carried over; no physical fit or strength acceptance.",
+    "step_symmetric_difference_mm3": 0.0,
+    "stl_closed": true,
+    "stl_nonmanifold": false,
+    "stl_connected_components": 1,
+    "files": {
+      "PP02-BubbleCradle.step": "4a8a442b7d43de9fe19d5e09c56132b9a59e4a7a69010466cf2d17c86598c7cc",
+      "PP02-BubbleCradle.stl": "d0e44b1ce8fbecf8ba418104c004f6cc521f6e6111b81634ed09e13e21c9017c"
+    }
+  },
+  "current_preview_scope": "PP02.png updated; other previews remain baseline illustrations"
 }

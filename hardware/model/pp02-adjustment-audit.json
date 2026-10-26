@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-26",
+  "scope": "PP02 only",
+  "baseline": {
+    "source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
+    "delivery_sha256": "d774df9e6200a37cbc47b2df47fe00b6932f07a6177bdc73323609f8e0d96bd0"
+  },
+  "source_document": "source/CyberTrack-design.FCStd",
+  "source_sha256": "b19c371fba3be2ac726707370cbdee50b6b57a9ae231ed87abe92b00eaf6af46",
+  "delivery_sha256": "dd1e18c3a10c56b32c136921989db5e5318e0800a0317eb4facbe5414973dbf6",
+  "removed_source_features": [
+    "BubbleGunSlotWall1",
+    "BubbleGunSlotWall6"
+  ],
+  "members": [
+    "BubbleGunCradle",
+    "BubbleGunRing",
+    "BubbleGunSlotWall2",
+    "BubbleGunSlotWall3",
+    "BubbleGunSlotWall4",
+    "BubbleGunSlotWall5"
+  ],
+  "ring": {
+    "outer_diameter_mm": 39,
+    "bore_diameter_mm": 32.0,
+    "bore_centre_local_z_mm": 111.3,
+    "bore_centre_rise_local_z_mm": 1.3,
+    "bore_bottom_before_notch_local_z_mm": 95.3,
+    "bore_lower_edge_rise_mm": 2.3,
+    "axial_width_mm": 3,
+    "foot_width_mm": 20,
+    "notch_width_mm": 7.5,
+    "notch_depth_mm": 2.3,
+    "notch_floor_local_z_mm": 93.0,
+    "notch_through_axial_width": true,
+    "coordinate_frame": "unpitched cradle; final assembly retains 15 degree elevation"
+  },
+  "changed_source_features": [
+    "BubbleGunRing",
+    "PrintBubbleCradle"
+  ],
+  "unchanged_source_signature_count": 420,
+  "unchanged_delivery_signature_count": 306,
+  "unchanged_check_method": "volume, area, topology counts and exact bounding box, tolerance 1e-5",
+  "valid": true,
+  "solids": 1,
+  "saved_and_reopened": true,
+  "geometry_and_export_checks_passed": true,
+  "assembly_fit_passed": false,
+  "assembly_overlaps": [
+    {
+      "object": "BubbleGunShell",
+      "volume_mm3": 65.11318159571593
+    }
+  ],
+  "service_paths_revalidated": false,
+  "manufacturing_released": false,
+  "physical_fit_verified": false,
+  "limits": "Requested geometry retained. Existing gun/body/service acceptance is not carried over; no physical fit or strength acceptance.",
+  "step_symmetric_difference_mm3": 0.0,
+  "stl_closed": true,
+  "stl_nonmanifold": false,
+  "stl_connected_components": 1,
+  "files": {
+    "PP02-BubbleCradle.step": "4a8a442b7d43de9fe19d5e09c56132b9a59e4a7a69010466cf2d17c86598c7cc",
+    "PP02-BubbleCradle.stl": "d0e44b1ce8fbecf8ba418104c004f6cc521f6e6111b81634ed09e13e21c9017c"
+  }
+}
