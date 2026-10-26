@@ -1,5 +1,7 @@
 # CyberTrack 履带交互机器人模型
 
+**当前局部更新：0.56／泡泡枪尾壳35.9 mm。** 不含底部薄片6.8，承托面至尾顶42.7为推导；枪口、薄片、PP02和15°姿态保持。正式源档、交付模型、STEP及独立部件新修订版已同步，见[专项回读](bubble-tail-height-audit.json)与[部件尺寸](../components/bubble-gun/README.md#当前模型尾壳高-359-mm2026-10-26)。尾壳无新增实体相交；原PP02配合冲突及拆装未验状态保持。
+
 **当前局部更新：0.55／15芯净径10通道。** 上下护口、颈架桥、板下至左侧路线及PP06已更新，见[说明](../../docs/cable-passage.md)和[专项](cable-passage-audit.json)。保留PP02既有配合冲突；其他历史预览以各自版本为准。
 
 当前整机为 **0.54 外接BOOT停止按钮候选**：右肩梁新增一体安装座、后插螺母腔、后护边和扎带鞍座，移除原独立StopPlinth；GPIO0/GND走廊经颈架后缘进入头舱后槽。按钮尚未选型，尺寸为设计预算，见[安装与走线说明](../../docs/boot-button.md)、[专项回读](boot-button-audit.json)及[范围审计](boot-button-change-audit.json)。
@@ -46,7 +48,7 @@
 
 - [CyberTrack.FCStd](CyberTrack.FCStd)：主要设计文件，中文对象树；设备包络及服务／天线审查区默认隐藏；点火走线例外，单列“07 点火线走线（橙色空间）”组并默认显示。
 - [CyberTrack.step](CyberTrack.step)：不含设备包络及审查区的布局交换文件；严格体积比较未通过，以 FCStd 为几何依据，不宣称曲面等价。
-- [当前整机装配与维护 PDF](CyberTrack-assembly-and-service.pdf)：0.54 + PP02-2026-10-26，69页A3横向。全部线稿从当前原生源档重建，包含六向尺寸、六件合并打印、PP02冲突详图、分系统维护、电源开关和BOOT；第25页可点击索引，第26–69页为260张图卡，覆盖416个源对象与6个合并件（共422项，含66个非实体空间）。56个已合并源特征明确标记不可重复打印。PP02配合仍未通过；详见[装配说明](../../docs/assembly.md#全对象装配图纸2026-10-26)和[覆盖记录](assembly-annotation-audit.json)。
+- [当前整机装配与维护 PDF](CyberTrack-assembly-and-service.pdf)：0.56 + PP02配合待解决，69页A3横向。全部彩色视图从当前原生源档重建，包含六向尺寸、六件合并打印、PP02冲突详图、分系统维护、15芯净径10通道、35.9尾壳、电源开关和BOOT；第25页可点击索引，第26–69页为260张图卡，覆盖416个源对象与6个合并件（共422项，含66个非实体空间）。56个已合并源特征明确标记不可重复打印。PP02配合仍未通过；详见[装配说明](../../docs/assembly.md#全对象装配图纸2026-10-26)和[覆盖记录](assembly-annotation-audit.json)。
 - [面包板布局](breadboard-layout.png) · [俯视](breadboard-top.png) · [浅托盘](breadboard-tray.png) · [工具入口](breadboard-access.png) · [整盘上提](breadboard-service.png)：整组规划包络，组内元件与防脱保持待实测。
 - [保存回读报告](readback.json)：对象有效性、静态检查、导出与视图哈希、最终保存及显示状态。
 - [顶部效果位轴测](crown-effects.png) · [顶部效果位俯视](crown-effects-top.png)：两处后掠凹槽为效果位置占位，橙色块不是电极。
@@ -251,10 +253,12 @@ PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
 ```sh
 PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
 /Applications/FreeCAD.app/Contents/Resources/bin/python scripts/export_drawing_geometry.py
+PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib \
+/Applications/FreeCAD.app/Contents/Resources/bin/python scripts/export_drawing_colors.py
 python3 scripts/build_drawing_pdf.py --allow-review-conflicts
 ```
 
-当前PP02与枪壳仍有干涉，因此必须显式使用`--allow-review-conflicts`生成标示失败的评审图册；默认入口会拒绝把它输出为全部检查通过的图册。此选项不会改变几何或检查结果。第二步使用ReportLab与macOS STHeiti字体。矢量消隐容差0.08 mm；投影缓存位于`tmp/pdfs/`，逐视图核对当前源档哈希。图册含书签、可点击系统索引和全对象图卡，覆盖／来源记录写入`assembly-annotation-audit.json`。
+当前PP02与枪壳仍有干涉，因此必须显式使用`--allow-review-conflicts`生成标示失败的评审图册；默认入口会拒绝把它输出为全部检查通过的图册。此选项不会改变几何或检查结果。第二步需要桌面显示，使用FreeCAD原生渲染保留面颜色和透明度，不保存CAD修改；第三步使用ReportLab与macOS STHeiti字体。矢量消隐容差0.08 mm；投影缓存位于`tmp/pdfs/`，逐视图核对当前源档、投影和彩图哈希。图册含书签、可点击系统索引和全对象图卡，覆盖／来源记录写入`assembly-annotation-audit.json`。
 
 交付文件为`CyberTrack-assembly-and-service.pdf`。生成后须渲染核对尺寸页、装拆说明和全部图卡，更新目录与页码。图纸无制造公差、材料及紧固件定版，不是加工放行；已合并源特征不重复打印。六件打印补充图册仍用`python3 scripts/build_print_parts_pdf.py`生成。
 

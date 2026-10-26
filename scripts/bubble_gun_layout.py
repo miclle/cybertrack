@@ -14,7 +14,7 @@ from water_gun_layout import bbox, hits
 V = App.Vector
 ROOT = Path(__file__).resolve().parents[1]
 COMPONENT = ROOT / 'hardware/components/bubble-gun'
-REVISION = COMPONENT / 'revisions/rear-tab-2026-10-24'
+REVISION = COMPONENT / 'revisions/tail-height-2026-10-26'
 ORIGIN = (-55.0, -129.0, 110.0)  # Muzzle end centre in assembly; body extends toward +Y after Z rotation.
 WIDTH = 35.8  # Reserved width, unmeasured.
 NAMES = ('BubbleGunShell', 'BubbleGunWheel', 'BubbleGunMotor', 'BubbleGunGearcase', 'BubbleGunMountingTab', 'BubbleGunFrontFoot')
@@ -25,25 +25,35 @@ def dimensions():
 
 
 def mounting_height():
+    """Support-to-muzzle-top datum; independent of the taller rear shell."""
     d=dimensions()
     tab=json.loads((COMPONENT/'mounting-tab-dimensions.json').read_text())
     return d['outermost_muzzle_circle_diameter']+tab['resting_plane_measurement']['muzzle_circle_bottom_above_plane_mm']
 
 
+def tail_dimensions():
+    return json.loads((REVISION/'dimensions.json').read_text())
+
+
+def overall_height():
+    tail=tail_dimensions()
+    return max(mounting_height(),tail['tail_shell_height_mm']+tail['bottom_tab_height_mm'])
+
+
 def inspection_box(origin=ORIGIN, extra_length=0, front_facing=True):
     d = dimensions()
     radius = d['outermost_muzzle_circle_diameter']/2
-    height = mounting_height()
+    height = overall_height()
     length = d['overall_body_length']
     x, y, z = origin
     return Part.makeBox(WIDTH, length+extra_length, height,
-                        V(x-WIDTH/2, y-extra_length if front_facing else y-length, z+radius-height))
+                        V(x-WIDTH/2, y-extra_length if front_facing else y-length, z+radius-mounting_height()))
 
 
 def local_shapes():
     d = dimensions(); radius = d['outermost_muzzle_circle_diameter']/2
-    length = d['overall_body_length']; height = mounting_height()
-    bottom = radius-height
+    length = d['overall_body_length']; height = overall_height()
+    bottom = radius-mounting_height()
     # Cylinder shell and five bubble loops convey visible features only.
     shell = Part.makeCylinder(radius, 23, V(0,-23,0),V(0,1,0)).cut(
         Part.makeCylinder(radius-1.5, 24, V(0,-23.5,0),V(0,1,0)))
@@ -63,11 +73,14 @@ def local_shapes():
         wheel=wheel.fuse(loop).fuse(spoke)
     # Motor lies behind the front shell. Rear case reaches the reported total length/height.
     motor=Part.makeCylinder(7,25,V(-3,-48,-1),V(0,1,0))
-    case=Part.makeBox(23,length-23,12,V(-11.5,-length,bottom))
-    case=case.fuse(Part.makeBox(6,22,17,V(11.5,-55,bottom)))
+    tail=tail_dimensions()
+    case_height=tail['tail_shell_height_mm']+tail['bottom_tab_height_mm']
+    case=Part.makeBox(23,length-23,case_height,V(-11.5,-length,bottom))
+    case=case.fuse(Part.makeBox(6,22,case_height,V(11.5,-55,bottom)))
     case=case.cut(motor).cut(shell).removeSplitter()
     # Rear bottom narrows into the measured thin section; it is NOT added below the body.
     td=json.loads((COMPONENT/'mounting-tab-dimensions.json').read_text())['dimensions']
+    assert td['height']==tail['bottom_tab_height_mm']==6.8
     tab=Part.makeBox(td['width'],td['length'],td['height'],V(-td['width']/2,-length,bottom))
     front_foot=Part.makeBox(10,length-23-td['length'],td['height'],V(-5,-length+td['length'],bottom))
     cut=Part.makeBox(WIDTH+2,length-23,td['height'],V(-WIDTH/2-1,-length,bottom))
@@ -102,12 +115,12 @@ def export_component(shapes, render=False):
         App.closeDocument(saved.Name); App.setActiveDocument(active.Name)
         return
     doc=App.newDocument('BubbleGun')
-    doc.Label='泡泡枪主体 · 后端底部薄片修订／位置假设'
-    labels=['前端通风圆筒／枪口外径31.5','五环出泡盘示意','电机外形示意','后部机构壳／底部薄片位置假设','后端底部薄片6×25×6.8／不额外向下凸出','前段底部10×19×6.8／配合轮廓假设']
+    doc.Label='泡泡枪主体 · 尾壳35.9／底部薄片6.8保持'
+    labels=['前端通风圆筒／枪口外径31.5','五环出泡盘示意','电机外形示意','后部机构壳高35.9／不含薄片6.8','后端底部薄片6×25×6.8／保持原位','前段底部10×19×6.8／配合轮廓假设']
     for (name,shape),label in zip(shapes.items(),labels):
         obj=doc.addObject('Part::Feature',name);obj.Label=label;obj.Shape=shape
         obj.addProperty('App::PropertyString','EvidenceBasis')
-        obj.EvidenceBasis='总尺寸及薄片6×25×6.8为用户输入；薄片不额外向下凸出；居中、尾端齐平、分段轮廓仍是假设'
+        obj.EvidenceBasis='2026-10-26用户确认尾壳35.9不含薄片6.8；承托至尾顶42.7为推导；枪口、薄片、长度保持，宽度和分段轮廓仍是假设'
         if render:obj.ViewObject.ShapeColor=(.88,.87,.78) if name!='BubbleGunMotor' else (.55,.58,.6)
     doc.recompute();doc.saveAs(str(cad));Part.export(doc.Objects,str(step))
     expected={o.Name:o.Shape.copy() for o in doc.Objects}
@@ -120,17 +133,17 @@ def export_component(shapes, render=False):
     neutral=Part.Shape();neutral.read(str(step));combined=Part.makeCompound(list(shapes.values()))
     delta=abs(neutral.Volume-combined.Volume)
     assert neutral.isValid() and len(neutral.Solids)==len(combined.Solids) and delta<.01
-    report={'user_dimensions_mm':dimensions(),'rear_bottom_tab':json.loads((COMPONENT/'mounting-tab-dimensions.json').read_text()),'local_coordinates':'muzzle end centre at origin; +Y faces outward; body extends to -Y; +Z up',
+    report={'historical_user_dimensions_mm':dimensions(),'tail_height_revision':tail_dimensions(),'rear_bottom_tab':json.loads((COMPONENT/'mounting-tab-dimensions.json').read_text()),'local_coordinates':'muzzle end centre at origin; +Y faces outward; body extends to -Y; +Z up',
             'assumptions':{'reserved_width_mm':WIDTH,'shell_length_mm':23,'shell_wall_mm':1.5,
                 'wheel_ring_count':5,'wheel_ring_outer_radius_mm':4.3,'wheel_ring_inner_radius_mm':3.3,
                 'wheel_ring_centres_radius_mm':9.1,'motor_radius_mm':7,'motor_length_mm':25,
-                'motor_origin_mm':[-3,-48,-1],'case_width_mm':23,'case_height_mm':12,
-                'side_case_size_xyz_mm':[6,22,17],'side_case_origin_mm':[11.5,-55,-20.45],
+                'motor_origin_mm':[-3,-48,-1],'case_width_mm':23,'case_shell_height_mm':35.9,
+                'side_case_shell_size_xyz_mm':[6,22,35.9],'side_case_shell_origin_mm':[11.5,-55,-13.65],
                 'vent_slot_size_xyz_mm':[4,3,7],'vent_y_mm':[-21,-16,-11],
-                'all_internal_dimensions_and_positions':'illustrative, not inferred measurements'},
+                'all_internal_dimensions_and_positions':'Except the user-confirmed tail height, widths, lengths and internal geometry remain illustrative, not inferred measurements.'},
             'objects':rows,'actual_model_bbox_mm':bbox(combined),'inspection_bbox_mm':bbox(inspection_box((0,0,0), front_facing=False)),
             'step_readback':{'valid':True,'volume_difference_mm3':delta,'solid_count':len(neutral.Solids)},
-            'input_sha256':{'../../'+p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (COMPONENT/'dimensions.json',COMPONENT/'sources.json',COMPONENT/'mounting-tab-dimensions.json')},
+            'input_sha256':{**{'../../'+p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (COMPONENT/'dimensions.json',COMPONENT/'sources.json',COMPONENT/'mounting-tab-dimensions.json')},'dimensions.json':hashlib.sha256((REVISION/'dimensions.json').read_bytes()).hexdigest()},
             'files_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (cad,step)},
             'maximum_width_measured':False,'mounts_designed':False,'physical_fit_verified':False}
     report_path.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
@@ -143,13 +156,17 @@ def add_bubble_gun(doc, add, render=False):
         moved=shape.copy();moved.rotate(V(),V(0,0,1),180);moved.translate(V(*ORIGIN))
         obj=add(name,'泡泡枪主体／'+name.removeprefix('BubbleGun'),moved,'component',
                 'metal' if name=='BubbleGunMotor' else 'light',
-                '用户原总尺寸及新增薄片／支承面尺寸；总高差0.4未消解；宽度与分段是假设；车体右前方候选；固定与线管为0.18设计假设')
+                '2026-10-26尾壳高35.9不含薄片6.8，承托至尾顶42.7；枪口与承托基准保持；宽度及分段为假设')
         obj.addProperty('App::PropertyString','ServiceGroup','Assembly');obj.ServiceGroup='bubble_gun'
     add('BubbleGunInspectionEnvelope','泡泡枪安装审查空间／宽35.8为假设',inspection_box(),'clearance','bubble',
-        '长67用户提供；安装高度按31.5+支承面间距4.7=36.2推导，与原高35.8差0.4；宽35.8为预留；不含线管固定件')
+                '长67用户提供；高度按尾壳35.9+薄片6.8=42.7推导，承托基准保持；宽35.8为预留；不是实测等截面外形')
     from bubble_gun_mount import build_mount
     mount=build_mount(doc,add)
     return {'source':'hardware/components/bubble-gun/README.md','origin_mm':list(ORIGIN),
+            'tail_shell_height_mm':tail_dimensions()['tail_shell_height_mm'],
+            'bottom_tab_height_mm':tail_dimensions()['bottom_tab_height_mm'],
+            'support_to_tail_top_mm':overall_height(),
+            'component_revision':str(REVISION.relative_to(ROOT/'hardware')),
             'rotation_degrees':[0,0,180],'orientation':'muzzle -Y; body toward +Y; front-view left / vehicle right',
             'inspection_bbox_mm':bbox(inspection_box()),'reserved_width_mm':WIDTH,
             'mount':mount,'mounts_and_hose_routes_designed':True}

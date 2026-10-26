@@ -1,0 +1,2269 @@
+{
+  "source_sha256": "6e23dc04aa6373d5b17067e34b847769f029b634a9cc095887700f79eaa543db",
+  "delivery_sha256": "a2f863a8b2e3dbd2dda314586d2dfbb0f02b62b303c8c1f062eeadfeb708cc86",
+  "input": {
+    "shell_height_mm": 35.9,
+    "includes_bottom_tab": false,
+    "tab_height_mm": 6.8,
+    "top_from_support_mm": 42.7,
+    "support_local_z_mm": 89.55,
+    "shell_local_z_mm": [
+      96.35,
+      132.25
+    ],
+    "pitch_degrees": 15
+  },
+  "baseline": {
+    "BubbleGunShell": {
+      "local_bbox": [
+        -70.75,
+        -129.0,
+        94.24999999999997,
+        -39.24999999999999,
+        -105.99999999999999,
+        125.75
+      ],
+      "world_bbox": [
+        -70.75,
+        -124.56883228701666,
+        105.35522234271015,
+        -39.24999999999999,
+        -94.19973836163865,
+        141.7347239081738
+      ]
+    },
+    "BubbleGunWheel": {
+      "local_bbox": [
+        -67.9546143982859,
+        -128.5000001,
+        98.33794525118797,
+        -42.045385601714095,
+        -126.9999999,
+        123.40000009999999
+      ],
+      "world_bbox": [
+        -67.9546143982859,
+        -123.02783136164635,
+        114.7390741810339,
+        -42.045385601714095,
+        -115.09240536970003,
+        139.33538879384324
+      ]
+    },
+    "BubbleGunMotor": {
+      "local_bbox": [
+        -59.0,
+        -105.99999999999999,
+        101.99999999999999,
+        -45.0,
+        -80.99999999999997,
+        115.99999999999999
+      ],
+      "world_bbox": [
+        -59.0,
+        -100.34669068282354,
+        106.37067136888741,
+        -45.0,
+        -72.57507839416152,
+        126.36410906449738
+      ]
+    },
+    "BubbleGunGearcase": {
+      "local_bbox": [
+        -72.5,
+        -106.0,
+        96.34999999999997,
+        -43.49999999999999,
+        -61.99999999999997,
+        106.54999999999998
+      ],
+      "world_bbox": [
+        -72.5,
+        -101.80901828765278,
+        95.99562859340627,
+        -43.49999999999999,
+        -57.962422896400646,
+        114.64791955504049
+      ]
+    },
+    "BubbleGunMountingTab": {
+      "local_bbox": [
+        -58.0,
+        -86.99999999999997,
+        89.54999999999997,
+        -52.0,
+        -61.99999999999997,
+        96.34999999999997
+      ],
+      "world_bbox": [
+        -58.0,
+        -85.21639709485763,
+        89.4273329746406,
+        -52.0,
+        -59.30828193093375,
+        102.4661047209693
+      ]
+    },
+    "BubbleGunFrontFoot": {
+      "local_bbox": [
+        -60.0,
+        -106.0,
+        89.54999999999997,
+        -50.0,
+        -86.99999999999997,
+        96.34999999999998
+      ],
+      "world_bbox": [
+        -60.0,
+        -103.56898779434992,
+        95.89780910220362,
+        -50.0,
+        -83.45642758816047,
+        107.3836665779172
+      ]
+    }
+  },
+  "scenarios": {
+    "rear_25_main_width_23": {
+      "local_bbox": [
+        -66.5,
+        -87.0,
+        96.35,
+        -43.5,
+        -62.0,
+        132.25
+      ],
+      "world_bbox": [
+        -66.5,
+        -83.4564275881605,
+        95.9956285934063,
+        -43.5,
+        -50.01667821175329,
+        137.14284188474687
+      ],
+      "solid_collisions": [],
+      "equipment_route_overlaps": [],
+      "clearance_overlaps": [
+        {
+          "name": "BubbleGunBaseTool1",
+          "label": "空托架基座批头空间 1",
+          "category": "clearance",
+          "distance_mm": 0.0,
+          "overlap_mm3": 42.3153304359106,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -72.89258783211484,
+              99.6355323893651
+            ],
+            [
+              -43.5,
+              -72.89258783211484,
+              99.6355323893651
+            ]
+          ],
+          "overlap_bbox_world_mm": [
+            -43.99999999999999,
+            -76.63360247100341,
+            99.63553238936494,
+            -43.5,
+            -64.51979172304769,
+            131.88563472117963
+          ]
+        },
+        {
+          "name": "BubbleGunBaseTool2",
+          "label": "空托架基座批头空间 2",
+          "category": "clearance",
+          "distance_mm": 0.0,
+          "overlap_mm3": 21.157665217954747,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -50.93548582186724,
+              127.24332907385767
+            ],
+            [
+              -43.5,
+              -50.93548582186723,
+              127.24332907385764
+            ]
+          ],
+          "overlap_bbox_world_mm": [
+            -43.99999999999999,
+            -61.17878925037832,
+            95.99562859340628,
+            -43.5,
+            -50.93548582186719,
+            127.74452999953934
+          ]
+        }
+      ],
+      "key_clearances": [
+        {
+          "name": "KeelLid",
+          "label": "低鼻锥至颈架的折面顶盖",
+          "category": "structure",
+          "distance_mm": 17.75149141252853,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -43.5,
+              -52.71554352894075,
+              79.5137825884237
+            ]
+          ]
+        },
+        {
+          "name": "HeadShell",
+          "label": "头舱固定下壳／托板及冠盖支座",
+          "category": "exterior",
+          "distance_mm": 24.409821771855967,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -74.16482386898,
+              137.14284188474687
+            ],
+            [
+              -43.5,
+              -69.0,
+              161.0
+            ]
+          ]
+        },
+        {
+          "name": "ShoulderRailR",
+          "label": "右斜面肩部承力梁",
+          "category": "structure",
+          "distance_mm": 10.399999999999963,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -43.5,
+              -62.00000000000001,
+              85.94999999999999
+            ]
+          ]
+        },
+        {
+          "name": "WaterGunBody",
+          "label": "拆出发射枪／前细后粗示意",
+          "category": "component",
+          "distance_mm": 81.9,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -74.16482386898,
+              137.14284188474687
+            ],
+            [
+              38.400000000000006,
+              -74.16482386898,
+              137.14284188474687
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunStopAccess",
+          "label": "BOOT按钮Ø12指端从前方接近及1.5 mm按压预算",
+          "category": "clearance",
+          "distance_mm": 1.5,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -58.0,
+              123.0
+            ],
+            [
+              -42.0,
+              -58.0,
+              123.0
+            ]
+          ]
+        },
+        {
+          "name": "StopBody",
+          "label": "BOOT停止按钮／杆体法兰候选",
+          "category": "component",
+          "distance_mm": 27.044481776296895,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -52.2581066710361,
+              122.30724086560957
+            ],
+            [
+              -37.20293495739464,
+              -26.85313790122205,
+              115.5
+            ]
+          ]
+        },
+        {
+          "name": "StopNut",
+          "label": "BOOT停止按钮／后插防转螺母候选",
+          "category": "component",
+          "distance_mm": 27.365822832033427,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -53.1947594216369,
+              118.81160521131825
+            ],
+            [
+              -36.0,
+              -27.773502691896258,
+              112.0
+            ]
+          ]
+        },
+        {
+          "name": "PrintNeck",
+          "label": "PP06 一体固定颈架",
+          "category": "merged_print_part",
+          "distance_mm": 32.35589532823165,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -50.01667821175329,
+              130.67236575718385
+            ],
+            [
+              -25.0,
+              -24.17700892746411,
+              136.75228794172247
+            ]
+          ]
+        }
+      ],
+      "nearest_solids": [
+        {
+          "name": "PrintBubbleCradle",
+          "label": "PP02 泡泡枪一体圆环底座",
+          "category": "merged_print_part",
+          "distance_mm": 0.2999999999999244,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -47.3,
+              -83.16664984027373,
+              102.38845900743854
+            ],
+            [
+              -47.3,
+              -83.24429555380448,
+              102.0986812595519
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunLowerPadRear",
+          "label": "阶梯槽底0.6垫／承托平面Z89.55",
+          "category": "structure",
+          "distance_mm": 6.799999999999955,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -57.800000000000004,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -57.800000000000004,
+              -61.06825143763088,
+              89.42733297464066
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseScrew1",
+          "label": "泡泡托架沉头位紧固候选 1",
+          "category": "structure",
+          "distance_mm": 7.702759245880628,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -74.76309515155884,
+              100.13673331504661
+            ],
+            [
+              -42.599999999999994,
+              -76.74306084659312,
+              92.74740074393527
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseScrew2",
+          "label": "泡泡托架沉头位紧固候选 2",
+          "category": "structure",
+          "distance_mm": 7.702759245880644,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -42.599999999999994,
+              -61.288247625968026,
+              88.60629602229493
+            ]
+          ]
+        },
+        {
+          "name": "ShoulderRailR",
+          "label": "右斜面肩部承力梁",
+          "category": "structure",
+          "distance_mm": 10.399999999999963,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -43.5,
+              -62.00000000000001,
+              85.94999999999999
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseInsert1",
+          "label": "泡泡托架 M3 级嵌件 1",
+          "category": "structure",
+          "distance_mm": 10.679419459876991,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -74.76309515155884,
+              100.13673331504661
+            ],
+            [
+              -42.199999999999996,
+              -77.50657702964556,
+              89.89791955638252
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseInsert2",
+          "label": "泡泡托架 M3 级嵌件 2",
+          "category": "structure",
+          "distance_mm": 10.679419459877009,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -42.199999999999996,
+              -62.051763809020464,
+              85.75681483474217
+            ]
+          ]
+        },
+        {
+          "name": "KeelLid",
+          "label": "低鼻锥至颈架的折面顶盖",
+          "category": "structure",
+          "distance_mm": 17.75149141252853,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -43.5,
+              -52.71554352894075,
+              79.5137825884237
+            ]
+          ]
+        },
+        {
+          "name": "KeelSideFrameR",
+          "label": "右镂空底座侧框",
+          "category": "structure",
+          "distance_mm": 19.27521783485673,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -66.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -66.5,
+              -52.231066992226964,
+              78.06668408201567
+            ]
+          ]
+        },
+        {
+          "name": "PrintLowerTub",
+          "label": "PP04 一体底盘及湿舱隔板",
+          "category": "merged_print_part",
+          "distance_mm": 20.536921485184312,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -51.072424308128014,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -51.072424308128014,
+              -51.681060770320066,
+              76.92757569187198
+            ]
+          ]
+        },
+        {
+          "name": "EffectInsert0",
+          "label": "承板内柱M2.5级嵌件候选 0",
+          "category": "structure",
+          "distance_mm": 22.115567821847456,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -47.0,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -47.0,
+              -51.0,
+              75.5
+            ]
+          ]
+        },
+        {
+          "name": "EffectScrew0",
+          "label": "承板凹入式M2.5级螺钉候选 0",
+          "category": "structure",
+          "distance_mm": 22.794475077240843,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -47.0,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -47.0,
+              -50.2,
+              75.1
+            ]
+          ]
+        },
+        {
+          "name": "HeadShell",
+          "label": "头舱固定下壳／托板及冠盖支座",
+          "category": "exterior",
+          "distance_mm": 24.409821771855967,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -74.16482386898,
+              137.14284188474687
+            ],
+            [
+              -43.5,
+              -69.0,
+              161.0
+            ]
+          ]
+        },
+        {
+          "name": "EffectTray",
+          "label": "效果板低位承板／凹座、防脱压框与四点沉台",
+          "category": "structure",
+          "distance_mm": 26.338118145600735,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -47.0,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -47.0,
+              -52.7,
+              70.5
+            ]
+          ]
+        }
+      ],
+      "nearest_equipment": [
+        {
+          "name": "BubbleGunHoseRoute",
+          "label": "泡泡顶部吸液管候选 Ø4／R8／侧向接前枪",
+          "category": "envelope",
+          "distance_mm": 7.105427357601002e-15,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -55.55236103720099,
+              -57.60726841054842,
+              102.34389747584608
+            ],
+            [
+              -55.55236103720099,
+              -57.607268410548414,
+              102.34389747584608
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunLeadRoute",
+          "label": "泡泡尾线束候选 Ø3／R8",
+          "category": "envelope",
+          "distance_mm": 4.263256414560601e-14,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -58.515205102730185,
+              98.95543161056771
+            ],
+            [
+              -43.5,
+              -58.515205102730135,
+              98.9554316105677
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunLeadConnector",
+          "label": "泡泡插头候选16×10×10",
+          "category": "envelope",
+          "distance_mm": 15.008331019803682,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -66.5,
+              -56.03422101038689,
+              108.21459029596306
+            ],
+            [
+              -74.0,
+              -43.47718526862894,
+              104.84994270963028
+            ]
+          ]
+        },
+        {
+          "name": "EffectMOSR",
+          "label": "MOS板／PCB与元件区候选 R",
+          "category": "envelope",
+          "distance_mm": 27.231624482958953,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -37.0,
+              -38.25,
+              80.0
+            ]
+          ]
+        },
+        {
+          "name": "EffectBuckR",
+          "label": "Buck板／PCB与元件区候选 R",
+          "category": "envelope",
+          "distance_mm": 29.63207715114649,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -26.0,
+              -52.75,
+              73.0
+            ]
+          ]
+        },
+        {
+          "name": "BreadboardEnvelope",
+          "label": "面包板整组规划包络 100×85×36",
+          "category": "envelope",
+          "distance_mm": 37.09172228668272,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -74.16482386898,
+              137.14284188474687
+            ],
+            [
+              -43.5,
+              -70.0,
+              174.0
+            ]
+          ]
+        },
+        {
+          "name": "IgnitionMOSBoard",
+          "label": "点火P01独立安装位／Board",
+          "category": "envelope",
+          "distance_mm": 42.773991030072345,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -66.48344070458653,
+              97.91820659237163
+            ],
+            [
+              -14.0,
+              -74.5,
+              68.0
+            ]
+          ]
+        },
+        {
+          "name": "PowerBank",
+          "label": "辰克5 V电池包116×70.5×19.5／前下方平放候选",
+          "category": "envelope",
+          "distance_mm": 43.495628593406295,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -43.5,
+              -59.30828193093379,
+              52.5
+            ]
+          ]
+        },
+        {
+          "name": "UltrasonicRearEnvelope",
+          "label": "候选超声波背面元件 45×20×4",
+          "category": "envelope",
+          "distance_mm": 45.93808190657066,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -74.16482386898,
+              137.14284188474687
+            ],
+            [
+              -22.5,
+              -74.16482386898,
+              178.0
+            ]
+          ]
+        },
+        {
+          "name": "UltrasonicPCBEnvelope",
+          "label": "候选超声波PCB 45×20×1.6",
+          "category": "envelope",
+          "distance_mm": 45.970840817418775,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -74.16482386898,
+              137.14284188474687
+            ],
+            [
+              -22.5,
+              -75.9,
+              178.0
+            ]
+          ]
+        }
+      ]
+    },
+    "rear_44_existing_case_footprint": {
+      "local_bbox": [
+        -72.5,
+        -106.0,
+        96.35,
+        -43.5,
+        -62.0,
+        132.25
+      ],
+      "world_bbox": [
+        -72.5,
+        -101.80901828765279,
+        95.9956285934063,
+        -43.5,
+        -50.01667821175329,
+        142.06040374169476
+      ],
+      "solid_collisions": [],
+      "equipment_route_overlaps": [],
+      "clearance_overlaps": [
+        {
+          "name": "BubbleGunBaseTool1",
+          "label": "空托架基座批头空间 1",
+          "category": "clearance",
+          "distance_mm": 0.0,
+          "overlap_mm3": 42.31533043591142,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -72.89258783211518,
+              99.6355323893652
+            ],
+            [
+              -43.5,
+              -72.89258783211518,
+              99.6355323893652
+            ]
+          ],
+          "overlap_bbox_world_mm": [
+            -43.99999999999999,
+            -76.63360247100341,
+            99.63553238936494,
+            -43.5,
+            -64.51979172304769,
+            131.88563472117963
+          ]
+        },
+        {
+          "name": "BubbleGunBaseTool2",
+          "label": "空托架基座批头空间 2",
+          "category": "clearance",
+          "distance_mm": 0.0,
+          "overlap_mm3": 21.157665217955113,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -50.93548582186724,
+              127.24332907385767
+            ],
+            [
+              -43.5,
+              -50.93548582186723,
+              127.24332907385764
+            ]
+          ],
+          "overlap_bbox_world_mm": [
+            -43.99999999999999,
+            -61.17878925037906,
+            95.99562859340628,
+            -43.49999999999968,
+            -50.93548582186719,
+            127.74452999953932
+          ]
+        }
+      ],
+      "key_clearances": [
+        {
+          "name": "KeelLid",
+          "label": "低鼻锥至颈架的折面顶盖",
+          "category": "structure",
+          "distance_mm": 17.75149141252853,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -43.5,
+              -52.71554352894075,
+              79.5137825884237
+            ]
+          ]
+        },
+        {
+          "name": "HeadShell",
+          "label": "头舱固定下壳／托板及冠盖支座",
+          "category": "exterior",
+          "distance_mm": 24.380999947276923,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -57.0,
+              -75.31026712499883,
+              137.4497624801728
+            ],
+            [
+              -57.0,
+              -69.0,
+              161.0
+            ]
+          ]
+        },
+        {
+          "name": "ShoulderRailR",
+          "label": "右斜面肩部承力梁",
+          "category": "structure",
+          "distance_mm": 10.399999999999963,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -43.5,
+              -62.00000000000001,
+              85.94999999999999
+            ]
+          ]
+        },
+        {
+          "name": "WaterGunBody",
+          "label": "拆出发射枪／前细后粗示意",
+          "category": "component",
+          "distance_mm": 81.89999999999998,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -50.01667821175329,
+              130.67236575718385
+            ],
+            [
+              38.400000000000006,
+              -50.01667821175329,
+              130.67236575718385
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunStopAccess",
+          "label": "BOOT按钮Ø12指端从前方接近及1.5 mm按压预算",
+          "category": "clearance",
+          "distance_mm": 1.5,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -58.0,
+              123.0
+            ],
+            [
+              -42.0,
+              -58.0,
+              123.0
+            ]
+          ]
+        },
+        {
+          "name": "StopBody",
+          "label": "BOOT停止按钮／杆体法兰候选",
+          "category": "component",
+          "distance_mm": 27.044481776296895,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -52.2581066710361,
+              122.30724086560957
+            ],
+            [
+              -37.20293495739464,
+              -26.85313790122205,
+              115.5
+            ]
+          ]
+        },
+        {
+          "name": "StopNut",
+          "label": "BOOT停止按钮／后插防转螺母候选",
+          "category": "component",
+          "distance_mm": 27.365822832033427,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -53.1947594216369,
+              118.81160521131825
+            ],
+            [
+              -36.0,
+              -27.773502691896258,
+              112.0
+            ]
+          ]
+        },
+        {
+          "name": "PrintNeck",
+          "label": "PP06 一体固定颈架",
+          "category": "merged_print_part",
+          "distance_mm": 32.35589532823165,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -50.01667821175329,
+              130.67236575718385
+            ],
+            [
+              -25.0,
+              -24.17700892746411,
+              136.75228794172247
+            ]
+          ]
+        }
+      ],
+      "nearest_solids": [
+        {
+          "name": "PrintBubbleCradle",
+          "label": "PP02 泡泡枪一体圆环底座",
+          "category": "merged_print_part",
+          "distance_mm": 0.2999999999999244,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -47.3,
+              -97.12427803015076,
+              106.12839420916997
+            ],
+            [
+              -47.3,
+              -97.2019237436815,
+              105.83861646128332
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunLowerPadRear",
+          "label": "阶梯槽底0.6垫／承托平面Z89.55",
+          "category": "structure",
+          "distance_mm": 6.799999999999935,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -57.800000000000004,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -57.800000000000004,
+              -61.06825143763088,
+              89.42733297464066
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseScrew1",
+          "label": "泡泡托架沉头位紧固候选 1",
+          "category": "structure",
+          "distance_mm": 7.702759245880642,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -74.76309515155884,
+              100.13673331504663
+            ],
+            [
+              -42.599999999999994,
+              -76.74306084659312,
+              92.74740074393527
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseScrew2",
+          "label": "泡泡托架沉头位紧固候选 2",
+          "category": "structure",
+          "distance_mm": 7.702759245880644,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -42.599999999999994,
+              -61.288247625968026,
+              88.60629602229493
+            ]
+          ]
+        },
+        {
+          "name": "ShoulderRailR",
+          "label": "右斜面肩部承力梁",
+          "category": "structure",
+          "distance_mm": 10.399999999999963,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -43.5,
+              -62.00000000000001,
+              85.94999999999999
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseInsert1",
+          "label": "泡泡托架 M3 级嵌件 1",
+          "category": "structure",
+          "distance_mm": 10.679419459877003,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -74.76309515155884,
+              100.13673331504663
+            ],
+            [
+              -42.199999999999996,
+              -77.50657702964556,
+              89.89791955638252
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseInsert2",
+          "label": "泡泡托架 M3 级嵌件 2",
+          "category": "structure",
+          "distance_mm": 10.679419459877009,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -42.199999999999996,
+              -62.051763809020464,
+              85.75681483474217
+            ]
+          ]
+        },
+        {
+          "name": "KeelLid",
+          "label": "低鼻锥至颈架的折面顶盖",
+          "category": "structure",
+          "distance_mm": 17.75149141252853,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -43.5,
+              -52.71554352894075,
+              79.5137825884237
+            ]
+          ]
+        },
+        {
+          "name": "KeelSideFrameR",
+          "label": "右镂空底座侧框",
+          "category": "structure",
+          "distance_mm": 19.27521783485673,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -66.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -66.5,
+              -52.231066992226964,
+              78.06668408201567
+            ]
+          ]
+        },
+        {
+          "name": "PrintLowerTub",
+          "label": "PP04 一体底盘及湿舱隔板",
+          "category": "merged_print_part",
+          "distance_mm": 20.536921485184312,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -51.072424308128014,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -51.072424308128014,
+              -51.681060770320066,
+              76.92757569187198
+            ]
+          ]
+        },
+        {
+          "name": "EffectInsert0",
+          "label": "承板内柱M2.5级嵌件候选 0",
+          "category": "structure",
+          "distance_mm": 22.115567821847456,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -47.0,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -47.0,
+              -51.0,
+              75.5
+            ]
+          ]
+        },
+        {
+          "name": "CheekArmorR",
+          "label": "右斜切颊部护板",
+          "category": "exterior",
+          "distance_mm": 22.399841927140628,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -92.51741456847229,
+              142.06040374169476
+            ],
+            [
+              -43.5,
+              -88.0,
+              164.0
+            ]
+          ]
+        },
+        {
+          "name": "EffectScrew0",
+          "label": "承板凹入式M2.5级螺钉候选 0",
+          "category": "structure",
+          "distance_mm": 22.794475077240843,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -47.0,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -47.0,
+              -50.2,
+              75.1
+            ]
+          ]
+        },
+        {
+          "name": "JawArmor",
+          "label": "多面下颌中央护片",
+          "category": "exterior",
+          "distance_mm": 22.947038105411472,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -92.51741456847229,
+              142.06040374169476
+            ],
+            [
+              -38.95715216140328,
+              -87.0,
+              163.86607336695903
+            ]
+          ]
+        }
+      ],
+      "nearest_equipment": [
+        {
+          "name": "BubbleGunHoseRoute",
+          "label": "泡泡顶部吸液管候选 Ø4／R8／侧向接前枪",
+          "category": "envelope",
+          "distance_mm": 7.105427357601002e-15,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -55.55236103720099,
+              -57.60726841054842,
+              102.34389747584608
+            ],
+            [
+              -55.55236103720099,
+              -57.607268410548414,
+              102.34389747584608
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunLeadRoute",
+          "label": "泡泡尾线束候选 Ø3／R8",
+          "category": "envelope",
+          "distance_mm": 4.263256414560601e-14,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -58.515205102730185,
+              98.95543161056771
+            ],
+            [
+              -43.5,
+              -58.515205102730135,
+              98.9554316105677
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunLeadConnector",
+          "label": "泡泡插头候选16×10×10",
+          "category": "envelope",
+          "distance_mm": 15.008331019803682,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -66.5,
+              -56.03422101038689,
+              108.21459029596306
+            ],
+            [
+              -74.0,
+              -43.47718526862894,
+              104.84994270963028
+            ]
+          ]
+        },
+        {
+          "name": "EffectMOSR",
+          "label": "MOS板／PCB与元件区候选 R",
+          "category": "envelope",
+          "distance_mm": 27.231624482958953,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -37.0,
+              -38.25,
+              80.0
+            ]
+          ]
+        },
+        {
+          "name": "EffectBuckR",
+          "label": "Buck板／PCB与元件区候选 R",
+          "category": "envelope",
+          "distance_mm": 29.63207715114649,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -26.0,
+              -52.75,
+              73.0
+            ]
+          ]
+        },
+        {
+          "name": "BreadboardEnvelope",
+          "label": "面包板整组规划包络 100×85×36",
+          "category": "envelope",
+          "distance_mm": 36.67921664393231,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -50.0,
+              -79.49327982689104,
+              138.57059735557394
+            ],
+            [
+              -50.0,
+              -70.0,
+              174.0
+            ]
+          ]
+        },
+        {
+          "name": "IgnitionMOSBoard",
+          "label": "点火P01独立安装位／Board",
+          "category": "envelope",
+          "distance_mm": 42.773991030072345,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -66.48344070458653,
+              97.91820659237163
+            ],
+            [
+              -14.0,
+              -74.5,
+              68.0
+            ]
+          ]
+        },
+        {
+          "name": "PowerBank",
+          "label": "辰克5 V电池包116×70.5×19.5／前下方平放候选",
+          "category": "envelope",
+          "distance_mm": 43.495628593406295,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -43.5,
+              -59.30828193093379,
+              52.5
+            ]
+          ]
+        },
+        {
+          "name": "UltrasonicPCBEnvelope",
+          "label": "候选超声波PCB 45×20×1.6",
+          "category": "envelope",
+          "distance_mm": 43.944251001847796,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -87.49087509108269,
+              140.71354654800507
+            ],
+            [
+              -22.5,
+              -77.5,
+              178.0
+            ]
+          ]
+        },
+        {
+          "name": "UltrasonicRearEnvelope",
+          "label": "候选超声波背面元件 45×20×4",
+          "category": "envelope",
+          "distance_mm": 44.30845837859879,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -43.5,
+              -85.99805476805514,
+              140.31354654800506
+            ],
+            [
+              -22.5,
+              -75.9,
+              178.0
+            ]
+          ]
+        }
+      ]
+    },
+    "rear_44_reserved_width_35_8": {
+      "local_bbox": [
+        -72.9,
+        -106.0,
+        96.35,
+        -37.1,
+        -62.0,
+        132.25
+      ],
+      "world_bbox": [
+        -72.9,
+        -101.80901828765279,
+        95.9956285934063,
+        -37.1,
+        -50.01667821175329,
+        142.06040374169476
+      ],
+      "solid_collisions": [],
+      "equipment_route_overlaps": [],
+      "clearance_overlaps": [
+        {
+          "name": "BubbleGunBaseTool1",
+          "label": "空托架基座批头空间 1",
+          "category": "clearance",
+          "distance_mm": 0.0,
+          "overlap_mm3": 1491.2954805740183,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -72.10197388274027,
+              99.4236880201054
+            ],
+            [
+              -37.1,
+              -72.10197388274027,
+              99.4236880201054
+            ]
+          ],
+          "overlap_bbox_world_mm": [
+            -43.99999999999999,
+            -78.62679845671511,
+            99.10145713463653,
+            -37.09999999999965,
+            -62.526595737336,
+            132.41970997590803
+          ]
+        },
+        {
+          "name": "BubbleGunBaseTool2",
+          "label": "空托架基座批头空间 2",
+          "category": "clearance",
+          "distance_mm": 0.0,
+          "overlap_mm3": 745.6477402870203,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -50.93548582186724,
+              127.24332907385767
+            ],
+            [
+              -37.1,
+              -50.93548582186723,
+              127.24332907385764
+            ]
+          ],
+          "overlap_bbox_world_mm": [
+            -44.000000000000114,
+            -63.171985236090016,
+            95.99562859340628,
+            -37.1,
+            -50.93548582186719,
+            128.27860525426772
+          ]
+        },
+        {
+          "name": "BubbleGunStopAccess",
+          "label": "BOOT按钮Ø12指端从前方接近及1.5 mm按压预算",
+          "category": "clearance",
+          "distance_mm": 0.0,
+          "overlap_mm3": 159.6932032498981,
+          "closest_points_world_mm": [
+            [
+              -42.0,
+              -58.0,
+              123.0
+            ],
+            [
+              -42.0,
+              -58.0,
+              123.0
+            ]
+          ],
+          "overlap_bbox_world_mm": [
+            -42.0,
+            -58.000000000000014,
+            117.10169515877644,
+            -37.09999999999998,
+            -51.67055863178022,
+            124.5
+          ]
+        }
+      ],
+      "key_clearances": [
+        {
+          "name": "KeelLid",
+          "label": "低鼻锥至颈架的折面顶盖",
+          "category": "structure",
+          "distance_mm": 17.75149141252853,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -37.1,
+              -52.71554352894075,
+              79.5137825884237
+            ]
+          ]
+        },
+        {
+          "name": "HeadShell",
+          "label": "头舱固定下壳／托板及冠盖支座",
+          "category": "exterior",
+          "distance_mm": 24.38099994727695,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -57.0,
+              -75.31026712499883,
+              137.44976248017278
+            ],
+            [
+              -57.0,
+              -69.0,
+              161.0
+            ]
+          ]
+        },
+        {
+          "name": "ShoulderRailR",
+          "label": "右斜面肩部承力梁",
+          "category": "structure",
+          "distance_mm": 10.399999999999963,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -37.7,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -37.7,
+              -61.99999999999999,
+              85.95
+            ]
+          ]
+        },
+        {
+          "name": "WaterGunBody",
+          "label": "拆出发射枪／前细后粗示意",
+          "category": "component",
+          "distance_mm": 75.49999999999999,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -50.01667821175329,
+              130.67236575718385
+            ],
+            [
+              38.4,
+              -50.01667821175329,
+              130.67236575718385
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunStopAccess",
+          "label": "BOOT按钮Ø12指端从前方接近及1.5 mm按压预算",
+          "category": "clearance",
+          "distance_mm": 0.0,
+          "overlap_mm3": 159.6932032498981,
+          "closest_points_world_mm": [
+            [
+              -42.0,
+              -58.0,
+              123.0
+            ],
+            [
+              -42.0,
+              -58.0,
+              123.0
+            ]
+          ],
+          "overlap_bbox_world_mm": [
+            -42.0,
+            -58.000000000000014,
+            117.10169515877644,
+            -37.09999999999998,
+            -51.67055863178022,
+            124.5
+          ]
+        },
+        {
+          "name": "StopBody",
+          "label": "BOOT停止按钮／杆体法兰候选",
+          "category": "component",
+          "distance_mm": 26.178602326921514,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -52.26772359873867,
+              122.27135000281088
+            ],
+            [
+              -36.18159183559769,
+              -26.99670135241684,
+              115.5
+            ]
+          ]
+        },
+        {
+          "name": "StopNut",
+          "label": "BOOT停止按钮／后插防转螺母候选",
+          "category": "component",
+          "distance_mm": 26.34099958760567,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -53.1947594216369,
+              118.81160521131825
+            ],
+            [
+              -36.0,
+              -27.773502691896258,
+              112.0
+            ]
+          ]
+        },
+        {
+          "name": "PrintNeck",
+          "label": "PP06 一体固定颈架",
+          "category": "merged_print_part",
+          "distance_mm": 29.17300057401505,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -50.01667821175329,
+              130.67236575718385
+            ],
+            [
+              -25.0,
+              -24.17700892746411,
+              136.75228794172247
+            ]
+          ]
+        }
+      ],
+      "nearest_solids": [
+        {
+          "name": "PrintBubbleCradle",
+          "label": "PP02 泡泡枪一体圆环底座",
+          "category": "merged_print_part",
+          "distance_mm": 0.2999999999999244,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -47.3,
+              -97.12427803015076,
+              106.12839420916997
+            ],
+            [
+              -47.3,
+              -97.2019237436815,
+              105.83861646128332
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunLowerPadRear",
+          "label": "阶梯槽底0.6垫／承托平面Z89.55",
+          "category": "structure",
+          "distance_mm": 6.799999999999935,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -57.800000000000004,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -57.800000000000004,
+              -61.06825143763088,
+              89.42733297464066
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseScrew1",
+          "label": "泡泡托架沉头位紧固候选 1",
+          "category": "structure",
+          "distance_mm": 7.64999999999995,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.4,
+              -74.76309515155886,
+              100.13673331504663
+            ],
+            [
+              -37.4,
+              -76.74306084659312,
+              92.7474007439353
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseScrew2",
+          "label": "泡泡托架沉头位紧固候选 2",
+          "category": "structure",
+          "distance_mm": 7.649999999999952,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.4,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -37.4,
+              -61.28824762596801,
+              88.60629602229496
+            ]
+          ]
+        },
+        {
+          "name": "ShoulderRailR",
+          "label": "右斜面肩部承力梁",
+          "category": "structure",
+          "distance_mm": 10.399999999999963,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -37.7,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -37.7,
+              -61.99999999999999,
+              85.95
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseInsert1",
+          "label": "泡泡托架 M3 级嵌件 1",
+          "category": "structure",
+          "distance_mm": 10.599999999999955,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.8,
+              -74.76309515155883,
+              100.13673331504663
+            ],
+            [
+              -37.8,
+              -77.50657702964554,
+              89.89791955638255
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunBaseInsert2",
+          "label": "泡泡托架 M3 级嵌件 2",
+          "category": "structure",
+          "distance_mm": 10.599999999999957,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.8,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -37.8,
+              -62.05176380902046,
+              85.7568148347422
+            ]
+          ]
+        },
+        {
+          "name": "KeelLid",
+          "label": "低鼻锥至颈架的折面顶盖",
+          "category": "structure",
+          "distance_mm": 17.75149141252853,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -37.1,
+              -52.71554352894075,
+              79.5137825884237
+            ]
+          ]
+        },
+        {
+          "name": "KeelSideFrameR",
+          "label": "右镂空底座侧框",
+          "category": "structure",
+          "distance_mm": 19.27521783485673,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -67.5,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -67.5,
+              -52.23106699222697,
+              78.06668408201567
+            ]
+          ]
+        },
+        {
+          "name": "PrintLowerTub",
+          "label": "PP04 一体底盘及湿舱隔板",
+          "category": "merged_print_part",
+          "distance_mm": 20.536921485184315,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -51.07242430812801,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -51.072424308128014,
+              -51.68106077032006,
+              76.92757569187198
+            ]
+          ]
+        },
+        {
+          "name": "JawArmor",
+          "label": "多面下颌中央护片",
+          "category": "exterior",
+          "distance_mm": 21.68228912744283,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -92.50150220703401,
+              142.0561400372977
+            ],
+            [
+              -32.82252380112433,
+              -87.0,
+              162.5880257919009
+            ]
+          ]
+        },
+        {
+          "name": "EffectInsert0",
+          "label": "承板内柱M2.5级嵌件候选 0",
+          "category": "structure",
+          "distance_mm": 22.115567821847456,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -47.0,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -47.0,
+              -51.0,
+              75.5
+            ]
+          ]
+        },
+        {
+          "name": "CheekArmorR",
+          "label": "右斜切颊部护板",
+          "category": "exterior",
+          "distance_mm": 22.399841927140628,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -56.4,
+              -92.51741456847229,
+              142.06040374169476
+            ],
+            [
+              -56.4,
+              -88.0,
+              164.0
+            ]
+          ]
+        },
+        {
+          "name": "EffectScrew0",
+          "label": "承板凹入式M2.5级螺钉候选 0",
+          "category": "structure",
+          "distance_mm": 22.794475077240843,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -47.0,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -47.0,
+              -50.2,
+              75.1
+            ]
+          ]
+        }
+      ],
+      "nearest_equipment": [
+        {
+          "name": "BubbleGunHoseRoute",
+          "label": "泡泡顶部吸液管候选 Ø4／R8／侧向接前枪",
+          "category": "envelope",
+          "distance_mm": 7.105427357601002e-15,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -55.55236103720099,
+              -57.60726841054842,
+              102.34389747584608
+            ],
+            [
+              -55.55236103720099,
+              -57.607268410548414,
+              102.34389747584608
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunLeadRoute",
+          "label": "泡泡尾线束候选 Ø3／R8",
+          "category": "envelope",
+          "distance_mm": 4.4938668397781776e-14,
+          "overlap_mm3": 0.0,
+          "closest_points_world_mm": [
+            [
+              -42.5,
+              -58.88123050651461,
+              97.58940620678332
+            ],
+            [
+              -42.5,
+              -58.88123050651457,
+              97.58940620678331
+            ]
+          ]
+        },
+        {
+          "name": "BubbleGunLeadConnector",
+          "label": "泡泡插头候选16×10×10",
+          "category": "envelope",
+          "distance_mm": 13.046455457326386,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -72.9,
+              -56.03422101038689,
+              108.21459029596306
+            ],
+            [
+              -74.0,
+              -43.47718526862894,
+              104.84994270963028
+            ]
+          ]
+        },
+        {
+          "name": "EffectBuckR",
+          "label": "Buck板／PCB与元件区候选 R",
+          "category": "envelope",
+          "distance_mm": 26.363231901485406,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -26.0,
+              -52.75,
+              73.0
+            ]
+          ]
+        },
+        {
+          "name": "EffectMOSR",
+          "label": "MOS板／PCB与元件区候选 R",
+          "category": "envelope",
+          "distance_mm": 26.44468513673191,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -37.0,
+              -38.25,
+              80.0
+            ]
+          ]
+        },
+        {
+          "name": "BreadboardEnvelope",
+          "label": "面包板整组规划包络 100×85×36",
+          "category": "envelope",
+          "distance_mm": 36.67921664393231,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -50.0,
+              -79.49327982689104,
+              138.57059735557394
+            ],
+            [
+              -50.0,
+              -70.0,
+              174.0
+            ]
+          ]
+        },
+        {
+          "name": "IgnitionMOSBoard",
+          "label": "点火P01独立安装位／Board",
+          "category": "envelope",
+          "distance_mm": 38.63902572064556,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -66.48344070458653,
+              97.91820659237163
+            ],
+            [
+              -14.0,
+              -74.5,
+              68.0
+            ]
+          ]
+        },
+        {
+          "name": "UltrasonicPCBEnvelope",
+          "label": "候选超声波PCB 45×20×1.6",
+          "category": "envelope",
+          "distance_mm": 41.270536658897484,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -87.49087509108269,
+              140.71354654800507
+            ],
+            [
+              -22.5,
+              -77.5,
+              178.0
+            ]
+          ]
+        },
+        {
+          "name": "UltrasonicRearEnvelope",
+          "label": "候选超声波背面元件 45×20×4",
+          "category": "envelope",
+          "distance_mm": 41.65812626472802,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -85.99805476805514,
+              140.31354654800506
+            ],
+            [
+              -22.5,
+              -75.9,
+              178.0
+            ]
+          ]
+        },
+        {
+          "name": "PowerBank",
+          "label": "辰克5 V电池包116×70.5×19.5／前下方平放候选",
+          "category": "envelope",
+          "distance_mm": 43.495628593406295,
+          "overlap_mm3": 0,
+          "closest_points_world_mm": [
+            [
+              -37.1,
+              -59.30828193093379,
+              95.9956285934063
+            ],
+            [
+              -37.1,
+              -59.30828193093379,
+              52.5
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "slot_feature_gaps": {
+    "BubbleGunRing": 17.999999999999925,
+    "BubbleGunSlotWall2": 0.2999999999999244,
+    "BubbleGunSlotWall3": 0.2999999999999381,
+    "BubbleGunSlotWall4": 0.2999999999999381,
+    "BubbleGunSlotWall5": 4.273601931554656,
+    "BubbleGunCradle": 7.3999999999999595
+  },
+  "existing_muzzle_conflict_mm3": 65.1131815957141,
+  "finger_access_width_probe": [
+    {
+      "width_mm": 26,
+      "overlap_mm3": 0.0,
+      "distance_mm": 0.0
+    },
+    {
+      "width_mm": 26.1,
+      "overlap_mm3": 0.6104883183357321,
+      "distance_mm": 0.0
+    }
+  ],
+  "assessment": "conditional static envelope analysis",
+  "user_input_source": "User stated tail shell height 35.9 mm, explicitly excluding the 6.8 mm bottom tab",
+  "assumptions": [
+    "Keep current mounting support and 15 degree pitch.",
+    "Measured height applies along local up, with shell starting above the 6.8 mm tab.",
+    "Rear lengths 25/44 mm, main width 23 mm, outer side extension 6 mm and centred reserved width 35.8 mm remain model assumptions.",
+    "No changes to native CAD or third-party component assets."
+  ],
+  "dynamic_removal_checked": false,
+  "physical_fit_verified": false,
+  "source_document": "source/CyberTrack-design.FCStd",
+  "collision_tolerance_mm3": 0.01,
+  "model_modified": false,
+  "view_file": "bubble-tail-clearance-review.png",
+  "view_sha256": "5926fa744704f27cbf0a3988a59dfb5240b5f1f51b7a6df05f017857c874aa3c"
+}

@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-26",
+  "revision": "0.56",
+  "baseline_files": {
+    "source/CyberTrack-design.FCStd": "6e23dc04aa6373d5b17067e34b847769f029b634a9cc095887700f79eaa543db",
+    "CyberTrack.FCStd": "a2f863a8b2e3dbd2dda314586d2dfbb0f02b62b303c8c1f062eeadfeb708cc86"
+  },
+  "source_document": "source/CyberTrack-design.FCStd",
+  "source_sha256": "9bc18b1a59777f05225d02513b2841d92ee98be380d1a608a54ed3b5e55fd366",
+  "delivery_sha256": "f4d01de42c2fa3abc3f9901597ec373d30088fc7465308a571f0b1cdd6bf5bcc",
+  "measurement": {
+    "component": "bubble-gun-tail-shell",
+    "date": "2026-10-26",
+    "unit": "mm",
+    "source": "User confirmed tail shell height 35.9 mm excluding the bottom tab, then requested updating the formal model while keeping the 6.8 mm tab unchanged.",
+    "tail_shell_height_mm": 35.9,
+    "includes_bottom_tab": false,
+    "bottom_tab_height_mm": 6.8,
+    "derived_support_to_tail_top_mm": 42.7,
+    "measurement_uncertainty_mm": null,
+    "model_interpretation": "Height is along the gun-local up direction, starting at the top of the existing bottom thin section. Retain current support datum, muzzle location, 15-degree assembly pitch and illustrative tail footprint.",
+    "retained_assumptions": {
+      "main_case_width_mm": 23,
+      "main_case_length_mm": 44,
+      "outer_side_extension_width_mm": 6,
+      "outer_side_extension_length_mm": 22,
+      "tab_centred_and_rear_flush": true
+    },
+    "historical_height": "The original overall height 35.8 mm is retained in ../../dimensions.json as historical input; it no longer determines the current tail envelope.",
+    "physical_fit_verified": false
+  },
+  "changed_source": [
+    "BubbleGunGearcase",
+    "BubbleGunInspectionEnvelope"
+  ],
+  "changed_delivery": [
+    "BubbleGunGearcase"
+  ],
+  "unchanged_signature_counts": {
+    "CyberTrack_design": 420,
+    "CyberTrack": 306
+  },
+  "unchanged_method": "All other object volume/area/topology/bounds signatures match; other gun pieces also compared by Boolean symmetric difference.",
+  "bottom_tab_unchanged": true,
+  "muzzle_and_mounts_unchanged": true,
+  "saved_and_reopened": true,
+  "local_case_bbox_mm": [
+    -11.5,
+    -67.0,
+    -13.650000000000002,
+    17.5,
+    -23.0,
+    22.249999999999993
+  ],
+  "world_case_bbox_mm": [
+    -72.5,
+    -101.80901828765279,
+    95.99562859340628,
+    -43.49999999999999,
+    -50.01667821175329,
+    142.06040374169476
+  ],
+  "shell_height_mm": 35.9,
+  "tab_height_mm": 6.8,
+  "support_to_tail_top_mm": 42.7,
+  "tail_solid_valid": true,
+  "tail_solids": 1,
+  "physical_collisions": [],
+  "equipment_route_overlaps": [],
+  "service_space_overlaps": [
+    {
+      "object": "BubbleGunBaseTool1",
+      "volume_mm3": 42.315330435912166
+    },
+    {
+      "object": "BubbleGunBaseTool2",
+      "volume_mm3": 21.15766521795549
+    }
+  ],
+  "clearances_mm": {
+    "PrintBubbleCradle": 0.2999999999999244,
+    "HeadShell": 24.38099994727695,
+    "ShoulderRailR": 10.399999999999963,
+    "KeelLid": 17.75149141252853,
+    "StopBody": 27.044481776296895,
+    "BubbleGunStopAccess": 1.499999999999993,
+    "PrintNeck": 32.35589532823164
+  },
+  "reserved_width_finger_space_overlap_mm3": 159.69320324990633,
+  "existing_muzzle_conflict_mm3": 65.1131815957141,
+  "geometry_and_export_checks_passed": true,
+  "assembly_fit_passed": false,
+  "service_paths_revalidated": false,
+  "physical_fit_verified": false,
+  "manufacturing_released": false,
+  "independent_revision": "components/bubble-gun/revisions/tail-height-2026-10-26",
+  "independent_readback_sha256": "f7997efea3ca8028d157da7c1f8b1c88987db7ec11392663833c606cd513b07b",
+  "historical_component_assets_unchanged": true
+}

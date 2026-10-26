@@ -32,15 +32,8 @@ by_name = {o.Name: o for o in objects}
 V = App.Vector
 # Columns of each matrix define an explicit world-to-page mapping. Front page
 # horizontal is +X; side is +Y; top has rear (+Y) at the top of the sheet.
-matrices = {
-    'iso': ((2**-.5,2**-.5,0),(-6**-.5,6**-.5,(2/3)**.5),(3**-.5,-3**-.5,3**-.5)),
-    'front': ((1,0,0),(0,0,1),(0,-1,0)),
-    'rear': ((-1,0,0),(0,0,1),(0,1,0)),
-    'side': ((0,1,0),(0,0,1),(1,0,0)),
-    'right': ((0,-1,0),(0,0,1),(-1,0,0)),
-    'top': ((1,0,0),(0,1,0),(0,0,1)),
-    'bottom': ((-1,0,0),(0,1,0),(0,0,-1)),
-}
+from export_drawing_colors import PROJECTION_MATRICES as matrices
+
 def project(key, names, view, clip=None):
     cache = OUT / f'{key}.json'
     if cache.exists():

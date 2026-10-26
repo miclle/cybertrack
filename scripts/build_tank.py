@@ -725,7 +725,7 @@ def main():
     print('Final readback; drive and bottle checks',flush=True)
     drive_mount_check=check_drive_mount(final,verbose=True)
     effects_check=check_effects_mount(final)
-    report={'status':'preliminary_concept','design_revision':'0.55','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.56','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'cable_passage_layout':cable_passage_info,
             'boot_button_layout':boot_button_info,'boot_button_check':check_boot_button(final),
             'drive_mount_check':drive_mount_check,

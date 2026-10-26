@@ -1,8 +1,8 @@
 {
   "source_document": "source/CyberTrack-design.FCStd",
-  "source_sha256": "6e23dc04aa6373d5b17067e34b847769f029b634a9cc095887700f79eaa543db",
+  "source_sha256": "9bc18b1a59777f05225d02513b2841d92ee98be380d1a608a54ed3b5e55fd366",
   "delivery_document": "CyberTrack.FCStd",
-  "delivery_sha256": "a2f863a8b2e3dbd2dda314586d2dfbb0f02b62b303c8c1f062eeadfeb708cc86",
+  "delivery_sha256": "f4d01de42c2fa3abc3f9901597ec373d30088fc7465308a571f0b1cdd6bf5bcc",
   "kept_group": "01 双履带与动力参考",
   "drive_members": [
     "DriveCouplerL",
@@ -188,7 +188,7 @@
   "retained_hidden_envelope_count": 20,
   "root_part_count": 277,
   "part_count": 307,
-  "geometry_scope": "Localized cable passage update; saved source/delivery changed shape signatures agree; see cable-passage-audit.json",
+  "geometry_scope": "Only tail shell and inspection envelope changed; source/delivery signatures and unchanged gun pieces checked in bubble-tail-height-audit.json",
   "shape_checks": [
     {
       "name": "TrackLeftRubberBand",
@@ -1426,5 +1426,6 @@
   "label_audit": "part-names-audit.json",
   "order_audit": "part-order-audit.json",
   "local_change_audit": "pp02-adjustment-audit.json",
-  "cable_passage_change_audit": "cable-passage-audit.json"
+  "cable_passage_change_audit": "cable-passage-audit.json",
+  "bubble_tail_height_audit": "bubble-tail-height-audit.json"
 }
