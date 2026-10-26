@@ -9,8 +9,8 @@ int main() {
         G g; g.Tick(0,true,false);
         int m=g.Claim(0,1,G::MoveOnly), w=g.Claim(0,2,G::WaterOnly), extra=g.Claim(0,3,G::MoveOnly);
         assert(is(g.Move(0,m,3000,d),"accepted"));
-        assert(g.left==((!strcmp(d,"left")||!strcmp(d,"backward"))?-60:60));
-        assert(g.right==((!strcmp(d,"right")||!strcmp(d,"backward"))?-60:60));
+        assert(g.left==((!strcmp(d,"left")||!strcmp(d,"backward"))?-80:80));
+        assert(g.right==((!strcmp(d,"right")||!strcmp(d,"backward"))?-80:80));
         assert(is(g.Water(0,w,5000),"accepted")); // Cross-lane queued request survives.
         assert(is(g.Move(0,extra,1000,d),"cancelled_or_duplicate"));
         assert(g.Moving() && g.Watering() && g.Starts()==2);
