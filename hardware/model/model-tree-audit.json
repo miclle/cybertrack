@@ -1,8 +1,8 @@
 {
   "source_document": "source/CyberTrack-design.FCStd",
-  "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+  "source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
   "delivery_document": "CyberTrack.FCStd",
-  "delivery_sha256": "24b224c7f8ea146f0bbd8c0a26ef621064be9d11d54a0280f7c99c30d64c2cf6",
+  "delivery_sha256": "d774df9e6200a37cbc47b2df47fe00b6932f07a6177bdc73323609f8e0d96bd0",
   "kept_group": "01 双履带与动力参考",
   "drive_members": [
     "DriveCouplerL",
@@ -188,8 +188,8 @@
     "WaterStrapAccessSpace"
   ],
   "retained_hidden_envelope_count": 20,
-  "root_part_count": 275,
-  "part_count": 305,
+  "root_part_count": 277,
+  "part_count": 307,
   "geometry_scope": "Retained objects; removed only duplicate inputs and hidden nonphysical check spaces",
   "shape_checks": [
     {
@@ -698,12 +698,6 @@
     },
     {
       "name": "ChestBadge",
-      "symmetric_difference_mm3": 0.0,
-      "native_brep_matches": true,
-      "brep_without_display_mesh_matches": true
-    },
-    {
-      "name": "StopPlinth",
       "symmetric_difference_mm3": 0.0,
       "native_brep_matches": true,
       "brep_without_display_mesh_matches": true
@@ -1982,6 +1976,24 @@
     },
     {
       "name": "PowerSwitchScrew1",
+      "symmetric_difference_mm3": 0.0,
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
+    },
+    {
+      "name": "StopBody",
+      "symmetric_difference_mm3": 0.0,
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
+    },
+    {
+      "name": "StopNut",
+      "symmetric_difference_mm3": 0.0,
+      "native_brep_matches": true,
+      "brep_without_display_mesh_matches": true
+    },
+    {
+      "name": "StopSignalRoute",
       "symmetric_difference_mm3": 0.0,
       "native_brep_matches": true,
       "brep_without_display_mesh_matches": true

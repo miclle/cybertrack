@@ -27,7 +27,7 @@ def organize(out, render=False):
     # Visible ignition routing is an explicit review overlay, not part of the
     # 59 hidden tool/service spaces the user asked to move out of the main file.
     spaces={o.Name for o in doc.Objects
-            if getattr(o,'Category','')=='clearance' and not o.Name.startswith('IgnitionRoute')}
+            if getattr(o,'Category','')=='clearance' and not o.Name.startswith(('IgnitionRoute','StopSignalRoute'))}
     prior=None
     if flattened:
         assert [o.Name for o in doc.Objects if o.isDerivedFrom('App::DocumentObjectGroup')]==['Drive']

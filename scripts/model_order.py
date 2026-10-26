@@ -54,7 +54,7 @@ def ordered_parts(report, drive_members):
     for name in roots:
         full.append(name)
         if name=='Drive':full.extend(drive)
-    assert len(roots)==276 and len(full)==306 and len(set(full))==306
+    assert len(roots)==len(objects)-len(drive_members)+1 and len(full)==len(objects)+1 and len(set(full))==len(full)
     return roots,drive,full,blocks
 
 
@@ -110,7 +110,7 @@ def reorder(out):
     audit={'delivery_document':'CyberTrack.FCStd','before_sha256':before,'delivery_sha256':after,
            'source_document':tree['source_document'],'source_sha256':tree['source_sha256'],
            'method':'Assembly median height descending; members by Z descending, Y ascending, X descending',
-           'root_count':276,'part_count':305,'root_order':roots,'drive_display_order':drive,'assemblies':blocks,
+           'root_count':len(roots),'part_count':len(report['objects']),'root_order':roots,'drive_display_order':drive,'assemblies':blocks,
            'geometry_entries_byte_identical':True,'document_properties_except_group_order_unchanged':True,
            'gui_properties_except_tree_rank_unchanged':True,
            'rank_metadata_verified':True}

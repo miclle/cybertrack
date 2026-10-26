@@ -164,5 +164,5 @@ def check_mount(doc):
     check('front_outlet_clearance',[cylinder(18,50,(-55,-129,110),(0,-1,0))],list(NAMES),'diameter36 x50 forward corridor; not flow validation')
     return {'service_spaces':spaces,'continuous_service_sweeps':results,'passed':all(x['passed'] for x in spaces+results),
         'tool_scope':'no front-ring tools; base tip5x1.25 then8x38.75 after body removal; no complete hands/handles',
-        'stop_access_scope':'diameter12 fingertip from front; not complete hand or ergonomic acceptance',
+        'stop_access_scope':'diameter12 fingertip from front; current BOOT seat also checks 1.5 mm press; not whole-hand acceptance',
         'contact_and_removal_profiles_assumed':True,'physical_fit_verified':False}

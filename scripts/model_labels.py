@@ -46,8 +46,9 @@ def part_labels():
         'OccipitalSpine':('后脑','中央脊甲'), 'OccipitalMark':('后脑','识别条'),
         'SensorMask':('前脸','传感器面板'), 'SensorStatusStrip':('前脸','状态色条'),
         'ChestAudioPanel':('前舱','内嵌饰板'), 'LowerChin':('前舱','下缘护片'),
-        'ChestBadge':('前舱','识别片'), 'StopPlinth':('停止按钮','基座'),
-        'StopControl':('停止按钮','本体（占位）'), 'PowerBank':('电源','辰克 5 V 电池包（占位）'),
+        'ChestBadge':('前舱','识别片'), 'StopBody':('停止按钮','杆体与法兰（候选）'),
+        'StopNut':('停止按钮','防转螺母（候选）'), 'StopSignalRoute':('停止按钮','GPIO0／GND 走廊（规划）'),
+        'StopControl':('停止按钮','按帽（候选）'), 'PowerBank':('电源','辰克 5 V 电池包（占位）'),
         'BatteryPullStrap':('电源','拉带（占位）'), 'ElectronicsTray':('面包板','浅托盘'),
         'PowerCableRoute':('电源','低压线束（规划）'), 'BaseCableGrommet':('底盘','线束护口'),
         'HeadCableGrommet':('头舱','线束护口'), 'NeckCableBridge':('颈架','线束限位桥'),
@@ -133,7 +134,8 @@ def part_labels():
     add('PowerSwitchBody','电源开关','本体与挂耳（占位）')
     add('PowerSwitchLever','电源开关','拨柄')
     numbered('PowerSwitchScrew','电源开关','固定螺钉',2)
-    assert len(labels)==305 and len(set(labels.values()))==305
+    labels['ShoulderRailR']='肩部 · 承力梁与 BOOT 按钮座 · 右'
+    assert len(labels)==307 and len(set(labels.values()))==307
     return labels
 
 
@@ -187,7 +189,7 @@ def normalize(out):
         with zipfile.ZipFile(temp) as archive:
             assert all(archive.read(info.filename)==data for info,data in entries if info.filename!='Document.xml')
         doc=App.openDocument(temp)
-        assert len(doc.Objects)==306 and doc.Drive.Label=='01 双履带与动力参考'
+        assert len(doc.Objects)==308 and doc.Drive.Label=='01 双履带与动力参考'
         for row in rows:
             obj=doc.getObject(row['name'])
             assert obj.Label==row['label'] and obj.Label2==row['description'],row['name']
@@ -202,7 +204,7 @@ def normalize(out):
     after_sha=sha(cad)
     audit={'delivery_document':'CyberTrack.FCStd','before_sha256':before_sha,'delivery_sha256':after_sha,
            'source_document':tree['source_document'],'source_sha256':tree['source_sha256'],
-           'part_count':305,'unique_labels':305,'renamed_count':changed,
+           'part_count':len(labels),'unique_labels':len(set(labels.values())),'renamed_count':changed,
            'geometry_and_gui_entries_byte_identical':True,'other_document_properties_unchanged':True,
            'native_readback_passed':True,'passed':True,'objects':rows}
     tree['delivery_sha256']=after_sha

@@ -1,12 +1,12 @@
 {
   "delivery_document": "CyberTrack.FCStd",
-  "before_sha256": "d8140fd9466b124059cef56c74dbdb4709716b1bbc3eb4e531d57f795c212042",
-  "delivery_sha256": "24b224c7f8ea146f0bbd8c0a26ef621064be9d11d54a0280f7c99c30d64c2cf6",
+  "before_sha256": "be1ea1930e235aa7218756b9e061ae01554c523b3495f54c3bd7915934f417cf",
+  "delivery_sha256": "d774df9e6200a37cbc47b2df47fe00b6932f07a6177bdc73323609f8e0d96bd0",
   "source_document": "source/CyberTrack-design.FCStd",
-  "source_sha256": "597e22d3f01e164b0a02ab0c5a804e0c88ec74d1edce4d568cb2b0e14719582a",
+  "source_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
   "method": "Assembly median height descending; members by Z descending, Y ascending, X descending",
-  "root_count": 276,
-  "part_count": 305,
+  "root_count": 278,
+  "part_count": 307,
   "root_order": [
     "PrintCrown",
     "CrownScrewLFront",
@@ -72,6 +72,10 @@
     "JawAccent",
     "PrintNeck",
     "NeckCableBridge",
+    "StopSignalRoute",
+    "StopControl",
+    "StopNut",
+    "StopBody",
     "WaterHoseRoute",
     "WaterGunInlet",
     "WaterGunBody",
@@ -99,10 +103,8 @@
     "BubbleGunBaseInsert1",
     "BubbleGunBaseScrew2",
     "BubbleGunBaseInsert2",
-    "StopControl",
-    "StopPlinth",
-    "ShoulderRailL",
     "ShoulderRailR",
+    "ShoulderRailL",
     "ArcLinerOuterL1",
     "ArcLinerInnerL1",
     "ArcLinerInnerR1",
@@ -449,6 +451,16 @@
       ]
     },
     {
+      "assembly": "停止按钮",
+      "height_mm": 114.0,
+      "members": [
+        "StopSignalRoute",
+        "StopControl",
+        "StopNut",
+        "StopBody"
+      ]
+    },
+    {
       "assembly": "水枪",
       "height_mm": 112.81278653788739,
       "members": [
@@ -488,19 +500,11 @@
       ]
     },
     {
-      "assembly": "停止按钮",
-      "height_mm": 98.5,
-      "members": [
-        "StopControl",
-        "StopPlinth"
-      ]
-    },
-    {
       "assembly": "肩部",
-      "height_mm": 90.03768872556569,
+      "height_mm": 95.66268872556569,
       "members": [
-        "ShoulderRailL",
-        "ShoulderRailR"
+        "ShoulderRailR",
+        "ShoulderRailL"
       ]
     },
     {

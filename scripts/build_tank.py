@@ -30,6 +30,7 @@ from mt3608_layout import apply as add_mt3608, check as check_mt3608, render as 
 from l298n_layout import add_l298n, check_l298n, render_l298n
 from l298n_mount import apply as add_l298n_mount, check as check_l298n_mount, render as render_l298n_mount, export_carrier
 from power_switch import apply as add_power_switch, check as check_power_switch, render as render_power_switch, export_component as export_power_switch
+from boot_button import apply as add_boot_button, check as check_boot_button, render as render_boot_button
 from speaker_layout import speaker_shape, LABEL as SPEAKER_LABEL, BASIS as SPEAKER_BASIS
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -118,7 +119,7 @@ def render_views(doc, output):
         view.saveImage(str(output/filename),1600,1200,'White')
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith('IgnitionRoute') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
+            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith(('IgnitionRoute','StopSignalRoute')) or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
             o.ViewObject.Transparency=40 if o.Name in ('WaterModule','BubbleModule') else 0
     for filename,direction in [('assembly.png','iso'),('front.png','front'),
                                ('side.png','side'),('right.png','right'),('rear.png','rear'),('top.png','top'),('rear-assembly.png','rear_iso')]:
@@ -203,7 +204,7 @@ def render_views(doc, output):
     render('bubble-gun-clearance.png','rear_iso')
     for o in doc.Objects:
         if hasattr(o,'Category'):
-            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith('IgnitionRoute') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
+            o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith(('IgnitionRoute','StopSignalRoute')) or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
             o.ViewObject.Transparency=0
     render('bubble-gun-layout.png','iso')
     render('bubble-gun-side.png','side')
@@ -226,7 +227,7 @@ def render_views(doc, output):
     for o in doc.Objects:
         if hasattr(o,'Category'):o.ViewObject.Transparency=40 if o.Name in ('WaterModule','BubbleModule') else 0
     for o in doc.Objects:
-        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith('IgnitionRoute') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
+        if hasattr(o,'Category'): o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith(('IgnitionRoute','StopSignalRoute')) or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
     view.setCameraOrientation(orientations['iso'].Q)
     view.fitAll()
 
@@ -240,7 +241,7 @@ def render_side_frames(doc, output):
     view=Gui.activeDocument().activeView();rotation=view.getCameraOrientation()
     try:
         for o in objects:
-            o.ViewObject.Visibility=(o.Category not in ('envelope','clearance') and o.Shape.BoundBox.ZMax<=132) or o.Name.startswith('IgnitionRoute')
+            o.ViewObject.Visibility=(o.Category not in ('envelope','clearance') and o.Shape.BoundBox.ZMax<=132) or o.Name.startswith(('IgnitionRoute','StopSignalRoute'))
             o.ViewObject.Transparency=85 if o.Name.startswith('Track') else 0
             if o.Name.startswith('KeelSideFrame'):o.ViewObject.ShapeColor=(.98,.38,.03)
         for filename,orientation in [
@@ -267,7 +268,7 @@ def main():
     source_hash = sha(source_path)
     source = App.openDocument(str(source_path))
     doc = App.newDocument('CyberTrack')
-    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.50'
+    doc.Label = 'CyberTrack 双履带交互机器人 · 装配候选 0.54'
     doc.Comment = 'Concept only. Unmeasured hardware uses assumed envelopes. No manufacturing release.'
     groups = {}
     for key, label in [('drive','01 双履带与动力参考'),('structure','02 新底盘与分仓'),
@@ -595,6 +596,7 @@ def main():
     from print_consolidation import connect_features, finalize as finalize_print_parts
     print_connections=connect_features(doc)
     power_switch_info=add_power_switch(doc,add)
+    boot_button_info=add_boot_button(doc,add)
     for kind,info in [('water',water_info),('bubble',bubble_info)]:
         info['pre_pitch_origin_mm']=info['origin_mm']
         info['origin_mm']=pitch_info['muzzle_centres_world_mm'][kind]
@@ -680,13 +682,14 @@ def main():
         render_ignition_mos(saved, OUT)
         render_side_frames(saved, OUT)
         render_power_switch(saved, OUT)
+        render_boot_button(saved, OUT)
         render_l298n_mount(saved, OUT)
         from drive_service import render_drive_views
         render_drive_views(saved, OUT)
         # Keep the exposed bottle envelopes visible in the saved assembly.
         for o in saved.Objects:
             if hasattr(o,'Category'):
-                o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith('IgnitionRoute') or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
+                o.ViewObject.Visibility=o.Category not in ('envelope','clearance') or o.Name.startswith(('IgnitionRoute','StopSignalRoute')) or o.Name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')
                 o.ViewObject.Transparency=40 if o.Name in ('WaterModule','BubbleModule') else 0
         show_ignition_routes(saved)
         saved.save()
@@ -711,13 +714,14 @@ def main():
                 name=provider.attrib['name']
                 if name in final_shapes:
                     visible=provider.find("Properties/Property[@name='Visibility']/Bool").attrib['value']=='true'
-                    assert visible==(final_shapes[name].Category not in ('envelope','clearance') or name.startswith('IgnitionRoute') or name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')),name
+                    assert visible==(final_shapes[name].Category not in ('envelope','clearance') or name.startswith(('IgnitionRoute','StopSignalRoute')) or name in ('WaterModule','BubbleModule','BackpackArcL','BackpackArcR')),name
     assert sha(source_path)==source_hash
     from drive_service_check import check as check_drive_mount
     print('Final readback; drive and bottle checks',flush=True)
     drive_mount_check=check_drive_mount(final,verbose=True)
     effects_check=check_effects_mount(final)
-    report={'status':'preliminary_concept','design_revision':'0.50','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.54','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+            'boot_button_layout':boot_button_info,'boot_button_check':check_boot_button(final),
             'drive_mount_check':drive_mount_check,
             'head_lift_check':check_head_lift(final),
             'rear_armor_symmetry_check':check_rear_armor(final),
@@ -804,7 +808,7 @@ def main():
     (OUT/'ignition-routing-audit.json').write_text(json.dumps(report['ignition_routing_check'],ensure_ascii=False,indent=2)+'\n')
     (OUT/'readback.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({k:report[k] for k in ('assembly_size_xyz_mm','step_readback','collision_check','service_paths')},ensure_ascii=False,indent=2))
-    required_checks = ('power_switch_check', 'ignition_mos_check', 'ignition_routing_check', 'front_effects_check',
+    required_checks = ('boot_button_check', 'power_switch_check', 'ignition_mos_check', 'ignition_routing_check', 'front_effects_check',
                        'mt3608_check', 'effects_mount_check', 'ultrasonic_integration_check',
                        'head_lift_check', 'bottle_backpack_check', 'l298n_mount_check',
                        'l298n_check', 'drive_mount_check', 'top_feed_check',
@@ -824,6 +828,9 @@ def main():
     switch_report=report['power_switch_check']
     switch_report.update(source_document='source/CyberTrack-design.FCStd',source_sha256=sha(OUT/'source/CyberTrack-design.FCStd'),delivery_sha256=sha(cad),saved_and_reopened=True,layout=power_switch_info)
     (OUT/'power-switch-audit.json').write_text(json.dumps(switch_report,ensure_ascii=False,indent=2)+'\n')
+    boot_report=report['boot_button_check']
+    boot_report.update(source_document='source/CyberTrack-design.FCStd',source_sha256=sha(OUT/'source/CyberTrack-design.FCStd'),delivery_sha256=sha(cad),saved_and_reopened=True,layout=boot_button_info)
+    (OUT/'boot-button-audit.json').write_text(json.dumps(boot_report,ensure_ascii=False,indent=2)+'\n')
     if args.render:
         # Dispose delayed view widgets while Python and its GIL still exist.
         QtCore.QCoreApplication.sendPostedEvents(None,QtCore.QEvent.DeferredDelete)
