@@ -2,7 +2,11 @@
 
 当前版本 **`0.2.0-linx-water-bench`**，ESP-IDF **v5.5.1**，ESP32-S3 N16R8。单次授权喷水见文末 0.2.0 小节；以下原状态／停止说明保留为 `0.1.0-linx-readonly` 阶段基线。此工程用于真实 Wi-Fi、设备绑定、WSS 和端侧 MCP 联调，复用现有控制核心／协议解析器。
 
+核对日期：2026-10-27。本工程版本号属于独立 COREBOARD 联网台架，应继续保留；当前样机采用[面包板 ct21](../esp32-audio/README.md)，不能套用本页 GPIO4、0x10000 应用偏移或单次 permit。独立 0.2.0 有状态、停止和喷水三项工具，真实绑定、5 秒喷水及 BOOT 提前停止有[分项实测](../../docs/linx-validation.md)；完整故障、供电与整机验收未完成。
+
 ## 范围
+
+**以下能力清单为 0.1.0 历史基线。** 0.2.0 新增喷水、GPIO4 受限输出及一次性授权，见文末；现用面包板音频和八工具能力不属于本工程。
 
 - 仅声明 `self.tank.get_status` 和 `self.tank.stop`。能力及动作时效预算全零，没有本地使能入口，也没有把 GPIO4 置高的代码。
 - GPIO4 为已核对 MOS 台架的临时控制引脚，应用开始时拉低，运行期间持续保持低；BOOT 对应 GPIO0 本地停止。停止回执证明逻辑锁定及软件撤销，不证明 MOS 实物关断或独立供能切断。
@@ -56,7 +60,7 @@ python firmware/esp32-linx/serial_session.py --command s
 
 ## 验证状态
 
-2026-10-24 新增 ASan／UBSan 主机检查通过：网关业务错误与令牌缺失、非受信任地址及 CR/LF 拒绝、hello、所有双段切分及 WebSocket continuation、乱序／超长拒绝、仅两项工具、动作拒绝、重复停止、状态和重连保持未使能。ESP-IDF 编译通过；真实绑定、WSS、状态、停止及停止后状态查询已通过，见[实测记录](../../docs/linx-validation.md)。
+2026-10-24 的 0.1.0 历史检查：ASan／UBSan 主机检查通过：网关业务错误与令牌缺失、非受信任地址及 CR/LF 拒绝、hello、所有双段切分及 WebSocket continuation、乱序／超长拒绝、仅两项工具、动作拒绝、重复停止、状态和重连保持未使能。ESP-IDF 编译通过；真实绑定、WSS、状态、停止及停止后状态查询已通过，见[实测记录](../../docs/linx-validation.md)。
 
 官方协议：[OTA 网关](https://linx.qiniu.com/docs/xrobot/platform/OTA)、[WebSocket](https://linx.qiniu.com/docs/xrobot/platform/websocket)、[端侧 MCP](https://linx.qiniu.com/docs/xrobot/mcp/hardware-mcp)。
 

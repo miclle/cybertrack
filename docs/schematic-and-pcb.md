@@ -1,8 +1,8 @@
 # CyberTrack 原理图设计与 PCB 打板
 
-版本：设计说明 v0.3 · 2026-10-26。适用对象：原理图设计、PCB 布局、制板文件准备和首板检查。
+版本：设计说明 v0.3 · 2026-10-26；状态核对：2026-10-27。适用对象：原理图设计、PCB 布局、制板文件准备和首板检查。
 
-**已完成 A1 模块级电气原理图，尚无 PCB 布线或 Gerber 生产文件，不能直接下单。** [KiCad 可编辑工程与说明](../hardware/schematic/README.md)及[五页 PDF](../hardware/schematic/CyberTrack-schematic.pdf)保留现有 ESP32-S3 开发板，按电气符号、端子和网络绘图。输入保护、主电源控制电路及元件数值／物理针序未冻结，仍以 `TBD` 标注。本文给出设计约束和交付标准；后续进度统一记入 [TODO](../TODO.md)，不以验收条件代替完成记录。
+**已完成 A1 模块级电气原理图，尚无 PCB 布线或 Gerber 生产文件，不能直接下单。** [KiCad 可编辑工程与说明](../hardware/schematic/README.md)及[五页 PDF](../hardware/schematic/CyberTrack-schematic.pdf)保留现有 ESP32-S3 开发板，按电气符号、端子和网络绘图。输入保护、主电源控制电路、部分元件数值／物理针序未冻结，仍以 `TBD` 标注；R1–R6 已选定 10 kΩ、±1%、至少 0.1 W、0603 为设计目标，不代表已安装或通过实物默认关闭验收。本文给出设计约束和交付标准；后续进度统一记入 [TODO](../TODO.md)，不以验收条件代替完成记录。
 
 ## 1. 设计范围与版本依据
 
@@ -14,7 +14,7 @@
 |---|---|---|
 | 主电源 | [辰克 CK18650-1234S-NP](../hardware/components/ck-5v-battery/README.md)，标注 5 V，用户尺寸 116 × 70.5 × 19.5 mm | 输出电流、接头用途／极性及保护未知；不沿用旧 A110M 参数，不设计电芯充电电路 |
 | 主控 | 现用 `bread-compact-wifi` 面包板 | 按实物丝印接线；独立 COREBOARD 的排针图不直接作为面包板封装依据 |
-| 固件 | [apply_overlay.py](../firmware/esp32-audio/apply_overlay.py) 为 `2.0.3-ct20`（80% PWM，已刷写）；[输出实现](../firmware/esp32-audio/action_outputs.h)及[控制实现](../firmware/esp32-audio/cybertrack_tools.cc) | 固件引脚有源码依据；部署证据见 [ct20 记录](../firmware/esp32-audio/startup-ct20.json)，不等于新 PCB 验收 |
+| 固件 | [apply_overlay.py](../firmware/esp32-audio/apply_overlay.py) 为 `2.0.3-ct21`（80% PWM，已刷写）；[输出实现](../firmware/esp32-audio/action_outputs.h)及[控制实现](../firmware/esp32-audio/cybertrack_tools.cc) | 固件引脚有源码依据；部署证据见 [ct21 记录](../firmware/esp32-audio/startup-ct21.json)；A1 初版采用 ct20 GPIO，ct21 未改变这些引脚，不等于新 PCB 验收 |
 | 行走 | MT3608 目标 12 V → P13 L298N → 两台 37R-520 | 保留外置功率模块；核算升压输入、启动电流、驱动损耗及回灌 |
 | 水枪／泡泡 | 用户确认均为 3.7 V；每路独立 MOS 和降压板 | 不能并成一个受控输出；保留两路独立回流 |
 | 点火低压控制 | GPIO21 控制共用的一块 MOS；用户指定 5 V、单次最多 5 秒 | 只定义低压接口和禁用状态；不画高压输出、接线、电极及放电结构，不安排高压通电测试 |
@@ -112,7 +112,7 @@ P12 的 EN 电平、默认偏置及可调状态未确认，不将 EN 直接接 G
 | `IGNITION_EN` | 21 | 共用点火 MOS 的低压控制端 | 低；首板保持该支路禁用 |
 | `BOOT_STOP_N` | 0 | 常开自复位按钮，另一端接 GND_SYS | 按下拉低；松开不恢复旧动作 |
 
-L298N 的 ENA／ENB 常高跳帽应取下；独立的稳压跳帽沿用已核对的模块状态，`+5V` 端不接主控。A／B 对应车体左右及前进方向仍待装车标定。不能把 H 桥电机端任一根线固定接地。
+L298N 的 ENA／ENB 常高跳帽应取下；独立的稳压跳帽沿用已核对的模块状态，`+5V` 端不接主控。ct21 软件映射为 A／右履带、B／左履带，装车四方向已有用户确认；实物桥臂到左右电机的逐线追踪、启动／停止及定量负载仍待验。不能把 H 桥电机端任一根线固定接地。
 
 下列资源已用于现有音频／显示／按键，不分配给新执行器。已核对当前导出构建的 `bread-compact-wifi/config.h`，可追溯说明见[面包板工程](../firmware/esp32-audio/README.md)：
 
