@@ -1,82 +1,105 @@
 # 固件能力与接口手册
 
-核对日期：2026-10-25。本文描述仓库当前实现，作为“有哪些能力、模块、接口，怎样传参和读取结果”的统一入口。板上实际版本须以启动日志为准；本文不表示所有工程已经合并为一个整机固件。源代码及各工程的验证记录是行为与验收依据。
+核对日期：2026-10-27。本文描述仓库当前实现，作为“有哪些能力、模块、接口，怎样传参和读取结果”的统一入口。板上实际版本须以启动日志为准；本文不表示所有工程已经合并为一个整机固件。源代码及各工程的验证记录是行为与验收依据。
 
 ## 阅读导航
 
 - 看当前能做什么：[工程与能力](#工程与能力)。
-- 配置语音工具或读取回执：[面包板 ct7 接口](#面包板-ct7-接口)。
+- 配置语音工具或读取回执：[当前面包板 ct21 接口](#当前面包板-ct21-接口)。
 - 对接另一块联网板：[联网水枪台架接口](#联网水枪台架接口)。
 - 开发正式控制固件：[正式控制核心的-mcp-接口](#正式控制核心的-mcp-接口)、[模块与数据流](#模块与数据流)、[内部-c-api](#内部-c-api)。
 - 做本地调试：[串口与板级接口](#串口与板级接口)。
 - 看证据和缺口：[验证与维护](#验证与维护)。
 
-## 面包板 ct11 长按计时
-
-在 ct10 双入口规则上增加网页长按秒数，每 0.1 秒刷新，松开后保留本次时长，取消／后台／失联结束计时。仅为浏览器输入时长，不是输出或机械移动测量；后端规则保持。见[当前说明](../docs/lan-control.md)。
-
-## 面包板 ct10 独立操作与双入口
-
-当前 `2.0.3-ct10` 页面自动连接、取消组合开关，行走和喷水可独立开始并同时运行。网页连接本身不阻止语音；同通道网页动作优先，先取消冲突语音动作并保留冷却，不补做旧请求。网页关闭／超时只停止网页来源通道，语音关闭只停止语音来源通道；全部停止／BOOT／Wi-Fi 断开仍停止两路。状态增加 `move_source`、`water_source` 和 `control_owner=shared`；后者只表示入口连接。契约与部署见[局域网控制](../docs/lan-control.md)。以下 ct9／ct8 描述为历史版本。
-
-## 面包板 ct9 按住行走
-
-历史源码 `2.0.3-ct9` 按用户要求取消配对码，打开网页可直接连接接管；将网页方向键改为按下开始、同方向持续续租、松开仅停行走；喷水仍定时，组合请求只在按下时启动一次喷水。设备 600 ms 行走截止，浏览器约每 150 ms 用单次回执凭据续租；状态心跳不能维持行走，停止／超时后旧续租不能恢复。后台、Wi-Fi 断开及全停关闭两路。语音原三秒上限与冷却保持。新操作 `drive_start/drive_renew/drive_stop`、字段及验证见[当前局域网契约](../docs/lan-control.md)。已烧录并同步平台，实机无负载 HTTP／桌面长按通过；手机、语音和带载验收以部署记录为准。下方 ct8 定时方向键为历史软件候选。
-
-## 面包板 ct8 局域网接口
-
-历史候选 `2.0.3-ct8` 在 ct7 基础上提供 `http://<设备 IP>:8080/`。网页单控制者，8 位启动配对码换取内存令牌，500 ms 状态刷新兼心跳，设备端 2000 ms 租约及 1500 ms 一次动作窗口。完整 HTTP 路由、参数、错误与来源切换见[局域网接口契约](../docs/lan-control.md)。本轮没有烧录或平台同步。
-
-原五个语音工具与参数保留；网页接管时拒绝语音动作，语音状态／全停和正常对话保留。关闭语音会话只撤销语音动作，Wi-Fi 断开／BOOT／全停关闭全部动作。新增状态字段 `control_owner`（web/voice/none）、`window`、`move_cooldown_ms`、`water_cooldown_ms`、`boot_held`；配对码和令牌不会出现在语音回执。这里的控制权不代表传感反馈。原 ct7 行走／喷水时限、独立截止和冷却不变。
-
 ## 工程与能力
 
 | 工程／版本 | 已实现能力 | 当前边界与证据 |
 |---|---|---|
+| [当前面包板](esp32-audio/README.md) `2.0.3-ct21` | 八个 CyberTrack MCP 工具、网页与语音并用、四路独立控制、三路长按与狂暴模式；约 80% PWM，B／左、A／右 | 已完成软件检查、仅应用部署及启动联网；用户确认前后左右正常。已有样机行走／转向／泡泡影像；停止距离、电流、温升、完整故障与四路组合负载仍未验收 |
 | 通用 C11 核心 `src/` | 行走／喷水／泡泡逻辑目标、限时互斥、停止锁定、MCP、运行层、输入滤波、队列、连接模拟、防重放及维护恢复 | [主机记录](tests/README.md)报告 23/23 CTest；没有完整生产板级后端，正式核心的真实网络动作未开放 |
 | [无负载工程](esp32/README.md) `0.2.0-boot-stop-check` | 启动、PSRAM 检查、周期控制核心、BOOT 停止输入 | 已有无负载实测；不驱动执行器，无网络／音频 |
 | [L298N 电机台架](esp32-motor-bench/README.md) `0.3.2-l298n-dual-10s` | A／B／AB 选择、本地使能、约 60% PWM／10 秒单次动作、BOOT 同停 | A=GPIO4／5／6，B=GPIO7／8／9；双路软件回归／编译通过，B 路接线及六脚静态关闭已获用户确认，此前 0.3.1 的 3 秒版 8 组空载组合已获用户确认：单路互不干扰、方向符合预期、正常停止且无异响或异常发热；随后一次双路 BOOT 提前停止及松开不恢复也获用户确认；用户已确认 40% 反转方向、约 10 秒停止及运行母线约 12 V；60%／10 秒反转获用户正常停止反馈，母线约 12 V，较 40% 更快、更顺畅且无异常；用户已确认双路 60%／10 秒空载正转正常启停，启动、运行中及临近停止母线均约 12 V，电机和 L298N 无明显发热、无异响或其他异常；这是万用表读数与主观发热观察，电流和定量温升仍未测；电流／温升和带载验收待完成；不是整机行走接口 |
 | [MOS 台架](esp32-mos-bench/README.md) `0.1.1` | 本地串口单次 5 秒 GPIO4 输出、自动结束、BOOT／串口停止 | 已有一次正常喷水／到期停止及 BOOT 带载提前停止观察；完整供电与故障验收未完成 |
 | [联网板](esp32-linx/README.md) `0.2.0-linx-water-bench` | Wi-Fi、绑定、WSS、MCP 状态／停止、本机单次授权的 5 秒喷水 | 已有真实平台调用、喷水及 BOOT 功能检查；无音频，正式核心动作仍关闭 |
-| [面包板 ct9](../docs/lan-control.md) `2.0.3-ct9` | 按住持续行走、松开停止、600 ms 续租截止，保留定时喷水和语音 | 已部署，无负载 HTTP／桌面网页通过；手机与语音待反馈 |
-| [面包板 ct8](../docs/lan-control.md) `2.0.3-ct8` | 同一 ESP32 提供局域网页面、定时动作、状态刷新、全停、独占网页会话，保留语音 | 主机测试与交叉编译通过；未烧录，手机／语音并行及断连实测待完成 |
-| [面包板 ct7](../docs/concurrent-actions.md) `2.0.3-ct7` | 行走与喷水独立计时、可同时运行，新增组合启动工具，统一停止 | 主机测试、编译、应用刷写与平台同步已通过，核心并发台架已完成；完整供电及整机验收待完成，见 ct7 记录；历史 ct6 互斥测试不作为并发验收 |
+| [面包板 ct9 历史版](../docs/lan-control.md) `2.0.3-ct9` | 按住持续行走、松开停止、600 ms 续租截止，保留定时喷水和语音 | 当时已部署，无负载 HTTP／桌面网页通过；后续 ct10 已有功率断开的手机／语音有限联调，完整带载仍未验收 |
+| [面包板 ct8 历史候选](../docs/lan-control.md) `2.0.3-ct8` | 同一 ESP32 提供局域网页面、定时动作、状态刷新、全停、独占网页会话，保留语音 | 当时主机测试与交叉编译通过，未烧录；独占网页规则已被 ct10 替代，历史缺口不等同于当前状态 |
+| [面包板 ct7 历史版](../docs/concurrent-actions.md) `2.0.3-ct7` | 行走与喷水独立计时、可同时运行，新增组合启动工具，统一停止 | 主机测试、编译、应用刷写与平台同步已通过，核心并发台架已完成；完整供电及整机验收待完成，见 ct7 记录；历史 ct6 互斥测试不作为并发验收 |
 | [面包板历史版](esp32-audio/README.md) `2.0.3-ct6` | 保留语音／唤醒／OLED／音量／说话按键；状态、统一停止、双路电机与 GPIO18 喷水互斥 | ct6 部署、平台同步、迁线及基本台架联调完成；断网、剩余语音回归和整机带载待验；行走 1–3000 ms、约 60%，喷水 1–30000 ms。ct4 带载／ct5 功率断开历史结果不转移为 ct6 验收 |
 
-面包板 ct6 已部署行走／转向与平台角色，迁线及基本台架语音验证完成，剩余回归见集成记录；截至 ct12 泡泡未在面包板或联网台架开放；ct13 源码候选已增加泡泡和点火低压 MOS 接口，尚未部署，见文末更新。超声波测距／避障、编码器闭环、舵机动作、液位／水流／电量遥测及双板协同控制均未在这些项目接口中实现。高压电路／接线不属于当前实现范围，ct13 仅实现低压 MOS 控制软件候选。上游音频工程可能还发布其自带工具，本文只定义 CyberTrack 增加的 `self.tank.*`，不把上游工具视为本项目新增能力。
+当前面包板已部署泡泡与点火低压 MOS 控制，ct7 两路并发台架、ct21 四方向现场反馈及[样机影像](../artifact/README.md)分别记录。影像没有绑定完整固件／电源配置，不能作为当前四路整机验收。超声波测距／避障、编码器闭环、舵机动作、液位／水流／电量遥测及双板协同控制均未在这些项目接口中实现。高压接线、安全、绝缘、液体共存及 EMC 仍未验收，见[效果控制](../docs/effects-control.md)。上游音频工程可能还发布其自带工具，本文只定义 CyberTrack 增加的 `self.tank.*`。
 
 以下三套同名工具不能混用：
 
-| 差异 | 面包板 ct6 | 联网板 0.2.0 | 正式核心 |
+| 差异 | 当前面包板 ct21 | 联网板 0.2.0 | 正式核心 |
 |---|---|---|---|
 | `water` 参数 | `duration_ms` | `duration_ms` + `permit` | `duration_ms`，另须可信元数据 |
-| 时长 | 水枪 1–30000 ms；行走 1–3000 ms | 必须 5000 ms | 受 `ct_limits` 限制；默认禁用 |
+| 定时请求时长 | 水枪／泡泡／狂暴 1–30000 ms；行走 1–3000 ms；点火 1–5000 ms；网页长按另有租约 | 必须 5000 ms | 受 `ct_limits` 限制；默认禁用 |
 | 启动门槛 | 新的明确指令、在线、非忙碌、按键释放且冷却结束 | 本机串口先签发一次性许可 | 本地使能、会话、时效、认证证据及存储门槛 |
 | 停止后再次启动 | 满足条件的新指令；不需逐次按键授权 | 新的本机许可 | 本地重新使能 |
 | 状态输出字段 | `logical_outputs.left/right` | `logical_output.left_level/right_level` | `logical_output.left_level/right_level` |
-| 防重放范围 | 当前音频会话内两类动作共用最多 128 个 RPC ID | 单次许可，RAM 中保存 | RPC／意图过滤器，另有持久化抽象；真实后端待接入 |
+| 防重放范围 | 当前音频会话内动作共用最多 128 个 RPC ID，不提供跨启动持久化保证 | 单次许可，RAM 中保存 | RPC／意图过滤器，另有持久化抽象；真实后端待接入 |
 
 `accepted` 表示软件接受了本次请求，`water=true` 表示逻辑目标；二者均不证明已经有水流。三个接口均声明 `physical_feedback=false`。
+
+## 当前面包板 ct21 接口
+
+源码版本与最新有记录的部署均为 `2.0.3-ct21`，见[软件验证](esp32-audio/verification-ct21.json)及[部署与四方向反馈](esp32-audio/startup-ct21.json)。实现入口为 [工具注册与回执](esp32-audio/cybertrack_tools.cc)、[MCP 参数校验](esp32-audio/apply_overlay.py)、[动作策略](esp32-audio/action_guard.h)、[来源与租约](esp32-audio/control_sessions.h)和[输出驱动](esp32-audio/action_outputs.h)。以下为当前接口，后文 ct6／ct7 及版本演进保留历史语义。
+
+### 当前工具入参
+
+表中名称均带 `self.tank.` 前缀。动作参数必须显式提供，拒绝额外字段、非法方向、非整数及越界值；`_ct_ticket` 为内部票据，不能由调用者传入。
+
+| 工具 | `arguments` | 行为 |
+|---|---|---|
+| `get_status` | `{}` | 查询本板逻辑状态与能力 |
+| `stop` | `{}` | 取消模式、四路输出与待执行票据，保留语音和屏幕 |
+| `move` | `direction` 为 `forward/backward/left/right`；`duration_ms` 整数 1–3000 | 固定约 80% PWM，不支持距离／角度闭环 |
+| `water` | `duration_ms` 整数 1–30000 | 单次定时喷水控制 |
+| `bubbles` | `duration_ms` 整数 1–30000 | 单次定时泡泡控制 |
+| `ignition` | `duration_ms` 整数 1–5000 | 一个低压 MOS 通道控制两只点火模块，不代表高压硬件验收 |
+| `move_and_water` | `direction` 四选一；`move_duration_ms` 整数 1–3000；`water_duration_ms` 整数 1–30000 | 两路均就绪才整体接受，独立到期关闭 |
+| `frenzy` | `duration_ms` 整数 1–30000 | 四路均就绪才启动：左转、喷水、泡泡持续，点火每次最多 1000 ms，关闭后至少等实际软件 ON 时长再启动下一脉冲；到期全停 |
+
+角色源 [role-prompt.txt](esp32-audio/role-prompt.txt)负责将明确请求换算为参数：普通动作未说时长为 1000 ms，狂暴模式为 5000 ms，组合未说时长各为 1000 ms；超限只请求上限并说明，不循环补足。固件不自行补缺参或截断越界值。2026-10-27 的别名、纠错与成功静默规则已保存到平台，真人语音回归仍待完成，见[角色维护](../docs/agent-role.md)。
+
+### 当前状态与控制边界
+
+工具结果为 MCP 文本中的 JSON；动作须检查内部 `result="accepted"`，外层成功不证明动作接受，更不证明实物执行。参数／领票失败走 `ReplyError`；回调还可能返回 `not_ready_or_busy`、`stale_request`、`cancelled_or_duplicate`、`cancelled_before_output` 或 `output_fault` 等。未知结果不作为接受，不自动重试。
+
+| 字段／规则 | 当前含义 |
+|---|---|
+| `logical_outputs` | `left/right` 为 −80/0/80，表示方向与标称占空比；`water/bubbles/ignition` 为布尔值，可同时活动 |
+| `capabilities` | `move/water/move_and_water/bubbles/ignition/frenzy/water_hold/bubbles_hold` 均为 true，能力存在不代表此刻可启动 |
+| `actuator_backend`、`physical_feedback` | `concurrent_motor_effects_bench`、false；无轮速、水流或停止传感反馈 |
+| 各路计时与来源 | `move/water/bubbles/ignition` 各有 `_last_duration_ms`、`_remaining_ms`、`_cooldown_ms`、`_source`；来源为 web/voice/none |
+| 汇总与模式 | `remaining_ms` 取四路剩余时长最大值；模式另读 `frenzy_remaining_ms/frenzy_last_duration_ms/frenzy_source`；`starts_this_boot` 是软件启动计数，不是实物检测次数 |
+| 时限与间隔 | 定时上限见入参表；行走／喷水／泡泡停止后间隔 200 ms；`ignition_cooldown_policy=equal_elapsed_on_time`，点火按本次实际软件 ON 时长计算间隔 |
+| 网页长按 | 行走／喷水／泡泡支持 start/renew/stop，各路租期 600 ms，松开仅停本路，续租凭据一次使用；普通定时语音请求不续时，点火没有长按持续接口 |
+| 网页与语音 | 页面自动连接，不再使用 ct8 配对码或独占规则；同通道冲突网页优先，停止冲突语音并保留冷却。`control_owner=shared` 只代表双入口连接 |
+| 停止与断线 | BOOT／全部停止／Wi-Fi 断开全停；来源会话关闭取消该来源动作，模式按来源取消；松开／重连不恢复，需新的有效请求 |
+| 重放与排队 | 会话内最多 128 个动作 RPC ID，重复拒绝、表满不淘汰；内部票据 5 秒过期，停止／断线取消；无跨启动持久化防重放保证 |
+
+完整 HTTP 路由、租约字段与来源切换见[局域网控制](../docs/lan-control.md)，源码 JSON 字段以工具实现为准。ct21 的 B／左、A／右为根据现场方向反馈修正的映射，桥身份未独立逐线核对；四方向反馈不扩展为定量停止、电流或温升验收。
 
 <a id="音频板-ct5-接口"></a>
 
 ## 面包板 ct7 接口
 
-ct7 新增并发动作，完整语义与部署状态见[ct7 说明](../docs/concurrent-actions.md)。单项 `move`／`water` 原参数和上限保持，允许同时活动，分别截止和冷却；停止仍全停。
+**历史版本。** ct7 新增并发动作，完整语义与部署状态见[ct7 说明](../docs/concurrent-actions.md)。单项 `move`／`water` 原参数和上限保持，允许同时活动，分别截止和冷却；停止仍全停。
 
 新增 `self.tank.move_and_water({"direction":"forward","move_duration_ms":1000,"water_duration_ms":3000})`：仅接受上述三个字段，方向四选一，行走整数 1–3000 ms、喷水整数 1–30000 ms。两路全部就绪才接受；忙碌时整体拒绝不部分执行。共享票据绑定目标通道，类型不符返回 `ticket_target_mismatch`；内部非法移动参数返回 `invalid_move`。单路启动只取消与自己重叠的排队票据。参数错误走 ReplyError。
 
 状态增加 `capabilities.move_and_water=true`、`move_last_duration_ms`、`water_last_duration_ms`、`move_remaining_ms`、`water_remaining_ms`、`log_events_dropped`。两路输出可同时活动，汇总 remaining_ms 取最大剩余时间，last_duration_ms 为最近请求时长（组合取最大），starts_this_boot 按启动的通道数累计，组合加 2。actuator_backend 改为 concurrent_motor_water_bench。细分日志为 ACTION_OFF channel=move/water；软件策略、输出驱动和平台角色须一并更新，ct6 设备不支持新工具。
 
-下节保留 ct6 旧接口及历史语义，ct7 以上述差异和当前源码为准；通用核心、独立联网板与台架不随此次改动变为并发。
+下节保留 ct6 旧接口及历史语义，ct7 历史接口以上述差异为准，ct21 见上文；通用核心、独立联网板与台架不随此次改动变为并发。
 
 <a id="面包板-ct6-接口"></a>
 
 ## 面包板 ct6 历史接口
 
-以下描述 ct6，已完成本面包板刷写及平台同步，迁线及本轮基本语音台架验证已完成，完整验收仍未完成。接线、刷写与平台同步状态见[集成记录](../docs/breadboard-integration.md)。ct5 仅有水枪；兼容保留旧锚点便于已有链接访问。
+以下描述 ct6，已完成本面包板刷写及平台同步，迁线及该阶段基本语音台架验证已完成，完整验收仍未完成。接线、刷写与平台同步状态见[集成记录](../docs/breadboard-integration.md)。ct5 仅有水枪；兼容保留旧锚点便于已有链接访问。
 
-实现：[工具注册与回执](esp32-audio/cybertrack_tools.cc)、[MCP 校验补丁](esp32-audio/apply_overlay.py)、[共享动作策略](esp32-audio/action_guard.h)、[输出驱动](esp32-audio/action_outputs.h)。传输和 MCP 基础服务由固定版本的小智上游工程承载，不使用下文正式核心的 `ct_protocol_handle`。
+当前实现入口（已演进，不能用于重现 ct6 历史源码）：[工具注册与回执](esp32-audio/cybertrack_tools.cc)、[MCP 校验补丁](esp32-audio/apply_overlay.py)、[共享动作策略](esp32-audio/action_guard.h)、[输出驱动](esp32-audio/action_outputs.h)。传输和 MCP 基础服务由固定版本的小智上游工程承载，不使用下文正式核心的 `ct_protocol_handle`。
 
 ### 工具入参
 
@@ -89,7 +112,7 @@ ct7 新增并发动作，完整语义与部署状态见[ct7 说明](../docs/conc
 
 建议始终发送普通整数，例如 `7000`。ct6 使用 cJSON 数值和整数值相等性校验，没有正式核心“必须十进制整数 token”的词法限制；不要假定两者对 `1000.0`／指数写法的处理相同。`_ct_ticket` 是固件插入的内部票据，不是云端参数，不能自行传入。
 
-平台角色负责秒数转毫秒；明确喷水但未指定时长的当前角色规则为 `1000` ms，超过 30 秒则请求 `30000` 并说明，不拆成循环。固件本身没有缺参默认值，也不会将越界值自动截断。ct6 工具描述已与角色统一；行走也默认 1000 ms，超过三秒请求 3000 并说明。指定时长等基本端到端行为已验证，默认时长和上限等剩余用例仍待按[集成步骤](../docs/breadboard-integration.md)验证。
+平台角色负责秒数转毫秒；明确喷水但未指定时长的 ct6 角色规则为 `1000` ms，超过 30 秒则请求 `30000` 并说明，不拆成循环。固件本身没有缺参默认值，也不会将越界值自动截断。ct6 工具描述已与角色统一；行走也默认 1000 ms，超过三秒请求 3000 并说明。指定时长等基本端到端行为已验证，默认时长和上限等剩余用例仍待按[集成步骤](../docs/breadboard-integration.md)验证。
 
 ### 工具出参
 
@@ -137,7 +160,7 @@ ct7 新增并发动作，完整语义与部署状态见[ct7 说明](../docs/conc
 
 ### 调用示例与时序
 
-以下仅展示 MCP JSON-RPC payload，不是本轮执行指令；外层封装由平台传输负责：
+以下仅展示 MCP JSON-RPC payload，不是设备执行指令；外层封装由平台传输负责：
 
 ```json
 {"jsonrpc":"2.0","id":101,"method":"tools/call","params":{"name":"self.tank.water","arguments":{"duration_ms":1000}}}
@@ -242,7 +265,7 @@ ct7 新增并发动作，完整语义与部署状态见[ct7 说明](../docs/conc
 | 恢复日志 | [replay_log.h](include/cybertrack/replay_log.h)／`src/replay_log.c` | 独立完整证据、两槽或四槽冗余，支持缺失主快照的维护恢复 |
 | 联网工程 | [linx_main.c](esp32-linx/main/linx_main.c)、[linx_wire.h](esp32-linx/main/linx_wire.h) | 实际 Wi-Fi／网关／WSS、hello 与分片处理，独立台架入口 |
 | 水枪策略／适配 | [water_policy.h](esp32-linx/main/water_policy.h)、[water_mcp.h](esp32-linx/main/water_mcp.h) | 单次许可、截止、冷却及台架 MCP；面包板复用策略 |
-| 面包板适配 | [cybertrack_tools.h](esp32-audio/cybertrack_tools.h)、[action_guard.h](esp32-audio/action_guard.h)、[action_outputs.h](esp32-audio/action_outputs.h) | 上游工具注册、共享票据／独立并发策略、六路电机与 GPIO18 输出、统一停止和状态 |
+| 面包板适配 | [cybertrack_tools.h](esp32-audio/cybertrack_tools.h)、[action_guard.h](esp32-audio/action_guard.h)、[action_outputs.h](esp32-audio/action_outputs.h) | 上游工具注册、共享票据／独立并发策略、六路电机与 GPIO18／17／21 输出、网页来源／租约和狂暴模式、统一停止和状态 |
 
 通用库的数据流是 SDK 事件 → `link` → `inbox` → `runtime` → `protocol` → `control` → 板级输出回调；本地停止／故障由运行层先处理。现有联网台架和音频适配各自实现板级循环，不能把这条通用库组合路线视为已经完整部署到它们。
 
@@ -395,10 +418,10 @@ ct7 新增并发动作，完整语义与部署状态见[ct7 说明](../docs/conc
 | `CyberTrackActionLink` | `bool online` | void；音频连接状态变化，离线取消票据并关断 |
 | `CyberTrackActionStop` | 无 | void；即时取消／关断，不等待主任务回复 |
 | `CyberTrackActionClaim` | `int rpc_id, const char* operation` | int；正数为内部票据，0 为拒绝 |
-| `AudioWaterGuard::Tick/Stop/Claim/Request` | 分别 `(now,online,pressed)`／`(now)`／`(now,rpc_id)`／`(now,ticket,duration)` | 前两者 void；Claim 返回票据或 0；Request 返回结果字符串。必须在适配器锁内执行 |
+| `AudioWaterGuard::Tick/Stop/Claim/Request`（ct5 历史适配／测试对象） | 分别 `(now,online,pressed)`／`(now)`／`(now,rpc_id)`／`(now,ticket,duration)` | 前两者 void；Claim 返回票据或 0；Request 返回结果字符串。必须在适配器锁内执行 |
 | 两套台架的 `bench_tick/bench_stop/bench_receive` | 分别 `(bench_policy *state,now,bool stop_held)`／`(state,now)`／`(state,now,stop_held,const unsigned char *bytes,size_t count)` | void；原地更新 armed/active/deadline 等状态，由各自主循环写 GPIO／PWM |
 
-`cybertrack_state.h` 中的 `CyberTrackAudioState::Call(stop,now,device_id,boot_id)` 返回 ct2 只读 JSON，是保留的历史适配及测试对象；ct6 当前实际使用 `cybertrack_tools.cc` 的共享动作状态，不能用 ct2 结构解析 ct6 回执。
+`cybertrack_state.h` 中的 `CyberTrackAudioState::Call(stop,now,device_id,boot_id)` 返回 ct2 只读 JSON，是保留的历史适配及测试对象；ct6 起实际使用 `cybertrack_tools.cc` 的共享动作状态，不能用 ct2 结构解析当前回执。
 
 ## 串口与板级接口
 
@@ -410,7 +433,7 @@ ct7 新增并发动作，完整语义与部署状态见[ct7 说明](../docs/conc
 | L298N 电机台架 `0.3.2` | 单独 `1`／`2`／`3` 选 A／B／AB，另发 `a` 后单独 `f`／`r`；AB 可用 `x`／`y` 请求两种反向组合；`s` 同停 | 默认 NONE；选择撤销使能，窗口 3000 ms，单次 10000 ms，冷却 3000 ms 且轴停稳；A=GPIO4／5／6，B=GPIO7／8／9，两路 PWM 共用 1 kHz、8 bit duty=154；关闭时六脚为低，状态包含 target |
 | MOS 台架 | 串口单字符 `a`，随后单独 `g`；`s` 停止 | 使能窗口 3000 ms；GPIO4 单次高电平 5000 ms；`MOS` 文本状态 |
 | 联网板 | 私有串口配网；`status`／`stop`／`water`／`s` | 前三者向平台发送固定联调文本，water 同时创建本地许可；s 直接本地停止；`LINX RPC`／`WATER_OFF` 等诊断 |
-| 面包板 ct6 | 原唤醒／说话／音量按键、MCP 工具、BOOT | GPIO8–13 双路 L298N 与 GPIO18 水枪；串口 `CT_AUDIO` 结果与关闭记录，不提供上述 a/g/f/r 调试命令 |
+| 当前面包板 ct21 | 原唤醒／说话／音量按键、八个 MCP 工具、网页、BOOT | GPIO8–13 双路 L298N、GPIO18 水枪、GPIO17 泡泡与 GPIO21 点火低压控制；串口 `CT_AUDIO` 结果与关闭记录，不提供上述 a/g/f/r 调试命令 |
 
 电机台架六路 GPIO 只适用于原 N16R8 台架板，不套用面包板接线；ENA／ENB 跳帽及两路控制按[接线说明](esp32-motor-bench/README.md)连接，空闲时两路保持禁用。
 
@@ -428,30 +451,61 @@ ct7 新增并发动作，完整语义与部署状态见[ct7 说明](../docs/conc
 | 联网绑定、工具与单次授权喷水 | [灵矽实测](../docs/linx-validation.md) |
 | 音频、屏幕、状态／停止 | [面包板实测](../docs/audio-board-validation.md) |
 | ct4 带载与 ct5 功率断开的时长验证 | [面包板喷水记录](../docs/audio-water-validation.md)；两类证据不得互相替代 |
+| ct7 并发与 ct10 手机／语音分项 | [ct7 台架](../docs/concurrent-actions.md)、[ct10 无负载联调](../docs/lan-control.md#ct10-首轮手机与语音联调) |
+| ct21 软件、部署与四方向反馈 | [软件报告](esp32-audio/verification-ct21.json)、[部署记录](esp32-audio/startup-ct21.json)；部署检查与后续用户实测分开记录 |
+| 当前样机与剩余整机验收 | [制作及运行影像](../artifact/README.md)、[验证计划](../docs/verification-plan.md)；旧电源、60% PWM 及影像不作为当前辰克电池和 80% PWM 的完整验收 |
 
-完整板级运行层、真实动作认证源、持久化与锚点后端、整机行走／泡泡／传感器集成、独立切断、失电／欠压／看门狗故障注入及完整带载验收仍按 [TODO](../TODO.md) 和[固件计划](PLAN.md)推进；不在本文另建一份完成清单。
+通用核心完整板级运行层、真实动作认证源、持久化与锚点后端、尚未实现的传感器集成，以及整机独立切断、失电／欠压／看门狗故障注入、定量停止距离、电流／温升与完整组合负载验收仍按 [TODO](../TODO.md) 和[固件计划](PLAN.md)推进；不在本文另建一份完成清单。
 
 新增／修改工具、字段、范围、错误值、引脚或版本时，同步本文对应工程、该工程 README 及必要专题契约；新增实测只更新对应证据范围。部署版本与源码不一致时，先核对设备版本，不以本文推断设备已更新。
 
 
 ct6 软件验证及部署边界见[集成记录](../docs/breadboard-integration.md)和[软件报告](esp32-audio/verification-ct6.json)。
 
+## 面包板 ct11 长按计时
+
+**历史记录。** 在 ct10 双入口规则上增加网页长按秒数，每 0.1 秒刷新，松开后保留本次时长，取消／后台／失联结束计时。仅为浏览器输入时长，不是输出或机械移动测量；后端规则保持。见[当前说明](../docs/lan-control.md)。
+
+## 面包板 ct10 独立操作与双入口
+
+**历史版本 `2.0.3-ct10`** 页面自动连接、取消组合开关，行走和喷水可独立开始并同时运行。网页连接本身不阻止语音；同通道网页动作优先，先取消冲突语音动作并保留冷却，不补做旧请求。网页关闭／超时只停止网页来源通道，语音关闭只停止语音来源通道；全部停止／BOOT／Wi-Fi 断开仍停止两路。状态增加 `move_source`、`water_source` 和 `control_owner=shared`；后者只表示入口连接。契约与部署见[局域网控制](../docs/lan-control.md)。以下 ct9／ct8 描述为历史版本。
+
+## 面包板 ct9 按住行走
+
+历史源码 `2.0.3-ct9` 按用户要求取消配对码，打开网页可直接连接接管；将网页方向键改为按下开始、同方向持续续租、松开仅停行走；喷水仍定时，组合请求只在按下时启动一次喷水。设备 600 ms 行走截止，浏览器约每 150 ms 用单次回执凭据续租；状态心跳不能维持行走，停止／超时后旧续租不能恢复。后台、Wi-Fi 断开及全停关闭两路。语音原三秒上限与冷却保持。新操作 `drive_start/drive_renew/drive_stop`、字段及验证见[当前局域网契约](../docs/lan-control.md)。已烧录并同步平台，实机无负载 HTTP／桌面长按通过；手机、语音和带载验收以部署记录为准。下方 ct8 定时方向键为历史软件候选。
+
+## 面包板 ct8 局域网接口
+
+历史候选 `2.0.3-ct8` 在 ct7 基础上提供 `http://<设备 IP>:8080/`。网页单控制者，8 位启动配对码换取内存令牌，500 ms 状态刷新兼心跳，设备端 2000 ms 租约及 1500 ms 一次动作窗口。完整 HTTP 路由、参数、错误与来源切换见[局域网接口契约](../docs/lan-control.md)。ct8 当时没有烧录或平台同步，后续已迭代部署至 ct21。
+
+原五个语音工具与参数保留；网页接管时拒绝语音动作，语音状态／全停和正常对话保留。关闭语音会话只撤销语音动作，Wi-Fi 断开／BOOT／全停关闭全部动作。新增状态字段 `control_owner`（web/voice/none）、`window`、`move_cooldown_ms`、`water_cooldown_ms`、`boot_held`；配对码和令牌不会出现在语音回执。这里的控制权不代表传感反馈。原 ct7 行走／喷水时限、独立截止和冷却不变。
+
 ### ct12 操作间隔（2026-10-25）
+
+历史变更，200 ms 规则在当前面包板继续沿用。
 
 面包板行走和喷水自然截止或停止后，分别等待 200 ms；重复停止不延长间隔。API 字段不变，网页短间隔自适应查询，语音描述同步。独立水枪固件策略不变。测试与部署见 `esp32-audio/verification-ct12.json`、`esp32-audio/startup-ct12.json`。
 
-## ct13 泡泡与点火候选（未部署）
+<a id="ct13-泡泡与点火候选未部署"></a>
 
-面包板适配新增 `self.tank.bubbles`、`self.tank.ignition` 以及对应 HTTP 操作，整数 `duration_ms` 1–5000。四路独立并行与全停，泡泡 GPIO17、双点火共用 GPIO21 为候选。状态能力与每路计时／来源／间隔均已扩展，详见[效果控制](../docs/effects-control.md)。本文此前“泡泡未开放／高压驱动不属于实现”指已部署和旧版本范围；ct13 仅完成低压 MOS 控制源码，未刷写、未平台同步、未实现高压接线或完成通电验证。
+## ct13 泡泡与点火历史部署
+
+ct13 当时新增 `self.tank.bubbles`、`self.tank.ignition` 以及对应 HTTP 操作，整数 `duration_ms` 1–5000。四路独立并行与全停，泡泡 GPIO17、双点火共用 GPIO21 为候选。状态能力与每路计时／来源／间隔均已扩展，详见[效果控制](../docs/effects-control.md)。ct13 已完成仅应用刷写与平台同步，见[部署记录](esp32-audio/startup-ct13.json)；当时无负载检查不证明泡泡或点火带载通过。泡泡上限随后由 ct14 改为 30 秒，点火间隔由 ct17 改为等实际软件 ON 时长；高压接线与安全验收仍未完成。
 
 ## ct14 持续喷水／泡泡
+
+历史版本变更，已部署并取得无负载 HTTP 长按／失租检查；见[ct14 部署](esp32-audio/startup-ct14.json)。以下固定三秒点火间隔是当时规则，已被 ct17 替代。
 
 新增网页 `water_start/renew/stop` 与 `bubbles_start/renew/stop`，每路独立 600 ms 租期、一次一回执续租，松开本路停止，可与行走长按及定时点火并行。页面每路 1／3／5／10／30 秒和按住持续共六个按钮。泡泡 MCP／HTTP 定时范围扩大为 1–30000 ms；点火上限 5000 ms、间隔 3000 ms 不变，无点火持续接口。新能力与状态字段见[接口说明](../docs/lan-control.md#ct14-喷水泡泡六按钮与长按)。
 
 ### ct17 网页狂暴模式
 
-`ControlSessions::FrenzyStart` 接收一次有序窗口请求，`AudioActionGuard::Frenzy` 检查四路后原子启动有界组合；总时长 1–30000 ms，网页预设 5／10／30 秒，左转／喷水／泡泡持续，点火脉冲最多 1000 ms、关闭后等长间隔。模式状态和停止由原会话及故障路径管理；不新增 MCP 启动工具。普通点火也改为等实际软件 ON 时长间隔；原固定 3000 ms 为历史。协议与证据见[局域网控制](../docs/lan-control.md#ct17-狂暴模式)。
+历史版本变更，已部署；当时未启动执行器，见[ct17 记录](esp32-audio/startup-ct17.json)。
+
+`ControlSessions::FrenzyStart` 接收一次有序窗口请求，`AudioActionGuard::Frenzy` 检查四路后原子启动有界组合；总时长 1–30000 ms，网页预设 5／10／30 秒，左转／喷水／泡泡持续，点火脉冲最多 1000 ms、关闭后等长间隔。模式状态和停止由原会话及故障路径管理；ct17 当时不新增 MCP 启动工具，ct18 随后增加语音入口。普通点火也改为等实际软件 ON 时长间隔；原固定 3000 ms 为历史。协议与证据见[局域网控制](../docs/lan-control.md#ct17-狂暴模式)。
 
 ### ct18 语音狂暴模式
+
+历史版本变更，已部署；该次检查启动次数为零，真人口述狂暴及完整带载验证仍未完成，见[ct18 记录](esp32-audio/startup-ct18.json)。
 
 新增 MCP `self.tank.frenzy`：仅 `duration_ms` 整数 1–30000，描述规定未指定时长为 5000。`AudioActionGuard::VoiceFrenzy` 消费绑定模式的内部票据；`ControlSessions::VoiceFrenzy` 建立语音来源和固定截止，复用与网页相同的脉冲调度。回执新增 `frenzy_source`、`frenzy_last_duration_ms`。状态和停止工具覆盖模式，普通动作不隐式升级为狂暴模式。
