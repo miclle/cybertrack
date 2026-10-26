@@ -1,0 +1,12 @@
+{
+  "evidence": "Calculated design sizing under datasheet table conditions; not a module measurement",
+  "resistor_range_ohm": [
+    9900.0,
+    10100.0
+  ],
+  "low_level_estimate_v": 0.101,
+  "gpio_load_at_3v3_a": 0.0004333333333333333,
+  "resistor_dissipation_at_3v6_w": 0.0013090909090909093,
+  "specified_minimum_rating_w": 0.1,
+  "limitations": "Uses chip table conditions and input-current magnitude for sizing; not a guaranteed module bound over all temperatures. ESP32-S3 unloaded VOH specification is not treated as a loaded-VOH guarantee."
+}

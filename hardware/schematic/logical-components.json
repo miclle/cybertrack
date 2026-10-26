@@ -1,0 +1,359 @@
+{
+  "revision": "A1",
+  "production_bom": false,
+  "pin_ids": "logical identity or silkscreen; NOT connector pad position",
+  "sheets": [
+    {
+      "file": "CyberTrack.kicad_sch",
+      "page": 1,
+      "parts": [
+        {
+          "ref": "BT1",
+          "unit": 1,
+          "kind": "Battery5V",
+          "value": "CK18650-1234S-NP / 5 V",
+          "dnp": false
+        },
+        {
+          "ref": "F1",
+          "unit": 1,
+          "kind": "Fuse",
+          "value": "RATING TBD",
+          "dnp": false
+        },
+        {
+          "ref": "U2",
+          "unit": 1,
+          "kind": "InputProtection_TBD",
+          "value": "PROTECTION / TBD",
+          "dnp": false
+        },
+        {
+          "ref": "#FLG00",
+          "unit": 1,
+          "kind": "SupplyFlag",
+          "value": "PWR_FLAG",
+          "dnp": false
+        },
+        {
+          "ref": "U3",
+          "unit": 1,
+          "kind": "MasterPower_TBD",
+          "value": "MASTER POWER / TBD",
+          "dnp": false
+        },
+        {
+          "ref": "SW1",
+          "unit": 1,
+          "kind": "Disconnect",
+          "value": "MASTER REQUEST / CONTACTS TBD",
+          "dnp": false
+        },
+        {
+          "ref": "F2",
+          "unit": 1,
+          "kind": "Fuse",
+          "value": "TBD",
+          "dnp": false
+        },
+        {
+          "ref": "JP1",
+          "unit": 1,
+          "kind": "Disconnect",
+          "value": "CTRL SERVICE LINK",
+          "dnp": false
+        },
+        {
+          "ref": "F3",
+          "unit": 1,
+          "kind": "Fuse",
+          "value": "TBD",
+          "dnp": false
+        },
+        {
+          "ref": "SW2",
+          "unit": 1,
+          "kind": "Disconnect",
+          "value": "ACTUATOR ISOLATOR / TBD",
+          "dnp": false
+        },
+        {
+          "ref": "F4",
+          "unit": 1,
+          "kind": "Fuse",
+          "value": "TBD",
+          "dnp": false
+        },
+        {
+          "ref": "F5",
+          "unit": 1,
+          "kind": "Fuse",
+          "value": "TBD",
+          "dnp": false
+        },
+        {
+          "ref": "F6",
+          "unit": 1,
+          "kind": "Fuse",
+          "value": "TBD",
+          "dnp": false
+        },
+        {
+          "ref": "F7",
+          "unit": 1,
+          "kind": "Fuse",
+          "value": "TBD",
+          "dnp": false
+        },
+        {
+          "ref": "#FLG01",
+          "unit": 1,
+          "kind": "SupplyFlag",
+          "value": "PWR_FLAG",
+          "dnp": false
+        },
+        {
+          "ref": "#FLG02",
+          "unit": 1,
+          "kind": "SupplyFlag",
+          "value": "PWR_FLAG",
+          "dnp": false
+        },
+        {
+          "ref": "#FLG03",
+          "unit": 1,
+          "kind": "SupplyFlag",
+          "value": "PWR_FLAG",
+          "dnp": false
+        },
+        {
+          "ref": "#FLG04",
+          "unit": 1,
+          "kind": "SupplyFlag",
+          "value": "PWR_FLAG",
+          "dnp": false
+        },
+        {
+          "ref": "#FLG05",
+          "unit": 1,
+          "kind": "SupplyFlag",
+          "value": "PWR_FLAG",
+          "dnp": false
+        }
+      ]
+    },
+    {
+      "file": "control.kicad_sch",
+      "page": 2,
+      "parts": [
+        {
+          "ref": "U1",
+          "unit": 1,
+          "kind": "Existing_ESP32S3",
+          "value": "Existing ESP32-S3",
+          "dnp": false
+        },
+        {
+          "ref": "SW3",
+          "unit": 1,
+          "kind": "ButtonNO",
+          "value": "BOOT / NO MOMENTARY",
+          "dnp": false
+        },
+        {
+          "ref": "U1",
+          "unit": 2,
+          "kind": "Existing_ESP32S3",
+          "value": "Existing ESP32-S3",
+          "dnp": false
+        },
+        {
+          "ref": "X1",
+          "unit": 1,
+          "kind": "Retained_Peripherals",
+          "value": "RETAINED ASSEMBLY",
+          "dnp": false
+        }
+      ]
+    },
+    {
+      "file": "drive.kicad_sch",
+      "page": 3,
+      "parts": [
+        {
+          "ref": "U4",
+          "unit": 1,
+          "kind": "MT3608",
+          "value": "MT3608 / TARGET 12 V",
+          "dnp": false
+        },
+        {
+          "ref": "U5",
+          "unit": 1,
+          "kind": "L298N_Module",
+          "value": "P13 / L298N",
+          "dnp": false
+        },
+        {
+          "ref": "M1",
+          "unit": 1,
+          "kind": "DCMotor",
+          "value": "37R-520 / A",
+          "dnp": false
+        },
+        {
+          "ref": "M2",
+          "unit": 1,
+          "kind": "DCMotor",
+          "value": "37R-520 / B",
+          "dnp": false
+        },
+        {
+          "ref": "R1",
+          "unit": 1,
+          "kind": "Pulldown",
+          "value": "10k 1%",
+          "dnp": false
+        },
+        {
+          "ref": "R2",
+          "unit": 1,
+          "kind": "Pulldown",
+          "value": "10k 1%",
+          "dnp": false
+        },
+        {
+          "ref": "R3",
+          "unit": 1,
+          "kind": "Pulldown",
+          "value": "10k 1%",
+          "dnp": false
+        },
+        {
+          "ref": "R4",
+          "unit": 1,
+          "kind": "Pulldown",
+          "value": "10k 1%",
+          "dnp": false
+        },
+        {
+          "ref": "R5",
+          "unit": 1,
+          "kind": "Pulldown",
+          "value": "10k 1%",
+          "dnp": false
+        },
+        {
+          "ref": "R6",
+          "unit": 1,
+          "kind": "Pulldown",
+          "value": "10k 1%",
+          "dnp": false
+        }
+      ]
+    },
+    {
+      "file": "effects.kicad_sch",
+      "page": 4,
+      "parts": [
+        {
+          "ref": "U6",
+          "unit": 1,
+          "kind": "JZ_MOS",
+          "value": "P01 / WATER",
+          "dnp": false
+        },
+        {
+          "ref": "U7",
+          "unit": 1,
+          "kind": "P12_Buck",
+          "value": "P12 / TARGET 3.7 V",
+          "dnp": false
+        },
+        {
+          "ref": "A1",
+          "unit": 1,
+          "kind": "Load3V7",
+          "value": "WATER / 3.7 V",
+          "dnp": false
+        },
+        {
+          "ref": "U8",
+          "unit": 1,
+          "kind": "JZ_MOS",
+          "value": "P01 / BUBBLE",
+          "dnp": false
+        },
+        {
+          "ref": "U9",
+          "unit": 1,
+          "kind": "P12_Buck",
+          "value": "P12 / TARGET 3.7 V",
+          "dnp": false
+        },
+        {
+          "ref": "A2",
+          "unit": 1,
+          "kind": "Load3V7",
+          "value": "BUBBLE / 3.7 V",
+          "dnp": false
+        },
+        {
+          "ref": "R7",
+          "unit": 1,
+          "kind": "Pulldown",
+          "value": "TBD",
+          "dnp": false
+        },
+        {
+          "ref": "R8",
+          "unit": 1,
+          "kind": "Pulldown",
+          "value": "TBD",
+          "dnp": false
+        }
+      ]
+    },
+    {
+      "file": "ignition-lv.kicad_sch",
+      "page": 5,
+      "parts": [
+        {
+          "ref": "JP2",
+          "unit": 1,
+          "kind": "Disconnect",
+          "value": "DNP / LEAVE OPEN",
+          "dnp": true
+        },
+        {
+          "ref": "U10",
+          "unit": 1,
+          "kind": "JZ_MOS",
+          "value": "P01 / COMMON CONTROL / DNP",
+          "dnp": true
+        },
+        {
+          "ref": "J9",
+          "unit": 1,
+          "kind": "LV_Reserved",
+          "value": "LV RESERVE / DNP",
+          "dnp": true
+        },
+        {
+          "ref": "#FLG06",
+          "unit": 1,
+          "kind": "SupplyFlag",
+          "value": "PWR_FLAG",
+          "dnp": false
+        },
+        {
+          "ref": "R9",
+          "unit": 1,
+          "kind": "Pulldown",
+          "value": "TBD",
+          "dnp": false
+        }
+      ]
+    }
+  ]
+}

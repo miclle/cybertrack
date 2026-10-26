@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-26T09:33:14",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.7",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/5724a998-1735-5701-ac0a-8a8a7029fc41",
+            "violations": []
+        },
+        {
+            "path": "/ESP32-S3 and BOOT/",
+            "uuid_path": "/5724a998-1735-5701-ac0a-8a8a7029fc41/b9d261a4-1648-5a5d-b166-2d3181f3e7cb",
+            "violations": []
+        },
+        {
+            "path": "/Motor drive/",
+            "uuid_path": "/5724a998-1735-5701-ac0a-8a8a7029fc41/51b7646a-8d1a-5094-a57e-879e503101e6",
+            "violations": []
+        },
+        {
+            "path": "/Water and bubbles/",
+            "uuid_path": "/5724a998-1735-5701-ac0a-8a8a7029fc41/77a50e1e-954a-51b2-a2f2-6aa8137dc9f9",
+            "violations": []
+        },
+        {
+            "path": "/Reserved ignition LV/",
+            "uuid_path": "/5724a998-1735-5701-ac0a-8a8a7029fc41/cedbaab9-b7ea-5dd9-b4d4-1cf2b7c811cd",
+            "violations": []
+        }
+    ],
+    "source": "CyberTrack.kicad_sch"
+}

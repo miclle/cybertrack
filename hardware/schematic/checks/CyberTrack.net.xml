@@ -1,0 +1,1589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/Users/miclle/github/miclle/cybertrack/hardware/schematic/CyberTrack.kicad_sch</source>
+    <date>2026-10-26T09:33:11</date>
+    <tool>Eeschema 10.0.7</tool>
+    <textvar name="REVISION">A1 - REVIEW ONLY</textvar>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>CyberTrack / Power and isolation</title>
+        <company>CyberTrack</company>
+        <rev>A1</rev>
+        <date>2026-10-26</date>
+        <source>CyberTrack.kicad_sch</source>
+        <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
+        <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
+        <comment number="3" value="Pin IDs identify signals, NOT physical header positions"/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="2" name="/ESP32-S3 and BOOT/" tstamps="/b9d261a4-1648-5a5d-b166-2d3181f3e7cb/">
+      <title_block>
+        <title>CyberTrack / ESP32-S3 and BOOT</title>
+        <company>CyberTrack</company>
+        <rev>A1</rev>
+        <date>2026-10-26</date>
+        <source>control.kicad_sch</source>
+        <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
+        <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
+        <comment number="3" value="Pin IDs identify signals, NOT physical header positions"/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="3" name="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/">
+      <title_block>
+        <title>CyberTrack / Motor drive</title>
+        <company>CyberTrack</company>
+        <rev>A1</rev>
+        <date>2026-10-26</date>
+        <source>drive.kicad_sch</source>
+        <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
+        <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
+        <comment number="3" value="Pin IDs identify signals, NOT physical header positions"/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="4" name="/Water and bubbles/" tstamps="/77a50e1e-954a-51b2-a2f2-6aa8137dc9f9/">
+      <title_block>
+        <title>CyberTrack / Water and bubbles</title>
+        <company>CyberTrack</company>
+        <rev>A1</rev>
+        <date>2026-10-26</date>
+        <source>effects.kicad_sch</source>
+        <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
+        <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
+        <comment number="3" value="Pin IDs identify signals, NOT physical header positions"/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="5" name="/Reserved ignition LV/" tstamps="/cedbaab9-b7ea-5dd9-b4d4-1cf2b7c811cd/">
+      <title_block>
+        <title>CyberTrack / Reserved ignition LV</title>
+        <company>CyberTrack</company>
+        <rev>A1</rev>
+        <date>2026-10-26</date>
+        <source>ignition-lv.kicad_sch</source>
+        <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
+        <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
+        <comment number="3" value="Pin IDs identify signals, NOT physical header positions"/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="BT1">
+      <value>CK18650-1234S-NP / 5 V</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Battery5V" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0c0ffebe-5979-50cb-954d-16ce72becc87</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="OUT+"/>
+            <pin num="OUT-"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F1">
+      <value>RATING TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Fuse" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>996ff16e-693f-5e48-9fdd-f9e415d2ed25</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F2">
+      <value>TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Fuse" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c238b202-a46d-5aaa-9ace-9f3e7b2c6543</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F3">
+      <value>TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Fuse" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0aa429d6-2c3e-5124-b284-6b42c98b8fcb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F4">
+      <value>TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Fuse" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1a009368-b117-5c04-8bd6-92744e37178b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F5">
+      <value>TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Fuse" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b92bdf91-91b6-51c3-98ca-ed949b5a3f23</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F6">
+      <value>TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Fuse" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>db729fae-3bf4-5d93-8c3b-251eccbfa91b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="F7">
+      <value>TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Fuse" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1e08d861-a651-52ee-bfa5-2c19242d7706</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="JP1">
+      <value>CTRL SERVICE LINK</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Disconnect" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d3b1c686-68b1-5575-a21c-482177ffe381</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="A"/>
+            <pin num="B"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="SW1">
+      <value>MASTER REQUEST / CONTACTS TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Disconnect" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2fadea8d-f044-5b27-abd0-b69911507bef</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="A"/>
+            <pin num="B"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="SW2">
+      <value>ACTUATOR ISOLATOR / TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Disconnect" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9e0caa84-2f4f-5998-8a3c-1d1a07676bc8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="A"/>
+            <pin num="B"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U2">
+      <value>PROTECTION / TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="InputProtection_TBD" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>65e78dc3-9067-5e1e-9525-b7790333ec80</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="IN+"/>
+            <pin num="RET"/>
+            <pin num="OUT+"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U3">
+      <value>MASTER POWER / TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="MasterPower_TBD" description=""/>
+      <property name="Sheetname" value="CyberTrack"/>
+      <property name="Sheetfile" value="CyberTrack.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>83ee2b27-f783-5601-b0d4-9160db1c1023</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="IN+"/>
+            <pin num="GND"/>
+            <pin num="REQ_A"/>
+            <pin num="REQ_B"/>
+            <pin num="OUT+"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="SW3">
+      <value>BOOT / NO MOMENTARY</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="ButtonNO" description=""/>
+      <property name="Sheetname" value="ESP32-S3 and BOOT"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/ESP32-S3 and BOOT/" tstamps="/b9d261a4-1648-5a5d-b166-2d3181f3e7cb/"/>
+      <tstamps>4d0bbb44-439b-5521-98ad-2aa311a32c3a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="A"/>
+            <pin num="B"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U1">
+      <value>Existing ESP32-S3</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Existing_ESP32S3" description=""/>
+      <property name="Sheetname" value="ESP32-S3 and BOOT"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/ESP32-S3 and BOOT/" tstamps="/b9d261a4-1648-5a5d-b166-2d3181f3e7cb/"/>
+      <tstamps>8b12807e-e1f6-5566-a23c-f5839e0f22f1 5e2555fc-6aff-57a3-a5b9-05533f2dd487</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="5Vin"/>
+            <pin num="GND"/>
+            <pin num="IO0"/>
+            <pin num="IO8"/>
+            <pin num="IO9"/>
+            <pin num="IO10"/>
+            <pin num="IO11"/>
+            <pin num="IO12"/>
+            <pin num="IO13"/>
+            <pin num="IO18"/>
+            <pin num="IO17"/>
+            <pin num="IO21"/>
+          </pins>
+        </unit>
+        <unit name="B">
+          <pins>
+            <pin num="IO4"/>
+            <pin num="IO5"/>
+            <pin num="IO6"/>
+            <pin num="IO7"/>
+            <pin num="IO15"/>
+            <pin num="IO16"/>
+            <pin num="IO41"/>
+            <pin num="IO42"/>
+            <pin num="IO47"/>
+            <pin num="IO40"/>
+            <pin num="IO39"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="X1">
+      <value>RETAINED ASSEMBLY</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Retained_Peripherals" description=""/>
+      <property name="Sheetname" value="ESP32-S3 and BOOT"/>
+      <property name="Sheetfile" value="control.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/ESP32-S3 and BOOT/" tstamps="/b9d261a4-1648-5a5d-b166-2d3181f3e7cb/"/>
+      <tstamps>709c274d-10e6-558a-87a3-570392acfa12</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="MIC_WS"/>
+            <pin num="MIC_SCK"/>
+            <pin num="MIC_DATA"/>
+            <pin num="AMP_DATA"/>
+            <pin num="AMP_BCLK"/>
+            <pin num="AMP_LRCK"/>
+            <pin num="OLED_SDA"/>
+            <pin num="OLED_SCL"/>
+            <pin num="TALK_INPUT"/>
+            <pin num="VOLUME_UP"/>
+            <pin num="VOLUME_DOWN"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="M1">
+      <value>37R-520 / A</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="DCMotor" description=""/>
+      <property name="Sheetname" value="Motor drive"/>
+      <property name="Sheetfile" value="drive.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/"/>
+      <tstamps>3f7c5bf4-1a32-5cdc-bf0a-524156486157</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="A"/>
+            <pin num="B"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="M2">
+      <value>37R-520 / B</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="DCMotor" description=""/>
+      <property name="Sheetname" value="Motor drive"/>
+      <property name="Sheetfile" value="drive.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/"/>
+      <tstamps>66d7c9fe-27a3-586b-a0d8-9d6460a9669d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="A"/>
+            <pin num="B"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1">
+      <value>10k 1%</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Pulldown" description=""/>
+      <property name="Sheetname" value="Motor drive"/>
+      <property name="Sheetfile" value="drive.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/"/>
+      <tstamps>3d42c733-7762-5feb-a7a4-b0fb35229db7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R2">
+      <value>10k 1%</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Pulldown" description=""/>
+      <property name="Sheetname" value="Motor drive"/>
+      <property name="Sheetfile" value="drive.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/"/>
+      <tstamps>3283fd9a-5df2-5704-b462-d261f0c3e17e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R3">
+      <value>10k 1%</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Pulldown" description=""/>
+      <property name="Sheetname" value="Motor drive"/>
+      <property name="Sheetfile" value="drive.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/"/>
+      <tstamps>81de7776-1b49-5d48-b546-a04bfca1a2a1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R4">
+      <value>10k 1%</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Pulldown" description=""/>
+      <property name="Sheetname" value="Motor drive"/>
+      <property name="Sheetfile" value="drive.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/"/>
+      <tstamps>c0261d91-284a-5b10-87f5-97c59dc35cd8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R5">
+      <value>10k 1%</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Pulldown" description=""/>
+      <property name="Sheetname" value="Motor drive"/>
+      <property name="Sheetfile" value="drive.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/"/>
+      <tstamps>0d47cfb4-a287-55ec-80d5-46af77892a55</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R6">
+      <value>10k 1%</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Pulldown" description=""/>
+      <property name="Sheetname" value="Motor drive"/>
+      <property name="Sheetfile" value="drive.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/"/>
+      <tstamps>4723ef23-86e9-5924-bf2a-dbd8c4306f51</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U4">
+      <value>MT3608 / TARGET 12 V</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="MT3608" description=""/>
+      <property name="Sheetname" value="Motor drive"/>
+      <property name="Sheetfile" value="drive.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/"/>
+      <tstamps>d7023d36-839e-5895-9be6-2f3871fcf5bb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="IN+"/>
+            <pin num="IN-"/>
+            <pin num="OUT+"/>
+            <pin num="OUT-"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U5">
+      <value>P13 / L298N</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="L298N_Module" description=""/>
+      <property name="Sheetname" value="Motor drive"/>
+      <property name="Sheetfile" value="drive.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Motor drive/" tstamps="/51b7646a-8d1a-5094-a57e-879e503101e6/"/>
+      <tstamps>efa97c35-8a3d-5f11-8011-8b1d26a0e446</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="+12V"/>
+            <pin num="GND"/>
+            <pin num="ENA"/>
+            <pin num="IN1"/>
+            <pin num="IN2"/>
+            <pin num="ENB"/>
+            <pin num="IN3"/>
+            <pin num="IN4"/>
+            <pin num="OUT1"/>
+            <pin num="OUT2"/>
+            <pin num="OUT3"/>
+            <pin num="OUT4"/>
+            <pin num="+5V"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="A1">
+      <value>WATER / 3.7 V</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Load3V7" description=""/>
+      <property name="Sheetname" value="Water and bubbles"/>
+      <property name="Sheetfile" value="effects.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Water and bubbles/" tstamps="/77a50e1e-954a-51b2-a2f2-6aa8137dc9f9/"/>
+      <tstamps>357a400e-ff72-550e-8aef-397a1b975f57</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="+"/>
+            <pin num="-"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="A2">
+      <value>BUBBLE / 3.7 V</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Load3V7" description=""/>
+      <property name="Sheetname" value="Water and bubbles"/>
+      <property name="Sheetfile" value="effects.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Water and bubbles/" tstamps="/77a50e1e-954a-51b2-a2f2-6aa8137dc9f9/"/>
+      <tstamps>b25c4a65-bd3a-5999-afb2-c840f7312449</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="+"/>
+            <pin num="-"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R7">
+      <value>TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Pulldown" description=""/>
+      <property name="Sheetname" value="Water and bubbles"/>
+      <property name="Sheetfile" value="effects.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Water and bubbles/" tstamps="/77a50e1e-954a-51b2-a2f2-6aa8137dc9f9/"/>
+      <tstamps>c24ed8a1-20a0-5ce8-a800-8ea57875e0a4</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R8">
+      <value>TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Pulldown" description=""/>
+      <property name="Sheetname" value="Water and bubbles"/>
+      <property name="Sheetfile" value="effects.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Water and bubbles/" tstamps="/77a50e1e-954a-51b2-a2f2-6aa8137dc9f9/"/>
+      <tstamps>8e3ee3cd-4c9f-520e-85b0-61aedcea77bb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U6">
+      <value>P01 / WATER</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="JZ_MOS" description=""/>
+      <property name="Sheetname" value="Water and bubbles"/>
+      <property name="Sheetfile" value="effects.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Water and bubbles/" tstamps="/77a50e1e-954a-51b2-a2f2-6aa8137dc9f9/"/>
+      <tstamps>f6a43bfc-ba7d-54b3-9931-00d9284ba375</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="VIN+"/>
+            <pin num="VIN-"/>
+            <pin num="TRIG"/>
+            <pin num="GND"/>
+            <pin num="VOUT+"/>
+            <pin num="VOUT-"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U7">
+      <value>P12 / TARGET 3.7 V</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="P12_Buck" description=""/>
+      <property name="Sheetname" value="Water and bubbles"/>
+      <property name="Sheetfile" value="effects.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Water and bubbles/" tstamps="/77a50e1e-954a-51b2-a2f2-6aa8137dc9f9/"/>
+      <tstamps>7ad59833-6aa2-583e-9563-5e90b78e7fea</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="IN+"/>
+            <pin num="GND"/>
+            <pin num="VO+"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U8">
+      <value>P01 / BUBBLE</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="JZ_MOS" description=""/>
+      <property name="Sheetname" value="Water and bubbles"/>
+      <property name="Sheetfile" value="effects.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Water and bubbles/" tstamps="/77a50e1e-954a-51b2-a2f2-6aa8137dc9f9/"/>
+      <tstamps>0c3b8b37-af7d-5a9f-b429-34b5bcd9252e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="VIN+"/>
+            <pin num="VIN-"/>
+            <pin num="TRIG"/>
+            <pin num="GND"/>
+            <pin num="VOUT+"/>
+            <pin num="VOUT-"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U9">
+      <value>P12 / TARGET 3.7 V</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="P12_Buck" description=""/>
+      <property name="Sheetname" value="Water and bubbles"/>
+      <property name="Sheetfile" value="effects.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Water and bubbles/" tstamps="/77a50e1e-954a-51b2-a2f2-6aa8137dc9f9/"/>
+      <tstamps>d16846e2-b3e7-5e6d-913a-f0867e556fd9</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="IN+"/>
+            <pin num="GND"/>
+            <pin num="VO+"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J9">
+      <value>LV RESERVE / DNP</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="LV_Reserved" description=""/>
+      <property name="Sheetname" value="Reserved ignition LV"/>
+      <property name="Sheetfile" value="ignition-lv.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <property name="dnp"/>
+      <sheetpath names="/Reserved ignition LV/" tstamps="/cedbaab9-b7ea-5dd9-b4d4-1cf2b7c811cd/"/>
+      <tstamps>fd0cc720-23d3-5029-ad73-8dcf3d96620f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="+"/>
+            <pin num="-"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="JP2">
+      <value>DNP / LEAVE OPEN</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Disconnect" description=""/>
+      <property name="Sheetname" value="Reserved ignition LV"/>
+      <property name="Sheetfile" value="ignition-lv.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <property name="dnp"/>
+      <sheetpath names="/Reserved ignition LV/" tstamps="/cedbaab9-b7ea-5dd9-b4d4-1cf2b7c811cd/"/>
+      <tstamps>41c10a2c-5627-5b28-a5c3-9d0d5bb5bbf1</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="A"/>
+            <pin num="B"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R9">
+      <value>TBD</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Pulldown" description=""/>
+      <property name="Sheetname" value="Reserved ignition LV"/>
+      <property name="Sheetfile" value="ignition-lv.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Reserved ignition LV/" tstamps="/cedbaab9-b7ea-5dd9-b4d4-1cf2b7c811cd/"/>
+      <tstamps>67d3b85a-1661-5257-a54b-99c772d209c6</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U10">
+      <value>P01 / COMMON CONTROL / DNP</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="JZ_MOS" description=""/>
+      <property name="Sheetname" value="Reserved ignition LV"/>
+      <property name="Sheetfile" value="ignition-lv.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <property name="dnp"/>
+      <sheetpath names="/Reserved ignition LV/" tstamps="/cedbaab9-b7ea-5dd9-b4d4-1cf2b7c811cd/"/>
+      <tstamps>fe5ef2a6-02f9-5e26-b9b5-5d579721eed0</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="VIN+"/>
+            <pin num="VIN-"/>
+            <pin num="TRIG"/>
+            <pin num="GND"/>
+            <pin num="VOUT+"/>
+            <pin num="VOUT-"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="CyberTrack" part="Battery5V">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Battery5V</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="OUT+" name="OUT+" type="power_out"/>
+        <pin num="OUT-" name="OUT-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="ButtonNO">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ButtonNO</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="A" name="A" type="passive"/>
+        <pin num="B" name="B" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="DCMotor">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">DCMotor</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="A" name="A" type="passive"/>
+        <pin num="B" name="B" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="Disconnect">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Disconnect</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="A" name="A" type="passive"/>
+        <pin num="B" name="B" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="Existing_ESP32S3">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Existing_ESP32S3</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="5Vin" name="5Vin_[L21]" type="power_in"/>
+        <pin num="GND" name="GND_[L22]" type="passive"/>
+        <pin num="IO0" name="BOOT_/_IO0_[R14]" type="input"/>
+        <pin num="IO4" name="MIC_WS_[L04]" type="output"/>
+        <pin num="IO5" name="MIC_SCK_[L05]" type="output"/>
+        <pin num="IO6" name="MIC_DATA_[L06]" type="input"/>
+        <pin num="IO7" name="AMP_DATA_[L07]" type="output"/>
+        <pin num="IO8" name="MOTOR_A_EN_[L12]" type="output"/>
+        <pin num="IO9" name="MOTOR_A_IN1_[L15]" type="output"/>
+        <pin num="IO10" name="MOTOR_A_IN2_[L16]" type="output"/>
+        <pin num="IO11" name="MOTOR_B_EN_[L17]" type="output"/>
+        <pin num="IO12" name="MOTOR_B_IN1_[L18]" type="output"/>
+        <pin num="IO13" name="MOTOR_B_IN2_[L19]" type="output"/>
+        <pin num="IO15" name="AMP_BCLK_[L08]" type="output"/>
+        <pin num="IO16" name="AMP_LRCK_[L09]" type="output"/>
+        <pin num="IO17" name="BUBBLE_EN_[L10]" type="output"/>
+        <pin num="IO18" name="WATER_EN_[L11]" type="output"/>
+        <pin num="IO21" name="IGNITION_EN_[R18]" type="output"/>
+        <pin num="IO39" name="VOLUME_DOWN_[R09]" type="input"/>
+        <pin num="IO40" name="VOLUME_UP_[R08]" type="input"/>
+        <pin num="IO41" name="OLED_SDA_[R07]" type="bidirectional"/>
+        <pin num="IO42" name="OLED_SCL_[R06]" type="output"/>
+        <pin num="IO47" name="TALK_INPUT_[R17]" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="Fuse">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Fuse</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="InputProtection_TBD">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">InputProtection_TBD</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="IN+" name="IN+" type="power_in"/>
+        <pin num="OUT+" name="OUT+" type="power_out"/>
+        <pin num="RET" name="RETURN" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="JZ_MOS">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">JZ_MOS</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="GND" name="CTRL_GND" type="passive"/>
+        <pin num="TRIG" name="TRIG/PWM" type="input"/>
+        <pin num="VIN+" name="VIN+" type="power_in"/>
+        <pin num="VIN-" name="VIN-" type="passive"/>
+        <pin num="VOUT+" name="VOUT+" type="power_out"/>
+        <pin num="VOUT-" name="VOUT-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="L298N_Module">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">L298N_Module</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="+5V" name="+5V_-_DO_NOT_CONNECT" type="power_out"/>
+        <pin num="+12V" name="+12V_/_VS" type="power_in"/>
+        <pin num="ENA" name="ENA" type="input"/>
+        <pin num="ENB" name="ENB" type="input"/>
+        <pin num="GND" name="GND" type="passive"/>
+        <pin num="IN1" name="IN1" type="input"/>
+        <pin num="IN2" name="IN2" type="input"/>
+        <pin num="IN3" name="IN3" type="input"/>
+        <pin num="IN4" name="IN4" type="input"/>
+        <pin num="OUT1" name="OUT1" type="output"/>
+        <pin num="OUT2" name="OUT2" type="output"/>
+        <pin num="OUT3" name="OUT3" type="output"/>
+        <pin num="OUT4" name="OUT4" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="LV_Reserved">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LV_Reserved</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="+" name="LV+_ONLY" type="passive"/>
+        <pin num="-" name="LV-_ONLY" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="Load3V7">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Load3V7</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="+" name="+" type="power_in"/>
+        <pin num="-" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="MT3608">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MT3608</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="IN+" name="IN+" type="power_in"/>
+        <pin num="IN-" name="IN-" type="passive"/>
+        <pin num="OUT+" name="OUT+" type="power_out"/>
+        <pin num="OUT-" name="OUT-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="MasterPower_TBD">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MasterPower_TBD</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="GND" name="GND" type="passive"/>
+        <pin num="IN+" name="IN+" type="power_in"/>
+        <pin num="OUT+" name="OUT+" type="power_out"/>
+        <pin num="REQ_A" name="REQ_A" type="passive"/>
+        <pin num="REQ_B" name="REQ_B" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="P12_Buck">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">P12_Buck</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="GND" name="GND" type="passive"/>
+        <pin num="IN+" name="IN+" type="power_in"/>
+        <pin num="VO+" name="VO+" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="Pulldown">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Pulldown</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="CyberTrack" part="Retained_Peripherals">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Retained_Peripherals</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="AMP_BCLK" name="AMP_BCLK" type="input"/>
+        <pin num="AMP_DATA" name="AMP_DATA" type="input"/>
+        <pin num="AMP_LRCK" name="AMP_LRCK" type="input"/>
+        <pin num="MIC_DATA" name="MIC_DATA" type="output"/>
+        <pin num="MIC_SCK" name="MIC_SCK" type="input"/>
+        <pin num="MIC_WS" name="MIC_WS" type="input"/>
+        <pin num="OLED_SCL" name="OLED_SCL" type="input"/>
+        <pin num="OLED_SDA" name="OLED_SDA" type="bidirectional"/>
+        <pin num="TALK_INPUT" name="TALK_INPUT" type="output"/>
+        <pin num="VOLUME_DOWN" name="VOLUME_DOWN" type="output"/>
+        <pin num="VOLUME_UP" name="VOLUME_UP" type="output"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="CyberTrack">
+      <uri>${KIPRJMOD}/CyberTrack.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/ESP32-S3 and BOOT/BOOT_STOP_N" class="Default">
+      <node ref="SW3" pin="B" pinfunction="B_B" pintype="passive"/>
+      <node ref="U1" pin="IO0" pinfunction="BOOT_/_IO0_[R14]_IO0" pintype="input"/>
+    </net>
+    <net code="2" name="/Reserved ignition LV/IGNITION_SW_N" class="Default">
+      <node ref="J9" pin="-" pinfunction="LV-_ONLY_-" pintype="passive"/>
+      <node ref="U10" pin="VOUT-" pinfunction="VOUT-_VOUT-" pintype="passive"/>
+    </net>
+    <net code="3" name="/Reserved ignition LV/IGNITION_SW_P" class="Default">
+      <node ref="J9" pin="+" pinfunction="LV+_ONLY_+" pintype="passive"/>
+      <node ref="U10" pin="VOUT+" pinfunction="VOUT+_VOUT+" pintype="power_out"/>
+    </net>
+    <net code="4" name="/Water and bubbles/3V7_BUBBLE" class="Default">
+      <node ref="A2" pin="+" pinfunction="+_+" pintype="power_in"/>
+      <node ref="U9" pin="VO+" pinfunction="VO+_VO+" pintype="power_out"/>
+    </net>
+    <net code="5" name="/Water and bubbles/3V7_WATER" class="Default">
+      <node ref="A1" pin="+" pinfunction="+_+" pintype="power_in"/>
+      <node ref="U7" pin="VO+" pinfunction="VO+_VO+" pintype="power_out"/>
+    </net>
+    <net code="6" name="/Water and bubbles/BUBBLE_SW_N" class="Default">
+      <node ref="A2" pin="-" pinfunction="-_-" pintype="passive"/>
+      <node ref="U8" pin="VOUT-" pinfunction="VOUT-_VOUT-" pintype="passive"/>
+      <node ref="U9" pin="GND" pinfunction="GND_GND" pintype="passive"/>
+    </net>
+    <net code="7" name="/Water and bubbles/BUBBLE_SW_P" class="Default">
+      <node ref="U8" pin="VOUT+" pinfunction="VOUT+_VOUT+" pintype="power_out"/>
+      <node ref="U9" pin="IN+" pinfunction="IN+_IN+" pintype="power_in"/>
+    </net>
+    <net code="8" name="/Water and bubbles/WATER_SW_N" class="Default">
+      <node ref="A1" pin="-" pinfunction="-_-" pintype="passive"/>
+      <node ref="U6" pin="VOUT-" pinfunction="VOUT-_VOUT-" pintype="passive"/>
+      <node ref="U7" pin="GND" pinfunction="GND_GND" pintype="passive"/>
+    </net>
+    <net code="9" name="/Water and bubbles/WATER_SW_P" class="Default">
+      <node ref="U6" pin="VOUT+" pinfunction="VOUT+_VOUT+" pintype="power_out"/>
+      <node ref="U7" pin="IN+" pinfunction="IN+_IN+" pintype="power_in"/>
+    </net>
+    <net code="10" name="5V_ACT" class="Default">
+      <node ref="F4" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="F5" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="F6" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="F7" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="SW2" pin="B" pinfunction="B_B" pintype="passive"/>
+    </net>
+    <net code="11" name="5V_BUBBLE_IN" class="Default">
+      <node ref="F6" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="U8" pin="VIN+" pinfunction="VIN+_VIN+" pintype="power_in"/>
+    </net>
+    <net code="12" name="5V_CTRL" class="Default">
+      <node ref="JP1" pin="B" pinfunction="B_B" pintype="passive"/>
+      <node ref="U1" pin="5Vin" pinfunction="5Vin_[L21]_5Vin" pintype="power_in"/>
+    </net>
+    <net code="13" name="5V_IGN_FUSED" class="Default">
+      <node ref="F7" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="JP2" pin="A" pinfunction="A_A" pintype="passive"/>
+    </net>
+    <net code="14" name="5V_IGN_ISOLATED" class="Default">
+      <node ref="JP2" pin="B" pinfunction="B_B" pintype="passive"/>
+      <node ref="U10" pin="VIN+" pinfunction="VIN+_VIN+" pintype="power_in"/>
+    </net>
+    <net code="15" name="5V_MOTOR_IN" class="Default">
+      <node ref="F4" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="U4" pin="IN+" pinfunction="IN+_IN+" pintype="power_in"/>
+    </net>
+    <net code="16" name="5V_SYS" class="Default">
+      <node ref="F2" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="F3" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U3" pin="OUT+" pinfunction="OUT+_OUT+" pintype="power_out"/>
+    </net>
+    <net code="17" name="5V_WATER_IN" class="Default">
+      <node ref="F5" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="U6" pin="VIN+" pinfunction="VIN+_VIN+" pintype="power_in"/>
+    </net>
+    <net code="18" name="12V_MOTOR" class="Default">
+      <node ref="U4" pin="OUT+" pinfunction="OUT+_OUT+" pintype="power_out"/>
+      <node ref="U5" pin="+12V" pinfunction="+12V_/_VS_+12V" pintype="power_in"/>
+    </net>
+    <net code="19" name="BUBBLE_EN" class="Default">
+      <node ref="R8" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="IO17" pinfunction="BUBBLE_EN_[L10]_IO17" pintype="output"/>
+      <node ref="U8" pin="TRIG" pinfunction="TRIG/PWM_TRIG" pintype="input"/>
+    </net>
+    <net code="20" name="GND_SYS" class="Default">
+      <node ref="BT1" pin="OUT-" pinfunction="OUT-_OUT-" pintype="passive"/>
+      <node ref="R1" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R2" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R3" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R4" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R5" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R6" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R7" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R8" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R9" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="SW3" pin="A" pinfunction="A_A" pintype="passive"/>
+      <node ref="U1" pin="GND" pinfunction="GND_[L22]_GND" pintype="passive"/>
+      <node ref="U10" pin="GND" pinfunction="CTRL_GND_GND" pintype="passive"/>
+      <node ref="U10" pin="VIN-" pinfunction="VIN-_VIN-" pintype="passive"/>
+      <node ref="U2" pin="RET" pinfunction="RETURN_RET" pintype="passive"/>
+      <node ref="U3" pin="GND" pinfunction="GND_GND" pintype="passive"/>
+      <node ref="U4" pin="IN-" pinfunction="IN-_IN-" pintype="passive"/>
+      <node ref="U4" pin="OUT-" pinfunction="OUT-_OUT-" pintype="passive"/>
+      <node ref="U5" pin="GND" pinfunction="GND_GND" pintype="passive"/>
+      <node ref="U6" pin="GND" pinfunction="CTRL_GND_GND" pintype="passive"/>
+      <node ref="U6" pin="VIN-" pinfunction="VIN-_VIN-" pintype="passive"/>
+      <node ref="U8" pin="GND" pinfunction="CTRL_GND_GND" pintype="passive"/>
+      <node ref="U8" pin="VIN-" pinfunction="VIN-_VIN-" pintype="passive"/>
+    </net>
+    <net code="21" name="IGNITION_EN" class="Default">
+      <node ref="R9" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="IO21" pinfunction="IGNITION_EN_[R18]_IO21" pintype="output"/>
+      <node ref="U10" pin="TRIG" pinfunction="TRIG/PWM_TRIG" pintype="input"/>
+    </net>
+    <net code="22" name="MOTOR_A_EN" class="Default">
+      <node ref="R1" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="IO8" pinfunction="MOTOR_A_EN_[L12]_IO8" pintype="output"/>
+      <node ref="U5" pin="ENA" pinfunction="ENA_ENA" pintype="input"/>
+    </net>
+    <net code="23" name="MOTOR_A_IN1" class="Default">
+      <node ref="R2" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="IO9" pinfunction="MOTOR_A_IN1_[L15]_IO9" pintype="output"/>
+      <node ref="U5" pin="IN1" pinfunction="IN1_IN1" pintype="input"/>
+    </net>
+    <net code="24" name="MOTOR_A_IN2" class="Default">
+      <node ref="R3" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="IO10" pinfunction="MOTOR_A_IN2_[L16]_IO10" pintype="output"/>
+      <node ref="U5" pin="IN2" pinfunction="IN2_IN2" pintype="input"/>
+    </net>
+    <net code="25" name="MOTOR_B_EN" class="Default">
+      <node ref="R4" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="IO11" pinfunction="MOTOR_B_EN_[L17]_IO11" pintype="output"/>
+      <node ref="U5" pin="ENB" pinfunction="ENB_ENB" pintype="input"/>
+    </net>
+    <net code="26" name="MOTOR_B_IN1" class="Default">
+      <node ref="R5" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="IO12" pinfunction="MOTOR_B_IN1_[L18]_IO12" pintype="output"/>
+      <node ref="U5" pin="IN3" pinfunction="IN3_IN3" pintype="input"/>
+    </net>
+    <net code="27" name="MOTOR_B_IN2" class="Default">
+      <node ref="R6" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="IO13" pinfunction="MOTOR_B_IN2_[L19]_IO13" pintype="output"/>
+      <node ref="U5" pin="IN4" pinfunction="IN4_IN4" pintype="input"/>
+    </net>
+    <net code="28" name="Net-(#FLG00-Pad1)" class="Default">
+      <node ref="F1" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="U2" pin="IN+" pinfunction="IN+_IN+" pintype="power_in"/>
+    </net>
+    <net code="29" name="Net-(BT1-PadOUT+)" class="Default">
+      <node ref="BT1" pin="OUT+" pinfunction="OUT+_OUT+" pintype="power_out"/>
+      <node ref="F1" pin="1" pinfunction="1_1" pintype="passive"/>
+    </net>
+    <net code="30" name="Net-(F2-Pad2)" class="Default">
+      <node ref="F2" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="JP1" pin="A" pinfunction="A_A" pintype="passive"/>
+    </net>
+    <net code="31" name="Net-(F3-Pad2)" class="Default">
+      <node ref="F3" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="SW2" pin="A" pinfunction="A_A" pintype="passive"/>
+    </net>
+    <net code="32" name="Net-(M1-PadA)" class="Default">
+      <node ref="M1" pin="A" pinfunction="A_A" pintype="passive"/>
+      <node ref="U5" pin="OUT1" pinfunction="OUT1_OUT1" pintype="output"/>
+    </net>
+    <net code="33" name="Net-(M1-PadB)" class="Default">
+      <node ref="M1" pin="B" pinfunction="B_B" pintype="passive"/>
+      <node ref="U5" pin="OUT2" pinfunction="OUT2_OUT2" pintype="output"/>
+    </net>
+    <net code="34" name="Net-(M2-PadA)" class="Default">
+      <node ref="M2" pin="A" pinfunction="A_A" pintype="passive"/>
+      <node ref="U5" pin="OUT3" pinfunction="OUT3_OUT3" pintype="output"/>
+    </net>
+    <net code="35" name="Net-(M2-PadB)" class="Default">
+      <node ref="M2" pin="B" pinfunction="B_B" pintype="passive"/>
+      <node ref="U5" pin="OUT4" pinfunction="OUT4_OUT4" pintype="output"/>
+    </net>
+    <net code="36" name="Net-(SW1-PadA)" class="Default">
+      <node ref="SW1" pin="A" pinfunction="A_A" pintype="passive"/>
+      <node ref="U3" pin="REQ_A" pinfunction="REQ_A_REQ_A" pintype="passive"/>
+    </net>
+    <net code="37" name="Net-(SW1-PadB)" class="Default">
+      <node ref="SW1" pin="B" pinfunction="B_B" pintype="passive"/>
+      <node ref="U3" pin="REQ_B" pinfunction="REQ_B_REQ_B" pintype="passive"/>
+    </net>
+    <net code="38" name="Net-(U1B-AMP_BCLK_[L08])" class="Default">
+      <node ref="U1" pin="IO15" pinfunction="AMP_BCLK_[L08]_IO15" pintype="output"/>
+      <node ref="X1" pin="AMP_BCLK" pinfunction="AMP_BCLK_AMP_BCLK" pintype="input"/>
+    </net>
+    <net code="39" name="Net-(U1B-AMP_DATA_[L07])" class="Default">
+      <node ref="U1" pin="IO7" pinfunction="AMP_DATA_[L07]_IO7" pintype="output"/>
+      <node ref="X1" pin="AMP_DATA" pinfunction="AMP_DATA_AMP_DATA" pintype="input"/>
+    </net>
+    <net code="40" name="Net-(U1B-AMP_LRCK_[L09])" class="Default">
+      <node ref="U1" pin="IO16" pinfunction="AMP_LRCK_[L09]_IO16" pintype="output"/>
+      <node ref="X1" pin="AMP_LRCK" pinfunction="AMP_LRCK_AMP_LRCK" pintype="input"/>
+    </net>
+    <net code="41" name="Net-(U1B-MIC_DATA_[L06])" class="Default">
+      <node ref="U1" pin="IO6" pinfunction="MIC_DATA_[L06]_IO6" pintype="input"/>
+      <node ref="X1" pin="MIC_DATA" pinfunction="MIC_DATA_MIC_DATA" pintype="output"/>
+    </net>
+    <net code="42" name="Net-(U1B-MIC_SCK_[L05])" class="Default">
+      <node ref="U1" pin="IO5" pinfunction="MIC_SCK_[L05]_IO5" pintype="output"/>
+      <node ref="X1" pin="MIC_SCK" pinfunction="MIC_SCK_MIC_SCK" pintype="input"/>
+    </net>
+    <net code="43" name="Net-(U1B-MIC_WS_[L04])" class="Default">
+      <node ref="U1" pin="IO4" pinfunction="MIC_WS_[L04]_IO4" pintype="output"/>
+      <node ref="X1" pin="MIC_WS" pinfunction="MIC_WS_MIC_WS" pintype="input"/>
+    </net>
+    <net code="44" name="Net-(U1B-OLED_SCL_[R06])" class="Default">
+      <node ref="U1" pin="IO42" pinfunction="OLED_SCL_[R06]_IO42" pintype="output"/>
+      <node ref="X1" pin="OLED_SCL" pinfunction="OLED_SCL_OLED_SCL" pintype="input"/>
+    </net>
+    <net code="45" name="Net-(U1B-OLED_SDA_[R07])" class="Default">
+      <node ref="U1" pin="IO41" pinfunction="OLED_SDA_[R07]_IO41" pintype="bidirectional"/>
+      <node ref="X1" pin="OLED_SDA" pinfunction="OLED_SDA_OLED_SDA" pintype="bidirectional"/>
+    </net>
+    <net code="46" name="Net-(U1B-TALK_INPUT_[R17])" class="Default">
+      <node ref="U1" pin="IO47" pinfunction="TALK_INPUT_[R17]_IO47" pintype="input"/>
+      <node ref="X1" pin="TALK_INPUT" pinfunction="TALK_INPUT_TALK_INPUT" pintype="output"/>
+    </net>
+    <net code="47" name="Net-(U1B-VOLUME_DOWN_[R09])" class="Default">
+      <node ref="U1" pin="IO39" pinfunction="VOLUME_DOWN_[R09]_IO39" pintype="input"/>
+      <node ref="X1" pin="VOLUME_DOWN" pinfunction="VOLUME_DOWN_VOLUME_DOWN" pintype="output"/>
+    </net>
+    <net code="48" name="Net-(U1B-VOLUME_UP_[R08])" class="Default">
+      <node ref="U1" pin="IO40" pinfunction="VOLUME_UP_[R08]_IO40" pintype="input"/>
+      <node ref="X1" pin="VOLUME_UP" pinfunction="VOLUME_UP_VOLUME_UP" pintype="output"/>
+    </net>
+    <net code="49" name="Net-(U2-PadOUT+)" class="Default">
+      <node ref="U2" pin="OUT+" pinfunction="OUT+_OUT+" pintype="power_out"/>
+      <node ref="U3" pin="IN+" pinfunction="IN+_IN+" pintype="power_in"/>
+    </net>
+    <net code="50" name="WATER_EN" class="Default">
+      <node ref="R7" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="IO18" pinfunction="WATER_EN_[L11]_IO18" pintype="output"/>
+      <node ref="U6" pin="TRIG" pinfunction="TRIG/PWM_TRIG" pintype="input"/>
+    </net>
+    <net code="51" name="unconnected-(U5-+5V_-_DO_NOT_CONNECT-Pad+5V)" class="Default">
+      <node ref="U5" pin="+5V" pinfunction="+5V_-_DO_NOT_CONNECT_+5V" pintype="power_out+no_connect"/>
+    </net>
+  </nets>
+</export>
