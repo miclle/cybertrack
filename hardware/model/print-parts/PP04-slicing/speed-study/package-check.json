@@ -1,0 +1,47 @@
+{
+  "candidate": "024-snug5",
+  "mesh_vertices_triangles_exactly_equal": true,
+  "critical_settings_preserved": true,
+  "configuration_changes": {
+    "internal_solid_infill_line_width": [
+      "0.42",
+      "0.6"
+    ],
+    "print_settings_id": [
+      "PP04 0.24mm PLA @P2S",
+      "PP04 speed study 024-snug5"
+    ],
+    "sparse_infill_line_width": [
+      "0.45",
+      "0.6"
+    ],
+    "sparse_infill_pattern": [
+      "gyroid",
+      "cubic"
+    ],
+    "support_base_pattern_spacing": [
+      "2.5",
+      "5"
+    ],
+    "support_style": [
+      "default",
+      "snug"
+    ]
+  },
+  "first_layer_bounds": [
+    39.02143,
+    27.157570000000003,
+    216.97853,
+    227.97854
+  ],
+  "bed_bounds_passed": true,
+  "mesh_repairs": {
+    "face_count": "23900",
+    "edges_fixed": "0",
+    "degenerate_facets": "0",
+    "facets_removed": "0",
+    "facets_reversed": "0",
+    "backwards_edges": "0"
+  },
+  "project_sha256": "4fbe2534ae03e6c72273cb0f0c2fa2e86ee97acc22de21445ae1025f227b36d5"
+}

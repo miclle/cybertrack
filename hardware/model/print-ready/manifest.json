@@ -1,0 +1,117 @@
+{
+  "plates": [
+    {
+      "plate": 1,
+      "name": "01 Chassis",
+      "source": "hardware/model/print-parts/PP04-slicing/PP04-P2S-PLA-FAST.3mf",
+      "sha256": "4fbe2534ae03e6c72273cb0f0c2fa2e86ee97acc22de21445ae1025f227b36d5",
+      "origin": [
+        0.0,
+        0.0
+      ],
+      "objects": [
+        "2"
+      ],
+      "process_overrides": {
+        "layer_height": "0.24",
+        "bottom_shell_layers": "4",
+        "brim_width": "3",
+        "inner_wall_line_width": "0.45",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "sparse_infill_density": "10%",
+        "support_base_pattern_spacing": "5",
+        "support_line_width": "0.42",
+        "support_style": "snug",
+        "support_top_z_distance": "0.24",
+        "support_type": "normal(auto)",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "top_surface_line_width": "0.42",
+        "tree_support_wall_count": "-1",
+        "wall_loops": "3"
+      }
+    },
+    {
+      "plate": 2,
+      "name": "02 Accessories 14 parts",
+      "source": "hardware/model/l298n-compact/slicing/Accessories-14parts-P2S-PLA-FAST.3mf",
+      "sha256": "0bb5c678bd8ec17c9017b091ac453acb28d1d524f3ad06e4b9f3dbec8b389985",
+      "origin": [
+        307.2,
+        0.0
+      ],
+      "objects": [
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30"
+      ],
+      "process_overrides": {
+        "layer_height": "0.24",
+        "bottom_shell_layers": "4",
+        "brim_width": "2",
+        "inner_wall_line_width": "0.45",
+        "line_width": "0.42",
+        "outer_wall_line_width": "0.42",
+        "sparse_infill_density": "10%",
+        "support_base_pattern_spacing": "5",
+        "support_line_width": "0.42",
+        "support_style": "snug",
+        "support_top_z_distance": "0.24",
+        "support_type": "normal(auto)",
+        "top_shell_layers": "5",
+        "top_shell_thickness": "1",
+        "top_surface_line_width": "0.42",
+        "tree_support_wall_count": "-1",
+        "wall_loops": "3"
+      }
+    },
+    {
+      "plate": 3,
+      "name": "03 Head shell",
+      "source": "hardware/model/print-parts/PP07-slicing/PP07-P2S-PLA-Basic-wide-fast.3mf",
+      "sha256": "779b666c51309c481e56eb52c022bcacdd90d9a7880e49a7c2108446c36f3b1e",
+      "origin": [
+        0.0,
+        -307.2
+      ],
+      "objects": [
+        "32"
+      ],
+      "process_overrides": {}
+    },
+    {
+      "plate": 4,
+      "name": "04 Crown and tray",
+      "source": "hardware/model/print-parts/PP07-slicing/Head-Crown-Tray-PLA-Basic-FAST.3mf",
+      "sha256": "0f1ac00c54106cf5a0121d480b288cb7214cc5681d02933dce238d02fc514e7b",
+      "origin": [
+        307.2,
+        -307.2
+      ],
+      "objects": [
+        "39",
+        "40"
+      ],
+      "process_overrides": {
+        "support_base_pattern_spacing": "5",
+        "support_style": "snug",
+        "support_type": "normal(auto)",
+        "wall_generator": "arachne"
+      }
+    }
+  ],
+  "material": "Bambu PLA Basic @BBL P2S",
+  "volumetric_limit": 21
+}

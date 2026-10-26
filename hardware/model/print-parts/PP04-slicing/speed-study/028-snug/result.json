@@ -1,0 +1,107 @@
+{
+    "error_string": "Success.",
+    "layer_height": 0.2800000011920929,
+    "peak_rss_mb": 355.6875,
+    "plate_index": 0,
+    "return_code": 0,
+    "sliced_plates": [
+        {
+            "feature_type_times": {
+                "Bottom surface": 153.66250610351563,
+                "Bridge": 696.9116821289063,
+                "Brim": 45.63850021362305,
+                "Custom": 400.6033630371094,
+                "Flush": 26.0,
+                "Gap infill": 462.3884582519531,
+                "Inner wall": 4029.296875,
+                "Internal solid infill": 2268.55517578125,
+                "Outer wall": 2921.1240234375,
+                "Overhang wall": 542.0818481445313,
+                "Sparse infill": 880.7255859375,
+                "Support": 2463.09033203125,
+                "Support interface": 498.1881103515625,
+                "Support transition": 245.80299377441406,
+                "Top surface": 400.2470703125,
+                "Travel": 2083.2421875,
+                "Undefined": 2078.576416015625
+            },
+            "filament_change_times": 0,
+            "filaments": [
+                {
+                    "filament_id": "GFL99",
+                    "id": 1,
+                    "main_used_g": 163.3076171875,
+                    "total_used_g": 163.3076171875
+                }
+            ],
+            "id": 1,
+            "layer_filament_change": 0,
+            "main_predication": 17664.990234375,
+            "obj_cached_cnt": 0,
+            "objects": [
+                {
+                    "bbox": {
+                        "depth": 196.0,
+                        "height": 66.0,
+                        "width": 174.0,
+                        "x": 40.9999885559082,
+                        "y": 30.0,
+                        "z": 0.0
+                    },
+                    "id": 5,
+                    "name": "PP04-LowerTub.stl",
+                    "triangle_count": 23900
+                }
+            ],
+            "times": {
+                "conflict_check_time": 0,
+                "detect_overhangs_time": 14,
+                "export_gcode_time": 920,
+                "flush_plan_time": 0,
+                "generate_support_material_time": 861,
+                "infill_generate_time": 74,
+                "infill_time": 230,
+                "ironing_time": 0,
+                "make_perimeters_time": 271,
+                "multifilament_segment_2d_time": 0,
+                "other_slice_time": 1,
+                "prepare_infill_time": 156,
+                "region_split_time": 0,
+                "skirt_brim_time": 5,
+                "slice_layers_time": 100,
+                "sliced_time": 2376,
+                "sliced_time_with_cache": 925,
+                "support_detect_time": 445,
+                "support_interface_time": 23,
+                "support_normal_generate_time": 304,
+                "support_toolpath_time": 89,
+                "support_tree_generate_time": 0,
+                "toolpath_time": 34,
+                "wall_time": 171,
+                "wipe_tower_time": 2
+            },
+            "total_predication": 18112.927734375,
+            "triangle_count": 23900,
+            "warning_message": ""
+        }
+    ],
+    "sparse_infill_density": 10.0,
+    "times": {
+        "export_3mf_time": 348,
+        "export_slicedata_time": 0,
+        "export_time": 616,
+        "import_time": 31,
+        "load_slicedata_time": 0,
+        "prepare_time": 32
+    },
+    "upward_compatible_machine": [
+        "Bambu Lab A1 0.4 nozzle",
+        "Bambu Lab H2S 0.4 nozzle",
+        "Bambu Lab H2D 0.4 nozzle",
+        "Bambu Lab H2D Pro 0.4 nozzle",
+        "Bambu Lab H2C 0.4 nozzle",
+        "Bambu Lab X2D 0.4 nozzle",
+        "Bambu Lab A2L 0.4 nozzle"
+    ],
+    "wall_loops": 3
+}

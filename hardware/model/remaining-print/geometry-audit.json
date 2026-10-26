@@ -1,0 +1,255 @@
+{
+  "scope": [
+    "PrintBubbleCradle",
+    "KeelLid"
+  ],
+  "baseline": {
+    "source": "a7b5995f8f2ceffb612d46d17109a891142e0b27805b054863317d3865c98d3d",
+    "delivery": "3f9f222efcc386935aba160477bb2d80b1e67fc083a1e722e1638b6db4423b78"
+  },
+  "unchanged": {
+    "source": 432,
+    "delivery": 267
+  },
+  "parts": {
+    "PP01": {
+      "name": "PrintWaterCradle",
+      "signature": [
+        13119.492912285019,
+        11258.589271606254,
+        1,
+        74,
+        203,
+        35.79999999999999,
+        -80.15999461960963,
+        92.31196201548904,
+        82.49999999999999,
+        20.108316362893483,
+        138.8572462597746
+      ],
+      "valid": true,
+      "solids": 1,
+      "overlaps": [],
+      "orientations": [
+        {
+          "stem": "PP01-base",
+          "size": [
+            46.699999999999996,
+            98.49999999999999,
+            23.000000000000043
+          ],
+          "angles": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            -59.14999999999999,
+            22.74999999999995,
+            -100.69999999999997
+          ],
+          "facets": 3210,
+          "stl_sha256": "bb5a08b1ce75b3585c8f80ddf775cd7436eb1df9a0506f1e5e2115ab960c1740",
+          "step_delta_mm3": 0.0
+        }
+      ]
+    },
+    "PP02": {
+      "name": "PrintBubbleCradle",
+      "signature": [
+        8334.79842235056,
+        7254.943138293904,
+        1,
+        47,
+        127,
+        -80.0,
+        -124.78517870878939,
+        85.17354286469245,
+        -30.0,
+        -57.43930539151248,
+        144.83930766655283
+      ],
+      "valid": true,
+      "solids": 1,
+      "overlaps": [],
+      "shell_clearance_mm": 0.6499999999999175,
+      "orientations": [
+        {
+          "stem": "PP02-base",
+          "size": [
+            50.0,
+            68.00000000000001,
+            43.550000000000054
+          ],
+          "angles": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            55.0,
+            92.99999999999997,
+            -85.95
+          ],
+          "facets": 2586,
+          "stl_sha256": "b3f3c1c659892ac9d001efcfe42a0a4f69f62bc82c103247dc7ab26c1a3c6ff3",
+          "step_delta_mm3": 0.0
+        }
+      ]
+    },
+    "PP03": {
+      "name": "PrintBackpack",
+      "signature": [
+        117436.38179485023,
+        82820.58615544756,
+        1,
+        106,
+        314,
+        -89.7500001,
+        35.0,
+        33.9999999,
+        89.75,
+        107.5000001,
+        124.0000001
+      ],
+      "valid": true,
+      "solids": 1,
+      "overlaps": [],
+      "orientations": [
+        {
+          "stem": "PP03-base",
+          "size": [
+            204.09069910316668,
+            75.83347778992587,
+            90.0
+          ],
+          "angles": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            12.295349551583335,
+            -72.91673889496293,
+            -34.0
+          ],
+          "facets": 6774,
+          "stl_sha256": "325a3b393aeb5964c3be6903b42420245854159e6fdc3d1c16dc3433964bbd46",
+          "step_delta_mm3": 0.0
+        },
+        {
+          "stem": "PP03-back",
+          "size": [
+            204.09069910316668,
+            90.00000000000001,
+            75.83347778992588
+          ],
+          "angles": [
+            90,
+            0,
+            0
+          ],
+          "translation": [
+            12.295349551583335,
+            79.0,
+            -35.0
+          ],
+          "facets": 6762,
+          "stl_sha256": "68dd8e206dc6f230c56e1331bf870eda661d61045d47278c5999e85ae8ce5974",
+          "step_delta_mm3": 0.0
+        }
+      ]
+    },
+    "LC04": {
+      "name": "KeelLid",
+      "signature": [
+        44682.77076365827,
+        33214.44908921729,
+        1,
+        124,
+        323,
+        -65.0,
+        -101.00000000000001,
+        58.5,
+        65.00000000000003,
+        28.0,
+        97.0
+      ],
+      "valid": true,
+      "solids": 1,
+      "overlaps": [],
+      "orientations": [
+        {
+          "stem": "LC04-base",
+          "size": [
+            130.00000000000003,
+            129.0,
+            38.5
+          ],
+          "angles": [
+            0,
+            0,
+            0
+          ],
+          "translation": [
+            -1.4210854715202004e-14,
+            36.50000000000001,
+            -58.5
+          ],
+          "facets": 7598,
+          "stl_sha256": "f738a550429f366cf5a2f80a9370b1761143c3419dec52497eea70836b9959c7",
+          "step_delta_mm3": 0.0
+        },
+        {
+          "stem": "LC04-flipped",
+          "size": [
+            130.00000000000003,
+            129.0,
+            38.499999999999986
+          ],
+          "angles": [
+            180,
+            0,
+            0
+          ],
+          "translation": [
+            -1.4210854715202004e-14,
+            -36.49999999999999,
+            97.0
+          ],
+          "facets": 7598,
+          "stl_sha256": "5f49b62b302d916f40113da7a4e26f63b7fbd6f309a3ba4bf0d5ec42020b2955",
+          "step_delta_mm3": 0.0
+        },
+        {
+          "stem": "LC04-tilted169",
+          "size": [
+            130.00000000000009,
+            131.9725585352919,
+            25.42626081674043
+          ],
+          "rotation_x_degrees": 169,
+          "relative_to": "LC04-base.brep",
+          "stl_sha256": "69540e21d18cd37ef85b65a172b2ecf50f18b5a51350365f8ae1fd313502746e"
+        },
+        {
+          "stem": "LC04-tilted158",
+          "size": [
+            130.00000000000009,
+            130.1724320621134,
+            34.16794222457755
+          ],
+          "rotation_x_degrees": 158.1985905136482,
+          "relative_to": "LC04-base.brep",
+          "stl_sha256": "5cf742c27262dc1175048e6cf8eaa54975eb9e8df0ee3c2eb0c9661527b5823f"
+        }
+      ]
+    }
+  },
+  "physical_fit_verified": false,
+  "saved_reopened": true,
+  "files": {
+    "source": "4ae9a087e76ffaaf77e333caf81e657c366ac6ce8cc75959b6bd820bb26fd525",
+    "delivery": "8996fe24d9a8ef6f8c4e8007f2920a6194c04b7bc8ea47f379ae222bdbe7fd97"
+  }
+}

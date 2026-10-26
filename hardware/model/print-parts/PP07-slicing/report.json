@@ -1,0 +1,37 @@
+{
+  "input_stl_sha256": "932281e9f81c6aec6912c20ed070747488b39338fd9ea34184a40d4669fe9724",
+  "printer": "Bambu Lab P2S 0.4 nozzle / standard flow",
+  "material": "Generic PLA",
+  "bed": "Textured PEI Plate",
+  "slicer": "Bambu Studio 02.08.04.57",
+  "chosen_orientation": "upright",
+  "comparison": [
+    {
+      "orientation": "upright",
+      "seconds": 26143.166015625,
+      "grams": 177.10800170898438,
+      "warning": ""
+    },
+    {
+      "orientation": "back",
+      "seconds": 33330.9375,
+      "grams": 223.58511352539062,
+      "warning": "Unsupported overhangs were detected.\nModel \"PP07-back.stl\" has 4 overhang region(s) that could not get support. Try adjusting the support settings or re-orienting the object."
+    },
+    {
+      "orientation": "inverted",
+      "seconds": 39261.640625,
+      "grams": 222.49575805664062,
+      "warning": ""
+    }
+  ],
+  "gcode_or_print_sent": false,
+  "physical_support_removal_verified": false,
+  "cli_note": "Factory P2S machine_end_gcode includes T65535; CLI reports Invalid T command (T65535). Slicing return_code=0; templates not modified.",
+  "files": {
+    "result.json": "d4a07ca9bcea46ec51acf7e31430cd471b191d1035f6407401bcd23c6e37dfd1",
+    "run.log": "5a7dcd2df03f8c82c8cc5819dbbe9edab4d74742a6b4ee21c123a4d7f0edf2a4",
+    "PP07-P2S-PLA-0.20.3mf": "59463091b3f167ce4a127e2a669a3ad4f072155b24a1b11bd504f9113f527d18",
+    "process.json": "3944d6dc082f13b8b406fd7c042f8695c45209d2f190068e7f770697bbc155cf"
+  }
+}

@@ -1,0 +1,1356 @@
+{
+  "method": "Native section contours at sampled layer midplanes, curve deflection 0.01 mm, contour raster 0.05 mm; 0.4 mm grid, lid ribs 0.2 mm. G-code footprint raster 0.025 mm, width +0.04 mm tolerance, support excluded; no >5 percentage-point loss vs 3x0.5 classic reference.",
+  "limits": "Sampled path preservation only, not physical strength or whole-volume simulation.",
+  "candidates": {
+    "combined-classic": {
+      "gcode_sha256": "327b7a6cf772d837bfad0721723e36d3de4b6e357c12d29a158fdbaea5701c64",
+      "sections": [
+        {
+          "part": "PP03-base",
+          "height": 1.6,
+          "points": 6223,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 18.12,
+          "points": 16059,
+          "coverage": 0.9986923220623949,
+          "baseline_coverage": 0.9986923220623949,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 22.6,
+          "points": 9191,
+          "coverage": 0.9832444782939832,
+          "baseline_coverage": 0.9832444782939832,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 40.52,
+          "points": 9191,
+          "coverage": 0.9829180720269829,
+          "baseline_coverage": 0.9829180720269829,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 78.6,
+          "points": 10605,
+          "coverage": 0.8350777934936351,
+          "baseline_coverage": 0.8350777934936351,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 86.44,
+          "points": 5358,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 2.44,
+          "points": 1920,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 8.88,
+          "points": 4314,
+          "coverage": 0.9529439035697729,
+          "baseline_coverage": 0.9529439035697729,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 8.88,
+          "points": 675,
+          "coverage": 0.9911111111111112,
+          "baseline_coverage": 0.9911111111111112,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 8.88,
+          "points": 675,
+          "coverage": 0.9911111111111112,
+          "baseline_coverage": 0.9911111111111112,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 11.96,
+          "points": 5293,
+          "coverage": 0.9578688834309466,
+          "baseline_coverage": 0.9578688834309466,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 11.96,
+          "points": 435,
+          "coverage": 0.9655172413793104,
+          "baseline_coverage": 0.9655172413793104,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 11.96,
+          "points": 435,
+          "coverage": 0.960919540229885,
+          "baseline_coverage": 0.960919540229885,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 15.04,
+          "points": 5555,
+          "coverage": 0.956075607560756,
+          "baseline_coverage": 0.956075607560756,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 15.04,
+          "points": 450,
+          "coverage": 0.9777777777777777,
+          "baseline_coverage": 0.9777777777777777,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 15.04,
+          "points": 450,
+          "coverage": 0.9755555555555555,
+          "baseline_coverage": 0.9755555555555555,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 17.0,
+          "points": 9029,
+          "coverage": 0.9723114409126149,
+          "baseline_coverage": 0.9723114409126149,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 17.0,
+          "points": 585,
+          "coverage": 0.9897435897435898,
+          "baseline_coverage": 0.9897435897435898,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 17.0,
+          "points": 585,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 24.0,
+          "points": 20884,
+          "coverage": 0.9216146332120283,
+          "baseline_coverage": 0.9216146332120283,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 27.08,
+          "points": 7327,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 1.6,
+          "points": 20363,
+          "coverage": 0.27756224524873546,
+          "baseline_coverage": 0.27756224524873546,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 3.56,
+          "points": 1190,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 4.96,
+          "points": 1190,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 8.04,
+          "points": 1130,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 15.88,
+          "points": 1020,
+          "coverage": 0.9990196078431373,
+          "baseline_coverage": 0.9990196078431373,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 20.92,
+          "points": 600,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 1.6,
+          "points": 12467,
+          "coverage": 0.2890029678350846,
+          "baseline_coverage": 0.2890029678350846,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 4.4,
+          "points": 1669,
+          "coverage": 0.9982025164769323,
+          "baseline_coverage": 0.9982025164769323,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 8.04,
+          "points": 1352,
+          "coverage": 0.9282544378698225,
+          "baseline_coverage": 0.9282544378698225,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 24.0,
+          "points": 128,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 36.88,
+          "points": 144,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 41.92,
+          "points": 328,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    "combined-arachne": {
+      "gcode_sha256": "c7831f179afebce5592534dc144774a19bad17cad91d6f8dc86a8edbcff742e9",
+      "sections": [
+        {
+          "part": "PP03-base",
+          "height": 1.6,
+          "points": 6223,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 18.12,
+          "points": 16059,
+          "coverage": 0.9985677813064325,
+          "baseline_coverage": 0.9986923220623949,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 22.6,
+          "points": 9191,
+          "coverage": 0.981938853225982,
+          "baseline_coverage": 0.9832444782939832,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 40.52,
+          "points": 9191,
+          "coverage": 0.9832444782939832,
+          "baseline_coverage": 0.9829180720269829,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 78.6,
+          "points": 10605,
+          "coverage": 0.8336633663366336,
+          "baseline_coverage": 0.8350777934936351,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 86.44,
+          "points": 5358,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 2.44,
+          "points": 1920,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 8.88,
+          "points": 4314,
+          "coverage": 0.9531757070004636,
+          "baseline_coverage": 0.9529439035697729,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 8.88,
+          "points": 675,
+          "coverage": 0.9955555555555555,
+          "baseline_coverage": 0.9911111111111112,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 8.88,
+          "points": 675,
+          "coverage": 0.9925925925925926,
+          "baseline_coverage": 0.9911111111111112,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 11.96,
+          "points": 5293,
+          "coverage": 0.9584356697525033,
+          "baseline_coverage": 0.9578688834309466,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 11.96,
+          "points": 435,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9655172413793104,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 11.96,
+          "points": 435,
+          "coverage": 0.9954022988505747,
+          "baseline_coverage": 0.960919540229885,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 15.04,
+          "points": 5555,
+          "coverage": 0.956975697569757,
+          "baseline_coverage": 0.956075607560756,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 15.04,
+          "points": 450,
+          "coverage": 0.9933333333333333,
+          "baseline_coverage": 0.9777777777777777,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 15.04,
+          "points": 450,
+          "coverage": 0.9866666666666667,
+          "baseline_coverage": 0.9755555555555555,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 17.0,
+          "points": 9029,
+          "coverage": 0.9724221951489644,
+          "baseline_coverage": 0.9723114409126149,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 17.0,
+          "points": 585,
+          "coverage": 0.9965811965811966,
+          "baseline_coverage": 0.9897435897435898,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 17.0,
+          "points": 585,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 24.0,
+          "points": 20884,
+          "coverage": 0.8702834705995021,
+          "baseline_coverage": 0.9216146332120283,
+          "passed": false
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 27.08,
+          "points": 7327,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 1.6,
+          "points": 20363,
+          "coverage": 0.2635662721602907,
+          "baseline_coverage": 0.27756224524873546,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 3.56,
+          "points": 1190,
+          "coverage": 0.9201680672268907,
+          "baseline_coverage": 1.0,
+          "passed": false
+        },
+        {
+          "part": "PP01-base",
+          "height": 4.96,
+          "points": 1190,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 8.04,
+          "points": 1130,
+          "coverage": 0.9991150442477876,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 15.88,
+          "points": 1020,
+          "coverage": 0.9990196078431373,
+          "baseline_coverage": 0.9990196078431373,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 20.92,
+          "points": 600,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 1.6,
+          "points": 12467,
+          "coverage": 0.275206545279538,
+          "baseline_coverage": 0.2890029678350846,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 4.4,
+          "points": 1669,
+          "coverage": 0.9982025164769323,
+          "baseline_coverage": 0.9982025164769323,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 8.04,
+          "points": 1352,
+          "coverage": 0.9282544378698225,
+          "baseline_coverage": 0.9282544378698225,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 24.0,
+          "points": 128,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 36.88,
+          "points": 144,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 41.92,
+          "points": 328,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    "combined-wide": {
+      "gcode_sha256": "655b42cfeb9f8caf5d0289cc53b52911b16df1b1f7791cedcd81ac71a7f84007",
+      "sections": [
+        {
+          "part": "PP03-base",
+          "height": 1.6,
+          "points": 6223,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 18.12,
+          "points": 16059,
+          "coverage": 0.9986300516844138,
+          "baseline_coverage": 0.9986923220623949,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 22.6,
+          "points": 9191,
+          "coverage": 0.9983679686649983,
+          "baseline_coverage": 0.9832444782939832,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 40.52,
+          "points": 9191,
+          "coverage": 0.9983679686649983,
+          "baseline_coverage": 0.9829180720269829,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 78.6,
+          "points": 10605,
+          "coverage": 0.8730787364450731,
+          "baseline_coverage": 0.8350777934936351,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 86.44,
+          "points": 5358,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 2.44,
+          "points": 1920,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 8.88,
+          "points": 4314,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9529439035697729,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 8.88,
+          "points": 675,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9911111111111112,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 8.88,
+          "points": 675,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9911111111111112,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 11.96,
+          "points": 5293,
+          "coverage": 0.9996221424522955,
+          "baseline_coverage": 0.9578688834309466,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 11.96,
+          "points": 435,
+          "coverage": 0.9954022988505747,
+          "baseline_coverage": 0.9655172413793104,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 11.96,
+          "points": 435,
+          "coverage": 0.9954022988505747,
+          "baseline_coverage": 0.960919540229885,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 15.04,
+          "points": 5555,
+          "coverage": 0.9985598559855986,
+          "baseline_coverage": 0.956075607560756,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 15.04,
+          "points": 450,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9777777777777777,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 15.04,
+          "points": 450,
+          "coverage": 0.9955555555555555,
+          "baseline_coverage": 0.9755555555555555,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 17.0,
+          "points": 9029,
+          "coverage": 0.9992247203455532,
+          "baseline_coverage": 0.9723114409126149,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 17.0,
+          "points": 585,
+          "coverage": 0.9965811965811966,
+          "baseline_coverage": 0.9897435897435898,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 17.0,
+          "points": 585,
+          "coverage": 0.9965811965811966,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 24.0,
+          "points": 20884,
+          "coverage": 0.9556119517333844,
+          "baseline_coverage": 0.9216146332120283,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 27.08,
+          "points": 7327,
+          "coverage": 0.9997270369864883,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 1.6,
+          "points": 20363,
+          "coverage": 0.3125276236310956,
+          "baseline_coverage": 0.27756224524873546,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 3.56,
+          "points": 1190,
+          "coverage": 0.9991596638655462,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 4.96,
+          "points": 1190,
+          "coverage": 0.9991596638655462,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 8.04,
+          "points": 1130,
+          "coverage": 0.9991150442477876,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 15.88,
+          "points": 1020,
+          "coverage": 0.9901960784313726,
+          "baseline_coverage": 0.9990196078431373,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 20.92,
+          "points": 600,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 1.6,
+          "points": 12467,
+          "coverage": 0.33303922355017246,
+          "baseline_coverage": 0.2890029678350846,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 4.4,
+          "points": 1669,
+          "coverage": 0.9982025164769323,
+          "baseline_coverage": 0.9982025164769323,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 8.04,
+          "points": 1352,
+          "coverage": 0.9252958579881657,
+          "baseline_coverage": 0.9282544378698225,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 24.0,
+          "points": 128,
+          "coverage": 0.9375,
+          "baseline_coverage": 1.0,
+          "passed": false
+        },
+        {
+          "part": "PP02-base",
+          "height": 36.88,
+          "points": 144,
+          "coverage": 0.9166666666666666,
+          "baseline_coverage": 1.0,
+          "passed": false
+        },
+        {
+          "part": "PP02-base",
+          "height": 41.92,
+          "points": 328,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    "combined-wide-arachne": {
+      "gcode_sha256": "53d8a788e6bc5369a1e6d76708aeccbbe181d01ed47fbeca57a98c8b5b5cb4ea",
+      "sections": [
+        {
+          "part": "PP03-base",
+          "height": 1.6,
+          "points": 6223,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 18.12,
+          "points": 16059,
+          "coverage": 0.9985055109284513,
+          "baseline_coverage": 0.9986923220623949,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 22.6,
+          "points": 9191,
+          "coverage": 0.9983679686649983,
+          "baseline_coverage": 0.9832444782939832,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 40.52,
+          "points": 9191,
+          "coverage": 0.9983679686649983,
+          "baseline_coverage": 0.9829180720269829,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 78.6,
+          "points": 10605,
+          "coverage": 0.8738330975954738,
+          "baseline_coverage": 0.8350777934936351,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 86.44,
+          "points": 5358,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 2.44,
+          "points": 1920,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 8.88,
+          "points": 4314,
+          "coverage": 0.9997681965693093,
+          "baseline_coverage": 0.9529439035697729,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 8.88,
+          "points": 675,
+          "coverage": 0.9985185185185185,
+          "baseline_coverage": 0.9911111111111112,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 8.88,
+          "points": 675,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9911111111111112,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 11.96,
+          "points": 5293,
+          "coverage": 0.9994332136784432,
+          "baseline_coverage": 0.9578688834309466,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 11.96,
+          "points": 435,
+          "coverage": 0.9954022988505747,
+          "baseline_coverage": 0.9655172413793104,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 11.96,
+          "points": 435,
+          "coverage": 0.9954022988505747,
+          "baseline_coverage": 0.960919540229885,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 15.04,
+          "points": 5555,
+          "coverage": 0.9981998199819982,
+          "baseline_coverage": 0.956075607560756,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 15.04,
+          "points": 450,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9777777777777777,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 15.04,
+          "points": 450,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9755555555555555,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 17.0,
+          "points": 9029,
+          "coverage": 0.9992247203455532,
+          "baseline_coverage": 0.9723114409126149,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 17.0,
+          "points": 585,
+          "coverage": 0.9965811965811966,
+          "baseline_coverage": 0.9897435897435898,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 17.0,
+          "points": 585,
+          "coverage": 0.9965811965811966,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 24.0,
+          "points": 20884,
+          "coverage": 0.9313828768435166,
+          "baseline_coverage": 0.9216146332120283,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 27.08,
+          "points": 7327,
+          "coverage": 0.9997270369864883,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 1.6,
+          "points": 20363,
+          "coverage": 0.2941118695673525,
+          "baseline_coverage": 0.27756224524873546,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 3.56,
+          "points": 1190,
+          "coverage": 0.9352941176470588,
+          "baseline_coverage": 1.0,
+          "passed": false
+        },
+        {
+          "part": "PP01-base",
+          "height": 4.96,
+          "points": 1190,
+          "coverage": 0.9991596638655462,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 8.04,
+          "points": 1130,
+          "coverage": 0.9991150442477876,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 15.88,
+          "points": 1020,
+          "coverage": 0.9980392156862745,
+          "baseline_coverage": 0.9990196078431373,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 20.92,
+          "points": 600,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 1.6,
+          "points": 12467,
+          "coverage": 0.313307130825379,
+          "baseline_coverage": 0.2890029678350846,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 4.4,
+          "points": 1669,
+          "coverage": 0.9982025164769323,
+          "baseline_coverage": 0.9982025164769323,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 8.04,
+          "points": 1352,
+          "coverage": 0.9252958579881657,
+          "baseline_coverage": 0.9282544378698225,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 24.0,
+          "points": 128,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 36.88,
+          "points": 144,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 41.92,
+          "points": 328,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    "merged-validation": {
+      "gcode_sha256": "f825efbb797395c93ffbd23670f11f22871308ca5ca6a45cca2e8a161fdbf579",
+      "sections": [
+        {
+          "part": "PP03-base",
+          "height": 1.6,
+          "points": 6223,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 18.12,
+          "points": 16059,
+          "coverage": 0.9985055109284513,
+          "baseline_coverage": 0.9986923220623949,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 22.6,
+          "points": 9191,
+          "coverage": 0.9983679686649983,
+          "baseline_coverage": 0.9832444782939832,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 40.52,
+          "points": 9191,
+          "coverage": 0.9983679686649983,
+          "baseline_coverage": 0.9829180720269829,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 78.6,
+          "points": 10605,
+          "coverage": 0.8738330975954738,
+          "baseline_coverage": 0.8350777934936351,
+          "passed": true
+        },
+        {
+          "part": "PP03-base",
+          "height": 86.44,
+          "points": 5358,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 2.44,
+          "points": 1920,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 8.88,
+          "points": 4314,
+          "coverage": 0.9997681965693093,
+          "baseline_coverage": 0.9529439035697729,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 8.88,
+          "points": 675,
+          "coverage": 0.9985185185185185,
+          "baseline_coverage": 0.9911111111111112,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 8.88,
+          "points": 675,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9911111111111112,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 11.96,
+          "points": 5293,
+          "coverage": 0.9994332136784432,
+          "baseline_coverage": 0.9578688834309466,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 11.96,
+          "points": 435,
+          "coverage": 0.9954022988505747,
+          "baseline_coverage": 0.9655172413793104,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 11.96,
+          "points": 435,
+          "coverage": 0.9954022988505747,
+          "baseline_coverage": 0.960919540229885,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 15.04,
+          "points": 5555,
+          "coverage": 0.9981998199819982,
+          "baseline_coverage": 0.956075607560756,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 15.04,
+          "points": 450,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9777777777777777,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 15.04,
+          "points": 450,
+          "coverage": 1.0,
+          "baseline_coverage": 0.9755555555555555,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 17.0,
+          "points": 9029,
+          "coverage": 0.9992247203455532,
+          "baseline_coverage": 0.9723114409126149,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib--1",
+          "height": 17.0,
+          "points": 585,
+          "coverage": 0.9965811965811966,
+          "baseline_coverage": 0.9897435897435898,
+          "passed": true
+        },
+        {
+          "part": "LC04-rib-1",
+          "height": 17.0,
+          "points": 585,
+          "coverage": 0.9965811965811966,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 24.0,
+          "points": 20884,
+          "coverage": 0.9313828768435166,
+          "baseline_coverage": 0.9216146332120283,
+          "passed": true
+        },
+        {
+          "part": "LC04-flipped",
+          "height": 27.08,
+          "points": 7327,
+          "coverage": 0.9997270369864883,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 1.6,
+          "points": 20363,
+          "coverage": 0.27756224524873546,
+          "baseline_coverage": 0.27756224524873546,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 3.56,
+          "points": 1190,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 4.96,
+          "points": 1190,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 8.04,
+          "points": 1130,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 15.88,
+          "points": 1020,
+          "coverage": 0.9990196078431373,
+          "baseline_coverage": 0.9990196078431373,
+          "passed": true
+        },
+        {
+          "part": "PP01-base",
+          "height": 20.92,
+          "points": 600,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 1.6,
+          "points": 12467,
+          "coverage": 0.313307130825379,
+          "baseline_coverage": 0.2890029678350846,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 4.4,
+          "points": 1669,
+          "coverage": 0.9982025164769323,
+          "baseline_coverage": 0.9982025164769323,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 8.04,
+          "points": 1352,
+          "coverage": 0.9252958579881657,
+          "baseline_coverage": 0.9282544378698225,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 24.0,
+          "points": 128,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 36.88,
+          "points": 144,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        },
+        {
+          "part": "PP02-base",
+          "height": 41.92,
+          "points": 328,
+          "coverage": 1.0,
+          "baseline_coverage": 1.0,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  }
+}

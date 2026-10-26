@@ -599,6 +599,9 @@ def main():
     boot_button_info=add_boot_button(doc,add)
     from cable_passage import apply as apply_cable_passage
     cable_passage_info=apply_cable_passage(doc)
+    from l298n_compact_mount import apply as apply_compact_l298n
+    l298n_mount_info=apply_compact_l298n(doc,add)
+    l298n_info=l298n_mount_info.copy()
     boot_button_info.update(wire_route_points_mm=cable_passage_info['boot_points_mm'],
         routed_length_mm=cable_passage_info['boot_routed_length_mm'],
         shared_trunk='15芯净径10通道；BOOT包含于总预算', board_endpoint='X60/Y6/Z194；板内末段待实物')
@@ -725,7 +728,7 @@ def main():
     print('Final readback; drive and bottle checks',flush=True)
     drive_mount_check=check_drive_mount(final,verbose=True)
     effects_check=check_effects_mount(final)
-    report={'status':'preliminary_concept','design_revision':'0.56','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
+    report={'status':'preliminary_concept','design_revision':'0.57','coordinate_system':'mm; +X left, +Y rear, +Z up; front -Y',
             'cable_passage_layout':cable_passage_info,
             'boot_button_layout':boot_button_info,'boot_button_check':check_boot_button(final),
             'drive_mount_check':drive_mount_check,

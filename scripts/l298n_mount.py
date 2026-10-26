@@ -115,6 +115,9 @@ def apply(doc, add):
 
 
 def moving_names(doc):
+    if doc.getObject('L298NTopRetainer'):
+        from l298n_compact_mount import moving_names as compact_moving
+        return compact_moving(doc)
     prefixes=('L298NClamp','L298NSidePad','L298NRearPad','L298NBottomPad')
     return ['L298NEnvelope','L298NCarrier']+[o.Name for o in doc.Objects if o.Name.startswith(prefixes)]
 
@@ -130,6 +133,12 @@ def box_sweep(shape, distance=80):
 
 
 def check(doc):
+    if doc.getObject('L298NTopRetainer'):
+        from l298n_compact_mount import check as compact_check, check_service
+        result = compact_check(doc)
+        result['service'] = check_service(doc)
+        result['passed'] = result['passed'] and result['service']['passed']
+        return result
     objects={o.Name:o for o in doc.Objects if hasattr(o,'Category')}
     physical={n:o.Shape for n,o in objects.items() if o.Category!='clearance'}
     def hits(parts,absent=()):
@@ -207,6 +216,9 @@ def check(doc):
 
 
 def export_carrier(doc, output):
+    if doc.getObject('L298NTopRetainer'):
+        from update_l298n_compact import export_parts
+        return export_parts(doc, output/'l298n-compact')
     folder=output/'parts';folder.mkdir(exist_ok=True)
     paths=[folder/'L298N-carrier-0.34.FCStd',folder/'L298N-carrier-0.34.step']
     expected=doc.getObject('L298NCarrier').Shape.copy()
@@ -229,6 +241,9 @@ def export_carrier(doc, output):
 
 
 def render(doc,output):
+    if doc.getObject('L298NTopRetainer'):
+        from update_l298n_compact import render_candidate
+        return render_candidate(doc, output/'l298n-compact')
     import FreeCADGui as G
     from PySide import QtGui
     objects=[o for o in doc.Objects if hasattr(o,'Category')]

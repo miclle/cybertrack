@@ -1,0 +1,119 @@
+[
+  {
+    "name": "L298NCarrier",
+    "stem": "LC01-Carrier",
+    "valid": true,
+    "solids": 1,
+    "volume_mm3": 4396.09196974399,
+    "size_xyz_mm": [
+      33.5,
+      47.5,
+      59.0
+    ],
+    "translation_xyz_mm": [
+      -0.0,
+      -1.0500000000000007,
+      -28.799999999999997
+    ],
+    "step_difference_mm3": 0.0,
+    "stl_closed": true,
+    "stl_nonmanifold": false,
+    "stl_facets": 2096,
+    "stl_components": 1,
+    "cad_shells": 1,
+    "files_sha256": {
+      "LC01-Carrier.step": "077729e4a10a8f994c1ead808a58e45b320d22ed400609c4d2881038e672c89d",
+      "LC01-Carrier.stl": "7bf3441227bf9dbd582f8be9c55f5d7e81bf9fbb9888b282172c2fe644e07322"
+    },
+    "manufacturing_released": false,
+    "note": "Single-solid fit candidate."
+  },
+  {
+    "name": "L298NTopRetainer",
+    "stem": "LC02-TopRetainer",
+    "valid": true,
+    "solids": 1,
+    "volume_mm3": 1631.0507106317816,
+    "size_xyz_mm": [
+      29.0,
+      43.75,
+      5.5
+    ],
+    "translation_xyz_mm": [
+      -0.0,
+      -0.625,
+      -82.5
+    ],
+    "step_difference_mm3": 0.0,
+    "stl_closed": true,
+    "stl_nonmanifold": false,
+    "stl_facets": 1668,
+    "stl_components": 1,
+    "cad_shells": 1,
+    "files_sha256": {
+      "LC02-TopRetainer.step": "ce812b078e12dcc9f0b1ac9ab56198f7aecbf73d6b53f78c09dceb2e5484bcba",
+      "LC02-TopRetainer.stl": "88ae09a257eab92c75f92b31b8b97216d6d9baedc4dbbdee9a835fabd763b45b"
+    },
+    "manufacturing_released": false,
+    "note": "Single-solid fit candidate."
+  },
+  {
+    "name": "BottomServiceCover",
+    "stem": "LC03-BottomServiceCover",
+    "valid": true,
+    "solids": 1,
+    "volume_mm3": 49846.44341633238,
+    "size_xyz_mm": [
+      131.6,
+      136.8,
+      2.8000000000000007
+    ],
+    "translation_xyz_mm": [
+      -0.0,
+      28.39999999999999,
+      -26.0
+    ],
+    "step_difference_mm3": 0.0,
+    "stl_closed": true,
+    "stl_nonmanifold": false,
+    "stl_facets": 6812,
+    "stl_components": 1,
+    "cad_shells": 1,
+    "files_sha256": {
+      "LC03-BottomServiceCover.step": "6a0e62d6d168c3dc9d2ceca326022e8b4ccf127a81826ed92da35a92b4650e0d",
+      "LC03-BottomServiceCover.stl": "f5bf24626456b6f255309c31f52a8584944318f3acc7cf19966ef7f7b97c19da"
+    },
+    "manufacturing_released": false,
+    "note": "Single-solid fit candidate."
+  },
+  {
+    "name": "KeelLid",
+    "stem": "LC04-KeelLid",
+    "valid": true,
+    "solids": 1,
+    "volume_mm3": 44682.77076365827,
+    "size_xyz_mm": [
+      130.0,
+      129.0,
+      38.5
+    ],
+    "translation_xyz_mm": [
+      -7.105427357601002e-15,
+      36.5,
+      -58.5
+    ],
+    "step_difference_mm3": 0.0,
+    "stl_closed": true,
+    "stl_nonmanifold": false,
+    "stl_facets": 7598,
+    "stl_components": 1,
+    "cad_shells": 1,
+    "files_sha256": {
+      "LC04-KeelLid.stl": "f738a550429f366cf5a2f80a9370b1761143c3419dec52497eea70836b9959c7",
+      "LC04-KeelLid.step": "f400f9e58a86c4eaf3568e759e66d1b0579cf9e39713ec9d6f89003b8e5c80ae"
+    },
+    "manufacturing_released": false,
+    "note": "Two 3 mm inward ribs connect former floating posts. One connected printable solid; use plate 05 flipped orientation and supports. Physical fit/strength unverified.",
+    "local_change_audit": "../remaining-print/geometry-audit.json"
+  }
+]

@@ -3,7 +3,7 @@
 *.py text eol=lf
 *.json text eol=lf
 *.FCStd binary
-*.step -text
+*.step -text -diff
 *.pdf binary
 *.png binary
 *.jpg binary
@@ -19,3 +19,9 @@
 
 # Immutable CAD interface exports; preserve bytes and review the readback report.
 /hardware/components/drive-interface/*.brep -text -diff
+
+# Generated CAD meshes and slice archives must retain their exact bytes.
+*.brep -text -diff
+*.stl binary
+*.3mf binary
+/hardware/model/**/run.log -text -diff

@@ -101,6 +101,9 @@ def add_l298n(doc, add):
 
 
 def check_l298n(doc):
+    if doc.getObject('L298NTopRetainer'):
+        from l298n_compact_mount import check
+        return check(doc)
     board = doc.getObject('L298NEnvelope').Shape
     expected = Part.makeBox(*SIZE)
     expected.Placement = placement()

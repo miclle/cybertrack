@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-26",
+  "slicer": "Bambu Studio 02.08.04.57",
+  "user_printer": "P2SC",
+  "profile": "Bambu Lab P2S 0.4 nozzle",
+  "material": "Generic PLA",
+  "bed": "Textured PEI Plate",
+  "source_stl_sha256": "34d99c7f547c4d877e09449b63576652fb48b92423d4fa54cbb74439813fa8df",
+  "project_sha256": "e26a0d381c8e47d968ee607b67647949ac0f53976c30b0f2c630fd6e443bddd5",
+  "selected": "final",
+  "comparisons": [
+    {
+      "candidate": "upright-tree",
+      "estimated_seconds": 5244.77099609375,
+      "estimated_grams": 33.62774658203125,
+      "model_warning": "",
+      "success": true
+    },
+    {
+      "candidate": "upright-normal",
+      "estimated_seconds": 5513.54345703125,
+      "estimated_grams": 36.03064727783203,
+      "model_warning": "",
+      "success": true
+    },
+    {
+      "candidate": "upright-tree-024",
+      "estimated_seconds": 4855.11572265625,
+      "estimated_grams": 33.92036819458008,
+      "model_warning": "",
+      "success": true
+    },
+    {
+      "candidate": "front-tree",
+      "estimated_seconds": 8278.9873046875,
+      "estimated_grams": 48.49192428588867,
+      "model_warning": "Unsupported overhangs were detected.\nModel \"VF01-DriveFitFrame.stl\" has 2 overhang region(s) that could not get support. Try adjusting the support settings or re-orienting the object.",
+      "success": true
+    },
+    {
+      "candidate": "final",
+      "estimated_seconds": 4860.4443359375,
+      "estimated_grams": 33.968101501464844,
+      "model_warning": "",
+      "success": true
+    }
+  ],
+  "gui_verified": {
+    "project_opened": true,
+    "layer_height_mm": 0.24,
+    "initial_layer_height_mm": 0.2,
+    "precise_z_height": true,
+    "final_height_mm": 41.6,
+    "layers": 173,
+    "estimated_total_g": 33.97,
+    "support_g": 1.4,
+    "estimated_total_time": "1h21m",
+    "first_layer_and_full_support_preview_checked": true
+  },
+  "model_warning": "",
+  "cli_diagnostic": "Invalid T command (T65535): command is present verbatim in bundled P2S factory machine_end_gcode, in AMS filament pullback block; unmodified. CLI returns success and GUI preview completes.",
+  "physical_print_verified": false
+}

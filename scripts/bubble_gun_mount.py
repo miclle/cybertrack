@@ -15,6 +15,7 @@ RING_BORE_MM=32.0
 RING_BORE_RISE_MM=1.3  # Keeps the lower bore edge 2.3 mm above the former Ø34 bore.
 RING_NOTCH_WIDTH_MM=7.5
 RING_NOTCH_DEPTH_MM=2.3
+RING_SHELL_RELIEF_DIAMETER_MM=32.8  # Ø31.5 shell plus 0.65 mm radial room, including 15° removal.
 SLOT_WALL_IDS=(2,3,4,5)  # User removed the -X front wall (1) and front stop (6).
 HOSE_POINTS=[(-28,65,154.5),(-28,65,174),(-99,65,174),(-99,10,174),(-99,10,94),
              (-99,-45,94),(-55,-45,101),(-55,-62,101)]
@@ -40,7 +41,10 @@ def ring_shape():
     bore_bottom=110+RING_BORE_RISE_MM-RING_BORE_MM/2
     notch=box(-55-RING_NOTCH_WIDTH_MM/2,-127,bore_bottom-RING_NOTCH_DEPTH_MM,
               -55+RING_NOTCH_WIDTH_MM/2,-124,110+RING_BORE_RISE_MM)
-    return ring.cut(notch).removeSplitter()
+    # The eccentric opening alone intersects the installed shell at both lower
+    # corners. Keep its upper profile and notch; relieve only the interfering arc.
+    relief=cylinder(RING_SHELL_RELIEF_DIAMETER_MM/2,3,(-55,-127,110),(0,1,0))
+    return ring.cut(notch).cut(relief).removeSplitter()
 
 
 def body_service_poses():

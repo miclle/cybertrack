@@ -84,7 +84,7 @@
     "dry_side_unchanged": true
   },
   "physical_fit_verified": false,
-  "source_sha256": "9bc18b1a59777f05225d02513b2841d92ee98be380d1a608a54ed3b5e55fd366",
+  "source_sha256": "4ae9a087e76ffaaf77e333caf81e657c366ac6ce8cc75959b6bd820bb26fd525",
   "parts": [
     {
       "id": "PP01",
@@ -140,7 +140,7 @@
       "feature_count": 6,
       "solids": 1,
       "valid": true,
-      "volume_mm3": 8489.899509844481,
+      "volume_mm3": 8334.79842235056,
       "size_xyz_mm": [
         50.0,
         67.34587331727691,
@@ -148,25 +148,27 @@
       ],
       "stl_translation_xyz_mm": [
         55.0,
-        91.11224205015094,
-        -85.17354286469245
+        92.99999999999997,
+        -85.95
       ],
       "stl_closed": true,
       "stl_connected_components": 1,
       "cad_boundary_shells": 1,
       "stl_nonmanifold": false,
-      "stl_facets": 2082,
-      "step_geometry_equivalence_verified": false,
+      "stl_facets": 2586,
+      "step_geometry_equivalence_verified": true,
       "step_usage": "layout_exchange_only; use native FCStd for geometry",
       "step_volume_difference_mm3": 9.307768777944148e-09,
       "step_volume_comparison_passed": true,
       "missing_source_volume_mm3": 0.0,
       "extra_volume_mm3": 0.0,
       "files": {
-        "PP02-BubbleCradle.step": "4a8a442b7d43de9fe19d5e09c56132b9a59e4a7a69010466cf2d17c86598c7cc",
-        "PP02-BubbleCradle.stl": "d0e44b1ce8fbecf8ba418104c004f6cc521f6e6111b81634ed09e13e21c9017c"
+        "PP02-BubbleCradle.stl": "b3f3c1c659892ac9d001efcfe42a0a4f69f62bc82c103247dc7ab26c1a3c6ff3",
+        "PP02-BubbleCradle.step": "c10f4f780bf0877cd99c15d07f14d339512ec16d9a5d6de9081169d4319fead5"
       },
-      "local_change_audit": "pp02-adjustment-audit.json"
+      "local_change_audit": "remaining-print/geometry-audit.json",
+      "stl_orientation": "undo bubble gun -15 degree assembly pitch, then center XY and set Zmin=0",
+      "step_symmetric_difference_mm3": 0.0
     },
     {
       "id": "PP03",
@@ -367,11 +369,12 @@
   "passed": true,
   "manufacturing_released": false,
   "checks_on_design_features_equivalent_to_union": true,
-  "limits": "Solid fusion/export checks only. PP02 changed 2026-10-26; assembly fit is separately recorded in pp02-adjustment-audit.json",
+  "limits": "Historical consolidation plus PP02 local export update. Four-part static checks and local gun/cradle removal samples are separate; no whole-machine or physical acceptance.",
   "source_document": "source/CyberTrack-design.FCStd",
   "equivalent_delivery_audit": "model-tree-audit.json",
-  "local_change_audit": "pp02-adjustment-audit.json",
+  "local_change_audit": "remaining-print/geometry-audit.json",
   "assembly_fit_passed": false,
   "cable_passage_change_audit": "cable-passage-audit.json",
-  "bubble_tail_height_audit": "bubble-tail-height-audit.json"
+  "bubble_tail_height_audit": "bubble-tail-height-audit.json",
+  "l298n_compact_audit": "l298n-compact-audit.json"
 }

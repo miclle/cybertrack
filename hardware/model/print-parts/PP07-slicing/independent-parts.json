@@ -1,0 +1,36 @@
+{
+  "parts": [
+    {
+      "part": "Crown",
+      "stl": "PP05-Crown.stl",
+      "input_stl_sha256": "cb2cd63d8cc0ca1de3100e12e732ec4ed6cdebdb6f43fa6581a66137c7d835c1",
+      "seconds": 25783.890625,
+      "grams": 131.67788696289062,
+      "warning": "",
+      "result": "Crown/result.json",
+      "project": "Crown/Crown.3mf"
+    },
+    {
+      "part": "Tray",
+      "stl": "Head-ElectronicsTray.stl",
+      "input_stl_sha256": "cb55e681d1ad80fa23524923f35b6bcb372c24e5b556d1a4638d97d995d14d63",
+      "seconds": 2986.50634765625,
+      "grams": 26.358484268188477,
+      "warning": "",
+      "result": "Tray/result.json",
+      "project": "Tray/Tray.3mf"
+    },
+    {
+      "part": "Coupon",
+      "stl": "Head-ScrewFitCoupon.stl",
+      "input_stl_sha256": "191576aabad582602d2eb3b7b332acd8dc98766f6a8b8260caa8b771675989cc",
+      "seconds": 1117.9786376953125,
+      "grams": 3.136944532394409,
+      "warning": "",
+      "result": "Coupon/result.json",
+      "project": "Coupon/Coupon.3mf"
+    }
+  ],
+  "settings": "same as PP07 process.json; model-surface tree supports enabled",
+  "sent_to_printer": false
+}

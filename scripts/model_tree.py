@@ -43,7 +43,8 @@ def organize(out, render=False):
         consumed={s.Name for o in unions for s in o.Shapes}
         from print_consolidation import groups
         assert consumed=={n for _,_,members in groups(doc) for n in members}
-    assert len(spaces)==59, 'Review changed clearance inventory before removing it'
+    expected_spaces = 62 if doc.getObject('L298NTopRetainer') else 59
+    assert len(spaces)==expected_spaces, 'Review changed clearance inventory before removing it'
     if render:
         assert all(not doc.getObject(n).ViewObject.Visibility for n in spaces)
     removed=consumed|spaces

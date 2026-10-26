@@ -1,0 +1,608 @@
+{
+  "source": "hardware/model/CyberTrack.FCStd",
+  "source_sha256": "d774df9e6200a37cbc47b2df47fe00b6932f07a6177bdc73323609f8e0d96bd0",
+  "source_object": "PrintLowerTub",
+  "fixture_id": "VF01",
+  "coordinate_system": "X left, Y rear, Z up; front -Y; millimetres",
+  "interface_clip_positive_xyz_mm": [
+    [
+      73,
+      87
+    ],
+    [
+      -35.1,
+      35.1
+    ],
+    [
+      30.4,
+      72
+    ]
+  ],
+  "interface_clip_negative": "mirror mask across X=0; copy actual source geometry",
+  "protected_interfaces": "motor plates X73..77/Y+-20.7/Z32..72; R5.5 post cores X73..87/Y+-28.1/Z37.4; both sides",
+  "post_root_changes": "new beam end blocks blend into R7 roots outside protected R5.5 cores",
+  "crossbeams": {
+    "x_mm": [
+      -77,
+      77
+    ],
+    "y_mm": [
+      [
+        -40,
+        -32
+      ],
+      [
+        32,
+        40
+      ]
+    ],
+    "z_mm": [
+      30.4,
+      38.4
+    ]
+  },
+  "end_blocks": {
+    "positive_x_mm": [
+      65,
+      77
+    ],
+    "mirrored": true,
+    "y_mm": [
+      [
+        -40,
+        -30
+      ],
+      [
+        30,
+        40
+      ]
+    ],
+    "z_mm": [
+      30.4,
+      44.4
+    ]
+  },
+  "original_volume_mm3": 142516.6581570777,
+  "fixture_volume_mm3": 40369.169610134646,
+  "solid_volume_reduction_percent": 71.67406945113677,
+  "stl_translation_xyz_mm": [
+    0,
+    0,
+    -30.4
+  ],
+  "stl_size_xyz_mm": [
+    174.0,
+    80.0,
+    41.6
+  ],
+  "solids": 1,
+  "cad_valid": true,
+  "stl_closed": true,
+  "stl_nonmanifold": false,
+  "stl_components": 1,
+  "stl_facets": 10016,
+  "reference_objects": [
+    "TrackLeftRubberBand",
+    "TrackLeftTreadPads",
+    "TrackLeftChevronTreads",
+    "TrackLeftShoulderLugs",
+    "TrackLeftWheelTires",
+    "TrackLeftWheelRims",
+    "TrackLeftWheelFaces",
+    "TrackLeftWheelHubs",
+    "TrackLeftSuspensionArms",
+    "TrackLeftRockerPlates",
+    "TrackLeftFasteners",
+    "TrackRightRubberBand",
+    "TrackRightTreadPads",
+    "TrackRightChevronTreads",
+    "TrackRightShoulderLugs",
+    "TrackRightWheelTires",
+    "TrackRightWheelRims",
+    "TrackRightWheelFaces",
+    "TrackRightWheelHubs",
+    "TrackRightSuspensionArms",
+    "TrackRightRockerPlates",
+    "TrackRightFasteners",
+    "MotorL",
+    "MotorShaftL",
+    "DriveCouplerL",
+    "TrackMountL",
+    "MotorR",
+    "MotorShaftR",
+    "DriveCouplerR",
+    "TrackMountR",
+    "TrackMountScrewLFront",
+    "TrackMountScrewLRear",
+    "MotorFaceScrewL0",
+    "MotorFaceScrewL1",
+    "MotorFaceScrewL2",
+    "MotorFaceScrewL3",
+    "TrackMountScrewRFront",
+    "TrackMountScrewRRear",
+    "MotorFaceScrewR0",
+    "MotorFaceScrewR1",
+    "MotorFaceScrewR2",
+    "MotorFaceScrewR3"
+  ],
+  "checks": [
+    {
+      "name": "retained_source_interface_0",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "retained_source_interface_1",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "interface_symmetric_difference_0",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "interface_symmetric_difference_1",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "interface_symmetric_difference_2",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "interface_symmetric_difference_3",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "interface_symmetric_difference_4",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "interface_symmetric_difference_5",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "motor_land_L0",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "motor_land_L1",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "motor_land_L2",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "motor_land_L3",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "motor_downward_envelope_L",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "motor_land_R0",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "motor_land_R1",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "motor_land_R2",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "motor_land_R3",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "motor_downward_envelope_R",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "track_screw_loading_corridor_0",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "track_screw_loading_corridor_1",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "track_screw_loading_corridor_2",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "track_screw_loading_corridor_3",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackLeftRubberBand",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackLeftTreadPads",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackLeftChevronTreads",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackLeftShoulderLugs",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackRightRubberBand",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackRightTreadPads",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackRightChevronTreads",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackRightShoulderLugs",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorL",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorShaftL",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_DriveCouplerL",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackMountL",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorR",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorShaftR",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_DriveCouplerR",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackMountR",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackMountScrewLFront",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackMountScrewLRear",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorFaceScrewL0",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorFaceScrewL1",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorFaceScrewL2",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorFaceScrewL3",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackMountScrewRFront",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_TrackMountScrewRRear",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorFaceScrewR0",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorFaceScrewR1",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorFaceScrewR2",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "static_fit_MotorFaceScrewR3",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_frame_symmetric_difference",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftRubberBand",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftTreadPads",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftChevronTreads",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftShoulderLugs",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftWheelTires",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftWheelRims",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftWheelFaces",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftWheelHubs",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftSuspensionArms",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftRockerPlates",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackLeftFasteners",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightRubberBand",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightTreadPads",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightChevronTreads",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightShoulderLugs",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightWheelTires",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightWheelRims",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightWheelFaces",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightWheelHubs",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightSuspensionArms",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightRockerPlates",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackRightFasteners",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorL",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorShaftL",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_DriveCouplerL",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackMountL",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorR",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorShaftR",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_DriveCouplerR",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackMountR",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackMountScrewLFront",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackMountScrewLRear",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorFaceScrewL0",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorFaceScrewL1",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorFaceScrewL2",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorFaceScrewL3",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackMountScrewRFront",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_TrackMountScrewRRear",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorFaceScrewR0",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorFaceScrewR1",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorFaceScrewR2",
+      "volume_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "name": "saved_reference_MotorFaceScrewR3",
+      "volume_mm3": 0.0,
+      "passed": true
+    }
+  ],
+  "files_sha256": {
+    "CyberTrack-drive-fit.FCStd": "39f4601e5f8b790b073c87fa51d1219d44912defb0781466e5d7e45c0095aab2",
+    "VF01-DriveFitFrame.stl": "34d99c7f547c4d877e09449b63576652fb48b92423d4fa54cbb74439813fa8df"
+  },
+  "passed": true,
+  "physical_fit_verified": false,
+  "sliced": true,
+  "limits": [
+    "CAD material reduction is not a measured filament or time saving",
+    "No stiffness, strength, loaded driving or full chassis access validation",
+    "Print supports, process tolerances and screw engagement remain unverified"
+  ],
+  "slicing_report": "slicing/report.json"
+}

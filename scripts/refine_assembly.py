@@ -169,7 +169,11 @@ def service_groups(doc):
     crown+=['HeadCrownShell','HeadServiceHatch']
     battery=['PowerBank','BatteryHatch','BatteryPullStrap']+[n for n in names if n.startswith(('BatteryPad','BatterySupportWasher'))]
     wet={name:([name+'Module'] if doc.getObject(name+'RetentionBand') else [name+suffix for suffix in (('ServiceLid','CapGrip','LidMark','TopPad') if doc.getObject(name+'TopPad') else ('ServiceLid','CapGrip','LidMark','FillPlug','FillSeal'))]) for name in ('Water','Bubble')}
-    return {'cable_access':['BottomServiceCover' if doc.getObject('BottomServiceCover') else 'CableServiceCover'],'battery':battery,'crown':crown,'electronics':(['ElectronicsTray','BreadboardEnvelope'] if doc.getObject('BreadboardEnvelope') else ['ElectronicsTray','Electronics','AudioModule']+controller_members(doc)+[n for n in names if n.startswith(('ControllerMountScrew','ControllerMountInsert'))]),**wet,
+    cable_access=['BottomServiceCover' if doc.getObject('BottomServiceCover') else 'CableServiceCover']
+    if doc.getObject('L298NTopRetainer'):
+        from l298n_compact_mount import moving_names
+        cable_access += moving_names(doc)
+    return {'cable_access':cable_access,'battery':battery,'crown':crown,'electronics':(['ElectronicsTray','BreadboardEnvelope'] if doc.getObject('BreadboardEnvelope') else ['ElectronicsTray','Electronics','AudioModule']+controller_members(doc)+[n for n in names if n.startswith(('ControllerMountScrew','ControllerMountInsert'))]),**wet,
             **({'arc_left':['ArcModuleL'],'arc_right':['ArcModuleR']} if doc.getObject('ArcModuleL') else {}),
             **({key:[o.Name for o in doc.Objects if getattr(o,'ServiceGroup','')==key] for key in ('bubble_gun','bubble_gun_cradle')} if doc.getObject('BubbleGunShell') else {}),
             **({'water_gun':['WaterGunBody','WaterGunInlet']} if doc.getObject('WaterGunBody') else {}),
