@@ -156,6 +156,12 @@ def normalize(out):
     xml=ET.fromstring(dict((info.filename,data) for info,data in entries)['Document.xml'])
     original=copy.deepcopy(xml)
     objects={o.attrib['name']:o for o in xml.find('ObjectData')}
+    if 'L298NTopRetainer' in objects:
+        labels={n:v for n,v in labels.items() if not n.startswith('L298N')}
+        for n,obj in objects.items():
+            if n.startswith('L298N'):
+                value=obj.find("Properties/Property[@name='Label']/String").attrib['value']
+                labels[n]=value if value.startswith('L298N · ') else 'L298N · '+value.removeprefix('L298N').strip()
     assert set(objects)==set(labels)|{'Drive'}
     rows=[]
     changed=0

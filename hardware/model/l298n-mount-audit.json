@@ -1,239 +1,255 @@
 {
-  "revision": "0.34",
-  "tolerance_mm3": 0.01,
-  "spaces": [
-    {
-      "name": "L298NAirSpaceL",
-      "bbox_mm": [
-        11.0,
-        -22.0,
-        28.8,
-        16.0,
-        24.0,
-        104.0
-      ],
-      "overlaps": [],
-      "passed": true
-    },
-    {
-      "name": "L298NMotorWireSpaceL",
-      "bbox_mm": [
-        22.25,
-        -7.0,
-        42.0,
-        25.5,
-        19.5,
-        70.0
-      ],
-      "overlaps": [],
-      "passed": true
-    },
-    {
-      "name": "L298NAirSpaceR",
-      "bbox_mm": [
-        -16.0,
-        -22.0,
-        28.8,
-        -11.0,
-        24.0,
-        104.0
-      ],
-      "overlaps": [],
-      "passed": true
-    },
-    {
-      "name": "L298NMotorWireSpaceR",
-      "bbox_mm": [
-        -25.5000001,
-        -7.0000001,
-        41.9999999,
-        -22.2499999,
-        19.5000001,
-        70.0000001
-      ],
-      "overlaps": [],
-      "passed": true
-    },
-    {
-      "name": "L298NConnectorSpace",
-      "bbox_mm": [
-        -16.0,
-        -17.0,
-        31.5,
-        16.0,
-        -5.5,
-        41.5
-      ],
-      "overlaps": [],
-      "passed": true
-    }
-  ],
-  "cassette_removal": {
-    "method": "80 mm downward continuous conservative union of primitive boxes; all final carrier material contained",
-    "moving": [
-      "L298NEnvelope",
-      "L298NCarrier",
-      "L298NClampNutL0",
-      "L298NClampScrewL0",
-      "L298NSidePadL0",
-      "L298NRearPadL0",
-      "L298NClampNutL1",
-      "L298NClampScrewL1",
-      "L298NSidePadL1",
-      "L298NRearPadL1",
-      "L298NBottomPadL",
-      "L298NClampNutR0",
-      "L298NClampScrewR0",
-      "L298NSidePadR0",
-      "L298NRearPadR0",
-      "L298NClampNutR1",
-      "L298NClampScrewR1",
-      "L298NSidePadR1",
-      "L298NRearPadR1",
-      "L298NBottomPadR"
-    ],
-    "removed_first": [
-      "BottomServiceCover",
-      "BottomCoverScrew0",
-      "BottomCoverScrew1",
-      "BottomCoverScrew2",
-      "BottomCoverScrew3",
-      "BottomCoverScrew4",
-      "BottomCoverScrew5",
-      "L298NMountScrewR",
-      "L298NMountScrewL"
-    ],
-    "disconnect_first": "motor, power and control wires; connectors and flexible service loops are not measured",
-    "overlaps": [],
-    "closed_cover_blocks": true,
-    "passed": true
+  "revision": "0.57",
+  "static_overlaps": {
+    "L298NEnvelope": [],
+    "L298NCarrier": [],
+    "L298NTopRetainer": [],
+    "L298NBaseNutR": [],
+    "L298NBaseScrewR": [],
+    "L298NBaseNutL": [],
+    "L298NBaseScrewL": [],
+    "L298NCapNutR": [],
+    "L298NCapScrewR": [],
+    "L298NCapNutL": [],
+    "L298NCapScrewL": [],
+    "L298NBottomPadRF": [],
+    "L298NBottomPadRB": [],
+    "L298NFrontPadR": [],
+    "L298NRearPadR": [],
+    "L298NTopPadRF": [],
+    "L298NTopPadRB": [],
+    "L298NBottomPadLF": [],
+    "L298NBottomPadLB": [],
+    "L298NFrontPadL": [],
+    "L298NRearPadL": [],
+    "L298NTopPadLF": [],
+    "L298NTopPadLB": [],
+    "L298NSidePadR1F": [],
+    "L298NSidePadR1B": [],
+    "L298NSidePad1F": [],
+    "L298NSidePad1B": []
   },
-  "mount_screws_and_tools": [
-    {
-      "name": "L298NMountScrewR",
-      "sweep_overlaps": [],
-      "tool_overlaps": [],
-      "tool_diameter_mm": 3.6,
-      "passed": true
-    },
-    {
-      "name": "L298NMountScrewL",
-      "sweep_overlaps": [],
-      "tool_overlaps": [],
-      "tool_diameter_mm": 3.6,
-      "passed": true
-    }
-  ],
-  "connector_access": {
-    "overlaps": [],
-    "passed": true
+  "internal_overlaps": [],
+  "wire_air_overlaps": {
+    "L298NLowerConnectorSpace": [],
+    "L298NFrontWireSpace": [],
+    "L298NRearWireSpace": [],
+    "L298NTrunkJoinSpace": [],
+    "L298NMotorExitSpace": [],
+    "L298NMotorLeadLSpace": [],
+    "L298NMotorLeadRSpace": [],
+    "L298NAirSpace": []
   },
-  "vent_wire_reservation_overlap_mm3": 0.0,
-  "bench_board_removal": {
-    "method": "80 mm up after cassette removed from robot and side pads released",
-    "overlaps": [],
-    "passed": true
+  "valid": {
+    "L298NEnvelope": true,
+    "L298NCarrier": true,
+    "L298NTopRetainer": true,
+    "L298NBaseNutR": true,
+    "L298NBaseScrewR": true,
+    "L298NBaseNutL": true,
+    "L298NBaseScrewL": true,
+    "L298NCapNutR": true,
+    "L298NCapScrewR": true,
+    "L298NCapNutL": true,
+    "L298NCapScrewL": true,
+    "L298NBottomPadRF": true,
+    "L298NBottomPadRB": true,
+    "L298NFrontPadR": true,
+    "L298NRearPadR": true,
+    "L298NTopPadRF": true,
+    "L298NTopPadRB": true,
+    "L298NBottomPadLF": true,
+    "L298NBottomPadLB": true,
+    "L298NFrontPadL": true,
+    "L298NRearPadL": true,
+    "L298NTopPadLF": true,
+    "L298NTopPadLB": true,
+    "L298NSidePadR1F": true,
+    "L298NSidePadR1B": true,
+    "L298NSidePad1F": true,
+    "L298NSidePad1B": true
   },
-  "cassette_nearby_distances": [
-    {
-      "object": "MotorL",
-      "distance_mm": 2.9567718883945053
-    },
-    {
-      "object": "MotorR",
-      "distance_mm": 2.9567718883945053
-    },
-    {
-      "object": "RearBulkhead",
-      "distance_mm": 0.5
-    },
-    {
-      "object": "PowerBank",
-      "distance_mm": 7.470107094279171
-    },
-    {
-      "object": "PowerCableRoute",
-      "distance_mm": 2.799999999999997
-    },
-    {
-      "object": "BottomServiceCover",
-      "distance_mm": 0.399999999999995
-    }
-  ],
-  "interfaces": {
-    "carrier_to_hanger_contact_area_mm2": 83.68494446807327,
-    "screw_head_contacts": [
-      {
-        "name": "L298NMountScrewR",
-        "area_mm2": 9.047768469787897
-      },
-      {
-        "name": "L298NMountScrewL",
-        "area_mm2": 9.04778684233862
-      }
-    ],
-    "passed": true
-  },
-  "sweep_carrier_uncovered_volume_mm3": 0.0,
-  "vent_openings": [
-    {
-      "side": -1,
-      "opening": "intake",
-      "remaining_material_mm3": 0.0,
-      "passed": true
-    },
-    {
-      "side": -1,
-      "opening": "exhaust",
-      "remaining_material_mm3": 0.0,
-      "passed": true
-    },
-    {
-      "side": 1,
-      "opening": "intake",
-      "remaining_material_mm3": 0.0,
-      "passed": true
-    },
-    {
-      "side": 1,
-      "opening": "exhaust",
-      "remaining_material_mm3": 0.0,
-      "passed": true
-    }
-  ],
-  "pcb_corner_contact_verified": false,
-  "connector_fit_verified": false,
-  "thermal_verified": false,
-  "physical_fit_verified": false,
-  "manufacturing_released": false,
   "passed": true,
-  "source_after_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
-  "saved_and_reopened": true,
-  "carrier_export": {
-    "coordinate_frame": "assembly coordinates, no scale or relocation",
-    "checks": [
+  "physical_fit_verified": false,
+  "service": {
+    "cassette_removal": {
+      "distance_mm": 80,
+      "moving": [
+        "L298NEnvelope",
+        "L298NCarrier",
+        "L298NTopRetainer",
+        "L298NBaseNutR",
+        "L298NBaseScrewR",
+        "L298NBaseNutL",
+        "L298NBaseScrewL",
+        "L298NCapNutR",
+        "L298NCapScrewR",
+        "L298NCapNutL",
+        "L298NCapScrewL",
+        "L298NBottomPadRF",
+        "L298NBottomPadRB",
+        "L298NFrontPadR",
+        "L298NRearPadR",
+        "L298NTopPadRF",
+        "L298NTopPadRB",
+        "L298NBottomPadLF",
+        "L298NBottomPadLB",
+        "L298NFrontPadL",
+        "L298NRearPadL",
+        "L298NTopPadLF",
+        "L298NTopPadLB",
+        "L298NSidePadR1F",
+        "L298NSidePadR1B",
+        "L298NSidePad1F",
+        "L298NSidePad1B",
+        "BottomServiceCover"
+      ],
+      "remove_first": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5"
+      ],
+      "method": "continuous conservative carrier/cap blank sweeps plus accurate cover projection and fastener bounding sweeps",
+      "overlaps": {
+        "L298NEnvelope": [],
+        "L298NBaseNutR": [],
+        "L298NBaseScrewR": [],
+        "L298NBaseNutL": [],
+        "L298NBaseScrewL": [],
+        "L298NCapNutR": [],
+        "L298NCapScrewR": [],
+        "L298NCapNutL": [],
+        "L298NCapScrewL": [],
+        "L298NBottomPadRF": [],
+        "L298NBottomPadRB": [],
+        "L298NFrontPadR": [],
+        "L298NRearPadR": [],
+        "L298NTopPadRF": [],
+        "L298NTopPadRB": [],
+        "L298NBottomPadLF": [],
+        "L298NBottomPadLB": [],
+        "L298NFrontPadL": [],
+        "L298NRearPadL": [],
+        "L298NTopPadLF": [],
+        "L298NTopPadLB": [],
+        "L298NSidePadR1F": [],
+        "L298NSidePadR1B": [],
+        "L298NSidePad1F": [],
+        "L298NSidePad1B": [],
+        "L298NCarrier": [],
+        "L298NTopRetainer": [],
+        "BottomServiceCover": []
+      },
+      "retained_cover_screw_negative_control": [
+        {
+          "object": "BottomCoverScrew0",
+          "volume_mm3": 13.571680263507925
+        },
+        {
+          "object": "BottomCoverScrew1",
+          "volume_mm3": 13.571680263507929
+        },
+        {
+          "object": "BottomCoverScrew2",
+          "volume_mm3": 13.571680263507929
+        },
+        {
+          "object": "BottomCoverScrew3",
+          "volume_mm3": 13.571680263507925
+        },
+        {
+          "object": "BottomCoverScrew4",
+          "volume_mm3": 13.571680263507933
+        },
+        {
+          "object": "BottomCoverScrew5",
+          "volume_mm3": 13.571680263507933
+        }
+      ],
+      "disconnect_first": "power/control and motor connections or provide measured service slack; flexible wire withdrawal not certified"
+    },
+    "base_screw_tools": [
       {
-        "format": "FCStd",
-        "valid": true,
-        "solids": 1,
-        "symmetric_difference_mm3": 0.0,
-        "passed": true
+        "name": "L298NBaseScrewR",
+        "diameter_mm": 3.2,
+        "overlaps": []
       },
       {
-        "format": "STEP",
-        "valid": true,
-        "solids": 1,
-        "symmetric_difference_mm3": 0.0,
-        "passed": true
+        "name": "L298NBaseScrewL",
+        "diameter_mm": 3.2,
+        "overlaps": []
       }
     ],
-    "files_sha256": {
-      "build/boot-button/output/parts/L298N-carrier-0.34.FCStd": "0d61bf634e7aabc00e837f04a16426a2c5428ba5341ff69ac13e976bb9417715",
-      "build/boot-button/output/parts/L298N-carrier-0.34.step": "c9dd2c496f3a46ba47db31122603576ce136c9eab182782287696d05c42f099b"
+    "bench_cap_screws": [
+      {
+        "name": "L298NCapScrewR",
+        "sweep_overlaps": [],
+        "tool_overlaps": []
+      },
+      {
+        "name": "L298NCapScrewL",
+        "sweep_overlaps": [],
+        "tool_overlaps": []
+      }
+    ],
+    "bench_cap_lift_overlaps": [],
+    "bench_board_lift_overlaps": [],
+    "pad_envelope_contact_areas_mm2": {
+      "L298NBottomPadRF": 8.749999999999998,
+      "L298NBottomPadRB": 8.749999999999998,
+      "L298NFrontPadR": 9.0,
+      "L298NRearPadR": 9.0,
+      "L298NTopPadRF": 8.749999999999998,
+      "L298NTopPadRB": 9.250000000000005,
+      "L298NBottomPadLF": 8.749999999999998,
+      "L298NBottomPadLB": 8.749999999999998,
+      "L298NFrontPadL": 9.0,
+      "L298NRearPadL": 9.0,
+      "L298NTopPadLF": 8.749999999999998,
+      "L298NTopPadLB": 9.250000000000005,
+      "L298NSidePadR1F": 7.0,
+      "L298NSidePadR1B": 7.0,
+      "L298NSidePad1F": 7.0,
+      "L298NSidePad1B": 7.0
+    },
+    "carrier_cover_contact_area_mm2": 709.2896028916546,
+    "other_reserved_space_overlaps": {
+      "L298NEnvelope": [],
+      "L298NCarrier": [],
+      "L298NTopRetainer": [],
+      "L298NBaseNutR": [],
+      "L298NBaseScrewR": [],
+      "L298NBaseNutL": [],
+      "L298NBaseScrewL": [],
+      "L298NCapNutR": [],
+      "L298NCapScrewR": [],
+      "L298NCapNutL": [],
+      "L298NCapScrewL": [],
+      "L298NBottomPadRF": [],
+      "L298NBottomPadRB": [],
+      "L298NFrontPadR": [],
+      "L298NRearPadR": [],
+      "L298NTopPadRF": [],
+      "L298NTopPadRB": [],
+      "L298NBottomPadLF": [],
+      "L298NBottomPadLB": [],
+      "L298NFrontPadL": [],
+      "L298NRearPadL": [],
+      "L298NTopPadLF": [],
+      "L298NTopPadLB": [],
+      "L298NSidePadR1F": [],
+      "L298NSidePadR1B": [],
+      "L298NSidePad1F": [],
+      "L298NSidePad1B": []
     },
     "passed": true,
-    "manufacturing_released": false
+    "pcb_contact_verified": false,
+    "flexible_service_verified": false
   },
-  "source_document": "source/CyberTrack-design.FCStd",
-  "equivalent_delivery_audit": "model-tree-audit.json"
+  "source_after_sha256": "3f9f222efcc386935aba160477bb2d80b1e67fc083a1e722e1638b6db4423b78",
+  "saved_and_reopened": true,
+  "current_snapshot_revalidated": true
 }

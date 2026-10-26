@@ -119,7 +119,9 @@ def apply(doc,put):
     for x,y in MOUNTS:
         tray=tray.cut(zc(1.4,66.4,70.6,x,y)).cut(zc(2.6,66.4,68.1,x,y))
     tray=tray.cut(doc.getObject('LowerTub').Shape)
-    doc.getObject('KeelLid').Shape=lid.removeSplitter()
+    from remaining_print_repairs import connect_lid_posts
+    doc.getObject('KeelLid').Shape=connect_lid_posts(lid,
+        [doc.getObject(n).Shape for n in ('LowerTub','ShoulderRailL','ShoulderRailR')])
     put('EffectTray','效果板低位承板／凹座、防脱压框与四点沉台',tray,'structure','metal',
         '底Z66.5，上Z68.5；板座下凹1、四耳厚4、螺钉头底66.6；下方至少2 mm候选，公差与强度待验。')
     return {'revision':'0.43','tray_floor_z_mm':[66.5,68.5],'tray_mount_xy_mm':MOUNTS,

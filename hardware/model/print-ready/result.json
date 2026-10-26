@@ -1,0 +1,525 @@
+{
+    "error_string": "Success.",
+    "layer_height": 0.2800000011920929,
+    "peak_rss_mb": 684.1875,
+    "plate_index": 0,
+    "return_code": 0,
+    "sliced_plates": [
+        {
+            "feature_type_times": {
+                "Bottom surface": 153.66250610351563,
+                "Bridge": 778.8256225585938,
+                "Brim": 45.69892501831055,
+                "Custom": 400.6033630371094,
+                "Flush": 26.0,
+                "Gap infill": 873.8366088867188,
+                "Inner wall": 2843.615234375,
+                "Internal solid infill": 1174.7762451171875,
+                "Outer wall": 2518.078125,
+                "Overhang wall": 506.2613830566406,
+                "Sparse infill": 345.5864562988281,
+                "Support": 1757.548095703125,
+                "Support interface": 488.8458251953125,
+                "Support transition": 211.9551239013672,
+                "Top surface": 300.5842590332031,
+                "Travel": 1933.23095703125,
+                "Undefined": 1928.56494140625
+            },
+            "filament_change_times": 0,
+            "filaments": [
+                {
+                    "filament_id": "GFA00",
+                    "id": 1,
+                    "main_used_g": 164.39285278320313,
+                    "total_used_g": 164.39285278320313
+                }
+            ],
+            "id": 1,
+            "layer_filament_change": 0,
+            "main_predication": 13905.2578125,
+            "obj_cached_cnt": 0,
+            "objects": [
+                {
+                    "bbox": {
+                        "depth": 196.0,
+                        "height": 66.0,
+                        "width": 174.0,
+                        "x": 40.9999885559082,
+                        "y": 30.0,
+                        "z": 0.0
+                    },
+                    "id": 5,
+                    "name": "PP04-LowerTub.stl",
+                    "triangle_count": 23900
+                }
+            ],
+            "times": {
+                "conflict_check_time": 0,
+                "detect_overhangs_time": 10,
+                "export_gcode_time": 843,
+                "flush_plan_time": 0,
+                "generate_support_material_time": 761,
+                "infill_generate_time": 49,
+                "infill_time": 122,
+                "ironing_time": 0,
+                "make_perimeters_time": 156,
+                "multifilament_segment_2d_time": 0,
+                "other_slice_time": 0,
+                "prepare_infill_time": 73,
+                "region_split_time": 0,
+                "skirt_brim_time": 5,
+                "slice_layers_time": 38,
+                "sliced_time": 1931,
+                "sliced_time_with_cache": 848,
+                "support_detect_time": 437,
+                "support_interface_time": 23,
+                "support_normal_generate_time": 281,
+                "support_toolpath_time": 20,
+                "support_tree_generate_time": 0,
+                "toolpath_time": 33,
+                "wall_time": 118,
+                "wipe_tower_time": 1
+            },
+            "total_predication": 14353.1953125,
+            "triangle_count": 23900,
+            "warning_message": ""
+        },
+        {
+            "feature_type_times": {
+                "Bottom surface": 887.0020751953125,
+                "Bridge": 1029.95166015625,
+                "Brim": 267.5443115234375,
+                "Custom": 400.5928955078125,
+                "Flush": 26.0,
+                "Gap infill": 376.55572509765625,
+                "Inner wall": 2103.35400390625,
+                "Internal solid infill": 2371.573486328125,
+                "Outer wall": 1692.037109375,
+                "Overhang wall": 459.0053405761719,
+                "Sparse infill": 455.9178466796875,
+                "Support": 1587.7344970703125,
+                "Support interface": 371.9190673828125,
+                "Support transition": 149.57089233398438,
+                "Top surface": 672.5791625976563,
+                "Travel": 2562.494873046875,
+                "Undefined": 2557.928955078125
+            },
+            "filament_change_times": 0,
+            "filaments": [
+                {
+                    "filament_id": "GFA00",
+                    "id": 1,
+                    "main_used_g": 150.81068420410156,
+                    "total_used_g": 150.81068420410156
+                }
+            ],
+            "id": 2,
+            "layer_filament_change": 0,
+            "main_predication": 14958.8779296875,
+            "obj_cached_cnt": 0,
+            "objects": [
+                {
+                    "bbox": {
+                        "depth": 136.8000030517578,
+                        "height": 2.799999952316284,
+                        "width": 131.59999084472656,
+                        "x": 312.20001220703125,
+                        "y": 4.999998569488525,
+                        "z": 3.8418579428878274e-09
+                    },
+                    "id": 9,
+                    "name": "LC03-BottomServiceCover-flipped",
+                    "triangle_count": 6812
+                },
+                {
+                    "bbox": {
+                        "depth": 50.999996185302734,
+                        "height": 1.5,
+                        "width": 136.99998474121094,
+                        "x": 312.20001220703125,
+                        "y": 145.8000030517578,
+                        "z": 0.0
+                    },
+                    "id": 13,
+                    "name": "KeelSideFrameL",
+                    "triangle_count": 60
+                },
+                {
+                    "bbox": {
+                        "depth": 50.999996185302734,
+                        "height": 1.5,
+                        "width": 136.99998474121094,
+                        "x": 312.20001220703125,
+                        "y": 200.8000030517578,
+                        "z": 0.0
+                    },
+                    "id": 17,
+                    "name": "KeelSideFrameR",
+                    "triangle_count": 60
+                },
+                {
+                    "bbox": {
+                        "depth": 131.60000610351563,
+                        "height": 1.7999999523162842,
+                        "width": 73.60001373291016,
+                        "x": 456.79998779296875,
+                        "y": 4.999997138977051,
+                        "z": -1.5814205500674916e-10
+                    },
+                    "id": 21,
+                    "name": "BatteryHatch",
+                    "triangle_count": 2332
+                },
+                {
+                    "bbox": {
+                        "depth": 49.99999237060547,
+                        "height": 68.0,
+                        "width": 68.00001525878906,
+                        "x": 456.79998779296875,
+                        "y": 142.60000610351563,
+                        "z": 0.0
+                    },
+                    "id": 25,
+                    "name": "PrintNeck",
+                    "triangle_count": 10256
+                },
+                {
+                    "bbox": {
+                        "depth": 47.49999237060547,
+                        "height": 59.0,
+                        "width": 33.5000114440918,
+                        "x": 456.79998779296875,
+                        "y": 198.60000610351563,
+                        "z": 0.0
+                    },
+                    "id": 29,
+                    "name": "LC01-Carrier-upright",
+                    "triangle_count": 2096
+                },
+                {
+                    "bbox": {
+                        "depth": 43.74999237060547,
+                        "height": 5.5,
+                        "width": 29.000011444091797,
+                        "x": 496.29998779296875,
+                        "y": 198.60000610351563,
+                        "z": 0.0
+                    },
+                    "id": 33,
+                    "name": "LC02-TopRetainer-flat",
+                    "triangle_count": 1668
+                },
+                {
+                    "bbox": {
+                        "depth": 78.0,
+                        "height": 42.86503982543945,
+                        "width": 14.499975204467773,
+                        "x": 538.6500244140625,
+                        "y": 5.0,
+                        "z": -1.2719727493504251e-08
+                    },
+                    "id": 37,
+                    "name": "ShoulderRailL",
+                    "triangle_count": 1898
+                },
+                {
+                    "bbox": {
+                        "depth": 83.0,
+                        "height": 46.07143020629883,
+                        "width": 16.999975204467773,
+                        "x": 537.4000244140625,
+                        "y": 95.0,
+                        "z": -3.149413174696747e-09
+                    },
+                    "id": 41,
+                    "name": "ShoulderRailR",
+                    "triangle_count": 2384
+                },
+                {
+                    "bbox": {
+                        "depth": 36.0,
+                        "height": 2.0,
+                        "width": 13.197994232177734,
+                        "x": 537.4010009765625,
+                        "y": 185.0,
+                        "z": 0.0
+                    },
+                    "id": 45,
+                    "name": "NeckCableBridge",
+                    "triangle_count": 752
+                },
+                {
+                    "bbox": {
+                        "depth": 45.599998474121094,
+                        "height": 1.2000000476837158,
+                        "width": 19.9999942779541,
+                        "x": 466.1000061035156,
+                        "y": 19.0,
+                        "z": 1.5814205500674916e-10
+                    },
+                    "id": 49,
+                    "name": "EffectRetainerLMOS",
+                    "triangle_count": 952
+                },
+                {
+                    "bbox": {
+                        "depth": 32.599998474121094,
+                        "height": 1.2000000476837158,
+                        "width": 13.999994277954102,
+                        "x": 489.6000061035156,
+                        "y": 25.5,
+                        "z": 1.5814205500674916e-10
+                    },
+                    "id": 53,
+                    "name": "EffectRetainerLBuck",
+                    "triangle_count": 912
+                },
+                {
+                    "bbox": {
+                        "depth": 45.599998474121094,
+                        "height": 1.2000000476837158,
+                        "width": 19.9999942779541,
+                        "x": 466.1000061035156,
+                        "y": 77.0,
+                        "z": 1.5814205500674916e-10
+                    },
+                    "id": 57,
+                    "name": "EffectRetainerRMOS",
+                    "triangle_count": 952
+                },
+                {
+                    "bbox": {
+                        "depth": 32.599998474121094,
+                        "height": 1.2000000476837158,
+                        "width": 13.999994277954102,
+                        "x": 489.6000061035156,
+                        "y": 83.5,
+                        "z": 1.5814205500674916e-10
+                    },
+                    "id": 61,
+                    "name": "EffectRetainerRBuck",
+                    "triangle_count": 912
+                }
+            ],
+            "times": {
+                "conflict_check_time": 119,
+                "detect_overhangs_time": 20,
+                "export_gcode_time": 1442,
+                "flush_plan_time": 0,
+                "generate_support_material_time": 813,
+                "infill_generate_time": 131,
+                "infill_time": 278,
+                "ironing_time": 0,
+                "make_perimeters_time": 288,
+                "multifilament_segment_2d_time": 0,
+                "other_slice_time": 1,
+                "prepare_infill_time": 147,
+                "region_split_time": 0,
+                "skirt_brim_time": 37,
+                "slice_layers_time": 62,
+                "sliced_time": 3066,
+                "sliced_time_with_cache": 1479,
+                "support_detect_time": 192,
+                "support_interface_time": 8,
+                "support_normal_generate_time": 844,
+                "support_toolpath_time": 29,
+                "support_tree_generate_time": 0,
+                "toolpath_time": 62,
+                "wall_time": 226,
+                "wipe_tower_time": 5
+            },
+            "total_predication": 15406.9052734375,
+            "triangle_count": 32046,
+            "warning_message": ""
+        },
+        {
+            "feature_type_times": {
+                "Bottom surface": 323.2334289550781,
+                "Bridge": 818.4286499023438,
+                "Brim": 102.82948303222656,
+                "Custom": 401.2880554199219,
+                "Flush": 26.0,
+                "Gap infill": 547.4544677734375,
+                "Inner wall": 1669.3834228515625,
+                "Internal solid infill": 1242.6575927734375,
+                "Outer wall": 2983.818359375,
+                "Overhang wall": 502.79388427734375,
+                "Sparse infill": 536.9322509765625,
+                "Support": 2277.755615234375,
+                "Support interface": 181.54275512695313,
+                "Top surface": 331.91357421875,
+                "Travel": 3014.58154296875,
+                "Undefined": 3009.36962890625
+            },
+            "filament_change_times": 0,
+            "filaments": [
+                {
+                    "filament_id": "GFA00",
+                    "id": 1,
+                    "main_used_g": 154.2153778076172,
+                    "total_used_g": 154.21536254882813
+                }
+            ],
+            "id": 3,
+            "layer_filament_change": 0,
+            "main_predication": 14508.486328125,
+            "obj_cached_cnt": 0,
+            "objects": [
+                {
+                    "bbox": {
+                        "depth": 122.5,
+                        "height": 55.099998474121094,
+                        "width": 179.0,
+                        "x": 38.5,
+                        "y": -240.4499969482422,
+                        "z": 6.293944920798822e-08
+                    },
+                    "id": 65,
+                    "name": "PP07-upright.stl",
+                    "triangle_count": 15494
+                }
+            ],
+            "times": {
+                "conflict_check_time": 0,
+                "detect_overhangs_time": 22,
+                "export_gcode_time": 1141,
+                "flush_plan_time": 0,
+                "generate_support_material_time": 3908,
+                "infill_generate_time": 49,
+                "infill_time": 123,
+                "ironing_time": 0,
+                "make_perimeters_time": 131,
+                "multifilament_segment_2d_time": 0,
+                "other_slice_time": 0,
+                "prepare_infill_time": 74,
+                "region_split_time": 0,
+                "skirt_brim_time": 12,
+                "slice_layers_time": 19,
+                "sliced_time": 5373,
+                "sliced_time_with_cache": 1153,
+                "support_detect_time": 66,
+                "support_interface_time": 8,
+                "support_normal_generate_time": 0,
+                "support_toolpath_time": 432,
+                "support_tree_generate_time": 3343,
+                "toolpath_time": 34,
+                "wall_time": 112,
+                "wipe_tower_time": 2
+            },
+            "total_predication": 14956.5625,
+            "triangle_count": 15494,
+            "warning_message": ""
+        },
+        {
+            "feature_type_times": {
+                "Bottom surface": 248.301513671875,
+                "Bridge": 1424.3179931640625,
+                "Brim": 120.34494018554688,
+                "Custom": 402.27972412109375,
+                "Flush": 26.0,
+                "Gap infill": 38.305728912353516,
+                "Inner wall": 762.851318359375,
+                "Internal solid infill": 1746.351806640625,
+                "Outer wall": 1005.2525024414063,
+                "Overhang wall": 311.4493713378906,
+                "Sparse infill": 429.62274169921875,
+                "Support": 3372.3193359375,
+                "Support interface": 509.2888488769531,
+                "Support transition": 374.9267272949219,
+                "Top surface": 447.17919921875,
+                "Travel": 1019.0297241210938,
+                "Undefined": 1012.6637573242188
+            },
+            "filament_change_times": 0,
+            "filaments": [
+                {
+                    "filament_id": "GFA00",
+                    "id": 1,
+                    "main_used_g": 154.03802490234375,
+                    "total_used_g": 154.03802490234375
+                }
+            ],
+            "id": 4,
+            "layer_filament_change": 0,
+            "main_predication": 11784.32421875,
+            "obj_cached_cnt": 0,
+            "objects": [
+                {
+                    "bbox": {
+                        "depth": 124.00001525878906,
+                        "height": 32.0,
+                        "width": 162.33334350585938,
+                        "x": 354.0333251953125,
+                        "y": -291.20001220703125,
+                        "z": 0.0
+                    },
+                    "id": 69,
+                    "name": "PP07-Crown.stl",
+                    "triangle_count": 5006
+                },
+                {
+                    "bbox": {
+                        "depth": 90.0,
+                        "height": 5.5,
+                        "width": 121.99998474121094,
+                        "x": 374.20001220703125,
+                        "y": -153.1999969482422,
+                        "z": 5.000000058430487e-08
+                    },
+                    "id": 73,
+                    "name": "PP07-Tray.stl",
+                    "triangle_count": 1678
+                }
+            ],
+            "times": {
+                "conflict_check_time": 43,
+                "detect_overhangs_time": 2,
+                "export_gcode_time": 484,
+                "flush_plan_time": 0,
+                "generate_support_material_time": 84,
+                "infill_generate_time": 53,
+                "infill_time": 139,
+                "ironing_time": 0,
+                "make_perimeters_time": 53,
+                "multifilament_segment_2d_time": 0,
+                "other_slice_time": 1,
+                "prepare_infill_time": 86,
+                "region_split_time": 1,
+                "skirt_brim_time": 14,
+                "slice_layers_time": 7,
+                "sliced_time": 831,
+                "sliced_time_with_cache": 498,
+                "support_detect_time": 41,
+                "support_interface_time": 13,
+                "support_normal_generate_time": 30,
+                "support_toolpath_time": 4,
+                "support_tree_generate_time": 0,
+                "toolpath_time": 10,
+                "wall_time": 45,
+                "wipe_tower_time": 1
+            },
+            "total_predication": 12232.23828125,
+            "triangle_count": 6684,
+            "warning_message": ""
+        }
+    ],
+    "sparse_infill_density": 8.0,
+    "times": {
+        "export_3mf_time": 642,
+        "export_slicedata_time": 0,
+        "export_time": 967,
+        "import_time": 52,
+        "load_slicedata_time": 0,
+        "prepare_time": 55
+    },
+    "upward_compatible_machine": [
+        "Bambu Lab A1 0.4 nozzle",
+        "Bambu Lab H2S 0.4 nozzle",
+        "Bambu Lab H2D 0.4 nozzle",
+        "Bambu Lab H2D Pro 0.4 nozzle",
+        "Bambu Lab H2C 0.4 nozzle",
+        "Bambu Lab X2D 0.4 nozzle",
+        "Bambu Lab A2L 0.4 nozzle"
+    ],
+    "wall_loops": 2
+}

@@ -1,187 +1,77 @@
 {
-  "size_lwh_mm": [
-    46.2,
-    43.5,
-    27.5
-  ],
-  "bbox_mm": [
-    -21.75,
-    -4.0,
-    32.0,
-    21.75,
-    23.5,
-    78.2
-  ],
-  "shape_valid": true,
-  "solid_count": 1,
-  "placement_difference_mm3": 0.0,
-  "outside_central_dry_bay_mm3": 0.0,
-  "overlap_tolerance_mm3": 0.01,
-  "objects_checked": 417,
-  "overlaps": [],
-  "reserved_space_overlaps": [],
-  "nearby_distances": [
-    {
-      "object": "L298NSidePadL0",
-      "category": "structure",
-      "distance_mm": 0.0
-    },
-    {
-      "object": "L298NRearPadL0",
-      "category": "structure",
-      "distance_mm": 0.0
-    },
-    {
-      "object": "L298NSidePadL1",
-      "category": "structure",
-      "distance_mm": 0.0
-    },
-    {
-      "object": "L298NRearPadL1",
-      "category": "structure",
-      "distance_mm": 0.0
-    },
-    {
-      "object": "L298NBottomPadL",
-      "category": "structure",
-      "distance_mm": 0.0
-    },
-    {
-      "object": "L298NSidePadR0",
-      "category": "structure",
-      "distance_mm": 0.0
-    },
-    {
-      "object": "L298NRearPadR0",
-      "category": "structure",
-      "distance_mm": 0.0
-    },
-    {
-      "object": "L298NSidePadR1",
-      "category": "structure",
-      "distance_mm": 0.0
-    },
-    {
-      "object": "L298NRearPadR1",
-      "category": "structure",
-      "distance_mm": 0.0
-    },
-    {
-      "object": "L298NBottomPadR",
-      "category": "structure",
-      "distance_mm": 0.0
-    },
-    {
-      "object": "L298NClampScrewR0",
-      "category": "structure",
-      "distance_mm": 0.49999999999999645
-    },
-    {
-      "object": "L298NClampScrewR1",
-      "category": "structure",
-      "distance_mm": 0.49999999999999645
-    },
-    {
-      "object": "L298NClampScrewL0",
-      "category": "structure",
-      "distance_mm": 0.5
-    },
-    {
-      "object": "L298NClampScrewL1",
-      "category": "structure",
-      "distance_mm": 0.5
-    },
-    {
-      "object": "L298NCarrier",
-      "category": "structure",
-      "distance_mm": 0.5
-    },
-    {
-      "object": "L298NMotorWireSpaceL",
-      "category": "clearance",
-      "distance_mm": 0.5
-    },
-    {
-      "object": "L298NMotorWireSpaceR",
-      "category": "clearance",
-      "distance_mm": 0.5
-    },
-    {
-      "object": "KeelLid",
-      "category": "structure",
-      "distance_mm": 0.7999999999999972
-    },
-    {
-      "object": "RearBulkhead",
-      "category": "structure",
-      "distance_mm": 1.5
-    },
-    {
-      "object": "L298NConnectorSpace",
-      "category": "clearance",
-      "distance_mm": 1.5
-    }
-  ],
-  "removal": {
-    "method": "exact rectangular continuous sweep, 80 mm down",
-    "removed_first": [
-      "BottomServiceCover",
-      "BottomCoverScrew0",
-      "BottomCoverScrew1",
-      "BottomCoverScrew2",
-      "BottomCoverScrew3",
-      "BottomCoverScrew4",
-      "BottomCoverScrew5",
-      "L298NMountScrewR",
-      "L298NMountScrewL"
-    ],
-    "co_moving_excluded_from_obstacles": [
-      "L298NCarrier",
-      "L298NClampNutL0",
-      "L298NClampScrewL0",
-      "L298NSidePadL0",
-      "L298NRearPadL0",
-      "L298NClampNutL1",
-      "L298NClampScrewL1",
-      "L298NSidePadL1",
-      "L298NRearPadL1",
-      "L298NBottomPadL",
-      "L298NClampNutR0",
-      "L298NClampScrewR0",
-      "L298NSidePadR0",
-      "L298NRearPadR0",
-      "L298NClampNutR1",
-      "L298NClampScrewR1",
-      "L298NSidePadR1",
-      "L298NRearPadR1",
-      "L298NBottomPadR"
-    ],
-    "disconnect_first": "actual driver leads; release modeled cassette mounting screws when present",
-    "existing_power_route_retained_as_obstacle": true,
-    "sweep_bbox_mm": [
-      -21.75,
-      -4.0,
-      -48.0,
-      21.75,
-      23.5,
-      78.2
-    ],
-    "overlaps": [],
-    "passed": true,
-    "closed_cover_negative_control_mm3": 3349.4999999999986,
-    "closed_cover_blocks": true
+  "revision": "0.57",
+  "static_overlaps": {
+    "L298NEnvelope": [],
+    "L298NCarrier": [],
+    "L298NTopRetainer": [],
+    "L298NBaseNutR": [],
+    "L298NBaseScrewR": [],
+    "L298NBaseNutL": [],
+    "L298NBaseScrewL": [],
+    "L298NCapNutR": [],
+    "L298NCapScrewR": [],
+    "L298NCapNutL": [],
+    "L298NCapScrewL": [],
+    "L298NBottomPadRF": [],
+    "L298NBottomPadRB": [],
+    "L298NFrontPadR": [],
+    "L298NRearPadR": [],
+    "L298NTopPadRF": [],
+    "L298NTopPadRB": [],
+    "L298NBottomPadLF": [],
+    "L298NBottomPadLB": [],
+    "L298NFrontPadL": [],
+    "L298NRearPadL": [],
+    "L298NTopPadLF": [],
+    "L298NTopPadLB": [],
+    "L298NSidePadR1F": [],
+    "L298NSidePadR1B": [],
+    "L298NSidePad1F": [],
+    "L298NSidePad1B": []
+  },
+  "internal_overlaps": [],
+  "wire_air_overlaps": {
+    "L298NLowerConnectorSpace": [],
+    "L298NFrontWireSpace": [],
+    "L298NRearWireSpace": [],
+    "L298NTrunkJoinSpace": [],
+    "L298NMotorExitSpace": [],
+    "L298NMotorLeadLSpace": [],
+    "L298NMotorLeadRSpace": [],
+    "L298NAirSpace": []
+  },
+  "valid": {
+    "L298NEnvelope": true,
+    "L298NCarrier": true,
+    "L298NTopRetainer": true,
+    "L298NBaseNutR": true,
+    "L298NBaseScrewR": true,
+    "L298NBaseNutL": true,
+    "L298NBaseScrewL": true,
+    "L298NCapNutR": true,
+    "L298NCapScrewR": true,
+    "L298NCapNutL": true,
+    "L298NCapScrewL": true,
+    "L298NBottomPadRF": true,
+    "L298NBottomPadRB": true,
+    "L298NFrontPadR": true,
+    "L298NRearPadR": true,
+    "L298NTopPadRF": true,
+    "L298NTopPadRB": true,
+    "L298NBottomPadLF": true,
+    "L298NBottomPadLB": true,
+    "L298NFrontPadL": true,
+    "L298NRearPadL": true,
+    "L298NTopPadLF": true,
+    "L298NTopPadLB": true,
+    "L298NSidePadR1F": true,
+    "L298NSidePadR1B": true,
+    "L298NSidePad1F": true,
+    "L298NSidePad1B": true
   },
   "passed": true,
-  "limits": [
-    "Dimensions inclusion, PCB corner contacts and exact terminal positions remain unverified.",
-    "Minimum nominal gaps are not thermal, insulation, tolerance or physical acceptance.",
-    "Bare envelope checked with co-moving cassette removed from obstacles; see mount check for complete cassette, screws and tool shafts; real wires/fingers remain unverified."
-  ],
   "physical_fit_verified": false,
-  "manufacturing_released": false,
-  "thermal_verified": false,
-  "source_after_sha256": "5e72e81e005dc172fe19a75a5e06153c15f67b77a9c19b3898461cb8a6d57540",
+  "source_after_sha256": "3f9f222efcc386935aba160477bb2d80b1e67fc083a1e722e1638b6db4423b78",
   "saved_and_reopened": true,
-  "source_document": "source/CyberTrack-design.FCStd",
-  "equivalent_delivery_audit": "model-tree-audit.json"
+  "current_snapshot_revalidated": true
 }

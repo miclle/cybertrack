@@ -10,7 +10,7 @@ REVISION = '0.55'
 DIAMETER = 10.0
 HEAD_POINTS = [(0,6,84),(0,6,166),(60,6,166),(60,6,194)]
 CHANGED = ('KeelLid','NeckPedestal','NeckHeadSaddle','HeadShell',
-           'BaseCableGrommet','HeadCableGrommet','NeckCableBridge',
+           'NeckCableBridge',
            'ElectronicsTray','PowerCableRoute','StopSignalRoute')
 
 
@@ -27,11 +27,9 @@ def apply(doc):
         obj=doc.getObject(name);obj.Shape=obj.Shape.cut(base_seat).removeSplitter()
     for name in ('NeckHeadSaddle','HeadShell'):
         obj=doc.getObject(name);obj.Shape=obj.Shape.cut(seat).removeSplitter()
-    doc.BaseCableGrommet.Shape=tube(6.2,5,90,93,0,6)
-    # Follow the first bend through the saddle and head floor instead of
-    # intersecting a straight cylindrical collar with a curved cable path.
-    doc.HeadCableGrommet.Shape=corridor(6.2).cut(passage).common(
-        box(-20,-10,158,24,24,164)).removeSplitter()
+    # User removed both separate grommets; preserve existing seat cutouts.
+    for name in ('BaseCableGrommet','HeadCableGrommet'):
+        if doc.getObject(name):doc.removeObject(name)
     bridge=box(-18,-1,107,18,2,109).fuse(tube(6.2,5,107,109,0,6))
     doc.NeckCableBridge.Shape=bridge.cut(Part.makeCylinder(5,4,V(0,6,106))).removeSplitter()
     doc.ElectronicsTray.Shape=doc.ElectronicsTray.Shape.cut(clearance).removeSplitter()
@@ -41,7 +39,7 @@ def apply(doc):
     doc.StopSignalRoute.Shape=rounded_route(boot_points,1.4,4)
     for name in CHANGED:
         obj=doc.getObject(name)
-        note=('；0.55：15芯总预算，净通道Ø10；底盘护口/桥内径10，护口外径12.4、安装座孔12.6；'
+        note=('；15芯总预算，限位桥净径10；上下独立护口已取消，原安装让位12.6保持；'
               '头部转向+X侧，经Z166托盘下方至X60后上行。R10为中心线布置假设，不是线材弯曲规格。')
         if name=='PowerCableRoute':
             obj.EvidenceBasis='15芯共用Ø10空间预算（含BOOT双线），不是导线实体或护管；实际线径、束径、接头与电气验证未完成。'
@@ -50,8 +48,7 @@ def apply(doc):
         elif '0.55：' not in obj.EvidenceBasis:obj.EvidenceBasis+=note
     doc.recompute()
     return dict(revision=REVISION,conductor_count=15,net_diameter_mm=10,
-        lower_grommet=dict(bore_mm=10,outer_mm=12.4,seat_hole_mm=12.6,z_mm=[90,93]),
-        head_grommet=dict(bore_along_path_mm=10,wall_mm=1.2,seat_radial_gap_mm=.1,z_clip_mm=[158,164]),
+        separate_grommets_removed=True,existing_seat_diameter_mm=12.6,
         neck_bridge=dict(bore_mm=10,outer_mm=12.4,z_mm=[107,109]),
         head_points_mm=HEAD_POINTS,head_centreline_bend_radius_mm=10,
         chassis_endpoint_mm=[0,6,84],
@@ -79,7 +76,7 @@ def check(doc):
     clear=overlaps(passage,obstacles)
     oversize=corridor(5.1)
     controls={n:oversize.common(doc.getObject(n).Shape).Volume>.01
-              for n in ('BaseCableGrommet','HeadCableGrommet','NeckCableBridge')}
+              for n in ('NeckCableBridge',)}
     from breadboard_layout import check as check_tray
     from boot_button import check as check_boot
     tray=check_tray(doc);boot=check_boot(doc)

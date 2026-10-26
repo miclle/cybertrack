@@ -10,7 +10,7 @@ SYSTEMS = OrderedDict([
  ('A', ('履带与传动', '动力固定 / 接口 / 维护', '先核对成品履带接口，再装电机、联轴器及履带；电机维护先移去本侧履带与电源。')),
  ('B', ('底盘、外甲与停止操作区', '外形尺寸 / 动力固定', '底盘电机固定面为一体；外甲分件固定工艺未定。BOOT按钮为肩梁一体安装座候选，GPIO0软件停止不等于供能切断。')),
  ('C', ('电池包与底部检修', '电源承托架 / 动力维护', '先铺垫、安放电源和拉带，再装内托架4点紧固；最后合底盖6点。拆底盖不要求先取电源。')),
- ('D', ('L298N 托框与 MT3608 升压板', '驱动板布局 / 固定与拆装', '机外装垫、螺母和侧压件，核实安全接触边后装板；托框从底部装入，两颗螺钉固定。')),
+ ('D', ('L298N 托框与 MT3608 升压板', '驱动板布局 / 固定与拆装', '机外装垫和上压框；托架用两颗M2.5固定到底盖，随底盖整体下取。插线厚28.5，接触与余线待试配。')),
  ('E', ('固定颈架与线束导向', '总装爆炸 / 内部路线', '固定颈架承托头舱；层板、套筒、横梁并非已验证活动关节。结构连接工艺仍需细化。')),
  ('F', ('头部下壳、面罩与侧甲', '头舱冠盖 / 总装爆炸', '以头壳为位置基准；面罩、耳部和后脑饰件的分体固定工艺未定；侧格栅不代表扬声器已定位。')),
  ('G', ('冠盖及随盖饰件', '头舱冠盖 / 整板上取', '冠盖组件由4颗候选螺钉固定在头壳上；拆时上提65。图卡内饰件随盖移动，工艺未定。')),
@@ -94,7 +94,7 @@ def relation(name, obj, group, cable_passage=False, tail_height=False):
         if name.startswith('EffectInsert'):return '顶盖内柱向下开口盲孔','4个M2.5级候选嵌件；顶盖外表面不穿孔，配合、制造和强度待验。'
         if name.startswith('EffectScrew'):return '承板四耳 → 顶盖内柱','4颗M2.5级候选，先拆电池包再从下操作；头部凹入耳内。新电池包较薄，旧电源间隙值不沿用。'
     if name=='BackpackShell':return '双瓶护壳及两侧一体点火模块桶座','0.50桶座、完整环带及连接耳融合为一个实体；顶部倒L压件及夹环螺钉／嵌件撤销。模块上取90，防脱保持力、材料和制造待验。'
-    if name=='KeelLid':return '底盘折面顶盖及内侧一体支柱','内侧承板吊柱与顶盖一体；外侧中央增加电源开关座、开孔和护边。按当前形状核对，不能沿用旧无开孔说明。'
+    if name=='KeelLid':return '底盘折面顶盖','0.57取消L298N旧吊柱、增加前侧排气口；电源开关座保持，两根3 mm内向筋连接原承板柱，现为单实体；实物配合待验。'
     if name.startswith('TrackPair'): raise ValueError(name)
     if name.startswith(('TrackLeft','TrackRight')):
         return '对应侧成品履带总成', '成品内部几何参考；胎块、轮组及紧固件不按此图逐件制造。内部拆装与真实数量以实物为准。'
@@ -133,17 +133,15 @@ def relation(name, obj, group, cable_passage=False, tail_height=False):
     if name=='MT3608Envelope':
         return 'L298N左上方干舱／固定待设计','37×18×6用户实测包络；先拆L298N托框及左电机后裸板下取90；接头、固定及散热待验。'
     if name.startswith('L298N'):
-        target = 'L298N开口托框'
-        note = '在机外装配侧压组件；板边安全接触位置、材料及压紧量须核实，不使用未测PCB孔。'
-        if 'MountInsert' in name: target,note='顶盖一体吊柱盲孔','2处M2.5级候选嵌件；盲孔不贯穿顶盖，配合及安装工艺待定。'
-        elif 'MountScrew' in name: target,note='托框 → 顶盖两根吊柱','2颗M2.5级候选；从底部紧固，拆时托住托框、断线，再退出螺钉。'
-        elif 'ClampNut' in name: note='四处M2级候选螺母从托框槽口放入；配侧压螺钉，真实防转及防松待验。'
-        elif 'ClampScrew' in name: note='四处M2级候选侧压螺钉配绝缘垫；在机外调整，不让金属件压焊脚或元件。'
-        elif 'SidePad' in name: note='四处0.5厚候选绝缘侧压垫，位于侧压螺钉与板边之间；接触位置待测。'
-        elif 'RearPad' in name: note='四角后挡软垫；背面中央避空，不代表已避开实际焊脚。'
-        elif 'BottomPad' in name: note='两处0.8厚候选垫承托PCB下沿；安装前核实下沿安全接触区。'
-        elif name=='L298NCarrier': target,note='顶盖吊柱下端','先在机外装板与侧压件，再将整框上装；2颗底部锁紧螺钉固定。'
-        elif name=='L298NEnvelope': note='46.2×43.5×27.5用户外形包络；竖装、下沿承托、四点侧压，真实器件位置未建模。'
+        target='底盖承载的L298N托架'
+        note='0.57前后限位、绝缘垫和可拆上压框；真实接触区和线束维护待试配。'
+        if name=='L298NEnvelope':note='46.2×43.5×28.5插线包络；转90°、下沿Z36；尾距30，名义每侧0.75。'
+        elif name=='L298NCarrier':note='两M2.5×8配防转螺母固定到底盖；检修时随底盖整组下取。'
+        elif name=='L298NTopRetainer':note='机外拆两M2×4后上提压框；底部两工具槽供螺钉退出。'
+        elif 'CapNut' in name:note='DIN439 M2薄螺母候选，对边4、厚1.2；须核对实物。'
+        elif 'BaseScrew' in name:note='M2.5×8候选；从底盖下方固定托架。'
+        elif 'CapScrew' in name:note='M2×4候选；机外沿-Y退出后上提压框。'
+        elif name.endswith('Space'):note='前后及底部接线、中央汇接或排气空间预算；不是实际电缆或热验收。'
         return target,note
     if name in ('PowerCableRoute','BaseCableGrommet','HeadCableGrommet','NeckCableBridge'):
         return '底盘中央干区 → 颈架 → 头舱后槽', '线束经护口和限位桥进入托盘后缘；Ø6为规划。拆托盘先断开对外线束，真实弯曲待验。'

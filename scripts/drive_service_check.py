@@ -40,6 +40,10 @@ def check(doc,verbose=False):
     A.closeDocument(src.Name)
     r['drive_preservation']={'objects':rows,'translation_mm':{'L':[14,0,0],'R':[-14,0,0]},'passed':len(rows)==30 and all(q['passed'] for q in rows)}
     tub=shapes['LowerTub'];cover=['BottomServiceCover'];cs=[n for n in shapes if n.startswith('BottomCoverScrew')]
+    if doc.getObject('L298NTopRetainer'):
+        from l298n_compact_mount import moving_names
+        cover += moving_names(doc)
+        r['motor_service_prerequisites'][0]='Remove unified cover together with the L298N cassette; disconnect its leads first'
     battery=[n for n in shapes if n.startswith(('BatteryPad','BatteryScrew','BatterySupportWasher'))]+['PowerBank','BatteryHatch','BatteryPullStrap','PowerCableRoute']
     cover_sweep=box(-65.8,-96.8,-54,65.8,40,28.8)
     for sign in (-1,1):
@@ -48,7 +52,7 @@ def check(doc,verbose=False):
         # The carrier fastener heads remain in place while the independent cover
         # is removed. Its actual new head-clearance holes continue through the sweep.
         for x in (-20,20):cover_sweep=cover_sweep.cut(cz(2.8,-54.1,28.9,x,-12))
-    swept('unified_cover',{'cover':cover_sweep},cover+cs,'80mm down; power bank and both drives still installed')
+    swept('unified_cover',{'cover':cover_sweep},cover+cs,'80mm down; compact L298N cassette co-moves when present; its complete sweep is checked separately')
     for i,(x,y) in enumerate(COVER_POINTS):
         swept('bottom_screw_'+str(i),{'screw':union([cz(2.2,-53.5,28,x,y),cz(1.2,-52,35.8,x,y)])},[cs[i]],'80mm downward')
         top=cz(2.6,28.8,28.9,x,y).cut(cz(1.6,28.8,28.9,x,y))

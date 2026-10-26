@@ -1,8 +1,8 @@
 {
   "source_document": "source/CyberTrack-design.FCStd",
-  "source_sha256": "9bc18b1a59777f05225d02513b2841d92ee98be380d1a608a54ed3b5e55fd366",
+  "source_sha256": "93edd6253efc2003806bf1f3f520b928863e075e18ae154a302fe74a574ee24c",
   "delivery_document": "CyberTrack.FCStd",
-  "delivery_sha256": "f4d01de42c2fa3abc3f9901597ec373d30088fc7465308a571f0b1cdd6bf5bcc",
+  "delivery_sha256": "8398011ffad72ded32d5de32afb46c3d2a14b37f3b9ead12be1aae90b86a3d93",
   "kept_group": "01 双履带与动力参考",
   "drive_members": [
     "DriveCouplerL",
@@ -166,11 +166,14 @@
     "EffectWireSideR",
     "IgnitionMOSPortL",
     "IgnitionMOSPortR",
-    "L298NAirSpaceL",
-    "L298NAirSpaceR",
-    "L298NConnectorSpace",
-    "L298NMotorWireSpaceL",
-    "L298NMotorWireSpaceR",
+    "L298NAirSpace",
+    "L298NFrontWireSpace",
+    "L298NLowerConnectorSpace",
+    "L298NMotorExitSpace",
+    "L298NMotorLeadLSpace",
+    "L298NMotorLeadRSpace",
+    "L298NRearWireSpace",
+    "L298NTrunkJoinSpace",
     "MT3608WireSpaceFront",
     "MT3608WireSpaceRear",
     "WaterBottleRemovalSpace",
@@ -186,9 +189,9 @@
     "WaterStrapAccessSpace"
   ],
   "retained_hidden_envelope_count": 20,
-  "root_part_count": 277,
-  "part_count": 307,
-  "geometry_scope": "Only tail shell and inspection envelope changed; source/delivery signatures and unchanged gun pieces checked in bubble-tail-height-audit.json",
+  "root_part_count": 239,
+  "part_count": 269,
+  "geometry_scope": "New L298N cassette and two supporting lids; all other shape signatures retained. See l298n-compact-audit.json.",
   "shape_checks": [
     {
       "name": "TrackLeftRubberBand",
@@ -335,138 +338,6 @@
       "geometry_signature_matches": true
     },
     {
-      "name": "HeadShell",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "VisorRim",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "CheekArmorL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "CheekArmorR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "JawArmor",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "JawAccent",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "AudioSideGuardL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "AudioEarRingL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "AudioEarGrilleL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "EarHubL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "AudioSideGuardR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "AudioEarRingR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "AudioEarGrilleR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "EarHubR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "TempleGuardL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "TempleGuardR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "TempleCrestL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "TempleLowerBladeL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "EarOuterArcL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "TempleCrestR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "TempleLowerBladeR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "EarOuterArcR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "OccipitalFrame",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "OccipitalInset",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "OccipitalSpine",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "OccipitalMark",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "OccipitalLouverL0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "OccipitalLouverL1",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "OccipitalLouverL2",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "OccipitalLouverR0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "OccipitalLouverR1",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "OccipitalLouverR2",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "SensorMask",
-      "geometry_signature_matches": true
-    },
-    {
       "name": "UltrasonicRingL",
       "geometry_signature_matches": true
     },
@@ -480,10 +351,6 @@
     },
     {
       "name": "UltrasonicFaceR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "SensorStatusStrip",
       "geometry_signature_matches": true
     },
     {
@@ -575,15 +442,7 @@
       "geometry_signature_matches": true
     },
     {
-      "name": "CrownInsertLFront",
-      "geometry_signature_matches": true
-    },
-    {
       "name": "CrownScrewLFront",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "CrownInsertLRear",
       "geometry_signature_matches": true
     },
     {
@@ -591,15 +450,7 @@
       "geometry_signature_matches": true
     },
     {
-      "name": "CrownInsertRFront",
-      "geometry_signature_matches": true
-    },
-    {
       "name": "CrownScrewRFront",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "CrownInsertRRear",
       "geometry_signature_matches": true
     },
     {
@@ -819,102 +670,6 @@
       "geometry_signature_matches": true
     },
     {
-      "name": "L298NEnvelope",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NClampNutL0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NClampScrewL0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NSidePadL0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NRearPadL0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NClampNutL1",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NClampScrewL1",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NSidePadL1",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NRearPadL1",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NBottomPadL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NClampNutR0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NClampScrewR0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NSidePadR0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NRearPadR0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NClampNutR1",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NClampScrewR1",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NSidePadR1",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NRearPadR1",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NBottomPadR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NCarrier",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NMountInsertR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NMountScrewR",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NMountInsertL",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "L298NMountScrewL",
-      "geometry_signature_matches": true
-    },
-    {
       "name": "WaterModule",
       "geometry_signature_matches": true
     },
@@ -1011,15 +766,7 @@
       "geometry_signature_matches": true
     },
     {
-      "name": "BreadboardInsert0",
-      "geometry_signature_matches": true
-    },
-    {
       "name": "BreadboardScrew0",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "BreadboardInsert1",
       "geometry_signature_matches": true
     },
     {
@@ -1027,15 +774,7 @@
       "geometry_signature_matches": true
     },
     {
-      "name": "BreadboardInsert2",
-      "geometry_signature_matches": true
-    },
-    {
       "name": "BreadboardScrew2",
-      "geometry_signature_matches": true
-    },
-    {
-      "name": "BreadboardInsert3",
       "geometry_signature_matches": true
     },
     {
@@ -1417,6 +1156,118 @@
     {
       "name": "PrintWaterCradle",
       "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NEnvelope",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NCarrier",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NTopRetainer",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NBaseNutR",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NBaseScrewR",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NBaseNutL",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NBaseScrewL",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NCapNutR",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NCapScrewR",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NCapNutL",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NCapScrewL",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NBottomPadRF",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NBottomPadRB",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NFrontPadR",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NRearPadR",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NTopPadRF",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NTopPadRB",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NBottomPadLF",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NBottomPadLB",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NFrontPadL",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NRearPadL",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NTopPadLF",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NTopPadLB",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NSidePadR1F",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NSidePadR1B",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NSidePad1F",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "L298NSidePad1B",
+      "geometry_signature_matches": true
+    },
+    {
+      "name": "PrintHeadShell",
+      "geometry_signature_matches": true
     }
   ],
   "geometry_unchanged": false,
@@ -1427,5 +1278,15 @@
   "order_audit": "part-order-audit.json",
   "local_change_audit": "pp02-adjustment-audit.json",
   "cable_passage_change_audit": "cable-passage-audit.json",
-  "bubble_tail_height_audit": "bubble-tail-height-audit.json"
+  "bubble_tail_height_audit": "bubble-tail-height-audit.json",
+  "l298n_compact_audit": "l298n-compact-audit.json",
+  "current_retained_shape_count": 269,
+  "current_source_shape_count": 435,
+  "label_audit_scope": "Historical naming proof retained; current labels and geometry are listed in readback.json and l298n-compact-audit.json.",
+  "local_followup": {
+    "source_sha256": "4ae9a087e76ffaaf77e333caf81e657c366ac6ce8cc75959b6bd820bb26fd525",
+    "delivery_sha256": "8996fe24d9a8ef6f8c4e8007f2920a6194c04b7bc8ea47f379ae222bdbe7fd97",
+    "report": "remaining-print/geometry-audit.json",
+    "note": "Only BubbleGunRing, PrintBubbleCradle and KeelLid changed; tree labels/order and other shapes retained. Main source hashes above belong to the historical tree audit."
+  }
 }

@@ -1,0 +1,221 @@
+{
+  "source": "hardware/model/CyberTrack.FCStd",
+  "source_sha256": "f4d01de42c2fa3abc3f9901597ec373d30088fc7465308a571f0b1cdd6bf5bcc",
+  "measurement": {
+    "gap_mm": 30,
+    "endpoints": "closest tail protrusions including encoders/connectors"
+  },
+  "study_assumptions": [
+    "30 mm axial gap centred on X=0 only for the nominal study.",
+    "Tail exclusion boxes use existing motor radial bounds Y +/-18.5 and Z31.5..68.5; actual encoder/connector profile unknown.",
+    "Both motor tails extend inward from the old placeholders; individual extension and centre offset remain unmeasured.",
+    "Cradle is a guide/support allocation without retention hardware, measured PCB contacts, terminal/wire or thermal allowances."
+  ],
+  "original": {
+    "board_bbox_mm": [
+      -21.75,
+      -4.0,
+      32.0,
+      21.75,
+      23.5,
+      78.2
+    ],
+    "board_tail_overlaps": [
+      {
+        "object": "TailStudy",
+        "volume_mm3": 11086.874999999998
+      }
+    ],
+    "hanger_tail_overlaps": [
+      {
+        "object": "TailStudy",
+        "volume_mm3": 3356.4986891671065
+      }
+    ]
+  },
+  "rejected_options": {
+    "rotate_existing_cradle": {
+      "bbox_mm": [
+        -14.750000000000004,
+        -28.399999999999995,
+        29.199999999999996,
+        26.750000000000004,
+        29.250000000000004,
+        78.2
+      ],
+      "overlaps": [
+        {
+          "object": "BatteryHatch",
+          "volume_mm3": 22.784999999998806
+        },
+        {
+          "object": "PowerBank",
+          "volume_mm3": 141.58918924994228
+        },
+        {
+          "object": "EffectMOSR",
+          "volume_mm3": 50.467239559159445
+        },
+        {
+          "object": "EffectSupportRMOS",
+          "volume_mm3": 1.5999999999999948
+        },
+        {
+          "object": "EffectRetainerRMOS",
+          "volume_mm3": 11.999999999999886
+        },
+        {
+          "object": "EffectTray",
+          "volume_mm3": 19.99999999999998
+        },
+        {
+          "object": "PrintLowerTub",
+          "volume_mm3": 200.44885833435788
+        }
+      ]
+    },
+    "flat_above_motors": {
+      "bbox_mm": [
+        -21.75,
+        -21.85,
+        70.5,
+        21.75,
+        24.35,
+        98.0
+      ],
+      "overlaps": [
+        {
+          "object": "KeelLid",
+          "volume_mm3": 5557.430562737064
+        },
+        {
+          "object": "PowerCableRoute",
+          "volume_mm3": 1099.557428756428
+        },
+        {
+          "object": "BaseCableGrommet",
+          "volume_mm3": 126.66901579274042
+        },
+        {
+          "object": "PrintNeck",
+          "volume_mm3": 6480.379372852902
+        }
+      ]
+    }
+  },
+  "candidate": {
+    "rotation": "+90 degrees about world Z; local length +Z, width -Y, thickness +X",
+    "board_bbox_mm": [
+      -13.75,
+      -21.25,
+      32.0,
+      13.75,
+      22.25,
+      78.2
+    ],
+    "cradle_bbox_mm": [
+      -13.75,
+      -22.7,
+      29.3,
+      13.750000000000007,
+      24.500000000000004,
+      80.0
+    ],
+    "board_tail_clearance_each_mm_at_centered_gap": 1.25,
+    "static_board_overlaps": [],
+    "static_cradle_overlaps": [],
+    "before_hatch_relief_overlaps": [
+      {
+        "object": "BatteryHatch",
+        "volume_mm3": 3.8249999999999704
+      }
+    ],
+    "cradle_volume_mm3": 1935.0000000000043,
+    "downward_80mm_continuous_sweep": {
+      "method": "union of horizontal-face extrusions and both endpoints of orthogonal polyhedra",
+      "removed_first": [
+        "BottomServiceCover",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5"
+      ],
+      "overlaps": [],
+      "includes_retention_hardware_and_wires": false
+    },
+    "minimum_distances_mm": {
+      "CenteredTailStudyKeepout": 1.25,
+      "BatteryHatch": 0.5000000000000036,
+      "PrintLowerTub": 0.5,
+      "KeelLid": 10.0,
+      "PowerCableRoute": 5.799999999999997,
+      "MT3608Envelope": 11.696687565289595,
+      "EffectTray": 0.75,
+      "BottomServiceCover": 0.5
+    },
+    "gap_center_sensitivity": [
+      {
+        "gap_center_x_mm": -11.2,
+        "minimum_x_clearance_mm": -9.95
+      },
+      {
+        "gap_center_x_mm": -2,
+        "minimum_x_clearance_mm": -0.75
+      },
+      {
+        "gap_center_x_mm": -1.25,
+        "minimum_x_clearance_mm": 0.0
+      },
+      {
+        "gap_center_x_mm": 0,
+        "minimum_x_clearance_mm": 1.25
+      },
+      {
+        "gap_center_x_mm": 1.25,
+        "minimum_x_clearance_mm": 0.0
+      },
+      {
+        "gap_center_x_mm": 2,
+        "minimum_x_clearance_mm": -0.75
+      },
+      {
+        "gap_center_x_mm": 11.2,
+        "minimum_x_clearance_mm": -9.95
+      }
+    ],
+    "retention_design_complete": false
+  },
+  "physical_fit_verified": false,
+  "manufacturing_released": false,
+  "main_cad_modified": false,
+  "saved_readback": [
+    {
+      "name": "MotorL",
+      "valid": true,
+      "difference_mm3": 0.0
+    },
+    {
+      "name": "MotorR",
+      "valid": true,
+      "difference_mm3": 0.0
+    },
+    {
+      "name": "TailStudyKeepout",
+      "valid": true,
+      "difference_mm3": 0.0
+    },
+    {
+      "name": "CandidateL298N",
+      "valid": true,
+      "difference_mm3": 0.0
+    },
+    {
+      "name": "CandidateCradle",
+      "valid": true,
+      "difference_mm3": 0.0
+    }
+  ],
+  "source_unchanged_during_study": true
+}

@@ -1,0 +1,2443 @@
+{
+  "tolerance_mm3": 1e-05,
+  "interfaces": [
+    {
+      "kind": "cover_clamping_land",
+      "index": 0,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "cover_clamping_land",
+      "index": 1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "cover_clamping_land",
+      "index": 2,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "cover_clamping_land",
+      "index": 3,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "cover_clamping_land",
+      "index": 4,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "cover_clamping_land",
+      "index": 5,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "integral_motor_seat",
+      "side": "L",
+      "hole": 0,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "integral_motor_seat",
+      "side": "L",
+      "hole": 1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "integral_motor_seat",
+      "side": "L",
+      "hole": 2,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "integral_motor_seat",
+      "side": "L",
+      "hole": 3,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "track_post",
+      "side": "L",
+      "y": -28.1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "track_post",
+      "side": "L",
+      "y": 28.1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "integral_motor_seat",
+      "side": "R",
+      "hole": 0,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "integral_motor_seat",
+      "side": "R",
+      "hole": 1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "integral_motor_seat",
+      "side": "R",
+      "hole": 2,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "integral_motor_seat",
+      "side": "R",
+      "hole": 3,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "track_post",
+      "side": "R",
+      "y": -28.1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "track_post",
+      "side": "R",
+      "y": 28.1,
+      "missing_mm3": 0.0,
+      "passed": true
+    },
+    {
+      "kind": "battery_washer_bearing",
+      "side": "L",
+      "end": "Front",
+      "tray_contact_mm2": 20.239167368562057,
+      "screw_head_contact_mm2": 9.047786842338649,
+      "passed": true
+    },
+    {
+      "kind": "battery_washer_bearing",
+      "side": "L",
+      "end": "Rear",
+      "tray_contact_mm2": 20.239167368562043,
+      "screw_head_contact_mm2": 9.047786842338649,
+      "passed": true
+    },
+    {
+      "kind": "battery_washer_bearing",
+      "side": "R",
+      "end": "Front",
+      "tray_contact_mm2": 20.239167368562256,
+      "screw_head_contact_mm2": 9.047786842338649,
+      "passed": true
+    },
+    {
+      "kind": "battery_washer_bearing",
+      "side": "R",
+      "end": "Rear",
+      "tray_contact_mm2": 20.23916736856225,
+      "screw_head_contact_mm2": 9.047786842338649,
+      "passed": true
+    }
+  ],
+  "paths": [
+    {
+      "name": "unified_cover",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm down; compact L298N cassette co-moves when present; its complete sweep is checked separately",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_0",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew0"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_1",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew1"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_2",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew2"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_3",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew3"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_4",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew4"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_screw_5",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm downward",
+      "absent": [
+        "BottomCoverScrew5"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_screw_L0",
+      "method": "continuous conservative solid sweep",
+      "description": "25mm axially outward after track removal; reverse for installation",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "DriveCouplerL",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "MotorFaceScrewL0",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackLeftChevronTreads",
+        "TrackLeftFasteners",
+        "TrackLeftRockerPlates",
+        "TrackLeftRubberBand",
+        "TrackLeftShoulderLugs",
+        "TrackLeftSuspensionArms",
+        "TrackLeftTreadPads",
+        "TrackLeftWheelFaces",
+        "TrackLeftWheelHubs",
+        "TrackLeftWheelRims",
+        "TrackLeftWheelTires",
+        "TrackMountL",
+        "TrackMountScrewLFront",
+        "TrackMountScrewLRear"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_screw_L1",
+      "method": "continuous conservative solid sweep",
+      "description": "25mm axially outward after track removal; reverse for installation",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "DriveCouplerL",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "MotorFaceScrewL1",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackLeftChevronTreads",
+        "TrackLeftFasteners",
+        "TrackLeftRockerPlates",
+        "TrackLeftRubberBand",
+        "TrackLeftShoulderLugs",
+        "TrackLeftSuspensionArms",
+        "TrackLeftTreadPads",
+        "TrackLeftWheelFaces",
+        "TrackLeftWheelHubs",
+        "TrackLeftWheelRims",
+        "TrackLeftWheelTires",
+        "TrackMountL",
+        "TrackMountScrewLFront",
+        "TrackMountScrewLRear"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_screw_L2",
+      "method": "continuous conservative solid sweep",
+      "description": "25mm axially outward after track removal; reverse for installation",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "DriveCouplerL",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "MotorFaceScrewL2",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackLeftChevronTreads",
+        "TrackLeftFasteners",
+        "TrackLeftRockerPlates",
+        "TrackLeftRubberBand",
+        "TrackLeftShoulderLugs",
+        "TrackLeftSuspensionArms",
+        "TrackLeftTreadPads",
+        "TrackLeftWheelFaces",
+        "TrackLeftWheelHubs",
+        "TrackLeftWheelRims",
+        "TrackLeftWheelTires",
+        "TrackMountL",
+        "TrackMountScrewLFront",
+        "TrackMountScrewLRear"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_screw_L3",
+      "method": "continuous conservative solid sweep",
+      "description": "25mm axially outward after track removal; reverse for installation",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "DriveCouplerL",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "MotorFaceScrewL3",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackLeftChevronTreads",
+        "TrackLeftFasteners",
+        "TrackLeftRockerPlates",
+        "TrackLeftRubberBand",
+        "TrackLeftShoulderLugs",
+        "TrackLeftSuspensionArms",
+        "TrackLeftTreadPads",
+        "TrackLeftWheelFaces",
+        "TrackLeftWheelHubs",
+        "TrackLeftWheelRims",
+        "TrackLeftWheelTires",
+        "TrackMountL",
+        "TrackMountScrewLFront",
+        "TrackMountScrewLRear"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "track_screw_LFront",
+      "method": "continuous conservative solid sweep",
+      "description": "35.5mm inward then80mm down; front requires prior removal of power bank and tray; opposite track screw remains",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackMountScrewLFront"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "track_screw_LRear",
+      "method": "continuous conservative solid sweep",
+      "description": "35.5mm inward then80mm down; front requires prior removal of power bank and tray; opposite track screw remains",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "TrackMountScrewLRear"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "track_module_L",
+      "method": "1mm discrete positions,0..60mm outward",
+      "moving_parts": [
+        "TrackLeftRubberBand",
+        "TrackLeftTreadPads",
+        "TrackLeftChevronTreads",
+        "TrackLeftShoulderLugs",
+        "TrackLeftWheelTires",
+        "TrackLeftWheelRims",
+        "TrackLeftWheelFaces",
+        "TrackLeftWheelHubs",
+        "TrackLeftSuspensionArms",
+        "TrackLeftRockerPlates",
+        "TrackLeftFasteners",
+        "TrackMountL",
+        "DriveCouplerL"
+      ],
+      "absent": [
+        "TrackLeftRubberBand",
+        "TrackLeftTreadPads",
+        "TrackLeftChevronTreads",
+        "TrackLeftShoulderLugs",
+        "TrackLeftWheelTires",
+        "TrackLeftWheelRims",
+        "TrackLeftWheelFaces",
+        "TrackLeftWheelHubs",
+        "TrackLeftSuspensionArms",
+        "TrackLeftRockerPlates",
+        "TrackLeftFasteners",
+        "TrackMountL",
+        "DriveCouplerL",
+        "TrackMountScrewLFront",
+        "TrackMountScrewLRear",
+        "BottomServiceCover",
+        "L298NEnvelope",
+        "L298NCarrier",
+        "L298NTopRetainer",
+        "L298NBaseNutR",
+        "L298NBaseScrewR",
+        "L298NBaseNutL",
+        "L298NBaseScrewL",
+        "L298NCapNutR",
+        "L298NCapScrewR",
+        "L298NCapNutL",
+        "L298NCapScrewL",
+        "L298NBottomPadRF",
+        "L298NBottomPadRB",
+        "L298NFrontPadR",
+        "L298NRearPadR",
+        "L298NTopPadRF",
+        "L298NTopPadRB",
+        "L298NBottomPadLF",
+        "L298NBottomPadLB",
+        "L298NFrontPadL",
+        "L298NRearPadL",
+        "L298NTopPadLF",
+        "L298NTopPadLB",
+        "L298NSidePadR1F",
+        "L298NSidePadR1B",
+        "L298NSidePad1F",
+        "L298NSidePad1B",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BatteryPadN54N90",
+        "BatteryPadN54N29",
+        "BatteryPad54N90",
+        "BatteryPad54N29",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "PowerBank",
+        "BatteryHatch",
+        "BatteryPullStrap",
+        "PowerCableRoute"
+      ],
+      "poses": [
+        {
+          "offset_mm": 0,
+          "collisions": []
+        },
+        {
+          "offset_mm": 1,
+          "collisions": []
+        },
+        {
+          "offset_mm": 2,
+          "collisions": []
+        },
+        {
+          "offset_mm": 3,
+          "collisions": []
+        },
+        {
+          "offset_mm": 4,
+          "collisions": []
+        },
+        {
+          "offset_mm": 5,
+          "collisions": []
+        },
+        {
+          "offset_mm": 6,
+          "collisions": []
+        },
+        {
+          "offset_mm": 7,
+          "collisions": []
+        },
+        {
+          "offset_mm": 8,
+          "collisions": []
+        },
+        {
+          "offset_mm": 9,
+          "collisions": []
+        },
+        {
+          "offset_mm": 10,
+          "collisions": []
+        },
+        {
+          "offset_mm": 11,
+          "collisions": []
+        },
+        {
+          "offset_mm": 12,
+          "collisions": []
+        },
+        {
+          "offset_mm": 13,
+          "collisions": []
+        },
+        {
+          "offset_mm": 14,
+          "collisions": []
+        },
+        {
+          "offset_mm": 15,
+          "collisions": []
+        },
+        {
+          "offset_mm": 16,
+          "collisions": []
+        },
+        {
+          "offset_mm": 17,
+          "collisions": []
+        },
+        {
+          "offset_mm": 18,
+          "collisions": []
+        },
+        {
+          "offset_mm": 19,
+          "collisions": []
+        },
+        {
+          "offset_mm": 20,
+          "collisions": []
+        },
+        {
+          "offset_mm": 21,
+          "collisions": []
+        },
+        {
+          "offset_mm": 22,
+          "collisions": []
+        },
+        {
+          "offset_mm": 23,
+          "collisions": []
+        },
+        {
+          "offset_mm": 24,
+          "collisions": []
+        },
+        {
+          "offset_mm": 25,
+          "collisions": []
+        },
+        {
+          "offset_mm": 26,
+          "collisions": []
+        },
+        {
+          "offset_mm": 27,
+          "collisions": []
+        },
+        {
+          "offset_mm": 28,
+          "collisions": []
+        },
+        {
+          "offset_mm": 29,
+          "collisions": []
+        },
+        {
+          "offset_mm": 30,
+          "collisions": []
+        },
+        {
+          "offset_mm": 31,
+          "collisions": []
+        },
+        {
+          "offset_mm": 32,
+          "collisions": []
+        },
+        {
+          "offset_mm": 33,
+          "collisions": []
+        },
+        {
+          "offset_mm": 34,
+          "collisions": []
+        },
+        {
+          "offset_mm": 35,
+          "collisions": []
+        },
+        {
+          "offset_mm": 36,
+          "collisions": []
+        },
+        {
+          "offset_mm": 37,
+          "collisions": []
+        },
+        {
+          "offset_mm": 38,
+          "collisions": []
+        },
+        {
+          "offset_mm": 39,
+          "collisions": []
+        },
+        {
+          "offset_mm": 40,
+          "collisions": []
+        },
+        {
+          "offset_mm": 41,
+          "collisions": []
+        },
+        {
+          "offset_mm": 42,
+          "collisions": []
+        },
+        {
+          "offset_mm": 43,
+          "collisions": []
+        },
+        {
+          "offset_mm": 44,
+          "collisions": []
+        },
+        {
+          "offset_mm": 45,
+          "collisions": []
+        },
+        {
+          "offset_mm": 46,
+          "collisions": []
+        },
+        {
+          "offset_mm": 47,
+          "collisions": []
+        },
+        {
+          "offset_mm": 48,
+          "collisions": []
+        },
+        {
+          "offset_mm": 49,
+          "collisions": []
+        },
+        {
+          "offset_mm": 50,
+          "collisions": []
+        },
+        {
+          "offset_mm": 51,
+          "collisions": []
+        },
+        {
+          "offset_mm": 52,
+          "collisions": []
+        },
+        {
+          "offset_mm": 53,
+          "collisions": []
+        },
+        {
+          "offset_mm": 54,
+          "collisions": []
+        },
+        {
+          "offset_mm": 55,
+          "collisions": []
+        },
+        {
+          "offset_mm": 56,
+          "collisions": []
+        },
+        {
+          "offset_mm": 57,
+          "collisions": []
+        },
+        {
+          "offset_mm": 58,
+          "collisions": []
+        },
+        {
+          "offset_mm": 59,
+          "collisions": []
+        },
+        {
+          "offset_mm": 60,
+          "collisions": []
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "motor_down_L",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm vertically down at original XY; no inward move; serviced track and motor face screws removed; opposite drive retained",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "DriveCouplerL",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "MotorFaceScrewL0",
+        "MotorFaceScrewL1",
+        "MotorFaceScrewL2",
+        "MotorFaceScrewL3",
+        "MotorL",
+        "MotorShaftL",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackLeftChevronTreads",
+        "TrackLeftFasteners",
+        "TrackLeftRockerPlates",
+        "TrackLeftRubberBand",
+        "TrackLeftShoulderLugs",
+        "TrackLeftSuspensionArms",
+        "TrackLeftTreadPads",
+        "TrackLeftWheelFaces",
+        "TrackLeftWheelHubs",
+        "TrackLeftWheelRims",
+        "TrackLeftWheelTires",
+        "TrackMountL",
+        "TrackMountScrewLFront",
+        "TrackMountScrewLRear"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_screw_R0",
+      "method": "continuous conservative solid sweep",
+      "description": "25mm axially outward after track removal; reverse for installation",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "DriveCouplerR",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "MotorFaceScrewR0",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackMountR",
+        "TrackMountScrewRFront",
+        "TrackMountScrewRRear",
+        "TrackRightChevronTreads",
+        "TrackRightFasteners",
+        "TrackRightRockerPlates",
+        "TrackRightRubberBand",
+        "TrackRightShoulderLugs",
+        "TrackRightSuspensionArms",
+        "TrackRightTreadPads",
+        "TrackRightWheelFaces",
+        "TrackRightWheelHubs",
+        "TrackRightWheelRims",
+        "TrackRightWheelTires"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_screw_R1",
+      "method": "continuous conservative solid sweep",
+      "description": "25mm axially outward after track removal; reverse for installation",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "DriveCouplerR",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "MotorFaceScrewR1",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackMountR",
+        "TrackMountScrewRFront",
+        "TrackMountScrewRRear",
+        "TrackRightChevronTreads",
+        "TrackRightFasteners",
+        "TrackRightRockerPlates",
+        "TrackRightRubberBand",
+        "TrackRightShoulderLugs",
+        "TrackRightSuspensionArms",
+        "TrackRightTreadPads",
+        "TrackRightWheelFaces",
+        "TrackRightWheelHubs",
+        "TrackRightWheelRims",
+        "TrackRightWheelTires"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_screw_R2",
+      "method": "continuous conservative solid sweep",
+      "description": "25mm axially outward after track removal; reverse for installation",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "DriveCouplerR",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "MotorFaceScrewR2",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackMountR",
+        "TrackMountScrewRFront",
+        "TrackMountScrewRRear",
+        "TrackRightChevronTreads",
+        "TrackRightFasteners",
+        "TrackRightRockerPlates",
+        "TrackRightRubberBand",
+        "TrackRightShoulderLugs",
+        "TrackRightSuspensionArms",
+        "TrackRightTreadPads",
+        "TrackRightWheelFaces",
+        "TrackRightWheelHubs",
+        "TrackRightWheelRims",
+        "TrackRightWheelTires"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_screw_R3",
+      "method": "continuous conservative solid sweep",
+      "description": "25mm axially outward after track removal; reverse for installation",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "DriveCouplerR",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "MotorFaceScrewR3",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackMountR",
+        "TrackMountScrewRFront",
+        "TrackMountScrewRRear",
+        "TrackRightChevronTreads",
+        "TrackRightFasteners",
+        "TrackRightRockerPlates",
+        "TrackRightRubberBand",
+        "TrackRightShoulderLugs",
+        "TrackRightSuspensionArms",
+        "TrackRightTreadPads",
+        "TrackRightWheelFaces",
+        "TrackRightWheelHubs",
+        "TrackRightWheelRims",
+        "TrackRightWheelTires"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "track_screw_RFront",
+      "method": "continuous conservative solid sweep",
+      "description": "35.5mm inward then80mm down; front requires prior removal of power bank and tray; opposite track screw remains",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackMountScrewRFront"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "track_screw_RRear",
+      "method": "continuous conservative solid sweep",
+      "description": "35.5mm inward then80mm down; front requires prior removal of power bank and tray; opposite track screw remains",
+      "absent": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "TrackMountScrewRRear"
+      ],
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "track_module_R",
+      "method": "1mm discrete positions,0..60mm outward",
+      "moving_parts": [
+        "TrackRightRubberBand",
+        "TrackRightTreadPads",
+        "TrackRightChevronTreads",
+        "TrackRightShoulderLugs",
+        "TrackRightWheelTires",
+        "TrackRightWheelRims",
+        "TrackRightWheelFaces",
+        "TrackRightWheelHubs",
+        "TrackRightSuspensionArms",
+        "TrackRightRockerPlates",
+        "TrackRightFasteners",
+        "TrackMountR",
+        "DriveCouplerR"
+      ],
+      "absent": [
+        "TrackRightRubberBand",
+        "TrackRightTreadPads",
+        "TrackRightChevronTreads",
+        "TrackRightShoulderLugs",
+        "TrackRightWheelTires",
+        "TrackRightWheelRims",
+        "TrackRightWheelFaces",
+        "TrackRightWheelHubs",
+        "TrackRightSuspensionArms",
+        "TrackRightRockerPlates",
+        "TrackRightFasteners",
+        "TrackMountR",
+        "DriveCouplerR",
+        "TrackMountScrewRFront",
+        "TrackMountScrewRRear",
+        "BottomServiceCover",
+        "L298NEnvelope",
+        "L298NCarrier",
+        "L298NTopRetainer",
+        "L298NBaseNutR",
+        "L298NBaseScrewR",
+        "L298NBaseNutL",
+        "L298NBaseScrewL",
+        "L298NCapNutR",
+        "L298NCapScrewR",
+        "L298NCapNutL",
+        "L298NCapScrewL",
+        "L298NBottomPadRF",
+        "L298NBottomPadRB",
+        "L298NFrontPadR",
+        "L298NRearPadR",
+        "L298NTopPadRF",
+        "L298NTopPadRB",
+        "L298NBottomPadLF",
+        "L298NBottomPadLB",
+        "L298NFrontPadL",
+        "L298NRearPadL",
+        "L298NTopPadLF",
+        "L298NTopPadLB",
+        "L298NSidePadR1F",
+        "L298NSidePadR1B",
+        "L298NSidePad1F",
+        "L298NSidePad1B",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BatteryPadN54N90",
+        "BatteryPadN54N29",
+        "BatteryPad54N90",
+        "BatteryPad54N29",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "PowerBank",
+        "BatteryHatch",
+        "BatteryPullStrap",
+        "PowerCableRoute"
+      ],
+      "poses": [
+        {
+          "offset_mm": 0,
+          "collisions": []
+        },
+        {
+          "offset_mm": 1,
+          "collisions": []
+        },
+        {
+          "offset_mm": 2,
+          "collisions": []
+        },
+        {
+          "offset_mm": 3,
+          "collisions": []
+        },
+        {
+          "offset_mm": 4,
+          "collisions": []
+        },
+        {
+          "offset_mm": 5,
+          "collisions": []
+        },
+        {
+          "offset_mm": 6,
+          "collisions": []
+        },
+        {
+          "offset_mm": 7,
+          "collisions": []
+        },
+        {
+          "offset_mm": 8,
+          "collisions": []
+        },
+        {
+          "offset_mm": 9,
+          "collisions": []
+        },
+        {
+          "offset_mm": 10,
+          "collisions": []
+        },
+        {
+          "offset_mm": 11,
+          "collisions": []
+        },
+        {
+          "offset_mm": 12,
+          "collisions": []
+        },
+        {
+          "offset_mm": 13,
+          "collisions": []
+        },
+        {
+          "offset_mm": 14,
+          "collisions": []
+        },
+        {
+          "offset_mm": 15,
+          "collisions": []
+        },
+        {
+          "offset_mm": 16,
+          "collisions": []
+        },
+        {
+          "offset_mm": 17,
+          "collisions": []
+        },
+        {
+          "offset_mm": 18,
+          "collisions": []
+        },
+        {
+          "offset_mm": 19,
+          "collisions": []
+        },
+        {
+          "offset_mm": 20,
+          "collisions": []
+        },
+        {
+          "offset_mm": 21,
+          "collisions": []
+        },
+        {
+          "offset_mm": 22,
+          "collisions": []
+        },
+        {
+          "offset_mm": 23,
+          "collisions": []
+        },
+        {
+          "offset_mm": 24,
+          "collisions": []
+        },
+        {
+          "offset_mm": 25,
+          "collisions": []
+        },
+        {
+          "offset_mm": 26,
+          "collisions": []
+        },
+        {
+          "offset_mm": 27,
+          "collisions": []
+        },
+        {
+          "offset_mm": 28,
+          "collisions": []
+        },
+        {
+          "offset_mm": 29,
+          "collisions": []
+        },
+        {
+          "offset_mm": 30,
+          "collisions": []
+        },
+        {
+          "offset_mm": 31,
+          "collisions": []
+        },
+        {
+          "offset_mm": 32,
+          "collisions": []
+        },
+        {
+          "offset_mm": 33,
+          "collisions": []
+        },
+        {
+          "offset_mm": 34,
+          "collisions": []
+        },
+        {
+          "offset_mm": 35,
+          "collisions": []
+        },
+        {
+          "offset_mm": 36,
+          "collisions": []
+        },
+        {
+          "offset_mm": 37,
+          "collisions": []
+        },
+        {
+          "offset_mm": 38,
+          "collisions": []
+        },
+        {
+          "offset_mm": 39,
+          "collisions": []
+        },
+        {
+          "offset_mm": 40,
+          "collisions": []
+        },
+        {
+          "offset_mm": 41,
+          "collisions": []
+        },
+        {
+          "offset_mm": 42,
+          "collisions": []
+        },
+        {
+          "offset_mm": 43,
+          "collisions": []
+        },
+        {
+          "offset_mm": 44,
+          "collisions": []
+        },
+        {
+          "offset_mm": 45,
+          "collisions": []
+        },
+        {
+          "offset_mm": 46,
+          "collisions": []
+        },
+        {
+          "offset_mm": 47,
+          "collisions": []
+        },
+        {
+          "offset_mm": 48,
+          "collisions": []
+        },
+        {
+          "offset_mm": 49,
+          "collisions": []
+        },
+        {
+          "offset_mm": 50,
+          "collisions": []
+        },
+        {
+          "offset_mm": 51,
+          "collisions": []
+        },
+        {
+          "offset_mm": 52,
+          "collisions": []
+        },
+        {
+          "offset_mm": 53,
+          "collisions": []
+        },
+        {
+          "offset_mm": 54,
+          "collisions": []
+        },
+        {
+          "offset_mm": 55,
+          "collisions": []
+        },
+        {
+          "offset_mm": 56,
+          "collisions": []
+        },
+        {
+          "offset_mm": 57,
+          "collisions": []
+        },
+        {
+          "offset_mm": 58,
+          "collisions": []
+        },
+        {
+          "offset_mm": 59,
+          "collisions": []
+        },
+        {
+          "offset_mm": 60,
+          "collisions": []
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "motor_down_R",
+      "method": "continuous conservative solid sweep",
+      "description": "80mm vertically down at original XY; no inward move; serviced track and motor face screws removed; opposite drive retained",
+      "absent": [
+        "BatteryHatch",
+        "BatteryPad54N29",
+        "BatteryPad54N90",
+        "BatteryPadN54N29",
+        "BatteryPadN54N90",
+        "BatteryPullStrap",
+        "BatteryScrewLFront",
+        "BatteryScrewLRear",
+        "BatteryScrewRFront",
+        "BatteryScrewRRear",
+        "BatterySupportWasherLFront",
+        "BatterySupportWasherLRear",
+        "BatterySupportWasherRFront",
+        "BatterySupportWasherRRear",
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5",
+        "BottomServiceCover",
+        "DriveCouplerR",
+        "L298NBaseNutL",
+        "L298NBaseNutR",
+        "L298NBaseScrewL",
+        "L298NBaseScrewR",
+        "L298NBottomPadLB",
+        "L298NBottomPadLF",
+        "L298NBottomPadRB",
+        "L298NBottomPadRF",
+        "L298NCapNutL",
+        "L298NCapNutR",
+        "L298NCapScrewL",
+        "L298NCapScrewR",
+        "L298NCarrier",
+        "L298NEnvelope",
+        "L298NFrontPadL",
+        "L298NFrontPadR",
+        "L298NRearPadL",
+        "L298NRearPadR",
+        "L298NSidePad1B",
+        "L298NSidePad1F",
+        "L298NSidePadR1B",
+        "L298NSidePadR1F",
+        "L298NTopPadLB",
+        "L298NTopPadLF",
+        "L298NTopPadRB",
+        "L298NTopPadRF",
+        "L298NTopRetainer",
+        "MotorFaceScrewR0",
+        "MotorFaceScrewR1",
+        "MotorFaceScrewR2",
+        "MotorFaceScrewR3",
+        "MotorR",
+        "MotorShaftR",
+        "PowerBank",
+        "PowerCableRoute",
+        "TrackMountR",
+        "TrackMountScrewRFront",
+        "TrackMountScrewRRear",
+        "TrackRightChevronTreads",
+        "TrackRightFasteners",
+        "TrackRightRockerPlates",
+        "TrackRightRubberBand",
+        "TrackRightShoulderLugs",
+        "TrackRightSuspensionArms",
+        "TrackRightTreadPads",
+        "TrackRightWheelFaces",
+        "TrackRightWheelHubs",
+        "TrackRightWheelRims",
+        "TrackRightWheelTires"
+      ],
+      "collisions": [],
+      "passed": true
+    }
+  ],
+  "tools": [
+    {
+      "name": "bottom_bit_0",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_bit_1",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_bit_2",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_bit_3",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_bit_4",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "bottom_bit_5",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_bit_L0",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_bit_L1",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_bit_L2",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_bit_L3",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "track_tool_LFront",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "track_tool_LRear",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_bit_R0",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_bit_R1",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_bit_R2",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "motor_face_bit_R3",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "track_tool_RFront",
+      "collisions": [],
+      "passed": true
+    },
+    {
+      "name": "track_tool_RRear",
+      "collisions": [],
+      "passed": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "name": "track_retained_blocks_face_tool_L0",
+      "collisions": [
+        {
+          "moving": "tool",
+          "fixed": "TrackLeftWheelFaces",
+          "volume_mm3": 37.699111843077524
+        },
+        {
+          "moving": "tool",
+          "fixed": "TrackMountL",
+          "volume_mm3": 60.19479928763357
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "track_retained_blocks_face_tool_L1",
+      "collisions": [
+        {
+          "moving": "tool",
+          "fixed": "TrackLeftWheelFaces",
+          "volume_mm3": 37.699111843077524
+        },
+        {
+          "moving": "tool",
+          "fixed": "TrackMountL",
+          "volume_mm3": 42.892611466665144
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "track_retained_blocks_face_tool_L2",
+      "collisions": [
+        {
+          "moving": "tool",
+          "fixed": "TrackLeftWheelFaces",
+          "volume_mm3": 37.69911184307752
+        },
+        {
+          "moving": "tool",
+          "fixed": "TrackMountL",
+          "volume_mm3": 42.89261146666434
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "track_retained_blocks_face_tool_L3",
+      "collisions": [
+        {
+          "moving": "tool",
+          "fixed": "TrackLeftWheelFaces",
+          "volume_mm3": 37.699111843077524
+        },
+        {
+          "moving": "tool",
+          "fixed": "TrackMountL",
+          "volume_mm3": 60.194799287634
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "short_track_screw_withdrawal_LFront",
+      "collisions": [
+        {
+          "moving": "screw",
+          "fixed": "TrackLeftRubberBand",
+          "volume_mm3": 2.0596986551203855
+        },
+        {
+          "moving": "screw",
+          "fixed": "TrackLeftTreadPads",
+          "volume_mm3": 0.6334905995186763
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "short_track_screw_withdrawal_LRear",
+      "collisions": [
+        {
+          "moving": "screw",
+          "fixed": "TrackLeftRubberBand",
+          "volume_mm3": 2.059698655120411
+        },
+        {
+          "moving": "screw",
+          "fixed": "TrackLeftTreadPads",
+          "volume_mm3": 3.5249536011590674
+        },
+        {
+          "moving": "screw",
+          "fixed": "TrackLeftShoulderLugs",
+          "volume_mm3": 6.726240961924055
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "closed_motor_slot_L",
+      "collision_mm3": 335.4906794768541,
+      "passed": true
+    },
+    {
+      "name": "track_retained_blocks_face_tool_R0",
+      "collisions": [
+        {
+          "moving": "tool",
+          "fixed": "TrackRightWheelFaces",
+          "volume_mm3": 37.699111843077524
+        },
+        {
+          "moving": "tool",
+          "fixed": "TrackMountR",
+          "volume_mm3": 60.194799287634126
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "track_retained_blocks_face_tool_R1",
+      "collisions": [
+        {
+          "moving": "tool",
+          "fixed": "TrackRightWheelFaces",
+          "volume_mm3": 37.699111843077524
+        },
+        {
+          "moving": "tool",
+          "fixed": "TrackMountR",
+          "volume_mm3": 42.89261146666533
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "track_retained_blocks_face_tool_R2",
+      "collisions": [
+        {
+          "moving": "tool",
+          "fixed": "TrackRightWheelFaces",
+          "volume_mm3": 37.69911184307752
+        },
+        {
+          "moving": "tool",
+          "fixed": "TrackMountR",
+          "volume_mm3": 42.89261146666473
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "track_retained_blocks_face_tool_R3",
+      "collisions": [
+        {
+          "moving": "tool",
+          "fixed": "TrackRightWheelFaces",
+          "volume_mm3": 37.699111843077524
+        },
+        {
+          "moving": "tool",
+          "fixed": "TrackMountR",
+          "volume_mm3": 60.194799287633806
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "short_track_screw_withdrawal_RFront",
+      "collisions": [
+        {
+          "moving": "screw",
+          "fixed": "TrackRightRubberBand",
+          "volume_mm3": 2.0596986551204486
+        },
+        {
+          "moving": "screw",
+          "fixed": "TrackRightTreadPads",
+          "volume_mm3": 0.6334905995186939
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "short_track_screw_withdrawal_RRear",
+      "collisions": [
+        {
+          "moving": "screw",
+          "fixed": "TrackRightRubberBand",
+          "volume_mm3": 2.059698655120408
+        },
+        {
+          "moving": "screw",
+          "fixed": "TrackRightTreadPads",
+          "volume_mm3": 3.5249536011590745
+        },
+        {
+          "moving": "screw",
+          "fixed": "TrackRightShoulderLugs",
+          "volume_mm3": 6.726240961924097
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "closed_motor_slot_R",
+      "collision_mm3": 335.4906794768541,
+      "passed": true
+    }
+  ],
+  "motor_service_prerequisites": [
+    "Remove unified cover together with the L298N cassette; disconnect its leads first",
+    "Disconnect power and motor leads",
+    "Remove power bank with its independent tray for front track screw access",
+    "Release actual coupling lock",
+    "Remove serviced track assembly and its two screws",
+    "Remove four motor face screws"
+  ],
+  "retained_for_motor_service": [
+    "opposite complete track assembly",
+    "opposite motor",
+    "rear wet bulkhead"
+  ],
+  "coupling_release": "Actual coupling locking details and encoder tail are not modeled; release and cable disconnection require physical confirmation.",
+  "drive_preservation": {
+    "objects": [
+      {
+        "name": "TrackLeftRubberBand",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftTreadPads",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftChevronTreads",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftShoulderLugs",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftWheelTires",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftWheelRims",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftWheelFaces",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftWheelHubs",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftSuspensionArms",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftRockerPlates",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackLeftFasteners",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightRubberBand",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightTreadPads",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightChevronTreads",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightShoulderLugs",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightWheelTires",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightWheelRims",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightWheelFaces",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightWheelHubs",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightSuspensionArms",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightRockerPlates",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackRightFasteners",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "MotorL",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "MotorShaftL",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "DriveCouplerL",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackMountL",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "MotorR",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "MotorShaftR",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "DriveCouplerR",
+        "difference_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "name": "TrackMountR",
+        "difference_mm3": 0.0,
+        "passed": true
+      }
+    ],
+    "translation_mm": {
+      "L": [
+        14,
+        0,
+        0
+      ],
+      "R": [
+        -14,
+        0,
+        0
+      ]
+    },
+    "passed": true
+  },
+  "single_chassis": {
+    "valid": true,
+    "solids": 1,
+    "passed": true
+  },
+  "lower_width": {
+    "stations": [
+      {
+        "y": -50,
+        "z": 40,
+        "width_mm": 132.00000000000006
+      },
+      {
+        "y": 50,
+        "z": 40,
+        "width_mm": 132.00000000000006
+      }
+    ],
+    "passed": true
+  },
+  "simplified_interior": {
+    "forbidden_objects": [],
+    "removed_crossbeams": [
+      {
+        "y_range_mm": [
+          -22.7,
+          -19.2
+        ],
+        "remaining_volume_mm3": 0.0,
+        "passed": true
+      },
+      {
+        "y_range_mm": [
+          19.2,
+          23.9
+        ],
+        "remaining_volume_mm3": 0.0,
+        "passed": true
+      }
+    ],
+    "rear_wet_bulkhead": {
+      "valid": true,
+      "solids": 1,
+      "bbox_mm": [
+        -45.0,
+        25.0,
+        31.0,
+        45.000000000000014,
+        27.000000000000014,
+        94.0
+      ]
+    },
+    "passed": true
+  },
+  "limits": [
+    "Complete track withdrawal is sampled at1mm, not continuously proved.",
+    "Coupling locking hardware, encoder tail, flexible cables and tool handles/hands require physical verification.",
+    "No material, strength, fatigue, thread, tolerance, sealing or manufacturing acceptance."
+  ],
+  "passed": true
+}

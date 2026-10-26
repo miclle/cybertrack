@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-26",
+  "evidence": "user reports both mounting-face-to-tail lengths 57 mm",
+  "lengths_mm": [
+    57,
+    57
+  ],
+  "model_mounting_face_x_mm": [
+    -73,
+    73
+  ],
+  "nominal_tail_x_from_measured_lengths_mm": [
+    -16,
+    16
+  ],
+  "nominal_gap_mm": 32,
+  "directly_reported_gap_mm": 30,
+  "gap_selected_for_study_mm": 30,
+  "study_tail_x_mm": [
+    -15,
+    15
+  ],
+  "extra_inward_allowance_each_side_vs_57mm_lengths_mm": 1,
+  "board_width_mm": 27.5,
+  "nominal_clearance_each_at_32mm_gap_mm": 2.25,
+  "retained_clearance_each_at_30mm_gap_mm": 1.25,
+  "interpretation": "Equal reported lengths support a centred candidate with symmetric mounting faces; keep smaller direct gap. Do not infer actual printed face spacing or measurement precision. Existing study geometry is unchanged.",
+  "manufacturing_released": false
+}

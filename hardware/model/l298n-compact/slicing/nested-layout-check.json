@@ -1,0 +1,32 @@
+{
+  "native_source_sha256": "3f9f222efcc386935aba160477bb2d80b1e67fc083a1e722e1638b6db4423b78",
+  "part_count": 14,
+  "nested_checks": [
+    {
+      "part": "EffectRetainerLMOS",
+      "nested_within": "BatteryHatch",
+      "surface_clearance_mm": 3.199999999999987,
+      "overlap_volume_mm3": 0.0
+    },
+    {
+      "part": "EffectRetainerLBuck",
+      "nested_within": "BatteryHatch",
+      "surface_clearance_mm": 4.0,
+      "overlap_volume_mm3": 0.0
+    },
+    {
+      "part": "EffectRetainerRMOS",
+      "nested_within": "BatteryHatch",
+      "surface_clearance_mm": 3.200000000000003,
+      "overlap_volume_mm3": 0.0
+    },
+    {
+      "part": "EffectRetainerRBuck",
+      "nested_within": "BatteryHatch",
+      "surface_clearance_mm": 4.0,
+      "overlap_volume_mm3": 0.0
+    }
+  ],
+  "passed": true,
+  "scope": "Exact native-solid clearance for intentional nested parts; other projected bounding boxes disjoint in layout.json. Support/brim checked in slicer output separately."
+}

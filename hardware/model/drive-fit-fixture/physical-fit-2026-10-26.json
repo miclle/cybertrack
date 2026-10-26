@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-26",
+  "evidence": "user_report_and_supplied_photo",
+  "printed_and_assembled": true,
+  "user_reports_no_issues": [
+    "fit_without_rework",
+    "motor_and_track_fastening_and_seating",
+    "coupler_fit_and_locking",
+    "overall_alignment_and_no_obvious_warp"
+  ],
+  "motor_tail_minimum_gap_mm": 30,
+  "measurement_endpoints": "closest opposing rear protrusions, including encoders/connectors",
+  "model_motor_placeholder_gap_mm": 52.4,
+  "difference_mm": 22.4,
+  "model_sha256": "f4d01de42c2fa3abc3f9901597ec373d30088fc7465308a571f0b1cdd6bf5bcc",
+  "photo": "assembled-2026-10-26.jpg",
+  "photo_sha256": "801d5c7c0527b336eb85cf5e128a7be92ee260b4553a00be2efedb62b40bd645",
+  "not_established": [
+    "encoder/connector 3D envelope and measurement uncertainty",
+    "2 mm dimensional closure difference between nominal mount spacing and user measurements",
+    "wire bend and plugged-connector service envelope",
+    "exact screw lengths and thread engagement",
+    "numerical front/rear parallelism measurements",
+    "actual print time and filament mass",
+    "powered motion, load and durability"
+  ],
+  "cad_interfaces_modified": false,
+  "motor_mounting_face_to_tail_mm": {
+    "motor_1": 57,
+    "motor_2": 57,
+    "evidence": "user_report_2026-10-26",
+    "endpoint": "mounting face to nearest opposing hard tail protrusion, including encoder/connector"
+  },
+  "dimensional_reconciliation": {
+    "model_mounting_face_separation_mm": 146,
+    "gap_from_57mm_lengths_and_nominal_faces_mm": 32,
+    "reported_direct_gap_mm": 30,
+    "difference_mm": 2,
+    "face_separation_implied_by_all_reported_dimensions_mm": 144,
+    "layout_check_gap_mm": 30,
+    "status": "retain smaller reported gap; actual face separation and measurement uncertainty unresolved"
+  },
+  "l298n_connected_max_thickness_mm": 28.5,
+  "l298n_thickness_evidence": "user measured maximum with control connector attached, 2026-10-26"
+}

@@ -1,0 +1,97 @@
+{
+    "error_string": "Success.",
+    "layer_height": 0.23999999463558197,
+    "peak_rss_mb": 180.609375,
+    "plate_index": 0,
+    "return_code": 0,
+    "sliced_plates": [
+        {
+            "feature_type_times": {
+                "Bottom surface": 119.82201385498047,
+                "Bridge": 138.0838165283203,
+                "Brim": 86.0115966796875,
+                "Custom": 401.89154052734375,
+                "Flush": 26.0,
+                "Gap infill": 11.615966796875,
+                "Inner wall": 1178.5794677734375,
+                "Internal solid infill": 520.5686645507813,
+                "Outer wall": 770.1691284179688,
+                "Overhang wall": 112.64746856689453,
+                "Sparse infill": 393.58294677734375,
+                "Support": 258.86285400390625,
+                "Support interface": 37.287628173828125,
+                "Top surface": 105.65933227539063,
+                "Travel": 705.6608276367188,
+                "Undefined": 699.7748413085938
+            },
+            "filament_change_times": 0,
+            "filaments": [
+                {
+                    "filament_id": "GFL99",
+                    "id": 1,
+                    "main_used_g": 33.968101501464844,
+                    "total_used_g": 33.968101501464844
+                }
+            ],
+            "id": 1,
+            "layer_filament_change": 0,
+            "main_predication": 4412.43896484375,
+            "obj_cached_cnt": 0,
+            "objects": [
+                {
+                    "bbox": {
+                        "depth": 80.0,
+                        "height": 41.599998474121094,
+                        "width": 174.0,
+                        "x": 41.0,
+                        "y": 88.0,
+                        "z": 0.0
+                    },
+                    "id": 5,
+                    "name": "VF01-DriveFitFrame.stl",
+                    "triangle_count": 10016
+                }
+            ],
+            "times": {
+                "conflict_check_time": 0,
+                "detect_overhangs_time": 3,
+                "export_gcode_time": 230,
+                "flush_plan_time": 0,
+                "generate_support_material_time": 299,
+                "infill_generate_time": 26,
+                "infill_time": 48,
+                "ironing_time": 0,
+                "make_perimeters_time": 39,
+                "multifilament_segment_2d_time": 0,
+                "other_slice_time": 1,
+                "prepare_infill_time": 22,
+                "region_split_time": 0,
+                "skirt_brim_time": 4,
+                "slice_layers_time": 15,
+                "sliced_time": 637,
+                "sliced_time_with_cache": 234,
+                "support_detect_time": 10,
+                "support_interface_time": 2,
+                "support_normal_generate_time": 0,
+                "support_toolpath_time": 62,
+                "support_tree_generate_time": 219,
+                "toolpath_time": 12,
+                "wall_time": 24,
+                "wipe_tower_time": 1
+            },
+            "total_predication": 4860.4443359375,
+            "triangle_count": 10016,
+            "warning_message": ""
+        }
+    ],
+    "sparse_infill_density": 10.0,
+    "times": {
+        "export_3mf_time": 126,
+        "export_slicedata_time": 0,
+        "export_time": 412,
+        "import_time": 7,
+        "load_slicedata_time": 0,
+        "prepare_time": 12
+    },
+    "wall_loops": 3
+}

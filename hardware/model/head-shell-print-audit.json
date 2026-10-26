@@ -1,0 +1,637 @@
+{
+  "date": "2026-10-26",
+  "revision": "0.58",
+  "baseline_files": {
+    "source/CyberTrack-design.FCStd": "93edd6253efc2003806bf1f3f520b928863e075e18ae154a302fe74a574ee24c",
+    "CyberTrack.FCStd": "8398011ffad72ded32d5de32afb46c3d2a14b37f3b9ead12be1aae90b86a3d93"
+  },
+  "source_document": "source/CyberTrack-design.FCStd",
+  "source_sha256": "a7b5995f8f2ceffb612d46d17109a891142e0b27805b054863317d3865c98d3d",
+  "delivery_sha256": "3f9f222efcc386935aba160477bb2d80b1e67fc083a1e722e1638b6db4423b78",
+  "original_features": [
+    "HeadShell",
+    "VisorRim",
+    "JawArmor",
+    "JawAccent",
+    "OccipitalFrame",
+    "OccipitalInset",
+    "OccipitalSpine",
+    "OccipitalMark",
+    "SensorMask",
+    "SensorStatusStrip",
+    "CheekArmorL",
+    "CheekArmorR",
+    "AudioSideGuardL",
+    "AudioSideGuardR",
+    "AudioEarRingL",
+    "AudioEarRingR",
+    "AudioEarGrilleL",
+    "AudioEarGrilleR",
+    "EarHubL",
+    "EarHubR",
+    "TempleGuardL",
+    "TempleGuardR",
+    "TempleCrestL",
+    "TempleCrestR",
+    "TempleLowerBladeL",
+    "TempleLowerBladeR",
+    "EarOuterArcL",
+    "EarOuterArcR",
+    "OccipitalLouverL0",
+    "OccipitalLouverL1",
+    "OccipitalLouverL2",
+    "OccipitalLouverR0",
+    "OccipitalLouverR1",
+    "OccipitalLouverR2"
+  ],
+  "connector_count": 14,
+  "connectors": [
+    {
+      "name": "JawTieR",
+      "volume_mm3": 153.0,
+      "contacts": [
+        {
+          "object": "HeadShell",
+          "overlap_mm3": 78.07176118456053
+        },
+        {
+          "object": "JawArmor",
+          "overlap_mm3": 18.0
+        }
+      ]
+    },
+    {
+      "name": "JawTieL",
+      "volume_mm3": 153.0,
+      "contacts": [
+        {
+          "object": "HeadShell",
+          "overlap_mm3": 78.07185574950735
+        },
+        {
+          "object": "JawArmor",
+          "overlap_mm3": 18.0
+        }
+      ]
+    },
+    {
+      "name": "SensorTieL",
+      "volume_mm3": 72.0,
+      "contacts": [
+        {
+          "object": "VisorRim",
+          "overlap_mm3": 15.199999999999804
+        },
+        {
+          "object": "SensorMask",
+          "overlap_mm3": 17.600000000000016
+        }
+      ]
+    },
+    {
+      "name": "CheekTieL",
+      "volume_mm3": 72.0,
+      "contacts": [
+        {
+          "object": "HeadShell",
+          "overlap_mm3": 13.999999999999996
+        },
+        {
+          "object": "CheekArmorL",
+          "overlap_mm3": 24.0
+        }
+      ]
+    },
+    {
+      "name": "EarTieL172",
+      "volume_mm3": 39.99999999999999,
+      "contacts": [
+        {
+          "object": "AudioSideGuardL",
+          "overlap_mm3": 4.095531786723283
+        },
+        {
+          "object": "AudioEarRingL",
+          "overlap_mm3": 16.382127146892664
+        },
+        {
+          "object": "AudioEarGrilleL",
+          "overlap_mm3": 11.603627351801254
+        }
+      ]
+    },
+    {
+      "name": "EarTieL200",
+      "volume_mm3": 39.99999999999999,
+      "contacts": [
+        {
+          "object": "AudioSideGuardL",
+          "overlap_mm3": 4.095531786723286
+        },
+        {
+          "object": "AudioEarRingL",
+          "overlap_mm3": 16.38212714689268
+        },
+        {
+          "object": "AudioEarGrilleL",
+          "overlap_mm3": 11.603627351801453
+        }
+      ]
+    },
+    {
+      "name": "EarHubTieL",
+      "volume_mm3": 134.69578502266242,
+      "contacts": [
+        {
+          "object": "AudioEarGrilleL",
+          "overlap_mm3": 36.10319510776173
+        },
+        {
+          "object": "EarHubL",
+          "overlap_mm3": 38.48451000647498
+        }
+      ]
+    },
+    {
+      "name": "SensorTieR",
+      "volume_mm3": 72.0,
+      "contacts": [
+        {
+          "object": "VisorRim",
+          "overlap_mm3": 15.199999999999804
+        },
+        {
+          "object": "SensorMask",
+          "overlap_mm3": 17.600000000000062
+        }
+      ]
+    },
+    {
+      "name": "CheekTieR",
+      "volume_mm3": 72.0,
+      "contacts": [
+        {
+          "object": "HeadShell",
+          "overlap_mm3": 13.99999999999999
+        },
+        {
+          "object": "CheekArmorR",
+          "overlap_mm3": 24.0
+        }
+      ]
+    },
+    {
+      "name": "EarTieR172",
+      "volume_mm3": 39.99999999999999,
+      "contacts": [
+        {
+          "object": "AudioSideGuardR",
+          "overlap_mm3": 4.095531786723172
+        },
+        {
+          "object": "AudioEarRingR",
+          "overlap_mm3": 16.382127146892675
+        },
+        {
+          "object": "AudioEarGrilleR",
+          "overlap_mm3": 11.603627351801217
+        }
+      ]
+    },
+    {
+      "name": "EarTieR200",
+      "volume_mm3": 39.99999999999999,
+      "contacts": [
+        {
+          "object": "AudioSideGuardR",
+          "overlap_mm3": 4.095531786723167
+        },
+        {
+          "object": "AudioEarRingR",
+          "overlap_mm3": 16.382127146892664
+        },
+        {
+          "object": "AudioEarGrilleR",
+          "overlap_mm3": 11.60362735180102
+        }
+      ]
+    },
+    {
+      "name": "EarHubTieR",
+      "volume_mm3": 134.69578502266242,
+      "contacts": [
+        {
+          "object": "AudioEarGrilleR",
+          "overlap_mm3": 36.103195107761735
+        },
+        {
+          "object": "EarHubR",
+          "overlap_mm3": 38.48451000647498
+        }
+      ]
+    },
+    {
+      "name": "SensorMaskSeam",
+      "volume_mm3": 401.63925250510795,
+      "contacts": [
+        {
+          "object": "VisorRim",
+          "overlap_mm3": 101.18621470770017
+        },
+        {
+          "object": "SensorMask",
+          "overlap_mm3": 99.63341154488188
+        },
+        {
+          "object": "SensorStatusStrip",
+          "overlap_mm3": 0.7999999999999545
+        }
+      ]
+    },
+    {
+      "name": "OccipitalInsetSeam",
+      "volume_mm3": 323.3270282001683,
+      "contacts": [
+        {
+          "object": "OccipitalFrame",
+          "overlap_mm3": 81.57984100873301
+        },
+        {
+          "object": "OccipitalInset",
+          "overlap_mm3": 80.08367309134309
+        },
+        {
+          "object": "OccipitalSpine",
+          "overlap_mm3": 4.166147368421018
+        }
+      ]
+    }
+  ],
+  "size_xyz_mm": [
+    179.0,
+    122.5,
+    55.10000009999999
+  ],
+  "volume_mm3": 150141.32302110613,
+  "valid": true,
+  "solids": 1,
+  "original_material_removed_mm3": 6.927211801165498,
+  "static_checks": [
+    {
+      "object": "UltrasonicRingL",
+      "category": "component",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "UltrasonicFaceL",
+      "category": "component",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "UltrasonicRingR",
+      "category": "component",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "UltrasonicFaceR",
+      "category": "component",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "ElectronicsTray",
+      "category": "structure",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "PowerCableRoute",
+      "category": "envelope",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "HeadCableGrommet",
+      "category": "structure",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "WaterHoseRoute",
+      "category": "envelope",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BubbleGunHoseRoute",
+      "category": "envelope",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "BreadboardEnvelope",
+      "category": "envelope",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "UltrasonicPCBEnvelope",
+      "category": "envelope",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "UltrasonicRearEnvelope",
+      "category": "envelope",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "UltrasonicTopConnector",
+      "category": "envelope",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "UltrasonicWireSpace",
+      "category": "envelope",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "StopSignalRoute",
+      "category": "clearance",
+      "overlap_mm3": 0.0
+    },
+    {
+      "object": "PrintNeck",
+      "category": "",
+      "overlap_mm3": 0.0
+    }
+  ],
+  "services": {
+    "crown_up": {
+      "method": "sampled rigid translation against PP07",
+      "positions_mm": [
+        0,
+        0.1,
+        0.25,
+        0.5,
+        1,
+        2,
+        3,
+        5,
+        10,
+        20,
+        40,
+        65
+      ],
+      "overlaps": [],
+      "passed": true
+    },
+    "tray_up": {
+      "method": "continuous conservative prism union against PP07",
+      "translation_mm": [
+        0,
+        0,
+        85
+      ],
+      "overlap_mm3": 0.0,
+      "passed": true,
+      "prerequisites": "remove crown and screws, unplug and park harness; sensor module may remain"
+    },
+    "tray_tool_access": {
+      "tests": [
+        {
+          "x": -57,
+          "y": -40,
+          "diameter_mm": 8,
+          "overlap_mm3": 0.0
+        },
+        {
+          "x": -57,
+          "y": -5,
+          "diameter_mm": 8,
+          "overlap_mm3": 0.0
+        },
+        {
+          "x": 57,
+          "y": -40,
+          "diameter_mm": 8,
+          "overlap_mm3": 0.0
+        },
+        {
+          "x": 57,
+          "y": -5,
+          "diameter_mm": 8,
+          "overlap_mm3": 0.0
+        }
+      ],
+      "passed": true
+    },
+    "ultrasonic_rear_11mm": {
+      "method": "continuous cuboid and cylinder/capsule sweep against PP07",
+      "overlap_mm3": 0.0,
+      "passed": true,
+      "prerequisites": "remove crown and tray, unplug and release sensor mounting; actual mount still unmodeled"
+    },
+    "ultrasonic_up_70mm": {
+      "method": "continuous cuboid and cylinder/capsule sweep against PP07",
+      "overlap_mm3": 0.0,
+      "passed": true,
+      "prerequisites": "remove crown and tray, unplug and release sensor mounting; actual mount still unmodeled"
+    }
+  },
+  "crown_head_overlap_mm3": 0,
+  "screw": {
+    "outer_diameter_mm": 2.5,
+    "total_length_mm": 8.6,
+    "head_diameter_mm": 3.9,
+    "head_height_mm": 1.0,
+    "under_head_length_mm": 7.6,
+    "thread_type": "coarse/self-tapping appearance; pitch and root diameter unmeasured"
+  },
+  "pilot_diameter_candidate_mm": 2.1,
+  "screw_checks": [
+    {
+      "name": "BreadboardScrew0",
+      "cover_intersection_mm3": 0.0,
+      "thread_engagement_mm": 5.1,
+      "blind_tip_clearance_mm": 1.9
+    },
+    {
+      "name": "BreadboardScrew1",
+      "cover_intersection_mm3": 0.0,
+      "thread_engagement_mm": 5.1,
+      "blind_tip_clearance_mm": 1.9
+    },
+    {
+      "name": "BreadboardScrew2",
+      "cover_intersection_mm3": 0.0,
+      "thread_engagement_mm": 5.1,
+      "blind_tip_clearance_mm": 1.9
+    },
+    {
+      "name": "BreadboardScrew3",
+      "cover_intersection_mm3": 0.0,
+      "thread_engagement_mm": 5.1,
+      "blind_tip_clearance_mm": 1.9
+    },
+    {
+      "name": "CrownScrewLFront",
+      "cover_intersection_mm3": 0.0,
+      "thread_engagement_mm": 5.1,
+      "blind_tip_clearance_mm": 1.0
+    },
+    {
+      "name": "CrownScrewLRear",
+      "cover_intersection_mm3": 0.0,
+      "thread_engagement_mm": 5.1,
+      "blind_tip_clearance_mm": 1.0
+    },
+    {
+      "name": "CrownScrewRFront",
+      "cover_intersection_mm3": 0.0,
+      "thread_engagement_mm": 5.1,
+      "blind_tip_clearance_mm": 1.0
+    },
+    {
+      "name": "CrownScrewRRear",
+      "cover_intersection_mm3": 0.0,
+      "thread_engagement_mm": 5.1,
+      "blind_tip_clearance_mm": 1.0
+    }
+  ],
+  "crown_receiver": {
+    "outer_diameter_mm": 7,
+    "top_z_mm": 216.1,
+    "pilot_bottom_z_mm": 210,
+    "clearance_pocket_diameter_mm": 7.5,
+    "pocket_top_z_mm": 216.35,
+    "head_seat_z_mm": 218.6
+  },
+  "removed_inserts": [
+    "CrownInsertLFront",
+    "CrownInsertLRear",
+    "CrownInsertRFront",
+    "CrownInsertRRear",
+    "BreadboardInsert0",
+    "BreadboardInsert1",
+    "BreadboardInsert2",
+    "BreadboardInsert3"
+  ],
+  "unchanged_geometry_counts": {
+    "source": 409,
+    "delivery": 259
+  },
+  "changed_source": [
+    "HeadShell",
+    "PrintCrown",
+    "HeadCrownShell",
+    "BreadboardScrew0",
+    "BreadboardScrew1",
+    "BreadboardScrew2",
+    "BreadboardScrew3",
+    "CrownScrewLFront",
+    "CrownScrewLRear",
+    "CrownScrewRFront",
+    "CrownScrewRRear"
+  ],
+  "unchanged_method": "cleaned BRep equality; Boolean symmetric difference fallback <1e-5 mm3; saved shape signatures",
+  "source_visibility_changed_only_for_merged_members": [
+    "HeadShell",
+    "VisorRim",
+    "JawArmor",
+    "JawAccent",
+    "OccipitalFrame",
+    "OccipitalInset",
+    "OccipitalSpine",
+    "OccipitalMark",
+    "SensorMask",
+    "SensorStatusStrip",
+    "CheekArmorL",
+    "CheekArmorR",
+    "AudioSideGuardL",
+    "AudioSideGuardR",
+    "AudioEarRingL",
+    "AudioEarRingR",
+    "AudioEarGrilleL",
+    "AudioEarGrilleR",
+    "EarHubL",
+    "EarHubR",
+    "TempleGuardL",
+    "TempleGuardR",
+    "TempleCrestL",
+    "TempleCrestR",
+    "TempleLowerBladeL",
+    "TempleLowerBladeR",
+    "EarOuterArcL",
+    "EarOuterArcR",
+    "OccipitalLouverL0",
+    "OccipitalLouverL1",
+    "OccipitalLouverL2",
+    "OccipitalLouverR0",
+    "OccipitalLouverR1",
+    "OccipitalLouverR2"
+  ],
+  "chassis_geometry_unchanged": true,
+  "independent_parts": [
+    "PrintCrown",
+    "ElectronicsTray"
+  ],
+  "files": {
+    "PP07-HeadShell.stl": {
+      "closed": true,
+      "nonmanifold": false,
+      "components": 1,
+      "facets": 15494,
+      "sha256": "932281e9f81c6aec6912c20ed070747488b39338fd9ea34184a40d4669fe9724",
+      "translation_xyz_mm": [
+        -0.0,
+        26.75,
+        -160.9999999
+      ],
+      "rotation_degrees": 0,
+      "orientation": "assembly +Z up; open side up"
+    },
+    "PP07-HeadShell.step": {
+      "sha256": "41658fe008349b66be74aab3279f7b835ba08c279cb4a1c6e65fffc2ffd7e396",
+      "valid": true,
+      "solids": 1,
+      "volume_difference_mm3": 0.1282548371818848,
+      "usage": "exchange only; native FCStd geometry authoritative"
+    },
+    "PP05-Crown.stl": {
+      "closed": true,
+      "nonmanifold": false,
+      "components": 1,
+      "facets": 5006,
+      "sha256": "cb2cd63d8cc0ca1de3100e12e732ec4ed6cdebdb6f43fa6581a66137c7d835c1",
+      "translation_xyz_mm": [
+        -7.105427357601002e-15,
+        26.0,
+        -196.0
+      ],
+      "rotation_degrees": 0,
+      "orientation": "assembly +Z up; decorated exterior up; supports required inside"
+    },
+    "PP05-Crown.step": {
+      "sha256": "75ef5f253a71fb9fb5a3b30ab0f433964c73b72fa2c81b8b43cbcf3651ed73cf",
+      "valid": true,
+      "solids": 1,
+      "volume_difference_mm3": 4.3641289359511575,
+      "usage": "exchange only; native FCStd geometry authoritative"
+    },
+    "Head-ScrewFitCoupon.stl": {
+      "closed": true,
+      "nonmanifold": false,
+      "components": 4,
+      "facets": 3276,
+      "sha256": "191576aabad582602d2eb3b7b332acd8dc98766f6a8b8260caa8b771675989cc"
+    },
+    "Head-ElectronicsTray.stl": {
+      "closed": true,
+      "nonmanifold": false,
+      "components": 1,
+      "facets": 1678,
+      "sha256": "cb55e681d1ad80fa23524923f35b6bcb372c24e5b556d1a4638d97d995d14d63"
+    }
+  },
+  "saved_and_reopened": true,
+  "geometry_checks_passed": true,
+  "slicing_verified": true,
+  "physical_fit_verified": false,
+  "manufacturing_released": false,
+  "limits": "Local CAD and sampled crown path and continuous sensor sweeps; continuous tray envelope. Existing PP02 conflict retained. Pilot/thread, strength, support removal and physical assembly require print checks.",
+  "slicing_report": "print-parts/PP07-slicing/report.json",
+  "independent_parts_slicing_report": "print-parts/PP07-slicing/independent-parts.json"
+}

@@ -1,0 +1,53 @@
+{
+  "selected": "upright-normal-all",
+  "comparisons": [
+    {
+      "candidate": "upright-tree-bed",
+      "seconds": 19848.791015625,
+      "grams": 156.77041625976562,
+      "warning": "Unsupported overhangs were detected.\nModel \"PP04-LowerTub.stl\" has 6 overhang region(s) that could not get support. Try adjusting the support settings or re-orienting the object."
+    },
+    {
+      "candidate": "upright-tree-all",
+      "seconds": 19877.306640625,
+      "grams": 156.778076171875,
+      "warning": "Unsupported overhangs were detected.\nModel \"PP04-LowerTub.stl\" has 2 overhang region(s) that could not get support. Try adjusting the support settings or re-orienting the object."
+    },
+    {
+      "candidate": "inverted-tree-bed",
+      "seconds": 27661.763671875,
+      "grams": 193.07936096191406,
+      "warning": "Unsupported overhangs were detected.\nModel \"PP04-LowerTub.stl\" has 10 overhang region(s) that could not get support. Try adjusting the support settings or re-orienting the object."
+    },
+    {
+      "candidate": "upright-normal-all",
+      "seconds": 19196.998046875,
+      "grams": 174.71063232421875,
+      "warning": ""
+    }
+  ],
+  "slicer_success": true,
+  "model_warning": "",
+  "estimated_seconds": 19196.998046875,
+  "estimated_grams": 174.71063232421875,
+  "first_layer_xy_bounds_mm": [
+    36.914060000000006,
+    25.4401,
+    219.08626,
+    230.56026000000003
+  ],
+  "bed_bounds_check": true,
+  "mesh_repairs": {
+    "face_count": "23900",
+    "edges_fixed": "0",
+    "degenerate_facets": "0",
+    "facets_removed": "0",
+    "facets_reversed": "0",
+    "backwards_edges": "0"
+  },
+  "project_sha256": "930c0dbefc4ebc1a550b90fee879c9291ce6328210c59d83425d1a915903c37e",
+  "gui_toolpath_review": false,
+  "physical_print_verified": false,
+  "cli_note": "T65535 diagnostic also occurs in prior VF01 slicing; command comes from unchanged bundled P2S ending G-code.",
+  "scope": "PP04 chassis only; bottom service cover and L298N carrier are separate parts"
+}

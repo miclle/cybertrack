@@ -1,0 +1,213 @@
+{
+  "candidate": "024-snug5",
+  "project_sha256": "4fbe2534ae03e6c72273cb0f0c2fa2e86ee97acc22de21445ae1025f227b36d5",
+  "passed": true,
+  "checks": [
+    {
+      "name": "track_lug_-1_-28.1",
+      "baseline": {
+        "z": 9.32,
+        "material_samples": 1080,
+        "covered": 1080,
+        "coverage": 1.0,
+        "segments": 67
+      },
+      "optimized": {
+        "z": 9.32,
+        "material_samples": 1080,
+        "covered": 1080,
+        "coverage": 1.0,
+        "segments": 59
+      }
+    },
+    {
+      "name": "track_lug_-1_28.1",
+      "baseline": {
+        "z": 9.32,
+        "material_samples": 1080,
+        "covered": 1080,
+        "coverage": 1.0,
+        "segments": 66
+      },
+      "optimized": {
+        "z": 9.32,
+        "material_samples": 1080,
+        "covered": 1080,
+        "coverage": 1.0,
+        "segments": 60
+      }
+    },
+    {
+      "name": "motor_face_-1_-14",
+      "baseline": {
+        "z": 22.04,
+        "material_samples": 416,
+        "covered": 404,
+        "coverage": 0.9711538461538461,
+        "segments": 24
+      },
+      "optimized": {
+        "z": 22.04,
+        "material_samples": 416,
+        "covered": 404,
+        "coverage": 0.9711538461538461,
+        "segments": 22
+      }
+    },
+    {
+      "name": "motor_face_-1_14",
+      "baseline": {
+        "z": 22.04,
+        "material_samples": 416,
+        "covered": 412,
+        "coverage": 0.9903846153846154,
+        "segments": 31
+      },
+      "optimized": {
+        "z": 22.04,
+        "material_samples": 416,
+        "covered": 404,
+        "coverage": 0.9711538461538461,
+        "segments": 22
+      }
+    },
+    {
+      "name": "outer_cover_boss_-1_-22",
+      "baseline": {
+        "z": 13.88,
+        "material_samples": 302,
+        "covered": 280,
+        "coverage": 0.9271523178807947,
+        "segments": 198
+      },
+      "optimized": {
+        "z": 13.88,
+        "material_samples": 302,
+        "covered": 280,
+        "coverage": 0.9271523178807947,
+        "segments": 200
+      }
+    },
+    {
+      "name": "outer_cover_boss_-1_22",
+      "baseline": {
+        "z": 13.88,
+        "material_samples": 302,
+        "covered": 280,
+        "coverage": 0.9271523178807947,
+        "segments": 247
+      },
+      "optimized": {
+        "z": 13.88,
+        "material_samples": 302,
+        "covered": 289,
+        "coverage": 0.956953642384106,
+        "segments": 237
+      }
+    },
+    {
+      "name": "track_lug_1_-28.1",
+      "baseline": {
+        "z": 9.32,
+        "material_samples": 1080,
+        "covered": 1080,
+        "coverage": 1.0,
+        "segments": 65
+      },
+      "optimized": {
+        "z": 9.32,
+        "material_samples": 1080,
+        "covered": 1080,
+        "coverage": 1.0,
+        "segments": 60
+      }
+    },
+    {
+      "name": "track_lug_1_28.1",
+      "baseline": {
+        "z": 9.32,
+        "material_samples": 1080,
+        "covered": 1080,
+        "coverage": 1.0,
+        "segments": 65
+      },
+      "optimized": {
+        "z": 9.32,
+        "material_samples": 1080,
+        "covered": 1080,
+        "coverage": 1.0,
+        "segments": 59
+      }
+    },
+    {
+      "name": "motor_face_1_-14",
+      "baseline": {
+        "z": 22.04,
+        "material_samples": 416,
+        "covered": 404,
+        "coverage": 0.9711538461538461,
+        "segments": 24
+      },
+      "optimized": {
+        "z": 22.04,
+        "material_samples": 416,
+        "covered": 410,
+        "coverage": 0.9855769230769231,
+        "segments": 26
+      }
+    },
+    {
+      "name": "motor_face_1_14",
+      "baseline": {
+        "z": 22.04,
+        "material_samples": 416,
+        "covered": 404,
+        "coverage": 0.9711538461538461,
+        "segments": 24
+      },
+      "optimized": {
+        "z": 22.04,
+        "material_samples": 416,
+        "covered": 404,
+        "coverage": 0.9711538461538461,
+        "segments": 22
+      }
+    },
+    {
+      "name": "outer_cover_boss_1_-22",
+      "baseline": {
+        "z": 13.88,
+        "material_samples": 302,
+        "covered": 281,
+        "coverage": 0.9304635761589404,
+        "segments": 197
+      },
+      "optimized": {
+        "z": 13.88,
+        "material_samples": 302,
+        "covered": 280,
+        "coverage": 0.9271523178807947,
+        "segments": 195
+      }
+    },
+    {
+      "name": "outer_cover_boss_1_22",
+      "baseline": {
+        "z": 13.88,
+        "material_samples": 302,
+        "covered": 267,
+        "coverage": 0.8841059602649006,
+        "segments": 242
+      },
+      "optimized": {
+        "z": 13.88,
+        "material_samples": 302,
+        "covered": 288,
+        "coverage": 0.9536423841059603,
+        "segments": 237
+      }
+    }
+  ],
+  "method": "12 retained critical CAD sections; four old inner-boss positions contained no CAD material and were excluded, 0.25 mm sample grid, emitted extrusion footprint; support excluded, arcs subdivided at <=0.12 mm. Optimized material coverage >=70% and no more than 8 percentage points below baseline.",
+  "limits": "Checks material presence at sampled sections only; does not prove full-layer connectivity, physical strength, layer adhesion, dimensional fit or support removability."
+}

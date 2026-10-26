@@ -1,0 +1,92 @@
+{
+  "base": "/Users/miclle/github/miclle/cybertrack/hardware/model/print-ready/CyberTrack-Ready-5plates.3mf",
+  "base_sha256": "b0d8ee4325535e40a5029abb70f001c7e95cc8d113c5a396973d46cdbaa296e0",
+  "project_sha256": "af9a0276772a8ac94e7dbfc4e868ce319710bc54d60c21f74461a377e08c8574",
+  "old_gcodes_unchanged": {
+    "Metadata/plate_4.gcode": "e22fae19dd02c0f9f6d29b29ca8552530ac0b0d1616aa8700c5a4bd333a3afa1",
+    "Metadata/plate_1.gcode": "25ac7aff9e6947e6aa4453f843b9e62e79a8fb6db8491c735aaecc1003b04517",
+    "Metadata/plate_2.gcode": "cf9ce3ce0f6020a55c48c09c7a95944435f6de1f49c3c6cc2f2d834c04ef172e",
+    "Metadata/plate_3.gcode": "0a017fdac32bcaa68d9dd2266f6486e606a852546f733a7e10fdd98a546fa780",
+    "Metadata/plate_5.gcode": "f825efbb797395c93ffbd23670f11f22871308ca5ca6a45cca2e8a161fdbf579"
+  },
+  "old_plate_count": 5,
+  "new_plate_count": 6,
+  "new_objects": [
+    {
+      "name": "WaterPod",
+      "object_id": "50",
+      "identify_id": 8
+    },
+    {
+      "name": "BubblePod",
+      "object_id": "52",
+      "identify_id": 12
+    },
+    {
+      "name": "EffectTray",
+      "object_id": "54",
+      "identify_id": 16
+    },
+    {
+      "name": "IgnitionMOSCarrier",
+      "object_id": "56",
+      "identify_id": 20
+    },
+    {
+      "name": "IgnitionMOSRetainer",
+      "object_id": "58",
+      "identify_id": 24
+    },
+    {
+      "name": "ChestAudioPanel",
+      "object_id": "60",
+      "identify_id": 28
+    },
+    {
+      "name": "PrintChestGuardL",
+      "object_id": "62",
+      "identify_id": 32
+    },
+    {
+      "name": "PrintChestGuardR",
+      "object_id": "64",
+      "identify_id": 36
+    },
+    {
+      "name": "LowerChin",
+      "object_id": "66",
+      "identify_id": 40
+    },
+    {
+      "name": "ChestBadge",
+      "object_id": "68",
+      "identify_id": 44
+    },
+    {
+      "name": "WaterLidMark",
+      "object_id": "70",
+      "identify_id": 48
+    },
+    {
+      "name": "BubbleLidMark",
+      "object_id": "72",
+      "identify_id": 52
+    }
+  ],
+  "overrides": {
+    "bottom_shell_layers": "4",
+    "brim_width": "3",
+    "sparse_infill_density": "10%",
+    "support_base_pattern_spacing": "4",
+    "support_style": "snug",
+    "support_type": "normal(auto)",
+    "top_shell_layers": "4",
+    "top_shell_thickness": "1.0",
+    "wall_generator": "arachne",
+    "wall_loops": "3"
+  },
+  "new_seconds": 5403.61279296875,
+  "new_grams": 59.8727912902832,
+  "warning": "",
+  "limits": "Existing model/settings retained; grid origins shifted for three columns. UI inspection remains separately recorded."
+}

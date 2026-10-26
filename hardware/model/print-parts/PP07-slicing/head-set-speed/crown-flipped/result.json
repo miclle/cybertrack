@@ -1,0 +1,105 @@
+{
+    "error_string": "Success.",
+    "layer_height": 0.2800000011920929,
+    "peak_rss_mb": 592.015625,
+    "plate_index": 0,
+    "return_code": 0,
+    "sliced_plates": [
+        {
+            "feature_type_times": {
+                "Bridge": 1215.5618896484375,
+                "Brim": 9.20644474029541,
+                "Custom": 402.36358642578125,
+                "Flush": 26.0,
+                "Gap infill": 76.88176727294922,
+                "Inner wall": 547.831787109375,
+                "Internal solid infill": 811.8817749023438,
+                "Outer wall": 1040.8052978515625,
+                "Overhang wall": 1097.676513671875,
+                "Sparse infill": 424.5051574707031,
+                "Support": 3952.46826171875,
+                "Support interface": 684.2064819335938,
+                "Top surface": 255.46017456054688,
+                "Travel": 3161.114013671875,
+                "Undefined": 3154.7353515625
+            },
+            "filament_change_times": 0,
+            "filaments": [
+                {
+                    "filament_id": "GFA00",
+                    "id": 1,
+                    "main_used_g": 100.5055160522461,
+                    "total_used_g": 100.5055160522461
+                }
+            ],
+            "id": 1,
+            "layer_filament_change": 0,
+            "main_predication": 13253.05078125,
+            "obj_cached_cnt": 0,
+            "objects": [
+                {
+                    "bbox": {
+                        "depth": 124.0,
+                        "height": 32.0,
+                        "width": 162.3333282470703,
+                        "x": 46.833335876464844,
+                        "y": 66.0,
+                        "z": 0.0
+                    },
+                    "id": 5,
+                    "name": "PP07-Crown.stl",
+                    "triangle_count": 5006
+                }
+            ],
+            "times": {
+                "conflict_check_time": 0,
+                "detect_overhangs_time": 42,
+                "export_gcode_time": 1206,
+                "flush_plan_time": 0,
+                "generate_support_material_time": 16992,
+                "infill_generate_time": 96,
+                "infill_time": 204,
+                "ironing_time": 0,
+                "make_perimeters_time": 63,
+                "multifilament_segment_2d_time": 0,
+                "other_slice_time": 1,
+                "prepare_infill_time": 108,
+                "region_split_time": 0,
+                "skirt_brim_time": 14,
+                "slice_layers_time": 13,
+                "sliced_time": 18606,
+                "sliced_time_with_cache": 1220,
+                "support_detect_time": 37,
+                "support_interface_time": 38,
+                "support_normal_generate_time": 0,
+                "support_toolpath_time": 6328,
+                "support_tree_generate_time": 10234,
+                "toolpath_time": 45,
+                "wall_time": 50,
+                "wipe_tower_time": 1
+            },
+            "total_predication": 13701.03515625,
+            "triangle_count": 5006,
+            "warning_message": "Unsupported overhangs were detected.\nModel \"PP07-Crown.stl\" has 1 overhang region(s) that could not get support. Try adjusting the support settings or re-orienting the object."
+        }
+    ],
+    "sparse_infill_density": 8.0,
+    "times": {
+        "export_3mf_time": 555,
+        "export_slicedata_time": 0,
+        "export_time": 849,
+        "import_time": 14,
+        "load_slicedata_time": 0,
+        "prepare_time": 15
+    },
+    "upward_compatible_machine": [
+        "Bambu Lab A1 0.4 nozzle",
+        "Bambu Lab H2S 0.4 nozzle",
+        "Bambu Lab H2D 0.4 nozzle",
+        "Bambu Lab H2D Pro 0.4 nozzle",
+        "Bambu Lab H2C 0.4 nozzle",
+        "Bambu Lab X2D 0.4 nozzle",
+        "Bambu Lab A2L 0.4 nozzle"
+    ],
+    "wall_loops": 2
+}

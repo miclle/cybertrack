@@ -1,0 +1,5575 @@
+{
+  "model_sha256": "8996fe24d9a8ef6f8c4e8007f2920a6194c04b7bc8ea47f379ae222bdbe7fd97",
+  "project_sha256": "b0d8ee4325535e40a5029abb70f001c7e95cc8d113c5a396973d46cdbaa296e0",
+  "objects": [
+    {
+      "name": "TrackLeftRubberBand",
+      "label": "履带 · 连续橡胶履带 · 左",
+      "category": "drive",
+      "solids": 1,
+      "valid": true,
+      "volume": 37367.41960436348,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧连续橡胶履带"
+      },
+      "bbox": [
+        70.0,
+        -70.3473977629341,
+        2.204409128110335,
+        112.0,
+        70.3473977629341,
+        87.84032084142676
+      ]
+    },
+    {
+      "name": "TrackLeftTreadPads",
+      "label": "履带 · 胎块底座 · 左",
+      "category": "drive",
+      "solids": 48,
+      "valid": true,
+      "volume": 7434.240000000004,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧履带胎块底座（48节）"
+      },
+      "bbox": [
+        69.0,
+        -70.80664146655073,
+        1.7132793670207433,
+        113.0,
+        70.79932573725762,
+        88.31763452160439
+      ]
+    },
+    {
+      "name": "TrackLeftChevronTreads",
+      "label": "履带 · 人字形抓地块 · 左",
+      "category": "drive",
+      "solids": 96,
+      "valid": true,
+      "volume": 10027.007999999976,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧人字形抓地块（96块）"
+      },
+      "bbox": [
+        71.0,
+        -72.44587445204442,
+        -2.4891304786271016e-09,
+        111.0,
+        72.55412555288818,
+        89.99999999999167
+      ]
+    },
+    {
+      "name": "TrackLeftShoulderLugs",
+      "label": "履带 · 肩部胎块 · 左",
+      "category": "drive",
+      "solids": 96,
+      "valid": true,
+      "volume": 1710.7200000000012,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧履带肩部胎块（96块）"
+      },
+      "bbox": [
+        68.0,
+        -72.12597832528954,
+        0.3592092608914952,
+        114.0,
+        72.17161352821078,
+        89.657515644071
+      ]
+    },
+    {
+      "name": "TrackLeftWheelTires",
+      "label": "履带 · 橡胶轮组 · 左",
+      "category": "drive",
+      "solids": 7,
+      "valid": true,
+      "volume": 7934.370788786179,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧驱动轮与导向轮橡胶轮组"
+      },
+      "bbox": [
+        102.5,
+        -63.835427191828614,
+        3.3000000000000007,
+        107.0,
+        63.83542719182863,
+        84.84032084142676
+      ]
+    },
+    {
+      "name": "TrackLeftWheelRims",
+      "label": "履带 · 金属轮圈 · 左",
+      "category": "drive",
+      "solids": 14,
+      "valid": true,
+      "volume": 6524.986468673521,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧金属轮圈"
+      },
+      "bbox": [
+        102.5,
+        -62.835427191828614,
+        4.300000000000001,
+        108.0,
+        62.83542719182863,
+        83.84032084142676
+      ]
+    },
+    {
+      "name": "TrackLeftWheelFaces",
+      "label": "履带 · 镂空轮盘 · 左",
+      "category": "drive",
+      "solids": 7,
+      "valid": true,
+      "volume": 9495.759033651344,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧镂空轮盘"
+      },
+      "bbox": [
+        104.0,
+        -60.23542719182862,
+        6.9,
+        107.0,
+        60.235427191828634,
+        81.24032084142675
+      ]
+    },
+    {
+      "name": "TrackLeftWheelHubs",
+      "label": "履带 · 轮毂与垫圈 · 左",
+      "category": "drive",
+      "solids": 15,
+      "valid": true,
+      "volume": 2283.181679227195,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧阶梯轮毂与垫圈"
+      },
+      "bbox": [
+        98.0,
+        -51.13542719182862,
+        9.0,
+        111.5,
+        51.13542719182863,
+        65.0
+      ]
+    },
+    {
+      "name": "TrackLeftSuspensionArms",
+      "label": "履带 · 悬挂支臂与轴套 · 左",
+      "category": "drive",
+      "solids": 2,
+      "valid": true,
+      "volume": 1941.709416921318,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧悬挂支臂与轴套"
+      },
+      "bbox": [
+        110.0,
+        -47.63542719182862,
+        24.916379699215803,
+        112.0,
+        47.63542719182863,
+        41.4
+      ]
+    },
+    {
+      "name": "TrackLeftRockerPlates",
+      "label": "履带 · 承重轮摇臂板 · 左",
+      "category": "drive",
+      "solids": 2,
+      "valid": true,
+      "volume": 1714.7842922385612,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧镂空承重轮摇臂板"
+      },
+      "bbox": [
+        111.0,
+        -40.8,
+        8.2,
+        113.0,
+        40.80000000000001,
+        30.0
+      ]
+    },
+    {
+      "name": "TrackLeftFasteners",
+      "label": "履带 · 轮组与悬挂紧固件 · 左",
+      "category": "drive",
+      "solids": 25,
+      "valid": true,
+      "volume": 91.92244284404435,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧轮组及悬挂紧固件"
+      },
+      "bbox": [
+        108.0,
+        -58.09997522367543,
+        11.700961894323342,
+        113.0,
+        58.09997522367544,
+        80.79294878558964
+      ]
+    },
+    {
+      "name": "TrackRightRubberBand",
+      "label": "履带 · 连续橡胶履带 · 右",
+      "category": "drive",
+      "solids": 1,
+      "valid": true,
+      "volume": 37367.4196043635,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧连续橡胶履带"
+      },
+      "bbox": [
+        -112.0,
+        -70.34739776293411,
+        2.204409128110335,
+        -70.0,
+        70.34739776293408,
+        87.84032084142676
+      ]
+    },
+    {
+      "name": "TrackRightTreadPads",
+      "label": "履带 · 胎块底座 · 右",
+      "category": "drive",
+      "solids": 48,
+      "valid": true,
+      "volume": 7434.240000000013,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧履带胎块底座（48节）"
+      },
+      "bbox": [
+        -113.0,
+        -70.80664146655073,
+        1.7132793670207433,
+        -69.0,
+        70.7993257372576,
+        88.31763452160439
+      ]
+    },
+    {
+      "name": "TrackRightChevronTreads",
+      "label": "履带 · 人字形抓地块 · 右",
+      "category": "drive",
+      "solids": 96,
+      "valid": true,
+      "volume": 10027.007999999983,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧人字形抓地块（96块）"
+      },
+      "bbox": [
+        -111.0,
+        -72.44587445204442,
+        -2.4891304786271016e-09,
+        -71.0,
+        72.55412555288818,
+        89.99999999999167
+      ]
+    },
+    {
+      "name": "TrackRightShoulderLugs",
+      "label": "履带 · 肩部胎块 · 右",
+      "category": "drive",
+      "solids": 96,
+      "valid": true,
+      "volume": 1710.720000000004,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧履带肩部胎块（96块）"
+      },
+      "bbox": [
+        -114.0,
+        -72.12597832528955,
+        0.3592092608914952,
+        -68.0,
+        72.17161352821078,
+        89.657515644071
+      ]
+    },
+    {
+      "name": "TrackRightWheelTires",
+      "label": "履带 · 橡胶轮组 · 右",
+      "category": "drive",
+      "solids": 7,
+      "valid": true,
+      "volume": 7934.370788786177,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧驱动轮与导向轮橡胶轮组"
+      },
+      "bbox": [
+        -107.0,
+        -63.83542719182863,
+        3.3000000000000007,
+        -102.5,
+        63.835427191828614,
+        84.84032084142676
+      ]
+    },
+    {
+      "name": "TrackRightWheelRims",
+      "label": "履带 · 金属轮圈 · 右",
+      "category": "drive",
+      "solids": 14,
+      "valid": true,
+      "volume": 6524.986468673522,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧金属轮圈"
+      },
+      "bbox": [
+        -108.0,
+        -62.83542719182863,
+        4.300000000000001,
+        -102.5,
+        62.835427191828614,
+        83.84032084142676
+      ]
+    },
+    {
+      "name": "TrackRightWheelFaces",
+      "label": "履带 · 镂空轮盘 · 右",
+      "category": "drive",
+      "solids": 7,
+      "valid": true,
+      "volume": 9495.759033651342,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧镂空轮盘"
+      },
+      "bbox": [
+        -107.0,
+        -60.235427191828634,
+        6.9,
+        -104.0,
+        60.23542719182862,
+        81.24032084142675
+      ]
+    },
+    {
+      "name": "TrackRightWheelHubs",
+      "label": "履带 · 轮毂与垫圈 · 右",
+      "category": "drive",
+      "solids": 15,
+      "valid": true,
+      "volume": 2283.1816792271948,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧阶梯轮毂与垫圈"
+      },
+      "bbox": [
+        -111.5,
+        -51.13542719182863,
+        9.0,
+        -98.0,
+        51.13542719182862,
+        65.0
+      ]
+    },
+    {
+      "name": "TrackRightSuspensionArms",
+      "label": "履带 · 悬挂支臂与轴套 · 右",
+      "category": "drive",
+      "solids": 2,
+      "valid": true,
+      "volume": 1941.7094169213208,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧悬挂支臂与轴套"
+      },
+      "bbox": [
+        -112.0,
+        -47.63542719182863,
+        24.916379699215803,
+        -110.0,
+        47.63542719182862,
+        41.4
+      ]
+    },
+    {
+      "name": "TrackRightRockerPlates",
+      "label": "履带 · 承重轮摇臂板 · 右",
+      "category": "drive",
+      "solids": 2,
+      "valid": true,
+      "volume": 1714.7842922385612,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧镂空承重轮摇臂板"
+      },
+      "bbox": [
+        -113.0,
+        -40.80000000000001,
+        8.2,
+        -111.0,
+        40.8,
+        30.0
+      ]
+    },
+    {
+      "name": "TrackRightFasteners",
+      "label": "履带 · 轮组与悬挂紧固件 · 右",
+      "category": "drive",
+      "solids": 25,
+      "valid": true,
+      "volume": 91.92244284404437,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧轮组及悬挂紧固件"
+      },
+      "bbox": [
+        -113.0,
+        -58.09997522367544,
+        11.700961894323342,
+        -108.0,
+        58.09997522367543,
+        80.79294878558964
+      ]
+    },
+    {
+      "name": "MotorL",
+      "label": "动力 · 37R-520 电机（占位） · 左",
+      "category": "drive",
+      "solids": 1,
+      "valid": true,
+      "volume": 44517.59932714777,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧37R-520电机（尺寸占位）"
+      },
+      "bbox": [
+        26.200000000000003,
+        -18.5,
+        31.5,
+        79.0,
+        18.5,
+        68.5
+      ]
+    },
+    {
+      "name": "MotorShaftL",
+      "label": "动力 · D 形输出轴 · 左",
+      "category": "drive",
+      "solids": 1,
+      "valid": true,
+      "volume": 584.8655604494375,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧Ø6偏心D形输出轴"
+      },
+      "bbox": [
+        73.0,
+        -2.999999999999999,
+        54.0,
+        95.0,
+        3.000000000000001,
+        60.0
+      ]
+    },
+    {
+      "name": "DriveCouplerL",
+      "label": "动力 · 六角联轴器（配合待测） · 左",
+      "category": "drive",
+      "solids": 1,
+      "valid": true,
+      "volume": 1655.380827593807,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧黄铜六角联轴器（配合待测）"
+      },
+      "bbox": [
+        85.0,
+        -6.928203230275509,
+        51.0,
+        103.0,
+        6.928203230275511,
+        63.0
+      ]
+    },
+    {
+      "name": "TrackMountL",
+      "label": "动力 · 履带安装件（参考） · 左",
+      "category": "drive",
+      "solids": 1,
+      "valid": true,
+      "volume": 4509.663155198775,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=14 mm，未缩放；物理配合未验证",
+        "Label2": "左侧履带安装件参考"
+      },
+      "bbox": [
+        86.99999999999999,
+        -32.500000000000014,
+        33.0,
+        98.0,
+        32.49999999999998,
+        71.00000000000003
+      ]
+    },
+    {
+      "name": "MotorR",
+      "label": "动力 · 37R-520 电机（占位） · 右",
+      "category": "drive",
+      "solids": 1,
+      "valid": true,
+      "volume": 44517.59932714777,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧37R-520电机（尺寸占位）"
+      },
+      "bbox": [
+        -79.0,
+        -18.5,
+        31.5,
+        -26.200000000000003,
+        18.5,
+        68.5
+      ]
+    },
+    {
+      "name": "MotorShaftR",
+      "label": "动力 · D 形输出轴 · 右",
+      "category": "drive",
+      "solids": 1,
+      "valid": true,
+      "volume": 584.8655604494376,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧Ø6偏心D形输出轴"
+      },
+      "bbox": [
+        -95.0,
+        -3.000000000000001,
+        54.0,
+        -73.0,
+        2.999999999999999,
+        60.0
+      ]
+    },
+    {
+      "name": "DriveCouplerR",
+      "label": "动力 · 六角联轴器（配合待测） · 右",
+      "category": "drive",
+      "solids": 1,
+      "valid": true,
+      "volume": 1655.3808275938075,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧黄铜六角联轴器（配合待测）"
+      },
+      "bbox": [
+        -103.0,
+        -6.9282032302755105,
+        51.0,
+        -85.0,
+        6.92820323027551,
+        63.0
+      ]
+    },
+    {
+      "name": "TrackMountR",
+      "label": "动力 · 履带安装件（参考） · 右",
+      "category": "drive",
+      "solids": 1,
+      "valid": true,
+      "volume": 4509.663155198778,
+      "properties": {
+        "EvidenceBasis": "独立动力参考；本侧整体平移 X=-14 mm，未缩放；物理配合未验证",
+        "Label2": "右侧履带安装件参考"
+      },
+      "bbox": [
+        -98.0,
+        -32.500000000000014,
+        32.999999999999986,
+        -87.0,
+        32.49999999999998,
+        71.00000000000004
+      ]
+    },
+    {
+      "name": "BatteryHatch",
+      "label": "电源 · 承托架",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 5430.128071842565,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "独立内部电源承托架／开底盖时保留",
+        "ServiceGroup": "battery"
+      },
+      "bbox": [
+        -65.8,
+        -96.8,
+        31.0,
+        65.8,
+        -23.200000000000003,
+        32.8
+      ]
+    },
+    {
+      "name": "BatteryPadN54N90",
+      "label": "电源 · 承托垫 · 右前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 5.00000000000007,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "电源底部承托垫",
+        "ServiceGroup": "battery"
+      },
+      "bbox": [
+        -56.5,
+        -92.5,
+        32.8,
+        -51.5,
+        -87.5,
+        33.0
+      ]
+    },
+    {
+      "name": "BatteryPadN54N29",
+      "label": "电源 · 承托垫 · 右后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 5.00000000000007,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "电源底部承托垫001",
+        "ServiceGroup": "battery"
+      },
+      "bbox": [
+        -56.5,
+        -31.5,
+        32.8,
+        -51.5,
+        -26.5,
+        33.0
+      ]
+    },
+    {
+      "name": "BatteryPad54N90",
+      "label": "电源 · 承托垫 · 左前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 5.00000000000007,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "电源底部承托垫002",
+        "ServiceGroup": "battery"
+      },
+      "bbox": [
+        51.5,
+        -92.5,
+        32.8,
+        56.5,
+        -87.5,
+        33.0
+      ]
+    },
+    {
+      "name": "BatteryPad54N29",
+      "label": "电源 · 承托垫 · 左后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 5.00000000000007,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "电源底部承托垫003",
+        "ServiceGroup": "battery"
+      },
+      "bbox": [
+        51.5,
+        -31.5,
+        32.8,
+        56.5,
+        -26.5,
+        33.0
+      ]
+    },
+    {
+      "name": "KeelLid",
+      "label": "底盘 · 折面顶盖",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 44682.77076365827,
+      "properties": {
+        "EvidenceBasis": "2026-10-26 打印修正：两根3 mm内向连接筋连接原承板柱，安装孔位不变；实物待验。",
+        "Label2": "低鼻锥至颈架的折面顶盖"
+      },
+      "bbox": [
+        -65.0,
+        -101.00000000000001,
+        58.5,
+        65.00000000000003,
+        28.0,
+        97.0
+      ]
+    },
+    {
+      "name": "UltrasonicRingL",
+      "label": "超声波 · 探头主体 · 左",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 1988.3728953192349,
+      "properties": {
+        "EvidenceBasis": "用户尺寸：圆柱Ø16、双圆柱总宽42、离面板高10.3 mm；中心距26为推导；0.41假设10.3从PCB前面Y=-77.5计，探头较0.40内退3.5；实际基准待确认；端面分色为外观假设",
+        "Label2": "超声波圆柱主体 Ø16×10.3 L"
+      },
+      "bbox": [
+        5.0,
+        -87.8,
+        180.0,
+        21.0,
+        -77.5,
+        196.0
+      ]
+    },
+    {
+      "name": "UltrasonicFaceL",
+      "label": "超声波 · 探头端面 · 左",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 82.56498192715677,
+      "properties": {
+        "EvidenceBasis": "用户尺寸：圆柱Ø16、双圆柱总宽42、离面板高10.3 mm；中心距26为推导；0.41假设10.3从PCB前面Y=-77.5计，探头较0.40内退3.5；实际基准待确认；端面Ø14.5及0.5深度仅为分色",
+        "Label2": "超声波探头端面 L"
+      },
+      "bbox": [
+        5.75,
+        -87.8,
+        180.75,
+        20.25,
+        -87.3,
+        195.25
+      ]
+    },
+    {
+      "name": "UltrasonicRingR",
+      "label": "超声波 · 探头主体 · 右",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 1988.3728953192349,
+      "properties": {
+        "EvidenceBasis": "用户尺寸：圆柱Ø16、双圆柱总宽42、离面板高10.3 mm；中心距26为推导；0.41假设10.3从PCB前面Y=-77.5计，探头较0.40内退3.5；实际基准待确认；端面分色为外观假设",
+        "Label2": "超声波圆柱主体 Ø16×10.3 R"
+      },
+      "bbox": [
+        -21.0,
+        -87.8,
+        180.0,
+        -5.0,
+        -77.5,
+        196.0
+      ]
+    },
+    {
+      "name": "UltrasonicFaceR",
+      "label": "超声波 · 探头端面 · 右",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 82.56498192715677,
+      "properties": {
+        "EvidenceBasis": "用户尺寸：圆柱Ø16、双圆柱总宽42、离面板高10.3 mm；中心距26为推导；0.41假设10.3从PCB前面Y=-77.5计，探头较0.40内退3.5；实际基准待确认；端面Ø14.5及0.5深度仅为分色",
+        "Label2": "超声波探头端面 R"
+      },
+      "bbox": [
+        -20.25,
+        -87.8,
+        180.75,
+        -5.75,
+        -87.3,
+        195.25
+      ]
+    },
+    {
+      "name": "ShoulderRailL",
+      "label": "肩部 · 承力梁 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 7948.261566199254,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "左斜面肩部承力梁"
+      },
+      "bbox": [
+        33.0,
+        -89.0,
+        73.428571429,
+        47.5,
+        -11.0,
+        116.29361204426276
+      ]
+    },
+    {
+      "name": "KeelSideFrameL",
+      "label": "底盘 · 镂空侧框 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 2970.750000000001,
+      "properties": {
+        "EvidenceBasis": "0.49保持原镂空和前段，后端沿+Y由8延至38 mm；厚1.5及最高Z90保持，结构强度与制造待验",
+        "Label2": "左镂空底座侧框"
+      },
+      "bbox": [
+        65.99999999999999,
+        -99.0,
+        39.0,
+        67.5,
+        38.0,
+        90.0
+      ]
+    },
+    {
+      "name": "ShoulderRailR",
+      "label": "肩部 · 承力梁与 BOOT 按钮座 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8106.039078491238,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行；0.54一体BOOT按钮座、后开口螺母腔、护边和扎带鞍座；候选尺寸",
+        "Label2": "右斜面肩部承力梁"
+      },
+      "bbox": [
+        -46.0,
+        -89.0,
+        73.428571429,
+        -29.0,
+        -6.0,
+        119.5
+      ]
+    },
+    {
+      "name": "KeelSideFrameR",
+      "label": "底盘 · 镂空侧框 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 2970.7500000000005,
+      "properties": {
+        "EvidenceBasis": "0.49保持原镂空和前段，后端沿+Y由8延至38 mm；厚1.5及最高Z90保持，结构强度与制造待验",
+        "Label2": "右镂空底座侧框"
+      },
+      "bbox": [
+        -67.5,
+        -99.0,
+        39.0,
+        -65.99999999999999,
+        38.0,
+        90.0
+      ]
+    },
+    {
+      "name": "ChestAudioPanel",
+      "label": "前舱 · 内嵌饰板",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 3897.000000000001,
+      "properties": {
+        "EvidenceBasis": "沿用对象标识；音频已移入头舱，此处仅为装甲饰板",
+        "Label2": "低位前舱内嵌饰板"
+      },
+      "bbox": [
+        -35.0,
+        -104.00000000000003,
+        38.0,
+        35.0,
+        -101.0,
+        63.0
+      ]
+    },
+    {
+      "name": "ChestGuardL",
+      "label": "前舱 · 侧甲 · 左",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 1931.907084154332,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "左低鼻锥折面侧甲"
+      },
+      "bbox": [
+        36.0,
+        -106.00000000000001,
+        35.0,
+        63.0,
+        -101.0,
+        67.0
+      ]
+    },
+    {
+      "name": "ChestAccentL",
+      "label": "前舱 · 嵌条 · 左",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.5,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "左前护甲嵌条"
+      },
+      "bbox": [
+        53.0,
+        -106.5,
+        43.0,
+        57.0,
+        -106.0,
+        49.0
+      ]
+    },
+    {
+      "name": "ChestGuardR",
+      "label": "前舱 · 侧甲 · 右",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 1931.9070841543326,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "右低鼻锥折面侧甲"
+      },
+      "bbox": [
+        -63.0,
+        -106.00000000000001,
+        35.0,
+        -36.0,
+        -101.0,
+        67.0
+      ]
+    },
+    {
+      "name": "ChestAccentR",
+      "label": "前舱 · 嵌条 · 右",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.5,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "右前护甲嵌条"
+      },
+      "bbox": [
+        -57.0,
+        -106.5,
+        43.0,
+        -53.0,
+        -106.0,
+        49.0
+      ]
+    },
+    {
+      "name": "LowerChin",
+      "label": "前舱 · 下缘护片",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 522.0,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "前舱薄下缘护片"
+      },
+      "bbox": [
+        -30.0,
+        -104.0,
+        32.0,
+        30.0,
+        -101.0,
+        35.0
+      ]
+    },
+    {
+      "name": "ChestBadge",
+      "label": "前舱 · 识别片",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 162.0,
+      "properties": {
+        "EvidenceBasis": "新设计尺寸；初步概念，未放行",
+        "Label2": "前舱上沿识别片"
+      },
+      "bbox": [
+        -10.0,
+        -104.0,
+        64.0,
+        10.0,
+        -101.0,
+        67.0
+      ]
+    },
+    {
+      "name": "StopControl",
+      "label": "停止按钮 · 按帽（候选）",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 150.79644737231004,
+      "properties": {
+        "EvidenceBasis": "未选型的常开自复位无灯按钮设计预算，不是厂商参数：杆径7、杆下深10、法兰Ø10×1.5、按帽Ø8×3、螺母对边10×厚2 mm；配合螺纹、行程、端子、密封及实物尺寸待核；GPIO0/GND仅为软件停止",
+        "Label2": "BOOT停止按钮／按帽候选"
+      },
+      "bbox": [
+        -40.0,
+        -26.0,
+        115.5,
+        -32.0,
+        -18.0,
+        118.5
+      ]
+    },
+    {
+      "name": "PowerBank",
+      "label": "电源 · 辰克 5 V 电池包（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 159471.0,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-25提供116×70.5×19.5 mm；照片铭牌辰克CK18650-1234S-NP、5 V；矩形最大包络，不含软线／接头，未称重或实测电气性能",
+        "Label2": "辰克5 V电池包116×70.5×19.5／前下方平放候选",
+        "ServiceGroup": "battery"
+      },
+      "bbox": [
+        -58.0,
+        -94.75,
+        33.0,
+        58.0,
+        -24.25,
+        52.5
+      ]
+    },
+    {
+      "name": "BatteryInsertLFront",
+      "label": "电源 · 承托架嵌件 · 左前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 30.783681014362998,
+      "properties": {
+        "EvidenceBasis": "设计占位 Ø4／孔 Ø2.7；材料、螺纹及压装参数待试验",
+        "Label2": "嵌件候选 BatteryInsertLFront"
+      },
+      "bbox": [
+        61.5,
+        -87.0,
+        31.3,
+        65.5,
+        -83.0,
+        35.8
+      ]
+    },
+    {
+      "name": "BatteryScrewLFront",
+      "label": "电源 · 承托架固定螺钉 · 左前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 45.19181032188916,
+      "properties": {
+        "EvidenceBasis": "M2.5 级候选；不是已选定沉头螺钉标准",
+        "Label2": "电源托盖下方沉头位紧固候选 LFront"
+      },
+      "bbox": [
+        61.3,
+        -87.2,
+        29.0,
+        65.70000000000002,
+        -82.8,
+        35.7
+      ]
+    },
+    {
+      "name": "BatteryInsertLRear",
+      "label": "电源 · 承托架嵌件 · 左后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 30.783681014363015,
+      "properties": {
+        "EvidenceBasis": "设计占位 Ø4／孔 Ø2.7；材料、螺纹及压装参数待试验",
+        "Label2": "嵌件候选 BatteryInsertLRear"
+      },
+      "bbox": [
+        61.5,
+        -42.0,
+        31.3,
+        65.5,
+        -38.0,
+        35.8
+      ]
+    },
+    {
+      "name": "BatteryScrewLRear",
+      "label": "电源 · 承托架固定螺钉 · 左后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 45.19181032188917,
+      "properties": {
+        "EvidenceBasis": "M2.5 级候选；不是已选定沉头螺钉标准",
+        "Label2": "电源托盖下方沉头位紧固候选 LRear"
+      },
+      "bbox": [
+        61.3,
+        -42.2,
+        29.0,
+        65.7,
+        -37.8,
+        35.7
+      ]
+    },
+    {
+      "name": "BatteryInsertRFront",
+      "label": "电源 · 承托架嵌件 · 右前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 30.78368101436294,
+      "properties": {
+        "EvidenceBasis": "设计占位 Ø4／孔 Ø2.7；材料、螺纹及压装参数待试验",
+        "Label2": "嵌件候选 BatteryInsertRFront"
+      },
+      "bbox": [
+        -65.5,
+        -87.0,
+        31.3,
+        -61.5,
+        -83.0,
+        35.8
+      ]
+    },
+    {
+      "name": "BatteryScrewRFront",
+      "label": "电源 · 承托架固定螺钉 · 右前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 45.19181032188917,
+      "properties": {
+        "EvidenceBasis": "M2.5 级候选；不是已选定沉头螺钉标准",
+        "Label2": "电源托盖下方沉头位紧固候选 RFront"
+      },
+      "bbox": [
+        -65.7,
+        -87.2,
+        29.0,
+        -61.3,
+        -82.8,
+        35.7
+      ]
+    },
+    {
+      "name": "BatteryInsertRRear",
+      "label": "电源 · 承托架嵌件 · 右后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 30.783681014362966,
+      "properties": {
+        "EvidenceBasis": "设计占位 Ø4／孔 Ø2.7；材料、螺纹及压装参数待试验",
+        "Label2": "嵌件候选 BatteryInsertRRear"
+      },
+      "bbox": [
+        -65.5,
+        -42.0,
+        31.3,
+        -61.5,
+        -38.0,
+        35.8
+      ]
+    },
+    {
+      "name": "BatteryScrewRRear",
+      "label": "电源 · 承托架固定螺钉 · 右后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 45.19181032188919,
+      "properties": {
+        "EvidenceBasis": "M2.5 级候选；不是已选定沉头螺钉标准",
+        "Label2": "电源托盖下方沉头位紧固候选 RRear"
+      },
+      "bbox": [
+        -65.7,
+        -42.2,
+        29.0,
+        -61.3,
+        -37.8,
+        35.7
+      ]
+    },
+    {
+      "name": "BatteryPullStrap",
+      "label": "电源 · 拉带（占位）",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 662.3999999999996,
+      "properties": {
+        "EvidenceBasis": "柔性件占位；材料、强度及固定方式待试验",
+        "Label2": "随电源托盖下取的柔性拉带占位",
+        "ServiceGroup": "battery"
+      },
+      "bbox": [
+        -58.6,
+        -63.0,
+        32.2,
+        58.6,
+        -57.0,
+        53.2
+      ]
+    },
+    {
+      "name": "CrownScrewLFront",
+      "label": "冠盖 · 固定螺钉 · 左前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 49.25231882665394,
+      "properties": {
+        "EvidenceBasis": "用户确认尺寸；牙型与保持力待试拧，不再配原M2.5嵌件",
+        "Label2": "实测Ø2.5／含帽8.6／帽Ø3.9×1；帽下7.6；光杆包络，非螺纹模型"
+      },
+      "bbox": [
+        62.05,
+        -53.95,
+        211.0,
+        65.95,
+        -50.05,
+        219.6
+      ]
+    },
+    {
+      "name": "CrownScrewLRear",
+      "label": "冠盖 · 固定螺钉 · 左后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 49.25231882665395,
+      "properties": {
+        "EvidenceBasis": "用户确认尺寸；牙型与保持力待试拧，不再配原M2.5嵌件",
+        "Label2": "实测Ø2.5／含帽8.6／帽Ø3.9×1；帽下7.6；光杆包络，非螺纹模型"
+      },
+      "bbox": [
+        62.05,
+        5.05,
+        211.0,
+        65.95,
+        8.95,
+        219.6
+      ]
+    },
+    {
+      "name": "CrownScrewRFront",
+      "label": "冠盖 · 固定螺钉 · 右前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 49.25231882665397,
+      "properties": {
+        "EvidenceBasis": "用户确认尺寸；牙型与保持力待试拧，不再配原M2.5嵌件",
+        "Label2": "实测Ø2.5／含帽8.6／帽Ø3.9×1；帽下7.6；光杆包络，非螺纹模型"
+      },
+      "bbox": [
+        -65.95,
+        -53.95,
+        211.0,
+        -62.05,
+        -50.05,
+        219.6
+      ]
+    },
+    {
+      "name": "CrownScrewRRear",
+      "label": "冠盖 · 固定螺钉 · 右后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 49.252318826653976,
+      "properties": {
+        "EvidenceBasis": "用户确认尺寸；牙型与保持力待试拧，不再配原M2.5嵌件",
+        "Label2": "实测Ø2.5／含帽8.6／帽Ø3.9×1；帽下7.6；光杆包络，非螺纹模型"
+      },
+      "bbox": [
+        -65.95,
+        5.05,
+        211.0,
+        -62.05,
+        8.95,
+        219.6
+      ]
+    },
+    {
+      "name": "ElectronicsTray",
+      "label": "面包板 · 浅托盘",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 25514.221862405713,
+      "properties": {
+        "EvidenceBasis": "内部101×86、底厚2.5、围边高3；100×85×36为用户规划包络；前缘中央49×2让位；公差、材料、保持力待验；0.55：15芯总预算，净通道Ø10；底盘护口/桥内径10，护口外径12.4、安装座孔12.6；头部转向+X侧，经Z166托盘下方至X60后上行。R10为中心线布置假设，不是线材弯曲规格。",
+        "Label2": "面包板浅托盘／105×90主体、122侧耳总宽",
+        "ServiceGroup": "electronics"
+      },
+      "bbox": [
+        -61.0000001,
+        -72.5000001,
+        171.4999999,
+        61.0000001,
+        17.5000001,
+        177.0000001
+      ]
+    },
+    {
+      "name": "PowerCableRoute",
+      "label": "电源 · 低压线束（规划）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 12677.577224439168,
+      "properties": {
+        "EvidenceBasis": "15芯共用Ø10空间预算（含BOOT双线），不是导线实体或护管；实际线径、束径、接头与电气验证未完成。",
+        "Label2": "中央低压线束预算／新电池端接待确认"
+      },
+      "bbox": [
+        -5.000000100000002,
+        0.9999999,
+        84.0,
+        65.0000001,
+        11.0000001,
+        194.0
+      ]
+    },
+    {
+      "name": "BaseCableGrommet",
+      "label": "底盘 · 线束护口",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 126.66901579274042,
+      "properties": {
+        "EvidenceBasis": "护口尺寸候选；线束规格、弯曲半径与磨损待测；0.55：15芯总预算，净通道Ø10；底盘护口/桥内径10，护口外径12.4、安装座孔12.6；头部转向+X侧，经Z166托盘下方至X60后上行。R10为中心线布置假设，不是线材弯曲规格。",
+        "Label2": "中央干区线束护口 BaseCableGrommet"
+      },
+      "bbox": [
+        -6.2,
+        -0.20000000000000018,
+        90.0,
+        6.2,
+        12.2,
+        93.0
+      ]
+    },
+    {
+      "name": "HeadCableGrommet",
+      "label": "头舱 · 线束护口",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 516.113443314292,
+      "properties": {
+        "EvidenceBasis": "护口尺寸候选；线束规格、弯曲半径与磨损待测；0.55：15芯总预算，净通道Ø10；底盘护口/桥内径10，护口外径12.4、安装座孔12.6；头部转向+X侧，经Z166托盘下方至X60后上行。R10为中心线布置假设，不是线材弯曲规格。",
+        "Label2": "中央干区线束护口 HeadCableGrommet"
+      },
+      "bbox": [
+        -6.076069271277022,
+        -0.20000010260641105,
+        157.9999999,
+        24.0000001,
+        12.20000010304085,
+        164.0000001
+      ]
+    },
+    {
+      "name": "NeckCableBridge",
+      "label": "颈架 · 线束限位桥",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 271.4907885770947,
+      "properties": {
+        "EvidenceBasis": "固定夹持候选；没有增加活动关节；0.55：15芯总预算，净通道Ø10；底盘护口/桥内径10，护口外径12.4、安装座孔12.6；头部转向+X侧，经Z166托盘下方至X60后上行。R10为中心线布置假设，不是线材弯曲规格。",
+        "Label2": "固定颈架线束限位桥"
+      },
+      "bbox": [
+        -18.0,
+        -1.0,
+        106.9999999,
+        18.0,
+        12.2,
+        109.0000001
+      ]
+    },
+    {
+      "name": "WaterHoseRoute",
+      "label": "水枪 · 供液管（规划）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 6031.677875054436,
+      "properties": {
+        "EvidenceBasis": "外径5为用户实测；中心弯曲半径8及接口位置为设计假设；不是供应商最小弯曲半径或已验收液路",
+        "Label2": "喷水顶部吸液管 Ø5 实测／R8／侧向接前枪"
+      },
+      "bbox": [
+        25.49999989999999,
+        -110.3167965519778,
+        112.44598689501633,
+        101.5000001,
+        67.5000001,
+        176.5000001
+      ]
+    },
+    {
+      "name": "WaterGunBody",
+      "label": "水枪 · 本体",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 90210.32415391509,
+      "properties": {
+        "EvidenceBasis": "实测总长138.5／宽33.2／厚24.6／带管宽38.5；分段轮廓与接口为假设；底部双面软胶固定；胶厚和线管为候选",
+        "Label2": "拆出发射枪／前细后粗示意",
+        "ServiceGroup": "water_gun"
+      },
+      "bbox": [
+        38.400000000000006,
+        -131.51665437312053,
+        100.44617956483691,
+        71.6,
+        5.965184912881462,
+        156.50399283520917
+      ]
+    },
+    {
+      "name": "WaterGunInlet",
+      "label": "水枪 · 进水接头（占位）",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 223.8384765682728,
+      "properties": {
+        "EvidenceBasis": "实测总长138.5／宽33.2／厚24.6／带管宽38.5；分段轮廓与接口为假设；底部双面软胶固定；胶厚和线管为候选",
+        "Label2": "水枪侧接头／未测形状",
+        "ServiceGroup": "water_gun"
+      },
+      "bbox": [
+        65.5,
+        -110.31679645197784,
+        139.4618478924311,
+        76.9,
+        -105.31679645197784,
+        144.4618478924311
+      ]
+    },
+    {
+      "name": "WaterGunBaseInsert1",
+      "label": "水枪 · 底座嵌件 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 39.395571876015936,
+      "properties": {
+        "EvidenceBasis": "候选尺寸：胶厚、粘接面、M3级基座紧固、引线均未实测；水管外径5为用户实测；不在原水枪上钻孔",
+        "Label2": "托架基座 M3 级嵌件候选 1"
+      },
+      "bbox": [
+        40.29999999999999,
+        -72.16919007906115,
+        108.49522078523263,
+        44.699999999999996,
+        -66.49561169532538,
+        114.94661662827359
+      ]
+    },
+    {
+      "name": "WaterGunBaseScrew1",
+      "label": "水枪 · 底座固定螺钉 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 64.55344584596304,
+      "properties": {
+        "EvidenceBasis": "候选尺寸：胶厚、粘接面、M3级基座紧固、引线均未实测；水管外径5为用户实测；不在原水枪上钻孔",
+        "Label2": "托架沉入式紧固候选 1"
+      },
+      "bbox": [
+        39.89999999999999,
+        -71.08586656390688,
+        109.86138701286153,
+        45.099999999999994,
+        -65.3327842295022,
+        117.9479217251818
+      ]
+    },
+    {
+      "name": "WaterGunBaseInsert2",
+      "label": "水枪 · 底座嵌件 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 39.39557187601596,
+      "properties": {
+        "EvidenceBasis": "候选尺寸：胶厚、粘接面、M3级基座紧固、引线均未实测；水管外径5为用户实测；不在原水枪上钻孔",
+        "Label2": "托架基座 M3 级嵌件候选 2"
+      },
+      "bbox": [
+        40.29999999999999,
+        -31.600305374920282,
+        97.62482089092674,
+        44.699999999999996,
+        -25.926726991184523,
+        104.0762167339677
+      ]
+    },
+    {
+      "name": "WaterGunBaseScrew2",
+      "label": "水枪 · 底座固定螺钉 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 64.55344584596301,
+      "properties": {
+        "EvidenceBasis": "候选尺寸：胶厚、粘接面、M3级基座紧固、引线均未实测；水管外径5为用户实测；不在原水枪上钻孔",
+        "Label2": "托架沉入式紧固候选 2"
+      },
+      "bbox": [
+        39.89999999999999,
+        -30.516981859766005,
+        98.99098711855565,
+        45.099999999999994,
+        -24.76389952536133,
+        107.07752183087592
+      ]
+    },
+    {
+      "name": "WaterGunLowerPad1",
+      "label": "水枪 · 底部软胶垫 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 595.7256661176917,
+      "properties": {
+        "EvidenceBasis": "候选尺寸：胶厚、粘接面、M3级基座紧固、引线均未实测；水管外径5为用户实测；不在原水枪上钻孔",
+        "Label2": "底部双面软胶候选／厚度未测 1",
+        "ServiceGroup": "water_gun_cradle"
+      },
+      "bbox": [
+        39.39999999999999,
+        -79.38353748430208,
+        115.39762501235289,
+        70.6,
+        -59.80620191341819,
+        121.5399317406924
+      ]
+    },
+    {
+      "name": "WaterGunLowerPad2",
+      "label": "水枪 · 底部软胶垫 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 598.823148197803,
+      "properties": {
+        "EvidenceBasis": "候选尺寸：胶厚、粘接面、M3级基座紧固、引线均未实测；水管外径5为用户实测；不在原水枪上钻孔",
+        "Label2": "底部双面软胶候选／厚度未测 2",
+        "ServiceGroup": "water_gun_cradle"
+      },
+      "bbox": [
+        39.39999999999999,
+        -29.15539451727054,
+        101.9390346670218,
+        70.6,
+        -9.578058946386653,
+        108.08134139536129
+      ]
+    },
+    {
+      "name": "WaterGunLeadRoute",
+      "label": "水枪 · 尾线束（规划）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 258.47244290365313,
+      "properties": {
+        "EvidenceBasis": "候选尺寸：胶厚、粘接面、M3级基座紧固、引线均未实测；水管外径5为用户实测；不在原水枪上钻孔",
+        "Label2": "水枪尾线束候选 Ø3／中心弯曲半径8"
+      },
+      "bbox": [
+        53.49999989999999,
+        2.393482090466714,
+        107.7212385869622,
+        83.0,
+        15.872820673589322,
+        113.77595596762606
+      ]
+    },
+    {
+      "name": "WaterGunLeadConnector",
+      "label": "水枪 · 插头（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 1599.9999999999995,
+      "properties": {
+        "EvidenceBasis": "候选尺寸：胶厚、粘接面、M3级基座紧固、引线均未实测；水管外径5为用户实测；不在原水枪上钻孔",
+        "Label2": "水枪可分离插头包络 16×10×10／型号未定"
+      },
+      "bbox": [
+        82.99999999999999,
+        8.249096216631365,
+        103.09751433000426,
+        98.99999999999999,
+        20.496544930547262,
+        115.34496304392016
+      ]
+    },
+    {
+      "name": "BubbleGunShell",
+      "label": "泡泡枪 · 枪壳",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 3060.7852888035195,
+      "properties": {
+        "EvidenceBasis": "用户原总尺寸及新增薄片／支承面尺寸；总高差0.4未消解；宽度与分段是假设；车体右前方候选；固定与线管为0.18设计假设",
+        "Label2": "泡泡枪主体／Shell",
+        "ServiceGroup": "bubble_gun"
+      },
+      "bbox": [
+        -70.75,
+        -124.56883228701666,
+        105.35522234271015,
+        -39.24999999999999,
+        -94.19973836163865,
+        141.7347239081738
+      ]
+    },
+    {
+      "name": "BubbleGunWheel",
+      "label": "泡泡枪 · 泡泡转轮",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 251.29232915812221,
+      "properties": {
+        "EvidenceBasis": "用户原总尺寸及新增薄片／支承面尺寸；总高差0.4未消解；宽度与分段是假设；车体右前方候选；固定与线管为0.18设计假设",
+        "Label2": "泡泡枪主体／Wheel",
+        "ServiceGroup": "bubble_gun"
+      },
+      "bbox": [
+        -67.9546143982859,
+        -123.02783136164635,
+        114.7390741810339,
+        -42.045385601714095,
+        -115.09240536970003,
+        139.33538879384324
+      ]
+    },
+    {
+      "name": "BubbleGunMotor",
+      "label": "泡泡枪 · 电机",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 3848.451000647502,
+      "properties": {
+        "EvidenceBasis": "用户原总尺寸及新增薄片／支承面尺寸；总高差0.4未消解；宽度与分段是假设；车体右前方候选；固定与线管为0.18设计假设",
+        "Label2": "泡泡枪主体／Motor",
+        "ServiceGroup": "bubble_gun"
+      },
+      "bbox": [
+        -59.0,
+        -100.34669068282354,
+        106.37067136888741,
+        -45.0,
+        -72.57507839416152,
+        126.36410906449738
+      ]
+    },
+    {
+      "name": "BubbleGunGearcase",
+      "label": "泡泡枪 · 齿轮箱",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 37221.148999352554,
+      "properties": {
+        "EvidenceBasis": "2026-10-26用户确认尾壳35.9不含薄片6.8；承托至尾顶42.7；既有宽长、侧凸和内部轮廓仍为假设，见bubble-tail-height-audit.json",
+        "Label2": "尾部壳体高35.9／不含底部薄片6.8／宽长轮廓假设",
+        "ServiceGroup": "bubble_gun"
+      },
+      "bbox": [
+        -72.5,
+        -101.80901828765278,
+        95.99562859340627,
+        -43.49999999999999,
+        -50.01667821175326,
+        142.06040374169476
+      ]
+    },
+    {
+      "name": "BubbleGunMountingTab",
+      "label": "泡泡枪 · 安装片",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 1020.0000000000015,
+      "properties": {
+        "EvidenceBasis": "用户原总尺寸及新增薄片／支承面尺寸；总高差0.4未消解；宽度与分段是假设；车体右前方候选；固定与线管为0.18设计假设",
+        "Label2": "泡泡枪主体／MountingTab",
+        "ServiceGroup": "bubble_gun"
+      },
+      "bbox": [
+        -58.0,
+        -85.21639709485763,
+        89.4273329746406,
+        -52.0,
+        -59.30828193093375,
+        102.4661047209693
+      ]
+    },
+    {
+      "name": "BubbleGunFrontFoot",
+      "label": "泡泡枪 · 前支脚",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 1292.000000000002,
+      "properties": {
+        "EvidenceBasis": "用户原总尺寸及新增薄片／支承面尺寸；总高差0.4未消解；宽度与分段是假设；车体右前方候选；固定与线管为0.18设计假设",
+        "Label2": "泡泡枪主体／FrontFoot",
+        "ServiceGroup": "bubble_gun"
+      },
+      "bbox": [
+        -60.0,
+        -103.56898779434992,
+        95.89780910220362,
+        -50.0,
+        -83.45642758816047,
+        107.3836665779172
+      ]
+    },
+    {
+      "name": "BubbleGunBaseInsert1",
+      "label": "泡泡枪 · 底座嵌件 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 39.39557187601585,
+      "properties": {
+        "EvidenceBasis": "0.18：新支承面间距4.7；薄片不额外凸出；前环+两段槽，位置与配合公差为候选",
+        "Label2": "泡泡托架 M3 级嵌件 1"
+      },
+      "bbox": [
+        -42.199999999999996,
+        -81.05511859554537,
+        84.0159256125671,
+        -37.79999999999999,
+        -75.38154021180961,
+        90.46732145560806
+      ]
+    },
+    {
+      "name": "BubbleGunBaseScrew1",
+      "label": "泡泡枪 · 底座固定螺钉 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 62.429729212136365,
+      "properties": {
+        "EvidenceBasis": "0.18：新支承面间距4.7；薄片不额外凸出；前环+两段槽，位置与配合公差为候选",
+        "Label2": "泡泡托架沉头位紧固候选 1"
+      },
+      "bbox": [
+        -42.599999999999994,
+        -79.95885412813595,
+        85.43038813151044,
+        -37.39999999999999,
+        -74.23165369824154,
+        93.42033026120183
+      ]
+    },
+    {
+      "name": "BubbleGunBaseInsert2",
+      "label": "泡泡枪 · 底座嵌件 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 39.39557187601591,
+      "properties": {
+        "EvidenceBasis": "0.18：新支承面间距4.7；薄片不额外凸出；前环+两段槽，位置与配合公差为候选",
+        "Label2": "泡泡托架 M3 级嵌件 2"
+      },
+      "bbox": [
+        -42.199999999999996,
+        -65.60030537492028,
+        79.87482089092676,
+        -37.79999999999999,
+        -59.926726991184516,
+        86.32621673396771
+      ]
+    },
+    {
+      "name": "BubbleGunBaseScrew2",
+      "label": "泡泡枪 · 底座固定螺钉 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 62.42972921213638,
+      "properties": {
+        "EvidenceBasis": "0.18：新支承面间距4.7；薄片不额外凸出；前环+两段槽，位置与配合公差为候选",
+        "Label2": "泡泡托架沉头位紧固候选 2"
+      },
+      "bbox": [
+        -42.599999999999994,
+        -64.50404090751087,
+        81.28928340987011,
+        -37.39999999999999,
+        -58.776840477616446,
+        89.27922553956148
+      ]
+    },
+    {
+      "name": "BubbleGunLowerPadRear",
+      "label": "泡泡枪 · 后槽软垫",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 191.7119999999994,
+      "properties": {
+        "EvidenceBasis": "0.18：新支承面间距4.7；薄片不额外凸出；前环+两段槽，位置与配合公差为候选",
+        "Label2": "阶梯槽底0.6垫／承托平面Z89.55",
+        "ServiceGroup": "bubble_gun_cradle"
+      },
+      "bbox": [
+        -59.79999999999999,
+        -103.43450147352468,
+        88.84777747886719,
+        -50.199999999999996,
+        -61.06825143763088,
+        100.73772524562081
+      ]
+    },
+    {
+      "name": "BubbleGunHoseRoute",
+      "label": "泡泡枪 · 供液管（规划）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 4020.1185092136566,
+      "properties": {
+        "EvidenceBasis": "0.18：新支承面间距4.7；薄片不额外凸出；前环+两段槽，位置与配合公差为候选",
+        "Label2": "泡泡顶部吸液管候选 Ø4／R8／侧向接前枪"
+      },
+      "bbox": [
+        -101.0000001,
+        -58.622411461412106,
+        91.9999999,
+        -25.99999989999999,
+        67.0000001,
+        176.0000001
+      ]
+    },
+    {
+      "name": "BubbleGunLeadRoute",
+      "label": "泡泡枪 · 尾线束（规划）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 363.19867145023073,
+      "properties": {
+        "EvidenceBasis": "0.18：新支承面间距4.7；薄片不额外凸出；前环+两段槽，位置与配合公差为候选",
+        "Label2": "泡泡尾线束候选 Ø3／R8"
+      },
+      "bbox": [
+        -74.0,
+        -59.26945907416836,
+        93.14360853239934,
+        -42.49999989999999,
+        -35.85346081167101,
+        109.88547671556297
+      ]
+    },
+    {
+      "name": "BubbleGunLeadConnector",
+      "label": "泡泡枪 · 插头（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 1599.9999999999993,
+      "properties": {
+        "EvidenceBasis": "0.18：新支承面间距4.7；薄片不额外凸出；前环+两段槽，位置与配合公差为候选",
+        "Label2": "泡泡插头候选16×10×10"
+      },
+      "bbox": [
+        -89.99999999999999,
+        -43.477185268628965,
+        102.26175225860503,
+        -73.99999999999999,
+        -31.22973655471307,
+        114.50920097252093
+      ]
+    },
+    {
+      "name": "TrackMountScrewLFront",
+      "label": "履带 · 安装件固定螺钉 · 左前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 247.90935948007768,
+      "properties": {
+        "EvidenceBasis": "沿用参考Ø5.4×2.8头、Ø3杆及4mm末端占位；接收螺纹和长度待实测",
+        "Label2": "履带安装件 M3 级固定螺钉 LFront"
+      },
+      "bbox": [
+        73.2,
+        -30.8,
+        34.699999999999996,
+        102.0,
+        -25.400000000000002,
+        40.1
+      ]
+    },
+    {
+      "name": "TrackMountScrewLRear",
+      "label": "履带 · 安装件固定螺钉 · 左后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 247.90935948007768,
+      "properties": {
+        "EvidenceBasis": "沿用参考Ø5.4×2.8头、Ø3杆及4mm末端占位；接收螺纹和长度待实测",
+        "Label2": "履带安装件 M3 级固定螺钉 LRear"
+      },
+      "bbox": [
+        73.2,
+        25.400000000000002,
+        34.699999999999996,
+        102.0,
+        30.8,
+        40.1
+      ]
+    },
+    {
+      "name": "MotorFaceScrewL0",
+      "label": "动力 · 电机端面螺钉 · 左1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 95.36932818502528,
+      "properties": {
+        "EvidenceBasis": "仅四个完整座；螺纹省略，2mm啮合占位，最终长度／有效牙深待核",
+        "Label2": "电机端面 M3 级固定螺钉 L0"
+      },
+      "bbox": [
+        71.0,
+        12.8,
+        47.3,
+        79.8,
+        18.2,
+        52.7
+      ]
+    },
+    {
+      "name": "MotorFaceScrewL1",
+      "label": "动力 · 电机端面螺钉 · 左2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 95.3693281850253,
+      "properties": {
+        "EvidenceBasis": "仅四个完整座；螺纹省略，2mm啮合占位，最终长度／有效牙深待核",
+        "Label2": "电机端面 M3 级固定螺钉 L1"
+      },
+      "bbox": [
+        71.0,
+        5.050000000000002,
+        60.723393758658794,
+        79.8,
+        10.450000000000003,
+        66.12339375865879
+      ]
+    },
+    {
+      "name": "MotorFaceScrewL2",
+      "label": "动力 · 电机端面螺钉 · 左3",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 95.36932818502528,
+      "properties": {
+        "EvidenceBasis": "仅四个完整座；螺纹省略，2mm啮合占位，最终长度／有效牙深待核",
+        "Label2": "电机端面 M3 级固定螺钉 L2"
+      },
+      "bbox": [
+        71.0,
+        -10.449999999999998,
+        60.7233937586588,
+        79.8,
+        -5.049999999999997,
+        66.1233937586588
+      ]
+    },
+    {
+      "name": "MotorFaceScrewL3",
+      "label": "动力 · 电机端面螺钉 · 左4",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 95.36932818502528,
+      "properties": {
+        "EvidenceBasis": "仅四个完整座；螺纹省略，2mm啮合占位，最终长度／有效牙深待核",
+        "Label2": "电机端面 M3 级固定螺钉 L3"
+      },
+      "bbox": [
+        71.0,
+        -18.2,
+        47.3,
+        79.8,
+        -12.8,
+        52.7
+      ]
+    },
+    {
+      "name": "TrackMountScrewRFront",
+      "label": "履带 · 安装件固定螺钉 · 右前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 247.90935948007774,
+      "properties": {
+        "EvidenceBasis": "沿用参考Ø5.4×2.8头、Ø3杆及4mm末端占位；接收螺纹和长度待实测",
+        "Label2": "履带安装件 M3 级固定螺钉 RFront"
+      },
+      "bbox": [
+        -102.0,
+        -30.8,
+        34.699999999999996,
+        -73.2,
+        -25.400000000000002,
+        40.1
+      ]
+    },
+    {
+      "name": "TrackMountScrewRRear",
+      "label": "履带 · 安装件固定螺钉 · 右后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 247.90935948007774,
+      "properties": {
+        "EvidenceBasis": "沿用参考Ø5.4×2.8头、Ø3杆及4mm末端占位；接收螺纹和长度待实测",
+        "Label2": "履带安装件 M3 级固定螺钉 RRear"
+      },
+      "bbox": [
+        -102.0,
+        25.400000000000002,
+        34.699999999999996,
+        -73.2,
+        30.8,
+        40.1
+      ]
+    },
+    {
+      "name": "MotorFaceScrewR0",
+      "label": "动力 · 电机端面螺钉 · 右1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 95.36932818502528,
+      "properties": {
+        "EvidenceBasis": "仅四个完整座；螺纹省略，2mm啮合占位，最终长度／有效牙深待核",
+        "Label2": "电机端面 M3 级固定螺钉 R0"
+      },
+      "bbox": [
+        -79.8,
+        12.8,
+        47.3,
+        -71.0,
+        18.2,
+        52.7
+      ]
+    },
+    {
+      "name": "MotorFaceScrewR1",
+      "label": "动力 · 电机端面螺钉 · 右2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 95.3693281850252,
+      "properties": {
+        "EvidenceBasis": "仅四个完整座；螺纹省略，2mm啮合占位，最终长度／有效牙深待核",
+        "Label2": "电机端面 M3 级固定螺钉 R1"
+      },
+      "bbox": [
+        -79.8,
+        5.050000000000002,
+        60.723393758658794,
+        -71.0,
+        10.450000000000003,
+        66.12339375865879
+      ]
+    },
+    {
+      "name": "MotorFaceScrewR2",
+      "label": "动力 · 电机端面螺钉 · 右3",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 95.36932818502544,
+      "properties": {
+        "EvidenceBasis": "仅四个完整座；螺纹省略，2mm啮合占位，最终长度／有效牙深待核",
+        "Label2": "电机端面 M3 级固定螺钉 R2"
+      },
+      "bbox": [
+        -79.8,
+        -10.449999999999998,
+        60.7233937586588,
+        -71.0,
+        -5.049999999999997,
+        66.1233937586588
+      ]
+    },
+    {
+      "name": "MotorFaceScrewR3",
+      "label": "动力 · 电机端面螺钉 · 右4",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 95.36932818502528,
+      "properties": {
+        "EvidenceBasis": "仅四个完整座；螺纹省略，2mm啮合占位，最终长度／有效牙深待核",
+        "Label2": "电机端面 M3 级固定螺钉 R3"
+      },
+      "bbox": [
+        -79.8,
+        -18.2,
+        47.3,
+        -71.0,
+        -12.8,
+        52.7
+      ]
+    },
+    {
+      "name": "BatterySupportWasherRFront",
+      "label": "电源 · 承压垫圈 · 右前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 16.163494202719484,
+      "properties": {
+        "EvidenceBasis": "Ø7/Ø2.8×0.5候选垫圈；扩大螺钉头与内托架承压面积",
+        "Label2": "电源内托架承压垫圈 RFront"
+      },
+      "bbox": [
+        -67.0,
+        -88.5,
+        30.5,
+        -60.0,
+        -81.5,
+        31.0
+      ]
+    },
+    {
+      "name": "BatterySupportWasherRRear",
+      "label": "电源 · 承压垫圈 · 右后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 16.163494202719484,
+      "properties": {
+        "EvidenceBasis": "Ø7/Ø2.8×0.5候选垫圈；扩大螺钉头与内托架承压面积",
+        "Label2": "电源内托架承压垫圈 RRear"
+      },
+      "bbox": [
+        -67.0,
+        -43.5,
+        30.5,
+        -60.0,
+        -36.5,
+        31.0
+      ]
+    },
+    {
+      "name": "BatterySupportWasherLFront",
+      "label": "电源 · 承压垫圈 · 左前",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 16.163494202719484,
+      "properties": {
+        "EvidenceBasis": "Ø7/Ø2.8×0.5候选垫圈；扩大螺钉头与内托架承压面积",
+        "Label2": "电源内托架承压垫圈 LFront"
+      },
+      "bbox": [
+        60.0,
+        -88.5,
+        30.5,
+        67.0,
+        -81.5,
+        31.0
+      ]
+    },
+    {
+      "name": "BatterySupportWasherLRear",
+      "label": "电源 · 承压垫圈 · 左后",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 16.163494202719484,
+      "properties": {
+        "EvidenceBasis": "Ø7/Ø2.8×0.5候选垫圈；扩大螺钉头与内托架承压面积",
+        "Label2": "电源内托架承压垫圈 LRear"
+      },
+      "bbox": [
+        60.0,
+        -43.5,
+        30.5,
+        67.0,
+        -36.5,
+        31.0
+      ]
+    },
+    {
+      "name": "BottomCoverScrew0",
+      "label": "底盘 · 检修盖固定螺钉 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 55.80411030571544,
+      "properties": {
+        "EvidenceBasis": "6处底部固定；实际紧固工艺待验",
+        "Label2": "一体底盖 M2.5 级示意螺钉 0"
+      },
+      "bbox": [
+        -65.2,
+        -77.2,
+        26.5,
+        -60.8,
+        -72.8,
+        35.8
+      ]
+    },
+    {
+      "name": "BottomCoverScrew1",
+      "label": "底盘 · 检修盖固定螺钉 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 55.80411030571544,
+      "properties": {
+        "EvidenceBasis": "6处底部固定；实际紧固工艺待验",
+        "Label2": "一体底盖 M2.5 级示意螺钉 1"
+      },
+      "bbox": [
+        -65.2,
+        -57.2,
+        26.5,
+        -60.8,
+        -52.8,
+        35.8
+      ]
+    },
+    {
+      "name": "BottomCoverScrew2",
+      "label": "底盘 · 检修盖固定螺钉 · 3",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 55.80411030571544,
+      "properties": {
+        "EvidenceBasis": "6处底部固定；实际紧固工艺待验",
+        "Label2": "一体底盖 M2.5 级示意螺钉 2"
+      },
+      "bbox": [
+        -65.2,
+        34.8,
+        26.5,
+        -60.8,
+        39.2,
+        35.8
+      ]
+    },
+    {
+      "name": "BottomCoverScrew3",
+      "label": "底盘 · 检修盖固定螺钉 · 4",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 55.804110305715476,
+      "properties": {
+        "EvidenceBasis": "6处底部固定；实际紧固工艺待验",
+        "Label2": "一体底盖 M2.5 级示意螺钉 3"
+      },
+      "bbox": [
+        60.8,
+        -77.2,
+        26.5,
+        65.20000000000002,
+        -72.8,
+        35.8
+      ]
+    },
+    {
+      "name": "BottomCoverScrew4",
+      "label": "底盘 · 检修盖固定螺钉 · 5",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 55.80411030571548,
+      "properties": {
+        "EvidenceBasis": "6处底部固定；实际紧固工艺待验",
+        "Label2": "一体底盖 M2.5 级示意螺钉 4"
+      },
+      "bbox": [
+        60.8,
+        -57.2,
+        26.5,
+        65.2,
+        -52.8,
+        35.8
+      ]
+    },
+    {
+      "name": "BottomCoverScrew5",
+      "label": "底盘 · 检修盖固定螺钉 · 6",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 55.80411030571548,
+      "properties": {
+        "EvidenceBasis": "6处底部固定；实际紧固工艺待验",
+        "Label2": "一体底盖 M2.5 级示意螺钉 5"
+      },
+      "bbox": [
+        60.8,
+        34.8,
+        26.5,
+        65.20000000000002,
+        39.2,
+        35.8
+      ]
+    },
+    {
+      "name": "BottomServiceCover",
+      "label": "底盘 · 底部检修盖",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 49846.44341633238,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配；底盖承载驱动托架，两M2.5级贯穿锁紧，整体下取",
+        "Label2": "一体底部检修盖／6颗螺钉"
+      },
+      "bbox": [
+        -65.8,
+        -96.8,
+        26.0,
+        65.8,
+        40.000000000000014,
+        28.8
+      ]
+    },
+    {
+      "name": "WaterModule",
+      "label": "清水瓶 · 瓶体含盖（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 213223.16065549897,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水成品瓶完整含盖包络 Ø48.8×114／150 mL"
+      },
+      "bbox": [
+        3.6000000000000014,
+        40.6,
+        40.0,
+        52.4,
+        89.4,
+        154.0
+      ]
+    },
+    {
+      "name": "WaterPodInsertL",
+      "label": "清水瓶 · 底托嵌件 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 20.35752039526187,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水底托M3嵌件候选"
+      },
+      "bbox": [
+        42.9,
+        62.9,
+        31.0,
+        47.1,
+        67.1,
+        34.0
+      ]
+    },
+    {
+      "name": "WaterPodScrewL",
+      "label": "清水瓶 · 底托固定螺钉 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 76.64778081346793,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水底托M3候选沉孔螺钉"
+      },
+      "bbox": [
+        42.2,
+        62.2,
+        32.0,
+        47.8,
+        67.8,
+        39.0
+      ]
+    },
+    {
+      "name": "WaterPodInsertR",
+      "label": "清水瓶 · 底托嵌件 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 20.357520395261865,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水底托M3嵌件候选001"
+      },
+      "bbox": [
+        8.9,
+        62.9,
+        31.0,
+        13.1,
+        67.1,
+        34.0
+      ]
+    },
+    {
+      "name": "WaterPodScrewR",
+      "label": "清水瓶 · 底托固定螺钉 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 76.64778081346795,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水底托M3候选沉孔螺钉001"
+      },
+      "bbox": [
+        8.2,
+        62.2,
+        32.0,
+        13.8,
+        67.8,
+        39.0
+      ]
+    },
+    {
+      "name": "WaterPod",
+      "label": "清水瓶 · 底托",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 17522.26493252445,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水开窗底托／前部绑带导槽／双M3固定"
+      },
+      "bbox": [
+        1.5999999000000014,
+        38.5999999,
+        33.9999999,
+        54.4000001,
+        91.4000001,
+        122.0000001
+      ]
+    },
+    {
+      "name": "WaterBottomPad",
+      "label": "清水瓶 · 底垫",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 1870.3786022412191,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水底部软垫候选1 mm"
+      },
+      "bbox": [
+        3.6000000000000014,
+        40.6,
+        39.0,
+        52.4,
+        89.4,
+        40.0
+      ]
+    },
+    {
+      "name": "WaterSidePad0",
+      "label": "清水瓶 · 环形侧垫 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 1564.5131414877196,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水环形侧垫候选1 mm"
+      },
+      "bbox": [
+        2.6000000000000014,
+        39.6,
+        50.0,
+        53.4,
+        90.4,
+        60.0
+      ]
+    },
+    {
+      "name": "WaterSidePad1",
+      "label": "清水瓶 · 环形侧垫 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 1564.5131414877196,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水环形侧垫候选1 mm001"
+      },
+      "bbox": [
+        2.6000000000000014,
+        39.6,
+        90.0,
+        53.4,
+        90.4,
+        100.0
+      ]
+    },
+    {
+      "name": "WaterRetentionBand",
+      "label": "清水瓶 · 绑带",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 1877.4157697852643,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水可释放环绕绑带候选12×1／张紧防滑未验"
+      },
+      "bbox": [
+        2.6000000000000014,
+        39.6,
+        108.0,
+        53.4,
+        90.4,
+        120.0
+      ]
+    },
+    {
+      "name": "WaterStrapClosure",
+      "label": "清水瓶 · 绑带搭接片",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 317.9065365922452,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水魔术贴搭接及后拉片候选／非刚性卡扣"
+      },
+      "bbox": [
+        18.0,
+        88.34866163187945,
+        108.0,
+        38.00000000000001,
+        96.0,
+        120.0
+      ]
+    },
+    {
+      "name": "WaterLidMark",
+      "label": "清水瓶 · 识别条",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 28.799999999999713,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "清水低位护舱识别条"
+      },
+      "bbox": [
+        20.0,
+        95.0,
+        96.0,
+        36.0,
+        95.6,
+        99.0
+      ]
+    },
+    {
+      "name": "BubbleModule",
+      "label": "泡泡液瓶 · 瓶体含盖（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 213223.16065549897,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液成品瓶完整含盖包络 Ø48.8×114／150 mL"
+      },
+      "bbox": [
+        -52.4,
+        40.6,
+        40.0,
+        -3.6000000000000014,
+        89.4,
+        154.0
+      ]
+    },
+    {
+      "name": "BubblePodInsertL",
+      "label": "泡泡液瓶 · 底托嵌件 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 20.357520395261865,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液底托M3嵌件候选"
+      },
+      "bbox": [
+        -13.1,
+        62.9,
+        31.0,
+        -8.9,
+        67.1,
+        34.0
+      ]
+    },
+    {
+      "name": "BubblePodScrewL",
+      "label": "泡泡液瓶 · 底托固定螺钉 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 76.64778081346795,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液底托M3候选沉孔螺钉"
+      },
+      "bbox": [
+        -13.8,
+        62.2,
+        32.0,
+        -8.2,
+        67.8,
+        39.0
+      ]
+    },
+    {
+      "name": "BubblePodInsertR",
+      "label": "泡泡液瓶 · 底托嵌件 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 20.35752039526187,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液底托M3嵌件候选001"
+      },
+      "bbox": [
+        -47.1,
+        62.9,
+        31.0,
+        -42.9,
+        67.1,
+        34.0
+      ]
+    },
+    {
+      "name": "BubblePodScrewR",
+      "label": "泡泡液瓶 · 底托固定螺钉 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 76.64778081346792,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液底托M3候选沉孔螺钉001"
+      },
+      "bbox": [
+        -47.8,
+        62.2,
+        32.0,
+        -42.2,
+        67.8,
+        39.0
+      ]
+    },
+    {
+      "name": "BubblePod",
+      "label": "泡泡液瓶 · 底托",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 17522.26493252445,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液开窗底托／前部绑带导槽／双M3固定"
+      },
+      "bbox": [
+        -54.4000001,
+        38.5999999,
+        33.9999999,
+        -1.5999999000000014,
+        91.4000001,
+        122.0000001
+      ]
+    },
+    {
+      "name": "BubbleBottomPad",
+      "label": "泡泡液瓶 · 底垫",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 1870.3786022412191,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液底部软垫候选1 mm"
+      },
+      "bbox": [
+        -52.4,
+        40.6,
+        39.0,
+        -3.5999999999999996,
+        89.4,
+        40.0
+      ]
+    },
+    {
+      "name": "BubbleSidePad0",
+      "label": "泡泡液瓶 · 环形侧垫 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 1564.5131414877196,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液环形侧垫候选1 mm"
+      },
+      "bbox": [
+        -53.4,
+        39.6,
+        50.0,
+        -2.5999999999999996,
+        90.4,
+        60.0
+      ]
+    },
+    {
+      "name": "BubbleSidePad1",
+      "label": "泡泡液瓶 · 环形侧垫 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 1564.5131414877196,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液环形侧垫候选1 mm001"
+      },
+      "bbox": [
+        -53.4,
+        39.6,
+        90.0,
+        -2.5999999999999996,
+        90.4,
+        100.0
+      ]
+    },
+    {
+      "name": "BubbleRetentionBand",
+      "label": "泡泡液瓶 · 绑带",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 1877.415769785268,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液可释放环绕绑带候选12×1／张紧防滑未验"
+      },
+      "bbox": [
+        -53.4,
+        39.6,
+        108.0,
+        -2.5999999999999996,
+        90.4,
+        120.0
+      ]
+    },
+    {
+      "name": "BubbleStrapClosure",
+      "label": "泡泡液瓶 · 绑带搭接片",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 317.9065365922452,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液魔术贴搭接及后拉片候选／非刚性卡扣"
+      },
+      "bbox": [
+        -38.0,
+        88.34866163187945,
+        108.0,
+        -17.999999999999993,
+        96.0,
+        120.0
+      ]
+    },
+    {
+      "name": "BubbleLidMark",
+      "label": "泡泡液瓶 · 识别条",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 28.799999999999713,
+      "properties": {
+        "EvidenceBasis": "用户指定150 mL成品瓶，最大外包络暂按Ø48.8×114含盖；瓶肩／瓶盖／公差未测；固定和软垫为候选",
+        "Label2": "泡泡液低位护舱识别条"
+      },
+      "bbox": [
+        -36.0,
+        95.0,
+        96.0,
+        -20.0,
+        95.6,
+        99.0
+      ]
+    },
+    {
+      "name": "BreadboardScrew0",
+      "label": "面包板 · 托板固定螺钉 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 49.25231882665394,
+      "properties": {
+        "EvidenceBasis": "用户确认尺寸；牙型与保持力待试拧，不再配原M2.5嵌件",
+        "Label2": "实测Ø2.5／含帽8.6／帽Ø3.9×1；帽下7.6；光杆包络，非螺纹模型"
+      },
+      "bbox": [
+        -58.95,
+        -41.95,
+        166.4,
+        -55.05,
+        -38.05,
+        175.0
+      ]
+    },
+    {
+      "name": "BreadboardScrew1",
+      "label": "面包板 · 托板固定螺钉 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 49.25231882665394,
+      "properties": {
+        "EvidenceBasis": "用户确认尺寸；牙型与保持力待试拧，不再配原M2.5嵌件",
+        "Label2": "实测Ø2.5／含帽8.6／帽Ø3.9×1；帽下7.6；光杆包络，非螺纹模型"
+      },
+      "bbox": [
+        -58.95,
+        -6.95,
+        166.4,
+        -55.05,
+        -3.05,
+        175.0
+      ]
+    },
+    {
+      "name": "BreadboardScrew2",
+      "label": "面包板 · 托板固定螺钉 · 3",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 49.252318826653934,
+      "properties": {
+        "EvidenceBasis": "用户确认尺寸；牙型与保持力待试拧，不再配原M2.5嵌件",
+        "Label2": "实测Ø2.5／含帽8.6／帽Ø3.9×1；帽下7.6；光杆包络，非螺纹模型"
+      },
+      "bbox": [
+        55.05,
+        -41.95,
+        166.4,
+        58.95,
+        -38.05,
+        175.0
+      ]
+    },
+    {
+      "name": "BreadboardScrew3",
+      "label": "面包板 · 托板固定螺钉 · 4",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 49.25231882665394,
+      "properties": {
+        "EvidenceBasis": "用户确认尺寸；牙型与保持力待试拧，不再配原M2.5嵌件",
+        "Label2": "实测Ø2.5／含帽8.6／帽Ø3.9×1；帽下7.6；光杆包络，非螺纹模型"
+      },
+      "bbox": [
+        55.05,
+        -6.95,
+        166.4,
+        58.95,
+        -3.05,
+        175.0
+      ]
+    },
+    {
+      "name": "BreadboardEnvelope",
+      "label": "面包板 · 整组包络（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 306000.0,
+      "properties": {
+        "EvidenceBasis": "用户指定规划包络；含面包板、ESP32、扬声器、麦克风、屏幕及线束；不是整组实测或逐元件几何",
+        "Label2": "面包板整组规划包络 100×85×36",
+        "ServiceGroup": "electronics"
+      },
+      "bbox": [
+        -50.0,
+        -70.0,
+        174.0,
+        50.0,
+        15.0,
+        210.0
+      ]
+    },
+    {
+      "name": "UltrasonicPCBEnvelope",
+      "label": "超声波 · PCB（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 1439.9999999999948,
+      "properties": {
+        "EvidenceBasis": "45×20借用通用整模块平面占位；厚1.6、居中、PCB面Y-77.5均为假设，板型与基准未实测",
+        "Label2": "候选超声波PCB 45×20×1.6"
+      },
+      "bbox": [
+        -22.5,
+        -77.5,
+        178.0,
+        22.5,
+        -75.9,
+        198.0
+      ]
+    },
+    {
+      "name": "UltrasonicRearEnvelope",
+      "label": "超声波 · 背面元件（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 3600.0,
+      "properties": {
+        "EvidenceBasis": "背深4为设计预算，不是从通用总厚15反推；逐件外形与焊脚未确认",
+        "Label2": "候选超声波背面元件 45×20×4"
+      },
+      "bbox": [
+        -22.5,
+        -75.9,
+        178.0,
+        22.5,
+        -71.9,
+        198.0
+      ]
+    },
+    {
+      "name": "UltrasonicTopConnector",
+      "label": "超声波 · 顶部接头（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 576.0,
+      "properties": {
+        "EvidenceBasis": "顶边位置、朝向、尺寸均待实测／选型；不表示现有模块已经支持向上接线",
+        "Label2": "候选超声波向上接头 12×6×8"
+      },
+      "bbox": [
+        -6.0,
+        -77.5,
+        198.0,
+        6.0,
+        -71.5,
+        206.0
+      ]
+    },
+    {
+      "name": "UltrasonicWireSpace",
+      "label": "超声波 · 线束（规划）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 871.0819832511413,
+      "properties": {
+        "EvidenceBasis": "折线路径至X54、Y-58侧边交接区；不是实测弯曲半径，尚未接至实际面包板端口；与接头共有端接体积归接头",
+        "Label2": "候选超声波Ø4线束空间／板端待定"
+      },
+      "bbox": [
+        -2.0,
+        -75.5,
+        205.0,
+        56.0,
+        -58.0,
+        209.0
+      ]
+    },
+    {
+      "name": "BackpackArcL",
+      "label": "点火模块 · 本体（占位） · 左",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 35749.360902443346,
+      "properties": {
+        "EvidenceBasis": "历史用户规划Ø25.5×70，非实测；不含端部、引线、电极、驱动、绝缘或屏蔽验收",
+        "Label2": "背包外侧本体候选 Ø25.5×70 L"
+      },
+      "bbox": [
+        61.25,
+        72.25,
+        54.0,
+        86.75,
+        97.75,
+        124.0
+      ]
+    },
+    {
+      "name": "ArcBottomPadL",
+      "label": "点火模块 · 底垫 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 96.0,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "本体底托1 mm软垫候选 L"
+      },
+      "bbox": [
+        68.0,
+        81.0,
+        53.0,
+        80.0,
+        89.0,
+        54.0
+      ]
+    },
+    {
+      "name": "ArcLinerInnerL0",
+      "label": "点火模块 · 内侧衬垫 · 左1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 120.72195362923685,
+      "properties": {
+        "EvidenceBasis": "名义接触不建压缩；材料、摩擦保持力、灌封壳接触区域与温升均待实测",
+        "Label2": "环带0.5 mm软衬候选 InnerL0"
+      },
+      "bbox": [
+        60.75,
+        71.75339666178533,
+        83.0,
+        73.7,
+        98.24660333821467,
+        89.0
+      ]
+    },
+    {
+      "name": "ArcLinerOuterL0",
+      "label": "点火模块 · 外侧衬垫 · 左1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 120.72195362923651,
+      "properties": {
+        "EvidenceBasis": "名义接触不建压缩；材料、摩擦保持力、灌封壳接触区域与温升均待实测",
+        "Label2": "环带0.5 mm软衬候选 OuterL0"
+      },
+      "bbox": [
+        74.3,
+        71.75339666178533,
+        83.0,
+        87.25,
+        98.24660333821467,
+        89.0
+      ]
+    },
+    {
+      "name": "ArcLinerInnerL1",
+      "label": "点火模块 · 内侧衬垫 · 左2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 120.72195362923685,
+      "properties": {
+        "EvidenceBasis": "名义接触不建压缩；材料、摩擦保持力、灌封壳接触区域与温升均待实测",
+        "Label2": "环带0.5 mm软衬候选 InnerL1"
+      },
+      "bbox": [
+        60.75,
+        71.75339666178533,
+        111.0,
+        73.7,
+        98.24660333821467,
+        117.0
+      ]
+    },
+    {
+      "name": "ArcLinerOuterL1",
+      "label": "点火模块 · 外侧衬垫 · 左2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 120.72195362923651,
+      "properties": {
+        "EvidenceBasis": "名义接触不建压缩；材料、摩擦保持力、灌封壳接触区域与温升均待实测",
+        "Label2": "环带0.5 mm软衬候选 OuterL1"
+      },
+      "bbox": [
+        74.3,
+        71.75339666178533,
+        111.0,
+        87.25,
+        98.24660333821467,
+        117.0
+      ]
+    },
+    {
+      "name": "BackpackArcR",
+      "label": "点火模块 · 本体（占位） · 右",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 35749.360902443346,
+      "properties": {
+        "EvidenceBasis": "历史用户规划Ø25.5×70，非实测；不含端部、引线、电极、驱动、绝缘或屏蔽验收",
+        "Label2": "背包外侧本体候选 Ø25.5×70 R"
+      },
+      "bbox": [
+        -86.75,
+        72.25,
+        54.0,
+        -61.24999999999999,
+        97.75,
+        124.0
+      ]
+    },
+    {
+      "name": "ArcBottomPadR",
+      "label": "点火模块 · 底垫 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 96.0,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "本体底托1 mm软垫候选 R"
+      },
+      "bbox": [
+        -80.0000001,
+        80.9999999,
+        52.9999999,
+        -67.9999999,
+        89.0000001,
+        54.0000001
+      ]
+    },
+    {
+      "name": "ArcLinerInnerR0",
+      "label": "点火模块 · 内侧衬垫 · 右1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 121.02567111924327,
+      "properties": {
+        "EvidenceBasis": "名义接触不建压缩；材料、摩擦保持力、灌封壳接触区域与温升均待实测",
+        "Label2": "环带0.5 mm软衬候选 InnerR0"
+      },
+      "bbox": [
+        -73.70000010000001,
+        71.75339656178534,
+        82.99999989999998,
+        -60.7499999,
+        98.24660343821469,
+        89.00000010000001
+      ]
+    },
+    {
+      "name": "ArcLinerOuterR0",
+      "label": "点火模块 · 外侧衬垫 · 右1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 120.72195362872736,
+      "properties": {
+        "EvidenceBasis": "名义接触不建压缩；材料、摩擦保持力、灌封壳接触区域与温升均待实测",
+        "Label2": "环带0.5 mm软衬候选 OuterR0"
+      },
+      "bbox": [
+        -87.25000010000001,
+        71.75339656178534,
+        82.9999999,
+        -74.2999999,
+        98.24660343821466,
+        89.00000010000001
+      ]
+    },
+    {
+      "name": "ArcLinerInnerR1",
+      "label": "点火模块 · 内侧衬垫 · 右2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 121.02567111924657,
+      "properties": {
+        "EvidenceBasis": "名义接触不建压缩；材料、摩擦保持力、灌封壳接触区域与温升均待实测",
+        "Label2": "环带0.5 mm软衬候选 InnerR1"
+      },
+      "bbox": [
+        -73.70000010000001,
+        71.75339656178534,
+        110.99999989999999,
+        -60.7499999,
+        98.24660343821469,
+        117.00000010000002
+      ]
+    },
+    {
+      "name": "ArcLinerOuterR1",
+      "label": "点火模块 · 外侧衬垫 · 右2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 120.72195362872816,
+      "properties": {
+        "EvidenceBasis": "名义接触不建压缩；材料、摩擦保持力、灌封壳接触区域与温升均待实测",
+        "Label2": "环带0.5 mm软衬候选 OuterR1"
+      },
+      "bbox": [
+        -87.25000010000001,
+        71.75339656178534,
+        110.99999989999999,
+        -74.2999999,
+        98.24660343821466,
+        117.00000010000002
+      ]
+    },
+    {
+      "name": "EffectInsert0",
+      "label": "效果板 · 托板嵌件 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 34.45934441906306,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "承板内柱M2.5级嵌件候选 0"
+      },
+      "bbox": [
+        -49.0,
+        -51.0,
+        71.0,
+        -45.0,
+        -47.0,
+        75.5
+      ]
+    },
+    {
+      "name": "EffectScrew0",
+      "label": "效果板 · 托板固定螺钉 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 56.570614475200884,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "承板凹入式M2.5级螺钉候选 0"
+      },
+      "bbox": [
+        -49.4,
+        -51.4,
+        66.6,
+        -44.6,
+        -46.6,
+        75.1
+      ]
+    },
+    {
+      "name": "EffectInsert1",
+      "label": "效果板 · 托板嵌件 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 34.459344419063065,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "承板内柱M2.5级嵌件候选 1"
+      },
+      "bbox": [
+        -49.0,
+        -28.5,
+        71.0,
+        -45.0,
+        -24.5,
+        75.5
+      ]
+    },
+    {
+      "name": "EffectScrew1",
+      "label": "效果板 · 托板固定螺钉 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 56.5706144752009,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "承板凹入式M2.5级螺钉候选 1"
+      },
+      "bbox": [
+        -49.4,
+        -28.9,
+        66.6,
+        -44.6,
+        -24.1,
+        75.1
+      ]
+    },
+    {
+      "name": "EffectInsert2",
+      "label": "效果板 · 托板嵌件 · 3",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 34.45934441906306,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "承板内柱M2.5级嵌件候选 2"
+      },
+      "bbox": [
+        45.0,
+        -51.0,
+        71.0,
+        49.0,
+        -47.0,
+        75.5
+      ]
+    },
+    {
+      "name": "EffectScrew2",
+      "label": "效果板 · 托板固定螺钉 · 3",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 56.570614475200884,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "承板凹入式M2.5级螺钉候选 2"
+      },
+      "bbox": [
+        44.6,
+        -51.4,
+        66.6,
+        49.4,
+        -46.6,
+        75.1
+      ]
+    },
+    {
+      "name": "EffectInsert3",
+      "label": "效果板 · 托板嵌件 · 4",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 34.459344419063065,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "承板内柱M2.5级嵌件候选 3"
+      },
+      "bbox": [
+        45.0,
+        -28.5,
+        71.0,
+        49.0,
+        -24.5,
+        75.5
+      ]
+    },
+    {
+      "name": "EffectScrew3",
+      "label": "效果板 · 托板固定螺钉 · 4",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 56.5706144752009,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "承板凹入式M2.5级螺钉候选 3"
+      },
+      "bbox": [
+        44.6,
+        -28.9,
+        66.6,
+        49.4,
+        -24.1,
+        75.1
+      ]
+    },
+    {
+      "name": "EffectMOSL",
+      "label": "效果 MOS 板 · 本体（占位） · 左",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 4391.999999999999,
+      "properties": {
+        "EvidenceBasis": "外包络MOS33×17×12（高假设）／降压20×11×5（用户）；PCB厚1.6、四边2.5无元件区均为新增假设，必须实测。",
+        "Label2": "MOS板／PCB与元件区候选 L"
+      },
+      "bbox": [
+        6.5,
+        -40.75,
+        68.0,
+        39.5,
+        -23.75,
+        80.0
+      ]
+    },
+    {
+      "name": "EffectSupportLMOS",
+      "label": "效果 MOS 板 · 板边垫 · 左",
+      "category": "structure",
+      "solids": 2,
+      "valid": true,
+      "volume": 49.599999999999916,
+      "properties": {
+        "EvidenceBasis": "只在假设无焊脚的板边承托；板底中央留0.5，焊脚／材料／散热／压缩未验，不是绝缘等级。",
+        "Label2": "两条0.5 mm板边垫候选 LMOS"
+      },
+      "bbox": [
+        7.5,
+        -40.55,
+        67.5,
+        38.5,
+        -23.95,
+        68.0
+      ]
+    },
+    {
+      "name": "EffectRetainerInsertLMOSInner",
+      "label": "效果 MOS 板 · 压框嵌件 · 左内",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.746193947594008,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级短嵌件候选 LMOSInner"
+      },
+      "bbox": [
+        1.1,
+        -33.65,
+        67.0,
+        3.9,
+        -30.85,
+        69.9
+      ]
+    },
+    {
+      "name": "EffectRetainerScrewLMOSInner",
+      "label": "效果 MOS 板 · 压框螺钉 · 左内",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 23.801066473365847,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级螺钉候选 LMOSInner"
+      },
+      "bbox": [
+        0.7,
+        -34.05,
+        67.1,
+        4.3,
+        -30.45,
+        72.5
+      ]
+    },
+    {
+      "name": "EffectRetainerInsertLMOSOuter",
+      "label": "效果 MOS 板 · 压框嵌件 · 左外",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.746193947594001,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级短嵌件候选 LMOSOuter"
+      },
+      "bbox": [
+        42.1,
+        -33.65,
+        67.0,
+        44.9,
+        -30.85,
+        69.9
+      ]
+    },
+    {
+      "name": "EffectRetainerScrewLMOSOuter",
+      "label": "效果 MOS 板 · 压框螺钉 · 左外",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 23.801066473365847,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级螺钉候选 LMOSOuter"
+      },
+      "bbox": [
+        41.7,
+        -34.05,
+        67.1,
+        45.3,
+        -30.45,
+        72.5
+      ]
+    },
+    {
+      "name": "EffectRetainerLMOS",
+      "label": "效果 MOS 板 · 压框 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 469.7696949871049,
+      "properties": {
+        "EvidenceBasis": "机外拆两颗M2级螺钉后上取压框，再提板；框只覆盖假设无元件的板边，PCB上方留0.4，不压紧元件。",
+        "Label2": "单板开窗防脱压框候选 LMOS"
+      },
+      "bbox": [
+        0.20000000000000018,
+        -42.25,
+        70.0,
+        45.8,
+        -22.25,
+        71.2
+      ]
+    },
+    {
+      "name": "EffectBuckL",
+      "label": "效果降压板 · 本体（占位） · 左",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 657.9999999999993,
+      "properties": {
+        "EvidenceBasis": "外包络MOS33×17×12（高假设）／降压20×11×5（用户）；PCB厚1.6、四边2.5无元件区均为新增假设，必须实测。",
+        "Label2": "Buck板／PCB与元件区候选 L"
+      },
+      "bbox": [
+        8.5,
+        -55.25,
+        68.0,
+        28.5,
+        -44.25,
+        73.0
+      ]
+    },
+    {
+      "name": "EffectSupportLBuck",
+      "label": "效果降压板 · 板边垫 · 左",
+      "category": "structure",
+      "solids": 2,
+      "valid": true,
+      "volume": 28.79999999999989,
+      "properties": {
+        "EvidenceBasis": "只在假设无焊脚的板边承托；板底中央留0.5，焊脚／材料／散热／压缩未验，不是绝缘等级。",
+        "Label2": "两条0.5 mm板边垫候选 LBuck"
+      },
+      "bbox": [
+        9.5,
+        -55.05,
+        67.5,
+        27.5,
+        -44.45,
+        68.0
+      ]
+    },
+    {
+      "name": "EffectRetainerInsertLBuckInner",
+      "label": "效果降压板 · 压框嵌件 · 左内",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.746193947594016,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级短嵌件候选 LBuckInner"
+      },
+      "bbox": [
+        3.1,
+        -51.15,
+        67.0,
+        5.9,
+        -48.35,
+        69.9
+      ]
+    },
+    {
+      "name": "EffectRetainerScrewLBuckInner",
+      "label": "效果降压板 · 压框螺钉 · 左内",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 23.801066473365847,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级螺钉候选 LBuckInner"
+      },
+      "bbox": [
+        2.7,
+        -51.55,
+        67.1,
+        6.3,
+        -47.95,
+        72.5
+      ]
+    },
+    {
+      "name": "EffectRetainerInsertLBuckOuter",
+      "label": "效果降压板 · 压框嵌件 · 左外",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.746193947594008,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级短嵌件候选 LBuckOuter"
+      },
+      "bbox": [
+        31.1,
+        -51.15,
+        67.0,
+        33.9,
+        -48.35,
+        69.9
+      ]
+    },
+    {
+      "name": "EffectRetainerScrewLBuckOuter",
+      "label": "效果降压板 · 压框螺钉 · 左外",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 23.80106647336584,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级螺钉候选 LBuckOuter"
+      },
+      "bbox": [
+        30.7,
+        -51.55,
+        67.1,
+        34.3,
+        -47.95,
+        72.5
+      ]
+    },
+    {
+      "name": "EffectRetainerLBuck",
+      "label": "效果降压板 · 压框 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 311.9968149339748,
+      "properties": {
+        "EvidenceBasis": "机外拆两颗M2级螺钉后上取压框，再提板；框只覆盖假设无元件的板边，PCB上方留0.4，不压紧元件。",
+        "Label2": "单板开窗防脱压框候选 LBuck"
+      },
+      "bbox": [
+        2.2,
+        -56.75,
+        70.0,
+        34.8,
+        -42.75,
+        71.2
+      ]
+    },
+    {
+      "name": "EffectMOSR",
+      "label": "效果 MOS 板 · 本体（占位） · 右",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 4391.999999999999,
+      "properties": {
+        "EvidenceBasis": "外包络MOS33×17×12（高假设）／降压20×11×5（用户）；PCB厚1.6、四边2.5无元件区均为新增假设，必须实测。",
+        "Label2": "MOS板／PCB与元件区候选 R"
+      },
+      "bbox": [
+        -39.5,
+        -40.75,
+        68.0,
+        -6.5,
+        -23.75,
+        80.0
+      ]
+    },
+    {
+      "name": "EffectSupportRMOS",
+      "label": "效果 MOS 板 · 板边垫 · 右",
+      "category": "structure",
+      "solids": 2,
+      "valid": true,
+      "volume": 49.599999999999916,
+      "properties": {
+        "EvidenceBasis": "只在假设无焊脚的板边承托；板底中央留0.5，焊脚／材料／散热／压缩未验，不是绝缘等级。",
+        "Label2": "两条0.5 mm板边垫候选 RMOS"
+      },
+      "bbox": [
+        -38.5,
+        -40.55,
+        67.5,
+        -7.5,
+        -23.95,
+        68.0
+      ]
+    },
+    {
+      "name": "EffectRetainerInsertRMOSInner",
+      "label": "效果 MOS 板 · 压框嵌件 · 右内",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.746193947594008,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级短嵌件候选 RMOSInner"
+      },
+      "bbox": [
+        -3.9,
+        -33.65,
+        67.0,
+        -1.1,
+        -30.85,
+        69.9
+      ]
+    },
+    {
+      "name": "EffectRetainerScrewRMOSInner",
+      "label": "效果 MOS 板 · 压框螺钉 · 右内",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 23.801066473365847,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级螺钉候选 RMOSInner"
+      },
+      "bbox": [
+        -4.3,
+        -34.05,
+        67.1,
+        -0.6999999999999998,
+        -30.45,
+        72.5
+      ]
+    },
+    {
+      "name": "EffectRetainerInsertRMOSOuter",
+      "label": "效果 MOS 板 · 压框嵌件 · 右外",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.746193947594001,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级短嵌件候选 RMOSOuter"
+      },
+      "bbox": [
+        -44.9,
+        -33.65,
+        67.0,
+        -42.1,
+        -30.85,
+        69.9
+      ]
+    },
+    {
+      "name": "EffectRetainerScrewRMOSOuter",
+      "label": "效果 MOS 板 · 压框螺钉 · 右外",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 23.801066473365843,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级螺钉候选 RMOSOuter"
+      },
+      "bbox": [
+        -45.3,
+        -34.05,
+        67.1,
+        -41.7,
+        -30.45,
+        72.5
+      ]
+    },
+    {
+      "name": "EffectRetainerRMOS",
+      "label": "效果 MOS 板 · 压框 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 469.76969498710866,
+      "properties": {
+        "EvidenceBasis": "机外拆两颗M2级螺钉后上取压框，再提板；框只覆盖假设无元件的板边，PCB上方留0.4，不压紧元件。",
+        "Label2": "单板开窗防脱压框候选 RMOS"
+      },
+      "bbox": [
+        -45.8,
+        -42.25,
+        70.0,
+        -0.20000000000000018,
+        -22.25,
+        71.2
+      ]
+    },
+    {
+      "name": "EffectBuckR",
+      "label": "效果降压板 · 本体（占位） · 右",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 657.9999999999993,
+      "properties": {
+        "EvidenceBasis": "外包络MOS33×17×12（高假设）／降压20×11×5（用户）；PCB厚1.6、四边2.5无元件区均为新增假设，必须实测。",
+        "Label2": "Buck板／PCB与元件区候选 R"
+      },
+      "bbox": [
+        -28.5,
+        -55.25,
+        68.0,
+        -8.5,
+        -44.25,
+        73.0
+      ]
+    },
+    {
+      "name": "EffectSupportRBuck",
+      "label": "效果降压板 · 板边垫 · 右",
+      "category": "structure",
+      "solids": 2,
+      "valid": true,
+      "volume": 28.79999999999989,
+      "properties": {
+        "EvidenceBasis": "只在假设无焊脚的板边承托；板底中央留0.5，焊脚／材料／散热／压缩未验，不是绝缘等级。",
+        "Label2": "两条0.5 mm板边垫候选 RBuck"
+      },
+      "bbox": [
+        -27.5,
+        -55.05,
+        67.5,
+        -9.5,
+        -44.45,
+        68.0
+      ]
+    },
+    {
+      "name": "EffectRetainerInsertRBuckInner",
+      "label": "效果降压板 · 压框嵌件 · 右内",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.746193947594016,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级短嵌件候选 RBuckInner"
+      },
+      "bbox": [
+        -5.9,
+        -51.15,
+        67.0,
+        -3.0999999999999996,
+        -48.35,
+        69.9
+      ]
+    },
+    {
+      "name": "EffectRetainerScrewRBuckInner",
+      "label": "效果降压板 · 压框螺钉 · 右内",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 23.80106647336585,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级螺钉候选 RBuckInner"
+      },
+      "bbox": [
+        -6.3,
+        -51.55,
+        67.1,
+        -2.6999999999999997,
+        -47.95,
+        72.5
+      ]
+    },
+    {
+      "name": "EffectRetainerInsertRBuckOuter",
+      "label": "效果降压板 · 压框嵌件 · 右外",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.746193947594001,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级短嵌件候选 RBuckOuter"
+      },
+      "bbox": [
+        -33.9,
+        -51.15,
+        67.0,
+        -31.099999999999998,
+        -48.35,
+        69.9
+      ]
+    },
+    {
+      "name": "EffectRetainerScrewRBuckOuter",
+      "label": "效果降压板 · 压框螺钉 · 右外",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 23.801066473365843,
+      "properties": {
+        "EvidenceBasis": "0.50机械候选；接触面、材料、标准件规格与实物配合待核，不是绝缘或安全外壳",
+        "Label2": "压框M2级螺钉候选 RBuckOuter"
+      },
+      "bbox": [
+        -34.3,
+        -51.55,
+        67.1,
+        -30.699999999999996,
+        -47.95,
+        72.5
+      ]
+    },
+    {
+      "name": "EffectRetainerRBuck",
+      "label": "效果降压板 · 压框 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 311.9968149339748,
+      "properties": {
+        "EvidenceBasis": "机外拆两颗M2级螺钉后上取压框，再提板；框只覆盖假设无元件的板边，PCB上方留0.4，不压紧元件。",
+        "Label2": "单板开窗防脱压框候选 RBuck"
+      },
+      "bbox": [
+        -34.8,
+        -56.75,
+        70.0,
+        -2.2,
+        -42.75,
+        71.2
+      ]
+    },
+    {
+      "name": "EffectTray",
+      "label": "效果板 · 承板",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 5124.497752377159,
+      "properties": {
+        "EvidenceBasis": "底Z66.5，上Z68.5；板座下凹1、四耳厚4、螺钉头底66.6；下方至少2 mm候选，公差与强度待验。",
+        "Label2": "效果板低位承板／凹座、防脱压框与四点沉台"
+      },
+      "bbox": [
+        -50.7,
+        -56.75,
+        66.5,
+        50.7,
+        -22.0,
+        70.5
+      ]
+    },
+    {
+      "name": "MT3608Envelope",
+      "label": "MT3608 · 升压板（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 3996.0,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-25实测长37×宽18×厚6 mm；完整外包络，无推定PCB、孔位、焊脚或电位器位置；L298N左上方候选，固定方式待设计",
+        "Label2": "P06 MT3608 升压板／37×18×6 实测包络"
+      },
+      "bbox": [
+        25.0,
+        -17.0,
+        82.0,
+        43.0,
+        20.0,
+        88.0
+      ]
+    },
+    {
+      "name": "IgnitionMOSBoard",
+      "label": "点火 MOS · 控制板（占位）",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 4391.999999999999,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火P01独立安装位／Board"
+      },
+      "bbox": [
+        -16.5,
+        -89.0,
+        56.0,
+        16.5,
+        -72.0,
+        68.0
+      ]
+    },
+    {
+      "name": "IgnitionMOSSupport",
+      "label": "点火 MOS · 板边垫",
+      "category": "structure",
+      "solids": 2,
+      "valid": true,
+      "volume": 49.599999999999895,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火P01独立安装位／Support"
+      },
+      "bbox": [
+        -15.5,
+        -88.8,
+        55.5,
+        15.5,
+        -72.2,
+        56.0
+      ]
+    },
+    {
+      "name": "IgnitionMOSRetainer",
+      "label": "点火 MOS · 压框",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 469.76969498710486,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火P01独立安装位／Retainer"
+      },
+      "bbox": [
+        -22.8,
+        -90.5,
+        58.0,
+        22.799999999999997,
+        -70.5,
+        59.2
+      ]
+    },
+    {
+      "name": "IgnitionMOSRetainerInsertInner",
+      "label": "点火 MOS · 压框嵌件 · 内侧",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.746193947594012,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火P01独立安装位／RetainerInsertInner"
+      },
+      "bbox": [
+        -21.9,
+        -81.9,
+        55.0,
+        -19.1,
+        -79.1,
+        57.900000000000006
+      ]
+    },
+    {
+      "name": "IgnitionMOSRetainerScrewInner",
+      "label": "点火 MOS · 压框螺钉 · 内侧",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 23.80106647336584,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火P01独立安装位／RetainerScrewInner"
+      },
+      "bbox": [
+        -22.3,
+        -82.3,
+        55.099999999999994,
+        -18.7,
+        -78.7,
+        60.5
+      ]
+    },
+    {
+      "name": "IgnitionMOSRetainerInsertOuter",
+      "label": "点火 MOS · 压框嵌件 · 外侧",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 8.746193947594008,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火P01独立安装位／RetainerInsertOuter"
+      },
+      "bbox": [
+        19.1,
+        -81.9,
+        55.0,
+        21.9,
+        -79.1,
+        57.900000000000006
+      ]
+    },
+    {
+      "name": "IgnitionMOSRetainerScrewOuter",
+      "label": "点火 MOS · 压框螺钉 · 外侧",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 23.80106647336584,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火P01独立安装位／RetainerScrewOuter"
+      },
+      "bbox": [
+        18.7,
+        -82.3,
+        55.099999999999994,
+        22.3,
+        -78.7,
+        60.5
+      ]
+    },
+    {
+      "name": "IgnitionMOSMountInsertL",
+      "label": "点火 MOS · 托架嵌件 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 37.52239725631305,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火MOS托架吊柱嵌件候选 L"
+      },
+      "bbox": [
+        21.0,
+        -90.0,
+        58.6,
+        25.0,
+        -86.0,
+        63.5
+      ]
+    },
+    {
+      "name": "IgnitionMOSMountScrewL",
+      "label": "点火 MOS · 托架固定螺钉 · 左",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 57.4106144752009,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火MOS独立托架底部M2.5级候选螺钉 L"
+      },
+      "bbox": [
+        20.6,
+        -90.4,
+        54.6,
+        25.4,
+        -85.6,
+        63.1
+      ]
+    },
+    {
+      "name": "IgnitionMOSMountInsertR",
+      "label": "点火 MOS · 托架嵌件 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 37.52239725631305,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火MOS托架吊柱嵌件候选 R"
+      },
+      "bbox": [
+        -25.0,
+        -90.0,
+        58.6,
+        -21.0,
+        -86.0,
+        63.5
+      ]
+    },
+    {
+      "name": "IgnitionMOSMountScrewR",
+      "label": "点火 MOS · 托架固定螺钉 · 右",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 57.410614475200894,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火MOS独立托架底部M2.5级候选螺钉 R"
+      },
+      "bbox": [
+        -25.4,
+        -90.4,
+        54.6,
+        -20.6,
+        -85.6,
+        63.1
+      ]
+    },
+    {
+      "name": "IgnitionMOSCarrier",
+      "label": "点火 MOS · 独立托架",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 1286.3246087698121,
+      "properties": {
+        "EvidenceBasis": "用户确认两只点火模块共用第三块同款P01；33×17平面、总高12及PCB/空白边沿用既有候选，非实测；只做安装位，不构成电气选型或通电验收",
+        "Label2": "点火P01前舱独立可拆托架／两点吊装"
+      },
+      "bbox": [
+        -25.8,
+        -90.8,
+        54.5,
+        25.8,
+        -70.5,
+        58.5
+      ]
+    },
+    {
+      "name": "FrontEffectSleeveL1",
+      "label": "前舱效果线 · 根部护套（外观示意） · 左1",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 68.89512689322413,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-25指定底盘前方左右各两根线，并补充单线外径1.5 mm；位置、长度及护套仍为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
+        "Label2": "左前方效果线1／根部护套外观"
+      },
+      "bbox": [
+        41.0,
+        -109.0,
+        59.0,
+        47.0,
+        -106.0,
+        65.0
+      ]
+    },
+    {
+      "name": "FrontEffectLeadL1",
+      "label": "前舱效果线 · 线体（外观占位） · 左1",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 51.57066591705156,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-25指定底盘前方左右各两根线，并补充单线外径1.5 mm；位置、长度及护套仍为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
+        "Label2": "左前方效果线1／封闭端外观占位"
+      },
+      "bbox": [
+        43.25,
+        -137.75,
+        61.23170462855892,
+        44.75,
+        -109.0,
+        68.97222222222223
+      ]
+    },
+    {
+      "name": "FrontEffectSleeveL2",
+      "label": "前舱效果线 · 根部护套（外观示意） · 左2",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 68.89512689322412,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-25指定底盘前方左右各两根线，并补充单线外径1.5 mm；位置、长度及护套仍为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
+        "Label2": "左前方效果线2／根部护套外观"
+      },
+      "bbox": [
+        51.0,
+        -109.0,
+        50.0,
+        57.0,
+        -106.0,
+        56.0
+      ]
+    },
+    {
+      "name": "FrontEffectLeadL2",
+      "label": "前舱效果线 · 线体（外观占位） · 左2",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 51.570665917052104,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-25指定底盘前方左右各两根线，并补充单线外径1.5 mm；位置、长度及护套仍为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
+        "Label2": "左前方效果线2／封闭端外观占位"
+      },
+      "bbox": [
+        53.25,
+        -137.75,
+        52.23170462855892,
+        54.75,
+        -109.0,
+        59.97222222222222
+      ]
+    },
+    {
+      "name": "FrontEffectSleeveR1",
+      "label": "前舱效果线 · 根部护套（外观示意） · 右1",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 68.89512689322413,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-25指定底盘前方左右各两根线，并补充单线外径1.5 mm；位置、长度及护套仍为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
+        "Label2": "右前方效果线1／根部护套外观"
+      },
+      "bbox": [
+        -47.0,
+        -109.0,
+        59.0,
+        -41.0,
+        -106.0,
+        65.0
+      ]
+    },
+    {
+      "name": "FrontEffectLeadR1",
+      "label": "前舱效果线 · 线体（外观占位） · 右1",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 51.57066591705156,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-25指定底盘前方左右各两根线，并补充单线外径1.5 mm；位置、长度及护套仍为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
+        "Label2": "右前方效果线1／封闭端外观占位"
+      },
+      "bbox": [
+        -44.75,
+        -137.75,
+        61.23170462855892,
+        -43.25,
+        -109.0,
+        68.97222222222223
+      ]
+    },
+    {
+      "name": "FrontEffectSleeveR2",
+      "label": "前舱效果线 · 根部护套（外观示意） · 右2",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 68.89512689322412,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-25指定底盘前方左右各两根线，并补充单线外径1.5 mm；位置、长度及护套仍为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
+        "Label2": "右前方效果线2／根部护套外观"
+      },
+      "bbox": [
+        -57.0,
+        -109.0,
+        50.0,
+        -51.0,
+        -106.0,
+        56.0
+      ]
+    },
+    {
+      "name": "FrontEffectLeadR2",
+      "label": "前舱效果线 · 线体（外观占位） · 右2",
+      "category": "exterior",
+      "solids": 1,
+      "valid": true,
+      "volume": 51.570665917052104,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-25指定底盘前方左右各两根线，并补充单线外径1.5 mm；位置、长度及护套仍为外观假设，不是高压线材、电极、放电间距、绝缘或安装规格；不含内部接线",
+        "Label2": "右前方效果线2／封闭端外观占位"
+      },
+      "bbox": [
+        -54.75,
+        -137.75,
+        52.23170462855892,
+        -53.25,
+        -109.0,
+        59.97222222222222
+      ]
+    },
+    {
+      "name": "IgnitionRouteL",
+      "label": "点火走线 · 双线走廊（审查区） · 左",
+      "category": "clearance",
+      "solids": 1,
+      "valid": true,
+      "volume": 2705.5459610156827,
+      "properties": {
+        "EvidenceBasis": "用户给定单线外径1.5 mm、每侧两根；背包附近向内收，经电机顶面内侧，从前舱肩部入壳并从前脸出线；走廊是空间预算，不是实际线束或绝缘规格。模块出线端、弯曲半径、固定护盖及实物穿线仍待验证",
+        "Label2": "底盘上表面内收至前舱的双线走廊 IgnitionRouteL"
+      },
+      "bbox": [
+        53.0,
+        -86.0,
+        57.0,
+        74.76923076923077,
+        86.84615384615384,
+        132.0
+      ]
+    },
+    {
+      "name": "IgnitionRouteBranchL1",
+      "label": "点火走线 · 单线接近区（审查区） · 左1",
+      "category": "clearance",
+      "solids": 1,
+      "valid": true,
+      "volume": 95.25355640179495,
+      "properties": {
+        "EvidenceBasis": "用户给定单线外径1.5 mm、每侧两根；背包附近向内收，经电机顶面内侧，从前舱肩部入壳并从前脸出线；走廊是空间预算，不是实际线束或绝缘规格。模块出线端、弯曲半径、固定护盖及实物穿线仍待验证",
+        "Label2": "前端单线接近区 IgnitionRouteBranchL1"
+      },
+      "bbox": [
+        43.0,
+        -111.0,
+        58.02155941848062,
+        55.65310051627616,
+        -85.21507086684477,
+        63.0
+      ]
+    },
+    {
+      "name": "IgnitionRouteBranchL2",
+      "label": "点火走线 · 单线接近区（审查区） · 左2",
+      "category": "clearance",
+      "solids": 1,
+      "valid": true,
+      "volume": 87.41815808123758,
+      "properties": {
+        "EvidenceBasis": "用户给定单线外径1.5 mm、每侧两根；背包附近向内收，经电机顶面内侧，从前舱肩部入壳并从前脸出线；走廊是空间预算，不是实际线束或绝缘规格。模块出线端、弯曲半径、固定护盖及实物穿线仍待验证",
+        "Label2": "前端单线接近区 IgnitionRouteBranchL2"
+      },
+      "bbox": [
+        53.0,
+        -111.0,
+        52.0,
+        55.989949493661165,
+        -85.85857864376268,
+        60.0
+      ]
+    },
+    {
+      "name": "IgnitionRouteR",
+      "label": "点火走线 · 双线走廊（审查区） · 右",
+      "category": "clearance",
+      "solids": 1,
+      "valid": true,
+      "volume": 2705.545964070583,
+      "properties": {
+        "EvidenceBasis": "用户给定单线外径1.5 mm、每侧两根；背包附近向内收，经电机顶面内侧，从前舱肩部入壳并从前脸出线；走廊是空间预算，不是实际线束或绝缘规格。模块出线端、弯曲半径、固定护盖及实物穿线仍待验证",
+        "Label2": "底盘上表面内收至前舱的双线走廊 IgnitionRouteR"
+      },
+      "bbox": [
+        -74.76923076923077,
+        -86.0,
+        57.0,
+        -53.0,
+        86.84615384615384,
+        132.0
+      ]
+    },
+    {
+      "name": "IgnitionRouteBranchR1",
+      "label": "点火走线 · 单线接近区（审查区） · 右1",
+      "category": "clearance",
+      "solids": 1,
+      "valid": true,
+      "volume": 95.25355481732635,
+      "properties": {
+        "EvidenceBasis": "用户给定单线外径1.5 mm、每侧两根；背包附近向内收，经电机顶面内侧，从前舱肩部入壳并从前脸出线；走廊是空间预算，不是实际线束或绝缘规格。模块出线端、弯曲半径、固定护盖及实物穿线仍待验证",
+        "Label2": "前端单线接近区 IgnitionRouteBranchR1"
+      },
+      "bbox": [
+        -55.65310051627616,
+        -111.0,
+        58.02155941848062,
+        -43.0,
+        -85.21507086684477,
+        63.0
+      ]
+    },
+    {
+      "name": "IgnitionRouteBranchR2",
+      "label": "点火走线 · 单线接近区（审查区） · 右2",
+      "category": "clearance",
+      "solids": 1,
+      "valid": true,
+      "volume": 87.418158081149,
+      "properties": {
+        "EvidenceBasis": "用户给定单线外径1.5 mm、每侧两根；背包附近向内收，经电机顶面内侧，从前舱肩部入壳并从前脸出线；走廊是空间预算，不是实际线束或绝缘规格。模块出线端、弯曲半径、固定护盖及实物穿线仍待验证",
+        "Label2": "前端单线接近区 IgnitionRouteBranchR2"
+      },
+      "bbox": [
+        -55.989949493661165,
+        -111.0,
+        52.0,
+        -53.0,
+        -85.85857864376268,
+        60.0
+      ]
+    },
+    {
+      "name": "PowerSwitchBody",
+      "label": "电源开关 · 本体与挂耳（占位）",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 561.5247084154332,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-26实测：含耳宽19.5、耳下宽10.6、厚5.8、含脚深8.3、孔距14.8、孔径2.6、拨柄2.9方形／行程6／突出4 mm；安装面为挂耳下表面；挂耳厚0.5和居中对称、连续含脚包络为建模假设，电气与实物适配未验",
+        "Label2": "电源开关／实测包络与挂耳",
+        "ServiceGroup": "power_switch"
+      },
+      "bbox": [
+        -9.75,
+        -66.9,
+        72.8,
+        9.75,
+        -61.1,
+        81.6
+      ]
+    },
+    {
+      "name": "PowerSwitchLever",
+      "label": "电源开关 · 拨柄",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 29.43500000000002,
+      "properties": {
+        "EvidenceBasis": "用户2026-10-26实测：含耳宽19.5、耳下宽10.6、厚5.8、含脚深8.3、孔距14.8、孔径2.6、拨柄2.9方形／行程6／突出4 mm；安装面为挂耳下表面；挂耳厚0.5和居中对称、连续含脚包络为建模假设，电气与实物适配未验",
+        "Label2": "电源开关／拨柄／中间行程展示",
+        "ServiceGroup": "power_switch"
+      },
+      "bbox": [
+        -1.45,
+        -65.45,
+        81.6,
+        1.45,
+        -62.55,
+        85.1
+      ]
+    },
+    {
+      "name": "PowerSwitchScrew0",
+      "label": "电源开关 · 固定螺钉 · 1",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 28.349732105994292,
+      "properties": {
+        "EvidenceBasis": "Ø2×6塑料用自攻螺钉候选；仅画Ø1.6孔内芯径及头部，螺纹未建模；导孔与材料、夹紧和重复拆装待验",
+        "Label2": "电源开关／Ø2×6塑料用自攻螺钉候选 1",
+        "ServiceGroup": "power_switch"
+      },
+      "bbox": [
+        -9.200000000000001,
+        -65.8,
+        75.6,
+        -5.6000000000000005,
+        -62.2,
+        83.19999999999999
+      ]
+    },
+    {
+      "name": "PowerSwitchScrew1",
+      "label": "电源开关 · 固定螺钉 · 2",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 28.349732105994292,
+      "properties": {
+        "EvidenceBasis": "Ø2×6塑料用自攻螺钉候选；仅画Ø1.6孔内芯径及头部，螺纹未建模；导孔与材料、夹紧和重复拆装待验",
+        "Label2": "电源开关／Ø2×6塑料用自攻螺钉候选 2",
+        "ServiceGroup": "power_switch"
+      },
+      "bbox": [
+        5.6000000000000005,
+        -65.8,
+        75.6,
+        9.200000000000001,
+        -62.2,
+        83.19999999999999
+      ]
+    },
+    {
+      "name": "StopBody",
+      "label": "停止按钮 · 杆体与法兰（候选）",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 502.65482457436696,
+      "properties": {
+        "EvidenceBasis": "未选型的常开自复位无灯按钮设计预算，不是厂商参数：杆径7、杆下深10、法兰Ø10×1.5、按帽Ø8×3、螺母对边10×厚2 mm；配合螺纹、行程、端子、密封及实物尺寸待核；GPIO0/GND仅为软件停止",
+        "Label2": "BOOT停止按钮／杆体法兰候选"
+      },
+      "bbox": [
+        -41.0,
+        -27.0,
+        104.0,
+        -31.0,
+        -17.0,
+        115.5
+      ]
+    },
+    {
+      "name": "StopNut",
+      "label": "停止按钮 · 防转螺母（候选）",
+      "category": "component",
+      "solids": 1,
+      "valid": true,
+      "volume": 96.2360607439378,
+      "properties": {
+        "EvidenceBasis": "未选型的常开自复位无灯按钮设计预算，不是厂商参数：杆径7、杆下深10、法兰Ø10×1.5、按帽Ø8×3、螺母对边10×厚2 mm；配合螺纹、行程、端子、密封及实物尺寸待核；GPIO0/GND仅为软件停止；仅画螺纹大径包络，不模拟螺纹咬合",
+        "Label2": "BOOT停止按钮／后插防转螺母候选"
+      },
+      "bbox": [
+        -41.0,
+        -27.773502691896258,
+        110.0,
+        -31.0,
+        -16.226497308103742,
+        112.00000000000003
+      ]
+    },
+    {
+      "name": "StopSignalRoute",
+      "label": "停止按钮 · GPIO0／GND 走廊（规划）",
+      "category": "clearance",
+      "solids": 1,
+      "valid": true,
+      "volume": 1463.63741572082,
+      "properties": {
+        "EvidenceBasis": "BOOT GPIO0/GND的Ø2.8空间预算；上段包含于15芯Ø10总预算；末端在X60/Y6/Z194，板内末段待实物确认。",
+        "Label2": "BOOT停止按钮／GPIO0与GND双线走廊"
+      },
+      "bbox": [
+        -37.4000001,
+        -22.0,
+        100.5999999,
+        61.40000009999999,
+        23.4000001,
+        194.0
+      ]
+    },
+    {
+      "name": "PrintBackpack",
+      "label": "PP03 双瓶背包一体外壳及桶座",
+      "category": "",
+      "solids": 1,
+      "valid": true,
+      "volume": 117436.38179485023,
+      "properties": {
+        "EvidenceBasis": "0.51合并打印候选；单实体检查，不代表材料、层向、公差或实物验收",
+        "SourceFeatures": [
+          "BackpackShell",
+          "RearBaseArmor",
+          "BackpackSpine"
+        ],
+        "PrintPartID": "PP03",
+        "Label2": ""
+      },
+      "bbox": [
+        -89.7500001,
+        35.0,
+        33.9999999,
+        89.75,
+        107.5000001,
+        124.0000001
+      ]
+    },
+    {
+      "name": "PrintBubbleCradle",
+      "label": "PP02 泡泡枪一体圆环底座",
+      "category": "",
+      "solids": 1,
+      "valid": true,
+      "volume": 8334.798422350565,
+      "properties": {
+        "EvidenceBasis": "2026-10-26 打印修正：圆环下缘增加Ø32.8同心避让，枪壳径向0.65候选；实物待验。",
+        "SourceFeatures": [
+          "BubbleGunCradle",
+          "BubbleGunRing",
+          "BubbleGunSlotWall2",
+          "BubbleGunSlotWall3",
+          "BubbleGunSlotWall4",
+          "BubbleGunSlotWall5"
+        ],
+        "PrintPartID": "PP02",
+        "Label2": ""
+      },
+      "bbox": [
+        -79.99999999999999,
+        -124.78517870878939,
+        85.17354286469244,
+        -29.999999999999986,
+        -57.439305391512484,
+        144.83930766655277
+      ]
+    },
+    {
+      "name": "PrintCrown",
+      "label": "PP05 一体冠盖及装甲饰件",
+      "category": "",
+      "solids": 1,
+      "valid": true,
+      "volume": 114783.22009571081,
+      "properties": {
+        "EvidenceBasis": "0.51合并打印候选；单实体检查，不代表材料、层向、公差或实物验收",
+        "SourceFeatures": [
+          "BrowArmorL",
+          "BrowArmorR",
+          "CrownFinL",
+          "CrownFinR",
+          "HeadServiceHatch",
+          "CrownSpine",
+          "CrownForePlate",
+          "CrownSideArmorL",
+          "CrownSideArmorR",
+          "CrownRearCassette",
+          "CrownRearBlade0",
+          "CrownRearBlade1",
+          "CrownRearBlade2",
+          "OccipitalBrowL",
+          "OccipitalBrowR",
+          "CrownEffectInsetL",
+          "CrownEffectMarkLFront",
+          "CrownEffectMarkLRear",
+          "CrownEffectInsetR",
+          "CrownEffectMarkRFront",
+          "CrownEffectMarkRRear",
+          "HeadCrownShell"
+        ],
+        "PrintPartID": "PP05",
+        "Label2": ""
+      },
+      "bbox": [
+        -81.16666676666667,
+        -88.0,
+        196.0,
+        81.16666676666668,
+        36.0,
+        228.0000001
+      ]
+    },
+    {
+      "name": "PrintLowerTub",
+      "label": "PP04 一体底盘及湿舱隔板",
+      "category": "",
+      "solids": 1,
+      "valid": true,
+      "volume": 142516.6581570777,
+      "properties": {
+        "EvidenceBasis": "0.51合并打印候选；单实体检查，不代表材料、层向、公差或实物验收",
+        "SourceFeatures": [
+          "LowerTub",
+          "RearBulkhead",
+          "WetDivider"
+        ],
+        "PrintPartID": "PP04",
+        "Label2": ""
+      },
+      "bbox": [
+        -87.0,
+        -101.0,
+        27.999999999999993,
+        87.0,
+        95.0,
+        94.0
+      ]
+    },
+    {
+      "name": "PrintNeck",
+      "label": "PP06 一体固定颈架",
+      "category": "",
+      "solids": 1,
+      "valid": true,
+      "volume": 59240.620771303875,
+      "properties": {
+        "EvidenceBasis": "0.55净径10穿线通道／局部更新；PP06单实体与导出检查，不代表制造及强度验收。",
+        "SourceFeatures": [
+          "NeckPedestal",
+          "NeckYokeL",
+          "NeckOuterWebL",
+          "NeckBearingL",
+          "NeckCapL",
+          "NeckSpacerL104",
+          "NeckSpacerL136",
+          "NeckStayL",
+          "NeckStaySleeveL",
+          "NeckYokeR",
+          "NeckOuterWebR",
+          "NeckBearingR",
+          "NeckCapR",
+          "NeckSpacerR104",
+          "NeckSpacerR136",
+          "NeckStayR",
+          "NeckStaySleeveR",
+          "NeckCrossbar",
+          "NeckHeadSaddle"
+        ],
+        "PrintPartID": "PP06",
+        "Label2": ""
+      },
+      "bbox": [
+        -34.0,
+        -28.0,
+        92.99999999999997,
+        34.0,
+        22.0,
+        161.0000001
+      ]
+    },
+    {
+      "name": "PrintWaterCradle",
+      "label": "PP01 水枪一体底托",
+      "category": "",
+      "solids": 1,
+      "valid": true,
+      "volume": 13119.492912285019,
+      "properties": {
+        "EvidenceBasis": "0.51合并打印候选；单实体检查，不代表材料、层向、公差或实物验收",
+        "SourceFeatures": [
+          "WaterGunCradle",
+          "WaterGunHoseSupport",
+          "WaterGunHoseSupportRear"
+        ],
+        "PrintPartID": "PP01",
+        "Label2": ""
+      },
+      "bbox": [
+        35.79999999999999,
+        -80.15999461960963,
+        92.31196201548904,
+        82.49999999999999,
+        20.108316362893483,
+        138.8572462597746
+      ]
+    },
+    {
+      "name": "L298NEnvelope",
+      "label": "L298N · 插线包络46.2×43.5×28.5／转90°",
+      "category": "envelope",
+      "solids": 1,
+      "valid": true,
+      "volume": 57276.45,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -14.25,
+        -21.25,
+        36.0,
+        14.25,
+        22.25,
+        82.2
+      ]
+    },
+    {
+      "name": "L298NCarrier",
+      "label": "L298N · 底盖承载托架／前后限位",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 4396.091969743986,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -16.75,
+        -22.7,
+        28.799999999999997,
+        16.75,
+        24.8,
+        87.8
+      ]
+    },
+    {
+      "name": "L298NTopRetainer",
+      "label": "L298N · 可拆上压框／两螺钉机外释放",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 1631.0507106317816,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -14.5,
+        -21.25,
+        82.5,
+        14.5,
+        22.5,
+        88.0
+      ]
+    },
+    {
+      "name": "L298NBaseNutR",
+      "label": "L298N · 底部防转螺母 M2.5 · R",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 33.48379314675376,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -13.386751345948129,
+        -2.5000000000000004,
+        31.8,
+        -7.613248654051871,
+        2.500000000000001,
+        33.8
+      ]
+    },
+    {
+      "name": "L298NBaseScrewR",
+      "label": "L298N · 底盖锁紧螺钉 M2.5×8 · R",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 66.10539261683643,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -12.8,
+        -2.3,
+        24.2,
+        -8.2,
+        2.3,
+        34.0
+      ]
+    },
+    {
+      "name": "L298NBaseNutL",
+      "label": "L298N · 底部防转螺母 M2.5 · L",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 33.48379314675377,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        7.613248654051871,
+        -2.5000000000000004,
+        31.8,
+        13.386751345948129,
+        2.500000000000001,
+        33.8
+      ]
+    },
+    {
+      "name": "L298NBaseScrewL",
+      "label": "L298N · 底盖锁紧螺钉 M2.5×8 · L",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 66.10539261683643,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        8.2,
+        -2.3,
+        24.2,
+        12.8,
+        2.3,
+        34.0
+      ]
+    },
+    {
+      "name": "L298NCapNutR",
+      "label": "L298N · 上压框薄螺母 M2×1.2 · R",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 12.85777656835346,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -13.309401076758503,
+        23.5,
+        82.5,
+        -8.690598923241495,
+        24.7,
+        86.5
+      ]
+    },
+    {
+      "name": "L298NCapScrewR",
+      "label": "L298N · 上压框螺钉 M2×4 · R",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 27.62716579566868,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -12.8,
+        19.1,
+        82.7,
+        -9.2,
+        24.7,
+        86.3
+      ]
+    },
+    {
+      "name": "L298NCapNutL",
+      "label": "L298N · 上压框薄螺母 M2×1.2 · L",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 12.857776568353458,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        8.690598923241497,
+        23.5,
+        82.5,
+        13.309401076758505,
+        24.7,
+        86.5
+      ]
+    },
+    {
+      "name": "L298NCapScrewL",
+      "label": "L298N · 上压框螺钉 M2×4 · L",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 27.62716579566868,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        9.2,
+        19.1,
+        82.7,
+        12.8,
+        24.7,
+        86.3
+      ]
+    },
+    {
+      "name": "L298NBottomPadRF",
+      "label": "L298N · 绝缘接触垫候选 · BottomPadRF",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 6.999999999999975,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -13.5,
+        -21.25,
+        35.2,
+        -8.5,
+        -19.5,
+        36.0
+      ]
+    },
+    {
+      "name": "L298NBottomPadRB",
+      "label": "L298N · 绝缘接触垫候选 · BottomPadRB",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 6.999999999999975,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -13.5,
+        20.5,
+        35.2,
+        -8.5,
+        22.25,
+        36.0
+      ]
+    },
+    {
+      "name": "L298NFrontPadR",
+      "label": "L298N · 绝缘接触垫候选 · FrontPadR",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 2.25,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -12.5,
+        -21.5,
+        56.5,
+        -9.5,
+        -21.25,
+        59.5
+      ]
+    },
+    {
+      "name": "L298NRearPadR",
+      "label": "L298N · 绝缘接触垫候选 · RearPadR",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 2.25,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -12.5,
+        22.25,
+        56.5,
+        -9.5,
+        22.5,
+        59.5
+      ]
+    },
+    {
+      "name": "L298NTopPadRF",
+      "label": "L298N · 绝缘接触垫候选 · TopPadRF",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 4.375000000000001,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -13.5,
+        -21.25,
+        82.2,
+        -8.5,
+        -19.5,
+        82.7
+      ]
+    },
+    {
+      "name": "L298NTopPadRB",
+      "label": "L298N · 绝缘接触垫候选 · TopPadRB",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 2.7749999999999755,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -13.5,
+        20.4,
+        82.2,
+        -8.5,
+        22.25,
+        82.5
+      ]
+    },
+    {
+      "name": "L298NBottomPadLF",
+      "label": "L298N · 绝缘接触垫候选 · BottomPadLF",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 6.999999999999975,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        8.5,
+        -21.25,
+        35.2,
+        13.5,
+        -19.5,
+        36.0
+      ]
+    },
+    {
+      "name": "L298NBottomPadLB",
+      "label": "L298N · 绝缘接触垫候选 · BottomPadLB",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 6.999999999999975,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        8.5,
+        20.5,
+        35.2,
+        13.5,
+        22.25,
+        36.0
+      ]
+    },
+    {
+      "name": "L298NFrontPadL",
+      "label": "L298N · 绝缘接触垫候选 · FrontPadL",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 2.25,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        9.5,
+        -21.5,
+        56.5,
+        12.5,
+        -21.25,
+        59.5
+      ]
+    },
+    {
+      "name": "L298NRearPadL",
+      "label": "L298N · 绝缘接触垫候选 · RearPadL",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 2.25,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        9.5,
+        22.25,
+        56.5,
+        12.5,
+        22.5,
+        59.5
+      ]
+    },
+    {
+      "name": "L298NTopPadLF",
+      "label": "L298N · 绝缘接触垫候选 · TopPadLF",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 4.375000000000001,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        8.5,
+        -21.25,
+        82.2,
+        13.5,
+        -19.5,
+        82.7
+      ]
+    },
+    {
+      "name": "L298NTopPadLB",
+      "label": "L298N · 绝缘接触垫候选 · TopPadLB",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 2.7749999999999755,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        8.5,
+        20.4,
+        82.2,
+        13.5,
+        22.25,
+        82.5
+      ]
+    },
+    {
+      "name": "L298NSidePadR1F",
+      "label": "L298N · 绝缘接触垫候选 · SidePadR1F",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 3.5,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -14.75,
+        -21.25,
+        40.0,
+        -14.25,
+        -19.5,
+        44.0
+      ]
+    },
+    {
+      "name": "L298NSidePadR1B",
+      "label": "L298N · 绝缘接触垫候选 · SidePadR1B",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 3.5,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        -14.75,
+        20.5,
+        40.0,
+        -14.25,
+        22.25,
+        44.0
+      ]
+    },
+    {
+      "name": "L298NSidePad1F",
+      "label": "L298N · 绝缘接触垫候选 · SidePad1F",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 3.5,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        14.25,
+        -21.25,
+        40.0,
+        14.75,
+        -19.5,
+        44.0
+      ]
+    },
+    {
+      "name": "L298NSidePad1B",
+      "label": "L298N · 绝缘接触垫候选 · SidePad1B",
+      "category": "structure",
+      "solids": 1,
+      "valid": true,
+      "volume": 3.5,
+      "properties": {
+        "EvidenceBasis": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配",
+        "Label2": "2026-10-26：两电机安装面至尾部均57 mm，直接净距30 mm；L298N插线总厚28.5 mm；按较小净距设计；紧固件、PCB接触、线束、散热与打印公差待试配"
+      },
+      "bbox": [
+        14.25,
+        20.5,
+        40.0,
+        14.75,
+        22.25,
+        44.0
+      ]
+    },
+    {
+      "name": "PrintHeadShell",
+      "label": "PP07 头部下壳及固定装饰",
+      "category": "",
+      "solids": 1,
+      "valid": true,
+      "volume": 150141.32302110607,
+      "properties": {
+        "EvidenceBasis": "34个原特征＋14处连接；Ø2.5自攻外形螺丝，Ø2.1导孔待试拧；见head-shell-print-audit.json",
+        "SourceFeatures": [
+          "HeadShell",
+          "VisorRim",
+          "JawArmor",
+          "JawAccent",
+          "OccipitalFrame",
+          "OccipitalInset",
+          "OccipitalSpine",
+          "OccipitalMark",
+          "SensorMask",
+          "SensorStatusStrip",
+          "CheekArmorL",
+          "CheekArmorR",
+          "AudioSideGuardL",
+          "AudioSideGuardR",
+          "AudioEarRingL",
+          "AudioEarRingR",
+          "AudioEarGrilleL",
+          "AudioEarGrilleR",
+          "EarHubL",
+          "EarHubR",
+          "TempleGuardL",
+          "TempleGuardR",
+          "TempleCrestL",
+          "TempleCrestR",
+          "TempleLowerBladeL",
+          "TempleLowerBladeR",
+          "EarOuterArcL",
+          "EarOuterArcR",
+          "OccipitalLouverL0",
+          "OccipitalLouverL1",
+          "OccipitalLouverL2",
+          "OccipitalLouverR0",
+          "OccipitalLouverR1",
+          "OccipitalLouverR2"
+        ],
+        "PrintPartID": "PP07",
+        "Label2": ""
+      },
+      "bbox": [
+        -89.5,
+        -88.0,
+        160.9999999,
+        89.5,
+        34.5,
+        216.1
+      ]
+    }
+  ],
+  "plates": [
+    {
+      "plate": "1",
+      "name": "01 Chassis",
+      "parts": [
+        "PP04-LowerTub.stl"
+      ]
+    },
+    {
+      "plate": "2",
+      "name": "02 Accessories 14 parts",
+      "parts": [
+        "LC03-BottomServiceCover-flipped",
+        "KeelSideFrameL",
+        "KeelSideFrameR",
+        "BatteryHatch",
+        "PrintNeck",
+        "LC01-Carrier-upright",
+        "LC02-TopRetainer-flat",
+        "ShoulderRailL",
+        "ShoulderRailR",
+        "NeckCableBridge",
+        "EffectRetainerLMOS",
+        "EffectRetainerLBuck",
+        "EffectRetainerRMOS",
+        "EffectRetainerRBuck"
+      ]
+    },
+    {
+      "plate": "3",
+      "name": "03 Head shell",
+      "parts": [
+        "PP07-upright.stl"
+      ]
+    },
+    {
+      "plate": "4",
+      "name": "04 Crown and tray",
+      "parts": [
+        "PP07-Crown.stl",
+        "PP07-Tray.stl"
+      ]
+    },
+    {
+      "plate": "5",
+      "name": "05 Backpack lid and gun cradles",
+      "parts": [
+        "PP03-base",
+        "LC04-flipped",
+        "PP01-base",
+        "PP02-base"
+      ]
+    }
+  ]
+}

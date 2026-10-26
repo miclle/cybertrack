@@ -1,0 +1,254 @@
+{
+  "static": {
+    "revision": "0.57",
+    "static_overlaps": {
+      "L298NEnvelope": [],
+      "L298NCarrier": [],
+      "L298NTopRetainer": [],
+      "L298NBaseNutR": [],
+      "L298NBaseScrewR": [],
+      "L298NBaseNutL": [],
+      "L298NBaseScrewL": [],
+      "L298NCapNutR": [],
+      "L298NCapScrewR": [],
+      "L298NCapNutL": [],
+      "L298NCapScrewL": [],
+      "L298NBottomPadRF": [],
+      "L298NBottomPadRB": [],
+      "L298NFrontPadR": [],
+      "L298NRearPadR": [],
+      "L298NTopPadRF": [],
+      "L298NTopPadRB": [],
+      "L298NBottomPadLF": [],
+      "L298NBottomPadLB": [],
+      "L298NFrontPadL": [],
+      "L298NRearPadL": [],
+      "L298NTopPadLF": [],
+      "L298NTopPadLB": [],
+      "L298NSidePadR1F": [],
+      "L298NSidePadR1B": [],
+      "L298NSidePad1F": [],
+      "L298NSidePad1B": []
+    },
+    "internal_overlaps": [],
+    "wire_air_overlaps": {
+      "L298NLowerConnectorSpace": [],
+      "L298NFrontWireSpace": [],
+      "L298NRearWireSpace": [],
+      "L298NTrunkJoinSpace": [],
+      "L298NMotorExitSpace": [],
+      "L298NMotorLeadLSpace": [],
+      "L298NMotorLeadRSpace": [],
+      "L298NAirSpace": []
+    },
+    "valid": {
+      "L298NEnvelope": true,
+      "L298NCarrier": true,
+      "L298NTopRetainer": true,
+      "L298NBaseNutR": true,
+      "L298NBaseScrewR": true,
+      "L298NBaseNutL": true,
+      "L298NBaseScrewL": true,
+      "L298NCapNutR": true,
+      "L298NCapScrewR": true,
+      "L298NCapNutL": true,
+      "L298NCapScrewL": true,
+      "L298NBottomPadRF": true,
+      "L298NBottomPadRB": true,
+      "L298NFrontPadR": true,
+      "L298NRearPadR": true,
+      "L298NTopPadRF": true,
+      "L298NTopPadRB": true,
+      "L298NBottomPadLF": true,
+      "L298NBottomPadLB": true,
+      "L298NFrontPadL": true,
+      "L298NRearPadL": true,
+      "L298NTopPadLF": true,
+      "L298NTopPadLB": true,
+      "L298NSidePadR1F": true,
+      "L298NSidePadR1B": true,
+      "L298NSidePad1F": true,
+      "L298NSidePad1B": true
+    },
+    "passed": true,
+    "physical_fit_verified": false
+  },
+  "service": {
+    "cassette_removal": {
+      "distance_mm": 80,
+      "moving": [
+        "L298NEnvelope",
+        "L298NCarrier",
+        "L298NTopRetainer",
+        "L298NBaseNutR",
+        "L298NBaseScrewR",
+        "L298NBaseNutL",
+        "L298NBaseScrewL",
+        "L298NCapNutR",
+        "L298NCapScrewR",
+        "L298NCapNutL",
+        "L298NCapScrewL",
+        "L298NBottomPadRF",
+        "L298NBottomPadRB",
+        "L298NFrontPadR",
+        "L298NRearPadR",
+        "L298NTopPadRF",
+        "L298NTopPadRB",
+        "L298NBottomPadLF",
+        "L298NBottomPadLB",
+        "L298NFrontPadL",
+        "L298NRearPadL",
+        "L298NTopPadLF",
+        "L298NTopPadLB",
+        "L298NSidePadR1F",
+        "L298NSidePadR1B",
+        "L298NSidePad1F",
+        "L298NSidePad1B",
+        "BottomServiceCover"
+      ],
+      "remove_first": [
+        "BottomCoverScrew0",
+        "BottomCoverScrew1",
+        "BottomCoverScrew2",
+        "BottomCoverScrew3",
+        "BottomCoverScrew4",
+        "BottomCoverScrew5"
+      ],
+      "method": "continuous conservative carrier/cap blank sweeps plus accurate cover projection and fastener bounding sweeps",
+      "overlaps": {
+        "L298NEnvelope": [],
+        "L298NBaseNutR": [],
+        "L298NBaseScrewR": [],
+        "L298NBaseNutL": [],
+        "L298NBaseScrewL": [],
+        "L298NCapNutR": [],
+        "L298NCapScrewR": [],
+        "L298NCapNutL": [],
+        "L298NCapScrewL": [],
+        "L298NBottomPadRF": [],
+        "L298NBottomPadRB": [],
+        "L298NFrontPadR": [],
+        "L298NRearPadR": [],
+        "L298NTopPadRF": [],
+        "L298NTopPadRB": [],
+        "L298NBottomPadLF": [],
+        "L298NBottomPadLB": [],
+        "L298NFrontPadL": [],
+        "L298NRearPadL": [],
+        "L298NTopPadLF": [],
+        "L298NTopPadLB": [],
+        "L298NSidePadR1F": [],
+        "L298NSidePadR1B": [],
+        "L298NSidePad1F": [],
+        "L298NSidePad1B": [],
+        "L298NCarrier": [],
+        "L298NTopRetainer": [],
+        "BottomServiceCover": []
+      },
+      "retained_cover_screw_negative_control": [
+        {
+          "object": "BottomCoverScrew0",
+          "volume_mm3": 13.571680263507925
+        },
+        {
+          "object": "BottomCoverScrew1",
+          "volume_mm3": 13.571680263507929
+        },
+        {
+          "object": "BottomCoverScrew2",
+          "volume_mm3": 13.571680263507929
+        },
+        {
+          "object": "BottomCoverScrew3",
+          "volume_mm3": 13.571680263507925
+        },
+        {
+          "object": "BottomCoverScrew4",
+          "volume_mm3": 13.571680263507933
+        },
+        {
+          "object": "BottomCoverScrew5",
+          "volume_mm3": 13.571680263507933
+        }
+      ],
+      "disconnect_first": "power/control and motor connections or provide measured service slack; flexible wire withdrawal not certified"
+    },
+    "base_screw_tools": [
+      {
+        "name": "L298NBaseScrewR",
+        "diameter_mm": 3.2,
+        "overlaps": []
+      },
+      {
+        "name": "L298NBaseScrewL",
+        "diameter_mm": 3.2,
+        "overlaps": []
+      }
+    ],
+    "bench_cap_screws": [
+      {
+        "name": "L298NCapScrewR",
+        "sweep_overlaps": [],
+        "tool_overlaps": []
+      },
+      {
+        "name": "L298NCapScrewL",
+        "sweep_overlaps": [],
+        "tool_overlaps": []
+      }
+    ],
+    "bench_cap_lift_overlaps": [],
+    "bench_board_lift_overlaps": [],
+    "pad_envelope_contact_areas_mm2": {
+      "L298NBottomPadRF": 8.749999999999998,
+      "L298NBottomPadRB": 8.749999999999998,
+      "L298NFrontPadR": 9.0,
+      "L298NRearPadR": 9.0,
+      "L298NTopPadRF": 8.749999999999998,
+      "L298NTopPadRB": 9.250000000000005,
+      "L298NBottomPadLF": 8.749999999999998,
+      "L298NBottomPadLB": 8.749999999999998,
+      "L298NFrontPadL": 9.0,
+      "L298NRearPadL": 9.0,
+      "L298NTopPadLF": 8.749999999999998,
+      "L298NTopPadLB": 9.250000000000005,
+      "L298NSidePadR1F": 7.0,
+      "L298NSidePadR1B": 7.0,
+      "L298NSidePad1F": 7.0,
+      "L298NSidePad1B": 7.0
+    },
+    "carrier_cover_contact_area_mm2": 709.2896028916546,
+    "other_reserved_space_overlaps": {
+      "L298NEnvelope": [],
+      "L298NCarrier": [],
+      "L298NTopRetainer": [],
+      "L298NBaseNutR": [],
+      "L298NBaseScrewR": [],
+      "L298NBaseNutL": [],
+      "L298NBaseScrewL": [],
+      "L298NCapNutR": [],
+      "L298NCapScrewR": [],
+      "L298NCapNutL": [],
+      "L298NCapScrewL": [],
+      "L298NBottomPadRF": [],
+      "L298NBottomPadRB": [],
+      "L298NFrontPadR": [],
+      "L298NRearPadR": [],
+      "L298NTopPadRF": [],
+      "L298NTopPadRB": [],
+      "L298NBottomPadLF": [],
+      "L298NBottomPadLB": [],
+      "L298NFrontPadL": [],
+      "L298NRearPadL": [],
+      "L298NTopPadLF": [],
+      "L298NTopPadLB": [],
+      "L298NSidePadR1F": [],
+      "L298NSidePadR1B": [],
+      "L298NSidePad1F": [],
+      "L298NSidePad1B": []
+    },
+    "passed": true,
+    "pcb_contact_verified": false,
+    "flexible_service_verified": false
+  }
+}
