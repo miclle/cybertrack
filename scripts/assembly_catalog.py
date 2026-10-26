@@ -85,7 +85,7 @@ def relation(name, obj, group, cable_passage=False, tail_height=False):
         if name.startswith('FrontEffect'):return '底盘左右前护甲外侧','0.45每侧两根封闭端外观线与根部护套；纯造型假设，无穿壳孔、内部高压路径、电极或固定工艺，不用于接线或制造。'
         if name.startswith('BackpackArc'):return '双瓶背包一体桶座与上导环','Ø25.5×70规划本体；先解除并收置引线，再上取90。上方无硬限位，摩擦保持力与实物装配待验。'
         if name.startswith(('ArcLiner','ArcBottomPad')):return '一体桶座与本体接触界面','环带软衬0.5、底垫1 mm候选；未建压缩，实际灌封壳接触区、材料、夹持力及温升待核。'
-        if name.startswith(('EffectMOS','EffectBuck')):return '承板浅凹座与开窗压框','MOS33×17×12／降压20×11×5；PCB厚1.6、四边无元件区2.5假设。机外拆框后上取20，实际板边必须核对。'
+        if name.startswith('EffectMOS'):return '精简承板浅凹座／胶固','2026-10-26取消压框，用户采用热熔胶固定；MOS33×17×12仍为候选包络，板边、焊脚、胶固保持及温升待实测。两块降压板已由用户集成于枪体。'
         if name.startswith('EffectSupport'):return 'PCB两条板边下方','0.5 mm垫放在1 mm深座内；板底中央0.5余量，焊脚、接触区、压缩及材料待实测。'
         if name.startswith('EffectRetainerInsert'):return '承板压框支柱','8个M2级短嵌件候选；实物规格、嵌件强度及热熔工艺未定。'
         if name.startswith('EffectRetainerScrew'):return '开窗压框 → 承板支柱','每框2颗M2级候选螺钉，全机新增8颗；先整盘取出，机外上退20。'

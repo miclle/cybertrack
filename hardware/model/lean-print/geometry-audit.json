@@ -1,0 +1,148 @@
+{
+  "removed_print_parts": [
+    "EffectRetainerLMOS",
+    "EffectRetainerLBuck",
+    "EffectRetainerRMOS",
+    "EffectRetainerRBuck",
+    "IgnitionMOSRetainer"
+  ],
+  "documents": {
+    "delivery": {
+      "removed": [
+        "EffectRetainerInsertLMOSInner",
+        "EffectRetainerScrewLMOSInner",
+        "EffectRetainerInsertLMOSOuter",
+        "EffectRetainerScrewLMOSOuter",
+        "EffectRetainerLMOS",
+        "EffectBuckL",
+        "EffectSupportLBuck",
+        "EffectRetainerInsertLBuckInner",
+        "EffectRetainerScrewLBuckInner",
+        "EffectRetainerInsertLBuckOuter",
+        "EffectRetainerScrewLBuckOuter",
+        "EffectRetainerLBuck",
+        "EffectRetainerInsertRMOSInner",
+        "EffectRetainerScrewRMOSInner",
+        "EffectRetainerInsertRMOSOuter",
+        "EffectRetainerScrewRMOSOuter",
+        "EffectRetainerRMOS",
+        "EffectBuckR",
+        "EffectSupportRBuck",
+        "EffectRetainerInsertRBuckInner",
+        "EffectRetainerScrewRBuckInner",
+        "EffectRetainerInsertRBuckOuter",
+        "EffectRetainerScrewRBuckOuter",
+        "EffectRetainerRBuck",
+        "IgnitionMOSRetainer",
+        "IgnitionMOSRetainerInsertInner",
+        "IgnitionMOSRetainerScrewInner",
+        "IgnitionMOSRetainerInsertOuter",
+        "IgnitionMOSRetainerScrewOuter"
+      ],
+      "objects": 236,
+      "other_geometry_preserved": 234,
+      "sha256": "b6ddaaa13af9ef3abf1b07f4737ce3d1032ef1f37f198cf79af1a3fa35fb20af",
+      "check": {
+        "passed": true,
+        "overlaps": {
+          "EffectTray": [],
+          "IgnitionMOSCarrier": []
+        },
+        "physical_fit_verified": false,
+        "adhesive_retention_verified": false
+      }
+    },
+    "source": {
+      "removed": [
+        "EffectRetainerInsertLMOSInner",
+        "EffectRetainerScrewLMOSInner",
+        "EffectRetainerToolLMOSInner",
+        "EffectRetainerInsertLMOSOuter",
+        "EffectRetainerScrewLMOSOuter",
+        "EffectRetainerToolLMOSOuter",
+        "EffectRetainerLMOS",
+        "EffectBuckL",
+        "EffectSupportLBuck",
+        "EffectRetainerInsertLBuckInner",
+        "EffectRetainerScrewLBuckInner",
+        "EffectRetainerToolLBuckInner",
+        "EffectRetainerInsertLBuckOuter",
+        "EffectRetainerScrewLBuckOuter",
+        "EffectRetainerToolLBuckOuter",
+        "EffectRetainerLBuck",
+        "EffectPortLBuckInner",
+        "EffectPortLBuckOuter",
+        "EffectRetainerInsertRMOSInner",
+        "EffectRetainerScrewRMOSInner",
+        "EffectRetainerToolRMOSInner",
+        "EffectRetainerInsertRMOSOuter",
+        "EffectRetainerScrewRMOSOuter",
+        "EffectRetainerToolRMOSOuter",
+        "EffectRetainerRMOS",
+        "EffectBuckR",
+        "EffectSupportRBuck",
+        "EffectRetainerInsertRBuckInner",
+        "EffectRetainerScrewRBuckInner",
+        "EffectRetainerToolRBuckInner",
+        "EffectRetainerInsertRBuckOuter",
+        "EffectRetainerScrewRBuckOuter",
+        "EffectRetainerToolRBuckOuter",
+        "EffectRetainerRBuck",
+        "EffectPortRBuckInner",
+        "EffectPortRBuckOuter",
+        "EffectWireSideL",
+        "EffectWireSideR",
+        "IgnitionMOSRetainer",
+        "IgnitionMOSRetainerInsertInner",
+        "IgnitionMOSRetainerScrewInner",
+        "IgnitionMOSRetainerInsertOuter",
+        "IgnitionMOSRetainerScrewOuter"
+      ],
+      "objects": 392,
+      "other_geometry_preserved": 390,
+      "sha256": "7c91cb04c63af63b136dd4f80d72d9c79ed6168995d6825397ba10a41888a182",
+      "check": {
+        "passed": true,
+        "overlaps": {
+          "EffectTray": [],
+          "IgnitionMOSCarrier": []
+        },
+        "physical_fit_verified": false,
+        "adhesive_retention_verified": false
+      }
+    }
+  },
+  "parts": {
+    "EffectTray": {
+      "old_volume_mm3": 5124.560666571989,
+      "volume_mm3": 3155.3059759057965,
+      "removed_volume_mm3": 1969.2546906661923,
+      "manifold": true,
+      "components": 1,
+      "step_delta_mm3": 0.0,
+      "translation": [
+        -0.0,
+        39.375,
+        -66.5
+      ]
+    },
+    "IgnitionMOSCarrier": {
+      "old_volume_mm3": 1286.336047714344,
+      "volume_mm3": 1139.2449640325808,
+      "removed_volume_mm3": 147.09108368176317,
+      "manifold": true,
+      "components": 1,
+      "step_delta_mm3": 0.0,
+      "translation": [
+        -0.0,
+        80.65,
+        -54.5
+      ]
+    }
+  },
+  "gun_buck_positions_measured": false,
+  "changed_print_parts": [
+    "EffectTray",
+    "IgnitionMOSCarrier"
+  ]
+}

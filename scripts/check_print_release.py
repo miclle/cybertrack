@@ -16,7 +16,7 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def check():
+def check_legacy():
     project = READY / 'CyberTrack-Ready-6plates.3mf'
     inventory = json.loads((READY / 'completion-inventory.json').read_text())
     earlier = json.loads((READY / 'completeness-audit.json').read_text())
@@ -70,6 +70,41 @@ def check():
             'plates': counts, 'old_five_plates_unchanged': True, 'grommets_absent': True,
             'gcode_sha256': hashes, 'checked_new_plate_sections': 56,
             'limits': 'Saved model/project inventory and recorded path evidence; not physical acceptance.'}
+
+
+def check():
+    lean = MODEL / 'lean-print'
+    if not (lean / 'delivery-check.json').exists():
+        return check_legacy()
+    report = json.loads((lean / 'delivery-check.json').read_text())
+    geometry = json.loads((lean / 'geometry-audit.json').read_text())
+    project = ROOT / report['project']
+    assert report['passed'] and sha(project) == report['project_sha256']
+    assert sha(MODEL/'CyberTrack.FCStd') == geometry['documents']['delivery']['sha256']
+    assert sha(MODEL/'source/CyberTrack-design.FCStd') == geometry['documents']['source']['sha256']
+    baseline = MODEL / 'archive/print-baselines/CyberTrack-34parts-6plates.3mf'
+    assert sha(baseline) == report['original_project_sha256']
+    with zipfile.ZipFile(project) as z, zipfile.ZipFile(baseline) as old:
+        settings = E.fromstring(z.read('Metadata/model_settings.config'))
+        counts = [len(p.findall('model_instance')) for p in settings.findall('plate')]
+        assert counts == [1,10,13,2,1,2]
+        assert len(settings.findall('object')) == 29
+        names = {o.find("metadata[@key='name']").get('value') for o in settings.findall('object')}
+        assert not names.intersection(report['removed'])
+        for row in report['plates']:
+            i = row['plate']; path = f'Metadata/plate_{i}.gcode'; code = z.read(path)
+            assert hashlib.sha256(code).hexdigest() == report['gcode_sha256'][str(i)]
+            assert hashlib.md5(code).hexdigest() == z.read(path+'.md5').decode().strip().lower()
+            if row['original_plate'] in report['unchanged_gcode_original_plates']:
+                assert code == old.read(f"Metadata/plate_{row['original_plate']}.gcode")
+        assert z.read('Metadata/project_settings.config') == old.read('Metadata/project_settings.config')
+    assert all(r['passed'] for r in report['checked_native_sections'])
+    return {'passed': True, 'project': report['project'], 'print_parts':29, 'plates':counts,
+            'native_geometry_objects': report['verified_native_geometry_objects'],
+            'checked_native_sections':len(report['checked_native_sections']),
+            'unchanged_gcode_original_plates': report['unchanged_gcode_original_plates'],
+            'saved_seconds':report['saved_seconds'], 'saved_grams':report['saved_grams'],
+            'limits': report['limits']}
 
 
 if __name__ == '__main__':
