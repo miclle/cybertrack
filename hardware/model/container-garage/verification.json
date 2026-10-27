@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-27",
+  "status": "appearance_concept_only",
+  "model_source": "../readback.json",
+  "model_source_sha256": "ba11d6782433d236c5257f78e6c132b59f107799c09c26600ebe0190aed9e07f",
+  "model_xyz_mm": [
+    228.0,
+    245.2500001,
+    228.00000000248912
+  ],
+  "interior_length_width_height_mm": [
+    280,
+    260,
+    250
+  ],
+  "external_target_length_width_height_mm": [
+    300,
+    280,
+    270
+  ],
+  "side_clearance_each_mm": 16.0,
+  "longitudinal_clearance_total_mm": 34.749999900000006,
+  "top_clearance_mm": 21.999999997510884,
+  "idealized_ramp_length_mm": 250,
+  "idealized_floor_height_mm": 12,
+  "idealized_ramp_slope_deg": 2.7512545888793243,
+  "idealized_open_angle_from_vertical_deg": 92.75125458887932,
+  "idealized_open_footprint_length_mm": 549.7118339206214,
+  "interior_volume_litres": 18.2,
+  "volume_reduction_vs_previous_proposal_percent": 45.522030651341,
+  "image": {
+    "path": "appearance-closed-open.png",
+    "width_px": 1774,
+    "height_px": 887,
+    "sha256": "2f76d2576456b0c027df8cc37b96fe584665ff954b867e99320efb472e8548d7"
+  },
+  "visual_review": {
+    "closed_and_open_states": true,
+    "closed_crown_without_overhead_wires": true,
+    "robot_reference_applied": true,
+    "dimensional_fidelity_verified": false
+  },
+  "cad_sweep_verified": false,
+  "physical_fit_verified": false,
+  "structural_load_verified": false,
+  "manufacturing_released": false
+}
