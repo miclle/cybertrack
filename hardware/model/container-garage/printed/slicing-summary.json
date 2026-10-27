@@ -1,0 +1,868 @@
+{
+  "user_printer": "P2SC; 256 x 256 x 256 mm supplied by user",
+  "profile": "Bambu Lab P2S 0.4 nozzle; Bambu PLA Basic",
+  "plates": [
+    {
+      "plate": "B01",
+      "failed": false,
+      "seconds": 14927.4990234375,
+      "grams": 247.90708923339844,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 505.8365783691406,
+        "Bridge": 854.920654296875,
+        "Brim": 57.72565841674805,
+        "Custom": 397.63323974609375,
+        "Flush": 26.0,
+        "Gap infill": 1.5635511875152588,
+        "Inner wall": 4467.640625,
+        "Internal solid infill": 2150.237548828125,
+        "Outer wall": 3177.029052734375,
+        "Overhang wall": 14.295858383178711,
+        "Sparse infill": 1466.91064453125,
+        "Support": 33.040679931640625,
+        "Support interface": 11.2955322265625,
+        "Support transition": 3.9029221534729004,
+        "Top surface": 290.89788818359375,
+        "Travel": 1481.284912109375,
+        "Undefined": 1479.7159423828125
+      },
+      "layout": [
+        {
+          "id": "B01",
+          "size_xyz_mm": [
+            152.0,
+            161.0,
+            248.0
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            50.0,
+            45.5,
+            206.0,
+            210.5
+          ],
+          "stl_sha256": "93311e14e6dbfd24607e7d88f808a40141800f110b20cd96a31646188f6a9bce"
+        },
+        {
+          "id": "L01",
+          "size_xyz_mm": [
+            10.0,
+            18.0,
+            2.4000000953674316
+          ],
+          "centre_xy_mm": [
+            229,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            222.0,
+            117.0,
+            236.0,
+            139.0
+          ],
+          "stl_sha256": "cf90f0cbc527120b9327ca07d60434dfe4ffc01514c096ca82e88811a0316837"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "3",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "7",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.96",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/B01/B01.3mf"
+    },
+    {
+      "plate": "B02",
+      "failed": false,
+      "seconds": 21747.080078125,
+      "grams": 350.8131103515625,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 513.4911499023438,
+        "Bridge": 908.8727416992188,
+        "Brim": 48.43816375732422,
+        "Custom": 397.5220031738281,
+        "Flush": 26.0,
+        "Gap infill": 1.1399370431900024,
+        "Inner wall": 7424.98291015625,
+        "Internal solid infill": 2239.790283203125,
+        "Outer wall": 5505.2021484375,
+        "Overhang wall": 15.353650093078613,
+        "Sparse infill": 1405.445068359375,
+        "Support": 189.4615478515625,
+        "Support interface": 13.896873474121094,
+        "Support transition": 7.389585494995117,
+        "Top surface": 302.1415710449219,
+        "Travel": 2751.7216796875,
+        "Undefined": 2750.152587890625
+      },
+      "layout": [
+        {
+          "id": "B02",
+          "size_xyz_mm": [
+            152.0,
+            149.0,
+            248.0
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            50.0,
+            51.5,
+            206.0,
+            204.5
+          ],
+          "stl_sha256": "e366739550316ffecb289d782947cda3c89219bbfa5f2e7a0c7f028c277f5a69"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "3",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "7",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.96",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/B02/B02.3mf"
+    },
+    {
+      "plate": "B03",
+      "failed": false,
+      "seconds": 14784.623046875,
+      "grams": 246.73184204101562,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 488.3274230957031,
+        "Bridge": 852.502685546875,
+        "Brim": 48.05982208251953,
+        "Custom": 397.5111999511719,
+        "Flush": 26.0,
+        "Gap infill": 0.9180828928947449,
+        "Inner wall": 4376.927734375,
+        "Internal solid infill": 2116.1162109375,
+        "Outer wall": 3172.602783203125,
+        "Overhang wall": 17.483198165893555,
+        "Sparse infill": 1447.5242919921875,
+        "Support": 63.97367477416992,
+        "Support interface": 17.74966812133789,
+        "Support transition": 8.796457290649414,
+        "Top surface": 279.8699951171875,
+        "Travel": 1480.0020751953125,
+        "Undefined": 1478.43310546875
+      },
+      "layout": [
+        {
+          "id": "B03",
+          "size_xyz_mm": [
+            140.0,
+            161.0,
+            248.0
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            56.0,
+            45.5,
+            200.0,
+            210.5
+          ],
+          "stl_sha256": "9a7d38ffa6510b621e0a66638c3567eb3f150f4e0765b1120278f25d2d1c0c37"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "3",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "7",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.96",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/B03/B03.3mf"
+    },
+    {
+      "plate": "B04",
+      "failed": false,
+      "seconds": 21513.251953125,
+      "grams": 344.6681213378906,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 502.5976867675781,
+        "Bridge": 906.1752319335938,
+        "Brim": 44.461936950683594,
+        "Custom": 397.588134765625,
+        "Flush": 26.0,
+        "Gap infill": 1.0869916677474976,
+        "Inner wall": 7084.31298828125,
+        "Internal solid infill": 2218.516357421875,
+        "Outer wall": 5301.1337890625,
+        "Overhang wall": 19.584856033325195,
+        "Sparse infill": 1389.7501220703125,
+        "Support": 371.82525634765625,
+        "Support interface": 21.56308364868164,
+        "Support transition": 12.564482688903809,
+        "Top surface": 302.9128112792969,
+        "Travel": 2922.47021484375,
+        "Undefined": 2920.901123046875
+      },
+      "layout": [
+        {
+          "id": "B04",
+          "size_xyz_mm": [
+            140.0,
+            149.0,
+            248.0
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            56.0,
+            51.5,
+            200.0,
+            204.5
+          ],
+          "stl_sha256": "5c73dd158f8cac13692a78ccea741b85a104bf565611441d27f232fe268126c8"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "3",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "7",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.96",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/B04/B04.3mf"
+    },
+    {
+      "plate": "R01",
+      "failed": false,
+      "seconds": 4572.455078125,
+      "grams": 79.6064224243164,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 528.1703491210938,
+        "Bridge": 110.5602798461914,
+        "Brim": 53.00078582763672,
+        "Custom": 402.95819091796875,
+        "Flush": 26.0,
+        "Gap infill": 0.493284672498703,
+        "Inner wall": 477.6847229003906,
+        "Internal solid infill": 1497.4697265625,
+        "Outer wall": 507.127685546875,
+        "Overhang wall": 4.763906002044678,
+        "Sparse infill": 383.2005310058594,
+        "Support": 16.272056579589844,
+        "Support interface": 1.0620505809783936,
+        "Support transition": 0.7214570045471191,
+        "Top surface": 309.04168701171875,
+        "Travel": 261.0095520019531,
+        "Undefined": 254.14358520507812
+      },
+      "layout": [
+        {
+          "id": "R01",
+          "size_xyz_mm": [
+            152.0,
+            161.0,
+            22.0
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            50.0,
+            45.5,
+            206.0,
+            210.5
+          ],
+          "stl_sha256": "e9bff0df50fd6561e3922a63772a3fdad3dc939501004c1b00da0d4b196b7f2f"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "2",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "4",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.12",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/R01/R01.3mf"
+    },
+    {
+      "plate": "R02",
+      "failed": false,
+      "seconds": 4807.5712890625,
+      "grams": 85.12725067138672,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 518.9038696289062,
+        "Bridge": 115.51385498046875,
+        "Brim": 52.744468688964844,
+        "Custom": 402.827880859375,
+        "Flush": 26.0,
+        "Gap infill": 0.7417594194412231,
+        "Inner wall": 543.3025512695312,
+        "Internal solid infill": 1498.6068115234375,
+        "Outer wall": 574.7555541992188,
+        "Overhang wall": 3.0597333908081055,
+        "Sparse infill": 515.3582153320312,
+        "Support": 15.824305534362793,
+        "Support interface": 1.0590680837631226,
+        "Support transition": 0.7213624715805054,
+        "Top surface": 299.2571105957031,
+        "Travel": 245.98756408691406,
+        "Undefined": 239.12159729003906
+      },
+      "layout": [
+        {
+          "id": "R02",
+          "size_xyz_mm": [
+            152.0,
+            149.0,
+            22.0
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            50.0,
+            51.5,
+            206.0,
+            204.5
+          ],
+          "stl_sha256": "c84c7a7c15c0d566c53df2a2dedddce3622fdf2178f64cf7e856958cfa880e40"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "2",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "4",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.12",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/R02/R02.3mf"
+    },
+    {
+      "plate": "R03",
+      "failed": false,
+      "seconds": 4459.2421875,
+      "grams": 77.70305633544922,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 517.5458374023438,
+        "Bridge": 101.41505432128906,
+        "Brim": 53.033729553222656,
+        "Custom": 402.97467041015625,
+        "Flush": 26.0,
+        "Gap infill": 0.35536476969718933,
+        "Inner wall": 467.3912353515625,
+        "Internal solid infill": 1462.050537109375,
+        "Outer wall": 498.19805908203125,
+        "Overhang wall": 4.763911724090576,
+        "Sparse infill": 371.0387878417969,
+        "Support": 16.30613136291504,
+        "Support interface": 1.0587677955627441,
+        "Support transition": 0.719764769077301,
+        "Top surface": 306.93389892578125,
+        "Travel": 236.41551208496094,
+        "Undefined": 229.549560546875
+      },
+      "layout": [
+        {
+          "id": "R03",
+          "size_xyz_mm": [
+            140.0,
+            161.0,
+            22.0
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            56.0,
+            45.5,
+            200.0,
+            210.5
+          ],
+          "stl_sha256": "9179f7550e5962039874569cbd830a29eef25b937466636de65e59d19e9655a9"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "2",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "4",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.12",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/R03/R03.3mf"
+    },
+    {
+      "plate": "R04",
+      "failed": false,
+      "seconds": 4695.96875,
+      "grams": 83.17565155029297,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 508.55181884765625,
+        "Bridge": 105.90027618408203,
+        "Brim": 52.784420013427734,
+        "Custom": 402.86907958984375,
+        "Flush": 26.0,
+        "Gap infill": 0.3486084043979645,
+        "Inner wall": 537.704345703125,
+        "Internal solid infill": 1449.1558837890625,
+        "Outer wall": 564.4149780273438,
+        "Overhang wall": 3.0605177879333496,
+        "Sparse infill": 501.84600830078125,
+        "Support": 15.847046852111816,
+        "Support interface": 1.0622271299362183,
+        "Support transition": 0.7201875448226929,
+        "Top surface": 291.8740234375,
+        "Travel": 240.91151428222656,
+        "Undefined": 234.04556274414062
+      },
+      "layout": [
+        {
+          "id": "R04",
+          "size_xyz_mm": [
+            140.0,
+            149.0,
+            22.0
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            56.0,
+            51.5,
+            200.0,
+            204.5
+          ],
+          "stl_sha256": "de27e2192de37c5616e272e373345de3426dbe8637056692f0412fd729b0c9fe"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "2",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "4",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.12",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/R04/R04.3mf"
+    },
+    {
+      "plate": "D01",
+      "failed": false,
+      "seconds": 7080.16064453125,
+      "grams": 110.62802124023438,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 801.410888671875,
+        "Bridge": 1519.131103515625,
+        "Brim": 62.73461151123047,
+        "Custom": 403.5041809082031,
+        "Flush": 26.0,
+        "Gap infill": 0.7127158045768738,
+        "Inner wall": 292.5677185058594,
+        "Internal solid infill": 2354.508544921875,
+        "Outer wall": 175.2410888671875,
+        "Overhang wall": 4.2208027839660645,
+        "Sparse infill": 564.9471435546875,
+        "Support": 10.850223541259766,
+        "Support interface": 7.901695251464844,
+        "Support transition": 2.1062819957733154,
+        "Top surface": 545.7992553710938,
+        "Travel": 315.0472717285156,
+        "Undefined": 307.6510314941406
+      },
+      "layout": [
+        {
+          "id": "D01",
+          "size_xyz_mm": [
+            137.5,
+            248.40878295898438,
+            11.397388458251953
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            57.25,
+            1.7956085205078125,
+            198.75,
+            254.2043914794922
+          ],
+          "stl_sha256": "9ba38992ef06b2a3a51ca099194735580b6991fd00bf2d1abd985e7a08bc64e4"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "3",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "4",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.12",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/D01/D01.3mf"
+    },
+    {
+      "plate": "D02",
+      "failed": false,
+      "seconds": 7061.30615234375,
+      "grams": 106.53573608398438,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 714.4656982421875,
+        "Bridge": 1491.9072265625,
+        "Brim": 39.83332824707031,
+        "Custom": 403.295654296875,
+        "Flush": 26.0,
+        "Gap infill": 0.48182252049446106,
+        "Inner wall": 280.4788513183594,
+        "Internal solid infill": 2219.69140625,
+        "Outer wall": 169.03355407714844,
+        "Overhang wall": 98.47716522216797,
+        "Sparse infill": 523.47021484375,
+        "Support": 184.27561950683594,
+        "Support interface": 67.93286895751953,
+        "Support transition": 46.97001266479492,
+        "Top surface": 510.7064514160156,
+        "Travel": 291.1588439941406,
+        "Undefined": 283.7626037597656
+      },
+      "layout": [
+        {
+          "id": "D02",
+          "size_xyz_mm": [
+            129.5,
+            248.40878295898438,
+            11.397388458251953
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            61.25,
+            1.7956085205078125,
+            194.75,
+            254.2043914794922
+          ],
+          "stl_sha256": "2ac69551b07639ca08221a25d86c1ee9103f312329e5208647ccb391b87bcd23"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "3",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "4",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.12",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/D02/D02.3mf"
+    }
+  ],
+  "comparison": [
+    {
+      "plate": "B02-two-walls",
+      "failed": false,
+      "seconds": 19822.775390625,
+      "grams": 342.6405334472656,
+      "warnings": "",
+      "feature_times": {
+        "Bottom surface": 520.8960571289062,
+        "Bridge": 925.4925537109375,
+        "Brim": 48.43815994262695,
+        "Custom": 397.5220031738281,
+        "Flush": 26.0,
+        "Gap infill": 1.1667455434799194,
+        "Inner wall": 5424.28955078125,
+        "Internal solid infill": 3041.11669921875,
+        "Outer wall": 5504.98486328125,
+        "Overhang wall": 12.097859382629395,
+        "Sparse infill": 1470.5186767578125,
+        "Support": 189.51107788085938,
+        "Support interface": 13.952080726623535,
+        "Support transition": 7.470020294189453,
+        "Top surface": 307.8835754394531,
+        "Travel": 1942.68408203125,
+        "Undefined": 1941.1151123046875
+      },
+      "layout": [
+        {
+          "id": "B02",
+          "size_xyz_mm": [
+            152.0,
+            149.0,
+            248.0
+          ],
+          "centre_xy_mm": [
+            128,
+            128
+          ],
+          "bounds_with_brim_mm": [
+            50.0,
+            51.5,
+            206.0,
+            204.5
+          ],
+          "stl_sha256": "e366739550316ffecb289d782947cda3c89219bbfa5f2e7a0c7f028c277f5a69"
+        }
+      ],
+      "settings": {
+        "layer_height": "0.28",
+        "wall_loops": "2",
+        "line_width": "0.6",
+        "outer_wall_line_width": "0.6",
+        "inner_wall_line_width": "0.6",
+        "sparse_infill_line_width": "0.6",
+        "internal_solid_infill_line_width": "0.6",
+        "top_surface_line_width": "0.6",
+        "sparse_infill_density": "12%",
+        "sparse_infill_pattern": "gyroid",
+        "top_shell_layers": "7",
+        "bottom_shell_layers": "4",
+        "top_shell_thickness": "1.96",
+        "enable_support": "1",
+        "support_type": "normal(auto)",
+        "support_style": "snug",
+        "support_on_build_plate_only": "0",
+        "support_base_pattern_spacing": "4",
+        "support_top_z_distance": "0.2",
+        "support_critical_regions_only": "1",
+        "independent_support_layer_height": "1",
+        "brim_type": "outer_only",
+        "brim_width": "2",
+        "wall_generator": "arachne",
+        "enable_prime_tower": "0",
+        "ironing_type": "no ironing"
+      },
+      "project": "slicing/B02-two-walls/B02-two-walls.3mf"
+    }
+  ],
+  "all_sliced": true,
+  "total_seconds": 105649.158203125,
+  "total_grams": 1732.8963012695312,
+  "physical_strength_verified": false,
+  "print_time_measured": false
+}
