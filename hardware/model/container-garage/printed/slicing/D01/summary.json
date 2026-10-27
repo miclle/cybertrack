@@ -1,0 +1,76 @@
+{
+  "plate": "D01",
+  "failed": false,
+  "seconds": 7080.16064453125,
+  "grams": 110.62802124023438,
+  "warnings": "",
+  "feature_times": {
+    "Bottom surface": 801.410888671875,
+    "Bridge": 1519.131103515625,
+    "Brim": 62.73461151123047,
+    "Custom": 403.5041809082031,
+    "Flush": 26.0,
+    "Gap infill": 0.7127158045768738,
+    "Inner wall": 292.5677185058594,
+    "Internal solid infill": 2354.508544921875,
+    "Outer wall": 175.2410888671875,
+    "Overhang wall": 4.2208027839660645,
+    "Sparse infill": 564.9471435546875,
+    "Support": 10.850223541259766,
+    "Support interface": 7.901695251464844,
+    "Support transition": 2.1062819957733154,
+    "Top surface": 545.7992553710938,
+    "Travel": 315.0472717285156,
+    "Undefined": 307.6510314941406
+  },
+  "layout": [
+    {
+      "id": "D01",
+      "size_xyz_mm": [
+        137.5,
+        248.40878295898438,
+        11.397388458251953
+      ],
+      "centre_xy_mm": [
+        128,
+        128
+      ],
+      "bounds_with_brim_mm": [
+        57.25,
+        1.7956085205078125,
+        198.75,
+        254.2043914794922
+      ],
+      "stl_sha256": "9ba38992ef06b2a3a51ca099194735580b6991fd00bf2d1abd985e7a08bc64e4"
+    }
+  ],
+  "settings": {
+    "layer_height": "0.28",
+    "wall_loops": "3",
+    "line_width": "0.6",
+    "outer_wall_line_width": "0.6",
+    "inner_wall_line_width": "0.6",
+    "sparse_infill_line_width": "0.6",
+    "internal_solid_infill_line_width": "0.6",
+    "top_surface_line_width": "0.6",
+    "sparse_infill_density": "12%",
+    "sparse_infill_pattern": "gyroid",
+    "top_shell_layers": "4",
+    "bottom_shell_layers": "4",
+    "top_shell_thickness": "1.12",
+    "enable_support": "1",
+    "support_type": "normal(auto)",
+    "support_style": "snug",
+    "support_on_build_plate_only": "0",
+    "support_base_pattern_spacing": "4",
+    "support_top_z_distance": "0.2",
+    "support_critical_regions_only": "1",
+    "independent_support_layer_height": "1",
+    "brim_type": "outer_only",
+    "brim_width": "2",
+    "wall_generator": "arachne",
+    "enable_prime_tower": "0",
+    "ironing_type": "no ironing"
+  },
+  "project": "slicing/D01/D01.3mf"
+}

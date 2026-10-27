@@ -1,0 +1,93 @@
+{
+  "changes": [
+    {
+      "id": "B01",
+      "added_volume_mm3": 0.0,
+      "removed_volume_mm3": 21.599999999999795,
+      "added_bbox_mm": null
+    },
+    {
+      "id": "B02",
+      "added_volume_mm3": 0.0,
+      "removed_volume_mm3": 21.60000000000023,
+      "added_bbox_mm": null
+    },
+    {
+      "id": "B03",
+      "added_volume_mm3": 0.0,
+      "removed_volume_mm3": 21.599999999999966,
+      "added_bbox_mm": null
+    },
+    {
+      "id": "B04",
+      "added_volume_mm3": 0.0,
+      "removed_volume_mm3": 0.0,
+      "added_bbox_mm": null
+    },
+    {
+      "id": "R01",
+      "added_volume_mm3": 2100.9246379489396,
+      "removed_volume_mm3": 0.0,
+      "added_bbox_mm": [
+        -80.0,
+        60.0,
+        262.0,
+        12.0,
+        153.0,
+        270.0
+      ]
+    },
+    {
+      "id": "R02",
+      "added_volume_mm3": 1050.4623189744698,
+      "removed_volume_mm3": 889.010679254397,
+      "added_bbox_mm": [
+        0.0,
+        205.0,
+        262.0,
+        12.0,
+        225.0,
+        270.0
+      ]
+    },
+    {
+      "id": "R03",
+      "added_volume_mm3": 1050.4623189744696,
+      "removed_volume_mm3": 879.0169292543973,
+      "added_bbox_mm": [
+        60.0,
+        141.0,
+        262.0,
+        80.0,
+        153.0,
+        270.0
+      ]
+    },
+    {
+      "id": "R04",
+      "added_volume_mm3": 0.0,
+      "removed_volume_mm3": 1768.0276085087942,
+      "added_bbox_mm": null
+    }
+  ],
+  "union_added_volume_mm3": 812.68155888029,
+  "union_added_bbox_mm": [
+    -80.0,
+    60.0,
+    262.0,
+    80.0,
+    225.0,
+    270.0
+  ],
+  "added_intersection_with_motion_corridor_mm3": 0.0,
+  "motion_corridor_xyz_mm": [
+    -120,
+    -600,
+    0,
+    120,
+    280,
+    258
+  ],
+  "door_unchanged": true,
+  "proof": "Added fixed material is outside conservative robot corridor and above door sweep; unchanged door and reduced wall material preserve prior path checks."
+}

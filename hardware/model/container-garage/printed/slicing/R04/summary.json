@@ -1,0 +1,76 @@
+{
+  "plate": "R04",
+  "failed": false,
+  "seconds": 4695.96875,
+  "grams": 83.17565155029297,
+  "warnings": "",
+  "feature_times": {
+    "Bottom surface": 508.55181884765625,
+    "Bridge": 105.90027618408203,
+    "Brim": 52.784420013427734,
+    "Custom": 402.86907958984375,
+    "Flush": 26.0,
+    "Gap infill": 0.3486084043979645,
+    "Inner wall": 537.704345703125,
+    "Internal solid infill": 1449.1558837890625,
+    "Outer wall": 564.4149780273438,
+    "Overhang wall": 3.0605177879333496,
+    "Sparse infill": 501.84600830078125,
+    "Support": 15.847046852111816,
+    "Support interface": 1.0622271299362183,
+    "Support transition": 0.7201875448226929,
+    "Top surface": 291.8740234375,
+    "Travel": 240.91151428222656,
+    "Undefined": 234.04556274414062
+  },
+  "layout": [
+    {
+      "id": "R04",
+      "size_xyz_mm": [
+        140.0,
+        149.0,
+        22.0
+      ],
+      "centre_xy_mm": [
+        128,
+        128
+      ],
+      "bounds_with_brim_mm": [
+        56.0,
+        51.5,
+        200.0,
+        204.5
+      ],
+      "stl_sha256": "de27e2192de37c5616e272e373345de3426dbe8637056692f0412fd729b0c9fe"
+    }
+  ],
+  "settings": {
+    "layer_height": "0.28",
+    "wall_loops": "2",
+    "line_width": "0.6",
+    "outer_wall_line_width": "0.6",
+    "inner_wall_line_width": "0.6",
+    "sparse_infill_line_width": "0.6",
+    "internal_solid_infill_line_width": "0.6",
+    "top_surface_line_width": "0.6",
+    "sparse_infill_density": "12%",
+    "sparse_infill_pattern": "gyroid",
+    "top_shell_layers": "4",
+    "bottom_shell_layers": "4",
+    "top_shell_thickness": "1.12",
+    "enable_support": "1",
+    "support_type": "normal(auto)",
+    "support_style": "snug",
+    "support_on_build_plate_only": "0",
+    "support_base_pattern_spacing": "4",
+    "support_top_z_distance": "0.2",
+    "support_critical_regions_only": "1",
+    "independent_support_layer_height": "1",
+    "brim_type": "outer_only",
+    "brim_width": "2",
+    "wall_generator": "arachne",
+    "enable_prime_tower": "0",
+    "ironing_type": "no ironing"
+  },
+  "project": "slicing/R04/R04.3mf"
+}

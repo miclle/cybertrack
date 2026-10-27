@@ -1,0 +1,76 @@
+{
+  "plate": "B03",
+  "failed": false,
+  "seconds": 14784.623046875,
+  "grams": 246.73184204101562,
+  "warnings": "",
+  "feature_times": {
+    "Bottom surface": 488.3274230957031,
+    "Bridge": 852.502685546875,
+    "Brim": 48.05982208251953,
+    "Custom": 397.5111999511719,
+    "Flush": 26.0,
+    "Gap infill": 0.9180828928947449,
+    "Inner wall": 4376.927734375,
+    "Internal solid infill": 2116.1162109375,
+    "Outer wall": 3172.602783203125,
+    "Overhang wall": 17.483198165893555,
+    "Sparse infill": 1447.5242919921875,
+    "Support": 63.97367477416992,
+    "Support interface": 17.74966812133789,
+    "Support transition": 8.796457290649414,
+    "Top surface": 279.8699951171875,
+    "Travel": 1480.0020751953125,
+    "Undefined": 1478.43310546875
+  },
+  "layout": [
+    {
+      "id": "B03",
+      "size_xyz_mm": [
+        140.0,
+        161.0,
+        248.0
+      ],
+      "centre_xy_mm": [
+        128,
+        128
+      ],
+      "bounds_with_brim_mm": [
+        56.0,
+        45.5,
+        200.0,
+        210.5
+      ],
+      "stl_sha256": "9a7d38ffa6510b621e0a66638c3567eb3f150f4e0765b1120278f25d2d1c0c37"
+    }
+  ],
+  "settings": {
+    "layer_height": "0.28",
+    "wall_loops": "3",
+    "line_width": "0.6",
+    "outer_wall_line_width": "0.6",
+    "inner_wall_line_width": "0.6",
+    "sparse_infill_line_width": "0.6",
+    "internal_solid_infill_line_width": "0.6",
+    "top_surface_line_width": "0.6",
+    "sparse_infill_density": "12%",
+    "sparse_infill_pattern": "gyroid",
+    "top_shell_layers": "7",
+    "bottom_shell_layers": "4",
+    "top_shell_thickness": "1.96",
+    "enable_support": "1",
+    "support_type": "normal(auto)",
+    "support_style": "snug",
+    "support_on_build_plate_only": "0",
+    "support_base_pattern_spacing": "4",
+    "support_top_z_distance": "0.2",
+    "support_critical_regions_only": "1",
+    "independent_support_layer_height": "1",
+    "brim_type": "outer_only",
+    "brim_width": "2",
+    "wall_generator": "arachne",
+    "enable_prime_tower": "0",
+    "ironing_type": "no ironing"
+  },
+  "project": "slicing/B03/B03.3mf"
+}
