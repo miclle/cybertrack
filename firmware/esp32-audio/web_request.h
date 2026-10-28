@@ -86,7 +86,7 @@ inline bool ParseWebCommand(const cJSON* root, WebCommand& cmd) {
     const auto move_duration = both ? get("move_duration_ms") : duration;
     const auto water_duration = both ? get("water_duration_ms") : duration;
     int left, right;
-    if ((move || both) && (!WebInteger(move_duration, 1, 3000) || !cJSON_IsString(direction) ||
+    if ((move || both) && (!WebInteger(move_duration, 1, AudioActionGuard::MoveMaxMs) || !cJSON_IsString(direction) ||
                           !AudioActionGuard::Direction(direction->valuestring, left, right))) return false;
     if ((water || both) && !WebInteger(water_duration, 1, 30000)) return false;
     if (bubbles && !WebInteger(duration, 1, AudioActionGuard::BubblesMaxMs)) return false;

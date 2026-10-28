@@ -15,7 +15,7 @@ int main() {
     for(int duration : {1,5000,10000,30000}) {
         ControlSessions s; auto id=ready(s);
         assert(accepted(s.FrenzyStart(0,id,1,s.window,duration)));
-        assert(s.guard.left==-80 && s.guard.right==80);
+        assert(s.guard.left==-90 && s.guard.right==90);
         for(int t=0;t<duration;++t) {
             s.Tick(t,false);
             if(t%500==0) assert(s.Heartbeat(t,id));
@@ -70,8 +70,8 @@ int main() {
         s.Tick(2400,false);assert(s.guard.Igniting() && s.guard.ignition.ends_at==3400);
         s.Stop(2700);assert(s.guard.ignition.cooldown_until==3000);off(s);
     }
-    { // Ordinary motion still has its original 3 s limit.
-        ControlSessions s;ready(s);assert(!accepted(s.guard.WebRequest(0,G::MoveOnly,3001,0,"left")));off(s);
+    { // Ordinary motion now accepts more than 3 s; frenzy retains its own 30 s limit.
+        ControlSessions s;ready(s);assert(accepted(s.guard.WebRequest(0,G::MoveOnly,3001,0,"left")));s.Stop(1);off(s);
     }
     for(int duration : {5000,10000,30000}) {
         ControlSessions s;ready(s);s.Release(0,s.owner);

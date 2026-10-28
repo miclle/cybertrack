@@ -31,6 +31,7 @@
   .effect-grid button{min-height:48px;font-size:14px;border-radius:10px}
   .effect-grid .effect-hold{padding:4px 2px;gap:1px}
   .effect-hold strong{font-size:12px}.effect-hold span{font-size:10px;line-height:13px}
+  .stop{margin-top:0}
   .stop{min-height:48px;font-size:17px;border-radius:11px}
   #message{min-height:28px;font-size:11px;line-height:14px;margin:0;overflow-wrap:anywhere}
 }
@@ -137,10 +138,16 @@
       function activityMessage(s) {
         if (s.state === "FAULT") { message("设备故障，动作已停止。", true); return; }
         if (s.boot_held) { message("BOOT 已按下，动作已停止。"); return; }
+        if (s.sequence_active) {
+          message("动作序列 " + s.sequence_step + "/" + s.sequence_steps +
+            (s.sequence_result === "waiting" ? "：等待下一步。" : "：执行中。"), false, true);
+          return;
+        }
         const active = s.frenzy_remaining_ms > 0 ? ["狂暴模式"] :
           [["move", directions[s.move_direction] || "行走"], ["water", "喷水"],
            ["bubbles", "吹泡泡"], ["ignition", "点火"]]
             .filter(([kind]) => s[kind + "_remaining_ms"] > 0).map(([, label]) => label);
+        if (!active.length && s.sequence_result === "cancelled") { message("动作序列已取消。"); return; }
         message(active.length ? "正在" + active.join("、") + "。" : "动作已结束。", false, active.length > 0);
       }
       function controls() {
@@ -213,7 +220,7 @@
           : "水枪";
         $("bubbles-label").textContent = s.logical_outputs.bubbles ? "吹泡泡中" : "泡泡枪";
         $("ignition-label").textContent = s.logical_outputs.ignition ? "点火中" : "点火线圈";
-        if (followingActivity) activityMessage(s);
+        if (followingActivity || s.sequence_active) activityMessage(s);
         controls();
       }
       async function request(path, body = {}, auth = token, timeoutMs = 1100) {

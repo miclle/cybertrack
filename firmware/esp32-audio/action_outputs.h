@@ -1,6 +1,7 @@
 #pragma once
 #include <driver/gpio.h>
 #include <driver/ledc.h>
+#include <climits>
 
 // Serialized by the adapter's priority-inheriting mutex, never a spinlock:
 // LEDC driver APIs may acquire their own RTOS locks.
@@ -9,8 +10,22 @@ public:
     static constexpr gpio_num_t WaterPin = GPIO_NUM_18;
     static constexpr gpio_num_t BubblesPin = GPIO_NUM_17; // Board-config free; physical wiring pending.
     static constexpr gpio_num_t IgnitionPin = GPIO_NUM_21; // One MOS for both modules; wiring pending.
-    static constexpr unsigned Duty = 204; // ~80%, 8 bit; increased from 154 after slow-motion feedback.
+    static constexpr unsigned Duty = 230; // ~90%, 8 bit; increased from 204 after slow-motion feedback.
     bool fault = false;
+    // Digital pad observations, not voltage/current or water-flow feedback.
+    // Sampled after successful output application; counters saturate on long holds.
+    struct WaterPadTrace {
+        unsigned high = 0, low = 0, motor_high = 0, motor_low = 0;
+        int first = -1, last = -1, off = -1;
+        static void Increment(unsigned& count) { if (count != UINT_MAX) ++count; }
+        void Sample(int level, bool moving) {
+            if (first < 0) first = level;
+            last = level;
+            Increment(level ? high : low);
+            if (moving) Increment(level ? motor_high : motor_low);
+        }
+    } water_pad;
+    int WaterPadLevel() const { return water_input_ready ? gpio_get_level(WaterPin) : -1; }
     bool Init() {
         uint64_t mask = (1ULL << WaterPin) | (1ULL << BubblesPin) | (1ULL << IgnitionPin);
         for (const auto& b : bridges) {
@@ -23,6 +38,9 @@ public:
         pins.pin_bit_mask = mask; pins.mode = GPIO_MODE_OUTPUT;
         pins.pull_down_en = GPIO_PULLDOWN_ENABLE;
         if (!Check(gpio_config(&pins))) return false;
+        // Preserve output mode and routing. gpio_get_level otherwise always reads 0.
+        if (!Check(gpio_input_enable(WaterPin))) return false;
+        water_input_ready = true;
         ledc_timer_config_t timer{};
         timer.speed_mode = LEDC_LOW_SPEED_MODE; timer.duty_resolution = LEDC_TIMER_8_BIT;
         timer.timer_num = LEDC_TIMER_2; timer.freq_hz = 1000; timer.clk_cfg = LEDC_AUTO_CLK;
@@ -39,8 +57,8 @@ public:
     }
     bool Apply(bool water, int left, int right, bool bubbles = false, bool ignition = false) {
         if (fault) { EmergencyOff(); return false; }
-        if ((left != 0 && left != 80 && left != -80) ||
-            (right != 0 && right != 80 && right != -80)) return Check(-1);
+        if ((left != 0 && left != 90 && left != -90) ||
+            (right != 0 && right != 90 && right != -90)) return Check(-1);
         // Change only requested lanes; stopping any one must not pulse the others.
         if ((!applied || ignition != ignition_on) && !ignition && !Check(gpio_set_level(IgnitionPin, 0))) return false;
         // Touch only the changing lane: starting/stopping water must not pulse
@@ -62,6 +80,12 @@ public:
         if ((!applied || water != water_on) && !Check(gpio_set_level(WaterPin, water))) return false;
         if ((!applied || bubbles != bubbles_on) && !Check(gpio_set_level(BubblesPin, bubbles))) return false;
         if ((!applied || ignition != ignition_on) && ignition && !Check(gpio_set_level(IgnitionPin, 1))) return false;
+        if (water) {
+            if (!water_on) water_pad = {};
+            water_pad.Sample(WaterPadLevel(), left != 0 || right != 0);
+        } else {
+            water_pad.off = WaterPadLevel();
+        }
         ignition_on = ignition;
         bubbles_on = bubbles;
         water_on = water; applied_left = left; applied_right = right; applied = true;
@@ -76,6 +100,7 @@ private:
         {GPIO_NUM_8, GPIO_NUM_9, GPIO_NUM_10, LEDC_CHANNEL_2},  // A / right
     };
     unsigned ready_mask = 0;
+    bool water_input_ready = false;
     bool water_on = false, bubbles_on = false, ignition_on = false, applied = false;
     int applied_left = 0, applied_right = 0;
     bool Check(esp_err_t error) {
@@ -96,5 +121,6 @@ private:
             (void)gpio_set_level(b.in1, 0);
             (void)gpio_set_level(b.in2, 0);
         }
+        water_pad.off = WaterPadLevel();
     }
 };

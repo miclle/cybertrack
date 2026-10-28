@@ -27,7 +27,7 @@ function harness(){
  const respond=(c,body,ok=true)=>c.resolve({ok,json:async()=>body});
  const status=(seq=1,extra={})=>({result:'ok',request_sequence:seq,window:seq,move_remaining_ms:0,water_remaining_ms:0,
   move_cooldown_ms:0,water_cooldown_ms:0,move_last_duration_ms:600,water_last_duration_ms:1000,
-  capabilities:{frenzy:true,move:true,water:true,bubbles:true,ignition:true,water_hold:true,bubbles_hold:true},drive_hold_id:0,drive_renewal:0,move_direction:'none',move_source:'none',water_source:'none',logical_outputs:{water:false},boot_held:false,state:'STOPPED',fault:'none',...extra});
+  capabilities:{frenzy:true,move:true,water:true,move_and_water:true,bubbles:true,ignition:true,water_hold:true,bubbles_hold:true},drive_hold_id:0,drive_renewal:0,move_direction:'none',move_source:'none',water_source:'none',logical_outputs:{water:false},boot_held:false,state:'STOPPED',fault:'none',...extra});
  async function connect(){const c=take('/api/pair');assert.equal(c.options.body,'{}');respond(c,{result:'ok',token:'session'});await flush();respond(take('/api/state'),status());await flush();assert(!buttons[0].disabled);}
  async function start(){const promise=ctx.beginHold(buttons[0],1);await flush();respond(take('/api/state'),status(2));await flush();return {promise,call:take('/api/action')};}
  async function hold(){const {promise,call}=await start();respond(call,status(3,{result:'accepted',drive_hold_id:1,drive_renewal:1,move_remaining_ms:600,move_source:'web',state:'ACTIVE'}));await promise;}
@@ -308,3 +308,16 @@ for(const [kind,label] of [['water','喷水'],['bubbles','吹泡泡'],['ignition
  assert.equal(h.ids.message.textContent,'动作已结束。');
 }
 console.log('PASS: live action notices finish on device state, retain concurrent activity, ignore stale receipts and preserve stop/error messages');
+
+{
+ const h=harness();await h.connect();
+ h.ctx.render(h.status(2,{sequence_active:true,sequence_step:1,sequence_steps:3,sequence_result:'running'}));
+ assert.equal(h.ids.message.textContent,'动作序列 1/3：执行中。');
+ h.ctx.render(h.status(3,{sequence_active:true,sequence_step:1,sequence_steps:3,sequence_result:'waiting'}));
+ assert.equal(h.ids.message.textContent,'动作序列 1/3：等待下一步。');
+ h.ctx.render(h.status(4,{sequence_active:false,sequence_result:'cancelled'}));
+ assert.equal(h.ids.message.textContent,'动作序列已取消。');
+ h.ctx.activityMessage(h.status(5,{sequence_result:'cancelled',water_remaining_ms:1000}));
+ assert.equal(h.ids.message.textContent,'正在喷水。');
+}
+console.log('PASS: sequence running/waiting/cancelled status never misreports inter-step waiting as completion');

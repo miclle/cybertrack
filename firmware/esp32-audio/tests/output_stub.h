@@ -14,6 +14,8 @@ struct ledc_channel_config_t { int gpio_num, speed_mode, channel, timer_sel, dut
 esp_err_t gpio_set_level(gpio_num_t, uint32_t);
 esp_err_t gpio_set_direction(gpio_num_t, int);
 esp_err_t gpio_config(const gpio_config_t*);
+esp_err_t gpio_input_enable(gpio_num_t);
+int gpio_get_level(gpio_num_t);
 esp_err_t ledc_timer_config(const ledc_timer_config_t*);
 esp_err_t ledc_channel_config(const ledc_channel_config_t*);
 esp_err_t ledc_stop(int, ledc_channel_t, uint32_t);

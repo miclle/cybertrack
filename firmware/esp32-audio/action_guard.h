@@ -6,8 +6,8 @@
 // Called only under the adapter mutex. Tickets are bound to their target lanes.
 class AudioActionGuard {
 public:
-    enum Target { MoveOnly = 1, WaterOnly = 2, Both = 3, BubblesOnly = 4, IgnitionOnly = 8, All = 15, FrenzyMode = 16 };
-    static constexpr int MoveMaxMs = 3000;
+    enum Target { MoveOnly = 1, WaterOnly = 2, Both = 3, BubblesOnly = 4, IgnitionOnly = 8, All = 15, FrenzyMode = 16, PlanMode = 32 };
+    static constexpr int MoveMaxMs = INT_MAX;
     static constexpr int BubblesMaxMs = 30000;
     static constexpr int IgnitionMaxMs = 5000;
     static constexpr unsigned CooldownMs = 200;
@@ -83,6 +83,9 @@ public:
         water_stop(&ignition, now);
         FinishIgnition(now, igniting);
     }
+    const char* ClaimPlan(uint64_t now, int ticket) {
+        return Request(now, ticket, PlanMode, 0, 0, nullptr);
+    }
     const char* VoiceFrenzy(uint64_t now, int ticket, int duration) {
         return Request(now, ticket, FrenzyMode, duration, 0, nullptr);
     }
@@ -97,7 +100,7 @@ public:
             std::strcmp(Execute(now, IgnitionOnly, 0, 0, nullptr, 0, pulse), "accepted")) {
             Stop(now); return "not_ready_or_busy";
         }
-        motion.ends_at = now + duration; // Only this bounded mode extends timed motion beyond 3 s.
+        motion.ends_at = now + duration; // Mode motion lasts until the shared mode deadline.
         move_duration_ms = last_duration_ms = duration;
         return "accepted";
     }
@@ -144,10 +147,10 @@ public:
     }
     static bool Direction(const char* value, int& a, int& b) {
         if (!value) return false;
-        if (!std::strcmp(value, "forward")) { a = 80; b = 80; }
-        else if (!std::strcmp(value, "backward")) { a = -80; b = -80; }
-        else if (!std::strcmp(value, "left")) { a = -80; b = 80; }
-        else if (!std::strcmp(value, "right")) { a = 80; b = -80; }
+        if (!std::strcmp(value, "forward")) { a = 90; b = 90; }
+        else if (!std::strcmp(value, "backward")) { a = -90; b = -90; }
+        else if (!std::strcmp(value, "left")) { a = -90; b = 90; }
+        else if (!std::strcmp(value, "right")) { a = 90; b = -90; }
         else return false;
         return true;
     }
@@ -170,7 +173,7 @@ private:
                now >= p.last_ms && now >= p.cooldown_until && now <= UINT64_MAX - WATER_PERMIT_MS;
     }
     bool Ready(uint64_t now, Target target) const {
-        if (target == FrenzyMode) return Ready(now, Both) && Ready(now, BubblesOnly) && Ready(now, IgnitionOnly);
+        if (target == FrenzyMode || target == PlanMode) return Ready(now, Both) && Ready(now, BubblesOnly) && Ready(now, IgnitionOnly);
         return (target == MoveOnly || target == WaterOnly || target == Both || target == BubblesOnly || target == IgnitionOnly) &&
                (!(target & MoveOnly) || LaneReady(motion, now)) &&
                (!(target & WaterOnly) || LaneReady(spray, now)) &&
@@ -179,7 +182,7 @@ private:
     }
     void Cancel(Target target) {
         for (unsigned i = 0; i < count_; ++i)
-            if ((requests_[i].target & target) || requests_[i].target == FrenzyMode || target == FrenzyMode) requests_[i].pending = false;
+            if ((requests_[i].target & target) || requests_[i].target == FrenzyMode || requests_[i].target == PlanMode || target == FrenzyMode || target == PlanMode) requests_[i].pending = false;
     }
     const char* Request(uint64_t now, int ticket, Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int ignition_ms = 0) {
         RequestRecord* r = nullptr;
@@ -188,12 +191,14 @@ private:
         r->pending = false;
         if (r->target != target) return "ticket_target_mismatch";
         if (now < r->received || now - r->received >= 5000) return "stale_request";
+        if (target == PlanMode) return Ready(now, PlanMode) ? "accepted" : "not_ready_or_busy";
         if (target == FrenzyMode) return Frenzy(now, move_ms);
         return Execute(now, target, move_ms, water_ms, value, bubbles_ms, ignition_ms);
     }
     const char* Execute(uint64_t now, Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int ignition_ms = 0) {
         int a = 0, b = 0;
         if (const char* error = Validate(target, move_ms, water_ms, value, bubbles_ms, ignition_ms)) return error;
+        if ((target & MoveOnly) && now > UINT64_MAX - static_cast<unsigned>(move_ms)) return "clock_fault";
         if (target & MoveOnly) Direction(value, a, b);
         // Both requires both lanes ready. Never start just one half of a rejected combined request.
         if (!Ready(now, target)) return "not_ready_or_busy";
@@ -207,9 +212,12 @@ private:
             value_nonce >>= 4;
         }
         if (target & MoveOnly) {
-            if (!water_arm(&motion, now, nonce) || std::strcmp(water_request_timed(&motion, now, nonce, move_ms), "accepted")) {
+            if (!water_arm(&motion, now, nonce) || std::strcmp(water_request_timed(&motion, now, nonce, 1), "accepted")) {
                 Stop(now); return "not_ready_or_busy";
             }
+            // The shared water gate still enforces its own 30 s limit. Motion has
+            // a separately validated integer duration and overflow-checked deadline.
+            motion.ends_at = now + static_cast<unsigned>(move_ms);
             left = a; right = b;
             direction = a == b ? (a > 0 ? "forward" : "backward") : (a < 0 ? "left" : "right");
             move_duration_ms = move_ms;
