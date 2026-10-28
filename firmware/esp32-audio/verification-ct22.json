@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-28",
+  "version": "2.0.3-ct22",
+  "status": "deployed_platform_prompt_synced",
+  "scope": "Requested movement duration, 90 percent PWM, atomic simultaneous steps and device-side ordered sequences",
+  "motor_pwm": {
+    "duty": 230,
+    "resolution_bits": 8,
+    "frequency_hz": 1000,
+    "logical_output_magnitude": 90,
+    "left_bridge": "B",
+    "right_bridge": "A"
+  },
+  "movement": {
+    "min_ms": 1,
+    "max_ms": 2147483647,
+    "limit_kind": "MCP signed integer representation; removed 3 s business cap",
+    "tested_ms": [
+      5000,
+      60000,
+      2147483647
+    ]
+  },
+  "sequence": {
+    "max_steps": 16,
+    "step_fields": [
+      "direction",
+      "move_ms",
+      "water_ms",
+      "bubbles_ms",
+      "ignition_ms"
+    ],
+    "all_steps_validated_before_start": true,
+    "all_lanes_reserved": true,
+    "stop_cancels_remaining_steps": true
+  },
+  "checks": {
+    "host_asan_ubsan": "passed; action/session/effects/frenzy/sequence policies and output 56-state fault matrix",
+    "requested_examples": "passed as software simulations: forward+water 5 s; forward 5 s then left 1 s then forward 5 s; forward 5 s then left+water 1 s",
+    "sequence_cancellation": "passed during running and inter-step wait: stop, BOOT, voice/Wi-Fi loss, shutdown, fault, clock rollback, web priority; no reconnect replay",
+    "mcp_arguments": "passed actual exported MCP checks including strict steps_json, 1..16 steps, missing/extra/duplicate keys, types/ranges, injected ticket, trailing content",
+    "http": "passed actual web parser and HTTP handler tests",
+    "web_ui": "passed including running/waiting/cancelled sequence state and later independent action display",
+    "esp_idf_build": "passed ESP-IDF v5.5.1; full build plus final incremental build",
+    "export_source_match": "passed adapter files and embedded web page",
+    "git_diff_check": "passed",
+    "platform_prompt": "saved and reopened; 5401 characters exactly match source excluding final newline",
+    "deployment": "application hash verified; first 128 KiB byte-for-byte unchanged; ct22 boot/network/tools/off state verified"
+  },
+  "source_sha256": {
+    "action_guard.h": "275a6333669d96549e6d9dd78bad378803217caffa9c1488d292a5007383381a",
+    "action_outputs.h": "9fc36414aba1c3af854ef43af16fa7a62302cd219760d4fcd9788b92c0baee30",
+    "action_plan.h": "e809f88a86bc7efa598f9e1e5d1d088471bd386eca6c06fd2e0a5d172a32effb",
+    "action_plan_json.h": "83634757e4dad9b66fe644f8bfe202a9b3d4232e007507d450c1e947837f9652",
+    "control_sessions.h": "0f284144b5e522daaf4de14efb18374a882e873685636df970aaac00e985bdc9",
+    "cybertrack_tools.cc": "798201ba09a77b2d262f23a883e63bbb089ef46d2914fb48ff05149705de3d23",
+    "web_request.h": "fce45d3499a11f4fd8c603cd2b703fd5f610318713174683d7cfbb8c8433cdbf",
+    "apply_overlay.py": "71249dc1094097cbabb04662d59b5803882a71432ef50dc69fad010e00f0adfa",
+    "role-prompt.txt": "7c53a39dc5d8dce14ac4f7c7d41bc2a8dc551f63aab71c1fdd81a92d9e95565b",
+    "web/index.html": "5d76112c62d53474cead5d540361aecedcab36899b8b64c992f029fe25d820bd",
+    "tests/sequence_test.cc": "44246f275001b864118f57e50b0f0677ae3d3bcc2d982e3ba337d203095c8847",
+    "tests/mcp_arguments_test.cc": "625615244d7bb87a033b6985e05eb45cf3f2408002f21638752dcc0bfb171271",
+    "tests/web_ui_test.mjs": "93023fe529620506024ce39e503963024b801da12d790aeeeb98ad6d430b2b47"
+  },
+  "logs": [
+    "build/ct22-host.log",
+    "build/ct22-web.log",
+    "build/ct22-mcp.log",
+    "build/ct22-build.log",
+    "build/ct22-build-final.log"
+  ],
+  "artifact": {
+    "path": "build/firmware-ct22/xiaozhi.bin",
+    "bytes": 2614560,
+    "sha256": "c9e623696ebc4c3d873cbf9fd984230e8d4c06fa724346ae75cafd656897d282"
+  },
+  "flashed": true,
+  "platform_prompt_synced": true,
+  "device_restarted": true,
+  "physical_actuation_tested": false,
+  "human_voice_regression_tested": false,
+  "limitations": [
+    "No device-side sequence or real voice confirmation.",
+    "90 percent PWM and extended motion are not load/current/voltage/thermal/stopping-distance acceptance.",
+    "Stop and connection loss still interrupt requested duration and cancel future steps.",
+    "Existing water/bubbles/ignition and frenzy limits remain.",
+    "Full build reports upstream esp_video ioctl macro redefinition warnings."
+  ],
+  "deployment_record": "startup-ct22.json"
+}

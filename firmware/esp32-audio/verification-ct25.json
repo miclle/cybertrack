@@ -1,0 +1,31 @@
+{
+  "version": "2.0.3-ct25",
+  "scope": "Remove temporary web combined test control; retain ct24 controller and diagnostic behavior",
+  "checks": {
+    "web_ui_regression": "passed",
+    "esp_idf_build": "passed v5.5.1",
+    "git_diff_check": "passed",
+    "controller_sources_match_ct24": true
+  },
+  "artifact": {
+    "path": "build/firmware-ct25/xiaozhi.bin",
+    "bytes": 2615232,
+    "sha256": "a86e4b2497a10199048686503c444d53c6c11befb7c98462c528642fa8daab6e"
+  },
+  "source_sha256": {
+    "web/index.html": "ab760abf30ff970c7e7d939de31b2e04a3316dfa0da9851622d8fddfa6817189",
+    "tests/web_ui_test.mjs": "777260550bf9f32c2db74de9afc0c5345b13059ad05bf81478236a53209f7e62",
+    "apply_overlay.py": "ca79a80e3517afb66369235b7e0c264aca125a5d6f422f2a6124b7eee5183358",
+    "action_outputs.h": "dc8bfff96529f7480538009df8155258d46fc66d8c21ae44b854fc02181452e1",
+    "cybertrack_tools.cc": "3f6f5150d3174ba62babdbec8a4b46474a65fcbee120b9fb8fefa05b0efd3505",
+    "role-prompt.txt": "7c53a39dc5d8dce14ac4f7c7d41bc2a8dc551f63aab71c1fdd81a92d9e95565b"
+  },
+  "logs": [
+    "build/ct25-web.log",
+    "build/ct25-build.log"
+  ],
+  "limits": [
+    "No new actuator requests or physical regression required for this page-only change.",
+    "Prior ct24 field observations and their limits remain applicable; no new hardware acceptance."
+  ]
+}
