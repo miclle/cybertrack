@@ -1,0 +1,291 @@
+{
+  "plate": 7,
+  "before_transform": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    2.22044605e-16,
+    1.0,
+    0.0,
+    -1.0,
+    2.22044605e-16,
+    128.0,
+    -486.4,
+    36.25
+  ],
+  "upright_transform": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    128.0,
+    -486.4,
+    44.999999949999996
+  ],
+  "plate_local_bounds_mm": [
+    [
+      34.0,
+      222.0
+    ],
+    [
+      91.75,
+      164.25
+    ],
+    [
+      0.0,
+      89.9999999
+    ]
+  ],
+  "size_mm": [
+    188.0,
+    72.5,
+    89.9999999
+  ],
+  "geometry_and_process_unchanged": true,
+  "date": "2026-10-28",
+  "project": "hardware/model/print-ready/CyberTrack-Ready-6plates.3mf",
+  "sha256": "2521530f18937ca7b90dc38384ee96b0beb857d4b6b72027fdef739344b4d65b",
+  "gui_upright_verified": true,
+  "gcode_embedded": false,
+  "physical_verified": false,
+  "changed_archive_entries": [
+    "3D/3dmodel.model",
+    "Metadata/model_settings.config"
+  ],
+  "other_objects_unchanged": true,
+  "comparison": {
+    "flat": {
+      "seconds": 15608.169921875,
+      "grams": 229.29214477539062,
+      "warning_message": "",
+      "result": {
+        "error_string": "Success.",
+        "layer_height": 0.2800000011920929,
+        "peak_rss_mb": 285.75,
+        "plate_index": 7,
+        "return_code": 0,
+        "sliced_plates": [
+          {
+            "feature_type_times": {
+              "Bottom surface": 269.7541198730469,
+              "Bridge": 1168.287353515625,
+              "Brim": 48.87103271484375,
+              "Custom": 400.4139099121094,
+              "Flush": 26.0,
+              "Gap infill": 0.693437397480011,
+              "Inner wall": 1804.6998291015625,
+              "Internal solid infill": 1582.38330078125,
+              "Outer wall": 1502.5052490234375,
+              "Overhang wall": 452.5890197753906,
+              "Sparse infill": 104.6254653930664,
+              "Support": 5429.90283203125,
+              "Support interface": 1024.3485107421875,
+              "Support transition": 308.718994140625,
+              "Top surface": 301.1322021484375,
+              "Travel": 1189.3868408203125,
+              "Undefined": 1185.0428466796875
+            },
+            "filament_change_times": 0,
+            "filaments": [
+              {
+                "filament_id": "GFA00",
+                "id": 1,
+                "main_used_g": 229.29214477539062,
+                "total_used_g": 229.29214477539062
+              }
+            ],
+            "id": 7,
+            "layer_filament_change": 0,
+            "main_predication": 15160.099609375,
+            "obj_cached_cnt": 0,
+            "objects": [
+              {
+                "bbox": {
+                  "depth": 90.0000228881836,
+                  "height": 72.5,
+                  "width": 188.0,
+                  "x": 34.0,
+                  "y": -531.4000244140625,
+                  "z": -7.105427357601002e-15
+                },
+                "id": 5,
+                "name": "PP03-base",
+                "triangle_count": 9182
+              }
+            ],
+            "times": {
+              "conflict_check_time": 0,
+              "detect_overhangs_time": 5,
+              "export_gcode_time": 466,
+              "flush_plan_time": 0,
+              "generate_support_material_time": 267,
+              "infill_generate_time": 50,
+              "infill_time": 130,
+              "ironing_time": 0,
+              "make_perimeters_time": 156,
+              "multifilament_segment_2d_time": 0,
+              "other_slice_time": 0,
+              "prepare_infill_time": 80,
+              "region_split_time": 1,
+              "skirt_brim_time": 3,
+              "slice_layers_time": 11,
+              "sliced_time": 1070,
+              "sliced_time_with_cache": 469,
+              "support_detect_time": 62,
+              "support_interface_time": 8,
+              "support_normal_generate_time": 172,
+              "support_toolpath_time": 25,
+              "support_tree_generate_time": 0,
+              "toolpath_time": 35,
+              "wall_time": 144,
+              "wipe_tower_time": 6
+            },
+            "total_predication": 15608.169921875,
+            "triangle_count": 9182,
+            "warning_message": ""
+          }
+        ],
+        "sparse_infill_density": 8.0,
+        "times": {
+          "export_3mf_time": 0,
+          "export_slicedata_time": 0,
+          "export_time": 0,
+          "import_time": 37,
+          "load_slicedata_time": 0,
+          "prepare_time": 40
+        },
+        "upward_compatible_machine": [
+          "Bambu Lab A1 0.4 nozzle",
+          "Bambu Lab H2S 0.4 nozzle",
+          "Bambu Lab H2D 0.4 nozzle",
+          "Bambu Lab H2D Pro 0.4 nozzle",
+          "Bambu Lab H2C 0.4 nozzle",
+          "Bambu Lab X2D 0.4 nozzle",
+          "Bambu Lab A2L 0.4 nozzle"
+        ],
+        "wall_loops": 2
+      },
+      "gcode_sha256": "8f1dc8595605e0a01f2dbf78b21b2369785586e4a71976f1da76ddb0b55fe8a3",
+      "diagnostic_log": "[2026-10-28 09:29:46.594487] [0x00000001f5cb3f80] [trace]   Initializing StaticPrintConfigs\n[2026-10-28 09:29:46.933132] [0x00000001f5cb3f80] [error]   ZFiller: encounter idx from clip: 4\n[2026-10-28 09:29:46.942865] [0x0000000171bb7000] [error]   ZFiller: encounter idx from clip: 375\n[2026-10-28 09:29:47.686441] [0x00000001f5cb3f80] [error]   Invalid T command (T65535).\n"
+    },
+    "upright": {
+      "seconds": 9566.794921875,
+      "grams": 156.96347045898438,
+      "warning_message": "",
+      "result": {
+        "error_string": "Success.",
+        "layer_height": 0.2800000011920929,
+        "peak_rss_mb": 292.609375,
+        "plate_index": 7,
+        "return_code": 0,
+        "sliced_plates": [
+          {
+            "feature_type_times": {
+              "Bridge": 84.09086608886719,
+              "Brim": 74.82693481445312,
+              "Custom": 399.519775390625,
+              "Flush": 26.0,
+              "Gap infill": 2.7454633712768555,
+              "Inner wall": 3614.81103515625,
+              "Internal solid infill": 213.4257354736328,
+              "Outer wall": 2206.829345703125,
+              "Overhang wall": 155.9235076904297,
+              "Sparse infill": 20.374414443969727,
+              "Support": 1225.9569091796875,
+              "Support interface": 142.800048828125,
+              "Support transition": 76.08258819580078,
+              "Top surface": 55.384944915771484,
+              "Travel": 1271.6002197265625,
+              "Undefined": 1268.13427734375
+            },
+            "filament_change_times": 0,
+            "filaments": [
+              {
+                "filament_id": "GFA00",
+                "id": 1,
+                "main_used_g": 156.96347045898438,
+                "total_used_g": 156.96347045898438
+              }
+            ],
+            "id": 7,
+            "layer_filament_change": 0,
+            "main_predication": 9118.7412109375,
+            "obj_cached_cnt": 0,
+            "objects": [
+              {
+                "bbox": {
+                  "depth": 72.5000228881836,
+                  "height": 90.0,
+                  "width": 188.0,
+                  "x": 34.0,
+                  "y": -522.6500244140625,
+                  "z": -5.000000413701855e-08
+                },
+                "id": 5,
+                "name": "PP03-base",
+                "triangle_count": 9182
+              }
+            ],
+            "times": {
+              "conflict_check_time": 0,
+              "detect_overhangs_time": 11,
+              "export_gcode_time": 566,
+              "flush_plan_time": 0,
+              "generate_support_material_time": 1073,
+              "infill_generate_time": 15,
+              "infill_time": 71,
+              "ironing_time": 0,
+              "make_perimeters_time": 506,
+              "multifilament_segment_2d_time": 0,
+              "other_slice_time": 0,
+              "prepare_infill_time": 56,
+              "region_split_time": 0,
+              "skirt_brim_time": 3,
+              "slice_layers_time": 50,
+              "sliced_time": 2259,
+              "sliced_time_with_cache": 569,
+              "support_detect_time": 88,
+              "support_interface_time": 3,
+              "support_normal_generate_time": 966,
+              "support_toolpath_time": 16,
+              "support_tree_generate_time": 0,
+              "toolpath_time": 25,
+              "wall_time": 456,
+              "wipe_tower_time": 2
+            },
+            "total_predication": 9566.794921875,
+            "triangle_count": 9182,
+            "warning_message": ""
+          }
+        ],
+        "sparse_infill_density": 8.0,
+        "times": {
+          "export_3mf_time": 0,
+          "export_slicedata_time": 0,
+          "export_time": 0,
+          "import_time": 37,
+          "load_slicedata_time": 0,
+          "prepare_time": 40
+        },
+        "upward_compatible_machine": [
+          "Bambu Lab A1 0.4 nozzle",
+          "Bambu Lab H2S 0.4 nozzle",
+          "Bambu Lab H2D 0.4 nozzle",
+          "Bambu Lab H2D Pro 0.4 nozzle",
+          "Bambu Lab H2C 0.4 nozzle",
+          "Bambu Lab X2D 0.4 nozzle",
+          "Bambu Lab A2L 0.4 nozzle"
+        ],
+        "wall_loops": 2
+      },
+      "gcode_sha256": "76342f6042715a1b6abb52c230f174e03def985c67f3f405215d80f7499ebac8",
+      "diagnostic_log": "[2026-10-28 09:29:46.594474] [0x00000001f5cb3f80] [trace]   Initializing StaticPrintConfigs\n[2026-10-28 09:29:48.857885] [0x00000001f5cb3f80] [error]   Invalid T command (T65535).\n"
+    }
+  }
+}
