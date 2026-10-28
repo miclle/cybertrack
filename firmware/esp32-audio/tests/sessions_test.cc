@@ -107,7 +107,7 @@ int main() {
         assert(!f.Heartbeat(102,sid));
         if(fault==1) { f.WifiLink(102,true); f.VoiceLink(102,true); assert(!f.Acquire(102)); }
     }
-    // Held movement stays continuous beyond the voice 3 s limit, with one start only.
+    // Held movement stays continuous across lease renewals, with one start only.
     ControlSessions h; auto hid=pair(h,0);
     assert(is(h.DriveStart(0,hid,1,h.window,"forward",30000),"accepted"));
     for(uint64_t t=150;t<=15000;t+=150) {

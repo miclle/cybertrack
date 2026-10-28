@@ -36,11 +36,11 @@ ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.bubbles" || tool_nam
         const cJSON* duration = cJSON_GetObjectItemCaseSensitive(tool_arguments, "duration_ms");
         const cJSON* direction = cJSON_GetObjectItemCaseSensitive(tool_arguments, "direction");
         if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 2 ||
-            !cJSON_IsNumber(duration) || !(duration->valuedouble >= 1 && duration->valuedouble <= 3000) ||
+            !cJSON_IsNumber(duration) || !(duration->valuedouble >= 1 && duration->valuedouble <= 2147483647) ||
             duration->valuedouble != duration->valueint || !cJSON_IsString(direction) ||
             (strcmp(direction->valuestring, "forward") && strcmp(direction->valuestring, "backward") &&
              strcmp(direction->valuestring, "left") && strcmp(direction->valuestring, "right"))) {
-            ReplyError(id, "Move requires direction forward/backward/left/right and integer duration_ms in 1..3000");
+            ReplyError(id, "Move requires direction forward/backward/left/right and integer duration_ms in 1..2147483647");
             return;
         }
     }
@@ -49,17 +49,26 @@ ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.bubbles" || tool_nam
         const cJSON* water = cJSON_GetObjectItemCaseSensitive(tool_arguments, "water_duration_ms");
         const cJSON* direction = cJSON_GetObjectItemCaseSensitive(tool_arguments, "direction");
         if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 3 ||
-            !cJSON_IsNumber(move) || !(move->valuedouble >= 1 && move->valuedouble <= 3000) || move->valuedouble != move->valueint ||
+            !cJSON_IsNumber(move) || !(move->valuedouble >= 1 && move->valuedouble <= 2147483647) || move->valuedouble != move->valueint ||
             !cJSON_IsNumber(water) || !(water->valuedouble >= 1 && water->valuedouble <= 30000) || water->valuedouble != water->valueint ||
             !cJSON_IsString(direction) ||
             (strcmp(direction->valuestring, "forward") && strcmp(direction->valuestring, "backward") &&
              strcmp(direction->valuestring, "left") && strcmp(direction->valuestring, "right"))) {
-            ReplyError(id, "Combined action requires direction, integer move_duration_ms in 1..3000 and water_duration_ms in 1..30000");
+            ReplyError(id, "Combined action requires direction, integer move_duration_ms in 1..2147483647 and water_duration_ms in 1..30000");
+            return;
+        }
+    }
+    if (tool_name == "self.tank.sequence") {
+        const cJSON* steps = cJSON_GetObjectItemCaseSensitive(tool_arguments, "steps_json");
+        ActionPlan plan;
+        if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 1 ||
+            !cJSON_IsString(steps) || !ParseActionPlan(steps->valuestring, plan)) {
+            ReplyError(id, "Sequence requires exactly steps_json with 1..16 valid steps");
             return;
         }
     }
     if (tool_name == "self.tank.stop") CyberTrackActionStop();
-    if (cybertrack || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy")
+    if (cybertrack || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy" || tool_name == "self.tank.sequence")
         ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());'''
 
 
@@ -79,7 +88,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct21")')
+                 'set(PROJECT_VER "2.0.3-ct25")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
@@ -88,7 +97,7 @@ def main():
     replace_once(source / "main/mcp_server.h",
                  'cJSON_AddItemToObject(input_schema, "properties", properties);',
                  'cJSON_AddItemToObject(input_schema, "properties", properties);\n'
-                 '        if (name_ == "self.tank.get_status" || name_ == "self.tank.stop" || name_ == "self.tank.water" || name_ == "self.tank.move" || name_ == "self.tank.move_and_water" || name_ == "self.tank.bubbles" || name_ == "self.tank.ignition" || name_ == "self.tank.frenzy") {\n'
+                 '        if (name_ == "self.tank.get_status" || name_ == "self.tank.stop" || name_ == "self.tank.water" || name_ == "self.tank.move" || name_ == "self.tank.move_and_water" || name_ == "self.tank.bubbles" || name_ == "self.tank.ignition" || name_ == "self.tank.frenzy" || name_ == "self.tank.sequence") {\n'
                  '            cJSON_AddBoolToObject(input_schema, "additionalProperties", false);\n'
                  '        }')
     replace_once(source / "main/mcp_server.cc", '    PropertyList arguments = (*tool_iter)->properties();',
@@ -100,13 +109,13 @@ def main():
                  '    if (cybertrack) ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());\n'
                  '    PropertyList arguments = (*tool_iter)->properties();')
     replace_once(source / "main/mcp_server.cc", '#include "mcp_server.h"',
-                 '#include "mcp_server.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"')
+                 '#include "mcp_server.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"\n#include "boards/bread-compact-wifi/action_plan_json.h"')
     replace_once(source / "main/mcp_server.cc",
                  '    if (cybertrack) ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());',
                  ACTION_ARGUMENT_CHECK)
     replace_once(source / "main/mcp_server.cc",
                  '    // Use main thread to call the tool',
-                 '    if (tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy") {\n'
+                 '    if (tool_name == "self.tank.sequence" || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy") {\n'
                  '        int ticket = CyberTrackActionClaim(id, tool_name.c_str());\n'
                  '        if (!ticket) { ReplyError(id, "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"); return; }\n'
                  '        arguments.AddProperty(Property("_ct_ticket", kPropertyTypeInteger, ticket));\n'
@@ -134,7 +143,7 @@ def main():
                  'void WebsocketProtocol::CloseAudioChannel() {\n    CyberTrackActionLink(false);')
     for name in ("water_policy.h", "water_policy.c"):
         shutil.copy2(ROOT / "firmware/esp32-linx/main" / name, board / name)
-    for name in ("cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
+    for name in ("cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
         shutil.copy2(HERE / name, board / name)
     page = (HERE / "web/index.html").read_text()
     if ')CTWEB"' in page:

@@ -1,4 +1,5 @@
 #include <cJSON.h>
+#include "action_plan_json.h"
 #include <cassert>
 #include <cstring>
 #include <string>
@@ -21,6 +22,34 @@ static void check(const char* tool, const char* json, bool valid) {
     cJSON_Delete(args);
 }
 int main() {
+    const std::string step = R"({"direction":"left","move_ms":5000,"water_ms":5000,"bubbles_ms":0,"ignition_ms":0})";
+    auto check_plan = [&](const std::string& text, bool valid) {
+        cJSON* obj = cJSON_CreateObject();
+        cJSON_AddStringToObject(obj, "steps_json", text.c_str());
+        char* json = cJSON_PrintUnformatted(obj);
+        check("self.tank.sequence", json, valid);
+        cJSON_free(json); cJSON_Delete(obj);
+    };
+    check_plan("[" + step + "]", true);
+    std::string many = "[" + step;
+    for (int i=1; i<16; ++i) many += "," + step;
+    check_plan(many + "]", true);
+    check_plan(many + "," + step + "]", false);
+    for (const char* invalid : {"[]", "{}", "null", "[{}]", "[false]", "[1]", "[", "[null]"}) check_plan(invalid, false);
+    for (auto pair : {std::pair<const char*,const char*>{"5000", "2147483648"},
+                     {"5000", "-1"}, {"5000", "0.5"}, {"5000", "true"}, {"left", "none"}, {"left", "spin"},
+                     {"left", "left\\u0000junk"}, {"move_ms", "water_ms"}, {"ignition_ms", "unknown"}}) {
+        auto bad = step; bad.replace(bad.find(pair.first), std::strlen(pair.first), pair.second);
+        check_plan("[" + bad + "]", false);
+    }
+    check_plan("[" + step + "] trailing", false);
+    check_plan(R"([{"direction":"none","move_ms":0,"water_ms":30001,"bubbles_ms":0,"ignition_ms":0}])", false);
+    check_plan(R"([{"direction":"none","move_ms":0,"water_ms":0,"bubbles_ms":0,"ignition_ms":5001}])", false);
+    check_plan(R"([{"direction":"none","move_ms":0,"water_ms":0,"bubbles_ms":0,"ignition_ms":0}])", false);
+    check("self.tank.sequence", R"({"steps_json":[]})", false);
+    check("self.tank.sequence", R"({"steps_json":"[]","_ct_ticket":1})", false);
+    check("self.tank.sequence", nullptr, false);
+
     for(const char* tool : {"self.tank.bubbles","self.tank.ignition","self.tank.frenzy"}) {
         for(const char* j : {R"({"duration_ms":1})", R"({"duration_ms":1000})", R"({"duration_ms":5000})"}) check(tool,j,true);
         for(const char* j : {"{}","[]","null",R"({"duration_ms":0})",R"({"duration_ms":-1})",
@@ -32,12 +61,12 @@ int main() {
     check("self.tank.frenzy",R"({"duration_ms":30000})",true);
     check("self.tank.ignition",R"({"duration_ms":5001})",false);
     for (const char* d : {"forward","backward","left","right"})
-        for (int ms : {1,500,1000,3000}) {
+        for (int ms : {1,500,1000,3000,5000,60000,2147483647}) {
             auto j = std::string("{\"direction\":\"") + d + "\",\"duration_ms\":" + std::to_string(ms) + "}";
             check("self.tank.move",j.c_str(),true);
         }
     for (const char* j : {"{}", "null", "[]", "1", "{\"direction\":\"forward\"}",
-         "{\"direction\":\"forward\",\"duration_ms\":0}", "{\"direction\":\"forward\",\"duration_ms\":3001}",
+         "{\"direction\":\"forward\",\"duration_ms\":0}", "{\"direction\":\"forward\",\"duration_ms\":2147483648}",
          "{\"direction\":\"forward\",\"duration_ms\":1.5}", "{\"direction\":\"forward\",\"duration_ms\":true}",
          "{\"direction\":\"forward\",\"duration_ms\":\"1000\"}", "{\"direction\":false,\"duration_ms\":1000}",
          "{\"direction\":\"spin\",\"duration_ms\":1000}", "{\"direction\":\"forward\",\"duration_ms\":1000,\"speed\":100}",
@@ -58,7 +87,7 @@ int main() {
     }
     for(const char* j : {"{}","null","[]",
         "{\"direction\":\"forward\",\"move_duration_ms\":1000}",
-        "{\"direction\":\"forward\",\"move_duration_ms\":3001,\"water_duration_ms\":1000}",
+        "{\"direction\":\"forward\",\"move_duration_ms\":2147483648,\"water_duration_ms\":1000}",
         "{\"direction\":\"forward\",\"move_duration_ms\":1000,\"water_duration_ms\":30001}",
         "{\"direction\":\"forward\",\"move_duration_ms\":0,\"water_duration_ms\":1000}",
         "{\"direction\":\"forward\",\"move_duration_ms\":1000,\"water_duration_ms\":-1}",

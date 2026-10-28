@@ -19,7 +19,7 @@ end = text.index('    PropertyList arguments =', start)
 cjson = args.idf / 'components/json/cJSON'
 flags = ['-g', '-fsanitize=address,undefined', '-Wall', '-Wextra', '-Werror']
 subprocess.run(['cc', '-std=c11', *flags, '-Wno-deprecated-declarations', '-I', str(cjson), '-c', str(cjson/'cJSON.c'), '-o', str(build/'cJSON.o')], check=True)
-subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
+subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build), '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
                 str(Path(__file__).with_name('mcp_arguments_test.cc')), str(build/'cJSON.o'),
                 '-o', str(build/'mcp_arguments_test')], check=True)
 subprocess.run([str(build/'mcp_arguments_test')], check=True)
