@@ -1,0 +1,37 @@
+{
+  "version": "2.0.3-ct24",
+  "scope": "GPIO18 digital input readback diagnostics only",
+  "checks": {
+    "host_asan_ubsan": "passed; independent forced-low pad readback, reset/snapshot/saturation, input enable failure, 56-state fault matrix and 60 scheduler/output combinations",
+    "mcp_http": "passed actual exported argument validation and HTTP parser/handlers",
+    "esp_idf_build": "passed v5.5.1",
+    "export_matches_source": true,
+    "git_diff_check": "passed"
+  },
+  "source_sha256": {
+    "action_outputs.h": "dc8bfff96529f7480538009df8155258d46fc66d8c21ae44b854fc02181452e1",
+    "cybertrack_tools.cc": "3f6f5150d3174ba62babdbec8a4b46474a65fcbee120b9fb8fefa05b0efd3505",
+    "apply_overlay.py": "3b00e1b36e6daee3a6bd51991a11163b684257a71b029909b0869ae7e9992a35",
+    "tests/output_test.cc": "983a11dd0ac10605347b98634df7be5dc14eb6500ebf5eaccfad77804bc7fb7e",
+    "tests/output_stub.h": "f9bbe0415dd0cce86c6c80b5d9b1492837028faf6387a4e2ed291cb0df840fc4",
+    "web/index.html": "033a1919756a166f6c1c87cc746d83d20072fca9244ddfa4fbe3a436b8405df5",
+    "role-prompt.txt": "7c53a39dc5d8dce14ac4f7c7d41bc2a8dc551f63aab71c1fdd81a92d9e95565b"
+  },
+  "artifact": {
+    "path": "build/firmware-ct24/xiaozhi.bin",
+    "bytes": 2616560,
+    "sha256": "6f6fed1f0a17e29e0157e3a457e2b5b6477171a3864f6243460f3fc08d3fc9c6"
+  },
+  "logs": [
+    "build/ct24-host.log",
+    "build/ct24-mcp.log",
+    "build/ct24-build.log"
+  ],
+  "limits": [
+    "Digital input threshold samples, not voltage/current/MOS/water-flow measurements.",
+    "Nominal 5 ms safety task plus request-driven samples; short glitches can be missed.",
+    "Counters do not represent elapsed time; first sample follows output transition.",
+    "No change to PWM 230/255, action timing, simultaneous starts, voice prompt or web page.",
+    "Physical fault remains unresolved pending user retest."
+  ]
+}

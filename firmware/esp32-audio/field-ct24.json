@@ -1,0 +1,413 @@
+{
+  "version": "2.0.3-ct24",
+  "test": "Two user-operated web left+water requests, 3000 ms each",
+  "user_observation": "Both runs: water slightly delayed at startup, then sustained overlap with turning.",
+  "events": [
+    {
+      "time": "2026-10-28T23:59:55.125526+08:00",
+      "receipt": {
+        "boot_id": "f11401b888620a02",
+        "operation": "move_and_water",
+        "result": "accepted",
+        "starts_this_boot": 2,
+        "logical_outputs": {
+          "left": -90,
+          "right": 90,
+          "water": true,
+          "bubbles": false,
+          "ignition": false
+        },
+        "move_last_duration_ms": 3000,
+        "water_last_duration_ms": 3000,
+        "log_events_dropped": 0
+      }
+    },
+    {
+      "time": "2026-10-28T23:59:57.986901+08:00",
+      "event": "ACTION_OFF channel=move reason=deadline software_on_ms=2999 move=OFF water=OFF bubbles=OFF ignition=OFF starts=2"
+    },
+    {
+      "time": "2026-10-28T23:59:57.998426+08:00",
+      "event": "ACTION_OFF channel=water reason=deadline software_on_ms=2999 move=OFF water=OFF bubbles=OFF ignition=OFF starts=2"
+    },
+    {
+      "time": "2026-10-28T23:59:58.011522+08:00",
+      "event": "WATER_PAD pin=18 high_samples=606 low_samples=0 motor_high_samples=606 motor_low_samples=0 first=1 last_on=1 after_off=0 starts=2"
+    },
+    {
+      "time": "2026-10-29T00:00:09.756294+08:00",
+      "receipt": {
+        "boot_id": "f11401b888620a02",
+        "operation": "move_and_water",
+        "result": "accepted",
+        "starts_this_boot": 4,
+        "logical_outputs": {
+          "left": -90,
+          "right": 90,
+          "water": true,
+          "bubbles": false,
+          "ignition": false
+        },
+        "move_last_duration_ms": 3000,
+        "water_last_duration_ms": 3000,
+        "log_events_dropped": 0
+      }
+    },
+    {
+      "time": "2026-10-29T00:00:12.617239+08:00",
+      "event": "ACTION_OFF channel=move reason=deadline software_on_ms=3000 move=OFF water=OFF bubbles=OFF ignition=OFF starts=4"
+    },
+    {
+      "time": "2026-10-29T00:00:12.629084+08:00",
+      "event": "ACTION_OFF channel=water reason=deadline software_on_ms=3000 move=OFF water=OFF bubbles=OFF ignition=OFF starts=4"
+    },
+    {
+      "time": "2026-10-29T00:00:12.642176+08:00",
+      "event": "WATER_PAD pin=18 high_samples=606 low_samples=0 motor_high_samples=606 motor_low_samples=0 first=1 last_on=1 after_off=0 starts=4"
+    },
+    {
+      "time": "2026-10-29T00:00:40.020890+08:00",
+      "receipt": {
+        "boot_id": "f11401b888620a02",
+        "operation": "release",
+        "result": "ok",
+        "starts_this_boot": 4,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "move_last_duration_ms": 3000,
+        "water_last_duration_ms": 3000,
+        "log_events_dropped": 0
+      }
+    }
+  ],
+  "limits": [
+    "Physical startup delay not measured; serial logging timestamps are not physical edge or water-flow timestamps.",
+    "No causal attribution for improvement over ct23 or variation between voice and web.",
+    "Current user observations do not establish repeated cold-start, long-duration or loaded electrical acceptance."
+  ],
+  "voice_regression": {
+    "date": "2026-10-29",
+    "user_observations": [
+      {
+        "utterance": "左转三秒，同时喷水三秒。",
+        "observation": "喷水启动略滞后，比网页组合按钮略长。"
+      },
+      {
+        "utterance": "前进五秒，然后左转三秒，左转时同时喷水三秒。",
+        "observation": "喷水启动滞后比直接语音组合略短，接近网页效果。"
+      }
+    ],
+    "events": [
+      {
+        "time": "2026-10-29T00:02:37.608682+08:00",
+        "event": "RPC id=5 tool=self.tank.move_and_water"
+      },
+      {
+        "time": "2026-10-29T00:02:37.753000+08:00",
+        "receipt": {
+          "boot_id": "f11401b888620a02",
+          "operation": "move_and_water",
+          "result": "accepted",
+          "fault": "none",
+          "uptime_ms": 254342,
+          "starts_this_boot": 6,
+          "logical_outputs": {
+            "left": -90,
+            "right": 90,
+            "water": true,
+            "bubbles": false,
+            "ignition": false
+          },
+          "move_last_duration_ms": 3000,
+          "water_last_duration_ms": 3000,
+          "move_remaining_ms": 3000,
+          "water_remaining_ms": 3000,
+          "sequence_active": false,
+          "sequence_step": 0,
+          "sequence_steps": 0,
+          "sequence_result": "idle",
+          "log_events_dropped": 0
+        }
+      },
+      {
+        "time": "2026-10-29T00:02:40.614628+08:00",
+        "event": "ACTION_OFF channel=move reason=deadline software_on_ms=3004 move=OFF water=OFF bubbles=OFF ignition=OFF starts=6"
+      },
+      {
+        "time": "2026-10-29T00:02:40.626349+08:00",
+        "event": "ACTION_OFF channel=water reason=deadline software_on_ms=3004 move=OFF water=OFF bubbles=OFF ignition=OFF starts=6"
+      },
+      {
+        "time": "2026-10-29T00:02:40.639573+08:00",
+        "event": "WATER_PAD pin=18 high_samples=601 low_samples=0 motor_high_samples=601 motor_low_samples=0 first=1 last_on=1 after_off=0 starts=6"
+      },
+      {
+        "time": "2026-10-29T00:03:00.027676+08:00",
+        "event": "RPC id=6 tool=self.tank.sequence"
+      },
+      {
+        "time": "2026-10-29T00:03:00.171160+08:00",
+        "receipt": {
+          "boot_id": "f11401b888620a02",
+          "operation": "sequence",
+          "result": "accepted",
+          "fault": "none",
+          "uptime_ms": 276761,
+          "starts_this_boot": 7,
+          "logical_outputs": {
+            "left": 90,
+            "right": 90,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "move_last_duration_ms": 5000,
+          "water_last_duration_ms": 3000,
+          "move_remaining_ms": 5000,
+          "water_remaining_ms": 0,
+          "sequence_active": true,
+          "sequence_step": 1,
+          "sequence_steps": 2,
+          "sequence_result": "running",
+          "log_events_dropped": 0
+        }
+      },
+      {
+        "time": "2026-10-29T00:03:05.029970+08:00",
+        "event": "ACTION_OFF channel=move reason=deadline software_on_ms=5000 move=OFF water=OFF bubbles=OFF ignition=OFF starts=7"
+      },
+      {
+        "time": "2026-10-29T00:03:08.229889+08:00",
+        "event": "ACTION_OFF channel=move reason=deadline software_on_ms=3000 move=OFF water=OFF bubbles=OFF ignition=OFF starts=9"
+      },
+      {
+        "time": "2026-10-29T00:03:08.241603+08:00",
+        "event": "ACTION_OFF channel=water reason=deadline software_on_ms=3000 move=OFF water=OFF bubbles=OFF ignition=OFF starts=9"
+      },
+      {
+        "time": "2026-10-29T00:03:08.254807+08:00",
+        "event": "WATER_PAD pin=18 high_samples=600 low_samples=0 motor_high_samples=600 motor_low_samples=0 first=1 last_on=1 after_off=0 starts=9"
+      }
+    ],
+    "conclusion": "Both voice combinations produced water per user report; simultaneous command and subsequent concurrent step observed. Physical startup lag remains unmeasured; improvement cause unresolved."
+  },
+  "independent_timing_and_stop_attempt": {
+    "date": "2026-10-29",
+    "user_observations": [
+      "Left turn stopped first; water continued to three seconds, with slight startup lag.",
+      "User spoke stop during second-step turn and observed all actions stopped."
+    ],
+    "events": [
+      {
+        "time": "2026-10-29T00:09:19.840886+08:00",
+        "event": "RPC id=5 tool=self.tank.move_and_water"
+      },
+      {
+        "time": "2026-10-29T00:09:19.986293+08:00",
+        "receipt": {
+          "boot_id": "f11401b888620a02",
+          "operation": "move_and_water",
+          "result": "accepted",
+          "fault": "none",
+          "uptime_ms": 656568,
+          "starts_this_boot": 11,
+          "logical_outputs": {
+            "left": -90,
+            "right": 90,
+            "water": true,
+            "bubbles": false,
+            "ignition": false
+          },
+          "move_last_duration_ms": 1000,
+          "water_last_duration_ms": 3000,
+          "move_remaining_ms": 999,
+          "water_remaining_ms": 2999,
+          "sequence_active": false,
+          "sequence_step": 2,
+          "sequence_steps": 2,
+          "sequence_result": "completed",
+          "log_events_dropped": 0
+        }
+      },
+      {
+        "time": "2026-10-29T00:09:20.844300+08:00",
+        "event": "ACTION_OFF channel=move reason=deadline software_on_ms=1001 move=OFF water=ON bubbles=OFF ignition=OFF starts=11"
+      },
+      {
+        "time": "2026-10-29T00:09:22.844443+08:00",
+        "event": "ACTION_OFF channel=water reason=deadline software_on_ms=3001 move=OFF water=OFF bubbles=OFF ignition=OFF starts=11"
+      },
+      {
+        "time": "2026-10-29T00:09:22.857595+08:00",
+        "event": "WATER_PAD pin=18 high_samples=601 low_samples=0 motor_high_samples=201 motor_low_samples=0 first=1 last_on=1 after_off=0 starts=11"
+      },
+      {
+        "time": "2026-10-29T00:09:45.314480+08:00",
+        "event": "RPC id=6 tool=self.tank.sequence"
+      },
+      {
+        "time": "2026-10-29T00:09:45.458113+08:00",
+        "receipt": {
+          "boot_id": "f11401b888620a02",
+          "operation": "sequence",
+          "result": "accepted",
+          "fault": "none",
+          "uptime_ms": 682041,
+          "starts_this_boot": 12,
+          "logical_outputs": {
+            "left": 90,
+            "right": 90,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "move_last_duration_ms": 5000,
+          "water_last_duration_ms": 3000,
+          "move_remaining_ms": 5000,
+          "water_remaining_ms": 0,
+          "sequence_active": true,
+          "sequence_step": 1,
+          "sequence_steps": 2,
+          "sequence_result": "running",
+          "log_events_dropped": 0
+        }
+      },
+      {
+        "time": "2026-10-29T00:09:50.319717+08:00",
+        "event": "ACTION_OFF channel=move reason=deadline software_on_ms=5003 move=OFF water=OFF bubbles=OFF ignition=OFF starts=12"
+      },
+      {
+        "time": "2026-10-29T00:09:53.519936+08:00",
+        "event": "ACTION_OFF channel=move reason=deadline software_on_ms=3000 move=OFF water=OFF bubbles=OFF ignition=OFF starts=14"
+      },
+      {
+        "time": "2026-10-29T00:09:53.532316+08:00",
+        "event": "ACTION_OFF channel=water reason=deadline software_on_ms=3000 move=OFF water=OFF bubbles=OFF ignition=OFF starts=14"
+      },
+      {
+        "time": "2026-10-29T00:09:53.545351+08:00",
+        "event": "WATER_PAD pin=18 high_samples=600 low_samples=0 motor_high_samples=600 motor_low_samples=0 first=1 last_on=1 after_off=0 starts=14"
+      },
+      {
+        "time": "2026-10-29T00:09:54.466203+08:00",
+        "event": "RPC id=7 tool=self.tank.stop"
+      },
+      {
+        "time": "2026-10-29T00:09:54.608249+08:00",
+        "receipt": {
+          "boot_id": "f11401b888620a02",
+          "operation": "stop",
+          "result": "ok",
+          "fault": "stopped",
+          "uptime_ms": 691192,
+          "starts_this_boot": 14,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "move_last_duration_ms": 3000,
+          "water_last_duration_ms": 3000,
+          "move_remaining_ms": 0,
+          "water_remaining_ms": 0,
+          "sequence_active": false,
+          "sequence_step": 2,
+          "sequence_steps": 2,
+          "sequence_result": "completed",
+          "log_events_dropped": 0
+        }
+      }
+    ],
+    "assessment": {
+      "independent_deadlines": "passed: move deadline at 1001 ms with water still ON; water deadline at 3001 ms",
+      "running_stop": "not demonstrated: both second-step channels closed by deadline at 3000 ms before stop RPC arrived roughly 0.9 seconds later; sequence_result remained completed",
+      "future_step_cancellation": "not exercised"
+    },
+    "next_test": "Use a longer first step and speak stop soon after motion starts; require stop-driven closure, cancelled sequence and no later-step starts."
+  },
+  "running_stop_retest": {
+    "date": "2026-10-29",
+    "utterance": "前进十五秒，然后左转三秒，同时喷水三秒。",
+    "user_observation": "Test completed as expected: early stop, no subsequent turn or water.",
+    "events": [
+      {
+        "time": "2026-10-29T00:15:51.525481+08:00",
+        "event": "RPC id=5 tool=self.tank.sequence"
+      },
+      {
+        "time": "2026-10-29T00:15:51.669671+08:00",
+        "receipt": {
+          "boot_id": "f11401b888620a02",
+          "operation": "sequence",
+          "result": "accepted",
+          "fault": "none",
+          "uptime_ms": 1048247,
+          "starts_this_boot": 15,
+          "logical_outputs": {
+            "left": 90,
+            "right": 90,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "move_last_duration_ms": 15000,
+          "water_last_duration_ms": 3000,
+          "move_remaining_ms": 15000,
+          "water_remaining_ms": 0,
+          "sequence_active": true,
+          "sequence_step": 1,
+          "sequence_steps": 2,
+          "sequence_result": "running",
+          "log_events_dropped": 0
+        }
+      },
+      {
+        "time": "2026-10-29T00:15:57.608883+08:00",
+        "event": "RPC id=6 tool=self.tank.stop"
+      },
+      {
+        "time": "2026-10-29T00:15:57.613570+08:00",
+        "event": "ACTION_OFF channel=move reason=stop software_on_ms=6082 move=OFF water=OFF bubbles=OFF ignition=OFF starts=15"
+      },
+      {
+        "time": "2026-10-29T00:15:57.763029+08:00",
+        "receipt": {
+          "boot_id": "f11401b888620a02",
+          "operation": "stop",
+          "result": "ok",
+          "fault": "stopped",
+          "uptime_ms": 1054330,
+          "starts_this_boot": 15,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "move_last_duration_ms": 15000,
+          "water_last_duration_ms": 3000,
+          "move_remaining_ms": 0,
+          "water_remaining_ms": 0,
+          "sequence_active": false,
+          "sequence_step": 1,
+          "sequence_steps": 2,
+          "sequence_result": "cancelled",
+          "log_events_dropped": 0
+        }
+      }
+    ],
+    "assessment": "Passed this field test: requested 15000 ms, move closed after 6082 ms with reason=stop; sequence cancelled at step 1 of 2, all outputs off, starts count stayed 15.",
+    "limits": [
+      "6082 ms is total software motion duration, not measured speech-to-stop latency.",
+      "USB-disconnected operation remains unverified in this regression."
+    ]
+  }
+}
