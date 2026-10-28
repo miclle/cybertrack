@@ -1,0 +1,195 @@
+{
+  "date": "2026-10-27",
+  "projects": [
+    {
+      "path": "hardware/model/lean-print/CyberTrack-Lean-6plates.3mf",
+      "before_sha256": "0def9d04eb3b7d18ec0e902c3820282dc5c88ef05fd92e652a351f494678dab7",
+      "sha256": "35fc14b599ba52fc3045423058b6e7941880236bde611bfc5d7eaf1f34dc925a",
+      "removed": [
+        "BubblePod",
+        "BubbleLidMark"
+      ],
+      "updated": [
+        "PP03-base"
+      ],
+      "part_names": [
+        "LC02-TopRetainer-flat",
+        "LC01-Carrier-upright",
+        "ShoulderRailL",
+        "ShoulderRailR",
+        "NeckCableBridge",
+        "PP07-upright.stl",
+        "PP07-Crown.stl",
+        "PP07-Tray.stl",
+        "BatteryHatch",
+        "KeelSideFrameL",
+        "KeelSideFrameR",
+        "PrintNeck",
+        "PP04-LowerTub.stl",
+        "LC03-BottomServiceCover-flipped",
+        "PP03-base",
+        "LC04-flipped",
+        "PP01-base",
+        "PP02-base",
+        "WaterPod",
+        "EffectTray",
+        "IgnitionMOSCarrier",
+        "ChestAudioPanel",
+        "PrintChestGuardL",
+        "PrintChestGuardR",
+        "LowerChin",
+        "ChestBadge",
+        "WaterLidMark"
+      ],
+      "print_parts": 27,
+      "requires_reslice_plates": [
+        3,
+        6
+      ],
+      "unchanged_archive_entries": 59,
+      "changed_or_removed_entries": [
+        "Metadata/plate_no_light_3.png",
+        "Metadata/top_3.png",
+        "Metadata/pick_3.png",
+        "3D/3dmodel.model",
+        "3D/_rels/3dmodel.model.rels",
+        "Metadata/model_settings.config",
+        "Metadata/slice_info.config",
+        "Metadata/_rels/model_settings.config.rels",
+        "3D/Objects/remaining_1.model",
+        "3D/Objects/completion_2.model",
+        "3D/Objects/completion_12.model",
+        "Metadata/plate_6.gcode",
+        "Metadata/plate_6.gcode.md5",
+        "Metadata/plate_3.gcode",
+        "Metadata/plate_3.gcode.md5",
+        "Metadata/plate_3.png",
+        "Metadata/plate_6.png"
+      ],
+      "process_settings_unchanged": true,
+      "sliced": false,
+      "mesh_local_translation_mm": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "hardware/model/print-ready/CyberTrack-Ready-6plates.3mf",
+      "before_sha256": "2d587d87d0c68dee679da7ae72af834d80bcced9ef56f224cbdc6a37949a6724",
+      "sha256": "2521530f18937ca7b90dc38384ee96b0beb857d4b6b72027fdef739344b4d65b",
+      "removed": [
+        "BubbleLidMark"
+      ],
+      "updated": [
+        "PP03-base"
+      ],
+      "part_names": [
+        "PrintChestGuardR",
+        "KeelSideFrameR",
+        "LowerChin",
+        "PrintChestGuardL",
+        "LC03-BottomServiceCover-flipped",
+        "KeelSideFrameL",
+        "PP04-LowerTub.stl",
+        "ChestAudioPanel",
+        "PP01-base",
+        "PP02-base",
+        "LC04-flipped",
+        "PP03-base",
+        "PP07-Crown.stl",
+        "PP07-Tray.stl",
+        "PP07-upright.stl",
+        "BatteryHatch",
+        "LC02-TopRetainer-flat",
+        "ChestBadge",
+        "EffectRetainerRBuck",
+        "PrintNeck",
+        "LC01-Carrier-upright",
+        "EffectRetainerRMOS",
+        "NeckCableBridge",
+        "EffectRetainerLMOS",
+        "ShoulderRailL",
+        "WaterLidMark",
+        "ShoulderRailR",
+        "EffectRetainerLBuck"
+      ],
+      "print_parts": 28,
+      "requires_reslice_plates": [
+        6,
+        7
+      ],
+      "unchanged_archive_entries": 58,
+      "changed_or_removed_entries": [
+        "Metadata/plate_6.png",
+        "Metadata/plate_no_light_6.png",
+        "Metadata/top_6.png",
+        "Metadata/pick_6.png",
+        "Metadata/plate_6.json",
+        "3D/3dmodel.model",
+        "3D/_rels/3dmodel.model.rels",
+        "3D/Objects/object_34.model",
+        "3D/Objects/object_19.model",
+        "Metadata/model_settings.config",
+        "Metadata/slice_info.config"
+      ],
+      "process_settings_unchanged": true,
+      "mesh_local_translation_mm": [
+        0.0,
+        0.0,
+        -45.00000005
+      ],
+      "sliced": false,
+      "updated_date": "2026-10-28",
+      "input_basis": "Latest unsaved user layout saved in Bambu Studio before this update",
+      "input_backup": "/tmp/cybertrack-backpack-20261028/Ready-unsaved-before-open.3mf",
+      "dedicated_backpack_plate": 7,
+      "plate_count": 7,
+      "other_object_transforms_unchanged": true,
+      "orientation": "upright",
+      "upright_transform": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        128.0,
+        -486.4,
+        44.999999949999996
+      ],
+      "orientation_audit": "hardware/model/backpack-upright-audit.json",
+      "plate7_trial_slice_passed": true
+    }
+  ],
+  "retired_exports": [
+    {
+      "path": "hardware/model/completion-print/BubbleLidMark.brep",
+      "sha256": "761d058594fd871b5a1f39751871a83393e4add99faf393d4ec5a6b87c71bb7b"
+    },
+    {
+      "path": "hardware/model/completion-print/BubbleLidMark.step",
+      "sha256": "2570040efb4236cb3241fb05d065290caa70e85e64a7103024dc9b2922abd21e"
+    },
+    {
+      "path": "hardware/model/completion-print/BubbleLidMark.stl",
+      "sha256": "9d391aef7a8f06a3218aef61a5303dee81ed1d975061e8284abf06550c83be51"
+    },
+    {
+      "path": "hardware/model/completion-print/BubblePod.brep",
+      "sha256": "f30299cf8ee9bcc9d2cfa9cc26e831dcab3818ef45e61bf94b171864731ed929"
+    },
+    {
+      "path": "hardware/model/completion-print/BubblePod.step",
+      "sha256": "7e961ab6fffc0049b72a6fccb6d4a6444a396a86d00b5c96879e30e5fb9f6caa"
+    },
+    {
+      "path": "hardware/model/completion-print/BubblePod.stl",
+      "sha256": "d7c250fcaffb00df40917360dd6f6bddb1d9172946c909daaabc79d88d6ca484"
+    }
+  ],
+  "sliced": false
+}

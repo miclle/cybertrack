@@ -73,6 +73,9 @@ def check_legacy():
 
 
 def check():
+    if (MODEL / 'backpack-print-update.json').exists():
+        from check_backpack_release import check as check_backpack
+        return check_backpack()
     lean = MODEL / 'lean-print'
     if not (lean / 'delivery-check.json').exists():
         return check_legacy()

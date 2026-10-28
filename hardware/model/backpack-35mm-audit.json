@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-27",
+  "baseline_sha256": {
+    "source": "7c91cb04c63af63b136dd4f80d72d9c79ed6168995d6825397ba10a41888a182",
+    "delivery": "8a2c454ae8946b20d947ba870c4cf11eddb968ec4f7878d300a7e5e680bb2a96"
+  },
+  "bore_diameter_mm": 35,
+  "outer_diameter_mm": 40,
+  "nominal_wall_mm": 2.5,
+  "axes_xy_mm": [
+    [
+      74,
+      85
+    ],
+    [
+      -74,
+      85
+    ]
+  ],
+  "floor_thickness_mm": 1.5,
+  "lower_inner_front_relief_mm": [
+    57.7,
+    60,
+    50,
+    62.45,
+    74.3,
+    60.75
+  ],
+  "removed": {
+    "source": [
+      "BubbleModule",
+      "BubblePod",
+      "BubbleBottomPad",
+      "BubbleSidePad0",
+      "BubbleSidePad1",
+      "BubbleRetentionBand",
+      "BubbleStrapClosure",
+      "BubbleLidMark",
+      "BubblePodInsertL",
+      "BubblePodInsertR",
+      "BubblePodScrewL",
+      "BubblePodScrewR",
+      "BubbleStrapAccessSpace",
+      "BubbleBottleRemovalSpace",
+      "BubbleFingerSpace",
+      "BubbleDipTubeSpace",
+      "ArcLinerInnerL0",
+      "ArcLinerInnerL1",
+      "ArcLinerInnerR0",
+      "ArcLinerInnerR1",
+      "ArcLinerOuterL0",
+      "ArcLinerOuterL1",
+      "ArcLinerOuterR0",
+      "ArcLinerOuterR1"
+    ],
+    "delivery": [
+      "BubbleModule",
+      "BubblePod",
+      "BubbleBottomPad",
+      "BubbleSidePad0",
+      "BubbleSidePad1",
+      "BubbleRetentionBand",
+      "BubbleStrapClosure",
+      "BubbleLidMark",
+      "BubblePodInsertL",
+      "BubblePodInsertR",
+      "BubblePodScrewL",
+      "BubblePodScrewR",
+      "ArcLinerInnerL0",
+      "ArcLinerInnerL1",
+      "ArcLinerInnerR0",
+      "ArcLinerInnerR1",
+      "ArcLinerOuterL0",
+      "ArcLinerOuterL1",
+      "ArcLinerOuterR0",
+      "ArcLinerOuterR1"
+    ]
+  },
+  "unchanged": {
+    "source": 366,
+    "delivery": 215
+  },
+  "exports": {
+    "base": {
+      "facets": 9182,
+      "step_delta_mm3": 0.0,
+      "stl_sha256": "db5cbebee3ee78e5142a5f1e55308664f10eb73b4858ad6462083cb008b170fc",
+      "step_sha256": "72b192ebc61fd4fa70f64b770c76a6358ba04ee70edf21ea799bbfb9a5f40e04"
+    },
+    "back": {
+      "facets": 9182,
+      "step_delta_mm3": 0.0,
+      "stl_sha256": "65124697a33b2b1d2fc6c729e5d04cd5639490601d7a227d0b0b6715662679cb",
+      "step_sha256": "29521ef1a5d004a606f23c4c0b4e91a98a69d479a1cb76690d141b394fd52878"
+    }
+  },
+  "physical_fit_verified": false,
+  "limits": "CAD and mesh checks only. Lower front/inner relief interrupts the wall locally. Original Ø25.5 body remains a placeholder; radial gap 4.75 mm, retention and liquid supply unverified.",
+  "bores": [
+    {
+      "x_mm": -74,
+      "radius_mm": 17.5,
+      "cylindrical_faces": 1,
+      "probe_intersection_mm3": 0.0,
+      "floor_probe_mm3": 766.057734305391
+    },
+    {
+      "x_mm": 74,
+      "radius_mm": 17.5,
+      "cylindrical_faces": 1,
+      "probe_intersection_mm3": 0.0,
+      "floor_probe_mm3": 766.0577336237874
+    }
+  ],
+  "backpack_collisions": [],
+  "files_sha256": {
+    "hardware/model/source/CyberTrack-design.FCStd": "68e80895159e262a16fd1a0e3bf0fcffc940d9ebdee44242431f2a9be4f6409a",
+    "hardware/model/CyberTrack.FCStd": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23",
+    "hardware/model/CyberTrack.step": "a9d3133474f09a364ab031e44e31aa71b14858aaf90871a0f931c9922fcef464",
+    "hardware/model/print-parts/PP03-Backpack.stl": "db5cbebee3ee78e5142a5f1e55308664f10eb73b4858ad6462083cb008b170fc",
+    "hardware/model/print-parts/PP03-Backpack.step": "72b192ebc61fd4fa70f64b770c76a6358ba04ee70edf21ea799bbfb9a5f40e04"
+  },
+  "saved_reopened": true,
+  "passed": true,
+  "gui_state_repair": "cad-visibility-repair.json"
+}

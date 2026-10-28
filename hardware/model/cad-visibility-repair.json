@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-28",
+  "cause": "Headless save omitted GuiDocument.xml and view assets",
+  "documents": {
+    "CyberTrack.FCStd": {
+      "view_providers": 217,
+      "visible": 199,
+      "existing_archive_entries_byte_identical": true,
+      "sha256": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23"
+    },
+    "source/CyberTrack-design.FCStd": {
+      "view_providers": 376,
+      "visible": 206,
+      "existing_archive_entries_byte_identical": true,
+      "sha256": "68e80895159e262a16fd1a0e3bf0fcffc940d9ebdee44242431f2a9be4f6409a"
+    }
+  },
+  "passed": true,
+  "gui_visual_check_completed": false,
+  "gui_visual_check_blocker": "FreeCAD 1.1.4 crashes in QMacAccessibilityElement dealloc during automated UI interaction."
+}
