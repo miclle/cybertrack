@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-28T23:42:03.042758+08:00",
+  "version": "2.0.3-ct23",
+  "scope": "One-click web left + water 3000 ms diagnostic; existing atomic HTTP backend; no actuator behavior change",
+  "checks": {
+    "host_asan_ubsan": "passed including scheduler-to-output 60 combinations",
+    "web_ui": "passed including exact single combined request, capability/busy/cooldown gates, fresh status, stop race and no retry",
+    "mcp_http": "passed actual exported MCP validation and HTTP handlers",
+    "esp_idf_build": "passed v5.5.1 full plus final incremental build",
+    "responsive_layout": {
+      "viewport": [
+        375,
+        667
+      ],
+      "scroll_width": 375,
+      "stop_bottom": 644,
+      "scroll_height": 670
+    }
+  },
+  "source_sha256": {
+    "web/index.html": "033a1919756a166f6c1c87cc746d83d20072fca9244ddfa4fbe3a436b8405df5",
+    "apply_overlay.py": "a7287960b41e8dd0ecffa737cf4d049065400733b53d2cc81816b5148f5cbd6c",
+    "tests/web_ui_test.mjs": "6a0ea02d12bbc3dcdb660b86e82fc5b5700c16c1baa6c73e59e12edb60641d29",
+    "action_guard.h": "275a6333669d96549e6d9dd78bad378803217caffa9c1488d292a5007383381a",
+    "action_outputs.h": "9fc36414aba1c3af854ef43af16fa7a62302cd219760d4fcd9788b92c0baee30",
+    "control_sessions.h": "0f284144b5e522daaf4de14efb18374a882e873685636df970aaac00e985bdc9",
+    "cybertrack_tools.cc": "798201ba09a77b2d262f23a883e63bbb089ef46d2914fb48ff05149705de3d23",
+    "role-prompt.txt": "7c53a39dc5d8dce14ac4f7c7d41bc2a8dc551f63aab71c1fdd81a92d9e95565b"
+  },
+  "artifact": {
+    "path": "build/firmware-ct23/xiaozhi.bin",
+    "bytes": 2615920,
+    "sha256": "d9ea5eacb0ca1b2658303acc6b161eceb8f127e65e2a57266b724d9b8eded923"
+  },
+  "unchanged": [
+    "PWM 230/255",
+    "GPIO mapping",
+    "voice prompt",
+    "simultaneous start scheduling",
+    "firmware limits and cancellation"
+  ],
+  "logs": [
+    "build/ct23-host.log",
+    "build/ct23-web.log",
+    "build/ct23-mcp.log",
+    "build/ct23-build.log",
+    "build/ct23-build-final.log"
+  ],
+  "limitations": [
+    "Host and browser checks do not prove physical water flow.",
+    "Simultaneous-start fault remains unresolved pending user comparison."
+  ]
+}
