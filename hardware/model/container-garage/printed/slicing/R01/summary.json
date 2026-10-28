@@ -1,0 +1,76 @@
+{
+  "plate": "R01",
+  "failed": false,
+  "seconds": 4572.455078125,
+  "grams": 79.6064224243164,
+  "warnings": "",
+  "feature_times": {
+    "Bottom surface": 528.1703491210938,
+    "Bridge": 110.5602798461914,
+    "Brim": 53.00078582763672,
+    "Custom": 402.95819091796875,
+    "Flush": 26.0,
+    "Gap infill": 0.493284672498703,
+    "Inner wall": 477.6847229003906,
+    "Internal solid infill": 1497.4697265625,
+    "Outer wall": 507.127685546875,
+    "Overhang wall": 4.763906002044678,
+    "Sparse infill": 383.2005310058594,
+    "Support": 16.272056579589844,
+    "Support interface": 1.0620505809783936,
+    "Support transition": 0.7214570045471191,
+    "Top surface": 309.04168701171875,
+    "Travel": 261.0095520019531,
+    "Undefined": 254.14358520507812
+  },
+  "layout": [
+    {
+      "id": "R01",
+      "size_xyz_mm": [
+        152.0,
+        161.0,
+        22.0
+      ],
+      "centre_xy_mm": [
+        128,
+        128
+      ],
+      "bounds_with_brim_mm": [
+        50.0,
+        45.5,
+        206.0,
+        210.5
+      ],
+      "stl_sha256": "e9bff0df50fd6561e3922a63772a3fdad3dc939501004c1b00da0d4b196b7f2f"
+    }
+  ],
+  "settings": {
+    "layer_height": "0.28",
+    "wall_loops": "2",
+    "line_width": "0.6",
+    "outer_wall_line_width": "0.6",
+    "inner_wall_line_width": "0.6",
+    "sparse_infill_line_width": "0.6",
+    "internal_solid_infill_line_width": "0.6",
+    "top_surface_line_width": "0.6",
+    "sparse_infill_density": "12%",
+    "sparse_infill_pattern": "gyroid",
+    "top_shell_layers": "4",
+    "bottom_shell_layers": "4",
+    "top_shell_thickness": "1.12",
+    "enable_support": "1",
+    "support_type": "normal(auto)",
+    "support_style": "snug",
+    "support_on_build_plate_only": "0",
+    "support_base_pattern_spacing": "4",
+    "support_top_z_distance": "0.2",
+    "support_critical_regions_only": "1",
+    "independent_support_layer_height": "1",
+    "brim_type": "outer_only",
+    "brim_width": "2",
+    "wall_generator": "arachne",
+    "enable_prime_tower": "0",
+    "ironing_type": "no ironing"
+  },
+  "project": "slicing/R01/R01.3mf"
+}
