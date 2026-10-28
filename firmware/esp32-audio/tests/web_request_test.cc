@@ -7,6 +7,8 @@ static bool parse(const char* text) {
     bool result=ParseWebCommand(root,command); cJSON_Delete(root); return result;
 }
 int main() {
+    assert(parse(R"({"operation":"move","sequence":1,"window":1,"direction":"forward","duration_ms":60000})"));
+    assert(!parse(R"({"operation":"move","sequence":1,"window":1,"direction":"forward","duration_ms":2147483648})"));
     assert(parse(R"({"operation":"drive_start","sequence":1,"window":1,"direction":"forward"})"));
     assert(parse(R"({"operation":"drive_start","sequence":1,"window":1,"direction":"left","water_duration_ms":30000})"));
     assert(parse(R"({"operation":"drive_renew","hold_id":1,"renewal":1})"));
@@ -71,7 +73,7 @@ int main() {
         R"({"operation":"water","sequence":1,"window":1,"window":2,"duration_ms":1})",
         R"({"operation":"water","sequence":1,"sequence":2,"duration_ms":1})",
         R"({"operation":"move","sequence":1,"window":1,"direction":"up","duration_ms":1})",
-        R"({"operation":"move","sequence":1,"window":1,"direction":"forward","duration_ms":3001})",
+        R"({"operation":"move","sequence":1,"window":1,"direction":"forward","duration_ms":2147483648})",
         R"({"operation":"move_and_water","sequence":1,"window":1,"direction":"left","move_duration_ms":1})",
         R"({"operation":"move_and_water","sequence":1,"window":1,"direction":"left","move_duration_ms":1,"water_duration_ms":-1})"
     };

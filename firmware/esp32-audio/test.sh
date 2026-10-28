@@ -27,8 +27,8 @@ for header in gpio ledc; do
   echo '#include "output_stub.h"' > "build/audio-host/stubs/driver/$header.h"
 done
 c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
-  -Ibuild/audio-host/stubs -Ifirmware/esp32-audio/tests -Ifirmware/esp32-audio \
-  firmware/esp32-audio/tests/output_test.cc -o build/audio-host/output_test
+  -Ibuild/audio-host/stubs -Ifirmware/esp32-audio/tests -Ifirmware/esp32-audio -Ifirmware/esp32-linx/main \
+  firmware/esp32-audio/tests/output_test.cc build/audio-host/water_policy.o -o build/audio-host/output_test
 build/audio-host/output_test
 c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/effects_test.cc \
@@ -38,3 +38,7 @@ c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/frenzy_test.cc \
   build/audio-host/water_policy.o -o build/audio-host/frenzy_test
 build/audio-host/frenzy_test
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
+  -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/sequence_test.cc \
+  build/audio-host/water_policy.o -o build/audio-host/sequence_test
+build/audio-host/sequence_test
