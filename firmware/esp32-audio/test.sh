@@ -46,3 +46,14 @@ c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/speed_test.cc \
   build/audio-host/water_policy.o -o build/audio-host/speed_test
 build/audio-host/speed_test
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
+  -Ifirmware/esp32-audio firmware/esp32-audio/tests/distance_test.cc -o build/audio-host/distance_test
+build/audio-host/distance_test
+mkdir -p build/audio-host/range-stubs/driver build/audio-host/range-stubs/freertos
+for header in driver/gpio driver/rmt_rx esp_log esp_rom_sys esp_timer freertos/FreeRTOS freertos/task freertos/queue; do
+  echo '#include "ultrasonic_stub.h"' > "build/audio-host/range-stubs/$header.h"
+done
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
+  -Ibuild/audio-host/range-stubs -Ifirmware/esp32-audio/tests -Ifirmware/esp32-audio \
+  firmware/esp32-audio/tests/ultrasonic_test.cc -o build/audio-host/ultrasonic_test
+build/audio-host/ultrasonic_test

@@ -1,0 +1,113 @@
+{
+  "version": "2.0.3-ct32",
+  "date": "2026-10-29",
+  "scope": "Height-responsive group spacing, clearer speed label and fixed bottom stop/status dock with measured content reservation",
+  "artifact": {
+    "path": "build/firmware-ct32/xiaozhi.bin",
+    "bytes": 2638176,
+    "sha256": "4ce1b0a74a2a17d19bf0567c967700f1dfa43db9124ee7ce51438bfdffc76090"
+  },
+  "checks": {
+    "web_ui_regression": "passed existing action/hold/stop/speed/range tests",
+    "esp_idf_build": "passed ESP-IDF 5.5.1",
+    "exported_page_matches_source": true,
+    "control_driver_prompt_unchanged": true,
+    "browser_layout": [
+      {
+        "dockTop": 481,
+        "groupMargin": "1.44px",
+        "lastControlBottom": 473.75,
+        "reserved": "93px",
+        "scrollHeight": 568,
+        "scrollWidth": 320,
+        "stopBottom": 562,
+        "viewport": [
+          320,
+          568
+        ]
+      },
+      {
+        "dockTop": 513,
+        "groupMargin": "4px",
+        "lastControlBottom": 484,
+        "reserved": "93px",
+        "scrollHeight": 600,
+        "scrollWidth": 375,
+        "stopBottom": 594,
+        "viewport": [
+          375,
+          600
+        ]
+      },
+      {
+        "dockTop": 576,
+        "groupMargin": "9.36px",
+        "lastControlBottom": 545.4375,
+        "reserved": "97px",
+        "scrollHeight": 667,
+        "scrollWidth": 390,
+        "stopBottom": 659,
+        "viewport": [
+          390,
+          667
+        ]
+      },
+      {
+        "dockTop": 745,
+        "groupMargin": "16px",
+        "lastControlBottom": 638,
+        "reserved": "105px",
+        "scrollHeight": 844,
+        "scrollWidth": 390,
+        "stopBottom": 834,
+        "viewport": [
+          390,
+          844
+        ]
+      },
+      {
+        "dockTop": 629,
+        "groupMargin": "13.6px",
+        "lastControlBottom": 562.375,
+        "reserved": "97px",
+        "scrollHeight": 720,
+        "scrollWidth": 1280,
+        "stopBottom": 712,
+        "viewport": [
+          1280,
+          720
+        ]
+      }
+    ],
+    "short_window_scroll_reachability": {
+      "dockTop": 313,
+      "lastControlBottom": 307,
+      "scrollY": 161,
+      "stopBottom": 394,
+      "viewport": [
+        320,
+        400
+      ]
+    },
+    "no_scrollbar_or_dock_overlap_at_five_tested_normal_sizes": true
+  },
+  "source_sha256": {
+    "web/index.html": "11fed30f2c86e556b8b9293a1154f810201109863829976c7489c3c9e67ff9f9",
+    "apply_overlay.py": "1a62293af6ebc42ed956b5b1bc62a3ea75699ac6c3437e640ab12ad1420355c5",
+    "role-prompt.txt": "541f59e66056c7e4037b51bf3dd1f2039baf6476e1e595f47c23154d9e327e50"
+  },
+  "logs": [
+    "build/ct32-web.log",
+    "build/ct32-build.log"
+  ],
+  "deployment": {
+    "flashed": true,
+    "device_restarted": true,
+    "startup_and_page_verified": true,
+    "evidence": "startup-ct32.json"
+  },
+  "limits": [
+    "Phone browser safe-area, long-press and subjective spacing pending user confirmation.",
+    "Natural scrolling remains available in extremely short or text-zoomed windows."
+  ]
+}
