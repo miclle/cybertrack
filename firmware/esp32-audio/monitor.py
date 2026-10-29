@@ -56,6 +56,10 @@ def main():
                         report({"diagnostic": line.strip()})
                 if len(pending) > 16384:
                     pending.clear()
+    except serial.SerialException:
+        # Make a disconnected observer visible in the filtered log; never auto-reset/reopen.
+        with args.log.open("a", buffering=1) as log:
+            report({"observer": "disconnected; recording stopped until serial is reopened"})
     except KeyboardInterrupt:
         pass
     finally:
