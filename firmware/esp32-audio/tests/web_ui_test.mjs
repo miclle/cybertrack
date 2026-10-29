@@ -438,3 +438,22 @@ console.log('PASS: range hysteresis, immediate large change/invalid clearing, 20
  h.ctx.disconnect('offline');assert.equal(h.ids['move-state'].textContent,'');assert.equal(h.ids['move-time'].textContent,'—');
 }
 console.log('PASS: compact channel states retain direction, countdown, hold, cooldown, fault and disconnected status');
+{
+ const h=harness();await h.connect();
+ h.ctx.render(h.status(2,{proximity:{forward_blocked:true}}));
+ assert(h.buttons[0].disabled); assert(h.buttons.slice(1).every(b=>!b.disabled));
+ assert(!h.ids.water.disabled);
+ h.ctx.render(h.status(3,{proximity:{forward_blocked:false}}));
+ assert(!h.buttons[0].disabled);assert(!h.sent.some(c=>JSON.parse(c.options.body).operation==='drive_start'));
+}
+for(const blocked of [true,false]) {
+ const h=harness();await h.connect();await h.hold();
+ const renewal=[...h.timers.values()].find(t=>t.ms===150);assert(renewal);const wait=renewal.fn();
+ h.respond(h.take('/api/action'),h.status(4,{result:'drive_cancelled',proximity:{forward_blocked:blocked},water_remaining_ms:2000,water_source:'web',logical_outputs:{water:true}}));
+ await wait;await flush();
+ assert(!h.sent.some(c=>['stop','release','drive_start'].includes(JSON.parse(c.options.body).operation) && c!==h.sent.find(x=>JSON.parse(x.options.body).operation==='drive_start')));
+ assert.equal(h.ids.stop.disabled,false);
+ assert.equal(h.buttons[0].disabled,blocked);
+ assert(h.ids.message.textContent.includes(blocked?'前方过近':'行走已停止'));
+}
+console.log('PASS: proximity locks only forward, cancellation preserves connection/effects, recovery never restarts');

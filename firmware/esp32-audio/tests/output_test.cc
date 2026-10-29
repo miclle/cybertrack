@@ -175,6 +175,20 @@ int main() {
             off();
         }
     }
+    {
+        reset(); AudioActionOutputs output; assert(output.Init());
+        ControlSessions session; session.WifiLink(0,true); session.VoiceLink(0,true); session.Tick(0,false);
+        auto& g=session.guard;
+        assert(!std::strcmp(g.MoveAndWater(0,session.VoiceClaim(0,1,AudioActionGuard::Both),5000,5000,"forward"),"accepted"));
+        assert(output.Apply(true,g.left,g.right,false,false)); assert(pwm[2] && pwm[3] && levels[18]);
+        session.SetForwardBlocked(100,true); session.Tick(100,false);
+        assert(output.Apply(g.Watering(),g.Moving()?g.left:0,g.Moving()?g.right:0,false,false));
+        assert(pwm[2]==0 && pwm[3]==0 && levels[18]==1);
+        assert(levels[9]==0 && levels[10]==0 && levels[12]==0 && levels[13]==0);
+        session.SetForwardBlocked(300,false); session.Tick(300,false);
+        assert(!g.Moving());
+    }
+    std::cout << "PASS: proximity stop clears both motor PWM/direction outputs, preserves water and never resumes\n";
     std::cout << "PASS: actual output driver 56-state concurrent transition matrix, A/right B/left mapping, untouched-lane continuity, disable-before-direction, all init/transition API failures and latched global shutdown\n";
     std::cout << "PASS: scheduler-to-GPIO/PWM integration, four directions x 15 parallel lane combinations, second-step start and independent deadlines at 5 ms cadence\n";
     std::cout << "PASS: GPIO18 input enable failure, independent pad readback, high/low/motor samples, per-action reset, snapshot, saturation and fault shutdown\n";
