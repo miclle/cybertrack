@@ -42,3 +42,7 @@ c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/sequence_test.cc \
   build/audio-host/water_policy.o -o build/audio-host/sequence_test
 build/audio-host/sequence_test
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
+  -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/speed_test.cc \
+  build/audio-host/water_policy.o -o build/audio-host/speed_test
+build/audio-host/speed_test

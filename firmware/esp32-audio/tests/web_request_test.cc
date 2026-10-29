@@ -7,6 +7,9 @@ static bool parse(const char* text) {
     bool result=ParseWebCommand(root,command); cJSON_Delete(root); return result;
 }
 int main() {
+    for(const char* speed:{"60","80","100"}) assert(parse((std::string(R"({"operation":"set_speed","sequence":1,"window":1,"speed_percent":)")+speed+"}").c_str()));
+    for(const char* speed:{"0","1","50","59","101","1.5","true","50,\"speed_percent\":50","50,\"extra\":1"}) assert(!parse((std::string(R"({"operation":"set_speed","sequence":1,"window":1,"speed_percent":)")+speed+"}").c_str()));
+
     assert(parse(R"({"operation":"move","sequence":1,"window":1,"direction":"forward","duration_ms":60000})"));
     assert(!parse(R"({"operation":"move","sequence":1,"window":1,"direction":"forward","duration_ms":2147483648})"));
     assert(parse(R"({"operation":"drive_start","sequence":1,"window":1,"direction":"forward"})"));

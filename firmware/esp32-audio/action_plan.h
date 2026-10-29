@@ -7,8 +7,9 @@ struct ActionPlan {
     struct Step {
         const char* direction = "none";
         int move_ms = 0, water_ms = 0, bubbles_ms = 0, ignition_ms = 0;
+        int speed_percent = 100;
         bool Valid() const {
-            if (move_ms < 0 || water_ms < 0 || bubbles_ms < 0 || ignition_ms < 0 ||
+            if (speed_percent < 60 || speed_percent > 100 || move_ms < 0 || water_ms < 0 || bubbles_ms < 0 || ignition_ms < 0 ||
                 !(move_ms || water_ms || bubbles_ms || ignition_ms)) return false;
             return (!move_ms ? !std::strcmp(direction, "none") :
                     !AudioActionGuard::Validate(AudioActionGuard::MoveOnly, move_ms, 0, direction)) &&

@@ -10,6 +10,7 @@
 
 .frenzy-controls h2{display:flex;justify-content:space-between;align-items:center}.frenzy-controls h2 span{font-size:11px;font-weight:400;color:#686e65}.frenzy-controls button{background:#f3e6d3;border-color:#dbbe94}
 
+.speed-control{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;margin:14px 0;color:var(--ink);font-size:13px}.speed-control input{width:100%;min-width:0;height:28px;margin:0;accent-color:#789324;touch-action:pan-y}.speed-control output{min-width:42px;text-align:right;font-variant-numeric:tabular-nums}.speed-control input:disabled{opacity:.35}
 /* Fit portrait phone browser viewports without clipping controls or disabling zoom. */
 @media (max-width:600px) {
   main{display:flex;flex-direction:column;gap:8px;padding:12px 14px max(10px,env(safe-area-inset-bottom));width:100%}
@@ -21,6 +22,7 @@
   .status strong{font-size:13px;line-height:18px;margin:0 0 2px}
   .status small{display:block;font-size:11px;line-height:14px}
   .status span{display:block;min-height:14px;margin:0}
+  .speed-control{margin:0;gap:8px;font-size:12px}.speed-control input{height:26px}
   .hint{font-size:11px;line-height:16px;margin:0}
   .pad{width:100%;max-width:none;margin:0;gap:6px}
   .pad button{height:48px;min-height:48px;font-size:13px}
@@ -59,6 +61,7 @@
 <article><strong id="bubbles-label">泡泡枪</strong><small><span id="bubbles-state">等待连接</span><span id="bubbles-time">—</span></small></article>
 <article><strong id="ignition-label">点火线圈</strong><small><span id="ignition-state">等待连接</span><span id="ignition-time">—</span></small></article>
 </section>
+<div class="speed-control"><label for="move-speed">网页速度</label><input id="move-speed" type="range" min="60" max="100" step="1" value="100" aria-describedby="speed-value" disabled><output id="speed-value" for="move-speed">100%</output></div>
 <p id="hold-time" class="hint">按住行走，松开停止</p>
 <div class="pad" aria-label="行走方向">
 <button class="forward" data-direction="forward" aria-label="前进" disabled><b aria-hidden="true">↑</b>前进</button>
@@ -110,6 +113,8 @@
         snapshot = null,
         pending = false,
         effectPending = false,
+        speedDesired = null,
+        speedJob = null,
         followingActivity = false,
         polling = false,
         timer,
@@ -186,6 +191,8 @@
           !Object.values(holds).some(Boolean) && ["move", "water", "bubbles", "ignition"].every(kind =>
             !snapshot?.[kind + "_remaining_ms"] && !snapshot?.[kind + "_cooldown_ms"]);
         document.querySelectorAll('[data-effect="frenzy"]').forEach(b => { b.disabled = !frenzyReady; });
+        $("move-speed").disabled = !token || !snapshot || pending || document.hidden ||
+          snapshot.boot_held || snapshot.state === "FAULT" || snapshot.capabilities?.speed_control !== true;
         $("stop").disabled = !token;
       }
       function render(s) {
@@ -193,6 +200,10 @@
         latest = s.request_sequence;
         snapshot = s;
         windowId = s.window;
+        if (speedDesired === null) {
+          $("move-speed").value = String(s.web_speed_percent ?? 100);
+          $("speed-value").textContent = $("move-speed").value + "%";
+        }
         $("frenzy-time").textContent = s.frenzy_remaining_ms > 0
           ? "剩余 " + (s.frenzy_remaining_ms / 1000).toFixed(1) + " 秒" : "最长 30 秒";
         for (const kind of ["move", "water", "bubbles", "ignition"]) {
@@ -214,7 +225,7 @@
                   ? "冷却 " + (cool / 1000).toFixed(1) + " 秒"
                   : "待命";
         }
-        $("direction").textContent = s.move_direction && s.move_direction !== "none" ? "行走 · " + directions[s.move_direction] : "行走";
+        $("direction").textContent = s.move_direction && s.move_direction !== "none" ? "行走 · " + directions[s.move_direction] + (s.move_speed_percent ? " " + s.move_speed_percent + "%" : "") : "行走";
         $("water-label").textContent = s.logical_outputs.water
           ? "喷水中"
           : "水枪";
@@ -264,6 +275,7 @@
         const old = token;
         token = "";
         epoch++;
+        speedDesired = null; speedJob = null;
         clearTimeout(timer);
         pending = false;
         effectPending = false;
@@ -292,7 +304,7 @@
       async function poll() {
         clearTimeout(timer);
         if (!token || document.hidden || Object.values(holds).some(Boolean)) return;
-        if (polling || pending || effectPending) {
+        if (polling || pending || effectPending || speedJob) {
           timer = setTimeout(poll, 100);
           return;
         }
@@ -361,6 +373,48 @@
         const next = startQueue.then(work);
         startQueue = next.catch(() => {});
         return next;
+      }
+      async function changeSpeed() {
+        if ($("move-speed").disabled) return;
+        const value = Number($("move-speed").value);
+        if (!Number.isInteger(value) || value < 60 || value > 100) return;
+        speedDesired = value;
+        $("speed-value").textContent = value + "%";
+        if (speedJob) return;
+        const job = { epoch };
+        speedJob = job;
+        try {
+          await queueStart(async () => {
+            while (speedJob === job && job.epoch === epoch && speedDesired !== null && !document.hidden) {
+              await pollWait;
+              if (speedJob !== job || job.epoch !== epoch || document.hidden) return;
+              const fresh = await request("/api/state", {}, token, 400);
+              if (speedJob !== job || job.epoch !== epoch || document.hidden) return;
+              if (fresh.result !== "ok") throw new Error(fresh.result);
+              render(fresh);
+              if ($("move-speed").disabled) { speedDesired = null; return; }
+              const speed = speedDesired;
+              const result = await request("/api/action", {
+                operation: "set_speed", sequence: ++sequence, window: fresh.window, speed_percent: speed,
+              }, token, 400);
+              if (speedJob !== job || job.epoch !== epoch) return;
+              if (result.result !== "ok") throw new Error(result.result);
+              if (speedDesired === speed) speedDesired = null;
+              render(result);
+            }
+          });
+        } catch (err) {
+          if (speedJob === job && job.epoch === epoch) disconnect("速度设置未确认，网页动作已请求停止。");
+        } finally {
+          if (speedJob === job) {
+            speedJob = null; speedDesired = null;
+            if (snapshot) {
+              $("move-speed").value = String(snapshot.web_speed_percent ?? 100);
+              $("speed-value").textContent = $("move-speed").value + "%";
+            }
+            controls(); poll();
+          }
+        }
       }
       async function action(kind = "water", duration = 1000) {
         if (!["water", "bubbles", "ignition", "frenzy"].includes(kind)) return;
@@ -596,10 +650,12 @@
       document.querySelectorAll("[data-effect]").forEach(button => {
         button.addEventListener("click", () => action(button.dataset.effect, Number(button.dataset.duration)));
       });
+      $("move-speed").addEventListener("input", changeSpeed);
       $("stop").addEventListener("click", async () => {
         if (!token) return;
         clearAllHolds();
         const e = ++epoch;
+        speedDesired = null; speedJob = null;
         effectPending = false;
         pending = true;
         controls();
