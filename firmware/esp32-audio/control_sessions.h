@@ -11,6 +11,7 @@ public:
     struct EffectHold { uint32_t id = 0, renewal = 0; uint64_t started = 0, until = 0; };
     EffectHold water_hold, bubbles_hold;
     AudioActionGuard guard;
+    int web_speed_percent = 100;
     bool plan_active = false;
     unsigned plan_step = 0, plan_count = 0;
     const char* plan_result = "idle";
@@ -88,6 +89,7 @@ public:
         heartbeat_ = now;
         window_issued_ = now;
         sequence_ = 0;
+        web_speed_percent = 100;
         return owner;
     }
     bool Owns(uint32_t session) const { return session && owner == session; }
@@ -107,6 +109,8 @@ public:
         return true;
     }
     int VoiceClaim(uint64_t now, int rpc, AudioActionGuard::Target target) {
+        if (target == AudioActionGuard::SpeedMode)
+            return wifi && voice && !shutdown ? guard.Claim(now, rpc, target) : 0;
         const unsigned lanes = (target == AudioActionGuard::FrenzyMode || target == AudioActionGuard::PlanMode) ? AudioActionGuard::All : target;
         return wifi && voice && !shutdown && !frenzy_until && !plan_active && !(web_targets_ & lanes) ? guard.Claim(now, rpc, target) : 0;
     }
@@ -116,6 +120,15 @@ public:
         if (error) return error;
         return StartWeb(now, target, move_ms, water_ms, direction, bubbles_ms, ignition_ms);
     }
+    const char* WebSpeed(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window, int speed) {
+        const char* error = Consume(now, session, seq, command_window, WindowMs);
+        if (error) return error;
+        if (speed < 60 || speed > 100) return "invalid_speed";
+        web_speed_percent = speed;
+        // Only web-owned movement changes. No start, renewal, direction or deadline change.
+        if ((web_targets_ & AudioActionGuard::MoveOnly) && guard.Moving()) guard.SetMoveSpeed(speed);
+        return "ok";
+    }
     const char* FrenzyStart(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window, int duration) {
         const char* error = Consume(now, session, seq, command_window, WindowMs);
         if (error) return error;
@@ -124,7 +137,7 @@ public:
             if (!frenzy_web_) { Stop(now); return "voice_preempted"; }
             return "not_ready_or_busy";
         }
-        const char* result = guard.Frenzy(now, duration);
+        const char* result = guard.Frenzy(now, duration, web_speed_percent);
         if (!std::strcmp(result, "accepted")) {
             frenzy_started_ = now; frenzy_until = now + duration;
             frenzy_duration_ms = duration; frenzy_web_ = true;
@@ -139,6 +152,20 @@ public:
             frenzy_started_ = now; frenzy_until = now + duration;
             frenzy_duration_ms = duration; frenzy_web_ = false;
         }
+        return result;
+    }
+    const char* VoiceSetSpeed(uint64_t now, int ticket, int speed) {
+        if (!wifi || !voice || shutdown) return "not_ready_or_busy";
+        const char* result = guard.SetSpeed(now, ticket, speed);
+        if (!std::strcmp(result, "accepted") && (web_targets_ & AudioActionGuard::MoveOnly))
+            web_speed_percent = speed;
+        return result;
+    }
+    const char* VoiceAdjustSpeed(uint64_t now, int ticket, int delta) {
+        if (!wifi || !voice || shutdown) return "not_ready_or_busy";
+        const char* result = guard.AdjustSpeed(now, ticket, delta);
+        if (!std::strcmp(result, "accepted") && (web_targets_ & AudioActionGuard::MoveOnly))
+            web_speed_percent = guard.left < 0 ? -guard.left : guard.left;
         return result;
     }
     const char* VoicePlan(uint64_t now, int ticket, const ActionPlan& plan) {
@@ -236,7 +263,7 @@ private:
             if (!durations[i]) continue;
             if (now > UINT64_MAX - static_cast<unsigned>(durations[i]) ||
                 std::strcmp(guard.WebRequest(now, targets[i], step.move_ms, step.water_ms,
-                                             step.direction, step.bubbles_ms, step.ignition_ms), "accepted")) {
+                                             step.direction, step.bubbles_ms, step.ignition_ms, step.speed_percent), "accepted")) {
                 Stop(now); return false;
             }
             plan_deadlines_[i] = now + static_cast<unsigned>(durations[i]);
@@ -312,7 +339,7 @@ private:
         }
         // Keep the configured operation interval; the user must press again after cooling, never queue a restart.
         if (preempted) return "voice_preempted";
-        const char* result = guard.WebRequest(now, target, move_ms, water_ms, direction, bubbles_ms, ignition_ms);
+        const char* result = guard.WebRequest(now, target, move_ms, water_ms, direction, bubbles_ms, ignition_ms, web_speed_percent);
         if (!std::strcmp(result, "accepted")) web_targets_ |= target;
         return result;
     }

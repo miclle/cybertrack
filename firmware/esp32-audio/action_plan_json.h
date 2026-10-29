@@ -4,7 +4,7 @@
 #include <string>
 
 // JSON is a string property because the upstream MCP schema supports scalar properties.
-// Require all five fields, reject duplicates/unknowns and validate the whole plan first.
+// Require five action fields and optional speed_percent; reject unknown/duplicate keys.
 inline bool ParseActionPlan(const std::string& text, ActionPlan& plan) {
     plan = {};
     if (text.empty() || text.size() > 4096 || text.find('\0') != std::string::npos ||
@@ -17,7 +17,13 @@ inline bool ParseActionPlan(const std::string& text, ActionPlan& plan) {
         const cJSON* item = cJSON_GetArrayItem(root, i);
         auto& step = plan.steps[i];
         const auto* direction = cJSON_GetObjectItemCaseSensitive(item, "direction");
-        valid = cJSON_IsObject(item) && cJSON_GetArraySize(item) == 5 && cJSON_IsString(direction);
+        const auto* speed = cJSON_GetObjectItemCaseSensitive(item, "speed_percent");
+        valid = cJSON_IsObject(item) && cJSON_GetArraySize(item) == (speed ? 6 : 5) && cJSON_IsString(direction);
+        if (speed) {
+            valid = valid && cJSON_IsNumber(speed) && speed->valuedouble >= 60 && speed->valuedouble <= 100 &&
+                speed->valuedouble == speed->valueint;
+            if (valid) step.speed_percent = speed->valueint;
+        }
         bool known = false;
         if (valid) for (const char* name : {"none", "forward", "backward", "left", "right"}) {
             if (!std::strcmp(direction->valuestring, name)) { step.direction = name; known = true; break; }

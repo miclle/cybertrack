@@ -15,7 +15,7 @@ int main() {
     for(int duration : {1,5000,10000,30000}) {
         ControlSessions s; auto id=ready(s);
         assert(accepted(s.FrenzyStart(0,id,1,s.window,duration)));
-        assert(s.guard.left==-90 && s.guard.right==90);
+        assert(s.guard.left==-100 && s.guard.right==100);
         for(int t=0;t<duration;++t) {
             s.Tick(t,false);
             if(t%500==0) assert(s.Heartbeat(t,id));

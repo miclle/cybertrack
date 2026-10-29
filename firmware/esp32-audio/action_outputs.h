@@ -10,7 +10,8 @@ public:
     static constexpr gpio_num_t WaterPin = GPIO_NUM_18;
     static constexpr gpio_num_t BubblesPin = GPIO_NUM_17; // Board-config free; physical wiring pending.
     static constexpr gpio_num_t IgnitionPin = GPIO_NUM_21; // One MOS for both modules; wiring pending.
-    static constexpr unsigned Duty = 230; // ~90%, 8 bit; increased from 204 after slow-motion feedback.
+    static constexpr unsigned Duty = 255; // Full 8-bit PWM is the default.
+    static unsigned SpeedDuty(int value) { return ((value < 0 ? -value : value) * Duty + 50) / 100; }
     bool fault = false;
     // Digital pad observations, not voltage/current or water-flow feedback.
     // Sampled after successful output application; counters saturate on long holds.
@@ -57,25 +58,32 @@ public:
     }
     bool Apply(bool water, int left, int right, bool bubbles = false, bool ignition = false) {
         if (fault) { EmergencyOff(); return false; }
-        if ((left != 0 && left != 90 && left != -90) ||
-            (right != 0 && right != 90 && right != -90)) return Check(-1);
+        if (left < -100 || left > 100 || right < -100 || right > 100 ||
+            (left != 0 && left > -60 && left < 60) || (right != 0 && right > -60 && right < 60)) return Check(-1);
         // Change only requested lanes; stopping any one must not pulse the others.
         if ((!applied || ignition != ignition_on) && !ignition && !Check(gpio_set_level(IgnitionPin, 0))) return false;
         // Touch only the changing lane: starting/stopping water must not pulse
         // motor enables, and motor transitions must not interrupt water.
         if (!applied || left != applied_left || right != applied_right) {
-            bool ok = true;
-            for (const auto& b : bridges) ok = (ledc_stop(LEDC_LOW_SPEED_MODE, b.channel, 0) == ESP_OK) && ok;
-            if (!ok) return Check(-1);
-            const int values[] = {left, right};
+            const int values[] = {left, right}, previous[] = {applied_left, applied_right};
+            auto sign = [](int n) { return (n > 0) - (n < 0); };
+            const bool direction_change = !applied || sign(left) != sign(applied_left) || sign(right) != sign(applied_right);
+            // Disable both bridges before direction changes. Same-direction speed changes
+            // update duty in place and never pulse motor enables or effect lanes.
+            if (direction_change) {
+                bool ok = true;
+                for (const auto& b : bridges) ok = (ledc_stop(LEDC_LOW_SPEED_MODE, b.channel, 0) == ESP_OK) && ok;
+                if (!ok) return Check(-1);
+            }
             for (unsigned i = 0; i < 2; ++i) {
                 const auto& b = bridges[i];
-                if (!Check(gpio_set_level(b.in1, values[i] > 0)) ||
-                    !Check(gpio_set_level(b.in2, values[i] < 0))) return false;
-                if (values[i] && !Check(ledc_set_duty(LEDC_LOW_SPEED_MODE, b.channel, Duty))) return false;
+                if (direction_change && (!Check(gpio_set_level(b.in1, values[i] > 0)) ||
+                    !Check(gpio_set_level(b.in2, values[i] < 0)))) return false;
+                if (values[i] && (direction_change || values[i] != previous[i]) &&
+                    !Check(ledc_set_duty(LEDC_LOW_SPEED_MODE, b.channel, SpeedDuty(values[i])))) return false;
             }
             for (unsigned i = 0; i < 2; ++i)
-                if (values[i] && !Check(ledc_update_duty(LEDC_LOW_SPEED_MODE, bridges[i].channel))) return false;
+                if (values[i] && (direction_change || values[i] != previous[i]) && !Check(ledc_update_duty(LEDC_LOW_SPEED_MODE, bridges[i].channel))) return false;
         }
         if ((!applied || water != water_on) && !Check(gpio_set_level(WaterPin, water))) return false;
         if ((!applied || bubbles != bubbles_on) && !Check(gpio_set_level(BubblesPin, bubbles))) return false;

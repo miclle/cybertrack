@@ -34,8 +34,10 @@ ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.bubbles" || tool_nam
     }
     if (tool_name == "self.tank.move") {
         const cJSON* duration = cJSON_GetObjectItemCaseSensitive(tool_arguments, "duration_ms");
+        const cJSON* speed = cJSON_GetObjectItemCaseSensitive(tool_arguments, "speed_percent");
         const cJSON* direction = cJSON_GetObjectItemCaseSensitive(tool_arguments, "direction");
-        if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 2 ||
+        if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != (speed ? 3 : 2) ||
+            (speed && (!cJSON_IsNumber(speed) || !(speed->valuedouble >= 60 && speed->valuedouble <= 100) || speed->valuedouble != speed->valueint)) ||
             !cJSON_IsNumber(duration) || !(duration->valuedouble >= 1 && duration->valuedouble <= 2147483647) ||
             duration->valuedouble != duration->valueint || !cJSON_IsString(direction) ||
             (strcmp(direction->valuestring, "forward") && strcmp(direction->valuestring, "backward") &&
@@ -46,9 +48,11 @@ ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.bubbles" || tool_nam
     }
     if (tool_name == "self.tank.move_and_water") {
         const cJSON* move = cJSON_GetObjectItemCaseSensitive(tool_arguments, "move_duration_ms");
+        const cJSON* speed = cJSON_GetObjectItemCaseSensitive(tool_arguments, "speed_percent");
         const cJSON* water = cJSON_GetObjectItemCaseSensitive(tool_arguments, "water_duration_ms");
         const cJSON* direction = cJSON_GetObjectItemCaseSensitive(tool_arguments, "direction");
-        if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 3 ||
+        if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != (speed ? 4 : 3) ||
+            (speed && (!cJSON_IsNumber(speed) || !(speed->valuedouble >= 60 && speed->valuedouble <= 100) || speed->valuedouble != speed->valueint)) ||
             !cJSON_IsNumber(move) || !(move->valuedouble >= 1 && move->valuedouble <= 2147483647) || move->valuedouble != move->valueint ||
             !cJSON_IsNumber(water) || !(water->valuedouble >= 1 && water->valuedouble <= 30000) || water->valuedouble != water->valueint ||
             !cJSON_IsString(direction) ||
@@ -56,6 +60,21 @@ ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.bubbles" || tool_nam
              strcmp(direction->valuestring, "left") && strcmp(direction->valuestring, "right"))) {
             ReplyError(id, "Combined action requires direction, integer move_duration_ms in 1..2147483647 and water_duration_ms in 1..30000");
             return;
+        }
+    }
+    if (tool_name == "self.tank.set_speed") {
+        const cJSON* speed = cJSON_GetObjectItemCaseSensitive(tool_arguments, "speed_percent");
+        if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 1 ||
+            !cJSON_IsNumber(speed) || !(speed->valuedouble >= 60 && speed->valuedouble <= 100) ||
+            speed->valuedouble != speed->valueint) {
+            ReplyError(id, "Set speed requires exactly integer speed_percent in 60..100"); return;
+        }
+    }
+    if (tool_name == "self.tank.adjust_speed") {
+        const cJSON* delta = cJSON_GetObjectItemCaseSensitive(tool_arguments, "delta_percent");
+        if (!cJSON_IsObject(tool_arguments) || cJSON_GetArraySize(tool_arguments) != 1 ||
+            !cJSON_IsNumber(delta) || (delta->valuedouble != 10 && delta->valuedouble != -10)) {
+            ReplyError(id, "Speed adjustment requires delta_percent of exactly 10 or -10"); return;
         }
     }
     if (tool_name == "self.tank.sequence") {
@@ -68,7 +87,7 @@ ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.bubbles" || tool_nam
         }
     }
     if (tool_name == "self.tank.stop") CyberTrackActionStop();
-    if (cybertrack || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy" || tool_name == "self.tank.sequence")
+    if (cybertrack || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy" || tool_name == "self.tank.sequence" || tool_name == "self.tank.adjust_speed" || tool_name == "self.tank.set_speed")
         ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());'''
 
 
@@ -88,7 +107,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct25")')
+                 'set(PROJECT_VER "2.0.3-ct27")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
@@ -97,7 +116,7 @@ def main():
     replace_once(source / "main/mcp_server.h",
                  'cJSON_AddItemToObject(input_schema, "properties", properties);',
                  'cJSON_AddItemToObject(input_schema, "properties", properties);\n'
-                 '        if (name_ == "self.tank.get_status" || name_ == "self.tank.stop" || name_ == "self.tank.water" || name_ == "self.tank.move" || name_ == "self.tank.move_and_water" || name_ == "self.tank.bubbles" || name_ == "self.tank.ignition" || name_ == "self.tank.frenzy" || name_ == "self.tank.sequence") {\n'
+                 '        if (name_ == "self.tank.get_status" || name_ == "self.tank.stop" || name_ == "self.tank.water" || name_ == "self.tank.move" || name_ == "self.tank.move_and_water" || name_ == "self.tank.bubbles" || name_ == "self.tank.ignition" || name_ == "self.tank.frenzy" || name_ == "self.tank.sequence" || name_ == "self.tank.adjust_speed" || name_ == "self.tank.set_speed") {\n'
                  '            cJSON_AddBoolToObject(input_schema, "additionalProperties", false);\n'
                  '        }')
     replace_once(source / "main/mcp_server.cc", '    PropertyList arguments = (*tool_iter)->properties();',
@@ -115,7 +134,7 @@ def main():
                  ACTION_ARGUMENT_CHECK)
     replace_once(source / "main/mcp_server.cc",
                  '    // Use main thread to call the tool',
-                 '    if (tool_name == "self.tank.sequence" || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy") {\n'
+                 '    if (tool_name == "self.tank.set_speed" || tool_name == "self.tank.adjust_speed" || tool_name == "self.tank.sequence" || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy") {\n'
                  '        int ticket = CyberTrackActionClaim(id, tool_name.c_str());\n'
                  '        if (!ticket) { ReplyError(id, "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"); return; }\n'
                  '        arguments.AddProperty(Property("_ct_ticket", kPropertyTypeInteger, ticket));\n'
