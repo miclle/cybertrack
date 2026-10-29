@@ -46,5 +46,13 @@ int main() {
     assert(Json(r, r.sampled_at_ms + 50).find("18446744073709551515") != std::string::npos);
     assert(Json(r, r.sampled_at_ms + 50).find("\"age_ms\":50") != std::string::npos);
     assert(Json({Error::Driver}, 10000).find("\"error\":\"driver_error\"") != std::string::npos);
+    r = {Error::Driver};
+    r.driver = {"rx_timeout", 263, 1234, 2, 1, 2000, true};
+    auto diagnostic = Json(r, 5000);
+    assert(diagnostic.find("\"last_failure\":\"rx_timeout\"") != std::string::npos);
+    assert(diagnostic.find("\"error_code\":263") != std::string::npos);
+    assert(diagnostic.find("\"restarts\":1") != std::string::npos);
+    assert(diagnostic.find("\"recovering\":true") != std::string::npos);
+    assert(diagnostic.find("\"distance_mm\":null") != std::string::npos);
     std::cout << "PASS: distance units, boundaries, no echo, noise, late echo, freshness, invalidation and 64-bit timestamps\n";
 }
