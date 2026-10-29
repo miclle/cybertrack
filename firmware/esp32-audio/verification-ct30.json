@@ -1,0 +1,35 @@
+{
+  "version": "2.0.3-ct30",
+  "date": "2026-10-29",
+  "scope": "Simplify range row to label and numeric centimetres; all unavailable readings show ASCII hyphen; retain ct29 hysteresis and expiry",
+  "artifact": {
+    "path": "build/firmware-ct30/xiaozhi.bin",
+    "bytes": 2638864,
+    "sha256": "f876527aa5930405d9f35e60887a2c5d9888b38c25cc1c09599bf3e65cab76e9"
+  },
+  "checks": {
+    "web_ui_regression": "passed; numeric display, invalid/stale/offline hyphen, hysteresis, and existing action/speed/stop races",
+    "esp_idf_build": "passed ESP-IDF 5.5.1",
+    "exported_page_matches_source": true,
+    "control_driver_prompt_unchanged": true
+  },
+  "source_sha256": {
+    "web/index.html": "e2fe2a6a81cb79b9664bae3dd0493bca7c0f2c8d3a34d1a1aa9d2b506e0def68",
+    "apply_overlay.py": "467ce839fda0f664afa470ce4237834043f1f82083442c0279a072bfa7d167cf",
+    "role-prompt.txt": "541f59e66056c7e4037b51bf3dd1f2039baf6476e1e595f47c23154d9e327e50"
+  },
+  "logs": [
+    "build/ct30-web.log",
+    "build/ct30-build.log"
+  ],
+  "deployment": {
+    "flashed": true,
+    "device_restarted": true,
+    "startup_and_page_verified": true,
+    "evidence": "startup-ct30.json"
+  },
+  "limits": [
+    "Physical phone display experience pending user confirmation.",
+    "Distance precision, electrical levels and interference acceptance unchanged."
+  ]
+}

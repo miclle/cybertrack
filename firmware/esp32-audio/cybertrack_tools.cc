@@ -3,6 +3,7 @@
 #include "action_plan_json.h"
 #include "web_server.h"
 #include "action_outputs.h"
+#include "ultrasonic.h"
 #include <freertos/FreeRTOS.h>
 #include <freertos/semphr.h>
 #include <freertos/queue.h>
@@ -107,7 +108,7 @@ void SafetyTask(void*) {
 std::string Reply(const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
                   uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100) {
     // Reserve before accepting an action.
-    std::string result; result.reserve(3000);
+    std::string result; result.reserve(3600);
     xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
     const char* outcome = "ok";
@@ -216,12 +217,15 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     const auto uptime = Decimal(now);
     const char* state = (fault || clock_fault) ? "FAULT" : (moving || watering || bubbling || igniting || plan_active) ? "ACTIVE" : stopped ? "STOPPED" : "DISARMED";
     const char* reason = fault ? "output_fault" : clock_fault ? "clock_fault" : stopped ? "stopped" : "none";
-    char json[3000];
+    char json[3600];
+    // Snapshot outside the action mutex; status/voice never wait for an echo.
+    const auto reading = CyberTrackDistanceSnapshot();
+    const auto distance = ultrasonic::Json(reading, Now());
     std::snprintf(json, sizeof(json),
         "{\"device_id\":\"%s\",\"boot_id\":\"%s\",\"request_sequence\":%u,\"operation\":\"%s\","
         "\"result\":\"%s\",\"state\":\"%s\",\"fault\":\"%s\",\"uptime_ms\":%s,"
         "\"logical_outputs\":{\"left\":%d,\"right\":%d,\"water\":%s,\"bubbles\":%s,\"ignition\":%s},"
-        "\"capabilities\":{\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
+        "\"capabilities\":{\"distance\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
         "\"local_authorization_required\":false,\"starts_this_boot\":%u,\"max_duration_ms\":30000,\"last_duration_ms\":%u,\"remaining_ms\":%u,"
         "\"move_last_duration_ms\":%u,\"water_last_duration_ms\":%u,\"move_remaining_ms\":%u,\"water_remaining_ms\":%u,"
         "\"web_speed_percent\":%d,\"move_speed_percent\":%d,\"speed_min_percent\":60,\"speed_max_percent\":100,"
@@ -234,7 +238,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         "\"bubbles_source\":\"%s\",\"ignition_source\":\"%s\","
         "\"frenzy_remaining_ms\":%u,\"frenzy_last_duration_ms\":%u,\"frenzy_source\":\"%s\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", "
         "\"sequence_active\":%s,\"sequence_step\":%u,\"sequence_steps\":%u,\"sequence_result\":\"%s\",\"sequence_max_steps\":16,"
-        "\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
+        "\"distance\":%s,\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
         device_id.c_str(), boot_id.c_str(), seq, operation, outcome, state, reason, uptime.c_str(),
         left, right, watering ? "true" : "false", bubbling ? "true" : "false", igniting ? "true" : "false",
         starts, last_duration, std::max({move_remaining, water_remaining, bubbles_remaining, ignition_remaining}),
@@ -242,7 +246,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         owner, window, move_cooldown, water_cooldown, held ? "true" : "false", move_source, water_source, drive_id, drive_renewal,
         static_cast<unsigned>(water_hold.id), static_cast<unsigned>(water_hold.renewal),
         static_cast<unsigned>(bubbles_hold.id), static_cast<unsigned>(bubbles_hold.renewal),
-        bubbles_ms, ignition_ms, bubbles_remaining, ignition_remaining, bubbles_cooldown, ignition_cooldown, bubbles_source, ignition_source, frenzy_remaining, frenzy_duration, frenzy_source, plan_active ? "true" : "false", plan_step, plan_count, plan_result);
+        bubbles_ms, ignition_ms, bubbles_remaining, ignition_remaining, bubbles_cooldown, ignition_cooldown, bubbles_source, ignition_source, frenzy_remaining, frenzy_duration, frenzy_source, plan_active ? "true" : "false", plan_step, plan_count, plan_result, distance.c_str());
     result.assign(json);
     if (!web_session || (strcmp(operation, "get_status") && strcmp(operation, "drive_renew") && strcmp(operation, "water_renew") && strcmp(operation, "bubbles_renew")))
         ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
@@ -322,10 +326,11 @@ void InitializeCyberTrackTools() {
     if (xTaskCreate(SafetyTask, "audio_actions", 4096, nullptr, 10, nullptr) != pdPASS) {
         CyberTrackActionStop(); ESP_ERROR_CHECK(ESP_ERR_NO_MEM);
     }
+    InitializeCyberTrackUltrasonic();
     InitializeCyberTrackWeb();
     auto& server = McpServer::GetInstance();
     server.AddTool("self.tank.get_status",
-        "查询CyberTrack行走、水枪、泡泡、点火、动作序列与狂暴模式状态。sequence_active/sequence_step/sequence_steps/sequence_result表示序列是否活动、当前步骤（从1开始）、总步数及running/waiting/completed/cancelled状态；waiting是步骤间等待。frenzy_remaining_ms表示模式剩余时长，frenzy_source表示来源。网页与语音可同时使用，move_source/water_source/bubbles_source/ignition_source 表示各通道动作来源；网页指令优先，全部停止始终有效。只有逻辑状态，没有轮速或水流反馈。",
+        "查询CyberTrack状态或前方距离，参数为空。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能用来自动行走、避障或推算移动距离。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("get_status"); });
     server.AddTool("self.tank.stop",
         "立即停止两台电机、水枪、泡泡和点火及狂暴模式并取消全部排队动作，不关闭语音和屏幕。",

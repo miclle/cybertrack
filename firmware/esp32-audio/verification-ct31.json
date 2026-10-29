@@ -1,0 +1,91 @@
+{
+  "version": "2.0.3-ct31",
+  "date": "2026-10-29",
+  "scope": "Compact channel status, one-row water/bubbles controls, range in direction-pad upper right, height-responsive layout with 44 px minimum touch targets",
+  "artifact": {
+    "path": "build/firmware-ct31/xiaozhi.bin",
+    "bytes": 2637136,
+    "sha256": "9792a5823abc7fa81eba528f67de9d3dd59ac80938d562a9ce8b1acc3e75ab13"
+  },
+  "checks": {
+    "web_ui_regression": "passed compact status and all existing action/hold/stop/speed/range regressions",
+    "esp_idf_build": "passed ESP-IDF 5.5.1",
+    "exported_page_matches_source": true,
+    "control_driver_prompt_unchanged": true,
+    "browser_layout": [
+      {
+        "documentHeight": 568,
+        "height": 550,
+        "minButtonHeight": 44,
+        "minButtonWidth": 46,
+        "statusOverflow": false,
+        "stopBottom": 514,
+        "viewport": [
+          320,
+          568
+        ],
+        "width": 320
+      },
+      {
+        "documentHeight": 600,
+        "height": 550,
+        "minButtonHeight": 44,
+        "minButtonWidth": 55.1640625,
+        "statusOverflow": false,
+        "stopBottom": 514,
+        "viewport": [
+          375,
+          600
+        ],
+        "width": 375
+      },
+      {
+        "documentHeight": 844,
+        "height": 676,
+        "minButtonHeight": 48,
+        "minButtonWidth": 57.6640625,
+        "statusOverflow": false,
+        "stopBottom": 630,
+        "viewport": [
+          390,
+          844
+        ],
+        "width": 390
+      },
+      {
+        "documentHeight": 720,
+        "height": 596,
+        "minButtonHeight": 44,
+        "minButtonWidth": 66,
+        "statusOverflow": false,
+        "stopBottom": 556,
+        "viewport": [
+          1280,
+          720
+        ],
+        "width": 1280
+      }
+    ],
+    "320x568_idle_matches_active_height": true,
+    "no_scrollbar_at_tested_sizes": true
+  },
+  "source_sha256": {
+    "web/index.html": "f417b430ec3ac0945736e70bd5238918e291effccc1f6540d95fea8d24f303fe",
+    "apply_overlay.py": "d66131f20f0149cfa3539b826b6f317598d96b2a1bc25b84c19e01143a7d81df",
+    "role-prompt.txt": "541f59e66056c7e4037b51bf3dd1f2039baf6476e1e595f47c23154d9e327e50"
+  },
+  "logs": [
+    "build/ct31-web.log",
+    "build/ct31-build.log"
+  ],
+  "deployment": {
+    "flashed": true,
+    "device_restarted": true,
+    "startup_and_page_verified": true,
+    "evidence": "startup-ct31.json"
+  },
+  "limits": [
+    "Natural scrolling remains available for extreme viewport heights or text zoom; no overflow hiding.",
+    "User phone gesture and visual acceptance pending; hardware acceptance unchanged."
+  ]
+}
