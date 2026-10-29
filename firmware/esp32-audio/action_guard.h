@@ -6,6 +6,8 @@
 // Called only under the adapter mutex. Tickets are bound to their target lanes.
 class AudioActionGuard {
 public:
+    bool forward_blocked = false;
+    bool BlocksForward(const char* value) const { return forward_blocked && value && !std::strcmp(value, "forward"); }
     enum Target { MoveOnly = 1, WaterOnly = 2, Both = 3, BubblesOnly = 4, IgnitionOnly = 8, All = 15, FrenzyMode = 16, PlanMode = 32, SpeedMode = 64 };
     static constexpr int MoveMaxMs = INT_MAX;
     static constexpr int BubblesMaxMs = 30000;
@@ -220,6 +222,7 @@ private:
         return Execute(now, target, move_ms, water_ms, value, bubbles_ms, ignition_ms, speed_percent);
     }
     const char* Execute(uint64_t now, Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int ignition_ms = 0, int speed_percent = 100) {
+        if ((target & MoveOnly) && BlocksForward(value)) return "obstacle_blocked";
         int a = 0, b = 0;
         if (const char* error = Validate(target, move_ms, water_ms, value, bubbles_ms, ignition_ms, speed_percent)) return error;
         if ((target & MoveOnly) && now > UINT64_MAX - static_cast<unsigned>(move_ms)) return "clock_fault";

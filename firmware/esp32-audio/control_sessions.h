@@ -53,6 +53,16 @@ public:
         if (!guard.Bubbling()) web_targets_ &= ~AudioActionGuard::BubblesOnly;
         if (!guard.Igniting() && !frenzy_until) web_targets_ &= ~AudioActionGuard::IgnitionOnly;
     }
+    void SetForwardBlocked(uint64_t now, bool blocked) {
+        if (blocked && !guard.forward_blocked) guard.CancelPending(AudioActionGuard::MoveOnly);
+        guard.forward_blocked = blocked;
+        if (!blocked || !guard.Moving() || std::strcmp(guard.direction, "forward")) return;
+        if (plan_active) { plan_active = false; plan_result = "obstacle_blocked"; }
+        guard.StopMove(now);
+        web_targets_ &= ~AudioActionGuard::MoveOnly;
+        drive_id = drive_renewal = 0;
+        window_valid_ = false;
+    }
     void Stop(uint64_t now) {
         if (plan_active) { plan_active = false; plan_result = "cancelled"; }
         guard.Stop(now);
@@ -176,7 +186,7 @@ public:
         plan_ = plan;
         plan_step = 1; plan_count = plan.count; plan_active = true;
         guard.CancelPending();
-        return StartPlanStep(now) ? "accepted" : "not_ready_or_busy";
+        return StartPlanStep(now) ? "accepted" : plan_result;
     }
     const char* DriveStart(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window,
                            const char* direction, int water_ms) {
@@ -255,6 +265,9 @@ private:
     uint64_t plan_last_tick_ = 0;
     bool StartPlanStep(uint64_t now) {
         const auto& step = plan_.steps[plan_step - 1];
+        if (step.move_ms && guard.BlocksForward(step.direction)) {
+            plan_active = false; plan_result = "obstacle_blocked"; return false;
+        }
         const int durations[] = {step.move_ms, step.water_ms, step.bubbles_ms, step.ignition_ms};
         const AudioActionGuard::Target targets[] = {AudioActionGuard::MoveOnly, AudioActionGuard::WaterOnly,
                                                    AudioActionGuard::BubblesOnly, AudioActionGuard::IgnitionOnly};
@@ -264,7 +277,7 @@ private:
             if (now > UINT64_MAX - static_cast<unsigned>(durations[i]) ||
                 std::strcmp(guard.WebRequest(now, targets[i], step.move_ms, step.water_ms,
                                              step.direction, step.bubbles_ms, step.ignition_ms, step.speed_percent), "accepted")) {
-                Stop(now); return false;
+                Stop(now); plan_result = "not_ready_or_busy"; return false;
             }
             plan_deadlines_[i] = now + static_cast<unsigned>(durations[i]);
         }
@@ -316,6 +329,7 @@ private:
         window_valid_ = false;
     }
     const char* StartWeb(uint64_t now, AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction, int bubbles_ms = 0, int ignition_ms = 0) {
+        if ((target & AudioActionGuard::MoveOnly) && guard.BlocksForward(direction)) return "obstacle_blocked";
         if (plan_active) { Stop(now); return "voice_preempted"; }
         if (frenzy_until) {
             if (!frenzy_web_) { Stop(now); return "voice_preempted"; }

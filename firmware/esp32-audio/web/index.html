@@ -135,6 +135,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         control_busy: "另一网页正在使用，等待连接。",
         pair_rate_limited: "操作太快，请稍后再连接。",
         session_expired: "连接已失效，正在重连。",
+        obstacle_blocked: "前方过近，已停止前进；可后退或转向。",
         not_ready_or_busy: "该动作正在运行、冷却或暂不可用。",
         stale_request: "请求已过期或被停止取消，请确认状态后重新操作。",
         duplicate_request: "重复请求已拒绝。",
@@ -180,6 +181,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
           b.disabled = hold
             ? !active
             : !(move && !effectPending);
+          if (b.dataset.direction === "forward" && snapshot?.proximity?.forward_blocked) b.disabled = true;
           b.classList.toggle("held", !!active);
           b.setAttribute("aria-pressed", String(!!active));
         });
@@ -561,6 +563,9 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
             400,
           );
           if (holds[h.kind] !== h || h.epoch !== epoch) return;
+          if (h.kind === "move" && s.result === "drive_cancelled") {
+            clearHold("move"); render(s); message(s.proximity?.forward_blocked ? reasons.obstacle_blocked : "行走已停止，请重新按下。"); controls(); poll(); return;
+          }
           if (s.result !== "renewed" || s[h.prefix + "_hold_id"] !== h.id)
             throw new Error(s.result);
           h.renewal = s[h.prefix + "_renewal"];
@@ -624,7 +629,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         try {
           const s = await request("/api/action", body, token, 400);
           if (holds[h.kind] !== h || h.epoch !== epoch) return;
-          if (s.result === "voice_preempted" || s.result === "not_ready_or_busy") {
+          if (s.result === "voice_preempted" || s.result === "not_ready_or_busy" || s.result === "obstacle_blocked") {
             clearHold(kind); render(s); message(reasons[s.result]); controls(); poll(); return;
           }
           if (s.result !== "accepted" || s[h.prefix + "_hold_id"] !== h.id)

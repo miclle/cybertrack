@@ -4,6 +4,7 @@
 #include "web_server.h"
 #include "action_outputs.h"
 #include "ultrasonic.h"
+#include "proximity_audio.h"
 #include <freertos/FreeRTOS.h>
 #include <freertos/semphr.h>
 #include <freertos/queue.h>
@@ -26,6 +27,7 @@ constexpr gpio_num_t stop_pin = GPIO_NUM_0;
 StaticSemaphore_t lock_storage;
 SemaphoreHandle_t lock = xSemaphoreCreateMutexStatic(&lock_storage);
 ControlSessions sessions;
+ProximityGuard proximity;
 AudioActionGuard& guard = sessions.guard;
 AudioActionOutputs outputs;
 bool initialized = false;
@@ -43,6 +45,9 @@ void Token(char (&token)[33]) {
     token[32] = 0;
 }
 void TickLocked(uint64_t now) {
+    const auto alert = proximity.Update(CyberTrackDistanceSnapshot(), now);
+    sessions.SetForwardBlocked(now, proximity.blocked);
+    CyberTrackProximityAlert(alert);
     sessions.Tick(now, gpio_get_level(stop_pin) == 0, outputs.fault);
 }
 struct OffEvent {
@@ -61,7 +66,7 @@ bool applied_move = false, applied_water = false, applied_bubbles = false, appli
 uint64_t move_started = 0, water_started = 0, bubbles_started = 0, ignition_started = 0;
 void OffRecord(const char* channel, uint64_t started, uint64_t now, const water_policy& policy) {
     OffEvent event{channel, outputs.fault ? "output_fault" : policy.held ? "BOOT" :
-        !policy.online ? "link_lost" : policy.clock_fault ? "clock_fault" : policy.stopped ? "stop" : "deadline",
+        !policy.online ? "link_lost" : policy.clock_fault ? "clock_fault" : (!std::strcmp(channel, "move") && guard.forward_blocked) ? "obstacle" : policy.stopped ? "stop" : "deadline",
         now - started, guard.Starts(), guard.Moving(), guard.Watering(), guard.Bubbling(), guard.Igniting(), outputs.water_pad};
     if (xQueueSend(event_queue, &event, 0) != pdTRUE) ++dropped_events;
 }
@@ -210,6 +215,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     const auto water_hold = sessions.water_hold, bubbles_hold = sessions.bubbles_hold;
     const int web_speed = sessions.web_speed_percent;
     const int move_speed = moving ? (left < 0 ? -left : left) : 0;
+    const bool forward_blocked = guard.forward_blocked;
     const bool plan_active = sessions.plan_active;
     const unsigned plan_step = sessions.plan_step, plan_count = sessions.plan_count;
     const char* plan_result = sessions.plan_result;
@@ -225,7 +231,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         "{\"device_id\":\"%s\",\"boot_id\":\"%s\",\"request_sequence\":%u,\"operation\":\"%s\","
         "\"result\":\"%s\",\"state\":\"%s\",\"fault\":\"%s\",\"uptime_ms\":%s,"
         "\"logical_outputs\":{\"left\":%d,\"right\":%d,\"water\":%s,\"bubbles\":%s,\"ignition\":%s},"
-        "\"capabilities\":{\"distance\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
+        "\"capabilities\":{\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
         "\"local_authorization_required\":false,\"starts_this_boot\":%u,\"max_duration_ms\":30000,\"last_duration_ms\":%u,\"remaining_ms\":%u,"
         "\"move_last_duration_ms\":%u,\"water_last_duration_ms\":%u,\"move_remaining_ms\":%u,\"water_remaining_ms\":%u,"
         "\"web_speed_percent\":%d,\"move_speed_percent\":%d,\"speed_min_percent\":60,\"speed_max_percent\":100,"
@@ -238,6 +244,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         "\"bubbles_source\":\"%s\",\"ignition_source\":\"%s\","
         "\"frenzy_remaining_ms\":%u,\"frenzy_last_duration_ms\":%u,\"frenzy_source\":\"%s\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", "
         "\"sequence_active\":%s,\"sequence_step\":%u,\"sequence_steps\":%u,\"sequence_result\":\"%s\",\"sequence_max_steps\":16,"
+        "\"proximity\":{\"forward_blocked\":%s,\"warn_below_mm\":500,\"stop_below_mm\":300,\"release_mm\":350},"
         "\"distance\":%s,\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
         device_id.c_str(), boot_id.c_str(), seq, operation, outcome, state, reason, uptime.c_str(),
         left, right, watering ? "true" : "false", bubbling ? "true" : "false", igniting ? "true" : "false",
@@ -246,7 +253,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         owner, window, move_cooldown, water_cooldown, held ? "true" : "false", move_source, water_source, drive_id, drive_renewal,
         static_cast<unsigned>(water_hold.id), static_cast<unsigned>(water_hold.renewal),
         static_cast<unsigned>(bubbles_hold.id), static_cast<unsigned>(bubbles_hold.renewal),
-        bubbles_ms, ignition_ms, bubbles_remaining, ignition_remaining, bubbles_cooldown, ignition_cooldown, bubbles_source, ignition_source, frenzy_remaining, frenzy_duration, frenzy_source, plan_active ? "true" : "false", plan_step, plan_count, plan_result, distance.c_str());
+        bubbles_ms, ignition_ms, bubbles_remaining, ignition_remaining, bubbles_cooldown, ignition_cooldown, bubbles_source, ignition_source, frenzy_remaining, frenzy_duration, frenzy_source, plan_active ? "true" : "false", plan_step, plan_count, plan_result, forward_blocked ? "true" : "false", distance.c_str());
     result.assign(json);
     if (!web_session || (strcmp(operation, "get_status") && strcmp(operation, "drive_renew") && strcmp(operation, "water_renew") && strcmp(operation, "bubbles_renew")))
         ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
@@ -326,11 +333,12 @@ void InitializeCyberTrackTools() {
     if (xTaskCreate(SafetyTask, "audio_actions", 4096, nullptr, 10, nullptr) != pdPASS) {
         CyberTrackActionStop(); ESP_ERROR_CHECK(ESP_ERR_NO_MEM);
     }
+    InitializeCyberTrackProximityAudio();
     InitializeCyberTrackUltrasonic();
     InitializeCyberTrackWeb();
     auto& server = McpServer::GetInstance();
     server.AddTool("self.tank.get_status",
-        "查询CyberTrack状态或前方距离，参数为空。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能用来自动行走、避障或推算移动距离。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
+        "查询CyberTrack状态或前方距离，参数为空。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能由云端轮询后自动行走、绕行或推算移动距离。设备本地小于50厘米提醒，小于30厘米提醒并禁止前进；proximity.forward_blocked为前进锁定，恢复至35厘米后允许新指令，不自动恢复。obstacle_blocked表示前进受阻，不重试。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("get_status"); });
     server.AddTool("self.tank.stop",
         "立即停止两台电机、水枪、泡泡和点火及狂暴模式并取消全部排队动作，不关闭语音和屏幕。",
