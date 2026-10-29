@@ -5,52 +5,54 @@
 <title>CyberTrack</title>
 <style>
 :root{color-scheme:light;--ink:#242b29;--paper:#faf9f5;--line:#deded5;--accent:#d5ee65}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px system-ui,-apple-system,sans-serif}main{max-width:440px;margin:auto;padding:24px 20px calc(24px + env(safe-area-inset-bottom))}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}h1{font-size:22px;letter-spacing:-.8px;margin:0}.badge{font-size:12px;color:#777}.badge.on{color:#3b641d}.badge.on:before{content:"●";margin-right:6px;font-size:9px}.status{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--line);padding:16px 0;gap:16px}.status article:nth-child(even){border-left:1px solid var(--line);padding-left:16px}.status strong{font-size:17px;display:block;margin-bottom:5px}.status small{color:#686e65;font-size:12px}.status span{margin-right:6px}.hint{text-align:center;color:#777;font-size:12px;margin:22px 0 12px} #hold-time{font-variant-numeric:tabular-nums}#hold-time.timing{color:var(--ink);font-weight:650}.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:340px;margin:auto}button,select{font:inherit;border:1px solid var(--line);border-radius:13px;color:var(--ink);background:#fff}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:48px}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #789324;outline-offset:3px}button:disabled{opacity:.35;cursor:default}.pad button{height:76px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;font-size:14px}.pad button b{display:block;font-size:24px;font-weight:400;line-height:26px;margin-bottom:3px}.pad button.held{background:var(--accent);border-color:#a8c33f}.forward{grid-column:2}.left{grid-column:1;grid-row:2}.backward{grid-column:2;grid-row:2}.right{grid-column:3;grid-row:2}.stop{margin-top:12px;width:100%;background:#b63831;color:white;border:0;font-weight:650;font-size:18px;min-height:58px}#message{min-height:34px;line-height:1.5;font-size:12px;margin:12px 0 0;color:#686e65;text-align:center}#message.error{color:#a9322b}
-.effect-controls{margin:24px 0}.effect-controls h2{font-size:15px;margin:0 0 10px}.effect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.effect-grid button{min-height:64px;background:#edf1e5;font-variant-numeric:tabular-nums}.effect-grid .effect-hold{background:transparent;border-color:#a8b49b;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px}.effect-hold strong{font-size:14px}.effect-hold span{font-size:10px;color:#686e65;white-space:nowrap}.effect-grid .effect-hold.held{background:var(--accent);border-color:#a8c33f}.effect-hold.held span{color:var(--ink)}
-
-.frenzy-controls h2{display:flex;justify-content:space-between;align-items:center}.frenzy-controls h2 span{font-size:11px;font-weight:400;color:#686e65}.frenzy-controls button{background:#f3e6d3;border-color:#dbbe94}
-
-.speed-control{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;margin:14px 0;color:var(--ink);font-size:13px}.speed-control input{width:100%;min-width:0;height:28px;margin:0;accent-color:#789324;touch-action:pan-y}.speed-control output{min-width:42px;text-align:right;font-variant-numeric:tabular-nums}.speed-control input:disabled{opacity:.35}
-/* Fit portrait phone browser viewports without clipping controls or disabling zoom. */
-@media (max-width:600px) {
-  main{display:flex;flex-direction:column;gap:8px;padding:12px 14px max(10px,env(safe-area-inset-bottom));width:100%}
-  header{margin:0;min-height:26px}h1{font-size:20px}
-  .status{grid-template-columns:repeat(4,minmax(0,1fr));padding:8px 0;gap:8px}
-  .status article{min-width:0}
-  .status article:nth-child(even){padding-left:0;border-left:0}
-  .status article+article{border-left:1px solid var(--line);padding-left:8px}
-  .status strong{font-size:13px;line-height:18px;margin:0 0 2px}
-  .status small{display:block;font-size:11px;line-height:14px}
-  .status span{display:block;min-height:14px;margin:0}
-  .speed-control{margin:0;gap:8px;font-size:12px}.speed-control input{height:26px}
-  .hint{font-size:11px;line-height:16px;margin:0}
-  .pad{width:100%;max-width:none;margin:0;gap:6px}
-  .pad button{height:48px;min-height:48px;font-size:13px}
-  .pad button b{display:inline;font-size:21px;line-height:1;margin:0 6px 0 0;vertical-align:-1px}
-  .effect-controls{margin:0}
-  .effect-controls h2{font-size:13px;line-height:18px;margin:0 0 6px}
-  .effect-grid{gap:6px}
-  .effect-grid button{min-height:48px;font-size:14px;border-radius:10px}
-  .effect-grid .effect-hold{padding:4px 2px;gap:1px}
-  .effect-hold strong{font-size:12px}.effect-hold span{font-size:10px;line-height:13px}
-  .stop{margin-top:0}
-  .stop{min-height:48px;font-size:17px;border-radius:11px}
-  #message{min-height:28px;font-size:11px;line-height:14px;margin:0;overflow-wrap:anywhere}
+*{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px system-ui,-apple-system,sans-serif}
+main{display:flex;flex-direction:column;gap:8px;max-width:440px;width:100%;margin:auto;padding:12px 12px max(10px,env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;min-height:26px}
+h1{font-size:20px;letter-spacing:-.8px;margin:0}.badge{font-size:12px;color:#777}.badge.on{color:#3b641d}.badge.on:before{content:"●";margin-right:6px;font-size:9px}
+.status{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:8px 0;gap:6px;border-block:1px solid var(--line)}
+.status article{min-width:0}.status article+article{border-left:1px solid var(--line);padding-left:6px}
+.status strong{display:block;font-size:12px;line-height:16px;white-space:nowrap}
+.status small{display:flex;gap:3px;min-height:14px;line-height:14px;font-size:10px;color:#686e65;font-variant-numeric:tabular-nums;white-space:nowrap}
+.status span:empty{display:none}
+.speed-control{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;font-size:12px}
+.speed-control input{width:100%;min-width:0;height:28px;margin:0;accent-color:#789324;touch-action:pan-y}
+.speed-control output{min-width:38px;text-align:right;font-variant-numeric:tabular-nums}.speed-control input:disabled{opacity:.35}
+.hint{text-align:center;color:#777;font-size:11px;line-height:14px;margin:0}#hold-time{font-variant-numeric:tabular-nums}#hold-time.timing{color:var(--ink);font-weight:650}
+.pad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}
+button{font:inherit;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:#fff;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:48px;min-width:0}
+button:focus-visible,input:focus-visible{outline:3px solid #789324;outline-offset:2px}button:disabled{opacity:.35;cursor:default}
+.pad button{height:48px;font-size:13px;touch-action:none}.pad button b{font-size:21px;line-height:1;font-weight:400;margin-right:6px;vertical-align:-1px}.pad button.held{background:var(--accent);border-color:#a8c33f}
+.drive-speed,.distance-status{align-self:center;text-align:center;min-width:0;color:#686e65;font-size:11px;line-height:16px;white-space:nowrap}
+.drive-speed{grid-column:1;grid-row:1}.distance-status{grid-column:3;grid-row:1}
+.drive-speed strong,.distance-status strong{display:block;color:var(--ink);font-size:18px;line-height:24px;font-variant-numeric:tabular-nums}
+.forward{grid-column:2;grid-row:1}.left{grid-column:1;grid-row:2}.backward{grid-column:2;grid-row:2}.right{grid-column:3;grid-row:2}
+.effect-controls{margin:0;margin-top:clamp(0px,calc(8dvh - 44px),16px)}.effect-controls h2{font-size:13px;line-height:18px;margin:0 0 4px}
+.effect-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}.effect-grid.durations{grid-template-columns:repeat(6,minmax(0,1fr))}
+.effect-grid button{padding:4px 2px;background:#edf1e5;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.effect-grid .effect-hold{background:transparent;border-color:#a8b49b;touch-action:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.effect-hold strong{font-size:12px;line-height:14px}.effect-hold span{max-width:100%;font-size:9px;line-height:12px;color:#686e65;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.effect-grid .effect-hold.held{background:var(--accent);border-color:#a8c33f}.effect-hold.held span{color:var(--ink)}
+.frenzy-controls h2{display:flex;justify-content:space-between;align-items:center}.frenzy-controls h2 span{font-size:10px;font-weight:400;color:#686e65}.frenzy-controls button{background:#f3e6d3;border-color:#dbbe94}
+.stop{width:100%;background:#b63831;color:white;border:0;font-weight:650;font-size:17px;min-height:48px}
+#message{min-height:28px;line-height:14px;font-size:11px;margin:0;color:#686e65;text-align:center;overflow-wrap:anywhere}#message.error{color:#a9322b}
+/* Compact by available height, including desktop windows and mobile browser chrome.
+   Keep 44 px touch targets; allow natural scroll for zoom/extremely short windows. */
+@media (max-height:740px){
+ main{gap:4px;padding-top:8px;padding-bottom:max(8px,env(safe-area-inset-bottom))}
+ header{min-height:24px}.status{padding:6px 0}
+ button{min-height:44px}.pad button{height:44px}.stop{min-height:44px}
 }
-@media (max-width:600px) and (max-height:780px) {
-  main{gap:4px;padding-top:8px;padding-bottom:max(8px,env(safe-area-inset-bottom))}
-  header{min-height:24px}.status{padding:6px 0}
-  .hint{line-height:14px}
-  .pad button{height:44px;min-height:44px}
-  .effect-grid button{min-height:44px}
-  .effect-controls h2{margin-bottom:4px}
+@media (max-height:620px){
+ main{gap:2px;padding-top:6px;padding-bottom:max(6px,env(safe-area-inset-bottom))}
+ .status{padding:4px 0}.effect-controls h2{font-size:12px;line-height:16px;margin-bottom:2px}
+ .speed-control input{height:26px}
 }
-@media (max-width:600px) and (max-height:700px) {
-  .pad{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .pad button{grid-column:auto;grid-row:auto;font-size:12px;padding:2px}
-  .pad button b{font-size:19px;margin-right:4px}
-  #message{min-height:14px}
-}
+/* Reserve the measured dock height so no controls sit behind the stop button. */
+main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
+.stop-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:10;width:100%;max-width:440px;display:flex;flex-direction:column;gap:4px;padding:8px 12px max(10px,env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+@media(max-height:740px){.stop-bar{padding-top:6px;padding-bottom:max(8px,env(safe-area-inset-bottom))}}
+@media(max-height:620px){.stop-bar{padding-top:4px;padding-bottom:max(6px,env(safe-area-inset-bottom))}}
 </style>
 </head>
 <body><main>
@@ -61,28 +63,30 @@
 <article><strong id="bubbles-label">泡泡枪</strong><small><span id="bubbles-state">等待连接</span><span id="bubbles-time">—</span></small></article>
 <article><strong id="ignition-label">点火线圈</strong><small><span id="ignition-state">等待连接</span><span id="ignition-time">—</span></small></article>
 </section>
-<div class="speed-control"><label for="move-speed">网页速度</label><input id="move-speed" type="range" min="60" max="100" step="1" value="100" aria-describedby="speed-value" disabled><output id="speed-value" for="move-speed">100%</output></div>
+<div class="speed-control"><label for="move-speed">设定速度</label><input id="move-speed" type="range" min="60" max="100" step="1" value="100" aria-describedby="speed-value" disabled><output id="speed-value" for="move-speed">100%</output></div>
 <p id="hold-time" class="hint">按住行走，松开停止</p>
 <div class="pad" aria-label="行走方向">
+<div class="drive-speed">行走速度<strong id="drive-speed">—</strong></div>
+<section class="distance-status" aria-label="前方测距"><span>前方距离</span><strong id="distance-value">-</strong></section>
 <button class="forward" data-direction="forward" aria-label="前进" disabled><b aria-hidden="true">↑</b>前进</button>
 <button class="left" data-direction="left" aria-label="左转" disabled><b aria-hidden="true">←</b>左转</button>
 <button class="backward" data-direction="backward" aria-label="后退" disabled><b aria-hidden="true">↓</b>后退</button>
 <button class="right" data-direction="right" aria-label="右转" disabled><b aria-hidden="true">→</b>右转</button>
 </div>
-<section class="effect-controls" aria-label="喷水控制"><h2>喷水</h2><div class="effect-grid">
+<section class="effect-controls" aria-label="喷水控制"><h2>喷水</h2><div class="effect-grid durations">
 <button id="water" data-effect="water" data-duration="1000" aria-label="喷水1秒" disabled>1 秒</button>
 <button id="water-3" data-effect="water" data-duration="3000" aria-label="喷水3秒" disabled>3 秒</button>
 <button id="water-5" data-effect="water" data-duration="5000" aria-label="喷水5秒" disabled>5 秒</button>
 <button id="water-10" data-effect="water" data-duration="10000" aria-label="喷水10秒" disabled>10 秒</button>
 <button id="water-30" data-effect="water" data-duration="30000" aria-label="喷水30秒" disabled>30 秒</button>
-<button id="water-hold" class="effect-hold" data-hold="water" aria-label="按住喷水，松开停止" disabled><strong>按住持续</strong><span id="water-hold-time">松开停止</span></button></div></section>
-<section class="effect-controls" aria-label="吹泡泡控制"><h2>吹泡泡</h2><div class="effect-grid">
+<button id="water-hold" class="effect-hold" data-hold="water" aria-label="按住喷水，松开停止" disabled><strong>按住</strong><span id="water-hold-time">松开停止</span></button></div></section>
+<section class="effect-controls" aria-label="吹泡泡控制"><h2>吹泡泡</h2><div class="effect-grid durations">
 <button id="bubbles" data-effect="bubbles" data-duration="1000" aria-label="吹泡泡1秒" disabled>1 秒</button>
 <button id="bubbles-3" data-effect="bubbles" data-duration="3000" aria-label="吹泡泡3秒" disabled>3 秒</button>
 <button id="bubbles-5" data-effect="bubbles" data-duration="5000" aria-label="吹泡泡5秒" disabled>5 秒</button>
 <button id="bubbles-10" data-effect="bubbles" data-duration="10000" aria-label="吹泡泡10秒" disabled>10 秒</button>
 <button id="bubbles-30" data-effect="bubbles" data-duration="30000" aria-label="吹泡泡30秒" disabled>30 秒</button>
-<button id="bubbles-hold" class="effect-hold" data-hold="bubbles" aria-label="按住吹泡泡，松开停止" disabled><strong>按住持续</strong><span id="bubbles-hold-time">松开停止</span></button></div></section>
+<button id="bubbles-hold" class="effect-hold" data-hold="bubbles" aria-label="按住吹泡泡，松开停止" disabled><strong>按住</strong><span id="bubbles-hold-time">松开停止</span></button></div></section>
 <section class="effect-controls" aria-label="点火控制"><h2>点火</h2><div class="effect-grid">
 <button id="ignition" data-effect="ignition" data-duration="1000" aria-label="点火1秒" disabled>1 秒</button>
 <button id="ignition-3" data-effect="ignition" data-duration="3000" aria-label="点火3秒" disabled>3 秒</button>
@@ -93,9 +97,11 @@
 <button id="frenzy-10" data-effect="frenzy" data-duration="10000" aria-label="狂暴模式10秒" disabled>10 秒</button>
 <button id="frenzy-30" data-effect="frenzy" data-duration="30000" aria-label="狂暴模式30秒" disabled>30 秒</button>
 </div></section>
-<button id="stop" class="stop" disabled>全部停止</button>
+</main>
+<footer class="stop-bar" aria-label="停止控制">
 <p id="message" role="status" aria-live="polite"></p>
-</main><script>
+<button id="stop" class="stop" disabled>全部停止</button>
+</footer><script>
       "use strict";
       const $ = (id) => document.getElementById(id),
         directions = {
@@ -118,6 +124,9 @@
         followingActivity = false,
         polling = false,
         timer,
+        distanceTimer,
+        displayedDistance = null,
+        distanceChangedAt = 0,
         holds = { move: null, water: null, bubbles: null },
         startQueue = Promise.resolve(),
         pollWait = Promise.resolve();
@@ -195,10 +204,44 @@
           snapshot.boot_held || snapshot.state === "FAULT" || snapshot.capabilities?.speed_control !== true;
         $("stop").disabled = !token;
       }
+      function clearDistance() {
+        clearTimeout(distanceTimer);
+        displayedDistance = null;
+        $("distance-value").textContent = "-";
+      }
+      function renderDistance(s) {
+        clearTimeout(distanceTimer);
+        if (s.capabilities?.distance !== true) {
+          clearDistance(); return;
+        }
+        const d = s.distance;
+        const age = d?.age_ms;
+        if (d?.valid === true && d.error === "none" && Number.isFinite(age) && age >= 0 && age <= 500 &&
+            Number.isInteger(d.distance_mm) && d.distance_mm >= 20 && d.distance_mm <= 4000) {
+          const cm = Math.round(d.distance_mm / 10), now = performance.now();
+          const delta = Math.abs(cm - displayedDistance);
+          // Suppress centimetre flicker, but follow large changes immediately.
+          // Every fresh sample still refreshes expiry; invalid samples clear at once.
+          if (displayedDistance === null || delta >= 10 || (delta >= 2 && now - distanceChangedAt >= 350)) {
+            displayedDistance = cm;
+            distanceChangedAt = now;
+            $("distance-value").textContent = cm + " cm";
+          }
+          distanceTimer = setTimeout(() => clearDistance(), 501 - age);
+        } else {
+          clearDistance();
+        }
+      }
+      function statusTime(ms) {
+        if (ms < 60000) return (ms / 1000).toFixed(1) + " s";
+        if (ms < 3600000) return Math.ceil(ms / 60000) + " min";
+        return Math.ceil(ms / 3600000) + " h";
+      }
       function render(s) {
         if (s.request_sequence <= latest) return;
         latest = s.request_sequence;
         snapshot = s;
+        renderDistance(s);
         windowId = s.window;
         if (speedDesired === null) {
           $("move-speed").value = String(s.web_speed_percent ?? 100);
@@ -211,30 +254,26 @@
             cool = s[kind + "_cooldown_ms"];
           $(kind + "-time").textContent =
             s[(kind === "move" ? "drive" : kind) + "_hold_id"]
-              ? "按住" + ({move:"行走",water:"喷水",bubbles:"吹泡泡"}[kind] || "")
+              ? (kind === "move" ? "" : "持续")
               : active
-                ? (s[kind + "_remaining_ms"] / 1000).toFixed(1) + " s"
+                ? statusTime(s[kind + "_remaining_ms"])
                 : "";
           $(kind + "-state").textContent = active
-            ? (s[kind + "_source"] === "voice" ? "语音" : "网页")
+            ? (kind === "move" ? directions[s.move_direction] || "行走" : "")
             : s.boot_held
-              ? "BOOT 已按下"
+              ? "已停止"
               : s.state === "FAULT"
-                ? "设备故障 · 不可操作"
+                ? "故障"
                 : cool
-                  ? "冷却 " + (cool / 1000).toFixed(1) + " 秒"
+                  ? "冷却"
                   : "待命";
         }
-        $("direction").textContent = s.move_direction && s.move_direction !== "none" ? "行走 · " + directions[s.move_direction] + (s.move_speed_percent ? " " + s.move_speed_percent + "%" : "") : "行走";
-        $("water-label").textContent = s.logical_outputs.water
-          ? "喷水中"
-          : "水枪";
-        $("bubbles-label").textContent = s.logical_outputs.bubbles ? "吹泡泡中" : "泡泡枪";
-        $("ignition-label").textContent = s.logical_outputs.ignition ? "点火中" : "点火线圈";
+        $("drive-speed").textContent = s.move_speed_percent > 0 ? s.move_speed_percent + "%" : "—";
         if (followingActivity || s.sequence_active) activityMessage(s);
         controls();
       }
       async function request(path, body = {}, auth = token, timeoutMs = 1100) {
+        const started = performance.now();
         const abort = new AbortController(),
           timeout = setTimeout(() => abort.abort(), timeoutMs);
         try {
@@ -251,6 +290,10 @@
           });
           const data = await response.json();
           if (!response.ok) throw new Error(data.result || "request_failed");
+          // Conservatively include the whole round trip, so delayed responses
+          // cannot make old range data look fresh on the browser.
+          if (Number.isFinite(data.distance?.age_ms))
+            data.distance.age_ms += Math.ceil(performance.now() - started);
           return data;
         } finally {
           clearTimeout(timeout);
@@ -270,6 +313,7 @@
           }).catch(() => {});
       }
       function disconnect(text) {
+        clearDistance();
         clearAllHolds();
         $("frenzy-time").textContent = "最长 30 秒";
         const old = token;
@@ -288,10 +332,11 @@
         connecting = false;
         for (const kind of ["move", "water", "bubbles", "ignition"]) {
           $(kind + "-time").textContent = "—";
-          $(kind + "-state").textContent = "状态未知";
+          $(kind + "-state").textContent = "";
 
         }
         $("direction").textContent = "行走";
+        $("drive-speed").textContent = "—";
         $("water-label").textContent = "水枪";
         $("bubbles-label").textContent = "泡泡枪";
         $("ignition-label").textContent = "点火线圈";
@@ -330,7 +375,9 @@
           finishPoll();
           if (e === epoch && token) {
             const cooling = [snapshot?.move_cooldown_ms, snapshot?.water_cooldown_ms, snapshot?.bubbles_cooldown_ms, snapshot?.ignition_cooldown_ms].filter(ms => ms > 0);
-            timer = setTimeout(poll, cooling.length ? Math.min(500, ...cooling) : 500);
+            // Leave room for sample age and LAN latency before the 500 ms expiry.
+            const interval = snapshot?.capabilities?.distance === true ? 200 : 500;
+            timer = setTimeout(poll, cooling.length ? Math.min(interval, ...cooling) : interval);
           }
         }
       }
@@ -452,7 +499,7 @@
       }
       function updateHoldTime(h) {
         if (holds[h.kind] !== h || document.hidden || h.epoch !== epoch) return;
-        $(h.kind === "move" ? "hold-time" : h.kind + "-hold-time").textContent = "已按住 " + holdSeconds(h) + " 秒";
+        $(h.kind === "move" ? "hold-time" : h.kind + "-hold-time").textContent = h.kind === "move" ? "已按住 " + holdSeconds(h) + " 秒" : holdSeconds(h) + "s";
         h.clockTimer = setTimeout(() => updateHoldTime(h), 100);
       }
       function clearHold(kind = "move") {
@@ -462,7 +509,7 @@
           clearTimeout(previous.timer);
           clearTimeout(previous.clockTimer);
           const display = $(kind === "move" ? "hold-time" : kind + "-hold-time");
-          display.textContent = "本次按住 " + holdSeconds(previous) + " 秒";
+          display.textContent = kind === "move" ? "本次按住 " + holdSeconds(previous) + " 秒" : holdSeconds(previous) + "s";
           display.className = kind === "move" ? "hint" : "";
           if (previous.pointer !== null && previous.button.hasPointerCapture(previous.pointer))
             previous.button.releasePointerCapture(previous.pointer);
@@ -691,5 +738,12 @@
         online = false; disconnect("网络已断开，网页动作已请求停止。");
       });
       window.addEventListener("online", () => { online = true; connect(); });
+      if (typeof ResizeObserver !== "undefined") {
+        const dock = document.querySelector(".stop-bar");
+        new ResizeObserver(() => {
+          document.documentElement.style.setProperty("--stop-bar-height", Math.ceil(dock.getBoundingClientRect().height) + "px");
+        }).observe(dock);
+      }
+      document.addEventListener("selectstart", event => event.preventDefault());
       connect();
     </script></body></html>

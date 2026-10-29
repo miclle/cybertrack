@@ -5,6 +5,10 @@ import vm from 'node:vm';
 const html=readFileSync(new URL('../web/index.html',import.meta.url),'utf8');
 const script=html.match(/<script>([\s\S]*?)<\/script>/)[1];
 const flush=()=>new Promise(r=>setImmediate(r));
+function rangeStatus(h, seq, distance = {}, extra = {}) {
+ return h.status(seq, {capabilities:{distance:true}, distance:{valid:true,error:'none',distance_mm:1000,age_ms:30,...distance},...extra});
+}
+assert(!html.includes('id="distance-state"'));
 assert(!html.includes('id="pairing"') && !html.includes('id="combined"') && !html.includes('id="release"'));
 function harness(){
  const element=()=>({value:'1000',disabled:true,style:{},events:{},classList:{toggle(){}},setAttribute(){},captured:false,
@@ -54,7 +58,7 @@ function harness(){
  const wc=h.take('/api/action');assert.equal(JSON.parse(wc.options.body).operation,'water');
  assert.equal(h.buttons[0].disabled,false);
  h.respond(wc,h.status(5,{result:'accepted',drive_hold_id:1,drive_renewal:1,move_remaining_ms:600,water_remaining_ms:1000,move_source:'web',water_source:'web',logical_outputs:{water:true}}));await water;
- assert.equal(h.ids['move-time'].textContent,'按住行走');
+ assert.equal(h.ids['move-time'].textContent,'');
  const stop=h.ctx.endHold();h.respond(h.take('/api/action'),h.status(6,{water_remaining_ms:800,water_source:'web',logical_outputs:{water:true}}));await stop;
  assert.equal(h.ids['water-time'].textContent,'0.8 s'); // Release leaves timed water running.
 }
@@ -110,6 +114,40 @@ for(const trigger of ['pointerup','pointercancel','lostpointercapture','pointerm
  assert.equal(h.sent.filter(c=>c.path==='/api/action').length,0);
 }
 console.log('PASS: automatic connection, independent water/held movement, fresh start window, voice preemption cooldown, release/stop races, background/offline cancellation and reconnect without action replay');
+{
+ const h=harness(); await h.connect();
+ h.ctx.render(rangeStatus(h,2));
+ assert.equal(h.ids['distance-value'].textContent,'100 cm');
+ const expiry=[...h.timers.values()].find(t=>t.ms===471);assert(expiry);expiry.fn();
+ assert.equal(h.ids['distance-value'].textContent,'-');
+ h.ctx.render(rangeStatus(h,3));
+ h.ctx.render(rangeStatus(h,2,{distance_mm:2500})); // Old response cannot replace newer data.
+ assert.equal(h.ids['distance-value'].textContent,'100 cm');
+ h.ctx.disconnect('offline');
+ assert.equal(h.ids['distance-value'].textContent,'-');
+ assert.equal(h.sent.filter(c=>c.path==='/api/action').length,0);
+}
+for(const distance of [
+ {valid:false,error:'no_echo',distance_mm:null}, {valid:false,error:'echo_high'},
+ {valid:false,error:'invalid_echo'}, {valid:false,error:'driver_error'},
+ {valid:false,error:'out_of_range'}, {valid:false,error:'not_ready'},
+ {error:'stale'}, {age_ms:501}, {age_ms:-1}, {age_ms:null},
+ {distance_mm:null}, {distance_mm:19}, {distance_mm:4001}, {distance_mm:'1000'},
+]){
+ const h=harness(); await h.connect(); h.ctx.render(rangeStatus(h,2));
+ h.ctx.render(rangeStatus(h,3,distance));
+ assert.equal(h.ids['distance-value'].textContent,'-',JSON.stringify(distance));
+ assert.equal(h.sent.filter(c=>c.path==='/api/action').length,0);
+}
+{
+ const h=harness(); await h.connect(); h.ctx.render(rangeStatus(h,2));
+ h.ctx.render(h.status(3)); // Connected old firmware has no distance capability.
+ assert.equal(h.ids['distance-value'].textContent,'-');
+ const pending=h.ctx.poll();const request=h.take('/api/state');h.advance(600);
+ h.respond(request,rangeStatus(h,4));await pending;
+ assert.equal(h.ids['distance-value'].textContent,'-'); // Network latency counts toward age.
+}
+console.log('PASS: distance display, units, local expiry, delayed/out-of-order responses, errors, old firmware and offline invalidation; no movement requests');
 
 {
  const h=harness();await h.connect();await h.hold();
@@ -143,7 +181,7 @@ for (const kind of ['bubbles','ignition']) {
  h.respond(call,h.status(6,{result:'accepted',drive_hold_id:1,drive_renewal:1,move_remaining_ms:600,water_remaining_ms:10000,
    bubbles_remaining_ms:4000,ignition_remaining_ms:5000,move_source:'web',water_source:'web',bubbles_source:'web',ignition_source:'web',
    logical_outputs:{water:true,bubbles:true,ignition:true}}));await effect;
- assert.equal(h.ids['bubbles-label'].textContent,'吹泡泡中');assert.equal(h.ids['ignition-label'].textContent,'点火中');
+ assert.equal(h.ids['bubbles-time'].textContent,'4.0 s');assert.equal(h.ids['ignition-time'].textContent,'5.0 s');
  assert(h.ids.bubbles.disabled && h.ids.ignition.disabled);assert(!h.buttons[0].disabled);
  const stop=h.ctx.endHold();h.respond(h.take('/api/action'),h.status(7,{bubbles_remaining_ms:3500,ignition_remaining_ms:4500,logical_outputs:{bubbles:true,ignition:true}}));await stop;
  assert.equal(h.ids['bubbles-time'].textContent,'3.5 s');assert.equal(h.ids['ignition-time'].textContent,'4.5 s');
@@ -189,11 +227,11 @@ async function effectHold(h,kind,id=1,seq=2,pointer=2) {
 }
 for(const kind of ['water','bubbles']) {
  const h=harness();await h.connect();await effectHold(h,kind);
- assert.equal(h.ids[kind+'-time'].textContent,'按住'+(kind==='water'?'喷水':'吹泡泡'));
+ assert.equal(h.ids[kind+'-time'].textContent,'持续');
  const timer=[...h.timers.entries()].find(([,t])=>t.ms===150);assert(timer);h.timers.delete(timer[0]);
  const renew=timer[1].fn();const call=h.take('/api/action');assert.equal(JSON.parse(call.options.body).operation,kind+'_renew');
  h.respond(call,h.status(4,{result:'renewed',[kind+'_hold_id']:1,[kind+'_renewal']:2,[kind+'_remaining_ms']:600}));await renew;
- h.advance(1234);const stop=h.ctx.endHold(kind);assert.equal(h.ids[kind+'-hold-time'].textContent,'本次按住 1.2 秒');
+ h.advance(1234);const stop=h.ctx.endHold(kind);assert.equal(h.ids[kind+'-hold-time'].textContent,'1.2s');
  const sc=h.take('/api/action');assert.deepEqual(JSON.parse(sc.options.body),{operation:kind+'_stop',hold_id:1});
  h.respond(sc,h.status(5));await stop;assert(![...h.timers.values()].some(t=>t.ms===150));
 }
@@ -329,7 +367,7 @@ console.log('PASS: sequence running/waiting/cancelled status never misreports in
  h.respond(h.take('/api/state'),h.status(5,{capabilities:{speed_control:true},web_speed_percent:100,drive_hold_id:1,move_remaining_ms:450}));await flush();
  const c=h.take('/api/action');assert.deepEqual(JSON.parse(c.options.body),{operation:'set_speed',sequence:2,window:5,speed_percent:60});
  h.respond(c,h.status(6,{capabilities:{speed_control:true},web_speed_percent:60,move_speed_percent:60,move_direction:'forward',drive_hold_id:1,move_remaining_ms:400}));await run;
- assert.equal(h.ids['speed-value'].textContent,'60%');assert.equal(h.ids.direction.textContent,'行走 · 前进 60%');
+ assert.equal(h.ids['speed-value'].textContent,'60%');assert.equal(h.ids['move-state'].textContent,'前进');assert.equal(h.ids['drive-speed'].textContent,'60%');
  assert.equal(h.sent.filter(x=>x.path==='/api/action').length,2);assert(!h.sent.some(x=>x.path==='/api/stop'));
 }
 { // Rapid input sends only the latest desired value after each in-flight receipt.
@@ -361,3 +399,42 @@ console.log('PASS: live speed slider, latest-value coalescing, source status, ca
  const h=harness();await h.connect();h.ctx.render(h.status(2,{capabilities:{speed_control:true},web_speed_percent:100}));
  h.ids['move-speed'].value='59';await h.ids['move-speed'].events.input();assert(!h.sent.some(x=>x.path==='/api/action'));
 }
+
+{
+ const h=harness();await h.connect();
+ let prevented=false;h.events.selectstart({preventDefault(){prevented=true;}});assert(prevented);
+ h.ctx.render(rangeStatus(h,2));
+ h.advance(100);h.ctx.render(rangeStatus(h,3,{distance_mm:1010}));
+ assert.equal(h.ids['distance-value'].textContent,'100 cm');
+ h.advance(100);h.ctx.render(rangeStatus(h,4,{distance_mm:1030}));
+ assert.equal(h.ids['distance-value'].textContent,'100 cm');
+ h.advance(160);h.ctx.render(rangeStatus(h,5,{distance_mm:1040}));
+ assert.equal(h.ids['distance-value'].textContent,'104 cm');
+ h.advance(20);h.ctx.render(rangeStatus(h,6,{distance_mm:300}));
+ assert.equal(h.ids['distance-value'].textContent,'30 cm'); // Approaching target is not slowly averaged.
+ h.ctx.render(rangeStatus(h,7,{valid:false,error:'no_echo',distance_mm:null}));
+ assert.equal(h.ids['distance-value'].textContent,'-');
+ h.ctx.render(rangeStatus(h,8,{distance_mm:310}));
+ assert.equal(h.ids['distance-value'].textContent,'31 cm'); // Reset hysteresis after invalid sample.
+ const run=h.ctx.poll();h.respond(h.take('/api/state'),rangeStatus(h,9));await run;
+ assert([...h.timers.values()].some(t=>t.ms===200));
+ h.ctx.render(h.status(10,{move_speed_percent:100,move_direction:'left'}));
+ assert.equal(h.ids['drive-speed'].textContent,'100%');
+ h.ctx.render(h.status(11,{move_speed_percent:0}));assert.equal(h.ids['drive-speed'].textContent,'—');
+ h.ctx.disconnect('offline');assert.equal(h.ids['drive-speed'].textContent,'—');
+ assert.equal(h.sent.filter(c=>c.path==='/api/action').length,0);
+}
+console.log('PASS: range hysteresis, immediate large change/invalid clearing, 200 ms telemetry polling, separate speed and selection prevention');
+
+{
+ const h=harness();await h.connect();
+ h.ctx.render(h.status(2,{move_remaining_ms:10000,move_direction:'forward',move_source:'voice',water_remaining_ms:1000,water_source:'web'}));
+ assert.equal(h.ids['move-state'].textContent,'前进');assert.equal(h.ids['move-time'].textContent,'10.0 s');
+ assert.equal(h.ids['water-state'].textContent,'');assert.equal(h.ids['water-time'].textContent,'1.0 s');
+ h.ctx.render(h.status(3,{move_remaining_ms:2147483647,move_direction:'left'}));assert.equal(h.ids['move-time'].textContent,'597 h');
+ h.ctx.render(h.status(4,{water_hold_id:1,water_remaining_ms:600}));assert.equal(h.ids['water-time'].textContent,'持续');
+ h.ctx.render(h.status(5,{water_cooldown_ms:100}));assert.equal(h.ids['water-state'].textContent,'冷却');
+ h.ctx.render(h.status(6,{state:'FAULT'}));assert.equal(h.ids['move-state'].textContent,'故障');
+ h.ctx.disconnect('offline');assert.equal(h.ids['move-state'].textContent,'');assert.equal(h.ids['move-time'].textContent,'—');
+}
+console.log('PASS: compact channel states retain direction, countdown, hold, cooldown, fault and disconnected status');

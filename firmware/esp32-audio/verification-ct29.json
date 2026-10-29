@@ -1,0 +1,49 @@
+{
+  "version": "2.0.3-ct29",
+  "date": "2026-10-29",
+  "scope": "Web selection prevention, fixed drive-speed position, range display hysteresis and 200 ms idle polling; control firmware and platform prompt unchanged from ct28",
+  "artifact": {
+    "path": "build/firmware-ct29/xiaozhi.bin",
+    "bytes": 2639600,
+    "sha256": "c728fc516c98774a37f9d38b04128e653fe0f99403c18755e1a7759eaf55ec66"
+  },
+  "checks": {
+    "web_ui_regression": "passed; holds/release/stop/races, speed, fresh/invalid range, hysteresis and no action generation",
+    "esp_idf_build": "passed ESP-IDF 5.5.1",
+    "exported_page_matches_source": true,
+    "ct28_control_range_and_prompt_source_hashes_unchanged": true,
+    "responsive_mock_preview": {
+      "390x844": {
+        "height_idle_and_moving": 871,
+        "stop_y_idle_and_moving": 776.5,
+        "no_horizontal_overflow": true
+      },
+      "320x667": {
+        "height_idle_and_moving": 759,
+        "stop_y_idle_and_moving": 684.5,
+        "no_horizontal_overflow": true
+      },
+      "speed_position": "left of forward and above left-turn in both sizes",
+      "selection": "computed user-select none"
+    }
+  },
+  "source_sha256": {
+    "web/index.html": "dcff18210639ee14cc7bf9bf63a0f5d278fc53611cc76ca692f9d8152ca99420",
+    "apply_overlay.py": "f2fcc0beecea92da2613645e283e33fc56171cff5bca761558242f21cb8c9815",
+    "role-prompt.txt": "541f59e66056c7e4037b51bf3dd1f2039baf6476e1e595f47c23154d9e327e50"
+  },
+  "logs": [
+    "build/ct29-web.log",
+    "build/ct29-build.log"
+  ],
+  "deployment": {
+    "flashed": true,
+    "device_restarted": true,
+    "startup_and_page_verified": true,
+    "evidence": "startup-ct29.json"
+  },
+  "limits": [
+    "Phone long-press behavior and subjective display smoothness require user confirmation.",
+    "Distance precision, electrical levels and load interference remain unverified."
+  ]
+}

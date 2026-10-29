@@ -1,0 +1,68 @@
+{
+  "version": "2.0.3-ct28",
+  "date": "2026-10-29",
+  "base_commit": "787688773f897103828c890f31bd70527fb1ce99",
+  "scope": "Head ultrasonic telemetry at 3.3 V, IO1 TRIG / IO2 ECHO; web display and existing voice get_status; no automatic obstacle avoidance.",
+  "checks": {
+    "host_asan_ubsan": "passed existing control/output/sequence/speed tests and new distance decoder and actual driver adapter tests",
+    "distance_cases": [
+      "20/4000 mm pulse boundaries",
+      "no echo and pulled-down missing sensor",
+      "echo high before/after capture",
+      "multiple/late pulses and buffer-full rejection",
+      "500 ms freshness and invalid sample replacement",
+      "64-bit timestamps",
+      "driver init/runtime errors and completion timeout cleanup",
+      "task allocation failure"
+    ],
+    "mcp_http": "passed exported actual MCP argument block, HTTP parser and handler regression tests",
+    "web_ui": "passed new valid/error/stale/missing-field/old-firmware/latency/disconnect cases, no range-driven movement requests; existing action/speed/stop race regressions passed",
+    "esp_idf_build": "passed ESP-IDF v5.5.1; existing locked esp_video ioctl macro redefinition warnings in full build; no new driver warnings",
+    "export_matches_source": true,
+    "action_policy_and_output_sources_unchanged": true,
+    "role_prompt_static": "5966 characters; get_status fields/units/freshness match; platform saved/reopened exact match; spoken regression pending",
+    "browser_preview": "Local mock only, 390 x 844 iframe: content width/scrollWidth both 390; valid 123 cm visible, followed by no_echo clearing value to dash. Content height 871, vertical scroll allowed."
+  },
+  "artifact": {
+    "path": "build/firmware-ct28/xiaozhi.bin",
+    "bytes": 2638224,
+    "sha256": "eedd6b1da868cf9bf4e94f400311e9d4e49100844d4fb2a4c764dba2cbfa0d59"
+  },
+  "source_sha256": {
+    "distance_reading.h": "b5accc565af3ffb635cb007a38dcb2f0ffc12991b096eeeeba3790dab7e4c47b",
+    "ultrasonic.h": "6b264fb0f3608b01ae7c41ab4494ddb1573bf0df935cc1cebb4556a7a75da733",
+    "ultrasonic.cc": "ec449dd3e891b381b24f1dd0bd9296c2c0fbeee9f5bd05a60ad6e888e9e2d7f4",
+    "cybertrack_tools.cc": "18f004b4aac5e6d80f6c775bc80376f19773bc3992f5bd3e5366aae94c54208a",
+    "apply_overlay.py": "ed372648e0f52654bff93afb184a9c59ad3c5edc82d55781b4438deb5f1678ba",
+    "web/index.html": "2005fc9381a9d7ec224395714e56a90ccef136bb26164c032fcce254c2f057c5",
+    "role-prompt.txt": "541f59e66056c7e4037b51bf3dd1f2039baf6476e1e595f47c23154d9e327e50",
+    "action_outputs.h": "3f26633f9b2b5fa2730c5815a9ff7bc5a593f1c83a0e6230c21e3b6552baf87f",
+    "control_sessions.h": "fdef392e8cd5987ea1ba3ef132cbd9c2b75b6a78e2194f7f350d9375876070d6",
+    "action_guard.h": "a10aa7ba8a47c856aacbd9d6d17b80522bb8369609e74532fb31ba7453439246"
+  },
+  "logs": [
+    "build/ct28-host.log",
+    "build/ct28-mcp.log",
+    "build/ct28-web.log",
+    "build/ct28-build.log",
+    "build/ct28-build-final.log"
+  ],
+  "local_preview_evidence": [
+    "build/ct28-preview-valid.png",
+    "build/ct28-preview-no-echo.png"
+  ],
+  "deployment": {
+    "flashed": true,
+    "platform_prompt_synced": true,
+    "device_restarted": true,
+    "device_contacted": true,
+    "latest_recorded_device_version": "2.0.3-ct28",
+    "evidence": "startup-ct28.json"
+  },
+  "limits": [
+    "3.3 V / direct ECHO is the user-selected candidate, not measured electrical compatibility.",
+    "Live RMT echo and fresh telemetry observed; pulse timing, accuracy and real-time coexistence remain unmeasured.",
+    "No physical installation, acoustic, load/interference or child-use acceptance.",
+    "No automatic avoidance or spoken voice regression; deployment evidence in startup-ct28.json."
+  ]
+}
