@@ -1,0 +1,162 @@
+{
+  "observed_at": "2026-10-30T00:25:11.906592+08:00",
+  "scope": "state reads only, no reset or action starts",
+  "samples": [
+    {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "a35689b4a1b779dd",
+      "distance": {
+        "valid": false,
+        "distance_mm": null,
+        "error": "driver_error",
+        "sampled_at_ms": null,
+        "age_ms": null,
+        "echo_us": null,
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 300,
+        "release_mm": 350
+      },
+      "uptime_ms": 35451,
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "a35689b4a1b779dd",
+      "distance": {
+        "valid": false,
+        "distance_mm": null,
+        "error": "driver_error",
+        "sampled_at_ms": null,
+        "age_ms": null,
+        "echo_us": null,
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 300,
+        "release_mm": 350
+      },
+      "uptime_ms": 36098,
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "a35689b4a1b779dd",
+      "distance": {
+        "valid": false,
+        "distance_mm": null,
+        "error": "driver_error",
+        "sampled_at_ms": null,
+        "age_ms": null,
+        "echo_us": null,
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 300,
+        "release_mm": 350
+      },
+      "uptime_ms": 36805,
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "a35689b4a1b779dd",
+      "distance": {
+        "valid": false,
+        "distance_mm": null,
+        "error": "driver_error",
+        "sampled_at_ms": null,
+        "age_ms": null,
+        "echo_us": null,
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 300,
+        "release_mm": 350
+      },
+      "uptime_ms": 37518,
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "a35689b4a1b779dd",
+      "distance": {
+        "valid": false,
+        "distance_mm": null,
+        "error": "driver_error",
+        "sampled_at_ms": null,
+        "age_ms": null,
+        "echo_us": null,
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 300,
+        "release_mm": 350
+      },
+      "uptime_ms": 38202,
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  ],
+  "user_observation": "Cold power-up fails with both independent 5 V battery and PC USB; waiting 10-20 seconds does not recover; RST restores ranging. Wiring remains 3V3/GND and IO1/TRIG IO2/ECHO."
+}

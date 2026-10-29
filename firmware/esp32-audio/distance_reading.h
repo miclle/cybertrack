@@ -23,12 +23,20 @@ inline const char* ErrorName(Error error) {
     }
     return "driver_error";
 }
+struct DriverStatus {
+    const char* last_failure = "none";
+    int error_code = 0;
+    uint64_t failed_at_ms = 0;
+    unsigned failures = 0, restarts = 0, retry_delay_ms = 0;
+    bool recovering = false;
+};
 struct Reading {
     Error error = Error::NotReady;
     unsigned distance_mm = 0;
     unsigned echo_us = 0;
     uint64_t sampled_at_ms = 0;
     bool sampled = false;
+    DriverStatus driver{};
 };
 
 // RMT samples at 1 MHz. Accept one contiguous HIGH pulse, not multiple echoes
@@ -81,6 +89,12 @@ inline std::string Json(const Reading& r, uint64_t now_ms) {
         (r.sampled ? Decimal(r.sampled_at_ms) : "null") +
         ",\"age_ms\":" + (r.sampled && clock_ok ? Decimal(age) : "null") +
         ",\"echo_us\":" + (r.sampled && r.echo_us ? Decimal(r.echo_us) : "null") +
+        ",\"driver\":{\"last_failure\":\"" + r.driver.last_failure +
+        "\",\"error_code\":" + std::to_string(r.driver.error_code) +
+        ",\"failed_at_ms\":" + Decimal(r.driver.failed_at_ms) +
+        ",\"failures\":" + Decimal(r.driver.failures) + ",\"restarts\":" + Decimal(r.driver.restarts) +
+        ",\"retry_delay_ms\":" + Decimal(r.driver.retry_delay_ms) +
+        ",\"recovering\":" + (r.driver.recovering ? "true" : "false") + "}" +
         ",\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false}";
 }
 } // namespace ultrasonic
