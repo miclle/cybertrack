@@ -1,0 +1,47 @@
+{
+  "version": "2.0.3-ct27",
+  "scope": "60 percent minimum, absolute live voice speed and full-speed direction phrases",
+  "checks": {
+    "host_asan_ubsan": "passed including absolute/relative speed, min bounds, no restart/deadline/lease change, stale/stop/step binding and output failures",
+    "mcp_http": "passed exported MCP, actual HTTP parser and handler tests",
+    "web_ui": "passed minimum bound, coalescing and stop races",
+    "esp_idf_build": "passed v5.5.1",
+    "export_matches_source": true,
+    "platform_prompt_saved_and_reopened_match": true,
+    "monitor_python_compile": "passed"
+  },
+  "artifact": {
+    "path": "build/firmware-ct27/xiaozhi.bin",
+    "bytes": 2625936,
+    "sha256": "362d72f0f340bfdf0a6d84044c1a4c1e57e219b868c37cd60742eda2aefda41d"
+  },
+  "source_sha256": {
+    "action_guard.h": "a10aa7ba8a47c856aacbd9d6d17b80522bb8369609e74532fb31ba7453439246",
+    "action_outputs.h": "3f26633f9b2b5fa2730c5815a9ff7bc5a593f1c83a0e6230c21e3b6552baf87f",
+    "control_sessions.h": "fdef392e8cd5987ea1ba3ef132cbd9c2b75b6a78e2194f7f350d9375876070d6",
+    "action_plan.h": "5631070bf77f26836f1b30ad3ab051ee5714f94e7c78b4e347e0ea5bc72e2a61",
+    "action_plan_json.h": "6d956c7d398bb1ddceebac4056078b001c7cd3471f854f43eff487525318cbbd",
+    "cybertrack_tools.cc": "6710cf63d3a1d3cc3f6f4df09a7e0e0e1b6d13213c58101a8ea3e1aae5a9339e",
+    "apply_overlay.py": "675af874b4ccbb1496ab74d0a409567494bffaebcbad5ad6b888405bab8f1986",
+    "web_request.h": "e870acbca9704596b7894001513bb3ec6cca5106d8177f8c725cbeb3edceab32",
+    "web/index.html": "0e230d89723f456885204f3c8350dc39562f15d00ef1cb527043ca6becbc6403",
+    "role-prompt.txt": "92bc342e700fd91711e9a2d6025314881b8db0076f033faa760ff4969c05c1b8",
+    "monitor.py": "bd87bcf3718fdb2a88dbebb0326ee4e3a462f1d6f6692e63e4fa941a97bd0e38"
+  },
+  "prompt_characters": 5974,
+  "logs": [
+    "build/ct27-host.log",
+    "build/ct27-mcp.log",
+    "build/ct27-web.log",
+    "build/ct27-build.log"
+  ],
+  "deployment": "application-only verified, config preserved, network and idle speed 80/60/100 checked, 59 rejected, no actuator starts",
+  "proofs": [
+    "build/ct27-private/role-saved.png"
+  ],
+  "limits": [
+    "ct26 web slider and relative voice adjustments confirmed by user; observer disconnected before those tests so no matching serial receipts.",
+    "ct27 absolute target and full-speed phrases still need spoken device validation.",
+    "Percent is PWM, not measured wheel speed; 60 percent is user requested usable floor, not electrical/thermal acceptance."
+  ]
+}

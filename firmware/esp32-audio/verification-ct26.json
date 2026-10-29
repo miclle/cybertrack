@@ -1,0 +1,45 @@
+{
+  "version": "2.0.3-ct26",
+  "scope": "Default full PWM, specified speeds, live web speed and 10-point voice adjustment",
+  "checks": {
+    "host_asan_ubsan": "passed including speed, replay/stop/step binding and output fault tests",
+    "mcp_http": "passed actual exported validation/parser/handlers",
+    "web_ui": "passed coalescing, capability and stop races",
+    "esp_idf_build": "passed v5.5.1",
+    "export_matches_source": true,
+    "mobile_preview": "375x667, slider and stop visible; mock slider 1 and 100 confirmed",
+    "platform_prompt_saved_and_reopened_match": true,
+    "voice_adjusts_current_web_movement": "passed with preference synchronization; lease and starts unchanged"
+  },
+  "artifact": {
+    "path": "build/firmware-ct26/xiaozhi.bin",
+    "bytes": 2624144,
+    "sha256": "fb060f1252dd88435da4d7fa711b050b1e5a4c208dc26df179135e4e825b54d7"
+  },
+  "source_sha256": {
+    "action_guard.h": "429300e42a88a43c415fb9b3f84e36d9005d03d5999774949c64f057d45fee32",
+    "action_outputs.h": "fca551c24785d59daa82bc792c1b2e0791ed60745c552fb236117bee4cca60a6",
+    "control_sessions.h": "ebae7a2b94eedd479805a805636d806e0c79d0bde9e0cde691d2b6214f0032de",
+    "cybertrack_tools.cc": "e6cbdc66053713143428e2de00ee633e81991cec17e3f649a55d8f2a295713cd",
+    "apply_overlay.py": "b163d8de1b5f1994ac82ab2bd676ad602516068ab84ccf352e44f0d20ad3c276",
+    "web_request.h": "715c6735f18753f9ae981ff8598f21bc1ddea9f0590e6f090be482223b6cf058",
+    "web/index.html": "b4eefd02c8af28f4390fdc6598a66e9c52c39e6dbde65e66df6c55fb34192e06",
+    "role-prompt.txt": "841426a5c48a4f595f89cc924a5b6bfa9bf1d61b9e0ba9c9890f51cf0a63b43f"
+  },
+  "prompt_characters": 5987,
+  "logs": [
+    "build/ct26-host.log",
+    "build/ct26-mcp.log",
+    "build/ct26-web.log",
+    "build/ct26-build.log"
+  ],
+  "limits": [
+    "Percent is PWM, not measured wheel speed; minimum moving duty is not calibrated.",
+    "Physical speed changes, speech recognition and full-duty electrical/thermal behavior remain unverified."
+  ],
+  "deployment": "application-only ct26 verified; configuration preserved; idle speed requests passed; no actuator starts",
+  "proofs": [
+    "build/ct26-private/web-speed-mobile.png",
+    "build/ct26-private/role-saved.png"
+  ]
+}
