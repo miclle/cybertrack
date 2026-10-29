@@ -1,5 +1,7 @@
 # CyberTrack 面包板：小D 语音与四路控制
 
+ct34 已仅应用部署并保持配置，复位启动后连续有效测距，驱动失败数及执行器启动数为 0；见[部署记录](startup-ct34.json)。本版增加测距冷启动等待、具体故障阶段与 1–8 秒退避恢复；初始化或接收超时不再直接结束任务。清理失败保留资源并明确报告，避免不安全复用。软件验证见[ct34 记录](verification-ct34.json)，一次用户确认的冷上电复测已通过，8 次有效测距且无驱动失败／重启，见[记录](cold-start-ct34.json)；用户随后确认电脑 USB 与独立电池均多次重新上电且测距正常（用户反馈，未逐轮采集遥测），详见[故障与恢复契约](../../docs/ultrasonic-ranging.md#ct34冷启动故障诊断与局部恢复)。角色源和网页布局保持 ct33。
+
 ct33 已部署，配置区保持、平台角色保存回读并重启联网，执行器启动次数为 0；见[验证](verification-ct33.json)与[部署](startup-ct33.json)。新增本地 50／30 cm 提醒和前进保护，覆盖语音、网页和动作序列；声音由独立任务播放，控制任务不等音频。原始有效读数参与判定，35 cm 解锁且不自行恢复。见[规则与验证](../../docs/ultrasonic-ranging.md#ct33本地距离提醒与前进保护)。
 
 2026-10-29 用户确认当前测距与网页优化“测试效果符合预期”，记录于 [ct32 现场反馈](startup-ct32.json)。下方各版本的待测说明保留其当时状态；本次整体反馈不代替电平、测距精度或干扰的定量验证。
@@ -28,7 +30,7 @@ ct23 增加网页“左转＋喷水，各 3 秒”对照入口，调用现有组
 
 ## 当前能力与验证范围
 
-当前源码与最新部署为 `2.0.3-ct33`，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
+当前源码与最新部署为 `2.0.3-ct34`，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
 
 | 功能 | 当前规则 |
 |---|---|
