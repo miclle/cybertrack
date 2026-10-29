@@ -1,0 +1,258 @@
+{
+  "date": "2026-10-29T08:38:11.472178+08:00",
+  "firmware": "2.0.3-ct27",
+  "firmware_changed": false,
+  "user_feedback": "Speed tests meet expectations; standalone 全速 during movement did not work.",
+  "diagnosis": "Prompt explicitly handled 调到全速 but omitted standalone 全速. No matching speed receipts or speech transcripts available; failure stage not proven.",
+  "prompt": {
+    "characters": 5998,
+    "sha256": "832a4c8ddda42388afca25d21c8d1e7da7a609f543aeec237f1a15c088d88f76",
+    "previous_sha256": "92bc342e700fd91711e9a2d6025314881b8db0076f033faa760ff4969c05c1b8",
+    "platform_saved_reopened_match": true,
+    "reboot_after_save": true
+  },
+  "changes": [
+    "Standalone 全速/最快/最大速度 invokes set_speed 100, no direction/duration question or movement start.",
+    "Full speed plus direction uses status to choose idle move versus same-direction speed update; no automatic reversal.",
+    "Negative/query/background and stop/no retry rules retained."
+  ],
+  "startup": [
+    {
+      "time": "2026-10-29T08:37:15.226728+08:00",
+      "firmware": "2.0.3-ct27"
+    },
+    {
+      "time": "2026-10-29T08:37:15.227626+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-10-29T08:37:15.227744+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-10-29T08:37:15.227870+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-10-29T08:37:15.229144+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-10-29T08:37:20.692235+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-10-29T08:37:20.748112+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-10-29T08:37:21.534734+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "checks": {
+    "prompt_limit": true,
+    "firmware_100_percent_target_tests": "Existing ct27 speed_test covers target 100 in four directions with direction/deadline/starts unchanged; firmware unchanged in this follow-up.",
+    "actuator_start_commands_sent": false
+  },
+  "proof": "build/ct27-private/role-full-speed-saved.png",
+  "speech_retest": "passed: user confirmed standalone 全速 during movement; serial confirms 60 to 100, direction/start count/deadline unchanged",
+  "field_validation": {
+    "date": "2026-10-29",
+    "timezone": "Asia/Shanghai",
+    "user_confirmed": true,
+    "serial_source": "build/ct22-private/concurrency-observer.jsonl",
+    "receipts": [
+      {
+        "time": "2026-10-29T08:54:28.683398+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "5534288be6ff97fd",
+          "request_sequence": 1,
+          "operation": "move",
+          "result": "accepted",
+          "state": "ACTIVE",
+          "fault": "none",
+          "uptime_ms": 976418,
+          "logical_outputs": {
+            "left": 60,
+            "right": 60,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "capabilities": {
+            "speed_control": true,
+            "sequence": true,
+            "frenzy": true,
+            "water_hold": true,
+            "bubbles_hold": true,
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": true,
+            "ignition": true
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 1,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 10000,
+          "remaining_ms": 10000,
+          "move_last_duration_ms": 10000,
+          "water_last_duration_ms": 0,
+          "move_remaining_ms": 10000,
+          "water_remaining_ms": 0,
+          "web_speed_percent": 100,
+          "move_speed_percent": 60,
+          "speed_min_percent": 60,
+          "speed_max_percent": 100,
+          "move_max_duration_ms": 2147483647,
+          "move_direction": "forward",
+          "log_events_dropped": 0,
+          "control_owner": "voice",
+          "window": 0,
+          "move_cooldown_ms": 0,
+          "water_cooldown_ms": 0,
+          "boot_held": false,
+          "move_source": "voice",
+          "water_source": "none",
+          "drive_hold_id": 0,
+          "drive_renewal": 0,
+          "drive_lease_ms": 600,
+          "water_hold_id": 0,
+          "water_renewal": 0,
+          "bubbles_hold_id": 0,
+          "bubbles_renewal": 0,
+          "effect_lease_ms": 600,
+          "bubbles_last_duration_ms": 0,
+          "ignition_last_duration_ms": 0,
+          "bubbles_remaining_ms": 0,
+          "ignition_remaining_ms": 0,
+          "bubbles_max_duration_ms": 30000,
+          "ignition_max_duration_ms": 5000,
+          "bubbles_cooldown_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_source": "none",
+          "frenzy_remaining_ms": 0,
+          "frenzy_last_duration_ms": 0,
+          "frenzy_source": "none",
+          "frenzy_max_duration_ms": 30000,
+          "ignition_cooldown_policy": "equal_elapsed_on_time",
+          "sequence_active": false,
+          "sequence_step": 0,
+          "sequence_steps": 0,
+          "sequence_result": "idle",
+          "sequence_max_steps": 16,
+          "actuator_backend": "concurrent_motor_effects_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      },
+      {
+        "time": "2026-10-29T08:54:37.290696+08:00",
+        "receipt": {
+          "device_id": "30:ed:a0:a1:97:7c",
+          "boot_id": "5534288be6ff97fd",
+          "request_sequence": 9,
+          "operation": "set_speed",
+          "result": "accepted",
+          "state": "ACTIVE",
+          "fault": "none",
+          "uptime_ms": 985025,
+          "logical_outputs": {
+            "left": 100,
+            "right": 100,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "capabilities": {
+            "speed_control": true,
+            "sequence": true,
+            "frenzy": true,
+            "water_hold": true,
+            "bubbles_hold": true,
+            "move": true,
+            "water": true,
+            "move_and_water": true,
+            "bubbles": true,
+            "ignition": true
+          },
+          "local_authorization_required": false,
+          "starts_this_boot": 1,
+          "max_duration_ms": 30000,
+          "last_duration_ms": 10000,
+          "remaining_ms": 1393,
+          "move_last_duration_ms": 10000,
+          "water_last_duration_ms": 0,
+          "move_remaining_ms": 1393,
+          "water_remaining_ms": 0,
+          "web_speed_percent": 100,
+          "move_speed_percent": 100,
+          "speed_min_percent": 60,
+          "speed_max_percent": 100,
+          "move_max_duration_ms": 2147483647,
+          "move_direction": "forward",
+          "log_events_dropped": 0,
+          "control_owner": "shared",
+          "window": 7,
+          "move_cooldown_ms": 0,
+          "water_cooldown_ms": 0,
+          "boot_held": false,
+          "move_source": "voice",
+          "water_source": "none",
+          "drive_hold_id": 0,
+          "drive_renewal": 0,
+          "drive_lease_ms": 600,
+          "water_hold_id": 0,
+          "water_renewal": 0,
+          "bubbles_hold_id": 0,
+          "bubbles_renewal": 0,
+          "effect_lease_ms": 600,
+          "bubbles_last_duration_ms": 0,
+          "ignition_last_duration_ms": 0,
+          "bubbles_remaining_ms": 0,
+          "ignition_remaining_ms": 0,
+          "bubbles_max_duration_ms": 30000,
+          "ignition_max_duration_ms": 5000,
+          "bubbles_cooldown_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_source": "none",
+          "frenzy_remaining_ms": 0,
+          "frenzy_last_duration_ms": 0,
+          "frenzy_source": "none",
+          "frenzy_max_duration_ms": 30000,
+          "ignition_cooldown_policy": "equal_elapsed_on_time",
+          "sequence_active": false,
+          "sequence_step": 0,
+          "sequence_steps": 0,
+          "sequence_result": "idle",
+          "sequence_max_steps": 16,
+          "actuator_backend": "concurrent_motor_effects_bench",
+          "physical_feedback": false,
+          "source": "cybertrack_audio_board"
+        }
+      }
+    ],
+    "stop_event": {
+      "time": "2026-10-29T08:54:38.541328+08:00",
+      "event": "ACTION_OFF channel=move reason=deadline software_on_ms=10003 move=OFF water=OFF bubbles=OFF ignition=OFF starts=1"
+    },
+    "checks": {
+      "speed_60_to_100": true,
+      "same_direction": true,
+      "starts_still_one": true,
+      "unchanged_deadline_uptime_ms": 986418,
+      "actual_software_on_ms": 10003,
+      "fault_none": true
+    },
+    "not_tested_here": [
+      "Standalone full speed after stop",
+      "Negative and query phrases",
+      "Other full-speed directions",
+      "Measured wheel speed and electrical/thermal behavior"
+    ]
+  }
+}
