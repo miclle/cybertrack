@@ -22,6 +22,25 @@ static void check(const char* tool, const char* json, bool valid) {
     cJSON_Delete(args);
 }
 int main() {
+    for (const char* speed : {"60","70","80","100"}) {
+        auto move=std::string(R"({"direction":"forward","duration_ms":5000,"speed_percent":)")+speed+"}";
+        check("self.tank.move",move.c_str(),true);
+        auto both=std::string(R"({"direction":"left","move_duration_ms":5000,"water_duration_ms":1000,"speed_percent":)")+speed+"}";
+        check("self.tank.move_and_water",both.c_str(),true);
+    }
+    for (const char* speed : {"0","1","50","59","101","-1","1.5","true","null","\"50\"","50,\"speed_percent\":50"}) {
+        auto move=std::string(R"({"direction":"left","duration_ms":1000,"speed_percent":)")+speed+"}";
+        check("self.tank.move",move.c_str(),false);
+        auto both=std::string(R"({"direction":"left","move_duration_ms":1000,"water_duration_ms":1000,"speed_percent":)")+speed+"}";
+        check("self.tank.move_and_water",both.c_str(),false);
+    }
+    for(const char* speed:{"60","70","80","100"}) check("self.tank.set_speed",(std::string(R"({"speed_percent":)")+speed+"}").c_str(),true);
+    for(const char* speed:{"0","1","50","59","101","60.5","true","null","\"60\"","60,\"speed_percent\":60","60,\"extra\":1"})
+        check("self.tank.set_speed",(std::string(R"({"speed_percent":)")+speed+"}").c_str(),false);
+    check("self.tank.set_speed","{}",false);check("self.tank.set_speed",nullptr,false);
+    check("self.tank.adjust_speed",R"({"delta_percent":10})",true);
+    check("self.tank.adjust_speed",R"({"delta_percent":-10})",true);
+    for(const char* bad:{"{}","null",R"({"delta_percent":0})",R"({"delta_percent":20})",R"({"delta_percent":10.5})",R"({"delta_percent":"10"})",R"({"delta_percent":10,"delta_percent":10})"}) check("self.tank.adjust_speed",bad,false);
     const std::string step = R"({"direction":"left","move_ms":5000,"water_ms":5000,"bubbles_ms":0,"ignition_ms":0})";
     auto check_plan = [&](const std::string& text, bool valid) {
         cJSON* obj = cJSON_CreateObject();
@@ -30,6 +49,9 @@ int main() {
         check("self.tank.sequence", json, valid);
         cJSON_free(json); cJSON_Delete(obj);
     };
+    check_plan(R"([{"direction":"left","move_ms":1000,"water_ms":0,"bubbles_ms":0,"ignition_ms":0,"speed_percent":60}])",true);
+    for(const char* speed:{"0","101","1.5","true","50,\"speed_percent\":50"})
+        check_plan(std::string(R"([{"direction":"left","move_ms":1000,"water_ms":0,"bubbles_ms":0,"ignition_ms":0,"speed_percent":)")+speed+"}]",false);
     check_plan("[" + step + "]", true);
     std::string many = "[" + step;
     for (int i=1; i<16; ++i) many += "," + step;

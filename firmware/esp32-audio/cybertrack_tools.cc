@@ -105,7 +105,7 @@ void SafetyTask(void*) {
     }
 }
 std::string Reply(const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
-                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr) {
+                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100) {
     // Reserve before accepting an action.
     std::string result; result.reserve(3000);
     xSemaphoreTake(lock, portMAX_DELAY);
@@ -120,7 +120,9 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     } else if (web_session && !strcmp(operation, "release")) {
         sessions.Release(now, web_session);
     } else if (command) {
-        if (!strcmp(operation, "frenzy"))
+        if (!strcmp(operation, "set_speed"))
+            outcome = sessions.WebSpeed(now, web_session, command->sequence, command->window, command->speed_percent);
+        else if (!strcmp(operation, "frenzy"))
             outcome = sessions.FrenzyStart(now, web_session, command->sequence, command->window, command->frenzy_ms);
         else if (!strcmp(operation, "drive_start"))
             outcome = sessions.DriveStart(now, web_session, command->sequence, command->window, direction, water_duration);
@@ -138,6 +140,10 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
             outcome = sessions.WebAction(now, web_session, command->sequence, command->window,
                                          command->target, duration, water_duration, direction, command->bubbles_ms, command->ignition_ms);
 
+    } else if (!strcmp(operation, "set_speed")) {
+        outcome = sessions.VoiceSetSpeed(now, ticket, duration);
+    } else if (!strcmp(operation, "adjust_speed")) {
+        outcome = sessions.VoiceAdjustSpeed(now, ticket, duration);
     } else if (plan) {
         outcome = sessions.VoicePlan(now, ticket, *plan);
     } else if (!strcmp(operation, "frenzy")) {
@@ -149,9 +155,9 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     } else if (!strcmp(operation, "ignition")) {
         outcome = guard.Ignition(now, ticket, duration);
     } else if (!strcmp(operation, "move")) {
-        outcome = guard.Move(now, ticket, duration, direction);
+        outcome = guard.Move(now, ticket, duration, direction, speed_percent);
     } else if (!strcmp(operation, "move_and_water")) {
-        outcome = guard.MoveAndWater(now, ticket, duration, water_duration, direction);
+        outcome = guard.MoveAndWater(now, ticket, duration, water_duration, direction, speed_percent);
     }
     // Apply before replying. Stop/BOOT/link and this path share one mutex.
     now = Now(); TickLocked(now);
@@ -161,7 +167,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         (!plan->steps[0].bubbles_ms || guard.Bubbling()) && (!plan->steps[0].ignition_ms || guard.Igniting());
     const bool requested_active = plan ? plan_started : !strcmp(operation, "frenzy") ? sessions.frenzy_until && guard.Moving() && guard.Watering() && guard.Bubbling() :
         !strcmp(operation, "drive_start") ? guard.Moving() && (!water_duration || guard.Watering()) :
-        (!strcmp(operation, "move") || !strcmp(operation, "drive_renew")) ? guard.Moving() :
+        (!strcmp(operation, "move") || !strcmp(operation, "set_speed") || !strcmp(operation, "adjust_speed") || !strcmp(operation, "drive_renew")) ? guard.Moving() :
         (!strcmp(operation, "water") || !strcmp(operation, "water_start") || !strcmp(operation, "water_renew")) ? guard.Watering() :
         (!strcmp(operation, "bubbles") || !strcmp(operation, "bubbles_start") || !strcmp(operation, "bubbles_renew")) ? guard.Bubbling() :
         !strcmp(operation, "ignition") ? guard.Igniting() : guard.Moving() && guard.Watering();
@@ -201,6 +207,8 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     const unsigned frenzy_duration = sessions.frenzy_duration_ms;
     const unsigned frenzy_remaining = sessions.frenzy_until > now ? sessions.frenzy_until - now : 0;
     const auto water_hold = sessions.water_hold, bubbles_hold = sessions.bubbles_hold;
+    const int web_speed = sessions.web_speed_percent;
+    const int move_speed = moving ? (left < 0 ? -left : left) : 0;
     const bool plan_active = sessions.plan_active;
     const unsigned plan_step = sessions.plan_step, plan_count = sessions.plan_count;
     const char* plan_result = sessions.plan_result;
@@ -213,9 +221,10 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         "{\"device_id\":\"%s\",\"boot_id\":\"%s\",\"request_sequence\":%u,\"operation\":\"%s\","
         "\"result\":\"%s\",\"state\":\"%s\",\"fault\":\"%s\",\"uptime_ms\":%s,"
         "\"logical_outputs\":{\"left\":%d,\"right\":%d,\"water\":%s,\"bubbles\":%s,\"ignition\":%s},"
-        "\"capabilities\":{\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
+        "\"capabilities\":{\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
         "\"local_authorization_required\":false,\"starts_this_boot\":%u,\"max_duration_ms\":30000,\"last_duration_ms\":%u,\"remaining_ms\":%u,"
         "\"move_last_duration_ms\":%u,\"water_last_duration_ms\":%u,\"move_remaining_ms\":%u,\"water_remaining_ms\":%u,"
+        "\"web_speed_percent\":%d,\"move_speed_percent\":%d,\"speed_min_percent\":60,\"speed_max_percent\":100,"
         "\"move_max_duration_ms\":2147483647,\"move_direction\":\"%s\",\"log_events_dropped\":%u,"
         "\"control_owner\":\"%s\",\"window\":%u,\"move_cooldown_ms\":%u,\"water_cooldown_ms\":%u,\"boot_held\":%s,"
         "\"move_source\":\"%s\",\"water_source\":\"%s\",\"drive_hold_id\":%u,\"drive_renewal\":%u,\"drive_lease_ms\":600,"
@@ -229,7 +238,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         device_id.c_str(), boot_id.c_str(), seq, operation, outcome, state, reason, uptime.c_str(),
         left, right, watering ? "true" : "false", bubbling ? "true" : "false", igniting ? "true" : "false",
         starts, last_duration, std::max({move_remaining, water_remaining, bubbles_remaining, ignition_remaining}),
-        move_duration, water_ms, move_remaining, water_remaining, move_direction, lost,
+        move_duration, water_ms, move_remaining, water_remaining, web_speed, move_speed, move_direction, lost,
         owner, window, move_cooldown, water_cooldown, held ? "true" : "false", move_source, water_source, drive_id, drive_renewal,
         static_cast<unsigned>(water_hold.id), static_cast<unsigned>(water_hold.renewal),
         static_cast<unsigned>(bubbles_hold.id), static_cast<unsigned>(bubbles_hold.renewal),
@@ -244,7 +253,8 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
 int CyberTrackActionClaim(int rpc_id, const char* operation) {
     xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
-    const auto target = !strcmp(operation, "self.tank.sequence") ? AudioActionGuard::PlanMode :
+    const auto target = (!strcmp(operation, "self.tank.adjust_speed") || !strcmp(operation, "self.tank.set_speed")) ? AudioActionGuard::SpeedMode :
+        !strcmp(operation, "self.tank.sequence") ? AudioActionGuard::PlanMode :
         !strcmp(operation, "self.tank.frenzy") ? AudioActionGuard::FrenzyMode :
         !strcmp(operation, "self.tank.move") ? AudioActionGuard::MoveOnly :
         !strcmp(operation, "self.tank.water") ? AudioActionGuard::WaterOnly :
@@ -345,27 +355,39 @@ void InitializeCyberTrackTools() {
             return Reply("frenzy", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
     server.AddTool("self.tank.move",
-        "仅在明确要求行走或转向时调用。direction只能为forward前进、backward后退、left向左原地转、right向右原地转。duration_ms按指定时长换算为整数毫秒，范围1到2147483647（协议整数范围），没有三秒业务上限；未说时长默认1000。不支持角度或距离精确控制。固定约90% PWM占空比，可与喷水同时执行、分别计时；同路运行中不续时或换向，行走结束后至少等待200毫秒。不得续时、自动重试或排队补做。BOOT或停止工具同时停止所有动作。回执不是实际移动反馈。",
-        PropertyList({Property("direction", kPropertyTypeString), Property("duration_ms", kPropertyTypeInteger, 1, 2147483647)}),
+        "仅在明确要求行走或转向时调用。direction只能为forward前进、backward后退、left向左原地转、right向右原地转。duration_ms按指定时长换算为整数毫秒，范围1到2147483647（协议整数范围），没有三秒业务上限；未说时长默认1000。全速前进/后退/左转/右转均传speed_percent=100及对应direction。不支持角度或距离精确控制。speed_percent为可选整数60到100，默认100；速度60表示60%，百分比控制PWM而非实测轮速。可与喷水同时执行、分别计时；同路运行中不续时或换向，行走结束后至少等待200毫秒。不得续时、自动重试或排队补做。BOOT或停止工具同时停止所有动作。回执不是实际移动反馈。",
+        PropertyList({Property("direction", kPropertyTypeString), Property("duration_ms", kPropertyTypeInteger, 1, 2147483647), Property("speed_percent", kPropertyTypeInteger, 100, 60, 100)}),
         [](const PropertyList& p) -> ReturnValue {
             return Reply("move", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>(),
-                         p["direction"].value<std::string>().c_str());
+                         p["direction"].value<std::string>().c_str(), 0, 0, nullptr, nullptr, p["speed_percent"].value<int>());
         });
     server.AddTool("self.tank.move_and_water",
-        "用户明确要求边走边喷或同时转向喷水时调用，一次同时启动两路。direction为forward/backward/left/right，move_duration_ms为1到2147483647，water_duration_ms为1到30000。只给一个时长且要求同时或在行走时喷水，两路共享该时长；都未说默认各1000。喷水仍最多30000，不分段；行走按指定时长执行。两路必须均空闲且冷却结束，否则整项拒绝不部分启动。分别计时，到期只停止对应动作，BOOT或停止关闭两路。不保证精确距离、角度或实际动作反馈。",
+        "用户明确要求边走边喷或同时转向喷水时调用，一次同时启动两路。direction为forward/backward/left/right，move_duration_ms为1到2147483647，water_duration_ms为1到30000。可选speed_percent为60到100整数，默认100，只控制行走PWM，速度60指60%。只给一个时长且要求同时或在行走时喷水，两路共享该时长；都未说默认各1000。喷水仍最多30000，不分段；行走按指定时长执行。两路必须均空闲且冷却结束，否则整项拒绝不部分启动。分别计时，到期只停止对应动作，BOOT或停止关闭两路。不保证精确距离、角度或实际动作反馈。",
         PropertyList({Property("direction", kPropertyTypeString), Property("move_duration_ms", kPropertyTypeInteger, 1, 2147483647),
-                      Property("water_duration_ms", kPropertyTypeInteger, 1, 30000)}),
+                      Property("water_duration_ms", kPropertyTypeInteger, 1, 30000), Property("speed_percent", kPropertyTypeInteger, 100, 60, 100)}),
         [](const PropertyList& p) -> ReturnValue {
             return Reply("move_and_water", p["_ct_ticket"].value<int>(), p["move_duration_ms"].value<int>(),
-                         p["direction"].value<std::string>().c_str(), p["water_duration_ms"].value<int>());
+                         p["direction"].value<std::string>().c_str(), p["water_duration_ms"].value<int>(), 0, nullptr, nullptr, p["speed_percent"].value<int>());
+        });
+    server.AddTool("self.tank.set_speed",
+        "只调整正在移动的机器人到指定目标速度。用户说减速到60%、加速到80%、速度调到70、调到全速时调用，唯一参数speed_percent为60到100整数，全速=100。有明确目标数值时用本工具，不用adjust_speed多次拼接，不调用move重新启动。不改变方向、截止时间、长按租期或其他动作，序列仅改当前步骤；网页移动同步滑块。停止或步骤等待时拒绝，不启动、不重试。accepted后静默；低于60或高于100的请求先说明范围并让用户选择，不擅自执行其他速度。",
+        PropertyList({Property("speed_percent", kPropertyTypeInteger, 60, 100)}),
+        [](const PropertyList& p) -> ReturnValue {
+            return Reply("set_speed", p["_ct_ticket"].value<int>(), p["speed_percent"].value<int>());
+        });
+    server.AddTool("self.tank.adjust_speed",
+        "仅在用户明确要求正在移动的机器人加速/加快速度/快一点或减速/减慢速度/慢一点时调用。delta_percent只能为10或-10，分别增加或减少10个百分点，固件将结果限制在60到100。每句一次，不循环调用。只调整当前行走或转向（含网页移动、序列当前步骤、狂暴模式），不启动移动、不改方向、不续时，也不改序列后续步骤；停止或等待步骤时拒绝，不能改用move启动或重试。accepted后静默，失败简短说明；move_speed_percent为设置值，不是实际轮速。",
+        PropertyList({Property("delta_percent", kPropertyTypeInteger, -10, 10)}),
+        [](const PropertyList& p) -> ReturnValue {
+            return Reply("adjust_speed", p["_ct_ticket"].value<int>(), p["delta_percent"].value<int>());
         });
     server.AddTool("self.tank.sequence",
-        "明确请求多个先后步骤或多通道同时执行时，一次提交整个序列，不能拆成连续单项调用。steps_json是JSON数组的字符串，1到16步，每步必须包含direction、move_ms、water_ms、bubbles_ms、ignition_ms五字段。direction为forward/backward/left/right；不行走用none且move_ms=0。各时长为整数毫秒，0表示不用该通道，每步至少一通道；move_ms最多2147483647，喷水/泡泡最多30000，点火最多5000。一步内各通道同时启动、独立停止；全部结束并满足冷却后下一步，无指定时长默认1000；同时或在某动作时做另一动作且只给一个时长则共享，分别遵守效果上限。不用额外步骤绕过效果上限。整单验证且四路均空闲才启动，运行中保留四路；失败不重试，停止/BOOT/断线/故障或网页抢占取消整单，不能补做。accepted仅表示序列已开始，sequence_result查询完成或取消。",
+        "明确请求多个先后步骤或多通道同时执行时，一次提交整个序列，不能拆成连续单项调用。steps_json是JSON数组的字符串，1到16步，每步必须包含direction、move_ms、water_ms、bubbles_ms、ignition_ms五字段，可选speed_percent为60到100整数、默认100；每步独立指定行走PWM，全句指定速度时应用到各行走步骤。direction为forward/backward/left/right；不行走用none且move_ms=0。各时长为整数毫秒，0表示不用该通道，每步至少一通道；move_ms最多2147483647，喷水/泡泡最多30000，点火最多5000。一步内各通道同时启动、独立停止；全部结束并满足冷却后下一步，无指定时长默认1000；同时或在某动作时做另一动作且只给一个时长则共享，分别遵守效果上限。不用额外步骤绕过效果上限。整单验证且四路均空闲才启动，运行中保留四路；失败不重试，停止/BOOT/断线/故障或网页抢占取消整单，不能补做。accepted仅表示序列已开始，sequence_result查询完成或取消。",
         PropertyList({Property("steps_json", kPropertyTypeString)}),
         [](const PropertyList& p) -> ReturnValue {
             ActionPlan plan;
             if (!ParseActionPlan(p["steps_json"].value<std::string>(), plan)) return std::string("{\"result\":\"invalid_plan\"}");
             return Reply("sequence", p["_ct_ticket"].value<int>(), 0, nullptr, 0, 0, nullptr, &plan);
         });
-    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000");
+    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000");
 }

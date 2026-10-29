@@ -321,3 +321,43 @@ console.log('PASS: live action notices finish on device state, retain concurrent
  assert.equal(h.ids.message.textContent,'正在喷水。');
 }
 console.log('PASS: sequence running/waiting/cancelled status never misreports inter-step waiting as completion');
+
+{ // A slider input during a hold changes only speed, not hold ownership or duration.
+ const h=harness();await h.connect();await h.hold();
+ h.ctx.render(h.status(4,{capabilities:{speed_control:true},web_speed_percent:100,drive_hold_id:1,drive_renewal:1,move_remaining_ms:500,move_source:'web'}));
+ h.ids['move-speed'].value='60';const run=h.ids['move-speed'].events.input();await flush();
+ h.respond(h.take('/api/state'),h.status(5,{capabilities:{speed_control:true},web_speed_percent:100,drive_hold_id:1,move_remaining_ms:450}));await flush();
+ const c=h.take('/api/action');assert.deepEqual(JSON.parse(c.options.body),{operation:'set_speed',sequence:2,window:5,speed_percent:60});
+ h.respond(c,h.status(6,{capabilities:{speed_control:true},web_speed_percent:60,move_speed_percent:60,move_direction:'forward',drive_hold_id:1,move_remaining_ms:400}));await run;
+ assert.equal(h.ids['speed-value'].textContent,'60%');assert.equal(h.ids.direction.textContent,'行走 · 前进 60%');
+ assert.equal(h.sent.filter(x=>x.path==='/api/action').length,2);assert(!h.sent.some(x=>x.path==='/api/stop'));
+}
+{ // Rapid input sends only the latest desired value after each in-flight receipt.
+ const h=harness();await h.connect();h.ctx.render(h.status(2,{capabilities:{speed_control:true},web_speed_percent:100}));
+ h.ids['move-speed'].value='80';const run=h.ids['move-speed'].events.input();await flush();
+ h.respond(h.take('/api/state'),h.status(3,{capabilities:{speed_control:true}}));await flush();const first=h.take('/api/action');
+ h.ids['move-speed'].value='60';await h.ids['move-speed'].events.input();h.ids['move-speed'].value='70';await h.ids['move-speed'].events.input();
+ h.respond(first,h.status(4,{capabilities:{speed_control:true},web_speed_percent:80}));await flush();
+ assert.equal(h.ids['speed-value'].textContent,'70%');
+ h.respond(h.take('/api/state'),h.status(5,{capabilities:{speed_control:true},web_speed_percent:80}));await flush();
+ const last=h.take('/api/action');assert.equal(JSON.parse(last.options.body).speed_percent,70);
+ h.respond(last,h.status(6,{capabilities:{speed_control:true},web_speed_percent:70}));await run;
+ assert.equal(h.sent.filter(x=>x.path==='/api/action').length,2);assert.equal(h.ids['speed-value'].textContent,'70%');
+}
+{ // Stop invalidates an in-flight freshness check; no delayed speed update.
+ const h=harness();await h.connect();h.ctx.render(h.status(2,{capabilities:{speed_control:true},web_speed_percent:100}));
+ h.ids['move-speed'].value='60';const run=h.ids['move-speed'].events.input();await flush();const fresh=h.take('/api/state');
+ const stop=h.ids.stop.events.click();h.respond(h.take('/api/stop'),h.status(4,{capabilities:{speed_control:true},web_speed_percent:100}));await stop;
+ h.respond(fresh,h.status(3,{capabilities:{speed_control:true}}));await run;
+ assert(!h.sent.some(x=>x.path==='/api/action'));assert.equal(h.ids['speed-value'].textContent,'100%');
+}
+{
+ const h=harness();await h.connect();assert(h.ids['move-speed'].disabled);
+ h.ids['move-speed'].value='60';await h.ids['move-speed'].events.input();assert(!h.sent.some(x=>x.path==='/api/action'));
+}
+console.log('PASS: live speed slider, latest-value coalescing, source status, capability gate and stop races without action replay');
+
+{ // Even synthetic stale clients cannot submit a below-floor setting.
+ const h=harness();await h.connect();h.ctx.render(h.status(2,{capabilities:{speed_control:true},web_speed_percent:100}));
+ h.ids['move-speed'].value='59';await h.ids['move-speed'].events.input();assert(!h.sent.some(x=>x.path==='/api/action'));
+}

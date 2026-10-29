@@ -46,7 +46,7 @@ esp_err_t ledc_channel_config(const ledc_channel_config_t* c) {
 esp_err_t ledc_stop(int, int ch, uint32_t) { if(fail()) return -1; ++motor_writes; pwm[ch]=0; return 0; }
 esp_err_t ledc_set_duty(int, int ch, uint32_t d) {
     if(fail()) return -1;
-    assert(!pwm[2] && !pwm[3] && d==230); ++motor_writes; duty[ch]=d; return 0;
+    assert(d>=3 && d<=255); ++motor_writes; duty[ch]=d; return 0;
 }
 esp_err_t ledc_update_duty(int, int ch) {
     if(fail()) return -1;
@@ -63,11 +63,11 @@ int main() {
     const unsigned init_calls=calls;
     for(unsigned at=1;at<=init_calls;++at) {
         reset();fail_at=at;AudioActionOutputs x;assert(!x.Init()&&x.fault);off();
-        assert(!x.Apply(true,90,90));off();
+        assert(!x.Apply(true,100,100));off();
     }
-    const State base_states[]={{false,90,0},{false,0,90},{false,-90,0},{false,0,-90},
-        {false,0,0},{true,0,0},{false,90,90},{true,90,90},
-        {false,-90,-90},{true,-90,-90},{false,-90,90},{true,-90,90},{false,90,-90},{true,90,-90}};
+    const State base_states[]={{false,100,0},{false,0,100},{false,-100,0},{false,0,-100},
+        {false,0,0},{true,0,0},{false,100,100},{true,100,100},
+        {false,-100,-100},{true,-100,-100},{false,-100,100},{true,-100,100},{false,100,-100},{true,100,-100}};
     std::vector<State> states;
     for(auto state:base_states) for(bool b:{false,true}) for(bool i:{false,true}) {
         state.bubbles=b; state.ignition=i; states.push_back(state);
@@ -79,7 +79,7 @@ int main() {
         const unsigned transition_calls=calls;
         assert(levels[18]==to.water && levels[17]==to.bubbles && levels[21]==to.ignition);
         // Assembled chassis: A drives right, B drives left; positive stays forward.
-        assert(pwm[2]==(to.right?230:0)&&pwm[3]==(to.left?230:0));
+        assert(pwm[2]==(to.right?255:0)&&pwm[3]==(to.left?255:0));
         assert(levels[9]==(to.right>0)&&levels[10]==(to.right<0));
         assert(levels[12]==(to.left>0)&&levels[13]==(to.left<0));
         if(from.left==to.left&&from.right==to.right) assert(motor_writes==0);
@@ -90,18 +90,34 @@ int main() {
             reset();AudioActionOutputs y;assert(y.Init());assert(y.Apply(from.water,from.left,from.right,from.bubbles,from.ignition));
             calls=0;fail_at=at;
             assert(!y.Apply(to.water,to.left,to.right,to.bubbles,to.ignition)&&y.fault);off();
-            assert(!y.Apply(true,90,90));off();
+            assert(!y.Apply(true,100,100));off();
         }
     }
-    reset();AudioActionOutputs x;assert(x.Init());assert(x.Apply(true,90,90));
-    assert(!x.Apply(true,30,90)&&x.fault);off();
+    reset();AudioActionOutputs x;assert(x.Init());assert(x.Apply(true,100,100));
+    assert(!x.Apply(true,101,100)&&x.fault);off();
+    for(int invalid:{1,50,59,-1,-50,-59}) {
+        reset();AudioActionOutputs y;assert(y.Init());assert(!y.Apply(false,invalid,100));assert(y.fault);off();
+    }
+    for (int percent : {60,70,80,100}) {
+        reset(); AudioActionOutputs y; assert(y.Init()); assert(y.Apply(true,-100,100));
+        motor_writes=water_writes=0; calls=0;
+        assert(y.Apply(true,-percent,percent));
+        assert(pwm[2]==static_cast<int>(AudioActionOutputs::SpeedDuty(percent)) && pwm[3]==pwm[2]);
+        assert(water_writes==0 && levels[18]==1);
+        assert(motor_writes==(percent==100?0u:4u)); // No enable stop or direction GPIO writes.
+        assert(levels[9]==1&&levels[10]==0&&levels[12]==0&&levels[13]==1);
+    }
+    for (unsigned at=1;at<=4;++at) {
+        reset(); AudioActionOutputs y;assert(y.Init());assert(y.Apply(true,100,100));
+        calls=0;fail_at=at;assert(!y.Apply(true,60,60));assert(y.fault);off();
+    }
     { // Read the pad independently of commanded output; observation never retries output.
         reset(); AudioActionOutputs y; assert(y.Init()); assert(y.WaterPadLevel()==0);
-        assert(y.Apply(true,-90,90));
+        assert(y.Apply(true,-100,100));
         assert(y.water_pad.high==1 && y.water_pad.motor_high==1 && y.water_pad.first==1);
         auto writes=water_writes;
         forced_water_pad=0;
-        assert(y.Apply(true,-90,90));
+        assert(y.Apply(true,-100,100));
         assert(levels[18]==1 && !y.fault && water_writes==writes);
         assert(y.water_pad.low==1 && y.water_pad.motor_low==1 && y.water_pad.last==0);
         forced_water_pad=-1;
@@ -115,7 +131,7 @@ int main() {
         assert(y.water_pad.high==1 && y.water_pad.low==0 && y.water_pad.motor_high==0 && y.water_pad.off==-1);
         assert(saved.low==1); // A queued snapshot survives the next action.
         y.water_pad.high=UINT_MAX; y.water_pad.motor_high=UINT_MAX;
-        assert(y.Apply(true,-90,90));
+        assert(y.Apply(true,-100,100));
         assert(y.water_pad.high==UINT_MAX && y.water_pad.motor_high==UINT_MAX);
         calls=0;fail_at=1;assert(!y.Apply(false,0,0));off();
         assert(y.water_pad.off==0 && y.fault);
@@ -146,8 +162,8 @@ int main() {
                 const bool bubbles=(mask&4)&&now>=5200&&now<7200;
                 const bool ignition=(mask&8)&&now>=5200&&now<5700;
                 assert(levels[18]==water && levels[17]==bubbles && levels[21]==ignition);
-                assert(pwm[2]==((now<5000||move)?230:0));
-                assert(pwm[3]==((now<5000||move)?230:0));
+                assert(pwm[2]==((now<5000||move)?255:0));
+                assert(pwm[3]==((now<5000||move)?255:0));
                 if(move) {
                     assert(levels[9]==(right>0)&&levels[10]==(right<0));
                     assert(levels[12]==(left>0)&&levels[13]==(left<0));
