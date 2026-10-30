@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-30T17:46:42.570Z",
+  "scope": "installed MCP protocol and live read-only service; no native desktop card",
+  "upstream_revision": "13698aeebce8e26aa2e7f371b7170c854dba5f4d",
+  "plugin_version": "0.8.0",
+  "installed_bundle_matches_locked_build": true,
+  "bundle_sha256": {
+    ".codex-plugin/plugin.json": "cf21c4ae2034a3563247c4af6c832572fdd9e32fc8d87bdfcd55adb594a8b3e7",
+    ".mcp.json": "a2695882682e0f647d24f3d9348f5fa19d6c019f3205149f68a8ffc4ba70144d",
+    "dist/mcp-server.mjs": "f8bb4a58cc220baa2de0a734a86136c2a294b240ed804462679a35331a2313fe",
+    "dist/model.html": "0e31532a0dee8f2d63a9cf1e6d885e67be59f5254abb566f6b95c4c585f427f0"
+  },
+  "tools": [
+    "acknowledge_comment",
+    "apply_center_hole",
+    "create_mounting_plate",
+    "create_spacer",
+    "export_step",
+    "get_state",
+    "open_model",
+    "save_comment",
+    "save_step",
+    "sync_cad_snapshot",
+    "undo_model",
+    "update_plate_hole_spacing",
+    "update_spacer_parameters"
+  ],
+  "cybertrack_data_directory_verified": true,
+  "cli_thread_target": null,
+  "service_revision": "r1",
+  "part_count": 0,
+  "comment_count": 0,
+  "write_tools_called": 0,
+  "native_message_delivery": "not_run",
+  "freecad_native_tool_edit": "not_run",
+  "same_card_update": "not_run",
+  "local_date": "2026-10-31",
+  "host_installation": {
+    "plugin_id": "cad-comment-lab@cad-comment-local",
+    "installed": true,
+    "enabled": true,
+    "marketplace_source": "locked local checkout",
+    "persisted_startup_service": false
+  }
+}
