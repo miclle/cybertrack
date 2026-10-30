@@ -12,7 +12,7 @@ CyberTrack 采用 ESP32-S3 面包板与灵矽语音交互，支持手机局域�
 
 https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
-[下载原始视频](artifact/cybertrack-prototype-demo-6min.mp4) · [制作过程与全部素材](artifact/README.md)
+[B 站播放](https://www.bilibili.com/video/BV1rLxM6sEF6/) · [下载原始视频](artifact/cybertrack-prototype-demo-6min.mp4) · [制作过程与全部素材](artifact/README.md)
 
 影像记录了制作与演示时的样机状态；具体固件、供电配置与工程验收以对应验证记录为准。
 
