@@ -43,6 +43,14 @@ class VoiceEvaluatorTests(unittest.TestCase):
         right[0]["arguments"]["duration_ms"] = True
         self.assertNotEqual(module.canonical(left), module.canonical(right))
 
+    def test_draft_contract_never_allows_direct_action(self):
+        corpus = json.loads((ROOT / "docs/validation/compose-cases.json").read_text())
+        trace = {"kind": "captured_tool_calls", "model": "synthetic-test", "role_sha256": "synthetic", "run_id": "unit",
+                 "results": [{"id": case["id"], "calls": case["expected_calls"]} for case in corpus["cases"]]}
+        self.assertTrue(module.evaluate(corpus, trace)["tool_call_target_met"])
+        trace["results"][4]["calls"] = [{"name": "self.tank.move", "arguments": {"direction": "forward", "duration_ms": 1}}]
+        self.assertIn("C005", module.evaluate(corpus, trace)["forbidden_call_cases"])
+
     def test_twenty_spoken_cases_are_real_corpus_references(self):
         spoken = json.loads((ROOT / "docs/validation/spoken-cases.json").read_text())
         self.assertEqual(len(set(spoken["case_ids"])), 20)

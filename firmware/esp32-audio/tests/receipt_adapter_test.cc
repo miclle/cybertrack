@@ -64,5 +64,24 @@ int main() {
     receipt = cJSON_GetObjectItemCaseSensitive(stopped,"recent_command");
     assert(field(receipt,"operation")=="stop" && field(receipt,"source")=="voice");
     cJSON_Delete(stopped);
+    clock_ms=1500;
+    Reply("get_status",0,0,nullptr,0,session);
+    command.operation="show_edit";command.sequence=3;command.window=sessions.window;
+    command.draft.plan.count=1;command.draft.plan.steps[0]={"none",0,0,200,0};
+    const auto starts=guard.Starts();
+    auto saved=cJSON_Parse(Reply("show_edit",0,0,nullptr,0,session,&command).c_str());
+    assert(saved && field(saved,"result")=="draft_saved" && guard.Starts()==starts);
+    auto proposal=cJSON_GetObjectItemCaseSensitive(saved,"show_draft");
+    assert(cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(proposal,"active")));
+    auto revision=cJSON_GetObjectItemCaseSensitive(proposal,"revision")->valueint;
+    assert(cJSON_GetArraySize(cJSON_GetObjectItemCaseSensitive(proposal,"steps"))==1);
+    cJSON_Delete(saved);
+    Reply("get_status",0,0,nullptr,0,session);
+    command.operation="show_confirm";command.sequence=4;command.window=sessions.window;command.draft.revision=revision;
+    auto confirmed=cJSON_Parse(Reply("show_confirm",0,0,nullptr,0,session,&command).c_str());
+    assert(confirmed && field(confirmed,"result")=="accepted" && guard.Bubbling());
+    assert(field(confirmed,"sequence_source")=="web");
+    assert(!cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(cJSON_GetObjectItemCaseSensitive(confirmed,"show_draft"),"active")));
+    cJSON_Delete(confirmed);Reply("stop");
     std::puts("PASS: actual Reply JSON acceptance/rejection/query/stop persistence with real guards and no hardware");
 }
