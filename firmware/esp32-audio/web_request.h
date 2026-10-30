@@ -10,6 +10,7 @@ struct WebCommand {
     uint32_t hold_id = 0, renewal = 0;
     int frenzy_ms = 0;
     int speed_percent = 100;
+    bool enabled = false;
     int move_ms = 0, water_ms = 0, bubbles_ms = 0, ignition_ms = 0;
     const char* operation = nullptr;
     const char* direction = nullptr;
@@ -56,6 +57,15 @@ inline bool ParseWebCommand(const cJSON* root, WebCommand& cmd) {
         return true;
     }
     if (!WebInteger(seq, 1, UINT32_MAX) || !WebInteger(window, 1, UINT32_MAX)) return false;
+    if (!strcmp(op->valuestring, "set_auto_avoidance")) {
+        const auto enabled = get("enabled");
+        if (cJSON_GetArraySize(root) != 4 || !cJSON_IsBool(enabled)) return false;
+        cmd.operation = "set_auto_avoidance";
+        cmd.sequence = static_cast<uint32_t>(seq->valuedouble);
+        cmd.window = static_cast<uint32_t>(window->valuedouble);
+        cmd.enabled = cJSON_IsTrue(enabled);
+        return true;
+    }
     if (!strcmp(op->valuestring, "set_speed")) {
         const auto speed = get("speed_percent");
         if (cJSON_GetArraySize(root) != 4 || !WebInteger(speed, 60, 100)) return false;

@@ -7,7 +7,8 @@ public:
     enum Alert { None, Beep, Stop };
     bool blocked = false;
     bool beeping = false;
-    Alert Update(const ultrasonic::Reading& r, uint64_t now, bool forward) {
+    Alert Update(const ultrasonic::Reading& r, uint64_t now, bool forward, bool auto_stop) {
+        if (!auto_stop) blocked = false;
         beeping = false;
         if (!forward) beep_started_ = false;
         if (!r.sampled || r.error != ultrasonic::Error::None || now < r.sampled_at_ms ||
@@ -16,7 +17,7 @@ public:
             return None; // Missing data never clears an existing movement lock.
         }
         if (r.distance_mm >= 200) blocked = false;
-        if (r.distance_mm < 150) {
+        if (auto_stop && r.distance_mm < 150) {
             const bool newly_blocked = !blocked;
             blocked = true;
             beep_started_ = false;

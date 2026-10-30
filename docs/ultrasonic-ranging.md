@@ -1,5 +1,17 @@
 # 头部超声波测距与前进保护
 
+## ct41：自动避障开关（已部署）
+
+网页速度滑块下方新增“自动避障”。每次开机默认关闭，不写入 NVS；浏览器刷新、释放、重连及语音／Wi-Fi 断线不会重置本次开机的设置。停止、BOOT、动作到期和断线停止仍生效。
+
+- 关闭：距离读数不停止或锁定前进；已有距离锁定清除，已停止动作、旧长按和取消的序列不恢复。测距显示和查询保持；前进时小于 40 cm 每 400 ms 一声，40–50 cm 每 800 ms 一声，不播放停车三连音。
+- 开启：沿用 ct36 阈值，严格小于 150 mm 停止并锁定前进，至少 200 mm 解锁；无效／过期样本不解锁。开启时已有新鲜近距离读数，会在同一请求回执前执行保护并撤销前进输出。后退／转向及独立效果保持原规则。
+- 状态由设备端统一维护，网页长按、语音 `move`／`move_and_water` 及 `sequence` 共用；不存在独立语音开关。语音仅查询或遵循设置，修改开关在网页完成。
+- HTTP `POST /api/action` 使用 `{"operation":"set_auto_avoidance","sequence":1,"window":1,"enabled":true}`，字段恰好四个，`enabled` 必须为 JSON 布尔值；沿用会话认证、一次性序号与状态窗口。回执 `proximity.auto_avoidance_enabled` 表示当前设置，`forward_blocked` 表示实际锁定。`capabilities.forward_protection=true` 表示支持此能力；历史 `capabilities.auto_avoidance=false` 仍表示不支持自动绕行，不是开关值。
+
+主机控制、HTTP／MCP 和网页回归见[ct41 验证](../firmware/esp32-audio/verification-ct41.json)。已仅应用部署、平台角色保存回读一致并重启联网；网页和 HTTP 开关两态验证、18 次有效测距／零驱动失败／零执行器启动通过。两组 Wi-Fi 和用户配置保持，启动时仅 WebSocket 会话令牌刷新，见[部署记录](../firmware/esp32-audio/startup-ct41.json)。真人语音及带载停车待验证。下方为版本沿革。
+
+
 ## ct36：15 cm 停止阈值
 
 用户将最短停止距离由 30 cm 调整为 15 cm。有效距离严格小于 150 mm 时立即停止并锁定前进，正在前进则响三声；恰好 15 cm 不新触发停止。解锁阈值同步为至少 200 mm（20 cm），保留 5 cm 回差，需新指令才可继续前进。
