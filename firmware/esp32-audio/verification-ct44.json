@@ -1,0 +1,71 @@
+{
+  "version": "2.0.3-ct44",
+  "date": "2026-10-31",
+  "scope": "stage 4a: versioned show draft and HTTP/MCP contract; editor and templates pending",
+  "checks": {
+    "host_control_asan_ubsan": true,
+    "actual_mcp_http_reply_asan_ubsan": true,
+    "web_script_regression": true,
+    "audio_overlay_regression": true,
+    "voice_scorer_and_compose_corpus_tests": true,
+    "esp_idf_full_build": true,
+    "prepared_overlay_matches_sources": true
+  },
+  "cases": [
+    "draft save and edits never start outputs",
+    "single-step replacement preserves other steps",
+    "stale revision and duplicate confirmation rejected",
+    "matching confirmation consumed even when busy",
+    "expiry, clock reversal, BOOT, stop, output fault, shutdown and source disconnect invalidate drafts",
+    "web-confirmed sequence ownership persists through voice disconnection",
+    "web release or lease loss cancels outputs and future steps without replay",
+    "remaining bubble lane retains web owner after forward protection",
+    "16-step escaped JSON accepted; oversized HTTP rejected",
+    "actual Reply snapshots draft and confirms once; model tests not run"
+  ],
+  "commands": [
+    "python3 scripts/verify_improvements.py --source build/xiaozhi-ct44-src",
+    "node firmware/esp32-audio/tests/web_ui_test.mjs",
+    "idf.py -C build/xiaozhi-ct44-src -B build/firmware-ct44 build"
+  ],
+  "host_report": "output/improvements/checks/20261030T171017052589Z/report.json",
+  "artifact": {
+    "path": "build/firmware-ct44/xiaozhi.bin",
+    "bytes": 2674768,
+    "sha256": "2c463231a4ae2d62b2ecbd220c7c35d4de59afbbc6946c90895ac7748ab47f51"
+  },
+  "source_sha256": {
+    "apply_overlay.py": "76ac43d3b0b8ce6493835c62f0e39afce4e4830bc6a75e752d2f861412ce4b1a",
+    "action_guard.h": "9d9d7a4ce46fe8bf19cd320322747eaf900b2350874049b66fc6256830094b6a",
+    "control_sessions.h": "4c217b7664bf5d6e6e920e7873b0e21c62d73d959da91ceac8920419d600f304",
+    "show_draft.h": "680d92673719abcdaa870814f8a0b7063565822bcda361c24e05fc1c82861676",
+    "show_command_json.h": "0849751dc8a850fd54aeae42380bd4eecb0cabf02c1c32104497c3cb8f7538e7",
+    "web_request.h": "c93a5cde3f49ba514b0c5ddefb54f912696bef83f7ff871e45f7c6645fb0d09a",
+    "web_server.cc": "23fc6f9d4ead8307f750f73f37c325ae3ddf89ac2adf0da7b312804550e5aa45",
+    "cybertrack_tools.cc": "385f7ebd3ee09502c1179bbd91676992f6533148bab7221820254d72ebb352da",
+    "recent_command.h": "acec8f60df1d500a48163e9f927371c482a9aa2fd667c99d89ddf9a8a52e86d8",
+    "role-prompt.txt": "9771eb9f4c3e3c2c509d23ab157e391e20cd44eba40e90edac4368a859d65de8",
+    "web/index.html": "639b31def43f17f7a10952aec017537d13b0c1a1143d57266e0a404602477231",
+    "tests/show_test.cc": "ecbb1a4ff8d57f57cb068fafd9c009eb6bf23ea5d48862954d8c475cfa656d0a",
+    "tests/receipt_adapter_test.cc": "ce5673ddf9c27fe11f43bc7716be99705d8d1bfd24ee31be2358c9212af0a351",
+    "tests/mcp_arguments_test.cc": "98f3591c67f7bc015522852d620ff2972310d535a68d30a3cc18c544199abdf1",
+    "tests/web_request_test.cc": "d84843d88d516144117c48d5d4f294b47b76060e6c8530858d0047bfddf4159a",
+    "tests/web_server_test.cc": "8863f2c53f03af166bf12b6d037e897edcc820d3aa380c340e7a557bb2355c63"
+  },
+  "role": {
+    "characters": 5994,
+    "sha256": "9771eb9f4c3e3c2c509d23ab157e391e20cd44eba40e90edac4368a859d65de8",
+    "platform_synced": false
+  },
+  "deployment": {
+    "flashed": false,
+    "latest_recorded_version": "2.0.3-ct42"
+  },
+  "limitations": [
+    "No web draft editor or theatre presets yet",
+    "No live Lingxi intent evaluation",
+    "No actual user confirmation flow or family trial",
+    "No physical load or stopping validation",
+    "Web session confirmation is not parent identity authentication"
+  ]
+}

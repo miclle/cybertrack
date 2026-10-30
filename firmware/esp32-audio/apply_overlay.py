@@ -79,6 +79,10 @@ ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.bubbles" || tool_nam
             ReplyError(id, "Speed adjustment requires delta_percent of exactly 10 or -10"); return;
         }
     }
+    if (tool_name == "self.tank.compose") {
+        ShowDraft::Command edit;
+        if (!ParseShowEdit(tool_arguments, edit)) { ReplyError(id, "Invalid show draft edit"); return; }
+    }
     if (tool_name == "self.tank.sequence") {
         const cJSON* steps = cJSON_GetObjectItemCaseSensitive(tool_arguments, "steps_json");
         ActionPlan plan;
@@ -109,7 +113,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct43")')
+                 'set(PROJECT_VER "2.0.3-ct44")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
@@ -130,13 +134,13 @@ def main():
                  '    if (cybertrack) ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());\n'
                  '    PropertyList arguments = (*tool_iter)->properties();')
     replace_once(source / "main/mcp_server.cc", '#include "mcp_server.h"',
-                 '#include "mcp_server.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"\n#include "boards/bread-compact-wifi/action_plan_json.h"')
+                 '#include "mcp_server.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"\n#include "boards/bread-compact-wifi/action_plan_json.h"\n#include "boards/bread-compact-wifi/show_command_json.h"')
     replace_once(source / "main/mcp_server.cc",
                  '    if (cybertrack) ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());',
                  ACTION_ARGUMENT_CHECK)
     replace_once(source / "main/mcp_server.cc",
                  '    // Use main thread to call the tool',
-                 '    if (tool_name == "self.tank.set_speed" || tool_name == "self.tank.adjust_speed" || tool_name == "self.tank.sequence" || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy") {\n'
+                 '    if (tool_name == "self.tank.compose" || tool_name == "self.tank.set_speed" || tool_name == "self.tank.adjust_speed" || tool_name == "self.tank.sequence" || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy") {\n'
                  '        int ticket = CyberTrackActionClaim(id, tool_name.c_str());\n'
                  '        if (!ticket) { ReplyError(id, "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"); return; }\n'
                  '        arguments.AddProperty(Property("_ct_ticket", kPropertyTypeInteger, ticket));\n'
@@ -166,7 +170,7 @@ def main():
         shutil.copy2(ROOT / "firmware/esp32-linx/main" / name, board / name)
     apply_audio_overlay(source, replace_once)
     apply_display_overlay(source, replace_once)
-    for name in ("recent_command.h", "proximity_guard.h", "proximity_audio.h", "proximity_audio.cc", "distance_reading.h", "ultrasonic.h", "ultrasonic.cc", "cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
+    for name in ("show_draft.h", "show_command_json.h", "recent_command.h", "proximity_guard.h", "proximity_audio.h", "proximity_audio.cc", "distance_reading.h", "ultrasonic.h", "ultrasonic.cc", "cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
         shutil.copy2(HERE / name, board / name)
     sounds = '#pragma once\n'
     for key, filename in (("ProximityBeep", "range-beep.ogg"), ("ProximityStop", "range-stop.ogg")):

@@ -1,5 +1,6 @@
 #include <cJSON.h>
 #include "action_plan_json.h"
+#include "show_command_json.h"
 #include <cassert>
 #include <cstring>
 #include <string>
@@ -124,5 +125,18 @@ int main() {
         check(tool,"{}",true); check(tool,nullptr,true);
         for(const char* j : {"[]","null","{\"duration_ms\":1000}"}) check(tool,j,false);
     }
+    check("self.tank.compose",R"({"edit":"cancel","revision":0,"step":0,"steps_json":""})",true);
+    check("self.tank.compose",R"({"edit":"remove_step","revision":1,"step":2,"steps_json":""})",true);
+    for(const char* json:{"{}","null",R"({"edit":"cancel","revision":true,"step":0,"steps_json":""})",
+        R"({"edit":"remove_step","revision":0,"step":1,"steps_json":""})",
+        R"({"edit":"cancel","revision":1,"step":0,"steps_json":"[]"})",
+        R"({"edit":"cancel","revision":1,"step":0,"steps_json":"","extra":0})",
+        R"({"edit":"cancel","revision":1,"step":0,"step":0,"steps_json":""})"}) check("self.tank.compose",json,false);
+    cJSON* show=cJSON_CreateObject();cJSON_AddStringToObject(show,"edit","replace");
+    cJSON_AddNumberToObject(show,"revision",0);cJSON_AddNumberToObject(show,"step",0);
+    cJSON_AddStringToObject(show,"steps_json",R"([{"direction":"none","move_ms":0,"water_ms":0,"bubbles_ms":1000,"ignition_ms":0}])");
+    char* text=cJSON_PrintUnformatted(show);check("self.tank.compose",text,true);cJSON_free(text);
+    cJSON_ReplaceItemInObjectCaseSensitive(show,"steps_json",cJSON_CreateString(R"([{"direction":"none","move_ms":0,"water_ms":1,"bubbles_ms":1000,"ignition_ms":0}])"));
+    text=cJSON_PrintUnformatted(show);check("self.tank.compose",text,false);cJSON_free(text);cJSON_Delete(show);
     std::cout << "PASS: generated MCP argument checks, directions/ranges/types, missing/extra/duplicate keys, injected ticket, stop/status isolation\n";
 }

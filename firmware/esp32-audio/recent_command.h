@@ -12,7 +12,7 @@ struct RecentCommand {
     bool valid = false, web = false;
     void Record(uint64_t now, const char* op, const char* outcome, bool from_web) {
         bool action = false;
-        for (const auto name : {"move", "water", "bubbles", "ignition", "move_and_water", "sequence", "frenzy",
+        for (const auto name : {"show_confirm", "move", "water", "bubbles", "ignition", "move_and_water", "sequence", "frenzy",
                                "stop", "set_speed", "adjust_speed", "set_auto_avoidance", "drive_start", "drive_stop",
                                "drive_renew", "water_start", "water_stop", "water_renew", "bubbles_start", "bubbles_stop", "bubbles_renew"})
             action |= !std::strcmp(op, name);

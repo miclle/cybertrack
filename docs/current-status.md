@@ -4,10 +4,10 @@
 
 | 项目 | 当前依据与状态 |
 |---|---|
-| 源码基线 | `2.0.3-ct43` 候选（上手帮助／只读回执解释），未部署；ESP-IDF 5.5.1、小智固定版本及 overlay |
+| 源码基线 | `2.0.3-ct44` 候选（编排设备契约，网页编辑待接入），未部署；ESP-IDF 5.5.1、小智固定版本及 overlay |
 | 最近记录的部署 | [ct42](../firmware/esp32-audio/startup-ct42.json)；不是本次实时设备探测 |
-| 软件验证 | [ct43 主机／编译记录](../firmware/esp32-audio/verification-ct43.json)，与 ct42 部署分开 |
-| 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，平台回读哈希记录于上述部署文件 |
+| 软件验证 | [ct44 主机／编译记录](../firmware/esp32-audio/verification-ct44.json)，与 ct42 部署分开 |
+| 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，源码新增编排规则，尚未同步；ct42 平台回读哈希记录于上述部署文件 |
 | 运动 | 四方向，60–100% PWM、默认 100%；全速转向省略时长为 880 ms，其他普通动作默认 1000 ms；无编码器里程计 |
 | 并发与序列 | 四路独立截止，序列最多 16 步；步骤内并发，步骤间串行；取消不恢复 |
 | 测距 | IO1/TRIG、IO2/ECHO，约 100 ms 采样、500 ms 过期；无效不报旧距离 |
@@ -26,4 +26,4 @@ ct42 部署检查记录 18 次有效距离样本、执行器启动次数为 0。
 
 ## 统一软件检查
 
-运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式及现有控制主机测试。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct43-src`，增加实际 MCP／HTTP 与音频适配检查。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
+运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式及现有控制主机测试。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct44-src`，增加实际 MCP／HTTP 与音频适配检查。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
