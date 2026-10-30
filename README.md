@@ -80,7 +80,7 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 使用 FreeCAD 打开 [CyberTrack.FCStd](hardware/model/CyberTrack.FCStd)，当前几何、局部修订及检查入口见[模型说明](hardware/model/README.md)。原生 FCStd 是几何依据，STEP 用于交换；部分历史 STEP 体积比较仍超过阈值，不能把交换文件一概视为原生几何等价。
 
-- **现行打印项目**：[Lean 29 件／6 盘](hardware/model/lean-print/README.md)及[3MF 文件](hardware/model/lean-print/CyberTrack-Lean-6plates.3mf)。已按 P2S、0.4 mm 喷嘴与 PLA Basic 配置各零件的朝向、层高、墙数和支撑，并完成切片与相应几何／路径检查。用于补打或复现样机时，按所需零件选盘，已打印件不重复打印；切片估算与检查不代表实物强度、配合或整机验收。
+- **现行打印项目**：[Lean 27 件／6 盘](hardware/model/lean-print/README.md)及[3MF 文件](hardware/model/lean-print/CyberTrack-Lean-6plates.3mf)。已按 P2S、0.4 mm 喷嘴与 PLA Basic 配置各零件的朝向、层高、墙数和支撑，原 29 件版本完成切片与相应几何／路径检查；当前背包调整后第 3、6 盘需重切，旧时间及路径结果不适用于这些盘。用于补打或复现样机时，按所需零件选盘，已打印件不重复打印；切片估算与检查不代表实物强度、配合或整机验收。
 - **头部与单件文件**：[0.58 头部整体打印与螺丝适配](docs/head-shell-print.md)说明 PP07 头壳、配套 PP05 冠盖及独立面包板托盘；[单件目录](hardware/model/print-parts/README.md)提供 STL／STEP 与专项记录。导孔试拧、螺丝保持力与重复拆装仍待实物核验，单件 STL 不包含支撑配置。
 - **装配与维护参考**：[装配说明](docs/assembly.md)与[装配维护图册](hardware/model/CyberTrack-assembly-and-service.pdf)保留各修订的特征定位和拆装参考，其中旧分件、孔形及配合状态须结合现行模型与专项记录阅读。实际打印分件以 Lean 清单为准，已合并的源特征不独立打印；[0.51 六件图册](hardware/model/print-parts/print-parts.pdf)仅作历史合并参考。
 
@@ -136,7 +136,7 @@ artifact/              制作过程照片、样机演示视频与素材索引
 docs/                  需求、决策、设计、接线与验证记录
 hardware/components/   独立部件模型、厂商资料与实测记录
 hardware/model/        整机 CAD、视图、装配图纸与检查报告
-  lean-print/          现行 29 件六盘项目、切片与交付检查
+  lean-print/          现行 27 件六盘项目、切片与交付检查
   print-parts/         单件 STL／STEP、头部打印及历史合并记录
   print-ready/         用户 Ready 排盘快照与精简前历史记录
 firmware/              控制核心、板级工程、协议与测试

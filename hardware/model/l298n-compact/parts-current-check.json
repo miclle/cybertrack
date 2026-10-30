@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-30",
+  "passed": true,
+  "scope": "File identity, binary STL facet count and bounding size; not a new CAD readback",
+  "historical_report_revision": "9ab523c6c9aa3792cc21fb1710eae2b5ecd2258f",
+  "historical_reports_sha256": {
+    "parts-readback.json": "212993907f05fc21b3812938c858b26890df45b90d6033d74217a0e6d8b025c1",
+    "slicing/export-check.json": "76f5dac09a8714a0b844a6d7e0f5366052716bf84ca5f24a2ab5cebda57f9385"
+  },
+  "historical_reports_byte_preserved": true,
+  "parts": [
+    {
+      "stem": "LC01-Carrier",
+      "stl_sha256": "697137e8cef2d8bf30844d930f934ec442e00fc1c8d6319537bdfdea01dc40fa",
+      "step_sha256": "077729e4a10a8f994c1ead808a58e45b320d22ed400609c4d2881038e672c89d",
+      "stl_facets": 2096,
+      "size_xyz_mm": [
+        33.5,
+        47.5,
+        59.0
+      ],
+      "matches_original_stl_hash": false,
+      "current_stl_evidence": "slicing/export-check.json",
+      "step_matches_original_hash": true
+    },
+    {
+      "stem": "LC02-TopRetainer",
+      "stl_sha256": "abfe973a157b583fda588f530ec589b6113adc8f4c9ac2ad8297cd3ac55044bd",
+      "step_sha256": "ce812b078e12dcc9f0b1ac9ab56198f7aecbf73d6b53f78c09dceb2e5484bcba",
+      "stl_facets": 1668,
+      "size_xyz_mm": [
+        29.0,
+        43.75,
+        5.5
+      ],
+      "matches_original_stl_hash": false,
+      "current_stl_evidence": "slicing/export-check.json",
+      "step_matches_original_hash": true
+    },
+    {
+      "stem": "LC03-BottomServiceCover",
+      "stl_sha256": "61411ecca04618ce8bcb84babaef76864256dc18604fd7ce237c44e859df9aa2",
+      "step_sha256": "6a0e62d6d168c3dc9d2ceca326022e8b4ccf127a81826ed92da35a92b4650e0d",
+      "stl_facets": 6812,
+      "size_xyz_mm": [
+        131.60000610351562,
+        136.8000030517578,
+        2.799999952316284
+      ],
+      "matches_original_stl_hash": false,
+      "current_stl_evidence": "slicing/export-check.json",
+      "step_matches_original_hash": true
+    },
+    {
+      "stem": "LC04-KeelLid",
+      "stl_sha256": "f738a550429f366cf5a2f80a9370b1761143c3419dec52497eea70836b9959c7",
+      "step_sha256": "f400f9e58a86c4eaf3568e759e66d1b0579cf9e39713ec9d6f89003b8e5c80ae",
+      "stl_facets": 7598,
+      "size_xyz_mm": [
+        130.0,
+        129.0,
+        38.5
+      ],
+      "matches_original_stl_hash": true,
+      "current_stl_evidence": "parts-readback.json",
+      "step_matches_original_hash": true
+    }
+  ],
+  "cad_boolean_rechecked": false,
+  "mesh_closedness_rechecked": false,
+  "physical_fit_verified": false,
+  "manufacturing_released": false
+}

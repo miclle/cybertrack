@@ -41,9 +41,11 @@
 
 ## 验证及复现
 
-已用 KiCad 10.0.7 读取工程并执行 ERC，报告 0 条违规；从实际导出的网表核对 92 项关键连接与固件映射，通过。五页 PDF 已渲染并逐页核对。工具版本、ERC 原始结果、网表检查和文件哈希见 [verification.json](verification.json) 与 [checks/](checks/)。报告记录了 KiCad 默认忽略的检查项，本次未添加错误豁免。ERC 通过只能说明已建模规则未发现相应问题，不说明未实现的 U2／U3、元件值、真实针序、输出电流或物理停止已通过。
+2026-10-30 当前复核见 [verification-current.json](verification-current.json)：使用现有 A1 网表和当前源码重新执行 92 项连接／映射检查。原 [verification.json](verification.json) 保留原字节，记录提交 `84c5f708` 的 A1 文件及输入；其中旧固件和说明哈希仅用于历史追溯。当前说明已更新，图纸、PDF 和网表未修改，历史 ERC／PDF 审阅结果没有重新运行。A1 工程包保持历史交付内容；当前源码复核不表示 A1 已覆盖后续新增 GPIO1／GPIO2 超声波接口或全部功能。运行 `python3 scripts/check_current_audits.py` 核对新证据，`--write` 重新生成当前报告。
 
-在安装了对应版本 KiCad 的环境中，可从仓库根目录复现导出和检查（`kicad-cli` 需在 PATH 中；本次执行过等效命令）：
+A1 历史验证使用 KiCad 10.0.7 读取工程并执行 ERC，报告 0 条违规；从实际导出的网表核对 92 项关键连接与固件映射，通过。五页 PDF 已渲染并逐页核对。工具版本、ERC 原始结果、网表检查和文件哈希见 [verification.json](verification.json) 与 [checks/](checks/)。报告记录了 KiCad 默认忽略的检查项，本次未添加错误豁免。ERC 通过只能说明已建模规则未发现相应问题，不说明未实现的 U2／U3、元件值、真实针序、输出电流或物理停止已通过。
+
+在安装了对应版本 KiCad 的环境中，可从仓库根目录复现导出和检查（`kicad-cli` 需在 PATH 中；A1 交付时执行过等效命令）：
 
 ```sh
 kicad-cli sch export pdf --no-background-color --exclude-pdf-property-popups -o hardware/schematic/CyberTrack-schematic.pdf hardware/schematic/CyberTrack.kicad_sch
