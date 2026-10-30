@@ -1,5 +1,9 @@
 # CyberTrack 面包板：小D 语音与四路控制
 
+ct36 已部署，将停止阈值改为小于 15 cm、解锁改为至少 20 cm；40–50 cm 每 800 ms 一声，15–40 cm 每 400 ms 一声，近障碍停止后只响三声。见[规则](../../docs/ultrasonic-ranging.md#ct3615-cm-停止阈值)和[验证](verification-ct36.json)。已仅应用烧录并保持配置区、平台角色保存回读一致后重启联网；11 次有效测距、无驱动失败、执行器启动数为 0，设备返回 150／200 mm 阈值，见[部署记录](startup-ct36.json)。2026-10-30 用户确认提示音和距离阈值调整“测试效果符合预期”，已记录于部署文件；定量停车距离及专项回归仍分别记录。
+
+ct35 已部署，将距离语音改为前进时的短提示音：40–50 cm 每 800 ms 一声，30–40 cm 每 400 ms 一声，小于 30 cm 立即停前进并响三声后安静。待机、后退、转向不持续提示；35 cm 解锁不续走保持。已仅应用烧录、配置区保持；平台角色保存并重新打开逐字一致，随后设备重启联网。启动后 11 次测距均有效、驱动失败数及执行器启动数均为 0，见[部署记录](startup-ct35.json)；实机听感待验证。见[规则](../../docs/ultrasonic-ranging.md#ct35前进距离提示音)及[验证](verification-ct35.json)。
+
 ct34 已仅应用部署并保持配置，复位启动后连续有效测距，驱动失败数及执行器启动数为 0；见[部署记录](startup-ct34.json)。本版增加测距冷启动等待、具体故障阶段与 1–8 秒退避恢复；初始化或接收超时不再直接结束任务。清理失败保留资源并明确报告，避免不安全复用。软件验证见[ct34 记录](verification-ct34.json)，一次用户确认的冷上电复测已通过，8 次有效测距且无驱动失败／重启，见[记录](cold-start-ct34.json)；用户随后确认电脑 USB 与独立电池均多次重新上电且测距正常（用户反馈，未逐轮采集遥测），详见[故障与恢复契约](../../docs/ultrasonic-ranging.md#ct34冷启动故障诊断与局部恢复)。角色源和网页布局保持 ct33。
 
 ct33 已部署，配置区保持、平台角色保存回读并重启联网，执行器启动次数为 0；见[验证](verification-ct33.json)与[部署](startup-ct33.json)。新增本地 50／30 cm 提醒和前进保护，覆盖语音、网页和动作序列；声音由独立任务播放，控制任务不等音频。原始有效读数参与判定，35 cm 解锁且不自行恢复。见[规则与验证](../../docs/ultrasonic-ranging.md#ct33本地距离提醒与前进保护)。
@@ -30,7 +34,7 @@ ct23 增加网页“左转＋喷水，各 3 秒”对照入口，调用现有组
 
 ## 当前能力与验证范围
 
-当前源码与最新部署为 `2.0.3-ct34`，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
+当前源码与最新部署为 `2.0.3-ct36`，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
 
 | 功能 | 当前规则 |
 |---|---|

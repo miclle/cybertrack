@@ -45,10 +45,16 @@ void Token(char (&token)[33]) {
     token[32] = 0;
 }
 void TickLocked(uint64_t now) {
-    const auto alert = proximity.Update(CyberTrackDistanceSnapshot(), now);
+    const bool pressed = gpio_get_level(stop_pin) == 0;
+    const bool forward = guard.Moving() && !std::strcmp(guard.direction, "forward") &&
+                         now >= guard.motion.last_ms && now < guard.motion.ends_at && !pressed && !outputs.fault;
+    auto alert = proximity.Update(CyberTrackDistanceSnapshot(), now, forward);
+    // Update the interlock before Tick can start another sequence step/effect.
     sessions.SetForwardBlocked(now, proximity.blocked);
-    CyberTrackProximityAlert(alert);
-    sessions.Tick(now, gpio_get_level(stop_pin) == 0, outputs.fault);
+    sessions.Tick(now, pressed, outputs.fault);
+    const bool beeping = proximity.beeping && guard.Moving() && !std::strcmp(guard.direction, "forward");
+    if (alert == ProximityGuard::Beep && !beeping) alert = ProximityGuard::None;
+    CyberTrackProximityAlert(alert, beeping);
 }
 struct OffEvent {
     const char* channel;
@@ -244,7 +250,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         "\"bubbles_source\":\"%s\",\"ignition_source\":\"%s\","
         "\"frenzy_remaining_ms\":%u,\"frenzy_last_duration_ms\":%u,\"frenzy_source\":\"%s\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", "
         "\"sequence_active\":%s,\"sequence_step\":%u,\"sequence_steps\":%u,\"sequence_result\":\"%s\",\"sequence_max_steps\":16,"
-        "\"proximity\":{\"forward_blocked\":%s,\"warn_below_mm\":500,\"stop_below_mm\":300,\"release_mm\":350},"
+        "\"proximity\":{\"forward_blocked\":%s,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},"
         "\"distance\":%s,\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
         device_id.c_str(), boot_id.c_str(), seq, operation, outcome, state, reason, uptime.c_str(),
         left, right, watering ? "true" : "false", bubbling ? "true" : "false", igniting ? "true" : "false",
@@ -338,7 +344,7 @@ void InitializeCyberTrackTools() {
     InitializeCyberTrackWeb();
     auto& server = McpServer::GetInstance();
     server.AddTool("self.tank.get_status",
-        "查询CyberTrack状态或前方距离，参数为空。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能由云端轮询后自动行走、绕行或推算移动距离。设备本地小于50厘米提醒，小于30厘米提醒并禁止前进；proximity.forward_blocked为前进锁定，恢复至35厘米后允许新指令，不自动恢复。obstacle_blocked表示前进受阻，不重试。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
+        "查询CyberTrack状态或前方距离，参数为空。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能由云端轮询后自动行走、绕行或推算移动距离。设备仅前进时在15至50厘米发出滴声，越近越密；小于15厘米禁止前进，正在前进则停止并响三声，待机、后退和转向安静；proximity.forward_blocked为前进锁定，恢复至20厘米后允许新指令，不自动恢复。obstacle_blocked表示前进受阻，不重试。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("get_status"); });
     server.AddTool("self.tank.stop",
         "立即停止两台电机、水枪、泡泡和点火及狂暴模式并取消全部排队动作，不关闭语音和屏幕。",

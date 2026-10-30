@@ -1,0 +1,602 @@
+{
+  "date": "2026-10-30T08:53:00.677288+08:00",
+  "version": "2.0.3-ct36",
+  "device_id": "30:ed:a0:a1:97:7c",
+  "scope": "Application-only deployment after platform role save; hardware reset, telemetry/stop/release only; no actuator starts",
+  "flash": {
+    "path": "build/firmware-ct36/xiaozhi.bin",
+    "size_bytes": 2644992,
+    "sha256": "82573799e5bbf5b5137ee38ff3385bed5ab376f1e6db1928381daabc417d15c1",
+    "offset": "0x20000",
+    "esptool_hash_verified": true,
+    "previous_application": "2.0.3-ct35",
+    "backup_kind": "ct35 binary copied after on-device verify_flash matched",
+    "first_128_kib_unchanged": true,
+    "partition_checks": {
+      "partitions": [
+        {
+          "label": "nvs",
+          "offset": "0x9000",
+          "size": "0x4000"
+        },
+        {
+          "label": "otadata",
+          "offset": "0xd000",
+          "size": "0x2000"
+        },
+        {
+          "label": "phy_init",
+          "offset": "0xf000",
+          "size": "0x1000"
+        },
+        {
+          "label": "ota_0",
+          "offset": "0x20000",
+          "size": "0x3f0000"
+        },
+        {
+          "label": "ota_1",
+          "offset": "0x410000",
+          "size": "0x3f0000"
+        },
+        {
+          "label": "assets",
+          "offset": "0x800000",
+          "size": "0x800000"
+        }
+      ],
+      "ota_sequence": 1,
+      "ota_state": 2,
+      "crc_valid": true
+    }
+  },
+  "startup": [
+    {
+      "time": "2026-10-30T08:52:38.066413+08:00",
+      "firmware": "2.0.3-ct36"
+    },
+    {
+      "time": "2026-10-30T08:52:38.067071+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-10-30T08:52:38.067165+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-10-30T08:52:38.069231+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-10-30T08:52:38.072628+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-10-30T08:52:42.502250+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-10-30T08:52:42.571411+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-10-30T08:52:43.911379+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "receipts": {
+    "state": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "get_status",
+      "result": "ok",
+      "uptime_ms": 6401,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 565,
+        "error": "none",
+        "sampled_at_ms": 6347,
+        "age_ms": 54,
+        "echo_us": 3295,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    },
+    "stop": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "stop",
+      "result": "ok",
+      "uptime_ms": 6695,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 569,
+        "error": "none",
+        "sampled_at_ms": 6652,
+        "age_ms": 43,
+        "echo_us": 3316,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    },
+    "distance_0": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "get_status",
+      "result": "ok",
+      "uptime_ms": 7169,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 503,
+        "error": "none",
+        "sampled_at_ms": 7106,
+        "age_ms": 63,
+        "echo_us": 2935,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    },
+    "distance_1": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "get_status",
+      "result": "ok",
+      "uptime_ms": 7464,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 480,
+        "error": "none",
+        "sampled_at_ms": 7409,
+        "age_ms": 55,
+        "echo_us": 2796,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    },
+    "distance_2": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "get_status",
+      "result": "ok",
+      "uptime_ms": 7947,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 507,
+        "error": "none",
+        "sampled_at_ms": 7914,
+        "age_ms": 33,
+        "echo_us": 2955,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    },
+    "distance_3": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "get_status",
+      "result": "ok",
+      "uptime_ms": 8258,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 480,
+        "error": "none",
+        "sampled_at_ms": 8218,
+        "age_ms": 40,
+        "echo_us": 2797,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    },
+    "distance_4": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "get_status",
+      "result": "ok",
+      "uptime_ms": 8657,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 508,
+        "error": "none",
+        "sampled_at_ms": 8623,
+        "age_ms": 34,
+        "echo_us": 2965,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    },
+    "distance_5": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "get_status",
+      "result": "ok",
+      "uptime_ms": 8878,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 507,
+        "error": "none",
+        "sampled_at_ms": 8825,
+        "age_ms": 53,
+        "echo_us": 2954,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    },
+    "distance_6": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "get_status",
+      "result": "ok",
+      "uptime_ms": 9178,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 524,
+        "error": "none",
+        "sampled_at_ms": 9128,
+        "age_ms": 50,
+        "echo_us": 3055,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    },
+    "distance_7": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "get_status",
+      "result": "ok",
+      "uptime_ms": 9484,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 515,
+        "error": "none",
+        "sampled_at_ms": 9431,
+        "age_ms": 54,
+        "echo_us": 3004,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    },
+    "release": {
+      "device_id": "30:ed:a0:a1:97:7c",
+      "boot_id": "5b64b45b5921dc21",
+      "operation": "release",
+      "result": "ok",
+      "uptime_ms": 9512,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 0,
+      "distance": {
+        "valid": true,
+        "distance_mm": 515,
+        "error": "none",
+        "sampled_at_ms": 9431,
+        "age_ms": 82,
+        "echo_us": 3004,
+        "driver": {
+          "last_failure": "none",
+          "error_code": 0,
+          "failed_at_ms": 0,
+          "failures": 0,
+          "restarts": 0,
+          "retry_delay_ms": 0,
+          "recovering": false
+        },
+        "max_age_ms": 500,
+        "min_mm": 20,
+        "max_mm": 4000,
+        "auto_avoidance": false
+      },
+      "proximity": {
+        "forward_blocked": false,
+        "warn_below_mm": 500,
+        "stop_below_mm": 150,
+        "release_mm": 200
+      },
+      "sequence_active": false
+    }
+  },
+  "checks": {
+    "served_page_matches_source": true,
+    "outputs_off": true,
+    "starts_this_boot": 0,
+    "web_session_released": true,
+    "valid_distance_samples": 11,
+    "distance_samples": 11,
+    "driver_failures": 0,
+    "stop_below_mm": 150,
+    "release_mm": 200,
+    "standby_proximity_events_in_startup_log": 0,
+    "restarted_after_role_save": true,
+    "cold_power_cycle_verified": false
+  },
+  "role": {
+    "characters": 5995,
+    "sha256": "86fa3d9577196785653fba853f7c7e6b93f8ae2a3b99d67b604a86eff490ad4d",
+    "saved_and_reopened_match": true,
+    "nickname": "小D",
+    "voice": "对话语言\n中文\n当前音色\n少年梓辛/Brayan (友好)",
+    "model": "deepseek-v4-flash",
+    "changed": true,
+    "screenshot": "build/ct36-private/platform-role-saved.png"
+  },
+  "limits": [
+    "Startup/reset checks do not establish a cold power cycle.",
+    "No forward motion or tone audition performed during deployment; physical stopping distance at the new threshold remains to be confirmed.",
+    "No actuator starts were issued."
+  ],
+  "user_feedback": {
+    "date": "2026-10-30",
+    "source": "user_report",
+    "statement": "测试效果符合预期",
+    "scope": "Proximity tones and distance threshold adjustment on deployed ct36",
+    "overall_passed": true,
+    "limits": [
+      "No quantitative stopping-distance measurements or per-case results supplied.",
+      "Cold power-cycle and concurrent cloud-speech tests were not specifically reported."
+    ]
+  }
+}
