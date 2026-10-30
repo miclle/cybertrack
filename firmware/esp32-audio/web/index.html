@@ -56,6 +56,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
 @media(max-height:740px){.stop-bar{padding-top:6px;padding-bottom:max(8px,env(safe-area-inset-bottom))}}
 @media(max-height:620px){.stop-bar{padding-top:4px;padding-bottom:max(6px,env(safe-area-inset-bottom))}}
 .help{margin-top:10px;border-top:1px solid var(--line);padding:10px 0;font-size:12px;line-height:1.65}.help summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:650}.help ol{padding-left:22px;margin:4px 0 12px}.help h2{font-size:13px;margin:12px 0 4px}.help p{margin:4px 0;white-space:pre-line}.help .note{color:#686e65}
+.theatre{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:0 12px;background:#f0f2e8;font-size:13px;line-height:1.6}.theatre summary{min-height:52px;cursor:pointer;font-weight:650;padding:14px 0}.theatre summary span{font-size:11px;font-weight:400;color:#686e65;margin-left:8px}.theatre p{margin:8px 0}.show-presets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.show-presets button{font-size:12px;background:var(--paper)}.show-preview{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;line-height:1.8;border-block:1px solid #ced3c0;padding:12px 0;margin:12px 0;font-variant-numeric:tabular-nums}.show-edit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.show-edit label{display:flex;flex-direction:column;font-size:12px;gap:3px}.show-edit input,.show-edit select{width:100%;min-width:0;min-height:44px;border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit;background:#fff;color:var(--ink);user-select:text;-webkit-user-select:text}.show-edit select:focus-visible{outline:3px solid #789324}.show-actions{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.show-actions button{flex:1 1 100px;font-size:12px;padding:6px}.show-review{display:flex;gap:8px;align-items:flex-start;padding:10px 0}.show-review input{margin:5px 0;width:18px;height:18px;accent-color:#789324;flex-shrink:0}.show-start{width:100%;background:var(--accent);border-color:#a8c33f;font-weight:650;margin-bottom:12px}.theatre .note{font-size:11px;color:#686e65}#show-notice{font-size:12px;min-height:38px}#show-notice.error{color:#a9322b}
 </style>
 </head>
 <body><main>
@@ -101,6 +102,27 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
 <button id="frenzy-10" data-effect="frenzy" data-duration="10000" aria-label="狂暴模式10秒" disabled>10 秒</button>
 <button id="frenzy-30" data-effect="frenzy" data-duration="30000" aria-label="狂暴模式30秒" disabled>30 秒</button>
 </div></section>
+<details id="theatre" class="theatre">
+<summary>小D 泡泡剧场 <span>一起编，再开始</span></summary>
+<p>选一个开场，或载入语音编好的草稿。模板只填入步骤，机器人不会立刻行动。</p>
+<div class="show-presets"><button id="show-entry">登场</button><button id="show-celebrate">庆祝</button><button id="show-curtain">谢幕</button></div>
+<p id="show-cue" class="note">孩子当导演，家长负责确认与停止。</p>
+<div class="show-actions"><button id="show-load" disabled>载入设备草稿</button><button id="show-cancel" disabled>取消设备草稿</button></div>
+<p id="show-preview" class="show-preview">还没有步骤。先选一个模板。</p>
+<div class="show-edit">
+<label>编辑第几步<input id="show-step" type="number" min="1" max="16" step="1" value="1" disabled></label>
+<label>方向<select id="show-direction" disabled><option value="none">不行走</option><option value="forward">前进</option><option value="backward">后退</option><option value="left">左转</option><option value="right">右转</option></select></label>
+<label>行走时长（秒）<input id="show-move" type="number" min="0" max="2147483.647" step="0.001" value="0" disabled></label>
+<label>泡泡时长（秒）<input id="show-bubbles" type="number" min="0" max="30" step="0.001" value="1" disabled></label>
+<label>行走速度（%）<input id="show-speed" type="number" min="60" max="100" step="1" value="100" disabled></label>
+</div>
+<div class="show-actions"><button id="show-apply" disabled>应用这一步</button><button id="show-add" disabled>追加一步</button><button id="show-remove" disabled>删除这一步</button></div>
+<p class="note">同一步的行走与泡泡同时开始，各自按时停止；步骤之间间隔 0.2 秒。速度为 PWM 设定，时长不代表实际距离或角度。</p>
+<div class="show-actions"><button id="show-save" disabled>保存到设备并预览</button></div>
+<p id="show-notice" role="status" aria-live="polite">连接后读取设备是否支持编排。</p>
+<label class="show-review"><input id="show-reviewed" type="checkbox" disabled><span>我是陪同家长，已核对上方步骤和周围空间，准备操作“全部停止”。</span></label>
+<button id="show-confirm" class="show-start" disabled>家长确认开始</button>
+</details>
 <details id="help" class="help">
 <summary>第一次使用 · 为什么没动</summary>
 <ol><li>家长先确认周围留有空间，准备操作底部“全部停止”和本机 BOOT。</li><li>手机与机器人连接同一局域网，打开 OLED 显示的地址，等到“已连接”。</li><li>按住方向键、松开停止；泡泡先选 1 秒。第一次亲子体验不使用点火或狂暴模式。</li></ol>
@@ -145,6 +167,8 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         startQueue = Promise.resolve(),
         pollWait = Promise.resolve();
       const reasons = {
+        draft_changed: "设备草稿已变化，请重新载入并核对。",
+        invalid_plan: "步骤参数无效，草稿未保存。",
         show_cancelled: "表演已取消，没有自动开始新动作。",
         voice_preempted: "已停止语音动作，稍后可重新操作。",
         control_busy: "另一网页正在使用，等待连接。",
@@ -160,6 +184,184 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         hold_cancelled: "长按已结束，请松开后重新按住。",
         drive_cancelled: "行走续租已取消，请松开后重新按住。",
       };
+      // Local editing never sends an action. A reviewed device revision is the
+      // only input to confirmation; polling cannot replace the parent's preview.
+      const show = {steps:[], base:[], revision:null, selected:0, dirty:false,
+        formDirty:false, generation:0, job:null, feedback:""};
+      const showStep = (direction, move_ms, bubbles_ms, speed_percent=100) =>
+        ({direction, move_ms, water_ms:0, bubbles_ms, ignition_ms:0, speed_percent});
+      const showPresets = {
+        entry: {cue:"登场 · 一起说：小D，欢迎来到我们的舞台！", steps:[showStep("forward",600,0),showStep("none",0,1000)]},
+        celebrate: {cue:"庆祝 · 一起说：今天的好消息，送给大家！", steps:[showStep("left",600,1000),showStep("right",600,1000)]},
+        curtain: {cue:"谢幕 · 一起说：谢谢观看，下次再一起创作！", steps:[showStep("none",0,1000),showStep("backward",600,0)]},
+      };
+      const cloneSteps = steps => steps.map(s => showStep(s.direction,s.move_ms,s.bubbles_ms,s.speed_percent));
+      const sameSteps = (a,b) => JSON.stringify(a) === JSON.stringify(b);
+      function validShowStep(s) {
+        return s && ["none","forward","backward","left","right"].includes(s.direction) &&
+          Number.isInteger(s.move_ms) && s.move_ms>=0 && s.move_ms<=2147483647 &&
+          Number.isInteger(s.bubbles_ms) && s.bubbles_ms>=0 && s.bubbles_ms<=30000 &&
+          s.water_ms===0 && s.ignition_ms===0 && Number.isInteger(s.speed_percent) &&
+          s.speed_percent>=60 && s.speed_percent<=100 && (s.move_ms>0 || s.bubbles_ms>0) &&
+          ((s.direction==="none") === (s.move_ms===0));
+      }
+      function deviceShow() {
+        const d=snapshot?.show_draft;
+        if (snapshot?.capabilities?.show_draft!==true || !d || !Array.isArray(d.steps)) return null;
+        if (d.active===false && d.revision===0 && d.steps.length===0) return {revision:0,steps:[]};
+        if (d.active!==true || !Number.isInteger(d.revision) || d.revision<1 || d.revision>2147483647 ||
+            !Number.isFinite(d.expires_in_ms) || d.expires_in_ms<=performance.now()-snapshotAt ||
+            !d.steps.length || d.steps.length>16 || !d.steps.every(validShowStep)) return null;
+        return {revision:d.revision,steps:cloneSteps(d.steps)};
+      }
+      function showFresh() {
+        return !!token && !!snapshot && !document.hidden && performance.now()-snapshotAt<=1500;
+      }
+      function showMatches() {
+        const d=deviceShow();
+        return !!d && show.revision===d.revision && sameSteps(show.base,d.steps);
+      }
+      function showIdle() {
+        return showFresh() && !snapshot.boot_held && snapshot.state!=="FAULT" &&
+          !snapshot.sequence_active && !snapshot.frenzy_remaining_ms &&
+          !Object.values(holds).some(Boolean) && ["move","water","bubbles","ignition"].every(k=>
+            !snapshot[k+"_remaining_ms"] && !snapshot[k+"_cooldown_ms"]);
+      }
+      function showChanged() {
+        show.generation++; show.feedback=""; $("show-reviewed").checked=false;
+      }
+      function invalidateShow() {
+        showChanged(); show.job=null; show.revision=null; show.base=[];
+        show.dirty=show.steps.length>0;
+      }
+      function showPreview() {
+        const lines=show.steps.map((s,i)=>`${i+1}. `+
+          (s.move_ms ? `${directions[s.direction]} ${s.move_ms/1000} 秒 · ${s.speed_percent}%` : "原地")+
+          (s.bubbles_ms ? ` ＋ 泡泡 ${s.bubbles_ms/1000} 秒` : ""));
+        const duration=show.steps.reduce((n,s)=>n+Math.max(s.move_ms,s.bubbles_ms),0)+Math.max(0,show.steps.length-1)*200;
+        $("show-preview").textContent=lines.length ? lines.join("\n")+`\n预计 ${duration/1000} 秒 · ${lines.length}/16 步` : "还没有步骤。先选一个模板。";
+        showControls();
+      }
+      function showForm() {
+        show.formDirty=false;
+        const s=show.steps[show.selected] || showStep("none",0,1000);
+        $("show-step").value=String(show.selected+1);
+        $("show-step").max=String(Math.max(1,show.steps.length));
+        $("show-direction").value=s.direction; $("show-move").value=String(s.move_ms/1000);
+        $("show-bubbles").value=String(s.bubbles_ms/1000); $("show-speed").value=String(s.speed_percent);
+      }
+      function showControls() {
+        const supported=snapshot?.capabilities?.show_draft===true, fresh=showFresh(),
+          available=fresh && supported && !pending && !effectPending && !show.job && !speedJob && !avoidancePending,
+          matches=showMatches(), canonical=matches && show.revision>0 && !show.dirty && !show.formDirty,
+          editable=show.steps.length>0 && !show.job;
+        if (!canonical || !fresh) $("show-reviewed").checked=false;
+        for (const id of ["entry","celebrate","curtain"]) $("show-"+id).disabled=!!show.job;
+        for (const id of ["step","direction","move","bubbles","speed"]) $("show-"+id).disabled=!editable;
+        $("show-step").disabled=!editable || show.formDirty;
+        $("show-apply").disabled=!editable || !show.formDirty;
+        $("show-add").disabled=!editable || show.formDirty || show.steps.length>=16;
+        $("show-remove").disabled=!editable || show.formDirty || show.steps.length<=1;
+        $("show-load").disabled=!available || !deviceShow();
+        $("show-cancel").disabled=!available || !matches || !show.revision;
+        $("show-save").disabled=!available || !matches || !showIdle() || !show.dirty || show.formDirty || !show.steps.length;
+        $("show-reviewed").disabled=!available || !canonical;
+        $("show-confirm").disabled=!available || !canonical || !showIdle() || !$("show-reviewed").checked;
+        const text=!token ? "未连接。可先在本页编排，连接后选模板或载入草稿再保存。" :
+          !supported ? "这台设备尚不支持表演编排；本页编辑不会启动机器人。" :
+          !fresh ? "设备状态已过期，等待新状态后重新核对。" :
+          show.job ? "正在核对设备草稿…" :
+          show.feedback ||
+          (show.revision!==null && !matches ? "设备草稿已变化或失效。载入设备草稿会替换本页编辑，请重新核对。" :
+          show.formDirty ? "这一步尚未应用；应用后再保存，或选择模板重新编排。" :
+          show.dirty ? "本页有未保存的修改。保存只更新草稿，不会启动动作。" :
+          canonical ? `正在预览设备草稿 v${show.revision}。核对后由家长勾选确认。` :
+          "选模板，或载入语音生成的设备草稿。草稿保存后 5 分钟失效。");
+        $("show-notice").textContent=text;
+      }
+      function selectShowPreset(name) {
+        if (show.job) return;
+        const preset=showPresets[name], d=deviceShow();
+        if (!preset) return;
+        showChanged(); show.steps=cloneSteps(preset.steps); show.base=d?cloneSteps(d.steps):[];
+        show.revision=d?.revision ?? null; show.selected=0; show.dirty=true;
+        $("show-cue").textContent=preset.cue+"（亲子台词提示）";
+        showForm(); showPreview();
+      }
+      function loadShow() {
+        if ($("show-load").disabled) return;
+        const d=deviceShow(); if (!d) return;
+        showChanged(); show.steps=cloneSteps(d.steps); show.base=cloneSteps(d.steps);
+        show.revision=d.revision; show.dirty=false; show.selected=0;
+        $("show-cue").textContent="已载入设备草稿；语音修改后请再次载入核对。";
+        showForm(); showPreview();
+      }
+      function applyShowStep() {
+        if ($("show-apply").disabled) return;
+        const values=["move","bubbles","speed"].map(id=>$("show-"+id).value.trim());
+        const ms=raw=>Math.round(Number(raw)*1000);
+        const s=showStep($("show-direction").value,ms(values[0]),ms(values[1]),Number(values[2]));
+        if (values.some(v=>!v) || !validShowStep(s) ||
+            [0,1].some(i=>Math.abs(Number(values[i])*1000-ms(values[i]))>0.000001)) {
+          show.feedback="请填写有效时长：行走或泡泡至少一项大于 0；不行走时行走时长为 0，泡泡最多 30 秒，精确到 0.001 秒；速度为 60–100 的整数。";
+          showControls(); return;
+        }
+        showChanged(); show.steps[show.selected]=s; show.dirty=true; showForm(); showPreview();
+      }
+      function editShowRequest() {
+        const changed=show.steps.map((s,i)=>sameSteps([s],[show.base[i]])?-1:i).filter(i=>i>=0);
+        if (show.revision && show.steps.length===show.base.length && changed.length===1)
+          return {edit:"replace_step",revision:show.revision,step:changed[0]+1,steps_json:JSON.stringify([show.steps[changed[0]]])};
+        if (show.revision && show.steps.length===show.base.length-1) {
+          const removed=show.base.findIndex((_,i)=>sameSteps(show.base.filter((_,j)=>i!==j),show.steps));
+          if (removed>=0) return {edit:"remove_step",revision:show.revision,step:removed+1,steps_json:""};
+        }
+        return {edit:"replace",revision:show.revision,step:0,steps_json:JSON.stringify(show.steps)};
+      }
+      async function sendShow(operation) {
+        const button={save:"show-save",confirm:"show-confirm",cancel:"show-cancel"}[operation];
+        if (!button || $(button).disabled) return;
+        const job={epoch,generation:show.generation}, revision=show.revision,
+          edit=operation==="save" ? editShowRequest() : {edit:"cancel",revision,step:0,steps_json:""};
+        const current=()=>show.job===job && epoch===job.epoch && show.generation===job.generation && !document.hidden;
+        show.job=job; $("show-reviewed").checked=false; controls();
+        try {
+          await queueStart(async()=>{
+            await pollWait;
+            if (!current()) return;
+            const fresh=await request("/api/state",{},token,400);
+            if (!current()) return;
+            if (fresh.result!=="ok") throw new Error(fresh.result);
+            const newest=fresh.request_sequence>latest; render(fresh);
+            if (!newest || !showFresh() || !showMatches() || (operation!=="cancel" && !showIdle())) {
+              show.feedback="设备状态或草稿已变化，没有发送操作。请重新载入并核对。"; return;
+            }
+            const result=await request("/api/action",operation==="confirm" ?
+              {operation:"show_confirm",sequence:++sequence,window:fresh.window,revision} :
+              {operation:"show_edit",sequence:++sequence,window:fresh.window,draft:edit},token,400);
+            if (!current()) return;
+            const latestReply=result.request_sequence>latest; render(result);
+            if (!latestReply) {show.feedback="回执已过期，请载入设备草稿重新核对。"; return;}
+            if (operation==="save" && result.result==="draft_saved") {
+              const d=deviceShow();
+              if (!d || !d.revision || !sameSteps(d.steps,show.steps)) throw new Error("draft_mismatch");
+              show.steps=cloneSteps(d.steps); show.base=cloneSteps(d.steps); show.revision=d.revision;
+              show.dirty=false; show.feedback=""; showForm(); showPreview();
+            } else if (operation==="cancel" && result.result==="draft_cancelled") {
+              show.steps=[]; show.base=[]; show.revision=0; show.dirty=false; show.selected=0;
+              show.feedback="设备草稿已取消。"; showForm(); showPreview();
+            } else if (operation==="confirm" && result.result==="accepted") {
+              invalidateShow(); show.feedback="表演请求已接受；实际动作请观察机器人。再次表演需要重新保存、预览和确认。";
+              activityMessage(snapshot);
+            } else show.feedback=reasons[result.result] || "操作未接受，请核对设备状态；不会自动重试。";
+          });
+        } catch (err) {
+          if (current()) disconnect("编排回执未确认，已请求停止并释放；不会重试或自动开始。");
+        } finally {
+          if (show.job===job) show.job=null;
+          controls(); if (epoch===job.epoch) poll();
+        }
+      }
       function diagnosisText(s, age) {
         if (!s || !Number.isFinite(age) || age < 0 || age > 1500)
           return "没有新鲜的设备状态，无法判断原因。请查看连接状态；不要依赖旧回执确认实际停止。";
@@ -228,7 +430,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         const ready =
           !!token &&
           !!snapshot &&
-          !pending &&
+          !pending && !show.job &&
           !document.hidden &&
           !snapshot.boot_held &&
           snapshot.state !== "FAULT" && !snapshot.frenzy_remaining_ms;
@@ -261,14 +463,15 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
           !Object.values(holds).some(Boolean) && ["move", "water", "bubbles", "ignition"].every(kind =>
             !snapshot?.[kind + "_remaining_ms"] && !snapshot?.[kind + "_cooldown_ms"]);
         document.querySelectorAll('[data-effect="frenzy"]').forEach(b => { b.disabled = !frenzyReady; });
-        $("move-speed").disabled = !token || !snapshot || pending || document.hidden ||
+        $("move-speed").disabled = !token || !snapshot || pending || !!show.job || document.hidden ||
           snapshot.boot_held || snapshot.state === "FAULT" || snapshot.capabilities?.speed_control !== true;
         const enabled = snapshot?.proximity?.auto_avoidance_enabled === true;
         $("auto-avoidance").setAttribute("aria-checked", String(enabled));
         $("auto-avoidance").textContent = snapshot ? (enabled ? "已开启" : "已关闭") : "未连接";
-        $("auto-avoidance").disabled = !token || !snapshot || pending || avoidancePending || document.hidden ||
+        $("auto-avoidance").disabled = !token || !snapshot || pending || !!show.job || avoidancePending || document.hidden ||
           typeof snapshot.proximity?.auto_avoidance_enabled !== "boolean";
         $("stop").disabled = !token;
+        showControls();
       }
       function clearDistance() {
         clearTimeout(distanceTimer);
@@ -310,7 +513,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         snapshotAt = performance.now() - (s.transport_age_ms || 0);
         clearTimeout(diagnosisTimer);
         explainStatus();
-        diagnosisTimer = setTimeout(explainStatus, Math.max(0, 1501 - (s.transport_age_ms || 0)));
+        diagnosisTimer = setTimeout(() => {explainStatus(); showControls();}, Math.max(0, 1501 - (s.transport_age_ms || 0)));
         renderDistance(s);
         windowId = s.window;
         if (speedDesired === null) {
@@ -390,6 +593,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         const old = token;
         token = "";
         epoch++;
+        invalidateShow();
         speedDesired = null; speedJob = null; avoidancePending = false;
         clearTimeout(timer);
         pending = false;
@@ -422,7 +626,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
       async function poll() {
         clearTimeout(timer);
         if (!token || document.hidden || Object.values(holds).some(Boolean)) return;
-        if (polling || pending || effectPending || speedJob || avoidancePending) {
+        if (polling || pending || effectPending || speedJob || avoidancePending || show.job) {
           timer = setTimeout(poll, 100);
           return;
         }
@@ -569,7 +773,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
       async function action(kind = "water", duration = 1000) {
         if (!["water", "bubbles", "ignition", "frenzy"].includes(kind)) return;
         const label = { water: "喷水", bubbles: "吹泡泡", ignition: "点火", frenzy: "狂暴模式" }[kind];
-        if (!token || pending || effectPending || holds[kind] || !snapshot || snapshot.frenzy_remaining_ms) return;
+        if (!token || pending || show.job || effectPending || holds[kind] || !snapshot || snapshot.frenzy_remaining_ms) return;
         if (kind === "frenzy" && (snapshot.capabilities?.frenzy !== true || Object.values(holds).some(Boolean))) return;
         const e = epoch;
         effectPending = true;
@@ -805,10 +1009,35 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
       });
       $("auto-avoidance").addEventListener("click", changeAutoAvoidance);
       $("move-speed").addEventListener("input", changeSpeed);
+      for (const name of ["entry","celebrate","curtain"])
+        $("show-"+name).addEventListener("click",()=>selectShowPreset(name));
+      $("show-load").addEventListener("click",loadShow);
+      $("show-step").addEventListener("change",()=>{
+        const index=Number($("show-step").value)-1;
+        if (show.formDirty || !Number.isInteger(index) || index<0 || index>=show.steps.length) return showForm();
+        show.selected=index; showForm(); showControls();
+      });
+      for (const id of ["direction","move","bubbles","speed"])
+        $("show-"+id).addEventListener("input",()=>{showChanged(); show.formDirty=true; showControls();});
+      $("show-apply").addEventListener("click",applyShowStep);
+      $("show-add").addEventListener("click",()=>{
+        if ($("show-add").disabled) return;
+        showChanged(); show.steps.push(showStep("none",0,1000)); show.selected=show.steps.length-1;
+        show.dirty=true; showForm(); showPreview();
+      });
+      $("show-remove").addEventListener("click",()=>{
+        if ($("show-remove").disabled) return;
+        showChanged(); show.steps.splice(show.selected,1); show.selected=Math.min(show.selected,show.steps.length-1);
+        show.dirty=true; showForm(); showPreview();
+      });
+      $("show-reviewed").addEventListener("change",showControls);
+      for (const action of ["save","confirm","cancel"])
+        $("show-"+action).addEventListener("click",()=>sendShow(action));
       $("stop").addEventListener("click", async () => {
         if (!token) return;
         clearAllHolds();
         const e = ++epoch;
+        invalidateShow();
         speedDesired = null; speedJob = null; avoidancePending = false;
         effectPending = false;
         pending = true;
@@ -838,7 +1067,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         else connect();
       });
       window.addEventListener("blur", () => {
-        if (Object.values(holds).some(Boolean) || snapshot?.frenzy_remaining_ms || effectPending) disconnect("页面失去焦点，已请求停止并释放。");
+        if (Object.values(holds).some(Boolean) || snapshot?.frenzy_remaining_ms || snapshot?.sequence_source==="web" || show.job || effectPending) disconnect("页面失去焦点，已请求停止并释放。");
       });
       window.addEventListener("pagehide", () => disconnect("页面已关闭。"));
       window.addEventListener("offline", () => {
