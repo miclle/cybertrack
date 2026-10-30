@@ -8,6 +8,7 @@ import shutil
 import subprocess
 import tarfile
 import yaml
+from wifi_config import apply_config, load_config
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -19,7 +20,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("upstream", type=Path)
     parser.add_argument("--target", type=Path, default=ROOT / "build/xiaozhi-audio-src")
+    parser.add_argument("--wifi", type=Path, help="Local ordinary Wi-Fi JSON; embedded in private firmware")
     args = parser.parse_args()
+    try:
+        networks = load_config(args.wifi) if args.wifi else None
+    except ValueError as error:
+        parser.exit(2, f"{error}\n")
     upstream = args.upstream.resolve()
     target = args.target.resolve()
     if not target.is_relative_to(ROOT / "build"):
@@ -51,6 +57,8 @@ def main():
         manifest["dependencies"][name] = {"override_path": f"../locked_components/{directory}"}
     manifest_path.write_text(yaml.safe_dump(manifest, sort_keys=False))
     subprocess.run(["python3", str(HERE / "apply_overlay.py"), str(target)], check=True)
+    if networks is not None:
+        apply_config(target, networks)
 
 
 if __name__ == "__main__":

@@ -40,7 +40,7 @@ ct23 增加网页“左转＋喷水，各 3 秒”对照入口，调用现有组
 
 ## 当前能力与验证范围
 
-当前源码与最新部署为 `2.0.3-ct39`，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
+默认源码版本为 `2.0.3-ct39`，最新部署为按配置顺序连接的 `2.0.3-ct39-wifi-order3`，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
 
 | 功能 | 当前规则 |
 |---|---|
@@ -77,6 +77,8 @@ ct20 主机回归与 ESP-IDF 完整编译通过，见[验证记录](verification
 **ct7 历史并发部署**：用户已要求行走和喷水可同时进行。该版本为 `2.0.3-ct7`，独立计时／冷却，增加 `move_and_water` 同时启动工具；BOOT 和停止仍全停。ct7 已仅应用刷写、平台角色回读并重启联网，核心并发台架回归与断功率收尾完成，完整供电／整机验收仍待完成；软件与部署证据见[并发动作说明](../../docs/concurrent-actions.md)。上段 ct6 及以下历史验收不能替代 ct7 并发实测。
 
 ## 来源与配置证据
+
+普通多 Wi-Fi 的本地配置入口为 `secrets/wifi.json`，格式、校验和导入方法见[多 Wi-Fi 配置](../../docs/wifi-configuration.md)。`prepare.py --wifi` 是可选构建入口；填写文件后仍需重新构建和刷入设备。2026-10-30 已部署 `2.0.3-ct39-wifi-order3`，按保存顺序尝试；第一组手机热点已两次连接成功，中间一次认证阶段超时后成功回退第二组。两组配置回读匹配，最终连接第一组，见[构建验证](verification-ct39-wifi-order3.json)和[部署记录](startup-ct39-wifi-order3.json)。热点反复重连稳定性仍待验证。
 
 - 上游：[`78/xiaozhi-esp32`，`e8ed16bb42ed9b199cbc9376011653e5037de8d8`](https://github.com/78/xiaozhi-esp32/tree/e8ed16bb42ed9b199cbc9376011653e5037de8d8)。
 - 本机原构建 ELF SHA-256：`f7e8809ce981ee4182fb6c3eb15b20aa785111c7f1e4b1e2f059e4debc813b45`，与面包板完整 Flash 中的应用描述一致；原 `xiaozhi.bin` 的 2,531,056 bytes 也与备份 `0x20000` 起的数据逐字节一致。
