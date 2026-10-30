@@ -12,6 +12,7 @@ public:
     EffectHold water_hold, bubbles_hold;
     AudioActionGuard guard;
     int web_speed_percent = 100;
+    bool auto_avoidance_enabled = false; // Device-wide, reset only by reboot; shared with voice.
     bool plan_active = false;
     unsigned plan_step = 0, plan_count = 0;
     const char* plan_result = "idle";
@@ -129,6 +130,12 @@ public:
         const char* error = Consume(now, session, seq, command_window, WindowMs);
         if (error) return error;
         return StartWeb(now, target, move_ms, water_ms, direction, bubbles_ms, ignition_ms);
+    }
+    const char* WebAutoAvoidance(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window, bool enabled) {
+        const char* error = Consume(now, session, seq, command_window, WindowMs);
+        if (error) return error;
+        auto_avoidance_enabled = enabled;
+        return "ok";
     }
     const char* WebSpeed(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window, int speed) {
         const char* error = Consume(now, session, seq, command_window, WindowMs);

@@ -7,6 +7,18 @@ static bool parse(const char* text) {
     bool result=ParseWebCommand(root,command); cJSON_Delete(root); return result;
 }
 int main() {
+    for (const char* value : {"true", "false"}) {
+        const auto body=std::string(R"({"operation":"set_auto_avoidance","sequence":1,"window":1,"enabled":)")+value+"}";
+        auto root=cJSON_Parse(body.c_str()); WebCommand command;
+        assert(ParseWebCommand(root,command));
+        assert(command.enabled == (std::string(value)=="true"));
+        cJSON_Delete(root);
+    }
+    for (const char* value : {"0", "1", "null", "\"true\"", "true,\"enabled\":false", "true,\"extra\":1"})
+        assert(!parse((std::string(R"({"operation":"set_auto_avoidance","sequence":1,"window":1,"enabled":)")+value+"}").c_str()));
+    assert(!parse(R"({"operation":"set_auto_avoidance","sequence":1,"window":1})"));
+    assert(!parse(R"({"operation":"set_auto_avoidance","sequence":0,"window":1,"enabled":true})"));
+
     for(const char* speed:{"60","80","100"}) assert(parse((std::string(R"({"operation":"set_speed","sequence":1,"window":1,"speed_percent":)")+speed+"}").c_str()));
     for(const char* speed:{"0","1","50","59","101","1.5","true","50,\"speed_percent\":50","50,\"extra\":1"}) assert(!parse((std::string(R"({"operation":"set_speed","sequence":1,"window":1,"speed_percent":)")+speed+"}").c_str()));
 

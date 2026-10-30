@@ -1,5 +1,7 @@
 # 固件能力与接口手册
 
+**ct41 已部署：** 新增 HTTP `set_auto_avoidance`（`sequence`、`window`、布尔 `enabled`）及 `proximity.auto_avoidance_enabled`。开机默认关闭、网页和所有语音前进入口共用；只有开启时执行 15／20 cm 停止／解锁。十一个语音工具不增加切换工具，`get_status` 返回实际设置；`capabilities.auto_avoidance=false` 继续表示无自动绕行。已仅应用部署、平台保存回读并重启联网，见[部署记录](esp32-audio/startup-ct41.json)和[规则](../docs/ultrasonic-ranging.md#ct41自动避障开关已部署)。
+
 ct39 已部署：100% 速度（含省略速度）的左右转语音默认时长从 900 改为 880 ms，其他普通动作仍为 1000 ms；单项、组合、序列各步一致，指定／共享时长优先。平台与设备已更新并重启联网，用户确认 880 ms 测试效果符合预期；完整语音回归仍待逐项验证，见[部署记录](esp32-audio/startup-ct39.json)。下方 ct38 的 900 ms 为历史记录。
 
 ct38 已部署：100% 速度（含省略速度）的左右转语音默认时长从 800 改为 900 ms，其他普通动作仍为 1000 ms；单项、组合、序列各步一致，指定／共享时长优先。平台与设备已更新并重启联网，真人语音回归待做，见[部署记录](esp32-audio/startup-ct38.json)。下方 ct37 的 800 ms 为历史记录。

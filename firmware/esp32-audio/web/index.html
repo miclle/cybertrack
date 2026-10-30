@@ -18,6 +18,8 @@ h1{font-size:20px;letter-spacing:-.8px;margin:0}.badge{font-size:12px;color:#777
 .speed-control{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;font-size:12px}
 .speed-control input{width:100%;min-width:0;height:28px;margin:0;accent-color:#789324;touch-action:pan-y}
 .speed-control output{min-width:38px;text-align:right;font-variant-numeric:tabular-nums}.speed-control input:disabled{opacity:.35}
+.avoidance-control{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px}.avoidance-control small{display:block;color:#686e65;font-size:11px;margin-top:3px}
+#auto-avoidance{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 12px;font-size:12px}#auto-avoidance::after{content:"";width:28px;height:16px;border-radius:10px;background:#b7bbb2;box-shadow:inset 12px 0 0 2px #fff}#auto-avoidance[aria-checked="true"]::after{background:#789324;box-shadow:inset -12px 0 0 2px #fff}
 .hint{text-align:center;color:#777;font-size:11px;line-height:14px;margin:0}#hold-time{font-variant-numeric:tabular-nums}#hold-time.timing{color:var(--ink);font-weight:650}
 .pad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}
 button{font:inherit;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:#fff;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:48px;min-width:0}
@@ -64,6 +66,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
 <article><strong id="ignition-label">点火线圈</strong><small><span id="ignition-state">等待连接</span><span id="ignition-time">—</span></small></article>
 </section>
 <div class="speed-control"><label for="move-speed">设定速度</label><input id="move-speed" type="range" min="60" max="100" step="1" value="100" aria-describedby="speed-value" disabled><output id="speed-value" for="move-speed">100%</output></div>
+<div class="avoidance-control"><div id="avoidance-label">自动避障<small id="avoidance-help">开启后小于 15 cm 停止前进，网页与语音共用</small></div><button id="auto-avoidance" type="button" role="switch" aria-checked="false" aria-labelledby="avoidance-label" aria-describedby="avoidance-help" disabled>已关闭</button></div>
 <p id="hold-time" class="hint">按住行走，松开停止</p>
 <div class="pad" aria-label="行走方向">
 <div class="drive-speed">行走速度<strong id="drive-speed">—</strong></div>
@@ -119,6 +122,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         snapshot = null,
         pending = false,
         effectPending = false,
+        avoidancePending = false,
         speedDesired = null,
         speedJob = null,
         followingActivity = false,
@@ -204,6 +208,11 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         document.querySelectorAll('[data-effect="frenzy"]').forEach(b => { b.disabled = !frenzyReady; });
         $("move-speed").disabled = !token || !snapshot || pending || document.hidden ||
           snapshot.boot_held || snapshot.state === "FAULT" || snapshot.capabilities?.speed_control !== true;
+        const enabled = snapshot?.proximity?.auto_avoidance_enabled === true;
+        $("auto-avoidance").setAttribute("aria-checked", String(enabled));
+        $("auto-avoidance").textContent = snapshot ? (enabled ? "已开启" : "已关闭") : "未连接";
+        $("auto-avoidance").disabled = !token || !snapshot || pending || avoidancePending || document.hidden ||
+          typeof snapshot.proximity?.auto_avoidance_enabled !== "boolean";
         $("stop").disabled = !token;
       }
       function clearDistance() {
@@ -321,7 +330,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         const old = token;
         token = "";
         epoch++;
-        speedDesired = null; speedJob = null;
+        speedDesired = null; speedJob = null; avoidancePending = false;
         clearTimeout(timer);
         pending = false;
         effectPending = false;
@@ -351,7 +360,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
       async function poll() {
         clearTimeout(timer);
         if (!token || document.hidden || Object.values(holds).some(Boolean)) return;
-        if (polling || pending || effectPending || speedJob) {
+        if (polling || pending || effectPending || speedJob || avoidancePending) {
           timer = setTimeout(poll, 100);
           return;
         }
@@ -422,6 +431,36 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         const next = startQueue.then(work);
         startQueue = next.catch(() => {});
         return next;
+      }
+      async function changeAutoAvoidance() {
+        if ($("auto-avoidance").disabled) return;
+        const enabled = !snapshot.proximity.auto_avoidance_enabled, e = epoch;
+        avoidancePending = true;
+        controls();
+        try {
+          await queueStart(async () => {
+            await pollWait;
+            if (e !== epoch || document.hidden) return;
+            const fresh = await request("/api/state", {}, token, 400);
+            if (e !== epoch || document.hidden) return;
+            if (fresh.result !== "ok") throw new Error(fresh.result);
+            render(fresh);
+            const result = await request("/api/action", {
+              operation: "set_auto_avoidance", sequence: ++sequence, window: fresh.window, enabled,
+            }, token, 400);
+            if (e !== epoch) return;
+            render(result);
+            if (result.result !== "ok") {
+              message(reasons[result.result] || "自动避障设置未接受。", true);
+              return;
+            }
+            message(result.proximity?.auto_avoidance_enabled ? "自动避障已开启，网页与语音共用。" : "自动避障已关闭。");
+          });
+        } catch (err) {
+          if (e === epoch) disconnect("自动避障设置未确认，重连后读取设备状态。");
+        } finally {
+          if (e === epoch) { avoidancePending = false; controls(); poll(); }
+        }
       }
       async function changeSpeed() {
         if ($("move-speed").disabled) return;
@@ -702,12 +741,13 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
       document.querySelectorAll("[data-effect]").forEach(button => {
         button.addEventListener("click", () => action(button.dataset.effect, Number(button.dataset.duration)));
       });
+      $("auto-avoidance").addEventListener("click", changeAutoAvoidance);
       $("move-speed").addEventListener("input", changeSpeed);
       $("stop").addEventListener("click", async () => {
         if (!token) return;
         clearAllHolds();
         const e = ++epoch;
-        speedDesired = null; speedJob = null;
+        speedDesired = null; speedJob = null; avoidancePending = false;
         effectPending = false;
         pending = true;
         controls();

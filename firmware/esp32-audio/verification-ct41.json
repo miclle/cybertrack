@@ -1,0 +1,64 @@
+{
+  "version": "2.0.3-ct41",
+  "date": "2026-10-30",
+  "scope": "Default-off web automatic avoidance switch shared by web and voice forward movement; unchanged exclusive 150 mm stop and 200 mm release thresholds",
+  "checks": {
+    "host_control_asan_ubsan": true,
+    "web_ui_host_suite": true,
+    "mcp_http_host_asan_ubsan": true,
+    "esp_idf_full_build": true,
+    "compiled_overlay_matches_sources": true,
+    "role_under_6000_characters": true,
+    "disconnected_browser_layout_360x800_no_horizontal_overflow": true
+  },
+  "cases": [
+    "default off allows near-obstacle voice movement, web held movement and voice sequence",
+    "enabling with a fresh near sample stops active forward motion and cancels pending sequence steps while preserving independently running spray",
+    "disabling clears the distance lock even with an invalid sample, without resuming movement or replaying cancelled holds",
+    "unauthorized, duplicate and stale settings rejected",
+    "web release, reconnect and Wi-Fi loss preserve preference; new device session defaults off",
+    "150 mm exclusive stop boundary, 200 mm release and invalid sample lock retention when enabled",
+    "UI receipt-driven state, failed request disconnect, old-firmware gate, out-of-order responses, reconnect and global-stop race"
+  ],
+  "commands": [
+    "sh firmware/esp32-audio/test.sh",
+    "node firmware/esp32-audio/tests/web_ui_test.mjs",
+    "python3 firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct41-src",
+    "idf.py -C build/xiaozhi-ct41-src -B build/firmware-ct41 build",
+    "git diff --check"
+  ],
+  "artifact": {
+    "path": "build/firmware-ct41/xiaozhi.bin",
+    "bytes": 2659856,
+    "sha256": "ad64acb188b3def91930d363999692e2d0cce51c413f11facfeab3d8bc49e303",
+    "app_partition_bytes": 4128768
+  },
+  "role": {
+    "characters": 5998,
+    "sha256": "77217d66676bb96c24dabd470f8c71b0b9ab46d85f3fe16fc81e86b898120301"
+  },
+  "source_sha256": {
+    "control_sessions.h": "3dc74f8ad341b2e34c492ee422c79089cdbe2f7ddd46f50baf230714cfb043e5",
+    "cybertrack_tools.cc": "9adb206a2e9d78d53c06e53a1f51b505de0b314746fa6c9b65f6a6c5a70c0c82",
+    "proximity_guard.h": "3c2937e592d638c133a045a03c7f952bc2bcbc8db63c9351a54cc853e22c76bd",
+    "web_request.h": "10068fc8b532768a3f36612695b16933b8d663848c08ef22054ef13a26d5a3ca",
+    "apply_overlay.py": "2a47fb6a75676732af6dd5d71c0309ed3703624a8b85b9c65afa8571bec54be3",
+    "role-prompt.txt": "77217d66676bb96c24dabd470f8c71b0b9ab46d85f3fe16fc81e86b898120301",
+    "web/index.html": "90a7b4fea78c33ca92631e6baba4c4600138393cdc990507d7edae29ded32ebf",
+    "tests/proximity_test.cc": "fea0c9440d2a7a8f3875161cce3ea36c4bafc346bb97f2db23707322627ea0bd",
+    "tests/web_request_test.cc": "5007b774c4e1d8035facfec1f29d0d36f8105445658d04c91211c5729055385d",
+    "tests/web_ui_test.mjs": "19abc0c61ca5fa3ad6729be403f8c1b0392105c84cf1621c65e07292117c877d"
+  },
+  "deployment": {
+    "flashed": true,
+    "platform_role_synced": true,
+    "physical_tested": false,
+    "on_device_idle_switch_verified": true,
+    "latest_deployed_version": "2.0.3-ct41",
+    "evidence": "startup-ct41.json"
+  },
+  "limitations": [
+    "Host tests and idle on-device switch verification do not establish spoken voice recognition or physical stopping distance.",
+    "Saved Wi-Fi and all other user settings were retained; the WebSocket session token refreshed during startup."
+  ]
+}

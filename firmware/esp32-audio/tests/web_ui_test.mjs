@@ -11,7 +11,7 @@ function rangeStatus(h, seq, distance = {}, extra = {}) {
 assert(!html.includes('id="distance-state"'));
 assert(!html.includes('id="pairing"') && !html.includes('id="combined"') && !html.includes('id="release"'));
 function harness(){
- const element=()=>({value:'1000',disabled:true,style:{},events:{},classList:{toggle(){}},setAttribute(){},captured:false,
+ const element=()=>({value:'1000',disabled:true,style:{},events:{},classList:{toggle(){}},attributes:{},setAttribute(k,v){this.attributes[k]=v;},captured:false,
   setPointerCapture(){this.captured=true;},hasPointerCapture(){return this.captured;},releasePointerCapture(){this.captured=false;},
   getBoundingClientRect(){return {left:0,top:0,right:100,bottom:100};},addEventListener(n,f){this.events[n]=f;}});
  const ids=Object.fromEntries([...html.matchAll(/id="([^"]+)"/g)].map(m=>[m[1],element()]));
@@ -457,3 +457,42 @@ for(const blocked of [true,false]) {
  assert(h.ids.message.textContent.includes(blocked?'前方过近':'行走已停止'));
 }
 console.log('PASS: proximity locks only forward, cancellation preserves connection/effects, recovery never restarts');
+
+for (const enabled of [false,true]) {
+ const h=harness();await h.connect();
+ assert(h.ids['auto-avoidance'].disabled); // Older firmware cannot configure this preference.
+ h.ctx.render(h.status(2,{proximity:{auto_avoidance_enabled:enabled,forward_blocked:false}}));
+ const b=h.ids['auto-avoidance'];assert(!b.disabled);assert.equal(b.attributes['aria-checked'],String(enabled));
+ const setting=b.events.click();await flush();
+ assert(b.disabled);assert.equal(b.attributes['aria-checked'],String(enabled));
+ h.respond(h.take('/api/state'),h.status(3,{proximity:{auto_avoidance_enabled:enabled}}));await flush();
+ const call=h.take('/api/action');assert.deepEqual(JSON.parse(call.options.body),{operation:'set_auto_avoidance',sequence:1,window:3,enabled:!enabled});
+ h.respond(call,h.status(4,{proximity:{auto_avoidance_enabled:!enabled,forward_blocked:!enabled}}));await setting;
+ assert.equal(b.attributes['aria-checked'],String(!enabled));assert(!b.disabled);
+ h.ctx.render(h.status(3,{proximity:{auto_avoidance_enabled:enabled}}));
+ assert.equal(b.attributes['aria-checked'],String(!enabled)); // Late status cannot roll back the switch.
+ h.ctx.disconnect('test');assert(b.disabled);assert.equal(b.textContent,'未连接');
+ h.respond(h.take('/api/state'),h.status(5));await flush(); // Finish the old in-flight poll.
+ const reconnect=h.ctx.connect();h.respond(h.take('/api/pair'),{result:'ok',token:'new'});await flush();
+ h.respond(h.take('/api/state'),h.status(1,{proximity:{auto_avoidance_enabled:!enabled}}));await reconnect;
+ assert.equal(b.attributes['aria-checked'],String(!enabled));
+}
+{
+ const h=harness();await h.connect();
+ h.ctx.render(h.status(2,{proximity:{auto_avoidance_enabled:false}}));
+ const setting=h.ids['auto-avoidance'].events.click();await flush();
+ h.respond(h.take('/api/state'),h.status(3,{proximity:{auto_avoidance_enabled:false}}));await flush();
+ h.take('/api/action').reject(new Error('network'));await setting;
+ assert(h.ids['auto-avoidance'].disabled);assert.equal(h.ids['auto-avoidance'].textContent,'未连接');
+}
+{
+ const h=harness();await h.connect();
+ h.ctx.render(h.status(2,{proximity:{auto_avoidance_enabled:false}}));
+ const setting=h.ids['auto-avoidance'].events.click();await flush();
+ h.respond(h.take('/api/state'),h.status(3,{proximity:{auto_avoidance_enabled:false}}));await flush();
+ const call=h.take('/api/action');
+ const stopping=h.ids.stop.events.click();h.respond(h.take('/api/stop'),h.status(5,{proximity:{auto_avoidance_enabled:true}}));await stopping;
+ h.respond(call,h.status(4,{proximity:{auto_avoidance_enabled:false}}));await setting;
+ assert.equal(h.ids['auto-avoidance'].attributes['aria-checked'],'true');
+}
+console.log('PASS: automatic avoidance switch uses device receipts, validates capability, ignores stale replies and handles failure/stop races');
