@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-30T09:26:47.998226+08:00",
+  "version": "2.0.3-ct39-wifi",
+  "device_id": "30:ed:a0:a1:97:7c",
+  "scope": "Application-only update with first-boot import of two ordinary Wi-Fi profiles; no actuator starts",
+  "flash": {
+    "path": "build/firmware-ct39-wifi/xiaozhi.bin",
+    "size_bytes": 2646224,
+    "sha256": "c06dbb5aaf519004006c833c29a247adc2a38f9cc8271ee86be8e9a8deac8438",
+    "offset": "0x20000",
+    "previous_application": "2.0.3-ct39",
+    "application_hash_verified": true,
+    "full_previous_application_partition_backup": true,
+    "pre_application_region_backup": true,
+    "pre_application_region_unchanged_before_first_boot": true
+  },
+  "wifi": {
+    "saved_networks_match_local_file": true,
+    "saved_network_count": 2,
+    "config_marker_matches": true,
+    "nvs_crc_valid": true,
+    "other_nvs_keys_unchanged_except_startup_websocket_token": true,
+    "startup_websocket_token_refreshed": true,
+    "outside_nvs_unchanged": true
+  },
+  "startup": [
+    {
+      "time": "2026-10-30T09:24:43.215594+08:00",
+      "firmware": "2.0.3-ct39-wifi"
+    },
+    {
+      "time": "2026-10-30T09:24:43.216427+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-10-30T09:24:43.216521+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-10-30T09:24:43.216623+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-10-30T09:24:43.216658+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-10-30T09:24:47.489664+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-10-30T09:24:47.558175+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-10-30T09:24:48.322318+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "restart": [
+    {
+      "time": "2026-10-30T09:25:19.166206+08:00",
+      "firmware": "2.0.3-ct39-wifi"
+    },
+    {
+      "time": "2026-10-30T09:25:19.167506+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-10-30T09:25:19.167762+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-10-30T09:25:19.167928+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-10-30T09:25:19.168032+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-10-30T09:25:23.468502+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-10-30T09:25:23.481598+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-10-30T09:25:24.293311+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "checks": {
+    "first_boot_network_idle": true,
+    "restart_network_idle": true,
+    "served_page_matches_source": true,
+    "all_observed_logical_outputs_off": true,
+    "starts_this_boot": 0,
+    "state_receipts_checked": 22,
+    "platform_role_changed": false
+  },
+  "other_nvs_change_explanation": "Only websocket/token changed outside the requested Wi-Fi keys; existing startup OTA configuration handling in main/ota.cc updates this field from the service response. Values withheld.",
+  "limitations": [
+    "No forced loss of active access point or alternate-network failover test",
+    "Reset and NVS readback verified; no physical power-cut test",
+    "Portal edits retained by host tests only; not tested on device",
+    "No actuator or spoken voice tests; no enterprise authentication or fixed-priority selection"
+  ],
+  "local_private_evidence": "build/ct39-wifi-private/ (backups and credentials must remain private)"
+}

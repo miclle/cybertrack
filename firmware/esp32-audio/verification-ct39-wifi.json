@@ -1,0 +1,43 @@
+{
+  "version": "2.0.3-ct39-wifi",
+  "network_count": 2,
+  "artifact": {
+    "path": "build/firmware-ct39-wifi/xiaozhi.bin",
+    "size_bytes": 2646224,
+    "sha256": "c06dbb5aaf519004006c833c29a247adc2a38f9cc8271ee86be8e9a8deac8438"
+  },
+  "checks": {
+    "config_valid": true,
+    "wifi_tests_passed": true,
+    "esp_idf_build": true,
+    "only_wifi_board_changed_in_runtime_sources": true,
+    "sdkconfig_unchanged": true,
+    "partition_table_unchanged": true,
+    "saved_networks_match_local_file": true,
+    "saved_network_count": 2,
+    "config_marker_matches": true,
+    "nvs_crc_valid": true,
+    "other_nvs_keys_unchanged_except_startup_websocket_token": true,
+    "startup_websocket_token_refreshed": true,
+    "outside_nvs_unchanged": true
+  },
+  "deployment": {
+    "flashed": true,
+    "evidence": "startup-ct39-wifi.json",
+    "latest_deployed_version": "2.0.3-ct39-wifi"
+  },
+  "date": "2026-10-30T09:26:47.998226+08:00",
+  "scope": "Ordinary multi-Wi-Fi JSON bootstrap on unchanged ct39 control and audio sources; private credentials omitted",
+  "source_sha256": {
+    "prepare.py": "7695f1b6c1a5dd9d5296eacf53773917ca961f7c2aa1c54252cc89aa4163ecee",
+    "wifi_config.py": "7b180e3273f38aaeff82eea8e5ff240d706c0f0d30f4d3fe3e6b13d8a5fa184f",
+    "tests/test_wifi_config.py": "7ee3beaeead63cd4c061598aa8456b505ef5a499f7ffac73650938b742619841",
+    "apply_overlay.py": "1848ae73653ea477a14fbf573b70d9cc2230cf1e2f968b9ba17ff80aff7ca466"
+  },
+  "limitations": [
+    "No forced loss of active access point or alternate-network failover test",
+    "Reset and NVS readback verified; no physical power-cut test",
+    "Portal edits retained by host tests only; not tested on device",
+    "No actuator or spoken voice tests; no enterprise authentication or fixed-priority selection"
+  ]
+}

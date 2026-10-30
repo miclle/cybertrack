@@ -4,7 +4,7 @@
 
 CyberTrack 采用 ESP32-S3 面包板与灵矽语音交互，支持手机局域网网页控制；机械设计采用切面头盔、固定颈架、前部双枪和双液体背包。
 
-[模型与图纸](hardware/model/README.md) · [打印项目](hardware/model/lean-print/README.md) · [面包板固件](firmware/esp32-audio/README.md) · [局域网控制](docs/lan-control.md) · [待办](TODO.md)
+[模型与图纸](hardware/model/README.md) · [打印项目](hardware/model/lean-print/README.md) · [面包板固件](firmware/esp32-audio/README.md) · [Wi-Fi 配置](docs/wifi-configuration.md) · [局域网控制](docs/lan-control.md) · [待办](TODO.md)
 
 ## 样机演示
 
@@ -96,7 +96,7 @@ cmake --build build/firmware-host
 ctest --test-dir build/firmware-host --output-on-failure
 ```
 
-这组命令验证通用控制核心及协议／运行层，不包含当前面包板的全部功能。现用语音与网页控制从 `firmware/esp32-audio/` 开始，源码版本与最近部署记录均为 `2.0.3-ct21`；通过 overlay 接入固定的上游源码，构建仍使用 ESP-IDF v5.5.1、原始源码及组件缓存。源码导出还需满足面包板适配说明中的 Python 与依赖要求。各工程的 GPIO 与工具语义须分别查阅：
+这组命令验证通用控制核心及协议／运行层，不包含当前面包板的全部功能。现用语音与网页控制从 `firmware/esp32-audio/` 开始，默认源码版本为 `2.0.3-ct39`，最新部署为按两组本地 Wi-Fi 配置顺序连接的 `2.0.3-ct39-wifi-order3`；通过 overlay 接入固定的上游源码，构建仍使用 ESP-IDF v5.5.1、原始源码及组件缓存。源码导出还需满足面包板适配说明中的 Python 与依赖要求。各工程的 GPIO 与工具语义须分别查阅：
 
 - [面包板适配](firmware/esp32-audio/README.md)：现用语音、网页和四路控制的构建、部署及逐版本记录。
 - [固件总览](firmware/README.md)与[能力及接口手册](firmware/CAPABILITIES.md)：通用核心、工程差异和接口；现用面包板的四路控制、约 80% 电机 PWM 与左右履带映射以[面包板当前记录](firmware/esp32-audio/README.md)为准，旧台架记录保留各自版本边界。
@@ -119,6 +119,7 @@ ctest --test-dir build/firmware-host --output-on-failure
 | 想了解什么 | 入口 |
 |---|---|
 | 产品目标与已确认决定 | [产品需求](docs/requirements.md) · [决策和待补资料](docs/decisions.md) |
+| 添加或修改普通 Wi-Fi | 编辑仓库根目录的 `secrets/wifi.json`（本地私密文件，Git 忽略）；见[配置说明](docs/wifi-configuration.md)与[格式示例](firmware/esp32-audio/wifi.example.json)。填写后需构建、刷入设备才生效。 |
 | 机械布局、打印与装配 | [模型与当前修订](hardware/model/README.md) · [Lean 六盘打印项目](hardware/model/lean-print/README.md) · [头部打印与螺丝](docs/head-shell-print.md) · [装配参考](docs/assembly.md) |
 | 电源、接线与采购 | [电源与接口](docs/power-and-interfaces.md) · [接线总表](docs/wiring.md) · [BOM](hardware/BOM.md) · [采购清单](hardware/procurement.md) |
 | 原理图设计与 PCB 打板 | [KiCad 原理图工程](hardware/schematic/README.md) · [五页原理图 PDF](hardware/schematic/CyberTrack-schematic.pdf) · [设计与制板要求](docs/schematic-and-pcb.md)；A1 为模块级审图稿，尚未达到 PCB 制造放行状态；[待确认参数](hardware/schematic/parameter-confirmation.md) |

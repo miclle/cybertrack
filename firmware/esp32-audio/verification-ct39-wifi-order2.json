@@ -1,0 +1,47 @@
+{
+  "version": "2.0.3-ct39-wifi-order2",
+  "network_count": 2,
+  "artifact": {
+    "path": "build/firmware-ct39-wifi-order2/xiaozhi.bin",
+    "size_bytes": 2645520,
+    "sha256": "ebf95362597c494715387b99b14fbcded2690dced28d4eb126195b379260352e"
+  },
+  "checks": {
+    "config_valid": true,
+    "bootstrap_tests_passed": true,
+    "exported_station_order_and_fallback_tests_passed": true,
+    "esp_idf_build": true,
+    "main_sources_match_previous_deployment": true,
+    "sdkconfig_unchanged": true,
+    "partition_table_unchanged": true,
+    "saved_networks_match_local_file": true,
+    "saved_network_count": 2,
+    "config_marker_matches": true,
+    "nvs_crc_valid": true,
+    "other_nvs_keys_unchanged_except_startup_websocket_token": true,
+    "startup_websocket_token_refreshed": true,
+    "outside_nvs_unchanged": true,
+    "observed_priority_on_first_boot_and_restart": true
+  },
+  "date": "2026-10-30T09:44:22.660082+08:00",
+  "scope": "Saved-list priority, one candidate per configured SSID with directed fallback for invisible/hidden networks, next candidate on disconnect failure, ten-second rescan; unchanged ct39 application controls",
+  "source_sha256": {
+    "prepare.py": "7695f1b6c1a5dd9d5296eacf53773917ca961f7c2aa1c54252cc89aa4163ecee",
+    "wifi_config.py": "1cc24573d5a2ac969414b7a038138c9435a246563777e365d61675bd50685d23",
+    "wifi_order.py": "8a1957af799490de5033af722171ff13b5fb1c5dbf5c07b8f73b9f9724ca2a74",
+    "tests/test_wifi_config.py": "70bd8e251512e2ce6a91850bd0328a2ade23a8403a791c95c0ba8c23fa1dbd25",
+    "tests/run_wifi_order_tests.py": "231a53ac6792de95bcd28c5a5f6611844570478331ee00c2ae987654984b8265",
+    "apply_overlay.py": "1848ae73653ea477a14fbf573b70d9cc2230cf1e2f968b9ba17ff80aff7ca466"
+  },
+  "deployment": {
+    "flashed": true,
+    "latest_deployed_version": "2.0.3-ct39-wifi-order2",
+    "evidence": "startup-ct39-wifi-order2.json"
+  },
+  "limitations": [
+    "Real first-network directed connection failed with reason 201 (NO_AP_FOUND); fallback to second network passed. Authentication-failure and active-link-loss failover not induced",
+    "All configured SSIDs attempted in saved order, including directed attempts for networks absent from broadcast scan; RSSI selects a radio only within one SSID",
+    "Initial network startup still has a 60-second total wait; Wi-Fi link failure triggers next candidate, no separate Internet-health failover",
+    "No physical power-cut, portal-edit persistence, spoken voice or actuator test"
+  ]
+}
