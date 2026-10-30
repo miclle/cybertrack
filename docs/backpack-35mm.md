@@ -14,8 +14,12 @@
 | 文件 | 当前件数 | 本轮变更 | 需要重切的盘 |
 |---|---:|---|---|
 | [Lean 六盘](../hardware/model/lean-print/CyberTrack-Lean-6plates.3mf) | 27 | 移除泡泡液瓶底托和识别条；更新 PP03 | 第 3、6 盘 |
-| [用户 Ready 项目（现为七盘）](../hardware/model/print-ready/CyberTrack-Ready-6plates.3mf) | 28 | 以 2026-10-28 最新界面排盘为输入，移除识别条并更新 PP03；背包从第 6 盘移到独立第 7 盘 | 第 6、7 盘；输入文件所有盘均无 G-code |
+| [用户 Ready 项目（当前六盘）](../hardware/model/print-ready/CyberTrack-Ready-6plates.3mf) | 27 | 已提交快照 `d5f5128` 移除托盘 `PP07-Tray.stl`，背包直立独放于第 6 盘；2026-10-30 同步审计 | 全部第 1–6 盘；文件无 G-code |
 | [背包 STL](../hardware/model/print-parts/PP03-Backpack.stl)／[STEP](../hardware/model/print-parts/PP03-Backpack.step) | 1 | 同一原生 PP03 导出，底面归零 | 导入后重新切片 |
+
+2026-10-30 核对当前已提交文件：保留的 27 件（含修改体共 31 个网格）拓扑、朝向和对象／零件工艺保持，部分排盘位置改变；全局设置仅预设显示名称和擦拭塔坐标数组长度变化。新哈希与盘号已同步，旧 28 件／7 盘记录保留在审计的 `previous_snapshot` 中。托盘移除仅描述现有项目，不作为装配完整性结论。本次未修改 CAD 或 3MF，见[快照核对](../hardware/model/print-ready/snapshot-audit-20261030.json)。
+
+### 2026-10-28 排盘与试切片历史
 
 2026-10-28 按用户要求，Ready 新增第 7 盘“背包 Ø35 · 独立盘”，仅放 PP03，保留原文件名。其他零件的位置、模型和工艺沿用最新界面快照，不能套用 Lean 盘号。它仍包含旧控制板压框，故仅作为用户现场项目；本轮只核对背包与泡泡液瓶的差异。两份文件本轮受影响盘的旧 G-code 和缩略图已失效清除，未重新切片、未发送打印。旧时间与耗材不再代表修改后的盘。
 
@@ -27,7 +31,7 @@
 
 [原生几何回读](../hardware/model/backpack-35mm-audit.json)验证两侧解析圆柱面半径 17.5 mm、孔内净空、保留底托、单实体、无保留零件实体干涉和无关零件几何保持。STL 闭合、单连通、无非流形；STEP 与原生几何双向差小于 0.01 mm³。[打印更新报告](../hardware/model/backpack-print-update.json)记录两份输入哈希、删除清单、保留条目和重切盘。
 
-从报告记录的修改前模型运行 FreeCAD Python `scripts/update_backpack.py`，再运行 `python3 scripts/update_backpack_prints.py`。只读检查：`python3 scripts/check_backpack_release.py` 或 `python3 scripts/check_print_release.py`。检查结果明确区分文件一致性和切片／实物验收；没有新增保持力、强度、公差、电气或液体共存验收。
+从报告记录的修改前模型运行 FreeCAD Python `scripts/update_backpack.py`，再运行 `python3 scripts/update_backpack_prints.py`。只读检查：`python3 scripts/check_backpack_release.py`；运行 `python3 scripts/check_print_release.py` 会重新检查并更新 `hardware/model/print-ready/release-check.json`。检查结果明确区分文件一致性和切片／实物验收；没有新增保持力、强度、公差、电气或液体共存验收。
 
 ![当前背包网格预览](../hardware/model/backpack-35mm.png)
 

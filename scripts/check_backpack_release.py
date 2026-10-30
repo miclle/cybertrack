@@ -29,11 +29,21 @@ def check():
     expected_mesh,_=raw_mesh(MODEL/'remaining-print/PP03-base.stl')
     result=[]
     for row in prints['projects']:
-        path=ROOT/row['path'];assert sha(path)==row['sha256']
+        path=ROOT/row['path'];assert sha(path)==row['sha256'],row['path']
         with zipfile.ZipFile(path) as z:
+            assert z.testzip() is None,row['path']
             settings=E.fromstring(z.read('Metadata/model_settings.config'))
             names=[o.find("metadata[@key='name']").get('value') for o in settings.findall('object')]
             assert names==row['part_names'] and not {'BubblePod','BubbleLidMark'}.intersection(names)
+            assert len(names)==len(set(names))==row['print_parts']
+            if 'plates' in row:
+                objects={o.get('id'):o.find("metadata[@key='name']").get('value') for o in settings.findall('object')}
+                plates=[{'name':p.find("metadata[@key='plater_name']").get('value'),
+                         'objects':sorted(objects[i.find("metadata[@key='object_id']").get('value')]
+                                          for i in p.findall('model_instance'))}
+                        for p in settings.findall('plate')]
+                assert plates==row['plates']
+                assert sorted(n for p in plates for n in p['objects'])==sorted(names)
             for plate in row['requires_reslice_plates']:
                 assert f'Metadata/plate_{plate}.gcode' not in z.namelist()
             assert names.count('PP03-base')==1
@@ -58,10 +68,11 @@ def check():
             for a,b in zip(actual,expected):
                 assert all(abs(float(a.get(k))-float(b.get(k))-offset)<1e-5 for k,offset in zip(('x','y','z'),row['mesh_local_translation_mm']))
             assert [t.attrib for t in mesh.find(tag('triangles'))]==[t.attrib for t in expected_mesh.find(tag('triangles'))]
-        result.append({'project':row['path'],'print_parts':len(names),'requires_reslice_plates':row['requires_reslice_plates'],
+        result.append({'project':row['path'],'sha256':row['sha256'],'print_parts':len(names),
+                       'plate_count':len(settings.findall('plate')),'requires_reslice_plates':row['requires_reslice_plates'],
                        'dedicated_backpack_plate':row.get('dedicated_backpack_plate')})
     for row in prints['retired_exports']:assert not (ROOT/row['path']).exists()
-    return {'passed':True,'scope':'2026-10-27 backpack CAD and saved project consistency',
+    return {'passed':True,'scope':'backpack CAD and current saved project consistency',
             'projects':result,'slicing_validated':False,'physical_fit_verified':False,
             'limits':'Affected plate G-code is invalidated. Unrelated historical slice evidence is not re-certified.'}
 
