@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "supply": {
+    "name": "辰克 CK18650-1234S-NP 5 V 输出",
+    "voltage_v": {
+      "value": 5,
+      "kind": "user_spec",
+      "source": "hardware/components/ck-5v-battery/README.md；标称非带载实测"
+    },
+    "continuous_a": {
+      "value": null,
+      "kind": "unknown",
+      "source": "hardware/schematic/parameter-confirmation.md E01"
+    }
+  },
+  "branches": {
+    "controller_audio": {
+      "idle": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; controller_audio idle 未测"
+        }
+      },
+      "run": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; controller_audio run 未测"
+        }
+      },
+      "start": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; controller_audio start 未测"
+        }
+      }
+    },
+    "motor_drive": {
+      "idle": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; motor_drive idle 未测"
+        }
+      },
+      "run": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; motor_drive run 未测"
+        }
+      },
+      "start": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; motor_drive start 未测"
+        }
+      }
+    },
+    "water": {
+      "idle": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; water idle 未测"
+        }
+      },
+      "run": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; water run 未测"
+        }
+      },
+      "start": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; water start 未测"
+        }
+      }
+    },
+    "bubbles": {
+      "idle": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; bubbles idle 未测"
+        }
+      },
+      "run": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; bubbles run 未测"
+        }
+      },
+      "start": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "hardware/schematic/parameter-confirmation.md E04; bubbles start 未测"
+        }
+      }
+    },
+    "ignition": {
+      "idle": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "docs/effects-control.md; 高压未放行，不安排带电采集，不假定为零"
+        }
+      },
+      "run": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "docs/effects-control.md; 高压未放行，不安排带电采集，不假定为零"
+        }
+      },
+      "start": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "docs/effects-control.md; 高压未放行，不安排带电采集，不假定为零"
+        }
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "id": "standby",
+      "kind": "steady",
+      "modes": {
+        "controller_audio": "idle",
+        "motor_drive": "idle",
+        "water": "idle",
+        "bubbles": "idle",
+        "ignition": "idle"
+      }
+    },
+    {
+      "id": "conversation",
+      "kind": "steady",
+      "modes": {
+        "controller_audio": "run",
+        "motor_drive": "idle",
+        "water": "idle",
+        "bubbles": "idle",
+        "ignition": "idle"
+      }
+    },
+    {
+      "id": "drive",
+      "kind": "steady",
+      "modes": {
+        "controller_audio": "run",
+        "motor_drive": "run",
+        "water": "idle",
+        "bubbles": "idle",
+        "ignition": "idle"
+      }
+    },
+    {
+      "id": "family_show",
+      "kind": "steady",
+      "modes": {
+        "controller_audio": "run",
+        "motor_drive": "run",
+        "water": "idle",
+        "bubbles": "run",
+        "ignition": "idle"
+      }
+    },
+    {
+      "id": "family_start",
+      "kind": "startup",
+      "modes": {
+        "controller_audio": "run",
+        "motor_drive": "start",
+        "water": "idle",
+        "bubbles": "start",
+        "ignition": "idle"
+      }
+    },
+    {
+      "id": "all_outputs_design_only",
+      "kind": "startup",
+      "modes": {
+        "controller_audio": "start",
+        "motor_drive": "start",
+        "water": "start",
+        "bubbles": "start",
+        "ignition": "start"
+      }
+    }
+  ]
+}
