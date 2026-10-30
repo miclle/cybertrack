@@ -1,0 +1,1031 @@
+{
+  "schema_version": 1,
+  "baseline": "2.0.3-ct42",
+  "scope": "工具选择与参数；不表示已执行模型或真人测试",
+  "cases": [
+    {
+      "id": "V001",
+      "category": "movement",
+      "text": "前进",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "forward",
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V002",
+      "category": "movement",
+      "text": "前进两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "forward",
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V003",
+      "category": "movement",
+      "text": "前进五秒，速度百分之六十",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "forward",
+            "duration_ms": 5000,
+            "speed_percent": 60
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V004",
+      "category": "movement",
+      "text": "前进一分钟",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "forward",
+            "duration_ms": 60000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V005",
+      "category": "movement",
+      "text": "后退",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "backward",
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V006",
+      "category": "movement",
+      "text": "后退两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "backward",
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V007",
+      "category": "movement",
+      "text": "后退五秒，速度百分之六十",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "backward",
+            "duration_ms": 5000,
+            "speed_percent": 60
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V008",
+      "category": "movement",
+      "text": "后退一分钟",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "backward",
+            "duration_ms": 60000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V009",
+      "category": "movement",
+      "text": "左转",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "left",
+            "duration_ms": 880
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V010",
+      "category": "movement",
+      "text": "左转两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "left",
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V011",
+      "category": "movement",
+      "text": "左转五秒，速度百分之六十",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "left",
+            "duration_ms": 5000,
+            "speed_percent": 60
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V012",
+      "category": "movement",
+      "text": "左转一分钟",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "left",
+            "duration_ms": 60000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V013",
+      "category": "movement",
+      "text": "右转",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "right",
+            "duration_ms": 880
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V014",
+      "category": "movement",
+      "text": "右转两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "right",
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V015",
+      "category": "movement",
+      "text": "右转五秒，速度百分之六十",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "right",
+            "duration_ms": 5000,
+            "speed_percent": 60
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V016",
+      "category": "movement",
+      "text": "右转一分钟",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "right",
+            "duration_ms": 60000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V017",
+      "category": "effects",
+      "text": "喷水",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V018",
+      "category": "effects",
+      "text": "喷水两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V019",
+      "category": "effects",
+      "text": "喷水30秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V020",
+      "category": "effects",
+      "text": "喷水六十秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "response_expectation": "只请求上限一次并说明，不循环补足"
+    },
+    {
+      "id": "V021",
+      "category": "effects",
+      "text": "吹泡泡",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V022",
+      "category": "effects",
+      "text": "吹泡泡两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V023",
+      "category": "effects",
+      "text": "吹泡泡30秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V024",
+      "category": "effects",
+      "text": "吹泡泡六十秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "response_expectation": "只请求上限一次并说明，不循环补足"
+    },
+    {
+      "id": "V025",
+      "category": "effects",
+      "text": "放电",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.ignition",
+          "arguments": {
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V026",
+      "category": "effects",
+      "text": "放电两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.ignition",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V027",
+      "category": "effects",
+      "text": "放电5秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.ignition",
+          "arguments": {
+            "duration_ms": 5000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V028",
+      "category": "effects",
+      "text": "放电六十秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.ignition",
+          "arguments": {
+            "duration_ms": 5000
+          }
+        }
+      ],
+      "response_expectation": "只请求上限一次并说明，不循环补足"
+    },
+    {
+      "id": "V029",
+      "category": "composition",
+      "text": "前进五秒，同时喷水",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move_and_water",
+          "arguments": {
+            "direction": "forward",
+            "move_duration_ms": 5000,
+            "water_duration_ms": 5000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V030",
+      "category": "composition",
+      "text": "左转三秒，同时喷水一秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move_and_water",
+          "arguments": {
+            "direction": "left",
+            "move_duration_ms": 3000,
+            "water_duration_ms": 1000
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V031",
+      "category": "composition",
+      "text": "前进五秒，然后左转",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"forward\",\"move_ms\":5000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V032",
+      "category": "composition",
+      "text": "先吹泡泡两秒，再后退一秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0},{\"direction\":\"backward\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V033",
+      "category": "composition",
+      "text": "左转两秒，同时吹泡泡三秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"left\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":3000,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V034",
+      "category": "composition",
+      "text": "同时喷水两秒和吹泡泡一秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":2000,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V035",
+      "category": "composition",
+      "text": "先前进一秒，再同时左转两秒和吹泡泡两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"forward\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V036",
+      "category": "composition",
+      "text": "先前进两秒再右转两秒，都用百分之七十速度",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"forward\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":70},{\"direction\":\"right\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":70}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V037",
+      "category": "speed",
+      "text": "调到百分之六十",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "expected_calls": [
+        {
+          "name": "self.tank.set_speed",
+          "arguments": {
+            "speed_percent": 60
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V038",
+      "category": "speed",
+      "text": "快一点",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "expected_calls": [
+        {
+          "name": "self.tank.adjust_speed",
+          "arguments": {
+            "delta_percent": 10
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V039",
+      "category": "speed",
+      "text": "慢一点",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "expected_calls": [
+        {
+          "name": "self.tank.adjust_speed",
+          "arguments": {
+            "delta_percent": -10
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V040",
+      "category": "speed",
+      "text": "全速",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "expected_calls": [
+        {
+          "name": "self.tank.set_speed",
+          "arguments": {
+            "speed_percent": 100
+          }
+        }
+      ],
+      "response_expectation": "成功静默；仅按回执判断，不补做"
+    },
+    {
+      "id": "V041",
+      "category": "speed",
+      "text": "速度百分之五十",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "越界／非整数先澄清，建议问句不调速，不启动"
+    },
+    {
+      "id": "V042",
+      "category": "speed",
+      "text": "速度百分之一百零一",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "越界／非整数先澄清，建议问句不调速，不启动"
+    },
+    {
+      "id": "V043",
+      "category": "speed",
+      "text": "速度百分之六十点五",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "越界／非整数先澄清，建议问句不调速，不启动"
+    },
+    {
+      "id": "V044",
+      "category": "speed",
+      "text": "速度快一些还是慢一些好？",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "越界／非整数先澄清，建议问句不调速，不启动"
+    },
+    {
+      "id": "V045",
+      "category": "stop",
+      "text": "停止",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "立即全停，成功静默；不先查询或追问"
+    },
+    {
+      "id": "V046",
+      "category": "stop",
+      "text": "停下",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "立即全停，成功静默；不先查询或追问"
+    },
+    {
+      "id": "V047",
+      "category": "stop",
+      "text": "停止行走",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "立即全停，成功静默；不先查询或追问"
+    },
+    {
+      "id": "V048",
+      "category": "stop",
+      "text": "停止喷水",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "立即全停，成功静默；不先查询或追问"
+    },
+    {
+      "id": "V049",
+      "category": "stop",
+      "text": "停止泡泡",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "立即全停，成功静默；不先查询或追问"
+    },
+    {
+      "id": "V050",
+      "category": "stop",
+      "text": "停止狂暴模式",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "立即全停，成功静默；不先查询或追问"
+    },
+    {
+      "id": "V051",
+      "category": "stop",
+      "text": "取消序列",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "立即全停，成功静默；不先查询或追问"
+    },
+    {
+      "id": "V052",
+      "category": "stop",
+      "text": "所有动作都停下来",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "立即全停，成功静默；不先查询或追问"
+    },
+    {
+      "id": "V053",
+      "category": "query",
+      "text": "你现在在做什么",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "只解释最新有效回执；缺数据不猜、不重复轮询，不启动"
+    },
+    {
+      "id": "V054",
+      "category": "query",
+      "text": "你还在喷水吗",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "只解释最新有效回执；缺数据不猜、不重复轮询，不启动"
+    },
+    {
+      "id": "V055",
+      "category": "query",
+      "text": "泡泡结束了吗",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "只解释最新有效回执；缺数据不猜、不重复轮询，不启动"
+    },
+    {
+      "id": "V056",
+      "category": "query",
+      "text": "序列进行到哪一步了",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "只解释最新有效回执；缺数据不猜、不重复轮询，不启动"
+    },
+    {
+      "id": "V057",
+      "category": "query",
+      "text": "狂暴模式还剩多久",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "只解释最新有效回执；缺数据不猜、不重复轮询，不启动"
+    },
+    {
+      "id": "V058",
+      "category": "query",
+      "text": "前面有多远",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "只解释最新有效回执；缺数据不猜、不重复轮询，不启动"
+    },
+    {
+      "id": "V059",
+      "category": "query",
+      "text": "测一下距离",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "只解释最新有效回执；缺数据不猜、不重复轮询，不启动"
+    },
+    {
+      "id": "V060",
+      "category": "query",
+      "text": "自动避障开着吗",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "只解释最新有效回执；缺数据不猜、不重复轮询，不启动"
+    },
+    {
+      "id": "V061",
+      "category": "no_action",
+      "text": "不要前进",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V062",
+      "category": "no_action",
+      "text": "别喷水",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V063",
+      "category": "no_action",
+      "text": "不要开启狂暴模式",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V064",
+      "category": "no_action",
+      "text": "不许吹泡泡",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V065",
+      "category": "no_action",
+      "text": "不要放电",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V066",
+      "category": "no_action",
+      "text": "不要饭店",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V067",
+      "category": "no_action",
+      "text": "“前进两秒”是什么意思",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V068",
+      "category": "no_action",
+      "text": "你会喷水吗",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V069",
+      "category": "no_action",
+      "text": "喷水的原理是什么",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V070",
+      "category": "no_action",
+      "text": "泡泡是怎么形成的",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V071",
+      "category": "no_action",
+      "text": "去饭店吃饭",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V072",
+      "category": "no_action",
+      "text": "附近的饭店在哪里",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V073",
+      "category": "no_action",
+      "text": "饭店是什么意思",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V074",
+      "category": "no_action",
+      "text": "如果以后我说前进，你会怎么办",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V075",
+      "category": "no_action",
+      "text": "我昨天说过“左转”",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V076",
+      "category": "no_action",
+      "text": "我在跟别人说喷水，不是在叫你",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作"
+    },
+    {
+      "id": "V077",
+      "category": "clarify",
+      "text": "前进二十厘米",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "简短澄清，不猜动作／时长／速度，不将距离角度换成时长"
+    },
+    {
+      "id": "V078",
+      "category": "clarify",
+      "text": "左转九十度",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "简短澄清，不猜动作／时长／速度，不将距离角度换成时长"
+    },
+    {
+      "id": "V079",
+      "category": "clarify",
+      "text": "动一下那个东西",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "简短澄清，不猜动作／时长／速度，不将距离角度换成时长"
+    },
+    {
+      "id": "V080",
+      "category": "clarify",
+      "text": "速度调到合适的程度",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "简短澄清，不猜动作／时长／速度，不将距离角度换成时长"
+    }
+  ]
+}
