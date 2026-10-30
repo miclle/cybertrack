@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recheck current L298N exports and A1 source evidence without rewriting history."""
+"""Recheck current L298N exports and schematic evidence without rewriting history."""
 import argparse
 from datetime import datetime
 import hashlib
@@ -16,6 +16,7 @@ L298N = ROOT / 'hardware/model/l298n-compact'
 SCHEMATIC = ROOT / 'hardware/schematic'
 HISTORY = '9ab523c6c9aa3792cc21fb1710eae2b5ecd2258f'
 A1 = '84c5f708d96ea7a6a3e3a6ce9b84647be7551886'
+A1_RECHECK = '8206f328e6a72a31123cd3fdc8037c8d8b9320f4'
 
 
 def sha(path):
@@ -72,13 +73,15 @@ def check_parts(date):
 def check_schematic(date):
     original = SCHEMATIC / 'verification.json'
     old = preserved_report(original)
+    package = SCHEMATIC / 'CyberTrack-schematic-A1.zip'
+    assert package.read_bytes() == historical_bytes(A1_RECHECK, package), 'A1 package changed'
+    recheck = SCHEMATIC / 'checks/A1-source-recheck-20261030.json'
+    assert recheck.read_bytes() == historical_bytes(A1_RECHECK, SCHEMATIC / 'verification-current.json'), 'A1 recheck changed'
     outputs, sources = {}, {}
     for name, expected in old['sha256'].items():
         path = SCHEMATIC / name
         assert hashlib.sha256(historical_bytes(A1, path)).hexdigest() == expected, name
         actual = sha(path)
-        # Only the live README is updated by this evidence refresh; A1 design files stay intact.
-        assert actual == expected or name == 'README.md', name
         outputs[name] = {'sha256': actual, 'matches_A1': actual == expected}
     for name, expected in old['source_evidence_sha256'].items():
         path = ROOT / name
@@ -86,21 +89,36 @@ def check_schematic(date):
         actual = sha(path)
         sources[name] = {'sha256': actual, 'matches_A1': actual == expected}
     connectivity = check_netlist(SCHEMATIC / 'checks/CyberTrack.net.xml')
-    assert connectivity['passed'] and len(connectivity['checks']) == 92
+    assert connectivity['passed'] and len(connectivity['checks']) == 112
+    export_path = SCHEMATIC / 'checks/A2-export-check.json'
+    export = json.loads(export_path.read_text())
+    assert export['revision'] == 'A2' and export['passed']
+    for name, expected in export['files_sha256'].items():
+        assert sha(ROOT / name) == expected, name
+    erc = json.loads((SCHEMATIC / 'checks/erc.json').read_text())
+    assert len(erc['sheets']) == 6 and not any(s['violations'] for s in erc['sheets'])
+    assert erc['ignored_checks'] == old['erc']['default_ignored_checks']
+    assert export['pdf_review']['pages'] == 6 and export['pdf_review']['passed']
+    outputs['ultrasonic.kicad_sch'] = {'sha256': sha(SCHEMATIC / 'ultrasonic.kicad_sch'), 'matches_A1': False}
     return {'date': date, 'passed': True,
-            'scope': 'Existing A1 netlist against current source assignments covered by the checker',
+            'revision': 'A2',
+            'scope': 'A2 regenerated six-sheet schematic, ERC, PDF and current source assignments',
             'historical_A1_revision': A1, 'historical_report_sha256': sha(original),
             'historical_report_byte_preserved': True,
+            'historical_package_sha256': sha(package),
+            'historical_source_recheck_sha256': sha(recheck),
+            'historical_package_and_source_recheck_byte_preserved': True,
             'historical_source_and_output_hashes_verified_at_A1_revision': True,
             'current_outputs': outputs, 'current_sources': sources,
             'additional_source_hashes': {
                 'firmware/esp32-audio/apply_overlay.py': sha(ROOT / 'firmware/esp32-audio/apply_overlay.py'),
                 'firmware/esp32-audio/ultrasonic.cc': sha(ROOT / 'firmware/esp32-audio/ultrasonic.cc')},
             'connectivity': connectivity,
-            'erc_rerun': False, 'pdf_render_review_rerun': False,
-            'netlist_reexported': False, 'physical_test_performed': False,
+            'export_check_sha256': sha(export_path),
+            'erc_rerun': True, 'erc_violations': 0, 'pdf_render_review_rerun': True,
+            'netlist_reexported': True, 'physical_test_performed': False,
             'manufacturing_ready': False,
-            'limits': 'A1 schematic and exported netlist bytes are preserved. This recheck covers the existing 92 assertions only, not all current firmware features. Later GPIO1/GPIO2 ultrasonic interfaces are not in A1. ERC and PDF review remain historical A1 evidence.'}
+            'limits': 'A1 package and original audit are retained. A2 adds controller 3V3/GND and GPIO1/GPIO2 ultrasonic wiring; all A1 terminal connectivity is preserved. New header positions, module electrical levels, 3V3 current margin and physical acceptance remain unverified.'}
 
 
 def main():

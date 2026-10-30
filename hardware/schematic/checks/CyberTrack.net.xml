@@ -2,15 +2,15 @@
 <export version="E">
   <design>
     <source>/Users/miclle/github/miclle/cybertrack/hardware/schematic/CyberTrack.kicad_sch</source>
-    <date>2026-10-26T09:33:11</date>
+    <date>2026-10-30T13:41:00</date>
     <tool>Eeschema 10.0.7</tool>
-    <textvar name="REVISION">A1 - REVIEW ONLY</textvar>
+    <textvar name="REVISION">A2 - REVIEW ONLY</textvar>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>CyberTrack / Power and isolation</title>
         <company>CyberTrack</company>
-        <rev>A1</rev>
-        <date>2026-10-26</date>
+        <rev>A2</rev>
+        <date>2026-10-30</date>
         <source>CyberTrack.kicad_sch</source>
         <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
         <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
@@ -27,8 +27,8 @@
       <title_block>
         <title>CyberTrack / ESP32-S3 and BOOT</title>
         <company>CyberTrack</company>
-        <rev>A1</rev>
-        <date>2026-10-26</date>
+        <rev>A2</rev>
+        <date>2026-10-30</date>
         <source>control.kicad_sch</source>
         <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
         <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
@@ -45,8 +45,8 @@
       <title_block>
         <title>CyberTrack / Motor drive</title>
         <company>CyberTrack</company>
-        <rev>A1</rev>
-        <date>2026-10-26</date>
+        <rev>A2</rev>
+        <date>2026-10-30</date>
         <source>drive.kicad_sch</source>
         <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
         <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
@@ -63,8 +63,8 @@
       <title_block>
         <title>CyberTrack / Water and bubbles</title>
         <company>CyberTrack</company>
-        <rev>A1</rev>
-        <date>2026-10-26</date>
+        <rev>A2</rev>
+        <date>2026-10-30</date>
         <source>effects.kicad_sch</source>
         <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
         <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
@@ -81,9 +81,27 @@
       <title_block>
         <title>CyberTrack / Reserved ignition LV</title>
         <company>CyberTrack</company>
-        <rev>A1</rev>
-        <date>2026-10-26</date>
+        <rev>A2</rev>
+        <date>2026-10-30</date>
         <source>ignition-lv.kicad_sch</source>
+        <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
+        <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
+        <comment number="3" value="Pin IDs identify signals, NOT physical header positions"/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+    <sheet number="6" name="/Ultrasonic 3V3 interface/" tstamps="/e55d08ff-8f6e-5736-b66e-f66591a8ea74/">
+      <title_block>
+        <title>CyberTrack / Ultrasonic 3V3 interface</title>
+        <company>CyberTrack</company>
+        <rev>A2</rev>
+        <date>2026-10-30</date>
+        <source>ultrasonic.kicad_sch</source>
         <comment number="1" value="MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION"/>
         <comment number="2" value="Retain existing ESP32-S3 board; TBD items are unresolved"/>
         <comment number="3" value="Pin IDs identify signals, NOT physical header positions"/>
@@ -482,6 +500,13 @@
             <pin num="IO47"/>
             <pin num="IO40"/>
             <pin num="IO39"/>
+          </pins>
+        </unit>
+        <unit name="C">
+          <pins>
+            <pin num="3V3"/>
+            <pin num="IO1"/>
+            <pin num="IO2"/>
           </pins>
         </unit>
       </units>
@@ -1077,6 +1102,32 @@
         </unit>
       </units>
     </comp>
+    <comp ref="U11">
+      <value>HC-SR04 / SELECTED VARIANT</value>
+      <description>Logical module interface; no pad mapping frozen</description>
+      <fields>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Logical module interface; no pad mapping frozen</field>
+      </fields>
+      <libsource lib="CyberTrack" part="Ultrasonic_Module" description=""/>
+      <property name="Sheetname" value="Ultrasonic 3V3 interface"/>
+      <property name="Sheetfile" value="ultrasonic.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="exclude_from_board"/>
+      <sheetpath names="/Ultrasonic 3V3 interface/" tstamps="/e55d08ff-8f6e-5736-b66e-f66591a8ea74/"/>
+      <tstamps>64fd573b-e420-5891-92e0-574e9209493d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="VCC"/>
+            <pin num="TRIG"/>
+            <pin num="ECHO"/>
+            <pin num="GND"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
   </components>
   <libparts>
     <libpart lib="CyberTrack" part="Battery5V">
@@ -1140,9 +1191,12 @@
         <field name="Description"/>
       </fields>
       <pins>
+        <pin num="3V3" name="3V3_/_REGULATED" type="power_out"/>
         <pin num="5Vin" name="5Vin_[L21]" type="power_in"/>
         <pin num="GND" name="GND_[L22]" type="passive"/>
         <pin num="IO0" name="BOOT_/_IO0_[R14]" type="input"/>
+        <pin num="IO1" name="GPIO1_/_TRIG" type="output"/>
+        <pin num="IO2" name="GPIO2_/_ECHO" type="input"/>
         <pin num="IO4" name="MIC_WS_[L04]" type="output"/>
         <pin num="IO5" name="MIC_SCK_[L05]" type="output"/>
         <pin num="IO6" name="MIC_DATA_[L06]" type="input"/>
@@ -1339,6 +1393,21 @@
         <pin num="VOLUME_UP" name="VOLUME_UP" type="output"/>
       </pins>
     </libpart>
+    <libpart lib="CyberTrack" part="Ultrasonic_Module">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">Ultrasonic_Module</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="ECHO" name="ECHO" type="output"/>
+        <pin num="GND" name="GND" type="passive"/>
+        <pin num="TRIG" name="TRIG" type="input"/>
+        <pin num="VCC" name="VCC_/_3.3_V" type="power_in"/>
+      </pins>
+    </libpart>
   </libparts>
   <libraries>
     <library logical="CyberTrack">
@@ -1358,78 +1427,90 @@
       <node ref="J9" pin="+" pinfunction="LV+_ONLY_+" pintype="passive"/>
       <node ref="U10" pin="VOUT+" pinfunction="VOUT+_VOUT+" pintype="power_out"/>
     </net>
-    <net code="4" name="/Water and bubbles/3V7_BUBBLE" class="Default">
+    <net code="4" name="/Ultrasonic 3V3 interface/3V3_CTRL" class="Default">
+      <node ref="U1" pin="3V3" pinfunction="3V3_/_REGULATED_3V3" pintype="power_out"/>
+      <node ref="U11" pin="VCC" pinfunction="VCC_/_3.3_V_VCC" pintype="power_in"/>
+    </net>
+    <net code="5" name="/Ultrasonic 3V3 interface/ULTRASONIC_ECHO" class="Default">
+      <node ref="U1" pin="IO2" pinfunction="GPIO2_/_ECHO_IO2" pintype="input"/>
+      <node ref="U11" pin="ECHO" pinfunction="ECHO_ECHO" pintype="output"/>
+    </net>
+    <net code="6" name="/Ultrasonic 3V3 interface/ULTRASONIC_TRIG" class="Default">
+      <node ref="U1" pin="IO1" pinfunction="GPIO1_/_TRIG_IO1" pintype="output"/>
+      <node ref="U11" pin="TRIG" pinfunction="TRIG_TRIG" pintype="input"/>
+    </net>
+    <net code="7" name="/Water and bubbles/3V7_BUBBLE" class="Default">
       <node ref="A2" pin="+" pinfunction="+_+" pintype="power_in"/>
       <node ref="U9" pin="VO+" pinfunction="VO+_VO+" pintype="power_out"/>
     </net>
-    <net code="5" name="/Water and bubbles/3V7_WATER" class="Default">
+    <net code="8" name="/Water and bubbles/3V7_WATER" class="Default">
       <node ref="A1" pin="+" pinfunction="+_+" pintype="power_in"/>
       <node ref="U7" pin="VO+" pinfunction="VO+_VO+" pintype="power_out"/>
     </net>
-    <net code="6" name="/Water and bubbles/BUBBLE_SW_N" class="Default">
+    <net code="9" name="/Water and bubbles/BUBBLE_SW_N" class="Default">
       <node ref="A2" pin="-" pinfunction="-_-" pintype="passive"/>
       <node ref="U8" pin="VOUT-" pinfunction="VOUT-_VOUT-" pintype="passive"/>
       <node ref="U9" pin="GND" pinfunction="GND_GND" pintype="passive"/>
     </net>
-    <net code="7" name="/Water and bubbles/BUBBLE_SW_P" class="Default">
+    <net code="10" name="/Water and bubbles/BUBBLE_SW_P" class="Default">
       <node ref="U8" pin="VOUT+" pinfunction="VOUT+_VOUT+" pintype="power_out"/>
       <node ref="U9" pin="IN+" pinfunction="IN+_IN+" pintype="power_in"/>
     </net>
-    <net code="8" name="/Water and bubbles/WATER_SW_N" class="Default">
+    <net code="11" name="/Water and bubbles/WATER_SW_N" class="Default">
       <node ref="A1" pin="-" pinfunction="-_-" pintype="passive"/>
       <node ref="U6" pin="VOUT-" pinfunction="VOUT-_VOUT-" pintype="passive"/>
       <node ref="U7" pin="GND" pinfunction="GND_GND" pintype="passive"/>
     </net>
-    <net code="9" name="/Water and bubbles/WATER_SW_P" class="Default">
+    <net code="12" name="/Water and bubbles/WATER_SW_P" class="Default">
       <node ref="U6" pin="VOUT+" pinfunction="VOUT+_VOUT+" pintype="power_out"/>
       <node ref="U7" pin="IN+" pinfunction="IN+_IN+" pintype="power_in"/>
     </net>
-    <net code="10" name="5V_ACT" class="Default">
+    <net code="13" name="5V_ACT" class="Default">
       <node ref="F4" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="F5" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="F6" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="F7" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="SW2" pin="B" pinfunction="B_B" pintype="passive"/>
     </net>
-    <net code="11" name="5V_BUBBLE_IN" class="Default">
+    <net code="14" name="5V_BUBBLE_IN" class="Default">
       <node ref="F6" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="U8" pin="VIN+" pinfunction="VIN+_VIN+" pintype="power_in"/>
     </net>
-    <net code="12" name="5V_CTRL" class="Default">
+    <net code="15" name="5V_CTRL" class="Default">
       <node ref="JP1" pin="B" pinfunction="B_B" pintype="passive"/>
       <node ref="U1" pin="5Vin" pinfunction="5Vin_[L21]_5Vin" pintype="power_in"/>
     </net>
-    <net code="13" name="5V_IGN_FUSED" class="Default">
+    <net code="16" name="5V_IGN_FUSED" class="Default">
       <node ref="F7" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="JP2" pin="A" pinfunction="A_A" pintype="passive"/>
     </net>
-    <net code="14" name="5V_IGN_ISOLATED" class="Default">
+    <net code="17" name="5V_IGN_ISOLATED" class="Default">
       <node ref="JP2" pin="B" pinfunction="B_B" pintype="passive"/>
       <node ref="U10" pin="VIN+" pinfunction="VIN+_VIN+" pintype="power_in"/>
     </net>
-    <net code="15" name="5V_MOTOR_IN" class="Default">
+    <net code="18" name="5V_MOTOR_IN" class="Default">
       <node ref="F4" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="U4" pin="IN+" pinfunction="IN+_IN+" pintype="power_in"/>
     </net>
-    <net code="16" name="5V_SYS" class="Default">
+    <net code="19" name="5V_SYS" class="Default">
       <node ref="F2" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="F3" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U3" pin="OUT+" pinfunction="OUT+_OUT+" pintype="power_out"/>
     </net>
-    <net code="17" name="5V_WATER_IN" class="Default">
+    <net code="20" name="5V_WATER_IN" class="Default">
       <node ref="F5" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="U6" pin="VIN+" pinfunction="VIN+_VIN+" pintype="power_in"/>
     </net>
-    <net code="18" name="12V_MOTOR" class="Default">
+    <net code="21" name="12V_MOTOR" class="Default">
       <node ref="U4" pin="OUT+" pinfunction="OUT+_OUT+" pintype="power_out"/>
       <node ref="U5" pin="+12V" pinfunction="+12V_/_VS_+12V" pintype="power_in"/>
     </net>
-    <net code="19" name="BUBBLE_EN" class="Default">
+    <net code="22" name="BUBBLE_EN" class="Default">
       <node ref="R8" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U1" pin="IO17" pinfunction="BUBBLE_EN_[L10]_IO17" pintype="output"/>
       <node ref="U8" pin="TRIG" pinfunction="TRIG/PWM_TRIG" pintype="input"/>
     </net>
-    <net code="20" name="GND_SYS" class="Default">
+    <net code="23" name="GND_SYS" class="Default">
       <node ref="BT1" pin="OUT-" pinfunction="OUT-_OUT-" pintype="passive"/>
       <node ref="R1" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="R2" pin="2" pinfunction="2_2" pintype="passive"/>
@@ -1444,6 +1525,7 @@
       <node ref="U1" pin="GND" pinfunction="GND_[L22]_GND" pintype="passive"/>
       <node ref="U10" pin="GND" pinfunction="CTRL_GND_GND" pintype="passive"/>
       <node ref="U10" pin="VIN-" pinfunction="VIN-_VIN-" pintype="passive"/>
+      <node ref="U11" pin="GND" pinfunction="GND_GND" pintype="passive"/>
       <node ref="U2" pin="RET" pinfunction="RETURN_RET" pintype="passive"/>
       <node ref="U3" pin="GND" pinfunction="GND_GND" pintype="passive"/>
       <node ref="U4" pin="IN-" pinfunction="IN-_IN-" pintype="passive"/>
@@ -1454,135 +1536,135 @@
       <node ref="U8" pin="GND" pinfunction="CTRL_GND_GND" pintype="passive"/>
       <node ref="U8" pin="VIN-" pinfunction="VIN-_VIN-" pintype="passive"/>
     </net>
-    <net code="21" name="IGNITION_EN" class="Default">
+    <net code="24" name="IGNITION_EN" class="Default">
       <node ref="R9" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U1" pin="IO21" pinfunction="IGNITION_EN_[R18]_IO21" pintype="output"/>
       <node ref="U10" pin="TRIG" pinfunction="TRIG/PWM_TRIG" pintype="input"/>
     </net>
-    <net code="22" name="MOTOR_A_EN" class="Default">
+    <net code="25" name="MOTOR_A_EN" class="Default">
       <node ref="R1" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U1" pin="IO8" pinfunction="MOTOR_A_EN_[L12]_IO8" pintype="output"/>
       <node ref="U5" pin="ENA" pinfunction="ENA_ENA" pintype="input"/>
     </net>
-    <net code="23" name="MOTOR_A_IN1" class="Default">
+    <net code="26" name="MOTOR_A_IN1" class="Default">
       <node ref="R2" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U1" pin="IO9" pinfunction="MOTOR_A_IN1_[L15]_IO9" pintype="output"/>
       <node ref="U5" pin="IN1" pinfunction="IN1_IN1" pintype="input"/>
     </net>
-    <net code="24" name="MOTOR_A_IN2" class="Default">
+    <net code="27" name="MOTOR_A_IN2" class="Default">
       <node ref="R3" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U1" pin="IO10" pinfunction="MOTOR_A_IN2_[L16]_IO10" pintype="output"/>
       <node ref="U5" pin="IN2" pinfunction="IN2_IN2" pintype="input"/>
     </net>
-    <net code="25" name="MOTOR_B_EN" class="Default">
+    <net code="28" name="MOTOR_B_EN" class="Default">
       <node ref="R4" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U1" pin="IO11" pinfunction="MOTOR_B_EN_[L17]_IO11" pintype="output"/>
       <node ref="U5" pin="ENB" pinfunction="ENB_ENB" pintype="input"/>
     </net>
-    <net code="26" name="MOTOR_B_IN1" class="Default">
+    <net code="29" name="MOTOR_B_IN1" class="Default">
       <node ref="R5" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U1" pin="IO12" pinfunction="MOTOR_B_IN1_[L18]_IO12" pintype="output"/>
       <node ref="U5" pin="IN3" pinfunction="IN3_IN3" pintype="input"/>
     </net>
-    <net code="27" name="MOTOR_B_IN2" class="Default">
+    <net code="30" name="MOTOR_B_IN2" class="Default">
       <node ref="R6" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U1" pin="IO13" pinfunction="MOTOR_B_IN2_[L19]_IO13" pintype="output"/>
       <node ref="U5" pin="IN4" pinfunction="IN4_IN4" pintype="input"/>
     </net>
-    <net code="28" name="Net-(#FLG00-Pad1)" class="Default">
+    <net code="31" name="Net-(#FLG00-Pad1)" class="Default">
       <node ref="F1" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="U2" pin="IN+" pinfunction="IN+_IN+" pintype="power_in"/>
     </net>
-    <net code="29" name="Net-(BT1-PadOUT+)" class="Default">
+    <net code="32" name="Net-(BT1-PadOUT+)" class="Default">
       <node ref="BT1" pin="OUT+" pinfunction="OUT+_OUT+" pintype="power_out"/>
       <node ref="F1" pin="1" pinfunction="1_1" pintype="passive"/>
     </net>
-    <net code="30" name="Net-(F2-Pad2)" class="Default">
+    <net code="33" name="Net-(F2-Pad2)" class="Default">
       <node ref="F2" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="JP1" pin="A" pinfunction="A_A" pintype="passive"/>
     </net>
-    <net code="31" name="Net-(F3-Pad2)" class="Default">
+    <net code="34" name="Net-(F3-Pad2)" class="Default">
       <node ref="F3" pin="2" pinfunction="2_2" pintype="passive"/>
       <node ref="SW2" pin="A" pinfunction="A_A" pintype="passive"/>
     </net>
-    <net code="32" name="Net-(M1-PadA)" class="Default">
+    <net code="35" name="Net-(M1-PadA)" class="Default">
       <node ref="M1" pin="A" pinfunction="A_A" pintype="passive"/>
       <node ref="U5" pin="OUT1" pinfunction="OUT1_OUT1" pintype="output"/>
     </net>
-    <net code="33" name="Net-(M1-PadB)" class="Default">
+    <net code="36" name="Net-(M1-PadB)" class="Default">
       <node ref="M1" pin="B" pinfunction="B_B" pintype="passive"/>
       <node ref="U5" pin="OUT2" pinfunction="OUT2_OUT2" pintype="output"/>
     </net>
-    <net code="34" name="Net-(M2-PadA)" class="Default">
+    <net code="37" name="Net-(M2-PadA)" class="Default">
       <node ref="M2" pin="A" pinfunction="A_A" pintype="passive"/>
       <node ref="U5" pin="OUT3" pinfunction="OUT3_OUT3" pintype="output"/>
     </net>
-    <net code="35" name="Net-(M2-PadB)" class="Default">
+    <net code="38" name="Net-(M2-PadB)" class="Default">
       <node ref="M2" pin="B" pinfunction="B_B" pintype="passive"/>
       <node ref="U5" pin="OUT4" pinfunction="OUT4_OUT4" pintype="output"/>
     </net>
-    <net code="36" name="Net-(SW1-PadA)" class="Default">
+    <net code="39" name="Net-(SW1-PadA)" class="Default">
       <node ref="SW1" pin="A" pinfunction="A_A" pintype="passive"/>
       <node ref="U3" pin="REQ_A" pinfunction="REQ_A_REQ_A" pintype="passive"/>
     </net>
-    <net code="37" name="Net-(SW1-PadB)" class="Default">
+    <net code="40" name="Net-(SW1-PadB)" class="Default">
       <node ref="SW1" pin="B" pinfunction="B_B" pintype="passive"/>
       <node ref="U3" pin="REQ_B" pinfunction="REQ_B_REQ_B" pintype="passive"/>
     </net>
-    <net code="38" name="Net-(U1B-AMP_BCLK_[L08])" class="Default">
+    <net code="41" name="Net-(U1B-AMP_BCLK_[L08])" class="Default">
       <node ref="U1" pin="IO15" pinfunction="AMP_BCLK_[L08]_IO15" pintype="output"/>
       <node ref="X1" pin="AMP_BCLK" pinfunction="AMP_BCLK_AMP_BCLK" pintype="input"/>
     </net>
-    <net code="39" name="Net-(U1B-AMP_DATA_[L07])" class="Default">
+    <net code="42" name="Net-(U1B-AMP_DATA_[L07])" class="Default">
       <node ref="U1" pin="IO7" pinfunction="AMP_DATA_[L07]_IO7" pintype="output"/>
       <node ref="X1" pin="AMP_DATA" pinfunction="AMP_DATA_AMP_DATA" pintype="input"/>
     </net>
-    <net code="40" name="Net-(U1B-AMP_LRCK_[L09])" class="Default">
+    <net code="43" name="Net-(U1B-AMP_LRCK_[L09])" class="Default">
       <node ref="U1" pin="IO16" pinfunction="AMP_LRCK_[L09]_IO16" pintype="output"/>
       <node ref="X1" pin="AMP_LRCK" pinfunction="AMP_LRCK_AMP_LRCK" pintype="input"/>
     </net>
-    <net code="41" name="Net-(U1B-MIC_DATA_[L06])" class="Default">
+    <net code="44" name="Net-(U1B-MIC_DATA_[L06])" class="Default">
       <node ref="U1" pin="IO6" pinfunction="MIC_DATA_[L06]_IO6" pintype="input"/>
       <node ref="X1" pin="MIC_DATA" pinfunction="MIC_DATA_MIC_DATA" pintype="output"/>
     </net>
-    <net code="42" name="Net-(U1B-MIC_SCK_[L05])" class="Default">
+    <net code="45" name="Net-(U1B-MIC_SCK_[L05])" class="Default">
       <node ref="U1" pin="IO5" pinfunction="MIC_SCK_[L05]_IO5" pintype="output"/>
       <node ref="X1" pin="MIC_SCK" pinfunction="MIC_SCK_MIC_SCK" pintype="input"/>
     </net>
-    <net code="43" name="Net-(U1B-MIC_WS_[L04])" class="Default">
+    <net code="46" name="Net-(U1B-MIC_WS_[L04])" class="Default">
       <node ref="U1" pin="IO4" pinfunction="MIC_WS_[L04]_IO4" pintype="output"/>
       <node ref="X1" pin="MIC_WS" pinfunction="MIC_WS_MIC_WS" pintype="input"/>
     </net>
-    <net code="44" name="Net-(U1B-OLED_SCL_[R06])" class="Default">
+    <net code="47" name="Net-(U1B-OLED_SCL_[R06])" class="Default">
       <node ref="U1" pin="IO42" pinfunction="OLED_SCL_[R06]_IO42" pintype="output"/>
       <node ref="X1" pin="OLED_SCL" pinfunction="OLED_SCL_OLED_SCL" pintype="input"/>
     </net>
-    <net code="45" name="Net-(U1B-OLED_SDA_[R07])" class="Default">
+    <net code="48" name="Net-(U1B-OLED_SDA_[R07])" class="Default">
       <node ref="U1" pin="IO41" pinfunction="OLED_SDA_[R07]_IO41" pintype="bidirectional"/>
       <node ref="X1" pin="OLED_SDA" pinfunction="OLED_SDA_OLED_SDA" pintype="bidirectional"/>
     </net>
-    <net code="46" name="Net-(U1B-TALK_INPUT_[R17])" class="Default">
+    <net code="49" name="Net-(U1B-TALK_INPUT_[R17])" class="Default">
       <node ref="U1" pin="IO47" pinfunction="TALK_INPUT_[R17]_IO47" pintype="input"/>
       <node ref="X1" pin="TALK_INPUT" pinfunction="TALK_INPUT_TALK_INPUT" pintype="output"/>
     </net>
-    <net code="47" name="Net-(U1B-VOLUME_DOWN_[R09])" class="Default">
+    <net code="50" name="Net-(U1B-VOLUME_DOWN_[R09])" class="Default">
       <node ref="U1" pin="IO39" pinfunction="VOLUME_DOWN_[R09]_IO39" pintype="input"/>
       <node ref="X1" pin="VOLUME_DOWN" pinfunction="VOLUME_DOWN_VOLUME_DOWN" pintype="output"/>
     </net>
-    <net code="48" name="Net-(U1B-VOLUME_UP_[R08])" class="Default">
+    <net code="51" name="Net-(U1B-VOLUME_UP_[R08])" class="Default">
       <node ref="U1" pin="IO40" pinfunction="VOLUME_UP_[R08]_IO40" pintype="input"/>
       <node ref="X1" pin="VOLUME_UP" pinfunction="VOLUME_UP_VOLUME_UP" pintype="output"/>
     </net>
-    <net code="49" name="Net-(U2-PadOUT+)" class="Default">
+    <net code="52" name="Net-(U2-PadOUT+)" class="Default">
       <node ref="U2" pin="OUT+" pinfunction="OUT+_OUT+" pintype="power_out"/>
       <node ref="U3" pin="IN+" pinfunction="IN+_IN+" pintype="power_in"/>
     </net>
-    <net code="50" name="WATER_EN" class="Default">
+    <net code="53" name="WATER_EN" class="Default">
       <node ref="R7" pin="1" pinfunction="1_1" pintype="passive"/>
       <node ref="U1" pin="IO18" pinfunction="WATER_EN_[L11]_IO18" pintype="output"/>
       <node ref="U6" pin="TRIG" pinfunction="TRIG/PWM_TRIG" pintype="input"/>
     </net>
-    <net code="51" name="unconnected-(U5-+5V_-_DO_NOT_CONNECT-Pad+5V)" class="Default">
+    <net code="54" name="unconnected-(U5-+5V_-_DO_NOT_CONNECT-Pad+5V)" class="Default">
       <node ref="U5" pin="+5V" pinfunction="+5V_-_DO_NOT_CONNECT_+5V" pintype="power_out+no_connect"/>
     </net>
   </nets>
