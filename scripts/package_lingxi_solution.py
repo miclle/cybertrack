@@ -54,7 +54,7 @@ python3 scripts/evaluate_voice.py --help
 
 本包只包含明确清单中的材料。文档中的其他相对链接须在完整 CyberTrack checkout 中阅读；完整源码、BOM、原理图和大体积模型对应 https://github.com/miclle/cybertrack/tree/{head} 。该提交未推送时远端链接尚不可用，应使用本地 checkout；未提交内容以清单为准。
 
-泡泡剧场与确认编排仍按计划推进。真人语音、五组家庭体验、当前供电与完整停止验收未完成。没有录音、Wi-Fi 凭据、设备令牌或绑定码；没有替你部署或发布。
+泡泡剧场与确认编排已有源码候选，部署与平台验证仍待完成。真人语音、五组家庭体验、当前供电与完整停止验收未完成。没有录音、Wi-Fi 凭据、设备令牌或绑定码；没有替你部署或发布。
 """.encode()
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as archive:
