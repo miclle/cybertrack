@@ -65,9 +65,17 @@ unit1 += [pin(f'IO{g}', n, 'R', -16 + i * 4, 'output')
           for i, (g, n) in enumerate(zip(action_gpios, action_nets))]
 unit2 = [pin(f'IO{g}', n, 'R', -20 + i * 4, kind)
          for i, (g, n, kind) in enumerate(peripherals)]
+unit3 = [pin('3V3', '3V3 / REGULATED', 'R', -12, 'power_out'),
+         pin('IO1', 'GPIO1 / TRIG', 'R', -4, 'output'),
+         pin('IO2', 'GPIO2 / ECHO', 'R', 4, 'input')]
 for p in unit1 + unit2:
     p['name'] += ' [' + INPUTS['controller_header']['positions'][p['number']] + ']'
-module('Existing_ESP32S3', 11, 24, [], units={1: unit1, 2: unit2})
+module('Existing_ESP32S3', 11, 24, [], units={1: unit1, 2: unit2, 3: unit3})
+module('Ultrasonic_Module', 12, 18,
+       [pin('VCC', 'VCC / 3.3 V', 'L', -12, 'power_in'),
+        pin('TRIG', 'TRIG', 'L', -4, 'input'),
+        pin('ECHO', 'ECHO', 'L', 4, 'output'),
+        pin('GND', 'GND', 'L', 12)])
 module('Retained_Peripherals', 8, 24,
        [pin(n, n, 'L', -20 + i * 4,
             {'input': 'output', 'output': 'input', 'bidirectional': 'bidirectional'}[kind])
@@ -231,7 +239,7 @@ class Sheet:
     def save(self):
         header = (f'(kicad_sch (version 20250114) (generator "cybertrack_schematic")'
                   f' (uuid {self.id}) (paper "A3")'
-                  f' (title_block (title {q(self.title)}) (date "2026-10-26")'
+                  f' (title_block (title {q(self.title)}) (date {q(INPUTS["date"])})'
                   f' (rev {q(REVISION)}) (company "CyberTrack")'
                   ' (comment 1 "MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION")'
                   ' (comment 2 "Retain existing ESP32-S3 board; TBD items are unresolved")'
@@ -283,10 +291,11 @@ def main():
     drive = Sheet('drive.kicad_sch', 'CyberTrack / Motor drive', 3)
     effects_sheet = Sheet('effects.kicad_sch', 'CyberTrack / Water and bubbles', 4)
     ignition = Sheet('ignition-lv.kicad_sch', 'CyberTrack / Reserved ignition LV', 5)
-    sheets = [power, control, drive, effects_sheet, ignition]
+    sonar = Sheet('ultrasonic.kicad_sch', 'CyberTrack / Ultrasonic 3V3 interface', 6)
+    sheets = [power, control, drive, effects_sheet, ignition, sonar]
 
     power.text('01  POWER INPUT AND DISTRIBUTION', 8, 7, 0.9)
-    power.text('A1 design candidate. Protection / switching blocks are NOT implemented circuits.', 8, 11)
+    power.text(f'{REVISION} design candidate. Protection / switching blocks are NOT implemented circuits.', 8, 11)
     p = power.part('Battery5V', 'BT1', 'CK18650-1234S-NP / 5 V', 17, 25)
     f = power.part('Fuse', 'F1', 'RATING TBD', 34, 22)
     power.wire(p['OUT+'], f['1'])
@@ -332,11 +341,12 @@ def main():
     for i, name in enumerate(['GND_SYS', '5V_CTRL', '5V_MOTOR_IN', '5V_WATER_IN', '5V_BUBBLE_IN']):
         supply(power, name, 113 + 10 * i, 39)
     power.text('PWR_FLAG marks intended supply paths for ERC only; it is not measured power evidence.', 99, 48, 0.45)
-    for other, x in zip(sheets[1:], [8, 35, 62, 89]):
+    for other, x in zip(sheets[1:5], [8, 35, 62, 89]):
         power.child(other, x, 100)
+    power.child(sonar, 8, 91)
 
     control.text('02  EXISTING DEVELOPMENT BOARD AND RETAINED PERIPHERALS', 8, 7, 0.85)
-    control.text('U1A and U1B are the SAME board. USB, regulator, reset, radio and on-board LED remain inside U1.', 8, 12)
+    control.text('U1A / U1B / U1C are the SAME board. U1C is on sheet 6. USB, regulator and reset remain inside U1.', 8, 12)
     a = control.part('Existing_ESP32S3', 'U1', 'Existing ESP32-S3', 45, 48, 1)
     stub(control, a, '5Vin', '5V_CTRL')
     stub(control, a, 'GND', 'GND_SYS')
@@ -352,8 +362,8 @@ def main():
         control.wire(b[f'IO{gpio}'], x[name])
     control.text('X1 is a LOGICAL interface, not a new 11-pin connector.\nExisting mic / amplifier / OLED / buttons retain their wiring.\nPeripheral power and auxiliary pins are not reconstructed.\nDo not infer module VCC or speaker grounding from this sheet.', 91, 78, 0.52)
     control.text('BOOT: dry contact to system ground; parallel to on-board BOOT.\nIt stops software actions. It does NOT isolate actuator power.\nHolding BOOT during reset may select ROM download mode.\nNo external pull-up / RC values are frozen here.', 8, 80, 0.52)
-    control.text('PIN ID: IO8 = GPIO8; [L12] = photo-based header position.\nComponent side facing you, antenna UP, USB DOWN.\nL/R rows counted 1-22 from antenna to USB; verify continuity.\nNo new encoder / ultrasonic / servo GPIO allocation.', 8, 94, 0.52)
-    control.text('Source: action_outputs.h + cybertrack_tools.cc (ct19).\nRetained peripherals: bread-compact-wifi/config.h.\nFirmware pin identity does not prove physical wiring.\nA1: no PCB transfer; see parameter-confirmation.md (E01-E10).', 91, 94, 0.52)
+    control.text('PIN ID: IO8 = GPIO8; [L12] = photo-based header position.\nComponent side facing you, antenna UP, USB DOWN.\nL/R rows counted 1-22 from antenna to USB; verify continuity.\nGPIO1 / GPIO2 ultrasonic interface: sheet 6; no encoder / servo allocation.', 8, 94, 0.52)
+    control.text('Source: current action_outputs.h + cybertrack_tools.cc.\nRetained peripherals: bread-compact-wifi/config.h.\nFirmware pin identity does not prove physical wiring.\nNo PCB transfer; see parameter-confirmation.md.', 91, 94, 0.52)
 
     drive.text('03  EXTERNAL BOOST CONVERTER AND DUAL H-BRIDGE', 8, 7, 0.85)
     boost = drive.part('MT3608', 'U4', 'MT3608 / TARGET 12 V', 31, 33)
@@ -372,7 +382,7 @@ def main():
     for hp, mp in [('OUT1', m1['A']), ('OUT2', m1['B']), ('OUT3', m2['A']), ('OUT4', m2['B'])]:
         drive.wire(h[hp], mp)
     drive.text('Remove ENA / ENB always-on jumpers.\nRetain only the verified regulator-jumper configuration.\nL298N +5V is intentionally unconnected.\n12 V bus is not guaranteed motor-terminal voltage.', 8, 48, 0.52)
-    drive.text('A = left candidate; B = right candidate.\nVehicle direction still requires calibration.\nEncoder conductors are not connected.\nNeither motor terminal is a fixed ground.', 115, 52, 0.5)
+    drive.text('Current firmware: A = right; B = left.\nPhysical lead tracing / loaded tests still pending.\nEncoder conductors are not connected.\nNeither motor terminal is a fixed ground.', 115, 52, 0.5)
     for i, net in enumerate(motor_nets):
         pulldown(drive, f'R{i+1}', net, 21 + i * 26, 80)
     drive.text('R1-R6: 10k, 1%, >=0.1 W; target 0603. At L298 inputs; actual module bias / reset state still need E05.\nST L298 Table 4 sizing: 10 uA x 10.1k = 0.101 V; added GPIO load at 3.3 V <= 0.433 mA (table conditions).\nPhoto control columns L to R: ENA, IN1, IN2, IN3, IN4, ENB; jumper contact identities need continuity check.\nEN LOW = free-running stop, not active braking. Pull-downs cannot stop a GPIO stuck HIGH. Keep SW2 independent.\nNew-supply current, thermal and reverse-energy tests pending; see parameter-confirmation.md for limits.', 8, 94, 0.52)
@@ -417,6 +427,20 @@ def main():
     pulldown(ignition, 'R9', 'IGNITION_EN', 66, 78)
     ignition.text('JP2 OPEN and output harness absent for initial validation.\nU10/J9 marked DNP in this review assembly.\nOne control channel is reserved for the shared MOS requested for two modules.\nOutput pin numbers are logical +/- only; no connector or current rating is frozen.', 8, 91, 0.55)
     ignition.text('Firmware: GPIO21, single action <= 5 s; cooldown >= elapsed software ON time.\nThese are software rules, NOT thermal protection or physical stop evidence.\nR9 value, protection, input current, cut-off and EMC remain unresolved.\nPWR_FLAG is an ERC declaration for the optional supply, not a populated link.', 88, 65, 0.52)
+
+    sonar.text('06  HEAD ULTRASONIC MODULE - CONTROLLER 3.3 V', 8, 7, 0.85)
+    sonar.text('U1C is part of the SAME existing ESP32-S3 board as U1A/U1B. No additional controller or regulator.', 8, 12)
+    controller = sonar.part('Existing_ESP32S3', 'U1', 'Existing ESP32-S3', 43, 46, 3)
+    sensor = sonar.part('Ultrasonic_Module', 'U11', 'HC-SR04 / SELECTED VARIANT', 112, 46)
+    for source, target, net in [('3V3', 'VCC', '3V3_CTRL'),
+                                ('IO1', 'TRIG', 'ULTRASONIC_TRIG'),
+                                ('IO2', 'ECHO', 'ULTRASONIC_ECHO')]:
+        sonar.wire(controller[source], sensor[target])
+        sonar.local(net, (66, sensor[target][1]))
+    stub(sonar, sensor, 'GND', 'GND_SYS', length=6)
+    sonar.text('VCC: existing board 3V3 output. GND: system/controller ground.\nGPIO1 -> TRIG: output, initially LOW, approximately 12 us pulse.\nGPIO2 <- ECHO: input, firmware internal pull-down; direct connection scheme.\nAll four wires remain in the head; no added head-to-chassis signal wire.', 8, 78, 0.6)
+    sonar.text('USER-SELECTED 3.3 V SCHEME - NOT ELECTRICAL ACCEPTANCE\nVerify module revision, 3V3 current margin, TRIG threshold and ECHO peak/off-state.\nDo NOT change module VCC to 5 V while ECHO remains directly connected.\nSignal IDs are NOT connector pad numbers; new header positions remain unassigned.', 8, 94, 0.6)
+    sonar.text('No 5Vin / 12 V / switched MOS supply on U11.\nNo external level-shifter or pull-down value invented.\nSource: ultrasonic.cc + docs/ultrasonic-ranging.md.\nPhysical pin order / wiring / enclosure acoustics still need verification.', 90, 65, 0.5)
 
     for sheet in sheets:
         sheet.save()

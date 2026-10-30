@@ -76,76 +76,121 @@
     },
     {
       "path": "hardware/model/print-ready/CyberTrack-Ready-6plates.3mf",
-      "before_sha256": "2d587d87d0c68dee679da7ae72af834d80bcced9ef56f224cbdc6a37949a6724",
-      "sha256": "2521530f18937ca7b90dc38384ee96b0beb857d4b6b72027fdef739344b4d65b",
+      "before_sha256": "2521530f18937ca7b90dc38384ee96b0beb857d4b6b72027fdef739344b4d65b",
+      "sha256": "0ae36f55ea8675a3fb0b18a32ad28b80ba0a5a811bb487a4a6e4f970101d79ee",
       "removed": [
-        "BubbleLidMark"
+        "PP07-Tray.stl"
       ],
-      "updated": [
-        "PP03-base"
-      ],
+      "updated": [],
       "part_names": [
-        "PrintChestGuardR",
+        "BatteryHatch",
+        "ChestBadge",
         "KeelSideFrameR",
+        "WaterLidMark",
         "LowerChin",
-        "PrintChestGuardL",
         "LC03-BottomServiceCover-flipped",
         "KeelSideFrameL",
-        "PP04-LowerTub.stl",
-        "ChestAudioPanel",
-        "PP01-base",
-        "PP02-base",
-        "LC04-flipped",
-        "PP03-base",
-        "PP07-Crown.stl",
-        "PP07-Tray.stl",
-        "PP07-upright.stl",
-        "BatteryHatch",
-        "LC02-TopRetainer-flat",
-        "ChestBadge",
-        "EffectRetainerRBuck",
-        "PrintNeck",
         "LC01-Carrier-upright",
-        "EffectRetainerRMOS",
-        "NeckCableBridge",
-        "EffectRetainerLMOS",
-        "ShoulderRailL",
-        "WaterLidMark",
         "ShoulderRailR",
-        "EffectRetainerLBuck"
+        "EffectRetainerLBuck",
+        "EffectRetainerLMOS",
+        "EffectRetainerRBuck",
+        "ShoulderRailL",
+        "NeckCableBridge",
+        "EffectRetainerRMOS",
+        "PrintNeck",
+        "LC02-TopRetainer-flat",
+        "PrintChestGuardR",
+        "PP04-LowerTub.stl",
+        "PP01-base",
+        "PP07-upright.stl",
+        "PP02-base",
+        "ChestAudioPanel",
+        "PrintChestGuardL",
+        "LC04-flipped",
+        "PP07-Crown.stl",
+        "PP03-base"
       ],
-      "print_parts": 28,
+      "print_parts": 27,
       "requires_reslice_plates": [
-        6,
-        7
-      ],
-      "unchanged_archive_entries": 58,
-      "changed_or_removed_entries": [
-        "Metadata/plate_6.png",
-        "Metadata/plate_no_light_6.png",
-        "Metadata/top_6.png",
-        "Metadata/pick_6.png",
-        "Metadata/plate_6.json",
-        "3D/3dmodel.model",
-        "3D/_rels/3dmodel.model.rels",
-        "3D/Objects/object_34.model",
-        "3D/Objects/object_19.model",
-        "Metadata/model_settings.config",
-        "Metadata/slice_info.config"
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
       ],
       "process_settings_unchanged": true,
       "mesh_local_translation_mm": [
         0.0,
         0.0,
-        -45.00000005
+        -45.0
       ],
       "sliced": false,
-      "updated_date": "2026-10-28",
-      "input_basis": "Latest unsaved user layout saved in Bambu Studio before this update",
-      "input_backup": "/tmp/cybertrack-backpack-20261028/Ready-unsaved-before-open.3mf",
-      "dedicated_backpack_plate": 7,
-      "plate_count": 7,
-      "other_object_transforms_unchanged": true,
+      "updated_date": "2026-10-30",
+      "input_basis": "Committed Ready snapshot d5f5128; archive and semantic comparison against its parent",
+      "dedicated_backpack_plate": 6,
+      "plate_count": 6,
+      "plates": [
+        {
+          "name": "盘 1 (盘 1 (底盘))",
+          "objects": [
+            "PP04-LowerTub.stl"
+          ]
+        },
+        {
+          "name": "底盘与电控配件",
+          "objects": [
+            "BatteryHatch",
+            "EffectRetainerLBuck",
+            "EffectRetainerLMOS",
+            "EffectRetainerRBuck",
+            "EffectRetainerRMOS",
+            "KeelSideFrameL",
+            "KeelSideFrameR",
+            "LC01-Carrier-upright",
+            "LC02-TopRetainer-flat",
+            "LC03-BottomServiceCover-flipped",
+            "NeckCableBridge",
+            "PrintNeck",
+            "ShoulderRailL",
+            "ShoulderRailR"
+          ]
+        },
+        {
+          "name": "双枪支架与顶盖",
+          "objects": [
+            "LC04-flipped",
+            "PP01-base",
+            "PP02-base"
+          ]
+        },
+        {
+          "name": "头壳",
+          "objects": [
+            "PP07-upright.stl"
+          ]
+        },
+        {
+          "name": "背包、瓶托与 MOS 配件",
+          "objects": [
+            "ChestAudioPanel",
+            "ChestBadge",
+            "LowerChin",
+            "PP07-Crown.stl",
+            "PrintChestGuardL",
+            "PrintChestGuardR",
+            "WaterLidMark"
+          ]
+        },
+        {
+          "name": "背包 Ø35 · 独立盘",
+          "objects": [
+            "PP03-base"
+          ]
+        }
+      ],
+      "other_object_transforms_unchanged": false,
       "orientation": "upright",
       "upright_transform": [
         1.0,
@@ -157,12 +202,101 @@
         0.0,
         0.0,
         1.0,
-        128.0,
-        -486.4,
-        44.999999949999996
+        741.99999,
+        -179.39999,
+        45.0
       ],
-      "orientation_audit": "hardware/model/backpack-upright-audit.json",
-      "plate7_trial_slice_passed": true
+      "snapshot_audit": "hardware/model/print-ready/snapshot-audit-20261030.json",
+      "previous_snapshot": {
+        "path": "hardware/model/print-ready/CyberTrack-Ready-6plates.3mf",
+        "before_sha256": "2d587d87d0c68dee679da7ae72af834d80bcced9ef56f224cbdc6a37949a6724",
+        "sha256": "2521530f18937ca7b90dc38384ee96b0beb857d4b6b72027fdef739344b4d65b",
+        "removed": [
+          "BubbleLidMark"
+        ],
+        "updated": [
+          "PP03-base"
+        ],
+        "part_names": [
+          "PrintChestGuardR",
+          "KeelSideFrameR",
+          "LowerChin",
+          "PrintChestGuardL",
+          "LC03-BottomServiceCover-flipped",
+          "KeelSideFrameL",
+          "PP04-LowerTub.stl",
+          "ChestAudioPanel",
+          "PP01-base",
+          "PP02-base",
+          "LC04-flipped",
+          "PP03-base",
+          "PP07-Crown.stl",
+          "PP07-Tray.stl",
+          "PP07-upright.stl",
+          "BatteryHatch",
+          "LC02-TopRetainer-flat",
+          "ChestBadge",
+          "EffectRetainerRBuck",
+          "PrintNeck",
+          "LC01-Carrier-upright",
+          "EffectRetainerRMOS",
+          "NeckCableBridge",
+          "EffectRetainerLMOS",
+          "ShoulderRailL",
+          "WaterLidMark",
+          "ShoulderRailR",
+          "EffectRetainerLBuck"
+        ],
+        "print_parts": 28,
+        "requires_reslice_plates": [
+          6,
+          7
+        ],
+        "unchanged_archive_entries": 58,
+        "changed_or_removed_entries": [
+          "Metadata/plate_6.png",
+          "Metadata/plate_no_light_6.png",
+          "Metadata/top_6.png",
+          "Metadata/pick_6.png",
+          "Metadata/plate_6.json",
+          "3D/3dmodel.model",
+          "3D/_rels/3dmodel.model.rels",
+          "3D/Objects/object_34.model",
+          "3D/Objects/object_19.model",
+          "Metadata/model_settings.config",
+          "Metadata/slice_info.config"
+        ],
+        "process_settings_unchanged": true,
+        "mesh_local_translation_mm": [
+          0.0,
+          0.0,
+          -45.00000005
+        ],
+        "sliced": false,
+        "updated_date": "2026-10-28",
+        "input_basis": "Latest unsaved user layout saved in Bambu Studio before this update",
+        "input_backup": "/tmp/cybertrack-backpack-20261028/Ready-unsaved-before-open.3mf",
+        "dedicated_backpack_plate": 7,
+        "plate_count": 7,
+        "other_object_transforms_unchanged": true,
+        "orientation": "upright",
+        "upright_transform": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          128.0,
+          -486.4,
+          44.999999949999996
+        ],
+        "orientation_audit": "hardware/model/backpack-upright-audit.json",
+        "plate7_trial_slice_passed": true
+      }
     }
   ],
   "retired_exports": [

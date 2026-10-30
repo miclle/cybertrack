@@ -1,6 +1,6 @@
 # 合并打印件演进与当前入口
 
-**现行交付：** [29 件 Lean 六盘项目](../hardware/model/lean-print/README.md)。已有[样机实拍与运行视频](../artifact/README.md)，当前处于联调与整机验证阶段。0.51 为六组合并历史基线，0.58 为头部局部修订；PP 编号数量不等于全机打印件数。下列历史合并、导出和检查记录保留原范围，实物验收项不变。
+**现行交付：** [27 件 Lean 六盘项目](../hardware/model/lean-print/README.md)。已有[样机实拍与运行视频](../artifact/README.md)，当前处于联调与整机验证阶段。0.51 为六组合并历史基线，0.58 为头部局部修订；PP 编号数量不等于全机打印件数。下列历史合并、导出和检查记录保留原范围，实物验收项不变。
 
 ## 0.58：新增 PP07 头部下壳整体打印
 
@@ -90,4 +90,4 @@ PP06基座/鞍座随净径10通道调整，其STEP/STL及PP06.png同步；其余
 
 ### 2026-10-26 遗漏件补齐
 
-前舱左右侧甲与对应嵌条分别合为 PrintChestGuardL/R，各为单实体；其余遗漏件独立打印，共新增 12 件一盘。EffectTray 与 IgnitionMOSCarrier 的相切连接已补实，STL 闭合/连通与切片路径检查完成。用户取消两个线束护口。当时形成 34 件六盘基线，当前制造入口为[29 件 Lean 六盘项目](../hardware/model/lean-print/README.md)，本轮[详单](../hardware/model/completion-print/README.md)取代上述前舱饰件尚未处理的历史状态。
+前舱左右侧甲与对应嵌条分别合为 PrintChestGuardL/R，各为单实体；其余遗漏件独立打印，共新增 12 件一盘。EffectTray 与 IgnitionMOSCarrier 的相切连接已补实，STL 闭合/连通与切片路径检查完成。用户取消两个线束护口。当时形成 34 件六盘基线，当前制造入口为[27 件 Lean 六盘项目](../hardware/model/lean-print/README.md)，本轮[详单](../hardware/model/completion-print/README.md)取代上述前舱饰件尚未处理的历史状态。

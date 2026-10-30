@@ -1,4 +1,4 @@
-(kicad_sch (version 20250114) (generator "cybertrack_schematic") (uuid 9a69abbb-549d-5c46-9b9c-8e78bd88b29b) (paper "A3") (title_block (title "CyberTrack / ESP32-S3 and BOOT") (date "2026-10-26") (rev "A1") (company "CyberTrack") (comment 1 "MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION") (comment 2 "Retain existing ESP32-S3 board; TBD items are unresolved") (comment 3 "Pin IDs identify signals, NOT physical header positions"))
+(kicad_sch (version 20250114) (generator "cybertrack_schematic") (uuid 9a69abbb-549d-5c46-9b9c-8e78bd88b29b) (paper "A3") (title_block (title "CyberTrack / ESP32-S3 and BOOT") (date "2026-10-30") (rev "A2") (company "CyberTrack") (comment 1 "MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION") (comment 2 "Retain existing ESP32-S3 board; TBD items are unresolved") (comment 3 "Pin IDs identify signals, NOT physical header positions"))
 (lib_symbols
 (symbol "CyberTrack:ButtonNO"
 (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
@@ -44,6 +44,12 @@
 (pin input line (at 35.56 -40.64 180) (length 7.62) (name "VOLUME_UP [R08]" (effects (font (size 1.143 1.143)))) (number "IO40" (effects (font (size 1.016 1.016)))))
 (pin input line (at 35.56 -50.8 180) (length 7.62) (name "VOLUME_DOWN [R09]" (effects (font (size 1.143 1.143)))) (number "IO39" (effects (font (size 1.016 1.016)))))
 )
+(symbol "Existing_ESP32S3_3_1"
+(rectangle (start -27.94 60.96) (end 27.94 -60.96) (stroke (width 0.254) (type default)) (fill (type background)))
+(pin power_out line (at 35.56 30.48 180) (length 7.62) (name "3V3 / REGULATED" (effects (font (size 1.143 1.143)))) (number "3V3" (effects (font (size 1.016 1.016)))))
+(pin output line (at 35.56 10.16 180) (length 7.62) (name "GPIO1 / TRIG" (effects (font (size 1.143 1.143)))) (number "IO1" (effects (font (size 1.016 1.016)))))
+(pin input line (at 35.56 -10.16 180) (length 7.62) (name "GPIO2 / ECHO" (effects (font (size 1.143 1.143)))) (number "IO2" (effects (font (size 1.016 1.016)))))
+)
 )
 (symbol "CyberTrack:Retained_Peripherals"
 (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
@@ -65,7 +71,7 @@
 )
 ))
 (text "02  EXISTING DEVELOPMENT BOARD AND RETAINED PERIPHERALS" (at 20.32 17.78 0) (effects (font (size 2.159 2.159)) (justify left top)) (uuid a3b27fb9-2a8f-55ad-8515-935e3b1b19c3))
-(text "U1A and U1B are the SAME board. USB, regulator, reset, radio and on-board LED remain inside U1." (at 20.32 30.48 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid a0b5009a-d1e9-5f38-9fb1-235b8568bb6e))
+(text "U1A / U1B / U1C are the SAME board. U1C is on sheet 6. USB, regulator and reset remain inside U1." (at 20.32 30.48 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid a0b5009a-d1e9-5f38-9fb1-235b8568bb6e))
 (symbol (lib_id "CyberTrack:Existing_ESP32S3") (at 114.3 121.92 0) (unit 1) (in_bom no) (on_board no) (dnp no) (uuid 8b12807e-e1f6-5566-a23c-f5839e0f22f1)(property "Reference" "U1" (at 114.3 48.26 0) (effects (font (size 1.651 1.651))))
 (property "Value" "Existing ESP32-S3" (at 114.3 54.61 0) (effects (font (size 1.524 1.524))))
 (property "Footprint" "" (at 114.3 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
@@ -121,6 +127,6 @@
 (wire (pts (xy 302.26 172.72) (xy 342.9 172.72)) (stroke (width 0) (type default)) (uuid 4bdcec6e-7b09-5a74-83b7-6fba0b683cdb))
 (text "X1 is a LOGICAL interface, not a new 11-pin connector.\nExisting mic / amplifier / OLED / buttons retain their wiring.\nPeripheral power and auxiliary pins are not reconstructed.\nDo not infer module VCC or speaker grounding from this sheet." (at 231.14 198.12 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid f995e1b7-5ec2-5043-bb9d-e0eef4885f57))
 (text "BOOT: dry contact to system ground; parallel to on-board BOOT.\nIt stops software actions. It does NOT isolate actuator power.\nHolding BOOT during reset may select ROM download mode.\nNo external pull-up / RC values are frozen here." (at 20.32 203.2 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid 412db020-4921-5c57-ad13-ed2a3532a80e))
-(text "PIN ID: IO8 = GPIO8; [L12] = photo-based header position.\nComponent side facing you, antenna UP, USB DOWN.\nL/R rows counted 1-22 from antenna to USB; verify continuity.\nNo new encoder / ultrasonic / servo GPIO allocation." (at 20.32 238.76 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid 5ad4a919-7068-57b5-9dfa-6c68f0b50f55))
-(text "Source: action_outputs.h + cybertrack_tools.cc (ct19).\nRetained peripherals: bread-compact-wifi/config.h.\nFirmware pin identity does not prove physical wiring.\nA1: no PCB transfer; see parameter-confirmation.md (E01-E10)." (at 231.14 238.76 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid 431051d3-d195-5244-aad8-b7e9d83c706d))
+(text "PIN ID: IO8 = GPIO8; [L12] = photo-based header position.\nComponent side facing you, antenna UP, USB DOWN.\nL/R rows counted 1-22 from antenna to USB; verify continuity.\nGPIO1 / GPIO2 ultrasonic interface: sheet 6; no encoder / servo allocation." (at 20.32 238.76 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid 5ad4a919-7068-57b5-9dfa-6c68f0b50f55))
+(text "Source: current action_outputs.h + cybertrack_tools.cc.\nRetained peripherals: bread-compact-wifi/config.h.\nFirmware pin identity does not prove physical wiring.\nNo PCB transfer; see parameter-confirmation.md." (at 231.14 238.76 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid 431051d3-d195-5244-aad8-b7e9d83c706d))
 )

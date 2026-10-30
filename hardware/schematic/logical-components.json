@@ -1,5 +1,5 @@
 {
-  "revision": "A1",
+  "revision": "A2",
   "production_bom": false,
   "pin_ids": "logical identity or silkscreen; NOT connector pad position",
   "sheets": [
@@ -351,6 +351,26 @@
           "unit": 1,
           "kind": "Pulldown",
           "value": "TBD",
+          "dnp": false
+        }
+      ]
+    },
+    {
+      "file": "ultrasonic.kicad_sch",
+      "page": 6,
+      "parts": [
+        {
+          "ref": "U1",
+          "unit": 3,
+          "kind": "Existing_ESP32S3",
+          "value": "Existing ESP32-S3",
+          "dnp": false
+        },
+        {
+          "ref": "U11",
+          "unit": 1,
+          "kind": "Ultrasonic_Module",
+          "value": "HC-SR04 / SELECTED VARIANT",
           "dnp": false
         }
       ]
