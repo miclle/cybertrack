@@ -1,0 +1,59 @@
+{
+  "version": "2.0.3-ct42",
+  "date": "2026-10-30",
+  "scope": "Distance-only proximity beeps independent of auto-avoidance switch, forward lock and movement state; unchanged optional stop protection",
+  "checks": {
+    "host_control_asan_ubsan": true,
+    "actual_audio_worker_and_overlay_tests": true,
+    "mcp_http_host_asan_ubsan": true,
+    "esp_idf_full_build": true,
+    "compiled_overlay_matches_sources": true
+  },
+  "cases": [
+    "standby, reverse and both turns beep in both switch states",
+    "400/800 ms cadence and 40/50 cm boundaries",
+    "near locked range continues ordinary beeps after stop triplet",
+    "movement and switch transitions preserve cadence",
+    "invalid or stale samples silence beeps without clearing enabled protection lock",
+    "stop triplet retains priority, ordinary beeps resume afterwards",
+    "voice, web hold, sequence stop and no-resume regressions"
+  ],
+  "commands": [
+    "sh firmware/esp32-audio/test.sh",
+    "python3 firmware/esp32-audio/tests/run_audio_tests.py --source build/xiaozhi-ct42-src",
+    "python3 firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct42-src",
+    "idf.py -C build/xiaozhi-ct42-src -B build/firmware-ct42 build"
+  ],
+  "artifact": {
+    "path": "build/firmware-ct42/xiaozhi.bin",
+    "bytes": 2659840,
+    "sha256": "eb90051b7ab63efe1bd5ccbecce8bf20068df6cb783c6b18ada05dd521621052",
+    "app_partition_bytes": 4128768
+  },
+  "source_sha256": {
+    "apply_overlay.py": "3d71e02dbff413b4a281097a0cbbebbd91bbf10136b0e3012c1b02196d2084bd",
+    "cybertrack_tools.cc": "38c194c6e099f49adfd4cc07766eca64df31c0e380879833c2e90f52e0037ceb",
+    "proximity_guard.h": "7fbd647d17e36f83af22ebb1e7c4a32ed344b6a477041a9fa70804f82da499d1",
+    "proximity_audio.cc": "0d5e7043e004a83c53f271bd8dc7502635e61458b4855c23b6c9c888a2ce3f20",
+    "role-prompt.txt": "56ae42682975ae3113b4d040fd7c1ee6f0e0c90b876ef89ccf9814060e639d7b",
+    "tests/proximity_test.cc": "d3676cabde82962ffc716ab73757b03e66129ccb7f399a49c2b1b4c9f2091c8c",
+    "tests/proximity_audio_test.cc": "79a967d05a940e599b4eca1ee228d9ef56b1f5b29c3a302cda33a96f54eaeccf",
+    "web/index.html": "90a7b4fea78c33ca92631e6baba4c4600138393cdc990507d7edae29ded32ebf"
+  },
+  "role": {
+    "characters": 5999,
+    "sha256": "56ae42682975ae3113b4d040fd7c1ee6f0e0c90b876ef89ccf9814060e639d7b"
+  },
+  "deployment": {
+    "flashed": true,
+    "platform_role_synced": true,
+    "on_device_idle_switch_verified": true,
+    "boot_beep_events_observed": 2,
+    "physical_acoustic_tested": false,
+    "latest_deployed_version": "2.0.3-ct42",
+    "evidence": "startup-ct42.json"
+  },
+  "limitations": [
+    "Host tests do not establish acoustic quality, voice interaction coexistence or physical stopping distance."
+  ]
+}
