@@ -374,14 +374,14 @@ void InitializeCyberTrackTools() {
             return Reply("frenzy", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
     server.AddTool("self.tank.move",
-        "仅在明确要求行走或转向时调用。direction只能为forward前进、backward后退、left向左原地转、right向右原地转。duration_ms按指定时长换算为整数毫秒，范围1到2147483647（协议整数范围），没有三秒业务上限；未说时长默认1000。全速前进/后退/左转/右转均传speed_percent=100及对应direction。不支持角度或距离精确控制。speed_percent为可选整数60到100，默认100；速度60表示60%，百分比控制PWM而非实测轮速。可与喷水同时执行、分别计时；同路运行中不续时或换向，行走结束后至少等待200毫秒。不得续时、自动重试或排队补做。BOOT或停止工具同时停止所有动作。回执不是实际移动反馈。",
+        "仅在明确要求行走或转向时调用。direction只能为forward前进、backward后退、left向左原地转、right向右原地转。duration_ms按指定时长换算为整数毫秒，范围1到2147483647（协议整数范围），没有三秒业务上限；未说时长时，100%速度（含省略速度）的left/right默认880，其他情况1000；明确指定时长优先。全速前进/后退/左转/右转均传speed_percent=100及对应direction。不支持角度或距离精确控制。speed_percent为可选整数60到100，默认100；速度60表示60%，百分比控制PWM而非实测轮速。可与喷水同时执行、分别计时；同路运行中不续时或换向，行走结束后至少等待200毫秒。不得续时、自动重试或排队补做。BOOT或停止工具同时停止所有动作。回执不是实际移动反馈。",
         PropertyList({Property("direction", kPropertyTypeString), Property("duration_ms", kPropertyTypeInteger, 1, 2147483647), Property("speed_percent", kPropertyTypeInteger, 100, 60, 100)}),
         [](const PropertyList& p) -> ReturnValue {
             return Reply("move", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>(),
                          p["direction"].value<std::string>().c_str(), 0, 0, nullptr, nullptr, p["speed_percent"].value<int>());
         });
     server.AddTool("self.tank.move_and_water",
-        "用户明确要求边走边喷或同时转向喷水时调用，一次同时启动两路。direction为forward/backward/left/right，move_duration_ms为1到2147483647，water_duration_ms为1到30000。可选speed_percent为60到100整数，默认100，只控制行走PWM，速度60指60%。只给一个时长且要求同时或在行走时喷水，两路共享该时长；都未说默认各1000。喷水仍最多30000，不分段；行走按指定时长执行。两路必须均空闲且冷却结束，否则整项拒绝不部分启动。分别计时，到期只停止对应动作，BOOT或停止关闭两路。不保证精确距离、角度或实际动作反馈。",
+        "用户明确要求边走边喷或同时转向喷水时调用，一次同时启动两路。direction为forward/backward/left/right，move_duration_ms为1到2147483647，water_duration_ms为1到30000。可选speed_percent为60到100整数，默认100，只控制行走PWM，速度60指60%。只给一个时长且要求同时或在行走时喷水，两路共享该时长；都未说时，100%速度（含省略速度）的left/right行走默认880，其他行走及喷水默认1000。喷水仍最多30000，不分段；行走按指定时长执行。两路必须均空闲且冷却结束，否则整项拒绝不部分启动。分别计时，到期只停止对应动作，BOOT或停止关闭两路。不保证精确距离、角度或实际动作反馈。",
         PropertyList({Property("direction", kPropertyTypeString), Property("move_duration_ms", kPropertyTypeInteger, 1, 2147483647),
                       Property("water_duration_ms", kPropertyTypeInteger, 1, 30000), Property("speed_percent", kPropertyTypeInteger, 100, 60, 100)}),
         [](const PropertyList& p) -> ReturnValue {
@@ -401,7 +401,7 @@ void InitializeCyberTrackTools() {
             return Reply("adjust_speed", p["_ct_ticket"].value<int>(), p["delta_percent"].value<int>());
         });
     server.AddTool("self.tank.sequence",
-        "明确请求多个先后步骤或多通道同时执行时，一次提交整个序列，不能拆成连续单项调用。steps_json是JSON数组的字符串，1到16步，每步必须包含direction、move_ms、water_ms、bubbles_ms、ignition_ms五字段，可选speed_percent为60到100整数、默认100；每步独立指定行走PWM，全句指定速度时应用到各行走步骤。direction为forward/backward/left/right；不行走用none且move_ms=0。各时长为整数毫秒，0表示不用该通道，每步至少一通道；move_ms最多2147483647，喷水/泡泡最多30000，点火最多5000。一步内各通道同时启动、独立停止；全部结束并满足冷却后下一步，无指定时长默认1000；同时或在某动作时做另一动作且只给一个时长则共享，分别遵守效果上限。不用额外步骤绕过效果上限。整单验证且四路均空闲才启动，运行中保留四路；失败不重试，停止/BOOT/断线/故障或网页抢占取消整单，不能补做。accepted仅表示序列已开始，sequence_result查询完成或取消。",
+        "明确请求多个先后步骤或多通道同时执行时，一次提交整个序列，不能拆成连续单项调用。steps_json是JSON数组的字符串，1到16步，每步必须包含direction、move_ms、water_ms、bubbles_ms、ignition_ms五字段，可选speed_percent为60到100整数、默认100；每步独立指定行走PWM，全句指定速度时应用到各行走步骤。direction为forward/backward/left/right；不行走用none且move_ms=0。各时长为整数毫秒，0表示不用该通道，每步至少一通道；move_ms最多2147483647，喷水/泡泡最多30000，点火最多5000。一步内各通道同时启动、独立停止；全部结束并满足冷却后下一步，无指定时长时，本步100%速度（含省略速度）的left/right行走默认880，其他动作1000；同时或在某动作时做另一动作且只给一个时长则共享，分别遵守效果上限。不用额外步骤绕过效果上限。整单验证且四路均空闲才启动，运行中保留四路；失败不重试，停止/BOOT/断线/故障或网页抢占取消整单，不能补做。accepted仅表示序列已开始，sequence_result查询完成或取消。",
         PropertyList({Property("steps_json", kPropertyTypeString)}),
         [](const PropertyList& p) -> ReturnValue {
             ActionPlan plan;
