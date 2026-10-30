@@ -1,6 +1,6 @@
 # 机械设计基线
 
-2026-10-27：项目已进入样机联调与整机验证阶段，已有[制作过程、样机实拍与运行视频](../artifact/README.md)。现行几何由主模型与可编辑设计源档维护；打印入口为[29 件 Lean 六盘项目](../hardware/model/lean-print/README.md)，不以某个局部修订号概括整机版本。
+2026-10-27：项目已进入样机联调与整机验证阶段，已有[制作过程、样机实拍与运行视频](../artifact/README.md)。现行几何由主模型与可编辑设计源档维护；打印入口为[27 件 Lean 六盘项目](../hardware/model/lean-print/README.md)，不以某个局部修订号概括整机版本。
 
 当前结构已包含[0.57 底盖承载 L298N 支架](../hardware/model/l298n-compact/README.md)、[0.58 整体头壳](head-shell-print.md)、[PP02／LC04 修正](../hardware/model/remaining-print/README.md)及 Lean 板卡固定精简。两块降压板已集成到枪体，MOS 改胶固；原 5 个压框取消。辰克 5 V 电池包为 116 × 70.5 × 19.5 mm，电机 12 V 升压支路保留。运行展示不关闭承载、供电、温升、紧固、线束检修、液体共存及效果安全等未验证项。
 

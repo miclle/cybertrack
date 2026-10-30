@@ -6,7 +6,9 @@
 
 2026-10-26。当前文件：[CyberTrack-Lean-6plates.3mf](CyberTrack-Lean-6plates.3mf)。创建此版时用户确认旧第 2、6 盘未打印，因此另存项目；该记录不表示它们至今尚未打印。三块 MOS 改用热熔胶固定，两块降压板已由用户集成到枪体。
 
-## 打印顺序
+当前六盘件数依次为 **1、10、11、2、1、2**，合计 27 件；第 3 盘已移除泡泡液瓶底托和识别条，第 6 盘已更新背包。下表的旧件数及时间／耗材仅用于追溯，受影响盘须重新切片。
+
+## 2026-10-26 历史打印顺序与估算
 
 先完成动力与电控安装，再打印双枪固定件及头部；背包、顶盖留到最后。小饰件沿用已有空位共盘，不单独增加开机时间。两块 MOS 承板仍通过顶盖内柱安装，可提前打印备好，最终安装需要末盘顶盖。
 
@@ -34,12 +36,12 @@
 
 [几何审计](geometry-audit.json)记录主模型与设计源的删除范围，除两件支架外的 234 个主模型几何保持；两件均为有效单实体，导出 STL 闭合、单连通、无非流形，STEP 回读体积差为零，无新增实体干涉。顶盖不改。
 
-[交付检查](delivery-check.json)核对当前 236 个几何对象与 29 个打印件清单；原底盘、头壳和冠盖／面包板盘的 G-code 字节保持。其余三盘因减件或前移枪座重切，工艺／材料参数、既有孔位和模型朝向保持；水枪底托仅在盘面旋转 90°，点火托架移至空余位置。三个重切盘警告为空，碰撞检查已执行，全部层的挤出路径在平台内。37 个关键原生截面的路径覆盖筛查通过，非全体积强度或实物验收。
+[历史交付检查](delivery-check.json)核对当时 236 个几何对象与 29 个打印件清单；原底盘、头壳和冠盖／面包板盘的 G-code 字节保持。其余三盘因减件或前移枪座重切，工艺／材料参数、既有孔位和模型朝向保持；水枪底托仅在盘面旋转 90°，点火托架移至空余位置。三个重切盘警告为空，碰撞检查已执行，全部层的挤出路径在平台内。37 个关键原生截面的路径覆盖筛查通过，非全体积强度或实物验收。
 
 ![重切三盘首层](first-layers.png)
 
-增量复现：在 FreeCAD Python 环境执行 `scripts/simplify_effect_mounts.py`，再执行 `python3 scripts/prepare_lean_print.py`，最后在 FreeCAD Python（含 Pillow）运行 `scripts/check_lean_print.py`。日常只读校验：`python3 scripts/check_print_release.py`。旧版 `build_tank.py` 和历史四／五／六盘实验脚本不是本次增量交付入口，不能用旧压框方案覆盖现行交付。
+历史增量复现须恢复对应修订与输入副本，不可直接覆盖现有 27 件项目：在 FreeCAD Python 环境执行 `scripts/simplify_effect_mounts.py`，再执行 `python3 scripts/prepare_lean_print.py`，最后在 FreeCAD Python（含 Pillow）运行 `scripts/check_lean_print.py`。当前只读校验：`python3 scripts/check_backpack_release.py`；`python3 scripts/check_print_release.py` 检查并更新[当前报告](../print-ready/release-check.json)。旧版 `build_tank.py` 和历史四／五／六盘实验脚本不是本次增量交付入口，不能用旧压框方案覆盖现行交付。
 
-原始六盘文件已移至[固定校验基线](../archive/print-baselines/CyberTrack-34parts-6plates.3mf)，原哈希与缓存路径保持，复现脚本从该文件读取。用户另行重排并改为中文盘名的 Ready 项目保留在原位置；它仍有 34 件且保存时未包含缓存 G-code，不能用于 Lean 的历史路径对照，也不能把本页盘号直接套用到该项目。
+原始六盘文件已移至[固定校验基线](../archive/print-baselines/CyberTrack-34parts-6plates.3mf)，原哈希与缓存路径保持，复现脚本从该文件读取。用户另行重排并改为中文盘名的 Ready 项目保留在原位置；当前为 27 件、6 盘，背包直立独放第 6 盘且所有盘无缓存 G-code（34 件及 28 件／7 盘均为历史快照），不能用于 Lean 的历史路径对照，也不能把本页盘号直接套用到该项目。
 
-2026-10-26 清理已取消的 5 个压框的 7 份独立导出，以及过期 FreeCAD／Finder 备份；清理文件可从本机废纸篓恢复，见[清理记录](cleanup-report.json)。原始资料、当前模型、单件接口、切片配置与验证报告保留。历史脚本若需旧压框独立导出，应从 Git 历史恢复；现行 Lean 生成和校验不依赖它们。
+2026-10-26 清理已取消的 5 个压框的 7 份独立导出，以及过期 FreeCAD／Finder 备份；清理文件可从本机废纸篓恢复，见[清理记录](cleanup-report.json)。原始资料、当前模型、单件接口、切片配置与验证报告保留。历史脚本若需旧压框独立导出，应从 Git 历史恢复；当前只读交付校验不依赖它们；历史生成流程须恢复当时输入。

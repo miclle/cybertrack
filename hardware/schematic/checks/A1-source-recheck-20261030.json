@@ -1,0 +1,563 @@
+{
+  "date": "2026-10-30",
+  "passed": true,
+  "scope": "Existing A1 netlist against current source assignments covered by the checker",
+  "historical_A1_revision": "84c5f708d96ea7a6a3e3a6ce9b84647be7551886",
+  "historical_report_sha256": "dd2420a4942a0483b8f06d868894a6c25ddda45fedbc1d7b41a96380f5dd7ee0",
+  "historical_report_byte_preserved": true,
+  "historical_source_and_output_hashes_verified_at_A1_revision": true,
+  "current_outputs": {
+    ".gitignore": {
+      "sha256": "09b6e0c5d96e2225ab3f27cbb9247e94c38b9e109b8a2d869bbcab331b6aafa9",
+      "matches_A1": true
+    },
+    "CyberTrack-schematic.pdf": {
+      "sha256": "48358f3ede4d4bf18eb713754065e3c48e69b95999c554b17fadc11a4f414092",
+      "matches_A1": true
+    },
+    "CyberTrack.kicad_pro": {
+      "sha256": "22db8ff9a4c1311b743dc4da5ceef0e4ed0ade962a5f6a4580f0c71645c32316",
+      "matches_A1": true
+    },
+    "CyberTrack.kicad_sch": {
+      "sha256": "499018617ebc4eda14bfb0ed27624125c647ccc23d934846f7c6b809552043da",
+      "matches_A1": true
+    },
+    "CyberTrack.kicad_sym": {
+      "sha256": "ecddf9e4afff12a4624ab37ac986af1a419a34f0a581dec907f3b25bdcc84806",
+      "matches_A1": true
+    },
+    "README.md": {
+      "sha256": "f0cb4c57013c913ece4d66646938964142fb426d513fe3077357d02d10f2aeb4",
+      "matches_A1": false
+    },
+    "checks/CyberTrack.net.xml": {
+      "sha256": "53b8a928b8376ffea6b1332ffd44e2fc3250dd2959f14220ef97371252065f8d",
+      "matches_A1": true
+    },
+    "checks/connectivity.json": {
+      "sha256": "908e3b395d11b536af2f8461b250682cebb99f38d331cfe51fc4410f69f7323c",
+      "matches_A1": true
+    },
+    "checks/design-values.json": {
+      "sha256": "a0e7a1e5579bf287f41393f55feb2edab75f45d30f33ff27f9cfb2a9c942c8ec",
+      "matches_A1": true
+    },
+    "checks/erc.json": {
+      "sha256": "b557dc6ab596ea91295c9a586d3e26dba49a34b32278541aea226cfe72bfbb0a",
+      "matches_A1": true
+    },
+    "control.kicad_sch": {
+      "sha256": "074d988fe5e68cc9e2927b20730c0a1279e1effaf4ddcedf20a8abb0be9a5a17",
+      "matches_A1": true
+    },
+    "design-inputs.json": {
+      "sha256": "98bec99cdf5a17ed3d93f2be0aecc99affd53ba5faff816854f531fe6be3056a",
+      "matches_A1": true
+    },
+    "drive.kicad_sch": {
+      "sha256": "f80beff2deada1519b57eb8d6af7dc7c1b112d21b3f7dc75fb13a772118aebe0",
+      "matches_A1": true
+    },
+    "effects.kicad_sch": {
+      "sha256": "5f663a546217b7dd01afc38756f21810b4ffa344106efba2d22401f4a53bb73f",
+      "matches_A1": true
+    },
+    "ignition-lv.kicad_sch": {
+      "sha256": "7bfd92cb43172885a59e64b4d434224f4982beb2843d9c02bef2149047a04232",
+      "matches_A1": true
+    },
+    "logical-components.json": {
+      "sha256": "bf9e2261dcdbe9b5666762ed538d8ea46d4674533c868691affc8820ca78a21e",
+      "matches_A1": true
+    },
+    "parameter-confirmation.md": {
+      "sha256": "71cf7c49c9b781fd51884d0090f1ab3ef439d1a978b5e211238ffdac6db6f193",
+      "matches_A1": true
+    },
+    "sym-lib-table": {
+      "sha256": "2899e28c17cd11a6b0863eef3cb838721483ac9cf6b4d3e9be44f3a5f586313b",
+      "matches_A1": true
+    }
+  },
+  "current_sources": {
+    "firmware/esp32-audio/action_outputs.h": {
+      "sha256": "3f26633f9b2b5fa2730c5815a9ff7bc5a593f1c83a0e6230c21e3b6552baf87f",
+      "matches_A1": false
+    },
+    "firmware/esp32-audio/cybertrack_tools.cc": {
+      "sha256": "bccd81c3d1d9e8a2c1d6f38636425ed4b4bd8851883ddc96c4d9a94a22a96aac",
+      "matches_A1": false
+    },
+    "hardware/components/ESP32-S3-N16R8/ESP32-S3-SCH-V1.4.pdf": {
+      "sha256": "440f8a078c0a43588638b78089e21fa77fcd2ba4a9eb66df8153959fec17c8e8",
+      "matches_A1": true
+    },
+    "hardware/components/breadboard/front-20261025.jpg": {
+      "sha256": "c9e655b45ef52ec002579f7c48717ccaefce72f30182035489584614ed6861f4",
+      "matches_A1": true
+    },
+    "hardware/components/L298N/reference/user-front-20261025.png": {
+      "sha256": "60c612ea3e93f96d0dc9c074a37198f0c653a474421a1430ce23888b6298bbf2",
+      "matches_A1": true
+    },
+    "hardware/components/jz-mos/physical-front-20261024.jpg": {
+      "sha256": "109134ea2e19a56705077d292f1733acce9f9b7fc32969b11165e36b85ee0324",
+      "matches_A1": true
+    },
+    "hardware/components/jz-mos/physical-back-20261024.jpg": {
+      "sha256": "eb586ae99b9db908fa7e1d3ba396831e1bfe226cdf84d1ed5eb7cfd38fdb9243",
+      "matches_A1": true
+    },
+    "scripts/generate_schematic.py": {
+      "sha256": "5f372d9e765c6017f0650f5af5b4846a7d2aa6e79528aa33412390bb1ddb71f7",
+      "matches_A1": true
+    },
+    "scripts/check_schematic_netlist.py": {
+      "sha256": "6be716694ada171a6da469fdc8233654c2f43af024ff16c7fee9c3b5de005001",
+      "matches_A1": true
+    },
+    "docs/schematic-and-pcb.md": {
+      "sha256": "da62a35a7e98cb799960c7c926689295921c81087454b1e4a61b88817e275340",
+      "matches_A1": false
+    }
+  },
+  "additional_source_hashes": {
+    "firmware/esp32-audio/apply_overlay.py": "1848ae73653ea477a14fbf573b70d9cc2230cf1e2f968b9ba17ff80aff7ca466",
+    "firmware/esp32-audio/ultrasonic.cc": "8580561e89716e41769ae7e15c033a1fb931f9fd37cbb6dcdef6aa87a2899469"
+  },
+  "connectivity": {
+    "passed": true,
+    "net_count": 51,
+    "checks": [
+      {
+        "check": "Motor GPIO8 -> ENA",
+        "net": "MOTOR_A_EN",
+        "passed": true
+      },
+      {
+        "check": "Motor GPIO9 -> IN1",
+        "net": "MOTOR_A_IN1",
+        "passed": true
+      },
+      {
+        "check": "Motor GPIO10 -> IN2",
+        "net": "MOTOR_A_IN2",
+        "passed": true
+      },
+      {
+        "check": "Motor GPIO11 -> ENB",
+        "net": "MOTOR_B_EN",
+        "passed": true
+      },
+      {
+        "check": "Motor GPIO12 -> IN3",
+        "net": "MOTOR_B_IN1",
+        "passed": true
+      },
+      {
+        "check": "Motor GPIO13 -> IN4",
+        "net": "MOTOR_B_IN2",
+        "passed": true
+      },
+      {
+        "check": "Effect GPIO18 -> U6",
+        "net": "WATER_EN",
+        "passed": true
+      },
+      {
+        "check": "Effect GPIO17 -> U8",
+        "net": "BUBBLE_EN",
+        "passed": true
+      },
+      {
+        "check": "Effect GPIO21 -> U10",
+        "net": "IGNITION_EN",
+        "passed": true
+      },
+      {
+        "check": "BOOT dry contact",
+        "net": "/ESP32-S3 and BOOT/BOOT_STOP_N",
+        "passed": true
+      },
+      {
+        "check": "BOOT ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "Controller external 5 V service link",
+        "net": "5V_CTRL",
+        "passed": true
+      },
+      {
+        "check": "12 V stays on motor supply",
+        "net": "12V_MOTOR",
+        "passed": true
+      },
+      {
+        "check": "Controller is not connected to motor 12 V",
+        "passed": true
+      },
+      {
+        "check": "U6 switched positive -> buck",
+        "net": "/Water and bubbles/WATER_SW_P",
+        "passed": true
+      },
+      {
+        "check": "U6 switched return -> buck and load",
+        "net": "/Water and bubbles/WATER_SW_N",
+        "passed": true
+      },
+      {
+        "check": "U7 3.7 V -> load",
+        "net": "/Water and bubbles/3V7_WATER",
+        "passed": true
+      },
+      {
+        "check": "U6 power and control reference",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "U8 switched positive -> buck",
+        "net": "/Water and bubbles/BUBBLE_SW_P",
+        "passed": true
+      },
+      {
+        "check": "U8 switched return -> buck and load",
+        "net": "/Water and bubbles/BUBBLE_SW_N",
+        "passed": true
+      },
+      {
+        "check": "U9 3.7 V -> load",
+        "net": "/Water and bubbles/3V7_BUBBLE",
+        "passed": true
+      },
+      {
+        "check": "U8 power and control reference",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "All switched returns remain separate",
+        "passed": true
+      },
+      {
+        "check": "OUT1 -> M1.A",
+        "net": "Net-(M1-PadA)",
+        "passed": true
+      },
+      {
+        "check": "OUT2 -> M1.B",
+        "net": "Net-(M1-PadB)",
+        "passed": true
+      },
+      {
+        "check": "OUT3 -> M2.A",
+        "net": "Net-(M2-PadA)",
+        "passed": true
+      },
+      {
+        "check": "OUT4 -> M2.B",
+        "net": "Net-(M2-PadB)",
+        "passed": true
+      },
+      {
+        "check": "Four H-bridge terminals are not tied together or grounded",
+        "passed": true
+      },
+      {
+        "check": "L298N +5V has no external connection",
+        "passed": true
+      },
+      {
+        "check": "Ignition disconnect supply side",
+        "net": "5V_IGN_FUSED",
+        "passed": true
+      },
+      {
+        "check": "Ignition disconnect load side",
+        "net": "5V_IGN_ISOLATED",
+        "passed": true
+      },
+      {
+        "check": "Ignition disconnect not bypassed",
+        "passed": true
+      },
+      {
+        "check": "Ignition LV output positive",
+        "net": "/Reserved ignition LV/IGNITION_SW_P",
+        "passed": true
+      },
+      {
+        "check": "Ignition LV output return",
+        "net": "/Reserved ignition LV/IGNITION_SW_N",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO4",
+        "net": "Net-(U1B-MIC_WS_[L04])",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO5",
+        "net": "Net-(U1B-MIC_SCK_[L05])",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO6",
+        "net": "Net-(U1B-MIC_DATA_[L06])",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO7",
+        "net": "Net-(U1B-AMP_DATA_[L07])",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO15",
+        "net": "Net-(U1B-AMP_BCLK_[L08])",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO16",
+        "net": "Net-(U1B-AMP_LRCK_[L09])",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO41",
+        "net": "Net-(U1B-OLED_SDA_[R07])",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO42",
+        "net": "Net-(U1B-OLED_SCL_[R06])",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO47",
+        "net": "Net-(U1B-TALK_INPUT_[R17])",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO40",
+        "net": "Net-(U1B-VOLUME_UP_[R08])",
+        "passed": true
+      },
+      {
+        "check": "Retained GPIO39",
+        "net": "Net-(U1B-VOLUME_DOWN_[R09])",
+        "passed": true
+      },
+      {
+        "check": "R1 returns to system ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "R2 returns to system ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "R3 returns to system ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "R4 returns to system ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "R5 returns to system ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "R6 returns to system ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "R7 returns to system ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "R8 returns to system ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "R9 returns to system ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "Controller and actuator branches start before SW2",
+        "net": "5V_SYS",
+        "passed": true
+      },
+      {
+        "check": "Controller fuse feeds service link",
+        "net": "Net-(F2-Pad2)",
+        "passed": true
+      },
+      {
+        "check": "Actuator fuse feeds SW2",
+        "net": "Net-(F3-Pad2)",
+        "passed": true
+      },
+      {
+        "check": "SW2 output feeds all actuator fuses",
+        "net": "5V_ACT",
+        "passed": true
+      },
+      {
+        "check": "SW2 is not bypassed by controller supply",
+        "passed": true
+      },
+      {
+        "check": "R1 value 10k 1%",
+        "passed": true
+      },
+      {
+        "check": "R2 value 10k 1%",
+        "passed": true
+      },
+      {
+        "check": "R3 value 10k 1%",
+        "passed": true
+      },
+      {
+        "check": "R4 value 10k 1%",
+        "passed": true
+      },
+      {
+        "check": "R5 value 10k 1%",
+        "passed": true
+      },
+      {
+        "check": "R6 value 10k 1%",
+        "passed": true
+      },
+      {
+        "check": "R7 value TBD",
+        "passed": true
+      },
+      {
+        "check": "R8 value TBD",
+        "passed": true
+      },
+      {
+        "check": "R9 value TBD",
+        "passed": true
+      },
+      {
+        "check": "U1 5Vin photo position L21",
+        "passed": true
+      },
+      {
+        "check": "U1 GND photo position L22",
+        "passed": true
+      },
+      {
+        "check": "U1 IO0 photo position R14",
+        "passed": true
+      },
+      {
+        "check": "U1 IO8 photo position L12",
+        "passed": true
+      },
+      {
+        "check": "U1 IO9 photo position L15",
+        "passed": true
+      },
+      {
+        "check": "U1 IO10 photo position L16",
+        "passed": true
+      },
+      {
+        "check": "U1 IO11 photo position L17",
+        "passed": true
+      },
+      {
+        "check": "U1 IO12 photo position L18",
+        "passed": true
+      },
+      {
+        "check": "U1 IO13 photo position L19",
+        "passed": true
+      },
+      {
+        "check": "U1 IO18 photo position L11",
+        "passed": true
+      },
+      {
+        "check": "U1 IO17 photo position L10",
+        "passed": true
+      },
+      {
+        "check": "U1 IO21 photo position R18",
+        "passed": true
+      },
+      {
+        "check": "U1 IO4 photo position L04",
+        "passed": true
+      },
+      {
+        "check": "U1 IO5 photo position L05",
+        "passed": true
+      },
+      {
+        "check": "U1 IO6 photo position L06",
+        "passed": true
+      },
+      {
+        "check": "U1 IO7 photo position L07",
+        "passed": true
+      },
+      {
+        "check": "U1 IO15 photo position L08",
+        "passed": true
+      },
+      {
+        "check": "U1 IO16 photo position L09",
+        "passed": true
+      },
+      {
+        "check": "U1 IO41 photo position R07",
+        "passed": true
+      },
+      {
+        "check": "U1 IO42 photo position R06",
+        "passed": true
+      },
+      {
+        "check": "U1 IO47 photo position R17",
+        "passed": true
+      },
+      {
+        "check": "U1 IO40 photo position R08",
+        "passed": true
+      },
+      {
+        "check": "U1 IO39 photo position R09",
+        "passed": true
+      },
+      {
+        "check": "Actuator assignments match current firmware",
+        "passed": true
+      }
+    ],
+    "evidence": "KiCad-exported electrical netlist; not a physical wiring or power test"
+  },
+  "erc_rerun": false,
+  "pdf_render_review_rerun": false,
+  "netlist_reexported": false,
+  "physical_test_performed": false,
+  "manufacturing_ready": false,
+  "limits": "A1 schematic and exported netlist bytes are preserved. This recheck covers the existing 92 assertions only, not all current firmware features. Later GPIO1/GPIO2 ultrasonic interfaces are not in A1. ERC and PDF review remain historical A1 evidence."
+}
