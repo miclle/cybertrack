@@ -1,10 +1,12 @@
 {
   "passed": true,
-  "scope": "2026-10-27 backpack CAD and saved project consistency",
+  "scope": "backpack CAD and current saved project consistency",
   "projects": [
     {
       "project": "hardware/model/lean-print/CyberTrack-Lean-6plates.3mf",
+      "sha256": "35fc14b599ba52fc3045423058b6e7941880236bde611bfc5d7eaf1f34dc925a",
       "print_parts": 27,
+      "plate_count": 6,
       "requires_reslice_plates": [
         3,
         6
@@ -13,12 +15,18 @@
     },
     {
       "project": "hardware/model/print-ready/CyberTrack-Ready-6plates.3mf",
-      "print_parts": 28,
+      "sha256": "0ae36f55ea8675a3fb0b18a32ad28b80ba0a5a811bb487a4a6e4f970101d79ee",
+      "print_parts": 27,
+      "plate_count": 6,
       "requires_reslice_plates": [
-        6,
-        7
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
       ],
-      "dedicated_backpack_plate": 7
+      "dedicated_backpack_plate": 6
     }
   ],
   "slicing_validated": false,
