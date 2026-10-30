@@ -518,3 +518,89 @@ console.log('PASS: automatic avoidance switch uses device receipts, validates ca
  h.ctx.disconnect('offline');assert.match(h.ids.diagnosis.textContent,/没有新鲜/);
 }
 console.log('PASS: readonly explanation, evidence-specific reasons, recent receipt age, stale/unknown/offline/out-of-order handling; no action requests');
+
+// Theatre editor uses the shipped script: no mock of edit or confirmation logic.
+const theatreStep=(direction='none',move_ms=0,bubbles_ms=1000)=>({direction,move_ms,water_ms:0,bubbles_ms,ignition_ms:0,speed_percent:100});
+async function theatreHarness(){
+ const h=harness();await h.connect();let seq=1,revision=0;
+ let draft={active:false,revision:0,steps:[],expires_in_ms:0};
+ const status=(extra={})=>h.status(++seq,{capabilities:{show_draft:true,move:true,bubbles:true},show_draft:structuredClone(draft),...extra});
+ const setDraft=steps=>{draft=steps.length?{active:true,revision:++revision,steps:structuredClone(steps),expires_in_ms:300000}:{active:false,revision:0,steps:[],expires_in_ms:0};};
+ h.ctx.render(status());
+ const drain=async()=>{const p=h.pending.find(c=>c.path==='/api/state');if(p){h.respond(h.take('/api/state'),status());await flush();}};
+ const save=async()=>{
+  const p=h.ctx.sendShow('save');await flush();h.respond(h.take('/api/state'),status());await flush();
+  const call=h.take('/api/action'),edit=JSON.parse(call.options.body).draft;
+  let steps=structuredClone(draft.steps);
+  if(edit.edit==='replace')steps=JSON.parse(edit.steps_json);
+  else if(edit.edit==='replace_step')steps[edit.step-1]=JSON.parse(edit.steps_json)[0];
+  else if(edit.edit==='remove_step')steps.splice(edit.step-1,1);
+  else throw Error('unexpected edit');
+  setDraft(steps);h.respond(call,status({result:'draft_saved'}));await p;await drain();return edit;
+ };
+ const review=()=>{h.ids['show-reviewed'].checked=true;h.ctx.showControls();};
+ return {...h,status,setDraft,drain,save,review};
+}
+{
+ const h=await theatreHarness();
+ for(const name of ['entry','celebrate','curtain']) {h.ctx.selectShowPreset(name);assert(!h.ids['show-save'].disabled);}
+ assert(!h.sent.some(c=>c.path==='/api/action'));assert(h.ids['show-confirm'].disabled);
+ await h.save();assert(!h.ids['show-reviewed'].disabled);assert(h.ids['show-confirm'].disabled);
+ h.review();assert(!h.ids['show-confirm'].disabled);
+ h.ids['show-step'].value='2';h.ids['show-step'].events.change();
+ h.ids['show-bubbles'].value='2';h.ids['show-bubbles'].events.input();assert(h.ids['show-confirm'].disabled);
+ assert(h.ids['show-save'].disabled);h.ctx.applyShowStep();
+ const edit=await h.save();assert.equal(edit.edit,'replace_step');assert.equal(edit.step,2);
+ assert.equal(JSON.parse(edit.steps_json)[0].bubbles_ms,2000);assert(h.ids['show-confirm'].disabled);
+ h.ids['show-remove'].events.click();const remove=await h.save();assert.equal(remove.edit,'remove_step');assert.equal(remove.step,2);
+ h.review();const confirm=h.ctx.sendShow('confirm');await flush();h.respond(h.take('/api/state'),h.status());await flush();
+ const call=h.take('/api/action');assert.equal(JSON.parse(call.options.body).operation,'show_confirm');
+ h.setDraft([]);h.respond(call,h.status({result:'accepted',sequence_active:true,sequence_source:'web'}));await confirm;await h.drain();
+ assert(h.ids['show-confirm'].disabled);await h.ctx.sendShow('confirm');
+ assert.equal(h.sent.filter(c=>JSON.parse(c.options.body).operation==='show_confirm').length,1);
+}
+{
+ const h=await theatreHarness();h.ctx.selectShowPreset('entry');await h.save();h.review();
+ const p=h.ctx.sendShow('confirm');await flush();
+ h.setDraft([theatreStep('none',0,2000)]);h.respond(h.take('/api/state'),h.status());await p;await h.drain();
+ assert(!h.sent.some(c=>JSON.parse(c.options.body).operation==='show_confirm'));
+ assert(h.ids['show-confirm'].disabled);assert.match(h.ids['show-preview'].textContent,/前进/); // Poll never swaps the preview.
+ h.ctx.loadShow();assert.match(h.ids['show-preview'].textContent,/泡泡 2 秒/);assert(h.ids['show-confirm'].disabled);
+ h.advance(300001);h.ctx.showControls();assert(h.ids['show-reviewed'].disabled);assert(h.ids['show-confirm'].disabled);
+}
+for(const trigger of ['stop','offline','windowblur']){
+ const h=await theatreHarness();h.ctx.selectShowPreset('entry');
+ const save=h.ctx.sendShow('save');await flush();h.respond(h.take('/api/state'),h.status());await flush();const late=h.take('/api/action');
+ if(trigger==='stop') {const p=h.ids.stop.events.click();h.setDraft([]);h.respond(h.take('/api/stop'),h.status());await p;await h.drain();}
+ else h.events[trigger]();
+ h.setDraft([theatreStep()]);h.respond(late,h.status({result:'draft_saved'}));await save;
+ assert(h.ids['show-confirm'].disabled);assert(h.ids['show-reviewed'].disabled);
+ assert(!h.sent.some(c=>JSON.parse(c.options.body).operation==='show_confirm'));
+}
+{
+ const h=await theatreHarness();h.ctx.selectShowPreset('entry');await h.save();h.review();
+ const p=h.ctx.sendShow('confirm');await flush();const late=h.take('/api/state');
+ const stopped=h.ids.stop.events.click();h.setDraft([]);h.respond(h.take('/api/stop'),h.status());await stopped;await h.drain();
+ h.respond(late,h.status());await p;
+ assert(!h.sent.some(c=>JSON.parse(c.options.body).operation==='show_confirm'));assert(h.ids['show-confirm'].disabled);
+}
+{
+ const h=await theatreHarness();h.ctx.selectShowPreset('entry');await h.save();h.review();
+ const p=h.ctx.sendShow('confirm');await flush();h.respond(h.take('/api/state'),h.status());await flush();const late=h.take('/api/action');
+ const stopped=h.ids.stop.events.click();h.setDraft([]);h.respond(h.take('/api/stop'),h.status());await stopped;await h.drain();
+ h.respond(late,h.status({result:'accepted',sequence_active:true,sequence_source:'web'}));await p;
+ assert(!h.ids['show-reviewed'].checked);assert(h.ids['show-confirm'].disabled);assert.equal(h.ids.message.textContent,'全部停止。');
+}
+{
+ const h=await theatreHarness();h.ctx.selectShowPreset('entry');
+ const p=h.ctx.sendShow('save');await flush();h.respond(h.take('/api/state'),h.status());await flush();const late=h.take('/api/action');
+ h.setDraft([theatreStep()]);const old=h.status({result:'draft_saved'});h.ctx.render(h.status());h.respond(late,old);await p;await h.drain();
+ assert(h.ids['show-confirm'].disabled);assert(h.ids['show-reviewed'].disabled);
+}
+{
+ const h=await theatreHarness();h.ctx.selectShowPreset('entry');await h.save();h.review();
+ h.ctx.render(h.status({show_draft:{active:true,revision:8,steps:[theatreStep('none',0,30001)],expires_in_ms:300000}}));
+ assert(h.ids['show-confirm'].disabled);assert(h.ids['show-load'].disabled);
+ h.ctx.render(h.status({capabilities:{}}));assert(h.ids['show-save'].disabled);assert(h.ids['show-confirm'].disabled);
+}
+console.log('PASS: theatre templates have no outputs; exact revision preview, single-step edit/remove, explicit one-shot confirmation, external edits/expiry/malformed drafts, stop/disconnect/blur and stale receipt races never replay');

@@ -1,0 +1,100 @@
+{
+  "version": "2.0.3-ct45",
+  "date": "2026-10-31",
+  "scope": "stage 4b: web show editor, exact revision review and three motion/bubble presets",
+  "checks": {
+    "host_control_asan_ubsan": true,
+    "actual_mcp_http_reply_asan_ubsan": true,
+    "web_script_regression": true,
+    "real_chromium_mock_transport": true,
+    "audio_overlay_regression": true,
+    "improvement_python_tests": 13,
+    "esp_idf_full_build": true,
+    "prepared_overlay_matches_sources": true
+  },
+  "cases": [
+    "three local presets never request outputs",
+    "single-step edit/remove selects matching device contract and preserves other steps",
+    "unsaved or unapplied edits invalidate parent review",
+    "confirmation sends only the exact reviewed device revision after a fresh status window",
+    "voice revision conflict preserves local preview and sends no confirmation",
+    "stop, offline, window blur, late receipts and stale status cannot re-enable confirmation or replay actions",
+    "malformed drafts and old firmware cannot enable saving or confirmation",
+    "cancel clears the device draft; repeated confirmation is disabled",
+    "320x568, 390x844 and 1280x800 real browser layouts: no overflow, fixed stop accessible",
+    "existing host/MCP/HTTP/audio and 13 improvement tests pass"
+  ],
+  "commands": [
+    "python3 scripts/verify_improvements.py --source build/xiaozhi-ct45-src",
+    "CYBERTRACK_PLAYWRIGHT_MODULE=<installed-playwright>/index.mjs node firmware/esp32-audio/tests/web_show_browser.mjs",
+    "CYBERTRACK_PLAYWRIGHT_MODULE=<installed-playwright>/index.mjs node firmware/esp32-audio/tests/web_explanation_browser.mjs",
+    "python3 -m unittest discover -s tests/improvements -v",
+    "idf.py -C build/xiaozhi-ct45-src -B build/firmware-ct45 build"
+  ],
+  "host_report": "output/improvements/checks/20261030T172213598726Z/report.json",
+  "artifact": {
+    "path": "build/firmware-ct45/xiaozhi.bin",
+    "bytes": 2692576,
+    "sha256": "9a347bddd1e9a9bf085bbd5f9cadf0ab79daabc71fc019b4f5c17dd191733872"
+  },
+  "source_sha256": {
+    "apply_overlay.py": "982d6199e18863916e135c9f8b81cf3832c425eeeb1924f26ca0c9c35d16f938",
+    "action_guard.h": "9d9d7a4ce46fe8bf19cd320322747eaf900b2350874049b66fc6256830094b6a",
+    "control_sessions.h": "4c217b7664bf5d6e6e920e7873b0e21c62d73d959da91ceac8920419d600f304",
+    "show_draft.h": "680d92673719abcdaa870814f8a0b7063565822bcda361c24e05fc1c82861676",
+    "show_command_json.h": "0849751dc8a850fd54aeae42380bd4eecb0cabf02c1c32104497c3cb8f7538e7",
+    "web_request.h": "c93a5cde3f49ba514b0c5ddefb54f912696bef83f7ff871e45f7c6645fb0d09a",
+    "web_server.cc": "23fc6f9d4ead8307f750f73f37c325ae3ddf89ac2adf0da7b312804550e5aa45",
+    "cybertrack_tools.cc": "385f7ebd3ee09502c1179bbd91676992f6533148bab7221820254d72ebb352da",
+    "recent_command.h": "acec8f60df1d500a48163e9f927371c482a9aa2fd667c99d89ddf9a8a52e86d8",
+    "role-prompt.txt": "9771eb9f4c3e3c2c509d23ab157e391e20cd44eba40e90edac4368a859d65de8",
+    "web/index.html": "3771c3a1f61e35cfc64469218fb89be7bd202d647bed1b8088255771c530a453",
+    "tests/show_test.cc": "ecbb1a4ff8d57f57cb068fafd9c009eb6bf23ea5d48862954d8c475cfa656d0a",
+    "tests/receipt_adapter_test.cc": "ce5673ddf9c27fe11f43bc7716be99705d8d1bfd24ee31be2358c9212af0a351",
+    "tests/mcp_arguments_test.cc": "98f3591c67f7bc015522852d620ff2972310d535a68d30a3cc18c544199abdf1",
+    "tests/web_request_test.cc": "d84843d88d516144117c48d5d4f294b47b76060e6c8530858d0047bfddf4159a",
+    "tests/web_server_test.cc": "8863f2c53f03af166bf12b6d037e897edcc820d3aa380c340e7a557bb2355c63",
+    "tests/web_ui_test.mjs": "fca0d42a438e661d8152153855694f1f1c15666072cda15c1d263de5ea187c8f",
+    "tests/web_show_browser.mjs": "d2f7a9d1620086d37f5f1be3f9f49507d632098ddd18754278264f5bd044f844"
+  },
+  "prepared_overlay_files": [
+    "action_guard.h",
+    "action_outputs.h",
+    "action_plan.h",
+    "action_plan_json.h",
+    "control_sessions.h",
+    "cybertrack_state.h",
+    "cybertrack_tools.cc",
+    "cybertrack_tools.h",
+    "distance_reading.h",
+    "proximity_audio.cc",
+    "proximity_audio.h",
+    "proximity_guard.h",
+    "recent_command.h",
+    "show_command_json.h",
+    "show_draft.h",
+    "ultrasonic.cc",
+    "ultrasonic.h",
+    "water_guard.h",
+    "web_request.h",
+    "web_server.cc",
+    "web_server.h",
+    "web/index.html -> web_page.h"
+  ],
+  "role": {
+    "characters": 5994,
+    "sha256": "9771eb9f4c3e3c2c509d23ab157e391e20cd44eba40e90edac4368a859d65de8",
+    "platform_synced": false
+  },
+  "deployment": {
+    "flashed": false,
+    "latest_recorded_version": "2.0.3-ct42"
+  },
+  "limitations": [
+    "Browser tests intercept every network request; no device was contacted",
+    "No live Lingxi tool discovery, intent evaluation or spoken trial",
+    "No family replay/modify observations or physical motion/stopping verification",
+    "Template speech is a parent/child cue, not synthesized robot speech or synchronized expressions",
+    "Parent review is an explicit interaction, not identity authentication"
+  ]
+}
