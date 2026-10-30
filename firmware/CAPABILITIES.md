@@ -1,6 +1,6 @@
 # 固件能力与接口手册
 
-当前参数核对于 2026-10-31；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码基线及最近记录部署为 `2.0.3-ct42`。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+当前参数核对于 2026-10-31；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码候选为 `2.0.3-ct43`，最近记录部署仍为 `2.0.3-ct42`。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
 
 <a id="当前面包板-ct21-接口"></a>
 <a id="当前面包板-ct22-接口"></a>
@@ -36,6 +36,8 @@
 - 距离不足 50 cm 滴声；40–50 cm 每 800 ms，小于 40 cm 每 400 ms，与行走和保护开关独立。
 - `proximity.auto_avoidance_enabled` 默认 false，仅网页切换，网页与语音共用。开启时小于 15 cm 停前进／至少 20 cm 解锁，需新指令；无效读数不解除已有锁定。`capabilities.auto_avoidance=false` 表示无自动绕行。
 
+ct43 候选新增 `recent_command`，保留进入动作适配器的最近一次请求结果，查询不覆盖。它不是最后停机原因；字段、未捕获范围与只读解释见[状态解释](../docs/status-explanation.md)。
+
 ## 网页与停止
 
 使用 `http://<设备 IP>:8080/`。单网页会话、POST JSON、同源校验及短期窗口；会话令牌不是用户身份认证。行走／喷水／泡泡长按租约 600 ms。状态轮询不能代替续租，断线重连只恢复状态。
@@ -44,6 +46,6 @@
 
 ## 验证
 
-[ct42 软件记录](esp32-audio/verification-ct42.json)覆盖主机、实际音频适配与编译；[部署记录](esp32-audio/startup-ct42.json)记录平台回读与零执行器启动检查。新一次检查须记录自己的源码与结果，不能复用历史记录宣称新候选通过。
+[ct43 候选记录](esp32-audio/verification-ct43.json)覆盖本次软件检查与编译；[部署记录](esp32-audio/startup-ct42.json)记录平台回读与零执行器启动检查。新一次检查须记录自己的源码与结果，不能复用历史记录宣称新候选通过。
 
 新产品计划见[执行计划](../docs/improvement-plan.md)。实机停车距离、定量电气／温升、完整语音与组合负载验收仍未完成。

@@ -109,7 +109,7 @@ cmake --build build/firmware-host
 ctest --test-dir build/firmware-host --output-on-failure
 ```
 
-这组命令验证通用控制核心及协议／运行层，不包含当前面包板的全部功能。现用语音与网页控制从 `firmware/esp32-audio/` 开始，默认源码与最近记录的部署为 `2.0.3-ct42`，保留按已保存顺序连接 Wi-Fi；通过 overlay 接入固定的上游源码，构建仍使用 ESP-IDF v5.5.1、原始源码及组件缓存。源码导出还需满足面包板适配说明中的 Python 与依赖要求。各工程的 GPIO 与工具语义须分别查阅：
+这组命令验证通用控制核心及协议／运行层，不包含当前面包板的全部功能。现用语音与网页控制从 `firmware/esp32-audio/` 开始，源码候选与最近部署版本分别见[当前状态](docs/current-status.md)，保留按已保存顺序连接 Wi-Fi；通过 overlay 接入固定的上游源码，构建仍使用 ESP-IDF v5.5.1、原始源码及组件缓存。源码导出还需满足面包板适配说明中的 Python 与依赖要求。各工程的 GPIO 与工具语义须分别查阅：
 
 - [面包板适配](firmware/esp32-audio/README.md)：现用语音、网页和四路控制的构建、部署及逐版本记录。
 - [固件总览](firmware/README.md)与[能力及接口手册](firmware/CAPABILITIES.md)：通用核心、工程差异和接口；现用面包板的四路控制、60–100% 电机 PWM 与左右履带映射以[面包板当前记录](firmware/esp32-audio/README.md)为准，旧台架记录保留各自版本边界。
