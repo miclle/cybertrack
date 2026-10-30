@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "templates_only_no_observations",
+  "family_sessions": [],
+  "family_session_fields": ["anonymous_id", "parent_present", "prototype_or_device", "firmware", "network_setup_seconds", "first_use_seconds", "independent_stop", "help_count", "spontaneous_repeat", "parent_use_context", "parent_concerns"],
+  "fault_trials": [],
+  "fault_trial_fields": ["condition", "repeat", "firmware_sha256", "power", "load", "ground_surface", "speed_percent", "source_by_channel", "event_ms", "output_off_ms", "mechanical_stop_ms", "stopping_distance_mm", "stale_action_resumed", "method", "observation"],
+  "power_runs": [],
+  "power_run_fields": ["run_id", "firmware", "battery", "procedure", "duration_s", "rail", "voltage_v", "current_a", "temperature_c", "rating_source", "instrument", "reset_count", "end_reason"],
+  "cost_items": [],
+  "cost_item_fields": ["bom_id", "quantity", "actual_unit_cny", "source", "purchased_on", "estimate_only"],
+  "maintenance_trials": [],
+  "maintenance_trial_fields": ["task", "before_or_after", "revision", "repeat", "duration_s", "tools", "faults", "observed_by"],
+  "engineering_changes": [],
+  "engineering_change_fields": ["change_id", "started_at", "ended_at", "human_minutes", "model_wait_minutes", "revision_rounds", "failed_checks", "commit", "regressions_found"]
+}
