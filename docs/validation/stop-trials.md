@@ -1,0 +1,86 @@
+# 停止、来源隔离与恢复记录
+
+I04 的离线采集／分析入口。分析器不连接设备、不发动作、不刷写固件，也不安排现场测试。当前用户无法配合实机验收，[记录文件](stop-trials.json)保持为空。填写结构化记录与验证其统计方法，不等于完成现场验收。
+
+## 固定矩阵
+
+每个配置、每个案例至少 5 次。活动阶段应在动作仍有效且可区分正常截止与触发停止时采样；原始资料需保留原计划截止与事件时间，无法区分原因时不能据此声称触发停止已验证。配置包含固件二进制 SHA-256、电池、负载、地面、PWM 速度、测量方法、时间误差及恢复观察时长；改变其中任一项就建立新配置，不合并计算覆盖率。当前矩阵 `stop-v1` 共 17 个案例，至少 85 次记录。矩阵唯一可执行定义是 [analyze_stop_trials.py](../../scripts/analyze_stop_trials.py) 的 `CASES`，报告会完整列出，避免漏项被解释为通过。
+
+| 案例 ID | 事件与准备状态 | 应停止 | 应保留 |
+|---|---|---|---|
+| `release_move`／`release_water`／`release_bubbles` | 网页长按相应单路，松手 | 该路 | 无其他活动通道 |
+| `boot_mixed`／`stop_mixed` | 网页行走、语音泡泡同时活动，分别使用 BOOT／全部停止 | 两路及后续动作 | 无 |
+| `page_hidden_mixed`／`web_loss_mixed` | 同上，分别隐藏页面／切断网页连接但保持设备 Wi-Fi 与语音连接 | 网页行走 | 语音泡泡按自身截止结束 |
+| `wifi_loss_mixed` | 同上，设备 Wi-Fi 中断 | 两路及后续动作 | 无 |
+| `voice_loss_mixed` | 同上，仅关闭语音连接 | 语音泡泡 | 网页行走按自身截止结束 |
+| `sequence_cancel_{web,voice}_{active,waiting}` | 两步以上行走／泡泡序列，来源分别为网页／语音，在执行／间隔阶段全部停止 | 当前与后续步骤；间隔阶段输出原本已关 | 无 |
+| `sequence_source_disconnect_{web,voice}_{active,waiting}` | 同上，断开对应网页会话／语音连接 | 当前与后续步骤 | 无 |
+
+所有案例都需要观察恢复到可接收新指令后，旧动作是否自动恢复；`recovery_observed` 必须覆盖这个过程，不能仅用断开时的一帧截图代替。恢复前后不给新的启动指令，观察窗口由测试负责人在配置中预先记录。有限观察窗口只能支持该窗口内的结论。
+
+网页确认后的表演来源是 `web`，即使草稿来自语音。序列 `waiting` 是固件步骤间隔，不等于整机已经机械停止；输出与惯性滑行仍分别记录。网页断线与设备 Wi-Fi 中断是不同案例，不能互相替代。
+
+这是低压行走／喷水／泡泡范围的采集材料。先进行断开执行器功率的逻辑检查，再在具备条件和授权后进行带载观察；软件记录归入 `software_simulation`，不能变成物理覆盖。点火与高压测试不属于矩阵。
+
+## 文件格式
+
+将空的 `stop-trials.json` 复制到本地忽略目录 `output/validation/`，保留原始测量资料；不要提交个人信息、录音或凭据。根字段固定为 `schema_version: 1`、`profiles` 和 `trials`。
+
+一个配置的字段如下，未测量时不要创建虚构记录：
+
+| 字段 | 填写依据 |
+|---|---|
+| `id` | 本文件唯一配置编号 |
+| `evidence_kind` | 实物测量填 `physical_observation`，软件／模拟填 `software_simulation` |
+| `firmware_sha256` | 当次实际二进制的 64 位小写 SHA-256，不能只填 ct45 等版本标签 |
+| `battery`、`load`、`ground_surface` | 电池型号／接线版本、负载状态、地面条件，明确到能够复现 |
+| `speed_percent` | 60–100 的整数；这是 PWM 设定，不是轮速 |
+| `method` | 仪器、触发判定、时间轴对齐、停止与距离定义；注明输出测点 |
+| `timing_uncertainty_ms` | 非负有限值；填写实际方法的误差，不从小数位数推断 |
+| `observation_window_ms` | 正数；每次恢复后实际观察的窗口长度，不能用租约值代替 |
+
+填写一个真实配置对象到本地 `profile.json` 后，可生成全部 85 条待填记录：
+
+```sh
+python3 scripts/analyze_stop_trials.py --init-profile output/validation/profile.json \
+  --output output/validation/actual-stop-trials.json
+```
+
+生成器仅预填案例、来源、编号和重复次数，全部观察值为 `null`，不生成测量结果，也不覆盖已有文件。待填记录可直接分析，报告将逐项指出缺少证据、触发时刻、测量与恢复观察；它们不会计入完整次数。
+
+每条试验字段：
+
+| 字段 | 填写依据 |
+|---|---|
+| `id`、`profile_id`、`case_id` | 唯一试验编号，以及对应配置和上述固定案例 |
+| `repeat` | 同一配置／案例下从 1 开始的独立重复编号 |
+| `evidence_ref` | 可回查的原始波形、视频或记录引用；待采集填 `null`，脚本不会读取、上传或认证它 |
+| `event_ms` | 该证据共同单调时间轴上的事件时刻，非负有限值；待采集填 `null` |
+| `channels` | 与案例要求完全一致的活动通道，逐路填下表 |
+| `recovery_observed` | 已完成恢复及约定窗口观察填 `true`；未完成填 `false` 或 `null` |
+| `stale_action_resumed` | 观察到旧动作恢复填 `true`；在完成观察窗口后未出现填 `false`；未知填 `null` |
+
+每路 `channels.<通道>` 包含以下全部字段：
+
+- `source`：按案例填写 `web` 或 `voice`。间隔阶段记录被测序列的来源，不把待机输出的 `none` 当作新来源。
+- `output_off_ms`：该通道实际测点关闭时刻，未知填 `null`。活动阶段早于触发的关闭时间不能计为有效停机试验；间隔阶段应已关闭，迟于触发会报告违例。
+- `mechanical_stop_ms`：仅 `move` 填履带／整机按约定方法停止的时刻，其他通道填 `null`。与输出时刻分别测量，允许机械先停、输出稍后关闭；不从 GPIO 状态推断机械停止。
+- `stopping_distance_mm`：仅被要求停止的 `move` 记录触发后位移，未知填 `null`，其他通道填 `null`。实际已经静止才能填 0。
+- `continued_until_own_deadline`：只用于应保留的另一来源通道，正常按自身截止结束填 `true`，被错误中断填 `false`，未观察填 `null`；应停止的通道固定填 `null`。
+
+应保留的通道不计停止延时；其关闭／机械字段可为 `null`。应停止的行走通道必须分别有输出、机械和距离记录，才能算一条完整记录。缺值不按 0 填补。时间戳与同一 `evidence_ref` 组成一次事件，换试验编号或重复编号不能把同一事件重复计数。
+
+## 分析与解释
+
+```sh
+python3 scripts/analyze_stop_trials.py output/validation/actual-stop-trials.json \
+  --output output/validation/stop-report.json
+```
+
+不提供输入参数时分析仓库中的空记录，得到零物理覆盖。报告附原始输入及 SHA-256，按配置／案例／通道列出记录数、缺项、违例，以及输出延迟、机械停止延迟和距离的中位数／最大值。输出延迟和机械延迟各自减去事件时刻；间隔阶段已关闭／已停的负差值记为 0，原始时间戳仍完整保留。
+
+- `incomplete`：次数不足或仍有未闭合观察。即使已有五条完整记录，额外的不完整记录也不会隐藏。
+- `violations_recorded`：观察到来源隔离错误、间隔阶段输出未关或旧动作恢复；五条成功不能冲掉第六条失败。
+- `records_complete`：至少五条记录字段齐全，且没有上述记录违例。它是采集覆盖，不是安全或性能合格。
+
+每个配置独立汇总；`software_simulation` 永不进入 `physical_profiles_with_complete_records`。命令退出 0 只表示输入合法、报告已生成。无论覆盖如何，`physical_acceptance` 都是 `not_established`：本工具没有给出适用于实物的停车距离／温度／供电限值，也不能独立核实原始证据、配置或观察者陈述。不要把主机测试成功或数据完整宣称为整机验收。
