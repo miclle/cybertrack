@@ -42,7 +42,7 @@ int main() {
             assert(is(sessions.VoicePlan(0,sessions.VoiceClaim(0,1,G::PlanMode),plan),"accepted"));
         }
         sensor=reading(100,10); TickLocked(10);
-        assert(guard.Moving() && guard.Watering() && !guard.forward_blocked && sound_event==P::Beep);
+        assert(guard.Moving() && guard.Watering() && !guard.forward_blocked && sound_enabled && sound_event==P::None);
         assert(is(sessions.WebAutoAvoidance(10,owner+1,2,sessions.window,true),"session_expired"));
         assert(!sessions.auto_avoidance_enabled);
         assert(sessions.Heartbeat(20,owner));
@@ -84,7 +84,7 @@ int main() {
     assert(p.Update(invalid,1400,false,true)==P::None && p.blocked);
     assert(p.Update(reading(1000,1400),1901,false,true)==P::None && p.blocked);
     assert(p.Update(reading(1000,2000),1999,false,true)==P::None && p.blocked);
-    assert(p.Update(reading(200,2000),2000,false,true)==P::None && !p.blocked);
+    assert(p.Update(reading(200,2000),2000,false,true)==P::Beep && !p.blocked);
     assert(p.Update(reading(149,2100),2100,false,true)==P::None && p.blocked);
     { // 15 cm is an exclusive stop threshold; the former 30 cm zone remains passable.
         P closer;
@@ -96,13 +96,37 @@ int main() {
         assert(closer.Update(reading(200,1000),1000,false,true)==P::None && !closer.blocked);
         assert(closer.Update(reading(150,1100),1100,false,true)==P::None && !closer.blocked);
     }
-    { // Standby/reverse/turning stay silent, including repeated 15/20 cm crossings.
-        P quiet;
-        for (uint64_t t=0; t<60000; t+=100)
-            assert(quiet.Update(reading(t%200 ? 149 : 450,t),t,false,true)==P::None && !quiet.beeping);
-        quiet.Update(reading(200,60000),60000,false,true);
-        assert(quiet.Update(reading(149,60100),60100,true,true)==P::Stop);
-        assert(quiet.Update(reading(149,60200),60200,true,true)==P::None); // One stop event, even before caller cancels.
+    for (bool enabled : {false,true}) {
+        for (const char* direction : {"none","backward","left","right"}) {
+            sessions=ready(); sessions.auto_avoidance_enabled=enabled; proximity={};
+            if (!is(direction,"none"))
+                assert(is(guard.Move(0,sessions.VoiceClaim(0,1,G::MoveOnly),5000,direction),"accepted"));
+            const auto starts=guard.Starts();
+            sensor=reading(500,0); TickLocked(0); assert(!sound_enabled && sound_event==P::None);
+            sensor=reading(450,1); TickLocked(1); assert(sound_enabled && sound_event==P::Beep);
+            sensor=reading(400,800); TickLocked(800); assert(sound_event==P::None);
+            sensor=reading(400,801); TickLocked(801); assert(sound_event==P::Beep);
+            sensor=reading(399,1200); TickLocked(1200); assert(sound_event==P::None);
+            sensor=reading(149,1201); TickLocked(1201);
+            assert(sound_enabled && sound_event==P::Beep && guard.forward_blocked==enabled);
+            sensor=reading(149,1601); TickLocked(1601); assert(sound_event==P::Beep);
+            sensor.error=ultrasonic::Error::NoEcho; TickLocked(1602);
+            assert(!sound_enabled && sound_event==P::None && guard.forward_blocked==enabled);
+            sensor=reading(149,1602); TickLocked(2103); // Stale sample silences beeps, not the lock.
+            assert(!sound_enabled && sound_event==P::None && guard.forward_blocked==enabled);
+            sensor=reading(500,2104); TickLocked(2104);
+            assert(!sound_enabled && !guard.forward_blocked && guard.Starts()==starts);
+            assert(guard.Moving()==!is(direction,"none"));
+        }
+    }
+    { // Movement and switch transitions cannot reset or suppress the distance cadence.
+        P independent;
+        assert(independent.Update(reading(100,0),0,true,false)==P::Beep);
+        assert(independent.Update(reading(100,100),100,false,false)==P::None && independent.beeping);
+        assert(independent.Update(reading(100,200),200,false,true)==P::None && independent.blocked);
+        assert(independent.Update(reading(100,400),400,false,true)==P::Beep);
+        assert(independent.Update(reading(100,401),401,false,false)==P::None && !independent.blocked);
+        assert(independent.Update(reading(100,800),800,true,false)==P::Beep);
     }
     { // Band jitter, invalid data and far spikes cannot produce catch-up bursts.
         P cadence;
@@ -135,7 +159,7 @@ int main() {
         auto deadline=ready(); P expired;
         assert(is(deadline.guard.Move(0,deadline.VoiceClaim(0,1,G::MoveOnly),100,"forward"),"accepted"));
         deadline.Tick(100,false);
-        assert(expired.Update(reading(149,100),100,deadline.guard.Moving(),true)==P::None && expired.blocked);
+        assert(expired.Update(reading(149,100),100,deadline.guard.Moving(),true)==P::Beep && expired.blocked);
     }
     { // A newly near obstacle must reject the NEXT step before its spray starts.
         sessions=ready(); proximity={}; ActionPlan plan; plan.count=2;
@@ -144,22 +168,24 @@ int main() {
         sensor=reading(1000,1000); TickLocked(1000);
         sensor=reading(149,1200); TickLocked(1200);
         assert(guard.Starts()==1 && !guard.Moving() && !guard.Watering());
-        assert(is(sessions.plan_result,"obstacle_blocked") && sound_event==P::None);
+        assert(is(sessions.plan_result,"obstacle_blocked") && sound_event==P::Beep);
     }
     { // Real adapter stops forward before audio and preserves independent effects.
         sessions=ready(); proximity={};
         assert(is(guard.MoveAndWater(0,sessions.VoiceClaim(0,1,G::Both),10000,10000,"forward"),"accepted"));
         sensor=reading(149,10); TickLocked(10);
         assert(sound_event==P::Stop && !sound_enabled && !guard.Moving() && guard.Watering());
-        TickLocked(15); assert(sound_event==P::None);
+        TickLocked(15); assert(sound_event==P::None && sound_enabled);
+        sensor=reading(149,410); TickLocked(410);
+        assert(sound_event==P::Beep && sound_enabled && !guard.Moving() && guard.Watering());
         sessions=ready(); proximity={};
         assert(is(guard.Move(0,sessions.VoiceClaim(0,1,G::MoveOnly),100,"forward"),"accepted"));
         sensor=reading(149,100); TickLocked(100);
-        assert(sound_event==P::None && !sound_enabled && !guard.Moving());
+        assert(sound_event==P::Beep && sound_enabled && !guard.Moving());
         sessions=ready(); proximity={};
         assert(is(guard.Move(0,sessions.VoiceClaim(0,1,G::MoveOnly),1000,"forward"),"accepted"));
         sensor=reading(149,100); pressed=true; TickLocked(100); pressed=false;
-        assert(sound_event==P::None && !sound_enabled && !guard.Moving());
+        assert(sound_event==P::Beep && sound_enabled && !guard.Moving());
     }
     { // Voice combined action: stop only forward and keep the independent spray deadline.
         auto s=ready();
@@ -213,5 +239,5 @@ int main() {
         s.SetForwardBlocked(100,true); s.Tick(1000,false); s.Tick(1200,false);
         assert(!s.plan_active && is(s.plan_result,"obstacle_blocked") && s.guard.Starts()==1);
     }
-    std::cout << "proximity forward-only tones, cadence, quiet standby, freshness, voice/web/sequence stops and no-resume: PASS\n";
+    std::cout << "distance-only tones across movement/switch states, cadence, freshness, voice/web/sequence stops and no-resume: PASS\n";
 }
