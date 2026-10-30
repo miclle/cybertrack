@@ -2,6 +2,8 @@
 
 README 聚焦产品亮点与使用价值；已实现、开发中、规划中及验收状态从本页进入：[当前可用能力](docs/current-status.md) · [I01–I13 改进进度](docs/improvement-plan.md)。
 
+最新交付与待验缺口见 [I01–I13 验收核对](docs/validation/delivery-audit-20261031.md)。
+
 ## 产品改进目标（2026-10-31）
 
 十项改进、SolidCue 接入、硬件架构专项及灵矽解决方案主线统一跟踪于[执行计划](docs/improvement-plan.md)。I01–I13 的状态、阶段和退出条件以该表为准；下方保留专项历史待办及证据。用户暂时无法配合实机测试，现场项目不以材料或主机检查完成替代。当前版本见[当前状态](docs/current-status.md)。
