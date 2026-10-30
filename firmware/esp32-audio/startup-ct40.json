@@ -1,0 +1,470 @@
+{
+  "date": "2026-10-30",
+  "version": "2.0.3-ct40",
+  "device_id": "30:ed:a0:a1:97:7c",
+  "scope": "Application-only update; preserve all stored configuration; no actuator commands",
+  "flash": {
+    "version": "2.0.3-ct40",
+    "idf": "v5.5.1",
+    "size_bytes": 2656384,
+    "sha256": "30d2bcd36089e8af90e2583b137fc3ac391712761a324807337ea1c71e0c6565",
+    "partition_table_matches_device": true,
+    "wifi_seed_absent": true,
+    "wifi_order_preserved": true,
+    "offset": "0x20000",
+    "previous_application": "2.0.3-ct39-wifi-order3",
+    "previous_app_backup_matches_recorded_hash": true,
+    "complete_flash_backup": true,
+    "complete_backup_sha256": "da8bbc15ed795fa8b9161000f36d269eb0dbd48a27b70ce9e386299b4a4df627",
+    "application_and_non_application_regions_verified": true
+  },
+  "configuration": {
+    "all_nvs_records_unchanged": true,
+    "record_count": 61,
+    "saved_network_count": 2,
+    "pre_application_region_byte_identical_after_boot": true,
+    "after_network_failure_changed_keys": [],
+    "user_configuration_preserved_after_network_failure": true
+  },
+  "startup": [
+    {
+      "time": "2026-10-30T18:24:59.969661+08:00",
+      "observer": "hardware reset; filtered startup observation; no actuator commands"
+    },
+    {
+      "time": "2026-10-30T18:24:59.971498+08:00",
+      "firmware": "2.0.3-ct40"
+    },
+    {
+      "time": "2026-10-30T18:24:59.971847+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-10-30T18:24:59.972112+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5\r"
+    },
+    {
+      "time": "2026-10-30T18:24:59.987955+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000\r"
+    },
+    {
+      "time": "2026-10-30T18:24:59.991024+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-10-30T18:25:02.539473+08:00",
+      "wifi_event": "Candidate network index=1 rssi=-44\r"
+    },
+    {
+      "time": "2026-10-30T18:25:02.539770+08:00",
+      "wifi_event": "Candidate network index=2 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:25:02.544534+08:00",
+      "wifi_event": "Attempt network index=1\r"
+    },
+    {
+      "time": "2026-10-30T18:25:05.047268+08:00",
+      "network": "LAN IP and port acquired"
+    },
+    {
+      "time": "2026-10-30T18:25:05.110351+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-10-30T18:26:39.571242+08:00",
+      "observer": "observation complete",
+      "idle_observed": false
+    },
+    {
+      "time": "2026-10-30T18:28:03.350014+08:00",
+      "observer": "hardware reset; filtered startup observation; no actuator commands"
+    },
+    {
+      "time": "2026-10-30T18:28:03.354656+08:00",
+      "firmware": "2.0.3-ct40"
+    },
+    {
+      "time": "2026-10-30T18:28:03.355138+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-10-30T18:28:03.355262+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5\r"
+    },
+    {
+      "time": "2026-10-30T18:28:03.358542+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000\r"
+    },
+    {
+      "time": "2026-10-30T18:28:03.361674+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-10-30T18:28:05.909961+08:00",
+      "wifi_event": "Candidate network index=1 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:28:05.910196+08:00",
+      "wifi_event": "Candidate network index=2 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:28:05.912678+08:00",
+      "wifi_event": "Attempt network index=1\r"
+    },
+    {
+      "time": "2026-10-30T18:28:08.332013+08:00",
+      "wifi_event": "Failure network index=1 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:28:08.332577+08:00",
+      "wifi_event": "Attempt network index=2\r"
+    },
+    {
+      "time": "2026-10-30T18:28:10.748096+08:00",
+      "wifi_event": "Failure network index=2 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:28:23.160047+08:00",
+      "wifi_event": "Candidate network index=1 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:28:23.160301+08:00",
+      "wifi_event": "Candidate network index=2 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:28:23.162751+08:00",
+      "wifi_event": "Attempt network index=1\r"
+    },
+    {
+      "time": "2026-10-30T18:28:25.582228+08:00",
+      "wifi_event": "Failure network index=1 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:28:25.582331+08:00",
+      "wifi_event": "Attempt network index=2\r"
+    },
+    {
+      "time": "2026-10-30T18:28:27.999486+08:00",
+      "wifi_event": "Failure network index=2 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:28:40.411824+08:00",
+      "wifi_event": "Candidate network index=1 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:28:40.413123+08:00",
+      "wifi_event": "Candidate network index=2 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:28:40.413315+08:00",
+      "wifi_event": "Attempt network index=1\r"
+    },
+    {
+      "time": "2026-10-30T18:28:42.832290+08:00",
+      "wifi_event": "Failure network index=1 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:28:42.832444+08:00",
+      "wifi_event": "Attempt network index=2\r"
+    },
+    {
+      "time": "2026-10-30T18:28:45.249194+08:00",
+      "wifi_event": "Failure network index=2 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:28:57.660189+08:00",
+      "wifi_event": "Candidate network index=1 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:28:57.660811+08:00",
+      "wifi_event": "Candidate network index=2 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:28:57.663413+08:00",
+      "wifi_event": "Attempt network index=1\r"
+    },
+    {
+      "time": "2026-10-30T18:29:00.084383+08:00",
+      "wifi_event": "Failure network index=1 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:29:00.084795+08:00",
+      "wifi_event": "Attempt network index=2\r"
+    },
+    {
+      "time": "2026-10-30T18:29:02.498254+08:00",
+      "wifi_event": "Failure network index=2 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:29:03.510741+08:00",
+      "application_state": "configuring"
+    },
+    {
+      "time": "2026-10-30T18:29:42.945729+08:00",
+      "observer": "observation complete",
+      "idle_observed": false
+    },
+    {
+      "time": "2026-10-30T18:30:44.553084+08:00",
+      "observer": "hardware reset; filtered startup observation; no actuator commands"
+    },
+    {
+      "time": "2026-10-30T18:30:44.558100+08:00",
+      "firmware": "2.0.3-ct40"
+    },
+    {
+      "time": "2026-10-30T18:30:44.558898+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-10-30T18:30:44.559109+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5\r"
+    },
+    {
+      "time": "2026-10-30T18:30:44.567015+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000\r"
+    },
+    {
+      "time": "2026-10-30T18:30:44.570086+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-10-30T18:30:47.119261+08:00",
+      "wifi_event": "Candidate network index=1 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:30:47.119634+08:00",
+      "wifi_event": "Candidate network index=2 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:30:47.121573+08:00",
+      "wifi_event": "Attempt network index=1\r"
+    },
+    {
+      "time": "2026-10-30T18:30:49.540942+08:00",
+      "wifi_event": "Failure network index=1 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:30:49.541496+08:00",
+      "wifi_event": "Attempt network index=2\r"
+    },
+    {
+      "time": "2026-10-30T18:30:51.959744+08:00",
+      "wifi_event": "Failure network index=2 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:31:04.370388+08:00",
+      "wifi_event": "Candidate network index=1 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:31:04.370946+08:00",
+      "wifi_event": "Candidate network index=2 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:31:04.373203+08:00",
+      "wifi_event": "Attempt network index=1\r"
+    },
+    {
+      "time": "2026-10-30T18:31:06.792298+08:00",
+      "wifi_event": "Failure network index=1 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:31:06.792640+08:00",
+      "wifi_event": "Attempt network index=2\r"
+    },
+    {
+      "time": "2026-10-30T18:31:09.209636+08:00",
+      "wifi_event": "Failure network index=2 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:31:21.620211+08:00",
+      "wifi_event": "Candidate network index=1 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:31:21.620772+08:00",
+      "wifi_event": "Candidate network index=2 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:31:21.622626+08:00",
+      "wifi_event": "Attempt network index=1\r"
+    },
+    {
+      "time": "2026-10-30T18:31:24.042672+08:00",
+      "wifi_event": "Failure network index=1 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:31:24.043263+08:00",
+      "wifi_event": "Attempt network index=2\r"
+    },
+    {
+      "time": "2026-10-30T18:31:26.459082+08:00",
+      "wifi_event": "Failure network index=2 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:31:38.870023+08:00",
+      "wifi_event": "Candidate network index=1 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:31:38.870645+08:00",
+      "wifi_event": "Candidate network index=2 directed=true\r"
+    },
+    {
+      "time": "2026-10-30T18:31:38.872374+08:00",
+      "wifi_event": "Attempt network index=1\r"
+    },
+    {
+      "time": "2026-10-30T18:31:41.292437+08:00",
+      "wifi_event": "Failure network index=1 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:31:41.292962+08:00",
+      "wifi_event": "Attempt network index=2\r"
+    },
+    {
+      "time": "2026-10-30T18:31:43.720137+08:00",
+      "wifi_event": "Failure network index=2 reason=201\r"
+    },
+    {
+      "time": "2026-10-30T18:31:44.717619+08:00",
+      "application_state": "configuring"
+    },
+    {
+      "time": "2026-10-30T18:32:24.315963+08:00",
+      "observer": "observation complete",
+      "idle_observed": false
+    }
+  ],
+  "checks": {
+    "network_connected": true,
+    "ssd1306_initialized": true,
+    "idle_observed": true,
+    "http_verified": false,
+    "no_actuator_start_commands_sent": true,
+    "platform_role_changed": false,
+    "cloud_version_check_failed_observed": false,
+    "initial_boot_wifi_connected": true,
+    "last_observed_state": "idle",
+    "last_reboot_saved_networks_not_found": false,
+    "physical_oled_confirmed": true,
+    "phone_control_page_user_confirmed": true
+  },
+  "local_private_evidence": "build/ct40-private/ (Flash and NVS contain credentials; keep private)",
+  "limitations": [
+    "The host could not reach the current device network; one serial state receipt confirms zero starts and all logical outputs off",
+    "Reconnection initially returned AUTH_EXPIRE (2), then connected network 1 on automatic retry; repeated connection stability is not established",
+    "No voice, actuator, physical power-cut, or systematic hotspot-switch tests in this follow-up",
+    "Selected build omits image_player used only by unselected esp-hi board; linked component versions stayed pinned",
+    "Phone control-page access and OLED IP display accepted by user; return from conversation and systematic hotspot-switch tests remain unverified"
+  ],
+  "user_feedback": {
+    "date": "2026-10-30",
+    "screen": "用户确认：已显示 IP 和 8080 端口",
+    "network": "用户确认：原 Wi-Fi／热点已开启，可以重新连接",
+    "scope": "现场确认地址和端口可见；不扩展为手机访问、语音字幕恢复或热点切换验收",
+    "final_acceptance": {
+      "date": "2026-10-30",
+      "quote": "手机已经能打开控制页面，屏幕 IP 显示也正常，测试符合预期。",
+      "phone_control_page_access": true,
+      "screen_ip_display": true,
+      "scope": "用户现场确认手机打开控制页和屏幕 IP 显示；不扩展为所有执行器、语音结束恢复或多网络稳定性验收"
+    }
+  },
+  "network_restored_followup": {
+    "date": "2026-10-30",
+    "user_confirmed_original_network_available": true,
+    "firmware": "2.0.3-ct40",
+    "saved_network_index_connected": 1,
+    "initial_auth_expire_then_retry_succeeded": true,
+    "network_connected": true,
+    "idle_observed": true,
+    "serial_state_receipts": 1,
+    "starts_this_boot": 0,
+    "all_logical_outputs_off": true,
+    "host_http_verified": false,
+    "events": [
+      {
+        "time": "2026-10-30T18:57:17.821426+08:00",
+        "observer": "hardware reset; filtered startup observation; no actuator commands"
+      },
+      {
+        "time": "2026-10-30T18:57:17.825787+08:00",
+        "firmware": "2.0.3-ct40"
+      },
+      {
+        "time": "2026-10-30T18:57:17.826232+08:00",
+        "display": "SSD1306 driver installed"
+      },
+      {
+        "time": "2026-10-30T18:57:17.826408+08:00",
+        "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5\r"
+      },
+      {
+        "time": "2026-10-30T18:57:17.839436+08:00",
+        "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000\r"
+      },
+      {
+        "time": "2026-10-30T18:57:17.842643+08:00",
+        "application_state": "starting"
+      },
+      {
+        "time": "2026-10-30T18:57:20.389831+08:00",
+        "wifi_event": "Candidate network index=1 rssi=-39\r"
+      },
+      {
+        "time": "2026-10-30T18:57:20.389997+08:00",
+        "wifi_event": "Candidate network index=2 directed=true\r"
+      },
+      {
+        "time": "2026-10-30T18:57:20.392043+08:00",
+        "wifi_event": "Attempt network index=1\r"
+      },
+      {
+        "time": "2026-10-30T18:57:22.686631+08:00",
+        "wifi_event": "Failure network index=1 reason=2\r"
+      },
+      {
+        "time": "2026-10-30T18:57:22.691867+08:00",
+        "wifi_event": "Attempt network index=2\r"
+      },
+      {
+        "time": "2026-10-30T18:57:25.110112+08:00",
+        "wifi_event": "Failure network index=2 reason=201\r"
+      },
+      {
+        "time": "2026-10-30T18:57:37.521320+08:00",
+        "wifi_event": "Candidate network index=1 rssi=-43\r"
+      },
+      {
+        "time": "2026-10-30T18:57:37.521620+08:00",
+        "wifi_event": "Candidate network index=2 directed=true\r"
+      },
+      {
+        "time": "2026-10-30T18:57:37.523584+08:00",
+        "wifi_event": "Attempt network index=1\r"
+      },
+      {
+        "time": "2026-10-30T18:57:38.669997+08:00",
+        "network": "LAN IP and port acquired"
+      },
+      {
+        "time": "2026-10-30T18:57:38.724658+08:00",
+        "application_state": "activating"
+      },
+      {
+        "time": "2026-10-30T18:57:39.742130+08:00",
+        "application_state": "idle"
+      },
+      {
+        "time": "2026-10-30T18:57:43.395782+08:00",
+        "cybertrack": "RESULT {\"device_id\":\"30:ed:a0:a1:97:7c\",\"boot_id\":\"20f25c47d1da9969\",\"request_sequence\":3,\"operation\":\"release\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":25637,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":0,\"max_duration_ms\":30000,\"last_duration_ms\":0,\"remaining_ms\":0,\"move_last_duration_ms\":0,\"water_last_duration_ms\":0,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"none\",\"window\":2,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"distance\":{\"valid\":true,\"distance_mm\":570,\"error\":\"none\",\"sampled_at_ms\":25528,\"age_ms\":110,\"echo_us\":3324,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}\r"
+      },
+      {
+        "time": "2026-10-30T18:57:54.789941+08:00",
+        "observer": "observation complete",
+        "idle_observed": true
+      }
+    ],
+    "scope": "Hardware restart using existing settings; no firmware flash, config writes, or actuator start commands in this follow-up"
+  }
+}

@@ -21,7 +21,18 @@ static httpd_req_t req(const char* path,const std::string& body) {
 }
 int main() {
     InitializeCyberTrackWeb(); ip_event_got_ip_t event; GotIp(nullptr,IP_EVENT,0,&event);
-    assert(Board::GetInstance().GetDisplay()->text=="http://192.168.1.123:8080");
+    auto display=Board::GetInstance().GetDisplay();
+    assert(display->address=="192.168.1.123:8080");
+    display->SetChatMessage("assistant", "Hello");
+    LostIp(nullptr,WIFI_EVENT,WIFI_EVENT_STA_DISCONNECTED,nullptr);
+    assert(display->address.empty() && display->text=="Hello");
+    event.ip_info.ip.addr=0x0a000002;
+    GotIp(nullptr,IP_EVENT,IP_EVENT_STA_GOT_IP,&event);
+    assert(display->address=="10.0.0.2:8080" && display->text=="Hello");
+    LostIp(nullptr,IP_EVENT,IP_EVENT_STA_LOST_IP,nullptr);
+    assert(display->address.empty());
+    event.ip_info.ip.addr=0xc0a8017b;
+    GotIp(nullptr,IP_EVENT,IP_EVENT_STA_GOT_IP,&event);
     auto r=req("/",""); r.method=HTTP_GET; assert(Page(&r)==ESP_OK);
     assert(r.sent=="TEST_PAGE");
     assert(r.response_headers["Content-Security-Policy"].find("frame-ancestors 'none'")!=std::string::npos);

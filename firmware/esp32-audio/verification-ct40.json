@@ -1,0 +1,123 @@
+{
+  "version": "2.0.3-ct40",
+  "date": "2026-10-30",
+  "scope": "OLED idle IPv4 and port display; chat restored during conversation; stale address cleared on disconnect/lost IP",
+  "upstream_revision": "e8ed16bb42ed9b199cbc9376011653e5037de8d8",
+  "checks": {
+    "pinned_source_overlay_applied": true,
+    "actual_oled_methods_host_asan_ubsan": true,
+    "mcp_http_host_asan_ubsan": true,
+    "esp_idf_full_build": true,
+    "flashed": true,
+    "physical_display_verified": true,
+    "full_host_control_suite": true,
+    "web_ui_host_suite": true,
+    "wifi_order_host_suite": true,
+    "partition_table_matches_device": true,
+    "application_flash_verified": true,
+    "non_application_regions_digest_verified": true,
+    "config_byte_identical_after_first_boot": true,
+    "all_61_nvs_records_preserved": true,
+    "saved_wifi_networks_preserved": 2,
+    "wifi_configuration_seed_absent": true,
+    "configuration_unchanged_after_network_failure": true,
+    "latest_network_ready": true,
+    "cloud_idle_verified": true,
+    "latest_boot_starts_zero_observed": true,
+    "latest_boot_outputs_off_observed": true,
+    "phone_control_page_user_confirmed": true
+  },
+  "commands": [
+    "python3 firmware/esp32-audio/apply_overlay.py build/xiaozhi-ct40-src",
+    "python3 firmware/esp32-audio/tests/run_display_tests.py --source build/xiaozhi-ct40-src",
+    "python3 firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct40-src",
+    "sh firmware/esp32-audio/test.sh",
+    "python3 firmware/esp32-audio/tests/run_wifi_order_tests.py --source build/xiaozhi-ct40-src",
+    "node firmware/esp32-audio/tests/web_ui_test.mjs",
+    "idf.py -C build/xiaozhi-ct40-src -B build/firmware-ct40 build"
+  ],
+  "display_cases": [
+    "initial offline",
+    "got IP",
+    "startup/idle repeated chat clear",
+    "conversation newline handling",
+    "disconnect during conversation",
+    "null chat clear",
+    "new IP while idle",
+    "IP change during conversation then idle"
+  ],
+  "font_metrics": {
+    "font": "LVGL v9.3.0 Montserrat 10",
+    "font_sha256": "afc14fefad31c0fe072fd6d3846c89df1277b77713d458e8b3e4ceaafec30d39",
+    "maximum_ipv4_port_conservative_width_px": 118,
+    "available_width_px": 128,
+    "line_height_px": 11,
+    "available_height_after_padding_px": 14
+  },
+  "source_sha256": {
+    "apply_overlay.py": "da5d7c631cd4cfbf316cd261f418a2b0e7c0c4d74d9beac69d3bb430fb6d9672",
+    "display_overlay.py": "d63b3cb45b25fdeb74b5ad523260e1e9698de66a4b6925c0db2f469a63bcbd93",
+    "web_server.cc": "aa11bd720b3f02ab0285514832f497649103ec8a6e8322ffce5cb6d89f4df186",
+    "tests/run_display_tests.py": "d5b2820ad335bdc23f5bacd0c5d5fd19043e0a0bc8eef2479af23decef76628f",
+    "tests/display_test.cc": "eb5696a533c0905d7ca1c417bdb8d218c4deda2a3374df9afa4edc92e9d2706e",
+    "tests/run_mcp_tests.py": "d7540a4d6170e3d41ce2467c11cfbcd28bb9f171efba9b2d9c2142dc05900886",
+    "tests/web_server_stubs.h": "66acacfe04117fb05c638858a1ec8353e19ca446c0c565c64f35d26be90f822e",
+    "tests/web_server_test.cc": "fd03f435449f259ef1d3b6e0237e605b7c122c607f6d83527b38d077f022f365",
+    "prepare.py": "69755abb4225e9129b62b6cb0f67aa30982192c23e6c57a4a030735ac296435d"
+  },
+  "limitations": [
+    "The host could not reach the current device network; one serial state receipt confirms zero starts and all logical outputs off",
+    "Reconnection initially returned AUTH_EXPIRE (2), then connected network 1 on automatic retry; repeated connection stability is not established",
+    "No voice, actuator, physical power-cut, or systematic hotspot-switch tests in this follow-up",
+    "Selected build omits image_player used only by unselected esp-hi board; linked component versions stayed pinned",
+    "Phone control-page access and OLED IP display accepted by user; return from conversation and systematic hotspot-switch tests remain unverified"
+  ],
+  "artifact": {
+    "version": "2.0.3-ct40",
+    "idf": "v5.5.1",
+    "size_bytes": 2656384,
+    "sha256": "30d2bcd36089e8af90e2583b137fc3ac391712761a324807337ea1c71e0c6565",
+    "partition_table_matches_device": true,
+    "wifi_seed_absent": true,
+    "wifi_order_preserved": true
+  },
+  "environment": {
+    "idf_version": "v5.5.1",
+    "idf_revision": "fcae32885b0296b32044cb99ecbdc50d98dddb83",
+    "idf_path": "build/toolchains/esp-idf-v5.5.1",
+    "source": "build/xiaozhi-ct40-src",
+    "build": "build/firmware-ct40",
+    "restored_locked_components": 48,
+    "build_components_with_verified_original_hash": 47,
+    "excluded_component": "espressif2022/image_player 1.1.0~1, only used by unselected esp-hi board; exact cache recovered separately after build",
+    "image_player_recovery": "upstream d61e0cc with registry manifest and published file set; exact locked hash 8d09974862ba5323c0c97b77deb3be81ca7bd83e60f77265504c086cd69cc5cf verified",
+    "wifi_order": "applied without configuration bootstrap; original saved networks untouched"
+  },
+  "user_feedback": {
+    "date": "2026-10-30",
+    "screen": "用户确认：已显示 IP 和 8080 端口",
+    "network": "用户确认：原 Wi-Fi／热点已开启，可以重新连接",
+    "scope": "现场确认地址和端口可见；不扩展为手机访问、语音字幕恢复或热点切换验收",
+    "final_acceptance": {
+      "date": "2026-10-30",
+      "quote": "手机已经能打开控制页面，屏幕 IP 显示也正常，测试符合预期。",
+      "phone_control_page_access": true,
+      "screen_ip_display": true,
+      "scope": "用户现场确认手机打开控制页和屏幕 IP 显示；不扩展为所有执行器、语音结束恢复或多网络稳定性验收"
+    }
+  },
+  "network_restored_followup": {
+    "date": "2026-10-30",
+    "user_confirmed_original_network_available": true,
+    "firmware": "2.0.3-ct40",
+    "saved_network_index_connected": 1,
+    "initial_auth_expire_then_retry_succeeded": true,
+    "network_connected": true,
+    "idle_observed": true,
+    "serial_state_receipts": 1,
+    "starts_this_boot": 0,
+    "all_logical_outputs_off": true,
+    "host_http_verified": false,
+    "scope": "Hardware restart using existing settings; no firmware flash, config writes, or actuator start commands in this follow-up"
+  }
+}
