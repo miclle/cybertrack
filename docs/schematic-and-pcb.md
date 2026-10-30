@@ -1,6 +1,6 @@
 # CyberTrack 原理图设计与 PCB 打板
 
-版本：设计说明 v0.3 · 2026-10-26；状态核对：2026-10-27。适用对象：原理图设计、PCB 布局、制板文件准备和首板检查。
+版本：设计说明 v0.3 · 2026-10-26；状态核对：2026-10-30。适用对象：原理图设计、PCB 布局、制板文件准备和首板检查。
 
 **已完成 A1 模块级电气原理图，尚无 PCB 布线或 Gerber 生产文件，不能直接下单。** [KiCad 可编辑工程与说明](../hardware/schematic/README.md)及[五页 PDF](../hardware/schematic/CyberTrack-schematic.pdf)保留现有 ESP32-S3 开发板，按电气符号、端子和网络绘图。输入保护、主电源控制电路、部分元件数值／物理针序未冻结，仍以 `TBD` 标注；R1–R6 已选定 10 kΩ、±1%、至少 0.1 W、0603 为设计目标，不代表已安装或通过实物默认关闭验收。本文给出设计约束和交付标准；后续进度统一记入 [TODO](../TODO.md)，不以验收条件代替完成记录。
 
@@ -14,13 +14,13 @@
 |---|---|---|
 | 主电源 | [辰克 CK18650-1234S-NP](../hardware/components/ck-5v-battery/README.md)，标注 5 V，用户尺寸 116 × 70.5 × 19.5 mm | 输出电流、接头用途／极性及保护未知；不沿用旧 A110M 参数，不设计电芯充电电路 |
 | 主控 | 现用 `bread-compact-wifi` 面包板 | 按实物丝印接线；独立 COREBOARD 的排针图不直接作为面包板封装依据 |
-| 固件 | [apply_overlay.py](../firmware/esp32-audio/apply_overlay.py) 为 `2.0.3-ct21`（80% PWM，已刷写）；[输出实现](../firmware/esp32-audio/action_outputs.h)及[控制实现](../firmware/esp32-audio/cybertrack_tools.cc) | 固件引脚有源码依据；部署证据见 [ct21 记录](../firmware/esp32-audio/startup-ct21.json)；A1 初版采用 ct20 GPIO，ct21 未改变这些引脚，不等于新 PCB 验收 |
+| 固件 | A1 历史输入为 ct20 GPIO；当前覆盖脚本版本为 `2.0.3-ct39`，最新部署记录为 [ct39-wifi-order3](../firmware/esp32-audio/verification-ct39-wifi-order3.json) | 2026-10-30 针对现有 A1 网表重跑 92 项连接／源码检查，见[当前复核](../hardware/schematic/verification-current.json)；不等于 A1 已纳入后续超声波接口或新 PCB 验收 |
 | 行走 | MT3608 目标 12 V → P13 L298N → 两台 37R-520 | 保留外置功率模块；核算升压输入、启动电流、驱动损耗及回灌 |
 | 水枪／泡泡 | 用户确认均为 3.7 V；每路独立 MOS 和降压板 | 不能并成一个受控输出；保留两路独立回流 |
 | 点火低压控制 | GPIO21 控制共用的一块 MOS；用户指定 5 V、单次最多 5 秒 | 只定义低压接口和禁用状态；不画高压输出、接线、电极及放电结构，不安排高压通电测试 |
 | 总开关／BOOT | [电源开关](power-switch.md)及[外接 BOOT](boot-button.md)已有机械候选 | 开关额定能力未确认；BOOT 是软件停止输入，不是功率切断 |
 
-现有接线与分项台架证据见[接线总表](wiring.md)、[电源与接口](power-and-interfaces.md)和[效果控制](effects-control.md)。这些页面包含历史版本；本页采用上表与当前源码，不继承旧版本的全部验证结论。
+现有接线与分项台架证据见[接线总表](wiring.md)、[电源与接口](power-and-interfaces.md)和[效果控制](effects-control.md)。这些页面包含历史版本；本页区分 A1 历史输入和当前源码复核，不继承旧版本的全部验证结论。A1 未包含后来使用 GPIO1／GPIO2 的超声波接口，不能作为当前整机完整接线图；现行测距接线见[测距说明](ultrasonic-ranging.md)。
 
 ## 2. 总体电路框图
 
@@ -64,7 +64,7 @@ flowchart TD
 | 4 / Water and bubbles | 两路独立 MOS→降压→3.7 V 负载 | 受控负极分别命名，不能被系统地或另一支路短接 |
 | 5 / Reserved ignition LV | 共用 MOS 的低压接口预留 | JP2 默认断开，U10／J9 在本审图装配中 DNP；不含实际点火负载或高压电路 |
 
-后续板内电路设计仍须补齐保护器件、输入电容、测试点、实际连接器／封装和所需默认关闭电路，不能把模块级 A1 直接转为 PCB。当前 ERC 与 92 项网表／源码核对结果见[验证记录](../hardware/schematic/verification.json)。
+后续板内电路设计仍须补齐保护器件、输入电容、测试点、实际连接器／封装和所需默认关闭电路，不能把模块级 A1 直接转为 PCB。历史 ERC／PDF 结果见[A1 原始记录](../hardware/schematic/verification.json)；2026-10-30 的 92 项网表／当前源码复核见[当前记录](../hardware/schematic/verification-current.json)。
 
 ### 3.1 电源与网络命名
 

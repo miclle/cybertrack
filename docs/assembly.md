@@ -2,7 +2,7 @@
 
 2026-10-27：已进入样机联调与整机验证阶段，已有[制作过程、样机实拍与运行视频](../artifact/README.md)。照片和视频不替代逐项实物验收；打印公差、螺丝保持力、承载、线束维护、温升、供电及液体共存等未验证项继续保留。
 
-现行打印入口为[29 件 Lean 六盘项目](../hardware/model/lean-print/README.md)。当前装配须结合 0.58 头壳、[0.57 底盖承载 L298N 支架](../hardware/model/l298n-compact/README.md)、[PP02／LC04 几何修正](../hardware/model/remaining-print/README.md)及 Lean 板卡固定方案：两块降压板已集成到枪体，5 个旧压框取消，两件 MOS 承托减料，MOS 改用热熔胶固定。胶固保持、散热及检修仍待验证。PP02 名义静态干涉已消除，102 个离散姿态检查不等于完整实物拆装通过。
+现行打印入口为[27 件 Lean 六盘项目](../hardware/model/lean-print/README.md)。当前装配须结合 0.58 头壳、[0.57 底盖承载 L298N 支架](../hardware/model/l298n-compact/README.md)、[PP02／LC04 几何修正](../hardware/model/remaining-print/README.md)及 Lean 板卡固定方案：两块降压板已集成到枪体，5 个旧压框取消，两件 MOS 承托减料，MOS 改用热熔胶固定。胶固保持、散热及检修仍待验证。PP02 名义静态干涉已消除，102 个离散姿态检查不等于完整实物拆装通过。
 
 **0.58头部打印更新：** 头壳与固定装饰合并为 PP07；冠盖4颗、托盘4颗螺丝改用用户现有 Ø2.5／含帽8.6／帽Ø3.9×1 mm 螺丝，不再装原8个候选嵌件。先试拧导孔，再使用配套新 PP05 盖合；见[装配及打印说明](head-shell-print.md)。底盘及其他紧固方案保持。
 
