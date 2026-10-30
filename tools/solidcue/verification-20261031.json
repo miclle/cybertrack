@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-31",
+  "scope": "native headless and STEP sync integration, synthetic comment",
+  "native": {
+    "scope": "native FreeCAD headless; not desktop card, user intent or physical acceptance",
+    "upstream_revision": "13698aeebce8e26aa2e7f371b7170c854dba5f4d",
+    "freecad_version": [
+      "1",
+      "1",
+      "4",
+      "20260928 (Git shallow)",
+      "Unknown",
+      "2026/09/28 13:46:34",
+      "(HEAD detached at 4fd3bf320)",
+      "4fd3bf320d9566a27e60069fc8387448aaa3a094"
+    ],
+    "source_object": "BatteryPadN54N90",
+    "stale_edit_rejected": true,
+    "restored_geometry_difference_mm3": 0.0,
+    "baseline_properties": {
+      "Height": 0.20000000000000284,
+      "Length": 5.0,
+      "Width": 5.0
+    },
+    "edited_properties": {
+      "Height": 0.20000000000000284,
+      "Length": 6.0,
+      "Width": 5.0
+    },
+    "restored_properties": {
+      "Height": 0.20000000000000284,
+      "Length": 5.0,
+      "Width": 5.0
+    },
+    "study_directory": "output/solidcue/studies/bded41f563ce4f488c8bf09679456fa0"
+  },
+  "sync": {
+    "scope": "native STEP plus SolidCue sync integration; synthetic comment; no actual desktop card",
+    "upstream_revision": "13698aeebce8e26aa2e7f371b7170c854dba5f4d",
+    "source_object": "BatteryPadN54N90",
+    "baseline_revision": "r2",
+    "edit_revision": "r3",
+    "restored_revision": "r4",
+    "face_mapping_count": 6,
+    "stale_revision_rejected": true,
+    "source_file_preserved": true,
+    "restored_properties": {
+      "Height": 0.20000000000000284,
+      "Length": 5,
+      "Width": 5
+    },
+    "restored_volume_mm3": 5.00000000000007
+  },
+  "provenance": {
+    "source": "hardware/model/CyberTrack.FCStd",
+    "source_sha256": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23",
+    "source_object": "BatteryPadN54N90",
+    "study_object": "StudyPart",
+    "coordinate_system": "mm; X left, Y rear, Z up; front -Y; no transform",
+    "geometry_equivalence_volume_mm3": 0.0,
+    "production_model_modified": false,
+    "physical_fit": "not tested"
+  },
+  "desktop_acceptance": "not_run",
+  "physical_acceptance": "not_run",
+  "plugin_build": "passed",
+  "plugin_bundle_protocol": "passed"
+}
