@@ -1,32 +1,40 @@
 #pragma once
 #include "distance_reading.h"
 
-// Raw fresh readings control protection; UI smoothing never delays stopping.
+// Raw fresh readings control protection; audio scheduling never delays stopping.
 class ProximityGuard {
 public:
-    enum Alert { None, Caution, Stop };
+    enum Alert { None, Beep, Stop };
     bool blocked = false;
-    Alert Update(const ultrasonic::Reading& r, uint64_t now) {
+    bool beeping = false;
+    Alert Update(const ultrasonic::Reading& r, uint64_t now, bool forward) {
+        beeping = false;
+        if (!forward) beep_started_ = false;
         if (!r.sampled || r.error != ultrasonic::Error::None || now < r.sampled_at_ms ||
             now - r.sampled_at_ms > ultrasonic::FreshnessMs ||
-            r.distance_mm < ultrasonic::MinDistanceMm || r.distance_mm > ultrasonic::MaxDistanceMm) return None;
-        if (r.distance_mm >= 350) blocked = false;
-        if (r.distance_mm >= 550) warned_ = false;
-        if (r.distance_mm < 300) {
-            const bool entered = !blocked;
-            blocked = true; warned_ = true;
-            if (entered && (!stop_announced_ || now - last_stop_ >= 5000)) {
-                stop_announced_ = true; last_stop_ = now; return Stop;
-            }
-        } else if (r.distance_mm < 500 && !warned_) {
-            warned_ = true;
-            if (!caution_announced_ || now - last_caution_ >= 5000) {
-                caution_announced_ = true; last_caution_ = now; return Caution;
-            }
+            r.distance_mm < ultrasonic::MinDistanceMm || r.distance_mm > ultrasonic::MaxDistanceMm) {
+            return None; // Missing data never clears an existing movement lock.
+        }
+        if (r.distance_mm >= 200) blocked = false;
+        if (r.distance_mm < 150) {
+            const bool newly_blocked = !blocked;
+            blocked = true;
+            beep_started_ = false;
+            return forward && newly_blocked ? Stop : None;
+        }
+        if (!forward || blocked || r.distance_mm >= 500) return None;
+        beeping = true;
+        const uint64_t interval = r.distance_mm < 400 ? 400 : 800;
+        // Re-evaluate cadence without restarting it at a distance-band crossing.
+        // One delayed tick emits at most one beep, never a catch-up burst.
+        if (!beep_started_ || now < last_beep_ || now - last_beep_ >= interval) {
+            beep_started_ = true;
+            last_beep_ = now;
+            return Beep;
         }
         return None;
     }
 private:
-    bool warned_ = false, stop_announced_ = false, caution_announced_ = false;
-    uint64_t last_stop_ = 0, last_caution_ = 0;
+    bool beep_started_ = false;
+    uint64_t last_beep_ = 0;
 };

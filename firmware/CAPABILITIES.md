@@ -1,5 +1,9 @@
 # 固件能力与接口手册
 
+ct36 已部署，将 `proximity.stop_below_mm` 改为 150、`release_mm` 改为 200；有效距离小于 15 cm 停前进、至少 20 cm 解锁但不续走。15–40 cm 快滴声，40–50 cm 慢滴声，见[规则](../docs/ultrasonic-ranging.md#ct3615-cm-停止阈值)。状态回读确认 150／200 mm 阈值，平台角色已同步并重启联网，见[部署记录](esp32-audio/startup-ct36.json)。
+
+ct35 已部署，将距离语音替换为仅前进时的滴声，按距离间隔 800／400 ms，小于 30 cm 停前进并响三声一次；待机、后退、转向安静。30／35 cm 保护和现有状态字段保持，详见[提示音规则](../docs/ultrasonic-ranging.md#ct35前进距离提示音)。平台角色已同步回读并重启联网，见[部署记录](esp32-audio/startup-ct35.json)；实际提示音听感待验证。
+
 ct34 在 `distance` 下增加 `driver` 诊断对象（最近失败阶段、错误码、时间、失败／重启计数、退避与恢复状态）。驱动可局部恢复，读取距离仍以 `distance.valid/error/age_ms` 为准，不把历史故障当作当前无效。工具数量与动作接口保持，详见[诊断字段](../docs/ultrasonic-ranging.md#ct34冷启动故障诊断与局部恢复)。
 
 ct33 增加本地距离提醒和前进保护：`capabilities.forward_protection=true`、`proximity.forward_blocked`；小于 50 cm 提醒，小于 30 cm 停止并锁定前进，至少 35 cm 解锁后需新指令。受阻请求／序列返回 `obstacle_blocked`，不重试；仍无自动绕行。所有动作入口共用规则，接口细节见[测距保护](../docs/ultrasonic-ranging.md#ct33本地距离提醒与前进保护)。

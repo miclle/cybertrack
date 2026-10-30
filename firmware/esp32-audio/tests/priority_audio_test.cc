@@ -49,7 +49,7 @@ int main(int argc,char**argv) {
     for (;;) { std::lock_guard<std::mutex> l(audio.audio_queue_mutex_); if(audio.local_priority_) break; }
     audio.ResetDecoder(); assert(audio.decoder.resets==0);
     assert(!audio.PushPacketToDecodeQueue(std::make_unique<AudioStreamPacket>()));
-    audio.PlaySound(ogg); // Normal beeps cannot interleave with priority speech.
+    audio.PlaySound(ogg); // Normal beeps cannot interleave with priority tone.
     {
         std::lock_guard<std::mutex> l(audio.audio_queue_mutex_);
         assert(audio.audio_decode_queue_.empty()); audio.decode_active_=false; audio.audio_queue_cv_.notify_all();
@@ -67,8 +67,8 @@ int main(int argc,char**argv) {
         l.lock(); assert(!returned); ++packets;
         audio.playback_active_=false; audio.audio_queue_cv_.notify_all();
     }
-    warning.join(); assert(returned && packets>10 && audio.decoder.resets==1);
+    warning.join(); assert(returned && packets>0 && packets<=8 && audio.decoder.resets==1);
     assert(audio.PushPacketToDecodeQueue(std::make_unique<AudioStreamPacket>()));
     audio.ResetDecoder(); assert(audio.decoder.resets==2 && audio.audio_decode_queue_.empty());
-    std::cout<<"priority speech: "<<packets<<" packets, cloud exclusion, reset protection, drain/release PASS\n";
+    std::cout<<"priority tone: "<<packets<<" packets, cloud exclusion, reset protection, drain/release PASS\n";
 }
