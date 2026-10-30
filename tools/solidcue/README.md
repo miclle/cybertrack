@@ -55,4 +55,4 @@ node scripts/check_solidcue_sync.mjs <study_directory>
 
 [接入验证记录](verification-20261031.json)记录真实 FreeCAD 1.1.4 的修改／恢复与 SolidCue STEP 同步结果；插件构建及 `npm run test:bundle` 也已通过。生产模型未改动。
 
-当前 FreeCAD MCP 服务未连接，本轮尚未完成真实桌面卡片的评论投递、原生工具修改和同卡片恢复。上游既有桌面结果不替代 CyberTrack 的验收。下一步是连接 FreeCAD、重载固定版本插件，在该独立研究件完成上述六步并补实际截图／回执；此项不依赖机器人实机，但依赖桌面宿主连接。
+2026-10-31 再次检查，固定 checkout 与构建仍可用，FreeCAD RPC 返回连接拒绝；桌面工具报告 Mac 当前锁屏。尚未完成真实桌面卡片的评论投递、原生工具修改和同卡片恢复。上游既有桌面结果不替代 CyberTrack 的验收。下一步是连接 FreeCAD、重载固定版本插件，在该独立研究件完成上述六步并补实际截图／回执；此项不依赖机器人实机，但依赖桌面宿主连接。
