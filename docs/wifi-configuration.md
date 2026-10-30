@@ -1,6 +1,8 @@
 # 普通多 Wi-Fi 配置
 
-2026-10-30：最新已部署 `2.0.3-ct39-wifi-order3`，按配置文件导入的保存顺序尝试网络。修正第一组热点信息后，三次实机启动依次为：第一组成功、第一组认证阶段超时（reason 2）后回退第二组、第一组再次成功；最终连接第一组并进入正常待机。两组配置回读匹配。见[构建验证](../firmware/esp32-audio/verification-ct39-wifi-order3.json)和[部署记录](../firmware/esp32-audio/startup-ct39-wifi-order3.json)。热点重连仍有偶发超时，不能宣称每次均成功。
+ct40 已部署，增加 OLED 待机内网地址显示，换网后更新、断网后清除，手机访问时加上 `http://`；两组 Wi-Fi 及全部既有 NVS 记录在首次启动后回读保持一致，见[屏幕地址规则与验证](lan-control.md#屏幕上的内网地址ct40)。
+
+2026-10-30 Wi-Fi 顺序功能部署基线为 `2.0.3-ct39-wifi-order3`，按配置文件导入的保存顺序尝试网络。修正第一组热点信息后，三次实机启动依次为：第一组成功、第一组认证阶段超时（reason 2）后回退第二组、第一组再次成功；最终连接第一组并进入正常待机。两组配置回读匹配。见[构建验证](../firmware/esp32-audio/verification-ct39-wifi-order3.json)和[部署记录](../firmware/esp32-audio/startup-ct39-wifi-order3.json)。热点重连仍有偶发超时，不能宣称每次均成功。
 
 在仓库根目录的 `secrets/wifi.json` 填写：
 
