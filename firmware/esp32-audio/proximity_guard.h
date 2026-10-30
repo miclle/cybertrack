@@ -10,7 +10,6 @@ public:
     Alert Update(const ultrasonic::Reading& r, uint64_t now, bool forward, bool auto_stop) {
         if (!auto_stop) blocked = false;
         beeping = false;
-        if (!forward) beep_started_ = false;
         if (!r.sampled || r.error != ultrasonic::Error::None || now < r.sampled_at_ms ||
             now - r.sampled_at_ms > ultrasonic::FreshnessMs ||
             r.distance_mm < ultrasonic::MinDistanceMm || r.distance_mm > ultrasonic::MaxDistanceMm) {
@@ -20,10 +19,14 @@ public:
         if (auto_stop && r.distance_mm < 150) {
             const bool newly_blocked = !blocked;
             blocked = true;
-            beep_started_ = false;
-            return forward && newly_blocked ? Stop : None;
+            if (forward && newly_blocked) {
+                // The stop triplet takes this cadence slot; ordinary range beeps continue after it.
+                beep_started_ = true;
+                last_beep_ = now;
+                return Stop;
+            }
         }
-        if (!forward || blocked || r.distance_mm >= 500) return None;
+        if (r.distance_mm >= 500) return None;
         beeping = true;
         const uint64_t interval = r.distance_mm < 400 ? 400 : 800;
         // Re-evaluate cadence without restarting it at a distance-band crossing.
