@@ -29,7 +29,7 @@ CyberTrack 是面向亲子互动的灵矽实体机器人方案：灵矽负责理
 - **交付落地**：提供参考整机、打印与原理图资料，并建设语义评测、上手卡、异常矩阵和维护流程，逐步形成别人可以复现的解决方案包。
 - **生态反馈**：整理工具试运行、角色版本管理、设备能力声明与分层日志的改进建议；这些是方案建议，不冒充灵矽已提供的功能。
 
-[完整灵矽解决方案：场景、架构、验证与推广](docs/lingxi-solution.md) · [现用工具契约](firmware/CAPABILITIES.md) · [角色配置与同步](docs/agent-role.md)
+[完整灵矽解决方案：场景、架构、验证与推广](docs/lingxi-solution.md) · [导出参考材料包](tools/lingxi-solution/README.md) · [现用工具契约](firmware/CAPABILITIES.md) · [角色配置与同步](docs/agent-role.md)
 
 ## 样机演示
 
