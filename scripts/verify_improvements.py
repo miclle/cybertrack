@@ -20,7 +20,8 @@ def main():
     out = args.output.resolve() / stamp
     out.mkdir(parents=True, exist_ok=False)
     commands = [[sys.executable, "scripts/check_firmware_current.py"],
-                ["git", "diff", "--check"], ["sh", "firmware/esp32-audio/test.sh"]]
+                ["git", "diff", "--check"], ["sh", "firmware/esp32-audio/test.sh"],
+                ["node", "firmware/esp32-audio/tests/web_ui_test.mjs"]]
     if (ROOT / "tests/improvements").exists():
         commands.append([sys.executable, "-m", "unittest", "discover", "-s", "tests/improvements"])
     if args.source:
