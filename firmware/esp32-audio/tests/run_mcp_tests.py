@@ -40,3 +40,15 @@ subprocess.run(['c++', '-std=c++17', *flags, '-I', str(stubs), '-I', str(cjson),
                 '-I', str(Path(__file__).parent), str(Path(__file__).with_name('web_server_test.cc')),
                 str(build/'cJSON.o'), '-o', str(build/'web_server_test')], check=True)
 subprocess.run([str(build/'web_server_test')], check=True)
+# Actual receipt serialization and request-history behavior with real guards.
+receipt_source = (root / 'firmware/esp32-audio/cybertrack_tools.cc').read_text()
+start = receipt_source.index('std::string Reply(')
+end = receipt_source.index('\n}\n}', start) + 2
+(build / 'receipt_reply.inc').write_text(receipt_source[start:end])
+subprocess.run(['cc', '-std=c11', *flags, '-I', str(root/'firmware/esp32-linx/main'), '-c',
+                str(root/'firmware/esp32-linx/main/water_policy.c'), '-o', str(build/'receipt_water_policy.o')], check=True)
+subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
+                '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
+                str(Path(__file__).with_name('receipt_adapter_test.cc')), str(build/'cJSON.o'),
+                str(build/'receipt_water_policy.o'), '-o', str(build/'receipt_adapter_test')], check=True)
+subprocess.run([str(build/'receipt_adapter_test')], check=True)

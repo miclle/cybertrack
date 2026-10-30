@@ -55,6 +55,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
 .stop-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);z-index:10;width:100%;max-width:440px;display:flex;flex-direction:column;gap:4px;padding:8px 12px max(10px,env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
 @media(max-height:740px){.stop-bar{padding-top:6px;padding-bottom:max(8px,env(safe-area-inset-bottom))}}
 @media(max-height:620px){.stop-bar{padding-top:4px;padding-bottom:max(6px,env(safe-area-inset-bottom))}}
+.help{margin-top:10px;border-top:1px solid var(--line);padding:10px 0;font-size:12px;line-height:1.65}.help summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:650}.help ol{padding-left:22px;margin:4px 0 12px}.help h2{font-size:13px;margin:12px 0 4px}.help p{margin:4px 0;white-space:pre-line}.help .note{color:#686e65}
 </style>
 </head>
 <body><main>
@@ -100,6 +101,13 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
 <button id="frenzy-10" data-effect="frenzy" data-duration="10000" aria-label="狂暴模式10秒" disabled>10 秒</button>
 <button id="frenzy-30" data-effect="frenzy" data-duration="30000" aria-label="狂暴模式30秒" disabled>30 秒</button>
 </div></section>
+<details id="help" class="help">
+<summary>第一次使用 · 为什么没动</summary>
+<ol><li>家长先确认周围留有空间，准备操作底部“全部停止”和本机 BOOT。</li><li>手机与机器人连接同一局域网，打开 OLED 显示的地址，等到“已连接”。</li><li>按住方向键、松开停止；泡泡先选 1 秒。第一次亲子体验不使用点火或狂暴模式。</li></ol>
+<h2>设备现在告诉我们什么</h2>
+<p id="diagnosis" role="status" aria-live="polite">尚未收到设备状态，无法判断原因。</p>
+<p class="note">这里只读取状态，不会发起动作或自动重试。网页显示逻辑状态，没有轮速或水流反馈。</p>
+</details>
 </main>
 <footer class="stop-bar" aria-label="停止控制">
 <p id="message" role="status" aria-live="polite"></p>
@@ -120,6 +128,8 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         windowId = 0,
         latest = -1,
         snapshot = null,
+        snapshotAt = 0,
+        diagnosisTimer,
         pending = false,
         effectPending = false,
         avoidancePending = false,
@@ -149,6 +159,50 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         hold_cancelled: "长按已结束，请松开后重新按住。",
         drive_cancelled: "行走续租已取消，请松开后重新按住。",
       };
+      function diagnosisText(s, age) {
+        if (!s || !Number.isFinite(age) || age < 0 || age > 1500)
+          return "没有新鲜的设备状态，无法判断原因。请查看连接状态；不要依赖旧回执确认实际停止。";
+        const facts = [];
+        if (s.state === "FAULT") facts.push("设备报告故障，当前不接受动作；具体原因以故障回执为准。");
+        if (s.boot_held === true) facts.push("设备报告 BOOT 正按下，动作被停止。");
+        if (s.proximity?.forward_blocked === true) facts.push("设备报告前进受阻；此状态不代表其他方向也受阻。");
+        const labels = {move:"行走",water:"喷水",bubbles:"泡泡",ignition:"点火"};
+        for (const [key, label] of Object.entries(labels)) {
+          if (Number.isFinite(s[key + "_remaining_ms"]) && s[key + "_remaining_ms"] > 0)
+            facts.push(label + "逻辑上正在运行，无法据此确认实物效果。");
+          else if (Number.isFinite(s[key + "_cooldown_ms"]) && s[key + "_cooldown_ms"] > 0)
+            facts.push(label + "正在间隔等待，当前不会自动补做动作。");
+        }
+        if (s.sequence_active === true) facts.push("动作序列正在占用控制；" + (s.sequence_result === "waiting" ? "步骤间等待。" : "正在执行。"));
+        const r = s.recent_command;
+        const operations = {move:"行走",drive_start:"长按行走",drive_stop:"停止行走",drive_renew:"续租行走",
+          water:"喷水",water_start:"长按喷水",water_stop:"停止喷水",water_renew:"续租喷水",
+          bubbles:"泡泡",bubbles_start:"长按泡泡",bubbles_stop:"停止泡泡",bubbles_renew:"续租泡泡",
+          ignition:"点火",move_and_water:"行走加喷水",sequence:"动作序列",frenzy:"狂暴模式",stop:"全部停止",
+          set_speed:"调整速度",adjust_speed:"调整速度",set_auto_avoidance:"调整前进保护"};
+        if (r?.valid === true && Number.isFinite(r.age_ms) && r.age_ms >= 0 && operations[r.operation]) {
+          const result = r.result === "accepted" ? "请求被逻辑接受，不等于实物动作完成。" :
+            r.result === "ok" ? "设备确认已处理该请求；实物效果仍需观察。" :
+            r.result === "not_ready_or_busy" ? "设备未就绪或被占用，回执未细分原因。" :
+            r.result === "obstacle_blocked" ? "该次前进请求被距离保护拒绝。" :
+            r.result === "voice_preempted" ? "该次请求中止了语音动作，没有自动启动新动作。" :
+            r.result === "stale_request" ? "该次请求过期或已被取消。" :
+            r.result === "duplicate_request" ? "重复请求被拒绝。" :
+            r.result === "session_expired" ? "该次请求的控制会话已经失效。" :
+            r.result === "cancelled_before_output" ? "该次动作在输出前被取消。" :
+            r.result === "output_fault" ? "该次请求返回输出故障。" :
+            ["invalid_request","invalid_plan","invalid_speed","invalid_duration","invalid_direction"].includes(r.result) ? "该次参数未通过设备校验。" :
+            ["drive_cancelled","hold_cancelled"].includes(r.result) ? "该次长按已取消。" :
+            "该回执暂时无法解释，不能推断设备或电池故障。";
+          facts.push("最近请求：" + operations[r.operation] + "（约 " + Math.floor((r.age_ms + age) / 1000) + " 秒前）。" + result);
+        } else facts.push("没有可用的最近动作回执，无法确定上一次未动作的原因。");
+        facts.push("当前状态和最近请求分别记录；不能据此认定后来停机的具体原因。");
+        return facts.join("\n");
+      }
+      function explainStatus() {
+        $("diagnosis").textContent = diagnosisText(snapshot, performance.now() - snapshotAt);
+      }
+      $("help").addEventListener("toggle", explainStatus);
       function message(text, error = false, followActivity = false) {
         followingActivity = followActivity;
         $("message").textContent = text;
@@ -252,6 +306,10 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         if (s.request_sequence <= latest) return;
         latest = s.request_sequence;
         snapshot = s;
+        snapshotAt = performance.now() - (s.transport_age_ms || 0);
+        clearTimeout(diagnosisTimer);
+        explainStatus();
+        diagnosisTimer = setTimeout(explainStatus, Math.max(0, 1501 - (s.transport_age_ms || 0)));
         renderDistance(s);
         windowId = s.window;
         if (speedDesired === null) {
@@ -305,6 +363,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
           // cannot make old range data look fresh on the browser.
           if (Number.isFinite(data.distance?.age_ms))
             data.distance.age_ms += Math.ceil(performance.now() - started);
+          data.transport_age_ms = Math.ceil(performance.now() - started);
           return data;
         } finally {
           clearTimeout(timeout);
@@ -335,6 +394,8 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         pending = false;
         effectPending = false;
         snapshot = null;
+        clearTimeout(diagnosisTimer);
+        explainStatus();
         latest = -1;
         windowId = 0;
         $("connection").textContent = "未连接";

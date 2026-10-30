@@ -496,3 +496,25 @@ for (const enabled of [false,true]) {
  assert.equal(h.ids['auto-avoidance'].attributes['aria-checked'],'true');
 }
 console.log('PASS: automatic avoidance switch uses device receipts, validates capability, ignores stale replies and handles failure/stop races');
+{
+ const h=harness();await h.connect();
+ const before=h.sent.length;
+ h.ids.help.events.toggle();assert.equal(h.sent.length,before);
+ assert.match(h.ids.diagnosis.textContent,/没有可用的最近动作回执/);
+ const recent={valid:true,operation:'move',result:'not_ready_or_busy',age_ms:300,source:'voice'};
+ h.ctx.render(h.status(2,{recent_command:recent,move_cooldown_ms:100}));
+ assert.match(h.ids.diagnosis.textContent,/间隔等待/);
+ assert.match(h.ids.diagnosis.textContent,/回执未细分原因/);
+ assert(!h.ids.diagnosis.textContent.includes('电池没电'));
+ h.ctx.render(h.status(3,{recent_command:{...recent,result:'accepted'},move_remaining_ms:100}));
+ assert.match(h.ids.diagnosis.textContent,/不等于实物动作完成/);
+ h.advance(1501);h.ids.help.events.toggle();assert.match(h.ids.diagnosis.textContent,/没有新鲜/);
+ assert.equal(h.sent.length,before);
+ h.ctx.render(h.status(4,{boot_held:true,proximity:{forward_blocked:true},state:'FAULT',recent_command:{...recent,age_ms:null}}));
+ assert.match(h.ids.diagnosis.textContent,/BOOT 正按下/);
+ assert.match(h.ids.diagnosis.textContent,/前进受阻/);
+ assert.match(h.ids.diagnosis.textContent,/没有可用/);
+ h.ctx.render(h.status(3,{recent_command:recent}));assert.match(h.ids.diagnosis.textContent,/BOOT 正按下/);
+ h.ctx.disconnect('offline');assert.match(h.ids.diagnosis.textContent,/没有新鲜/);
+}
+console.log('PASS: readonly explanation, evidence-specific reasons, recent receipt age, stale/unknown/offline/out-of-order handling; no action requests');
