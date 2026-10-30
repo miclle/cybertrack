@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "net_count": 51,
+  "net_count": 54,
   "checks": [
     {
       "check": "Motor GPIO8 -> ENA",
@@ -421,6 +421,90 @@
     },
     {
       "check": "Actuator assignments match current firmware",
+      "passed": true
+    },
+    {
+      "check": "Ultrasonic GPIO1 -> TRIG",
+      "net": "/Ultrasonic 3V3 interface/ULTRASONIC_TRIG",
+      "passed": true
+    },
+    {
+      "check": "Ultrasonic GPIO2 -> ECHO",
+      "net": "/Ultrasonic 3V3 interface/ULTRASONIC_ECHO",
+      "passed": true
+    },
+    {
+      "check": "Ultrasonic uses controller regulated 3V3",
+      "net": "/Ultrasonic 3V3 interface/3V3_CTRL",
+      "passed": true
+    },
+    {
+      "check": "Ultrasonic uses system ground",
+      "net": "GND_SYS",
+      "passed": true
+    },
+    {
+      "check": "Ultrasonic supply isolated from 5 V, 12 V and switched returns",
+      "passed": true
+    },
+    {
+      "check": "Ultrasonic TRIG and ECHO are separate",
+      "passed": true
+    },
+    {
+      "check": "Ultrasonic VCC direct two-endpoint net",
+      "passed": true
+    },
+    {
+      "check": "Ultrasonic TRIG direct two-endpoint net",
+      "passed": true
+    },
+    {
+      "check": "Ultrasonic ECHO direct two-endpoint net",
+      "passed": true
+    },
+    {
+      "check": "U1.IO1 electrical type output",
+      "passed": true
+    },
+    {
+      "check": "U1.IO2 electrical type input",
+      "passed": true
+    },
+    {
+      "check": "U1.3V3 electrical type power_out",
+      "passed": true
+    },
+    {
+      "check": "U11.TRIG electrical type input",
+      "passed": true
+    },
+    {
+      "check": "U11.ECHO electrical type output",
+      "passed": true
+    },
+    {
+      "check": "U11.VCC electrical type power_in",
+      "passed": true
+    },
+    {
+      "check": "3V3 has no invented photo/header position",
+      "passed": true
+    },
+    {
+      "check": "IO1 has no invented photo/header position",
+      "passed": true
+    },
+    {
+      "check": "IO2 has no invented photo/header position",
+      "passed": true
+    },
+    {
+      "check": "Ultrasonic assignments match current firmware and design inputs",
+      "passed": true
+    },
+    {
+      "check": "All A1 terminal connectivity preserved in A2",
       "passed": true
     }
   ],

@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
+import zipfile
 
 
 def check(path):
@@ -92,6 +93,45 @@ def check(path):
     for a, b, c in [(8, 9, 10), (11, 12, 13)]:
         assert f'GPIO_NUM_{a}, GPIO_NUM_{b}, GPIO_NUM_{c}' in source
     results.append(dict(check='Actuator assignments match current firmware', passed=True))
+    for gpio, terminal in [('1', 'TRIG'), ('2', 'ECHO')]:
+        same(f'Ultrasonic GPIO{gpio} -> {terminal}', ('U1', f'IO{gpio}'), ('U11', terminal))
+    same('Ultrasonic uses controller regulated 3V3', ('U1', '3V3'), ('U11', 'VCC'))
+    same('Ultrasonic uses system ground', ('U1', 'GND'), ('U11', 'GND'))
+    separate('Ultrasonic supply isolated from 5 V, 12 V and switched returns',
+             ('U11', 'VCC'), ('U1', '5Vin'), ('U5', '+12V'),
+             ('U6', 'VOUT-'), ('U8', 'VOUT-'), ('U10', 'VOUT-'))
+    separate('Ultrasonic TRIG and ECHO are separate', ('U11', 'TRIG'), ('U11', 'ECHO'))
+    for terminal, gpio in [('VCC', '3V3'), ('TRIG', 'IO1'), ('ECHO', 'IO2')]:
+        assert nets[node_net[('U11', terminal)]] == {('U1', gpio), ('U11', terminal)}, terminal
+        results.append(dict(check=f'Ultrasonic {terminal} direct two-endpoint net', passed=True))
+    sensor_pins = {p.attrib['num']: p for p in root.findall("./libparts/libpart[@part='Ultrasonic_Module']/pins/pin")}
+    controller_pins = {p.attrib['num']: p for p in pins}
+    for owner, terminal, kind in [('U1', 'IO1', 'output'), ('U1', 'IO2', 'input'),
+                                  ('U1', '3V3', 'power_out'), ('U11', 'TRIG', 'input'),
+                                  ('U11', 'ECHO', 'output'), ('U11', 'VCC', 'power_in')]:
+        entry = controller_pins[terminal] if owner == 'U1' else sensor_pins[terminal]
+        assert entry.attrib['type'] == kind, (owner, terminal)
+        results.append(dict(check=f'{owner}.{terminal} electrical type {kind}', passed=True))
+    inputs = json.loads((repo / 'hardware/schematic/design-inputs.json').read_text())
+    assert set(inputs['controller_header']['unmapped_signals']) == {'3V3', 'IO1', 'IO2'}
+    for signal in inputs['controller_header']['unmapped_signals']:
+        assert signal not in positions and '[' not in actual[signal], signal
+        results.append(dict(check=f'{signal} has no invented photo/header position', passed=True))
+    ultrasonic = (repo / 'firmware/esp32-audio/ultrasonic.cc').read_text()
+    for name, number in [('TrigPin', 1), ('EchoPin', 2)]:
+        assert re.search(rf'{name}\s*=\s*GPIO_NUM_{number}\b', ultrasonic)
+        assert inputs['ultrasonic'][name[:4].lower() + '_gpio'] == number
+    results.append(dict(check='Ultrasonic assignments match current firmware and design inputs', passed=True))
+    with zipfile.ZipFile(repo / 'hardware/schematic/CyberTrack-schematic-A1.zip') as archive:
+        baseline = ET.fromstring(archive.read('CyberTrack-schematic-A1/checks/CyberTrack.net.xml'))
+    old_nets = [{(n.attrib['ref'], n.attrib['pin']) for n in net.findall('node')}
+                for net in baseline.findall('./nets/net')]
+    original_nodes = set().union(*old_nets)
+    assert original_nodes <= set(node_net), 'A1 terminal removed'
+    for nodes in old_nets:
+        current = nets[node_net[next(iter(nodes))]] & original_nodes
+        assert current == nodes, ('A1 connection changed', nodes, current)
+    results.append(dict(check='All A1 terminal connectivity preserved in A2', passed=True))
     return dict(passed=True, net_count=len(nets), checks=results,
                 evidence='KiCad-exported electrical netlist; not a physical wiring or power test')
 

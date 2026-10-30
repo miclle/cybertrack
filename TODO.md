@@ -1,5 +1,7 @@
 # CyberTrack 待办
 
+- [x] 2026-10-30 A2 原理图补齐主控侧 3V3／GND、GPIO1／GPIO2 超声波接口；重新导出六页 PDF／网表、ERC 及 112 项连接／源码检查通过，A1 既有端子连接保持，见[当前记录](hardware/schematic/verification-current.json)。实物电平、3V3 余量、针序与装壳声学仍待验证。
+
 ## 普通多 Wi-Fi 配置（2026-10-30）
 
 - [x] 本地 `secrets/wifi.json`、格式校验、可选构建导入与主机 NVS 行为测试；不输出凭据、不重复覆盖后续配网。

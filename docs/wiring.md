@@ -1,6 +1,8 @@
 # 整机接线总表
 
-**2026-10-29 ct28 补充：** 超声波 VCC→3V3、GND→GND、TRIG→IO1、ECHO→IO2；只在头部内连接，用于网页／语音测距。已按后续授权烧录并读到有效回波；3.3 V 供电下 ECHO 电平及实物接线仍未验收。A1 尚未纳入此支路，见[测距说明](ultrasonic-ranging.md)。
+2026-10-30：A2 原理图已补齐主控 3V3／GND、IO1→TRIG、IO2←ECHO，见[原理图与验证](../hardware/schematic/README.md)。四根线在头部内；下文 A1 既有执行器供能和停止边界保持，新增支路不代表实物电平或接线验收。
+
+**2026-10-29 ct28 补充：** 超声波 VCC→3V3、GND→GND、TRIG→IO1、ECHO→IO2；只在头部内连接，用于网页／语音测距。已按后续授权烧录并读到有效回波；3.3 V 供电下 ECHO 电平及实物接线仍未验收。该 ct28 历史阶段 A1 尚未纳入此支路；2026-10-30 已在 A2 补齐，见[测距说明](ultrasonic-ranging.md)。
 
 核对日期：2026-10-27。集中记录已纳入项目的开发板、电子模块及电气负载，区分当前集成接法、历史台架接法和待确定项。机械件及液管安装见[装配说明](assembly.md)，器件编号沿用 [BOM](../hardware/BOM.md) 和[采购清单](../hardware/procurement.md)。
 
@@ -8,7 +10,7 @@
 
 当前电源已换为[辰克 5 V 电池包](../hardware/components/ck-5v-battery/README.md)，面包板源码与最新有记录的部署为 `2.0.3-ct21`。GPIO17 泡泡和 GPIO21 共用点火 MOS 低压控制已部署；样机有落地运行与泡泡影像，ct21 四方向获用户确认。完整接线、功率参数、停止与故障验收仍未完成；影像未绑定完整版本／供电配置，见[集成记录](breadboard-integration.md)、[效果控制](effects-control.md)及[影像记录](../artifact/README.md)。
 
-[模块级原理图 A1](../hardware/schematic/README.md)为当前审图入口：包含辰克电池分配、独立水枪／泡泡支路、外接 BOOT 和点火低压预留。ERC／网表通过不代表实际接线或制造放行；SW2 已确认只切执行器、主控继续运行，U2／U3、保险及部分下拉仍待定，点火页 JP2 断开、U10／J9 为 DNP。参数和照片位置见[待确认清单](../hardware/schematic/parameter-confirmation.md)。
+[模块级原理图 A2](../hardware/schematic/README.md)为当前审图入口：包含辰克电池分配、独立水枪／泡泡支路、外接 BOOT 和点火低压预留。ERC／网表通过不代表实际接线或制造放行；SW2 已确认只切执行器、主控继续运行，U2／U3、保险及部分下拉仍待定，点火页 JP2 断开、U10／J9 为 DNP。参数和照片位置见[待确认清单](../hardware/schematic/parameter-confirmation.md)。
 
 ## 整机接线图
 
@@ -213,4 +215,4 @@ L298N **ENA、ENB 两个常高使能跳帽取下**，沿用已测台架的板载
 
 新源码分配泡泡 MOS 为 GPIO17、两只点火共用 MOS 为 GPIO21，水枪保持 GPIO18；该分配已随 ct13 部署并沿用至 ct21；泡泡已有运行影像，但完整实物端接与复位电平未验收。用户给定点火 5 V、≤5 秒，不提供高压端接线。泡泡保持 3.7 V 供电需求，三块 MOS 各一路的用途及验收边界见[效果控制](effects-control.md)。本节更新上文“GPIO 未定／未实现”的软件状态，不把旧水枪接线证据套用于新增负载。
 
-ct13 图文同步状态：上方 SVG／HTML 整机接线图仍为旧基线，尚未绘入泡泡 GPIO17 和双点火共用 GPIO21；不能作为完整 ct13 接线图。该图现明确保留为历史示意；当前新通道见本表及[效果控制](effects-control.md)，设计候选见[模块级原理图 A1](../hardware/schematic/README.md)。
+ct13 图文同步状态：上方 SVG／HTML 整机接线图仍为旧基线，尚未绘入泡泡 GPIO17 和双点火共用 GPIO21；不能作为完整 ct13 接线图。该图现明确保留为历史示意；当前新通道见本表及[效果控制](effects-control.md)，设计候选见[模块级原理图 A2](../hardware/schematic/README.md)。

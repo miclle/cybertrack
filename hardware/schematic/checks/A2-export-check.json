@@ -1,0 +1,153 @@
+{
+  "date": "2026-10-30",
+  "revision": "A2",
+  "passed": true,
+  "scope": "Current six-sheet schematic export and static verification; no physical or powered test",
+  "kicad_version": "10.0.7",
+  "base_revision": "8206f328e6a72a31123cd3fdc8037c8d8b9320f4",
+  "changes": [
+    "Add U1C and U11: controller 3V3 to VCC, GPIO1 to TRIG, GPIO2 from ECHO, common GND_SYS",
+    "Synchronize motor annotation to current firmware A/right and B/left; no existing terminal connectivity changed"
+  ],
+  "commands": [
+    "python3 scripts/generate_schematic.py",
+    "kicad-cli sch export netlist --format kicadxml -o hardware/schematic/checks/CyberTrack.net.xml hardware/schematic/CyberTrack.kicad_sch",
+    "kicad-cli sch erc --format json --severity-all --exit-code-violations -o hardware/schematic/checks/erc.json hardware/schematic/CyberTrack.kicad_sch",
+    "kicad-cli sch export pdf --no-background-color --exclude-pdf-property-popups -o hardware/schematic/CyberTrack-schematic.pdf hardware/schematic/CyberTrack.kicad_sch",
+    "python3 scripts/check_schematic_netlist.py hardware/schematic/checks/CyberTrack.net.xml --output hardware/schematic/checks/connectivity.json",
+    "python3 scripts/tests/test_schematic_netlist.py",
+    "pdftoppm -scale-to 1700 -png hardware/schematic/CyberTrack-schematic.pdf build/schematic-a2/final"
+  ],
+  "erc": {
+    "violations": 0,
+    "included_severities": [
+      "error",
+      "warning",
+      "exclusion"
+    ],
+    "ignored_checks": [
+      {
+        "description": "Global label only appears once in the schematic",
+        "key": "single_global_label"
+      },
+      {
+        "description": "Four connection points are joined together",
+        "key": "four_way_junction"
+      },
+      {
+        "description": "SPICE model issue",
+        "key": "simulation_model_issue"
+      },
+      {
+        "description": "Assigned footprint doesn't match footprint filters",
+        "key": "footprint_filter"
+      }
+    ],
+    "new_exclusions_added": false
+  },
+  "connectivity": {
+    "passed": true,
+    "checks": 112,
+    "nets": 54,
+    "all_A1_terminal_connectivity_preserved": true
+  },
+  "regression_tests": {
+    "passed": 5,
+    "failed": 0,
+    "cases": [
+      "current export",
+      "reject swapped TRIG/ECHO",
+      "reject 5 V supply",
+      "reject switched-return ground",
+      "reject wrong ECHO direction"
+    ]
+  },
+  "pdf_review": {
+    "pages": 6,
+    "passed": true,
+    "method": "Render every page at 1700 pixels with pdftoppm and visually inspect labels, wiring, title blocks and page boundaries",
+    "page_results": [
+      {
+        "page": 1,
+        "passed": true,
+        "render_sha256": "706dfe1d48931b839badabea6556ac551463bd7c0b6bf4ddbec7e85d4d06b155"
+      },
+      {
+        "page": 2,
+        "passed": true,
+        "render_sha256": "9a4951fd364e3c219fb1b814e94e9d313224b7dafb8297c573f64ab7c6e7653a"
+      },
+      {
+        "page": 3,
+        "passed": true,
+        "render_sha256": "252b5b46f242aa881d14c2a3de00333e1eab97064f0df44998fa1f986ab2b62e"
+      },
+      {
+        "page": 4,
+        "passed": true,
+        "render_sha256": "dc73ab9c45f8a49ed41b03f5a064c063b9d87901cec0d4f05520f45764217986"
+      },
+      {
+        "page": 5,
+        "passed": true,
+        "render_sha256": "7400be8d9f372c21b35205bf6596e83c0136b8a647f24ec573a1ddcae63d5a4f"
+      },
+      {
+        "page": 6,
+        "passed": true,
+        "render_sha256": "bffbafc101f3fb85cc42d3478b9d93d97bc90adfaba82fa2f1c11f007d54ca3d"
+      }
+    ],
+    "corrections": "Moved added root-sheet child box away from title block; corrected stale motor-side annotation."
+  },
+  "files_sha256": {
+    "README.md": "2247393448bfb6d6a1f0a8a5475149e1d47da53d6b7090c023dea57005987895",
+    "TODO.md": "bf83868e00d5e1e2e9a94eec396f99211a6c413893c843ff47d6f692bed97829",
+    "docs/power-and-interfaces.md": "e7337f77a235682ea99f0d06100e18350ab9861a657439d6896e144ef5932dbf",
+    "docs/schematic-and-pcb.md": "16bd93290045b210143768d376cb9491fdfd9b84ddab72c8a8568be6a5de3000",
+    "docs/ultrasonic-ranging.md": "4103594c7e9acbf576ebea637fd1090d5905589d68497f8fb27db2c5495726f9",
+    "docs/wiring.md": "7e4fdbce14afe6c2b7a49088efad56ee446aa4461c2b150bd90adacd45ee463c",
+    "firmware/esp32-audio/action_outputs.h": "3f26633f9b2b5fa2730c5815a9ff7bc5a593f1c83a0e6230c21e3b6552baf87f",
+    "firmware/esp32-audio/apply_overlay.py": "1848ae73653ea477a14fbf573b70d9cc2230cf1e2f968b9ba17ff80aff7ca466",
+    "firmware/esp32-audio/cybertrack_tools.cc": "bccd81c3d1d9e8a2c1d6f38636425ed4b4bd8851883ddc96c4d9a94a22a96aac",
+    "firmware/esp32-audio/ultrasonic.cc": "8580561e89716e41769ae7e15c033a1fb931f9fd37cbb6dcdef6aa87a2899469",
+    "hardware/components/ESP32-S3-N16R8/ESP32-S3-SCH-V1.4.pdf": "440f8a078c0a43588638b78089e21fa77fcd2ba4a9eb66df8153959fec17c8e8",
+    "hardware/components/L298N/reference/user-front-20261025.png": "60c612ea3e93f96d0dc9c074a37198f0c653a474421a1430ce23888b6298bbf2",
+    "hardware/components/breadboard/front-20261025.jpg": "c9e655b45ef52ec002579f7c48717ccaefce72f30182035489584614ed6861f4",
+    "hardware/components/jz-mos/physical-back-20261024.jpg": "eb586ae99b9db908fa7e1d3ba396831e1bfe226cdf84d1ed5eb7cfd38fdb9243",
+    "hardware/components/jz-mos/physical-front-20261024.jpg": "109134ea2e19a56705077d292f1733acce9f9b7fc32969b11165e36b85ee0324",
+    "hardware/schematic/.gitignore": "09b6e0c5d96e2225ab3f27cbb9247e94c38b9e109b8a2d869bbcab331b6aafa9",
+    "hardware/schematic/CyberTrack-schematic-A1.zip": "3fbbeb8c9b2ce623f3c9c7648ea44f9137e18bc9f62359aa464f638c213a7875",
+    "hardware/schematic/CyberTrack-schematic.pdf": "3492aeec9794256b471be84c6c6346474be2faac48055899eaa20aafdbae51f5",
+    "hardware/schematic/CyberTrack.kicad_pro": "fc4f4da3a0a12ac37de2c3aeae503eca51e156347d94ac4345c86626d1681a5a",
+    "hardware/schematic/CyberTrack.kicad_sch": "796accb6f32c1201d6779ef117981d28132e66f6c3eb61fa669681eb85c28f19",
+    "hardware/schematic/CyberTrack.kicad_sym": "412deb2f4d4ddef72a74d5feb5d7097c2186957874f940d726ad809225ab03ff",
+    "hardware/schematic/README.md": "a032e0e52b08715ceb368d26ff0f72a83bd5166c2393c3c3ce7e064fda798e02",
+    "hardware/schematic/checks/A1-source-recheck-20261030.json": "96048c99a9d51b692596b8d6e5613a71cea420915bb778acca91bf94cdf931d0",
+    "hardware/schematic/checks/CyberTrack.net.xml": "0f18bb7965fbe0700dfce8bc85cd4b0e416a16aea20bad779a1fed54413b0e60",
+    "hardware/schematic/checks/connectivity.json": "a751e15a29bd8bb5d3c8750dc51c55a98ba7340bc1e046df434dbea2198d1fd4",
+    "hardware/schematic/checks/design-values.json": "a0e7a1e5579bf287f41393f55feb2edab75f45d30f33ff27f9cfb2a9c942c8ec",
+    "hardware/schematic/checks/erc.json": "bb7aee69bd75b0c49b21908fbe4bd44e92058f2beef7f8e3f42013bd2a2ae818",
+    "hardware/schematic/control.kicad_sch": "9e4ddbfb6f206df41820edffed219fa5f82cd3ee959bc815140029b612cdff59",
+    "hardware/schematic/design-inputs.json": "f809a9d7c05fb41d665141a89e44d64e9eca106d7f714a87a26d7c4394937817",
+    "hardware/schematic/drive.kicad_sch": "ff35decff187665bdcaf8d7b38f046754cda104fd36378d7f973efb1e30bffbc",
+    "hardware/schematic/effects.kicad_sch": "a36bc22413cc87a827b565b6261da679eefdd962cd0b3cee00c01cb36b977c66",
+    "hardware/schematic/ignition-lv.kicad_sch": "5b49e3cd2273c1b48bb6699aeee831b640bd50058187cc2586bb44fcb0f5abf7",
+    "hardware/schematic/logical-components.json": "da5fcf84a6efcd7d9ba6d51b2b856df72e46e1718ede464c1b6f94460af0916d",
+    "hardware/schematic/parameter-confirmation.md": "9503f4fe9fd5334b401feb69b4d1bfdec440a3ffb20c2cfed7c275bd8634b427",
+    "hardware/schematic/sym-lib-table": "2899e28c17cd11a6b0863eef3cb838721483ac9cf6b4d3e9be44f3a5f586313b",
+    "hardware/schematic/ultrasonic.kicad_sch": "325d63c4fab4548077c5831f7003bfac396795f62345b42d40564a595c96d497",
+    "hardware/schematic/verification.json": "dd2420a4942a0483b8f06d868894a6c25ddda45fedbc1d7b41a96380f5dd7ee0",
+    "scripts/check_current_audits.py": "24688d2bbda64af804221f783e82aef52d5b7750ff18cb2cec3e548a509ad1e2",
+    "scripts/check_schematic_netlist.py": "308ab71080315a6e83ac633d2adc3fb65cc10a5a0927a9652badb16b085153b5",
+    "scripts/generate_schematic.py": "eefb481ac8758639392de268f40ecb2a358eb6f291432b9c230c96e750c013e8",
+    "scripts/tests/test_schematic_netlist.py": "c57b0a073a55d1dac75ae8d4d4d62f77fc607531e8902a93b03a506e3740af76"
+  },
+  "physical_test_performed": false,
+  "manufacturing_ready": false,
+  "limits": [
+    "Pin IDs are signal identities, not PCB pads or newly assigned photo positions",
+    "3V3 current margin, module variant, ECHO peak/off-state and physical wiring remain unverified",
+    "ERC supply declarations and module symbols do not validate internal circuits or operating performance"
+  ]
+}
