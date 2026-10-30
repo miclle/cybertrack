@@ -122,7 +122,7 @@ ctest --test-dir build/firmware-host --output-on-failure
 | 添加或修改普通 Wi-Fi | 编辑仓库根目录的 `secrets/wifi.json`（本地私密文件，Git 忽略）；见[配置说明](docs/wifi-configuration.md)与[格式示例](firmware/esp32-audio/wifi.example.json)。填写后需构建、刷入设备才生效。 |
 | 机械布局、打印与装配 | [模型与当前修订](hardware/model/README.md) · [Lean 六盘打印项目](hardware/model/lean-print/README.md) · [头部打印与螺丝](docs/head-shell-print.md) · [装配参考](docs/assembly.md) |
 | 电源、接线与采购 | [电源与接口](docs/power-and-interfaces.md) · [接线总表](docs/wiring.md) · [BOM](hardware/BOM.md) · [采购清单](hardware/procurement.md) |
-| 原理图设计与 PCB 打板 | [KiCad 原理图工程](hardware/schematic/README.md) · [五页原理图 PDF](hardware/schematic/CyberTrack-schematic.pdf) · [设计与制板要求](docs/schematic-and-pcb.md)；A1 为模块级审图稿，尚未达到 PCB 制造放行状态；[待确认参数](hardware/schematic/parameter-confirmation.md) |
+| 原理图设计与 PCB 打板 | [KiCad 原理图工程](hardware/schematic/README.md) · [六页原理图 PDF](hardware/schematic/CyberTrack-schematic.pdf) · [设计与制板要求](docs/schematic-and-pcb.md)；A2 已包含主控侧超声波接口，为模块级审图稿，尚未达到 PCB 制造放行状态；[待确认参数](hardware/schematic/parameter-confirmation.md) |
 | 控制架构与语音配置 | [系统架构](docs/architecture.md) · [智能体角色](docs/agent-role.md) · [灵矽接入](docs/linx-integration.md) |
 | 网页操作与效果控制 | [局域网控制](docs/lan-control.md) · [泡泡与点火](docs/effects-control.md) · [面包板固件](firmware/esp32-audio/README.md) |
 | 固件接口与后续开发 | [固件入口](firmware/README.md) · [能力与接口](firmware/CAPABILITIES.md) · [固件计划](firmware/PLAN.md) |

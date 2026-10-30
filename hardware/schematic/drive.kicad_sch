@@ -1,4 +1,4 @@
-(kicad_sch (version 20250114) (generator "cybertrack_schematic") (uuid 7112bade-82ae-5c61-bb4d-f16fb9309728) (paper "A3") (title_block (title "CyberTrack / Motor drive") (date "2026-10-26") (rev "A1") (company "CyberTrack") (comment 1 "MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION") (comment 2 "Retain existing ESP32-S3 board; TBD items are unresolved") (comment 3 "Pin IDs identify signals, NOT physical header positions"))
+(kicad_sch (version 20250114) (generator "cybertrack_schematic") (uuid 7112bade-82ae-5c61-bb4d-f16fb9309728) (paper "A3") (title_block (title "CyberTrack / Motor drive") (date "2026-10-30") (rev "A2") (company "CyberTrack") (comment 1 "MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION") (comment 2 "Retain existing ESP32-S3 board; TBD items are unresolved") (comment 3 "Pin IDs identify signals, NOT physical header positions"))
 (lib_symbols
 (symbol "CyberTrack:DCMotor"
 (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
@@ -101,7 +101,7 @@
 (wire (pts (xy 264.16 99.06) (xy 337.82 99.06)) (stroke (width 0) (type default)) (uuid e3cb4183-f93f-5341-b6fb-0b0b2dd0561e))
 (wire (pts (xy 264.16 109.22) (xy 337.82 109.22)) (stroke (width 0) (type default)) (uuid bda17273-1c3e-5cf7-99f0-f2605f312277))
 (text "Remove ENA / ENB always-on jumpers.\nRetain only the verified regulator-jumper configuration.\nL298N +5V is intentionally unconnected.\n12 V bus is not guaranteed motor-terminal voltage." (at 20.32 121.92 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid a53b298f-1661-5623-bb47-f5c2138ad68f))
-(text "A = left candidate; B = right candidate.\nVehicle direction still requires calibration.\nEncoder conductors are not connected.\nNeither motor terminal is a fixed ground." (at 292.1 132.08 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid aed16d60-ee59-5502-835d-fa6d976307f8))
+(text "Current firmware: A = right; B = left.\nPhysical lead tracing / loaded tests still pending.\nEncoder conductors are not connected.\nNeither motor terminal is a fixed ground." (at 292.1 132.08 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid aed16d60-ee59-5502-835d-fa6d976307f8))
 (symbol (lib_id "CyberTrack:Pulldown") (at 53.34 203.2 0) (unit 1) (in_bom no) (on_board no) (dnp no) (uuid 3d42c733-7762-5feb-a7a4-b0fb35229db7)(property "Reference" "R1" (at 60.96 200.66 0) (effects (font (size 1.651 1.651)) (justify left)))
 (property "Value" "10k 1%" (at 60.96 207.01 0) (effects (font (size 1.524 1.524)) (justify left)))
 (property "Footprint" "" (at 53.34 203.2 0) (effects (font (size 1.27 1.27)) (hide yes)))

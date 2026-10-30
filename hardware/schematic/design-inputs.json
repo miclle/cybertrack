@@ -1,24 +1,51 @@
 {
-  "revision": "A1",
-  "date": "2026-10-26",
+  "revision": "A2",
+  "date": "2026-10-30",
   "controller_header": {
     "orientation": "Component side facing observer; antenna up; both USB connectors down",
     "numbering": "L/R are drawing-local row names; count 1 to 22 from antenna toward USB. Not a new connector footprint.",
     "evidence": "hardware/components/breadboard/front-20261025.jpg",
     "evidence_kind": "Visible silkscreen / row position, cross-checked against the supplier drawing; not a continuity or pad-dimension test",
     "positions": {
-      "5Vin": "L21", "GND": "L22", "IO0": "R14",
-      "IO8": "L12", "IO9": "L15", "IO10": "L16",
-      "IO11": "L17", "IO12": "L18", "IO13": "L19",
-      "IO18": "L11", "IO17": "L10", "IO21": "R18",
-      "IO4": "L04", "IO5": "L05", "IO6": "L06",
-      "IO7": "L07", "IO15": "L08", "IO16": "L09",
-      "IO41": "R07", "IO42": "R06", "IO47": "R17",
-      "IO40": "R08", "IO39": "R09"
+      "5Vin": "L21",
+      "GND": "L22",
+      "IO0": "R14",
+      "IO8": "L12",
+      "IO9": "L15",
+      "IO10": "L16",
+      "IO11": "L17",
+      "IO12": "L18",
+      "IO13": "L19",
+      "IO18": "L11",
+      "IO17": "L10",
+      "IO21": "R18",
+      "IO4": "L04",
+      "IO5": "L05",
+      "IO6": "L06",
+      "IO7": "L07",
+      "IO15": "L08",
+      "IO16": "L09",
+      "IO41": "R07",
+      "IO42": "R06",
+      "IO47": "R17",
+      "IO40": "R08",
+      "IO39": "R09"
+    },
+    "unmapped_signals": {
+      "3V3": "On-board regulated 3.3 V output; header position not frozen",
+      "IO1": "GPIO1 / ultrasonic TRIG; header position not frozen",
+      "IO2": "GPIO2 / ultrasonic ECHO; header position not frozen"
     }
   },
   "motor_pulldowns": {
-    "references": ["R1", "R2", "R3", "R4", "R5", "R6"],
+    "references": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+    ],
     "value": "10k 1%",
     "resistance_ohm": 10000,
     "tolerance": 0.01,
@@ -29,7 +56,7 @@
     "datasheet_revision": "DS0218 Rev 5, October 2023, Table 4 page 5 and Table 5 page 8",
     "logic_low_max_v": 1.5,
     "logic_high_min_v": 2.3,
-    "low_input_current_magnitude_a": 0.00001,
+    "low_input_current_magnitude_a": 1e-05,
     "high_input_current_max_a": 0.0001,
     "calculation_limits": "Uses chip table conditions and input-current magnitude for sizing; not a guaranteed module bound over all temperatures. ESP32-S3 unloaded VOH specification is not treated as a loaded-VOH guarantee.",
     "placement": "At L298N receiver inputs; ENA/ENB always-on jumpers removed"
@@ -51,16 +78,47 @@
   "module_terminal_evidence": {
     "L298N": {
       "front_view": "Heatsink up, power/control connectors down",
-      "control_columns_left_to_right": ["ENA", "IN1", "IN2", "IN3", "IN4", "ENB"],
+      "control_columns_left_to_right": [
+        "ENA",
+        "IN1",
+        "IN2",
+        "IN3",
+        "IN4",
+        "ENB"
+      ],
       "limit": "ENA/ENB jumper columns each contain supply and signal contacts; photograph does not assign which contact is the signal. Confirm continuity before choosing a physical footprint.",
       "evidence": "hardware/components/L298N/reference/user-front-20261025.png"
     },
     "JZ_MOS": {
-      "known_terminals": ["VIN+", "VIN-", "VOUT+", "VOUT-", "TRIG/PWM", "GND"],
+      "known_terminals": [
+        "VIN+",
+        "VIN-",
+        "VOUT+",
+        "VOUT-",
+        "TRIG/PWM",
+        "GND"
+      ],
       "control_holes": "Two repeated TRIG contacts and two repeated GND contacts; one controlled channel",
-      "evidence": ["hardware/components/jz-mos/physical-front-20261024.jpg", "hardware/components/jz-mos/physical-back-20261024.jpg"],
+      "evidence": [
+        "hardware/components/jz-mos/physical-front-20261024.jpg",
+        "hardware/components/jz-mos/physical-back-20261024.jpg"
+      ],
       "unresolved": "Internal bias, exact MOS parts, current capability, protection and unpowered state"
     }
   },
-  "manufacturing_ready": false
+  "manufacturing_ready": false,
+  "ultrasonic": {
+    "reference": "U11",
+    "module": "HC-SR04 selected wide-voltage variant",
+    "supply": "U1 3V3",
+    "ground": "GND_SYS",
+    "trig_gpio": 1,
+    "echo_gpio": 2,
+    "connection": "Direct 3.3 V scheme requested by user; no 5 V feed or level-shifter added",
+    "evidence": [
+      "docs/ultrasonic-ranging.md",
+      "firmware/esp32-audio/ultrasonic.cc"
+    ],
+    "limits": "Module revision, 3V3 current margin, TRIG threshold, ECHO peak/off-state and physical pin order remain unverified; do not change VCC to 5 V with direct ECHO."
+  }
 }

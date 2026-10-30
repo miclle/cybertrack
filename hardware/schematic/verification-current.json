@@ -1,10 +1,14 @@
 {
   "date": "2026-10-30",
   "passed": true,
-  "scope": "Existing A1 netlist against current source assignments covered by the checker",
+  "revision": "A2",
+  "scope": "A2 regenerated six-sheet schematic, ERC, PDF and current source assignments",
   "historical_A1_revision": "84c5f708d96ea7a6a3e3a6ce9b84647be7551886",
   "historical_report_sha256": "dd2420a4942a0483b8f06d868894a6c25ddda45fedbc1d7b41a96380f5dd7ee0",
   "historical_report_byte_preserved": true,
+  "historical_package_sha256": "3fbbeb8c9b2ce623f3c9c7648ea44f9137e18bc9f62359aa464f638c213a7875",
+  "historical_source_recheck_sha256": "96048c99a9d51b692596b8d6e5613a71cea420915bb778acca91bf94cdf931d0",
+  "historical_package_and_source_recheck_byte_preserved": true,
   "historical_source_and_output_hashes_verified_at_A1_revision": true,
   "current_outputs": {
     ".gitignore": {
@@ -12,72 +16,76 @@
       "matches_A1": true
     },
     "CyberTrack-schematic.pdf": {
-      "sha256": "48358f3ede4d4bf18eb713754065e3c48e69b95999c554b17fadc11a4f414092",
-      "matches_A1": true
+      "sha256": "3492aeec9794256b471be84c6c6346474be2faac48055899eaa20aafdbae51f5",
+      "matches_A1": false
     },
     "CyberTrack.kicad_pro": {
-      "sha256": "22db8ff9a4c1311b743dc4da5ceef0e4ed0ade962a5f6a4580f0c71645c32316",
-      "matches_A1": true
+      "sha256": "fc4f4da3a0a12ac37de2c3aeae503eca51e156347d94ac4345c86626d1681a5a",
+      "matches_A1": false
     },
     "CyberTrack.kicad_sch": {
-      "sha256": "499018617ebc4eda14bfb0ed27624125c647ccc23d934846f7c6b809552043da",
-      "matches_A1": true
+      "sha256": "796accb6f32c1201d6779ef117981d28132e66f6c3eb61fa669681eb85c28f19",
+      "matches_A1": false
     },
     "CyberTrack.kicad_sym": {
-      "sha256": "ecddf9e4afff12a4624ab37ac986af1a419a34f0a581dec907f3b25bdcc84806",
-      "matches_A1": true
+      "sha256": "412deb2f4d4ddef72a74d5feb5d7097c2186957874f940d726ad809225ab03ff",
+      "matches_A1": false
     },
     "README.md": {
-      "sha256": "f0cb4c57013c913ece4d66646938964142fb426d513fe3077357d02d10f2aeb4",
+      "sha256": "a032e0e52b08715ceb368d26ff0f72a83bd5166c2393c3c3ce7e064fda798e02",
       "matches_A1": false
     },
     "checks/CyberTrack.net.xml": {
-      "sha256": "53b8a928b8376ffea6b1332ffd44e2fc3250dd2959f14220ef97371252065f8d",
-      "matches_A1": true
+      "sha256": "0f18bb7965fbe0700dfce8bc85cd4b0e416a16aea20bad779a1fed54413b0e60",
+      "matches_A1": false
     },
     "checks/connectivity.json": {
-      "sha256": "908e3b395d11b536af2f8461b250682cebb99f38d331cfe51fc4410f69f7323c",
-      "matches_A1": true
+      "sha256": "a751e15a29bd8bb5d3c8750dc51c55a98ba7340bc1e046df434dbea2198d1fd4",
+      "matches_A1": false
     },
     "checks/design-values.json": {
       "sha256": "a0e7a1e5579bf287f41393f55feb2edab75f45d30f33ff27f9cfb2a9c942c8ec",
       "matches_A1": true
     },
     "checks/erc.json": {
-      "sha256": "b557dc6ab596ea91295c9a586d3e26dba49a34b32278541aea226cfe72bfbb0a",
-      "matches_A1": true
+      "sha256": "bb7aee69bd75b0c49b21908fbe4bd44e92058f2beef7f8e3f42013bd2a2ae818",
+      "matches_A1": false
     },
     "control.kicad_sch": {
-      "sha256": "074d988fe5e68cc9e2927b20730c0a1279e1effaf4ddcedf20a8abb0be9a5a17",
-      "matches_A1": true
+      "sha256": "9e4ddbfb6f206df41820edffed219fa5f82cd3ee959bc815140029b612cdff59",
+      "matches_A1": false
     },
     "design-inputs.json": {
-      "sha256": "98bec99cdf5a17ed3d93f2be0aecc99affd53ba5faff816854f531fe6be3056a",
-      "matches_A1": true
+      "sha256": "f809a9d7c05fb41d665141a89e44d64e9eca106d7f714a87a26d7c4394937817",
+      "matches_A1": false
     },
     "drive.kicad_sch": {
-      "sha256": "f80beff2deada1519b57eb8d6af7dc7c1b112d21b3f7dc75fb13a772118aebe0",
-      "matches_A1": true
+      "sha256": "ff35decff187665bdcaf8d7b38f046754cda104fd36378d7f973efb1e30bffbc",
+      "matches_A1": false
     },
     "effects.kicad_sch": {
-      "sha256": "5f663a546217b7dd01afc38756f21810b4ffa344106efba2d22401f4a53bb73f",
-      "matches_A1": true
+      "sha256": "a36bc22413cc87a827b565b6261da679eefdd962cd0b3cee00c01cb36b977c66",
+      "matches_A1": false
     },
     "ignition-lv.kicad_sch": {
-      "sha256": "7bfd92cb43172885a59e64b4d434224f4982beb2843d9c02bef2149047a04232",
-      "matches_A1": true
+      "sha256": "5b49e3cd2273c1b48bb6699aeee831b640bd50058187cc2586bb44fcb0f5abf7",
+      "matches_A1": false
     },
     "logical-components.json": {
-      "sha256": "bf9e2261dcdbe9b5666762ed538d8ea46d4674533c868691affc8820ca78a21e",
-      "matches_A1": true
+      "sha256": "da5fcf84a6efcd7d9ba6d51b2b856df72e46e1718ede464c1b6f94460af0916d",
+      "matches_A1": false
     },
     "parameter-confirmation.md": {
-      "sha256": "71cf7c49c9b781fd51884d0090f1ab3ef439d1a978b5e211238ffdac6db6f193",
-      "matches_A1": true
+      "sha256": "9503f4fe9fd5334b401feb69b4d1bfdec440a3ffb20c2cfed7c275bd8634b427",
+      "matches_A1": false
     },
     "sym-lib-table": {
       "sha256": "2899e28c17cd11a6b0863eef3cb838721483ac9cf6b4d3e9be44f3a5f586313b",
       "matches_A1": true
+    },
+    "ultrasonic.kicad_sch": {
+      "sha256": "325d63c4fab4548077c5831f7003bfac396795f62345b42d40564a595c96d497",
+      "matches_A1": false
     }
   },
   "current_sources": {
@@ -110,15 +118,15 @@
       "matches_A1": true
     },
     "scripts/generate_schematic.py": {
-      "sha256": "5f372d9e765c6017f0650f5af5b4846a7d2aa6e79528aa33412390bb1ddb71f7",
-      "matches_A1": true
+      "sha256": "eefb481ac8758639392de268f40ecb2a358eb6f291432b9c230c96e750c013e8",
+      "matches_A1": false
     },
     "scripts/check_schematic_netlist.py": {
-      "sha256": "6be716694ada171a6da469fdc8233654c2f43af024ff16c7fee9c3b5de005001",
-      "matches_A1": true
+      "sha256": "308ab71080315a6e83ac633d2adc3fb65cc10a5a0927a9652badb16b085153b5",
+      "matches_A1": false
     },
     "docs/schematic-and-pcb.md": {
-      "sha256": "da62a35a7e98cb799960c7c926689295921c81087454b1e4a61b88817e275340",
+      "sha256": "16bd93290045b210143768d376cb9491fdfd9b84ddab72c8a8568be6a5de3000",
       "matches_A1": false
     }
   },
@@ -128,7 +136,7 @@
   },
   "connectivity": {
     "passed": true,
-    "net_count": 51,
+    "net_count": 54,
     "checks": [
       {
         "check": "Motor GPIO8 -> ENA",
@@ -550,14 +558,100 @@
       {
         "check": "Actuator assignments match current firmware",
         "passed": true
+      },
+      {
+        "check": "Ultrasonic GPIO1 -> TRIG",
+        "net": "/Ultrasonic 3V3 interface/ULTRASONIC_TRIG",
+        "passed": true
+      },
+      {
+        "check": "Ultrasonic GPIO2 -> ECHO",
+        "net": "/Ultrasonic 3V3 interface/ULTRASONIC_ECHO",
+        "passed": true
+      },
+      {
+        "check": "Ultrasonic uses controller regulated 3V3",
+        "net": "/Ultrasonic 3V3 interface/3V3_CTRL",
+        "passed": true
+      },
+      {
+        "check": "Ultrasonic uses system ground",
+        "net": "GND_SYS",
+        "passed": true
+      },
+      {
+        "check": "Ultrasonic supply isolated from 5 V, 12 V and switched returns",
+        "passed": true
+      },
+      {
+        "check": "Ultrasonic TRIG and ECHO are separate",
+        "passed": true
+      },
+      {
+        "check": "Ultrasonic VCC direct two-endpoint net",
+        "passed": true
+      },
+      {
+        "check": "Ultrasonic TRIG direct two-endpoint net",
+        "passed": true
+      },
+      {
+        "check": "Ultrasonic ECHO direct two-endpoint net",
+        "passed": true
+      },
+      {
+        "check": "U1.IO1 electrical type output",
+        "passed": true
+      },
+      {
+        "check": "U1.IO2 electrical type input",
+        "passed": true
+      },
+      {
+        "check": "U1.3V3 electrical type power_out",
+        "passed": true
+      },
+      {
+        "check": "U11.TRIG electrical type input",
+        "passed": true
+      },
+      {
+        "check": "U11.ECHO electrical type output",
+        "passed": true
+      },
+      {
+        "check": "U11.VCC electrical type power_in",
+        "passed": true
+      },
+      {
+        "check": "3V3 has no invented photo/header position",
+        "passed": true
+      },
+      {
+        "check": "IO1 has no invented photo/header position",
+        "passed": true
+      },
+      {
+        "check": "IO2 has no invented photo/header position",
+        "passed": true
+      },
+      {
+        "check": "Ultrasonic assignments match current firmware and design inputs",
+        "passed": true
+      },
+      {
+        "check": "All A1 terminal connectivity preserved in A2",
+        "passed": true
       }
     ],
     "evidence": "KiCad-exported electrical netlist; not a physical wiring or power test"
   },
-  "erc_rerun": false,
-  "pdf_render_review_rerun": false,
-  "netlist_reexported": false,
+  "export_check_sha256": "24fd308e6ceba69de6f6b031d41a49dc3baa615905e2ed6261e39fb65e898613",
+  "erc_rerun": true,
+  "erc_violations": 0,
+  "pdf_render_review_rerun": true,
+  "netlist_reexported": true,
   "physical_test_performed": false,
   "manufacturing_ready": false,
-  "limits": "A1 schematic and exported netlist bytes are preserved. This recheck covers the existing 92 assertions only, not all current firmware features. Later GPIO1/GPIO2 ultrasonic interfaces are not in A1. ERC and PDF review remain historical A1 evidence."
+  "limits": "A1 package and original audit are retained. A2 adds controller 3V3/GND and GPIO1/GPIO2 ultrasonic wiring; all A1 terminal connectivity is preserved. New header positions, module electrical levels, 3V3 current margin and physical acceptance remain unverified."
 }
