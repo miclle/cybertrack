@@ -1,6 +1,7 @@
 #include "cybertrack_tools.h"
 #include "control_sessions.h"
 #include "action_plan_json.h"
+#include "recent_command.h"
 #include "web_server.h"
 #include "action_outputs.h"
 #include "ultrasonic.h"
@@ -32,6 +33,7 @@ AudioActionGuard& guard = sessions.guard;
 AudioActionOutputs outputs;
 bool initialized = false;
 unsigned sequence = 0;
+RecentCommand recent_command;
 std::string device_id, boot_id;
 uint64_t Now() { return esp_timer_get_time() / 1000; }
 std::string Decimal(uint64_t n) {
@@ -226,8 +228,11 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     const bool plan_active = sessions.plan_active;
     const unsigned plan_step = sessions.plan_step, plan_count = sessions.plan_count;
     const char* plan_result = sessions.plan_result;
+    recent_command.Record(now, operation, outcome, web_session != 0);
+    const auto recent = recent_command;
     xSemaphoreGive(lock);
     const auto uptime = Decimal(now);
+    const auto recent_age = recent.valid && now >= recent.at ? Decimal(now - recent.at) : "null";
     const char* state = (fault || clock_fault) ? "FAULT" : (moving || watering || bubbling || igniting || plan_active) ? "ACTIVE" : stopped ? "STOPPED" : "DISARMED";
     const char* reason = fault ? "output_fault" : clock_fault ? "clock_fault" : stopped ? "stopped" : "none";
     char json[3600];
@@ -252,6 +257,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         "\"frenzy_remaining_ms\":%u,\"frenzy_last_duration_ms\":%u,\"frenzy_source\":\"%s\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", "
         "\"sequence_active\":%s,\"sequence_step\":%u,\"sequence_steps\":%u,\"sequence_result\":\"%s\",\"sequence_max_steps\":16,"
         "\"proximity\":{\"auto_avoidance_enabled\":%s,\"forward_blocked\":%s,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},"
+        "\"recent_command\":{\"valid\":%s,\"operation\":\"%s\",\"result\":\"%s\",\"source\":\"%s\",\"age_ms\":%s},"
         "\"distance\":%s,\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
         device_id.c_str(), boot_id.c_str(), seq, operation, outcome, state, reason, uptime.c_str(),
         left, right, watering ? "true" : "false", bubbling ? "true" : "false", igniting ? "true" : "false",
@@ -260,7 +266,8 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         owner, window, move_cooldown, water_cooldown, held ? "true" : "false", move_source, water_source, drive_id, drive_renewal,
         static_cast<unsigned>(water_hold.id), static_cast<unsigned>(water_hold.renewal),
         static_cast<unsigned>(bubbles_hold.id), static_cast<unsigned>(bubbles_hold.renewal),
-        bubbles_ms, ignition_ms, bubbles_remaining, ignition_remaining, bubbles_cooldown, ignition_cooldown, bubbles_source, ignition_source, frenzy_remaining, frenzy_duration, frenzy_source, plan_active ? "true" : "false", plan_step, plan_count, plan_result, auto_avoidance_enabled ? "true" : "false", forward_blocked ? "true" : "false", distance.c_str());
+        bubbles_ms, ignition_ms, bubbles_remaining, ignition_remaining, bubbles_cooldown, ignition_cooldown, bubbles_source, ignition_source, frenzy_remaining, frenzy_duration, frenzy_source, plan_active ? "true" : "false", plan_step, plan_count, plan_result, auto_avoidance_enabled ? "true" : "false", forward_blocked ? "true" : "false", recent.valid ? "true" : "false", recent.operation, recent.result,
+        recent.valid ? (recent.web ? "web" : "voice") : "none", recent_age.c_str(), distance.c_str());
     result.assign(json);
     if (!web_session || (strcmp(operation, "get_status") && strcmp(operation, "drive_renew") && strcmp(operation, "water_renew") && strcmp(operation, "bubbles_renew")))
         ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
@@ -345,7 +352,7 @@ void InitializeCyberTrackTools() {
     InitializeCyberTrackWeb();
     auto& server = McpServer::GetInstance();
     server.AddTool("self.tank.get_status",
-        "查询CyberTrack状态或前方距离，参数为空。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能由云端轮询后自动行走、绕行或推算移动距离。有效距离不足50厘米时发出滴声，越近越密，不受自动避障开关或行走状态影响；至少50厘米或读数无效、过期时不响。proximity.auto_avoidance_enabled为网页自动避障开关，开机默认false、网页与语音共用；仅true时小于15厘米禁止前进，正在前进则停止并响三声；false时不因距离停前进。开关仅由网页设置，关闭不会恢复旧动作。proximity.forward_blocked为前进锁定，恢复至20厘米后允许新指令，不自动恢复。obstacle_blocked表示前进受阻，不重试。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
+        "查询CyberTrack状态或前方距离，参数为空。问为什么没动时只查询，不启动或重试。recent_command是本次开机最近一次动作请求回执，含operation/result/source/age_ms；查询不覆盖它，成功续租不覆盖它。它不是最后停机原因或物理反馈，较旧记录不能解释当前现象；valid=false或age_ms=null时不能推断。结合当前boot_held、fault、各通道remaining/cooldown和proximity说明已知状态；not_ready_or_busy不能凭空细分原因。accepted只表示逻辑接受，不能说实际已移动；未知就说明无法确认，不猜电池没电或线路故障。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能由云端轮询后自动行走、绕行或推算移动距离。有效距离不足50厘米时发出滴声，越近越密，不受自动避障开关或行走状态影响；至少50厘米或读数无效、过期时不响。proximity.auto_avoidance_enabled为网页自动避障开关，开机默认false、网页与语音共用；仅true时小于15厘米禁止前进，正在前进则停止并响三声；false时不因距离停前进。开关仅由网页设置，关闭不会恢复旧动作。proximity.forward_blocked为前进锁定，恢复至20厘米后允许新指令，不自动恢复。obstacle_blocked表示前进受阻，不重试。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("get_status"); });
     server.AddTool("self.tank.stop",
         "立即停止两台电机、水枪、泡泡和点火及狂暴模式并取消全部排队动作，不关闭语音和屏幕。",

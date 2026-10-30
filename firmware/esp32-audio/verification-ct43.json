@@ -1,0 +1,74 @@
+{
+  "version": "2.0.3-ct43",
+  "date": "2026-10-31",
+  "scope": "parent onboarding help and readonly current-state/recent-command explanation",
+  "checks": {
+    "host_control_asan_ubsan": true,
+    "actual_reply_serialization_asan_ubsan": true,
+    "mcp_http_host_asan_ubsan": true,
+    "actual_audio_overlay_regression": true,
+    "page_script_regression": true,
+    "chromium_mock_transport_layout": true,
+    "esp_idf_full_build": true,
+    "prepared_overlay_matches_sources": true
+  },
+  "host_report": "output/improvements/checks/20261030T165549886856Z/report.json",
+  "browser": {
+    "viewports": [
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        1280,
+        800
+      ]
+    ],
+    "transport": "synthetic local interception; no device",
+    "cases": [
+      "disclosure sends no action",
+      "no horizontal overflow",
+      "last help paragraph above fixed stop dock",
+      "no JavaScript error"
+    ],
+    "screenshots": "output/improvements/ct43-*-help.png"
+  },
+  "commands": [
+    "sh firmware/esp32-audio/test.sh",
+    "node firmware/esp32-audio/tests/web_ui_test.mjs",
+    "CYBERTRACK_PLAYWRIGHT_MODULE=<installed playwright index.mjs> node firmware/esp32-audio/tests/web_explanation_browser.mjs",
+    "python3 scripts/verify_improvements.py --source build/xiaozhi-ct43-src",
+    "idf.py -C build/xiaozhi-ct43-src -B build/firmware-ct43 build"
+  ],
+  "artifact": {
+    "path": "build/firmware-ct43/xiaozhi.bin",
+    "bytes": 2666528,
+    "sha256": "c19f6e92a759689161890832f2cf43004934ec9b1c4d3b44a4920302385d6743"
+  },
+  "source_sha256": {
+    "apply_overlay.py": "fb717f8f26705beb30acdc7febc02853ad00e283fdeaef0961a70fab2a453b9e",
+    "cybertrack_tools.cc": "3aa37b332bcad75bbe3f6d81e76fdf6fb3c342c88b9d178e2b541c5648f3f413",
+    "recent_command.h": "105693ff5c31c7eb79c060583e8c9bf7b83477ddc3b0c8c92f70816b573e5826",
+    "web/index.html": "41ac04328f172bc65a604054edb2d4b8593c979e0d2c489ad19dcef04e901039",
+    "tests/recent_command_test.cc": "63e57782cd04f1dcbc92bae2b1ecbccb29bdc59096feb75f534c02c0625c91b0",
+    "tests/receipt_adapter_test.cc": "8b5df999eb0da2ed8f569f9a195a30c5456fa2c47f3c2b3f1329eb35fd44d630",
+    "tests/web_ui_test.mjs": "9c7c9ac3bde4495fdeaf89f7e7ab629e39f3b18ef87e33a3a26bb63b2d7d162e",
+    "role-prompt.txt": "56ae42682975ae3113b4d040fd7c1ee6f0e0c90b876ef89ccf9814060e639d7b",
+    "tests/web_explanation_browser.mjs": "3dd1720f1efea7f5f51185cb4d81494d427615e4101a2a26cde34ba68829d191"
+  },
+  "deployment": {
+    "flashed": false,
+    "platform_role_synced": false,
+    "latest_recorded_version": "2.0.3-ct42"
+  },
+  "limitations": [
+    "No live Lingxi diagnosis or family trial",
+    "No physical output, load, stop or power validation",
+    "Receipt covers adapter requests; not early schema/auth rejection or subsequent stop cause",
+    "Text role unchanged; new tool description requires candidate firmware deployment"
+  ]
+}
