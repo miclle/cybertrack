@@ -10,6 +10,9 @@ constexpr int ESP_OK=0, ESP_FAIL=-1;
 using esp_event_base_t = const char*;
 constexpr auto IP_EVENT="ip";
 constexpr int IP_EVENT_STA_GOT_IP=1;
+constexpr int IP_EVENT_STA_LOST_IP=2;
+constexpr auto WIFI_EVENT="wifi";
+constexpr int WIFI_EVENT_STA_DISCONNECTED=3;
 inline void TestLog(const char*, const char*, ...) {}
 #define ESP_LOGI(...) TestLog(__VA_ARGS__)
 #define ESP_LOGE(...) TestLog(__VA_ARGS__)
@@ -28,7 +31,8 @@ inline void* esp_netif_get_handle_from_ifkey(const char*) { return reinterpret_c
 inline int esp_netif_get_ip_info(void*,esp_netif_ip_info_t* info) { info->ip.addr=0xc0a8017b; return ESP_OK; }
 inline int esp_event_handler_register(esp_event_base_t,int,void(*)(void*,esp_event_base_t,int32_t,void*),void*) { return ESP_OK; }
 struct TestDisplay {
-    std::string text,notice;
+    std::string text,notice,address;
+    void SetLocalAddress(const char* value) { address=value; }
     void SetChatMessage(const char*,const char* value) { text=value; }
     void ShowNotification(const std::string& value,int) { notice=value; }
 };

@@ -9,6 +9,7 @@ import subprocess
 import tarfile
 import yaml
 from wifi_config import apply_config, load_config
+from wifi_order import apply_order
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -59,6 +60,9 @@ def main():
     subprocess.run(["python3", str(HERE / "apply_overlay.py"), str(target)], check=True)
     if networks is not None:
         apply_config(target, networks)
+    else:
+        # Preserve saved-network priority without reseeding the device's NVS.
+        apply_order(target)
 
 
 if __name__ == "__main__":

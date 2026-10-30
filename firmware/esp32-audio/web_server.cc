@@ -6,6 +6,7 @@
 #include "display/display.h"
 #include <esp_http_server.h>
 #include <esp_event.h>
+#include <esp_wifi.h>
 #include <esp_netif.h>
 #include <esp_timer.h>
 #include <esp_random.h>
@@ -140,13 +141,20 @@ void GotIp(void*, esp_event_base_t, int32_t, void* data) {
     }
     char address[48]; snprintf(address, sizeof(address), IPSTR ":%u", IP2STR(&event->ip_info.ip), Port);
     ESP_LOGI("CT_WEB", "Open http://%s", address);
-    std::string url = std::string("http://") + address;
-    Application::GetInstance().Schedule([url]() {
+    std::string local_address = address;
+    Application::GetInstance().Schedule([local_address]() {
         auto display = Board::GetInstance().GetDisplay();
-        display->SetChatMessage("system", url.c_str());
+        display->SetLocalAddress(local_address.c_str());
+    });
+}
+void LostIp(void*, esp_event_base_t, int32_t, void*) {
+    Application::GetInstance().Schedule([]() {
+        Board::GetInstance().GetDisplay()->SetLocalAddress("");
     });
 }
 }
 void InitializeCyberTrackWeb() {
     ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, GotIp, nullptr));
+    ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_LOST_IP, LostIp, nullptr));
+    ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, WIFI_EVENT_STA_DISCONNECTED, LostIp, nullptr));
 }

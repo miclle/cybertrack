@@ -1,5 +1,7 @@
 # CyberTrack 面包板：小D 语音与四路控制
 
+ct40 已完成完整编译和仅应用烧录：OLED 待机底行显示当前 `IPv4:8080`，对话结束后恢复；断网清除旧地址，重新联网更新。48 个锁定组件缓存已恢复并核验原哈希，选定 OLED 构建使用其中 47 个（排除仅供其他开发板使用的 image_player），ESP-IDF 为 v5.5.1。应用及非应用区域校验通过，首次启动后 61 条 NVS 记录、两组 Wi-Fi 和整个应用前区域逐字节保持。用户确认手机已能打开控制页面、屏幕 IP 显示正常，测试符合预期。此前网络不可用时进入配网模式，配置回读仍未变化；用户恢复原网络后重启，首次认证超时后自动重试连接第一组并进入正常待机，串口记录零启动／输出全关。语音结束后的地址恢复和反复重连稳定性待验证，见[验证](verification-ct40.json)和[部署记录](startup-ct40.json)。
+
 ct39 已部署：100% 速度下未指定时长的左右转默认改为 880 ms，单项、组合和序列一致；指定／共享时长优先。平台保存回读、应用哈希、配置区保持和重启联网检查通过，启动数为 0；用户随后确认“880 ms 测试效果符合预期”，精确计时与完整语音回归仍待验证。见[验证](verification-ct39.json)和[部署记录](startup-ct39.json)。下方 ct38 的 900 ms 为历史记录。
 
 ct38 已部署：100% 速度下未指定时长的左右转默认改为 900 ms，单项、组合和序列一致；指定／共享时长优先。平台保存回读、应用哈希、配置区保持和重启联网检查通过，启动数为 0；真人语音及实物转向计时待测。见[验证](verification-ct38.json)和[部署记录](startup-ct38.json)。下方 ct37 的 800 ms 为历史记录。
@@ -40,7 +42,7 @@ ct23 增加网页“左转＋喷水，各 3 秒”对照入口，调用现有组
 
 ## 当前能力与验证范围
 
-默认源码版本为 `2.0.3-ct39`，最新部署为按配置顺序连接的 `2.0.3-ct39-wifi-order3`，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
+默认源码与最新部署版本为 `2.0.3-ct40`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
 
 | 功能 | 当前规则 |
 |---|---|
@@ -141,6 +143,18 @@ ct3 的逐次物理授权流程和 ct4 的固定五秒要求已被用户明确�
 
 ## 重现构建
 
+2026-10-30 已恢复本机 ct40 环境，可直接复用导出源码进行增量构建：
+
+```sh
+export PATH="/Users/miclle/.espressif/python_env/idf5.5_py3.13_env/bin:$PATH"
+source build/toolchains/esp-idf-v5.5.1/export.sh
+idf.py -C build/xiaozhi-ct40-src -B "$PWD/build/firmware-ct40" build
+```
+
+恢复来源为固定上游提交与仓库锁定的组件哈希。下架的 `image_player 1.1.0~1` 后续从上游历史、原发布清单与 manifest 重建并通过完整哈希核验；它只用于未选中的 `esp-hi`，本次已完成的 OLED 构建未引用它。恢复后的完整缓存位于 `build/xiaozhi-ct40-src/locked_components/`，构建记录见 `verification-ct40.json`。本次没有导入 Wi-Fi 文件；直接使用设备已有配置并保留连接顺序。`prepare.py` 的无 `--wifi` 路径也应用顺序补丁，不重写 NVS。
+
+以下原始导出流程仍需原 ELF 及其组件缓存：
+
 源码导出使用支持 tarfile data filter 的 Python（历史构建使用 3.14）；ESP-IDF 仍固定 v5.5.1。需保留原始源码 checkout、原构建 ELF 及组件缓存；不要求联网下载替代版本。`prepare.py` 要求一个尚不存在的导出目录（默认 `build/xiaozhi-audio-src`，可用 `--target` 指定），不会覆盖已有导出或修改原 checkout。
 
 ```sh
@@ -149,6 +163,7 @@ python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target 
 sh firmware/esp32-audio/test.sh
 node firmware/esp32-audio/tests/web_ui_test.mjs
 python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct21-rebuild-src
+python firmware/esp32-audio/tests/run_display_tests.py --source build/xiaozhi-ct21-rebuild-src
 idf.py -C build/xiaozhi-ct21-rebuild-src -B "$PWD/build/firmware-ct21-rebuild" build
 ```
 

@@ -31,7 +31,7 @@ subprocess.run([str(build/'web_request_test')], check=True)
 stubs = build/'web-stubs'
 stubs.mkdir(exist_ok=True)
 for name in ('application.h', 'board.h', 'display/display.h', 'esp_http_server.h',
-             'esp_event.h', 'esp_netif.h', 'esp_timer.h', 'esp_random.h', 'esp_log.h', 'web_page.h'):
+             'esp_event.h', 'esp_wifi.h', 'esp_netif.h', 'esp_timer.h', 'esp_random.h', 'esp_log.h', 'web_page.h'):
     path = stubs/name
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text('#include "web_server_stubs.h"\n')
