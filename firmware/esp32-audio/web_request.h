@@ -1,10 +1,12 @@
 #pragma once
 #include "action_guard.h"
+#include "show_command_json.h"
 #include "cJSON.h"
 #include <cmath>
 #include <string>
 
 struct WebCommand {
+    ShowDraft::Command draft;
     AudioActionGuard::Target target = AudioActionGuard::Both;
     uint32_t sequence = 0, window = 0;
     uint32_t hold_id = 0, renewal = 0;
@@ -57,6 +59,16 @@ inline bool ParseWebCommand(const cJSON* root, WebCommand& cmd) {
         return true;
     }
     if (!WebInteger(seq, 1, UINT32_MAX) || !WebInteger(window, 1, UINT32_MAX)) return false;
+    if (!strcmp(op->valuestring, "show_edit") || !strcmp(op->valuestring, "show_confirm")) {
+        const bool edit = !strcmp(op->valuestring, "show_edit");
+        if (cJSON_GetArraySize(root) != 4) return false;
+        if (edit ? !ParseShowEdit(get("draft"), cmd.draft) : !ShowInteger(get("revision"), 1, INT_MAX)) return false;
+        cmd.operation = edit ? "show_edit" : "show_confirm";
+        if (!edit) cmd.draft.revision = get("revision")->valueint;
+        cmd.sequence = static_cast<uint32_t>(seq->valuedouble);
+        cmd.window = static_cast<uint32_t>(window->valuedouble);
+        return true;
+    }
     if (!strcmp(op->valuestring, "set_auto_avoidance")) {
         const auto enabled = get("enabled");
         if (cJSON_GetArraySize(root) != 4 || !cJSON_IsBool(enabled)) return false;

@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "baseline": "2.0.3-ct44 candidate",
+  "scope": "编排工具语义增量；合成回执上下文；模型未运行",
+  "cases": [
+    {
+      "id": "C001",
+      "category": "draft",
+      "text": "帮我编排一段先左转，再吹泡泡的表演，先别执行",
+      "context": "模拟 get_status 回执：无草稿 revision=0；设备空闲",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace",
+            "revision": 0,
+            "step": 0,
+            "steps_json": "[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":100},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "仅保存并邀请家长在网页预览和开始"
+    },
+    {
+      "id": "C002",
+      "category": "draft",
+      "text": "把草稿第二步泡泡改成两秒",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "只改第二步，不重写其他步骤"
+    },
+    {
+      "id": "C003",
+      "category": "draft",
+      "text": "去掉草稿第一步转向",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "remove_step",
+            "revision": 7,
+            "step": 1,
+            "steps_json": ""
+          }
+        }
+      ],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "仅删除第一步，不启动"
+    },
+    {
+      "id": "C004",
+      "category": "draft",
+      "text": "取消这个草稿",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "cancel",
+            "revision": 7,
+            "step": 0,
+            "steps_json": ""
+          }
+        }
+      ],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "说明已取消，不执行"
+    },
+    {
+      "id": "C005",
+      "category": "draft",
+      "text": "开始这段表演",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "请家长在网页核对并点开始，不用sequence替代确认"
+    },
+    {
+      "id": "C006",
+      "category": "draft",
+      "text": "不要编排表演",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "不保存、不启动"
+    },
+    {
+      "id": "C007",
+      "category": "draft",
+      "text": "草稿第一步改成点火",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "说明首版编排只支持行走和泡泡，不调用点火"
+    },
+    {
+      "id": "C008",
+      "category": "draft",
+      "text": "第二步短一点",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "询问具体时长，不猜测参数或启动"
+    }
+  ],
+  "suite": "compose-v1"
+}

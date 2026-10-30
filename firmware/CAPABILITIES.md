@@ -1,6 +1,6 @@
 # 固件能力与接口手册
 
-当前参数核对于 2026-10-31；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码候选为 `2.0.3-ct43`，最近记录部署仍为 `2.0.3-ct42`。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+当前参数核对于 2026-10-31；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码候选为 `2.0.3-ct44`，最近记录部署仍为 `2.0.3-ct42`。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
 
 <a id="当前面包板-ct21-接口"></a>
 <a id="当前面包板-ct22-接口"></a>
@@ -12,6 +12,7 @@
 | 工具 | 参数与行为 |
 |---|---|
 | `get_status` | `{}`，最新逻辑状态、距离及驱动诊断；不启动动作 |
+| `compose` | ct44 候选，只保存／修改／取消版本化表演草稿；不执行，详见[编排契约](../docs/show-composer.md) |
 | `stop` | `{}`，立即取消四路、序列和模式，作废旧票据；不关闭语音或屏幕 |
 | `move` | `direction` 四方向、`duration_ms` 1–2147483647，可选 `speed_percent` 60–100，默认 100 |
 | `water` | `duration_ms` 1–30000，独立定时喷水 |
@@ -46,6 +47,6 @@ ct43 候选新增 `recent_command`，保留进入动作适配器的最近一次�
 
 ## 验证
 
-[ct43 候选记录](esp32-audio/verification-ct43.json)覆盖本次软件检查与编译；[部署记录](esp32-audio/startup-ct42.json)记录平台回读与零执行器启动检查。新一次检查须记录自己的源码与结果，不能复用历史记录宣称新候选通过。
+[ct44 候选记录](esp32-audio/verification-ct44.json)覆盖本次软件检查与编译；[部署记录](esp32-audio/startup-ct42.json)记录平台回读与零执行器启动检查。新一次检查须记录自己的源码与结果，不能复用历史记录宣称新候选通过。
 
 新产品计划见[执行计划](../docs/improvement-plan.md)。实机停车距离、定量电气／温升、完整语音与组合负载验收仍未完成。

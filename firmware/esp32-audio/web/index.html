@@ -145,6 +145,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         startQueue = Promise.resolve(),
         pollWait = Promise.resolve();
       const reasons = {
+        show_cancelled: "表演已取消，没有自动开始新动作。",
         voice_preempted: "已停止语音动作，稍后可重新操作。",
         control_busy: "另一网页正在使用，等待连接。",
         pair_rate_limited: "操作太快，请稍后再连接。",
@@ -175,7 +176,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         }
         if (s.sequence_active === true) facts.push("动作序列正在占用控制；" + (s.sequence_result === "waiting" ? "步骤间等待。" : "正在执行。"));
         const r = s.recent_command;
-        const operations = {move:"行走",drive_start:"长按行走",drive_stop:"停止行走",drive_renew:"续租行走",
+        const operations = {show_confirm:"开始表演",move:"行走",drive_start:"长按行走",drive_stop:"停止行走",drive_renew:"续租行走",
           water:"喷水",water_start:"长按喷水",water_stop:"停止喷水",water_renew:"续租喷水",
           bubbles:"泡泡",bubbles_start:"长按泡泡",bubbles_stop:"停止泡泡",bubbles_renew:"续租泡泡",
           ignition:"点火",move_and_water:"行走加喷水",sequence:"动作序列",frenzy:"狂暴模式",stop:"全部停止",

@@ -52,17 +52,17 @@ esp_err_t Error(httpd_req_t* req, const char* status, const char* reason) {
     Send(req, status, body);
     return ESP_FAIL;
 }
-cJSON* Body(httpd_req_t* req) {
-    if (!Header(req, "Content-Type", "application/json") || req->content_len == 0 || req->content_len > 384) return nullptr;
-    char body[385]; size_t used = 0;
+cJSON* Body(httpd_req_t* req, size_t limit = 384) {
+    if (!Header(req, "Content-Type", "application/json") || req->content_len == 0 || req->content_len > limit) return nullptr;
+    std::string body(req->content_len + 1, '\0'); size_t used = 0;
     while (used < req->content_len) {
-        int n = httpd_req_recv(req, body + used, req->content_len - used);
+        int n = httpd_req_recv(req, body.data() + used, req->content_len - used);
         if (n <= 0) return nullptr;
         used += n;
     }
     body[used] = 0;
-    if (memchr(body, 0, used)) return nullptr;
-    return cJSON_ParseWithLengthOpts(body, used + 1, nullptr, true);
+    if (memchr(body.data(), 0, used)) return nullptr;
+    return cJSON_ParseWithLengthOpts(body.data(), used + 1, nullptr, true);
 }
 esp_err_t Page(httpd_req_t* req) {
     if (!TrustedRequest(req)) return Error(req, "403 Forbidden", "origin_rejected");
@@ -96,7 +96,7 @@ esp_err_t Api(httpd_req_t* req) {
     if (!TrustedRequest(req)) return Error(req, "403 Forbidden", "origin_rejected");
     if (!session || !bearer[0] || !Header(req, "X-CyberTrack-Token", bearer))
         return Error(req, "401 Unauthorized", "session_expired");
-    cJSON* body = Body(req);
+    cJSON* body = Body(req, !strcmp(req->uri, "/api/action") ? 8192 : 384);
     if (!cJSON_IsObject(body)) { cJSON_Delete(body); return Error(req, "400 Bad Request", "invalid_request"); }
     const bool action = !strcmp(req->uri, "/api/action");
     WebCommand command;

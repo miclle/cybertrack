@@ -85,6 +85,7 @@ public:
         water_stop(&ignition, now);
         FinishIgnition(now, igniting);
     }
+    bool PlanReady(uint64_t now) const { return Ready(now, PlanMode); }
     const char* ClaimPlan(uint64_t now, int ticket) {
         return Request(now, ticket, PlanMode, 0, 0, nullptr);
     }

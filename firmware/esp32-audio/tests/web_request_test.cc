@@ -95,5 +95,11 @@ int main() {
     assert(parse(R"({"operation":"bubbles","sequence":1,"window":1,"duration_ms":30000})"));
     assert(!parse(R"({"operation":"ignition","sequence":1,"window":1,"duration_ms":5001})"));
     for (const auto text:bad) assert(!parse(text));
+    assert(parse(R"({"operation":"show_confirm","sequence":1,"window":1,"revision":1})"));
+    assert(!parse(R"({"operation":"show_confirm","sequence":1,"window":1,"revision":0})"));
+    assert(!parse(R"({"operation":"show_confirm","sequence":1,"window":1,"revision":1.5})"));
+    assert(!parse(R"({"operation":"show_confirm","sequence":1,"window":1,"revision":1,"revision":1})"));
+    assert(parse(R"({"operation":"show_edit","sequence":1,"window":1,"draft":{"edit":"cancel","revision":1,"step":0,"steps_json":""}})"));
+    assert(!parse(R"({"operation":"show_edit","sequence":1,"window":1,"draft":{"edit":"cancel","revision":1,"step":0,"steps_json":"","extra":1}})"));
     std::cout << "PASS: actual web JSON parser, action schemas, integer/sequence bounds, missing/extra/duplicate fields\n";
 }

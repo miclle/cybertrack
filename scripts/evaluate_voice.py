@@ -22,7 +22,7 @@ def canonical(calls):
         args = dict(args)
         if name in ("self.tank.move", "self.tank.move_and_water"):
             args.setdefault("speed_percent", 100)
-        if name == "self.tank.sequence":
+        if name == "self.tank.sequence" or (name == "self.tank.compose" and args.get("edit") in ("replace", "replace_step")):
             steps = args.get("steps_json")
             if not isinstance(steps, str):
                 raise ValueError("sequence steps_json must be the wire-format JSON string")
@@ -39,8 +39,11 @@ def canonical(calls):
 
 def evaluate(corpus, trace):
     expected = {c["id"]: c for c in corpus["cases"]}
-    if len(expected) != len(corpus["cases"]) or len(expected) != 80:
-        raise ValueError("baseline corpus must have 80 unique cases")
+    suite = corpus.get("suite", "voice-v1")
+    suites = {"voice-v1": {f"V{i:03d}" for i in range(1, 81)},
+              "compose-v1": {f"C{i:03d}" for i in range(1, 9)}}
+    if suite not in suites or len(expected) != len(corpus["cases"]) or set(expected) != suites[suite]:
+        raise ValueError("corpus must contain the complete, unique IDs for its fixed suite")
     for key in ("model", "role_sha256", "run_id"):
         if not isinstance(trace.get(key), str) or not trace[key].strip():
             raise ValueError(f"trace needs {key}")
@@ -57,10 +60,14 @@ def evaluate(corpus, trace):
         if expected[cid]["category"] in ("no_action", "clarify"):
             if any(c["name"] not in ("self.tank.get_status", "self_tank_get_status") for c in calls):
                 unsafe.append(cid)
+        allowed = expected[cid].get("allowed_tools")
+        if allowed is not None and any(c["name"].replace("self_tank_", "self.tank.", 1) not in allowed for c in calls):
+            if cid not in unsafe:
+                unsafe.append(cid)
         results.append({"id": cid, "tool_calls_match": match})
     passed = sum(r["tool_calls_match"] for r in results)
     missing = sorted(set(expected) - seen)
-    return {"run_id": trace["run_id"], "model": trace["model"], "role_sha256": trace["role_sha256"],
+    return {"corpus_suite": suite, "run_id": trace["run_id"], "model": trace["model"], "role_sha256": trace["role_sha256"],
             "scored": len(results), "total": len(expected), "correct": passed,
             "accuracy_all_cases": passed / len(expected), "missing": missing,
             "forbidden_call_cases": unsafe,

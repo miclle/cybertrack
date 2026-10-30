@@ -64,6 +64,17 @@ int main() {
             assert(Api(&r)==ESP_OK && last_operation==op);
         }
     }
+    cJSON* show=cJSON_CreateObject();cJSON_AddStringToObject(show,"operation","show_edit");
+    cJSON_AddNumberToObject(show,"sequence",4);cJSON_AddNumberToObject(show,"window",1);
+    cJSON* draft=cJSON_AddObjectToObject(show,"draft");cJSON_AddStringToObject(draft,"edit","replace");
+    cJSON_AddNumberToObject(draft,"revision",0);cJSON_AddNumberToObject(draft,"step",0);
+    std::string steps="[";
+    for(int i=0;i<16;++i) {if(i)steps+=",";steps+=R"({"direction":"none","move_ms":0,"water_ms":0,"bubbles_ms":1000,"ignition_ms":0})";}
+    steps+="]";cJSON_AddStringToObject(draft,"steps_json",steps.c_str());
+    char* encoded=cJSON_PrintUnformatted(show);std::string body(encoded);cJSON_free(encoded);cJSON_Delete(show);
+    assert(body.size()>384 && body.size()<8192);r=api("/api/action",body);
+    assert(Api(&r)==ESP_OK && last_operation=="show_edit");
+    r=api("/api/action",std::string(8193,' '));assert(Api(&r)==ESP_FAIL);
     unsigned before=calls;
     for(const auto bad:{"[]","null","{", "{} {}", "{\"extra\":0}"}) {
         r=api("/api/stop",bad); assert(Api(&r)==ESP_FAIL); assert(calls==before);
