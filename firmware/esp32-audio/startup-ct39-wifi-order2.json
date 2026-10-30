@@ -1,0 +1,186 @@
+{
+  "date": "2026-10-30T09:44:22.660082+08:00",
+  "version": "2.0.3-ct39-wifi-order2",
+  "device_id": "30:ed:a0:a1:97:7c",
+  "scope": "Application-only ordered Wi-Fi update; no actuator starts",
+  "flash": {
+    "path": "build/firmware-ct39-wifi-order2/xiaozhi.bin",
+    "size_bytes": 2645520,
+    "sha256": "ebf95362597c494715387b99b14fbcded2690dced28d4eb126195b379260352e",
+    "offset": "0x20000",
+    "previous_application": "2.0.3-ct39-wifi-order",
+    "application_hash_verified": true,
+    "verified_previous_application_backup": true,
+    "pre_application_region_backup": true,
+    "pre_application_region_unchanged_before_first_boot": true
+  },
+  "wifi": {
+    "saved_networks_match_local_file": true,
+    "saved_network_count": 2,
+    "config_marker_matches": true,
+    "nvs_crc_valid": true,
+    "other_nvs_keys_unchanged_except_startup_websocket_token": true,
+    "startup_websocket_token_refreshed": true,
+    "outside_nvs_unchanged": true
+  },
+  "first_network_connected": false,
+  "first_network_failure_reason": 201,
+  "fallback_to_second_network_verified": true,
+  "network_order_checks": [
+    {
+      "candidate_network_indices": [
+        1,
+        2
+      ],
+      "attempt_indices": [
+        1,
+        2
+      ],
+      "connected_network_index": 2,
+      "first_attempt_matches_saved_priority": true
+    },
+    {
+      "candidate_network_indices": [
+        1,
+        2
+      ],
+      "attempt_indices": [
+        1,
+        2
+      ],
+      "connected_network_index": 2,
+      "first_attempt_matches_saved_priority": true
+    }
+  ],
+  "startup": [
+    {
+      "time": "2026-10-30T09:38:52.628335+08:00",
+      "firmware": "2.0.3-ct39-wifi-order2"
+    },
+    {
+      "time": "2026-10-30T09:38:52.629307+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-10-30T09:38:52.629423+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-10-30T09:38:52.633812+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-10-30T09:38:52.636986+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-10-30T09:38:55.185964+08:00",
+      "wifi_event": "Candidate network index=1 directed=true"
+    },
+    {
+      "time": "2026-10-30T09:38:55.186261+08:00",
+      "wifi_event": "Candidate network index=2 rssi=-50"
+    },
+    {
+      "time": "2026-10-30T09:38:55.188079+08:00",
+      "wifi_event": "Attempt network index=1"
+    },
+    {
+      "time": "2026-10-30T09:38:57.606242+08:00",
+      "wifi_event": "Failure network index=1 reason=201"
+    },
+    {
+      "time": "2026-10-30T09:38:57.606419+08:00",
+      "wifi_event": "Attempt network index=2"
+    },
+    {
+      "time": "2026-10-30T09:38:59.454057+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-10-30T09:38:59.454545+08:00",
+      "connected_network_index": 2
+    },
+    {
+      "time": "2026-10-30T09:38:59.517677+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-10-30T09:39:00.398763+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "restart": [
+    {
+      "time": "2026-10-30T09:39:07.646680+08:00",
+      "firmware": "2.0.3-ct39-wifi-order2"
+    },
+    {
+      "time": "2026-10-30T09:39:07.647954+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-10-30T09:39:07.648082+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-10-30T09:39:07.648239+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-10-30T09:39:07.648284+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-10-30T09:39:10.196449+08:00",
+      "wifi_event": "Candidate network index=1 directed=true"
+    },
+    {
+      "time": "2026-10-30T09:39:10.196544+08:00",
+      "wifi_event": "Candidate network index=2 rssi=-52"
+    },
+    {
+      "time": "2026-10-30T09:39:10.198751+08:00",
+      "wifi_event": "Attempt network index=1"
+    },
+    {
+      "time": "2026-10-30T09:39:12.617637+08:00",
+      "wifi_event": "Failure network index=1 reason=201"
+    },
+    {
+      "time": "2026-10-30T09:39:12.617977+08:00",
+      "wifi_event": "Attempt network index=2"
+    },
+    {
+      "time": "2026-10-30T09:39:14.322766+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-10-30T09:39:14.323037+08:00",
+      "connected_network_index": 2
+    },
+    {
+      "time": "2026-10-30T09:39:14.393477+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-10-30T09:39:15.151331+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "checks": {
+    "first_boot_and_restart_network_idle": true,
+    "served_page_matches_source": true,
+    "all_observed_logical_outputs_off": true,
+    "starts_this_boot": 0,
+    "state_receipts_checked": 22,
+    "platform_role_changed": false
+  },
+  "limitations": [
+    "Real first-network directed connection failed with reason 201 (NO_AP_FOUND); fallback to second network passed. Authentication-failure and active-link-loss failover not induced",
+    "All configured SSIDs attempted in saved order, including directed attempts for networks absent from broadcast scan; RSSI selects a radio only within one SSID",
+    "Initial network startup still has a 60-second total wait; Wi-Fi link failure triggers next candidate, no separate Internet-health failover",
+    "No physical power-cut, portal-edit persistence, spoken voice or actuator test"
+  ],
+  "local_private_evidence": "build/ct39-wifi-order2-private/ (configuration and backup bytes must remain private)"
+}

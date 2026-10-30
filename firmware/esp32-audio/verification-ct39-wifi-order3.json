@@ -1,0 +1,48 @@
+{
+  "version": "2.0.3-ct39-wifi-order3",
+  "network_count": 2,
+  "artifact": {
+    "path": "build/firmware-ct39-wifi-order3/xiaozhi.bin",
+    "size_bytes": 2645520,
+    "sha256": "457974b7ae1dd6a9fd08f1d069666e5b947df6e96cfcec0572c622dd88628143"
+  },
+  "checks": {
+    "config_valid": true,
+    "bootstrap_tests_passed": true,
+    "exported_station_order_and_fallback_tests_passed_on_identical_order2_source": true,
+    "esp_idf_build": true,
+    "only_local_credentials_changed_from_order2": true,
+    "sdkconfig_unchanged": true,
+    "partition_table_unchanged": true,
+    "saved_networks_match_local_file": true,
+    "saved_network_count": 2,
+    "config_marker_matches": true,
+    "nvs_crc_valid": true,
+    "other_nvs_keys_unchanged_except_startup_websocket_token": true,
+    "startup_websocket_token_refreshed": true,
+    "outside_nvs_unchanged": true,
+    "first_network_connected_on_first_and_final_trials": true,
+    "exported_station_order_and_fallback_tests_passed": true
+  },
+  "date": "2026-10-30T09:50:27.508728+08:00",
+  "scope": "Ordered Wi-Fi selection with corrected local credentials; first configured phone hotspot connected in first and final trials; intermediate authentication expiry exercised fallback",
+  "source_sha256": {
+    "prepare.py": "7695f1b6c1a5dd9d5296eacf53773917ca961f7c2aa1c54252cc89aa4163ecee",
+    "wifi_config.py": "acd1fdb3b0384c01c43c2c8e92bfc00e0d0680935f98003c200d35fc16950fad",
+    "wifi_order.py": "8a1957af799490de5033af722171ff13b5fb1c5dbf5c07b8f73b9f9724ca2a74",
+    "tests/test_wifi_config.py": "0381df95f4721ad1dc0eec84d80c2b695179a9a541c594a132b957ad9449eb55",
+    "tests/run_wifi_order_tests.py": "231a53ac6792de95bcd28c5a5f6611844570478331ee00c2ae987654984b8265",
+    "apply_overlay.py": "1848ae73653ea477a14fbf573b70d9cc2230cf1e2f968b9ba17ff80aff7ca466"
+  },
+  "deployment": {
+    "flashed": true,
+    "latest_deployed_version": "2.0.3-ct39-wifi-order3",
+    "evidence": "startup-ct39-wifi-order3.json"
+  },
+  "limitations": [
+    "One of three trials returned AUTH_EXPIRE (reason 2) on network 1 and fell back to network 2; first and final trials connected network 1. Hotspot reconnection is not consistently successful in every trial",
+    "Startup retains a 60-second total wait; no separate Internet-health failover",
+    "No physical power-cut, portal-edit persistence, spoken voice or actuator tests",
+    "Host HTTP state/page checks succeeded on fallback network 2 only; on phone hotspot network 1, IP, firmware version, initial GPIO low and cloud idle confirmed over serial"
+  ]
+}
