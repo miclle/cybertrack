@@ -13,7 +13,7 @@ CyberTrack 基于**灵矽语音与智能体能力**，面向家长陪同的亲�
 | **先编排，再开始** | 看清步骤后说“第二步短一点”或“去掉转向”，由家长明确开始表演 | 开发计划；现有普通语音指令会直接请求动作 |
 | **点选 3D 模型，说出修改想法** | 通过 SolidCue 将评论绑定到零件、面、位置和版本，由当前对话协助原生 CAD 修改与恢复 | 已接入固定版本并验证单件原生修改／恢复；桌面卡片验收推进中 |
 | **自己打印，也能维护和改造** | 切面头盔、履带底盘、前部双枪与可拆维护结构，提供 FreeCAD、STEP 和打印项目 | 已交付模型与 27 件／6 盘打印项目；实物适配按版本验证 |
-| **从电源到外壳，一起设计** | 电源分域、独立执行器断电、可维护线束与参数化部件模型，让外观和内部结构共同迭代 | 已有原理图与 CAD；电源管理与硬件架构专项推进中 |
+| **从电源到外壳，一起设计** | 电源分域、独立执行器断电、可维护线束与参数化部件模型，让外观和内部结构共同迭代 | 已交付电源树、预算工具、回流与接口设计；实物验证持续推进 |
 | **手机和语音一起用** | 行走、喷水、泡泡各自控制；距离提示音、可选近距离停车和统一停止 | 已实现；实机停止性能与组合负载仍待验收 |
 
 规划中的功能也是产品方向，进度持续更新。亲子体验由家长负责启动、停止和设备管理；当前为开发样机，尚未完成儿童使用验收。首次亲子玩法不包含点火或狂暴模式。
@@ -139,7 +139,7 @@ ctest --test-dir build/firmware-host --output-on-failure
 | 产品目标与已确认决定 | [产品需求](docs/requirements.md) · [决策和待补资料](docs/decisions.md) |
 | 添加或修改普通 Wi-Fi | 编辑仓库根目录的 `secrets/wifi.json`（本地私密文件，Git 忽略）；见[配置说明](docs/wifi-configuration.md)与[格式示例](firmware/esp32-audio/wifi.example.json)。填写后需构建、刷入设备才生效。 |
 | 机械布局、打印与装配 | [模型与当前修订](hardware/model/README.md) · [Lean 六盘打印项目](hardware/model/lean-print/README.md) · [头部打印与螺丝](docs/head-shell-print.md) · [装配参考](docs/assembly.md) |
-| 电源、接线与采购 | [电源与接口](docs/power-and-interfaces.md) · [接线总表](docs/wiring.md) · [BOM](hardware/BOM.md) · [采购清单](hardware/procurement.md) |
+| 电源、接线与采购 | [硬件架构与电源预算](hardware/architecture/README.md) · [电源与接口](docs/power-and-interfaces.md) · [接线总表](docs/wiring.md) · [BOM](hardware/BOM.md) · [采购清单](hardware/procurement.md) |
 | 原理图设计与 PCB 打板 | [KiCad 原理图工程](hardware/schematic/README.md) · [六页原理图 PDF](hardware/schematic/CyberTrack-schematic.pdf) · [设计与制板要求](docs/schematic-and-pcb.md)；A2 已包含主控侧超声波接口，为模块级审图稿，尚未达到 PCB 制造放行状态；[待确认参数](hardware/schematic/parameter-confirmation.md) |
 | 控制架构与语音配置 | [系统架构](docs/architecture.md) · [智能体角色](docs/agent-role.md) · [灵矽接入](docs/linx-integration.md) |
 | 网页操作与效果控制 | [局域网控制](docs/lan-control.md) · [泡泡与点火](docs/effects-control.md) · [面包板固件](firmware/esp32-audio/README.md) |
