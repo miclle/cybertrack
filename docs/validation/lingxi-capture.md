@@ -33,6 +33,8 @@ python3 scripts/evaluate_voice.py output/voice/<唯一运行名>.json \
 
 编排增量将两条命令的 corpus 改为 `docs/validation/compose-cases.json`（评分命令使用 `--corpus`），输出改用新的唯一文件名。`--ids C001` 可做单条诊断，不能计为完整集通过。已有捕获不覆盖，失败不自动重试；补跑必须保留原记录，不能用后一次成功抹去首轮失败。
 
+默认在首个未完成用例后停止。批量采集可显式加 `--continue-incomplete`：原样保存该例的未完成标记，再进入下一条尚未执行的用例，不补跑或替换失败。文件同时记录 `continue_incomplete=true`；评分器仍将这些用例记入 incomplete。连接或程序异常仍会中止，不把异常伪造为一条正常会话。该选项也适用于合成语音与完整固件主机。
+
 ## 输入、回执与判定
 
 每例新建会话，发送 hello，按固件 8000 字节上限分页回应 tools/list，末页返回后发送文本。当前入口使用 `listen.detect.text`，不是麦克风 ASR；服务端 STT 文本回传也不能当作语音识别证据。发送内容由“无执行器文本评测”的说明、用例 `context` 和用户原话构成，因此结论只覆盖这种上下文；该前缀可能影响模型行为，不能直接外推到无前缀口述。
