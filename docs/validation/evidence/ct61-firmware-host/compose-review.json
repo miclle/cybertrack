@@ -1,0 +1,866 @@
+{
+  "scope": "Real platform raw text plus actual firmware MCP host; virtual time and 600 mm simulated range; no board IO, human or speaker acceptance",
+  "source_commit": "8c90ad0a26ba09a9fffeb1ff67d6ea6b9eded8ab",
+  "host_replay_sha256": "a3977980c0a9c21c9dc3f6cb136ec99a152d193660872ac73df06e2ce2b8f0b5",
+  "primary": {
+    "correct": 6,
+    "total": 8,
+    "completed": 7,
+    "incomplete": [
+      "C005"
+    ],
+    "mismatch_ids": [
+      "C005",
+      "C008"
+    ],
+    "aggregation": "Initial C001..C005 including timeout plus previously unexecuted C006..C008; no diagnostic replacement"
+  },
+  "conflict": {
+    "sessions": 3,
+    "old_revision_rejected": 3,
+    "web_version_preserved": 3,
+    "automatic_retries": 0,
+    "starts": 0
+  },
+  "diagnostic": {
+    "case": "C005",
+    "separate_from_primary": true,
+    "completed": true,
+    "elapsed_ms": 19066,
+    "tool_calls": 0,
+    "stability_proven": false
+  },
+  "rows": [
+    {
+      "capture": "compose.json.gz",
+      "run_id": "e5c8c122-4e11-4977-b0fc-12fbc0447021",
+      "case_id": "C001",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 22337,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace",
+            "revision": 0,
+            "step": 0,
+            "steps_json": "[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "replies": [
+        "当前没有已保存的草稿，",
+        "版本为0。",
+        "我来保存这段先左转再吹泡泡的表演。",
+        "左转未说时长，按默认880毫秒，泡泡默认1000毫秒草稿已保存好了，一共两步：先左转约0.9秒，再吹泡泡1秒。",
+        "你可以在网页上预览一下，确认没问题后点开始就行。"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 1,
+        "expires_in_ms": 281542,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true
+    },
+    {
+      "capture": "compose.json.gz",
+      "run_id": "e5c8c122-4e11-4977-b0fc-12fbc0447021",
+      "case_id": "C002",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 10471,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "replies": [
+        "第二步的泡泡已经改成两秒了，",
+        "草稿已保存。",
+        "请在网页上预览确认，没问题就点开始吧。"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 8,
+        "expires_in_ms": 292138,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 2000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 3080
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true
+    },
+    {
+      "capture": "compose.json.gz",
+      "run_id": "e5c8c122-4e11-4977-b0fc-12fbc0447021",
+      "case_id": "C003",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 14804,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "remove_step",
+            "revision": 7,
+            "step": 1,
+            "steps_json": ""
+          }
+        }
+      ],
+      "replies": [
+        "草稿当前有2步，",
+        "第1步是左转880毫秒，我来移除这一步。",
+        "已把草稿第一步的左转去掉，现在只剩吹泡泡这一步了。",
+        "请在网页上预览确认一下，没问题就点开始。"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 8,
+        "expires_in_ms": 288060,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 1000
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true
+    },
+    {
+      "capture": "compose.json.gz",
+      "run_id": "e5c8c122-4e11-4977-b0fc-12fbc0447021",
+      "case_id": "C004",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 5528,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "cancel",
+            "revision": 7,
+            "step": 0,
+            "steps_json": ""
+          }
+        }
+      ],
+      "replies": [
+        "草稿已经取消了。"
+      ],
+      "final_draft": {
+        "active": false,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 0,
+        "expires_in_ms": 0,
+        "source": "none",
+        "steps": [],
+        "nominal_duration_ms": 0
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true
+    },
+    {
+      "capture": "compose.json.gz",
+      "run_id": "e5c8c122-4e11-4977-b0fc-12fbc0447021",
+      "case_id": "C005",
+      "completed": false,
+      "completion": "incomplete_or_timeout",
+      "elapsed_ms": 54775,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "用户说\"开始这段表演\"，",
+        "这需要先查状态确认是否有编排好的草稿，以及是否已保存。",
+        "让我先查询状态。",
+        "用户说\"开始这段表演\"，但根据规则，口头说\"开始表演\"不能替代网页确认。",
+        "草稿已保存，需要家长在网页预览后点开始。",
+        "我没有语音确认执行工具，无法代替网页执行草稿。",
+        "应该说明草稿已保存，需要家长在网页预览并点开始。",
+        "根据规则：\"draft_saved后简述改动并请家长在网页预览、点开始；",
+        "口头'开始表演'也不替代网页确认。",
+        "\"\n\n所以我应该告诉用户，这段表演草稿已经保存好了，需要在网页上预览后点开始按钮才能执行，我没法通过语音直接开始。",
+        "草稿已经保存好了，是左转再吹泡泡的两步表演。",
+        "不过我没法通过语音直接开始，需要你在网页上预览一下，然后点开始按钮，表演就会跑起来了。"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 7,
+        "expires_in_ms": 245225,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true
+    },
+    {
+      "capture": "compose-rest.json.gz",
+      "run_id": "2a22b7cc-ab8a-439f-8258-775f7d0adc08",
+      "case_id": "C006",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 10825,
+      "calls": [],
+      "replies": [
+        "用户说\"不要编排表演\"，",
+        "这是否定表达，不是要编排。",
+        "不触发任何动作或工具调用。",
+        "好的，不编排。",
+        "需要我做什么直接说就行。"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 7,
+        "expires_in_ms": 289175,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true
+    },
+    {
+      "capture": "compose-rest.json.gz",
+      "run_id": "2a22b7cc-ab8a-439f-8258-775f7d0adc08",
+      "case_id": "C007",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 8311,
+      "calls": [],
+      "replies": [
+        "草稿只支持行走和吹泡泡，",
+        "点火这类效果做不了，不改。",
+        "要不要把第一步改成吹泡泡？"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 7,
+        "expires_in_ms": 291689,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true
+    },
+    {
+      "capture": "compose-rest.json.gz",
+      "run_id": "2a22b7cc-ab8a-439f-8258-775f7d0adc08",
+      "case_id": "C008",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 26353,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "用户说\"第二步短一点\"，",
+        "这涉及编排草稿的修改。",
+        "我需要先查询状态获取草稿信息用户说\"第二步短一点\"，但没有明确具体时长。",
+        "草稿目前有2步，第二步是泡泡1000毫秒。",
+        "按规则，用户说\"短一点\"等相对时长且没有明确新时长时，只问要改成几秒，不猜。",
+        "第二步现在时长是1000毫秒（1秒），请问你想改成几秒？"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 7,
+        "expires_in_ms": 273647,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true
+    },
+    {
+      "capture": "conflict-1.json.gz",
+      "run_id": "1ac8783c-10de-42e8-971a-0d0803f6a26d",
+      "case_id": "X001",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 17784,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "replies": [
+        "我先查一下当前草稿版本修改第二步泡泡为两秒\n\n草稿版本有变化，",
+        "第二步泡泡改成了三秒而不是两秒，我没法确认保存成功。",
+        "麻烦家长在网页上预览一下，确认改动后再点开始。"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 8,
+        "expires_in_ms": 285130,
+        "source": "web",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 3000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 4080
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true,
+      "rejected": "draft_changed",
+      "automatic_retry": false,
+      "web_version_preserved": true
+    },
+    {
+      "capture": "conflict-2.json.gz",
+      "run_id": "001d7c83-8e37-4775-bf54-6bb43770f7c3",
+      "case_id": "X001",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 18174,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "replies": [
+        "草稿版本变了，",
+        "没能保存这次的修改。",
+        "刚才查到的草稿第二步泡泡是一秒，但提交时版本已经更新，目前草稿里第二步泡泡是3秒。",
+        "需要的话可以再确认一下要改成几秒，我重新改。"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 8,
+        "expires_in_ms": 285290,
+        "source": "web",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 3000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 4080
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true,
+      "rejected": "draft_changed",
+      "automatic_retry": false,
+      "web_version_preserved": true
+    },
+    {
+      "capture": "conflict-3.json.gz",
+      "run_id": "ff34296e-96a7-4a84-9e6e-cc06055d36bc",
+      "case_id": "X001",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 17913,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "replies": [
+        "草稿当前版本是7，",
+        "第二步泡泡是1000毫秒，改成2000毫秒。",
+        "草稿版本变了，保存没有成功。",
+        "现在网页上草稿的第二步泡泡是3秒，不是2秒。",
+        "你可以在网页上再确认一下，如果需要改成2秒，请再告诉我一次。"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 8,
+        "expires_in_ms": 285480,
+        "source": "web",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 3000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 4080
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true,
+      "rejected": "draft_changed",
+      "automatic_retry": false,
+      "web_version_preserved": true
+    },
+    {
+      "capture": "c005-diagnostic.json.gz",
+      "run_id": "ae99f2bd-9207-474e-912b-a3b65d7282df",
+      "case_id": "C005",
+      "completed": true,
+      "completion": "tts_stop",
+      "elapsed_ms": 19066,
+      "calls": [],
+      "replies": [
+        "\"开始这段表演\"听起来你是想让我执行某个编排好的泡泡表演草稿。",
+        "不过我没有语音确认执行的工具，草稿需要在网页上预览后点开始按钮才能运行。",
+        "我这边没法直接触发。",
+        "如果是要我直接做动作，请告诉我具体想做什么，比如前进、吹泡泡这些。"
+      ],
+      "final_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 7,
+        "expires_in_ms": 280934,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      },
+      "starts": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "replay_equal": true
+    }
+  ]
+}

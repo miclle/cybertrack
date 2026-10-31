@@ -77,3 +77,24 @@ python3 scripts/capture_lingxi.py \
 [独立冲突用例](compose-conflict-cases.json)在本轮第一次 compose 之前，通过真实 WebDraft 将第二步改为三秒。网页心跳在虚拟时间内每 200 ms 维持，确保新稿持续存在。该事件是固定顺序的并发故障注入，不测真实线程时延。模型接收原话，无法从提示词预知冲突。
 
 协议检查覆盖八份合成预期调用、跳过读取的拒绝，以及并发写入后 draft_changed 和网页版本保留；均为本地主机回归。平台实际结果与不完整会话另行记录，不能以预期请求回放替代模型成绩。
+
+## 编排固定集与冲突平台结果
+
+本轮仍用 ct61 工具和同一 5991 字符角色，只发送原话。首次采集在 C005 超过 55 秒等待上限后中断；随后只补跑尚未执行的 C006–C008。两份原始轨迹和摘要保留，合并文件逐行保留首次结果，不是单一连续会话，也没有用诊断重跑替换失败。[完整评分](evidence/ct61-firmware-host/full-suite-scores.json) · [汇总轨迹](evidence/ct61-firmware-host/full-compose.json.gz) · [逐条审阅](evidence/ct61-firmware-host/compose-review.json) · [本轮主机清单](evidence/ct61-firmware-host/compose-host-manifest.json)
+
+| 项目 | 结果 |
+|---|---|
+| 固定八条工具、参数及顺序 | 6/8，未达门槛 |
+| 收到正常结束 | 7/8；C005 未完整结束，继续记失败 |
+| C001 新建、C002 单步修改、C003 删除、C004 取消 | 调用与最终草稿均匹配；未启动动作 |
+| C005，开始这段表演 | 多查状态并播报长篇规则分析，等待超时；没有越过网页确认启动 |
+| C008，第二步短一点 | 多查一次状态后追问秒数，未修改草稿 |
+| 本轮八条启动计数和逻辑输出 | 均为零／关闭 |
+
+C005 的独立诊断重跑正常结束，用时约 19.1 秒且无工具调用。它不进入首次固定集成绩，也不能证明波动已修复。[首次 C001–C005](evidence/ct61-firmware-host/compose.json.gz) · [未执行的后三条](evidence/ct61-firmware-host/compose-rest.json.gz) · [单独诊断](evidence/ct61-firmware-host/c005-diagnostic.json.gz)
+
+C005、C006、C008 的回复仍包含“用户说”“根据规则”等过程文字，C001 等还有保存前旁白。记录的是平台回复／TTS 文本，未做扬声器听感验收。后续需核对平台当前模型、模型专属推理参数和回复通道，再分别比较旁白、等待时间、工具匹配和停止表现；不能仅凭这些文字断定某个开关已开启。当前桌面工具报告锁屏，尚未完成该项设置回读，本轮没有改平台参数。官方[模型配置接口](https://linx.qiniu.com/docs/xrobot/api/llm)要求按具体模型取得自定义配置 schema，不能套用未经确认的通用参数。
+
+另以 X001 原话独立跑三次：模型查到版本 7 后，主机在第一次编辑前将网页稿改为版本 8、第二步泡泡三秒。三次实际编辑均收到 `draft_changed`，均未自动重试或声称两秒保存成功，最终网页版本和三秒时长保留，启动计数为零。回复仍有操作旁白；三次确定顺序的故障注入不代表任意线程竞争或现场表现通过。[第一次](evidence/ct61-firmware-host/conflict-1.json.gz) · [第二次](evidence/ct61-firmware-host/conflict-2.json.gz) · [第三次](evidence/ct61-firmware-host/conflict-3.json.gz)
+
+本轮十二条会话的完整 MCP 结果、回执和结束状态均经捕获时的固定二进制重放一致。随后修复主机初始化编号碰撞，以新二进制重新播放既有 80 条原话、八条编排、三次冲突和一次诊断，共 92 行；完整 MCP 结果和终态仍逐项一致。原捕获清单不覆盖，新版本另存[主机清单](evidence/ct61-firmware-host/current-host-manifest.json)和[兼容回放结果](evidence/ct61-firmware-host/host-replay-check.json)。这些是离线复核，没有新增模型会话或板上部署。
