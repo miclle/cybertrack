@@ -5,6 +5,20 @@ import json
 from pathlib import Path
 
 from evaluate_voice import evaluate
+from review_spoken_cases import review as review_spoken
+
+STT_SPOKEN_SCORE = "docs/validation/evidence/ct62-stt-host/spoken-review.json"
+STT_EXPERIMENT = "docs/validation/evidence/ct62-stt-host/experiment.json"
+STT_CAPTURE = "docs/validation/evidence/ct62-stt-host/full20.json.gz"
+
+
+def score_spoken_replay(trace, recorded):
+    if trace.get("host_input_mode") != "platform_stt_events" or trace.get("fixture_version") != "firmware_host":
+        raise ValueError("STT speech replay requires observed input events")
+    report = review_spoken(trace)
+    if report != recorded:
+        raise ValueError("STT speech replay differs from recorded review")
+    return {key: value for key, value in report.items() if key != "results"}
 
 ROOT = Path(__file__).resolve().parents[1]
 SCORES = "docs/validation/evidence/role-5991/full-suite-scores.json"
@@ -68,7 +82,9 @@ def review(root):
                 results[suite]["tool_source_version"] = recorded[suite]["tool_source_version"]
                 results[suite]["input_mode"] = trace["input_mode"]
         groups[name] = results
-    return {"git_head": manifest["git_head"], "firmware": manifest["firmware"], **groups}
+    spoken = score_spoken_replay(json.loads((root / "replay/stt/voice.json").read_bytes()),
+                                  json.loads((root / STT_SPOKEN_SCORE).read_bytes()))
+    return {"git_head": manifest["git_head"], "firmware": manifest["firmware"], **groups, "spoken_stt_review": spoken}
 
 
 if __name__ == "__main__":
