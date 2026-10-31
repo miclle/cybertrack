@@ -25,7 +25,7 @@ class SolutionPackageTest(unittest.TestCase):
         data = package.build_archive(ROOT, paths, "test-revision", False)
         self.assertEqual(data, package.build_archive(ROOT, paths, "test-revision", False))
         with tempfile.TemporaryDirectory() as folder, zipfile.ZipFile(io.BytesIO(data)) as archive:
-            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/qwen/compose.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json"})
+            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/qwen/compose.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json"})
             manifest = json.loads(archive.read("MANIFEST.json"))
             current = json.loads(archive.read("firmware/current.json"))
             build = json.loads(archive.read("firmware/" + current["software_evidence"]))
@@ -65,13 +65,25 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual((compact["scored"], compact["correct"]), (8, 5))
             self.assertEqual(compact["forbidden_call_cases"], ["C006"])
             self.assertFalse(compact["tool_call_target_met"])
+            stop = result["stop_negation_scores"]
+            self.assertEqual((stop["voice"]["scored"], stop["voice"]["correct"]), (80, 77))
+            self.assertEqual(stop["voice"]["forbidden_call_cases"], ["V064", "V079"])
+            self.assertEqual(stop["voice"]["failed_stop_cases"], [])
+            self.assertFalse(stop["voice"]["tool_call_target_met"])
+            self.assertEqual((stop["compose"]["scored"], stop["compose"]["correct"]), (8, 6))
+            self.assertEqual(stop["compose"]["mismatch_ids"], ["C007", "C008"])
+            self.assertEqual(stop["compose"]["forbidden_call_cases"], [])
+            self.assertFalse(stop["compose"]["tool_call_target_met"])
+            stop_trace = json.loads(archive.read("replay/stop-negation/voice.json"))
+            self.assertEqual(next(row for row in stop_trace["results"] if row["id"] == "V079")["calls"],
+                             [dict(name="self.tank.move", arguments=dict(direction="forward", duration_ms=1000))])
             guard = json.loads(archive.read("docs/validation/evidence/ct62-voice-turn/replay.json"))
             fallback = next(row for row in guard["archived_cases"] if row["id"] == "C005")
             self.assertEqual(fallback["starts"], 0)
             self.assertIn("voice_input_failed", fallback["results"][1])
             self.assertFalse(json.loads(archive.read("firmware/esp32-audio/verification-ct62.json"))["flashed"])
             self.assertNotIn("device_id", manifest["firmware"])
-            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json"):
+            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json"):
                 replay = root/name
                 original = replay.read_bytes()
                 replay.write_bytes(original+b" ")
