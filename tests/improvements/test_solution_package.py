@@ -25,7 +25,7 @@ class SolutionPackageTest(unittest.TestCase):
         data = package.build_archive(ROOT, paths, "test-revision", False)
         self.assertEqual(data, package.build_archive(ROOT, paths, "test-revision", False))
         with tempfile.TemporaryDirectory() as folder, zipfile.ZipFile(io.BytesIO(data)) as archive:
-            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/qwen/compose.json", "replay/doubao/compose.json"})
+            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/qwen/compose.json", "replay/doubao/compose.json", "replay/stt/voice.json"})
             manifest = json.loads(archive.read("MANIFEST.json"))
             self.assertEqual(manifest["files"]["START_HERE.md"]["sha256"], hashlib.sha256(archive.read("START_HERE.md")).hexdigest())
             archive.extractall(folder)
@@ -54,13 +54,17 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual(doubao["invalid_tool_argument_cases"], ["C002", "C007"])
             self.assertEqual(doubao["forbidden_call_cases"], ["C005", "C006"])
             self.assertFalse(doubao["tool_call_target_met"])
+            speech = result["spoken_stt_review"]
+            self.assertEqual((speech["expected"], speech["completed"], speech["calls_match"]), (20, 19, 19))
+            self.assertEqual(speech["not_completed"], ["V017"])
+            self.assertEqual(speech["transcript_matches"], 19)
             guard = json.loads(archive.read("docs/validation/evidence/ct62-voice-turn/replay.json"))
             fallback = next(row for row in guard["archived_cases"] if row["id"] == "C005")
             self.assertEqual(fallback["starts"], 0)
             self.assertIn("voice_input_failed", fallback["results"][1])
             self.assertFalse(json.loads(archive.read("firmware/esp32-audio/verification-ct62.json"))["flashed"])
             self.assertNotIn("device_id", manifest["firmware"])
-            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json"):
+            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json"):
                 replay = root/name
                 original = replay.read_bytes()
                 replay.write_bytes(original+b" ")

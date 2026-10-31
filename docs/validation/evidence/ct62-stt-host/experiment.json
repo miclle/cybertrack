@@ -1,0 +1,64 @@
+{
+  "source_commit": "ba27b8d",
+  "scope": "21 independent platform sessions: one smoke and twenty fixed synthesized utterances; no board IO, flash, role or configuration changes",
+  "model_label": "deepseek-v4-flash",
+  "model_identity": "visible page label, not independently identified by WSS",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "platform_parameters": {
+    "temperature": 0.7,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_tokens": 500,
+    "thinking": {
+      "type": "disabled"
+    },
+    "reasoning_effort": "low",
+    "stream_options": {
+      "include_usage": true
+    }
+  },
+  "configuration_screenshot_sha256": "81bce3151cdeb36de87d789ed849ef2c4a1385e90a03087008d5ee9622149fbc",
+  "capture_source_sha256": "581ab4187911585fc6e8f8c7dc631a119989792e76f40e1ba01fbe6df28b9517",
+  "files": {
+    "fixed20.json.gz": {
+      "bytes": 6506,
+      "sha256": "5205c2d1c67ed55ae338ef9a928d4efcbf664ccebed4f6b2c655a8c2d6ebadff"
+    },
+    "full20.json.gz": {
+      "bytes": 18607,
+      "sha256": "59e75b5d6fba14ac50ee4dcf08562ddf2679569b6806051e8c85b7cfbca91aa2"
+    },
+    "guard-check.json": {
+      "bytes": 1433,
+      "sha256": "c2b4affa5af4893690e5c7a9c98cd63f155818c888c69e04acf0e6b49e1aaa0c"
+    },
+    "host-manifest.json": {
+      "bytes": 4045,
+      "sha256": "b2977d26cac0e2d1395821b73e6cd3a635dc0d474c8db0efb8f418bb580bfa08"
+    },
+    "playback-review.json": {
+      "bytes": 3221,
+      "sha256": "61987c502277b487ee9aa46da905719ce156e4f4279166150851d07e5ae785bc"
+    },
+    "protocol-review.json": {
+      "bytes": 9226,
+      "sha256": "366fb095477bcf0ef51c39f0dbc571d158e8a4c9b5ffb366d7ea6def8b6a86e4"
+    },
+    "remaining15.json.gz": {
+      "bytes": 15778,
+      "sha256": "be7ceb39384754084726f02b0d39923055beb9ad36386d51c3325b9f38ce29f9"
+    },
+    "smoke.json.gz": {
+      "bytes": 4366,
+      "sha256": "e9af670447a68de957cf6c551f388606c53c46d947fdd2710b9ada9111303049"
+    },
+    "spoken-review.json": {
+      "bytes": 13264,
+      "sha256": "a58a787f943a969c33364657e2a3751c0e4262ac1fd3e2e330955dd12e7b7633"
+    },
+    "software-checks.json": {
+      "bytes": 3779,
+      "sha256": "e2fd922a9ed67e675c78ddb81e3bde5c8c58993cb5aee1b78c39664b507075a1"
+    }
+  }
+}
