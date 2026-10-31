@@ -82,6 +82,14 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual(fallback["starts"], 0)
             self.assertIn("voice_input_failed", fallback["results"][1])
             self.assertFalse(json.loads(archive.read("firmware/esp32-audio/verification-ct62.json"))["flashed"])
+            stop_dispatch = json.loads(archive.read("docs/validation/evidence/ct66-stop-dispatch/replay.json"))
+            self.assertTrue(stop_dispatch["passed"])
+            self.assertEqual(stop_dispatch["scenarios"], 8)
+            self.assertTrue(all(row["passed"] for row in stop_dispatch["results"]))
+            comparison = json.loads(archive.read("docs/validation/evidence/ct66-stop-dispatch/comparison.json"))
+            self.assertEqual(len(comparison["baseline_failed"]), 5)
+            self.assertEqual(comparison["candidate_failed"], [])
+            self.assertFalse(json.loads(archive.read("firmware/esp32-audio/verification-ct66.json"))["flashed"])
             self.assertNotIn("device_id", manifest["firmware"])
             for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json"):
                 replay = root/name
