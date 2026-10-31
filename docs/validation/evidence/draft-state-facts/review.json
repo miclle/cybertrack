@@ -1,0 +1,667 @@
+[
+  {
+    "file": "fixture-r1-baseline.json.gz",
+    "sha256": "dd92a3c3002b2841094dd6fb7a554b93d58ac556f6c850a4536c1961b32d4206",
+    "stage": "fixture",
+    "id": "C001",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.compose",
+        "arguments": {
+          "edit": "replace",
+          "revision": 0,
+          "step": 0,
+          "steps_json": "[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+        }
+      }
+    ],
+    "saved_receipt": true,
+    "cancelled_receipt": false,
+    "reply": "草稿按两步编排：第一步向左原地转，第二步吹泡泡。现在保存草稿。草稿已保存：第一步向左原地转，第二步吹泡泡。请在网页上预览，确认没问题后点开始就行。",
+    "final_state": null
+  },
+  {
+    "file": "fixture-r1-facts.json.gz",
+    "sha256": "a35a22114b357a7e343b3724b0ae53cb5a0208329715561843c4fe852bd23dc2",
+    "stage": "fixture",
+    "id": "C001",
+    "facts_fixture": true,
+    "calls_match": true,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.compose",
+        "arguments": {
+          "edit": "replace",
+          "revision": 0,
+          "step": 0,
+          "steps_json": "[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+        }
+      }
+    ],
+    "saved_receipt": true,
+    "cancelled_receipt": false,
+    "reply": "草稿已保存：先左转，再吹泡泡。请在网页上预览，确认没问题后点开始就行。",
+    "final_state": null
+  },
+  {
+    "file": "fixture-r2-baseline.json.gz",
+    "sha256": "0a702e31bda978721b511263cb5974ac0ac8f9d5ba7fd3f0ac0874701d3d5a0d",
+    "stage": "fixture",
+    "id": "C001",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.compose",
+        "arguments": {
+          "edit": "replace",
+          "revision": 0,
+          "step": 0,
+          "steps_json": "[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+        }
+      }
+    ],
+    "saved_receipt": true,
+    "cancelled_receipt": false,
+    "reply": "我先查一下当前状态。当前无草稿，我保存新草稿：先左转，再吹泡泡。草稿已保存：先左转，再吹泡泡。请在网页预览后点开始。",
+    "final_state": null
+  },
+  {
+    "file": "fixture-r2-facts.json.gz",
+    "sha256": "6598a3dc1470ef21996da1a91267aca3817f3c9e010420b2292ef73a777f3cd5",
+    "stage": "fixture",
+    "id": "C001",
+    "facts_fixture": true,
+    "calls_match": true,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.compose",
+        "arguments": {
+          "edit": "replace",
+          "revision": 0,
+          "step": 0,
+          "steps_json": "[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+        }
+      }
+    ],
+    "saved_receipt": true,
+    "cancelled_receipt": false,
+    "reply": "我先查一下当前状态。好的，我来保存这段草稿：先左转，再吹泡泡。草稿已保存，两步：先左转，再吹泡泡。请在网页上预览后点开始。",
+    "final_state": null
+  },
+  {
+    "file": "fixture-r3-baseline.json.gz",
+    "sha256": "083b4c28ec31d93f3244a1ecf2e6537c7111504cc86db9a6b7aaaeb781659664",
+    "stage": "fixture",
+    "id": "C001",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.compose",
+        "arguments": {
+          "edit": "replace",
+          "revision": 0,
+          "step": 0,
+          "steps_json": "[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+        }
+      }
+    ],
+    "saved_receipt": true,
+    "cancelled_receipt": false,
+    "reply": "I'll check the current status first before composing thedraft.编排草稿，先左转再吹泡泡，两步。左转未说时长，按默认880毫秒；吹泡泡未说时长，按默认1000毫秒。草稿已保存：先左转约0.9秒，再吹泡泡1秒。请在网页预览确认，点开始就会执行。",
+    "final_state": null
+  },
+  {
+    "file": "fixture-r3-facts.json.gz",
+    "sha256": "b8dca08afce5258c23648fcae1423a132feaaa88ba7c533ab6d5ed104b4b93e1",
+    "stage": "fixture",
+    "id": "C001",
+    "facts_fixture": true,
+    "calls_match": true,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.compose",
+        "arguments": {
+          "edit": "replace",
+          "revision": 0,
+          "step": 0,
+          "steps_json": "[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+        }
+      }
+    ],
+    "saved_receipt": true,
+    "cancelled_receipt": false,
+    "reply": "草稿已保存：先左转，再吹泡泡。请在网页上预览一下，确认没问题后点开始就行。",
+    "final_state": null
+  },
+  {
+    "file": "host-C001.json.gz",
+    "sha256": "4250e26dc0faa392eb577f0c0af21472f45d324ad765f044de9eacca531bc99e",
+    "stage": "host",
+    "id": "C001",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.compose",
+        "arguments": {
+          "edit": "replace",
+          "revision": 0,
+          "step": 0,
+          "steps_json": "[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+        }
+      }
+    ],
+    "saved_receipt": true,
+    "cancelled_receipt": false,
+    "reply": "草稿已经保存好了：先左转，再吹泡泡。你可以到网页上预览一下，确认没问题后点开始就行。",
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "show_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 1,
+        "expires_in_ms": 300000,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      }
+    }
+  },
+  {
+    "file": "host-C002.json.gz",
+    "sha256": "1adee1710e1663c748c9ae1725357bd7b81d4c4340c01ff96230285d06da18a8",
+    "stage": "host",
+    "id": "C002",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.compose",
+        "arguments": {
+          "edit": "replace_step",
+          "revision": 7,
+          "step": 2,
+          "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+        }
+      }
+    ],
+    "saved_receipt": true,
+    "cancelled_receipt": false,
+    "reply": "第二步泡泡已改成两秒，草稿保存好了。请在网页预览一下，确认没问题再点开始。",
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "show_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 8,
+        "expires_in_ms": 300000,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 2000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 3080
+      }
+    }
+  },
+  {
+    "file": "host-C003.json.gz",
+    "sha256": "b73e6be2b2ac78549bc3c526e593f39f548415933155f0acd198011e3b2e1e21",
+    "stage": "host",
+    "id": "C003",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.compose",
+        "arguments": {
+          "edit": "remove_step",
+          "revision": 7,
+          "step": 1,
+          "steps_json": ""
+        }
+      }
+    ],
+    "saved_receipt": true,
+    "cancelled_receipt": false,
+    "reply": "用户要求去掉草稿第一步（转向），即删除步骤1。当前草稿revision为7，用remove_step删除步骤1。已去掉第一步转向，现在草稿只剩一步吹泡泡，时长1秒。请在网页预览后点开始。",
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "show_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 8,
+        "expires_in_ms": 300000,
+        "source": "voice",
+        "steps": [
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 1000
+      }
+    }
+  },
+  {
+    "file": "host-C004.json.gz",
+    "sha256": "8fca6f0ecf060a35b3d63139a044d643403a26fa74dbb1d0afd2454db0edde51",
+    "stage": "host",
+    "id": "C004",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.compose",
+        "arguments": {
+          "edit": "cancel",
+          "revision": 7,
+          "step": 0,
+          "steps_json": ""
+        }
+      }
+    ],
+    "saved_receipt": false,
+    "cancelled_receipt": true,
+    "reply": "草稿已取消。草稿已取消，表演内容清空了。",
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "show_draft": {
+        "active": false,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 0,
+        "expires_in_ms": 0,
+        "source": "none",
+        "steps": [],
+        "nominal_duration_ms": 0
+      }
+    }
+  },
+  {
+    "file": "host-C005.json.gz",
+    "sha256": "c91e33ccddab601c6dbb80828189d10330ef2edd8a767f56fe6c90d57baace00",
+    "stage": "host",
+    "id": "C005",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [],
+    "saved_receipt": false,
+    "cancelled_receipt": false,
+    "reply": "用户说\"开始这段表演\"，但根据规则，口头说\"开始表演\"不能替代网页确认。草稿已保存，需要请家长在网页预览并点开始。这段表演的草稿已经保存好了，麻烦家长在网页上预览一下，确认没问题后点开始按钮就能播放了。",
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "show_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 7,
+        "expires_in_ms": 300000,
+        "source": "web",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      }
+    }
+  },
+  {
+    "file": "host-C006.json.gz",
+    "sha256": "d9fa8f8a6bfa9b0d8d9b9c72f7cff74b6cfb348b708704635ce01e9542f938cd",
+    "stage": "host",
+    "id": "C006",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [],
+    "saved_receipt": false,
+    "cancelled_receipt": false,
+    "reply": "用户明确表示不要编排表演，这是否定表达，不启动任何编排操作。当前没有进行中的草稿需要取消。不需要调用工具，简短回应即可。",
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "show_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 7,
+        "expires_in_ms": 300000,
+        "source": "web",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      }
+    }
+  },
+  {
+    "file": "host-C007.json.gz",
+    "sha256": "2161be7addae120297dc83e7be51bce97557453510d11729b96817e58f165e99",
+    "stage": "host",
+    "id": "C007",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [],
+    "saved_receipt": false,
+    "cancelled_receipt": false,
+    "reply": "草稿只支持行走和泡泡，不支持点火。第一步无法改成点火，需要我帮你改成别的吗？比如把第一步改成吹泡泡或调整行走。",
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "show_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 7,
+        "expires_in_ms": 300000,
+        "source": "web",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      }
+    }
+  },
+  {
+    "file": "host-C008.json.gz",
+    "sha256": "7f8234e29596cb380effd0ec60746b058f1bc22a82bf8ce4878f500459b3dfdf",
+    "stage": "host",
+    "id": "C008",
+    "facts_fixture": false,
+    "calls_match": true,
+    "calls": [],
+    "saved_receipt": false,
+    "cancelled_receipt": false,
+    "reply": "用户说\"第二步短一点\"，但没给具体时长。按规则，含糊的相对时长要问具体几秒，不猜。第二步当前是泡泡1000毫秒，请问你想改成几秒？",
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "show_draft": {
+        "active": true,
+        "editing_capabilities": {
+          "allowed": [
+            "move",
+            "bubbles"
+          ],
+          "unsupported": [
+            "water",
+            "ignition"
+          ],
+          "confirmation": "web",
+          "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+        },
+        "revision": 7,
+        "expires_in_ms": 300000,
+        "source": "web",
+        "steps": [
+          {
+            "direction": "left",
+            "move_ms": 880,
+            "water_ms": 0,
+            "bubbles_ms": 0,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          },
+          {
+            "direction": "none",
+            "move_ms": 0,
+            "water_ms": 0,
+            "bubbles_ms": 1000,
+            "ignition_ms": 0,
+            "speed_percent": 100
+          }
+        ],
+        "nominal_duration_ms": 2080
+      }
+    }
+  }
+]
