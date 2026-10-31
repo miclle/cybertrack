@@ -8,7 +8,7 @@ python3 scripts/check_firmware_current.py --source-bin build/firmware-ct59/xiaoz
 
 | 项目 | 当前依据与状态 |
 |---|---|
-| 源码基线 | `2.0.3-ct59` 候选，调速拒绝时提供请求时刻的未移动或链路离线说明。工具说明要求单说“全速”直接请求调速，匹配本轮成功回执后抑制确认音频。手机可在载入前对照设备新稿与本页预览，动作状态未确认时保留本地 BOOT 停止指引，明确全停成功后本地抑制确认音频，状态查询列出网页长按通道，区分续租窗口与定时动作剩余量，剧场预览显示同时动作和结束顺序；ESP-IDF 5.5.1、小智固定版本及 overlay |
+| 源码基线 | `2.0.3-ct59` 候选，状态查询明确区分已有／没有草稿和本次保存回执。调速拒绝时提供请求时刻的未移动或链路离线说明。工具说明要求单说“全速”直接请求调速，匹配本轮成功回执后抑制确认音频。手机可在载入前对照设备新稿与本页预览，动作状态未确认时保留本地 BOOT 停止指引，明确全停成功后本地抑制确认音频，状态查询列出网页长按通道，区分续租窗口与定时动作剩余量，剧场预览显示同时动作和结束顺序；ESP-IDF 5.5.1、小智固定版本及 overlay |
 | 最近记录的部署 | [ct45](../firmware/esp32-audio/startup-ct45.json)；2026-10-31 已重启联网并回读 |
 | 最近角色同步 | [ct45 停止与长按角色修正](../firmware/esp32-audio/role-cancel-hold-ct45.json)，5991 字符保存回读、重启与零启动检查；模型语义另验 |
 | 软件验证 | [ct59 软件记录](../firmware/esp32-audio/verification-ct59.json)、[ct47 定向联调](validation/lingxi-ct47.md)与 [ct46 三轮联调](validation/lingxi-ct46.md)；已部署 ct45 的软件依据仍见 [ct45 记录](../firmware/esp32-audio/verification-ct45.json) |

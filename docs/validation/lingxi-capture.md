@@ -120,3 +120,9 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 ### 从空草稿验证保存回执
 
 `--draft-host` 默认保留两步、版本 7 的网页草稿。新建场景可以同时指定 `--draft-profile empty_web_draft`，从无草稿、版本 0 开始。查询不会创建草稿，只有实际 `compose` 成功回执才保存版本 1。运行前用相同候选的 `run_mcp_tests.py` 构建主机回执程序，并固定其二进制。轨迹的 `initial_profile` 与 `host_replay_sha256` 标识所测初态和实现。
+
+### 固定工具与角色，对照草稿状态说明
+
+`--draft-read-facts-fixture` 为隔离对照增加 `draft_status_facts`，只影响状态查询回执。先将 `scripts/lingxi_status_fixture.cc` 与当前 `status_facts.h`、cJSON 编译到 `build/lingxi-schema-export/draft-read-fixture`。轨迹绑定帮助程序和头文件哈希。默认夹具保持原样，实际 ct59 主机回执直接包含该字段，无需实验开关。
+
+说明按真实 `show_draft.active` 生成，只指出当前是否有草稿及查询不构成保存确认，不代替保存操作。对照组保持角色和十二个工具定义一致。

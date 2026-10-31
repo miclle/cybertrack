@@ -12,6 +12,7 @@
     "All twelve exported tool schemas and the role are unchanged from ct58.",
     "Actual get_status serialization distinguishes no saved draft from an existing saved draft and states that this query is not a save acknowledgement.",
     "Actual show_edit save receipts omit query-only facts, and queries preserve zero starts and closed outputs.",
-    "MCP/web host suite and empty draft roundtrip passed."
+    "MCP/web host suite and empty draft roundtrip passed.",
+    "All eight local check groups passed against ct59, including 64 improvement tests and MCP/control/audio/stop checks."
   ]
 }
