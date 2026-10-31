@@ -1,5 +1,7 @@
 # CyberTrack 面包板：小D 语音与四路控制
 
+ct46 候选增加短指令成功播报控制、设备状态解释和改稿前读版本检查。[构建与软件证据](verification-ct46.json) · [隔离平台验收](../../docs/validation/lingxi-ct46.md)
+
 **2026-10-31 ct45 已部署：** 接入“小D 泡泡剧场”网页预览、编辑、家长确认／取消和三个行走／泡泡模板，复用 ct44 版本化草稿及 `compose` 工具。角色已保存重开逐字回读，设备仅应用部署、配置保持及无动作草稿路径通过，见[部署记录](startup-ct45.json)、[编排契约与操作](../../docs/show-composer.md)和[验证记录](verification-ct45.json)。
 
 **ct43 历史引入、已随 ct45 部署：** 新增家长上手帮助与只读状态解释，保存最近一次适配器动作回执供网页和语音查询。不会新增启动或自动重试。线上回复另行验证，详见[功能与边界](../../docs/status-explanation.md)和[验证记录](verification-ct43.json)。
