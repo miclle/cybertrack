@@ -1,5 +1,20 @@
 {
   "version": "2.0.3-ct47",
   "scope": "Candidate receipt contract only; last recorded deployment remains ct45",
-  "checks": []
+  "checks": [
+    "Six of seven checks passed on first pass, including actual receipt adapter and audio checks",
+    "Python suite initially rejected new runner-owned fixture version metadata; added a hostile corpus override and verified all 37 Python tests pass",
+    "Actual receipt adapter includes draft capabilities, includes fault advice on output fault and omits fault_recovery on normal status"
+  ],
+  "source_commit": "0a6b481",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "artifact": "xiaozhi.bin",
+    "bytes": 2697136,
+    "sha256": "f6393ae2ead0f28efbada1b87028c3c33637c2f01f7e48a735e2313f87aff532"
+  },
+  "deployment": {
+    "flashed": false,
+    "last_recorded_application": "2.0.3-ct45"
+  }
 }
