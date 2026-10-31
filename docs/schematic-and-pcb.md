@@ -2,7 +2,7 @@
 
 版本：设计说明 v0.4 · 2026-10-30；状态核对：2026-10-30。适用对象：原理图设计、PCB 布局、制板文件准备和首板检查。
 
-**已完成 A2 模块级电气原理图（含主控侧超声波接口），尚无 PCB 布线或 Gerber 生产文件，不能直接下单。** [KiCad 可编辑工程与说明](../hardware/schematic/README.md)及[六页 PDF](../hardware/schematic/CyberTrack-schematic.pdf)保留现有 ESP32-S3 开发板，按电气符号、端子和网络绘图。输入保护、主电源控制电路、部分元件数值／物理针序未冻结，仍以 `TBD` 标注；R1–R6 已选定 10 kΩ、±1%、至少 0.1 W、0603 为设计目标，不代表已安装或通过实物默认关闭验收。本文给出设计约束和交付标准；后续进度统一记入 [TODO](../TODO.md)，不以验收条件代替完成记录。
+**已完成 A2 模块级电气原理图（含主控侧超声波接口），尚无 PCB 布线或 Gerber 生产文件，不能直接下单。** [KiCad 可编辑工程与说明](../hardware/schematic/README.md)及[六页 PDF](../hardware/schematic/CyberTrack-schematic.pdf)保留现有 ESP32-S3 开发板，按电气符号、端子和网络绘图。输入保护、主电源控制电路、部分元件数值／物理针序未冻结，仍以 `TBD` 标注；R1–R6 已选定 10 kΩ、±1%、至少 0.1 W、0603 为设计目标，不代表已安装或通过实物默认关闭验收。本文给出设计约束和交付标准；后续进度统一记入 [TODO](TODO.md)，不以验收条件代替完成记录。
 
 ## 1. 设计范围与版本依据
 
@@ -14,13 +14,13 @@
 |---|---|---|
 | 主电源 | [辰克 CK18650-1234S-NP](../hardware/components/ck-5v-battery/README.md)，标注 5 V，用户尺寸 116 × 70.5 × 19.5 mm | 输出电流、接头用途／极性及保护未知；不沿用旧 A110M 参数，不设计电芯充电电路 |
 | 主控 | 现用 `bread-compact-wifi` 面包板 | 按实物丝印接线；独立 COREBOARD 的排针图不直接作为面包板封装依据 |
-| 固件 | A1 历史输入为 ct20 GPIO；当前覆盖脚本版本为 `2.0.3-ct39`，最新部署记录为 [ct39-wifi-order3](../firmware/esp32-audio/verification-ct39-wifi-order3.json) | 2026-10-30 对 A2 新导出网表执行 112 项连接／源码检查，见[当前复核](../hardware/schematic/verification-current.json)；GPIO1／GPIO2 接口已纳入 A2，不等于实物电平或 PCB 验收 |
+| 固件 | A1 历史输入为 ct20 GPIO；A2 导出时使用 `2.0.3-ct39`，当次构建依据为 [ct39-wifi-order3](../firmware/esp32-audio/verification-ct39-wifi-order3.json) | 现行固件见[版本状态](current-status.md)。2026-10-30 对 A2 新导出网表执行 112 项连接／源码检查，见[当前复核](../hardware/schematic/verification-current.json)；GPIO1／GPIO2 接口已纳入 A2，不等于实物电平或 PCB 验收 |
 | 行走 | MT3608 目标 12 V → P13 L298N → 两台 37R-520 | 保留外置功率模块；核算升压输入、启动电流、驱动损耗及回灌 |
 | 水枪／泡泡 | 用户确认均为 3.7 V；每路独立 MOS 和降压板 | 不能并成一个受控输出；保留两路独立回流 |
 | 点火低压控制 | GPIO21 控制共用的一块 MOS；用户指定 5 V、单次最多 5 秒 | 只定义低压接口和禁用状态；不画高压输出、接线、电极及放电结构，不安排高压通电测试 |
-| 总开关／BOOT | [电源开关](power-switch.md)及[外接 BOOT](boot-button.md)已有机械候选 | 开关额定能力未确认；BOOT 是软件停止输入，不是功率切断 |
+| 总开关／BOOT | [电源开关](assembly.md#电源开关与停止按钮)及[外接 BOOT](assembly.md#电源开关与停止按钮)已有机械候选 | 开关额定能力未确认；BOOT 是软件停止输入，不是功率切断 |
 
-现有接线与分项台架证据见[接线总表](wiring.md)、[电源与接口](power-and-interfaces.md)和[效果控制](effects-control.md)。这些页面包含历史版本；本页区分 A1 历史输入和 A2 当前验证，不继承旧版本的全部验证结论。A2 第 6 页已包含主控 3V3／GND／GPIO1／GPIO2 至超声波模块的支路；实际电平、排针和装壳声学边界见[测距说明](ultrasonic-ranging.md)。
+现有接线与分项台架证据见[接线总表](wiring.md)、[电源与接口](../hardware/architecture/README.md)和[效果控制](effects-control.md)。这些页面包含历史版本；本页区分 A1 历史输入和 A2 当前验证，不继承旧版本的全部验证结论。A2 第 6 页已包含主控 3V3／GND／GPIO1／GPIO2 至超声波模块的支路；实际电平、排针和装壳声学边界见[测距说明](ultrasonic-ranging.md)。
 
 ## 2. 总体电路框图
 
@@ -260,7 +260,7 @@ Gerber 回读核对层数、铜皮填充、板框闭合、孔槽／孔金属化�
 
 ## 9. 当前制板阻塞项
 
-这些是本设计的放行条件，任务状态统一维护在 [TODO](../TODO.md)。
+这些是本设计的放行条件，任务状态统一维护在 [TODO](TODO.md)。
 
 | 待补输入 | 不能提前冻结的内容 |
 |---|---|
