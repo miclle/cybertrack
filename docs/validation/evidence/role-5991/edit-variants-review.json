@@ -1,0 +1,347 @@
+{
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "ct45_host_sha256": "809e6af646759ccb77e4ede555a178b3f9705713eaa1f8f184309534cb3aec7c",
+  "corpus_sha256": "4ec1beae7d4dbbfc82a13b01a44670a5dc9ab25a9804c2d7701f2613eb36083b",
+  "scope": "Raw platform text, isolated firmware RPC replies and post-call host readback; no board IO or recorded audio.",
+  "results": [
+    {
+      "round": 1,
+      "id": "E001",
+      "trace": "edit-variants-1.json.gz",
+      "calls": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "outcomes": [
+        "ok",
+        "draft_saved"
+      ],
+      "version": 8,
+      "saved_steps": [
+        {
+          "direction": "left",
+          "move_ms": 880,
+          "water_ms": 0,
+          "bubbles_ms": 0,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        },
+        {
+          "direction": "none",
+          "move_ms": 0,
+          "water_ms": 0,
+          "bubbles_ms": 3000,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        }
+      ],
+      "starts": 0,
+      "outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "reply": "I'll check the current draft first当前草稿有两步：先左转880毫秒，再吹泡泡1秒。你说开头转圈那段留着，后面的泡泡改成3秒。我用replace_step改第二步改好了，草稿现在是先左转圈，然后吹泡泡3秒。你到网页上预览一下，确认没问题点开始就行。"
+    },
+    {
+      "round": 1,
+      "id": "E002",
+      "trace": "edit-variants-1.json.gz",
+      "calls": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "outcomes": [
+        "ok",
+        "draft_saved"
+      ],
+      "version": 8,
+      "saved_steps": [
+        {
+          "direction": "left",
+          "move_ms": 880,
+          "water_ms": 0,
+          "bubbles_ms": 0,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        }
+      ],
+      "starts": 0,
+      "outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "reply": "我先查看当前草稿状态。当前草稿有2步：第1步左转880毫秒，第2步吹泡泡1000毫秒。删除最后一步，保留开头的左转。草稿已改好，去掉最后的吹泡泡，只保留开头的左转这一步。请在网页上预览一下，满意的话点开始就行。"
+    },
+    {
+      "round": 1,
+      "id": "E003",
+      "trace": "edit-variants-1.json.gz",
+      "calls": [
+        "self.tank.get_status"
+      ],
+      "outcomes": [
+        "ok"
+      ],
+      "version": 7,
+      "saved_steps": [
+        {
+          "direction": "left",
+          "move_ms": 880,
+          "water_ms": 0,
+          "bubbles_ms": 0,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        },
+        {
+          "direction": "none",
+          "move_ms": 0,
+          "water_ms": 0,
+          "bubbles_ms": 1000,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        }
+      ],
+      "starts": 0,
+      "outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "reply": "当前草稿是第7版，有两步：先左转880毫秒，然后吹泡泡1000毫秒。你想缩短结尾的泡泡，但还没想好几秒，那你说个具体秒数，我帮你改。"
+    },
+    {
+      "round": 2,
+      "id": "E001",
+      "trace": "edit-variants-2.json.gz",
+      "calls": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "outcomes": [
+        "ok",
+        "draft_saved"
+      ],
+      "version": 8,
+      "saved_steps": [
+        {
+          "direction": "left",
+          "move_ms": 880,
+          "water_ms": 0,
+          "bubbles_ms": 0,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        },
+        {
+          "direction": "none",
+          "move_ms": 0,
+          "water_ms": 0,
+          "bubbles_ms": 3000,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        }
+      ],
+      "starts": 0,
+      "outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "reply": "我先查一下当前草稿的状态。当前草稿是第1步原地左转880毫秒，第2步吹泡泡1秒。要保留开头转圈那段，把泡泡改成3秒。好，草稿改好了。开头转圈那步保留，后面的泡泡改成3秒，其余没动。你在网页上预览一下，没问题就点开始吧。"
+    },
+    {
+      "round": 2,
+      "id": "E002",
+      "trace": "edit-variants-2.json.gz",
+      "calls": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "outcomes": [
+        "ok",
+        "draft_saved"
+      ],
+      "version": 8,
+      "saved_steps": [
+        {
+          "direction": "left",
+          "move_ms": 880,
+          "water_ms": 0,
+          "bubbles_ms": 0,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        }
+      ],
+      "starts": 0,
+      "outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "reply": "我先查一下当前草稿的状态看到草稿了，当前有两个步骤：第一步是左转880毫秒，第二步是吹泡泡1000毫秒。我把第二步删掉，保留第一步改好了，把最后那个吹泡泡删掉了，现在只剩开头的左转动作。你到网页上预览一下，没问题就点开始吧。"
+    },
+    {
+      "round": 2,
+      "id": "E003",
+      "trace": "edit-variants-2.json.gz",
+      "calls": [
+        "self.tank.get_status"
+      ],
+      "outcomes": [
+        "ok"
+      ],
+      "version": 7,
+      "saved_steps": [
+        {
+          "direction": "left",
+          "move_ms": 880,
+          "water_ms": 0,
+          "bubbles_ms": 0,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        },
+        {
+          "direction": "none",
+          "move_ms": 0,
+          "water_ms": 0,
+          "bubbles_ms": 1000,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        }
+      ],
+      "starts": 0,
+      "outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "reply": "我先查一下当前草稿的状态你想把结尾的泡泡缩短到几秒？告诉我具体秒数，我帮你改草稿。"
+    },
+    {
+      "round": 3,
+      "id": "E001",
+      "trace": "edit-variants-3.json.gz",
+      "calls": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "outcomes": [
+        "ok",
+        "draft_saved"
+      ],
+      "version": 8,
+      "saved_steps": [
+        {
+          "direction": "left",
+          "move_ms": 880,
+          "water_ms": 0,
+          "bubbles_ms": 0,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        },
+        {
+          "direction": "none",
+          "move_ms": 0,
+          "water_ms": 0,
+          "bubbles_ms": 3000,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        }
+      ],
+      "starts": 0,
+      "outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "reply": "I'll check the current draft status first.The current draft has revision 7 with 2 steps.The first step is the turning section (left turn).I need to keep step 1 and modify step 2's bubbles to 3 seconds.I'll replace step 2 with bubbles of 3000ms改好了，开头转圈那段留着，后面的泡泡改成吹三秒。草稿已经保存，麻烦家长在网页上预览一下，确认没问题就点开始。"
+    },
+    {
+      "round": 3,
+      "id": "E002",
+      "trace": "edit-variants-3.json.gz",
+      "calls": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "outcomes": [
+        "ok",
+        "draft_saved"
+      ],
+      "version": 8,
+      "saved_steps": [
+        {
+          "direction": "left",
+          "move_ms": 880,
+          "water_ms": 0,
+          "bubbles_ms": 0,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        }
+      ],
+      "starts": 0,
+      "outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "reply": "我先查一下当前草稿的版本和步骤。草稿有两步：第一步是左转，第二步是吹泡泡。我把第二步删掉，保留开头的左转。删好了，现在草稿只剩开头的左转那一步。麻烦你在网页上预览一下，确认没问题再点开始。"
+    },
+    {
+      "round": 3,
+      "id": "E003",
+      "trace": "edit-variants-3.json.gz",
+      "calls": [
+        "self.tank.get_status"
+      ],
+      "outcomes": [
+        "ok"
+      ],
+      "version": 7,
+      "saved_steps": [
+        {
+          "direction": "left",
+          "move_ms": 880,
+          "water_ms": 0,
+          "bubbles_ms": 0,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        },
+        {
+          "direction": "none",
+          "move_ms": 0,
+          "water_ms": 0,
+          "bubbles_ms": 1000,
+          "ignition_ms": 0,
+          "speed_percent": 100
+        }
+      ],
+      "starts": 0,
+      "outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "reply": "我先看看当前草稿的情况草稿还在，结尾的泡泡是第2步，时长1000毫秒。你想改成几秒？告诉我具体秒数我就帮你改。"
+    }
+  ]
+}
