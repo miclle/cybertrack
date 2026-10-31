@@ -62,5 +62,36 @@ int main() {
         feedback.StartSpeech();
         assert(!feedback.Muted());
     }
+    auto top_speed = cJSON_Parse(R"({"speed_percent":100})");
+    const char* full_speed = R"({"operation":"set_speed","result":"accepted","fault":"none","move_speed_percent":100})";
+    for (const char* phrase : {"全速。","最快","最大速度","调到全速"}) {
+        feedback.Input(phrase);
+        auto call = feedback.BeginCall("self.tank.set_speed", top_speed);
+        assert(call);
+        feedback.Receipt(call,full_speed);
+        feedback.StartSpeech();
+        assert(feedback.Muted());
+    }
+    for (const char* phrase : {"不要全速","全速前进","全速？"}) {
+        feedback.Input(phrase);
+        assert(!feedback.BeginCall("self.tank.set_speed", top_speed));
+    }
+    for (const char* raw : {R"({"speed_percent":90})", R"({"speed_percent":"100"})",
+                            R"({"speed_percent":100,"extra":1})"}) {
+        auto* args = cJSON_Parse(raw);
+        feedback.Input("全速");
+        assert(!feedback.BeginCall("self.tank.set_speed",args));
+        cJSON_Delete(args);
+    }
+    for (const char* raw : {R"({"operation":"set_speed","result":"not_ready_or_busy","fault":"none"})",
+                            R"({"operation":"set_speed","result":"accepted","fault":"none","move_speed_percent":70})",
+                            R"({"operation":"set_speed","result":"accepted","fault":"none"})"}) {
+        feedback.Input("全速");
+        auto call = feedback.BeginCall("self.tank.set_speed", top_speed);
+        feedback.Receipt(call,raw);
+        feedback.StartSpeech();
+        assert(!feedback.Muted());
+    }
+    cJSON_Delete(top_speed);
     cJSON_Delete(move);
 }
