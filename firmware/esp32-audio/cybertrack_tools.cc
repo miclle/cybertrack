@@ -280,9 +280,12 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         recent.valid ? (recent.web ? "web" : "voice") : "none", recent_age.c_str(), distance.c_str());
     result.assign(json);
     result.pop_back();
-    if (!strcmp(operation, "get_status"))
+    if (!strcmp(operation, "get_status")) {
+        if (const char* guidance = FaultRecovery(reason))
+            result += ",\"fault_recovery\":\"" + std::string(guidance) + "\"";
         result += ",\"status_facts\":\"" + StatusFacts(reason, forward_blocked, plan_active,
             moving || watering || bubbling || igniting, recent.valid ? recent.result : "") + "\"";
+    }
     result += ",\"sequence_source\":\"" + std::string(plan_source) + "\",\"show_draft\":" + ShowDraftJson(draft, now) + "}";
     if (!web_session || (strcmp(operation, "get_status") && strcmp(operation, "drive_renew") && strcmp(operation, "water_renew") && strcmp(operation, "bubbles_renew")))
         ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
