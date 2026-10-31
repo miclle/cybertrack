@@ -1,6 +1,7 @@
 // Replay the evaluation's status, speed, stop and compose RPCs with a controlled host clock.
 // Unimplemented RPCs fail the replay; the executable links no board IO.
 #include "receipt_host.h"
+#include "admission_result.h"
 #include <iostream>
 #include <memory>
 
@@ -90,12 +91,11 @@ int main(int argc, char** argv) {
             if (cJSON_GetArraySize(args) != 1 || !ShowInteger(speed,60,100)) return 3;
             int ticket = sessions.VoiceClaim(clock_ms,id,AudioActionGuard::SpeedMode);
             if (!ticket) {
-                auto* error = cJSON_CreateObject();
-                cJSON_AddStringToObject(error,"rpc_error",sessions.VoiceClaimError(AudioActionGuard::SpeedMode));
-                char* raw = cJSON_PrintUnformatted(error);
-                std::cout << raw << '\n';
-                cJSON_free(raw);
-                cJSON_Delete(error);
+                const auto envelope = CyberTrackAdmissionResult("set_speed",sessions.VoiceClaimError(AudioActionGuard::SpeedMode));
+                auto* result = cJSON_Parse(envelope.c_str());
+                auto* entry = cJSON_GetArrayItem(cJSON_GetObjectItemCaseSensitive(result,"content"),0);
+                std::cout << cJSON_GetObjectItemCaseSensitive(entry,"text")->valuestring << '\n';
+                cJSON_Delete(result);
                 continue;
             }
             std::cout << Reply("set_speed",ticket,speed->valueint) << '\n';
