@@ -58,15 +58,16 @@ class CaptureTests(unittest.TestCase):
             with tempfile.TemporaryDirectory() as tmp:
                 base=Path(tmp)
                 for name,value in [('connection',{}),('tools',{'tools':[{'name':f'self.tank.t{i}'} for i in range(12)]}),
-                                   ('corpus',{'cases':[{'id':'V001','text':'查询','context':'空闲','expected_calls':['DO NOT SEND'],'response_expectation':'DO NOT SEND'},
+                                   ('corpus',{'cases':[{'id':'V001','text':'查询','context':'空闲','fixture_version':'DO NOT SEND','expected_calls':['DO NOT SEND'],'response_expectation':'DO NOT SEND'},
                                                        {'id':'D001','text':'查询','context':'合成故障','fixture_status':{'fault':'driver_error'},'expected_calls':['DO NOT SEND']}]})]:
                     (base/name).write_text(json.dumps(value));(base/name).chmod(0o600)
                 (base/'role').write_text('fixture')
                 args=SimpleNamespace(**{k:base/k for k in ['connection','tools','corpus','role','output']},ids=None,model='fixture',timeout=1)
                 mock=AsyncMock(return_value={'id':'V001','calls':[],'completion':'tts_stop','completed':True})
                 with patch.object(module,'capture_case',mock):await module.run(args)
-                self.assertEqual(set(mock.call_args_list[0].args[2]),{'id','text','context'})
-                self.assertEqual(set(mock.call_args_list[1].args[2]),{'id','text','context','fixture_status'})
+                self.assertEqual(set(mock.call_args_list[0].args[2]),{'id','text','context','fixture_version'})
+                self.assertEqual(set(mock.call_args_list[1].args[2]),{'id','text','context','fixture_status','fixture_version'})
+                self.assertEqual(mock.call_args_list[0].args[2]['fixture_version'],'ct45')
                 self.assertEqual(mock.call_args_list[1].args[2]['fixture_status'],{'fault':'driver_error'})
                 with self.assertRaises(ValueError):await module.run(args)
         asyncio.run(exercise())
