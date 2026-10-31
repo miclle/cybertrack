@@ -1,6 +1,6 @@
 # 固件能力与接口手册
 
-当前参数核对于 2026-10-31；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码及最近记录部署均为 `2.0.3-ct45`，部署与无动作检查见 [startup-ct45.json](esp32-audio/startup-ct45.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+当前参数核对于 2026-10-31；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码候选为 [ct46](esp32-audio/verification-ct46.json)，最近记录部署为 `2.0.3-ct45`，部署与无动作检查见 [startup-ct45.json](esp32-audio/startup-ct45.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
 
 <a id="当前面包板-ct21-接口"></a>
 <a id="当前面包板-ct22-接口"></a>
