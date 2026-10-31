@@ -63,3 +63,27 @@ class SyntheticSpeechTests(unittest.TestCase):
             else:
                 self.assertEqual(reply["error"]["message"], error)
                 self.assertNotIn("simulated_receipts", result)
+
+    def test_invalid_arguments_never_reach_fixture(self):
+        socket = AsyncMock()
+        socket.recv.side_effect = [json.dumps(msg) for msg in (
+            {"type": "hello", "session_id": "test"},
+            {"type": "mcp", "payload": {"method": "tools/list", "id": 1}},
+            {"type": "mcp", "payload": {"method": "tools/call", "id": 2,
+                "params": {"name": "self.tank.bubbles", "arguments": {"duration_ms": 60000}}}},
+            {"type": "tts", "state": "stop"})]
+        connection = MagicMock()
+        connection.return_value.__aenter__.return_value = socket
+        verdict = {"valid": False, "error": "actual gate rejected duration", "stop_requested": False}
+        with patch.dict(sys.modules, {"websockets.asyncio.client": MagicMock(connect=connection)}), \
+                patch("capture_lingxi.subprocess.check_output", return_value=json.dumps(verdict)), \
+                patch("capture_lingxi.simulated_reply") as simulate:
+            result = asyncio.run(capture_case(dict(token="test", client_id="c", device_id="d"),
+                [{"name": "self.tank.bubbles"}], dict(id="V024", text="吹泡泡六十秒", context="",
+                argument_validator=Path("/inert/test/checker"))))
+        simulate.assert_not_called()
+        self.assertNotIn("simulated_receipts", result)
+        self.assertEqual(result["argument_checks"][0]["valid"], False)
+        self.assertEqual(result["calls"][0]["arguments"]["duration_ms"], 60000)
+        self.assertEqual(json.loads(socket.send.call_args_list[-1].args[0])["payload"]["error"]["message"],
+                         verdict["error"])
