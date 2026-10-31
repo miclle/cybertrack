@@ -36,6 +36,16 @@ class VoiceEvaluatorTests(unittest.TestCase):
         self.trace["results"].append(self.trace["results"][0])
         with self.assertRaises(ValueError): module.evaluate(self.corpus, self.trace)
 
+    def test_timeout_is_not_a_successful_no_action_case(self):
+        row = next(r for r in self.trace["results"] if r["id"] == "V061")
+        row["completed"] = False
+        result = module.evaluate(self.corpus, self.trace)
+        self.assertGreater(result["accuracy_all_cases"], .95)
+        self.assertEqual(result["incomplete"], ["V061"])
+        self.assertFalse(result["tool_call_target_met"])
+        row["completed"] = "false"
+        with self.assertRaises(ValueError): module.evaluate(self.corpus, self.trace)
+
     def test_equivalent_names_defaults_but_not_types(self):
         left = [{"name": "self_tank_move", "arguments": {"direction": "forward", "duration_ms": 1}}]
         right = [{"name": "self.tank.move", "arguments": {"direction": "forward", "duration_ms": 1, "speed_percent": 100}}]

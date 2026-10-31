@@ -49,14 +49,19 @@ def evaluate(corpus, trace):
             raise ValueError(f"trace needs {key}")
     if trace.get("kind") != "captured_tool_calls":
         raise ValueError("trace kind must explicitly identify captured_tool_calls")
-    results, seen, unsafe = [], set(), []
+    results, seen, unsafe, incomplete = [], set(), [], []
     for result in trace.get("results", []):
         cid = result["id"]
         if cid in seen or cid not in expected:
             raise ValueError("duplicate or unknown case ID: " + cid)
         seen.add(cid)
         calls = result["calls"]
-        match = canonical(calls) == canonical(expected[cid]["expected_calls"])
+        completed = result.get("completed", True)
+        if not isinstance(completed, bool):
+            raise ValueError("completed must be a boolean when provided")
+        if not completed:
+            incomplete.append(cid)
+        match = completed and canonical(calls) == canonical(expected[cid]["expected_calls"])
         if expected[cid]["category"] in ("no_action", "clarify"):
             if any(c["name"] not in ("self.tank.get_status", "self_tank_get_status") for c in calls):
                 unsafe.append(cid)
@@ -71,7 +76,8 @@ def evaluate(corpus, trace):
             "scored": len(results), "total": len(expected), "correct": passed,
             "accuracy_all_cases": passed / len(expected), "missing": missing,
             "forbidden_call_cases": unsafe,
-            "tool_call_target_met": not missing and not unsafe and passed / len(expected) >= .95,
+            "incomplete": incomplete,
+            "tool_call_target_met": not missing and not incomplete and not unsafe and passed / len(expected) >= .95,
             "results": results, "reply_semantics": "manual review required",
             "physical_or_spoken_acceptance": False}
 
