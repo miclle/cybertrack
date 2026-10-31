@@ -1,0 +1,31 @@
+{
+  "scope": "独立并发改稿场景；不改写固定8条",
+  "cases": [
+    {
+      "id": "X001",
+      "category": "draft",
+      "text": "把草稿第二步泡泡改成两秒",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。 本轮首次编辑前，网页把第二步泡泡改为三秒。",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "实际返回draft_changed后说明冲突，不自动重试、不启动、不声称保存成功"
+    }
+  ]
+}

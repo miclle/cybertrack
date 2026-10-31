@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def check(executable):
     corpus = json.loads((ROOT/"docs/validation/voice-cases.json").read_bytes())
+    assert len(corpus["cases"]) == 80 and {c["id"] for c in corpus["cases"]} == {f"V{i:03d}" for i in range(1,81)}
     for case in corpus["cases"]:
         profile = firmware_profile(case["context"])
         calls = [dict(call, elapsed_ms=(index+1)*500, rpc_id=index+1)
@@ -28,6 +29,37 @@ def check(executable):
             assert not any(final["logical_outputs"].values()) and final["starts_this_boot"] == 1
         if not case["expected_calls"]:
             assert final["starts_this_boot"] == 0
+
+    compose = json.loads((ROOT/"docs/validation/compose-cases.json").read_bytes())
+    assert len(compose["cases"]) == 8 and {c["id"] for c in compose["cases"]} == {f"C{i:03d}" for i in range(1,9)}
+    for case in compose["cases"]:
+        calls = [dict(call, elapsed_ms=(index+1)*500, rpc_id=index+1)
+                 for index, call in enumerate(case["expected_calls"])]
+        rows = firmware_replay(executable, firmware_profile(case["context"]),
+                               [*calls, dict(inspect_ms=6000)])
+        assert all("result" in wire for wire in rows[:-1])
+        final = rows[-1]
+        draft = final["show_draft"]
+        expected_revision = {"C001":1,"C002":8,"C003":8,"C004":0}.get(case["id"],7)
+        assert draft["revision"] == expected_revision, (case["id"], draft)
+        assert final["starts_this_boot"] == 0 and not any(final["logical_outputs"].values())
+        if case["id"] == "C002":
+            assert draft["steps"][0]["move_ms"] == 880 and draft["steps"][1]["bubbles_ms"] == 2000
+        if case["id"] == "C003":
+            assert len(draft["steps"]) == 1 and draft["steps"][0]["bubbles_ms"] == 1000
+    edit = next(case for case in compose["cases"] if case["id"] == "C002")
+    calls = [dict(call, elapsed_ms=(index+1)*500, rpc_id=index+1)
+             for index, call in enumerate(edit["expected_calls"])]
+    no_read = firmware_replay(executable, "corpus_draft7", [
+        dict(edit["expected_calls"][1], elapsed_ms=500, rpc_id=1)])
+    assert json.loads(no_read[0]["result"]["content"][0]["text"])["result"] == "draft_changed"
+    assert no_read[-1]["show_draft"]["revision"] == 7
+    rows = firmware_replay(executable, "corpus_draft7_conflict", [*calls, dict(inspect_ms=60000)])
+    rejected = json.loads(rows[1]["result"]["content"][0]["text"])
+    assert rejected["result"] == "draft_changed"
+    assert rows[-1]["show_draft"]["revision"] == 8
+    assert rows[-1]["show_draft"]["steps"][1]["bubbles_ms"] == 3000
+    assert rows[-1]["starts_this_boot"] == 0
 
     invalid = [
         dict(name="self.tank.bubbles", arguments={"duration_ms":60000}),
@@ -51,7 +83,7 @@ def check(executable):
         dict(name="self.tank.stop",arguments={"unexpected":True},elapsed_ms=0,rpc_id=1)])
     assert "error" in wire and final["move_speed_percent"] == 70
     return dict(scope="Synthetic protocol requests, virtual timing and simulated range; no model or board IO",
-                expected_traces=80, invalid_requests=len(invalid), duplicate_id_did_not_restart=True,
+                expected_traces=80, compose_traces=8, concurrent_edit_rejected=True, invalid_requests=len(invalid), duplicate_id_did_not_restart=True,
                 invalid_stop_did_not_change_motion=True)
 
 

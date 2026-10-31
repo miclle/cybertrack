@@ -42,12 +42,19 @@ public:
 };
 #include "host_dispatch.inc"
 
+uint32_t host_web_owner = 0;
+uint64_t last_web_heartbeat = 1000;
+
 static bool Advance(unsigned elapsed) {
     const uint64_t target = 1000 + elapsed;
     if (target < clock_ms || elapsed > 300000) return false;
     while (clock_ms < target) {
         clock_ms = std::min<uint64_t>(clock_ms+5,target);
         TickLocked(clock_ms);
+        if (host_web_owner && clock_ms-last_web_heartbeat>=200) {
+            if (!sessions.Heartbeat(clock_ms,host_web_owner)) return false;
+            last_web_heartbeat=clock_ms;
+        }
     }
     return true;
 }
@@ -70,6 +77,19 @@ int main(int argc, char** argv) {
         int ticket=sessions.VoiceClaim(clock_ms,INT_MIN,AudioActionGuard::PlanMode);
         Reply("sequence",ticket,0,nullptr,0,0,nullptr,&plan);
         if (!sessions.plan_active || !guard.Moving()) return 2;
+    } else if (profile == "corpus_draft7" || profile == "corpus_draft7_conflict") {
+        ShowDraft::Command edit;
+        edit.plan.count=2;
+        edit.plan.steps[0]={"left",880,0,0,0,100};
+        edit.plan.steps[1]={"none",0,0,1000,0,100};
+        for (int revision=0;revision<7;++revision) {
+            Reply("get_status");
+            edit.revision=revision;
+            int ticket=sessions.VoiceClaim(clock_ms,INT_MIN+revision,AudioActionGuard::PlanMode);
+            if (!ticket) return 2;
+            Reply("show_edit",ticket,0,nullptr,0,0,nullptr,nullptr,100,&edit);
+            if (sessions.draft.CurrentRevision()!=static_cast<unsigned>(revision+1)) return 2;
+        }
     } else if (profile != "corpus_idle") return 2;
 
     McpServer server;
@@ -79,6 +99,7 @@ int main(int argc, char** argv) {
     std::unique_ptr<cJSON,decltype(&cJSON_Delete)> calls(cJSON_ParseWithOpts(input.c_str(),nullptr,true),cJSON_Delete);
     if (!cJSON_IsArray(calls.get())) return 2;
     int id=1;
+    bool conflict_applied=false;
     cJSON* call;
     cJSON_ArrayForEach(call,calls.get()) {
         const auto* inspect=cJSON_GetObjectItemCaseSensitive(call,"inspect_ms");
@@ -92,6 +113,19 @@ int main(int argc, char** argv) {
         if (!ShowInteger(elapsed,0,300000) || !Advance(elapsed->valueint) || !cJSON_IsString(name)) return 2;
         std::string tool=name->valuestring;
         if (tool.compare(0,10,"self_tank_")==0) tool.replace(0,10,"self.tank.");
+        if (profile=="corpus_draft7_conflict" && !conflict_applied && tool=="self.tank.compose") {
+            host_web_owner=sessions.Acquire(clock_ms);
+            if (!host_web_owner || !sessions.Heartbeat(clock_ms,host_web_owner)) return 2;
+            last_web_heartbeat=clock_ms;
+            ShowDraft::Command edit;
+            edit.edit=ShowDraft::ReplaceStep;
+            edit.revision=sessions.draft.CurrentRevision();
+            edit.step=2;
+            edit.plan.count=1;
+            edit.plan.steps[0]={"none",0,0,3000,0,100};
+            if (std::strcmp(sessions.WebDraft(clock_ms,host_web_owner,1,sessions.window,edit),"draft_saved")) return 2;
+            conflict_applied=true;
+        }
         const auto* rpc=cJSON_GetObjectItemCaseSensitive(call,"rpc_id");
         if (rpc && !ShowInteger(rpc,INT_MIN,INT_MAX)) return 2;
         server.reply.clear();
