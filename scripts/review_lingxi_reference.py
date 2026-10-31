@@ -10,11 +10,11 @@ ROOT = Path(__file__).resolve().parents[1]
 SCORES = "docs/validation/evidence/role-5991/full-suite-scores.json"
 SUITES = ("voice", "compose")
 CANDIDATE_SCORES = "docs/validation/evidence/ct57-full/full-suite-scores.json"
-FIRMWARE_HOST_SCORES = "docs/validation/evidence/ct61-firmware-host/voice-score.json"
+FIRMWARE_HOST_SCORES = "docs/validation/evidence/ct61-firmware-host/full-suite-scores.json"
 EVALUATIONS = (
     ("", SCORES, SUITES, "scores"),
     ("ct57/", CANDIDATE_SCORES, SUITES, "candidate_scores"),
-    ("firmware-host/", FIRMWARE_HOST_SCORES, ("voice",), "firmware_host_scores"),
+    ("firmware-host/", FIRMWARE_HOST_SCORES, SUITES, "firmware_host_scores"),
 )
 
 
@@ -27,7 +27,7 @@ def score_replay(suite, corpus, trace, recorded):
                 "failed_stop_cases", "forbidden_call_cases", "missing", "incomplete", "tool_call_target_met"):
         if report[key] != recorded[key]:
             raise ValueError(f"{suite}: recomputed {key} differs from recorded score")
-    return {**{key: report[key] for key in ("scored", "correct", "mismatch_ids", "tool_call_target_met", "role_sha256")},
+    return {**{key: report[key] for key in ("scored", "correct", "mismatch_ids", "incomplete", "tool_call_target_met", "role_sha256")},
             "fixture_version": trace["fixture_version"]}
 
 

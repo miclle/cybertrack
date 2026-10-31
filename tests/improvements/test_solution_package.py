@@ -25,7 +25,7 @@ class SolutionPackageTest(unittest.TestCase):
         data = package.build_archive(ROOT, paths, "test-revision", False)
         self.assertEqual(data, package.build_archive(ROOT, paths, "test-revision", False))
         with tempfile.TemporaryDirectory() as folder, zipfile.ZipFile(io.BytesIO(data)) as archive:
-            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json"})
+            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json"})
             manifest = json.loads(archive.read("MANIFEST.json"))
             self.assertEqual(manifest["files"]["START_HERE.md"]["sha256"], hashlib.sha256(archive.read("START_HERE.md")).hexdigest())
             archive.extractall(folder)
@@ -38,8 +38,15 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual(result["candidate_scores"]["compose"]["scored"], 8)
             self.assertEqual(result["firmware_host_scores"]["voice"]["scored"], 80)
             self.assertEqual(result["firmware_host_scores"]["voice"]["input_mode"], "raw_text_diagnostic")
+            compose = result["firmware_host_scores"]["compose"]
+            self.assertEqual((compose["scored"], compose["correct"]), (8, 6))
+            self.assertEqual(compose["incomplete"], ["C005"])
+            self.assertEqual(compose["mismatch_ids"], ["C005", "C008"])
+            self.assertFalse(compose["tool_call_target_met"])
+            captured = json.loads(archive.read("replay/firmware-host/compose.json"))
+            self.assertFalse(next(row for row in captured["results"] if row["id"] == "C005")["completed"])
             self.assertNotIn("device_id", manifest["firmware"])
-            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json"):
+            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json"):
                 replay = root/name
                 original = replay.read_bytes()
                 replay.write_bytes(original+b" ")
