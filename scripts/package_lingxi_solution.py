@@ -118,7 +118,8 @@ def main():
     current = json.loads((ROOT / "firmware/current.json").read_bytes())
     sources = ["tools/lingxi-solution/files.json", "scripts/package_lingxi_solution.py", "scripts/check_firmware_current.py",
                "firmware/esp32-audio/apply_overlay.py", "firmware/" + current["last_recorded_deployment"],
-               *(str(Path(SCORES).with_name(f"full-{suite}.json.gz")) for suite in SUITES)]
+               *(str(Path(score_path).with_name(f"full-{suite}.json.gz"))
+                 for _, score_path, suites, _ in EVALUATIONS for suite in suites)]
     sources.extend(["scripts/package_family_rehearsal.py", "tools/family-study/rehearsal.js", "firmware/esp32-audio/web/index.html"])
     dirty = bool(subprocess.check_output(["git", "status", "--porcelain", "--", *paths, *sources], cwd=ROOT, text=True))
     payload = build_archive(ROOT, paths, head, dirty)
