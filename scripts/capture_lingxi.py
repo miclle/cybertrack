@@ -356,8 +356,8 @@ async def run(args):
     if firmware_host:
         if not (getattr(args,'raw_text',False) or getattr(args,'synthetic_speech',False)):
             raise ValueError('full firmware host requires raw text or synthetic speech')
-        if getattr(args,'argument_validator',None):
-            raise ValueError('full firmware host includes the actual parameter gate')
+        if getattr(args,'argument_validator',None) or getattr(args,'draft_read_facts_fixture',False):
+            raise ValueError('full firmware host includes its own validation and status facts')
         version='firmware_host'
         for case in cases:
             case.update(host_binary=firmware_host.resolve(),initial_profile=firmware_profile(case['context']))

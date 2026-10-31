@@ -1,4 +1,6 @@
 import asyncio
+import tempfile
+from argparse import Namespace
 import json
 from pathlib import Path
 import sys
@@ -6,7 +8,7 @@ import unittest
 from unittest.mock import AsyncMock, MagicMock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
-from capture_lingxi import capture_case, firmware_profile
+from capture_lingxi import capture_case, firmware_profile, run
 
 
 class FirmwareHostCaptureTests(unittest.TestCase):
@@ -16,6 +18,21 @@ class FirmwareHostCaptureTests(unittest.TestCase):
                          {"corpus_idle", "corpus_forward70", "corpus_sequence"})
         with self.assertRaises(ValueError):
             firmware_profile("网页长按正在运行")
+
+    def test_full_host_rejects_fixture_transformations(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            connection = root/"connection.json"
+            connection.write_text("{}")
+            connection.chmod(0o600)
+            tools = root/"tools.json"
+            tools.write_text(json.dumps({"tools":[{"name":f"self.tank.tool{i}"} for i in range(12)]}))
+            args = Namespace(connection=connection, tools=tools, output=root/"capture.json",
+                             corpus=Path(__file__).resolve().parents[2]/"docs/validation/voice-cases.json",
+                             ids="V001", raw_text=True, firmware_host=Path("/inert/host"),
+                             draft_read_facts_fixture=True)
+            with self.assertRaisesRegex(ValueError,"own validation and status facts"):
+                asyncio.run(run(args))
 
     def test_actual_wire_envelope_and_rpc_id_are_preserved(self):
         for rejected in (False, True):
