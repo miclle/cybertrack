@@ -104,6 +104,7 @@ python3 scripts/review_lingxi_reference.py
 - [ct66 即时停止回执](docs/validation/stop-dispatch.md)附八组实际 MCP 调度回放、回执分配失败和十三组软件检查摘要。停止校验后同步完成，不留二次回调；公开工具及角色不变。包内只核对记录完整性，重跑控制与分配失败测试需要完整 checkout，不是第八组模型成绩，也没有部署。
 - [状态话术限定](docs/validation/stop-role-qualifier.md)的十四次定向对照未采纳：两组严格匹配均 6/7，停止静默均 0/3，平台原角色已恢复。它不是第八组完整模型评分。[灵矽联调反馈](docs/validation/platform-tts-feedback.md)另提供过程文字进入 TTS 与含糊改稿的事件、复核步骤和协作问题，尚未代发。
 - [ct67 相对改稿门禁](docs/validation/relative-draft-duration.md)附十三组原生回放、分类器来源和二十条定向合成语音审阅。真实 STT／终态均 20/20，严格调用 14/20，六条多查状态，在线实际澄清拒绝为零。它不替代旧 `spoken_stt_review` 或增加第八组完整文本评分；本包只核对这些材料的完整性，完整控制重放需 checkout 与对应主机。
+- [ct68 含糊动作门禁](docs/validation/vague-action-admission.md)附二十六组原生对照和二十条定向真实 STT 审阅：严格调用 16/20、终态 20/20，三次猜测执行被拒绝。八条含糊输入零启动不能抵消模型错误或多余查询；本包仅核对材料完整性，不增加第八组固定成绩。原始压缩轨迹及完整控制重放需要 checkout，最近部署仍为 ct45。
 - [编排说明对照](docs/validation/compose-routing.md)保留了未采纳的诊断：工具匹配增多，但一次含糊请求擅自缩短草稿。包内含摘要与两份定义，原始轨迹和该诊断的重算需要完整 checkout。
 - 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
 - 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。

@@ -22,6 +22,8 @@ ct68 针对历史 V079“动一下那个东西”被模型猜成前进，增加�
 
 当前二十六组通过；冻结 ct67 主机在同一矩阵中十八组不满足新增约束。ASan／UBSan 分类器和实际 Reply 测试另核对语音拒绝后的可信网页、全停及新输入恢复。[当前回放](evidence/ct68-vague-action/native-replay.json) · [旧版对照](evidence/ct68-vague-action/native-baseline.json)
 
+另将固定八十条语义和八条编排的原话作为模拟识别输入，配合预期 RPC 经过实际 MCP，八十八条均兼容；统一主机检查入口已加入这一步。它用于检查门禁是否误拒既有预期路径，不是实际模型或 ASR 成绩。[兼容记录](evidence/ct68-vague-action/recognized-compatibility.json)
+
 ## 二十条真实 STT 会话
 
 预先声明十条输入、两轮各采一次，发送合成普通话 Opus，不发送原话文本、不接麦克风／扬声器／真实设备。实际收到的 STT 开启主机输入代际，模型读取实际 MCP 回执。
