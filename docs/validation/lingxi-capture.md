@@ -116,3 +116,7 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 ### 对照 RPC 错误与拒绝结果
 
 仅为隔离实验时，可以在 `--speed-host` 基础上增加 `--admission-result-fixture`，将同一个主机拒绝包在 `result=rejected` 的工具结果里返回，包含原错误 `rejection_reason` 和 `physical_feedback=false`。轨迹另存原始错误，标记这是夹具转换。默认路径仍使用实际固件的 RPC 错误。两组使用相同的工具描述、角色与语音，结果不作为板上接口已修改的证据。
+
+### 从空草稿验证保存回执
+
+`--draft-host` 默认保留两步、版本 7 的网页草稿。新建场景可以同时指定 `--draft-profile empty_web_draft`，从无草稿、版本 0 开始。查询不会创建草稿，只有实际 `compose` 成功回执才保存版本 1。运行前用相同候选的 `run_mcp_tests.py` 构建主机回执程序，并固定其二进制。轨迹的 `initial_profile` 与 `host_replay_sha256` 标识所测初态和实现。
