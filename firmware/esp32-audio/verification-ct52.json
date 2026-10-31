@@ -1,0 +1,18 @@
+{
+  "version": "2.0.3-ct52",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Browser guidance for unconfirmed stops and reconnects. No board or actuator test.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2700592,
+    "sha256": "2f0a56450e70576994f646fdd4df1d4587c6baac18b0b617f675847ba7899fe4"
+  },
+  "embedded_html_sha256": "a072f422e506c74c55aa7ddc6aab16b4058fb6db69e90112b33b1f3cac286613",
+  "checks": [
+    "Application binary contains the complete repository HTML exactly once",
+    "Page-script test: dropped hold-stop response sends web release, shows BOOT guidance through pairing and a stale response, then displays continuing voice bubbles without replay",
+    "Real Chromium with intercepted HTTP: warning visible at 320x568, 390x844 and 1280x800; releasing the page with a dropped release packet then reconnecting displays the active sequence with no new action or stop RPC",
+    "All 8 unified local checks passed using the ct52 prepared source, including stop-v1 replay"
+  ]
+}

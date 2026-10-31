@@ -604,3 +604,26 @@ for(const trigger of ['stop','offline','windowblur']){
  h.ctx.render(h.status({capabilities:{}}));assert(h.ids['show-save'].disabled);assert(h.ids['show-confirm'].disabled);
 }
 console.log('PASS: theatre templates have no outputs; exact revision preview, single-step edit/remove, explicit one-shot confirmation, external edits/expiry/malformed drafts, stop/disconnect/blur and stale receipt races never replay');
+
+// Losing a hold-stop reply releases only web ownership. Keep local-stop guidance
+// while pairing succeeds and until a fresh actionable state arrives.
+{
+ const h=harness();await h.connect();await h.hold();
+ const end=h.ctx.endHold();h.take('/api/action').reject(new Error('offline'));await end;
+ assert(h.pending.some(c=>c.path==='/api/release'));assert(!h.sent.some(c=>c.path==='/api/stop'));
+ assert.match(h.ids.message.textContent,/无法确认.*BOOT/);
+ const reconnect=h.ctx.connect();h.respond(h.take('/api/pair'),{result:'ok',token:'new'});await flush();
+ assert.match(h.ids.message.textContent,/BOOT/);
+ h.advance(1600);
+ h.respond(h.take('/api/state'),h.status(9));await reconnect;
+ assert.match(h.ids.message.textContent,/BOOT/);assert(h.buttons[0].disabled);
+ const fresh=h.ctx.poll();
+ h.respond(h.take('/api/state'),h.status(10,{state:'ACTIVE',bubbles_source:'voice',bubbles_remaining_ms:4800}));
+ await fresh;assert.match(h.ids.message.textContent,/正在.*泡泡/);
+ assert(!h.sent.slice(-2).some(c=>c.path==='/api/action'));
+}
+{
+ const h=harness();await h.connect();h.events.offline();
+ assert(!h.ids.message.textContent.includes('BOOT'));
+}
+console.log('PASS: unconfirmed hold-stop survives pairing until a fresh state; concurrent voice output stays visible');
