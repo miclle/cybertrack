@@ -88,8 +88,17 @@ int main() {
         assert(is(s.guard.Water(0,s.VoiceClaim(0,1,G::WaterOnly),100),"accepted"));
         s.Heartbeat(0,owner);assert(is(s.WebConfirm(0,owner,2,s.window,rev),"not_ready_or_busy"));assert(!s.draft.active);
     }
+    { // A late or disconnected reader cannot replace the current draft.
+        auto s=ready();auto c=example();s.ObserveVoiceDraft(0);
+        assert(is(s.VoiceDraft(30000,s.VoiceClaim(30000,1,G::PlanMode),c),"draft_changed"));
+        s.ObserveVoiceDraft(30001);s.VoiceLink(30001,false);s.VoiceLink(30002,true);
+        assert(is(s.VoiceDraft(30002,s.VoiceClaim(30002,2,G::PlanMode),c),"draft_changed"));
+        assert(!s.draft.active && !s.guard.Starts());
+    }
     { // Voice creates a proposal; there is no voice confirmation path.
         auto s=ready();auto c=example();int ticket=s.VoiceClaim(0,1,G::PlanMode);
+        assert(is(s.VoiceDraft(0,ticket,c),"draft_changed"));
+        s.ObserveVoiceDraft(0); ticket=s.VoiceClaim(0,10,G::PlanMode);
         assert(is(s.VoiceDraft(0,ticket,c),"draft_saved"));assert(s.guard.Starts()==0);
         assert(!is(s.VoiceDraft(0,ticket,c),"draft_saved"));
         s.VoiceLink(1,false);assert(!s.draft.active);
