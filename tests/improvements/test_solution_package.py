@@ -117,6 +117,12 @@ class SolutionPackageTest(unittest.TestCase):
                 self.assertEqual((group["total"], group["completed"], group["strict_matches"]), (36, 36, 29))
                 self.assertEqual(group["stops_without_tts_text"], 0)
             self.assertTrue(json.loads(archive.read("docs/validation/evidence/intent-routing-role/restored-readback.json"))["savedAndReopened"])
+            inputs = json.loads(archive.read("docs/validation/evidence/capture-recognized-input/summary.json"))
+            self.assertEqual((inputs["total"], inputs["completed"], inputs["strict_tool_matches"], inputs["state_matches"]), (24, 24, 20, 24))
+            self.assertEqual(inputs["clarification_rejections"], 2)
+            legacy_input = json.loads(archive.read("docs/validation/evidence/capture-recognized-input/legacy-review.json"))
+            self.assertEqual(legacy_input["host_input_mode"], "simulated_initial_input")
+            self.assertEqual(legacy_input["strict_tool_matches"], 9)
             self.assertNotIn("device_id", manifest["firmware"])
             for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json"):
                 replay = root/name
