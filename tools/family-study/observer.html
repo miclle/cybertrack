@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; form-action 'none'; base-uri 'none'; connect-src 'none'">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>亲子体验观察单 · CyberTrack</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f6f6ef;color:#202b25;font:16px/1.6 system-ui,sans-serif}
+main{max-width:48rem;margin:auto;padding:24px 16px 60px}header{border-top:5px solid #446044;padding-top:14px}h1{margin:4px 0;font-size:2rem}
+small,aside{color:#4e6052}fieldset{background:#fff;border:1px solid #c5cdc0;border-radius:10px;margin:26px 0 0;padding:12px 16px 18px}
+legend{font-weight:700;color:#314d37;background:#f6f6ef;padding:0 6px}label{display:block;font-weight:550;margin-top:10px}
+input,select,textarea,button{font:inherit}input:not([type=checkbox]),select,textarea{width:100%;padding:7px 9px;border:1px solid #839282;border-radius:5px;color:inherit;background:white}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(190px,100%),1fr));gap:0 14px}
+button{min-height:44px;padding:6px 12px;margin:8px 4px 4px 0;border:1px solid #647763;border-radius:5px;background:#edf3e7;color:inherit;cursor:pointer}
+button:disabled{opacity:.5;cursor:default}.save{background:#314e39;color:white}.choices{display:flex;flex-wrap:wrap;gap:4px 16px}
+.choices label{font-weight:400}textarea{min-height:60px}p{margin:8px 0}output{font-variant-numeric:tabular-nums}
+</style></head><body><main>
+<header><small>CyberTrack / 家庭试用</small><h1>亲子体验观察单</h1><p>每个家庭填一张。先观察家长怎样完成第一次操作，再留三分钟让孩子自由选择。结束后下载记录。</p>
+<aside>页面离线运行，刷新会清空未下载内容。只记家庭编号和匿名观察，不填姓名、联系方式、网络名称或设备地址。</aside></header>
+<form id="sheet">
+<fieldset><legend>01　开始之前</legend><div class="grid">
+<label>记录来源<select name="evidence_kind" required><option value="">请选择</option><option value="family_observation">现场家庭观察</option><option value="dry_run">主持人演练</option></select></label>
+<label>家庭编号<select name="anonymous_id" required><option value="">请选择</option><option>F01</option><option>F02</option><option>F03</option><option>F04</option><option>F05</option></select></label>
+<label>场次代号<input name="cohort_id" required maxlength="48" placeholder="如 周六上午"></label>
+<label>载体<select name="prototype_or_device" required><option value="">请选择</option><option value="prototype">无动作原型</option><option value="device">经现场核验的实机</option></select></label>
+<label>实际固件或原型版本<input name="firmware" required maxlength="48"></label>
+<label>工况编号<input name="condition_id" required maxlength="48" placeholder="同版本、网络与任务共用编号"></label>
+<label>家长知情并全程陪同<select name="parent_present" data-bool></select></label>
+<label>第一次使用这个界面<select name="first_use" data-bool></select></label></div></fieldset>
+<fieldset><legend>02　第一次使用</legend><p>网络准备另计。家长看到开机指引时开始，上手任务结束时停表。若超时、放弃或需要帮助，仍记录实际过程。</p>
+<button type="button" id="start">开始计时</button><button type="button" id="end" disabled>结束计时</button> <output id="clock" aria-label="计时器">未开始</output>
+<div class="grid"><label>网络准备（秒）<input type="number" min="0" step="any" name="network_setup_seconds"></label>
+<label>上手经过时间（秒，可手填）<input type="number" min="0" step="any" name="first_use_seconds"></label>
+<label>完成指定动作<select name="first_action_completed" data-bool></select></label>
+<label>家长独立全停<select name="independent_stop" data-bool></select></label>
+<label>主持人操作提示次数<input name="help_count" type="number" min="0" step="1" placeholder="观察过且没提示填 0"></label></div></fieldset>
+<fieldset><legend>03　按任务编排</legend><p>让家庭选“登场”，把第二步泡泡改为两秒并预览。记录他们怎样判断机器人何时才会开始。</p><div class="grid">
+<label>理解选模板不会启动<select name="template_start_understood" data-bool></select></label>
+<label>独立应用并保存修改<select name="draft_edit_independent" data-bool></select></label>
+<label>核对过草稿版本<select name="preview_revision_checked" data-bool></select></label></div></fieldset>
+<fieldset><legend>04　三分钟自由选择</legend><p>从这里开始不指定要玩什么。上一步要求的改稿不计入。记录家庭主动又玩了一次的玩法，或主动改过的剧本。</p>
+<label>完整观察自由选择环节<select name="free_play_observed" data-bool></select></label>
+<div id="activity"><p>主动重复的同一玩法（可多选）</p><div id="repeat" class="choices"></div>
+<label>重复自编剧本的编号（选填，多个用空格分隔）<input name="custom" maxlength="200" pattern="[A-Za-z0-9_ \-]*" placeholder="同一份剧本共用编号，如 B01"></label>
+<p>主动修改的剧场（可多选）</p><div id="modify" class="choices"></div></div></fieldset>
+<fieldset><legend>05　家长反馈</legend><label>愿意在哪种场合使用<textarea name="parent_use_context"></textarea></label>
+<label>主要顾虑<textarea name="parent_concerns"></textarea></label><label>愿意承担哪些装配或维护工作<textarea name="maintenance_acceptance"></textarea></label>
+<label>中途退出、卡住或需要帮助的位置<textarea name="observer_note"></textarea></label></fieldset>
+<p>没有观察到的项目留空。选择“完整观察”后，未勾选的自由玩法按零次记录。</p>
+<button class="save" type="submit">下载本家庭记录</button> <output id="notice" role="status"></output></form>
+</main><script>
+const form=document.querySelector('form'), field=name=>form.elements.namedItem(name);
+const text=name=>field(name).value.trim(), bool=name=>text(name)===''?null:text(name)==='yes';
+const number=name=>text(name)===''?null:Number(text(name));
+for(const el of form.querySelectorAll('[data-bool]')) {
+  for(const [value,label] of [['','未观察'],['yes','是'],['no','否']]) el.add(new Option(label,value));
+}
+const shows=['登场','庆祝','谢幕'];
+for(const [id,items] of [['repeat',['左转一秒','吹泡泡一秒',...shows]],['modify',[...shows,'自编剧场']]]) {
+  for(const value of items) {
+    const label=document.createElement('label'), input=document.createElement('input');
+    input.type='checkbox';input.name=id;input.value=value;label.append(input,value);
+    document.getElementById(id).append(label);
+  }
+}
+function updateChoices(){
+  const on=bool('free_play_observed')===true;
+  for(const input of document.querySelectorAll('#activity input')) input.disabled=!on;
+}
+field('free_play_observed').onchange=updateChoices;updateChoices();
+const clock=document.getElementById('clock'), start=document.getElementById('start'), end=document.getElementById('end');
+let since=null,interval;
+function elapsed(){return (performance.now()-since)/1000;}
+start.onclick=()=>{since=performance.now();start.disabled=true;end.disabled=false;field('first_use_seconds').disabled=true;
+  clock.textContent='计时中';interval=setInterval(()=>clock.textContent=elapsed().toFixed(1)+' 秒',250);};
+end.onclick=()=>{field('first_use_seconds').value=(Math.ceil(elapsed()*1000)/1000).toString();
+  clearInterval(interval);since=null;end.disabled=true;field('first_use_seconds').disabled=false;clock.textContent='已停止';};
+const selected=name=>[...form.querySelectorAll('input[name="'+name+'"]:checked')].map(el=>el.value);
+form.onsubmit=event=>{
+  event.preventDefault();const notice=document.getElementById('notice');
+  if(since!==null){notice.textContent='请先结束计时，再下载。';return;}
+  const row={};
+  for(const name of ['cohort_id','condition_id','firmware','anonymous_id','prototype_or_device','evidence_kind']) {
+    row[name]=text(name);if(!row[name]){field(name).focus();notice.textContent='请填写场次、工况和版本。';return;}
+  }
+  for(const el of form.querySelectorAll('[data-bool]')) row[el.name]=bool(el.name);
+  for(const name of ['first_use_seconds','help_count','network_setup_seconds']) row[name]=number(name);
+  const observed=row.free_play_observed===true;
+  const custom=observed && text('custom')?text('custom').split(/\s+/):[];
+  if(custom.some(c=>!/^[A-Za-z0-9_-]{1,24}$/.test(c))){notice.textContent='剧本编号为 1–24 位字母、数字、下划线或短横线。';return;}
+  row.repeat_plays=observed?[...selected('repeat'),...new Set(custom.map(s=>'自编/'+s))]:null;
+  row.modified_shows=observed?selected('modify'):null;
+  for(const el of form.querySelectorAll('textarea')) row[el.name]=text(el.name)||null;
+  const url=URL.createObjectURL(new Blob([JSON.stringify({family_sessions:[row]},null,2)+'\n'],{type:'application/json'}));
+  const link=document.createElement('a');link.href=url;link.download='CyberTrack-'+row.anonymous_id+'-'+row.prototype_or_device+'.json';link.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);notice.textContent='下载已请求。请核对文件后再关闭本页。';
+};
+</script></body></html>
