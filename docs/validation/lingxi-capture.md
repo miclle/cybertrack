@@ -136,3 +136,9 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 先运行 `run_mcp_tests.py --source <prepared源码>`，再把生成的 `build/audio-host/mcp_validation_replay` 复制到固定位置，在采集命令传入 `--argument-validator <固定程序>`。它编译实际 MCP 分发器生成的参数校验代码，链接无动作 I/O 的 stop 桩。已发现的机器人工具参数才交给它检查。
 
 每次调用的检查结果写入 `argument_checks`，程序摘要写入轨迹。无效参数返回与固件相同的 RPC 错误，并跳过模拟接受和主机动作回执。通过参数校验后仍按所选夹具应答，不能将“参数有效”当成控制器已经接受或执行。历史未启用参数门的捕获保持原语义。
+
+### 完整 MCP 主机的输入边界
+
+`--firmware-host` 运行实际分发和回调，不等于识别链路也经过设备。现有文本模式将主机初始化为 `captured host input`，轨迹标记 `simulated_initial_input`；该占位文本没有形成各条原话的语义标记。`--synthetic-speech` 则按平台实际 STT 事件记录 `host_calls` 输入并使用 `--await-stt` 重放，标记 `platform_stt_events`。两者不可混作相同控制覆盖；文本模式中的合法误改不能直接证明 STT 门禁失效。
+
+[角色分流对照](intent-routing-role.md)按前一种方式保留原始 72 次结果，没有回填原话或改写捕获以提升成绩。后续增加模拟原话模式时须使用独立模式标识与新轨迹，不追认旧会话为已通过完整语音路径。
