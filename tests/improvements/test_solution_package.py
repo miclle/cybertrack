@@ -96,6 +96,16 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual(qualifier["result"]["candidate_silent_stops"], 0)
             self.assertTrue(qualifier["restored"]["saved_platform_role"])
             self.assertEqual(qualifier["result"]["baseline_C008_revision"], 8)
+            relative = json.loads(archive.read("docs/validation/evidence/ct67-relative-draft/platform-review.json"))
+            self.assertEqual((relative["total"], relative["completed"], relative["state_matches"]), (20, 20, 20))
+            self.assertEqual(relative["tool_matches"], 14)
+            self.assertEqual(relative["clarification_rejections"], 0)
+            self.assertEqual(relative["relative_states_preserved"], 6)
+            self.assertNotEqual(relative["capture_host_sha256"], relative["host_sha256"])
+            native = json.loads(archive.read("docs/validation/evidence/ct67-relative-draft/native-replay.json"))
+            self.assertTrue(native["passed"])
+            self.assertEqual(native["scenarios"], 13)
+            self.assertFalse(json.loads(archive.read("firmware/esp32-audio/verification-ct67.json"))["flashed"])
             self.assertNotIn("device_id", manifest["firmware"])
             for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json"):
                 replay = root/name
