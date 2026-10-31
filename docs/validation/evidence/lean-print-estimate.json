@@ -1,0 +1,71 @@
+{
+  "project": "hardware/model/lean-print/CyberTrack-Lean-6plates.3mf",
+  "sha256": "35fc14b599ba52fc3045423058b6e7941880236bde611bfc5d7eaf1f34dc925a",
+  "printer": "Bambu Lab P2S 0.4 nozzle",
+  "filament": [
+    "Bambu PLA Basic @BBL P2S"
+  ],
+  "plates": [
+    {
+      "plate": 1,
+      "parts": 1,
+      "source": "project_cache",
+      "slicer": "BambuStudio 02.08.04.57",
+      "estimated_g": 164.39,
+      "estimated_s": 14353,
+      "diagnostics": []
+    },
+    {
+      "plate": 2,
+      "parts": 10,
+      "source": "project_cache",
+      "slicer": "BambuStudio 02.08.04.57",
+      "estimated_g": 148.83,
+      "estimated_s": 15079,
+      "diagnostics": []
+    },
+    {
+      "plate": 3,
+      "parts": 11,
+      "source": "fresh_slice",
+      "slicer": "BambuStudio 02.08.04.57",
+      "estimated_g": 59.52,
+      "estimated_s": 5702,
+      "diagnostics": [
+        "ZFiller: encounter idx from clip: 126",
+        "Invalid T command (T65535)."
+      ]
+    },
+    {
+      "plate": 4,
+      "parts": 2,
+      "source": "project_cache",
+      "slicer": "BambuStudio 02.08.04.57",
+      "estimated_g": 154.04,
+      "estimated_s": 12232,
+      "diagnostics": []
+    },
+    {
+      "plate": 5,
+      "parts": 1,
+      "source": "project_cache",
+      "slicer": "BambuStudio 02.08.04.57",
+      "estimated_g": 154.22,
+      "estimated_s": 14956,
+      "diagnostics": []
+    },
+    {
+      "plate": 6,
+      "parts": 2,
+      "source": "fresh_slice",
+      "slicer": "BambuStudio 02.08.04.57",
+      "estimated_g": 239.28,
+      "estimated_s": 17404,
+      "diagnostics": [
+        "Invalid T command (T65535)."
+      ]
+    }
+  ],
+  "estimated_g": 920.28,
+  "estimated_s": 79726
+}
