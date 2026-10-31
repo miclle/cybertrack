@@ -341,7 +341,7 @@ if __name__=='__main__':
     inputs.add_argument('--synthetic-speech',action='store_true',help='Send synthesized Mandarin as Opus frames, without input text or a microphone')
     inputs.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
     versions=p.add_mutually_exclusive_group()
-    versions.add_argument('--speed-host',choices=('idle','thirty_second_forward70'),help='Use timed firmware speed/status receipts for a synthetic utterance')
+    versions.add_argument('--speed-host',choices=('idle','thirty_second_forward70','voice_offline','wifi_offline'),help='Use timed firmware speed/status receipts for a synthetic utterance')
     versions.add_argument('--draft-host',type=Path,metavar='REPLAY',help='Use host firmware with a two-step web draft at revision 7')
     versions.add_argument('--timed-host',action='store_true',help='Use read-only host firmware receipts at observed RPC offsets')
     versions.add_argument('--ct47', action='store_true', help='Include draft capabilities and fault recovery in candidate receipts')

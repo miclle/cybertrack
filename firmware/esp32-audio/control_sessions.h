@@ -129,6 +129,15 @@ public:
         StopWeb(now);
         return true;
     }
+    const char* VoiceClaimError(AudioActionGuard::Target target) const {
+        if (target == AudioActionGuard::SpeedMode) {
+            if (!wifi) return "speed_rejected_wifi_offline: device Wi-Fi was offline at request time; no action started.";
+            if (!voice) return "speed_rejected_voice_offline: device voice control link was offline at request time; no action started.";
+            if (shutdown) return "speed_rejected_shutdown: device was shutting down at request time; no action started.";
+            if (!guard.Moving()) return "speed_rejected_not_moving: no movement at request time; speed was not changed and no action started.";
+        }
+        return "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority";
+    }
     int VoiceClaim(uint64_t now, int rpc, AudioActionGuard::Target target) {
         if (target == AudioActionGuard::SpeedMode)
             return wifi && voice && !shutdown ? guard.Claim(now, rpc, target) : 0;

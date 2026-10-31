@@ -299,7 +299,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
 }
 }
 
-int CyberTrackActionClaim(int rpc_id, const char* operation) {
+int CyberTrackActionClaim(int rpc_id, const char* operation, const char** error) {
     xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
     const auto target = (!strcmp(operation, "self.tank.adjust_speed") || !strcmp(operation, "self.tank.set_speed")) ? AudioActionGuard::SpeedMode :
@@ -311,6 +311,7 @@ int CyberTrackActionClaim(int rpc_id, const char* operation) {
         !strcmp(operation, "self.tank.ignition") ? AudioActionGuard::IgnitionOnly :
         !strcmp(operation, "self.tank.move_and_water") ? AudioActionGuard::Both : static_cast<AudioActionGuard::Target>(0);
     int ticket = sessions.VoiceClaim(now, rpc_id, target);
+    if (error) *error = ticket ? nullptr : sessions.VoiceClaimError(target);
     xSemaphoreGive(lock);
     return ticket;
 }
