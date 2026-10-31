@@ -1,0 +1,97 @@
+{
+  "scope": "Platform model diagnostic: 通义千问极速版 with original ct61 descriptions and role; real platform raw text, actual host, no board IO",
+  "configuration": {
+    "model": "通义千问极速版",
+    "temperature": 0.7,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_reply_length": 500,
+    "enable_thinking": false,
+    "web_search": false,
+    "source": "Fresh saved configuration reopened in built-in browser; setting labels are UI labels, no independent WSS model identity"
+  },
+  "host_sha256": "d79280610fbc0076cdc2abdba3ebde8b6d76a11319e5f8213229f8477d9e98c4",
+  "schema_sha256": "19af1bd295a49f066fe25a3915d82dab0f0cecee2150a68e8be0600010c4b6f1",
+  "source_commit": "66226a417049366a36b35cb95e90bf9d58ea29b4",
+  "runs": [
+    {
+      "case_id": "C005",
+      "round": 1,
+      "capture": "qwen-C005-1.json.gz",
+      "capture_json_sha256": "b748c652bc4350454f6fbed9a6c2b13b33457270b3327ac20aacfa8246af14b7",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [],
+      "elapsed_ms": 4126
+    },
+    {
+      "case_id": "C008",
+      "round": 1,
+      "capture": "qwen-C008-1.json.gz",
+      "capture_json_sha256": "7f65354fda520aae941f488890943c5e3ef0801539863b89278c8d2370f89ab2",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [],
+      "elapsed_ms": 2586
+    },
+    {
+      "case_id": "C005",
+      "round": 2,
+      "capture": "qwen-C005-2.json.gz",
+      "capture_json_sha256": "e44b802cdb12ce858f25c95c8532f557756fea97634320aae207c36aba3fa2d2",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [],
+      "elapsed_ms": 4369
+    },
+    {
+      "case_id": "C008",
+      "round": 2,
+      "capture": "qwen-C008-2.json.gz",
+      "capture_json_sha256": "1cfa731d988ed084ece0996b3614206313ab46dc0dc25ab3218a88c4ac200e35",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [],
+      "elapsed_ms": 2453
+    },
+    {
+      "case_id": "C005",
+      "round": 3,
+      "capture": "qwen-C005-3.json.gz",
+      "capture_json_sha256": "8a9062c176e329e6cb7c51f90b93024b987829c7b12e3025d12148df60cdbed1",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [],
+      "elapsed_ms": 4771
+    },
+    {
+      "case_id": "C008",
+      "round": 3,
+      "capture": "qwen-C008-3.json.gz",
+      "capture_json_sha256": "4182042e60661a2293933d4269259322eec4536a3da912f5208308959d3d924f",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [],
+      "elapsed_ms": 3243
+    }
+  ],
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "role_ui_readback_characters": 5991,
+  "host_manifest": "../ct61-firmware-host/current-host-manifest.json",
+  "local_screenshots": {
+    "output/model-parameters/qwen-turbo-parameters-readback.png": "0d377841f3b3eaf51f1106968a9821f39771cbeb9dbd6705ea4c27664a6f8113",
+    "output/model-parameters/qwen-turbo-model-readback.png": "79b01408dbe81a78b9824023d82ed130aa701be3559d2fa25d702015390fc996"
+  },
+  "targeted_completed": 6,
+  "targeted_matches": 6,
+  "full_regression_required": true,
+  "decision": "not_adopted",
+  "full_regression_completed": true,
+  "full_score_file": "full-suite-scores.json"
+}
