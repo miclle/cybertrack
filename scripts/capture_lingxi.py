@@ -196,7 +196,17 @@ async def capture_case(connection,tools,case,timeout=45):
                     row['calls'].append(dict(name=name,arguments=args))
                     try:
                         if name.replace('self_tank_','self.tank.',1) not in {t['name'] for t in tools}:raise ValueError('unknown tool')
-                        if version in ('draft_host','speed_host'):
+                        validation = None
+                        if case.get('argument_validator'):
+                            validation = json.loads(subprocess.check_output([str(case['argument_validator'])],
+                                input=json.dumps(dict(name=name.replace('self_tank_','self.tank.',1),arguments=args)),
+                                text=True, timeout=10))
+                            if type(validation.get('valid')) is not bool or not isinstance(validation.get('error'),str):
+                                raise ValueError('invalid argument checker output')
+                            row.setdefault('argument_checks',[]).append(dict(name=name, **validation))
+                        if validation is not None and not validation['valid']:
+                            receipt=dict(rpc_error=validation['error'])
+                        elif version in ('draft_host','speed_host'):
                             if input_ms is None:raise ValueError('missing evaluation input')
                             receipt=host_reply(case['host_binary'],case['initial_profile'],call_history,name,args,timeline[-1]['ms']-input_ms)
                         elif version == 'timed_host':
@@ -223,7 +233,7 @@ async def capture_case(connection,tools,case,timeout=45):
                                 receipt['show_draft']['editing_capabilities'] = fields.pop('editing_capabilities')
                                 if name.endswith('get_status'): receipt.update(fields)
                             else: receipt['status_facts'] = output
-                        if name.endswith('compose') or name.endswith('stop'):status=copy.deepcopy(receipt);status['result']='ok'
+                        if (name.endswith('compose') or name.endswith('stop')) and 'rpc_error' not in receipt:status=copy.deepcopy(receipt);status['result']='ok'
                         if 'rpc_error' in receipt and case.get('admission_result_fixture'):
                             row.setdefault('original_admission_errors',[]).append(receipt['rpc_error'])
                             receipt = dict(operation=name.removeprefix('self.tank.'), result='rejected',
@@ -308,6 +318,8 @@ async def run(args):
             case.update(host_binary=binary.resolve(), initial_profile=getattr(args,'draft_profile','two_step_web_draft') if draft_host else speed_host)
     for case in cases:
         case['fixture_version']=version
+        if getattr(args,'argument_validator',None):
+            case['argument_validator']=args.argument_validator.resolve()
         if getattr(args,'draft_read_facts_fixture',False):
             case['draft_read_facts_fixture']=True
         if getattr(args,'admission_result_fixture',False):
@@ -319,6 +331,8 @@ async def run(args):
                input_mode='raw_text_diagnostic' if getattr(args,'raw_text',False) else 'context_prefixed',
                capture_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                scope='Real platform calls; synthetic receipt/context fixtures; zero device forwarding; text not microphone ASR',results=[])
+    if getattr(args,'argument_validator',None):
+        trace['argument_validator_sha256']=hashlib.sha256(args.argument_validator.read_bytes()).hexdigest()
     synthetic = getattr(args, 'synthetic_speech', False)
     if synthetic:
         if timed or draft_host:
@@ -359,6 +373,7 @@ if __name__=='__main__':
     p.add_argument('--admission-result-fixture',action='store_true',help='Experiment only: expose host admission errors as structured rejected tool results')
     p.add_argument('--draft-profile',choices=('two_step_web_draft','empty_web_draft'),default='two_step_web_draft',help='Initial draft for --draft-host; default preserves existing two-step revision 7')
     p.add_argument('--draft-read-facts-fixture',action='store_true',help='Experiment only: add firmware draft query facts to status receipts')
+    p.add_argument('--argument-validator',type=Path,help='Use the prepared firmware parameter gate before any isolated receipt')
     p.add_argument('--audio-packets',action='store_true',help='Record arrival and size of every remote audio packet; discard its content')
     inputs=p.add_mutually_exclusive_group()
     inputs.add_argument('--synthetic-speech',action='store_true',help='Send synthesized Mandarin as Opus frames, without input text or a microphone')

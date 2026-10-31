@@ -24,6 +24,22 @@ subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
                 str(Path(__file__).with_name('mcp_arguments_test.cc')), str(build/'cJSON.o'),
                 '-o', str(build/'mcp_arguments_test')], check=True)
 subprocess.run([str(build/'mcp_arguments_test')], check=True)
+subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
+                '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
+                str(Path(__file__).with_name('mcp_validation_replay.cc')), str(build/'cJSON.o'),
+                '-o', str(build/'mcp_validation_replay')], check=True)
+for name, args, expected in (
+    ('self.tank.bubbles', {'duration_ms':30000}, True),
+    ('self.tank.bubbles', {'duration_ms':60000}, False),
+    ('self.tank.bubbles', {'duration_ms':True}, False),
+    ('self.tank.bubbles', {'duration_ms':1000,'extra':1}, False),
+    ('self.tank.stop', {}, True)):
+    result = json.loads(subprocess.check_output([str(build/'mcp_validation_replay')],
+        input=json.dumps(dict(name=name,arguments=args)), text=True))
+    assert result['valid'] is expected
+    assert result['stop_requested'] is (name=='self.tank.stop')
+    assert bool(result['error']) is (not expected)
+
 subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson),
                 '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
                 str(Path(__file__).with_name('web_request_test.cc')), str(build/'cJSON.o'),
