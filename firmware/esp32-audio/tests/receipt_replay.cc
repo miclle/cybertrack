@@ -47,7 +47,9 @@ int main(int argc, char** argv) {
         command.window = sessions.window;
         Reply("drive_start", 0, 0, "forward", 0, web, &command);
         if (!guard.Moving() || guard.Starts() != 1) return 2;
-    } else if (profile != "idle") return 2;
+    } else if (profile == "voice_offline") sessions.VoiceLink(clock_ms,false);
+    else if (profile == "wifi_offline") sessions.WifiLink(clock_ms,false);
+    else if (profile != "idle") return 2;
 
     std::string line;
     if (!std::getline(std::cin,line)) return 2;
@@ -88,7 +90,12 @@ int main(int argc, char** argv) {
             if (cJSON_GetArraySize(args) != 1 || !ShowInteger(speed,60,100)) return 3;
             int ticket = sessions.VoiceClaim(clock_ms,id,AudioActionGuard::SpeedMode);
             if (!ticket) {
-                std::cout << R"({"rpc_error":"Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"})" << '\n';
+                auto* error = cJSON_CreateObject();
+                cJSON_AddStringToObject(error,"rpc_error",sessions.VoiceClaimError(AudioActionGuard::SpeedMode));
+                char* raw = cJSON_PrintUnformatted(error);
+                std::cout << raw << '\n';
+                cJSON_free(raw);
+                cJSON_Delete(error);
                 continue;
             }
             std::cout << Reply("set_speed",ticket,speed->valueint) << '\n';

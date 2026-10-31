@@ -10,6 +10,26 @@ static uint32_t pair(ControlSessions& s, uint64_t now) {
     assert(s.Heartbeat(now, id)); return id;
 }
 int main() {
+    {
+        ControlSessions state;
+        const auto speed = Target::SpeedMode;
+        assert(std::strstr(state.VoiceClaimError(speed),"wifi_offline:"));
+        state.WifiLink(0,true);
+        assert(std::strstr(state.VoiceClaimError(speed),"voice_offline:"));
+        state.VoiceLink(0,true);
+        state.Tick(0,false);
+        assert(!state.VoiceClaim(0,1,speed));
+        assert(std::strstr(state.VoiceClaimError(speed),"not_moving:"));
+        auto move = state.VoiceClaim(0,2,Target::MoveOnly);
+        assert(move && is(state.guard.Move(0,move,4000,"forward"),"accepted"));
+        auto pending = state.VoiceClaim(1,3,speed);
+        assert(pending);
+        // A duplicate admission while moving cannot be described as stationary.
+        assert(!state.VoiceClaim(1,3,speed));
+        assert(!std::strstr(state.VoiceClaimError(speed),"not_moving:"));
+        assert(state.guard.Starts()==1 && state.guard.Moving());
+    }
+
     // Web operates with no cloud audio session. Independent deadlines survive voice closure.
     ControlSessions s;
     auto id = pair(s, 0);

@@ -57,12 +57,15 @@ subprocess.run([str(build/'receipt_adapter_test')], check=True)
 
 # Replay both admission outcomes against the same dispatch contract as the board.
 speed_call = dict(name='self.tank.set_speed', arguments={'speed_percent':100}, elapsed_ms=1800)
-for profile in ('thirty_second_forward70', 'idle'):
+for profile in ('thirty_second_forward70', 'idle', 'voice_offline', 'wifi_offline'):
     lines = subprocess.check_output([str(build/'receipt_replay'), profile],
                                     input=json.dumps([speed_call]), text=True).splitlines()
     reply, final = map(json.loads, lines)
-    if profile == 'idle':
-        assert f'ReplyError(id, "{reply["rpc_error"]}")' in text
+    if profile != 'thirty_second_forward70':
+        assert 'ReplyError(id, admission_error)' in text
+        assert 'CyberTrackActionClaim(id, tool_name.c_str(), &admission_error)' in text
+        expected = {'idle':'not_moving', 'voice_offline':'voice_offline', 'wifi_offline':'wifi_offline'}
+        assert reply['rpc_error'].startswith('speed_rejected_' + expected[profile] + ':')
         assert final['starts_this_boot'] == 0 and not any(final['logical_outputs'].values())
     else:
         assert reply['result'] == 'accepted' and reply['move_speed_percent'] == 100

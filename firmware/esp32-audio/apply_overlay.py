@@ -114,7 +114,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct54")')
+                 'set(PROJECT_VER "2.0.3-ct55")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
@@ -142,8 +142,9 @@ def main():
     replace_once(source / "main/mcp_server.cc",
                  '    // Use main thread to call the tool',
                  '    if (tool_name == "self.tank.compose" || tool_name == "self.tank.set_speed" || tool_name == "self.tank.adjust_speed" || tool_name == "self.tank.sequence" || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy") {\n'
-                 '        int ticket = CyberTrackActionClaim(id, tool_name.c_str());\n'
-                 '        if (!ticket) { ReplyError(id, "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"); return; }\n'
+                 '        const char* admission_error = nullptr;\n'
+                 '        int ticket = CyberTrackActionClaim(id, tool_name.c_str(), &admission_error);\n'
+                 '        if (!ticket) { ReplyError(id, admission_error); return; }\n'
                  '        arguments.AddProperty(Property("_ct_ticket", kPropertyTypeInteger, ticket));\n'
                  '    }\n'
                  '    // Use main thread to call the tool')

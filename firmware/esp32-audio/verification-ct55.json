@@ -1,0 +1,17 @@
+{
+  "version": "2.0.3-ct55",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Device admission errors and host tests only; no actuator or physical acceptance.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2702672,
+    "sha256": "042db9a811c63249d2fdb062c52c05a22e6c981d5cc024408974ad2ba4adecf2"
+  },
+  "checks": [
+    "Firmware image built with matching control_sessions and MCP admission source.",
+    "Host tests cover stationary and offline speed admission, no new output starts, moving duplicate request fallback, unchanged direction and deadline after valid speed change.",
+    "Prepared MCP error path forwards the message selected under the same control mutex as VoiceClaim.",
+    "Control, actual MCP/web handler and audio suites passed."
+  ]
+}
