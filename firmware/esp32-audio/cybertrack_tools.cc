@@ -421,7 +421,7 @@ void InitializeCyberTrackTools() {
                          p["direction"].value<std::string>().c_str(), p["water_duration_ms"].value<int>(), 0, nullptr, nullptr, p["speed_percent"].value<int>());
         });
     server.AddTool("self.tank.set_speed",
-        "只调整正在移动的机器人到指定目标速度。用户说减速到60%、加速到80%、速度调到70、调到全速时调用，唯一参数speed_percent为60到100整数，全速=100。有明确目标数值时用本工具，不用adjust_speed多次拼接，不调用move重新启动。不改变方向、截止时间、长按租期或其他动作，序列仅改当前步骤；网页移动同步滑块。停止或步骤等待时拒绝，不启动、不重试。accepted后静默；低于60或高于100的请求先说明范围并让用户选择，不擅自执行其他速度。",
+        "单说“全速”“最快”“最大速度”“调到全速”，直接调用本工具一次，speed_percent=100。不要先查询状态、追问或播报计划。由本次回执判断：空闲拒绝时只解释没有移动，接受后静默。带方向的“全速前进”等另按行走规则处理。用户说减速到60%、加速到80%、速度调到70、调到全速时调用，唯一参数speed_percent为60到100整数，全速=100。有明确目标数值时用本工具，不用adjust_speed多次拼接，不调用move重新启动。不改变方向、截止时间、长按租期或其他动作，序列仅改当前步骤；网页移动同步滑块。停止或步骤等待时拒绝，不启动、不重试。accepted后静默；低于60或高于100的请求先说明范围并让用户选择，不擅自执行其他速度。",
         PropertyList({Property("speed_percent", kPropertyTypeInteger, 60, 100)}),
         [](const PropertyList& p) -> ReturnValue {
             return Reply("set_speed", p["_ct_ticket"].value<int>(), p["speed_percent"].value<int>());
