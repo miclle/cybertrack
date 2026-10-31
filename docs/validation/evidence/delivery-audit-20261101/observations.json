@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-11-01",
+  "git_head": "1698f28c47e07c7affcec5255682e9face6e4297",
+  "scope": "Current saved repository and local evidence; no new platform evaluation, deployment or physical acceptance",
+  "software": {
+    "report": "software-checks.json",
+    "passed_groups": 18,
+    "source_hashes_verified": true
+  },
+  "field_record_counts": {
+    "family_sessions": 0,
+    "fault_trials": 0,
+    "power_runs": 0,
+    "cost_items": 0,
+    "maintenance_cycles": 0,
+    "maintenance_trials": 0,
+    "engineering_changes": 0
+  },
+  "stop_record_counts": {
+    "profiles": 0,
+    "trials": 0
+  },
+  "engineering": {
+    "technical_records": 37,
+    "unfinished_records": 0,
+    "complete_effort_records": 0,
+    "target_effort_records": 5,
+    "ct71_full_stt_finish": "Late administrative binding to commit 6062aaf; elapsed interval is not active work, human time or model waiting",
+    "missing_metrics": [
+      "human_minutes",
+      "model_wait_minutes",
+      "revision_rounds",
+      "failed_checks",
+      "regressions_found"
+    ],
+    "efficiency_improvement": "not_established"
+  },
+  "model_design": {
+    "source": "hardware/model/CyberTrack.FCStd",
+    "current_sha256": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23",
+    "acceptance_source_sha256": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23",
+    "source_matches": true,
+    "historical_screenshot_files": {
+      "output/solidcue/host-new-comment-r9.png": {
+        "exists": true,
+        "sha256_matches": true
+      },
+      "output/solidcue/host-message-adjusted-r10.png": {
+        "exists": true,
+        "sha256_matches": true
+      },
+      "output/solidcue/host-message-restored-r11.png": {
+        "exists": true,
+        "sha256_matches": true
+      }
+    },
+    "scope": "Prior saved GUI/card acceptance applies to unchanged source; not a new desktop run or physical acceptance"
+  },
+  "versions": {
+    "schema_version": 1,
+    "source_version": "2.0.3-ct73",
+    "last_recorded_deployment": "esp32-audio/startup-ct45.json",
+    "software_evidence": "esp32-audio/verification-ct73.json",
+    "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "deployment_relation": "candidate_not_deployed",
+    "physical_acceptance": "incomplete",
+    "last_recorded_role_sync": "esp32-audio/role-cancel-hold-ct45.json"
+  },
+  "completion": "incomplete"
+}
