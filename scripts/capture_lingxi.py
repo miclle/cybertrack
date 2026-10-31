@@ -136,7 +136,7 @@ def timed_status(profile, elapsed_ms, name, args):
 def host_reply(executable, profile, history, name, args, elapsed_ms):
     """Re-run this conversation's valid RPC prefix from the same initial firmware state."""
     tool = name.replace('self_tank_', 'self.tank.', 1)
-    allowed = ('get_status', 'stop', 'compose') if profile == 'two_step_web_draft' else ('get_status', 'set_speed')
+    allowed = ('get_status', 'stop', 'compose') if profile in ('two_step_web_draft','empty_web_draft') else ('get_status', 'set_speed')
     if tool.removeprefix('self.tank.') not in allowed:
         raise ValueError('RPC outside host replay')
     call = dict(name=tool, arguments=args, elapsed_ms=elapsed_ms)
@@ -300,7 +300,7 @@ async def run(args):
         version='draft_host' if draft_host else 'speed_host'
         binary=draft_host or ROOT/'build/audio-host/receipt_replay'
         for case in cases:
-            case.update(host_binary=binary.resolve(), initial_profile='two_step_web_draft' if draft_host else speed_host)
+            case.update(host_binary=binary.resolve(), initial_profile=getattr(args,'draft_profile','two_step_web_draft') if draft_host else speed_host)
     for case in cases:
         case['fixture_version']=version
         if getattr(args,'admission_result_fixture',False):
@@ -325,7 +325,7 @@ async def run(args):
         trace['host_replay_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
     if getattr(args,'audio_packets',False):trace['audio_packet_sizes_recorded']=True
     if draft_host or speed_host:
-        trace['initial_profile']='two_step_web_draft' if draft_host else speed_host
+        trace['initial_profile']=getattr(args,'draft_profile','two_step_web_draft') if draft_host else speed_host
     trace['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
     if speed_host:
         trace['scope']='Synthesized speech over platform ASR; timed firmware host receipts; zero device IO'
@@ -346,6 +346,7 @@ if __name__=='__main__':
     for name in ('connection','tools','corpus','role','output'):p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
     p.add_argument('--admission-result-fixture',action='store_true',help='Experiment only: expose host admission errors as structured rejected tool results')
+    p.add_argument('--draft-profile',choices=('two_step_web_draft','empty_web_draft'),default='two_step_web_draft',help='Initial draft for --draft-host; default preserves existing two-step revision 7')
     p.add_argument('--audio-packets',action='store_true',help='Record arrival and size of every remote audio packet; discard its content')
     inputs=p.add_mutually_exclusive_group()
     inputs.add_argument('--synthetic-speech',action='store_true',help='Send synthesized Mandarin as Opus frames, without input text or a microphone')

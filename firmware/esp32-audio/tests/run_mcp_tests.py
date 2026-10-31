@@ -76,6 +76,24 @@ for profile in ('thirty_second_forward70', 'idle', 'voice_offline', 'wifi_offlin
         assert final['move_remaining_ms'] == 30000 - speed_call['elapsed_ms']
 
 
+# A status read of an empty draft is not a successful creation.
+compose_corpus = json.loads((root/'docs/validation/compose-cases.json').read_text())['cases']
+create = next(case for case in compose_corpus if case['id']=='C001')['expected_calls']
+for prefix in (create[:1], create):
+    lines = subprocess.check_output([str(build/'receipt_replay'), 'empty_web_draft'],
+                                    input=json.dumps(prefix), text=True).splitlines()
+    first, final = json.loads(lines[0]), json.loads(lines[-1])
+    assert not first['show_draft']['active'] and first['show_draft']['revision']==0
+    assert final['starts_this_boot']==0 and not any(final['logical_outputs'].values())
+    if len(prefix)==1:
+        assert not final['show_draft']['active'] and final['show_draft']['revision']==0
+    else:
+        saved = json.loads(lines[-2])
+        assert saved['result']=='draft_saved' and final['show_draft']['revision']==1
+        assert final['show_draft']['steps'][0]['move_ms']==880
+        assert final['show_draft']['steps'][1]['bubbles_ms']==1000
+
+
 # C002 uses a real web-owned draft. A matching revision alone cannot authorize
 # a voice edit. Exercise the fresh-read boundary and verify both steps on readback.
 compose_cases = json.loads((root/'docs/validation/compose-cases.json').read_text())['cases']
