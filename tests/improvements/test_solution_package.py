@@ -25,7 +25,7 @@ class SolutionPackageTest(unittest.TestCase):
         data = package.build_archive(ROOT, paths, "test-revision", False)
         self.assertEqual(data, package.build_archive(ROOT, paths, "test-revision", False))
         with tempfile.TemporaryDirectory() as folder, zipfile.ZipFile(io.BytesIO(data)) as archive:
-            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/qwen/compose.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json"})
+            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/qwen/compose.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json", "replay/ct71-full-stt/voice.json", "replay/ct71-full-stt/compose.json"})
             manifest = json.loads(archive.read("MANIFEST.json"))
             current = json.loads(archive.read("firmware/current.json"))
             build = json.loads(archive.read("firmware/" + current["software_evidence"]))
@@ -57,6 +57,18 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual(doubao["invalid_tool_argument_cases"], ["C002", "C007"])
             self.assertEqual(doubao["forbidden_call_cases"], ["C005", "C006"])
             self.assertFalse(doubao["tool_call_target_met"])
+            full = result["full_speech_scores"]
+            self.assertEqual((full["voice"]["tools"]["correct"], full["compose"]["tools"]["correct"]), (77, 6))
+            self.assertEqual(full["voice"]["tools"]["forbidden_call_cases"], ["V064"])
+            self.assertEqual(full["voice"]["tools"]["failed_stop_cases"], [])
+            self.assertFalse(full["voice"]["tools"]["tool_call_target_met"])
+            self.assertEqual((full["voice"]["transcription"]["matches"], full["compose"]["transcription"]["matches"]), (76, 8))
+            minimal = json.loads(archive.read("replay/ct71-full-stt/voice.json"))
+            self.assertTrue(minimal["score_replay"])
+            self.assertTrue(all("stt_texts" in row and "timeline" not in row and "simulated_receipts" not in row for row in minimal["results"]))
+            playback = json.loads(archive.read("docs/validation/evidence/ct72-effect-playback/playback-review.json"))
+            self.assertEqual((playback["suppressed"], playback["allowed"]), (1085, 4595))
+            self.assertEqual(len(playback["synthetic_mismatches"]), 81)
             speech = result["spoken_stt_review"]
             self.assertEqual((speech["expected"], speech["completed"], speech["calls_match"]), (20, 19, 19))
             self.assertEqual(speech["not_completed"], ["V017"])
@@ -153,7 +165,7 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual(legacy_input["host_input_mode"], "simulated_initial_input")
             self.assertEqual(legacy_input["strict_tool_matches"], 9)
             self.assertNotIn("device_id", manifest["firmware"])
-            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json"):
+            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json", "replay/ct71-full-stt/voice.json", "replay/ct71-full-stt/compose.json"):
                 replay = root/name
                 original = replay.read_bytes()
                 replay.write_bytes(original+b" ")
