@@ -84,3 +84,16 @@ python3 scripts/analyze_stop_trials.py output/validation/actual-stop-trials.json
 - `records_complete`：至少五条记录字段齐全，且没有上述记录违例。它是采集覆盖，不是安全或性能合格。
 
 每个配置独立汇总；`software_simulation` 永不进入 `physical_profiles_with_complete_records`。命令退出 0 只表示输入合法、报告已生成。无论覆盖如何，`physical_acceptance` 都是 `not_established`：本工具没有给出适用于实物的停车距离／温度／供电限值，也不能独立核实原始证据、配置或观察者陈述。不要把主机测试成功或数据完整宣称为整机验收。
+
+## 已部署版与候选版的固件主机回放
+
+在对应版本的 prepared 源码上运行以下命令。程序单独编译该版本的控制会话、草稿和动作策略，通过受控时钟输入网页与语音事件，每 5 ms 核对各路逻辑状态与来源、序列阶段及动作启动计数。网页表演通过实际的保存草稿和确认接口启动。此处把 BOOT 表示为控制任务读到按下，把页面隐藏表示为设备收到网页释放请求。浏览器事件送出释放请求另由网页测试覆盖。
+
+```sh
+python3 scripts/replay_stop_matrix.py --source build/xiaozhi-ct45-src
+python3 scripts/replay_stop_matrix.py --source build/xiaozhi-ct51-src
+```
+
+[ct45 控制回放](evidence/stop-matrix/ct45.json)与 [ct51 控制回放](evidence/stop-matrix/ct51.json)均覆盖 17 个案例。每个案例选择五个不同触发时刻，两版共 170 个软件工况。来源隔离案例在另一通道原有截止前后均有采样。事件后 2500 ms 恢复连接，随后观察 6000 ms，未见旧动作重新启动。无停止干预的两个对照中，网页和语音序列均正常进入第二步。现场采集表仍为零条。
+
+**页面释放已送达和无线网络静默中断有不同的结果。** 在步骤间隔中收到网页释放请求，控制器当即取消表演。另一个对照中，最后一次心跳在 1000 ms，网页网络在 1100 ms 静默中断。控制器在 1200 ms 启动原计划第二步泡泡，直到 3000 ms 会话租期届满才取消并关断。恢复后没有补做。在真机计时中，应分别记录网络中断、设备检测失联、输出关断和机械停止；现场看见断线不能证明输出已关。
