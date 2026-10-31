@@ -35,7 +35,7 @@ ct45 部署检查的 39 条状态／操作回执全部输出关闭、动作启�
 
 真实灵矽隔离文本联调：首轮 76/80，角色修正后 77/80（96.25%），8 条编排仍匹配 5 条；只读解释 4/8 满足全部要求，45 条成功静默均未达成。见[最新复测](validation/lingxi-ct45-role-feedback-20261031.md)。无前缀诊断单独保留，未替代首轮成绩。真实设备网页、草稿 300538 ms 到期和六类非法输入拒绝均保持零启动。完整边界见[联调记录](validation/lingxi-ct45-20261031.md)。
 
-运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct71-src`，增加 17 类停止回放、实际 MCP／HTTP、音频适配、完整固件主机、输入失败隔离及即时停止回执检查；当前十七组通过，含 98 项改进测试。ct62 十一组通过，含 76 项改进测试；八组输入边界与四条历史请求为离线回放，不构成新模型成绩。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
+运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct71-src`，增加 17 类停止回放、实际 MCP／HTTP、音频适配、完整固件主机、输入失败隔离及即时停止回执检查；当前十七组通过，含 106 项改进测试。ct62 十一组通过，含 76 项改进测试；八组输入边界与四条历史请求为离线回放，不构成新模型成绩。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
 
 要检查模型设计工具，请在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct71-src --model-design`。新增模型／几何／整机同步测试、插件 bundle 和合成宿主界面回归；统一报告记录工具源码哈希并排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
 
@@ -68,3 +68,5 @@ ct68 [泛化动作门禁](validation/vague-action-admission.md)补充首次猜�
 ct70 独立完成[原始 JSON 截断准入修复](validation/mcp-raw-json.md)：普通及消毒器主机的 16 组通过，旧 ct68 同矩阵有 11 项不满足新约束；既有 88 条平台请求的回执和终态保持。完整构建和十六组统一检查通过，工具与角色未改，未部署；不提升原模型语义或现场成绩。
 
 ct71 的[否定输入保护](validation/negative-input-admission.md)完成最终 46 组普通／消毒器、迟到／等待停止、分配失败和 BOOT 检查；24 次实际 STT 定向会话严格 23/24、控制状态 24/24，一次误停被拒绝。活动停止拒绝初版因五项反例撤回，最终版对全部实际捕获回执／终态复算一致。工具与角色未改，未部署；原模型语义、活动否定、过程播报和现场验收继续未完成。
+
+[ct71 原 80／8 完整语音链路](validation/full-stt-ct71.md)已执行一次：全部结束，严格工具 77/80、6/8；八条停止正确，V064 误停被拒绝，V033／V075 多查询。四条逐字转写差异中三条是数字书写、一条“调／掉”同音，不能混称四条识别失败。88 条完整回执／终态均重放一致；包级回放发现普通点火仍放行 64 个确认包。固件／平台不变，原模型、播报与现场门槛继续未完成。

@@ -76,3 +76,12 @@ ct67 后续的[二十条真实 STT 定向会话](relative-draft-duration.md)进�
 后续[意图分流角色对照](intent-routing-role.md)增加 72 次文本诊断：删除停止确认例句、前置否定与含糊分流仍未解决问题，两组严格调用均 29/36，停止静默均 0/6；候选 C002 仍有英文过程语，C005 三次朗读规则分析，C008 一次擅改半秒。试验已恢复原角色。它使用占位输入的实际主机，仅定位角色与播报现象，不覆盖 STT 门禁；材料未代发。
 
 [ct71 否定输入研究](negative-input-admission.md)24 次实际 STT 仍有停止确认与改稿过程文字；活动停止拒绝初版另暴露迟到 RPC 无原始输入关联的问题，已撤回。希望平台提供可信的原始语句／阶段关联，以区分否定意图与前一句的真实停止；这是后续接口需求，材料未代发，未声称平台已经提供。
+
+
+## 官方接口核对与完整语音复测（2026-11-01）
+
+[DeepSeek 思考模式文档](https://api-docs.deepseek.com/guides/thinking_mode/)将关闭思考与推理强度分开定义，OpenAI 格式使用 `thinking.type=disabled`，推理内容与回答分别位于 `reasoning_content` 和 `content`。当前配置页形式符合前者，但不能据此证明平台实际转发的请求或输出字段。
+
+[灵矽配置指引](https://linx.qiniu.com/docs/xrobot/guide/agent-config)中的唤醒回复只控制问候；[WebSocket 文档](https://linx.qiniu.com/docs/xrobot/platform/websocket)列出的 TTS 句子事件没有最终回答阶段标志。建议维护方分别核对思考参数转发、模型返回字段与 TTS 取值，并区分工具中间轮的普通操作文字；这些是待核对项，不是已确认成因。
+
+[原 80／8 全语音链路](full-stt-ct71.md)进一步保留 C005 的长篇规则分析及 V033 调用前文字。完整回归期间未改配置，原始事件与回执可独立复算。平台反馈材料仍未代发，端侧播放与实际听感继续分别验收。

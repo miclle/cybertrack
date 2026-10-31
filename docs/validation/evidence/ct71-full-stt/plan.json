@@ -1,0 +1,27 @@
+{
+  "scope": "Full original eighty semantic and eight compose cases through synthetic Mandarin Opus, actual platform STT, actual frozen ct71 MCP; no board IO",
+  "base_commit": "fd10217fa61911a0e7072fd30fc4fe9bc1884a30",
+  "repeats": 1,
+  "suite_counts": {
+    "voice": 80,
+    "compose": 8
+  },
+  "host_sha256": "9b1fdfe1ae2cf95461d481752f608d24b6ce0c6b96b2ef875fd3b429ec3663d4",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "capture_source_sha256": "2c8f998c09771e569b2c706aa3e2792bf6cc13d3a3eb9e5d3b3f3f28c003f4ee",
+  "synthesis_source_sha256": "5f10a4c1e92a2755ed7bc5e9c27f5104190306b9d291516108410affdacb7df8",
+  "tools_sha256": "1cb8f1c281bc496e0042f9679e1438fcaf2e3fc5207913fd39937ce025e3db94",
+  "corpus_sha256": {
+    "voice": "38ab1b2fd546f4b00483c31bfdcf0e94b1f1797e6fd42db383037ba2d5d2466f",
+    "compose": "2eff96c104825c6f4f3532a65a22fb338904b5f0a17dab14d0bfecfdacf2de66"
+  },
+  "model": "deepseek-v4-flash",
+  "rules": [
+    "Run each original case once; do not retry/resample incomplete or failed sessions.",
+    "Keep platform role/model/settings unchanged for all eighty/eight.",
+    "Report transcription, strict tools, admission, states and narration independently.",
+    "A refusal of an incorrect call remains a strict tool failure.",
+    "Full speech pipeline results do not replace historical text, human microphone, speaker or physical acceptance.",
+    "Capture source and binary/corpus/role hashes checked before each suite."
+  ]
+}
