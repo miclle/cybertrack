@@ -64,7 +64,7 @@ def build_archive(root, paths, head, dirty):
 | 源码与构建依据 | `{firmware['source_version']}` |
 | 最近一次应用部署 | `{firmware['recorded_deployment']}` |
 
-## 从历史基线与当前候选重算成绩
+## 从历史基线与 ct57 工具回归重算成绩
 
 解压后在本目录运行。只需要 Python 3.9 或更高版本。
 
@@ -72,7 +72,7 @@ def build_archive(root, paths, head, dirty):
 python3 scripts/review_lingxi_reference.py
 ```
 
-从此包复现的是记录所列工具版本和角色的结果，历史基线保留在 scores，当前候选保留在 candidate_scores。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出含历史基线和 ct57 工具定义各自的两组成绩、偏差用例编号和各自是否达到门槛。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，设备回执由隔离环境提供。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
+从此包复现的是记录所列工具版本和角色的结果，历史基线保留在 scores，ct57 工具回归保留在 candidate_scores。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出含历史基线和 ct57 工具定义各自的两组成绩、偏差用例编号和各自是否达到门槛。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，设备回执由隔离环境提供。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
 
 - 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
 - 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
