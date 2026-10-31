@@ -1,0 +1,259 @@
+{
+  "scope": "Actual synthesized Opus ASR and fixture receipts; same captured packets replayed through both firmware policies",
+  "capture_count": 10,
+  "ct61_suppressed_packets": 190,
+  "ct61_audible_packets": 348,
+  "policy_source_sha256": {
+    "60": "82cbfece87111bfc12db66aaa7bd9cb342287ec9b63f1620f58342fcb0a56dfb",
+    "61": "2ed323fb52741325791ac20057df3413bde282ab75507b9f85caadb92127a2ab"
+  },
+  "duration_parser_sha256": "03fb4a1b0103442d21370fc167d6df9feeb6ec10ce2fac9cb15b558e882d5281",
+  "results": [
+    {
+      "file": "opus.json.gz",
+      "id": "E001",
+      "expected_text": "吹泡泡两秒",
+      "asr": "吹泡泡两秒。",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "calls_match": true,
+      "reply": "好的，吹泡泡两秒。",
+      "playback": {
+        "60": {
+          "suppressed": 0,
+          "audible": 30
+        },
+        "61": {
+          "suppressed": 30,
+          "audible": 0
+        }
+      }
+    },
+    {
+      "file": "opus.json.gz",
+      "id": "E002",
+      "expected_text": "吹泡泡三十秒",
+      "asr": "吹泡泡三十秒。",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "calls_match": true,
+      "reply": "好的，吹泡泡三十秒。",
+      "playback": {
+        "60": {
+          "suppressed": 0,
+          "audible": 34
+        },
+        "61": {
+          "suppressed": 34,
+          "audible": 0
+        }
+      }
+    },
+    {
+      "file": "opus.json.gz",
+      "id": "E003",
+      "expected_text": "喷水零点五秒",
+      "asr": "喷水零点五秒。",
+      "calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "calls_match": false,
+      "reply": "零点五秒太短了，喷水最短一秒，我按一秒来。喷水最短只能一秒，我按一秒来啦。",
+      "playback": {
+        "60": {
+          "suppressed": 0,
+          "audible": 110
+        },
+        "61": {
+          "suppressed": 0,
+          "audible": 110
+        }
+      }
+    },
+    {
+      "file": "opus.json.gz",
+      "id": "E004",
+      "expected_text": "吹泡泡两点五秒",
+      "asr": "吹泡泡两点五秒。",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 2500
+          }
+        }
+      ],
+      "calls_match": true,
+      "reply": "好的，吹泡泡两秒半。",
+      "playback": {
+        "60": {
+          "suppressed": 0,
+          "audible": 36
+        },
+        "61": {
+          "suppressed": 36,
+          "audible": 0
+        }
+      }
+    },
+    {
+      "file": "opus.json.gz",
+      "id": "E005",
+      "expected_text": "吹泡泡六十秒",
+      "asr": "吹泡泡六十秒。",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "calls_match": true,
+      "reply": "吹泡泡单次最多三十秒。",
+      "playback": {
+        "60": {
+          "suppressed": 0,
+          "audible": 34
+        },
+        "61": {
+          "suppressed": 0,
+          "audible": 34
+        }
+      }
+    },
+    {
+      "file": "opus.json.gz",
+      "id": "E006",
+      "expected_text": "不要吹泡泡两秒",
+      "asr": "不要吹泡泡两秒。",
+      "calls": [],
+      "calls_match": true,
+      "reply": "用户说\"不要吹泡泡两秒\"，这是否定表达，不启动动作。不调用工具。好的，不吹泡泡。",
+      "playback": {
+        "60": {
+          "suppressed": 0,
+          "audible": 112
+        },
+        "61": {
+          "suppressed": 0,
+          "audible": 112
+        }
+      }
+    },
+    {
+      "file": "opus.json.gz",
+      "id": "E007",
+      "expected_text": "吹泡泡两秒是什么意思",
+      "asr": "吹泡泡两秒是什么意思？",
+      "calls": [],
+      "calls_match": true,
+      "reply": "吹泡泡两秒就是让机器人启动泡泡功能，持续吹两秒，然后自动停。",
+      "playback": {
+        "60": {
+          "suppressed": 0,
+          "audible": 92
+        },
+        "61": {
+          "suppressed": 0,
+          "audible": 92
+        }
+      }
+    },
+    {
+      "file": "water-half-r1.json.gz",
+      "id": "E003",
+      "expected_text": "喷水零点五秒",
+      "asr": "喷水零点五秒。",
+      "calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 500
+          }
+        }
+      ],
+      "calls_match": true,
+      "reply": "好的，喷水零点五秒。",
+      "playback": {
+        "60": {
+          "suppressed": 0,
+          "audible": 28
+        },
+        "61": {
+          "suppressed": 28,
+          "audible": 0
+        }
+      }
+    },
+    {
+      "file": "water-half-r2.json.gz",
+      "id": "E003",
+      "expected_text": "喷水零点五秒",
+      "asr": "喷水零点五秒。",
+      "calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 500
+          }
+        }
+      ],
+      "calls_match": true,
+      "reply": "好，喷水零点五秒。",
+      "playback": {
+        "60": {
+          "suppressed": 0,
+          "audible": 28
+        },
+        "61": {
+          "suppressed": 28,
+          "audible": 0
+        }
+      }
+    },
+    {
+      "file": "water-half-r3.json.gz",
+      "id": "E003",
+      "expected_text": "喷水零点五秒",
+      "asr": "喷水零点五秒。",
+      "calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 500
+          }
+        }
+      ],
+      "calls_match": true,
+      "reply": "好的，喷水零点五秒。",
+      "playback": {
+        "60": {
+          "suppressed": 0,
+          "audible": 34
+        },
+        "61": {
+          "suppressed": 34,
+          "audible": 0
+        }
+      }
+    }
+  ]
+}
