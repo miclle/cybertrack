@@ -1,0 +1,23 @@
+{
+  "version": "2.0.3-ct72",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Playback-only matching of existing effect aliases and frenzy with channel-specific duration receipts; no actuator, role, public tool or platform changes. Candidate not deployed.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2718432,
+    "sha256": "75f07342654211217bd962eb76a1885a6929ec4c91b90e579be82fb65027740e"
+  },
+  "checks": [
+    "Complete ESP-IDF build passes.",
+    "Plain and ASan/UBSan playback fixtures pass: 145 positive matches and 106 preserved explanations; old ct71 fails the new matrix.",
+    "Original 88 actual-STT captures replay with exactly three changed cases: 64 ordinary ignition confirmation packets newly suppressed; all other case counts preserved, including limit explanations.",
+    "Eighty-one synthetic packet-stream mismatches retain all audio.",
+    "Full eighteen-group unified software checks, including 106 Python improvement tests, recorded separately in docs/validation/evidence/ct72-effect-playback/software-checks.json."
+  ],
+  "pending": [
+    "Candidate not deployed; no board timing, human microphone, speaker or physical/family acceptance.",
+    "Model scores remain 77/80 and 6/8. C005 process narration and other semantic failures remain; no new platform sessions.",
+    "Unknown phrases, compound ignition playback, early narration and active negative-stop association remain outside this playback extension."
+  ]
+}
