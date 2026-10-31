@@ -1,0 +1,807 @@
+{
+  "scope": "Twenty targeted synthesized-voice sessions with real ASR/STT and actual host control; not the fixed 20 human cases or speaker/board acceptance",
+  "host_sha256": "67135c0de2098c64e931a60c3b22be5e3ee1fbbeac7bd7c83f5124876b481ba6",
+  "capture_host_sha256": "12eb533f105876bd5c8cd786ddb2c13e4edcaf492999d2938d36d0c11256fea8",
+  "classifier_sha256": "88c3a731dfa2bbcb395600c18ecfe63603c2205031231d72bea0c44e1127833d",
+  "capture_classifier_sha256": "abde815e960492b35e142ec1cc45a775a88a81dba0e0fa23ac1f1560fa28dd1d",
+  "identity": {
+    "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "tool_schema_sha256": "454f88f95d461b144f7e2c0d60da667247e033056fc00e6ec28a4878eaf917f4",
+    "capture_source_sha256": "9adc5ebad10317a532a6c54f4b36e2e8f47a63950957ca4383d8f547bcaee47f",
+    "synthesis_source_sha256": "5f10a4c1e92a2755ed7bc5e9c27f5104190306b9d291516108410affdacb7df8",
+    "model": "deepseek-v4-flash"
+  },
+  "total": 20,
+  "completed": 20,
+  "literal_transcript_matches": 20,
+  "tool_matches": 14,
+  "state_matches": 20,
+  "relative_states_preserved": 6,
+  "relative_total": 6,
+  "clarification_rejections": 0,
+  "unquantified_mutations_accepted": 0,
+  "incomplete": [],
+  "replies_and_final_states_reproduced": true,
+  "results": [
+    {
+      "repeat": 1,
+      "id": "D001",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "第二步短一点。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": true,
+      "tool_calls_match": false,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "第二步短一点。",
+          "classified_unquantified": true,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 7,
+      "starts": 0,
+      "reply": "用户说\"第二步短一点\"，这是关于编排草稿的修改指令，但\"短一点\"没有明确时长。根据规则，我需要先问要改成几秒，不能猜。让我先查一下当前草稿状态。用户说\"第二步短一点\"，但没说具体几秒。根据规则，含糊时长我只问具体几秒，不猜。第二步现在是泡泡1000毫秒。我需要问用户要改成几秒。第二步现在是吹泡泡1秒，您想改成几秒？"
+    },
+    {
+      "repeat": 1,
+      "id": "D002",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "把结尾的泡泡再缩短一些。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": true,
+      "tool_calls_match": false,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "把结尾的泡泡再缩短一些。",
+          "classified_unquantified": true,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 7,
+      "starts": 0,
+      "reply": "我先查一下当前草稿的状态草稿最后一步的泡泡是1000毫秒，结尾的泡泡要缩短到几秒？给我个具体时长我就改。"
+    },
+    {
+      "repeat": 1,
+      "id": "D003",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "第一步稍长一点。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": true,
+      "tool_calls_match": false,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "第一步稍长一点。",
+          "classified_unquantified": true,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 7,
+      "starts": 0,
+      "reply": "用户说要让第一步稍长一点，但我需要知道具体改成几秒。草稿当前第一步是左转880毫秒。用户说\"稍长一点\"，但没有给出具体时长。按照规则，含糊的相对时长需要询问具体秒数。现在第一步是左转880毫秒，用户说稍长一点，但没有明确新时长，我需要问要改成几秒。"
+    },
+    {
+      "repeat": 1,
+      "id": "D004",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "把第二步泡泡改成两秒。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "把第二步泡泡改成两秒。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        },
+        {
+          "name": "self.tank.compose",
+          "recognized_text": "把第二步泡泡改成两秒。",
+          "classified_unquantified": false,
+          "result": "draft_saved",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 8,
+      "starts": 0,
+      "reply": "草稿当前版本是7，第2步泡泡是1000毫秒，改成2000毫秒。第二步的泡泡已经改成两秒了，草稿已保存。请在网页上预览确认，没问题就点开始吧。"
+    },
+    {
+      "repeat": 1,
+      "id": "D005",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "第二步改成向右转。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"right\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "第二步改成向右转。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        },
+        {
+          "name": "self.tank.compose",
+          "recognized_text": "第二步改成向右转。",
+          "classified_unquantified": false,
+          "result": "draft_saved",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 8,
+      "starts": 0,
+      "reply": "I need to check the current draft status first beforemodifying the show sequence当前草稿第二步是吹泡泡，改成向右转需要整步替换第二步已经改成向右转了。现在表演是先左转、再右转，你到网页上预览一下，确认没问题点开始就行。"
+    },
+    {
+      "repeat": 1,
+      "id": "D006",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "取消这个草稿。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "cancel",
+            "revision": 7,
+            "step": 0,
+            "steps_json": ""
+          }
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "取消这个草稿。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        },
+        {
+          "name": "self.tank.compose",
+          "recognized_text": "取消这个草稿。",
+          "classified_unquantified": false,
+          "result": "draft_cancelled",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 0,
+      "starts": 0,
+      "reply": "草稿已取消，之前的表演编排清掉了。"
+    },
+    {
+      "repeat": 1,
+      "id": "D007",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "删除第二步。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "remove_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": ""
+          }
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "删除第二步。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        },
+        {
+          "name": "self.tank.compose",
+          "recognized_text": "删除第二步。",
+          "classified_unquantified": false,
+          "result": "draft_saved",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 8,
+      "starts": 0,
+      "reply": "第二步已经删掉了，现在表演就剩第一步：向左转。请到网页上预览确认，满意的话点开始就行。"
+    },
+    {
+      "repeat": 1,
+      "id": "D008",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "停止。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.stop",
+          "recognized_text": "停止。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 0,
+      "starts": 1,
+      "reply": "动作都停下了，我在这儿等你。"
+    },
+    {
+      "repeat": 1,
+      "id": "D009",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "你现在在做什么？",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "你现在在做什么？",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 0,
+      "starts": 0,
+      "reply": "我在待命，目前没有动作在运行。"
+    },
+    {
+      "repeat": 1,
+      "id": "D010",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "把第二步泡泡缩短到半秒。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":500,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "把第二步泡泡缩短到半秒。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        },
+        {
+          "name": "self.tank.compose",
+          "recognized_text": "把第二步泡泡缩短到半秒。",
+          "classified_unquantified": false,
+          "result": "draft_saved",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 8,
+      "starts": 0,
+      "reply": "I need to check the current draft status first beforemaking any changes.Current draft has 2 steps, step 2 has bubbles_ms=1000.I need to change it to 500ms (half a second).Using replace_step with revision7.\n\n第二步的泡泡已经改成半秒了，草稿已保存。请到网页上预览确认，没问题就点开始吧。"
+    },
+    {
+      "repeat": 2,
+      "id": "D001",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "第二步短一点。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": true,
+      "tool_calls_match": false,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "第二步短一点。",
+          "classified_unquantified": true,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 7,
+      "starts": 0,
+      "reply": "用户说第二步短一点，但没有给出具体时长。我看看当前草稿第二步是吹泡泡1000毫秒。按规则，用户说\"短一点\"等含糊时长只问具体几秒，不猜半秒或减半。当前草稿第二步是泡泡1000毫秒，用户说\"短一点\"，我需要问具体改成几秒。"
+    },
+    {
+      "repeat": 2,
+      "id": "D002",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "把结尾的泡泡再缩短一些。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": true,
+      "tool_calls_match": false,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "把结尾的泡泡再缩短一些。",
+          "classified_unquantified": true,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 7,
+      "starts": 0,
+      "reply": "I need to check the current draft status first beforemodifying the show.草稿当前有两步：先左转880毫秒，再吹泡泡1000毫秒。要把结尾的泡泡缩短，请告诉我具体改成几秒？"
+    },
+    {
+      "repeat": 2,
+      "id": "D003",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "第一步稍长一点。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": true,
+      "tool_calls_match": false,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "第一步稍长一点。",
+          "classified_unquantified": true,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 7,
+      "starts": 0,
+      "reply": "用户说\"第一步稍长一点\"，这是对表演草稿的修改请求。根据规则，我需要先查询get_status获取最新草稿版本和步骤。让我先查询状态。用户说第一步稍长一点，但没有给出具体时长。根据规则，含糊的相对时长（\"短一点\"、\"长一点\"）需要问具体几秒，不猜测。当前草稿第一步是左转880毫秒。我需要问用户想改成几秒。用户说\"第一步稍长一点\"，这是相对时长，没有明确新时长。根据规则：\"用户说短一点等相对时长且没有明确新时长时，只问要改成几秒。\"\n\n我不应该擅自修改，需要先问清楚具体时长。当前第一步是左转880毫秒。您想把它改成几秒呢？"
+    },
+    {
+      "repeat": 2,
+      "id": "D004",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "把第二步泡泡改成两秒。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "把第二步泡泡改成两秒。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        },
+        {
+          "name": "self.tank.compose",
+          "recognized_text": "把第二步泡泡改成两秒。",
+          "classified_unquantified": false,
+          "result": "draft_saved",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 8,
+      "starts": 0,
+      "reply": "当前草稿第7版，第二步泡泡是1000毫秒，改成2000毫秒第二步泡泡改成两秒了，草稿已保存。请在网页上预览确认，点开始就会执行。"
+    },
+    {
+      "repeat": 2,
+      "id": "D005",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "第二步改成向右转。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"right\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "第二步改成向右转。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        },
+        {
+          "name": "self.tank.compose",
+          "recognized_text": "第二步改成向右转。",
+          "classified_unquantified": false,
+          "result": "draft_saved",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 8,
+      "starts": 0,
+      "reply": "当前草稿第2步是吹泡泡，我把它改成向右转第二步已经改成向右转了，草稿现在是一步左转、一步右转。请在网页上预览，确认没问题后点开始就行。"
+    },
+    {
+      "repeat": 2,
+      "id": "D006",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "取消这个草稿。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "cancel",
+            "revision": 7,
+            "step": 0,
+            "steps_json": ""
+          }
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "取消这个草稿。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        },
+        {
+          "name": "self.tank.compose",
+          "recognized_text": "取消这个草稿。",
+          "classified_unquantified": false,
+          "result": "draft_cancelled",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 0,
+      "starts": 0,
+      "reply": "草稿已经取消了，之前的表演内容都清掉了。需要重新编排的话随时说。"
+    },
+    {
+      "repeat": 2,
+      "id": "D007",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "删除第二步。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "remove_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": ""
+          }
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "删除第二步。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        },
+        {
+          "name": "self.tank.compose",
+          "recognized_text": "删除第二步。",
+          "classified_unquantified": false,
+          "result": "draft_saved",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 8,
+      "starts": 0,
+      "reply": "当前草稿有2步，删除第2步。第二步已经删掉了，现在表演只剩第一步向左转。请在网页上预览一下，确认没问题再点开始。"
+    },
+    {
+      "repeat": 2,
+      "id": "D008",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "停止。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.stop",
+          "recognized_text": "停止。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 0,
+      "starts": 1,
+      "reply": "动作都停下了，我在这儿等你。"
+    },
+    {
+      "repeat": 2,
+      "id": "D009",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "你现在在做什么？",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "你现在在做什么？",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 0,
+      "starts": 0,
+      "reply": "我在待命，目前没有动作在运行。"
+    },
+    {
+      "repeat": 2,
+      "id": "D010",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "把第二步泡泡缩短到半秒。",
+      "literal_transcript_match": true,
+      "final_text_classified_unquantified": false,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":500,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "把第二步泡泡缩短到半秒。",
+          "classified_unquantified": false,
+          "result": "ok",
+          "clarification_facts": null
+        },
+        {
+          "name": "self.tank.compose",
+          "recognized_text": "把第二步泡泡缩短到半秒。",
+          "classified_unquantified": false,
+          "result": "draft_saved",
+          "clarification_facts": null
+        }
+      ],
+      "unquantified_mutation_accepted": [],
+      "final_revision": 8,
+      "starts": 0,
+      "reply": "I'll check the current draft status firstI'll modifystep 2's bubble duration to 500ms (half second第二步的泡泡已经改成半秒了，草稿已保存。请在网页上预览一下，没问题就点开始。"
+    }
+  ]
+}

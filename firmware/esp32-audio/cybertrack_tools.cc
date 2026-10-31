@@ -3,6 +3,7 @@
 #include "action_plan_json.h"
 #include "recent_command.h"
 #include "status_facts.h"
+#include "draft_duration_intent.h"
 #include "web_server.h"
 #include "action_outputs.h"
 #include "ultrasonic.h"
@@ -136,6 +137,8 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
         outcome = "voice_input_changed";
     } else if (voice_turn >= 0 && strcmp(operation, "stop") && strcmp(operation, "get_status") && !sessions.VoiceTurnReady(voice_turn)) {
         outcome = "voice_input_failed";
+    } else if (voice_turn >= 0 && sessions.voice_draft_unquantified && strcmp(operation, "stop") && strcmp(operation, "get_status")) {
+        outcome = "draft_duration_unspecified";
     } else if (web_session && !sessions.Owns(web_session)) {
         outcome = "session_expired";
     } else if (web_session && !strcmp(operation, "get_status")) {
@@ -295,6 +298,8 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
         recent.valid ? (recent.web ? "web" : "voice") : "none", recent_age.c_str(), distance.c_str());
     result.assign(json);
     result.pop_back();
+    if (!strcmp(outcome, "draft_duration_unspecified"))
+        result += ",\"clarification_facts\":\"本轮识别到相对长短表达，但未识别到量化时长。这次没有修改草稿或新启动动作。只问具体改成几秒，不猜半秒或减半，不自动重试、删除、取消或改用动作工具补做。\"";
     if (!strcmp(operation, "get_status")) {
         result += ",\"draft_status_facts\":\"" + std::string(DraftReadFacts(draft.active)) + "\"";
         if (const char* guidance = FaultRecovery(reason))
@@ -332,8 +337,10 @@ void CyberTrackVoiceInput(const char* text) {
     bool content = false;
     for (const char* p = text; *p; ++p) if (*p != ' ' && *p != '\t' && *p != '\r' && *p != '\n') { content = true; break; }
     if (!content) return;
+    const bool unquantified = draft_duration::NeedsClarification(text);
     xSemaphoreTake(lock, portMAX_DELAY);
     sessions.AdvanceVoiceTurn(true);
+    sessions.voice_draft_unquantified = unquantified;
     xSemaphoreGive(lock);
 }
 void CyberTrackVoiceFailure(int turn) {

@@ -2,6 +2,7 @@
 #include "receipt_host.h"
 #include "admission_result.h"
 #include "voice_feedback.h"
+#include "draft_duration_intent.h"
 #include "mcp_tool_types.h"
 #include <functional>
 #include <iostream>

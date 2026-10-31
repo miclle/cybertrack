@@ -115,3 +115,5 @@ python3 scripts/analyze_maintenance.py docs/validation/templates.json \
 [ct66 即时停止回执](stop-dispatch.md)提供八组实际 MCP 调度回放、分配失败测试及十三组统一检查；不新增模型或实体成绩。
 
 [状态话术限定对照](stop-role-qualifier.md)保留十四次会话、角色快照及恢复回读。数值先行检查与产品采纳分列，三字减少不能当作静默通过。
+
+[ct67 无量化相对改稿门禁](relative-draft-duration.md)将原生十三组控制回放与二十条真实 STT 定向会话分开报告，不覆盖原固定语义、口述或家庭成绩。
