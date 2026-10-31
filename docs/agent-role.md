@@ -22,6 +22,8 @@
 
 ct55 在调速票据被拒绝时提供请求时刻的未移动、Wi-Fi 离线、语音链路离线或关机状态。选择错误信息与请求票据共用控制锁，其他拒绝保留通用说明。角色按明确回执回答，模糊错误不能推断具体原因。[构建检查](../firmware/esp32-audio/verification-ct55.json)
 
+ct58 的编排工具说明明确区分查询、提交和保存回执。只有本次实际收到 `draft_saved` 与新版本才可说已保存，取消必须取得 `draft_cancelled`；未提交不能声称完成。平台行为按独立回归记录核对。[构建与主机检查](../firmware/esp32-audio/verification-ct58.json)
+
 ct57 将绝对与相对调速的票据拒绝作为明确的工具结果返回。传输 `isError=false`，内部 `result=rejected`，不能判断为动作成功。未分配票据时直接返回，不进入动作回调。原有角色源和接受条件继续适用。[构建检查](../firmware/esp32-audio/verification-ct57.json)
 
 ct56 的调速工具说明要求按明确错误中的状态解释，通用错误只说明未确认，拒绝后不建议试动。线上回复另见[原因解释对照](validation/speed-rejection.md)。
