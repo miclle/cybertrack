@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Package an explicit text-only Lingxi reference bundle; never publish it."""
 import argparse
+import gzip
 import hashlib
 import io
 import json
@@ -8,10 +9,13 @@ from pathlib import Path, PurePosixPath
 import subprocess
 import zipfile
 
+from check_firmware_current import check
+from review_lingxi_reference import SCORES, SUITES, score_replay
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def build_archive(root, paths, head, dirty):
+def read_inputs(root, paths):
     root = root.resolve()
     if len(set(paths)) != len(paths):
         raise ValueError("duplicate bundle entry")
@@ -28,35 +32,59 @@ def build_archive(root, paths, head, dirty):
             raise ValueError(f"missing or symlinked bundle input: {name}")
         contents[name] = target.read_bytes()
         contents[name].decode("utf-8")
-    manifest = {"schema_version": 1, "scope": "Lingxi reference material, not deployed firmware or complete CAD distribution",
-                "git_head": head, "selected_inputs_dirty": dirty,
-                "files": {name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()} for name, data in contents.items()},
-                "excluded": ["credentials", "recordings", "device identifiers", "firmware binaries", "physical acceptance", "CAD binaries"],
-                "model_evaluation": "see_validation_record_in_full_repository", "family_trials": "not_run"}
-    contents["MANIFEST.json"] = (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode()
+    return contents
+
+
+def build_archive(root, paths, head, dirty):
+    contents = read_inputs(root, paths)
+    firmware = check(root)
+    scores = json.loads(contents[SCORES])
+    for suite in SUITES:
+        raw = gzip.decompress((root / SCORES).with_name(f"full-{suite}.json.gz").read_bytes())
+        if hashlib.sha256(raw).hexdigest() != scores[suite]["capture_json_sha256"]:
+            raise ValueError(f"{suite}: original capture does not match recorded score")
+        trace = json.loads(raw)
+        replay = {key: trace[key] for key in ("run_id", "kind", "role_sha256", "model", "corpus_sha256", "fixture_version")}
+        replay["results"] = [{key: row[key] for key in ("id", "calls", "completed")} for row in trace["results"]]
+        score_replay(suite, contents[f"docs/validation/{suite}-cases.json"], replay, scores[suite])
+        contents[f"replay/{suite}.json"] = (json.dumps(replay, ensure_ascii=False, indent=2) + "\n").encode()
     contents["START_HERE.md"] = f"""# CyberTrack 灵矽方案参考材料
 
-本包用于评审、接入设计和无设备评测准备，不是可刷写固件或完整 CAD 分发。
-来源 Git 提交：`{head}`；所选文件未提交修改：`{dirty}`。实际文件以 MANIFEST.json 哈希为准。
+本包对应 Git 提交 `{head}`。打包输入存在未提交修改为 `{dirty}`。版本、应用字节数和 SHA-256 见 `MANIFEST.json` 的 `firmware` 小节。
 
-1. 阅读 docs/lingxi-solution.md：场景、平台职责、方案交付与平台建议。
-2. 阅读 docs/quick-start.md 和 firmware/CAPABILITIES.md：亲子上手、当前能力及限制。
-3. 以 firmware/esp32-audio/role-prompt.txt 核对角色；参考包不向平台上传配置。
-4. 使用 docs/validation/ 中的文本集、口述集和空白采集模板，不把测试样例当成模型或用户结果。
-5. 阅读 hardware/architecture/README.md 和 tools/solidcue/README.md：硬件与设计工具边界。
+| 记录 | 固件版本 |
+|---|---|
+| 源码与构建依据 | `{firmware['source_version']}` |
+| 最近一次应用部署 | `{firmware['recorded_deployment']}` |
 
-无需设备的检查：
+## 从两份真实平台轨迹重算成绩
+
+解压后在本目录运行。只需要 Python 3.9 或更高版本。
+
+```sh
+python3 scripts/review_lingxi_reference.py
+```
+
+从此包复现的是记录所列工具版本和角色的历史结果。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出含两组成绩、偏差用例编号和各自是否达到门槛。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，设备回执由隔离环境提供。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
+
+- 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
+- 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
+- 语义偏差见[固定集回归](docs/validation/lingxi-role-5991.md)，远端音频包的端侧处理见[播放回归](docs/validation/lingxi-ct51-playback.md)。
+- 供电与机械设计见[硬件架构](hardware/architecture/README.md)和[整机模型辅助设计](tools/model-design/README.md)。
+
+包内材料可离线阅读和评测。原始部署记录、完整轨迹和 CAD 资产见[对应源码提交](https://github.com/miclle/cybertrack/tree/{head})。还可以在包内运行以下检查。
 
 ```sh
 python3 -m unittest discover -s tests/improvements -v
 python3 scripts/power_budget.py
-python3 scripts/evaluate_voice.py --help
 ```
-
-本包只包含明确清单中的材料。文档中的其他相对链接须在完整 CyberTrack checkout 中阅读；完整源码、BOM、原理图和大体积模型对应 https://github.com/miclle/cybertrack/tree/{head} 。该提交未推送时远端链接尚不可用，应使用本地 checkout；未提交内容以清单为准。
-
-ct45 已部署并完成真实平台隔离文本联调，语义尚未全部通过；结果和失败项见完整仓库中的 docs/validation/lingxi-ct45-20261031.md。此包不运行联网评测，也不包含设备部署日志。真人语音、五组家庭体验、当前供电与完整停止验收未完成。没有录音、Wi-Fi 凭据、设备令牌或绑定码；没有替你部署或发布。
 """.encode()
+    manifest = {"schema_version": 2, "scope": "Lingxi offline reference material",
+                "git_head": head, "selected_inputs_dirty": dirty, "firmware": firmware,
+                "files": {name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()} for name, data in contents.items()},
+                "excluded": ["credentials", "recordings", "device identifiers", "firmware binaries", "physical acceptance", "CAD binaries"],
+                "model_evaluation": "replay of recorded tool calls; no new model request", "family_trials": "not_run"}
+    contents["MANIFEST.json"] = (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode()
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         for name, data in sorted(contents.items()):
@@ -73,7 +101,11 @@ def main():
     args = parser.parse_args()
     paths = json.loads((ROOT / "tools/lingxi-solution/files.json").read_text())
     head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-    dirty = bool(subprocess.check_output(["git", "status", "--porcelain", "--", *paths], cwd=ROOT, text=True))
+    current = json.loads((ROOT / "firmware/current.json").read_bytes())
+    sources = ["tools/lingxi-solution/files.json", "scripts/package_lingxi_solution.py", "scripts/check_firmware_current.py",
+               "firmware/esp32-audio/apply_overlay.py", "firmware/" + current["last_recorded_deployment"],
+               *(str(Path(SCORES).with_name(f"full-{suite}.json.gz")) for suite in SUITES)]
+    dirty = bool(subprocess.check_output(["git", "status", "--porcelain", "--", *paths, *sources], cwd=ROOT, text=True))
     payload = build_archive(ROOT, paths, head, dirty)
     output = args.output or ROOT / "output/lingxi-solution" / f"cybertrack-lingxi-reference-{head[:12]}.zip"
     output.parent.mkdir(parents=True, exist_ok=True)

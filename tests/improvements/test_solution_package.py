@@ -3,6 +3,8 @@ import importlib.util
 import io
 import json
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 import zipfile
@@ -10,33 +12,44 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location("package_solution", ROOT / "scripts/package_lingxi_solution.py")
 package = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(package)
+sys.path.insert(0, str(ROOT/"scripts"))
+try:
+    spec.loader.exec_module(package)
+finally:
+    sys.path.pop(0)
 
 
 class SolutionPackageTest(unittest.TestCase):
     def test_exact_allowlist_and_integrity(self):
-        with tempfile.TemporaryDirectory() as folder:
-            root = Path(folder).resolve()
-            (root / "reference.md").write_text("example")
-            (root / "private.txt").write_text("must stay out")
-            data = package.build_archive(root, ["reference.md"], "test-revision", False)
-            self.assertEqual(data, package.build_archive(root, ["reference.md"], "test-revision", False))
-            with zipfile.ZipFile(io.BytesIO(data)) as archive:
-                self.assertEqual(set(archive.namelist()), {"reference.md", "MANIFEST.json", "START_HERE.md"})
-                manifest = json.loads(archive.read("MANIFEST.json"))
-                self.assertEqual(manifest["files"]["reference.md"]["sha256"], hashlib.sha256(b"example").hexdigest())
+        paths = json.loads((ROOT / "tools/lingxi-solution/files.json").read_bytes())
+        data = package.build_archive(ROOT, paths, "test-revision", False)
+        self.assertEqual(data, package.build_archive(ROOT, paths, "test-revision", False))
+        with tempfile.TemporaryDirectory() as folder, zipfile.ZipFile(io.BytesIO(data)) as archive:
+            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "replay/voice.json", "replay/compose.json"})
+            manifest = json.loads(archive.read("MANIFEST.json"))
+            self.assertEqual(manifest["files"]["START_HERE.md"]["sha256"], hashlib.sha256(archive.read("START_HERE.md")).hexdigest())
+            archive.extractall(folder)
+            root = Path(folder)
+            cli = [sys.executable, "-E", "-s", str(root/"scripts/review_lingxi_reference.py")]
+            result = json.loads(subprocess.check_output(cli, cwd=folder, text=True))
+            self.assertEqual(result["scores"]["compose"]["scored"], 8)
+            self.assertEqual(result["scores"]["voice"]["scored"], 80)
+            self.assertNotIn("device_id", manifest["firmware"])
+            replay = root/"replay/voice.json"
+            replay.write_bytes(replay.read_bytes()+b" ")
+            failed = subprocess.run(cli, cwd=folder, capture_output=True, text=True)
+            self.assertNotEqual(failed.returncode, 0)
+            self.assertIn("differs from manifest", failed.stderr)
 
     def test_extensionless_license_and_notice_remain_explicit(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder).resolve()
             for name in ["LICENSE", "NOTICE", "other"]:
                 (root / name).write_text("reviewed legal text")
-            data = package.build_archive(root, ["LICENSE", "NOTICE"], "test", False)
-            with zipfile.ZipFile(io.BytesIO(data)) as archive:
-                self.assertEqual(archive.read("NOTICE"), b"reviewed legal text")
-                self.assertNotIn("other", archive.namelist())
+            contents = package.read_inputs(root, ["LICENSE", "NOTICE"])
+            self.assertEqual(contents, {"LICENSE": b"reviewed legal text", "NOTICE": b"reviewed legal text"})
             with self.assertRaises(ValueError):
-                package.build_archive(root, ["other"], "test", False)
+                package.read_inputs(root, ["other"])
 
     def test_reject_outside_sensitive_and_symlink_paths(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -45,7 +58,7 @@ class SolutionPackageTest(unittest.TestCase):
             (root / "alias.md").symlink_to(root / "real.md")
             for path in ["../real.md", "/real.md", "alias.md", "secrets/wifi.json", "recordings/transcript.txt", "x//y.md"]:
                 with self.subTest(path=path), self.assertRaises(ValueError):
-                    package.build_archive(root, [path], "test", False)
+                    package.read_inputs(root, [path])
 
 
 if __name__ == "__main__": unittest.main()
