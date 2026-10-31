@@ -219,6 +219,10 @@ async def capture_case(connection,tools,case,timeout=45):
                                 if name.endswith('get_status'): receipt.update(fields)
                             else: receipt['status_facts'] = output
                         if name.endswith('compose') or name.endswith('stop'):status=copy.deepcopy(receipt);status['result']='ok'
+                        if 'rpc_error' in receipt and case.get('admission_result_fixture'):
+                            row.setdefault('original_admission_errors',[]).append(receipt['rpc_error'])
+                            receipt = dict(operation=name.removeprefix('self.tank.'), result='rejected',
+                                           rejection_reason=receipt['rpc_error'], physical_feedback=False)
                         if 'rpc_error' in receipt:
                             rpc_error=dict(message=receipt['rpc_error'])
                             row.setdefault('rpc_errors',[]).append(dict(name=name, **rpc_error))
@@ -288,6 +292,8 @@ async def run(args):
     version = 'timed_host' if timed else 'ct47' if getattr(args,'ct47',False) else 'ct46' if getattr(args,'ct46',False) else 'ct45'
     draft_host=getattr(args,'draft_host',None)
     speed_host=getattr(args,'speed_host',None)
+    if getattr(args,'admission_result_fixture',False) and not speed_host:
+        raise ValueError('admission result fixture requires speed host')
     if speed_host and not getattr(args,'synthetic_speech',False):
         raise ValueError('speed host requires synthetic speech')
     if draft_host or speed_host:
@@ -297,6 +303,7 @@ async def run(args):
             case.update(host_binary=binary.resolve(), initial_profile='two_step_web_draft' if draft_host else speed_host)
     for case in cases:
         case['fixture_version']=version
+        case['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
         if getattr(args,'audio_packets',False): case['audio_packets']=True
     trace=dict(fixture_version=version,kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
                model_source='visible platform configuration; no model identity in WSS response',role_sha256=hashlib.sha256(args.role.read_bytes()).hexdigest(),
@@ -318,6 +325,7 @@ async def run(args):
     if getattr(args,'audio_packets',False):trace['audio_packet_sizes_recorded']=True
     if draft_host or speed_host:
         trace['initial_profile']='two_step_web_draft' if draft_host else speed_host
+    trace['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
     if speed_host:
         trace['scope']='Synthesized speech over platform ASR; timed firmware host receipts; zero device IO'
     args.output.parent.mkdir(parents=True,exist_ok=True)
@@ -336,6 +344,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('connection','tools','corpus','role','output'):p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
+    p.add_argument('--admission-result-fixture',action='store_true',help='Experiment only: expose host admission errors as structured rejected tool results')
     p.add_argument('--audio-packets',action='store_true',help='Record arrival and size of every remote audio packet; discard its content')
     inputs=p.add_mutually_exclusive_group()
     inputs.add_argument('--synthetic-speech',action='store_true',help='Send synthesized Mandarin as Opus frames, without input text or a microphone')

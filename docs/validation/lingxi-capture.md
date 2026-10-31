@@ -112,3 +112,7 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 用 `run_mcp_tests.py --source` 先构建当前版本的主机回执程序。给合成语音采集命令增加 `--ids V040 --audio-packets --speed-host thirty_second_forward70` 或 `--speed-host idle`。前者从 70% 前进、原截止为第 30 秒开始，后者从零启动、全路关闭开始。计时从发送监听开始算起。两组仅向灵矽发送“全速”的声音，模型收到调用结果后才可能获知设备状态。
 
 夹具每次按本会话已观察的调用与时刻重放固件调度和回执；只允许状态查询和绝对调速。空闲时固件不签发调速票据，平台收到与固件分发器相同的 JSON-RPC 错误。运行轨迹的 `initial_profile` 指定实际初态，`context` 是 V040 文本用例原有描述。音频包大小和顺序可用于离线对照不同版本的播放策略。
+
+### 对照 RPC 错误与拒绝结果
+
+仅为隔离实验时，可以在 `--speed-host` 基础上增加 `--admission-result-fixture`，将同一个主机拒绝包在 `result=rejected` 的工具结果里返回，包含原错误 `rejection_reason` 和 `physical_feedback=false`。轨迹另存原始错误，标记这是夹具转换。默认路径仍使用实际固件的 RPC 错误。两组使用相同的工具描述、角色与语音，结果不作为板上接口已修改的证据。
