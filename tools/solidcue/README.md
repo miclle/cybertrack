@@ -34,7 +34,9 @@ codex plugin marketplace add "$PWD/tools/model-design"
 codex plugin add cad-comment-lab@cad-comment-local
 ```
 
-若本机同名 marketplace 仍指向早期临时 checkout，先执行 `codex plugin marketplace remove cad-comment-local`，再执行上面的命令；原模型数据不会删除。插件技术 ID 沿用，显示名称为 **CyberTrack 模型设计**。重载宿主 MCP 连接，再调用 `open_model` 并展开卡片。升级 UI 后须新开一次卡片；同轮修改和恢复使用同一卡片。
+若本机同名 marketplace 仍指向早期临时 checkout，先执行 `codex plugin marketplace remove cad-comment-local`，再执行上面的命令；原模型数据不会删除。插件技术 ID 沿用，显示名称为 **CyberTrack 模型设计**。升级后按下面步骤重新加载连接，再调用 `open_model` 并展开卡片。升级 UI 后须新开一次卡片；同轮修改和恢复使用同一卡片。
+
+本地插件重载：等待当前操作保存后，使用 `⌘Q` 完全退出承载 Codex 的 ChatGPT 桌面应用，再重新打开并回到原对话；只关闭窗口不算退出。保持 FreeCAD 和本地模型服务运行，不需要卸载插件或删除研究数据。此流程依据 [OpenAI 本地插件说明](https://developers.openai.com/plugins/build/plugins#install-a-local-plugin-manually)；当前 CLI 的 `codex plugin`／`codex mcp` 没有 `reload` 子命令。返回对话后先核对工具描述与当前文档版本，再新开模型卡片；旧卡片仍可能保留旧 UI。
 
 ```sh
 node scripts/check_solidcue_plugin.mjs
