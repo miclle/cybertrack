@@ -1,6 +1,7 @@
 #pragma once
 #include "cJSON.h"
 #include "spoken_duration.h"
+#include "spoken_playback.h"
 #include <mutex>
 #include <string_view>
 #include <cstdint>
@@ -28,6 +29,8 @@ class VoiceFeedback {
     uint64_t generation_ = 0;
     const Command* expected_ = nullptr;
     const Command* pending_ = nullptr;
+    SpokenPlayback plan_{};
+    bool expected_plan_ = false, pending_plan_ = false;
     bool accepted_ = false, muted_ = false;
 
 public:
@@ -36,6 +39,7 @@ public:
         ++generation_;
         accepted_ = muted_ = false;
         expected_ = nullptr;
+        expected_plan_ = pending_plan_ = false;
         for (std::string_view suffix : {"。", "！", "!"}) {
             if (text.size() >= suffix.size() && text.substr(text.size()-suffix.size()) == suffix) {
                 text.remove_suffix(suffix.size());
@@ -52,14 +56,22 @@ public:
                 expected_ = &timed_effect_;
             }
         }
+        if (!expected_) expected_plan_ = plan_.Parse(text);
     }
     uint64_t BeginCall(std::string_view tool, const cJSON* args) {
         std::lock_guard<std::mutex> lock(mutex_);
         ++generation_;
         const auto* command = expected_;
         expected_ = nullptr;
+        pending_ = nullptr;
         accepted_ = muted_ = false;
         constexpr std::string_view prefix = "self.tank.";
+        const bool candidate = expected_plan_;
+        expected_plan_ = pending_plan_ = false;
+        if (candidate && tool.substr(0,prefix.size()) == prefix && tool.substr(prefix.size()) == plan_.tool && plan_.Request(args)) {
+            pending_plan_ = true;
+            return generation_;
+        }
         if (!command || tool.substr(0,prefix.size()) != prefix || tool.substr(prefix.size()) != command->tool)
             return 0;
         if (command->tool == "set_speed") {
@@ -89,7 +101,10 @@ public:
         const auto* fault = cJSON_GetObjectItemCaseSensitive(json,"fault");
         {
             std::lock_guard<std::mutex> lock(mutex_);
-            if (call == generation_ && pending_) {
+            if (call == generation_ && pending_plan_) {
+                accepted_ = plan_.Receipt(json);
+                pending_plan_ = false;
+            } else if (call == generation_ && pending_) {
                 const bool stop = pending_->tool == "stop";
                 accepted_ = cJSON_IsString(op) && pending_->tool == op->valuestring &&
                     cJSON_IsString(result) && std::string_view(result->valuestring) == (stop ? "ok" : "accepted") &&
@@ -112,6 +127,7 @@ public:
         std::lock_guard<std::mutex> lock(mutex_);
         ++generation_; // An early reply or a delayed receipt stays audible.
         expected_ = nullptr;
+        expected_plan_ = pending_plan_ = false;
         muted_ = accepted_;
         accepted_ = false;
     }
