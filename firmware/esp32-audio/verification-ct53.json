@@ -1,0 +1,18 @@
+{
+  "version": "2.0.3-ct53",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Web draft preview with intercepted browser requests; no device or actuator access.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2701552,
+    "sha256": "42de484b79c0c494e6db30b918ef3083a584da69cfe9dceff730219fa0148ae5"
+  },
+  "embedded_html_sha256": "753689d052d5d1d187ac74d60a744a9eaccc518d6cd2c4b5af7649369e193831",
+  "checks": [
+    "Embedded page matches repository HTML exactly once in the application image.",
+    "New device revision appears alongside untouched local preview; stale state hides incoming preview, explicit load replaces local steps and still requires review.",
+    "Chromium at 320x568, 390x844 and 1280x800: confirming a changed draft shows separate 1s and 3s previews, prevents start and clears approval on load.",
+    "All eight local check groups passed against the ct53 prepared tree, including 52 improvement tests and the control, MCP and audio host suites."
+  ]
+}
