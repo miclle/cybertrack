@@ -4,10 +4,10 @@
 
 | 项目 | 当前依据与状态 |
 |---|---|
-| 源码基线 | `2.0.3-ct46` 候选，增加简单成功指令的端侧播报控制；ESP-IDF 5.5.1、小智固定版本及 overlay |
+| 源码基线 | `2.0.3-ct46` 候选，增加简单成功指令的端侧播报控制、设备状态解释及语音改稿读版本约束；ESP-IDF 5.5.1、小智固定版本及 overlay |
 | 最近记录的部署 | [ct45](../firmware/esp32-audio/startup-ct45.json)；2026-10-31 已重启联网并回读 |
 | 最近角色同步 | [ct45 联调反馈修正](../firmware/esp32-audio/role-feedback-ct45.json)，5998 字符保存回读、重启与零启动检查；模型语义另验 |
-| 软件验证 | [ct45 主机／编译记录](../firmware/esp32-audio/verification-ct45.json)，与部署及实物验收分开 |
+| 软件验证 | [ct46 候选构建与主机验证](../firmware/esp32-audio/verification-ct46.json)；已部署 ct45 的软件依据仍见 [ct45 记录](../firmware/esp32-audio/verification-ct45.json) |
 | 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，5998 字符已保存、重新打开逐字回读；平台哈希记录于独立角色同步文件 |
 | 运动 | 四方向，60–100% PWM、默认 100%；全速转向省略时长为 880 ms，其他普通动作默认 1000 ms；无编码器里程计 |
 | 并发与序列 | 四路独立截止，序列最多 16 步；步骤内并发，步骤间串行；取消不恢复 |
