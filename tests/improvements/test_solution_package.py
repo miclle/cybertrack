@@ -48,6 +48,17 @@ class SolutionPackageTest(unittest.TestCase):
                 self.assertIn("differs from manifest", failed.stderr)
                 replay.write_bytes(original)
 
+    def test_cli_creates_archive_and_refuses_overwrite(self):
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder)/"reference.zip"
+            command = [sys.executable, str(ROOT/"scripts/package_lingxi_solution.py"), "--output", str(output)]
+            report = json.loads(subprocess.check_output(command, cwd=ROOT, text=True))
+            original = output.read_bytes()
+            self.assertEqual(hashlib.sha256(original).hexdigest(), report["sha256"])
+            failed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+            self.assertNotEqual(failed.returncode, 0)
+            self.assertEqual(output.read_bytes(), original)
+
     def test_extensionless_license_and_notice_remain_explicit(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder).resolve()
