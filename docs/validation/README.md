@@ -117,3 +117,5 @@ python3 scripts/analyze_maintenance.py docs/validation/templates.json \
 [状态话术限定对照](stop-role-qualifier.md)保留十四次会话、角色快照及恢复回读。数值先行检查与产品采纳分列，三字减少不能当作静默通过。
 
 [ct67 无量化相对改稿门禁](relative-draft-duration.md)将原生十三组控制回放与二十条真实 STT 定向会话分开报告，不覆盖原固定语义、口述或家庭成绩。
+
+[原生数组步骤对照](native-step-inputs.md)保留两组共 176 次会话，基线 77/80、5/8，候选 75/80、4/8；实际参数按公布的字符串／数组 schema 分别评分，全部完整回执与终态重放一致。候选未采纳，原平台角色和主线 ct68 已恢复；该研究不替代真实语音、扬声器或现场验收。
