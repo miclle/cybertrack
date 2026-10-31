@@ -140,3 +140,5 @@ ct66 [即时停止回执](validation/stop-dispatch.md)只调整固件调度，�
 ct67 [相对改稿门禁](validation/relative-draft-duration.md)为可识别但未量化的相对长短请求返回 `draft_duration_unspecified` 与 `clarification_facts`，要求追问、不猜测、不换工具补做。角色与公开定义保持不变；拒绝不是保存成功，在线二十条定向语音仍有六条多余查询及过程播报。量化数值归属和其他意图错误仍待修，未部署。
 
 ct68 [含糊动作门禁](validation/vague-action-admission.md)对有限的泛化动作类别返回 `action_unspecified` 与 `clarification_facts`，要求澄清具体动作而不换工具补做。拒绝不意味着原有动作已停止，也不是草稿保存回执。compose 草稿编辑仍走原契约，明确停止保持优先。角色和十二项公开工具未改，未部署；模型误停和过程播报继续待修。
+
+[意图分流角色对照](validation/intent-routing-role.md)临时将角色 5991→5990→5991，72 次文本会话后未采纳；严格匹配均 29/36，候选仍擅改半秒且停止仍有 TTS 确认。仓库、平台保存回读和原参数均已恢复，未重启或刷写；这些是占位输入的主机诊断，不是实际 STT 门禁或真人成绩。

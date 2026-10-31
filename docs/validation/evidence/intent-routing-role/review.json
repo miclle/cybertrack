@@ -1,0 +1,1780 @@
+{
+  "scope": "Seventy-two role-only raw text sessions; host uses its synthetic placeholder input, not STT. Lexical STT guards and human/physical acceptance are not evaluated.",
+  "host_sha256": "a20da0879ee6447e94d8c9aad79057f8d38dd53235478d6f8765560043d15c6e",
+  "identity": {
+    "model": "deepseek-v4-flash",
+    "capture_source_sha256": "9adc5ebad10317a532a6c54f4b36e2e8f47a63950957ca4383d8f547bcaee47f",
+    "tool_schema_sha256": "62f76a865ce61c78eeecab640bf78d30854e4940aef07b55acabe598216fd6c1"
+  },
+  "groups": {
+    "baseline": {
+      "total": 36,
+      "completed": 36,
+      "strict_matches": 29,
+      "forbidden_calls": 1,
+      "false_stops": 1,
+      "stop_total": 6,
+      "stops_matched": 6,
+      "stops_without_tts_text": 0,
+      "explicit_edit_cancel_matches": 6,
+      "failed": [
+        {
+          "repeat": 1,
+          "id": "C008"
+        },
+        {
+          "repeat": 1,
+          "id": "C005"
+        },
+        {
+          "repeat": 1,
+          "id": "V079"
+        },
+        {
+          "repeat": 2,
+          "id": "C007"
+        },
+        {
+          "repeat": 2,
+          "id": "C008"
+        },
+        {
+          "repeat": 3,
+          "id": "C006"
+        },
+        {
+          "repeat": 3,
+          "id": "C005"
+        }
+      ],
+      "results": [
+        {
+          "repeat": 1,
+          "id": "V064",
+          "text": "不许吹泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不吹泡泡。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "C006",
+          "text": "不要编排表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不编排表演。有什么需要我做的吗？",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "N006",
+          "text": "不要停止当前序列",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "明白，不动当前序列。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": false
+        },
+        {
+          "repeat": 1,
+          "id": "C007",
+          "text": "草稿第一步改成点火",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "用户要求修改草稿，但草稿只支持行走和泡泡。点火不支持，需要说明。根据规则：草稿要求喷水或点火，直接说明只支持行走和泡泡，不查询、不提交。但这里用户说\"第一步改成点火\"，我需要先说明限制。不过规则说\"草稿要求喷水或点火，直接说明只支持行走和泡泡，不查询、不提交\"。所以我直接说明即可，不调用工具。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "C008",
+          "text": "第二步短一点",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "我需要先查看当前草稿的状态和版本。用户说\"第二步短一点\"，但没说具体几秒。草稿第二步是泡泡1000毫秒。需要问具体时长。第二步现在是吹泡泡一秒。你想改成几秒？",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "C005",
+          "text": "开始这段表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "好的，我来查看当前的表演草稿。当前有一个已保存的表演草稿，包含两步：先左转880毫秒，再吹泡泡1000毫秒。不过这个草稿需要在网页上预览并点击开始来执行，我这边没有语音确认执行的工具。目前设备处于空闲状态，草稿已经保存好了。请您在网页上预览这段表演，确认没问题后点一下开始按钮就可以播放了。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "V079",
+          "text": "动一下那个东西",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "你说的\"动一下那个东西\"有点含糊，我这边可以前进、后退、左右转、喷水、吹泡泡、点火这些动作。你想让我做哪个？或者直接说\"前进\"、\"喷水\"之类的就行。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "V047",
+          "text": "停止行走",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "好的，停下了。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "V049",
+          "text": "停止泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "动作都停下了，我在这儿等你。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "V001",
+          "text": "前进",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "receipt_results": [
+            "accepted"
+          ],
+          "reply": "好的，前进中。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "C002",
+          "text": "把草稿第二步泡泡改成两秒",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "replace_step",
+                "revision": 7,
+                "step": 2,
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_saved"
+          ],
+          "reply": "我先查一下当前草稿的状态当前草稿第二步是泡泡1秒，我把它改成2秒。第二步的泡泡已经改成两秒了。请在网页上预览一下，确认没问题再点开始。",
+          "final_revision": 8,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "C004",
+          "text": "取消这个草稿",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_cancelled"
+          ],
+          "reply": "草稿已经取消了。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "V064",
+          "text": "不许吹泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不吹泡泡。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "C006",
+          "text": "不要编排表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不编排表演。有什么其他需要帮忙的吗？",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "N006",
+          "text": "不要停止当前序列",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "我不会停止当前序列。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": false
+        },
+        {
+          "repeat": 2,
+          "id": "C007",
+          "text": "草稿第一步改成点火",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "我先查一下当前草稿的版本和内容。草稿只支持行走和泡泡，点火不支持加入表演，我没法把第一步改成点火。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "C008",
+          "text": "第二步短一点",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "I need to understand what \"第二步\" refers to in the contextof composing a show draft.Since the user mentions \"第二步短一点\" (make the second step shorter), this is about a show draft.Let me check the status first to understand the current draft.用户说\"第二步短一点\"，需要确认具体改成几秒。当前第二步是泡泡1000毫秒，用户没有给出明确时长。\"短一点\"是相对时长，没有明确新时长，按规则我只问要改成几秒。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "C005",
+          "text": "开始这段表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "\"开始这段表演\"是口头指令，需要网页确认。请问你是想让我编排/预览表演草稿，还是有具体的动作指令？如果你是要播放已经编排好的草稿，需要家长在网页上点\"开始\"按钮。如果你是想让我执行某个动作，请直接告诉我具体要做什么。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "V079",
+          "text": "动一下那个东西",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "“动一下那个东西”有点含糊，你是想让我走一走、转个方向，还是做别的动作？说清楚点我就来。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "V047",
+          "text": "停止行走",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "都停下来了，我在这儿等你。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "V049",
+          "text": "停止泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "动作都停下了，我在这儿等你。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "V001",
+          "text": "前进",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "receipt_results": [
+            "accepted"
+          ],
+          "reply": "好的，前进。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "C002",
+          "text": "把草稿第二步泡泡改成两秒",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "replace_step",
+                "revision": 7,
+                "step": 2,
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_saved"
+          ],
+          "reply": "草稿第二步泡泡时长是1000毫秒，改为2000毫秒第二步泡泡已经改成两秒了，草稿保存好了。请在网页上预览一下，确认没问题就点开始。",
+          "final_revision": 8,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "C004",
+          "text": "取消这个草稿",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_cancelled"
+          ],
+          "reply": "草稿有，版本7。我来取消它。草稿已经取消了。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "V064",
+          "text": "不许吹泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "这是否定指令，不启动泡泡，我不执行。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "C006",
+          "text": "不要编排表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": true,
+          "false_stop": true,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "好的，没有编排草稿在运行，动作都停下了。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "N006",
+          "text": "不要停止当前序列",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不停止，序列继续跑。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": false
+        },
+        {
+          "repeat": 3,
+          "id": "C007",
+          "text": "草稿第一步改成点火",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "用户要求把草稿第一步改成点火，但编排草稿只支持行走和泡泡，不支持点火。我需要先查询状态看看草稿情况。不过根据规则，草稿要求点火直接说明只支持行走和泡泡，不查询、不提交。所以我直接说明限制即可。草稿只支持行走和泡泡，点火这个效果不支持哦。你可以把第一步改成行走或吹泡泡。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "C008",
+          "text": "第二步短一点",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，请问第二步要改成几秒呢？",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "C005",
+          "text": "开始这段表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "用户说\"开始这段表演\"，但根据规则，口头\"开始表演\"不能替代网页确认。草稿保存后需要家长在网页预览并点开始，我没有语音确认执行工具。草稿已经保存好了，里面有2个步骤，共约2秒。这个需要你在网页上预览后点开始按钮才能播放，我这边没法直接启动草稿表演哦。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "V079",
+          "text": "动一下那个东西",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "这个表述有点模糊，你是想让我动哪个？行走、转向、喷水还是吹泡泡？说清楚我就照办。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "V047",
+          "text": "停止行走",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "动作都停下了，我在这儿等你。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "V049",
+          "text": "停止泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "都停了，我在这儿等你。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "V001",
+          "text": "前进",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "receipt_results": [
+            "accepted"
+          ],
+          "reply": "好的，前进！",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "C002",
+          "text": "把草稿第二步泡泡改成两秒",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "replace_step",
+                "revision": 7,
+                "step": 2,
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_saved"
+          ],
+          "reply": "我先查看当前草稿状态。草稿第二步是泡泡，改为两秒。草稿第二步的泡泡已经改成两秒了。请在网页上预览，确认后点开始就行。",
+          "final_revision": 8,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "C004",
+          "text": "取消这个草稿",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_cancelled"
+          ],
+          "reply": "草稿已取消，没有保存任何内容了。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        }
+      ]
+    },
+    "candidate": {
+      "total": 36,
+      "completed": 36,
+      "strict_matches": 29,
+      "forbidden_calls": 1,
+      "false_stops": 0,
+      "stop_total": 6,
+      "stops_matched": 6,
+      "stops_without_tts_text": 0,
+      "explicit_edit_cancel_matches": 6,
+      "failed": [
+        {
+          "repeat": 1,
+          "id": "C007"
+        },
+        {
+          "repeat": 1,
+          "id": "C008"
+        },
+        {
+          "repeat": 1,
+          "id": "C005"
+        },
+        {
+          "repeat": 2,
+          "id": "C008"
+        },
+        {
+          "repeat": 2,
+          "id": "C005"
+        },
+        {
+          "repeat": 3,
+          "id": "C008"
+        },
+        {
+          "repeat": 3,
+          "id": "C005"
+        }
+      ],
+      "results": [
+        {
+          "repeat": 1,
+          "id": "V064",
+          "text": "不许吹泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不吹泡泡。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "C006",
+          "text": "不要编排表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不编排表演。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "N006",
+          "text": "不要停止当前序列",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不停止当前序列。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": false
+        },
+        {
+          "repeat": 1,
+          "id": "C007",
+          "text": "草稿第一步改成点火",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "草稿只支持行走和泡泡，不支持点火，所以这个改动没法保存。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "C008",
+          "text": "第二步短一点",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": true,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "replace_step",
+                "revision": 7,
+                "step": 2,
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":500,\"ignition_ms\":0,\"speed_percent\":100}]"
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_saved"
+          ],
+          "reply": "我来查看当前草稿的版本和步骤。当前草稿第二步是吹泡泡1000毫秒。你说\"短一点\"，但没给具体时长，我需要知道改成几秒。第二步已经改成吹泡泡500毫秒（半秒）了，整条表演现在约1.6秒。请在网页预览后点开始确认。",
+          "final_revision": 8,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "C005",
+          "text": "开始这段表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "用户说\"开始这段表演\"，这是要求开始执行已保存的草稿。但根据规则，草稿的确认执行需要家长在网页上点开始，我没有语音确认执行的工具。当前有已保存的草稿（revision 7），包含两步：左转880ms，然后吹泡泡1000ms。用户说\"开始这段表演\"，这是口头要求开始草稿表演。根据规则，draft_saved后需要家长在网页预览、点开始，口头开始表演不替代网页确认。所以我应该说明需要网页确认。不过让我再想想——用户说\"开始这段表演\"，这确实是明确要求执行已保存的草稿。但规则明确指出：\"口头开始表演不替代网页确认，也不查状态。\"\n\n我应该告知用户需要在网页上点开始来执行表演。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "V079",
+          "text": "动一下那个东西",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "请问是要让机器人走、转向，还是做别的动作？说具体一点我好执行。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "V047",
+          "text": "停止行走",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "好的，已停止。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "V049",
+          "text": "停止泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "已停止。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "V001",
+          "text": "前进",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "receipt_results": [
+            "accepted"
+          ],
+          "reply": "好的，前进。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "C002",
+          "text": "把草稿第二步泡泡改成两秒",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "replace_step",
+                "revision": 7,
+                "step": 2,
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_saved"
+          ],
+          "reply": "I'll check the current draft status first to see theversion and stepsI'll update the second step's bubbles to 2 seconds (2000ms).第二步泡泡已改成两秒，草稿已保存。请在网页预览后点开始确认。",
+          "final_revision": 8,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 1,
+          "id": "C004",
+          "text": "取消这个草稿",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_cancelled"
+          ],
+          "reply": "草稿已取消。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "V064",
+          "text": "不许吹泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不吹泡泡。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "C006",
+          "text": "不要编排表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不编排表演。有别的需要随时说。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "N006",
+          "text": "不要停止当前序列",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不停止，序列继续执行。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": false
+        },
+        {
+          "repeat": 2,
+          "id": "C007",
+          "text": "草稿第一步改成点火",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "草稿只支持行走和吹泡泡，点火这个效果做不了。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "C008",
+          "text": "第二步短一点",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "This is a draft editing request.I need to check the current status first to get the draft version and steps.用户说\"第二步短一点\"，这是相对时长，没有明确新时长。我需要询问要改成几秒。草稿第二步是吹泡泡1000毫秒。用户说\"短一点\"但没有给具体时长。根据规则：\"用户说短一点等相对时长且没有明确新时长时，只问要改成几秒。\"\n\n第二步改成几秒？",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "C005",
+          "text": "开始这段表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "我需要先查看当前是否有草稿。让我查询状态。设备当前有已保存的草稿（版本7，含左转和吹泡泡两步）。用户说\"开始这段表演\"，但草稿的确认执行需要在网页端操作，没有语音确认执行的工具。我应说明需要家长在网页上点开始。草稿已经保存好了，这一步是左转，然后吹泡泡。开始表演需要在网页上确认，麻烦家长在网页预览后点开始吧。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "V079",
+          "text": "动一下那个东西",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "请问具体想让我做什么动作？前进、后退、转向、喷水还是吹泡泡？",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "V047",
+          "text": "停止行走",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "已停止。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "V049",
+          "text": "停止泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "已停止。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "V001",
+          "text": "前进",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "receipt_results": [
+            "accepted"
+          ],
+          "reply": "好的，前进中。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "C002",
+          "text": "把草稿第二步泡泡改成两秒",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "replace_step",
+                "revision": 7,
+                "step": 2,
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_saved"
+          ],
+          "reply": "草稿当前有2步，第2步是泡泡1秒。改为2秒（2000毫秒已把第二步的泡泡改成两秒，草稿已保存。请在网页上预览后点开始。",
+          "final_revision": 8,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 2,
+          "id": "C004",
+          "text": "取消这个草稿",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_cancelled"
+          ],
+          "reply": "草稿已取消。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "V064",
+          "text": "不许吹泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不吹泡泡。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "C006",
+          "text": "不要编排表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，不编排。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "N006",
+          "text": "不要停止当前序列",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "好的，我不会停止当前序列。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": false
+        },
+        {
+          "repeat": 3,
+          "id": "C007",
+          "text": "草稿第一步改成点火",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "草稿只支持行走和吹泡泡，点火做不了，我帮你改不了这一步。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "C008",
+          "text": "第二步短一点",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "我先查一下当前草稿的状态第二步现在是吹泡泡1000毫秒。你说短一点，具体要改成几秒呢？",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "C005",
+          "text": "开始这段表演",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": false,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "用户要求开始表演，但我没有编排草稿的上下文。让我查看状态确认是否有草稿。用户说\"开始这段表演\"，但根据规则，草稿的保存和开始需要通过网页确认，口头说开始表演不替代网页确认。设备状态显示有已保存草稿（2步），但\"开始\"需要通过网页操作。按照规则，draft_saved后需请家长在网页预览后点开始，口头开始表演不替代网页确认。当前没有草稿保存操作发生，只是用户口头要求开始。我应该说明需要网页确认。设备当前有已保存的表演草稿，但开始表演需要在网页上预览后点开始，我这边没法直接启动草稿。请家长在网页上确认一下。",
+          "final_revision": 7,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "V079",
+          "text": "动一下那个东西",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [],
+          "receipt_results": [],
+          "reply": "动作或方向不明确，想问下是要前进、后退还是左右转？",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "V047",
+          "text": "停止行走",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "已停止。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "V049",
+          "text": "停止泡泡",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "receipt_results": [
+            "ok"
+          ],
+          "reply": "已停止。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "V001",
+          "text": "前进",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "receipt_results": [
+            "accepted"
+          ],
+          "reply": "已接受。",
+          "final_revision": 0,
+          "starts": 1,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "C002",
+          "text": "把草稿第二步泡泡改成两秒",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "replace_step",
+                "revision": 7,
+                "step": 2,
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_saved"
+          ],
+          "reply": "草稿当前版本是第7版，第二步泡泡是1000毫秒，改成2000毫秒。第二步泡泡已改成两秒，草稿已保存。请在网页上预览后点开始。",
+          "final_revision": 8,
+          "starts": 0,
+          "outputs_off": true
+        },
+        {
+          "repeat": 3,
+          "id": "C004",
+          "text": "取消这个草稿",
+          "completed": true,
+          "completion": "tts_stop",
+          "strict_match": true,
+          "forbidden_call": false,
+          "false_stop": false,
+          "is_stop": false,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "receipt_results": [
+            "ok",
+            "draft_cancelled"
+          ],
+          "reply": "草稿已取消。",
+          "final_revision": 0,
+          "starts": 0,
+          "outputs_off": true
+        }
+      ]
+    }
+  },
+  "structural_preflight_passed": false,
+  "adoption": "preflight insufficient; restore original role",
+  "replies_and_final_states_reproduced": true
+}

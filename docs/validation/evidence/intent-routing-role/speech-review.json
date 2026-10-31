@@ -1,0 +1,43 @@
+{
+  "scope": "Manual review of retained TTS text, not speaker playback",
+  "adopted": false,
+  "observations": [
+    {
+      "group": "baseline",
+      "repeat": 3,
+      "id": "C006",
+      "issue": "Negated future composition incorrectly called stop and cleared the revision-7 draft; a forbidden call."
+    },
+    {
+      "group": "candidate",
+      "repeat": 1,
+      "id": "C008",
+      "issue": "Guessed 500 ms without a user quantity; actual reply draft_saved, revision 7 to 8. Narrated needing clarification and then claimed the change."
+    },
+    {
+      "group": "candidate",
+      "repeat": 1,
+      "id": "C002",
+      "issue": "English process text precedes the final saved-edit confirmation despite the Chinese-only instruction."
+    },
+    {
+      "group": "candidate",
+      "repeat": "1,2,3",
+      "id": "C005",
+      "issue": "All three speak rule analysis and query despite saying oral start cannot replace web confirmation."
+    },
+    {
+      "group": "candidate",
+      "repeat": "1,2,3",
+      "id": "C007",
+      "issue": "Final denial is concise and correct, but repeat 1 still queries unnecessarily."
+    },
+    {
+      "group": "both",
+      "repeat": "1,2,3",
+      "id": "V047,V049",
+      "issue": "All twelve explicit stops call the correct tool, but all twelve still include TTS confirmation. Shorter candidate acknowledgements are not silent success."
+    }
+  ],
+  "decision": "Do not adopt or expand to fixed eighty/eight suite; source and saved platform role restored. No per-language/keyword audio filter introduced."
+}
