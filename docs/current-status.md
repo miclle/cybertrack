@@ -17,7 +17,7 @@
 | 电源 | 辰克 5 V 电池包、12 V 升压电机支路；旧电源测试不迁移 |
 | 机械 | [当前模型](../hardware/model/README.md)，Lean／Ready 各 27 件、6 盘；须按各自说明切片 |
 | 实物 | 已有样机及分项现场反馈；当前整机持续负载、停止性能、可靠性及完整语音回归未验收 |
-| 只读帮助 | ct43 引入、ct45 已部署[上手与回执解释](status-explanation.md)，不自动执行或重试；线上语音待验 |
+| 只读帮助 | ct43 引入、ct45 已部署[上手与回执解释](status-explanation.md)，不自动执行或重试；线上隔离解释已运行，发现猜测和恢复表述偏差；见[联调结果](validation/lingxi-ct45-20261031.md) |
 | 编排 | ct45 新增[泡泡剧场编辑器](show-composer.md)与登场／庆祝／谢幕模板；设备版本预览、显式确认及取消；无动作草稿路径已在设备验证 |
 | 新改进 | [执行计划](improvement-plan.md)，部署不等于实物验收 |
 
@@ -26,6 +26,9 @@ ct45 部署检查的 39 条状态／操作回执全部输出关闭、动作启�
 旧版本参数及证据保留在各专题的历史章节；当前能力以本页、[接口手册](../firmware/CAPABILITIES.md)与源码交叉核对。
 
 ## 统一软件检查
+
+
+真实灵矽隔离文本联调已完成首轮：80 条工具匹配 76 条（95%），8 条编排匹配 5 条；成功静默及只读解释尚未通过。无前缀诊断单独保留，未替代首轮成绩。真实设备网页、草稿 300538 ms 到期和六类非法输入拒绝均保持零启动。完整边界见[联调记录](validation/lingxi-ct45-20261031.md)。
 
 运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct45-src`，增加实际 MCP／HTTP 与音频适配检查。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
 
