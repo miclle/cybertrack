@@ -14,6 +14,8 @@
     "Actual control guard and Reply tested with 2500 ms bubbles and concurrent 500 ms water; accepted receipt and duration match enable muting.",
     "Rejection, missing/wrong duration, delayed receipt, multi-clause, question, negation and over-limit speech retain audio.",
     "ct60/ct61 tool schemas differ only in the water description, clarifying 1 ms minimum versus 1000 ms unspecified default.",
-    "All eight local software check groups passed against ct61, including 65 improvement tests and control/MCP/audio/stop suites."
+    "All eight local software check groups passed against ct61, including 65 improvement tests and control/MCP/audio/stop suites.",
+    "Expanded validation passed all ten check groups, including 67 improvement tests and the full prepared MCP dispatcher/callback host with synthetic protocol checks. Firmware image unchanged.",
+    "Full-host capture rejects mixing fixture transformations; the final complete improvement suite passed 68 tests."
   ]
 }
