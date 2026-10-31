@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-31",
+  "scope": "Actual desktop MCP app: saved comment, host acceptance, explicit agent MCP readback and receipt, GUI native edit/restore and same-card updates. Automatic app-message-triggered turn remains unverified.",
+  "plugin_version": "0.9.2",
+  "source": "hardware/model/CyberTrack.FCStd",
+  "source_sha256": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23",
+  "production_unchanged": true,
+  "document_id": "solidcue-35d77545-836d-4915-807c-a95ade093ba4",
+  "native_document_uid": "f293a227-30e8-4add-9f6d-eaa0abd9969e",
+  "visible_shape_objects": 198,
+  "target": "PrintCrown",
+  "selection_kind": "object",
+  "placement_z_mm": [
+    0,
+    8,
+    0
+  ],
+  "non_target_native_objects_unchanged": 197,
+  "saved_edit_and_restore_gui_readback": "passed: 198 native fingerprints and 217 display states",
+  "revisions": [
+    "r7",
+    "r8",
+    "r9"
+  ],
+  "same_native_host_card_update": true,
+  "host_card_status": "connected to current conversation",
+  "comment_id": "b701481c-6a93-4336-a6e7-dc2acf9e6fe3",
+  "comment_sha256": "e61216badf2e079b76d7d434bd431a0b94146c89912385e288d3495f3c98eeb6",
+  "comment_created_at": "2026-10-31T02:30:16.028Z",
+  "host_message_acceptance": "passed: UI reports host accepted message",
+  "agent_receipt_at": "2026-10-31T02:31:31.580Z",
+  "agent_comment_read_path": "explicit get_state MCP readback during goal continuation",
+  "automatic_message_triggered_turn": "not_verified: recent chat turns contain user restart request and goal continuation, not separate app message",
+  "restored_scene_fingerprint": "7b6e59518c517cff2065870138bedd5a80bfba3eb26d2dda78ed9d6654b92842",
+  "snapshot_hashes": {
+    "assembly-host-edit-20261031": {
+      "manifest_sha256": "690e1f3334689938d976777e1c7939a8182510ab17d1774ca5af08578ddc6ac3",
+      "native_sha256": "6598b65c6e074efa8b7686c0e28598b0ea95e36fff4919bc274d167dcd25c122"
+    },
+    "assembly-host-restored-20261031": {
+      "manifest_sha256": "deac019ad4a0d85e1840f629bdab31e743f998a195f503fc0578df1f7602c798",
+      "native_sha256": "173fec787ad5596454f9992500aef80debdc4e08ccc1db4145b5f700e0f84313"
+    }
+  },
+  "screenshots": {
+    "docs/images/model-design/whole-model-host-adjusted.png": "175dd439c1abec46dec7ca5c41f1753f7ec4e04998fd5d8c615525b4ef60d503",
+    "output/solidcue/host-comment-r7.png": "f7ed41b6972dfdfdcab2a3c93c3c44cf136a321fe8cdfa236de9302e7fe41711",
+    "output/solidcue/host-restored-r9.png": "4bf4846003bfaf3164184652f8e521bb1d41788a38bd8a54d1407809e6c5af6c"
+  },
+  "step_validation": false,
+  "physical_acceptance": false
+}
