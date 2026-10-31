@@ -1,5 +1,7 @@
 # CyberTrack 面包板：小D 语音与四路控制
 
+ct62 候选按识别输入代际阻止失败后的自动动作重试／补做，停止与查询保留，新输入恢复；已完成构建与主机回放，未部署。[验证与边界](../../docs/validation/voice-input-guard.md)
+
 ct47 候选在草稿回执列出可用通道，驱动输出故障查询增加家长排查说明。[ct47 软件验证](verification-ct47.json)
 
 ct46 增加短指令成功播报控制、设备状态解释和改稿前读版本检查。[构建与软件证据](verification-ct46.json) · [隔离平台验收](../../docs/validation/lingxi-ct46.md)

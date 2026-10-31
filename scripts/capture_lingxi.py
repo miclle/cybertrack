@@ -176,7 +176,7 @@ def firmware_profile(context):
 
 def firmware_replay(executable, profile, calls):
     lines = subprocess.check_output([str(executable),profile],input=json.dumps(calls),text=True,timeout=10).splitlines()
-    rpc_count = sum('inspect_ms' not in call for call in calls)
+    rpc_count = sum('name' in call for call in calls)
     if len(lines) != rpc_count + 1:
         raise RuntimeError('incomplete firmware dispatch replay')
     return list(map(json.loads,lines))

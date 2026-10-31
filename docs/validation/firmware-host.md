@@ -6,7 +6,7 @@
 
 主机程序从 prepared 源码提取实际 DoToolCall、Property／McpTool 序列化、十二个工具注册及回调、动作票据入口、Reply 序列化，并编译同版控制守卫。它复用默认参数、校验、票据去重、来源仲裁、拒绝结果、序列、计时与取消。
 
-Application::Schedule 在主机立即执行。时间由输入发送后的实际调用时刻驱动，以最长 5 ms 的步长推进控制循环。没有 GPIO、串口、HTTP 设备或输出回调。测距固定为 600 mm，由真实 Reading 序列化器生成新鲜读数。
+Application::Schedule 默认在主机立即执行；输入代际测试可显式推迟回调，再由 flush 事件执行队列。时间由输入发送后的调用时刻驱动，以最长 5 ms 的步长推进控制循环。没有 GPIO、串口、HTTP 设备或输出回调。测距固定为 600 mm，由真实 Reading 序列化器生成新鲜读数。
 
 回执里的 device_id／boot_id 是固定桩值，source／actuator_backend 等常量沿用序列化源码；执行位置由外层 scope、主机二进制摘要及构建清单共同标识。主机检查不测实际调度延迟、驱动、供电、声音、机械输出或传感器。
 
@@ -27,13 +27,14 @@ Application::Schedule 在主机立即执行。时间由输入发送后的实际�
 需要完整 checkout、已准备的同版固件源码和 ESP-IDF cJSON，不自动下载或刷写。
 
 ```sh
-python3 scripts/build_firmware_host.py --source build/xiaozhi-ct61-src --output build/full-firmware-host
+python3 scripts/build_firmware_host.py --source build/xiaozhi-ct62-src --output build/full-firmware-host
 python3 scripts/check_firmware_host.py --executable build/full-firmware-host/firmware_host
+python3 scripts/check_voice_turn.py --executable build/full-firmware-host/firmware_host
 ```
 
 构建器核对 prepared 的控制头文件与仓库来源，生成含二进制及输入摘要的 manifest.json。协议检查把固定集的 80 份预期调用作为合成测试输入，通过实际分发和回调核对守卫，再测非法参数、未知工具、重复编号和无效停止请求。停止场景另推进至第 60 秒，检查后续步骤没有恢复。它验证主机工具链，不构成 80 条模型成绩。
 
-统一检查的 `--source` 路径会运行构建器与协议检查。开始平台采集前，应复制二进制到固定文件，避免其他构建替换正在使用的程序。
+统一检查的 `--source` 路径会运行构建器、协议及[输入失败隔离检查](voice-input-guard.md)。输入代际检查使用八组合成输入／队列事件和四条已保留的平台请求；不会生成新的模型成绩。开始平台采集前，应复制二进制到固定文件，避免其他构建替换正在使用的程序。下文 ct61 平台命令与成绩保留其历史版本。
 
 ## 平台采集
 

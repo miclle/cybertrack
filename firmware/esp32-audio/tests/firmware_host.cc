@@ -13,8 +13,18 @@ bool initialized = false;
 #define ESP_LOGE(...) ((void)0)
 class Application {
 public:
+    bool defer = false;
+    std::vector<std::function<void()>> pending;
     static Application& GetInstance() { static Application instance; return instance; }
-    void Schedule(std::function<void()> callback) { callback(); }
+    void Schedule(std::function<void()> callback) {
+        if (defer) pending.push_back(std::move(callback));
+        else callback();
+    }
+    void Flush() {
+        auto callbacks = std::move(pending);
+        pending.clear();
+        for (auto& callback : callbacks) callback();
+    }
 };
 
 class McpServer {
@@ -22,12 +32,16 @@ class McpServer {
     std::vector<McpTool*> tools_;
 public:
     std::string reply;
+    std::vector<std::string> responses;
     void AddTool(const std::string& name, const std::string& description, const PropertyList& properties,
                  std::function<ReturnValue(const PropertyList&)> callback) {
         owned_.emplace_back(new McpTool(name, description, properties, callback));
         tools_.push_back(owned_.back().get());
     }
-    void ReplyResult(int, const std::string& result) { reply = "{\"result\":" + result + "}"; }
+    void ReplyResult(int, const std::string& result) {
+        reply = "{\"result\":" + result + "}";
+        responses.push_back(reply);
+    }
     void ReplyError(int, const std::string& message) {
         auto* object = cJSON_CreateObject();
         auto* error = cJSON_AddObjectToObject(object,"error");
@@ -35,6 +49,7 @@ public:
         char* raw = cJSON_PrintUnformatted(object);
         if (!raw) throw std::runtime_error("cannot encode host error");
         reply = raw;
+        responses.push_back(reply);
         cJSON_free(raw);
         cJSON_Delete(object);
     }
@@ -94,6 +109,7 @@ int main(int argc, char** argv) {
 
     // Bootstrap requests belong to setup, not the captured platform RPC epoch.
     guard.NewVoiceSession();
+    CyberTrackVoiceInput("captured host input");
     McpServer server;
 #include "host_registration.inc"
     std::string input;
@@ -110,9 +126,25 @@ int main(int argc, char** argv) {
             continue;
         }
         const auto* elapsed=cJSON_GetObjectItemCaseSensitive(call,"elapsed_ms");
+        if (!ShowInteger(elapsed,0,300000) || !Advance(elapsed->valueint)) return 2;
+        if (const auto* text=cJSON_GetObjectItemCaseSensitive(call,"input_text")) {
+            if (!cJSON_IsString(text)) return 2;
+            CyberTrackVoiceInput(text->valuestring);
+            continue;
+        }
+        if (const auto* flush=cJSON_GetObjectItemCaseSensitive(call,"flush")) {
+            if (!cJSON_IsTrue(flush)) return 2;
+            Application::GetInstance().Flush();
+            continue;
+        }
+        if (const auto* online=cJSON_GetObjectItemCaseSensitive(call,"voice_online")) {
+            if (!cJSON_IsBool(online)) return 2;
+            sessions.VoiceLink(clock_ms,cJSON_IsTrue(online));
+            continue;
+        }
         const auto* name=cJSON_GetObjectItemCaseSensitive(call,"name");
         const auto* args=cJSON_GetObjectItemCaseSensitive(call,"arguments");
-        if (!ShowInteger(elapsed,0,300000) || !Advance(elapsed->valueint) || !cJSON_IsString(name)) return 2;
+        if (!cJSON_IsString(name)) return 2;
         std::string tool=name->valuestring;
         if (tool.compare(0,10,"self_tank_")==0) tool.replace(0,10,"self.tank.");
         if (profile=="corpus_draft7_conflict" && !conflict_applied && tool=="self.tank.compose") {
@@ -131,9 +163,14 @@ int main(int argc, char** argv) {
         const auto* rpc=cJSON_GetObjectItemCaseSensitive(call,"rpc_id");
         if (rpc && !ShowInteger(rpc,INT_MIN,INT_MAX)) return 2;
         server.reply.clear();
+        const auto* defer=cJSON_GetObjectItemCaseSensitive(call,"defer");
+        if (defer && !cJSON_IsBool(defer)) return 2;
+        Application::GetInstance().defer=cJSON_IsTrue(defer);
         server.DoToolCall(rpc ? rpc->valueint : ++id,tool,args);
-        if (server.reply.empty()) return 3;
-        std::cout << server.reply << '\n';
+        Application::GetInstance().defer=false;
+        if (server.reply.empty() && !cJSON_IsTrue(defer)) return 3;
     }
+    Application::GetInstance().Flush();
+    for (const auto& response : server.responses) std::cout << response << '\n';
     std::cout << Reply("get_status") << '\n';
 }
