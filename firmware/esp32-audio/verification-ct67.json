@@ -1,0 +1,25 @@
+{
+  "version": "2.0.3-ct67",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Observed STT marks relative draft requests lacking quantitative duration; mutation rejected before callbacks apply changes, failed-input fallback blocked, query/stop/trusted web preserved; not general intent understanding.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2714816,
+    "sha256": "69ae820cc97b728a6015edbb476a318ddfb13aac90f158b0c0ff95734884d282"
+  },
+  "checks": [
+    "Complete ESP-IDF 5.5.1 build passes.",
+    "Thirteen native actual-MCP scenarios pass, preserving exact durations, direction defaults, cancel recovery, stale callback isolation, stop and retained C008 requests.",
+    "Classifier and trusted web/stop rejection boundary sanitizer tests pass.",
+    "All twelve public tool definitions unchanged from ct66.",
+    "Twenty declared targeted synthetic voice sessions complete: literal STT 20/20, expected state 20/20, strict tool calls 14/20; six extra read-only queries remain.",
+    "Six relative requests preserve the draft; this sample has zero attempted mutating calls for these inputs, so no live rejection interception is claimed.",
+    "Final quantitative unit refinement produces identical full MCP replies and final states for all twenty retained sessions.",
+    "All fourteen final local check groups pass, including 86 improvement tests; no full-suite model results overwritten."
+  ],
+  "pending": [
+    "General intent/quantity attribution, process narration, deployment and physical/human acceptance remain incomplete"
+  ],
+  "evidence": "../../docs/validation/evidence/ct67-relative-draft/platform-review.json"
+}

@@ -1,5 +1,7 @@
 # CyberTrack 面包板：小D 语音与四路控制
 
+ct67 候选增加基于本轮 STT 的无量化相对改稿门禁，拒绝猜测修改与同轮补做，保留查询、全停和可信网页；公开工具与角色未改，未部署。[范围和验证](../../docs/validation/relative-draft-duration.md)
+
 ct66 候选同步完成 MCP 全停与回执，不留二次排队回调；分配回执失败时仍先关闭输出。公开工具与角色未改，最近部署仍是 ct45。[调度与验证](../../docs/validation/stop-dispatch.md)
 
 ct63 候选扩展普通组合／序列及目标速度的成功确认播放匹配，只有完整原话、参数和成功回执一致才抑制音频。已有 STT 事件回放抑制 216 个新增确认包、保留 397 个状态／否定／澄清包；未部署。[验证与范围](../../docs/validation/plan-feedback.md)
@@ -60,7 +62,7 @@ ct23 增加网页“左转＋喷水，各 3 秒”对照入口，调用现有组
 
 ## 当前能力与验证范围
 
-源码候选为 `2.0.3-ct66`、最近记录部署为 `2.0.3-ct45`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十二个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`compose`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
+源码候选为 `2.0.3-ct67`、最近记录部署为 `2.0.3-ct45`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十二个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`compose`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
 
 | 功能 | 当前规则 |
 |---|---|
