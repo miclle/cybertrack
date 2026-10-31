@@ -60,7 +60,7 @@ ct23 增加网页“左转＋喷水，各 3 秒”对照入口，调用现有组
 
 ## 当前能力与验证范围
 
-默认源码与最新部署版本为 `2.0.3-ct42`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
+源码候选为 `2.0.3-ct66`、最近记录部署为 `2.0.3-ct45`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十二个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`compose`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
 
 | 功能 | 当前规则 |
 |---|---|

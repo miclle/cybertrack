@@ -99,8 +99,9 @@ python3 scripts/review_lingxi_reference.py
 - [单次识别失败隔离](docs/validation/voice-input-guard.md)另附 ct62 构建及离线控制回放证据；C005 拒绝后换用 sequence 被拦截，零启动。它不是新的模型成绩，原模型禁止调用记录保持不变。重跑控制回放仍需完整 checkout 与 prepared 固件，本包仅核对所存材料的完整性。
 - [真实 STT 驱动主机](docs/validation/ct62-stt-host.md)的二十条合成语音另在 `spoken_stt_review` 复算转写与工具结果：19 条正常结束并匹配，V017 未收到结束事件仍保留。事件与控制回执完整重放需要完整 checkout 和固定主机二进制。
 - [ct63 播放匹配](docs/validation/plan-feedback.md)另附构建和离线回放：同一批事件新增抑制 216 个组合／序列／目标速度确认包，保留 397 个状态／否定／澄清包；30 条合成不一致保留音频。这不是新的模型成绩，播放重跑需要完整 checkout 和同版 C++ 回放器。
-- [回执收敛试验](docs/validation/compact-model-receipts.md)未采纳；`compact_receipt_scores` 保留 5/8 及 C006 的禁止调用。字节减少不等于语义通过，主线仍为 ct63。实验源码补丁和完整 MCP 重放需要按专题中的范围复核。
-- [停止说明对照](docs/validation/stop-negation.md)也未采纳；`stop_negation_scores` 重算语义 77/80 与编排 6/8，继续标明 V064 误停、V079 含糊请求擅自前进。八条明确停止通过不能抵消禁止调用；诊断 ct65 未部署，主线仍为 ct63。
+- [回执收敛试验](docs/validation/compact-model-receipts.md)未采纳；`compact_receipt_scores` 保留 5/8 及 C006 的禁止调用。字节减少不等于语义通过，该试验结束后恢复 ct63，当前候选见版本表。实验源码补丁和完整 MCP 重放需要按专题中的范围复核。
+- [停止说明对照](docs/validation/stop-negation.md)也未采纳；`stop_negation_scores` 重算语义 77/80 与编排 6/8，继续标明 V064 误停、V079 含糊请求擅自前进。八条明确停止通过不能抵消禁止调用；诊断 ct65 未部署，该试验结束后恢复 ct63，当前候选见版本表。
+- [ct66 即时停止回执](docs/validation/stop-dispatch.md)附八组实际 MCP 调度回放、回执分配失败和十三组软件检查摘要。停止校验后同步完成，不留二次回调；公开工具及角色不变。包内只核对记录完整性，重跑控制与分配失败测试需要完整 checkout，不是第八组模型成绩，也没有部署。
 - [编排说明对照](docs/validation/compose-routing.md)保留了未采纳的诊断：工具匹配增多，但一次含糊请求擅自缩短草稿。包内含摘要与两份定义，原始轨迹和该诊断的重算需要完整 checkout。
 - 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
 - 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
