@@ -1,0 +1,2095 @@
+{
+  "scope": "Offline replay of real-platform raw-text traces; no new model run, ASR, speaker or board acceptance",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "host_sha256": "8586932c9e1111143786c17971ec9302a00ef5fd11207c204b3cb7907fed82de",
+  "pilot": [
+    {
+      "group": "baseline",
+      "repeat": 1,
+      "id": "C006",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 17
+    },
+    {
+      "group": "baseline",
+      "repeat": 2,
+      "id": "C006",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 16
+    },
+    {
+      "group": "baseline",
+      "repeat": 3,
+      "id": "C006",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 53
+    },
+    {
+      "group": "diagnostic",
+      "repeat": 1,
+      "id": "C006",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 9
+    },
+    {
+      "group": "diagnostic",
+      "repeat": 2,
+      "id": "C006",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 9
+    },
+    {
+      "group": "diagnostic",
+      "repeat": 3,
+      "id": "C006",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 7
+    }
+  ],
+  "contrast": [
+    {
+      "id": "N001",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 19
+    },
+    {
+      "id": "N002",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 16
+    },
+    {
+      "id": "N003",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 27
+    },
+    {
+      "id": "N004",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 12
+    },
+    {
+      "id": "N005",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [],
+      "reply_characters": 52
+    },
+    {
+      "id": "N006",
+      "completed": true,
+      "strict_tool_match": false,
+      "unexpected_control_calls": [],
+      "draft_revision": 0,
+      "draft_matches": true,
+      "starts": 1,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "reply_characters": 117
+    },
+    {
+      "id": "N007",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 0,
+      "draft_matches": true,
+      "starts": 1,
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "reply_characters": 13
+    },
+    {
+      "id": "N008",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 0,
+      "draft_matches": true,
+      "starts": 1,
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "reply_characters": 14
+    },
+    {
+      "id": "N009",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 0,
+      "draft_matches": true,
+      "starts": 1,
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "reply_characters": 14
+    },
+    {
+      "id": "N010",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 1,
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "reply_characters": 48
+    },
+    {
+      "id": "N011",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 7,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "reply_characters": 21
+    },
+    {
+      "id": "N012",
+      "completed": true,
+      "strict_tool_match": true,
+      "unexpected_control_calls": [],
+      "draft_revision": 0,
+      "draft_matches": true,
+      "starts": 0,
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "cancel",
+            "revision": 7,
+            "step": 0,
+            "steps_json": ""
+          }
+        }
+      ],
+      "reply_characters": 10
+    }
+  ],
+  "contrast_strict_matches": 11,
+  "contrast_total": 12,
+  "can_proceed_to_fixed_suite": true,
+  "strict_mismatch_ids": [
+    "N006"
+  ],
+  "replies_and_final_states_match": true,
+  "fixed_suites": {
+    "scope": "Offline replay of all 88 real-platform text sessions through frozen ct65 host; no device IO",
+    "host_sha256": "827cb00f314596af5c122266ead6695a0fbfa4c074e1135a207b1e60bd93c057",
+    "voice": {
+      "correct": 77,
+      "total": 80,
+      "forbidden_call_cases": [
+        "V064",
+        "V079"
+      ],
+      "incomplete": [],
+      "failed_stop_cases": [],
+      "results": [
+        {
+          "id": "V001",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 6
+        },
+        {
+          "id": "V002",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 2000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 8
+        },
+        {
+          "id": "V003",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 5000,
+                "speed_percent": 60
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 60,
+            "right": 60,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 16
+        },
+        {
+          "id": "V004",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 60000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 100,
+            "right": 100,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 9
+        },
+        {
+          "id": "V005",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "backward",
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 4
+        },
+        {
+          "id": "V006",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "backward",
+                "duration_ms": 2000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 8
+        },
+        {
+          "id": "V007",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "backward",
+                "duration_ms": 5000,
+                "speed_percent": 60
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": -60,
+            "right": -60,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 16
+        },
+        {
+          "id": "V008",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "backward",
+                "duration_ms": 60000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": -100,
+            "right": -100,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 9
+        },
+        {
+          "id": "V009",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "left",
+                "duration_ms": 880
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 8
+        },
+        {
+          "id": "V010",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "left",
+                "duration_ms": 2000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 8
+        },
+        {
+          "id": "V011",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "left",
+                "duration_ms": 5000,
+                "speed_percent": 60
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": -60,
+            "right": 60,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 15
+        },
+        {
+          "id": "V012",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "left",
+                "duration_ms": 60000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": -100,
+            "right": 100,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 9
+        },
+        {
+          "id": "V013",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "right",
+                "duration_ms": 880
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 6
+        },
+        {
+          "id": "V014",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "right",
+                "duration_ms": 2000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 8
+        },
+        {
+          "id": "V015",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "right",
+                "duration_ms": 5000,
+                "speed_percent": 60
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 60,
+            "right": -60,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 16
+        },
+        {
+          "id": "V016",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "right",
+                "duration_ms": 60000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 100,
+            "right": -100,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 9
+        },
+        {
+          "id": "V017",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.water",
+              "arguments": {
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 8
+        },
+        {
+          "id": "V018",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.water",
+              "arguments": {
+                "duration_ms": 2000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 8
+        },
+        {
+          "id": "V019",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.water",
+              "arguments": {
+                "duration_ms": 30000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 10
+        },
+        {
+          "id": "V020",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.water",
+              "arguments": {
+                "duration_ms": 30000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": true,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 10
+        },
+        {
+          "id": "V021",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.bubbles",
+              "arguments": {
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 8
+        },
+        {
+          "id": "V022",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.bubbles",
+              "arguments": {
+                "duration_ms": 2000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 10
+        },
+        {
+          "id": "V023",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.bubbles",
+              "arguments": {
+                "duration_ms": 30000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": true,
+            "ignition": false
+          },
+          "reply_characters": 11
+        },
+        {
+          "id": "V024",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.bubbles",
+              "arguments": {
+                "duration_ms": 30000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": true,
+            "ignition": false
+          },
+          "reply_characters": 21
+        },
+        {
+          "id": "V025",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.ignition",
+              "arguments": {
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 9
+        },
+        {
+          "id": "V026",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.ignition",
+              "arguments": {
+                "duration_ms": 2000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 8
+        },
+        {
+          "id": "V027",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.ignition",
+              "arguments": {
+                "duration_ms": 5000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": true
+          },
+          "reply_characters": 8
+        },
+        {
+          "id": "V028",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.ignition",
+              "arguments": {
+                "duration_ms": 5000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 32
+        },
+        {
+          "id": "V029",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move_and_water",
+              "arguments": {
+                "direction": "forward",
+                "move_duration_ms": 5000,
+                "water_duration_ms": 5000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 2,
+          "logical_outputs": {
+            "left": 100,
+            "right": 100,
+            "water": true,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 18
+        },
+        {
+          "id": "V030",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move_and_water",
+              "arguments": {
+                "direction": "left",
+                "move_duration_ms": 3000,
+                "water_duration_ms": 1000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 2,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 17
+        },
+        {
+          "id": "V031",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.sequence",
+              "arguments": {
+                "steps_json": "[{\"direction\":\"forward\",\"move_ms\":5000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 100,
+            "right": 100,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 19
+        },
+        {
+          "id": "V032",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.sequence",
+              "arguments": {
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0},{\"direction\":\"backward\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 2,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 19
+        },
+        {
+          "id": "V033",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.sequence",
+              "arguments": {
+                "steps_json": "[{\"direction\":\"left\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":3000,\"ignition_ms\":0}]"
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 2,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 66
+        },
+        {
+          "id": "V034",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.sequence",
+              "arguments": {
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":2000,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 2,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 18
+        },
+        {
+          "id": "V035",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.sequence",
+              "arguments": {
+                "steps_json": "[{\"direction\":\"forward\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0}]"
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 3,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 11
+        },
+        {
+          "id": "V036",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.sequence",
+              "arguments": {
+                "steps_json": "[{\"direction\":\"forward\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":70},{\"direction\":\"right\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":70}]"
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 2,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 28
+        },
+        {
+          "id": "V037",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.set_speed",
+              "arguments": {
+                "speed_percent": 60
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 60,
+            "right": 60,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 9
+        },
+        {
+          "id": "V038",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.adjust_speed",
+              "arguments": {
+                "delta_percent": 10
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 80,
+            "right": 80,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 14
+        },
+        {
+          "id": "V039",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.adjust_speed",
+              "arguments": {
+                "delta_percent": -10
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 60,
+            "right": 60,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 9
+        },
+        {
+          "id": "V040",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.set_speed",
+              "arguments": {
+                "speed_percent": 100
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 100,
+            "right": 100,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 6
+        },
+        {
+          "id": "V041",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 39
+        },
+        {
+          "id": "V042",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 34
+        },
+        {
+          "id": "V043",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 38
+        },
+        {
+          "id": "V044",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 56
+        },
+        {
+          "id": "V045",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 14,
+          "outputs_off_at_60s": true
+        },
+        {
+          "id": "V046",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 14,
+          "outputs_off_at_60s": true
+        },
+        {
+          "id": "V047",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 14,
+          "outputs_off_at_60s": true
+        },
+        {
+          "id": "V048",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 14,
+          "outputs_off_at_60s": true
+        },
+        {
+          "id": "V049",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 14,
+          "outputs_off_at_60s": true
+        },
+        {
+          "id": "V050",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 14,
+          "outputs_off_at_60s": true
+        },
+        {
+          "id": "V051",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 13,
+          "outputs_off_at_60s": true
+        },
+        {
+          "id": "V052",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 14,
+          "outputs_off_at_60s": true
+        },
+        {
+          "id": "V053",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 15
+        },
+        {
+          "id": "V054",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 10
+        },
+        {
+          "id": "V055",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 15
+        },
+        {
+          "id": "V056",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 19
+        },
+        {
+          "id": "V057",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 21
+        },
+        {
+          "id": "V058",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 9
+        },
+        {
+          "id": "V059",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 7
+        },
+        {
+          "id": "V060",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 11
+        },
+        {
+          "id": "V061",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 31
+        },
+        {
+          "id": "V062",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 7
+        },
+        {
+          "id": "V063",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 11
+        },
+        {
+          "id": "V064",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 22
+        },
+        {
+          "id": "V065",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 19
+        },
+        {
+          "id": "V066",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 7
+        },
+        {
+          "id": "V067",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 54
+        },
+        {
+          "id": "V068",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 11
+        },
+        {
+          "id": "V069",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 42
+        },
+        {
+          "id": "V070",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 59
+        },
+        {
+          "id": "V071",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 53
+        },
+        {
+          "id": "V072",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 28
+        },
+        {
+          "id": "V073",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 31
+        },
+        {
+          "id": "V074",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 49
+        },
+        {
+          "id": "V075",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 73
+        },
+        {
+          "id": "V076",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 11
+        },
+        {
+          "id": "V077",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 42
+        },
+        {
+          "id": "V078",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 35
+        },
+        {
+          "id": "V079",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "forward",
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 1,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 89
+        },
+        {
+          "id": "V080",
+          "completed": true,
+          "calls": [],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 32
+        }
+      ],
+      "replies_and_final_states_match": true
+    },
+    "compose": {
+      "correct": 6,
+      "total": 8,
+      "forbidden_call_cases": [],
+      "incomplete": [],
+      "failed_stop_cases": [],
+      "results": [
+        {
+          "id": "C001",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "replace",
+                "revision": 0,
+                "step": 0,
+                "steps_json": "[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+              }
+            }
+          ],
+          "final_revision": 1,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 58
+        },
+        {
+          "id": "C002",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "replace_step",
+                "revision": 7,
+                "step": 2,
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+              }
+            }
+          ],
+          "final_revision": 8,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 153
+        },
+        {
+          "id": "C003",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "remove_step",
+                "revision": 7,
+                "step": 1,
+                "steps_json": ""
+              }
+            }
+          ],
+          "final_revision": 8,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 143
+        },
+        {
+          "id": "C004",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "final_revision": 0,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 18
+        },
+        {
+          "id": "C005",
+          "completed": true,
+          "calls": [],
+          "final_revision": 7,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 83
+        },
+        {
+          "id": "C006",
+          "completed": true,
+          "calls": [],
+          "final_revision": 7,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 9
+        },
+        {
+          "id": "C007",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 7,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 104
+        },
+        {
+          "id": "C008",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "final_revision": 7,
+          "starts": 0,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "reply_characters": 208
+        }
+      ],
+      "replies_and_final_states_match": true
+    }
+  }
+}
