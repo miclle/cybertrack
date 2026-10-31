@@ -60,10 +60,14 @@ def _save_copy(doc, path):
     with zipfile.ZipFile(doc.FileName) as source:
         gui = source.read('GuiDocument.xml')
         assets = {e.get('file') for e in ET.fromstring(gui).iter() if e.get('file')}
-        retained = {name:source.read(name) for name in assets}
-        retained['GuiDocument.xml'] = gui
+        # FreeCAD's restore reader consumes registered binary files in archive
+        # order. A set iteration puts materials before their XML or out of order,
+        # silently replacing saved appearances with default gray in the GUI.
+        retained = {'GuiDocument.xml': gui}
+        retained.update({name:source.read(name) for name in source.namelist() if name in assets})
     with zipfile.ZipFile(path) as snapshot:
         contents = {name:snapshot.read(name) for name in snapshot.namelist()}
+    contents = {name:data for name,data in contents.items() if name not in retained}
     contents.update(retained)
     with zipfile.ZipFile(path,'w',zipfile.ZIP_DEFLATED) as snapshot:
         for name,data in contents.items(): snapshot.writestr(name,data)
