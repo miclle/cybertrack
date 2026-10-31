@@ -90,6 +90,12 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual(len(comparison["baseline_failed"]), 5)
             self.assertEqual(comparison["candidate_failed"], [])
             self.assertFalse(json.loads(archive.read("firmware/esp32-audio/verification-ct66.json"))["flashed"])
+            qualifier = json.loads(archive.read("docs/validation/evidence/stop-role-qualifier/experiment.json"))
+            self.assertTrue(qualifier["preflight_checks_met"])
+            self.assertEqual(qualifier["decision"], "not_adopted")
+            self.assertEqual(qualifier["result"]["candidate_silent_stops"], 0)
+            self.assertTrue(qualifier["restored"]["saved_platform_role"])
+            self.assertEqual(qualifier["result"]["baseline_C008_revision"], 8)
             self.assertNotIn("device_id", manifest["firmware"])
             for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json"):
                 replay = root/name
