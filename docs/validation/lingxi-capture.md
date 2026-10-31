@@ -86,3 +86,13 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 上面的固定快照适合比较动作意图。检验“还要走多久”时，使用 `--timed-host --raw-text` 和[采样时刻用例](status-timing-cases.json)。先按上一节编译主机回执程序。每次查询取输入已发出到该 RPC 到达的实测间隔，以 5 ms 步长推进受控时钟，用固件回执序列化代码生成查询结果，再通过同一条 WSS 会话返回。该模式只允许无参数的 `get_status`。其他调用照实记录并返回错误，不发送到执行器。原始轨迹保留主机程序、角色、用例、工具描述的哈希，以及查询、回复文本和首个音频包的时间点。
 
 初态分别为 70% 前进且剩余 4000 ms 或 400 ms。长短对照可以区分“查询时还有计时”和“查询到达前计时已结束”。核对回复时分开检查方向是否带多余倒计时、剩余秒数是否与回执匹配并明确属于查询瞬间、是否对未来运动作出保证，以及到期后是否猜测停机原因。只读重放没有实物位移反馈。
+
+## 用固件回执验证“只改第二步”
+
+在仓库根目录用对应版本的 prepared 源码运行 `python3 firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct50-src`。它会在 `build/audio-host/` 生成 `receipt_replay`。将上文捕获命令的工具描述换成同版导出，语料换成 `docs/validation/compose-cases.json`，并附加以下参数。
+
+```sh
+--ids C002 --draft-host build/audio-host/receipt_replay
+```
+
+主机通过网页草稿接口建立版本 7，第一步左转 880 ms，第二步吹泡泡 1000 ms。虚拟网页每 200 ms 续约，仅保持草稿所属会话在线。灵矽实际发来的查询、停止和改稿按到达时刻及原顺序送入固件，每次收到的回执随后送回同一条平台会话。用于检查的末尾快照不会授权下一次改稿。轨迹中可分别检查版本、两步参数、动作启动次数和云端答复。固定集上下文会告诉模型初始版本，另加 `--raw-text` 才是只给用户原话的对照。
