@@ -1,6 +1,6 @@
 # 成功回执收敛试验：不采纳
 
-本轮尝试让灵矽只收到成功动作或成功改稿所需的业务字段，查询、拒绝、故障及网页诊断继续保留完整快照。诊断构建标为 `ct64`，没有进入主线或刷写；当前源码候选仍是 ct63。
+本轮尝试让灵矽只收到成功动作或成功改稿所需的业务字段，查询、拒绝、故障及网页诊断继续保留完整快照。诊断构建标为 `ct64`，没有进入主线或刷写；试验结束后源码候选恢复 ct63；后续候选见[当前状态](../current-status.md)。
 
 内置浏览器回读仍为 `deepseek-v4-flash`，5991 字符角色及 SHA-256 与仓库一致，温度 0.7、Top P 1、频率惩罚 0、最长 500、thinking disabled、reasoning_effort low、usage 开启。未修改或保存平台配置。公开工具定义与 ct63 相同。[实验、摘要与未采纳决定](evidence/compact-model-receipts/experiment.json)
 
@@ -31,7 +31,7 @@ C001／C002 仍有操作前旁白，C003／C008 含英文过程文字，C005 仍
 
 ## 保留、恢复与复核
 
-主线控制源码及 `firmware/current.json` 保持 ct63，角色不变。[诊断源码补丁](evidence/compact-model-receipts/experimental-source.patch.txt)以 `715662f` 为基线，包含全部十个实验文件，已在原文件副本中应用并逐字回读一致。这是零上下文补丁，应用时须指定 `git apply --unidiff-zero`；只供独立研究副本复现，不应直接套用当前主线。实验构建的字节数和 SHA-256 另记在实验清单中，不能作为当前候选或部署依据。
+试验结束时主线控制源码及 `firmware/current.json` 恢复 ct63，角色不变。[诊断源码补丁](evidence/compact-model-receipts/experimental-source.patch.txt)以 `715662f` 为基线，包含全部十个实验文件，已在原文件副本中应用并逐字回读一致。这是零上下文补丁，应用时须指定 `git apply --unidiff-zero`；只供独立研究副本复现，不应直接套用当前主线。实验构建的字节数和 SHA-256 另记在实验清单中，不能作为当前候选或部署依据。
 
 有本轮固定诊断主机与同版播放回放器时，可执行：
 
