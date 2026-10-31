@@ -40,3 +40,5 @@ ct45 部署检查的 39 条状态／操作回执全部输出关闭、动作启�
 要检查模型设计工具，请在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct62-src --model-design`。新增模型／几何／整机同步测试、插件 bundle 和合成宿主界面回归；统一报告记录工具源码哈希并排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
 
 模型辅助设计的[真实 GUI 验收](../tools/solidcue/verification-gui-20261031.json)已完成：198 件整机中冠盖上移 8 mm 后恢复，修改与恢复均经 FreeCAD GUI MCP 保存重开核对；同一本地页面更新到 r7，正式模型未改。无界面快照材质顺序修复通过 GUI 回读。后续[真实宿主卡片验收](../tools/solidcue/verification-host-20261031.json)已完成评论保存／宿主接受、MCP 读回与回执，以及同一卡片 r7 → r8 → r9 更新／恢复。随后[真实消息驱动验收](../tools/solidcue/verification-message-20261031.json)完成：尚未处理的 r9 评论通过 `mcp_app` 独立触发本轮，冠盖上移 4 mm 后恢复，GUI 保存重开与同一卡片 r9 → r10 → r11、最终回执均通过。I11 接入已验收；单次真实链路不代表制造或实物通过。
+
+ct62 [真实 STT 合成上行](validation/ct62-stt-host.md)二十条中十九条正常结束且工具匹配，喷水一条未收到结束事件；转写十九条匹配。全部输入事件、MCP 回执与终态离线重放一致。播放策略抑制 248 个确认包，组合／序列和目标速度仍有 216 个确认包待处理。该记录使用无设备主机，不更新板上 ct45 或真人成绩；完整改进测试现为 81 项通过。

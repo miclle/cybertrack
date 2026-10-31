@@ -1,0 +1,445 @@
+{
+  "input_mode": "synthetic_opus",
+  "condition": "digital_synthesis",
+  "run_id": "combined-7b45e9c9-02f3-4d69-b655-904e16f3115e",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "model": "deepseek-v4-flash",
+  "expected": 20,
+  "completed": 19,
+  "transcript_observed": 20,
+  "transcript_matches": 19,
+  "calls_scored": 19,
+  "calls_match": 19,
+  "forbidden_call_cases": [],
+  "reply_assessed": 0,
+  "reply_matches": 0,
+  "missing": [],
+  "not_completed": [
+    "V017"
+  ],
+  "stop_mismatches": [],
+  "results": [
+    {
+      "id": "V001",
+      "expected_text": "前进",
+      "asr_text": "前进。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "forward",
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "remote_reply": "好的，前进。",
+      "remote_audio_bytes": 1986,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V005",
+      "expected_text": "后退",
+      "asr_text": "后退。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "backward",
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "remote_reply": "好的，正在后退。",
+      "remote_audio_bytes": 2629,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V009",
+      "expected_text": "左转",
+      "asr_text": "左转。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "left",
+            "duration_ms": 880
+          }
+        }
+      ],
+      "remote_reply": "好的，左转。",
+      "remote_audio_bytes": 2190,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V013",
+      "expected_text": "右转",
+      "asr_text": "右转。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "right",
+            "duration_ms": 880
+          }
+        }
+      ],
+      "remote_reply": "好的，右转。",
+      "remote_audio_bytes": 2274,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V017",
+      "expected_text": "喷水",
+      "asr_text": "喷水。",
+      "completed": false,
+      "transcript_matches": true,
+      "calls_match": null,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "remote_reply": "",
+      "remote_audio_bytes": 0,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V021",
+      "expected_text": "吹泡泡",
+      "asr_text": "吹泡泡。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "remote_reply": "好的，泡泡吹起来啦。",
+      "remote_audio_bytes": 3706,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V029",
+      "expected_text": "前进五秒，同时喷水",
+      "asr_text": "前进五秒，同时喷水。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.move_and_water",
+          "arguments": {
+            "direction": "forward",
+            "move_duration_ms": 5000,
+            "water_duration_ms": 5000
+          }
+        }
+      ],
+      "remote_reply": "好的，前进五秒同时喷水，走起！",
+      "remote_audio_bytes": 5441,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V031",
+      "expected_text": "前进五秒，然后左转",
+      "asr_text": "前进五秒，然后左转。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"forward\",\"move_ms\":5000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "remote_reply": "好的，前进五秒后左转。",
+      "remote_audio_bytes": 3501,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V033",
+      "expected_text": "左转两秒，同时吹泡泡三秒",
+      "asr_text": "左转两秒，同时吹泡泡三秒。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"left\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":3000,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "remote_reply": "好的，左转两秒同时吹泡泡三秒，已经开始了。",
+      "remote_audio_bytes": 8090,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V035",
+      "expected_text": "先前进一秒，再同时左转两秒和吹泡泡两秒",
+      "asr_text": "先前进一秒，再同时左转两秒和吹泡泡两秒。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"forward\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "remote_reply": "好的，序列已经开始了。",
+      "remote_audio_bytes": 3049,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V037",
+      "expected_text": "调到百分之六十",
+      "asr_text": "掉到百分之六十。",
+      "completed": true,
+      "transcript_matches": false,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.set_speed",
+          "arguments": {
+            "speed_percent": 60
+          }
+        }
+      ],
+      "remote_reply": "好的，速度已经调到60%。",
+      "remote_audio_bytes": 4582,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V040",
+      "expected_text": "全速",
+      "asr_text": "全速。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "成功静默；仅按回执判断，不补做",
+      "calls": [
+        {
+          "name": "self.tank.set_speed",
+          "arguments": {
+            "speed_percent": 100
+          }
+        }
+      ],
+      "remote_reply": "已将速度调到全速。",
+      "remote_audio_bytes": 3221,
+      "fixture_results": [
+        "accepted"
+      ]
+    },
+    {
+      "id": "V045",
+      "expected_text": "停止",
+      "asr_text": "停止。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "立即全停，成功静默；不先查询或追问",
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "remote_reply": "动作都停下了，我在这儿等你。",
+      "remote_audio_bytes": 4304,
+      "fixture_results": [
+        "ok"
+      ]
+    },
+    {
+      "id": "V051",
+      "expected_text": "取消序列",
+      "asr_text": "取消序列。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "立即全停，成功静默；不先查询或追问",
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "remote_reply": "序列已取消，动作都停下了，我在这儿等你。",
+      "remote_audio_bytes": 6973,
+      "fixture_results": [
+        "ok"
+      ]
+    },
+    {
+      "id": "V053",
+      "expected_text": "你现在在做什么",
+      "asr_text": "你现在在做什么？",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "只解释最新有效回执；缺数据不猜、不重复轮询，不启动",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "remote_reply": "我在待命，目前没有动作在运行。",
+      "remote_audio_bytes": 4519,
+      "fixture_results": [
+        "ok"
+      ]
+    },
+    {
+      "id": "V057",
+      "expected_text": "狂暴模式还剩多久",
+      "asr_text": "狂暴模式还剩多久？",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "只解释最新有效回执；缺数据不猜、不重复轮询，不启动",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "remote_reply": "狂暴模式目前没有在运行，剩余时间是0。",
+      "remote_audio_bytes": 7123,
+      "fixture_results": [
+        "ok"
+      ]
+    },
+    {
+      "id": "V061",
+      "expected_text": "不要前进",
+      "asr_text": "不要前进。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作",
+      "calls": [],
+      "remote_reply": "好的，不前进。",
+      "remote_audio_bytes": 2347,
+      "fixture_results": []
+    },
+    {
+      "id": "V067",
+      "expected_text": "“前进两秒”是什么意思",
+      "asr_text": "前进两秒是什么意思？",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作",
+      "calls": [],
+      "remote_reply": "\"前进两秒\"就是让小D以默认速度往前走两秒钟。",
+      "remote_audio_bytes": 7268,
+      "fixture_results": []
+    },
+    {
+      "id": "V072",
+      "expected_text": "附近的饭店在哪里",
+      "asr_text": "附近的饭店在哪里？",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "禁止启动；根据问题正常回答，不将否定／引用／背景当动作",
+      "calls": [],
+      "remote_reply": "附近有没有饭店我可不知道，我也没有导航找饭店的本事。你要是想找吃的，可以自己用手机地图搜一下。",
+      "remote_audio_bytes": 13424,
+      "fixture_results": []
+    },
+    {
+      "id": "V077",
+      "expected_text": "前进二十厘米",
+      "asr_text": "前进二十厘米。",
+      "completed": true,
+      "transcript_matches": true,
+      "calls_match": true,
+      "forbidden_call_observed": false,
+      "expected_reply": "简短澄清，不猜动作／时长／速度，不将距离角度换成时长",
+      "calls": [],
+      "remote_reply": "前进二十厘米这个我做不到精确控制距离，我只能按时间控制，你告诉我走几秒就行。",
+      "remote_audio_bytes": 11586,
+      "fixture_results": []
+    }
+  ]
+}

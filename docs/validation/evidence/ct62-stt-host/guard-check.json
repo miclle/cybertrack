@@ -1,0 +1,54 @@
+{
+  "scope": "Offline protocol and archived request replay only; input/timing and deferred scheduling simulated; no new model run or board IO",
+  "synthetic_scenarios": 9,
+  "await_stt_mode_checked": true,
+  "invalid_then_retry_blocked": true,
+  "stops_available": true,
+  "new_input_recovers": true,
+  "caller_cannot_set_input_token": true,
+  "stale_callbacks_and_reads_isolated": true,
+  "rpc_replay_preserved": true,
+  "reconnect_requires_input": true,
+  "source_capture_gzip_sha256": "45320734969322b443e2d56782eee61b94de9362f8405881f2231a7bae51f6a5",
+  "archived_cases": [
+    {
+      "id": "C002",
+      "results": [
+        "ok",
+        "Invalid show draft edit",
+        "Invalid show draft edit",
+        "Invalid show draft edit"
+      ],
+      "final_revision": 7,
+      "starts": 0
+    },
+    {
+      "id": "C004",
+      "results": [
+        "draft_changed"
+      ],
+      "final_revision": 7,
+      "starts": 0
+    },
+    {
+      "id": "C005",
+      "results": [
+        "draft_changed",
+        "voice_input_failed: an earlier request in this input failed; no retry or replacement action is allowed; wait for a new user input."
+      ],
+      "final_revision": 7,
+      "starts": 0
+    },
+    {
+      "id": "C007",
+      "results": [
+        "ok",
+        "Invalid show draft edit",
+        "Invalid show draft edit",
+        "Invalid show draft edit"
+      ],
+      "final_revision": 7,
+      "starts": 0
+    }
+  ]
+}

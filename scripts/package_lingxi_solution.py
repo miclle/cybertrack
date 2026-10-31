@@ -11,7 +11,7 @@ import zipfile
 
 from check_firmware_current import check
 from package_family_rehearsal import build as build_rehearsal
-from review_lingxi_reference import EVALUATIONS, score_replay
+from review_lingxi_reference import EVALUATIONS, score_replay, score_spoken_replay, STT_SPOKEN_SCORE, STT_EXPERIMENT, STT_CAPTURE
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -40,6 +40,19 @@ def build_archive(root, paths, head, dirty):
     contents = read_inputs(root, paths)
     contents["family/rehearsal.html"] = build_rehearsal(root).encode()
     firmware = check(root)
+    raw = (root / STT_CAPTURE).read_bytes()
+    if hashlib.sha256(raw).hexdigest() != json.loads(contents[STT_EXPERIMENT])["files"]["full20.json.gz"]["sha256"]:
+        raise ValueError("STT original capture differs from experiment")
+    trace = json.loads(gzip.decompress(raw))
+    replay = {key: trace[key] for key in ("input_mode", "kind", "run_id", "model", "role_sha256", "corpus_sha256",
+                                         "synthesis_source_sha256", "capture_source_sha256", "tool_schema_sha256",
+                                         "host_input_mode", "fixture_version", "host_replay_sha256")}
+    replay["results"] = [{key: row[key] for key in ("id", "input_text", "echoed_text", "completed", "completion", "calls",
+                                                  "uplink", "replies", "received_audio_bytes_discarded")} |
+                         {"simulated_receipts": [{"result": receipt.get("result")} for receipt in row.get("simulated_receipts", [])]}
+                         for row in trace["results"]]
+    score_spoken_replay(replay, json.loads(contents[STT_SPOKEN_SCORE]))
+    contents["replay/stt/voice.json"] = (json.dumps(replay, ensure_ascii=False, indent=2) + "\n").encode()
     for prefix, score_path, suites, _ in EVALUATIONS:
         scores = json.loads(contents[score_path])
         for suite in suites:
@@ -81,6 +94,7 @@ python3 scripts/review_lingxi_reference.py
 
 - [模型参数与选型对照](docs/validation/model-parameters.md)中的未采纳结果也可复算：`qwen_scores` 保留完整语义／编排与漏停、禁止调用，`doubao_compose_scores` 保留八条编排及畸形参数失败。豆包二十条语义仅为诊断子集，不在本包重算完整语义成绩。
 - [单次识别失败隔离](docs/validation/voice-input-guard.md)另附 ct62 构建及离线控制回放证据；C005 拒绝后换用 sequence 被拦截，零启动。它不是新的模型成绩，原模型禁止调用记录保持不变。重跑控制回放仍需完整 checkout 与 prepared 固件，本包仅核对所存材料的完整性。
+- [真实 STT 驱动主机](docs/validation/ct62-stt-host.md)的二十条合成语音另在 `spoken_stt_review` 复算转写与工具结果：19 条正常结束并匹配，V017 未收到结束事件仍保留。事件与控制回执完整重放需要完整 checkout 和固定主机二进制。
 - [编排说明对照](docs/validation/compose-routing.md)保留了未采纳的诊断：工具匹配增多，但一次含糊请求擅自缩短草稿。包内含摘要与两份定义，原始轨迹和该诊断的重算需要完整 checkout。
 - 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
 - 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
@@ -120,7 +134,7 @@ def main():
     head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     current = json.loads((ROOT / "firmware/current.json").read_bytes())
     sources = ["tools/lingxi-solution/files.json", "scripts/package_lingxi_solution.py", "scripts/check_firmware_current.py",
-               "firmware/esp32-audio/apply_overlay.py", "firmware/" + current["last_recorded_deployment"],
+               "firmware/esp32-audio/apply_overlay.py", "firmware/" + current["last_recorded_deployment"], STT_CAPTURE,
                *(str(Path(score_path).with_name(f"full-{suite}.json.gz"))
                  for _, score_path, suites, _ in EVALUATIONS for suite in suites)]
     sources.extend(["scripts/package_family_rehearsal.py", "tools/family-study/rehearsal.js", "firmware/esp32-audio/web/index.html"])

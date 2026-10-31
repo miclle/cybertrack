@@ -19,3 +19,5 @@
 [模型选型记录](../../docs/validation/model-parameters.md)也随包提供：`qwen_scores` 复算 68/80 与 7/8，并列出漏停与禁止调用；`doubao_compose_scores` 复算 3/8，保留 C002、C007 的畸形参数失败。豆包的二十条语义是诊断子集，不是完整 80 条成绩。当前平台已恢复原 DeepSeek 配置。
 
 ct62 的[单次识别失败隔离](../../docs/validation/voice-input-guard.md)及构建、主机来源和回放摘要已随包提供。八组合成边界与四条历史请求回放中，C005 拒绝后转用 sequence 被拦截，零启动。它们是设备控制候选的离线证据，不是新的模型成绩；`doubao_compose_scores` 继续保留原禁止调用。重跑控制回放需要完整 checkout、prepared 固件与主机编译器；该包仅核对保存材料的完整性。
+
+参考包现在另以 `spoken_stt_review` 复算[真实 STT 驱动主机](../../docs/validation/ct62-stt-host.md)的二十条合成语音。十九条正常结束且工具匹配，V017 喷水没有结束事件，继续记未完成；转写十九条匹配。包内保留语音评分所需的文字与编码摘要，事件及实际 MCP 控制回放需要完整 checkout 和同摘要二进制。

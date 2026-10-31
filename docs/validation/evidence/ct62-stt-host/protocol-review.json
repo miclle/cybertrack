@@ -1,0 +1,431 @@
+{
+  "scope": "Offline replay of captured STT/tool event order and host state; no new model run or board IO",
+  "run_id": "combined-7b45e9c9-02f3-4d69-b655-904e16f3115e",
+  "host_replay_sha256": "9b536dee5c2018a596bc87aadcf84b54af6f3c0d4ea0617fced887936064dd67",
+  "cases": 20,
+  "completed": 19,
+  "cases_with_tools_before_stt": [],
+  "replies_and_final_states_match": true,
+  "results": [
+    {
+      "id": "V001",
+      "completed": true,
+      "stt": [
+        {
+          "text": "前进。",
+          "elapsed_ms": 1471
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V005",
+      "completed": true,
+      "stt": [
+        {
+          "text": "后退。",
+          "elapsed_ms": 1508
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V009",
+      "completed": true,
+      "stt": [
+        {
+          "text": "左转。",
+          "elapsed_ms": 1491
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V013",
+      "completed": true,
+      "stt": [
+        {
+          "text": "右转。",
+          "elapsed_ms": 1463
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V017",
+      "completed": false,
+      "stt": [
+        {
+          "text": "喷水。",
+          "elapsed_ms": 1414
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V021",
+      "completed": true,
+      "stt": [
+        {
+          "text": "吹泡泡。",
+          "elapsed_ms": 1806
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V029",
+      "completed": true,
+      "stt": [
+        {
+          "text": "前进五秒，同时喷水。",
+          "elapsed_ms": 3433
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 2,
+      "final_outputs": {
+        "left": 100,
+        "right": 100,
+        "water": true,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V031",
+      "completed": true,
+      "stt": [
+        {
+          "text": "前进五秒，然后左转。",
+          "elapsed_ms": 3309
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 100,
+        "right": 100,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V033",
+      "completed": true,
+      "stt": [
+        {
+          "text": "左转两秒，同时吹泡泡三秒。",
+          "elapsed_ms": 4212
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 2,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V035",
+      "completed": true,
+      "stt": [
+        {
+          "text": "先前进一秒，再同时左转两秒和吹泡泡两秒。",
+          "elapsed_ms": 5991
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 3,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V037",
+      "completed": true,
+      "stt": [
+        {
+          "text": "掉到百分之六十。",
+          "elapsed_ms": 2568
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 60,
+        "right": 60,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V040",
+      "completed": true,
+      "stt": [
+        {
+          "text": "全速。",
+          "elapsed_ms": 1421
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 100,
+        "right": 100,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V045",
+      "completed": true,
+      "stt": [
+        {
+          "text": "停止。",
+          "elapsed_ms": 1334
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V051",
+      "completed": true,
+      "stt": [
+        {
+          "text": "取消序列。",
+          "elapsed_ms": 1783
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 1,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V053",
+      "completed": true,
+      "stt": [
+        {
+          "text": "你现在在做什么？",
+          "elapsed_ms": 2351
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 0,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V057",
+      "completed": true,
+      "stt": [
+        {
+          "text": "狂暴模式还剩多久？",
+          "elapsed_ms": 2846
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 1,
+      "rpc_error_count": 0,
+      "starts_this_boot": 0,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V061",
+      "completed": true,
+      "stt": [
+        {
+          "text": "不要前进。",
+          "elapsed_ms": 1774
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 0,
+      "rpc_error_count": 0,
+      "starts_this_boot": 0,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V067",
+      "completed": true,
+      "stt": [
+        {
+          "text": "前进两秒是什么意思？",
+          "elapsed_ms": 2888
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 0,
+      "rpc_error_count": 0,
+      "starts_this_boot": 0,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V072",
+      "completed": true,
+      "stt": [
+        {
+          "text": "附近的饭店在哪里？",
+          "elapsed_ms": 2455
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 0,
+      "rpc_error_count": 0,
+      "starts_this_boot": 0,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    },
+    {
+      "id": "V077",
+      "completed": true,
+      "stt": [
+        {
+          "text": "前进二十厘米。",
+          "elapsed_ms": 2387
+        }
+      ],
+      "tools_before_nonempty_stt": [],
+      "tool_count": 0,
+      "rpc_error_count": 0,
+      "starts_this_boot": 0,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  ]
+}
