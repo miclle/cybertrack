@@ -174,8 +174,10 @@ def firmware_profile(context):
     return profiles[context]
 
 
-def firmware_replay(executable, profile, calls):
-    lines = subprocess.check_output([str(executable),profile],input=json.dumps(calls),text=True,timeout=10).splitlines()
+def firmware_replay(executable, profile, calls, *, await_stt=False):
+    command = [str(executable), profile]
+    if await_stt: command.append('--await-stt')
+    lines = subprocess.check_output(command,input=json.dumps(calls),text=True,timeout=10).splitlines()
     rpc_count = sum('name' in call for call in calls)
     if len(lines) != rpc_count + 1:
         raise RuntimeError('incomplete firmware dispatch replay')
@@ -237,7 +239,8 @@ async def capture_case(connection,tools,case,timeout=45):
                             if input_ms is None:raise ValueError('missing evaluation input')
                             call_history.append(dict(name=name,arguments=args,rpc_id=payload['id'],
                                 elapsed_ms=timeline[-1]['ms']-input_ms))
-                            wire_reply=firmware_replay(case['host_binary'],case['initial_profile'],call_history)[-2]
+                            wire_reply=firmware_replay(case['host_binary'],case['initial_profile'],call_history,
+                                await_stt=case.get('host_stt_events',False))[-2]
                             row.setdefault('host_rpc_replies',[]).append(wire_reply)
                             if 'error' in wire_reply:
                                 receipt=dict(rpc_error=wire_reply['error']['message'])
@@ -316,13 +319,17 @@ async def capture_case(connection,tools,case,timeout=45):
                     break
             elif kind=='stt':
                 row['echoed_text']=msg.get('text','');mark('stt', text=row['echoed_text'])
+                if case.get('host_stt_events') and input_ms is not None:
+                    if not isinstance(row['echoed_text'],str):raise ValueError('invalid platform STT text')
+                    call_history.append(dict(input_text=row['echoed_text'],elapsed_ms=timeline[-1]['ms']-input_ms))
             elif kind in ('error','goodbye'):row['events'].append(kind);break
     if version == 'firmware_host':
         row['initial_profile']=case['initial_profile']
+        row['host_input_mode']='platform_stt_events' if case.get('host_stt_events') else 'simulated_initial_input'
         row['host_calls']=call_history
         row['host_inspect_ms']=round((time.monotonic()-opened)*1000)-input_ms if input_ms is not None else 0
         row['host_final_state']=firmware_replay(case['host_binary'],case['initial_profile'],
-            [*call_history,dict(inspect_ms=row['host_inspect_ms'])])[-1]
+            [*call_history,dict(inspect_ms=row['host_inspect_ms'])],await_stt=case.get('host_stt_events',False))[-1]
     row['received_audio_bytes_discarded']=audio_bytes
     row.setdefault('completion','tts_stop' if row['completed'] else 'incomplete_or_timeout')
     return row
@@ -370,6 +377,7 @@ async def run(args):
         version='firmware_host'
         for case in cases:
             case.update(host_binary=firmware_host.resolve(),initial_profile=firmware_profile(case['context']))
+            if getattr(args,'synthetic_speech',False):case['host_stt_events']=True
     for case in cases:
         case['fixture_version']=version
         if getattr(args,'argument_validator',None):
@@ -408,6 +416,9 @@ async def run(args):
     trace['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
     if firmware_host:
         trace['scope']='Real platform with raw input; actual MCP dispatch, callbacks and guard on host; virtual clock, 600 mm simulated range, immediate schedule; zero board IO'
+        trace['host_input_mode']='platform_stt_events' if synthetic else 'simulated_initial_input'
+        if synthetic:
+            trace['scope']='Synthesized speech over real platform ASR; observed STT events open host input generations; actual MCP dispatcher/callbacks/guard; virtual clock and 600 mm range; zero microphone/speaker/board IO'
     if speed_host:
         trace['scope']='Synthesized speech over platform ASR; timed firmware host receipts; zero device IO'
     args.output.parent.mkdir(parents=True,exist_ok=True)

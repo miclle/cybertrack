@@ -4,6 +4,7 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+import sys
 from types import SimpleNamespace
 import unittest
 from unittest.mock import AsyncMock, patch
@@ -15,6 +16,35 @@ spec.loader.exec_module(module)
 
 
 class CaptureTests(unittest.TestCase):
+    def test_actual_stt_events_reach_closed_host_in_received_order(self):
+        class Socket:
+            async def __aenter__(self): return self
+            async def __aexit__(self,*args): pass
+            send=AsyncMock()
+            recv=AsyncMock(side_effect=[json.dumps(message) for message in [
+                dict(type='hello',session_id='fixture'),
+                dict(type='mcp',payload=dict(id=1,method='tools/list',params={})),
+                dict(type='stt',text='喷水'),dict(type='stt',text=''),dict(type='stt',text='喷水'),
+                dict(type='mcp',payload=dict(id=2,method='tools/call',params=dict(name='self.tank.water',arguments=dict(duration_ms=1000)))),
+                dict(type='tts',state='stop')]])
+        histories=[]
+        wire=dict(result=dict(content=[dict(type='text',text='{"result":"accepted"}')],isError=False))
+        def replay(binary,profile,calls,**kwargs):
+            histories.append((copy.deepcopy(calls),kwargs))
+            return [wire,dict(starts_this_boot=1)]
+        case=dict(id='V001',text='喷水',context='空闲',fixture_version='firmware_host',
+                  host_binary=Path('unused'),initial_profile='corpus_idle',host_stt_events=True,opus_frames=[])
+        client=SimpleNamespace(connect=lambda *args,**kwargs:Socket())
+        with patch.dict(sys.modules,{'websockets.asyncio.client':client}),patch.object(module,'firmware_replay',side_effect=replay):
+            row=asyncio.run(module.capture_case(dict(token='test',device_id='test',client_id='test'),
+                [dict(name='self.tank.water'),*[dict(name='self.tank.t'+str(i)) for i in range(11)]],case))
+        self.assertTrue(row['completed'])
+        self.assertEqual(row['host_input_mode'],'platform_stt_events')
+        self.assertEqual([event.get('input_text') for event in row['host_calls'][:-1]],['喷水','','喷水'])
+        self.assertEqual(row['host_calls'][-1]['name'],'self.tank.water')
+        self.assertTrue(all(kwargs==dict(await_stt=True) for _,kwargs in histories))
+        self.assertEqual(histories[0][0],row['host_calls'])
+
     def test_schema_pagination_is_complete_and_bounded(self):
         tools=[dict(name='self.tank.tool'+str(i),description='中文'*1200) for i in range(12)]
         seen=[];cursor=''
