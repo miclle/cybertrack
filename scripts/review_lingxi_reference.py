@@ -10,6 +10,12 @@ ROOT = Path(__file__).resolve().parents[1]
 SCORES = "docs/validation/evidence/role-5991/full-suite-scores.json"
 SUITES = ("voice", "compose")
 CANDIDATE_SCORES = "docs/validation/evidence/ct57-full/full-suite-scores.json"
+FIRMWARE_HOST_SCORES = "docs/validation/evidence/ct61-firmware-host/voice-score.json"
+EVALUATIONS = (
+    ("", SCORES, SUITES, "scores"),
+    ("ct57/", CANDIDATE_SCORES, SUITES, "candidate_scores"),
+    ("firmware-host/", FIRMWARE_HOST_SCORES, ("voice",), "firmware_host_scores"),
+)
 
 
 def score_replay(suite, corpus, trace, recorded):
@@ -35,23 +41,26 @@ def review(root):
         if len(data) != expected["bytes"] or hashlib.sha256(data).hexdigest() != expected["sha256"]:
             raise ValueError(f"bundle file differs from manifest: {name}")
 
-    recorded = json.loads((root / SCORES).read_bytes())
-    results = {}
-    for suite in SUITES:
-        corpus = (root / f"docs/validation/{suite}-cases.json").read_bytes()
-        trace = json.loads((root / f"replay/{suite}.json").read_bytes())
-        results[suite] = score_replay(suite, corpus, trace, recorded[suite])
-    candidate = json.loads((root / CANDIDATE_SCORES).read_bytes())
-    candidate_results = {}
-    for suite in SUITES:
-        corpus = (root / f"docs/validation/{suite}-cases.json").read_bytes()
-        trace = json.loads((root / f"replay/ct57/{suite}.json").read_bytes())
-        if trace["tool_schema_sha256"] != candidate[suite]["tool_schema_sha256"]:
-            raise ValueError(f"{suite}: candidate tool schemas differ")
-        candidate_results[suite] = score_replay(suite, corpus, trace, candidate[suite])
-        candidate_results[suite]["tool_source_version"] = candidate[suite]["tool_source_version"]
-    return {"git_head": manifest["git_head"], "firmware": manifest["firmware"],
-            "scores": results, "candidate_scores": candidate_results}
+    groups = {}
+    for prefix, score_path, suites, name in EVALUATIONS:
+        recorded = json.loads((root / score_path).read_bytes())
+        results = {}
+        for suite in suites:
+            corpus = (root / f"docs/validation/{suite}-cases.json").read_bytes()
+            trace = json.loads((root / f"replay/{prefix}{suite}.json").read_bytes())
+            if prefix:
+                for key in ("tool_schema_sha256", "input_mode", "fixture_version"):
+                    if trace[key] != recorded[suite][key]:
+                        raise ValueError(f"{prefix}{suite}: recorded {key} differs")
+                if "host_replay_sha256" in recorded[suite]:
+                    if trace["host_replay_sha256"] != recorded[suite]["host_replay_sha256"]:
+                        raise ValueError(f"{prefix}{suite}: host implementation differs")
+            results[suite] = score_replay(suite, corpus, trace, recorded[suite])
+            if prefix:
+                results[suite]["tool_source_version"] = recorded[suite]["tool_source_version"]
+                results[suite]["input_mode"] = trace["input_mode"]
+        groups[name] = results
+    return {"git_head": manifest["git_head"], "firmware": manifest["firmware"], **groups}
 
 
 if __name__ == "__main__":

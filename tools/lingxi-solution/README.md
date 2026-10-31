@@ -1,6 +1,6 @@
 # 灵矽参考材料包
 
-在仓库根目录执行 `python3 scripts/package_lingxi_solution.py`，生成 `output/lingxi-solution/` 下的本地 ZIP；不会上传、发布或更改灵矽账号。解压后从 `START_HERE.md` 开始。家长和孩子可双击 `family/rehearsal.html` 离线编排，在屏幕上看每一步；主持人另开 `tools/family-study/observer.html` 记录体验。在解压目录运行 `python3 scripts/review_lingxi_reference.py`，可离线核对清单所列文件并分别重算历史基线与 ct57 工具定义各两组真实平台调用的成绩，输出各自的偏差用例编号。返回码 0 表示重算结果与原记录一致。
+在仓库根目录执行 `python3 scripts/package_lingxi_solution.py`，生成 `output/lingxi-solution/` 下的本地 ZIP；不会上传、发布或更改灵矽账号。解压后从 `START_HERE.md` 开始。家长和孩子可双击 `family/rehearsal.html` 离线编排，在屏幕上看每一步；主持人另开 `tools/family-study/observer.html` 记录体验。在解压目录运行 `python3 scripts/review_lingxi_reference.py`，可离线核对清单所列文件并分别重算历史基线与 ct57 工具定义各两组真实平台调用的成绩，输出各自的偏差用例编号。新增 `firmware_host_scores` 单列 ct61 原话＋完整固件主机的 80 条结果。返回码 0 表示重算结果与原记录一致。
 
 [明确文件清单](files.json)包含方案章节、亲子上手卡、现用工具契约、角色源、文本／口述用例、采集模板、语义评分器、停止记录分析器、工程修改记录工具、硬件架构、电源预算及模型辅助设计接入记录。`MANIFEST.json` 记录 Git 提交、所选文件是否存在未提交修改、清单之外各交付文件的 SHA-256、源码候选与最近部署应用各自的字节数和哈希。相同输入生成相同字节；已有输出不覆盖。
 
@@ -10,6 +10,6 @@
 
 工程修改记录的开始／结束命令依赖完整 CyberTrack Git checkout；本参考包不包含 `.git`。模型辅助设计的安装命令同样需要完整仓库中的 `tools/model-design/`，本包只含说明、来源、许可证与验证记录。测试使用独立临时仓库，不代表实际工程效率样本。
 
-[ct57 完整回归](../../docs/validation/lingxi-ct57-full.md)与历史基线独立保存。包内 `scores` 是历史成绩，`candidate_scores` 是 ct57 工具定义的本轮成绩，后者的回执仍由静态隔离夹具提供。
+[ct57 完整回归](../../docs/validation/lingxi-ct57-full.md)与历史基线独立保存。包内 `scores` 是历史成绩，`candidate_scores` 是 ct57 工具定义的记录成绩，后者的回执仍由静态隔离夹具提供。
 
 隔离联调的脚本、诊断集和说明随包提供；包内 `replay/` 只保留评分所需的元数据、用例编号、完成标记和工具调用。打包时逐一核对原始捕获哈希与语料哈希；完整回复与逐轮轨迹从仓库验证记录阅读。工具描述导出依赖完整 checkout 与 prepared 固件源码，联网捕获另需在获授权环境准备依赖和现有设备认证；包内不包含认证信息，也不会自动连接设备。

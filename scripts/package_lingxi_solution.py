@@ -11,7 +11,7 @@ import zipfile
 
 from check_firmware_current import check
 from package_family_rehearsal import build as build_rehearsal
-from review_lingxi_reference import CANDIDATE_SCORES, SCORES, SUITES, score_replay
+from review_lingxi_reference import EVALUATIONS, score_replay
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -40,18 +40,23 @@ def build_archive(root, paths, head, dirty):
     contents = read_inputs(root, paths)
     contents["family/rehearsal.html"] = build_rehearsal(root).encode()
     firmware = check(root)
-    for prefix, score_path in (("", SCORES), ("ct57/", CANDIDATE_SCORES)):
+    for prefix, score_path, suites, _ in EVALUATIONS:
         scores = json.loads(contents[score_path])
-        for suite in SUITES:
+        for suite in suites:
             raw = gzip.decompress((root / score_path).with_name(f"full-{suite}.json.gz").read_bytes())
             if hashlib.sha256(raw).hexdigest() != scores[suite]["capture_json_sha256"]:
                 raise ValueError(f"{prefix}{suite}: original capture does not match recorded score")
             trace = json.loads(raw)
             replay = {key: trace[key] for key in ("run_id", "kind", "role_sha256", "model", "corpus_sha256", "fixture_version")}
             if prefix:
-                replay["tool_schema_sha256"] = trace["tool_schema_sha256"]
-                if replay["tool_schema_sha256"] != scores[suite]["tool_schema_sha256"]:
-                    raise ValueError(f"{prefix}{suite}: candidate tool schemas differ")
+                for key in ("tool_schema_sha256", "input_mode", "fixture_version"):
+                    replay[key] = trace[key]
+                    if replay[key] != scores[suite][key]:
+                        raise ValueError(f"{prefix}{suite}: recorded {key} differs")
+                if "host_replay_sha256" in trace:
+                    replay["host_replay_sha256"] = trace["host_replay_sha256"]
+                    if replay["host_replay_sha256"] != scores[suite]["host_replay_sha256"]:
+                        raise ValueError(f"{prefix}{suite}: host implementation differs")
             replay["results"] = [{key: row[key] for key in ("id", "calls", "completed")} for row in trace["results"]]
             score_replay(suite, contents[f"docs/validation/{suite}-cases.json"], replay, scores[suite])
             contents[f"replay/{prefix}{suite}.json"] = (json.dumps(replay, ensure_ascii=False, indent=2) + "\n").encode()
@@ -64,7 +69,7 @@ def build_archive(root, paths, head, dirty):
 | 源码与构建依据 | `{firmware['source_version']}` |
 | 最近一次应用部署 | `{firmware['recorded_deployment']}` |
 
-## 从历史基线与 ct57 工具回归重算成绩
+## 从三种记录分别重算成绩
 
 解压后在本目录运行。只需要 Python 3.9 或更高版本。
 
@@ -72,7 +77,7 @@ def build_archive(root, paths, head, dirty):
 python3 scripts/review_lingxi_reference.py
 ```
 
-从此包复现的是记录所列工具版本和角色的结果，历史基线保留在 scores，ct57 工具回归保留在 candidate_scores。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出含历史基线和 ct57 工具定义各自的两组成绩、偏差用例编号和各自是否达到门槛。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，设备回执由隔离环境提供。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
+从此包复现的是记录所列工具版本和角色的结果，历史基线保留在 scores，ct57 工具回归保留在 candidate_scores，ct61 原话和真实固件主机的 80 条另在 firmware_host_scores。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出分别列出三种记录的成绩、偏差用例编号与门槛判断，并标明工具来源和输入模式。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，静态夹具与真实固件主机分别标识。完整主机源码与构建入口见[固件主机验证](docs/validation/firmware-host.md)，参考包离线复算工具选择，控制守卫重放需要完整 checkout。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
 
 - 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
 - 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
