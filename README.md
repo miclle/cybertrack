@@ -71,7 +71,7 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 小D的角色配置还定义了否定、引用、含糊时长、未知状态和异常回复的处理约定。角色源与固件一起维护，方便在改变玩法时同步检查“怎么理解”和“实际怎么执行”。当前平台仍有冗余播报与部分解释偏差，工具选对不等于整段交互已通过。
 
-[角色与同步流程](docs/agent-role.md) · [角色源文件](firmware/esp32-audio/role-prompt.txt) · [真实平台联调](docs/validation/lingxi-ct45-role-feedback-20261031.md)
+[角色与同步流程](docs/agent-role.md) · [角色源文件](firmware/esp32-audio/role-prompt.txt) · [真实平台联调](docs/validation/README.md)
 
 ## 履带行走与实时调速
 
