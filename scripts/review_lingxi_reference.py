@@ -6,10 +6,21 @@ from pathlib import Path
 
 from evaluate_voice import evaluate
 from review_spoken_cases import review as review_spoken
+from review_full_speech import score_speech
 
 STT_SPOKEN_SCORE = "docs/validation/evidence/ct62-stt-host/spoken-review.json"
 STT_EXPERIMENT = "docs/validation/evidence/ct62-stt-host/experiment.json"
 STT_CAPTURE = "docs/validation/evidence/ct62-stt-host/full20.json.gz"
+FULL_SPEECH_SCORES = "docs/validation/evidence/ct71-full-stt/scores.json"
+
+
+def score_full_speech(suite, corpus, trace, recorded):
+    if hashlib.sha256(corpus).hexdigest() != trace['corpus_sha256']:
+        raise ValueError(f'{suite}: full speech corpus differs')
+    report = score_speech(json.loads(corpus), trace)
+    if report != recorded:
+        raise ValueError(f'{suite}: full speech score differs from recorded results')
+    return report
 
 
 def score_spoken_replay(trace, recorded):
@@ -88,7 +99,11 @@ def review(root):
         groups[name] = results
     spoken = score_spoken_replay(json.loads((root / "replay/stt/voice.json").read_bytes()),
                                   json.loads((root / STT_SPOKEN_SCORE).read_bytes()))
-    return {"git_head": manifest["git_head"], "firmware": manifest["firmware"], **groups, "spoken_stt_review": spoken}
+    full_recorded = json.loads((root / FULL_SPEECH_SCORES).read_bytes())['suites']
+    full_speech = {suite: score_full_speech(suite, (root / f'docs/validation/{suite}-cases.json').read_bytes(),
+        json.loads((root / f'replay/ct71-full-stt/{suite}.json').read_bytes()), full_recorded[suite]['speech_score']) for suite in SUITES}
+    return {"git_head": manifest["git_head"], "firmware": manifest["firmware"], **groups,
+            "spoken_stt_review": spoken, "full_speech_scores": full_speech}
 
 
 if __name__ == "__main__":
