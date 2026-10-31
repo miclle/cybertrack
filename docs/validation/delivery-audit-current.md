@@ -23,7 +23,7 @@
 - `templates.json` 的家庭、故障、供电、成本、维护循环与维护计时数组均为空。`stop-trials.json` 的配置与现场试验数组均为空。它们是采集入口。
 - 本地工程记录汇总的完整样本为 0/5，缺人工用时、模型等待及返工等字段。提交和绑定证据已存在，完整效率指标仍缺真实采集。
 - 当前正式 `hardware/model/CyberTrack.FCStd` 的 SHA-256 与[模型设计消息验收](../../tools/solidcue/verification-message-20261031.json)的来源摘要一致，既有恢复证据可追溯。
-- 最新参考包解压后，包内提供的 49 项离线测试通过。完整源码中的 64 项改进测试另有[ct57 软件记录](../../firmware/esp32-audio/verification-ct57.json)。两项测试范围各自保留。
+- 最新参考包解压后，包内提供的 51 项离线测试通过。完整源码中的 64 项改进测试另有[ct57 软件记录](../../firmware/esp32-audio/verification-ct57.json)。两项测试范围各自保留。
 - 当前源码、最近部署及角色关联由[版本真源](../../firmware/current.json)维护。更新候选构建记录不构成一次设备部署。
 
 ## 下一阶段的退出条件
