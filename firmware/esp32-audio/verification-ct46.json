@@ -1,6 +1,25 @@
 {
   "version": "2.0.3-ct46",
-  "scope": "Host-tested candidate, no device deployment or physical action",
+  "scope": "Host and ESP32-S3 build evidence. No new deployment or physical actuation.",
   "playback": "A single recognized default movement, water, bubbles or stop command, matching tool arguments and successful receipt before TTS start suppress remote audio for that reply. Unmatched, early, failed and multi-tool replies remain audible.",
-  "checks": ["python3 firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct46-src"]
+  "checks": [
+    "python3 scripts/verify_improvements.py --source build/xiaozhi-ct46-final-src",
+    "ESP-IDF full application build with pinned upstream and locked components"
+  ],
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "artifact": "xiaozhi.bin",
+    "bytes": 2696496,
+    "sha256": "9343dccf1bc446302dc2479d40cf4d490501d0fd4e3ef458404dc26bbd6578bd"
+  },
+  "source_commit": "a5fe8f4",
+  "deployment": {
+    "flashed": false,
+    "last_recorded_application": "2.0.3-ct45"
+  },
+  "verified": [
+    "Seven software checks passed, including actual MCP validation, receipt serialization, HTTP and audio adapters under host stubs",
+    "Fresh voice draft read required, 30 second expiry, disconnect invalidation, unchanged zero start count on draft save",
+    "Host playback transitions cover mismatch, failure, multi-tool, delayed receipt and stop"
+  ]
 }
