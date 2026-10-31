@@ -1,0 +1,377 @@
+{
+  "model": "deepseek-v4-flash",
+  "model_settings_read_from_console": {
+    "temperature": 0.7,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_tokens": 500,
+    "thinking": {
+      "type": "disabled"
+    },
+    "reasoning_effort": "low"
+  },
+  "tool_description_prefixes": {
+    "get_status": "给小D的语音约定：查询是无声的内部步骤。修改表演时静默读取草稿并直接调用改稿工具。只有用户直接问状态，才读完回执后用一句中文回答。",
+    "compose": "亲子表演的所有查询、选择步骤和保存操作只用工具调用完成。整个操作过程中不发文字，哪怕一句查询预告也会被扬声器读出。收到成功回执才一次性对家长说“改好了，〈实际改动〉。请在网页预览后点开始。”删除也按此格式。不确定几秒时只问“你想改成几秒？”；失败只说实际原因。全程只用中文口语。"
+  },
+  "groups": {
+    "baseline": [
+      {
+        "run_id": "3cce6210-55f2-451d-9bac-997fd1798390",
+        "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+        "schema_sha256": "7ecd624f1a4deb3f23a42e45155acdd00e24ee2b33af30005ca72bd0a889b70a",
+        "host_sha256": "809e6af646759ccb77e4ede555a178b3f9705713eaa1f8f184309534cb3aec7c",
+        "rows": [
+          {
+            "id": "E001",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 1,
+            "audio_before_saved": true,
+            "english_phrase": true,
+            "tool_word": true,
+            "reply_characters": 140,
+            "reply": "I'll check the current draft first当前草稿有两步：先左转880毫秒，再吹泡泡1秒。你说开头转圈那段留着，后面的泡泡改成3秒。我用replace_step改第二步改好了，草稿现在是先左转圈，然后吹泡泡3秒。你到网页上预览一下，确认没问题点开始就行。"
+          },
+          {
+            "id": "E002",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 2,
+            "audio_before_saved": true,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 105,
+            "reply": "我先查看当前草稿状态。当前草稿有2步：第1步左转880毫秒，第2步吹泡泡1000毫秒。删除最后一步，保留开头的左转。草稿已改好，去掉最后的吹泡泡，只保留开头的左转这一步。请在网页上预览一下，满意的话点开始就行。"
+          },
+          {
+            "id": "E003",
+            "calls": [
+              "self.tank.get_status"
+            ],
+            "results": [
+              "ok"
+            ],
+            "before_saved_segments": null,
+            "audio_before_saved": null,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 66,
+            "reply": "当前草稿是第7版，有两步：先左转880毫秒，然后吹泡泡1000毫秒。你想缩短结尾的泡泡，但还没想好几秒，那你说个具体秒数，我帮你改。"
+          }
+        ],
+        "file": "evidence/role-5991/edit-variants-1.json.gz",
+        "raw_sha256": "885190b82a9a97fdc5897e49a5a2456d5b52398d59ba2ff66400f8dd4a1ebced"
+      },
+      {
+        "run_id": "f4c5f1ae-a292-4a39-a71a-e0e9901a7781",
+        "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+        "schema_sha256": "7ecd624f1a4deb3f23a42e45155acdd00e24ee2b33af30005ca72bd0a889b70a",
+        "host_sha256": "809e6af646759ccb77e4ede555a178b3f9705713eaa1f8f184309534cb3aec7c",
+        "rows": [
+          {
+            "id": "E001",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 2,
+            "audio_before_saved": true,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 109,
+            "reply": "我先查一下当前草稿的状态。当前草稿是第1步原地左转880毫秒，第2步吹泡泡1秒。要保留开头转圈那段，把泡泡改成3秒。好，草稿改好了。开头转圈那步保留，后面的泡泡改成3秒，其余没动。你在网页上预览一下，没问题就点开始吧。"
+          },
+          {
+            "id": "E002",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 1,
+            "audio_before_saved": true,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 112,
+            "reply": "我先查一下当前草稿的状态看到草稿了，当前有两个步骤：第一步是左转880毫秒，第二步是吹泡泡1000毫秒。我把第二步删掉，保留第一步改好了，把最后那个吹泡泡删掉了，现在只剩开头的左转动作。你到网页上预览一下，没问题就点开始吧。"
+          },
+          {
+            "id": "E003",
+            "calls": [
+              "self.tank.get_status"
+            ],
+            "results": [
+              "ok"
+            ],
+            "before_saved_segments": null,
+            "audio_before_saved": null,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 41,
+            "reply": "我先查一下当前草稿的状态你想把结尾的泡泡缩短到几秒？告诉我具体秒数，我帮你改草稿。"
+          }
+        ],
+        "file": "evidence/role-5991/edit-variants-2.json.gz",
+        "raw_sha256": "f8a99bbb4a4db4db84501c1212142976bd0fc00fbec4e81c3eaf2ef06bd37a9f"
+      },
+      {
+        "run_id": "b056b251-dd18-43a7-bb77-e9889a874686",
+        "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+        "schema_sha256": "7ecd624f1a4deb3f23a42e45155acdd00e24ee2b33af30005ca72bd0a889b70a",
+        "host_sha256": "809e6af646759ccb77e4ede555a178b3f9705713eaa1f8f184309534cb3aec7c",
+        "rows": [
+          {
+            "id": "E001",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 2,
+            "audio_before_saved": true,
+            "english_phrase": true,
+            "tool_word": false,
+            "reply_characters": 297,
+            "reply": "I'll check the current draft status first.The current draft has revision 7 with 2 steps.The first step is the turning section (left turn).I need to keep step 1 and modify step 2's bubbles to 3 seconds.I'll replace step 2 with bubbles of 3000ms改好了，开头转圈那段留着，后面的泡泡改成吹三秒。草稿已经保存，麻烦家长在网页上预览一下，确认没问题就点开始。"
+          },
+          {
+            "id": "E002",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 1,
+            "audio_before_saved": true,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 94,
+            "reply": "我先查一下当前草稿的版本和步骤。草稿有两步：第一步是左转，第二步是吹泡泡。我把第二步删掉，保留开头的左转。删好了，现在草稿只剩开头的左转那一步。麻烦你在网页上预览一下，确认没问题再点开始。"
+          },
+          {
+            "id": "E003",
+            "calls": [
+              "self.tank.get_status"
+            ],
+            "results": [
+              "ok"
+            ],
+            "before_saved_segments": null,
+            "audio_before_saved": null,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 55,
+            "reply": "我先看看当前草稿的情况草稿还在，结尾的泡泡是第2步，时长1000毫秒。你想改成几秒？告诉我具体秒数我就帮你改。"
+          }
+        ],
+        "file": "evidence/role-5991/edit-variants-3.json.gz",
+        "raw_sha256": "499a7c2411a44a316268d7c0b96d0e3ac000a23506a2e8e669c836d9425053aa"
+      }
+    ],
+    "prefixed": [
+      {
+        "run_id": "2a935928-1a23-43c9-8334-2fbd90328ffd",
+        "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+        "schema_sha256": "165736a07467393ecc2ade9f24c3a23811e12c9750479df75bb23c554c0c5deb",
+        "host_sha256": "809e6af646759ccb77e4ede555a178b3f9705713eaa1f8f184309534cb3aec7c",
+        "rows": [
+          {
+            "id": "E001",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 1,
+            "audio_before_saved": true,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 108,
+            "reply": "当前草稿rev7有2步：第1步左转880ms，第2步吹泡泡1000ms。用户说开头转圈那段留着，后面的泡泡吹三秒，即把第2步泡泡改成3000ms。改好了，开头左转那段保留，后面的泡泡改成了三秒。请在网页预览后点开始。"
+          },
+          {
+            "id": "E002",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 1,
+            "audio_before_saved": true,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 64,
+            "reply": "我先看看当前草稿的情况草稿第7版有2步，删掉第2步吹泡泡改好了，删掉了最后的吹泡泡，开头的原地左转保留着。请在网页预览后点开始。"
+          },
+          {
+            "id": "E003",
+            "calls": [
+              "self.tank.get_status"
+            ],
+            "results": [
+              "ok"
+            ],
+            "before_saved_segments": null,
+            "audio_before_saved": null,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 18,
+            "reply": "你想改成几秒？告诉我具体秒数我来改。"
+          }
+        ],
+        "file": "evidence/draft-narration/prefixed-1.json.gz",
+        "raw_sha256": "1659d3566b980987a5308e6f8004378a4057cad542e594ac59f3f68a6683ba93"
+      },
+      {
+        "run_id": "5970c1b1-275c-4729-b467-242e9c2832c9",
+        "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+        "schema_sha256": "165736a07467393ecc2ade9f24c3a23811e12c9750479df75bb23c554c0c5deb",
+        "host_sha256": "809e6af646759ccb77e4ede555a178b3f9705713eaa1f8f184309534cb3aec7c",
+        "rows": [
+          {
+            "id": "E001",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 1,
+            "audio_before_saved": true,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 137,
+            "reply": "当前草稿是第1步左转880毫秒，第2步吹泡泡1秒。用户要求保留开头转圈那段，后面的泡泡改成3秒。当前草稿revision是7，需要修改第2步的bubbles_ms从1000改成3000。改好了，开头左转那段保留，后面的泡泡改成吹三秒。请在网页上预览一下，确认没问题就点开始。"
+          },
+          {
+            "id": "E002",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 1,
+            "audio_before_saved": true,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 61,
+            "reply": "草稿有2步，第2步是吹泡泡，我来把它删掉改好了，把最后那个吹泡泡删掉了，现在只剩开头的左转那一步。请在网页上预览后点开始。"
+          },
+          {
+            "id": "E003",
+            "calls": [
+              "self.tank.get_status"
+            ],
+            "results": [
+              "ok"
+            ],
+            "before_saved_segments": null,
+            "audio_before_saved": null,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 20,
+            "reply": "你想改成几秒？告诉我具体秒数我就帮你改。"
+          }
+        ],
+        "file": "evidence/draft-narration/prefixed-2.json.gz",
+        "raw_sha256": "f2177950a04a59fa6bf218afc649aec015c5e1e5f202e915dd60f5b43b671991"
+      },
+      {
+        "run_id": "ea887c8a-fa04-4d09-9fb4-a0466fe18a67",
+        "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+        "schema_sha256": "165736a07467393ecc2ade9f24c3a23811e12c9750479df75bb23c554c0c5deb",
+        "host_sha256": "809e6af646759ccb77e4ede555a178b3f9705713eaa1f8f184309534cb3aec7c",
+        "rows": [
+          {
+            "id": "E001",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 1,
+            "audio_before_saved": true,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 118,
+            "reply": "我看到当前草稿第1步是左转880毫秒，第2步是吹泡泡1秒。用户说开头转圈那段留着，后面的泡泡改成吹3秒。我需要把第2步的泡泡时长从1000毫秒改成3000毫秒改好了，开头左转那段保持不变，后面的泡泡改成吹3秒。请在网页预览后点开始就行。"
+          },
+          {
+            "id": "E002",
+            "calls": [
+              "self.tank.get_status",
+              "self.tank.compose"
+            ],
+            "results": [
+              "ok",
+              "draft_saved"
+            ],
+            "before_saved_segments": 1,
+            "audio_before_saved": true,
+            "english_phrase": true,
+            "tool_word": false,
+            "reply_characters": 107,
+            "reply": "I'll check the current draft status first.草稿有2步，最后一步是吹泡泡1000毫秒，我删掉它。改好了，把最后那个吹泡泡删掉了，现在只剩开头的原地左转。请在网页预览后点开始。"
+          },
+          {
+            "id": "E003",
+            "calls": [
+              "self.tank.get_status"
+            ],
+            "results": [
+              "ok"
+            ],
+            "before_saved_segments": null,
+            "audio_before_saved": null,
+            "english_phrase": false,
+            "tool_word": false,
+            "reply_characters": 13,
+            "reply": "你想把结尾的泡泡改成几秒？"
+          }
+        ],
+        "file": "evidence/draft-narration/prefixed-3.json.gz",
+        "raw_sha256": "d2bc1dd1f8d94d11aeb4d9db7a0e97d79d1671389afdda9cd51ad08d01d59611"
+      }
+    ]
+  }
+}
