@@ -116,14 +116,21 @@ async def capture_case(connection,tools,case,timeout=45):
     row=dict(id=case['id'],calls=[],replies=[],events=[],completed=False,input_text=case['text'],context=case['context'])
     headers={'Authorization':'Bearer '+connection['token'].removeprefix('Bearer '),
              'Device-Id':connection['device_id'],'Client-Id':connection['client_id'],'Protocol-Version':'1'}
-    session=None;sent=False;deadline=time.monotonic()+timeout;audio_bytes=0
+    opened = time.monotonic()
+    timeline = row['timeline'] = []
+    def mark(event, **details):
+        timeline.append(dict(ms=round((time.monotonic()-opened)*1000), event=event, **details))
+    session=None;sent=False;deadline=opened+timeout;audio_bytes=0
     async with connect(ENDPOINT,additional_headers=headers,proxy=None,open_timeout=15,max_size=2**20) as ws:
         async def send(message):await ws.send(json.dumps(message,ensure_ascii=False))
         await send(dict(type='hello',version=1,transport='websocket',features={'mcp':True},audio_params=dict(format='opus',sample_rate=16000,channels=1,frame_duration=60)))
         while time.monotonic()<deadline:
             try:raw=await asyncio.wait_for(ws.recv(),min(5,max(.01,deadline-time.monotonic())))
             except asyncio.TimeoutError:continue
-            if isinstance(raw,bytes):audio_bytes+=len(raw);continue
+            if isinstance(raw,bytes):
+                if not audio_bytes:mark('first_audio')
+                audio_bytes+=len(raw)
+                continue
             msg=json.loads(raw);kind=msg.get('type')
             if kind=='hello':session=msg.get('session_id');row['events'].append('hello')
             elif kind=='mcp':
@@ -134,6 +141,7 @@ async def capture_case(connection,tools,case,timeout=45):
                 elif method=='tools/list':result=tools_page(tools,params.get('cursor',''))
                 elif method=='tools/call':
                     name=params['name'];args=params.get('arguments',{})
+                    mark('tool_call', name=name)
                     row['calls'].append(dict(name=name,arguments=args))
                     try:
                         if name.replace('self_tank_','self.tank.',1) not in {t['name'] for t in tools}:raise ValueError('unknown tool')
@@ -144,20 +152,27 @@ async def capture_case(connection,tools,case,timeout=45):
                     except (ValueError,KeyError,TypeError,IndexError):result={'content':[{'type':'text','text':'capture fixture rejected invalid arguments'}],'isError':True}
                 if result is not None:
                     await send(dict(type='mcp',payload=dict(jsonrpc='2.0',id=payload['id'],result=result)))
+                if method=='tools/call':
+                    mark('tool_reply_sent', name=name, is_error=result['isError'])
                 if method=='tools/list' and not result.get('nextCursor') and not sent:
                     # Context is visibly separate from the user's phrase; the
                     # runner never reads expected_calls or response_expectation.
                     text=case['text'] if case.get('raw_text') else '本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：'+case['context']+'。请只处理这条用户原话：'+case['text']
                     await send(dict(session_id=session,type='listen',state='detect',text=text))
-                    sent=True;row['events'].append('test_input_sent')
+                    sent=True;row['events'].append('test_input_sent');mark('input_sent')
             elif kind=='tts':
+                state=msg.get('state')
+                if state in ('start','sentence_start','stop'):
+                    mark('tts_'+state, reply_index=len(row['replies']))
                 if msg.get('state')=='sentence_start':row['replies'].append(msg.get('text',''))
                 if msg.get('state')=='stop' and sent:
-                    row['completed']=True;break
+                    row['completed']=msg.get('is_aborted') is not True
+                    if not row['completed']:row['completion']='tts_aborted'
+                    break
             elif kind=='stt':row['echoed_text']=msg.get('text','')
             elif kind in ('error','goodbye'):row['events'].append(kind);break
     row['received_audio_bytes_discarded']=audio_bytes
-    row['completion']='tts_stop' if row['completed'] else 'incomplete_or_timeout'
+    row.setdefault('completion','tts_stop' if row['completed'] else 'incomplete_or_timeout')
     return row
 
 
