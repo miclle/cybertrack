@@ -76,6 +76,15 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual(protocol["observed_phase_fields"], [])
             self.assertEqual(protocol["restored_stop"]["strict_tool_matches"], 1)
             self.assertEqual(protocol["restored_stop_added_starts"], 0)
+            relay = json.loads(archive.read("docs/validation/evidence/llm-tool-round-relay/local-tests.json"))
+            self.assertTrue(relay["passed"])
+            self.assertEqual(relay["tests_run"], 17)
+            self.assertFalse(relay["adopted"])
+            for name, digest in relay["source_sha256"].items():
+                self.assertEqual(hashlib.sha256(archive.read(name)).hexdigest(), digest)
+            limits = json.loads(archive.read("docs/validation/evidence/llm-tool-round-relay/known-limitations.json"))
+            self.assertTrue(limits["tool_round_limit_text_removed"])
+            self.assertFalse(limits["actual_stop_latency_measured"])
             speech = result["spoken_stt_review"]
             self.assertEqual((speech["expected"], speech["completed"], speech["calls_match"]), (20, 19, 19))
             self.assertEqual(speech["not_completed"], ["V017"])

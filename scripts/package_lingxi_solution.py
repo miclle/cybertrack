@@ -114,6 +114,7 @@ python3 scripts/review_lingxi_reference.py
 - [真实 STT 驱动主机](docs/validation/ct62-stt-host.md)的二十条合成语音另在 `spoken_stt_review` 复算转写与工具结果：19 条正常结束并匹配，V017 未收到结束事件仍保留。事件与控制回执完整重放需要完整 checkout 和固定主机二进制。
 - [ct71 完整语音固定集](docs/validation/full-stt-ct71.md)以 `full_speech_scores` 单独复算原 80／8 条的严格工具 77/80、6/8，V064 禁止调用及额外查询继续失败。逐字转写 76/80、8/8，数字书写差异与同音分别说明；这是合成普通话经实际 STT，不是文本、真人拾音或实物验收。包内仅含评分字段与识别文字，完整事件／回执／终态需 checkout。七组历史文本及旧二十条未完成记录保持。
 - [ct72 效果播放](docs/validation/effect-alias-feedback.md)附构建、88 条事件回放和 81 条不一致变体摘要：只新增抑制普通点火 64 包，超限与其他包计数保持。它不是新模型成绩或设备部署，重跑音频包策略需完整 checkout 和 C++ 回放器。
+- [模型工具轮中继原型](tools/lingxi-relay/README.md)附源码、仅引用环境变量名的配置样例和 17 项本地 HTTP／SSE 测试。所有模型返回是测试夹具，未访问外部服务或设备；工具后分析、工具轮必要限制与缓冲时延仍是未通过的采纳条件，不新增模型评分。解压后可运行单独的 `test_llm_relay.py`，仅临时使用回环端口，不创建灵矽模型或云端绑定。
 - [ct63 播放匹配](docs/validation/plan-feedback.md)另附构建和离线回放：同一批事件新增抑制 216 个组合／序列／目标速度确认包，保留 397 个状态／否定／澄清包；30 条合成不一致保留音频。这不是新的模型成绩，播放重跑需要完整 checkout 和同版 C++ 回放器。
 - [回执收敛试验](docs/validation/compact-model-receipts.md)未采纳；`compact_receipt_scores` 保留 5/8 及 C006 的禁止调用。字节减少不等于语义通过，该试验结束后恢复 ct63，当前候选见版本表。实验源码补丁和完整 MCP 重放需要按专题中的范围复核。
 - [停止说明对照](docs/validation/stop-negation.md)也未采纳；`stop_negation_scores` 重算语义 77/80 与编排 6/8，继续标明 V064 误停、V079 含糊请求擅自前进。八条明确停止通过不能抵消禁止调用；诊断 ct65 未部署，该试验结束后恢复 ct63，当前候选见版本表。

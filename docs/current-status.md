@@ -73,8 +73,10 @@ ct71 的[否定输入保护](validation/negative-input-admission.md)完成最终
 
 ct72 [效果确认播放](validation/effect-alias-feedback.md)复用完整 88 条实际 STT 轨迹，仅新增抑制普通点火的 64 个确认包；其余 85 条逐例计数保持，所有超限提示保留。81 条合成不一致均保留音频，原生夹具涵盖既有别名、模式及并发通道时长。源码候选更新，板上仍 ct45，模型语义及过程播报仍未完成。
 
-最新[灵矽参考材料包](../tools/lingxi-solution/README.md)单列 `full_speech_scores` 复算 ct71 原 80／8 语音成绩，附 ct72 播放摘要；最近参考包 81 项包内离线测试通过；完整源码现有 124 项测试通过。历史文本及 ct62 未完成 V017 保留，包内最小评分轨迹不包含完整 RPC 事件。
+最新[灵矽参考材料包](../tools/lingxi-solution/README.md)单列 `full_speech_scores` 复算 ct71 原 80／8 语音成绩，附 ct72 播放摘要；最近参考包 98 项包内离线测试通过；完整源码现有 124 项测试通过。历史文本及 ct62 未完成 V017 保留，包内最小评分轨迹不包含完整 RPC 事件。
 
 [协议字段与参数对照](validation/tts-protocol-observation.md)完成 8+8 条实际 STT 和恢复后的独立停止：`action=thinking` 不能区分有效限幅提示；临时 none 导致统一异常并漏停，未采纳，原 low／角色已保存重开恢复。原固定集与 ct72／ct45 版本保持，过程播报仍未解决。
 
 [模型工具轮中继原型](validation/llm-tool-round-relay.md)完成 17 项本地 HTTP／SSE 与策略测试，尚未采纳或接入平台。工具后分析仍放行，工具轮限幅文字也可能丢失，整轮缓冲时延未测；未更新模型成绩、固件或部署。
+
+参考材料包已纳入中继源码、配置样例及 17 项回环 HTTP／SSE 测试，解压后共 98 项离线测试。样例只含环境变量名，原模型评分与未采纳条件保持，材料包不启动或绑定线上服务。
