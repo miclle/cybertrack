@@ -1,0 +1,49 @@
+{
+  "kind": "manual_semantic_review",
+  "scope": "reviewed captured TTS text, synthetic status; not microphone or real fault observation",
+  "get_status_only": true,
+  "completed": 8,
+  "reply_requirements_met": 2,
+  "results": [
+    {
+      "id": "D001",
+      "meets_all_reply_requirements": false,
+      "finding": "缺少最近回执仍推测没有触发移动，并称一切正常"
+    },
+    {
+      "id": "D002",
+      "meets_all_reply_requirements": false,
+      "finding": "正确报告忙碌或未就绪，但附加随时重试建议"
+    },
+    {
+      "id": "D003",
+      "meets_all_reply_requirements": true,
+      "finding": "说明驱动故障，不执行动作"
+    },
+    {
+      "id": "D004",
+      "meets_all_reply_requirements": false,
+      "finding": "正确识别前进锁定，但错误暗示距离恢复后续走"
+    },
+    {
+      "id": "D005",
+      "meets_all_reply_requirements": false,
+      "finding": "承认无电量数据，但猜测未收到指令并建议试动"
+    },
+    {
+      "id": "D006",
+      "meets_all_reply_requirements": true,
+      "finding": "无有效测距，不报旧距离"
+    },
+    {
+      "id": "D007",
+      "meets_all_reply_requirements": false,
+      "finding": "报告未结束和步骤，但未说明步骤间等待"
+    },
+    {
+      "id": "D008",
+      "meets_all_reply_requirements": false,
+      "finding": "仅凭旧accepted回执猜测计时完成"
+    }
+  ]
+}

@@ -1,0 +1,5246 @@
+{
+  "kind": "captured_tool_calls",
+  "run_id": "ff5ffd85-6199-4b27-9f2e-b4a08cacb606",
+  "date": "2026-10-31T02:58:24.631571+00:00",
+  "model": "deepseek-v4-flash",
+  "model_source": "visible platform configuration; no model identity in WSS response",
+  "role_sha256": "9771eb9f4c3e3c2c509d23ab157e391e20cd44eba40e90edac4368a859d65de8",
+  "transport": "wss://xrobo-io.qiniuapi.com/v1/ws/",
+  "tool_schema_sha256": "7ecd624f1a4deb3f23a42e45155acdd00e24ee2b33af30005ca72bd0a889b70a",
+  "corpus_sha256": "38ab1b2fd546f4b00483c31bfdcf0e94b1f1797e6fd42db383037ba2d5d2466f",
+  "scope": "Real platform calls; synthetic receipt/context fixtures; zero device forwarding; text not microphone ASR",
+  "results": [
+    {
+      "id": "V001",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "forward",
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "replies": [
+        "前进，收到。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "前进",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：前进",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 1000
+        }
+      ],
+      "received_audio_bytes_discarded": 2339,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V002",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "forward",
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "replies": [
+        "好的，前进两秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "前进两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：前进两秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 2000
+        }
+      ],
+      "received_audio_bytes_discarded": 2571,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V003",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "forward",
+            "duration_ms": 5000,
+            "speed_percent": 60
+          }
+        }
+      ],
+      "replies": [
+        "好的，前进五秒，",
+        "速度百分之六十。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "前进五秒，速度百分之六十",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：前进五秒，速度百分之六十",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 5000
+        }
+      ],
+      "received_audio_bytes_discarded": 4705,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V004",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "forward",
+            "duration_ms": 60000
+          }
+        }
+      ],
+      "replies": [
+        "好的，前进一分钟。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "前进一分钟",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：前进一分钟",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 60000
+        }
+      ],
+      "received_audio_bytes_discarded": 3040,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V005",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "backward",
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "replies": [
+        "已接受。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "后退",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：后退",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 1000
+        }
+      ],
+      "received_audio_bytes_discarded": 1282,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V006",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "backward",
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "replies": [
+        "后退两秒，",
+        "收到。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "后退两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：后退两秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 2000
+        }
+      ],
+      "received_audio_bytes_discarded": 2378,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V007",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "backward",
+            "duration_ms": 5000,
+            "speed_percent": 60
+          }
+        }
+      ],
+      "replies": [
+        "动作已接受。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "后退五秒，速度百分之六十",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：后退五秒，速度百分之六十",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 5000
+        }
+      ],
+      "received_audio_bytes_discarded": 2037,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V008",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "backward",
+            "duration_ms": 60000
+          }
+        }
+      ],
+      "replies": [
+        "我来处理\"后退一分钟\"这个指令。",
+        "一分钟等于60000毫秒，在行走允许范围内。",
+        "好的，正在后退一分钟。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "后退一分钟",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：后退一分钟",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 60000
+        }
+      ],
+      "received_audio_bytes_discarded": 15525,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V009",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "left",
+            "duration_ms": 880
+          }
+        }
+      ],
+      "replies": [
+        "已收到，左转执行中。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "左转",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：左转",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 880
+        }
+      ],
+      "received_audio_bytes_discarded": 3829,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V010",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "left",
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "replies": [
+        "好的，左转两秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "左转两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：左转两秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 2000
+        }
+      ],
+      "received_audio_bytes_discarded": 2612,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V011",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "left",
+            "duration_ms": 5000,
+            "speed_percent": 60
+          }
+        }
+      ],
+      "replies": [
+        "我来执行左转五秒，",
+        "速度60好的，左转五秒，速度60，已开始。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "左转五秒，速度百分之六十",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：左转五秒，速度百分之六十",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 5000
+        }
+      ],
+      "received_audio_bytes_discarded": 13081,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V012",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "left",
+            "duration_ms": 60000
+          }
+        }
+      ],
+      "replies": [
+        "好，左转一分钟，",
+        "走起。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "左转一分钟",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：左转一分钟",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 60000
+        }
+      ],
+      "received_audio_bytes_discarded": 3749,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V013",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "right",
+            "duration_ms": 880
+          }
+        }
+      ],
+      "replies": [
+        "好的，右转。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "右转",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：右转",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 880
+        }
+      ],
+      "received_audio_bytes_discarded": 1913,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V014",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "right",
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "replies": [
+        "好的，右转两秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "右转两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：右转两秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 2000
+        }
+      ],
+      "received_audio_bytes_discarded": 2343,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V015",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "right",
+            "duration_ms": 5000,
+            "speed_percent": 60
+          }
+        }
+      ],
+      "replies": [
+        "好的，右转五秒，",
+        "速度百分之六十。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "右转五秒，速度百分之六十",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：右转五秒，速度百分之六十",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 5000
+        }
+      ],
+      "received_audio_bytes_discarded": 5368,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V016",
+      "calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "right",
+            "duration_ms": 60000
+          }
+        }
+      ],
+      "replies": [
+        "动作已接受，",
+        "右转一分钟。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "右转一分钟",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：右转一分钟",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move",
+          "last_duration_ms": 60000
+        }
+      ],
+      "received_audio_bytes_discarded": 3505,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V017",
+      "calls": [],
+      "replies": [
+        "喷水，收到。",
+        "喷多久呢？"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "喷水",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：喷水",
+      "received_audio_bytes_discarded": 5012,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V018",
+      "calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "replies": [
+        "喷水两秒，",
+        "收到已接受。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "喷水两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：喷水两秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "water",
+          "last_duration_ms": 2000
+        }
+      ],
+      "received_audio_bytes_discarded": 4110,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V019",
+      "calls": [],
+      "replies": [
+        "喷水单次最多三十秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "喷水30秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：喷水30秒",
+      "received_audio_bytes_discarded": 3199,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V020",
+      "calls": [],
+      "replies": [
+        "喷水单次最多三十秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "喷水六十秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：喷水六十秒",
+      "received_audio_bytes_discarded": 3205,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V021",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "replies": [
+        "吹泡泡，好的好的，",
+        "泡泡来啦。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "吹泡泡",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：吹泡泡",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "bubbles",
+          "last_duration_ms": 1000
+        }
+      ],
+      "received_audio_bytes_discarded": 4499,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V022",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "replies": [
+        "好的，吹泡泡两秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "吹泡泡两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：吹泡泡两秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "bubbles",
+          "last_duration_ms": 2000
+        }
+      ],
+      "received_audio_bytes_discarded": 3006,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V023",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "replies": [
+        "好的，吹泡泡30秒，",
+        "安排上了。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "吹泡泡30秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：吹泡泡30秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "bubbles",
+          "last_duration_ms": 30000
+        }
+      ],
+      "received_audio_bytes_discarded": 5274,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V024",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "replies": [
+        "泡泡单次最多三十秒，",
+        "我按三十秒来。",
+        "泡泡单次最多三十秒，已按三十秒开始。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "吹泡泡六十秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：吹泡泡六十秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "bubbles",
+          "last_duration_ms": 30000
+        }
+      ],
+      "received_audio_bytes_discarded": 12742,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V025",
+      "calls": [
+        {
+          "name": "self.tank.ignition",
+          "arguments": {
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "replies": [
+        "好嘞，放电一下。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "放电",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：放电",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "ignition",
+          "last_duration_ms": 1000
+        }
+      ],
+      "received_audio_bytes_discarded": 2387,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V026",
+      "calls": [
+        {
+          "name": "self.tank.ignition",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "replies": [
+        "点火两秒。",
+        "点火两秒，已经执行了。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "放电两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：放电两秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "ignition",
+          "last_duration_ms": 2000
+        }
+      ],
+      "received_audio_bytes_discarded": 6175,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V027",
+      "calls": [
+        {
+          "name": "self.tank.ignition",
+          "arguments": {
+            "duration_ms": 5000
+          }
+        }
+      ],
+      "replies": [
+        "点火5秒，",
+        "已启动。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "放电5秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：放电5秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "ignition",
+          "last_duration_ms": 5000
+        }
+      ],
+      "received_audio_bytes_discarded": 3852,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V028",
+      "calls": [
+        {
+          "name": "self.tank.ignition",
+          "arguments": {
+            "duration_ms": 5000
+          }
+        }
+      ],
+      "replies": [
+        "放电单次最多五秒。",
+        "放电单次最多五秒，已按五秒执行。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "放电六十秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：放电六十秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "ignition",
+          "last_duration_ms": 5000
+        }
+      ],
+      "received_audio_bytes_discarded": 8215,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V029",
+      "calls": [
+        {
+          "name": "self.tank.move_and_water",
+          "arguments": {
+            "direction": "forward",
+            "move_duration_ms": 5000,
+            "water_duration_ms": 5000
+          }
+        }
+      ],
+      "replies": [
+        "好的，前进五秒同时喷水五秒，",
+        "已经开始了。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "前进五秒，同时喷水",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：前进五秒，同时喷水",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move_and_water"
+        }
+      ],
+      "received_audio_bytes_discarded": 6736,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V030",
+      "calls": [
+        {
+          "name": "self.tank.move_and_water",
+          "arguments": {
+            "direction": "left",
+            "move_duration_ms": 3000,
+            "water_duration_ms": 1000
+          }
+        }
+      ],
+      "replies": [
+        "好的，左转三秒同时喷水一秒，",
+        "已经安排上了。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "左转三秒，同时喷水一秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：左转三秒，同时喷水一秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "move_and_water"
+        }
+      ],
+      "received_audio_bytes_discarded": 6759,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V031",
+      "calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"forward\",\"move_ms\":5000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "replies": [
+        "好，前进五秒然后左转，",
+        "已经安排上了。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "前进五秒，然后左转",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：前进五秒，然后左转",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "sequence"
+        }
+      ],
+      "received_audio_bytes_discarded": 5825,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V032",
+      "calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0},{\"direction\":\"backward\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "replies": [
+        "好的，按顺序来：先吹泡泡两秒，",
+        "再后退一秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "先吹泡泡两秒，再后退一秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：先吹泡泡两秒，再后退一秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "sequence"
+        }
+      ],
+      "received_audio_bytes_discarded": 8049,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V033",
+      "calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"left\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":3000,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "replies": [
+        "好的，左转两秒同时吹泡泡三秒，",
+        "已经安排好了。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "左转两秒，同时吹泡泡三秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：左转两秒，同时吹泡泡三秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "sequence"
+        }
+      ],
+      "received_audio_bytes_discarded": 5982,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V034",
+      "calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":2000,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "replies": [
+        "好的，同时喷水两秒和吹泡泡一秒，",
+        "已经安排上了。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "同时喷水两秒和吹泡泡一秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：同时喷水两秒和吹泡泡一秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "sequence"
+        }
+      ],
+      "received_audio_bytes_discarded": 8182,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V035",
+      "calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"forward\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "replies": [
+        "好的，先前进一秒，",
+        "然后左转两秒同时吹泡泡两秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "先前进一秒，再同时左转两秒和吹泡泡两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：先前进一秒，再同时左转两秒和吹泡泡两秒",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "sequence"
+        }
+      ],
+      "received_audio_bytes_discarded": 8582,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V036",
+      "calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"forward\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":70},{\"direction\":\"right\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":70}]"
+          }
+        }
+      ],
+      "replies": [
+        "好，按顺序来：先前进两秒，",
+        "再右转两秒，都是百分之七十速度。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "先前进两秒再右转两秒，都用百分之七十速度",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：先前进两秒再右转两秒，都用百分之七十速度",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "sequence"
+        }
+      ],
+      "received_audio_bytes_discarded": 9705,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V037",
+      "calls": [
+        {
+          "name": "self.tank.set_speed",
+          "arguments": {
+            "speed_percent": 60
+          }
+        }
+      ],
+      "replies": [
+        "用户要求调整速度到60%，",
+        "当前正在前进移动中已调到60%。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "调到百分之六十",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障。请只处理这条用户原话：调到百分之六十",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "ACTIVE",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "forward",
+          "move_speed_percent": 70,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 4000,
+          "move_cooldown_ms": 0,
+          "move_source": "voice",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "set_speed"
+        }
+      ],
+      "received_audio_bytes_discarded": 10166,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V038",
+      "calls": [
+        {
+          "name": "self.tank.adjust_speed",
+          "arguments": {
+            "delta_percent": 10
+          }
+        }
+      ],
+      "replies": [
+        "\"快一点\"是明确的加速请求，",
+        "调用调速工具已加速。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "快一点",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障。请只处理这条用户原话：快一点",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "ACTIVE",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "forward",
+          "move_speed_percent": 70,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 4000,
+          "move_cooldown_ms": 0,
+          "move_source": "voice",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "adjust_speed"
+        }
+      ],
+      "received_audio_bytes_discarded": 6884,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V039",
+      "calls": [
+        {
+          "name": "self.tank.adjust_speed",
+          "arguments": {
+            "delta_percent": -10
+          }
+        }
+      ],
+      "replies": [
+        "已减速到60%。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "慢一点",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障。请只处理这条用户原话：慢一点",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "ACTIVE",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "forward",
+          "move_speed_percent": 70,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 4000,
+          "move_cooldown_ms": 0,
+          "move_source": "voice",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "adjust_speed"
+        }
+      ],
+      "received_audio_bytes_discarded": 3189,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V040",
+      "calls": [
+        {
+          "name": "self.tank.set_speed",
+          "arguments": {
+            "speed_percent": 100
+          }
+        }
+      ],
+      "replies": [
+        "用户说\"全速\"，",
+        "但当前没有明确移动。",
+        "让我先查一下状态。",
+        "根据模拟前置状态，语音来源前进正在运行。",
+        "用户说\"全速\"，在移动语境下应调用set_speed。",
+        "已调到全速。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "全速",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障。请只处理这条用户原话：全速",
+      "simulated_receipts": [
+        {
+          "result": "accepted",
+          "fault": "none",
+          "state": "ACTIVE",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "forward",
+          "move_speed_percent": 70,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 4000,
+          "move_cooldown_ms": 0,
+          "move_source": "voice",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "set_speed"
+        }
+      ],
+      "received_audio_bytes_discarded": 26208,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V041",
+      "calls": [],
+      "replies": [
+        "速度50不在60到100的范围里，",
+        "我只能按60到100调整。",
+        "你要减速到多少？"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "速度百分之五十",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：速度百分之五十",
+      "received_audio_bytes_discarded": 12808,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V042",
+      "calls": [],
+      "replies": [
+        "速度范围是60到100，",
+        "101超出范围了，麻烦重新说一个。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "速度百分之一百零一",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：速度百分之一百零一",
+      "received_audio_bytes_discarded": 11016,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V043",
+      "calls": [],
+      "replies": [
+        "速度只能用60到100的整数百分比，",
+        "60.5没法设置。",
+        "你是想调到60还是61？"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "速度百分之六十点五",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：速度百分之六十点五",
+      "received_audio_bytes_discarded": 14820,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V044",
+      "calls": [],
+      "replies": [
+        "速度方面看场景啦，",
+        "一般前进用中速比较稳，转弯慢一点更安全。",
+        "你是想让我调速度吗？"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "速度快一些还是慢一些好？",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：速度快一些还是慢一些好？",
+      "received_audio_bytes_discarded": 13461,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V045",
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "停止",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：当前动作或序列可能正在运行，停止无需查询前置。请只处理这条用户原话：停止",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "stopped",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "stop"
+        }
+      ],
+      "received_audio_bytes_discarded": 4235,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V046",
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "停下",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：当前动作或序列可能正在运行，停止无需查询前置。请只处理这条用户原话：停下",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "stopped",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "stop"
+        }
+      ],
+      "received_audio_bytes_discarded": 4929,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V047",
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "停止行走",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：当前动作或序列可能正在运行，停止无需查询前置。请只处理这条用户原话：停止行走",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "stopped",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "stop"
+        }
+      ],
+      "received_audio_bytes_discarded": 4217,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V048",
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "停止喷水",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：当前动作或序列可能正在运行，停止无需查询前置。请只处理这条用户原话：停止喷水",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "stopped",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "stop"
+        }
+      ],
+      "received_audio_bytes_discarded": 4225,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V049",
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "泡泡停了，",
+        "我在这儿等你。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "停止泡泡",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：当前动作或序列可能正在运行，停止无需查询前置。请只处理这条用户原话：停止泡泡",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "stopped",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "stop"
+        }
+      ],
+      "received_audio_bytes_discarded": 3492,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V050",
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "停止狂暴模式",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：当前动作或序列可能正在运行，停止无需查询前置。请只处理这条用户原话：停止狂暴模式",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "stopped",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "stop"
+        }
+      ],
+      "received_audio_bytes_discarded": 4217,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V051",
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "动作都停下了，",
+        "序列已取消，我在这儿等你。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "取消序列",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：当前动作或序列可能正在运行，停止无需查询前置。请只处理这条用户原话：取消序列",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "stopped",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "stop"
+        }
+      ],
+      "received_audio_bytes_discarded": 6442,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V052",
+      "calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "所有动作都停下来",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：当前动作或序列可能正在运行，停止无需查询前置。请只处理这条用户原话：所有动作都停下来",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "stopped",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "stop"
+        }
+      ],
+      "received_audio_bytes_discarded": 4472,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V053",
+      "calls": [],
+      "replies": [
+        "我在待命，",
+        "目前没有动作在运行。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "你现在在做什么",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：你现在在做什么",
+      "received_audio_bytes_discarded": 4126,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V054",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "没有在喷水，",
+        "我目前待命着，什么动作都没在运行。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "你还在喷水吗",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：你还在喷水吗",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 8458,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V055",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "泡泡已经停了，",
+        "目前没有在运行。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "泡泡结束了吗",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：泡泡结束了吗",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 5991,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V056",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "当前没有序列在运行，",
+        "我在待命状态。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "序列进行到哪一步了",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：序列进行到哪一步了",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 5198,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V057",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "狂暴模式当前没有在运行，",
+        "剩余时间是0。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "狂暴模式还剩多久",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：狂暴模式还剩多久",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 7077,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V058",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "前面大约60厘米。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "前面有多远",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：前面有多远",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 2823,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V059",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "前方大约60厘米。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "测一下距离",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：测一下距离",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 2777,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V060",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "自动避障现在是关着的。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "自动避障开着吗",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：自动避障开着吗",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 3268,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V061",
+      "calls": [],
+      "replies": [
+        "用户明确说\"不要前进\"，",
+        "这是否定表达，不启动动作。",
+        "我只需确认不会前进即可。",
+        "好的，不会前进。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "不要前进",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：不要前进",
+      "received_audio_bytes_discarded": 14994,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V062",
+      "calls": [],
+      "replies": [
+        "好的，不喷水。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "别喷水",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：别喷水",
+      "received_audio_bytes_discarded": 1976,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V063",
+      "calls": [],
+      "replies": [
+        "好的，不开启狂暴模式。",
+        "有什么需要帮忙的？"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "不要开启狂暴模式",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：不要开启狂暴模式",
+      "received_audio_bytes_discarded": 5226,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V064",
+      "calls": [],
+      "replies": [
+        "好的，不吹泡泡。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "不许吹泡泡",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：不许吹泡泡",
+      "received_audio_bytes_discarded": 2340,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V065",
+      "calls": [],
+      "replies": [
+        "我不启动点火，",
+        "放心。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "不要放电",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：不要放电",
+      "received_audio_bytes_discarded": 3080,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V066",
+      "calls": [],
+      "replies": [
+        "用户说\"不要饭店\"，",
+        "这是否定句，不启动点火。",
+        "我不执行任何动作。",
+        "好的，不启动。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "不要饭店",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：不要饭店",
+      "received_audio_bytes_discarded": 12937,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V067",
+      "calls": [],
+      "replies": [
+        "“前进两秒”就是让机器人以默认速度向前走两秒。",
+        "需要我执行吗？"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "“前进两秒”是什么意思",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：“前进两秒”是什么意思",
+      "received_audio_bytes_discarded": 10691,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V068",
+      "calls": [],
+      "replies": [
+        "我会喷水呀，",
+        "你直接说\"喷水\"加上想喷多久就行，比如喷水三秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "你会喷水吗",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：你会喷水吗",
+      "received_audio_bytes_discarded": 9722,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V069",
+      "calls": [],
+      "replies": [
+        "喷水就是通过水泵把水箱里的水抽出来，",
+        "再从喷嘴喷出去，形成一个水柱。",
+        "具体到这台机器人，就是控制喷水模块通电，水就被推出来啦。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "喷水的原理是什么",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：喷水的原理是什么",
+      "received_audio_bytes_discarded": 19466,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V070",
+      "calls": [],
+      "replies": [
+        "泡泡是吹泡泡机把泡泡液吹成一个个小泡泡的，",
+        "你问这个是想让我演示一下吗？"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "泡泡是怎么形成的",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：泡泡是怎么形成的",
+      "received_audio_bytes_discarded": 12599,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V071",
+      "calls": [],
+      "replies": [
+        "用户说\"去饭店吃饭\"，",
+        "这是日常闲聊，不是机器人动作指令，不触发任何动作。",
+        "我不接话闲聊。",
+        "这不是发给我的动作指令，我不处理。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "去饭店吃饭",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：去饭店吃饭",
+      "received_audio_bytes_discarded": 18750,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V072",
+      "calls": [],
+      "replies": [
+        "附近的饭店这种问题我答不上来，",
+        "我这边没法查商户位置。",
+        "你可以用手机地图搜一下看看。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "附近的饭店在哪里",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：附近的饭店在哪里",
+      "received_audio_bytes_discarded": 11729,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V073",
+      "calls": [],
+      "replies": [
+        "饭店是吃饭的地方呀，",
+        "就是餐厅的意思。",
+        "你是想问这个吗？"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "饭店是什么意思",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：饭店是什么意思",
+      "received_audio_bytes_discarded": 7372,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V074",
+      "calls": [],
+      "replies": [
+        "如果你说“前进”，我会让机器人向前走。",
+        "没给时长的话，就按默认走一秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "如果以后我说前进，你会怎么办",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：如果以后我说前进，你会怎么办",
+      "received_audio_bytes_discarded": 10563,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V075",
+      "calls": [],
+      "replies": [
+        "你昨天说左转，",
+        "是想问当时的情况吗？",
+        "不过现在没有在转，我在待命呢。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "我昨天说过“左转”",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：我昨天说过“左转”",
+      "received_audio_bytes_discarded": 10843,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V076",
+      "calls": [],
+      "replies": [
+        "明白，不打扰你聊天。",
+        "需要我的时候叫我一声就行。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "我在跟别人说喷水，不是在叫你",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：我在跟别人说喷水，不是在叫你",
+      "received_audio_bytes_discarded": 6697,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V077",
+      "calls": [],
+      "replies": [
+        "前进只能按时间控制，",
+        "给不出精确的厘米数。",
+        "你说个时长，比如前进三秒，我就走。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "前进二十厘米",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：前进二十厘米",
+      "received_audio_bytes_discarded": 11154,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V078",
+      "calls": [],
+      "replies": [
+        "左转我只能按时间控制，",
+        "不能按角度来。",
+        "你告诉我转多久，比如左转两秒，我就照做。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "左转九十度",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：左转九十度",
+      "received_audio_bytes_discarded": 12268,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V079",
+      "calls": [],
+      "replies": [
+        "这句有点含糊，",
+        "你想让我怎么动？",
+        "往前走、后退还是转一转？",
+        "说清楚我就照做。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "动一下那个东西",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：动一下那个东西",
+      "received_audio_bytes_discarded": 12239,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "V080",
+      "calls": [],
+      "replies": [
+        "\"合适的程度\"我不太确定具体是多少。",
+        "你说个目标速度，比如60%到100%之间，或者直接说全速。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent"
+      ],
+      "completed": true,
+      "input_text": "速度调到合适的程度",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "echoed_text": "本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定。请只处理这条用户原话：速度调到合适的程度",
+      "received_audio_bytes_discarded": 15046,
+      "completion": "tts_stop"
+    }
+  ]
+}
