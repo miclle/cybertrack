@@ -25,7 +25,7 @@ class SolutionPackageTest(unittest.TestCase):
         data = package.build_archive(ROOT, paths, "test-revision", False)
         self.assertEqual(data, package.build_archive(ROOT, paths, "test-revision", False))
         with tempfile.TemporaryDirectory() as folder, zipfile.ZipFile(io.BytesIO(data)) as archive:
-            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "replay/voice.json", "replay/compose.json"})
+            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json"})
             manifest = json.loads(archive.read("MANIFEST.json"))
             self.assertEqual(manifest["files"]["START_HERE.md"]["sha256"], hashlib.sha256(archive.read("START_HERE.md")).hexdigest())
             archive.extractall(folder)
