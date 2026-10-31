@@ -1,0 +1,33 @@
+{
+  "scope": "Full MCP dispatcher and actual callbacks; immediate host schedule; simulated distance; zero board IO",
+  "executable_sha256": "d79280610fbc0076cdc2abdba3ebde8b6d76a11319e5f8213229f8477d9e98c4",
+  "sources": {
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/cybertrack_tools.cc": "74428cdc6d6ca3680193c775dfc301d225912d7e7cc0a08c53fbb619600d6432",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/voice_feedback.h": "2ed323fb52741325791ac20057df3413bde282ab75507b9f85caadb92127a2ab",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/status_facts.h": "c25403fec2f45e8c8d52eb68637e9101cdebcda9a67972f401929983a80d5502",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/cybertrack_state.h": "76c93df096d5d6a564ea1846fa2cdff22e1eb7a634b5d106c2b0d456fddbf730",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/action_outputs.h": "3f26633f9b2b5fa2730c5815a9ff7bc5a593f1c83a0e6230c21e3b6552baf87f",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/action_plan_json.h": "6d956c7d398bb1ddceebac4056078b001c7cd3471f854f43eff487525318cbbd",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/control_sessions.h": "258cd3d24a8d33a0d80efb2d327c9bc71b23a335693e99d911b5929a69ecc62c",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/water_guard.h": "088309c542a1e06dbfc3d49994ad0b8793c5e6868fef2e5c238b6cf0deec5379",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/cybertrack_tools.h": "3cdfd88f516f58b582322b6b12090e0ec0fbc4c58b196d47691910398028ff12",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/action_guard.h": "9d9d7a4ce46fe8bf19cd320322747eaf900b2350874049b66fc6256830094b6a",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/action_plan.h": "5631070bf77f26836f1b30ad3ab051ee5714f94e7c78b4e347e0ea5bc72e2a61",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/ultrasonic.h": "6b264fb0f3608b01ae7c41ab4494ddb1573bf0df935cc1cebb4556a7a75da733",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/spoken_duration.h": "03fb4a1b0103442d21370fc167d6df9feeb6ec10ce2fac9cb15b558e882d5281",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/web_server.h": "75f081aa6bd6f8388d2d3f4b765c7ba67b357ab5edbcb46698c649e0002b1b75",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/distance_reading.h": "465eb36af85fdbc9830438d00529816cffec6cfbebcbdbe15464881adcfe34df",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/admission_result.h": "51f37074fa0f52d2e6d64b23bbcee57f0fb391e5df85f7913a76b212266f32ea",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/recent_command.h": "acec8f60df1d500a48163e9f927371c482a9aa2fd667c99d89ddf9a8a52e86d8",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/show_command_json.h": "8807cde4beb1bb76f58f932397725f60a6219d375a6bde82bd06a0782ca4f953",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/web_request.h": "c93a5cde3f49ba514b0c5ddefb54f912696bef83f7ff871e45f7c6645fb0d09a",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/proximity_guard.h": "7fbd647d17e36f83af22ebb1e7c4a32ed344b6a477041a9fa70804f82da499d1",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/show_draft.h": "680d92673719abcdaa870814f8a0b7063565822bcda361c24e05fc1c82861676",
+    "build/xiaozhi-ct61-src/main/boards/bread-compact-wifi/proximity_audio.h": "78cf54a0bdcc1268ddb3fb4380a17a312e1191a34588a39476e20e15a0e5cf8e",
+    "firmware/esp32-audio/tests/receipt_host.h": "2c5e8556b54c94e3cd273b7ee1541dfbde999665f38f93c621277245472570e0",
+    "build/xiaozhi-ct61-src/main/mcp_server.cc": "f342184be044ea56bd4f62120dff1cf79ae3e2ce02d31da3ec69d1f3b4b365dd",
+    "build/xiaozhi-ct61-src/main/mcp_server.h": "2cd14f7e9d5c898fe725d94a82a7e3e585a0815a4aaf1619bfcd9071d16c1534",
+    "firmware/esp32-audio/tests/firmware_host.cc": "a2b0c91ced510045fcc25c18f6cd3a3e8d59466891c876be29dcf8b810f51b6f",
+    "scripts/build_firmware_host.py": "f101e0b2656726f45c361eadd66e0baeb606916c361fea64e10b843311e69c21"
+  }
+}
