@@ -1,0 +1,148 @@
+{
+  "scope": "Input provenance and complete host reply/state reproduction; semantic errors retained, no human/physical acceptance",
+  "host_input_mode": "platform_stt_events",
+  "host_sha256": "12eb533f105876bd5c8cd786ddb2c13e4edcaf492999d2938d36d0c11256fea8",
+  "corpus_sha256": "1709b97e0785040291011a500fc26d86d6ac36b70a23e8ffe4bab8600dfc6611",
+  "cases": 10,
+  "completed": 10,
+  "strict_tool_matches": 7,
+  "tools_before_input": [],
+  "replies_and_final_states_reproduced": true,
+  "results": [
+    {
+      "id": "D001",
+      "completed": true,
+      "strict_tool_match": false,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "用户说\"第二步短一点\"，这是关于编排草稿的修改指令，但\"短一点\"没有明确时长。根据规则，我需要先问要改成几秒，不能猜。让我先查一下当前草稿状态。用户说\"第二步短一点\"，但没说具体几秒。根据规则，含糊时长我只问具体几秒，不猜。第二步现在是泡泡1000毫秒。我需要问用户要改成几秒。第二步现在是吹泡泡1秒，您想改成几秒？"
+    },
+    {
+      "id": "D002",
+      "completed": true,
+      "strict_tool_match": false,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "我先查一下当前草稿的状态草稿最后一步的泡泡是1000毫秒，结尾的泡泡要缩短到几秒？给我个具体时长我就改。"
+    },
+    {
+      "id": "D003",
+      "completed": true,
+      "strict_tool_match": false,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "用户说要让第一步稍长一点，但我需要知道具体改成几秒。草稿当前第一步是左转880毫秒。用户说\"稍长一点\"，但没有给出具体时长。按照规则，含糊的相对时长需要询问具体秒数。现在第一步是左转880毫秒，用户说稍长一点，但没有明确新时长，我需要问要改成几秒。"
+    },
+    {
+      "id": "D004",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "starts": 0,
+      "draft_revision": 8,
+      "reply": "草稿当前版本是7，第2步泡泡是1000毫秒，改成2000毫秒。第二步的泡泡已经改成两秒了，草稿已保存。请在网页上预览确认，没问题就点开始吧。"
+    },
+    {
+      "id": "D005",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "starts": 0,
+      "draft_revision": 8,
+      "reply": "I need to check the current draft status first beforemodifying the show sequence当前草稿第二步是吹泡泡，改成向右转需要整步替换第二步已经改成向右转了。现在表演是先左转、再右转，你到网页上预览一下，确认没问题点开始就行。"
+    },
+    {
+      "id": "D006",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_cancelled"
+      ],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "草稿已取消，之前的表演编排清掉了。"
+    },
+    {
+      "id": "D007",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "starts": 0,
+      "draft_revision": 8,
+      "reply": "第二步已经删掉了，现在表演就剩第一步：向左转。请到网页上预览确认，满意的话点开始就行。"
+    },
+    {
+      "id": "D008",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "动作都停下了，我在这儿等你。"
+    },
+    {
+      "id": "D009",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "我在待命，目前没有动作在运行。"
+    },
+    {
+      "id": "D010",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "starts": 0,
+      "draft_revision": 8,
+      "reply": "I need to check the current draft status first beforemaking any changes.Current draft has 2 steps, step 2 has bubbles_ms=1000.I need to change it to 500ms (half a second).Using replace_step with revision7.\n\n第二步的泡泡已经改成半秒了，草稿已保存。请到网页上预览确认，没问题就点开始吧。"
+    }
+  ]
+}
