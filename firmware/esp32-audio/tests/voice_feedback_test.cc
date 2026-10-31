@@ -4,7 +4,7 @@
 int main() {
     VoiceFeedback feedback;
     auto move = cJSON_Parse(R"({"direction":"forward","duration_ms":1000})");
-    const char* accepted = R"({"operation":"move","result":"accepted"})";
+    const char* accepted = R"({"operation":"move","result":"accepted","fault":"none"})";
     auto start = [&](const char* text) {
         feedback.Input(text);
         return feedback.BeginCall("self.tank.move", move);
@@ -41,10 +41,26 @@ int main() {
     feedback.Receipt(multi, accepted);
     feedback.StartSpeech();
     assert(!feedback.Muted());
-    feedback.Input("停止");
-    auto stop = feedback.BeginCall("self.tank.stop", nullptr);
-    feedback.Receipt(stop, R"({"operation":"stop","result":"ok"})");
-    feedback.StartSpeech();
-    assert(feedback.Muted());
+    for (const char* phrase : {"停止", "停止行走", "停止喷水", "停止泡泡", "停止狂暴模式",
+                               "取消序列", "所有动作都停下来", "取消正在执行的表演！"}) {
+        feedback.Input(phrase);
+        auto stop = feedback.BeginCall("self.tank.stop", nullptr);
+        feedback.Receipt(stop, R"({"operation":"stop","result":"ok","fault":"stopped"})");
+        feedback.StartSpeech();
+        assert(feedback.Muted());
+    }
+    for (const char* phrase : {"不要取消序列", "取消这个还没开始的草稿", "停止了吗？"}) {
+        feedback.Input(phrase);
+        assert(!feedback.BeginCall("self.tank.stop", nullptr));
+    }
+    for (const char* receipt : {R"({"operation":"move","result":"accepted","fault":"none"})",
+                                R"({"operation":"stop","result":"ok","fault":"output_fault"})",
+                                R"({"operation":"stop","result":"ok"})"}) {
+        feedback.Input("取消序列");
+        auto call = feedback.BeginCall("self.tank.stop", nullptr);
+        feedback.Receipt(call, receipt);
+        feedback.StartSpeech();
+        assert(!feedback.Muted());
+    }
     cJSON_Delete(move);
 }

@@ -176,6 +176,7 @@ async def capture_case(connection,tools,case,timeout=45):
             except asyncio.TimeoutError:continue
             if isinstance(raw,bytes):
                 if not audio_bytes:mark('first_audio')
+                if case.get('audio_packets'):mark('audio_packet', size=len(raw))
                 audio_bytes+=len(raw)
                 continue
             msg=json.loads(raw);kind=msg.get('type')
@@ -271,7 +272,9 @@ async def run(args):
     if draft_host:
         version='draft_host'
         for case in cases: case['draft_host']=draft_host.resolve()
-    for case in cases: case['fixture_version']=version
+    for case in cases:
+        case['fixture_version']=version
+        if getattr(args,'audio_packets',False): case['audio_packets']=True
     trace=dict(fixture_version=version,kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
                model_source='visible platform configuration; no model identity in WSS response',role_sha256=hashlib.sha256(args.role.read_bytes()).hexdigest(),
                transport=ENDPOINT,tool_schema_sha256=hashlib.sha256(args.tools.read_bytes()).hexdigest(),corpus_sha256=hashlib.sha256(args.corpus.read_bytes()).hexdigest(),
@@ -281,6 +284,7 @@ async def run(args):
     if timed or draft_host:
         binary=draft_host or ROOT/'build/audio-host/receipt_replay'
         trace['host_replay_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
+    if getattr(args,'audio_packets',False):trace['audio_packet_sizes_recorded']=True
     if draft_host:
         trace['initial_profile']='two_step_web_draft'
     args.output.parent.mkdir(parents=True,exist_ok=True)
@@ -295,6 +299,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('connection','tools','corpus','role','output'):p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
+    p.add_argument('--audio-packets',action='store_true',help='Record arrival and size of every remote audio packet; discard its content')
     p.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
     versions=p.add_mutually_exclusive_group()
     versions.add_argument('--draft-host',type=Path,metavar='REPLAY',help='Use host firmware with a two-step web draft at revision 7')
