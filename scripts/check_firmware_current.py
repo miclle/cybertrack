@@ -19,6 +19,8 @@ def check(root=ROOT):
     if role_hash != current["role_sha256"]:
         raise ValueError("role source changed: update candidate hash and deployment relation")
     deployment = json.loads((firmware / current["last_recorded_deployment"]).read_text())
+    # A role-only save/restart does not constitute another firmware flash.
+    role_sync = json.loads((firmware / current["last_recorded_role_sync"]).read_text()) if current.get("last_recorded_role_sync") else deployment
     evidence = json.loads((firmware / current["software_evidence"]).read_text())
     relation = current["deployment_relation"]
     if relation not in ("matches_recorded_version", "candidate_not_deployed"):
@@ -26,7 +28,7 @@ def check(root=ROOT):
     if relation == "matches_recorded_version":
         if deployment["version"] != current["source_version"] or evidence["version"] != current["source_version"]:
             raise ValueError("declared source/deployment/evidence versions disagree")
-        if deployment["platform_role"]["sha256"] != role_hash:
+        if role_sync["version"] != current["source_version"] or role_sync["platform_role"]["sha256"] != role_hash:
             raise ValueError("role differs from recorded platform synchronization")
     if current["physical_acceptance"] != "incomplete":
         raise ValueError("physical acceptance requires a separately reviewed evidence contract")

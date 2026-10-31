@@ -1,0 +1,1059 @@
+{
+  "kind": "captured_tool_calls",
+  "run_id": "e6ff77dc-d337-4f0e-b962-a84d4fa5d0bd",
+  "date": "2026-10-31T03:35:53.467644+00:00",
+  "model": "deepseek-v4-flash",
+  "model_source": "visible platform configuration; no model identity in WSS response",
+  "role_sha256": "79662d7d2e4540a6f448a0b2330cecad2ba49f0ee2d59d1430f5279f96a677ac",
+  "transport": "wss://xrobo-io.qiniuapi.com/v1/ws/",
+  "tool_schema_sha256": "7ecd624f1a4deb3f23a42e45155acdd00e24ee2b33af30005ca72bd0a889b70a",
+  "corpus_sha256": "a44ce4c52c15f571160a7da521a593683a09013b18bcb7817715a4a9b854be7d",
+  "input_mode": "raw_text_diagnostic",
+  "capture_source_sha256": "f755d9fdb4d1177bf09d5cb90a1432e37d219502e95fe3f3cf702c3f70a921d5",
+  "scope": "Real platform calls; synthetic receipt/context fixtures; zero device forwarding; text not microphone ASR",
+  "results": [
+    {
+      "id": "H001",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace",
+            "revision": 0,
+            "step": 0,
+            "steps_json": "[{\"direction\":\"backward\",\"move_ms\":2000,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0}]"
+          }
+        }
+      ],
+      "replies": [
+        "我先查一下当前状态和草稿版本。",
+        "草稿当前是空的，我保存一下这个预览版本草稿已保存：后退两秒，同时吹泡泡一秒。",
+        "请在网页上预览，确认没问题再点开始。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "帮我预览一段：往后走两秒，同时吹泡泡一秒，先别开始。",
+      "context": "独立新表达；仅提供合成工具状态，不发送预期答案",
+      "echoed_text": "帮我预览一段：往后走两秒，同时吹泡泡一秒，先别开始。",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        },
+        {
+          "result": "draft_saved",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": true,
+            "revision": 1,
+            "steps": [
+              {
+                "direction": "backward",
+                "move_ms": 2000,
+                "water_ms": 0,
+                "bubbles_ms": 1000,
+                "ignition_ms": 0
+              }
+            ],
+            "expires_in_ms": 300000
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "compose"
+        }
+      ],
+      "received_audio_bytes_discarded": 22958,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "H002",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 1,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":1000,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "replies": [
+        "我来先查看当前的草稿状态草稿当前版本是7，",
+        "第一段是左转880毫秒。",
+        "我来把第一段替换成喷水1000毫秒。",
+        "这个草稿只支持行走和泡泡，不支持喷水，所以第一段没法换成喷水。",
+        "草稿没改动，还是原来的内容。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "把排练里的第一段换成喷水，先存着。",
+      "context": "独立新表达；仅提供合成工具状态，不发送预期答案",
+      "echoed_text": "把排练里的第一段换成喷水，先存着。",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": true,
+            "revision": 7,
+            "expires_in_ms": 300000,
+            "steps": [
+              {
+                "direction": "left",
+                "move_ms": 880,
+                "water_ms": 0,
+                "bubbles_ms": 0,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              },
+              {
+                "direction": "none",
+                "move_ms": 0,
+                "water_ms": 0,
+                "bubbles_ms": 1000,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              }
+            ]
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        },
+        {
+          "result": "invalid_plan",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": true,
+            "revision": 7,
+            "expires_in_ms": 300000,
+            "steps": [
+              {
+                "direction": "left",
+                "move_ms": 880,
+                "water_ms": 0,
+                "bubbles_ms": 0,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              },
+              {
+                "direction": "none",
+                "move_ms": 0,
+                "water_ms": 0,
+                "bubbles_ms": 1000,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              }
+            ]
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "compose"
+        }
+      ],
+      "received_audio_bytes_discarded": 31264,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "H003",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[]"
+          }
+        }
+      ],
+      "replies": [
+        "I need to handle a compose request for editing a bubble",
+        "show draft.",
+        "Let me first check the status to get the current draft revision.",
+        "The user wants to add a \"护盾效果\" (shield effect) to step 2 of the preview draft.",
+        "But \"护盾\" maps to ignition (点火) via aliases.",
+        "However, compose only supports walking and bubbles, not ignition.",
+        "Let me check the current status first.",
+        "用户想把第二步改成护盾效果（点火），但编排草稿只支持行走和泡泡，不支持点火。",
+        "我需要说明这一点。",
+        "当前草稿 revision 是 7，第二步是泡泡效果。",
+        "用户要求第二步改为护盾（点火），这是不支持的。",
+        "编排草稿只支持行走和泡泡，护盾（点火）效果不能放进表演草稿里，这个我没法保存。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "预演的第二步来个护盾效果，先保存别启动。",
+      "context": "独立新表达；仅提供合成工具状态，不发送预期答案",
+      "echoed_text": "预演的第二步来个护盾效果，先保存别启动。",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": true,
+            "revision": 7,
+            "expires_in_ms": 300000,
+            "steps": [
+              {
+                "direction": "left",
+                "move_ms": 880,
+                "water_ms": 0,
+                "bubbles_ms": 0,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              },
+              {
+                "direction": "none",
+                "move_ms": 0,
+                "water_ms": 0,
+                "bubbles_ms": 1000,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              }
+            ]
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        },
+        {
+          "result": "invalid_plan",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": true,
+            "revision": 7,
+            "expires_in_ms": 300000,
+            "steps": [
+              {
+                "direction": "left",
+                "move_ms": 880,
+                "water_ms": 0,
+                "bubbles_ms": 0,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              },
+              {
+                "direction": "none",
+                "move_ms": 0,
+                "water_ms": 0,
+                "bubbles_ms": 1000,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              }
+            ]
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "operation": "compose"
+        }
+      ],
+      "received_audio_bytes_discarded": 79687,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "H004",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "我需要先查询当前状态，",
+        "看看序列是否在运行，才能理解\"第二步\"指的是什么当前有一个草稿，第2步是吹泡泡1000毫秒。",
+        "用户说\"第二步再稍微快点结束\"，这是针对草稿的修改请求。",
+        "当前草稿revision是7，第2步要缩短泡泡时长。",
+        "\"稍微快点结束\"比较含糊，用户说\"稍微\"，但没有给具体时长。",
+        "我应该澄清具体多少秒。",
+        "不过结合上下文，第2步是泡泡1000毫秒。",
+        "\"稍微快点结束\"是缩短时长，但没说具体数值。",
+        "按照规则：\"短一点\"等含糊时长只问具体几秒，不猜半秒或减半。",
+        "这里是\"稍微快点结束\"，同样含糊，我应该询问具体时长。",
+        "当前第2步泡泡是1000毫秒。",
+        "我询问用户希望第2步泡泡改成多少毫秒/几秒。",
+        "由于这是编排草稿修改，需要先确认具体时长再修改。",
+        "用户想改第2步泡泡的时长，请告诉我改成几秒？",
+        "现在第2步是吹泡泡1秒。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "第二步再稍微快点结束。",
+      "context": "独立新表达；仅提供合成工具状态，不发送预期答案",
+      "echoed_text": "第二步再稍微快点结束。",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": true,
+            "revision": 7,
+            "expires_in_ms": 300000,
+            "steps": [
+              {
+                "direction": "left",
+                "move_ms": 880,
+                "water_ms": 0,
+                "bubbles_ms": 0,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              },
+              {
+                "direction": "none",
+                "move_ms": 0,
+                "water_ms": 0,
+                "bubbles_ms": 1000,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              }
+            ]
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 110647,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "H005",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "我来先查一下当前的草稿状态，",
+        "然后帮你保存。",
+        "好的，草稿还在，版本7，共两步：先向左转880毫秒，再吹泡泡1秒。",
+        "已经留着没动，等爸爸在网页上预览确认后点开始就行。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "刚才那段先留着，等爸爸确认再开始。",
+      "context": "独立新表达；仅提供合成工具状态，不发送预期答案",
+      "echoed_text": "刚才那段先留着，等爸爸确认再开始。",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": true,
+            "revision": 7,
+            "expires_in_ms": 300000,
+            "steps": [
+              {
+                "direction": "left",
+                "move_ms": 880,
+                "water_ms": 0,
+                "bubbles_ms": 0,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              },
+              {
+                "direction": "none",
+                "move_ms": 0,
+                "water_ms": 0,
+                "bubbles_ms": 1000,
+                "ignition_ms": 0,
+                "speed_percent": 100
+              }
+            ]
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 26626,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "H006",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "目前设备没有报电量相关的故障，",
+        "我看不到电量数据，这个暂时查不到。",
+        "现在所有动作都已停止，没有异常记录。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "你是不是因为电不够才停的？",
+      "context": "独立新表达；仅提供合成工具状态，不发送预期答案",
+      "echoed_text": "你是不是因为电不够才停的？",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": true,
+            "operation": "move",
+            "result": "accepted",
+            "source": "voice",
+            "age_ms": 8000
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 15107,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "H007",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "不会自己接着走的，",
+        "刚才那次前进因为障碍被取消了，障碍挪开也不会自动恢复。",
+        "你需要重新跟我说一声，我再继续走。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "前面的东西挪开了，你会自己接着走吗？",
+      "context": "独立新表达；仅提供合成工具状态，不发送预期答案",
+      "echoed_text": "前面的东西挪开了，你会自己接着走吗？",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 400,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": true,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": true,
+            "operation": "move",
+            "result": "obstacle_blocked",
+            "source": "voice",
+            "age_ms": 300
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 15355,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "H008",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "现在没卡住，",
+        "所有动作都停了，我在待命。",
+        "刚才那条移动请求没被接受，可能当时有别的占用，不过现在已经空闲了。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "刚才那条别重发，只查现在卡在哪儿。",
+      "context": "独立新表达；仅提供合成工具状态，不发送预期答案",
+      "echoed_text": "刚才那条别重发，只查现在卡在哪儿。",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": true,
+            "operation": "move",
+            "result": "not_ready_or_busy",
+            "source": "voice",
+            "age_ms": 300
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 15800,
+      "completion": "tts_stop"
+    }
+  ]
+}

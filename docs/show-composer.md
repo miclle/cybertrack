@@ -110,3 +110,5 @@ CYBERTRACK_PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs \
 ```
 
 ct45 已部署，真实网页草稿编辑／取消、五分钟到期和六类非法输入拒绝均通过，见[设备补验](../firmware/esp32-audio/web-live-ct45.json)。真实平台已完成 80＋8 隔离轨迹采集，语义偏差继续修复；20 条真人语音、有效确认执行和停止／失租实测，以及五组家庭主动重玩／修改指标仍待现场。台词播报与表情联动仍是后续产品方向。
+
+角色反馈修正后，C007 点火草稿已拒绝、C008 含糊时长已澄清；严格工具顺序仍仅 5/8，冗长推理播报也未通过。首轮不覆盖，见[修正后轨迹](validation/lingxi-ct45-role-feedback-20261031.md)。

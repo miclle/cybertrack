@@ -1,0 +1,363 @@
+{
+  "kind": "captured_text_silence_check_and_manual_notes",
+  "scope": "TTS text in isolated WSS; not speaker listening or physical effect",
+  "required_silent": 45,
+  "silent": 0,
+  "passed": false,
+  "results": [
+    {
+      "id": "V001",
+      "has_tts_text": true,
+      "replies": [
+        "动作已接受。"
+      ]
+    },
+    {
+      "id": "V002",
+      "has_tts_text": true,
+      "replies": [
+        "动作已接受。"
+      ]
+    },
+    {
+      "id": "V003",
+      "has_tts_text": true,
+      "replies": [
+        "好的，前进五秒，",
+        "速度百分之六十。"
+      ]
+    },
+    {
+      "id": "V004",
+      "has_tts_text": true,
+      "replies": [
+        "前进一分钟，",
+        "收到。"
+      ]
+    },
+    {
+      "id": "V005",
+      "has_tts_text": true,
+      "replies": [
+        "我来执行后退动作动作已接受。"
+      ]
+    },
+    {
+      "id": "V006",
+      "has_tts_text": true,
+      "replies": [
+        "好的，后退两秒。"
+      ]
+    },
+    {
+      "id": "V007",
+      "has_tts_text": true,
+      "replies": [
+        "已安排后退五秒，",
+        "速度百分之六十。"
+      ]
+    },
+    {
+      "id": "V008",
+      "has_tts_text": true,
+      "replies": [
+        "收到，后退一分钟。"
+      ]
+    },
+    {
+      "id": "V009",
+      "has_tts_text": true,
+      "replies": [
+        "左转。",
+        "好的，左转。"
+      ]
+    },
+    {
+      "id": "V010",
+      "has_tts_text": true,
+      "replies": [
+        "动作已接受，",
+        "左转两秒。"
+      ]
+    },
+    {
+      "id": "V011",
+      "has_tts_text": true,
+      "replies": [
+        "已接受，左转五秒，",
+        "速度百分之六十。"
+      ]
+    },
+    {
+      "id": "V012",
+      "has_tts_text": true,
+      "replies": [
+        "好的，左转一分钟。"
+      ]
+    },
+    {
+      "id": "V013",
+      "has_tts_text": true,
+      "replies": [
+        "好，右转。"
+      ]
+    },
+    {
+      "id": "V014",
+      "has_tts_text": true,
+      "replies": [
+        "动作已接受，",
+        "右转两秒。"
+      ]
+    },
+    {
+      "id": "V015",
+      "has_tts_text": true,
+      "replies": [
+        "好的，右转五秒，",
+        "速度百分之六十。"
+      ]
+    },
+    {
+      "id": "V016",
+      "has_tts_text": true,
+      "replies": [
+        "好的，右转一分钟。"
+      ]
+    },
+    {
+      "id": "V017",
+      "has_tts_text": true,
+      "replies": [
+        "收到，已启动喷水。"
+      ]
+    },
+    {
+      "id": "V018",
+      "has_tts_text": true,
+      "replies": [
+        "好的，喷水两秒。",
+        "已接受，喷水两秒。"
+      ]
+    },
+    {
+      "id": "V019",
+      "has_tts_text": true,
+      "replies": [
+        "喷水单次最多三十秒。",
+        "喷水单次最多三十秒。"
+      ]
+    },
+    {
+      "id": "V021",
+      "has_tts_text": true,
+      "replies": [
+        "吹泡泡，来啦好的，",
+        "泡泡来啦！"
+      ]
+    },
+    {
+      "id": "V022",
+      "has_tts_text": true,
+      "replies": [
+        "吹泡泡两秒，",
+        "走起。",
+        "好嘞，泡泡吹两秒。"
+      ]
+    },
+    {
+      "id": "V023",
+      "has_tts_text": true,
+      "replies": [
+        "好的，吹泡泡30秒，",
+        "安排上了。"
+      ]
+    },
+    {
+      "id": "V025",
+      "has_tts_text": true,
+      "replies": [
+        "点火。",
+        "已执行放电。"
+      ]
+    },
+    {
+      "id": "V026",
+      "has_tts_text": true,
+      "replies": [
+        "放电两秒已执行。"
+      ]
+    },
+    {
+      "id": "V027",
+      "has_tts_text": true,
+      "replies": [
+        "我来执行点火5秒。",
+        "好的，放电5秒。"
+      ]
+    },
+    {
+      "id": "V029",
+      "has_tts_text": true,
+      "replies": [
+        "好的，前进五秒同时喷水，",
+        "已经安排上了。"
+      ]
+    },
+    {
+      "id": "V030",
+      "has_tts_text": true,
+      "replies": [
+        "I'll process this instruction: turn left for 3 seconds while",
+        "spraying water for 1 second simultaneously.",
+        "Since these are simultaneous actions, I'll use the moveandwater tool.",
+        "The direction is left, move duration is 3 seconds (3000ms), and water duration is 1 second (1000ms已"
+      ]
+    },
+    {
+      "id": "V031",
+      "has_tts_text": true,
+      "replies": [
+        "好的，已按顺序执行：先前进五秒，",
+        "然后左转。"
+      ]
+    },
+    {
+      "id": "V032",
+      "has_tts_text": true,
+      "replies": [
+        "好的，先吹泡泡两秒，",
+        "再后退一秒，已经安排上了。"
+      ]
+    },
+    {
+      "id": "V033",
+      "has_tts_text": true,
+      "replies": [
+        "已执行，左转两秒同时吹泡泡三秒。"
+      ]
+    },
+    {
+      "id": "V034",
+      "has_tts_text": true,
+      "replies": [
+        "好的，喷水两秒和吹泡泡一秒同时进行。"
+      ]
+    },
+    {
+      "id": "V035",
+      "has_tts_text": true,
+      "replies": [
+        "已按顺序执行：先前进一秒，",
+        "然后同时左转两秒并吹泡泡两秒。"
+      ]
+    },
+    {
+      "id": "V036",
+      "has_tts_text": true,
+      "replies": [
+        "好的，先前进两秒再右转两秒，",
+        "都用百分之七十速度，序列已提交。"
+      ]
+    },
+    {
+      "id": "V037",
+      "has_tts_text": true,
+      "replies": [
+        "好的，速度调到百分之六十了。"
+      ]
+    },
+    {
+      "id": "V038",
+      "has_tts_text": true,
+      "replies": [
+        "已加速。"
+      ]
+    },
+    {
+      "id": "V039",
+      "has_tts_text": true,
+      "replies": [
+        "已减速到60%，",
+        "继续前进中。"
+      ]
+    },
+    {
+      "id": "V040",
+      "has_tts_text": true,
+      "replies": [
+        "正在同方向前进中，",
+        "直接调到全速。",
+        "已调到全速。"
+      ]
+    },
+    {
+      "id": "V045",
+      "has_tts_text": true,
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ]
+    },
+    {
+      "id": "V046",
+      "has_tts_text": true,
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ]
+    },
+    {
+      "id": "V047",
+      "has_tts_text": true,
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ]
+    },
+    {
+      "id": "V048",
+      "has_tts_text": true,
+      "replies": [
+        "喷水停了。"
+      ]
+    },
+    {
+      "id": "V049",
+      "has_tts_text": true,
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ]
+    },
+    {
+      "id": "V050",
+      "has_tts_text": true,
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ]
+    },
+    {
+      "id": "V051",
+      "has_tts_text": true,
+      "replies": [
+        "动作都停下了，",
+        "序列已取消，我在这儿等你。"
+      ]
+    },
+    {
+      "id": "V052",
+      "has_tts_text": true,
+      "replies": [
+        "动作都停下了，",
+        "我在这儿等你。"
+      ]
+    }
+  ],
+  "manual_notes": [
+    "V019 and V020 each repeat the limit explanation twice",
+    "V040, V065 and V077 mismatches are additional read-only status queries; do not classify as actuator starts",
+    "C008 and several voice cases expose reasoning/testing context; not a concise final reply"
+  ]
+}

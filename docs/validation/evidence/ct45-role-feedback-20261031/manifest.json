@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-31",
+  "role_sha256": "79662d7d2e4540a6f448a0b2330cecad2ba49f0ee2d59d1430f5279f96a677ac",
+  "role_characters": 5998,
+  "capture_source_sha256": "f755d9fdb4d1177bf09d5cb90a1432e37d219502e95fe3f3cf702c3f70a921d5",
+  "firmware": "2.0.3-ct45",
+  "scope": "actual platform calls with synthetic receipts; no device forwarding; role-only update does not change firmware binary",
+  "original_baseline": "../ct45-20261031/manifest.json",
+  "files": {
+    "compose-context-score.json": {
+      "sha256": "8dabd67af1b64c0af01a50fdd1400fb596bface19326438216f406b901e63951",
+      "bytes": 1003
+    },
+    "compose-context.json": {
+      "sha256": "cbed7596ab6898f94927dc2161947fd74802b09e813459e1f0548b962e8233d8",
+      "bytes": 28969
+    },
+    "holdout-raw.json": {
+      "sha256": "5cd8c6977333530d15b43a969116abf87351b2faf160dd763c91b9f5be0df896",
+      "bytes": 33072
+    },
+    "holdout-review.json": {
+      "sha256": "63fc3b54d21624fb6fea3633615066e7aa79c9be34fde45be60e50ba34f101ea",
+      "bytes": 1812
+    },
+    "status-raw.json": {
+      "sha256": "62f558d5a859319134ab661cb5dcb60d89ef6c316ec1ef7595ff424c23a0f85d",
+      "bytes": 21448
+    },
+    "status-review.json": {
+      "sha256": "fff5c89bb6dbfa6cb244c1fe212e42a54fc3898b509e4a03a8a395e0341703fc",
+      "bytes": 1390
+    },
+    "voice-context-score.json": {
+      "sha256": "4437e1b8cbb20ff6a1db8bb611a17bd144c5f4a06ed63c88faa72273d5a36c7e",
+      "bytes": 5612
+    },
+    "voice-context.json": {
+      "sha256": "dfec70bf9bd07f235b57cc44a173f22a99741f8c449444272acad7ff2d275e76",
+      "bytes": 181716
+    },
+    "voice-reply-review.json": {
+      "sha256": "75c9212f1635748be0f7e0d80acd7c1f5ba0aad22896e2739f4693417523ac16",
+      "bytes": 7485
+    }
+  },
+  "corpora": {
+    "docs/validation/voice-cases.json": "38ab1b2fd546f4b00483c31bfdcf0e94b1f1797e6fd42db383037ba2d5d2466f",
+    "docs/validation/compose-cases.json": "2eff96c104825c6f4f3532a65a22fb338904b5f0a17dab14d0bfecfdacf2de66",
+    "docs/validation/status-cases.json": "4df9416a124bc1ae15d42a1c8640d1f146090cdf707960d4084d37112e3dad9c",
+    "docs/validation/holdout-cases-20261031.json": "a44ce4c52c15f571160a7da521a593683a09013b18bcb7817715a4a9b854be7d"
+  },
+  "role_sync_record": {
+    "path": "firmware/esp32-audio/role-feedback-ct45.json",
+    "sha256": "9c22c9b144f2f8f3f83e05112fd9861f045f17dc1625ac5b4799e83eb71bcae6"
+  }
+}
