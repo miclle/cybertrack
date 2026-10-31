@@ -31,3 +31,5 @@ ct63 的[组合／序列与目标速度播放匹配](../../docs/validation/plan-
 当前候选 ct66 的[即时停止回执](../../docs/validation/stop-dispatch.md)已附八组实际 MCP 调度回放、分配失败及十三组统一检查摘要。公开工具与角色未改；包内核对这些文件的完整性，完整控制回放需 checkout。它不新增模型评分，七组既有文本和 STT 未完成记录保持，最近部署仍为 ct45。
 
 [状态话术十四次对照](../../docs/validation/stop-role-qualifier.md)未采纳，原角色已恢复。包内附审阅、历史角色快照及[灵矽联调复现材料](../../docs/validation/platform-tts-feedback.md)，它们不新增第八组完整成绩；原始压缩轨迹和完整 MCP 重放仍需 checkout，材料尚未代发。
+
+ct67 的[相对改稿门禁](../../docs/validation/relative-draft-duration.md)及语料、十三组原生回放、二十条真实 STT 定向审阅已随包提供。终态 20/20 与严格调用 14/20 分列，六条额外查询保留，在线样本没有触发实际澄清拒绝；拦截依据为原生协议／历史请求回放。原始两轮压缩轨迹和完整二进制控制复核仍需 checkout。它不替代旧二十条语音或真人指标，也不新增完整固定集成绩。
