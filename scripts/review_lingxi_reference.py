@@ -27,12 +27,14 @@ CANDIDATE_SCORES = "docs/validation/evidence/ct57-full/full-suite-scores.json"
 FIRMWARE_HOST_SCORES = "docs/validation/evidence/ct61-firmware-host/full-suite-scores.json"
 QWEN_MODEL_SCORES = "docs/validation/evidence/model-qwen/full-suite-scores.json"
 DOUBAO_MODEL_SCORES = "docs/validation/evidence/model-doubao/suite-scores.json"
+COMPACT_RECEIPT_SCORES = "docs/validation/evidence/compact-model-receipts/full-suite-scores.json"
 EVALUATIONS = (
     ("", SCORES, SUITES, "scores"),
     ("ct57/", CANDIDATE_SCORES, SUITES, "candidate_scores"),
     ("firmware-host/", FIRMWARE_HOST_SCORES, SUITES, "firmware_host_scores"),
     ("qwen/", QWEN_MODEL_SCORES, SUITES, "qwen_scores"),
     ("doubao/", DOUBAO_MODEL_SCORES, ("compose",), "doubao_compose_scores"),
+    ("compact-receipts/", COMPACT_RECEIPT_SCORES, ("compose",), "compact_receipt_scores"),
 )
 
 
