@@ -80,6 +80,7 @@ python3 scripts/review_lingxi_reference.py
 从此包复现的是记录所列工具版本和角色的结果，历史基线保留在 scores，ct57 工具回归保留在 candidate_scores，ct61 原话和真实固件主机的 80 条语义及八条编排另在 firmware_host_scores，编排首次超时继续列入 incomplete。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出分别列出五种记录的成绩、偏差用例编号与门槛判断，并标明工具来源和输入模式。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，静态夹具与真实固件主机分别标识。完整主机源码与构建入口见[固件主机验证](docs/validation/firmware-host.md)，参考包离线复算工具选择，控制守卫重放需要完整 checkout。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
 
 - [模型参数与选型对照](docs/validation/model-parameters.md)中的未采纳结果也可复算：`qwen_scores` 保留完整语义／编排与漏停、禁止调用，`doubao_compose_scores` 保留八条编排及畸形参数失败。豆包二十条语义仅为诊断子集，不在本包重算完整语义成绩。
+- [单次识别失败隔离](docs/validation/voice-input-guard.md)另附 ct62 构建及离线控制回放证据；C005 拒绝后换用 sequence 被拦截，零启动。它不是新的模型成绩，原模型禁止调用记录保持不变。重跑控制回放仍需完整 checkout 与 prepared 固件，本包仅核对所存材料的完整性。
 - [编排说明对照](docs/validation/compose-routing.md)保留了未采纳的诊断：工具匹配增多，但一次含糊请求擅自缩短草稿。包内含摘要与两份定义，原始轨迹和该诊断的重算需要完整 checkout。
 - 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
 - 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
