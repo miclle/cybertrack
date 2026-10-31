@@ -54,6 +54,11 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual(doubao["invalid_tool_argument_cases"], ["C002", "C007"])
             self.assertEqual(doubao["forbidden_call_cases"], ["C005", "C006"])
             self.assertFalse(doubao["tool_call_target_met"])
+            guard = json.loads(archive.read("docs/validation/evidence/ct62-voice-turn/replay.json"))
+            fallback = next(row for row in guard["archived_cases"] if row["id"] == "C005")
+            self.assertEqual(fallback["starts"], 0)
+            self.assertIn("voice_input_failed", fallback["results"][1])
+            self.assertFalse(json.loads(archive.read("firmware/esp32-audio/verification-ct62.json"))["flashed"])
             self.assertNotIn("device_id", manifest["firmware"])
             for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json"):
                 replay = root/name
