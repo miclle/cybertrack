@@ -6,9 +6,9 @@
 |---|---|
 | 源码基线 | `2.0.3-ct49` 候选，状态查询按设备采样时刻解释剩余量，剧场预览显示同时动作和结束顺序；ESP-IDF 5.5.1、小智固定版本及 overlay |
 | 最近记录的部署 | [ct45](../firmware/esp32-audio/startup-ct45.json)；2026-10-31 已重启联网并回读 |
-| 最近角色同步 | [ct45 状态查询角色修正](../firmware/esp32-audio/role-query-focus-ct45.json)，5917 字符保存回读、重启与零启动检查；模型语义另验 |
+| 最近角色同步 | [ct45 停止与长按角色修正](../firmware/esp32-audio/role-cancel-hold-ct45.json)，5991 字符保存回读、重启与零启动检查；模型语义另验 |
 | 软件验证 | [ct49 软件记录](../firmware/esp32-audio/verification-ct49.json)、[ct47 定向联调](validation/lingxi-ct47.md)与 [ct46 三轮联调](validation/lingxi-ct46.md)；已部署 ct45 的软件依据仍见 [ct45 记录](../firmware/esp32-audio/verification-ct45.json) |
-| 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，5991 字符候选增加“取消序列”立即停止与网页长按解释；最近平台回读为上行 5917 字符版本。检查命令分别列出两份哈希 |
+| 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，5991 字符，已重开回读。检查命令分别列出仓库角色与平台回读哈希 |
 | 运动 | 四方向，60–100% PWM、默认 100%；全速转向省略时长为 880 ms，其他普通动作默认 1000 ms；无编码器里程计 |
 | 并发与序列 | 四路独立截止，序列最多 16 步；步骤内并发，步骤间串行；取消不恢复 |
 | 测距 | IO1/TRIG、IO2/ECHO，约 100 ms 采样、500 ms 过期；无效不报旧距离 |
