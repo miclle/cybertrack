@@ -33,3 +33,5 @@ python3 scripts/review_stop_role_qualifier.py \
 ```
 
 脚本核对两份角色只相差六字、语料与工具／主机摘要、实际回执及终态，保留严格工具失败和全文回复。`preflight_checks_met` 只是先行数值检查，不是采纳结论。参考包提供审阅摘要，重跑完整控制仍需 checkout 和对应二进制。
+
+面向灵矽维护方的[复现与协作问题](platform-tts-feedback.md)另列完整事件顺序和验收出口，尚未代发。

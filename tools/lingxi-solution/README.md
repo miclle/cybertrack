@@ -29,3 +29,5 @@ ct63 的[组合／序列与目标速度播放匹配](../../docs/validation/plan-
 [停止说明对照](../../docs/validation/stop-negation.md)的 ct65 诊断未采纳。第七组 `stop_negation_scores` 重算语义 77/80、编排 6/8；V064 误停和 V079 擅自前进仍标为禁止调用，八条明确停止正确不会抵消失败。包内附十二条补充语料与复核脚本；原始轨迹及完整控制重放仍需 checkout，该试验结束后恢复 ct63。
 
 当前候选 ct66 的[即时停止回执](../../docs/validation/stop-dispatch.md)已附八组实际 MCP 调度回放、分配失败及十三组统一检查摘要。公开工具与角色未改；包内核对这些文件的完整性，完整控制回放需 checkout。它不新增模型评分，七组既有文本和 STT 未完成记录保持，最近部署仍为 ct45。
+
+[状态话术十四次对照](../../docs/validation/stop-role-qualifier.md)未采纳，原角色已恢复。包内附审阅、历史角色快照及[灵矽联调复现材料](../../docs/validation/platform-tts-feedback.md)，它们不新增第八组完整成绩；原始压缩轨迹和完整 MCP 重放仍需 checkout，材料尚未代发。
