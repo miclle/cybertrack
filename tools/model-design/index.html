@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberTrack 模型设计 · 点选与对话</title>
+  <link rel="icon" href="data:,"><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="workspace" aria-label="三维模型工作区">
+    <div id="viewport">
+      <canvas id="model-canvas" aria-label="可旋转、缩放、点击选择的三维模型" tabindex="0"></canvas>
+      <div id="empty-model" hidden><strong>从一个模型开始</strong><span>在当前对话中描述零件和尺寸。</span></div>
+      <div id="webgl-error" hidden role="alert"></div>
+      <div id="pick-label" hidden></div>
+      <section id="comment-popover" class="comment-popover" role="dialog" aria-label="评论选中目标" hidden>
+        <div class="popover-heading"><span id="part-name"></span><button id="close-comment" aria-label="关闭评论，保留草稿" title="关闭 · Esc">×</button></div>
+        <div class="target-line"><span id="pick-type">等待点选</span><span id="draft-status"></span></div>
+        <label class="sr-only" for="comment">模型评论</label>
+        <textarea id="comment" rows="3" maxlength="2000" placeholder="描述你希望怎样修改这里…"></textarea>
+        <div class="popover-actions"><span>⌘ / Ctrl + Enter 发送</span><button id="submit" class="primary" disabled>保存评论</button></div>
+      </section>
+    </div>
+    <header class="toolbar">
+      <div class="identity"><span class="brand-icon" aria-hidden="true">⌖</span><div><h1 id="model-title">CyberTrack 模型设计</h1><span id="render-status" role="status">正在读取模型</span></div></div>
+      <nav aria-label="模型工具">
+        <button id="reset" title="让模型适应画面" aria-label="适应视图">适应视图</button>
+        <button id="undo" title="撤销最近一次建模操作" disabled>撤销</button>
+        <span class="toolbar-divider" aria-hidden="true"></span>
+        <button id="toggle-history" aria-expanded="false" aria-controls="history-panel">历史</button>
+        <button id="toggle-details" aria-expanded="false" aria-controls="details-panel">更多 <span aria-hidden="true">⋯</span></button>
+      </nav>
+    </header>
+    <div class="workspace-foot"><span id="interaction-hint">悬停查看面 · 单击评论 · 拖动旋转</span><button id="resume-comment" hidden>继续评论</button></div>
+    <div class="status-area" aria-live="polite"><p id="status" role="status"></p><p id="history-status" role="status"></p></div>
+    <aside id="history-panel" class="drawer" aria-label="修改历史" hidden>
+      <div class="drawer-heading"><h2>修改历史 <span id="history-count">0 次操作</span></h2><button id="close-history" aria-label="关闭历史">×</button></div>
+      <p id="history-empty" class="hint">还没有建模操作。</p>
+      <div id="history-list"></div>
+      <section id="comment-section" class="comment-section">
+        <h2>评论 <span id="comment-count">0 条</span></h2>
+        <p id="empty-comments" class="hint">点选模型，发送第一条评论。</p><div id="comments"></div>
+      </section>
+    </aside>
+    <aside id="details-panel" class="drawer" aria-label="模型与导出" hidden>
+      <div class="drawer-heading"><h2>模型与导出</h2><button id="close-details" aria-label="关闭模型与导出">×</button></div>
+      <section><h3>零件</h3><p id="model-info" class="hint"></p><div id="parts" aria-label="零件列表"></div></section>
+      <section><h3>选中目标</h3><p id="selection-hint" class="hint">点选模型表面，或从上方选择整个零件。</p><div id="selection-info" hidden><dl id="selection-fields"></dl></div></section>
+      <section class="export-section" aria-label="STEP 下载"><h3>导出 STEP</h3><div class="export-controls"><label>版本<select id="export-revision" aria-label="导出版本"></select></label><label>零件<select id="export-part" aria-label="导出零件"></select></label></div><button id="export-step" disabled>下载 STEP ↓</button><p id="export-hint" class="hint"></p><p id="export-status" role="status" aria-live="polite"></p></section>
+      <details><summary>模型验证</summary><p id="geometry-result" class="hint"></p></details>
+      <details class="bridge"><summary>对话连接</summary><p>独立浏览器会保存评论。回到当前对话读取并处理；内嵌插件可直接发送。</p></details>
+      <p class="hint">CyberTrack 模型设计 · 单位 mm · Z 轴向上<br>拖动旋转，滚轮缩放。选择零件后可用键盘输入评论。</p>
+    </aside>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -11,8 +11,7 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 const root=resolve(fileURLToPath(new URL('..',import.meta.url)));
 const lock=JSON.parse(await readFile(join(root,'tools/solidcue/lock.json'),'utf8'));
 const source=join(root,lock.source_directory);
-assert.equal(execFileSync('git',['rev-parse','HEAD'],{cwd:source,encoding:'utf8'}).trim(),lock.revision);
-assert.equal(execFileSync('git',['status','--porcelain'],{cwd:source,encoding:'utf8'}).trim(),'');
+execFileSync('python3',[join(root,'scripts/solidcue.py'),'check'],{cwd:root});
 const config=JSON.parse(execFileSync('codex',['mcp','get','cad-comments','--json'],
  {encoding:'utf8',stdio:['ignore','pipe','ignore'],timeout:15000}));
 assert.equal(config.enabled,true);

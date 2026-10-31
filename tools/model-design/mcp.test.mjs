@@ -1,0 +1,40 @@
+import { execFileSync } from 'node:child_process';
+import { test } from 'node:test';
+import { decodeState } from './dist/state-codec.js';
+import assert from 'node:assert/strict';
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
+test('installed MCP plugin exposes model UI and live comment tools', async () => {
+  const client = new Client({ name: 'cad-comment-verification', version: '1.0.0' });
+  const config = JSON.parse(execFileSync('codex', ['mcp', 'get', 'cad-comments', '--json'], { encoding: 'utf8' }));
+  assert.equal(config.enabled, true);
+  assert.ok(!JSON.stringify(config.transport).includes('${PLUGIN_ROOT}'));
+  const transport = new StdioClientTransport({ command: config.transport.command, args: config.transport.args, cwd: config.transport.cwd });
+  try {
+    await client.connect(transport);
+    const { tools } = await client.listTools();
+    assert.deepEqual(tools.map(t => t.name).sort(), ['acknowledge_comment','apply_center_hole','create_mounting_plate','create_spacer','export_step','get_state','open_model','save_comment','save_step','sync_cad_snapshot','undo_model','update_plate_hole_spacing','update_spacer_parameters']);
+    assert.equal(tools.find(t=>t.name==='create_mounting_plate').inputSchema.additionalProperties,false);
+    assert.equal(tools.find(t=>t.name==='update_plate_hole_spacing').inputSchema.additionalProperties,false);
+    const open = tools.find(t => t.name === 'open_model');
+    assert.equal(tools.find(t=>t.name==='update_spacer_parameters').inputSchema.additionalProperties,false);
+    assert.equal(tools.find(t=>t.name==='export_step').annotations.readOnlyHint,true);
+    assert.equal(tools.find(t=>t.name==='save_step').annotations.readOnlyHint,false);
+    assert.equal(tools.find(t=>t.name==='save_step').inputSchema.additionalProperties,false);
+    assert.equal(tools.find(t=>t.name==='export_step').inputSchema.additionalProperties,false);
+    assert.equal(open._meta.ui.resourceUri, 'ui://cad-comment/model.html');
+    const resource = await client.readResource({ uri: open._meta.ui.resourceUri });
+    assert.match(resource.contents[0].text, /ui\/message/);
+    assert.ok(!resource.contents[0].text.includes('/api/send'), 'MCP UI must contain no local queue send endpoint');
+    const opened = await client.callTool({ name: 'open_model', arguments: {} });
+    assert.match(opened.structuredContent.model.revision, /^r[1-9][0-9]*$/);
+    const decoded = await decodeState(opened.structuredContent);
+    for(const part of decoded.model.parts) assert.ok(decoded.preview.meshes[part.id].indices.length > 0);
+    const result = await client.callTool({ name: 'get_state', arguments: {} });
+    assert.ok(result.structuredContent.model.documentId);
+    for(const name of ['create_mounting_plate','create_spacer','apply_center_hole','undo_model','update_plate_hole_spacing','update_spacer_parameters']) assert.ok(tools.find(t=>t.name===name).inputSchema.required.includes('documentId'));
+    assert.ok(Array.isArray(result.structuredContent.comments));
+    const invalid = await client.callTool({ name: 'save_comment', arguments: { payload: { revision: 'invalid' } } });
+    assert.equal(invalid.isError, true);
+  } finally { await client.close(); }
+});

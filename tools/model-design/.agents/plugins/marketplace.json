@@ -1,0 +1,20 @@
+{
+  "name": "cad-comment-local",
+  "interface": {
+    "displayName": "CyberTrack Model Design"
+  },
+  "plugins": [
+    {
+      "name": "cad-comment-lab",
+      "source": {
+        "source": "local",
+        "path": "./plugin"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
