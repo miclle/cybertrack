@@ -27,6 +27,9 @@ class SolutionPackageTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder, zipfile.ZipFile(io.BytesIO(data)) as archive:
             self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/qwen/compose.json", "replay/doubao/compose.json", "replay/stt/voice.json"})
             manifest = json.loads(archive.read("MANIFEST.json"))
+            current = json.loads(archive.read("firmware/current.json"))
+            build = json.loads(archive.read("firmware/" + current["software_evidence"]))
+            self.assertEqual(build["version"], current["source_version"])
             self.assertEqual(manifest["files"]["START_HERE.md"]["sha256"], hashlib.sha256(archive.read("START_HERE.md")).hexdigest())
             archive.extractall(folder)
             root = Path(folder)
@@ -83,6 +86,13 @@ class SolutionPackageTest(unittest.TestCase):
             failed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
             self.assertNotEqual(failed.returncode, 0)
             self.assertEqual(output.read_bytes(), original)
+
+    def test_missing_current_build_evidence_is_rejected(self):
+        paths = json.loads((ROOT / "tools/lingxi-solution/files.json").read_bytes())
+        current = json.loads((ROOT / "firmware/current.json").read_bytes())
+        paths.remove("firmware/" + current["software_evidence"])
+        with self.assertRaisesRegex(ValueError, "current candidate build evidence"):
+            package.build_archive(ROOT, paths, "test-revision", False)
 
     def test_extensionless_license_and_notice_remain_explicit(self):
         with tempfile.TemporaryDirectory() as folder:
