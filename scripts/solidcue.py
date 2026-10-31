@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare or run the pinned SolidCue service in CyberTrack-owned data."""
+"""Prepare or run the CyberTrack model design service in CyberTrack-owned data."""
 import argparse
 import json
 import os
@@ -18,6 +18,11 @@ def configuration():
 
 
 def verified_source(lock, source):
+    if lock.get("source_mode") == "vendored":
+        provenance = json.loads((source / "UPSTREAM.json").read_text())
+        if provenance["revision"] != lock["revision"] or not (source / "LICENSE").is_file():
+            raise ValueError("Vendored source provenance or license missing")
+        return
     revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=source, text=True).strip()
     dirty = subprocess.check_output(["git", "status", "--porcelain"], cwd=source, text=True)
     if revision != lock["revision"] or dirty:
@@ -39,7 +44,7 @@ def main():
     parser.add_argument("command", choices=("prepare", "check", "start"))
     args = parser.parse_args()
     lock, source, data = configuration()
-    if args.command == "prepare" and not source.exists():
+    if args.command == "prepare" and not source.exists() and lock.get("source_mode") != "vendored":
         source.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(["git", "clone", "--no-checkout", lock["repository"], str(source)], check=True)
         subprocess.run(["git", "checkout", "--detach", lock["revision"]], cwd=source, check=True)
@@ -55,6 +60,7 @@ def main():
             subprocess.run(command, cwd=source, check=True)
     elif args.command == "start":
         with socket.socket() as probe:
+            probe.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             try:
                 probe.bind(("127.0.0.1", lock["port"]))
             except OSError as exc:
