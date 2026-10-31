@@ -113,3 +113,5 @@ python3 scripts/analyze_maintenance.py docs/validation/templates.json \
 [停止说明对照](stop-negation.md)保留 ct65 未采纳结果及补充十二条语料。定向集与完整固定集分开报告，不能用 C006 成功覆盖 V064／V079 的禁止调用。
 
 [ct66 即时停止回执](stop-dispatch.md)提供八组实际 MCP 调度回放、分配失败测试及十三组统一检查；不新增模型或实体成绩。
+
+[状态话术限定对照](stop-role-qualifier.md)保留十四次会话、角色快照及恢复回读。数值先行检查与产品采纳分列，三字减少不能当作静默通过。

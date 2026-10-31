@@ -1,0 +1,24 @@
+{
+  "scope": "Seven-case role qualifier preflight, not a full suite or human acceptance",
+  "change": "Prefix the status-only paragraph with 状态查询时，; six characters only",
+  "baseline_role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "candidate_role_sha256": "8cfd9c1404151be6bd2cde2d5257b4e74a4fa85992e2efbebd75562efb3204ae",
+  "unchanged": [
+    "model",
+    "model_parameters",
+    "tools",
+    "ct66_host",
+    "corpora",
+    "capture_program"
+  ],
+  "acceptance": {
+    "all_cases_complete": true,
+    "stops_direct": 3,
+    "status_queries_match": 2,
+    "cancel_calls_and_final_revision_match": true,
+    "ambiguous_edit_no_mutation": true,
+    "stop_spoken_characters_less_than_baseline": true
+  },
+  "failure_policy": "Restore repository and saved platform role if preflight fails; retain all captures; no retries",
+  "candidate_not_deployed": true
+}
