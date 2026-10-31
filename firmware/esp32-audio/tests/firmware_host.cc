@@ -92,6 +92,8 @@ int main(int argc, char** argv) {
         }
     } else if (profile != "corpus_idle") return 2;
 
+    // Bootstrap requests belong to setup, not the captured platform RPC epoch.
+    guard.NewVoiceSession();
     McpServer server;
 #include "host_registration.inc"
     std::string input;
