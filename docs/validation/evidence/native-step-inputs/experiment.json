@@ -1,0 +1,125 @@
+{
+  "scope": "Rejected ct69 array experiment; fixed original samples and diagnostic source preserved; no audio, binaries, credentials or device tests",
+  "files": {
+    "baseline-compose-score.json": {
+      "bytes": 1067,
+      "sha256": "15315a0ef133b48859154ac0b54f8ec1109363ab9fa44b7bbab90652ad7ea8d3"
+    },
+    "baseline-compose.json.gz": {
+      "bytes": 31857,
+      "sha256": "e2050e5545718348ebb6c0d7e522cb575c82e034ba134ca9f42b4664e392e7aa"
+    },
+    "baseline-host-manifest.json": {
+      "bytes": 4496,
+      "sha256": "2ea34719471037597e8b3b154cfd9c4d11f7d5f7fa0c556afdf46f33cbb46c43"
+    },
+    "baseline-platform-readback.json": {
+      "bytes": 356,
+      "sha256": "822641b445b9c10ba8e81bb92978415ab7b2353677bca1355b178b20b36532e5"
+    },
+    "baseline-role.txt": {
+      "bytes": 14812,
+      "sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127"
+    },
+    "baseline-tools.json": {
+      "bytes": 17065,
+      "sha256": "62f76a865ce61c78eeecab640bf78d30854e4940aef07b55acabe598216fd6c1"
+    },
+    "baseline-voice-score.json": {
+      "bytes": 5691,
+      "sha256": "9fd2dd20ca83d843c85b3c3e883f855e00f3bef58005c73345b8f41d20461ce3"
+    },
+    "baseline-voice.json.gz": {
+      "bytes": 63912,
+      "sha256": "fd1a62528e993e1eaf945a349ca5bdaac5036bd4304e8d609724862da179f124"
+    },
+    "candidate-compiled-tools.json": {
+      "bytes": 19009,
+      "sha256": "6f6aaba975f5281daae282f13d72208dc6b85ecf88f9720acbfd98d48b1e38cf"
+    },
+    "candidate-compose-score.json": {
+      "bytes": 1080,
+      "sha256": "fdc93097a562106e6dc09abcee73aa315d4e8885fa88d7e96f115274fa957b62"
+    },
+    "candidate-compose.json.gz": {
+      "bytes": 26732,
+      "sha256": "67031e45385b458b357afab4a5991209c26f2580a0ba8e96ca7c540196de2d2a"
+    },
+    "candidate-host-manifest.json": {
+      "bytes": 5033,
+      "sha256": "ef5a43d6afff467a2fab6b1920662d45c73bae8ed9130e74dde55ff49c7f0851"
+    },
+    "candidate-platform-readback.json": {
+      "bytes": 213,
+      "sha256": "09b4dd7859829750e216d2be8eed08d79c5dbe49bf7bf07cc333b6259f826f3c"
+    },
+    "candidate-role.txt": {
+      "bytes": 14831,
+      "sha256": "a2aba6185e20e13ca453ce6349330e920137584c90b5e352a2d9f5b8dee3dcdc"
+    },
+    "candidate-tools.json": {
+      "bytes": 20138,
+      "sha256": "23eea6fa1d00ebeff3b9953996d007f4b76c8d1b95aef45ab5c303e25bf83526"
+    },
+    "candidate-voice-score.json": {
+      "bytes": 5729,
+      "sha256": "1b3a9829c47a093dc545f3e798183e28a2e19e1dc1b446bb4c2307850aa53240"
+    },
+    "candidate-voice.json.gz": {
+      "bytes": 61231,
+      "sha256": "fd845f9fd585c49d393edeeec4fb6d6f8f5b76ae43b0962024721b3cdbb47567"
+    },
+    "diagnostic-build.json": {
+      "bytes": 1578,
+      "sha256": "d8895d97767ad278accf7e5305872474fb3e7de75a99211e03daa50373fe80a1"
+    },
+    "experimental-source.patch.txt": {
+      "bytes": 78067,
+      "sha256": "e19e0dce1b64219add8f038b4540586bd576a10728500b4af287c143c00447c9"
+    },
+    "native-relative.json.gz": {
+      "bytes": 7079,
+      "sha256": "591fdeeb50809f1f318016fe9044a6c1e585be87ae4bfaff36d8dbe9af1a72a8"
+    },
+    "native-steps-asan.json.gz": {
+      "bytes": 5799,
+      "sha256": "d378bbbbe8764b6987ec0113b9eb99ef00272f68d0311041c8510eb93f407e2c"
+    },
+    "native-steps.json.gz": {
+      "bytes": 5801,
+      "sha256": "29470b87683de89c007f41b4c6f1c91493b39541b9b129fc9b343f497f44afa6"
+    },
+    "native-stop.json.gz": {
+      "bytes": 4137,
+      "sha256": "2fe5f037b9392c0ca426299422d491fea94bde2484565fd349fc63c4d3700150"
+    },
+    "native-vague.json.gz": {
+      "bytes": 8524,
+      "sha256": "38c40335cf3d675df8a411ea5102f1ee95710b7ed120ae0f6820b1f5279c9d62"
+    },
+    "plan.json": {
+      "bytes": 1805,
+      "sha256": "2dc2015c356485399e67bde9b1f8ffb87a2d913e7d85b12304d33acd87fdf601"
+    },
+    "restored-platform-readback.json": {
+      "bytes": 449,
+      "sha256": "cd376949c0d5d36df72010dd777647806ebebf01d089b822df34a476db605246"
+    },
+    "restored-source-check.json": {
+      "bytes": 831,
+      "sha256": "5f52d566a875e943f708baff3a48762fbbeb0d76bdf68365b81e7c4cdefd1e33"
+    },
+    "review.json": {
+      "bytes": 104946,
+      "sha256": "c95baabfe12d86076ce246457cc12752954d93469c4576772f0027811eeb2d1c"
+    },
+    "software-checks.json": {
+      "bytes": 51381,
+      "sha256": "e0bce9774a5b55a67891527dfe3495c41363a9ab2f4cbbdb7c621425ec61b744"
+    },
+    "source-patch-manifest.json": {
+      "bytes": 3272,
+      "sha256": "87d98f91e62a9dc52392a9932f839d65a3a626f98d8fe0540b43ce8d01b4968f"
+    }
+  }
+}

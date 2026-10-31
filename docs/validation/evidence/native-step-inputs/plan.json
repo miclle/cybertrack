@@ -1,0 +1,25 @@
+{
+  "scope": "Current ct68 versus proposed ct69 array step contract; full original eighty/eight raw-text sessions, simulated recognized input, no ASR or board IO",
+  "base_commit": "4a4e9b170e0ac71b2f60cf64db95742b08911e29",
+  "baseline_host_sha256": "a20da0879ee6447e94d8c9aad79057f8d38dd53235478d6f8765560043d15c6e",
+  "baseline_role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "capture_source_sha256": "4d2c69144d6e4db85dad2027dd8649bb891d13359f692ff97abfb788bf9b86ec",
+  "repeats": 1,
+  "source_candidate": "ct69",
+  "deployed_application": "ct45",
+  "adoption_gates": [
+    "Native schema, parser, scheduling ownership, invalid arguments, stop, draft revision and web confirmation checks must pass.",
+    "Complete ESP-IDF build must pass; no device deployment.",
+    "Original eighty/eight candidate tool scores must not regress from the new ct68 baseline, and invalid sequence/compose arguments must not increase.",
+    "A tooling improvement does not close original model accuracy, forbidden-call, narration or physical acceptance gates.",
+    "Keep all incomplete/failure attempts; do not resample; restore platform deployment-compatible role after comparison."
+  ],
+  "candidate_host_sha256": "10f9fa72f685976f1740e21f7ac881c739fcacfe3ffee0f2695212b4b61b674e",
+  "candidate_role_sha256": "a2aba6185e20e13ca453ce6349330e920137584c90b5e352a2d9f5b8dee3dcdc",
+  "candidate_capture_source_sha256": "2c8f998c09771e569b2c706aa3e2792bf6cc13d3a3eb9e5d3b3f3f28c003f4ee",
+  "capturer_change": "Only host test-transport metadata and declared wire-format attestation were added after baseline; all eighty/eight original baseline RPCs/states reproduce identically. No model-facing input change.",
+  "changed_tools": [
+    "self.tank.compose",
+    "self.tank.sequence"
+  ]
+}
