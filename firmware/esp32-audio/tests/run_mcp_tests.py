@@ -64,13 +64,14 @@ end = receipt_source.index('\n}\n}', start) + 2
 (build / 'receipt_reply.inc').write_text(receipt_source[start:end])
 subprocess.run(['cc', '-std=c11', *flags, '-I', str(root/'firmware/esp32-linx/main'), '-c',
                 str(root/'firmware/esp32-linx/main/water_policy.c'), '-o', str(build/'receipt_water_policy.o')], check=True)
-for executable in ('receipt_adapter_test','receipt_replay','admission_result_test'):
+for executable in ('receipt_adapter_test','receipt_replay','admission_result_test','voice_effect_feedback_test'):
     subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
                     '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
                     str(Path(__file__).with_name(executable+'.cc')), str(build/'cJSON.o'),
                     str(build/'receipt_water_policy.o'), '-o', str(build/executable)], check=True)
 subprocess.run([str(build/'receipt_adapter_test')], check=True)
 subprocess.run([str(build/'admission_result_test')], check=True)
+subprocess.run([str(build/'voice_effect_feedback_test')], check=True)
 
 # Replay both admission outcomes against the same dispatch contract as the board.
 speed_call = dict(name='self.tank.set_speed', arguments={'speed_percent':100}, elapsed_ms=1800)

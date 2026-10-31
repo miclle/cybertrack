@@ -1,5 +1,6 @@
 #pragma once
 #include "cJSON.h"
+#include "spoken_duration.h"
 #include <mutex>
 #include <string_view>
 #include <cstdint>
@@ -9,18 +10,20 @@ class VoiceFeedback {
     struct Command {
         std::string_view phrase, tool, direction;
         int duration;
+        bool verify_duration;
     };
     static constexpr Command commands[] = {
-        {"前进","move","forward",1000}, {"后退","move","backward",1000},
-        {"左转","move","left",880}, {"右转","move","right",880},
-        {"喷水","water","",1000}, {"吹泡泡","bubbles","",1000},
-        {"全速","set_speed","",0}, {"最快","set_speed","",0},
-        {"最大速度","set_speed","",0}, {"调到全速","set_speed","",0},
-        {"停止","stop","",0}, {"停下","stop","",0}, {"全部停止","stop","",0},
-        {"停止行走","stop","",0}, {"停止喷水","stop","",0}, {"停止泡泡","stop","",0},
-        {"停止狂暴模式","stop","",0}, {"所有动作都停下来","stop","",0},
-        {"取消序列","stop","",0}, {"取消正在执行的表演","stop","",0}
+        {"前进","move","forward",1000,false}, {"后退","move","backward",1000,false},
+        {"左转","move","left",880,false}, {"右转","move","right",880,false},
+        {"喷水","water","",1000,false}, {"吹泡泡","bubbles","",1000,false},
+        {"全速","set_speed","",0,false}, {"最快","set_speed","",0,false},
+        {"最大速度","set_speed","",0,false}, {"调到全速","set_speed","",0,false},
+        {"停止","stop","",0,false}, {"停下","stop","",0,false}, {"全部停止","stop","",0,false},
+        {"停止行走","stop","",0,false}, {"停止喷水","stop","",0,false}, {"停止泡泡","stop","",0,false},
+        {"停止狂暴模式","stop","",0,false}, {"所有动作都停下来","stop","",0,false},
+        {"取消序列","stop","",0,false}, {"取消正在执行的表演","stop","",0,false}
     };
+    Command timed_effect_{};
     std::mutex mutex_;
     uint64_t generation_ = 0;
     const Command* expected_ = nullptr;
@@ -41,6 +44,14 @@ public:
         }
         for (const auto& command : commands)
             if (command.phrase == text) expected_ = &command;
+        for (auto prefix : {std::string_view("喷水"),std::string_view("吹泡泡")}) {
+            if (text.substr(0,prefix.size()) != prefix) continue;
+            int ms = SpokenEffectMs(text.substr(prefix.size()));
+            if (ms) {
+                timed_effect_ = {{},prefix=="喷水"?"water":"bubbles",{},ms,true};
+                expected_ = &timed_effect_;
+            }
+        }
     }
     uint64_t BeginCall(std::string_view tool, const cJSON* args) {
         std::lock_guard<std::mutex> lock(mutex_);
@@ -56,6 +67,7 @@ public:
             if (cJSON_GetArraySize(args) != 1 || !cJSON_IsNumber(speed) || speed->valuedouble != 100)
                 return 0;
         }
+        if (command->verify_duration && (!cJSON_IsObject(args) || cJSON_GetArraySize(args)!=1)) return 0;
         if (command->duration) {
             const auto* duration = cJSON_GetObjectItemCaseSensitive(args,"duration_ms");
             if (!cJSON_IsNumber(duration) || duration->valuedouble != command->duration) return 0;
@@ -86,6 +98,10 @@ public:
                 if (accepted_ && pending_->tool == "set_speed") {
                     const auto* speed = cJSON_GetObjectItemCaseSensitive(json,"move_speed_percent");
                     accepted_ = cJSON_IsNumber(speed) && speed->valuedouble == 100;
+                }
+                if (accepted_ && pending_->verify_duration) {
+                    const auto* duration = cJSON_GetObjectItemCaseSensitive(json,"last_duration_ms");
+                    accepted_ = cJSON_IsNumber(duration) && duration->valuedouble == pending_->duration;
                 }
                 pending_ = nullptr;
             }
