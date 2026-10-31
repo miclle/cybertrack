@@ -1,0 +1,983 @@
+{
+  "scope": "Captured calls replayed with host IO stubs; no hardware or physical motion.",
+  "runs": [
+    {
+      "run_id": "be64c7cb-3ff9-45bf-aefe-579356c5963a",
+      "raw_sha256": "4f7d0bc27768c86122c09974110bdb4454466ec3131f8bed10fd0c28f8225854",
+      "results": [
+        {
+          "id": "R001",
+          "exact_calls": false,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "forward",
+          "speed": 70,
+          "remaining_ms": 4000,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1050,
+              "remaining_ms": 2950,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 9686,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R002",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "forward",
+          "speed": 70,
+          "remaining_ms": 4000,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1221,
+              "remaining_ms": 2779,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 7006,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "forward",
+          "speed": 70,
+          "remaining_ms": 4000,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1258,
+              "remaining_ms": 2742,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 6621,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1299,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 5203,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "backward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "left",
+              "move_ms": 1000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 2000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        },
+        {
+          "id": "R006",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "left",
+              "move_ms": 1000,
+              "water_ms": 0,
+              "bubbles_ms": 3000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "forward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        },
+        {
+          "id": "R007",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "forward",
+              "move_ms": 1000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "backward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "right",
+              "move_ms": 3000,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        },
+        {
+          "id": "R008",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "backward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "right",
+              "move_ms": 3000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        }
+      ]
+    },
+    {
+      "run_id": "581160df-0d2c-42d5-91cb-d55c148428f6",
+      "raw_sha256": "c82db62aca7d11a9a421204f72508eb9ff82f7040b90cb9d0dc76487faf06592",
+      "results": [
+        {
+          "id": "R001",
+          "exact_calls": false,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "forward",
+          "speed": 70,
+          "remaining_ms": 4000,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1371,
+              "remaining_ms": 2629,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 6755,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R002",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "forward",
+          "speed": 70,
+          "remaining_ms": 4000,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1570,
+              "remaining_ms": 2430,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 9326,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "forward",
+          "speed": 70,
+          "remaining_ms": 4000,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1273,
+              "remaining_ms": 2727,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 7195,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1082,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 4668,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "backward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "left",
+              "move_ms": 1000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 2000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        },
+        {
+          "id": "R006",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "left",
+              "move_ms": 1000,
+              "water_ms": 0,
+              "bubbles_ms": 3000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "forward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        },
+        {
+          "id": "R007",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "forward",
+              "move_ms": 1000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "backward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "right",
+              "move_ms": 3000,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        },
+        {
+          "id": "R008",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "backward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "right",
+              "move_ms": 3000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        }
+      ]
+    },
+    {
+      "run_id": "87566065-1b98-4d4a-b9cd-3ad6c591da5b",
+      "raw_sha256": "4d25492dbac04db8d14061d921fe79d8963512ae84a6f1d4df7ff45a252aca87",
+      "results": [
+        {
+          "id": "R001",
+          "exact_calls": false,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "forward",
+          "speed": 70,
+          "remaining_ms": 4000,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1438,
+              "remaining_ms": 2562,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 9185,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R002",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "forward",
+          "speed": 70,
+          "remaining_ms": 4000,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1320,
+              "remaining_ms": 2680,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 5765,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R003",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 70,
+            "right": 70,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "forward",
+          "speed": 70,
+          "remaining_ms": 4000,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1359,
+              "remaining_ms": 2641,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 6517,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R004",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok"
+          ],
+          "starts": 1,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [],
+          "final_state_matches": true,
+          "timed_motion": [
+            {
+              "at_ms": 1054,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            },
+            {
+              "at_ms": 4396,
+              "remaining_ms": 0,
+              "matches_deadline": true
+            }
+          ]
+        },
+        {
+          "id": "R005",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "backward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "left",
+              "move_ms": 1000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 2000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        },
+        {
+          "id": "R006",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "left",
+              "move_ms": 1000,
+              "water_ms": 0,
+              "bubbles_ms": 3000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "forward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        },
+        {
+          "id": "R007",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "forward",
+              "move_ms": 1000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "backward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "right",
+              "move_ms": 3000,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        },
+        {
+          "id": "R008",
+          "exact_calls": true,
+          "replayed": true,
+          "outcomes": [
+            "ok",
+            "draft_saved"
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "direction": "none",
+          "speed": 0,
+          "remaining_ms": 0,
+          "saved": [
+            {
+              "direction": "backward",
+              "move_ms": 2000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "right",
+              "move_ms": 3000,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "final_state_matches": true
+        }
+      ]
+    }
+  ]
+}
