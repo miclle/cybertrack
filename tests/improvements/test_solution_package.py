@@ -111,6 +111,12 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual((vague["clarification_rejections"], vague["vague_states_preserved"]), (3, 8))
             self.assertNotIn("docs/validation/evidence/ct68-vague-action/platform-1.json.gz", archive.namelist())
             self.assertFalse(json.loads(archive.read("firmware/esp32-audio/verification-ct68.json"))["flashed"])
+            routing = json.loads(archive.read("docs/validation/evidence/intent-routing-role/review.json"))
+            self.assertFalse(routing["structural_preflight_passed"])
+            for group in routing["groups"].values():
+                self.assertEqual((group["total"], group["completed"], group["strict_matches"]), (36, 36, 29))
+                self.assertEqual(group["stops_without_tts_text"], 0)
+            self.assertTrue(json.loads(archive.read("docs/validation/evidence/intent-routing-role/restored-readback.json"))["savedAndReopened"])
             self.assertNotIn("device_id", manifest["firmware"])
             for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json"):
                 replay = root/name
