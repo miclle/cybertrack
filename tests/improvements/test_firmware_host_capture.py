@@ -19,6 +19,16 @@ class FirmwareHostCaptureTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             firmware_profile("网页长按正在运行")
 
+    def test_compose_preconditions_are_pinned(self):
+        root = Path(__file__).resolve().parents[2]
+        cases = json.loads((root/"docs/validation/compose-cases.json").read_bytes())["cases"]
+        self.assertEqual(firmware_profile(cases[0]["context"]), "corpus_idle")
+        self.assertEqual({firmware_profile(c["context"]) for c in cases[1:]}, {"corpus_draft7"})
+        conflict = json.loads((root/"docs/validation/compose-conflict-cases.json").read_bytes())["cases"][0]
+        self.assertEqual(firmware_profile(conflict["context"]), "corpus_draft7_conflict")
+        with self.assertRaises(ValueError):
+            firmware_profile(cases[1]["context"].replace("revision=7", "revision=8"))
+
     def test_full_host_rejects_fixture_transformations(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)

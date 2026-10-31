@@ -160,6 +160,15 @@ def firmware_profile(context):
         '语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障': 'corpus_forward70',
         '当前动作或序列可能正在运行，停止无需查询前置': 'corpus_sequence',
     }
+    draft_steps = [
+        dict(direction='left',move_ms=880,water_ms=0,bubbles_ms=0,ignition_ms=0,speed_percent=100),
+        dict(direction='none',move_ms=0,water_ms=0,bubbles_ms=1000,ignition_ms=0,speed_percent=100)]
+    saved_context = ('模拟 get_status 回执：show_draft.active=true、revision=7、steps='
+                     + json.dumps(draft_steps,ensure_ascii=False)
+                     + '；设备空闲。仅定义评测输入，不是实测。')
+    profiles['模拟 get_status 回执：无草稿 revision=0；设备空闲'] = 'corpus_idle'
+    profiles[saved_context] = 'corpus_draft7'
+    profiles[saved_context+' 本轮首次编辑前，网页把第二步泡泡改为三秒。'] = 'corpus_draft7_conflict'
     if context not in profiles:
         raise ValueError('no firmware host profile for this precondition')
     return profiles[context]
