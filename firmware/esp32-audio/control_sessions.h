@@ -2,6 +2,7 @@
 #include "action_guard.h"
 #include "action_plan.h"
 #include "show_draft.h"
+#include "negative_input_intent.h"
 
 // All methods run under the adapter mutex, including the 5 ms deadline tick.
 // One expiring web session coexists with voice; active web lanes have priority.
@@ -9,6 +10,9 @@ class ControlSessions {
 public:
     static constexpr uint64_t LeaseMs = 2000, WindowMs = 1500;
     static constexpr unsigned DriveLeaseMs = 600;
+    // The stop callback has no allocated argument context. This private value
+    // distinguishes remote stop from trusted board/web stop under the mutex.
+    static constexpr int RemoteStopInput = -2;
     struct EffectHold { uint32_t id = 0, renewal = 0; uint64_t started = 0, until = 0; };
     EffectHold water_hold, bubbles_hold;
     AudioActionGuard guard;
@@ -23,6 +27,7 @@ public:
     bool voice_turn_open = false, voice_turn_failed = false;
     bool voice_draft_unquantified = false;
     bool voice_action_unspecified = false;
+    negative_input::Kind voice_negative = negative_input::Kind::None;
     uint32_t owner = 0, window = 0;
     uint32_t drive_id = 0, drive_renewal = 0;
     uint64_t frenzy_until = 0;
@@ -152,6 +157,7 @@ public:
         voice_turn_failed = false;
         voice_draft_unquantified = false;
         voice_action_unspecified = false;
+        voice_negative = negative_input::Kind::None;
         draft_read_ = false;
         guard.CancelPending(); // Keep active lanes and the session RPC replay table.
     }

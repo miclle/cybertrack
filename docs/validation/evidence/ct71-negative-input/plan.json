@@ -1,0 +1,34 @@
+{
+  "scope": "Two original twelve-case synthesized-speech runs, actual platform STT and actual frozen host, no board IO",
+  "repeats": 2,
+  "cases": [
+    "G001",
+    "G002",
+    "G003",
+    "G004",
+    "G005",
+    "G006",
+    "G007",
+    "G008",
+    "G009",
+    "G010",
+    "G011",
+    "G012"
+  ],
+  "corpus_sha256": "5550eb127bb71f3ca8f078ffe51d263e1d58915ff5bc97a0bf04d1173f9aebfb",
+  "host_sha256": "7cebacd359f2d1e4caf93a9a5e683981d846b24dbaaae190ab3e4d1202dc14f4",
+  "classifier_sha256": "a72b2150fe3caae4a2764d0fb26c691ce2ab08ad0308cad9c56b6c8fadc7b755",
+  "classifier_source_sha256": "4120072f3ef543f33ceb8d3b4037753a582bd3dc8894661c3efd05272d9c466a",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "capture_source_sha256": "2c8f998c09771e569b2c706aa3e2792bf6cc13d3a3eb9e5d3b3f3f28c003f4ee",
+  "synthesis_source_sha256": "5f10a4c1e92a2755ed7bc5e9c27f5104190306b9d291516108410affdacb7df8",
+  "model": "deepseek-v4-flash",
+  "rules": [
+    "Never resample failures or incomplete cases.",
+    "Replay every captured input, RPC reply and final state through the exact frozen host.",
+    "Report transcript, strict tool selection and state independently; a refused wrong call remains a model failure.",
+    "True-stop cases must not be refused; control states must match intended state at the same observation time.",
+    "No platform configuration changes or device deployment.",
+    "Targeted data do not replace original eighty/eight, human or physical acceptance."
+  ]
+}

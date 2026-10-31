@@ -1,0 +1,478 @@
+{
+  "scope": "Actual MCP with simulated recognized input/time, no model/ASR/board acceptance; active prohibitions preserve the stop path",
+  "host_sha256": "1344cbbe66d3fa2f0d4e8d212890c8740eb6321e3ef9237c84776f20816ec0f0",
+  "scenarios": 46,
+  "passed": true,
+  "failed": [],
+  "kind": "summary_of_complete_native_capture",
+  "full_capture": {
+    "path": "native-asan-full.json.gz",
+    "sha256": "7dc28870680074c55e44166eb157c7baac9d30ff5321008bff92e22ab001d1c3",
+    "decompressed_sha256": "5744ba5472b8480e33eb1356f39c611f7dd4f8d84d1839e1c14a435ad4a0ae76"
+  },
+  "results": [
+    {
+      "name": "idle_false_stop_不要前进",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "idle_false_stop_别喷水",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "idle_false_stop_不要开启狂暴模式",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "idle_false_stop_不许吹泡泡",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "idle_false_stop_不要放电",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "idle_false_stop_不要饭店",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "idle_false_stop_请先不要启动泡泡。",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "preserve_draft_不要编排表演",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 7
+    },
+    {
+      "name": "preserve_draft_这次先别编排新的表演",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 7
+    },
+    {
+      "name": "preserve_draft_先不要创建节目，保留现在的草稿",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 7
+    },
+    {
+      "name": "preserve_draft_别取消这份草稿",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 7
+    },
+    {
+      "name": "preserve_draft_我没让你取消草稿",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 7
+    },
+    {
+      "name": "no_substitute_move",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "no_substitute_water",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "no_substitute_bubbles",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "no_substitute_ignition",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "no_substitute_frenzy",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "no_substitute_sequence",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "no_cancel_substitute",
+      "passed": true,
+      "results": [
+        "ok",
+        "input_negated"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 7
+    },
+    {
+      "name": "no_speed_set_speed",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "no_speed_adjust_speed",
+      "passed": true,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "active_stop_priority_不要停止当前序列",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "active_stop_priority_不要停",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "active_stop_priority_别取消序列",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_停止",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_停下",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_停止行走",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_停止喷水",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_停止泡泡",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_停止狂暴模式",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_取消序列",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_所有动作都停下来",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_别动",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_不要再动了",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_别喷水了",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_先别编排了，马上停下",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_不要放电，停下",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_别再往前走了，马上停下",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "stop_not_blocked_未知表达",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "active_prohibition_keeps_stop",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "new_input_restores_stop",
+      "passed": true,
+      "results": [
+        "input_negated",
+        "ok"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "failure_latch_no_fallback",
+      "passed": true,
+      "results": [
+        "input_negated",
+        "rpc_error"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "positive_clause_not_globally_blocked",
+      "passed": true,
+      "results": [
+        "accepted"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "old_callback_isolated",
+      "passed": true,
+      "results": [
+        "voice_input_changed"
+      ],
+      "starts": 0,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "late_valid_stop_after_new_negative_input",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    },
+    {
+      "name": "waiting_gap_stop_after_negative_input",
+      "passed": true,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "sequence_active": false,
+      "draft_revision": 0
+    }
+  ]
+}
