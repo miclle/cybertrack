@@ -66,9 +66,9 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 旋转完整整机，点选冠盖、枪座或外壳，将“这个零件上移一点”这样的想法落到明确的零件、面和模型版本。调整在独立研究副本中进行，原生 CAD 结果回到同一设计界面，便于对照修改前后并恢复。
 
-![完整 CyberTrack 模型中的冠盖调整与修改历史](docs/images/model-design/whole-model-gui-adjusted.png)
+![完整 CyberTrack 模型中的冠盖调整与修改历史](docs/images/model-design/whole-model-host-adjusted.png)
 
-*真实设计工作区：在完整整机中点选冠盖，通过 FreeCAD 将它沿 Z 轴上移 8 mm，右侧保留表面评论与坐标变化。可追溯、可对照、可恢复；[查看操作流程](tools/solidcue/README.md)。*
+*真实对话内设计卡片：在完整整机中选中冠盖，通过 FreeCAD 将它沿 Z 轴上移 8 mm，同一卡片保留目标评论、AI 回执与坐标变化。可追溯、可对照、可恢复；[查看操作流程](tools/solidcue/README.md)。*
 
 <details>
 <summary>查看点选零件、提出修改的界面</summary>

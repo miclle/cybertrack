@@ -31,4 +31,4 @@ ct42 部署检查记录 18 次有效距离样本、执行器启动次数为 0。
 
 模型设计工具随仓库交付后，可在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct45-src --model-design`。新增模型／几何／整机同步测试、插件 bundle 和合成宿主界面回归；统一报告记录工具源码哈希并排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
 
-模型辅助设计的[真实 GUI 验收](../tools/solidcue/verification-gui-20261031.json)已完成：198 件整机中冠盖上移 8 mm 后恢复，修改与恢复均经 FreeCAD GUI MCP 保存重开核对；同一本地页面更新到 r7，正式模型未改。无界面快照材质顺序修复通过 GUI 回读。桌面宿主评论自动触发和同卡片链路仍待插件连接重载后验收，不能由统一软件检查替代。
+模型辅助设计的[真实 GUI 验收](../tools/solidcue/verification-gui-20261031.json)已完成：198 件整机中冠盖上移 8 mm 后恢复，修改与恢复均经 FreeCAD GUI MCP 保存重开核对；同一本地页面更新到 r7，正式模型未改。无界面快照材质顺序修复通过 GUI 回读。后续[真实宿主卡片验收](../tools/solidcue/verification-host-20261031.json)已完成评论保存／宿主接受、MCP 读回与回执，以及同一卡片 r7 → r8 → r9 更新／恢复。旧连接超时已解除；宿主消息自动触发独立处理轮次仍未验证，不能用目标续跑处理或统一软件检查替代。

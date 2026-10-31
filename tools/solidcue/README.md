@@ -36,7 +36,7 @@ codex plugin add cad-comment-lab@cad-comment-local
 
 若本机同名 marketplace 仍指向早期临时 checkout，先执行 `codex plugin marketplace remove cad-comment-local`，再执行上面的命令；原模型数据不会删除。插件技术 ID 沿用，显示名称为 **CyberTrack 模型设计**。升级后按下面步骤重新加载连接，再调用 `open_model` 并展开卡片。升级 UI 后须新开一次卡片；同轮修改和恢复使用同一卡片。
 
-本地插件重载：等待当前操作保存后，使用 `⌘Q` 完全退出承载 Codex 的 ChatGPT 桌面应用，再重新打开并回到原对话；只关闭窗口不算退出。保持 FreeCAD 和本地模型服务运行，不需要卸载插件或删除研究数据。此流程依据 [OpenAI 本地插件说明](https://developers.openai.com/plugins/build/plugins#install-a-local-plugin-manually)；当前 CLI 的 `codex plugin`／`codex mcp` 没有 `reload` 子命令。返回对话后先核对工具描述与当前文档版本，再新开模型卡片；旧卡片仍可能保留旧 UI。
+本地插件重载：等待当前操作保存后，使用 `⌘Q` 完全退出承载 Codex 的 ChatGPT 桌面应用，再重新打开并回到原对话；只关闭窗口不算退出。保持 FreeCAD 打开，不需要卸载插件或删除研究数据。若模型服务运行在应用管理的终端中，退出应用可能结束服务；重开后先检查 `127.0.0.1:9473`，确认没有服务监听时再运行 `python3 scripts/solidcue.py start`，沿用原数据目录。此流程依据 [OpenAI 本地插件说明](https://developers.openai.com/plugins/build/plugins#install-a-local-plugin-manually)；当前 CLI 的 `codex plugin`／`codex mcp` 没有 `reload` 子命令。返回对话后先核对工具描述与当前文档版本，再新开模型卡片；旧卡片仍可能保留旧 UI。
 
 ```sh
 node scripts/check_solidcue_plugin.mjs
@@ -85,7 +85,9 @@ npm --prefix tools/model-design run test:ui
 
 上述 r3–r5 为无界面原生记录。后续[真实 GUI 验收](verification-gui-20261031.json)已恢复 FreeCAD 1.1.4／MCP 0.1.28：在本地页面点选冠盖 `Face113`，核对 r5 评论后，通过 GUI MCP 完成 Z=0 → 8 → 0 mm，并在修改和恢复后分别保存、关闭、重开；198 个原生指纹、217 个显示状态回读一致，其他 197 件不变。同一本地页面经 MCP 发布更新 r5 → r6 → r7，README 使用 r6 实拍。
 
-剩余验收是桌面宿主卡片的 `ui/message` 自动触发与同卡片完整链路。当前旧连接的 `get_state` 在 300 秒后超时，已请求重载插件；它不影响已通过的 GUI MCP 和本地 UI 验证。状态见 [I11 执行计划](../../docs/improvement-plan.md)。
+重启桌面应用后，新版连接的 `get_state`／`open_model` 已正常返回；本地服务随应用退出结束，确认端口空闲后从原数据目录恢复。[真实宿主卡片验收](verification-host-20261031.json)完成 r7 冠盖评论保存、宿主接受消息、MCP 显式读回与 AI 回执、GUI 修改／保存重开、同一卡片 r7 → r8 → r9 更新与恢复；README 使用 r8 宿主实拍。
+
+仍未验证的是 `ui/message` 自动触发独立处理轮次：当前工作由目标自动续跑驱动，通过 `get_state` 读回评论；“宿主已接受”与回执不冒充实际消息触发。连接超时已解除，无需重复重启。状态见 [I11 执行计划](../../docs/improvement-plan.md)。
 
 无界面导出的 FCStd 必须保留 `GuiDocument.xml` 及材质二进制的原始归档顺序，否则 FreeCAD GUI 可能以默认灰色打开。适配器已修复该顺序；2026-10-31 通过真实整机的无界面导出 → GUI 打开验证，198 个原生指纹、217 个对象的显示状态与原始模型一致。历史快照不重写；继续编辑请使用已核验的 GUI 研究副本或重新导出。
 
