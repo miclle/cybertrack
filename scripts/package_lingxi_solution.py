@@ -10,6 +10,7 @@ import subprocess
 import zipfile
 
 from check_firmware_current import check
+from package_family_rehearsal import build as build_rehearsal
 from review_lingxi_reference import SCORES, SUITES, score_replay
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,6 +38,7 @@ def read_inputs(root, paths):
 
 def build_archive(root, paths, head, dirty):
     contents = read_inputs(root, paths)
+    contents["family/rehearsal.html"] = build_rehearsal(root).encode()
     firmware = check(root)
     scores = json.loads(contents[SCORES])
     for suite in SUITES:
@@ -72,7 +74,7 @@ python3 scripts/review_lingxi_reference.py
 - 语义偏差见[固定集回归](docs/validation/lingxi-role-5991.md)，远端音频包的端侧处理见[播放回归](docs/validation/lingxi-ct51-playback.md)。
 - 供电与机械设计见[硬件架构](hardware/architecture/README.md)和[整机模型辅助设计](tools/model-design/README.md)。
 
-主持人可用浏览器打开包内的[亲子观察单](tools/family-study/observer.html)，逐户下载匿名记录，用 `python3 scripts/analyze_family_sessions.py 记录目录/*.json` 分别汇总原型与实机结果。
+家长与孩子可双击[离线泡泡剧场](family/rehearsal.html)，选择模板、修改和确认，在屏幕上排演各步，也可以中途全停。排演页内没有设备或灵矽连接。主持人可用浏览器打开包内的[亲子观察单](tools/family-study/observer.html)，逐户下载匿名记录，用 `python3 scripts/analyze_family_sessions.py 记录目录/*.json` 分别汇总原型与实机结果。
 
 包内材料可离线阅读和评测。原始部署记录、完整轨迹和 CAD 资产见[对应源码提交](https://github.com/miclle/cybertrack/tree/{head})。还可以在包内运行以下检查。
 
@@ -107,6 +109,7 @@ def main():
     sources = ["tools/lingxi-solution/files.json", "scripts/package_lingxi_solution.py", "scripts/check_firmware_current.py",
                "firmware/esp32-audio/apply_overlay.py", "firmware/" + current["last_recorded_deployment"],
                *(str(Path(SCORES).with_name(f"full-{suite}.json.gz")) for suite in SUITES)]
+    sources.extend(["scripts/package_family_rehearsal.py", "tools/family-study/rehearsal.js", "firmware/esp32-audio/web/index.html"])
     dirty = bool(subprocess.check_output(["git", "status", "--porcelain", "--", *paths, *sources], cwd=ROOT, text=True))
     payload = build_archive(ROOT, paths, head, dirty)
     output = args.output or ROOT / "output/lingxi-solution" / f"cybertrack-lingxi-reference-{head[:12]}.zip"
