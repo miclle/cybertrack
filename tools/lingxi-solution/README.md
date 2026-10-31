@@ -1,6 +1,6 @@
 # 灵矽参考材料包
 
-在仓库根目录执行 `python3 scripts/package_lingxi_solution.py`，生成 `output/lingxi-solution/` 下的本地 ZIP；不会上传、发布或更改灵矽账号。解压后从 `START_HERE.md` 开始。家长和孩子可双击 `family/rehearsal.html` 离线编排，在屏幕上看每一步；主持人另开 `tools/family-study/observer.html` 记录体验。在解压目录运行 `python3 scripts/review_lingxi_reference.py`，可离线核对清单所列文件并分别重算历史基线与 ct57 候选各两组真实平台调用的成绩，输出各自的偏差用例编号。返回码 0 表示重算结果与原记录一致。
+在仓库根目录执行 `python3 scripts/package_lingxi_solution.py`，生成 `output/lingxi-solution/` 下的本地 ZIP；不会上传、发布或更改灵矽账号。解压后从 `START_HERE.md` 开始。家长和孩子可双击 `family/rehearsal.html` 离线编排，在屏幕上看每一步；主持人另开 `tools/family-study/observer.html` 记录体验。在解压目录运行 `python3 scripts/review_lingxi_reference.py`，可离线核对清单所列文件并分别重算历史基线与 ct57 工具定义各两组真实平台调用的成绩，输出各自的偏差用例编号。返回码 0 表示重算结果与原记录一致。
 
 [明确文件清单](files.json)包含方案章节、亲子上手卡、现用工具契约、角色源、文本／口述用例、采集模板、语义评分器、停止记录分析器、工程修改记录工具、硬件架构、电源预算及模型辅助设计接入记录。`MANIFEST.json` 记录 Git 提交、所选文件是否存在未提交修改、清单之外各交付文件的 SHA-256、源码候选与最近部署应用各自的字节数和哈希。相同输入生成相同字节；已有输出不覆盖。
 
