@@ -52,3 +52,8 @@ subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
                 str(Path(__file__).with_name('receipt_adapter_test.cc')), str(build/'cJSON.o'),
                 str(build/'receipt_water_policy.o'), '-o', str(build/'receipt_adapter_test')], check=True)
 subprocess.run([str(build/'receipt_adapter_test')], check=True)
+
+subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(root/'firmware/esp32-audio'),
+                str(Path(__file__).with_name('voice_feedback_test.cc')), str(build/'cJSON.o'),
+                '-o', str(build/'voice_feedback_test')], check=True)
+subprocess.run([str(build/'voice_feedback_test')], check=True)
