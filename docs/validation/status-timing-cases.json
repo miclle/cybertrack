@@ -28,6 +28,20 @@
       "initial_motion": "short_forward70",
       "context": "主机初态，无执行器",
       "response_expectation": "已截止时说明当前没有行走计时，不猜停止原因"
+    },
+    {
+      "id": "L005",
+      "text": "你现在在做什么",
+      "initial_motion": "forward70",
+      "context": "主机初态，无执行器",
+      "response_expectation": "先实际查询，再按回执说明当前活动"
+    },
+    {
+      "id": "L006",
+      "text": "你现在在做什么",
+      "initial_motion": "idle",
+      "context": "主机初态，无执行器",
+      "response_expectation": "先实际查询，再按回执说明当前活动"
     }
   ]
 }
