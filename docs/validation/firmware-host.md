@@ -98,3 +98,5 @@ C005、C006、C008 的回复仍包含“用户说”“根据规则”等过程�
 另以 X001 原话独立跑三次：模型查到版本 7 后，主机在第一次编辑前将网页稿改为版本 8、第二步泡泡三秒。三次实际编辑均收到 `draft_changed`，均未自动重试或声称两秒保存成功，最终网页版本和三秒时长保留，启动计数为零。回复仍有操作旁白；三次确定顺序的故障注入不代表任意线程竞争或现场表现通过。[第一次](evidence/ct61-firmware-host/conflict-1.json.gz) · [第二次](evidence/ct61-firmware-host/conflict-2.json.gz) · [第三次](evidence/ct61-firmware-host/conflict-3.json.gz)
 
 本轮十二条会话的完整 MCP 结果、回执和结束状态均经捕获时的固定二进制重放一致。随后修复主机初始化编号碰撞，以新二进制重新播放既有 80 条原话、八条编排、三次冲突和一次诊断，共 92 行；完整 MCP 结果和终态仍逐项一致。原捕获清单不覆盖，新版本另存[主机清单](evidence/ct61-firmware-host/current-host-manifest.json)和[兼容回放结果](evidence/ct61-firmware-host/host-replay-check.json)。这些是离线复核，没有新增模型会话或板上部署。
+
+后续[两条原话的工具说明对照](compose-routing.md)完成十二次独立会话。诊断版严格匹配从 2/6 到 5/6，但有一次未给新时长就将泡泡改为半秒，因此不采纳。它不替换本页固定集或超时记录。
