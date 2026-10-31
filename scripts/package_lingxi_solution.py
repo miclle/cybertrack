@@ -108,6 +108,7 @@ python3 scripts/review_lingxi_reference.py
 - [意图分流角色对照](docs/validation/intent-routing-role.md)72 次文本会话未采纳：两组均 29/36，各有禁止调用，停止静默均 0/6；原角色与参数已恢复。该主机使用占位识别文本，不能计作 STT 门禁覆盖。本包只核对所存材料完整性，不增加第八组固定模型成绩；完整回放需要 checkout 与原始轨迹。
 - [文本模拟识别输入](docs/validation/capture-recognized-input.md)把原话注入新的文本主机，与旧占位和真实 STT 分别标记。二十四条会话终态匹配，严格调用 20/24，两次猜测动作被拒绝；它不是 ASR 或第八组固定成绩。本包核对材料，完整控制复算仍需 checkout 与固定主机。
 - [原生数组步骤对照](docs/validation/native-step-inputs.md)另附两组共 176 次模拟识别原话的文本审阅：基线 77/80、5/8，候选 75/80、4/8，全部回执和终态重放一致；候选未采纳，主线和平台原角色已恢复。包内只核对研究材料完整性，原始压缩轨迹及完整控制重放仍需 checkout 与固定主机；七组既有评分和 STT 未完成记录保持。
+- [ct70 原始 JSON 准入](docs/validation/mcp-raw-json.md)独立修复机器人零字符前缀截断，16 组普通／消毒器回放通过，88 条历史平台请求的回执和终态保持；十二项工具与角色未改，未部署。包内只核对控制材料完整性，不新增模型成绩；重跑需要完整 checkout、固定主机及工具链。
 - [编排说明对照](docs/validation/compose-routing.md)保留了未采纳的诊断：工具匹配增多，但一次含糊请求擅自缩短草稿。包内含摘要与两份定义，原始轨迹和该诊断的重算需要完整 checkout。
 - 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
 - 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
