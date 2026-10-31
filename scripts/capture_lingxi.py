@@ -164,6 +164,7 @@ async def capture_case(connection,tools,case,timeout=45):
     timeline = row['timeline'] = []
     def mark(event, **details):
         timeline.append(dict(ms=round((time.monotonic()-opened)*1000), event=event, **details))
+    uplink = case.get('opus_frames')
     input_ms=None
     draft_history=[]
     draft_observed_at=None
@@ -226,9 +227,18 @@ async def capture_case(connection,tools,case,timeout=45):
                 if method=='tools/list' and not result.get('nextCursor') and not sent:
                     # Context is visibly separate from the user's phrase; the
                     # runner never reads expected_calls or response_expectation.
-                    text=case['text'] if case.get('raw_text') else '本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：'+case['context']+'。请只处理这条用户原话：'+case['text']
-                    await send(dict(session_id=session,type='listen',state='detect',text=text))
-                    sent=True;row['events'].append('test_input_sent');mark('input_sent');input_ms=timeline[-1]['ms']
+                    mark('input_sent');input_ms=timeline[-1]['ms']
+                    if uplink is not None:
+                        await send(dict(session_id=session,type='listen',state='start',mode='manual'))
+                        for frame in uplink:
+                            await ws.send(frame)
+                            await asyncio.sleep(.060)
+                        await send(dict(session_id=session,type='listen',state='stop'))
+                        mark('uplink_end')
+                    else:
+                        text=case['text'] if case.get('raw_text') else '本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：'+case['context']+'。请只处理这条用户原话：'+case['text']
+                        await send(dict(session_id=session,type='listen',state='detect',text=text))
+                    sent=True;row['events'].append('test_input_sent')
             elif kind=='tts':
                 state=msg.get('state')
                 if state in ('start','sentence_start','stop'):
@@ -281,6 +291,14 @@ async def run(args):
                input_mode='raw_text_diagnostic' if getattr(args,'raw_text',False) else 'context_prefixed',
                capture_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                scope='Real platform calls; synthetic receipt/context fixtures; zero device forwarding; text not microphone ASR',results=[])
+    synthetic = getattr(args, 'synthetic_speech', False)
+    if synthetic:
+        if timed or draft_host:
+            raise ValueError('synthetic speech currently uses static isolated receipts')
+        import synthetic_speech
+        trace['input_mode'] = 'synthetic_opus'
+        trace['synthesis_source_sha256'] = hashlib.sha256(Path(synthetic_speech.__file__).read_bytes()).hexdigest()
+        trace['scope'] = 'Synthesized speech over real platform ASR; isolated fixture receipts; no microphone, speaker or device IO'
     if timed or draft_host:
         binary=draft_host or ROOT/'build/audio-host/receipt_replay'
         trace['host_replay_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
@@ -289,7 +307,11 @@ async def run(args):
         trace['initial_profile']='two_step_web_draft'
     args.output.parent.mkdir(parents=True,exist_ok=True)
     for case in cases:
+        if synthetic:
+            case['opus_frames'], metadata = synthetic_speech.synthesize(case['text'])
         row=await capture_case(connection,tools,case,args.timeout)
+        if synthetic:
+            row['uplink'] = metadata
         trace['results'].append(row);args.output.write_text(json.dumps(trace,ensure_ascii=False,indent=2)+'\n')
         print(case['id'],row['completion'],','.join(c['name'] for c in row['calls']) or '(no tools)',flush=True)
         if not row['completed']:raise RuntimeError('incomplete case; capture retained, not counted as a successful no-call result')
@@ -300,7 +322,9 @@ if __name__=='__main__':
     for name in ('connection','tools','corpus','role','output'):p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
     p.add_argument('--audio-packets',action='store_true',help='Record arrival and size of every remote audio packet; discard its content')
-    p.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
+    inputs=p.add_mutually_exclusive_group()
+    inputs.add_argument('--synthetic-speech',action='store_true',help='Send synthesized Mandarin as Opus frames, without input text or a microphone')
+    inputs.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
     versions=p.add_mutually_exclusive_group()
     versions.add_argument('--draft-host',type=Path,metavar='REPLAY',help='Use host firmware with a two-step web draft at revision 7')
     versions.add_argument('--timed-host',action='store_true',help='Use read-only host firmware receipts at observed RPC offsets')
