@@ -108,6 +108,8 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
 <div class="show-presets"><button id="show-entry">登场</button><button id="show-celebrate">庆祝</button><button id="show-curtain">谢幕</button></div>
 <p id="show-cue" class="note">孩子当导演，家长负责确认与停止。</p>
 <div class="show-actions"><button id="show-load" disabled>载入设备草稿</button><button id="show-cancel" disabled>取消设备草稿</button></div>
+<p id="show-incoming" class="show-preview" hidden></p>
+<span>本页预览</span>
 <p id="show-preview" class="show-preview">还没有步骤。先选一个模板。</p>
 <div class="show-edit">
 <label>编辑第几步<input id="show-step" type="number" min="1" max="16" step="1" value="1" disabled></label>
@@ -235,8 +237,8 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         showChanged(); show.job=null; show.revision=null; show.base=[];
         show.dirty=show.steps.length>0;
       }
-      function showPreview() {
-        const lines=show.steps.map((step,index)=>{
+      function describeShow(steps) {
+        const lines=steps.map((step,index)=>{
           const move=step.move_ms ? `${directions[step.direction]} ${step.move_ms/1000} 秒（${step.speed_percent}%）` : "";
           const bubbles=step.bubbles_ms ? `吹泡泡 ${step.bubbles_ms/1000} 秒` : "";
           const order=index===0 ? "先" : "再";
@@ -249,8 +251,11 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
           }
           return `第 ${index+1} 步 · ${order}${action}`;
         });
-        const duration=show.steps.reduce((n,s)=>n+Math.max(s.move_ms,s.bubbles_ms),0)+Math.max(0,show.steps.length-1)*200;
-        $("show-preview").textContent=lines.length ? lines.join("\n")+`\n预计 ${duration/1000} 秒 · ${lines.length}/16 步` : "还没有步骤。先选一个模板。";
+        const duration=steps.reduce((n,s)=>n+Math.max(s.move_ms,s.bubbles_ms),0)+Math.max(0,steps.length-1)*200;
+        return lines.length ? lines.join("\n")+`\n预计 ${duration/1000} 秒 · ${lines.length}/16 步` : "还没有步骤。先选一个模板。";
+      }
+      function showPreview() {
+        $("show-preview").textContent=describeShow(show.steps);
         showControls();
       }
       function showForm() {
@@ -266,6 +271,11 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
           available=fresh && supported && !pending && !effectPending && !show.job && !speedJob && !avoidancePending,
           matches=showMatches(), canonical=matches && show.revision>0 && !show.dirty && !show.formDirty,
           editable=show.steps.length>0 && !show.job;
+        const incoming=fresh && !matches && deviceShow();
+        const comparison=incoming?.revision ? `设备草稿 v${incoming.revision}（待载入）\n${describeShow(incoming.steps)}\n载入后请重新核对并勾选确认。` : "";
+        const panel=$("show-incoming");
+        if (panel.textContent!==comparison) panel.textContent=comparison;
+        panel.hidden=!comparison;
         if (!canonical || !fresh) $("show-reviewed").checked=false;
         for (const id of ["entry","celebrate","curtain"]) $("show-"+id).disabled=!!show.job;
         for (const id of ["step","direction","move","bubbles","speed"]) $("show-"+id).disabled=!editable;
