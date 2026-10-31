@@ -4,7 +4,7 @@
 
 **现行入口：** [27 件 Lean 六盘项目](../lean-print/README.md)。以下记录四件几何修正及当时五盘切片；PP01／PP02 现位于 Lean 第 3 盘，PP03／LC04 位于第 6 盘。样机已完成基础装配并有[实拍与运行视频](../../../artifact/README.md)，本页尚未验证的公差、强度与完整拆装继续保留。
 
-2026-10-26。PP01 水枪底托、PP02 泡泡枪底座、PP03 背包、LC04 顶盖共用新增第 5 盘，合入[五盘项目](../print-ready/CyberTrack-Ready-5plates.3mf)。当时保留原四盘的模型、工艺设置和 G-code；补打按实物需要及现行 Lean 清单安排。
+2026-10-26。PP01 水枪底托、PP02 泡泡枪底座、PP03 背包、LC04 顶盖共用新增第 5 盘，合入当时的五盘项目 `CyberTrack-Ready-5plates.3mf`（旧模型已于 2026-10-31 清理）。当时保留原四盘的模型、工艺设置和 G-code；补打按实物需要及现行 Lean 清单安排。
 
 | 零件 | 打印方向 | 独立导出 |
 |---|---|---|
@@ -32,4 +32,4 @@
 
 下列脚本记录当时流程，须使用对应历史修订及输入副本；不直接覆盖当前 Lean 模型或用户排盘。
 
-`prepare_remaining_geometry.py` 在 FreeCAD Python 中局部修正、导出并保存回读；`slice_remaining_prints.py` 生成独立候选；`export_remaining_sections.py` 与 `check_remaining_paths.py` 核对原生截面与路径。`preserve_current_prints.py` 验证 Bambu Studio 当前快照并恢复其 Save As 省略的原四盘 G-code；`append_remaining_plate.py` 追加新盘；仅用 CLI `--slice 5` 检查新增盘，最后 `finalize_remaining_project.py` 写入已检查的第 5 盘路径。图像和路径检查脚本需要 Pillow。首轮修改前的 FCStd 保留在 `baseline/`，不覆盖或提交其他任务修改。
+`prepare_remaining_geometry.py` 在 FreeCAD Python 中局部修正、导出并保存回读；`slice_remaining_prints.py` 生成独立候选；`export_remaining_sections.py` 与 `check_remaining_paths.py` 核对原生截面与路径。`preserve_current_prints.py` 验证 Bambu Studio 当前快照并恢复其 Save As 省略的原四盘 G-code；`append_remaining_plate.py` 追加新盘；仅用 CLI `--slice 5` 检查新增盘，最后 `finalize_remaining_project.py` 写入已检查的第 5 盘路径。图像和路径检查脚本需要 Pillow。首轮修改前曾备份 FCStd 到 `baseline/`；该临时备份已清理，历史复现需要恢复当时修订和输入副本。
