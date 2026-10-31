@@ -31,7 +31,8 @@ class FamilyTests(unittest.TestCase):
         rows[0].update(first_use=False, repeat_plays=None, modified_shows=[])
         rows[1]['free_play_observed'] = False
         rows.append({**rows[2], 'prototype_or_device':'prototype'})
-        r = summarize([*rows, {'spontaneous_repeat':True}])
+        r = summarize([*rows, {**rows[0], 'evidence_kind':'dry_run'}, {'spontaneous_repeat':True}])
+        self.assertEqual(r['dry_run_rows'], 1)
         self.assertEqual(r['unclassified_rows'], 1)
         device, proto = r['groups']
         self.assertEqual(proto['same_play_repeated']['scope'], 'prototype_only')
@@ -45,3 +46,15 @@ class FamilyTests(unittest.TestCase):
                      [{**row,'repeat_plays':['登场','登场']}], [{**row,'help_count':False}]):
             with self.assertRaises(ValueError):
                 summarize(data)
+
+    def test_templates_and_custom_stories_count_by_identity(self):
+        rows = [sheet(i) for i in FAMILIES]
+        for i, row in enumerate(rows):
+            row['repeat_plays'] = [f'自编/B{i}']
+            row['modified_shows'] = []
+        self.assertEqual(summarize(rows)['groups'][0]['same_play_repeated']['positive'], 1)
+        for row in rows[:3]:
+            row['repeat_plays'] = ['自编/B1']
+        r = summarize(rows)['groups'][0]
+        self.assertEqual(r['same_play_repeated']['result'], 'met')
+        self.assertEqual(r['replayed_or_modified_show']['positive'], 5)

@@ -24,7 +24,7 @@ def read_inputs(root, paths):
         path = PurePosixPath(name)
         if path.is_absolute() or ".." in path.parts or not path.parts or str(path) != name:
             raise ValueError("bundle paths must be normalized repository-relative paths")
-        allowed_text = path.suffix in {".md", ".json", ".txt", ".py"} or path.name in {"LICENSE", "NOTICE"}
+        allowed_text = path.suffix in {".md", ".json", ".txt", ".py"} or path.name in {"LICENSE", "NOTICE"} or name == "tools/family-study/observer.html"
         if set(path.parts) & {"secrets", "recordings", "output", "tmp", ".git"} or not allowed_text:
             raise ValueError("bundle supports reviewed reference text only")
         target = root / name
@@ -71,6 +71,8 @@ python3 scripts/review_lingxi_reference.py
 - 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
 - 语义偏差见[固定集回归](docs/validation/lingxi-role-5991.md)，远端音频包的端侧处理见[播放回归](docs/validation/lingxi-ct51-playback.md)。
 - 供电与机械设计见[硬件架构](hardware/architecture/README.md)和[整机模型辅助设计](tools/model-design/README.md)。
+
+主持人可用浏览器打开包内的[亲子观察单](tools/family-study/observer.html)，逐户下载匿名记录，用 `python3 scripts/analyze_family_sessions.py 记录目录/*.json` 分别汇总原型与实机结果。
 
 包内材料可离线阅读和评测。原始部署记录、完整轨迹和 CAD 资产见[对应源码提交](https://github.com/miclle/cybertrack/tree/{head})。还可以在包内运行以下检查。
 
