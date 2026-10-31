@@ -6,7 +6,7 @@
   "fault_trials": [],
   "fault_trial_fields": ["condition", "repeat", "firmware_sha256", "power", "load", "ground_surface", "speed_percent", "source_by_channel", "event_ms", "output_off_ms", "mechanical_stop_ms", "stopping_distance_mm", "stale_action_resumed", "method", "observation"],
   "power_runs": [],
-  "power_run_fields": ["run_id", "firmware", "battery", "procedure", "duration_s", "rail", "voltage_v", "current_a", "temperature_c", "rating_source", "instrument", "reset_count", "end_reason"],
+  "power_run_fields": ["run_id", "firmware", "battery", "procedure", "condition_id", "duration_s", "rail", "voltage_v", "current_a", "temperature_c", "rating_source", "instrument", "reset_count", "end_reason"],
   "cost_items": [],
   "cost_item_fields": ["bom_id", "quantity", "actual_unit_cny", "source", "purchased_on", "estimate_only"],
   "maintenance_cycles": [],
