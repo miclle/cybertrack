@@ -119,3 +119,5 @@ python3 scripts/analyze_maintenance.py docs/validation/templates.json \
 [ct67 无量化相对改稿门禁](relative-draft-duration.md)将原生十三组控制回放与二十条真实 STT 定向会话分开报告，不覆盖原固定语义、口述或家庭成绩。
 
 [原生数组步骤对照](native-step-inputs.md)保留两组共 176 次会话，基线 77/80、5/8，候选 75/80、4/8；实际参数按公布的字符串／数组 schema 分别评分，全部完整回执与终态重放一致。候选未采纳，原平台角色和主线 ct68 已恢复；该研究不替代真实语音、扬声器或现场验收。
+
+[ct70 原始 JSON](mcp-raw-json.md)将数组实验发现的零字符截断独立修复，16 组实际 MCP／消毒器回放、原 SDK 字符串入口及 88 条历史兼容通过；工具、角色和原模型成绩保持，候选未部署。

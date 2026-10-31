@@ -1,0 +1,2750 @@
+{
+  "scope": "Raw test transport with actual MCP dispatcher/callbacks, simulated input/time; no network/model/board IO",
+  "host_sha256": "a20da0879ee6447e94d8c9aad79057f8d38dd53235478d6f8765560043d15c6e",
+  "scenarios": 16,
+  "passed": false,
+  "failed": [
+    "direction-zero",
+    "combined-zero",
+    "tool-name-zero",
+    "key-zero",
+    "cancel-zero",
+    "edit-zero",
+    "bad-stop-does-not-stop",
+    "valid-stop-after-bad",
+    "same-input-no-fallback",
+    "new-input-restores",
+    "queued-then-invalid"
+  ],
+  "results": [
+    {
+      "id": "direction-zero",
+      "passed": false,
+      "results": [
+        "accepted"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":1,\"operation\":\"move\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":100,\"right\":100,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":1000,\"water_last_duration_ms\":0,\"move_remaining_ms\":1000,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":100,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"move\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 2,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 100,
+          "right": 100,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 1,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 1000,
+        "remaining_ms": 901,
+        "move_last_duration_ms": 1000,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 901,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 100,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "forward",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "voice",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "move",
+          "result": "accepted",
+          "source": "voice",
+          "age_ms": 99
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "上次请求已被控制器接受，这条回执没有记录停止原因。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "combined-zero",
+      "passed": false,
+      "results": [
+        "accepted"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":1,\"operation\":\"move_and_water\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":-100,\"right\":100,\"water\":true,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":2,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":880,\"water_last_duration_ms\":1000,\"move_remaining_ms\":880,\"water_remaining_ms\":1000,\"web_speed_percent\":100,\"move_speed_percent\":100,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"left\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"voice\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"move_and_water\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 2,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": -100,
+          "right": 100,
+          "water": true,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 2,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 1000,
+        "remaining_ms": 901,
+        "move_last_duration_ms": 880,
+        "water_last_duration_ms": 1000,
+        "move_remaining_ms": 781,
+        "water_remaining_ms": 901,
+        "web_speed_percent": 100,
+        "move_speed_percent": 100,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "left",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "voice",
+        "water_source": "voice",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "move_and_water",
+          "result": "accepted",
+          "source": "voice",
+          "age_ms": 99
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "上次请求已被控制器接受，这条回执没有记录停止原因。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "tool-name-zero",
+      "passed": false,
+      "results": [
+        "accepted"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":1,\"operation\":\"water\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":true,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":0,\"water_last_duration_ms\":1000,\"move_remaining_ms\":0,\"water_remaining_ms\":1000,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"voice\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"water\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 2,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": true,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 1,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 1000,
+        "remaining_ms": 901,
+        "move_last_duration_ms": 0,
+        "water_last_duration_ms": 1000,
+        "move_remaining_ms": 0,
+        "water_remaining_ms": 901,
+        "web_speed_percent": 100,
+        "move_speed_percent": 0,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "none",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "none",
+        "water_source": "voice",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "water",
+          "result": "accepted",
+          "source": "voice",
+          "age_ms": 99
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "上次请求已被控制器接受，这条回执没有记录停止原因。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "key-zero",
+      "passed": false,
+      "results": [
+        "accepted"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":1,\"operation\":\"move\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":100,\"right\":100,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":1000,\"water_last_duration_ms\":0,\"move_remaining_ms\":1000,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":100,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"move\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 2,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 100,
+          "right": 100,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 1,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 1000,
+        "remaining_ms": 901,
+        "move_last_duration_ms": 1000,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 901,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 100,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "forward",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "voice",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "move",
+          "result": "accepted",
+          "source": "voice",
+          "age_ms": 99
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "上次请求已被控制器接受，这条回执没有记录停止原因。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "cancel-zero",
+      "passed": false,
+      "results": [
+        "ok",
+        "draft_cancelled"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":15,\"operation\":\"get_status\",\"result\":\"ok\",\"state\":\"DISARMED\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":0,\"max_duration_ms\":30000,\"last_duration_ms\":0,\"remaining_ms\":0,\"move_last_duration_ms\":0,\"water_last_duration_ms\":0,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":false,\"operation\":\"\",\"result\":\"\",\"source\":\"none\",\"age_ms\":null},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"draft_status_facts\":\"设备当前有已保存草稿。这次状态查询没有保存、修改或取消任何草稿，不能把已有版本当成本次操作完成。只有本次compose返回draft_saved或draft_cancelled，才能确认相应操作完成。\",\"status_facts\":\"没有最近的动作回执，无法据此解释上一次动作。设备没有电量读数和实际动作反馈。\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":true,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":7,\"expires_in_ms\":299999,\"source\":\"voice\",\"steps\":[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":100},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0,\"speed_percent\":100}],\"nominal_duration_ms\":2080}}"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":16,\"operation\":\"show_edit\",\"result\":\"draft_cancelled\",\"state\":\"DISARMED\",\"fault\":\"none\",\"uptime_ms\":1002,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":0,\"max_duration_ms\":30000,\"last_duration_ms\":0,\"remaining_ms\":0,\"move_last_duration_ms\":0,\"water_last_duration_ms\":0,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":false,\"operation\":\"\",\"result\":\"\",\"source\":\"none\",\"age_ms\":null},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1002,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 17,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "DISARMED",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 0,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 0,
+        "remaining_ms": 0,
+        "move_last_duration_ms": 0,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 0,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 0,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "none",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "none",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": false,
+          "operation": "",
+          "result": "",
+          "source": "none",
+          "age_ms": null
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "没有最近的动作回执，无法据此解释上一次动作。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "edit-zero",
+      "passed": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":15,\"operation\":\"get_status\",\"result\":\"ok\",\"state\":\"DISARMED\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":0,\"max_duration_ms\":30000,\"last_duration_ms\":0,\"remaining_ms\":0,\"move_last_duration_ms\":0,\"water_last_duration_ms\":0,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":false,\"operation\":\"\",\"result\":\"\",\"source\":\"none\",\"age_ms\":null},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"draft_status_facts\":\"设备当前有已保存草稿。这次状态查询没有保存、修改或取消任何草稿，不能把已有版本当成本次操作完成。只有本次compose返回draft_saved或draft_cancelled，才能确认相应操作完成。\",\"status_facts\":\"没有最近的动作回执，无法据此解释上一次动作。设备没有电量读数和实际动作反馈。\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":true,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":7,\"expires_in_ms\":299999,\"source\":\"voice\",\"steps\":[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":100},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0,\"speed_percent\":100}],\"nominal_duration_ms\":2080}}"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":16,\"operation\":\"show_edit\",\"result\":\"draft_saved\",\"state\":\"DISARMED\",\"fault\":\"none\",\"uptime_ms\":1002,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":0,\"max_duration_ms\":30000,\"last_duration_ms\":0,\"remaining_ms\":0,\"move_last_duration_ms\":0,\"water_last_duration_ms\":0,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":false,\"operation\":\"\",\"result\":\"\",\"source\":\"none\",\"age_ms\":null},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1002,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":true,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":8,\"expires_in_ms\":300000,\"source\":\"voice\",\"steps\":[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":100},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}],\"nominal_duration_ms\":3080}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 17,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "DISARMED",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 0,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 0,
+        "remaining_ms": 0,
+        "move_last_duration_ms": 0,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 0,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 0,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "none",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "none",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": false,
+          "operation": "",
+          "result": "",
+          "source": "none",
+          "age_ms": null
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前有已保存草稿。这次状态查询没有保存、修改或取消任何草稿，不能把已有版本当成本次操作完成。只有本次compose返回draft_saved或draft_cancelled，才能确认相应操作完成。",
+        "status_facts": "没有最近的动作回执，无法据此解释上一次动作。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": true,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 8,
+          "expires_in_ms": 299902,
+          "source": "voice",
+          "steps": [
+            {
+              "direction": "left",
+              "move_ms": 880,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 2000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "nominal_duration_ms": 3080
+        }
+      }
+    },
+    {
+      "id": "bad-stop-does-not-stop",
+      "passed": false,
+      "results": [
+        "ok"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":2,\"operation\":\"stop\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":30000,\"remaining_ms\":0,\"move_last_duration_ms\":30000,\"water_last_duration_ms\":0,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":200,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"stop\",\"result\":\"ok\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 3,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "STOPPED",
+        "fault": "stopped",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 1,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 30000,
+        "remaining_ms": 0,
+        "move_last_duration_ms": 30000,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 0,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 0,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "none",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 101,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "none",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "stop",
+          "result": "ok",
+          "source": "voice",
+          "age_ms": 99
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "valid-stop-after-bad",
+      "passed": false,
+      "results": [
+        "ok",
+        "ok"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":2,\"operation\":\"stop\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":30000,\"remaining_ms\":0,\"move_last_duration_ms\":30000,\"water_last_duration_ms\":0,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":200,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"stop\",\"result\":\"ok\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":3,\"operation\":\"stop\",\"result\":\"ok\",\"state\":\"STOPPED\",\"fault\":\"stopped\",\"uptime_ms\":1002,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":30000,\"remaining_ms\":0,\"move_last_duration_ms\":30000,\"water_last_duration_ms\":0,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":199,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"stop\",\"result\":\"ok\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1002,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 4,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "STOPPED",
+        "fault": "stopped",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 1,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 30000,
+        "remaining_ms": 0,
+        "move_last_duration_ms": 30000,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 0,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 0,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "none",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 101,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "none",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "stop",
+          "result": "ok",
+          "source": "voice",
+          "age_ms": 98
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "same-input-no-fallback",
+      "passed": false,
+      "results": [
+        "accepted",
+        "accepted"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":1,\"operation\":\"move\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":100,\"right\":100,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":1000,\"water_last_duration_ms\":0,\"move_remaining_ms\":1000,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":100,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"move\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":2,\"operation\":\"bubbles\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1002,\"logical_outputs\":{\"left\":100,\"right\":100,\"water\":false,\"bubbles\":true,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":2,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":1000,\"water_last_duration_ms\":0,\"move_remaining_ms\":999,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":100,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":1000,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":1000,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"voice\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"bubbles\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1002,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 3,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 100,
+          "right": 100,
+          "water": false,
+          "bubbles": true,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 2,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 1000,
+        "remaining_ms": 902,
+        "move_last_duration_ms": 1000,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 901,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 100,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "forward",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "voice",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 1000,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 902,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "voice",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "bubbles",
+          "result": "accepted",
+          "source": "voice",
+          "age_ms": 98
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "上次请求已被控制器接受，这条回执没有记录停止原因。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "new-input-restores",
+      "passed": false,
+      "results": [
+        "accepted",
+        "accepted"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":1,\"operation\":\"move\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":100,\"right\":100,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":1000,\"water_last_duration_ms\":0,\"move_remaining_ms\":1000,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":100,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"move\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":2,\"operation\":\"bubbles\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1003,\"logical_outputs\":{\"left\":100,\"right\":100,\"water\":false,\"bubbles\":true,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":2,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":1000,\"water_last_duration_ms\":0,\"move_remaining_ms\":998,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":100,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":1000,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":1000,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"voice\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"bubbles\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1003,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 3,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 100,
+          "right": 100,
+          "water": false,
+          "bubbles": true,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 2,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 1000,
+        "remaining_ms": 903,
+        "move_last_duration_ms": 1000,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 901,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 100,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "forward",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "voice",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 1000,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 903,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "voice",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "bubbles",
+          "result": "accepted",
+          "source": "voice",
+          "age_ms": 97
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "上次请求已被控制器接受，这条回执没有记录停止原因。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "valid-move",
+      "passed": true,
+      "results": [
+        "accepted"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":1,\"operation\":\"move\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":100,\"right\":100,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":1000,\"water_last_duration_ms\":0,\"move_remaining_ms\":1000,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":100,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"move\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 2,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 100,
+          "right": 100,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 1,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 1000,
+        "remaining_ms": 901,
+        "move_last_duration_ms": 1000,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 901,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 100,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "forward",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "voice",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "move",
+          "result": "accepted",
+          "source": "voice",
+          "age_ms": 99
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "上次请求已被控制器接受，这条回执没有记录停止原因。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "valid-legacy-sequence",
+      "passed": true,
+      "results": [
+        "accepted"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":1,\"operation\":\"sequence\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":-100,\"right\":100,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":880,\"remaining_ms\":880,\"move_last_duration_ms\":880,\"water_last_duration_ms\":0,\"move_remaining_ms\":880,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":100,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"left\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":true,\"sequence_step\":1,\"sequence_steps\":1,\"sequence_result\":\"running\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"sequence\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"voice\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 2,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": -100,
+          "right": 100,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 1,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 880,
+        "remaining_ms": 781,
+        "move_last_duration_ms": 880,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 781,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 100,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "left",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "voice",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": true,
+        "sequence_step": 1,
+        "sequence_steps": 1,
+        "sequence_result": "running",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "sequence",
+          "result": "accepted",
+          "source": "voice",
+          "age_ms": 99
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "上次请求已被控制器接受，这条回执没有记录停止原因。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "voice",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "inner-plan-zero",
+      "passed": true,
+      "results": [
+        "error"
+      ],
+      "replies": [
+        {
+          "error": {
+            "message": "Sequence requires exactly steps_json with 1..16 valid steps"
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 1,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "DISARMED",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 0,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 0,
+        "remaining_ms": 0,
+        "move_last_duration_ms": 0,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 0,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 0,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "none",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "none",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": false,
+          "operation": "",
+          "result": "",
+          "source": "none",
+          "age_ms": null
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "没有最近的动作回执，无法据此解释上一次动作。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "literal-escape-not-zero",
+      "passed": true,
+      "results": [
+        "error"
+      ],
+      "replies": [
+        {
+          "error": {
+            "message": "Move requires direction forward/backward/left/right and integer duration_ms in 1..2147483647"
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 1,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "DISARMED",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 0,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 0,
+        "remaining_ms": 0,
+        "move_last_duration_ms": 0,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 0,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 0,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "none",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "none",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": false,
+          "operation": "",
+          "result": "",
+          "source": "none",
+          "age_ms": null
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "没有最近的动作回执，无法据此解释上一次动作。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "valid-cancel",
+      "passed": true,
+      "results": [
+        "ok",
+        "draft_cancelled"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":15,\"operation\":\"get_status\",\"result\":\"ok\",\"state\":\"DISARMED\",\"fault\":\"none\",\"uptime_ms\":1001,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":0,\"max_duration_ms\":30000,\"last_duration_ms\":0,\"remaining_ms\":0,\"move_last_duration_ms\":0,\"water_last_duration_ms\":0,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":false,\"operation\":\"\",\"result\":\"\",\"source\":\"none\",\"age_ms\":null},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1001,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"draft_status_facts\":\"设备当前有已保存草稿。这次状态查询没有保存、修改或取消任何草稿，不能把已有版本当成本次操作完成。只有本次compose返回draft_saved或draft_cancelled，才能确认相应操作完成。\",\"status_facts\":\"没有最近的动作回执，无法据此解释上一次动作。设备没有电量读数和实际动作反馈。\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":true,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":7,\"expires_in_ms\":299999,\"source\":\"voice\",\"steps\":[{\"direction\":\"left\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0,\"speed_percent\":100},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":1000,\"ignition_ms\":0,\"speed_percent\":100}],\"nominal_duration_ms\":2080}}"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":16,\"operation\":\"show_edit\",\"result\":\"draft_cancelled\",\"state\":\"DISARMED\",\"fault\":\"none\",\"uptime_ms\":1002,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":false,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":0,\"max_duration_ms\":30000,\"last_duration_ms\":0,\"remaining_ms\":0,\"move_last_duration_ms\":0,\"water_last_duration_ms\":0,\"move_remaining_ms\":0,\"water_remaining_ms\":0,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"none\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":false,\"operation\":\"\",\"result\":\"\",\"source\":\"none\",\"age_ms\":null},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1002,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 17,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "DISARMED",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 0,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 0,
+        "remaining_ms": 0,
+        "move_last_duration_ms": 0,
+        "water_last_duration_ms": 0,
+        "move_remaining_ms": 0,
+        "water_remaining_ms": 0,
+        "web_speed_percent": 100,
+        "move_speed_percent": 0,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "none",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "none",
+        "water_source": "none",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": false,
+          "operation": "",
+          "result": "",
+          "source": "none",
+          "age_ms": null
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "没有最近的动作回执，无法据此解释上一次动作。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    },
+    {
+      "id": "queued-then-invalid",
+      "passed": false,
+      "results": [
+        "accepted",
+        "accepted"
+      ],
+      "replies": [
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":1,\"operation\":\"water\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1002,\"logical_outputs\":{\"left\":0,\"right\":0,\"water\":true,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":1,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":0,\"water_last_duration_ms\":1000,\"move_remaining_ms\":0,\"water_remaining_ms\":1000,\"web_speed_percent\":100,\"move_speed_percent\":0,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"none\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"none\",\"water_source\":\"voice\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"water\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1002,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        },
+        {
+          "result": {
+            "content": [
+              {
+                "type": "text",
+                "text": "{\"device_id\":\"dddddddddddddddddddddddddddddddd\",\"boot_id\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"request_sequence\":2,\"operation\":\"move\",\"result\":\"accepted\",\"state\":\"ACTIVE\",\"fault\":\"none\",\"uptime_ms\":1100,\"logical_outputs\":{\"left\":100,\"right\":100,\"water\":true,\"bubbles\":false,\"ignition\":false},\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},\"local_authorization_required\":false,\"starts_this_boot\":2,\"max_duration_ms\":30000,\"last_duration_ms\":1000,\"remaining_ms\":1000,\"move_last_duration_ms\":1000,\"water_last_duration_ms\":1000,\"move_remaining_ms\":1000,\"water_remaining_ms\":902,\"web_speed_percent\":100,\"move_speed_percent\":100,\"speed_min_percent\":60,\"speed_max_percent\":100,\"move_max_duration_ms\":2147483647,\"move_direction\":\"forward\",\"log_events_dropped\":0,\"control_owner\":\"voice\",\"window\":0,\"move_cooldown_ms\":0,\"water_cooldown_ms\":0,\"boot_held\":false,\"move_source\":\"voice\",\"water_source\":\"voice\",\"drive_hold_id\":0,\"drive_renewal\":0,\"drive_lease_ms\":600,\"water_hold_id\":0,\"water_renewal\":0,\"bubbles_hold_id\":0,\"bubbles_renewal\":0,\"effect_lease_ms\":600,\"bubbles_last_duration_ms\":0,\"ignition_last_duration_ms\":0,\"bubbles_remaining_ms\":0,\"ignition_remaining_ms\":0,\"bubbles_max_duration_ms\":30000,\"ignition_max_duration_ms\":5000,\"bubbles_cooldown_ms\":0,\"ignition_cooldown_ms\":0,\"bubbles_source\":\"none\",\"ignition_source\":\"none\",\"frenzy_remaining_ms\":0,\"frenzy_last_duration_ms\":0,\"frenzy_source\":\"none\",\"frenzy_max_duration_ms\":30000,\"ignition_cooldown_policy\":\"equal_elapsed_on_time\", \"sequence_active\":false,\"sequence_step\":0,\"sequence_steps\":0,\"sequence_result\":\"idle\",\"sequence_max_steps\":16,\"proximity\":{\"auto_avoidance_enabled\":false,\"forward_blocked\":false,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},\"recent_command\":{\"valid\":true,\"operation\":\"move\",\"result\":\"accepted\",\"source\":\"voice\",\"age_ms\":0},\"distance\":{\"valid\":true,\"distance_mm\":600,\"error\":\"none\",\"sampled_at_ms\":1100,\"age_ms\":0,\"echo_us\":null,\"driver\":{\"last_failure\":\"none\",\"error_code\":0,\"failed_at_ms\":0,\"failures\":0,\"restarts\":0,\"retry_delay_ms\":0,\"recovering\":false},\"max_age_ms\":500,\"min_mm\":20,\"max_mm\":4000,\"auto_avoidance\":false},\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\",\"sequence_source\":\"none\",\"show_draft\":{\"active\":false,\"editing_capabilities\":{\"allowed\":[\"move\",\"bubbles\"],\"unsupported\":[\"water\",\"ignition\"],\"confirmation\":\"web\",\"explanation\":\"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。\"},\"revision\":0,\"expires_in_ms\":0,\"source\":\"none\",\"steps\":[],\"nominal_duration_ms\":0}}"
+              }
+            ],
+            "isError": false
+          }
+        }
+      ],
+      "final": {
+        "device_id": "dddddddddddddddddddddddddddddddd",
+        "boot_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_sequence": 3,
+        "operation": "get_status",
+        "result": "ok",
+        "state": "ACTIVE",
+        "fault": "none",
+        "uptime_ms": 1100,
+        "logical_outputs": {
+          "left": 100,
+          "right": 100,
+          "water": true,
+          "bubbles": false,
+          "ignition": false
+        },
+        "capabilities": {
+          "show_draft": true,
+          "distance": true,
+          "forward_protection": true,
+          "auto_avoidance": false,
+          "speed_control": true,
+          "sequence": true,
+          "frenzy": true,
+          "water_hold": true,
+          "bubbles_hold": true,
+          "move": true,
+          "water": true,
+          "move_and_water": true,
+          "bubbles": true,
+          "ignition": true
+        },
+        "local_authorization_required": false,
+        "starts_this_boot": 2,
+        "max_duration_ms": 30000,
+        "last_duration_ms": 1000,
+        "remaining_ms": 1000,
+        "move_last_duration_ms": 1000,
+        "water_last_duration_ms": 1000,
+        "move_remaining_ms": 1000,
+        "water_remaining_ms": 902,
+        "web_speed_percent": 100,
+        "move_speed_percent": 100,
+        "speed_min_percent": 60,
+        "speed_max_percent": 100,
+        "move_max_duration_ms": 2147483647,
+        "move_direction": "forward",
+        "log_events_dropped": 0,
+        "control_owner": "voice",
+        "window": 0,
+        "move_cooldown_ms": 0,
+        "water_cooldown_ms": 0,
+        "boot_held": false,
+        "move_source": "voice",
+        "water_source": "voice",
+        "drive_hold_id": 0,
+        "drive_renewal": 0,
+        "drive_lease_ms": 600,
+        "water_hold_id": 0,
+        "water_renewal": 0,
+        "bubbles_hold_id": 0,
+        "bubbles_renewal": 0,
+        "effect_lease_ms": 600,
+        "bubbles_last_duration_ms": 0,
+        "ignition_last_duration_ms": 0,
+        "bubbles_remaining_ms": 0,
+        "ignition_remaining_ms": 0,
+        "bubbles_max_duration_ms": 30000,
+        "ignition_max_duration_ms": 5000,
+        "bubbles_cooldown_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_source": "none",
+        "frenzy_remaining_ms": 0,
+        "frenzy_last_duration_ms": 0,
+        "frenzy_source": "none",
+        "frenzy_max_duration_ms": 30000,
+        "ignition_cooldown_policy": "equal_elapsed_on_time",
+        "sequence_active": false,
+        "sequence_step": 0,
+        "sequence_steps": 0,
+        "sequence_result": "idle",
+        "sequence_max_steps": 16,
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false,
+          "warn_below_mm": 500,
+          "stop_below_mm": 150,
+          "release_mm": 200
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "move",
+          "result": "accepted",
+          "source": "voice",
+          "age_ms": 0
+        },
+        "distance": {
+          "valid": true,
+          "distance_mm": 600,
+          "error": "none",
+          "sampled_at_ms": 1100,
+          "age_ms": 0,
+          "echo_us": null,
+          "driver": {
+            "last_failure": "none",
+            "error_code": 0,
+            "failed_at_ms": 0,
+            "failures": 0,
+            "restarts": 0,
+            "retry_delay_ms": 0,
+            "recovering": false
+          },
+          "max_age_ms": 500,
+          "min_mm": 20,
+          "max_mm": 4000,
+          "auto_avoidance": false
+        },
+        "actuator_backend": "concurrent_motor_effects_bench",
+        "physical_feedback": false,
+        "source": "cybertrack_audio_board",
+        "draft_status_facts": "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。",
+        "status_facts": "上次请求已被控制器接受，这条回执没有记录停止原因。设备没有电量读数和实际动作反馈。",
+        "sequence_source": "none",
+        "show_draft": {
+          "active": false,
+          "editing_capabilities": {
+            "allowed": [
+              "move",
+              "bubbles"
+            ],
+            "unsupported": [
+              "water",
+              "ignition"
+            ],
+            "confirmation": "web",
+            "explanation": "草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"
+          },
+          "revision": 0,
+          "expires_in_ms": 0,
+          "source": "none",
+          "steps": [],
+          "nominal_duration_ms": 0
+        }
+      }
+    }
+  ]
+}

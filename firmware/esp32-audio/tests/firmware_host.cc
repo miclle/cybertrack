@@ -5,6 +5,7 @@
 #include "draft_duration_intent.h"
 #include "vague_action_intent.h"
 #include "mcp_tool_types.h"
+#include "mcp_raw_json.h"
 #include <functional>
 #include <iostream>
 #include <memory>
@@ -40,6 +41,15 @@ public:
         owned_.emplace_back(new McpTool(name, description, properties, callback));
         tools_.push_back(owned_.back().get());
     }
+    std::string Catalog() const {
+        std::string result="[";
+        for (const auto* tool : tools_) {
+            if (result.size()>1) result+=",";
+            result+=tool->to_json();
+        }
+        return result+"]";
+    }
+    void RejectRobotInput(int id);
     void ReplyResult(int, const std::string& result) {
         reply = "{\"result\":" + result + "}";
         responses.push_back(reply);
@@ -76,6 +86,12 @@ static bool Advance(unsigned elapsed) {
     return true;
 }
 int main(int argc, char** argv) {
+    if (argc==2 && std::string(argv[1])=="--catalog") {
+        McpServer server;
+#include "host_registration.inc"
+        std::cout << server.Catalog() << '\n';
+        return 0;
+    }
     if (argc != 2 && (argc != 3 || std::string(argv[2]) != "--await-stt")) return 2;
     sessions.WifiLink(clock_ms,true);
     sessions.VoiceLink(clock_ms,true);
@@ -168,7 +184,32 @@ int main(int argc, char** argv) {
         const auto* defer=cJSON_GetObjectItemCaseSensitive(call,"defer");
         if (defer && !cJSON_IsBool(defer)) return 2;
         Application::GetInstance().defer=cJSON_IsTrue(defer);
-        server.DoToolCall(rpc ? rpc->valueint : ++id,tool,args);
+        const int tool_id=rpc ? rpc->valueint : ++id;
+        std::unique_ptr<cJSON,decltype(&cJSON_Delete)> frame(nullptr,cJSON_Delete);
+        if (const auto* raw=cJSON_GetObjectItemCaseSensitive(call,"raw_params")) {
+            if (!cJSON_IsString(raw)) return 2;
+            const std::string transport="{\"type\":\"mcp\",\"payload\":{\"method\":\"tools/call\",\"id\":"+
+                std::to_string(tool_id)+",\"params\":"+raw->valuestring+"}}";
+            frame.reset(cJSON_ParseWithOpts(transport.c_str(),nullptr,true));
+            int invalid_id=0;
+            if (RejectZeroInRobotMcp(transport,frame.get(),invalid_id)) {
+                server.RejectRobotInput(invalid_id);
+                Application::GetInstance().defer=false;
+                continue;
+            }
+            const auto* params=cJSON_GetObjectItemCaseSensitive(cJSON_GetObjectItemCaseSensitive(frame.get(),"payload"),"params");
+            const auto* raw_name=cJSON_GetObjectItemCaseSensitive(params,"name");
+            const auto* raw_args=cJSON_GetObjectItemCaseSensitive(params,"arguments");
+            if (!cJSON_IsString(raw_name) || std::strcmp(raw_name->valuestring,name->valuestring) ||
+                !((!raw_args && !args) || cJSON_Compare(raw_args,args,true))) return 2;
+            args=raw_args;
+        } else return 2; // A parsed tree alone cannot prove the original string value.
+        // Match the network lifetime: incoming arguments are released as soon
+        // as dispatch returns, including when the callback is still queued.
+        std::unique_ptr<cJSON,decltype(&cJSON_Delete)> owned(args ? cJSON_Duplicate(args,true) : nullptr,cJSON_Delete);
+        if (args && !owned) return 2;
+        server.DoToolCall(tool_id,tool,owned.get());
+        owned.reset();
         Application::GetInstance().defer=false;
         if (server.reply.empty() && !cJSON_IsTrue(defer)) return 3;
     }

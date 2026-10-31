@@ -10,6 +10,7 @@ from feedback_overlay import apply as apply_feedback_overlay
 from voice_turn_overlay import apply as apply_voice_turn_overlay
 from audio_overlay import apply as apply_audio_overlay
 from display_overlay import apply as apply_display_overlay
+from mcp_raw_overlay import apply as apply_mcp_raw_overlay
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -114,7 +115,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct68")')
+                 'set(PROJECT_VER "2.0.3-ct70")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
@@ -180,9 +181,10 @@ def main():
         shutil.copy2(ROOT / "firmware/esp32-linx/main" / name, board / name)
     apply_feedback_overlay(source, replace_once)
     apply_voice_turn_overlay(source, replace_once)
+    apply_mcp_raw_overlay(source, replace_once)
     apply_audio_overlay(source, replace_once)
     apply_display_overlay(source, replace_once)
-    for name in ("vague_action_intent.h", "draft_duration_intent.h", "spoken_duration.h", "spoken_playback.h", "admission_result.h", "status_facts.h", "voice_feedback.h", "show_draft.h", "show_command_json.h", "recent_command.h", "proximity_guard.h", "proximity_audio.h", "proximity_audio.cc", "distance_reading.h", "ultrasonic.h", "ultrasonic.cc", "cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
+    for name in ("mcp_raw_json.h", "vague_action_intent.h", "draft_duration_intent.h", "spoken_duration.h", "spoken_playback.h", "admission_result.h", "status_facts.h", "voice_feedback.h", "show_draft.h", "show_command_json.h", "recent_command.h", "proximity_guard.h", "proximity_audio.h", "proximity_audio.cc", "distance_reading.h", "ultrasonic.h", "ultrasonic.cc", "cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
         shutil.copy2(HERE / name, board / name)
     sounds = '#pragma once\n'
     for key, filename in (("ProximityBeep", "range-beep.ogg"), ("ProximityStop", "range-stop.ogg")):

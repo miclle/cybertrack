@@ -26,6 +26,17 @@ subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
                 str(Path(__file__).with_name('mcp_arguments_test.cc')), str(build/'cJSON.o'),
                 '-o', str(build/'mcp_arguments_test')], check=True)
 subprocess.run([str(build/'mcp_arguments_test')], check=True)
+
+raw_start = text.index('void McpServer::ParseMessage(const std::string& message) {')
+raw_end = text.index('\nvoid McpServer::ParseCapabilities(', raw_start)
+(build/'mcp_raw_parse.inc').write_text(text[raw_start:raw_end])
+subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson),
+                '-I', str(build),
+                '-I', str(root/'firmware/esp32-audio'),
+                str(Path(__file__).with_name('mcp_raw_json_test.cc')), str(build/'cJSON.o'),
+                '-o', str(build/'mcp_raw_json_test')], check=True)
+subprocess.run([str(build/'mcp_raw_json_test')], check=True)
+
 subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
                 '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
                 str(Path(__file__).with_name('mcp_validation_replay.cc')), str(build/'cJSON.o'),

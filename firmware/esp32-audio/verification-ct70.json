@@ -1,0 +1,24 @@
+{
+  "version": "2.0.3-ct70",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Raw robot MCP zero-prefix rejection at WebSocket, MQTT and direct SDK string boundaries; original 12 public tool schemas and 5991-character role unchanged. Candidate only, no deployment.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2715792,
+    "sha256": "3b86fb5b51348cffb0630c5ac44e92ef633d08f5ee4f2d3a0f113a1a8e828927"
+  },
+  "checks": [
+    "Complete ESP-IDF build passes.",
+    "Sixteen actual-dispatch scenarios pass on both plain and ASan/UBSan hosts; old ct68 violates eleven expectations in the same matrix.",
+    "Raw SDK string entry and shared guard cover cJSON prefix truncation, fractional/out-of-range numeric IDs, actual zero bytes, escaped backslash parity, valid stop and nonrobot frames.",
+    "Unchanged public schemas and role; actual model semantics not rescored.",
+    "Sixteen unified software check groups pass, including 98 Python improvement tests.",
+    "All 88 retained ct68 baseline request histories reproduce identical complete replies and final states through ct70.",
+    "Local ct70 source application and last-recorded ct45 deployment image sizes and SHA-256 checked separately; role remains equal to recorded platform sync."
+  ],
+  "pending": [
+    "Candidate not deployed. No device timing, speaker, actual movement, electrical or family acceptance.",
+    "Model false stops, narration and original semantic gates remain unresolved; no new model evaluation is claimed."
+  ]
+}
