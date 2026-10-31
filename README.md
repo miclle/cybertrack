@@ -11,14 +11,14 @@ CyberTrack 基于**灵矽语音与智能体能力**，面向家长陪同的亲�
 | **听懂先后，也能同时行动** | “先左转，再边走边吹泡泡”；语音转换为最多 16 步动作，一步内多路独立计时 |
 | **小D 泡泡剧场** | 登场、庆祝、谢幕，把台词、表情、履带和泡泡组合成可以一起创作的表演 |
 | **先编排，再开始** | 看清步骤后说“第二步短一点”或“去掉转向”，由家长明确开始表演 |
-| **点选 3D 模型，说出修改想法** | 通过 SolidCue 将评论绑定到零件、面、位置和版本，由当前对话协助原生 CAD 修改与恢复 |
+| **点选 3D 模型，说出修改想法** | 将评论绑定到零件、面、位置和版本，由当前对话协助原生 CAD 修改与恢复 |
 | **自己打印，也能维护和改造** | 切面头盔、履带底盘、前部双枪与可拆维护结构，提供 FreeCAD、STEP 和打印项目 |
 | **从电源到外壳，一起设计** | 电源分域、独立执行器断电、可维护线束与参数化部件模型，让外观和内部结构共同迭代 |
 | **手机和语音一起用** | 行走、喷水、泡泡各自控制；距离提示音、可选近距离停车和统一停止 |
 
 以上呈现产品体验与设计方向。当前可用范围、开发进度和验收记录统一从 [TODO](TODO.md) 查阅；亲子首次使用见[上手卡](docs/quick-start.md)。
 
-[第一次和小D互动](docs/quick-start.md) · [当前能力与版本](docs/current-status.md) · [产品改进计划](docs/improvement-plan.md) · [SolidCue 设计工具](tools/solidcue/README.md) · [模型与图纸](hardware/model/README.md) · [打印项目](hardware/model/lean-print/README.md)
+[第一次和小D互动](docs/quick-start.md) · [当前能力与版本](docs/current-status.md) · [产品改进计划](docs/improvement-plan.md) · [模型辅助设计工具](tools/solidcue/README.md) · [模型与图纸](hardware/model/README.md) · [打印项目](hardware/model/lean-print/README.md)
 
 ## 让灵矽从对话走进真实机器人
 
@@ -83,7 +83,7 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 2026-10-31 核对：最近记录的面包板部署为 **2.0.3-ct42**。支持语音与手机网页控制、60–100% 行走输出、四路独立计时、16 步并发动作序列和前方测距。距离提示音独立于行走状态；可选前进保护每次开机默认关闭，开启后小于 15 cm 停前进、至少 20 cm 解锁但不续走。
 
-当前版本、参数和证据统一见 [当前状态](docs/current-status.md)及[接口手册](firmware/CAPABILITIES.md)。[产品改进执行计划](docs/improvement-plan.md)跟踪上手体验、语音回归、编排玩法、实机验收及 SolidCue 单件设计接入；计划功能不代表已经部署。
+当前版本、参数和证据统一见 [当前状态](docs/current-status.md)及[接口手册](firmware/CAPABILITIES.md)。[产品改进执行计划](docs/improvement-plan.md)跟踪上手体验、语音回归、编排玩法、实机验收及单件模型辅助设计；计划功能不代表已经部署。
 
 已有基本装配样机、运行影像和分项现场反馈。整机供电、持续带载、停止性能和完整故障验收尚未完成；CAD、主机测试、部署回读与实物结果分别记录。现用电源为辰克 5 V 电池包及 12 V 升压电机支路，旧电源台架结果不迁移。点火低压控制不代表高压、绝缘、液体共存或 EMC 验收。
 
