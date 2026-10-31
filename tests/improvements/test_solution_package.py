@@ -25,7 +25,7 @@ class SolutionPackageTest(unittest.TestCase):
         data = package.build_archive(ROOT, paths, "test-revision", False)
         self.assertEqual(data, package.build_archive(ROOT, paths, "test-revision", False))
         with tempfile.TemporaryDirectory() as folder, zipfile.ZipFile(io.BytesIO(data)) as archive:
-            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json"})
+            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json"})
             manifest = json.loads(archive.read("MANIFEST.json"))
             self.assertEqual(manifest["files"]["START_HERE.md"]["sha256"], hashlib.sha256(archive.read("START_HERE.md")).hexdigest())
             archive.extractall(folder)
@@ -34,12 +34,17 @@ class SolutionPackageTest(unittest.TestCase):
             result = json.loads(subprocess.check_output(cli, cwd=folder, text=True))
             self.assertEqual(result["scores"]["compose"]["scored"], 8)
             self.assertEqual(result["scores"]["voice"]["scored"], 80)
+            self.assertEqual(result["candidate_scores"]["voice"]["scored"], 80)
+            self.assertEqual(result["candidate_scores"]["compose"]["scored"], 8)
             self.assertNotIn("device_id", manifest["firmware"])
-            replay = root/"replay/voice.json"
-            replay.write_bytes(replay.read_bytes()+b" ")
-            failed = subprocess.run(cli, cwd=folder, capture_output=True, text=True)
-            self.assertNotEqual(failed.returncode, 0)
-            self.assertIn("differs from manifest", failed.stderr)
+            for name in ("replay/voice.json", "replay/ct57/voice.json"):
+                replay = root/name
+                original = replay.read_bytes()
+                replay.write_bytes(original+b" ")
+                failed = subprocess.run(cli, cwd=folder, capture_output=True, text=True)
+                self.assertNotEqual(failed.returncode, 0)
+                self.assertIn("differs from manifest", failed.stderr)
+                replay.write_bytes(original)
 
     def test_extensionless_license_and_notice_remain_explicit(self):
         with tempfile.TemporaryDirectory() as folder:
