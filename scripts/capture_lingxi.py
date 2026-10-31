@@ -38,7 +38,7 @@ def fixture(context):
         status[channel+'_cooldown_ms']=0
         status[channel+'_source']='none'
     if '当前速度70%' in context:
-        status.update(state='ACTIVE',move_direction='forward',move_speed_percent=70,move_remaining_ms=4000,move_source='voice')
+        status.update(state='ACTIVE',starts_this_boot=1,move_direction='forward',move_speed_percent=70,move_remaining_ms=4000,move_source='voice')
         status['logical_outputs'].update(left=70,right=70)
     if 'revision=7' in context:
         steps=json.loads(re.search(r'steps=(\[.*\])；',context).group(1))
@@ -70,6 +70,13 @@ def simulated_reply(status, name, args):
     result['operation']=name.removeprefix('self.tank.')
     if name=='self.tank.stop':
         result.update(result='ok',fault='stopped',state='STOPPED')
+        result.update(move_direction='none',move_speed_percent=0,drive_hold_id=0,water_hold_id=0,
+                      bubbles_hold_id=0,frenzy_remaining_ms=0,sequence_active=False)
+        if status['sequence_active']:result['sequence_result']='cancelled'
+        for channel in ('move','water','bubbles','ignition'):
+            result[channel+'_remaining_ms']=0
+            result[channel+'_source']='none'
+        result['recent_command']=dict(valid=True,operation='stop',result='ok',source='voice',age_ms=0)
         result['logical_outputs']=dict(left=0,right=0,water=False,bubbles=False,ignition=False)
         result['show_draft']=dict(active=False,revision=0,steps=[],expires_in_ms=0)
     elif name=='self.tank.compose':
