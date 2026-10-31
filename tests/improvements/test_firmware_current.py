@@ -18,9 +18,10 @@ class FirmwareCurrentTests(unittest.TestCase):
             (audio/'apply_overlay.py').write_text('set(PROJECT_VER "2.0.3-ct45")')
             (audio/'role-prompt.txt').write_text('new role')
             digest=hashlib.sha256(b'new role').hexdigest()
-            deployment={'version':'2.0.3-ct45','platform_role':{'sha256':'old role'}}
+            image={'bytes':3,'sha256':hashlib.sha256(b'app').hexdigest()}
+            deployment={'flash':image,'version':'2.0.3-ct45','platform_role':{'sha256':'old role'}}
             (fw/'startup.json').write_text(json.dumps(deployment))
-            (fw/'software.json').write_text(json.dumps({'version':'2.0.3-ct45'}))
+            (fw/'software.json').write_text(json.dumps({'version':'2.0.3-ct45','artifact':image}))
             current={'source_version':'2.0.3-ct45','role_sha256':digest,'last_recorded_deployment':'startup.json',
                      'software_evidence':'software.json','deployment_relation':'matches_recorded_version','physical_acceptance':'incomplete'}
             (fw/'current.json').write_text(json.dumps(current))
@@ -36,3 +37,22 @@ class FirmwareCurrentTests(unittest.TestCase):
             (fw/'current.json').write_text(json.dumps(current))
             (fw/'role-sync.json').write_text(json.dumps(deployment))
             self.assertFalse(module.check(root)['role_matches_recorded_sync'])
+
+            # A new role can be pending even when the application version is unchanged.
+            (root/'app.bin').write_bytes(b'app')
+            verified=module.check(root, root/'app.bin', root/'app.bin')
+            self.assertTrue(verified['local_source_image_checked'])
+            self.assertEqual(verified['deployed_image'],image)
+            (root/'app.bin').write_bytes(b'bad')
+            with self.assertRaisesRegex(ValueError,'application image does not match'):
+                module.check(root, source_bin=root/'app.bin')
+            with self.assertRaisesRegex(ValueError,'application image does not match'):
+                module.check(root, deployed_bin=root/'app.bin')
+            (fw/'software.json').write_text(json.dumps({'version':'2.0.3-ct44','artifact':image}))
+            with self.assertRaisesRegex(ValueError,'evidence version'):
+                module.check(root)
+            (fw/'software.json').write_text(json.dumps({'version':'2.0.3-ct45','esp_idf_build':image}))
+            self.assertEqual(module.check(root)['source_image'],image)
+            (fw/'role-sync.json').write_text(json.dumps({'version':'2.0.3-ct44','platform_role':{'sha256':digest}}))
+            with self.assertRaisesRegex(ValueError,'deployment version'):
+                module.check(root)
