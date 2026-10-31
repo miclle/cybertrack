@@ -12,6 +12,7 @@
     "Admission refusal is serialized through a shared C++ helper into MCP content with result=rejected; all other admission failures retain RPC errors.",
     "Host tests exercise set_speed and adjust_speed rejection serialization with quotes, Chinese and newlines. No accepted state can be inferred from the rejected result.",
     "Prepared MCP path returns before scheduling a tool when a ticket was not issued; allocation failure falls back to the original RPC error.",
-    "MCP/web host checks passed, including no new starts after idle/offline refusal and preserved deadline/direction for accepted speed changes."
+    "MCP/web host checks passed, including no new starts after idle/offline refusal and preserved deadline/direction for accepted speed changes.",
+    "Seven control, protocol, web and audio check groups passed against ct57. An improvement-suite failure exposed the experimental flag in default input; after preserving the original input shape, all 64 improvement tests passed."
   ]
 }

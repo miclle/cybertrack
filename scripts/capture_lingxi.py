@@ -303,7 +303,8 @@ async def run(args):
             case.update(host_binary=binary.resolve(), initial_profile='two_step_web_draft' if draft_host else speed_host)
     for case in cases:
         case['fixture_version']=version
-        case['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
+        if getattr(args,'admission_result_fixture',False):
+            case['admission_result_fixture']=True
         if getattr(args,'audio_packets',False): case['audio_packets']=True
     trace=dict(fixture_version=version,kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
                model_source='visible platform configuration; no model identity in WSS response',role_sha256=hashlib.sha256(args.role.read_bytes()).hexdigest(),
