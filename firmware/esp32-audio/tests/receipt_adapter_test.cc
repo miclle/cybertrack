@@ -1,6 +1,7 @@
 // Compile the actual Reply function with real guards and a controlled clock/IO.
 #include "control_sessions.h"
 #include "recent_command.h"
+#include "status_facts.h"
 #include "web_request.h"
 #include "cJSON.h"
 #include <algorithm>
@@ -35,7 +36,10 @@ int main() {
     sessions.WifiLink(clock_ms, true);
     const auto session = sessions.Acquire(clock_ms);
     auto initial = cJSON_Parse(Reply("get_status", 0, 0, nullptr, 0, session).c_str());
-    assert(initial);
+    assert(initial && field(initial, "status_facts").find("没有最近") != std::string::npos);
+    assert(StatusFacts("output_fault", true, false, false, "").find("旧动作不会恢复") != std::string::npos);
+    assert(StatusFacts("none", false, true, false, "accepted").find("步骤间等待") != std::string::npos);
+    assert(StatusFacts("none", false, true, true, "").find("步骤间等待") == std::string::npos);
     assert(!cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(cJSON_GetObjectItemCaseSensitive(initial,"recent_command"),"valid")));
     cJSON_Delete(initial);
     WebCommand command;

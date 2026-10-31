@@ -39,6 +39,9 @@ def export(source, idf, output):
     cjson = idf / 'components/json/cJSON'
     subprocess.run(['cc', '-c', '-I', str(cjson), str(cjson/'cJSON.c'), '-o', str(build/'cJSON.o')], check=True, capture_output=True)
     subprocess.run(['c++', '-std=c++17', '-I', str(build), '-I', str(header.parent), '-I', str(cjson), str(build/'export.cc'), str(build/'cJSON.o'), '-o', str(build/'export')], check=True, capture_output=True)
+    subprocess.run(['c++', '-std=c++17', '-I', str(cjson), '-I', str(registration.parent),
+                    str(ROOT/'scripts/lingxi_status_fixture.cc'), str(build/'cJSON.o'),
+                    '-o', str(build/'status-fixture')], check=True)
     schemas = json.loads(subprocess.check_output([str(build/'export')], text=True))
     if len({s['name'] for s in schemas}) != 12:
         raise ValueError('duplicate tool schemas')
