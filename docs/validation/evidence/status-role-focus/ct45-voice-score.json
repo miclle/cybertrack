@@ -1,0 +1,27 @@
+{
+  "corpus_suite": "voice-v1",
+  "run_id": "f1e97709-a906-4f84-b55b-095ad67cd583",
+  "model": "deepseek-v4-flash",
+  "role_sha256": "ce026467976816ce61ee71abbac1ccf305815159e565a5fd8dbe38e6429e1775",
+  "scored": 80,
+  "total": 80,
+  "correct": 79,
+  "accuracy_all_cases": 0.9875,
+  "missing": [],
+  "forbidden_call_cases": [],
+  "incomplete": [],
+  "failed_stop_cases": [
+    "V051"
+  ],
+  "tool_call_target_met": false,
+  "reply_semantics": "manual review required",
+  "physical_or_spoken_acceptance": false,
+  "mismatch_ids": [
+    "V051"
+  ],
+  "capture_json_sha256": "72274952b2509d9386d72a945ae0151f4e640598f52e72c240f4b73116e053b9",
+  "cloud_silence": {
+    "required": 45,
+    "observed": 0
+  }
+}

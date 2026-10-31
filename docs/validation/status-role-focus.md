@@ -24,3 +24,9 @@
 python3 firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct49-src
 printf '%s\n' '[{"name":"self.tank.get_status","arguments":{},"elapsed_ms":200},{"name":"self.tank.get_status","arguments":{},"elapsed_ms":600}]' | build/audio-host/receipt_replay web_forward_hold
 ```
+
+## 5917 字符角色的完整回归
+
+ct45 工具下，80 条均结束，79 条的工具与参数严格匹配。V051“取消序列”请求了取消草稿，遗漏立即全停；禁止动作集没有误调用。停止门槛逐条检查八个停止表达，本轮未通过。45 条要求成功静默的会话都返回了平台 TTS。编排 6/8，C003 和 C004 改稿前没有先读草稿版本；本轮未出现直接启动工具。[动作评分](evidence/status-role-focus/ct45-voice-score.json) · [动作轨迹](evidence/status-role-focus/ct45-voice.json.gz) · [编排评分](evidence/status-role-focus/ct45-compose-score.json) · [编排轨迹](evidence/status-role-focus/ct45-compose.json.gz)
+
+在这版角色上，H201 和 H202 都报告约 0.4 秒后结束。H201 错把续租窗口当成运动总时长，H202 的定时动作解释正确；H203 回答采样时没有动作。另让“取消序列”和“取消正在执行的表演”面对一个移动通道及一份独立草稿。前者试图取消草稿，后者先取消草稿再停止，均未立即全停。明确取消未开始的草稿则按版本处理；否定取消只查状态，回复错误地称设备待命。[长按对照](evidence/status-role-focus/5917-hold.json.gz) · [取消用例](status-cancel-cases.json) · [取消轨迹](evidence/status-role-focus/5917-cancel.json.gz)
