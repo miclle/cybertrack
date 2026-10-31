@@ -48,6 +48,7 @@ def summarize(directory, replay, version):
             if suite in ('voice', 'compose'):
                 score = evaluate(corpus, trace)
                 row.update(exact=score['correct'], forbidden=score['forbidden_call_cases'],
+                           failed_stops=score['failed_stop_cases'],
                            mismatches=[r['id'] for r in score['results'] if not r['tool_calls_match']])
             if suite == 'voice':
                 silent = {c['id'] for c in corpus['cases'] if '成功静默' in c['response_expectation']}

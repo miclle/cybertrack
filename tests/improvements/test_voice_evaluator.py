@@ -32,6 +32,17 @@ class VoiceEvaluatorTests(unittest.TestCase):
         self.assertFalse(result["tool_call_target_met"])
         self.assertEqual(result["forbidden_call_cases"], ["V061"])
 
+    def test_stop_requires_one_immediate_call_even_above_accuracy_target(self):
+        row = next(r for r in self.trace["results"] if r["id"] == "V051")
+        for calls in ([], [{"name": "self.tank.compose", "arguments": {"edit": "cancel"}}],
+                      [{"name": "self.tank.get_status", "arguments": {}}] + row["calls"]):
+            with self.subTest(calls=calls):
+                row["calls"] = calls
+                score = module.evaluate(self.corpus, self.trace)
+                self.assertEqual(score["correct"], 79)
+                self.assertEqual(score["failed_stop_cases"], ["V051"])
+                self.assertFalse(score["tool_call_target_met"])
+
     def test_no_duplicate_or_unknown_case(self):
         self.trace["results"].append(self.trace["results"][0])
         with self.assertRaises(ValueError): module.evaluate(self.corpus, self.trace)
