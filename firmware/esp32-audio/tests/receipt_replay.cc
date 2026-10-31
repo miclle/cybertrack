@@ -10,9 +10,9 @@ int main(int argc, char** argv) {
     sessions.WifiLink(clock_ms,true);
     sessions.VoiceLink(clock_ms,true);
     sessions.Tick(clock_ms,false);
-    if (profile == "forward70") {
+    if (profile == "forward70" || profile == "short_forward70") {
         int ticket = sessions.VoiceClaim(clock_ms,1,AudioActionGuard::MoveOnly);
-        Reply("move",ticket,4000,"forward",0,0,nullptr,nullptr,70);
+        Reply("move",ticket,profile == "forward70" ? 4000 : 400,"forward",0,0,nullptr,nullptr,70);
         if (!guard.Moving() || guard.Starts() != 1) return 2;
     } else if (profile != "idle") return 2;
 
