@@ -13,6 +13,7 @@
   <a href="#样机演示">演示</a> ·
   <a href="#项目亮点">亮点</a> ·
   <a href="#应用场景与商业价值">应用价值</a> ·
+  <a href="#软件架构">架构</a> ·
   <a href="#从这里开始">快速开始</a> ·
   <a href="TODO.md">进度</a>
 </p>
@@ -122,6 +123,73 @@ CyberTrack 将灵矽的对话能力落到三个相互配合的层面：
 开发者可以沿着“理解表达 → 调用工具 → 设备执行 → 返回状态”的链路定位问题，并通过参考材料包复用角色、接口与评测方法。项目也整理了角色版本管理、工具试运行和分层日志等平台建议，供方案迭代讨论。
 
 [完整解决方案](docs/lingxi-solution.md) · [导出参考材料包](tools/lingxi-solution/README.md) · [设备能力契约](firmware/CAPABILITIES.md) · [角色配置](docs/agent-role.md)
+
+## 软件架构
+
+**云端理解意图，设备管理动作。** 日常语音由面包板直接连接灵矽，音频、角色对话与 MCP 工具调用沿同一设备会话运行；手机网页由设备本地提供。两种控制入口汇入同一套设备端会话、编排和执行逻辑，无需电脑代理。
+
+```mermaid
+flowchart TB
+  CLOUD["灵矽语音与智能体"] -->|MCP 工具| CHECK
+  WEB["手机局域网网页"] -->|HTTP| CHECK
+  subgraph DEVICE["ESP32-S3 面包板 · 设备端"]
+    CHECK["接口校验 / 来源仲裁"]
+    CHECK -->|直接动作| RUN["动作调度与本地截止"]
+    CHECK -->|表演编排| DRAFT["草稿保存 · 预览 · 版本校验"]
+    DRAFT -->|网页显式确认| RUN
+    GUARD["BOOT / 全部停止<br/>测距与可选前进保护"] -->|本地优先处理| RUN
+    RUN --> OUT["GPIO / PWM<br/>执行器低压控制"]
+  end
+```
+
+*图示为动作请求路径；音频传输、只读状态查询和回执返回为并行链路。草稿编辑不产生输出，普通直接动作不经过草稿确认。*
+
+<table>
+  <thead><tr><th width="112">模块</th><th>负责什么</th></tr></thead>
+  <tbody>
+    <tr><td><strong>语音与网页</strong></td><td>灵矽选择受限业务工具；网页发送操控与编排请求。两者查询设备状态，不暴露通用 GPIO 云端控制。</td></tr>
+    <tr><td><strong>会话与编排</strong></td><td>校验参数、请求时效和来源；处理网页租期与同通道优先级；管理草稿版本、确认、取消及最多 16 步序列。</td></tr>
+    <tr><td><strong>本地执行</strong></td><td>步骤内并发、步骤间串行，行走／喷水／泡泡／点火低压四路独立计时；停止、故障及连接变化按各自规则处理，不自动恢复旧动作。</td></tr>
+    <tr><td><strong>状态与反馈</strong></td><td>返回逻辑输出、剩余时间、动作回执及有效测距，供网页和语音解释；当前没有轮速、水流或电流反馈。</td></tr>
+  </tbody>
+</table>
+
+本地截止不依赖云端再次发送停止。BOOT／全部停止与 Wi-Fi 断线全停；语音断线、网页失租按来源处理。前进保护每次开机默认关闭，开启后才根据距离阻止或停止前进，解锁后仍需新指令。
+
+当前整机实现位于 [esp32-audio](firmware/esp32-audio/README.md)，通过 overlay 接入固定小智源码与 ESP-IDF v5.5.1。仓库另有用于主机验证的通用 C11 控制核心；它的本地使能和持久化契约不等于面包板已部署能力。CAD 辅助设计在电脑端独立运行，也不参与机器人实时控制。
+
+[系统架构详解](docs/architecture.md) · [能力与接口](firmware/CAPABILITIES.md) · [编排契约](docs/show-composer.md) · [当前部署与验证](docs/current-status.md)
+
+## 硬件架构
+
+**主控、动力与效果分支各司其职，结构围绕装配和维护组织。** 头舱容纳面包板、音频、OLED 与超声波；底盘承载电池、电机驱动和双履带；水枪与泡泡枪各有独立控制支路，降压模块集成在各自枪体内。
+
+下图概括 **A2 模块级供电设计**。标注“待选”或“禁用”的部分尚未落实为已验收硬件，整图不表示样机当前已按图接线。
+
+```mermaid
+flowchart TB
+  BAT["辰克 5 V 电池包"] --> POWER["输入保护 / 主电源分配<br/>U2、U3 待选"]
+  POWER --> CTRL["主控支路<br/>ESP32-S3 面包板"]
+  POWER --> CUT["执行器支路 / SW2<br/>切断器件待选"]
+  CTRL --> AV["音频 / OLED<br/>超声波使用主控 3.3 V"]
+  CUT --> BOOST["MT3608 升压至 12 V"]
+  BOOST --> DRIVE["L298N → 左右电机与履带"]
+  CUT --> MOS["水枪、泡泡各自 MOS<br/>受控 5 V → 枪内降压"]
+  MOS --> EFFECT["3.7 V 水枪 / 泡泡机"]
+  CUT -.-> IGN["点火低压预留<br/>A2 禁用装配"]
+  classDef pending fill:#fff4dc,stroke:#a36b00,color:#5c3d00,stroke-dasharray:5 5
+  class POWER,CUT,IGN pending
+```
+
+*连线表示供电功能关系，省略了支路保护、控制信号和回流端点；具体连接以原理图和接线表为准。*
+
+- **主控与执行器分域：** SW2 的设计目标是切断执行器供能、保留主控运行。它与 BOOT 软件停止不同，器件额定、残余储能及实际切断仍需验证。
+- **功率路径与信号分开：** ESP32-S3 通过 GPIO／PWM 控制 L298N 和 MOS，负载由对应功率支路供电。水枪与泡泡的 MOS 位于降压前，各路受控负极不能额外并回系统地。
+- **模块可拆、接口可查：** 可拆冠盖、面包板托盘、底部维护入口与独立枪体便于分模块检修；原生 CAD、BOM 和六页 KiCad 原理图共同记录结构及接口。
+
+电池带载能力、完整电流预算、保护定值和温升仍待实测。四路软件并发不代表组合负载已验收；点火低压固件能力也不改变 A2 的禁用装配边界。
+
+[硬件架构与电源预算](hardware/architecture/README.md) · [KiCad 原理图](hardware/schematic/README.md) · [接线总表](docs/wiring.md) · [BOM](hardware/BOM.md) · [机械模型](hardware/model/README.md)
 
 ## 从这里开始
 
