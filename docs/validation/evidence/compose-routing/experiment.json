@@ -1,0 +1,175 @@
+{
+  "scope": "Diagnostic description prefixes only; real platform raw text, actual full firmware host; no board IO",
+  "host_sha256": "d79280610fbc0076cdc2abdba3ebde8b6d76a11319e5f8213229f8477d9e98c4",
+  "corpus": "docs/validation/compose-cases.json",
+  "schemas": {
+    "baseline": {
+      "file": "baseline-schema.json",
+      "sha256": "19af1bd295a49f066fe25a3915d82dab0f0cecee2150a68e8be0600010c4b6f1"
+    },
+    "route": {
+      "file": "route-schema.json",
+      "sha256": "cf3c7314376fdb47ee5ef0758a2ebfa92d56c913a30b8cd3fbf1d443d3aca2dc"
+    }
+  },
+  "runs": [
+    {
+      "group": "baseline",
+      "case_id": "C005",
+      "round": 1,
+      "capture": "baseline-C005-1.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [
+        "self.tank.get_status"
+      ],
+      "elapsed_ms": 26525,
+      "capture_json_sha256": "0442fec39ed7c4c1bf2f5828938185738c0377c7eb5c8b4a9ff1164105a21180"
+    },
+    {
+      "group": "route",
+      "case_id": "C005",
+      "round": 1,
+      "capture": "route-C005-1.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [],
+      "elapsed_ms": 6111,
+      "capture_json_sha256": "d045a9717c6c135f4174ec59e2761c4f3f64b96c0834f59e57e878167589a79a"
+    },
+    {
+      "group": "baseline",
+      "case_id": "C008",
+      "round": 1,
+      "capture": "baseline-C008-1.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [
+        "self.tank.get_status"
+      ],
+      "elapsed_ms": 19668,
+      "capture_json_sha256": "8c57d9ef60c1eaa777bd9e2924cdcf909662941e13a99ea3f7deda29c15a96a0"
+    },
+    {
+      "group": "route",
+      "case_id": "C008",
+      "round": 1,
+      "capture": "route-C008-1.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [],
+      "elapsed_ms": 12898,
+      "capture_json_sha256": "05d8ba5858c5a759ed54c3d9efdb78c5808bb3867b9f89f99ccf246f85f16f52"
+    },
+    {
+      "group": "route",
+      "case_id": "C005",
+      "round": 2,
+      "capture": "route-C005-2.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [],
+      "elapsed_ms": 9258,
+      "capture_json_sha256": "248616dcb50af821e29decf014064efd83b2c33ea60a5a954b022a589be34ed4"
+    },
+    {
+      "group": "baseline",
+      "case_id": "C005",
+      "round": 2,
+      "capture": "baseline-C005-2.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [],
+      "elapsed_ms": 10483,
+      "capture_json_sha256": "2a62d74f715afd40a4df708d346b8212c9ca748f25a4b18190bbbf103d1852c3"
+    },
+    {
+      "group": "route",
+      "case_id": "C008",
+      "round": 2,
+      "capture": "route-C008-2.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "elapsed_ms": 24002,
+      "capture_json_sha256": "4c1fb730427c58b0e826c4f152b12f4fcfd9186388e4b9bbc18e3a3ac5ebbbbb"
+    },
+    {
+      "group": "baseline",
+      "case_id": "C008",
+      "round": 2,
+      "capture": "baseline-C008-2.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [],
+      "elapsed_ms": 4405,
+      "capture_json_sha256": "44e48ce1a3199af121bd819b1684b35ea0e807886fdae71e95e4ec94807a7627"
+    },
+    {
+      "group": "baseline",
+      "case_id": "C005",
+      "round": 3,
+      "capture": "baseline-C005-3.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [
+        "self.tank.get_status"
+      ],
+      "elapsed_ms": 26970,
+      "capture_json_sha256": "e89222ca3da7c3d6475604d059d2e21abed9879aa7a8874542109b0217128c17"
+    },
+    {
+      "group": "route",
+      "case_id": "C005",
+      "round": 3,
+      "capture": "route-C005-3.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [],
+      "elapsed_ms": 5784,
+      "capture_json_sha256": "06889a32365e98a3f8716d7c262f2c5c406fd966b3982fa806668dec77c8f252"
+    },
+    {
+      "group": "baseline",
+      "case_id": "C008",
+      "round": 3,
+      "capture": "baseline-C008-3.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [
+        "self.tank.get_status"
+      ],
+      "elapsed_ms": 7112,
+      "capture_json_sha256": "9a135ff216efd81ce8729ef12a50024b5e33706771210c906b476bbf1de36c57"
+    },
+    {
+      "group": "route",
+      "case_id": "C008",
+      "round": 3,
+      "capture": "route-C008-3.json.gz",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "tools": [],
+      "elapsed_ms": 15127,
+      "capture_json_sha256": "3876160ae3da8d84c88d982d3c6e0479b6fb74d1eaee6268b2cd2b789f1a072b"
+    }
+  ],
+  "source_commit": "591197367734dbe0369dae4d9184feed43c8ea22",
+  "all_rpc_replies_replayed_equal": true,
+  "all_final_states_replayed_equal": true
+}
