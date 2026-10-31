@@ -74,7 +74,7 @@ static bool Advance(unsigned elapsed) {
     return true;
 }
 int main(int argc, char** argv) {
-    if (argc != 2) return 2;
+    if (argc != 2 && (argc != 3 || std::string(argv[2]) != "--await-stt")) return 2;
     sessions.WifiLink(clock_ms,true);
     sessions.VoiceLink(clock_ms,true);
     sessions.Tick(clock_ms,false);
@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
 
     // Bootstrap requests belong to setup, not the captured platform RPC epoch.
     guard.NewVoiceSession();
-    CyberTrackVoiceInput("captured host input");
+    if (argc == 2) CyberTrackVoiceInput("captured host input");
     McpServer server;
 #include "host_registration.inc"
     std::string input;

@@ -58,6 +58,15 @@ def check(executable):
     assert result(rows[0])['result']=='voice_input_changed' and 'error' in rows[1]
     assert result(rows[2])['result']=='accepted' and rows[-1]['starts_this_boot']==1
 
+    rows=firmware_replay(executable,'corpus_idle',[
+        call('water',{'duration_ms':1000}),call('get_status',{},1,2),call('stop',{},2,3),
+        dict(input_text=' \t',elapsed_ms=3),call('water',{'duration_ms':1000},4,4),
+        dict(input_text='喷水',elapsed_ms=5),call('water',{'duration_ms':1000},5,5)],await_stt=True)
+    assert 'voice_input_changed' in rows[0]['error']['message']
+    assert result(rows[1])['result']=='ok' and result(rows[2])['result']=='ok'
+    assert 'error' in rows[3] and result(rows[4])['result']=='accepted'
+    assert rows[-1]['starts_this_boot']==1
+
     rows=firmware_replay(executable,'corpus_forward70',[
         invalid,call('stop',{},10,2),dict(inspect_ms=60000)])
     assert result(rows[1])['result']=='ok' and not any(rows[-1]['logical_outputs'].values())
@@ -85,7 +94,7 @@ def check(executable):
         replayed.append(dict(id=row['id'],results=[wire.get('error',{}).get('message') if 'error' in wire else result(wire)['result'] for wire in rows[:-1]],final_revision=7,starts=0))
     assert len(replayed)==4
     return dict(scope='Offline protocol and archived request replay only; input/timing and deferred scheduling simulated; no new model run or board IO',
-                synthetic_scenarios=8,invalid_then_retry_blocked=True,stops_available=True,new_input_recovers=True,
+                synthetic_scenarios=9,await_stt_mode_checked=True,invalid_then_retry_blocked=True,stops_available=True,new_input_recovers=True,
                 caller_cannot_set_input_token=True,
                 stale_callbacks_and_reads_isolated=True,rpc_replay_preserved=True,reconnect_requires_input=True,
                 source_capture_gzip_sha256=hashlib.sha256(raw).hexdigest(),archived_cases=replayed)
