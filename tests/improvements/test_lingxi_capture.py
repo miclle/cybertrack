@@ -27,6 +27,17 @@ class CaptureTests(unittest.TestCase):
         self.assertEqual(seen,tools)
         with self.assertRaises(ValueError):module.tools_page([dict(name='self.tank.big',description='x'*9000)])
 
+    def test_stop_clears_active_motion_without_another_start(self):
+        status = module.fixture('向前行走，当前速度70%')
+        stopped = module.simulated_reply(status,'self.tank.stop',{})
+        self.assertEqual(status['move_remaining_ms'],4000)
+        self.assertEqual(stopped['move_remaining_ms'],0)
+        self.assertEqual(stopped['move_speed_percent'],0)
+        self.assertEqual(stopped['move_direction'],'none')
+        self.assertEqual(stopped['move_source'],'none')
+        self.assertEqual(stopped['starts_this_boot'],status['starts_this_boot'])
+        self.assertEqual(stopped['recent_command']['operation'],'stop')
+
     def test_fixture_draft_preserves_non_target_and_source(self):
         corpus=json.loads((ROOT/'docs/validation/compose-cases.json').read_text())
         status=module.fixture(corpus['cases'][1]['context']);before=copy.deepcopy(status)
