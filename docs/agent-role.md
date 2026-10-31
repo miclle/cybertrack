@@ -22,6 +22,8 @@
 
 ct55 在调速票据被拒绝时提供请求时刻的未移动、Wi-Fi 离线、语音链路离线或关机状态。选择错误信息与请求票据共用控制锁，其他拒绝保留通用说明。角色按明确回执回答，模糊错误不能推断具体原因。[构建检查](../firmware/esp32-audio/verification-ct55.json)
 
+ct60 的泡泡工具说明强调先将超三十秒请求的参数设为 30000，不能以口头说明上限代替合法参数。设备端范围校验继续拒绝越界，捕获工具可用同段 MCP 校验代码核对参数。[构建检查](../firmware/esp32-audio/verification-ct60.json)
+
 ct59 的状态查询增加 `draft_status_facts`，按当前草稿状态说明已有或没有已保存草稿，并指出该查询没有产生保存、修改或取消回执。字段仅随状态查询返回，保存回执仍以操作结果与新版本为准。[构建检查](../firmware/esp32-audio/verification-ct59.json)
 
 ct58 的编排工具说明明确区分查询、提交和保存回执。只有本次实际收到 `draft_saved` 与新版本才可说已保存，取消必须取得 `draft_cancelled`；未提交不能声称完成。平台行为按独立回归记录核对。[构建与主机检查](../firmware/esp32-audio/verification-ct58.json)

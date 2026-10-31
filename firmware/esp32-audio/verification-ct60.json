@@ -1,0 +1,17 @@
+{
+  "version": "2.0.3-ct60",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Bubble duration guidance and actual parameter-gate replay; no physical acceptance.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2704928,
+    "sha256": "e6fe53657c5d5c3a0d017b046e1f371f386cfd138fbcb67f12041a83f9735d10"
+  },
+  "checks": [
+    "ct59 and ct60 generated MCP parameter-validation blocks are byte identical.",
+    "Exported schema comparison: only the bubbles description differs; all tool names and parameters are unchanged.",
+    "Actual parameter gate accepts 30000 ms and rejects 60000 ms, boolean duration and extra keys. Stop is an inert host stub.",
+    "Capture tests verify rejected parameters skip simulated acceptance and receipt decorators, preserve the actual request, and return the original RPC error."
+  ]
+}

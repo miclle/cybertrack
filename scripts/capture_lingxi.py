@@ -217,14 +217,14 @@ async def capture_case(connection,tools,case,timeout=45):
                             receipt={**copy.deepcopy(status),'operation':'show_edit','result':'draft_changed'}
                         else:
                             receipt=simulated_reply(status,name,args)
-                        if case.get('draft_read_facts_fixture') and name.endswith('get_status'):
+                        if case.get('draft_read_facts_fixture') and name.endswith('get_status') and 'rpc_error' not in receipt:
                             helper = ROOT/'build/lingxi-schema-export/draft-read-fixture'
                             fields = json.loads(subprocess.check_output([str(helper),'draft_read'],
                                 input=json.dumps(receipt), text=True, timeout=10))
                             receipt.update(fields)
                         if name.endswith('compose') or name.endswith('stop'):draft_observed_at=None
-                        if name.endswith('get_status'):draft_observed_at=time.monotonic()
-                        if version == 'ct47' or (version == 'ct46' and name.endswith('get_status')):
+                        if name.endswith('get_status') and 'rpc_error' not in receipt:draft_observed_at=time.monotonic()
+                        if 'rpc_error' not in receipt and (version == 'ct47' or (version == 'ct46' and name.endswith('get_status'))):
                             helper = Path(__file__).resolve().parents[1] / 'build/lingxi-schema-export/status-fixture'
                             output = subprocess.run([str(helper), version], input=json.dumps(receipt),
                                 text=True, capture_output=True, check=True).stdout.strip()

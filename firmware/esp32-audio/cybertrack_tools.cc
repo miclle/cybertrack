@@ -390,7 +390,7 @@ void InitializeCyberTrackTools() {
             return Reply("water", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
     server.AddTool("self.tank.bubbles",
-        "仅在用户明确要求吹泡泡时调用。duration_ms是1到30000的整数毫秒；未说时长传1000，超过三十秒只请求30000并说明，不分段。与行走、喷水和点火独立并行；同路不续时、不排队，停止后间隔200毫秒。不自动重试。BOOT和停止工具全停。接受回执不代表实际出泡。",
+        "仅在用户明确要求吹泡泡时调用。用户指定超过三十秒时，必须在本次调用前将duration_ms设为30000，例如六十秒、一分钟或更长都只传30000；绝不能把60000等越界值发给设备。说明上限不能替代传入合法参数。duration_ms是1到30000的整数毫秒；未说时长传1000，超过三十秒只请求30000并说明，不分段。与行走、喷水和点火独立并行；同路不续时、不排队，停止后间隔200毫秒。不自动重试。BOOT和停止工具全停。接受回执不代表实际出泡。",
         PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 30000)}),
         [](const PropertyList& p) -> ReturnValue {
             return Reply("bubbles", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
