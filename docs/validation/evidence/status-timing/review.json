@@ -1,0 +1,437 @@
+{
+  "scope": "Host readback at actual RPC arrival offsets. No physical motion.",
+  "runs": [
+    {
+      "round": 1,
+      "schema": "ct48",
+      "run_id": "d1c4333f-11ae-4797-91d6-f69b9ee41a1f",
+      "sha256": "113495c5a60d2114717c735873f0787e6b3f07dfde20767ddb0a50ad32464b8d",
+      "cases": [
+        {
+          "id": "L001",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1505,
+              "remaining_ms": 2495
+            }
+          ],
+          "reply": "目前正在前进方向，速度70%，还有大约2.5秒。"
+        },
+        {
+          "id": "L002",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1276,
+              "remaining_ms": 2724
+            }
+          ],
+          "reply": "还在往前走，大概还有2.7秒就停了。"
+        },
+        {
+          "id": "L003",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1441,
+              "remaining_ms": 2559
+            }
+          ],
+          "reply": "现在还在走。移动还剩大约2.5秒，正在向前，速度70%。"
+        },
+        {
+          "id": "L004",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1437,
+              "remaining_ms": 0
+            }
+          ],
+          "reply": "刚才那段行走已经结束了，现在没有动作在运行，我在待命。"
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "schema": "ct49",
+      "run_id": "b7d7eb01-7e97-41a5-bd93-391d9481e5d2",
+      "sha256": "f774147fde35f3af4035977a2f3eb15f84cb4a261b3f262c6d7b04ed4334f2e1",
+      "cases": [
+        {
+          "id": "L001",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1147,
+              "remaining_ms": 2853
+            }
+          ],
+          "reply": "我需要查询状态来回答刚才查询时正在向前走，大约还剩2.9秒。"
+        },
+        {
+          "id": "L002",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1308,
+              "remaining_ms": 2692
+            }
+          ],
+          "reply": "车正在前进，刚才查询时还剩约2.7秒。"
+        },
+        {
+          "id": "L003",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1517,
+              "remaining_ms": 2483
+            }
+          ],
+          "reply": "我来查一下当前状态刚才查的时候它还在往前走，还剩大约2.5秒。不过现在可能已经停了，等你听到这句话时未必还在走。"
+        },
+        {
+          "id": "L004",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1240,
+              "remaining_ms": 0
+            }
+          ],
+          "reply": "刚才查询时行走已经结束了，剩余时间是 0 秒，没有在移动中。"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "schema": "ct48",
+      "run_id": "580ec485-5aa3-4b3c-870c-254bf26651ca",
+      "sha256": "e5ce38a415be7a555ec883b59a02a53765f1ffb2c8126fcd913ff19572909394",
+      "cases": [
+        {
+          "id": "L001",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1487,
+              "remaining_ms": 2513
+            }
+          ],
+          "reply": "正在向前走，速度是70%，大约还剩2.5秒就结束了。"
+        },
+        {
+          "id": "L002",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1225,
+              "remaining_ms": 2775
+            }
+          ],
+          "reply": "车还在前进，大概还剩2.8秒就停了。"
+        },
+        {
+          "id": "L003",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1363,
+              "remaining_ms": 2637
+            }
+          ],
+          "reply": "对，它还在走呢。正在向前移动，速度70%，大约还剩2.6秒左右就会停下来了。"
+        },
+        {
+          "id": "L004",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1121,
+              "remaining_ms": 0
+            }
+          ],
+          "reply": "刚才那段行走已经结束了，现在没在移动，我在这儿待命呢。"
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "schema": "ct49",
+      "run_id": "6c64fa72-b7dc-4e1d-94fc-0a56af93fe54",
+      "sha256": "4f70072e24916efb26868d51822da9d30ee79ca704dfc69b9cb0a24509dfc016",
+      "cases": [
+        {
+          "id": "L001",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1413,
+              "remaining_ms": 2587
+            }
+          ],
+          "reply": "刚才查询时正在前进，速度70%，还剩大约2.6秒。"
+        },
+        {
+          "id": "L002",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1451,
+              "remaining_ms": 2549
+            }
+          ],
+          "reply": "刚才查询时，车还在前进，大约还剩2.5秒左右就走完了。"
+        },
+        {
+          "id": "L003",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1240,
+              "remaining_ms": 2760
+            }
+          ],
+          "reply": "刚才查询的时候它还在往前走，速度70%，大约还剩2.8秒。不过现在说完了，我没法保证它还一定在走，这个只能现场确认。"
+        },
+        {
+          "id": "L004",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1476,
+              "remaining_ms": 0
+            }
+          ],
+          "reply": "刚才查询时行走已经结束了，没有正在运行的移动计时。目前我在待命状态。"
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "schema": "ct48",
+      "run_id": "16a234e9-25bc-4051-bbbd-5daba72f1f8a",
+      "sha256": "0705a89e1e561fbf3b712dfff091604277630ac3c1b12a7697957a187cf8ac84",
+      "cases": [
+        {
+          "id": "L001",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1714,
+              "remaining_ms": 2286
+            }
+          ],
+          "reply": "正在向前走，速度70%，大概还有2秒多到时间。"
+        },
+        {
+          "id": "L002",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1391,
+              "remaining_ms": 2609
+            }
+          ],
+          "reply": "还在往前走，大约还剩2.6秒就停下来了。"
+        },
+        {
+          "id": "L003",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1274,
+              "remaining_ms": 2726
+            }
+          ],
+          "reply": "查了一下，它还在走，目前是前进，速度70%，剩余大约2.7秒。"
+        },
+        {
+          "id": "L004",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1140,
+              "remaining_ms": 0
+            }
+          ],
+          "reply": "刚才那段行走已经结束了，现在没有在动，我在待命。"
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "schema": "ct49",
+      "run_id": "428a7751-0a2e-40c0-94f8-f03524828d9c",
+      "sha256": "a9f0a97e0fab3ff8eb299966a277379ff16932c58e231a5567bc2e3de9464249",
+      "cases": [
+        {
+          "id": "L001",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1443,
+              "remaining_ms": 2557
+            }
+          ],
+          "reply": "刚才查询时正在向前走，速度70%，还剩大约2.6秒。"
+        },
+        {
+          "id": "L002",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1249,
+              "remaining_ms": 2751
+            }
+          ],
+          "reply": "刚才查询时还在往前走，剩余约2.8秒。"
+        },
+        {
+          "id": "L003",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1127,
+              "remaining_ms": 2873
+            }
+          ],
+          "reply": "刚才查询时它还在往前走，速度70%，剩余约2.9秒。不过那是查询那一刻的实时状态，现在可能已经停了，我没法保证它现在还在走。"
+        },
+        {
+          "id": "L004",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "snapshots": [
+            {
+              "elapsed_ms": 1561,
+              "remaining_ms": 0
+            }
+          ],
+          "reply": "刚才那次行走已经结束了，现在没有行走在运行中。"
+        }
+      ]
+    }
+  ]
+}
