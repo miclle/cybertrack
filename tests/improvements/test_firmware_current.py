@@ -27,7 +27,12 @@ class FirmwareCurrentTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'role differs'):module.check(root)
             current['last_recorded_role_sync']='role-sync.json';(fw/'current.json').write_text(json.dumps(current))
             (fw/'role-sync.json').write_text(json.dumps({'version':'2.0.3-ct45','platform_role':{'sha256':digest}}))
+            self.assertTrue(module.check(root)['role_matches_recorded_sync'])
             self.assertEqual(module.check(root)['role_sha256'],digest)
             self.assertEqual(json.loads((fw/'startup.json').read_text()),deployment)
             (fw/'role-sync.json').write_text(json.dumps({'version':'2.0.3-ct44','platform_role':{'sha256':digest}}))
             with self.assertRaisesRegex(ValueError,'role differs'):module.check(root)
+            current['deployment_relation']='candidate_not_deployed'
+            (fw/'current.json').write_text(json.dumps(current))
+            (fw/'role-sync.json').write_text(json.dumps(deployment))
+            self.assertFalse(module.check(root)['role_matches_recorded_sync'])
