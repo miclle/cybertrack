@@ -14,11 +14,15 @@ class VoiceFeedback {
         {"前进","move","forward",1000}, {"后退","move","backward",1000},
         {"左转","move","left",880}, {"右转","move","right",880},
         {"喷水","water","",1000}, {"吹泡泡","bubbles","",1000},
-        {"停止","stop","",0}, {"停下","stop","",0}, {"全部停止","stop","",0}
+        {"停止","stop","",0}, {"停下","stop","",0}, {"全部停止","stop","",0},
+        {"停止行走","stop","",0}, {"停止喷水","stop","",0}, {"停止泡泡","stop","",0},
+        {"停止狂暴模式","stop","",0}, {"所有动作都停下来","stop","",0},
+        {"取消序列","stop","",0}, {"取消正在执行的表演","stop","",0}
     };
     std::mutex mutex_;
     uint64_t generation_ = 0;
     const Command* expected_ = nullptr;
+    const Command* pending_ = nullptr;
     bool accepted_ = false, muted_ = false;
 
 public:
@@ -55,6 +59,7 @@ public:
             if (!cJSON_IsString(dir) || command->direction != dir->valuestring ||
                 (speed && (!cJSON_IsNumber(speed) || speed->valuedouble != 100))) return 0;
         }
+        pending_ = command;
         return generation_;
     }
     void Receipt(uint64_t call, const char* raw) {
@@ -62,11 +67,19 @@ public:
         cJSON* json = cJSON_Parse(raw);
         const auto* result = cJSON_GetObjectItemCaseSensitive(json,"result");
         const auto* op = cJSON_GetObjectItemCaseSensitive(json,"operation");
-        bool ok = cJSON_IsString(op) && cJSON_IsString(result) &&
-            std::string_view(result->valuestring) == (std::string_view(op->valuestring) == "stop" ? "ok" : "accepted");
+        const auto* fault = cJSON_GetObjectItemCaseSensitive(json,"fault");
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            if (call == generation_ && pending_) {
+                const bool stop = pending_->tool == "stop";
+                accepted_ = cJSON_IsString(op) && pending_->tool == op->valuestring &&
+                    cJSON_IsString(result) && std::string_view(result->valuestring) == (stop ? "ok" : "accepted") &&
+                    cJSON_IsString(fault) && (std::string_view(fault->valuestring) == "none" ||
+                                             (stop && std::string_view(fault->valuestring) == "stopped"));
+                pending_ = nullptr;
+            }
+        }
         cJSON_Delete(json);
-        std::lock_guard<std::mutex> lock(mutex_);
-        if (call == generation_) accepted_ = ok;
     }
     void StartSpeech() {
         std::lock_guard<std::mutex> lock(mutex_);

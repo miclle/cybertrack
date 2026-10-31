@@ -4,10 +4,10 @@
 
 | 项目 | 当前依据与状态 |
 |---|---|
-| 源码基线 | `2.0.3-ct50` 候选，状态查询列出网页长按通道，区分续租窗口与定时动作剩余量，剧场预览显示同时动作和结束顺序；ESP-IDF 5.5.1、小智固定版本及 overlay |
+| 源码基线 | `2.0.3-ct51` 候选，明确全停成功后本地抑制确认音频，状态查询列出网页长按通道，区分续租窗口与定时动作剩余量，剧场预览显示同时动作和结束顺序；ESP-IDF 5.5.1、小智固定版本及 overlay |
 | 最近记录的部署 | [ct45](../firmware/esp32-audio/startup-ct45.json)；2026-10-31 已重启联网并回读 |
 | 最近角色同步 | [ct45 停止与长按角色修正](../firmware/esp32-audio/role-cancel-hold-ct45.json)，5991 字符保存回读、重启与零启动检查；模型语义另验 |
-| 软件验证 | [ct50 软件记录](../firmware/esp32-audio/verification-ct50.json)、[ct47 定向联调](validation/lingxi-ct47.md)与 [ct46 三轮联调](validation/lingxi-ct46.md)；已部署 ct45 的软件依据仍见 [ct45 记录](../firmware/esp32-audio/verification-ct45.json) |
+| 软件验证 | [ct51 软件记录](../firmware/esp32-audio/verification-ct51.json)、[ct47 定向联调](validation/lingxi-ct47.md)与 [ct46 三轮联调](validation/lingxi-ct46.md)；已部署 ct45 的软件依据仍见 [ct45 记录](../firmware/esp32-audio/verification-ct45.json) |
 | 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，5991 字符，已重开回读。检查命令分别列出仓库角色与平台回读哈希 |
 | 运动 | 四方向，60–100% PWM、默认 100%；全速转向省略时长为 880 ms，其他普通动作默认 1000 ms；无编码器里程计 |
 | 并发与序列 | 四路独立截止，序列最多 16 步；步骤内并发，步骤间串行；取消不恢复 |
