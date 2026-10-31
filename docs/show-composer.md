@@ -130,3 +130,5 @@ ct48 将每一步的开始和结束顺序写入预览。例如“后退两秒，
 初次体验可选“登场”，把第二步泡泡改为两秒，点击应用、保存排演草稿，再由家长勾选并确认。下一轮自由选择其他模板或自己改编。主持人另开[观察单](../tools/family-study/observer.html)，载体选“无动作原型”。此入口可观察理解和主动选择；三分钟实机上手及停车仍须在现场测量。
 
 已在断网 Chromium 的 320、390、1280 像素视口使用实际生成文件验证三个模板、单步改稿、确认、第二步的屏幕提示、中途停止和重新排演，未产生 HTTP 请求。[浏览器检查](../tools/family-study/rehearsal_test.mjs)
+
+对于可识别但没有量化时长的相对改稿，ct67 候选返回 `draft_duration_unspecified` 与 `clarification_facts`，保留草稿并要求具体秒数；同轮不能通过其他工具补做。量化归属、未知说法和过程播报仍待修，当前部署范围见[版本状态](current-status.md)。[门禁与验证](validation/relative-draft-duration.md)

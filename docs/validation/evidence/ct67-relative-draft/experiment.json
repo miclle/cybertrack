@@ -1,0 +1,85 @@
+{
+  "source_version": "2.0.3-ct67",
+  "last_recorded_application": "2.0.3-ct45",
+  "base_commit": "7bc81e15f9f7d3dd02955886ca09cc64a4f318b3",
+  "decision": "source_candidate_not_deployed",
+  "flashed": false,
+  "platform_configuration_changed": false,
+  "role_changed": false,
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2714816,
+    "sha256": "69ae820cc97b728a6015edbb476a318ddfb13aac90f158b0c0ff95734884d282"
+  },
+  "native_scenarios": 13,
+  "native_passed": true,
+  "platform_sessions": 20,
+  "platform_model_score_scope": "Two declared targeted synthetic-speech runs; not fixed eighty/twenty or human data",
+  "result": {
+    "completed": 20,
+    "literal_transcript_matches": 20,
+    "tool_calls_match": 14,
+    "state_matches": 20,
+    "relative_states_preserved": 6,
+    "relative_total": 6,
+    "live_clarification_rejections": 0
+  },
+  "final_source_replay_identical_to_captured_host": true,
+  "limitations": [
+    "Only recognized Chinese relative draft phrases without quantitative fragments are flagged.",
+    "Quantities in other clauses, quoted/current/target attribution and unknown phrasing are not validated.",
+    "Unconditional stop remains available; initial vague movement and false stop intent are unresolved.",
+    "This online sample contained no attempted mutating calls for unquantified requests; interception evidence is native protocol replay.",
+    "English/process speech and extra queries remain."
+  ],
+  "files": {
+    "capture-classifier-header.txt": {
+      "bytes": 2751,
+      "sha256": "10914755b04d4c09b6daaf1309169db1373c4edc8035e51ac3eca65d2359f491"
+    },
+    "capture-host-manifest.json": {
+      "bytes": 4345,
+      "sha256": "6526274eb25a12f9b192321e06b01ce53640ec7fa565567d7a0b7f066051927b"
+    },
+    "final-tools.json": {
+      "bytes": 17065,
+      "sha256": "55187243b06b9d7b3864098eda7219cf287e8c0f4f401896b0d6cc979452e291"
+    },
+    "host-manifest.json": {
+      "bytes": 4345,
+      "sha256": "514f39a9872d992d8313b87c719d336da2f03aee33984df27b2df07baa379cd6"
+    },
+    "native-baseline.json": {
+      "bytes": 226371,
+      "sha256": "e42a1386259ead580929891220d40290c17b8bafa7d067df890d5ab0f5aac60c"
+    },
+    "native-replay.json": {
+      "bytes": 229431,
+      "sha256": "477e1d9e7407256e14e0cc15813902b33c155900644dcf19b05c66224f4de731"
+    },
+    "plan.json": {
+      "bytes": 450,
+      "sha256": "3afffc3b63dcd6ae2b6e57e1cf4d300835e8cc74dd133870d16a5e05b9f65ee9"
+    },
+    "platform-1.json.gz": {
+      "bytes": 39975,
+      "sha256": "2692287918a6d69e3cf86afe237d72afd5e51574af36478360e4dbd2279b5fd3"
+    },
+    "platform-2.json.gz": {
+      "bytes": 38354,
+      "sha256": "0ae6f12aed92394290a2231928ade9a033743937a936e49dadc1573334bc1115"
+    },
+    "platform-review.json": {
+      "bytes": 27408,
+      "sha256": "67278b7f209eb3c656721180826ad41ced53cc4115fbbdebe141146917a62241"
+    },
+    "software-checks.json": {
+      "bytes": 4949,
+      "sha256": "7afd11520497a552546f5f377926ea6a7ade92e6b0e53cbdce1e3f2acf5a2a44"
+    },
+    "tools.json": {
+      "bytes": 17065,
+      "sha256": "454f88f95d461b144f7e2c0d60da667247e033056fc00e6ec28a4878eaf917f4"
+    }
+  }
+}

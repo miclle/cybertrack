@@ -2,6 +2,9 @@
 set -eu
 cd "$(dirname "$0")/../.."
 mkdir -p build/audio-host
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
+  -Ifirmware/esp32-audio firmware/esp32-audio/tests/draft_duration_intent_test.cc -o build/audio-host/draft_duration_intent_test
+build/audio-host/draft_duration_intent_test
 cc -std=c11 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ifirmware/include -c firmware/src/control.c -o build/audio-host/control.o
 c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \

@@ -136,3 +136,5 @@ ct65 [停止说明对照](validation/stop-negation.md)未采纳：角色未改�
 ct66 [即时停止回执](validation/stop-dispatch.md)只调整固件调度，公开工具、角色及平台配置不变。校验后的 stop 同步完成并回复，不因新识别轮次误报失败或留下二次停止回调；旧动作和查询继续隔离。这不是新的模型语义或真人静默成绩，候选未部署。
 
 [状态话术限定对照](validation/stop-role-qualifier.md)临时为状态段增加六字，角色 5991→5997→5991，十四次定向会话后恢复。停止静默仍为 0/3、C008 仍有过程文字，没有采纳或扩大固定集；原始误改和恢复证据均保留。
+
+ct67 [相对改稿门禁](validation/relative-draft-duration.md)为可识别但未量化的相对长短请求返回 `draft_duration_unspecified` 与 `clarification_facts`，要求追问、不猜测、不换工具补做。角色与公开定义保持不变；拒绝不是保存成功，在线二十条定向语音仍有六条多余查询及过程播报。量化数值归属和其他意图错误仍待修，未部署。
