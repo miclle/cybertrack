@@ -9,7 +9,8 @@ spec.loader.exec_module(m)
 
 def trial(task,phase,repeat,seconds):
     return dict(sample_id=f'{task}-{phase}-{repeat}',condition_id='fixture',task=task,before_or_after=phase,
-                revision=phase,repeat=repeat,duration_s=seconds,completed=True,observed_by='test',tools=[],faults=[])
+                revision=phase,repeat=repeat,duration_s=seconds,completed=True,observed_by='test',steps=['fixture step'],
+                evidence_kind='physical_observation',evidence_ref='fixture log',tools=[],faults=[])
 
 
 class MaintenanceTests(unittest.TestCase):
@@ -26,7 +27,7 @@ class MaintenanceTests(unittest.TestCase):
 
     def test_distinct_complete_cycles_and_missing_records(self):
         cycles=[dict(sample_id=str(i),condition_id='fixture',revision='after',repeat=i,completed=True,observed_by='test',
-                     checks=dict.fromkeys(m.CHECKS,'ok'),faults=[]) for i in range(1,11)]
+                     evidence_kind='physical_observation',evidence_ref='fixture log',checks=dict.fromkeys(m.CHECKS,'ok'),faults=[]) for i in range(1,11)]
         data=dict(maintenance_trials=[{'task':'取瓶'}, {**trial('取瓶','before',1,10),'completed':False}],maintenance_cycles=cycles)
         cycles[0]['checks']['磨线']='issue'
         report=m.analyze(data,'fixture','before','after')
@@ -39,3 +40,17 @@ class MaintenanceTests(unittest.TestCase):
         self.assertEqual(report['observations_with_faults'],['1'])
         cycles.append({**cycles[-1],'sample_id':'different'})
         with self.assertRaisesRegex(ValueError,'Duplicate'):m.analyze(data,'fixture','before','after')
+
+    def test_field_provenance_and_steps_required(self):
+        original = trial('取瓶', 'before', 1, 10)
+        rows = [original, {**original, 'sample_id': 'cad', 'evidence_kind': 'software_simulation'},
+                {**original, 'sample_id': 'old', 'evidence_kind': None},
+                {**original, 'sample_id': 'no-source', 'repeat': 2, 'evidence_ref': ' '},
+                {**original, 'sample_id': 'no-steps', 'repeat': 3, 'steps': []}]
+        cycle = dict(condition_id='fixture', revision='after', sample_id='cad-cycle',
+                     repeat=1, evidence_kind='software_simulation')
+        report = m.analyze(dict(maintenance_trials=rows, maintenance_cycles=[cycle]), 'fixture', 'before', 'after')
+        self.assertEqual(report['counts']['before']['取瓶'], 1)
+        self.assertEqual(report['excluded_nonphysical_or_unclassified'], ['cad', 'old', 'cad-cycle'])
+        self.assertEqual(report['incomplete_samples'], ['no-source', 'no-steps'])
+        self.assertEqual(report['complete_cycles'], 0)
