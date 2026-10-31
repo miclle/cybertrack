@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-31",
+  "scope": "Actual MCP app message independently triggered the agent turn before any edit; native FreeCAD GUI edit, saved reopen, same host card update and native restore completed.",
+  "plugin_version": "0.9.2",
+  "source": "hardware/model/CyberTrack.FCStd",
+  "source_sha256": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23",
+  "production_unchanged": true,
+  "document_id": "solidcue-35d77545-836d-4915-807c-a95ade093ba4",
+  "native_document_uid": "f293a227-30e8-4add-9f6d-eaa0abd9969e",
+  "target": "PrintCrown",
+  "visible_shape_objects": 198,
+  "comment_id": "3b7c4fb0-0f07-48ef-9a16-16d2335230d0",
+  "comment_sha256": "6bf1801cdf3597b0602448d2831fd7f0262fcdcb5ab9e292c7e212e120420017",
+  "comment_created_at": "2026-10-31T02:35:25.311Z",
+  "trigger": "mcp_app message, not goal continuation",
+  "triggered_turn_started_at": "2026-10-31T02:35:40Z",
+  "message_payload_hash_verified": true,
+  "comment_unprocessed_at_trigger": true,
+  "automatic_message_triggered_turn": "passed",
+  "native_gui_mcp_edit": "passed",
+  "placement_z_mm": [
+    0,
+    4,
+    0
+  ],
+  "non_target_native_objects_unchanged": 197,
+  "saved_edit_and_restore_gui_readback": "passed: 198 native fingerprints and 217 display states",
+  "same_native_host_card_update": true,
+  "revisions": [
+    "r9",
+    "r10",
+    "r11"
+  ],
+  "final_receipt_at": "2026-10-31T02:37:20.210Z",
+  "final_receipt_visible_in_same_card": true,
+  "restored_scene_fingerprint": "7b6e59518c517cff2065870138bedd5a80bfba3eb26d2dda78ed9d6654b92842",
+  "late_message_handling": {
+    "comment_id": "b701481c-6a93-4336-a6e7-dc2acf9e6fe3",
+    "received_revision": "r9",
+    "already_processed_revision": "r8",
+    "native_edit_repeated": false,
+    "result_receipt_updated": true
+  },
+  "snapshot_hashes": {
+    "assembly-message-edit-20261031": {
+      "manifest_sha256": "60c787ac81f7a074d8c988a3d6aa42783472fc221a153b851787d881ce22bf0d",
+      "native_sha256": "a474838948f1d30882318145c94daa4d6366b21e8c59d445381163da4d1aca34"
+    },
+    "assembly-message-restored-20261031": {
+      "manifest_sha256": "faa3c11c7bfd2ab6494daf133be41ac9e548a607e7bed8905d4f9badd1cce0b6",
+      "native_sha256": "da14f481b854e9aba25ec06146186eb025a154baa038e0188ffed6c2d00dd628"
+    }
+  },
+  "screenshots": {
+    "output/solidcue/host-new-comment-r9.png": "03a055538a448b360b2b4d0d624855091e68311cac683c9399ec0a22ae8cce20",
+    "output/solidcue/host-message-adjusted-r10.png": "a8eae675d6d5d22126e93813b25b6efc9e8b65838c23c28a33b0db0292ebdb1f",
+    "output/solidcue/host-message-restored-r11.png": "3b274580a1a3f05faac613a824fe306fb36a09e16a7098f4b6eea456a13e2262"
+  },
+  "limits": [
+    "One real object-selection roundtrip, not a throughput or latency guarantee",
+    "Earlier text/surface selection and rejection tests remain separate evidence",
+    "Preview does not imply STEP or physical acceptance"
+  ],
+  "step_validation": false,
+  "physical_acceptance": false
+}
