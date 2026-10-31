@@ -14,6 +14,8 @@ class VoiceFeedback {
         {"前进","move","forward",1000}, {"后退","move","backward",1000},
         {"左转","move","left",880}, {"右转","move","right",880},
         {"喷水","water","",1000}, {"吹泡泡","bubbles","",1000},
+        {"全速","set_speed","",0}, {"最快","set_speed","",0},
+        {"最大速度","set_speed","",0}, {"调到全速","set_speed","",0},
         {"停止","stop","",0}, {"停下","stop","",0}, {"全部停止","stop","",0},
         {"停止行走","stop","",0}, {"停止喷水","stop","",0}, {"停止泡泡","stop","",0},
         {"停止狂暴模式","stop","",0}, {"所有动作都停下来","stop","",0},
@@ -49,6 +51,11 @@ public:
         constexpr std::string_view prefix = "self.tank.";
         if (!command || tool.substr(0,prefix.size()) != prefix || tool.substr(prefix.size()) != command->tool)
             return 0;
+        if (command->tool == "set_speed") {
+            const auto* speed = cJSON_GetObjectItemCaseSensitive(args,"speed_percent");
+            if (cJSON_GetArraySize(args) != 1 || !cJSON_IsNumber(speed) || speed->valuedouble != 100)
+                return 0;
+        }
         if (command->duration) {
             const auto* duration = cJSON_GetObjectItemCaseSensitive(args,"duration_ms");
             if (!cJSON_IsNumber(duration) || duration->valuedouble != command->duration) return 0;
@@ -76,6 +83,10 @@ public:
                     cJSON_IsString(result) && std::string_view(result->valuestring) == (stop ? "ok" : "accepted") &&
                     cJSON_IsString(fault) && (std::string_view(fault->valuestring) == "none" ||
                                              (stop && std::string_view(fault->valuestring) == "stopped"));
+                if (accepted_ && pending_->tool == "set_speed") {
+                    const auto* speed = cJSON_GetObjectItemCaseSensitive(json,"move_speed_percent");
+                    accepted_ = cJSON_IsNumber(speed) && speed->valuedouble == 100;
+                }
                 pending_ = nullptr;
             }
         }
