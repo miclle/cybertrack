@@ -1,0 +1,226 @@
+{
+  "scope": "Two declared twelve-case text simulations with actual host input injection; not ASR or fixed model suites",
+  "cases": [
+    {
+      "id": "D001",
+      "category": "draft",
+      "text": "第二步短一点",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "询问具体时长，不猜测参数或启动",
+      "needs_clarification": true,
+      "expected_revision": 7
+    },
+    {
+      "id": "D004",
+      "category": "draft",
+      "text": "把第二步泡泡改成两秒",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 2000, \"ignition_ms\": 0}]"
+          }
+        }
+      ],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "只改第二步，不重写其他步骤",
+      "needs_clarification": false,
+      "expected_revision": 8
+    },
+    {
+      "id": "D005",
+      "category": "draft",
+      "text": "第二步改成向右转",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\": \"right\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0}]"
+          }
+        }
+      ],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "只改第二步，不重写其他步骤",
+      "needs_clarification": false,
+      "expected_revision": 8
+    },
+    {
+      "id": "D006",
+      "category": "draft",
+      "text": "取消这个草稿",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "cancel",
+            "revision": 7,
+            "step": 0,
+            "steps_json": ""
+          }
+        }
+      ],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "说明已取消，不执行",
+      "needs_clarification": false,
+      "expected_revision": 0
+    },
+    {
+      "id": "D010",
+      "category": "draft",
+      "text": "把第二步泡泡缩短到半秒",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 500, \"ignition_ms\": 0}]"
+          }
+        }
+      ],
+      "allowed_tools": [
+        "self.tank.get_status",
+        "self.tank.compose"
+      ],
+      "response_expectation": "只改第二步，不重写其他步骤",
+      "needs_clarification": false,
+      "expected_revision": 8
+    },
+    {
+      "id": "A001",
+      "category": "ambiguous",
+      "text": "动一下那个东西",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "needs_clarification": true,
+      "response_expectation": "先澄清具体动作，不猜测执行，不主动建议试动"
+    },
+    {
+      "id": "A004",
+      "category": "ambiguous",
+      "text": "动一下三秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "needs_clarification": true,
+      "response_expectation": "先澄清具体动作，不猜测执行，不主动建议试动"
+    },
+    {
+      "id": "A005",
+      "category": "action",
+      "text": "让小车向前动两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "forward",
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "needs_clarification": false,
+      "response_expectation": "按明确口令执行；查询只读，停止直接全停"
+    },
+    {
+      "id": "A006",
+      "category": "action",
+      "text": "启动一下泡泡，持续一秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "needs_clarification": false,
+      "response_expectation": "按明确口令执行；查询只读，停止直接全停"
+    },
+    {
+      "id": "A007",
+      "category": "action",
+      "text": "开枪一秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 1000
+          }
+        }
+      ],
+      "needs_clarification": false,
+      "response_expectation": "按明确口令执行；查询只读，停止直接全停"
+    },
+    {
+      "id": "A009",
+      "category": "query",
+      "text": "你现在在做什么",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "needs_clarification": false,
+      "response_expectation": "按明确口令执行；查询只读，停止直接全停"
+    },
+    {
+      "id": "A010",
+      "category": "stop",
+      "text": "停止",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "needs_clarification": false,
+      "response_expectation": "按明确口令执行；查询只读，停止直接全停"
+    }
+  ]
+}

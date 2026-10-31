@@ -188,6 +188,12 @@ async def capture_case(connection,tools,case,timeout=45):
     from websockets.asyncio.client import connect
     status=copy.deepcopy(case['fixture_status']) if 'fixture_status' in case else fixture(case['context'])
     version = case.get('fixture_version','ct46' if case.get('ct46') else 'ct45')
+    host_await_input = bool(case.get('host_stt_events') or case.get('host_text_input'))
+    host_input_mode = ('platform_stt_events' if case.get('host_stt_events') else
+                       'simulated_recognized_text' if case.get('host_text_input') else 'simulated_initial_input')
+    if case.get('host_text_input') and (case.get('host_stt_events') or case.get('opus_frames') is not None
+                                      or version != 'firmware_host' or not case.get('raw_text')):
+        raise ValueError('simulated recognition requires raw-text firmware host without audio/STT injection')
     row=dict(id=case['id'],calls=[],replies=[],events=[],completed=False,input_text=case['text'],context=case['context'])
     headers={'Authorization':'Bearer '+connection['token'].removeprefix('Bearer '),
              'Device-Id':connection['device_id'],'Client-Id':connection['client_id'],'Protocol-Version':'1'}
@@ -240,7 +246,7 @@ async def capture_case(connection,tools,case,timeout=45):
                             call_history.append(dict(name=name,arguments=args,rpc_id=payload['id'],
                                 elapsed_ms=timeline[-1]['ms']-input_ms))
                             wire_reply=firmware_replay(case['host_binary'],case['initial_profile'],call_history,
-                                await_stt=case.get('host_stt_events',False))[-2]
+                                await_stt=host_await_input)[-2]
                             row.setdefault('host_rpc_replies',[]).append(wire_reply)
                             if 'error' in wire_reply:
                                 receipt=dict(rpc_error=wire_reply['error']['message'])
@@ -297,6 +303,11 @@ async def capture_case(connection,tools,case,timeout=45):
                     # Context is visibly separate from the user's phrase; the
                     # runner never reads expected_calls or response_expectation.
                     mark('input_sent');input_ms=timeline[-1]['ms']
+                    if case.get('host_text_input'):
+                        # This is a simulated recognition event, not platform
+                        # ASR. Record the known utterance before any tool call.
+                        mark('simulated_input',text=case['text'])
+                        call_history.append(dict(input_text=case['text'],elapsed_ms=timeline[-1]['ms']-input_ms))
                     if uplink is not None:
                         await send(dict(session_id=session,type='listen',state='start',mode='manual'))
                         for frame in uplink:
@@ -325,11 +336,11 @@ async def capture_case(connection,tools,case,timeout=45):
             elif kind in ('error','goodbye'):row['events'].append(kind);break
     if version == 'firmware_host':
         row['initial_profile']=case['initial_profile']
-        row['host_input_mode']='platform_stt_events' if case.get('host_stt_events') else 'simulated_initial_input'
+        row['host_input_mode']=host_input_mode
         row['host_calls']=call_history
         row['host_inspect_ms']=round((time.monotonic()-opened)*1000)-input_ms if input_ms is not None else 0
         row['host_final_state']=firmware_replay(case['host_binary'],case['initial_profile'],
-            [*call_history,dict(inspect_ms=row['host_inspect_ms'])],await_stt=case.get('host_stt_events',False))[-1]
+            [*call_history,dict(inspect_ms=row['host_inspect_ms'])],await_stt=host_await_input)[-1]
     row['received_audio_bytes_discarded']=audio_bytes
     row.setdefault('completion','tts_stop' if row['completed'] else 'incomplete_or_timeout')
     return row
@@ -378,6 +389,7 @@ async def run(args):
         for case in cases:
             case.update(host_binary=firmware_host.resolve(),initial_profile=firmware_profile(case['context']))
             if getattr(args,'synthetic_speech',False):case['host_stt_events']=True
+            else:case['host_text_input']=True
     for case in cases:
         case['fixture_version']=version
         if getattr(args,'argument_validator',None):
@@ -417,7 +429,9 @@ async def run(args):
     trace['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
     if firmware_host:
         trace['scope']='Real platform with raw input; actual MCP dispatch, callbacks and guard on host; virtual clock, 600 mm simulated range, immediate schedule; zero board IO'
-        trace['host_input_mode']='platform_stt_events' if synthetic else 'simulated_initial_input'
+        trace['host_input_mode']='platform_stt_events' if synthetic else 'simulated_recognized_text'
+        if not synthetic:
+            trace['scope']='Real platform with raw text; known utterance injected as simulated recognition before actual host MCP; virtual clock/range; no ASR, microphone/speaker/board IO'
         if synthetic:
             trace['scope']='Synthesized speech over real platform ASR; observed STT events open host input generations; actual MCP dispatcher/callbacks/guard; virtual clock and 600 mm range; zero microphone/speaker/board IO'
     if speed_host:

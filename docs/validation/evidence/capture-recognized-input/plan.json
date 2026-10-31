@@ -1,0 +1,30 @@
+{
+  "scope": "Two predeclared text runs, same role/tools/ct68 host; simulated recognized utterance, not ASR or board IO",
+  "cases": [
+    "D001",
+    "D004",
+    "D005",
+    "D006",
+    "D010",
+    "A001",
+    "A004",
+    "A005",
+    "A006",
+    "A007",
+    "A009",
+    "A010"
+  ],
+  "repeats": 2,
+  "source_version": "2.0.3-ct68",
+  "recorded_board": "2.0.3-ct45",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "capture_source_sha256": "4d2c69144d6e4db85dad2027dd8649bb891d13359f692ff97abfb788bf9b86ec",
+  "corpus_sha256": "8a350fa2b65f7737aade82bf7d4a14e4f3062028a0b83cb50d8767392dcbb237",
+  "host_sha256": "a20da0879ee6447e94d8c9aad79057f8d38dd53235478d6f8765560043d15c6e",
+  "preflight": [
+    "Original utterance must precede tool calls; text echo must not open another host input turn.",
+    "Every captured full RPC reply and final state must reproduce with await-stt host mode.",
+    "Retain incomplete and semantic mismatches; guard refusals do not count as correct model tools.",
+    "No source firmware, role, platform configuration, flash or physical acceptance changes."
+  ]
+}

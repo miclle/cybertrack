@@ -35,7 +35,7 @@ ct45 部署检查的 39 条状态／操作回执全部输出关闭、动作启�
 
 真实灵矽隔离文本联调：首轮 76/80，角色修正后 77/80（96.25%），8 条编排仍匹配 5 条；只读解释 4/8 满足全部要求，45 条成功静默均未达成。见[最新复测](validation/lingxi-ct45-role-feedback-20261031.md)。无前缀诊断单独保留，未替代首轮成绩。真实设备网页、草稿 300538 ms 到期和六类非法输入拒绝均保持零启动。完整边界见[联调记录](validation/lingxi-ct45-20261031.md)。
 
-运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct68-src`，增加 17 类停止回放、实际 MCP／HTTP、音频适配、完整固件主机、输入失败隔离及即时停止回执检查；当前十五组通过，含 86 项改进测试。ct62 十一组通过，含 76 项改进测试；八组输入边界与四条历史请求为离线回放，不构成新模型成绩。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
+运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct68-src`，增加 17 类停止回放、实际 MCP／HTTP、音频适配、完整固件主机、输入失败隔离及即时停止回执检查；当前十五组通过，含 93 项改进测试。ct62 十一组通过，含 76 项改进测试；八组输入边界与四条历史请求为离线回放，不构成新模型成绩。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
 
 要检查模型设计工具，请在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct68-src --model-design`。新增模型／几何／整机同步测试、插件 bundle 和合成宿主界面回归；统一报告记录工具源码哈希并排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
 
@@ -58,3 +58,5 @@ ct67 [相对改稿门禁](validation/relative-draft-duration.md)将可识别且�
 ct68 [泛化动作门禁](validation/vague-action-admission.md)补充首次猜测执行约束：二十六组原生通过；二十条真实 STT 合成上行均结束、转写与同观测时刻终态均匹配，严格调用 16/20。三次在线猜测动作被拒绝，八条含糊请求零启动；另一次多余查询及过程／停止确认播报仍待修。完整构建与十五组软件检查通过；普通明确口令和创意草稿保留，未部署。
 
 [意图分流角色对照](validation/intent-routing-role.md)的 72 次原话文本诊断未采纳：两组严格工具均 29/36，各有一次禁止调用；候选仍猜半秒，明确停止静默均 0/6。已恢复平台和仓库原角色及参数，ct68／ct45 不变。本批主机使用占位识别文本，ct67／ct68 的真实 STT 门禁不参与；完整路径不能由主机标签推断。
+
+[文本模拟识别输入](validation/capture-recognized-input.md)已接入采集器，默认文本主机先等待输入，再注入原话，与历史占位和真实 STT 分开标记。二十四条新会话及终态均完成／匹配，严格调用 20/24，两次猜测动作被拒绝、两次多查状态保留；另复核旧占位和 STT 样本，未改写历史成绩。十五组软件检查含 93 项通过；固件、角色、平台配置及 ct45 部署不变。
