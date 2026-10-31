@@ -35,3 +35,31 @@ class SyntheticSpeechTests(unittest.TestCase):
         self.assertFalse(any("停止" in msg for msg in sent if isinstance(msg, str)))
         self.assertTrue(result["completed"])
         self.assertEqual(result["echoed_text"], "停止。")
+
+    def test_admission_envelopes_preserve_rejection(self):
+        for as_result in (False, True):
+            socket = AsyncMock()
+            socket.recv.side_effect = [json.dumps(msg) for msg in (
+                {"type": "hello", "session_id": "test"},
+                {"type": "mcp", "payload": {"method": "tools/list", "id": 1}},
+                {"type": "mcp", "payload": {"method": "tools/call", "id": 2,
+                    "params": {"name": "self.tank.set_speed", "arguments": {"speed_percent": 100}}}},
+                {"type": "tts", "state": "stop"})]
+            connection = MagicMock()
+            connection.return_value.__aenter__.return_value = socket
+            error = "speed_rejected_not_moving: no movement at request time"
+            with patch.dict(sys.modules, {"websockets.asyncio.client": MagicMock(connect=connection)}), \
+                    patch("capture_lingxi.simulated_reply", return_value={"rpc_error": error}):
+                result = asyncio.run(capture_case(dict(token="test", client_id="c", device_id="d"),
+                    [{"name": "self.tank.set_speed"}], dict(id="V040", text="全速", context="",
+                    admission_result_fixture=as_result)))
+            reply = json.loads(socket.send.call_args_list[-1].args[0])["payload"]
+            if as_result:
+                content = json.loads(reply["result"]["content"][0]["text"])
+                self.assertEqual(content["result"], "rejected")
+                self.assertEqual(content["rejection_reason"], error)
+                self.assertFalse(content["physical_feedback"])
+                self.assertEqual(result["original_admission_errors"], [error])
+            else:
+                self.assertEqual(reply["error"]["message"], error)
+                self.assertNotIn("simulated_receipts", result)
