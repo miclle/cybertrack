@@ -85,7 +85,7 @@ def stats(values: list[float]) -> dict:
 def analyze(data: dict) -> dict:
     """Check per-profile coverage and report known violations separately."""
     fields(data, {"schema_version", "profiles", "trials"}, "input")
-    if type(data["schema_version"]) is not int or data["schema_version"] != 1:
+    if type(data["schema_version"]) is not int or data["schema_version"] not in (1, 2):
         raise ValueError("unsupported schema")
     if not isinstance(data["profiles"], list) or not isinstance(data["trials"], list):
         raise ValueError("profiles and trials must be arrays")
@@ -111,7 +111,8 @@ def analyze(data: dict) -> dict:
     rows = {name: {case.id: [] for case in CASES} for name in profiles}
     seen_ids, seen_repeats, seen_events = set(), set(), set()
     for trial in data["trials"]:
-        fields(trial, {"id", "profile_id", "case_id", "repeat", "evidence_ref", "event_ms", "channels",
+        times = {"device_event_ms", "recovered_ms", "observed_until_ms"} if data["schema_version"] == 2 else set()
+        fields(trial, times | {"id", "profile_id", "case_id", "repeat", "evidence_ref", "event_ms", "channels",
                        "recovery_observed", "stale_action_resumed"}, "trial")
         trial_id = text(trial["id"], "trial.id")
         if trial_id in seen_ids:
@@ -145,9 +146,20 @@ def analyze(data: dict) -> dict:
             missing.append("evidence reference missing")
         if event is None:
             missing.append("trigger timestamp missing")
+        detected, recovered, observed_until = [number(trial.get(key), key, nullable=True) for key in
+                                              ("device_event_ms", "recovered_ms", "observed_until_ms")]
+        recorded_times = [t for t in (event, detected, recovered, observed_until) if t is not None]
+        if recorded_times != sorted(recorded_times):
+            raise ValueError(f"{trial_id}: event, device detection, recovery and observation must be ordered")
+        if detected is None:
+            missing.append("device trigger timestamp missing")
+        window = None if recovered is None or observed_until is None else observed_until - recovered
+        if window is None or window < profiles[profile_id]["observation_window_ms"]:
+            missing.append("insufficient timed observation after recovery")
         for channel, source in case.sources.items():
             row = trial["channels"][channel]
-            fields(row, {"source", "output_off_ms", "mechanical_stop_ms", "stopping_distance_mm",
+            deadline_field = {"normal_end"} if data["schema_version"] == 2 else set()
+            fields(row, deadline_field | {"source", "output_off_ms", "mechanical_stop_ms", "stopping_distance_mm",
                          "continued_until_own_deadline"}, f"{trial_id}.{channel}")
             if row["source"] != source:
                 raise ValueError(f"{trial_id}.{channel}: expected {source} source")
@@ -155,6 +167,19 @@ def analyze(data: dict) -> dict:
             mechanical = number(row["mechanical_stop_ms"], f"{trial_id}.{channel}.mechanical_stop_ms", nullable=True)
             distance = number(row["stopping_distance_mm"], f"{trial_id}.{channel}.stopping_distance_mm", nullable=True)
             continued = flag(row["continued_until_own_deadline"], f"{trial_id}.{channel}.continued")
+            normal_end = row.get("normal_end")
+            held = normal_end == "while_held"
+            if held and (source != "web" or case_id.startswith("sequence_")):
+                raise ValueError(f"{trial_id}.{channel}: renewable hold requires an independent web channel")
+            deadline = None if held else number(normal_end, f"{trial_id}.{channel}.normal_end", nullable=True)
+            if case.phase == "active" and channel in case.stop and not held:
+                if deadline is None:
+                    missing.append(f"{channel}: independent deadline missing")
+                elif off is not None and deadline - off <= profiles[profile_id]["timing_uncertainty_ms"]:
+                    missing.append(f"{channel}: output cutoff indistinguishable from normal deadline")
+            if (case.phase == "active" and channel in case.stop and detected is not None and off is not None
+                    and off + profiles[profile_id]["timing_uncertainty_ms"] < detected):
+                missing.append(f"{channel}: output already off before device detected trigger")
             if channel != "move" and (mechanical is not None or distance is not None):
                 raise ValueError(f"{trial_id}.{channel}: mechanical stop/distance are for tracks only")
             if channel in case.keep:
@@ -192,6 +217,8 @@ def analyze(data: dict) -> dict:
         elif resumed is None:
             missing.append("stale action recovery unknown")
         rows[profile_id][case_id].append({"id": trial_id, "repeat": trial["repeat"], "evidence_ref": evidence,
+                                        "detection_latency_ms": None if detected is None or event is None else detected-event,
+                                        "recovery_observation_ms": window,
                                         "missing": missing, "violations": violations, "measurements": measurements})
     summaries = []
     for name, cases in rows.items():
@@ -212,7 +239,7 @@ def analyze(data: dict) -> dict:
         summaries.append({"profile": profiles[name], "cases": case_reports,
                           "coverage_complete": all(c["status"] == "records_complete" for c in case_reports)})
     physical = [s for s in summaries if s["profile"]["evidence_kind"] == "physical_observation"]
-    return {"schema_version": 1, "matrix_id": "stop-v1", "required_repeats_per_case": REPEATS,
+    return {"schema_version": 2, "matrix_id": "stop-v1", "required_repeats_per_case": REPEATS,
             "required_cases": [{"id": c.id, "event": c.event, "phase": c.phase, "source_by_channel": c.sources,
                                 "stop_channels": c.stop, "continue_channels": c.keep} for c in CASES],
             "profiles": summaries, "physical_profiles_with_complete_records": [s["profile"]["id"] for s in physical if s["coverage_complete"]],
@@ -236,14 +263,15 @@ def unique_fields(pairs: list[tuple[str, object]]) -> dict:
 
 def initialize(profile: dict) -> dict:
     """Generate unobserved rows for a declared configuration, never measurements."""
-    data = {"schema_version": 1, "profiles": [profile], "trials": []}
+    data = {"schema_version": 2, "profiles": [profile], "trials": []}
     analyze(data)  # Validate the declared configuration before creating records.
     for case in CASES:
         for repeat in range(1, REPEATS + 1):
             data["trials"].append({
                 "id": f"{profile['id']}-{case.id}-{repeat}", "profile_id": profile["id"],
                 "case_id": case.id, "repeat": repeat, "evidence_ref": None, "event_ms": None,
-                "channels": {channel: {"source": source, "output_off_ms": None,
+                "device_event_ms": None, "recovered_ms": None, "observed_until_ms": None,
+                "channels": {channel: {"source": source, "normal_end": None, "output_off_ms": None,
                                        "mechanical_stop_ms": None, "stopping_distance_mm": None,
                                        "continued_until_own_deadline": None}
                              for channel, source in case.sources.items()},
