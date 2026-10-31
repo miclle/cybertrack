@@ -1,5 +1,5 @@
 # CyberTrack 模型辅助设计
 
-源码随 CyberTrack 一起维护。安装、操作与验收见 [工具入口](../solidcue/README.md)。
+这里是 CyberTrack 模型辅助设计工具的源码。要在 FreeCAD 整机上选择零件、提交修改并查看结果，请从[安装与操作指南](../solidcue/README.md)开始。
 
 来源及原始文件哈希见 [UPSTREAM.json](UPSTREAM.json)，许可证见 [LICENSE](LICENSE)，修改说明见 [NOTICE](NOTICE)。
