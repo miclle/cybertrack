@@ -16,6 +16,59 @@ spec.loader.exec_module(module)
 
 
 class CaptureTests(unittest.TestCase):
+    def test_simulated_text_reaches_closed_host_without_using_echo_or_oracles(self):
+        class Socket:
+            async def __aenter__(self): return self
+            async def __aexit__(self,*args): pass
+            send=AsyncMock()
+            recv=AsyncMock(side_effect=[json.dumps(message) for message in [
+                dict(type='hello',session_id='fixture'),
+                dict(type='mcp',payload=dict(id=1,method='tools/list',params={})),
+                dict(type='stt',text='unrelated text echo'),
+                dict(type='mcp',payload=dict(id=2,method='tools/call',params=dict(name='self.tank.move',arguments=dict(direction='forward',duration_ms=3000)))),
+                dict(type='tts',state='stop')]])
+        histories=[]
+        wire=dict(result=dict(content=[dict(type='text',text='{"result":"action_unspecified"}')],isError=False))
+        def replay(binary,profile,calls,**kwargs):
+            histories.append((copy.deepcopy(calls),kwargs));return [wire,dict(starts_this_boot=0)]
+        case=dict(id='A004',text='动一下三秒',context='空闲',raw_text=True,fixture_version='firmware_host',
+                  host_binary=Path('unused'),initial_profile='corpus_idle',host_text_input=True,
+                  expected_calls=['DO NOT SEND'],response_expectation='DO NOT SEND')
+        client=SimpleNamespace(connect=lambda *args,**kwargs:Socket())
+        with patch.dict(sys.modules,{'websockets.asyncio.client':client}),patch.object(module,'firmware_replay',side_effect=replay):
+            row=asyncio.run(module.capture_case(dict(token='test',device_id='test',client_id='test'),
+                [dict(name='self.tank.move'),*[dict(name='self.tank.t'+str(i)) for i in range(11)]],case))
+        self.assertEqual(row['host_input_mode'],'simulated_recognized_text')
+        self.assertEqual([c['input_text'] for c in row['host_calls'] if 'input_text' in c],['动一下三秒'])
+        self.assertEqual(row['host_calls'][-1]['name'],'self.tank.move')
+        self.assertTrue(all(kwargs==dict(await_stt=True) for _,kwargs in histories))
+        self.assertEqual(histories[0][0],row['host_calls'])
+        sent=[json.loads(c.args[0]) for c in Socket.send.call_args_list]
+        utterances=[c['text'] for c in sent if c.get('type')=='listen']
+        self.assertEqual(utterances,['动一下三秒'])
+        for changes in (dict(host_stt_events=True),dict(opus_frames=[]),dict(raw_text=False)):
+            with patch.dict(sys.modules,{'websockets.asyncio.client':client}),self.subTest(changes=changes),self.assertRaises(ValueError):
+                asyncio.run(module.capture_case(dict(token='test',device_id='test',client_id='test'),[],{**case,**changes}))
+
+    def test_firmware_text_runner_declares_simulation_and_strips_oracles(self):
+        async def exercise():
+            with tempfile.TemporaryDirectory() as tmp:
+                base=Path(tmp)
+                case=json.loads((ROOT/'docs/validation/voice-cases.json').read_bytes())['cases'][0]
+                for name,value in [('connection',{}),('tools',{'tools':[{'name':f'self.tank.t{i}'} for i in range(12)]}),
+                                   ('corpus',{'cases':[case]})]:
+                    (base/name).write_text(json.dumps(value));(base/name).chmod(0o600)
+                (base/'role').write_text('fixture');(base/'host').write_bytes(b'fixture')
+                args=SimpleNamespace(**{k:base/k for k in ('connection','tools','corpus','role','output')},
+                    ids=None,model='fixture',timeout=1,firmware_host=base/'host',raw_text=True)
+                mocked=AsyncMock(return_value=dict(id=case['id'],calls=[],completion='tts_stop',completed=True))
+                with patch.object(module,'capture_case',mocked):await module.run(args)
+                sent=mocked.call_args.args[2]
+                self.assertTrue(sent['host_text_input']);self.assertNotIn('host_stt_events',sent)
+                self.assertNotIn('expected_calls',sent);self.assertNotIn('response_expectation',sent)
+                self.assertEqual(json.loads(args.output.read_bytes())['host_input_mode'],'simulated_recognized_text')
+        asyncio.run(exercise())
+
     def test_actual_stt_events_reach_closed_host_in_received_order(self):
         class Socket:
             async def __aenter__(self): return self

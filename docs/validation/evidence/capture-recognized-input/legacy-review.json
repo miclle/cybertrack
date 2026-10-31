@@ -1,0 +1,163 @@
+{
+  "scope": "Input provenance and complete host reply/state reproduction; semantic errors retained, no human/physical acceptance",
+  "host_input_mode": "simulated_initial_input",
+  "host_sha256": "a20da0879ee6447e94d8c9aad79057f8d38dd53235478d6f8765560043d15c6e",
+  "corpus_sha256": "e6548c756c03322eba881a9612a3f06c259e0e4d5c2ed51c9dfca502b4c51773",
+  "cases": 12,
+  "completed": 12,
+  "strict_tool_matches": 9,
+  "tools_before_input": [],
+  "replies_and_final_states_reproduced": true,
+  "results": [
+    {
+      "id": "V064",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "好的，不吹泡泡。"
+    },
+    {
+      "id": "C006",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "好的，不编排表演。有什么需要我做的吗？"
+    },
+    {
+      "id": "N006",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "明白，不动当前序列。"
+    },
+    {
+      "id": "C007",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "用户要求修改草稿，但草稿只支持行走和泡泡。点火不支持，需要说明。根据规则：草稿要求喷水或点火，直接说明只支持行走和泡泡，不查询、不提交。但这里用户说\"第一步改成点火\"，我需要先说明限制。不过规则说\"草稿要求喷水或点火，直接说明只支持行走和泡泡，不查询、不提交\"。所以我直接说明即可，不调用工具。"
+    },
+    {
+      "id": "C008",
+      "completed": true,
+      "strict_tool_match": false,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "我需要先查看当前草稿的状态和版本。用户说\"第二步短一点\"，但没说具体几秒。草稿第二步是泡泡1000毫秒。需要问具体时长。第二步现在是吹泡泡一秒。你想改成几秒？"
+    },
+    {
+      "id": "C005",
+      "completed": true,
+      "strict_tool_match": false,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "好的，我来查看当前的表演草稿。当前有一个已保存的表演草稿，包含两步：先左转880毫秒，再吹泡泡1000毫秒。不过这个草稿需要在网页上预览并点击开始来执行，我这边没有语音确认执行的工具。目前设备处于空闲状态，草稿已经保存好了。请您在网页上预览这段表演，确认没问题后点一下开始按钮就可以播放了。"
+    },
+    {
+      "id": "V079",
+      "completed": true,
+      "strict_tool_match": false,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "你说的\"动一下那个东西\"有点含糊，我这边可以前进、后退、左右转、喷水、吹泡泡、点火这些动作。你想让我做哪个？或者直接说\"前进\"、\"喷水\"之类的就行。"
+    },
+    {
+      "id": "V047",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "好的，停下了。"
+    },
+    {
+      "id": "V049",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "动作都停下了，我在这儿等你。"
+    },
+    {
+      "id": "V001",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [
+        "accepted"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "好的，前进中。"
+    },
+    {
+      "id": "C002",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "starts": 0,
+      "draft_revision": 8,
+      "reply": "我先查一下当前草稿的状态当前草稿第二步是泡泡1秒，我把它改成2秒。第二步的泡泡已经改成两秒了。请在网页上预览一下，确认没问题再点开始。"
+    },
+    {
+      "id": "C004",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 0,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_cancelled"
+      ],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "草稿已经取消了。"
+    }
+  ]
+}

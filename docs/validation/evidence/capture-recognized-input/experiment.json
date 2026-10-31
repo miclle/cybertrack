@@ -1,0 +1,88 @@
+{
+  "base_commit": "a42c9756f45751c83f529dcfe7c2d4f6f428ec73",
+  "decision": "capture_tooling_adopted",
+  "source_candidate": "2.0.3-ct68",
+  "recorded_board": "2.0.3-ct45",
+  "firmware_changed": false,
+  "role_changed": false,
+  "platform_configuration_changed": false,
+  "flashed": false,
+  "platform_sessions": 24,
+  "host_input_mode": "simulated_recognized_text",
+  "result": {
+    "scope": "Twenty-four actual platform text sessions with simulated recognized originals and actual host; not ASR/human/board acceptance",
+    "identity": {
+      "model": "deepseek-v4-flash",
+      "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+      "tool_schema_sha256": "62f76a865ce61c78eeecab640bf78d30854e4940aef07b55acabe598216fd6c1",
+      "capture_source_sha256": "4d2c69144d6e4db85dad2027dd8649bb891d13359f692ff97abfb788bf9b86ec"
+    },
+    "total": 24,
+    "completed": 24,
+    "strict_tool_matches": 20,
+    "state_matches": 24,
+    "clarification_rejections": 2,
+    "all_input_and_rpc_states_reproduced": true
+  },
+  "local_check_groups": 15,
+  "improvement_tests": 93,
+  "old_mode_compatibility": {
+    "placeholder_cases": 12,
+    "placeholder_mode": "simulated_initial_input",
+    "actual_stt_cases": 10,
+    "actual_stt_mode": "platform_stt_events",
+    "full_rpc_and_state_reproduced": true
+  },
+  "limitations": [
+    "Text simulation does not evaluate ASR, microphone, speaker, device timing or physical motion.",
+    "Two A004 guessed actions refused; two D001 extra queries remain strict model failures.",
+    "Relative draft inputs in this sample only queried; no live relative-edit rejection is claimed.",
+    "No fixed eighty/eight or human twenty score overwritten."
+  ],
+  "files": {
+    "host-manifest.json": {
+      "bytes": 4496,
+      "sha256": "2ea34719471037597e8b3b154cfd9c4d11f7d5f7fa0c556afdf46f33cbb46c43"
+    },
+    "legacy-review.json": {
+      "bytes": 5277,
+      "sha256": "9d3149fdf239ffb0d37d73f173691807c1f4b3b9244721ace6b1ff5fcae90279"
+    },
+    "plan.json": {
+      "bytes": 1132,
+      "sha256": "e5f42105b34a0a8c834e7089eab566c44f3131d7d5214125441bcacfcc023c5e"
+    },
+    "platform-1.json.gz": {
+      "bytes": 31550,
+      "sha256": "347b0e31ead93855f8f8e50ae5726863fa3e88974ede4fc10b70d88d0c6d42a0"
+    },
+    "platform-2.json.gz": {
+      "bytes": 29349,
+      "sha256": "d85cc10eae58f866a33cf29fd316f5f0a315c0029e199666bfc0ad45db0ce0ae"
+    },
+    "review-1.json": {
+      "bytes": 5266,
+      "sha256": "c9e4d4db8fc5d6b9a6b5037b3423e1feb027728b7e2a909b0b5c59b9163ae38f"
+    },
+    "review-2.json": {
+      "bytes": 5338,
+      "sha256": "4bed04cd083ca1ec9ad621b861c1f7215a7a8f3d45b7613563450e35f0766144"
+    },
+    "software-checks.json": {
+      "bytes": 48643,
+      "sha256": "79b46d4bf09fbdb41813dbcbc525c31298c65318e18b24a268fe51c8363f1d1a"
+    },
+    "stt-review.json": {
+      "bytes": 5221,
+      "sha256": "fa546cb257cc710aae1955ffdf9678cf48b58a90393bd4048c2441d7b3825536"
+    },
+    "summary.json": {
+      "bytes": 11752,
+      "sha256": "a36d95fd128f45bfea0ee1d8235fde47ab057f45639be0e08c65c7c62abb6f5e"
+    },
+    "tools.json": {
+      "bytes": 17065,
+      "sha256": "62f76a865ce61c78eeecab640bf78d30854e4940aef07b55acabe598216fd6c1"
+    }
+  }
+}

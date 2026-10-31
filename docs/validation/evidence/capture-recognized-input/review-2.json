@@ -1,0 +1,171 @@
+{
+  "scope": "Input provenance and complete host reply/state reproduction; semantic errors retained, no human/physical acceptance",
+  "host_input_mode": "simulated_recognized_text",
+  "host_sha256": "a20da0879ee6447e94d8c9aad79057f8d38dd53235478d6f8765560043d15c6e",
+  "corpus_sha256": "8a350fa2b65f7737aade82bf7d4a14e4f3062028a0b83cb50d8767392dcbb237",
+  "cases": 12,
+  "completed": 12,
+  "strict_tool_matches": 10,
+  "tools_before_input": [],
+  "replies_and_final_states_reproduced": true,
+  "results": [
+    {
+      "id": "D001",
+      "completed": true,
+      "strict_tool_match": false,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "用户提到\"第二步短一点\"，这涉及到编排/修改表演草稿的上下文。我需要先查询当前状态来了解草稿情况用户说\"第二步短一点\"，但没有给出具体秒数。根据规则，相对时长且没有明确新时长时，只问要改成几秒。第二步是吹泡泡，当前是1000毫秒（1秒）。用户说\"短一点\"但没说具体时长，我需要询问具体要几秒。"
+    },
+    {
+      "id": "D004",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "starts": 0,
+      "draft_revision": 8,
+      "reply": "当前草稿第2步是泡泡1000毫秒，改成2000毫秒。第二步的泡泡已经改成两秒了，草稿已保存。请在网页上预览一下，确认没问题后点开始就行。"
+    },
+    {
+      "id": "D005",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "starts": 0,
+      "draft_revision": 8,
+      "reply": "我先查一下当前草稿的状态当前草稿第二步是吹泡泡，你要把第二步改成向右转，我保存一下好的，第二步已经改成向右转了。现在整场表演是：先向左转，再向右转。请在网页上预览确认，满意就点开始。"
+    },
+    {
+      "id": "D006",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_cancelled"
+      ],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "草稿已经取消了。"
+    },
+    {
+      "id": "D010",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "starts": 0,
+      "draft_revision": 8,
+      "reply": "I need to check the current draft status first before modifyingthe show draft.I'll modify step 2's bubble duration to 500ms第二步的泡泡已经改成半秒了，其他步骤没动。请在网页上预览一下，点开始就能表演。"
+    },
+    {
+      "id": "A001",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "\"那个东西\"是啥呀？你想让我往前走、后退，还是转个方向？或者你是想让我喷水、吹泡泡、点火？说清楚点我就动起来。"
+    },
+    {
+      "id": "A004",
+      "completed": true,
+      "strict_tool_match": false,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "action_unspecified"
+      ],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "这次没确认成功，设备没识别到具体的动作方向。你想让我怎么动？前进、后退、左转还是右转？"
+    },
+    {
+      "id": "A005",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "accepted"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "好的，小车向前走了。"
+    },
+    {
+      "id": "A006",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "accepted"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "好的，泡泡已经启动了。"
+    },
+    {
+      "id": "A007",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "accepted"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "已开始喷水一秒。"
+    },
+    {
+      "id": "A009",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "我在待命，目前没有动作在运行。有什么需要我帮忙的吗？"
+    },
+    {
+      "id": "A010",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "动作都停下了，我在这儿等你。"
+    }
+  ]
+}

@@ -139,6 +139,6 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 
 ### 完整 MCP 主机的输入边界
 
-`--firmware-host` 运行实际分发和回调，不等于识别链路也经过设备。现有文本模式将主机初始化为 `captured host input`，轨迹标记 `simulated_initial_input`；该占位文本没有形成各条原话的语义标记。`--synthetic-speech` 则按平台实际 STT 事件记录 `host_calls` 输入并使用 `--await-stt` 重放，标记 `platform_stt_events`。两者不可混作相同控制覆盖；文本模式中的合法误改不能直接证明 STT 门禁失效。
+`--firmware-host` 运行实际分发和回调，不等于识别链路也经过设备。历史文本模式将主机初始化为 `captured host input`，轨迹标记 `simulated_initial_input`；该占位文本没有形成各条原话的语义标记。`--synthetic-speech` 则按平台实际 STT 事件记录 `host_calls` 输入并使用 `--await-stt` 重放，标记 `platform_stt_events`。两者不可混作相同控制覆盖；文本模式中的合法误改不能直接证明 STT 门禁失效。
 
-[角色分流对照](intent-routing-role.md)按前一种方式保留原始 72 次结果，没有回填原话或改写捕获以提升成绩。后续增加模拟原话模式时须使用独立模式标识与新轨迹，不追认旧会话为已通过完整语音路径。
+[角色分流对照](intent-routing-role.md)按前一种方式保留原始 72 次结果，没有回填原话或改写捕获以提升成绩。新文本诊断现使用 `simulated_recognized_text`，将原话作为模拟识别事件注入；与历史占位及真实 STT 分开标识，不追认旧会话为已通过完整语音路径。[实现与复核](capture-recognized-input.md)
