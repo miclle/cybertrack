@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-31",
+  "version": "2.0.3-ct45",
+  "scope": "Role save and restart only. No application flash or actuator request.",
+  "platform_role": {
+    "sha256": "ce026467976816ce61ee71abbac1ccf305815159e565a5fd8dbe38e6429e1775",
+    "hash_convention": "UTF-8 with one trailing LF, editor count excludes LF",
+    "characters": 5917,
+    "previous_sha256": "79662d7d2e4540a6f448a0b2330cecad2ba49f0ee2d59d1430f5279f96a677ac",
+    "matches": true,
+    "reopenedAfterSave": true
+  },
+  "board": {
+    "firmware": "2.0.3-ct45",
+    "application_states": [
+      "starting",
+      "activating",
+      "idle"
+    ],
+    "boot_id_changed": true,
+    "ct45_web_page_sha256": "3771c3a1f61e35cfc64469218fb89be7bd202d647bed1b8088255771c530a453",
+    "startup_outputs": [
+      "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5",
+      "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    ],
+    "sample_count_after_restart": 8,
+    "zero_starts_all_samples": true,
+    "outputs_off_all_samples": true
+  }
+}
