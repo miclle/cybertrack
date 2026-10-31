@@ -114,7 +114,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct56")')
+                 'set(PROJECT_VER "2.0.3-ct57")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
@@ -135,7 +135,7 @@ def main():
                  '    if (cybertrack) ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());\n'
                  '    PropertyList arguments = (*tool_iter)->properties();')
     replace_once(source / "main/mcp_server.cc", '#include "mcp_server.h"',
-                 '#include "mcp_server.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"\n#include "boards/bread-compact-wifi/action_plan_json.h"\n#include "boards/bread-compact-wifi/show_command_json.h"')
+                 '#include "mcp_server.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"\n#include "boards/bread-compact-wifi/admission_result.h"\n#include "boards/bread-compact-wifi/action_plan_json.h"\n#include "boards/bread-compact-wifi/show_command_json.h"')
     replace_once(source / "main/mcp_server.cc",
                  '    if (cybertrack) ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());',
                  ACTION_ARGUMENT_CHECK)
@@ -144,7 +144,15 @@ def main():
                  '    if (tool_name == "self.tank.compose" || tool_name == "self.tank.set_speed" || tool_name == "self.tank.adjust_speed" || tool_name == "self.tank.sequence" || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy") {\n'
                  '        const char* admission_error = nullptr;\n'
                  '        int ticket = CyberTrackActionClaim(id, tool_name.c_str(), &admission_error);\n'
-                 '        if (!ticket) { ReplyError(id, admission_error); return; }\n'
+                 '        if (!ticket) {\n'
+                 '            if (tool_name == "self.tank.set_speed" || tool_name == "self.tank.adjust_speed") {\n'
+                 '                auto result = CyberTrackAdmissionResult(tool_name.c_str()+10, admission_error);\n'
+                 '                if (result.empty()) ReplyError(id, admission_error);\n'
+                 '                else ReplyResult(id, result);\n'
+                 '            }\n'
+                 '            else ReplyError(id, admission_error);\n'
+                 '            return;\n'
+                 '        }\n'
                  '        arguments.AddProperty(Property("_ct_ticket", kPropertyTypeInteger, ticket));\n'
                  '    }\n'
                  '    // Use main thread to call the tool')
@@ -153,7 +161,7 @@ def main():
     replace_once(board / "compact_wifi_board.cc", BOOT_CALLBACK, '')
     app = source / "main/application.cc"
     replace_once(app, '#include "application.h"',
-                 '#include "application.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"')
+                 '#include "application.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"\n#include "boards/bread-compact-wifi/admission_result.h"')
     replace_once(app, '    protocol_->OnNetworkError([this](const std::string& message) {',
                  '    protocol_->OnNetworkError([this](const std::string& message) {\n        CyberTrackActionLink(false);')
     replace_once(app, '    protocol_->OnAudioChannelOpened([this, codec, &board]() {',
@@ -165,7 +173,7 @@ def main():
     replace_once(app, 'bool Application::UpgradeFirmware(Ota& ota, const std::string& url) {',
                  'bool Application::UpgradeFirmware(Ota& ota, const std::string& url) {\n    CyberTrackShutdown();')
     replace_once(source / "main/protocols/websocket_protocol.cc", '#include "websocket_protocol.h"',
-                 '#include "websocket_protocol.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"')
+                 '#include "websocket_protocol.h"\n#include "boards/bread-compact-wifi/cybertrack_tools.h"\n#include "boards/bread-compact-wifi/admission_result.h"')
     replace_once(source / "main/protocols/websocket_protocol.cc", 'void WebsocketProtocol::CloseAudioChannel() {',
                  'void WebsocketProtocol::CloseAudioChannel() {\n    CyberTrackActionLink(false);')
     for name in ("water_policy.h", "water_policy.c"):
@@ -173,7 +181,7 @@ def main():
     apply_feedback_overlay(source, replace_once)
     apply_audio_overlay(source, replace_once)
     apply_display_overlay(source, replace_once)
-    for name in ("status_facts.h", "voice_feedback.h", "show_draft.h", "show_command_json.h", "recent_command.h", "proximity_guard.h", "proximity_audio.h", "proximity_audio.cc", "distance_reading.h", "ultrasonic.h", "ultrasonic.cc", "cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
+    for name in ("admission_result.h", "status_facts.h", "voice_feedback.h", "show_draft.h", "show_command_json.h", "recent_command.h", "proximity_guard.h", "proximity_audio.h", "proximity_audio.cc", "distance_reading.h", "ultrasonic.h", "ultrasonic.cc", "cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
         shutil.copy2(HERE / name, board / name)
     sounds = '#pragma once\n'
     for key, filename in (("ProximityBeep", "range-beep.ogg"), ("ProximityStop", "range-stop.ogg")):

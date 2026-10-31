@@ -48,12 +48,13 @@ end = receipt_source.index('\n}\n}', start) + 2
 (build / 'receipt_reply.inc').write_text(receipt_source[start:end])
 subprocess.run(['cc', '-std=c11', *flags, '-I', str(root/'firmware/esp32-linx/main'), '-c',
                 str(root/'firmware/esp32-linx/main/water_policy.c'), '-o', str(build/'receipt_water_policy.o')], check=True)
-for executable in ('receipt_adapter_test','receipt_replay'):
+for executable in ('receipt_adapter_test','receipt_replay','admission_result_test'):
     subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
                     '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
                     str(Path(__file__).with_name(executable+'.cc')), str(build/'cJSON.o'),
                     str(build/'receipt_water_policy.o'), '-o', str(build/executable)], check=True)
 subprocess.run([str(build/'receipt_adapter_test')], check=True)
+subprocess.run([str(build/'admission_result_test')], check=True)
 
 # Replay both admission outcomes against the same dispatch contract as the board.
 speed_call = dict(name='self.tank.set_speed', arguments={'speed_percent':100}, elapsed_ms=1800)
@@ -62,10 +63,12 @@ for profile in ('thirty_second_forward70', 'idle', 'voice_offline', 'wifi_offlin
                                     input=json.dumps([speed_call]), text=True).splitlines()
     reply, final = map(json.loads, lines)
     if profile != 'thirty_second_forward70':
-        assert 'ReplyError(id, admission_error)' in text
+        assert 'auto result = CyberTrackAdmissionResult(tool_name.c_str()+10, admission_error);' in text
+        assert 'else ReplyResult(id, result);' in text
+        assert reply['result']=='rejected' and reply['physical_feedback'] is False
         assert 'CyberTrackActionClaim(id, tool_name.c_str(), &admission_error)' in text
         expected = {'idle':'not_moving', 'voice_offline':'voice_offline', 'wifi_offline':'wifi_offline'}
-        assert reply['rpc_error'].startswith('speed_rejected_' + expected[profile] + ':')
+        assert reply['rejection_reason'].startswith('speed_rejected_' + expected[profile] + ':')
         assert final['starts_this_boot'] == 0 and not any(final['logical_outputs'].values())
     else:
         assert reply['result'] == 'accepted' and reply['move_speed_percent'] == 100
