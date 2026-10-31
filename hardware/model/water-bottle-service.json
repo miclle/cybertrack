@@ -1,0 +1,25 @@
+{
+  "model": "CyberTrack.FCStd",
+  "sha256": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23",
+  "bottle_diameter_height_mm": [
+    48.8,
+    114.0
+  ],
+  "axis": "+Z",
+  "travel_mm": 150,
+  "swept_z_mm": [
+    40.0,
+    304.0
+  ],
+  "released_first": [
+    "WaterRetentionBand",
+    "WaterStrapClosure"
+  ],
+  "checked_fixed_shapes_with_hose": 206,
+  "volume_threshold_mm3": 0.01,
+  "with_hose_overlaps_mm3": {
+    "WaterHoseRoute": 793.9267
+  },
+  "after_hose_removal_overlaps_mm3": {},
+  "pass": true
+}
