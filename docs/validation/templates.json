@@ -8,7 +8,7 @@
   "power_runs": [],
   "power_run_fields": ["run_id", "firmware", "battery", "procedure", "condition_id", "duration_s", "rail", "voltage_v", "current_a", "temperature_c", "rating_source", "instrument", "reset_count", "end_reason"],
   "cost_items": [],
-  "cost_item_fields": ["bom_id", "quantity", "actual_unit_cny", "source", "purchased_on", "estimate_only"],
+  "cost_item_fields": ["bom_id", "quantity", "actual_unit_cny", "source", "purchased_on", "estimate_only", "estimated_unit_cny", "scenario"],
   "maintenance_cycles": [],
   "maintenance_cycle_fields": ["sample_id", "condition_id", "revision", "repeat", "completed", "checks", "faults", "observed_by"],
   "maintenance_trials": [],
