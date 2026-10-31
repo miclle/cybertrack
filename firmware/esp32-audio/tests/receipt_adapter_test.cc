@@ -41,7 +41,16 @@ int main() {
     assert(StatusFacts("none", false, true, false, "accepted").find("步骤间等待") != std::string::npos);
     assert(StatusFacts("none", false, true, true, "").find("步骤间等待") == std::string::npos);
     assert(!cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(cJSON_GetObjectItemCaseSensitive(initial,"recent_command"),"valid")));
+    auto* capabilities = cJSON_GetObjectItemCaseSensitive(cJSON_GetObjectItemCaseSensitive(initial,"show_draft"),"editing_capabilities");
+    assert(field(capabilities,"confirmation") == "web");
+    assert(cJSON_GetArraySize(cJSON_GetObjectItemCaseSensitive(capabilities,"allowed")) == 2);
+    assert(!cJSON_GetObjectItemCaseSensitive(initial,"fault_recovery"));
     cJSON_Delete(initial);
+    outputs.fault = true;
+    auto* fault_status = cJSON_Parse(Reply("get_status").c_str());
+    assert(field(fault_status,"fault_recovery").find("不要重启") != std::string::npos);
+    cJSON_Delete(fault_status);
+    outputs.fault = false;
     WebCommand command;
     command.operation="move"; command.target=AudioActionGuard::MoveOnly;
     command.sequence=1; command.window=sessions.window; command.direction="forward"; command.move_ms=1000;

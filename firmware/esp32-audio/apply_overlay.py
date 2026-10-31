@@ -114,7 +114,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct46")')
+                 'set(PROJECT_VER "2.0.3-ct47")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',

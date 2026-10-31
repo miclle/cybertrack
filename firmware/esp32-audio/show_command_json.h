@@ -1,5 +1,6 @@
 #pragma once
 #include "show_draft.h"
+#include "status_facts.h"
 #include "action_plan_json.h"
 #include <cmath>
 #include <cstdio>
@@ -30,6 +31,8 @@ inline bool ParseShowEdit(const cJSON* root, ShowDraft::Command& command) {
 inline std::string ShowDraftJson(const ShowDraft& draft, uint64_t now) {
     std::string result="{\"active\":";
     result+=draft.active?"true":"false";
+    result+=",\"editing_capabilities\":";
+    result+=DraftEditingCapabilities;
     result+=",\"revision\":"+std::to_string(draft.CurrentRevision())+",\"expires_in_ms\":"+std::to_string(draft.Remaining(now));
     result+=",\"source\":\"";result+=!draft.active?"none":draft.web_owner?"web":"voice";result+="\",\"steps\":[";
     uint64_t duration=0;

@@ -114,6 +114,7 @@ def tools_page(tools, cursor=''):
 async def capture_case(connection,tools,case,timeout=45):
     from websockets.asyncio.client import connect
     status=copy.deepcopy(case['fixture_status']) if 'fixture_status' in case else fixture(case['context'])
+    version = case.get('fixture_version','ct46' if case.get('ct46') else 'ct45')
     row=dict(id=case['id'],calls=[],replies=[],events=[],completed=False,input_text=case['text'],context=case['context'])
     headers={'Authorization':'Bearer '+connection['token'].removeprefix('Bearer '),
              'Device-Id':connection['device_id'],'Client-Id':connection['client_id'],'Protocol-Version':'1'}
@@ -139,7 +140,7 @@ async def capture_case(connection,tools,case,timeout=45):
                 payload=msg.get('payload',{});method=payload.get('method');params=payload.get('params') or {}
                 row['events'].append(method)
                 result=None
-                if method=='initialize':result=dict(protocolVersion='2024-11-05',capabilities={'tools':{}},serverInfo=dict(name='CyberTrack capture only',version='ct46' if case.get('ct46') else 'ct45'))
+                if method=='initialize':result=dict(protocolVersion='2024-11-05',capabilities={'tools':{}},serverInfo=dict(name='CyberTrack capture only',version=version))
                 elif method=='tools/list':result=tools_page(tools,params.get('cursor',''))
                 elif method=='tools/call':
                     name=params['name'];args=params.get('arguments',{})
@@ -147,17 +148,22 @@ async def capture_case(connection,tools,case,timeout=45):
                     row['calls'].append(dict(name=name,arguments=args))
                     try:
                         if name.replace('self_tank_','self.tank.',1) not in {t['name'] for t in tools}:raise ValueError('unknown tool')
-                        if case.get('ct46') and name.endswith('compose') and (
+                        if version != 'ct45' and name.endswith('compose') and (
                                 draft_observed_at is None or time.monotonic()-draft_observed_at >= 30):
                             receipt={**copy.deepcopy(status),'operation':'show_edit','result':'draft_changed'}
                         else:
                             receipt=simulated_reply(status,name,args)
                         if name.endswith('compose') or name.endswith('stop'):draft_observed_at=None
                         if name.endswith('get_status'):draft_observed_at=time.monotonic()
-                        if case.get('ct46') and name.endswith('get_status'):
+                        if version == 'ct47' or (version == 'ct46' and name.endswith('get_status')):
                             helper = Path(__file__).resolve().parents[1] / 'build/lingxi-schema-export/status-fixture'
-                            receipt['status_facts'] = subprocess.run([str(helper)], input=json.dumps(receipt),
+                            output = subprocess.run([str(helper), version], input=json.dumps(receipt),
                                 text=True, capture_output=True, check=True).stdout.strip()
+                            if version == 'ct47':
+                                fields = json.loads(output)
+                                receipt['show_draft']['editing_capabilities'] = fields.pop('editing_capabilities')
+                                if name.endswith('get_status'): receipt.update(fields)
+                            else: receipt['status_facts'] = output
                         if name.endswith('compose') or name.endswith('stop'):status=copy.deepcopy(receipt);status['result']='ok'
                         row.setdefault('simulated_receipts',[]).append(receipt)
                         result={'content':[{'type':'text','text':json.dumps(receipt,ensure_ascii=False)}],'isError':False}
@@ -204,9 +210,9 @@ async def run(args):
     cases=[{k:c[k] for k in ('id','text','context','fixture_status') if k in c} for c in cases]
     if getattr(args, 'raw_text', False):
         for case in cases: case['raw_text']=True
-    if getattr(args,'ct46',False):
-        for case in cases: case['ct46']=True
-    trace=dict(fixture_version='ct46' if getattr(args,'ct46',False) else 'ct45',kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
+    version = 'ct47' if getattr(args,'ct47',False) else 'ct46' if getattr(args,'ct46',False) else 'ct45'
+    for case in cases: case['fixture_version']=version
+    trace=dict(fixture_version=version,kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
                model_source='visible platform configuration; no model identity in WSS response',role_sha256=hashlib.sha256(args.role.read_bytes()).hexdigest(),
                transport=ENDPOINT,tool_schema_sha256=hashlib.sha256(args.tools.read_bytes()).hexdigest(),corpus_sha256=hashlib.sha256(args.corpus.read_bytes()).hexdigest(),
                input_mode='raw_text_diagnostic' if getattr(args,'raw_text',False) else 'context_prefixed',
@@ -225,7 +231,9 @@ if __name__=='__main__':
     for name in ('connection','tools','corpus','role','output'):p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
     p.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
-    p.add_argument('--ct46', action='store_true', help='Use candidate status facts compiled from status_facts.h')
+    versions=p.add_mutually_exclusive_group()
+    versions.add_argument('--ct47', action='store_true', help='Include draft capabilities and fault recovery in candidate receipts')
+    versions.add_argument('--ct46', action='store_true', help='Use candidate status facts compiled from status_facts.h')
     args=p.parse_args()
     try:asyncio.run(run(args))
     except Exception as error:
