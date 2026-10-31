@@ -1,0 +1,168 @@
+{
+  "scope": "Single platform parameter diagnostic: temperature 0.7 to 0.2; original ct61 tool descriptions and role; real platform raw text, actual host, no board IO",
+  "configuration": {
+    "model": "deepseek-v4-flash",
+    "temperature": 0.2,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_reply_length": 500,
+    "thinking": {
+      "type": "disabled"
+    },
+    "reasoning_effort": "low",
+    "usage": {
+      "include_usage": true
+    },
+    "source": "Fresh saved configuration reopened in built-in browser; setting labels are UI labels, no independent WSS model identity"
+  },
+  "host_sha256": "d79280610fbc0076cdc2abdba3ebde8b6d76a11319e5f8213229f8477d9e98c4",
+  "schema_sha256": "19af1bd295a49f066fe25a3915d82dab0f0cecee2150a68e8be0600010c4b6f1",
+  "source_commit": "66226a417049366a36b35cb95e90bf9d58ea29b4",
+  "runs": [
+    {
+      "case_id": "C005",
+      "round": 1,
+      "capture": "temperature02-C005-1.json.gz",
+      "capture_json_sha256": "8f707d236f752237a639d95261bd949c6c1890447ea9b0deb40578efa41cdb4f",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "elapsed_ms": 28437
+    },
+    {
+      "case_id": "C008",
+      "round": 1,
+      "capture": "temperature02-C008-1.json.gz",
+      "capture_json_sha256": "6df0222701628cb39bb3477a4ad1db497c09c7cc47a52b98595767274499385e",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace_step",
+            "revision": 7,
+            "step": 2,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":500,\"ignition_ms\":0,\"speed_percent\":100}]"
+          }
+        }
+      ],
+      "elapsed_ms": 24681
+    },
+    {
+      "case_id": "C005",
+      "round": 2,
+      "capture": "temperature02-C005-2.json.gz",
+      "capture_json_sha256": "9adc7f6172070e29bb5df2bd4dd170f0c9df40bfa32febce75fc9703af8a2498",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "elapsed_ms": 43636
+    },
+    {
+      "case_id": "C008",
+      "round": 2,
+      "capture": "temperature02-C008-2.json.gz",
+      "capture_json_sha256": "037ff427fab19f86ffe0511cf79b79bf0260b9a52231e52efec840b00d95943d",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "elapsed_ms": 22305
+    },
+    {
+      "case_id": "C005",
+      "round": 3,
+      "capture": "temperature02-C005-3.json.gz",
+      "capture_json_sha256": "86a2c50e36156b5c3c7d9d24ef9591221d2a1e8ccbe346b26fc51d0942c93845",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "elapsed_ms": 33882
+    },
+    {
+      "case_id": "C008",
+      "round": 3,
+      "capture": "temperature02-C008-3.json.gz",
+      "capture_json_sha256": "be4d68ec5809ddb8dce79d2cc454da49aedc24afcd807fd411d4d311b5f579fa",
+      "exit_code": 0,
+      "completed": true,
+      "completion": "tts_stop",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "elapsed_ms": 24916
+    }
+  ],
+  "original_configuration": {
+    "model": "deepseek-v4-flash",
+    "temperature": 0.7,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_reply_length": 500,
+    "thinking": {
+      "type": "disabled"
+    },
+    "reasoning_effort": "low",
+    "usage": {
+      "include_usage": true
+    },
+    "source": "Fresh saved configuration reopened in built-in browser; setting labels are UI labels, no independent WSS model identity"
+  },
+  "restored_configuration": {
+    "model": "deepseek-v4-flash",
+    "temperature": 0.7,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_reply_length": 500,
+    "thinking": {
+      "type": "disabled"
+    },
+    "reasoning_effort": "low",
+    "usage": {
+      "include_usage": true
+    },
+    "source": "Fresh saved configuration reopened in built-in browser; setting labels are UI labels, no independent WSS model identity"
+  },
+  "temperature_restored_and_reopened": true,
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "role_ui_readback_characters": 5991,
+  "role_ui_readback_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "decision": "not_adopted",
+  "baseline": "The baseline group of ../compose-routing/experiment.json, earlier unmodified ct61 schemas at temperature 0.7; not an interleaved temperature experiment",
+  "local_screenshots": {
+    "output/model-parameters/temperature-02-readback.png": "098861dcc6370a4246fc52e4e3e3e329667bb9a199cb4eac392241b41980d47c",
+    "output/model-parameters/temperature-07-restored.png": "899f31c09730d63c268bcab95979e6c7fbefcedeeb66ec3d2ec63b302cdde4b5"
+  }
+}
