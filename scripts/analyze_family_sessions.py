@@ -24,10 +24,10 @@ def choices(row, key, allowed):
 
 
 def independently_started_and_stopped(row):
-    fields = ("first_use", "first_action_completed", "independent_stop")
+    fields = ("first_use", "web_opened", "first_action_completed", "independent_stop")
     flags = [row.get(k) for k in fields]
     if any(v is not None and type(v) is not bool for v in flags):
-        raise ValueError("First use, action and stop observations must be boolean or null")
+        raise ValueError("First use, web access, action and stop observations must be boolean or null")
     elapsed, help_count = row.get("first_use_seconds"), row.get("help_count")
     if elapsed is not None and (type(elapsed) not in (int, float) or not math.isfinite(elapsed) or elapsed < 0):
         raise ValueError("Invalid first use duration")

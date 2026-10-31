@@ -29,6 +29,7 @@ button:disabled{opacity:.5;cursor:default}.save{background:#314e39;color:white}.
 <button type="button" id="start">开始计时</button><button type="button" id="end" disabled>结束计时</button> <output id="clock" aria-label="计时器">未开始</output>
 <div class="grid"><label>网络准备（秒）<input type="number" min="0" step="any" name="network_setup_seconds"></label>
 <label>上手经过时间（秒，可手填）<input type="number" min="0" step="any" name="first_use_seconds"></label>
+<label>家长打开控制网页<select name="web_opened" data-bool></select></label>
 <label>完成指定动作<select name="first_action_completed" data-bool></select></label>
 <label>家长独立全停<select name="independent_stop" data-bool></select></label>
 <label>主持人操作提示次数<input name="help_count" type="number" min="0" step="1" placeholder="观察过且没提示填 0"></label></div></fieldset>

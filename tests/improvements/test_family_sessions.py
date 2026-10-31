@@ -8,7 +8,7 @@ from analyze_family_sessions import FAMILIES, summarize
 
 def sheet(family):
     return dict(cohort_id='fixture', condition_id='lan', firmware='ct45', prototype_or_device='device',
-                anonymous_id=family, evidence_kind='family_observation', parent_present=True, first_use=True, first_action_completed=True,
+                anonymous_id=family, evidence_kind='family_observation', parent_present=True, first_use=True, web_opened=True, first_action_completed=True,
                 independent_stop=True, first_use_seconds=180, help_count=0, free_play_observed=True,
                 repeat_plays=['登场'], modified_shows=['登场'])
 
@@ -58,3 +58,10 @@ class FamilyTests(unittest.TestCase):
         r = summarize(rows)['groups'][0]
         self.assertEqual(r['same_play_repeated']['result'], 'met')
         self.assertEqual(r['replayed_or_modified_show']['positive'], 5)
+
+    def test_voice_only_does_not_prove_web_onboarding(self):
+        rows = [sheet(i) for i in FAMILIES]
+        rows[0]['web_opened'] = False
+        rows[1]['web_opened'] = None
+        first = summarize(rows)['groups'][0]['independent_use']
+        self.assertEqual((first['observed'], first['positive'], first['result']), (4, 3, 'pending'))

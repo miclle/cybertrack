@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 const {chromium}=await import(process.env.CYBERTRACK_PLAYWRIGHT_MODULE
   ? pathToFileURL(process.env.CYBERTRACK_PLAYWRIGHT_MODULE).href : 'playwright');
+const fields=JSON.parse(await readFile(new URL('../../docs/validation/templates.json',import.meta.url),'utf8')).family_session_fields;
 const browser=await chromium.launch({headless:true});
 try {
   for(const width of [320,390,1280]){
@@ -36,6 +37,7 @@ try {
       return row;
     }
     const row=await download();
+    assert.deepEqual(Object.keys(row).sort(),fields.slice().sort());
     assert.deepEqual(row.repeat_plays,['左转一秒','自编/B01','自编/B02']);assert.deepEqual(row.modified_shows,['登场']);
     assert.equal(row.help_count,null);assert.equal(row.first_action_completed,null);assert.equal(row.evidence_kind,'dry_run');
     await input('free_play_observed').selectOption('no');
