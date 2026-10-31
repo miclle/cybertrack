@@ -70,6 +70,7 @@ public:
         window_valid_ = false;
     }
     void Stop(uint64_t now) {
+        draft_read_ = false;
         draft.Clear();
         if (plan_active) { plan_active = false; plan_result = "cancelled"; }
         guard.Stop(now);
@@ -83,6 +84,7 @@ public:
         if (online && !voice) guard.NewVoiceSession();
         voice = online;
         if (!online) {
+            draft_read_ = false;
             if (!draft.web_owner) draft.Clear();
             if ((plan_active && !plan_web_) || (frenzy_until && !frenzy_web_)) Stop(now);
             guard.CancelPending();
@@ -210,10 +212,20 @@ public:
         if (plan_active || frenzy_until || !guard.PlanReady(now)) return "not_ready_or_busy";
         return draft.Apply(now, edit, session);
     }
+    void ObserveVoiceDraft(uint64_t now) {
+        draft_read_ = wifi && voice && !shutdown;
+        draft_read_at_ = now;
+        draft_serial_ = draft.revision;
+        draft_visible_ = draft.CurrentRevision();
+    }
     const char* VoiceDraft(uint64_t now, int ticket, const ShowDraft::Command& edit) {
         if (!wifi || !voice || shutdown || plan_active || frenzy_until || web_targets_) return "not_ready_or_busy";
         const char* result = guard.ClaimPlan(now, ticket);
         if (std::strcmp(result, "accepted")) return result;
+        const bool fresh = draft_read_ && now >= draft_read_at_ && now - draft_read_at_ < 30000 &&
+            draft_serial_ == draft.revision && draft_visible_ == draft.CurrentRevision();
+        draft_read_ = false;
+        if (!fresh || edit.revision != draft_visible_) return "draft_changed";
         return draft.Apply(now, edit, 0);
     }
     const char* WebConfirm(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window, uint32_t revision) {
@@ -306,6 +318,9 @@ public:
     const char* BubblesSource() const { return !guard.Bubbling() ? "none" : ((plan_active && plan_web_) || (web_targets_ & AudioActionGuard::BubblesOnly)) ? "web" : "voice"; }
     const char* IgnitionSource() const { return !guard.Igniting() ? "none" : ((plan_active && plan_web_) || (web_targets_ & AudioActionGuard::IgnitionOnly)) ? "web" : "voice"; }
 private:
+    bool draft_read_ = false;
+    uint64_t draft_read_at_ = 0;
+    uint32_t draft_serial_ = 0, draft_visible_ = 0;
     ActionPlan plan_;
     bool plan_web_ = false;
     uint64_t plan_deadlines_[4] = {};
