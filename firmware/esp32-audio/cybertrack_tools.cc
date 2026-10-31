@@ -281,6 +281,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     result.assign(json);
     result.pop_back();
     if (!strcmp(operation, "get_status")) {
+        result += ",\"draft_status_facts\":\"" + std::string(DraftReadFacts(draft.active)) + "\"";
         if (const char* guidance = FaultRecovery(reason))
             result += ",\"fault_recovery\":\"" + std::string(guidance) + "\"";
         auto facts = StatusFacts(reason, forward_blocked, plan_active,
