@@ -373,7 +373,7 @@ void InitializeCyberTrackTools() {
         "用status_facts中的设备事实简短回答所问部分。不要推测拒绝原因、停止原因、电量或自动恢复。查询CyberTrack状态或前方距离，参数为空。问为什么没动时只查询，不启动或重试。recent_command是本次开机最近一次动作请求回执，含operation/result/source/age_ms；查询不覆盖它，成功续租不覆盖它。它不是最后停机原因或物理反馈，较旧记录不能解释当前现象；valid=false或age_ms=null时不能推断。结合当前boot_held、fault、各通道remaining/cooldown和proximity说明已知状态；not_ready_or_busy不能凭空细分原因。accepted只表示逻辑接受，不能说实际已移动；未知就说明无法确认，不猜电池没电或线路故障。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能由云端轮询后自动行走、绕行或推算移动距离。有效距离不足50厘米时发出滴声，越近越密，不受自动避障开关或行走状态影响；至少50厘米或读数无效、过期时不响。proximity.auto_avoidance_enabled为网页自动避障开关，开机默认false、网页与语音共用；仅true时小于15厘米禁止前进，正在前进则停止并响三声；false时不因距离停前进。开关仅由网页设置，关闭不会恢复旧动作。proximity.forward_blocked为前进锁定，恢复至20厘米后允许新指令，不自动恢复。obstacle_blocked表示前进受阻，不重试。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("get_status"); });
     server.AddTool("self.tank.stop",
-        "立即停止两台电机、水枪、泡泡和点火及狂暴模式并取消全部排队动作，不关闭语音和屏幕。",
+        "明确要求停止、停下、关闭正在运行的动作时立即调用，无需先查询。只是否定要做的动作（例如“不要前进”）且没有要求停止时不调用。立即停止两台电机、水枪、泡泡和点火及狂暴模式并取消全部排队动作，不关闭语音和屏幕。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("stop"); });
     server.AddTool("self.tank.water",
         "用户明确要求喷水时直接调用，无需按键授权。duration_ms按用户时长换算为整数毫秒，范围1到30000；超过30秒只执行30秒并说明，明确要求喷水但未说时长时传1000。到期自动关闭，BOOT可提前停止。不得连续、延长或失败自动重试。可与行走同时执行、分别计时。同路正在执行时拒绝，结束后至少等待200毫秒，不排队补做。成功仅表示控制请求已接受。",
@@ -427,7 +427,7 @@ void InitializeCyberTrackTools() {
             return Reply("adjust_speed", p["_ct_ticket"].value<int>(), p["delta_percent"].value<int>());
         });
     server.AddTool("self.tank.compose",
-        "仅当用户明确编排、预览或修改泡泡表演草稿时使用；不执行动作。每次改稿前必须在本次会话调用get_status读取show_draft最新revision与steps，即使用户或上下文已经给出版本也要查。只允许行走和吹泡泡。喷水、点火、放电、护盾等不支持的效果只说明限制，不调用本工具，不提交空数组。用户说短一点等相对时长且没有明确新时长时，只问要改成几秒。参数edit为replace/replace_step/remove_step/cancel，revision为当前草稿版本，无草稿填0；step为从1开始的步骤索引，整单替换或取消填0；steps_json沿用sequence步骤格式，首版仅行走与泡泡，water_ms/ignition_ms均0。replace传完整1到16步，replace_step只传单步数组，其余步骤由设备保留；remove_step/cancel传空字符串。draft_saved表示保存未执行，简短说明改动并请家长在网页预览后点开始；draft_changed先说明版本已变，不自动重试。不能用sequence/move等工具替代确认；没有语音确认执行工具。",
+        "仅当用户明确编排、预览或修改泡泡表演草稿时使用；不执行动作。每次改稿前必须在本次会话调用get_status读取show_draft最新revision与steps，即使用户或上下文已经给出版本也要查。只允许行走和吹泡泡。喷水、点火、放电、护盾等不支持的效果只说明限制，不调用本工具，不提交空数组。用户说短一点等相对时长且没有明确新时长时，只问要改成几秒。参数edit为replace/replace_step/remove_step/cancel，revision为当前草稿版本，无草稿填0；step为从1开始的步骤索引，整单替换或取消填0；“同时／一边…一边”把行走和泡泡写进同一个步骤，各填各的时长；“先…再／然后”写为先后两步。回顾用户要求的先后关系再保存。steps_json沿用sequence步骤格式，首版仅行走与泡泡，water_ms/ignition_ms均0。replace传完整1到16步，replace_step只传单步数组，其余步骤由设备保留；remove_step/cancel传空字符串。draft_saved表示保存未执行，简短说明改动并请家长在网页预览后点开始；draft_changed先说明版本已变，不自动重试。不能用sequence/move等工具替代确认；没有语音确认执行工具。",
         PropertyList({Property("edit", kPropertyTypeString), Property("revision", kPropertyTypeInteger, 0, INT_MAX),
                       Property("step", kPropertyTypeInteger, 0, 16), Property("steps_json", kPropertyTypeString)}),
         [](const PropertyList& p) -> ReturnValue {

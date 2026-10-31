@@ -120,7 +120,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
 <p class="note">同一步的行走与泡泡同时开始，各自按时停止；步骤之间间隔 0.2 秒。速度为 PWM 设定，时长不代表实际距离或角度。</p>
 <div class="show-actions"><button id="show-save" disabled>保存到设备并预览</button></div>
 <p id="show-notice" role="status" aria-live="polite">连接后读取设备是否支持编排。</p>
-<label class="show-review"><input id="show-reviewed" type="checkbox" disabled><span>我是陪同家长，已核对上方步骤和周围空间，准备操作“全部停止”。</span></label>
+<label class="show-review"><input id="show-reviewed" type="checkbox" disabled><span>我是陪同家长，已核对哪些动作同时开始、哪些分步进行，并确认周围空间，准备操作“全部停止”。</span></label>
 <button id="show-confirm" class="show-start" disabled>家长确认开始</button>
 </details>
 <details id="help" class="help">
@@ -235,9 +235,19 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         show.dirty=show.steps.length>0;
       }
       function showPreview() {
-        const lines=show.steps.map((s,i)=>`${i+1}. `+
-          (s.move_ms ? `${directions[s.direction]} ${s.move_ms/1000} 秒 · ${s.speed_percent}%` : "原地")+
-          (s.bubbles_ms ? ` ＋ 泡泡 ${s.bubbles_ms/1000} 秒` : ""));
+        const lines=show.steps.map((step,index)=>{
+          const move=step.move_ms ? `${directions[step.direction]} ${step.move_ms/1000} 秒（${step.speed_percent}%）` : "";
+          const bubbles=step.bubbles_ms ? `吹泡泡 ${step.bubbles_ms/1000} 秒` : "";
+          const order=index===0 ? "先" : "再";
+          let action=move || bubbles;
+          if (move && bubbles) {
+            const extra=Math.abs(step.move_ms-step.bubbles_ms)/1000;
+            const finish=extra ? (step.move_ms>step.bubbles_ms ? `泡泡先停，行走再持续 ${extra} 秒` :
+              `行走先停，泡泡再持续 ${extra} 秒`) : "一起结束";
+            action=`同时开始：${move}、${bubbles}；${finish}`;
+          }
+          return `第 ${index+1} 步 · ${order}${action}`;
+        });
         const duration=show.steps.reduce((n,s)=>n+Math.max(s.move_ms,s.bubbles_ms),0)+Math.max(0,show.steps.length-1)*200;
         $("show-preview").textContent=lines.length ? lines.join("\n")+`\n预计 ${duration/1000} 秒 · ${lines.length}/16 步` : "还没有步骤。先选一个模板。";
         showControls();
