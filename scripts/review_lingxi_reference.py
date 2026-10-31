@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify an extracted reference bundle and reproduce its two tool-call scores offline."""
+"""Verify an extracted reference bundle and reproduce recorded tool-call scores offline."""
 import hashlib
 import json
 from pathlib import Path
@@ -11,10 +11,14 @@ SCORES = "docs/validation/evidence/role-5991/full-suite-scores.json"
 SUITES = ("voice", "compose")
 CANDIDATE_SCORES = "docs/validation/evidence/ct57-full/full-suite-scores.json"
 FIRMWARE_HOST_SCORES = "docs/validation/evidence/ct61-firmware-host/full-suite-scores.json"
+QWEN_MODEL_SCORES = "docs/validation/evidence/model-qwen/full-suite-scores.json"
+DOUBAO_MODEL_SCORES = "docs/validation/evidence/model-doubao/suite-scores.json"
 EVALUATIONS = (
     ("", SCORES, SUITES, "scores"),
     ("ct57/", CANDIDATE_SCORES, SUITES, "candidate_scores"),
     ("firmware-host/", FIRMWARE_HOST_SCORES, SUITES, "firmware_host_scores"),
+    ("qwen/", QWEN_MODEL_SCORES, SUITES, "qwen_scores"),
+    ("doubao/", DOUBAO_MODEL_SCORES, ("compose",), "doubao_compose_scores"),
 )
 
 
@@ -27,7 +31,11 @@ def score_replay(suite, corpus, trace, recorded):
                 "failed_stop_cases", "forbidden_call_cases", "missing", "incomplete", "tool_call_target_met"):
         if report[key] != recorded[key]:
             raise ValueError(f"{suite}: recomputed {key} differs from recorded score")
-    return {**{key: report[key] for key in ("scored", "correct", "mismatch_ids", "incomplete", "tool_call_target_met", "role_sha256")},
+    if report["invalid_tool_argument_cases"] != recorded.get("invalid_tool_argument_cases", []):
+        raise ValueError(f"{suite}: invalid argument cases differ from recorded score")
+    return {**{key: report[key] for key in ("model", "scored", "total", "correct", "mismatch_ids", "incomplete", "missing",
+                                          "failed_stop_cases", "forbidden_call_cases", "invalid_tool_argument_cases",
+                                          "tool_call_target_met", "role_sha256")},
             "fixture_version": trace["fixture_version"]}
 
 
