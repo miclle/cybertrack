@@ -1,0 +1,17 @@
+{
+  "version": "2.0.3-ct58",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Draft acknowledgement contract and host replay; no device or actuator access.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2704000,
+    "sha256": "b1c14f810135d59217b7f1cf6922a159a7f71264180377aa7b982e3d4fa1233a"
+  },
+  "checks": [
+    "Schema comparison with ct57: only the compose description differs; all twelve names and argument schemas remain identical.",
+    "Empty draft host: querying preserves inactive revision zero; only a real compose reply yields draft_saved at revision one.",
+    "Creation keeps starts_this_boot zero and all logical outputs off; generated draft preserves the 880 ms left turn followed by 1000 ms bubbles.",
+    "MCP/web host suite passed; source tool registration matches prepared firmware bytes."
+  ]
+}

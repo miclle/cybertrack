@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
         if (!guard.Moving() || guard.Starts() != 1) return 2;
     } else if (profile == "voice_offline") sessions.VoiceLink(clock_ms,false);
     else if (profile == "wifi_offline") sessions.WifiLink(clock_ms,false);
-    else if (profile != "idle") return 2;
+    else if (profile != "idle" && profile != "empty_web_draft") return 2;
 
     std::string line;
     if (!std::getline(std::cin,line)) return 2;
