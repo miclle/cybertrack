@@ -1,0 +1,521 @@
+[
+  {
+    "file": "r1-idle-51.json.gz",
+    "capture_sha256": "6483848364ef0bf1ca6c6725ccaa5dbaf1cb4c0fc571a81b3d84b0633110ff2e",
+    "schema": "51",
+    "profile": "idle",
+    "asr": "全速。",
+    "direct": false,
+    "calls": [],
+    "rpc_errors": [],
+    "replies": [
+      "\"全速\"单独说没有明确移动方向，",
+      "请问要全速前进、后退还是左转右转？"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 88
+      },
+      "54": {
+        "suppressed": 0,
+        "audible": 88
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 0,
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r1-idle-54.json.gz",
+    "capture_sha256": "90bf1bf0835f7cfda1a1f27a02d6346fb2ea6b58989ad7c56bbbe023740f2f72",
+    "schema": "54",
+    "profile": "idle",
+    "asr": "全速。",
+    "direct": true,
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "rpc_errors": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"
+      }
+    ],
+    "replies": [
+      "现在没有在移动，",
+      "所以调不了速度。"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 44
+      },
+      "54": {
+        "suppressed": 0,
+        "audible": 44
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 0,
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r1-thirty_second_forward70-51.json.gz",
+    "capture_sha256": "73041787ccf5c51aa4245ace4da07373a5cad3da11d8fe9ee2130e6f5bed015e",
+    "schema": "51",
+    "profile": "thirty_second_forward70",
+    "asr": "全速。",
+    "direct": false,
+    "calls": [],
+    "rpc_errors": [],
+    "replies": [
+      "\"全速\"这个指令不明确，",
+      "请问你是想让机器人全速前进、后退，还是转向呢？"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 92
+      },
+      "54": {
+        "suppressed": 0,
+        "audible": 92
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 1,
+      "move_direction": "forward",
+      "move_speed_percent": 70,
+      "move_remaining_ms": 30000,
+      "logical_outputs": {
+        "left": 70,
+        "right": 70,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r1-thirty_second_forward70-54.json.gz",
+    "capture_sha256": "f227c0aed32f97337b18cbc86d41e38f3b5f66ca280d645e25e6dbd991da3ae9",
+    "schema": "54",
+    "profile": "thirty_second_forward70",
+    "asr": "全速。",
+    "direct": true,
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "rpc_errors": [],
+    "replies": [
+      "已调到全速。"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 22
+      },
+      "54": {
+        "suppressed": 22,
+        "audible": 0
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 1,
+      "move_direction": "forward",
+      "move_speed_percent": 100,
+      "move_remaining_ms": 27215,
+      "logical_outputs": {
+        "left": 100,
+        "right": 100,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r2-idle-51.json.gz",
+    "capture_sha256": "30c3a873ae3857017897af03c6026f6372511c16dde9c184bb8d7d1e325dddd8",
+    "schema": "51",
+    "profile": "idle",
+    "asr": "全速。",
+    "direct": false,
+    "calls": [],
+    "rpc_errors": [],
+    "replies": [
+      "\"全速\"单独说比较含糊，",
+      "你是想让机器人全速前进、后退还是转向呢？",
+      "或者是给正在移动的动作调速？",
+      "告诉我具体要做什么。"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 166
+      },
+      "54": {
+        "suppressed": 0,
+        "audible": 166
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 0,
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r2-idle-54.json.gz",
+    "capture_sha256": "65836f52217eb5f3ff5b81a1982aa9321052efb23f5515d4989b24db10939329",
+    "schema": "54",
+    "profile": "idle",
+    "asr": "全速。",
+    "direct": true,
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "rpc_errors": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"
+      }
+    ],
+    "replies": [
+      "没有正在移动的动作，",
+      "速度调不了。"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 42
+      },
+      "54": {
+        "suppressed": 0,
+        "audible": 42
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 0,
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r2-thirty_second_forward70-51.json.gz",
+    "capture_sha256": "2cdc1306e8b6a64282b28b2b662bd2754cefa50e6fef0fe2c9a13704ad9d9608",
+    "schema": "51",
+    "profile": "thirty_second_forward70",
+    "asr": "全速。",
+    "direct": false,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      },
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "rpc_errors": [],
+    "replies": [
+      "正在向前移动，",
+      "直接调到全速好，已经调到全速了。"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 61
+      },
+      "54": {
+        "suppressed": 0,
+        "audible": 61
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 1,
+      "move_direction": "forward",
+      "move_speed_percent": 100,
+      "move_remaining_ms": 26003,
+      "logical_outputs": {
+        "left": 100,
+        "right": 100,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r2-thirty_second_forward70-54.json.gz",
+    "capture_sha256": "f7f91e69ba82a81ddcba5097e5c26f01ce4877ddf765d5e6668089d332d28c1a",
+    "schema": "54",
+    "profile": "thirty_second_forward70",
+    "asr": "全速。",
+    "direct": true,
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "rpc_errors": [],
+    "replies": [
+      "已调到全速。"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 16
+      },
+      "54": {
+        "suppressed": 16,
+        "audible": 0
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 1,
+      "move_direction": "forward",
+      "move_speed_percent": 100,
+      "move_remaining_ms": 27170,
+      "logical_outputs": {
+        "left": 100,
+        "right": 100,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r3-idle-51.json.gz",
+    "capture_sha256": "6c8eed3ba8e6413b9946d871a207d5253c02e8816e762c1aa1a9c9aab956b55e",
+    "schema": "51",
+    "profile": "idle",
+    "asr": "全速。",
+    "direct": false,
+    "calls": [
+      {
+        "name": "self.tank.get_status",
+        "arguments": {}
+      }
+    ],
+    "rpc_errors": [],
+    "replies": [
+      "当前没有正在移动，",
+      "全速需要有正在进行的动作才能调整。",
+      "你是想让我前进、后退还是转向？",
+      "告诉我方向和时长就行。"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 151
+      },
+      "54": {
+        "suppressed": 0,
+        "audible": 151
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 0,
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r3-idle-54.json.gz",
+    "capture_sha256": "e31f3800f8df24481088dc51a00147a844ca741c07cd6d401b17bb71cb984aba",
+    "schema": "54",
+    "profile": "idle",
+    "asr": "全速。",
+    "direct": true,
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "rpc_errors": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"
+      }
+    ],
+    "replies": [
+      "当前没有正在移动的动作，",
+      "所以没法调速。"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 48
+      },
+      "54": {
+        "suppressed": 0,
+        "audible": 48
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 0,
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r3-thirty_second_forward70-51.json.gz",
+    "capture_sha256": "0e7176b74dd5cd3f4c5f25704ae37fd738655cfc587795b180549d8e333e2fc6",
+    "schema": "51",
+    "profile": "thirty_second_forward70",
+    "asr": "全速。",
+    "direct": false,
+    "calls": [],
+    "rpc_errors": [],
+    "replies": [
+      "\"全速\"这个词需要结合上下文。",
+      "你是想让机器人全速前进，还是调整正在移动的速度到全速？",
+      "请告诉我具体要做什么。"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 131
+      },
+      "54": {
+        "suppressed": 0,
+        "audible": 131
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 1,
+      "move_direction": "forward",
+      "move_speed_percent": 70,
+      "move_remaining_ms": 30000,
+      "logical_outputs": {
+        "left": 70,
+        "right": 70,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  },
+  {
+    "file": "r3-thirty_second_forward70-54.json.gz",
+    "capture_sha256": "681085990cd4ae4c5b7f37682ef7dcb34e09d36d21f498e83886a08d970c6a36",
+    "schema": "54",
+    "profile": "thirty_second_forward70",
+    "asr": "全速。",
+    "direct": true,
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "rpc_errors": [],
+    "replies": [
+      "好的，已调到全速。"
+    ],
+    "playback": {
+      "53": {
+        "suppressed": 0,
+        "audible": 22
+      },
+      "54": {
+        "suppressed": 22,
+        "audible": 0
+      }
+    },
+    "host_at_last_call": {
+      "starts_this_boot": 1,
+      "move_direction": "forward",
+      "move_speed_percent": 100,
+      "move_remaining_ms": 26616,
+      "logical_outputs": {
+        "left": 100,
+        "right": 100,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      }
+    }
+  }
+]

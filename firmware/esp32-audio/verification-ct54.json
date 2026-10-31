@@ -11,6 +11,7 @@
   "checks": [
     "Prepared tool registration and feedback header match repository bytes; the image contains the new version and the exported set_speed description.",
     "Compared with the ct51 schema export, only the set_speed description differs. The tool name, parameters and eleven other tools are unchanged.",
-    "Host feedback tests exercise the four full-speed phrases, exact numeric target, accepted speed readback, rejections, missing speed, negation and direction-qualified inputs."
+    "Host feedback tests exercise the four full-speed phrases, exact numeric target, accepted speed readback, rejections, missing speed, negation and direction-qualified inputs.",
+    "All eight local software check groups passed against the ct54 prepared source, including 63 improvement tests and host checks for the real speed admission, output count, direction and original deadline."
   ]
 }

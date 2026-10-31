@@ -33,4 +33,4 @@ python3 scripts/capture_lingxi.py --synthetic-speech --ids "$ids" --timeout 55 \
   --corpus docs/validation/voice-cases.json --output "$NEW_CAPTURE"
 ```
 
-下一轮可使用同一句“全速”复测调用顺序和英文旁白。真人观察单及三种现场条件见[语音工具选择](README.md#语音工具选择)。
+后续已分别从移动中和空闲开始，完成[“全速”两种工具说明与两版播放策略对照](full-speed.md)。真人观察单及三种现场条件见[语音工具选择](README.md#语音工具选择)。
