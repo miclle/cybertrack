@@ -9,6 +9,7 @@ from evaluate_voice import evaluate
 ROOT = Path(__file__).resolve().parents[1]
 SCORES = "docs/validation/evidence/role-5991/full-suite-scores.json"
 SUITES = ("voice", "compose")
+CANDIDATE_SCORES = "docs/validation/evidence/ct57-full/full-suite-scores.json"
 
 
 def score_replay(suite, corpus, trace, recorded):
@@ -40,7 +41,17 @@ def review(root):
         corpus = (root / f"docs/validation/{suite}-cases.json").read_bytes()
         trace = json.loads((root / f"replay/{suite}.json").read_bytes())
         results[suite] = score_replay(suite, corpus, trace, recorded[suite])
-    return {"git_head": manifest["git_head"], "firmware": manifest["firmware"], "scores": results}
+    candidate = json.loads((root / CANDIDATE_SCORES).read_bytes())
+    candidate_results = {}
+    for suite in SUITES:
+        corpus = (root / f"docs/validation/{suite}-cases.json").read_bytes()
+        trace = json.loads((root / f"replay/ct57/{suite}.json").read_bytes())
+        if trace["tool_schema_sha256"] != candidate[suite]["tool_schema_sha256"]:
+            raise ValueError(f"{suite}: candidate tool schemas differ")
+        candidate_results[suite] = score_replay(suite, corpus, trace, candidate[suite])
+        candidate_results[suite]["tool_source_version"] = candidate[suite]["tool_source_version"]
+    return {"git_head": manifest["git_head"], "firmware": manifest["firmware"],
+            "scores": results, "candidate_scores": candidate_results}
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ import zipfile
 
 from check_firmware_current import check
 from package_family_rehearsal import build as build_rehearsal
-from review_lingxi_reference import SCORES, SUITES, score_replay
+from review_lingxi_reference import CANDIDATE_SCORES, SCORES, SUITES, score_replay
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -40,16 +40,21 @@ def build_archive(root, paths, head, dirty):
     contents = read_inputs(root, paths)
     contents["family/rehearsal.html"] = build_rehearsal(root).encode()
     firmware = check(root)
-    scores = json.loads(contents[SCORES])
-    for suite in SUITES:
-        raw = gzip.decompress((root / SCORES).with_name(f"full-{suite}.json.gz").read_bytes())
-        if hashlib.sha256(raw).hexdigest() != scores[suite]["capture_json_sha256"]:
-            raise ValueError(f"{suite}: original capture does not match recorded score")
-        trace = json.loads(raw)
-        replay = {key: trace[key] for key in ("run_id", "kind", "role_sha256", "model", "corpus_sha256", "fixture_version")}
-        replay["results"] = [{key: row[key] for key in ("id", "calls", "completed")} for row in trace["results"]]
-        score_replay(suite, contents[f"docs/validation/{suite}-cases.json"], replay, scores[suite])
-        contents[f"replay/{suite}.json"] = (json.dumps(replay, ensure_ascii=False, indent=2) + "\n").encode()
+    for prefix, score_path in (("", SCORES), ("ct57/", CANDIDATE_SCORES)):
+        scores = json.loads(contents[score_path])
+        for suite in SUITES:
+            raw = gzip.decompress((root / score_path).with_name(f"full-{suite}.json.gz").read_bytes())
+            if hashlib.sha256(raw).hexdigest() != scores[suite]["capture_json_sha256"]:
+                raise ValueError(f"{prefix}{suite}: original capture does not match recorded score")
+            trace = json.loads(raw)
+            replay = {key: trace[key] for key in ("run_id", "kind", "role_sha256", "model", "corpus_sha256", "fixture_version")}
+            if prefix:
+                replay["tool_schema_sha256"] = trace["tool_schema_sha256"]
+                if replay["tool_schema_sha256"] != scores[suite]["tool_schema_sha256"]:
+                    raise ValueError(f"{prefix}{suite}: candidate tool schemas differ")
+            replay["results"] = [{key: row[key] for key in ("id", "calls", "completed")} for row in trace["results"]]
+            score_replay(suite, contents[f"docs/validation/{suite}-cases.json"], replay, scores[suite])
+            contents[f"replay/{prefix}{suite}.json"] = (json.dumps(replay, ensure_ascii=False, indent=2) + "\n").encode()
     contents["START_HERE.md"] = f"""# CyberTrack 灵矽方案参考材料
 
 本包对应 Git 提交 `{head}`。打包输入存在未提交修改为 `{dirty}`。版本、应用字节数和 SHA-256 见 `MANIFEST.json` 的 `firmware` 小节。
@@ -59,7 +64,7 @@ def build_archive(root, paths, head, dirty):
 | 源码与构建依据 | `{firmware['source_version']}` |
 | 最近一次应用部署 | `{firmware['recorded_deployment']}` |
 
-## 从两份真实平台轨迹重算成绩
+## 从历史基线与当前候选重算成绩
 
 解压后在本目录运行。只需要 Python 3.9 或更高版本。
 
@@ -67,11 +72,11 @@ def build_archive(root, paths, head, dirty):
 python3 scripts/review_lingxi_reference.py
 ```
 
-从此包复现的是记录所列工具版本和角色的历史结果。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出含两组成绩、偏差用例编号和各自是否达到门槛。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，设备回执由隔离环境提供。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
+从此包复现的是记录所列工具版本和角色的结果，历史基线保留在 scores，当前候选保留在 candidate_scores。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出含历史基线和 ct57 工具定义各自的两组成绩、偏差用例编号和各自是否达到门槛。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，设备回执由隔离环境提供。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
 
 - 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
 - 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
-- 语义偏差见[固定集回归](docs/validation/lingxi-role-5991.md)，远端音频包的端侧处理见[播放回归](docs/validation/lingxi-ct51-playback.md)。
+- 语义偏差见[候选完整回归](docs/validation/lingxi-ct57-full.md)与[历史基线](docs/validation/lingxi-role-5991.md)，远端音频包的端侧处理见[播放回归](docs/validation/lingxi-ct51-playback.md)。
 - 供电与机械设计见[硬件架构](hardware/architecture/README.md)和[整机模型辅助设计](tools/model-design/README.md)。
 
 家长与孩子可双击[离线泡泡剧场](family/rehearsal.html)，选择模板、修改和确认，在屏幕上排演各步，也可以中途全停。排演页内没有设备或灵矽连接。主持人可用浏览器打开包内的[亲子观察单](tools/family-study/observer.html)，逐户下载匿名记录，用 `python3 scripts/analyze_family_sessions.py 记录目录/*.json` 分别汇总原型与实机结果。
