@@ -1,0 +1,170 @@
+[
+  {
+    "file": "status-1-ct50.json.gz",
+    "uncompressed_sha256": "7d9f9be3a1261225718a387d2ae07fe67f7f5a54019dca1dd83441c6ea5f430a",
+    "cases": [
+      {
+        "id": "L005",
+        "calls": [
+          "self.tank.get_status"
+        ],
+        "moving_at_sample": true,
+        "reply": "我正在往前走呢，速度70，刚才查的时候还剩大约2到3秒。"
+      },
+      {
+        "id": "L006",
+        "calls": [
+          "self.tank.get_status"
+        ],
+        "moving_at_sample": false,
+        "reply": "我在待命，目前没有动作在运行。"
+      }
+    ]
+  },
+  {
+    "file": "audio-1-ct50.json.gz",
+    "uncompressed_sha256": "652b6a71bcc0bfe8c625cd33ae7839de82c66062acd926c09123bede4466b384",
+    "cases": [
+      {
+        "id": "P001",
+        "calls": [
+          "self.tank.move"
+        ],
+        "first_packet": "suppressed"
+      },
+      {
+        "id": "P002",
+        "calls": [
+          "self.tank.stop"
+        ],
+        "first_packet": "suppressed"
+      },
+      {
+        "id": "P003",
+        "calls": [
+          "self.tank.bubbles"
+        ],
+        "first_packet": "suppressed"
+      },
+      {
+        "id": "P004",
+        "calls": [
+          "self.tank.water"
+        ],
+        "first_packet": "audible"
+      }
+    ]
+  },
+  {
+    "file": "status-2-ct50.json.gz",
+    "uncompressed_sha256": "e8ed8fdceaf2c3af6fee9c3a1e2a175be2cb9c03cb22498f4441b8faa7c62704",
+    "cases": [
+      {
+        "id": "L005",
+        "calls": [
+          "self.tank.get_status"
+        ],
+        "moving_at_sample": true,
+        "reply": "我正在前进，速度是70%，刚才查询时还剩大约3秒。"
+      },
+      {
+        "id": "L006",
+        "calls": [
+          "self.tank.get_status"
+        ],
+        "moving_at_sample": false,
+        "reply": "我在待命，目前没有动作在运行。"
+      }
+    ]
+  },
+  {
+    "file": "audio-2-ct50.json.gz",
+    "uncompressed_sha256": "6ddc0fa13bf63c975814e8b573e10d2118108e715255510b5f44236ebb340db0",
+    "cases": [
+      {
+        "id": "P001",
+        "calls": [
+          "self.tank.move"
+        ],
+        "first_packet": "suppressed"
+      },
+      {
+        "id": "P002",
+        "calls": [
+          "self.tank.stop"
+        ],
+        "first_packet": "suppressed"
+      },
+      {
+        "id": "P003",
+        "calls": [
+          "self.tank.bubbles"
+        ],
+        "first_packet": "suppressed"
+      },
+      {
+        "id": "P004",
+        "calls": [
+          "self.tank.water"
+        ],
+        "first_packet": "audible"
+      }
+    ]
+  },
+  {
+    "file": "status-3-ct50.json.gz",
+    "uncompressed_sha256": "509ebd8b77adb981eb4451dbf4918dd87a1fe8193ea6bc44e38f2178b44c6eff",
+    "cases": [
+      {
+        "id": "L005",
+        "calls": [
+          "self.tank.get_status"
+        ],
+        "moving_at_sample": true,
+        "reply": "我现在正在前进，速度是百分之七十，刚才查的时候还剩大约三秒。"
+      },
+      {
+        "id": "L006",
+        "calls": [
+          "self.tank.get_status"
+        ],
+        "moving_at_sample": false,
+        "reply": "我在待命，目前没有动作在运行。"
+      }
+    ]
+  },
+  {
+    "file": "audio-3-ct50.json.gz",
+    "uncompressed_sha256": "2d1be4683f404f4e09b3706fb3e72c1383e44972b2a2459e97534ebcf4cf40aa",
+    "cases": [
+      {
+        "id": "P001",
+        "calls": [
+          "self.tank.move"
+        ],
+        "first_packet": "suppressed"
+      },
+      {
+        "id": "P002",
+        "calls": [
+          "self.tank.stop"
+        ],
+        "first_packet": "suppressed"
+      },
+      {
+        "id": "P003",
+        "calls": [
+          "self.tank.bubbles"
+        ],
+        "first_packet": "suppressed"
+      },
+      {
+        "id": "P004",
+        "calls": [
+          "self.tank.water"
+        ],
+        "first_packet": "audible"
+      }
+    ]
+  }
+]
