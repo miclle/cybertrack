@@ -13,6 +13,7 @@
     "Host tests cover stationary and offline speed admission, no new output starts, moving duplicate request fallback, unchanged direction and deadline after valid speed change.",
     "Prepared MCP error path forwards the message selected under the same control mutex as VoiceClaim.",
     "Control, actual MCP/web handler and audio suites passed.",
-    "Compared ct55 and ct56 exports: only the set_speed description differs; all twelve tool names and argument schemas are identical."
+    "Compared ct55 and ct56 exports: only the set_speed description differs; all twelve tool names and argument schemas are identical.",
+    "All eight local check groups passed against ct56, including 63 improvement tests, control/MCP/audio host suites and the stop matrix."
   ]
 }
