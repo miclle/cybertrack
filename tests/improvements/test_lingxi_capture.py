@@ -27,6 +27,13 @@ class CaptureTests(unittest.TestCase):
         self.assertEqual(seen,tools)
         with self.assertRaises(ValueError):module.tools_page([dict(name='self.tank.big',description='x'*9000)])
 
+    def test_timed_status_rejects_writes_before_running_host(self):
+        with patch.object(module.subprocess,'check_output') as run_host:
+            for name,args in [('self.tank.stop',{}),('self.tank.get_status',{'extra':True})]:
+                with self.assertRaises(ValueError):
+                    module.timed_status('forward70',1200,name,args)
+            run_host.assert_not_called()
+
     def test_stop_clears_active_motion_without_another_start(self):
         status = module.fixture('向前行走，当前速度70%')
         stopped = module.simulated_reply(status,'self.tank.stop',{})
