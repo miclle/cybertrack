@@ -1,0 +1,672 @@
+{
+  "scope": "Targeted synthetic speech with actual STT/MCP; offline policy comparison and synthetic mismatches; no board/speaker IO",
+  "plan_sha256": "1a7cb651713e7b9cd7bc7ba1f3c810f9052c5a98cda8bca084d6945b582c54dd",
+  "source_sha256": {
+    "firmware/esp32-audio/voice_feedback.h": "d60b1148ab0e0b4a1b28407c37813e5234947bd140a65a18644a121e59f5550c",
+    "firmware/esp32-audio/spoken_playback.h": "1e68fb81c56610d9bb3247928ed52256f375dada98e238d1bf0d84585b1b9403",
+    "firmware/esp32-audio/spoken_effects.h": "00f923192e657a260011c4c80d4ede86aa2b500582e3164ec04940fe5bbf20a4",
+    "firmware/esp32-audio/spoken_duration.h": "03fb4a1b0103442d21370fc167d6df9feeb6ec10ce2fac9cb15b558e882d5281",
+    "scripts/replay_lingxi_feedback.cc": "aed8412d1e4d6b0f9aa6414432d3f662d6ebfecc9d96489bffe66cea840d5cc2",
+    "scripts/review_four_lane_feedback.py": "9d80d660eda95af120b270e5e0c098a98eccf58167c7aec82d434416727254f6"
+  },
+  "playback_sha256": {
+    "before": "1d1b58c98b965ee2964fd166708f50e28621a68f973413148ae5f060525c8da6",
+    "after": "a8b18b51a173710a9e3536379bfd7e7203bad2f759b0ac7fd7ab71110f93089e"
+  },
+  "host_review": {
+    "scope": "Input provenance and complete host reply/state reproduction; semantic errors retained, no human/physical acceptance",
+    "host_input_mode": "platform_stt_events",
+    "host_sha256": "e5af840948f9169dc8a482cd4e30085609cee37a7e27023ac3897ad3cb4f1504",
+    "corpus_sha256": "b055a1a83c30a83b1bc19eb68d5f84a0e0f251509905b9526af4f2280ca59e2e",
+    "cases": 12,
+    "completed": 12,
+    "strict_tool_matches": 10,
+    "tools_before_input": [],
+    "replies_and_final_states_reproduced": true,
+    "results": [
+      {
+        "id": "F001",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "accepted"
+        ],
+        "starts": 2,
+        "draft_revision": 0,
+        "reply": "已同时启动喷水和点火。"
+      },
+      {
+        "id": "F002",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "accepted"
+        ],
+        "starts": 4,
+        "draft_revision": 0,
+        "reply": "好的，前进两秒、喷水一秒、吹泡泡三秒、点火半秒，都已同时启动。"
+      },
+      {
+        "id": "F003",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "accepted"
+        ],
+        "starts": 2,
+        "draft_revision": 0,
+        "reply": "好的，先放电一秒，再吹泡泡两秒，已经安排上了。"
+      },
+      {
+        "id": "F004",
+        "completed": true,
+        "strict_tool_match": false,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "accepted"
+        ],
+        "starts": 2,
+        "draft_revision": 0,
+        "reply": "好的，前进十秒并点火一秒，序列已开始执行。"
+      },
+      {
+        "id": "F005",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [],
+        "starts": 0,
+        "draft_revision": 0,
+        "reply": "好的，那我就不同时启动喷水和点火了。"
+      },
+      {
+        "id": "F006",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "ok"
+        ],
+        "starts": 0,
+        "draft_revision": 0,
+        "reply": "我先查一下当前状态。我查了一下，刚才没有同时喷水和点火的记录，现在这两个动作也都没在运行。"
+      },
+      {
+        "id": "F007",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "ok"
+        ],
+        "starts": 1,
+        "draft_revision": 0,
+        "reply": "动作都停下了，我在这儿等你。"
+      },
+      {
+        "id": "F008",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "accepted"
+        ],
+        "starts": 3,
+        "draft_revision": 0,
+        "reply": "序列已接受，先前进一秒，然后同时吹泡泡两秒和点火一秒。"
+      },
+      {
+        "id": "F009",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "accepted"
+        ],
+        "starts": 2,
+        "draft_revision": 0,
+        "reply": "已接受。"
+      },
+      {
+        "id": "F010",
+        "completed": true,
+        "strict_tool_match": false,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "accepted"
+        ],
+        "starts": 1,
+        "draft_revision": 0,
+        "reply": "喷水三十秒，然后停顿五秒喷水已开始，三十秒后自动停。"
+      },
+      {
+        "id": "F011",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "accepted"
+        ],
+        "starts": 2,
+        "draft_revision": 0,
+        "reply": "点火单次最多五秒，喷水两秒正常。我按点火五秒、喷水两秒来执行。两路可独立运行，我用序列一步同时启动。点火单次最多五秒，已按五秒执行，喷水两秒同时进行。"
+      },
+      {
+        "id": "F012",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [],
+        "starts": 0,
+        "draft_revision": 0,
+        "reply": "好的，这两句只是举例，我不会执行。"
+      }
+    ]
+  },
+  "cases": 12,
+  "completed": 12,
+  "strict_tool_matches": 10,
+  "literal_transcript_matches": 11,
+  "additional_suppressed": 277,
+  "results": [
+    {
+      "id": "F001",
+      "category": "success",
+      "completed": true,
+      "strict_tool_match": true,
+      "stt": [
+        "开枪并开启护盾。"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 0,
+        "audible": 34
+      },
+      "after": {
+        "suppressed": 34,
+        "audible": 0
+      },
+      "additional_suppressed": 34
+    },
+    {
+      "id": "F002",
+      "category": "success",
+      "completed": true,
+      "strict_tool_match": true,
+      "stt": [
+        "前进两秒并喷水一秒，并吹泡泡三秒，并点火半秒。"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 0,
+        "audible": 92
+      },
+      "after": {
+        "suppressed": 92,
+        "audible": 0
+      },
+      "additional_suppressed": 92
+    },
+    {
+      "id": "F003",
+      "category": "success",
+      "completed": true,
+      "strict_tool_match": true,
+      "stt": [
+        "先放电一秒，然后开炮两秒。"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 0,
+        "audible": 54
+      },
+      "after": {
+        "suppressed": 54,
+        "audible": 0
+      },
+      "additional_suppressed": 54
+    },
+    {
+      "id": "F004",
+      "category": "limit",
+      "completed": true,
+      "strict_tool_match": false,
+      "stt": [
+        "前进十秒并点火。"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 0,
+        "audible": 64
+      },
+      "after": {
+        "suppressed": 0,
+        "audible": 64
+      },
+      "additional_suppressed": 0
+    },
+    {
+      "id": "F005",
+      "category": "no_action",
+      "completed": true,
+      "strict_tool_match": true,
+      "stt": [
+        "不要同时喷水和点火。"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 0,
+        "audible": 49
+      },
+      "after": {
+        "suppressed": 0,
+        "audible": 49
+      },
+      "additional_suppressed": 0
+    },
+    {
+      "id": "F006",
+      "category": "query",
+      "completed": true,
+      "strict_tool_match": true,
+      "stt": [
+        "刚才同时喷水和点火了吗？"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 0,
+        "audible": 110
+      },
+      "after": {
+        "suppressed": 0,
+        "audible": 110
+      },
+      "additional_suppressed": 0
+    },
+    {
+      "id": "F007",
+      "category": "stop",
+      "completed": true,
+      "strict_tool_match": true,
+      "stt": [
+        "停止。"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 36,
+        "audible": 0
+      },
+      "after": {
+        "suppressed": 36,
+        "audible": 0
+      },
+      "additional_suppressed": 0
+    },
+    {
+      "id": "F008",
+      "category": "success",
+      "completed": true,
+      "strict_tool_match": true,
+      "stt": [
+        "先前进一秒，再同时开炮两秒和护盾一秒。"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 0,
+        "audible": 85
+      },
+      "after": {
+        "suppressed": 85,
+        "audible": 0
+      },
+      "additional_suppressed": 85
+    },
+    {
+      "id": "F009",
+      "category": "success",
+      "completed": true,
+      "strict_tool_match": true,
+      "stt": [
+        "前进并射击。"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 0,
+        "audible": 12
+      },
+      "after": {
+        "suppressed": 12,
+        "audible": 0
+      },
+      "additional_suppressed": 12
+    },
+    {
+      "id": "F010",
+      "category": "success",
+      "completed": true,
+      "strict_tool_match": false,
+      "stt": [
+        "喷水三十秒并互顿五秒。"
+      ],
+      "literal_transcript_match": false,
+      "before": {
+        "suppressed": 0,
+        "audible": 79
+      },
+      "after": {
+        "suppressed": 0,
+        "audible": 79
+      },
+      "additional_suppressed": 0
+    },
+    {
+      "id": "F011",
+      "category": "limit",
+      "completed": true,
+      "strict_tool_match": true,
+      "stt": [
+        "点火十秒并喷水两秒。"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 0,
+        "audible": 245
+      },
+      "after": {
+        "suppressed": 0,
+        "audible": 245
+      },
+      "additional_suppressed": 0
+    },
+    {
+      "id": "F012",
+      "category": "no_action",
+      "completed": true,
+      "strict_tool_match": true,
+      "stt": [
+        "这两句是举例，开枪并护盾，不要执行。"
+      ],
+      "literal_transcript_match": true,
+      "before": {
+        "suppressed": 0,
+        "audible": 48
+      },
+      "after": {
+        "suppressed": 0,
+        "audible": 48
+      },
+      "additional_suppressed": 0
+    }
+  ],
+  "synthetic_mismatches": [
+    {
+      "id": "F001",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F001",
+      "mutation": "wrong_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F001",
+      "mutation": "missing_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F001",
+      "mutation": "wrong_source",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F001",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F001",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F001",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F001",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F001",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F001",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F002",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F002",
+      "mutation": "wrong_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F002",
+      "mutation": "missing_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F002",
+      "mutation": "wrong_source",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F002",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F002",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F002",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F002",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F002",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F002",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F003",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F003",
+      "mutation": "wrong_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F003",
+      "mutation": "missing_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F003",
+      "mutation": "wrong_source",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F003",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F003",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F003",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F003",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F003",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F003",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F008",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F008",
+      "mutation": "wrong_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F008",
+      "mutation": "missing_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F008",
+      "mutation": "wrong_source",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F008",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F008",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F008",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F008",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F008",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F008",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F009",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F009",
+      "mutation": "wrong_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F009",
+      "mutation": "missing_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F009",
+      "mutation": "wrong_source",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F009",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F009",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F009",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F009",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F009",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "F009",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    }
+  ],
+  "playback_gate_passed": true,
+  "playback_gate_violations": [],
+  "original_model_scores_changed": false,
+  "physical_acceptance": false
+}

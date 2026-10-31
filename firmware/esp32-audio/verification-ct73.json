@@ -1,0 +1,23 @@
+{
+  "version": "2.0.3-ct73",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Playback-only four-lane compound/sequence matching and shared existing effect vocabulary; no action/tool/role/platform changes. Candidate not deployed.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2718640,
+    "sha256": "a6414595cd933a815603ff5f543dbc5275faacfa90fcd4d783a52f89e3f8e1de"
+  },
+  "checks": [
+    "Complete ESP-IDF build passes.",
+    "Plain and ASan/UBSan four-lane native fixtures pass: 70 positive matches and 87 preserved explanations; old ct72 fails the new matrix.",
+    "Original 88 actual-STT playback counts remain 1085 suppressed and 4595 allowed; 81 historical effect mismatches and older twenty-case plan replay remain covered.",
+    "Twelve targeted actual-STT sessions complete, strict tools 10/12, literal transcripts 11/12; complete RPC replies/final states reproduce. Five matched successful compounds newly suppress 277 packets, fifty synthetic mismatches retain audio.",
+    "Eighteen unified software groups include 124 Python improvement tests; final report archived separately. Twelve public tool definitions and role remain unchanged."
+  ],
+  "pending": [
+    "Candidate not deployed; no human microphone, speaker, actual timing, physical or family acceptance.",
+    "F004 shared ignition duration was misinterpreted as default one second; F010 shield was transcribed as an unrelated word and ignition omitted. These remain model/ASR failures; original full model grades unchanged.",
+    "Limit sample F011 retains necessary warning and process prose. Early narration, final rule analysis and unknown grammar remain unresolved."
+  ]
+}

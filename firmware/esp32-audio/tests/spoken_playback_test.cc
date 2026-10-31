@@ -27,16 +27,16 @@ int main() {
     assert(plan.Parse("先前进，再左转"));
     assert(plan.count == 2 && plan.steps[0].ms[0] == 1000 && plan.steps[1].ms[0] == 880);
     assert(plan.Parse("前进五秒同时喷水两秒和吹泡泡"));
-    assert(plan.steps[0].ms == (std::array<int, 3>{5000, 2000, 1000}));
+    assert(plan.steps[0].ms == (std::array<int, 4>{5000, 2000, 1000, 0}));
     assert(plan.Parse("前进五秒同时喷水和吹泡泡"));
-    assert(plan.steps[0].ms == (std::array<int, 3>{5000, 5000, 5000}));
+    assert(plan.steps[0].ms == (std::array<int, 4>{5000, 5000, 5000, 0}));
     std::string many = "前进一秒";
     for (unsigned i = 1; i < 16; ++i) many += "然后左转";
     assert(plan.Parse(many) && plan.count == 16);
     assert(!plan.Parse(many + "然后喷水"));
     for (const char* phrase : {"不要前进五秒同时喷水", "前进五秒同时不要喷水", "前进五秒吗", "前进五秒后会怎样",
                               "前进五秒然后", "前进五秒，", "左转两秒和右转", "喷水和喷水", "前进31秒",
-                              "喷水六十秒同时前进", "前进零秒", "前进-1秒", "编排前进一秒然后泡泡", "先前进然后点火"})
+                              "喷水六十秒同时前进", "前进零秒", "前进-1秒", "编排前进一秒然后泡泡"})
         assert(!plan.Parse(phrase));
 
     auto* both = cJSON_Parse(R"({"direction":"forward","move_duration_ms":5000,"water_duration_ms":5000})");

@@ -1,0 +1,16 @@
+{
+  "scope": "Plain and ASan/UBSan native playback fixtures; not model or physical results",
+  "positive": 70,
+  "explanations_preserved": 87,
+  "outputs": {
+    "plain": "four-lane playback: 70 positive, 87 explanations preserved",
+    "asan": "four-lane playback: 70 positive, 87 explanations preserved"
+  },
+  "source_sha256": {
+    "firmware/esp32-audio/tests/four_lane_feedback_test.cc": "e9eec778dba3b135c49a2c05786ee82fda01df12a4f29d884ee26a4df0a0307c",
+    "firmware/esp32-audio/voice_feedback.h": "d60b1148ab0e0b4a1b28407c37813e5234947bd140a65a18644a121e59f5550c",
+    "firmware/esp32-audio/spoken_playback.h": "1e68fb81c56610d9bb3247928ed52256f375dada98e238d1bf0d84585b1b9403",
+    "firmware/esp32-audio/spoken_effects.h": "00f923192e657a260011c4c80d4ede86aa2b500582e3164ec04940fe5bbf20a4",
+    "firmware/esp32-audio/spoken_duration.h": "03fb4a1b0103442d21370fc167d6df9feeb6ec10ce2fac9cb15b558e882d5281"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "scope": "Twelve targeted synthetic-speech/actual-STT sessions and offline playback comparison; independent of original 80/8 scores",
+  "completed": 12,
+  "cases": 12,
+  "strict_tool_matches": 10,
+  "literal_transcript_matches": 11,
+  "additional_suppressed": 277,
+  "synthetic_mismatches_audio_preserved": 50,
+  "failures": {
+    "F004": "Shared ten-second request treated ignition as default one second; wrong tool parameters retained audible",
+    "F010": "Shield transcribed as unrelated word; ignition omitted, retained audible"
+  },
+  "original88_playback": {
+    "suppressed": 1085,
+    "allowed": 4595,
+    "unchanged": true
+  },
+  "native": {
+    "positive": 70,
+    "preserved": 87
+  },
+  "unified_check_groups": 18,
+  "python_tests": 124,
+  "source_candidate": "2.0.3-ct73",
+  "last_deployment": "2.0.3-ct45",
+  "flashed": false
+}

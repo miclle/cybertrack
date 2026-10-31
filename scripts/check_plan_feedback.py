@@ -55,7 +55,7 @@ def check(executable):
     return dict(scope='Offline playback policy replay plus synthetic mismatches; no new platform sessions, audio decoding or board IO',
                 capture_gzip_sha256=hashlib.sha256(CAPTURE.read_bytes()).hexdigest(),baseline_sha256=hashlib.sha256(BASELINE.read_bytes()).hexdigest(),
                 source_sha256={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in
-                    ('firmware/esp32-audio/voice_feedback.h','firmware/esp32-audio/spoken_playback.h','scripts/replay_lingxi_feedback.cc')},
+                    ('firmware/esp32-audio/voice_feedback.h','firmware/esp32-audio/spoken_playback.h','firmware/esp32-audio/spoken_effects.h','firmware/esp32-audio/spoken_duration.h','scripts/replay_lingxi_feedback.cc')},
                 executable_sha256=hashlib.sha256(executable.read_bytes()).hexdigest(),
                 suppressed=sum(row['suppressed'] for row in results),audible=sum(row['audible'] for row in results),
                 results=results,synthetic_mismatches=negative)

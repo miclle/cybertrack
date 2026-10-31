@@ -1,6 +1,7 @@
 #pragma once
 #include "cJSON.h"
 #include "spoken_duration.h"
+#include "spoken_effects.h"
 #include "spoken_playback.h"
 #include <mutex>
 #include <string_view>
@@ -26,26 +27,6 @@ class VoiceFeedback {
         {"停止射击","stop","",0,false,{}}, {"关闭护盾","stop","",0,false,{}},
         {"停止饭店","stop","",0,false,{}},
         {"取消序列","stop","",0,false,{}}, {"取消正在执行的表演","stop","",0,false,{}}
-    };
-    struct Effect {
-        std::string_view phrase, tool, duration_field;
-        int default_ms, maximum_ms;
-    };
-    static constexpr Effect effects[] = {
-        {"喷水","water","water_last_duration_ms",1000,30000},
-        {"发射","water","water_last_duration_ms",1000,30000},
-        {"开枪","water","water_last_duration_ms",1000,30000},
-        {"射击","water","water_last_duration_ms",1000,30000},
-        {"吹泡泡","bubbles","bubbles_last_duration_ms",1000,30000},
-        {"开炮","bubbles","bubbles_last_duration_ms",1000,30000},
-        {"点火","ignition","ignition_last_duration_ms",1000,5000},
-        {"放电","ignition","ignition_last_duration_ms",1000,5000},
-        {"闪电","ignition","ignition_last_duration_ms",1000,5000},
-        {"护盾","ignition","ignition_last_duration_ms",1000,5000},
-        {"打火","ignition","ignition_last_duration_ms",1000,5000},
-        {"电击","ignition","ignition_last_duration_ms",1000,5000},
-        {"饭店","ignition","ignition_last_duration_ms",1000,5000},
-        {"狂暴模式","frenzy","frenzy_last_duration_ms",5000,30000}
     };
     Command timed_effect_{};
     std::mutex mutex_;
@@ -74,7 +55,7 @@ public:
         auto effect_text = text;
         if (effect_text.substr(0,std::string_view("开启").size()) == "开启")
             effect_text.remove_prefix(std::string_view("开启").size());
-        for (const auto& effect : effects) {
+        for (const auto& effect : spoken_effects) {
             if (effect_text.substr(0,effect.phrase.size()) != effect.phrase) continue;
             auto suffix = effect_text.substr(effect.phrase.size());
             int ms = suffix.empty() || suffix == "一下" ? effect.default_ms : SpokenEffectMs(suffix);

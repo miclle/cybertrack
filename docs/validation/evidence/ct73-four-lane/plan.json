@@ -1,0 +1,31 @@
+{
+  "scope": "Twelve targeted actual-STT sessions, frozen actual host; playback comparison ct72/ct73; not full 80/8 score",
+  "created_utc": "2026-10-31T18:46:45.322263+00:00",
+  "base_commit": "bd3a424ae75f1699d382ef330dc2375d5df12c2f",
+  "source_candidate": "2.0.3-ct73",
+  "last_deployment": "2.0.3-ct45",
+  "repeats": 1,
+  "no_resampling": true,
+  "ids": [
+    "F001",
+    "F002",
+    "F003",
+    "F004",
+    "F005",
+    "F006",
+    "F007",
+    "F008",
+    "F009",
+    "F010",
+    "F011",
+    "F012"
+  ],
+  "host_sha256": "e5af840948f9169dc8a482cd4e30085609cee37a7e27023ac3897ad3cb4f1504",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "corpus_sha256": "b055a1a83c30a83b1bc19eb68d5f84a0e0f251509905b9526af4f2280ca59e2e",
+  "capture_source_sha256": "9ae7a95ef8a8d2837eb5a037f847316c3254d564a850ee811d788968ce2f5cc2",
+  "tools_sha256": "809cadf8eef7a62ff98b445fe6d2f06b4bbaddf13b88239df0c4f99116b2fb67",
+  "adoption_gate": "No new mute on limits/negation/query/quotes or mismatched receipts; original 88 packet counts unchanged; preserve all model failures separately.",
+  "platform_changed": false,
+  "flashed": false
+}

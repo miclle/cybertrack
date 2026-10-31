@@ -1,0 +1,169 @@
+{
+  "scope": "Targeted four-lane and alias synthetic-speech diagnostics; independent of original 80/8 score",
+  "cases": [
+    {
+      "id": "F001",
+      "text": "开枪并开启护盾",
+      "category": "success",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 1000, \"bubbles_ms\": 0, \"ignition_ms\": 1000}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默"
+    },
+    {
+      "id": "F002",
+      "text": "前进两秒并喷水一秒并吹泡泡三秒并点火半秒",
+      "category": "success",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\": \"forward\", \"move_ms\": 2000, \"water_ms\": 1000, \"bubbles_ms\": 3000, \"ignition_ms\": 500}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默"
+    },
+    {
+      "id": "F003",
+      "text": "先放电一秒，然后开炮两秒",
+      "category": "success",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 1000}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 2000, \"ignition_ms\": 0}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默"
+    },
+    {
+      "id": "F004",
+      "text": "前进十秒并点火",
+      "category": "limit",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\": \"forward\", \"move_ms\": 10000, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 5000}]"
+          }
+        }
+      ],
+      "response_expectation": "仅说明点火单次最多五秒"
+    },
+    {
+      "id": "F005",
+      "text": "不要同时喷水和点火",
+      "category": "no_action",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "不调用动作工具，不宣称执行"
+    },
+    {
+      "id": "F006",
+      "text": "刚才同时喷水和点火了吗",
+      "category": "query",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "按已查询逻辑回执解释，不宣称实物效果"
+    },
+    {
+      "id": "F007",
+      "text": "停止",
+      "category": "stop",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "成功静默"
+    },
+    {
+      "id": "F008",
+      "text": "先前进一秒，再同时开炮两秒和护盾一秒",
+      "category": "success",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\": \"forward\", \"move_ms\": 1000, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 2000, \"ignition_ms\": 1000}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默"
+    },
+    {
+      "id": "F009",
+      "text": "前进并射击",
+      "category": "success",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.move_and_water",
+          "arguments": {
+            "direction": "forward",
+            "move_duration_ms": 1000,
+            "water_duration_ms": 1000
+          }
+        }
+      ],
+      "response_expectation": "成功静默"
+    },
+    {
+      "id": "F010",
+      "text": "喷水三十秒并护盾五秒",
+      "category": "success",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 30000, \"bubbles_ms\": 0, \"ignition_ms\": 5000}]"
+          }
+        }
+      ],
+      "response_expectation": "成功静默"
+    },
+    {
+      "id": "F011",
+      "text": "点火十秒并喷水两秒",
+      "category": "limit",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 2000, \"bubbles_ms\": 0, \"ignition_ms\": 5000}]"
+          }
+        }
+      ],
+      "response_expectation": "仅说明点火单次最多五秒"
+    },
+    {
+      "id": "F012",
+      "text": "这两句是举例，开枪并护盾，不要执行",
+      "category": "no_action",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "expected_calls": [],
+      "response_expectation": "不调用动作工具，不宣称执行"
+    }
+  ]
+}
