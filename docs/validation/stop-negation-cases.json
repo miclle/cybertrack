@@ -1,0 +1,130 @@
+{
+  "scope": "New contrast phrases for negative draft requests, explicit stops and independent positive requests; raw text and host only, separate from fixed corpus scores",
+  "cases": [
+    {
+      "id": "N001",
+      "text": "这次先别编排新的表演",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [],
+      "expected_draft_revision": 7
+    },
+    {
+      "id": "N002",
+      "text": "先不要创建节目，保留现在的草稿",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [],
+      "expected_draft_revision": 7
+    },
+    {
+      "id": "N003",
+      "text": "别取消这份草稿",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [],
+      "expected_draft_revision": 7
+    },
+    {
+      "id": "N004",
+      "text": "我没让你取消草稿",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [],
+      "expected_draft_revision": 7
+    },
+    {
+      "id": "N005",
+      "text": "“取消草稿”这句话是什么意思",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [],
+      "expected_draft_revision": 7
+    },
+    {
+      "id": "N006",
+      "text": "不要停止当前序列",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [],
+      "expected_draft_revision": 0
+    },
+    {
+      "id": "N007",
+      "text": "先别编排了，马上停下",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "expected_draft_revision": 0
+    },
+    {
+      "id": "N008",
+      "text": "别再往前走了，马上停下",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "expected_draft_revision": 0
+    },
+    {
+      "id": "N009",
+      "text": "取消正在执行的泡泡表演",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "expected_draft_revision": 0
+    },
+    {
+      "id": "N010",
+      "text": "先不要编排，直接吹泡泡两秒",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "expected_draft_revision": 7
+    },
+    {
+      "id": "N011",
+      "text": "别编排新节目，告诉我前方多远",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "expected_draft_revision": 7
+    },
+    {
+      "id": "N012",
+      "text": "取消这份还没开始的草稿",
+      "context": "模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备空闲。仅定义评测输入，不是实测。",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "cancel",
+            "revision": 7,
+            "step": 0,
+            "steps_json": ""
+          }
+        }
+      ],
+      "expected_draft_revision": 0
+    }
+  ]
+}
