@@ -565,7 +565,11 @@ async function theatreHarness(){
  h.setDraft([theatreStep('none',0,2000)]);h.respond(h.take('/api/state'),h.status());await p;await h.drain();
  assert(!h.sent.some(c=>JSON.parse(c.options.body).operation==='show_confirm'));
  assert(h.ids['show-confirm'].disabled);assert.match(h.ids['show-preview'].textContent,/前进/); // Poll never swaps the preview.
- h.ctx.loadShow();assert.match(h.ids['show-preview'].textContent,/泡泡 2 秒/);assert(h.ids['show-confirm'].disabled);
+ assert(!h.ids['show-incoming'].hidden);
+ assert.match(h.ids['show-incoming'].textContent,/设备草稿 v2（待载入）[\s\S]*吹泡泡 2 秒/);
+ h.advance(1600);h.ctx.showControls();assert(h.ids['show-incoming'].hidden);assert(h.ids['show-load'].disabled);
+ h.ctx.render(h.status());h.ctx.loadShow();assert(h.ids['show-incoming'].hidden);
+ assert.match(h.ids['show-preview'].textContent,/泡泡 2 秒/);assert(h.ids['show-confirm'].disabled);
  h.advance(300001);h.ctx.showControls();assert(h.ids['show-reviewed'].disabled);assert(h.ids['show-confirm'].disabled);
 }
 for(const trigger of ['stop','offline','windowblur']){

@@ -97,7 +97,14 @@ try {
   // Fresh state at confirmation must reject a revision changed by voice.
   await page.locator('#show-confirm').click();
   await page.locator('#show-notice').filter({hasText:'没有发送操作'}).waitFor();assert.equal(starts,1);
-  await page.locator('#show-load').click();await page.locator('#show-cancel').click();
+  const incoming=page.locator('#show-incoming');
+  assert.match(await incoming.innerText(),/设备草稿 v\d+（待载入）[\s\S]*吹泡泡 3 秒/);
+  assert.match(await preview.innerText(),/吹泡泡 1 秒/);
+  assert(await page.locator('#show-confirm').isDisabled());
+  await page.locator('#show-load').click();
+  assert(await incoming.isHidden());assert.match(await preview.innerText(),/吹泡泡 3 秒/);
+  assert(!(await page.locator('#show-reviewed').isChecked()));assert.equal(starts,1);
+  await page.locator('#show-cancel').click();
   await page.locator('#show-notice').filter({hasText:'设备草稿已取消'}).waitFor();assert.equal(draft,null);
   active=true;dropRelease=true;await page.evaluate(()=>poll());
   await page.locator('#message').filter({hasText:'动作序列'}).waitFor();
