@@ -142,3 +142,9 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 `--firmware-host` 运行实际分发和回调，不等于识别链路也经过设备。历史文本模式将主机初始化为 `captured host input`，轨迹标记 `simulated_initial_input`；该占位文本没有形成各条原话的语义标记。`--synthetic-speech` 则按平台实际 STT 事件记录 `host_calls` 输入并使用 `--await-stt` 重放，标记 `platform_stt_events`。两者不可混作相同控制覆盖；文本模式中的合法误改不能直接证明 STT 门禁失效。
 
 [角色分流对照](intent-routing-role.md)按前一种方式保留原始 72 次结果，没有回填原话或改写捕获以提升成绩。新文本诊断现使用 `simulated_recognized_text`，将原话作为模拟识别事件注入；与历史占位及真实 STT 分开标识，不追认旧会话为已通过完整语音路径。[实现与复核](capture-recognized-input.md)
+
+### 步骤格式与主机契约
+
+新捕获另记录 `step_argument_format`，来自实际声明的 sequence／compose schema：`legacy_string` 对应 `steps_json` 字符串，`native_array` 对应 `steps` 数组。若固定主机提供经过哈希校验的工具清单，采集前必须逐项一致。评分按声明检查实际调用，语义相同但字段或类型不符仍记非法参数；不同格式只在语义比较时归一，原调用不改写。此记录不代表当前部署已支持数组，能力仍见[版本真源](../../firmware/current.json)。
+
+主机回放另传仅在本地使用的 `raw_params` 元数据，保留零字符转义以检查原始控制 JSON；不发送给模型，也不改写捕获的参数和时刻。旧主机忽略该字段，历史回执与终态仍需完整复算一致。生成的意图用例可通过 `firmware_corpus.expected_commands` 投影到固定主机声明的步骤格式；实际捕获回放不得使用该投影。

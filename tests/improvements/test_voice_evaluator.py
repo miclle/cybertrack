@@ -24,6 +24,19 @@ class VoiceEvaluatorTests(unittest.TestCase):
         self.assertFalse(result["tool_call_target_met"])
         self.assertEqual(len(result["missing"]), 1)
 
+    def test_native_semantics_match_but_wrong_advertised_wire_type_is_invalid(self):
+        sequence=next(r for r in self.trace['results'] if any(c['name']=='self.tank.sequence' for c in r['calls']))
+        legacy=copy.deepcopy(sequence['calls'])
+        native=copy.deepcopy(legacy)
+        for call in native:
+            if call['name']=='self.tank.sequence':call['arguments']['steps']=json.loads(call['arguments'].pop('steps_json'))
+        self.assertEqual(module.canonical(native,step_format='native_array'),module.canonical(legacy))
+        with self.assertRaises(module.InvalidToolArguments):module.canonical(legacy,step_format='native_array')
+        with self.assertRaises(module.InvalidToolArguments):module.canonical(native,step_format='legacy_string')
+        self.trace['step_argument_format']='native_array'
+        result=module.evaluate(self.corpus,self.trace)
+        self.assertIn(sequence['id'],result['invalid_tool_argument_cases'])
+
     def test_negative_action_is_failure_despite_high_average(self):
         row = next(r for r in self.trace["results"] if r["id"] == "V061")
         row["calls"] = [{"name": "self.tank.move", "arguments": {"direction": "forward", "duration_ms": 1}}]

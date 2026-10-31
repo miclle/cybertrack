@@ -177,7 +177,12 @@ def firmware_profile(context):
 def firmware_replay(executable, profile, calls, *, await_stt=False):
     command = [str(executable), profile]
     if await_stt: command.append('--await-stt')
-    lines = subprocess.check_output(command,input=json.dumps(calls),text=True,timeout=10).splitlines()
+    # Test-transport metadata retains escaped zero characters for the same raw
+    # frame check used by the device. Historical hosts ignore this extra field;
+    # actual tool names/arguments and captured histories are never rewritten.
+    transport = [dict(call,raw_params=json.dumps({key:call[key] for key in ('name','arguments') if key in call},ensure_ascii=False))
+                 if 'name' in call else call for call in calls]
+    lines = subprocess.check_output(command,input=json.dumps(transport),text=True,timeout=10).splitlines()
     rpc_count = sum('name' in call for call in calls)
     if len(lines) != rpc_count + 1:
         raise RuntimeError('incomplete firmware dispatch replay')
@@ -429,6 +434,22 @@ async def run(args):
     trace['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
     if firmware_host:
         trace['scope']='Real platform with raw input; actual MCP dispatch, callbacks and guard on host; virtual clock, 600 mm simulated range, immediate schedule; zero board IO'
+        formats=[]
+        for name in ('self.tank.sequence','self.tank.compose'):
+            schema=next((tool for tool in tools if tool['name']==name),{}).get('inputSchema',{}).get('properties',{})
+            formats.append('native_array' if schema.get('steps',{}).get('type')=='array' else
+                           'legacy_string' if schema.get('steps_json',{}).get('type')=='string' else 'unknown')
+        if formats[0]!=formats[1] or formats[0]=='unknown':raise ValueError('unknown or mixed step schemas')
+        trace['step_argument_format']=formats[0]
+        manifest_file=firmware_host.resolve().parent/'manifest.json'
+        if manifest_file.exists():
+            manifest=json.loads(manifest_file.read_bytes())
+            if manifest.get('tool_catalog_sha256'):
+                catalog=firmware_host.resolve().parent/'tool-catalog.json'
+                if (hashlib.sha256(catalog.read_bytes()).hexdigest()!=manifest['tool_catalog_sha256'] or
+                    json.loads(catalog.read_bytes())!=tools or
+                    hashlib.sha256(firmware_host.read_bytes()).hexdigest()!=manifest['executable_sha256']):
+                    raise ValueError('advertised tools differ from the frozen host catalog')
         trace['host_input_mode']='platform_stt_events' if synthetic else 'simulated_recognized_text'
         if not synthetic:
             trace['scope']='Real platform with raw text; known utterance injected as simulated recognition before actual host MCP; virtual clock/range; no ASR, microphone/speaker/board IO'
