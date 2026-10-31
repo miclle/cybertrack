@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Compile the actual overlaid MCP validation block against ESP-IDF's cJSON."""
 import argparse
+import json
 import os
 from pathlib import Path
 import subprocess
@@ -53,6 +54,27 @@ for executable in ('receipt_adapter_test','receipt_replay'):
                     str(Path(__file__).with_name(executable+'.cc')), str(build/'cJSON.o'),
                     str(build/'receipt_water_policy.o'), '-o', str(build/executable)], check=True)
 subprocess.run([str(build/'receipt_adapter_test')], check=True)
+
+# C002 uses a real web-owned draft. A matching revision alone cannot authorize
+# a voice edit. Exercise the fresh-read boundary and verify both steps on readback.
+compose_cases = json.loads((root/'docs/validation/compose-cases.json').read_text())['cases']
+c002 = next(case for case in compose_cases if case['id'] == 'C002')
+read, edit = c002['expected_calls']
+for offset, expected in ((None, 'draft_changed'), (29999, 'draft_saved'), (30000, 'draft_changed')):
+    calls = [] if offset is None else [dict(read, elapsed_ms=0)]
+    calls.append(dict(edit, elapsed_ms=1000 if offset is None else offset))
+    lines = subprocess.check_output([str(build/'receipt_replay'), 'two_step_web_draft'],
+                                    input=json.dumps(calls), text=True).splitlines()
+    reply, final = map(json.loads, lines[-2:])
+    assert reply['result'] == expected
+    draft = final['show_draft']
+    saved = expected == 'draft_saved'
+    assert draft['active'] and draft['revision'] == (8 if saved else 7)
+    assert len(draft['steps']) == 2 and draft['steps'][0]['direction'] == 'left'
+    assert draft['steps'][0]['move_ms'] == 880 and draft['steps'][1]['bubbles_ms'] == (2000 if saved else 1000)
+    assert final['starts_this_boot'] == 0 and not any(final['logical_outputs'].values())
+print('PASS: web draft stays active, only a fresh voice read permits C002, no output starts')
+
 
 subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(root/'firmware/esp32-audio'),
                 str(Path(__file__).with_name('voice_feedback_test.cc')), str(build/'cJSON.o'),

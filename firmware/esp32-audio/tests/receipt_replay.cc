@@ -10,6 +10,8 @@ int main(int argc, char** argv) {
     sessions.WifiLink(clock_ms,true);
     sessions.VoiceLink(clock_ms,true);
     sessions.Tick(clock_ms,false);
+    uint32_t draft_web_owner = 0;
+    uint64_t last_heartbeat = clock_ms;
     if (profile == "forward70" || profile == "short_forward70") {
         int ticket = sessions.VoiceClaim(clock_ms,1,AudioActionGuard::MoveOnly);
         Reply("move",ticket,profile == "forward70" ? 4000 : 400,"forward",0,0,nullptr,nullptr,70);
@@ -22,6 +24,20 @@ int main(int argc, char** argv) {
         int ticket = sessions.VoiceClaim(clock_ms, 1, AudioActionGuard::PlanMode);
         Reply("sequence", ticket, 0, nullptr, 0, 0, nullptr, &plan);
         if (!sessions.plan_active || !guard.Moving() || guard.Starts() != 1) return 2;
+    } else if (profile == "two_step_web_draft") {
+        // C002 starts with a saved web draft and no prior voice status read.
+        draft_web_owner = sessions.Acquire(clock_ms);
+        if (!draft_web_owner) return 2;
+        ShowDraft::Command edit;
+        edit.plan.count = 2;
+        edit.plan.steps[0] = {"left", 880, 0, 0, 0, 100};
+        edit.plan.steps[1] = {"none", 0, 0, 1000, 0, 100};
+        for (unsigned rev = 0; rev < 7; ++rev) {
+            edit.revision = rev;
+            if (!sessions.Heartbeat(clock_ms, draft_web_owner)) return 2;
+            if (std::strcmp(sessions.WebDraft(clock_ms, draft_web_owner, rev + 1, sessions.window, edit),
+                            "draft_saved")) return 2;
+        }
     } else if (profile == "web_forward_hold") {
         const auto web = sessions.Acquire(clock_ms);
         if (!web || !sessions.Heartbeat(clock_ms, web)) return 2;
@@ -49,6 +65,10 @@ int main(int argc, char** argv) {
             while (clock_ms < target) {
                 clock_ms = std::min<uint64_t>(clock_ms+5,target);
                 TickLocked(clock_ms);
+                if (draft_web_owner && clock_ms - last_heartbeat >= 200) {
+                    if (!sessions.Heartbeat(clock_ms, draft_web_owner)) return 2;
+                    last_heartbeat = clock_ms;
+                }
             }
         }
         const auto* name = cJSON_GetObjectItemCaseSensitive(call,"name");
