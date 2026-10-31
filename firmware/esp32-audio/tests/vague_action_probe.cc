@@ -1,0 +1,8 @@
+#include "vague_action_intent.h"
+#include <iostream>
+#include <iterator>
+#include <string>
+int main() {
+    const std::string text{std::istreambuf_iterator<char>(std::cin),std::istreambuf_iterator<char>()};
+    std::cout << (vague_action::NeedsClarification(text) ? "true\n" : "false\n");
+}
