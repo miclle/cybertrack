@@ -1,0 +1,185 @@
+{
+  "case": "C002",
+  "original_run_id": "9a438057-f736-4881-a229-809f7df19fb1",
+  "input_sha256": "020806e15fe1dde7b5d4e24ed67aa2e31c2b0e68cf17b7296c84db934be798b3",
+  "original_rpc": {
+    "name": "self.tank.compose",
+    "arguments": {
+      "edit": "replace_step",
+      "revision": 7,
+      "step": 2,
+      "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0,\"speed_percent\":100}]"
+    },
+    "elapsed_ms": 2357
+  },
+  "versions": {
+    "ct45": {
+      "host_sha256": "809e6af646759ccb77e4ede555a178b3f9705713eaa1f8f184309534cb3aec7c",
+      "replays": {
+        "original": {
+          "result": "draft_saved",
+          "final_revision": 8,
+          "final_steps": [
+            {
+              "direction": "left",
+              "move_ms": 880,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 2000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          }
+        },
+        "control_with_read": {
+          "result": "draft_saved",
+          "final_revision": 8,
+          "final_steps": [
+            {
+              "direction": "left",
+              "move_ms": 880,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 2000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          }
+        }
+      }
+    },
+    "ct50": {
+      "host_sha256": "c4ec3f2a3a51a0bd19d4dc71f2a3a622e88d60d1ffbdf15ddb292fc359063316",
+      "replays": {
+        "original": {
+          "result": "draft_changed",
+          "final_revision": 7,
+          "final_steps": [
+            {
+              "direction": "left",
+              "move_ms": 880,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 1000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          }
+        },
+        "control_with_read": {
+          "result": "draft_saved",
+          "final_revision": 8,
+          "final_steps": [
+            {
+              "direction": "left",
+              "move_ms": 880,
+              "water_ms": 0,
+              "bubbles_ms": 0,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            },
+            {
+              "direction": "none",
+              "move_ms": 0,
+              "water_ms": 0,
+              "bubbles_ms": 2000,
+              "ignition_ms": 0,
+              "speed_percent": 100
+            }
+          ],
+          "starts": 0,
+          "outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          }
+        }
+      }
+    }
+  },
+  "new_platform_runs": [
+    {
+      "file": "draft-1-ct45.json.gz",
+      "sha256": "11b198591cc226de90f023ce840e84bbaf2a46162d1e61d3facb862b38a9ee3a",
+      "run_id": "0811f171-60de-4445-928b-ea9f648f6e99",
+      "calls_match": true
+    },
+    {
+      "file": "draft-1-ct50.json.gz",
+      "sha256": "fa62f1f945a777ca405ce80c9c8e8a33f59d6cfa6c51ca23fab258e4c3289ab1",
+      "run_id": "7bdd42d5-19a3-45f1-b112-3dfa58763622",
+      "calls_match": true
+    },
+    {
+      "file": "draft-2-ct45.json.gz",
+      "sha256": "8b6195006d11429e9311fe6f73de9d518a0db9ddc95f56e65900b603f266ddfa",
+      "run_id": "1dfe7f7a-643e-4b30-9bba-a85037e5c9ab",
+      "calls_match": true
+    },
+    {
+      "file": "draft-2-ct50.json.gz",
+      "sha256": "9c47d26428318a66bb13c41ceab9ddf15f618af85f0d919d66ebd3a3cec3f6c5",
+      "run_id": "77eaa180-0fd9-4f68-89dc-6d496154301f",
+      "calls_match": true
+    },
+    {
+      "file": "draft-3-ct45.json.gz",
+      "sha256": "31e11ec7ffaf150009a74dbae5264711b3af8181286f33f89024401db300a390",
+      "run_id": "737d294c-25ee-4cf4-9260-cfb41cf8ca1c",
+      "calls_match": true
+    },
+    {
+      "file": "draft-3-ct50.json.gz",
+      "sha256": "21123b8cca83d7c26a5cc23bbf5f95fa3951ce41bc0be8ba7fd1d5cdae9a5e66",
+      "run_id": "14a229dd-7bb2-45bf-b479-425f879f83c2",
+      "calls_match": true
+    }
+  ]
+}
