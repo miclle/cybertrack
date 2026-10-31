@@ -154,6 +154,25 @@ def host_reply(executable, profile, history, name, args, elapsed_ms):
     return receipt
 
 
+def firmware_profile(context):
+    profiles = {
+        '设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定': 'corpus_idle',
+        '语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障': 'corpus_forward70',
+        '当前动作或序列可能正在运行，停止无需查询前置': 'corpus_sequence',
+    }
+    if context not in profiles:
+        raise ValueError('no firmware host profile for this precondition')
+    return profiles[context]
+
+
+def firmware_replay(executable, profile, calls):
+    lines = subprocess.check_output([str(executable),profile],input=json.dumps(calls),text=True,timeout=10).splitlines()
+    rpc_count = sum('inspect_ms' not in call for call in calls)
+    if len(lines) != rpc_count + 1:
+        raise RuntimeError('incomplete firmware dispatch replay')
+    return list(map(json.loads,lines))
+
+
 async def capture_case(connection,tools,case,timeout=45):
     from websockets.asyncio.client import connect
     status=copy.deepcopy(case['fixture_status']) if 'fixture_status' in case else fixture(case['context'])
@@ -188,6 +207,7 @@ async def capture_case(connection,tools,case,timeout=45):
                 row['events'].append(method)
                 result=None
                 rpc_error=None
+                wire_reply=None
                 if method=='initialize':result=dict(protocolVersion='2024-11-05',capabilities={'tools':{}},serverInfo=dict(name='CyberTrack capture only',version=version))
                 elif method=='tools/list':result=tools_page(tools,params.get('cursor',''))
                 elif method=='tools/call':
@@ -204,7 +224,17 @@ async def capture_case(connection,tools,case,timeout=45):
                             if type(validation.get('valid')) is not bool or not isinstance(validation.get('error'),str):
                                 raise ValueError('invalid argument checker output')
                             row.setdefault('argument_checks',[]).append(dict(name=name, **validation))
-                        if validation is not None and not validation['valid']:
+                        if version == 'firmware_host':
+                            if input_ms is None:raise ValueError('missing evaluation input')
+                            call_history.append(dict(name=name,arguments=args,rpc_id=payload['id'],
+                                elapsed_ms=timeline[-1]['ms']-input_ms))
+                            wire_reply=firmware_replay(case['host_binary'],case['initial_profile'],call_history)[-2]
+                            row.setdefault('host_rpc_replies',[]).append(wire_reply)
+                            if 'error' in wire_reply:
+                                receipt=dict(rpc_error=wire_reply['error']['message'])
+                            else:
+                                receipt=json.loads(wire_reply['result']['content'][0]['text'])
+                        elif validation is not None and not validation['valid']:
                             receipt=dict(rpc_error=validation['error'])
                         elif version in ('draft_host','speed_host'):
                             if input_ms is None:raise ValueError('missing evaluation input')
@@ -243,7 +273,7 @@ async def capture_case(connection,tools,case,timeout=45):
                             row.setdefault('rpc_errors',[]).append(dict(name=name, **rpc_error))
                         else:
                             row.setdefault('simulated_receipts',[]).append(receipt)
-                            result={'content':[{'type':'text','text':json.dumps(receipt,ensure_ascii=False)}],'isError':False}
+                            result=wire_reply['result'] if wire_reply is not None else {'content':[{'type':'text','text':json.dumps(receipt,ensure_ascii=False)}],'isError':False}
                     except (ValueError,KeyError,TypeError,IndexError):result={'content':[{'type':'text','text':'capture fixture rejected invalid arguments'}],'isError':True}
                 if rpc_error is not None:
                     await send(dict(type='mcp',payload=dict(jsonrpc='2.0',id=payload['id'],error=rpc_error)))
@@ -278,6 +308,12 @@ async def capture_case(connection,tools,case,timeout=45):
             elif kind=='stt':
                 row['echoed_text']=msg.get('text','');mark('stt', text=row['echoed_text'])
             elif kind in ('error','goodbye'):row['events'].append(kind);break
+    if version == 'firmware_host':
+        row['initial_profile']=case['initial_profile']
+        row['host_calls']=call_history
+        row['host_inspect_ms']=round((time.monotonic()-opened)*1000)-input_ms if input_ms is not None else 0
+        row['host_final_state']=firmware_replay(case['host_binary'],case['initial_profile'],
+            [*call_history,dict(inspect_ms=row['host_inspect_ms'])])[-1]
     row['received_audio_bytes_discarded']=audio_bytes
     row.setdefault('completion','tts_stop' if row['completed'] else 'incomplete_or_timeout')
     return row
@@ -316,6 +352,15 @@ async def run(args):
         binary=draft_host or ROOT/'build/audio-host/receipt_replay'
         for case in cases:
             case.update(host_binary=binary.resolve(), initial_profile=getattr(args,'draft_profile','two_step_web_draft') if draft_host else speed_host)
+    firmware_host=getattr(args,'firmware_host',None)
+    if firmware_host:
+        if not (getattr(args,'raw_text',False) or getattr(args,'synthetic_speech',False)):
+            raise ValueError('full firmware host requires raw text or synthetic speech')
+        if getattr(args,'argument_validator',None):
+            raise ValueError('full firmware host includes the actual parameter gate')
+        version='firmware_host'
+        for case in cases:
+            case.update(host_binary=firmware_host.resolve(),initial_profile=firmware_profile(case['context']))
     for case in cases:
         case['fixture_version']=version
         if getattr(args,'argument_validator',None):
@@ -345,13 +390,15 @@ async def run(args):
     if trace['draft_read_facts_fixture']:
         trace['draft_facts_header_sha256']=hashlib.sha256((ROOT/'firmware/esp32-audio/status_facts.h').read_bytes()).hexdigest()
         trace['draft_facts_helper_sha256']=hashlib.sha256((ROOT/'build/lingxi-schema-export/draft-read-fixture').read_bytes()).hexdigest()
-    if timed or draft_host or speed_host:
-        binary=draft_host or ROOT/'build/audio-host/receipt_replay'
+    if timed or draft_host or speed_host or firmware_host:
+        binary=firmware_host or draft_host or ROOT/'build/audio-host/receipt_replay'
         trace['host_replay_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
     if getattr(args,'audio_packets',False):trace['audio_packet_sizes_recorded']=True
     if draft_host or speed_host:
         trace['initial_profile']=getattr(args,'draft_profile','two_step_web_draft') if draft_host else speed_host
     trace['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
+    if firmware_host:
+        trace['scope']='Real platform with raw input; actual MCP dispatch, callbacks and guard on host; virtual clock, 600 mm simulated range, immediate schedule; zero board IO'
     if speed_host:
         trace['scope']='Synthesized speech over platform ASR; timed firmware host receipts; zero device IO'
     args.output.parent.mkdir(parents=True,exist_ok=True)
@@ -379,6 +426,7 @@ if __name__=='__main__':
     inputs.add_argument('--synthetic-speech',action='store_true',help='Send synthesized Mandarin as Opus frames, without input text or a microphone')
     inputs.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
     versions=p.add_mutually_exclusive_group()
+    versions.add_argument('--firmware-host',type=Path,help='Use actual MCP dispatch and guard for the fixed corpus preconditions')
     versions.add_argument('--speed-host',choices=('idle','thirty_second_forward70','voice_offline','wifi_offline'),help='Use timed firmware speed/status receipts for a synthetic utterance')
     versions.add_argument('--draft-host',type=Path,metavar='REPLAY',help='Use host firmware with a two-step web draft at revision 7')
     versions.add_argument('--timed-host',action='store_true',help='Use read-only host firmware receipts at observed RPC offsets')

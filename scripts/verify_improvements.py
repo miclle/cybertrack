@@ -37,6 +37,10 @@ def main():
         commands.append([sys.executable, "scripts/replay_stop_matrix.py", "--source", str(source)])
         for suite in ("run_mcp_tests.py", "run_audio_tests.py"):
             commands.append([sys.executable, f"firmware/esp32-audio/tests/{suite}", "--source", str(source)])
+        host_build = ROOT / "build/full-firmware-host"
+        commands.extend([
+            [sys.executable, "scripts/build_firmware_host.py", "--source", str(source), "--output", str(host_build)],
+            [sys.executable, "scripts/check_firmware_host.py", "--executable", str(host_build/"firmware_host")]])
     if args.model_design:
         commands.extend([["npm", "--prefix", "tools/model-design", "test"],
                          ["npm", "--prefix", "tools/model-design", "run", "test:bundle"],
