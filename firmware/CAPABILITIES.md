@@ -1,6 +1,6 @@
 # 固件能力与接口手册
 
-当前参数核对于 2026-10-31；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码候选为 [ct63](esp32-audio/verification-ct63.json)，最近记录部署为 `2.0.3-ct45`，部署与无动作检查见 [startup-ct45.json](esp32-audio/startup-ct45.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+当前参数核对于 2026-10-31；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码候选为 [ct66](esp32-audio/verification-ct66.json)，最近记录部署为 `2.0.3-ct45`，部署与无动作检查见 [startup-ct45.json](esp32-audio/startup-ct45.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
 
 ct62 候选新增[单次识别失败隔离](../docs/validation/voice-input-guard.md)：同轮失败后拒绝动作、调速与改稿，查询和全停保留，新输入恢复。内部代际不可由调用者传入，公开工具参数不变；未部署。
 
@@ -56,3 +56,5 @@ ct45 已部署网页提供“小D 泡泡剧场”，本地模板和编辑不启�
 [ct45 软件记录](esp32-audio/verification-ct45.json)与[部署记录](esp32-audio/startup-ct45.json)分别记录构建和设备检查；后续角色调整及隔离评测见[联调记录](../docs/validation/lingxi-ct45-role-feedback-20261031.md)。新一次检查须记录自己的源码与结果，不能复用历史记录宣称新候选通过。
 
 新产品计划见[执行计划](../docs/improvement-plan.md)。实机停车距离、定量电气／温升、完整语音与组合负载验收仍未完成。
+
+ct66 的[即时全停回执](../docs/validation/stop-dispatch.md)在严格校验后同步完成，不再二次排队；回执分配失败也先关闭输出。网页会话权限及旧动作／查询的输入代际隔离保留。未改变公开工具定义和角色，未部署。

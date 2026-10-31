@@ -7,9 +7,7 @@
 #include <string>
 
 static const char* error = nullptr;
-static bool stopped = false;
 static void ReplyError(int, const char* message) { error = message; }
-static void CyberTrackActionStop() { stopped = true; }
 #define ESP_LOGI(...) ((void)0)
 static void Validate(const std::string& tool_name, cJSON* tool_arguments) {
     [[maybe_unused]] const int id = 1;
@@ -26,7 +24,7 @@ int main() {
     auto* result = cJSON_CreateObject();
     cJSON_AddBoolToObject(result,"valid",error == nullptr);
     cJSON_AddStringToObject(result,"error",error ? error : "");
-    cJSON_AddBoolToObject(result,"stop_requested",stopped);
+    cJSON_AddBoolToObject(result,"stop_requested",false); // Validation never executes a callback.
     char* raw = cJSON_PrintUnformatted(result);
     if (!raw) { cJSON_Delete(result); cJSON_Delete(call); return 1; }
     std::cout << raw << '\n';
