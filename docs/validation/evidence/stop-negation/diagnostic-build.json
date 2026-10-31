@@ -1,0 +1,23 @@
+{
+  "version": "2.0.3-ct65",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Stop-tool description only: negative draft requests versus explicit stops; callbacks, role and parameter schemas unchanged.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2712592,
+    "sha256": "b567e3bac71e06fa2d20ce80f4abeedb6d5e16deb63cb66aec0db265555d601a"
+  },
+  "checks": [
+    "ESP-IDF build passes.",
+    "Candidate tool catalog equals the diagnostic catalog; only stop.description differs from ct63.",
+    "Pilot baseline and diagnostic groups each preserve C006 draft in three independent sessions.",
+    "Contrast set has eleven strict matches out of twelve; N006 has an extra read-only query, retained as a mismatch.",
+    "All twelve local software groups pass, including 86 improvement tests; callbacks, parameters and role unchanged.",
+    "Fixed real-platform text suites complete: voice 77/80, forbidden V064 and V079; compose 6/8. Gate fails."
+  ],
+  "pending": [
+    "Not adopted or deployed; physical and human acceptance remain outside this diagnostic"
+  ],
+  "decision": "not_adopted"
+}

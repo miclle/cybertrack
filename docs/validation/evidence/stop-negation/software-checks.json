@@ -1,0 +1,126 @@
+{
+  "scope": "Local software checks only; no deployment or physical acceptance",
+  "groups": 12,
+  "passed": true,
+  "improvement_tests": 86,
+  "created_utc": "20261031T122637640628Z",
+  "checks": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/check_firmware_current.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "bfd9473f6e328436f3a8b2a2166ec05b907c3990c809c4930ed614903f71bcde"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "sh",
+        "firmware/esp32-audio/test.sh"
+      ],
+      "exit_code": 0,
+      "log_sha256": "f6a9150318b4b986dcc3ef2a2fcb590b2f68bd19c2fc8b2e26c5f47c24a264cc"
+    },
+    {
+      "command": [
+        "node",
+        "firmware/esp32-audio/tests/web_ui_test.mjs"
+      ],
+      "exit_code": 0,
+      "log_sha256": "d53dbd78d05bd6783d528cd7895e42ffb33987b0215136e04c5f2ae40dceb089"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/improvements"
+      ],
+      "exit_code": 0,
+      "log_sha256": "8fdddbaf17852e0a8e78fba1536c43f84ac0bf524c124fda7701b12583f15f00"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/replay_stop_matrix.py",
+        "--source",
+        "/Users/miclle/github/miclle/cybertrack/build/xiaozhi-ct65-src"
+      ],
+      "exit_code": 0,
+      "log_sha256": "16f77b2de9425173a965ff0e53ea51066e7ca043800a3a1fdad50c2046181e9a"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "firmware/esp32-audio/tests/run_mcp_tests.py",
+        "--source",
+        "/Users/miclle/github/miclle/cybertrack/build/xiaozhi-ct65-src"
+      ],
+      "exit_code": 0,
+      "log_sha256": "6edbdff95fe32606908b8913a4c2102fa7502280f3ed047cd606225707a1b976"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "firmware/esp32-audio/tests/run_audio_tests.py",
+        "--source",
+        "/Users/miclle/github/miclle/cybertrack/build/xiaozhi-ct65-src"
+      ],
+      "exit_code": 0,
+      "log_sha256": "c1518be5f84b54974eac0f93f5bac0833909cba5bee866ab3360d7fc6e96c106"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/check_plan_feedback.py",
+        "--executable",
+        "/Users/miclle/github/miclle/cybertrack/build/audio-host/feedback_replay"
+      ],
+      "exit_code": 0,
+      "log_sha256": "20eb4af305347371c2dc8df5e7f22ad4272100547f4568358f2226da75b394c3"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/build_firmware_host.py",
+        "--source",
+        "/Users/miclle/github/miclle/cybertrack/build/xiaozhi-ct65-src",
+        "--output",
+        "/Users/miclle/github/miclle/cybertrack/build/full-firmware-host"
+      ],
+      "exit_code": 0,
+      "log_sha256": "243dd0a2675bfafbe903a3388fd4f4cd7486180a99d68253ffbea1aef905825e"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/check_firmware_host.py",
+        "--executable",
+        "/Users/miclle/github/miclle/cybertrack/build/full-firmware-host/firmware_host"
+      ],
+      "exit_code": 0,
+      "log_sha256": "b7c71b51291ed797a312a7ec17e923461384d884d8ababe2718922c30249912e"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/check_voice_turn.py",
+        "--executable",
+        "/Users/miclle/github/miclle/cybertrack/build/full-firmware-host/firmware_host"
+      ],
+      "exit_code": 0,
+      "log_sha256": "c2b4affa5af4893690e5c7a9c98cd63f155818c888c69e04acf0e6b49e1aaa0c"
+    }
+  ]
+}
