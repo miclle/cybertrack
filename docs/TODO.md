@@ -22,7 +22,7 @@
 3. **更可靠地运行：** 补齐停止、组合负载、电源、温升、续航及维护数据，再据实测收敛器件和结构。
 4. **更方便地复现：** 核对打印与配套版本，积累制作、成本和工程修改记录，完善参考方案交付。
 
-[改进计划](improvement-plan.md)记录各项任务的验收条件；[当前状态](current-status.md)和 [firmware/current.json](../firmware/current.json)维护版本依据。未完成项不会因文档、模拟或局部演示通过而自动关闭。
+[改进计划](improvement-plan.md)记录各项任务的验收条件，[交付核对表](validation/delivery-audit-current.md)逐项列出已有依据和缺口；[当前状态](current-status.md)和 [firmware/current.json](../firmware/current.json)维护版本依据。未完成项不会因文档、模拟或局部演示通过而自动关闭。
 
 ## 当前待办
 
