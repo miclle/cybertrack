@@ -1,0 +1,728 @@
+[
+  {
+    "file": "experiment-r1-idle-result.json.gz",
+    "sha256": "9011a830cd82b264a8b8a16656566063079d7dff955af285a03f7b380a0daef7",
+    "stage": "experiment",
+    "profile": "idle",
+    "envelope": "result",
+    "reply": "现在没有在移动，暂时调不了速度。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 36
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r1-idle-rpc.json.gz",
+    "sha256": "58cbae50750a7d28a1400861ba62ccc5f4d87bdf23b3c61b7fd99fc34ff1415c",
+    "stage": "experiment",
+    "profile": "idle",
+    "envelope": "rpc",
+    "reply": "刚才没确认成功，可能是设备不在线或没有正在移动。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 70
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r1-voice_offline-result.json.gz",
+    "sha256": "b091920695083802fe1cbe533176cca94741e5ab5bed8177880b9d37100febeb",
+    "stage": "experiment",
+    "profile": "voice_offline",
+    "envelope": "result",
+    "reply": "语音控制链路离线，这次没确认成功。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 56
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r1-voice_offline-rpc.json.gz",
+    "sha256": "2c7d65b17a9ff554d4489f88286a408f9f7490e6fc3a1fb412663c17f68831cd",
+    "stage": "experiment",
+    "profile": "voice_offline",
+    "envelope": "rpc",
+    "reply": "这次没确认成功。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 22
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r1-wifi_offline-result.json.gz",
+    "sha256": "590fb4f03329b276caaeb05f495a890756e44c3aaa49daa126239a3e806cff68",
+    "stage": "experiment",
+    "profile": "wifi_offline",
+    "envelope": "result",
+    "reply": "设备Wi-Fi离线了，这次没确认成功。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 46
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r1-wifi_offline-rpc.json.gz",
+    "sha256": "c740ea17a83d2c63eeaa7e219b43ee288b09a86e941cf1a5517e4920e8b6740f",
+    "stage": "experiment",
+    "profile": "wifi_offline",
+    "envelope": "rpc",
+    "reply": "这次没确认成功。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 22
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r2-idle-result.json.gz",
+    "sha256": "293cbe39f03f6d763dbe117b9da6b3d449e4a45a3a8ea52f7d1640dbbe44354a",
+    "stage": "experiment",
+    "profile": "idle",
+    "envelope": "result",
+    "reply": "当前没有在移动，没法调速度呢。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 44
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r2-idle-rpc.json.gz",
+    "sha256": "07a93dfefd49820669cd97875c029686d62b39982ecc57b4b846d57f6106f1ab",
+    "stage": "experiment",
+    "profile": "idle",
+    "envelope": "rpc",
+    "reply": "这次没确认成功。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 22
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r2-voice_offline-result.json.gz",
+    "sha256": "99fc53853eddca5c09fa4e6149977a2845f295cd2f6e3ca9f84892884a93bd9a",
+    "stage": "experiment",
+    "profile": "voice_offline",
+    "envelope": "result",
+    "reply": "语音控制链路离线了，这次没法调速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 46
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r2-voice_offline-rpc.json.gz",
+    "sha256": "d6d0dff1e488d79dbba03853a80d84ef42d79855eccc54ee17c016f355f094ed",
+    "stage": "experiment",
+    "profile": "voice_offline",
+    "envelope": "rpc",
+    "reply": "这次没确认成功。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 22
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r2-wifi_offline-result.json.gz",
+    "sha256": "afa1e9f6957bb5e124b7ad39def6f61da7732caff591888d2dbfda9af6277dc2",
+    "stage": "experiment",
+    "profile": "wifi_offline",
+    "envelope": "result",
+    "reply": "设备Wi-Fi离线，没法调整速度。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 42
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r2-wifi_offline-rpc.json.gz",
+    "sha256": "2ff48fea213c74efd8512f006f17da42b1bc2c4384de29767135704248a80a69",
+    "stage": "experiment",
+    "profile": "wifi_offline",
+    "envelope": "rpc",
+    "reply": "这次没确认成功。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 22
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r3-idle-result.json.gz",
+    "sha256": "e93aaa30a2ce3ef91a7bd820efb466031a4629dbf160d8199901fe935c670272",
+    "stage": "experiment",
+    "profile": "idle",
+    "envelope": "result",
+    "reply": "现在没有在移动，没法调全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 40
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r3-idle-rpc.json.gz",
+    "sha256": "4d69eabe7c808cd9763460889d8aebb7a20faae943b94a10dc5803198e17da5b",
+    "stage": "experiment",
+    "profile": "idle",
+    "envelope": "rpc",
+    "reply": "这次没确认成功。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 24
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r3-voice_offline-result.json.gz",
+    "sha256": "83c7bf54cbc566e5b52a0003c6cff1efcb1bf0614bd0808596fa7430e5d26f1e",
+    "stage": "experiment",
+    "profile": "voice_offline",
+    "envelope": "result",
+    "reply": "语音控制链路离线，这次没确认成功。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 56
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r3-voice_offline-rpc.json.gz",
+    "sha256": "949e2124af6b41734469c22a97d8e15e0499bb785c7bc1e7eebfa81a8de3c23a",
+    "stage": "experiment",
+    "profile": "voice_offline",
+    "envelope": "rpc",
+    "reply": "这次没确认成功。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 18
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r3-wifi_offline-result.json.gz",
+    "sha256": "0612959955cd73998dd4584e15a537229a450ff5544aeb4db715871bb9c55a69",
+    "stage": "experiment",
+    "profile": "wifi_offline",
+    "envelope": "result",
+    "reply": "设备Wi-Fi离线了，这次没法调整速度。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 48
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "experiment-r3-wifi_offline-rpc.json.gz",
+    "sha256": "9da88ca33d367bd9ae996c784745b58e66ac1d3f8ff32208502d861caeee172c",
+    "stage": "experiment",
+    "profile": "wifi_offline",
+    "envelope": "rpc",
+    "reply": "回执没成功，这次没确认调到全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 46
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "firmware_host-idle.json.gz",
+    "sha256": "d74d9922b7dccacf533534848649919482546b9e1f2763cf196f023c1b58e275",
+    "stage": "firmware_host",
+    "profile": "idle",
+    "envelope": "result",
+    "reply": "当前没有在移动，速度调不了。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 44
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "firmware_host-thirty_second_forward70.json.gz",
+    "sha256": "2c3e17c683c3470ae983821c441ed5097a35fa7fc37abd70746df10258af43c7",
+    "stage": "firmware_host",
+    "profile": "thirty_second_forward70",
+    "envelope": "result",
+    "reply": "好，已经调到全速了。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 28,
+      "audible": 0
+    },
+    "final_state": {
+      "starts_this_boot": 1,
+      "logical_outputs": {
+        "left": 100,
+        "right": 100,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "forward",
+      "move_speed_percent": 100,
+      "move_remaining_ms": 26894
+    }
+  },
+  {
+    "file": "firmware_host-voice_offline.json.gz",
+    "sha256": "68d717ed8acefe1718c885f37cba4c01708d1ab5024c0fc66d66a92cfc6ebc22",
+    "stage": "firmware_host",
+    "profile": "voice_offline",
+    "envelope": "result",
+    "reply": "语音控制链路离线，这次没调成速度。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 56
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  },
+  {
+    "file": "firmware_host-wifi_offline.json.gz",
+    "sha256": "3dd45feeeb30e55874e8741522013f116d2d5ab536292a520087a43f782c0906",
+    "stage": "firmware_host",
+    "profile": "wifi_offline",
+    "envelope": "result",
+    "reply": "设备Wi-Fi离线，这次没法调速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "playback": {
+      "suppressed": 0,
+      "audible": 40
+    },
+    "final_state": {
+      "starts_this_boot": 0,
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "move_direction": "none",
+      "move_speed_percent": 0,
+      "move_remaining_ms": 0
+    }
+  }
+]
