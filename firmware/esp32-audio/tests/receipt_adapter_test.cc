@@ -68,5 +68,23 @@ int main() {
     assert(field(confirmed,"sequence_source")=="web");
     assert(!cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(cJSON_GetObjectItemCaseSensitive(confirmed,"show_draft"),"active")));
     cJSON_Delete(confirmed);Reply("stop");
+    clock_ms += 300;
+    assert(sessions.Heartbeat(clock_ms, session));
+    assert(std::string(sessions.DriveStart(clock_ms, session, 5, sessions.window, "forward", 0)) == "accepted");
+    assert(sessions.Heartbeat(clock_ms, session));
+    assert(std::string(sessions.EffectStart(clock_ms, session, 6, sessions.window, AudioActionGuard::WaterOnly)) == "accepted");
+    assert(sessions.Heartbeat(clock_ms, session));
+    assert(std::string(sessions.EffectStart(clock_ms, session, 7, sessions.window, AudioActionGuard::BubblesOnly)) == "accepted");
+    clock_ms += 200;
+    auto* held_status = cJSON_Parse(Reply("get_status").c_str());
+    const auto held_facts = field(held_status, "status_facts");
+    for (auto channel : {"行走由网页长按", "喷水由网页长按", "吹泡泡由网页长按"})
+        assert(held_facts.find(channel) != std::string::npos);
+    assert(cJSON_GetObjectItemCaseSensitive(held_status, "move_remaining_ms")->valueint == 400);
+    cJSON_Delete(held_status);
+    clock_ms += 400;
+    auto* expired_status = cJSON_Parse(Reply("get_status").c_str());
+    assert(field(expired_status, "status_facts").find("长按") == std::string::npos);
+    cJSON_Delete(expired_status);
     std::puts("PASS: actual Reply JSON acceptance/rejection/query/stop persistence with real guards and no hardware");
 }
