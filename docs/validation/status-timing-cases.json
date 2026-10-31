@@ -1,0 +1,33 @@
+{
+  "scope": "Read-only timed snapshots at RPC arrival. Raw text. No board or audio output.",
+  "cases": [
+    {
+      "id": "L001",
+      "text": "走的是哪个方向？",
+      "initial_motion": "forward70",
+      "context": "主机初态，无执行器",
+      "response_expectation": "方向，不附带倒计时"
+    },
+    {
+      "id": "L002",
+      "text": "车还要走多久？",
+      "initial_motion": "forward70",
+      "context": "主机初态，无执行器",
+      "response_expectation": "刚查询时的剩余量，不能承诺听到时仍在动"
+    },
+    {
+      "id": "L003",
+      "text": "等你说完这句话，它一定还在走吗？请查一下。",
+      "initial_motion": "forward70",
+      "context": "主机初态，无执行器",
+      "response_expectation": "查询状态，明确不能保证播报时仍行走"
+    },
+    {
+      "id": "L004",
+      "text": "查一下，刚才那段行走现在还剩多少时间？",
+      "initial_motion": "short_forward70",
+      "context": "主机初态，无执行器",
+      "response_expectation": "已截止时说明当前没有行走计时，不猜停止原因"
+    }
+  ]
+}

@@ -118,6 +118,21 @@ def tools_page(tools, cursor=''):
     return dict(tools=page)
 
 
+def timed_status(profile, elapsed_ms, name, args):
+    """A frozen host image can evaluate a pure status read at any sampled offset."""
+    if name.replace('self_tank_','self.tank.',1) != 'self.tank.get_status' or args != {}:
+        raise ValueError('timed status evaluation accepts read-only queries')
+    if profile not in ('forward70','short_forward70','idle') or not 0 <= elapsed_ms <= 300000:
+        raise ValueError('invalid timed status input')
+    call = dict(name='self.tank.get_status', arguments={}, elapsed_ms=elapsed_ms)
+    output = subprocess.check_output([str(ROOT/'build/audio-host/receipt_replay'),profile],
+                                     input=json.dumps([call]),text=True,timeout=10)
+    receipt = json.loads(output.splitlines()[0])
+    # All board identifiers in this binary are fixed stubs.
+    receipt.update(actuator_backend='host_stub',source='host_firmware_replay')
+    return receipt
+
+
 async def capture_case(connection,tools,case,timeout=45):
     from websockets.asyncio.client import connect
     status=copy.deepcopy(case['fixture_status']) if 'fixture_status' in case else fixture(case['context'])
@@ -129,6 +144,7 @@ async def capture_case(connection,tools,case,timeout=45):
     timeline = row['timeline'] = []
     def mark(event, **details):
         timeline.append(dict(ms=round((time.monotonic()-opened)*1000), event=event, **details))
+    input_ms=None
     draft_observed_at=None
     session=None;sent=False;deadline=opened+timeout;audio_bytes=0
     async with connect(ENDPOINT,additional_headers=headers,proxy=None,open_timeout=15,max_size=2**20) as ws:
@@ -155,7 +171,10 @@ async def capture_case(connection,tools,case,timeout=45):
                     row['calls'].append(dict(name=name,arguments=args))
                     try:
                         if name.replace('self_tank_','self.tank.',1) not in {t['name'] for t in tools}:raise ValueError('unknown tool')
-                        if version != 'ct45' and name.endswith('compose') and (
+                        if version == 'timed_host':
+                            if input_ms is None:raise ValueError('missing evaluation input')
+                            receipt=timed_status(case['initial_motion'],timeline[-1]['ms']-input_ms,name,args)
+                        elif version != 'ct45' and name.endswith('compose') and (
                                 draft_observed_at is None or time.monotonic()-draft_observed_at >= 30):
                             receipt={**copy.deepcopy(status),'operation':'show_edit','result':'draft_changed'}
                         else:
@@ -184,7 +203,7 @@ async def capture_case(connection,tools,case,timeout=45):
                     # runner never reads expected_calls or response_expectation.
                     text=case['text'] if case.get('raw_text') else '本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：'+case['context']+'。请只处理这条用户原话：'+case['text']
                     await send(dict(session_id=session,type='listen',state='detect',text=text))
-                    sent=True;row['events'].append('test_input_sent');mark('input_sent')
+                    sent=True;row['events'].append('test_input_sent');mark('input_sent');input_ms=timeline[-1]['ms']
             elif kind=='tts':
                 state=msg.get('state')
                 if state in ('start','sentence_start','stop'):
@@ -214,10 +233,16 @@ async def run(args):
         requested=set(args.ids.split(','));cases=[c for c in cases if c['id'] in requested]
         if {c['id'] for c in cases}!=requested:raise ValueError('unknown case id')
     # Deliberately discard all oracle fields before entering the capture loop.
-    cases=[{k:c[k] for k in ('id','text','context','fixture_status') if k in c} for c in cases]
+    fields=('id','text','context','fixture_status')
+    timed=getattr(args,'timed_host',False)
+    if timed:
+        if not args.raw_text or any(c.get('initial_motion') not in ('forward70','short_forward70','idle') for c in cases):
+            raise ValueError('timed host requires raw input and a known motion profile')
+        fields=('id','text','context','initial_motion')
+    cases=[{k:c[k] for k in fields if k in c} for c in cases]
     if getattr(args, 'raw_text', False):
         for case in cases: case['raw_text']=True
-    version = 'ct47' if getattr(args,'ct47',False) else 'ct46' if getattr(args,'ct46',False) else 'ct45'
+    version = 'timed_host' if timed else 'ct47' if getattr(args,'ct47',False) else 'ct46' if getattr(args,'ct46',False) else 'ct45'
     for case in cases: case['fixture_version']=version
     trace=dict(fixture_version=version,kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
                model_source='visible platform configuration; no model identity in WSS response',role_sha256=hashlib.sha256(args.role.read_bytes()).hexdigest(),
@@ -225,6 +250,8 @@ async def run(args):
                input_mode='raw_text_diagnostic' if getattr(args,'raw_text',False) else 'context_prefixed',
                capture_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                scope='Real platform calls; synthetic receipt/context fixtures; zero device forwarding; text not microphone ASR',results=[])
+    if timed:
+        trace['host_replay_sha256']=hashlib.sha256((ROOT/'build/audio-host/receipt_replay').read_bytes()).hexdigest()
     args.output.parent.mkdir(parents=True,exist_ok=True)
     for case in cases:
         row=await capture_case(connection,tools,case,args.timeout)
@@ -239,6 +266,7 @@ if __name__=='__main__':
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
     p.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
     versions=p.add_mutually_exclusive_group()
+    versions.add_argument('--timed-host',action='store_true',help='Use read-only host firmware receipts at observed RPC offsets')
     versions.add_argument('--ct47', action='store_true', help='Include draft capabilities and fault recovery in candidate receipts')
     versions.add_argument('--ct46', action='store_true', help='Use candidate status facts compiled from status_facts.h')
     args=p.parse_args()
