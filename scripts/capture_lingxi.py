@@ -393,6 +393,7 @@ async def run(args):
                input_mode='raw_text_diagnostic' if getattr(args,'raw_text',False) else 'context_prefixed',
                capture_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                scope='Real platform calls; synthetic receipt/context fixtures; zero device forwarding; text not microphone ASR',results=[])
+    trace['continue_incomplete']=getattr(args,'continue_incomplete',False)
     if getattr(args,'argument_validator',None):
         trace['argument_validator_sha256']=hashlib.sha256(args.argument_validator.read_bytes()).hexdigest()
     synthetic = getattr(args, 'synthetic_speech', False)
@@ -430,13 +431,15 @@ async def run(args):
             row['uplink'] = metadata
         trace['results'].append(row);args.output.write_text(json.dumps(trace,ensure_ascii=False,indent=2)+'\n')
         print(case['id'],row['completion'],','.join(c['name'] for c in row['calls']) or '(no tools)',flush=True)
-        if not row['completed']:raise RuntimeError('incomplete case; capture retained, not counted as a successful no-call result')
+        if not row['completed'] and not trace['continue_incomplete']:
+            raise RuntimeError('incomplete case; capture retained, not counted as a successful no-call result')
 
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('connection','tools','corpus','role','output'):p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
+    p.add_argument('--continue-incomplete',action='store_true',help='Retain incomplete cases as failures and continue only to the next unrun case; never retry')
     p.add_argument('--admission-result-fixture',action='store_true',help='Experiment only: expose host admission errors as structured rejected tool results')
     p.add_argument('--draft-profile',choices=('two_step_web_draft','empty_web_draft'),default='two_step_web_draft',help='Initial draft for --draft-host; default preserves existing two-step revision 7')
     p.add_argument('--draft-read-facts-fixture',action='store_true',help='Experiment only: add firmware draft query facts to status receipts')

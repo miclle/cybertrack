@@ -118,4 +118,17 @@ class CaptureTests(unittest.TestCase):
                 self.assertEqual(mock.call_args_list[0].args[2]['fixture_version'],'ct45')
                 self.assertEqual(mock.call_args_list[1].args[2]['fixture_status'],{'fault':'driver_error'})
                 with self.assertRaises(ValueError):await module.run(args)
+                args.output=base/'keep-going';args.continue_incomplete=True
+                failed=dict(id='V001',calls=[],completion='incomplete_or_timeout',completed=False)
+                done=dict(id='D001',calls=[],completion='tts_stop',completed=True)
+                mock=AsyncMock(side_effect=[failed,done])
+                with patch.object(module,'capture_case',mock):await module.run(args)
+                retained=json.loads(args.output.read_text())
+                self.assertEqual(retained['results'],[failed,done])
+                self.assertEqual(mock.await_count,2)
+                args.output=base/'fail-fast';args.continue_incomplete=False
+                mock=AsyncMock(return_value=failed)
+                with patch.object(module,'capture_case',mock),self.assertRaises(RuntimeError):await module.run(args)
+                self.assertEqual(json.loads(args.output.read_text())['results'],[failed])
+                self.assertEqual(mock.await_count,1)
         asyncio.run(exercise())
