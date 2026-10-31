@@ -26,6 +26,18 @@ class SolutionPackageTest(unittest.TestCase):
                 manifest = json.loads(archive.read("MANIFEST.json"))
                 self.assertEqual(manifest["files"]["reference.md"]["sha256"], hashlib.sha256(b"example").hexdigest())
 
+    def test_extensionless_license_and_notice_remain_explicit(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder).resolve()
+            for name in ["LICENSE", "NOTICE", "other"]:
+                (root / name).write_text("reviewed legal text")
+            data = package.build_archive(root, ["LICENSE", "NOTICE"], "test", False)
+            with zipfile.ZipFile(io.BytesIO(data)) as archive:
+                self.assertEqual(archive.read("NOTICE"), b"reviewed legal text")
+                self.assertNotIn("other", archive.namelist())
+            with self.assertRaises(ValueError):
+                package.build_archive(root, ["other"], "test", False)
+
     def test_reject_outside_sensitive_and_symlink_paths(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder).resolve()
