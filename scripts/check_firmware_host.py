@@ -79,12 +79,21 @@ def check(executable):
     first, duplicate, final = firmware_replay(executable, "corpus_idle", calls)
     assert "result" in first and "error" in duplicate
     assert final["starts_this_boot"] == 1 and final["water_remaining_ms"] == 950
+    # Negative int32 IDs are valid platform requests, including setup's IDs.
+    for profile in ("corpus_idle", "corpus_forward70", "corpus_sequence", "corpus_draft7"):
+        stopped, first, duplicate, final = firmware_replay(executable, profile, [
+            dict(name="self.tank.stop", arguments={}, elapsed_ms=0, rpc_id=333),
+            dict(name="self.tank.water", arguments={"duration_ms":1000}, elapsed_ms=0, rpc_id=-2147483648),
+            dict(name="self.tank.water", arguments={"duration_ms":1000}, elapsed_ms=50, rpc_id=-2147483648),
+        ])
+        assert "result" in first and "error" in duplicate, (profile, first, duplicate)
+        assert final["water_remaining_ms"] == 950
     wire, final = firmware_replay(executable, "corpus_forward70", [
         dict(name="self.tank.stop",arguments={"unexpected":True},elapsed_ms=0,rpc_id=1)])
     assert "error" in wire and final["move_speed_percent"] == 70
     return dict(scope="Synthetic protocol requests, virtual timing and simulated range; no model or board IO",
                 expected_traces=80, compose_traces=8, concurrent_edit_rejected=True, invalid_requests=len(invalid), duplicate_id_did_not_restart=True,
-                invalid_stop_did_not_change_motion=True)
+                setup_ids_isolated=True, invalid_stop_did_not_change_motion=True)
 
 
 if __name__ == "__main__":
