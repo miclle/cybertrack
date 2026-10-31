@@ -126,3 +126,9 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 `--draft-read-facts-fixture` 为隔离对照增加 `draft_status_facts`，只影响状态查询回执。先将 `scripts/lingxi_status_fixture.cc` 与当前 `status_facts.h`、cJSON 编译到 `build/lingxi-schema-export/draft-read-fixture`。轨迹绑定帮助程序和头文件哈希。默认夹具保持原样，实际 ct59 主机回执直接包含该字段，无需实验开关。
 
 说明按真实 `show_draft.active` 生成，只指出当前是否有草稿及查询不构成保存确认，不代替保存操作。对照组保持角色和十二个工具定义一致。
+
+### 用实际固件校验参数
+
+先运行 `run_mcp_tests.py --source <prepared源码>`，再把生成的 `build/audio-host/mcp_validation_replay` 复制到固定位置，在采集命令传入 `--argument-validator <固定程序>`。它编译实际 MCP 分发器生成的参数校验代码，链接无动作 I/O 的 stop 桩。已发现的机器人工具参数才交给它检查。
+
+每次调用的检查结果写入 `argument_checks`，程序摘要写入轨迹。无效参数返回与固件相同的 RPC 错误，并跳过模拟接受和主机动作回执。通过参数校验后仍按所选夹具应答，不能将“参数有效”当成控制器已经接受或执行。历史未启用参数门的捕获保持原语义。
