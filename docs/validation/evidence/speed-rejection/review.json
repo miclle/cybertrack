@@ -1,0 +1,470 @@
+[
+  {
+    "file": "ct56-r1-idle.json.gz",
+    "sha256": "159540d2f21272247438a37eb2a61c9355a9e59463fa8de13ffbdb3f57ec0d9a",
+    "schema": "56",
+    "profile": "idle",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_not_moving: no movement at request time; speed was not changed and no action started."
+      }
+    ],
+    "reply": "这次没确认成功。",
+    "remote_audio_bytes": 2062,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "generic_uncertainty"
+  },
+  {
+    "file": "ct56-r1-voice_offline.json.gz",
+    "sha256": "bea0b251c0f451432aef8ab62c0646d2c8ac92c6dfd53763cc403678c9c53d81",
+    "schema": "56",
+    "profile": "voice_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_voice_offline: device voice control link was offline at request time; no action started."
+      }
+    ],
+    "reply": "这次没确认成功。",
+    "remote_audio_bytes": 2713,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "generic_uncertainty"
+  },
+  {
+    "file": "ct56-r1-wifi_offline.json.gz",
+    "sha256": "960590a71675833cc6177e9385efa597ff9a645583137bc33c244b5dcdb91a4b",
+    "schema": "56",
+    "profile": "wifi_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_wifi_offline: device Wi-Fi was offline at request time; no action started."
+      }
+    ],
+    "reply": "这次没确认成功。",
+    "remote_audio_bytes": 2393,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "generic_uncertainty"
+  },
+  {
+    "file": "ct56-r2-idle.json.gz",
+    "sha256": "f4acdee1cdfd2fa9411cdb3df689c5381c7536dc449cc1dcfb059bc6797e881d",
+    "schema": "56",
+    "profile": "idle",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_not_moving: no movement at request time; speed was not changed and no action started."
+      }
+    ],
+    "reply": "这次没确认成功。",
+    "remote_audio_bytes": 2393,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "generic_uncertainty"
+  },
+  {
+    "file": "ct56-r2-voice_offline.json.gz",
+    "sha256": "49c46468773d5ebc209f2a533fe83dbf75a5497f7444c26fad9bfcdfd9848179",
+    "schema": "56",
+    "profile": "voice_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_voice_offline: device voice control link was offline at request time; no action started."
+      }
+    ],
+    "reply": "这次没确认成功。",
+    "remote_audio_bytes": 2434,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "generic_uncertainty"
+  },
+  {
+    "file": "ct56-r2-wifi_offline.json.gz",
+    "sha256": "9a83718abf292a6a9b5e95a7df52fe9563603d6f6fb5a85b737a87aabee6d295",
+    "schema": "56",
+    "profile": "wifi_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_wifi_offline: device Wi-Fi was offline at request time; no action started."
+      }
+    ],
+    "reply": "这次没确认成功。",
+    "remote_audio_bytes": 2454,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "generic_uncertainty"
+  },
+  {
+    "file": "ct56-r3-idle.json.gz",
+    "sha256": "bf8b112ad73cd08bc4f6b1eb1e06f2c21bdb59c521f51bc8b1334bcf220202b9",
+    "schema": "56",
+    "profile": "idle",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_not_moving: no movement at request time; speed was not changed and no action started."
+      }
+    ],
+    "reply": "这次没确认成功。",
+    "remote_audio_bytes": 2441,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "generic_uncertainty"
+  },
+  {
+    "file": "ct56-r3-voice_offline.json.gz",
+    "sha256": "929d69d28ef267a7d5cd463fbd00746b0fe48165628431d16275768a0a9bc295",
+    "schema": "56",
+    "profile": "voice_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_voice_offline: device voice control link was offline at request time; no action started."
+      }
+    ],
+    "reply": "这次没确认成功。",
+    "remote_audio_bytes": 2128,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "generic_uncertainty"
+  },
+  {
+    "file": "ct56-r3-wifi_offline.json.gz",
+    "sha256": "ba5183830aa4749a674d95f5867156a5bcab3f3945fd4c34890fc010e264605e",
+    "schema": "56",
+    "profile": "wifi_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_wifi_offline: device Wi-Fi was offline at request time; no action started."
+      }
+    ],
+    "reply": "这次没确认成功。",
+    "remote_audio_bytes": 2458,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "generic_uncertainty"
+  },
+  {
+    "file": "r1-idle.json.gz",
+    "sha256": "aae274b53b5d73fa1e22dea7592a99ade3bc34fcdf64b7a3e9fb0a5c3919db7f",
+    "schema": "55",
+    "profile": "idle",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_not_moving: no movement at request time; speed was not changed and no action started."
+      }
+    ],
+    "reply": "这次没确认成功，现在没有正在移动的动作可以调速。",
+    "remote_audio_bytes": 7451,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "correct_no_motion"
+  },
+  {
+    "file": "r1-voice_offline.json.gz",
+    "sha256": "23d8c38ed28efde274ad2ad106266765ee7ce4fbddf66cbb3ca8a590b7f0ed00",
+    "schema": "55",
+    "profile": "voice_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_voice_offline: device voice control link was offline at request time; no action started."
+      }
+    ],
+    "reply": "现在没有正在移动，所以没法调速。需要先让我走起来再调速度。",
+    "remote_audio_bytes": 8166,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "incorrect_no_motion"
+  },
+  {
+    "file": "r1-wifi_offline.json.gz",
+    "sha256": "e7b38a1f51ff1425f59f4a3fff220185726f72ad1f7322582b50abdd81a3cee3",
+    "schema": "55",
+    "profile": "wifi_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_wifi_offline: device Wi-Fi was offline at request time; no action started."
+      }
+    ],
+    "reply": "当前没有在移动，没法调速。",
+    "remote_audio_bytes": 5215,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "incorrect_no_motion"
+  },
+  {
+    "file": "r2-idle.json.gz",
+    "sha256": "614dcfb03d4aebeaa784e0e1d94e42e925acd83d7d75e432ebf1bd0d8239065a",
+    "schema": "55",
+    "profile": "idle",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_not_moving: no movement at request time; speed was not changed and no action started."
+      }
+    ],
+    "reply": "当前没有在移动，所以调不了速度。",
+    "remote_audio_bytes": 5288,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "correct_no_motion"
+  },
+  {
+    "file": "r2-voice_offline.json.gz",
+    "sha256": "775678f8c88d72c3e4fcd884a48587becabe295c2b2faa7b8766fdf20ee98e8d",
+    "schema": "55",
+    "profile": "voice_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_voice_offline: device voice control link was offline at request time; no action started."
+      }
+    ],
+    "reply": "当前没有移动，没法调速度。",
+    "remote_audio_bytes": 4191,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "incorrect_no_motion"
+  },
+  {
+    "file": "r2-wifi_offline.json.gz",
+    "sha256": "f5cd138057dfb25a09f810be41b799fa627912dafbc04228a8c8c33fd9518f01",
+    "schema": "55",
+    "profile": "wifi_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_wifi_offline: device Wi-Fi was offline at request time; no action started."
+      }
+    ],
+    "reply": "当前没有移动，没法调速。",
+    "remote_audio_bytes": 4123,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "incorrect_no_motion"
+  },
+  {
+    "file": "r3-idle.json.gz",
+    "sha256": "70324d80b55ef993747d973057fad8604bdf61de5b3c1711bb9aaa9c69b32940",
+    "schema": "55",
+    "profile": "idle",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_not_moving: no movement at request time; speed was not changed and no action started."
+      }
+    ],
+    "reply": "当前没有在移动，没法调速。",
+    "remote_audio_bytes": 4792,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "correct_no_motion"
+  },
+  {
+    "file": "r3-voice_offline.json.gz",
+    "sha256": "a06c4e6a4e7825f476328f87752c7d2cf1e5604d64f2b61dfcac4625b6aae6e9",
+    "schema": "55",
+    "profile": "voice_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_voice_offline: device voice control link was offline at request time; no action started."
+      }
+    ],
+    "reply": "当前没有正在移动的动作，所以没法调速度。",
+    "remote_audio_bytes": 6599,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "incorrect_no_motion"
+  },
+  {
+    "file": "r3-wifi_offline.json.gz",
+    "sha256": "dc84f7a6122e5f81b165569bd00fea55b780481d885ff5befe784b25cd4e86df",
+    "schema": "55",
+    "profile": "wifi_offline",
+    "asr": "全速。",
+    "calls": [
+      {
+        "name": "self.tank.set_speed",
+        "arguments": {
+          "speed_percent": 100
+        }
+      }
+    ],
+    "error": [
+      {
+        "name": "self.tank.set_speed",
+        "message": "speed_rejected_wifi_offline: device Wi-Fi was offline at request time; no action started."
+      }
+    ],
+    "reply": "现在没有在移动，速度调不了。",
+    "remote_audio_bytes": 4114,
+    "zero_starts": true,
+    "outputs_off": true,
+    "reply_assessment": "incorrect_no_motion"
+  }
+]
