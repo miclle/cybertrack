@@ -1,0 +1,131 @@
+{
+  "scope": "Real platform, fresh session per text and frozen firmware receipts. Same role and raw questions, different tool description and held-channel status fact.",
+  "runs": [
+    {
+      "file": "pair-1-ct49.json.gz",
+      "raw_sha256": "874c7d509bd58ec3713006446a9474afb6639400340850705838a8de26625054",
+      "corpus_sha256": "5cbbf31a6f6d0cf461c57c070cdf2b75919e9ae702e2bbe847fa23018ee42a39",
+      "tool_schema_sha256": "fa23bce609a66d107a8788581eef2d694a09462d49a533155208dc3b3a30f8b6",
+      "replay_sha256": "fd01a953002f07a13ae576ed668b70ab1bc3e2f6598b06bb377daeb60752a3b5",
+      "answers": [
+        {
+          "id": "H201",
+          "reply": "刚才查询时还剩约0.4秒，不过这个是网页在控制的长按移动，具体多久结束要看什么时候松手。"
+        },
+        {
+          "id": "H202",
+          "reply": "我来查一下当前状态刚才查询时还剩约0.4秒就结束了。"
+        },
+        {
+          "id": "H203",
+          "reply": "刚才查询时移动已经结束了，目前没有行走动作在运行。"
+        }
+      ]
+    },
+    {
+      "file": "pair-1-ct50.json.gz",
+      "raw_sha256": "7f281aa7d1ad7a3ebd3df1c9881f610a5a2746eb6cee63e81072c7e4410f173c",
+      "corpus_sha256": "138f3f1b6b6fa82e4e1c74a2b5808ab7c2460b9ab2863d556e70ee97908ba617",
+      "tool_schema_sha256": "fa840ac11821a988295942471a3c40edb291b256994eaafea27f5f9c9ec74d96",
+      "replay_sha256": "4394faf2dc0310a422d62f67f910616f3524bb05b37c7723bc085f2bf23d09e0",
+      "answers": [
+        {
+          "id": "H201",
+          "reply": "当前行走是由网页长按控制的，什么时候结束要看松手，我没法给你报具体秒数。"
+        },
+        {
+          "id": "H202",
+          "reply": "刚才查询时移动还剩约0.4秒，现在应该已经走完了。"
+        },
+        {
+          "id": "H203",
+          "reply": "刚才查询时移动已经结束了，当时没有正在运行的移动动作。"
+        }
+      ]
+    },
+    {
+      "file": "pair-2-ct49.json.gz",
+      "raw_sha256": "0a4e1402282958c819d045d1fffe5c68fe9633060ef1105cd1c622d70dacbc22",
+      "corpus_sha256": "5cbbf31a6f6d0cf461c57c070cdf2b75919e9ae702e2bbe847fa23018ee42a39",
+      "tool_schema_sha256": "fa23bce609a66d107a8788581eef2d694a09462d49a533155208dc3b3a30f8b6",
+      "replay_sha256": "fd01a953002f07a13ae576ed668b70ab1bc3e2f6598b06bb377daeb60752a3b5",
+      "answers": [
+        {
+          "id": "H201",
+          "reply": "刚才查询时还剩约0.4秒就结束了。"
+        },
+        {
+          "id": "H202",
+          "reply": "刚才查询时移动还剩约0.4秒，现在应该已经停了。"
+        },
+        {
+          "id": "H203",
+          "reply": "这次移动已经结束了，刚才查询时剩余时间是0，现在没有动作在运行。"
+        }
+      ]
+    },
+    {
+      "file": "pair-2-ct50.json.gz",
+      "raw_sha256": "f6d52041657fe48fbb7465aa21207601b56344f0f53024863d2b0ea2c98beb89",
+      "corpus_sha256": "138f3f1b6b6fa82e4e1c74a2b5808ab7c2460b9ab2863d556e70ee97908ba617",
+      "tool_schema_sha256": "fa840ac11821a988295942471a3c40edb291b256994eaafea27f5f9c9ec74d96",
+      "replay_sha256": "4394faf2dc0310a422d62f67f910616f3524bb05b37c7723bc085f2bf23d09e0",
+      "answers": [
+        {
+          "id": "H201",
+          "reply": "这次是网页长按控制的移动，什么时候结束要看什么时候松手，我这边没法预知剩余时间。"
+        },
+        {
+          "id": "H202",
+          "reply": "刚才查询时移动还剩约0.4秒，现在应该已经停了。"
+        },
+        {
+          "id": "H203",
+          "reply": "刚才查询时移动已经结束了，现在没有在行走。"
+        }
+      ]
+    },
+    {
+      "file": "pair-3-ct49.json.gz",
+      "raw_sha256": "738e31c239770326acb479e9a4c052bbfeed7bc4e949f0e8ee6bfc33dd430116",
+      "corpus_sha256": "5cbbf31a6f6d0cf461c57c070cdf2b75919e9ae702e2bbe847fa23018ee42a39",
+      "tool_schema_sha256": "fa23bce609a66d107a8788581eef2d694a09462d49a533155208dc3b3a30f8b6",
+      "replay_sha256": "fd01a953002f07a13ae576ed668b70ab1bc3e2f6598b06bb377daeb60752a3b5",
+      "answers": [
+        {
+          "id": "H201",
+          "reply": "这次移动是网页控制的，刚才查询时还剩约0.4秒，应该很快就结束了。"
+        },
+        {
+          "id": "H202",
+          "reply": "刚才查询时移动还剩约0.4秒，应该很快结束了。"
+        },
+        {
+          "id": "H203",
+          "reply": "刚才查询时移动已经结束了，目前没有正在运行的移动计时。"
+        }
+      ]
+    },
+    {
+      "file": "pair-3-ct50.json.gz",
+      "raw_sha256": "29ce2994f57a857b45baeb1f86da31e32496e33724ddb273915a6e735420ff43",
+      "corpus_sha256": "138f3f1b6b6fa82e4e1c74a2b5808ab7c2460b9ab2863d556e70ee97908ba617",
+      "tool_schema_sha256": "fa840ac11821a988295942471a3c40edb291b256994eaafea27f5f9c9ec74d96",
+      "replay_sha256": "4394faf2dc0310a422d62f67f910616f3524bb05b37c7723bc085f2bf23d09e0",
+      "answers": [
+        {
+          "id": "H201",
+          "reply": "这次行走是网页长按控制的，什么时候结束要看什么时候松手。"
+        },
+        {
+          "id": "H202",
+          "reply": "刚才查询时还剩大约不到1秒，应该已经走完了。"
+        },
+        {
+          "id": "H203",
+          "reply": "刚才查询时移动已经结束了，目前没有正在运行的动作。"
+        }
+      ]
+    }
+  ]
+}
