@@ -1,0 +1,1056 @@
+{
+  "schema_version": 1,
+  "kind": "full_synthetic_speech_scores",
+  "scope": "Original eighty/eight through synthesized Mandarin and actual STT; model/tool and transcription separate, no human or physical acceptance",
+  "suites": {
+    "voice": {
+      "capture_json_sha256": "4d9c2945795f6f9b4ad45e4d16c49031b4c7eb08af1d04cb1290a43eeee3fe25",
+      "capture_gzip_sha256": "719ba388e7b3709a6dee5366016ea89749175bdfc7fa458bb2e8d6bb72a5929f",
+      "speech_score": {
+        "scope": "Full original corpus through synthesized speech and actual STT; not human microphone or spoken acceptance",
+        "tools": {
+          "corpus_suite": "voice-v1",
+          "run_id": "ef9dbbe9-edb6-4ad7-bffe-017a8f1b050a",
+          "model": "deepseek-v4-flash",
+          "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+          "scored": 80,
+          "total": 80,
+          "correct": 77,
+          "accuracy_all_cases": 0.9625,
+          "missing": [],
+          "forbidden_call_cases": [
+            "V064"
+          ],
+          "invalid_tool_argument_cases": [],
+          "incomplete": [],
+          "failed_stop_cases": [],
+          "tool_call_target_met": false,
+          "results": [
+            {
+              "id": "V001",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V002",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V003",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V004",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V005",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V006",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V007",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V008",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V009",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V010",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V011",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V012",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V013",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V014",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V015",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V016",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V017",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V018",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V019",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V020",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V021",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V022",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V023",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V024",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V025",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V026",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V027",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V028",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V029",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V030",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V031",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V032",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V033",
+              "tool_calls_match": false
+            },
+            {
+              "id": "V034",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V035",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V036",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V037",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V038",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V039",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V040",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V041",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V042",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V043",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V044",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V045",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V046",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V047",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V048",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V049",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V050",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V051",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V052",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V053",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V054",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V055",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V056",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V057",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V058",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V059",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V060",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V061",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V062",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V063",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V064",
+              "tool_calls_match": false
+            },
+            {
+              "id": "V065",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V066",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V067",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V068",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V069",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V070",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V071",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V072",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V073",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V074",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V075",
+              "tool_calls_match": false
+            },
+            {
+              "id": "V076",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V077",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V078",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V079",
+              "tool_calls_match": true
+            },
+            {
+              "id": "V080",
+              "tool_calls_match": true
+            }
+          ],
+          "reply_semantics": "manual review required",
+          "physical_or_spoken_acceptance": false
+        },
+        "transcription": {
+          "criterion": "Literal after NFKC/whitespace/listed punctuation normalization; numeral spelling differences alone do not prove an ASR error",
+          "total": 80,
+          "observed": 80,
+          "matches": 76,
+          "missing_stt": [],
+          "mismatches": [
+            "V019",
+            "V023",
+            "V027",
+            "V037"
+          ],
+          "results": [
+            {
+              "id": "V001",
+              "recognized": [
+                "前进。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V002",
+              "recognized": [
+                "前进两秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V003",
+              "recognized": [
+                "前进五秒，速度百分之六十。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V004",
+              "recognized": [
+                "前进一分钟。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V005",
+              "recognized": [
+                "后退。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V006",
+              "recognized": [
+                "后退两秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V007",
+              "recognized": [
+                "后退五秒，速度百分之六十。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V008",
+              "recognized": [
+                "后退一分钟。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V009",
+              "recognized": [
+                "左转。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V010",
+              "recognized": [
+                "左转两秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V011",
+              "recognized": [
+                "左转五秒，速度百分之六十。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V012",
+              "recognized": [
+                "左转一分钟。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V013",
+              "recognized": [
+                "右转。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V014",
+              "recognized": [
+                "右转两秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V015",
+              "recognized": [
+                "右转五秒，速度百分之六十。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V016",
+              "recognized": [
+                "右转一分钟。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V017",
+              "recognized": [
+                "喷水。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V018",
+              "recognized": [
+                "喷水两秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V019",
+              "recognized": [
+                "喷水三十秒。"
+              ],
+              "transcript_matches": false
+            },
+            {
+              "id": "V020",
+              "recognized": [
+                "喷水六十秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V021",
+              "recognized": [
+                "吹泡泡。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V022",
+              "recognized": [
+                "吹泡泡两秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V023",
+              "recognized": [
+                "吹泡泡三十秒。"
+              ],
+              "transcript_matches": false
+            },
+            {
+              "id": "V024",
+              "recognized": [
+                "吹泡泡六十秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V025",
+              "recognized": [
+                "放电。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V026",
+              "recognized": [
+                "放电两秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V027",
+              "recognized": [
+                "放电五秒。"
+              ],
+              "transcript_matches": false
+            },
+            {
+              "id": "V028",
+              "recognized": [
+                "放电六十秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V029",
+              "recognized": [
+                "前进五秒，同时喷水。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V030",
+              "recognized": [
+                "左转三秒，同时喷水一秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V031",
+              "recognized": [
+                "前进五秒，然后左转。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V032",
+              "recognized": [
+                "先吹泡泡两秒，再后退一秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V033",
+              "recognized": [
+                "左转两秒，同时吹泡泡三秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V034",
+              "recognized": [
+                "同时喷水两秒和吹泡泡一秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V035",
+              "recognized": [
+                "先前进一秒，再同时左转两秒和吹泡泡两秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V036",
+              "recognized": [
+                "先前进两秒再右转两秒，都用百分之七十速度。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V037",
+              "recognized": [
+                "掉到百分之六十。"
+              ],
+              "transcript_matches": false
+            },
+            {
+              "id": "V038",
+              "recognized": [
+                "快一点。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V039",
+              "recognized": [
+                "慢一点。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V040",
+              "recognized": [
+                "全速。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V041",
+              "recognized": [
+                "速度百分之五十。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V042",
+              "recognized": [
+                "速度百分之一百零一。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V043",
+              "recognized": [
+                "速度百分之六十点五。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V044",
+              "recognized": [
+                "速度快一些还是慢一些好？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V045",
+              "recognized": [
+                "停止。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V046",
+              "recognized": [
+                "停下。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V047",
+              "recognized": [
+                "停止行走。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V048",
+              "recognized": [
+                "停止喷水。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V049",
+              "recognized": [
+                "停止泡泡。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V050",
+              "recognized": [
+                "停止狂暴模式。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V051",
+              "recognized": [
+                "取消序列。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V052",
+              "recognized": [
+                "所有动作都停下来。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V053",
+              "recognized": [
+                "你现在在做什么？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V054",
+              "recognized": [
+                "你还在喷水吗？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V055",
+              "recognized": [
+                "泡泡结束了吗？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V056",
+              "recognized": [
+                "序列进行到哪一步了？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V057",
+              "recognized": [
+                "狂暴模式还剩多久？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V058",
+              "recognized": [
+                "前面有多远？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V059",
+              "recognized": [
+                "测一下距离。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V060",
+              "recognized": [
+                "自动避障开着吗？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V061",
+              "recognized": [
+                "不要前进。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V062",
+              "recognized": [
+                "别喷水。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V063",
+              "recognized": [
+                "不要开启狂暴模式。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V064",
+              "recognized": [
+                "不许吹泡泡。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V065",
+              "recognized": [
+                "不要放电。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V066",
+              "recognized": [
+                "不要饭店。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V067",
+              "recognized": [
+                "前进两秒是什么意思？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V068",
+              "recognized": [
+                "你会喷水吗？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V069",
+              "recognized": [
+                "喷水的原理是什么？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V070",
+              "recognized": [
+                "泡泡是怎么形成的？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V071",
+              "recognized": [
+                "去饭店吃饭。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V072",
+              "recognized": [
+                "附近的饭店在哪里？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V073",
+              "recognized": [
+                "饭店是什么意思？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V074",
+              "recognized": [
+                "如果以后我说前进，你会怎么办？"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V075",
+              "recognized": [
+                "我昨天说过左转。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V076",
+              "recognized": [
+                "我在跟别人说喷水，不是在叫你。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V077",
+              "recognized": [
+                "前进二十厘米。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V078",
+              "recognized": [
+                "左转九十度。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V079",
+              "recognized": [
+                "动一下那个东西。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "V080",
+              "recognized": [
+                "速度调到合适的程度。"
+              ],
+              "transcript_matches": true
+            }
+          ]
+        }
+      }
+    },
+    "compose": {
+      "capture_json_sha256": "c4d3b08c034c6dec899978f9c4a31384d1bf82deef431a614a051f3006702639",
+      "capture_gzip_sha256": "ec834539e8dea0f03c9d006f5c20a689bb804fca9647739ff14854a9acba61ac",
+      "speech_score": {
+        "scope": "Full original corpus through synthesized speech and actual STT; not human microphone or spoken acceptance",
+        "tools": {
+          "corpus_suite": "compose-v1",
+          "run_id": "74b703f4-c85d-4a46-9b7d-64d4dbc031d7",
+          "model": "deepseek-v4-flash",
+          "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+          "scored": 8,
+          "total": 8,
+          "correct": 6,
+          "accuracy_all_cases": 0.75,
+          "missing": [],
+          "forbidden_call_cases": [],
+          "invalid_tool_argument_cases": [],
+          "incomplete": [],
+          "failed_stop_cases": [],
+          "tool_call_target_met": false,
+          "results": [
+            {
+              "id": "C001",
+              "tool_calls_match": true
+            },
+            {
+              "id": "C002",
+              "tool_calls_match": true
+            },
+            {
+              "id": "C003",
+              "tool_calls_match": true
+            },
+            {
+              "id": "C004",
+              "tool_calls_match": true
+            },
+            {
+              "id": "C005",
+              "tool_calls_match": false
+            },
+            {
+              "id": "C006",
+              "tool_calls_match": true
+            },
+            {
+              "id": "C007",
+              "tool_calls_match": true
+            },
+            {
+              "id": "C008",
+              "tool_calls_match": false
+            }
+          ],
+          "reply_semantics": "manual review required",
+          "physical_or_spoken_acceptance": false
+        },
+        "transcription": {
+          "criterion": "Literal after NFKC/whitespace/listed punctuation normalization; numeral spelling differences alone do not prove an ASR error",
+          "total": 8,
+          "observed": 8,
+          "matches": 8,
+          "missing_stt": [],
+          "mismatches": [],
+          "results": [
+            {
+              "id": "C001",
+              "recognized": [
+                "帮我编排一段先左转，再吹泡泡的表演，先别执行。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "C002",
+              "recognized": [
+                "把草稿第二步泡泡改成两秒。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "C003",
+              "recognized": [
+                "去掉草稿第一步转向。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "C004",
+              "recognized": [
+                "取消这个草稿。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "C005",
+              "recognized": [
+                "开始这段表演。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "C006",
+              "recognized": [
+                "不要编排表演。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "C007",
+              "recognized": [
+                "草稿第一步改成点火。"
+              ],
+              "transcript_matches": true
+            },
+            {
+              "id": "C008",
+              "recognized": [
+                "第二步短一点。"
+              ],
+              "transcript_matches": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}
