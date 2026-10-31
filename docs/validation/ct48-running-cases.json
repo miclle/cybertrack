@@ -1,0 +1,132 @@
+{
+  "scope": "Active motion and three-step draft contrast. Raw text; standing fixture time.",
+  "cases": [
+    {
+      "id": "R001",
+      "text": "照原来的速度往前走就行，别喷水，也别改速度。",
+      "context": "设备正在向前行走，当前速度70%，还剩4秒。",
+      "initial_motion": "forward70",
+      "expected_calls": []
+    },
+    {
+      "id": "R002",
+      "text": "先不要加速，告诉我现在是什么速度。",
+      "context": "设备正在向前行走，当前速度70%，还剩4秒。",
+      "initial_motion": "forward70",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "id": "R003",
+      "text": "别把履带停下来，只查一下现在往哪个方向走。",
+      "context": "设备正在向前行走，当前速度70%，还剩4秒。",
+      "initial_motion": "forward70",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "id": "R004",
+      "text": "不用改速度了，现在全部停下！",
+      "context": "设备正在向前行走，当前速度70%，还剩4秒。",
+      "initial_motion": "forward70",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "id": "R005",
+      "text": "编排三步，先后退两秒，同时吹一秒泡泡，再左转一秒，最后原地吹两秒泡泡。只存草稿。",
+      "context": "设备空闲，无有效草稿。",
+      "initial_motion": "idle",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace",
+            "revision": 0,
+            "step": 0,
+            "steps_json": "[{\"direction\":\"backward\",\"move_ms\":2000,\"bubbles_ms\":1000,\"water_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":1000,\"bubbles_ms\":0,\"water_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"bubbles_ms\":2000,\"water_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ]
+    },
+    {
+      "id": "R006",
+      "text": "帮我排练，先吹一秒泡泡，然后左转一秒的同时吹三秒泡泡，最后前进两秒。等我确认。",
+      "context": "设备空闲，无有效草稿。",
+      "initial_motion": "idle",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace",
+            "revision": 0,
+            "step": 0,
+            "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"bubbles_ms\":1000,\"water_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":1000,\"bubbles_ms\":3000,\"water_ms\":0,\"ignition_ms\":0},{\"direction\":\"forward\",\"move_ms\":2000,\"bubbles_ms\":0,\"water_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ]
+    },
+    {
+      "id": "R007",
+      "text": "先预览：前进一秒，再后退两秒，最后右转三秒，同时吹一秒泡泡。不要开演。",
+      "context": "设备空闲，无有效草稿。",
+      "initial_motion": "idle",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace",
+            "revision": 0,
+            "step": 0,
+            "steps_json": "[{\"direction\":\"forward\",\"move_ms\":1000,\"bubbles_ms\":0,\"water_ms\":0,\"ignition_ms\":0},{\"direction\":\"backward\",\"move_ms\":2000,\"bubbles_ms\":0,\"water_ms\":0,\"ignition_ms\":0},{\"direction\":\"right\",\"move_ms\":3000,\"bubbles_ms\":1000,\"water_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ]
+    },
+    {
+      "id": "R008",
+      "text": "排成三步：先后退两秒，再吹一秒泡泡，最后右转三秒。先保存，不开始。",
+      "context": "设备空闲，无有效草稿。",
+      "initial_motion": "idle",
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        },
+        {
+          "name": "self.tank.compose",
+          "arguments": {
+            "edit": "replace",
+            "revision": 0,
+            "step": 0,
+            "steps_json": "[{\"direction\":\"backward\",\"move_ms\":2000,\"bubbles_ms\":0,\"water_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"bubbles_ms\":1000,\"water_ms\":0,\"ignition_ms\":0},{\"direction\":\"right\",\"move_ms\":3000,\"bubbles_ms\":0,\"water_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ]
+    }
+  ]
+}
