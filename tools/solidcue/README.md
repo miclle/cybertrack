@@ -69,6 +69,8 @@ node scripts/check_solidcue_sync.mjs <study_directory>
 
 ## 开发检查与验收
 
+统一入口：`python3 scripts/verify_improvements.py --model-design`；已有 ct45 准备树时加 `--source build/xiaozhi-ct45-src`。报告包含每项退出码、日志和工具源码哈希，不自动安装依赖，也不连接实际设计服务。下列命令可单独运行对应检查：
+
 ```sh
 npm --prefix tools/model-design test
 npm --prefix tools/model-design run test:bundle
