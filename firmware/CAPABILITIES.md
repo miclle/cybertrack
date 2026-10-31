@@ -21,8 +21,8 @@
 | `move_and_water` | `direction`、`move_duration_ms`、`water_duration_ms`，可选速度；两路均就绪才整体接受，各自截止 |
 | `sequence` | `steps_json`，1–16 步 JSON 数组字符串；每步 `direction/move_ms/water_ms/bubbles_ms/ignition_ms`，可选速度；不用通道填 0，无行走填 `none` |
 | `frenzy` | `duration_ms` 1–30000；四路均就绪才启动，间歇点火受自身关闭间隔约束 |
-| `adjust_speed` | 运行中相对调速，具体字段与来源规则见[速度接口](../docs/speed-control.md)；不启动或续时 |
-| `set_speed` | 运行中绝对目标 60–100%，具体字段见[速度接口](../docs/speed-control.md)；不自动换向或续时 |
+| `adjust_speed` | 运行中相对调速，具体字段与来源规则见[速度接口](../docs/action-sequences.md#速度与时长)；不启动或续时 |
+| `set_speed` | 运行中绝对目标 60–100%，具体字段见[速度接口](../docs/action-sequences.md#速度与时长)；不自动换向或续时 |
 
 语音未说时长时：全速左右转 880 ms，其他普通动作 1000 ms，狂暴 5000 ms。显式／同一步共享时长优先；否定、查询、引用和含糊表达不套用默认启动。规则唯一维护源为 [role-prompt.txt](esp32-audio/role-prompt.txt)。
 

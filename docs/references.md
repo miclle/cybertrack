@@ -32,6 +32,6 @@
 
 2026-10-23 的[采购网页核对记录](../hardware/procurement-web-review.md)汇总选项、参数、来源冲突和设计影响；[原图／说明书来源清单](../hardware/reference/procurement-2026-10-23/sources.json)记录 18 个新保存文件及 SHA-256，独立于既有部件校验清单，不覆盖只读资产。P07 页面 PDF 已核对为芯片规格书 v2.2；P11 商品页说明书的单路／多端额定输出已读取，实物仍未验收。
 
-[初始化检查报告](initialization-check.json)为 2026-10-23 的历史快照，文件内标明对应 Git 提交；其中路径、哈希和检查结果不代表当前工作树状态。
+[初始化检查快照](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/initialization-check.json)为 2026-10-23 的历史快照，文件内标明对应 Git 提交；其中路径、哈希和检查结果不代表当前工作树状态。
 
 原始图片中的厂家名称与器件型号按原资料保留。

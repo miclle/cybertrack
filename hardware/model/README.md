@@ -18,11 +18,11 @@
 
 **历史局部更新：0.56／泡泡枪尾壳35.9 mm。** 不含底部薄片6.8，承托面至尾顶42.7为推导；枪口、薄片、PP02和15°姿态保持。正式源档、交付模型、STEP及独立部件新修订版已同步，见[专项回读](bubble-tail-height-audit.json)与[部件尺寸](../components/bubble-gun/README.md#当前模型尾壳高-359-mm2026-10-26)。尾壳无新增实体相交；原PP02配合冲突及拆装未验状态保持。
 
-**历史局部更新：0.55／15芯净径10通道。** 上下护口、颈架桥、板下至左侧路线及PP06已更新，见[说明](../../docs/cable-passage.md)和[专项](cable-passage-audit.json)。保留PP02既有配合冲突；其他历史预览以各自版本为准。
+**历史局部更新：0.55／15芯净径10通道。** 上下护口、颈架桥、板下至左侧路线及PP06已更新，见[说明](../../docs/assembly.md#头舱与穿线)和[专项](cable-passage-audit.json)。保留PP02既有配合冲突；其他历史预览以各自版本为准。
 
-历史整机修订 **0.54 外接BOOT停止按钮候选**：右肩梁新增一体安装座、后插螺母腔、后护边和扎带鞍座，移除原独立StopPlinth；GPIO0/GND走廊经颈架后缘进入头舱后槽。按钮尚未选型，尺寸为设计预算，见[安装与走线说明](../../docs/boot-button.md)、[专项回读](boot-button-audit.json)及[范围审计](boot-button-change-audit.json)。
+历史整机修订 **0.54 外接BOOT停止按钮候选**：右肩梁新增一体安装座、后插螺母腔、后护边和扎带鞍座，移除原独立StopPlinth；GPIO0/GND走廊经颈架后缘进入头舱后槽。按钮尚未选型，尺寸为设计预算，见[安装与走线说明](../../docs/assembly.md#电源开关与停止按钮)、[专项回读](boot-button-audit.json)及[范围审计](boot-button-change-audit.json)。
 
-沿用 **0.53 折面顶盖中央电源开关候选**：新增一体安装座、本体通孔、前后护边和两颗Ø2×6塑料用自攻螺丝候选；用户明确不放左右侧面，头部几何保持。见[安装说明](../../docs/power-switch.md)、[专项回读](power-switch-audit.json)及[变更范围](power-switch-change-audit.json)。沿用0.51六组合并打印：58个设计特征归并为6个单实体；冠盖新增四处连接筋，固定颈架横梁填平配合间隙。主模型只保留“01 双履带与动力参考”分组，其他对象全部一级显示；58个重复融合输入和59个隐藏检查空间仅在独立[设计源档](source/CyberTrack-design.FCStd)保留，主模型保留20个默认隐藏的设备／线管占位，见[树结构检查](model-tree-audit.json)。见[合并说明](../../docs/print-consolidation.md)、[打印文件](print-parts/README.md)及[检查报告](print-consolidation-audit.json)。下述0.50说明记录此前基线。
+沿用 **0.53 折面顶盖中央电源开关候选**：新增一体安装座、本体通孔、前后护边和两颗Ø2×6塑料用自攻螺丝候选；用户明确不放左右侧面，头部几何保持。见[安装说明](../../docs/assembly.md#电源开关与停止按钮)、[专项回读](power-switch-audit.json)及[变更范围](power-switch-change-audit.json)。沿用0.51六组合并打印：58个设计特征归并为6个单实体；冠盖新增四处连接筋，固定颈架横梁填平配合间隙。主模型只保留“01 双履带与动力参考”分组，其他对象全部一级显示；58个重复融合输入和59个隐藏检查空间仅在独立[设计源档](source/CyberTrack-design.FCStd)保留，主模型保留20个默认隐藏的设备／线管占位，见[树结构检查](model-tree-audit.json)。见[合并说明](../../docs/assembly.md#打印件与装配图册)、[打印文件](print-parts/README.md)及[检查报告](print-consolidation-audit.json)。下述0.50说明记录此前基线。
 
 [历史 CAD 报告归档](archive/README.md)：旧报告按原字节保留；当前生成与图纸检查使用的报告仍位于本目录。
 
@@ -32,7 +32,7 @@
 
 零件列表随后按相邻组件集中排列，组件按各零件包络中心高度的中位数从高到低排序，组件内再按高度、前后和左右位置排序。冠盖与紧固件、双枪与各自底托、各板卡与固定件、电池与承托件分别相邻；底部检修盖与螺钉置于末尾。履带动力参考组内部先左侧、后右侧，不新增分组或名称前缀。[排序回读报告](part-order-audit.json)记录 278 个一级条目（277 个零件及 1 个分组）和 30 个组内对象的显示顺序，已核对 FreeCAD 实际树视图。排序只修改显示顺序和组内成员顺序，保留名称、几何、颜色和可见性；[排序脚本](../../scripts/model_order.py)在命名之后执行。
 
-历史整机修订 **0.50 双瓶背包一体点火模块桶座**：下半段封成有底圆筒，完整上下环带及连接耳合入 `BackpackShell`，取消顶部倒 L 压件及独立夹环紧固件，见[结构与拆装](../../docs/effects-mount.md)和[变更范围](ignition-housing-change-audit.json)。保留0.49侧框后伸：左右后端各延长30 mm，见[侧框说明](../../docs/mechanical.md#049-左右镂空底座侧框后伸)。保留0.48前舱入线与点火MOS安装；采用新电池包116×70.5×19.5，取消外沿／履带上方走线，改为前肩入舱、前脸四孔，新增第三块P01独立托架，见[本轮布局](../../docs/ignition-routing.md)。沿用[0.44 MT3608布局](#044-mt3608-升压板包络)。沿用0.43四板固定、接线空间与承板装配余量候选，见[结构与拆装](../../docs/effects-mount.md)。保留0.41头部共存结构。新增PCB／背面／向上接头／线束包络及托盘前缘49×2让位，详见[集成记录](../../docs/ultrasonic-head.md)。整组100×85×36规划包络，头部外形保持，旧头舱主控／独立扬声器／电弧占位撤出头部布局，详见[浅托盘记录](../../docs/breadboard-tray.md)。保留0.39双枪15°：泡泡枪与水枪由10°上调至15°，肩梁承托、孔轴及枪侧管路同步调整，见[仰角记录](../../docs/mechanical.md#039-双枪上仰15)及[范围与净距检查](gun-pitch-audit.json)。保留0.37头舱整体上移25 mm方案：头壳底面Z161、顶部Z228；颈架和斜撑同步延伸，中央电源线束接至新头舱入口。双瓶与底盘保持，详见[加高记录](../../docs/mechanical.md#037-头舱整体上移25-mm)、[间隙检查](head-lift-audit.json)及[范围核对](head-lift-change-audit.json)。沿用0.36双瓶护舱：护舱高90 mm，完整瓶包络Ø48.8×114含盖、上部外露30 mm，固定和独立拆装见[机械记录](../../docs/mechanical.md#036-低位开放双瓶护舱)、[专项检查](bottle-backpack-audit.json)及[变更范围](bottle-backpack-change-audit.json)。此前0.34驱动板结构保留。
+历史整机修订 **0.50 双瓶背包一体点火模块桶座**：下半段封成有底圆筒，完整上下环带及连接耳合入 `BackpackShell`，取消顶部倒 L 压件及独立夹环紧固件，见[结构与拆装](../../docs/backpack-35mm.md)和[变更范围](ignition-housing-change-audit.json)。保留0.49侧框后伸：左右后端各延长30 mm，见[侧框说明](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/mechanical.md#049-左右镂空底座侧框后伸)。保留0.48前舱入线与点火MOS安装；采用新电池包116×70.5×19.5，取消外沿／履带上方走线，改为前肩入舱、前脸四孔，新增第三块P01独立托架，见[本轮布局](../../docs/assembly.md#双枪与背包)。沿用[0.44 MT3608布局](#044-mt3608-升压板包络)。沿用0.43四板固定、接线空间与承板装配余量候选，见[结构与拆装](../../docs/backpack-35mm.md)。保留0.41头部共存结构。新增PCB／背面／向上接头／线束包络及托盘前缘49×2让位，详见[集成记录](../../docs/assembly.md#头舱与穿线)。整组100×85×36规划包络，头部外形保持，旧头舱主控／独立扬声器／电弧占位撤出头部布局，详见[浅托盘记录](../../docs/assembly.md#头舱与穿线)。保留0.39双枪15°：泡泡枪与水枪由10°上调至15°，肩梁承托、孔轴及枪侧管路同步调整，见[仰角记录](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/mechanical.md#039-双枪上仰15)及[范围与净距检查](gun-pitch-audit.json)。保留0.37头舱整体上移25 mm方案：头壳底面Z161、顶部Z228；颈架和斜撑同步延伸，中央电源线束接至新头舱入口。双瓶与底盘保持，详见[加高记录](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/mechanical.md#037-头舱整体上移25-mm)、[间隙检查](head-lift-audit.json)及[范围核对](head-lift-change-audit.json)。沿用0.36双瓶护舱：护舱高90 mm，完整瓶包络Ø48.8×114含盖、上部外露30 mm，固定和独立拆装见[机械记录](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/mechanical.md#036-低位开放双瓶护舱)、[专项检查](bottle-backpack-audit.json)及[变更范围](bottle-backpack-change-audit.json)。此前0.34驱动板结构保留。
 
 2026-10-25 · **装配候选 0.34**：保持 [L298N 独立包络](../components/L298N/README.md)及下部竖装位置，增加顶盖一体吊架、独立开口托框、可调侧压件和接线／通风空间。两张用户正反面原图已保存。完整托框组件的连续下取、批头通道和干涉检查见[支架专项](l298n-mount-audit.json)；实际 PCB 接触、插头、温升和制造未验收。
 
@@ -60,7 +60,7 @@
 
 ## 文件与视图
 
-- [0.41 超声波 PCB／接线与面包板共存集成](../../docs/ultrasonic-head.md)：已合入主模型和PDF；独立副本已清理。保留头壳外形；在探头内退3.5 mm的待确认基准下，比较后插头冲突、向上出线及托盘前缘让位后的拆装。PCB、接头和固定接口未实测。
+- [0.41 超声波 PCB／接线与面包板共存集成](../../docs/assembly.md#头舱与穿线)：已合入主模型和PDF；独立副本已清理。保留头壳外形；在探头内退3.5 mm的待确认基准下，比较后插头冲突、向上出线及托盘前缘让位后的拆装。PCB、接头和固定接口未实测。
 
 - [CyberTrack.FCStd](CyberTrack.FCStd)：交付原生模型，中文对象树；保留履带动力分组，其他对象一级显示。设计输入及检修空间另见设计源档，设备和走线占位不计入打印清单。
 - [CyberTrack.step](CyberTrack.step)：不含设备包络及审查区的布局交换文件；严格体积比较未通过，以 FCStd 为几何依据，不宣称曲面等价。
@@ -79,7 +79,7 @@
 
 用户选择一体化优先，接受换电机前移开本侧履带。电机固定面融合进`LowerTub`，取消独立端板、4颗端板锁紧螺钉、短脚、承压台阶及止挡配合。前干舱隔板`FrontBulkhead`、电源水平内隔板`BatteryRoof`和旧托座两道跨舱横梁移除；外顶盖、后湿舱隔板`RearBulkhead`及中央分隔`WetDivider`保留。电源底部托架、承托条及固定柱实际支承电源，继续保留。
 
-电机端面X±73／厚4、PCD31／Ø3.4、四个完整安装座、轴线Z57及履带面X±87／孔距56.2不变；下底盘仍前后132等宽，动力仍左右各外移14。先开一体底盖、断线并取出电源内托架，解除联轴器锁定；本侧履带螺钉内退35.5、下取80，履带总成外移60。卸4颗电机端面螺钉后，电机连轴直接下取80，不再内退28。详见[装配说明](../../docs/assembly.md#032-简化一体底盘与电机维护)。
+电机端面X±73／厚4、PCD31／Ø3.4、四个完整安装座、轴线Z57及履带面X±87／孔距56.2不变；下底盘仍前后132等宽，动力仍左右各外移14。先开一体底盖、断线并取出电源内托架，解除联轴器锁定；本侧履带螺钉内退35.5、下取80，履带总成外移60。卸4颗电机端面螺钉后，电机连轴直接下取80，不再内退28。详见[装配说明](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/assembly.md#032-简化一体底盘与电机维护)。
 
 历史记录：[0.29动力专项](archive/reports/drive-mount-0.29-audit.json)、[0.29范围审计](archive/reports/drive-mount-change-audit.json)、[0.30动力专项](archive/reports/drive-mount-0.30-audit.json)、[0.30范围审计](archive/reports/drive-service-0.30-change-audit.json)、[0.31动力专项](archive/reports/drive-mount-0.31-audit.json)、[0.31范围审计](archive/reports/drive-service-0.31-change-audit.json)。旧可拆端板及免拆履带路径不作为当前装配方案。所有CAD通过均不证明打印材料、螺纹、公差、疲劳、液体密封或实物工具通过。
 
@@ -133,7 +133,7 @@
 
 左右各两段定位挡板，净宽34.4、每侧间隙0.6，挡板长12、高20、厚2 mm；顶部开放，不设压盖或侧垫。前后双托管槽紧贴外侧挡板、无支臂，槽径5.6、长6、中心距52，向上开口，适配实测Ø5水管。尾线导向鞍与扎带槽已融合进底托。底托通过 2 颗 M3 级候选紧固件连接左肩梁。断电排液、断开水管并从双托管槽上提，断开尾线并释放导向鞍后，先充分解除底部粘接，再沿倾斜底板法向抬起 2 mm、沿枪轴前方取出 150 mm。空底托仍可卸基座螺钉后上提 2、外移 60 mm。拆装图中枪体前移 110 mm 仅为露出胶区，不代替检查位移。
 
-裸枪最大矩形对挡板及整机、带管最大矩形对夹具以外障碍、示意接头分别检查静态和两段连续扫掠。喷水管实测Ø5；托管座槽Ø5.6，名义径向余量0.3。尾线Ø3、中心R8、路线Ø8及插头尺寸仍为候选；Ø8路线审查区仅在托座处允许重叠，实际管体另检。两处局部6 mm直管段向上10 mm的连续扫掠不代表整条软管柔性拆卸。胶材、厚度、保持力与脱胶操作尚未实测，详见[装配说明](../../docs/assembly.md#025-双托管槽与一体尾线导向鞍)。
+裸枪最大矩形对挡板及整机、带管最大矩形对夹具以外障碍、示意接头分别检查静态和两段连续扫掠。喷水管实测Ø5；托管座槽Ø5.6，名义径向余量0.3。尾线Ø3、中心R8、路线Ø8及插头尺寸仍为候选；Ø8路线审查区仅在托座处允许重叠，实际管体另检。两处局部6 mm直管段向上10 mm的连续扫掠不代表整条软管柔性拆卸。胶材、厚度、保持力与脱胶操作尚未实测，详见[装配说明](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/assembly.md#025-双托管槽与一体尾线导向鞍)。
 
 ## 本轮造型与布局
 
@@ -154,7 +154,7 @@
 | 泡泡枪 | 枪口端中心 (−55,−120.49,126.52)，前向上仰15°；右肩梁托架、前圆环／两段底槽及线管候选，宽35.8与固定面待实测 |
 | 水枪 | 喷嘴端中心 (55,−131.00,148.17)，前向上仰15°；底部双面软胶固定，主底板宽38.4；左右挡板净宽34.4，外侧双Ø5.6托管槽；无压盖，脱胶后抬起再前抽 |
 
-后脑浅槽采用封闭衬板，是造型细节；0.36背包为低位双瓶保护壳、后抓取空间及绑带操作缺口，没有据此认定散热或防液体进入的性能。详细参考见[造型方向](../../docs/style-direction.md)。
+后脑浅槽采用封闭衬板，是造型细节；0.36背包为低位双瓶保护壳、后抓取空间及绑带操作缺口，没有据此认定散热或防液体进入的性能。详细参考见[造型方向](../../docs/decisions.md)。
 
 ## 已知尺寸与设计分配
 
@@ -174,7 +174,7 @@
 
 两瓶采用未削切的完整含盖圆柱外包络；瓶内吸管仅作隐藏审查空间，150 mL不是外圆柱体积。最大直径含盖范围、瓶肩、公差和瓶口仍待核实。用户已拆出水枪并提供[实测与照片](../components/pulse-water-gun/README.md)：长 138.5 × 最粗处宽 33.2 × 厚 24.6 mm，带管宽 38.5 mm，前端较细；0.25 采用底部双面软胶、左右挡板、双托管槽与一体尾线导向鞍，重新检查Ø5喷水管、基座工具及解除粘接后的分包络取出路径，粘接保持力和实物适配仍未验证。当前头舱改用面包板整组规划包络；旧独立电子／音频位置与USB／天线检查不再作为当前适配证据。新增黄色电源线／插头和青色软管也是假设包络，详见[装配说明](../../docs/assembly.md)。
 
-2026-10-25新增需求：双火花效果区域改为底盘前方左右各两根线、共四根，替代顶部效果位置；0.45 CAD已加入这些线的外观占位与根部护套，本体与冠盖造型保持；实际高压出线未设计。详见[位置需求](../../docs/effects-mount.md#2026-10-25-前方效果位置需求)。
+2026-10-25新增需求：双火花效果区域改为底盘前方左右各两根线、共四根，替代顶部效果位置；0.45 CAD已加入这些线的外观占位与根部护套，本体与冠盖造型保持；实际高压出线未设计。详见[位置需求](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/effects-mount.md#2026-10-25-前方效果位置需求)。
 
 ## 功能与结构边界
 
@@ -197,7 +197,7 @@
 
 ## 主控安装与接口边界（历史裸板方案）
 
-0.40已由[整组浅托盘](../../docs/breadboard-tray.md)替代；以下USB／天线与排母检查不适用于当前面包板。
+0.40已由[整组浅托盘](../../docs/assembly.md#头舱与穿线)替代；以下USB／天线与排母检查不适用于当前面包板。
 
 双排母座只按图纸的排距 25.4、首末针距 53.34 作候选；CAD 用连续槽和条带简化，不是已经选型的连接器，也不在开发板上新增螺钉孔。小托架新增 4 处 M2.5 级紧固，防脱压架新增 2 处，压架与最高元件包络留 0.5 mm 假设间隙。压架防止向上脱出，不预压板上元件；实际触碰位置、拔插力、刚度与紧固工艺待试装。
 
@@ -288,7 +288,7 @@ python3 scripts/build_drawing_pdf.py --allow-review-conflicts
 
 交付文件为`CyberTrack-assembly-and-service.pdf`。生成后须渲染核对尺寸页、装拆说明和全部图卡，更新目录与页码。图纸无制造公差、材料及紧固件定版，不是加工放行；已合并源特征不重复打印。六件打印补充图册仍用`python3 scripts/build_print_parts_pdf.py`生成。
 
-本轮依据见[0.25 双托管槽与一体尾线导向鞍](../../docs/mechanical.md#025-双托管槽与一体尾线导向鞍)及[变更核对](archive/reports/water-gun-routing-audit.json)。[0.23 胶粘固定核对](archive/reports/water-gun-adhesive-audit.json)为历史记录。尾线导向鞍已直接并入 `WaterGunCradle`，不再有独立 `WaterGunLeadGuide`。双托管座分别命名为 `WaterGunHoseSupport`／`WaterGunHoseSupportRear`，制造合并需包含三者。旧 0.18 支架 STL 带压盖，不能作为当前水枪底托输出；试打包及专用导出脚本已移除。仓库当前没有可用于现行双枪支架的试打 STL 包，需按当前模型重新导出并验证。
+本轮依据见[0.25 双托管槽与一体尾线导向鞍](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/mechanical.md#025-双托管槽与一体尾线导向鞍)及[变更核对](archive/reports/water-gun-routing-audit.json)。[0.23 胶粘固定核对](archive/reports/water-gun-adhesive-audit.json)为历史记录。尾线导向鞍已直接并入 `WaterGunCradle`，不再有独立 `WaterGunLeadGuide`。双托管座分别命名为 `WaterGunHoseSupport`／`WaterGunHoseSupportRear`，制造合并需包含三者。旧 0.18 支架 STL 带压盖，不能作为当前水枪底托输出；试打包及专用导出脚本已移除。仓库当前没有可用于现行双枪支架的试打 STL 包，需按当前模型重新导出并验证。
 
 [0.22 水枪尺寸与范围核对（历史）](archive/reports/water-gun-fit-audit.json)记录两道夹持带的几何净空、相对 0.21 的修改对象及独立部件资产校验。
 
@@ -346,13 +346,13 @@ STEP 回读为 872 个有效实体，包络一致；体积差约 0.8231 mm³，�
 
 ## 0.39 双枪上仰15°
 
-按用户要求从10°调至15°试装候选；水枪安装基准较0.38再上移3 mm，肩梁承托和孔轴同步。泡泡外侧管段中心线Z96降至94，保留瓶端插入位置。头舱加高25 mm、颈架、双瓶与底盘保持。检查与物理未决项见[机械记录](../../docs/mechanical.md#039-双枪上仰15)、[范围审计](gun-pitch-audit.json)和[整机回读](readback.json)。
+按用户要求从10°调至15°试装候选；水枪安装基准较0.38再上移3 mm，肩梁承托和孔轴同步。泡泡外侧管段中心线Z96降至94，保留瓶端插入位置。头舱加高25 mm、颈架、双瓶与底盘保持。检查与物理未决项见[机械记录](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/mechanical.md#039-双枪上仰15)、[范围审计](gun-pitch-audit.json)和[整机回读](readback.json)。
 
 ## 0.40 面包板浅托盘
 
 现有面包板整组按100×85×36规划，不要求先拆散组内接线。浅托盘主体105×90、内区101×86、底厚2.5、围边高3，侧耳总宽122；四孔X±57、Y−40／−5。包络Z174…210，到冠盖名义净距4。头壳仅改内部支柱，所有外部造型与0.39比较；颈部以下电源线及双枪／双瓶／动力保持。
 
-[专项与连续拆装检查](breadboard-fit-audit.json) · [范围与外形核对](breadboard-change-audit.json) · [尺寸、装配及边界](../../docs/breadboard-tray.md)。防脱压片、材料／柱根强度、真实接头与线束、屏幕／声学／RF仍待实物确认。
+[专项与连续拆装检查](breadboard-fit-audit.json) · [范围与外形核对](breadboard-change-audit.json) · [尺寸、装配及边界](../../docs/assembly.md#头舱与穿线)。防脱压片、材料／柱根强度、真实接头与线束、屏幕／声学／RF仍待实物确认。
 
 ![面包板整组与浅托盘](breadboard-layout.png)
 
@@ -364,11 +364,11 @@ PYTHONPATH=/Applications/FreeCAD.app/Contents/Resources/lib /Applications/FreeCA
 
 ## 0.41 超声波与面包板共存
 
-[结构与证据边界](../../docs/ultrasonic-head.md)、[集成专项](ultrasonic-integration-audit.json)、[0.40→0.41范围审计](ultrasonic-integration-change-audit.json)。PCB／背面／接头及线束为候选，头壳完整几何不变；双探头内退3.5，托盘前缘中央49×2让位。蓝色PCB、橙色背面、紫色接头、黄色线束与绿色面包板见[共存图](ultrasonic-coexistence.png)；[整盘拆出](ultrasonic-service.png)先收置超声波线束。独立研究副本已由正式生成流程替代。
+[结构与证据边界](../../docs/assembly.md#头舱与穿线)、[集成专项](ultrasonic-integration-audit.json)、[0.40→0.41范围审计](ultrasonic-integration-change-audit.json)。PCB／背面／接头及线束为候选，头壳完整几何不变；双探头内退3.5，托盘前缘中央49×2让位。蓝色PCB、橙色背面、紫色接头、黄色线束与绿色面包板见[共存图](ultrasonic-coexistence.png)；[整盘拆出](ultrasonic-service.png)先收置超声波线束。独立研究副本已由正式生成流程替代。
 
 ## 0.42 背包外侧夹持与底盘薄承板
 
-用户批准背包外侧方向，原前斜坡与头壳保持；每侧两道分体夹环、底托与上限位，8颗外侧M2.5级候选螺钉。底盘薄承板4颗底部螺钉固定到顶盖内柱，先拆充电宝再向下取。详见[结构说明](../../docs/effects-mount.md)、[专项](effects-mount-audit.json)、[范围审计](effects-change-audit.json)及[清理记录](effects-cleanup-audit.json)。
+用户批准背包外侧方向，原前斜坡与头壳保持；每侧两道分体夹环、底托与上限位，8颗外侧M2.5级候选螺钉。底盘薄承板4颗底部螺钉固定到顶盖内柱，先拆充电宝再向下取。详见[结构说明](../../docs/backpack-35mm.md)、[专项](effects-mount-audit.json)、[范围审计](effects-change-audit.json)及[清理记录](effects-cleanup-audit.json)。
 
 ![背包夹持](effects-backpack.png)
 ![四点薄承板](effects-tray-bottom.png)
@@ -382,7 +382,7 @@ A02抬高前舱已被否定；A03独立占位由主模型替代，相关候选�
 
 四点承板孔距94×22.5，螺钉头凹入侧耳，承板到充电宝2.0、头部到充电宝2.1 mm；替代0.42的0.5 mm最小头部间隙。需计入充电宝尺寸、加工偏差、翘曲、安装偏移和附加垫片的最不利公差组合后试装，不是实物适配结论。
 
-[四板固定与机外拆装](../../docs/effects-mount.md) · [板卡专项](effect-board-fit-audit.json) · [本轮范围审计](effect-board-change-audit.json)。0.42范围及清理报告保留历史来源哈希。
+[四板固定与机外拆装](../../docs/backpack-35mm.md) · [板卡专项](effect-board-fit-audit.json) · [本轮范围审计](effect-board-change-audit.json)。0.42范围及清理报告保留历史来源哈希。
 
 ![四板固定](effects-board-mount.png)
 ![局部接线预算](effects-board-wiring.png)
@@ -410,7 +410,7 @@ CAD检查不证明安装保持力、材料与公差、实际接线、调节、�
 
 ## 0.45 前方效果线外观
 
-底盘前方左右各两根，共四根橙色封闭端外观线，根部配四个深色护套；沿前护甲斜边错开，向前略微上翘。范围审计确认原有412个对象几何、标签与分类保持，新增8个对象，无删除。位置和尺寸见[设计记录](../../docs/effects-mount.md#2026-10-25-前方效果位置需求)，均为外观假设，不是高压线材、放电间距或固定接口规格。
+底盘前方左右各两根，共四根橙色封闭端外观线，根部配四个深色护套；沿前护甲斜边错开，向前略微上翘。范围审计确认原有412个对象几何、标签与分类保持，新增8个对象，无删除。位置和尺寸见[设计记录](https://github.com/miclle/cybertrack/blob/c25b0af729bd216b69779db2bba75f32f9475cdd/docs/effects-mount.md#2026-10-25-前方效果位置需求)，均为外观假设，不是高压线材、放电间距或固定接口规格。
 
 [静态与保存回读](front-effects-fit-audit.json)及[范围审计](front-effects-change-audit.json)只验证CAD几何，不代表实物、电气、液体共存或制造验收。原PDF尚未同步；FCStd、STEP与当前预览已更新。
 
@@ -428,7 +428,7 @@ CAD检查不证明安装保持力、材料与公差、实际接线、调节、�
 
 ## 0.48 前舱入线与第三块 MOS
 
-[详细布局](../../docs/ignition-routing.md)、[新电池资料](../components/ck-5v-battery/README.md)、[走线检查](ignition-routing-audit.json)、[MOS检查](ignition-mos-audit.json)及[范围审计](ignition-routing-change-audit.json)共同描述本轮。旧0.47外沿候选已撤销。前伸仍为28 mm、单线外径1.5 mm；新增实体穿孔仅限前肩、前壁、前护甲和护套。模块真实输出端、护口与固定及完整端接仍待核。
+[详细布局](../../docs/assembly.md#双枪与背包)、[新电池资料](../components/ck-5v-battery/README.md)、[走线检查](ignition-routing-audit.json)、[MOS检查](ignition-mos-audit.json)及[范围审计](ignition-routing-change-audit.json)共同描述本轮。旧0.47外沿候选已撤销。前伸仍为28 mm、单线外径1.5 mm；新增实体穿孔仅限前肩、前壁、前护甲和护套。模块真实输出端、护口与固定及完整端接仍待核。
 
 ![前舱入线](ignition-routing.png)
 

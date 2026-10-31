@@ -45,7 +45,7 @@
 
 2026-10-30 A2 验证见 [verification-current.json](verification-current.json)：从当前六页工程重新导出网表与 PDF，执行 ERC，并对网表及当前源码执行 112 项检查。新增检查覆盖 TRIG／ECHO 方向、3V3 供电、共地、直连端点、未虚构的排针位置，以及全部 A1 既有端子的连接保持；六页 PDF 渲染检查通过，驱动页文字同步为当前固件 A／右、B／左。工具版本、导出文件哈希和逐页检查见 [A2-export-check.json](checks/A2-export-check.json)；5 项回归测试包含 TRIG／ECHO 对调、误接 5 V、误接受控回流及错误信号方向的拒绝检查。未进行实物接线或通电测试，仍未制造放行。
 
-[A1 原始审计](verification.json)、[A1 工程包](CyberTrack-schematic-A1.zip)及[扩展前的源码复核](checks/A1-source-recheck-20261030.json)按原字节保留；其旧哈希、五页 PDF 和 92 项检查只描述历史输入。当前运行 `python3 scripts/check_current_audits.py` 核对记录，`--write` 在完成本次导出和检查后重新生成当前文件证据；该脚本本身不会代为执行 ERC 或 PDF 目检。
+[A1 原始审计](verification.json)、[A1 工程包](CyberTrack-schematic-A1.zip)及[扩展前的源码复核](checks/A1-source-recheck-20261030.json)按原字节保留；其旧哈希、五页 PDF 和 92 项检查只描述历史输入。完整 A2 导出校验绑定当时的源码、文档路径和文件哈希，可在 [A2 导出版本](https://github.com/miclle/cybertrack/tree/36c28fa36581dfc8bb5aff40fe74848fa137cef0)运行 `python3 scripts/check_current_audits.py` 复核。要单独核对现行固件引脚与已导出网表的连接，请在仓库根目录运行 `python3 scripts/check_schematic_netlist.py hardware/schematic/checks/CyberTrack.net.xml --output /tmp/cybertrack-connectivity.json`。
 
 在安装了对应版本 KiCad 的环境中，可从仓库根目录复现导出和检查（`kicad-cli` 需在 PATH 中；A2 交付时执行过等效命令）：
 
@@ -59,4 +59,4 @@ python3 scripts/tests/test_schematic_netlist.py
 
 [生成脚本](../../scripts/generate_schematic.py)用于重建初始源文件。**重新生成会覆盖可编辑原理图**；直接在 KiCad 中修改后，先保存并审查差异，不要无条件重跑生成器。PDF 始终应从最终保存的根原理图重新导出。
 
-完整设计约束和制板前资料要求见[原理图设计与 PCB 打板](../../docs/schematic-and-pcb.md)。固件引脚依据见 [action_outputs.h](../../firmware/esp32-audio/action_outputs.h) 与 [cybertrack_tools.cc](../../firmware/esp32-audio/cybertrack_tools.cc)，外围信号依据见[面包板工程](../../firmware/esp32-audio/README.md)。部件参数和证据见[接线总表](../../docs/wiring.md)、[电源与接口](../../docs/power-and-interfaces.md)及对应部件记录。
+完整设计约束和制板前资料要求见[原理图设计与 PCB 打板](../../docs/schematic-and-pcb.md)。固件引脚依据见 [action_outputs.h](../../firmware/esp32-audio/action_outputs.h) 与 [cybertrack_tools.cc](../../firmware/esp32-audio/cybertrack_tools.cc)，外围信号依据见[面包板工程](../../firmware/esp32-audio/README.md)。部件参数和证据见[接线总表](../../docs/wiring.md)、[电源与接口](../architecture/README.md)及对应部件记录。

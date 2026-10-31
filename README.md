@@ -16,7 +16,7 @@
   <a href="#可打印的整机与维护设计">制作</a> ·
   <a href="#软件架构">架构</a> ·
   <a href="#从这里开始">快速开始</a> ·
-  <a href="#项目进展与下一步">进度</a>
+  <a href="docs/TODO.md">TODO</a>
 </p>
 
 <p align="center">
@@ -26,7 +26,7 @@
 
 **小D 是一台能听指令、能演泡泡剧场，也能自己动手改造的双履带机器人。** 你可以用一句话让它做几个动作，也可以先在手机上编排：选“庆祝”，把右转改短一点，预览后再决定什么时候开演。想改它的造型？同一套工程里就有可以打开的 FreeCAD 整机和可以补打的零件。
 
-> **项目阶段：已有可运行样机，正在完善交互与整机验证。** 语音、网页控制和基础动作已有部署及分项现场记录；泡泡剧场、模型辅助设计和配套制作资料持续完善。当前能力、待验项目与后续方向在下文分别说明。
+> **项目阶段：已有可运行样机，正在完善交互与整机验证。** 语音、网页控制和基础动作已有部署及分项现场记录；泡泡剧场、模型辅助设计和配套制作资料持续完善。
 
 ## 样机演示
 
@@ -52,7 +52,7 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 - **指挥小D。** 一句话能让两路动作持续不同的时间；移动中还可以说“慢一点”。见[语音互动](#语音交互与角色表达)、[行走调速](#履带行走与实时调速)和[多路协同](#喷水泡泡与多路协同)。
 - **自己编排和改造。** 在[泡泡剧场](#一起编排小d的泡泡剧场)改一段表演，在[整机模型](#在完整机器人上直接说出修改想法)上选中一个零件提出改动，或者制作配套的[收纳车库](#配套集装箱车库)。
 - **在现场掌控动作。** [手机](#手机控制与多网络接入)上看距离、按住遥控、松开即发停止；[前进保护](#距离感知与前进保护)与[状态解释](#看得懂的状态与可中止的动作)让操作者知道设备为什么拒绝或停止。
-- **从现有工程继续开发。** [打印与装配资料](#可打印的整机与维护设计)、设备固件、原理图和[灵矽接入方案](#为灵矽提供可复用的实体机器人方案)均可用于二次开发。[验证结果](#验证与可复现工程)和[项目进展](#项目进展与下一步)说明哪些已有证据，哪些还要试。
+- **从现有工程继续开发。** [打印与装配资料](#可打印的整机与维护设计)、设备固件、原理图和[灵矽接入方案](#为灵矽提供可复用的实体机器人方案)均可用于二次开发。已有测试和现场记录见[验证结果](#验证与可复现工程)。
 
 ## 语音交互与角色表达
 
@@ -83,7 +83,7 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 未指定时长的普通动作默认 1 秒，全速左右转默认 0.88 秒；明确说出的时长优先。这里的百分比是电机 PWM 设置，当前没有编码器里程计，不把它换算成已校准的厘米、转角或实际车速。
 
-[速度控制与现场记录](docs/speed-control.md) · [动作序列规则](docs/action-sequences.md)
+[速度控制与现场记录](docs/action-sequences.md#速度与时长) · [动作序列规则](docs/action-sequences.md)
 
 ## 喷水泡泡与多路协同
 
@@ -99,7 +99,7 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 现场试验中，喷水曾比转向稍晚开始；软件同时输出不等于效果在同一瞬间出现，也不代表当前电源已通过四路组合负载验收。
 
-[当前能力与参数](firmware/CAPABILITIES.md) · [并发现场证据](docs/action-sequences.md) · [效果控制与历史记录](docs/effects-control.md)
+[当前能力与参数](firmware/CAPABILITIES.md) · [并发现场证据](docs/action-sequences.md) · [低压效果控制](docs/effects-control.md)
 
 ## 手机控制与多网络接入
 
@@ -379,30 +379,6 @@ python3 scripts/verify_improvements.py
 
 [当前检查入口](docs/current-status.md#统一软件检查) · [平台复测与失败样例](docs/validation/lingxi-ct45-role-feedback-20261031.md) · [实机验证材料](docs/validation/README.md) · [工程修改记录](docs/validation/engineering-log.md)
 
-## 项目进展与下一步
-
-截至 **2026-10-31**，最近记录的面包板应用为 **2.0.3-ct45**，角色已同步。项目已从部件台架推进到整机样机、网页编排与模型辅助设计阶段；下面按实际证据说明成熟度。
-
-<table>
-  <thead><tr><th width="132">范围</th><th>已有结果与仍需完成的工作</th></tr></thead>
-  <tbody>
-    <tr><td><strong>基础互动</strong></td><td>已有语音、网页、行走、调速、喷水与泡泡的部署及分项现场反馈，另有运行影像。当前整机持续负载、定量停止与完整语音回归待验。</td></tr>
-    <tr><td><strong>泡泡剧场</strong></td><td>编辑器、三个模板、版本化草稿和确认机制已部署；设备草稿编辑／过期／非法输入拒绝有记录。确认后的实际表演、语义泛化和家庭体验待验。</td></tr>
-    <tr><td><strong>模型辅助设计</strong></td><td>已完成真实宿主消息触发、FreeCAD GUI 修改／保存重开／恢复和同卡片更新。支持范围是受限位置研究及符合条件的单件参数修改。</td></tr>
-    <tr><td><strong>机械与电气</strong></td><td>已有整机 CAD、打印项目、BOM、A2 六页原理图与预算工具。保护器件定值、电源／温升、反复拆装及儿童使用验收仍未完成。</td></tr>
-    <tr><td><strong>配套与商业探索</strong></td><td>车库试制候选、参考材料包、用户体验与成本记录工具已提供；车库新版适配、真实用户研究、量产成本与购买意愿尚未验证。</td></tr>
-  </tbody>
-</table>
-
-下一阶段沿四条主线推进：
-
-1. **更容易上手：** 完成真人语音与家庭体验，观察第一次使用、主动重玩和修改表演的过程。
-2. **更准确地表达：** 修复冗余播报、含糊改稿与状态解释；台词自动播报和表情联动作为后续体验方向。
-3. **更可靠地运行：** 补齐停止、组合负载、电源、温升、续航及维护数据，再据实测收敛器件和结构。
-4. **更方便地复现：** 核对打印与配套版本，积累制作、成本和工程修改记录，完善参考方案交付。
-
-[TODO](TODO.md) 与[改进计划](docs/improvement-plan.md)记录详细进度；[当前状态](docs/current-status.md)和 [firmware/current.json](firmware/current.json)维护版本依据。未完成项不会因文档、模拟或局部演示通过而自动关闭。
-
 ## 从这里开始
 
 ### 体验已有样机
@@ -426,7 +402,7 @@ cd cybertrack
 2. **打开原生模型。** 使用 FreeCAD 查看 [CyberTrack.FCStd](hardware/model/CyberTrack.FCStd)；FCStd 是几何依据，当前修订与交换文件检查见[模型说明](hardware/model/README.md)。
 3. **按需选择打印件。** [Lean 项目](hardware/model/lean-print/README.md)提供 27 件／6 盘及 [3MF 文件](hardware/model/lean-print/CyberTrack-Lean-6plates.3mf)。当前第 3、6 盘需重新切片；[Ready 排盘](hardware/model/print-ready/README.md)是独立方案，不混用盘号。头部与单件补打见[头部打印说明](docs/head-shell-print.md)和[单件目录](hardware/model/print-parts/README.md)。
 
-当前仍处于样机联调阶段。打印配合、整机供电、持续负载、停止性能及儿童使用验收尚未完成；点火仅有低压控制实现，高压、绝缘、液体共存及 EMC 尚未验收。首次亲子流程不含点火或狂暴模式，具体边界见[效果控制](docs/effects-control.md)与[待办](TODO.md)。
+当前仍处于样机联调阶段。打印配合、整机供电、持续负载、停止性能及儿童使用验收尚未完成；点火仅有低压控制实现，高压、绝缘、液体共存及 EMC 尚未验收。首次亲子流程不含点火或狂暴模式，具体边界见[效果控制](docs/effects-control.md)。
 
 ### 先在电脑上开发与验证
 
@@ -444,15 +420,17 @@ ctest --test-dir build/firmware-host --output-on-failure
 
 ## 文档导航
 
+[按任务浏览项目文档](docs/README.md)
+
 | 想了解什么 | 从这里进入 |
 |---|---|
 | **体验与玩法** | [首次互动](docs/quick-start.md) · [手机控制](docs/lan-control.md) · [泡泡剧场](docs/show-composer.md) · [测距保护](docs/ultrasonic-ranging.md) |
 | **产品与方案** | [需求](docs/requirements.md) · [设计决策](docs/decisions.md) · [灵矽解决方案](docs/lingxi-solution.md) |
 | **模型与制造** | [整机 CAD](hardware/model/README.md) · [打印项目](hardware/model/lean-print/README.md) · [装配维护图册](hardware/model/CyberTrack-assembly-and-service.pdf) |
 | **改造与配套** | [模型辅助设计](tools/solidcue/README.md) · [集装箱车库](hardware/model/container-garage/printed/README.md) |
-| **电气与采购** | [硬件架构](hardware/architecture/README.md) · [电源与接口](docs/power-and-interfaces.md) · [KiCad 原理图](hardware/schematic/README.md) · [BOM](hardware/BOM.md) |
+| **电气与采购** | [硬件架构与电源](hardware/architecture/README.md) · [接线表](docs/wiring.md) · [KiCad 原理图](hardware/schematic/README.md) · [BOM](hardware/BOM.md) |
 | **控制与开发** | [系统架构](docs/architecture.md) · [固件总览](firmware/README.md) · [能力与接口](firmware/CAPABILITIES.md) · [智能体角色](docs/agent-role.md) |
-| **进度与证据** | [TODO](TODO.md) · [当前状态](docs/current-status.md) · [改进计划](docs/improvement-plan.md) · [验收计划](docs/verification-plan.md) |
+| **进度与证据** | [当前状态](docs/current-status.md) · [改进计划](docs/improvement-plan.md) · [验收计划](docs/verification-plan.md) |
 | **制作与来源** | [照片和视频](artifact/README.md) · [部件资料](hardware/components/) · [参考资料](docs/references.md) |
 
 <details>
@@ -475,7 +453,7 @@ scripts/               建模、检查与工程辅助脚本
 
 ## 参与项目
 
-欢迎通过 [Issue](https://github.com/miclle/cybertrack/issues) 分享复现问题、玩法与改造想法，也欢迎提交改进。开始前可先查看 [TODO](TODO.md)，找到当前需要验证的方向。
+欢迎通过 [Issue](https://github.com/miclle/cybertrack/issues) 分享复现问题、玩法与改造想法，也欢迎提交改进。
 
 有价值的反馈包括：清楚的复现步骤、固件或模型版本、打印与装配记录，以及遇到的交互问题。请区分软件回执、CAD 检查与实物现象，避免上传网络凭据或私人录音。
 
