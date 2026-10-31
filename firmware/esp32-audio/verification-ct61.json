@@ -1,0 +1,18 @@
+{
+  "version": "2.0.3-ct61",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Explicit effect-duration playback eligibility and water minimum guidance; no actuator or speaker acceptance.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2707072,
+    "sha256": "e93142e6f4d0a63e2e3d4817c9ad5eca6886e85c650781344da8aed8910c9dfe"
+  },
+  "checks": [
+    "Prepared playback headers and tool registrations match repository bytes.",
+    "All 1..30000 integer millisecond values, Chinese seconds 1..30, decimal seconds, half-second forms and invalid boundaries tested.",
+    "Actual control guard and Reply tested with 2500 ms bubbles and concurrent 500 ms water; accepted receipt and duration match enable muting.",
+    "Rejection, missing/wrong duration, delayed receipt, multi-clause, question, negation and over-limit speech retain audio.",
+    "ct60/ct61 tool schemas differ only in the water description, clarifying 1 ms minimum versus 1000 ms unspecified default."
+  ]
+}
