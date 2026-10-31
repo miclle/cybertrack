@@ -1,0 +1,250 @@
+{
+  "voice": {
+    "corpus_suite": "voice-v1",
+    "run_id": "f318d0f8-9a3f-49ab-ae7f-6e6c4005fabc",
+    "model": "豆包",
+    "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "scored": 20,
+    "total": 80,
+    "correct": 18,
+    "accuracy_all_cases": 0.225,
+    "missing": [
+      "V003",
+      "V004",
+      "V005",
+      "V006",
+      "V007",
+      "V008",
+      "V009",
+      "V010",
+      "V011",
+      "V012",
+      "V014",
+      "V015",
+      "V016",
+      "V017",
+      "V018",
+      "V020",
+      "V021",
+      "V022",
+      "V023",
+      "V024",
+      "V026",
+      "V028",
+      "V029",
+      "V030",
+      "V031",
+      "V032",
+      "V033",
+      "V034",
+      "V035",
+      "V036",
+      "V037",
+      "V041",
+      "V042",
+      "V043",
+      "V044",
+      "V054",
+      "V055",
+      "V056",
+      "V057",
+      "V059",
+      "V060",
+      "V061",
+      "V062",
+      "V063",
+      "V064",
+      "V065",
+      "V066",
+      "V067",
+      "V068",
+      "V069",
+      "V070",
+      "V071",
+      "V072",
+      "V073",
+      "V074",
+      "V075",
+      "V076",
+      "V077",
+      "V078",
+      "V080"
+    ],
+    "forbidden_call_cases": [
+      "V079"
+    ],
+    "invalid_tool_argument_cases": [],
+    "incomplete": [],
+    "failed_stop_cases": [],
+    "tool_call_target_met": false,
+    "results": [
+      {
+        "id": "V001",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V002",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V013",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V019",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V025",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V027",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V038",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V039",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V040",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V045",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V046",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V047",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V048",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V049",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V050",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V051",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V052",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V053",
+        "tool_calls_match": false
+      },
+      {
+        "id": "V058",
+        "tool_calls_match": true
+      },
+      {
+        "id": "V079",
+        "tool_calls_match": false
+      }
+    ],
+    "reply_semantics": "manual review required",
+    "physical_or_spoken_acceptance": false,
+    "capture_json_sha256": "0f2ac7764d6fe0ad5c4a1b05ae804c6be09433c017d9dfe5b82c16d9948d0f38",
+    "tool_source_version": "2.0.3-ct61",
+    "evaluator_sha256": "43be325e5fd396052d1e0142fe20db6a78a29f0e5dfe829cde5dac423493062a",
+    "mismatch_ids": [
+      "V053",
+      "V079"
+    ],
+    "input_mode": "raw_text_diagnostic",
+    "fixture_version": "firmware_host",
+    "tool_schema_sha256": "19af1bd295a49f066fe25a3915d82dab0f0cecee2150a68e8be0600010c4b6f1",
+    "host_replay_sha256": "d79280610fbc0076cdc2abdba3ebde8b6d76a11319e5f8213229f8477d9e98c4"
+  },
+  "compose": {
+    "corpus_suite": "compose-v1",
+    "run_id": "c0701a02-20cc-4be5-bc96-86d66f281160",
+    "model": "豆包",
+    "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "scored": 8,
+    "total": 8,
+    "correct": 3,
+    "accuracy_all_cases": 0.375,
+    "missing": [],
+    "forbidden_call_cases": [
+      "C005",
+      "C006"
+    ],
+    "invalid_tool_argument_cases": [
+      "C002",
+      "C007"
+    ],
+    "incomplete": [],
+    "failed_stop_cases": [],
+    "tool_call_target_met": false,
+    "results": [
+      {
+        "id": "C001",
+        "tool_calls_match": true
+      },
+      {
+        "id": "C002",
+        "tool_calls_match": false,
+        "invalid_tool_arguments": "invalid sequence steps"
+      },
+      {
+        "id": "C003",
+        "tool_calls_match": true
+      },
+      {
+        "id": "C004",
+        "tool_calls_match": false
+      },
+      {
+        "id": "C005",
+        "tool_calls_match": false
+      },
+      {
+        "id": "C006",
+        "tool_calls_match": false
+      },
+      {
+        "id": "C007",
+        "tool_calls_match": false,
+        "invalid_tool_arguments": "sequence steps_json must be the wire-format JSON string"
+      },
+      {
+        "id": "C008",
+        "tool_calls_match": true
+      }
+    ],
+    "reply_semantics": "manual review required",
+    "physical_or_spoken_acceptance": false,
+    "capture_json_sha256": "9b7d5b5ab0e25c2b81f29b910a0730c2f9b23822fd788d956b6a4d2e80b1c527",
+    "tool_source_version": "2.0.3-ct61",
+    "evaluator_sha256": "43be325e5fd396052d1e0142fe20db6a78a29f0e5dfe829cde5dac423493062a",
+    "mismatch_ids": [
+      "C002",
+      "C004",
+      "C005",
+      "C006",
+      "C007"
+    ],
+    "input_mode": "raw_text_diagnostic",
+    "fixture_version": "firmware_host",
+    "tool_schema_sha256": "19af1bd295a49f066fe25a3915d82dab0f0cecee2150a68e8be0600010c4b6f1",
+    "host_replay_sha256": "d79280610fbc0076cdc2abdba3ebde8b6d76a11319e5f8213229f8477d9e98c4"
+  }
+}
