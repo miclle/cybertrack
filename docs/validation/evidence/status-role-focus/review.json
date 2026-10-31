@@ -1,0 +1,257 @@
+{
+  "role_sha256": "ce026467976816ce61ee71abbac1ccf305815159e565a5fd8dbe38e6429e1775",
+  "runs": [
+    {
+      "file": "round-1.json.gz",
+      "json_sha256": "6047bd896fb3d76448a523cf6ae7fe393a6670c18656aa180c5b46720732068c",
+      "suite": "timed_host",
+      "host_replay_sha256": "01095c367c4c0eed17f31b95c7c3bdefdc160c830a5e5be46d54e4cbf0c85880",
+      "cases": [
+        {
+          "id": "L001",
+          "remaining_ms": 2597,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查时在往前走。"
+        },
+        {
+          "id": "L002",
+          "remaining_ms": 2774,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚才查的时候还在往前走，还剩大约3秒。"
+        },
+        {
+          "id": "L003",
+          "remaining_ms": 2952,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚才查询时它还在往前走，剩余约3秒。不过我没法保证你听到这句话时它一定还在走，动作计时是动态的，最好现场确认一下。"
+        },
+        {
+          "id": "L004",
+          "remaining_ms": 0,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚刚查询时行走已经结束了，剩余时间是0，现在没有行走在运行。"
+        }
+      ]
+    },
+    {
+      "file": "round-2.json.gz",
+      "json_sha256": "517a4a5aa0c114146eb419c581ad8d7fa1fafdd605ba1cf6352a488956da55fd",
+      "suite": "timed_host",
+      "host_replay_sha256": "01095c367c4c0eed17f31b95c7c3bdefdc160c830a5e5be46d54e4cbf0c85880",
+      "cases": [
+        {
+          "id": "L001",
+          "remaining_ms": 2321,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查时在往前走。"
+        },
+        {
+          "id": "L002",
+          "remaining_ms": 1470,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查的时候行走还剩大约1.5秒。"
+        },
+        {
+          "id": "L003",
+          "remaining_ms": 2403,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查的时候它还在往前走，剩余约2.4秒。但我不能保证你现在听完这句话它还在走，动作会按设定时间自动停。"
+        },
+        {
+          "id": "L004",
+          "remaining_ms": 0,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚才查询时行走已经结束了，剩余时间是0，没有正在运行的行走。"
+        }
+      ]
+    },
+    {
+      "file": "round-3.json.gz",
+      "json_sha256": "c62429f62cb47a66edecf94aa80193fba5329d6d9c99d2172d7d68eaf77499de",
+      "suite": "timed_host",
+      "host_replay_sha256": "01095c367c4c0eed17f31b95c7c3bdefdc160c830a5e5be46d54e4cbf0c85880",
+      "cases": [
+        {
+          "id": "L001",
+          "remaining_ms": 2527,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查时在往前走。"
+        },
+        {
+          "id": "L002",
+          "remaining_ms": 2155,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚才查询时车子还在往前走，大约还剩2秒左右。"
+        },
+        {
+          "id": "L003",
+          "remaining_ms": 2280,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查的时候它还在往前走，剩余约2秒多。不过那是我查询那一刻的快照，等你听到这句话时可能已经停了，没法保证它还在走。"
+        },
+        {
+          "id": "L004",
+          "remaining_ms": 0,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚才查询时行走已经结束了，剩余时间是0，没有在移动了。"
+        }
+      ]
+    },
+    {
+      "file": "ct45-focus.json.gz",
+      "json_sha256": "19641b33d5a81309fae8adc8b227f0330151871735a67907fb760f3fdd9bb672",
+      "suite": "ct45",
+      "host_replay_sha256": null,
+      "cases": [
+        {
+          "id": "D101",
+          "remaining_ms": 3000,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查的时候在往前走。"
+        },
+        {
+          "id": "D102",
+          "remaining_ms": 3000,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查时在往后退，速度是70%。"
+        },
+        {
+          "id": "D103",
+          "remaining_ms": 3000,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查时是在向左转。"
+        },
+        {
+          "id": "D104",
+          "remaining_ms": 3000,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查时在往右转。"
+        },
+        {
+          "id": "D105",
+          "remaining_ms": 3000,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "当前速度设的是80%，正在后退中。"
+        },
+        {
+          "id": "D106",
+          "remaining_ms": 3000,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查时在向左转，还剩大约3秒就会停。"
+        },
+        {
+          "id": "D107",
+          "remaining_ms": 700,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚查的时候移动还剩大约0.7秒，也就是不到一秒就结束了。"
+        },
+        {
+          "id": "D108",
+          "remaining_ms": 0,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "我现在没有在移动，正在待命呢。"
+        }
+      ]
+    }
+  ]
+}
