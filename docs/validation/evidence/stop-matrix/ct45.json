@@ -1,0 +1,54 @@
+{
+  "matrix": "stop-v1",
+  "source_version": "2.0.3-ct45",
+  "evidence_kind": "host_control_replay",
+  "passed_cases": [
+    "release_move",
+    "release_water",
+    "release_bubbles",
+    "boot_mixed",
+    "stop_mixed",
+    "page_hidden_mixed",
+    "web_loss_mixed",
+    "wifi_loss_mixed",
+    "voice_loss_mixed",
+    "sequence_cancel_web_active",
+    "sequence_cancel_web_waiting",
+    "sequence_cancel_voice_active",
+    "sequence_cancel_voice_waiting",
+    "sequence_source_disconnect_web_active",
+    "sequence_source_disconnect_web_waiting",
+    "sequence_source_disconnect_voice_active",
+    "sequence_source_disconnect_voice_waiting"
+  ],
+  "trigger_offsets_ms": [
+    5,
+    55,
+    100,
+    150,
+    195
+  ],
+  "tick_ms": 5,
+  "reconnected_at_ms_after_trigger": 2500,
+  "observed_ms_after_reconnect": 6000,
+  "second_step_without_stop": [
+    "web",
+    "voice"
+  ],
+  "physical_trials_added": 0,
+  "web_blackout_during_wait_ms": {
+    "last_heartbeat": 1000,
+    "network_lost": 1100,
+    "second_step_started": 1200,
+    "session_expired_and_stopped": 3000
+  },
+  "prepared_source_sha256": {
+    "control_sessions.h": "4c217b7664bf5d6e6e920e7873b0e21c62d73d959da91ceac8920419d600f304",
+    "action_guard.h": "9d9d7a4ce46fe8bf19cd320322747eaf900b2350874049b66fc6256830094b6a",
+    "action_plan.h": "5631070bf77f26836f1b30ad3ab051ee5714f94e7c78b4e347e0ea5bc72e2a61",
+    "show_draft.h": "680d92673719abcdaa870814f8a0b7063565822bcda361c24e05fc1c82861676",
+    "water_guard.h": "088309c542a1e06dbfc3d49994ad0b8793c5e6868fef2e5c238b6cf0deec5379",
+    "water_policy.c": "6398f30393a06e0fb9081e16adf9cfd5b8bf723234604e960f6c8656cb4f050a",
+    "water_policy.h": "a4a13f7be957e989a2edcea152dbaff1b9bd180bf98d4a6e950c043a1128b3ab"
+  }
+}
