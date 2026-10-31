@@ -1,0 +1,252 @@
+{
+  "scope": "Captured Lingxi remote audio packet timing and sizes replayed on host; no microphone or speaker observation",
+  "runs": [
+    {
+      "suite": "all-stop",
+      "run_id": "8ecfd682-c1e0-4737-a297-446ebe187e6e",
+      "trace": "all-stop.json.gz",
+      "uncompressed_sha256": "7fdc252e25798f056fdc26805dd82d5dae475881dafda1fcfd60b5d34ea62f17",
+      "results": [
+        {
+          "id": "V045",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 36,
+            "audible": 0
+          },
+          "ct51": {
+            "suppressed": 36,
+            "audible": 0
+          }
+        },
+        {
+          "id": "V046",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 38,
+            "audible": 0
+          },
+          "ct51": {
+            "suppressed": 38,
+            "audible": 0
+          }
+        },
+        {
+          "id": "V047",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 34
+          },
+          "ct51": {
+            "suppressed": 34,
+            "audible": 0
+          }
+        },
+        {
+          "id": "V048",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 40
+          },
+          "ct51": {
+            "suppressed": 40,
+            "audible": 0
+          }
+        },
+        {
+          "id": "V049",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 34
+          },
+          "ct51": {
+            "suppressed": 34,
+            "audible": 0
+          }
+        },
+        {
+          "id": "V050",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 34
+          },
+          "ct51": {
+            "suppressed": 34,
+            "audible": 0
+          }
+        },
+        {
+          "id": "V051",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 44
+          },
+          "ct51": {
+            "suppressed": 44,
+            "audible": 0
+          }
+        },
+        {
+          "id": "V052",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 40
+          },
+          "ct51": {
+            "suppressed": 40,
+            "audible": 0
+          }
+        }
+      ]
+    },
+    {
+      "suite": "cancel",
+      "run_id": "0816be1e-224c-4923-9607-0f5abcc44cee",
+      "trace": "cancel.json.gz",
+      "uncompressed_sha256": "f226ff686bc9b13b04187067153cbc927bf92dd9e2839bdb71a54503b85bd0f3",
+      "results": [
+        {
+          "id": "Q201",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 42
+          },
+          "ct51": {
+            "suppressed": 42,
+            "audible": 0
+          }
+        },
+        {
+          "id": "Q202",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 38
+          },
+          "ct51": {
+            "suppressed": 38,
+            "audible": 0
+          }
+        },
+        {
+          "id": "Q203",
+          "calls": [
+            "self.tank.get_status",
+            "self.tank.compose"
+          ],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 73
+          },
+          "ct51": {
+            "suppressed": 0,
+            "audible": 73
+          }
+        },
+        {
+          "id": "Q204",
+          "calls": [],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 46
+          },
+          "ct51": {
+            "suppressed": 0,
+            "audible": 46
+          }
+        }
+      ]
+    },
+    {
+      "suite": "transfer",
+      "run_id": "d42cc85d-4550-456a-8294-a6d8d8b5afad",
+      "trace": "transfer.json.gz",
+      "uncompressed_sha256": "df1a04bcd71399c34c8d83676a5dc03bd07aace679cb5ee1ea7f965a092b2d27",
+      "results": [
+        {
+          "id": "P001",
+          "calls": [
+            "self.tank.move"
+          ],
+          "ct50": {
+            "suppressed": 18,
+            "audible": 0
+          },
+          "ct51": {
+            "suppressed": 18,
+            "audible": 0
+          }
+        },
+        {
+          "id": "P002",
+          "calls": [
+            "self.tank.stop"
+          ],
+          "ct50": {
+            "suppressed": 38,
+            "audible": 0
+          },
+          "ct51": {
+            "suppressed": 38,
+            "audible": 0
+          }
+        },
+        {
+          "id": "P003",
+          "calls": [
+            "self.tank.bubbles"
+          ],
+          "ct50": {
+            "suppressed": 18,
+            "audible": 0
+          },
+          "ct51": {
+            "suppressed": 18,
+            "audible": 0
+          }
+        },
+        {
+          "id": "P004",
+          "calls": [
+            "self.tank.water"
+          ],
+          "ct50": {
+            "suppressed": 0,
+            "audible": 34
+          },
+          "ct51": {
+            "suppressed": 0,
+            "audible": 34
+          }
+        }
+      ]
+    }
+  ]
+}
