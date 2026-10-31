@@ -55,7 +55,7 @@ class CaptureTests(unittest.TestCase):
             with tempfile.TemporaryDirectory() as tmp:
                 base=Path(tmp)
                 case=json.loads((ROOT/'docs/validation/voice-cases.json').read_bytes())['cases'][0]
-                for name,value in [('connection',{}),('tools',{'tools':[{'name':f'self.tank.t{i}'} for i in range(12)]}),
+                for name,value in [('connection',{}),('tools',{'tools':[{'name':'self.tank.'+name,'inputSchema':{'properties':{'steps_json':{'type':'string'}}}} for name in ('sequence','compose')]+[{'name':f'self.tank.t{i}'} for i in range(10)]}),
                                    ('corpus',{'cases':[case]})]:
                     (base/name).write_text(json.dumps(value));(base/name).chmod(0o600)
                 (base/'role').write_text('fixture');(base/'host').write_bytes(b'fixture')
@@ -67,6 +67,15 @@ class CaptureTests(unittest.TestCase):
                 self.assertTrue(sent['host_text_input']);self.assertNotIn('host_stt_events',sent)
                 self.assertNotIn('expected_calls',sent);self.assertNotIn('response_expectation',sent)
                 self.assertEqual(json.loads(args.output.read_bytes())['host_input_mode'],'simulated_recognized_text')
+                self.assertEqual(json.loads(args.output.read_bytes())['step_argument_format'],'legacy_string')
+                # A frozen host catalog is authoritative, not a caller-supplied tools file.
+                import hashlib
+                (base/'tool-catalog.json').write_text('[]')
+                (base/'manifest.json').write_text(json.dumps(dict(executable_sha256=hashlib.sha256((base/'host').read_bytes()).hexdigest(),
+                    tool_catalog_sha256=hashlib.sha256((base/'tool-catalog.json').read_bytes()).hexdigest())))
+                args.output=base/'mismatched-catalog';mocked.reset_mock()
+                with patch.object(module,'capture_case',mocked),self.assertRaises(ValueError):await module.run(args)
+                mocked.assert_not_awaited()
         asyncio.run(exercise())
 
     def test_actual_stt_events_reach_closed_host_in_received_order(self):

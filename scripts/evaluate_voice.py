@@ -11,7 +11,9 @@ class InvalidToolArguments(ValueError):
     """Captured arguments cannot be normalized, but still count as a failure."""
 
 
-def canonical(calls):
+def canonical(calls, *, step_format=None):
+    if step_format not in (None,"legacy_string","native_array"):
+        raise ValueError("unknown declared step format")
     if not isinstance(calls, list):
         raise ValueError("calls must be a list")
     normalized = []
@@ -24,6 +26,16 @@ def canonical(calls):
         if name.startswith("self_tank_"):
             name = "self.tank." + name[len("self_tank_"):]
         args = dict(args)
+        if name in ("self.tank.sequence", "self.tank.compose") and step_format:
+            key, expected_type = ("steps",list) if step_format=="native_array" else ("steps_json",str)
+            other = "steps_json" if key=="steps" else "steps"
+            if other in args or not isinstance(args.get(key),expected_type):
+                raise InvalidToolArguments("step arguments do not match the advertised wire schema")
+        if name in ("self.tank.sequence", "self.tank.compose") and "steps" in args:
+            if "steps_json" in args or not isinstance(args["steps"], list):
+                raise InvalidToolArguments("steps must be an array and cannot coexist with steps_json")
+            steps = args.pop("steps")
+            args["steps_json"] = "" if name == "self.tank.compose" and args.get("edit") in ("cancel", "remove_step") and not steps else json.dumps(steps,ensure_ascii=False)
         if name in ("self.tank.move", "self.tank.move_and_water"):
             args.setdefault("speed_percent", 100)
         if name == "self.tank.sequence" or (name == "self.tank.compose" and args.get("edit") in ("replace", "replace_step")):
@@ -72,7 +84,7 @@ def evaluate(corpus, trace):
             incomplete.append(cid)
         argument_error = None
         try:
-            actual = canonical(calls)
+            actual = canonical(calls,step_format=trace.get("step_argument_format"))
         except InvalidToolArguments as error:
             actual = None
             argument_error = str(error)

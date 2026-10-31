@@ -23,6 +23,7 @@ def review(trace, executable, corpus_path):
     require(trace['fixture_version'] == 'firmware_host' and trace['host_replay_sha256'] == binary,
             'actual host identity differs')
     mode = trace['host_input_mode']
+    require(trace.get('step_argument_format') in (None,'legacy_string','native_array'), 'unknown declared step schema')
     require(mode in ('simulated_initial_input','simulated_recognized_text','platform_stt_events'), 'unknown input provenance')
     require(trace['input_mode'] == ('synthetic_opus' if mode == 'platform_stt_events' else 'raw_text_diagnostic'),
             'transport and host input provenance differ')
@@ -68,7 +69,7 @@ def review(trace, executable, corpus_path):
         require(replies == row.get('host_rpc_replies',[]), 'captured RPC reply differs')
         final = firmware_replay(executable,row['initial_profile'],[*history,dict(inspect_ms=row['host_inspect_ms'])],await_stt=await_input)[-1]
         require(final == row['host_final_state'], 'captured final state differs')
-        try: strict = row['completed'] and canonical(row['calls']) == canonical(case['expected_calls'])
+        try: strict = row['completed'] and canonical(row['calls'],step_format=trace.get('step_argument_format')) == canonical(case['expected_calls'])
         except (ValueError,TypeError): strict = False
         values = [json.loads(w['result']['content'][0]['text']) if 'result' in w else dict(result='rpc_error') for w in replies]
         results.append(dict(id=cid,completed=row['completed'],strict_tool_match=strict,input_events=input_count,
