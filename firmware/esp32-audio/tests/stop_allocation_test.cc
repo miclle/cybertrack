@@ -48,5 +48,23 @@ int main() {
     cJSON_Delete(expired);
     Reply("stop");
     assert(!guard.Moving());
+    for (auto kind : {negative_input::Kind::None, negative_input::Kind::NoNewAction, negative_input::Kind::PreserveExisting}) {
+        clock_ms += 60000;
+        sessions.voice_negative=kind;
+        ticket=sessions.VoiceClaim(clock_ms,static_cast<int>(clock_ms),AudioActionGuard::PlanMode);
+        Reply("sequence",ticket,0,nullptr,0,0,nullptr,&plan);
+        assert(guard.Moving() && guard.Watering());
+        fail_next_allocation=true;failed=false;
+        try { Reply(ControlSessions::RemoteStopInput,"stop"); }
+        catch(const std::bad_alloc&) { failed=true; }
+        assert(failed && !guard.Moving() && !guard.Watering() && !guard.Bubbling() && !guard.Igniting() && !sessions.plan_active);
+    }
+    // Local BOOT never consults a remote-language classification.
+    clock_ms += 60000;
+    sessions.voice_negative=negative_input::Kind::PreserveExisting;
+    ticket=sessions.VoiceClaim(clock_ms,static_cast<int>(clock_ms),AudioActionGuard::PlanMode);
+    Reply("sequence",ticket,0,nullptr,0,0,nullptr,&plan);
+    sessions.Tick(clock_ms,true);
+    assert(!guard.Moving() && !guard.Watering() && !guard.Bubbling() && !guard.Igniting() && !sessions.plan_active);
     std::cout << "PASS: receipt allocation failure leaves all lanes and later steps stopped\n";
 }

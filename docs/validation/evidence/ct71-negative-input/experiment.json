@@ -1,0 +1,90 @@
+{
+  "scope": "ct71 idle negative-input protection, rejected prototype stop regressions, actual STT and final offline replay; no board IO",
+  "base_commit": "066145773990e3d6f7f3cf6772e19056cedc128a",
+  "files": {
+    "asan-host-manifest.json": {
+      "bytes": 4951,
+      "sha256": "2ca424a56a62e0ee8d779e9b4a61d535d1bf922efd60930f9831fb662831aad3"
+    },
+    "baseline-full.json.gz": {
+      "bytes": 9285,
+      "sha256": "9f79da5a912ad375d371b924edc54909a6bd5f762de5bd94b01bc09e707b593b"
+    },
+    "baseline.json": {
+      "bytes": 18231,
+      "sha256": "916179b9d2971dec6ddea3d33b1482f612a54ea492baa240a0d388e1ac9fb37d"
+    },
+    "capture-host-manifest.json": {
+      "bytes": 4952,
+      "sha256": "bf40ebedc3c8e4ec2de89126358ae4e3e009bf9382bf5a33cfb538683161c027"
+    },
+    "contract-check.json": {
+      "bytes": 732,
+      "sha256": "1a823edc5483170aa403159154d47a9798236be1234d3b149581c62b61a1be5f"
+    },
+    "final-host-manifest.json": {
+      "bytes": 4952,
+      "sha256": "94cd58c5716d52e2deb511293360e20d92551eb1aae7ad306e4aaf3e6c409bb9"
+    },
+    "native-asan-full.json.gz": {
+      "bytes": 9295,
+      "sha256": "7dc28870680074c55e44166eb157c7baac9d30ff5321008bff92e22ab001d1c3"
+    },
+    "native-asan.json": {
+      "bytes": 10202,
+      "sha256": "24ee37ac962bf6afbd1a4f2cf0528cc6639c20376756261219fd7d227102ad60"
+    },
+    "native-full.json.gz": {
+      "bytes": 9296,
+      "sha256": "d035fe9c2357d7c043d14f027eb9ba104c981a089f720d998c2f07b31c41f2f0"
+    },
+    "native.json": {
+      "bytes": 10197,
+      "sha256": "80a3bc263fea2f4d4aa4020de14ac4ff7e7919939cecceadb3c20db829299ece"
+    },
+    "plan.json": {
+      "bytes": 1518,
+      "sha256": "f84d002f06499cb9d7b912f5a9bc9ab00e3317af503218efc2c4f62f3368bb94"
+    },
+    "platform-1.json.gz": {
+      "bytes": 18799,
+      "sha256": "6ed69760dc8d7cabd81ed9347f16e2da3121c1210a426d527499f33e9dea17a9"
+    },
+    "platform-2.json.gz": {
+      "bytes": 17737,
+      "sha256": "5c67d2757cd4193886fa2e8d4b326ee95d90cca7b1fcbf3cb7d9c6584e1b7889"
+    },
+    "platform-readback.json": {
+      "bytes": 399,
+      "sha256": "fd7cddf2a23091afac4ee24bac0c463fa82d11a3e11bcae1b8cb4294fdcba9bf"
+    },
+    "platform-review.json": {
+      "bytes": 19868,
+      "sha256": "affc9fce26ab5f1034b5d1972dc3106ffe8849d7a1d35c8507790280c1e5d361"
+    },
+    "rejected-prototype-full.json.gz": {
+      "bytes": 9560,
+      "sha256": "5ac806892cc8ac04e1d738be536674410c5a8b58666a7134bbb5afca74beccf7"
+    },
+    "rejected-prototype-tools.cc.txt": {
+      "bytes": 47445,
+      "sha256": "e4a83307327ce867ea4780f66a77fbf18c5b591fb293161ffd6857a1509e8075"
+    },
+    "rejected-prototype.json": {
+      "bytes": 12034,
+      "sha256": "79597a88a04227c06134dcbf3f596f54f563c15928ea554e42ea692e1ed639b5"
+    },
+    "software-checks.json": {
+      "bytes": 51649,
+      "sha256": "2096cd1a8b542eeb1d013b30f7741b1d7fc44865bf631f113b09fa74ab9cfd12"
+    },
+    "tools.json": {
+      "bytes": 17065,
+      "sha256": "96c24d99182dda1f3b2fd66f00674238b5bd95de53b7f84c2952457bb9ac7f38"
+    },
+    "version-check.json": {
+      "bytes": 831,
+      "sha256": "35d111e331a4d4d81304be5148f534e9bb392521af2eff84800a53d4411d78de"
+    }
+  }
+}

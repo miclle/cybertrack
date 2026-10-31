@@ -1,0 +1,754 @@
+{
+  "scope": "24 targeted synthesized Mandarin sessions, actual STT and actual MCP; no human/speaker/board acceptance or replacement fixed-suite score",
+  "identity": {
+    "model": "deepseek-v4-flash",
+    "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "tool_schema_sha256": "96c24d99182dda1f3b2fd66f00674238b5bd95de53b7f84c2952457bb9ac7f38",
+    "capture_source_sha256": "2c8f998c09771e569b2c706aa3e2792bf6cc13d3a3eb9e5d3b3f3f28c003f4ee",
+    "synthesis_source_sha256": "5f10a4c1e92a2755ed7bc5e9c27f5104190306b9d291516108410affdacb7df8"
+  },
+  "host_sha256": "7cebacd359f2d1e4caf93a9a5e683981d846b24dbaaae190ab3e4d1202dc14f4",
+  "classifier_sha256": "a72b2150fe3caae4a2764d0fb26c691ce2ab08ad0308cad9c56b6c8fadc7b755",
+  "total": 24,
+  "completed": 24,
+  "transcript_matches": 24,
+  "strict_tool_matches": 23,
+  "control_state_matches": 24,
+  "input_negated_rejections": 1,
+  "expected_stop_refusals": 0,
+  "all_captured_inputs_rpc_replies_and_final_states_reproduced": true,
+  "results": [
+    {
+      "repeat": 1,
+      "id": "G001",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "好的，不吹泡泡。",
+      "recognized": [
+        "不许吹泡泡。"
+      ],
+      "categories": [
+        1
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 1,
+      "id": "G002",
+      "completed": true,
+      "strict_tool_match": false,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "input_negated"
+      ],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "好的，不启动。好的，不启动。",
+      "recognized": [
+        "不要饭店。"
+      ],
+      "categories": [
+        1
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 1
+    },
+    {
+      "repeat": 1,
+      "id": "G003",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "好的，不编排表演。还有其他需要吗？",
+      "recognized": [
+        "不要编排表演。"
+      ],
+      "categories": [
+        2
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 1,
+      "id": "G004",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "用户明确否定取消，不执行任何操作。好的，不取消这份草稿。",
+      "recognized": [
+        "别取消这份草稿。"
+      ],
+      "categories": [
+        2
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 1,
+      "id": "G005",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "好的，我不动，序列继续跑。",
+      "recognized": [
+        "不要停止当前序列。"
+      ],
+      "categories": [
+        2
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 1,
+      "id": "G006",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "动作都停下了，我在这儿等你。",
+      "recognized": [
+        "停止。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": true,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 1,
+      "id": "G007",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "好的，都停下来了，我在这儿等你。",
+      "recognized": [
+        "先别编排了，马上停下。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": true,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 1,
+      "id": "G008",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "好的，我停下了动作都停下了，我在这儿等你。",
+      "recognized": [
+        "不要再动了。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": true,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 1,
+      "id": "G009",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "accepted"
+      ],
+      "starts": 1,
+      "draft_revision": 7,
+      "reply": "好，直接吹泡泡两秒好，泡泡吹起来了。",
+      "recognized": [
+        "先不要编排，直接吹泡泡两秒。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 1,
+      "id": "G010",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "starts": 0,
+      "draft_revision": 8,
+      "reply": "I'll check the current draft status first.I'll update step 2's bubbles to 2 seconds.第二步的泡泡改成两秒了，草稿已保存。请在网页上预览一下，确认后点开始就行。",
+      "recognized": [
+        "把第二步泡泡改成两秒。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 1,
+      "id": "G011",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "好的，不前进。",
+      "recognized": [
+        "不要前进。"
+      ],
+      "categories": [
+        1
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 1,
+      "id": "G012",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "动作都停下了，我在这儿等你。",
+      "recognized": [
+        "不要编排表演，停下。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": true,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G001",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "好的，不吹泡泡。",
+      "recognized": [
+        "不许吹泡泡。"
+      ],
+      "categories": [
+        1
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G002",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "明白，不启动。",
+      "recognized": [
+        "不要饭店。"
+      ],
+      "categories": [
+        1
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G003",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "好的，不编排表演。有什么其他需要吗？",
+      "recognized": [
+        "不要编排表演。"
+      ],
+      "categories": [
+        2
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G004",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 7,
+      "reply": "用户明确表示不要取消草稿，这是否定指令，不需要调用任何工具。好的，不取消。这份草稿保留着，需要改的时候告诉我。",
+      "recognized": [
+        "别取消这份草稿。"
+      ],
+      "categories": [
+        2
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G005",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "好的，当前序列继续运行。",
+      "recognized": [
+        "不要停止当前序列。"
+      ],
+      "categories": [
+        2
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G006",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "动作都停下了，我在这儿等你。",
+      "recognized": [
+        "停止。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": true,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G007",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "动作都停下了，我在这儿等你。",
+      "recognized": [
+        "先别编排了，马上停下。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": true,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G008",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "好的，都停下来了。",
+      "recognized": [
+        "不要再动了。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": true,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G009",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "accepted"
+      ],
+      "starts": 1,
+      "draft_revision": 7,
+      "reply": "好的，泡泡已经吹起来了。",
+      "recognized": [
+        "先不要编排，直接吹泡泡两秒。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G010",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok",
+        "draft_saved"
+      ],
+      "starts": 0,
+      "draft_revision": 8,
+      "reply": "草稿当前版本是7，第二步泡泡是1000毫秒。现在把第二步的泡泡改为2000毫秒第二步的泡泡已经改成两秒了，草稿保存好了。你去网页上预览一下，没问题就点开始吧。",
+      "recognized": [
+        "把第二步泡泡改成两秒。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G011",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [],
+      "starts": 0,
+      "draft_revision": 0,
+      "reply": "好的，不前进。",
+      "recognized": [
+        "不要前进。"
+      ],
+      "categories": [
+        1
+      ],
+      "transcript_matches": true,
+      "negative_case": true,
+      "expected_control_state_matches": true,
+      "expected_stop_case": false,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    },
+    {
+      "repeat": 2,
+      "id": "G012",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "动作都停下了，我在这儿等你。",
+      "recognized": [
+        "不要编排表演，停下。"
+      ],
+      "categories": [
+        0
+      ],
+      "transcript_matches": true,
+      "negative_case": false,
+      "expected_control_state_matches": true,
+      "expected_stop_case": true,
+      "expected_stop_refused": false,
+      "input_negated_rejections": 0
+    }
+  ],
+  "final_candidate_replay": {
+    "scope": "Offline compatibility of the final candidate with all 24 captured input/RPC histories; not a new platform run",
+    "captured_host_sha256": "7cebacd359f2d1e4caf93a9a5e683981d846b24dbaaae190ab3e4d1202dc14f4",
+    "final_host_sha256": "9b1fdfe1ae2cf95461d481752f608d24b6ce0c6b96b2ef875fd3b429ec3663d4",
+    "cases": 24,
+    "results": [
+      {
+        "repeat": 1,
+        "id": "G001",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G002",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G003",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G004",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G005",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G006",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G007",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G008",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G009",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G010",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G011",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 1,
+        "id": "G012",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G001",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G002",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G003",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G004",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G005",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G006",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G007",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G008",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G009",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G010",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G011",
+        "all_replies_and_final_state_identical": true
+      },
+      {
+        "repeat": 2,
+        "id": "G012",
+        "all_replies_and_final_state_identical": true
+      }
+    ]
+  }
+}

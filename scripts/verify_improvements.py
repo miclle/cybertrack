@@ -50,7 +50,9 @@ def main():
             [sys.executable, "scripts/check_vague_action.py", "--executable", str(host_build/"firmware_host"),
              "--output", str(out/"vague-action.json")],
             [sys.executable, "scripts/check_mcp_raw.py", "--executable", str(host_build/"firmware_host"),
-             "--output", str(out/"mcp-raw.json")]])
+             "--output", str(out/"mcp-raw.json")],
+            [sys.executable, "scripts/check_negative_input.py", "--executable", str(host_build/"firmware_host"),
+             "--output", str(out/"negative-input.json")]])
     if args.model_design:
         commands.extend([["npm", "--prefix", "tools/model-design", "test"],
                          ["npm", "--prefix", "tools/model-design", "run", "test:bundle"],

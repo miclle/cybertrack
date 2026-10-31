@@ -1,0 +1,23 @@
+{
+  "version": "2.0.3-ct71",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Bounded whole-clause negative-input admission, state-aware remote stop; trusted local/web stop unchanged, original tools and role unchanged. Candidate, not deployed.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2717664,
+    "sha256": "8ca3f03a7c0a94d0dbb0fbc59bf487403f61e79f71b2fec4391e56bf978018fd"
+  },
+  "checks": [
+    "Complete ESP-IDF build passes.",
+    "Final 46 actual-MCP scenarios pass on both plain and ASan/UBSan hosts. Old ct70 fails 23 expectations; the rejected initial active-stop-blocking prototype fails 5 stop-priority expectations.",
+    "Original eighty/eight semantic fixtures, input isolation and eight synchronous stop scenarios pass.",
+    "Twenty-four targeted synthetic-speech sessions complete: actual STT 24/24, strict tools 23/24, control states 24/24, one actual input_negated refusal. Capture used the initial frozen host; all actual input/RPC histories and final states reproduce identically through the final candidate.",
+    "Final candidate always preserves running and waiting-sequence stop, including late actual stop after newer negative input; local BOOT/trusted stop bypass language guard.",
+    "Final seventeen unified software check groups pass, including 98 Python improvement tests; extended actual Reply allocation-failure and BOOT tests pass for all negative categories."
+  ],
+  "pending": [
+    "Candidate not deployed. No actual board timing, human microphone, speaker, physical or family acceptance.",
+    "Running/waiting stop always remains available because MCP has no originating input ID. Active negative-stop semantics, unknown phrases and original full model/narration gates remain unresolved."
+  ]
+}

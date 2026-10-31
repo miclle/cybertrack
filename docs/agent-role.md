@@ -146,3 +146,5 @@ ct68 [含糊动作门禁](validation/vague-action-admission.md)对有限的泛�
 [原生数组研究](validation/native-step-inputs.md)曾将序列参数说明从字符串改为数组（5991 → 5994 字符）。完整固定集退步，未采纳；源码角色与平台保存重开均恢复为原 5991 字符。没有新增设备重启或部署记录，不能把实验角色当作当前契约。
 
 ct70 的原始 JSON 零字符拒绝不修改角色或十二项工具；畸形请求锁定本轮失败，模型不得换工具补做。现有输入代际隔离、合法停止与新输入恢复保留，原误停和过程播报门槛未因此关闭。[验证](validation/mcp-raw-json.md)
+
+ct71 返回 `input_negated`／`negation_facts` 时，本次写入或空闲误停没有执行；不得称停止／保存成功或换工具补做。原角色与公开工具定义不变。设备活动／等待时仍优先全停，不能依最新文本推断迟到 RPC 的原始意图。[实际 STT、失败初版与最终边界](validation/negative-input-admission.md)
