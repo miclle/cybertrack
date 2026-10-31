@@ -25,7 +25,7 @@ class SolutionPackageTest(unittest.TestCase):
         data = package.build_archive(ROOT, paths, "test-revision", False)
         self.assertEqual(data, package.build_archive(ROOT, paths, "test-revision", False))
         with tempfile.TemporaryDirectory() as folder, zipfile.ZipFile(io.BytesIO(data)) as archive:
-            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json"})
+            self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "family/rehearsal.html", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/qwen/compose.json", "replay/doubao/compose.json"})
             manifest = json.loads(archive.read("MANIFEST.json"))
             self.assertEqual(manifest["files"]["START_HERE.md"]["sha256"], hashlib.sha256(archive.read("START_HERE.md")).hexdigest())
             archive.extractall(folder)
@@ -45,8 +45,17 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertFalse(compose["tool_call_target_met"])
             captured = json.loads(archive.read("replay/firmware-host/compose.json"))
             self.assertFalse(next(row for row in captured["results"] if row["id"] == "C005")["completed"])
+            qwen = result["qwen_scores"]["voice"]
+            self.assertEqual((qwen["scored"], qwen["correct"]), (80, 68))
+            self.assertEqual(qwen["failed_stop_cases"], ["V049"])
+            self.assertEqual(qwen["forbidden_call_cases"], ["V079"])
+            doubao = result["doubao_compose_scores"]["compose"]
+            self.assertEqual((doubao["scored"], doubao["correct"]), (8, 3))
+            self.assertEqual(doubao["invalid_tool_argument_cases"], ["C002", "C007"])
+            self.assertEqual(doubao["forbidden_call_cases"], ["C005", "C006"])
+            self.assertFalse(doubao["tool_call_target_met"])
             self.assertNotIn("device_id", manifest["firmware"])
-            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json"):
+            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json"):
                 replay = root/name
                 original = replay.read_bytes()
                 replay.write_bytes(original+b" ")
