@@ -1,0 +1,99 @@
+{
+  "scope": "Isolated platform text with synthetic device receipts. Playback policy replay is host-only.",
+  "model": "deepseek-v4-flash",
+  "role_sha256": "79662d7d2e4540a6f448a0b2330cecad2ba49f0ee2d59d1430f5279f96a677ac",
+  "tool_schema_sha256": "e006800fd494436767cdb6f2dd4e0f92ef96c75f65064f2452ce9c3e58d8d03b",
+  "capture_source_sha256": "d255e559efed986978a12d3dc93405599f413155dc3a332765194e38a9a4f341",
+  "runs": [
+    {
+      "round": 1,
+      "suite": "status",
+      "run_id": "f919029f-b2e0-4bba-8c7f-e11acca3a43b",
+      "sha256": "65cb44ebcf2501ccf8ccd1ab58ea8ad610e69a31ec6a37eace8fc6d79b327bd3",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": []
+    },
+    {
+      "round": 1,
+      "suite": "transfer",
+      "run_id": "793d6b5d-03f0-464b-b25a-1809a1ca4e4b",
+      "sha256": "8912067bbf5d989eb62b50a95002c6abcb46273d025f1e2ac292fec042e3437b",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": [],
+      "first_remote_packet_policy": {
+        "P001": "suppressed",
+        "P002": "suppressed",
+        "P003": "suppressed",
+        "P004": "audible",
+        "P005": "audible",
+        "P006": "audible",
+        "P007": "audible",
+        "P008": "audible"
+      }
+    },
+    {
+      "round": 2,
+      "suite": "status",
+      "run_id": "24fe6ed8-56bc-45d8-9745-f5c9bcd47c44",
+      "sha256": "5a365cb2c1ea25aff209f58cdb84efd56acbbc19af2ef0500f79caab29419e7c",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": []
+    },
+    {
+      "round": 2,
+      "suite": "transfer",
+      "run_id": "19e13900-7893-43c8-9d19-b31bc333cb61",
+      "sha256": "fdd40bdd57c6eda129e0a103e950634ecadd6eb6369c5c7c20cd084418cda32b",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": [],
+      "first_remote_packet_policy": {
+        "P001": "suppressed",
+        "P002": "suppressed",
+        "P003": "suppressed",
+        "P004": "audible",
+        "P005": "audible",
+        "P006": "audible",
+        "P007": "audible",
+        "P008": "audible"
+      }
+    },
+    {
+      "round": 3,
+      "suite": "status",
+      "run_id": "93a44522-746f-4674-84e5-45439f58a981",
+      "sha256": "e66a25f6e0443a8c1e1963fce20f54e30f17bec6e93b67f2c7b397be98df65b8",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": []
+    },
+    {
+      "round": 3,
+      "suite": "transfer",
+      "run_id": "77b31666-dd5a-4152-b079-0e8a079b656a",
+      "sha256": "24f3c710c82474c14cafe1758f9a0fe8e8bbcc063c8b30c7513929a80e5c9744",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": [],
+      "first_remote_packet_policy": {
+        "P001": "suppressed",
+        "P002": "suppressed",
+        "P003": "suppressed",
+        "P004": "audible",
+        "P005": "audible",
+        "P006": "audible",
+        "P007": "audible",
+        "P008": "audible"
+      }
+    }
+  ]
+}
