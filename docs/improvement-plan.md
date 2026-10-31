@@ -185,3 +185,5 @@ I03／I06／I13 的[原 80／8 语音链路](validation/full-stt-ct71.md)已完�
 I03／I08／I10 的 [ct72 效果播放匹配](validation/effect-alias-feedback.md)已补齐既有别名及模式，并改用通道独立时长；完整 88 条回放仅新增抑制普通点火 64 包，81 条不一致保留音频。模型、角色与平台不变，最近部署仍 ct45，规则分析和物理验收继续未完成。
 
 I03／I06／I13 增加[协议字段与 none 对照](validation/tts-protocol-observation.md)，候选不兼容表现和恢复证据均保留；`action=thinking` 不作为音频过滤依据，过程播报仍需模型与 TTS 之间的明确出口，原退出条件不变。
+
+I03／I06／I13 的[工具轮播报中继原型](validation/llm-tool-round-relay.md)已完成本地 HTTP／SSE、完整工具参数及工具结果闭环测试；尚未配置真实模型／托管。最终分析、必要限制和时延反例作为采纳门槛，17 项本地测试不关闭原目标。
