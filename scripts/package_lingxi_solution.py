@@ -20,7 +20,8 @@ def build_archive(root, paths, head, dirty):
         path = PurePosixPath(name)
         if path.is_absolute() or ".." in path.parts or not path.parts or str(path) != name:
             raise ValueError("bundle paths must be normalized repository-relative paths")
-        if set(path.parts) & {"secrets", "recordings", "output", "tmp", ".git"} or path.suffix not in {".md", ".json", ".txt", ".py"}:
+        allowed_text = path.suffix in {".md", ".json", ".txt", ".py"} or path.name in {"LICENSE", "NOTICE"}
+        if set(path.parts) & {"secrets", "recordings", "output", "tmp", ".git"} or not allowed_text:
             raise ValueError("bundle supports reviewed reference text only")
         target = root / name
         if target.resolve() != target or not target.is_file():
