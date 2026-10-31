@@ -9,6 +9,10 @@ int main() {
     const auto session = sessions.Acquire(clock_ms);
     auto initial = cJSON_Parse(Reply("get_status", 0, 0, nullptr, 0, session).c_str());
     assert(initial && field(initial, "status_facts").find("没有最近") != std::string::npos);
+    assert(field(initial,"draft_status_facts")==DraftReadFacts(false));
+    assert(std::string(DraftReadFacts(false)).find("没有已保存草稿")!=std::string::npos);
+    assert(std::string(DraftReadFacts(true)).find("有已保存草稿")!=std::string::npos);
+    assert(std::string(DraftReadFacts(true)).find("不能把已有版本")!=std::string::npos);
     assert(StatusFacts("output_fault", true, false, false, "").find("旧动作不会恢复") != std::string::npos);
     assert(StatusFacts("none", false, true, false, "accepted").find("步骤间等待") != std::string::npos);
     assert(StatusFacts("none", false, true, true, "").find("步骤间等待") == std::string::npos);

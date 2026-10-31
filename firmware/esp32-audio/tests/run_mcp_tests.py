@@ -84,12 +84,15 @@ for prefix in (create[:1], create):
                                     input=json.dumps(prefix), text=True).splitlines()
     first, final = json.loads(lines[0]), json.loads(lines[-1])
     assert not first['show_draft']['active'] and first['show_draft']['revision']==0
+    assert '没有已保存草稿' in first['draft_status_facts']
     assert final['starts_this_boot']==0 and not any(final['logical_outputs'].values())
     if len(prefix)==1:
         assert not final['show_draft']['active'] and final['show_draft']['revision']==0
     else:
         saved = json.loads(lines[-2])
         assert saved['result']=='draft_saved' and final['show_draft']['revision']==1
+        assert 'draft_status_facts' not in saved
+        assert '当前有已保存草稿' in final['draft_status_facts']
         assert final['show_draft']['steps'][0]['move_ms']==880
         assert final['show_draft']['steps'][1]['bubbles_ms']==1000
 

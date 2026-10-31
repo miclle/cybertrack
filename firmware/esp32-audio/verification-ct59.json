@@ -1,0 +1,17 @@
+{
+  "version": "2.0.3-ct59",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Explicit draft status facts; build and no-device host checks only.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2704704,
+    "sha256": "6b12dca5fe21285674f933e227aa4feaa99cc3cca4c0e3cc8eaec52e20ab9fed"
+  },
+  "checks": [
+    "All twelve exported tool schemas and the role are unchanged from ct58.",
+    "Actual get_status serialization distinguishes no saved draft from an existing saved draft and states that this query is not a save acknowledgement.",
+    "Actual show_edit save receipts omit query-only facts, and queries preserve zero starts and closed outputs.",
+    "MCP/web host suite and empty draft roundtrip passed."
+  ]
+}
