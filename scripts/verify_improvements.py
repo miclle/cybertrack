@@ -34,6 +34,7 @@ def main():
         commands.append([sys.executable, "-m", "unittest", "discover", "-s", "tests/improvements"])
     if args.source:
         source = args.source.resolve()
+        commands.append([sys.executable, "scripts/replay_stop_matrix.py", "--source", str(source)])
         for suite in ("run_mcp_tests.py", "run_audio_tests.py"):
             commands.append([sys.executable, f"firmware/esp32-audio/tests/{suite}", "--source", str(source)])
     if args.model_design:
