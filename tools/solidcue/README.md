@@ -46,6 +46,11 @@ node scripts/check_solidcue_plugin.mjs
 
 ## 整机研究流程
 
+| 在零件上写评论 | 查看修改与撤销记录 |
+| --- | --- |
+| ![点选冠盖后，模型旁展开带有面编号的评论框](../../artifact/solidcue-3.jpg) | ![模型右侧的历史面板列出冠盖的同步和撤销记录](../../artifact/solidcue-2.jpg) |
+| 点选冠盖表面，在评论里写明移动方向、距离和要观察的装配关系。 | 打开“历史”，可从冠盖的修改记录回看来源评论，核对修改和撤销各自对应的版本。 |
+
 1. 执行 `python3 scripts/prepare_model_study.py`，取得带原文件哈希的独立整机副本。
 2. 通过 FreeCAD MCP 打开返回的 `study` 文件。核对路径后添加字符串属性 `CyberTrackStudySource`，值为原始 FCStd 绝对路径；保存研究副本，不能把标记加到正式模型。
 3. 用 `get_state.cadBridge.assemblyAdapterScript` 加载 `assembly_bridge.py`。`export_assembly(document_name, inbox, unique_snapshot_id)` 导出当前可见整机，包含网格、来源指纹和原生 FCStd 副本；生产文件不覆盖。
