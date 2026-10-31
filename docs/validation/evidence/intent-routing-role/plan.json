@@ -1,0 +1,31 @@
+{
+  "scope": "Three independent twelve-case baseline runs then three candidate runs, same ct68 actual host/tools/model; no board IO",
+  "baseline_role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "candidate_role_sha256": "d9d4bff563832d421938a97c5c098020e94b90f1afbd111b63edcb8760a8149a",
+  "baseline_characters": 5991,
+  "candidate_characters": 5990,
+  "corpus_sha256": "e6548c756c03322eba881a9612a3f06c259e0e4d5c2ed51c9dfca502b4c51773",
+  "repeats": 3,
+  "cases": [
+    "V064",
+    "C006",
+    "N006",
+    "C007",
+    "C008",
+    "C005",
+    "V079",
+    "V047",
+    "V049",
+    "V001",
+    "C002",
+    "C004"
+  ],
+  "adoption_preflight": [
+    "All candidate cases complete; no forbidden call, false stop or missed explicit stop.",
+    "Candidate strict tools improve over baseline; correct explicit edit/cancel and read-version order preserved.",
+    "Review process narration and false claims separately; shorter wording alone is insufficient.",
+    "Only a passing preflight warrants full original 80+8 platform suite. Full-suite gates unchanged."
+  ],
+  "failure_policy": "Retain each attempt, no resampling; restore saved platform and repository role if unsuitable; no flash/restart",
+  "control_input": "Raw-text diagnostic host uses synthetic placeholder captured host input; lexical STT guards are not evaluated. Same host mode for both roles; no ASR claim."
+}

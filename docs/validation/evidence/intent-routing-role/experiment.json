@@ -1,0 +1,191 @@
+{
+  "base_commit": "dcf9fadf0d4b472972f79fe305975443d6a76d93",
+  "source_candidate": "2.0.3-ct68",
+  "recorded_board": "2.0.3-ct45",
+  "decision": "not_adopted",
+  "platform_sessions": 72,
+  "flashed": false,
+  "device_restarted": false,
+  "tools_changed": false,
+  "model_parameters_changed": false,
+  "source_role_restored": true,
+  "saved_platform_role_restored": true,
+  "raw_host_mode": "Synthetic placeholder input, not the actual recognized utterance; ct67/ct68 lexical STT guards are not evaluated in this role-only text diagnostic.",
+  "planning_note": "The plan control_input annotation was clarified during baseline capture; corpus, roles, tools, host, repetitions and adoption gates unchanged.",
+  "result": {
+    "baseline": {
+      "total": 36,
+      "completed": 36,
+      "strict_matches": 29,
+      "forbidden_calls": 1,
+      "false_stops": 1,
+      "stop_total": 6,
+      "stops_matched": 6,
+      "stops_without_tts_text": 0,
+      "explicit_edit_cancel_matches": 6,
+      "failed": [
+        {
+          "repeat": 1,
+          "id": "C008"
+        },
+        {
+          "repeat": 1,
+          "id": "C005"
+        },
+        {
+          "repeat": 1,
+          "id": "V079"
+        },
+        {
+          "repeat": 2,
+          "id": "C007"
+        },
+        {
+          "repeat": 2,
+          "id": "C008"
+        },
+        {
+          "repeat": 3,
+          "id": "C006"
+        },
+        {
+          "repeat": 3,
+          "id": "C005"
+        }
+      ]
+    },
+    "candidate": {
+      "total": 36,
+      "completed": 36,
+      "strict_matches": 29,
+      "forbidden_calls": 1,
+      "false_stops": 0,
+      "stop_total": 6,
+      "stops_matched": 6,
+      "stops_without_tts_text": 0,
+      "explicit_edit_cancel_matches": 6,
+      "failed": [
+        {
+          "repeat": 1,
+          "id": "C007"
+        },
+        {
+          "repeat": 1,
+          "id": "C008"
+        },
+        {
+          "repeat": 1,
+          "id": "C005"
+        },
+        {
+          "repeat": 2,
+          "id": "C008"
+        },
+        {
+          "repeat": 2,
+          "id": "C005"
+        },
+        {
+          "repeat": 3,
+          "id": "C008"
+        },
+        {
+          "repeat": 3,
+          "id": "C005"
+        }
+      ]
+    }
+  },
+  "replies_and_final_states_reproduced": true,
+  "configuration_identity_limit": "UI save/reopen proves stored configuration; WSS does not independently attest backend model or executed prompt hashes.",
+  "screenshot_files": {
+    "baseline-platform.png": {
+      "path": "output/intent-routing/baseline-platform.png",
+      "sha256": "9716ecd604b58a3edd04ad0ffee480cec7eb90fe85942274fa0084c3a5757382"
+    },
+    "candidate-platform.png": {
+      "path": "output/intent-routing/candidate-platform.png",
+      "sha256": "4c09bf48a5915312329db182222cfc781345ae7642392baf88f465060a4b6f37"
+    },
+    "restored-platform.png": {
+      "path": "output/intent-routing/restored-platform.png",
+      "sha256": "9716ecd604b58a3edd04ad0ffee480cec7eb90fe85942274fa0084c3a5757382"
+    }
+  },
+  "files": {
+    "baseline-1.json.gz": {
+      "bytes": 29823,
+      "sha256": "3986a336f7b28dd4f9a2b1fe71582274af68dc13dae89867c11d87a27348b0a1"
+    },
+    "baseline-2.json.gz": {
+      "bytes": 27333,
+      "sha256": "62f21e5f44257c961d3ea32d3fc8704cd74596aaad8023f6ff329b76f66b44d9"
+    },
+    "baseline-3.json.gz": {
+      "bytes": 25865,
+      "sha256": "9372782debd551852bf80f4586ec5d823cb66565b1830b6b385a9f9f193ad4ee"
+    },
+    "baseline-role.txt": {
+      "bytes": 14812,
+      "sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127"
+    },
+    "candidate-1.json.gz": {
+      "bytes": 28928,
+      "sha256": "6393cf2b46e82c1bcf5c1e1116686f5c13ac755a0a3ff418bd8c317fbc0f9fd1"
+    },
+    "candidate-2.json.gz": {
+      "bytes": 24218,
+      "sha256": "819daa84a57af9ad11e8ef76b937c3764ee0a592ebe97f7283a17c9fa9fd1ba9"
+    },
+    "candidate-3.json.gz": {
+      "bytes": 22899,
+      "sha256": "156dae64ed45a71e63544997d430dc592db85053ebb6c4685de760748cefb422"
+    },
+    "candidate-readback.json": {
+      "bytes": 193,
+      "sha256": "436b2bfa3541a4810637d48a18154d362cb2125e49539321bab1455ee85137f5"
+    },
+    "candidate-role.txt": {
+      "bytes": 14813,
+      "sha256": "d9d4bff563832d421938a97c5c098020e94b90f1afbd111b63edcb8760a8149a"
+    },
+    "cases.json": {
+      "bytes": 7175,
+      "sha256": "e6548c756c03322eba881a9612a3f06c259e0e4d5c2ed51c9dfca502b4c51773"
+    },
+    "host-manifest.json": {
+      "bytes": 4496,
+      "sha256": "2ea34719471037597e8b3b154cfd9c4d11f7d5f7fa0c556afdf46f33cbb46c43"
+    },
+    "plan.json": {
+      "bytes": 1405,
+      "sha256": "19f7d5fd286915ab9b999a9e6d7e3229ae49bc0822d1157a4d474c32f5bf2c5e"
+    },
+    "restored-readback.json": {
+      "bytes": 363,
+      "sha256": "721ce834bbf8fed94b8e1bfc9e83edf4ed446ff691a32633baca41e7d27997d3"
+    },
+    "restored-source-check.json": {
+      "bytes": 831,
+      "sha256": "5f52d566a875e943f708baff3a48762fbbeb0d76bdf68365b81e7c4cdefd1e33"
+    },
+    "review.json": {
+      "bytes": 55730,
+      "sha256": "f2f07033451359936b623935b2309c09f110345504d3ea4c5319eb20837fcf74"
+    },
+    "speech-review.json": {
+      "bytes": 1557,
+      "sha256": "dc3ed3c761fb773c02de1b04df6c9cfa9c1d49e2bf284afa0f6fc25744cfa6f0"
+    },
+    "tools.json": {
+      "bytes": 17065,
+      "sha256": "62f76a865ce61c78eeecab640bf78d30854e4940aef07b55acabe598216fd6c1"
+    }
+  },
+  "local_checks": {
+    "improvement_tests": 86,
+    "all_passed": true,
+    "role_and_metadata_diff_from_base": "none",
+    "runtime_firmware_changed": false
+  }
+}
