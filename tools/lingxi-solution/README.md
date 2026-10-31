@@ -25,3 +25,5 @@ ct62 的[单次识别失败隔离](../../docs/validation/voice-input-guard.md)�
 ct63 的[组合／序列与目标速度播放匹配](../../docs/validation/plan-feedback.md)另有候选构建与离线回放摘要。同一批 STT 事件新增抑制 216 个确认包，397 个状态／否定／澄清包保留，30 条合成不一致均保留音频。未新增模型会话，不覆盖此前语音成绩或未完成 V017；重跑播放策略需要完整 checkout 与同版 C++ 回放器。打包器要求当前源码候选的构建记录实际包含在清单内。
 
 [成功回执收敛试验](../../docs/validation/compact-model-receipts.md)没有进入主线：离线工具文本字节减少约 61%，八条平台编排却为 5/8，C006 误调用停止并清除草稿。`compact_receipt_scores` 保留这些失败；实验补丁、来源清单和复核工具供独立研究，当前候选仍是 ct63。
+
+[停止说明对照](../../docs/validation/stop-negation.md)的 ct65 诊断未采纳。第七组 `stop_negation_scores` 重算语义 77/80、编排 6/8；V064 误停和 V079 擅自前进仍标为禁止调用，八条明确停止正确不会抵消失败。包内附十二条补充语料与复核脚本；原始轨迹及完整控制重放仍需 checkout，当前候选保持 ct63。
