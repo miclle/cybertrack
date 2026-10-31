@@ -1,0 +1,67 @@
+{
+  "compose": {
+    "corpus_suite": "compose-v1",
+    "run_id": "637ceb1e-d8d4-4a29-8053-2c08fec465a5",
+    "model": "deepseek-v4-flash",
+    "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "scored": 8,
+    "total": 8,
+    "correct": 5,
+    "accuracy_all_cases": 0.625,
+    "missing": [],
+    "forbidden_call_cases": [
+      "C006"
+    ],
+    "invalid_tool_argument_cases": [],
+    "incomplete": [],
+    "failed_stop_cases": [],
+    "tool_call_target_met": false,
+    "results": [
+      {
+        "id": "C001",
+        "tool_calls_match": true
+      },
+      {
+        "id": "C002",
+        "tool_calls_match": true
+      },
+      {
+        "id": "C003",
+        "tool_calls_match": true
+      },
+      {
+        "id": "C004",
+        "tool_calls_match": true
+      },
+      {
+        "id": "C005",
+        "tool_calls_match": false
+      },
+      {
+        "id": "C006",
+        "tool_calls_match": false
+      },
+      {
+        "id": "C007",
+        "tool_calls_match": true
+      },
+      {
+        "id": "C008",
+        "tool_calls_match": false
+      }
+    ],
+    "reply_semantics": "manual review required",
+    "physical_or_spoken_acceptance": false,
+    "capture_json_sha256": "dde0ebfa7be2397f2f633e3281cdc1e29bd4305923697393199d6457547599ac",
+    "tool_source_version": "ct64-diagnostic-unadopted",
+    "input_mode": "raw_text_diagnostic",
+    "fixture_version": "firmware_host",
+    "tool_schema_sha256": "6a805f51dd1c8005609308e6a40764d43e36653aa58da44a7bc7ca6c591e4167",
+    "host_replay_sha256": "c52b072f0399ab0d33df7e3452b9259a756b1e366ed21bd70dace867f8dc9b64",
+    "mismatch_ids": [
+      "C005",
+      "C006",
+      "C008"
+    ]
+  }
+}

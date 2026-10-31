@@ -1,0 +1,84 @@
+{
+  "base_commit": "715662f57087dc2b08b92eb6fb848a948a6e1902",
+  "decision": "not_adopted",
+  "diagnostic_build": "2.0.3-ct64",
+  "current_source_candidate": "2.0.3-ct63",
+  "flashed": false,
+  "platform_configuration_changed": false,
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "model_label": "deepseek-v4-flash",
+  "model_identity": "visible platform label only; no independent identity in WSS",
+  "platform_parameters": {
+    "temperature": 0.7,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_tokens": 500,
+    "thinking": {
+      "type": "disabled"
+    },
+    "reasoning_effort": "low",
+    "include_usage": true
+  },
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2713568,
+    "sha256": "1367a8338befcb6eef59102ea342e62f65af2895b286a7809e98c774fa623618"
+  },
+  "platform_sessions": 8,
+  "voice80_not_run": true,
+  "acceptance": {
+    "minimum_compose_match": 6,
+    "forbidden_calls_allowed": 0
+  },
+  "result": {
+    "compose_correct": 5,
+    "compose_total": 8,
+    "forbidden_call_cases": [
+      "C006"
+    ],
+    "incomplete": []
+  },
+  "scope": "Raw text to real platform with actual experimental MCP callbacks and guards; no device forwarding, microphone, speaker or physical acceptance",
+  "patch_reapplied_to_file_fixtures": true,
+  "patch_readback_files": 10,
+  "configuration_screenshot_sha256": "81bce3151cdeb36de87d789ed849ef2c4a1385e90a03087008d5ee9622149fbc",
+  "files": {
+    "experimental-source.patch.txt": {
+      "bytes": 17999,
+      "sha256": "9c645866441f607a06ca6b59a6ea7daefab8494b29ff68b3440adaa21e61d9c0"
+    },
+    "full-compose.json.gz": {
+      "bytes": 29020,
+      "sha256": "1c950101d1ae6c19c348be894286d365079b20ede436a51912c03cf6771d6ae7"
+    },
+    "full-suite-scores.json": {
+      "bytes": 1694,
+      "sha256": "e7fe1c95731f1643cb94c0405d87e69de58161f8aee3d51e50c57fcf3b87bfab"
+    },
+    "host-manifest.json": {
+      "bytes": 4337,
+      "sha256": "e3055e347837c472b4c3bed878b0d5a5a7d70d68fbf40462b6f09a71b18f4997"
+    },
+    "projection-review.json": {
+      "bytes": 5206,
+      "sha256": "b193635353c5872a8100f0dde728b6676b0f9b70d797785727af3239f4d2cda8"
+    },
+    "restored-source-check.json": {
+      "bytes": 832,
+      "sha256": "496dd4ea5e80144cac68958f1cb583a09cf035ac66525638e316aa33e7ce3e0a"
+    },
+    "review.json": {
+      "bytes": 9275,
+      "sha256": "fd00e3d49933d52717e02e74da448348675ecbd59a68e8cb926c2e3d7cabb94f"
+    },
+    "software-checks.json": {
+      "bytes": 468,
+      "sha256": "eb5e99945f495393599f8e2c2e0572a685fdaaa7c0a571403dfeb2903eddb3e2"
+    }
+  },
+  "restored_mainline_control": true,
+  "active_runner_change": "91e45cd",
+  "capture_source_commit": "91e45cdf37509600a19ba9c098449fa240614c54",
+  "capture_source_sha256": "9adc5ebad10317a532a6c54f4b36e2e8f47a63950957ca4383d8f547bcaee47f",
+  "patch_application": "git apply --unidiff-zero against the base file fixtures"
+}
