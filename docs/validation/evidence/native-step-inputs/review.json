@@ -1,0 +1,3093 @@
+{
+  "scope": "176 real-platform text sessions, simulated recognized originals, frozen actual MCP hosts; no ASR, speaker or board IO",
+  "groups": {
+    "baseline": {
+      "host_sha256": "a20da0879ee6447e94d8c9aad79057f8d38dd53235478d6f8765560043d15c6e",
+      "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+      "wire_format": "legacy_string",
+      "suites": {
+        "voice": {
+          "score": {
+            "corpus_suite": "voice-v1",
+            "run_id": "bfbe587f-0508-4840-b569-375b6a69993e",
+            "model": "deepseek-v4-flash",
+            "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+            "scored": 80,
+            "total": 80,
+            "correct": 77,
+            "accuracy_all_cases": 0.9625,
+            "missing": [],
+            "forbidden_call_cases": [
+              "V066"
+            ],
+            "invalid_tool_argument_cases": [],
+            "incomplete": [],
+            "failed_stop_cases": [],
+            "tool_call_target_met": false,
+            "results": [
+              {
+                "id": "V001",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V002",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V003",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V004",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V005",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V006",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V007",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V008",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V009",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V010",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V011",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V012",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V013",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V014",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V015",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V016",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V017",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V018",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V019",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V020",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V021",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V022",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V023",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V024",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V025",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V026",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V027",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V028",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V029",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V030",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V031",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V032",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V033",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V034",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V035",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V036",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V037",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V038",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V039",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V040",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V041",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V042",
+                "tool_calls_match": false
+              },
+              {
+                "id": "V043",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V044",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V045",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V046",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V047",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V048",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V049",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V050",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V051",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V052",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V053",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V054",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V055",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V056",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V057",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V058",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V059",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V060",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V061",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V062",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V063",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V064",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V065",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V066",
+                "tool_calls_match": false
+              },
+              {
+                "id": "V067",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V068",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V069",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V070",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V071",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V072",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V073",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V074",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V075",
+                "tool_calls_match": false
+              },
+              {
+                "id": "V076",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V077",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V078",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V079",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V080",
+                "tool_calls_match": true
+              }
+            ],
+            "reply_semantics": "manual review required",
+            "physical_or_spoken_acceptance": false
+          },
+          "replay": {
+            "scope": "Input provenance and complete host reply/state reproduction; semantic errors retained, no human/physical acceptance",
+            "host_input_mode": "simulated_recognized_text",
+            "host_sha256": "a20da0879ee6447e94d8c9aad79057f8d38dd53235478d6f8765560043d15c6e",
+            "corpus_sha256": "38ab1b2fd546f4b00483c31bfdcf0e94b1f1797e6fd42db383037ba2d5d2466f",
+            "cases": 80,
+            "completed": 80,
+            "strict_tool_matches": 77,
+            "tools_before_input": [],
+            "replies_and_final_states_reproduced": true,
+            "results": [
+              {
+                "id": "V001",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，前进！"
+              },
+              {
+                "id": "V002",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，前进两秒。"
+              },
+              {
+                "id": "V003",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，前进五秒，速度百分之六十。"
+              },
+              {
+                "id": "V004",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，前进一分钟。"
+              },
+              {
+                "id": "V005",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，后退一秒钟。"
+              },
+              {
+                "id": "V006",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，后退两秒。"
+              },
+              {
+                "id": "V007",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好，后退五秒，速度百分之六十，走起。"
+              },
+              {
+                "id": "V008",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "后退一分钟，收到。"
+              },
+              {
+                "id": "V009",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，左转。"
+              },
+              {
+                "id": "V010",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好，左转两秒。"
+              },
+              {
+                "id": "V011",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，左转五秒，速度百分之六十。"
+              },
+              {
+                "id": "V012",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，左转一分钟。"
+              },
+              {
+                "id": "V013",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，右转。"
+              },
+              {
+                "id": "V014",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，右转两秒。"
+              },
+              {
+                "id": "V015",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，右转五秒，速度百分之六十。"
+              },
+              {
+                "id": "V016",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，右转一分钟。"
+              },
+              {
+                "id": "V017",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，喷水了。"
+              },
+              {
+                "id": "V018",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，喷水两秒。"
+              },
+              {
+                "id": "V019",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，喷水三十秒。"
+              },
+              {
+                "id": "V020",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "喷水单次最多三十秒。"
+              },
+              {
+                "id": "V021",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，泡泡吹起来啦！"
+              },
+              {
+                "id": "V022",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，泡泡吹起来啦！"
+              },
+              {
+                "id": "V023",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，泡泡吹起来啦，30秒。"
+              },
+              {
+                "id": "V024",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "吹泡泡单次最多三十秒。"
+              },
+              {
+                "id": "V025",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，放电已启动。"
+              },
+              {
+                "id": "V026",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，放电两秒。"
+              },
+              {
+                "id": "V027",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，放电5秒，已经开始了。"
+              },
+              {
+                "id": "V028",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "点火单次最多五秒。"
+              },
+              {
+                "id": "V029",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "好的，前进五秒同时喷水，已开始。"
+              },
+              {
+                "id": "V030",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "I'll execute a left turn with simultaneous water spray动作已接受，左转和喷水同时开始。"
+              },
+              {
+                "id": "V031",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，前进五秒再左转，开始执行了。"
+              },
+              {
+                "id": "V032",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "好的，先吹泡泡两秒，然后后退一秒。"
+              },
+              {
+                "id": "V033",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "好，左转两秒同时吹泡泡三秒，已经安排上了。"
+              },
+              {
+                "id": "V034",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "好的，喷水两秒和吹泡泡一秒同时开始了。"
+              },
+              {
+                "id": "V035",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 3,
+                "draft_revision": 0,
+                "reply": "好的，序列已开始，先前进一秒，然后左转同时吹泡泡两秒。"
+              },
+              {
+                "id": "V036",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "序列已开始执行。"
+              },
+              {
+                "id": "V037",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "速度已经调到60%了。"
+              },
+              {
+                "id": "V038",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，已经加速了。"
+              },
+              {
+                "id": "V039",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，已经减速了。"
+              },
+              {
+                "id": "V040",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "已调到全速。"
+              },
+              {
+                "id": "V041",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "速度范围是60到100，百分之五十不在范围内，请给一个60到100之间的数值。"
+              },
+              {
+                "id": "V042",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "rpc_error"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "用户说的速度数值101，超出范围60到100。需要说明范围并让用户选择。速度只能设60到100之间，101超出范围了，你想调到哪个数？"
+              },
+              {
+                "id": "V043",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "速度得是60到100的整数，60.5没法设，你要60还是61？"
+              },
+              {
+                "id": "V044",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "速度看你要干嘛，想让它跑得稳就慢点，要玩得刺激就快点。具体想让我怎么走？"
+              },
+              {
+                "id": "V045",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V046",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V047",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V048",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，喷水已经停了。"
+              },
+              {
+                "id": "V049",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "泡泡停了，我在这儿等你。"
+              },
+              {
+                "id": "V050",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V051",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "序列已取消，动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V052",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V053",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "我在待命，目前没有动作在运行。"
+              },
+              {
+                "id": "V054",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "没有，喷水没在运行。"
+              },
+              {
+                "id": "V055",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "泡泡已经结束了，现在没有在吹。"
+              },
+              {
+                "id": "V056",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "目前没有正在运行的序列，我在这儿待命。"
+              },
+              {
+                "id": "V057",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "狂暴模式现在没有在运行，剩余时间是0。"
+              },
+              {
+                "id": "V058",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "前方大约60厘米。"
+              },
+              {
+                "id": "V059",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "前方大约60厘米。"
+              },
+              {
+                "id": "V060",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "自动避障现在是关着的。"
+              },
+              {
+                "id": "V061",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "用户说\"不要前进\"，这是否定要做的动作，没有要求停止，不调用stop。我没有启动前进动作，放心。"
+              },
+              {
+                "id": "V062",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好，不喷水。"
+              },
+              {
+                "id": "V063",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好的，不开狂暴模式。"
+              },
+              {
+                "id": "V064",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好，不吹泡泡。"
+              },
+              {
+                "id": "V065",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "明白，不放电。"
+              },
+              {
+                "id": "V066",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "明白，不启动放电。好的，不启动。"
+              },
+              {
+                "id": "V067",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "“前进两秒”就是让机器人以默认速度往前走两秒，大约两秒后自动停下。要我现在执行吗？"
+              },
+              {
+                "id": "V068",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "会啊，你说喷水我就喷。要喷多久？"
+              },
+              {
+                "id": "V069",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "喷水的原理嘛，就是小D肚子里装了个小水泵，通电后把水从水箱里抽上来，再从喷嘴喷出去，跟浇花的花洒差不多，靠电机加压把水送出来的。"
+              },
+              {
+                "id": "V070",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "泡泡的形成啊，简单说就是空气被包进了一层薄薄的水膜里。吹泡泡时，泡泡液里的表面活性剂让水膜更有弹性，空气从缝隙进去，就撑出一个圆圆的球。等水膜里的水分慢慢蒸发或者破了，泡泡就消失了。"
+              },
+              {
+                "id": "V071",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "\"去饭店吃饭\"是日常聊天，不是动作指令，我不启动任何动作。需要我做什么可以直接说，比如前进、喷水或吹泡泡。"
+              },
+              {
+                "id": "V072",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "附近找饭店我帮不上忙，这个得靠手机地图啦。"
+              },
+              {
+                "id": "V073",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "\"饭店\"就是吃饭住宿的地方，比如餐厅、酒店。你是想问这个，还是刚才没听清我说的什么？"
+              },
+              {
+                "id": "V074",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "你说前进，我就让机器人往前走。默认走一秒，除非你另外说时长。"
+              },
+              {
+                "id": "V075",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "你昨天说过“左转”？让我查一下状态。我这边查不到昨天的记录，只有最近一次设备操作的回执，而且现在也没有在运行的动作。你昨天说的“左转”可能是当时执行过了，现在没有保存的历史记录。需要我现在做什么吗？"
+              },
+              {
+                "id": "V076",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "明白，不打扰你们聊天。"
+              },
+              {
+                "id": "V077",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "只能按时间控制行走，没法精确定位到厘米。请告诉我走多久，比如几秒。"
+              },
+              {
+                "id": "V078",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "左转只能按时间控制，我这边不支持精确角度，你告诉我转多久就行。"
+              },
+              {
+                "id": "V079",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "用户说\"动一下那个东西\"，这个指令比较含糊，不清楚具体要做什么动作。我应该简短澄清一下，不猜测执行。你想让我怎么动？前进、后退、左转还是右转？说清楚一点我就动起来。"
+              },
+              {
+                "id": "V080",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "\"合适的程度\"这个说法太模糊了，我没法猜。你是想调到多少？60到100之间说个数就行。"
+              }
+            ]
+          }
+        },
+        "compose": {
+          "score": {
+            "corpus_suite": "compose-v1",
+            "run_id": "d71b85d2-01c6-42d0-b42e-7c7ef571a3e7",
+            "model": "deepseek-v4-flash",
+            "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+            "scored": 8,
+            "total": 8,
+            "correct": 5,
+            "accuracy_all_cases": 0.625,
+            "missing": [],
+            "forbidden_call_cases": [],
+            "invalid_tool_argument_cases": [],
+            "incomplete": [],
+            "failed_stop_cases": [],
+            "tool_call_target_met": false,
+            "results": [
+              {
+                "id": "C001",
+                "tool_calls_match": true
+              },
+              {
+                "id": "C002",
+                "tool_calls_match": true
+              },
+              {
+                "id": "C003",
+                "tool_calls_match": true
+              },
+              {
+                "id": "C004",
+                "tool_calls_match": true
+              },
+              {
+                "id": "C005",
+                "tool_calls_match": false
+              },
+              {
+                "id": "C006",
+                "tool_calls_match": true
+              },
+              {
+                "id": "C007",
+                "tool_calls_match": false
+              },
+              {
+                "id": "C008",
+                "tool_calls_match": false
+              }
+            ],
+            "reply_semantics": "manual review required",
+            "physical_or_spoken_acceptance": false
+          },
+          "replay": {
+            "scope": "Input provenance and complete host reply/state reproduction; semantic errors retained, no human/physical acceptance",
+            "host_input_mode": "simulated_recognized_text",
+            "host_sha256": "a20da0879ee6447e94d8c9aad79057f8d38dd53235478d6f8765560043d15c6e",
+            "corpus_sha256": "2eff96c104825c6f4f3532a65a22fb338904b5f0a17dab14d0bfecfdacf2de66",
+            "cases": 8,
+            "completed": 8,
+            "strict_tool_matches": 5,
+            "tools_before_input": [],
+            "replies_and_final_states_reproduced": true,
+            "results": [
+              {
+                "id": "C001",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok",
+                  "draft_saved"
+                ],
+                "starts": 0,
+                "draft_revision": 1,
+                "reply": "我来先查看当前设备状态和草稿版本。当前没有已保存的草稿。我来保存这个先左转再吹泡泡的表演。草稿已保存：第一步先左转，第二步吹泡泡。请在网页端预览一下，确认没问题后点开始就可以啦。"
+              },
+              {
+                "id": "C002",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok",
+                  "draft_saved"
+                ],
+                "starts": 0,
+                "draft_revision": 8,
+                "reply": "好的，我先查一下当前草稿的版本和内容。草稿第二步是泡泡1000毫秒，我把它改成两秒。第二步泡泡已改成两秒，草稿保存好了。请在网页上预览一下，确认后点开始就行。"
+              },
+              {
+                "id": "C003",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok",
+                  "draft_saved"
+                ],
+                "starts": 0,
+                "draft_revision": 8,
+                "reply": "我先查看当前的草稿状态。当前草稿有两个步骤，第一步是左转880毫秒。我来删除这一步已经删掉第一步的转向了，现在草稿只剩吹泡泡这一步。请到网页上预览一下，确认没问题再点开始。"
+              },
+              {
+                "id": "C004",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok",
+                  "draft_cancelled"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "草稿已经取消了。"
+              },
+              {
+                "id": "C005",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 7,
+                "reply": "用户说\"开始这段表演\"，但根据规则，口头说\"开始表演\"不替代网页确认，需要家长在网页预览后点开始。让我先查一下状态口头说\"开始表演\"不能替代网页确认，需要家长在网页预览后点开始。我来说明一下。这段表演草稿还在，需要家长在网页上预览一下，然后点开始按钮才会真正播放。我这边没法直接启动草稿。"
+              },
+              {
+                "id": "C006",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 7,
+                "reply": "好的，不动表演草稿。"
+              },
+              {
+                "id": "C007",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 7,
+                "reply": "I need to check the current show draft status first beforemodifying it草稿不支持点火效果，只能编排行走和泡泡，所以这步改不了。需要我帮你把它改成别的动作吗？"
+              },
+              {
+                "id": "C008",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 7,
+                "reply": "I need to understand the context here.The user says \"第二步短一点\" (make the second step shorter).This is about modifying a show draft.Let me check the current status first to see the draft.The draft has 2 steps.The second step is bubbles for 1000ms.The user says \"第二步短一点\" (make the second step shorter) but didn't specify a specific duration.I need to ask how many seconds they want.草稿里第二步是吹泡泡，时长一千毫秒。想改成几秒？"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "candidate": {
+      "host_sha256": "10f9fa72f685976f1740e21f7ac881c739fcacfe3ffee0f2695212b4b61b674e",
+      "role_sha256": "a2aba6185e20e13ca453ce6349330e920137584c90b5e352a2d9f5b8dee3dcdc",
+      "wire_format": "native_array",
+      "suites": {
+        "voice": {
+          "score": {
+            "corpus_suite": "voice-v1",
+            "run_id": "c4963344-fa75-4bbc-a93e-578f00e983da",
+            "model": "deepseek-v4-flash",
+            "role_sha256": "a2aba6185e20e13ca453ce6349330e920137584c90b5e352a2d9f5b8dee3dcdc",
+            "scored": 80,
+            "total": 80,
+            "correct": 75,
+            "accuracy_all_cases": 0.9375,
+            "missing": [],
+            "forbidden_call_cases": [
+              "V064",
+              "V065",
+              "V066",
+              "V079"
+            ],
+            "invalid_tool_argument_cases": [],
+            "incomplete": [],
+            "failed_stop_cases": [],
+            "tool_call_target_met": false,
+            "results": [
+              {
+                "id": "V001",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V002",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V003",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V004",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V005",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V006",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V007",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V008",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V009",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V010",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V011",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V012",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V013",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V014",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V015",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V016",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V017",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V018",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V019",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V020",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V021",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V022",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V023",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V024",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V025",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V026",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V027",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V028",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V029",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V030",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V031",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V032",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V033",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V034",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V035",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V036",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V037",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V038",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V039",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V040",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V041",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V042",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V043",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V044",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V045",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V046",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V047",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V048",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V049",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V050",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V051",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V052",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V053",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V054",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V055",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V056",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V057",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V058",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V059",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V060",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V061",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V062",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V063",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V064",
+                "tool_calls_match": false
+              },
+              {
+                "id": "V065",
+                "tool_calls_match": false
+              },
+              {
+                "id": "V066",
+                "tool_calls_match": false
+              },
+              {
+                "id": "V067",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V068",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V069",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V070",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V071",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V072",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V073",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V074",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V075",
+                "tool_calls_match": false
+              },
+              {
+                "id": "V076",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V077",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V078",
+                "tool_calls_match": true
+              },
+              {
+                "id": "V079",
+                "tool_calls_match": false
+              },
+              {
+                "id": "V080",
+                "tool_calls_match": true
+              }
+            ],
+            "reply_semantics": "manual review required",
+            "physical_or_spoken_acceptance": false
+          },
+          "replay": {
+            "scope": "Input provenance and complete host reply/state reproduction; semantic errors retained, no human/physical acceptance",
+            "host_input_mode": "simulated_recognized_text",
+            "host_sha256": "10f9fa72f685976f1740e21f7ac881c739fcacfe3ffee0f2695212b4b61b674e",
+            "corpus_sha256": "38ab1b2fd546f4b00483c31bfdcf0e94b1f1797e6fd42db383037ba2d5d2466f",
+            "cases": 80,
+            "completed": 80,
+            "strict_tool_matches": 75,
+            "tools_before_input": [],
+            "replies_and_final_states_reproduced": true,
+            "results": [
+              {
+                "id": "V001",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，前进。"
+              },
+              {
+                "id": "V002",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，前进两秒。"
+              },
+              {
+                "id": "V003",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，前进五秒，速度百分之六十。"
+              },
+              {
+                "id": "V004",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，前进一分钟，已经开始了。"
+              },
+              {
+                "id": "V005",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，正在后退。"
+              },
+              {
+                "id": "V006",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，后退两秒。"
+              },
+              {
+                "id": "V007",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，后退五秒，速度百分之六十，走起。"
+              },
+              {
+                "id": "V008",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，后退一分钟，走起。"
+              },
+              {
+                "id": "V009",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好，已左转。"
+              },
+              {
+                "id": "V010",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，左转两秒。"
+              },
+              {
+                "id": "V011",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，左转五秒，速度百分之六十，走起。"
+              },
+              {
+                "id": "V012",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，左转一分钟，走起。"
+              },
+              {
+                "id": "V013",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，正在右转。"
+              },
+              {
+                "id": "V014",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，右转两秒。"
+              },
+              {
+                "id": "V015",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，右转五秒，速度百分之六十。"
+              },
+              {
+                "id": "V016",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，右转一分钟。"
+              },
+              {
+                "id": "V017",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好，喷水了。"
+              },
+              {
+                "id": "V018",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，喷水两秒开始了。"
+              },
+              {
+                "id": "V019",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "喷水单次最多三十秒。"
+              },
+              {
+                "id": "V020",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "喷水单次最多三十秒。"
+              },
+              {
+                "id": "V021",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，泡泡吹起来了。"
+              },
+              {
+                "id": "V022",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，泡泡吹起来啦。"
+              },
+              {
+                "id": "V023",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，泡泡已经开始了，三十秒的泡泡时间。"
+              },
+              {
+                "id": "V024",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "泡泡单次最多三十秒。"
+              },
+              {
+                "id": "V025",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，放电一秒钟。"
+              },
+              {
+                "id": "V026",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，放电两秒。"
+              },
+              {
+                "id": "V027",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "放电最多五秒，已经按五秒执行了。"
+              },
+              {
+                "id": "V028",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "放电是点火，最多五秒，我按五秒来。点火单次最多五秒。"
+              },
+              {
+                "id": "V029",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "好的，前进五秒同时喷水，走起！"
+              },
+              {
+                "id": "V030",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "好的，左转三秒同时喷水一秒，已经开始了。"
+              },
+              {
+                "id": "V031",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，先前进五秒，然后左转。"
+              },
+              {
+                "id": "V032",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "好，先吹泡泡两秒，再后退一秒，已经安排上了。"
+              },
+              {
+                "id": "V033",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "I'll execute a left turn for 2 seconds while blowing bubblesfor 3 seconds simultaneously.好的，开始左转两秒加吹泡泡三秒。"
+              },
+              {
+                "id": "V034",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "好的，喷水两秒和吹泡泡一秒同时进行。"
+              },
+              {
+                "id": "V035",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 3,
+                "draft_revision": 0,
+                "reply": "好的，序列已开始。"
+              },
+              {
+                "id": "V036",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 2,
+                "draft_revision": 0,
+                "reply": "好的，前进两秒再右转两秒，都用百分之七十速度，已经开始了。"
+              },
+              {
+                "id": "V037",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "好的，速度已经调到百分之六十。"
+              },
+              {
+                "id": "V038",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "已加速，速度从70%提到80%。"
+              },
+              {
+                "id": "V039",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "已减速到60%。"
+              },
+              {
+                "id": "V040",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "accepted"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "速度已经调到全速了。"
+              },
+              {
+                "id": "V041",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "速度范围是60到100，百分之五十不在范围内，请给我一个60到100之间的数值。"
+              },
+              {
+                "id": "V042",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "速度范围是60到100，101超出范围了，我这边没法设置，你给个60到100之间的数吧。"
+              },
+              {
+                "id": "V043",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "速度只能设60到100的整数，比如60、70这样。你想调到多少？"
+              },
+              {
+                "id": "V044",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "这个要看用在哪儿，没有绝对的好坏。你是在问机器人行走速度，还是别的什么？说清楚点我好帮你判断。"
+              },
+              {
+                "id": "V045",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V046",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V047",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V048",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V049",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V050",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V051",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "序列已取消，动作都停下了。"
+              },
+              {
+                "id": "V052",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 1,
+                "draft_revision": 0,
+                "reply": "动作都停下了，我在这儿等你。"
+              },
+              {
+                "id": "V053",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "我在待命，目前没有动作在运行。"
+              },
+              {
+                "id": "V054",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "没有在喷水，水枪现在是关着的。"
+              },
+              {
+                "id": "V055",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "泡泡已经停了，现在没有在运行。"
+              },
+              {
+                "id": "V056",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "当前没有序列在运行，设备在待命状态。"
+              },
+              {
+                "id": "V057",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "狂暴模式当前没有在运行，没有剩余时间。"
+              },
+              {
+                "id": "V058",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "前方大约60厘米。"
+              },
+              {
+                "id": "V059",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "距离大约60厘米。"
+              },
+              {
+                "id": "V060",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "自动避障目前是关着的。"
+              },
+              {
+                "id": "V061",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "这是否定要做的动作，不启动行走。好的，不前进。"
+              },
+              {
+                "id": "V062",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好的，不喷水。"
+              },
+              {
+                "id": "V063",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好的，不开。"
+              },
+              {
+                "id": "V064",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好的，不吹泡泡。好的，不吹泡泡，动作都停下了。"
+              },
+              {
+                "id": "V065",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "明白，不放电。好的，不会放电的。"
+              },
+              {
+                "id": "V066",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好的，不启动。好的，不启动。"
+              },
+              {
+                "id": "V067",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "就是让我往前走两秒的意思，你要我前进吗？"
+              },
+              {
+                "id": "V068",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "会啊，你说一声我就喷。不过我现在还不会自己动起来。"
+              },
+              {
+                "id": "V069",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "喷水的原理就是机器人里有个小水泵，启动后把水抽上来再从喷嘴喷出去，靠电机驱动水流形成水柱。简单说就是水泵抽水加压再喷射出来。"
+              },
+              {
+                "id": "V070",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "泡泡是空气被包在一层薄薄的水膜里形成的。水和洗洁精这类表面活性剂混合后，水的表面张力降低，薄膜不容易破，空气被裹进去就成了泡泡。"
+              },
+              {
+                "id": "V071",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好的，我不支持去饭店这个功能哦。我是你的机器人小助手，只能陪你聊天和玩动作，比如行走、喷水、吹泡泡这些。你是想让我做什么吗？"
+              },
+              {
+                "id": "V072",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "这个我查不到，我是机器人小助手，没有导航功能。附近饭店可以用手机地图搜一下。"
+              },
+              {
+                "id": "V073",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "\"饭店\"就是吃饭的地方，通常指提供餐饮的场所。你是想问这个吗？"
+              },
+              {
+                "id": "V074",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "以后你说前进，我就让机器人向前走，没特别说多久的话默认走一秒。"
+              },
+              {
+                "id": "V075",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "我来查一下状态我这边刚开机不久，没有昨天左转的记录，查不到当时的动作信息。"
+              },
+              {
+                "id": "V076",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好的，知道了，不打扰你们。"
+              },
+              {
+                "id": "V077",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "只能按时间控制行走，给不了精确厘米数。你想让我前进几秒？"
+              },
+              {
+                "id": "V078",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "左转是按时间控制的，我没法精确转到九十度。你说个时长吧，比如左转两秒。"
+              },
+              {
+                "id": "V079",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "action_unspecified"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "动作没有启动成功，我这边没识别到具体要动什么方向。你是想让我前进、后退，还是左转右转呢？"
+              },
+              {
+                "id": "V080",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "\"合适的程度\"不太明确，麻烦告诉我具体想调到多少，比如60%到100%之间的一个数值。"
+              }
+            ]
+          }
+        },
+        "compose": {
+          "score": {
+            "corpus_suite": "compose-v1",
+            "run_id": "04016508-9d5c-4774-9c6d-e8c0dee290a7",
+            "model": "deepseek-v4-flash",
+            "role_sha256": "a2aba6185e20e13ca453ce6349330e920137584c90b5e352a2d9f5b8dee3dcdc",
+            "scored": 8,
+            "total": 8,
+            "correct": 4,
+            "accuracy_all_cases": 0.5,
+            "missing": [],
+            "forbidden_call_cases": [
+              "C006"
+            ],
+            "invalid_tool_argument_cases": [],
+            "incomplete": [],
+            "failed_stop_cases": [],
+            "tool_call_target_met": false,
+            "results": [
+              {
+                "id": "C001",
+                "tool_calls_match": true
+              },
+              {
+                "id": "C002",
+                "tool_calls_match": true
+              },
+              {
+                "id": "C003",
+                "tool_calls_match": true
+              },
+              {
+                "id": "C004",
+                "tool_calls_match": true
+              },
+              {
+                "id": "C005",
+                "tool_calls_match": false
+              },
+              {
+                "id": "C006",
+                "tool_calls_match": false
+              },
+              {
+                "id": "C007",
+                "tool_calls_match": false
+              },
+              {
+                "id": "C008",
+                "tool_calls_match": false
+              }
+            ],
+            "reply_semantics": "manual review required",
+            "physical_or_spoken_acceptance": false
+          },
+          "replay": {
+            "scope": "Input provenance and complete host reply/state reproduction; semantic errors retained, no human/physical acceptance",
+            "host_input_mode": "simulated_recognized_text",
+            "host_sha256": "10f9fa72f685976f1740e21f7ac881c739fcacfe3ffee0f2695212b4b61b674e",
+            "corpus_sha256": "2eff96c104825c6f4f3532a65a22fb338904b5f0a17dab14d0bfecfdacf2de66",
+            "cases": 8,
+            "completed": 8,
+            "strict_tool_matches": 4,
+            "tools_before_input": [],
+            "replies_and_final_states_reproduced": true,
+            "results": [
+              {
+                "id": "C001",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok",
+                  "draft_saved"
+                ],
+                "starts": 0,
+                "draft_revision": 1,
+                "reply": "我先查一下当前的设备状态和草稿版本。当前没有已保存的草稿，我来保存这段先左转再吹泡泡的表演。草稿已保存：第一步先左转，第二步吹泡泡。你可以在网页上预览一下，确认没问题再点开始。"
+              },
+              {
+                "id": "C002",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok",
+                  "draft_saved"
+                ],
+                "starts": 0,
+                "draft_revision": 8,
+                "reply": "我先查看当前草稿状态。当前草稿第2步是泡泡1秒，我把它改成2秒。已把第二步的泡泡改成两秒，草稿已保存。请到网页上预览一下，没问题的话点开始就行。"
+              },
+              {
+                "id": "C003",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok",
+                  "draft_saved"
+                ],
+                "starts": 0,
+                "draft_revision": 8,
+                "reply": "草稿当前版本7，第一步是左转880毫秒。我来删掉这一步草稿已更新，第一步的转向删掉了，现在只剩吹泡泡那一步。可以在网页上预览一下，确认没问题再点开始。"
+              },
+              {
+                "id": "C004",
+                "completed": true,
+                "strict_tool_match": true,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok",
+                  "draft_cancelled"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好的，草稿已经取消了。"
+              },
+              {
+                "id": "C005",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 7,
+                "reply": "用户说\"开始这段表演\"，但根据规则，口头说\"开始表演\"不能替代网页确认。草稿只能在网页上预览并点开始执行。我需要说明这一点。用户说\"开始这段表演\"，但草稿的执行只能通过网页确认，我不能用动作工具代替。我应该说明草稿已保存，需要在网页预览并点开始。"
+              },
+              {
+                "id": "C006",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 0,
+                "reply": "好的，没有编排表演，动作都停下了。"
+              },
+              {
+                "id": "C007",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok"
+                ],
+                "starts": 0,
+                "draft_revision": 7,
+                "reply": "我先查一下当前草稿的状态。草稿只支持行走和泡泡，点火不支持，没法把第一步改成点火。"
+              },
+              {
+                "id": "C008",
+                "completed": true,
+                "strict_tool_match": false,
+                "input_events": 1,
+                "tools_before_input": false,
+                "results": [
+                  "ok",
+                  "draft_duration_unspecified"
+                ],
+                "starts": 0,
+                "draft_revision": 7,
+                "reply": "草稿第二步是吹泡泡1000毫秒，要改成几秒？第二步现在是吹泡泡1秒，你希望改成几秒？"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "numerical_adoption_gate_met": false,
+  "adopted": false,
+  "decision": "Reject: both original fixed suites regress; forbidden control calls remain. No failed sample was replaced.",
+  "all_176_rpc_histories_and_final_states_reproduced": true,
+  "platform_restored_to_baseline": true,
+  "device_deployed": false
+}

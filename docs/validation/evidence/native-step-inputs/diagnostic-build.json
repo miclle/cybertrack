@@ -1,0 +1,24 @@
+{
+  "version": "2.0.3-ct69",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Rejected native-array diagnostic, not current firmware or a deployment. Native MCP arrays, owned SDK values and raw JSON zero rejection; legacy web/internal format retained.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2718800,
+    "sha256": "305a9f08ffdcea465f55ed0eb4b1a2708bff83238cf43aa113da519bedcd5574"
+  },
+  "checks": [
+    "Complete ESP-IDF build passes.",
+    "Fifteen native array scenarios pass on plain and ASan/UBSan hosts, including deferred argument release, invalid shapes, zero-prefix refusal and semantic parity with ct68 on valid fixtures.",
+    "SDK array schema, owned copies, parameter and web/receipt sanitizer tests pass.",
+    "Eighty/eight expected intent requests and existing input/stop/relative/vague guards pass with explicit generated fixture wire-format projection.",
+    "Sixteen unified software check groups pass, including 98 Python improvement tests.",
+    "Both groups completed the original eighty/eight platform text suites once: baseline 77/80 and 5/8; candidate 75/80 and 4/8. All 176 complete RPC histories/final states reproduce through their pinned hosts.",
+    "Candidate violates the declared non-regression gate; not adopted. Platform baseline role and all original visible model parameters restored and reopened."
+  ],
+  "pending": [
+    "No device, speaker, actual motion or family acceptance.",
+    "Array input is not promoted to the main candidate; source is preserved as an experimental patch."
+  ]
+}
