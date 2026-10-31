@@ -1,0 +1,44 @@
+{
+  "version": "2.0.3-ct66",
+  "source_base": "2b7b1d81fe4703fbd096126f15d5af1db96ea6dc",
+  "decision": "source_candidate_not_deployed",
+  "flashed": false,
+  "platform_configuration_changed": false,
+  "new_platform_sessions": 0,
+  "build": {
+    "version": "v5.5.1",
+    "bytes": 2712576,
+    "sha256": "b4536edcbc1eae6d8cab361207fa3d1017c6672f1e34dd0db8902c92776c7165"
+  },
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "files": {
+    "baseline-host-manifest.json": {
+      "bytes": 4192,
+      "sha256": "326e316dd3a3ce3781c2dd2399f6d17426dd8ba95c2440407f4dd9e5dacfeebd"
+    },
+    "baseline.json.gz": {
+      "bytes": 4230,
+      "sha256": "0dbb0cea99f5c6b3b81d122f7215bf3f88672a201b9a71ddf9567913a5a14722"
+    },
+    "comparison.json": {
+      "bytes": 661,
+      "sha256": "5290ac21aaec4e6e6fffa9654f7cedd03752e9e76fe87edb285e061352a8b5a0"
+    },
+    "host-manifest.json": {
+      "bytes": 4192,
+      "sha256": "88799441cea2bf3ff900a429b44cf5462ddee68001bf50629da8a3e2d5cdfc2b"
+    },
+    "replay.json": {
+      "bytes": 95338,
+      "sha256": "9ebd483f630aa1bc35ddb30983557dd35681b3435800e0facd07aabe1ec7af2f"
+    },
+    "software-checks.json": {
+      "bytes": 4579,
+      "sha256": "2736968fc60ffe86200690d88daf67931b46f99478ea951ebd220edaf672f297"
+    },
+    "tools.json": {
+      "bytes": 17065,
+      "sha256": "69cb372070faec6b43692e6978294b49af836cfca22f1df3dda56eba904acc53"
+    }
+  }
+}

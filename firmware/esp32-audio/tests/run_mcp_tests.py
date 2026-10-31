@@ -15,7 +15,9 @@ build = root / 'build/audio-host'
 build.mkdir(parents=True, exist_ok=True)
 text = (args.source / 'main/mcp_server.cc').read_text()
 start = text.index('    const bool cybertrack =')
-end = text.index('    PropertyList arguments =', start)
+end = text.find('    // Return a validated stop before scheduling any callback.', start)
+if end < 0:
+    end = text.index('    PropertyList arguments =', start)
 (build / 'argument_checks.inc').write_text(text[start:end])
 cjson = args.idf / 'components/json/cJSON'
 flags = ['-g', '-fsanitize=address,undefined', '-Wall', '-Wextra', '-Werror']
@@ -37,7 +39,7 @@ for name, args, expected in (
     result = json.loads(subprocess.check_output([str(build/'mcp_validation_replay')],
         input=json.dumps(dict(name=name,arguments=args)), text=True))
     assert result['valid'] is expected
-    assert result['stop_requested'] is (name=='self.tank.stop')
+    assert result['stop_requested'] is False # Parameter validation has no output side effects.
     assert bool(result['error']) is (not expected)
 
 subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson),
@@ -64,7 +66,7 @@ end = receipt_source.index('\n}\n}', start) + 2
 (build / 'receipt_reply.inc').write_text(receipt_source[start:end])
 subprocess.run(['cc', '-std=c11', *flags, '-I', str(root/'firmware/esp32-linx/main'), '-c',
                 str(root/'firmware/esp32-linx/main/water_policy.c'), '-o', str(build/'receipt_water_policy.o')], check=True)
-for executable in ('receipt_adapter_test','receipt_replay','admission_result_test','voice_effect_feedback_test'):
+for executable in ('receipt_adapter_test','receipt_replay','admission_result_test','voice_effect_feedback_test','stop_allocation_test'):
     subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
                     '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
                     str(Path(__file__).with_name(executable+'.cc')), str(build/'cJSON.o'),
@@ -72,6 +74,7 @@ for executable in ('receipt_adapter_test','receipt_replay','admission_result_tes
 subprocess.run([str(build/'receipt_adapter_test')], check=True)
 subprocess.run([str(build/'admission_result_test')], check=True)
 subprocess.run([str(build/'voice_effect_feedback_test')], check=True)
+subprocess.run([str(build/'stop_allocation_test')], check=True)
 
 # Replay both admission outcomes against the same dispatch contract as the board.
 speed_call = dict(name='self.tank.set_speed', arguments={'speed_percent':100}, elapsed_ms=1800)

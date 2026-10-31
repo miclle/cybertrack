@@ -111,3 +111,5 @@ python3 scripts/analyze_maintenance.py docs/validation/templates.json \
 原型和实机按场次、载体、版本及网络条件分别汇总。原型结果标为 `prototype_only`。每项收齐五组可判定观察后才显示达到或未达到门槛。来源不明的历史记录单列，模拟数据不得充当家庭观察。定性判断另需结合家长的使用场合、顾虑和维护接受度。
 
 [停止说明对照](stop-negation.md)保留 ct65 未采纳结果及补充十二条语料。定向集与完整固定集分开报告，不能用 C006 成功覆盖 V064／V079 的禁止调用。
+
+[ct66 即时停止回执](stop-dispatch.md)提供八组实际 MCP 调度回放、分配失败测试及十三组统一检查；不新增模型或实体成绩。

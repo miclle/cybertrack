@@ -31,4 +31,20 @@ def apply(source, replace):
     updated = updated.replace('            cybertrack_feedback.Receipt(feedback_call, receipt.c_str());',
                               '            if (robot_tool) CyberTrackVoiceResult(voice_turn, receipt.c_str());\n'
                               '            cybertrack_feedback.Receipt(feedback_call, receipt.c_str());', 1)
+    # Stop has already passed its strict empty-argument check. Unlike actions
+    # and reads, it must finish here, with no second callback left in the queue.
+    updated = updated.replace('    PropertyList arguments = (*tool_iter)->properties();', '''    // Return a validated stop before scheduling any callback.
+    if (tool_name == "self.tank.stop") {
+        try {
+            std::string receipt;
+            auto result = (*tool_iter)->Call(PropertyList(), &receipt);
+            CyberTrackVoiceResult(voice_turn, receipt.c_str());
+            cybertrack_feedback.Receipt(feedback_call, receipt.c_str());
+            ReplyResult(id, result);
+        } catch (const std::exception& e) {
+            reject(e.what());
+        }
+        return;
+    }
+    PropertyList arguments = (*tool_iter)->properties();''', 1)
     replace(path, body, updated)

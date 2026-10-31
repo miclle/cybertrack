@@ -119,12 +119,20 @@ void SafetyTask(void*) {
 }
 std::string Reply(int voice_turn, const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
                   uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100, const ShowDraft::Command* edit = nullptr) {
+    // A validated stop runs synchronously. Apply it before receipt allocation;
+    // a later input or reporting failure must never defer the output shutdown.
+    if (!web_session && !strcmp(operation, "stop")) {
+        xSemaphoreTake(lock, portMAX_DELAY);
+        sessions.Stop(Now());
+        ApplyLocked(Now());
+        xSemaphoreGive(lock);
+    }
     // Reserve before accepting an action.
     std::string result; result.reserve(7000);
     xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
     const char* outcome = "ok";
-    if (voice_turn >= 0 && voice_turn != sessions.voice_turn) {
+    if (voice_turn >= 0 && strcmp(operation, "stop") && voice_turn != sessions.voice_turn) {
         outcome = "voice_input_changed";
     } else if (voice_turn >= 0 && strcmp(operation, "stop") && strcmp(operation, "get_status") && !sessions.VoiceTurnReady(voice_turn)) {
         outcome = "voice_input_failed";
@@ -132,7 +140,7 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
         outcome = "session_expired";
     } else if (web_session && !strcmp(operation, "get_status")) {
         if (!sessions.Heartbeat(now, web_session)) outcome = "session_expired";
-    } else if (!strcmp(operation, "stop")) {
+    } else if (web_session && !strcmp(operation, "stop")) {
         sessions.Stop(now);
     } else if (web_session && !strcmp(operation, "release")) {
         sessions.Release(now, web_session);
@@ -426,7 +434,7 @@ void InitializeCyberTrackTools() {
         PropertyList(), [](const PropertyList& p) -> ReturnValue { return Reply(p["_ct_turn"].value<int>(), "get_status"); });
     server.AddTool("self.tank.stop",
         "明确要求停止、停下、关闭正在运行的动作时立即调用，无需先查询。只是否定要做的动作（例如“不要前进”）且没有要求停止时不调用。立即停止两台电机、水枪、泡泡和点火及狂暴模式并取消全部排队动作，不关闭语音和屏幕。",
-        PropertyList(), [](const PropertyList& p) -> ReturnValue { return Reply(p["_ct_turn"].value<int>(), "stop"); });
+        PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("stop"); });
     server.AddTool("self.tank.water",
         "用户明确要求喷水时直接调用，无需按键授权。最短时长是1毫秒，不是1秒；明确说零点五秒或0.5秒时传500，0.001秒传1。未说时长才默认1000，不能擅自把明确的小数秒改成一秒，也不能声称最短一秒。duration_ms按用户时长换算为整数毫秒，范围1到30000；超过30秒只执行30秒并说明，明确要求喷水但未说时长时传1000。到期自动关闭，BOOT可提前停止。不得连续、延长或失败自动重试。可与行走同时执行、分别计时。同路正在执行时拒绝，结束后至少等待200毫秒，不排队补做。成功仅表示控制请求已接受。",
         PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 30000)}),
