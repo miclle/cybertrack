@@ -123,7 +123,7 @@ def main():
     replace_once(source / "main/mcp_server.h",
                  'cJSON_AddItemToObject(input_schema, "properties", properties);',
                  'cJSON_AddItemToObject(input_schema, "properties", properties);\n'
-                 '        if (name_ == "self.tank.get_status" || name_ == "self.tank.stop" || name_ == "self.tank.water" || name_ == "self.tank.move" || name_ == "self.tank.move_and_water" || name_ == "self.tank.bubbles" || name_ == "self.tank.ignition" || name_ == "self.tank.frenzy" || name_ == "self.tank.sequence" || name_ == "self.tank.adjust_speed" || name_ == "self.tank.set_speed") {\n'
+                 '        if (name_ == "self.tank.compose" || name_ == "self.tank.get_status" || name_ == "self.tank.stop" || name_ == "self.tank.water" || name_ == "self.tank.move" || name_ == "self.tank.move_and_water" || name_ == "self.tank.bubbles" || name_ == "self.tank.ignition" || name_ == "self.tank.frenzy" || name_ == "self.tank.sequence" || name_ == "self.tank.adjust_speed" || name_ == "self.tank.set_speed") {\n'
                  '            cJSON_AddBoolToObject(input_schema, "additionalProperties", false);\n'
                  '        }')
     replace_once(source / "main/mcp_server.cc", '    PropertyList arguments = (*tool_iter)->properties();',

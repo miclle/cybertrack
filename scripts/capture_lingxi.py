@@ -121,6 +121,7 @@ async def capture_case(connection,tools,case,timeout=45):
     timeline = row['timeline'] = []
     def mark(event, **details):
         timeline.append(dict(ms=round((time.monotonic()-opened)*1000), event=event, **details))
+    draft_observed_at=None
     session=None;sent=False;deadline=opened+timeout;audio_bytes=0
     async with connect(ENDPOINT,additional_headers=headers,proxy=None,open_timeout=15,max_size=2**20) as ws:
         async def send(message):await ws.send(json.dumps(message,ensure_ascii=False))
@@ -146,7 +147,13 @@ async def capture_case(connection,tools,case,timeout=45):
                     row['calls'].append(dict(name=name,arguments=args))
                     try:
                         if name.replace('self_tank_','self.tank.',1) not in {t['name'] for t in tools}:raise ValueError('unknown tool')
-                        receipt=simulated_reply(status,name,args)
+                        if case.get('ct46') and name.endswith('compose') and (
+                                draft_observed_at is None or time.monotonic()-draft_observed_at >= 30):
+                            receipt={**copy.deepcopy(status),'operation':'show_edit','result':'draft_changed'}
+                        else:
+                            receipt=simulated_reply(status,name,args)
+                        if name.endswith('compose') or name.endswith('stop'):draft_observed_at=None
+                        if name.endswith('get_status'):draft_observed_at=time.monotonic()
                         if case.get('ct46') and name.endswith('get_status'):
                             helper = Path(__file__).resolve().parents[1] / 'build/lingxi-schema-export/status-fixture'
                             receipt['status_facts'] = subprocess.run([str(helper)], input=json.dumps(receipt),

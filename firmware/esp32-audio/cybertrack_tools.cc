@@ -237,6 +237,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     const char* plan_result = sessions.plan_result;
     recent_command.Record(now, operation, outcome, web_session != 0);
     const auto recent = recent_command;
+    if (!web_session && !strcmp(operation, "get_status")) sessions.ObserveVoiceDraft(now);
     const auto draft = sessions.draft;
     const auto plan_source = sessions.PlanSource();
     xSemaphoreGive(lock);
@@ -423,7 +424,7 @@ void InitializeCyberTrackTools() {
             return Reply("adjust_speed", p["_ct_ticket"].value<int>(), p["delta_percent"].value<int>());
         });
     server.AddTool("self.tank.compose",
-        "仅当用户明确编排、预览或修改泡泡表演草稿时使用；不执行动作。先get_status读取show_draft最新revision与steps。参数edit为replace/replace_step/remove_step/cancel，revision为当前草稿版本，无草稿填0；step为从1开始的步骤索引，整单替换或取消填0；steps_json沿用sequence步骤格式，首版仅行走与泡泡，water_ms/ignition_ms均0。replace传完整1到16步，replace_step只传单步数组，其余步骤由设备保留；remove_step/cancel传空字符串。draft_saved表示保存未执行，简短说明改动并请家长在网页预览后点开始；draft_changed先说明版本已变，不自动重试。不能用sequence/move等工具替代确认；没有语音确认执行工具。",
+        "仅当用户明确编排、预览或修改泡泡表演草稿时使用；不执行动作。每次改稿前必须在本次会话调用get_status读取show_draft最新revision与steps，即使用户或上下文已经给出版本也要查。只允许行走和吹泡泡。喷水、点火、放电、护盾等不支持的效果只说明限制，不调用本工具，不提交空数组。用户说短一点等相对时长且没有明确新时长时，只问要改成几秒。参数edit为replace/replace_step/remove_step/cancel，revision为当前草稿版本，无草稿填0；step为从1开始的步骤索引，整单替换或取消填0；steps_json沿用sequence步骤格式，首版仅行走与泡泡，water_ms/ignition_ms均0。replace传完整1到16步，replace_step只传单步数组，其余步骤由设备保留；remove_step/cancel传空字符串。draft_saved表示保存未执行，简短说明改动并请家长在网页预览后点开始；draft_changed先说明版本已变，不自动重试。不能用sequence/move等工具替代确认；没有语音确认执行工具。",
         PropertyList({Property("edit", kPropertyTypeString), Property("revision", kPropertyTypeInteger, 0, INT_MAX),
                       Property("step", kPropertyTypeInteger, 0, 16), Property("steps_json", kPropertyTypeString)}),
         [](const PropertyList& p) -> ReturnValue {
