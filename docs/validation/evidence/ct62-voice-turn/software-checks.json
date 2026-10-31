@@ -1,0 +1,116 @@
+{
+  "scope": "local software checks only",
+  "created_utc": "20261031T110024074594Z",
+  "git_head_before_commit": "2b33fcc0c4f15c1ba16432ce568ddccd8c7697d5",
+  "passed": true,
+  "prepared_source_checked": true,
+  "checks": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/check_firmware_current.py"
+      ],
+      "exit_code": 0,
+      "log_sha256": "0c97baf21de36e2d458553e0a2e60de98bc22539e91c02d5118d161cf669b9b9"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "sh",
+        "firmware/esp32-audio/test.sh"
+      ],
+      "exit_code": 0,
+      "log_sha256": "f6a9150318b4b986dcc3ef2a2fcb590b2f68bd19c2fc8b2e26c5f47c24a264cc"
+    },
+    {
+      "command": [
+        "node",
+        "firmware/esp32-audio/tests/web_ui_test.mjs"
+      ],
+      "exit_code": 0,
+      "log_sha256": "d53dbd78d05bd6783d528cd7895e42ffb33987b0215136e04c5f2ae40dceb089"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/improvements"
+      ],
+      "exit_code": 0,
+      "log_sha256": "24046c0ebfd1336040c59aa37cff2fffcd2d2fd940e86f9759f1988b550efb61"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/replay_stop_matrix.py",
+        "--source",
+        "/Users/miclle/github/miclle/cybertrack/build/xiaozhi-ct62-src"
+      ],
+      "exit_code": 0,
+      "log_sha256": "50c41c785ff39d137b6cf2441a720099432989b03aeff814c7a20264ce8b79b1"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "firmware/esp32-audio/tests/run_mcp_tests.py",
+        "--source",
+        "/Users/miclle/github/miclle/cybertrack/build/xiaozhi-ct62-src"
+      ],
+      "exit_code": 0,
+      "log_sha256": "6edbdff95fe32606908b8913a4c2102fa7502280f3ed047cd606225707a1b976"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "firmware/esp32-audio/tests/run_audio_tests.py",
+        "--source",
+        "/Users/miclle/github/miclle/cybertrack/build/xiaozhi-ct62-src"
+      ],
+      "exit_code": 0,
+      "log_sha256": "c1518be5f84b54974eac0f93f5bac0833909cba5bee866ab3360d7fc6e96c106"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/build_firmware_host.py",
+        "--source",
+        "/Users/miclle/github/miclle/cybertrack/build/xiaozhi-ct62-src",
+        "--output",
+        "/Users/miclle/github/miclle/cybertrack/build/full-firmware-host"
+      ],
+      "exit_code": 0,
+      "log_sha256": "243dd0a2675bfafbe903a3388fd4f4cd7486180a99d68253ffbea1aef905825e"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/check_firmware_host.py",
+        "--executable",
+        "/Users/miclle/github/miclle/cybertrack/build/full-firmware-host/firmware_host"
+      ],
+      "exit_code": 0,
+      "log_sha256": "b7c71b51291ed797a312a7ec17e923461384d884d8ababe2718922c30249912e"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "scripts/check_voice_turn.py",
+        "--executable",
+        "/Users/miclle/github/miclle/cybertrack/build/full-firmware-host/firmware_host"
+      ],
+      "exit_code": 0,
+      "log_sha256": "ac6da140cf823e1aed1541b62f6d85cda371e330831842c9abb5c189af5071db"
+    }
+  ]
+}

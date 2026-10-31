@@ -30,7 +30,7 @@ def build(source, idf, output):
     if callbacks.count("server.AddTool(") != 12:
         raise ValueError("expected 12 robot tools")
     (output / "host_registration.inc").write_text(callbacks)
-    start = registration.index("int CyberTrackActionClaim(")
+    start = registration.index("int CyberTrackVoiceTurn(")
     end = registration.index("void CyberTrackActionLink(", start)
     (output / "host_admission.inc").write_text(registration[start:end])
     start = registration.index("std::string Reply(")
@@ -51,7 +51,7 @@ def build(source, idf, output):
                     str(output/"cJSON.o"), str(output/"water_policy.o"), "-o", str(executable)], check=True)
     paths = [board/name for name in names] + [ROOT/"firmware/esp32-audio/tests/receipt_host.h", source/"main/mcp_server.cc", source/"main/mcp_server.h", board/"cybertrack_tools.cc",
              ROOT/"firmware/esp32-audio/tests/firmware_host.cc", Path(__file__).resolve()]
-    manifest = dict(scope="Full MCP dispatcher and actual callbacks; immediate host schedule; simulated distance; zero board IO",
+    manifest = dict(scope="Full MCP dispatcher and actual callbacks; immediate or explicitly deferred host schedule; simulated input/time/distance; zero board IO",
                     executable_sha256=hashlib.sha256(executable.read_bytes()).hexdigest(),
                     sources={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths})
     (output/"manifest.json").write_text(json.dumps(manifest, indent=2)+"\n")

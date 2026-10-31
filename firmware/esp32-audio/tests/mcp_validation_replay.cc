@@ -13,6 +13,7 @@ static void CyberTrackActionStop() { stopped = true; }
 #define ESP_LOGI(...) ((void)0)
 static void Validate(const std::string& tool_name, cJSON* tool_arguments) {
     [[maybe_unused]] const int id = 1;
+    auto reject = [](const char* message) { ReplyError(1, message); };
 #include "argument_checks.inc"
 }
 int main() {

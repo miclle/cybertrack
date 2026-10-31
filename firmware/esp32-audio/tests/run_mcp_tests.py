@@ -83,7 +83,7 @@ for profile in ('thirty_second_forward70', 'idle', 'voice_offline', 'wifi_offlin
         assert 'auto result = CyberTrackAdmissionResult(tool_name.c_str()+10, admission_error);' in text
         assert 'else ReplyResult(id, result);' in text
         assert reply['result']=='rejected' and reply['physical_feedback'] is False
-        assert 'CyberTrackActionClaim(id, tool_name.c_str(), &admission_error)' in text
+        assert 'CyberTrackActionClaim(id, tool_name.c_str(), &admission_error, voice_turn)' in text
         expected = {'idle':'not_moving', 'voice_offline':'voice_offline', 'wifi_offline':'wifi_offline'}
         assert reply['rejection_reason'].startswith('speed_rejected_' + expected[profile] + ':')
         assert final['starts_this_boot'] == 0 and not any(final['logical_outputs'].values())

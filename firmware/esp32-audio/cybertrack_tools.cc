@@ -117,14 +117,18 @@ void SafetyTask(void*) {
         vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
-std::string Reply(const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
+std::string Reply(int voice_turn, const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
                   uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100, const ShowDraft::Command* edit = nullptr) {
     // Reserve before accepting an action.
     std::string result; result.reserve(7000);
     xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
     const char* outcome = "ok";
-    if (web_session && !sessions.Owns(web_session)) {
+    if (voice_turn >= 0 && voice_turn != sessions.voice_turn) {
+        outcome = "voice_input_changed";
+    } else if (voice_turn >= 0 && strcmp(operation, "stop") && strcmp(operation, "get_status") && !sessions.VoiceTurnReady(voice_turn)) {
+        outcome = "voice_input_failed";
+    } else if (web_session && !sessions.Owns(web_session)) {
         outcome = "session_expired";
     } else if (web_session && !strcmp(operation, "get_status")) {
         if (!sessions.Heartbeat(now, web_session)) outcome = "session_expired";
@@ -199,6 +203,9 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     }
     ApplyLocked(now);
     if (outputs.fault) outcome = "output_fault";
+    if (voice_turn >= 0 && strcmp(outcome, "ok") && strcmp(outcome, "accepted") &&
+        strcmp(outcome, "draft_saved") && strcmp(outcome, "draft_cancelled"))
+        sessions.FailVoiceTurn(voice_turn);
     const bool watering = guard.Watering(), moving = guard.Moving(), bubbling = guard.Bubbling(), igniting = guard.Igniting();
     const int left = moving ? guard.left : 0, right = moving ? guard.right : 0;
     const char* move_direction = moving ? guard.direction : "none";
@@ -237,7 +244,7 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     const char* plan_result = sessions.plan_result;
     recent_command.Record(now, operation, outcome, web_session != 0);
     const auto recent = recent_command;
-    if (!web_session && !strcmp(operation, "get_status")) sessions.ObserveVoiceDraft(now);
+    if (!web_session && !strcmp(operation, "get_status") && !strcmp(outcome, "ok")) sessions.ObserveVoiceDraft(now);
     const auto draft = sessions.draft;
     const auto plan_source = sessions.PlanSource();
     xSemaphoreGive(lock);
@@ -297,10 +304,45 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
     if (!web_session || (strcmp(operation, "get_status") && strcmp(operation, "drive_renew") && strcmp(operation, "water_renew") && strcmp(operation, "bubbles_renew")))
         ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
     return result;
+
+}
+std::string Reply(const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
+                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100, const ShowDraft::Command* edit = nullptr) {
+    // Trusted board/web calls have no remote input token. MCP always passes one.
+    return Reply(-1, operation, ticket, duration, direction, water_duration, web_session, command, plan, speed_percent, edit);
 }
 }
 
-int CyberTrackActionClaim(int rpc_id, const char* operation, const char** error) {
+int CyberTrackVoiceTurn() {
+    xSemaphoreTake(lock, portMAX_DELAY);
+    const int turn = sessions.voice_turn;
+    xSemaphoreGive(lock);
+    return turn;
+}
+void CyberTrackVoiceInput(const char* text) {
+    if (!text || !*text) return;
+    bool content = false;
+    for (const char* p = text; *p; ++p) if (*p != ' ' && *p != '\t' && *p != '\r' && *p != '\n') { content = true; break; }
+    if (!content) return;
+    xSemaphoreTake(lock, portMAX_DELAY);
+    sessions.AdvanceVoiceTurn(true);
+    xSemaphoreGive(lock);
+}
+void CyberTrackVoiceFailure(int turn) {
+    xSemaphoreTake(lock, portMAX_DELAY);
+    sessions.FailVoiceTurn(turn);
+    xSemaphoreGive(lock);
+}
+void CyberTrackVoiceResult(int turn, const char* receipt) {
+    auto* object = cJSON_Parse(receipt);
+    const auto* result = cJSON_GetObjectItemCaseSensitive(object, "result");
+    const bool success = cJSON_IsString(result) && (!strcmp(result->valuestring, "ok") || !strcmp(result->valuestring, "accepted") ||
+        !strcmp(result->valuestring, "draft_saved") || !strcmp(result->valuestring, "draft_cancelled"));
+    cJSON_Delete(object);
+    if (!success) CyberTrackVoiceFailure(turn);
+}
+
+int CyberTrackActionClaim(int rpc_id, const char* operation, const char** error, int voice_turn) {
     xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
     const auto target = (!strcmp(operation, "self.tank.adjust_speed") || !strcmp(operation, "self.tank.set_speed")) ? AudioActionGuard::SpeedMode :
@@ -311,8 +353,10 @@ int CyberTrackActionClaim(int rpc_id, const char* operation, const char** error)
         !strcmp(operation, "self.tank.bubbles") ? AudioActionGuard::BubblesOnly :
         !strcmp(operation, "self.tank.ignition") ? AudioActionGuard::IgnitionOnly :
         !strcmp(operation, "self.tank.move_and_water") ? AudioActionGuard::Both : static_cast<AudioActionGuard::Target>(0);
-    int ticket = sessions.VoiceClaim(now, rpc_id, target);
-    if (error) *error = ticket ? nullptr : sessions.VoiceClaimError(target);
+    int ticket = sessions.VoiceClaim(now, rpc_id, target, voice_turn);
+    if (error) *error = ticket ? nullptr : (!sessions.wifi || !sessions.voice || sessions.shutdown || voice_turn < 0 || sessions.VoiceTurnReady(voice_turn))
+        ? sessions.VoiceClaimError(target) : sessions.VoiceTurnError(voice_turn);
+    if (!ticket && voice_turn >= 0) sessions.FailVoiceTurn(voice_turn);
     xSemaphoreGive(lock);
     return ticket;
 }
@@ -379,39 +423,39 @@ void InitializeCyberTrackTools() {
     auto& server = McpServer::GetInstance();
     server.AddTool("self.tank.get_status",
         "用status_facts中的设备事实简短回答所问部分。动作方向、速度和剩余时长都是回执采样瞬间的快照。只问方向或速度时不要附加倒计时。明确问还要多久时，先看所问通道是否由网页长按控制。若是，只说明何时结束取决于松手、停止或续租中断，不报秒数；只有定时通道才按对应通道remaining_ms简短说明“刚才查询时还剩约…秒”，不要当作播报时的当前值。查询时未运行就说明当时没有该动作计时。无法保证听完回复时仍在运行；不要轮询或延长动作。不要推测拒绝原因、停止原因、电量或自动恢复。查询CyberTrack状态或前方距离，参数为空。问为什么没动时只查询，不启动或重试。recent_command是本次开机最近一次动作请求回执，含operation/result/source/age_ms；查询不覆盖它，成功续租不覆盖它。它不是最后停机原因或物理反馈，较旧记录不能解释当前现象；valid=false或age_ms=null时不能推断。结合当前boot_held、fault、各通道remaining/cooldown和proximity说明已知状态；not_ready_or_busy不能凭空细分原因。accepted只表示逻辑接受，不能说实际已移动；未知就说明无法确认，不猜电池没电或线路故障。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能由云端轮询后自动行走、绕行或推算移动距离。有效距离不足50厘米时发出滴声，越近越密，不受自动避障开关或行走状态影响；至少50厘米或读数无效、过期时不响。proximity.auto_avoidance_enabled为网页自动避障开关，开机默认false、网页与语音共用；仅true时小于15厘米禁止前进，正在前进则停止并响三声；false时不因距离停前进。开关仅由网页设置，关闭不会恢复旧动作。proximity.forward_blocked为前进锁定，恢复至20厘米后允许新指令，不自动恢复。obstacle_blocked表示前进受阻，不重试。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
-        PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("get_status"); });
+        PropertyList(), [](const PropertyList& p) -> ReturnValue { return Reply(p["_ct_turn"].value<int>(), "get_status"); });
     server.AddTool("self.tank.stop",
         "明确要求停止、停下、关闭正在运行的动作时立即调用，无需先查询。只是否定要做的动作（例如“不要前进”）且没有要求停止时不调用。立即停止两台电机、水枪、泡泡和点火及狂暴模式并取消全部排队动作，不关闭语音和屏幕。",
-        PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("stop"); });
+        PropertyList(), [](const PropertyList& p) -> ReturnValue { return Reply(p["_ct_turn"].value<int>(), "stop"); });
     server.AddTool("self.tank.water",
         "用户明确要求喷水时直接调用，无需按键授权。最短时长是1毫秒，不是1秒；明确说零点五秒或0.5秒时传500，0.001秒传1。未说时长才默认1000，不能擅自把明确的小数秒改成一秒，也不能声称最短一秒。duration_ms按用户时长换算为整数毫秒，范围1到30000；超过30秒只执行30秒并说明，明确要求喷水但未说时长时传1000。到期自动关闭，BOOT可提前停止。不得连续、延长或失败自动重试。可与行走同时执行、分别计时。同路正在执行时拒绝，结束后至少等待200毫秒，不排队补做。成功仅表示控制请求已接受。",
         PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 30000)}),
         [](const PropertyList& p) -> ReturnValue {
-            return Reply("water", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
+            return Reply(p["_ct_turn"].value<int>(), "water", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
     server.AddTool("self.tank.bubbles",
         "仅在用户明确要求吹泡泡时调用。用户指定超过三十秒时，必须在本次调用前将duration_ms设为30000，例如六十秒、一分钟或更长都只传30000；绝不能把60000等越界值发给设备。说明上限不能替代传入合法参数。duration_ms是1到30000的整数毫秒；未说时长传1000，超过三十秒只请求30000并说明，不分段。与行走、喷水和点火独立并行；同路不续时、不排队，停止后间隔200毫秒。不自动重试。BOOT和停止工具全停。接受回执不代表实际出泡。",
         PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 30000)}),
         [](const PropertyList& p) -> ReturnValue {
-            return Reply("bubbles", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
+            return Reply(p["_ct_turn"].value<int>(), "bubbles", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
     server.AddTool("self.tank.ignition",
         "仅在用户明确要求点火或火花效果时调用，不从喷水、泡泡或行走指令推断点火。一个通道同时控制两只模块。duration_ms是1到5000的整数毫秒；未说时长传1000，超过五秒只请求5000并说明，不分段、不循环、不续时、不自动重试。与其他动作独立并行，停止后至少间隔本次实际通电时长（提前停止也按实际时长计算）且必须新指令。BOOT和停止工具全停。接受回执仅为逻辑状态，不代表实际火花或硬件验收。",
         PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 5000)}),
         [](const PropertyList& p) -> ReturnValue {
-            return Reply("ignition", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
+            return Reply(p["_ct_turn"].value<int>(), "ignition", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
     server.AddTool("self.tank.frenzy",
         "仅在用户明确要求开启狂暴模式时调用。duration_ms为1到30000的整数毫秒；未说时长默认5000，超过三十秒只请求30000并说明，不分段。模式持续左转、喷水和吹泡泡，点火每次最多一秒、停止后至少间隔实际通电时长；到时全停。四路均就绪才整体启动，运行中不续时、不自动重试或补做。停止工具、BOOT、语音连接关闭或Wi-Fi断开取消。否定句、状态询问及含糊效果请求不启动。按frenzy_last_duration_ms确认时长，不代表实际动作反馈。",
         PropertyList({Property("duration_ms", kPropertyTypeInteger, 1, 30000)}),
         [](const PropertyList& p) -> ReturnValue {
-            return Reply("frenzy", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
+            return Reply(p["_ct_turn"].value<int>(), "frenzy", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>());
         });
     server.AddTool("self.tank.move",
         "仅在明确要求行走或转向时调用。direction只能为forward前进、backward后退、left向左原地转、right向右原地转。duration_ms按指定时长换算为整数毫秒，范围1到2147483647（协议整数范围），没有三秒业务上限；未说时长时，100%速度（含省略速度）的left/right默认880，其他情况1000；明确指定时长优先。全速前进/后退/左转/右转均传speed_percent=100及对应direction。不支持角度或距离精确控制。speed_percent为可选整数60到100，默认100；速度60表示60%，百分比控制PWM而非实测轮速。可与喷水同时执行、分别计时；同路运行中不续时或换向，行走结束后至少等待200毫秒。不得续时、自动重试或排队补做。BOOT或停止工具同时停止所有动作。回执不是实际移动反馈。",
         PropertyList({Property("direction", kPropertyTypeString), Property("duration_ms", kPropertyTypeInteger, 1, 2147483647), Property("speed_percent", kPropertyTypeInteger, 100, 60, 100)}),
         [](const PropertyList& p) -> ReturnValue {
-            return Reply("move", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>(),
+            return Reply(p["_ct_turn"].value<int>(), "move", p["_ct_ticket"].value<int>(), p["duration_ms"].value<int>(),
                          p["direction"].value<std::string>().c_str(), 0, 0, nullptr, nullptr, p["speed_percent"].value<int>());
         });
     server.AddTool("self.tank.move_and_water",
@@ -419,20 +463,20 @@ void InitializeCyberTrackTools() {
         PropertyList({Property("direction", kPropertyTypeString), Property("move_duration_ms", kPropertyTypeInteger, 1, 2147483647),
                       Property("water_duration_ms", kPropertyTypeInteger, 1, 30000), Property("speed_percent", kPropertyTypeInteger, 100, 60, 100)}),
         [](const PropertyList& p) -> ReturnValue {
-            return Reply("move_and_water", p["_ct_ticket"].value<int>(), p["move_duration_ms"].value<int>(),
+            return Reply(p["_ct_turn"].value<int>(), "move_and_water", p["_ct_ticket"].value<int>(), p["move_duration_ms"].value<int>(),
                          p["direction"].value<std::string>().c_str(), p["water_duration_ms"].value<int>(), 0, nullptr, nullptr, p["speed_percent"].value<int>());
         });
     server.AddTool("self.tank.set_speed",
         "单说“全速”“最快”“最大速度”“调到全速”，直接调用本工具一次，speed_percent=100。不要先查询状态、追问或播报计划。由本次回执判断，接受后静默。拒绝时只解释错误明确给出的事实：speed_rejected_not_moving表示请求时未移动，speed_rejected_wifi_offline表示设备Wi-Fi离线，speed_rejected_voice_offline表示语音控制链路离线，speed_rejected_shutdown表示正在关机。离线不能解释为没有移动；通用错误只说这次没确认成功。拒绝后不建议试动、不启动、不重试。带方向的“全速前进”等另按行走规则处理。用户说减速到60%、加速到80%、速度调到70、调到全速时调用，唯一参数speed_percent为60到100整数，全速=100。有明确目标数值时用本工具，不用adjust_speed多次拼接，不调用move重新启动。不改变方向、截止时间、长按租期或其他动作，序列仅改当前步骤；网页移动同步滑块。停止或步骤等待时拒绝，不启动、不重试。accepted后静默；低于60或高于100的请求先说明范围并让用户选择，不擅自执行其他速度。",
         PropertyList({Property("speed_percent", kPropertyTypeInteger, 60, 100)}),
         [](const PropertyList& p) -> ReturnValue {
-            return Reply("set_speed", p["_ct_ticket"].value<int>(), p["speed_percent"].value<int>());
+            return Reply(p["_ct_turn"].value<int>(), "set_speed", p["_ct_ticket"].value<int>(), p["speed_percent"].value<int>());
         });
     server.AddTool("self.tank.adjust_speed",
         "仅在用户明确要求正在移动的机器人加速/加快速度/快一点或减速/减慢速度/慢一点时调用。delta_percent只能为10或-10，分别增加或减少10个百分点，固件将结果限制在60到100。每句一次，不循环调用。只调整当前行走或转向（含网页移动、序列当前步骤、狂暴模式），不启动移动、不改方向、不续时，也不改序列后续步骤；停止或等待步骤时拒绝，不能改用move启动或重试。accepted后静默，失败简短说明；move_speed_percent为设置值，不是实际轮速。",
         PropertyList({Property("delta_percent", kPropertyTypeInteger, -10, 10)}),
         [](const PropertyList& p) -> ReturnValue {
-            return Reply("adjust_speed", p["_ct_ticket"].value<int>(), p["delta_percent"].value<int>());
+            return Reply(p["_ct_turn"].value<int>(), "adjust_speed", p["_ct_ticket"].value<int>(), p["delta_percent"].value<int>());
         });
     server.AddTool("self.tank.compose",
         "查询get_status只读取现状，绝不创建或保存草稿。用户明确要求新建或修改表演时，查完版本必须实际调用本工具，拿到本次result=draft_saved和新revision后才能说已保存；没有保存回执时说明尚未保存，不能凭计划或旧草稿宣称完成。取消也必须先实际查询，再调用cancel并收到draft_cancelled才说已取消。不要播报推理或操作计划。仅当用户明确编排、预览或修改泡泡表演草稿时使用；不执行动作。每次改稿前必须在本次会话调用get_status读取show_draft最新revision与steps，即使用户或上下文已经给出版本也要查。只允许行走和吹泡泡。喷水、点火、放电、护盾等不支持的效果只说明限制，不调用本工具，不提交空数组。用户说短一点等相对时长且没有明确新时长时，只问要改成几秒。参数edit为replace/replace_step/remove_step/cancel，revision为当前草稿版本，无草稿填0；step为从1开始的步骤索引，整单替换或取消填0；“同时／一边…一边”把行走和泡泡写进同一个步骤，各填各的时长；“先…再／然后”写为先后两步。回顾用户要求的先后关系再保存。steps_json沿用sequence步骤格式，首版仅行走与泡泡，water_ms/ignition_ms均0。replace传完整1到16步，replace_step只传单步数组，其余步骤由设备保留；remove_step/cancel传空字符串。draft_saved表示保存未执行，简短说明改动并请家长在网页预览后点开始；draft_changed先说明版本已变，不自动重试。不能用sequence/move等工具替代确认；没有语音确认执行工具。",
@@ -447,7 +491,7 @@ void InitializeCyberTrackTools() {
             ShowDraft::Command edit;
             const bool valid = ParseShowEdit(root, edit); cJSON_Delete(root);
             if (!valid) return std::string("{\"result\":\"invalid_plan\"}");
-            return Reply("show_edit", p["_ct_ticket"].value<int>(), 0, nullptr, 0, 0, nullptr, nullptr, 100, &edit);
+            return Reply(p["_ct_turn"].value<int>(), "show_edit", p["_ct_ticket"].value<int>(), 0, nullptr, 0, 0, nullptr, nullptr, 100, &edit);
         });
     server.AddTool("self.tank.sequence",
         "直接动作指令使用本工具；明确编排、预览或修改草稿用compose，不得用本工具代替草稿确认。明确请求多个先后步骤或多通道同时执行时，一次提交整个序列，不能拆成连续单项调用。steps_json是JSON数组的字符串，1到16步，每步必须包含direction、move_ms、water_ms、bubbles_ms、ignition_ms五字段，可选speed_percent为60到100整数、默认100；每步独立指定行走PWM，全句指定速度时应用到各行走步骤。direction为forward/backward/left/right；不行走用none且move_ms=0。各时长为整数毫秒，0表示不用该通道，每步至少一通道；move_ms最多2147483647，喷水/泡泡最多30000，点火最多5000。一步内各通道同时启动、独立停止；全部结束并满足冷却后下一步，无指定时长时，本步100%速度（含省略速度）的left/right行走默认880，其他动作1000；同时或在某动作时做另一动作且只给一个时长则共享，分别遵守效果上限。不用额外步骤绕过效果上限。整单验证且四路均空闲才启动，运行中保留四路；失败不重试，停止/BOOT/断线/故障或网页抢占取消整单，不能补做。accepted仅表示序列已开始，sequence_result查询完成或取消。",
@@ -455,7 +499,7 @@ void InitializeCyberTrackTools() {
         [](const PropertyList& p) -> ReturnValue {
             ActionPlan plan;
             if (!ParseActionPlan(p["steps_json"].value<std::string>(), plan)) return std::string("{\"result\":\"invalid_plan\"}");
-            return Reply("sequence", p["_ct_ticket"].value<int>(), 0, nullptr, 0, 0, nullptr, &plan);
+            return Reply(p["_ct_turn"].value<int>(), "sequence", p["_ct_ticket"].value<int>(), 0, nullptr, 0, 0, nullptr, &plan);
         });
     ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000");
 }

@@ -19,6 +19,8 @@ public:
     unsigned plan_step = 0, plan_count = 0;
     const char* plan_result = "idle";
     bool wifi = false, voice = false, shutdown = false;
+    int voice_turn = 0;
+    bool voice_turn_open = false, voice_turn_failed = false;
     uint32_t owner = 0, window = 0;
     uint32_t drive_id = 0, drive_renewal = 0;
     uint64_t frenzy_until = 0;
@@ -81,6 +83,7 @@ public:
         frenzy_until = 0;
     }
     void VoiceLink(uint64_t now, bool online) {
+        if (online != voice) AdvanceVoiceTurn(false);
         if (online && !voice) guard.NewVoiceSession();
         voice = online;
         if (!online) {
@@ -96,10 +99,12 @@ public:
         }
     }
     void WifiLink(uint64_t now, bool online) {
+        if (online != wifi) AdvanceVoiceTurn(false);
         wifi = online;
         if (!online) { voice = false; owner = 0; Stop(now); }
     }
     void Shutdown(uint64_t now) {
+        AdvanceVoiceTurn(false);
         shutdown = true; owner = 0; voice = false; Stop(now);
     }
     uint32_t Acquire(uint64_t now) {
@@ -138,7 +143,30 @@ public:
         }
         return "Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority";
     }
-    int VoiceClaim(uint64_t now, int rpc, AudioActionGuard::Target target) {
+    void AdvanceVoiceTurn(bool open) {
+        const bool advanced = voice_turn < INT_MAX;
+        if (advanced) ++voice_turn;
+        voice_turn_open = advanced && open && wifi && voice && !shutdown;
+        voice_turn_failed = false;
+        draft_read_ = false;
+        guard.CancelPending(); // Keep active lanes and the session RPC replay table.
+    }
+    bool VoiceTurnReady(int turn) const {
+        return turn > 0 && turn == voice_turn && voice_turn_open && !voice_turn_failed;
+    }
+    const char* VoiceTurnError(int turn) const {
+        if (turn != voice_turn || !voice_turn_open) return "voice_input_changed: a new recognized input is required; no action started.";
+        return "voice_input_failed: an earlier request in this input failed; no retry or replacement action is allowed; wait for a new user input.";
+    }
+    void FailVoiceTurn(int turn) {
+        if (turn >= 0 && turn == voice_turn && voice_turn_open) {
+            voice_turn_failed = true;
+            draft_read_ = false;
+            guard.CancelPending();
+        }
+    }
+    int VoiceClaim(uint64_t now, int rpc, AudioActionGuard::Target target, int turn = -1) {
+        if (turn >= 0 && !VoiceTurnReady(turn)) return 0;
         if (target == AudioActionGuard::SpeedMode)
             return wifi && voice && !shutdown ? guard.Claim(now, rpc, target) : 0;
         const unsigned lanes = (target == AudioActionGuard::FrenzyMode || target == AudioActionGuard::PlanMode) ? AudioActionGuard::All : target;

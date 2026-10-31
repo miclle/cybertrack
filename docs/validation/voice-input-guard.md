@@ -1,0 +1,32 @@
+# 单次识别输入的失败隔离
+
+ct62 将已有的“失败后不自动重试或补做”要求落实到设备端。最近记录部署仍是 ct45；本页证据来自 ct62 构建和无设备主机回放，没有刷写或实物动作。
+
+## 行为与边界
+
+设备收到新的非空 STT 文本时开启一轮输入，纯 ASCII 空白不重置。机器人 MCP 请求在分发时取得内部代际；参数、准入或执行失败后，本轮后续动作、调速和改稿均被拒绝。查询与全停仍可用，但不会解除失败标记。下一条识别文本开启新轮次，RPC 去重表继续保留；语音重连后也须有新的识别输入。
+
+失败标记、票据与动作回调共用控制锁。失败会撤销尚未执行的票据；旧轮次排队中的动作、改稿和查询回调均不能改变新轮次。旧查询不能授权新一轮改稿，旧失败回执不能误锁新输入。已经接受的动作保留原有截止时间和停止机制，不因新输入或失败续时；正常四路并发语义保持。
+
+`_ct_turn` 是严格参数检查之后由设备注入的内部值，工具公开参数不变；调用者提供此字段会被拒绝。`voice_input_failed` 表示本轮已有失败，`voice_input_changed` 表示排队回调的代际已失效。参数校验先于准入，后续畸形请求仍可能返回原参数错误，但不会进入动作回调。
+
+这道防护不能判断首个合法工具是否误解用户意图，不能修复模型虚报完成或冗余播报。上游协议没有关联原话的输入编号，因此在新 STT **之后才到达设备**的网络请求仍归入当时轮次；本次仅证明已在设备捕获的请求及其排队回调隔离。真实 STT 时序、平台重连、声音与实体停止须另验。
+
+## 回放结果
+
+八组合成协议场景覆盖非法参数后跨工具补做、失败前已排队动作、新输入与旧改稿回调并存、旧查询不能授权新改稿、RPC 去重、失败后停止及 60 秒不恢复、重连要求新输入，以及伪造内部标记。
+
+另复用已保留的豆包 C002／C004／C005／C007 请求，四例均保持草稿 revision 7、零启动。C005 原先在取消被拒后转用 sequence，旧主机记录启动两路；ct62 对同一请求序列返回 `draft_changed`、`voice_input_failed`，启动数为零。这是历史请求的离线回放，不能作为一次新的模型成绩，也不覆盖此前 V079 首次含糊请求误启动等问题。
+
+- [回放结果](evidence/ct62-voice-turn/replay.json)
+- [主机来源及二进制摘要](evidence/ct62-voice-turn/host-manifest.json)
+- [十一组检查命令与日志摘要](evidence/ct62-voice-turn/software-checks.json)
+- [ESP-IDF 构建与检查记录](../../firmware/esp32-audio/verification-ct62.json)
+
+```sh
+python3 scripts/build_firmware_host.py --source build/xiaozhi-ct62-src --output build/full-firmware-host-ct62
+python3 scripts/check_voice_turn.py --executable build/full-firmware-host-ct62/firmware_host
+python3 scripts/verify_improvements.py --source build/xiaozhi-ct62-src
+```
+
+主机默认立即调度，边界场景显式延后回调；输入、时间和测距由测试模拟。控制状态使用实际 MCP 分发、回调和守卫，未接触串口、GPIO、执行器或真实传感器。

@@ -1,0 +1,23 @@
+{
+  "version": "2.0.3-ct62",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Input generation and failure latch for remote robot tools; host replay and ESP-IDF build only; no board IO or physical acceptance.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2709184,
+    "sha256": "a3afa37c7363d1b452c8f47c639de870b6f3eaf1929599569830e902d0719da4"
+  },
+  "checks": [
+    "ASan/UBSan ControlSessions input-generation tests pass.",
+    "Full prepared MCP host passes 80 synthetic voice traces and eight compose traces, plus invalid/duplicate ID and argument checks.",
+    "Eight synthetic input/failure/queue scenarios and four archived Doubao compose request sequences pass; rejected C005 fallback starts zero channels.",
+    "Public tool schemas and 5991-character role source remain unchanged from ct61.",
+    "All eleven unified local check groups pass, including 76 improvement tests, ASan/UBSan control, MCP/HTTP, audio, web, stop matrix and full host checks."
+  ],
+  "evidence": "../../docs/validation/evidence/ct62-voice-turn/replay.json",
+  "schema_comparison": {
+    "equal": true,
+    "baseline": "../../docs/validation/evidence/compose-routing/baseline-schema.json"
+  }
+}
