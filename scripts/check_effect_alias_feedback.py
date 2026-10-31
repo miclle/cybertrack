@@ -64,7 +64,7 @@ def check(executable):
                 assert got == dict(suppressed=0, audible=sum(count.values())), (row['id'], mutation, got)
                 negative.append(dict(id=row['id'], mutation=mutation, all_audio_preserved=True))
     assert len(results) == 88 and len(negative) == 81
-    names = ['firmware/esp32-audio/voice_feedback.h', 'firmware/esp32-audio/spoken_playback.h',
+    names = ['firmware/esp32-audio/voice_feedback.h', 'firmware/esp32-audio/spoken_playback.h','firmware/esp32-audio/spoken_effects.h','firmware/esp32-audio/spoken_duration.h',
              'scripts/replay_lingxi_feedback.cc', 'scripts/check_effect_alias_feedback.py']
     return dict(scope='Offline playback only; original 88 captures unchanged; mismatches synthetic; no new model calls or device audio',
                 executable_sha256=hashlib.sha256(executable.read_bytes()).hexdigest(),

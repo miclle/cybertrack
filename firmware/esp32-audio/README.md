@@ -1,5 +1,7 @@
 # CyberTrack 面包板：小D 语音与四路控制
 
+ct73 候选扩展四路组合／序列及既有别名的成功确认匹配，保留点火超限提示；十二条定向实际 STT 严格 10/12，五条成功组合新增抑制 277 包。70／87 原生夹具、18 组软件检查与完整构建通过，未部署。[范围与失败](../../docs/validation/four-lane-feedback.md)
+
 ct72 候选补齐既有喷水／泡泡／点火别名及狂暴模式的成功确认播放，按通道独立时长核验；复用 88 条真实 STT 轨迹，仅新增抑制普通点火的 64 包，超限提示保留。未部署，规则分析播报仍待修。[范围与证据](../../docs/validation/effect-alias-feedback.md)
 
 ct71 候选增加完整否定句写入拒绝和空闲草稿保护；活动／等待时始终保留全停，修正了按当前文本挡住迟到停止的初版。46 组普通／消毒器、24 次实际 STT 与最终兼容重放、十七组软件检查及构建完成，未部署。[边界与证据](../../docs/validation/negative-input-admission.md)
@@ -68,7 +70,7 @@ ct23 增加网页“左转＋喷水，各 3 秒”对照入口，调用现有组
 
 ## 当前能力与验证范围
 
-源码候选为 `2.0.3-ct72`、最近记录部署为 `2.0.3-ct45`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十二个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`compose`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
+源码候选为 `2.0.3-ct73`、最近记录部署为 `2.0.3-ct45`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十二个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`compose`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
 
 | 功能 | 当前规则 |
 |---|---|

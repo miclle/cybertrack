@@ -38,3 +38,5 @@ python3 scripts/check_plan_feedback.py --executable build/audio-host/feedback_re
 十二组软件检查通过，含 81 项改进测试与实际 MCP／HTTP、音频、停止矩阵和完整固件主机。ESP-IDF 构建通过，公开工具和 5991 字符角色不变；未保存平台配置、重启或刷写。包数反映端侧策略，不证明扬声器听感；未知语法和其他成功回复仍需逐项扩展及现场验证。
 
 后续 [ct72 效果别名与模式](effect-alias-feedback.md)单独扩展普通点火等效果；本页三通道组合／序列解析的范围不变，不支持点火组合匹配。
+
+后续 [ct73 四路组合](four-lane-feedback.md)扩展点火与既有别名的组合／序列匹配；本页原三通道范围与计数继续作为历史证据，未知及超限表达仍保留音频。

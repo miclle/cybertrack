@@ -3,15 +3,15 @@
 核对日期：2026-11-01。机器可读版本入口为 [firmware/current.json](../firmware/current.json)，检查命令 `python3 scripts/check_firmware_current.py`。`last_recorded_deployment` 保留应用部署记录，独立的 `last_recorded_role_sync` 记录后续纯角色同步，避免将重启冒充烧录。检查器核对源码版本与构建记录，以及角色同步所对应的已部署版本。可用下列命令分别核对两份本地应用文件的字节数和 SHA-256。省略参数时只检查记录；两种方式均离线运行。
 
 ```sh
-python3 scripts/check_firmware_current.py --source-bin build/firmware-ct72/xiaozhi.bin --deployed-bin build/firmware-ct45/xiaozhi.bin
+python3 scripts/check_firmware_current.py --source-bin build/firmware-ct73/xiaozhi.bin --deployed-bin build/firmware-ct45/xiaozhi.bin
 ```
 
 | 项目 | 当前依据与状态 |
 |---|---|
-| 源码基线 | `2.0.3-ct72` 候选，补齐既有效果别名与狂暴模式的成功确认播放匹配，改用各通道独立时长核验；增加完整否定句的写入拒绝和空闲草稿保护，活动／等待时始终保留全停；拒绝机器人 MCP 原始零字符截断，保留原工具／角色及合法停止；增加可识别泛化动作的首次执行澄清门禁，保留草稿编排、查询、全停及可信网页；增加本轮 STT 的无量化相对改稿澄清标记；MCP 全停在校验后立即完成并返回，不留二次排队回调；扩展组合／序列和目标速度的成功确认播放匹配；增加按识别输入代际的失败隔离，失败后拒绝自动重试／补做，停止与查询保留，新输入恢复；状态查询明确区分已有／没有草稿和本次保存回执。调速拒绝时提供请求时刻的未移动或链路离线说明。工具说明要求单说“全速”直接请求调速，匹配本轮成功回执后抑制确认音频。手机可在载入前对照设备新稿与本页预览，动作状态未确认时保留本地 BOOT 停止指引，明确全停成功后本地抑制确认音频，状态查询列出网页长按通道，区分续租窗口与定时动作剩余量，剧场预览显示同时动作和结束顺序；ESP-IDF 5.5.1、小智固定版本及 overlay |
+| 源码基线 | `2.0.3-ct73` 候选，扩展四路组合／序列及既有别名的成功确认匹配，保留点火超限说明；补齐既有效果别名与狂暴模式的成功确认播放匹配，改用各通道独立时长核验；增加完整否定句的写入拒绝和空闲草稿保护，活动／等待时始终保留全停；拒绝机器人 MCP 原始零字符截断，保留原工具／角色及合法停止；增加可识别泛化动作的首次执行澄清门禁，保留草稿编排、查询、全停及可信网页；增加本轮 STT 的无量化相对改稿澄清标记；MCP 全停在校验后立即完成并返回，不留二次排队回调；扩展组合／序列和目标速度的成功确认播放匹配；增加按识别输入代际的失败隔离，失败后拒绝自动重试／补做，停止与查询保留，新输入恢复；状态查询明确区分已有／没有草稿和本次保存回执。调速拒绝时提供请求时刻的未移动或链路离线说明。工具说明要求单说“全速”直接请求调速，匹配本轮成功回执后抑制确认音频。手机可在载入前对照设备新稿与本页预览，动作状态未确认时保留本地 BOOT 停止指引，明确全停成功后本地抑制确认音频，状态查询列出网页长按通道，区分续租窗口与定时动作剩余量，剧场预览显示同时动作和结束顺序；ESP-IDF 5.5.1、小智固定版本及 overlay |
 | 最近记录的部署 | [ct45](../firmware/esp32-audio/startup-ct45.json)；2026-10-31 已重启联网并回读 |
 | 最近角色同步 | [ct45 停止与长按角色修正](../firmware/esp32-audio/role-cancel-hold-ct45.json)，5991 字符保存回读、重启与零启动检查；模型语义另验 |
-| 软件验证 | [ct72 效果播放](validation/effect-alias-feedback.md)、[ct72 软件记录](../firmware/esp32-audio/verification-ct72.json)、[ct71 否定输入](validation/negative-input-admission.md)、[ct71 软件记录](../firmware/esp32-audio/verification-ct71.json)、[ct70 原始 JSON](validation/mcp-raw-json.md)、[ct70 软件记录](../firmware/esp32-audio/verification-ct70.json)、[ct68 软件记录](../firmware/esp32-audio/verification-ct68.json)、[含糊动作门禁](validation/vague-action-admission.md)、[ct67 软件记录](../firmware/esp32-audio/verification-ct67.json)、[相对改稿门禁](validation/relative-draft-duration.md)、[ct66 软件记录](../firmware/esp32-audio/verification-ct66.json)、[即时停止回执](validation/stop-dispatch.md)、[ct63 软件记录](../firmware/esp32-audio/verification-ct63.json)、[播放匹配](validation/plan-feedback.md)、[输入失败隔离](validation/voice-input-guard.md)、[ct47 定向联调](validation/lingxi-ct47.md)与 [ct46 三轮联调](validation/lingxi-ct46.md)；已部署 ct45 的软件依据仍见 [ct45 记录](../firmware/esp32-audio/verification-ct45.json) |
+| 软件验证 | [ct73 四路组合](validation/four-lane-feedback.md)、[ct73 软件记录](../firmware/esp32-audio/verification-ct73.json)、[ct72 效果播放](validation/effect-alias-feedback.md)、[ct72 软件记录](../firmware/esp32-audio/verification-ct72.json)、[ct71 否定输入](validation/negative-input-admission.md)、[ct71 软件记录](../firmware/esp32-audio/verification-ct71.json)、[ct70 原始 JSON](validation/mcp-raw-json.md)、[ct70 软件记录](../firmware/esp32-audio/verification-ct70.json)、[ct68 软件记录](../firmware/esp32-audio/verification-ct68.json)、[含糊动作门禁](validation/vague-action-admission.md)、[ct67 软件记录](../firmware/esp32-audio/verification-ct67.json)、[相对改稿门禁](validation/relative-draft-duration.md)、[ct66 软件记录](../firmware/esp32-audio/verification-ct66.json)、[即时停止回执](validation/stop-dispatch.md)、[ct63 软件记录](../firmware/esp32-audio/verification-ct63.json)、[播放匹配](validation/plan-feedback.md)、[输入失败隔离](validation/voice-input-guard.md)、[ct47 定向联调](validation/lingxi-ct47.md)与 [ct46 三轮联调](validation/lingxi-ct46.md)；已部署 ct45 的软件依据仍见 [ct45 记录](../firmware/esp32-audio/verification-ct45.json) |
 | 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，5991 字符，已重开回读。检查命令分别列出仓库角色与平台回读哈希 |
 | 运动 | 四方向，60–100% PWM、默认 100%；全速转向省略时长为 880 ms，其他普通动作默认 1000 ms；无编码器里程计 |
 | 并发与序列 | 四路独立截止，序列最多 16 步；步骤内并发，步骤间串行；取消不恢复 |
@@ -35,9 +35,9 @@ ct45 部署检查的 39 条状态／操作回执全部输出关闭、动作启�
 
 真实灵矽隔离文本联调：首轮 76/80，角色修正后 77/80（96.25%），8 条编排仍匹配 5 条；只读解释 4/8 满足全部要求，45 条成功静默均未达成。见[最新复测](validation/lingxi-ct45-role-feedback-20261031.md)。无前缀诊断单独保留，未替代首轮成绩。真实设备网页、草稿 300538 ms 到期和六类非法输入拒绝均保持零启动。完整边界见[联调记录](validation/lingxi-ct45-20261031.md)。
 
-运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct72-src`，增加 17 类停止回放、实际 MCP／HTTP、音频适配、完整固件主机、输入失败隔离及即时停止回执检查；ct72 发布阶段十八组通过，含 106 项改进测试；新增完整 88 条效果播放回放。随后协议字段观测增加一项回归，后续中继原型增加 17 项本地测试，现有 124 项 Python 测试通过。ct62 十一组通过，含 76 项改进测试；八组输入边界与四条历史请求为离线回放，不构成新模型成绩。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
+运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct73-src`，增加 17 类停止回放、实际 MCP／HTTP、音频适配、完整固件主机、输入失败隔离及即时停止回执检查；当前 ct73 十八组通过，含 124 项 Python 改进测试；新增四路组合原生夹具，完整 88 条效果播放回放保持。ct72 发布阶段含 106 项，随后协议字段观测与中继原型另增 18 项。ct62 十一组通过，含 76 项改进测试；八组输入边界与四条历史请求为离线回放，不构成新模型成绩。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
 
-要检查模型设计工具，请在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct72-src --model-design`。新增模型／几何／整机同步测试、插件 bundle 和合成宿主界面回归；统一报告记录工具源码哈希并排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
+要检查模型设计工具，请在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct73-src --model-design`。新增模型／几何／整机同步测试、插件 bundle 和合成宿主界面回归；统一报告记录工具源码哈希并排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
 
 模型辅助设计的[真实 GUI 验收](../tools/solidcue/verification-gui-20261031.json)已完成：198 件整机中冠盖上移 8 mm 后恢复，修改与恢复均经 FreeCAD GUI MCP 保存重开核对；同一本地页面更新到 r7，正式模型未改。无界面快照材质顺序修复通过 GUI 回读。后续[真实宿主卡片验收](../tools/solidcue/verification-host-20261031.json)已完成评论保存／宿主接受、MCP 读回与回执，以及同一卡片 r7 → r8 → r9 更新／恢复。随后[真实消息驱动验收](../tools/solidcue/verification-message-20261031.json)完成：尚未处理的 r9 评论通过 `mcp_app` 独立触发本轮，冠盖上移 4 mm 后恢复，GUI 保存重开与同一卡片 r9 → r10 → r11、最终回执均通过。I11 接入已验收；单次真实链路不代表制造或实物通过。
 
@@ -80,3 +80,5 @@ ct72 [效果确认播放](validation/effect-alias-feedback.md)复用完整 88 �
 [模型工具轮中继原型](validation/llm-tool-round-relay.md)完成 17 项本地 HTTP／SSE 与策略测试，尚未采纳或接入平台。工具后分析仍放行，工具轮限幅文字也可能丢失，整轮缓冲时延未测；未更新模型成绩、固件或部署。
 
 参考材料包已纳入中继源码、配置样例及 17 项回环 HTTP／SSE 测试，解压后共 98 项离线测试。样例只含环境变量名，原模型评分与未采纳条件保持，材料包不启动或绑定线上服务。
+
+ct73 [四路组合播放匹配](validation/four-lane-feedback.md)完成十二条定向实际 STT：严格工具 10/12、逐字转写 11/12、完整回执／终态重放一致，新增抑制五条成功组合的 277 包，50 条不一致均保留。F004 共享时长误解、F010 识别与漏调用保留；原 88 条播放计数不变，18 组软件检查与构建通过，未部署。

@@ -131,3 +131,5 @@ python3 scripts/analyze_maintenance.py docs/validation/templates.json \
 [协议字段与 none 对照](tts-protocol-observation.md)记录定向实际 STT、公开字段形态及参数恢复；排除将表情 thinking 当作内部推理的过滤方案，不新增完整模型成绩。
 
 [模型工具轮中继原型](llm-tool-round-relay.md)单列完全本地的 HTTP／SSE 夹具测试及未通过的采纳条件，不属于新平台会话或完整模型评分。
+
+[ct73 四路组合与别名播放](four-lane-feedback.md)记录独立十二条实际 STT 和包级对照，保留模型／识别失败；不覆盖原 80／8 成绩或物理验收。

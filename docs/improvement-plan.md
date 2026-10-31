@@ -187,3 +187,5 @@ I03／I08／I10 的 [ct72 效果播放匹配](validation/effect-alias-feedback.m
 I03／I06／I13 增加[协议字段与 none 对照](validation/tts-protocol-observation.md)，候选不兼容表现和恢复证据均保留；`action=thinking` 不作为音频过滤依据，过程播报仍需模型与 TTS 之间的明确出口，原退出条件不变。
 
 I03／I06／I13 的[工具轮播报中继原型](validation/llm-tool-round-relay.md)已完成本地 HTTP／SSE、完整工具参数及工具结果闭环测试；尚未配置真实模型／托管。最终分析、必要限制和时延反例作为采纳门槛，17 项本地测试不关闭原目标。
+
+I03／I08／I10 的 [ct73 四路组合播放](validation/four-lane-feedback.md)已完成候选：70／87 原生、十二条实际 STT（严格 10/12）、新增抑制 277 包及五十条不一致保留；原 88 条计数、工具、角色与平台不变。十八组检查及构建通过，F004／F010 和过程播报继续失败，未部署，不关闭模型与现场门槛。
