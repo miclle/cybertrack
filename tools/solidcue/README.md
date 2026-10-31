@@ -2,9 +2,9 @@
 
 在完整机器人模型中选中零件或面，直接描述调整意图，由当前对话定位 FreeCAD 原生对象、执行修改并回读。模型、评论、修改历史和恢复结果保持版本关联。工具属于设计开发流程；机器人日常语音仍直接通过灵矽运行。
 
-## 随项目交付的实现
+## 模型编辑能力
 
-源码位于 [tools/model-design](../model-design/README.md)，随 CyberTrack clone 一起获得，不再要求访问另一个源码仓库。底层来自 SolidCue 0.8.0；[原始文件哈希及提交](../model-design/UPSTREAM.json)、[许可证](../model-design/LICENSE)与[修改说明](../model-design/NOTICE)保留归属。CyberTrack 0.9.2 增加整机原生预览、按零件定位、位置研究、整机基线／非目标零件校验和恢复。
+CyberTrack 模型辅助设计工具可以预览整机、定位零件，并在研究副本上调整和恢复零件位置。每次修改后，工具会与基线模型比对，核查其他零件的位置与几何。实现见[工具源码](../model-design/README.md)。
 
 原生 FCStd 是几何依据。两条接入路径分别记录证据：
 
@@ -25,7 +25,7 @@ python3 scripts/solidcue.py check
 python3 scripts/solidcue.py start
 ```
 
-`prepare` 安装锁定依赖并构建仓库内源码，不克隆其他项目。服务只监听 `127.0.0.1:9473`，不绑定 CLI 对话。整机数据在 `output/solidcue/assembly-data/`；早期单件数据 `output/solidcue/data/` 保留。数据、研究副本、依赖和生成目录不提交。端口已有服务时拒绝替换；`start` 需持续运行，不自动配置开机启动。
+`prepare` 按锁定版本安装依赖并构建模型设计工具。服务只监听 `127.0.0.1:9473`，不绑定 CLI 对话。整机数据在 `output/solidcue/assembly-data/`；早期单件数据 `output/solidcue/data/` 保留。数据、研究副本、依赖和生成目录不提交。端口已有服务时拒绝替换；`start` 需持续运行，不自动配置开机启动。
 
 安装插件：
 
@@ -34,7 +34,7 @@ codex plugin marketplace add "$PWD/tools/model-design"
 codex plugin add cad-comment-lab@cad-comment-local
 ```
 
-若本机同名 marketplace 仍指向早期临时 checkout，先执行 `codex plugin marketplace remove cad-comment-local`，再执行上面的命令；原模型数据不会删除。插件技术 ID 沿用，显示名称为 **CyberTrack 模型设计**。升级后按下面步骤重新加载连接，再调用 `open_model` 并展开卡片。升级 UI 后须新开一次卡片；同轮修改和恢复使用同一卡片。
+若本机同名 marketplace 配置的路径与当前工具目录不符，先执行 `codex plugin marketplace remove cad-comment-local`，再执行上面的命令；原模型数据不会删除。插件技术 ID 沿用，显示名称为 **CyberTrack 模型设计**。升级后按下面步骤重新加载连接，再调用 `open_model` 并展开卡片。升级 UI 后须新开一次卡片；同轮修改和恢复使用同一卡片。
 
 本地插件重载：等待当前操作保存后，使用 `⌘Q` 完全退出承载 Codex 的 ChatGPT 桌面应用，再重新打开并回到原对话；只关闭窗口不算退出。保持 FreeCAD 打开，不需要卸载插件或删除研究数据。若模型服务运行在应用管理的终端中，退出应用可能结束服务；重开后先检查 `127.0.0.1:9473`，确认没有服务监听时再运行 `python3 scripts/solidcue.py start`，沿用原数据目录。此流程依据 [OpenAI 本地插件说明](https://developers.openai.com/plugins/build/plugins#install-a-local-plugin-manually)；当前 CLI 的 `codex plugin`／`codex mcp` 没有 `reload` 子命令。返回对话后先核对工具描述与当前文档版本，再新开模型卡片；旧卡片仍可能保留旧 UI。
 
