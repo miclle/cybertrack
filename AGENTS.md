@@ -1,7 +1,7 @@
 # CyberTrack 工作约定
 
 - CyberTrack 是双履带语音交互玩具机器人；履带是行走方式，不要求传统坦克轮廓。
-- 当前任务基线见 `docs/requirements.md`、`docs/decisions.md` 和 `TODO.md`。用户后续补充优先于假设；同步所有受影响的需求、接口、BOM 和验证项。
+- 当前任务基线见 `docs/requirements.md`、`docs/decisions.md` 和 `docs/TODO.md`。用户后续补充优先于假设；同步所有受影响的需求、接口、BOM 和验证项。
 - `hardware/model/` 用于整机设计；部件模型与整机设计分别管理。
 - `hardware/components/` 原始图片和 PDF 保留版本与厂商标识，第三方权利不变。新事实引用具体资料，资料冲突明确记录，不根据图片比例补定接口尺寸。
 - 只读部件资产不覆盖；需要更新时先说明新输入并重新生成校验与回读报告。部件几何、标称参数、推导值、假设和物理验收分开陈述。
