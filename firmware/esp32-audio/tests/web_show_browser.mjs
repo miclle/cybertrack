@@ -6,7 +6,7 @@ const {chromium}=await import(process.env.CYBERTRACK_PLAYWRIGHT_MODULE
  ? pathToFileURL(process.env.CYBERTRACK_PLAYWRIGHT_MODULE).href : 'playwright');
 const html=await readFile('firmware/esp32-audio/web/index.html','utf8');
 const step=(direction='none',move_ms=0,bubbles_ms=1000)=>({direction,move_ms,water_ms:0,bubbles_ms,ignition_ms:0,speed_percent:100});
-await mkdir('output/improvements',{recursive:true});
+await mkdir('output/improvements/show-browser',{recursive:true});
 const browser=await chromium.launch({headless:true});
 try {
  for(const [width,height] of [[390,844],[320,568],[1280,800]]) {
@@ -67,17 +67,25 @@ try {
   assert.equal(starts,0);assert(await page.locator('#show-confirm').isDisabled());
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await page.locator('#show-preview').scrollIntoViewIfNeeded();
-  await page.screenshot({path:`output/improvements/ct45-${width}-editor.png`});
+  await page.screenshot({path:`output/improvements/show-browser/${width}-editor.png`});
   await page.locator('#show-reviewed').check();
   await page.locator('#show-confirm').scrollIntoViewIfNeeded();
   const confirmBox=await page.locator('#show-confirm').boundingBox(),dock=await page.locator('.stop-bar').boundingBox();
   assert(confirmBox.y+confirmBox.height<=dock.y);
-  await page.screenshot({path:`output/improvements/ct45-${width}-confirm.png`});
+  await page.screenshot({path:`output/improvements/show-browser/${width}-confirm.png`});
   await page.locator('#show-confirm').click();
   await page.locator('#show-notice').filter({hasText:'表演请求已接受'}).waitFor();
   assert.equal(starts,1);assert(await page.locator('#show-confirm').isDisabled());
   await page.locator('#stop').click();
   await page.locator('#message').filter({hasText:'全部停止'}).waitFor();
+  setDraft([step('backward',2000,1000)]);await page.evaluate(()=>poll());await page.locator('#show-load').click();
+  const preview=page.locator('#show-preview');
+  assert.match(await preview.innerText(),/同时开始.*后退 2 秒.*吹泡泡 1 秒.*泡泡先停，行走再持续 1 秒/);
+  assert.match(await preview.innerText(),/预计 2 秒/);
+  setDraft([step('backward',2000,0),step('none',0,1000)]);await page.evaluate(()=>poll());await page.locator('#show-load').click();
+  assert.match(await preview.innerText(),/第 1 步 · 先后退 2 秒.*\n第 2 步 · 再吹泡泡 1 秒/);
+  assert.match(await preview.innerText(),/预计 3.2 秒/);
+  assert(await page.locator('#show-confirm').isDisabled());assert.equal(starts,1);
   setDraft([step()]);await page.evaluate(()=>poll());await page.locator('#show-load').click();
   await page.locator('#show-reviewed').check();conflictNext=true;
   // Fresh state at confirmation must reject a revision changed by voice.
