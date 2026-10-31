@@ -14,6 +14,14 @@ int main(int argc, char** argv) {
         int ticket = sessions.VoiceClaim(clock_ms,1,AudioActionGuard::MoveOnly);
         Reply("move",ticket,profile == "forward70" ? 4000 : 400,"forward",0,0,nullptr,nullptr,70);
         if (!guard.Moving() || guard.Starts() != 1) return 2;
+    } else if (profile == "sequence_forward_bubbles") {
+        ActionPlan plan;
+        plan.count = 2;
+        plan.steps[0] = {"forward", 4000, 0, 0, 0, 70};
+        plan.steps[1] = {"none", 0, 0, 1000, 0};
+        int ticket = sessions.VoiceClaim(clock_ms, 1, AudioActionGuard::PlanMode);
+        Reply("sequence", ticket, 0, nullptr, 0, 0, nullptr, &plan);
+        if (!sessions.plan_active || !guard.Moving() || guard.Starts() != 1) return 2;
     } else if (profile == "web_forward_hold") {
         const auto web = sessions.Acquire(clock_ms);
         if (!web || !sessions.Heartbeat(clock_ms, web)) return 2;

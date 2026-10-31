@@ -1,0 +1,269 @@
+{
+  "scope": "Three isolated raw-text rounds with ct45 tool schemas; host-generated hold fixtures and synthetic cancel fixtures.",
+  "runs": [
+    {
+      "file": "1-ct45-hold.json.gz",
+      "raw_sha256": "6ad0aea2d65048f7f9a85b6a4803990e86b290b1b1d77585333a7eade6068a4e",
+      "cases": [
+        {
+          "id": "H201",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "这次移动还剩大约0.4秒，马上就到了。"
+        },
+        {
+          "id": "H202",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "正在前进，还剩大约0.4秒就结束了。"
+        },
+        {
+          "id": "H203",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "当前没有移动在运行了，moveremainingms是0，也没有序列在跑。刚才那次移动已经结束了。"
+        }
+      ]
+    },
+    {
+      "file": "1-ct45-cancel.json.gz",
+      "raw_sha256": "9ec4610679fb1db8cc9b9199064472a4d2008add8e3eae24c20fe7df04057f90",
+      "cases": [
+        {
+          "id": "Q201",
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "reply": "序列已取消，所有动作都停下了。"
+        },
+        {
+          "id": "Q202",
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "reply": "动作都停下了，我在这儿等你。"
+        },
+        {
+          "id": "Q203",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "reply": "草稿revision是7，我来取消它。草稿已经取消了，泡泡表演草稿已清空，不会自动执行。"
+        },
+        {
+          "id": "Q204",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "好的，序列继续，不会取消。"
+        }
+      ]
+    },
+    {
+      "file": "2-ct45-hold.json.gz",
+      "raw_sha256": "5098ac1d46c2ee2bb55defdd75a755fbef115747e8d85a9d35718e2c091bf874",
+      "cases": [
+        {
+          "id": "H201",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "当前正在向前走，还剩大约0.4秒就结束了。"
+        },
+        {
+          "id": "H202",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "这次移动还剩大约不到半秒就结束了。"
+        },
+        {
+          "id": "H203",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "刚才的移动已经结束了，现在没有正在执行的动作，我在待命。"
+        }
+      ]
+    },
+    {
+      "file": "2-ct45-cancel.json.gz",
+      "raw_sha256": "0bb0208b39f0094616110ccf48c223a7dbc8a177b797c4dfc267ffb2861fd1cb",
+      "cases": [
+        {
+          "id": "Q201",
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "reply": "好的，序列已取消，动作都停下了。"
+        },
+        {
+          "id": "Q202",
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "reply": "动作都停下了，我在这儿等你。"
+        },
+        {
+          "id": "Q203",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "reply": "草稿已经取消了，没保存的表演不会执行。"
+        },
+        {
+          "id": "Q204",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "用户说\"不要取消序列，让它继续\"，这是让我不要停止序列。当前序列应该还在运行中，用户只是表达不要取消的意愿，并没有要求我执行任何操作。让我确认一下当前状态。好的，没有取消，序列继续运行，我不干预。"
+        }
+      ]
+    },
+    {
+      "file": "3-ct45-hold.json.gz",
+      "raw_sha256": "0333f6727fe2a7eba665f0b1a6de44a56365316bee9ed3a4e79a36e82741fe87",
+      "cases": [
+        {
+          "id": "H201",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "正在前进，还剩不到一秒就停了。"
+        },
+        {
+          "id": "H202",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "还在前进，大概还有不到一秒就结束了。"
+        },
+        {
+          "id": "H203",
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "reply": "我需要查询状态来了解当前移动的剩余时间移动已经结束了，现在没有动作在运行，我在这儿等你。"
+        }
+      ]
+    },
+    {
+      "file": "3-ct45-cancel.json.gz",
+      "raw_sha256": "9697ea273624ff74eec384e007238dd9f9fb4ae09d44e084f9a976c952dc131a",
+      "cases": [
+        {
+          "id": "Q201",
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "reply": "动作都停下了，我在这儿等你。"
+        },
+        {
+          "id": "Q202",
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "reply": "动作都停下了，我在这儿等你。"
+        },
+        {
+          "id": "Q203",
+          "calls": [
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 0,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "reply": "草稿版本有变化，当前是第7版，取消没有成功。需要我再试一次吗？"
+        },
+        {
+          "id": "Q204",
+          "calls": [],
+          "reply": "用户说不要取消序列，让它继续。这是否定取消的意思，不执行任何操作。好的，序列继续跑着，我不动它。"
+        }
+      ]
+    }
+  ]
+}
