@@ -1,0 +1,26 @@
+{
+  "version": "2.0.3-ct68",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Limited generic-action detection on observed STT rejects first actuator/speed guesses; safe draft edits, query, immediate stop and trusted web retain existing gates. Not general natural language understanding.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2715712,
+    "sha256": "a07308364003d0246a9ee64708c6a5f616ded68060600801743829179ecb645e"
+  },
+  "checks": [
+    "Complete ESP-IDF 5.5.1 build passes.",
+    "Twenty-six actual-MCP native scenarios pass, including retained V079 requests with simulated recognized text; ct67 fails eighteen expected guard contrasts.",
+    "ASan/UBSan classifier and actual Reply tests preserve trusted web, all-stop and new-input recovery.",
+    "All twelve public tool definitions and role source unchanged from ct67.",
+    "Twenty declared synthetic speech sessions complete: normalized literal STT 20/20; same-observation-time expected final states 20/20; strict tool calls 16/20.",
+    "Three live guessed actuator calls return action_unspecified; all eight vague inputs preserve zero starts. One extra query and model guesses remain failures.",
+    "All full MCP replies and final states reproduce from actual observed STT events.",
+    "Fifteen unified local check groups pass, including 86 improvement tests; no fixed-suite score replaced."
+  ],
+  "pending": [
+    "Broader vocabulary and action/negation/quote attribution, false stop, process narration and unnecessary queries.",
+    "Candidate deployment, actual scheduling/output/speaker, physical and family acceptance remain incomplete."
+  ],
+  "evidence": "../../docs/validation/evidence/ct68-vague-action/platform-review.json"
+}

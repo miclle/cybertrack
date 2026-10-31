@@ -46,7 +46,9 @@ def main():
             [sys.executable, "scripts/check_stop_dispatch.py", "--executable", str(host_build/"firmware_host"),
              "--output", str(out/"stop-dispatch.json")],
             [sys.executable, "scripts/check_relative_draft.py", "--executable", str(host_build/"firmware_host"),
-             "--output", str(out/"relative-draft.json")]])
+             "--output", str(out/"relative-draft.json")],
+            [sys.executable, "scripts/check_vague_action.py", "--executable", str(host_build/"firmware_host"),
+             "--output", str(out/"vague-action.json")]])
     if args.model_design:
         commands.extend([["npm", "--prefix", "tools/model-design", "test"],
                          ["npm", "--prefix", "tools/model-design", "run", "test:bundle"],

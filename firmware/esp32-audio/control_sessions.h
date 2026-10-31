@@ -22,6 +22,7 @@ public:
     int voice_turn = 0;
     bool voice_turn_open = false, voice_turn_failed = false;
     bool voice_draft_unquantified = false;
+    bool voice_action_unspecified = false;
     uint32_t owner = 0, window = 0;
     uint32_t drive_id = 0, drive_renewal = 0;
     uint64_t frenzy_until = 0;
@@ -150,6 +151,7 @@ public:
         voice_turn_open = advanced && open && wifi && voice && !shutdown;
         voice_turn_failed = false;
         voice_draft_unquantified = false;
+        voice_action_unspecified = false;
         draft_read_ = false;
         guard.CancelPending(); // Keep active lanes and the session RPC replay table.
     }
