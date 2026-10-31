@@ -62,7 +62,7 @@ python3 scripts/analyze_power_runs.py docs/validation/templates.json
 
 维护记录补液、清洁、取瓶、换电池、线束检修的步骤／耗时／工具／异常。先测基线，再选择最慢两项修改，比较相同条件下至少 3 次中位数；目标降低 ≥30%。10 次拆装检查紧固、磨线、管路与渗漏；未经观察不得写“无故障”。
 
-在本地记录副本中填写 `maintenance_trials`。每次观察有独立 `sample_id`，`condition_id` 对应一份可追溯的工况说明，固定装配方向、液量、起止状态、计时口径及操作人员安排。两个版本共用该工况编号。记录实用工具、观察者代号、是否完整完成及异常，未检查的异常填 null，检查过且无异常填空数组。每个任务分别按 `before` 或 `after` 从 1 编号。旧记录缺工况时只计为未归类。
+在本地记录副本中填写 `maintenance_trials`。每次观察有独立 `sample_id`，`condition_id` 对应一份可追溯的工况说明，固定装配方向、液量、起止状态、计时口径及操作人员安排。两个版本共用该工况编号。记录实用工具、观察者代号、是否完整完成及异常，未检查的异常填 null，检查过且无异常填空数组。按顺序将实际操作写入非空的 `steps` 数组。计时与循环均填写 `evidence_kind: physical_observation` 和能定位该次原始观察的 `evidence_ref`（如台架记录页及行号）。CAD 演练、模拟和来源未标明的旧记录单列，不进入中位数或十次循环。每个任务分别按 `before` 或 `after` 从 1 编号。旧记录缺工况时只计为未归类。
 
 ```sh
 python3 scripts/analyze_maintenance.py docs/validation/templates.json \

@@ -10,9 +10,9 @@
   "cost_items": [],
   "cost_item_fields": ["bom_id", "quantity", "actual_unit_cny", "source", "purchased_on", "estimate_only", "estimated_unit_cny", "scenario"],
   "maintenance_cycles": [],
-  "maintenance_cycle_fields": ["sample_id", "condition_id", "revision", "repeat", "completed", "checks", "faults", "observed_by"],
+  "maintenance_cycle_fields": ["sample_id", "condition_id", "revision", "repeat", "completed", "checks", "faults", "observed_by", "evidence_kind", "evidence_ref"],
   "maintenance_trials": [],
-  "maintenance_trial_fields": ["sample_id", "condition_id", "completed", "task", "before_or_after", "revision", "repeat", "duration_s", "tools", "faults", "observed_by"],
+  "maintenance_trial_fields": ["sample_id", "condition_id", "completed", "task", "before_or_after", "revision", "repeat", "duration_s", "steps", "tools", "faults", "observed_by", "evidence_kind", "evidence_ref"],
   "engineering_changes": [],
   "engineering_change_fields": ["change_id", "started_at", "ended_at", "human_minutes", "model_wait_minutes", "revision_rounds", "failed_checks", "commit", "regressions_found"]
 }
