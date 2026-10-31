@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarize independent ct46 platform runs without sending messages or rewriting captures."""
+"""Summarize independent platform runs without sending messages or rewriting captures."""
 import argparse
 import gzip
 import hashlib
@@ -16,12 +16,14 @@ CORPORA = {
 }
 
 
-def summarize(directory, replay):
+def summarize(directory, replay, version):
     rows = []
     run_ids = set()
     pinned = None
     for round_number in (1, 2, 3):
         for suite, filename in CORPORA.items():
+            if version == 'ct47' and suite not in ('status','transfer'):
+                continue
             path = directory / f'{round_number}-{suite}.json'
             data = path.read_bytes() if path.is_file() else gzip.decompress(path.with_suffix('.json.gz').read_bytes())
             trace = json.loads(data)
@@ -32,7 +34,7 @@ def summarize(directory, replay):
             fingerprint = tuple(trace[k] for k in ('model','role_sha256','tool_schema_sha256','capture_source_sha256'))
             if pinned is None:
                 pinned = fingerprint
-            if (trace['run_id'] in run_ids or fingerprint != pinned or trace['fixture_version'] != 'ct46'
+            if (trace['run_id'] in run_ids or fingerprint != pinned or trace['fixture_version'] != version
                     or trace['corpus_sha256'] != hashlib.sha256(corpus_data).hexdigest()
                     or trace['input_mode'] != ('context_prefixed' if suite in ('voice','compose') else 'raw_text_diagnostic')):
                 raise ValueError(f'{path.name}: incompatible or duplicate run')
@@ -67,5 +69,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('directory', type=Path)
     parser.add_argument('--replay', type=Path, default=ROOT/'build/lingxi-schema-export/replay-feedback')
+    parser.add_argument('--fixture-version', choices=['ct46','ct47'], default='ct46')
     args = parser.parse_args()
-    print(json.dumps(summarize(args.directory,args.replay), ensure_ascii=False, indent=2))
+    print(json.dumps(summarize(args.directory,args.replay,args.fixture_version), ensure_ascii=False, indent=2))
