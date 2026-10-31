@@ -1,0 +1,1042 @@
+{
+  "scope": "Offline playback only; original 88 captures unchanged; mismatches synthetic; no new model calls or device audio",
+  "executable_sha256": "ce9e518d32f2a1a804d94ff17a0a92b8224f5b2509432dafe05943792e30dbec",
+  "source_sha256": {
+    "firmware/esp32-audio/voice_feedback.h": "60b36f5e8ec31f86a2639fe7c93af848488b6a8c7b420c5a3175503f1f333aa6",
+    "firmware/esp32-audio/spoken_playback.h": "acca0a7b78cacc51e9ff611a045bf9df4788f2340bfd53a555bbc873d5a18651",
+    "scripts/replay_lingxi_feedback.cc": "aed8412d1e4d6b0f9aa6414432d3f662d6ebfecc9d96489bffe66cea840d5cc2",
+    "scripts/check_effect_alias_feedback.py": "315574d864ee1fc543c2d573ddb1f648692d3fda2181475826b07dbd303f5f14"
+  },
+  "evidence_sha256": {
+    "full-voice.json.gz": "719ba388e7b3709a6dee5366016ea89749175bdfc7fa458bb2e8d6bb72a5929f",
+    "full-compose.json.gz": "ec834539e8dea0f03c9d006f5c20a689bb804fca9647739ff14854a9acba61ac",
+    "playback-baseline.json": "c05fc21804dea9d892006f83abdd53475c74d1882dffe65a48a44cd6762e7c62"
+  },
+  "suppressed": 1085,
+  "allowed": 4595,
+  "results": [
+    {
+      "suite": "voice",
+      "id": "V001",
+      "completed": true,
+      "suppressed": 22,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V002",
+      "completed": true,
+      "suppressed": 24,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V003",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 46
+    },
+    {
+      "suite": "voice",
+      "id": "V004",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 34
+    },
+    {
+      "suite": "voice",
+      "id": "V005",
+      "completed": true,
+      "suppressed": 16,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V006",
+      "completed": true,
+      "suppressed": 22,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V007",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 44
+    },
+    {
+      "suite": "voice",
+      "id": "V008",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 34
+    },
+    {
+      "suite": "voice",
+      "id": "V009",
+      "completed": true,
+      "suppressed": 22,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V010",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 59
+    },
+    {
+      "suite": "voice",
+      "id": "V011",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 38
+    },
+    {
+      "suite": "voice",
+      "id": "V012",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 24
+    },
+    {
+      "suite": "voice",
+      "id": "V013",
+      "completed": true,
+      "suppressed": 22,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V014",
+      "completed": true,
+      "suppressed": 24,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V015",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 50
+    },
+    {
+      "suite": "voice",
+      "id": "V016",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 24
+    },
+    {
+      "suite": "voice",
+      "id": "V017",
+      "completed": true,
+      "suppressed": 22,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V018",
+      "completed": true,
+      "suppressed": 26,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V019",
+      "completed": true,
+      "suppressed": 40,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V020",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 31
+    },
+    {
+      "suite": "voice",
+      "id": "V021",
+      "completed": true,
+      "suppressed": 30,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V022",
+      "completed": true,
+      "suppressed": 28,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V023",
+      "completed": true,
+      "suppressed": 28,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V024",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 34
+    },
+    {
+      "suite": "voice",
+      "id": "V025",
+      "completed": true,
+      "suppressed": 12,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V026",
+      "completed": true,
+      "suppressed": 22,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V027",
+      "completed": true,
+      "suppressed": 30,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V028",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 91
+    },
+    {
+      "suite": "voice",
+      "id": "V029",
+      "completed": true,
+      "suppressed": 58,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V030",
+      "completed": true,
+      "suppressed": 16,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V031",
+      "completed": true,
+      "suppressed": 64,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V032",
+      "completed": true,
+      "suppressed": 50,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V033",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 133
+    },
+    {
+      "suite": "voice",
+      "id": "V034",
+      "completed": true,
+      "suppressed": 61,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V035",
+      "completed": true,
+      "suppressed": 88,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V036",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 76
+    },
+    {
+      "suite": "voice",
+      "id": "V037",
+      "completed": true,
+      "suppressed": 24,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V038",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 24
+    },
+    {
+      "suite": "voice",
+      "id": "V039",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 12
+    },
+    {
+      "suite": "voice",
+      "id": "V040",
+      "completed": true,
+      "suppressed": 22,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V041",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 104
+    },
+    {
+      "suite": "voice",
+      "id": "V042",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 70
+    },
+    {
+      "suite": "voice",
+      "id": "V043",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 89
+    },
+    {
+      "suite": "voice",
+      "id": "V044",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 166
+    },
+    {
+      "suite": "voice",
+      "id": "V045",
+      "completed": true,
+      "suppressed": 38,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V046",
+      "completed": true,
+      "suppressed": 38,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V047",
+      "completed": true,
+      "suppressed": 38,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V048",
+      "completed": true,
+      "suppressed": 36,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V049",
+      "completed": true,
+      "suppressed": 32,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V050",
+      "completed": true,
+      "suppressed": 34,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V051",
+      "completed": true,
+      "suppressed": 58,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V052",
+      "completed": true,
+      "suppressed": 38,
+      "audible": 0
+    },
+    {
+      "suite": "voice",
+      "id": "V053",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 40
+    },
+    {
+      "suite": "voice",
+      "id": "V054",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 50
+    },
+    {
+      "suite": "voice",
+      "id": "V055",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 44
+    },
+    {
+      "suite": "voice",
+      "id": "V056",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 46
+    },
+    {
+      "suite": "voice",
+      "id": "V057",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 58
+    },
+    {
+      "suite": "voice",
+      "id": "V058",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 24
+    },
+    {
+      "suite": "voice",
+      "id": "V059",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 30
+    },
+    {
+      "suite": "voice",
+      "id": "V060",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 46
+    },
+    {
+      "suite": "voice",
+      "id": "V061",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 24
+    },
+    {
+      "suite": "voice",
+      "id": "V062",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 22
+    },
+    {
+      "suite": "voice",
+      "id": "V063",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 16
+    },
+    {
+      "suite": "voice",
+      "id": "V064",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 40
+    },
+    {
+      "suite": "voice",
+      "id": "V065",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 22
+    },
+    {
+      "suite": "voice",
+      "id": "V066",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 22
+    },
+    {
+      "suite": "voice",
+      "id": "V067",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 70
+    },
+    {
+      "suite": "voice",
+      "id": "V068",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 30
+    },
+    {
+      "suite": "voice",
+      "id": "V069",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 185
+    },
+    {
+      "suite": "voice",
+      "id": "V070",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 210
+    },
+    {
+      "suite": "voice",
+      "id": "V071",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 107
+    },
+    {
+      "suite": "voice",
+      "id": "V072",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 76
+    },
+    {
+      "suite": "voice",
+      "id": "V073",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 146
+    },
+    {
+      "suite": "voice",
+      "id": "V074",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 104
+    },
+    {
+      "suite": "voice",
+      "id": "V075",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 111
+    },
+    {
+      "suite": "voice",
+      "id": "V076",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 34
+    },
+    {
+      "suite": "voice",
+      "id": "V077",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 86
+    },
+    {
+      "suite": "voice",
+      "id": "V078",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 95
+    },
+    {
+      "suite": "voice",
+      "id": "V079",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 137
+    },
+    {
+      "suite": "voice",
+      "id": "V080",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 96
+    },
+    {
+      "suite": "compose",
+      "id": "C001",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 262
+    },
+    {
+      "suite": "compose",
+      "id": "C002",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 162
+    },
+    {
+      "suite": "compose",
+      "id": "C003",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 264
+    },
+    {
+      "suite": "compose",
+      "id": "C004",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 55
+    },
+    {
+      "suite": "compose",
+      "id": "C005",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 482
+    },
+    {
+      "suite": "compose",
+      "id": "C006",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 48
+    },
+    {
+      "suite": "compose",
+      "id": "C007",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 64
+    },
+    {
+      "suite": "compose",
+      "id": "C008",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 104
+    }
+  ],
+  "synthetic_mismatches": [
+    {
+      "id": "V017",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V017",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V017",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V017",
+      "mutation": "missing_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V017",
+      "mutation": "wrong_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V017",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V017",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V017",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V017",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V018",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V018",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V018",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V018",
+      "mutation": "missing_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V018",
+      "mutation": "wrong_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V018",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V018",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V018",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V018",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V019",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V019",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V019",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V019",
+      "mutation": "missing_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V019",
+      "mutation": "wrong_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V019",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V019",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V019",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V019",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V021",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V021",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V021",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V021",
+      "mutation": "missing_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V021",
+      "mutation": "wrong_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V021",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V021",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V021",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V021",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V022",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V022",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V022",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V022",
+      "mutation": "missing_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V022",
+      "mutation": "wrong_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V022",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V022",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V022",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V022",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V023",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V023",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V023",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V023",
+      "mutation": "missing_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V023",
+      "mutation": "wrong_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V023",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V023",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V023",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V023",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V025",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V025",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V025",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V025",
+      "mutation": "missing_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V025",
+      "mutation": "wrong_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V025",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V025",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V025",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V025",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V026",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V026",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V026",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V026",
+      "mutation": "missing_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V026",
+      "mutation": "wrong_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V026",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V026",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V026",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V026",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V027",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V027",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V027",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V027",
+      "mutation": "missing_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V027",
+      "mutation": "wrong_channel_duration",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V027",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V027",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V027",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V027",
+      "mutation": "extra_tool",
+      "all_audio_preserved": true
+    }
+  ]
+}

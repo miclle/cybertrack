@@ -38,6 +38,8 @@ def main():
         for suite in ("run_mcp_tests.py", "run_audio_tests.py"):
             commands.append([sys.executable, f"firmware/esp32-audio/tests/{suite}", "--source", str(source)])
         commands.append([sys.executable, "scripts/check_plan_feedback.py", "--executable", str(ROOT/"build/audio-host/feedback_replay")])
+        commands.append([sys.executable, "scripts/check_effect_alias_feedback.py", "--executable", str(ROOT/"build/audio-host/feedback_replay"),
+                         "--output", str(out/"effect-alias-feedback.json")])
         host_build = ROOT / "build/full-firmware-host"
         commands.extend([
             [sys.executable, "scripts/build_firmware_host.py", "--source", str(source), "--output", str(host_build)],

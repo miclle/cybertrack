@@ -1,6 +1,6 @@
 # 固件能力与接口手册
 
-当前参数核对于 2026-11-01；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码候选为 [ct71](esp32-audio/verification-ct71.json)，最近记录部署为 `2.0.3-ct45`，部署与无动作检查见 [startup-ct45.json](esp32-audio/startup-ct45.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+当前参数核对于 2026-11-01；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码候选为 [ct72](esp32-audio/verification-ct72.json)，最近记录部署为 `2.0.3-ct45`，部署与无动作检查见 [startup-ct45.json](esp32-audio/startup-ct45.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
 
 ct62 候选新增[单次识别失败隔离](../docs/validation/voice-input-guard.md)：同轮失败后拒绝动作、调速与改稿，查询和全停保留，新输入恢复。内部代际不可由调用者传入，公开工具参数不变；未部署。
 
@@ -66,3 +66,5 @@ ct68 增加[含糊动作门禁](../docs/validation/vague-action-admission.md)：
 ct70 在 WebSocket／MQTT／SDK 原始字符串入口拒绝会被 cJSON 截成合法前缀的机器人零字符请求；锁定本轮失败，保留合法停止与新输入恢复。十二项工具、字符串步骤和角色不变，未部署；[验证及范围](../docs/validation/mcp-raw-json.md)。
 
 ct71 的[有限否定输入门禁](../docs/validation/negative-input-admission.md)返回 `input_negated` 与 `negation_facts`，拒绝受支持完整否定句的新写入，仅在完全空闲时保护草稿免受误调 stop 清除。活动／等待的全停、BOOT 与可信网页保留；真实停止先关输出再分配回执。未知表达和活动否定语义仍按原模型要求验收，未部署。
+
+ct72 的[效果成功确认播放](../docs/validation/effect-alias-feedback.md)匹配既有别名与狂暴模式，核对本轮参数及通道独立时长；超限、拒绝、问句与未知表达保留音频。只影响播放，工具、执行器约束及最近部署 ct45 不变。
