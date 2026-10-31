@@ -94,7 +94,6 @@ ACTION_ARGUMENT_CHECK = r'''    if (tool_name == "self.tank.bubbles" || tool_nam
             return;
         }
     }
-    if (tool_name == "self.tank.stop") CyberTrackActionStop();
     if (cybertrack || tool_name == "self.tank.water" || tool_name == "self.tank.move" || tool_name == "self.tank.move_and_water" || tool_name == "self.tank.bubbles" || tool_name == "self.tank.ignition" || tool_name == "self.tank.frenzy" || tool_name == "self.tank.sequence" || tool_name == "self.tank.adjust_speed" || tool_name == "self.tank.set_speed")
         ESP_LOGI("CT_AUDIO", "RPC id=%d tool=%s", id, tool_name.c_str());'''
 
@@ -115,7 +114,7 @@ def main():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct63")')
+                 'set(PROJECT_VER "2.0.3-ct66")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',

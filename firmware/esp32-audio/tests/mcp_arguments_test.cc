@@ -5,9 +5,8 @@
 #include <cstring>
 #include <string>
 #include <iostream>
-static bool rejected, stopped;
+static bool rejected;
 static void ReplyError(int, const char*) { rejected = true; }
-static void CyberTrackActionStop() { stopped = true; }
 #define ESP_LOGI(...) ((void)0)
 static void validate(const std::string& tool_name, cJSON* tool_arguments) {
     [[maybe_unused]] const int id = 1;
@@ -15,12 +14,11 @@ static void validate(const std::string& tool_name, cJSON* tool_arguments) {
 #include "argument_checks.inc"
 }
 static void check(const char* tool, const char* json, bool valid) {
-    rejected = stopped = false;
+    rejected = false;
     cJSON* args = json ? cJSON_Parse(json) : nullptr;
     if (json) assert(args);
     validate(tool, args);
     assert(rejected != valid);
-    assert(stopped == (valid && !strcmp(tool,"self.tank.stop")));
     cJSON_Delete(args);
 }
 int main() {

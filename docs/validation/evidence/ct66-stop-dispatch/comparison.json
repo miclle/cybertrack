@@ -1,0 +1,17 @@
+{
+  "scope": "Offline actual MCP scheduling comparison; no new model/device/physical acceptance",
+  "baseline_failed": [
+    "active_sequence_then_new_input",
+    "later_input_action_survives_completed_stop",
+    "no_second_stop_callback",
+    "pending_action_cancelled_before_stop_receipt",
+    "stop_without_recognized_input"
+  ],
+  "candidate_failed": [],
+  "scenarios": 8,
+  "baseline_stop_already_turns_outputs_off": true,
+  "fix": "Synchronous stop completion and receipt; no scheduled second callback",
+  "public_tool_definitions_unchanged": true,
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "flashed": false
+}
