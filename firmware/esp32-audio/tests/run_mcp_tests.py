@@ -139,3 +139,10 @@ subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(root/'f
                 str(Path(__file__).with_name('voice_feedback_test.cc')), str(build/'cJSON.o'),
                 '-o', str(build/'voice_feedback_test')], check=True)
 subprocess.run([str(build/'voice_feedback_test')], check=True)
+subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(root/'firmware/esp32-audio'),
+                str(Path(__file__).with_name('spoken_playback_test.cc')), str(build/'cJSON.o'),
+                '-o', str(build/'spoken_playback_test')], check=True)
+subprocess.run([str(build/'spoken_playback_test')], check=True)
+subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(root/'firmware/esp32-audio'),
+                str(root/'scripts/replay_lingxi_feedback.cc'), str(build/'cJSON.o'),
+                '-o', str(build/'feedback_replay')], check=True)

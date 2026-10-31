@@ -1,0 +1,287 @@
+{
+  "scope": "Offline playback policy replay plus synthetic mismatches; no new platform sessions, audio decoding or board IO",
+  "capture_gzip_sha256": "59e75b5d6fba14ac50ee4dcf08562ddf2679569b6806051e8c85b7cfbca91aa2",
+  "baseline_sha256": "61987c502277b487ee9aa46da905719ce156e4f4279166150851d07e5ae785bc",
+  "source_sha256": {
+    "firmware/esp32-audio/voice_feedback.h": "4c02ee77272baa0c24f9e80858ed8d628a80fdb7462187fb3254a3bb113e60bb",
+    "firmware/esp32-audio/spoken_playback.h": "acca0a7b78cacc51e9ff611a045bf9df4788f2340bfd53a555bbc873d5a18651",
+    "scripts/replay_lingxi_feedback.cc": "aed8412d1e4d6b0f9aa6414432d3f662d6ebfecc9d96489bffe66cea840d5cc2"
+  },
+  "executable_sha256": "95b5e6ea9fa07df472856519f5d6d9b9d96119ddcccbbbd5e0709dd07414a29e",
+  "suppressed": 464,
+  "audible": 397,
+  "results": [
+    {
+      "id": "V001",
+      "completed": true,
+      "suppressed": 18,
+      "audible": 0
+    },
+    {
+      "id": "V005",
+      "completed": true,
+      "suppressed": 24,
+      "audible": 0
+    },
+    {
+      "id": "V009",
+      "completed": true,
+      "suppressed": 22,
+      "audible": 0
+    },
+    {
+      "id": "V013",
+      "completed": true,
+      "suppressed": 22,
+      "audible": 0
+    },
+    {
+      "id": "V017",
+      "completed": false,
+      "suppressed": 0,
+      "audible": 0
+    },
+    {
+      "id": "V021",
+      "completed": true,
+      "suppressed": 34,
+      "audible": 0
+    },
+    {
+      "id": "V029",
+      "completed": true,
+      "suppressed": 48,
+      "audible": 0
+    },
+    {
+      "id": "V031",
+      "completed": true,
+      "suppressed": 30,
+      "audible": 0
+    },
+    {
+      "id": "V033",
+      "completed": true,
+      "suppressed": 70,
+      "audible": 0
+    },
+    {
+      "id": "V035",
+      "completed": true,
+      "suppressed": 28,
+      "audible": 0
+    },
+    {
+      "id": "V037",
+      "completed": true,
+      "suppressed": 40,
+      "audible": 0
+    },
+    {
+      "id": "V040",
+      "completed": true,
+      "suppressed": 28,
+      "audible": 0
+    },
+    {
+      "id": "V045",
+      "completed": true,
+      "suppressed": 38,
+      "audible": 0
+    },
+    {
+      "id": "V051",
+      "completed": true,
+      "suppressed": 62,
+      "audible": 0
+    },
+    {
+      "id": "V053",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 40
+    },
+    {
+      "id": "V057",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 62
+    },
+    {
+      "id": "V061",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 22
+    },
+    {
+      "id": "V067",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 61
+    },
+    {
+      "id": "V072",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 114
+    },
+    {
+      "id": "V077",
+      "completed": true,
+      "suppressed": 0,
+      "audible": 98
+    }
+  ],
+  "synthetic_mismatches": [
+    {
+      "id": "V029",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V029",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V029",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V029",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V029",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V029",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V031",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V031",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V031",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V031",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V031",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V031",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V033",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V033",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V033",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V033",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V033",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V033",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V035",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V035",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V035",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V035",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V035",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V035",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V037",
+      "mutation": "wrong_request",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V037",
+      "mutation": "rejected_receipt",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V037",
+      "mutation": "missing_fault",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V037",
+      "mutation": "negation",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V037",
+      "mutation": "early_speech",
+      "all_audio_preserved": true
+    },
+    {
+      "id": "V037",
+      "mutation": "new_input",
+      "all_audio_preserved": true
+    }
+  ]
+}

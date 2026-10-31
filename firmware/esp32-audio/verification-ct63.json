@@ -1,0 +1,18 @@
+{
+  "version": "2.0.3-ct63",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "scope": "Playback whitelist for recognized ordinary action plans and target speed; no new control tools, role edits or physical acceptance.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2712304,
+    "sha256": "da03724f12db78b35f2951998209290b07c2f32766fb2e807bfd86f28b647977"
+  },
+  "checks": [
+    "ASan/UBSan playback grammar and request/receipt tests pass, including sharing, ordering, sixteen-step limit, invalid/limited inputs, late speech and stale receipts.",
+    "Same twenty captured STT/tool/packet traces: 464 confirmation packets suppressed, 397 state/negation/clarification packets preserved; V017 has no audio and remains incomplete.",
+    "Thirty synthetic mismatches preserve all audio: wrong requests, rejected results, missing fault, negation, early speech and new input.",
+    "All twelve local check groups pass, including 81 improvement tests and unchanged public tool definitions compared with ct62."
+  ],
+  "evidence": "../../docs/validation/evidence/ct63-plan-feedback/playback-review.json"
+}
