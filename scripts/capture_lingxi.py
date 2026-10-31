@@ -133,17 +133,18 @@ def timed_status(profile, elapsed_ms, name, args):
     return receipt
 
 
-def draft_host_reply(executable, history, name, args, elapsed_ms):
-    """Re-run this conversation's valid RPC prefix from an identical web draft."""
+def host_reply(executable, profile, history, name, args, elapsed_ms):
+    """Re-run this conversation's valid RPC prefix from the same initial firmware state."""
     tool = name.replace('self_tank_', 'self.tank.', 1)
-    if tool not in ('self.tank.get_status', 'self.tank.stop', 'self.tank.compose'):
-        raise ValueError('RPC outside draft replay')
+    allowed = ('get_status', 'stop', 'compose') if profile == 'two_step_web_draft' else ('get_status', 'set_speed')
+    if tool.removeprefix('self.tank.') not in allowed:
+        raise ValueError('RPC outside host replay')
     call = dict(name=tool, arguments=args, elapsed_ms=elapsed_ms)
     calls = [*history, call]
-    process = subprocess.run([str(executable), 'two_step_web_draft'], input=json.dumps(calls),
+    process = subprocess.run([str(executable), profile], input=json.dumps(calls),
                              text=True, capture_output=True, timeout=10)
     if process.returncode == 3:
-        raise ValueError('invalid draft RPC arguments')
+        raise ValueError('invalid host RPC arguments')
     process.check_returncode()
     lines = process.stdout.splitlines()
     if len(lines) != len(calls) + 1:
@@ -166,7 +167,7 @@ async def capture_case(connection,tools,case,timeout=45):
         timeline.append(dict(ms=round((time.monotonic()-opened)*1000), event=event, **details))
     uplink = case.get('opus_frames')
     input_ms=None
-    draft_history=[]
+    call_history=[]
     draft_observed_at=None
     session=None;sent=False;deadline=opened+timeout;audio_bytes=0
     async with connect(ENDPOINT,additional_headers=headers,proxy=None,open_timeout=15,max_size=2**20) as ws:
@@ -186,6 +187,7 @@ async def capture_case(connection,tools,case,timeout=45):
                 payload=msg.get('payload',{});method=payload.get('method');params=payload.get('params') or {}
                 row['events'].append(method)
                 result=None
+                rpc_error=None
                 if method=='initialize':result=dict(protocolVersion='2024-11-05',capabilities={'tools':{}},serverInfo=dict(name='CyberTrack capture only',version=version))
                 elif method=='tools/list':result=tools_page(tools,params.get('cursor',''))
                 elif method=='tools/call':
@@ -194,9 +196,9 @@ async def capture_case(connection,tools,case,timeout=45):
                     row['calls'].append(dict(name=name,arguments=args))
                     try:
                         if name.replace('self_tank_','self.tank.',1) not in {t['name'] for t in tools}:raise ValueError('unknown tool')
-                        if version == 'draft_host':
+                        if version in ('draft_host','speed_host'):
                             if input_ms is None:raise ValueError('missing evaluation input')
-                            receipt=draft_host_reply(case['draft_host'],draft_history,name,args,timeline[-1]['ms']-input_ms)
+                            receipt=host_reply(case['host_binary'],case['initial_profile'],call_history,name,args,timeline[-1]['ms']-input_ms)
                         elif version == 'timed_host':
                             if input_ms is None:raise ValueError('missing evaluation input')
                             receipt=timed_status(case['initial_motion'],timeline[-1]['ms']-input_ms,name,args)
@@ -217,13 +219,19 @@ async def capture_case(connection,tools,case,timeout=45):
                                 if name.endswith('get_status'): receipt.update(fields)
                             else: receipt['status_facts'] = output
                         if name.endswith('compose') or name.endswith('stop'):status=copy.deepcopy(receipt);status['result']='ok'
-                        row.setdefault('simulated_receipts',[]).append(receipt)
-                        result={'content':[{'type':'text','text':json.dumps(receipt,ensure_ascii=False)}],'isError':False}
+                        if 'rpc_error' in receipt:
+                            rpc_error=dict(message=receipt['rpc_error'])
+                            row.setdefault('rpc_errors',[]).append(dict(name=name, **rpc_error))
+                        else:
+                            row.setdefault('simulated_receipts',[]).append(receipt)
+                            result={'content':[{'type':'text','text':json.dumps(receipt,ensure_ascii=False)}],'isError':False}
                     except (ValueError,KeyError,TypeError,IndexError):result={'content':[{'type':'text','text':'capture fixture rejected invalid arguments'}],'isError':True}
-                if result is not None:
+                if rpc_error is not None:
+                    await send(dict(type='mcp',payload=dict(jsonrpc='2.0',id=payload['id'],error=rpc_error)))
+                elif result is not None:
                     await send(dict(type='mcp',payload=dict(jsonrpc='2.0',id=payload['id'],result=result)))
                 if method=='tools/call':
-                    mark('tool_reply_sent', name=name, is_error=result['isError'])
+                    mark('tool_reply_sent', name=name, is_error=rpc_error is not None or result['isError'])
                 if method=='tools/list' and not result.get('nextCursor') and not sent:
                     # Context is visibly separate from the user's phrase; the
                     # runner never reads expected_calls or response_expectation.
@@ -279,9 +287,14 @@ async def run(args):
         for case in cases: case['raw_text']=True
     version = 'timed_host' if timed else 'ct47' if getattr(args,'ct47',False) else 'ct46' if getattr(args,'ct46',False) else 'ct45'
     draft_host=getattr(args,'draft_host',None)
-    if draft_host:
-        version='draft_host'
-        for case in cases: case['draft_host']=draft_host.resolve()
+    speed_host=getattr(args,'speed_host',None)
+    if speed_host and not getattr(args,'synthetic_speech',False):
+        raise ValueError('speed host requires synthetic speech')
+    if draft_host or speed_host:
+        version='draft_host' if draft_host else 'speed_host'
+        binary=draft_host or ROOT/'build/audio-host/receipt_replay'
+        for case in cases:
+            case.update(host_binary=binary.resolve(), initial_profile='two_step_web_draft' if draft_host else speed_host)
     for case in cases:
         case['fixture_version']=version
         if getattr(args,'audio_packets',False): case['audio_packets']=True
@@ -299,12 +312,14 @@ async def run(args):
         trace['input_mode'] = 'synthetic_opus'
         trace['synthesis_source_sha256'] = hashlib.sha256(Path(synthetic_speech.__file__).read_bytes()).hexdigest()
         trace['scope'] = 'Synthesized speech over real platform ASR; isolated fixture receipts; no microphone, speaker or device IO'
-    if timed or draft_host:
+    if timed or draft_host or speed_host:
         binary=draft_host or ROOT/'build/audio-host/receipt_replay'
         trace['host_replay_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
     if getattr(args,'audio_packets',False):trace['audio_packet_sizes_recorded']=True
-    if draft_host:
-        trace['initial_profile']='two_step_web_draft'
+    if draft_host or speed_host:
+        trace['initial_profile']='two_step_web_draft' if draft_host else speed_host
+    if speed_host:
+        trace['scope']='Synthesized speech over platform ASR; timed firmware host receipts; zero device IO'
     args.output.parent.mkdir(parents=True,exist_ok=True)
     for case in cases:
         if synthetic:
@@ -326,6 +341,7 @@ if __name__=='__main__':
     inputs.add_argument('--synthetic-speech',action='store_true',help='Send synthesized Mandarin as Opus frames, without input text or a microphone')
     inputs.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
     versions=p.add_mutually_exclusive_group()
+    versions.add_argument('--speed-host',choices=('idle','thirty_second_forward70'),help='Use timed firmware speed/status receipts for a synthetic utterance')
     versions.add_argument('--draft-host',type=Path,metavar='REPLAY',help='Use host firmware with a two-step web draft at revision 7')
     versions.add_argument('--timed-host',action='store_true',help='Use read-only host firmware receipts at observed RPC offsets')
     versions.add_argument('--ct47', action='store_true', help='Include draft capabilities and fault recovery in candidate receipts')

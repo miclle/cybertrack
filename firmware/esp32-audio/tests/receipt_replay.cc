@@ -1,4 +1,4 @@
-// Replay the evaluation's read, stop and compose RPCs with a controlled host clock.
+// Replay the evaluation's status, speed, stop and compose RPCs with a controlled host clock.
 // Unimplemented RPCs fail the replay; the executable links no board IO.
 #include "receipt_host.h"
 #include <iostream>
@@ -12,9 +12,10 @@ int main(int argc, char** argv) {
     sessions.Tick(clock_ms,false);
     uint32_t draft_web_owner = 0;
     uint64_t last_heartbeat = clock_ms;
-    if (profile == "forward70" || profile == "short_forward70") {
+    if (profile == "forward70" || profile == "short_forward70" || profile == "thirty_second_forward70") {
         int ticket = sessions.VoiceClaim(clock_ms,1,AudioActionGuard::MoveOnly);
-        Reply("move",ticket,profile == "forward70" ? 4000 : 400,"forward",0,0,nullptr,nullptr,70);
+        const int duration = profile == "thirty_second_forward70" ? 30000 : (profile == "forward70" ? 4000 : 400);
+        Reply("move",ticket,duration,"forward",0,0,nullptr,nullptr,70);
         if (!guard.Moving() || guard.Starts() != 1) return 2;
     } else if (profile == "sequence_forward_bubbles") {
         ActionPlan plan;
@@ -82,6 +83,15 @@ int main(int argc, char** argv) {
             int ticket = sessions.VoiceClaim(clock_ms,id,AudioActionGuard::PlanMode);
             if (!ticket) return 3;
             std::cout << Reply("show_edit",ticket,0,nullptr,0,0,nullptr,nullptr,100,&edit) << '\n';
+        } else if (tool == "self.tank.set_speed") {
+            auto* speed = cJSON_GetObjectItemCaseSensitive(args, "speed_percent");
+            if (cJSON_GetArraySize(args) != 1 || !ShowInteger(speed,60,100)) return 3;
+            int ticket = sessions.VoiceClaim(clock_ms,id,AudioActionGuard::SpeedMode);
+            if (!ticket) {
+                std::cout << R"({"rpc_error":"Action request duplicate, channel busy or cooling, offline, queue full, or cancelled by web priority"})" << '\n';
+                continue;
+            }
+            std::cout << Reply("set_speed",ticket,speed->valueint) << '\n';
         } else if ((tool == "self.tank.get_status" || tool == "self.tank.stop") && cJSON_GetArraySize(args)==0) {
             if (tool == "self.tank.stop") sessions.Stop(clock_ms); // Same immediate cancellation as MCP dispatch.
             std::cout << Reply(tool.c_str()+10) << '\n';
