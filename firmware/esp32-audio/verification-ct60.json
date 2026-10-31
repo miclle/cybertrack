@@ -12,6 +12,7 @@
     "ct59 and ct60 generated MCP parameter-validation blocks are byte identical.",
     "Exported schema comparison: only the bubbles description differs; all tool names and parameters are unchanged.",
     "Actual parameter gate accepts 30000 ms and rejects 60000 ms, boolean duration and extra keys. Stop is an inert host stub.",
-    "Capture tests verify rejected parameters skip simulated acceptance and receipt decorators, preserve the actual request, and return the original RPC error."
+    "Capture tests verify rejected parameters skip simulated acceptance and receipt decorators, preserve the actual request, and return the original RPC error.",
+    "All eight local check groups passed against ct60, including 65 improvement tests and actual MCP/control/audio/stop suites."
   ]
 }
