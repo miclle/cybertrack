@@ -11,6 +11,7 @@ import datetime
 import hashlib
 import json
 import os
+import subprocess
 from pathlib import Path
 import re
 import time
@@ -137,7 +138,7 @@ async def capture_case(connection,tools,case,timeout=45):
                 payload=msg.get('payload',{});method=payload.get('method');params=payload.get('params') or {}
                 row['events'].append(method)
                 result=None
-                if method=='initialize':result=dict(protocolVersion='2024-11-05',capabilities={'tools':{}},serverInfo=dict(name='CyberTrack capture only',version='ct45'))
+                if method=='initialize':result=dict(protocolVersion='2024-11-05',capabilities={'tools':{}},serverInfo=dict(name='CyberTrack capture only',version='ct46' if case.get('ct46') else 'ct45'))
                 elif method=='tools/list':result=tools_page(tools,params.get('cursor',''))
                 elif method=='tools/call':
                     name=params['name'];args=params.get('arguments',{})
@@ -146,6 +147,10 @@ async def capture_case(connection,tools,case,timeout=45):
                     try:
                         if name.replace('self_tank_','self.tank.',1) not in {t['name'] for t in tools}:raise ValueError('unknown tool')
                         receipt=simulated_reply(status,name,args)
+                        if case.get('ct46') and name.endswith('get_status'):
+                            helper = Path(__file__).resolve().parents[1] / 'build/lingxi-schema-export/status-fixture'
+                            receipt['status_facts'] = subprocess.run([str(helper)], input=json.dumps(receipt),
+                                text=True, capture_output=True, check=True).stdout.strip()
                         if name.endswith('compose') or name.endswith('stop'):status=copy.deepcopy(receipt);status['result']='ok'
                         row.setdefault('simulated_receipts',[]).append(receipt)
                         result={'content':[{'type':'text','text':json.dumps(receipt,ensure_ascii=False)}],'isError':False}
@@ -169,7 +174,8 @@ async def capture_case(connection,tools,case,timeout=45):
                     row['completed']=msg.get('is_aborted') is not True
                     if not row['completed']:row['completion']='tts_aborted'
                     break
-            elif kind=='stt':row['echoed_text']=msg.get('text','')
+            elif kind=='stt':
+                row['echoed_text']=msg.get('text','');mark('stt', text=row['echoed_text'])
             elif kind in ('error','goodbye'):row['events'].append(kind);break
     row['received_audio_bytes_discarded']=audio_bytes
     row.setdefault('completion','tts_stop' if row['completed'] else 'incomplete_or_timeout')
@@ -191,7 +197,9 @@ async def run(args):
     cases=[{k:c[k] for k in ('id','text','context','fixture_status') if k in c} for c in cases]
     if getattr(args, 'raw_text', False):
         for case in cases: case['raw_text']=True
-    trace=dict(kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
+    if getattr(args,'ct46',False):
+        for case in cases: case['ct46']=True
+    trace=dict(fixture_version='ct46' if getattr(args,'ct46',False) else 'ct45',kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
                model_source='visible platform configuration; no model identity in WSS response',role_sha256=hashlib.sha256(args.role.read_bytes()).hexdigest(),
                transport=ENDPOINT,tool_schema_sha256=hashlib.sha256(args.tools.read_bytes()).hexdigest(),corpus_sha256=hashlib.sha256(args.corpus.read_bytes()).hexdigest(),
                input_mode='raw_text_diagnostic' if getattr(args,'raw_text',False) else 'context_prefixed',
@@ -210,6 +218,7 @@ if __name__=='__main__':
     for name in ('connection','tools','corpus','role','output'):p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
     p.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
+    p.add_argument('--ct46', action='store_true', help='Use candidate status facts compiled from status_facts.h')
     args=p.parse_args()
     try:asyncio.run(run(args))
     except Exception as error:

@@ -172,7 +172,7 @@ def main():
     apply_feedback_overlay(source, replace_once)
     apply_audio_overlay(source, replace_once)
     apply_display_overlay(source, replace_once)
-    for name in ("voice_feedback.h", "show_draft.h", "show_command_json.h", "recent_command.h", "proximity_guard.h", "proximity_audio.h", "proximity_audio.cc", "distance_reading.h", "ultrasonic.h", "ultrasonic.cc", "cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
+    for name in ("status_facts.h", "voice_feedback.h", "show_draft.h", "show_command_json.h", "recent_command.h", "proximity_guard.h", "proximity_audio.h", "proximity_audio.cc", "distance_reading.h", "ultrasonic.h", "ultrasonic.cc", "cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
         shutil.copy2(HERE / name, board / name)
     sounds = '#pragma once\n'
     for key, filename in (("ProximityBeep", "range-beep.ogg"), ("ProximityStop", "range-stop.ogg")):
