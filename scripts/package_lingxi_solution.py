@@ -77,7 +77,7 @@ def build_archive(root, paths, head, dirty):
 python3 scripts/review_lingxi_reference.py
 ```
 
-从此包复现的是记录所列工具版本和角色的结果，历史基线保留在 scores，ct57 工具回归保留在 candidate_scores，ct61 原话和真实固件主机的 80 条另在 firmware_host_scores。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出分别列出三种记录的成绩、偏差用例编号与门槛判断，并标明工具来源和输入模式。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，静态夹具与真实固件主机分别标识。完整主机源码与构建入口见[固件主机验证](docs/validation/firmware-host.md)，参考包离线复算工具选择，控制守卫重放需要完整 checkout。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
+从此包复现的是记录所列工具版本和角色的结果，历史基线保留在 scores，ct57 工具回归保留在 candidate_scores，ct61 原话和真实固件主机的 80 条语义及八条编排另在 firmware_host_scores，编排首次超时继续列入 incomplete。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出分别列出三种记录的成绩、偏差用例编号与门槛判断，并标明工具来源和输入模式。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，静态夹具与真实固件主机分别标识。完整主机源码与构建入口见[固件主机验证](docs/validation/firmware-host.md)，参考包离线复算工具选择，控制守卫重放需要完整 checkout。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
 
 - 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
 - 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
