@@ -24,7 +24,7 @@ I04 的离线采集／分析入口。分析器不连接设备、不发动作、�
 
 ## 文件格式
 
-将空的 `stop-trials.json` 复制到本地忽略目录 `output/validation/`，保留原始测量资料；不要提交个人信息、录音或凭据。根字段固定为 `schema_version: 1`、`profiles` 和 `trials`。
+将空的 `stop-trials.json` 复制到本地忽略目录 `output/validation/`，保留原始测量资料；不要提交个人信息、录音或凭据。新记录使用 `schema_version: 2`、`profiles` 和 `trials`。旧版 1 的记录仍可读取，既有测量值继续参与统计。旧记录缺少设备检测与恢复时间轴，会标记为缺项；应依据原始资料补录后再按版本 2 分析。
 
 一个配置的字段如下，未测量时不要创建虚构记录：
 
@@ -56,13 +56,16 @@ python3 scripts/analyze_stop_trials.py --init-profile output/validation/profile.
 | `repeat` | 同一配置／案例下从 1 开始的独立重复编号 |
 | `evidence_ref` | 可回查的原始波形、视频或记录引用；待采集填 `null`，脚本不会读取、上传或认证它 |
 | `event_ms` | 该证据共同单调时间轴上的事件时刻，非负有限值；待采集填 `null` |
+| `device_event_ms` | 同一时间轴上，设备实际处理停止、释放或检测到来源失联的时刻。无观测填 `null`，不可根据额定租期倒推 |
+| `recovered_ms`、`observed_until_ms` | 恢复至可接受新指令的时刻，以及持续观察结束的时刻。两者之差须达到本配置预设的观察窗口 |
 | `channels` | 与案例要求完全一致的活动通道，逐路填下表 |
 | `recovery_observed` | 已完成恢复及约定窗口观察填 `true`；未完成填 `false` 或 `null` |
-| `stale_action_resumed` | 观察到旧动作恢复填 `true`；在完成观察窗口后未出现填 `false`；未知填 `null` |
+| `stale_action_resumed` | 从设备处理触发事件起至恢复观察结束，发现旧动作恢复或后续步骤启动填 `true`；完成该段观察且未出现填 `false`；未知填 `null` |
 
 每路 `channels.<通道>` 包含以下全部字段：
 
 - `source`：按案例填写 `web` 或 `voice`。间隔阶段记录被测序列的来源，不把待机输出的 `none` 当作新来源。
+- `normal_end` 记录未触发停止时，该路定时输出原计划的结束时刻（同一时间轴，毫秒）。持续按住且正常续租的独立网页通道填 `"while_held"`，未知或间隔阶段填 `null`。被要求停止的活动通道如果不能在测量误差内区分正常截止与触发关断，本条不计完整。
 - `output_off_ms`：该通道实际测点关闭时刻，未知填 `null`。活动阶段早于触发的关闭时间不能计为有效停机试验；间隔阶段应已关闭，迟于触发会报告违例。
 - `mechanical_stop_ms`：仅 `move` 填履带／整机按约定方法停止的时刻，其他通道填 `null`。与输出时刻分别测量，允许机械先停、输出稍后关闭；不从 GPIO 状态推断机械停止。
 - `stopping_distance_mm`：仅被要求停止的 `move` 记录触发后位移，未知填 `null`，其他通道填 `null`。实际已经静止才能填 0。

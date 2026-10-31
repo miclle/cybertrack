@@ -25,17 +25,18 @@ def trial(case, repeat=1, name="synthetic"):
     channels = {}
     for channel, source in case.sources.items():
         off = 1010 if case.phase == "active" else 900
-        channels[channel] = {"source": source, "output_off_ms": off if channel in case.stop else None,
+        channels[channel] = {"source": source, "normal_end": 8000 if case.phase == "active" else None, "output_off_ms": off if channel in case.stop else None,
                              "mechanical_stop_ms": (1030 if case.phase == "active" else 920) if channel == "move" and channel in case.stop else None,
                              "stopping_distance_mm": 12 if channel == "move" and channel in case.stop else None,
                              "continued_until_own_deadline": True if channel in case.keep else None}
     return {"id": f"{name}-{case.id}-{repeat}", "profile_id": name, "case_id": case.id,
             "repeat": repeat, "evidence_ref": f"synthetic:{name}:{case.id}:{repeat}", "event_ms": 1000,
+            "device_event_ms": 1005, "recovered_ms": 2000, "observed_until_ms": 7000,
             "channels": channels, "recovery_observed": True, "stale_action_resumed": False}
 
 
 def dataset():
-    return {"schema_version": 1, "profiles": [profile()],
+    return {"schema_version": 2, "profiles": [profile()],
             "trials": [trial(c, n) for c in stop.CASES for n in range(1, 6)]}
 
 
@@ -93,7 +94,7 @@ class StopTrialsTest(unittest.TestCase):
         self.assertEqual(stop.analyze(data)["profiles"][0]["cases"][0]["status"], "incomplete")
 
     def test_profiles_and_phases_are_not_pooled(self):
-        data = {"schema_version": 1, "profiles": [profile("a"), profile("b")],
+        data = {"schema_version": 2, "profiles": [profile("a"), profile("b")],
                 "trials": [trial(stop.CASES[0], n, "a") for n in range(1, 4)] +
                           [trial(stop.CASES[0], n, "b") for n in range(1, 3)]}
         report = stop.analyze(data)
@@ -103,7 +104,7 @@ class StopTrialsTest(unittest.TestCase):
 
     def test_waiting_outputs_already_off_and_independent_mechanical_clock(self):
         case = stop.CASE_BY_ID["sequence_cancel_web_waiting"]
-        data = {"schema_version": 1, "profiles": [profile()], "trials": [trial(case)]}
+        data = {"schema_version": 2, "profiles": [profile()], "trials": [trial(case)]}
         report = stop.analyze(data)
         row = next(c for c in report["profiles"][0]["cases"] if c["case_id"] == case.id)
         self.assertEqual(row["metrics"]["move"]["output_latency_ms"]["median"], 0)
@@ -117,7 +118,7 @@ class StopTrialsTest(unittest.TestCase):
         self.assertEqual(stop.analyze(data)["profiles"][0]["cases"][0]["complete_records"], 1)
 
     def test_bad_values_duplicate_identity_and_source_are_rejected(self):
-        base = {"schema_version": 1, "profiles": [profile()], "trials": [trial(stop.CASES[0])]}
+        base = {"schema_version": 2, "profiles": [profile()], "trials": [trial(stop.CASES[0])]}
         mutations = [
             lambda d: d["trials"].append(copy.deepcopy(d["trials"][0])),
             lambda d: d["trials"][0].update(case_id="unknown"),
@@ -138,6 +139,29 @@ class StopTrialsTest(unittest.TestCase):
         base["trials"].append(duplicate)
         with self.assertRaisesRegex(ValueError, "event already counted"): stop.analyze(base)
 
+    def test_deadline_and_recovery_are_independent_evidence(self):
+        case = stop.CASE_BY_ID["page_hidden_mixed"]
+        t = trial(case)
+        d = {"schema_version": 2, "profiles": [profile()], "trials": [t]}
+        def record():
+            return next(row for row in stop.analyze(d)["profiles"][0]["cases"] if row["case_id"] == case.id)["trials"][0]
+        self.assertEqual(record()["detection_latency_ms"], 5)
+        t["observed_until_ms"] -= 1
+        t["channels"]["move"]["normal_end"] = 1011  # off at 1010, measurement error 1 ms
+        self.assertEqual(len(record()["missing"]), 2)
+        t["observed_until_ms"] += 1
+        t["channels"]["move"]["normal_end"] = "while_held"
+        self.assertEqual(record()["missing"], [])
+        t["device_event_ms"] = 1012
+        self.assertIn("move: output already off before device detected trigger", record()["missing"])
+        t["device_event_ms"] = 2001
+        with self.assertRaisesRegex(ValueError, "must be ordered"): record()
+        d["schema_version"] = 1
+        for key in ("device_event_ms", "recovered_ms", "observed_until_ms"): del t[key]
+        for c in t["channels"].values(): del c["normal_end"]
+        self.assertIn("device trigger timestamp missing", record()["missing"])
+        self.assertIsNone(record()["recovery_observation_ms"])
+
     def test_cli_keeps_input_and_provenance(self):
         with tempfile.TemporaryDirectory() as folder:
             source, output = Path(folder)/"trials.json", Path(folder)/"report.json"
@@ -152,7 +176,7 @@ class StopTrialsTest(unittest.TestCase):
             result = subprocess.run(command+[str(source)], capture_output=True, text=True)
             self.assertNotEqual(result.returncode, 0)
             self.assertEqual(source.read_bytes(), before)
-            source.write_text('{"schema_version": 1, "schema_version": 1, "profiles": [], "trials": []}')
+            source.write_text('{"schema_version": 1, "schema_version": 2, "profiles": [], "trials": []}')
             result = subprocess.run(command+[str(output)], capture_output=True, text=True)
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("duplicate JSON field", result.stderr)
