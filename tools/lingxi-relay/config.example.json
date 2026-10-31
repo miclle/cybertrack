@@ -1,0 +1,9 @@
+{
+  "upstream_url": "https://example.invalid/v1/chat/completions",
+  "upstream_model": "your-non-thinking-model",
+  "public_model": "cybertrack-dialogue",
+  "upstream_api_key_env": "CYBERTRACK_LLM_UPSTREAM_KEY",
+  "client_api_key_env": "CYBERTRACK_LLM_RELAY_KEY",
+  "disable_thinking": false,
+  "timeout_seconds": 45
+}

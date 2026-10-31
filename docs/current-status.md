@@ -35,7 +35,7 @@ ct45 部署检查的 39 条状态／操作回执全部输出关闭、动作启�
 
 真实灵矽隔离文本联调：首轮 76/80，角色修正后 77/80（96.25%），8 条编排仍匹配 5 条；只读解释 4/8 满足全部要求，45 条成功静默均未达成。见[最新复测](validation/lingxi-ct45-role-feedback-20261031.md)。无前缀诊断单独保留，未替代首轮成绩。真实设备网页、草稿 300538 ms 到期和六类非法输入拒绝均保持零启动。完整边界见[联调记录](validation/lingxi-ct45-20261031.md)。
 
-运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct72-src`，增加 17 类停止回放、实际 MCP／HTTP、音频适配、完整固件主机、输入失败隔离及即时停止回执检查；ct72 发布阶段十八组通过，含 106 项改进测试；新增完整 88 条效果播放回放。随后协议字段观测增加一项回归，现有 107 项 Python 测试通过。ct62 十一组通过，含 76 项改进测试；八组输入边界与四条历史请求为离线回放，不构成新模型成绩。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
+运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct72-src`，增加 17 类停止回放、实际 MCP／HTTP、音频适配、完整固件主机、输入失败隔离及即时停止回执检查；ct72 发布阶段十八组通过，含 106 项改进测试；新增完整 88 条效果播放回放。随后协议字段观测增加一项回归，后续中继原型增加 17 项本地测试，现有 124 项 Python 测试通过。ct62 十一组通过，含 76 项改进测试；八组输入边界与四条历史请求为离线回放，不构成新模型成绩。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
 
 要检查模型设计工具，请在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct72-src --model-design`。新增模型／几何／整机同步测试、插件 bundle 和合成宿主界面回归；统一报告记录工具源码哈希并排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
 
@@ -73,6 +73,8 @@ ct71 的[否定输入保护](validation/negative-input-admission.md)完成最终
 
 ct72 [效果确认播放](validation/effect-alias-feedback.md)复用完整 88 条实际 STT 轨迹，仅新增抑制普通点火的 64 个确认包；其余 85 条逐例计数保持，所有超限提示保留。81 条合成不一致均保留音频，原生夹具涵盖既有别名、模式及并发通道时长。源码候选更新，板上仍 ct45，模型语义及过程播报仍未完成。
 
-最新[灵矽参考材料包](../tools/lingxi-solution/README.md)单列 `full_speech_scores` 复算 ct71 原 80／8 语音成绩，附 ct72 播放摘要；81 项包内离线测试与 107 项完整源码测试通过。历史文本及 ct62 未完成 V017 保留，包内最小评分轨迹不包含完整 RPC 事件。
+最新[灵矽参考材料包](../tools/lingxi-solution/README.md)单列 `full_speech_scores` 复算 ct71 原 80／8 语音成绩，附 ct72 播放摘要；最近参考包 81 项包内离线测试通过；完整源码现有 124 项测试通过。历史文本及 ct62 未完成 V017 保留，包内最小评分轨迹不包含完整 RPC 事件。
 
 [协议字段与参数对照](validation/tts-protocol-observation.md)完成 8+8 条实际 STT 和恢复后的独立停止：`action=thinking` 不能区分有效限幅提示；临时 none 导致统一异常并漏停，未采纳，原 low／角色已保存重开恢复。原固定集与 ct72／ct45 版本保持，过程播报仍未解决。
+
+[模型工具轮中继原型](validation/llm-tool-round-relay.md)完成 17 项本地 HTTP／SSE 与策略测试，尚未采纳或接入平台。工具后分析仍放行，工具轮限幅文字也可能丢失，整轮缓冲时延未测；未更新模型成绩、固件或部署。

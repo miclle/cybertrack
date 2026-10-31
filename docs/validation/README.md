@@ -129,3 +129,5 @@ python3 scripts/analyze_maintenance.py docs/validation/templates.json \
 [ct72 效果确认播放](effect-alias-feedback.md)复用完整 88 条实际 STT 轨迹，按通道独立时长核对既有别名与模式，保留超限和异常音频；不更新模型或物理成绩。
 
 [协议字段与 none 对照](tts-protocol-observation.md)记录定向实际 STT、公开字段形态及参数恢复；排除将表情 thinking 当作内部推理的过滤方案，不新增完整模型成绩。
+
+[模型工具轮中继原型](llm-tool-round-relay.md)单列完全本地的 HTTP／SSE 夹具测试及未通过的采纳条件，不属于新平台会话或完整模型评分。

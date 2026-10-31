@@ -1,0 +1,32 @@
+{
+  "scope": "Only synthetic policy and real HTTP/SSE between local fixtures; no Lingxi, external model, board or audio IO",
+  "base_commit": "30b32004e496e39f88fbfe68054a67704720a6fa",
+  "created_utc": "2026-10-31T18:33:11.293591+00:00",
+  "tests_run": 17,
+  "passed": true,
+  "test_ids": [
+    "test_llm_relay.RelayHTTPTests.test_http_sse_ends_normally_and_no_tool_prose_is_sent",
+    "test_llm_relay.RelayHTTPTests.test_no_sse_headers_or_prose_escape_before_upstream_completion",
+    "test_llm_relay.RelayHTTPTests.test_redirect_does_not_send_credentials_to_another_request",
+    "test_llm_relay.RelayHTTPTests.test_truncated_response_does_not_return_partial_tool_calls",
+    "test_llm_relay.RelayHTTPTests.test_two_round_http_tool_loop_preserves_result_and_final_limit",
+    "test_llm_relay.RelayHTTPTests.test_unauthorized_and_invalid_requests_make_zero_upstream_calls",
+    "test_llm_relay.RelayHTTPTests.test_upstream_errors_never_retry_or_leak_response_text",
+    "test_llm_relay.RelayPolicyTests.test_bad_request_shapes_do_not_reach_upstream",
+    "test_llm_relay.RelayPolicyTests.test_config_requires_https_and_separate_environment_credential_inputs",
+    "test_llm_relay.RelayPolicyTests.test_final_limits_refusals_queries_and_clarifications_are_not_keyword_filtered",
+    "test_llm_relay.RelayPolicyTests.test_incomplete_or_inconsistent_tool_round_is_never_forwarded",
+    "test_llm_relay.RelayPolicyTests.test_invalid_tool_ids_arguments_and_choice_shapes_fail_closed",
+    "test_llm_relay.RelayPolicyTests.test_reasoning_mode_is_rejected_before_tool_calls_can_escape",
+    "test_llm_relay.RelayPolicyTests.test_refusal_is_retained_and_unknown_provider_fields_are_not_emitted",
+    "test_llm_relay.RelayPolicyTests.test_request_preserves_messages_tool_results_and_definitions",
+    "test_llm_relay.RelayPolicyTests.test_stream_has_no_tool_prose_and_preserves_ids_order_arguments_usage",
+    "test_llm_relay.RelayPolicyTests.test_tool_round_discards_prose_without_changing_any_calls"
+  ],
+  "source_sha256": {
+    "scripts/lingxi_llm_relay.py": "50da5edbcc119045b513fa600cd1edf6286d7c724d27a4f0bdf0d6c01629873c",
+    "tests/improvements/test_llm_relay.py": "609766465c1be9a7d0686ab3779c649ef2da1dd2720d3bc499cc14574cad24f9"
+  },
+  "live_platform_integration": false,
+  "adopted": false
+}
