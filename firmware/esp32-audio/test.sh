@@ -75,3 +75,7 @@ c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/show_test.cc \
   build/audio-host/water_policy.o -o build/audio-host/show_test
 build/audio-host/show_test
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
+  -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/voice_turn_test.cc \
+  build/audio-host/water_policy.o -o build/audio-host/voice_turn_test
+build/audio-host/voice_turn_test
