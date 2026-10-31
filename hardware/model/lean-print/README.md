@@ -42,6 +42,6 @@
 
 历史增量复现须恢复对应修订与输入副本，不可直接覆盖现有 27 件项目：在 FreeCAD Python 环境执行 `scripts/simplify_effect_mounts.py`，再执行 `python3 scripts/prepare_lean_print.py`，最后在 FreeCAD Python（含 Pillow）运行 `scripts/check_lean_print.py`。当前只读校验：`python3 scripts/check_backpack_release.py`；`python3 scripts/check_print_release.py` 检查并更新[当前报告](../print-ready/release-check.json)。旧版 `build_tank.py` 和历史四／五／六盘实验脚本不是本次增量交付入口，不能用旧压框方案覆盖现行交付。
 
-原始六盘文件已移至[固定校验基线](../archive/print-baselines/CyberTrack-34parts-6plates.3mf)，原哈希与缓存路径保持，复现脚本从该文件读取。用户另行重排并改为中文盘名的 Ready 项目保留在原位置；当前为 27 件、6 盘，背包直立独放第 6 盘且所有盘无缓存 G-code（34 件及 28 件／7 盘均为历史快照），不能用于 Lean 的历史路径对照，也不能把本页盘号直接套用到该项目。
+原始 34 件六盘文件已于 2026-10-31 清理，仅保留[历史基线说明](../archive/print-baselines/README.md)和原检查记录；历史复现脚本需要恢复对应修订及旧输入，当前只读校验不依赖该旧文件。用户另行重排并改为中文盘名的 Ready 项目保留在原位置；当前为 27 件、6 盘，背包直立独放第 6 盘且所有盘无缓存 G-code（34 件及 28 件／7 盘均为历史快照），不能用于 Lean 的历史路径对照，也不能把本页盘号直接套用到该项目。
 
 2026-10-26 清理已取消的 5 个压框的 7 份独立导出，以及过期 FreeCAD／Finder 备份；清理文件可从本机废纸篓恢复，见[清理记录](cleanup-report.json)。原始资料、当前模型、单件接口、切片配置与验证报告保留。历史脚本若需旧压框独立导出，应从 Git 历史恢复；当前只读交付校验不依赖它们；历史生成流程须恢复当时输入。
