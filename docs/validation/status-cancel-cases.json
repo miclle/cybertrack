@@ -1,0 +1,29 @@
+{
+  "scope": "Isolated raw utterances with concurrent movement and a separate unsent draft",
+  "cases": [
+    {
+      "id": "Q201",
+      "text": "取消序列",
+      "context": "当前速度70%；模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备在行走。仅定义评测输入，不是实测。",
+      "response_expectation": "只调用全停"
+    },
+    {
+      "id": "Q202",
+      "text": "取消正在执行的表演",
+      "context": "当前速度70%；模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备在行走。仅定义评测输入，不是实测。",
+      "response_expectation": "只调用全停"
+    },
+    {
+      "id": "Q203",
+      "text": "取消这个还没开始的草稿",
+      "context": "当前速度70%；模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备在行走。仅定义评测输入，不是实测。",
+      "response_expectation": "先查草稿版本，再取消草稿，不停止运行通道"
+    },
+    {
+      "id": "Q204",
+      "text": "不要取消序列，让它继续",
+      "context": "当前速度70%；模拟 get_status 回执：show_draft.active=true、revision=7、steps=[{\"direction\": \"left\", \"move_ms\": 880, \"water_ms\": 0, \"bubbles_ms\": 0, \"ignition_ms\": 0, \"speed_percent\": 100}, {\"direction\": \"none\", \"move_ms\": 0, \"water_ms\": 0, \"bubbles_ms\": 1000, \"ignition_ms\": 0, \"speed_percent\": 100}]；设备在行走。仅定义评测输入，不是实测。",
+      "response_expectation": "不停止、不改稿、不发新动作"
+    }
+  ]
+}
