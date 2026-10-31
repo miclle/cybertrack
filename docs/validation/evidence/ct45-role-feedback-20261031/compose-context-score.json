@@ -1,0 +1,50 @@
+{
+  "corpus_suite": "compose-v1",
+  "run_id": "d5d68090-ccca-42f5-90f2-cd7026dbbb1f",
+  "model": "deepseek-v4-flash",
+  "role_sha256": "79662d7d2e4540a6f448a0b2330cecad2ba49f0ee2d59d1430f5279f96a677ac",
+  "scored": 8,
+  "total": 8,
+  "correct": 5,
+  "accuracy_all_cases": 0.625,
+  "missing": [],
+  "forbidden_call_cases": [],
+  "incomplete": [],
+  "tool_call_target_met": false,
+  "results": [
+    {
+      "id": "C001",
+      "tool_calls_match": true
+    },
+    {
+      "id": "C002",
+      "tool_calls_match": false
+    },
+    {
+      "id": "C003",
+      "tool_calls_match": true
+    },
+    {
+      "id": "C004",
+      "tool_calls_match": false
+    },
+    {
+      "id": "C005",
+      "tool_calls_match": false
+    },
+    {
+      "id": "C006",
+      "tool_calls_match": true
+    },
+    {
+      "id": "C007",
+      "tool_calls_match": true
+    },
+    {
+      "id": "C008",
+      "tool_calls_match": true
+    }
+  ],
+  "reply_semantics": "manual review required",
+  "physical_or_spoken_acceptance": false
+}

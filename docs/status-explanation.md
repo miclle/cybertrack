@@ -34,3 +34,5 @@ ct43 引入此能力，现已随 [ct45 部署](../firmware/esp32-audio/startup-c
 浏览器检查可在仓库根目录运行 `node firmware/esp32-audio/tests/web_explanation_browser.mjs`，需要已安装 Playwright 及 Chromium；模块不在默认解析路径时，通过 `CYBERTRACK_PLAYWRIGHT_MODULE` 指定其 `index.mjs` 绝对路径。该脚本拦截全部网络请求，仅使用合成回执。
 
 完整固件编译与源码产物核对独立记录。设备语音、实物停止、亲子上手时间和使用体验仍按 [I02／I08](improvement-plan.md)验收；这些主机检查不关闭现场项目。
+
+2026-10-31 角色反馈修正后，同一组原话／合成状态复测 4/8 满足全部解释要求；8/8 仍只查询。缺记录、电量未知已有改善，保护恢复暗示、等待语义及状态概括仍未通过，见[独立复测](validation/lingxi-ct45-role-feedback-20261031.md)。

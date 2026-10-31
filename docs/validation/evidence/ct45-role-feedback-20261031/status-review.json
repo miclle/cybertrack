@@ -1,0 +1,49 @@
+{
+  "kind": "manual_semantic_review",
+  "scope": "same raw-text synthetic status corpus; observed single-run replies, not causal proof or physical fault validation",
+  "completed": 8,
+  "get_status_only": true,
+  "reply_requirements_met": 4,
+  "results": [
+    {
+      "id": "D001",
+      "meets_all_reply_requirements": true,
+      "finding": "缺少记录不猜原因，说明当前待命"
+    },
+    {
+      "id": "D002",
+      "meets_all_reply_requirements": false,
+      "finding": "将未就绪或忙碌只说忙碌，仍建议可以重新执行"
+    },
+    {
+      "id": "D003",
+      "meets_all_reply_requirements": true,
+      "finding": "说明驱动故障，不执行动作"
+    },
+    {
+      "id": "D004",
+      "meets_all_reply_requirements": false,
+      "finding": "仍暗示障碍解除后继续走"
+    },
+    {
+      "id": "D005",
+      "meets_all_reply_requirements": true,
+      "finding": "电量未知，不诊断没电或猜未收到指令"
+    },
+    {
+      "id": "D006",
+      "meets_all_reply_requirements": true,
+      "finding": "不报无效距离"
+    },
+    {
+      "id": "D007",
+      "meets_all_reply_requirements": false,
+      "finding": "仍遗漏步骤间等待"
+    },
+    {
+      "id": "D008",
+      "meets_all_reply_requirements": false,
+      "finding": "不再猜计时停止，但仍以一切正常概括缺少物理反馈的状态"
+    }
+  ]
+}
