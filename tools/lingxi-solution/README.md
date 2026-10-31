@@ -53,3 +53,5 @@ ct68 的[含糊动作门禁](../../docs/validation/vague-action-admission.md)附
 [协议字段／none 对照](../../docs/validation/tts-protocol-observation.md)随包提供摘要与恢复依据：17 条定向会话不增加完整评分，none 候选统一异常且漏停，已恢复原 low。表情 thinking 不能作为内部推理过滤器；完整字段／RPC 回放仍需 checkout 与固定主机。
 
 [模型工具轮中继原型](../lingxi-relay/README.md)的源码、环境变量名配置样例、本地 HTTP／SSE 夹具测试及未采纳依据已随包提供。17 项新增测试只使用回环服务，不访问外部模型或设备；工具后分析、工具轮必要限制和缓冲时延门槛继续保留，不新增模型成绩。
+
+[ct73 四路组合播放](../../docs/validation/four-lane-feedback.md)附十二条实际 STT 的定向摘要：严格 10/12、逐字转写 11/12，F004 共享时长及 F010 识别／漏调用失败保留。五条匹配成功组合新增抑制 277 包，五十条不一致保留音频，原 88 条计数不变；本包核对摘要，完整 RPC／包级重放需 checkout 与固定二进制，不增加完整模型评分组。
