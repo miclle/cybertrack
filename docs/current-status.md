@@ -1,6 +1,6 @@
 # CyberTrack 当前状态
 
-核对日期：2026-10-31。机器可读版本入口为 [firmware/current.json](../firmware/current.json)，检查命令 `python3 scripts/check_firmware_current.py`。`last_recorded_deployment` 保留应用部署记录，独立的 `last_recorded_role_sync` 记录后续纯角色同步，避免将重启冒充烧录。检查器核对源码版本与构建记录，以及角色同步所对应的已部署版本。可用下列命令分别核对两份本地应用文件的字节数和 SHA-256。省略参数时只检查记录；两种方式均离线运行。
+核对日期：2026-11-01。机器可读版本入口为 [firmware/current.json](../firmware/current.json)，检查命令 `python3 scripts/check_firmware_current.py`。`last_recorded_deployment` 保留应用部署记录，独立的 `last_recorded_role_sync` 记录后续纯角色同步，避免将重启冒充烧录。检查器核对源码版本与构建记录，以及角色同步所对应的已部署版本。可用下列命令分别核对两份本地应用文件的字节数和 SHA-256。省略参数时只检查记录；两种方式均离线运行。
 
 ```sh
 python3 scripts/check_firmware_current.py --source-bin build/firmware-ct68/xiaozhi.bin --deployed-bin build/firmware-ct45/xiaozhi.bin
