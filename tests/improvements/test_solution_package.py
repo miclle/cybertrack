@@ -69,6 +69,13 @@ class SolutionPackageTest(unittest.TestCase):
             playback = json.loads(archive.read("docs/validation/evidence/ct72-effect-playback/playback-review.json"))
             self.assertEqual((playback["suppressed"], playback["allowed"]), (1085, 4595))
             self.assertEqual(len(playback["synthetic_mismatches"]), 81)
+            protocol = json.loads(archive.read("docs/validation/evidence/tts-protocol-observation/summary.json"))
+            self.assertFalse(protocol["adopted"])
+            self.assertEqual(protocol["candidate"]["missed_stop_cases"], ["V045"])
+            self.assertEqual(protocol["candidate"]["generic_failure_reply_cases"], 8)
+            self.assertEqual(protocol["observed_phase_fields"], [])
+            self.assertEqual(protocol["restored_stop"]["strict_tool_matches"], 1)
+            self.assertEqual(protocol["restored_stop_added_starts"], 0)
             speech = result["spoken_stt_review"]
             self.assertEqual((speech["expected"], speech["completed"], speech["calls_match"]), (20, 19, 19))
             self.assertEqual(speech["not_completed"], ["V017"])

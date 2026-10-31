@@ -1,0 +1,36 @@
+{
+  "scope": "Paired targeted experiment: reasoning_effort none vs previous low, thinking disabled unchanged; no model identity attestation",
+  "base_commit": "ca55f4d788c7afc17e631379325a3832acf35768",
+  "created_utc": "2026-10-31T18:13:54.979792+00:00",
+  "repeats": 1,
+  "no_resampling": true,
+  "model": "deepseek-v4-flash",
+  "ids": {
+    "voice": [
+      "V020",
+      "V033",
+      "V045",
+      "V057",
+      "V064"
+    ],
+    "compose": [
+      "C002",
+      "C005",
+      "C008"
+    ]
+  },
+  "host_sha256": "d68270ebc7637dee6e4dd68d797ed02d577cb67123046145be14e0ef1fabfa12",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "capture_source_sha256": "9ae7a95ef8a8d2837eb5a037f847316c3254d564a850ee811d788968ce2f5cc2",
+  "platform_change": false,
+  "deployment": false,
+  "parameter_change": {
+    "reasoning_effort": {
+      "before": "low",
+      "candidate": "none"
+    }
+  },
+  "hypothesis": "If non-thinking mode forwarding is inconsistent, disabling via both supported controls may remove process narration; no cause assumed",
+  "adoption_gate": "No new forbidden call/missed stop/incorrect edit; all targeted rows complete; C005/C008 process narration materially reduced. Full original regression required before adoption.",
+  "restore_on_failure": true
+}

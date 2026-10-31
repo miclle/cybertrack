@@ -85,3 +85,5 @@ ct67 后续的[二十条真实 STT 定向会话](relative-draft-duration.md)进�
 [灵矽配置指引](https://linx.qiniu.com/docs/xrobot/guide/agent-config)中的唤醒回复只控制问候；[WebSocket 文档](https://linx.qiniu.com/docs/xrobot/platform/websocket)列出的 TTS 句子事件没有最终回答阶段标志。建议维护方分别核对思考参数转发、模型返回字段与 TTS 取值，并区分工具中间轮的普通操作文字；这些是待核对项，不是已确认成因。
 
 [原 80／8 全语音链路](full-stt-ct71.md)进一步保留 C005 的长篇规则分析及 V033 调用前文字。完整回归期间未改配置，原始事件与回执可独立复算。平台反馈材料仍未代发，端侧播放与实际听感继续分别验收。
+
+[协议字段与 none 对照](tts-protocol-observation.md)新增 8+8 次定向实际 STT 和独立恢复检查：本轮 TTS／LLM 消息未见最终阶段或独立 reasoning 字段，`action=thinking` 也出现在必须保留的喷水限幅提示中。临时 `reasoning_effort=none` 的八条均变为统一异常，停止未调工具；原 `low` 已保存重开恢复，停止复核正确。请维护方核对实际模型／参数转发和中间轮内容的合成出口，不能只根据设备表情过滤；材料仍未代发。

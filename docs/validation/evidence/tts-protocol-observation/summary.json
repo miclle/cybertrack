@@ -1,0 +1,58 @@
+{
+  "scope": "Targeted 8+8 actual-STT comparison and one distinct restoration check; not a full model score",
+  "baseline": {
+    "completed": 7,
+    "cases": 8,
+    "strict_tools": 6,
+    "forbidden_calls": [
+      "C005"
+    ],
+    "incomplete": [
+      "C005"
+    ]
+  },
+  "candidate": {
+    "completed": 8,
+    "cases": 8,
+    "strict_tools": 3,
+    "generic_failure_reply_cases": 8,
+    "missed_stop_cases": [
+      "V045"
+    ]
+  },
+  "adopted": false,
+  "restored_stop": {
+    "scope": "Input provenance and complete host reply/state reproduction; semantic errors retained, no human/physical acceptance",
+    "host_input_mode": "platform_stt_events",
+    "host_sha256": "d68270ebc7637dee6e4dd68d797ed02d577cb67123046145be14e0ef1fabfa12",
+    "corpus_sha256": "38ab1b2fd546f4b00483c31bfdcf0e94b1f1797e6fd42db383037ba2d5d2466f",
+    "cases": 1,
+    "completed": 1,
+    "strict_tool_matches": 1,
+    "tools_before_input": [],
+    "replies_and_final_states_reproduced": true,
+    "results": [
+      {
+        "id": "V045",
+        "completed": true,
+        "strict_tool_match": true,
+        "input_events": 1,
+        "tools_before_input": false,
+        "results": [
+          "ok"
+        ],
+        "starts": 1,
+        "draft_revision": 0,
+        "reply": "动作都停下了，我在这儿等你。"
+      }
+    ]
+  },
+  "restored_stop_initial_seed_starts": 1,
+  "restored_stop_added_starts": 0,
+  "observed_phase_fields": [],
+  "observed_reasoning_fields": [],
+  "thinking_action_not_a_reasoning_marker": "Present on the valid V020 water limit explanation, ordinary confirmations, status, negation and candidate generic failures. No packet filtering implemented.",
+  "software_tests": 107,
+  "firmware_source": "2.0.3-ct72",
+  "last_recorded_deployment": "2.0.3-ct45"
+}

@@ -189,6 +189,32 @@ def firmware_replay(executable, profile, calls, *, await_stt=False):
     return list(map(json.loads,lines))
 
 
+def protocol_observation(message):
+    """Record JSON field types and bounded phase enums, never arbitrary values."""
+    allowed = {'type': {'hello','stt','tts','llm','mcp','error','goodbye','notify'},
+               'state': {'start','stop','sentence_start'},
+               'phase': {'analysis','reasoning','tool','final','answer'},
+               'stage': {'analysis','reasoning','tool','final','answer'},
+               'channel': {'analysis','reasoning','final','commentary'},
+               'action': {'thinking','speaking','listening','idle'},
+               'role': {'assistant','tool','system','user'}}
+    def shape(value):
+        if value is None: return 'null'
+        if type(value) is bool: return 'boolean'
+        if isinstance(value, str): return 'string'
+        if isinstance(value, (int,float)): return 'number'
+        if isinstance(value, list): return 'array'
+        if isinstance(value, dict): return 'object'
+        raise ValueError('not JSON')
+    def fields(obj):
+        return {key:shape(value) for key,value in sorted(obj.items()) if re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]{0,63}',key)}
+    observed = dict(fields=fields(message), signals={key:value for key,value in message.items()
+        if key in allowed and isinstance(value,str) and value in allowed[key]})
+    # These are field/type observations, not evidence of provider reasoning.
+    observed['nested'] = {key:fields(message[key]) for key in ('metadata','data','payload') if isinstance(message.get(key),dict)}
+    return observed
+
+
 async def capture_case(connection,tools,case,timeout=45):
     from websockets.asyncio.client import connect
     status=copy.deepcopy(case['fixture_status']) if 'fixture_status' in case else fixture(case['context'])
@@ -204,6 +230,7 @@ async def capture_case(connection,tools,case,timeout=45):
              'Device-Id':connection['device_id'],'Client-Id':connection['client_id'],'Protocol-Version':'1'}
     opened = time.monotonic()
     timeline = row['timeline'] = []
+    if case.get('protocol_events'): row['protocol_observations'] = []
     def mark(event, **details):
         timeline.append(dict(ms=round((time.monotonic()-opened)*1000), event=event, **details))
     uplink = case.get('opus_frames')
@@ -223,6 +250,8 @@ async def capture_case(connection,tools,case,timeout=45):
                 audio_bytes+=len(raw)
                 continue
             msg=json.loads(raw);kind=msg.get('type')
+            if case.get('protocol_events'):
+                row['protocol_observations'].append(dict(ms=round((time.monotonic()-opened)*1000), **protocol_observation(msg)))
             if kind=='hello':session=msg.get('session_id');row['events'].append('hello')
             elif kind=='mcp':
                 payload=msg.get('payload',{});method=payload.get('method');params=payload.get('params') or {}
@@ -404,6 +433,7 @@ async def run(args):
         if getattr(args,'admission_result_fixture',False):
             case['admission_result_fixture']=True
         if getattr(args,'audio_packets',False): case['audio_packets']=True
+        if getattr(args,'protocol_events',False): case['protocol_events']=True
     trace=dict(fixture_version=version,kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
                model_source='visible platform configuration; no model identity in WSS response',role_sha256=hashlib.sha256(args.role.read_bytes()).hexdigest(),
                transport=ENDPOINT,tool_schema_sha256=hashlib.sha256(args.tools.read_bytes()).hexdigest(),corpus_sha256=hashlib.sha256(args.corpus.read_bytes()).hexdigest(),
@@ -429,6 +459,7 @@ async def run(args):
         binary=firmware_host or draft_host or ROOT/'build/audio-host/receipt_replay'
         trace['host_replay_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
     if getattr(args,'audio_packets',False):trace['audio_packet_sizes_recorded']=True
+    if getattr(args,'protocol_events',False):trace['protocol_observations_recorded']=True
     if draft_host or speed_host:
         trace['initial_profile']=getattr(args,'draft_profile','two_step_web_draft') if draft_host else speed_host
     trace['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
@@ -480,6 +511,7 @@ if __name__=='__main__':
     p.add_argument('--draft-read-facts-fixture',action='store_true',help='Experiment only: add firmware draft query facts to status receipts')
     p.add_argument('--argument-validator',type=Path,help='Use the prepared firmware parameter gate before any isolated receipt')
     p.add_argument('--audio-packets',action='store_true',help='Record arrival and size of every remote audio packet; discard its content')
+    p.add_argument('--protocol-events',action='store_true',help='Record JSON field types and bounded stage enums only; never raw identifiers or arbitrary extra values')
     inputs=p.add_mutually_exclusive_group()
     inputs.add_argument('--synthetic-speech',action='store_true',help='Send synthesized Mandarin as Opus frames, without input text or a microphone')
     inputs.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
