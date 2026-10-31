@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-31",
+  "plugin_version": "0.9.2",
+  "scope": "Real full-model FreeCAD headless edit, saved native readback, MCP snapshot sync and actual local UI; not native host ui/message end-to-end acceptance",
+  "source": "hardware/model/CyberTrack.FCStd",
+  "source_sha256": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23",
+  "production_unchanged": true,
+  "visible_shape_objects": 198,
+  "target": "PrintCrown",
+  "placement_z_mm": [
+    0,
+    8,
+    0
+  ],
+  "non_target_objects_unchanged": 197,
+  "target_bounds_translation_mm": [
+    0,
+    0,
+    8
+  ],
+  "target_volume_unchanged": true,
+  "saved_edit_and_restore_readback": "passed: all 198 native fingerprints",
+  "restored_scene_fingerprint": "7b6e59518c517cff2065870138bedd5a80bfba3eb26d2dda78ed9d6654b92842",
+  "revisions": [
+    "r3",
+    "r4",
+    "r5"
+  ],
+  "document_id": "solidcue-35d77545-836d-4915-807c-a95ade093ba4",
+  "comment_id": "2dbcd6fc-2d81-4e76-a51f-de272c682d52",
+  "comment_sha256": "3912895d8eddfec96c4017a1d9ca96bf27f8a608e7d7a9b8788a4a065c63b0ee",
+  "final_revision": "r5",
+  "same_local_page_update": true,
+  "native_gui_mcp_edit": "not_run: FreeCAD RPC disconnected after app restart; Mac locked",
+  "native_host_message_roundtrip": "pending",
+  "step_validation": false,
+  "physical_acceptance": false,
+  "snapshot_hashes": {
+    "assembly-validated-baseline-20261031": {
+      "manifest_sha256": "2537c98c964a52f6db70689f07e6177ff94e9e7bd33f549f4f58f79cd7aca670",
+      "native_sha256": "da557e75eaa2c01658e67b626ae31bbcf09de4ab98a1f603641f2299fc36e762"
+    },
+    "assembly-placement-edit-20261031": {
+      "manifest_sha256": "66f89c3c56c09889cdb3b3779aa51ddc88ba6ce0494c335de6b684852b3d74eb",
+      "native_sha256": "a1b8cdff46a30251b8e15c1f5a360d8e008db250eb9de2cc243f4212c4bb4059"
+    },
+    "assembly-placement-restored-20261031": {
+      "manifest_sha256": "3160c46f78edc18f9b70f8a1831d802b51107ef9e0888ae9a95e5e509ea9692d",
+      "native_sha256": "53d7c76d4e6c1bbef59efbbccaea6283192226979b462f5c6deda7bde8fe9728"
+    }
+  },
+  "screenshots": {
+    "whole-model-adjusted.png": "3f5915743312cab024ddf265b14aa8a54110d4bf79747118569203c173cbf7bb",
+    "whole-model-comment.png": "abe61be13684957af749edfd1bb8d0779f4c47e5de4f2bba84b3c4114b95f272"
+  },
+  "compressed_preview_base64_bytes": 5650252,
+  "fingerprint_normalization": "Ignore OCCT tessellation caches, transient topology flags, and BREP numeric serialization differences below 1e-9; not a manufacturing tolerance",
+  "mesh_stability": "Reuse hashed baseline tessellation for native-fingerprint-identical parts across save/reopen",
+  "checks": {
+    "model_geometry_sync_codec": 29,
+    "bundle": 1,
+    "ui_fixture": 1,
+    "installed_plugin": "13 tools, exact bundle bytes, live data paths; read-only"
+  }
+}
