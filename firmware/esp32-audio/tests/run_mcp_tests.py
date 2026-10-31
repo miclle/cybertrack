@@ -55,6 +55,21 @@ for executable in ('receipt_adapter_test','receipt_replay'):
                     str(build/'receipt_water_policy.o'), '-o', str(build/executable)], check=True)
 subprocess.run([str(build/'receipt_adapter_test')], check=True)
 
+# Replay both admission outcomes against the same dispatch contract as the board.
+speed_call = dict(name='self.tank.set_speed', arguments={'speed_percent':100}, elapsed_ms=1800)
+for profile in ('thirty_second_forward70', 'idle'):
+    lines = subprocess.check_output([str(build/'receipt_replay'), profile],
+                                    input=json.dumps([speed_call]), text=True).splitlines()
+    reply, final = map(json.loads, lines)
+    if profile == 'idle':
+        assert f'ReplyError(id, "{reply["rpc_error"]}")' in text
+        assert final['starts_this_boot'] == 0 and not any(final['logical_outputs'].values())
+    else:
+        assert reply['result'] == 'accepted' and reply['move_speed_percent'] == 100
+        assert final['starts_this_boot'] == 1 and final['move_direction'] == 'forward'
+        assert final['move_remaining_ms'] == 30000 - speed_call['elapsed_ms']
+
+
 # C002 uses a real web-owned draft. A matching revision alone cannot authorize
 # a voice edit. Exercise the fresh-read boundary and verify both steps on readback.
 compose_cases = json.loads((root/'docs/validation/compose-cases.json').read_text())['cases']
