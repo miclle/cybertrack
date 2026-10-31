@@ -14,6 +14,14 @@ int main(int argc, char** argv) {
         int ticket = sessions.VoiceClaim(clock_ms,1,AudioActionGuard::MoveOnly);
         Reply("move",ticket,profile == "forward70" ? 4000 : 400,"forward",0,0,nullptr,nullptr,70);
         if (!guard.Moving() || guard.Starts() != 1) return 2;
+    } else if (profile == "web_forward_hold") {
+        const auto web = sessions.Acquire(clock_ms);
+        if (!web || !sessions.Heartbeat(clock_ms, web)) return 2;
+        WebCommand command;
+        command.sequence = 1;
+        command.window = sessions.window;
+        Reply("drive_start", 0, 0, "forward", 0, web, &command);
+        if (!guard.Moving() || guard.Starts() != 1) return 2;
     } else if (profile != "idle") return 2;
 
     std::string line;
