@@ -152,6 +152,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         snapshot = null,
         snapshotAt = 0,
         diagnosisTimer,
+        stopUnconfirmed = false,
         pending = false,
         effectPending = false,
         avoidancePending = false,
@@ -331,7 +332,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
       async function sendShow(operation) {
         const button={save:"show-save",confirm:"show-confirm",cancel:"show-cancel"}[operation];
         if (!button || $(button).disabled) return;
-        const job={epoch,generation:show.generation}, revision=show.revision,
+        const job={epoch,generation:show.generation,operation}, revision=show.revision,
           edit=operation==="save" ? editShowRequest() : {edit:"cancel",revision,step:0,steps_json:""};
         const current=()=>show.job===job && epoch===job.epoch && show.generation===job.generation && !document.hidden;
         show.job=job; $("show-reviewed").checked=false; controls();
@@ -417,6 +418,11 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
       }
       $("help").addEventListener("toggle", explainStatus);
       function message(text, error = false, followActivity = false) {
+        if (stopUnconfirmed) {
+          text = "网页无法确认动作是否已停。如需立即全停，请家长按设备 BOOT 键。";
+          error = true;
+          followActivity = false;
+        }
         followingActivity = followActivity;
         $("message").textContent = text;
         $("message").className = error ? "error" : "";
@@ -439,7 +445,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
       function controls() {
         const ready =
           !!token &&
-          !!snapshot &&
+          !!snapshot && !stopUnconfirmed &&
           !pending && !show.job &&
           !document.hidden &&
           !snapshot.boot_held &&
@@ -518,6 +524,10 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
       }
       function render(s) {
         if (s.request_sequence <= latest) return;
+        const recovered = stopUnconfirmed && s.result === "ok" &&
+          ["ACTIVE", "STOPPED", "DISARMED"].includes(s.state) && ["none", "stopped"].includes(s.fault) &&
+          (s.transport_age_ms || 0) <= 1500;
+        if (recovered) stopUnconfirmed = false;
         latest = s.request_sequence;
         snapshot = s;
         snapshotAt = performance.now() - (s.transport_age_ms || 0);
@@ -552,7 +562,8 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
                   : "待命";
         }
         $("drive-speed").textContent = s.move_speed_percent > 0 ? s.move_speed_percent + "%" : "—";
-        if (followingActivity || s.sequence_active) activityMessage(s);
+        if (recovered && s.state !== "ACTIVE") message("已取得设备状态，当前逻辑输出已关闭。");
+        else if (recovered || followingActivity || s.sequence_active) activityMessage(s);
         controls();
       }
       async function request(path, body = {}, auth = token, timeoutMs = 1100) {
@@ -597,6 +608,9 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
           }).catch(() => {});
       }
       function disconnect(text) {
+        if (token && (pending || effectPending || show.job?.operation === "confirm" ||
+            Object.values(holds).some(Boolean) || snapshot?.state === "ACTIVE" || snapshot?.sequence_active))
+          stopUnconfirmed = true;
         clearDistance();
         clearAllHolds();
         $("frenzy-time").textContent = "最长 30 秒";
@@ -858,7 +872,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
         } catch (err) {
           if (e === epoch)
             disconnect(
-              "停止回执未确认，已停止续租并请求全部停止。请检查设备。",
+              "松开回执未确认，已停止续租并请求释放网页会话。",
             );
         } finally {
           if (e === epoch) {
@@ -933,7 +947,7 @@ main{padding-bottom:calc(var(--stop-bar-height,100px) + 6px)}
           if (fresh.result !== "ok") throw new Error(fresh.result);
           render(fresh);
         } catch (err) {
-          if (holds[h.kind] === h && h.epoch === epoch) disconnect("连接中断，长按已取消。");
+          if (holds[h.kind] === h && h.epoch === epoch) disconnect("连接中断，已停止发送长按续租。");
           return;
         }
         h.id = ++sequence;
