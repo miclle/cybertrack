@@ -1,0 +1,46 @@
+{
+  "scope": "ct70 raw robot JSON admission; native/sanitizer and historical compatibility evidence, not model or physical acceptance",
+  "checks_source_sha256": "c20640fde3c0a5fec6c045de74ec9b4e65d30ce165b183d352e32a07dbf9e4e6",
+  "files": {
+    "asan-host-manifest.json": {
+      "bytes": 4798,
+      "sha256": "742ea643c64ef0f74607502e6f3a3116262045b3d319035253ae1e8f3836ac76"
+    },
+    "baseline.json": {
+      "bytes": 151964,
+      "sha256": "eb5c1e68575125358052c9d17b380e55fbaf5dec4169210c31dde5ef845fe717"
+    },
+    "compiled-tools.json": {
+      "bytes": 16254,
+      "sha256": "c317b09676c7a2471eb56fa66fbaaeddbd41ddddd9b3c530f1c34ad2cc7b3206"
+    },
+    "contract-check.json": {
+      "bytes": 632,
+      "sha256": "9a72315512b1eaf6b6db5b0a377cf23a038f347999509a6e16031f6e12207d37"
+    },
+    "historical-compatibility.json": {
+      "bytes": 9702,
+      "sha256": "067a7c887cc46576c9409c6dd2b32a3b431668f9d560cb18da090df4c5b842d5"
+    },
+    "host-manifest.json": {
+      "bytes": 4799,
+      "sha256": "28eab5edb41e7ab7eb7918f827c4a49d5fd0d3d39a7ab1822ad13c7b1fa4150b"
+    },
+    "native-asan.json": {
+      "bytes": 113327,
+      "sha256": "c05e85aca131f4785a28b04f7538982cb7d6cbea6ebbfae6f98a56ed14e55a06"
+    },
+    "native.json": {
+      "bytes": 113327,
+      "sha256": "1dcf0a251918197813647a2350804119d5cecffd062a7e5d40c08fd9c385f427"
+    },
+    "software-checks.json": {
+      "bytes": 50336,
+      "sha256": "d0e0d0261d1cb9ef803e8bd4c4fb85d73bca13a000d95ac08da198f32dfcf1ca"
+    },
+    "version-check.json": {
+      "bytes": 831,
+      "sha256": "8ea093529fc966f2dfecdc9d8d60b1d7ed1a31d52b54decbac1d836281382421"
+    }
+  }
+}
