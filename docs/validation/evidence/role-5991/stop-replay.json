@@ -1,0 +1,262 @@
+{
+  "scope": "Offline replay of captured RPCs on a separate active ct45 sequence, simulated clock and IO.",
+  "control": [
+    {
+      "operation": "get_status",
+      "result": "ok",
+      "sequence_active": true,
+      "sequence_step": 1,
+      "sequence_result": "running",
+      "logical_outputs": {
+        "left": 70,
+        "right": 70,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 1
+    },
+    {
+      "operation": "get_status",
+      "result": "ok",
+      "sequence_active": true,
+      "sequence_step": 2,
+      "sequence_result": "running",
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": true,
+        "ignition": false
+      },
+      "starts_this_boot": 2
+    },
+    {
+      "operation": "get_status",
+      "result": "ok",
+      "sequence_active": false,
+      "sequence_step": 2,
+      "sequence_result": "completed",
+      "logical_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts_this_boot": 2
+    }
+  ],
+  "runs": [
+    {
+      "round": 1,
+      "id": "Q201",
+      "rpc_after_input_ms": 1155,
+      "immediate": {
+        "operation": "stop",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      },
+      "at_6000ms": {
+        "operation": "get_status",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      }
+    },
+    {
+      "round": 1,
+      "id": "Q202",
+      "rpc_after_input_ms": 1017,
+      "immediate": {
+        "operation": "stop",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      },
+      "at_6000ms": {
+        "operation": "get_status",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      }
+    },
+    {
+      "round": 2,
+      "id": "Q201",
+      "rpc_after_input_ms": 1171,
+      "immediate": {
+        "operation": "stop",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      },
+      "at_6000ms": {
+        "operation": "get_status",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      }
+    },
+    {
+      "round": 2,
+      "id": "Q202",
+      "rpc_after_input_ms": 1245,
+      "immediate": {
+        "operation": "stop",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      },
+      "at_6000ms": {
+        "operation": "get_status",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      }
+    },
+    {
+      "round": 3,
+      "id": "Q201",
+      "rpc_after_input_ms": 1326,
+      "immediate": {
+        "operation": "stop",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      },
+      "at_6000ms": {
+        "operation": "get_status",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      }
+    },
+    {
+      "round": 3,
+      "id": "Q202",
+      "rpc_after_input_ms": 1227,
+      "immediate": {
+        "operation": "stop",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      },
+      "at_6000ms": {
+        "operation": "get_status",
+        "result": "ok",
+        "sequence_active": false,
+        "sequence_step": 1,
+        "sequence_result": "cancelled",
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 1
+      }
+    }
+  ]
+}
