@@ -1,0 +1,55 @@
+{
+  "voice": {
+    "corpus_suite": "voice-v1",
+    "run_id": "31f4fd62-2095-48aa-8694-c23272f719d2",
+    "model": "deepseek-v4-flash",
+    "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "scored": 80,
+    "total": 80,
+    "correct": 78,
+    "accuracy_all_cases": 0.975,
+    "missing": [],
+    "forbidden_call_cases": [],
+    "incomplete": [],
+    "failed_stop_cases": [],
+    "tool_call_target_met": true,
+    "reply_semantics": "manual review required",
+    "physical_or_spoken_acceptance": false,
+    "mismatch_ids": [
+      "V040",
+      "V053"
+    ],
+    "capture_json_sha256": "c4ab9e17925c59d7a25f89b9d52a14ceb65d459f12b96e632b4fe16760d997ba",
+    "cloud_silence": {
+      "required": 45,
+      "observed": 0
+    }
+  },
+  "compose": {
+    "corpus_suite": "compose-v1",
+    "run_id": "9a438057-f736-4881-a229-809f7df19fb1",
+    "model": "deepseek-v4-flash",
+    "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "scored": 8,
+    "total": 8,
+    "correct": 7,
+    "accuracy_all_cases": 0.875,
+    "missing": [],
+    "forbidden_call_cases": [],
+    "incomplete": [],
+    "failed_stop_cases": [],
+    "tool_call_target_met": false,
+    "reply_semantics": "manual review required",
+    "physical_or_spoken_acceptance": false,
+    "mismatch_ids": [
+      "C002"
+    ],
+    "capture_json_sha256": "020806e15fe1dde7b5d4e24ed67aa2e31c2b0e68cf17b7296c84db934be798b3"
+  },
+  "board_after_evaluations": {
+    "same_ct45_boot_as_role_sync": true,
+    "samples": 8,
+    "starts_this_boot": 0,
+    "all_logical_outputs_off": true
+  }
+}
