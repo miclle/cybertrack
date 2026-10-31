@@ -1,0 +1,85 @@
+{
+  "base_commit": "ff20b504e4ef981d8b8665e1da870e6e37335094",
+  "decision": "not_adopted",
+  "source_candidate": "2.0.3-ct66",
+  "new_firmware_build": false,
+  "flashed": false,
+  "device_restarted": false,
+  "platform_sessions": 14,
+  "full_fixed_suites_not_run": true,
+  "model": "deepseek-v4-flash",
+  "model_identity": "Visible platform label only; not independently attested by WSS",
+  "role_only_change": "Prefix status paragraph with 状态查询时， (six characters)",
+  "preflight_checks_met": true,
+  "decision_reason": "All three stop cases still contain TTS confirmation; no gain in silent stops; C008 still contains English/process analysis. Three fewer characters is not evidence of silent success.",
+  "numeric_checks_are_not_product_acceptance": true,
+  "result": {
+    "baseline_strict_matches": 6,
+    "candidate_strict_matches": 6,
+    "group_cases": 7,
+    "baseline_stop_reply_characters": 42,
+    "candidate_stop_reply_characters": 39,
+    "baseline_silent_stops": 0,
+    "candidate_silent_stops": 0,
+    "baseline_C008_revision": 8,
+    "candidate_C008_revision": 7
+  },
+  "restored": {
+    "repository_role": true,
+    "repository_current_metadata": true,
+    "saved_platform_role": true,
+    "reopened_exact_match": true,
+    "model_parameters_unchanged": true
+  },
+  "screenshots": {
+    "candidate-saved.png": "226a131726c75adda0f5180afcd59f31b8915607cc50a226fb53995fa048441e",
+    "restored-role.png": "caddd0020652c87b803f545f627b9b84581fb212b0e9b7fe167126bf95d1882e"
+  },
+  "scope": "Real platform raw-text sessions with actual host MCP callbacks and guards; no board forwarding, real microphone, speaker or family acceptance",
+  "files": {
+    "baseline-compose.json.gz": {
+      "bytes": 10687,
+      "sha256": "2c3a34c89b6a46a0d60840572ce4c9cd62a1d68514b37e6b777213c0c705f9ff"
+    },
+    "baseline-role.txt": {
+      "bytes": 14812,
+      "sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127"
+    },
+    "baseline-voice.json.gz": {
+      "bytes": 6573,
+      "sha256": "905fdf63bfee3fd2c8b065edda5f50f2b141459633e11ebead96af018a71e6d3"
+    },
+    "candidate-compose.json.gz": {
+      "bytes": 8863,
+      "sha256": "809a7c682591f47487c0406f8cab863174c835680eceba0a946b225218b22d99"
+    },
+    "candidate-voice.json.gz": {
+      "bytes": 6586,
+      "sha256": "1d0c377ad8455dcbeaf1cf3e17eebeee39766006156d9d323365565f2dcf1d18"
+    },
+    "host-manifest.json": {
+      "bytes": 4192,
+      "sha256": "88799441cea2bf3ff900a429b44cf5462ddee68001bf50629da8a3e2d5cdfc2b"
+    },
+    "platform-readback.json": {
+      "bytes": 260,
+      "sha256": "6ec455713006b3b1e213eeddeb99c9680902633be475c0beeada3ddcc98ded4e"
+    },
+    "preflight-plan.json": {
+      "bytes": 905,
+      "sha256": "70d848ae44620effeb62d7c3b94c3a1d5638102e5d8ecffaf1a3af23bf5d7d20"
+    },
+    "proposed-role.txt": {
+      "bytes": 14830,
+      "sha256": "8cfd9c1404151be6bd2cde2d5257b4e74a4fa85992e2efbebd75562efb3204ae"
+    },
+    "review.json": {
+      "bytes": 8690,
+      "sha256": "4f04b774567d85d489e368654c14e6e779a5816f8da173a0fc6acce0e4e9d765"
+    },
+    "tools.json": {
+      "bytes": 17065,
+      "sha256": "69cb372070faec6b43692e6978294b49af836cfca22f1df3dda56eba904acc53"
+    }
+  }
+}

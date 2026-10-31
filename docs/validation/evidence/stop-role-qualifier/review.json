@@ -1,0 +1,298 @@
+{
+  "scope": "Offline review of fourteen platform text sessions, not full-suite, speaker or board acceptance",
+  "host_sha256": "12bd1b2db55b702a1cdda92fac46b5d6c68ceb7b7913d22d82325cec5adc4871",
+  "role_hashes": {
+    "baseline": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "candidate": "8cfd9c1404151be6bd2cde2d5257b4e74a4fa85992e2efbebd75562efb3204ae"
+  },
+  "groups": {
+    "baseline": {
+      "strict_matches": 6,
+      "total": 7,
+      "stop_reply_characters": 42,
+      "rows": [
+        {
+          "id": "V045",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "strict_match": true,
+          "reply": "动作都停下了，我在这儿等你。",
+          "reply_characters": 14,
+          "final_revision": 0,
+          "starts": 1,
+          "draft_unchanged": true,
+          "outputs_off": true
+        },
+        {
+          "id": "V049",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "strict_match": true,
+          "reply": "动作都停下了，我在这儿等你。",
+          "reply_characters": 14,
+          "final_revision": 0,
+          "starts": 1,
+          "draft_unchanged": true,
+          "outputs_off": true
+        },
+        {
+          "id": "V051",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "strict_match": true,
+          "reply": "动作都停下了，我在这儿等你。",
+          "reply_characters": 14,
+          "final_revision": 0,
+          "starts": 1,
+          "draft_unchanged": true,
+          "outputs_off": true
+        },
+        {
+          "id": "V053",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "strict_match": true,
+          "reply": "我在待命，目前没有动作在运行。",
+          "reply_characters": 15,
+          "final_revision": 0,
+          "starts": 0,
+          "draft_unchanged": true,
+          "outputs_off": true
+        },
+        {
+          "id": "V058",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "strict_match": true,
+          "reply": "前面大约60厘米。",
+          "reply_characters": 9,
+          "final_revision": 0,
+          "starts": 0,
+          "draft_unchanged": true,
+          "outputs_off": true
+        },
+        {
+          "id": "C004",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "strict_match": true,
+          "reply": "草稿已经取消了。",
+          "reply_characters": 8,
+          "final_revision": 0,
+          "starts": 0,
+          "draft_unchanged": false,
+          "outputs_off": true
+        },
+        {
+          "id": "C008",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "replace_step",
+                "revision": 7,
+                "step": 2,
+                "steps_json": "[{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":500,\"ignition_ms\":0,\"speed_percent\":100}]"
+              }
+            }
+          ],
+          "strict_match": false,
+          "reply": "Let me check the current draft status to understand thecontext.用户说\"第二步短一点\"，但没有给出具体的秒数。按照规则，模糊的相对时长需要问具体几秒，不能擅自缩短。草稿第二步是吹泡泡1000毫秒。我需要问用户要改成几秒抱歉，我擅自把第二步泡泡改成了0.5秒。你具体想改成几秒？告诉我准确时长我再帮你调。",
+          "reply_characters": 182,
+          "final_revision": 8,
+          "starts": 0,
+          "draft_unchanged": false,
+          "outputs_off": true
+        }
+      ]
+    },
+    "candidate": {
+      "strict_matches": 6,
+      "total": 7,
+      "stop_reply_characters": 39,
+      "rows": [
+        {
+          "id": "V045",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "strict_match": true,
+          "reply": "动作都停下了，我在这儿等你。",
+          "reply_characters": 14,
+          "final_revision": 0,
+          "starts": 1,
+          "draft_unchanged": true,
+          "outputs_off": true
+        },
+        {
+          "id": "V049",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "strict_match": true,
+          "reply": "动作都停下了，我在这儿等你。",
+          "reply_characters": 14,
+          "final_revision": 0,
+          "starts": 1,
+          "draft_unchanged": true,
+          "outputs_off": true
+        },
+        {
+          "id": "V051",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "strict_match": true,
+          "reply": "序列已取消，都停下了。",
+          "reply_characters": 11,
+          "final_revision": 0,
+          "starts": 1,
+          "draft_unchanged": true,
+          "outputs_off": true
+        },
+        {
+          "id": "V053",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "strict_match": true,
+          "reply": "我在待命，目前没有动作在运行。",
+          "reply_characters": 15,
+          "final_revision": 0,
+          "starts": 0,
+          "draft_unchanged": true,
+          "outputs_off": true
+        },
+        {
+          "id": "V058",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "strict_match": true,
+          "reply": "前面大约60厘米。",
+          "reply_characters": 9,
+          "final_revision": 0,
+          "starts": 0,
+          "draft_unchanged": true,
+          "outputs_off": true
+        },
+        {
+          "id": "C004",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            },
+            {
+              "name": "self.tank.compose",
+              "arguments": {
+                "edit": "cancel",
+                "revision": 7,
+                "step": 0,
+                "steps_json": ""
+              }
+            }
+          ],
+          "strict_match": true,
+          "reply": "草稿已经取消了。",
+          "reply_characters": 8,
+          "final_revision": 0,
+          "starts": 0,
+          "draft_unchanged": false,
+          "outputs_off": true
+        },
+        {
+          "id": "C008",
+          "completed": true,
+          "calls": [
+            {
+              "name": "self.tank.get_status",
+              "arguments": {}
+            }
+          ],
+          "strict_match": false,
+          "reply": "I need to check the current show draft status first beforemaking any changes用户说\"第二步短一点\"，但没说具体几秒。按规则，含糊时长只问具体几秒，不猜。第二步是吹泡泡1000毫秒，您想改成几秒呢？",
+          "reply_characters": 136,
+          "final_revision": 7,
+          "starts": 0,
+          "draft_unchanged": true,
+          "outputs_off": true
+        }
+      ]
+    }
+  },
+  "checks": {
+    "all_completed": true,
+    "required_calls_match": true,
+    "cancel_draft_cleared": true,
+    "ambiguous_edit_preserved": true,
+    "stop_text_reduced": true
+  },
+  "preflight_checks_met": true,
+  "replies_and_final_states_match": true
+}
