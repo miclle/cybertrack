@@ -1,6 +1,6 @@
 # 上手帮助与“为什么没动”
 
-ct43 源码候选，最近记录部署仍为 ct42。该能力尚未部署或进行线上语音验收。软件检查和编译证据见 [verification-ct43.json](../firmware/esp32-audio/verification-ct43.json)。
+ct43 引入此能力，现已随 [ct45 部署](../firmware/esp32-audio/startup-ct45.json)；线上语音解释仍待独立验收。软件检查和编译证据见 [verification-ct43.json](../firmware/esp32-audio/verification-ct43.json)。
 
 ## 家长看到的入口
 
