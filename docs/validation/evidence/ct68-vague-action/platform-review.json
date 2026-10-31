@@ -1,0 +1,453 @@
+{
+  "scope": "Twenty targeted synthesized speech sessions with actual STT and host MCP; replay integrity is separate from model quality; no microphone/speaker/board IO",
+  "host_sha256": "a20da0879ee6447e94d8c9aad79057f8d38dd53235478d6f8765560043d15c6e",
+  "classifier_sha256": "ef28852ed5a91c09100330b75039ff38a335932329483711a4a304bd87b9f181",
+  "identity": {
+    "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "tool_schema_sha256": "62f76a865ce61c78eeecab640bf78d30854e4940aef07b55acabe598216fd6c1",
+    "capture_source_sha256": "9adc5ebad10317a532a6c54f4b36e2e8f47a63950957ca4383d8f547bcaee47f",
+    "synthesis_source_sha256": "5f10a4c1e92a2755ed7bc5e9c27f5104190306b9d291516108410affdacb7df8",
+    "model": "deepseek-v4-flash"
+  },
+  "total": 20,
+  "completed": 20,
+  "literal_transcript_matches": 20,
+  "tool_matches": 16,
+  "state_matches": 20,
+  "vague_total": 8,
+  "vague_states_preserved": 8,
+  "clarification_rejections": 3,
+  "vague_actuation_accepted": 0,
+  "incomplete": [],
+  "replies_and_final_states_reproduced": true,
+  "results": [
+    {
+      "repeat": 1,
+      "id": "A001",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "动一下那个东西。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "call_results": [],
+      "vague_actuation_accepted": [],
+      "starts": 0,
+      "reply": "\"那个东西\"有点模糊，你是想让我前进、后退、左转还是右转？告诉我方向和时长就行。"
+    },
+    {
+      "repeat": 1,
+      "id": "A002",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "让那个东西动起来。",
+      "literal_transcript_match": true,
+      "tool_calls_match": false,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "让那个东西动起来。",
+          "classified_vague": true,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 0,
+      "reply": "\"那个东西\"有点含糊，你是想让我前进、后退、左转还是右转？给我个方向我就动起来。"
+    },
+    {
+      "repeat": 1,
+      "id": "A003",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "来个效果。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "call_results": [],
+      "vague_actuation_accepted": [],
+      "starts": 0,
+      "reply": "\"来个效果\"太含糊了，我不确定你想要什么。你可以明确说喷水、吹泡泡或者点火。"
+    },
+    {
+      "repeat": 1,
+      "id": "A004",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "动一下三秒。",
+      "literal_transcript_match": true,
+      "tool_calls_match": false,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "call_results": [
+        {
+          "name": "self.tank.move",
+          "recognized_text": "动一下三秒。",
+          "classified_vague": true,
+          "result": "action_unspecified",
+          "clarification_facts": "本轮识别文本含泛化动作或指代，设备未核对到具体动作名称或方向。这次请求没有新启动动作。先澄清用户意图，不猜前进方向，不换工具补做，不主动建议试动。"
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 0,
+      "reply": "这次没确认成功，设备没有接受这个动作。你说\"动一下\"我不确定是往前走还是转向，能说清楚一点吗，比如\"前进三秒\"或\"左转三秒\"。"
+    },
+    {
+      "repeat": 1,
+      "id": "A005",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "让小车向前动两秒。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.move",
+          "recognized_text": "让小车向前动两秒。",
+          "classified_vague": false,
+          "result": "accepted",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 1,
+      "reply": "好的，小车正在向前走，两秒。"
+    },
+    {
+      "repeat": 1,
+      "id": "A006",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "启动一下泡泡，持续一秒。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.bubbles",
+          "recognized_text": "启动一下泡泡，持续一秒。",
+          "classified_vague": false,
+          "result": "accepted",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 1,
+      "reply": "好的，泡泡已经启动啦。"
+    },
+    {
+      "repeat": 1,
+      "id": "A007",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "开枪一秒。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.water",
+          "recognized_text": "开枪一秒。",
+          "classified_vague": false,
+          "result": "accepted",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 1,
+      "reply": "好的，喷水一秒。"
+    },
+    {
+      "repeat": 1,
+      "id": "A008",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "右转一下。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.move",
+          "recognized_text": "右转一下。",
+          "classified_vague": false,
+          "result": "accepted",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 1,
+      "reply": "好的，右转一下。"
+    },
+    {
+      "repeat": 1,
+      "id": "A009",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "你现在在做什么？",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "你现在在做什么？",
+          "classified_vague": false,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 0,
+      "reply": "我在待命，目前没有动作在运行。有什么需要我做的吗？"
+    },
+    {
+      "repeat": 1,
+      "id": "A010",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "停止。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.stop",
+          "recognized_text": "停止。",
+          "classified_vague": false,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 1,
+      "reply": "动作都停下了，我在这儿等你。"
+    },
+    {
+      "repeat": 2,
+      "id": "A001",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "动一下那个东西。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "call_results": [],
+      "vague_actuation_accepted": [],
+      "starts": 0,
+      "reply": "\"那个东西\"具体指哪个？你是想让我前进、转向，还是喷水、吹泡泡？说清楚一点我就动。"
+    },
+    {
+      "repeat": 2,
+      "id": "A002",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "让那个东西动起来。",
+      "literal_transcript_match": true,
+      "tool_calls_match": false,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "call_results": [
+        {
+          "name": "self.tank.move",
+          "recognized_text": "让那个东西动起来。",
+          "classified_vague": true,
+          "result": "action_unspecified",
+          "clarification_facts": "本轮识别文本含泛化动作或指代，设备未核对到具体动作名称或方向。这次请求没有新启动动作。先澄清用户意图，不猜前进方向，不换工具补做，不主动建议试动。"
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 0,
+      "reply": "这次没确认成功，设备没有接受到明确的方向指令。你说让它动起来，是想让它前进、后退，还是左转右转？告诉我方向就行。"
+    },
+    {
+      "repeat": 2,
+      "id": "A003",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "来个效果。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "call_results": [],
+      "vague_actuation_accepted": [],
+      "starts": 0,
+      "reply": "\"来个效果\"这个说法太含糊了，我不太确定你想要什么。你是想让我喷水、吹泡泡，还是点火？说清楚点我就来。"
+    },
+    {
+      "repeat": 2,
+      "id": "A004",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "动一下三秒。",
+      "literal_transcript_match": true,
+      "tool_calls_match": false,
+      "expected_state_matches": true,
+      "needs_clarification": true,
+      "call_results": [
+        {
+          "name": "self.tank.move",
+          "recognized_text": "动一下三秒。",
+          "classified_vague": true,
+          "result": "action_unspecified",
+          "clarification_facts": "本轮识别文本含泛化动作或指代，设备未核对到具体动作名称或方向。这次请求没有新启动动作。先澄清用户意图，不猜前进方向，不换工具补做，不主动建议试动。"
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 0,
+      "reply": "回执显示这次没有成功启动动作。你说的\"动一下\"我没能确定具体方向，能告诉我往哪个方向动吗？比如前进、后退、左转或右转。"
+    },
+    {
+      "repeat": 2,
+      "id": "A005",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "让小车向前动两秒。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.move",
+          "recognized_text": "让小车向前动两秒。",
+          "classified_vague": false,
+          "result": "accepted",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 1,
+      "reply": "好的，小车向前走两秒。"
+    },
+    {
+      "repeat": 2,
+      "id": "A006",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "启动一下泡泡，持续一秒。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.bubbles",
+          "recognized_text": "启动一下泡泡，持续一秒。",
+          "classified_vague": false,
+          "result": "accepted",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 1,
+      "reply": "好的，泡泡已经启动了。"
+    },
+    {
+      "repeat": 2,
+      "id": "A007",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "开枪一秒。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.water",
+          "recognized_text": "开枪一秒。",
+          "classified_vague": false,
+          "result": "accepted",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 1,
+      "reply": "\"开枪\"是喷水的别名，我来执行已执行喷水一秒。"
+    },
+    {
+      "repeat": 2,
+      "id": "A008",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "右转一下。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.move",
+          "recognized_text": "右转一下。",
+          "classified_vague": false,
+          "result": "accepted",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 1,
+      "reply": "好的，右转一下。"
+    },
+    {
+      "repeat": 2,
+      "id": "A009",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "你现在在做什么？",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.get_status",
+          "recognized_text": "你现在在做什么？",
+          "classified_vague": false,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 0,
+      "reply": "我在待命，目前没有动作在运行。"
+    },
+    {
+      "repeat": 2,
+      "id": "A010",
+      "completed": true,
+      "completion": "tts_stop",
+      "transcript": "停止。",
+      "literal_transcript_match": true,
+      "tool_calls_match": true,
+      "expected_state_matches": true,
+      "needs_clarification": false,
+      "call_results": [
+        {
+          "name": "self.tank.stop",
+          "recognized_text": "停止。",
+          "classified_vague": false,
+          "result": "ok",
+          "clarification_facts": null
+        }
+      ],
+      "vague_actuation_accepted": [],
+      "starts": 1,
+      "reply": "动作都停下了，我在这儿等你。"
+    }
+  ]
+}

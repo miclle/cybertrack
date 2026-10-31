@@ -1,0 +1,80 @@
+{
+  "source_version": "2.0.3-ct68",
+  "last_recorded_application": "2.0.3-ct45",
+  "base_commit": "cc700610ec574bb68afa9ef380b152104b9c73cd",
+  "decision": "source_candidate_not_deployed",
+  "flashed": false,
+  "platform_configuration_changed": false,
+  "role_changed": false,
+  "public_tools_unchanged": true,
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2715712,
+    "sha256": "a07308364003d0246a9ee64708c6a5f616ded68060600801743829179ecb645e"
+  },
+  "native_scenarios": 26,
+  "native_passed": true,
+  "baseline_failed": 18,
+  "platform_sessions": 20,
+  "platform_model_score_scope": "Two declared ten-case targeted synthetic speech runs, not fixed eighty/twenty or human data",
+  "result": {
+    "completed": 20,
+    "literal_transcript_matches": 20,
+    "tool_matches": 16,
+    "state_matches": 20,
+    "vague_total": 8,
+    "vague_states_preserved": 8,
+    "clarification_rejections": 3,
+    "vague_actuation_accepted": 0
+  },
+  "software_check_groups": 15,
+  "improvement_tests": 86,
+  "limitations": [
+    "Finite Chinese lexical category; named/quoted/negative/multi-clause attribution and unknown phrasing are not fully parsed.",
+    "Draft compose remains subject to original semantic/version/confirmation gates; this guard only prevents actuator/speed guesses.",
+    "Unconditional stop remains available; model false stop and process/confirmation speech remain unresolved.",
+    "No board deployment, output/speaker/physical or family acceptance."
+  ],
+  "files": {
+    "baseline-host-manifest.json": {
+      "bytes": 4345,
+      "sha256": "514f39a9872d992d8313b87c719d336da2f03aee33984df27b2df07baa379cd6"
+    },
+    "classifier-header.txt": {
+      "bytes": 1031,
+      "sha256": "c42a92541cb9215d6634d0b25988909a95e6529fdd58ddc8158b68590cefa8bb"
+    },
+    "host-manifest.json": {
+      "bytes": 4496,
+      "sha256": "2ea34719471037597e8b3b154cfd9c4d11f7d5f7fa0c556afdf46f33cbb46c43"
+    },
+    "native-baseline.json": {
+      "bytes": 305215,
+      "sha256": "cf42fa72f4e5fd6b03647980b9cd99a41e05ec01096eeef89a418c2220c5820f"
+    },
+    "native-replay.json": {
+      "bytes": 307823,
+      "sha256": "6cea49236f7fd96b49796a4105a7eace84e4239b9ff00bbc06e5a44175b9568a"
+    },
+    "platform-1.json.gz": {
+      "bytes": 8914,
+      "sha256": "4b9306778fe92e9b1696003365484856cb4ce49676b84eca0b0d12418cb77014"
+    },
+    "platform-2.json.gz": {
+      "bytes": 8937,
+      "sha256": "7bde2e0fc4cea128ddb725429287f567a61d89b756deae608f964b6be28ae62e"
+    },
+    "platform-review.json": {
+      "bytes": 15005,
+      "sha256": "c317929a393934db73d0577394f39e1f459a8fb17dc8dfa09de84cc8197ad073"
+    },
+    "software-checks.json": {
+      "bytes": 49162,
+      "sha256": "321e6e22aea6e40596d632d7adce34dd6976103eac9aa95e21b5e1eb53278c87"
+    },
+    "tools.json": {
+      "bytes": 17065,
+      "sha256": "62f76a865ce61c78eeecab640bf78d30854e4940aef07b55acabe598216fd6c1"
+    }
+  }
+}

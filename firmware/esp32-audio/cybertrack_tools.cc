@@ -4,6 +4,7 @@
 #include "recent_command.h"
 #include "status_facts.h"
 #include "draft_duration_intent.h"
+#include "vague_action_intent.h"
 #include "web_server.h"
 #include "action_outputs.h"
 #include "ultrasonic.h"
@@ -139,6 +140,8 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
         outcome = "voice_input_failed";
     } else if (voice_turn >= 0 && sessions.voice_draft_unquantified && strcmp(operation, "stop") && strcmp(operation, "get_status")) {
         outcome = "draft_duration_unspecified";
+    } else if (voice_turn >= 0 && sessions.voice_action_unspecified && !edit && strcmp(operation, "stop") && strcmp(operation, "get_status")) {
+        outcome = "action_unspecified";
     } else if (web_session && !sessions.Owns(web_session)) {
         outcome = "session_expired";
     } else if (web_session && !strcmp(operation, "get_status")) {
@@ -300,6 +303,8 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
     result.pop_back();
     if (!strcmp(outcome, "draft_duration_unspecified"))
         result += ",\"clarification_facts\":\"本轮识别到相对长短表达，但未识别到量化时长。这次没有修改草稿或新启动动作。只问具体改成几秒，不猜半秒或减半，不自动重试、删除、取消或改用动作工具补做。\"";
+    if (!strcmp(outcome, "action_unspecified"))
+        result += ",\"clarification_facts\":\"本轮识别文本含泛化动作或指代，设备未核对到具体动作名称或方向。这次请求没有新启动动作。先澄清用户意图，不猜前进方向，不换工具补做，不主动建议试动。\"";
     if (!strcmp(operation, "get_status")) {
         result += ",\"draft_status_facts\":\"" + std::string(DraftReadFacts(draft.active)) + "\"";
         if (const char* guidance = FaultRecovery(reason))
@@ -338,9 +343,11 @@ void CyberTrackVoiceInput(const char* text) {
     for (const char* p = text; *p; ++p) if (*p != ' ' && *p != '\t' && *p != '\r' && *p != '\n') { content = true; break; }
     if (!content) return;
     const bool unquantified = draft_duration::NeedsClarification(text);
+    const bool unspecified = vague_action::NeedsClarification(text);
     xSemaphoreTake(lock, portMAX_DELAY);
     sessions.AdvanceVoiceTurn(true);
     sessions.voice_draft_unquantified = unquantified;
+    sessions.voice_action_unspecified = unspecified;
     xSemaphoreGive(lock);
 }
 void CyberTrackVoiceFailure(int turn) {
