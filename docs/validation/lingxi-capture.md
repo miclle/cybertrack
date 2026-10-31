@@ -54,3 +54,16 @@ python3 scripts/evaluate_voice.py output/voice/<唯一运行名>.json \
 ct46 在远端音频进入解码队列前检查当前语音轮次。首批支持省略参数的「前进、后退、左转、右转、喷水、吹泡泡、停止、停下、全部停止」。必须匹配唯一工具、默认参数和先于 TTS 开始的成功回执。其他措辞、未收到识别文本、提前到达的语音、多工具、限幅及错误保留平台音频。断线、新输入和 TTS 结束清除标记。本地测距警报走独立路径。该候选影响扬声器播放，平台仍可能生成文字和音频，屏幕保留回复。真人口述与扬声器听感待验。
 
 验证 ct46 候选时，先用该候选的 prepared 目录导出工具，再给捕获器加 `--ct46`。导出步骤同时编译主机状态解释器，读取合成快照并复用固件的 `StatusFacts`。模型看到的解释来自当前状态，捕获器不会把用例期望嵌入回执。
+
+[ct46 原话迁移集](ct46-transfer-cases.json)在候选固件冻结后新增，包含短指令、超限喷水、含糊改稿、禁止通道和恢复条件。每条保留服务回传的识别文本、调用、回执、首个音频包和 TTS 边界。可在主机上重放一条捕获，复用候选固件实际的播放判断。以下命令在仓库根目录、已导出候选工具且安装 jq 的环境下运行。
+
+```sh
+c++ -std=c++17 -I "$HOME/esp/esp-idf/components/json/cJSON" \
+  -I build/xiaozhi-ct46-final-src/main/boards/bread-compact-wifi \
+  scripts/replay_lingxi_feedback.cc build/lingxi-schema-export/cJSON.o \
+  -o build/lingxi-schema-export/replay-feedback
+jq -c '.results[0]' output/voice/ct46-repeat/1-transfer.json | \
+  build/lingxi-schema-export/replay-feedback
+```
+
+输出为首包被抑制、可播放或未收到首包。文本输入不能验证麦克风识别，主机回放也不能证明扬声器实际静默。固定 80 条带评测前缀，端侧会按真实识别文本处理，不能人为剥掉前缀再报告端到端静默率。
