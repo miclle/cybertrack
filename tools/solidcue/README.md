@@ -81,7 +81,9 @@ npm --prefix tools/model-design run test:ui
 
 [整机验证记录](verification-assembly-20261031.json)：实际加载 198 个可见形状，在本地界面选择 `PrintCrown` 并保存评论，通过 FreeCAD 主机原生适配器完成 Z=0 → 8 → 0 mm，保存、重新打开核对；其余 197 个零件不变。MCP 快照同步使同一本地页面依次显示 r3 → r4 → r5；正式模型 SHA-256 保持不变。[README 截图](../../README.md#在完整机器人上直接说出修改想法)来自真实本地界面。
 
-这次整机修改由 FreeCAD 无界面进程执行；它验证原生 CAD 与实际本地 UI，不代替桌面宿主 `ui/message` 自动触发和 GUI FreeCAD MCP 的完整闭环。后者在 FreeCAD 重启、RPC 断开及再次锁屏后待继续，状态见 [I11 执行计划](../../docs/improvement-plan.md)。
+上述 r3–r5 为无界面原生记录。后续[真实 GUI 验收](verification-gui-20261031.json)已恢复 FreeCAD 1.1.4／MCP 0.1.28：在本地页面点选冠盖 `Face113`，核对 r5 评论后，通过 GUI MCP 完成 Z=0 → 8 → 0 mm，并在修改和恢复后分别保存、关闭、重开；198 个原生指纹、217 个显示状态回读一致，其他 197 件不变。同一本地页面经 MCP 发布更新 r5 → r6 → r7，README 使用 r6 实拍。
+
+剩余验收是桌面宿主卡片的 `ui/message` 自动触发与同卡片完整链路。当前旧连接的 `get_state` 在 300 秒后超时，已请求重载插件；它不影响已通过的 GUI MCP 和本地 UI 验证。状态见 [I11 执行计划](../../docs/improvement-plan.md)。
 
 无界面导出的 FCStd 必须保留 `GuiDocument.xml` 及材质二进制的原始归档顺序，否则 FreeCAD GUI 可能以默认灰色打开。适配器已修复该顺序；2026-10-31 通过真实整机的无界面导出 → GUI 打开验证，198 个原生指纹、217 个对象的显示状态与原始模型一致。历史快照不重写；继续编辑请使用已核验的 GUI 研究副本或重新导出。
 

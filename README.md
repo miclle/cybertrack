@@ -66,9 +66,9 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 旋转完整整机，点选冠盖、枪座或外壳，将“这个零件上移一点”这样的想法落到明确的零件、面和模型版本。调整在独立研究副本中进行，原生 CAD 结果回到同一设计界面，便于对照修改前后并恢复。
 
-![完整 CyberTrack 模型中的冠盖调整与修改历史](docs/images/model-design/whole-model-adjusted.png)
+![完整 CyberTrack 模型中的冠盖调整与修改历史](docs/images/model-design/whole-model-gui-adjusted.png)
 
-*真实设计工作区：在完整整机中将冠盖沿 Z 轴上移 8 mm，右侧保留评论与坐标变化。可追溯、可对照、可恢复；[查看操作流程](tools/solidcue/README.md)。*
+*真实设计工作区：在完整整机中点选冠盖，通过 FreeCAD 将它沿 Z 轴上移 8 mm，右侧保留表面评论与坐标变化。可追溯、可对照、可恢复；[查看操作流程](tools/solidcue/README.md)。*
 
 <details>
 <summary>查看点选零件、提出修改的界面</summary>
@@ -98,7 +98,7 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 2026-10-31 核对：最近记录的面包板部署为 **2.0.3-ct42**。支持语音与手机网页控制、60–100% 行走输出、四路独立计时、16 步并发动作序列和前方测距。距离提示音独立于行走状态；可选前进保护每次开机默认关闭，开启后小于 15 cm 停前进、至少 20 cm 解锁但不续走。
 
-当前版本、参数和证据统一见 [当前状态](docs/current-status.md)及[接口手册](firmware/CAPABILITIES.md)。[产品改进执行计划](docs/improvement-plan.md)跟踪上手体验、语音回归、编排玩法、实机验收及单件模型辅助设计；计划功能不代表已经部署。
+当前版本、参数和证据统一见 [当前状态](docs/current-status.md)及[接口手册](firmware/CAPABILITIES.md)。[产品改进执行计划](docs/improvement-plan.md)跟踪上手体验、语音回归、编排玩法、实机验收及整机模型辅助设计；计划功能不代表已经部署。
 
 已有基本装配样机、运行影像和分项现场反馈。整机供电、持续带载、停止性能和完整故障验收尚未完成；CAD、主机测试、部署回读与实物结果分别记录。现用电源为辰克 5 V 电池包及 12 V 升压电机支路，旧电源台架结果不迁移。点火低压控制不代表高压、绝缘、液体共存或 EMC 验收。
 
