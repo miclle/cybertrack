@@ -52,8 +52,11 @@ def gate(observed, positive, minimum, mode):
 
 def summarize(records):
     groups = defaultdict(dict)
-    unclassified = 0
+    unclassified = dry_runs = 0
     for r in records:
+        if r.get("evidence_kind") == "dry_run":
+            dry_runs += 1
+            continue
         profile = tuple(r.get(k) for k in PROFILE)
         if any(v is None or v == "" for v in profile):
             unclassified += 1  # Historical rows have no cohort or condition.
@@ -93,7 +96,7 @@ def summarize(records):
             "same_play_repeated": gate(repeat_observed, max(repeats.values(), default=0), 3, profile[1]),
             "replayed_or_modified_show": gate(theatre_observed, theatre_positive, 3, profile[1]),
         })
-    return {"groups": reports, "unclassified_rows": unclassified}
+    return {"groups": reports, "unclassified_rows": unclassified, "dry_run_rows": dry_runs}
 
 
 if __name__ == "__main__":
