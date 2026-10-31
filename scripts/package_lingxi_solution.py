@@ -32,7 +32,7 @@ def build_archive(root, paths, head, dirty):
                 "git_head": head, "selected_inputs_dirty": dirty,
                 "files": {name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()} for name, data in contents.items()},
                 "excluded": ["credentials", "recordings", "device identifiers", "firmware binaries", "physical acceptance", "CAD binaries"],
-                "model_evaluation": "not_run", "family_trials": "not_run"}
+                "model_evaluation": "see_validation_record_in_full_repository", "family_trials": "not_run"}
     contents["MANIFEST.json"] = (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode()
     contents["START_HERE.md"] = f"""# CyberTrack 灵矽方案参考材料
 
@@ -55,7 +55,7 @@ python3 scripts/evaluate_voice.py --help
 
 本包只包含明确清单中的材料。文档中的其他相对链接须在完整 CyberTrack checkout 中阅读；完整源码、BOM、原理图和大体积模型对应 https://github.com/miclle/cybertrack/tree/{head} 。该提交未推送时远端链接尚不可用，应使用本地 checkout；未提交内容以清单为准。
 
-泡泡剧场与确认编排已有源码候选，部署与平台验证仍待完成。真人语音、五组家庭体验、当前供电与完整停止验收未完成。没有录音、Wi-Fi 凭据、设备令牌或绑定码；没有替你部署或发布。
+ct45 已部署并完成真实平台隔离文本联调，语义尚未全部通过；结果和失败项见完整仓库中的 docs/validation/lingxi-ct45-20261031.md。此包不运行联网评测，也不包含设备部署日志。真人语音、五组家庭体验、当前供电与完整停止验收未完成。没有录音、Wi-Fi 凭据、设备令牌或绑定码；没有替你部署或发布。
 """.encode()
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED) as archive:

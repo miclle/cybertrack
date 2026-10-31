@@ -1,0 +1,720 @@
+{
+  "kind": "captured_tool_calls",
+  "run_id": "299b7cfb-cb13-452f-a56d-ae1051ee0795",
+  "date": "2026-10-31T03:22:40.885237+00:00",
+  "model": "deepseek-v4-flash",
+  "model_source": "visible platform configuration; no model identity in WSS response",
+  "role_sha256": "79662d7d2e4540a6f448a0b2330cecad2ba49f0ee2d59d1430f5279f96a677ac",
+  "transport": "wss://xrobo-io.qiniuapi.com/v1/ws/",
+  "tool_schema_sha256": "7ecd624f1a4deb3f23a42e45155acdd00e24ee2b33af30005ca72bd0a889b70a",
+  "corpus_sha256": "4df9416a124bc1ae15d42a1c8640d1f146090cdf707960d4084d37112e3dad9c",
+  "input_mode": "raw_text_diagnostic",
+  "capture_source_sha256": "f755d9fdb4d1177bf09d5cb90a1432e37d219502e95fe3f3cf702c3f70a921d5",
+  "scope": "Real platform calls; synthetic receipt/context fixtures; zero device forwarding; text not microphone ASR",
+  "results": [
+    {
+      "id": "D001",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "没有足够记录判断刚才没动的原因，",
+        "目前我是在待命状态，没有动作在运行。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "刚才为什么没动？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "echoed_text": "刚才为什么没动？",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 10345,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "D002",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "刚才有一次行走指令被拒绝了，",
+        "回执显示设备当时正忙，所以没能动起来。",
+        "现在所有动作都已停止，我在待命状态，随时可以重新给你执行。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "刚才为什么没动？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "echoed_text": "刚才为什么没动？",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": true,
+            "operation": "move",
+            "result": "not_ready_or_busy",
+            "source": "voice",
+            "age_ms": 300
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 18725,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "D003",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "目前状态显示有驱动故障，",
+        "机器人暂时动不了。",
+        "这个需要检查一下硬件或连接，我没法远程排除这个故障。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "为什么不走了？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "echoed_text": "为什么不走了？",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "driver_error",
+          "state": "FAULT",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 14369,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "D004",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "前面有障碍物，",
+        "自动避障开着，所以前进被挡住了。",
+        "等障碍物移开或退到20厘米以外，我再继续走就行。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "为什么不往前走了？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "echoed_text": "为什么不往前走了？",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 100,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": true,
+            "forward_blocked": true
+          },
+          "recent_command": {
+            "valid": true,
+            "operation": "move",
+            "result": "obstacle_blocked",
+            "source": "voice",
+            "age_ms": 300
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 14173,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "D005",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "我先查一下状态。",
+        "我这边查不到电量情况，这个暂时查不到。",
+        "目前没有动作在运行，但具体是不是没电没法确认。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "是不是没电了，所以没动？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "echoed_text": "是不是没电了，所以没动？",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 13943,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "D006",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "暂时没有有效距离，",
+        "测不到前方有多远。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "前面有多远？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "echoed_text": "前面有多远？",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": false,
+            "error": "no_echo",
+            "distance_mm": 600,
+            "age_ms": 900
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 6477,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "D007",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "还在进行中，",
+        "目前是序列的第1步，总共2步，还没结束。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "表演结束了吗？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "echoed_text": "表演结束了吗？",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": true,
+          "sequence_result": "waiting",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": false,
+            "age_ms": null
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none",
+          "sequence_step": 1,
+          "sequence_steps": 2
+        }
+      ],
+      "received_audio_bytes_discarded": 9243,
+      "completion": "tts_stop"
+    },
+    {
+      "id": "D008",
+      "calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "replies": [
+        "刚才有一次行走指令被接受了，",
+        "但那是8秒前的记录，现在所有动作都已经结束，目前没有异常。",
+        "至于具体为什么停下来，没有更近的停机记录，我这边只能确认现在一切正常，没有故障。"
+      ],
+      "events": [
+        "hello",
+        "initialize",
+        "tools/list",
+        "tools/list",
+        "test_input_sent",
+        "tools/call"
+      ],
+      "completed": true,
+      "input_text": "刚才为什么停了？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "echoed_text": "刚才为什么停了？",
+      "simulated_receipts": [
+        {
+          "result": "ok",
+          "fault": "none",
+          "state": "STOPPED",
+          "boot_held": false,
+          "logical_outputs": {
+            "left": 0,
+            "right": 0,
+            "water": false,
+            "bubbles": false,
+            "ignition": false
+          },
+          "starts_this_boot": 0,
+          "physical_feedback": false,
+          "actuator_backend": "capture_fixture",
+          "sequence_active": false,
+          "sequence_result": "idle",
+          "frenzy_remaining_ms": 0,
+          "show_draft": {
+            "active": false,
+            "revision": 0,
+            "steps": [],
+            "expires_in_ms": 0
+          },
+          "distance": {
+            "valid": true,
+            "error": "none",
+            "distance_mm": 600,
+            "age_ms": 0
+          },
+          "proximity": {
+            "auto_avoidance_enabled": false,
+            "forward_blocked": false
+          },
+          "recent_command": {
+            "valid": true,
+            "operation": "move",
+            "result": "accepted",
+            "source": "voice",
+            "age_ms": 8000
+          },
+          "move_direction": "none",
+          "move_speed_percent": 0,
+          "web_speed_percent": 100,
+          "drive_hold_id": 0,
+          "water_hold_id": 0,
+          "bubbles_hold_id": 0,
+          "move_remaining_ms": 0,
+          "move_cooldown_ms": 0,
+          "move_source": "none",
+          "water_remaining_ms": 0,
+          "water_cooldown_ms": 0,
+          "water_source": "none",
+          "bubbles_remaining_ms": 0,
+          "bubbles_cooldown_ms": 0,
+          "bubbles_source": "none",
+          "ignition_remaining_ms": 0,
+          "ignition_cooldown_ms": 0,
+          "ignition_source": "none"
+        }
+      ],
+      "received_audio_bytes_discarded": 25032,
+      "completion": "tts_stop"
+    }
+  ]
+}
