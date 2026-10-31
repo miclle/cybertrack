@@ -1,0 +1,292 @@
+diff --git a/firmware/esp32-audio/apply_overlay.py b/firmware/esp32-audio/apply_overlay.py
+index cfbd33b..6864804 100644
+--- a/firmware/esp32-audio/apply_overlay.py
++++ b/firmware/esp32-audio/apply_overlay.py
+@@ -118 +118 @@ def main():
+-                 'set(PROJECT_VER "2.0.3-ct63")')
++                 'set(PROJECT_VER "2.0.3-ct64")')
+@@ -186 +186 @@ def main():
+-    for name in ("spoken_duration.h", "spoken_playback.h", "admission_result.h", "status_facts.h", "voice_feedback.h", "show_draft.h", "show_command_json.h", "recent_command.h", "proximity_guard.h", "proximity_audio.h", "proximity_audio.cc", "distance_reading.h", "ultrasonic.h", "ultrasonic.cc", "cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
++    for name in ("model_receipt.h", "spoken_duration.h", "spoken_playback.h", "admission_result.h", "status_facts.h", "voice_feedback.h", "show_draft.h", "show_command_json.h", "recent_command.h", "proximity_guard.h", "proximity_audio.h", "proximity_audio.cc", "distance_reading.h", "ultrasonic.h", "ultrasonic.cc", "cybertrack_state.h", "cybertrack_tools.h", "cybertrack_tools.cc", "water_guard.h", "action_guard.h", "action_plan.h", "action_plan_json.h", "action_outputs.h", "control_sessions.h", "web_request.h", "web_server.h", "web_server.cc"):
+diff --git a/firmware/esp32-audio/cybertrack_tools.cc b/firmware/esp32-audio/cybertrack_tools.cc
+index 98febc2..1a9448f 100644
+--- a/firmware/esp32-audio/cybertrack_tools.cc
++++ b/firmware/esp32-audio/cybertrack_tools.cc
+@@ -1,0 +2 @@
++#include "model_receipt.h"
+@@ -305,0 +307 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
++    if (voice_turn >= 0) CompactModelReceipt(result);
+diff --git a/firmware/esp32-audio/tests/receipt_host.h b/firmware/esp32-audio/tests/receipt_host.h
+index 97f2c00..c427904 100644
+--- a/firmware/esp32-audio/tests/receipt_host.h
++++ b/firmware/esp32-audio/tests/receipt_host.h
+@@ -3,0 +4 @@
++#include "model_receipt.h"
+diff --git a/firmware/esp32-audio/tests/run_mcp_tests.py b/firmware/esp32-audio/tests/run_mcp_tests.py
+index 403ae03..afe9b02 100644
+--- a/firmware/esp32-audio/tests/run_mcp_tests.py
++++ b/firmware/esp32-audio/tests/run_mcp_tests.py
+@@ -67 +67 @@ subprocess.run(['cc', '-std=c11', *flags, '-I', str(root/'firmware/esp32-linx/ma
+-for executable in ('receipt_adapter_test','receipt_replay','admission_result_test','voice_effect_feedback_test'):
++for executable in ('receipt_adapter_test','receipt_replay','admission_result_test','voice_effect_feedback_test','model_receipt_test'):
+@@ -74,0 +75 @@ subprocess.run([str(build/'voice_effect_feedback_test')], check=True)
++subprocess.run([str(build/'model_receipt_test')], check=True)
+diff --git a/scripts/verify_improvements.py b/scripts/verify_improvements.py
+index 88564f5..95f0f06 100644
+--- a/scripts/verify_improvements.py
++++ b/scripts/verify_improvements.py
+@@ -45 +45,3 @@ def main():
+-            [sys.executable, "scripts/check_voice_turn.py", "--executable", str(host_build/"firmware_host")]])
++            [sys.executable, "scripts/check_voice_turn.py", "--executable", str(host_build/"firmware_host")],
++            [sys.executable, "scripts/check_model_receipts.py", "--executable", str(host_build/"firmware_host"),
++             "--playback", str(ROOT/"build/audio-host/feedback_replay")]])
+diff --git a/scripts/capture_lingxi.py b/scripts/capture_lingxi.py
+index cfa54f0..12dba04 100644
+--- a/scripts/capture_lingxi.py
++++ b/scripts/capture_lingxi.py
+@@ -395,0 +396 @@ async def run(args):
++    trace['continue_incomplete']=getattr(args,'continue_incomplete',False)
+@@ -433 +434,2 @@ async def run(args):
+-        if not row['completed']:raise RuntimeError('incomplete case; capture retained, not counted as a successful no-call result')
++        if not row['completed'] and not trace['continue_incomplete']:
++            raise RuntimeError('incomplete case; capture retained, not counted as a successful no-call result')
+@@ -439,0 +442 @@ if __name__=='__main__':
++    p.add_argument('--continue-incomplete',action='store_true',help='Retain incomplete cases as failures and continue only to the next unrun case; never retry')
+diff --git a/tests/improvements/test_lingxi_capture.py b/tests/improvements/test_lingxi_capture.py
+index 92e2ada..d9f3805 100644
+--- a/tests/improvements/test_lingxi_capture.py
++++ b/tests/improvements/test_lingxi_capture.py
+@@ -120,0 +121,13 @@ class CaptureTests(unittest.TestCase):
++                args.output=base/'keep-going';args.continue_incomplete=True
++                failed=dict(id='V001',calls=[],completion='incomplete_or_timeout',completed=False)
++                done=dict(id='D001',calls=[],completion='tts_stop',completed=True)
++                mock=AsyncMock(side_effect=[failed,done])
++                with patch.object(module,'capture_case',mock):await module.run(args)
++                retained=json.loads(args.output.read_text())
++                self.assertEqual(retained['results'],[failed,done])
++                self.assertEqual(mock.await_count,2)
++                args.output=base/'fail-fast';args.continue_incomplete=False
++                mock=AsyncMock(return_value=failed)
++                with patch.object(module,'capture_case',mock),self.assertRaises(RuntimeError):await module.run(args)
++                self.assertEqual(json.loads(args.output.read_text())['results'],[failed])
++                self.assertEqual(mock.await_count,1)
+diff --git a/firmware/esp32-audio/model_receipt.h b/firmware/esp32-audio/model_receipt.h
+new file mode 100644
+index 0000000..1087035
+--- /dev/null
++++ b/firmware/esp32-audio/model_receipt.h
+@@ -0,0 +1,57 @@
++#pragma once
++#include <cJSON.h>
++#include <cstring>
++#include <string>
++
++// Presentation only, after the control lock is released. Diagnostics and failures
++// retain the full snapshot. Every retained value comes from the same real reply.
++inline void CompactModelReceipt(std::string& reply) {
++    auto* full = cJSON_ParseWithOpts(reply.c_str(), nullptr, true);
++    const auto* operation = cJSON_GetObjectItemCaseSensitive(full, "operation");
++    const auto* result = cJSON_GetObjectItemCaseSensitive(full, "result");
++    const auto* fault = cJSON_GetObjectItemCaseSensitive(full, "fault");
++    bool action = false, draft = false;
++    if (cJSON_IsString(operation) && cJSON_IsString(result)) {
++        for (const char* name : {"move", "water", "bubbles", "ignition", "move_and_water", "sequence", "frenzy", "set_speed", "adjust_speed"})
++            if (!std::strcmp(operation->valuestring, name) && !std::strcmp(result->valuestring, "accepted")) action = true;
++        action |= !std::strcmp(operation->valuestring, "stop") && !std::strcmp(result->valuestring, "ok");
++        draft = !std::strcmp(operation->valuestring, "show_edit") &&
++            (!std::strcmp(result->valuestring, "draft_saved") || !std::strcmp(result->valuestring, "draft_cancelled"));
++    }
++    const bool normal = cJSON_IsString(fault) && (!std::strcmp(fault->valuestring, "none") ||
++        ((draft || (cJSON_IsString(operation) && !std::strcmp(operation->valuestring, "stop"))) && !std::strcmp(fault->valuestring, "stopped")));
++    if ((!action && !draft) || !normal) { cJSON_Delete(full); return; }
++    auto* compact = cJSON_CreateObject();
++    if (!compact) { cJSON_Delete(full); return; }
++    auto copy = [&](const char* key) {
++        const auto* item = cJSON_GetObjectItemCaseSensitive(full, key);
++        auto* clone = item ? cJSON_Duplicate(item, true) : nullptr;
++        if (!clone) return false;
++        if (!cJSON_AddItemToObject(compact, key, clone)) { cJSON_Delete(clone); return false; }
++        return true;
++    };
++    bool valid = true;
++    for (const char* key : {"operation", "result", "state", "fault", "physical_feedback", "boot_held", "logical_outputs", "starts_this_boot"})
++        if (!copy(key)) { valid = false; break; }
++    if (valid && draft) valid = copy("show_draft");
++    if (valid && action) {
++        for (const char* key : {"last_duration_ms", "remaining_ms", "move_last_duration_ms", "water_last_duration_ms",
++                               "bubbles_last_duration_ms", "ignition_last_duration_ms", "move_remaining_ms", "water_remaining_ms",
++                               "bubbles_remaining_ms", "ignition_remaining_ms", "move_direction", "move_speed_percent",
++                               "move_source", "water_source", "bubbles_source", "ignition_source", "sequence_active", "sequence_step",
++                               "sequence_steps", "sequence_result", "sequence_source", "frenzy_remaining_ms", "frenzy_last_duration_ms", "frenzy_source"})
++            if (!copy(key)) { valid = false; break; }
++    }
++    char* encoded = valid ? cJSON_PrintUnformatted(compact) : nullptr;
++    if (encoded) {
++        const auto size = std::strlen(encoded);
++        if (size < reply.size()) {
++            // Reuse the full reply's preallocated storage after acceptance.
++            std::memcpy(reply.data(), encoded, size);
++            reply.resize(size);
++        }
++        cJSON_free(encoded);
++    }
++    cJSON_Delete(compact);
++    cJSON_Delete(full);
++}
+diff --git a/firmware/esp32-audio/tests/model_receipt_test.cc b/firmware/esp32-audio/tests/model_receipt_test.cc
+new file mode 100644
+index 0000000..1e05bb2
+--- /dev/null
++++ b/firmware/esp32-audio/tests/model_receipt_test.cc
+@@ -0,0 +1,81 @@
++#include "receipt_host.h"
++#include <climits>
++#include <cstdlib>
++
++static int budget = INT_MAX, allocations = 0;
++static void* Allocate(std::size_t size) {
++    ++allocations;
++    if (!budget) return nullptr;
++    --budget;
++    return std::malloc(size);
++}
++static void EqualRetained(const std::string& full, const std::string& compact) {
++    auto* before = cJSON_Parse(full.c_str()); auto* after = cJSON_Parse(compact.c_str());
++    assert(before && after);
++    for (auto* item = after->child; item; item = item->next)
++        assert(cJSON_Compare(item, cJSON_GetObjectItemCaseSensitive(before, item->string), true));
++    for (const char* key : {"operation", "result", "fault", "state", "boot_held", "logical_outputs", "physical_feedback", "starts_this_boot"})
++        assert(cJSON_GetObjectItemCaseSensitive(after, key));
++    assert(!cJSON_GetObjectItemCaseSensitive(after, "device_id"));
++    assert(!cJSON_GetObjectItemCaseSensitive(after, "boot_id"));
++    assert(!cJSON_GetObjectItemCaseSensitive(after, "window"));
++    cJSON_Delete(before); cJSON_Delete(after);
++}
++int main() {
++    sessions.WifiLink(clock_ms, true); sessions.VoiceLink(clock_ms, true); sessions.Tick(clock_ms, false);
++    const auto ticket = sessions.VoiceClaim(clock_ms, 1, AudioActionGuard::MoveOnly);
++    assert(ticket);
++    const auto full = Reply("move", ticket, 1000, "forward");
++    auto compact = full; const auto* storage = compact.data();
++    CompactModelReceipt(compact);
++    assert(compact.size() < full.size() && compact.data() == storage);
++    EqualRetained(full, compact);
++    assert(guard.Moving() && guard.Starts() == 1);
++    auto* action = cJSON_Parse(compact.c_str());
++    assert(cJSON_GetObjectItemCaseSensitive(action, "sequence_active"));
++    assert(!cJSON_GetObjectItemCaseSensitive(action, "show_draft"));
++    assert(!cJSON_GetObjectItemCaseSensitive(action, "distance"));
++    cJSON_Delete(action);
++
++    for (const char* status : {"get_status", "unknown"}) {
++        auto raw = Reply(status), unchanged = raw;
++        CompactModelReceipt(raw);assert(raw == unchanged);
++    }
++    for (const auto& change : {std::pair{"result", "not_ready_or_busy"}, {"result", "draft_changed"},
++                              {"fault", "clock_fault"}, {"fault", "output_fault"}, {"operation", "future_tool"}}) {
++        auto* value = cJSON_Parse(full.c_str());
++        cJSON_SetValuestring(cJSON_GetObjectItem(value, change.first), change.second);
++        auto* encoded = cJSON_PrintUnformatted(value);std::string raw(encoded), original(raw);
++        cJSON_free(encoded);cJSON_Delete(value);
++        CompactModelReceipt(raw);assert(raw == original);
++    }
++    for (const char* key : {"fault", "logical_outputs", "sequence_source", "physical_feedback"}) {
++        auto* value = cJSON_Parse(full.c_str());cJSON_DeleteItemFromObject(value, key);
++        auto* encoded = cJSON_PrintUnformatted(value);std::string raw(encoded), original(raw);
++        cJSON_free(encoded);cJSON_Delete(value);
++        CompactModelReceipt(raw);assert(raw == original);
++    }
++    auto stopped = Reply("stop"), stopped_full = stopped;
++    CompactModelReceipt(stopped);EqualRetained(stopped_full, stopped);
++    clock_ms += 300;sessions.Tick(clock_ms, false);
++    ShowDraft::Command edit;edit.plan.count = 1;edit.plan.steps[0].bubbles_ms = 1000;
++    Reply("get_status");
++    const auto draft_ticket = sessions.VoiceClaim(clock_ms, 2, AudioActionGuard::PlanMode);
++    assert(draft_ticket);
++    auto draft = Reply("show_edit", draft_ticket, 0, nullptr, 0, 0, nullptr, nullptr, 100, &edit), draft_full = draft;
++    CompactModelReceipt(draft);EqualRetained(draft_full, draft);
++    auto* saved = cJSON_Parse(draft.c_str());assert(cJSON_GetObjectItemCaseSensitive(saved, "show_draft"));cJSON_Delete(saved);
++    assert(guard.Starts() == 1);
++
++    // Fail each C allocation point. Projection is optional; action acceptance is not.
++    cJSON_Hooks hooks{Allocate, std::free};cJSON_InitHooks(&hooks);
++    allocations = 0;budget = INT_MAX;auto probe = full;CompactModelReceipt(probe);
++    const int total = allocations;cJSON_InitHooks(nullptr);assert(probe != full);
++    for (int allowed = 0; allowed <= total; ++allowed) {
++        auto raw = full;const auto* data = raw.data();budget = allowed;allocations = 0;cJSON_InitHooks(&hooks);
++        CompactModelReceipt(raw);cJSON_InitHooks(nullptr);
++        assert(raw.data() == data);
++        if (raw != full) EqualRetained(full, raw);
++        assert(guard.Starts() == 1);
++    }
++}
+diff --git a/scripts/check_model_receipts.py b/scripts/check_model_receipts.py
+new file mode 100644
+index 0000000..892f7bc
+--- /dev/null
++++ b/scripts/check_model_receipts.py
+@@ -0,0 +1,64 @@
++#!/usr/bin/env python3
++"""Check actual MCP receipt projection against retained control and playback traces."""
++import argparse
++import copy
++import gzip
++import hashlib
++import json
++from pathlib import Path
++import subprocess
++
++from capture_lingxi import firmware_replay
++
++ROOT=Path(__file__).resolve().parents[1]
++CAPTURE=ROOT/'docs/validation/evidence/ct62-stt-host/full20.json.gz'
++PLAYBACK=ROOT/'docs/validation/evidence/ct63-plan-feedback/playback-review.json'
++
++
++def check(executable, playback):
++    trace=json.loads(gzip.decompress(CAPTURE.read_bytes()))
++    expected={row['id']:row for row in json.loads(PLAYBACK.read_bytes())['results']}
++    results=[];before=after=changed=0
++    for row in trace['results']:
++        calls=row['host_calls'];replies=[]
++        for i,call in enumerate(calls):
++            if 'name' in call:replies.append(firmware_replay(executable,row['initial_profile'],calls[:i+1],await_stt=True)[-2])
++        original=row.get('host_rpc_replies',[])
++        assert len(original)==len(replies)
++        full_bytes=compact_bytes=0;changes=0;receipts=[]
++        for old,new in zip(original,replies):
++            if 'error' in old:
++                assert old==new;continue
++            assert 'result' in new
++            a=old['result']['content'][0]['text'];b=new['result']['content'][0]['text']
++            full=json.loads(a);compact=json.loads(b)
++            assert compact and all(key in full and full[key]==value for key,value in compact.items())
++            if full!=compact:
++                assert full['result'] in ('accepted','ok','draft_saved','draft_cancelled')
++                assert full['operation']!='get_status'
++                changes+=1
++            full_bytes+=len(a.encode());compact_bytes+=len(b.encode());receipts.append(compact)
++        final=firmware_replay(executable,row['initial_profile'],[*calls,dict(inspect_ms=row['host_inspect_ms'])],await_stt=True)[-1]
++        assert final==row['host_final_state']
++        projected=copy.deepcopy(row);projected['simulated_receipts']=receipts
++        packets=dict(suppressed=0,audible=0)
++        if row['received_audio_bytes_discarded']:
++            packets=json.loads(subprocess.check_output([str(playback),'--packets'],input=json.dumps(projected),text=True,timeout=10))
++        assert packets=={key:expected[row['id']][key] for key in ('suppressed','audible')}
++        results.append(dict(id=row['id'],receipts_changed=changes,full_bytes=full_bytes,model_bytes=compact_bytes,
++                            all_retained_values_equal=True,final_state_equal=True,**packets))
++        before+=full_bytes;after+=compact_bytes;changed+=changes
++    assert len(results)==20 and changed==14 and after<before
++    return dict(scope='Offline replay with actual MCP dispatcher and control guard; projection and playback only; model did not consume these projected replies; no new platform session or board IO',
++                capture_gzip_sha256=hashlib.sha256(CAPTURE.read_bytes()).hexdigest(),
++                host_sha256=hashlib.sha256(executable.read_bytes()).hexdigest(),playback_sha256=hashlib.sha256(playback.read_bytes()).hexdigest(),
++                cases=len(results),changed_receipts=changed,full_bytes=before,model_bytes=after,
++                suppressed=sum(row['suppressed'] for row in results),audible=sum(row['audible'] for row in results),results=results)
++
++
++if __name__=='__main__':
++    parser=argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--executable',type=Path,required=True)
++    parser.add_argument('--playback',type=Path,required=True)
++    args=parser.parse_args()
++    print(json.dumps(check(args.executable,args.playback),ensure_ascii=False,indent=2))
