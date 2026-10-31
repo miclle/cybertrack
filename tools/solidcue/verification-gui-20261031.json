@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-31",
+  "scope": "FreeCAD GUI MCP edit, save/reopen and restore; real local UI and native MCP sync; host ui/message roundtrip still pending",
+  "plugin_version": "0.9.2",
+  "freecad_version": "1.1.4",
+  "freecad_mcp_addon_version": "0.1.28",
+  "source": "hardware/model/CyberTrack.FCStd",
+  "source_sha256": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23",
+  "production_unchanged": true,
+  "document_id": "solidcue-35d77545-836d-4915-807c-a95ade093ba4",
+  "native_document_uid": "f293a227-30e8-4add-9f6d-eaa0abd9969e",
+  "target": "PrintCrown",
+  "selected_face": "Face113",
+  "visible_shape_objects": 198,
+  "non_target_native_objects_unchanged": 197,
+  "placement_z_mm": [
+    0,
+    8,
+    0
+  ],
+  "revisions": [
+    "r5",
+    "r6",
+    "r7"
+  ],
+  "comment_id": "0331f28d-ec9c-4d66-b108-7cacb9f62f19",
+  "comment_sha256": "f423f8e16a3cf122fa07019b3d60425aa218470765a9565be86be2c4efea907f",
+  "comment_origin": "actual local UI surface selection; no host message bridge",
+  "native_gui_mcp_edit": "passed",
+  "saved_edit_and_restore_gui_readback": "passed: all 198 native fingerprints and 217 display states",
+  "same_local_page_update": true,
+  "native_host_message_roundtrip": "pending: active old MCP get_state call timed out after 300 seconds; reload requested",
+  "restored_scene_fingerprint": "7b6e59518c517cff2065870138bedd5a80bfba3eb26d2dda78ed9d6654b92842",
+  "headless_snapshot_gui_appearance": {
+    "regression": "unordered GUI material archive entries reopen as default gray",
+    "fix": "preserve GUI XML then source archive order for referenced binary assets",
+    "real_gui_readback": "passed: 198 native fingerprints, 217 display states, PrintCrown 229 materials and #405c6e",
+    "regression_test": "tests/improvements/test_model_snapshot.py",
+    "snapshot_sha256": "a0b60a416753df9ecb9e34ffb62cd89e8a4097c7d84c12c58411ad8afb028a51"
+  },
+  "snapshot_hashes": {
+    "assembly-gui-verified-edit-20261031": {
+      "manifest_sha256": "aaefddc9626dbcb50a298747e0b4711f647078535db6b9b57544db361433ef93",
+      "native_sha256": "43605990e69226fcf46f823e76b91761d5646cf22bf1bda7d0ca7606766ca119"
+    },
+    "assembly-gui-restored-20261031": {
+      "manifest_sha256": "d101185e9cc658182fd1b928d29c901c8676ae5d942fd77dfa07d48487801fa9",
+      "native_sha256": "9bef74216234246f256c618c28c3e3c67d6f891c5802d0cc64198da4037e3e90"
+    }
+  },
+  "screenshot": {
+    "path": "docs/images/model-design/whole-model-gui-adjusted.png",
+    "sha256": "49804f6f095338619c15f138db3f72c9c560c669d3fcc57cc2264ef87e3376d2"
+  },
+  "step_validation": false,
+  "physical_acceptance": false
+}
