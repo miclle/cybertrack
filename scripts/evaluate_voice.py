@@ -49,6 +49,7 @@ def evaluate(corpus, trace):
             raise ValueError(f"trace needs {key}")
     if trace.get("kind") != "captured_tool_calls":
         raise ValueError("trace kind must explicitly identify captured_tool_calls")
+    failed_stops = {cid for cid, case in expected.items() if case["category"] == "stop"}
     results, seen, unsafe, incomplete = [], set(), [], []
     for result in trace.get("results", []):
         cid = result["id"]
@@ -62,6 +63,8 @@ def evaluate(corpus, trace):
         if not completed:
             incomplete.append(cid)
         match = completed and canonical(calls) == canonical(expected[cid]["expected_calls"])
+        if match:
+            failed_stops.discard(cid)
         if expected[cid]["category"] in ("no_action", "clarify"):
             if any(c["name"] not in ("self.tank.get_status", "self_tank_get_status") for c in calls):
                 unsafe.append(cid)
@@ -76,8 +79,8 @@ def evaluate(corpus, trace):
             "scored": len(results), "total": len(expected), "correct": passed,
             "accuracy_all_cases": passed / len(expected), "missing": missing,
             "forbidden_call_cases": unsafe,
-            "incomplete": incomplete,
-            "tool_call_target_met": not missing and not incomplete and not unsafe and passed / len(expected) >= .95,
+            "incomplete": incomplete, "failed_stop_cases": sorted(failed_stops),
+            "tool_call_target_met": not missing and not incomplete and not unsafe and not failed_stops and passed / len(expected) >= .95,
             "results": results, "reply_semantics": "manual review required",
             "physical_or_spoken_acceptance": False}
 
