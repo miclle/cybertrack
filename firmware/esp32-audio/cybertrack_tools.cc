@@ -2,6 +2,7 @@
 #include "control_sessions.h"
 #include "action_plan_json.h"
 #include "recent_command.h"
+#include "status_facts.h"
 #include "web_server.h"
 #include "action_outputs.h"
 #include "ultrasonic.h"
@@ -278,6 +279,9 @@ std::string Reply(const char* operation, int ticket = 0, int duration = 0, const
         recent.valid ? (recent.web ? "web" : "voice") : "none", recent_age.c_str(), distance.c_str());
     result.assign(json);
     result.pop_back();
+    if (!strcmp(operation, "get_status"))
+        result += ",\"status_facts\":\"" + StatusFacts(reason, forward_blocked, plan_active,
+            moving || watering || bubbling || igniting, recent.valid ? recent.result : "") + "\"";
     result += ",\"sequence_source\":\"" + std::string(plan_source) + "\",\"show_draft\":" + ShowDraftJson(draft, now) + "}";
     if (!web_session || (strcmp(operation, "get_status") && strcmp(operation, "drive_renew") && strcmp(operation, "water_renew") && strcmp(operation, "bubbles_renew")))
         ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
@@ -362,7 +366,7 @@ void InitializeCyberTrackTools() {
     InitializeCyberTrackWeb();
     auto& server = McpServer::GetInstance();
     server.AddTool("self.tank.get_status",
-        "查询CyberTrack状态或前方距离，参数为空。问为什么没动时只查询，不启动或重试。recent_command是本次开机最近一次动作请求回执，含operation/result/source/age_ms；查询不覆盖它，成功续租不覆盖它。它不是最后停机原因或物理反馈，较旧记录不能解释当前现象；valid=false或age_ms=null时不能推断。结合当前boot_held、fault、各通道remaining/cooldown和proximity说明已知状态；not_ready_or_busy不能凭空细分原因。accepted只表示逻辑接受，不能说实际已移动；未知就说明无法确认，不猜电池没电或线路故障。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能由云端轮询后自动行走、绕行或推算移动距离。有效距离不足50厘米时发出滴声，越近越密，不受自动避障开关或行走状态影响；至少50厘米或读数无效、过期时不响。proximity.auto_avoidance_enabled为网页自动避障开关，开机默认false、网页与语音共用；仅true时小于15厘米禁止前进，正在前进则停止并响三声；false时不因距离停前进。开关仅由网页设置，关闭不会恢复旧动作。proximity.forward_blocked为前进锁定，恢复至20厘米后允许新指令，不自动恢复。obstacle_blocked表示前进受阻，不重试。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
+        "用status_facts中的设备事实简短回答所问部分。不要推测拒绝原因、停止原因、电量或自动恢复。查询CyberTrack状态或前方距离，参数为空。问为什么没动时只查询，不启动或重试。recent_command是本次开机最近一次动作请求回执，含operation/result/source/age_ms；查询不覆盖它，成功续租不覆盖它。它不是最后停机原因或物理反馈，较旧记录不能解释当前现象；valid=false或age_ms=null时不能推断。结合当前boot_held、fault、各通道remaining/cooldown和proximity说明已知状态；not_ready_or_busy不能凭空细分原因。accepted只表示逻辑接受，不能说实际已移动；未知就说明无法确认，不猜电池没电或线路故障。distance.valid=true且error=none时，distance.distance_mm为头部超声波测距毫米值，除以10换算厘米，回答大约多少厘米；valid=false、缺失或过期时只说暂时没有有效距离，不能说前方畅通，不能由云端轮询后自动行走、绕行或推算移动距离。有效距离不足50厘米时发出滴声，越近越密，不受自动避障开关或行走状态影响；至少50厘米或读数无效、过期时不响。proximity.auto_avoidance_enabled为网页自动避障开关，开机默认false、网页与语音共用；仅true时小于15厘米禁止前进，正在前进则停止并响三声；false时不因距离停前进。开关仅由网页设置，关闭不会恢复旧动作。proximity.forward_blocked为前进锁定，恢复至20厘米后允许新指令，不自动恢复。obstacle_blocked表示前进受阻，不重试。动作仍只有逻辑状态，没有轮速或水流反馈。sequence_active/sequence_step/sequence_steps/sequence_result为序列活动、步骤、总步数及状态；waiting是步骤间等待。frenzy_remaining_ms是模式剩余时间。网页与语音可同时用，各通道source表示来源，网页同路优先，全部停止始终有效。",
         PropertyList(), [](const PropertyList&) -> ReturnValue { return Reply("get_status"); });
     server.AddTool("self.tank.stop",
         "立即停止两台电机、水枪、泡泡和点火及狂暴模式并取消全部排队动作，不关闭语音和屏幕。",
