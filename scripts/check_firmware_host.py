@@ -18,7 +18,8 @@ def check(executable):
                  for index, call in enumerate(case["expected_calls"])]
         if case["category"] == "stop":
             calls.append(dict(inspect_ms=60000))
-        rows = firmware_replay(executable, profile, calls)
+        rows = firmware_replay(executable, profile,
+                               [dict(input_text=case['text'],elapsed_ms=0), *calls], await_stt=True)
         for wire in rows[:-1]:
             assert "result" in wire, (case["id"], wire)
             receipt = json.loads(wire["result"]["content"][0]["text"])
@@ -36,7 +37,7 @@ def check(executable):
         calls = [dict(call, elapsed_ms=(index+1)*500, rpc_id=index+1)
                  for index, call in enumerate(case["expected_calls"])]
         rows = firmware_replay(executable, firmware_profile(case["context"]),
-                               [*calls, dict(inspect_ms=6000)])
+                               [dict(input_text=case['text'],elapsed_ms=0), *calls, dict(inspect_ms=6000)], await_stt=True)
         assert all("result" in wire for wire in rows[:-1])
         final = rows[-1]
         draft = final["show_draft"]
@@ -92,7 +93,8 @@ def check(executable):
         dict(name="self.tank.stop",arguments={"unexpected":True},elapsed_ms=0,rpc_id=1)])
     assert "error" in wire and final["move_speed_percent"] == 70
     return dict(scope="Synthetic protocol requests, virtual timing and simulated range; no model or board IO",
-                expected_traces=80, compose_traces=8, concurrent_edit_rejected=True, invalid_requests=len(invalid), duplicate_id_did_not_restart=True,
+                expected_traces=80, compose_traces=8, simulated_recognized_inputs=88,
+                concurrent_edit_rejected=True, invalid_requests=len(invalid), duplicate_id_did_not_restart=True,
                 setup_ids_isolated=True, invalid_stop_did_not_change_motion=True)
 
 

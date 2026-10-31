@@ -106,6 +106,11 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertTrue(native["passed"])
             self.assertEqual(native["scenarios"], 13)
             self.assertFalse(json.loads(archive.read("firmware/esp32-audio/verification-ct67.json"))["flashed"])
+            vague = json.loads(archive.read("docs/validation/evidence/ct68-vague-action/platform-review.json"))
+            self.assertEqual((vague["total"], vague["completed"], vague["tool_matches"], vague["state_matches"]), (20, 20, 16, 20))
+            self.assertEqual((vague["clarification_rejections"], vague["vague_states_preserved"]), (3, 8))
+            self.assertNotIn("docs/validation/evidence/ct68-vague-action/platform-1.json.gz", archive.namelist())
+            self.assertFalse(json.loads(archive.read("firmware/esp32-audio/verification-ct68.json"))["flashed"])
             self.assertNotIn("device_id", manifest["firmware"])
             for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json"):
                 replay = root/name
