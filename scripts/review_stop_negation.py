@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 from capture_lingxi import firmware_profile, firmware_replay
-from evaluate_voice import canonical
+from evaluate_voice import canonical, evaluate
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -33,6 +33,51 @@ def summarize_case(row,case,final):
 def contrast_can_proceed(results,expected):
     return all(row['completed'] and not row['unexpected_control_calls'] and row['draft_matches'] and
                (row['strict_tool_match'] or not expected[row['id']]['expected_calls']) for row in results)
+
+
+def review_fixed(directory, executable):
+    """Replay all retained candidate calls, not only matched or safe examples."""
+    identity = read(directory, 'diagnostic-C006-1')
+    binary = hashlib.sha256(executable.read_bytes()).hexdigest()
+    schema = hashlib.sha256((directory/'candidate-tools.json').read_bytes()).hexdigest()
+    assert read(directory, 'candidate-tools')['tools'] == read(directory, 'diagnostic-tools')['tools']
+    results = {}
+    for suite, count in (('voice', 80), ('compose', 8)):
+        corpus_path = ROOT/f'docs/validation/{suite}-cases.json'
+        corpus = json.loads(corpus_path.read_bytes())
+        expected = {case['id']: case for case in corpus['cases']}
+        trace = read(directory, 'full-'+suite)
+        assert trace['role_sha256'] == identity['role_sha256']
+        assert trace['model'] == identity['model'] and trace['capture_source_sha256'] == identity['capture_source_sha256']
+        assert trace['host_replay_sha256'] == binary and trace['tool_schema_sha256'] == schema
+        assert trace['input_mode'] == 'raw_text_diagnostic' and trace['fixture_version'] == 'firmware_host'
+        assert trace['corpus_sha256'] == hashlib.sha256(corpus_path.read_bytes()).hexdigest()
+        assert len(trace['results']) == count and {row['id'] for row in trace['results']} == set(expected)
+        rows = []
+        for row in trace['results']:
+            case = expected[row['id']]
+            assert row['input_text'] == case['text'] and row['context'] == case['context']
+            assert row['initial_profile'] == firmware_profile(case['context'])
+            calls = row['host_calls']
+            assert [{key: call[key] for key in ('name', 'arguments')} for call in calls] == row['calls']
+            replies = [firmware_replay(executable, row['initial_profile'], calls[:i+1])[-2] for i in range(len(calls))]
+            assert replies == row.get('host_rpc_replies', [])
+            final = firmware_replay(executable, row['initial_profile'], [*calls, dict(inspect_ms=row['host_inspect_ms'])])[-1]
+            assert final == row['host_final_state']
+            result = dict(id=row['id'], completed=row['completed'], calls=row['calls'],
+                          final_revision=final['show_draft']['revision'], starts=final['starts_this_boot'],
+                          logical_outputs=final['logical_outputs'], reply_characters=len(''.join(row['replies'])))
+            if case['category'] == 'stop':
+                later = firmware_replay(executable, row['initial_profile'], [*calls, dict(inspect_ms=max(60000, row['host_inspect_ms']))])[-1]
+                assert not later['sequence_active'] and not any(later['logical_outputs'].values())
+                result['outputs_off_at_60s'] = True
+            rows.append(result)
+        score = evaluate(corpus, trace)
+        results[suite] = dict(correct=score['correct'], total=count, forbidden_call_cases=score['forbidden_call_cases'],
+                              incomplete=score['incomplete'], failed_stop_cases=score['failed_stop_cases'],
+                              results=rows, replies_and_final_states_match=True)
+    return dict(scope='Offline replay of all 88 real-platform text sessions through frozen ct65 host; no device IO',
+                host_sha256=binary, **results)
 
 
 def review(directory,executable):
@@ -93,5 +138,9 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--directory',type=Path,required=True)
     parser.add_argument('--executable',type=Path,required=True)
+    parser.add_argument('--candidate-executable',type=Path)
     args=parser.parse_args()
-    print(json.dumps(review(args.directory,args.executable),ensure_ascii=False,indent=2))
+    result = review(args.directory,args.executable)
+    if args.candidate_executable:
+        result['fixed_suites'] = review_fixed(args.directory,args.candidate_executable)
+    print(json.dumps(result,ensure_ascii=False,indent=2))
