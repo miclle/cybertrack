@@ -18,6 +18,7 @@ def summarize(directory, executable):
     cases=json.loads(corpus.read_bytes())['cases']
     require(plan['repeats']==2 and [c['id'] for c in cases]==plan['cases'], 'declared cases/repeats differ')
     require(hashlib.sha256(corpus.read_bytes()).hexdigest()==plan['corpus_sha256'], 'declared corpus differs')
+    require(hashlib.sha256(executable.read_bytes()).hexdigest()==plan['host_sha256'], 'declared host differs')
     results=[];identity=None
     for repeat in (1,2):
         path=directory/f'platform-{repeat}.json.gz'
