@@ -1,0 +1,63 @@
+{
+  "scope": "独立表达核验；不替代固定80条",
+  "cases": [
+    {
+      "id": "B001",
+      "text": "吹泡泡两秒",
+      "context": "设备空闲，输出关闭",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ]
+    },
+    {
+      "id": "B002",
+      "text": "吹泡泡三十秒",
+      "context": "设备空闲，输出关闭",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ]
+    },
+    {
+      "id": "B003",
+      "text": "吹泡泡九十秒",
+      "context": "设备空闲，输出关闭",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ]
+    },
+    {
+      "id": "B004",
+      "text": "吹泡泡两分钟",
+      "context": "设备空闲，输出关闭",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ]
+    },
+    {
+      "id": "B005",
+      "text": "不要吹泡泡",
+      "context": "设备空闲，输出关闭",
+      "expected_calls": []
+    }
+  ]
+}

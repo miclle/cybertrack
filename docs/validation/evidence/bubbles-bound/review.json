@@ -1,0 +1,253 @@
+{
+  "scope": "11 real platform text sessions with actual parameter gate; subsequent accepted receipts remain isolated fixtures",
+  "results": [
+    {
+      "file": "holdout-ct60.json.gz",
+      "id": "B001",
+      "input_text": "吹泡泡两秒",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ],
+      "checks": [
+        {
+          "valid": true,
+          "error": "",
+          "stop_requested": false
+        }
+      ],
+      "calls_match": true,
+      "reply": "好的，吹泡泡两秒。"
+    },
+    {
+      "file": "holdout-ct60.json.gz",
+      "id": "B002",
+      "input_text": "吹泡泡三十秒",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "checks": [
+        {
+          "valid": true,
+          "error": "",
+          "stop_requested": false
+        }
+      ],
+      "calls_match": true,
+      "reply": "好的，吹泡泡三十秒已启动。"
+    },
+    {
+      "file": "holdout-ct60.json.gz",
+      "id": "B003",
+      "input_text": "吹泡泡九十秒",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "checks": [
+        {
+          "valid": true,
+          "error": "",
+          "stop_requested": false
+        }
+      ],
+      "calls_match": true,
+      "reply": "吹泡泡单次最多三十秒，我按三十秒来吹泡泡单次最多三十秒，我按三十秒来。"
+    },
+    {
+      "file": "holdout-ct60.json.gz",
+      "id": "B004",
+      "input_text": "吹泡泡两分钟",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "checks": [
+        {
+          "valid": true,
+          "error": "",
+          "stop_requested": false
+        }
+      ],
+      "calls_match": true,
+      "reply": "吹泡泡最多三十秒，我按三十秒来吹泡泡最多三十秒，这次就按三十秒来。"
+    },
+    {
+      "file": "holdout-ct60.json.gz",
+      "id": "B005",
+      "input_text": "不要吹泡泡",
+      "calls": [],
+      "checks": [],
+      "calls_match": true,
+      "reply": "好的，不吹泡泡。"
+    },
+    {
+      "file": "r1-ct59.json.gz",
+      "id": "V024",
+      "input_text": "吹泡泡六十秒",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "checks": [
+        {
+          "valid": true,
+          "error": "",
+          "stop_requested": false
+        }
+      ],
+      "calls_match": true,
+      "reply": "吹泡泡单次最多三十秒。吹泡泡单次最多三十秒。"
+    },
+    {
+      "file": "r1-ct60.json.gz",
+      "id": "V024",
+      "input_text": "吹泡泡六十秒",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "checks": [
+        {
+          "valid": true,
+          "error": "",
+          "stop_requested": false
+        }
+      ],
+      "calls_match": true,
+      "reply": "用户要求吹泡泡六十秒，超过三十秒，调用时传30000。吹泡泡单次最多三十秒。"
+    },
+    {
+      "file": "r2-ct59.json.gz",
+      "id": "V024",
+      "input_text": "吹泡泡六十秒",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "checks": [
+        {
+          "valid": true,
+          "error": "",
+          "stop_requested": false
+        }
+      ],
+      "calls_match": true,
+      "reply": "吹泡泡最多三十秒，我按三十秒来吹泡泡单次最多三十秒。"
+    },
+    {
+      "file": "r2-ct60.json.gz",
+      "id": "V024",
+      "input_text": "吹泡泡六十秒",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "checks": [
+        {
+          "valid": true,
+          "error": "",
+          "stop_requested": false
+        }
+      ],
+      "calls_match": true,
+      "reply": "吹泡泡单次最多三十秒。"
+    },
+    {
+      "file": "r3-ct59.json.gz",
+      "id": "V024",
+      "input_text": "吹泡泡六十秒",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "checks": [
+        {
+          "valid": true,
+          "error": "",
+          "stop_requested": false
+        }
+      ],
+      "calls_match": true,
+      "reply": "吹泡泡最多三十秒，我按三十秒来吹泡泡单次最多三十秒。"
+    },
+    {
+      "file": "r3-ct60.json.gz",
+      "id": "V024",
+      "input_text": "吹泡泡六十秒",
+      "calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ],
+      "checks": [
+        {
+          "valid": true,
+          "error": "",
+          "stop_requested": false
+        }
+      ],
+      "calls_match": true,
+      "reply": "吹泡泡单次最多三十秒。"
+    }
+  ],
+  "legacy_replay": {
+    "original_capture_sha256": "16c919ff9d0e903a43dd3cf2b77c8130f409d2a4a9dc0fd3ea1c691ee5f27cee",
+    "case_id": "V024",
+    "calls": [
+      {
+        "name": "self.tank.bubbles",
+        "arguments": {
+          "duration_ms": 60000
+        }
+      }
+    ],
+    "checks": [
+      {
+        "valid": false,
+        "error": "Effect requires exactly integer duration_ms within its limit",
+        "stop_requested": false
+      }
+    ]
+  }
+}
