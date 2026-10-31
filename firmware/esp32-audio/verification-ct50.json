@@ -1,0 +1,21 @@
+{
+  "version": "2.0.3-ct50",
+  "scope": "Website holds in status replies. No flash or actuator action.",
+  "last_recorded_application": "2.0.3-ct45",
+  "flashed": false,
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "bytes": 2699168,
+    "sha256": "58c5caa469c63858ee5fe84603ca49cf5f5419b351cd718e51d9dd50cb092264"
+  },
+  "source_sha256": {
+    "cybertrack_tools.cc": "f73e8a9880334310206930daf8a5f73d7ec6493ba9f9dbcfd620a29e2bc698ee",
+    "exported_tool_schemas": "fa840ac11821a988295942471a3c40edb291b256994eaafea27f5f9c9ec74d96"
+  },
+  "checks": [
+    "Actual Reply exercised with three simultaneous web holds at +200 ms and expiration at +600 ms",
+    "Only self.tank.get_status description changed in the 12 exported schemas",
+    "Of the three frozen ct49/ct50 snapshots, only status_facts differed on the active web hold",
+    "All seven checks passed via scripts/verify_improvements.py --source build/xiaozhi-ct50-src"
+  ]
+}
