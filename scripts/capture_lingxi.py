@@ -207,6 +207,11 @@ async def capture_case(connection,tools,case,timeout=45):
                             receipt={**copy.deepcopy(status),'operation':'show_edit','result':'draft_changed'}
                         else:
                             receipt=simulated_reply(status,name,args)
+                        if case.get('draft_read_facts_fixture') and name.endswith('get_status'):
+                            helper = ROOT/'build/lingxi-schema-export/draft-read-fixture'
+                            fields = json.loads(subprocess.check_output([str(helper),'draft_read'],
+                                input=json.dumps(receipt), text=True, timeout=10))
+                            receipt.update(fields)
                         if name.endswith('compose') or name.endswith('stop'):draft_observed_at=None
                         if name.endswith('get_status'):draft_observed_at=time.monotonic()
                         if version == 'ct47' or (version == 'ct46' and name.endswith('get_status')):
@@ -303,6 +308,8 @@ async def run(args):
             case.update(host_binary=binary.resolve(), initial_profile=getattr(args,'draft_profile','two_step_web_draft') if draft_host else speed_host)
     for case in cases:
         case['fixture_version']=version
+        if getattr(args,'draft_read_facts_fixture',False):
+            case['draft_read_facts_fixture']=True
         if getattr(args,'admission_result_fixture',False):
             case['admission_result_fixture']=True
         if getattr(args,'audio_packets',False): case['audio_packets']=True
@@ -320,6 +327,10 @@ async def run(args):
         trace['input_mode'] = 'synthetic_opus'
         trace['synthesis_source_sha256'] = hashlib.sha256(Path(synthetic_speech.__file__).read_bytes()).hexdigest()
         trace['scope'] = 'Synthesized speech over real platform ASR; isolated fixture receipts; no microphone, speaker or device IO'
+    trace['draft_read_facts_fixture']=getattr(args,'draft_read_facts_fixture',False)
+    if trace['draft_read_facts_fixture']:
+        trace['draft_facts_header_sha256']=hashlib.sha256((ROOT/'firmware/esp32-audio/status_facts.h').read_bytes()).hexdigest()
+        trace['draft_facts_helper_sha256']=hashlib.sha256((ROOT/'build/lingxi-schema-export/draft-read-fixture').read_bytes()).hexdigest()
     if timed or draft_host or speed_host:
         binary=draft_host or ROOT/'build/audio-host/receipt_replay'
         trace['host_replay_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
@@ -347,6 +358,7 @@ if __name__=='__main__':
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
     p.add_argument('--admission-result-fixture',action='store_true',help='Experiment only: expose host admission errors as structured rejected tool results')
     p.add_argument('--draft-profile',choices=('two_step_web_draft','empty_web_draft'),default='two_step_web_draft',help='Initial draft for --draft-host; default preserves existing two-step revision 7')
+    p.add_argument('--draft-read-facts-fixture',action='store_true',help='Experiment only: add firmware draft query facts to status receipts')
     p.add_argument('--audio-packets',action='store_true',help='Record arrival and size of every remote audio packet; discard its content')
     inputs=p.add_mutually_exclusive_group()
     inputs.add_argument('--synthetic-speech',action='store_true',help='Send synthesized Mandarin as Opus frames, without input text or a microphone')

@@ -17,6 +17,12 @@ inline std::string StatusFacts(std::string_view fault, bool blocked, bool sequen
     return facts;
 }
 
+inline const char* DraftReadFacts(bool active) {
+    return active
+        ? "设备当前有已保存草稿。这次状态查询没有保存、修改或取消任何草稿，不能把已有版本当成本次操作完成。只有本次compose返回draft_saved或draft_cancelled，才能确认相应操作完成。"
+        : "设备当前没有已保存草稿。这次状态查询没有创建或保存草稿。用户明确要求新建时，需要实际调用compose并收到draft_saved及新版本后，才可说已保存；仅查询不能完成新建。";
+}
+
 // Expose the show's narrower contract separately from the robot's direct tools.
 inline constexpr char DraftEditingCapabilities[] =
     R"({"allowed":["move","bubbles"],"unsupported":["water","ignition"],"confirmation":"web","explanation":"草稿只支持行走和泡泡。喷水无法加入表演，改变时长也无法添加。"})";
