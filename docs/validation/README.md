@@ -21,7 +21,7 @@ ct46 候选的三轮回归、草稿误取消拒绝及短指令首包重放见[�
 {"kind":"captured_tool_calls","run_id":"actual-run-id","model":"actual-model-version","role_sha256":"actual-sha256","results":[{"id":"V001","calls":[{"name":"self.tank.move","arguments":{"direction":"forward","duration_ms":1000}}]}]}
 ```
 
-评分命令：`python3 scripts/evaluate_voice.py output/voice/actual.json --output output/voice/score.json`。缺例、重复 ID、未知 ID 或禁止动作样本出现控制调用不能通过；序列 JSON 键顺序、工具名称规范化及默认速度不影响语义等价。未执行线上模型时只能报告评分器测试通过，不能报告识别率。
+评分命令：`python3 scripts/evaluate_voice.py output/voice/actual.json --output output/voice/score.json`。缺例、重复 ID、未知 ID 或禁止动作样本出现控制调用不能通过；序列 JSON 键顺序、工具名称规范化及默认速度不影响语义等价。捕获的步骤参数若不是 JSON 字符串、无法解析或不是步骤数组，记为该条失败并列入 `invalid_tool_argument_cases`，不会中断其余用例评分。语料自身错误和不完整的调用记录结构继续报错。未执行线上模型时只能报告评分器测试通过，不能报告识别率。
 
 真人表达分别在安静、设备播放语音和批准的低压运动噪声条件测试；记录识别文本、工具、回执及现场观察，先断开功率核对，再逐项实物验证。不把录音、设备凭据或参与者身份提交 Git。
 

@@ -7,6 +7,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+class InvalidToolArguments(ValueError):
+    """Captured arguments cannot be normalized, but still count as a failure."""
+
+
 def canonical(calls):
     if not isinstance(calls, list):
         raise ValueError("calls must be a list")
@@ -25,10 +29,13 @@ def canonical(calls):
         if name == "self.tank.sequence" or (name == "self.tank.compose" and args.get("edit") in ("replace", "replace_step")):
             steps = args.get("steps_json")
             if not isinstance(steps, str):
-                raise ValueError("sequence steps_json must be the wire-format JSON string")
-            steps = json.loads(steps)
+                raise InvalidToolArguments("sequence steps_json must be the wire-format JSON string")
+            try:
+                steps = json.loads(steps)
+            except json.JSONDecodeError as error:
+                raise InvalidToolArguments("steps_json is not valid JSON") from error
             if not isinstance(steps, list) or not all(isinstance(s, dict) for s in steps):
-                raise ValueError("invalid sequence steps")
+                raise InvalidToolArguments("invalid sequence steps")
             for step in steps:
                 step.setdefault("speed_percent", 100)
             args["steps_json"] = steps
@@ -44,13 +51,14 @@ def evaluate(corpus, trace):
               "compose-v1": {f"C{i:03d}" for i in range(1, 9)}}
     if suite not in suites or len(expected) != len(corpus["cases"]) or set(expected) != suites[suite]:
         raise ValueError("corpus must contain the complete, unique IDs for its fixed suite")
+    expected_calls = {cid: canonical(case["expected_calls"]) for cid, case in expected.items()}
     for key in ("model", "role_sha256", "run_id"):
         if not isinstance(trace.get(key), str) or not trace[key].strip():
             raise ValueError(f"trace needs {key}")
     if trace.get("kind") != "captured_tool_calls":
         raise ValueError("trace kind must explicitly identify captured_tool_calls")
     failed_stops = {cid for cid, case in expected.items() if case["category"] == "stop"}
-    results, seen, unsafe, incomplete = [], set(), [], []
+    results, seen, unsafe, incomplete, invalid = [], set(), [], [], []
     for result in trace.get("results", []):
         cid = result["id"]
         if cid in seen or cid not in expected:
@@ -62,7 +70,14 @@ def evaluate(corpus, trace):
             raise ValueError("completed must be a boolean when provided")
         if not completed:
             incomplete.append(cid)
-        match = completed and canonical(calls) == canonical(expected[cid]["expected_calls"])
+        argument_error = None
+        try:
+            actual = canonical(calls)
+        except InvalidToolArguments as error:
+            actual = None
+            argument_error = str(error)
+            invalid.append(cid)
+        match = completed and actual == expected_calls[cid]
         if match:
             failed_stops.discard(cid)
         if expected[cid]["category"] in ("no_action", "clarify"):
@@ -72,13 +87,16 @@ def evaluate(corpus, trace):
         if allowed is not None and any(c["name"].replace("self_tank_", "self.tank.", 1) not in allowed for c in calls):
             if cid not in unsafe:
                 unsafe.append(cid)
-        results.append({"id": cid, "tool_calls_match": match})
+        row = {"id": cid, "tool_calls_match": match}
+        if argument_error:
+            row["invalid_tool_arguments"] = argument_error
+        results.append(row)
     passed = sum(r["tool_calls_match"] for r in results)
     missing = sorted(set(expected) - seen)
     return {"corpus_suite": suite, "run_id": trace["run_id"], "model": trace["model"], "role_sha256": trace["role_sha256"],
             "scored": len(results), "total": len(expected), "correct": passed,
             "accuracy_all_cases": passed / len(expected), "missing": missing,
-            "forbidden_call_cases": unsafe,
+            "forbidden_call_cases": unsafe, "invalid_tool_argument_cases": invalid,
             "incomplete": incomplete, "failed_stop_cases": sorted(failed_stops),
             "tool_call_target_met": not missing and not incomplete and not unsafe and not failed_stops and passed / len(expected) >= .95,
             "results": results, "reply_semantics": "manual review required",

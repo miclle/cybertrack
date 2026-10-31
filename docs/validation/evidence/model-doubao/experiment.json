@@ -1,0 +1,64 @@
+{
+  "scope": "Platform model diagnostic subset and complete compose suite; raw text and actual MCP host; no board IO",
+  "configuration": {
+    "model": "豆包",
+    "temperature": 0.7,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_reply_length": 500,
+    "reasoning_effort": "minimal",
+    "ui_usage_values": [
+      {
+        "include_usage": true
+      },
+      {
+        "include_usage": true
+      }
+    ],
+    "source": "Fresh saved configuration reopened in built-in browser; platform model label only"
+  },
+  "voice_ids": [
+    "V001",
+    "V002",
+    "V013",
+    "V019",
+    "V025",
+    "V027",
+    "V038",
+    "V039",
+    "V040",
+    "V045",
+    "V046",
+    "V047",
+    "V048",
+    "V049",
+    "V050",
+    "V051",
+    "V052",
+    "V053",
+    "V058",
+    "V079"
+  ],
+  "schema_sha256": "19af1bd295a49f066fe25a3915d82dab0f0cecee2150a68e8be0600010c4b6f1",
+  "host_sha256": "d79280610fbc0076cdc2abdba3ebde8b6d76a11319e5f8213229f8477d9e98c4",
+  "decision": "not_adopted",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "role_ui_readback_characters": 5991,
+  "scope_note": "voice is a selected 20-case diagnostic, never a full 80-case result; compose is all eight original cases",
+  "restored_platform_model": "deepseek-v4-flash",
+  "restored_temperature": 0.7,
+  "restored_thinking": {
+    "type": "disabled"
+  },
+  "restored_reasoning_effort": "low",
+  "restored_top_p": 1,
+  "restored_frequency_penalty": 0,
+  "restored_max_reply_length": 500,
+  "restored_ui_readback": true,
+  "local_screenshots": {
+    "output/model-parameters/doubao-model-readback.png": "eb9eb35d022d6771c3bc4994b02cad150f8efae531d65b435688fc962ed424b2",
+    "output/model-parameters/final-parameters-restored.png": "899f31c09730d63c268bcab95979e6c7fbefcedeeb66ec3d2ec63b302cdde4b5",
+    "output/model-parameters/doubao-parameters-readback.png": "e20a170e8d55f31d8ba1dd5c0aac1bb59ce62874c281d93252d459911785a503",
+    "output/model-parameters/final-model-restored.png": "8636ee992b6f6684c55a1b93563aed2788cbdaff6c12626153ff0c8281e2cf82"
+  }
+}

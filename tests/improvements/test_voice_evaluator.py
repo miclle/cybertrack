@@ -77,5 +77,25 @@ class VoiceEvaluatorTests(unittest.TestCase):
         self.assertEqual(len(set(spoken["case_ids"])), 20)
         self.assertTrue(set(spoken["case_ids"]) <= {c["id"] for c in self.corpus["cases"]})
 
+    def test_bad_captured_steps_are_scored_without_losing_other_cases(self):
+        row = self.trace["results"][0]
+        for value in ('{', '{"steps": []}', '[1]', None):
+            with self.subTest(value=value):
+                row["calls"] = [{"name": "self.tank.sequence", "arguments": {"steps_json": value}}]
+                result = module.evaluate(self.corpus, self.trace)
+                self.assertEqual((result["scored"], result["correct"]), (80, 79))
+                self.assertEqual(result["invalid_tool_argument_cases"], [row["id"]])
+                self.assertFalse(result["results"][0]["tool_calls_match"])
+                self.assertIn("invalid_tool_arguments", result["results"][0])
+
+    def test_bad_oracle_and_capture_shape_still_raise(self):
+        self.corpus["cases"][0]["expected_calls"] = [{"name": "self.tank.sequence", "arguments": {"steps_json": '{}'}}]
+        with self.assertRaises(ValueError):
+            module.evaluate(self.corpus, self.trace)
+        self.setUp()
+        self.trace["results"][0]["calls"] = [{"name": "self.tank.sequence", "arguments": "not an object"}]
+        with self.assertRaises(ValueError):
+            module.evaluate(self.corpus, self.trace)
+
 
 if __name__ == "__main__": unittest.main()
