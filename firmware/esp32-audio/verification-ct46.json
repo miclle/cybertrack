@@ -1,0 +1,6 @@
+{
+  "version": "2.0.3-ct46",
+  "scope": "Host-tested candidate, no device deployment or physical action",
+  "playback": "A single recognized default movement, water, bubbles or stop command, matching tool arguments and successful receipt before TTS start suppress remote audio for that reply. Unmatched, early, failed and multi-tool replies remain audible.",
+  "checks": ["python3 firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct46-src"]
+}

@@ -4,7 +4,7 @@
 
 | 项目 | 当前依据与状态 |
 |---|---|
-| 源码基线 | `2.0.3-ct45`（网页编排、版本确认与三个泡泡表演模板），已仅应用部署；ESP-IDF 5.5.1、小智固定版本及 overlay |
+| 源码基线 | `2.0.3-ct46` 候选，增加简单成功指令的端侧播报控制；ESP-IDF 5.5.1、小智固定版本及 overlay |
 | 最近记录的部署 | [ct45](../firmware/esp32-audio/startup-ct45.json)；2026-10-31 已重启联网并回读 |
 | 最近角色同步 | [ct45 联调反馈修正](../firmware/esp32-audio/role-feedback-ct45.json)，5998 字符保存回读、重启与零启动检查；模型语义另验 |
 | 软件验证 | [ct45 主机／编译记录](../firmware/esp32-audio/verification-ct45.json)，与部署及实物验收分开 |
