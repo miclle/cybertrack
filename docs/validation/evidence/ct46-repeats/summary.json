@@ -1,0 +1,229 @@
+{
+  "scope": "Isolated platform text with synthetic device receipts. Playback policy replay is host-only.",
+  "model": "deepseek-v4-flash",
+  "role_sha256": "79662d7d2e4540a6f448a0b2330cecad2ba49f0ee2d59d1430f5279f96a677ac",
+  "tool_schema_sha256": "8b01f8c65dcabdecc3f678cd14a9d99abb175df8e69450b1bf7e6bda1b4cfbd3",
+  "capture_source_sha256": "65a3edc573d565ab9e6faddf77280625d8f9a7c7841b21b265074ec951b07c5e",
+  "runs": [
+    {
+      "round": 1,
+      "suite": "voice",
+      "run_id": "82de9639-dc3f-492b-b320-9ce7423a2d8c",
+      "sha256": "03eac8d731e840e63842f04322c656cf5c5cfd360290b260533501edc6a930a8",
+      "expected": 80,
+      "completed": 80,
+      "missing": [],
+      "incomplete": [],
+      "exact": 79,
+      "forbidden": [],
+      "mismatches": [
+        "V040"
+      ],
+      "cloud_silence_required": 45,
+      "cloud_silence_observed": 0
+    },
+    {
+      "round": 1,
+      "suite": "compose",
+      "run_id": "6dcb4d20-2bb2-49c4-8c5e-bb2a61dc6d8a",
+      "sha256": "84276b195cb73138da17f0fe117812aa418a57dd8795bd93751d88e7613fec1a",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": [],
+      "exact": 7,
+      "forbidden": [],
+      "mismatches": [
+        "C008"
+      ]
+    },
+    {
+      "round": 1,
+      "suite": "status",
+      "run_id": "b4957b16-167c-4f4e-a004-a3a88a3812fd",
+      "sha256": "fda450ec0a8873e3a93e4e1d61ce648471655480b381258bc465fd1bcef19762",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": []
+    },
+    {
+      "round": 1,
+      "suite": "holdout",
+      "run_id": "3e24b847-7240-4bec-b892-a51e304c26a9",
+      "sha256": "df104d4b26ce76f5a18c5a1bb700d2a8cce50c18a38dd6f164a81ba30a96d0e3",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": []
+    },
+    {
+      "round": 1,
+      "suite": "transfer",
+      "run_id": "382b21bb-bfa5-4cd0-8410-86c9591e3a6a",
+      "sha256": "45d317a83015a25191dffb0c8243034a1cfe82f705e7d57fbd9ab35a7ff06323",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": [],
+      "first_remote_packet_policy": {
+        "P001": "suppressed",
+        "P002": "suppressed",
+        "P003": "suppressed",
+        "P004": "audible",
+        "P005": "audible",
+        "P006": "audible",
+        "P007": "audible",
+        "P008": "audible"
+      }
+    },
+    {
+      "round": 2,
+      "suite": "voice",
+      "run_id": "9886a878-d236-4f7e-8f95-ebfb9a694d4f",
+      "sha256": "ff8fce45bfeb533b31c961556f1a7174f08cc9342ab121d6b69da530eecc646d",
+      "expected": 80,
+      "completed": 80,
+      "missing": [],
+      "incomplete": [],
+      "exact": 77,
+      "forbidden": [
+        "V061"
+      ],
+      "mismatches": [
+        "V028",
+        "V061",
+        "V077"
+      ],
+      "cloud_silence_required": 45,
+      "cloud_silence_observed": 0
+    },
+    {
+      "round": 2,
+      "suite": "compose",
+      "run_id": "59c45adc-a57e-45b8-b14d-27d614322c7e",
+      "sha256": "5d82981ef37b280149a5f7ed8b3c1b9e1ea8297f4643ba35e3b72fba44b8c71e",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": [],
+      "exact": 8,
+      "forbidden": [],
+      "mismatches": []
+    },
+    {
+      "round": 2,
+      "suite": "status",
+      "run_id": "f890c8bf-e88b-4aca-b5a1-7d918afcfae8",
+      "sha256": "65adc66ef20c062f0b89230140a60c11fadd970f84c5a9f49c6777b87c8f8f26",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": []
+    },
+    {
+      "round": 2,
+      "suite": "holdout",
+      "run_id": "8a6e473d-5471-4311-926f-447c685174ed",
+      "sha256": "bbb96cbb33f0f969fbc84f644c228b0dd41792019579eb82ef27e5195e3ae873",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": []
+    },
+    {
+      "round": 2,
+      "suite": "transfer",
+      "run_id": "967540e3-bbcc-44b6-9a00-76c863811dd2",
+      "sha256": "97ae92f52d1ec2a0aa8abaf97e15f135c680c619ff14591203a9317cd11c1cb7",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": [],
+      "first_remote_packet_policy": {
+        "P001": "suppressed",
+        "P002": "suppressed",
+        "P003": "suppressed",
+        "P004": "audible",
+        "P005": "audible",
+        "P006": "audible",
+        "P007": "audible",
+        "P008": "audible"
+      }
+    },
+    {
+      "round": 3,
+      "suite": "voice",
+      "run_id": "a6ee2b6c-1a49-4dce-849f-d842479c2c1a",
+      "sha256": "e2afc11299cdfdb26702494581f0e34bc6d2837f2da177185186c401c6ec043f",
+      "expected": 80,
+      "completed": 80,
+      "missing": [],
+      "incomplete": [],
+      "exact": 79,
+      "forbidden": [],
+      "mismatches": [
+        "V040"
+      ],
+      "cloud_silence_required": 45,
+      "cloud_silence_observed": 0
+    },
+    {
+      "round": 3,
+      "suite": "compose",
+      "run_id": "6b0536fd-db11-4a9d-bbe3-6252fbefccc0",
+      "sha256": "908cfe58f6d18685db1f3d28f34f401394cd9a9db95b6ddbae6a057e2304004f",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": [],
+      "exact": 5,
+      "forbidden": [],
+      "mismatches": [
+        "C006",
+        "C007",
+        "C008"
+      ]
+    },
+    {
+      "round": 3,
+      "suite": "status",
+      "run_id": "8f20bb54-bdc2-449c-a1f9-04fe8ba3a408",
+      "sha256": "b9c7636b3e216eba2db99f8f09070e67309816f3da569a3fc72f8a862abb6598",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": []
+    },
+    {
+      "round": 3,
+      "suite": "holdout",
+      "run_id": "44734b82-5b52-4a80-8851-c25fdd12b289",
+      "sha256": "608f0bd1247512a7237fa55d5b86488e2ad5f3bb59c2042247b69c799cd80a76",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": []
+    },
+    {
+      "round": 3,
+      "suite": "transfer",
+      "run_id": "07d6d502-c2fd-4f5f-970e-e5d6e9c5c4d6",
+      "sha256": "6e3a49711b0e6f3e062444f932df5d140de305a5dbc47d759438782fe26a940c",
+      "expected": 8,
+      "completed": 8,
+      "missing": [],
+      "incomplete": [],
+      "first_remote_packet_policy": {
+        "P001": "suppressed",
+        "P002": "suppressed",
+        "P003": "suppressed",
+        "P004": "audible",
+        "P005": "audible",
+        "P006": "audible",
+        "P007": "audible",
+        "P008": "audible"
+      }
+    }
+  ]
+}
