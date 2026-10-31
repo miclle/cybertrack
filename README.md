@@ -1,122 +1,147 @@
-# CyberTrack
+<h1 align="center">CyberTrack</h1>
 
-**和小D聊天，一起编排会动、会吹泡泡的机器人表演。**
+<p align="center"><strong>让 AI 开进生活，让想象变成一场机器人表演。</strong></p>
+<p align="center">基于灵矽的开源双履带交互机器人 · 语音互动 · 泡泡剧场 · 3D 打印与模型改造</p>
 
-CyberTrack 基于**灵矽语音与智能体能力**，面向家长陪同的亲子互动：孩子提出想法，家长参与控制和创作，小D用语音、履带动作与泡泡作出回应。项目结合可维护的 3D 打印整机、语音与手机控制，围绕表演编排与自然语言辅助 CAD 设计，让互动、创作和改造连在一起。
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-2563eb.svg" alt="许可证：Apache 2.0"></a>
+  <a href="firmware/esp32-audio/README.md"><img src="https://img.shields.io/badge/Hardware-ESP32--S3-e76f51.svg" alt="主控：ESP32-S3"></a>
+  <a href="hardware/model/README.md"><img src="https://img.shields.io/badge/CAD-FreeCAD-168a70.svg" alt="原生模型：FreeCAD"></a>
+</p>
 
-## 项目亮点
+<p align="center">
+  <a href="#样机演示">演示</a> ·
+  <a href="#项目亮点">亮点</a> ·
+  <a href="#应用场景与商业价值">应用价值</a> ·
+  <a href="#从这里开始">快速开始</a> ·
+  <a href="TODO.md">进度</a>
+</p>
 
-| 亮点 | 能带来什么 |
-|---|---|
-| **听懂先后，也能同时行动** | “先左转，再边走边吹泡泡”；语音转换为最多 16 步动作，一步内多路独立计时 |
-| **小D 泡泡剧场** | 登场、庆祝、谢幕，把台词、表情、履带和泡泡组合成可以一起创作的表演 |
-| **先编排，再开始** | 看清步骤后说“第二步短一点”或“去掉转向”，由家长明确开始表演 |
-| **点选 3D 模型，说出修改想法** | 将评论绑定到零件、面、位置和版本，由当前对话协助原生 CAD 修改与恢复 |
-| **自己打印，也能维护和改造** | 切面头盔、履带底盘、前部双枪与可拆维护结构，提供 FreeCAD、STEP 和打印项目 |
-| **从电源到外壳，一起设计** | 电源分域、独立执行器断电、可维护线束与参数化部件模型，让外观和内部结构共同迭代 |
-| **手机和语音一起用** | 行走、喷水、泡泡各自控制；距离提示音、可选近距离停车和统一停止 |
+<p align="center">
+  <a href="artifact/cybertrack-cover.png"><img src="artifact/cybertrack-cover.png" alt="CyberTrack 项目展示封面：工作台场景中的双履带机器人与泡泡，左上角为 CYBERTRACK 标题" width="100%"></a>
+  <br><sub><a href="artifact/README.md#项目封面">项目展示封面</a></sub>
+</p>
 
-以上呈现产品体验与设计方向。当前可用范围、开发进度和验收记录统一从 [TODO](TODO.md) 查阅；亲子首次使用见[上手卡](docs/quick-start.md)。
+**认识小D：一个可以聊天、行走、喷水、吹泡泡，也可以和你一起改造的机器人。** CyberTrack 面向家长陪同的亲子互动，把灵矽的语音与智能体能力接入真实硬件：孩子提出创意，家长参与编排，小D用履带动作与泡泡回应。从一句话、一段表演，到一个自己打印的零件，让互动自然延伸到创作。
 
-[第一次和小D互动](docs/quick-start.md) · [当前能力与版本](docs/current-status.md) · [产品改进计划](docs/improvement-plan.md) · [模型辅助设计工具](tools/solidcue/README.md) · [模型与图纸](hardware/model/README.md) · [打印项目](hardware/model/lean-print/README.md)
+项目提供固件、原生 CAD、打印项目、原理图、BOM 和设计工具，方便创作者沿着同一套工程继续制作与开发。
 
-## 让灵矽从对话走进真实机器人
-
-CyberTrack 是面向亲子互动的灵矽实体机器人方案：灵矽负责理解表达、塑造小D的角色和选择工具，设备负责参数校验、动作时序、状态回执与本地停止。现有语音链路通过同一设备会话的 MCP 工具控制机器人，日常运行不依赖电脑转发。
-
-- **场景落地**：从语音遥控走向家长和孩子共同创作的泡泡短剧；让孩子表达想法、家长参与编排与启动。
-- **工程落地**：把角色、工具契约、固件、硬件接口和版本证据放在同一工程中维护，减少“模型会说，但设备行为不一致”。
-- **交付落地**：提供参考整机、打印与原理图资料，将语义评测、上手卡、异常矩阵和维护流程组织成可复用的方案材料。
-- **生态反馈**：整理工具试运行、角色版本管理、设备能力声明与分层日志的改进建议；这些是方案建议，不冒充灵矽已提供的功能。
-
-[完整灵矽解决方案：场景、架构、验证与推广](docs/lingxi-solution.md) · [导出参考材料包](tools/lingxi-solution/README.md) · [现用工具契约](firmware/CAPABILITIES.md) · [角色配置与同步](docs/agent-role.md)
+> 当前为开发样机。功能进度、最新部署及验收证据见 [TODO](TODO.md) → [当前状态](docs/current-status.md)；下文的应用方向不代表成品上市或商业验证。
 
 ## 样机演示
 
-**6 分钟实拍**：样机在地面上的移动、转向与泡泡效果展示。点击下方播放器即可播放。
+**先看小D动起来。** 6 分钟实拍展示地面移动、转向和泡泡效果。
 
 https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
-[B 站播放](https://www.bilibili.com/video/BV1rLxM6sEF6/) · [下载原始视频](artifact/cybertrack-prototype-demo-6min.mp4) · [制作过程与全部素材](artifact/README.md)
+[在 B 站观看](https://www.bilibili.com/video/BV1rLxM6sEF6/) · [下载原始视频](artifact/cybertrack-prototype-demo-6min.mp4) · [浏览 33 张制作照片与 2 段视频](artifact/README.md)
 
-影像记录了制作与演示时的样机状态；具体固件、供电配置与工程验收以对应验证记录为准。
+*视频记录拍摄时的样机表现；当前固件、供电配置与验证结果见[工程记录](docs/current-status.md)。*
 
-## 制作过程与样机照片
-
-从双电机台架、底盘装配到头部电子件安装，再看样机的正面、侧面和背面。点击照片可查看原图。
+### 从模型到样机
 
 <table>
   <tr>
-    <td width="50%" valign="top"><a href="artifact/03-dual-motor-bench.jpg"><img src="artifact/previews/03-dual-motor-bench.jpg" alt="双电机台架接线" width="100%"></a><br>双电机台架接线</td>
-    <td width="50%" valign="top"><a href="artifact/19-chassis-assembly-14.jpg"><img src="artifact/previews/19-chassis-assembly-14.jpg" alt="底盘装配与接线" width="100%"></a><br>底盘装配与接线</td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top"><a href="artifact/26-head-breadboard-installation.jpg"><img src="artifact/previews/26-head-breadboard-installation.jpg" alt="头部面包板与扬声器安装" width="100%"></a><br>头部面包板与扬声器安装</td>
-    <td width="50%" valign="top"><a href="artifact/27-prototype-front-workbench.jpg"><img src="artifact/previews/27-prototype-front-workbench.jpg" alt="样机正面：超声波模块与双枪布局" width="100%"></a><br>样机正面：超声波模块与双枪布局</td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top"><a href="artifact/28-prototype-water-gun-side.jpg"><img src="artifact/previews/28-prototype-water-gun-side.jpg" alt="样机侧面：履带、颈架与水枪" width="100%"></a><br>样机侧面：履带、颈架与水枪</td>
-    <td width="50%" valign="top"><a href="artifact/29-prototype-rear-reservoirs.jpg"><img src="artifact/previews/29-prototype-rear-reservoirs.jpg" alt="样机背面：双液体瓶与管路" width="100%"></a><br>样机背面：双液体瓶与管路</td>
+    <td width="50%" align="center"><a href="hardware/model/readme-views/front-iso.png"><img src="hardware/model/readme-views/front-iso.png" alt="CyberTrack CAD 外形：切面头盔、双枪与双履带" width="100%"></a><br><sub>CAD · 2026-10-27</sub></td>
+    <td width="50%" align="center"><a href="artifact/31-prototype-front-floor.jpg"><img src="artifact/previews/31-prototype-front-floor.jpg" alt="CyberTrack 实物样机：地面上的履带机器人，头部尚未盖合" width="100%"></a><br><sub>实物 · 制作样机</sub></td>
   </tr>
 </table>
 
-[查看全部 33 张照片与 2 段视频](artifact/README.md)
+## 项目亮点
+
+### 01 · 一句话，变成看得见的行动
+
+“左转一秒”“边走边吹泡泡”“先后退，再右转”——用日常语言表达动作和先后关系。灵矽负责理解与工具选择，设备负责动作时序；最多 **16 步序列**，步骤内多路并发，让机器人有节奏地回应创意。[了解动作编排](docs/action-sequences.md)
+
+### 02 · 从遥控机器人，到一起创作泡泡剧场
+
+登场、庆祝、谢幕，三个短表演模板提供创作起点。修改方向、速度和时长，预览每一步，再由家长在网页确认开始。让孩子参与“怎么演”，让家长看清“将要做什么”。[打开泡泡剧场指南](docs/show-composer.md)
+
+### 03 · 能自己制作，也能继续改造
+
+切面头盔、双履带、前部双枪构成小D的外形；可拆冠盖、独立面包板托盘和底部维护结构，让内部器件也成为可理解的设计。仓库提供 **FreeCAD 原生模型、STEP、STL 与 3MF**，把外观、装配、打印和维护放在一起迭代。[查看模型与打印资料](hardware/model/README.md)
+
+### 04 · 点选零件，把修改想法留在模型上
+
+在完整整机中选中零件或面，写下“冠盖上移一点”。评论关联模型位置与版本，当前对话协助完成原生 CAD 修改、对照和恢复，让改造建议有明确的对象和可检查的结果。[体验模型辅助设计](tools/solidcue/README.md)
+
+### 05 · 语音、手机与本地控制协同
+
+语音用于自然表达，手机网页用于直接操控和查看状态，本机 BOOT 与“全部停止”用于及时中止动作。日常语音经设备直接连接灵矽，**无需电脑转发**；距离提示音、可选前进保护与设备端计时共同参与控制。[了解控制方式](docs/lan-control.md)
+
+## 应用场景与商业价值
+
+**CyberTrack 的价值在于把角色体验、实体动作和可改造硬件组织成一套可复用的机器人方案。** 同一套工程可以承接不同内容与外观设计，为后续产品探索提供原型基础。
+
+<table>
+  <thead><tr><th width="96">场景</th><th>使用价值与产品方向</th></tr></thead>
+  <tbody>
+    <tr><td><strong>亲子互动</strong></td><td>把说想法、改步骤和看机器人回应组织成共同创作的活动。可探索陪同体验套件、主题表演内容与外观配件。</td></tr>
+    <tr><td><strong>创客教育</strong></td><td>沿着一个完整项目理解语音工具、嵌入式控制、机械装配与 3D 打印。可探索制作工作坊、项目制课程与改造任务。</td></tr>
+    <tr><td><strong>展览活动</strong></td><td>用有角色感的造型、移动和泡泡呈现可见的 AI 互动。可探索主题展示原型、互动脚本与外观定制。</td></tr>
+    <tr><td><strong>生态集成</strong></td><td>为灵矽生态与硬件开发者提供角色、设备工具契约、参考硬件和验证材料。可探索参考设计、设备适配与方案集成服务。</td></tr>
+  </tbody>
+</table>
+
+这些方向共享三类已有资产：**可演示的样机、可修改的软硬件工程、可追溯的接入与验证资料**。它们让后续团队能够从现有实现继续试验，也让内容、造型和硬件迭代有共同依据。
+
+下一步先通过小规模陪同体验验证上手难度与主动重玩，再结合维护、可靠性和成本数据判断产品形态。用户需求、定价、量产成本与付费意愿尚未验证；完整路径见[灵矽解决方案](docs/lingxi-solution.md)。
+
+## 一起编排小D的泡泡剧场
+
+**提出想法 → 修改步骤 → 预览草稿 → 家长确认。**
+
+1. **选一段开场。** 在手机网页选择“登场”“庆祝”或“谢幕”，也可以明确说“编排表演，先别执行”来提出草稿。
+2. **一起改一改。** 调整某一步的方向、行走时长或泡泡时长，再保存到设备并预览。草稿编辑本身不启动执行器。
+3. **决定什么时候演。** 家长核对网页中的步骤与版本，确认开始；需要中止时，使用“全部停止”或本机 BOOT。
+
+普通语音动作仍会直接请求执行；需要预览时，应明确进入编排。当前剧场只编排行走与泡泡，台词是供亲子一起说的网页提示。机器人自动播报台词、表情联动属于后续方向；自然语言改稿与确认后的实机表演仍在验证，详见[编排进度与证据](docs/show-composer.md)。
 
 ## 在完整机器人上，直接说出修改想法
 
-旋转完整整机，点选冠盖、枪座或外壳，将“这个零件上移一点”这样的想法落到明确的零件、面和模型版本。调整在独立研究副本中进行，原生 CAD 结果回到同一设计界面，便于对照修改前后并恢复。
+从“玩什么”进一步走到“怎样改造它”。通过随仓库提供的模型辅助设计工具，在整机上下文中选中冠盖、枪座或外壳，描述调整意图，再检查原生 CAD 的变化。
 
-![完整 CyberTrack 模型中的冠盖调整与修改历史](docs/images/model-design/whole-model-host-adjusted.png)
+<p align="center">
+  <a href="docs/images/model-design/whole-model-host-adjusted.png"><img src="docs/images/model-design/whole-model-host-adjusted.png" alt="真实模型设计卡片：冠盖沿 Z 轴上移 8 mm，右侧显示原生坐标变化、评论与修改历史" width="680"></a>
+</p>
 
-*真实对话内设计卡片：在完整整机中选中冠盖，通过 FreeCAD 将它沿 Z 轴上移 8 mm，同一卡片保留目标评论、AI 回执与坐标变化。可追溯、可对照、可恢复；[查看操作流程](tools/solidcue/README.md)。*
+*真实设计卡片：在独立研究副本中将冠盖上移 8 mm，保留评论、AI 回执和修改历史。修改与恢复经 FreeCAD 保存、重开核对，正式模型保持不变。*
 
-<details>
-<summary>查看点选零件、提出修改的界面</summary>
+这条流程把**设计讨论、原生修改与版本对照**连在一起。当前整机编辑支持受限静态零件的位置调整；任意外形重建、装配约束求解和制造验收仍需相应 CAD 工作。设计工具在电脑上运行，与机器人日常语音链路独立。
 
-![在完整 CyberTrack 模型中选中冠盖并提出调整](docs/images/model-design/whole-model-comment.png)
+[安装与操作流程](tools/solidcue/README.md) · [工具源码](tools/model-design/README.md) · [真实消息驱动验证](tools/solidcue/verification-message-20261031.json)
 
-</details>
+## 为灵矽提供可复用的实体机器人方案
 
-## CAD 模型
+CyberTrack 将灵矽的对话能力落到三个相互配合的层面：
 
-以下视图于 **2026-10-27** 从当前 [CyberTrack.FCStd](hardware/model/CyberTrack.FCStd) 导出，展示整机外形、双枪与履带布局，以及背部双瓶结构。点击图片可查看大图。
+- **交互层：** 小D的角色、语音表达、设备状态解释与亲子上手流程。
+- **执行层：** 同一设备会话的 MCP 业务工具、参数校验、动作计时、来源仲裁与本地停止。
+- **工程层：** 固件与角色版本、原理图、BOM、原生 CAD，以及分层回归和现场验证记录。
 
-<table>
-  <tr>
-    <td width="50%" valign="top"><a href="hardware/model/readme-views/front-iso.png"><img src="hardware/model/readme-views/front-iso.png" alt="CyberTrack CAD 前侧整体视图：头壳、双枪与双履带" width="100%"></a><br>前侧整体视图</td>
-    <td width="50%" valign="top"><a href="hardware/model/readme-views/front.png"><img src="hardware/model/readme-views/front.png" alt="CyberTrack CAD 正面视图：超声波探头与双枪布局" width="100%"></a><br>正面布局</td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top"><a href="hardware/model/readme-views/side.png"><img src="hardware/model/readme-views/side.png" alt="CyberTrack CAD 侧面视图：履带、颈架与背包" width="100%"></a><br>侧面结构</td>
-    <td width="50%" valign="top"><a href="hardware/model/readme-views/rear-iso.png"><img src="hardware/model/readme-views/rear-iso.png" alt="CyberTrack CAD 后侧视图：双瓶背包与管路" width="100%"></a><br>后侧与双瓶背包</td>
-  </tr>
-</table>
+开发者可以沿着“理解表达 → 调用工具 → 设备执行 → 返回状态”的链路定位问题，并通过参考材料包复用角色、接口与评测方法。项目也整理了角色版本管理、工具试运行和分层日志等平台建议，供方案迭代讨论。
 
-*以上为 CAD 模型视图，颜色用于区分零件，不代表实物材料或打印配色；样机状态见上方实拍。模型修订见[模型入口](hardware/model/README.md)，装配、打印工艺与持续带载的完整验收仍待完成。*
-
-## 当前状态
-
-2026-10-31 核对：最近记录的面包板部署为 **2.0.3-ct42**。支持语音与手机网页控制、60–100% 行走输出、四路独立计时、16 步并发动作序列和前方测距。距离提示音独立于行走状态；可选前进保护每次开机默认关闭，开启后小于 15 cm 停前进、至少 20 cm 解锁但不续走。
-
-当前版本、参数和证据统一见 [当前状态](docs/current-status.md)及[接口手册](firmware/CAPABILITIES.md)。[产品改进执行计划](docs/improvement-plan.md)跟踪上手体验、语音回归、编排玩法、实机验收及整机模型辅助设计；计划功能不代表已经部署。
-
-已有基本装配样机、运行影像和分项现场反馈。整机供电、持续带载、停止性能和完整故障验收尚未完成；CAD、主机测试、部署回读与实物结果分别记录。现用电源为辰克 5 V 电池包及 12 V 升压电机支路，旧电源台架结果不迁移。点火低压控制不代表高压、绝缘、液体共存或 EMC 验收。
+[完整解决方案](docs/lingxi-solution.md) · [导出参考材料包](tools/lingxi-solution/README.md) · [设备能力契约](firmware/CAPABILITIES.md) · [角色配置](docs/agent-role.md)
 
 ## 从这里开始
 
-### 查看模型、补打与装配
+### 体验已有样机
 
-使用 FreeCAD 打开 [CyberTrack.FCStd](hardware/model/CyberTrack.FCStd)，当前几何、局部修订及检查入口见[模型说明](hardware/model/README.md)。原生 FCStd 是几何依据，STEP 用于交换；部分历史 STEP 体积比较仍超过阈值，不能把交换文件一概视为原生几何等价。
+先读[首次互动上手卡](docs/quick-start.md)。已部署对应固件的设备联网后，让手机加入同一可互通局域网，打开 OLED 显示的 `http://<设备 IP>:8080/`，即可进入遥控与泡泡剧场，无需安装手机 App。
 
-- **现行打印项目**：[Lean 27 件／6 盘](hardware/model/lean-print/README.md)及[3MF 文件](hardware/model/lean-print/CyberTrack-Lean-6plates.3mf)。已按 P2S、0.4 mm 喷嘴与 PLA Basic 配置各零件的朝向、层高、墙数和支撑，原 29 件版本完成切片与相应几何／路径检查；当前背包调整后第 3、6 盘需重切，旧时间及路径结果不适用于这些盘。用于补打或复现样机时，按所需零件选盘，已打印件不重复打印；切片估算与检查不代表实物强度、配合或整机验收。
-- **头部与单件文件**：[0.58 头部整体打印与螺丝适配](docs/head-shell-print.md)说明 PP07 头壳、配套 PP05 冠盖及独立面包板托盘；[单件目录](hardware/model/print-parts/README.md)提供 STL／STEP 与专项记录。导孔试拧、螺丝保持力与重复拆装仍待实物核验，单件 STL 不包含支撑配置。
-- **装配与维护参考**：[装配说明](docs/assembly.md)与[装配维护图册](hardware/model/CyberTrack-assembly-and-service.pdf)保留各修订的特征定位和拆装参考，其中旧分件、孔形及配合状态须结合现行模型与专项记录阅读。实际打印分件以 Lean 清单为准，已合并的源特征不独立打印；[0.51 六件图册](hardware/model/print-parts/print-parts.pdf)仅作历史合并参考。
+先找到页面底部“全部停止”和本机 BOOT。网页按住方向键行走、松开停止；语音与网页的详细规则见[操作指南](docs/lan-control.md)。距离提示音与前进保护独立，保护每次开机默认关闭，开启后是近距离停止前进，不会自动绕行。当前网页无用户身份认证，应在可信局域网内使用。
 
-[Ready 用户排盘快照](hardware/model/print-ready/README.md)与 Lean 分别保留，盘序和零件范围不同，不混用盘号或切片估算。样机基本装配已有实拍记录；剩余适配、紧固、拆装与承载验证继续按 [TODO](TODO.md) 跟进。
+### 制作、补打或改造一台
 
-### 开发固件
+1. **了解物料与结构。** 从 [BOM](hardware/BOM.md)、[接线总表](docs/wiring.md)和[装配说明](docs/assembly.md)开始，结合实物确认器件与接口。
+2. **打开原生模型。** 使用 FreeCAD 查看 [CyberTrack.FCStd](hardware/model/CyberTrack.FCStd)；FCStd 是几何依据，当前修订与交换文件检查见[模型说明](hardware/model/README.md)。
+3. **按需选择打印件。** [Lean 项目](hardware/model/lean-print/README.md)提供 27 件／6 盘及 [3MF 文件](hardware/model/lean-print/CyberTrack-Lean-6plates.3mf)。当前第 3、6 盘需重新切片；[Ready 排盘](hardware/model/print-ready/README.md)是独立方案，不混用盘号。头部与单件补打见[头部打印说明](docs/head-shell-print.md)和[单件目录](hardware/model/print-parts/README.md)。
 
-控制核心可在电脑上构建和测试，无需连接设备。需要 C11 编译器、CMake ≥ 3.16 和 Python ≥ 3.9，在仓库根目录执行：
+当前仍处于样机联调阶段。打印配合、整机供电、持续负载、停止性能及儿童使用验收尚未完成；点火仅有低压控制实现，高压、绝缘、液体共存及 EMC 尚未验收。首次亲子流程不含点火或狂暴模式，具体边界见[效果控制](docs/effects-control.md)与[待办](TODO.md)。
+
+### 开发固件与设计工具
+
+无需连接设备，即可在电脑上构建通用控制核心。准备 C11 编译器、CMake ≥ 3.16 和 Python ≥ 3.9，在仓库根目录执行：
 
 ```sh
 cmake -S firmware -B build/firmware-host -DCMAKE_BUILD_TYPE=Debug
@@ -124,59 +149,46 @@ cmake --build build/firmware-host
 ctest --test-dir build/firmware-host --output-on-failure
 ```
 
-这组命令验证通用控制核心及协议／运行层，不包含当前面包板的全部功能。现用语音与网页控制从 `firmware/esp32-audio/` 开始，源码候选与最近部署版本分别见[当前状态](docs/current-status.md)，保留按已保存顺序连接 Wi-Fi；通过 overlay 接入固定的上游源码，构建仍使用 ESP-IDF v5.5.1、原始源码及组件缓存。源码导出还需满足面包板适配说明中的 Python 与依赖要求。各工程的 GPIO 与工具语义须分别查阅：
+这组命令检查通用控制核心、协议与运行层。现用面包板的语音、网页和执行器功能从 [firmware/esp32-audio/](firmware/esp32-audio/README.md) 开始，使用固定小智源码、overlay 与 ESP-IDF v5.5.1，依赖准备和构建按该目录说明执行。网络配置见 [Wi-Fi 指南](docs/wifi-configuration.md)，本地凭据不进入 Git。
 
-- [面包板适配](firmware/esp32-audio/README.md)：现用语音、网页和四路控制的构建、部署及逐版本记录。
-- [固件总览](firmware/README.md)与[能力及接口手册](firmware/CAPABILITIES.md)：通用核心、工程差异和接口；现用面包板的四路控制、60–100% 电机 PWM 与左右履带映射以[面包板当前记录](firmware/esp32-audio/README.md)为准，旧台架记录保留各自版本边界。
-- [ESP32 无负载检查](firmware/esp32/README.md)、[电机台架](firmware/esp32-motor-bench/README.md)与[MOS 台架](firmware/esp32-mos-bench/README.md)：各自的接线、版本和测试记录。
-
-### 使用局域网控制
-
-已部署对应面包板固件的设备与手机接入同一可互通局域网后，打开 `http://<设备 IP>:8080/`，页面自动申请控制会话；设备 IP 可从 OLED 或串口读取。以下为当前软件操作规则，各执行器的实物验证状态见上表。
-
-<a href="docs/images/lan-control-ct41.jpg"><img src="docs/images/lan-control-ct41.jpg" alt="CyberTrack ct41 实机网页控制页面：已连接，自动避障关闭，四路待命" width="440"></a>
-
-2026-10-30 的 ct41 实机页面截图，自动避障处于关闭状态。该开关每次开机默认关闭，网页与语音共用；开启后有效距离小于 15 cm 时停止前进。截图中的距离是当时读数。详情见[自动避障规则](docs/ultrasonic-ranging.md#ct41自动避障开关已部署)。
-
-- **距离提示音**：有效距离小于 50 cm 时滴声，40–50 cm 慢滴、小于 40 cm 快滴；与自动避障开关及行走状态无关，无效／过期读数时安静。
-- **行走**：按住方向键持续行走，松开停止本路；语音按指定整数毫秒执行，具体默认值与范围见接口手册。
-- **喷水／泡泡**：各有 1／3／5／10／30 秒按钮和“按住持续”；长按由短租期续约维持，松开只停止本路。
-- **点火**：提供 1／3／5 秒按钮，软件单次上限 5 秒；停止后至少等待本次实际软件开启时长。该间隔不代表热保护或硬件时限验收。
-- **狂暴模式**：网页提供 5／10／30 秒，语音默认 5 秒、最多 30 秒；四路就绪后整体启动，点火按 1 秒开启与至少等长间隔调度。
-- **停止与冲突**：“全部停止”、BOOT 或语音停止关闭四路；旧动作不自动恢复。普通动作同通道冲突时网页优先，行走／喷水／泡泡停止后间隔 200 ms；组合模式的抢占规则见专项说明。
-
-完整操作、失租／断连处理和验证记录见[局域网控制说明](docs/lan-control.md)。当前网页没有用户身份认证，同局域网可访问设备的客户端可申请控制会话；页面显示固件逻辑回执，没有轮速、水流或火花的物理反馈。
+模型辅助设计的依赖与启动流程见[工具指南](tools/solidcue/README.md)；固件与设计工具的检查入口见[统一软件检查](docs/current-status.md#统一软件检查)。
 
 ## 文档导航
 
-| 想了解什么 | 入口 |
+| 想了解什么 | 从这里进入 |
 |---|---|
-| 产品目标与已确认决定 | [产品需求](docs/requirements.md) · [决策和待补资料](docs/decisions.md) |
-| 添加或修改普通 Wi-Fi | 编辑仓库根目录的 `secrets/wifi.json`（本地私密文件，Git 忽略）；见[配置说明](docs/wifi-configuration.md)与[格式示例](firmware/esp32-audio/wifi.example.json)。填写后需构建、刷入设备才生效。 |
-| 机械布局、打印与装配 | [模型与当前修订](hardware/model/README.md) · [Lean 六盘打印项目](hardware/model/lean-print/README.md) · [头部打印与螺丝](docs/head-shell-print.md) · [装配参考](docs/assembly.md) |
-| 电源、接线与采购 | [硬件架构与电源预算](hardware/architecture/README.md) · [电源与接口](docs/power-and-interfaces.md) · [接线总表](docs/wiring.md) · [BOM](hardware/BOM.md) · [采购清单](hardware/procurement.md) |
-| 原理图设计与 PCB 打板 | [KiCad 原理图工程](hardware/schematic/README.md) · [六页原理图 PDF](hardware/schematic/CyberTrack-schematic.pdf) · [设计与制板要求](docs/schematic-and-pcb.md)；A2 已包含主控侧超声波接口，为模块级审图稿，尚未达到 PCB 制造放行状态；[待确认参数](hardware/schematic/parameter-confirmation.md) |
-| 控制架构与语音配置 | [系统架构](docs/architecture.md) · [智能体角色](docs/agent-role.md) · [灵矽接入](docs/linx-integration.md) |
-| 网页操作与效果控制 | [局域网控制](docs/lan-control.md) · [泡泡与点火](docs/effects-control.md) · [面包板固件](firmware/esp32-audio/README.md) |
-| 固件接口与后续开发 | [固件入口](firmware/README.md) · [能力与接口](firmware/CAPABILITIES.md) · [固件计划](firmware/PLAN.md) |
-| 当前待办与验收范围 | [TODO](TODO.md) · [实施及验收计划](docs/verification-plan.md) |
-| 部件资料与来源 | [资料索引](docs/references.md) · [部件资产](hardware/components/) |
+| **体验与玩法** | [首次互动](docs/quick-start.md) · [手机控制](docs/lan-control.md) · [泡泡剧场](docs/show-composer.md) |
+| **产品与方案** | [需求](docs/requirements.md) · [设计决策](docs/decisions.md) · [灵矽解决方案](docs/lingxi-solution.md) |
+| **模型与制造** | [整机 CAD](hardware/model/README.md) · [打印项目](hardware/model/lean-print/README.md) · [装配维护图册](hardware/model/CyberTrack-assembly-and-service.pdf) |
+| **电气与采购** | [硬件架构](hardware/architecture/README.md) · [电源与接口](docs/power-and-interfaces.md) · [KiCad 原理图](hardware/schematic/README.md) · [BOM](hardware/BOM.md) |
+| **控制与开发** | [系统架构](docs/architecture.md) · [固件总览](firmware/README.md) · [能力与接口](firmware/CAPABILITIES.md) · [智能体角色](docs/agent-role.md) |
+| **进度与证据** | [TODO](TODO.md) · [当前状态](docs/current-status.md) · [改进计划](docs/improvement-plan.md) · [验收计划](docs/verification-plan.md) |
+| **制作与来源** | [照片和视频](artifact/README.md) · [部件资料](hardware/components/) · [参考资料](docs/references.md) |
 
-## 仓库结构
+<details>
+<summary><strong>展开仓库结构</strong></summary>
 
 ```text
-artifact/              制作过程照片、样机演示视频与素材索引
-docs/                  需求、决策、设计、接线与验证记录
-hardware/components/   独立部件模型、厂商资料与实测记录
-hardware/model/        整机 CAD、视图、装配图纸与检查报告
-  lean-print/          现行 27 件六盘项目、切片与交付检查
-  print-parts/         单件 STL／STEP、头部打印及历史合并记录
-  print-ready/         用户 Ready 排盘快照与精简前历史记录
-firmware/              控制核心、板级工程、协议与测试
-  esp32-audio/         现用面包板的语音、网页及执行器适配
-scripts/               CAD 生成、布局检查与图纸生成脚本
+artifact/              制作照片、样机视频与素材索引
+docs/                  产品、设计、操作与验证记录
+hardware/components/   独立部件模型与厂商资料
+hardware/model/        整机 CAD、打印项目与装配图纸
+hardware/schematic/    KiCad 原理图与审图资料
+firmware/              控制核心、板级工程与测试
+  esp32-audio/         现用面包板的语音、网页与执行器适配
+tools/model-design/    随仓库提供的模型辅助设计源码
+tools/lingxi-solution/  灵矽参考材料打包工具
+scripts/               建模、检查与工程辅助脚本
 ```
+
+</details>
+
+## 参与项目
+
+欢迎通过 [Issue](https://github.com/miclle/cybertrack/issues) 分享复现问题、玩法与改造想法，也欢迎提交改进。开始前可先查看 [TODO](TODO.md)，找到当前需要验证的方向。
+
+有价值的反馈包括：清楚的复现步骤、固件或模型版本、打印与装配记录，以及遇到的交互问题。请区分软件回执、CAD 检查与实物现象，避免上传网络凭据或私人录音。
 
 ## 许可证
 
-项目采用 [Apache License 2.0](LICENSE)。供应商图片、原理图及数据手册的权利归原权利人，归档不改变其授权条件。
+项目采用 [Apache License 2.0](LICENSE)。随仓库分发的第三方代码按各自许可证与声明使用；模型设计工具保留 [SolidCue 来源与修改说明](tools/model-design/NOTICE)及[许可证](tools/model-design/LICENSE)。供应商图片、原理图和数据手册的权利归原权利人，归档不改变其授权条件。
