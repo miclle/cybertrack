@@ -1,0 +1,27 @@
+{
+  "scope": "Eight targeted actual-STT sessions to observe public JSON field shapes; not a full model grade or speaker/device test",
+  "base_commit": "ca55f4d788c7afc17e631379325a3832acf35768",
+  "created_utc": "2026-10-31T18:10:38.182477+00:00",
+  "repeats": 1,
+  "no_resampling": true,
+  "model": "deepseek-v4-flash",
+  "ids": {
+    "voice": [
+      "V020",
+      "V033",
+      "V045",
+      "V057",
+      "V064"
+    ],
+    "compose": [
+      "C002",
+      "C005",
+      "C008"
+    ]
+  },
+  "host_sha256": "d68270ebc7637dee6e4dd68d797ed02d577cb67123046145be14e0ef1fabfa12",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "capture_source_sha256": "9ae7a95ef8a8d2837eb5a037f847316c3254d564a850ee811d788968ce2f5cc2",
+  "platform_change": false,
+  "deployment": false
+}

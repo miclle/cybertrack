@@ -48,4 +48,6 @@ ct68 的[含糊动作门禁](../../docs/validation/vague-action-admission.md)附
 
 [ct71 完整语音回归](../../docs/validation/full-stt-ct71.md)另以 `full_speech_scores` 复算原 80／8 条合成普通话经真实 STT 的结果，严格工具 77/80、6/8；八条明确停止正确，V064 禁止调用仍失败。逐字转写 76/80、8/8，三条数字书写与一条同音分别说明，不把它直接称为整机识别率。最小重放保留实际识别文字、完成标记和工具，不含原始音频或完整 RPC 事件。七组历史文本及旧 STT 的未完成 V017 保持，不用新采集覆盖。
 
-[ct72 效果播放](../../docs/validation/effect-alias-feedback.md)提供构建、逐包及合成不一致摘要；完整 88 条原事件仅新增抑制普通点火 64 包。包内核对材料，C++ 包级播放和完整控制重放需完整 checkout；没有新平台会话或设备部署。新增八项纯评分器测试后，参考包现有 80 项离线测试，完整源码仍为 106 项。
+[ct72 效果播放](../../docs/validation/effect-alias-feedback.md)提供构建、逐包及合成不一致摘要；完整 88 条原事件仅新增抑制普通点火 64 包。包内核对材料，C++ 包级播放和完整控制重放需完整 checkout；没有新平台会话或设备部署。新增八项纯评分器测试后，参考包现有 81 项离线测试，完整源码现为 107 项。
+
+[协议字段／none 对照](../../docs/validation/tts-protocol-observation.md)随包提供摘要与恢复依据：17 条定向会话不增加完整评分，none 候选统一异常且漏停，已恢复原 low。表情 thinking 不能作为内部推理过滤器；完整字段／RPC 回放仍需 checkout 与固定主机。

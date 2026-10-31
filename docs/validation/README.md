@@ -127,3 +127,5 @@ python3 scripts/analyze_maintenance.py docs/validation/templates.json \
 [ct71 原 80／8 全语音链路](full-stt-ct71.md)将转写、工具选择、准入／状态及包级播放分开报告：严格 77/80、6/8，八条停止正确；禁止调用、冗余查询和规则分析保留。它与原文本和二十条真人语音独立，88 条主机重放不替代现场效果。
 
 [ct72 效果确认播放](effect-alias-feedback.md)复用完整 88 条实际 STT 轨迹，按通道独立时长核对既有别名与模式，保留超限和异常音频；不更新模型或物理成绩。
+
+[协议字段与 none 对照](tts-protocol-observation.md)记录定向实际 STT、公开字段形态及参数恢复；排除将表情 thinking 当作内部推理的过滤方案，不新增完整模型成绩。

@@ -16,6 +16,18 @@ spec.loader.exec_module(module)
 
 
 class CaptureTests(unittest.TestCase):
+    def test_protocol_observation_never_records_arbitrary_values(self):
+        secret='PRIVATE-VALUE-MUST-NOT-BE-RETAINED'
+        seen=module.protocol_observation(dict(type='tts',state='sentence_start',phase='final',session_id=secret,
+            text=secret,reasoning_content=secret,token=secret,metadata=dict(stage='final',input_id=secret)))
+        self.assertNotIn(secret,json.dumps(seen))
+        self.assertEqual(seen['signals'],dict(type='tts',state='sentence_start',phase='final'))
+        self.assertEqual(seen['fields']['reasoning_content'],'string')
+        self.assertEqual(seen['nested']['metadata'],dict(input_id='string',stage='string'))
+        unknown=module.protocol_observation(dict(type=secret,phase=secret,action=secret,data=dict(text=secret)))
+        self.assertEqual(unknown['signals'],{})
+        self.assertNotIn(secret,json.dumps(unknown))
+
     def test_simulated_text_reaches_closed_host_without_using_echo_or_oracles(self):
         class Socket:
             async def __aenter__(self): return self
@@ -33,12 +45,14 @@ class CaptureTests(unittest.TestCase):
             histories.append((copy.deepcopy(calls),kwargs));return [wire,dict(starts_this_boot=0)]
         case=dict(id='A004',text='动一下三秒',context='空闲',raw_text=True,fixture_version='firmware_host',
                   host_binary=Path('unused'),initial_profile='corpus_idle',host_text_input=True,
-                  expected_calls=['DO NOT SEND'],response_expectation='DO NOT SEND')
+                  expected_calls=['DO NOT SEND'],response_expectation='DO NOT SEND',protocol_events=True)
         client=SimpleNamespace(connect=lambda *args,**kwargs:Socket())
         with patch.dict(sys.modules,{'websockets.asyncio.client':client}),patch.object(module,'firmware_replay',side_effect=replay):
             row=asyncio.run(module.capture_case(dict(token='test',device_id='test',client_id='test'),
                 [dict(name='self.tank.move'),*[dict(name='self.tank.t'+str(i)) for i in range(11)]],case))
         self.assertEqual(row['host_input_mode'],'simulated_recognized_text')
+        self.assertEqual(len(row['protocol_observations']),5)
+        self.assertEqual(row['protocol_observations'][-1]['signals'],dict(type='tts',state='stop'))
         self.assertEqual([c['input_text'] for c in row['host_calls'] if 'input_text' in c],['动一下三秒'])
         self.assertEqual(row['host_calls'][-1]['name'],'self.tank.move')
         self.assertTrue(all(kwargs==dict(await_stt=True) for _,kwargs in histories))

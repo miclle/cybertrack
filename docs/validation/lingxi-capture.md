@@ -148,3 +148,7 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 新捕获另记录 `step_argument_format`，来自实际声明的 sequence／compose schema：`legacy_string` 对应 `steps_json` 字符串，`native_array` 对应 `steps` 数组。若固定主机提供经过哈希校验的工具清单，采集前必须逐项一致。评分按声明检查实际调用，语义相同但字段或类型不符仍记非法参数；不同格式只在语义比较时归一，原调用不改写。此记录不代表当前部署已支持数组，能力仍见[版本真源](../../firmware/current.json)。
 
 主机回放另传仅在本地使用的 `raw_params` 元数据，保留零字符转义以检查原始控制 JSON；不发送给模型，也不改写捕获的参数和时刻。旧主机忽略该字段，历史回执与终态仍需完整复算一致。生成的意图用例可通过 `firmware_corpus.expected_commands` 投影到固定主机声明的步骤格式；实际捕获回放不得使用该投影。
+
+## 可选协议字段观测
+
+使用 `--protocol-events` 记录收到 JSON 的字段名／类型、有限阶段枚举和到达时刻；任意额外值、会话编号、认证和远端音频不保存。`protocol_observations_recorded=true` 与每例 `protocol_observations` 明确标记此模式，默认不开启。它不修改发送内容、MCP 回执或控制行为，也不把表情 `action=thinking` 当作内部推理。实际 [八加八定向对照](tts-protocol-observation.md)及独立恢复检查保留所有失败，不覆盖完整固定集。
