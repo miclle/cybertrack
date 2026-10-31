@@ -45,6 +45,21 @@ def fixture(context):
     return status
 
 
+def valid_draft_steps(steps):
+    """Mirror the ct45 draft subset, not its timing/ownership execution logic."""
+    required={'direction','move_ms','water_ms','bubbles_ms','ignition_ms'}
+    if not isinstance(steps,list) or not 1<=len(steps)<=16:return False
+    for step in steps:
+        if not isinstance(step,dict) or not required<=step.keys() or step.keys()-required-{'speed_percent'}:return False
+        values=[step[k] for k in ('move_ms','water_ms','bubbles_ms','ignition_ms')]
+        speed=step.get('speed_percent',100)
+        if any(type(v) is not int or v<0 for v in values) or type(speed) is not int or not 60<=speed<=100:return False
+        move,water,bubbles,ignition=values
+        if water or ignition or not (move or bubbles) or move>2147483647 or bubbles>30000:return False
+        if step['direction'] not in (('forward','backward','left','right') if move else ('none',)):return False
+    return True
+
+
 def simulated_reply(status, name, args):
     """Only in-memory fixtures. No callback or device address can be supplied."""
     name=name.replace('self_tank_','self.tank.',1)
@@ -63,10 +78,16 @@ def simulated_reply(status, name, args):
             result['result']='draft_cancelled';result['show_draft']=dict(active=False,revision=0,steps=[],expires_in_ms=0)
         else:
             steps=copy.deepcopy(draft['steps']);index=args.get('step',0)-1
-            if edit=='replace':steps=json.loads(args['steps_json'])
-            elif edit=='replace_step' and 0<=index<len(steps):steps[index]=json.loads(args['steps_json'])[0]
+            if edit in ('replace','replace_step'):
+                try:incoming=json.loads(args['steps_json'])
+                except (ValueError,TypeError):incoming=None
+                if not valid_draft_steps(incoming) or (edit=='replace_step' and len(incoming)!=1):
+                    result['result']='invalid_plan';return result
+            if edit=='replace':steps=incoming
+            elif edit=='replace_step' and 0<=index<len(steps):steps[index]=incoming[0]
             elif edit=='remove_step' and 0<=index<len(steps):steps.pop(index)
             else:raise ValueError('unsupported fixture edit')
+            if not valid_draft_steps(steps):result['result']='invalid_plan';return result
             result['result']='draft_saved';result['show_draft']=dict(active=True,revision=rev+1,steps=steps,expires_in_ms=300000)
     else:
         # This is a simulated acceptance used to observe the model's subsequent
@@ -91,7 +112,7 @@ def tools_page(tools, cursor=''):
 
 async def capture_case(connection,tools,case,timeout=45):
     from websockets.asyncio.client import connect
-    status=fixture(case['context'])
+    status=copy.deepcopy(case['fixture_status']) if 'fixture_status' in case else fixture(case['context'])
     row=dict(id=case['id'],calls=[],replies=[],events=[],completed=False,input_text=case['text'],context=case['context'])
     headers={'Authorization':'Bearer '+connection['token'].removeprefix('Bearer '),
              'Device-Id':connection['device_id'],'Client-Id':connection['client_id'],'Protocol-Version':'1'}
@@ -126,7 +147,7 @@ async def capture_case(connection,tools,case,timeout=45):
                 if method=='tools/list' and not result.get('nextCursor') and not sent:
                     # Context is visibly separate from the user's phrase; the
                     # runner never reads expected_calls or response_expectation.
-                    text='本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：'+case['context']+'。请只处理这条用户原话：'+case['text']
+                    text=case['text'] if case.get('raw_text') else '本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：'+case['context']+'。请只处理这条用户原话：'+case['text']
                     await send(dict(session_id=session,type='listen',state='detect',text=text))
                     sent=True;row['events'].append('test_input_sent')
             elif kind=='tts':
@@ -152,10 +173,14 @@ async def run(args):
         requested=set(args.ids.split(','));cases=[c for c in cases if c['id'] in requested]
         if {c['id'] for c in cases}!=requested:raise ValueError('unknown case id')
     # Deliberately discard all oracle fields before entering the capture loop.
-    cases=[{k:c[k] for k in ('id','text','context')} for c in cases]
+    cases=[{k:c[k] for k in ('id','text','context','fixture_status') if k in c} for c in cases]
+    if getattr(args, 'raw_text', False):
+        for case in cases: case['raw_text']=True
     trace=dict(kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
                model_source='visible platform configuration; no model identity in WSS response',role_sha256=hashlib.sha256(args.role.read_bytes()).hexdigest(),
                transport=ENDPOINT,tool_schema_sha256=hashlib.sha256(args.tools.read_bytes()).hexdigest(),corpus_sha256=hashlib.sha256(args.corpus.read_bytes()).hexdigest(),
+               input_mode='raw_text_diagnostic' if getattr(args,'raw_text',False) else 'context_prefixed',
+               capture_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                scope='Real platform calls; synthetic receipt/context fixtures; zero device forwarding; text not microphone ASR',results=[])
     args.output.parent.mkdir(parents=True,exist_ok=True)
     for case in cases:
@@ -169,6 +194,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     for name in ('connection','tools','corpus','role','output'):p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
+    p.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
     args=p.parse_args()
     try:asyncio.run(run(args))
     except Exception as error:

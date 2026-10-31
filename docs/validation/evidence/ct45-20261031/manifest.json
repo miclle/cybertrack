@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-31",
+  "firmware": "2.0.3-ct45",
+  "role_sha256": "9771eb9f4c3e3c2c509d23ab157e391e20cd44eba40e90edac4368a859d65de8",
+  "original_runner_commit": "411c206c4f51a94817aa81325a32232c9a6c73df",
+  "original_runner_sha256": "b12e9c134a94fdc979a1e27e2a0df49e9dde1052112e3042fb05dfa75f946619",
+  "model_configuration_observed": {
+    "model": "deepseek-v4-flash",
+    "temperature": 0.7,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_reply_length": 500,
+    "thinking": {
+      "type": "disabled"
+    },
+    "reasoning_effort": "low",
+    "scope": "UI read-only observation; no parameter changes"
+  },
+  "diagnostics": "raw input and hardened fixture are separate runs, not replacements or controlled causal experiments",
+  "files": {
+    "compose-context-score.json": {
+      "sha256": "3609e579bf2cc048fde08f35497d67c81353b397ee8cd45968d7cc3ce7467e4c",
+      "bytes": 1003
+    },
+    "compose-context.json": {
+      "sha256": "365d5bd2685f9cbd93d335d2e240a0b3942357e7ff46c7ad56decc950c652555",
+      "bytes": 39006
+    },
+    "compose-raw-score.json": {
+      "sha256": "bd68d38f7e6a2c849b89ff5efa891a9bc018354ccf359bb8658dc285ff39d2b8",
+      "bytes": 1003
+    },
+    "compose-raw.json": {
+      "sha256": "3c7e3b4e78dee5e9f433f3598ba7dd5893e097fbd91a1efede12cac1baf3a6b7",
+      "bytes": 39552
+    },
+    "status-raw.json": {
+      "sha256": "4578e4646e5ae9208dce500f8e8b128e5187d22fa2888258cb32b26c4edffa8e",
+      "bytes": 21723
+    },
+    "status-review.json": {
+      "sha256": "443c2e910625e7dacd3dd39788bd329110ae5cc441df8194b92085af96e96208",
+      "bytes": 1433
+    },
+    "voice-context-score.json": {
+      "sha256": "187481e732bb5a31ccd9f7df5a90d58438a099f2b4a7b321d1f2bf0bc7e5e8fe",
+      "bytes": 5611
+    },
+    "voice-context.json": {
+      "sha256": "5bf4ab5525caf5cc05618d8a2d115073c27bac6f54098045a58cc81ccf422aa4",
+      "bytes": 168452
+    },
+    "voice-raw-diagnostic.json": {
+      "sha256": "e16c657ebd93c3825b0b5ee1f78503bfa0f5f7aeb565d9d75277c843b38f0093",
+      "bytes": 11319
+    }
+  }
+}

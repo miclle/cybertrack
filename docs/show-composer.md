@@ -93,7 +93,7 @@ python3 scripts/evaluate_voice.py <实际捕获轨迹.json> \
   --corpus docs/validation/compose-cases.json --output output/compose-score.json
 ```
 
-目前只有评分器与主机回归结果，没有实际模型分数或真人语音成绩。
+真实灵矽隔离捕获中，固定上下文集与无前缀诊断均为 5/8，失败项不同；点火草稿和含糊时长处理未通过。见[逐项结果](validation/lingxi-ct45-20261031.md)。真人语音成绩仍缺。
 
 ## 本阶段证据与下一阶段
 
@@ -109,4 +109,4 @@ CYBERTRACK_PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs \
   node firmware/esp32-audio/tests/web_show_browser.mjs
 ```
 
-下一阶段在具备部署和现场条件后核对完整工具发现、8 条编排／80 条直接动作的实际平台轨迹、20 条真人语音与停止／失租实测，再由五组家庭验证主动重玩／修改指标。台词播报与表情联动仍是后续产品方向。
+ct45 已部署，真实网页草稿编辑／取消、五分钟到期和六类非法输入拒绝均通过，见[设备补验](../firmware/esp32-audio/web-live-ct45.json)。真实平台已完成 80＋8 隔离轨迹采集，语义偏差继续修复；20 条真人语音、有效确认执行和停止／失租实测，以及五组家庭主动重玩／修改指标仍待现场。台词播报与表情联动仍是后续产品方向。

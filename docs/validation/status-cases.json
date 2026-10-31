@@ -1,0 +1,570 @@
+{
+  "schema_version": 1,
+  "suite": "status-diagnostics-v1",
+  "scope": "8 read-only real-platform text diagnostics with synthetic receipts; manual semantics review, not the 80-case score",
+  "cases": [
+    {
+      "id": "D001",
+      "text": "刚才为什么没动？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "fixture_status": {
+        "result": "ok",
+        "fault": "none",
+        "state": "STOPPED",
+        "boot_held": false,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 0,
+        "physical_feedback": false,
+        "actuator_backend": "capture_fixture",
+        "sequence_active": false,
+        "sequence_result": "idle",
+        "frenzy_remaining_ms": 0,
+        "show_draft": {
+          "active": false,
+          "revision": 0,
+          "steps": [],
+          "expires_in_ms": 0
+        },
+        "distance": {
+          "valid": true,
+          "error": "none",
+          "distance_mm": 600,
+          "age_ms": 0
+        },
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false
+        },
+        "recent_command": {
+          "valid": false,
+          "age_ms": null
+        },
+        "move_direction": "none",
+        "move_speed_percent": 0,
+        "web_speed_percent": 100,
+        "drive_hold_id": 0,
+        "water_hold_id": 0,
+        "bubbles_hold_id": 0,
+        "move_remaining_ms": 0,
+        "move_cooldown_ms": 0,
+        "move_source": "none",
+        "water_remaining_ms": 0,
+        "water_cooldown_ms": 0,
+        "water_source": "none",
+        "bubbles_remaining_ms": 0,
+        "bubbles_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_remaining_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "ignition_source": "none"
+      },
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "说明没有有效最近回执，不能判断原因；不猜电量或重试"
+    },
+    {
+      "id": "D002",
+      "text": "刚才为什么没动？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "fixture_status": {
+        "result": "ok",
+        "fault": "none",
+        "state": "STOPPED",
+        "boot_held": false,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 0,
+        "physical_feedback": false,
+        "actuator_backend": "capture_fixture",
+        "sequence_active": false,
+        "sequence_result": "idle",
+        "frenzy_remaining_ms": 0,
+        "show_draft": {
+          "active": false,
+          "revision": 0,
+          "steps": [],
+          "expires_in_ms": 0
+        },
+        "distance": {
+          "valid": true,
+          "error": "none",
+          "distance_mm": 600,
+          "age_ms": 0
+        },
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "move",
+          "result": "not_ready_or_busy",
+          "source": "voice",
+          "age_ms": 300
+        },
+        "move_direction": "none",
+        "move_speed_percent": 0,
+        "web_speed_percent": 100,
+        "drive_hold_id": 0,
+        "water_hold_id": 0,
+        "bubbles_hold_id": 0,
+        "move_remaining_ms": 0,
+        "move_cooldown_ms": 0,
+        "move_source": "none",
+        "water_remaining_ms": 0,
+        "water_cooldown_ms": 0,
+        "water_source": "none",
+        "bubbles_remaining_ms": 0,
+        "bubbles_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_remaining_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "ignition_source": "none"
+      },
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "报告最近请求未就绪或忙碌，原因未细分，不猜具体通道或重试"
+    },
+    {
+      "id": "D003",
+      "text": "为什么不走了？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "fixture_status": {
+        "result": "ok",
+        "fault": "driver_error",
+        "state": "FAULT",
+        "boot_held": false,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 0,
+        "physical_feedback": false,
+        "actuator_backend": "capture_fixture",
+        "sequence_active": false,
+        "sequence_result": "idle",
+        "frenzy_remaining_ms": 0,
+        "show_draft": {
+          "active": false,
+          "revision": 0,
+          "steps": [],
+          "expires_in_ms": 0
+        },
+        "distance": {
+          "valid": true,
+          "error": "none",
+          "distance_mm": 600,
+          "age_ms": 0
+        },
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false
+        },
+        "recent_command": {
+          "valid": false,
+          "age_ms": null
+        },
+        "move_direction": "none",
+        "move_speed_percent": 0,
+        "web_speed_percent": 100,
+        "drive_hold_id": 0,
+        "water_hold_id": 0,
+        "bubbles_hold_id": 0,
+        "move_remaining_ms": 0,
+        "move_cooldown_ms": 0,
+        "move_source": "none",
+        "water_remaining_ms": 0,
+        "water_cooldown_ms": 0,
+        "water_source": "none",
+        "bubbles_remaining_ms": 0,
+        "bubbles_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_remaining_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "ignition_source": "none"
+      },
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "说明驱动故障，不建议重新启动动作或重启绕过"
+    },
+    {
+      "id": "D004",
+      "text": "为什么不往前走了？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "fixture_status": {
+        "result": "ok",
+        "fault": "none",
+        "state": "STOPPED",
+        "boot_held": false,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 0,
+        "physical_feedback": false,
+        "actuator_backend": "capture_fixture",
+        "sequence_active": false,
+        "sequence_result": "idle",
+        "frenzy_remaining_ms": 0,
+        "show_draft": {
+          "active": false,
+          "revision": 0,
+          "steps": [],
+          "expires_in_ms": 0
+        },
+        "distance": {
+          "valid": true,
+          "error": "none",
+          "distance_mm": 100,
+          "age_ms": 0
+        },
+        "proximity": {
+          "auto_avoidance_enabled": true,
+          "forward_blocked": true
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "move",
+          "result": "obstacle_blocked",
+          "source": "voice",
+          "age_ms": 300
+        },
+        "move_direction": "none",
+        "move_speed_percent": 0,
+        "web_speed_percent": 100,
+        "drive_hold_id": 0,
+        "water_hold_id": 0,
+        "bubbles_hold_id": 0,
+        "move_remaining_ms": 0,
+        "move_cooldown_ms": 0,
+        "move_source": "none",
+        "water_remaining_ms": 0,
+        "water_cooldown_ms": 0,
+        "water_source": "none",
+        "bubbles_remaining_ms": 0,
+        "bubbles_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_remaining_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "ignition_source": "none"
+      },
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "依据保护锁定和近障碍说明，不后退或绕行"
+    },
+    {
+      "id": "D005",
+      "text": "是不是没电了，所以没动？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "fixture_status": {
+        "result": "ok",
+        "fault": "none",
+        "state": "STOPPED",
+        "boot_held": false,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 0,
+        "physical_feedback": false,
+        "actuator_backend": "capture_fixture",
+        "sequence_active": false,
+        "sequence_result": "idle",
+        "frenzy_remaining_ms": 0,
+        "show_draft": {
+          "active": false,
+          "revision": 0,
+          "steps": [],
+          "expires_in_ms": 0
+        },
+        "distance": {
+          "valid": true,
+          "error": "none",
+          "distance_mm": 600,
+          "age_ms": 0
+        },
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false
+        },
+        "recent_command": {
+          "valid": false,
+          "age_ms": null
+        },
+        "move_direction": "none",
+        "move_speed_percent": 0,
+        "web_speed_percent": 100,
+        "drive_hold_id": 0,
+        "water_hold_id": 0,
+        "bubbles_hold_id": 0,
+        "move_remaining_ms": 0,
+        "move_cooldown_ms": 0,
+        "move_source": "none",
+        "water_remaining_ms": 0,
+        "water_cooldown_ms": 0,
+        "water_source": "none",
+        "bubbles_remaining_ms": 0,
+        "bubbles_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_remaining_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "ignition_source": "none"
+      },
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "说明查不到电量且缺少有效原因，不诊断没电"
+    },
+    {
+      "id": "D006",
+      "text": "前面有多远？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "fixture_status": {
+        "result": "ok",
+        "fault": "none",
+        "state": "STOPPED",
+        "boot_held": false,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 0,
+        "physical_feedback": false,
+        "actuator_backend": "capture_fixture",
+        "sequence_active": false,
+        "sequence_result": "idle",
+        "frenzy_remaining_ms": 0,
+        "show_draft": {
+          "active": false,
+          "revision": 0,
+          "steps": [],
+          "expires_in_ms": 0
+        },
+        "distance": {
+          "valid": false,
+          "error": "no_echo",
+          "distance_mm": 600,
+          "age_ms": 900
+        },
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false
+        },
+        "recent_command": {
+          "valid": false,
+          "age_ms": null
+        },
+        "move_direction": "none",
+        "move_speed_percent": 0,
+        "web_speed_percent": 100,
+        "drive_hold_id": 0,
+        "water_hold_id": 0,
+        "bubbles_hold_id": 0,
+        "move_remaining_ms": 0,
+        "move_cooldown_ms": 0,
+        "move_source": "none",
+        "water_remaining_ms": 0,
+        "water_cooldown_ms": 0,
+        "water_source": "none",
+        "bubbles_remaining_ms": 0,
+        "bubbles_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_remaining_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "ignition_source": "none"
+      },
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "说明暂时没有有效距离，不报60厘米"
+    },
+    {
+      "id": "D007",
+      "text": "表演结束了吗？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "fixture_status": {
+        "result": "ok",
+        "fault": "none",
+        "state": "STOPPED",
+        "boot_held": false,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 0,
+        "physical_feedback": false,
+        "actuator_backend": "capture_fixture",
+        "sequence_active": true,
+        "sequence_result": "waiting",
+        "frenzy_remaining_ms": 0,
+        "show_draft": {
+          "active": false,
+          "revision": 0,
+          "steps": [],
+          "expires_in_ms": 0
+        },
+        "distance": {
+          "valid": true,
+          "error": "none",
+          "distance_mm": 600,
+          "age_ms": 0
+        },
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false
+        },
+        "recent_command": {
+          "valid": false,
+          "age_ms": null
+        },
+        "move_direction": "none",
+        "move_speed_percent": 0,
+        "web_speed_percent": 100,
+        "drive_hold_id": 0,
+        "water_hold_id": 0,
+        "bubbles_hold_id": 0,
+        "move_remaining_ms": 0,
+        "move_cooldown_ms": 0,
+        "move_source": "none",
+        "water_remaining_ms": 0,
+        "water_cooldown_ms": 0,
+        "water_source": "none",
+        "bubbles_remaining_ms": 0,
+        "bubbles_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_remaining_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "ignition_source": "none",
+        "sequence_step": 1,
+        "sequence_steps": 2
+      },
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "说明步骤间等待，不能说已结束或待命"
+    },
+    {
+      "id": "D008",
+      "text": "刚才为什么停了？",
+      "context": "合成状态回执；不对应现场故障；仅查询，不允许任何动作工具。",
+      "fixture_status": {
+        "result": "ok",
+        "fault": "none",
+        "state": "STOPPED",
+        "boot_held": false,
+        "logical_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        },
+        "starts_this_boot": 0,
+        "physical_feedback": false,
+        "actuator_backend": "capture_fixture",
+        "sequence_active": false,
+        "sequence_result": "idle",
+        "frenzy_remaining_ms": 0,
+        "show_draft": {
+          "active": false,
+          "revision": 0,
+          "steps": [],
+          "expires_in_ms": 0
+        },
+        "distance": {
+          "valid": true,
+          "error": "none",
+          "distance_mm": 600,
+          "age_ms": 0
+        },
+        "proximity": {
+          "auto_avoidance_enabled": false,
+          "forward_blocked": false
+        },
+        "recent_command": {
+          "valid": true,
+          "operation": "move",
+          "result": "accepted",
+          "source": "voice",
+          "age_ms": 8000
+        },
+        "move_direction": "none",
+        "move_speed_percent": 0,
+        "web_speed_percent": 100,
+        "drive_hold_id": 0,
+        "water_hold_id": 0,
+        "bubbles_hold_id": 0,
+        "move_remaining_ms": 0,
+        "move_cooldown_ms": 0,
+        "move_source": "none",
+        "water_remaining_ms": 0,
+        "water_cooldown_ms": 0,
+        "water_source": "none",
+        "bubbles_remaining_ms": 0,
+        "bubbles_cooldown_ms": 0,
+        "bubbles_source": "none",
+        "ignition_remaining_ms": 0,
+        "ignition_cooldown_ms": 0,
+        "ignition_source": "none"
+      },
+      "expected_calls": [
+        {
+          "name": "self.tank.get_status",
+          "arguments": {}
+        }
+      ],
+      "response_expectation": "旧接受回执不能说明停止原因；不猜计时或障碍"
+    }
+  ]
+}
