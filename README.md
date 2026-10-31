@@ -62,6 +62,21 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 [查看全部 33 张照片与 2 段视频](artifact/README.md)
 
+## 在完整机器人上，直接说出修改想法
+
+旋转完整整机，点选冠盖、枪座或外壳，将“这个零件上移一点”这样的想法落到明确的零件、面和模型版本。调整在独立研究副本中进行，原生 CAD 结果回到同一设计界面，便于对照修改前后并恢复。
+
+![完整 CyberTrack 模型中的冠盖调整与修改历史](docs/images/model-design/whole-model-adjusted.png)
+
+*真实设计工作区：在完整整机中将冠盖沿 Z 轴上移 8 mm，右侧保留评论与坐标变化。可追溯、可对照、可恢复；[查看操作流程](tools/solidcue/README.md)。*
+
+<details>
+<summary>查看点选零件、提出修改的界面</summary>
+
+![在完整 CyberTrack 模型中选中冠盖并提出调整](docs/images/model-design/whole-model-comment.png)
+
+</details>
+
 ## CAD 模型
 
 以下视图于 **2026-10-27** 从当前 [CyberTrack.FCStd](hardware/model/CyberTrack.FCStd) 导出，展示整机外形、双枪与履带布局，以及背部双瓶结构。点击图片可查看大图。
