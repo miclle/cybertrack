@@ -133,6 +133,26 @@ def timed_status(profile, elapsed_ms, name, args):
     return receipt
 
 
+def draft_host_reply(executable, history, name, args, elapsed_ms):
+    """Re-run this conversation's valid RPC prefix from an identical web draft."""
+    tool = name.replace('self_tank_', 'self.tank.', 1)
+    if tool not in ('self.tank.get_status', 'self.tank.stop', 'self.tank.compose'):
+        raise ValueError('RPC outside draft replay')
+    call = dict(name=tool, arguments=args, elapsed_ms=elapsed_ms)
+    calls = [*history, call]
+    process = subprocess.run([str(executable), 'two_step_web_draft'], input=json.dumps(calls),
+                             text=True, capture_output=True, timeout=10)
+    if process.returncode == 3:
+        raise ValueError('invalid draft RPC arguments')
+    process.check_returncode()
+    lines = process.stdout.splitlines()
+    if len(lines) != len(calls) + 1:
+        raise RuntimeError('incomplete firmware replay')
+    receipt = json.loads(lines[-2])  # The last line is a separate inspection read.
+    history.append(call)
+    return receipt
+
+
 async def capture_case(connection,tools,case,timeout=45):
     from websockets.asyncio.client import connect
     status=copy.deepcopy(case['fixture_status']) if 'fixture_status' in case else fixture(case['context'])
@@ -145,6 +165,7 @@ async def capture_case(connection,tools,case,timeout=45):
     def mark(event, **details):
         timeline.append(dict(ms=round((time.monotonic()-opened)*1000), event=event, **details))
     input_ms=None
+    draft_history=[]
     draft_observed_at=None
     session=None;sent=False;deadline=opened+timeout;audio_bytes=0
     async with connect(ENDPOINT,additional_headers=headers,proxy=None,open_timeout=15,max_size=2**20) as ws:
@@ -171,7 +192,10 @@ async def capture_case(connection,tools,case,timeout=45):
                     row['calls'].append(dict(name=name,arguments=args))
                     try:
                         if name.replace('self_tank_','self.tank.',1) not in {t['name'] for t in tools}:raise ValueError('unknown tool')
-                        if version == 'timed_host':
+                        if version == 'draft_host':
+                            if input_ms is None:raise ValueError('missing evaluation input')
+                            receipt=draft_host_reply(case['draft_host'],draft_history,name,args,timeline[-1]['ms']-input_ms)
+                        elif version == 'timed_host':
                             if input_ms is None:raise ValueError('missing evaluation input')
                             receipt=timed_status(case['initial_motion'],timeline[-1]['ms']-input_ms,name,args)
                         elif version != 'ct45' and name.endswith('compose') and (
@@ -243,6 +267,10 @@ async def run(args):
     if getattr(args, 'raw_text', False):
         for case in cases: case['raw_text']=True
     version = 'timed_host' if timed else 'ct47' if getattr(args,'ct47',False) else 'ct46' if getattr(args,'ct46',False) else 'ct45'
+    draft_host=getattr(args,'draft_host',None)
+    if draft_host:
+        version='draft_host'
+        for case in cases: case['draft_host']=draft_host.resolve()
     for case in cases: case['fixture_version']=version
     trace=dict(fixture_version=version,kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
                model_source='visible platform configuration; no model identity in WSS response',role_sha256=hashlib.sha256(args.role.read_bytes()).hexdigest(),
@@ -250,8 +278,11 @@ async def run(args):
                input_mode='raw_text_diagnostic' if getattr(args,'raw_text',False) else 'context_prefixed',
                capture_source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                scope='Real platform calls; synthetic receipt/context fixtures; zero device forwarding; text not microphone ASR',results=[])
-    if timed:
-        trace['host_replay_sha256']=hashlib.sha256((ROOT/'build/audio-host/receipt_replay').read_bytes()).hexdigest()
+    if timed or draft_host:
+        binary=draft_host or ROOT/'build/audio-host/receipt_replay'
+        trace['host_replay_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
+    if draft_host:
+        trace['initial_profile']='two_step_web_draft'
     args.output.parent.mkdir(parents=True,exist_ok=True)
     for case in cases:
         row=await capture_case(connection,tools,case,args.timeout)
@@ -266,6 +297,7 @@ if __name__=='__main__':
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
     p.add_argument('--raw-text',action='store_true',help='Diagnostic only: omit the context prefix; not equivalent to the fixed contextual suite')
     versions=p.add_mutually_exclusive_group()
+    versions.add_argument('--draft-host',type=Path,metavar='REPLAY',help='Use host firmware with a two-step web draft at revision 7')
     versions.add_argument('--timed-host',action='store_true',help='Use read-only host firmware receipts at observed RPC offsets')
     versions.add_argument('--ct47', action='store_true', help='Include draft capabilities and fault recovery in candidate receipts')
     versions.add_argument('--ct46', action='store_true', help='Use candidate status facts compiled from status_facts.h')
