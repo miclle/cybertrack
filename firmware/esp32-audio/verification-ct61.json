@@ -13,6 +13,7 @@
     "All 1..30000 integer millisecond values, Chinese seconds 1..30, decimal seconds, half-second forms and invalid boundaries tested.",
     "Actual control guard and Reply tested with 2500 ms bubbles and concurrent 500 ms water; accepted receipt and duration match enable muting.",
     "Rejection, missing/wrong duration, delayed receipt, multi-clause, question, negation and over-limit speech retain audio.",
-    "ct60/ct61 tool schemas differ only in the water description, clarifying 1 ms minimum versus 1000 ms unspecified default."
+    "ct60/ct61 tool schemas differ only in the water description, clarifying 1 ms minimum versus 1000 ms unspecified default.",
+    "All eight local software check groups passed against ct61, including 65 improvement tests and control/MCP/audio/stop suites."
   ]
 }

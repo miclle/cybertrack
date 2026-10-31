@@ -1,0 +1,82 @@
+{
+  "scope": "普通效果的明确时长、超限、否定与词义查询；不替代固定80条",
+  "cases": [
+    {
+      "id": "E001",
+      "text": "吹泡泡两秒",
+      "context": "设备空闲",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 2000
+          }
+        }
+      ]
+    },
+    {
+      "id": "E002",
+      "text": "吹泡泡三十秒",
+      "context": "设备空闲",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ]
+    },
+    {
+      "id": "E003",
+      "text": "喷水零点五秒",
+      "context": "设备空闲",
+      "expected_calls": [
+        {
+          "name": "self.tank.water",
+          "arguments": {
+            "duration_ms": 500
+          }
+        }
+      ]
+    },
+    {
+      "id": "E004",
+      "text": "吹泡泡两点五秒",
+      "context": "设备空闲",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 2500
+          }
+        }
+      ]
+    },
+    {
+      "id": "E005",
+      "text": "吹泡泡六十秒",
+      "context": "设备空闲",
+      "expected_calls": [
+        {
+          "name": "self.tank.bubbles",
+          "arguments": {
+            "duration_ms": 30000
+          }
+        }
+      ]
+    },
+    {
+      "id": "E006",
+      "text": "不要吹泡泡两秒",
+      "context": "设备空闲",
+      "expected_calls": []
+    },
+    {
+      "id": "E007",
+      "text": "吹泡泡两秒是什么意思",
+      "context": "设备空闲",
+      "expected_calls": []
+    }
+  ]
+}
