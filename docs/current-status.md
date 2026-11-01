@@ -28,7 +28,7 @@ python3 scripts/check_firmware_current.py --source-bin build/firmware-ct74/xiaoz
 
 ct45 部署检查的 39 条状态／操作回执全部输出关闭、动作启动计数为 0；草稿创建、单步修改、旧版本拒绝、删除、取消、停止／会话释放失效及重连不恢复通过。未提交有效表演确认，未触发执行器。提示音调度日志不是听感验收；电平、机械停止及效果反馈继续以专项实测为准。2026-10-31 用户暂时无法配合实机测试。
 
-2026-11-01 用户恢复现场配合；[ct73 部署与第一轮验收](validation/ct73-deployment.md)已进入实机阶段。两次启动各十条状态回读输出全关、启动计数为 0，网页与源码逐字节一致；写入前后配置及非应用区校验通过，首启后仅 WebSocket token 更新。现场动作、停止、听感与负载记录仍待采集。
+2026-11-01 用户恢复现场配合；[ct73 部署与第一轮验收](validation/ct73-deployment.md)已进入实机阶段。两次启动各十条状态回读输出全关、启动计数为 0，网页与源码逐字节一致；写入前后配置及非应用区校验通过，首启后仅 WebSocket token 更新。随后已取得架空行走、BOOT 提前停止及首条真人语音的分项反馈，见下文；量化停止、完整语音回归、ct74 听感及组合负载仍待采集。
 
 2026-11-01 首项架空行走诊断未通过：60% PWM、500 ms 前进有一次 accepted／逻辑动作，但用户明确反馈两侧履带均未转动。用户随后确认手机为 100%；同样 500 ms 定时请求在 100% 下复核，两侧转动并随后停止。60% 未转原因未定；已全停并保留[完整失败及参数／路径对照入口](validation/ct73-deployment.md#首项现场结果未通过)，未增加正式停止矩阵通过数。
 
@@ -41,9 +41,9 @@ ct73 架空单路 BOOT 诊断：截止前检测到按下与逻辑全关，松开
 
 真实灵矽隔离文本联调：首轮 76/80，角色修正后 77/80（96.25%），8 条编排仍匹配 5 条；只读解释 4/8 满足全部要求，45 条成功静默均未达成。见[最新复测](validation/lingxi-ct45-role-feedback-20261031.md)。无前缀诊断单独保留，未替代首轮成绩。真实设备网页、草稿 300538 ms 到期和六类非法输入拒绝均保持零启动。完整边界见[联调记录](validation/lingxi-ct45-20261031.md)。
 
-运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct73-src`，增加 17 类停止回放、实际 MCP／HTTP、音频适配、完整固件主机、输入失败隔离及即时停止回执检查；当前 ct73 十八组通过，含 124 项 Python 改进测试；新增四路组合原生夹具，完整 88 条效果播放回放保持。ct72 发布阶段含 106 项，随后协议字段观测与中继原型另增 18 项。ct62 十一组通过，含 76 项改进测试；八组输入边界与四条历史请求为离线回放，不构成新模型成绩。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
+运行 `python3 scripts/verify_improvements.py` 检查版本元数据、差异格式、现有控制主机测试及网页原脚本回归（需要 Node.js）。已有准备树时运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct74-src`，增加 17 类停止回放、实际 MCP／HTTP、音频适配、完整固件主机、输入失败隔离及即时停止回执检查；当前 ct74 的[十八组检查](validation/evidence/ct74-dialogue-beeps/software-checks.json)通过，含 124 项 Python 改进测试；音频原生夹具覆盖对话取消普通提示、保留语音及准备 PCM 期间的状态／包到达竞态。ct73 的四路组合与完整 88 条效果播放回放作为历史依据保留。ct72 发布阶段含 106 项，随后协议字段观测与中继原型另增 18 项。ct62 十一组通过，含 76 项改进测试；八组输入边界与四条历史请求为离线回放，不构成新模型成绩。每次输出独立的 `output/improvements/checks/<UTC时间>/report.json` 和日志，记录源码哈希及未覆盖范围；不刷写、联网调用模型或操纵设备。完整固件编译仍按面包板说明执行。
 
-要检查模型设计工具，请在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct73-src --model-design`。新增模型／几何／整机同步测试、插件 bundle 和合成宿主界面回归；统一报告记录工具源码哈希并排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
+要检查模型设计工具，请在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct74-src --model-design`。新增模型／几何／整机同步测试、插件 bundle 和合成宿主界面回归；统一报告记录工具源码哈希并排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
 
 模型辅助设计的[真实 GUI 验收](../tools/solidcue/verification-gui-20261031.json)已完成：198 件整机中冠盖上移 8 mm 后恢复，修改与恢复均经 FreeCAD GUI MCP 保存重开核对；同一本地页面更新到 r7，正式模型未改。无界面快照材质顺序修复通过 GUI 回读。后续[真实宿主卡片验收](../tools/solidcue/verification-host-20261031.json)已完成评论保存／宿主接受、MCP 读回与回执，以及同一卡片 r7 → r8 → r9 更新／恢复。随后[真实消息驱动验收](../tools/solidcue/verification-message-20261031.json)完成：尚未处理的 r9 评论通过 `mcp_app` 独立触发本轮，冠盖上移 4 mm 后恢复，GUI 保存重开与同一卡片 r9 → r10 → r11、最终回执均通过。I11 接入已验收；单次真实链路不代表制造或实物通过。
 
