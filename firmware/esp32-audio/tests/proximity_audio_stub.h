@@ -18,6 +18,7 @@ struct Done {};
 inline uint64_t now=0, ready_at=0;
 inline size_t size=0;
 inline bool queued=false;
+inline bool range_allowed=true;
 inline uint8_t pending[64]{};
 inline std::vector<std::string> played;
 inline std::function<void()> before_play;
@@ -44,8 +45,14 @@ inline unsigned pdMS_TO_TICKS(unsigned ms) {return ms;}
 inline void vTaskDelay(unsigned ms) {sound_mock::now+=ms;}
 inline int64_t esp_timer_get_time() {return sound_mock::now*1000;}
 struct FakeAudio {
+    bool PlayRangeBeepIfIdle() {
+        if (!sound_mock::range_allowed) return false;
+        sound_mock::played.emplace_back("b");
+        if(sound_mock::before_play) sound_mock::before_play();
+        return true;
+    }
     void PlaySound(std::string_view data,bool priority) {
-        assert(priority); sound_mock::played.emplace_back(data);
+        assert(priority && data=="s"); sound_mock::played.emplace_back(data);
         if(sound_mock::before_play) sound_mock::before_play();
     }
 };

@@ -1,0 +1,9 @@
+{
+  "result": "failed_initial_unified_run",
+  "passed_groups": 17,
+  "failed_group": "Python unittest packaging tests",
+  "affected_tests": 3,
+  "cause": "New candidate verification-ct74.json absent from reference allowlist",
+  "repair": "Add candidate evidence and related documentation to explicit bundle inputs",
+  "firmware_or_native_audio_failure": false
+}
