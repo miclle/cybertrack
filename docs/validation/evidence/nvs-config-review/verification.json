@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-01T09:20:11.706612+00:00",
+  "scope": "Offline synthetic binary tests and reuse of ct75 saved snapshots; no device access or new deployment",
+  "sdk": "ESP-IDF 5.5.1",
+  "tests_run": 11,
+  "tests_skipped": 0,
+  "tests_passed": true,
+  "strict_snapshot_exit": 1,
+  "reviewed_snapshot_exit": 0,
+  "strict_difference_expected": true,
+  "snapshot_values_published": false,
+  "source_sha256": {
+    "scripts/review_nvs_config.py": "9f44849566680c68896bbcdd26c45fd2c50e6fa96551919f6e6ac354000cc98e",
+    "tests/improvements/test_nvs_config.py": "79a6b503b8485f06c3e28ae6a845009fdb497579c6209ab55b7195dce8ab0e77"
+  }
+}
