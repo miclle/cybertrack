@@ -1,5 +1,8 @@
 # 取消正在执行的表演与删除草稿
 
+> 本页为对应旧版本的历史验证；涉及的表演编辑已退役，不代表 ct78 能力。[当前退役说明](theatre-removal.md)
+
+
 灵矽平台已保存 5991 字符角色，重新打开后的全文 SHA-256 与仓库一致。面包板重启后仍运行 ct45，八份回执均为零启动、所有逻辑输出关闭。[平台回读和重启依据](../../firmware/esp32-audio/role-cancel-hold-ct45.json)
 
 ## 新角色配 ct45 工具
@@ -71,4 +74,4 @@ python3 scripts/export_hold_cases.py build/audio-host/receipt_replay output/voic
 
 九次固件主机回读均为零启动，全部逻辑输出关闭。六次完成编辑后，回复均请用户在网页预览并点开始。三次“改三秒”里有两次返回英文操作说明，第一次还读出 `replace_step`；删除时三次都先播报要查草稿。工具结果正确，面向孩子的回复仍需缩短。这里使用文本输入，测试没有连接执行器或记录音频。[逐条回读与回复](evidence/role-5991/edit-variants-review.json) · [第一轮轨迹](evidence/role-5991/edit-variants-1.json.gz) · [第二轮](evidence/role-5991/edit-variants-2.json.gz) · [第三轮](evidence/role-5991/edit-variants-3.json.gz)
 
-[改稿旁白的工具说明对照](draft-narration.md)记录同一组用例的首个音频包、保存回执先后和逐次回复。
+[改稿旁白的工具说明对照](history/draft-narration.md)记录同一组用例的首个音频包、保存回执先后和逐次回复。

@@ -1,8 +1,11 @@
 # 无量化时长的相对改稿门禁
 
+> 历史记录：对应 ct78 之前的已退役功能，仅保留验证来源，不是当前能力、操作入口或待办。[退役说明](../theatre-removal.md)
+
+
 2026-11-01 后续：[ct76 分句修正](draft-clause-duration.md)阻止借用其他分句的数字放行含糊改稿，最近部署已为 ct75；下文保留 ct67 当时的实验与版本边界。
 
-ct67 将已观察到的“第二步短一点”猜半秒问题补上一层设备约束。它是源码候选，最近记录部署仍为 ct45；没有刷写或触发真实设备。十二项公开工具定义和角色源均不变。[构建记录](../../firmware/esp32-audio/verification-ct67.json)
+ct67 将已观察到的“第二步短一点”猜半秒问题补上一层设备约束。它是源码候选，最近记录部署仍为 ct45；没有刷写或触发真实设备。十二项公开工具定义和角色源均不变。[构建记录](../../../firmware/esp32-audio/verification-ct67.json)
 
 ## 行为
 
@@ -22,11 +25,11 @@ ct67 将已观察到的“第二步短一点”猜半秒问题补上一层设备
 - 旧排队回调不污染新输入；混合句中的全停仍直接生效并观察到 60 秒不恢复。
 - 复用此前真实平台 C008 的实际 RPC 参数和时刻，另注入模拟识别文本；原先草稿 7→8 的猜半秒请求现被拒绝，保持版本 7。此项是历史请求回放，不是新的模型成绩。
 
-额外的 ASan／UBSan 测试覆盖量化／非量化表达、说话长短对照，以及语音拒绝不影响可信网页控制和停止。[原生回放](evidence/ct67-relative-draft/native-replay.json) · [旧版对照](evidence/ct67-relative-draft/native-baseline.json)
+额外的 ASan／UBSan 测试覆盖量化／非量化表达、说话长短对照，以及语音拒绝不影响可信网页控制和停止。[原生回放](../evidence/ct67-relative-draft/native-replay.json) · [旧版对照](../evidence/ct67-relative-draft/native-baseline.json)
 
 ## 二十条真实 STT 定向会话
 
-预先声明十条原话、两轮独立采集，发送合成普通话 Opus，不发送评测原话文本。按实际收到的 STT 顺序开启主机输入代际，并提供实际 MCP 回执，不向机器人转发。它与原固定八十条和二十条真人语音分开，不能替代家庭或扬声器验收。[十条语料](relative-draft-cases.json) · [采集计划](evidence/ct67-relative-draft/plan.json)
+预先声明十条原话、两轮独立采集，发送合成普通话 Opus，不发送评测原话文本。按实际收到的 STT 顺序开启主机输入代际，并提供实际 MCP 回执，不向机器人转发。它与原固定八十条和二十条真人语音分开，不能替代家庭或扬声器验收。[十条语料](../relative-draft-cases.json) · [采集计划](../evidence/ct67-relative-draft/plan.json)
 
 | 项目 | 结果 |
 |---|---|
@@ -38,9 +41,9 @@ ct67 将已观察到的“第二步短一点”猜半秒问题补上一层设备
 | 在线实际拦截猜测修改 | 0 次；六条均未请求修改，不能声称门禁在这些会话中拦截过 |
 | 其他十四条明确修改、取消、删除、停止、查询 | 工具与终态符合预期 |
 
-英文操作文字、规则分析和停止确认仍存在。严格工具分数没有因终态正确而改为通过；真正的拦截依据来自上面的原生协议及历史请求回放。[逐条转写、调用和回复](evidence/ct67-relative-draft/platform-review.json)
+英文操作文字、规则分析和停止确认仍存在。严格工具分数没有因终态正确而改为通过；真正的拦截依据来自上面的原生协议及历史请求回放。[逐条转写、调用和回复](../evidence/ct67-relative-draft/platform-review.json)
 
-采集使用固定的初始 ct67 主机，随后补齐“天／周／个星期”等量化单位兼容。原捕获程序和二进制保留；最终候选对全部实际输入分类相同，逐条完整 MCP 回执及终态重放一致。报告分别记录捕获与最终主机、分类器摘要，未修改原始轨迹，也没有重采样替换结果。[主机与文件清单](evidence/ct67-relative-draft/experiment.json)
+采集使用固定的初始 ct67 主机，随后补齐“天／周／个星期”等量化单位兼容。原捕获程序和二进制保留；最终候选对全部实际输入分类相同，逐条完整 MCP 回执及终态重放一致。报告分别记录捕获与最终主机、分类器摘要，未修改原始轨迹，也没有重采样替换结果。[主机与文件清单](../evidence/ct67-relative-draft/experiment.json)
 
 ## 复核与边界
 
@@ -54,6 +57,6 @@ python3 scripts/review_relative_draft.py \
   --capture-classifier /path/to/captured/draft_duration_probe
 ```
 
-构建主机见[完整固件主机](firmware-host.md)。分类器探针只用于离线查看同一 C++ 函数，可用 C++17、`-Ifirmware/esp32-audio` 编译 `firmware/esp32-audio/tests/draft_duration_probe.cc`。上述完整控制重放需要 checkout 与对应环境；参考包只含材料及完整性核对。
+构建主机见[完整固件主机](../firmware-host.md)。分类器探针只用于离线查看同一 C++ 函数，可用 C++17、`-Ifirmware/esp32-audio` 编译 `firmware/esp32-audio/tests/draft_duration_probe.cc`。上述完整控制重放需要 checkout 与对应环境；参考包只含材料及完整性核对。
 
 最终十四组本地检查通过，包含 86 项改进测试、原八十条／八条预期请求、输入隔离、停止、网页和音频回归。ESP-IDF 5.5.1 构建为 2,714,816 字节，摘要见构建记录。设备时序、物理输出与机械停止、真人语音、家庭体验及量化目标归属均继续待验。

@@ -98,7 +98,7 @@ esp_err_t Api(httpd_req_t* req) {
     if (!TrustedRequest(req)) return Error(req, "403 Forbidden", "origin_rejected");
     if (!session || !bearer[0] || !Header(req, "X-CyberTrack-Token", bearer))
         return Error(req, "401 Unauthorized", "session_expired");
-    cJSON* body = Body(req, !strcmp(req->uri, "/api/action") ? 8192 : 384);
+    cJSON* body = Body(req, 384);
     if (!cJSON_IsObject(body)) { cJSON_Delete(body); return Error(req, "400 Bad Request", "invalid_request"); }
     const bool action = !strcmp(req->uri, "/api/action");
     WebCommand command;

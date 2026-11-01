@@ -1,0 +1,9 @@
+PASS: generated MCP argument checks, directions/ranges/types, missing/extra/duplicate keys, injected ticket, stop/status isolation
+PASS: lossy enum prefix, raw/bare envelope and slash parity; valid stop, nonrobot and literal escapes preserved
+PASS: actual web JSON parser, action schemas, integer/sequence bounds, missing/extra/duplicate fields
+PASS: actual HTTP handlers, Host/Origin/auth, no-PIN acquire throttle/ownership, token rotation/revocation, bounded/partial bodies, raw and escaped zero rejection, escape parity, legal Unicode/status/stop, invalid JSON, send failure release
+PASS: actual Reply JSON acceptance/rejection/query/stop persistence with real guards and no hardware
+effect alias playback: 145 positive, 106 explanations preserved
+four-lane playback: 70 positive, 87 explanations preserved
+PASS: receipt allocation failure leaves all lanes and later steps stopped
+PASS: vague-input rejection preserves trusted web, stop and new input recovery

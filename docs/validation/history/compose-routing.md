@@ -1,6 +1,9 @@
 # 编排工具说明的原话分流对照
 
-本轮尝试减少“开始这段表演”和“第二步短一点”的多余状态查询。两种说法各做三轮独立原话会话，交替使用 ct61 原工具说明和诊断说明，共十二次真实灵矽会话。角色、模型标记、语料、主机二进制和捕获程序摘要相同；诊断版只在 `get_status` 与 `compose` 说明前增加意图区分，不改参数、回调或角色，不给模型附加场景前缀。模型标记来自此前配置页观察，WSS 响应没有独立模型身份。[实验清单](evidence/compose-routing/experiment.json) · [原说明](evidence/compose-routing/baseline-schema.json) · [诊断说明](evidence/compose-routing/route-schema.json) · [逐轮审阅](evidence/compose-routing/review.json)
+> 历史记录：对应 ct78 之前的已退役功能，仅保留验证来源，不是当前能力、操作入口或待办。[退役说明](../theatre-removal.md)
+
+
+本轮尝试减少“开始这段表演”和“第二步短一点”的多余状态查询。两种说法各做三轮独立原话会话，交替使用 ct61 原工具说明和诊断说明，共十二次真实灵矽会话。角色、模型标记、语料、主机二进制和捕获程序摘要相同；诊断版只在 `get_status` 与 `compose` 说明前增加意图区分，不改参数、回调或角色，不给模型附加场景前缀。模型标记来自此前配置页观察，WSS 响应没有独立模型身份。[实验清单](../evidence/compose-routing/experiment.json) · [原说明](../evidence/compose-routing/baseline-schema.json) · [诊断说明](../evidence/compose-routing/route-schema.json) · [逐轮审阅](../evidence/compose-routing/review.json)
 
 | 观察项 | 原说明 | 诊断说明 |
 |---|---:|---:|
@@ -12,7 +15,7 @@
 | 启动动作／最终逻辑输出开启 | 0/6 | 0/6 |
 | 从输入到结束的中位数 | 15.1 秒 | 11.1 秒 |
 
-**不采纳这版说明。** 诊断版第二轮 C008 在没有给定秒数时，先查询版本 7，再提交第二步泡泡 500 ms；实际主机接受并保存为版本 8，第一步保持 880 ms。模型先说应该追问，却随后擅自将一秒改为半秒。它没有执行草稿，网页确认边界仍在，但不符合“含糊时长先追问”的产品要求，不能用其余五次匹配抵消。[失败原始轨迹](evidence/compose-routing/route-C008-2.json.gz)
+**不采纳这版说明。** 诊断版第二轮 C008 在没有给定秒数时，先查询版本 7，再提交第二步泡泡 500 ms；实际主机接受并保存为版本 8，第一步保持 880 ms。模型先说应该追问，却随后擅自将一秒改为半秒。它没有执行草稿，网页确认边界仍在，但不符合“含糊时长先追问”的产品要求，不能用其余五次匹配抵消。[失败原始轨迹](../evidence/compose-routing/route-C008-2.json.gz)
 
 诊断版三次 C008 都含“用户说”“根据规则”“我需要”等过程文字；无工具调用也不代表已得到合格的家长回复。原说明也有过程旁白。样本少、两组分时运行，不能把差异确定归因于某一句说明，或据此宣称推理播报／超时已修复。未收集真人音频或播放设备声音。
 
@@ -26,6 +29,6 @@
 python3 scripts/review_compose_routing.py
 ```
 
-[本地主机清单](evidence/ct61-firmware-host/current-host-manifest.json)标识本轮控制回放的代码与二进制。需要重算实际 MCP 和终态时，使用对应固定二进制，按每行 `initial_profile`、`host_calls`、`host_inspect_ms` 调用 `capture_lingxi.firmware_replay`。参考材料包只提供本轮审阅与说明，不携带原始压缩轨迹或完整控制回放环境。
+[本地主机清单](../evidence/ct61-firmware-host/current-host-manifest.json)标识本轮控制回放的代码与二进制。需要重算实际 MCP 和终态时，使用对应固定二进制，按每行 `initial_profile`、`host_calls`、`host_inspect_ms` 调用 `capture_lingxi.firmware_replay`。参考材料包只提供本轮审阅与说明，不携带原始压缩轨迹或完整控制回放环境。
 
 下一步先回读平台当前模型设置与工具／回复通道，再单项对照；此前[配置页观察](draft-narration.md)中思考已显示 disabled，不能假定重新关闭思考即可解决。本轮桌面仍锁定，未改平台参数。灵矽[配置指引](https://linx.qiniu.com/docs/xrobot/guide/agent-config)说明模型高级参数因模型而异，修改后需要确认、保存并重新连接；实际参数以本次页面回读为准。修正后需同时覆盖含糊表达、明确新时长、单步隔离、新建／取消、旧版冲突和完整固定集，分别检查工具、草稿及最终回复。

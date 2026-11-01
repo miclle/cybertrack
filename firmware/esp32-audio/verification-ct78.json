@@ -1,0 +1,144 @@
+{
+  "version": "2.0.3-ct78",
+  "date": "2026-11-01",
+  "last_recorded_application": "2.0.3-ct77",
+  "flashed": false,
+  "platform_role_synced": false,
+  "scope": "Remove theatre editor, drafts and compose; preserve direct combinations, voice sequences and stop guards.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "path": "build/firmware-ct78/xiaozhi.bin",
+    "bytes": 2690912,
+    "sha256": "00c6204bdc1a3c04d171e04f0bbf0be83602769f57cca336272f19e0e270895c"
+  },
+  "checks": [
+    {
+      "command": "sh firmware/esp32-audio/test.sh",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/host.txt"
+    },
+    {
+      "command": "python3 firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct78-src",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/mcp.txt"
+    },
+    {
+      "command": "python3 firmware/esp32-audio/tests/run_audio_tests.py --source build/xiaozhi-ct78-src",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/audio.txt"
+    },
+    {
+      "command": "python3 scripts/check_firmware_host.py --executable build/ct78-full-host/firmware_host",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/corpus.txt"
+    },
+    {
+      "command": "python3 scripts/check_voice_turn.py --executable build/ct78-full-host/firmware_host",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/turn.txt"
+    },
+    {
+      "command": "python3 scripts/check_negative_input.py --executable build/ct78-full-host/firmware_host",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/negative.txt"
+    },
+    {
+      "command": "python3 scripts/check_vague_action.py --executable build/ct78-full-host/firmware_host",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/vague.txt"
+    },
+    {
+      "command": "python3 scripts/check_mcp_raw.py --executable build/ct78-full-host/firmware_host",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/raw.txt"
+    },
+    {
+      "command": "python3 scripts/replay_stop_matrix.py --source build/xiaozhi-ct78-src",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/stop.txt"
+    },
+    {
+      "command": "node firmware/esp32-audio/tests/web_ui_test.mjs",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/web.txt"
+    },
+    {
+      "command": "python3 scripts/check_no_theatre.py --executable build/ct78-full-host/firmware_host",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/no-theatre.json"
+    },
+    {
+      "command": "idf.py -C build/xiaozhi-ct78-src -B build/firmware-ct78 build",
+      "exit_code": 0
+    },
+    {
+      "command": "IDF_PATH=<esp-idf> python3 -m unittest discover -s tests/improvements",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/python.txt"
+    },
+    {
+      "command": "CYBERTRACK_PLAYWRIGHT_MODULE=<playwright/index.mjs> node firmware/esp32-audio/tests/web_browser.mjs",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/browser.txt"
+    },
+    {
+      "command": "CYBERTRACK_PLAYWRIGHT_MODULE=<playwright/index.mjs> node tools/family-study/browser_test.mjs",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/observer.txt"
+    },
+    {
+      "command": "python3 scripts/check_firmware_current.py --source-bin build/firmware-ct78/xiaozhi.bin --deployed-bin build/firmware-ct77/xiaozhi.bin",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct78-theatre-removal/current.txt"
+    },
+    {
+      "check": "Changed Markdown relative path targets (anchors not checked)",
+      "targets": 800,
+      "passed": true
+    },
+    {
+      "command": "IDF_PATH=<esp-idf> python3 -m unittest discover -s tests/improvements -p test_solution_package.py",
+      "exit_code": 0,
+      "tests": 5
+    },
+    {
+      "check": "Prepared overlay control files match authoritative source",
+      "passed": true
+    }
+  ],
+  "pending": [
+    "Online role synchronization with ct78 deployment",
+    "Actual voice and physical acceptance"
+  ],
+  "source_sha256": {
+    "apply_overlay.py": "e91e8e54a660dba8e1b1aea1226e2f7eb7b65443f7ff25570671d6eeddfe029b",
+    "control_sessions.h": "af38629b98e333eb12c65139d3679e783824e5cb1d9e28d19bdf583b9f9495ef",
+    "cybertrack_tools.cc": "52cb8bd895b50d0a8f2e440e894f84a345314104d23aa7798322300df7a92c3c",
+    "negative_input_intent.h": "106532db7373cbf7cc695ef6567a25b12268fa572d6bfcc38a7e36d35343bf06",
+    "non_execution_intent.h": "55416f6c21f43dadf98256c6a46d57b04fd35de1324d92ac8879e087d7ee0526",
+    "recent_command.h": "105693ff5c31c7eb79c060583e8c9bf7b83477ddc3b0c8c92f70816b573e5826",
+    "status_facts.h": "9b39bc697db04a6200db2c63c659f09953ec0fc07f5ecb1dc08bf2d6bb50e8e8",
+    "role-prompt.txt": "c22dc4b756efd30d129330fd7ea88840833495511d92275a4575790acc97162d",
+    "web_request.h": "10068fc8b532768a3f36612695b16933b8d663848c08ef22054ef13a26d5a3ca",
+    "web_server.cc": "9c3b4ad25e0b09bae4ba0a0bf1649e4bab694e4d474a1c1e7d33ed7ed189fe0a",
+    "web/index.html": "70097052871acbd8de993dbe32016f1f767a77ba8c64757ab13d80b30f8aa5cc"
+  },
+  "host_binary_sha256": "8142dd89326f34d56195a62fe34bb9aeaae8eaa14f4880a2f0ffbc2aa4ee0479",
+  "evidence_sha256": {
+    "docs/validation/evidence/ct78-theatre-removal/audio.txt": "c1f20a0b426580d07377b274fd20f5522ac056651ab3df4e9d226c26e402d617",
+    "docs/validation/evidence/ct78-theatre-removal/browser.txt": "07daddce2a5caeeeb35b9e1ca0d5b4c76d4f12d2381499ba262736137210bd3c",
+    "docs/validation/evidence/ct78-theatre-removal/corpus.txt": "da43e51d5e68af0e4916232e04c5dc9f89bd5458e612efa08b336cf85540b6df",
+    "docs/validation/evidence/ct78-theatre-removal/current.txt": "08c3f24c196c51ce6f505e51114ea545dae44b0d07e378c7a14c4a017c18b496",
+    "docs/validation/evidence/ct78-theatre-removal/host.txt": "f342adfd6c956f4caf8275bccbdda5a73be712e08c0f788b2e581b3c01f2d71d",
+    "docs/validation/evidence/ct78-theatre-removal/mcp.txt": "c25975ea0f92c07a8201a6292fccd689e1b7760055a76e3812e34b56c5002df8",
+    "docs/validation/evidence/ct78-theatre-removal/negative.txt": "be81171c88deb62bdcb07f2533b870f8e1237b54e73a9a1fea2558958b03b6ad",
+    "docs/validation/evidence/ct78-theatre-removal/no-theatre.json": "a07bc0dccde901cbc4ea696a80ce8985a5a08d4a9ec6b4c6521a6aa6491fbc2c",
+    "docs/validation/evidence/ct78-theatre-removal/observer.txt": "f8d2a9d34c05a7a9afcbd459b4ea92403af939db86203597a08eb18aca93c6ca",
+    "docs/validation/evidence/ct78-theatre-removal/python.txt": "a04ecd5523ae1e31717a8b26b6f1a0cf831783e6febe4659c160712320f42d7e",
+    "docs/validation/evidence/ct78-theatre-removal/raw.txt": "d021e4aeead0069c8a4f57ab9472add26a84d3cea8862256c33bcf8526413611",
+    "docs/validation/evidence/ct78-theatre-removal/stop.txt": "bedcd8b8e34950cc2ed14727ed7ba98ae5a22b491090f93b25cbc319b8013426",
+    "docs/validation/evidence/ct78-theatre-removal/turn.txt": "0d3f07f1ed8ea5f34c36b62dadf021cb3a4b7896ca2844c0794495ec8b050d6a",
+    "docs/validation/evidence/ct78-theatre-removal/vague.txt": "9888865fb3e42c773c808679448fe7547a0c7f5605faf1724ada49c38f25c60e",
+    "docs/validation/evidence/ct78-theatre-removal/web.txt": "6d1c8c8d89c9cbecde1fb893edf24b7b276a997a415357ffaee1325617f8e76b"
+  }
+}

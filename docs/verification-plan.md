@@ -34,5 +34,5 @@
 
 - V01、V02、V09 从 [VF01 试配](../hardware/model/drive-fit-fixture/README.md)、[当前打印项目](../hardware/model/lean-print/README.md)和[装配指南](assembly.md)核对。记录实际材料、紧固件、拆装次数、承载和满／空液状态。
 - V03–V06、V10 使用当前电池与对应负载，分别记录电压、电流、温升、滴液和停机残余。区分软件关断时间、电气输出关断与机械停止距离。[台架分项](validation/bench.md) · [电源预算](../hardware/architecture/README.md) · [停止场景](validation/stop-trials.md)
-- V07、V08 分开核对设备联网、平台工具选择、执行回执、断线及恢复。ct45 已有隔离文本评测与设备草稿检查，真人语音、有效确认后的表演和负载故障仍需现场记录。[语音评测](validation/README.md) · [固件测试](../firmware/tests/README.md)
+- V07、V08 分开核对设备联网、平台工具选择、执行回执、断线及恢复。已有旧版本隔离文本评测；当前候选需复验语音组合、序列、停止与负载故障，旧成绩不迁移。[语音评测](validation/README.md) · [固件测试](../firmware/tests/README.md)
 - PX／VX 单独评估。原理图禁用点火装配，低压接口软件计时与物理高压安全验收独立。[A2 设计状态](../hardware/schematic/README.md) · [效果控制](effects-control.md)

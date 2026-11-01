@@ -15,16 +15,11 @@ def scenarios():
     stop=call('stop', {})
     move=call('move', dict(direction='forward', duration_ms=1000))
     steps=json.dumps([dict(direction='left', move_ms=880, water_ms=0, bubbles_ms=0, ignition_ms=0)])
-    edit=dict(edit='replace_step', revision=7, step=2, steps_json=json.dumps([
-        dict(direction='none', move_ms=0, water_ms=0, bubbles_ms=2000, ignition_ms=0)]))
-    cancel=dict(edit='cancel', revision=7, step=0, steps_json='')
     return [
         dict(id='direction-zero', calls=[call('move',dict(direction='forward\0extra',duration_ms=1000))], starts=0, error='embedded zero'),
         dict(id='combined-zero', calls=[call('move_and_water',dict(direction='left\0extra',move_duration_ms=880,water_duration_ms=1000))], starts=0,error='embedded zero'),
         dict(id='tool-name-zero', calls=[call('water\0extra',dict(duration_ms=1000))],starts=0,error='embedded zero'),
         dict(id='key-zero',calls=[call('move',{'direction\0extra':'forward','duration_ms':1000})],starts=0,error='embedded zero'),
-        dict(id='cancel-zero',profile='corpus_draft7',calls=[read,call('compose',dict(cancel,edit='cancel\0extra'))],starts=0,revision=7,error='embedded zero'),
-        dict(id='edit-zero',profile='corpus_draft7',calls=[read,call('compose',dict(edit,edit='replace_step\0extra'))],starts=0,revision=7,error='embedded zero'),
         dict(id='bad-stop-does-not-stop',profile='corpus_forward70',calls=[call('stop\0extra',{})],starts=1,moving=True,error='embedded zero'),
         dict(id='valid-stop-after-bad',profile='corpus_forward70',calls=[call('stop\0extra',{}),stop],starts=1,moving=False,results=['error','ok']),
         dict(id='same-input-no-fallback',calls=[call('move',dict(direction='forward\0extra',duration_ms=1000)),call('bubbles',dict(duration_ms=1000))],starts=0,results=['error','error'],error='voice_input_failed'),
@@ -33,7 +28,6 @@ def scenarios():
         dict(id='valid-legacy-sequence',calls=[call('sequence',dict(steps_json=steps))],starts=1,moving=True,results=['accepted']),
         dict(id='inner-plan-zero',calls=[call('sequence',dict(steps_json=steps.replace('left','left\\u0000extra')))],starts=0,error='Sequence requires'),
         dict(id='literal-escape-not-zero',calls=[call('move',dict(direction=r'left\u0000',duration_ms=880))],starts=0,error='Move requires'),
-        dict(id='valid-cancel',profile='corpus_draft7',calls=[read,call('compose',cancel)],starts=0,revision=0,results=['ok','draft_cancelled']),
         dict(id='queued-then-invalid',calls=[dict(move,defer=True),call('water\0extra',dict(duration_ms=1000))],starts=0),
     ]
 
@@ -47,7 +41,6 @@ def check(executable):
         values=[json.loads(r['result']['content'][0]['text'])['result'] if 'result' in r else 'error' for r in replies]
         passed=final['starts_this_boot']==case['starts']
         if 'moving' in case:passed=passed and bool(final['logical_outputs']['left'] or final['logical_outputs']['right'])==case['moving']
-        if 'revision' in case:passed=passed and final['show_draft']['revision']==case['revision']
         if 'error' in case:passed=passed and 'error' in replies[-1] and case['error'] in replies[-1]['error']['message']
         if 'results' in case:passed=passed and values==case['results']
         results.append(dict(id=case['id'],passed=passed,results=values,replies=replies,final=final))

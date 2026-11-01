@@ -33,16 +33,11 @@ button:disabled{opacity:.5;cursor:default}.save{background:#314e39;color:white}.
 <label>完成指定动作<select name="first_action_completed" data-bool></select></label>
 <label>家长独立全停<select name="independent_stop" data-bool></select></label>
 <label>主持人操作提示次数<input name="help_count" type="number" min="0" step="1" placeholder="观察过且没提示填 0"></label></div></fieldset>
-<fieldset><legend>03　按任务编排</legend><p>让家庭选“登场”，把第二步泡泡改为两秒并预览。记录他们怎样判断机器人何时才会开始。</p><div class="grid">
-<label>理解选模板不会启动<select name="template_start_understood" data-bool></select></label>
-<label>独立应用并保存修改<select name="draft_edit_independent" data-bool></select></label>
-<label>核对过草稿版本<select name="preview_revision_checked" data-bool></select></label></div></fieldset>
-<fieldset><legend>04　三分钟自由选择</legend><p>从这里开始不指定要玩什么。上一步要求的改稿不计入。记录家庭主动又玩了一次的玩法，或主动改过的剧本。</p>
+<fieldset><legend>03　三分钟自由选择</legend><p>从这里开始不指定要玩什么。主持人要求的动作不计入。记录家庭主动又玩了一次的玩法。</p>
 <label>完整观察自由选择环节<select name="free_play_observed" data-bool></select></label>
 <div id="activity"><p>主动重复的同一玩法（可多选）</p><div id="repeat" class="choices"></div>
-<label>重复自编剧本的编号（选填，多个用空格分隔）<input name="custom" maxlength="200" pattern="[A-Za-z0-9_ \-]*" placeholder="同一份剧本共用编号，如 B01"></label>
-<p>主动修改的剧场（可多选）</p><div id="modify" class="choices"></div></div></fieldset>
-<fieldset><legend>05　家长反馈</legend><label>愿意在哪种场合使用<textarea name="parent_use_context"></textarea></label>
+</div></fieldset>
+<fieldset><legend>04　家长反馈</legend><label>愿意在哪种场合使用<textarea name="parent_use_context"></textarea></label>
 <label>主要顾虑<textarea name="parent_concerns"></textarea></label><label>愿意承担哪些装配或维护工作<textarea name="maintenance_acceptance"></textarea></label>
 <label>中途退出、卡住或需要帮助的位置<textarea name="observer_note"></textarea></label></fieldset>
 <p>没有观察到的项目留空。选择“完整观察”后，未勾选的自由玩法按零次记录。</p>
@@ -54,8 +49,7 @@ const number=name=>text(name)===''?null:Number(text(name));
 for(const el of form.querySelectorAll('[data-bool]')) {
   for(const [value,label] of [['','未观察'],['yes','是'],['no','否']]) el.add(new Option(label,value));
 }
-const shows=['登场','庆祝','谢幕'];
-for(const [id,items] of [['repeat',['左转一秒','吹泡泡一秒',...shows]],['modify',[...shows,'自编剧场']]]) {
+for(const [id,items] of [['repeat',['左转一秒','吹泡泡一秒','语音组合动作']]]) {
   for(const value of items) {
     const label=document.createElement('label'), input=document.createElement('input');
     input.type='checkbox';input.name=id;input.value=value;label.append(input,value);
@@ -85,10 +79,7 @@ form.onsubmit=event=>{
   for(const el of form.querySelectorAll('[data-bool]')) row[el.name]=bool(el.name);
   for(const name of ['first_use_seconds','help_count','network_setup_seconds']) row[name]=number(name);
   const observed=row.free_play_observed===true;
-  const custom=observed && text('custom')?text('custom').split(/\s+/):[];
-  if(custom.some(c=>!/^[A-Za-z0-9_-]{1,24}$/.test(c))){notice.textContent='剧本编号为 1–24 位字母、数字、下划线或短横线。';return;}
-  row.repeat_plays=observed?[...selected('repeat'),...new Set(custom.map(s=>'自编/'+s))]:null;
-  row.modified_shows=observed?selected('modify'):null;
+  row.repeat_plays=observed?selected('repeat'):null;
   for(const el of form.querySelectorAll('textarea')) row[el.name]=text(el.name)||null;
   const url=URL.createObjectURL(new Blob([JSON.stringify({family_sessions:[row]},null,2)+'\n'],{type:'application/json'}));
   const link=document.createElement('a');link.href=url;link.download='CyberTrack-'+row.anonymous_id+'-'+row.prototype_or_device+'.json';link.click();

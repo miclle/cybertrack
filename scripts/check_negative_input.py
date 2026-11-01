@@ -23,16 +23,10 @@ def check(executable):
     for phrase in ('不要前进','别喷水','不要开启狂暴模式','不许吹泡泡','不要放电','不要饭店','请先不要启动泡泡。'):
         run('idle_false_stop_'+phrase,[text(phrase),call('stop',defer=True)],
             lambda r,s:r[0]['result']=='input_negated' and s['starts_this_boot']==0 and off(s))
-    for phrase in ('不要编排表演','这次先别编排新的表演','先不要创建节目，保留现在的草稿','别取消这份草稿','我没让你取消草稿'):
-        run('preserve_draft_'+phrase,[text(phrase),call('stop',defer=True)],
-            lambda r,s:r[0]['result']=='input_negated' and bool(r[0].get('negation_facts')) and s['show_draft']['revision']==7 and s['show_draft']['active'] and s['starts_this_boot']==0,'corpus_draft7')
     plan='[{"direction":"left","move_ms":880,"water_ms":0,"bubbles_ms":0,"ignition_ms":0}]'
     for tool,args in [('move',dict(direction='forward',duration_ms=1000)),('water',dict(duration_ms=1000)),('bubbles',dict(duration_ms=1000)),
                       ('ignition',dict(duration_ms=1000)),('frenzy',dict(duration_ms=1000)),('sequence',dict(steps_json=plan))]:
         run('no_substitute_'+tool,[text('不要放电'),call(tool,args)],lambda r,s:r[0]['result']=='input_negated' and s['starts_this_boot']==0 and off(s))
-    edit=dict(edit='cancel',revision=7,step=0,steps_json='')
-    run('no_cancel_substitute',[text('不要编排表演'),call('get_status'),call('compose',edit,20,2)],
-        lambda r,s:r[0]['result']=='ok' and r[1]['result']=='input_negated' and s['show_draft']['revision']==7,'corpus_draft7')
     for tool,args in [('set_speed',dict(speed_percent=100)),('adjust_speed',dict(delta_percent=10))]:
         run('no_speed_'+tool,[text('不要前进'),call(tool,args)],lambda r,s:r[0]['result']=='input_negated' and s['move_speed_percent']==70,'corpus_forward70')
     for phrase in ('不要停止当前序列','不要停','别取消序列'):
@@ -44,12 +38,12 @@ def check(executable):
         run('stop_not_blocked_'+phrase,[text(phrase),call('stop',defer=True),dict(inspect_ms=60000)],
             lambda r,s:r[0]['result']=='ok' and r[0]['uptime_ms']==1010 and off(s),'corpus_sequence')
     run('active_prohibition_keeps_stop',[text('别喷水'),call('stop',defer=True)],lambda r,s:r[0]['result']=='ok' and off(s),'corpus_sequence')
-    run('new_input_restores_stop',[text('不要编排表演'),call('stop'),text('停下',20),call('stop',ms=30,rpc=2)],
-        lambda r,s:r[0]['result']=='input_negated' and r[1]['result']=='ok' and s['show_draft']['revision']==0,'corpus_draft7')
+    run('new_input_restores_stop',[text('不要前进'),call('stop'),text('停下',20),call('stop',ms=30,rpc=2)],
+        lambda r,s:r[0]['result']=='input_negated' and r[1]['result']=='ok' and off(s))
     run('failure_latch_no_fallback',[text('不要放电'),call('ignition',dict(duration_ms=1000)),call('water',dict(duration_ms=1000),20,2)],
         lambda r,s:r[0]['result']=='input_negated' and r[1]['result']=='rpc_error' and s['starts_this_boot']==0)
-    run('positive_clause_not_globally_blocked',[text('先不要编排，直接吹泡泡两秒'),call('bubbles',dict(duration_ms=2000))],
-        lambda r,s:r[0]['result']=='accepted' and s['starts_this_boot']==1)
+    run('preview_conflict_does_not_execute',[text('先不要编排，直接吹泡泡两秒'),call('bubbles',dict(duration_ms=2000))],
+        lambda r,s:r[0]['result']=='execution_not_requested' and s['starts_this_boot']==0)
     run('old_callback_isolated',[text('前进一秒'),call('move',dict(direction='forward',duration_ms=1000),defer=True),text('不要前进',20),dict(flush=True,elapsed_ms=30)],
         lambda r,s:r[0]['result']=='voice_input_changed' and s['starts_this_boot']==0)
     run('late_valid_stop_after_new_negative_input',[text('停止'),text('不要编排表演',1),call('stop',ms=2,defer=True)],

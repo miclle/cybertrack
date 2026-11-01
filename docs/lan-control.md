@@ -4,7 +4,7 @@ ct42 补充：距离滴声不受开关或行走状态影响，待机／后退／
 
 ## 上手帮助与回执解释
 
-页面的“第一次使用 · 为什么没动”提供亲子上手步骤、当前状态和最近请求的只读解释；不会发起动作。过期、缺失或未知数据明确说明无法判断，详见[解释规则](status-explanation.md)。帮助入口由 ct43 引入，已随 ct45 部署；同版网页还提供可预览、需明确确认的[泡泡剧场](show-composer.md)。
+页面的“第一次使用 · 为什么没动”提供亲子上手步骤、当前状态和最近请求的只读解释；不会发起动作。过期、缺失或未知数据明确说明无法判断，详见[解释规则](status-explanation.md)。帮助入口由 ct43 引入，已随 ct45 部署。
 
 ## 自动避障开关（ct41 已部署）
 
@@ -80,7 +80,6 @@ ct52 候选网页在动作进行中或停止回执未确认时失联，会持续
 |---|---|
 | `set_speed` | `speed_percent`，60–100 的整数 |
 | `set_auto_avoidance` | `enabled`，布尔值 |
-| `show_edit`／`show_confirm` | 编辑传 `draft`，确认传预览的 `revision`，见[编排契约](show-composer.md) |
 | `drive_start` | `direction` 为 forward/backward/left/right；保留可选 `water_duration_ms` 供已有接口，当前网页不发送组合请求 |
 | `water`／`bubbles` | 整数 `duration_ms`，1–30000 |
 | `ignition` | 整数 `duration_ms`，1–5000 |
@@ -91,10 +90,10 @@ ct52 候选网页在动作进行中或停止回执未确认时失联，会持续
 
 `drive_renew`、`water_renew`、`bubbles_renew` 只带 `operation/hold_id/renewal`；对应的 `drive_stop`、`water_stop`、`bubbles_stop` 只带 `operation/hold_id`，均不带窗口。`hold_id/renewal` 为非零 uint32；续租必须使用上次回执的凭据，不能重放。正常开始 `result=accepted`，续租 `renewed`，停止／状态 `ok`。`voice_preempted` 表示语音已被停止但**网页新动作尚未启动**；不得当作 accepted。
 
-`/api/action` 请求体上限为 8192 字节，其他 JSON 接口上限为 384 字节。额外／缺失／重复字段、非整数与越界拒绝，socket 收发超时一秒、最多两个连接、8192 bytes HTTP 栈。HTTP 400 参数错误、401 会话失效、403 来源不符、409 网页会话忙、429 接管限流；HTTP 200 仍须核对内部 result。
+`/api/action` 请求体上限为 384 字节，其他 JSON 接口上限为 384 字节。额外／缺失／重复字段、非整数与越界拒绝，socket 收发超时一秒、最多两个连接、384 bytes HTTP 栈。HTTP 400 参数错误、401 会话失效、403 来源不符、409 网页会话忙、429 接管限流；HTTP 200 仍须核对内部 result。
 
 状态包含 `move_source`、`water_source`、`bubbles_source`、`ignition_source` 及 `frenzy_source`，值为 web/voice/none。`control_owner=shared` 表示网页会话与语音通道同时在线，web/voice/none 表示入口连接情况，**不再表示语音被网页独占禁止**。`drive_hold_id`、`water_hold_id`、`bubbles_hold_id` 非零时，对应 `_remaining_ms` 为短租期剩余，不能作为总运行剩余时长；`drive_lease_ms/effect_lease_ms=600`。模式单独读取 `frenzy_remaining_ms/frenzy_last_duration_ms/frenzy_max_duration_ms`，不能按点火间歇判断结束。`remaining_ms` 为四路剩余值的最大值；各路间隔、能力、窗口、BOOT 和丢日志字段见[接口手册](../firmware/CAPABILITIES.md#当前面包板-ct21-接口)，`physical_feedback=false`。
 
 开发阶段按用户要求无身份认证：同局域网能访问设备的客户端可以申请会话。内存令牌用于会话关联与防止旧请求串入，不作为用户身份认证；不写 URL、cookie 或 localStorage。
 
-编排接口与版本确认见[泡泡剧场](show-composer.md)，状态回执字段见[状态解释](status-explanation.md)。网页检查与设备部署见[当前状态](current-status.md)。
+状态回执字段见[状态解释](status-explanation.md)。网页检查与设备部署见[当前状态](current-status.md)。

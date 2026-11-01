@@ -77,7 +77,7 @@ end = receipt_source.index('\n}\n}', start) + 2
 (build / 'receipt_reply.inc').write_text(receipt_source[start:end])
 subprocess.run(['cc', '-std=c11', *flags, '-I', str(root/'firmware/esp32-linx/main'), '-c',
                 str(root/'firmware/esp32-linx/main/water_policy.c'), '-o', str(build/'receipt_water_policy.o')], check=True)
-for executable in ('receipt_adapter_test','receipt_replay','admission_result_test','voice_effect_feedback_test','effect_alias_feedback_test','four_lane_feedback_test','stop_allocation_test','relative_draft_reply_test','vague_action_reply_test'):
+for executable in ('receipt_adapter_test','receipt_replay','admission_result_test','voice_effect_feedback_test','effect_alias_feedback_test','four_lane_feedback_test','stop_allocation_test','vague_action_reply_test'):
     subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(build),
                     '-I', str(root/'firmware/esp32-audio'), '-I', str(root/'firmware/esp32-linx/main'),
                     str(Path(__file__).with_name(executable+'.cc')), str(build/'cJSON.o'),
@@ -88,7 +88,6 @@ subprocess.run([str(build/'voice_effect_feedback_test')], check=True)
 subprocess.run([str(build/'effect_alias_feedback_test')], check=True)
 subprocess.run([str(build/'four_lane_feedback_test')], check=True)
 subprocess.run([str(build/'stop_allocation_test')], check=True)
-subprocess.run([str(build/'relative_draft_reply_test')], check=True)
 subprocess.run([str(build/'vague_action_reply_test')], check=True)
 
 # Replay both admission outcomes against the same dispatch contract as the board.
@@ -109,48 +108,6 @@ for profile in ('thirty_second_forward70', 'idle', 'voice_offline', 'wifi_offlin
         assert reply['result'] == 'accepted' and reply['move_speed_percent'] == 100
         assert final['starts_this_boot'] == 1 and final['move_direction'] == 'forward'
         assert final['move_remaining_ms'] == 30000 - speed_call['elapsed_ms']
-
-
-# A status read of an empty draft is not a successful creation.
-compose_corpus = json.loads((root/'docs/validation/compose-cases.json').read_text())['cases']
-create = next(case for case in compose_corpus if case['id']=='C001')['expected_calls']
-for prefix in (create[:1], create):
-    lines = subprocess.check_output([str(build/'receipt_replay'), 'empty_web_draft'],
-                                    input=json.dumps(prefix), text=True).splitlines()
-    first, final = json.loads(lines[0]), json.loads(lines[-1])
-    assert not first['show_draft']['active'] and first['show_draft']['revision']==0
-    assert '没有已保存草稿' in first['draft_status_facts']
-    assert final['starts_this_boot']==0 and not any(final['logical_outputs'].values())
-    if len(prefix)==1:
-        assert not final['show_draft']['active'] and final['show_draft']['revision']==0
-    else:
-        saved = json.loads(lines[-2])
-        assert saved['result']=='draft_saved' and final['show_draft']['revision']==1
-        assert 'draft_status_facts' not in saved
-        assert '当前有已保存草稿' in final['draft_status_facts']
-        assert final['show_draft']['steps'][0]['move_ms']==880
-        assert final['show_draft']['steps'][1]['bubbles_ms']==1000
-
-
-# C002 uses a real web-owned draft. A matching revision alone cannot authorize
-# a voice edit. Exercise the fresh-read boundary and verify both steps on readback.
-compose_cases = json.loads((root/'docs/validation/compose-cases.json').read_text())['cases']
-c002 = next(case for case in compose_cases if case['id'] == 'C002')
-read, edit = c002['expected_calls']
-for offset, expected in ((None, 'draft_changed'), (29999, 'draft_saved'), (30000, 'draft_changed')):
-    calls = [] if offset is None else [dict(read, elapsed_ms=0)]
-    calls.append(dict(edit, elapsed_ms=1000 if offset is None else offset))
-    lines = subprocess.check_output([str(build/'receipt_replay'), 'two_step_web_draft'],
-                                    input=json.dumps(calls), text=True).splitlines()
-    reply, final = map(json.loads, lines[-2:])
-    assert reply['result'] == expected
-    draft = final['show_draft']
-    saved = expected == 'draft_saved'
-    assert draft['active'] and draft['revision'] == (8 if saved else 7)
-    assert len(draft['steps']) == 2 and draft['steps'][0]['direction'] == 'left'
-    assert draft['steps'][0]['move_ms'] == 880 and draft['steps'][1]['bubbles_ms'] == (2000 if saved else 1000)
-    assert final['starts_this_boot'] == 0 and not any(final['logical_outputs'].values())
-print('PASS: web draft stays active, only a fresh voice read permits C002, no output starts')
 
 
 subprocess.run(['c++', '-std=c++17', *flags, '-I', str(cjson), '-I', str(root/'firmware/esp32-audio'),

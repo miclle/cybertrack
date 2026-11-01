@@ -9,18 +9,6 @@ int main(int argc, char** argv) {
     if (!cJSON_IsObject(status)) { cJSON_Delete(status); return 1; }
     auto get = cJSON_GetObjectItemCaseSensitive;
     auto str = [](const cJSON* value) { return cJSON_IsString(value) ? value->valuestring : ""; };
-    if (argc == 2 && std::string_view(argv[1]) == "draft_read") {
-        auto* draft = get(status,"show_draft");
-        auto* value = get(draft,"active");
-        if (!cJSON_IsBool(value)) { cJSON_Delete(status); return 1; }
-        auto* fields = cJSON_CreateObject();
-        cJSON_AddStringToObject(fields,"draft_status_facts",DraftReadFacts(cJSON_IsTrue(value)));
-        char* raw = cJSON_PrintUnformatted(fields);
-        if (!raw) { cJSON_Delete(fields); cJSON_Delete(status); return 1; }
-        std::cout << raw << '\n';
-        cJSON_free(raw); cJSON_Delete(fields); cJSON_Delete(status);
-        return 0;
-    }
     auto* outputs = get(status,"logical_outputs");
     bool active = false;
     for (auto key : {"left", "right", "water", "bubbles", "ignition"}) {
@@ -34,7 +22,6 @@ int main(int argc, char** argv) {
     if (argc == 2 && std::string_view(argv[1]) == "ct47") {
         auto* fields = cJSON_CreateObject();
         cJSON_AddStringToObject(fields, "status_facts", facts.c_str());
-        cJSON_AddRawToObject(fields, "editing_capabilities", DraftEditingCapabilities);
         if (const char* guidance = FaultRecovery(str(get(status,"fault"))))
             cJSON_AddStringToObject(fields, "fault_recovery", guidance);
         char* json = cJSON_PrintUnformatted(fields);

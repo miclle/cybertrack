@@ -1,0 +1,18 @@
+PASS: automatic connection, independent water/held movement, fresh start window, voice preemption cooldown, release/stop races, background/offline cancellation and reconnect without action replay
+PASS: distance display, units, local expiry, delayed/out-of-order responses, errors, old firmware and offline invalidation; no movement requests
+PASS: elapsed hold timer uses monotonic time, freezes at release despite delayed receipt, cancels on background/offline/global stop
+PASS: bubbles/ignition controls, four-lane concurrent display, independent intervals, held-motion continuity and global-stop versus pending effect race
+PASS: new effect controls require explicit firmware capabilities
+PASS: five one-tap durations per lane, independent held water/bubbles, three simultaneous holds, serialized starts, per-lane release, multitouch focus, cancel/offline/stop, late receipts and capability gating
+PASS: ignition 1/3/5-second buttons map to exact durations, all disabled while active/cooling; no hold or dropdown
+PASS: frenzy 5/10/30-second payloads, countdown, capability gating and blur release
+PASS: live action notices finish on device state, retain concurrent activity, ignore stale receipts and preserve stop/error messages
+PASS: sequence running/waiting/cancelled status never misreports inter-step waiting as completion
+PASS: live speed slider, latest-value coalescing, source status, capability gate and stop races without action replay
+PASS: range hysteresis, immediate large change/invalid clearing, 200 ms telemetry polling, separate speed and selection prevention
+PASS: compact channel states retain direction, countdown, hold, cooldown, fault and disconnected status
+PASS: proximity locks only forward, cancellation preserves connection/effects, recovery never restarts
+PASS: automatic avoidance switch uses device receipts, validates capability, ignores stale replies and handles failure/stop races
+PASS: readonly explanation, evidence-specific reasons, recent receipt age, stale/unknown/offline/out-of-order handling; no action requests
+PASS: unconfirmed hold-stop survives pairing until a fresh state; concurrent voice output stays visible
+PASS: lost timed-effect replies preserve BOOT guidance and release the web session

@@ -69,22 +69,6 @@ def check(executable):
         text('动一下那个东西', 20), dict(flush=True, elapsed_ms=30), call('move', move, 40, 2)],
         lambda r, s: r[0]['result'] == 'voice_input_changed' and r[1]['result'] == 'action_unspecified' and idle(s))
 
-    edit = dict(edit='replace_step', revision=7, step=2,
-                steps_json='[{"direction":"none","move_ms":0,"water_ms":0,"bubbles_ms":2000,"ignition_ms":0}]')
-    run('creative_draft_is_allowed_without_actuation', [text('帮我编排一个表演，你来想动作'),
-        call('get_status'), call('compose', edit, 20, 2)],
-        lambda r, s: r[1]['result'] == 'draft_saved' and s['show_draft']['revision'] == 8 and idle(s), 'corpus_draft7')
-
-    new_draft = dict(edit='replace', revision=0, step=0,
-                     steps_json='[{"direction":"left","move_ms":880,"water_ms":0,"bubbles_ms":1000,"ignition_ms":0}]')
-    run('creative_new_draft_keeps_read_version_gate', [text('帮我编排一个表演，你来想动作'),
-        call('get_status'), call('compose', new_draft, 20, 2)],
-        lambda r, s: r[1]['result'] == 'draft_saved' and s['show_draft']['revision'] == 1 and idle(s))
-
-    run('relative_edit_guard_still_precedes_creative_draft', [text('第二步动作短一点'),
-        call('get_status'), call('compose', edit, 20, 2)],
-        lambda r, s: r[1]['result'] == 'draft_duration_unspecified' and s['show_draft']['revision'] == 7 and idle(s), 'corpus_draft7')
-
     for phrase, tool, args in [('让那个小车向前动两秒', 'move', dict(direction='forward', duration_ms=2000)),
                                ('向右转一下那个机器人', 'move', dict(direction='right', duration_ms=880)),
                                ('启动一下泡泡', 'bubbles', dict(duration_ms=1000)),
