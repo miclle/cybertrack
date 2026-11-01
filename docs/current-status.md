@@ -51,7 +51,7 @@ ct73 架空单路 BOOT 诊断：截止前检测到按下与逻辑全关，松开
 
 运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct78-src` 可复核当前适用的本地软件检查；具体命令和证据见 [ct78 退役验证](validation/theatre-removal.md)。当前停止矩阵为 13 类场景，每类五个偏移；不再包含已退役的网页表演序列。历史十八组检查、124 项测试及 88 条语料成绩按其采集版本保留，不替代当前直接动作回归。
 
-要检查模型设计工具，请在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct75-src --model-design`。新增模型／几何／整机同步测试、插件 bundle 和合成宿主界面回归；统一报告记录工具源码哈希并排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
+模型设计工具源码已移至 [SolidCue 仓库](https://github.com/miclle/solidcue)，本仓库不再内置源码。当前锁定上游 0.8.0，不含旧内置 0.9.2 的整机扩展；下述整机验收是旧版本历史证据。要检查外部模型设计工具，请在依赖已准备的环境运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct75-src --model-design`。执行锁定上游提供的测试、插件 bundle 和合成宿主界面回归；统一报告记录外部仓库版本及其源码哈希，排除依赖、研究数据及生成文件。命令不安装插件、不调用正在运行的模型服务，也不代表桌面宿主消息或 FreeCAD GUI MCP 已验收。首次依赖准备见[模型设计工具](../tools/solidcue/README.md)。
 
 模型辅助设计的[真实 GUI 验收](../tools/solidcue/verification-gui-20261031.json)已完成：198 件整机中冠盖上移 8 mm 后恢复，修改与恢复均经 FreeCAD GUI MCP 保存重开核对；同一本地页面更新到 r7，正式模型未改。无界面快照材质顺序修复通过 GUI 回读。后续[真实宿主卡片验收](../tools/solidcue/verification-host-20261031.json)已完成评论保存／宿主接受、MCP 读回与回执，以及同一卡片 r7 → r8 → r9 更新／恢复。随后[真实消息驱动验收](../tools/solidcue/verification-message-20261031.json)完成：尚未处理的 r9 评论通过 `mcp_app` 独立触发本轮，冠盖上移 4 mm 后恢复，GUI 保存重开与同一卡片 r9 → r10 → r11、最终回执均通过。I11 接入已验收；单次真实链路不代表制造或实物通过。
 

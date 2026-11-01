@@ -20,7 +20,12 @@ def main():
     if args.source and not (args.source.resolve() / "main/audio/audio_service.cc").is_file():
         parser.error("--source must be a prepared xiaozhi tree; no download or regeneration is implicit")
     if args.model_design:
-        model_root = ROOT / "tools/model-design"
+        from solidcue import configuration, verified_source
+        model_lock, model_root, _ = configuration()
+        try:
+            verified_source(model_lock, model_root)
+        except (ValueError, subprocess.CalledProcessError) as exc:
+            parser.error(str(exc))
         required = [model_root / "node_modules/.bin/tsc", model_root / ".venv/bin/python"]
         if not all(path.is_file() for path in required):
             parser.error("--model-design requires prepared dependencies; run python3 scripts/solidcue.py prepare first")
@@ -56,9 +61,9 @@ def main():
             [sys.executable, "scripts/check_negative_input.py", "--executable", str(host_build/"firmware_host"),
              "--output", str(out/"negative-input.json")]])
     if args.model_design:
-        commands.extend([["npm", "--prefix", "tools/model-design", "test"],
-                         ["npm", "--prefix", "tools/model-design", "run", "test:bundle"],
-                         ["npm", "--prefix", "tools/model-design", "run", "test:ui"]])
+        commands.extend([["npm", "--prefix", str(model_root), "test"],
+                         ["npm", "--prefix", str(model_root), "run", "test:bundle"],
+                         ["npm", "--prefix", str(model_root), "run", "test:ui"]])
     report = {"scope": "local software checks only", "created_utc": stamp,
               "git_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
               "git_status": subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT, text=True),
@@ -69,14 +74,14 @@ def main():
             if path.is_file() and path.suffix in (".py", ".cc", ".h", ".html", ".mjs", ".sh", ".txt", ".json") and "__pycache__" not in path.parts:
                 report["source_sha256"][str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
     if args.model_design:
-        # Respect repository ignores: dependency trees, study data and generated
-        # bundles are not source inputs. Include new source files before commit.
-        names = subprocess.check_output(["git", "ls-files", "--cached", "--others", "--exclude-standard",
-                                         "-z", "--", "tools/model-design"], cwd=ROOT).decode().split("\0")
+        # Hash the independently versioned checkout, never vendor its contents.
+        report["model_design_source"] = {"repository": model_lock["repository"],
+                                         "revision": model_lock["revision"]}
+        names = subprocess.check_output(["git", "ls-files", "-z"], cwd=model_root).decode().split("\0")
         for name in sorted(set(filter(None, names))):
-            path = ROOT / name
+            path = model_root / name
             if path.is_file():
-                report["source_sha256"][name] = hashlib.sha256(path.read_bytes()).hexdigest()
+                report["source_sha256"]["solidcue/" + name] = hashlib.sha256(path.read_bytes()).hexdigest()
     for i, command in enumerate(commands):
         print("Running:", " ".join(command), flush=True)
         log = out / f"{i:02d}.log"

@@ -22,3 +22,10 @@ recordings/
 /scripts/extract_drive_reference.py
 
 /.worktree/
+
+# SolidCue source lives in its own repository; retain reference documents only.
+/tools/model-design/*
+!/tools/model-design/README.md
+!/tools/model-design/LICENSE
+!/tools/model-design/NOTICE
+!/tools/model-design/UPSTREAM.json
