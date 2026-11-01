@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-01",
+  "source": "http.json",
+  "source_sha256": "9d7241284a12c2f16330602c23fa131a8b2978f01d6bb28b290abe89128fd113",
+  "passed_in_scope": true,
+  "requests": 27,
+  "state_bearing_responses": 23,
+  "all_observed_logical_outputs_off": true,
+  "all_observed_start_counts": 0,
+  "show_confirm_or_actuator_requests_sent": 0,
+  "case_results": {
+    "save-two-steps": "draft_saved",
+    "replace-only-second": "draft_saved",
+    "reject-old-cancel": "draft_changed",
+    "reject-reused-window": "stale_request",
+    "reject-duplicate-sequence": "duplicate_request",
+    "remove-first": "draft_saved",
+    "cancel-current": "draft_cancelled",
+    "save-before-release": "draft_saved",
+    "release-clears-own-draft": "ok",
+    "old-token-rejected": "session_expired",
+    "reconnect-empty": "ok",
+    "save-before-lease-expiry": "draft_saved",
+    "expired-owner-rejected": "session_expired",
+    "expired-draft-not-restored": "ok",
+    "final-release": "ok"
+  },
+  "single_step_isolation": true,
+  "rejected_edits_preserve_revision_and_steps": true,
+  "release_and_lease_expiry_clear_own_draft": true,
+  "final_own_session_released": true,
+  "recorded_deployment": "ct74",
+  "runtime_version_independently_read": false,
+  "estimated_boot_time_delta_from_deployment_seconds": {
+    "minimum": 612.853853,
+    "maximum": 613.282653
+  },
+  "limits": [
+    "One LAN web session at a time; no cloud or mixed-source concurrency acceptance",
+    "No valid show confirmation, real performance, physical stop timing, actual Wi-Fi outage or 300-second expiry acceptance",
+    "User-skipped listening cases remain skipped"
+  ]
+}
