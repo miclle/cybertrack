@@ -1,12 +1,12 @@
 # 固件能力与接口手册
 
-当前参数核对于 2026-11-01；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码候选为 [ct74](esp32-audio/verification-ct74.json)，最近记录部署为 ct73；仅应用写入、配置保持、两次启动与无动作检查见 [startup-ct73.json](esp32-audio/startup-ct73.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+当前参数核对于 2026-11-01；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码为 [ct74](esp32-audio/verification-ct74.json)，最近记录部署为 ct74；仅应用写入、配置保持、两次启动与无动作检查见 [startup-ct74.json](esp32-audio/startup-ct74.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
 
 ct62 候选新增[单次识别失败隔离](../docs/validation/voice-input-guard.md)：同轮失败后拒绝动作、调速与改稿，查询和全停保留，新输入恢复。内部代际不可由调用者传入，公开工具参数不变；已随 ct73 部署，现场时序与停止另验。
 
 ct63 候选扩展[组合／序列及目标速度的播放匹配](../docs/validation/plan-feedback.md)，只有完整原话、参数和成功回执匹配才抑制确认；动作控制协议与角色源不变，已随 ct73 部署，扬声器听感另验。
 
-ct74 [对话提示候选](../docs/validation/dialogue-range-beeps.md)只在空闲播放普通测距提示，监听／播报暂缓，结束只按实时读数恢复；普通 PCM 不截断云端语音，紧急停车告警仍优先。尚未部署或完成新版本听感验收。
+ct74 [对话提示](../docs/validation/dialogue-range-beeps.md)只在空闲播放普通测距提示，监听／播报暂缓，结束只按实时读数恢复；普通 PCM 不截断云端语音，紧急停车告警仍优先。已完成仅应用部署与无动作检查，新版本听感尚待验收。
 
 <a id="当前面包板-ct21-接口"></a>
 <a id="当前面包板-ct22-接口"></a>

@@ -1,0 +1,129 @@
+{
+  "date": "2026-11-01T16:48:28.005157+08:00",
+  "version": "2.0.3-ct74",
+  "scope": "Application-only deployment with actuator power reported disconnected; two startup checks and non-actuating HTTP readback. No physical action or human speech acceptance.",
+  "device_matches_previous_deployment": true,
+  "flash": {
+    "path": "build/firmware-ct74/xiaozhi.bin",
+    "application_verified": true,
+    "config_byte_identical_before_boot": true,
+    "upper_non_app_digest_unchanged": true,
+    "offset": "0x20000",
+    "app_partition_bytes": 4128768,
+    "bytes": 2721328,
+    "sha256": "28606ac3c771ca650faf4297d9353e86c05bd2efdc50e2b285df5817d8522cb5",
+    "previous_application": "2.0.3-ct73",
+    "previous_application_backup_verified": true,
+    "full_flash_backup": "not attempted; verified rollback application and separate configuration backup",
+    "rollback_scope": "verified previous application and separate configuration backup"
+  },
+  "configuration": {
+    "all_nvs_records_unchanged": false,
+    "record_count": 71,
+    "saved_network_count": 2,
+    "saved_wifi_and_user_config_unchanged": true,
+    "startup_websocket_token_refreshed": true,
+    "pre_application_region_byte_identical_after_boot": false,
+    "nvs_crc_valid": true,
+    "scope": "First ct74 boot compared with pre-flash; no values exported"
+  },
+  "platform_role": {
+    "observed_at": "2026-11-01T08:47:00.420Z",
+    "scope": "Read-only visible role configuration; no save or model request",
+    "characters": 5991,
+    "sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "visible_text_sha256": "083f61b0d1d33aae499aa62ca42e6be16e2c07cbf18e69e6fb4c073cbd3b04d9",
+    "matches_repository": true,
+    "model_label": "deepseek-v4-flash",
+    "configuration_modified": false,
+    "normalization": "Repository role text has one terminal LF; UI textarea omits that LF."
+  },
+  "startup": [
+    {
+      "time": "2026-11-01T16:46:48.534712+08:00",
+      "firmware": "2.0.3-ct74"
+    },
+    {
+      "time": "2026-11-01T16:46:48.535084+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-11-01T16:46:48.535129+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-11-01T16:46:48.539502+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-11-01T16:46:48.542728+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-11-01T16:46:56.569203+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-11-01T16:46:56.628180+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-11-01T16:46:57.341162+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "restart_startup": [
+    {
+      "time": "2026-11-01T16:47:36.213479+08:00",
+      "firmware": "2.0.3-ct74"
+    },
+    {
+      "time": "2026-11-01T16:47:36.214901+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-11-01T16:47:36.215020+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-11-01T16:47:36.217259+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-11-01T16:47:36.220046+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-11-01T16:47:44.135342+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-11-01T16:47:44.195186+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-11-01T16:47:45.187187+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "http": {
+    "initial_samples": 10,
+    "restart_samples": 10,
+    "source_page_matches": true,
+    "starts_this_boot": 0,
+    "logical_outputs_all_off": true,
+    "session_released_after_each_capture": true,
+    "evidence": "docs/validation/evidence/ct74-deployment/http-readback.json"
+  },
+  "user_reported_setup": {
+    "controller_power": "USB retained",
+    "actuator_power_during_deployment": "motor/water/bubbles/ignition disconnected by user",
+    "deployment_authorization": "User explicitly approved ct74 application-only update"
+  },
+  "limitations": [
+    "No full-flash backup attempted. Verified ct73 rollback application and fresh 128KiB pre-application configuration backup retained privately.",
+    "Only first post-boot NVS snapshot compared; refreshed websocket token is the only semantic change. Second restart observed separately.",
+    "Startup GPIO reports and HTTP logical outputs do not measure electrical or mechanical effects.",
+    "Human speaker listening remains pending; no actuator or ignition test in this deployment."
+  ]
+}
