@@ -1,0 +1,10 @@
+{
+  "scope": "First ct75 post-boot NVS check; snapshot retained privately",
+  "outcome": "failed",
+  "reason": "Token-only change assertion failed",
+  "resolution": "Review same saved snapshots by NVS blob indices; only phy/cal_data and websocket/token logical values differ. Calibration contents really changed, not only storage layout. Wi-Fi and user values unchanged.",
+  "parser_source": "ESP-IDF v5.5.1 components/nvs_flash/nvs_partition_tool/nvs_parser.py",
+  "phy_owner_source": "ESP-IDF v5.5.1 components/esp_phy/src/phy_init.c",
+  "phy_owner_source_sha256": "4c994869b7a9bf72e77373931136f31c2aa4f03bb13c0f868c43a029e6ae8c22",
+  "cause_of_phy_update": "not established; startup capture did not retain a calibration reason event"
+}

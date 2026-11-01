@@ -1,10 +1,10 @@
 # 产品改进交付核对
 
-核对日期：2026-11-01。对应 [I01–I13 原计划](../improvement-plan.md)；原完成条件保持不变。当前源码候选为 **ct75**，最近记录的设备应用为 **ct74**，二者由[版本真源](../../firmware/current.json)分别维护。总目标尚未完成。
+核对日期：2026-11-01。对应 [I01–I13 原计划](../improvement-plan.md)；原完成条件保持不变。当前源码与最近记录的设备应用均为 **ct75**，二者由[版本真源](../../firmware/current.json)分别维护。总目标尚未完成。
 
 ## 当前结论
 
-- ct75 [HTTP 零转义校验](http-zero-admission.md)保留旧版失败，复用 MCP 原始扫描器；完整构建、实际 HTTP 原生回归及[十八组统一检查](evidence/ct75-http-zero/software-checks.json)通过，含 124 项 Python 测试；尚未部署。没有发送畸形实机请求或增加模型／物理成绩。
+- ct75 [HTTP 零转义校验](http-zero-admission.md)保留旧版失败，复用 MCP 原始扫描器；完整构建、实际 HTTP 原生回归及[十八组统一检查](evidence/ct75-http-zero/software-checks.json)通过，含 124 项 Python 测试；随后完成[仅应用部署及 22 次无动作 HTTP 检查](ct75-deployment.md)，五类非法请求拒绝、草稿保持与合法查询／取消／空闲停止通过。首启 NVS 的 PHY 校准及连接令牌变化已记录，Wi-Fi／用户设置保持；不增加模型／物理成绩。
 
 - ct74 软件基线（提交 `fa88ec2`）的[十八组软件检查](evidence/ct74-dialogue-beeps/software-checks.json)全部通过，含 124 项 Python 测试；检查发生于提交前，以记录中的源码哈希对应最终实现。普通提示与语音共存的原生检查通过，已完成[仅应用部署和零动作检查](ct74-deployment.md)，首轮用户反馈对话中提示暂缓、回复不卡；结束恢复、移远不补播及再次靠近三项由用户选择跳过，本轮不再请求，不计验收通过。此前 `1698f28` 的[软件检查](evidence/delivery-audit-20261101/software-checks.json)作为历史记录保留。
 - 最新一次原 80／8 全集的[合成普通话 → 实际 STT → 固件主机回归](full-stt-ct71.md)为严格工具 **77/80、编排 6/8**，八条明确停止正确；V064 的模型禁止调用仍计失败，即使设备拒绝。它不是真人拾音或机械停止验收。
