@@ -18,7 +18,7 @@ ct74 将普通滴声改成独立 PCM 通知：
 
 ## 验证与当前状态
 
-[构建记录](../../firmware/esp32-audio/verification-ct74.json)为完整 ESP-IDF 5.5.1 构建，应用 2,721,328 字节，SHA-256 `28606ac3c771ca650faf4297d9353e86c05bd2efdc50e2b285df5817d8522cb5`。源码与最近实际部署均为 ct74；[仅应用部署、配置保持和两次零动作检查](ct74-deployment.md)已通过，新版本听感尚待验收。
+[构建记录](../../firmware/esp32-audio/verification-ct74.json)为完整 ESP-IDF 5.5.1 构建，应用 2,721,328 字节，SHA-256 `28606ac3c771ca650faf4297d9353e86c05bd2efdc50e2b285df5817d8522cb5`。源码与最近实际部署均为 ct74；[仅应用部署、配置保持和两次零动作检查](ct74-deployment.md)已通过，[第一轮听感](evidence/ct74-deployment/listening-01.json)已确认空闲有滴声、监听／回复暂缓且回复不卡；结束恢复和移远不补播仍待验收。
 
 [最终音频原生检查](evidence/ct74-dialogue-beeps/native-final.txt)执行导出的方法，ASan／UBSan 覆盖五种采样率波形、空闲入队、对话边沿取消、原样保留语音包、活跃帧／关键告警阻止普通通知，以及普通提示暂缓后不补播、仅新事件恢复；关键告警在普通提示被抑制时仍可播放。重跑：
 
