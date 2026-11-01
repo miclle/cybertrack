@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-01T08:52:54.576837+00:00",
+  "firmware": "2.0.3-ct74",
+  "source": "user_instruction",
+  "user_response": "我不想做这个测试了，你直接跳过吧",
+  "status": "skipped_by_user",
+  "cases": [
+    "Resume near-distance beep after dialogue returns to idle",
+    "Move target away during dialogue and verify no stale or catch-up beep",
+    "Move target near again and verify idle beep returns"
+  ],
+  "physical_results": null,
+  "previous_observation": "listening-01.json",
+  "scope": "Skip the requested three follow-up listening checks. Preserve the first reported result; do not count skipped checks as pass or fail. Do not request this round again unless the user reopens it."
+}
