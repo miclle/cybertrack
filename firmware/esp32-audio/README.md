@@ -20,6 +20,8 @@ ct47 候选在草稿回执列出可用通道，驱动输出故障查询增加家
 
 ct46 增加短指令成功播报控制、设备状态解释和改稿前读版本检查。[构建与软件证据](verification-ct46.json) · [隔离平台验收](../../docs/validation/lingxi-ct46.md)
 
+**2026-11-01 ct77 已部署：** [普通测距滴声连续确认](../../docs/validation/range-beep-confirmation.md)要求连续三个有效近距样本，过滤孤立／双样本跳值；停车仍立即响应，对话暂缓保留。已仅应用部署，用户已确认偶发滴声明显减少、效果可以。
+
 **2026-11-01 ct76 软件候选：** [含糊改稿分句门禁](../../docs/validation/draft-clause-duration.md)修复其他步骤时长或速度误放行猜测修改；保留明确时长与统一停止。未刷写，正式角色与工具未改。
 
 **2026-11-01 ct75 已部署：** HTTP 控制在 cJSON 解析前复用原始零字符检查，补齐 Unicode 零转义截断缺口。旧版反例、实际 HTTP 原生回归与完整构建已留证；已完成[仅应用部署与无动作 HTTP 检查](../../docs/validation/ct75-deployment.md)，Wi-Fi／用户设置保持，PHY 校准及连接令牌变化单独记录；不修改语音或动作策略。见[校验说明](../../docs/validation/http-zero-admission.md)。
@@ -78,7 +80,7 @@ ct23 增加网页“左转＋喷水，各 3 秒”对照入口，调用现有组
 
 ## 当前能力与验证范围
 
-源码为 `2.0.3-ct76` 未部署候选，最近记录部署为 `2.0.3-ct75`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十二个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`compose`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
+源码及最近记录部署均为 `2.0.3-ct77`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十二个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`compose`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
 
 | 功能 | 当前规则 |
 |---|---|

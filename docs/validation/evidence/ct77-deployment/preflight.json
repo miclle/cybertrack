@@ -1,0 +1,42 @@
+{
+  "device_matches_recorded": true,
+  "previous_version": "2.0.3-ct75",
+  "pre_config_sha256": "cf855e8e091ab6782bb2383705240591b15de35ba7b9d97d31c24c88ac5a5261",
+  "rollback_app_sha256": "6e6cf11e9ae1fd59e4280ec249495a8dc1602950a57e08b130ea44883714a8c8",
+  "rollback_app_verified_against_device": true,
+  "upper_non_app_md5": "1d6cacd4bbb333502ca2033ce5fd6322",
+  "ota_sequence": 1,
+  "ota_state": 2,
+  "partitions": [
+    {
+      "label": "nvs",
+      "offset": 36864,
+      "size": 16384
+    },
+    {
+      "label": "otadata",
+      "offset": 53248,
+      "size": 8192
+    },
+    {
+      "label": "phy_init",
+      "offset": 61440,
+      "size": 4096
+    },
+    {
+      "label": "ota_0",
+      "offset": 131072,
+      "size": 4128768
+    },
+    {
+      "label": "ota_1",
+      "offset": 4259840,
+      "size": 4128768
+    },
+    {
+      "label": "assets",
+      "offset": 8388608,
+      "size": 8388608
+    }
+  ]
+}

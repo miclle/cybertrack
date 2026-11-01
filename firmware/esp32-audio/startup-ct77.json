@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-01T21:20:34.525201+08:00",
+  "version": "2.0.3-ct77",
+  "scope": "User-authorized application-only deployment for listening; no actuator commands or platform changes. Output checks are logical, not physical measurements.",
+  "device_matches_previous_deployment": true,
+  "flash": {
+    "path": "build/firmware-ct77/xiaozhi.bin",
+    "application_verified": true,
+    "config_byte_identical_before_boot": true,
+    "upper_non_app_digest_unchanged": true,
+    "offset": "0x20000",
+    "app_partition_bytes": 4128768,
+    "bytes": 2722080,
+    "sha256": "cbbbe5d199ff0a6884f8a3c0a81d5a3359dc19a00ce7aeaa7d8a55a2ad810391",
+    "previous_application": "2.0.3-ct75",
+    "previous_application_backup_verified": true,
+    "full_flash_backup": "not attempted; verified rollback application and separate configuration backup",
+    "rollback_scope": "verified previous application and separate configuration backup"
+  },
+  "configuration": {
+    "scope": "Offline logical NVS comparison; no device, firmware identity, RF or physical acceptance",
+    "snapshot_bytes": 131072,
+    "nvs_offset": 36864,
+    "nvs_bytes": 16384,
+    "records_before": 71,
+    "records_after": 71,
+    "logical_entries_before": 59,
+    "logical_entries_after": 59,
+    "all_logical_values_unchanged": false,
+    "non_nvs_bytes_unchanged": true,
+    "changed_keys": [
+      "websocket/token"
+    ],
+    "permitted_changed_keys": [
+      "websocket/token"
+    ],
+    "unexpected_changed_keys": [],
+    "added_keys": [],
+    "removed_keys": [],
+    "requested_runtime_exceptions": [
+      "phy/cal_data",
+      "websocket/token"
+    ],
+    "matches_policy": true,
+    "parser_sha256": "621bdbf0ac60e34ae190f63be10f0f1a4dd4d18c25ebab0cf56ff53a6f2b6c2c"
+  },
+  "platform_role": {
+    "characters": 5991,
+    "sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "saved": true,
+    "reopened": true,
+    "exact_match": true,
+    "evidence": "../../docs/validation/evidence/concise-role/restored-readback.json",
+    "observed_at": "2026-11-01T10:28:57.497Z",
+    "association_note": "Inherited ct75 platform restoration readback; local role hash unchanged. No new platform save or readback during ct77 deployment."
+  },
+  "startup": [
+    {
+      "time": "2026-11-01T21:19:28.223124+08:00",
+      "firmware": "2.0.3-ct77"
+    },
+    {
+      "time": "2026-11-01T21:19:28.223665+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-11-01T21:19:28.223739+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-11-01T21:19:28.231446+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-11-01T21:19:28.234597+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-11-01T21:19:36.232159+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-11-01T21:19:36.293647+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-11-01T21:19:37.188671+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "restart_startup": [
+    {
+      "time": "2026-11-01T21:19:56.213646+08:00",
+      "firmware": "2.0.3-ct77"
+    },
+    {
+      "time": "2026-11-01T21:19:56.215343+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-11-01T21:19:56.215477+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-11-01T21:19:56.216489+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-11-01T21:19:56.219649+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-11-01T21:20:04.189265+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-11-01T21:20:04.258916+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-11-01T21:20:05.141655+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "http": {
+    "initial_samples": 10,
+    "restart_samples": 10,
+    "source_page_matches": true,
+    "starts_this_boot": 0,
+    "logical_outputs_all_off": true,
+    "sessions_released": true,
+    "evidence": "docs/validation/evidence/ct77-deployment/http-readback.json"
+  },
+  "listening": "User accepted the observed reduction in occasional beeps after ct77 deployment; qualitative listening feedback only.",
+  "limitations": [
+    "Only first post-boot configuration snapshot compared; second restart separately checked.",
+    "No new actuator power wiring confirmation or physical output measurement; no actuator commands sent.",
+    "No new platform readback; unchanged repository role associated with timestamped ct75 restoration."
+  ],
+  "user_followup": {
+    "date": "2026-11-01",
+    "feedback": "听了一下，偶发滴滴声明显少了，效果可以，提交并推送。",
+    "accepted_scope": "本次普通滴声抗偶发跳值的实机听感改善",
+    "limitations": "未提供量化误报率、同步读数或目标距离；不替代传感器精度、误判根因与停车性能验收。"
+  }
+}

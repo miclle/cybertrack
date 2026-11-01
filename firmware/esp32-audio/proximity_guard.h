@@ -13,7 +13,19 @@ public:
         if (!r.sampled || r.error != ultrasonic::Error::None || now < r.sampled_at_ms ||
             now - r.sampled_at_ms > ultrasonic::FreshnessMs ||
             r.distance_mm < ultrasonic::MinDistanceMm || r.distance_mm > ultrasonic::MaxDistanceMm) {
+            near_samples_ = 0;
             return None; // Missing data never clears an existing movement lock.
+        }
+        // Count sensor samples, not the 5 ms control ticks reusing a snapshot.
+        // Only ordinary audio waits for confirmation; protection below stays immediate.
+        if (r.distance_mm >= 500) {
+            near_samples_ = 0;
+        } else if (!near_samples_ || r.sampled_at_ms != last_near_sample_) {
+            if (r.sampled_at_ms < last_near_sample_ ||
+                r.sampled_at_ms - last_near_sample_ > ultrasonic::FreshnessMs)
+                near_samples_ = 0;
+            if (near_samples_ < 3) ++near_samples_;
+            last_near_sample_ = r.sampled_at_ms;
         }
         if (r.distance_mm >= 200) blocked = false;
         if (auto_stop && r.distance_mm < 150) {
@@ -26,7 +38,7 @@ public:
                 return Stop;
             }
         }
-        if (r.distance_mm >= 500) return None;
+        if (near_samples_ < 3) return None;
         beeping = true;
         const uint64_t interval = r.distance_mm < 400 ? 400 : 800;
         // Re-evaluate cadence without restarting it at a distance-band crossing.
@@ -39,6 +51,8 @@ public:
         return None;
     }
 private:
+    unsigned near_samples_ = 0;
+    uint64_t last_near_sample_ = 0;
     bool beep_started_ = false;
     uint64_t last_beep_ = 0;
 };
