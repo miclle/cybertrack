@@ -1,0 +1,8 @@
+{
+  "scope": "Host-only actual HTTP handlers with ESP transport/control stubs; no device request",
+  "baseline_source_sha256": "23fc6f9d4ead8307f750f73f37c325ae3ddf89ac2adf0da7b312804550e5aa45",
+  "expected_rejection_test_exit": -6,
+  "stderr": "Assertion failed: (Api(&r)==ESP_FAIL), function main, file web_server_test.cc, line 88.\n",
+  "stdout": "",
+  "finding": "First escaped-zero operation was not rejected by ct74 HTTP handler; remaining cases were not reached in this assertion run"
+}

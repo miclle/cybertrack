@@ -1,6 +1,8 @@
 # 固件能力与接口手册
 
-当前参数核对于 2026-11-01；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码为 [ct74](esp32-audio/verification-ct74.json)，最近记录部署为 ct74；仅应用写入、配置保持、两次启动与无动作检查见 [startup-ct74.json](esp32-audio/startup-ct74.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+当前参数核对于 2026-11-01；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码候选为 [ct75](esp32-audio/verification-ct75.json)，最近记录部署为 ct74；仅应用写入、配置保持、两次启动与无动作检查见 [startup-ct74.json](esp32-audio/startup-ct74.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+
+ct75 候选在 HTTP JSON 解析前拒绝原始零字节与实际 Unicode 零转义，避免非法操作名、方向或键名被截断为合法前缀；合法查询／停止保留。[证据与边界](../docs/validation/http-zero-admission.md)，尚未部署。
 
 ct62 候选新增[单次识别失败隔离](../docs/validation/voice-input-guard.md)：同轮失败后拒绝动作、调速与改稿，查询和全停保留，新输入恢复。内部代际不可由调用者传入，公开工具参数不变；已随 ct73 部署，现场时序与停止另验。
 

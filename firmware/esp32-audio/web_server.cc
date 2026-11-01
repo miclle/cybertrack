@@ -1,5 +1,6 @@
 #include "web_server.h"
 #include "cybertrack_tools.h"
+#include "mcp_raw_json.h"
 #include "web_page.h"
 #include "application.h"
 #include "board.h"
@@ -61,7 +62,8 @@ cJSON* Body(httpd_req_t* req, size_t limit = 384) {
         used += n;
     }
     body[used] = 0;
-    if (memchr(body.data(), 0, used)) return nullptr;
+    // Share MCP's raw-string guard: cJSON drops suffixes after escaped zeros too.
+    if (McpJsonContainsZero(std::string_view(body.data(), used))) return nullptr;
     return cJSON_ParseWithLengthOpts(body.data(), used + 1, nullptr, true);
 }
 esp_err_t Page(httpd_req_t* req) {
