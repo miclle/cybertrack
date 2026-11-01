@@ -1,0 +1,156 @@
+{
+  "date": "2026-11-01T17:12:25.063482+08:00",
+  "version": "2.0.3-ct75",
+  "scope": "Application-only deployment with actuator power reported disconnected; two startup checks, no-action HTTP readback and representative raw-zero rejection checks. No physical action or human speech acceptance.",
+  "device_matches_previous_deployment": true,
+  "flash": {
+    "path": "build/firmware-ct75/xiaozhi.bin",
+    "application_verified": true,
+    "config_byte_identical_before_boot": true,
+    "upper_non_app_digest_unchanged": true,
+    "offset": "0x20000",
+    "app_partition_bytes": 4128768,
+    "bytes": 2721488,
+    "sha256": "6e6cf11e9ae1fd59e4280ec249495a8dc1602950a57e08b130ea44883714a8c8",
+    "previous_application": "2.0.3-ct74",
+    "previous_application_backup_verified": true,
+    "full_flash_backup": "not attempted; verified rollback application and separate configuration backup",
+    "rollback_scope": "verified previous application and separate configuration backup"
+  },
+  "configuration": {
+    "all_nvs_records_unchanged": false,
+    "record_count_before": 71,
+    "record_count": 70,
+    "logical_entry_count_before": 59,
+    "logical_entry_count": 59,
+    "saved_network_count": 2,
+    "saved_wifi_and_user_config_unchanged": true,
+    "startup_websocket_token_refreshed": true,
+    "phy_calibration_data_changed": true,
+    "phy_calibration_bytes_before": 1904,
+    "phy_calibration_bytes_after": 1904,
+    "semantic_changed_keys": [
+      "phy/cal_data",
+      "websocket/token"
+    ],
+    "nvs_crc_valid": true,
+    "pre_application_region_byte_identical_after_boot": false,
+    "non_nvs_pre_application_bytes_unchanged_after_boot": true,
+    "scope": "First ct75 boot snapshot only. Blob indices select and order current chunks before value comparison. No values exported. Second restart checked separately.",
+    "initial_check": "Token-only allowance failed; original log retained. PHY calibration contents changed as well as chunk layout; not described as mere compaction.",
+    "phy_change_cause": "Not established; esp_phy SDK owns this runtime calibration key. No RF quality or calibration acceptance claim."
+  },
+  "platform_role": {
+    "observed_at": "2026-11-01T08:47:00.420Z",
+    "scope": "Read-only visible role configuration; no save or model request",
+    "characters": 5991,
+    "sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "visible_text_sha256": "083f61b0d1d33aae499aa62ca42e6be16e2c07cbf18e69e6fb4c073cbd3b04d9",
+    "matches_repository": true,
+    "model_label": "deepseek-v4-flash",
+    "configuration_modified": false,
+    "normalization": "Repository role text has one terminal LF; UI textarea omits that LF.",
+    "association_note": "Reuses the timestamped ct74 read-only platform observation; role source is unchanged. No fresh platform readback or save during ct75 deployment."
+  },
+  "startup": [
+    {
+      "time": "2026-11-01T17:07:50.531270+08:00",
+      "firmware": "2.0.3-ct75"
+    },
+    {
+      "time": "2026-11-01T17:07:50.532685+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-11-01T17:07:50.532804+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-11-01T17:07:50.536945+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-11-01T17:07:50.538051+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-11-01T17:07:58.511496+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-11-01T17:07:58.576367+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-11-01T17:07:59.503416+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "restart_startup": [
+    {
+      "time": "2026-11-01T17:10:48.390530+08:00",
+      "firmware": "2.0.3-ct75"
+    },
+    {
+      "time": "2026-11-01T17:10:48.390849+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-11-01T17:10:48.390882+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-11-01T17:10:48.398103+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-11-01T17:10:48.401320+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-11-01T17:10:56.274970+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-11-01T17:10:56.331997+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-11-01T17:10:57.265700+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "http": {
+    "initial_samples": 10,
+    "restart_samples": 10,
+    "source_page_matches": true,
+    "starts_this_boot": 0,
+    "logical_outputs_all_off": true,
+    "session_released_after_each_capture": true,
+    "evidence": "docs/validation/evidence/ct75-deployment/http-readback.json"
+  },
+  "http_zero_admission": {
+    "requests": 22,
+    "state_bearing_responses": 16,
+    "invalid_requests_rejected": 5,
+    "logical_outputs_all_off": true,
+    "starts_this_boot": 0,
+    "draft_preserved_after_rejections": true,
+    "legal_unicode_and_query_cancel_stop_passed": true,
+    "final_session_released": true,
+    "evidence": "docs/validation/evidence/ct75-deployment/http-zero.json"
+  },
+  "user_reported_setup": {
+    "controller_power": "retained",
+    "actuator_power_during_deployment": "still disconnected, confirmed by user",
+    "deployment_authorization": "User explicitly approved ct75 application-only update"
+  },
+  "limitations": [
+    "No full-flash backup attempted; verified ct74 application rollback and fresh 128KiB configuration backup retained privately.",
+    "Initial token-only NVS check failed. Same snapshots show PHY calibration and websocket token changed; all other logical values including saved Wi-Fi/user settings unchanged. No RF calibration quality claim.",
+    "Only first post-boot NVS snapshot compared; second restart is separately observed, not a second semantic configuration check.",
+    "Platform role association reuses timestamped ct74 readback; unchanged source hash verified locally, no new platform readback or save.",
+    "Malformed move/drive/effect requests were not sent; startup and HTTP logical outputs are not physical level or stop timing measurements.",
+    "User-skipped listening checks were not reopened."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "all_nvs_records_unchanged": false,
+  "record_count_before": 71,
+  "record_count": 70,
+  "logical_entry_count_before": 59,
+  "logical_entry_count": 59,
+  "saved_network_count": 2,
+  "saved_wifi_and_user_config_unchanged": true,
+  "startup_websocket_token_refreshed": true,
+  "phy_calibration_data_changed": true,
+  "phy_calibration_bytes_before": 1904,
+  "phy_calibration_bytes_after": 1904,
+  "semantic_changed_keys": [
+    "phy/cal_data",
+    "websocket/token"
+  ],
+  "nvs_crc_valid": true,
+  "pre_application_region_byte_identical_after_boot": false,
+  "non_nvs_pre_application_bytes_unchanged_after_boot": true,
+  "scope": "First ct75 boot snapshot only. Blob indices select and order current chunks before value comparison. No values exported. Second restart checked separately.",
+  "initial_check": "Token-only allowance failed; original log retained. PHY calibration contents changed as well as chunk layout; not described as mere compaction.",
+  "phy_change_cause": "Not established; esp_phy SDK owns this runtime calibration key. No RF quality or calibration acceptance claim."
+}
