@@ -10,7 +10,9 @@ root = Path(__file__).resolve().parents[3]
 build = root / 'build/audio-host'
 s = (a.source/'main/audio/audio_service.cc').read_text()
 parts=[]
-for signature in ('bool AudioService::PushPacketToDecodeQueue(', 'void AudioService::PlaySound(', 'void AudioService::ResetDecoder('):
+for signature in ('bool AudioService::PushPacketToDecodeQueue(', 'void AudioService::PlaySound(',
+                  'void AudioService::ResetDecoder(', 'void AudioService::CancelRangeNotificationsLocked(',
+                  'void AudioService::SetRangeNotificationSuppressed(', 'bool AudioService::PlayRangeBeepIfIdle('):
     start=s.index(signature); end=s.index('\n}',start)+2
     parts.append(s[start:end])
 (build/'priority_audio_methods.inc').write_text('\n'.join(parts))

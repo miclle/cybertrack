@@ -25,10 +25,13 @@ void ProximitySoundTask(void*) {
         const bool stop = event.alert == ProximityGuard::Stop;
         if (event.alert == ProximityGuard::None || now < event.at_ms ||
             now - event.at_ms > (stop ? 1000u : 250u) || (!stop && !beeping.load())) continue;
-        const auto* data = stop ? ProximityStop : ProximityBeep;
-        const auto size = stop ? sizeof(ProximityStop) : sizeof(ProximityBeep);
-        ESP_LOGI("CT_RANGE", "PROXIMITY_TONE kind=%s", stop ? "stop" : "beep");
-        app.GetAudioService().PlaySound(std::string_view(reinterpret_cast<const char*>(data), size), true);
+        if (stop) {
+            ESP_LOGI("CT_RANGE", "PROXIMITY_TONE kind=stop");
+            app.GetAudioService().PlaySound(std::string_view(
+                reinterpret_cast<const char*>(ProximityStop), sizeof(ProximityStop)), true);
+        } else if (app.GetAudioService().PlayRangeBeepIfIdle()) {
+            ESP_LOGI("CT_RANGE", "PROXIMITY_TONE kind=beep");
+        }
     }
 }
 }

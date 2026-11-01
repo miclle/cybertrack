@@ -1,0 +1,38 @@
+{
+  "version": "2.0.3-ct74",
+  "date": "2026-11-01T08:26:20.492750+00:00",
+  "last_recorded_application": "2.0.3-ct73",
+  "flashed": false,
+  "scope": "Ordinary proximity beeps only during audio-idle state; queued ordinary PCM cancelled for conversation/cloud packets; critical stop alert priority and all action/distance policies unchanged. Candidate not deployed.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "path": "build/firmware-ct74/xiaozhi.bin",
+    "bytes": 2721328,
+    "sha256": "28606ac3c771ca650faf4297d9353e86c05bd2efdc50e2b285df5817d8522cb5"
+  },
+  "source_sha256": {
+    "apply_overlay.py": "80eb8a7d8ba3569959a8214258074c221e7ea726ff1d6e102a281d0464efaa56",
+    "audio_overlay.py": "10b25a48b4e0997f63fd5ffd87396aeb0658df1338cd546bd9df13125f262373",
+    "proximity_audio.cc": "fa85b1de93480534c263de064bee429e6d1acfbf2a6f4b91dff7cac6ebc2388a",
+    "range_notification.h": "b5dbfa9f6a6f66c58f5dec2aa209ff63b20e3b56c82e638763f0c44888d3f442",
+    "tests/priority_audio_test.cc": "794d808867c9abee1d0b13717e94a644fbb07849971cb4fe6f36c83ebcf174d9",
+    "tests/proximity_audio_stub.h": "0813eb2d4b34132ba3ea8ea44ee2c321e850b777d8deeb00c9019d1e2005b4c5",
+    "tests/proximity_audio_test.cc": "028b8a38e516f35fb0ff885c36d5103acf1fdda9da8bf10e155cb0410f030931",
+    "tests/run_audio_tests.py": "d44873abe758d301b4ec7949bf0c688a2678e4fbe5e914b80abfe76c1e0f10b6"
+  },
+  "checks": [
+    "Complete ESP-IDF build passes.",
+    "Actual exported audio methods pass ASan/UBSan: PCM waveform at five sample rates, idle gating, queued-notification cancellation, cloud-packet preservation, active frame guards and critical priority.",
+    "Tone worker: dialogue suppression, no delayed catch-up, fresh-event resume, critical warning while ordinary notification suppressed."
+  ],
+  "unchanged_control_sources": {
+    "action_outputs.h": "3f26633f9b2b5fa2730c5815a9ff7bc5a593f1c83a0e6230c21e3b6552baf87f",
+    "control_sessions.h": "23dcbc89643d6c07bfa795d9ea3e8a60dda36771e6da061f7f6669e9bcdbe292",
+    "proximity_guard.h": "7fbd647d17e36f83af22ebb1e7c4a32ed344b6a477041a9fa70804f82da499d1"
+  },
+  "pending": [
+    "No ct74 deployment, human listening or codec/DMA latency measurement.",
+    "Intermittent empty-front beeps not reproduced in separate 12s window; raw distance accuracy and physical scene remain unmeasured."
+  ],
+  "unified_software_report": "docs/validation/evidence/ct74-dialogue-beeps/software-checks.json"
+}
