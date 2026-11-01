@@ -1,8 +1,10 @@
 # 产品改进交付核对
 
-核对日期：2026-11-01。对应 [I01–I13 原计划](../improvement-plan.md)；原完成条件保持不变。当前源码与最近记录的设备应用均为 **ct75**，二者由[版本真源](../../firmware/current.json)分别维护。总目标尚未完成。
+核对日期：2026-11-01。对应 [I01–I13 原计划](../improvement-plan.md)；原完成条件保持不变。当前源码为 **ct76 未部署候选**，最近记录的设备应用仍为 **ct75**，二者由[版本真源](../../firmware/current.json)分别维护。总目标尚未完成。
 
 ## 当前结论
+
+- 用户暂缓实机；[ct76 分句改稿门禁](draft-clause-duration.md)已完成反例复现、19 组实际 MCP 主机与完整构建。它阻止跨分句数字掩盖含糊修改，不证明模型语义或播报通过。[4000 字符角色候选](concise-role.md)及 36 条对照集已准备，平台尚未保存或采集。
 
 - ct75 [HTTP 零转义校验](http-zero-admission.md)保留旧版失败，复用 MCP 原始扫描器；完整构建、实际 HTTP 原生回归及[十八组统一检查](evidence/ct75-http-zero/software-checks.json)通过，含 124 项 Python 测试；随后完成[仅应用部署及 22 次无动作 HTTP 检查](ct75-deployment.md)，五类非法请求拒绝、草稿保持与合法查询／取消／空闲停止通过。首启 NVS 的 PHY 校准及连接令牌变化已记录，Wi-Fi／用户设置保持；不增加模型／物理成绩。
 

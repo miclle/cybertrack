@@ -1,6 +1,8 @@
 # 固件能力与接口手册
 
-当前参数核对于 2026-11-01；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码为 [ct75](esp32-audio/verification-ct75.json)，最近记录部署为 ct75；仅应用写入、Wi-Fi／用户设置保持、两次启动与无动作检查见 [startup-ct75.json](esp32-audio/startup-ct75.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+当前参数核对于 2026-11-01；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码为未部署候选 [ct76](esp32-audio/verification-ct76.json)，最近记录部署为 ct75；仅应用写入、Wi-Fi／用户设置保持、两次启动与无动作检查见 [startup-ct75.json](esp32-audio/startup-ct75.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+
+ct76 [分句改稿门禁](../docs/validation/draft-clause-duration.md)不再借用其他分句的量化值解除相对改稿澄清；明确的紧邻时长补充保留，停止入口与工具参数不变。未部署，不作为完整自然语言归属验证。
 
 ct75 在 HTTP JSON 解析前拒绝原始零字节与实际 Unicode 零转义，避免非法操作名、方向或键名被截断为合法前缀；合法查询／停止保留。[证据与边界](../docs/validation/http-zero-admission.md)，已完成[部署及无动作 HTTP 检查](../docs/validation/ct75-deployment.md)，物理及未测分支独立验收。
 
