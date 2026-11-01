@@ -1,6 +1,6 @@
 <h1 align="center">CyberTrack</h1>
 
-<p align="center"><strong>一句话指挥小D转身，一步步编出自己的泡泡剧。</strong></p>
+<p align="center"><strong>一句话让小D动起来，从模型到代码都能亲手改造。</strong></p>
 <p align="center">基于灵矽的开源双履带交互机器人 · 语音互动 · 泡泡剧场 · 3D 打印与模型改造</p>
 
 <p align="center">
