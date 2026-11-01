@@ -1,0 +1,37 @@
+{
+  "scope": "Manual review of retained first-round TTS text and event order; not speaker acceptance",
+  "baseline_process_narration": [
+    "V075",
+    "C001",
+    "C002",
+    "C003",
+    "C005",
+    "C007",
+    "N005"
+  ],
+  "candidate_process_narration": [
+    "V047",
+    "V050",
+    "C006",
+    "N002",
+    "N003",
+    "N006"
+  ],
+  "improvements": {
+    "C005": "No query; one web-confirmation sentence replaces long rule analysis and timeout.",
+    "C001_C002_C003": "Concise saved-change summary instead of version/parameter narration.",
+    "C008": "Asks exact time, no guessed compose; extra get_status remains."
+  },
+  "regressions": {
+    "V047_V050": "New English process text; events show it arrives after stop receipt, not a proven pre-stop delay.",
+    "N002_N006": "New explicit reasoning about negative commands.",
+    "N003": "Wrongly calls direct user utterance background speech and queries status.",
+    "V020": "Limit preserved but redundant execution confirmation added."
+  },
+  "remaining": {
+    "success_silence": "0/14 at platform text/audio level in both groups; shorter confirmations are not silence.",
+    "V075": "Candidate echoes user-stated history as certainty and adds an unsolicited question; no independent memory evidence.",
+    "physical": "No microphone, speaker, robot IO or device timing measurements."
+  },
+  "decision": "Structural preflight improved but narration only shifted/reduced; not a completed voice fix or an adoption decision. Followup plan tests stability."
+}

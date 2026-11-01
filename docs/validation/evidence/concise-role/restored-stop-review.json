@@ -1,0 +1,30 @@
+{
+  "scope": "Input provenance and complete host reply/state reproduction; semantic errors retained, no human/physical acceptance; one recovery check only, not a replacement for candidate failure",
+  "host_input_mode": "simulated_recognized_text",
+  "host_sha256": "e5af840948f9169dc8a482cd4e30085609cee37a7e27023ac3897ad3cb4f1504",
+  "corpus_sha256": "79d1dfa1bcb10712995464bf5ec1387c7f958e0fcbb5bac3c66489dd4de78b40",
+  "cases": 1,
+  "completed": 1,
+  "strict_tool_matches": 1,
+  "tools_before_input": [],
+  "replies_and_final_states_reproduced": true,
+  "results": [
+    {
+      "id": "V047",
+      "completed": true,
+      "strict_tool_match": true,
+      "input_events": 1,
+      "tools_before_input": false,
+      "results": [
+        "ok"
+      ],
+      "starts": 1,
+      "draft_revision": 0,
+      "reply": "动作都停下了，我在这儿等你。"
+    }
+  ],
+  "capture_json_sha256": "373344d1adc6bcc7bc6861dd30605944f777ce94ebc31319c79fd6a526014695",
+  "role_sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+  "logical_outputs_off": true,
+  "stop_receipt_ok": true
+}
