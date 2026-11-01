@@ -41,7 +41,9 @@
     "input_voltage_v": null,
     "driver_supply_voltage_v": null,
     "loaded_rail_waveforms": null,
-    "cause": "unresolved"
+    "cause": "unresolved",
+    "next_step": "Verify local BOOT early stop at 100% under raised-track conditions, then revisit lower PWM startup reliability",
+    "supply_fault_established": false
   },
   "formal_stop_matrix_complete_records_added": 0,
   "limits": [
@@ -50,5 +52,43 @@
     "HTTP first active state was the acceptance reply; subsequent state sampling already saw zero outputs.",
     "No driver fault reported does not prove GPIO/PWM voltage, bridge output or motor effect.",
     "No automatic movement retry, boost adjustment, wiring change, 100% test or new firmware write after reported failure."
-  ]
+  ],
+  "phone_control_followup": {
+    "source": "user_report",
+    "reported_at": "2026-11-01T07:49:46.745536+00:00",
+    "response": "电机没有问题，我用手机打开网页测试是正常的",
+    "phone_control_result": "reported normal",
+    "speed_percent": 100,
+    "held_duration_ms": null,
+    "side_detail": "pending",
+    "meaning": "Normal phone control shifts next diagnosis to parameter/control-path comparison; does not erase first timed-move failure or establish electrical acceptance",
+    "duration_report": "时间很短也能转动",
+    "condition_detail": "Exact hold time and per-side timing not measured"
+  },
+  "hundred_percent_comparison": {
+    "direction": "forward",
+    "duration_ms": 500,
+    "speed_percent": 100,
+    "first_comparison": "accepted but user did not observe; neither physical pass nor fail",
+    "repeat_authorization": "user explicitly requested repeat",
+    "observed_repeat": "one accepted move; both tracks turned then stopped, reported by user",
+    "test_scope": "raised-track functional observation only",
+    "cause_of_60pct_failure": "unresolved; no torque, power or startup-threshold claim"
+  },
+  "boot_stop_diagnostic": {
+    "requested_move_ms": 3000,
+    "speed_percent": 100,
+    "tracks": "raised",
+    "logical_stop_review": {
+      "planned_deadline_uptime_ms": 799407,
+      "first_boot_held_sample_uptime_ms": 797155,
+      "off_sample_precedes_deadline": true,
+      "post_release_samples": 24,
+      "post_release_all_off": true,
+      "post_release_observation_device_ms": 3031,
+      "scope": "HTTP state samples, not measured GPIO edge or mechanical timing"
+    },
+    "physical_observation": "pending_user_report",
+    "formal_case_scope": "single web movement only; not stop-v1 boot_mixed and not full physical coverage"
+  }
 }
