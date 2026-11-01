@@ -18,11 +18,11 @@ def configuration():
 
 
 def verified_source(lock, source):
-    if lock.get("source_mode") == "vendored":
-        provenance = json.loads((source / "UPSTREAM.json").read_text())
-        if provenance["revision"] != lock["revision"] or not (source / "LICENSE").is_file():
-            raise ValueError("Vendored source provenance or license missing")
-        return
+    if not (source / ".git").exists():
+        raise ValueError("SolidCue checkout is missing; run python3 scripts/solidcue.py prepare")
+    top = subprocess.check_output(["git", "rev-parse", "--show-toplevel"], cwd=source, text=True).strip()
+    if Path(top).resolve() != source.resolve():
+        raise ValueError("SolidCue must use its own checkout, separate from CyberTrack history")
     revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=source, text=True).strip()
     dirty = subprocess.check_output(["git", "status", "--porcelain"], cwd=source, text=True)
     if revision != lock["revision"] or dirty:
@@ -44,7 +44,7 @@ def main():
     parser.add_argument("command", choices=("prepare", "check", "start"))
     args = parser.parse_args()
     lock, source, data = configuration()
-    if args.command == "prepare" and not source.exists() and lock.get("source_mode") != "vendored":
+    if args.command == "prepare" and not source.exists():
         source.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(["git", "clone", "--no-checkout", lock["repository"], str(source)], check=True)
         subprocess.run(["git", "checkout", "--detach", lock["revision"]], cwd=source, check=True)

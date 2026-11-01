@@ -1,5 +1,7 @@
 # CyberTrack 模型辅助设计工具
 
+源码入口已改为 [SolidCue 仓库](https://github.com/miclle/solidcue)，CyberTrack 仅保留接入脚本、说明、历史验证记录与截图。当前 [lock.json](lock.json) 固定上游 0.8.0，源码下载到被忽略的 `build/solidcue-src/`，需要仓库访问权限。旧内置 0.9.2 的整机编辑扩展不在该上游版本中；下面的整机能力、截图和验收结果属于旧版本历史记录，不能作为外部版本的能力或验收结论。使用外部版本时请以其文档为准，单实体 STEP 接入脚本仍保留。
+
 在完整机器人模型中选中零件或面，直接描述调整意图，由当前对话定位 FreeCAD 原生对象、执行修改并回读。模型、评论、修改历史和恢复结果保持版本关联。工具属于设计开发流程；机器人日常语音仍直接通过灵矽运行。
 
 ## 模型编辑能力
@@ -25,16 +27,16 @@ python3 scripts/solidcue.py check
 python3 scripts/solidcue.py start
 ```
 
-`prepare` 按锁定版本安装依赖并构建模型设计工具。服务只监听 `127.0.0.1:9473`，不绑定 CLI 对话。整机数据在 `output/solidcue/assembly-data/`；早期单件数据 `output/solidcue/data/` 保留。数据、研究副本、依赖和生成目录不提交。端口已有服务时拒绝替换；`start` 需持续运行，不自动配置开机启动。
+`prepare` 从外部仓库获取锁定版本、安装依赖并构建模型设计工具。服务只监听 `127.0.0.1:9473`，不绑定 CLI 对话。外部版本使用独立数据目录 `output/solidcue/external-data/`；旧整机数据 `output/solidcue/assembly-data/` 与早期单件数据 `output/solidcue/data/` 保留，不交给旧版上游读取或改写。数据、研究副本、依赖和生成目录不提交。端口已有服务时拒绝替换；`start` 需持续运行，不自动配置开机启动。
 
 安装插件：
 
 ```sh
-codex plugin marketplace add "$PWD/tools/model-design"
+codex plugin marketplace add "$PWD/build/solidcue-src"
 codex plugin add cad-comment-lab@cad-comment-local
 ```
 
-若本机同名 marketplace 配置的路径与当前工具目录不符，先执行 `codex plugin marketplace remove cad-comment-local`，再执行上面的命令；原模型数据不会删除。插件技术 ID 沿用，显示名称为 **CyberTrack 模型设计**。升级后按下面步骤重新加载连接，再调用 `open_model` 并展开卡片。升级 UI 后须新开一次卡片；同轮修改和恢复使用同一卡片。
+若本机同名 marketplace 配置的路径与当前工具目录不符，先执行 `codex plugin marketplace remove cad-comment-local`，再执行上面的命令；原模型数据不会删除。插件技术 ID 沿用，显示名称以 SolidCue 上游版本为准。升级后按下面步骤重新加载连接，再调用 `open_model` 并展开卡片。升级 UI 后须新开一次卡片；同轮修改和恢复使用同一卡片。
 
 本地插件重载：等待当前操作保存后，使用 `⌘Q` 完全退出承载 Codex 的 ChatGPT 桌面应用，再重新打开并回到原对话；只关闭窗口不算退出。保持 FreeCAD 打开，不需要卸载插件或删除研究数据。若模型服务运行在应用管理的终端中，退出应用可能结束服务；重开后先检查 `127.0.0.1:9473`，确认没有服务监听时再运行 `python3 scripts/solidcue.py start`，沿用原数据目录。此流程依据 [OpenAI 本地插件说明](https://developers.openai.com/plugins/build/plugins#install-a-local-plugin-manually)；当前 CLI 的 `codex plugin`／`codex mcp` 没有 `reload` 子命令。返回对话后先核对工具描述与当前文档版本，再新开模型卡片；旧卡片仍可能保留旧 UI。
 
@@ -44,7 +46,7 @@ node scripts/check_solidcue_plugin.mjs
 
 此命令核对安装缓存、13 个工具、UI 资源及实际服务路径，只做协议检查，不代替真实卡片验收。
 
-## 整机研究流程
+## 整机研究流程（旧内置版本历史记录）
 
 | 在零件上写评论 | 查看修改与撤销记录 |
 | --- | --- |
@@ -79,9 +81,9 @@ node scripts/check_solidcue_sync.mjs <study_directory>
 统一入口：`python3 scripts/verify_improvements.py --model-design`；已有 ct45 准备树时加 `--source build/xiaozhi-ct45-src`。报告包含每项退出码、日志和工具源码哈希，不自动安装依赖，也不连接实际设计服务。下列命令可单独运行对应检查：
 
 ```sh
-npm --prefix tools/model-design test
-npm --prefix tools/model-design run test:bundle
-npm --prefix tools/model-design run test:ui
+npm --prefix build/solidcue-src test
+npm --prefix build/solidcue-src run test:bundle
+npm --prefix build/solidcue-src run test:ui
 ```
 
 0.9.2 编译与 29 项模型／内核／同步／传输测试通过；打包、合成宿主界面和已安装插件检查通过。整机协议覆盖旧版本、错误目标、网格篡改、非目标改变及恢复；压缩预览按 geometry key 缓存，普通轮询不重复传输整机网格。
