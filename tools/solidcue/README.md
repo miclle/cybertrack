@@ -1,12 +1,12 @@
 # CyberTrack 模型辅助设计工具
 
-源码入口已改为 [SolidCue 仓库](https://github.com/miclle/solidcue)，CyberTrack 仅保留接入脚本、说明、历史验证记录与截图。当前 [lock.json](lock.json) 固定上游 0.8.0，源码下载到被忽略的 `build/solidcue-src/`，需要仓库访问权限。旧内置 0.9.2 的整机编辑扩展不在该上游版本中；下面的整机能力、截图和验收结果属于旧版本历史记录，不能作为外部版本的能力或验收结论。使用外部版本时请以其文档为准，单实体 STEP 接入脚本仍保留。
+模型辅助设计工具从 CyberTrack 中拆出，现由 [SolidCue](https://github.com/miclle/solidcue) 独立维护。CyberTrack 保留接入脚本、说明、历史验证记录与截图。整机快照、研究副本位置修改与恢复、场景校验、材质归档保全和压缩预览已迁回 SolidCue 0.9.3；具体提交由 [lock.json](lock.json) 固定。源码下载到被忽略的独立 checkout `build/solidcue-src/`，需要仓库访问权限，不进入 CyberTrack Git。单实体 STEP 接入继续保留。
 
 在完整机器人模型中选中零件或面，直接描述调整意图，由当前对话定位 FreeCAD 原生对象、执行修改并回读。模型、评论、修改历史和恢复结果保持版本关联。工具属于设计开发流程；机器人日常语音仍直接通过灵矽运行。
 
 ## 模型编辑能力
 
-CyberTrack 模型辅助设计工具可以预览整机、定位零件，并在研究副本上调整和恢复零件位置。每次修改后，工具会与基线模型比对，核查其他零件的位置与几何。实现见[工具源码](../model-design/README.md)。
+CyberTrack 模型辅助设计工具可以预览整机、定位零件，并在研究副本上调整和恢复零件位置。每次修改后，工具会与基线模型比对，核查其他零件的位置与几何。实现及通用用法见 [SolidCue 整机接入](https://github.com/miclle/solidcue/blob/main/docs/freecad-assembly.md)。
 
 原生 FCStd 是几何依据。两条接入路径分别记录证据：
 
@@ -27,7 +27,9 @@ python3 scripts/solidcue.py check
 python3 scripts/solidcue.py start
 ```
 
-`prepare` 从外部仓库获取锁定版本、安装依赖并构建模型设计工具。服务只监听 `127.0.0.1:9473`，不绑定 CLI 对话。外部版本使用独立数据目录 `output/solidcue/external-data/`；旧整机数据 `output/solidcue/assembly-data/` 与早期单件数据 `output/solidcue/data/` 保留，不交给旧版上游读取或改写。数据、研究副本、依赖和生成目录不提交。端口已有服务时拒绝替换；`start` 需持续运行，不自动配置开机启动。
+`prepare` 从外部仓库获取锁定版本、安装依赖并构建模型设计工具。服务只监听 `127.0.0.1:9473`，不绑定 CLI 对话。外部版本使用独立数据目录 `output/solidcue/external-data/`；旧整机数据 `output/solidcue/assembly-data/` 与早期单件数据 `output/solidcue/data/` 保留，不在升级时自动导入或改写。数据、研究副本、依赖和生成目录不提交。端口已有服务时拒绝替换；`start` 需持续运行，不自动配置开机启动。
+
+已有旧 checkout 时，先用 `git -C build/solidcue-src status --short` 检查并保留本地修改；确认干净后从该独立仓库 fetch，并 checkout 到 `lock.json` 的 `revision`，再运行 `prepare`。脚本遇到版本不符会拒绝，不会自动重置已有源码。
 
 安装插件：
 
@@ -46,7 +48,9 @@ node scripts/check_solidcue_plugin.mjs
 
 此命令核对安装缓存、13 个工具、UI 资源及实际服务路径，只做协议检查，不代替真实卡片验收。
 
-## 整机研究流程（旧内置版本历史记录）
+## 整机研究流程
+
+下图沿用旧内置 0.9.2 的实际截图；0.9.3 迁回验证见后文，不将旧截图当成新版本桌面验收。
 
 | 在零件上写评论 | 查看修改与撤销记录 |
 | --- | --- |
@@ -54,14 +58,14 @@ node scripts/check_solidcue_plugin.mjs
 | 点选冠盖表面，在评论里写明移动方向、距离和要观察的装配关系。 | 打开“历史”，可从冠盖的修改记录回看来源评论，核对修改和撤销各自对应的版本。 |
 
 1. 执行 `python3 scripts/prepare_model_study.py`，取得带原文件哈希的独立整机副本。
-2. 通过 FreeCAD MCP 打开返回的 `study` 文件。核对路径后添加字符串属性 `CyberTrackStudySource`，值为原始 FCStd 绝对路径；保存研究副本，不能把标记加到正式模型。
+2. 通过 FreeCAD MCP 打开返回的 `study` 文件。核对路径后添加字符串属性 `SolidCueStudySource`，值为原始 FCStd 绝对路径；保存研究副本，不能把标记加到正式模型。旧 `CyberTrackStudySource` 标记仍兼容；两者同时存在时必须指向同一来源。
 3. 用 `get_state.cadBridge.assemblyAdapterScript` 加载 `assembly_bridge.py`。`export_assembly(document_name, inbox, unique_snapshot_id)` 导出当前可见整机，包含网格、来源指纹和原生 FCStd 副本；生产文件不覆盖。
 4. 在空白设计文档调用 `sync_cad_snapshot(mode=attach)`。在真实卡片点选目标、填写评论；核对文档、版本、评论 ID/hash、原生 UID 与 fingerprint。
 5. `edit_placement(document_name, document_uid, object_name, expected_fingerprint, changes, inbox, baseline_snapshot_id, unique_snapshot_id)` 只接受明确的绝对毫米坐标。它校验整个原生场景基线；以事务修改，导出失败则回滚。
 6. 调用 `sync_cad_snapshot(mode=edit, commentId, sha256)` 发布。服务核对目标、所有非目标零件、网格／FCStd 哈希及面索引；相同卡片更新并清除旧选择。
 7. `undo_placement(document_name, document_uid, inbox, edit_snapshot_id, unique_snapshot_id)` 恢复原生位置，再调用 `sync_cad_snapshot(mode=undo, operationId)`。恢复必须匹配原始整机指纹；不能只切换旧预览。
 
-同步超时或结果不明确时，先读 `get_state.cadSnapshotId`，不能盲目重复原生修改。整机 STEP 请从 FreeCAD 导出；整机预览不会提供未经验证的 STEP 下载。
+同步超时或结果不明确时，先读 `get_state.model.cadSnapshotId`，不能盲目重复原生修改。整机 STEP 请从 FreeCAD 导出；整机预览不会提供未经验证的 STEP 下载。
 
 ## 单实体研究与历史证据
 
@@ -81,10 +85,19 @@ node scripts/check_solidcue_sync.mjs <study_directory>
 统一入口：`python3 scripts/verify_improvements.py --model-design`；已有 ct45 准备树时加 `--source build/xiaozhi-ct45-src`。报告包含每项退出码、日志和工具源码哈希，不自动安装依赖，也不连接实际设计服务。下列命令可单独运行对应检查：
 
 ```sh
+npm --prefix build/solidcue-src run typecheck
 npm --prefix build/solidcue-src test
+npm --prefix build/solidcue-src run test:geometry
+npm --prefix build/solidcue-src run test:assembly
 npm --prefix build/solidcue-src run test:bundle
 npm --prefix build/solidcue-src run test:ui
 ```
+
+[0.9.3 迁回验证](verification-migration-20261101.json)：类型检查、30 项 Node 测试、11 项几何内核测试、3 项研究副本／归档测试、5 项原生 FreeCAD 测试及插件 bundle／合成宿主 UI 回归通过。使用 198 件真实模型的临时研究副本完成冠盖 Z=0 → 1 → 0 mm、保存重开和恢复；其余 197 件与正式模型不变。隔离 HTTP 服务接入这些原生快照完成 r2 → r3 → r4，验证压缩传输、缓存命中／失效和整机 STEP 导出拒绝。新快照采用 `solidcue-assembly/v1`，旧协议仍可读取。
+
+本轮没有安装或替换正在使用的插件，没有新增 0.9.3 真实桌面消息与 GUI 外观验收。以下 2026-10-31 记录属于旧内置版本，保留其原始范围和截图。
+
+### 旧内置版本验收记录
 
 0.9.2 编译与 29 项模型／内核／同步／传输测试通过；打包、合成宿主界面和已安装插件检查通过。整机协议覆盖旧版本、错误目标、网格篡改、非目标改变及恢复；压缩预览按 geometry key 缓存，普通轮询不重复传输整机网格。
 
