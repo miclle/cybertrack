@@ -88,7 +88,38 @@
       "post_release_observation_device_ms": 3031,
       "scope": "HTTP state samples, not measured GPIO edge or mechanical timing"
     },
-    "physical_observation": "pending_user_report",
+    "physical_observation": {
+      "source": "user_report",
+      "response": "立即停下，松开后未恢复",
+      "reported_at": "2026-11-01T07:59:01.758950+00:00",
+      "outcome": "passed_raised_boot_functional_observation",
+      "mechanical_stop_ms": null,
+      "stale_action_physically_resumed": false,
+      "limits": "Immediate is subjective; no measured mechanical stop latency"
+    },
     "formal_case_scope": "single web movement only; not stop-v1 boot_mixed and not full physical coverage"
+  },
+  "human_voice_left": {
+    "expected_utterance": "你好小智，左转一秒",
+    "user_report": "已唤醒，有左转并停止，无播报",
+    "human_functional_result": "passed",
+    "HTTP_window_move_samples": 0,
+    "HTTP_window_start_delta": 0,
+    "alignment": "User report received after fixed sampling window; exact action/STT/RPC alignment not captured",
+    "original_model_scores_changed": false
+  },
+  "human_nonaction_batch": {
+    "backend_transcripts_verified": 3,
+    "HTTP_samples": 412,
+    "HTTP_start_delta": 0,
+    "HTTP_all_outputs_off": true,
+    "replies": "platform-human-nonaction.json",
+    "remaining_findings": [
+      "Redundant ending after negative input",
+      "Idle state claim without visible fresh robot status query",
+      "Battery query used generic device-status tool; no battery percentage fabricated"
+    ],
+    "playback_issue": "User reports stuttering on ESP32-S3 while proximity beeps audible",
+    "formal_model_grades_changed": false
   }
 }

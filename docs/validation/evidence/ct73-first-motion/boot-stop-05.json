@@ -8224,9 +8224,13 @@
   "serial_control_events": [],
   "logic_error": null,
   "physical_observation": {
-    "outcome": "pending_user_report",
+    "source": "user_report",
+    "response": "立即停下，松开后未恢复",
+    "reported_at": "2026-11-01T07:59:01.758950+00:00",
+    "outcome": "passed_raised_boot_functional_observation",
     "mechanical_stop_ms": null,
-    "stale_action_physically_resumed": null
+    "stale_action_physically_resumed": false,
+    "limits": "Immediate is subjective; no measured mechanical stop latency"
   },
   "mechanical_stop_ms": null,
   "output_off_measured_ms": null,

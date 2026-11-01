@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-11-01T08:11:20.601Z",
+  "source": "Rendered CyberTrack chat-history dialog; requested real-device session 2026-11-01 16:03",
+  "scope": "Visible transcript/tool entries only; no raw audio, credentials or full backend event stream",
+  "cases": [
+    {
+      "id": "HV02",
+      "user_text": "不要前进。",
+      "time": "2026-11-01 16:03:03",
+      "replies": [
+        "好，不前进，",
+        "我不会动的。",
+        "有什么需要帮忙的尽管说。"
+      ],
+      "visible_tools": [],
+      "review": "No action request visible; redundant customer-service ending remains."
+    },
+    {
+      "id": "HV03",
+      "user_text": "你现在在做什么？",
+      "time": "2026-11-01 16:03:10",
+      "replies": [
+        "我在待命，",
+        "目前没有动作在运行，随时听你吩咐。"
+      ],
+      "visible_tools": [],
+      "review": "No fresh robot get_status visible before the state claim; freshness requirement not established."
+    },
+    {
+      "id": "HV04",
+      "user_text": "电量还有多少？",
+      "time": "2026-11-01 16:03:19",
+      "replies": [
+        "电量这个暂时查不到，",
+        "我这边没有电量反馈。"
+      ],
+      "visible_tools": [
+        {
+          "name": "self_get_device_status",
+          "arguments": {},
+          "result_summary": {
+            "audio_speaker": {
+              "volume": 100
+            },
+            "screen": {},
+            "network": {
+              "type": "wifi",
+              "signal": "strong"
+            }
+          },
+          "redacted_fields": [
+            "network.ssid"
+          ],
+          "duration_ms": 161
+        }
+      ],
+      "review": "No fabricated battery percentage; generic device-status tool rather than robot status."
+    }
+  ]
+}
