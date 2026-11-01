@@ -1,0 +1,165 @@
+{
+  "scope": "Offline replay of actual packet sizes/STT/receipts through ct78 VoiceFeedback; no audio decoding or speaker acceptance",
+  "executable_sha256": "530f003caa9db0157f61b211e8980f2ebcb6ae4e6d7ca26bd3f65f443b8224b0",
+  "source_sha256": {
+    "scripts/replay_lingxi_feedback.cc": "aed8412d1e4d6b0f9aa6414432d3f662d6ebfecc9d96489bffe66cea840d5cc2",
+    "firmware/esp32-audio/voice_feedback.h": "d60b1148ab0e0b4a1b28407c37813e5234947bd140a65a18644a121e59f5550c",
+    "firmware/esp32-audio/spoken_playback.h": "1e68fb81c56610d9bb3247928ed52256f375dada98e238d1bf0d84585b1b9403",
+    "firmware/esp32-audio/spoken_effects.h": "00f923192e657a260011c4c80d4ede86aa2b500582e3164ec04940fe5bbf20a4",
+    "firmware/esp32-audio/spoken_duration.h": "03fb4a1b0103442d21370fc167d6df9feeb6ec10ce2fac9cb15b558e882d5281"
+  },
+  "suppressed": 456,
+  "audible": 1353,
+  "results": [
+    {
+      "id": "B01",
+      "suppressed": 10,
+      "audible": 0
+    },
+    {
+      "id": "B02",
+      "suppressed": 0,
+      "audible": 48
+    },
+    {
+      "id": "B03",
+      "suppressed": 0,
+      "audible": 140
+    },
+    {
+      "id": "B04",
+      "suppressed": 0,
+      "audible": 18
+    },
+    {
+      "id": "S01",
+      "suppressed": 0,
+      "audible": 49
+    },
+    {
+      "id": "S02",
+      "suppressed": 76,
+      "audible": 0
+    },
+    {
+      "id": "S03",
+      "suppressed": 0,
+      "audible": 80
+    },
+    {
+      "id": "S04",
+      "suppressed": 0,
+      "audible": 46
+    },
+    {
+      "id": "T01",
+      "suppressed": 38,
+      "audible": 0
+    },
+    {
+      "id": "T02",
+      "suppressed": 22,
+      "audible": 0
+    },
+    {
+      "id": "T03",
+      "suppressed": 40,
+      "audible": 0
+    },
+    {
+      "id": "T04",
+      "suppressed": 0,
+      "audible": 44
+    },
+    {
+      "id": "N01",
+      "suppressed": 0,
+      "audible": 160
+    },
+    {
+      "id": "N02",
+      "suppressed": 0,
+      "audible": 126
+    },
+    {
+      "id": "N03",
+      "suppressed": 0,
+      "audible": 131
+    },
+    {
+      "id": "N04",
+      "suppressed": 0,
+      "audible": 22
+    },
+    {
+      "id": "N05",
+      "suppressed": 0,
+      "audible": 147
+    },
+    {
+      "id": "N06",
+      "suppressed": 0,
+      "audible": 40
+    },
+    {
+      "id": "Q01",
+      "suppressed": 0,
+      "audible": 22
+    },
+    {
+      "id": "A01",
+      "suppressed": 24,
+      "audible": 0
+    },
+    {
+      "id": "A02",
+      "suppressed": 52,
+      "audible": 0
+    },
+    {
+      "id": "A03",
+      "suppressed": 40,
+      "audible": 0
+    },
+    {
+      "id": "A04",
+      "suppressed": 24,
+      "audible": 0
+    },
+    {
+      "id": "A05",
+      "suppressed": 16,
+      "audible": 0
+    },
+    {
+      "id": "D01",
+      "suppressed": 0,
+      "audible": 34
+    },
+    {
+      "id": "D02",
+      "suppressed": 0,
+      "audible": 24
+    },
+    {
+      "id": "R01",
+      "suppressed": 24,
+      "audible": 58
+    },
+    {
+      "id": "R02",
+      "suppressed": 28,
+      "audible": 36
+    },
+    {
+      "id": "R03",
+      "suppressed": 0,
+      "audible": 78
+    },
+    {
+      "id": "R04",
+      "suppressed": 62,
+      "audible": 50
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "frozen_before_capture": true,
+  "case_count": 30,
+  "utterances": 35,
+  "no_retries": true,
+  "model": "deepseek-v4-flash",
+  "settings": {
+    "temperature": 0.7,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_tokens": 500,
+    "thinking": "disabled",
+    "reasoning_effort": "low",
+    "include_usage": true
+  },
+  "platform_role": "Temporarily save candidate for isolated sessions, restore original after capture; no device reboot or deployment",
+  "input": "macOS Tingting 180 wpm -> 16kHz mono Opus -> actual platform STT",
+  "boundaries": [
+    "No microphone/speaker/serial/robot HTTP or actuator IO",
+    "Expected calls never included in model input",
+    "Report incomplete, transcription, calls, control states and speech separately",
+    "Followups share one WSS session and continuous host timeline",
+    "No replacement of original fixed-corpus scores"
+  ],
+  "sha256": {
+    "docs/validation/evidence/ct78-voice-regression/tools.json": "3db9b8066a7cb9049b33bbe4fb07aad7e6324b1a8402937be2eb38b95fda251b",
+    "docs/validation/evidence/ct78-voice-regression/host-manifest.json": "41f4f3f24e48bd7a1d41dcac4c50cf5fccc645ce9076b0bc59a2979e8aff0f44",
+    "docs/validation/evidence/ct78-voice-regression/cases.json": "3825ba2138b98dbacca0dd2cf9e5b409b6a297e20a05a71ea633f2aac7540098",
+    "docs/validation/evidence/ct78-voice-regression/candidate-role.txt": "c22dc4b756efd30d129330fd7ea88840833495511d92275a4575790acc97162d"
+  },
+  "capture_source_sha256": "6cedca561aeb4a878d89fb28a19dd02022f62594423b81a010a2a78c30eedf1b"
+}

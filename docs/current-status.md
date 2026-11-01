@@ -1,6 +1,6 @@
 # CyberTrack 当前状态
 
-ct78 为未部署候选；本次只修改仓库与本地构建。历史编排和草稿检查不再作为当前功能或验收任务。最近设备部署仍为 ct77。[退役记录](validation/theatre-removal.md)
+ct78 为未部署候选，最近设备部署仍为 ct77。已完成新角色与 11 个工具的[无实物语音回归](validation/ct78-voice-regression.md)：35 轮全部结束，严格匹配 33/35；明确时长错误及漏调停止保留为上线阻塞。测试后已恢复原平台角色，无刷写或设备重启。历史编排不再作为当前功能或验收任务。[退役记录](validation/theatre-removal.md)
 
 核对日期：2026-11-01。机器可读版本入口为 [firmware/current.json](../firmware/current.json)，检查命令 `python3 scripts/check_firmware_current.py`。`last_recorded_deployment` 保留应用部署记录，独立的 `last_recorded_role_sync` 记录角色回读关联或后续纯角色同步，避免将重启冒充烧录。检查器核对源码版本与构建记录，以及角色同步所对应的已部署版本。可用下列命令分别核对两份本地应用文件的字节数和 SHA-256。省略参数时只检查记录；两种方式均离线运行。
 

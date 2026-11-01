@@ -1,0 +1,112 @@
+{
+  "date": "2026-11-01",
+  "decision": "candidate_not_ready_for_deployment",
+  "firmware_version": "2.0.3-ct78",
+  "recorded_device_version": "2.0.3-ct77",
+  "host_sha256": "8142dd89326f34d56195a62fe34bb9aeaae8eaa14f4880a2f0ffbc2aa4ee0479",
+  "role_sha256": "c22dc4b756efd30d129330fd7ea88840833495511d92275a4575790acc97162d",
+  "scenario_count": 30,
+  "utterances": 35,
+  "completed": 35,
+  "strict_matches": 33,
+  "failed_cases": [
+    "S01",
+    "T04"
+  ],
+  "recovery_scenarios_passed": 4,
+  "attempts_per_scenario": 1,
+  "platform_role_restored": true,
+  "device_operations": false,
+  "checks": [
+    {
+      "command": "Targeted capture, multi-turn replay and scoring unittest suites",
+      "tests": 22,
+      "exit_code": 0,
+      "evidence": "local-checks.txt"
+    },
+    {
+      "command": "review_voice_scenarios.py against complete capture and pinned ct78 host",
+      "exit_code": 0,
+      "evidence": "review.json"
+    },
+    {
+      "check": "Frozen corpus, tools, role and actual capture source hashes",
+      "passed": true
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/improvements -p test_solution_package.py",
+      "tests": 5,
+      "exit_code": 0
+    },
+    {
+      "check": "Changed documentation relative targets (anchors not checked)",
+      "targets": 200,
+      "passed": true
+    },
+    {
+      "check": "Capture artifacts contain no existing connection credential values",
+      "passed": true
+    }
+  ],
+  "source_sha256": {
+    "scripts/capture_lingxi.py": "6cedca561aeb4a878d89fb28a19dd02022f62594423b81a010a2a78c30eedf1b",
+    "scripts/review_stt_host.py": "f479d46d81fff1d5ee5feb5db2d83b2537ccb3adb3e3f01f8eb561aad7a0ae58",
+    "scripts/review_voice_scenarios.py": "34159eb62c290581c21ec0725b1fe5b513ebea54455371da6c2361a96fb13e66",
+    "tests/improvements/test_lingxi_capture.py": "5908033ba0987a57c5083d449d75bbb26ef5444c511d1c700d04a275d350973d",
+    "tests/improvements/test_firmware_host_capture.py": "6d2a190e958b77205df37337c998d2bf2c21fad0259cc4cb2deae921cb850efd",
+    "tests/improvements/test_stt_host_review.py": "a72595718b3032db12949d3769a205c74bd66402bf3ddc498f2ab82a2cb318fd",
+    "tests/improvements/test_voice_scenarios.py": "4035851919206c8ba64c7c6a8cfa70cf60e493c6982a3089a0e4dd002742e84d"
+  },
+  "files": {
+    "candidate-role.txt": {
+      "bytes": 14398,
+      "sha256": "c22dc4b756efd30d129330fd7ea88840833495511d92275a4575790acc97162d"
+    },
+    "capture.json.gz": {
+      "bytes": 43332,
+      "sha256": "4faecf21f84c8304f015e5fee131bc6152d60bc6443783075a373d7f4ae13d00"
+    },
+    "cases.json": {
+      "bytes": 15845,
+      "sha256": "3825ba2138b98dbacca0dd2cf9e5b409b6a297e20a05a71ea633f2aac7540098"
+    },
+    "host-manifest.json": {
+      "bytes": 4805,
+      "sha256": "41f4f3f24e48bd7a1d41dcac4c50cf5fccc645ce9076b0bc59a2979e8aff0f44"
+    },
+    "local-checks.txt": {
+      "bytes": 297,
+      "sha256": "2470086aba2d0999f71dec9ead1c5648f59a1b71fb546b6528c7e5f3baaa0deb"
+    },
+    "plan.json": {
+      "bytes": 1545,
+      "sha256": "1bc1ba186204de95f153ae01ec7e2594d98dd01a8067f4a3ff916757e073d0e8"
+    },
+    "platform-after-capture.json": {
+      "bytes": 512,
+      "sha256": "7e77d41153d16ba2750f9027ccae3bc9cb99074d474b64c6593ed0d27baa4ea0"
+    },
+    "platform-candidate.json": {
+      "bytes": 477,
+      "sha256": "ba68b5df54e8a11070709ea4c7d976f01b7ebd05eaa8a5a52bba7c9db6b125ba"
+    },
+    "platform-restored.json": {
+      "bytes": 538,
+      "sha256": "e129a2a6da790265138ffcdf0a93898bd1df7e8abe4d7f58b8ba6407d98410f3"
+    },
+    "playback.json": {
+      "bytes": 3132,
+      "sha256": "0478a66cc2dddd2e7ac8e64927166e16e0b10848d62e1244e8ad611de0148337"
+    },
+    "review.json": {
+      "bytes": 55774,
+      "sha256": "50668056346d049aa940c97206407f69630edae943add25e9fb0ce2b1a4116e9"
+    },
+    "tools.json": {
+      "bytes": 14375,
+      "sha256": "3db9b8066a7cb9049b33bbe4fb07aad7e6324b1a8402937be2eb38b95fda251b"
+    }
+  },
+  "capture_json_sha256": "44a535f0331ffd05022ee38b744b18ef298c6dea2d4e3199f6fd4e372a01673e",
+  "scope": "Synthetic Mandarin through actual remote STT/model and real host MCP; no human microphone, speaker or physical acceptance"
+}
