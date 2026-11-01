@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-01",
+  "firmware": "2.0.3-ct73",
+  "conditions": {
+    "tracks": "raised, reported by user",
+    "controller_power": "separate, reported by user",
+    "actuator_power": "motor/water/bubbles restored; ignition disconnected, reported by user"
+  },
+  "not_started_attempt": {
+    "event": "HTTP pair timeout",
+    "action_request_sent": false,
+    "initialization_logs_observed": true,
+    "reset_cause": "not established"
+  },
+  "accepted_attempt": {
+    "direction": "forward",
+    "duration_ms": 500,
+    "speed_percent": 60,
+    "move_requests": 1,
+    "device_result": "accepted",
+    "start_counter_delta": 1,
+    "reply_logical_outputs": {
+      "left": 60,
+      "right": 60,
+      "water": false,
+      "bubbles": false,
+      "ignition": false
+    },
+    "zero_outputs_read_before_explicit_stop": true,
+    "final_stop_result": "ok",
+    "final_session_released": true,
+    "web_speed_restored_to": 100,
+    "boot_stable_during_movement_observation": true,
+    "physical_result": "both tracks stationary, reported by user",
+    "overall_result": "failed"
+  },
+  "diagnostics": {
+    "output_driver_ct45_ct73_identical": true,
+    "meaning": "Does not exclude scheduler, supply, enable signal, wiring or mechanical causes",
+    "input_voltage_v": null,
+    "driver_supply_voltage_v": null,
+    "loaded_rail_waveforms": null,
+    "cause": "unresolved"
+  },
+  "formal_stop_matrix_complete_records_added": 0,
+  "limits": [
+    "Raised-track functional diagnostic, not ground braking or distance acceptance.",
+    "500ms is the requested duration; no independent output or mechanical timing measurement.",
+    "HTTP first active state was the acceptance reply; subsequent state sampling already saw zero outputs.",
+    "No driver fault reported does not prove GPIO/PWM voltage, bridge output or motor effect.",
+    "No automatic movement retry, boost adjustment, wiring change, 100% test or new firmware write after reported failure."
+  ]
+}

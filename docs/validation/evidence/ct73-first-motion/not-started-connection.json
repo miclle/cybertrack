@@ -1,0 +1,35 @@
+{
+  "test_id": "ct73-raised-forward-500ms-60pct-01",
+  "date": "2026-11-01T15:40:43.927838+08:00",
+  "firmware": "2.0.3-ct73",
+  "application_sha256": "a6414595cd933a815603ff5f543dbc5275faacfa90fcd4d783a52f89e3f8e1de",
+  "user_reported_conditions": {
+    "tracks": "raised",
+    "actuator_power": "motor/water/bubbles restored; ignition disconnected",
+    "onsite_ready": true
+  },
+  "request": {
+    "direction": "forward",
+    "duration_ms": 500,
+    "speed_percent": 60
+  },
+  "history": [],
+  "serial_control_events": [
+    {
+      "host_elapsed_ms": 345.920709,
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5\r"
+    },
+    {
+      "host_elapsed_ms": 417.49125,
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000\r"
+    }
+  ],
+  "logic_error": "URLError: <urlopen error timed out>",
+  "physical_observation": "not_run",
+  "mechanical_stop_ms": null,
+  "output_off_measured_ms": null,
+  "stopping_distance_mm": null,
+  "limits": "Host request/HTTP and firmware logs only; not electrical measurement or mechanical timing. User observation pending.",
+  "outcome": "not_started_connection_timeout",
+  "diagnostic_note": "HTTP pair request timed out before an action request. Additional serial observer saw initialization logs; reset cause not established. GET / subsequently returned 200. Following attempt used HTTP only without opening serial."
+}
