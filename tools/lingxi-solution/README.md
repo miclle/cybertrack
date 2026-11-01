@@ -10,7 +10,7 @@ ct78 已移除表演编辑与预览，参考包不再包含离线排演页面。
 
 198 件整机的本地界面与原生位置修改／恢复已有独立记录；整机宿主卡片消息闭环已完成；真实灵矽隔离文本联调及其失败项见[当前角色回归记录](../../docs/validation/lingxi-role-5991.md)，不能将工具准确率替代回复语义通过。家庭体验和硬件验收仍待完成。开发者可从此包开始检查能力契约、运行语义评分器、停止记录分析和电源预算；新增执行器必须在本地设备重新实现与验证，不由复制角色自动获得。
 
-工程修改记录的开始／结束命令依赖完整 CyberTrack Git checkout；本参考包不包含 `.git`。模型辅助设计需另外从 [SolidCue 仓库](https://github.com/miclle/solidcue)获取源码；完整 CyberTrack checkout 中的 `scripts/solidcue.py prepare` 会按锁定版本下载到 `build/solidcue-src/`。本包只含说明、来源、许可证与历史验证记录。测试使用独立临时仓库，不代表实际工程效率样本。
+工程修改记录的开始／结束命令依赖完整 CyberTrack Git checkout；本参考包不包含 `.git`。模型辅助设计已从 CyberTrack 中拆出为 [SolidCue](https://github.com/miclle/solidcue)，使用时从其独立仓库获取源码；完整 CyberTrack checkout 中的 `scripts/solidcue.py prepare` 会按锁定版本下载到 `build/solidcue-src/`。整机扩展及修复已迁回 SolidCue 0.9.3；本包只含说明、锁定引用、来源、许可证与验证记录。测试使用独立临时仓库，不代表实际工程效率样本。
 
 [ct57 完整回归](../../docs/validation/lingxi-ct57-full.md)与历史基线独立保存。包内 `scores` 是历史成绩，`candidate_scores` 是 ct57 工具定义的记录成绩，后者的回执仍由静态隔离夹具提供。
 

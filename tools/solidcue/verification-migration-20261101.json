@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-01",
+  "repository": "https://github.com/miclle/solidcue",
+  "version": "0.9.3",
+  "revision": "3d043881b374e76504ed0979591e7ca104e352cd",
+  "revision_status": "published on SolidCue main",
+  "capabilities": [
+    "native assembly snapshots",
+    "independent placement edit and undo",
+    "whole-scene and non-target validation",
+    "stable fingerprints and baseline meshes",
+    "GUI asset archive order",
+    "gzip preview with versioned cache"
+  ],
+  "compatibility": {
+    "new_schema": "solidcue-assembly/v1",
+    "accepted_legacy_schema": "cybertrack-assembly/v1",
+    "study_marker": "SolidCueStudySource",
+    "accepted_legacy_marker": "CyberTrackStudySource"
+  },
+  "tests": {
+    "typecheck": "pass",
+    "node": {
+      "passed": 30
+    },
+    "geometry": {
+      "passed": 11
+    },
+    "study_and_archive": {
+      "passed": 3
+    },
+    "freecad_native": {
+      "passed": 5
+    },
+    "plugin_bundle": "pass",
+    "synthetic_host_ui": "pass",
+    "installed_plugin": {
+      "status": "not_passed",
+      "reason": "existing installed plugin open_model requires local service on port 9473; connection refused; no installation or service replacement"
+    }
+  },
+  "native_model": {
+    "scope": "real CyberTrack model in temporary FreeCAD headless study; not GUI, desktop host, STEP or physical acceptance",
+    "freecad_version": [
+      "1",
+      "1",
+      "4",
+      "20260928 (Git shallow)",
+      "Unknown",
+      "2026/09/28 13:46:34",
+      "(HEAD detached at 4fd3bf320)",
+      "4fd3bf320d9566a27e60069fc8387448aaa3a094"
+    ],
+    "visible_parts": 198,
+    "target": "PrintCrown",
+    "placement_z_mm": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "unchanged_other_parts": 197,
+    "save_reopen_fingerprint_match": true,
+    "restored_scene_matches": true,
+    "source_sha256": "70e5c08a1e4dab9c48f8f4206f58be9370342f8f4a66495b8dccb4bb5cdd4c23",
+    "source_unchanged": true
+  },
+  "isolated_http": {
+    "scope": "isolated HTTP service using real headless FreeCAD snapshots; synthetic comment; no desktop host acceptance",
+    "parts": 198,
+    "revisions": [
+      "r2",
+      "r3",
+      "r4"
+    ],
+    "compressed_base64_bytes": 5746992,
+    "unchanged_preview_cache": true,
+    "changed_preview_cache_invalidated": true,
+    "restored_scene_matches": true,
+    "assembly_step_exports": 0
+  },
+  "evidence_limits": [
+    "No new 0.9.3 desktop-host message acceptance",
+    "No new GUI appearance acceptance",
+    "No STEP, manufacturing or physical acceptance",
+    "Historical 0.9.2 screenshots retained without relabeling"
+  ],
+  "source_boundary": "Implementation and source tests are maintained only in the independent SolidCue repository; CyberTrack retains references and verification metadata.",
+  "cybertrack_history_check": {
+    "old_source_blobs_checked": 62,
+    "old_source_blobs_present": 0,
+    "reachable_source_paths": 0,
+    "root_readme_and_screenshots": "unchanged",
+    "migrated_source_blobs_checked": 20,
+    "migrated_source_blobs_present": 0
+  },
+  "reference_package_tests": {
+    "passed": 5
+  }
+}
