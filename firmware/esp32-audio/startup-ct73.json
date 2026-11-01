@@ -1,0 +1,134 @@
+{
+  "date": "2026-11-01T15:37:12.231624+08:00",
+  "version": "2.0.3-ct73",
+  "scope": "Application-only deployment with actuator power reported disconnected; two startup checks and non-actuating HTTP readback. No physical action or human speech acceptance.",
+  "device_matches_recorded_ct45": true,
+  "flash": {
+    "path": "build/firmware-ct73/xiaozhi.bin",
+    "application_verified": true,
+    "config_byte_identical_before_boot": true,
+    "upper_non_app_digest_unchanged": true,
+    "offset": "0x20000",
+    "app_partition_bytes": 4128768,
+    "bytes": 2718640,
+    "sha256": "a6414595cd933a815603ff5f543dbc5275faacfa90fcd4d783a52f89e3f8e1de",
+    "previous_application": "2.0.3-ct45",
+    "previous_application_backup_verified": true,
+    "full_flash_backup": "incomplete; not used",
+    "rollback_scope": "verified previous application and separate configuration backup"
+  },
+  "configuration": {
+    "all_nvs_records_unchanged": false,
+    "record_count": 71,
+    "saved_network_count": 2,
+    "saved_wifi_and_user_config_unchanged": true,
+    "startup_websocket_token_refreshed": true,
+    "pre_application_region_byte_identical_after_boot": false,
+    "nvs_crc_valid": true,
+    "scope": "First ct73 boot compared with pre-flash; no values exported"
+  },
+  "platform_role": {
+    "observed_at": "2026-11-01T07:32:01.245Z",
+    "scope": "Read-only visible role configuration; no save or model request",
+    "characters": 5991,
+    "sha256": "7f286df244df131de1271d1fcb0a82c5374998a2590cba7eb099645a4c4d9127",
+    "matches_repository": true,
+    "model_label": "deepseek-v4-flash",
+    "nickname": "小D",
+    "configuration_modified": false,
+    "visible_text_sha256": "083f61b0d1d33aae499aa62ca42e6be16e2c07cbf18e69e6fb4c073cbd3b04d9",
+    "normalization": "Repository role text has one terminal LF; UI textarea omits that LF. Canonical sha256 includes the LF."
+  },
+  "startup": [
+    {
+      "time": "2026-11-01T15:34:41.388983+08:00",
+      "firmware": "2.0.3-ct73"
+    },
+    {
+      "time": "2026-11-01T15:34:41.389385+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-11-01T15:34:41.389465+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-11-01T15:34:41.396082+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-11-01T15:34:41.399318+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-11-01T15:34:49.288758+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-11-01T15:34:49.348418+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-11-01T15:34:49.494576+08:00",
+      "ultrasonic": "PROXIMITY_TONE kind=beep"
+    },
+    {
+      "time": "2026-11-01T15:34:50.476030+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "restart_startup": [
+    {
+      "time": "2026-11-01T15:35:43.226975+08:00",
+      "firmware": "2.0.3-ct73"
+    },
+    {
+      "time": "2026-11-01T15:35:43.227662+08:00",
+      "display": "SSD1306 driver installed"
+    },
+    {
+      "time": "2026-11-01T15:35:43.227732+08:00",
+      "cybertrack": "WATER_PAD_READY pin=18 level=0 output_fault=false sample=after_apply nominal_tick_ms=5"
+    },
+    {
+      "time": "2026-11-01T15:35:43.230024+08:00",
+      "cybertrack": "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000"
+    },
+    {
+      "time": "2026-11-01T15:35:43.233335+08:00",
+      "application_state": "starting"
+    },
+    {
+      "time": "2026-11-01T15:35:51.141045+08:00",
+      "web": "LAN URL observed; address withheld"
+    },
+    {
+      "time": "2026-11-01T15:35:51.201557+08:00",
+      "application_state": "activating"
+    },
+    {
+      "time": "2026-11-01T15:35:52.105623+08:00",
+      "application_state": "idle"
+    }
+  ],
+  "http": {
+    "initial_samples": 10,
+    "restart_samples": 10,
+    "source_page_matches": true,
+    "starts_this_boot": 0,
+    "logical_outputs_all_off": true,
+    "session_released_after_each_capture": true,
+    "evidence": "docs/validation/evidence/ct73-deployment/http-readback.json"
+  },
+  "user_reported_setup": {
+    "controller_power": "separate",
+    "actuator_power_during_deployment": "disconnected by user",
+    "motor_water_bubbles_before_disconnect": "reported normal; not measured"
+  },
+  "limitations": [
+    "Full 16MB read timed out at 180s; no full-flash backup claim. Verified ct45 application rollback and separate 128KiB pre-application backup retained privately.",
+    "Only first post-boot NVS snapshot compared; startup refreshed websocket token, saved Wi-Fi and user values unchanged. Second restart is separately observed, not a second semantic NVS snapshot.",
+    "Logical output state and startup GPIO reports do not measure physical output levels, mechanical stopping, flow, bubbles or safety.",
+    "No actuator commands, ignition/high-voltage test, human microphone, speaker or family acceptance in this deployment."
+  ]
+}
