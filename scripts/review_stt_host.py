@@ -27,7 +27,10 @@ def review(trace, executable):
         if row['initial_profile'] != profile: raise ValueError('initial profile differs from context')
         timeline=row['timeline']
         boundaries=[i for i,event in enumerate(timeline) if event['event']=='input_sent']
-        if len(boundaries)!=1: raise ValueError('requires one input boundary')
+        turns=row.get('turns')
+        if not boundaries or (not turns and len(boundaries)!=1): raise ValueError('requires input boundary')
+        if turns and (len(turns)!=len(boundaries) or [t['input_ms'] for t in turns]!=[timeline[i]['ms'] for i in boundaries]):
+            raise ValueError('turn boundaries differ from inputs')
         sent=timeline[boundaries[0]]['ms']
         events=[event for event in timeline[boundaries[0]+1:] if event['event'] in ('stt','tool_call')]
         calls=row['host_calls']
@@ -57,6 +60,13 @@ def review(trace, executable):
             if 'name' in call:
                 replies.append(firmware_replay(executable,profile,calls[:i+1],await_stt=True)[-2])
         final=firmware_replay(executable,profile,[*calls,dict(inspect_ms=row['host_inspect_ms'])],await_stt=True)[-1]
+        for turn in turns or []:
+            if turn.get('completed'):
+                elapsed=turn['end_ms']-sent
+                end=next((i for i,e in enumerate(events) if e['ms']>turn['end_ms']),len(events))
+                prefix=calls[:end]
+                state=firmware_replay(executable,profile,[*prefix,dict(inspect_ms=elapsed)],await_stt=True)[-1]
+                if state!=turn['host_state']: raise ValueError('turn state differs from replay')
         if replies!=row.get('host_rpc_replies',[]) or final!=row['host_final_state']:
             raise ValueError('captured MCP reply or final state differs from closed-host replay')
         results.append(dict(id=row['id'],completed=row['completed'],stt=stt,tools_before_nonempty_stt=early,

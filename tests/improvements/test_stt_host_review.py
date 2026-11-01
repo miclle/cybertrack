@@ -68,5 +68,22 @@ class SttReviewTests(unittest.TestCase):
             if change=='missing':row['timeline'].pop(2)
             with self.subTest(change=change),self.assertRaises(ValueError):review.review(trace,self.binary)
 
+    def test_multi_turn_state_and_shared_clock_are_replayed(self):
+        row=self.trace['results'][0]
+        row['timeline'] += [dict(event='tts_stop',ms=2),dict(event='input_sent',ms=3),
+                            dict(event='stt',ms=4,text='停止'),dict(event='tool_call',ms=5,name='self.tank.stop'),
+                            dict(event='tts_stop',ms=6)]
+        stop=dict(name='self.tank.stop',arguments={})
+        row['calls'].append(stop)
+        row['host_calls'] += [dict(input_text='停止',elapsed_ms=4),dict(**stop,rpc_id=4,elapsed_ms=5)]
+        row['host_rpc_replies'].append(self.wire)
+        row['host_inspect_ms']=6
+        row['turns']=[dict(input_ms=0,end_ms=2,completed=True,host_state=self.final),
+                      dict(input_ms=3,end_ms=6,completed=True,host_state=self.final)]
+        self.assertTrue(review.review(self.trace,self.binary)['replies_and_final_states_match'])
+        row['turns'][1]['host_state']={'tampered':True}
+        with self.assertRaisesRegex(ValueError,'turn state'):
+            review.review(self.trace,self.binary)
+
 
 if __name__=='__main__':unittest.main()
