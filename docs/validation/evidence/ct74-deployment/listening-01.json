@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-11-01T08:50:24.985291+00:00",
+  "firmware": "2.0.3-ct74",
+  "source": "user_field_report",
+  "user_response": "空闲有滴声，监听／回复时滴声暂缓； 回复不卡顿",
+  "requested_setup": {
+    "actuator_power": "remain disconnected",
+    "phone_control_page": "closed",
+    "target_distance_cm": [
+      35,
+      45
+    ],
+    "utterance": "你叫什么名字？"
+  },
+  "measured_distance_cm": null,
+  "synchronized_device_distance": null,
+  "observations": {
+    "idle_beeps_audible": true,
+    "ordinary_beeps_deferred_during_listening_and_reply": true,
+    "reply_stuttering_reported": false
+  },
+  "scope": "One subjective near-target dialogue observation; not synchronized audio, ASR, range or codec/DMA measurement",
+  "pending": [
+    "Resume on current near distance after returning to idle",
+    "Move target away during conversation and verify no stale/catch-up beep",
+    "New near target can trigger subsequent idle beep",
+    "Intermittent empty-front beep diagnosis",
+    "Critical stop alarm and physical stopping acceptance"
+  ]
+}
