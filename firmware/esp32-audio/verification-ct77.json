@@ -1,0 +1,59 @@
+{
+  "version": "2.0.3-ct77",
+  "date": "2026-11-01",
+  "last_recorded_application": "2.0.3-ct75",
+  "flashed": false,
+  "scope": "Require three distinct fresh near samples for ordinary range audio; raw immediate forward protection and dialogue audio gating preserved. No device operations.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "path": "build/firmware-ct77/xiaozhi.bin",
+    "bytes": 2722080,
+    "sha256": "cbbbe5d199ff0a6884f8a3c0a81d5a3359dc19a00ce7aeaa7d8a55a2ad810391"
+  },
+  "source_sha256": {
+    "apply_overlay.py": "ab0f44b57c22a8201189c957f0dbc564d1ddf67faac465b1a773a32a1c703d77",
+    "proximity_guard.h": "22c28dd869157e167b162b02af7fef767fdf0588085a6e7ee2feda0af2012a97",
+    "tests/proximity_test.cc": "8b274384d4a81d550dbdb5906e393098995e5fb1ed5eee0e2faaf94c673ded32"
+  },
+  "checks": [
+    {
+      "command": "sh firmware/esp32-audio/test.sh",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct77-range-confirmation/host-tests.txt"
+    },
+    {
+      "command": "python3 firmware/esp32-audio/tests/run_audio_tests.py --source build/xiaozhi-ct77-src",
+      "exit_code": 0,
+      "evidence": "docs/validation/evidence/ct77-range-confirmation/audio-tests.txt"
+    },
+    {
+      "command": "idf.py -C build/xiaozhi-ct77-src -B build/firmware-ct77 build",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/check_firmware_current.py --source-bin build/firmware-ct77/xiaozhi.bin --deployed-bin build/firmware-ct75/xiaozhi.bin",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/improvements -p 'test_firmware_current.py'",
+      "exit_code": 0,
+      "tests": 1
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/improvements -p 'test_solution_package.py'",
+      "exit_code": 0,
+      "tests": 5
+    },
+    {
+      "check": "Modified Markdown relative link targets",
+      "targets": 345,
+      "passed": true
+    }
+  ],
+  "pending": [
+    "Device deployment and actual listening",
+    "Cause of occasional near readings in an open area; persistent false near readings remain possible",
+    "Physical stopping performance"
+  ],
+  "exported_header_sha256": "22c28dd869157e167b162b02af7fef767fdf0588085a6e7ee2feda0af2012a97"
+}

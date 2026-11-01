@@ -42,7 +42,7 @@ int main() {
             assert(is(sessions.VoicePlan(0,sessions.VoiceClaim(0,1,G::PlanMode),plan),"accepted"));
         }
         sensor=reading(100,10); TickLocked(10);
-        assert(guard.Moving() && guard.Watering() && !guard.forward_blocked && sound_enabled && sound_event==P::None);
+        assert(guard.Moving() && guard.Watering() && !guard.forward_blocked && !sound_enabled && sound_event==P::None);
         assert(is(sessions.WebAutoAvoidance(10,owner+1,2,sessions.window,true),"session_expired"));
         assert(!sessions.auto_avoidance_enabled);
         assert(sessions.Heartbeat(20,owner));
@@ -71,80 +71,104 @@ int main() {
         assert(s.Acquire(2) && s.auto_avoidance_enabled);
         s.WifiLink(3,false); assert(s.auto_avoidance_enabled);
     }
-    P p;
-    assert(p.Update(reading(500,0),0,true,true)==P::None);
-    assert(p.Update(reading(499,1),1,true,true)==P::Beep && p.beeping && !p.blocked);
-    assert(p.Update(reading(400,800),800,true,true)==P::None);
-    assert(p.Update(reading(400,801),801,true,true)==P::Beep);
-    assert(p.Update(reading(399,1200),1200,true,true)==P::None);
-    assert(p.Update(reading(150,1201),1201,true,true)==P::Beep && !p.blocked);
-    assert(p.Update(reading(149,1202),1202,true,true)==P::Stop && p.blocked && !p.beeping);
-    for (unsigned mm : {149u,150u,199u}) assert(p.Update(reading(mm,1300),1300,false,true)==P::None && p.blocked);
-    auto invalid = reading(1000,1400); invalid.error = ultrasonic::Error::NoEcho;
-    assert(p.Update(invalid,1400,false,true)==P::None && p.blocked);
-    assert(p.Update(reading(1000,1400),1901,false,true)==P::None && p.blocked);
-    assert(p.Update(reading(1000,2000),1999,false,true)==P::None && p.blocked);
-    assert(p.Update(reading(200,2000),2000,false,true)==P::Beep && !p.blocked);
-    assert(p.Update(reading(149,2100),2100,false,true)==P::None && p.blocked);
-    { // 15 cm is an exclusive stop threshold; the former 30 cm zone remains passable.
-        P closer;
-        assert(closer.Update(reading(300,0),0,true,true)==P::Beep && !closer.blocked);
-        assert(closer.Update(reading(200,400),400,true,true)==P::Beep && !closer.blocked);
-        assert(closer.Update(reading(150,800),800,true,true)==P::Beep && !closer.blocked);
-        assert(closer.Update(reading(149,801),801,true,true)==P::Stop && closer.blocked);
-        assert(closer.Update(reading(199,900),900,false,true)==P::None && closer.blocked);
-        assert(closer.Update(reading(200,1000),1000,false,true)==P::None && !closer.blocked);
-        assert(closer.Update(reading(150,1100),1100,false,true)==P::None && !closer.blocked);
+    { // Isolated and paired near spikes never sound; repeated ticks are not samples.
+        P p;
+        for (uint64_t base : {0u, 1000u, 2000u}) {
+            assert(p.Update(reading(499,base),base,false,false)==P::None && !p.beeping);
+            for (uint64_t t=base+5; t<base+100; t+=5)
+                assert(p.Update(reading(499,base),t,false,false)==P::None && !p.beeping);
+            assert(p.Update(reading(399,base+100),base+100,false,false)==P::None && !p.beeping);
+            assert(p.Update(reading(500,base+200),base+200,false,false)==P::None && !p.beeping);
+        }
+        assert(p.Update(reading(499,3000),3000,false,false)==P::None);
+        assert(p.Update(reading(450,3100),3100,false,false)==P::None);
+        assert(p.Update(reading(400,3200),3200,false,false)==P::Beep && p.beeping);
+        for (uint64_t t=3300; t<4000; t+=100)
+            assert(p.Update(reading(400,t),t,false,false)==P::None && p.beeping);
+        assert(p.Update(reading(400,4000),4000,false,false)==P::Beep);
+        assert(p.Update(reading(399,4300),4300,false,false)==P::None);
+        assert(p.Update(reading(399,4400),4400,false,false)==P::Beep);
+        assert(p.Update(reading(500,4401),4401,false,false)==P::None && !p.beeping);
+    }
+    { // Every invalid/far snapshot resets confirmation, even after beeping began.
+        auto invalid=reading(100,300); invalid.error=ultrasonic::Error::NoEcho;
+        auto unsampled=reading(100,300); unsampled.sampled=false;
+        for (const auto& interrupted : {invalid, unsampled, reading(19,300), reading(4001,300),
+                                       reading(500,300), reading(100,0), reading(100,1000)}) {
+            P p;
+            assert(p.Update(reading(100,100),100,false,false)==P::None);
+            assert(p.Update(reading(100,200),200,false,false)==P::None);
+            assert(p.Update(reading(100,300),300,false,false)==P::Beep);
+            assert(p.Update(interrupted,600,false,false)==P::None && !p.beeping);
+            assert(p.Update(reading(100,700),700,false,false)==P::None && !p.beeping);
+            assert(p.Update(reading(100,800),800,false,false)==P::None && !p.beeping);
+            assert(p.Update(reading(100,900),900,false,false)==P::Beep);
+        }
+    }
+    { // Missing control ticks and backward sample times cannot preserve confirmation.
+        P p;
+        assert(p.Update(reading(100,0),0,false,false)==P::None);
+        assert(p.Update(reading(100,100),100,false,false)==P::None);
+        assert(p.Update(reading(100,601),601,false,false)==P::None && !p.beeping);
+        assert(p.Update(reading(100,701),701,false,false)==P::None);
+        assert(p.Update(reading(100,801),801,false,false)==P::Beep);
+        assert(p.Update(reading(100,10000),10000,false,false)==P::None && !p.beeping);
+        assert(p.Update(reading(100,10100),10100,false,false)==P::None);
+        assert(p.Update(reading(100,10200),10200,false,false)==P::Beep);
+        assert(p.Update(reading(100,10150),10205,false,false)==P::None && !p.beeping);
+        assert(p.Update(reading(100,10300),10300,false,false)==P::None && !p.beeping);
+        assert(p.Update(reading(100,10400),10400,false,false)==P::None && p.beeping);
+    }
+    { // Cadence survives a short reset and never catches up missed events.
+        P p;
+        p.Update(reading(399,0),0,false,false);
+        p.Update(reading(399,100),100,false,false);
+        assert(p.Update(reading(399,200),200,false,false)==P::Beep);
+        assert(p.Update(reading(500,205),205,false,false)==P::None);
+        assert(p.Update(reading(399,210),210,false,false)==P::None);
+        assert(p.Update(reading(399,310),310,false,false)==P::None);
+        assert(p.Update(reading(399,410),410,false,false)==P::None && p.beeping);
+        assert(p.Update(reading(399,600),600,false,false)==P::Beep);
+        assert(p.Update(reading(399,600),605,false,false)==P::None);
+        assert(p.Update(reading(399,600),1101,false,false)==P::None && !p.beeping);
+    }
+    { // Protection still acts on the first sample, including exact boundary/fault cases.
+        P p;
+        assert(p.Update(reading(300,0),0,true,true)==P::None && !p.blocked);
+        assert(p.Update(reading(150,100),100,true,true)==P::None && !p.blocked);
+        assert(p.Update(reading(149,101),101,true,true)==P::Stop && p.blocked && !p.beeping);
+        for (unsigned mm : {149u,150u,199u})
+            assert(p.Update(reading(mm,200),200,false,true)==P::None && p.blocked);
+        auto invalid=reading(1000,300); invalid.error=ultrasonic::Error::NoEcho;
+        assert(p.Update(invalid,300,false,true)==P::None && p.blocked);
+        assert(p.Update(reading(1000,300),801,false,true)==P::None && p.blocked);
+        assert(p.Update(reading(1000,1000),999,false,true)==P::None && p.blocked);
+        assert(p.Update(reading(200,1000),1000,false,true)==P::None && !p.blocked);
     }
     for (bool enabled : {false,true}) {
-        for (const char* direction : {"none","backward","left","right"}) {
+        for (const char* direction : {"none","forward","backward","left","right"}) {
             sessions=ready(); sessions.auto_avoidance_enabled=enabled; proximity={};
             if (!is(direction,"none"))
                 assert(is(guard.Move(0,sessions.VoiceClaim(0,1,G::MoveOnly),5000,direction),"accepted"));
             const auto starts=guard.Starts();
-            sensor=reading(500,0); TickLocked(0); assert(!sound_enabled && sound_event==P::None);
-            sensor=reading(450,1); TickLocked(1); assert(sound_enabled && sound_event==P::Beep);
-            sensor=reading(400,800); TickLocked(800); assert(sound_event==P::None);
-            sensor=reading(400,801); TickLocked(801); assert(sound_event==P::Beep);
-            sensor=reading(399,1200); TickLocked(1200); assert(sound_event==P::None);
-            sensor=reading(149,1201); TickLocked(1201);
-            assert(sound_enabled && sound_event==P::Beep && guard.forward_blocked==enabled);
-            sensor=reading(149,1601); TickLocked(1601); assert(sound_event==P::Beep);
-            sensor.error=ultrasonic::Error::NoEcho; TickLocked(1602);
-            assert(!sound_enabled && sound_event==P::None && guard.forward_blocked==enabled);
-            sensor=reading(149,1602); TickLocked(2103); // Stale sample silences beeps, not the lock.
-            assert(!sound_enabled && sound_event==P::None && guard.forward_blocked==enabled);
-            sensor=reading(500,2104); TickLocked(2104);
-            assert(!sound_enabled && !guard.forward_blocked && guard.Starts()==starts);
+            sensor=reading(450,0); TickLocked(0); assert(!sound_enabled && sound_event==P::None);
+            TickLocked(5); assert(!sound_enabled && sound_event==P::None);
+            sensor=reading(450,100); TickLocked(100); assert(!sound_enabled && sound_event==P::None);
+            sensor=reading(450,200); TickLocked(200); assert(sound_enabled && sound_event==P::Beep);
+            sensor=reading(400,600); TickLocked(600); assert(sound_event==P::None);
+            sensor=reading(400,1000); TickLocked(1000); assert(sound_event==P::Beep);
+            sensor=reading(500,1001); TickLocked(1001);
+            assert(!sound_enabled && sound_event==P::None && !guard.forward_blocked && guard.Starts()==starts);
             assert(guard.Moving()==!is(direction,"none"));
         }
     }
-    { // Movement and switch transitions cannot reset or suppress the distance cadence.
-        P independent;
-        assert(independent.Update(reading(100,0),0,true,false)==P::Beep);
-        assert(independent.Update(reading(100,100),100,false,false)==P::None && independent.beeping);
-        assert(independent.Update(reading(100,200),200,false,true)==P::None && independent.blocked);
-        assert(independent.Update(reading(100,400),400,false,true)==P::Beep);
-        assert(independent.Update(reading(100,401),401,false,false)==P::None && !independent.blocked);
-        assert(independent.Update(reading(100,800),800,true,false)==P::Beep);
-    }
-    { // Band jitter, invalid data and far spikes cannot produce catch-up bursts.
-        P cadence;
-        assert(cadence.Update(reading(450,0),0,true,true)==P::Beep);
-        for (uint64_t t=5; t<400; t+=5) {
-            const unsigned mm=t%10 ? 399 : 401;
-            assert(cadence.Update(reading(mm,t),t,true,true)==P::None);
-        }
-        assert(cadence.Update(reading(399,400),400,true,true)==P::Beep);
-        assert(cadence.Update(reading(550,500),500,true,true)==P::None && !cadence.beeping);
-        assert(cadence.Update(reading(399,600),600,true,true)==P::None);
-        auto lost=reading(399,700); lost.error=ultrasonic::Error::NoEcho;
-        assert(cadence.Update(lost,700,true,true)==P::None && !cadence.beeping);
-        assert(cadence.Update(reading(399,750),750,true,true)==P::None);
-        assert(cadence.Update(reading(399,800),800,true,true)==P::Beep);
-        assert(cadence.Update(reading(399,10000),10000,true,true)==P::Beep);
-        assert(cadence.Update(reading(399,10000),10005,true,true)==P::None);
-        assert(cadence.Update(reading(399,10000),10501,true,true)==P::None && !cadence.beeping);
+    { // Movement and switch transitions neither bypass confirmation nor reset cadence.
+        P p;
+        assert(p.Update(reading(100,0),0,true,false)==P::None);
+        assert(p.Update(reading(100,100),100,false,false)==P::None);
+        assert(p.Update(reading(100,200),200,false,true)==P::Beep && p.blocked);
+        assert(p.Update(reading(100,300),300,false,false)==P::None && !p.blocked && p.beeping);
+        assert(p.Update(reading(100,600),600,true,false)==P::Beep);
     }
     { // Stop sound follows actual forward motion, not a rejected request or an unlocked reading.
         auto s=ready(); P g;
@@ -159,7 +183,7 @@ int main() {
         auto deadline=ready(); P expired;
         assert(is(deadline.guard.Move(0,deadline.VoiceClaim(0,1,G::MoveOnly),100,"forward"),"accepted"));
         deadline.Tick(100,false);
-        assert(expired.Update(reading(149,100),100,deadline.guard.Moving(),true)==P::Beep && expired.blocked);
+        assert(expired.Update(reading(149,100),100,deadline.guard.Moving(),true)==P::None && expired.blocked);
     }
     { // A newly near obstacle must reject the NEXT step before its spray starts.
         sessions=ready(); proximity={}; ActionPlan plan; plan.count=2;
@@ -168,24 +192,26 @@ int main() {
         sensor=reading(1000,1000); TickLocked(1000);
         sensor=reading(149,1200); TickLocked(1200);
         assert(guard.Starts()==1 && !guard.Moving() && !guard.Watering());
-        assert(is(sessions.plan_result,"obstacle_blocked") && sound_event==P::Beep);
+        assert(is(sessions.plan_result,"obstacle_blocked") && sound_event==P::None);
     }
     { // Real adapter stops forward before audio and preserves independent effects.
         sessions=ready(); proximity={};
         assert(is(guard.MoveAndWater(0,sessions.VoiceClaim(0,1,G::Both),10000,10000,"forward"),"accepted"));
         sensor=reading(149,10); TickLocked(10);
         assert(sound_event==P::Stop && !sound_enabled && !guard.Moving() && guard.Watering());
-        TickLocked(15); assert(sound_event==P::None && sound_enabled);
+        TickLocked(15); assert(sound_event==P::None && !sound_enabled);
+        sensor=reading(149,110); TickLocked(110); assert(sound_event==P::None && !sound_enabled);
+        sensor=reading(149,210); TickLocked(210); assert(sound_event==P::None && sound_enabled);
         sensor=reading(149,410); TickLocked(410);
         assert(sound_event==P::Beep && sound_enabled && !guard.Moving() && guard.Watering());
         sessions=ready(); proximity={};
         assert(is(guard.Move(0,sessions.VoiceClaim(0,1,G::MoveOnly),100,"forward"),"accepted"));
         sensor=reading(149,100); TickLocked(100);
-        assert(sound_event==P::Beep && sound_enabled && !guard.Moving());
+        assert(sound_event==P::None && !sound_enabled && !guard.Moving());
         sessions=ready(); proximity={};
         assert(is(guard.Move(0,sessions.VoiceClaim(0,1,G::MoveOnly),1000,"forward"),"accepted"));
         sensor=reading(149,100); pressed=true; TickLocked(100); pressed=false;
-        assert(sound_event==P::Beep && sound_enabled && !guard.Moving());
+        assert(sound_event==P::None && !sound_enabled && !guard.Moving());
     }
     { // Voice combined action: stop only forward and keep the independent spray deadline.
         auto s=ready();
@@ -239,5 +265,5 @@ int main() {
         s.SetForwardBlocked(100,true); s.Tick(1000,false); s.Tick(1200,false);
         assert(!s.plan_active && is(s.plan_result,"obstacle_blocked") && s.guard.Starts()==1);
     }
-    std::cout << "distance-only tones across movement/switch states, cadence, freshness, voice/web/sequence stops and no-resume: PASS\n";
+    std::cout << "three-sample audio confirmation, spike rejection, cadence, freshness, immediate voice/web/sequence stops and no-resume: PASS\n";
 }

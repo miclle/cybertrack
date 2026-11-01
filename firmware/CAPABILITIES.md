@@ -1,6 +1,6 @@
 # 固件能力与接口手册
 
-当前参数核对于 2026-11-01；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码为未部署候选 [ct76](esp32-audio/verification-ct76.json)，最近记录部署为 ct75；仅应用写入、Wi-Fi／用户设置保持、两次启动与无动作检查见 [startup-ct75.json](esp32-audio/startup-ct75.json)。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
+当前参数核对于 2026-11-01；版本与部署依据见 [current.json](current.json) 和[当前状态](../docs/current-status.md)。现用工程为 `esp32-audio/`，源码及最近记录部署均为 [ct77](esp32-audio/verification-ct77.json)；仅应用写入、配置保持、两次启动与二十条零输出回读见 [startup-ct77.json](esp32-audio/startup-ct77.json)，用户已确认偶发滴声明显减少、效果可以。历史核心、台架、逐版本接口与证据保留于[历史手册](CAPABILITIES-history.md)，不同工程同名工具不能混用。
 
 ct76 [分句改稿门禁](../docs/validation/draft-clause-duration.md)不再借用其他分句的量化值解除相对改稿澄清；明确的紧邻时长补充保留，停止入口与工具参数不变。未部署，不作为完整自然语言归属验证。
 
@@ -44,7 +44,7 @@ ct74 [对话提示](../docs/validation/dialogue-range-beeps.md)只在空闲播�
 - `logical_outputs.left/right` 为有符号 PWM 百分比，范围 −100..100（非零最小绝对值 60）；其他三路为布尔值。无轮速、水流、火花、电量或液位反馈，`physical_feedback=false`。
 - 序列通过 `sequence_active/step/steps/result` 报告；`waiting` 是步骤间等待，不能说全部完成。故障、忙碌、冷却、取消或过期均不自动重试。
 - 距离只在 `distance.valid=true`、`error=none`、`age_ms<=500` 时可用，无效为 null。前向距离不是移动里程或道路畅通证明。
-- 距离不足 50 cm 滴声；40–50 cm 每 800 ms，小于 40 cm 每 400 ms，与行走和保护开关独立。
+- 距离不足 50 cm 滴声；ct77 须连续 3 个不同有效近距样本才提示，远距／无效／过期或超过 500 ms 的采样间隔后重新确认。确认后 40–50 cm 每 800 ms，小于 40 cm 每 400 ms，与行走和保护开关独立，对话期间暂缓；避障停车不等待声音确认。[验证与部署边界](../docs/validation/range-beep-confirmation.md)
 - `proximity.auto_avoidance_enabled` 默认 false，仅网页切换，网页与语音共用。开启时小于 15 cm 停前进／至少 20 cm 解锁，需新指令；无效读数不解除已有锁定。`capabilities.auto_avoidance=false` 表示无自动绕行。
 
 ct43 引入 `recent_command`，保留进入动作适配器的最近一次请求结果，查询不覆盖。它不是最后停机原因；字段、未捕获范围与只读解释见[状态解释](../docs/status-explanation.md)。
