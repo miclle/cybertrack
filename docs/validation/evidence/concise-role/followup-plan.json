@@ -1,0 +1,29 @@
+{
+  "created_utc": "2026-11-01T10:24:53.263113+00:00",
+  "reason": "First preflight strict 29/36 -> 34/36 with no observed candidate forbidden writes or missed stops; narration remains, so not adopted.",
+  "role_and_host_and_tools": "Unchanged snapshots and hashes from plan.json",
+  "rounds": [
+    {
+      "group": "candidate",
+      "round": 2
+    },
+    {
+      "group": "baseline",
+      "round": 2
+    },
+    {
+      "group": "candidate",
+      "round": 3
+    },
+    {
+      "group": "baseline",
+      "round": 3
+    }
+  ],
+  "cases_per_round": 36,
+  "timeout_seconds": 60,
+  "input_mode": "raw_text_diagnostic",
+  "retention": "No replacement of any failed/interrupted case; resume only next unrun case after an interruption.",
+  "early_exit": "If a candidate followup has forbidden writes, false/missed stops or worse strict matching, retain its entire 36-case round and restore baseline; do not proceed to later rounds/full suite.",
+  "full_suite_gate": "All followup candidate rounds retain zero forbidden/false/missed stops and strict improvement; review preserved limits and narration before original 80/8 synthetic-speech evaluation. Never promote from this targeted set."
+}
