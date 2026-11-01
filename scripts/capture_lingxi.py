@@ -188,12 +188,42 @@ async def capture_case(connection,tools,case,timeout=45):
     if case.get('protocol_events'): row['protocol_observations'] = []
     def mark(event, **details):
         timeline.append(dict(ms=round((time.monotonic()-opened)*1000), event=event, **details))
-    uplink = case.get('opus_frames')
+    followups = case.get('followups', [])
+    if followups and (version != 'firmware_host' or not case.get('host_stt_events')):
+        raise ValueError('followups require actual STT-gated firmware host')
+    inputs = [case, *followups]
+    turn_index = 0
+    if followups: row['turns'] = []
     input_ms=None
     call_history=[]
     session=None;sent=False;deadline=opened+timeout;audio_bytes=0
     async with connect(ENDPOINT,additional_headers=headers,proxy=None,open_timeout=15,max_size=2**20) as ws:
         async def send(message):await ws.send(json.dumps(message,ensure_ascii=False))
+        async def send_input(item):
+            nonlocal input_ms, sent, deadline
+            mark('input_sent')
+            if input_ms is None: input_ms = timeline[-1]['ms']
+            deadline = time.monotonic() + timeout
+            if followups:
+                row['turns'].append(dict(text=item['text'], input_ms=timeline[-1]['ms'],
+                    call_start=len(row['calls']), reply_start=len(row['replies']), completed=False,
+                    uplink=item['uplink']))
+            if case.get('host_text_input'):
+                mark('simulated_input', text=item['text'])
+                call_history.append(dict(input_text=item['text'],elapsed_ms=timeline[-1]['ms']-input_ms))
+            uplink = item.get('opus_frames')
+            if uplink is not None:
+                await send(dict(session_id=session,type='listen',state='start',mode='manual'))
+                for frame in uplink:
+                    await ws.send(frame)
+                    await asyncio.sleep(.060)
+                await send(dict(session_id=session,type='listen',state='stop'))
+                mark('uplink_end')
+            else:
+                text=item['text'] if case.get('raw_text') else '本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：'+case['context']+'。请只处理这条用户原话：'+item['text']
+                await send(dict(session_id=session,type='listen',state='detect',text=text))
+            sent=True;row['events'].append('test_input_sent')
+
         await send(dict(type='hello',version=1,transport='websocket',features={'mcp':True},audio_params=dict(format='opus',sample_rate=16000,channels=1,frame_duration=60)))
         while time.monotonic()<deadline:
             try:raw=await asyncio.wait_for(ws.recv(),min(5,max(.01,deadline-time.monotonic())))
@@ -277,33 +307,27 @@ async def capture_case(connection,tools,case,timeout=45):
                 if method=='tools/call':
                     mark('tool_reply_sent', name=name, is_error=rpc_error is not None or result['isError'])
                 if method=='tools/list' and not result.get('nextCursor') and not sent:
-                    # Context is visibly separate from the user's phrase; the
-                    # runner never reads expected_calls or response_expectation.
-                    mark('input_sent');input_ms=timeline[-1]['ms']
-                    if case.get('host_text_input'):
-                        # This is a simulated recognition event, not platform
-                        # ASR. Record the known utterance before any tool call.
-                        mark('simulated_input',text=case['text'])
-                        call_history.append(dict(input_text=case['text'],elapsed_ms=timeline[-1]['ms']-input_ms))
-                    if uplink is not None:
-                        await send(dict(session_id=session,type='listen',state='start',mode='manual'))
-                        for frame in uplink:
-                            await ws.send(frame)
-                            await asyncio.sleep(.060)
-                        await send(dict(session_id=session,type='listen',state='stop'))
-                        mark('uplink_end')
-                    else:
-                        text=case['text'] if case.get('raw_text') else '本轮为无执行器的文本评测，以下仅是模拟前置状态，不是动作指令：'+case['context']+'。请只处理这条用户原话：'+case['text']
-                        await send(dict(session_id=session,type='listen',state='detect',text=text))
-                    sent=True;row['events'].append('test_input_sent')
+                    await send_input(case)
             elif kind=='tts':
                 state=msg.get('state')
                 if state in ('start','sentence_start','stop'):
                     mark('tts_'+state, reply_index=len(row['replies']))
                 if msg.get('state')=='sentence_start':row['replies'].append(msg.get('text',''))
                 if msg.get('state')=='stop' and sent:
-                    row['completed']=msg.get('is_aborted') is not True
-                    if not row['completed']:row['completion']='tts_aborted'
+                    complete=msg.get('is_aborted') is not True
+                    if followups:
+                        row['turns'][-1].update(completed=complete, end_ms=timeline[-1]['ms'],
+                            call_end=len(row['calls']), reply_end=len(row['replies']))
+                        row['turns'][-1]['host_state'] = firmware_replay(case['host_binary'], case['initial_profile'],
+                            [*call_history, dict(inspect_ms=timeline[-1]['ms']-input_ms)], await_stt=True)[-1]
+                    if not complete:
+                        row['completion']='tts_aborted'
+                        break
+                    if turn_index + 1 < len(inputs):
+                        turn_index += 1
+                        await send_input(inputs[turn_index])
+                        continue
+                    row['completed']=True
                     break
             elif kind=='stt':
                 row['echoed_text']=msg.get('text','');mark('stt', text=row['echoed_text'])
@@ -341,7 +365,10 @@ async def run(args):
         if not args.raw_text or any(c.get('initial_motion') not in ('forward70','short_forward70','idle') for c in cases):
             raise ValueError('timed host requires raw input and a known motion profile')
         fields=('id','text','context','initial_motion')
-    cases=[{k:c[k] for k in fields if k in c} for c in cases]
+    cases=[dict({k:c[k] for k in fields if k in c}, **(
+        {'followups':[{'text':item['text']} for item in c['followups']]} if c.get('followups') else {})) for c in cases]
+    if any(c.get('followups') for c in cases) and not (getattr(args,'synthetic_speech',False) and getattr(args,'firmware_host',None)):
+        raise ValueError('followups require synthetic speech and firmware host')
     if getattr(args, 'raw_text', False):
         for case in cases: case['raw_text']=True
     version = 'timed_host' if timed else 'ct47' if getattr(args,'ct47',False) else 'ct46' if getattr(args,'ct46',False) else 'ct45'
@@ -428,6 +455,9 @@ async def run(args):
     for case in cases:
         if synthetic:
             case['opus_frames'], metadata = synthetic_speech.synthesize(case['text'])
+            case['uplink'] = metadata
+            for item in case.get('followups', []):
+                item['opus_frames'], item['uplink'] = synthetic_speech.synthesize(item['text'])
         row=await capture_case(connection,tools,case,args.timeout)
         if synthetic:
             row['uplink'] = metadata

@@ -73,3 +73,46 @@ class FirmwareHostCaptureTests(unittest.TestCase):
             self.assertEqual(payload["id"], 41)
             self.assertEqual(payload["error"] if rejected else payload["result"],
                              wire["error"] if rejected else wire["result"])
+
+    def test_followup_reuses_connection_and_host_history_and_abort_stops(self):
+        for aborted in (False, True):
+            socket = AsyncMock()
+            messages = [dict(type='hello', session_id='test'),
+                        dict(type='mcp', payload=dict(method='tools/list', id=1)),
+                        dict(type='stt', text='全速'),
+                        dict(type='mcp', payload=dict(method='tools/call', id=2,
+                            params=dict(name='self.tank.set_speed', arguments=dict(speed_percent=100)))),
+                        dict(type='tts', state='stop', is_aborted=aborted)]
+            if not aborted:
+                messages += [dict(type='stt', text='左转一秒'),
+                             dict(type='mcp', payload=dict(method='tools/call', id=3,
+                                 params=dict(name='self.tank.move', arguments=dict(direction='left',duration_ms=1000)))),
+                             dict(type='tts', state='stop')]
+            socket.recv.side_effect = [json.dumps(m) for m in messages]
+            connect = MagicMock()
+            connect.return_value.__aenter__.return_value = socket
+            wire = dict(result=dict(content=[dict(type='text',text='{"result":"ok"}')],isError=False))
+            case = dict(id='R01',text='全速',context='',fixture_version='firmware_host',
+                        host_binary=Path('/inert/host'),initial_profile='corpus_idle',host_stt_events=True,
+                        opus_frames=[b'first'],uplink={'frames':1},
+                        followups=[dict(text='左转一秒',opus_frames=[b'second'],uplink={'frames':1})])
+            with patch.dict(sys.modules, {'websockets.asyncio.client':MagicMock(connect=connect)}), \
+                    patch('capture_lingxi.firmware_replay',return_value=[wire,dict(starts_this_boot=0)]) as replay, \
+                    patch('capture_lingxi.asyncio.sleep',new=AsyncMock()):
+                row=asyncio.run(capture_case(dict(token='test',device_id='d',client_id='c'),
+                    [dict(name='self.tank.set_speed'),dict(name='self.tank.move')],case))
+            self.assertEqual(connect.call_count,1)
+            self.assertEqual(row['completed'],not aborted)
+            self.assertEqual(len(row['turns']),1 if aborted else 2)
+            self.assertEqual([c['input_text'] for c in row['host_calls'] if 'input_text' in c],
+                             ['全速'] if aborted else ['全速','左转一秒'])
+            sent=[c.args[0] for c in socket.send.call_args_list]
+            self.assertEqual([m for m in sent if isinstance(m,bytes)],
+                             [b'first'] if aborted else [b'first',b'second'])
+            self.assertTrue(all(c.kwargs['await_stt'] for c in replay.call_args_list))
+            self.assertEqual(row['turns'][0]['call_start'],0)
+            self.assertEqual(row['turns'][0]['call_end'],1)
+            if not aborted:
+                self.assertEqual(row['turns'][1]['call_start'],1)
+                self.assertEqual(row['turns'][1]['call_end'],2)
+                self.assertEqual(len(replay.call_args.args[2]),5)  # Both STTs/RPCs and final inspect.
