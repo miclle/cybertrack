@@ -3,15 +3,15 @@
 核对日期：2026-11-01。机器可读版本入口为 [firmware/current.json](../firmware/current.json)，检查命令 `python3 scripts/check_firmware_current.py`。`last_recorded_deployment` 保留应用部署记录，独立的 `last_recorded_role_sync` 记录角色回读关联或后续纯角色同步，避免将重启冒充烧录。检查器核对源码版本与构建记录，以及角色同步所对应的已部署版本。可用下列命令分别核对两份本地应用文件的字节数和 SHA-256。省略参数时只检查记录；两种方式均离线运行。
 
 ```sh
-python3 scripts/check_firmware_current.py --source-bin build/firmware-ct74/xiaozhi.bin --deployed-bin build/firmware-ct73/xiaozhi.bin
+python3 scripts/check_firmware_current.py --source-bin build/firmware-ct74/xiaozhi.bin --deployed-bin build/firmware-ct74/xiaozhi.bin
 ```
 
 | 项目 | 当前依据与状态 |
 |---|---|
-| 源码基线 | `2.0.3-ct74` 候选：对话期间暂缓普通测距滴声，普通通知独立 PCM／空闲入队，收到语音只撤普通通知，紧急告警优先不变。最近部署 ct73 已完成仅应用与无动作检查；此前改进继续保留：扩展四路组合／序列及既有别名的成功确认匹配，保留点火超限说明；补齐既有效果别名与狂暴模式的成功确认播放匹配，改用各通道独立时长核验；增加完整否定句的写入拒绝和空闲草稿保护，活动／等待时始终保留全停；拒绝机器人 MCP 原始零字符截断，保留原工具／角色及合法停止；增加可识别泛化动作的首次执行澄清门禁，保留草稿编排、查询、全停及可信网页；增加本轮 STT 的无量化相对改稿澄清标记；MCP 全停在校验后立即完成并返回，不留二次排队回调；扩展组合／序列和目标速度的成功确认播放匹配；增加按识别输入代际的失败隔离，失败后拒绝自动重试／补做，停止与查询保留，新输入恢复；状态查询明确区分已有／没有草稿和本次保存回执。调速拒绝时提供请求时刻的未移动或链路离线说明。工具说明要求单说“全速”直接请求调速，匹配本轮成功回执后抑制确认音频。手机可在载入前对照设备新稿与本页预览，动作状态未确认时保留本地 BOOT 停止指引，明确全停成功后本地抑制确认音频，状态查询列出网页长按通道，区分续租窗口与定时动作剩余量，剧场预览显示同时动作和结束顺序；ESP-IDF 5.5.1、小智固定版本及 overlay |
-| 最近记录的部署 | [ct73](../firmware/esp32-audio/startup-ct73.json)；2026-11-01 仅应用写入、两次启动联网及零动作回读通过；带载另验 |
-| 最近角色核对 | [ct73 部署关联](../firmware/esp32-audio/startup-ct73.json)：5991 字符只读回读与源文件一致，配置未修改，设备已重启；前次实际角色保存仍见 [ct45 修正](../firmware/esp32-audio/role-cancel-hold-ct45.json)，模型语义另验 |
-| 软件验证 | [ct74 对话提示候选](validation/dialogue-range-beeps.md)、[ct74 构建](../firmware/esp32-audio/verification-ct74.json)； [ct73 四路组合](validation/four-lane-feedback.md)、[ct73 软件记录](../firmware/esp32-audio/verification-ct73.json)、[ct72 效果播放](validation/effect-alias-feedback.md)、[ct72 软件记录](../firmware/esp32-audio/verification-ct72.json)、[ct71 否定输入](validation/negative-input-admission.md)、[ct71 软件记录](../firmware/esp32-audio/verification-ct71.json)、[ct70 原始 JSON](validation/mcp-raw-json.md)、[ct70 软件记录](../firmware/esp32-audio/verification-ct70.json)、[ct68 软件记录](../firmware/esp32-audio/verification-ct68.json)、[含糊动作门禁](validation/vague-action-admission.md)、[ct67 软件记录](../firmware/esp32-audio/verification-ct67.json)、[相对改稿门禁](validation/relative-draft-duration.md)、[ct66 软件记录](../firmware/esp32-audio/verification-ct66.json)、[即时停止回执](validation/stop-dispatch.md)、[ct63 软件记录](../firmware/esp32-audio/verification-ct63.json)、[播放匹配](validation/plan-feedback.md)、[输入失败隔离](validation/voice-input-guard.md)、[ct47 定向联调](validation/lingxi-ct47.md)与 [ct46 三轮联调](validation/lingxi-ct46.md)；已部署 ct45 的软件依据仍见 [ct45 记录](../firmware/esp32-audio/verification-ct45.json) |
+| 源码基线 | `2.0.3-ct74` 已部署：对话期间暂缓普通测距滴声，普通通知独立 PCM／空闲入队，收到语音只撤普通通知，紧急告警优先不变。最近部署 ct74 已完成仅应用与无动作检查；此前改进继续保留：扩展四路组合／序列及既有别名的成功确认匹配，保留点火超限说明；补齐既有效果别名与狂暴模式的成功确认播放匹配，改用各通道独立时长核验；增加完整否定句的写入拒绝和空闲草稿保护，活动／等待时始终保留全停；拒绝机器人 MCP 原始零字符截断，保留原工具／角色及合法停止；增加可识别泛化动作的首次执行澄清门禁，保留草稿编排、查询、全停及可信网页；增加本轮 STT 的无量化相对改稿澄清标记；MCP 全停在校验后立即完成并返回，不留二次排队回调；扩展组合／序列和目标速度的成功确认播放匹配；增加按识别输入代际的失败隔离，失败后拒绝自动重试／补做，停止与查询保留，新输入恢复；状态查询明确区分已有／没有草稿和本次保存回执。调速拒绝时提供请求时刻的未移动或链路离线说明。工具说明要求单说“全速”直接请求调速，匹配本轮成功回执后抑制确认音频。手机可在载入前对照设备新稿与本页预览，动作状态未确认时保留本地 BOOT 停止指引，明确全停成功后本地抑制确认音频，状态查询列出网页长按通道，区分续租窗口与定时动作剩余量，剧场预览显示同时动作和结束顺序；ESP-IDF 5.5.1、小智固定版本及 overlay |
+| 最近记录的部署 | [ct74](../firmware/esp32-audio/startup-ct74.json)；2026-11-01 仅应用写入、两次启动联网及零动作回读通过；带载另验 |
+| 最近角色核对 | [ct74 部署关联](../firmware/esp32-audio/startup-ct74.json)：5991 字符只读回读与源文件一致，配置未修改，设备已重启；前次实际角色保存仍见 [ct45 修正](../firmware/esp32-audio/role-cancel-hold-ct45.json)，模型语义另验 |
+| 软件验证 | [ct74 对话提示](validation/dialogue-range-beeps.md)、[ct74 构建](../firmware/esp32-audio/verification-ct74.json)； [ct73 四路组合](validation/four-lane-feedback.md)、[ct73 软件记录](../firmware/esp32-audio/verification-ct73.json)、[ct72 效果播放](validation/effect-alias-feedback.md)、[ct72 软件记录](../firmware/esp32-audio/verification-ct72.json)、[ct71 否定输入](validation/negative-input-admission.md)、[ct71 软件记录](../firmware/esp32-audio/verification-ct71.json)、[ct70 原始 JSON](validation/mcp-raw-json.md)、[ct70 软件记录](../firmware/esp32-audio/verification-ct70.json)、[ct68 软件记录](../firmware/esp32-audio/verification-ct68.json)、[含糊动作门禁](validation/vague-action-admission.md)、[ct67 软件记录](../firmware/esp32-audio/verification-ct67.json)、[相对改稿门禁](validation/relative-draft-duration.md)、[ct66 软件记录](../firmware/esp32-audio/verification-ct66.json)、[即时停止回执](validation/stop-dispatch.md)、[ct63 软件记录](../firmware/esp32-audio/verification-ct63.json)、[播放匹配](validation/plan-feedback.md)、[输入失败隔离](validation/voice-input-guard.md)、[ct47 定向联调](validation/lingxi-ct47.md)与 [ct46 三轮联调](validation/lingxi-ct46.md)；已部署 ct45 的软件依据仍见 [ct45 记录](../firmware/esp32-audio/verification-ct45.json) |
 | 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，5991 字符，已重开回读。检查命令分别列出仓库角色与平台回读哈希 |
 | 运动 | 四方向，60–100% PWM、默认 100%；全速转向省略时长为 880 ms，其他普通动作默认 1000 ms；无编码器里程计 |
 | 并发与序列 | 四路独立截止，序列最多 16 步；步骤内并发，步骤间串行；取消不恢复 |
@@ -35,6 +35,8 @@ ct45 部署检查的 39 条状态／操作回执全部输出关闭、动作启�
 ct73 架空单路 BOOT 诊断：截止前检测到按下与逻辑全关，松开后约三秒状态保持全关；用户确认实际立即停下且松开未恢复。它是单次功能观察，不代替双来源矩阵、机械停止时延或距离测量。
 
 旧版本参数及证据保留在各专题的历史章节；当前能力以本页、[接口手册](../firmware/CAPABILITIES.md)与源码交叉核对。
+
+2026-11-01 [ct74 部署](validation/ct74-deployment.md)完成：用户断开执行器功率后仅应用更新，ct73 回退核对、配置保持、两次启动及二十条零输出状态通过；角色只读回读一致。对话普通提示暂缓的现场听感仍待反馈，空旷偶发滴声和完整停止矩阵未关闭。
 
 ## 统一软件检查
 
