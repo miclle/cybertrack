@@ -1,0 +1,26 @@
+{
+  "scope": "Offline logical NVS comparison; no device, firmware identity, RF or physical acceptance",
+  "snapshot_bytes": 131072,
+  "nvs_offset": 36864,
+  "nvs_bytes": 16384,
+  "records_before": 71,
+  "records_after": 70,
+  "logical_entries_before": 59,
+  "logical_entries_after": 59,
+  "all_logical_values_unchanged": false,
+  "non_nvs_bytes_unchanged": true,
+  "changed_keys": [
+    "phy/cal_data",
+    "websocket/token"
+  ],
+  "permitted_changed_keys": [],
+  "unexpected_changed_keys": [
+    "phy/cal_data",
+    "websocket/token"
+  ],
+  "added_keys": [],
+  "removed_keys": [],
+  "requested_runtime_exceptions": [],
+  "matches_policy": false,
+  "parser_sha256": "621bdbf0ac60e34ae190f63be10f0f1a4dd4d18c25ebab0cf56ff53a6f2b6c2c"
+}
