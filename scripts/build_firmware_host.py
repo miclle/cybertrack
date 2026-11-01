@@ -29,8 +29,8 @@ def build(source, idf, output, sanitize=False):
     start = registration.index("    server.AddTool(")
     end = registration.index('    ESP_LOGI("CT_AUDIO", "READY', start)
     callbacks = registration[start:end]
-    if callbacks.count("server.AddTool(") != 12:
-        raise ValueError("expected 12 robot tools")
+    if callbacks.count("server.AddTool(") != 11:
+        raise ValueError("expected 11 robot tools")
     (output / "host_registration.inc").write_text(callbacks)
     start = registration.index("int CyberTrackVoiceTurn(")
     end = registration.index("void CyberTrackActionLink(", start)
@@ -56,11 +56,11 @@ def build(source, idf, output, sanitize=False):
              ROOT/"firmware/esp32-audio/tests/firmware_host.cc", Path(__file__).resolve()]
     catalog = json.loads(subprocess.check_output([str(executable),"--catalog"],text=True))
     formats = []
-    for name in ("self.tank.sequence","self.tank.compose"):
+    for name in ("self.tank.sequence",):
         properties = next(t for t in catalog if t["name"]==name)["inputSchema"]["properties"]
         formats.append("native_array" if properties.get("steps",{}).get("type")=="array" else
                        "legacy_string" if properties.get("steps_json",{}).get("type")=="string" else "unknown")
-    if formats[0]!=formats[1] or formats[0]=="unknown": raise ValueError("unknown/inconsistent step contract")
+    if formats[0]=="unknown": raise ValueError("unknown/inconsistent step contract")
     catalog_file=output/"tool-catalog.json"
     catalog_file.write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+"\n")
     manifest = dict(scope="Full MCP dispatcher and actual callbacks; immediate or explicitly deferred host schedule; simulated input/time/distance; zero board IO",

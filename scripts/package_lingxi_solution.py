@@ -10,7 +10,6 @@ import subprocess
 import zipfile
 
 from check_firmware_current import check
-from package_family_rehearsal import build as build_rehearsal
 from review_lingxi_reference import EVALUATIONS, score_replay, score_spoken_replay, STT_SPOKEN_SCORE, STT_EXPERIMENT, STT_CAPTURE
 from review_lingxi_reference import FULL_SPEECH_SCORES, score_full_speech
 from review_full_speech import score_replay as full_speech_replay
@@ -40,7 +39,6 @@ def read_inputs(root, paths):
 
 def build_archive(root, paths, head, dirty):
     contents = read_inputs(root, paths)
-    contents["family/rehearsal.html"] = build_rehearsal(root).encode()
     firmware = check(root)
     current = json.loads(contents["firmware/current.json"])
     if "firmware/" + current["software_evidence"] not in contents:
@@ -92,6 +90,8 @@ def build_archive(root, paths, head, dirty):
             contents[f"replay/{prefix}{suite}.json"] = (json.dumps(replay, ensure_ascii=False, indent=2) + "\n").encode()
     contents["START_HERE.md"] = f"""# CyberTrack 灵矽方案参考材料
 
+ct78 已移除表演编辑与预览。包内旧 compose 轨迹仅供复算历史结果，不代表当前功能或当前角色成绩。
+
 本包对应 Git 提交 `{head}`。打包输入存在未提交修改为 `{dirty}`。版本、应用字节数和 SHA-256 见 `MANIFEST.json` 的 `firmware` 小节。
 
 | 记录 | 固件版本 |
@@ -121,7 +121,7 @@ python3 scripts/review_lingxi_reference.py
 - [停止说明对照](docs/validation/stop-negation.md)也未采纳；`stop_negation_scores` 重算语义 77/80 与编排 6/8，继续标明 V064 误停、V079 含糊请求擅自前进。八条明确停止通过不能抵消禁止调用；诊断 ct65 未部署，该试验结束后恢复 ct63，当前候选见版本表。
 - [ct66 即时停止回执](docs/validation/stop-dispatch.md)附八组实际 MCP 调度回放、回执分配失败和十三组软件检查摘要。停止校验后同步完成，不留二次回调；公开工具及角色不变。包内只核对记录完整性，重跑控制与分配失败测试需要完整 checkout，不是第八组模型成绩，也没有部署。
 - [状态话术限定](docs/validation/stop-role-qualifier.md)的十四次定向对照未采纳：两组严格匹配均 6/7，停止静默均 0/3，平台原角色已恢复。它不是第八组完整模型评分。[灵矽联调反馈](docs/validation/platform-tts-feedback.md)另提供过程文字进入 TTS 与含糊改稿的事件、复核步骤和协作问题，尚未代发。
-- [ct67 相对改稿门禁](docs/validation/relative-draft-duration.md)附十三组原生回放、分类器来源和二十条定向合成语音审阅。真实 STT／终态均 20/20，严格调用 14/20，六条多查状态，在线实际澄清拒绝为零。它不替代旧 `spoken_stt_review` 或增加第八组完整文本评分；本包只核对这些材料的完整性，完整控制重放需 checkout 与对应主机。
+- [ct67 历史改稿门禁](docs/validation/history/relative-draft-duration.md)附十三组原生回放、分类器来源和二十条定向合成语音审阅。真实 STT／终态均 20/20，严格调用 14/20，六条多查状态，在线实际澄清拒绝为零。它不替代旧 `spoken_stt_review` 或增加第八组完整文本评分；本包只核对这些材料的完整性，完整控制重放需 checkout 与对应主机。
 - [ct68 含糊动作门禁](docs/validation/vague-action-admission.md)附二十六组原生对照和二十条定向真实 STT 审阅：严格调用 16/20、终态 20/20，三次猜测执行被拒绝。八条含糊输入零启动不能抵消模型错误或多余查询；本包仅核对材料完整性，不增加第八组固定成绩。原始压缩轨迹及完整控制重放需要 checkout，最近部署仍为 ct45。
 - [意图分流角色对照](docs/validation/intent-routing-role.md)72 次文本会话未采纳：两组均 29/36，各有禁止调用，停止静默均 0/6；原角色与参数已恢复。该主机使用占位识别文本，不能计作 STT 门禁覆盖。本包只核对所存材料完整性，不增加第八组固定模型成绩；完整回放需要 checkout 与原始轨迹。
 - [文本模拟识别输入](docs/validation/capture-recognized-input.md)把原话注入新的文本主机，与旧占位和真实 STT 分别标记。二十四条会话终态匹配，严格调用 20/24，两次猜测动作被拒绝；它不是 ASR 或第八组固定成绩。本包核对材料，完整控制复算仍需 checkout 与固定主机。
@@ -134,7 +134,7 @@ python3 scripts/review_lingxi_reference.py
 - 语义偏差见[候选完整回归](docs/validation/lingxi-ct57-full.md)与[历史基线](docs/validation/lingxi-role-5991.md)，远端音频包的端侧处理见[播放回归](docs/validation/lingxi-ct51-playback.md)。
 - 供电与机械设计见[硬件架构](hardware/architecture/README.md)和[整机模型辅助设计](tools/model-design/README.md)。
 
-家长与孩子可双击[离线泡泡剧场](family/rehearsal.html)，选择模板、修改和确认，在屏幕上排演各步，也可以中途全停。排演页内没有设备或灵矽连接。主持人可用浏览器打开包内的[亲子观察单](tools/family-study/observer.html)，逐户下载匿名记录，用 `python3 scripts/analyze_family_sessions.py 记录目录/*.json` 分别汇总原型与实机结果。
+主持人可用浏览器打开包内的[亲子观察单](tools/family-study/observer.html)，逐户下载匿名记录，用 `python3 scripts/analyze_family_sessions.py 记录目录/*.json` 分别汇总原型与实机结果。
 
 包内材料可离线阅读和评测。原始部署记录、完整轨迹和 CAD 资产见[对应源码提交](https://github.com/miclle/cybertrack/tree/{head})。还可以在包内运行以下检查。
 
@@ -170,7 +170,6 @@ def main():
                "firmware/esp32-audio/apply_overlay.py", "firmware/" + current["last_recorded_deployment"], STT_CAPTURE,
                *(str(Path(score_path).with_name(f"full-{suite}.json.gz"))
                  for _, score_path, suites, _ in EVALUATIONS for suite in suites)]
-    sources.extend(["scripts/package_family_rehearsal.py", "tools/family-study/rehearsal.js", "firmware/esp32-audio/web/index.html"])
     sources.extend(str(Path(FULL_SPEECH_SCORES).with_name(f'full-{suite}.json.gz')) for suite in ('voice', 'compose'))
     dirty = bool(subprocess.check_output(["git", "status", "--porcelain", "--", *paths, *sources], cwd=ROOT, text=True))
     payload = build_archive(ROOT, paths, head, dirty)

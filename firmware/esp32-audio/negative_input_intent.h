@@ -24,14 +24,11 @@ inline Kind Clause(std::string_view text) {
             if (TakePrefix(text,prefix)) { removed=true;break; }
         if (!removed) break;
     }
-    for (auto keep : {"保留现在的草稿","保留当前草稿","保留这份草稿"})
-        if (text==keep) return Kind::PreserveExisting;
     bool negated=false;
     for (auto prefix : {"不要","不许","不准","不用","禁止","别","我没让你"})
         if (TakePrefix(text,prefix)) { negated=true;break; }
     if (!negated) return Kind::None;
-    for (auto body : {"编排","编排表演","编排新节目","编排新的表演","创建节目","创建表演","新建表演",
-                      "取消草稿","取消这个草稿","取消这份草稿","取消表演","取消序列",
+    for (auto body : {"取消表演","取消序列",
                       "停止","停","停下","停下来","停止当前序列","停止序列","停止当前动作","取消当前序列"})
         if (text==body) return Kind::PreserveExisting;
     for (auto prefix : {"开启","启动","打开","执行"})

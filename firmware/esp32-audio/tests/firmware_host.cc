@@ -1,8 +1,9 @@
 // Actual MCP dispatch/callbacks with a virtual clock and no board IO.
 #include "receipt_host.h"
+#include "action_plan_json.h"
 #include "admission_result.h"
 #include "voice_feedback.h"
-#include "draft_duration_intent.h"
+#include "non_execution_intent.h"
 #include "vague_action_intent.h"
 #include "mcp_tool_types.h"
 #include "mcp_raw_json.h"
@@ -110,19 +111,6 @@ int main(int argc, char** argv) {
         int ticket=sessions.VoiceClaim(clock_ms,INT_MIN,AudioActionGuard::PlanMode);
         Reply("sequence",ticket,0,nullptr,0,0,nullptr,&plan);
         if (!sessions.plan_active || !guard.Moving()) return 2;
-    } else if (profile == "corpus_draft7" || profile == "corpus_draft7_conflict") {
-        ShowDraft::Command edit;
-        edit.plan.count=2;
-        edit.plan.steps[0]={"left",880,0,0,0,100};
-        edit.plan.steps[1]={"none",0,0,1000,0,100};
-        for (int revision=0;revision<7;++revision) {
-            Reply("get_status");
-            edit.revision=revision;
-            int ticket=sessions.VoiceClaim(clock_ms,INT_MIN+revision,AudioActionGuard::PlanMode);
-            if (!ticket) return 2;
-            Reply("show_edit",ticket,0,nullptr,0,0,nullptr,nullptr,100,&edit);
-            if (sessions.draft.CurrentRevision()!=static_cast<unsigned>(revision+1)) return 2;
-        }
     } else if (profile != "corpus_idle") return 2;
 
     // Bootstrap requests belong to setup, not the captured platform RPC epoch.
@@ -135,16 +123,15 @@ int main(int argc, char** argv) {
     std::unique_ptr<cJSON,decltype(&cJSON_Delete)> calls(cJSON_ParseWithOpts(input.c_str(),nullptr,true),cJSON_Delete);
     if (!cJSON_IsArray(calls.get())) return 2;
     int id=1;
-    bool conflict_applied=false;
     cJSON* call;
     cJSON_ArrayForEach(call,calls.get()) {
         const auto* inspect=cJSON_GetObjectItemCaseSensitive(call,"inspect_ms");
         if (inspect) {
-            if (!ShowInteger(inspect,0,300000) || !Advance(inspect->valueint)) return 2;
+            if (!WebInteger(inspect,0,300000) || !Advance(inspect->valueint)) return 2;
             continue;
         }
         const auto* elapsed=cJSON_GetObjectItemCaseSensitive(call,"elapsed_ms");
-        if (!ShowInteger(elapsed,0,300000) || !Advance(elapsed->valueint)) return 2;
+        if (!WebInteger(elapsed,0,300000) || !Advance(elapsed->valueint)) return 2;
         if (const auto* text=cJSON_GetObjectItemCaseSensitive(call,"input_text")) {
             if (!cJSON_IsString(text)) return 2;
             CyberTrackVoiceInput(text->valuestring);
@@ -165,21 +152,8 @@ int main(int argc, char** argv) {
         if (!cJSON_IsString(name)) return 2;
         std::string tool=name->valuestring;
         if (tool.compare(0,10,"self_tank_")==0) tool.replace(0,10,"self.tank.");
-        if (profile=="corpus_draft7_conflict" && !conflict_applied && tool=="self.tank.compose") {
-            host_web_owner=sessions.Acquire(clock_ms);
-            if (!host_web_owner || !sessions.Heartbeat(clock_ms,host_web_owner)) return 2;
-            last_web_heartbeat=clock_ms;
-            ShowDraft::Command edit;
-            edit.edit=ShowDraft::ReplaceStep;
-            edit.revision=sessions.draft.CurrentRevision();
-            edit.step=2;
-            edit.plan.count=1;
-            edit.plan.steps[0]={"none",0,0,3000,0,100};
-            if (std::strcmp(sessions.WebDraft(clock_ms,host_web_owner,1,sessions.window,edit),"draft_saved")) return 2;
-            conflict_applied=true;
-        }
         const auto* rpc=cJSON_GetObjectItemCaseSensitive(call,"rpc_id");
-        if (rpc && !ShowInteger(rpc,INT_MIN,INT_MAX)) return 2;
+        if (rpc && !WebInteger(rpc,INT_MIN,INT_MAX)) return 2;
         server.reply.clear();
         const auto* defer=cJSON_GetObjectItemCaseSensitive(call,"defer");
         if (defer && !cJSON_IsBool(defer)) return 2;

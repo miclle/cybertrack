@@ -3,7 +3,7 @@
 #include "action_plan_json.h"
 #include "recent_command.h"
 #include "status_facts.h"
-#include "draft_duration_intent.h"
+#include "non_execution_intent.h"
 #include "vague_action_intent.h"
 #include "web_server.h"
 #include "action_outputs.h"
@@ -120,7 +120,7 @@ void SafetyTask(void*) {
     }
 }
 std::string Reply(int voice_turn, const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
-                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100, const ShowDraft::Command* edit = nullptr) {
+                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100) {
     // A validated stop runs synchronously. Apply it before receipt allocation;
     // a later input or reporting failure must never defer the output shutdown.
     bool negative_stop = false;
@@ -153,9 +153,9 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
         outcome = "voice_input_failed";
     } else if (voice_turn >= 0 && sessions.voice_negative != negative_input::Kind::None && strcmp(operation, "stop") && strcmp(operation, "get_status")) {
         outcome = "input_negated";
-    } else if (voice_turn >= 0 && sessions.voice_draft_unquantified && strcmp(operation, "stop") && strcmp(operation, "get_status")) {
-        outcome = "draft_duration_unspecified";
-    } else if (voice_turn >= 0 && sessions.voice_action_unspecified && !edit && strcmp(operation, "stop") && strcmp(operation, "get_status")) {
+    } else if (voice_turn >= 0 && sessions.voice_non_execution && strcmp(operation, "stop") && strcmp(operation, "get_status")) {
+        outcome = "execution_not_requested";
+    } else if (voice_turn >= 0 && sessions.voice_action_unspecified && strcmp(operation, "stop") && strcmp(operation, "get_status")) {
         outcome = "action_unspecified";
     } else if (web_session && !sessions.Owns(web_session)) {
         outcome = "session_expired";
@@ -166,11 +166,7 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
     } else if (web_session && !strcmp(operation, "release")) {
         sessions.Release(now, web_session);
     } else if (command) {
-        if (!strcmp(operation, "show_edit"))
-            outcome = sessions.WebDraft(now, web_session, command->sequence, command->window, command->draft);
-        else if (!strcmp(operation, "show_confirm"))
-            outcome = sessions.WebConfirm(now, web_session, command->sequence, command->window, command->draft.revision);
-        else if (!strcmp(operation, "set_auto_avoidance"))
+        if (!strcmp(operation, "set_auto_avoidance"))
             outcome = sessions.WebAutoAvoidance(now, web_session, command->sequence, command->window, command->enabled);
         else if (!strcmp(operation, "set_speed"))
             outcome = sessions.WebSpeed(now, web_session, command->sequence, command->window, command->speed_percent);
@@ -192,8 +188,6 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
             outcome = sessions.WebAction(now, web_session, command->sequence, command->window,
                                          command->target, duration, water_duration, direction, command->bubbles_ms, command->ignition_ms);
 
-    } else if (edit) {
-        outcome = sessions.VoiceDraft(now, ticket, *edit);
     } else if (!strcmp(operation, "set_speed")) {
         outcome = sessions.VoiceSetSpeed(now, ticket, duration);
     } else if (!strcmp(operation, "adjust_speed")) {
@@ -219,21 +213,20 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
     const bool plan_started = plan && sessions.plan_active && sessions.plan_step == 1 &&
         (!plan->steps[0].move_ms || guard.Moving()) && (!plan->steps[0].water_ms || guard.Watering()) &&
         (!plan->steps[0].bubbles_ms || guard.Bubbling()) && (!plan->steps[0].ignition_ms || guard.Igniting());
-    const bool requested_active = !strcmp(operation, "show_confirm") ? sessions.plan_step == 1 && sessions.PlanStepActive() : plan ? plan_started : !strcmp(operation, "frenzy") ? sessions.frenzy_until && guard.Moving() && guard.Watering() && guard.Bubbling() :
+    const bool requested_active = plan ? plan_started : !strcmp(operation, "frenzy") ? sessions.frenzy_until && guard.Moving() && guard.Watering() && guard.Bubbling() :
         !strcmp(operation, "drive_start") ? guard.Moving() && (!water_duration || guard.Watering()) :
         (!strcmp(operation, "move") || !strcmp(operation, "set_speed") || !strcmp(operation, "adjust_speed") || !strcmp(operation, "drive_renew")) ? guard.Moving() :
         (!strcmp(operation, "water") || !strcmp(operation, "water_start") || !strcmp(operation, "water_renew")) ? guard.Watering() :
         (!strcmp(operation, "bubbles") || !strcmp(operation, "bubbles_start") || !strcmp(operation, "bubbles_renew")) ? guard.Bubbling() :
         !strcmp(operation, "ignition") ? guard.Igniting() : guard.Moving() && guard.Watering();
     if ((!strcmp(outcome, "accepted") || !strcmp(outcome, "renewed")) && !requested_active) {
-        if (plan || !strcmp(operation, "show_confirm") || !strcmp(operation, "move_and_water") || !strcmp(operation, "drive_start") || !strcmp(operation, "frenzy")) sessions.Stop(now);
-        if (plan || !strcmp(operation, "show_confirm")) sessions.plan_result = "cancelled";
+        if (plan || !strcmp(operation, "move_and_water") || !strcmp(operation, "drive_start") || !strcmp(operation, "frenzy")) sessions.Stop(now);
+        if (plan) sessions.plan_result = "cancelled";
         outcome = "cancelled_before_output";
     }
     ApplyLocked(now);
     if (outputs.fault) outcome = "output_fault";
-    if (voice_turn >= 0 && strcmp(outcome, "ok") && strcmp(outcome, "accepted") &&
-        strcmp(outcome, "draft_saved") && strcmp(outcome, "draft_cancelled"))
+    if (voice_turn >= 0 && strcmp(outcome, "ok") && strcmp(outcome, "accepted"))
         sessions.FailVoiceTurn(voice_turn);
     const bool watering = guard.Watering(), moving = guard.Moving(), bubbling = guard.Bubbling(), igniting = guard.Igniting();
     const int left = moving ? guard.left : 0, right = moving ? guard.right : 0;
@@ -273,9 +266,7 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
     const char* plan_result = sessions.plan_result;
     recent_command.Record(now, operation, outcome, web_session != 0);
     const auto recent = recent_command;
-    if (!web_session && !strcmp(operation, "get_status") && !strcmp(outcome, "ok")) sessions.ObserveVoiceDraft(now);
-    const auto draft = sessions.draft;
-    const auto plan_source = sessions.PlanSource();
+    const auto plan_source = (sessions.plan_active ? "voice" : "none");
     xSemaphoreGive(lock);
     const auto uptime = Decimal(now);
     const auto recent_age = recent.valid && now >= recent.at ? Decimal(now - recent.at) : "null";
@@ -289,7 +280,7 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
         "{\"device_id\":\"%s\",\"boot_id\":\"%s\",\"request_sequence\":%u,\"operation\":\"%s\","
         "\"result\":\"%s\",\"state\":\"%s\",\"fault\":\"%s\",\"uptime_ms\":%s,"
         "\"logical_outputs\":{\"left\":%d,\"right\":%d,\"water\":%s,\"bubbles\":%s,\"ignition\":%s},"
-        "\"capabilities\":{\"show_draft\":true,\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
+        "\"capabilities\":{\"distance\":true,\"forward_protection\":true,\"auto_avoidance\":false,\"speed_control\":true,\"sequence\":true,\"frenzy\":true,\"water_hold\":true,\"bubbles_hold\":true,\"move\":true,\"water\":true,\"move_and_water\":true,\"bubbles\":true,\"ignition\":true},"
         "\"local_authorization_required\":false,\"starts_this_boot\":%u,\"max_duration_ms\":30000,\"last_duration_ms\":%u,\"remaining_ms\":%u,"
         "\"move_last_duration_ms\":%u,\"water_last_duration_ms\":%u,\"move_remaining_ms\":%u,\"water_remaining_ms\":%u,"
         "\"web_speed_percent\":%d,\"move_speed_percent\":%d,\"speed_min_percent\":60,\"speed_max_percent\":100,"
@@ -316,14 +307,13 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
         recent.valid ? (recent.web ? "web" : "voice") : "none", recent_age.c_str(), distance.c_str());
     result.assign(json);
     result.pop_back();
-    if (!strcmp(outcome, "draft_duration_unspecified"))
-        result += ",\"clarification_facts\":\"本轮识别到相对长短表达，但未识别到量化时长。这次没有修改草稿或新启动动作。只问具体改成几秒，不猜半秒或减半，不自动重试、删除、取消或改用动作工具补做。\"";
+    if (!strcmp(outcome, "execution_not_requested"))
+        result += ",\"clarification_facts\":\"本轮识别为预览、编辑或暂不执行的请求，没有启动或调整动作。设备不提供表演编辑与预览；说明当前不支持，不改用动作工具补做。\"";
     if (!strcmp(outcome, "action_unspecified"))
         result += ",\"clarification_facts\":\"本轮识别文本含泛化动作或指代，设备未核对到具体动作名称或方向。这次请求没有新启动动作。先澄清用户意图，不猜前进方向，不换工具补做，不主动建议试动。\"";
     if (!strcmp(outcome, "input_negated"))
-        result += ",\"negation_facts\":\"本轮识别为受支持的完整否定句，本次控制请求未执行。已有草稿及运行状态未因本次请求改变；不是停止或保存成功，不自动重试、取消、改稿或换工具补做。\"";
+        result += ",\"negation_facts\":\"本轮识别为受支持的完整否定句，本次控制请求未执行。运行状态未因本次请求改变；不是停止成功，不自动重试或换工具补做。\"";
     if (!strcmp(operation, "get_status")) {
-        result += ",\"draft_status_facts\":\"" + std::string(DraftReadFacts(draft.active)) + "\"";
         if (const char* guidance = FaultRecovery(reason))
             result += ",\"fault_recovery\":\"" + std::string(guidance) + "\"";
         auto facts = StatusFacts(reason, forward_blocked, plan_active,
@@ -335,16 +325,16 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
             facts += "长按通道的剩余毫秒只供设备检查续租；松手、停止或续租中断才会结束，不能据此播报倒计时。";
         result += ",\"status_facts\":\"" + facts + "\"";
     }
-    result += ",\"sequence_source\":\"" + std::string(plan_source) + "\",\"show_draft\":" + ShowDraftJson(draft, now) + "}";
+    result += ",\"sequence_source\":\"" + std::string(plan_source) + "\"}";
     if (!web_session || (strcmp(operation, "get_status") && strcmp(operation, "drive_renew") && strcmp(operation, "water_renew") && strcmp(operation, "bubbles_renew")))
         ESP_LOGI("CT_AUDIO", "RESULT %s", result.c_str());
     return result;
 
 }
 std::string Reply(const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
-                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100, const ShowDraft::Command* edit = nullptr) {
+                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100) {
     // Trusted board/web calls have no remote input token. MCP always passes one.
-    return Reply(-1, operation, ticket, duration, direction, water_duration, web_session, command, plan, speed_percent, edit);
+    return Reply(-1, operation, ticket, duration, direction, water_duration, web_session, command, plan, speed_percent);
 }
 }
 
@@ -359,12 +349,12 @@ void CyberTrackVoiceInput(const char* text) {
     bool content = false;
     for (const char* p = text; *p; ++p) if (*p != ' ' && *p != '\t' && *p != '\r' && *p != '\n') { content = true; break; }
     if (!content) return;
-    const bool unquantified = draft_duration::NeedsClarification(text);
+    const bool non_execution = non_execution::Requested(text);
     const bool unspecified = vague_action::NeedsClarification(text);
     const auto negative = negative_input::Classify(text);
     xSemaphoreTake(lock, portMAX_DELAY);
     sessions.AdvanceVoiceTurn(true);
-    sessions.voice_draft_unquantified = unquantified;
+    sessions.voice_non_execution = non_execution;
     sessions.voice_action_unspecified = unspecified;
     sessions.voice_negative = negative;
     xSemaphoreGive(lock);
@@ -377,8 +367,7 @@ void CyberTrackVoiceFailure(int turn) {
 void CyberTrackVoiceResult(int turn, const char* receipt) {
     auto* object = cJSON_Parse(receipt);
     const auto* result = cJSON_GetObjectItemCaseSensitive(object, "result");
-    const bool success = cJSON_IsString(result) && (!strcmp(result->valuestring, "ok") || !strcmp(result->valuestring, "accepted") ||
-        !strcmp(result->valuestring, "draft_saved") || !strcmp(result->valuestring, "draft_cancelled"));
+    const bool success = cJSON_IsString(result) && (!strcmp(result->valuestring, "ok") || !strcmp(result->valuestring, "accepted"));
     cJSON_Delete(object);
     if (!success) CyberTrackVoiceFailure(turn);
 }
@@ -387,7 +376,7 @@ int CyberTrackActionClaim(int rpc_id, const char* operation, const char** error,
     xSemaphoreTake(lock, portMAX_DELAY);
     auto now = Now(); TickLocked(now);
     const auto target = (!strcmp(operation, "self.tank.adjust_speed") || !strcmp(operation, "self.tank.set_speed")) ? AudioActionGuard::SpeedMode :
-        (!strcmp(operation, "self.tank.sequence") || !strcmp(operation, "self.tank.compose")) ? AudioActionGuard::PlanMode :
+        !strcmp(operation, "self.tank.sequence") ? AudioActionGuard::PlanMode :
         !strcmp(operation, "self.tank.frenzy") ? AudioActionGuard::FrenzyMode :
         !strcmp(operation, "self.tank.move") ? AudioActionGuard::MoveOnly :
         !strcmp(operation, "self.tank.water") ? AudioActionGuard::WaterOnly :
@@ -519,28 +508,13 @@ void InitializeCyberTrackTools() {
         [](const PropertyList& p) -> ReturnValue {
             return Reply(p["_ct_turn"].value<int>(), "adjust_speed", p["_ct_ticket"].value<int>(), p["delta_percent"].value<int>());
         });
-    server.AddTool("self.tank.compose",
-        "查询get_status只读取现状，绝不创建或保存草稿。用户明确要求新建或修改表演时，查完版本必须实际调用本工具，拿到本次result=draft_saved和新revision后才能说已保存；没有保存回执时说明尚未保存，不能凭计划或旧草稿宣称完成。取消也必须先实际查询，再调用cancel并收到draft_cancelled才说已取消。不要播报推理或操作计划。仅当用户明确编排、预览或修改泡泡表演草稿时使用；不执行动作。每次改稿前必须在本次会话调用get_status读取show_draft最新revision与steps，即使用户或上下文已经给出版本也要查。只允许行走和吹泡泡。喷水、点火、放电、护盾等不支持的效果只说明限制，不调用本工具，不提交空数组。用户说短一点等相对时长且没有明确新时长时，只问要改成几秒。参数edit为replace/replace_step/remove_step/cancel，revision为当前草稿版本，无草稿填0；step为从1开始的步骤索引，整单替换或取消填0；“同时／一边…一边”把行走和泡泡写进同一个步骤，各填各的时长；“先…再／然后”写为先后两步。回顾用户要求的先后关系再保存。steps_json沿用sequence步骤格式，首版仅行走与泡泡，water_ms/ignition_ms均0。replace传完整1到16步，replace_step只传单步数组，其余步骤由设备保留；remove_step/cancel传空字符串。draft_saved表示保存未执行，简短说明改动并请家长在网页预览后点开始；draft_changed先说明版本已变，不自动重试。不能用sequence/move等工具替代确认；没有语音确认执行工具。",
-        PropertyList({Property("edit", kPropertyTypeString), Property("revision", kPropertyTypeInteger, 0, INT_MAX),
-                      Property("step", kPropertyTypeInteger, 0, 16), Property("steps_json", kPropertyTypeString)}),
-        [](const PropertyList& p) -> ReturnValue {
-            cJSON* root = cJSON_CreateObject();
-            cJSON_AddStringToObject(root, "edit", p["edit"].value<std::string>().c_str());
-            cJSON_AddNumberToObject(root, "revision", p["revision"].value<int>());
-            cJSON_AddNumberToObject(root, "step", p["step"].value<int>());
-            cJSON_AddStringToObject(root, "steps_json", p["steps_json"].value<std::string>().c_str());
-            ShowDraft::Command edit;
-            const bool valid = ParseShowEdit(root, edit); cJSON_Delete(root);
-            if (!valid) return std::string("{\"result\":\"invalid_plan\"}");
-            return Reply(p["_ct_turn"].value<int>(), "show_edit", p["_ct_ticket"].value<int>(), 0, nullptr, 0, 0, nullptr, nullptr, 100, &edit);
-        });
     server.AddTool("self.tank.sequence",
-        "直接动作指令使用本工具；明确编排、预览或修改草稿用compose，不得用本工具代替草稿确认。明确请求多个先后步骤或多通道同时执行时，一次提交整个序列，不能拆成连续单项调用。steps_json是JSON数组的字符串，1到16步，每步必须包含direction、move_ms、water_ms、bubbles_ms、ignition_ms五字段，可选speed_percent为60到100整数、默认100；每步独立指定行走PWM，全句指定速度时应用到各行走步骤。direction为forward/backward/left/right；不行走用none且move_ms=0。各时长为整数毫秒，0表示不用该通道，每步至少一通道；move_ms最多2147483647，喷水/泡泡最多30000，点火最多5000。一步内各通道同时启动、独立停止；全部结束并满足冷却后下一步，无指定时长时，本步100%速度（含省略速度）的left/right行走默认880，其他动作1000；同时或在某动作时做另一动作且只给一个时长则共享，分别遵守效果上限。不用额外步骤绕过效果上限。整单验证且四路均空闲才启动，运行中保留四路；失败不重试，停止/BOOT/断线/故障或网页抢占取消整单，不能补做。accepted仅表示序列已开始，sequence_result查询完成或取消。",
+        "仅在用户明确要求执行动作时使用；只预览、先别执行或编辑表演等请求不执行，说明不支持编辑与预览。明确请求多个先后步骤或多通道同时执行时，一次提交整个序列，不能拆成连续单项调用。steps_json是JSON数组的字符串，1到16步，每步必须包含direction、move_ms、water_ms、bubbles_ms、ignition_ms五字段，可选speed_percent为60到100整数、默认100；每步独立指定行走PWM，全句指定速度时应用到各行走步骤。direction为forward/backward/left/right；不行走用none且move_ms=0。各时长为整数毫秒，0表示不用该通道，每步至少一通道；move_ms最多2147483647，喷水/泡泡最多30000，点火最多5000。一步内各通道同时启动、独立停止；全部结束并满足冷却后下一步，无指定时长时，本步100%速度（含省略速度）的left/right行走默认880，其他动作1000；同时或在某动作时做另一动作且只给一个时长则共享，分别遵守效果上限。不用额外步骤绕过效果上限。整单验证且四路均空闲才启动，运行中保留四路；失败不重试，停止/BOOT/断线/故障或网页抢占取消整单，不能补做。accepted仅表示序列已开始，sequence_result查询完成或取消。",
         PropertyList({Property("steps_json", kPropertyTypeString)}),
         [](const PropertyList& p) -> ReturnValue {
             ActionPlan plan;
             if (!ParseActionPlan(p["steps_json"].value<std::string>(), plan)) return std::string("{\"result\":\"invalid_plan\"}");
             return Reply(p["_ct_turn"].value<int>(), "sequence", p["_ct_ticket"].value<int>(), 0, nullptr, 0, 0, nullptr, &plan);
         });
-    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,compose,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000");
+    ESP_LOGI("CT_AUDIO", "READY tools=status,stop,water,bubbles,ignition,frenzy,move,move_and_water,sequence,adjust_speed,set_speed concurrent=true motor_A=8/9/10 motor_B=11/12/13 GPIO18=LOW GPIO17=LOW GPIO21=LOW BOOT=stop_all move_max_ms=2147483647 water_max_ms=30000 bubbles_max_ms=30000 ignition_max_ms=5000");
 }

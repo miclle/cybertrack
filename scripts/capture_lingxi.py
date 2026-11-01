@@ -27,7 +27,6 @@ def fixture(context):
                   logical_outputs=dict(left=0,right=0,water=False,bubbles=False,ignition=False),
                   starts_this_boot=0, physical_feedback=False, actuator_backend='capture_fixture',
                   sequence_active=False, sequence_result='idle', frenzy_remaining_ms=0,
-                  show_draft=dict(active=False,revision=0,steps=[],expires_in_ms=0),
                   distance=dict(valid=True,error='none',distance_mm=600,age_ms=0),
                   proximity=dict(auto_avoidance_enabled=False,forward_blocked=False),
                   recent_command=dict(valid=False,age_ms=None),
@@ -40,25 +39,7 @@ def fixture(context):
     if '当前速度70%' in context:
         status.update(state='ACTIVE',starts_this_boot=1,move_direction='forward',move_speed_percent=70,move_remaining_ms=4000,move_source='voice')
         status['logical_outputs'].update(left=70,right=70)
-    if 'revision=7' in context:
-        steps=json.loads(re.search(r'steps=(\[.*\])；',context).group(1))
-        status['show_draft']=dict(active=True,revision=7,steps=steps,expires_in_ms=300000)
     return status
-
-
-def valid_draft_steps(steps):
-    """Mirror the ct45 draft subset, not its timing/ownership execution logic."""
-    required={'direction','move_ms','water_ms','bubbles_ms','ignition_ms'}
-    if not isinstance(steps,list) or not 1<=len(steps)<=16:return False
-    for step in steps:
-        if not isinstance(step,dict) or not required<=step.keys() or step.keys()-required-{'speed_percent'}:return False
-        values=[step[k] for k in ('move_ms','water_ms','bubbles_ms','ignition_ms')]
-        speed=step.get('speed_percent',100)
-        if any(type(v) is not int or v<0 for v in values) or type(speed) is not int or not 60<=speed<=100:return False
-        move,water,bubbles,ignition=values
-        if water or ignition or not (move or bubbles) or move>2147483647 or bubbles>30000:return False
-        if step['direction'] not in (('forward','backward','left','right') if move else ('none',)):return False
-    return True
 
 
 def simulated_reply(status, name, args):
@@ -66,6 +47,8 @@ def simulated_reply(status, name, args):
     name=name.replace('self_tank_','self.tank.',1)
     if name=='self.tank.get_status':
         return copy.deepcopy(status)
+    if name not in {'self.tank.'+n for n in ('get_status','stop','move','water','move_and_water','bubbles','ignition','frenzy','sequence','set_speed','adjust_speed')}:
+        return dict(rpc_error='Unknown tool')
     result=copy.deepcopy(status)
     result['operation']=name.removeprefix('self.tank.')
     if name=='self.tank.stop':
@@ -78,25 +61,6 @@ def simulated_reply(status, name, args):
             result[channel+'_source']='none'
         result['recent_command']=dict(valid=True,operation='stop',result='ok',source='voice',age_ms=0)
         result['logical_outputs']=dict(left=0,right=0,water=False,bubbles=False,ignition=False)
-        result['show_draft']=dict(active=False,revision=0,steps=[],expires_in_ms=0)
-    elif name=='self.tank.compose':
-        draft=status['show_draft'];edit=args.get('edit');rev=args.get('revision')
-        if rev!=draft['revision']:result['result']='draft_changed'
-        elif edit=='cancel':
-            result['result']='draft_cancelled';result['show_draft']=dict(active=False,revision=0,steps=[],expires_in_ms=0)
-        else:
-            steps=copy.deepcopy(draft['steps']);index=args.get('step',0)-1
-            if edit in ('replace','replace_step'):
-                try:incoming=json.loads(args['steps_json'])
-                except (ValueError,TypeError):incoming=None
-                if not valid_draft_steps(incoming) or (edit=='replace_step' and len(incoming)!=1):
-                    result['result']='invalid_plan';return result
-            if edit=='replace':steps=incoming
-            elif edit=='replace_step' and 0<=index<len(steps):steps[index]=incoming[0]
-            elif edit=='remove_step' and 0<=index<len(steps):steps.pop(index)
-            else:raise ValueError('unsupported fixture edit')
-            if not valid_draft_steps(steps):result['result']='invalid_plan';return result
-            result['result']='draft_saved';result['show_draft']=dict(active=True,revision=rev+1,steps=steps,expires_in_ms=300000)
     else:
         # This is a simulated acceptance used to observe the model's subsequent
         # response, never evidence that firmware accepted or executed a request.
@@ -136,7 +100,7 @@ def timed_status(profile, elapsed_ms, name, args):
 def host_reply(executable, profile, history, name, args, elapsed_ms):
     """Re-run this conversation's valid RPC prefix from the same initial firmware state."""
     tool = name.replace('self_tank_', 'self.tank.', 1)
-    allowed = ('get_status', 'stop', 'compose') if profile in ('two_step_web_draft','empty_web_draft') else ('get_status', 'set_speed')
+    allowed = ('get_status', 'set_speed')
     if tool.removeprefix('self.tank.') not in allowed:
         raise ValueError('RPC outside host replay')
     call = dict(name=tool, arguments=args, elapsed_ms=elapsed_ms)
@@ -160,15 +124,6 @@ def firmware_profile(context):
         '语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障': 'corpus_forward70',
         '当前动作或序列可能正在运行，停止无需查询前置': 'corpus_sequence',
     }
-    draft_steps = [
-        dict(direction='left',move_ms=880,water_ms=0,bubbles_ms=0,ignition_ms=0,speed_percent=100),
-        dict(direction='none',move_ms=0,water_ms=0,bubbles_ms=1000,ignition_ms=0,speed_percent=100)]
-    saved_context = ('模拟 get_status 回执：show_draft.active=true、revision=7、steps='
-                     + json.dumps(draft_steps,ensure_ascii=False)
-                     + '；设备空闲。仅定义评测输入，不是实测。')
-    profiles['模拟 get_status 回执：无草稿 revision=0；设备空闲'] = 'corpus_idle'
-    profiles[saved_context] = 'corpus_draft7'
-    profiles[saved_context+' 本轮首次编辑前，网页把第二步泡泡改为三秒。'] = 'corpus_draft7_conflict'
     if context not in profiles:
         raise ValueError('no firmware host profile for this precondition')
     return profiles[context]
@@ -236,7 +191,6 @@ async def capture_case(connection,tools,case,timeout=45):
     uplink = case.get('opus_frames')
     input_ms=None
     call_history=[]
-    draft_observed_at=None
     session=None;sent=False;deadline=opened+timeout;audio_bytes=0
     async with connect(ENDPOINT,additional_headers=headers,proxy=None,open_timeout=15,max_size=2**20) as ws:
         async def send(message):await ws.send(json.dumps(message,ensure_ascii=False))
@@ -288,34 +242,23 @@ async def capture_case(connection,tools,case,timeout=45):
                                 receipt=json.loads(wire_reply['result']['content'][0]['text'])
                         elif validation is not None and not validation['valid']:
                             receipt=dict(rpc_error=validation['error'])
-                        elif version in ('draft_host','speed_host'):
+                        elif version == 'speed_host':
                             if input_ms is None:raise ValueError('missing evaluation input')
                             receipt=host_reply(case['host_binary'],case['initial_profile'],call_history,name,args,timeline[-1]['ms']-input_ms)
                         elif version == 'timed_host':
                             if input_ms is None:raise ValueError('missing evaluation input')
                             receipt=timed_status(case['initial_motion'],timeline[-1]['ms']-input_ms,name,args)
-                        elif version != 'ct45' and name.endswith('compose') and (
-                                draft_observed_at is None or time.monotonic()-draft_observed_at >= 30):
-                            receipt={**copy.deepcopy(status),'operation':'show_edit','result':'draft_changed'}
                         else:
                             receipt=simulated_reply(status,name,args)
-                        if case.get('draft_read_facts_fixture') and name.endswith('get_status') and 'rpc_error' not in receipt:
-                            helper = ROOT/'build/lingxi-schema-export/draft-read-fixture'
-                            fields = json.loads(subprocess.check_output([str(helper),'draft_read'],
-                                input=json.dumps(receipt), text=True, timeout=10))
-                            receipt.update(fields)
-                        if name.endswith('compose') or name.endswith('stop'):draft_observed_at=None
-                        if name.endswith('get_status') and 'rpc_error' not in receipt:draft_observed_at=time.monotonic()
                         if 'rpc_error' not in receipt and (version == 'ct47' or (version == 'ct46' and name.endswith('get_status'))):
                             helper = Path(__file__).resolve().parents[1] / 'build/lingxi-schema-export/status-fixture'
                             output = subprocess.run([str(helper), version], input=json.dumps(receipt),
                                 text=True, capture_output=True, check=True).stdout.strip()
                             if version == 'ct47':
                                 fields = json.loads(output)
-                                receipt['show_draft']['editing_capabilities'] = fields.pop('editing_capabilities')
                                 if name.endswith('get_status'): receipt.update(fields)
                             else: receipt['status_facts'] = output
-                        if (name.endswith('compose') or name.endswith('stop')) and 'rpc_error' not in receipt:status=copy.deepcopy(receipt);status['result']='ok'
+                        if name.endswith('stop') and 'rpc_error' not in receipt:status=copy.deepcopy(receipt);status['result']='ok'
                         if 'rpc_error' in receipt and case.get('admission_result_fixture'):
                             row.setdefault('original_admission_errors',[]).append(receipt['rpc_error'])
                             receipt = dict(operation=name.removeprefix('self.tank.'), result='rejected',
@@ -386,7 +329,7 @@ async def run(args):
     if args.output.exists():raise ValueError('refusing to overwrite an existing capture')
     connection=json.loads(args.connection.read_text())
     tools=json.loads(args.tools.read_text())['tools']
-    if len(tools)!=12 or any(not t['name'].startswith('self.tank.') for t in tools):raise ValueError('expected 12 robot-only schemas')
+    if len(tools)!=11 or any(not t['name'].startswith('self.tank.') for t in tools):raise ValueError('expected 11 robot-only schemas')
     cases=json.loads(args.corpus.read_text())['cases']
     if args.ids:
         requested=set(args.ids.split(','));cases=[c for c in cases if c['id'] in requested]
@@ -402,22 +345,21 @@ async def run(args):
     if getattr(args, 'raw_text', False):
         for case in cases: case['raw_text']=True
     version = 'timed_host' if timed else 'ct47' if getattr(args,'ct47',False) else 'ct46' if getattr(args,'ct46',False) else 'ct45'
-    draft_host=getattr(args,'draft_host',None)
     speed_host=getattr(args,'speed_host',None)
     if getattr(args,'admission_result_fixture',False) and not speed_host:
         raise ValueError('admission result fixture requires speed host')
     if speed_host and not getattr(args,'synthetic_speech',False):
         raise ValueError('speed host requires synthetic speech')
-    if draft_host or speed_host:
-        version='draft_host' if draft_host else 'speed_host'
-        binary=draft_host or ROOT/'build/audio-host/receipt_replay'
+    if speed_host:
+        version='speed_host'
+        binary=ROOT/'build/audio-host/receipt_replay'
         for case in cases:
-            case.update(host_binary=binary.resolve(), initial_profile=getattr(args,'draft_profile','two_step_web_draft') if draft_host else speed_host)
+            case.update(host_binary=binary.resolve(), initial_profile=speed_host)
     firmware_host=getattr(args,'firmware_host',None)
     if firmware_host:
         if not (getattr(args,'raw_text',False) or getattr(args,'synthetic_speech',False)):
             raise ValueError('full firmware host requires raw text or synthetic speech')
-        if getattr(args,'argument_validator',None) or getattr(args,'draft_read_facts_fixture',False):
+        if getattr(args,'argument_validator',None):
             raise ValueError('full firmware host includes its own validation and status facts')
         version='firmware_host'
         for case in cases:
@@ -428,8 +370,6 @@ async def run(args):
         case['fixture_version']=version
         if getattr(args,'argument_validator',None):
             case['argument_validator']=args.argument_validator.resolve()
-        if getattr(args,'draft_read_facts_fixture',False):
-            case['draft_read_facts_fixture']=True
         if getattr(args,'admission_result_fixture',False):
             case['admission_result_fixture']=True
         if getattr(args,'audio_packets',False): case['audio_packets']=True
@@ -445,32 +385,28 @@ async def run(args):
         trace['argument_validator_sha256']=hashlib.sha256(args.argument_validator.read_bytes()).hexdigest()
     synthetic = getattr(args, 'synthetic_speech', False)
     if synthetic:
-        if timed or draft_host:
+        if timed:
             raise ValueError('synthetic speech currently uses static isolated receipts')
         import synthetic_speech
         trace['input_mode'] = 'synthetic_opus'
         trace['synthesis_source_sha256'] = hashlib.sha256(Path(synthetic_speech.__file__).read_bytes()).hexdigest()
         trace['scope'] = 'Synthesized speech over real platform ASR; isolated fixture receipts; no microphone, speaker or device IO'
-    trace['draft_read_facts_fixture']=getattr(args,'draft_read_facts_fixture',False)
-    if trace['draft_read_facts_fixture']:
-        trace['draft_facts_header_sha256']=hashlib.sha256((ROOT/'firmware/esp32-audio/status_facts.h').read_bytes()).hexdigest()
-        trace['draft_facts_helper_sha256']=hashlib.sha256((ROOT/'build/lingxi-schema-export/draft-read-fixture').read_bytes()).hexdigest()
-    if timed or draft_host or speed_host or firmware_host:
-        binary=firmware_host or draft_host or ROOT/'build/audio-host/receipt_replay'
+    if timed or speed_host or firmware_host:
+        binary=firmware_host or ROOT/'build/audio-host/receipt_replay'
         trace['host_replay_sha256']=hashlib.sha256(binary.read_bytes()).hexdigest()
     if getattr(args,'audio_packets',False):trace['audio_packet_sizes_recorded']=True
     if getattr(args,'protocol_events',False):trace['protocol_observations_recorded']=True
-    if draft_host or speed_host:
-        trace['initial_profile']=getattr(args,'draft_profile','two_step_web_draft') if draft_host else speed_host
+    if speed_host:
+        trace['initial_profile']=speed_host
     trace['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
     if firmware_host:
         trace['scope']='Real platform with raw input; actual MCP dispatch, callbacks and guard on host; virtual clock, 600 mm simulated range, immediate schedule; zero board IO'
         formats=[]
-        for name in ('self.tank.sequence','self.tank.compose'):
+        for name in ('self.tank.sequence',):
             schema=next((tool for tool in tools if tool['name']==name),{}).get('inputSchema',{}).get('properties',{})
             formats.append('native_array' if schema.get('steps',{}).get('type')=='array' else
                            'legacy_string' if schema.get('steps_json',{}).get('type')=='string' else 'unknown')
-        if formats[0]!=formats[1] or formats[0]=='unknown':raise ValueError('unknown or mixed step schemas')
+        if formats[0]=='unknown':raise ValueError('unknown or mixed step schemas')
         trace['step_argument_format']=formats[0]
         manifest_file=firmware_host.resolve().parent/'manifest.json'
         if manifest_file.exists():
@@ -507,8 +443,6 @@ if __name__=='__main__':
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
     p.add_argument('--continue-incomplete',action='store_true',help='Retain incomplete cases as failures and continue only to the next unrun case; never retry')
     p.add_argument('--admission-result-fixture',action='store_true',help='Experiment only: expose host admission errors as structured rejected tool results')
-    p.add_argument('--draft-profile',choices=('two_step_web_draft','empty_web_draft'),default='two_step_web_draft',help='Initial draft for --draft-host; default preserves existing two-step revision 7')
-    p.add_argument('--draft-read-facts-fixture',action='store_true',help='Experiment only: add firmware draft query facts to status receipts')
     p.add_argument('--argument-validator',type=Path,help='Use the prepared firmware parameter gate before any isolated receipt')
     p.add_argument('--audio-packets',action='store_true',help='Record arrival and size of every remote audio packet; discard its content')
     p.add_argument('--protocol-events',action='store_true',help='Record JSON field types and bounded stage enums only; never raw identifiers or arbitrary extra values')
@@ -518,9 +452,8 @@ if __name__=='__main__':
     versions=p.add_mutually_exclusive_group()
     versions.add_argument('--firmware-host',type=Path,help='Use actual MCP dispatch and guard for the fixed corpus preconditions')
     versions.add_argument('--speed-host',choices=('idle','thirty_second_forward70','voice_offline','wifi_offline'),help='Use timed firmware speed/status receipts for a synthetic utterance')
-    versions.add_argument('--draft-host',type=Path,metavar='REPLAY',help='Use host firmware with a two-step web draft at revision 7')
     versions.add_argument('--timed-host',action='store_true',help='Use read-only host firmware receipts at observed RPC offsets')
-    versions.add_argument('--ct47', action='store_true', help='Include draft capabilities and fault recovery in candidate receipts')
+    versions.add_argument('--ct47', action='store_true', help='Include fault recovery in candidate receipts')
     versions.add_argument('--ct46', action='store_true', help='Use candidate status facts compiled from status_facts.h')
     args=p.parse_args()
     try:asyncio.run(run(args))

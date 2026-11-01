@@ -22,8 +22,8 @@ def export(source, idf, output):
         raise ValueError('prepared tool registrations differ from repository source')
     text = registration.read_text()
     declarations = re.findall(r'server\.AddTool\((.*?)\s*,\s*\[\]\(const PropertyList&', text, re.S)
-    if len(declarations) != 12:
-        raise ValueError('expected exactly 12 robot registrations; inspect source changes')
+    if len(declarations) != 11:
+        raise ValueError('expected exactly 11 robot registrations; inspect source changes')
     build = ROOT / 'build/lingxi-schema-export'
     (build / 'mbedtls').mkdir(parents=True, exist_ok=True)
     # Image encoding is not used by robot schema serialization.
@@ -43,7 +43,7 @@ def export(source, idf, output):
                     str(ROOT/'scripts/lingxi_status_fixture.cc'), str(build/'cJSON.o'),
                     '-o', str(build/'status-fixture')], check=True)
     schemas = json.loads(subprocess.check_output([str(build/'export')], text=True))
-    if len({s['name'] for s in schemas}) != 12:
+    if len({s['name'] for s in schemas}) != 11:
         raise ValueError('duplicate tool schemas')
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps({'scope':'host export, inert callbacks; not remote discovery', 'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [header,registration]}, 'tools':schemas}, ensure_ascii=False, indent=2)+'\n')

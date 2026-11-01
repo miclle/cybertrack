@@ -4,7 +4,7 @@
 
 | 想做什么 | 从哪里开始 |
 |---|---|
-| 遥控、编排与排查 | [手机控制](lan-control.md) · [Wi-Fi](wifi-configuration.md) · [表演编排](show-composer.md) · [状态解释](status-explanation.md) |
+| 遥控与排查 | [手机控制](lan-control.md) · [Wi-Fi](wifi-configuration.md) · [状态解释](status-explanation.md) |
 | 改变动作或语音体验 | [软件架构](architecture.md) · [角色维护](agent-role.md) · [动作序列](action-sequences.md) · [调速](action-sequences.md#速度与时长) · [测距保护](ultrasonic-ranging.md) |
 | 打印、装配和检修 | [机械装配](assembly.md) · [头壳打印](head-shell-print.md) · [背包与排盘](backpack-35mm.md) · [整机 CAD](../hardware/model/README.md) |
 | 核对电气设计 | [接线表](wiring.md) · [供电与接口](../hardware/architecture/README.md) · [效果控制](effects-control.md) · [原理图与制板条件](schematic-and-pcb.md) |

@@ -4,13 +4,10 @@ import argparse
 from collections import Counter, defaultdict
 import json
 import math
-import re
 from pathlib import Path
 
 FAMILIES = tuple(f"F{i:02}" for i in range(1, 6))
-SHOWS = ("登场", "庆祝", "谢幕", "自编剧场")
-PLAYS = ("左转一秒", "吹泡泡一秒", *SHOWS[:3])
-CUSTOM_SHOW = re.compile(r"自编/[A-Za-z0-9_-]{1,24}")
+PLAYS = ("左转一秒", "吹泡泡一秒", "语音组合动作")
 PROFILE = ("cohort_id", "prototype_or_device", "firmware", "condition_id")
 
 
@@ -18,7 +15,7 @@ def choices(row, key, allowed):
     values = row.get(key)
     if values is None:
         return None
-    if not isinstance(values, list) or any(not isinstance(v, str) or (v not in allowed and not (key == "repeat_plays" and CUSTOM_SHOW.fullmatch(v))) for v in values) or len(values) != len(set(values)):
+    if not isinstance(values, list) or any(not isinstance(v, str) or v not in allowed for v in values) or len(values) != len(set(values)):
         raise ValueError(f"Invalid {key} for {row['anonymous_id']}")
     return set(values)
 
@@ -70,7 +67,7 @@ def summarize(records):
     reports = []
     for profile, families in sorted(groups.items()):
         first = []
-        repeat_observed = theatre_observed = theatre_positive = 0
+        repeat_observed = 0
         repeats = Counter()
         for row in families.values():
             if row.get("parent_present") is not True or row.get("evidence_kind") != "family_observation":
@@ -81,20 +78,14 @@ def summarize(records):
             if row.get("free_play_observed") is not True:
                 continue
             plays = choices(row, "repeat_plays", PLAYS)
-            edits = choices(row, "modified_shows", SHOWS)
             if plays is not None:
                 repeat_observed += 1
                 repeats.update(plays)
-            replayed_show = any(p in SHOWS or CUSTOM_SHOW.fullmatch(p) for p in (plays or ()))
-            if replayed_show or edits or (plays is not None and edits is not None):
-                theatre_observed += 1
-                theatre_positive += bool(replayed_show or edits)
         reports.append({
             **dict(zip(PROFILE, profile)), "missing_sheets": sorted(set(FAMILIES) - families.keys()),
             "independent_use": gate(len(first), sum(first), 4, profile[1]),
             "repeat_by_play": dict(sorted(repeats.items())),
             "same_play_repeated": gate(repeat_observed, max(repeats.values(), default=0), 3, profile[1]),
-            "replayed_or_modified_show": gate(theatre_observed, theatre_positive, 3, profile[1]),
         })
     return {"groups": reports, "unclassified_rows": unclassified, "dry_run_rows": dry_runs}
 

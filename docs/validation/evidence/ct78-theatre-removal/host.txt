@@ -1,0 +1,21 @@
+PASS: whole negative clauses; true stop, mixed request, quote and question counterexamples defer
+PASS: generic action category and named/direction/alias contrasts
+PASS: no-actuator state, stop latch, repeat stop, sequence, clock fault
+PASS: direct voice 1..30000ms, range rejection, deadline, busy/cooldown, BOOT/stop queue cancellation, reconnect, replay, expiry, clock fault
+PASS: independent concurrent timers/cooldowns, both arrival orders, atomic combined requests, same-lane refusal, replay/expiry/stop/BOOT/offline/clock
+PASS: held water/bubbles: 45 s concurrent continuity, per-lane release/expiry, nonce replay, late release/start, cooldown, no ignition lease, all stop/fault paths
+PASS: web ownership/replay and held drive: 15 s continuous run, single start, release/renew reorder, 600 ms boundary, no heartbeat-only renewal, per-lane release, global cancellation and cooldown
+PASS: proximity stop clears both motor PWM/direction outputs, preserves water and never resumes
+PASS: actual output driver 56-state concurrent transition matrix, A/right B/left mapping, untouched-lane continuity, disable-before-direction, all init/transition API failures and latched global shutdown
+PASS: scheduler-to-GPIO/PWM integration, four directions x 15 parallel lane combinations, second-step start and independent deadlines at 5 ms cadence
+PASS: GPIO18 input enable failure, independent pad readback, high/low/motor samples, per-action reset, snapshot, saturation and fault shutdown
+PASS: four concurrent lanes, independent expiry, per-lane duration boundaries, no extension, ignition interval, all stop/fault paths, effect source isolation and preemption
+PASS: voice frenzy ticket replay/expiry/cancellation, 5/10/30 s without web heartbeat, source isolation, web preemption and voice/BOOT/fault/stop cancellation
+PASS: frenzy durations/pulses, atomic admission, absolute deadline, all cancellation paths, source reservation, no extension/replay, delayed OFF and equal elapsed cooldown
+PASS: long movement, simultaneous/ordered steps, cooldowns, atomic validation, cancellation/reconnect, replay, web priority
+PASS: 60% floor, absolute target speed, speed defaults/ranges, four directions, bounded 10-point voice changes, replay and step binding, live web speed without restarts/extensions, source isolation
+PASS: distance units, boundaries, no echo, noise, late echo, freshness, invalidation and 64-bit timestamps
+PASS: cold-start allowance, transient recovery, backoff, late callback discard, cleanup failure latch and detailed diagnostics
+PASS: actual distance adapter capture, missing/stuck/noisy echo, bounded waits, driver cleanup and task allocation failure
+three-sample audio confirmation, spike rejection, cadence, freshness, immediate voice/web/sequence stops and no-resume: PASS
+PASS: bounded request receipt, copied lifetime, query/renewal isolation and invalid text rejection

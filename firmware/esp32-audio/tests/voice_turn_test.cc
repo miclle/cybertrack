@@ -14,7 +14,7 @@ int main() {
     assert(!s.VoiceTurnReady(first));
     assert(std::strcmp(s.guard.Water(0, pending, 1000), "accepted"));
     assert(!s.VoiceClaim(0, 2, AudioActionGuard::MoveOnly, first));
-    s.ObserveVoiceDraft(0); // Queries and stopping never reopen failed input.
+    // Stopping never reopens failed input.
     s.Stop(0);
     assert(!s.VoiceTurnReady(first) && s.guard.Starts() == 0);
 

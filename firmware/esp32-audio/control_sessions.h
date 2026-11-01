@@ -1,7 +1,6 @@
 #pragma once
 #include "action_guard.h"
 #include "action_plan.h"
-#include "show_draft.h"
 #include "negative_input_intent.h"
 
 // All methods run under the adapter mutex, including the 5 ms deadline tick.
@@ -16,7 +15,6 @@ public:
     struct EffectHold { uint32_t id = 0, renewal = 0; uint64_t started = 0, until = 0; };
     EffectHold water_hold, bubbles_hold;
     AudioActionGuard guard;
-    ShowDraft draft;
     int web_speed_percent = 100;
     bool auto_avoidance_enabled = false; // Device-wide, reset only by reboot; shared with voice.
     bool plan_active = false;
@@ -25,7 +23,7 @@ public:
     bool wifi = false, voice = false, shutdown = false;
     int voice_turn = 0;
     bool voice_turn_open = false, voice_turn_failed = false;
-    bool voice_draft_unquantified = false;
+    bool voice_non_execution = false;
     bool voice_action_unspecified = false;
     negative_input::Kind voice_negative = negative_input::Kind::None;
     uint32_t owner = 0, window = 0;
@@ -35,8 +33,6 @@ public:
     const char* FrenzySource() const { return !frenzy_until ? "none" : frenzy_web_ ? "web" : "voice"; }
 
     void Tick(uint64_t now, bool pressed, bool output_fault = false) {
-        draft.Tick(now);
-        if (output_fault) draft.Clear();
         if (owner && (now < heartbeat_ || now - heartbeat_ >= LeaseMs || !wifi || shutdown)) {
             owner = 0;
             StopWeb(now);
@@ -49,7 +45,6 @@ public:
         }
         pressed_ = pressed;
         guard.Tick(now, !shutdown && !output_fault && wifi && (owner || voice), pressed, false);
-        if (guard.motion.clock_fault || guard.spray.clock_fault || guard.bubbles.clock_fault || guard.ignition.clock_fault) draft.Clear();
         if (frenzy_until) {
             if (now < frenzy_started_ || now >= frenzy_until || (frenzy_web_ ? !owner : !voice) || output_fault ||
                 !guard.Moving() || !guard.Watering() || !guard.Bubbling() || guard.ignition.clock_fault || guard.ignition.held) {
@@ -79,8 +74,6 @@ public:
         window_valid_ = false;
     }
     void Stop(uint64_t now) {
-        draft_read_ = false;
-        draft.Clear();
         if (plan_active) { plan_active = false; plan_result = "cancelled"; }
         guard.Stop(now);
         web_targets_ = 0;
@@ -94,11 +87,8 @@ public:
         if (online && !voice) guard.NewVoiceSession();
         voice = online;
         if (!online) {
-            draft_read_ = false;
-            if (!draft.web_owner) draft.Clear();
-            if ((plan_active && !plan_web_) || (frenzy_until && !frenzy_web_)) Stop(now);
+            if (plan_active || (frenzy_until && !frenzy_web_)) Stop(now);
             guard.CancelPending();
-            if (plan_active && plan_web_) return;
             if (!(web_targets_ & AudioActionGuard::MoveOnly)) guard.StopMove(now);
             if (!(web_targets_ & AudioActionGuard::WaterOnly)) guard.StopWater(now);
             if (!(web_targets_ & AudioActionGuard::BubblesOnly)) guard.StopBubbles(now);
@@ -155,10 +145,9 @@ public:
         if (advanced) ++voice_turn;
         voice_turn_open = advanced && open && wifi && voice && !shutdown;
         voice_turn_failed = false;
-        voice_draft_unquantified = false;
+        voice_non_execution = false;
         voice_action_unspecified = false;
         voice_negative = negative_input::Kind::None;
-        draft_read_ = false;
         guard.CancelPending(); // Keep active lanes and the session RPC replay table.
     }
     bool VoiceTurnReady(int turn) const {
@@ -171,7 +160,6 @@ public:
     void FailVoiceTurn(int turn) {
         if (turn >= 0 && turn == voice_turn && voice_turn_open) {
             voice_turn_failed = true;
-            draft_read_ = false;
             guard.CancelPending();
         }
     }
@@ -206,7 +194,7 @@ public:
     const char* FrenzyStart(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window, int duration) {
         const char* error = Consume(now, session, seq, command_window, WindowMs);
         if (error) return error;
-        if (plan_active) { const bool web_plan = plan_web_; Stop(now); return web_plan ? "show_cancelled" : "voice_preempted"; }
+        if (plan_active) { Stop(now); return "voice_preempted"; }
         if (frenzy_until) {
             if (!frenzy_web_) { Stop(now); return "voice_preempted"; }
             return "not_ready_or_busy";
@@ -247,52 +235,11 @@ public:
         if (!wifi || !voice || shutdown || frenzy_until || plan_active || web_targets_) return "not_ready_or_busy";
         const char* result = guard.ClaimPlan(now, ticket);
         if (std::strcmp(result, "accepted")) return result;
-        draft.Clear();
-        plan_web_ = false;
         plan_ = plan;
         plan_step = 1; plan_count = plan.count; plan_active = true;
         guard.CancelPending();
         return StartPlanStep(now) ? "accepted" : plan_result;
     }
-    const char* WebDraft(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window, const ShowDraft::Command& edit) {
-        if (const char* error = Consume(now, session, seq, command_window, WindowMs)) return error;
-        if (plan_active || frenzy_until || !guard.PlanReady(now)) return "not_ready_or_busy";
-        return draft.Apply(now, edit, session);
-    }
-    void ObserveVoiceDraft(uint64_t now) {
-        draft_read_ = wifi && voice && !shutdown;
-        draft_read_at_ = now;
-        draft_serial_ = draft.revision;
-        draft_visible_ = draft.CurrentRevision();
-    }
-    const char* VoiceDraft(uint64_t now, int ticket, const ShowDraft::Command& edit) {
-        if (!wifi || !voice || shutdown || plan_active || frenzy_until || web_targets_) return "not_ready_or_busy";
-        const char* result = guard.ClaimPlan(now, ticket);
-        if (std::strcmp(result, "accepted")) return result;
-        const bool fresh = draft_read_ && now >= draft_read_at_ && now - draft_read_at_ < 30000 &&
-            draft_serial_ == draft.revision && draft_visible_ == draft.CurrentRevision();
-        draft_read_ = false;
-        if (!fresh || edit.revision != draft_visible_) return "draft_changed";
-        return draft.Apply(now, edit, 0);
-    }
-    const char* WebConfirm(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window, uint32_t revision) {
-        if (const char* error = Consume(now, session, seq, command_window, WindowMs)) return error;
-        ActionPlan confirmed;
-        if (const char* error = draft.Take(now, revision, confirmed)) return error;
-        if (plan_active || frenzy_until || !guard.PlanReady(now)) return "not_ready_or_busy";
-        plan_ = confirmed;
-        plan_web_ = true;
-        plan_step = 1; plan_count = confirmed.count; plan_active = true;
-        guard.CancelPending();
-        return StartPlanStep(now) ? "accepted" : plan_result;
-    }
-    bool PlanStepActive() const {
-        if (!plan_active || !plan_step || plan_step > plan_count) return false;
-        const auto& step = plan_.steps[plan_step - 1];
-        return (!step.move_ms || guard.Moving()) && (!step.water_ms || guard.Watering()) &&
-               (!step.bubbles_ms || guard.Bubbling()) && (!step.ignition_ms || guard.Igniting());
-    }
-    const char* PlanSource() const { return !plan_active ? "none" : plan_web_ ? "web" : "voice"; }
     const char* DriveStart(uint64_t now, uint32_t session, uint32_t seq, uint32_t command_window,
                            const char* direction, int water_ms) {
         const char* error = Consume(now, session, seq, command_window, DriveLeaseMs);
@@ -360,16 +307,12 @@ public:
         if (Hold(target).id && id >= Hold(target).id) StopEffect(now, target);
         return "ok";
     }
-    const char* MoveSource() const { return !guard.Moving() ? "none" : ((plan_active && plan_web_) || (web_targets_ & AudioActionGuard::MoveOnly)) ? "web" : "voice"; }
-    const char* WaterSource() const { return !guard.Watering() ? "none" : ((plan_active && plan_web_) || (web_targets_ & AudioActionGuard::WaterOnly)) ? "web" : "voice"; }
-    const char* BubblesSource() const { return !guard.Bubbling() ? "none" : ((plan_active && plan_web_) || (web_targets_ & AudioActionGuard::BubblesOnly)) ? "web" : "voice"; }
-    const char* IgnitionSource() const { return !guard.Igniting() ? "none" : ((plan_active && plan_web_) || (web_targets_ & AudioActionGuard::IgnitionOnly)) ? "web" : "voice"; }
+    const char* MoveSource() const { return !guard.Moving() ? "none" : (web_targets_ & AudioActionGuard::MoveOnly) ? "web" : "voice"; }
+    const char* WaterSource() const { return !guard.Watering() ? "none" : (web_targets_ & AudioActionGuard::WaterOnly) ? "web" : "voice"; }
+    const char* BubblesSource() const { return !guard.Bubbling() ? "none" : (web_targets_ & AudioActionGuard::BubblesOnly) ? "web" : "voice"; }
+    const char* IgnitionSource() const { return !guard.Igniting() ? "none" : (web_targets_ & AudioActionGuard::IgnitionOnly) ? "web" : "voice"; }
 private:
-    bool draft_read_ = false;
-    uint64_t draft_read_at_ = 0;
-    uint32_t draft_serial_ = 0, draft_visible_ = 0;
     ActionPlan plan_;
-    bool plan_web_ = false;
     uint64_t plan_deadlines_[4] = {};
     uint64_t plan_last_tick_ = 0;
     bool StartPlanStep(uint64_t now) {
@@ -388,7 +331,6 @@ private:
                                              step.direction, step.bubbles_ms, step.ignition_ms, step.speed_percent), "accepted")) {
                 Stop(now); plan_result = "not_ready_or_busy"; return false;
             }
-            if (plan_web_) web_targets_ |= targets[i];
             plan_deadlines_[i] = now + static_cast<unsigned>(durations[i]);
         }
         plan_last_tick_ = now;
@@ -397,7 +339,7 @@ private:
     }
     void TickPlan(uint64_t now, bool output_fault) {
         if (!plan_active) return;
-        if (!wifi || (plan_web_ ? !owner : !voice) || shutdown || output_fault || now < plan_last_tick_ ||
+        if (!wifi || !voice || shutdown || output_fault || now < plan_last_tick_ ||
             guard.motion.held || guard.motion.clock_fault || guard.spray.clock_fault ||
             guard.bubbles.clock_fault || guard.ignition.clock_fault) { Stop(now); return; }
         plan_last_tick_ = now;
@@ -428,8 +370,6 @@ private:
         Hold(t) = {};
     }
     void StopWeb(uint64_t now) {
-        if (draft.web_owner) draft.Clear();
-        if (plan_active && plan_web_) { Stop(now); return; }
         if (web_targets_ & AudioActionGuard::MoveOnly) guard.StopMove(now);
         if (web_targets_ & AudioActionGuard::WaterOnly) guard.StopWater(now);
         if (web_targets_ & AudioActionGuard::BubblesOnly) guard.StopBubbles(now);
@@ -442,7 +382,7 @@ private:
     }
     const char* StartWeb(uint64_t now, AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction, int bubbles_ms = 0, int ignition_ms = 0) {
         if ((target & AudioActionGuard::MoveOnly) && guard.BlocksForward(direction)) return "obstacle_blocked";
-        if (plan_active) { const bool web_plan = plan_web_; Stop(now); return web_plan ? "show_cancelled" : "voice_preempted"; }
+        if (plan_active) { Stop(now); return "voice_preempted"; }
         if (frenzy_until) {
             if (!frenzy_web_) { Stop(now); return "voice_preempted"; }
             return "not_ready_or_busy";

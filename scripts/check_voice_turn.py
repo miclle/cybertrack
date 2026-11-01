@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Exercise input generations through the actual MCP host; never a model or board."""
 import argparse
-import gzip
-import hashlib
 import json
 from pathlib import Path
 
@@ -37,19 +35,12 @@ def check(executable):
     assert rows[-1]['starts_this_boot']==0
 
     rows = firmware_replay(executable,'corpus_idle',[
-        call('compose',dict(edit='cancel',revision=0,step=0,steps_json=''),defer=True),
+        call('move',move,defer=True),
         dict(input_text='吹泡泡',elapsed_ms=10),call('bubbles',{'duration_ms':1000},20,2),
         dict(flush=True,elapsed_ms=30),call('water',{'duration_ms':1000},40,3)])
     assert result(rows[0])['result']=='accepted' and result(rows[1])['result']=='voice_input_changed'
     assert result(rows[2])['result']=='accepted' and rows[-1]['starts_this_boot']==2
     assert rows[-1]['logical_outputs']['water'] and rows[-1]['logical_outputs']['bubbles']
-
-    edit=dict(edit='replace_step',revision=7,step=2,steps_json='[{"direction":"none","move_ms":0,"water_ms":0,"bubbles_ms":2000,"ignition_ms":0}]')
-    rows=firmware_replay(executable,'corpus_draft7',[
-        call('get_status',{},defer=True),dict(input_text='修改第二步',elapsed_ms=10),
-        dict(flush=True,elapsed_ms=20),call('compose',edit,30,2)])
-    assert result(rows[0])['result']=='voice_input_changed' and result(rows[1])['result']=='draft_changed'
-    assert rows[-1]['show_draft']['revision']==7 and rows[-1]['starts_this_boot']==0
 
     rows=firmware_replay(executable,'corpus_idle',[
         call('move',move,defer=True),dict(input_text='新的指令',elapsed_ms=10),
@@ -84,20 +75,10 @@ def check(executable):
     assert 'error' in rows[0] and 'voice_input_failed' in rows[1]['error']['message']
     assert result(rows[2])['result']=='accepted' and rows[-1]['starts_this_boot']==1
 
-    raw=(ROOT/'docs/validation/evidence/model-doubao/full-compose.json.gz').read_bytes()
-    trace=json.loads(gzip.decompress(raw)); replayed=[]
-    for row in trace['results']:
-        if row['id'] not in ('C002','C004','C005','C007'):continue
-        rows=firmware_replay(executable,row['initial_profile'],[*row['host_calls'],dict(inspect_ms=row['host_inspect_ms'])])
-        assert rows[-1]['starts_this_boot']==0 and rows[-1]['show_draft']['revision']==7
-        assert not any(rows[-1]['logical_outputs'].values())
-        replayed.append(dict(id=row['id'],results=[wire.get('error',{}).get('message') if 'error' in wire else result(wire)['result'] for wire in rows[:-1]],final_revision=7,starts=0))
-    assert len(replayed)==4
     return dict(scope='Offline protocol and archived request replay only; input/timing and deferred scheduling simulated; no new model run or board IO',
-                synthetic_scenarios=9,await_stt_mode_checked=True,invalid_then_retry_blocked=True,stops_available=True,new_input_recovers=True,
+                synthetic_scenarios=8,await_stt_mode_checked=True,invalid_then_retry_blocked=True,stops_available=True,new_input_recovers=True,
                 caller_cannot_set_input_token=True,
-                stale_callbacks_and_reads_isolated=True,rpc_replay_preserved=True,reconnect_requires_input=True,
-                source_capture_gzip_sha256=hashlib.sha256(raw).hexdigest(),archived_cases=replayed)
+                stale_callbacks_and_reads_isolated=True,rpc_replay_preserved=True,reconnect_requires_input=True)
 
 
 if __name__=='__main__':

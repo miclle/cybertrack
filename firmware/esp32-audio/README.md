@@ -1,5 +1,7 @@
 # CyberTrack 面包板：小D 语音与四路控制
 
+**ct78 候选：已移除泡泡剧场的草稿、编辑、确认、模板、离线排演与 compose 工具。** 语音组合动作、序列调度与停止保护保留。尚未刷写或同步线上角色；下方旧版本段落保留当时证据，不代表现行接口。[本次验证](../../docs/validation/theatre-removal.md)
+
 ct73 候选扩展四路组合／序列及既有别名的成功确认匹配，保留点火超限提示；十二条定向实际 STT 严格 10/12，五条成功组合新增抑制 277 包。70／87 原生夹具、18 组软件检查与完整构建通过，未部署。[范围与失败](../../docs/validation/four-lane-feedback.md)
 
 ct72 候选补齐既有喷水／泡泡／点火别名及狂暴模式的成功确认播放，按通道独立时长核验；复用 88 条真实 STT 轨迹，仅新增抑制普通点火的 64 包，超限提示保留。未部署，规则分析播报仍待修。[范围与证据](../../docs/validation/effect-alias-feedback.md)
@@ -16,13 +18,11 @@ ct63 候选扩展普通组合／序列及目标速度的成功确认播放匹配
 
 ct62 候选按识别输入代际阻止失败后的自动动作重试／补做，停止与查询保留，新输入恢复；已完成构建与主机回放，未部署。[验证与边界](../../docs/validation/voice-input-guard.md)
 
-ct47 候选在草稿回执列出可用通道，驱动输出故障查询增加家长排查说明。[ct47 软件验证](verification-ct47.json)
 
 ct46 增加短指令成功播报控制、设备状态解释和改稿前读版本检查。[构建与软件证据](verification-ct46.json) · [隔离平台验收](../../docs/validation/lingxi-ct46.md)
 
 **2026-11-01 ct77 已部署：** [普通测距滴声连续确认](../../docs/validation/range-beep-confirmation.md)要求连续三个有效近距样本，过滤孤立／双样本跳值；停车仍立即响应，对话暂缓保留。已仅应用部署，用户已确认偶发滴声明显减少、效果可以。
 
-**2026-11-01 ct76 软件候选：** [含糊改稿分句门禁](../../docs/validation/draft-clause-duration.md)修复其他步骤时长或速度误放行猜测修改；保留明确时长与统一停止。未刷写，正式角色与工具未改。
 
 **2026-11-01 ct75 已部署：** HTTP 控制在 cJSON 解析前复用原始零字符检查，补齐 Unicode 零转义截断缺口。旧版反例、实际 HTTP 原生回归与完整构建已留证；已完成[仅应用部署与无动作 HTTP 检查](../../docs/validation/ct75-deployment.md)，Wi-Fi／用户设置保持，PHY 校准及连接令牌变化单独记录；不修改语音或动作策略。见[校验说明](../../docs/validation/http-zero-admission.md)。
 
@@ -30,7 +30,6 @@ ct46 增加短指令成功播报控制、设备状态解释和改稿前读版本
 
 **2026-11-01 ct73 已部署：** 在用户切断执行器功率后仅写 `0x20000` 应用，保存经设备校验的 ct45 回退文件与配置备份；写入前后配置及非应用区校验通过，首启 NVS 仅 WebSocket token 更新，两个已存网络与用户配置保持。两次启动版本／联网、网页全文一致及二十条状态回读通过，零动作；全片读取超时不算完整备份。角色只读核对一致且未修改，实机带载和真人语音待验。见[部署记录](startup-ct73.json)和[验收入口](../../docs/validation/ct73-deployment.md)。
 
-**2026-10-31 ct45 已部署：** 接入“小D 泡泡剧场”网页预览、编辑、家长确认／取消和三个行走／泡泡模板，复用 ct44 版本化草稿及 `compose` 工具。角色已保存重开逐字回读，设备仅应用部署、配置保持及无动作草稿路径通过，见[部署记录](startup-ct45.json)、[编排契约与操作](../../docs/show-composer.md)和[验证记录](verification-ct45.json)。
 
 **ct43 历史引入、已随 ct45 部署：** 新增家长上手帮助与只读状态解释，保存最近一次适配器动作回执供网页和语音查询。不会新增启动或自动重试。线上回复另行验证，详见[功能与边界](../../docs/status-explanation.md)和[验证记录](verification-ct43.json)。
 
@@ -80,7 +79,7 @@ ct23 增加网页“左转＋喷水，各 3 秒”对照入口，调用现有组
 
 ## 当前能力与验证范围
 
-源码及最近记录部署均为 `2.0.3-ct77`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十二个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`compose`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
+源码为 `2.0.3-ct78` 未部署候选，最近记录部署为 `2.0.3-ct77`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
 
 | 功能 | 当前规则 |
 |---|---|

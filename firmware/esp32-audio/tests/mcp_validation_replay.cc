@@ -1,6 +1,5 @@
 // Execute the prepared firmware's parameter gate without action callbacks or IO.
 #include "action_plan_json.h"
-#include "show_command_json.h"
 #include <cJSON.h>
 #include <cstring>
 #include <iostream>

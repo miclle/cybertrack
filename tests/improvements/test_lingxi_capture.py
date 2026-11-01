@@ -69,7 +69,7 @@ class CaptureTests(unittest.TestCase):
             with tempfile.TemporaryDirectory() as tmp:
                 base=Path(tmp)
                 case=json.loads((ROOT/'docs/validation/voice-cases.json').read_bytes())['cases'][0]
-                for name,value in [('connection',{}),('tools',{'tools':[{'name':'self.tank.'+name,'inputSchema':{'properties':{'steps_json':{'type':'string'}}}} for name in ('sequence','compose')]+[{'name':f'self.tank.t{i}'} for i in range(10)]}),
+                for name,value in [('connection',{}),('tools',{'tools':[{'name':'self.tank.'+name,'inputSchema':{'properties':{'steps_json':{'type':'string'}}}} for name in ('sequence',)]+[{'name':f'self.tank.t{i}'} for i in range(10)]}),
                                    ('corpus',{'cases':[case]})]:
                     (base/name).write_text(json.dumps(value));(base/name).chmod(0o600)
                 (base/'role').write_text('fixture');(base/'host').write_bytes(b'fixture')
@@ -122,7 +122,7 @@ class CaptureTests(unittest.TestCase):
         self.assertEqual(histories[0][0],row['host_calls'])
 
     def test_schema_pagination_is_complete_and_bounded(self):
-        tools=[dict(name='self.tank.tool'+str(i),description='中文'*1200) for i in range(12)]
+        tools=[dict(name='self.tank.tool'+str(i),description='中文'*1200) for i in range(11)]
         seen=[];cursor=''
         while True:
             page=module.tools_page(tools,cursor)
@@ -151,37 +151,11 @@ class CaptureTests(unittest.TestCase):
         self.assertEqual(stopped['starts_this_boot'],status['starts_this_boot'])
         self.assertEqual(stopped['recent_command']['operation'],'stop')
 
-    def test_fixture_draft_preserves_non_target_and_source(self):
-        corpus=json.loads((ROOT/'docs/validation/compose-cases.json').read_text())
-        status=module.fixture(corpus['cases'][1]['context']);before=copy.deepcopy(status)
-        step=copy.deepcopy(status['show_draft']['steps'][1]);step['bubbles_ms']=2000
-        reply=module.simulated_reply(status,'self.tank.compose',dict(edit='replace_step',revision=7,step=2,steps_json=json.dumps([step])))
-        self.assertEqual(status,before)
-        self.assertEqual(reply['show_draft']['steps'][0],status['show_draft']['steps'][0])
-        self.assertEqual(reply['show_draft']['steps'][1]['bubbles_ms'],2000)
-        self.assertEqual(reply['starts_this_boot'],0)
-        self.assertEqual(reply['actuator_backend'],'capture_fixture')
-
-    def test_invalid_draft_preserves_original(self):
-        corpus=json.loads((ROOT/'docs/validation/compose-cases.json').read_text())
-        status=module.fixture(corpus['cases'][1]['context']);before=copy.deepcopy(status)
-        valid=status['show_draft']['steps'][1]
-        for changes in ({'water_ms':1000},{'ignition_ms':1000},{'bubbles_ms':30001},
-                        {'bubbles_ms':True},{'direction':'left'},{'speed_percent':59}):
-            bad={**valid,**changes}
-            reply=module.simulated_reply(status,'self.tank.compose',dict(edit='replace_step',revision=7,step=1,steps_json=json.dumps([bad])))
-            self.assertEqual(reply['result'],'invalid_plan')
-            self.assertEqual(reply['show_draft'],before['show_draft'])
-            self.assertEqual(status,before)
-        for value in ([],{},[valid,valid],None):
-            reply=module.simulated_reply(status,'self.tank.compose',dict(edit='replace_step',revision=7,step=1,steps_json=json.dumps(value)))
-            self.assertEqual(reply['result'],'invalid_plan')
-
     def test_runner_strips_oracles_and_refuses_overwrite(self):
         async def exercise():
             with tempfile.TemporaryDirectory() as tmp:
                 base=Path(tmp)
-                for name,value in [('connection',{}),('tools',{'tools':[{'name':f'self.tank.t{i}'} for i in range(12)]}),
+                for name,value in [('connection',{}),('tools',{'tools':[{'name':f'self.tank.t{i}'} for i in range(11)]}),
                                    ('corpus',{'cases':[{'id':'V001','text':'查询','context':'空闲','fixture_version':'DO NOT SEND','expected_calls':['DO NOT SEND'],'response_expectation':'DO NOT SEND'},
                                                        {'id':'D001','text':'查询','context':'合成故障','fixture_status':{'fault':'driver_error'},'expected_calls':['DO NOT SEND']}]})]:
                     (base/name).write_text(json.dumps(value));(base/name).chmod(0o600)

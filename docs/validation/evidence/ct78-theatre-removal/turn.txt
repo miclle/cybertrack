@@ -1,0 +1,12 @@
+{
+  "scope": "Offline protocol and archived request replay only; input/timing and deferred scheduling simulated; no new model run or board IO",
+  "synthetic_scenarios": 8,
+  "await_stt_mode_checked": true,
+  "invalid_then_retry_blocked": true,
+  "stops_available": true,
+  "new_input_recovers": true,
+  "caller_cannot_set_input_token": true,
+  "stale_callbacks_and_reads_isolated": true,
+  "rpc_replay_preserved": true,
+  "reconnect_requires_input": true
+}

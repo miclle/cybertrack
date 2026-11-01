@@ -19,15 +19,12 @@ class FirmwareHostCaptureTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             firmware_profile("网页长按正在运行")
 
-    def test_compose_preconditions_are_pinned(self):
+    def test_retired_preconditions_are_rejected(self):
         root = Path(__file__).resolve().parents[2]
         cases = json.loads((root/"docs/validation/compose-cases.json").read_bytes())["cases"]
-        self.assertEqual(firmware_profile(cases[0]["context"]), "corpus_idle")
-        self.assertEqual({firmware_profile(c["context"]) for c in cases[1:]}, {"corpus_draft7"})
-        conflict = json.loads((root/"docs/validation/compose-conflict-cases.json").read_bytes())["cases"][0]
-        self.assertEqual(firmware_profile(conflict["context"]), "corpus_draft7_conflict")
-        with self.assertRaises(ValueError):
-            firmware_profile(cases[1]["context"].replace("revision=7", "revision=8"))
+        for case in cases:
+            with self.assertRaises(ValueError):
+                firmware_profile(case["context"])
 
     def test_full_host_rejects_fixture_transformations(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -36,11 +33,11 @@ class FirmwareHostCaptureTests(unittest.TestCase):
             connection.write_text("{}")
             connection.chmod(0o600)
             tools = root/"tools.json"
-            tools.write_text(json.dumps({"tools":[{"name":f"self.tank.tool{i}"} for i in range(12)]}))
+            tools.write_text(json.dumps({"tools":[{"name":f"self.tank.tool{i}"} for i in range(11)]}))
             args = Namespace(connection=connection, tools=tools, output=root/"capture.json",
                              corpus=Path(__file__).resolve().parents[2]/"docs/validation/voice-cases.json",
                              ids="V001", raw_text=True, firmware_host=Path("/inert/host"),
-                             draft_read_facts_fixture=True)
+                             argument_validator=Path("/inert/validator"))
             with self.assertRaisesRegex(ValueError,"own validation and status facts"):
                 asyncio.run(run(args))
 
