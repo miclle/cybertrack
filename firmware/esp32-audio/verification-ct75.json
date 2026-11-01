@@ -1,0 +1,29 @@
+{
+  "version": "2.0.3-ct75",
+  "date": "2026-11-01T08:57:31.147604+00:00",
+  "last_recorded_application": "2.0.3-ct74",
+  "flashed": false,
+  "scope": "HTTP raw and Unicode zero rejection before cJSON parsing; shared existing MCP scanner. Host-only transport/control stubs and complete ESP-IDF build; no device writes or requests.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "path": "build/firmware-ct75/xiaozhi.bin",
+    "bytes": 2721488,
+    "sha256": "6e6cf11e9ae1fd59e4280ec249495a8dc1602950a57e08b130ea44883714a8c8"
+  },
+  "source_sha256": {
+    "apply_overlay.py": "f31fd95e37505b5ee5e58c9fd8ed125141e18c8b74a43b2b5b0715be35b5586b",
+    "web_server.cc": "3b10cb56fcaa5e5942c402c1b274bb3f5e3f423910f29d57910b5f049bd21935",
+    "mcp_raw_json.h": "74a1349ac60cd1f19281cceb030f95387ea3ad1b1880cd68a7a1e4336e207b39",
+    "tests/web_server_test.cc": "cd70b650efb66614b4fe5a54c776e14acf74a8c9b080d4a2051ffeb391f6dd65"
+  },
+  "checks": [
+    "Old ct74 HTTP handler fails first escaped-zero rejection assertion; no device contacted.",
+    "Actual HTTP handler ASan/UBSan regression passes malformed command/key/direction/draft, escape parity, raw zero, legal Unicode, and state/stop checks.",
+    "Complete ESP-IDF build passes."
+  ],
+  "pending": [
+    "ct75 deployment and actual device HTTP timing/recovery",
+    "Existing model, physical and family acceptance; skipped ct74 listening cases remain skipped"
+  ],
+  "unified_software_report": "docs/validation/evidence/ct75-http-zero/software-checks.json"
+}

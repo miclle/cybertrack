@@ -76,6 +76,33 @@ int main() {
     assert(Api(&r)==ESP_OK && last_operation=="show_edit");
     r=api("/api/action",std::string(8193,' '));assert(Api(&r)==ESP_FAIL);
     unsigned before=calls;
+    // Check raw escaped zeros before cJSON can truncate command values or keys.
+    for (const auto bad : {
+        R"({"operation":"set_speed\u0000extra","sequence":5,"window":1,"speed_percent":100})",
+        R"({"operation\u0000extra":"set_speed","sequence":5,"window":1,"speed_percent":100})",
+        R"({"operation":"move","sequence":5,"window":1,"direction":"forward\u0000extra","duration_ms":500})",
+        R"({"operation":"show_edit","sequence":5,"window":1,"draft":{"edit":"cancel\u0000extra","revision":1,"step":0,"steps_json":""}})",
+        R"({"operation":"show_edit","sequence":5,"window":1,"draft":{"edit":"cancel","revision\u0000extra":1,"step":0,"steps_json":""}})"
+    }) {
+        r=api("/api/action",bad);
+        assert(Api(&r)==ESP_FAIL);
+        assert(r.status=="400 Bad Request" && r.sent=="{\"result\":\"invalid_request\"}");
+        assert(calls==before && session && bearer[0]);
+    }
+    // Even backslash runs encode literal text, odd runs encode a zero.
+    for (unsigned slash_count=1; slash_count<=8; ++slash_count) {
+        r=api("/api/state","{\"text\":\""+std::string(slash_count,'\\')+"u0000tail\"}");
+        cJSON* parsed=Body(&r);
+        assert(bool(parsed)==(slash_count%2==0));
+        cJSON_Delete(parsed);
+    }
+    r=api("/api/state",std::string("{}\0tail",7));
+    assert(Api(&r)==ESP_FAIL && calls==before);
+    // Other Unicode escapes are legal, and rejection does not revoke stop/status.
+    r=api("/api/action",R"({"operation":"set_\u0073peed","sequence":5,"window":1,"speed_percent":100})");
+    assert(Api(&r)==ESP_OK && last_operation=="set_speed");
+    r=api("/api/state"); assert(Api(&r)==ESP_OK && last_operation=="get_status");
+    before=calls;
     for(const auto bad:{"[]","null","{", "{} {}", "{\"extra\":0}"}) {
         r=api("/api/stop",bad); assert(Api(&r)==ESP_FAIL); assert(calls==before);
     }
@@ -89,5 +116,5 @@ int main() {
     r=login(); assert(Pair(&r)==ESP_OK); assert(token!=bearer); token=bearer;
     response="{\"result\":\"session_expired\"}";
     r=api("/api/state"); assert(Api(&r)==ESP_OK); assert(r.status=="401 Unauthorized" && !session && !bearer[0]);
-    std::cout << "PASS: actual HTTP handlers, Host/Origin/auth, no-PIN acquire throttle/ownership, token rotation/revocation, bounded/partial bodies, invalid JSON, send failure release\n";
+    std::cout << "PASS: actual HTTP handlers, Host/Origin/auth, no-PIN acquire throttle/ownership, token rotation/revocation, bounded/partial bodies, raw and escaped zero rejection, escape parity, legal Unicode/status/stop, invalid JSON, send failure release\n";
 }
