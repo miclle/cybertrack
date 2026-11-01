@@ -18,5 +18,20 @@ int main() {
     // These contain no precise time; an ordinal is not a duration.
     for (const char* text : {"第二步缩短几秒","第12步长一点"})
         assert(draft_duration::NeedsClarification(text));
+    // Duration/speed in another clause must not permit a guessed draft edit.
+    for (const char* text : {"第一步保持两秒，第二步短一点","第二步短一点，第一步保持两秒",
+                             "速度保持80%，第二步短一点","第二步短一点；第一步两秒",
+                             "第一步两秒。第二步短一点","第一步两秒\n第二步短一点",
+                             "第一步两秒,第二步短一点","第一步两秒！第二步短一点",
+                             "第一步两秒？第二步短一点","第一步两秒;第二步短一点",
+                             "第一步两秒!第二步短一点","第一步两秒?第二步短一点",
+                             "第二步短一点，先保留草稿，改为两秒",
+                             "第二步短一点，改为第一步两秒",
+                             "第二步长一点，改为两秒，第三步短一点"})
+        assert(draft_duration::NeedsClarification(text));
+    for (const char* text : {"第二步长一点，改为两秒","第二步短一点, 设置为500 ms",
+                             "第二步短一点，设成半秒","第二步长一点，设置成两秒",
+                             "第一步两秒，第二步缩短到半秒","回答短一点，第一步保持两秒"})
+        assert(!draft_duration::NeedsClarification(text));
     std::cout << "PASS: unquantified relative draft category and explicit/speech contrasts\n";
 }

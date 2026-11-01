@@ -37,6 +37,18 @@ def check(executable):
             lambda r,s:len(r)==2 and r[1]['result']=='draft_duration_unspecified'
             and bool(r[1].get('clarification_facts')) and unchanged(s))
 
+    for phrase in ['第一步保持两秒，第二步短一点','第二步短一点，第一步保持两秒',
+                   '速度保持80%，第二步短一点','第二步长一点，改为两秒，第三步短一点']:
+        run(phrase,[text(phrase),call('get_status'),call('compose',edit(),20,2)],
+            lambda r,s:r[1]['result']=='draft_duration_unspecified' and unchanged(s))
+
+    for phrase in ['第二步长一点，改为两秒','第一步保持两秒，第二步缩短到半秒']:
+        duration=2000 if '改为两秒' in phrase else 500
+        run(phrase,[text(phrase),call('get_status'),call('compose',edit(duration),20,2)],
+            lambda r,s,duration=duration:r[1]['result']=='draft_saved'
+            and s['show_draft']['steps'][0]['move_ms']==880
+            and s['show_draft']['steps'][1]['bubbles_ms']==duration and s['starts_this_boot']==0)
+
     for name,args in [('compose',dict(edit='cancel',revision=7,step=0,steps_json='')),
                       ('move',dict(direction='forward',duration_ms=1000)),
                       ('sequence',dict(steps_json='[{"direction":"left","move_ms":880,"water_ms":0,"bubbles_ms":0,"ignition_ms":0}]'))]:

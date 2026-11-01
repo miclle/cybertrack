@@ -1,0 +1,35 @@
+{
+  "scope": "18 local software groups: retain 17 passing groups; rerun only failing Python group after adding ct76 build evidence to reference bundle. No repeated physical/online checks.",
+  "passed": true,
+  "initial_report": "software-initial.json",
+  "initial_report_sha256": "7307cf9a585ba865ce8154b7d8f63ca12e92d0f27613219e25e94a207919eb72",
+  "retained_passed_groups": 17,
+  "rerun": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests/improvements"
+    ],
+    "environment": {
+      "IDF_PATH": "/Users/miclle/esp/esp-idf"
+    },
+    "exit_code": 0,
+    "tests": 135,
+    "skipped": 0,
+    "log": "python-final.txt",
+    "log_sha256": "12de9a9d2dbd2aeeaab899108540d97352ed959c503aee198c04bdba3149c0c0"
+  },
+  "excluded": [
+    "firmware build",
+    "deployment",
+    "online model evaluation",
+    "human voice",
+    "physical acceptance",
+    "native desktop host message delivery",
+    "FreeCAD GUI MCP edits"
+  ],
+  "completed_utc": "2026-11-01T10:14:34.759422+00:00"
+}

@@ -1,0 +1,31 @@
+{
+  "version": "2.0.3-ct76",
+  "date": "2026-11-01T10:12:08.887114+00:00",
+  "last_recorded_application": "2.0.3-ct75",
+  "flashed": false,
+  "scope": "Clause-local quantification for vague draft edits; no role or public tool changes. Host-only IO and full ESP-IDF build; no device operations.",
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "path": "build/firmware-ct76/xiaozhi.bin",
+    "bytes": 2722016,
+    "sha256": "0b7ed14411b41d170516f6f271af4e43c34c9594572baa977f7639e0da026761"
+  },
+  "source_sha256": {
+    "apply_overlay.py": "b6a107eae99aa6f05aba6d0c5b57a22344813566af1667e59f748a5b5ea5c96f",
+    "draft_duration_intent.h": "bc22b53dd57b60f332b984c73a40343861ef165028cb70658c42c579f812e942",
+    "tests/draft_duration_intent_test.cc": "48a75bc9766e6e7a5aa5d0130f1ae1de8cee89980ec106616ba8fe1374e61864"
+  },
+  "checks": [
+    "ct75 host reproduces three guessed edits accepted from unrelated clause quantifiers.",
+    "Classifier ASan/UBSan tests pass.",
+    "19 actual MCP host scenarios pass with ASan/UBSan.",
+    "Complete ESP-IDF build passes.",
+    "18 effective software groups pass: 17 original passes retained, failed packaging/Python group rerun after allowlist correction; all 135 Python tests pass without skips."
+  ],
+  "pending": [
+    "Actual STT punctuation and step/number attribution beyond bounded clauses",
+    "Platform concise-role comparison and excessive narration",
+    "Deployment and physical acceptance deferred by user"
+  ],
+  "unified_software_report": "docs/validation/evidence/ct76-draft-clause/software-checks.json"
+}
