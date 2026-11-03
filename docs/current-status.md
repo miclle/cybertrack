@@ -1,18 +1,18 @@
 # CyberTrack 当前状态
 
-ct78 为未部署候选，最近设备部署仍为 ct77。[停止与时长修正](validation/ct78-stop-duration.md)的两轮定向语音集均 16/16，原 S01／T04 已通过；完整 35 轮仍为 33/35，当前阻塞为“快一点”漏调用及 STT 丢失“先别执行”后误启动。仓库角色为 5999 字符候选，试验后平台已恢复原 5991 字符角色，无刷写或设备重启。历史编排不再作为当前功能或验收任务。[退役记录](validation/theatre-removal.md)
+ct78 应用已于 2026-11-03 [仅应用部署](validation/ct78-deployment.md)，两次启动联网及二十条零输出回读通过。仓库 5999 字符角色仍待同步；平台最近记录为 2026-11-01 恢复的旧 5991 字符角色，本次未修改或重新回读平台。[停止与时长修正](validation/ct78-stop-duration.md)的两轮定向语音集均 16/16，原 S01／T04 已通过；完整集仍为 33/35，“快一点”漏调用及 STT 丢失“先别执行”后误启动继续保留。固件更新不代表角色或语音验收通过。[剧场退役](validation/theatre-removal.md)
 
-核对日期：2026-11-01。机器可读版本入口为 [firmware/current.json](../firmware/current.json)，检查命令 `python3 scripts/check_firmware_current.py`。`last_recorded_deployment` 保留应用部署记录，独立的 `last_recorded_role_sync` 记录角色回读关联或后续纯角色同步，避免将重启冒充烧录。检查器核对源码版本与构建记录，以及角色同步所对应的已部署版本。可用下列命令分别核对两份本地应用文件的字节数和 SHA-256。省略参数时只检查记录；两种方式均离线运行。
+核对日期：2026-11-03。机器可读版本入口为 [firmware/current.json](../firmware/current.json)，检查命令 `python3 scripts/check_firmware_current.py`。`last_recorded_deployment` 保留应用部署记录，独立的 `last_recorded_role_sync` 记录角色回读关联或后续纯角色同步，避免将重启冒充烧录。检查器核对源码版本与构建记录，以及角色同步所对应的已部署版本。可用下列命令分别核对两份本地应用文件的字节数和 SHA-256。省略参数时只检查记录；两种方式均离线运行。
 
 ```sh
-python3 scripts/check_firmware_current.py --source-bin build/firmware-ct78/xiaozhi.bin --deployed-bin build/firmware-ct77/xiaozhi.bin
+python3 scripts/check_firmware_current.py --source-bin build/firmware-ct78/xiaozhi.bin --deployed-bin build/firmware-ct78/xiaozhi.bin
 ```
 
 | 项目 | 当前依据与状态 |
 |---|---|
-| 源码基线 | `2.0.3-ct78` 未部署候选：移除独立剧场、草稿、compose 与网页编辑／确认；保留语音组合、序列、四路独立截止及停止保护，新增仅讨论／暂不执行的有限拒绝检查。继承 ct77 测距提示连续确认及现有音频、协议保护。 |
-| 最近记录的部署 | [ct77](../firmware/esp32-audio/startup-ct77.json)；2026-11-01 仅应用写入、配置保持、两次启动联网及二十条零输出回读通过；用户确认偶发滴声明显减少 |
-| 最近角色核对 | [精简角色实验后恢复](../firmware/esp32-audio/role-concise-restored-ct75.json)：原 5991 字符角色保存重开逐字一致，模型参数未变；无设备重启或配置加载验收。候选因漏停撤回，见[固定对照](validation/concise-role.md) |
+| 源码基线 | `2.0.3-ct78` 应用已部署，角色候选待同步：移除独立剧场、草稿、compose 与网页编辑／确认；保留语音组合、序列、四路独立截止及停止保护，新增仅讨论／暂不执行的有限拒绝检查。继承 ct77 测距提示连续确认及现有音频、协议保护。 |
+| 最近记录的部署 | [ct78](../firmware/esp32-audio/startup-ct78.json)；2026-11-03 仅应用写入、配置保持、两次启动联网及二十条零输出回读通过；未更新平台角色 |
+| 最近角色核对 | [2026-11-01 回归后恢复](validation/evidence/ct78-stop-duration/platform-restored.json)：原 5991 字符角色保存重开逐字一致，模型参数未变；ct78 部署时未新增平台回读 |
 | 软件验证 | [ct78 本地构建与回归](../firmware/esp32-audio/verification-ct78.json)，[范围与边界](validation/theatre-removal.md)；旧版本记录保留在各验证专题，不作为新角色或现行模型验收。 |
 | 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，5999 字符候选，尚未同步；平台最近回读仍为旧 5991 字符角色。 |
 | 运动 | 四方向，60–100% PWM、默认 100%；全速转向省略时长为 880 ms，其他普通动作默认 1000 ms；无编码器里程计 |
@@ -25,7 +25,7 @@ python3 scripts/check_firmware_current.py --source-bin build/firmware-ct78/xiaoz
 | 机械 | [当前模型](../hardware/model/README.md)，Lean／Ready 各 27 件、6 盘；须按各自说明切片 |
 | 实物 | 已有样机及分项现场反馈；当前整机持续负载、停止性能、可靠性及完整语音回归未验收 |
 | 只读帮助 | ct43 引入、ct45 已部署[上手与回执解释](status-explanation.md)，不自动执行或重试；线上隔离解释已运行，发现猜测和恢复表述偏差；见[联调结果](validation/lingxi-ct45-20261031.md) |
-| 剧场退役 | ct78 已删除独立编辑入口和草稿协议；设备仍为 ct77，上线需配套同步固件和角色。 |
+| 剧场退役 | ct78 已删除独立编辑入口和草稿协议；设备已更新 ct78；角色同步及配套验收仍待完成。 |
 | 新改进 | [执行计划](improvement-plan.md)，部署不等于实物验收 |
 
 ct45 部署检查的 39 条状态／操作回执全部输出关闭、动作启动计数为 0；草稿创建、单步修改、旧版本拒绝、删除、取消、停止／会话释放失效及重连不恢复通过。未提交有效表演确认，未触发执行器。提示音调度日志不是听感验收；电平、机械停止及效果反馈继续以专项实测为准。2026-10-31 用户暂时无法配合实机测试。
