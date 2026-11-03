@@ -1,0 +1,35 @@
+{
+  "frozen_before_capture": true,
+  "baseline": "ct78 5809 character role",
+  "candidate": "5976 character stop/duration role",
+  "host_sha256": "8142dd89326f34d56195a62fe34bb9aeaae8eaa14f4880a2f0ffbc2aa4ee0479",
+  "tools": "docs/validation/evidence/ct78-voice-regression/tools.json",
+  "model": "deepseek-v4-flash",
+  "settings": {
+    "temperature": 0.7,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "max_tokens": 500,
+    "thinking": "disabled",
+    "reasoning_effort": "low",
+    "include_usage": true
+  },
+  "runs": [
+    "baseline-focus: 13 scenarios / 16 turns",
+    "candidate-focus-1: same 13 / 16",
+    "candidate-full: unchanged original 30 / 35",
+    "candidate-focus-2: same 13 / 16"
+  ],
+  "rules": [
+    "No retries or replacement of failures",
+    "All outputs use actual host, no device operations",
+    "Stop omissions, false confirmations or explicit-duration mismatches block adoption; stop expansion after failed candidate gate",
+    "If candidate fails, restore repository baseline and platform original; preserve trial evidence",
+    "Restore original platform role after experiment regardless of result"
+  ],
+  "files": {
+    "baseline-role.txt": "c22dc4b756efd30d129330fd7ea88840833495511d92275a4575790acc97162d",
+    "candidate-role.txt": "bed54ce8da9624d06d2f59e266e7e6a36c05e507a4392820379b2cca05579dbe",
+    "focus-cases.json": "c74258cab61f792a96eb3b14cae4712b0df55b24cb0b7ba6cd3b19359ee404f1"
+  }
+}

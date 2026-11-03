@@ -1,0 +1,191 @@
+{
+  "scope": "Fixed stop/duration contrast, synthetic speech with actual STT and ct78 host",
+  "cases": [
+    {
+      "id": "F01",
+      "text": "停止",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "category": "stop",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "id": "F02",
+      "text": "停止",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "category": "stop",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "id": "F03",
+      "text": "停止行走",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "category": "stop",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "id": "F04",
+      "text": "取消序列",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "category": "stop",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ]
+    },
+    {
+      "id": "F05",
+      "text": "停止",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "category": "repeated_stop",
+      "expected_calls": [
+        {
+          "name": "self.tank.stop",
+          "arguments": {}
+        }
+      ],
+      "followups": [
+        {
+          "text": "停止",
+          "expected_calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ]
+        },
+        {
+          "text": "停止",
+          "expected_calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ]
+        },
+        {
+          "text": "左转一秒",
+          "expected_calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "left",
+                "duration_ms": 1000
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "F06",
+      "text": "不要停止当前序列",
+      "context": "当前动作或序列可能正在运行，停止无需查询前置",
+      "category": "negative_stop",
+      "expected_calls": []
+    },
+    {
+      "id": "F07",
+      "text": "停止是什么意思",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "category": "quoted_stop",
+      "expected_calls": []
+    },
+    {
+      "id": "F08",
+      "text": "停止说话",
+      "context": "语音来源前进正在运行，原截止尚未到；当前速度70%，在线且无故障",
+      "category": "speech_only",
+      "expected_calls": []
+    },
+    {
+      "id": "F09",
+      "text": "先左转一秒，再吹泡泡两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "category": "duration",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"left\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0}]"
+          }
+        }
+      ]
+    },
+    {
+      "id": "F10",
+      "text": "先右转半秒，再左转一秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "category": "duration",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"right\",\"move_ms\":500,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ]
+    },
+    {
+      "id": "F11",
+      "text": "左转",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "category": "default_duration",
+      "expected_calls": [
+        {
+          "name": "self.tank.move",
+          "arguments": {
+            "direction": "left",
+            "duration_ms": 880
+          }
+        }
+      ]
+    },
+    {
+      "id": "F12",
+      "text": "左转，同时喷水两秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "category": "shared_duration",
+      "expected_calls": [
+        {
+          "name": "self.tank.move_and_water",
+          "arguments": {
+            "direction": "left",
+            "move_duration_ms": 2000,
+            "water_duration_ms": 2000
+          }
+        }
+      ]
+    },
+    {
+      "id": "F13",
+      "text": "先右转，再左转一秒",
+      "context": "设备在线、空闲，四路关闭且不在冷却；网页未占用；距离有效且未锁定",
+      "category": "mixed_duration",
+      "expected_calls": [
+        {
+          "name": "self.tank.sequence",
+          "arguments": {
+            "steps_json": "[{\"direction\":\"right\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+          }
+        }
+      ]
+    }
+  ]
+}

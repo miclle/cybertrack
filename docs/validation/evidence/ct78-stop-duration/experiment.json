@@ -1,0 +1,234 @@
+{
+  "date": "2026-11-01",
+  "decision": "retain_v3_as_local_candidate; deployment_blocked_by_R02_and_R03",
+  "firmware": "2.0.3-ct78",
+  "recorded_device": "2.0.3-ct77",
+  "role_characters": 5999,
+  "role_sha256": "a8ca1285577e10d6b71995cb1c444bacf8d2ecfc2d7bf3b1f8a758dcc7ae4a55",
+  "host_sha256": "8142dd89326f34d56195a62fe34bb9aeaae8eaa14f4880a2f0ffbc2aa4ee0479",
+  "host_manifest": "docs/validation/evidence/ct78-voice-regression/host-manifest.json",
+  "tools": "docs/validation/evidence/ct78-voice-regression/tools.json",
+  "original_full_corpus": "docs/validation/evidence/ct78-voice-regression/cases.json",
+  "first_two_commits": [
+    "906015b",
+    "4059b9e"
+  ],
+  "runs": [
+    {
+      "review": "baseline-focus-review.json",
+      "completed": 16,
+      "strict": 13,
+      "expected": 16,
+      "transcripts": 16,
+      "missing": [],
+      "host_replay_matches": true
+    },
+    {
+      "review": "candidate-focus-1-review.json",
+      "completed": 16,
+      "strict": 15,
+      "expected": 16,
+      "transcripts": 16,
+      "missing": [],
+      "host_replay_matches": true
+    },
+    {
+      "review": "candidate-v2-focus-1-review.json",
+      "completed": 16,
+      "strict": 15,
+      "expected": 16,
+      "transcripts": 16,
+      "missing": [],
+      "host_replay_matches": true
+    },
+    {
+      "review": "candidate-v3-focus-1-review.json",
+      "completed": 16,
+      "strict": 16,
+      "expected": 16,
+      "transcripts": 16,
+      "missing": [],
+      "host_replay_matches": true
+    },
+    {
+      "review": "candidate-v3-focus-2-review.json",
+      "completed": 16,
+      "strict": 16,
+      "expected": 16,
+      "transcripts": 16,
+      "missing": [],
+      "host_replay_matches": true
+    },
+    {
+      "review": "candidate-v3-full-review.json",
+      "completed": 35,
+      "strict": 33,
+      "expected": 35,
+      "transcripts": 32,
+      "missing": [],
+      "host_replay_matches": true
+    }
+  ],
+  "total_utterances": 115,
+  "completed_utterances": 115,
+  "final_candidate_strict": 65,
+  "final_candidate_utterances": 67,
+  "scope": "Synthetic Mandarin through actual STT/model; real MCP host with simulated time and IO; no recordings, microphone, speaker, physical acceptance, device reboot or flash",
+  "platform_original_restored": true,
+  "credentials_scan_passed": true,
+  "unchanged_source_sha256": {
+    "scripts/capture_lingxi.py": "6cedca561aeb4a878d89fb28a19dd02022f62594423b81a010a2a78c30eedf1b",
+    "scripts/review_stt_host.py": "f479d46d81fff1d5ee5feb5db2d83b2537ccb3adb3e3f01f8eb561aad7a0ae58",
+    "scripts/review_voice_scenarios.py": "34159eb62c290581c21ec0725b1fe5b513ebea54455371da6c2361a96fb13e66",
+    "docs/validation/evidence/ct78-voice-regression/tools.json": "3db9b8066a7cb9049b33bbe4fb07aad7e6324b1a8402937be2eb38b95fda251b",
+    "docs/validation/evidence/ct78-voice-regression/cases.json": "3825ba2138b98dbacca0dd2cf9e5b409b6a297e20a05a71ea633f2aac7540098"
+  },
+  "checks": {
+    "firmware_identity_passed": true,
+    "firmware_current_unit_tests": 1,
+    "package_tests": 5,
+    "relative_link_targets": 198,
+    "relative_links_passed": true,
+    "git_diff_check_passed": true,
+    "source_and_capture_identities_match": true,
+    "stop_dispatch_scenarios": 8,
+    "nonexecution_checks": 40,
+    "all_actual_stop_receipts_and_no_resume": 39,
+    "final_candidate_stops": 19,
+    "final_candidate_active_stops": 12
+  },
+  "files": {
+    "baseline-focus-review.json": {
+      "bytes": 24455,
+      "sha256": "3d35377d3f33954fc4f71b2d32298d2c08f8b8f9468d2b1cd3e7fee98c913353"
+    },
+    "baseline-focus.json.gz": {
+      "bytes": 20154,
+      "sha256": "dcfd22fe6aec5fc1d1f952a8975f88c4e847ce869aa09e50662615f695dcca21"
+    },
+    "baseline-role.txt": {
+      "bytes": 14398,
+      "sha256": "c22dc4b756efd30d129330fd7ea88840833495511d92275a4575790acc97162d"
+    },
+    "candidate-focus-1-review.json": {
+      "bytes": 24768,
+      "sha256": "a20005505a71bf0f91d557865fd58268d26e1ede41dba7cdf3366d8d4b2297b9"
+    },
+    "candidate-focus-1.json.gz": {
+      "bytes": 19913,
+      "sha256": "7487e23eb79a4b69068abf4a03dc8fd347d7ee2ed9b8939334e479898973afeb"
+    },
+    "candidate-role.txt": {
+      "bytes": 14857,
+      "sha256": "bed54ce8da9624d06d2f59e266e7e6a36c05e507a4392820379b2cca05579dbe"
+    },
+    "candidate-v2-focus-1-review.json": {
+      "bytes": 24552,
+      "sha256": "c3e454c1bcadd0c3fa4fe4f3c7b197971e8c78cda6f9ea62fe0d30f50ea5efb9"
+    },
+    "candidate-v2-focus-1.json.gz": {
+      "bytes": 19183,
+      "sha256": "cdda8d5f066561e3da85cd199446aad92ae5c8ca6a32199bb7024fbe0126aed5"
+    },
+    "candidate-v2-role.txt": {
+      "bytes": 14914,
+      "sha256": "4686a9cb67407c2720b7c40afd0ca55fe5fee7d050eba3a757caef5804e556d5"
+    },
+    "candidate-v3-focus-1-review.json": {
+      "bytes": 24607,
+      "sha256": "af50c0da683a94e720f33003b6b737cbd3132a02ef64e254dcf62bda2b68d8e4"
+    },
+    "candidate-v3-focus-1.json.gz": {
+      "bytes": 19352,
+      "sha256": "274ba32428041b9f786e008b18bc353688855e4b23dbd6861fd5ae6c727252bf"
+    },
+    "candidate-v3-focus-2-review.json": {
+      "bytes": 24602,
+      "sha256": "d03d71c95a8a7d1129bb6cc108d0b5a1ace5f377c614731845cca4c8149e1374"
+    },
+    "candidate-v3-focus-2.json.gz": {
+      "bytes": 19254,
+      "sha256": "1f195238de04a20c482238c36f98c2da618e5dab9be5ce2e5b0d20a1442f138d"
+    },
+    "candidate-v3-full-review.json": {
+      "bytes": 55617,
+      "sha256": "661fc5ce7b05317950b1593b71174984097273f52f51139e546115efe5d3be8d"
+    },
+    "candidate-v3-full.json.gz": {
+      "bytes": 40454,
+      "sha256": "54e9ada8d75dc3302de62cf7ea45d0e582597776ac2f3609b2c5b933c391e9d5"
+    },
+    "candidate-v3-role.txt": {
+      "bytes": 14914,
+      "sha256": "a8ca1285577e10d6b71995cb1c444bacf8d2ecfc2d7bf3b1f8a758dcc7ae4a55"
+    },
+    "current-check.json": {
+      "bytes": 834,
+      "sha256": "8d646f11d4d8db5b17084a5b5db659be3c9d47790999b2fd77177f233c561038"
+    },
+    "focus-cases.json": {
+      "bytes": 5660,
+      "sha256": "c74258cab61f792a96eb3b14cae4712b0df55b24cb0b7ba6cd3b19359ee404f1"
+    },
+    "local-checks.txt": {
+      "bytes": 287,
+      "sha256": "5685138b9588775e179311a44453657d77b3d740947ac2086dcd8260f633c5f5"
+    },
+    "nonexecution.json": {
+      "bytes": 306,
+      "sha256": "a07bc0dccde901cbc4ea696a80ce8985a5a08d4a9ec6b4c6521a6aa6491fbc2c"
+    },
+    "plan.json": {
+      "bytes": 1434,
+      "sha256": "4c15ac81e38e6957f8aad03c3c87a36b6123f0833a050b315fce501ef3c3f61b"
+    },
+    "platform-after-capture.json": {
+      "bytes": 194,
+      "sha256": "2258b15981676f07cdc3e72d7034ca844a41edb0ad473f4d18dd084a26a2cc7c"
+    },
+    "platform-baseline.json": {
+      "bytes": 410,
+      "sha256": "4111420bfb6fc4b066c4bdc2bac04ac918afca33a1864b25d9bb37ec4f3b8c96"
+    },
+    "platform-candidate-v2.json": {
+      "bytes": 410,
+      "sha256": "b9609eb14f0ff2760ebe3289b16392d7071d5349bee5f83fa4273099dcd8aa56"
+    },
+    "platform-candidate-v3.json": {
+      "bytes": 410,
+      "sha256": "dee938f3f98ff98d6fc2004d20a20fb7f2162cb697b80cbbe9e9d8005102a705"
+    },
+    "platform-candidate.json": {
+      "bytes": 410,
+      "sha256": "c2207e7fd8e5fcf4269769ea88a1506d848bb48c30696b366d54f62b7345546b"
+    },
+    "platform-restored.json": {
+      "bytes": 515,
+      "sha256": "1248f47ce16279803411f73a0f1139abdf844276ddbbd9cd25ce8672895c00b2"
+    },
+    "replay_stops.py": {
+      "bytes": 1970,
+      "sha256": "f9df45b9a7a535de20ee1d0189c3027970475a261e4ede37f9fac41dd80f8da9"
+    },
+    "stop-control-review.json": {
+      "bytes": 9832,
+      "sha256": "5e1dc1db4e822cd71c15c8d69f2bea44e6e335c698b0059e1992263e9550c6ff"
+    },
+    "stop-dispatch.json": {
+      "bytes": 80831,
+      "sha256": "1aff1f51b99e4ec3d390090bcaf375e5f2d7357c854fa6c70139ac3368aaba33"
+    },
+    "stt-negation-diagnostic.json": {
+      "bytes": 15662,
+      "sha256": "13eb68cda79d399e278e318e719a0a6f21eaa6aa2cf7703884685b3a81201af5"
+    },
+    "v2-plan.json": {
+      "bytes": 746,
+      "sha256": "04781bb8cd2e75d881b4389095b0a28e9ac1950a49dda20b7ae0662106c82278"
+    },
+    "v3-plan.json": {
+      "bytes": 745,
+      "sha256": "bc2f06e438abb15199ac4d96635736c574eda7e4adb3c8fc9f4d7ea8351ab48a"
+    }
+  }
+}
