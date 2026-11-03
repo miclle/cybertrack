@@ -1,6 +1,6 @@
 # CyberTrack 面包板：小D 语音与四路控制
 
-**ct78 候选：已移除泡泡剧场的草稿、编辑、确认、模板、离线排演与 compose 工具。** 语音组合动作、序列调度与停止保护保留。尚未刷写或同步线上角色；下方旧版本段落保留当时证据，不代表现行接口。[本次验证](../../docs/validation/theatre-removal.md)
+**ct78 应用已部署：已移除泡泡剧场的草稿、编辑、确认、模板、离线排演与 compose 工具。** 语音组合动作、序列调度与停止保护保留。2026-11-03 已[仅应用烧录并核验](../../docs/validation/ct78-deployment.md)，线上角色未同步；下方旧版本段落保留当时证据，不代表现行接口。[本次验证](../../docs/validation/theatre-removal.md)
 
 ct73 候选扩展四路组合／序列及既有别名的成功确认匹配，保留点火超限提示；十二条定向实际 STT 严格 10/12，五条成功组合新增抑制 277 包。70／87 原生夹具、18 组软件检查与完整构建通过，未部署。[范围与失败](../../docs/validation/four-lane-feedback.md)
 
@@ -79,7 +79,7 @@ ct23 增加网页“左转＋喷水，各 3 秒”对照入口，调用现有组
 
 ## 当前能力与验证范围
 
-源码为 `2.0.3-ct78` 未部署候选，最近记录部署为 `2.0.3-ct77`，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
+源码与最近记录的应用部署均为 `2.0.3-ct78`，仓库角色候选仍待同步，保留按已保存顺序连接 Wi-Fi，基于 `bread-compact-wifi`／`xiaozhi 2.0.3`，保留语音、OLED、唤醒、音量与说话按键。十一个 `self.tank.*` 工具为 `get_status`、`stop`、`move`、`water`、`move_and_water`、`bubbles`、`ignition`、`frenzy`、`sequence`、`adjust_speed`、`set_speed`，完整参数与状态见[当前接口手册](../CAPABILITIES.md#当前面包板-ct21-接口)。
 
 | 功能 | 当前规则 |
 |---|---|
