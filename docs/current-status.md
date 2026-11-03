@@ -1,6 +1,6 @@
 # CyberTrack 当前状态
 
-ct78 为未部署候选，最近设备部署仍为 ct77。已完成新角色与 11 个工具的[无实物语音回归](validation/ct78-voice-regression.md)：35 轮全部结束，严格匹配 33/35；明确时长错误及漏调停止保留为上线阻塞。测试后已恢复原平台角色，无刷写或设备重启。历史编排不再作为当前功能或验收任务。[退役记录](validation/theatre-removal.md)
+ct78 为未部署候选，最近设备部署仍为 ct77。[停止与时长修正](validation/ct78-stop-duration.md)的两轮定向语音集均 16/16，原 S01／T04 已通过；完整 35 轮仍为 33/35，当前阻塞为“快一点”漏调用及 STT 丢失“先别执行”后误启动。仓库角色为 5999 字符候选，试验后平台已恢复原 5991 字符角色，无刷写或设备重启。历史编排不再作为当前功能或验收任务。[退役记录](validation/theatre-removal.md)
 
 核对日期：2026-11-01。机器可读版本入口为 [firmware/current.json](../firmware/current.json)，检查命令 `python3 scripts/check_firmware_current.py`。`last_recorded_deployment` 保留应用部署记录，独立的 `last_recorded_role_sync` 记录角色回读关联或后续纯角色同步，避免将重启冒充烧录。检查器核对源码版本与构建记录，以及角色同步所对应的已部署版本。可用下列命令分别核对两份本地应用文件的字节数和 SHA-256。省略参数时只检查记录；两种方式均离线运行。
 
@@ -14,7 +14,7 @@ python3 scripts/check_firmware_current.py --source-bin build/firmware-ct78/xiaoz
 | 最近记录的部署 | [ct77](../firmware/esp32-audio/startup-ct77.json)；2026-11-01 仅应用写入、配置保持、两次启动联网及二十条零输出回读通过；用户确认偶发滴声明显减少 |
 | 最近角色核对 | [精简角色实验后恢复](../firmware/esp32-audio/role-concise-restored-ct75.json)：原 5991 字符角色保存重开逐字一致，模型参数未变；无设备重启或配置加载验收。候选因漏停撤回，见[固定对照](validation/concise-role.md) |
 | 软件验证 | [ct78 本地构建与回归](../firmware/esp32-audio/verification-ct78.json)，[范围与边界](validation/theatre-removal.md)；旧版本记录保留在各验证专题，不作为新角色或现行模型验收。 |
-| 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，5809 字符的 ct78 候选，尚未同步；平台最近回读仍为旧 5991 字符角色。 |
+| 角色 | [唯一角色源](../firmware/esp32-audio/role-prompt.txt)，5999 字符候选，尚未同步；平台最近回读仍为旧 5991 字符角色。 |
 | 运动 | 四方向，60–100% PWM、默认 100%；全速转向省略时长为 880 ms，其他普通动作默认 1000 ms；无编码器里程计 |
 | 并发与序列 | 四路独立截止，序列最多 16 步；步骤内并发，步骤间串行；取消不恢复 |
 | 测距 | IO1/TRIG、IO2/ECHO，约 100 ms 采样、500 ms 过期；无效不报旧距离 |

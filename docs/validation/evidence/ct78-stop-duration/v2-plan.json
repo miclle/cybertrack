@@ -1,0 +1,18 @@
+{
+  "frozen_before_capture": true,
+  "reason": "V1 incorrectly called stop for speech-only stop (F08); reject V1 and move stop-object exclusions before action-stop routing",
+  "candidate_sha256": "4686a9cb67407c2720b7c40afd0ca55fe5fee7d050eba3a757caef5804e556d5",
+  "candidate_characters": 5995,
+  "unchanged": [
+    "13 scenarios / 16 turns focus corpus",
+    "original 30 scenarios / 35 turns corpus",
+    "ct78 host / tools",
+    "model parameters"
+  ],
+  "runs": [
+    "candidate-v2-focus-1",
+    "candidate-v2-full only after focus passes",
+    "candidate-v2-focus-2 repeat after full"
+  ],
+  "boundaries": "Retain all V1 evidence. Continue temporary configuration experiment; restore original platform role at end; no device operations."
+}

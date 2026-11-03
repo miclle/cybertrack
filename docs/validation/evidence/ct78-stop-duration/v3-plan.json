@@ -1,0 +1,18 @@
+{
+  "frozen_before_capture": true,
+  "reason": "V2 again gave move_and_water 880/2000 for explicitly simultaneous two seconds (F12). Reject V2; replace defaults-first paragraph with ordered explicit/shared/default resolution and align combination paragraph.",
+  "candidate_sha256": "a8ca1285577e10d6b71995cb1c444bacf8d2ecfc2d7bf3b1f8a758dcc7ae4a55",
+  "candidate_characters": 5999,
+  "unchanged": [
+    "focus corpus 13/16",
+    "original corpus 30/35",
+    "ct78 host / 11 tools",
+    "model parameters"
+  ],
+  "runs": [
+    "candidate-v3-focus-1",
+    "candidate-v3-full after focus passes",
+    "candidate-v3-focus-2 repeat"
+  ],
+  "boundaries": "No retries, preserve prior failures, restore original platform at end, no device operations"
+}

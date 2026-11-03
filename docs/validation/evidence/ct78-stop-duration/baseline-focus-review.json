@@ -1,0 +1,951 @@
+{
+  "scope": "Fixed ct78 scenarios, synthesized Mandarin and real platform STT/model; actual host MCP; no physical or human speech acceptance",
+  "run_id": "c450d823-bcf1-4bfc-aeb7-2eec410d9442",
+  "expected_scenarios": 13,
+  "captured_scenarios": 13,
+  "expected_utterances": 16,
+  "completed_scenarios": 13,
+  "completed_utterances": 16,
+  "strict_scenario_matches": 11,
+  "strict_utterance_matches": 13,
+  "expected_receipt_scenarios": 12,
+  "transcript_matches": 16,
+  "tools_before_stt": 0,
+  "missing": [],
+  "replay": {
+    "scope": "Offline replay of captured STT/tool event order and host state; no new model run or board IO",
+    "run_id": "c450d823-bcf1-4bfc-aeb7-2eec410d9442",
+    "host_replay_sha256": "8142dd89326f34d56195a62fe34bb9aeaae8eaa14f4880a2f0ffbc2aa4ee0479",
+    "cases": 13,
+    "completed": 13,
+    "cases_with_tools_before_stt": [],
+    "replies_and_final_states_match": true,
+    "results": [
+      {
+        "id": "F01",
+        "completed": true,
+        "stt": [
+          {
+            "text": "停止。",
+            "elapsed_ms": 1341
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 1,
+        "rpc_error_count": 0,
+        "starts_this_boot": 0,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F02",
+        "completed": true,
+        "stt": [
+          {
+            "text": "停止。",
+            "elapsed_ms": 1385
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 1,
+        "rpc_error_count": 0,
+        "starts_this_boot": 1,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F03",
+        "completed": true,
+        "stt": [
+          {
+            "text": "停止行走。",
+            "elapsed_ms": 1845
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 1,
+        "rpc_error_count": 0,
+        "starts_this_boot": 1,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F04",
+        "completed": true,
+        "stt": [
+          {
+            "text": "取消序列。",
+            "elapsed_ms": 1781
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 1,
+        "rpc_error_count": 0,
+        "starts_this_boot": 1,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F05",
+        "completed": true,
+        "stt": [
+          {
+            "text": "停止。",
+            "elapsed_ms": 1354
+          },
+          {
+            "text": "停止。",
+            "elapsed_ms": 7602
+          },
+          {
+            "text": "停止。",
+            "elapsed_ms": 12702
+          },
+          {
+            "text": "左转一秒。",
+            "elapsed_ms": 18092
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 2,
+        "rpc_error_count": 0,
+        "starts_this_boot": 2,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F06",
+        "completed": true,
+        "stt": [
+          {
+            "text": "不要停止当前序列。",
+            "elapsed_ms": 2727
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 0,
+        "rpc_error_count": 0,
+        "starts_this_boot": 1,
+        "final_outputs": {
+          "left": 70,
+          "right": 70,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F07",
+        "completed": true,
+        "stt": [
+          {
+            "text": "停止是什么意思？",
+            "elapsed_ms": 2245
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 0,
+        "rpc_error_count": 0,
+        "starts_this_boot": 0,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F08",
+        "completed": true,
+        "stt": [
+          {
+            "text": "停止说话。",
+            "elapsed_ms": 1839
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 0,
+        "rpc_error_count": 0,
+        "starts_this_boot": 1,
+        "final_outputs": {
+          "left": 70,
+          "right": 70,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F09",
+        "completed": true,
+        "stt": [
+          {
+            "text": "先左转一秒，再吹泡泡两秒。",
+            "elapsed_ms": 4182
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 1,
+        "rpc_error_count": 0,
+        "starts_this_boot": 2,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F10",
+        "completed": true,
+        "stt": [
+          {
+            "text": "先右转半秒，再左转一秒。",
+            "elapsed_ms": 3983
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 1,
+        "rpc_error_count": 0,
+        "starts_this_boot": 2,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F11",
+        "completed": true,
+        "stt": [
+          {
+            "text": "左转。",
+            "elapsed_ms": 1434
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 1,
+        "rpc_error_count": 0,
+        "starts_this_boot": 1,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F12",
+        "completed": true,
+        "stt": [
+          {
+            "text": "左转，同时喷水两秒。",
+            "elapsed_ms": 3312
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 1,
+        "rpc_error_count": 0,
+        "starts_this_boot": 2,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      },
+      {
+        "id": "F13",
+        "completed": true,
+        "stt": [
+          {
+            "text": "先右转，再左转一秒。",
+            "elapsed_ms": 3315
+          }
+        ],
+        "tools_before_nonempty_stt": [],
+        "tool_count": 1,
+        "rpc_error_count": 0,
+        "starts_this_boot": 2,
+        "final_outputs": {
+          "left": 0,
+          "right": 0,
+          "water": false,
+          "bubbles": false,
+          "ignition": false
+        }
+      }
+    ]
+  },
+  "results": [
+    {
+      "id": "F01",
+      "category": "stop",
+      "completed": true,
+      "turns": [
+        {
+          "text": "停止",
+          "completed": true,
+          "stt": [
+            "停止。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "results": [
+            "ok"
+          ],
+          "expected_results": [
+            "ok"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "好的，都停下来了。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 0,
+      "sequence_result": "idle",
+      "remote_audio_bytes": 2622
+    },
+    {
+      "id": "F02",
+      "category": "stop",
+      "completed": true,
+      "turns": [
+        {
+          "text": "停止",
+          "completed": true,
+          "stt": [
+            "停止。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "results": [
+            "ok"
+          ],
+          "expected_results": [
+            "ok"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "动作都停下了，我在这儿等你。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 1,
+      "sequence_result": "idle",
+      "remote_audio_bytes": 3744
+    },
+    {
+      "id": "F03",
+      "category": "stop",
+      "completed": true,
+      "turns": [
+        {
+          "text": "停止行走",
+          "completed": true,
+          "stt": [
+            "停止行走。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "results": [
+            "ok"
+          ],
+          "expected_results": [
+            "ok"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "好的，停下了，我在这儿等你。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 1,
+      "sequence_result": "idle",
+      "remote_audio_bytes": 3454
+    },
+    {
+      "id": "F04",
+      "category": "stop",
+      "completed": true,
+      "turns": [
+        {
+          "text": "取消序列",
+          "completed": true,
+          "stt": [
+            "取消序列。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "results": [
+            "ok"
+          ],
+          "expected_results": [
+            "ok"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "序列已经取消了，动作都停下了。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 1,
+      "sequence_result": "cancelled",
+      "remote_audio_bytes": 4856
+    },
+    {
+      "id": "F05",
+      "category": "repeated_stop",
+      "completed": true,
+      "turns": [
+        {
+          "text": "停止",
+          "completed": true,
+          "stt": [
+            "停止。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.stop",
+              "arguments": {}
+            }
+          ],
+          "results": [
+            "ok"
+          ],
+          "expected_results": [
+            "ok"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "动作都停下了，我在这儿等你。",
+          "remote_text_empty": false
+        },
+        {
+          "text": "停止",
+          "completed": true,
+          "stt": [
+            "停止。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": false,
+          "tools_before_stt": false,
+          "calls": [],
+          "results": [],
+          "expected_results": [
+            "ok"
+          ],
+          "expected_receipts_match": false,
+          "rejected": false,
+          "remote_reply": "已经停了，没有动作在运行。",
+          "remote_text_empty": false
+        },
+        {
+          "text": "停止",
+          "completed": true,
+          "stt": [
+            "停止。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": false,
+          "tools_before_stt": false,
+          "calls": [],
+          "results": [],
+          "expected_results": [
+            "ok"
+          ],
+          "expected_receipts_match": false,
+          "rejected": false,
+          "remote_reply": "已经停好了，我在待命。",
+          "remote_text_empty": false
+        },
+        {
+          "text": "左转一秒",
+          "completed": true,
+          "stt": [
+            "左转一秒。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "left",
+                "duration_ms": 1000
+              }
+            }
+          ],
+          "results": [
+            "accepted"
+          ],
+          "expected_results": [
+            "accepted"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "好的，左转一秒。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": false,
+      "expected_receipts_match": false,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 2,
+      "sequence_result": "idle",
+      "remote_audio_bytes": 14851
+    },
+    {
+      "id": "F06",
+      "category": "negative_stop",
+      "completed": true,
+      "turns": [
+        {
+          "text": "不要停止当前序列",
+          "completed": true,
+          "stt": [
+            "不要停止当前序列。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [],
+          "results": [],
+          "expected_results": [],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "好，不会停止当前序列。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 70,
+        "right": 70,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 1,
+      "sequence_result": "running",
+      "remote_audio_bytes": 3292
+    },
+    {
+      "id": "F07",
+      "category": "quoted_stop",
+      "completed": true,
+      "turns": [
+        {
+          "text": "停止是什么意思",
+          "completed": true,
+          "stt": [
+            "停止是什么意思？"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [],
+          "results": [],
+          "expected_results": [],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "停止就是让机器人马上停下所有动作，包括行走、喷水、泡泡和点火这些。你现在没有动作在跑，我在这儿待命呢。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 0,
+      "sequence_result": "idle",
+      "remote_audio_bytes": 19197
+    },
+    {
+      "id": "F08",
+      "category": "speech_only",
+      "completed": true,
+      "turns": [
+        {
+          "text": "停止说话",
+          "completed": true,
+          "stt": [
+            "停止说话。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [],
+          "results": [],
+          "expected_results": [],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "好的，不说了。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 70,
+        "right": 70,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 1,
+      "sequence_result": "idle",
+      "remote_audio_bytes": 2258
+    },
+    {
+      "id": "F09",
+      "category": "duration",
+      "completed": true,
+      "turns": [
+        {
+          "text": "先左转一秒，再吹泡泡两秒",
+          "completed": true,
+          "stt": [
+            "先左转一秒，再吹泡泡两秒。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.sequence",
+              "arguments": {
+                "steps_json": "[{\"direction\":\"left\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"none\",\"move_ms\":0,\"water_ms\":0,\"bubbles_ms\":2000,\"ignition_ms\":0}]"
+              }
+            }
+          ],
+          "results": [
+            "accepted"
+          ],
+          "expected_results": [
+            "accepted"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "好的，先左转一秒，再吹泡泡两秒。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 2,
+      "sequence_result": "completed",
+      "remote_audio_bytes": 6191
+    },
+    {
+      "id": "F10",
+      "category": "duration",
+      "completed": true,
+      "turns": [
+        {
+          "text": "先右转半秒，再左转一秒",
+          "completed": true,
+          "stt": [
+            "先右转半秒，再左转一秒。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.sequence",
+              "arguments": {
+                "steps_json": "[{\"direction\":\"right\",\"move_ms\":500,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+              }
+            }
+          ],
+          "results": [
+            "accepted"
+          ],
+          "expected_results": [
+            "accepted"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "好的，先右转半秒，再左转一秒，已经安排上了。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 2,
+      "sequence_result": "completed",
+      "remote_audio_bytes": 7318
+    },
+    {
+      "id": "F11",
+      "category": "default_duration",
+      "completed": true,
+      "turns": [
+        {
+          "text": "左转",
+          "completed": true,
+          "stt": [
+            "左转。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.move",
+              "arguments": {
+                "direction": "left",
+                "duration_ms": 880
+              }
+            }
+          ],
+          "results": [
+            "accepted"
+          ],
+          "expected_results": [
+            "accepted"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "好的，左转。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 1,
+      "sequence_result": "idle",
+      "remote_audio_bytes": 2124
+    },
+    {
+      "id": "F12",
+      "category": "shared_duration",
+      "completed": true,
+      "turns": [
+        {
+          "text": "左转，同时喷水两秒",
+          "completed": true,
+          "stt": [
+            "左转，同时喷水两秒。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": false,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.move_and_water",
+              "arguments": {
+                "direction": "left",
+                "move_duration_ms": 880,
+                "water_duration_ms": 2000
+              }
+            }
+          ],
+          "results": [
+            "accepted"
+          ],
+          "expected_results": [
+            "accepted"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "好的，左转同时喷水两秒，已经开始了。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": false,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 2,
+      "sequence_result": "idle",
+      "remote_audio_bytes": 6225
+    },
+    {
+      "id": "F13",
+      "category": "mixed_duration",
+      "completed": true,
+      "turns": [
+        {
+          "text": "先右转，再左转一秒",
+          "completed": true,
+          "stt": [
+            "先右转，再左转一秒。"
+          ],
+          "transcript_matches": true,
+          "strict_tool_match": true,
+          "tools_before_stt": false,
+          "calls": [
+            {
+              "name": "self.tank.sequence",
+              "arguments": {
+                "steps_json": "[{\"direction\":\"right\",\"move_ms\":880,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0},{\"direction\":\"left\",\"move_ms\":1000,\"water_ms\":0,\"bubbles_ms\":0,\"ignition_ms\":0}]"
+              }
+            }
+          ],
+          "results": [
+            "accepted"
+          ],
+          "expected_results": [
+            "accepted"
+          ],
+          "expected_receipts_match": true,
+          "rejected": false,
+          "remote_reply": "好，已经安排好了。",
+          "remote_text_empty": false
+        }
+      ],
+      "strict_tool_match": true,
+      "expected_receipts_match": true,
+      "final_outputs": {
+        "left": 0,
+        "right": 0,
+        "water": false,
+        "bubbles": false,
+        "ignition": false
+      },
+      "starts": 2,
+      "sequence_result": "completed",
+      "remote_audio_bytes": 2649
+    }
+  ]
+}
