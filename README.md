@@ -30,11 +30,23 @@
 
 ## 样机演示
 
-**先看小D动起来。** 最新样机演示（2026-11-01 收录），时长约 2 分 46 秒。
+### 最新样机演示 · 2 分 46 秒
+
+**先看小D动起来。** 2026-11-01 收录的最新样机视频。
 
 https://github.com/user-attachments/assets/ee478fe1-ac43-49b4-ba31-2930058c963d
 
-[在 B 站观看](https://www.bilibili.com/video/BV1BRx466E1b/) · [下载原始视频](artifact/cybertrack-prototype-demo-2026-11-01.mp4) · [浏览 33 张制作照片与 3 段视频](artifact/README.md)
+[在 B 站观看](https://www.bilibili.com/video/BV1BRx466E1b/) · [下载原始视频](artifact/cybertrack-prototype-demo-2026-11-01.mp4)
+
+### 地面移动与泡泡 · 6 分钟
+
+样机在地面上的移动、转向与泡泡效果，保留更完整的实拍过程。
+
+https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
+
+[在 B 站观看](https://www.bilibili.com/video/BV1rLxM6sEF6/) · [下载原始视频](artifact/cybertrack-prototype-demo-6min.mp4)
+
+[浏览全部制作记录 → 33 张照片与 3 段视频](artifact/README.md)
 
 *视频记录拍摄时的样机表现；当前固件、供电配置与验证结果见[工程记录](docs/current-status.md)。*
 
