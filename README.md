@@ -29,6 +29,16 @@
 
 > **项目阶段：已有可运行样机，正在完善交互与整机验证。** 语音、网页控制和基础动作已有部署及分项现场记录；模型辅助设计和配套制作资料持续完善。
 
+## Web 工程文档与三维模型
+
+文档站按主题组织现有 Markdown，支持筛选左侧目录。三维查看器支持旋转和缩放 **v2 整机**、切换视角、显隐零件并查看爆炸图。
+
+在仓库根目录运行 `make serve`，再打开 [本地文档站](http://127.0.0.1:24173/)。可用 `make serve PORT=8080` 更改预览端口。
+
+构建需要 Node.js 22 或更新版本。Make 会在首次构建或依赖清单变更时按锁文件安装依赖，也可单独运行 `make deps`。首次构建或 CAD 更新时，需要能导入 FreeCAD 的 Python。macOS 默认使用 `/Applications/FreeCAD.app` 内的 Python，其他安装可通过 `FREECAD_PYTHON` 指定解释器。模型缓存位于 `build/web-models/`，源档或导出器发生变化时会重新生成。
+
+运行 `make build` 可单独生成 `build/web/`，将该目录作为静态站点通过 HTTP 提供即可。浏览器查看三维模型需要 WebGL 2，静态服务器和访客无需安装 FreeCAD。
+
 ## v2 默认分支
 
 GitHub 仓库的默认分支已切换到 `v2`。整机模型、打印件、原理图和固件的后续更新都在此维护。早期样机的工程资料仍可在 [`main` 分支](https://github.com/miclle/cybertrack/tree/main)查看。
