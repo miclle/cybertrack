@@ -28,7 +28,7 @@ const github = (source, kind = "blob") => `${repository}/${kind}/${branch}/${url
 
 const named = new Map(sections.flatMap(([, entries]) => entries));
 const documents = new Map([
-  ...[...tracked].filter(file => file.startsWith("docs/") && file.endsWith(".md")),
+  ...[...tracked].filter(file => file.startsWith("docs/") && file.endsWith(".md") && fs.existsSync(path.join(root, file))),
   ...named.keys(),
   "hardware/architecture/README.md",
   "hardware/schematic/README.md",

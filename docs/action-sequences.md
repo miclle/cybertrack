@@ -44,7 +44,7 @@ v2 的序列每步含 `direction`、`move_ms`、`water_ms`、`bubbles_ms`，可�
 
 ## 序列工具与执行契约
 
-`self.tank.sequence` 仅接收字符串 `steps_json`，内容为 1–16 个步骤组成的 JSON 数组。上游工具属性仅支持标量，因此使用 JSON 字符串；调用时应正规 JSON 编码，不直接传数组。每步必须包含以下五个动作字段，仅另可选填行走速度 `speed_percent`，不接受缺失、重复或额外字段：
+`self.tank.sequence` 仅接收字符串 `steps_json`，内容为 1–16 个步骤组成的 JSON 数组。上游工具属性仅支持标量，因此使用 JSON 字符串；调用时应正规 JSON 编码，不直接传数组。每步必须包含以下四个动作字段，仅另可选填行走速度 `speed_percent`，不接受缺失、重复或额外字段：
 
 | 字段 | 范围／语义 |
 |---|---|

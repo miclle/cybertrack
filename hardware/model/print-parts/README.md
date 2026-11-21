@@ -2,8 +2,6 @@
 
 v2 的 PP03 已封平绑带缺口，PP04 已填平底托安装孔。当前 STL／STEP 对应双瓶直放布局，下文旧预览与工时为历史记录。[现行几何回读](../bottle-backpack-direct-fit.json)
 
-2026-10-27：PP03 STL／STEP 已更新为双侧内径 **35 mm**；泡泡液瓶底托及识别条不再导出。当前 CAD 与打印清单见[背包调整](../../../docs/backpack-35mm.md)，旧图册保留历史版本。
-
 **当前入口：** [Lean 六盘项目](../lean-print/README.md)。样机已有[实拍与运行视频](../../../artifact/README.md)，本目录供单件查看、补打和历史参数追溯。实物公差、螺丝保持、强度与完整拆装等未验证项继续保留。
 
 **四件几何修正记录：** PP02 与 LC04 已修复；PP01、PP02、PP03、LC04 曾组成新增第 5 盘，现分入 Lean 第 3、6 盘，见[独立 STL／STEP、方向与检查](../remaining-print/README.md)。PP02 本目录 STL／STEP 已同步为底板贴床方向，原 PP02.png 和旧图册保留历史孔形。
