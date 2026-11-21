@@ -289,10 +289,6 @@ async def capture_case(connection,tools,case,timeout=45):
                                 if name.endswith('get_status'): receipt.update(fields)
                             else: receipt['status_facts'] = output
                         if name.endswith('stop') and 'rpc_error' not in receipt:status=copy.deepcopy(receipt);status['result']='ok'
-                        if 'rpc_error' in receipt and case.get('admission_result_fixture'):
-                            row.setdefault('original_admission_errors',[]).append(receipt['rpc_error'])
-                            receipt = dict(operation=name.removeprefix('self.tank.'), result='rejected',
-                                           rejection_reason=receipt['rpc_error'], physical_feedback=False)
                         if 'rpc_error' in receipt:
                             rpc_error=dict(message=receipt['rpc_error'])
                             row.setdefault('rpc_errors',[]).append(dict(name=name, **rpc_error))
@@ -374,8 +370,6 @@ async def run(args):
         for case in cases: case['raw_text']=True
     version = 'timed_host' if timed else 'ct47' if getattr(args,'ct47',False) else 'ct46' if getattr(args,'ct46',False) else 'ct45'
     speed_host=getattr(args,'speed_host',None)
-    if getattr(args,'admission_result_fixture',False) and not speed_host:
-        raise ValueError('admission result fixture requires speed host')
     if speed_host and not getattr(args,'synthetic_speech',False):
         raise ValueError('speed host requires synthetic speech')
     if speed_host:
@@ -398,8 +392,6 @@ async def run(args):
         case['fixture_version']=version
         if getattr(args,'argument_validator',None):
             case['argument_validator']=args.argument_validator.resolve()
-        if getattr(args,'admission_result_fixture',False):
-            case['admission_result_fixture']=True
         if getattr(args,'audio_packets',False): case['audio_packets']=True
         if getattr(args,'protocol_events',False): case['protocol_events']=True
     trace=dict(fixture_version=version,kind='captured_tool_calls',run_id=str(uuid.uuid4()),date=datetime.datetime.now(datetime.timezone.utc).isoformat(),model=args.model,
@@ -426,7 +418,6 @@ async def run(args):
     if getattr(args,'protocol_events',False):trace['protocol_observations_recorded']=True
     if speed_host:
         trace['initial_profile']=speed_host
-    trace['admission_result_fixture']=getattr(args,'admission_result_fixture',False)
     if firmware_host:
         trace['scope']='Real platform with raw input; actual MCP dispatch, callbacks and guard on host; virtual clock, 600 mm simulated range, immediate schedule; zero board IO'
         formats=[]
@@ -473,7 +464,6 @@ if __name__=='__main__':
     for name in ('connection','tools','corpus','role','output'):p.add_argument('--'+name,type=Path,required=True)
     p.add_argument('--model',required=True);p.add_argument('--ids');p.add_argument('--timeout',type=float,default=45)
     p.add_argument('--continue-incomplete',action='store_true',help='Retain incomplete cases as failures and continue only to the next unrun case; never retry')
-    p.add_argument('--admission-result-fixture',action='store_true',help='Experiment only: expose host admission errors as structured rejected tool results')
     p.add_argument('--argument-validator',type=Path,help='Use the prepared firmware parameter gate before any isolated receipt')
     p.add_argument('--audio-packets',action='store_true',help='Record arrival and size of every remote audio packet; discard its content')
     p.add_argument('--protocol-events',action='store_true',help='Record JSON field types and bounded stage enums only; never raw identifiers or arbitrary extra values')
