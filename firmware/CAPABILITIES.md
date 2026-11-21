@@ -2,7 +2,7 @@
 
 ct79 是 v2 的未部署固件候选。点火与狂暴模式已退役，旧网页操作及含旧字段的序列会被拒绝。
 
-现用工程为 [ESP32-S3 面包板](esp32-audio/README.md)。版本与最近一次设备部署见[当前状态](../docs/current-status.md)，旧接口可查[历史手册](CAPABILITIES-history.md)。
+现用工程为 [ESP32-S3 面包板](esp32-audio/README.md)。版本与最近一次设备部署见[当前状态](../docs/current-status.md)。
 
 <a id="当前面包板-ct21-接口"></a>
 <a id="当前面包板-ct22-接口"></a>
@@ -51,4 +51,4 @@ ct43 引入 `recent_command`，保留进入动作适配器的最近一次请求�
 
 固件按本轮输入校验动作。含糊动作可能返回 `action_unspecified`，完整否定表达可能返回 `input_negated`。失败后不为同一输入重试或换工具补做。活动中或等待中的全停优先，查询可用于查看回执。[输入隔离](../docs/validation/voice-input-guard.md) · [否定与停止](../docs/validation/negative-input-admission.md)
 
-当前构建、已部署应用、语音失败样例和待验的实际效果统一见[当前状态](../docs/current-status.md)。旧接口及其回放见[历史手册](CAPABILITIES-history.md)。
+当前构建、已部署应用、语音失败样例和待验的实际效果统一见[当前状态](../docs/current-status.md)。历史版本的接口说明保存在提交 `04ed36b` 的 `firmware/CAPABILITIES-history.md`。

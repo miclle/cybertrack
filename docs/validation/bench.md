@@ -5,7 +5,7 @@
 | 对象和试验条件 | 已观察的结果 | 留待整机验证 |
 |---|---|---|
 | 独立灵矽设备，0.1／0.2 | 绑定、WSS、端侧 MCP 状态和停止可用。受限喷水做过断开功率的调用及两次带载调用 | 面包板语音和网页有独立会话规则。[台架工程](../../firmware/esp32-linx/README.md) |
-| 独立 MOS 水枪台架，GPIO4 | 5 秒喷水到期停止，另一次按 BOOT 提前停止，用户确认松开后未恢复 | 精确关断延迟、残液、温升、持续负载和失电行为。[台架配置](../../firmware/esp32-mos-bench/README.md) |
+| 独立 MOS 水枪台架，GPIO4 | 5 秒喷水到期停止，另一次按 BOOT 提前停止，用户确认松开后未恢复 | 精确关断延迟、残液、温升、持续负载和失电行为。[当时的固件与接线记录](https://github.com/miclle/cybertrack/blob/04ed36b87a49dd381d1a0d2fdd5cc9ac988489f4/firmware/esp32-mos-bench/README.md) |
 | 独立 L298N 台架，电机空载 | 8 组方向与通道隔离得到现场反馈。双路约 60% 输出运行 10 秒时观察母线约 12 V，另测过 BOOT 提前停止 | 辰克电池下的整机电流、定量温升、机械停止距离。[运行记录](../../firmware/esp32-motor-bench/dual-10s-run-verification.json) · [停止记录](../../firmware/esp32-motor-bench/dual-boot-stop-verification.json) |
 | 面包板 ct2、ct4、ct5 | ct2 修复工具回执崩溃后，语音状态与停止完成联调。GPIO18 控制端接反纠正后，ct4 实喷及 BOOT 停止有反馈。ct5 的可变时长调用在功率断开时核对 | 30 秒持续喷水、装壳声学和当前角色的真人语音回归 |
 | 同板集成 ct6、并发 ct7 | ct6 完成四方向空载、水枪及 BOOT 分项。ct7 观察到行走与喷水同时运行、分别到期，BOOT 与语音可提前停止 | 当时的供电和通道映射只适用于该轮。参见 [ct6 部署](../../firmware/esp32-audio/startup-ct6.json)和 [ct7 部署](../../firmware/esp32-audio/startup-ct7.json) |

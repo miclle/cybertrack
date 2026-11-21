@@ -6,8 +6,9 @@
 |---|---|
 | [面包板应用](esp32-audio/README.md) | 音频、OLED、联网、MCP 工具与本地执行器。[接口手册](CAPABILITIES.md) |
 | [通用 C11 核心](src/) | 离线协议、受限动作和运行层，使用虚拟时间及假板卡测试。[实施计划](PLAN.md) · [协议契约](PROTOCOL.md) |
-| [独立 ESP32-S3 工程](esp32/README.md) | 无负载启动、存储和 BOOT 输入验证。[板卡资料](BOARD-INFO.md) |
-| [联网台架](esp32-linx/README.md) · [电机台架](esp32-motor-bench/README.md) · [MOS 台架](esp32-mos-bench/README.md) | 分项测试有各自的接线、固件与供电记录，按原工况查阅。[台架记录](../docs/validation/bench.md) |
+| [联网台架](esp32-linx/README.md) · [电机台架](esp32-motor-bench/README.md) | 分项测试有各自的接线、固件与供电记录，按原工况查阅。[台架记录](../docs/validation/bench.md) |
+
+独立板无负载启动和 MOS 喷水台架的验证固件已归档。当时的源码、板卡条件与实测入口见[无负载检查](esp32/README.md)和[台架记录](../docs/validation/bench.md)。早期面包板软件报告可按版本号在[清理前的固件目录](https://github.com/miclle/cybertrack/tree/04ed36b87a49dd381d1a0d2fdd5cc9ac988489f4/firmware/esp32-audio)查阅。
 
 ## 本地编译与验证
 
