@@ -105,29 +105,6 @@
           "source": "hardware/schematic/parameter-confirmation.md E04; bubbles start 未测"
         }
       }
-    },
-    "ignition": {
-      "idle": {
-        "input_current_a": {
-          "value": null,
-          "kind": "unknown",
-          "source": "docs/effects-control.md; 高压未放行，不安排带电采集，不假定为零"
-        }
-      },
-      "run": {
-        "input_current_a": {
-          "value": null,
-          "kind": "unknown",
-          "source": "docs/effects-control.md; 高压未放行，不安排带电采集，不假定为零"
-        }
-      },
-      "start": {
-        "input_current_a": {
-          "value": null,
-          "kind": "unknown",
-          "source": "docs/effects-control.md; 高压未放行，不安排带电采集，不假定为零"
-        }
-      }
     }
   },
   "scenarios": [
@@ -138,8 +115,7 @@
         "controller_audio": "idle",
         "motor_drive": "idle",
         "water": "idle",
-        "bubbles": "idle",
-        "ignition": "idle"
+        "bubbles": "idle"
       }
     },
     {
@@ -149,8 +125,7 @@
         "controller_audio": "run",
         "motor_drive": "idle",
         "water": "idle",
-        "bubbles": "idle",
-        "ignition": "idle"
+        "bubbles": "idle"
       }
     },
     {
@@ -160,8 +135,7 @@
         "controller_audio": "run",
         "motor_drive": "run",
         "water": "idle",
-        "bubbles": "idle",
-        "ignition": "idle"
+        "bubbles": "idle"
       }
     },
     {
@@ -171,8 +145,7 @@
         "controller_audio": "run",
         "motor_drive": "run",
         "water": "idle",
-        "bubbles": "run",
-        "ignition": "idle"
+        "bubbles": "run"
       }
     },
     {
@@ -182,8 +155,7 @@
         "controller_audio": "run",
         "motor_drive": "start",
         "water": "idle",
-        "bubbles": "start",
-        "ignition": "idle"
+        "bubbles": "start"
       }
     },
     {
@@ -193,8 +165,7 @@
         "controller_audio": "start",
         "motor_drive": "start",
         "water": "start",
-        "bubbles": "start",
-        "ignition": "start"
+        "bubbles": "start"
       }
     }
   ]

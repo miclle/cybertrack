@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "net_count": 54,
+  "net_count": 49,
   "checks": [
     {
       "check": "Motor GPIO8 -> ENA",
@@ -40,11 +40,6 @@
     {
       "check": "Effect GPIO17 -> U8",
       "net": "BUBBLE_EN",
-      "passed": true
-    },
-    {
-      "check": "Effect GPIO21 -> U10",
-      "net": "IGNITION_EN",
       "passed": true
     },
     {
@@ -144,30 +139,6 @@
       "passed": true
     },
     {
-      "check": "Ignition disconnect supply side",
-      "net": "5V_IGN_FUSED",
-      "passed": true
-    },
-    {
-      "check": "Ignition disconnect load side",
-      "net": "5V_IGN_ISOLATED",
-      "passed": true
-    },
-    {
-      "check": "Ignition disconnect not bypassed",
-      "passed": true
-    },
-    {
-      "check": "Ignition LV output positive",
-      "net": "/Reserved ignition LV/IGNITION_SW_P",
-      "passed": true
-    },
-    {
-      "check": "Ignition LV output return",
-      "net": "/Reserved ignition LV/IGNITION_SW_N",
-      "passed": true
-    },
-    {
       "check": "Retained GPIO4",
       "net": "Net-(U1B-MIC_WS_[L04])",
       "passed": true
@@ -263,11 +234,6 @@
       "passed": true
     },
     {
-      "check": "R9 returns to system ground",
-      "net": "GND_SYS",
-      "passed": true
-    },
-    {
       "check": "Controller and actuator branches start before SW2",
       "net": "5V_SYS",
       "passed": true
@@ -324,10 +290,6 @@
       "passed": true
     },
     {
-      "check": "R9 value TBD",
-      "passed": true
-    },
-    {
       "check": "U1 5Vin photo position L21",
       "passed": true
     },
@@ -369,10 +331,6 @@
     },
     {
       "check": "U1 IO17 photo position L10",
-      "passed": true
-    },
-    {
-      "check": "U1 IO21 photo position R18",
       "passed": true
     },
     {
@@ -504,7 +462,11 @@
       "passed": true
     },
     {
-      "check": "All A1 terminal connectivity preserved in A2",
+      "check": "Retired ignition circuitry and IO21 absent",
+      "passed": true
+    },
+    {
+      "check": "A1 connectivity preserved for every retained terminal",
       "passed": true
     }
   ],

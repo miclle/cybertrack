@@ -1,5 +1,5 @@
 {
-  "revision": "A2",
+  "revision": "A3",
   "production_bom": false,
   "pin_ids": "logical identity or silkscreen; NOT connector pad position",
   "sheets": [
@@ -93,13 +93,6 @@
         },
         {
           "ref": "F6",
-          "unit": 1,
-          "kind": "Fuse",
-          "value": "TBD",
-          "dnp": false
-        },
-        {
-          "ref": "F7",
           "unit": 1,
           "kind": "Fuse",
           "value": "TBD",
@@ -315,49 +308,8 @@
       ]
     },
     {
-      "file": "ignition-lv.kicad_sch",
-      "page": 5,
-      "parts": [
-        {
-          "ref": "JP2",
-          "unit": 1,
-          "kind": "Disconnect",
-          "value": "DNP / LEAVE OPEN",
-          "dnp": true
-        },
-        {
-          "ref": "U10",
-          "unit": 1,
-          "kind": "JZ_MOS",
-          "value": "P01 / COMMON CONTROL / DNP",
-          "dnp": true
-        },
-        {
-          "ref": "J9",
-          "unit": 1,
-          "kind": "LV_Reserved",
-          "value": "LV RESERVE / DNP",
-          "dnp": true
-        },
-        {
-          "ref": "#FLG06",
-          "unit": 1,
-          "kind": "SupplyFlag",
-          "value": "PWR_FLAG",
-          "dnp": false
-        },
-        {
-          "ref": "R9",
-          "unit": 1,
-          "kind": "Pulldown",
-          "value": "TBD",
-          "dnp": false
-        }
-      ]
-    },
-    {
       "file": "ultrasonic.kicad_sch",
-      "page": 6,
+      "page": 5,
       "parts": [
         {
           "ref": "U1",

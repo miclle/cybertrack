@@ -16,7 +16,6 @@
 (pin output line (at 35.56 -10.16 180) (length 7.62) (name "MOTOR_B_IN2 [L19]" (effects (font (size 1.143 1.143)))) (number "IO13" (effects (font (size 1.016 1.016)))))
 (pin output line (at 35.56 -20.32 180) (length 7.62) (name "WATER_EN [L11]" (effects (font (size 1.143 1.143)))) (number "IO18" (effects (font (size 1.016 1.016)))))
 (pin output line (at 35.56 -30.48 180) (length 7.62) (name "BUBBLE_EN [L10]" (effects (font (size 1.143 1.143)))) (number "IO17" (effects (font (size 1.016 1.016)))))
-(pin output line (at 35.56 -40.64 180) (length 7.62) (name "IGNITION_EN [R18]" (effects (font (size 1.143 1.143)))) (number "IO21" (effects (font (size 1.016 1.016)))))
 )
 (symbol "Existing_ESP32S3_2_1"
 (rectangle (start -27.94 60.96) (end 27.94 -60.96) (stroke (width 0.254) (type default)) (fill (type background)))
@@ -231,16 +230,6 @@
 (rectangle (start -17.78 20.32) (end 17.78 -20.32) (stroke (width 0.254) (type default)) (fill (type background)))
 (pin power_in line (at -25.4 10.16 0) (length 7.62) (name "+" (effects (font (size 1.143 1.143)))) (number "+" (effects (font (size 1.016 1.016)))))
 (pin passive line (at -25.4 -10.16 0) (length 7.62) (name "-" (effects (font (size 1.143 1.143)))) (number "-" (effects (font (size 1.016 1.016)))))
-)
-)
-(symbol "LV_Reserved"
-(pin_names (offset 1.016)) (in_bom yes) (on_board yes)
-(property "Reference" "U" (at 0 27.94 0) (effects (font (size 1.27 1.27))))
-(property "Value" "LV_Reserved" (at 0 22.86 0) (effects (font (size 1.27 1.27))))
-(symbol "LV_Reserved_1_1"
-(rectangle (start -25.4 20.32) (end 25.4 -20.32) (stroke (width 0.254) (type default)) (fill (type background)))
-(pin passive line (at -33.02 10.16 0) (length 7.62) (name "LV+ ONLY" (effects (font (size 1.143 1.143)))) (number "+" (effects (font (size 1.016 1.016)))))
-(pin passive line (at -33.02 -10.16 0) (length 7.62) (name "LV- ONLY" (effects (font (size 1.143 1.143)))) (number "-" (effects (font (size 1.016 1.016)))))
 )
 )
 )

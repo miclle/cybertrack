@@ -1,4 +1,4 @@
-(kicad_sch (version 20250114) (generator "cybertrack_schematic") (uuid a9094ecc-00e6-5590-b175-6f5e783bf16c) (paper "A3") (title_block (title "CyberTrack / Ultrasonic 3V3 interface") (date "2026-10-30") (rev "A2") (company "CyberTrack") (comment 1 "MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION") (comment 2 "Retain existing ESP32-S3 board; TBD items are unresolved") (comment 3 "Pin IDs identify signals, NOT physical header positions"))
+(kicad_sch (version 20250114) (generator "cybertrack_schematic") (uuid a9094ecc-00e6-5590-b175-6f5e783bf16c) (paper "A3") (title_block (title "CyberTrack / Ultrasonic 3V3 interface") (date "2026-11-21") (rev "A3") (company "CyberTrack") (comment 1 "MODULE INTERCONNECTION SCHEMATIC - NOT FOR FABRICATION") (comment 2 "Retain existing ESP32-S3 board; TBD items are unresolved") (comment 3 "Pin IDs identify signals, NOT physical header positions"))
 (lib_symbols
 (symbol "CyberTrack:Existing_ESP32S3"
 (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
@@ -17,7 +17,6 @@
 (pin output line (at 35.56 -10.16 180) (length 7.62) (name "MOTOR_B_IN2 [L19]" (effects (font (size 1.143 1.143)))) (number "IO13" (effects (font (size 1.016 1.016)))))
 (pin output line (at 35.56 -20.32 180) (length 7.62) (name "WATER_EN [L11]" (effects (font (size 1.143 1.143)))) (number "IO18" (effects (font (size 1.016 1.016)))))
 (pin output line (at 35.56 -30.48 180) (length 7.62) (name "BUBBLE_EN [L10]" (effects (font (size 1.143 1.143)))) (number "IO17" (effects (font (size 1.016 1.016)))))
-(pin output line (at 35.56 -40.64 180) (length 7.62) (name "IGNITION_EN [R18]" (effects (font (size 1.143 1.143)))) (number "IO21" (effects (font (size 1.016 1.016)))))
 )
 (symbol "Existing_ESP32S3_2_1"
 (rectangle (start -27.94 60.96) (end 27.94 -60.96) (stroke (width 0.254) (type default)) (fill (type background)))
@@ -52,7 +51,7 @@
 (pin passive line (at -38.1 -30.48 0) (length 7.62) (name "GND" (effects (font (size 1.143 1.143)))) (number "GND" (effects (font (size 1.016 1.016)))))
 )
 ))
-(text "06  HEAD ULTRASONIC MODULE - CONTROLLER 3.3 V" (at 20.32 17.78 0) (effects (font (size 2.159 2.159)) (justify left top)) (uuid ee0620b5-e0cd-50c2-be74-80e62448c201))
+(text "05  HEAD ULTRASONIC MODULE - CONTROLLER 3.3 V" (at 20.32 17.78 0) (effects (font (size 2.159 2.159)) (justify left top)) (uuid ee0620b5-e0cd-50c2-be74-80e62448c201))
 (text "U1C is part of the SAME existing ESP32-S3 board as U1A/U1B. No additional controller or regulator." (at 20.32 30.48 0) (effects (font (size 1.651 1.651)) (justify left top)) (uuid b565427e-6688-5c71-97b6-5c214faaad0d))
 (symbol (lib_id "CyberTrack:Existing_ESP32S3") (at 109.22 116.84 0) (unit 3) (in_bom no) (on_board no) (dnp no) (uuid 699ec532-b501-5666-899e-7108488b9e8a)(property "Reference" "U1" (at 109.22 43.18 0) (effects (font (size 1.651 1.651))))
 (property "Value" "Existing ESP32-S3" (at 109.22 49.53 0) (effects (font (size 1.524 1.524))))

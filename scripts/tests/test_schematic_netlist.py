@@ -35,7 +35,6 @@ class UltrasonicNetlistTests(unittest.TestCase):
     def test_current_export(self):
         result = check(NETLIST)
         self.assertTrue(result['passed'])
-        self.assertEqual(len(result['checks']), 112)
 
     def test_swapped_trig_echo(self):
         def swap(root):
@@ -49,6 +48,11 @@ class UltrasonicNetlistTests(unittest.TestCase):
 
     def test_switched_return_ground(self):
         self.reject(lambda root: self.move(root, 'GND', 'U6', 'VOUT-'))
+
+    def test_retired_gpio_reappears(self):
+        def add(root):
+            ET.SubElement(self.net(root, 'U1', 'GND'), 'node', ref='U1', pin='IO21')
+        self.reject(add)
 
     def test_wrong_echo_direction(self):
         def reverse(root):

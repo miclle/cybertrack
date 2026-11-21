@@ -36,7 +36,7 @@ def check(path):
                ('11', 'ENB'), ('12', 'IN3'), ('13', 'IN4')]
     for i, (gpio, terminal) in enumerate(mapping):
         same(f'Motor GPIO{gpio} -> {terminal}', ('U1', f'IO{gpio}'), ('U5', terminal), (f'R{i+1}', '1'))
-    for gpio, mos, r in [('18', 'U6', 'R7'), ('17', 'U8', 'R8'), ('21', 'U10', 'R9')]:
+    for gpio, mos, r in [('18', 'U6', 'R7'), ('17', 'U8', 'R8')]:
         same(f'Effect GPIO{gpio} -> {mos}', ('U1', f'IO{gpio}'), (mos, 'TRIG'), (r, '1'))
     same('BOOT dry contact', ('U1', 'IO0'), ('SW3', 'B'))
     same('BOOT ground', ('U1', 'GND'), ('SW3', 'A'))
@@ -48,7 +48,7 @@ def check(path):
         same(f'{mos} switched return -> buck and load', (mos, 'VOUT-'), (buck, 'GND'), (load, '-'))
         same(f'{buck} 3.7 V -> load', (buck, 'VO+'), (load, '+'))
         same(f'{mos} power and control reference', ('U1', 'GND'), (mos, 'VIN-'), (mos, 'GND'))
-    separate('All switched returns remain separate', ('U1', 'GND'), ('U6', 'VOUT-'), ('U8', 'VOUT-'), ('U10', 'VOUT-'))
+    separate('All switched returns remain separate', ('U1', 'GND'), ('U6', 'VOUT-'), ('U8', 'VOUT-'))
     for pin, motor, terminal in [('OUT1', 'M1', 'A'), ('OUT2', 'M1', 'B'),
                                  ('OUT3', 'M2', 'A'), ('OUT4', 'M2', 'B')]:
         same(f'{pin} -> {motor}.{terminal}', ('U5', pin), (motor, terminal))
@@ -57,25 +57,20 @@ def check(path):
     five = node_net.get(('U5', '+5V'))
     assert five is None or nets[five] == {('U5', '+5V')}, 'L298N +5V unexpectedly connected'
     results.append(dict(check='L298N +5V has no external connection', passed=True))
-    same('Ignition disconnect supply side', ('F7', '2'), ('JP2', 'A'))
-    same('Ignition disconnect load side', ('JP2', 'B'), ('U10', 'VIN+'))
-    separate('Ignition disconnect not bypassed', ('JP2', 'A'), ('JP2', 'B'))
-    same('Ignition LV output positive', ('U10', 'VOUT+'), ('J9', '+'))
-    same('Ignition LV output return', ('U10', 'VOUT-'), ('J9', '-'))
     for gpio, interface in [('4', 'MIC_WS'), ('5', 'MIC_SCK'), ('6', 'MIC_DATA'),
                             ('7', 'AMP_DATA'), ('15', 'AMP_BCLK'), ('16', 'AMP_LRCK'),
                             ('41', 'OLED_SDA'), ('42', 'OLED_SCL'), ('47', 'TALK_INPUT'),
                             ('40', 'VOLUME_UP'), ('39', 'VOLUME_DOWN')]:
         same(f'Retained GPIO{gpio}', ('U1', f'IO{gpio}'), ('X1', interface))
-    for i in range(1, 10):
+    for i in range(1, 9):
         same(f'R{i} returns to system ground', (f'R{i}', '2'), ('U1', 'GND'))
     same('Controller and actuator branches start before SW2', ('U3', 'OUT+'), ('F2', '1'), ('F3', '1'))
     same('Controller fuse feeds service link', ('F2', '2'), ('JP1', 'A'))
     same('Actuator fuse feeds SW2', ('F3', '2'), ('SW2', 'A'))
-    same('SW2 output feeds all actuator fuses', ('SW2', 'B'), *((f'F{i}', '1') for i in range(4, 8)))
+    same('SW2 output feeds all actuator fuses', ('SW2', 'B'), *((f'F{i}', '1') for i in range(4, 7)))
     separate('SW2 is not bypassed by controller supply', ('SW2', 'A'), ('SW2', 'B'), ('U1', '5Vin'))
     components = {c.attrib['ref']: c for c in root.findall('./components/comp')}
-    for i in range(1, 10):
+    for i in range(1, 9):
         expected = '10k 1%' if i <= 6 else 'TBD'
         assert components[f'R{i}'].findtext('value') == expected, f'Wrong R{i} value'
         results.append(dict(check=f'R{i} value {expected}', passed=True))
@@ -83,12 +78,12 @@ def check(path):
     positions = json.loads((repo / 'hardware/schematic/design-inputs.json').read_text())['controller_header']['positions']
     pins = root.find("./libparts/libpart[@part='Existing_ESP32S3']/pins")
     actual = {p.attrib['num']: p.attrib['name'] for p in pins}
-    assert len(positions) == 23
+    assert len(positions) == 22
     for number, position in positions.items():
         assert actual[number].endswith(f'[{position}]'), (number, position, actual[number])
         results.append(dict(check=f'U1 {number} photo position {position}', passed=True))
     source = (repo / 'firmware/esp32-audio/action_outputs.h').read_text()
-    for name, number in [('WaterPin', 18), ('BubblesPin', 17), ('IgnitionPin', 21)]:
+    for name, number in [('WaterPin', 18), ('BubblesPin', 17)]:
         assert re.search(rf'{name}\s*=\s*GPIO_NUM_{number}\b', source)
     for a, b, c in [(8, 9, 10), (11, 12, 13)]:
         assert f'GPIO_NUM_{a}, GPIO_NUM_{b}, GPIO_NUM_{c}' in source
@@ -99,7 +94,7 @@ def check(path):
     same('Ultrasonic uses system ground', ('U1', 'GND'), ('U11', 'GND'))
     separate('Ultrasonic supply isolated from 5 V, 12 V and switched returns',
              ('U11', 'VCC'), ('U1', '5Vin'), ('U5', '+12V'),
-             ('U6', 'VOUT-'), ('U8', 'VOUT-'), ('U10', 'VOUT-'))
+             ('U6', 'VOUT-'), ('U8', 'VOUT-'))
     separate('Ultrasonic TRIG and ECHO are separate', ('U11', 'TRIG'), ('U11', 'ECHO'))
     for terminal, gpio in [('VCC', '3V3'), ('TRIG', 'IO1'), ('ECHO', 'IO2')]:
         assert nets[node_net[('U11', terminal)]] == {('U1', gpio), ('U11', terminal)}, terminal
@@ -124,14 +119,24 @@ def check(path):
     results.append(dict(check='Ultrasonic assignments match current firmware and design inputs', passed=True))
     with zipfile.ZipFile(repo / 'hardware/schematic/CyberTrack-schematic-A1.zip') as archive:
         baseline = ET.fromstring(archive.read('CyberTrack-schematic-A1/checks/CyberTrack.net.xml'))
-    old_nets = [{(n.attrib['ref'], n.attrib['pin']) for n in net.findall('node')}
-                for net in baseline.findall('./nets/net')]
+    retired_refs = {'F7', 'JP2', 'U10', 'J9', 'R9'}
+    retired_pins = {('U1', 'IO21')}
+    assert not retired_refs.intersection(components)
+    assert retired_pins.isdisjoint(node_net)
+    assert not any('IGNITION' in name or '5V_IGN' in name for name in nets)
+    results.append(dict(check='Retired ignition circuitry and IO21 absent', passed=True))
+    old_nets = [
+        {(n.attrib['ref'], n.attrib['pin']) for n in net.findall('node')
+         if n.attrib['ref'] not in retired_refs} - retired_pins
+        for net in baseline.findall('./nets/net')
+    ]
+    old_nets = [nodes for nodes in old_nets if nodes]
     original_nodes = set().union(*old_nets)
-    assert original_nodes <= set(node_net), 'A1 terminal removed'
+    assert original_nodes <= set(node_net), 'Retained A1 terminal removed'
     for nodes in old_nets:
         current = nets[node_net[next(iter(nodes))]] & original_nodes
-        assert current == nodes, ('A1 connection changed', nodes, current)
-    results.append(dict(check='All A1 terminal connectivity preserved in A2', passed=True))
+        assert current == nodes, ('Retained A1 connection changed', nodes, current)
+    results.append(dict(check='A1 connectivity preserved for every retained terminal', passed=True))
     return dict(passed=True, net_count=len(nets), checks=results,
                 evidence='KiCad-exported electrical netlist; not a physical wiring or power test')
 

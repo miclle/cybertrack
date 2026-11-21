@@ -14,9 +14,9 @@ from check_schematic_netlist import check as check_netlist
 ROOT = Path(__file__).resolve().parents[1]
 L298N = ROOT / 'hardware/model/l298n-compact'
 SCHEMATIC = ROOT / 'hardware/schematic'
-HISTORY = '9ab523c6c9aa3792cc21fb1710eae2b5ecd2258f'
-A1 = '84c5f708d96ea7a6a3e3a6ce9b84647be7551886'
-A1_RECHECK = '8206f328e6a72a31123cd3fdc8037c8d8b9320f4'
+HISTORY = '6684e522b7c15d4c414cf4f0ac5e55c3904a4aa5'
+A1 = 'fb680faac6ae51d6e30dd7520f47db2aa6d621e7'
+A1_RECHECK = '6684e522b7c15d4c414cf4f0ac5e55c3904a4aa5'
 
 
 def sha(path):
@@ -39,27 +39,34 @@ def check_parts(date):
     export = L298N / 'slicing/export-check.json'
     newer = {r['stem']: r for r in preserved_report(export)['parts']}
     rows = []
+    v2_path = L298N.parent / 'v2-cad-readback.json'
+    v2 = json.loads(v2_path.read_text())['exports']['LC04-KeelLid'] if v2_path.exists() else None
     for row in old:
         stem = row['stem']
         stl, step = [L298N / f'{stem}.{ext}' for ext in ('stl', 'step')]
         digest = sha(stl)
         expected = newer[stem]['sha256'] if stem in newer else row['files_sha256'][stl.name]
-        assert digest == expected, stl
-        assert sha(step) == row['files_sha256'][step.name], step
+        revised = v2 if stem == 'LC04-KeelLid' else None
+        if revised:
+            assert digest == revised['stl_sha256'] and sha(step) == revised['step_sha256']
+        else:
+            assert digest == expected, stl
+            assert sha(step) == row['files_sha256'][step.name], step
         data = stl.read_bytes()
         facets = struct.unpack_from('<I', data, 80)[0]
-        assert len(data) == 84 + 50 * facets and facets == row['stl_facets'], stl
+        expected_facets = revised['facets'] if revised else row['stl_facets']
+        assert len(data) == 84 + 50 * facets and facets == expected_facets, stl
         vertices = []
         for offset in range(84, len(data), 50):
             values = struct.unpack_from('<12fH', data, offset)
             vertices.extend(values[start:start + 3] for start in (3, 6, 9))
         size = [max(v[i] for v in vertices) - min(v[i] for v in vertices) for i in range(3)]
-        assert all(abs(a - b) < 0.0001 for a, b in zip(size, row['size_xyz_mm'])), stem
+        assert all(abs(a - b) < 0.0001 for a, b in zip(size, (revised or row)['size_xyz_mm'])), stem
         rows.append({'stem': stem, 'stl_sha256': digest, 'step_sha256': sha(step),
                      'stl_facets': facets, 'size_xyz_mm': size,
                      'matches_original_stl_hash': digest == row['files_sha256'][stl.name],
-                     'current_stl_evidence': 'slicing/export-check.json' if stem in newer else 'parts-readback.json',
-                     'step_matches_original_hash': True})
+                     'current_stl_evidence': 'v2-cad-readback.json' if revised else 'slicing/export-check.json' if stem in newer else 'parts-readback.json',
+                     'step_matches_original_hash': sha(step) == row['files_sha256'][step.name]})
     return {'date': date, 'passed': True,
             'scope': 'File identity, binary STL facet count and bounding size; not a new CAD readback',
             'historical_report_revision': HISTORY,
@@ -78,9 +85,12 @@ def check_schematic(date):
     recheck = SCHEMATIC / 'checks/A1-source-recheck-20261030.json'
     assert recheck.read_bytes() == historical_bytes(A1_RECHECK, SCHEMATIC / 'verification-current.json'), 'A1 recheck changed'
     outputs, sources = {}, {}
+    assert not (SCHEMATIC / 'ignition-lv.kicad_sch').exists()
     for name, expected in old['sha256'].items():
         path = SCHEMATIC / name
         assert hashlib.sha256(historical_bytes(A1, path)).hexdigest() == expected, name
+        if name == 'ignition-lv.kicad_sch':
+            continue
         actual = sha(path)
         outputs[name] = {'sha256': actual, 'matches_A1': actual == expected}
     for name, expected in old['source_evidence_sha256'].items():
@@ -89,20 +99,19 @@ def check_schematic(date):
         actual = sha(path)
         sources[name] = {'sha256': actual, 'matches_A1': actual == expected}
     connectivity = check_netlist(SCHEMATIC / 'checks/CyberTrack.net.xml')
-    assert connectivity['passed'] and len(connectivity['checks']) == 112
-    export_path = SCHEMATIC / 'checks/A2-export-check.json'
+    assert connectivity['passed']
+    export_path = SCHEMATIC / 'checks/A3-export-check.json'
     export = json.loads(export_path.read_text())
-    assert export['revision'] == 'A2' and export['passed']
+    assert export['revision'] == 'A3' and export['passed']
     for name, expected in export['files_sha256'].items():
         assert sha(ROOT / name) == expected, name
     erc = json.loads((SCHEMATIC / 'checks/erc.json').read_text())
-    assert len(erc['sheets']) == 6 and not any(s['violations'] for s in erc['sheets'])
-    assert erc['ignored_checks'] == old['erc']['default_ignored_checks']
-    assert export['pdf_review']['pages'] == 6 and export['pdf_review']['passed']
+    assert len(erc['sheets']) == 5 and not any(s['violations'] for s in erc['sheets'])
+    assert export['pdf_review']['pages'] == 5 and export['pdf_review']['passed']
     outputs['ultrasonic.kicad_sch'] = {'sha256': sha(SCHEMATIC / 'ultrasonic.kicad_sch'), 'matches_A1': False}
     return {'date': date, 'passed': True,
-            'revision': 'A2',
-            'scope': 'A2 regenerated six-sheet schematic, ERC, PDF and current source assignments',
+            'revision': 'A3',
+            'scope': 'A3 regenerated five-sheet schematic, ERC, PDF and current source assignments',
             'historical_A1_revision': A1, 'historical_report_sha256': sha(original),
             'historical_report_byte_preserved': True,
             'historical_package_sha256': sha(package),
@@ -118,7 +127,7 @@ def check_schematic(date):
             'erc_rerun': True, 'erc_violations': 0, 'pdf_render_review_rerun': True,
             'netlist_reexported': True, 'physical_test_performed': False,
             'manufacturing_ready': False,
-            'limits': 'A1 package and original audit are retained. A2 adds controller 3V3/GND and GPIO1/GPIO2 ultrasonic wiring; all A1 terminal connectivity is preserved. New header positions, module electrical levels, 3V3 current margin and physical acceptance remain unverified.'}
+            'limits': 'A3 removes the ignition circuit and preserves connectivity for all retained A1 terminals. Physical wiring, electrical levels, current margin and acceptance remain unverified.'}
 
 
 def main():

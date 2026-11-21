@@ -50,8 +50,8 @@ def module(name, width, height, pins, drawing='box', units=None):
 
 motor_nets = ['MOTOR_A_EN', 'MOTOR_A_IN1', 'MOTOR_A_IN2',
               'MOTOR_B_EN', 'MOTOR_B_IN1', 'MOTOR_B_IN2']
-action_nets = motor_nets + ['WATER_EN', 'BUBBLE_EN', 'IGNITION_EN']
-action_gpios = [8, 9, 10, 11, 12, 13, 18, 17, 21]
+action_nets = motor_nets + ['WATER_EN', 'BUBBLE_EN']
+action_gpios = [8, 9, 10, 11, 12, 13, 18, 17]
 peripherals = [('4', 'MIC_WS', 'output'), ('5', 'MIC_SCK', 'output'),
                ('6', 'MIC_DATA', 'input'), ('7', 'AMP_DATA', 'output'),
                ('15', 'AMP_BCLK', 'output'), ('16', 'AMP_LRCK', 'output'),
@@ -114,8 +114,6 @@ module('P12_Buck', 8, 8,
        [pin('IN+', 'IN+', 'L', -4, 'power_in'), pin('GND', 'GND', 'L', 4),
         pin('VO+', 'VO+', 'R', -4, 'power_out')])
 module('Load3V7', 7, 8, [pin('+', '+', 'L', -4, 'power_in'), pin('-', '-', 'L', 4)])
-module('LV_Reserved', 10, 8,
-       [pin('+', 'LV+ ONLY', 'L', -4), pin('-', 'LV- ONLY', 'L', 4)])
 
 
 def pin_xy(spec, p):
@@ -290,9 +288,8 @@ def main():
     control = Sheet('control.kicad_sch', 'CyberTrack / ESP32-S3 and BOOT', 2)
     drive = Sheet('drive.kicad_sch', 'CyberTrack / Motor drive', 3)
     effects_sheet = Sheet('effects.kicad_sch', 'CyberTrack / Water and bubbles', 4)
-    ignition = Sheet('ignition-lv.kicad_sch', 'CyberTrack / Reserved ignition LV', 5)
-    sonar = Sheet('ultrasonic.kicad_sch', 'CyberTrack / Ultrasonic 3V3 interface', 6)
-    sheets = [power, control, drive, effects_sheet, ignition, sonar]
+    sonar = Sheet('ultrasonic.kicad_sch', 'CyberTrack / Ultrasonic 3V3 interface', 5)
+    sheets = [power, control, drive, effects_sheet, sonar]
 
     power.text('01  POWER INPUT AND DISTRIBUTION', 8, 7, 0.9)
     power.text(f'{REVISION} design candidate. Protection / switching blocks are NOT implemented circuits.', 8, 11)
@@ -332,21 +329,21 @@ def main():
     power.wire(f['2'], sw['A'])
     stub(power, sw, 'B', '5V_ACT', 'R')
     power.text('SW2: ACTUATORS ONLY; controller remains powered (confirmed).\nDevice rating TBD; no MCU required to open. Re-arm / stored energy unverified.', 8, 82, 0.5)
-    for i, name in enumerate(['5V_MOTOR_IN', '5V_WATER_IN', '5V_BUBBLE_IN', '5V_IGN_FUSED']):
+    for i, name in enumerate(['5V_MOTOR_IN', '5V_WATER_IN', '5V_BUBBLE_IN']):
         y = 58 + 10 * i
         f = power.part('Fuse', f'F{i+4}', 'TBD', 121, y)
         stub(power, f, '1', '5V_ACT', length=5)
         stub(power, f, '2', name, 'R', length=4)
-    power.text('All four action groups may run concurrently.\nFuse / wire / connector ratings require a measured input budget.', 99, 94, 0.48)
+    power.text('All three action groups may run concurrently.\nFuse / wire / connector ratings require a measured input budget.', 99, 94, 0.48)
     for i, name in enumerate(['GND_SYS', '5V_CTRL', '5V_MOTOR_IN', '5V_WATER_IN', '5V_BUBBLE_IN']):
         supply(power, name, 113 + 10 * i, 39)
     power.text('PWR_FLAG marks intended supply paths for ERC only; it is not measured power evidence.', 99, 48, 0.45)
-    for other, x in zip(sheets[1:5], [8, 35, 62, 89]):
+    for other, x in zip(sheets[1:4], [8, 35, 62]):
         power.child(other, x, 100)
-    power.child(sonar, 8, 91)
+    power.child(sonar, 89, 100)
 
     control.text('02  EXISTING DEVELOPMENT BOARD AND RETAINED PERIPHERALS', 8, 7, 0.85)
-    control.text('U1A / U1B / U1C are the SAME board. U1C is on sheet 6. USB, regulator and reset remain inside U1.', 8, 12)
+    control.text('U1A / U1B / U1C are the SAME board. U1C is on sheet 5. USB, regulator and reset remain inside U1.', 8, 12)
     a = control.part('Existing_ESP32S3', 'U1', 'Existing ESP32-S3', 45, 48, 1)
     stub(control, a, '5Vin', '5V_CTRL')
     stub(control, a, 'GND', 'GND_SYS')
@@ -362,7 +359,7 @@ def main():
         control.wire(b[f'IO{gpio}'], x[name])
     control.text('X1 is a LOGICAL interface, not a new 11-pin connector.\nExisting mic / amplifier / OLED / buttons retain their wiring.\nPeripheral power and auxiliary pins are not reconstructed.\nDo not infer module VCC or speaker grounding from this sheet.', 91, 78, 0.52)
     control.text('BOOT: dry contact to system ground; parallel to on-board BOOT.\nIt stops software actions. It does NOT isolate actuator power.\nHolding BOOT during reset may select ROM download mode.\nNo external pull-up / RC values are frozen here.', 8, 80, 0.52)
-    control.text('PIN ID: IO8 = GPIO8; [L12] = photo-based header position.\nComponent side facing you, antenna UP, USB DOWN.\nL/R rows counted 1-22 from antenna to USB; verify continuity.\nGPIO1 / GPIO2 ultrasonic interface: sheet 6; no encoder / servo allocation.', 8, 94, 0.52)
+    control.text('PIN ID: IO8 = GPIO8; [L12] = photo-based header position.\nComponent side facing you, antenna UP, USB DOWN.\nL/R rows counted 1-22 from antenna to USB; verify continuity.\nGPIO1 / GPIO2 ultrasonic interface: sheet 5; no encoder / servo allocation.', 8, 94, 0.52)
     control.text('Source: current action_outputs.h + cybertrack_tools.cc.\nRetained peripherals: bread-compact-wifi/config.h.\nFirmware pin identity does not prove physical wiring.\nNo PCB transfer; see parameter-confirmation.md.', 91, 94, 0.52)
 
     drive.text('03  EXTERNAL BOOST CONVERTER AND DUAL H-BRIDGE', 8, 7, 0.85)
@@ -409,26 +406,7 @@ def main():
     pulldown(effects_sheet, 'R8', 'BUBBLE_EN', 63, 99)
     effects_sheet.text('R7/R8 values TBD. P12 EN / trim retain existing settings, not modeled here.\nP12 common GND is the local switched return, NOT GND_SYS.\nJZ-MOS internal topology and 3.3 V trigger behavior require verification.\nDo not bypass the switch with test-instrument ground or added wiring.\nBuck capacitance may sustain output after MOS command goes LOW.', 82, 94, 0.5)
 
-    ignition.text('05  IGNITION LOW-VOLTAGE INTERFACE - DISABLED', 8, 7, 0.9)
-    ignition.text('No ignition-module HV circuitry, electrodes or HV wiring is included. This sheet authorizes no energization.', 8, 12, 0.55)
-    jp = ignition.part('Disconnect', 'JP2', 'DNP / LEAVE OPEN', 25, 37, dnp=True)
-    stub(ignition, jp, 'A', '5V_IGN_FUSED')
-    ignition.net('5V_IGN_ISOLATED', jp['B'], (32, 37))
-    mos = ignition.part('JZ_MOS', 'U10', 'P01 / COMMON CONTROL / DNP', 66, 43, dnp=True)
-    for terminal, net in [('VIN+', '5V_IGN_ISOLATED'), ('VIN-', 'GND_SYS'),
-                          ('TRIG', 'IGNITION_EN'), ('GND', 'GND_SYS')]:
-        stub(ignition, mos, terminal, net)
-    out = ignition.part('LV_Reserved', 'J9', 'LV RESERVE / DNP', 126, 43, dnp=True)
-    ignition.wire(mos['VOUT+'], out['+'])
-    ignition.wire(mos['VOUT-'], out['-'])
-    ignition.local('IGNITION_SW_P', (91, 39))
-    ignition.local('IGNITION_SW_N', (91, 47))
-    supply(ignition, '5V_IGN_ISOLATED', 40, 62)
-    pulldown(ignition, 'R9', 'IGNITION_EN', 66, 78)
-    ignition.text('JP2 OPEN and output harness absent for initial validation.\nU10/J9 marked DNP in this review assembly.\nOne control channel is reserved for the shared MOS requested for two modules.\nOutput pin numbers are logical +/- only; no connector or current rating is frozen.', 8, 91, 0.55)
-    ignition.text('Firmware: GPIO21, single action <= 5 s; cooldown >= elapsed software ON time.\nThese are software rules, NOT thermal protection or physical stop evidence.\nR9 value, protection, input current, cut-off and EMC remain unresolved.\nPWR_FLAG is an ERC declaration for the optional supply, not a populated link.', 88, 65, 0.52)
-
-    sonar.text('06  HEAD ULTRASONIC MODULE - CONTROLLER 3.3 V', 8, 7, 0.85)
+    sonar.text('05  HEAD ULTRASONIC MODULE - CONTROLLER 3.3 V', 8, 7, 0.85)
     sonar.text('U1C is part of the SAME existing ESP32-S3 board as U1A/U1B. No additional controller or regulator.', 8, 12)
     controller = sonar.part('Existing_ESP32S3', 'U1', 'Existing ESP32-S3', 43, 46, 3)
     sensor = sonar.part('Ultrasonic_Module', 'U11', 'HC-SR04 / SELECTED VARIANT', 112, 46)
