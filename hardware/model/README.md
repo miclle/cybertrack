@@ -17,6 +17,8 @@
 | [L298N 支架](l298n-compact/README.md) | 底盖承载，按 28.5 mm 插线包络核对实物与紧固件。 |
 | [原始部件资料](../components/) | 核对实测外形、厂商资料和接口假设。 |
 
+在仓库根目录运行 `python3 scripts/check_print_release.py` 可复核现行 CAD 与两个 3MF 的文件哈希、六盘清单和需重切盘的缓存状态。
+
 实物还需检查枪座配合、螺丝保持力、带线检修、满／空瓶移动与急停时的稳定性，以及电子舱隔液。[验收计划](../../docs/verification-plan.md)
 
 ## 历史图纸与回读

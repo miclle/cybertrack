@@ -35,16 +35,4 @@
 - 截面覆盖是打印路径筛查，不是全层连通证明、标定强度或实物配合验收。螺丝试拧、支撑清理、层间强度和装配仍由首件验证；既有导孔试件说明保留。
 - CLI日志里的`Invalid T command (T65535)`来自未改动的官方P2S结束模板；完整日志保留，不将切片成功等同于实机执行验收。本轮未向打印机发送任务。
 
-## 复现
-
-在仓库根目录运行：
-
-```sh
-python3 scripts/optimize_head_set.py crown-arachne-seats tray-wide
-python3 scripts/compose_head_companions.py crown-arachne-seats tray-wide
-/Applications/FreeCAD.app/Contents/Resources/bin/freecadcmd scripts/check_head_companion_paths.py
-python3 scripts/check_head_print_paths.py hardware/model/print-parts/PP07-slicing/PP07-P2S-PLA-Basic-wide-fast.3mf hardware/model/print-parts/PP07-slicing/head-set-speed/head-path-check.json
-python3 scripts/check_head_set_delivery.py
-```
-
-最后一个脚本需要Pillow。FreeCADcmd的退出码不能单独证明执行成功，必须检查输出JSON中各候选`passed`。本轮无需修改整机FCStd、重新导出几何或整体缩放模型。
+复核头部三件的独立切片时，按[当时的复现步骤](https://github.com/miclle/cybertrack/blob/06342c8bebe0eacdbd414c1e3b4887b975d80913/hardware/model/print-parts/PP07-slicing/head-set-speed/README.md)恢复对应版本的输入模型。

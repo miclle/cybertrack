@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 from zipfile import ZipFile
 
 from check_print_project_preservation import read
-from prepare_lean_print import PN, archive_write, meta, relxml, setmeta, sha, tag, xml
+from print_project_3mf import PN, archive_write, meta, relxml, setmeta, sha, tag, xml
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = ROOT / "hardware/model"

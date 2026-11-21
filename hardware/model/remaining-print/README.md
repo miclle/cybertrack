@@ -15,7 +15,7 @@ PP03 的平放与背面贴床导出已同步双瓶直放布局。LC04 沿用 v2 
 
 第 5 盘预计 **5 小时 24 分、264.39 g**，为切片估算。P2S／0.4 mm／PLA Basic／纹理 PEI；0.28 mm 层高、3 墙、10% cubic、顶底各 4 层、3 mm 外侧 brim。背包、顶盖、泡泡枪座采用 0.6 mm 墙线与 Arachne；水枪底托保留 0.5 mm 经典墙线，避免薄壁路径覆盖下降。普通贴合支撑，4 mm 底部间距、0.2 mm 顶部接触间隙，允许从模型表面生长。
 
-比较了背包竖放／背放、顶盖正放／翻面／两个倾角、树状／普通支撑及经典／Arachne 墙线。背包背放耗料和时间均增加；树状支撑顶盖明显更慢；倾斜顶盖虽然可省料，但不如翻面快。最终按零件混合墙线参数。统一 0.6 mm 经典墙线、统一 Arachne 等候选未通过部分截面的覆盖保持筛查，不作为交付版本。各候选和失败记录见 [slicing](slicing/)，最终结果见[合并后切片](slicing/merged-validation/result.json)。
+比较了背包竖放／背放、顶盖正放／翻面／两个倾角、树状／普通支撑及经典／Arachne 墙线。背包背放耗料和时间均增加；树状支撑顶盖明显更慢；倾斜顶盖虽然可省料，但不如翻面快。最终按零件混合墙线参数。统一 0.6 mm 经典墙线、统一 Arachne 等候选未通过部分截面的覆盖保持筛查，不作为交付版本。候选参数与结果见[切片比较](slicing/combined-comparison.json)，最终结果见[合并后切片](slicing/merged-validation/result.json)。
 
 ## 两处几何修正
 
@@ -28,8 +28,4 @@ PP03 的平放与背面贴床导出已同步双瓶直放布局。LC04 沿用 v2 
 
 [路径检查](path-check.json)通过 33 个截面，包含两根新增筋；普通填充区域按基线覆盖比较，不能把 10% 填充内部误判为缺料。[首层图](plate-5-preview.png)已查看，全部模型、支撑和 brim 路径位于 256 × 256 mm 平台内，切片警告为空且执行了路径碰撞检查。没有发送打印指令。
 
-## 复现与保留
-
-下列脚本记录当时流程，须使用对应历史修订及输入副本；不直接覆盖当前 Lean 模型或用户排盘。
-
-`prepare_remaining_geometry.py` 在 FreeCAD Python 中局部修正、导出并保存回读；`slice_remaining_prints.py` 生成独立候选；`export_remaining_sections.py` 与 `check_remaining_paths.py` 核对原生截面与路径。`preserve_current_prints.py` 验证 Bambu Studio 当前快照并恢复其 Save As 省略的原四盘 G-code；`append_remaining_plate.py` 追加新盘；仅用 CLI `--slice 5` 检查新增盘，最后 `finalize_remaining_project.py` 写入已检查的第 5 盘路径。图像和路径检查脚本需要 Pillow。首轮修改前曾备份 FCStd 到 `baseline/`；该临时备份已清理，历史复现需要恢复当时修订和输入副本。
+第 5 盘所用的几何修正、原四盘保护检查和合盘步骤见[当时的复现说明](https://github.com/miclle/cybertrack/blob/06342c8bebe0eacdbd414c1e3b4887b975d80913/hardware/model/remaining-print/README.md)。复现需要同一修订的模型与原四盘输入。

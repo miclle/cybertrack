@@ -4,4 +4,4 @@
 
 原始六盘交付来自提交 `8552155`，当时的路径为 `hardware/model/print-ready/CyberTrack-Ready-6plates.3mf`，SHA-256 为 `aa53bac408cfa8f8289c48bfbee61ee6e9af5d6756091a1b8b1fc9027d263553`。其后曾在本目录作为 34 件打印基线保存。
 
-旧四盘／五盘／34 件六盘及 Lean 29 件生成、对照脚本仅供历史复现，需在独立的匹配历史修订中恢复当时输入，不能对当前项目直接运行。当前 `scripts/check_backpack_release.py` 及 `scripts/check_print_release.py` 的当前版本检查分支均不读取已删除的旧模型。
+当前两个六盘项目使用 `python3 scripts/check_print_release.py` 校验。复核旧排盘时，请按原修订恢复输入和[当时的检查脚本](https://github.com/miclle/cybertrack/blob/06342c8bebe0eacdbd414c1e3b4887b975d80913/scripts/check_print_release.py)。

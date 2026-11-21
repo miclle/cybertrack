@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import xml.etree.ElementTree as E
 import zipfile
-from prepare_lean_print import NS, PN, tag, xml, meta, raw_mesh, archive_write, sha
+from print_project_3mf import NS, PN, tag, xml, meta, raw_mesh, archive_write, sha
 
 ROOT=Path(__file__).resolve().parents[1]
 MODEL=ROOT/'hardware/model'

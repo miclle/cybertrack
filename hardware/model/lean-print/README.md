@@ -10,4 +10,4 @@
 
 按当时的 27 件排盘各打印一次，P2S、0.4 mm 喷嘴和 Bambu PLA Basic 的切片估算合计 **920.28 g、22 小时 8 分 46 秒**。[历史逐盘记录](../../../docs/validation/evidence/lean-print-estimate.json)
 
-第 1、2、4、5 盘读取项目缓存，第 3、6 盘用同版 Bambu Studio 在临时目录重切。第 3 盘为 59.52 g，第 6 盘为 239.28 g。两盘均输出估算，日志均报告 `Invalid T command (T65535)`，第 3 盘另有 `ZFiller` 诊断。此处仅用于成本预算。打印前仍需在 Studio 中检查诊断、预览路径并切片保存。在对应历史版本与输入副本上运行 `python3 scripts/estimate_lean_print.py` 复核，原始 3MF 的哈希见逐盘记录。
+第 1、2、4、5 盘读取项目缓存，第 3、6 盘用同版 Bambu Studio 在临时目录重切。第 3 盘为 59.52 g，第 6 盘为 239.28 g。两盘均输出估算，日志均报告 `Invalid T command (T65535)`，第 3 盘另有 `ZFiller` 诊断。此处仅用于成本预算。打印前仍需在 Studio 中检查诊断、预览路径并切片保存。如需复核，请使用[当时的估算脚本](https://github.com/miclle/cybertrack/blob/06342c8bebe0eacdbd414c1e3b4887b975d80913/scripts/estimate_lean_print.py)与哈希匹配的 27 件排盘副本。
