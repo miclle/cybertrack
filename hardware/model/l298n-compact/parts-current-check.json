@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-30",
+  "date": "2026-11-21",
   "passed": true,
   "scope": "File identity, binary STL facet count and bounding size; not a new CAD readback",
-  "historical_report_revision": "9ab523c6c9aa3792cc21fb1710eae2b5ecd2258f",
+  "historical_report_revision": "6684e522b7c15d4c414cf4f0ac5e55c3904a4aa5",
   "historical_reports_sha256": {
     "parts-readback.json": "212993907f05fc21b3812938c858b26890df45b90d6033d74217a0e6d8b025c1",
     "slicing/export-check.json": "76f5dac09a8714a0b844a6d7e0f5366052716bf84ca5f24a2ab5cebda57f9385"
@@ -53,17 +53,17 @@
     },
     {
       "stem": "LC04-KeelLid",
-      "stl_sha256": "f738a550429f366cf5a2f80a9370b1761143c3419dec52497eea70836b9959c7",
-      "step_sha256": "f400f9e58a86c4eaf3568e759e66d1b0579cf9e39713ec9d6f89003b8e5c80ae",
-      "stl_facets": 7598,
+      "stl_sha256": "cfc8fc2136637c2e3e1188735a001d1d46d27e2642213b4e8206b4cae9ba99dd",
+      "step_sha256": "289a6b2d1570eee49912064ea6c530e442f44abb098411d07990cc95618d4ade",
+      "stl_facets": 5906,
       "size_xyz_mm": [
         130.0,
         129.0,
-        38.5
+        28.0
       ],
-      "matches_original_stl_hash": true,
-      "current_stl_evidence": "parts-readback.json",
-      "step_matches_original_hash": true
+      "matches_original_stl_hash": false,
+      "current_stl_evidence": "v2-cad-readback.json",
+      "step_matches_original_hash": false
     }
   ],
   "cad_boolean_rechecked": false,

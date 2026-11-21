@@ -1,4 +1,4 @@
-"""Check the retained water bottle's vertical service path in the delivery FCStd."""
+"""Check a liquid bottle's vertical service path in the delivery FCStd."""
 import hashlib
 import json
 from pathlib import Path
@@ -11,8 +11,9 @@ LIFT_MM = 150
 TOL_MM3 = 0.01
 
 
-def review(doc):
-    body = doc.WaterModule.Shape
+def review(doc, bottle="Water"):
+    module = doc.getObject(bottle + "Module")
+    body = module.Shape
     box = body.optimalBoundingBox(False)
     base = FreeCAD.Vector(box.Center.x, box.Center.y, box.ZMin)
     radius = box.XLength / 2
@@ -20,14 +21,14 @@ def review(doc):
     if body.cut(cylinder).Volume + cylinder.cut(body).Volume > TOL_MM3:
         raise ValueError("The saved bottle is no longer a vertical cylinder; revise the sweep")
     sweep = Part.makeCylinder(radius, box.ZLength + LIFT_MM, base)
-    released = [doc.WaterRetentionBand.Name, doc.WaterStrapClosure.Name]
-    hose = doc.WaterHoseRoute.Name
+    released = [bottle + "RetentionBand", bottle + "StrapClosure"]
+    hose = {"Water": "WaterHoseRoute", "Bubble": "BubbleGunHoseRoute"}[bottle]
     checked = 0
     hits = {}
     for obj in doc.Objects:
         if (obj.isDerivedFrom("App::DocumentObjectGroup") or not hasattr(obj, "Shape")
                 or obj.Shape.isNull() or getattr(obj, "Category", "") == "clearance"
-                or obj.Name in [doc.WaterModule.Name, *released]):
+                or obj.Name in [module.Name, *released]):
             continue
         checked += 1
         if not sweep.BoundBox.intersect(obj.Shape.BoundBox):
@@ -37,7 +38,7 @@ def review(doc):
             hits[obj.Name] = round(volume, 4)
     return {
         "model": MODEL.name,
-        "sha256": hashlib.sha256(MODEL.read_bytes()).hexdigest(),
+        "sha256": hashlib.sha256(Path(doc.FileName).read_bytes()).hexdigest(),
         "bottle_diameter_height_mm": [round(2 * radius, 3), round(box.ZLength, 3)],
         "axis": "+Z",
         "travel_mm": LIFT_MM,

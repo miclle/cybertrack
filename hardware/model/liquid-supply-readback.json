@@ -1,0 +1,153 @@
+{
+  "source": {
+    "added": [
+      "BubbleModule",
+      "BubblePod",
+      "BubbleBottomPad",
+      "BubbleSidePad0",
+      "BubbleSidePad1",
+      "BubbleRetentionBand",
+      "BubbleStrapClosure",
+      "BubbleLidMark",
+      "BubblePodInsertL",
+      "BubblePodInsertR",
+      "BubblePodScrewL",
+      "BubblePodScrewR",
+      "BubbleStrapAccessSpace",
+      "BubbleBottleRemovalSpace",
+      "BubbleFingerSpace",
+      "BubbleDipTubeSpace"
+    ],
+    "both_supply_routes_visible": true,
+    "sha256": "4270c010c63ca7c270e75776e104dc8793e2aa85ea8d2ec6e9065f758bccfb50"
+  },
+  "delivery": {
+    "added": [
+      "BubbleModule",
+      "BubblePod",
+      "BubbleBottomPad",
+      "BubbleSidePad0",
+      "BubbleSidePad1",
+      "BubbleRetentionBand",
+      "BubbleStrapClosure",
+      "BubbleLidMark",
+      "BubblePodInsertL",
+      "BubblePodInsertR",
+      "BubblePodScrewL",
+      "BubblePodScrewR"
+    ],
+    "both_supply_routes_visible": true,
+    "sha256": "508a4bd4bb7ac2384fd82b4fce02e42fea36872db25a8032dabad77f5c1172f4"
+  },
+  "supply_route_solids": [
+    "WaterHoseRoute",
+    "BubbleGunHoseRoute"
+  ],
+  "bottle_support": {
+    "Water": {
+      "pod_contacts_tub": true,
+      "bottle_contacts_pad": true
+    },
+    "Bubble": {
+      "pod_contacts_tub": true,
+      "bottle_contacts_pad": true
+    }
+  },
+  "bottle_service": {
+    "Water": {
+      "model": "CyberTrack.FCStd",
+      "sha256": "508a4bd4bb7ac2384fd82b4fce02e42fea36872db25a8032dabad77f5c1172f4",
+      "bottle_diameter_height_mm": [
+        48.8,
+        114.0
+      ],
+      "axis": "+Z",
+      "travel_mm": 150,
+      "swept_z_mm": [
+        40.0,
+        304.0
+      ],
+      "released_first": [
+        "WaterRetentionBand",
+        "WaterStrapClosure"
+      ],
+      "checked_fixed_shapes_with_hose": 199,
+      "volume_threshold_mm3": 0.01,
+      "with_hose_overlaps_mm3": {
+        "WaterHoseRoute": 793.9267
+      },
+      "after_hose_removal_overlaps_mm3": {},
+      "pass": true
+    },
+    "Bubble": {
+      "model": "CyberTrack.FCStd",
+      "sha256": "508a4bd4bb7ac2384fd82b4fce02e42fea36872db25a8032dabad77f5c1172f4",
+      "bottle_diameter_height_mm": [
+        48.8,
+        114.0
+      ],
+      "axis": "+Z",
+      "travel_mm": 150,
+      "swept_z_mm": [
+        40.0,
+        304.0
+      ],
+      "released_first": [
+        "BubbleRetentionBand",
+        "BubbleStrapClosure"
+      ],
+      "checked_fixed_shapes_with_hose": 199,
+      "volume_threshold_mm3": 0.01,
+      "with_hose_overlaps_mm3": {
+        "BubbleGunHoseRoute": 508.2645
+      },
+      "after_hose_removal_overlaps_mm3": {},
+      "pass": true
+    }
+  },
+  "step_sha256": "eb1940b7bee34d446a063ee988f9303695572b1aeca50b3cebb6da93b5e2cb70",
+  "physical_fit_verified": false,
+  "reopened_in_gui": {
+    "CyberTrack": {
+      "WaterModule": true,
+      "BubbleModule": true,
+      "WaterPod": true,
+      "BubblePod": true,
+      "WaterHoseRoute": true,
+      "BubbleGunHoseRoute": true,
+      "PrintBackpack": true,
+      "PrintCrown": true
+    },
+    "CyberTrack-design": {
+      "WaterModule": true,
+      "BubbleModule": true,
+      "WaterPod": true,
+      "BubblePod": true,
+      "WaterHoseRoute": true,
+      "BubbleGunHoseRoute": true,
+      "PrintBackpack": true,
+      "PrintCrown": true
+    }
+  },
+  "print_exports": {
+    "BubblePod": {
+      "mesh_faces": 6034,
+      "files_sha256": {
+        "stl": "d7c250fcaffb00df40917360dd6f6bddb1d9172946c909daaabc79d88d6ca484",
+        "step": "7e961ab6fffc0049b72a6fccb6d4a6444a396a86d00b5c96879e30e5fb9f6caa",
+        "brep": "f30299cf8ee9bcc9d2cfa9cc26e831dcab3818ef45e61bf94b171864731ed929"
+      },
+      "valid_native_solid": true
+    },
+    "BubbleLidMark": {
+      "mesh_faces": 12,
+      "files_sha256": {
+        "stl": "9d391aef7a8f06a3218aef61a5303dee81ed1d975061e8284abf06550c83be51",
+        "step": "2570040efb4236cb3241fb05d065290caa70e85e64a7103024dc9b2922abd21e",
+        "brep": "761d058594fd871b5a1f39751871a83393e4add99faf393d4ec5a6b87c71bb7b"
+      },
+      "valid_native_solid": true
+    }
+  },
+  "historical_reference": "368d5d8"
+}

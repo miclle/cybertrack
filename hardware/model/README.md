@@ -1,5 +1,7 @@
 # CyberTrack 履带交互机器人模型
 
+**v2 当前模型。** 两份 FCStd 与 STEP 已移除点火占位、桶座、托架与旧走廊，封回四个前脸孔及肩部走线孔，并封闭冠盖的旧效果槽。背包恢复清水和泡泡液双瓶、独立底托与顶部软管。现行 Lean 为 28 件、6 盘，第 1、3、4、6 盘需重切。Ready 为 29 件、6 盘，均需切片。[双瓶回读](liquid-supply-readback.json)下方预览、图册和旧报告用于追溯。见[几何回读](v2-cad-readback.json)及[排盘回读](v2-print-readback.json)。
+
 2026-10-31 清理：保留当前交付模型、设计源、当前打印项目与独立设计；移除已被替代的打印快照、0.34 支架和自动备份。旧检查报告仍用于追溯，不代表旧模型仍在工作区。
 
 2026-10-30 当前文件核对：两侧桶座内径 **35 mm**；泡泡液瓶组从 CAD 与打印清单同步移除。Lean 为 **27 件、6 盘**，第 3、6 盘需重切；Ready 为 **27 件、6 盘**，已移除托盘 `PP07-Tray.stl`，背包直立独放第 6 盘，六盘均无缓存 G-code，打印前均须切片。见[背包调整与证据](../../docs/backpack-35mm.md)。下文 29 件与双瓶记录为此前版本。
@@ -65,7 +67,7 @@
 - [0.41 超声波 PCB／接线与面包板共存集成](../../docs/assembly.md#头舱与穿线)：已合入主模型和PDF；独立副本已清理。保留头壳外形；在探头内退3.5 mm的待确认基准下，比较后插头冲突、向上出线及托盘前缘让位后的拆装。PCB、接头和固定接口未实测。
 
 - [CyberTrack.FCStd](CyberTrack.FCStd)：交付原生模型，中文对象树；保留履带动力分组，其他对象一级显示。设计输入及检修空间另见设计源档，设备和走线占位不计入打印清单。
-- [CyberTrack.step](CyberTrack.step)：不含设备包络及审查区的布局交换文件；严格体积比较未通过，以 FCStd 为几何依据，不宣称曲面等价。
+- [CyberTrack.step](CyberTrack.step)：含双瓶与两根供液管的布局交换文件，其他设备包络和审查区省略；严格体积比较未通过，以 FCStd 为几何依据，不宣称曲面等价。
 - [历史装配与维护 PDF](CyberTrack-assembly-and-service.pdf)：0.56 阶段的 69 页 A3 评审快照，保留当时 PP02 冲突、六件合并及对象图卡；未覆盖后续 0.57 支架、0.58 头壳、PP02／LC04 修正和 Lean 精简。现行安装依据见[装配说明](../../docs/assembly.md)，历史图册范围与哈希见[覆盖记录](assembly-annotation-audit.json)。
 - [面包板布局](breadboard-layout.png) · [俯视](breadboard-top.png) · [浅托盘](breadboard-tray.png) · [工具入口](breadboard-access.png) · [整盘上提](breadboard-service.png)：整组规划包络，组内元件与防脱保持待实测。
 - [保存回读报告](readback.json)：保留分阶段几何、导出与视图记录，须按其中修订和哈希解释；现行 Lean 清单与增量证据见精简目录。

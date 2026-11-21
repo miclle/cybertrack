@@ -1,6 +1,6 @@
 # 机械装配与维护
 
-先核对手里的打印件属于哪套排盘。Lean 和 Ready 均为 27 件、6 盘，盘号和切片缓存各自独立。Lean 第 3、6 盘需重切，Ready 六盘均需切片。装配时以保存的 FreeCAD 整机为几何依据，坐标 X 向左、Y 向后、Z 向上，前方为 −Y。[整机模型](../hardware/model/README.md) · [Lean](../hardware/model/lean-print/README.md) · [Ready](../hardware/model/print-ready/README.md)
+先核对手里的打印件属于哪套排盘。Lean 为 28 件、6 盘，Ready 为 29 件、6 盘，盘号和切片缓存各自独立。Lean 第 1、3、4、6 盘需重切，Ready 六盘均需切片。装配时以保存的 FreeCAD 整机为几何依据，坐标 X 向左、Y 向后、Z 向上，前方为 −Y。[整机模型](../hardware/model/README.md) · [Lean](../hardware/model/lean-print/README.md) · [Ready](../hardware/model/print-ready/README.md)
 
 ## 底盘与动力
 
@@ -26,11 +26,11 @@ L298N 的现行支架由底盖承载，拆卸前要给端子和线尾留出空�
 
 从正面看，泡泡枪在左、水枪在右。两枪的降压模块各在枪体内，MOS 板按现行 Lean 方案胶固。PP02 泡泡枪底座采用复合孔口，装枪时需检查实物轮廓、软管、胶合保持与拆卸空间。测试供液时另记吸程、低液位、滴液、倒流与湿区隔离。[枪座修正](../hardware/model/remaining-print/README.md) · [低压效果控制](effects-control.md)
 
-PP03 背包保留清水瓶，旧泡泡液瓶及其底托已移除，泡泡供液容器尚待确定。两侧桶座与上导环内径 35 mm。模块固定、防脱和导线保护需要实物数据，A2 的点火支路保持禁用装配。[背包几何与打印文件](backpack-35mm.md) · [原理图与装配状态](../hardware/schematic/README.md)
+PP03 背包内有两只 150 mL 候选瓶，清水和泡泡液各用一只。每瓶有独立底托、软垫、绑带及两个 M3 级候选固定点。两根软管从瓶顶接向各自的前枪。水管外径 5 mm 来自实测，泡泡管外径 4 mm 是 CAD 候选。[双瓶与软管回读](../hardware/model/liquid-supply-readback.json)
 
-### 清水瓶怎么取
+### 两只瓶怎么取
 
-断电、处理残液后，释放绑带和搭接片，把清水吸管从瓶中抽出并收在提瓶路径外，再竖直向上取瓶。当前整机上的含盖瓶包络为 Ø48.8 × 114 mm。沿 +Z 上提 150 mm 时，仍在原位的清水管与瓶的扫掠体重叠约 794 mm³。移开清水管后，整段路径没有超过 0.01 mm³ 的实体重叠。复现可在具备 FreeCAD Python 模块的环境中运行 `scripts/check_water_bottle_service.py`。[整机几何回读](../hardware/model/water-bottle-service.json) · [检查脚本](../scripts/check_water_bottle_service.py)
+断电并处理残液后，解开要取那只瓶的绑带，把该瓶的吸管抽出并收在提瓶路径外，再竖直向上取瓶。两瓶含盖包络均为 Ø48.8 × 114 mm。CAD 分别验证了沿 +Z 上提 150 mm 的路径，另一只瓶及其软管保持在位。实际软管能否收妥以及瓶盖密封待试装。[双瓶拆装检查](../hardware/model/liquid-supply-readback.json)
 
 现场计时从清水瓶已固定、吸管已接好开始，到瓶体完整离开背包为止。分别记录解带、收管和提瓶时遇到的卡滞、滴液或抓握困难；取瓶和装回分开计时。柔性软管能否实际收妥、装回后能否防脱和密封，需要实物验证。[维护记录方法](validation/README.md)
 

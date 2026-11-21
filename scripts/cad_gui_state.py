@@ -1,8 +1,35 @@
 """Retain FreeCAD view providers and their assets across headless saves."""
 import copy
 from pathlib import Path
+import struct
 import xml.etree.ElementTree as E
 import zipfile
+
+
+def read_material_list(data):
+    """Decode a FreeCAD MaterialList v3 payload into numeric and string records."""
+    count = struct.unpack_from("<I", data)[0]
+    # FreeCAD writes all six numeric fields for all faces first. The later
+    # image, image path and UUID strings have separate length-prefixed records.
+    size = struct.calcsize("<4I2f")
+    string_offset = 4 + count * size
+    materials = []
+    for index in range(count):
+        numeric_offset = 4 + index * size
+        start = string_offset
+        for _ in range(3):
+            length = struct.unpack_from("<I", data, string_offset)[0]
+            string_offset += 4 + length
+        assert string_offset <= len(data), "Truncated FreeCAD material strings"
+        materials.append((data[numeric_offset:numeric_offset + size], data[start:string_offset]))
+    assert string_offset == len(data), "Unexpected FreeCAD material data"
+    return materials
+
+
+def write_material_list(materials):
+    return (struct.pack("<I", len(materials))
+            + b"".join(numeric for numeric, _ in materials)
+            + b"".join(strings for _, strings in materials))
 
 
 def capture(path):

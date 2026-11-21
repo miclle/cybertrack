@@ -72,7 +72,33 @@ def check_legacy():
             'limits': 'Saved model/project inventory and recorded path evidence; not physical acceptance.'}
 
 
+def check_v2():
+    cad = json.loads((MODEL / 'v2-cad-readback.json').read_text())
+    print_report = json.loads((MODEL / 'v2-print-readback.json').read_text())
+    assert cad['saved_reopened']
+    for relative in ('CyberTrack.FCStd', 'source/CyberTrack-design.FCStd', 'CyberTrack.step'):
+        path = MODEL / relative
+        assert sha(path) == cad['files_sha256'][path.name], relative
+    for row in print_report:
+        path = ROOT / row['path']
+        assert sha(path) == row['sha256'], path
+        with zipfile.ZipFile(path) as archive:
+            assert archive.testzip() is None
+            settings = E.fromstring(archive.read('Metadata/model_settings.config'))
+            names = [obj.find("metadata[@key='name']").get('value') for obj in settings.findall('object')]
+            assert names == row['part_names']
+            assert 'IgnitionMOSCarrier' not in names
+            assert len(names) == len(set(names)) == row['print_parts']
+            assert len(settings.findall('plate')) == 6
+            for plate in row['requires_reslice_plates']:
+                assert f'Metadata/plate_{plate}.gcode' not in archive.namelist(), plate
+    return {'passed': True, 'scope': 'v2 native and print project identity; affected caches invalidated',
+            'projects': print_report, 'slicing_validated': False, 'physical_fit_verified': False}
+
+
 def check():
+    if (MODEL / 'v2-print-readback.json').exists():
+        return check_v2()
     if (MODEL / 'backpack-print-update.json').exists():
         from check_backpack_release import check as check_backpack
         return check_backpack()

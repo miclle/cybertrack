@@ -1,5 +1,7 @@
 # 遗漏件补齐与第 6 盘
 
+v2 恢复 [泡泡液瓶底托](BubblePod.stl)及[瓶位标识片](BubbleLidMark.stl)，并已封闭两件前侧甲的出线孔并更新 STL／STEP／BRep。下方原切片与旧审计只用于追溯。 [现行几何回读](../v2-cad-readback.json)
+
 2026-10-27：泡泡液瓶底托与识别条已从 CAD、六盘项目及本目录独立导出中撤销。下文补齐数量和报告属于历史版本，现行清单见[背包修订](../../../docs/backpack-35mm.md)。
 
 本目录为精简前的历史补齐记录。2026-10-26 用户取消 MOS 压框、将两块降压板移入枪体后，现行两件支架几何、27 件清单和打印顺序已转到[精简交付](../lean-print/README.md)；旧压框导出此前已清理；本目录旧 EffectTray／IgnitionMOSCarrier 的 STL、STEP、BREP 于 2026-10-31 移除，只保留 Lean 目录中的当前版本。

@@ -1,5 +1,7 @@
 # 打印单件与历史切片索引
 
+v2 的 PP03、PP04、PP05 已更新，前侧甲见 completion-print，LC04 见 l298n-compact。按当前 STL 制作；下文旧预览与工时为历史证据。 [现行几何回读](../v2-cad-readback.json)
+
 2026-10-27：PP03 STL／STEP 已更新为双侧内径 **35 mm**；泡泡液瓶底托及识别条不再导出。当前 CAD 与打印清单见[背包调整](../../../docs/backpack-35mm.md)，旧图册保留历史版本。
 
 **当前入口：** [27 件 Lean 六盘项目](../lean-print/README.md)。样机已有[实拍与运行视频](../../../artifact/README.md)，本目录供单件查看、补打和历史参数追溯。实物公差、螺丝保持、强度与完整拆装等未验证项继续保留。

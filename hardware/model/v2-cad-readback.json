@@ -1,0 +1,206 @@
+{
+  "removed_source": [
+    "CrownEffectInsetL",
+    "CrownEffectMarkLFront",
+    "CrownEffectMarkLRear",
+    "CrownEffectInsetR",
+    "CrownEffectMarkRFront",
+    "CrownEffectMarkRRear",
+    "BackpackArcL",
+    "ArcBottomPadL",
+    "BackpackArcR",
+    "ArcBottomPadR",
+    "IgnitionMOSBoard",
+    "IgnitionMOSSupport",
+    "IgnitionMOSMountInsertL",
+    "IgnitionMOSMountScrewL",
+    "IgnitionMOSMountInsertR",
+    "IgnitionMOSMountScrewR",
+    "IgnitionMOSCarrier",
+    "IgnitionMOSPortL",
+    "IgnitionMOSPortR",
+    "FrontEffectSleeveL1",
+    "FrontEffectLeadL1",
+    "FrontEffectSleeveL2",
+    "FrontEffectLeadL2",
+    "FrontEffectSleeveR1",
+    "FrontEffectLeadR1",
+    "FrontEffectSleeveR2",
+    "FrontEffectLeadR2",
+    "IgnitionRouteL",
+    "IgnitionRouteBranchL1",
+    "IgnitionRouteBranchL2",
+    "IgnitionRouteR",
+    "IgnitionRouteBranchR1",
+    "IgnitionRouteBranchR2",
+    "FrontIgnitionRouting"
+  ],
+  "exports": {
+    "PP03-base": {
+      "facets": 112,
+      "step_volume_delta_mm3": 0.0
+    },
+    "PP03-back": {
+      "facets": 112,
+      "step_volume_delta_mm3": 8.731149137020111e-11
+    },
+    "PP04-LowerTub": {
+      "facets": 25758,
+      "step_volume_delta_mm3": 3.388803452253342e-05
+    },
+    "PP05-Crown": {
+      "facets": 6006,
+      "step_volume_delta_mm3": 4.79706525275833
+    },
+    "PrintChestGuardL": {
+      "facets": 48,
+      "step_volume_delta_mm3": 1.921307557495311e-10
+    },
+    "PrintChestGuardR": {
+      "facets": 48,
+      "step_volume_delta_mm3": 5.6843418860808015e-12
+    },
+    "LC04-KeelLid": {
+      "facets": 5906,
+      "step_volume_delta_mm3": 0.01621945502847666,
+      "stl_sha256": "cfc8fc2136637c2e3e1188735a001d1d46d27e2642213b4e8206b4cae9ba99dd",
+      "step_sha256": "289a6b2d1570eee49912064ea6c530e442f44abb098411d07990cc95618d4ade",
+      "size_xyz_mm": [
+        130.0,
+        129.0,
+        28.0
+      ]
+    },
+    "LC04-flipped": {
+      "facets": 5906,
+      "step_volume_delta_mm3": 0.016219454642850906
+    }
+  },
+  "PrintLowerTub": {
+    "added_mm3": 232.3136672085279,
+    "new_overlaps": {}
+  },
+  "PrintBackpack": {
+    "added_mm3": 2123.1762732797883,
+    "new_overlaps": {}
+  },
+  "PrintChestGuardL": {
+    "added_mm3": 51.50012837029752,
+    "new_overlaps": {}
+  },
+  "PrintChestGuardR": {
+    "added_mm3": 51.50012837029753,
+    "new_overlaps": {}
+  },
+  "KeelLid": {
+    "added_mm3": 0.0,
+    "new_overlaps": {}
+  },
+  "PrintCrown": {
+    "added_mm3": 1771.334545454548,
+    "new_overlaps": {}
+  },
+  "removed_delivery": [
+    "BackpackArcL",
+    "ArcBottomPadL",
+    "BackpackArcR",
+    "ArcBottomPadR",
+    "IgnitionMOSBoard",
+    "IgnitionMOSSupport",
+    "IgnitionMOSMountInsertL",
+    "IgnitionMOSMountScrewL",
+    "IgnitionMOSMountInsertR",
+    "IgnitionMOSMountScrewR",
+    "IgnitionMOSCarrier",
+    "FrontEffectSleeveL1",
+    "FrontEffectLeadL1",
+    "FrontEffectSleeveL2",
+    "FrontEffectLeadL2",
+    "FrontEffectSleeveR1",
+    "FrontEffectLeadR1",
+    "FrontEffectSleeveR2",
+    "FrontEffectLeadR2",
+    "IgnitionRouteL",
+    "IgnitionRouteBranchL1",
+    "IgnitionRouteBranchL2",
+    "IgnitionRouteR",
+    "IgnitionRouteBranchR1",
+    "IgnitionRouteBranchR2"
+  ],
+  "files_sha256": {
+    "CyberTrack-design.FCStd": "4270c010c63ca7c270e75776e104dc8793e2aa85ea8d2ec6e9065f758bccfb50",
+    "CyberTrack.FCStd": "508a4bd4bb7ac2384fd82b4fce02e42fea36872db25a8032dabad77f5c1172f4",
+    "CyberTrack.step": "eb1940b7bee34d446a063ee988f9303695572b1aeca50b3cebb6da93b5e2cb70"
+  },
+  "saved_reopened": true,
+  "unaffected_shapes_verified": {
+    "delivery": 185,
+    "source": 323
+  },
+  "appearance_verification": {
+    "scope": "FreeCAD 1.1.4 MaterialList v3 repaired; archive geometry and object properties byte-identical",
+    "reopened_in_gui": true,
+    "reviewed_views": [
+      "front",
+      "rear",
+      "isometric"
+    ],
+    "visible_and_opaque_readback": {
+      "CyberTrack": {
+        "PrintCrown": {
+          "visible": true,
+          "faces": 195,
+          "opaque_appearance_entries": 195
+        },
+        "PrintBackpack": {
+          "visible": true,
+          "faces": 28,
+          "opaque_appearance_entries": 1
+        },
+        "PrintLowerTub": {
+          "visible": true,
+          "faces": 457,
+          "opaque_appearance_entries": 457
+        },
+        "PrintChestGuardL": {
+          "visible": true,
+          "faces": 16,
+          "opaque_appearance_entries": 16
+        },
+        "PrintChestGuardR": {
+          "visible": true,
+          "faces": 16,
+          "opaque_appearance_entries": 16
+        }
+      },
+      "CyberTrack-design": {
+        "PrintCrown": {
+          "visible": true,
+          "faces": 195,
+          "opaque_appearance_entries": 195
+        },
+        "PrintBackpack": {
+          "visible": true,
+          "faces": 28,
+          "opaque_appearance_entries": 1
+        },
+        "PrintLowerTub": {
+          "visible": true,
+          "faces": 457,
+          "opaque_appearance_entries": 457
+        },
+        "PrintChestGuardL": {
+          "visible": true,
+          "faces": 16,
+          "opaque_appearance_entries": 16
+        },
+        "PrintChestGuardR": {
+          "visible": true,
+          "faces": 16,
+          "opaque_appearance_entries": 16
+        }
+      }
+    }
+  },
+  "liquid_supply_restoration": "liquid-supply-readback.json"
+}

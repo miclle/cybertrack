@@ -15,19 +15,58 @@ REMOVED={'BubblePod','BubbleLidMark'}
 E.register_namespace('',NS);E.register_namespace('p',PN)
 
 
-def update(path):
+def align_replacement(old_mesh, new_mesh, component, instances):
+    """Preserve the local XY centre and the placed bottom, including rotated instances."""
+    axes = ('x', 'y', 'z')
+    identity = '1 0 0 0 1 0 0 0 1 0 0 0'
+    inner = [float(v) for v in component.get('transform', identity).split()]
+
+    def placed_z_axis(instance):
+        outer = [float(v) for v in instance.get('transform', identity).split()]
+        return tuple(sum(inner[3*i+j] * outer[3*j+2] for j in range(3)) for i in range(3))
+
+    directions = {placed_z_axis(item) for item in instances}
+    assert len(directions) == 1, 'All replacement instances must agree on the bed axis'
+    bed_axis = directions.pop()
+    old_vertices, new_vertices = [
+        [tuple(float(v.get(k)) for k in axes) for v in mesh.find(tag('vertices'))]
+        for mesh in (old_mesh, new_mesh)
+    ]
+
+    def centre(vertices, axis):
+        return (min(v[axis] for v in vertices) + max(v[axis] for v in vertices)) / 2
+
+    def minimum(vertices):
+        return min(sum(x * k for x, k in zip(vertex, bed_axis)) for vertex in vertices)
+
+    delta = [centre(old_vertices, i) - centre(new_vertices, i) for i in range(3)]
+    before = minimum(old_vertices)
+    shift = (before - minimum(new_vertices) - sum(x * k for x, k in zip(delta, bed_axis)))
+    scale = sum(k * k for k in bed_axis)
+    delta = [x + shift * k / scale for x, k in zip(delta, bed_axis)]
+    after = minimum(new_vertices) + sum(x * k for x, k in zip(delta, bed_axis))
+    assert abs(before - after) < 1e-6
+    for v in new_mesh.find(tag('vertices')):
+        for k, offset in zip(axes, delta):
+            v.set(k, str(float(v.get(k)) + offset))
+    return delta, after - before
+
+
+def update(path, *, removed_names=REMOVED, replacements=None):
+    if replacements is None:
+        replacements = {'PP03-base': MODEL/'remaining-print/PP03-base.stl'}
     before=path.read_bytes()
     with zipfile.ZipFile(path) as z:files={n:z.read(n) for n in z.namelist()}
     original=dict(files)
     root=E.fromstring(files['3D/3dmodel.model'])
     settings=E.fromstring(files['Metadata/model_settings.config'])
     resources,build=root.find(tag('resources')),root.find(tag('build'))
-    ids=set();removed=[];changed=[]
+    ids=set();removed=[];changed=[];deltas={};bed_deltas={}
     for obj in list(settings.findall('object')):
         name=meta(obj)['name'];oid=obj.get('id')
-        if name not in REMOVED and name!='PP03-base':continue
+        if name not in removed_names and name not in replacements:continue
         parent=resources.find("%s[@id='%s']"%(tag('object'),oid));ids.add(oid)
-        if name in REMOVED:
+        if name in removed_names:
             removed.append(name);settings.remove(obj);resources.remove(parent)
             for item in list(build):
                 if item.get('objectid')==oid:build.remove(item)
@@ -45,21 +84,16 @@ def update(path):
             child_path=component.get('{'+PN+'}path').lstrip('/')
             child=E.fromstring(files[child_path])
             child_obj=child.find(tag('resources')).find("%s[@id='%s']"%(tag('object'),component.get('objectid')))
-            mesh,count=raw_mesh(MODEL/'remaining-print/PP03-base.stl')
+            mesh,count=raw_mesh(replacements[name])
             old_mesh=child_obj.find(tag('mesh'))
-            # Bambu may recenter imported vertices around local Z=0 while
-            # retaining bed placement in the instance transform. Preserve it.
-            def centre(m):
-                vertices=list(m.find(tag('vertices')))
-                return [(min(float(v.get(k)) for v in vertices)+max(float(v.get(k)) for v in vertices))/2 for k in ('x','y','z')]
-            delta=[a-b for a,b in zip(centre(old_mesh),centre(mesh))]
-            for v in mesh.find(tag('vertices')):
-                for k,offset in zip(('x','y','z'),delta):v.set(k,str(float(v.get(k))+offset))
+            instances = [item for item in build if item.get('objectid') == oid]
+            deltas[name], bed_deltas[name] = align_replacement(old_mesh, mesh, component, instances)
             child_obj.remove(old_mesh);child_obj.append(mesh)
             files[child_path]=xml(child)
-            obj.find('metadata[@face_count]').set('face_count',str(count))
+            stat = obj.find('metadata[@face_count]')
+            if stat is not None: stat.set('face_count',str(count))
             obj.find('part/mesh_stat').set('face_count',str(count));changed.append(name)
-    assert changed==['PP03-base']
+    assert set(changed)==set(replacements)
     plates=[]
     for index,plate in enumerate(settings.findall('plate'),1):
         instances=plate.findall('model_instance')
@@ -95,7 +129,7 @@ def update(path):
     files['3D/3dmodel.model']=xml(root)
     files['Metadata/model_settings.config']=xml(settings)
     names=[meta(o)['name'] for o in settings.findall('object')]
-    assert not REMOVED.intersection(names)
+    assert not removed_names.intersection(names)
     unchanged=[n for n in original if n in files and original[n]==files[n]]
     # Unrelated source meshes and all project process settings remain byte-for-byte.
     touched=[n for n in original if n not in files or original[n]!=files[n]]
@@ -107,7 +141,7 @@ def update(path):
     return {'path':str(path.relative_to(ROOT)),'before_sha256':sha(before),'sha256':sha(path.read_bytes()),
             'removed':removed,'updated':changed,'part_names':names,'print_parts':len(names),
             'requires_reslice_plates':plates,'unchanged_archive_entries':len(unchanged),'changed_or_removed_entries':touched,
-            'process_settings_unchanged':True,'mesh_local_translation_mm':delta,'sliced':False}
+            'process_settings_unchanged':True,'placed_bottom_change_mm':bed_deltas,'mesh_local_translation_mm':deltas.get('PP03-base', deltas) if len(deltas)==1 else deltas,'sliced':False}
 
 
 def main():
