@@ -43,7 +43,7 @@
 
 GitHub 仓库的默认分支已切换到 `v2`。整机模型、打印件、原理图和固件的后续更新都在此维护。早期样机的工程资料仍可在 [`main` 分支](https://github.com/miclle/cybertrack/tree/main)查看。
 
-- 为降低亲子使用中的风险，**整机模型和设计源档**移除了点火结构，封闭前脸的点火出线孔，拆除背包两侧的点火桶座。清水瓶和泡泡液瓶各有独立底托，两根供液软管均已恢复到整机模型中。[FreeCAD 模型与打印件](hardware/model/README.md)
+- 为降低亲子使用中的风险，**整机模型和设计源档**移除了点火结构，封闭前脸的点火出线孔，拆除背包两侧的点火桶座。清水瓶和泡泡液瓶直接放入背包，各由一根顶部软管供液。[FreeCAD 模型与打印件](hardware/model/README.md)
 - **A3 原理图**移除了点火支路，BOM 和接线表已同步更新。固件、网页和语音入口也移除了点火与狂暴模式，行走、喷水和泡泡仍可独立控制或组合执行。[A3 原理图](hardware/schematic/README.md) · [BOM](hardware/BOM.md) · [控制能力](firmware/CAPABILITIES.md)
 - **`ct79` 候选固件**已通过本地构建与回归测试，最近记录的样机固件仍是 `ct78`。v2 应用和语音角色待部署，整机实物及儿童使用验收仍待完成。[当前部署与验证记录](docs/current-status.md)
 
@@ -221,7 +221,7 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 整机使用 FreeCAD 管理，**FCStd 是几何依据**。STEP 用于交换，STL 用于单件制作，3MF 保存排盘和工艺配置；这些不同格式分别检查，不能把交换成功等同于制造通过。
 
-v2 Lean 项目为 **28 件、6 盘**，按动力、电控、枪座、头部与背包等安装需要组织；已有零件可按需补打。头部固定结构尽量合并，冠盖与面包板托盘保留独立拆装，减少细碎零件的同时保留维护入口。另有用户 Ready 排盘，盘序独立维护。
+v2 Lean 项目为 **24 件、6 盘**，按动力、电控、枪座、头部与背包等安装需要组织；已有零件可按需补打。头部固定结构尽量合并，冠盖与面包板托盘保留独立拆装，减少细碎零件的同时保留维护入口。另有用户 Ready 排盘，盘序独立维护。
 
 ### 为使用后的维护留位置
 
@@ -389,7 +389,7 @@ cd cybertrack
 
 1. **了解物料与结构。** 从 [BOM](hardware/BOM.md)、[接线总表](docs/wiring.md)和[装配说明](docs/assembly.md)开始，结合实物确认器件与接口。
 2. **打开原生模型。** 使用 FreeCAD 查看 [CyberTrack.FCStd](hardware/model/CyberTrack.FCStd)；FCStd 是几何依据，当前修订与交换文件检查见[模型说明](hardware/model/README.md)。
-3. **按需选择打印件。** [Lean 项目](hardware/model/lean-print/README.md)提供 28 件／6 盘及 [3MF 文件](hardware/model/lean-print/CyberTrack-Lean-6plates.3mf)。当前第 1、3、4、6 盘需重新切片；[Ready 排盘](hardware/model/print-ready/README.md)是独立方案，不混用盘号。头部与单件补打见[头部打印说明](docs/head-shell-print.md)和[单件目录](hardware/model/print-parts/README.md)。
+3. **按需选择打印件。** [Lean 项目](hardware/model/lean-print/README.md)提供 24 件／6 盘及 [3MF 文件](hardware/model/lean-print/CyberTrack-Lean-6plates.3mf)。当前第 1、3、4、6 盘需重新切片；[Ready 排盘](hardware/model/print-ready/README.md)使用独立盘号。头部与单件补打见[头部打印说明](docs/head-shell-print.md)和[单件目录](hardware/model/print-parts/README.md)。
 
 当前仍处于样机联调阶段。打印配合、整机供电、持续负载、停止性能及儿童使用验收尚未完成。v2 退役点火与狂暴模式，现行功能见[效果控制](docs/effects-control.md)。
 

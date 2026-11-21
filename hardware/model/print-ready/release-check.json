@@ -1,23 +1,131 @@
 {
   "passed": true,
-  "scope": "backpack CAD and current saved project consistency",
+  "scope": "v2 native and print project identity; affected caches invalidated",
   "projects": [
     {
-      "project": "hardware/model/lean-print/CyberTrack-Lean-6plates.3mf",
-      "sha256": "35fc14b599ba52fc3045423058b6e7941880236bde611bfc5d7eaf1f34dc925a",
-      "print_parts": 27,
-      "plate_count": 6,
+      "path": "hardware/model/lean-print/CyberTrack-Lean-6plates.3mf",
+      "before_sha256": "aa4afca971e7fb6bf5b30d746f926aee81bc24c579d882bdf73567077e155def",
+      "sha256": "b045ca42877010f5153919aa5423d74bb30a002e08734e16b2e552bf96300987",
+      "removed": [
+        "WaterPod",
+        "WaterLidMark",
+        "BubblePod",
+        "BubbleLidMark"
+      ],
+      "updated": [
+        "PP04-LowerTub.stl",
+        "PP03-base"
+      ],
+      "part_names": [
+        "LC02-TopRetainer-flat",
+        "LC01-Carrier-upright",
+        "ShoulderRailL",
+        "ShoulderRailR",
+        "NeckCableBridge",
+        "PP07-upright.stl",
+        "PP07-Crown.stl",
+        "PP07-Tray.stl",
+        "BatteryHatch",
+        "KeelSideFrameL",
+        "KeelSideFrameR",
+        "PrintNeck",
+        "PP04-LowerTub.stl",
+        "LC03-BottomServiceCover-flipped",
+        "PP03-base",
+        "LC04-flipped",
+        "PP01-base",
+        "PP02-base",
+        "EffectTray",
+        "ChestAudioPanel",
+        "PrintChestGuardL",
+        "PrintChestGuardR",
+        "LowerChin",
+        "ChestBadge"
+      ],
+      "print_parts": 24,
       "requires_reslice_plates": [
+        1,
         3,
+        4,
         6
       ],
-      "dedicated_backpack_plate": null
+      "unchanged_archive_entries": 43,
+      "changed_or_removed_entries": [
+        "3D/3dmodel.model",
+        "3D/_rels/3dmodel.model.rels",
+        "3D/Objects/object_1.model",
+        "Metadata/model_settings.config",
+        "3D/Objects/remaining_1.model",
+        "3D/Objects/completion_1.model",
+        "3D/Objects/completion_11.model",
+        "3D/Objects/v2-liquid-BubblePod.model",
+        "3D/Objects/v2-liquid-BubbleLidMark.model"
+      ],
+      "process_settings_unchanged": true,
+      "placed_bottom_change_mm": {
+        "PP04-LowerTub.stl": 0.0,
+        "PP03-base": 0.0
+      },
+      "mesh_local_translation_mm": {
+        "PP04-LowerTub.stl": [
+          0.0,
+          0.0,
+          -33.00000000000001
+        ],
+        "PP03-base": [
+          0.0,
+          0.0,
+          5.000000413701855e-08
+        ]
+      },
+      "sliced": false,
+      "cached_plates": [
+        2,
+        5
+      ]
     },
     {
-      "project": "hardware/model/print-ready/CyberTrack-Ready-6plates.3mf",
-      "sha256": "0ae36f55ea8675a3fb0b18a32ad28b80ba0a5a811bb487a4a6e4f970101d79ee",
-      "print_parts": 27,
-      "plate_count": 6,
+      "path": "hardware/model/print-ready/CyberTrack-Ready-6plates.3mf",
+      "before_sha256": "4593d31aa250a97787fc14bb0c6c6342a3e83ff6e818460b78848996208117e9",
+      "sha256": "9e6050af1da41ca7cf046284973f9e14f46f2dad2e5b29929776835cb8d7a0e5",
+      "removed": [
+        "WaterLidMark",
+        "BubblePod",
+        "BubbleLidMark"
+      ],
+      "updated": [
+        "PP04-LowerTub.stl",
+        "PP03-base"
+      ],
+      "part_names": [
+        "BatteryHatch",
+        "ChestBadge",
+        "KeelSideFrameR",
+        "LowerChin",
+        "LC03-BottomServiceCover-flipped",
+        "KeelSideFrameL",
+        "LC01-Carrier-upright",
+        "ShoulderRailR",
+        "EffectRetainerLBuck",
+        "EffectRetainerLMOS",
+        "EffectRetainerRBuck",
+        "ShoulderRailL",
+        "NeckCableBridge",
+        "EffectRetainerRMOS",
+        "PrintNeck",
+        "LC02-TopRetainer-flat",
+        "PrintChestGuardR",
+        "PP04-LowerTub.stl",
+        "PP01-base",
+        "PP07-upright.stl",
+        "PP02-base",
+        "ChestAudioPanel",
+        "PrintChestGuardL",
+        "LC04-flipped",
+        "PP07-Crown.stl",
+        "PP03-base"
+      ],
+      "print_parts": 26,
       "requires_reslice_plates": [
         1,
         2,
@@ -26,10 +134,38 @@
         5,
         6
       ],
-      "dedicated_backpack_plate": 6
+      "unchanged_archive_entries": 44,
+      "changed_or_removed_entries": [
+        "3D/3dmodel.model",
+        "3D/_rels/3dmodel.model.rels",
+        "3D/Objects/object_33.model",
+        "3D/Objects/object_19.model",
+        "3D/Objects/object_1.model",
+        "Metadata/model_settings.config",
+        "3D/Objects/v2-liquid-BubblePod.model",
+        "3D/Objects/v2-liquid-BubbleLidMark.model"
+      ],
+      "process_settings_unchanged": true,
+      "placed_bottom_change_mm": {
+        "PP04-LowerTub.stl": 0.0,
+        "PP03-base": 0.0
+      },
+      "mesh_local_translation_mm": {
+        "PP04-LowerTub.stl": [
+          0.0,
+          0.0,
+          -33.00000000000001
+        ],
+        "PP03-base": [
+          0.0,
+          0.0,
+          -45.0
+        ]
+      },
+      "sliced": false,
+      "cached_plates": []
     }
   ],
   "slicing_validated": false,
-  "physical_fit_verified": false,
-  "limits": "Affected plate G-code is invalidated. Unrelated historical slice evidence is not re-certified."
+  "physical_fit_verified": false
 }

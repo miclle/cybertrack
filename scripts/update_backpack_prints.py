@@ -52,7 +52,7 @@ def align_replacement(old_mesh, new_mesh, component, instances):
     return delta, after - before
 
 
-def update(path, *, removed_names=REMOVED, replacements=None):
+def update(path, *, removed_names=REMOVED, replacements=None, destination=None):
     if replacements is None:
         replacements = {'PP03-base': MODEL/'remaining-print/PP03-base.stl'}
     before=path.read_bytes()
@@ -134,11 +134,12 @@ def update(path, *, removed_names=REMOVED, replacements=None):
     # Unrelated source meshes and all project process settings remain byte-for-byte.
     touched=[n for n in original if n not in files or original[n]!=files[n]]
     assert original['Metadata/project_settings.config']==files['Metadata/project_settings.config']
-    archive_write(path,files)
-    with zipfile.ZipFile(path) as z:
+    destination = destination or path
+    archive_write(destination,files)
+    with zipfile.ZipFile(destination) as z:
         assert set(z.namelist())==set(files)
         assert all(z.read(n)==files[n] for n in files)
-    return {'path':str(path.relative_to(ROOT)),'before_sha256':sha(before),'sha256':sha(path.read_bytes()),
+    return {'path':str(path.relative_to(ROOT)),'before_sha256':sha(before),'sha256':sha(destination.read_bytes()),
             'removed':removed,'updated':changed,'part_names':names,'print_parts':len(names),
             'requires_reslice_plates':plates,'unchanged_archive_entries':len(unchanged),'changed_or_removed_entries':touched,
             'process_settings_unchanged':True,'placed_bottom_change_mm':bed_deltas,'mesh_local_translation_mm':deltas.get('PP03-base', deltas) if len(deltas)==1 else deltas,'sliced':False}

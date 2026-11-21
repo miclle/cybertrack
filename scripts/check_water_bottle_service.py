@@ -21,7 +21,8 @@ def review(doc, bottle="Water"):
     if body.cut(cylinder).Volume + cylinder.cut(body).Volume > TOL_MM3:
         raise ValueError("The saved bottle is no longer a vertical cylinder; revise the sweep")
     sweep = Part.makeCylinder(radius, box.ZLength + LIFT_MM, base)
-    released = [bottle + "RetentionBand", bottle + "StrapClosure"]
+    fasteners = (bottle + "RetentionBand", bottle + "StrapClosure")
+    released = [name for name in fasteners if doc.getObject(name)]
     hose = {"Water": "WaterHoseRoute", "Bubble": "BubbleGunHoseRoute"}[bottle]
     checked = 0
     hits = {}

@@ -24,7 +24,7 @@ python3 scripts/check_firmware_current.py --source-bin build/firmware-ct79/xiaoz
 | 前进保护 | 网页开关默认关闭；开启时小于 15 cm 停前进／至少 20 cm 解锁，解锁不续走；无自动绕行 |
 | 网页 | `http://<设备 IP>:8080/`；单网页会话，长按租期 600 ms；同通道网页优先 |
 | 电源 | 辰克 5 V 电池包、12 V 升压电机支路；旧电源测试不迁移 |
-| 机械 | [当前模型](../hardware/model/README.md)，Lean 28 件、Ready 29 件，均为六盘；须按各自说明切片 |
+| 机械 | [当前模型](../hardware/model/README.md)采用双瓶直放背包；Lean 24 件、Ready 26 件，均为六盘 |
 | 实物 | 已有样机及分项现场反馈；当前整机持续负载、停止性能、可靠性及完整语音回归未验收 |
 | 只读帮助 | ct43 引入、ct45 已部署[上手与回执解释](status-explanation.md)，不自动执行或重试；线上隔离解释已运行，发现猜测和恢复表述偏差；见[联调结果](validation/lingxi-ct45-20261031.md) |
 | 剧场退役 | ct78 已删除独立编辑入口和草稿协议；设备已更新 ct78；角色同步及配套验收仍待完成。 |

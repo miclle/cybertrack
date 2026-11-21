@@ -1,0 +1,361 @@
+{
+  "saved_reopened": true,
+  "source": {
+    "removed": [
+      "BubbleBottomPad",
+      "BubbleLidMark",
+      "BubblePod",
+      "BubblePodInsertL",
+      "BubblePodInsertR",
+      "BubblePodScrewL",
+      "BubblePodScrewR",
+      "BubbleRetentionBand",
+      "BubbleSidePad0",
+      "BubbleSidePad1",
+      "BubbleStrapAccessSpace",
+      "BubbleStrapClosure",
+      "WaterBottomPad",
+      "WaterLidMark",
+      "WaterPod",
+      "WaterPodInsertL",
+      "WaterPodInsertR",
+      "WaterPodScrewL",
+      "WaterPodScrewR",
+      "WaterRetentionBand",
+      "WaterSidePad0",
+      "WaterSidePad1",
+      "WaterStrapAccessSpace",
+      "WaterStrapClosure"
+    ],
+    "edited": [
+      "BackpackShell",
+      "BubbleBottleRemovalSpace",
+      "BubbleDipTubeSpace",
+      "BubbleFingerSpace",
+      "BubbleGunHoseClearance",
+      "BubbleGunHoseRoute",
+      "BubbleModule",
+      "LowerTub",
+      "PrintBackpack",
+      "PrintLowerTub",
+      "WaterBottleRemovalSpace",
+      "WaterDipTubeSpace",
+      "WaterFingerSpace",
+      "WaterGunHoseClearance",
+      "WaterHoseRoute",
+      "WaterModule"
+    ],
+    "unaffected_shapes": 311,
+    "baseline_sha256": "4270c010c63ca7c270e75776e104dc8793e2aa85ea8d2ec6e9065f758bccfb50",
+    "sha256": "a7ea783831f89abfd5cae1918bb5ccf760bee6f503d1396b5f610e6a829a7d8a",
+    "gui": {
+      "view_providers": 334,
+      "visible": 173
+    }
+  },
+  "delivery": {
+    "removed": [
+      "BubbleBottomPad",
+      "BubbleLidMark",
+      "BubblePod",
+      "BubblePodInsertL",
+      "BubblePodInsertR",
+      "BubblePodScrewL",
+      "BubblePodScrewR",
+      "BubbleRetentionBand",
+      "BubbleSidePad0",
+      "BubbleSidePad1",
+      "BubbleStrapClosure",
+      "WaterBottomPad",
+      "WaterLidMark",
+      "WaterPod",
+      "WaterPodInsertL",
+      "WaterPodInsertR",
+      "WaterPodScrewL",
+      "WaterPodScrewR",
+      "WaterRetentionBand",
+      "WaterSidePad0",
+      "WaterSidePad1",
+      "WaterStrapClosure"
+    ],
+    "edited": [
+      "BubbleGunHoseRoute",
+      "BubbleModule",
+      "PrintBackpack",
+      "PrintLowerTub",
+      "WaterHoseRoute",
+      "WaterModule"
+    ],
+    "unaffected_shapes": 175,
+    "baseline_sha256": "508a4bd4bb7ac2384fd82b4fce02e42fea36872db25a8032dabad77f5c1172f4",
+    "sha256": "70f4f080fbf51e4c71ef725dfdbd90b2390a6a2606f315258916e2d9b8b39466",
+    "gui": {
+      "view_providers": 182,
+      "visible": 167
+    }
+  },
+  "bottle_service": {
+    "Water": {
+      "model": "CyberTrack.FCStd",
+      "sha256": "70f4f080fbf51e4c71ef725dfdbd90b2390a6a2606f315258916e2d9b8b39466",
+      "bottle_diameter_height_mm": [
+        48.8,
+        114.0
+      ],
+      "axis": "+Z",
+      "travel_mm": 150,
+      "swept_z_mm": [
+        34.0,
+        298.0
+      ],
+      "released_first": [],
+      "checked_fixed_shapes_with_hose": 179,
+      "volume_threshold_mm3": 0.01,
+      "with_hose_overlaps_mm3": {
+        "WaterHoseRoute": 911.7364
+      },
+      "after_hose_removal_overlaps_mm3": {},
+      "pass": true,
+      "floor_contact_mm2": 1870.3786,
+      "cap_to_hose_gap_mm": 0.5
+    },
+    "Bubble": {
+      "model": "CyberTrack.FCStd",
+      "sha256": "70f4f080fbf51e4c71ef725dfdbd90b2390a6a2606f315258916e2d9b8b39466",
+      "bottle_diameter_height_mm": [
+        48.8,
+        114.0
+      ],
+      "axis": "+Z",
+      "travel_mm": 150,
+      "swept_z_mm": [
+        34.0,
+        298.0
+      ],
+      "released_first": [],
+      "checked_fixed_shapes_with_hose": 179,
+      "volume_threshold_mm3": 0.01,
+      "with_hose_overlaps_mm3": {
+        "BubbleGunHoseRoute": 583.6627
+      },
+      "after_hose_removal_overlaps_mm3": {},
+      "pass": true,
+      "floor_contact_mm2": 1870.3786,
+      "cap_to_hose_gap_mm": 0.5
+    }
+  },
+  "step_solids": 771,
+  "step_invalid_solids": 0,
+  "exports": {
+    "remaining-print/PP03-base": {
+      "facets": 80,
+      "step_volume_delta_mm3": 1.4551915228366852e-11
+    },
+    "remaining-print/PP03-back": {
+      "facets": 80,
+      "step_volume_delta_mm3": 1.0186340659856796e-10
+    },
+    "print-parts/PP04-LowerTub": {
+      "facets": 25742,
+      "step_volume_delta_mm3": 3.374251537024975e-05
+    }
+  },
+  "retired_exports": {
+    "completion-print/BubbleLidMark.brep": "761d058594fd871b5a1f39751871a83393e4add99faf393d4ec5a6b87c71bb7b",
+    "completion-print/BubbleLidMark.step": "2570040efb4236cb3241fb05d065290caa70e85e64a7103024dc9b2922abd21e",
+    "completion-print/BubbleLidMark.stl": "9d391aef7a8f06a3218aef61a5303dee81ed1d975061e8284abf06550c83be51",
+    "completion-print/BubblePod.brep": "f30299cf8ee9bcc9d2cfa9cc26e831dcab3818ef45e61bf94b171864731ed929",
+    "completion-print/BubblePod.step": "7e961ab6fffc0049b72a6fccb6d4a6444a396a86d00b5c96879e30e5fb9f6caa",
+    "completion-print/BubblePod.stl": "d7c250fcaffb00df40917360dd6f6bddb1d9172946c909daaabc79d88d6ca484",
+    "completion-print/WaterLidMark.brep": "986b8d8e76ef3613bc433cbe76fcc008418d750275947949a0327c9f391756d1",
+    "completion-print/WaterLidMark.step": "52539139681edd5bc03ba1a9e46a36ac81732f6365ea12fc5845904dba7e3887",
+    "completion-print/WaterLidMark.stl": "9d391aef7a8f06a3218aef61a5303dee81ed1d975061e8284abf06550c83be51",
+    "completion-print/WaterPod.brep": "ae4804114f467c9c2b59bf08a28311e047a57bc4e35b0ffe9d61c49cbb4f9694",
+    "completion-print/WaterPod.step": "6ff6ccfade2709287f619afc7a185fe33e7eb62e9bc44f9d3a7d5ddadfb763e6",
+    "completion-print/WaterPod.stl": "c8b70fb6ef09f6319f5d9a0350bfeb2d2e3380b855746fbf5f46d4c57b88c03e"
+  },
+  "files_sha256": {
+    "CyberTrack.FCStd": "70f4f080fbf51e4c71ef725dfdbd90b2390a6a2606f315258916e2d9b8b39466",
+    "CyberTrack.step": "d87c8ab778f11c1bb2e0068d5a94b6c07daacc81b224dc54bd3bd89c3af9d775",
+    "lean-print/CyberTrack-Lean-6plates.3mf": "b045ca42877010f5153919aa5423d74bb30a002e08734e16b2e552bf96300987",
+    "print-parts/PP03-Backpack.step": "84f027bb25a0f32da6205acdbf45d302f6fb649dcce43ff0359e0837bb9eab93",
+    "print-parts/PP03-Backpack.stl": "bbeb2b84eac1eaccda2de89d78eef3bcec2e511cf35a6b3b8d526a43fe722d67",
+    "print-parts/PP04-LowerTub.step": "7f39844c0ccf0ecf8bb0ada4f1d5a1ae3b209aa797b3f52d69157465551cb9b8",
+    "print-parts/PP04-LowerTub.stl": "24a9852fb22c68a908c6774df5eff9e44aefe3778f4150054b163024700dbd7f",
+    "print-ready/CyberTrack-Ready-6plates.3mf": "9e6050af1da41ca7cf046284973f9e14f46f2dad2e5b29929776835cb8d7a0e5",
+    "remaining-print/PP03-back.brep": "5290fd28987fa9f8089facb20e64a1444d078c3cd497f5384960fd846174a231",
+    "remaining-print/PP03-back.step": "c69a6ce99749ab5372f1ab5aed7376ea6b3e2464e477deec3e8bfe97ab6fb17a",
+    "remaining-print/PP03-back.stl": "030208d6e4f9362180fb138442703d180d6c99bb700d21c767bb783c607b6e75",
+    "remaining-print/PP03-base.brep": "c853177c111b7467dafaf39fbe0ee16ca5fa953de228dc851914ad276693091f",
+    "remaining-print/PP03-base.step": "84f027bb25a0f32da6205acdbf45d302f6fb649dcce43ff0359e0837bb9eab93",
+    "remaining-print/PP03-base.stl": "bbeb2b84eac1eaccda2de89d78eef3bcec2e511cf35a6b3b8d526a43fe722d67",
+    "source/CyberTrack-design.FCStd": "a7ea783831f89abfd5cae1918bb5ccf760bee6f503d1396b5f610e6a829a7d8a"
+  },
+  "projects": [
+    {
+      "path": "hardware/model/lean-print/CyberTrack-Lean-6plates.3mf",
+      "before_sha256": "aa4afca971e7fb6bf5b30d746f926aee81bc24c579d882bdf73567077e155def",
+      "sha256": "b045ca42877010f5153919aa5423d74bb30a002e08734e16b2e552bf96300987",
+      "removed": [
+        "WaterPod",
+        "WaterLidMark",
+        "BubblePod",
+        "BubbleLidMark"
+      ],
+      "updated": [
+        "PP04-LowerTub.stl",
+        "PP03-base"
+      ],
+      "part_names": [
+        "LC02-TopRetainer-flat",
+        "LC01-Carrier-upright",
+        "ShoulderRailL",
+        "ShoulderRailR",
+        "NeckCableBridge",
+        "PP07-upright.stl",
+        "PP07-Crown.stl",
+        "PP07-Tray.stl",
+        "BatteryHatch",
+        "KeelSideFrameL",
+        "KeelSideFrameR",
+        "PrintNeck",
+        "PP04-LowerTub.stl",
+        "LC03-BottomServiceCover-flipped",
+        "PP03-base",
+        "LC04-flipped",
+        "PP01-base",
+        "PP02-base",
+        "EffectTray",
+        "ChestAudioPanel",
+        "PrintChestGuardL",
+        "PrintChestGuardR",
+        "LowerChin",
+        "ChestBadge"
+      ],
+      "print_parts": 24,
+      "requires_reslice_plates": [
+        1,
+        3,
+        4,
+        6
+      ],
+      "unchanged_archive_entries": 43,
+      "changed_or_removed_entries": [
+        "3D/3dmodel.model",
+        "3D/_rels/3dmodel.model.rels",
+        "3D/Objects/object_1.model",
+        "Metadata/model_settings.config",
+        "3D/Objects/remaining_1.model",
+        "3D/Objects/completion_1.model",
+        "3D/Objects/completion_11.model",
+        "3D/Objects/v2-liquid-BubblePod.model",
+        "3D/Objects/v2-liquid-BubbleLidMark.model"
+      ],
+      "process_settings_unchanged": true,
+      "placed_bottom_change_mm": {
+        "PP04-LowerTub.stl": 0.0,
+        "PP03-base": 0.0
+      },
+      "mesh_local_translation_mm": {
+        "PP04-LowerTub.stl": [
+          0.0,
+          0.0,
+          -33.00000000000001
+        ],
+        "PP03-base": [
+          0.0,
+          0.0,
+          5.000000413701855e-08
+        ]
+      },
+      "sliced": false,
+      "cached_plates": [
+        2,
+        5
+      ]
+    },
+    {
+      "path": "hardware/model/print-ready/CyberTrack-Ready-6plates.3mf",
+      "before_sha256": "4593d31aa250a97787fc14bb0c6c6342a3e83ff6e818460b78848996208117e9",
+      "sha256": "9e6050af1da41ca7cf046284973f9e14f46f2dad2e5b29929776835cb8d7a0e5",
+      "removed": [
+        "WaterLidMark",
+        "BubblePod",
+        "BubbleLidMark"
+      ],
+      "updated": [
+        "PP04-LowerTub.stl",
+        "PP03-base"
+      ],
+      "part_names": [
+        "BatteryHatch",
+        "ChestBadge",
+        "KeelSideFrameR",
+        "LowerChin",
+        "LC03-BottomServiceCover-flipped",
+        "KeelSideFrameL",
+        "LC01-Carrier-upright",
+        "ShoulderRailR",
+        "EffectRetainerLBuck",
+        "EffectRetainerLMOS",
+        "EffectRetainerRBuck",
+        "ShoulderRailL",
+        "NeckCableBridge",
+        "EffectRetainerRMOS",
+        "PrintNeck",
+        "LC02-TopRetainer-flat",
+        "PrintChestGuardR",
+        "PP04-LowerTub.stl",
+        "PP01-base",
+        "PP07-upright.stl",
+        "PP02-base",
+        "ChestAudioPanel",
+        "PrintChestGuardL",
+        "LC04-flipped",
+        "PP07-Crown.stl",
+        "PP03-base"
+      ],
+      "print_parts": 26,
+      "requires_reslice_plates": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "unchanged_archive_entries": 44,
+      "changed_or_removed_entries": [
+        "3D/3dmodel.model",
+        "3D/_rels/3dmodel.model.rels",
+        "3D/Objects/object_33.model",
+        "3D/Objects/object_19.model",
+        "3D/Objects/object_1.model",
+        "Metadata/model_settings.config",
+        "3D/Objects/v2-liquid-BubblePod.model",
+        "3D/Objects/v2-liquid-BubbleLidMark.model"
+      ],
+      "process_settings_unchanged": true,
+      "placed_bottom_change_mm": {
+        "PP04-LowerTub.stl": 0.0,
+        "PP03-base": 0.0
+      },
+      "mesh_local_translation_mm": {
+        "PP04-LowerTub.stl": [
+          0.0,
+          0.0,
+          -33.00000000000001
+        ],
+        "PP03-base": [
+          0.0,
+          0.0,
+          -45.0
+        ]
+      },
+      "sliced": false,
+      "cached_plates": []
+    }
+  ],
+  "physical_fit_verified": false,
+  "slicing_validated": false
+}

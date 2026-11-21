@@ -73,12 +73,21 @@ def check_legacy():
 
 
 def check_v2():
-    cad = json.loads((MODEL / 'v2-cad-readback.json').read_text())
-    print_report = json.loads((MODEL / 'v2-print-readback.json').read_text())
+    latest = MODEL / 'bottle-backpack-direct-fit.json'
+    if latest.exists():
+        cad = json.loads(latest.read_text())
+        print_report = cad['projects']
+        for relative, digest in cad['files_sha256'].items():
+            assert sha(MODEL / relative) == digest, relative
+        assert all(not (MODEL / relative).exists() for relative in cad['retired_exports'])
+        assert all(row['pass'] for row in cad['bottle_service'].values())
+    else:
+        cad = json.loads((MODEL / 'v2-cad-readback.json').read_text())
+        print_report = json.loads((MODEL / 'v2-print-readback.json').read_text())
+        for relative in ('CyberTrack.FCStd', 'source/CyberTrack-design.FCStd', 'CyberTrack.step'):
+            path = MODEL / relative
+            assert sha(path) == cad['files_sha256'][path.name], relative
     assert cad['saved_reopened']
-    for relative in ('CyberTrack.FCStd', 'source/CyberTrack-design.FCStd', 'CyberTrack.step'):
-        path = MODEL / relative
-        assert sha(path) == cad['files_sha256'][path.name], relative
     for row in print_report:
         path = ROOT / row['path']
         assert sha(path) == row['sha256'], path
@@ -88,6 +97,7 @@ def check_v2():
             names = [obj.find("metadata[@key='name']").get('value') for obj in settings.findall('object')]
             assert names == row['part_names']
             assert 'IgnitionMOSCarrier' not in names
+            assert not set(row['removed']).intersection(names)
             assert len(names) == len(set(names)) == row['print_parts']
             assert len(settings.findall('plate')) == 6
             for plate in row['requires_reslice_plates']:
