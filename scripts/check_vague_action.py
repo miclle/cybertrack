@@ -6,7 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from capture_lingxi import firmware_replay
+from capture_lingxi import firmware_replay, has_ct78_effects
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -37,9 +37,15 @@ def check(executable):
         run(phrase, [text(phrase), call('move', move)],
             lambda r, s: r[0]['result'] == 'action_unspecified' and bool(r[0].get('clarification_facts')) and idle(s))
 
-    for tool, args in [('water', dict(duration_ms=1000)), ('bubbles', dict(duration_ms=1000)),
-                       ('ignition', dict(duration_ms=1000)), ('frenzy', dict(duration_ms=1000)),
-                       ('sequence', dict(steps_json='[{"direction":"left","move_ms":880,"water_ms":0,"bubbles_ms":0,"ignition_ms":0}]'))]:
+    legacy = has_ct78_effects(executable)
+    step = dict(direction='left', move_ms=880, water_ms=0, bubbles_ms=0)
+    effects = ['water', 'bubbles']
+    if legacy:
+        step['ignition_ms'] = 0
+        effects.extend(['ignition', 'frenzy'])
+    alternatives = [(tool, dict(duration_ms=1000)) for tool in effects]
+    alternatives.append(('sequence', dict(steps_json=json.dumps([step]))))
+    for tool, args in alternatives:
         run('cannot_substitute_'+tool, [text('来个效果'), call(tool, args)],
             lambda r, s: r[0]['result'] == 'action_unspecified' and idle(s))
 

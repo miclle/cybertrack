@@ -5,16 +5,19 @@ import hashlib
 import json
 from pathlib import Path
 
-from capture_lingxi import firmware_replay
+from capture_lingxi import firmware_replay, has_ct78_effects
 
 
-def scenarios():
+def scenarios(legacy):
     def call(name, arguments, **extra):
         return dict(name='self.tank.'+name, arguments=arguments, **extra)
     read=call('get_status', {})
     stop=call('stop', {})
     move=call('move', dict(direction='forward', duration_ms=1000))
-    steps=json.dumps([dict(direction='left', move_ms=880, water_ms=0, bubbles_ms=0, ignition_ms=0)])
+    step = dict(direction='left', move_ms=880, water_ms=0, bubbles_ms=0)
+    if legacy:
+        step['ignition_ms'] = 0
+    steps = json.dumps([step])
     return [
         dict(id='direction-zero', calls=[call('move',dict(direction='forward\0extra',duration_ms=1000))], starts=0, error='embedded zero'),
         dict(id='combined-zero', calls=[call('move_and_water',dict(direction='left\0extra',move_duration_ms=880,water_duration_ms=1000))], starts=0,error='embedded zero'),
@@ -25,7 +28,7 @@ def scenarios():
         dict(id='same-input-no-fallback',calls=[call('move',dict(direction='forward\0extra',duration_ms=1000)),call('bubbles',dict(duration_ms=1000))],starts=0,results=['error','error'],error='voice_input_failed'),
         dict(id='new-input-restores',calls=[call('move',dict(direction='forward\0extra',duration_ms=1000)),dict(input_text='吹泡泡一秒'),call('bubbles',dict(duration_ms=1000))],starts=1,results=['error','accepted']),
         dict(id='valid-move',calls=[move],starts=1,moving=True,results=['accepted']),
-        dict(id='valid-legacy-sequence',calls=[call('sequence',dict(steps_json=steps))],starts=1,moving=True,results=['accepted']),
+        dict(id='valid-sequence',calls=[call('sequence',dict(steps_json=steps))],starts=1,moving=True,results=['accepted']),
         dict(id='inner-plan-zero',calls=[call('sequence',dict(steps_json=steps.replace('left','left\\u0000extra')))],starts=0,error='Sequence requires'),
         dict(id='literal-escape-not-zero',calls=[call('move',dict(direction=r'left\u0000',duration_ms=880))],starts=0,error='Move requires'),
         dict(id='queued-then-invalid',calls=[dict(move,defer=True),call('water\0extra',dict(duration_ms=1000))],starts=0),
@@ -34,7 +37,7 @@ def scenarios():
 
 def check(executable):
     results=[]
-    for case in scenarios():
+    for case in scenarios(has_ct78_effects(executable)):
         commands=[dict(command,elapsed_ms=index+1) for index,command in enumerate(case['calls'])]
         wire=firmware_replay(executable,case.get('profile','corpus_idle'),[*commands,dict(inspect_ms=100)])
         replies,final=wire[:-1],wire[-1]

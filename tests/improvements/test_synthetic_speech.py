@@ -50,14 +50,11 @@ class SyntheticSpeechTests(unittest.TestCase):
             verdict = {"valid": False, "error": "actual gate rejected duration", "stop_requested": False}
             with patch.dict(sys.modules, {"websockets.asyncio.client": MagicMock(connect=connection)}), \
                     patch("capture_lingxi.subprocess.check_output", return_value=json.dumps(verdict)), \
-                    patch("capture_lingxi.simulated_reply") as simulate, \
-                    patch("capture_lingxi.subprocess.run") as decorate:
+                    patch("capture_lingxi.simulated_reply") as simulate:
                 result = asyncio.run(capture_case(dict(token="test", client_id="c", device_id="d"),
                     [{"name": tool}], dict(id="V024", text="吹泡泡六十秒", context="",
-                    argument_validator=Path("/inert/test/checker"),fixture_version="ct47",
-                    draft_read_facts_fixture=True)))
+                    argument_validator=Path("/inert/test/checker"))))
             simulate.assert_not_called()
-            decorate.assert_not_called()
             self.assertNotIn("simulated_receipts", result)
             self.assertEqual(result["argument_checks"][0]["valid"], False)
             self.assertEqual(result["calls"][0]["arguments"]["duration_ms"], 60000)

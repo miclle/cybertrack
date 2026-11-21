@@ -17,7 +17,7 @@ def check(executable):
     trace=json.loads(gzip.decompress(CAPTURE.read_bytes()))
     baseline=json.loads(BASELINE.read_bytes())
     old={row['id']:row for row in baseline['results']}
-    targets={'V029','V031','V033','V035','V037'}
+    targets={'V029','V037'}
     def packets(row):
         if not row['received_audio_bytes_discarded']:return dict(suppressed=0,audible=0)
         return json.loads(subprocess.check_output([str(executable),'--packets'],input=json.dumps(row),text=True,timeout=10))
@@ -27,6 +27,9 @@ def check(executable):
         expected={key:old[row['id']][key] for key in ('suppressed','audible')}
         if row['id'] in targets:
             expected=dict(suppressed=sum(expected.values()),audible=0)
+        # Archived sequence requests include the retired fourth lane.
+        if row['id'] in ('V031','V033','V035'):
+            expected=dict(suppressed=0,audible=sum(expected.values()))
         assert count==expected,(row['id'],count,expected)
         results.append(dict(id=row['id'],completed=row['completed'],**count))
         if row['id'] not in targets:continue
@@ -34,8 +37,8 @@ def check(executable):
             changed=copy.deepcopy(row)
             if mutation=='wrong_request':
                 args=changed['calls'][0]['arguments']
-                key='steps_json' if 'steps_json' in args else 'speed_percent' if 'speed_percent' in args else 'water_duration_ms'
-                args[key]='[]' if key=='steps_json' else 90 if key=='speed_percent' else 1
+                key='speed_percent' if 'speed_percent' in args else 'water_duration_ms'
+                args[key]=90 if key=='speed_percent' else 1
             if mutation=='rejected_receipt':changed['simulated_receipts'][0]['result']='voice_input_failed'
             if mutation=='missing_fault':del changed['simulated_receipts'][0]['fault']
             if mutation=='negation':

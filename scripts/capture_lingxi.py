@@ -129,6 +129,19 @@ def firmware_profile(context):
     return profiles[context]
 
 
+def has_ct78_effects(executable):
+    """Identify the frozen ct78 host or the three-lane host from its own catalog."""
+    catalog = json.loads(subprocess.check_output([str(executable), '--catalog'], text=True))
+    names = {tool['name'] for tool in catalog}
+    current = {'self.tank.' + tool for tool in ('get_status', 'stop', 'water', 'bubbles', 'move',
+               'move_and_water', 'set_speed', 'adjust_speed', 'sequence')}
+    if len(names) == len(catalog) and names == current:
+        return False
+    if len(names) == len(catalog) and names == current | {'self.tank.ignition', 'self.tank.frenzy'}:
+        return True
+    raise ValueError('unrecognized host tool catalog')
+
+
 def firmware_replay(executable, profile, calls, *, await_stt=False):
     command = [str(executable), profile]
     if await_stt: command.append('--await-stt')
@@ -173,7 +186,7 @@ def protocol_observation(message):
 async def capture_case(connection,tools,case,timeout=45):
     from websockets.asyncio.client import connect
     status=copy.deepcopy(case['fixture_status']) if 'fixture_status' in case else fixture(case['context'])
-    version = case.get('fixture_version','ct46' if case.get('ct46') else 'ct45')
+    version = case.get('fixture_version','ct45')
     host_await_input = bool(case.get('host_stt_events') or case.get('host_text_input'))
     host_input_mode = ('platform_stt_events' if case.get('host_stt_events') else
                        'simulated_recognized_text' if case.get('host_text_input') else 'simulated_initial_input')
@@ -280,14 +293,6 @@ async def capture_case(connection,tools,case,timeout=45):
                             receipt=timed_status(case['initial_motion'],timeline[-1]['ms']-input_ms,name,args)
                         else:
                             receipt=simulated_reply(status,name,args)
-                        if 'rpc_error' not in receipt and (version == 'ct47' or (version == 'ct46' and name.endswith('get_status'))):
-                            helper = Path(__file__).resolve().parents[1] / 'build/lingxi-schema-export/status-fixture'
-                            output = subprocess.run([str(helper), version], input=json.dumps(receipt),
-                                text=True, capture_output=True, check=True).stdout.strip()
-                            if version == 'ct47':
-                                fields = json.loads(output)
-                                if name.endswith('get_status'): receipt.update(fields)
-                            else: receipt['status_facts'] = output
                         if name.endswith('stop') and 'rpc_error' not in receipt:status=copy.deepcopy(receipt);status['result']='ok'
                         if 'rpc_error' in receipt:
                             rpc_error=dict(message=receipt['rpc_error'])
@@ -368,7 +373,7 @@ async def run(args):
         raise ValueError('followups require synthetic speech and firmware host')
     if getattr(args, 'raw_text', False):
         for case in cases: case['raw_text']=True
-    version = 'timed_host' if timed else 'ct47' if getattr(args,'ct47',False) else 'ct46' if getattr(args,'ct46',False) else 'ct45'
+    version = 'timed_host' if timed else 'ct45'
     speed_host=getattr(args,'speed_host',None)
     if speed_host and not getattr(args,'synthetic_speech',False):
         raise ValueError('speed host requires synthetic speech')
@@ -474,8 +479,6 @@ if __name__=='__main__':
     versions.add_argument('--firmware-host',type=Path,help='Use actual MCP dispatch and guard for the fixed corpus preconditions')
     versions.add_argument('--speed-host',choices=('idle','thirty_second_forward70','voice_offline','wifi_offline'),help='Use timed firmware speed/status receipts for a synthetic utterance')
     versions.add_argument('--timed-host',action='store_true',help='Use read-only host firmware receipts at observed RPC offsets')
-    versions.add_argument('--ct47', action='store_true', help='Include fault recovery in candidate receipts')
-    versions.add_argument('--ct46', action='store_true', help='Use candidate status facts compiled from status_facts.h')
     args=p.parse_args()
     try:asyncio.run(run(args))
     except Exception as error:

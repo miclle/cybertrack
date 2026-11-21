@@ -4,12 +4,13 @@ import argparse
 import json
 from pathlib import Path
 
-from capture_lingxi import firmware_profile, firmware_replay
+from capture_lingxi import firmware_profile, firmware_replay, has_ct78_effects
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def check(executable):
+    legacy = has_ct78_effects(executable)
     corpus = json.loads((ROOT/"docs/validation/voice-cases.json").read_bytes())
     assert len(corpus["cases"]) == 80 and {c["id"] for c in corpus["cases"]} == {f"V{i:03d}" for i in range(1,81)}
     for case in corpus["cases"]:
@@ -20,7 +21,15 @@ def check(executable):
             calls.append(dict(inspect_ms=60000))
         rows = firmware_replay(executable, profile,
                                [dict(input_text=case['text'],elapsed_ms=0), *calls], await_stt=True)
-        for wire in rows[:-1]:
+        for call, wire in zip(case["expected_calls"], rows[:-1]):
+            if not legacy and call["name"] == "self.tank.ignition":
+                assert "Unknown tool" in wire["error"]["message"] and rows[-1]["starts_this_boot"] == 0
+                continue
+            if not legacy and call["name"] == "self.tank.sequence" and any(
+                "ignition_ms" in step for step in json.loads(call["arguments"]["steps_json"])
+            ):
+                assert "error" in wire and rows[-1]["starts_this_boot"] == 0
+                continue
             assert "result" in wire, (case["id"], wire)
             receipt = json.loads(wire["result"]["content"][0]["text"])
             assert receipt["result"] in ("accepted", "ok"), (case["id"], receipt)

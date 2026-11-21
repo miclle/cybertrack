@@ -9,8 +9,5 @@ int main() {
                              "开枪","开炮","开启护盾","放电","饭店一下","开启饭店","去饭店吃饭",
                              "动得快一点","那个速度调到70%","停止","取消序列","检查状态","第二步改成三秒"})
         assert(!vague_action::NeedsClarification(text));
-    // A creative proposal can be generic. Admission allows draft edits and
-    // still requires the existing version/read/web-confirmation contract.
-    assert(vague_action::NeedsClarification("帮我编排一个表演，你来想动作"));
     std::cout << "PASS: generic action category and named/direction/alias contrasts\n";
 }

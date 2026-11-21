@@ -15,7 +15,8 @@ EVIDENCE = ROOT / 'docs/validation/evidence/ct71-full-stt'
 def check(executable):
     baseline = json.loads((EVIDENCE / 'playback-baseline.json').read_bytes())
     old = {(row['suite'], row['id']): row for row in baseline['results']}
-    targets = {'V025', 'V026', 'V027'}
+    # Old ignition calls and four-lane sequences must leave feedback audible.
+    retired_requests = {'V025', 'V026', 'V027', 'V028', 'V031', 'V032', 'V033', 'V034', 'V035', 'V036'}
     results, negative = [], []
 
     def packets(row):
@@ -29,11 +30,11 @@ def check(executable):
         for row in trace['results']:
             count = packets(row)
             expected = {key: old[suite, row['id']][key] for key in ('suppressed', 'audible')}
-            if suite == 'voice' and row['id'] in targets:
-                expected = dict(suppressed=sum(expected.values()), audible=0)
+            if suite == 'voice' and row['id'] in retired_requests:
+                expected = dict(suppressed=0, audible=sum(expected.values()))
             assert count == expected, (suite, row['id'], count, expected)
             results.append(dict(suite=suite, id=row['id'], completed=row['completed'], **count))
-            if suite != 'voice' or row['id'] not in {'V017','V018','V019','V021','V022','V023',*targets}:
+            if suite != 'voice' or row['id'] not in {'V017','V018','V019','V021','V022','V023'}:
                 continue
             assert len(row['calls']) == len(row['simulated_receipts']) == 1
             field = row['calls'][0]['name'].split('.')[-1] + '_last_duration_ms'
@@ -63,7 +64,7 @@ def check(executable):
                 got = packets(changed)
                 assert got == dict(suppressed=0, audible=sum(count.values())), (row['id'], mutation, got)
                 negative.append(dict(id=row['id'], mutation=mutation, all_audio_preserved=True))
-    assert len(results) == 88 and len(negative) == 81
+    assert len(results) == 88 and len(negative) == 54
     names = ['firmware/esp32-audio/voice_feedback.h', 'firmware/esp32-audio/spoken_playback.h','firmware/esp32-audio/spoken_effects.h','firmware/esp32-audio/spoken_duration.h',
              'scripts/replay_lingxi_feedback.cc', 'scripts/check_effect_alias_feedback.py']
     return dict(scope='Offline playback only; original 88 captures unchanged; mismatches synthetic; no new model calls or device audio',
