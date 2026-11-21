@@ -99,7 +99,7 @@ ct78 已移除表演编辑与预览。包内旧 compose 轨迹仅供复算历史
 | 源码与构建依据 | `{firmware['source_version']}` |
 | 最近一次应用部署 | `{firmware['recorded_deployment']}` |
 
-## 从七种文本记录分别重算成绩
+## 复算文本与合成语音记录
 
 解压后在本目录运行。只需要 Python 3.9 或更高版本。
 
