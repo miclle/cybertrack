@@ -45,4 +45,4 @@ IDF_PATH=/path/to/esp-idf python3 -m unittest discover \
 
 原 ct75 前后快照离线重跑得到[默认严格报告](evidence/nvs-config-review/strict.json)与[显式例外报告](evidence/nvs-config-review/reviewed.json)：前后各 59 个逻辑项，变化仍为 `phy/cal_data` 和 `websocket/token`；范围外字节保持。严格返回 1、明确指定两项例外后返回 0，两个报告均保留 `all_logical_values_unchanged=false`。原始快照不公开，公开合成夹具用于复现比较规则，不能冒充复算原始设备数据。
 
-这是对[ct75 部署](ct75-deployment.md)同一份快照的离线复核，不是新部署或新采样；不覆盖原首次失败，也不改变无线校准更新原因未知的结论。记录见[验证摘要](evidence/nvs-config-review/verification.json)。
+这是对[ct75 部署](../../firmware/esp32-audio/startup-ct75.json)同一份快照的离线复核，不是新部署或新采样；不覆盖原首次失败，也不改变无线校准更新原因未知的结论。记录见[验证摘要](evidence/nvs-config-review/verification.json)。

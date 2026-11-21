@@ -27,7 +27,7 @@ ct79 是 v2 的未部署固件候选。点火与狂暴模式已退役，旧网�
 
 序列整单校验、步骤内多路并发、各路独立截止；全步结束并满足冷却才进入下一步。行走／喷水／泡泡关闭间隔 200 ms。停止、来源失效、Wi-Fi 断开、故障或网页抢占取消待执行步骤，恢复后不补做。详细见[序列契约](../docs/action-sequences.md)。
 
-ct78 不再注册 `compose`，不接受 `show_edit`／`show_confirm`，状态不再输出 `show_draft`、`draft_status_facts` 或草稿能力。仅讨论、预览或暂不执行的可识别请求拒绝启动／调速，停止仍直接处理。[退役边界](../docs/validation/theatre-removal.md)
+ct78 不再注册 `compose`，不接受 `show_edit`／`show_confirm`，状态不再输出 `show_draft`、`draft_status_facts` 或草稿能力。仅讨论、预览或暂不执行的可识别请求拒绝启动／调速，停止仍直接处理。[退役边界](../docs/validation/evidence/ct78-theatre-removal/no-theatre.json)
 
 ## 状态与事实边界
 
@@ -35,7 +35,7 @@ ct78 不再注册 `compose`，不接受 `show_edit`／`show_confirm`，状态不
 - `logical_outputs.left/right` 为有符号 PWM 百分比，范围 −100..100（非零最小绝对值 60）；喷水和泡泡为布尔值。无轮速、水流、电量或液位反馈，`physical_feedback=false`。
 - 序列通过 `sequence_active/step/steps/result` 报告；`waiting` 是步骤间等待，不能说全部完成。故障、忙碌、冷却、取消或过期均不自动重试。
 - 距离只在 `distance.valid=true`、`error=none`、`age_ms<=500` 时可用，无效为 null。前向距离不是移动里程或道路畅通证明。
-- 距离不足 50 cm 滴声；ct77 须连续 3 个不同有效近距样本才提示，远距／无效／过期或超过 500 ms 的采样间隔后重新确认。确认后 40–50 cm 每 800 ms，小于 40 cm 每 400 ms，与行走和保护开关独立，对话期间暂缓；避障停车不等待声音确认。[验证与部署边界](../docs/validation/range-beep-confirmation.md)
+- 距离不足 50 cm 滴声；ct77 须连续 3 个不同有效近距样本才提示，远距／无效／过期或超过 500 ms 的采样间隔后重新确认。确认后 40–50 cm 每 800 ms，小于 40 cm 每 400 ms，与行走和保护开关独立，对话期间暂缓；避障停车不等待声音确认。[验证与部署边界](../docs/ultrasonic-ranging.md#距离提示音)
 - `proximity.auto_avoidance_enabled` 默认 false，仅网页切换，网页与语音共用。开启时小于 15 cm 停前进／至少 20 cm 解锁，需新指令；无效读数不解除已有锁定。`capabilities.auto_avoidance=false` 表示无自动绕行。
 
 ct43 引入 `recent_command`，保留进入动作适配器的最近一次请求结果，查询不覆盖。它不是最后停机原因；字段、未捕获范围与只读解释见[状态解释](../docs/status-explanation.md)。
@@ -49,6 +49,6 @@ ct43 引入 `recent_command`，保留进入动作适配器的最近一次请求�
 
 ## 拒绝与验证
 
-固件按本轮输入校验动作。含糊动作可能返回 `action_unspecified`，完整否定表达可能返回 `input_negated`。失败后不为同一输入重试或换工具补做。活动中或等待中的全停优先，查询可用于查看回执。[输入隔离](../docs/validation/voice-input-guard.md) · [否定与停止](../docs/validation/negative-input-admission.md)
+固件按本轮输入校验动作。含糊动作可能返回 `action_unspecified`，完整否定表达可能返回 `input_negated`。失败后不为同一输入重试或换工具补做。活动中或等待中的全停优先，查询可用于查看回执。[输入隔离](../docs/validation/evidence/ct62-voice-turn/replay.json) · [否定与停止](esp32-audio/verification-ct71.json)
 
 当前构建、已部署应用、语音失败样例和待验的实际效果统一见[当前状态](../docs/current-status.md)。历史版本的接口说明保存在提交 `04ed36b` 的 `firmware/CAPABILITIES-history.md`。

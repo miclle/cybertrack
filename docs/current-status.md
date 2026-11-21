@@ -11,7 +11,7 @@
 ## 现场与语音
 
 - ct73 架空前进 500 ms，60% PWM 时两侧均未转动，100% 时两侧转动并停止。单次 BOOT 提前停止、松开后保持停止，以及一次真人语音左转，均有现场反馈。低占空比原因、地面停止距离和完整故障矩阵待测。[现场记录](validation/ct73-deployment.md)
-- ct74 现场确认对话期间普通测距滴声暂缓，回复不卡。结束恢复、移远不补播和再次靠近三项当时跳过。ct77 加入连续三次近距采样确认后，用户反馈偶发滴声明显减少。[ct74 听感](validation/ct74-deployment.md) · [ct77 反馈](validation/range-beep-confirmation.md)
+- ct74 现场确认对话期间普通测距滴声暂缓，回复不卡。结束恢复、移远不补播和再次靠近三项当时跳过。ct77 加入连续三次近距采样确认后，用户反馈偶发滴声明显减少。[ct74 听感](validation/ct74-deployment.md) · [ct77 反馈](ultrasonic-ranging.md#距离提示音)
 - ct78 角色用合成普通话经过平台识别和无输出主机复测，两轮定向集各 16/16，完整集 33/35。“快一点”漏调速，另一条识别丢失“先别执行”后主机接受前进。ct79 的本地合成输入回归未覆盖真人拾音、平台工具选择或扬声器听感。[ct78 失败样例](validation/ct78-stop-duration.md) · [当前待办](TODO.md)
 
 ## 统一软件检查
@@ -24,6 +24,6 @@ python3 scripts/check_firmware_current.py \
   --deployed-bin build/firmware-ct78/xiaozhi.bin
 ```
 
-准备好同版上游源码后，可从仓库根目录运行 `python3 scripts/verify_improvements.py --source build/xiaozhi-ct79-src` 发起本地软件检查。
+准备好同版上游源码后，按[固件主机验证](validation/firmware-host.md)运行 ct79 的退役请求、停止与恢复检查。
 
-ct79 记录包含 9 个工具、28 个拒绝与停止案例，以及 13 类场景各 5 个触发时刻的停止回放。软件回执、输出关断和机械停止分别验收。[版本清单](../firmware/current.json) · [软件检查入口](../scripts/verify_improvements.py) · [整机验收](verification-plan.md)
+ct79 记录包含 9 个工具、28 个拒绝与停止案例，以及 13 类场景各 5 个触发时刻的停止回放。软件回执、输出关断和机械停止分别验收。[版本清单](../firmware/current.json) · [整机验收](verification-plan.md)

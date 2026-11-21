@@ -1,122 +1,15 @@
-# 通过完整固件主机验证原话
+# 固件主机验证
 
-> 本页为对应旧版本的历史验证；涉及的表演编辑已退役，不代表 ct78 能力。[当前退役说明](theatre-removal.md)
+在主机上验证 ct79 的九个工具、请求分发、参数校验、回执和停止逻辑。时钟、测距和 IO 由主机模拟。实际平台选用哪个工具、扬声器是否播报、履带何时停稳，需要分别采集。
 
-
-此前完整固定集将前置状态附在用户原话前，并由静态夹具返回接受。实际控制守卫、参数拒绝和动作计时已有单独检查。本入口把这些环节连接起来，保留历史测试，另验证只发送用户原话的真实平台调用。
-
-## 复用范围
-
-主机程序从 prepared 源码提取实际 DoToolCall、Property／McpTool 序列化、十二个工具注册及回调、动作票据入口、Reply 序列化，并编译同版控制守卫。它复用默认参数、校验、票据去重、来源仲裁、拒绝结果、序列、计时与取消。
-
-Application::Schedule 默认在主机立即执行；输入代际测试可显式推迟回调，再由 flush 事件执行队列。时间由输入发送后的调用时刻驱动，以最长 5 ms 的步长推进控制循环。没有 GPIO、串口、HTTP 设备或输出回调。测距固定为 600 mm，由真实 Reading 序列化器生成新鲜读数。
-
-回执里的 device_id／boot_id 是固定桩值，source／actuator_backend 等常量沿用序列化源码；执行位置由外层 scope、主机二进制摘要及构建清单共同标识。主机检查不测实际调度延迟、驱动、供电、声音、机械输出或传感器。
-
-## 三个明确场景
-
-| 原固定集前置条件 | 主机初始化 |
-|---|---|
-| 在线、空闲、四路关闭、距离有效 | 输出关闭，模拟 600 mm 新鲜读数 |
-| 70% 前进，原截止尚未到 | 前进 30 秒、70%，从输入发送时刻开始计时 |
-| 可能有动作或序列运行，明确停止 | 前进 30 秒后吹泡泡一秒的活动序列 |
-
-场景从原语料的 context 显式映射，未知条件拒绝运行，不静默退回空闲。前置动作通过独立的引导请求建立。初始化后清空引导请求的去重记录，再进入平台 RPC 会话，避免有效的负编号与引导编号碰撞；草稿和逻辑前置状态保留。平台实际 RPC 编号原样送入分发器，同一平台会话内的重复编号仍触发真实去重。
-
-历史文本采集默认模拟一次初始识别输入。合成语音与 `--firmware-host` 合用时，现改为让主机等待真实 STT：只把输入发送后平台实际返回的每条转写事件送入 `CyberTrackVoiceInput`，不从测试原话补填，不去重、不丢弃空转写。工具先到就按未有新输入处理。两种模式分别标为 `simulated_initial_input` 和 `platform_stt_events`，不能混作识别时序证据。
-
-工具请求由实际分发器验证后才进入回调。MCP 结果原样转交平台，错误也保持原消息。轨迹保存调用、平台编号、完整结果、参数与操作回执。结束时按实际结束时刻重新计算最终状态，未发生调用的用例也有终态。
-
-## 编译与独立协议检查
-
-需要完整 checkout、已准备的同版固件源码和 ESP-IDF cJSON，不自动下载或刷写。
+准备与候选版本一致的小智源码后，在仓库根目录运行：
 
 ```sh
-python3 scripts/build_firmware_host.py --source build/xiaozhi-ct62-src --output build/full-firmware-host
-python3 scripts/check_firmware_host.py --executable build/full-firmware-host/firmware_host
-python3 scripts/check_voice_turn.py --executable build/full-firmware-host/firmware_host
+python3 scripts/build_firmware_host.py --source build/xiaozhi-ct79-src --output build/ct79-full-host
+python3 scripts/check_no_theatre.py --executable build/ct79-full-host/firmware_host --output output/validation/ct79-refusals.json
+python3 scripts/replay_stop_matrix.py --source build/xiaozhi-ct79-src
 ```
 
-构建器核对 prepared 的控制头文件与仓库来源，生成含二进制及输入摘要的 manifest.json。协议检查把固定集的 80 份预期调用作为合成测试输入，通过实际分发和回调核对守卫，再测非法参数、未知工具、重复编号和无效停止请求。停止场景另推进至第 60 秒，检查后续步骤没有恢复。它验证主机工具链，不构成 80 条模型成绩。
+核对源码、角色与本地镜像的身份见[统一软件检查](../current-status.md#统一软件检查)。ct79 构建记录中，退役请求与停止共 28 例，停止矩阵覆盖 13 类场景各 5 个触发时刻。[ct79 构建与回归](../../firmware/esp32-audio/verification-ct79.json)
 
-统一检查的 `--source` 路径会运行构建器、协议及[输入失败隔离检查](voice-input-guard.md)。输入代际检查使用八组合成输入／队列事件和四条已保留的平台请求；不会生成新的模型成绩。开始平台采集前，应复制二进制到固定文件，避免其他构建替换正在使用的程序。下文 ct61 平台命令与成绩保留其历史版本。
-
-新增的第九组协议检查验证 `--await-stt` 启动：无转写时拒绝动作，查询和停止可用，空白不能解锁，非空转写开启新轮次。该开关仅属于无设备主机，不是远端工具参数。
-
-## 合成语音与真实 STT 事件
-
-沿用[合成上行](synthetic-uplink.md)的准备环境，在采集命令中同时指定 `--synthetic-speech --firmware-host <固定主机程序>`，不再模拟初始识别文本。输入事件与原 RPC 请求按顺序保存在 `host_calls`，每次回执仍由实际分发器和守卫产生。
-
-```sh
-python3 scripts/review_stt_host.py --capture <实际采集.json或.json.gz> --executable <同一固定主机程序>
-```
-
-复核器先检查二进制摘要和输入边界，再逐次重放真实 STT／工具前缀，核对完整 MCP 回执与最终状态。没有工具的否定／澄清用例不会伪造回执。报告列出工具早于非空 STT 的用例，供单独核查。时间为采集循环处理事件的时刻，不是声学延迟或精密网络测量。无结束事件继续记未完成；不得把等待超时自动当作成功静默。
-
-## 平台采集
-
-```sh
-cp build/full-firmware-host/firmware_host build/firmware-host-ct61-frozen
-python3 scripts/capture_lingxi.py \
-  --connection "$CONNECTION_FILE" --tools "$TOOL_SCHEMAS" \
-  --role firmware/esp32-audio/role-prompt.txt --model deepseek-v4-flash \
-  --corpus docs/validation/voice-cases.json \
-  --firmware-host build/firmware-host-ct61-frozen --raw-text --audio-packets \
-  --output "$NEW_CAPTURE"
-```
-
-连接文件仍须私有且不提交。此模式要求原话文本或合成语音，前置状态不写入提示词，模型通过实际工具回执获得状态；它自带真实参数校验和状态事实，不能叠加独立参数门或实验状态转换。每例用实际调用前缀重放，同一模型输入不会被额外填入预期答案。
-
-平台评分继续使用原 80 条预期调用和顺序。缺查询、参数错误、额外调用、禁止动作和缺例都继续计分。历史带场景输入与本组原话输入分别保留，跨组差异需要结合输入、回执和采样共同解释。
-
-## 本次完整平台结果
-
-使用 ct61 工具定义、5991 字符角色和固定的主机二进制，按上述原话文本入口完成 80 次独立会话。所有请求、完整 MCP 结果与结束时终态均已按实际 RPC 编号、调用前缀和时刻重新计算，逐项一致。[评分和来源摘要](evidence/ct61-firmware-host/voice-score.json) · [完整轨迹](evidence/ct61-firmware-host/full-voice.json.gz) · [主机清单](evidence/ct61-firmware-host/host-manifest.json)
-
-| 项目 | 结果 |
-|---|---|
-| 正常结束 | 80/80 |
-| 工具、参数及调用顺序 | 78/80，97.5% |
-| 明确停止 | 8/8 直接全停 |
-| 禁止动作样本中的控制调用 | 0 |
-| V075，昨天说过“左转” | 额外查询一次状态，未启动动作 |
-| V079，动一下那个东西 | 额外查询一次状态后追问，未启动动作 |
-
-原 ct57 带场景前缀与静态夹具为 77/80，当前原话与完整主机为 78/80。两轮工具版本、输入、回执和采样均有变化，分别保存，不能将差异归因于单个改动。参数与顺序达标不代表回复语义、声学识别或成功静默全部通过。
-
-主机入口的协议回归另覆盖 80 份合成预期请求、五种非法请求、重复 RPC 编号和非法停止参数。此部分没有调用模型，不计入上述 80 次平台成绩。带 prepared 源码的统一检查共十组通过，其中改进测试原为 67 项；补充禁止混用实验转换的回归后，完整改进测试 68 项通过；再补充打包命令行回归后，69 项通过。
-
-本轮继续保留引用／含糊请求的多余查询，语音旁白和重复确认另见已有回归。真人收音、扬声器、实际动作、家庭和电源等验收按原计划执行，最近板上版本仍为 ct45。
-
-## 编排与并发改稿场景
-
-原八条编排的两种前置条件也可显式映射到主机。C001 使用空草稿，其余使用两步、版本 7 的已保存草稿。初始化通过真实状态读取、票据和保存回执建立语音来源草稿；每次保存消费前置读取，平台开始本轮时没有可借用的旧读取许可。
-
-[独立冲突用例](compose-conflict-cases.json)在本轮第一次 compose 之前，通过真实 WebDraft 将第二步改为三秒。网页心跳在虚拟时间内每 200 ms 维持，确保新稿持续存在。该事件是固定顺序的并发故障注入，不测真实线程时延。模型接收原话，无法从提示词预知冲突。
-
-协议检查覆盖八份合成预期调用、跳过读取的拒绝，以及并发写入后 draft_changed 和网页版本保留；均为本地主机回归。平台实际结果与不完整会话另行记录，不能以预期请求回放替代模型成绩。
-
-## 编排固定集与冲突平台结果
-
-本轮仍用 ct61 工具和同一 5991 字符角色，只发送原话。首次采集在 C005 超过 55 秒等待上限后中断；随后只补跑尚未执行的 C006–C008。两份原始轨迹和摘要保留，合并文件逐行保留首次结果，不是单一连续会话，也没有用诊断重跑替换失败。[完整评分](evidence/ct61-firmware-host/full-suite-scores.json) · [汇总轨迹](evidence/ct61-firmware-host/full-compose.json.gz) · [逐条审阅](evidence/ct61-firmware-host/compose-review.json) · [本轮主机清单](evidence/ct61-firmware-host/compose-host-manifest.json)
-
-| 项目 | 结果 |
-|---|---|
-| 固定八条工具、参数及顺序 | 6/8，未达门槛 |
-| 收到正常结束 | 7/8；C005 未完整结束，继续记失败 |
-| C001 新建、C002 单步修改、C003 删除、C004 取消 | 调用与最终草稿均匹配；未启动动作 |
-| C005，开始这段表演 | 多查状态并播报长篇规则分析，等待超时；没有越过网页确认启动 |
-| C008，第二步短一点 | 多查一次状态后追问秒数，未修改草稿 |
-| 本轮八条启动计数和逻辑输出 | 均为零／关闭 |
-
-C005 的独立诊断重跑正常结束，用时约 19.1 秒且无工具调用。它不进入首次固定集成绩，也不能证明波动已修复。[首次 C001–C005](evidence/ct61-firmware-host/compose.json.gz) · [未执行的后三条](evidence/ct61-firmware-host/compose-rest.json.gz) · [单独诊断](evidence/ct61-firmware-host/c005-diagnostic.json.gz)
-
-C005、C006、C008 的回复仍包含“用户说”“根据规则”等过程文字，C001 等还有保存前旁白。记录的是平台回复／TTS 文本，未做扬声器听感验收。后续需核对平台当前模型、模型专属推理参数和回复通道，再分别比较旁白、等待时间、工具匹配和停止表现；不能仅凭这些文字断定某个开关已开启。当前桌面工具报告锁屏，尚未完成该项设置回读，本轮没有改平台参数。官方[模型配置接口](https://linx.qiniu.com/docs/xrobot/api/llm)要求按具体模型取得自定义配置 schema，不能套用未经确认的通用参数。
-
-另以 X001 原话独立跑三次：模型查到版本 7 后，主机在第一次编辑前将网页稿改为版本 8、第二步泡泡三秒。三次实际编辑均收到 `draft_changed`，均未自动重试或声称两秒保存成功，最终网页版本和三秒时长保留，启动计数为零。回复仍有操作旁白；三次确定顺序的故障注入不代表任意线程竞争或现场表现通过。[第一次](evidence/ct61-firmware-host/conflict-1.json.gz) · [第二次](evidence/ct61-firmware-host/conflict-2.json.gz) · [第三次](evidence/ct61-firmware-host/conflict-3.json.gz)
-
-本轮十二条会话的完整 MCP 结果、回执和结束状态均经捕获时的固定二进制重放一致。随后修复主机初始化编号碰撞，以新二进制重新播放既有 80 条原话、八条编排、三次冲突和一次诊断，共 92 行；完整 MCP 结果和终态仍逐项一致。原捕获清单不覆盖，新版本另存[主机清单](evidence/ct61-firmware-host/current-host-manifest.json)和[兼容回放结果](evidence/ct61-firmware-host/host-replay-check.json)。这些是离线复核，没有新增模型会话或板上部署。
-
-后续[两条原话的工具说明对照](history/compose-routing.md)完成十二次独立会话。诊断版严格匹配从 2/6 到 5/6，但有一次未给新时长就将泡泡改为半秒，因此不采纳。它不替换本页固定集或超时记录。
-
-2026-10-31 后续已恢复内置页面，完成[模型设置回读和温度对照](model-parameters.md)。思考原已关闭；低温度六次仍未解决问题，已恢复原值。前文锁屏描述保留为当时状态。
+平台转写与模型工具选择的检查方法见[灵矽隔离联调](lingxi-capture.md)。

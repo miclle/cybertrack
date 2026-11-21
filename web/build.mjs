@@ -30,18 +30,12 @@ const named = new Map(sections.flatMap(([, entries]) => entries));
 const documents = new Map([
   ...[...tracked].filter(file => file.startsWith("docs/") && file.endsWith(".md") && fs.existsSync(path.join(root, file))),
   ...named.keys(),
-  "hardware/architecture/README.md",
-  "hardware/schematic/README.md",
-  "hardware/model/lean-print/README.md",
-  "firmware/README.md",
-  "firmware/CAPABILITIES.md",
-  "firmware/esp32-audio/README.md",
 ].map(file => [file, named.get(file) ?? read(file).match(/^# +(.+)$/m)?.[1] ?? file]));
 const other = [...documents].filter(([file]) => !named.has(file) && file !== "docs/README.md");
 const navGroups = [
   ["三维模型", models.map(model => [modelPage(model), model.title])],
   ...sections.map(([title, entries]) => [title, entries.map(([file, label]) => [docPage(file), label])]),
-  ["更多文档", other.map(([file, label]) => [docPage(file), label])],
+  ...(other.length ? [["更多文档", other.map(([file, label]) => [docPage(file), label])]] : []),
 ];
 const attachments = new Set([prototype]);
 
@@ -50,7 +44,7 @@ function shell(page, title, content, model = false) {
   const navLink = (to, label) =>
     `<a href="${link(to)}"${to === page ? ' aria-current="page"' : ""}>${escape(label)}</a>`;
   const nav = navGroups.map(([label, entries]) => {
-    const open = label !== "更多文档" || entries.some(([file]) => file === page);
+    const open = !["样机记录", "更多文档"].includes(label) || entries.some(([file]) => file === page);
     return `<details data-group="${escape(label)}"${open ? " open" : ""}><summary>${escape(label)}</summary>
       <div>${entries.map(([file, name]) => navLink(file, name)).join("")}</div></details>`;
   }).join("");

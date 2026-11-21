@@ -107,32 +107,9 @@ ct78 已移除表演编辑与预览。包内旧 compose 轨迹仅供复算历史
 python3 scripts/review_lingxi_reference.py
 ```
 
-从此包复现的是记录所列工具版本和角色的结果，历史基线保留在 scores，ct57 工具回归保留在 candidate_scores，ct61 原话和真实固件主机的 80 条语义及八条编排另在 firmware_host_scores，编排首次超时继续列入 incomplete。程序核对清单列出的文件，并逐条比较捕获的工具调用、参数和调用顺序。输出分别列出七种文本记录的成绩、偏差用例编号与门槛判断，并标明工具来源和输入模式。命令成功表示复现了记录，编排组原有的失败会保留。平台输入采用文本，静态夹具与真实固件主机分别标识。完整主机源码与构建入口见[固件主机验证](docs/validation/firmware-host.md)，参考包离线复算工具选择，控制守卫重放需要完整 checkout。真人拾音、扬声器听感、机械动作和家庭体验需分别验收。
+评分器用包内语料和回放重新计算工具匹配、缺例、禁止调用和停止偏差，并校验清单中的文件。各组保留采集时的模型、角色、输入方式和固件版本。未完成会话和失败用例随结果列出。
 
-- [模型参数与选型对照](docs/validation/model-parameters.md)中的未采纳结果也可复算：`qwen_scores` 保留完整语义／编排与漏停、禁止调用，`doubao_compose_scores` 保留八条编排及畸形参数失败。豆包二十条语义仅为诊断子集，不在本包重算完整语义成绩。
-- [单次识别失败隔离](docs/validation/voice-input-guard.md)另附 ct62 构建及离线控制回放证据；C005 拒绝后换用 sequence 被拦截，零启动。它不是新的模型成绩，原模型禁止调用记录保持不变。重跑控制回放仍需完整 checkout 与 prepared 固件，本包仅核对所存材料的完整性。
-- [真实 STT 驱动主机](docs/validation/ct62-stt-host.md)的二十条合成语音另在 `spoken_stt_review` 复算转写与工具结果：19 条正常结束并匹配，V017 未收到结束事件仍保留。事件与控制回执完整重放需要完整 checkout 和固定主机二进制。
-- [ct71 完整语音固定集](docs/validation/full-stt-ct71.md)以 `full_speech_scores` 单独复算原 80／8 条的严格工具 77/80、6/8，V064 禁止调用及额外查询继续失败。逐字转写 76/80、8/8，数字书写差异与同音分别说明；这是合成普通话经实际 STT，不是文本、真人拾音或实物验收。包内仅含评分字段与识别文字，完整事件／回执／终态需 checkout。七组历史文本及旧二十条未完成记录保持。
-- [ct72 效果播放](docs/validation/effect-alias-feedback.md)附构建、88 条事件回放和 81 条不一致变体摘要：只新增抑制普通点火 64 包，超限与其他包计数保持。它不是新模型成绩或设备部署，重跑音频包策略需完整 checkout 和 C++ 回放器。
-- [ct73 四路组合播放](docs/validation/four-lane-feedback.md)附十二条定向实际 STT 摘要，严格工具 10/12、逐字转写 11/12，F004 共享时长与 F010 识别／漏调用失败保留。五条匹配成功组合新增抑制 277 包，五十条不一致保留音频，原 88 条计数保持；本包核对摘要，不新增完整评分组，完整 RPC／播放重放需 checkout 与固定二进制。
-- [模型工具轮中继原型](tools/lingxi-relay/README.md)附源码、仅引用环境变量名的配置样例和 17 项本地 HTTP／SSE 测试。所有模型返回是测试夹具，未访问外部服务或设备；工具后分析、工具轮必要限制与缓冲时延仍是未通过的采纳条件，不新增模型评分。解压后可运行单独的 `test_llm_relay.py`，仅临时使用回环端口，不创建灵矽模型或云端绑定。
-- [ct63 播放匹配](docs/validation/plan-feedback.md)另附构建和离线回放：同一批事件新增抑制 216 个组合／序列／目标速度确认包，保留 397 个状态／否定／澄清包；30 条合成不一致保留音频。这不是新的模型成绩，播放重跑需要完整 checkout 和同版 C++ 回放器。
-- [回执收敛试验](docs/validation/compact-model-receipts.md)未采纳；`compact_receipt_scores` 保留 5/8 及 C006 的禁止调用。字节减少不等于语义通过，该试验结束后恢复 ct63，当前候选见版本表。实验源码补丁和完整 MCP 重放需要按专题中的范围复核。
-- [停止说明对照](docs/validation/stop-negation.md)也未采纳；`stop_negation_scores` 重算语义 77/80 与编排 6/8，继续标明 V064 误停、V079 含糊请求擅自前进。八条明确停止通过不能抵消禁止调用；诊断 ct65 未部署，该试验结束后恢复 ct63，当前候选见版本表。
-- [ct66 即时停止回执](docs/validation/stop-dispatch.md)附八组实际 MCP 调度回放、回执分配失败和十三组软件检查摘要。停止校验后同步完成，不留二次回调；公开工具及角色不变。包内只核对记录完整性，重跑控制与分配失败测试需要完整 checkout，不是第八组模型成绩，也没有部署。
-- [状态话术限定](docs/validation/stop-role-qualifier.md)的十四次定向对照未采纳：两组严格匹配均 6/7，停止静默均 0/3，平台原角色已恢复。它不是第八组完整模型评分。[灵矽联调反馈](docs/validation/platform-tts-feedback.md)另提供过程文字进入 TTS 与含糊改稿的事件、复核步骤和协作问题，尚未代发。
-- [ct67 历史改稿门禁](docs/validation/history/relative-draft-duration.md)附十三组原生回放、分类器来源和二十条定向合成语音审阅。真实 STT／终态均 20/20，严格调用 14/20，六条多查状态，在线实际澄清拒绝为零。它不替代旧 `spoken_stt_review` 或增加第八组完整文本评分；本包只核对这些材料的完整性，完整控制重放需 checkout 与对应主机。
-- [ct68 含糊动作门禁](docs/validation/vague-action-admission.md)附二十六组原生对照和二十条定向真实 STT 审阅：严格调用 16/20、终态 20/20，三次猜测执行被拒绝。八条含糊输入零启动不能抵消模型错误或多余查询；本包仅核对材料完整性，不增加第八组固定成绩。原始压缩轨迹及完整控制重放需要 checkout，最近部署仍为 ct45。
-- [意图分流角色对照](docs/validation/intent-routing-role.md)72 次文本会话未采纳：两组均 29/36，各有禁止调用，停止静默均 0/6；原角色与参数已恢复。该主机使用占位识别文本，不能计作 STT 门禁覆盖。本包只核对所存材料完整性，不增加第八组固定模型成绩；完整回放需要 checkout 与原始轨迹。
-- [文本模拟识别输入](docs/validation/capture-recognized-input.md)把原话注入新的文本主机，与旧占位和真实 STT 分别标记。二十四条会话终态匹配，严格调用 20/24，两次猜测动作被拒绝；它不是 ASR 或第八组固定成绩。本包核对材料，完整控制复算仍需 checkout 与固定主机。
-- [原生数组步骤对照](docs/validation/native-step-inputs.md)另附两组共 176 次模拟识别原话的文本审阅：基线 77/80、5/8，候选 75/80、4/8，全部回执和终态重放一致；候选未采纳，主线和平台原角色已恢复。包内只核对研究材料完整性，原始压缩轨迹及完整控制重放仍需 checkout 与固定主机；七组既有评分和 STT 未完成记录保持。
-- [ct70 原始 JSON 准入](docs/validation/mcp-raw-json.md)独立修复机器人零字符前缀截断，16 组普通／消毒器回放通过，88 条历史平台请求的回执和终态保持；十二项工具与角色未改，未部署。包内只核对控制材料完整性，不新增模型成绩；重跑需要完整 checkout、固定主机及工具链。
-- [ct71 否定输入保护](docs/validation/negative-input-admission.md)附最终 46 组原生／消毒器、初版五项停止反例和 24 次实际 STT 审阅：严格工具 23/24、控制状态 24/24，一次空闲误停被拒绝。最终对捕获的完整回执／终态重放一致，活动／等待时始终保留全停，原模型与过程播报仍待完成。包内核对文本摘要，完整压缩记录、编译和控制重放需要 checkout，不增加第八组固定成绩。
-- [编排说明对照](docs/validation/compose-routing.md)保留了未采纳的诊断：工具匹配增多，但一次含糊请求擅自缩短草稿。包内含摘要与两份定义，原始轨迹和该诊断的重算需要完整 checkout。
-- 场景、平台职责与复用方法见[灵矽解决方案](docs/lingxi-solution.md)。
-- 家长可阅读[上手卡](docs/quick-start.md)，开发者可核对[设备能力](firmware/CAPABILITIES.md)及[角色源文件](firmware/esp32-audio/role-prompt.txt)。
-- 语义偏差见[候选完整回归](docs/validation/lingxi-ct57-full.md)与[历史基线](docs/validation/lingxi-role-5991.md)，远端音频包的端侧处理见[播放回归](docs/validation/lingxi-ct51-playback.md)。
-- 供电与机械设计见[硬件架构](hardware/architecture/README.md)和[整机模型辅助设计](tools/model-design/README.md)。
+修改 v2 时从[当前状态](docs/current-status.md)、[设备接口](firmware/CAPABILITIES.md)与[角色源](firmware/esp32-audio/role-prompt.txt)开始。新角色的现场语音验证按[验收矩阵](docs/verification-plan.md)执行。
 
 主持人可用浏览器打开包内的[亲子观察单](tools/family-study/observer.html)，逐户下载匿名记录，用 `python3 scripts/analyze_family_sessions.py 记录目录/*.json` 分别汇总原型与实机结果。
 
