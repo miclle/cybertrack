@@ -187,15 +187,13 @@ int main() {
     assert(held.Heartbeat(0,hs));
     assert(is(held.EffectStart(0,hs,3,held.window,Target::BubblesOnly),"accepted"));
     assert(held.Heartbeat(0,hs));
-    assert(is(held.WebAction(0,hs,4,held.window,Target::IgnitionOnly,0,0,nullptr,0,5000),"accepted"));
     for(unsigned t=150;t<=45000;t+=150) {
         held.Tick(t,false);
         assert(is(held.DriveRenew(t,hs,1,held.drive_renewal),"renewed"));
         assert(is(held.EffectRenew(t,hs,Target::WaterOnly,2,held.water_hold.renewal),"renewed"));
         assert(is(held.EffectRenew(t,hs,Target::BubblesOnly,3,held.bubbles_hold.renewal),"renewed"));
         assert(held.guard.Moving() && held.guard.Watering() && held.guard.Bubbling());
-        assert(held.guard.Starts()==4);
-        if(t>=5100) assert(!held.guard.Igniting());
+        assert(held.guard.Starts()==3);
     }
     assert(is(held.EffectStop(45001,hs,Target::WaterOnly,2),"ok"));
     assert(!held.guard.Watering() && held.guard.Bubbling() && held.guard.Moving());
@@ -222,8 +220,6 @@ int main() {
         assert(x.Heartbeat(749,sid));x.Tick(749,false);assert(x.guard.Watering() || x.guard.Bubbling());
         x.Tick(750,false);assert(!x.guard.Watering() && !x.guard.Bubbling());
         assert(is(x.EffectRenew(750,sid,target,2,2),"hold_cancelled"));
-        assert(!x.guard.RenewWebEffect(751,Target::IgnitionOnly,600));
-        assert(is(x.EffectStart(751,sid,4,x.window,Target::IgnitionOnly),"invalid_request"));
         assert(x.Heartbeat(949,sid));
         assert(is(x.EffectStart(949,sid,4,x.window,target),"not_ready_or_busy"));
         x.Tick(950,false);assert(x.Heartbeat(950,sid));
@@ -247,6 +243,6 @@ int main() {
         assert(!is(x.EffectRenew(102,sid,Target::WaterOnly,1,1),"renewed"));
         assert(!is(x.EffectRenew(102,sid,Target::BubblesOnly,2,1),"renewed"));
     }
-    std::cout << "PASS: held water/bubbles: 45 s concurrent continuity, per-lane release/expiry, nonce replay, late release/start, cooldown, no ignition lease, all stop/fault paths\n";
+    std::cout << "PASS: held water/bubbles: 45 s concurrent continuity, per-lane release/expiry, nonce replay, late release/start, cooldown, all stop/fault paths\n";
     std::cout << "PASS: web ownership/replay and held drive: 15 s continuous run, single start, release/renew reorder, 600 ms boundary, no heartbeat-only renewal, per-lane release, global cancellation and cooldown\n";
 }

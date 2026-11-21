@@ -14,13 +14,5 @@ inline constexpr SpokenEffectAlias spoken_effects[] = {
     {"射击","water","water_last_duration_ms",1,1000,30000,true},
     {"吹泡泡","bubbles","bubbles_last_duration_ms",2,1000,30000,true},
     {"开炮","bubbles","bubbles_last_duration_ms",2,1000,30000,true},
-    {"点火","ignition","ignition_last_duration_ms",3,1000,5000,true},
-    {"放电","ignition","ignition_last_duration_ms",3,1000,5000,true},
-    {"闪电","ignition","ignition_last_duration_ms",3,1000,5000,true},
-    {"护盾","ignition","ignition_last_duration_ms",3,1000,5000,true},
-    {"打火","ignition","ignition_last_duration_ms",3,1000,5000,true},
-    {"电击","ignition","ignition_last_duration_ms",3,1000,5000,true},
     // The homophone correction is limited to independent short phrases.
-    {"饭店","ignition","ignition_last_duration_ms",3,1000,5000,false},
-    {"狂暴模式","frenzy","frenzy_last_duration_ms",-1,5000,30000,false}
 };

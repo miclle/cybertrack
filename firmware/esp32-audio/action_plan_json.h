@@ -4,7 +4,7 @@
 #include <string>
 
 // JSON is a string property because the upstream MCP schema supports scalar properties.
-// Require five action fields and optional speed_percent; reject unknown/duplicate keys.
+// Require four action fields and optional speed_percent; reject unknown/duplicate keys.
 inline bool ParseActionPlan(const std::string& text, ActionPlan& plan) {
     plan = {};
     if (text.empty() || text.size() > 4096 || text.find('\0') != std::string::npos ||
@@ -18,7 +18,7 @@ inline bool ParseActionPlan(const std::string& text, ActionPlan& plan) {
         auto& step = plan.steps[i];
         const auto* direction = cJSON_GetObjectItemCaseSensitive(item, "direction");
         const auto* speed = cJSON_GetObjectItemCaseSensitive(item, "speed_percent");
-        valid = cJSON_IsObject(item) && cJSON_GetArraySize(item) == (speed ? 6 : 5) && cJSON_IsString(direction);
+        valid = cJSON_IsObject(item) && cJSON_GetArraySize(item) == (speed ? 5 : 4) && cJSON_IsString(direction);
         if (speed) {
             valid = valid && cJSON_IsNumber(speed) && speed->valuedouble >= 60 && speed->valuedouble <= 100 &&
                 speed->valuedouble == speed->valueint;
@@ -29,10 +29,10 @@ inline bool ParseActionPlan(const std::string& text, ActionPlan& plan) {
             if (!std::strcmp(direction->valuestring, name)) { step.direction = name; known = true; break; }
         }
         valid = valid && known;
-        const char* keys[] = {"move_ms", "water_ms", "bubbles_ms", "ignition_ms"};
-        int* values[] = {&step.move_ms, &step.water_ms, &step.bubbles_ms, &step.ignition_ms};
-        const int limits[] = {INT_MAX, 30000, 30000, 5000};
-        for (unsigned j = 0; valid && j < 4; ++j) {
+        const char* keys[] = {"move_ms", "water_ms", "bubbles_ms"};
+        int* values[] = {&step.move_ms, &step.water_ms, &step.bubbles_ms};
+        const int limits[] = {INT_MAX, 30000, 30000};
+        for (unsigned j = 0; valid && j < 3; ++j) {
             const auto* v = cJSON_GetObjectItemCaseSensitive(item, keys[j]);
             valid = cJSON_IsNumber(v) && v->valuedouble >= 0 && v->valuedouble <= limits[j] &&
                 v->valuedouble == v->valueint;

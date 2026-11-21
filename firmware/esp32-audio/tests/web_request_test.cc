@@ -31,13 +31,14 @@ int main() {
     assert(parse(R"({"operation":"move","sequence":1,"window":1,"direction":"left","duration_ms":1})"));
     assert(parse(R"({"operation":"water","sequence":4294967295,"window":1,"duration_ms":30000})"));
     assert(parse(R"({"operation":"move_and_water","sequence":1,"window":1,"direction":"backward","move_duration_ms":3000,"water_duration_ms":30000})"));
-    for(const char* op : {"bubbles", "ignition"}) {
+    {
+        const char* op = "bubbles";
         const auto prefix=std::string("{\"operation\":\"")+op+"\",\"sequence\":1,\"window\":1,\"duration_ms\":";
         for(const char* ms : {"1", "1000", "5000"}) {
             const auto json=prefix+ms+"}";
             auto root=cJSON_Parse(json.c_str()); WebCommand cmd; assert(ParseWebCommand(root,cmd));
-            assert(cmd.target==(!strcmp(op,"bubbles")?AudioActionGuard::BubblesOnly:AudioActionGuard::IgnitionOnly));
-            assert((!strcmp(op,"bubbles")?cmd.bubbles_ms:cmd.ignition_ms)==atoi(ms));
+            assert(cmd.target==AudioActionGuard::BubblesOnly);
+            assert(cmd.bubbles_ms==atoi(ms));
             cJSON_Delete(root);
         }
         for(const char* ms : {"0","-1","30001","1.5","true","\"1000\"","1,\"duration_ms\":1","1,\"extra\":0"})
@@ -58,14 +59,10 @@ int main() {
     assert(!parse(R"({"operation":"water_start","sequence":1,"sequence":1})"));
     assert(!parse(R"({"operation":"water_renew","hold_id":1,"renewal":1.5})"));
     assert(!parse(R"({"operation":"bubbles_stop","hold_id":1,"hold_id":2})"));
-    for (const char* ms : {"1", "5000", "10000", "30000"}) {
-        const auto json = std::string(R"({"operation":"frenzy","sequence":1,"window":1,"duration_ms":)") + ms + "}";
-        auto root = cJSON_Parse(json.c_str()); WebCommand cmd;
-        assert(ParseWebCommand(root, cmd) && cmd.frenzy_ms == atoi(ms));
-        assert(std::string(cmd.operation) == "frenzy"); cJSON_Delete(root);
+    for (const char* op : {"ignition", "frenzy"}) {
+        const auto json = std::string(R"({"operation":")") + op + R"(","sequence":1,"window":1,"duration_ms":1000})";
+        assert(!parse(json.c_str()));
     }
-    for (const char* ms : {"0", "-1", "30001", "1.5", "true", "\"5000\"", "5000,\"duration_ms\":5000", "5000,\"extra\":1"})
-        assert(!parse((std::string(R"({"operation":"frenzy","sequence":1,"window":1,"duration_ms":)") + ms + "}").c_str()));
     const char* bad[]={
         "null", "[]", "{}",
         R"({"operation":"drive_start","sequence":1,"window":1,"direction":"left","duration_ms":1000})",

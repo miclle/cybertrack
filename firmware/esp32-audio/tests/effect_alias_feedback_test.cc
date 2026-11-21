@@ -16,10 +16,6 @@ int main() {
         {"喷水","water","water_last_duration_ms",1000}, {"发射","water","water_last_duration_ms",1000},
         {"开枪","water","water_last_duration_ms",1000}, {"射击","water","water_last_duration_ms",1000},
         {"吹泡泡","bubbles","bubbles_last_duration_ms",1000}, {"开炮","bubbles","bubbles_last_duration_ms",1000},
-        {"点火","ignition","ignition_last_duration_ms",1000}, {"放电","ignition","ignition_last_duration_ms",1000},
-        {"闪电","ignition","ignition_last_duration_ms",1000}, {"护盾","ignition","ignition_last_duration_ms",1000},
-        {"打火","ignition","ignition_last_duration_ms",1000}, {"电击","ignition","ignition_last_duration_ms",1000},
-        {"饭店","ignition","ignition_last_duration_ms",1000}, {"狂暴模式","frenzy","frenzy_last_duration_ms",5000}
     };
     int positive=0, preserved=0;
     for (const auto& alias : aliases) {
@@ -49,10 +45,11 @@ int main() {
             ++preserved;
         }
     }
-    for (const char* text : {"饭店吃饭","去饭店","附近饭店","还在饭店吗","开启饭店吃饭","放电八秒","护盾三十秒"}) {
+    for (const char* text : {"饭店吃饭","去饭店","点火","放电","闪电","护盾","打火","电击","狂暴模式"}) {
         feedback.Input(text);
         auto* args=request(1000);
         assert(!feedback.BeginCall("self.tank.ignition",args));
+        assert(!feedback.BeginCall("self.tank.frenzy",args));
         feedback.StartSpeech();
         assert(!feedback.Muted());
         cJSON_Delete(args);
@@ -60,9 +57,9 @@ int main() {
     }
     for (const char* raw : {R"({"duration_ms":2000,"extra":1})",R"({"duration_ms":"2000"})",R"({"duration_ms":true})",
                             R"({"duration_ms":1000})",R"({"duration_ms":2000.5})"}) {
-        feedback.Input("放电两秒");
+        feedback.Input("喷水两秒");
         auto* args=cJSON_Parse(raw);
-        assert(!feedback.BeginCall("self.tank.ignition",args));
+        assert(!feedback.BeginCall("self.tank.water",args));
         feedback.StartSpeech();
         assert(!feedback.Muted());
         cJSON_Delete(args);
@@ -70,16 +67,16 @@ int main() {
     }
     auto* args=request(2000);
     for (const char* raw : {
-        R"({"operation":"ignition","result":"rejected","fault":"none","ignition_last_duration_ms":2000})",
-        R"({"operation":"ignition","result":"accepted","ignition_last_duration_ms":2000})",
-        R"({"operation":"ignition","result":"accepted","fault":"output_fault","ignition_last_duration_ms":2000})",
-        R"({"operation":"water","result":"accepted","fault":"none","ignition_last_duration_ms":2000})",
-        R"({"operation":"ignition","result":"accepted","fault":"none","last_duration_ms":2000})",
-        R"({"operation":"ignition","result":"accepted","fault":"none","water_last_duration_ms":2000})",
-        R"({"operation":"ignition","result":"accepted","fault":"none","last_duration_ms":2000,"ignition_last_duration_ms":1000})"
+        R"({"operation":"water","result":"rejected","fault":"none","water_last_duration_ms":2000})",
+        R"({"operation":"water","result":"accepted","water_last_duration_ms":2000})",
+        R"({"operation":"water","result":"accepted","fault":"output_fault","water_last_duration_ms":2000})",
+        R"({"operation":"bubbles","result":"accepted","fault":"none","water_last_duration_ms":2000})",
+        R"({"operation":"water","result":"accepted","fault":"none","last_duration_ms":2000})",
+        R"({"operation":"bubbles","result":"accepted","fault":"none","water_last_duration_ms":2000})",
+        R"({"operation":"water","result":"accepted","fault":"none","last_duration_ms":2000,"water_last_duration_ms":1000})"
     }) {
-        feedback.Input("放电两秒");
-        auto token=feedback.BeginCall("self.tank.ignition",args);
+        feedback.Input("喷水两秒");
+        auto token=feedback.BeginCall("self.tank.water",args);
         assert(token);
         feedback.Receipt(token,raw);
         feedback.StartSpeech();
@@ -87,12 +84,12 @@ int main() {
         ++preserved;
     }
     for (int timing=0;timing<3;++timing) {
-        feedback.Input("放电两秒");
-        auto token=feedback.BeginCall("self.tank.ignition",args);
+        feedback.Input("喷水两秒");
+        auto token=feedback.BeginCall("self.tank.water",args);
         if (timing==0) feedback.Input("现在什么状态？");
         if (timing==1) feedback.StartSpeech();
         if (timing==2) feedback.BeginCall("self.tank.get_status",nullptr);
-        feedback.Receipt(token,receipt("ignition","ignition_last_duration_ms",2000).c_str());
+        feedback.Receipt(token,receipt("water","water_last_duration_ms",2000).c_str());
         feedback.StartSpeech();
         assert(!feedback.Muted());
         ++preserved;

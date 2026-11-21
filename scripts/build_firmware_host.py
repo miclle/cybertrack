@@ -29,8 +29,8 @@ def build(source, idf, output, sanitize=False):
     start = registration.index("    server.AddTool(")
     end = registration.index('    ESP_LOGI("CT_AUDIO", "READY', start)
     callbacks = registration[start:end]
-    if callbacks.count("server.AddTool(") != 11:
-        raise ValueError("expected 11 robot tools")
+    if callbacks.count("server.AddTool(") != 9:
+        raise ValueError("expected 9 robot tools")
     (output / "host_registration.inc").write_text(callbacks)
     start = registration.index("int CyberTrackVoiceTurn(")
     end = registration.index("void CyberTrackActionLink(", start)

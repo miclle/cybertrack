@@ -22,8 +22,8 @@ int main(int argc, char** argv) {
     if (sequence) {
         ActionPlan plan;
         plan.count = 2;
-        plan.steps[0] = {"forward", 1000, 0, 1000, 0};
-        plan.steps[1] = {"none", 0, 0, 4000, 0};
+        plan.steps[0] = {"forward", 1000, 0, 1000};
+        plan.steps[1] = {"none", 0, 0, 4000};
         assert(source == "voice");
         assert(!std::strcmp(s.VoicePlan(0, s.VoiceClaim(0, 1, G::PlanMode), plan), "accepted"));
     } else if (event == "pointer_release") {
@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
         }
         s.Tick(now, event == "boot" && now >= trigger && now < trigger + 50);
         if (web_connected && now % 200 == 0) assert(s.Heartbeat(now, owner));
-        std::printf("%u %s %s %s %d %s %u %u %d %d %d\n", now, s.MoveSource(), s.WaterSource(), s.BubblesSource(),
-                    s.plan_active, s.plan_result, s.guard.Starts(), s.owner, s.guard.Igniting(), s.wifi, s.voice);
+        std::printf("%u %s %s %s %d %s %u %u %d %d\n", now, s.MoveSource(), s.WaterSource(), s.BubblesSource(),
+                    s.plan_active, s.plan_result, s.guard.Starts(), s.owner, s.wifi, s.voice);
     }
 }

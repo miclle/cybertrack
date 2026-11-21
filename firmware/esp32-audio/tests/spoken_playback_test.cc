@@ -27,9 +27,9 @@ int main() {
     assert(plan.Parse("先前进，再左转"));
     assert(plan.count == 2 && plan.steps[0].ms[0] == 1000 && plan.steps[1].ms[0] == 880);
     assert(plan.Parse("前进五秒同时喷水两秒和吹泡泡"));
-    assert(plan.steps[0].ms == (std::array<int, 4>{5000, 2000, 1000, 0}));
+    assert(plan.steps[0].ms == (std::array<int, 3>{5000, 2000, 1000}));
     assert(plan.Parse("前进五秒同时喷水和吹泡泡"));
-    assert(plan.steps[0].ms == (std::array<int, 4>{5000, 5000, 5000, 0}));
+    assert(plan.steps[0].ms == (std::array<int, 3>{5000, 5000, 5000}));
     std::string many = "前进一秒";
     for (unsigned i = 1; i < 16; ++i) many += "然后左转";
     assert(plan.Parse(many) && plan.count == 16);
@@ -58,7 +58,7 @@ int main() {
     }
     cJSON_Delete(both);
 
-    const char* steps = R"([{"direction":"forward","move_ms":1000,"water_ms":0,"bubbles_ms":0,"ignition_ms":0},{"direction":"left","move_ms":2000,"water_ms":0,"bubbles_ms":2000,"ignition_ms":0}])";
+    const char* steps = R"([{"direction":"forward","move_ms":1000,"water_ms":0,"bubbles_ms":0},{"direction":"left","move_ms":2000,"water_ms":0,"bubbles_ms":2000}])";
     auto* sequence = Args(steps);
     const char* sequence_receipt = R"({"operation":"sequence","result":"accepted","fault":"none","sequence_active":true,"sequence_step":1,"sequence_steps":2,"sequence_source":"voice","sequence_result":"running","move_direction":"forward","move_last_duration_ms":1000,"move_source":"voice","move_speed_percent":100})";
     const char* sentence = "先前进一秒，再同时左转两秒和吹泡泡两秒。";
@@ -71,9 +71,9 @@ int main() {
         assert(!Playback(sentence, "self.tank.sequence", sequence, raw));
         cJSON_free(raw);cJSON_Delete(reply);
     }
-    for (const char* bad : {R"([{"direction":"forward","move_ms":1000,"water_ms":0,"bubbles_ms":0,"ignition_ms":0}])",
-                            R"([{"direction":"left","move_ms":1000,"water_ms":0,"bubbles_ms":0,"ignition_ms":0},{"direction":"forward","move_ms":2000,"water_ms":0,"bubbles_ms":2000,"ignition_ms":0}])",
-                            R"([{"direction":"forward","move_ms":1000,"water_ms":0,"bubbles_ms":0,"ignition_ms":0,"speed_percent":80},{"direction":"left","move_ms":2000,"water_ms":0,"bubbles_ms":2000,"ignition_ms":0}])",
+    for (const char* bad : {R"([{"direction":"forward","move_ms":1000,"water_ms":0,"bubbles_ms":0}])",
+                            R"([{"direction":"left","move_ms":1000,"water_ms":0,"bubbles_ms":0},{"direction":"forward","move_ms":2000,"water_ms":0,"bubbles_ms":2000}])",
+                            R"([{"direction":"forward","move_ms":1000,"water_ms":0,"bubbles_ms":0,"speed_percent":80},{"direction":"left","move_ms":2000,"water_ms":0,"bubbles_ms":2000}])",
                             "[]", "null", "[", "[] trailing"}) {
         auto* args = Args(bad);
         assert(!Playback(sentence, "self.tank.sequence", args, sequence_receipt));

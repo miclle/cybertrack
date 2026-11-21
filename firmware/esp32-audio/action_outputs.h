@@ -9,7 +9,6 @@ class AudioActionOutputs {
 public:
     static constexpr gpio_num_t WaterPin = GPIO_NUM_18;
     static constexpr gpio_num_t BubblesPin = GPIO_NUM_17; // Board-config free; physical wiring pending.
-    static constexpr gpio_num_t IgnitionPin = GPIO_NUM_21; // One MOS for both modules; wiring pending.
     static constexpr unsigned Duty = 255; // Full 8-bit PWM is the default.
     static unsigned SpeedDuty(int value) { return ((value < 0 ? -value : value) * Duty + 50) / 100; }
     bool fault = false;
@@ -28,13 +27,13 @@ public:
     } water_pad;
     int WaterPadLevel() const { return water_input_ready ? gpio_get_level(WaterPin) : -1; }
     bool Init() {
-        uint64_t mask = (1ULL << WaterPin) | (1ULL << BubblesPin) | (1ULL << IgnitionPin);
+        uint64_t mask = (1ULL << WaterPin) | (1ULL << BubblesPin);
         for (const auto& b : bridges) {
             mask |= (1ULL << b.enable) | (1ULL << b.in1) | (1ULL << b.in2);
             if (!Check(gpio_set_level(b.enable, 0)) || !Check(gpio_set_level(b.in1, 0)) ||
                 !Check(gpio_set_level(b.in2, 0))) return false;
         }
-        if (!Check(gpio_set_level(WaterPin, 0)) || !Check(gpio_set_level(BubblesPin, 0)) || !Check(gpio_set_level(IgnitionPin, 0))) return false;
+        if (!Check(gpio_set_level(WaterPin, 0)) || !Check(gpio_set_level(BubblesPin, 0))) return false;
         gpio_config_t pins{};
         pins.pin_bit_mask = mask; pins.mode = GPIO_MODE_OUTPUT;
         pins.pull_down_en = GPIO_PULLDOWN_ENABLE;
@@ -56,12 +55,11 @@ public:
         }
         return Apply(false, 0, 0);
     }
-    bool Apply(bool water, int left, int right, bool bubbles = false, bool ignition = false) {
+    bool Apply(bool water, int left, int right, bool bubbles = false) {
         if (fault) { EmergencyOff(); return false; }
         if (left < -100 || left > 100 || right < -100 || right > 100 ||
             (left != 0 && left > -60 && left < 60) || (right != 0 && right > -60 && right < 60)) return Check(-1);
         // Change only requested lanes; stopping any one must not pulse the others.
-        if ((!applied || ignition != ignition_on) && !ignition && !Check(gpio_set_level(IgnitionPin, 0))) return false;
         // Touch only the changing lane: starting/stopping water must not pulse
         // motor enables, and motor transitions must not interrupt water.
         if (!applied || left != applied_left || right != applied_right) {
@@ -87,14 +85,12 @@ public:
         }
         if ((!applied || water != water_on) && !Check(gpio_set_level(WaterPin, water))) return false;
         if ((!applied || bubbles != bubbles_on) && !Check(gpio_set_level(BubblesPin, bubbles))) return false;
-        if ((!applied || ignition != ignition_on) && ignition && !Check(gpio_set_level(IgnitionPin, 1))) return false;
         if (water) {
             if (!water_on) water_pad = {};
             water_pad.Sample(WaterPadLevel(), left != 0 || right != 0);
         } else {
             water_pad.off = WaterPadLevel();
         }
-        ignition_on = ignition;
         bubbles_on = bubbles;
         water_on = water; applied_left = left; applied_right = right; applied = true;
         return true;
@@ -109,7 +105,7 @@ private:
     };
     unsigned ready_mask = 0;
     bool water_input_ready = false;
-    bool water_on = false, bubbles_on = false, ignition_on = false, applied = false;
+    bool water_on = false, bubbles_on = false, applied = false;
     int applied_left = 0, applied_right = 0;
     bool Check(esp_err_t error) {
         if (error == ESP_OK) return true;
@@ -118,7 +114,6 @@ private:
     void EmergencyOff() {
         // Best effort after an API error: try every output, then reclaim enables
         // as GPIO low. A latched fault prevents any later PWM reactivation.
-        (void)gpio_set_level(IgnitionPin, 0);
         (void)gpio_set_level(WaterPin, 0);
         (void)gpio_set_level(BubblesPin, 0);
         for (unsigned i = 0; i < 2; ++i)

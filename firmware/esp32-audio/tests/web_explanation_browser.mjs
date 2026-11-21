@@ -18,9 +18,9 @@ try {
    requests.push(path);
    if(path==='/api/pair') return route.fulfill({json:{result:'ok',token:'fake-local-only'}});
    if(path==='/api/state') return route.fulfill({json:{result:'ok',request_sequence:++sequence,window:sequence,state:'STOPPED',boot_held:false,
-    capabilities:{move:true,water:true,bubbles:true,ignition:true,speed_control:true},
+    capabilities:{move:true,water:true,bubbles:true,speed_control:true},
     move_remaining_ms:0,move_cooldown_ms:0,water_remaining_ms:0,water_cooldown_ms:0,
-    bubbles_remaining_ms:0,ignition_remaining_ms:0,
+    bubbles_remaining_ms:0,
     recent_command:{valid:true,operation:'move',result:'not_ready_or_busy',source:'voice',age_ms:300},
     proximity:{forward_blocked:false,auto_avoidance_enabled:false}}});
    return route.abort();

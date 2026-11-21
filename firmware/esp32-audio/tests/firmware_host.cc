@@ -106,8 +106,8 @@ int main(int argc, char** argv) {
     } else if (profile == "corpus_sequence") {
         ActionPlan plan;
         plan.count=2;
-        plan.steps[0]={"forward",30000,0,0,0,70};
-        plan.steps[1]={"none",0,0,1000,0};
+        plan.steps[0]={"forward",30000,0,0,70};
+        plan.steps[1]={"none",0,0,1000};
         int ticket=sessions.VoiceClaim(clock_ms,INT_MIN,AudioActionGuard::PlanMode);
         Reply("sequence",ticket,0,nullptr,0,0,nullptr,&plan);
         if (!sessions.plan_active || !guard.Moving()) return 2;

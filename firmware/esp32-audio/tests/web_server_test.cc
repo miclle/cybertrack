@@ -70,6 +70,12 @@ int main() {
                           R"({"operation":"show_edit","sequence":4,"window":1,"draft":{"edit":"cancel","revision":1,"step":0,"steps_json":""}})"}) {
         r=api("/api/action",old);assert(Api(&r)==ESP_FAIL && calls==before);
     }
+    for (const auto retired : {"ignition", "frenzy"}) {
+        r=api("/api/action", std::string(R"({"operation":")") + retired +
+                             R"(","sequence":4,"window":1,"duration_ms":1000})");
+        assert(Api(&r)==ESP_FAIL && calls==before);
+        assert(r.sent==R"({"result":"unsupported_operation"})");
+    }
     // Check raw escaped zeros before cJSON can truncate command values or keys.
     for (const auto bad : {
         R"({"operation":"set_speed\u0000extra","sequence":5,"window":1,"speed_percent":100})",

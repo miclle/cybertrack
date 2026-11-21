@@ -6,15 +6,16 @@
 #include <iostream>
 static std::array<int,49> levels;
 static std::array<int,4> pwm, duty;
-static unsigned calls, fail_at, motor_writes, water_writes, bubbles_writes, ignition_writes;
+static unsigned calls, fail_at, motor_writes, water_writes, bubbles_writes;
 static bool water_input_enabled = false;
 static int forced_water_pad = -1;
 static bool fail() { return ++calls == fail_at; }
 esp_err_t gpio_set_level(int pin, uint32_t v) {
+    assert(pin != 21);
     if (fail()) return -1;
     // Never change direction while either bridge is enabled.
     if (pin==9 || pin==10 || pin==12 || pin==13) assert(!pwm[2] && !pwm[3]);
-    if (pin==18) ++water_writes; else if (pin==17) ++bubbles_writes; else if (pin==21) ++ignition_writes; else ++motor_writes;
+    if (pin==18) ++water_writes; else if (pin==17) ++bubbles_writes; else ++motor_writes;
     levels[pin]=v; return 0;
 }
 esp_err_t gpio_set_direction(int pin, int) {
@@ -24,7 +25,10 @@ esp_err_t gpio_set_direction(int pin, int) {
     if (pin==11) pwm[3]=0;
     return 0;
 }
-esp_err_t gpio_config(const gpio_config_t*) { return fail() ? -1 : 0; }
+esp_err_t gpio_config(const gpio_config_t* cfg) {
+    assert(!(cfg->pin_bit_mask & (1ULL << 21)));
+    return fail() ? -1 : 0;
+}
 esp_err_t gpio_input_enable(int pin) {
     assert(pin==18);
     if(fail()) return -1;
@@ -52,12 +56,12 @@ esp_err_t ledc_update_duty(int, int ch) {
     if(fail()) return -1;
     ++motor_writes; pwm[ch]=duty[ch]; return 0;
 }
-static void reset() { levels.fill(0); pwm.fill(0); duty.fill(0); calls=fail_at=motor_writes=water_writes=bubbles_writes=ignition_writes=0; water_input_enabled=false;forced_water_pad=-1; }
+static void reset() { levels.fill(0); pwm.fill(0); duty.fill(0); calls=fail_at=motor_writes=water_writes=bubbles_writes=0; water_input_enabled=false;forced_water_pad=-1; }
 static void off() {
-    for(int p : {8,9,10,11,12,13,17,18,21}) assert(!levels[p]);
+    for(int p : {8,9,10,11,12,13,17,18}) assert(!levels[p]);
     assert(!pwm[2] && !pwm[3]);
 }
-struct State { bool water; int left, right; bool bubbles=false, ignition=false; };
+struct State { bool water; int left, right; bool bubbles=false; };
 int main() {
     reset(); AudioActionOutputs a; assert(a.Init()); off();
     const unsigned init_calls=calls;
@@ -69,15 +73,15 @@ int main() {
         {false,0,0},{true,0,0},{false,100,100},{true,100,100},
         {false,-100,-100},{true,-100,-100},{false,-100,100},{true,-100,100},{false,100,-100},{true,100,-100}};
     std::vector<State> states;
-    for(auto state:base_states) for(bool b:{false,true}) for(bool i:{false,true}) {
-        state.bubbles=b; state.ignition=i; states.push_back(state);
+    for(auto state:base_states) for(bool b:{false,true}) {
+        state.bubbles=b; states.push_back(state);
     }
     for(const auto& from:states) for(const auto& to:states) {
-        reset();AudioActionOutputs x;assert(x.Init());assert(x.Apply(from.water,from.left,from.right,from.bubbles,from.ignition));
-        calls=motor_writes=water_writes=bubbles_writes=ignition_writes=0;
-        assert(x.Apply(to.water,to.left,to.right,to.bubbles,to.ignition));
+        reset();AudioActionOutputs x;assert(x.Init());assert(x.Apply(from.water,from.left,from.right,from.bubbles));
+        calls=motor_writes=water_writes=bubbles_writes=0;
+        assert(x.Apply(to.water,to.left,to.right,to.bubbles));
         const unsigned transition_calls=calls;
-        assert(levels[18]==to.water && levels[17]==to.bubbles && levels[21]==to.ignition);
+        assert(levels[18]==to.water && levels[17]==to.bubbles);
         // Assembled chassis: A drives right, B drives left; positive stays forward.
         assert(pwm[2]==(to.right?255:0)&&pwm[3]==(to.left?255:0));
         assert(levels[9]==(to.right>0)&&levels[10]==(to.right<0));
@@ -85,11 +89,10 @@ int main() {
         if(from.left==to.left&&from.right==to.right) assert(motor_writes==0);
         if(from.water==to.water) assert(water_writes==0);
         if(from.bubbles==to.bubbles) assert(bubbles_writes==0);
-        if(from.ignition==to.ignition) assert(ignition_writes==0);
         for(unsigned at=1;at<=transition_calls;++at) {
-            reset();AudioActionOutputs y;assert(y.Init());assert(y.Apply(from.water,from.left,from.right,from.bubbles,from.ignition));
+            reset();AudioActionOutputs y;assert(y.Init());assert(y.Apply(from.water,from.left,from.right,from.bubbles));
             calls=0;fail_at=at;
-            assert(!y.Apply(to.water,to.left,to.right,to.bubbles,to.ignition)&&y.fault);off();
+            assert(!y.Apply(to.water,to.left,to.right,to.bubbles)&&y.fault);off();
             assert(!y.Apply(true,100,100));off();
         }
     }
@@ -140,14 +143,14 @@ int main() {
     // Every nonempty lane combination must survive the transition into a later
     // step, with independent deadlines, not merely report active guard flags.
     for (const char* direction : {"forward", "backward", "left", "right"}) {
-        for (unsigned mask=1; mask<16; ++mask) {
+        for (unsigned mask=1; mask<8; ++mask) {
             reset(); AudioActionOutputs output; assert(output.Init());
             ControlSessions session;
             session.WifiLink(0,true); session.VoiceLink(0,true); session.Tick(0,false);
             ActionPlan plan; plan.count=2;
-            plan.steps[0]={"forward",5000,0,0,0};
+            plan.steps[0]={"forward",5000,0,0};
             plan.steps[1]={mask&1 ? direction : "none", mask&1 ? 1000 : 0,
-                mask&2 ? 1500 : 0, mask&4 ? 2000 : 0, mask&8 ? 500 : 0};
+                mask&2 ? 1500 : 0, mask&4 ? 2000 : 0};
             assert(!std::strcmp(session.VoicePlan(0,
                 session.VoiceClaim(0,1,AudioActionGuard::PlanMode),plan),"accepted"));
             int left=0,right=0; assert(AudioActionGuard::Direction(direction,left,right));
@@ -156,12 +159,11 @@ int main() {
                 session.Tick(now,false);
                 const auto& g=session.guard;
                 assert(output.Apply(g.Watering(),g.Moving()?g.left:0,g.Moving()?g.right:0,
-                                    g.Bubbling(),g.Igniting()));
+                                    g.Bubbling()));
                 const bool move=(mask&1)&&now>=5200&&now<6200;
                 const bool water=(mask&2)&&now>=5200&&now<6700;
                 const bool bubbles=(mask&4)&&now>=5200&&now<7200;
-                const bool ignition=(mask&8)&&now>=5200&&now<5700;
-                assert(levels[18]==water && levels[17]==bubbles && levels[21]==ignition);
+                assert(levels[18]==water && levels[17]==bubbles);
                 assert(pwm[2]==((now<5000||move)?255:0));
                 assert(pwm[3]==((now<5000||move)?255:0));
                 if(move) {
@@ -180,16 +182,16 @@ int main() {
         ControlSessions session; session.WifiLink(0,true); session.VoiceLink(0,true); session.Tick(0,false);
         auto& g=session.guard;
         assert(!std::strcmp(g.MoveAndWater(0,session.VoiceClaim(0,1,AudioActionGuard::Both),5000,5000,"forward"),"accepted"));
-        assert(output.Apply(true,g.left,g.right,false,false)); assert(pwm[2] && pwm[3] && levels[18]);
+        assert(output.Apply(true,g.left,g.right,false)); assert(pwm[2] && pwm[3] && levels[18]);
         session.SetForwardBlocked(100,true); session.Tick(100,false);
-        assert(output.Apply(g.Watering(),g.Moving()?g.left:0,g.Moving()?g.right:0,false,false));
+        assert(output.Apply(g.Watering(),g.Moving()?g.left:0,g.Moving()?g.right:0,false));
         assert(pwm[2]==0 && pwm[3]==0 && levels[18]==1);
         assert(levels[9]==0 && levels[10]==0 && levels[12]==0 && levels[13]==0);
         session.SetForwardBlocked(300,false); session.Tick(300,false);
         assert(!g.Moving());
     }
     std::cout << "PASS: proximity stop clears both motor PWM/direction outputs, preserves water and never resumes\n";
-    std::cout << "PASS: actual output driver 56-state concurrent transition matrix, A/right B/left mapping, untouched-lane continuity, disable-before-direction, all init/transition API failures and latched global shutdown\n";
-    std::cout << "PASS: scheduler-to-GPIO/PWM integration, four directions x 15 parallel lane combinations, second-step start and independent deadlines at 5 ms cadence\n";
+    std::cout << "PASS: actual output driver 28-state concurrent transition matrix, A/right B/left mapping, untouched-lane continuity, disable-before-direction, all init/transition API failures and latched global shutdown\n";
+    std::cout << "PASS: scheduler-to-GPIO/PWM integration, four directions x 7 parallel lane combinations, second-step start and independent deadlines at 5 ms cadence\n";
     std::cout << "PASS: GPIO18 input enable failure, independent pad readback, high/low/motor samples, per-action reset, snapshot, saturation and fault shutdown\n";
 }

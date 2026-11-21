@@ -16,4 +16,10 @@ inline bool NeedsClarification(std::string_view text) {
         if (text.find(named)!=text.npos) return false;
     return true;
 }
+// Block writes for an entire voice turn containing a retired effect.
+inline bool MentionsRetiredEffect(std::string_view text) {
+    for (std::string_view retired : {"点火", "火花", "放电", "闪电", "护盾", "打火", "电击", "狂暴模式"})
+        if (text.find(retired) != text.npos) return true;
+    return false;
+}
 } // namespace vague_action

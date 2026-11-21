@@ -353,7 +353,8 @@ async def run(args):
     if args.output.exists():raise ValueError('refusing to overwrite an existing capture')
     connection=json.loads(args.connection.read_text())
     tools=json.loads(args.tools.read_text())['tools']
-    if len(tools)!=11 or any(not t['name'].startswith('self.tank.') for t in tools):raise ValueError('expected 11 robot-only schemas')
+    if len(tools) not in (9, 11) or any(not t['name'].startswith('self.tank.') for t in tools):
+        raise ValueError('expected v2 or historical v1 robot-only schemas')
     cases=json.loads(args.corpus.read_text())['cases']
     if args.ids:
         requested=set(args.ids.split(','));cases=[c for c in cases if c['id'] in requested]

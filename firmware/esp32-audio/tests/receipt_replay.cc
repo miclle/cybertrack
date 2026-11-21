@@ -19,8 +19,8 @@ int main(int argc, char** argv) {
     } else if (profile == "sequence_forward_bubbles") {
         ActionPlan plan;
         plan.count = 2;
-        plan.steps[0] = {"forward", 4000, 0, 0, 0, 70};
-        plan.steps[1] = {"none", 0, 0, 1000, 0};
+        plan.steps[0] = {"forward", 4000, 0, 0, 70};
+        plan.steps[1] = {"none", 0, 0, 1000};
         int ticket = sessions.VoiceClaim(clock_ms, 1, AudioActionGuard::PlanMode);
         Reply("sequence", ticket, 0, nullptr, 0, 0, nullptr, &plan);
         if (!sessions.plan_active || !guard.Moving() || guard.Starts() != 1) return 2;

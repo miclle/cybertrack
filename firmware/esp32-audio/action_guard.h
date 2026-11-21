@@ -8,58 +8,51 @@ class AudioActionGuard {
 public:
     bool forward_blocked = false;
     bool BlocksForward(const char* value) const { return forward_blocked && value && !std::strcmp(value, "forward"); }
-    enum Target { MoveOnly = 1, WaterOnly = 2, Both = 3, BubblesOnly = 4, IgnitionOnly = 8, All = 15, FrenzyMode = 16, PlanMode = 32, SpeedMode = 64 };
+    enum Target { MoveOnly = 1, WaterOnly = 2, Both = 3, BubblesOnly = 4, All = 7, PlanMode = 32, SpeedMode = 64 };
     static constexpr int MoveMaxMs = INT_MAX;
     static constexpr int BubblesMaxMs = 30000;
-    static constexpr int IgnitionMaxMs = 5000;
     static constexpr unsigned CooldownMs = 200;
-    water_policy motion{}, spray{}, bubbles{}, ignition{};
-    unsigned move_duration_ms = 0, water_duration_ms = 0, bubbles_duration_ms = 0, ignition_duration_ms = 0, last_duration_ms = 0;
+    water_policy motion{}, spray{}, bubbles{};
+    unsigned move_duration_ms = 0, water_duration_ms = 0, bubbles_duration_ms = 0, last_duration_ms = 0;
     int left = 0, right = 0;
     const char* direction = "none";
 
     void Tick(uint64_t now, bool online, bool pressed, bool reset_replay = true) {
         if (reset_replay && online && !motion.online) count_ = 0;
-        const bool moving = Moving(), watering = Watering(), bubbling = Bubbling(), igniting = Igniting();
+        const bool moving = Moving(), watering = Watering(), bubbling = Bubbling();
         water_tick(&motion, now, online, pressed);
         water_tick(&spray, now, online, pressed);
         water_tick(&bubbles, now, online, pressed);
-        water_tick(&ignition, now, online, pressed);
         FinishLane(motion, now, moving);
         FinishLane(spray, now, watering);
         FinishLane(bubbles, now, bubbling);
-        FinishIgnition(now, igniting);
-        if (!online || motion.held || motion.clock_fault || spray.clock_fault || bubbles.clock_fault || ignition.clock_fault) Cancel(All);
+        if (!online || motion.held || motion.clock_fault || spray.clock_fault || bubbles.clock_fault) Cancel(All);
     }
     void NewVoiceSession() { count_ = 0; Cancel(All); }
     void CancelPending(Target target = All) { Cancel(target); }
-    static const char* Validate(Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int ignition_ms = 0, int speed_percent = 100) {
+    static const char* Validate(Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int speed_percent = 100) {
         int a = 0, b = 0;
-        if (target != MoveOnly && target != WaterOnly && target != Both && target != BubblesOnly && target != IgnitionOnly) return "invalid_request";
+        if (target != MoveOnly && target != WaterOnly && target != Both && target != BubblesOnly) return "invalid_request";
         if ((target & MoveOnly) && (move_ms < 1 || move_ms > MoveMaxMs || !Direction(value, a, b, speed_percent)))
             return "invalid_move";
         if ((target & WaterOnly) && (water_ms < 1 || water_ms > static_cast<int>(WATER_MAX_TIMED_MS)))
             return "duration_out_of_range";
         if (target == BubblesOnly && (bubbles_ms < 1 || bubbles_ms > BubblesMaxMs))
             return "duration_out_of_range";
-        if (target == IgnitionOnly && (ignition_ms < 1 || ignition_ms > IgnitionMaxMs))
-            return "duration_out_of_range";
         return nullptr;
     }
-    const char* WebRequest(uint64_t now, Target target, int move_ms, int water_ms, const char* direction, int bubbles_ms = 0, int ignition_ms = 0, int speed_percent = 100) {
-        return Execute(now, target, move_ms, water_ms, direction, bubbles_ms, ignition_ms, speed_percent);
+    const char* WebRequest(uint64_t now, Target target, int move_ms, int water_ms, const char* direction, int bubbles_ms = 0, int speed_percent = 100) {
+        return Execute(now, target, move_ms, water_ms, direction, bubbles_ms, speed_percent);
     }
     void Stop(uint64_t now) {
-        const bool moving = Moving(), watering = Watering(), bubbling = Bubbling(), igniting = Igniting();
+        const bool moving = Moving(), watering = Watering(), bubbling = Bubbling();
         Cancel(All);
         water_stop(&motion, now);
         water_stop(&spray, now);
         water_stop(&bubbles, now);
-        water_stop(&ignition, now);
         FinishLane(motion, now, moving);
         FinishLane(spray, now, watering);
         FinishLane(bubbles, now, bubbling);
-        FinishIgnition(now, igniting);
     }
     void StopMove(uint64_t now) {
         const bool moving = Moving();
@@ -79,33 +72,9 @@ public:
         water_stop(&bubbles, now);
         FinishLane(bubbles, now, bubbling);
     }
-    void StopIgnition(uint64_t now) {
-        const bool igniting = Igniting();
-        Cancel(IgnitionOnly);
-        water_stop(&ignition, now);
-        FinishIgnition(now, igniting);
-    }
     bool PlanReady(uint64_t now) const { return Ready(now, PlanMode); }
     const char* ClaimPlan(uint64_t now, int ticket) {
         return Request(now, ticket, PlanMode, 0, 0, nullptr);
-    }
-    const char* VoiceFrenzy(uint64_t now, int ticket, int duration) {
-        return Request(now, ticket, FrenzyMode, duration, 0, nullptr);
-    }
-    const char* Frenzy(uint64_t now, int duration, int speed_percent = 100) {
-        if (duration < 1 || duration > 30000 || speed_percent < 60 || speed_percent > 100 || now > UINT64_MAX - duration) return "duration_out_of_range";
-        if (!Ready(now, Both) || !Ready(now, BubblesOnly) || !Ready(now, IgnitionOnly)) return "not_ready_or_busy";
-        // Preflight all lanes before changing any output; the caller applies once under its mutex.
-        Cancel(All);
-        const int pulse = duration < 1000 ? duration : 1000;
-        if (std::strcmp(Execute(now, Both, pulse, duration, "left", 0, 0, speed_percent), "accepted") ||
-            std::strcmp(Execute(now, BubblesOnly, 0, 0, nullptr, duration), "accepted") ||
-            std::strcmp(Execute(now, IgnitionOnly, 0, 0, nullptr, 0, pulse), "accepted")) {
-            Stop(now); return "not_ready_or_busy";
-        }
-        motion.ends_at = now + duration; // Mode motion lasts until the shared mode deadline.
-        move_duration_ms = last_duration_ms = duration;
-        return "accepted";
     }
     bool RenewWebMove(uint64_t now, unsigned lease_ms) {
         if (!motion.active || !motion.online || motion.held || motion.clock_fault ||
@@ -156,14 +125,11 @@ public:
     const char* Bubbles(uint64_t now, int ticket, int duration) {
         return Request(now, ticket, BubblesOnly, 0, 0, nullptr, duration);
     }
-    const char* Ignition(uint64_t now, int ticket, int duration) {
-        return Request(now, ticket, IgnitionOnly, 0, 0, nullptr, 0, duration);
-    }
     const char* Move(uint64_t now, int ticket, int duration, const char* value, int speed_percent = 100) {
-        return Request(now, ticket, MoveOnly, duration, 0, value, 0, 0, speed_percent);
+        return Request(now, ticket, MoveOnly, duration, 0, value, 0, speed_percent);
     }
     const char* MoveAndWater(uint64_t now, int ticket, int move_ms, int water_ms, const char* value, int speed_percent = 100) {
-        return Request(now, ticket, Both, move_ms, water_ms, value, 0, 0, speed_percent);
+        return Request(now, ticket, Both, move_ms, water_ms, value, 0, speed_percent);
     }
     static bool Direction(const char* value, int& a, int& b, int speed_percent = 100) {
         if (!value || speed_percent < 60 || speed_percent > 100) return false;
@@ -181,8 +147,7 @@ public:
     bool Moving() const { return motion.active; }
     bool Watering() const { return spray.active; }
     bool Bubbling() const { return bubbles.active; }
-    bool Igniting() const { return ignition.active; }
-    unsigned Starts() const { return motion.starts + spray.starts + bubbles.starts + ignition.starts; }
+    unsigned Starts() const { return motion.starts + spray.starts + bubbles.starts; }
     static unsigned Remaining(const water_policy& p, uint64_t now) {
         return p.active && p.ends_at > now ? p.ends_at - now : 0;
     }
@@ -191,7 +156,7 @@ private:
     std::array<RequestRecord, 128> requests_{};
     unsigned count_ = 0;
     int next_ticket_ = 0;
-    uint64_t next_output_nonce_ = 0, ignition_started_ = 0;
+    uint64_t next_output_nonce_ = 0;
     static bool LaneReady(const water_policy& p, uint64_t now) {
         return p.online && !p.held && !p.clock_fault && !p.active && !p.armed &&
                now >= p.last_ms && now >= p.cooldown_until && now <= UINT64_MAX - WATER_PERMIT_MS;
@@ -199,18 +164,17 @@ private:
     bool Ready(uint64_t now, Target target) const {
         if (target == SpeedMode) return Moving() && motion.online && !motion.held && !motion.clock_fault &&
             now >= motion.last_ms && now < motion.ends_at;
-        if (target == FrenzyMode || target == PlanMode) return Ready(now, Both) && Ready(now, BubblesOnly) && Ready(now, IgnitionOnly);
-        return (target == MoveOnly || target == WaterOnly || target == Both || target == BubblesOnly || target == IgnitionOnly) &&
+        if (target == PlanMode) return Ready(now, Both) && Ready(now, BubblesOnly);
+        return (target == MoveOnly || target == WaterOnly || target == Both || target == BubblesOnly) &&
                (!(target & MoveOnly) || LaneReady(motion, now)) &&
                (!(target & WaterOnly) || LaneReady(spray, now)) &&
-               (!(target & BubblesOnly) || LaneReady(bubbles, now)) &&
-               (!(target & IgnitionOnly) || LaneReady(ignition, now));
+               (!(target & BubblesOnly) || LaneReady(bubbles, now));
     }
     void Cancel(Target target) {
         for (unsigned i = 0; i < count_; ++i)
-            if ((requests_[i].target & target) || (requests_[i].target == SpeedMode && (target & MoveOnly)) || requests_[i].target == FrenzyMode || requests_[i].target == PlanMode || target == FrenzyMode || target == PlanMode) requests_[i].pending = false;
+            if ((requests_[i].target & target) || (requests_[i].target == SpeedMode && (target & MoveOnly)) || requests_[i].target == PlanMode || target == PlanMode) requests_[i].pending = false;
     }
-    const char* Request(uint64_t now, int ticket, Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int ignition_ms = 0, int speed_percent = 100) {
+    const char* Request(uint64_t now, int ticket, Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int speed_percent = 100) {
         RequestRecord* r = nullptr;
         for (unsigned i = 0; i < count_; ++i) if (requests_[i].ticket == ticket) { r = &requests_[i]; break; }
         if (!r || !r->pending) return "cancelled_or_duplicate";
@@ -219,13 +183,12 @@ private:
         if (now < r->received || now - r->received >= 5000) return "stale_request";
         if (target == SpeedMode) return r->motion_start == motion.starts && Ready(now, SpeedMode) ? "accepted" : "not_ready_or_busy";
         if (target == PlanMode) return Ready(now, PlanMode) ? "accepted" : "not_ready_or_busy";
-        if (target == FrenzyMode) return Frenzy(now, move_ms);
-        return Execute(now, target, move_ms, water_ms, value, bubbles_ms, ignition_ms, speed_percent);
+        return Execute(now, target, move_ms, water_ms, value, bubbles_ms, speed_percent);
     }
-    const char* Execute(uint64_t now, Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int ignition_ms = 0, int speed_percent = 100) {
+    const char* Execute(uint64_t now, Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int speed_percent = 100) {
         if ((target & MoveOnly) && BlocksForward(value)) return "obstacle_blocked";
         int a = 0, b = 0;
-        if (const char* error = Validate(target, move_ms, water_ms, value, bubbles_ms, ignition_ms, speed_percent)) return error;
+        if (const char* error = Validate(target, move_ms, water_ms, value, bubbles_ms, speed_percent)) return error;
         if ((target & MoveOnly) && now > UINT64_MAX - static_cast<unsigned>(move_ms)) return "clock_fault";
         if (target & MoveOnly) Direction(value, a, b, speed_percent);
         // Both requires both lanes ready. Never start just one half of a rejected combined request.
@@ -262,22 +225,9 @@ private:
             }
             bubbles_duration_ms = bubbles_ms;
         }
-        if (target == IgnitionOnly) {
-            if (!water_arm(&ignition, now, nonce) || std::strcmp(water_request_timed(&ignition, now, nonce, ignition_ms), "accepted")) {
-                Stop(now); return "not_ready_or_busy";
-            }
-            ignition_started_ = now;
-            ignition_duration_ms = ignition_ms;
-        }
-        last_duration_ms = target == IgnitionOnly ? ignition_ms : target == BubblesOnly ? bubbles_ms : target == MoveOnly ? move_ms : target == WaterOnly ? water_ms : (move_ms > water_ms ? move_ms : water_ms);
+        last_duration_ms = target == BubblesOnly ? bubbles_ms : target == MoveOnly ? move_ms : target == WaterOnly ? water_ms : (move_ms > water_ms ? move_ms : water_ms);
         Cancel(target); // Cancel same-lane bursts; independent queued lane remains eligible.
         return "accepted";
-    }
-    void FinishIgnition(uint64_t now, bool was_active) {
-        if (!was_active || ignition.active) return;
-        // Use elapsed software ON time, including an early stop or a delayed deadline tick.
-        const uint64_t elapsed = now >= ignition_started_ ? now - ignition_started_ : UINT64_MAX;
-        ignition.cooldown_until = now <= UINT64_MAX - elapsed ? now + elapsed : UINT64_MAX;
     }
     static void FinishLane(water_policy& lane, uint64_t now, bool was_active, unsigned interval = CooldownMs) {
         // Audio-board interaction interval; leave the standalone water policy unchanged.

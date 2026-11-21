@@ -10,9 +10,9 @@ static ControlSessions ready() {
 static ActionPlan example(bool spray) {
     ActionPlan p;
     p.count=3;
-    p.steps[0]={"forward",5000,0,0,0};
-    p.steps[1]={"left",1000,spray?1000:0,0,0};
-    p.steps[2]={"forward",5000,0,0,0};
+    p.steps[0]={"forward",5000,0,0};
+    p.steps[1]={"left",1000,spray?1000:0,0};
+    p.steps[2]={"forward",5000,0,0};
     return p;
 }
 static void start(ControlSessions& s, const ActionPlan& p) {
@@ -81,21 +81,16 @@ int main() {
         assert(!is(s.VoicePlan(mode==1?5000:2,ticket,p),"accepted"));
         assert(!s.plan_active);
     }
-    // Atomic multi-channel start, independent deadlines, and equal elapsed ignition cooldown.
+    // Atomic multi-channel start, independent deadlines, and bubble cooldown.
     {
         auto s=ready(); ActionPlan p; p.count=2;
-        p.steps[0]={"left",1000,2000,3000,1000}; p.steps[1]={"none",0,1000,0,1000}; start(s,p);
-        assert(s.guard.Starts()==4);
-        s.Tick(1000,false); assert(!s.guard.Moving()&&!s.guard.Igniting()&&s.guard.Watering()&&s.guard.Bubbling());
+        p.steps[0]={"left",1000,2000,3000}; p.steps[1]={"none",0,1000,0}; start(s,p);
+        assert(s.guard.Starts()==3);
+        s.Tick(1000,false); assert(!s.guard.Moving()&&s.guard.Watering()&&s.guard.Bubbling());
         s.Tick(2000,false); assert(!s.guard.Watering()&&s.guard.Bubbling());
         s.Tick(3000,false); assert(s.plan_step==1);
-        s.Tick(3200,false); assert(s.plan_step==2&&s.guard.Watering()&&s.guard.Igniting());
+        s.Tick(3200,false); assert(s.plan_step==2&&s.guard.Watering());
         s.Tick(4200,false); assert(!s.plan_active);
-    }
-    {
-        auto s=ready(); ActionPlan p; p.count=2; p.steps[0]={"none",0,0,0,1000}; p.steps[1]=p.steps[0]; start(s,p);
-        s.Tick(1000,false); s.Tick(1999,false); assert(s.plan_step==1&&!s.guard.Igniting());
-        s.Tick(2000,false); assert(s.plan_step==2&&s.guard.Igniting());
     }
     {
         auto s=ready(); auto web=s.Acquire(0); assert(s.Heartbeat(0,web));

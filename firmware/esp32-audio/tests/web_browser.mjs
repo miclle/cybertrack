@@ -13,12 +13,12 @@ try {
     page.on('pageerror',e=>errors.push(String(e)));
     let seq=0, active=true;
     const status=()=>({result:'ok',request_sequence:++seq,window:seq,state:active?'ACTIVE':'STOPPED',fault:'none',boot_held:false,
-      capabilities:{move:true,water:true,bubbles:true,ignition:true,frenzy:true,speed_control:true,water_hold:true,bubbles_hold:true},
+      capabilities:{move:true,water:true,bubbles:true,speed_control:true,water_hold:true,bubbles_hold:true},
       sequence_active:active,sequence_step:1,sequence_steps:2,sequence_result:active?'waiting':'cancelled',sequence_source:active?'voice':'none',
-      move_remaining_ms:0,water_remaining_ms:0,bubbles_remaining_ms:0,ignition_remaining_ms:0,
-      move_cooldown_ms:0,water_cooldown_ms:0,bubbles_cooldown_ms:0,ignition_cooldown_ms:0,
-      web_speed_percent:100,move_speed_percent:0,move_direction:'none',logical_outputs:{left:0,right:0,water:false,bubbles:false,ignition:false},
-      drive_hold_id:0,water_hold_id:0,bubbles_hold_id:0,frenzy_remaining_ms:0,
+      move_remaining_ms:0,water_remaining_ms:0,bubbles_remaining_ms:0,
+      move_cooldown_ms:0,water_cooldown_ms:0,bubbles_cooldown_ms:0,
+      web_speed_percent:100,move_speed_percent:0,move_direction:'none',logical_outputs:{left:0,right:0,water:false,bubbles:false},
+      drive_hold_id:0,water_hold_id:0,bubbles_hold_id:0,
       distance:{valid:true,error:'none',distance_mm:600,age_ms:0},proximity:{auto_avoidance_enabled:false,forward_blocked:false}});
     await page.route('**/*',async route=>{
       const url=new URL(route.request().url());

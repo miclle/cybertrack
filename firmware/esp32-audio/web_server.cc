@@ -102,6 +102,15 @@ esp_err_t Api(httpd_req_t* req) {
     if (!cJSON_IsObject(body)) { cJSON_Delete(body); return Error(req, "400 Bad Request", "invalid_request"); }
     const bool action = !strcmp(req->uri, "/api/action");
     WebCommand command;
+    // Recognize the two retired operation names only to reject older clients.
+    if (action) {
+        const auto* operation = cJSON_GetObjectItemCaseSensitive(body, "operation");
+        if (cJSON_IsString(operation) &&
+            (!strcmp(operation->valuestring, "ignition") || !strcmp(operation->valuestring, "frenzy"))) {
+            cJSON_Delete(body);
+            return Error(req, "400 Bad Request", "unsupported_operation");
+        }
+    }
     if ((action && !ParseWebCommand(body, command)) || (!action && cJSON_GetArraySize(body))) {
         cJSON_Delete(body); return Error(req, "400 Bad Request", "invalid_request");
     }

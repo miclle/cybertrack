@@ -13,7 +13,7 @@
 struct SpokenPlayback {
     struct Step {
         const char* direction = "none";
-        std::array<int, 4> ms{}; // move, water, bubbles, ignition; -1 means unspecified.
+        std::array<int, 3> ms{}; // move, water, bubbles; -1 means unspecified.
         unsigned specified = 0;
     };
     std::array<Step, 16> steps{};
@@ -112,13 +112,10 @@ struct SpokenPlayback {
             for (unsigned lane = 0; lane < step.ms.size(); ++lane)
                 if (step.ms[lane] < 0) step.ms[lane] = shared ? shared :
                     (lane == 0 && (!std::strcmp(step.direction, "left") || !std::strcmp(step.direction, "right"))) ? 880 : 1000;
-            // Shared duration must not hide an ignition cap explanation.
-            if (step.ms[3] > 5000) return false;
         }
         const auto& first = steps[0];
-        tool = count > 1 || (first.ms[2] && (first.ms[0] || first.ms[1])) ||
-               (first.ms[3] && (first.ms[0] || first.ms[1] || first.ms[2])) ? "sequence" :
-               first.ms[0] && first.ms[1] ? "move_and_water" : first.ms[0] ? "move" : first.ms[1] ? "water" : first.ms[2] ? "bubbles" : "ignition";
+        tool = count > 1 || (first.ms[2] && (first.ms[0] || first.ms[1])) ? "sequence" :
+               first.ms[0] && first.ms[1] ? "move_and_water" : first.ms[0] ? "move" : first.ms[1] ? "water" : "bubbles";
         return true;
     }
     bool Request(const cJSON* args) const {
@@ -129,8 +126,8 @@ struct SpokenPlayback {
         const bool has_speed = cJSON_GetObjectItemCaseSensitive(args, "speed_percent");
         if (!std::strcmp(tool, "move"))
             return size == 2+has_speed && Text(args, "direction", first.direction) && Number(args, "duration_ms", first.ms[0]) && DefaultSpeed(args);
-        if (!std::strcmp(tool, "water") || !std::strcmp(tool, "bubbles") || !std::strcmp(tool, "ignition"))
-            return size == 1 && Number(args, "duration_ms", first.ms[first.ms[1] ? 1 : first.ms[2] ? 2 : 3]);
+        if (!std::strcmp(tool, "water") || !std::strcmp(tool, "bubbles"))
+            return size == 1 && Number(args, "duration_ms", first.ms[first.ms[1] ? 1 : 2]);
         if (!std::strcmp(tool, "move_and_water"))
             return size == 3+has_speed && Text(args, "direction", first.direction) && Number(args, "move_duration_ms", first.ms[0]) &&
                    Number(args, "water_duration_ms", first.ms[1]) && DefaultSpeed(args);
@@ -140,10 +137,10 @@ struct SpokenPlayback {
         bool same = cJSON_IsArray(plan) && cJSON_GetArraySize(plan) == static_cast<int>(count);
         for (unsigned i = 0; same && i < count; ++i) {
             const auto* item = cJSON_GetArrayItem(plan, i);
-            same = cJSON_IsObject(item) && cJSON_GetArraySize(item) == 5+(cJSON_GetObjectItemCaseSensitive(item, "speed_percent") != nullptr) &&
+            same = cJSON_IsObject(item) && cJSON_GetArraySize(item) == 4+(cJSON_GetObjectItemCaseSensitive(item, "speed_percent") != nullptr) &&
                    Text(item, "direction", steps[i].direction) && Number(item, "move_ms", steps[i].ms[0]) &&
                    Number(item, "water_ms", steps[i].ms[1]) && Number(item, "bubbles_ms", steps[i].ms[2]) &&
-                   Number(item, "ignition_ms", steps[i].ms[3]) && DefaultSpeed(item);
+                   DefaultSpeed(item);
         }
         cJSON_Delete(plan);
         return same;
@@ -154,8 +151,8 @@ struct SpokenPlayback {
         if (!std::strcmp(tool, "sequence") &&
             (!cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(receipt, "sequence_active")) || !Number(receipt, "sequence_step", 1) ||
              !Number(receipt, "sequence_steps", count) || !Text(receipt, "sequence_source", "voice") || !Text(receipt, "sequence_result", "running"))) return false;
-        const char* durations[] = {"move_last_duration_ms", "water_last_duration_ms", "bubbles_last_duration_ms", "ignition_last_duration_ms"};
-        const char* sources[] = {"move_source", "water_source", "bubbles_source", "ignition_source"};
+        const char* durations[] = {"move_last_duration_ms", "water_last_duration_ms", "bubbles_last_duration_ms"};
+        const char* sources[] = {"move_source", "water_source", "bubbles_source"};
         for (unsigned lane = 0; lane < steps[0].ms.size(); ++lane)
             if (steps[0].ms[lane] && (!Number(receipt, durations[lane], steps[0].ms[lane]) || !Text(receipt, sources[lane], "voice"))) return false;
         return !steps[0].ms[0] || (Text(receipt, "move_direction", steps[0].direction) && Number(receipt, "move_speed_percent", 100));

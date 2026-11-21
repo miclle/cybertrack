@@ -25,7 +25,7 @@ int main(){
   ticket=s.VoiceClaim(20,4,G::SpeedMode);s.Stop(30);assert(!is(s.VoiceAdjustSpeed(40,ticket,-10),"accepted"));assert(!s.guard.Moving());
  }
  { // A delayed adjustment cannot target a later sequence step.
-  auto s=ready();ActionPlan p;p.count=2;p.steps[0]={"forward",1000,0,0,0,80};p.steps[1]={"left",1000,1000,0,0,60};
+  auto s=ready();ActionPlan p;p.count=2;p.steps[0]={"forward",1000,0,0,80};p.steps[1]={"left",1000,1000,0,60};
   assert(is(s.VoicePlan(0,s.VoiceClaim(0,1,G::PlanMode),p),"accepted"));
   auto ticket=s.VoiceClaim(100,2,G::SpeedMode);assert(is(s.VoiceAdjustSpeed(100,ticket,10),"accepted"));assert(s.guard.left==90);
   ticket=s.VoiceClaim(200,3,G::SpeedMode);s.Tick(1000,false);assert(!s.VoiceClaim(1100,4,G::SpeedMode));s.Tick(1200,false);
@@ -70,7 +70,7 @@ int main(){
   assert(is(s.VoiceAdjustSpeed(200,s.VoiceClaim(200,3,G::SpeedMode),-10),"accepted"));assert(s.guard.right==-60);
  }
  { // Absolute speed cannot leak into the next step or start from idle.
-  auto s=ready();assert(!s.VoiceClaim(0,1,G::SpeedMode));ActionPlan p;p.count=2;p.steps[0]={"forward",1000,0,0,0,80};p.steps[1]={"left",1000,0,0,0,70};
+  auto s=ready();assert(!s.VoiceClaim(0,1,G::SpeedMode));ActionPlan p;p.count=2;p.steps[0]={"forward",1000,0,0,80};p.steps[1]={"left",1000,0,0,70};
   assert(is(s.VoicePlan(0,s.VoiceClaim(0,2,G::PlanMode),p),"accepted"));auto ticket=s.VoiceClaim(100,3,G::SpeedMode);
   s.Tick(1000,false);s.Tick(1200,false);assert(!is(s.VoiceSetSpeed(1201,ticket,100),"accepted"));assert(s.guard.left==-70);
  }

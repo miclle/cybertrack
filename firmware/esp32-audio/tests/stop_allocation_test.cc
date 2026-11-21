@@ -21,11 +21,11 @@ int main() {
     sessions.Tick(clock_ms, false);
     ActionPlan plan;
     plan.count = 2;
-    plan.steps[0] = {"forward", 30000, 30000, 30000, 1000, 100};
-    plan.steps[1] = {"backward", 1000, 0, 0, 0, 100};
+    plan.steps[0] = {"forward", 30000, 30000, 30000, 100};
+    plan.steps[1] = {"backward", 1000, 0, 0, 100};
     int ticket = sessions.VoiceClaim(clock_ms, 1, AudioActionGuard::PlanMode);
     Reply("sequence", ticket, 0, nullptr, 0, 0, nullptr, &plan);
-    assert(guard.Moving() && guard.Watering() && guard.Bubbling() && guard.Igniting());
+    assert(guard.Moving() && guard.Watering() && guard.Bubbling());
     fail_next_allocation = true;
     bool failed = false;
     try {
@@ -34,11 +34,11 @@ int main() {
         failed = true;
     }
     assert(failed && !fail_next_allocation);
-    assert(!guard.Moving() && !guard.Watering() && !guard.Bubbling() && !guard.Igniting());
+    assert(!guard.Moving() && !guard.Watering() && !guard.Bubbling());
     assert(!sessions.plan_active);
     clock_ms += 60000;
     sessions.Tick(clock_ms, false);
-    assert(!guard.Moving() && !guard.Watering() && !guard.Bubbling() && !guard.Igniting());
+    assert(!guard.Moving() && !guard.Watering() && !guard.Bubbling());
     ticket = sessions.VoiceClaim(clock_ms, 2, AudioActionGuard::MoveOnly);
     Reply("move", ticket, 30000, "forward");
     assert(guard.Moving());
@@ -57,7 +57,7 @@ int main() {
         fail_next_allocation=true;failed=false;
         try { Reply(ControlSessions::RemoteStopInput,"stop"); }
         catch(const std::bad_alloc&) { failed=true; }
-        assert(failed && !guard.Moving() && !guard.Watering() && !guard.Bubbling() && !guard.Igniting() && !sessions.plan_active);
+        assert(failed && !guard.Moving() && !guard.Watering() && !guard.Bubbling() && !sessions.plan_active);
     }
     // Local BOOT never consults a remote-language classification.
     clock_ms += 60000;
@@ -65,6 +65,6 @@ int main() {
     ticket=sessions.VoiceClaim(clock_ms,static_cast<int>(clock_ms),AudioActionGuard::PlanMode);
     Reply("sequence",ticket,0,nullptr,0,0,nullptr,&plan);
     sessions.Tick(clock_ms,true);
-    assert(!guard.Moving() && !guard.Watering() && !guard.Bubbling() && !guard.Igniting() && !sessions.plan_active);
+    assert(!guard.Moving() && !guard.Watering() && !guard.Bubbling() && !sessions.plan_active);
     std::cout << "PASS: receipt allocation failure leaves all lanes and later steps stopped\n";
 }

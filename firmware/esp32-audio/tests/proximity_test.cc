@@ -38,7 +38,7 @@ int main() {
             assert(is(sessions.DriveStart(0,owner,1,sessions.window,"forward",10000),"accepted"));
         else {
             ActionPlan plan; plan.count=2;
-            plan.steps[0]={"forward",10000,10000,0,0}; plan.steps[1]={"left",1000,0,0,0};
+            plan.steps[0]={"forward",10000,10000,0}; plan.steps[1]={"left",1000,0,0};
             assert(is(sessions.VoicePlan(0,sessions.VoiceClaim(0,1,G::PlanMode),plan),"accepted"));
         }
         sensor=reading(100,10); TickLocked(10);
@@ -187,7 +187,7 @@ int main() {
     }
     { // A newly near obstacle must reject the NEXT step before its spray starts.
         sessions=ready(); proximity={}; ActionPlan plan; plan.count=2;
-        plan.steps[0]={"left",1000,0,0,0}; plan.steps[1]={"forward",1000,1000,0,0};
+        plan.steps[0]={"left",1000,0,0}; plan.steps[1]={"forward",1000,1000,0};
         assert(is(sessions.VoicePlan(0,sessions.VoiceClaim(0,1,G::PlanMode),plan),"accepted"));
         sensor=reading(1000,1000); TickLocked(1000);
         sensor=reading(149,1200); TickLocked(1200);
@@ -251,7 +251,7 @@ int main() {
     }
     { // Cancel future steps when forward is interrupted, preserve running effects until their deadline.
         auto s=ready(); ActionPlan plan; plan.count=2;
-        plan.steps[0]={"forward",1000,2000,0,0}; plan.steps[1]={"left",1000,0,0,0};
+        plan.steps[0]={"forward",1000,2000,0}; plan.steps[1]={"left",1000,0,0};
         assert(is(s.VoicePlan(0,s.VoiceClaim(0,1,G::PlanMode),plan),"accepted"));
         s.SetForwardBlocked(100,true); s.Tick(100,false);
         assert(!s.plan_active && is(s.plan_result,"obstacle_blocked") && s.guard.Watering());
@@ -260,7 +260,7 @@ int main() {
     }
     { // A future forward step is rejected before any of its effects start.
         auto s=ready(); ActionPlan plan; plan.count=2;
-        plan.steps[0]={"left",1000,0,0,0}; plan.steps[1]={"forward",1000,1000,0,0};
+        plan.steps[0]={"left",1000,0,0}; plan.steps[1]={"forward",1000,1000,0};
         assert(is(s.VoicePlan(0,s.VoiceClaim(0,1,G::PlanMode),plan),"accepted"));
         s.SetForwardBlocked(100,true); s.Tick(1000,false); s.Tick(1200,false);
         assert(!s.plan_active && is(s.plan_result,"obstacle_blocked") && s.guard.Starts()==1);

@@ -31,9 +31,9 @@ def exercise(binary, case, offset):
     initial_starts = len(case.sources)
     rows = samples(binary, case.event, source, case.phase, offset)
     for tick, row in enumerate(rows):
-        now, move, water, bubbles, active, result, starts, owner, ignition, wifi, voice = row
+        now, move, water, bubbles, active, result, starts, owner, wifi, voice = row
         now = int(now)
-        if now != tick * 5 or int(starts) != initial_starts or ignition != '0':
+        if now != tick * 5 or int(starts) != initial_starts:
             raise ValueError(f'{case.id} at {now}: unexpected start, channel or sample gap')
         for channel, actual in zip(LANES, (move, water, bubbles)):
             limit = cutoff if channel not in case.keep else {'move': 6000, 'bubbles': 5000}[channel]
