@@ -7,9 +7,19 @@
 - 删除网页剧场、三个模板、编辑／预览／确认入口，以及离线排演页面和打包入口。
 - 删除 `self.tank.compose`、HTTP `show_edit`／`show_confirm`、草稿版本与过期状态、语音读版本许可、专用相对改稿分类器及状态说明。公开工具从十二个减为十一个。
 - 删除仅用于网页表演的序列来源分支；保留语音 `sequence` 最多 16 步、`move_and_water`、运行中调速、统一停止、BOOT、断线／故障取消、不重试及不恢复。
-- 删除当前使用说明，将专用研究记录移入 history 归档，更新需求、架构、接口、角色和待办。版本化原始 JSON、压缩轨迹和历史评分语料保留以复算旧证据；参考包中的历史 compose 成绩不代表现行能力。
+- 删除当前使用说明，将专用研究记录移入 history 归档，更新需求、架构、接口、角色和待办。参考包保留固定语料与历史 compose 成绩，可离线复算。
 
 旧 MCP 工具按未知工具拒绝，旧 HTTP 编辑／确认请求在解析时拒绝，不映射成动作。旧缓存网页不能通过已移除的确认接口启动；其他合法遥控接口仍按原契约处理。
+
+## 旧版草稿实验
+
+| 实验 | 当时观测到的结果 | 原始记录与复核方法 |
+|---|---|---|
+| ct45 改稿旁白 | 两组各 9 次。调整工具说明前后，明确改稿的 6 次会话都在保存回执前返回了音频。 | [旁白对照](https://github.com/miclle/cybertrack/blob/c975f8ae4214dcf8a012503b7a31ec5b1d18ab6e/docs/validation/history/draft-narration.md) |
+| ct58 保存回执 | 新说明下，主机回执组 9/9 调用匹配。静态夹具组仍有 1/3 只查询就声称已保存。 | [24 次会话](https://github.com/miclle/cybertrack/blob/c975f8ae4214dcf8a012503b7a31ec5b1d18ab6e/docs/validation/history/draft-save-contract.md) |
+| ct59 草稿状态 | 两组静态夹具各 3/3，实际主机组 8/8。三组共 14 次，输入和回执来源见原记录。 | [状态对照](https://github.com/miclle/cybertrack/blob/c975f8ae4214dcf8a012503b7a31ec5b1d18ab6e/docs/validation/history/draft-state-facts.md) |
+
+复核这三组实验时，请使用链接所指修订的评审脚本、语料和压缩轨迹。现行版本对预览和编辑请求的检查见下节。
 
 ## 仅讨论或预览时不执行
 

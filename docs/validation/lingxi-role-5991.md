@@ -54,7 +54,7 @@ python3 scripts/export_hold_cases.py build/audio-host/receipt_replay output/voic
 
 把上一轮 C002 的原始改稿调用按实测到达时间（输入后 2357 ms）分别交给两个版本的固件主机程序。两者初态相同，网页保持在线，草稿版本为 7。ct45 接受只带正确版本号的调用，把第二步泡泡从一秒改为两秒，版本升到 8。ct50 返回 `draft_changed`，版本仍为 7，第二步仍为一秒。给同一条调用补上前置查询后，两版均成功保存。四次对照中第一步左转 880 ms 完整保留，动作启动计数均为零。ct50 另测了读取时效边界，间隔 29999 ms 的编辑通过，恰好 30000 ms 的编辑被拒。[原始调用、对照及最终草稿](evidence/role-5991/draft-version-replay.json)
 
-随后让同一线上角色重做 C002，交替使用 ct45 和 ct50 的工具描述及对应固件回执，各三轮。六次均先实际查询再改第二步，回执确认版本从 7 升到 8，其余步骤未变，家长仍需在网页确认开始。原来的失败仍计入固定集的 7/8。[逐轮文件及哈希](evidence/role-5991/draft-version-replay.json) · [复测方法](lingxi-capture.md#用固件回执验证只改第二步)
+随后让同一线上角色重做 C002，交替使用 ct45 和 ct50 的工具描述及对应固件回执，各三轮。六次均先实际查询再改第二步，回执确认版本从 7 升到 8，其余步骤未变，家长仍需在网页确认开始。原来的失败仍计入固定集的 7/8。[逐轮文件及哈希](evidence/role-5991/draft-version-replay.json) · [复测方法](https://github.com/miclle/cybertrack/blob/c975f8ae4214dcf8a012503b7a31ec5b1d18ab6e/docs/validation/lingxi-capture.md#用固件回执验证只改第二步)
 
 ### 只给“你现在在做什么”时的回执
 
@@ -62,16 +62,6 @@ python3 scripts/export_hold_cases.py build/audio-host/receipt_replay output/voic
 
 同角色另测“前进！”“全部停止。”“吹泡泡！”和超限喷水，各三轮。十二次都有云端回复。用 ct50 播放策略回放每条的真实事件顺序，九条短指令的首个音频包均被抑制；三条超限请求的首包均保留。云端的限幅说明仍有重复。[逐轮状态、回复与播放结果](evidence/role-5991/status-audio-review.json)
 
-### 亲子改稿的三种说法
+### 旧版草稿编辑
 
-再次从配置页读取角色全文，5991 字符与仓库吻合。使用 ct45 的 12 个工具和同版固件主机回执，在灵矽逐字发送[三条新原话](draft-edit-variants.json)。每条独立建会话，三轮均正常结束。家长网页中的初稿是左转 880 毫秒，再吹泡泡一秒。每次平台调用都按实际到达时间处理，另在主机读取本轮结束后的草稿和输出。
-
-| 孩子怎么说 | 草稿回读 |
-|---|---|
-| 开头转圈留着，后面的泡泡吹三秒 | 3/3 先查后改，左转保留，只改第二步为三秒，版本从 7 升到 8。 |
-| 删掉最后的泡泡，保留开头 | 3/3 先查后删，只留下左转，版本升到 8。 |
-| 结尾泡泡短一点，还没想好几秒 | 3/3 只查草稿，追问具体秒数，原有两步和版本 7 保留。 |
-
-九次固件主机回读均为零启动，全部逻辑输出关闭。六次完成编辑后，回复均请用户在网页预览并点开始。三次“改三秒”里有两次返回英文操作说明，第一次还读出 `replace_step`；删除时三次都先播报要查草稿。工具结果正确，面向孩子的回复仍需缩短。这里使用文本输入，测试没有连接执行器或记录音频。[逐条回读与回复](evidence/role-5991/edit-variants-review.json) · [第一轮轨迹](evidence/role-5991/edit-variants-1.json.gz) · [第二轮](evidence/role-5991/edit-variants-2.json.gz) · [第三轮](evidence/role-5991/edit-variants-3.json.gz)
-
-[改稿旁白的工具说明对照](history/draft-narration.md)记录同一组用例的首个音频包、保存回执先后和逐次回复。
+当时三种改稿说法各测三次，九次均无动作启动。保存回执前的旁白和英文回复另有对照，见[退役实验汇总](theatre-removal.md#旧版草稿实验)。[当时的逐轮记录](https://github.com/miclle/cybertrack/blob/c975f8ae4214dcf8a012503b7a31ec5b1d18ab6e/docs/validation/lingxi-role-5991.md#亲子改稿的三种说法)

@@ -31,4 +31,4 @@ python3 scripts/review_compose_routing.py
 
 [本地主机清单](../evidence/ct61-firmware-host/current-host-manifest.json)标识本轮控制回放的代码与二进制。需要重算实际 MCP 和终态时，使用对应固定二进制，按每行 `initial_profile`、`host_calls`、`host_inspect_ms` 调用 `capture_lingxi.firmware_replay`。参考材料包只提供本轮审阅与说明，不携带原始压缩轨迹或完整控制回放环境。
 
-下一步先回读平台当前模型设置与工具／回复通道，再单项对照；此前[配置页观察](draft-narration.md)中思考已显示 disabled，不能假定重新关闭思考即可解决。本轮桌面仍锁定，未改平台参数。灵矽[配置指引](https://linx.qiniu.com/docs/xrobot/guide/agent-config)说明模型高级参数因模型而异，修改后需要确认、保存并重新连接；实际参数以本次页面回读为准。修正后需同时覆盖含糊表达、明确新时长、单步隔离、新建／取消、旧版冲突和完整固定集，分别检查工具、草稿及最终回复。
+下一步先回读平台当前模型设置与工具／回复通道，再单项对照；此前[配置页观察](https://github.com/miclle/cybertrack/blob/c975f8ae4214dcf8a012503b7a31ec5b1d18ab6e/docs/validation/history/draft-narration.md)中思考已显示 disabled，不能假定重新关闭思考即可解决。本轮桌面仍锁定，未改平台参数。灵矽[配置指引](https://linx.qiniu.com/docs/xrobot/guide/agent-config)说明模型高级参数因模型而异，修改后需要确认、保存并重新连接；实际参数以本次页面回读为准。修正后需同时覆盖含糊表达、明确新时长、单步隔离、新建／取消、旧版冲突和完整固定集，分别检查工具、草稿及最终回复。

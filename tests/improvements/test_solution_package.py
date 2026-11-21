@@ -27,6 +27,7 @@ class SolutionPackageTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder, zipfile.ZipFile(io.BytesIO(data)) as archive:
             self.assertEqual(set(archive.namelist()), set(paths) | {"MANIFEST.json", "START_HERE.md", "replay/voice.json", "replay/compose.json", "replay/ct57/voice.json", "replay/ct57/compose.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/qwen/compose.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json", "replay/ct71-full-stt/voice.json", "replay/ct71-full-stt/compose.json"})
             manifest = json.loads(archive.read("MANIFEST.json"))
+            self.assertEqual(set(manifest["files"]), set(archive.namelist()) - {"MANIFEST.json"})
             current = json.loads(archive.read("firmware/current.json"))
             build = json.loads(archive.read("firmware/" + current["software_evidence"]))
             self.assertEqual(build["version"], current["source_version"])
@@ -188,14 +189,14 @@ class SolutionPackageTest(unittest.TestCase):
             self.assertEqual(legacy_input["host_input_mode"], "simulated_initial_input")
             self.assertEqual(legacy_input["strict_tool_matches"], 9)
             self.assertNotIn("device_id", manifest["firmware"])
-            for name in ("replay/voice.json", "replay/ct57/voice.json", "replay/firmware-host/voice.json", "replay/firmware-host/compose.json", "replay/qwen/voice.json", "replay/doubao/compose.json", "replay/stt/voice.json", "replay/compact-receipts/compose.json", "replay/stop-negation/voice.json", "replay/stop-negation/compose.json", "replay/ct71-full-stt/voice.json", "replay/ct71-full-stt/compose.json"):
-                replay = root/name
-                original = replay.read_bytes()
-                replay.write_bytes(original+b" ")
-                failed = subprocess.run(cli, cwd=folder, capture_output=True, text=True)
-                self.assertNotEqual(failed.returncode, 0)
-                self.assertIn("differs from manifest", failed.stderr)
-                replay.write_bytes(original)
+            replay = root / "replay/voice.json"
+            original = replay.read_bytes()
+            for changed in (original + b" ", b"!" + original[1:]):
+                with self.subTest(changed_bytes=len(changed)):
+                    replay.write_bytes(changed)
+                    failed = subprocess.run(cli, cwd=folder, capture_output=True, text=True)
+                    self.assertNotEqual(failed.returncode, 0)
+                    self.assertIn("bundle file differs from manifest: replay/voice.json", failed.stderr)
 
     def test_cli_creates_archive_and_refuses_overwrite(self):
         with tempfile.TemporaryDirectory() as folder:

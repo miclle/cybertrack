@@ -93,15 +93,7 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 
 初态分别为 70% 前进且剩余 4000 ms 或 400 ms。长短对照可以区分“查询时还有计时”和“查询到达前计时已结束”。核对回复时分开检查方向是否带多余倒计时、剩余秒数是否与回执匹配并明确属于查询瞬间、是否对未来运动作出保证，以及到期后是否猜测停机原因。只读重放没有实物位移反馈。
 
-## 用固件回执验证“只改第二步”
-
-在仓库根目录用对应版本的 prepared 源码运行 `python3 firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct50-src`。它会在 `build/audio-host/` 生成 `receipt_replay`。将上文捕获命令的工具描述换成同版导出，语料换成 `docs/validation/compose-cases.json`，并附加以下参数。
-
-```sh
---ids C002 --draft-host build/audio-host/receipt_replay
-```
-
-主机通过网页草稿接口建立版本 7，第一步左转 880 ms，第二步吹泡泡 1000 ms。虚拟网页每 200 ms 续约，仅保持草稿所属会话在线。灵矽实际发来的查询、停止和改稿按到达时刻及原顺序送入固件，每次收到的回执随后送回同一条平台会话。用于检查的末尾快照不会授权下一次改稿。轨迹中可分别检查版本、两步参数、动作启动次数和云端答复。固定集上下文会告诉模型初始版本，另加 `--raw-text` 才是只给用户原话的对照。
+网页改稿已于 ct78 退役。ct45–ct59 的改稿、保存和状态查询可按[当时的捕获步骤](https://github.com/miclle/cybertrack/blob/c975f8ae4214dcf8a012503b7a31ec5b1d18ab6e/docs/validation/lingxi-capture.md#用固件回执验证只改第二步)复核，结论见[旧版草稿实验](theatre-removal.md#旧版草稿实验)。
 
 ## 核对整段回复的播放策略
 
@@ -122,16 +114,6 @@ python3 scripts/replay_running_intents.py output/voice/ct48-running/1.json
 ### 对照 RPC 错误与拒绝结果
 
 仅为隔离实验时，可以在 `--speed-host` 基础上增加 `--admission-result-fixture`，将同一个主机拒绝包在 `result=rejected` 的工具结果里返回，包含原错误 `rejection_reason` 和 `physical_feedback=false`。轨迹另存原始错误，标记这是夹具转换。默认路径仍使用实际固件的 RPC 错误。两组使用相同的工具描述、角色与语音，结果不作为板上接口已修改的证据。
-
-### 从空草稿验证保存回执
-
-`--draft-host` 默认保留两步、版本 7 的网页草稿。新建场景可以同时指定 `--draft-profile empty_web_draft`，从无草稿、版本 0 开始。查询不会创建草稿，只有实际 `compose` 成功回执才保存版本 1。运行前用相同候选的 `run_mcp_tests.py` 构建主机回执程序，并固定其二进制。轨迹的 `initial_profile` 与 `host_replay_sha256` 标识所测初态和实现。
-
-### 固定工具与角色，对照草稿状态说明
-
-`--draft-read-facts-fixture` 为隔离对照增加 `draft_status_facts`，只影响状态查询回执。先将 `scripts/lingxi_status_fixture.cc` 与当前 `status_facts.h`、cJSON 编译到 `build/lingxi-schema-export/draft-read-fixture`。轨迹绑定帮助程序和头文件哈希。默认夹具保持原样，实际 ct59 主机回执直接包含该字段，无需实验开关。
-
-说明按真实 `show_draft.active` 生成，只指出当前是否有草稿及查询不构成保存确认，不代替保存操作。对照组保持角色和十二个工具定义一致。
 
 ### 用实际固件校验参数
 
