@@ -441,6 +441,8 @@ async def run(args):
                     json.loads(catalog.read_bytes())!=tools or
                     hashlib.sha256(firmware_host.read_bytes()).hexdigest()!=manifest['executable_sha256']):
                     raise ValueError('advertised tools differ from the frozen host catalog')
+                if manifest.get('firmware'):
+                    trace['firmware'] = manifest['firmware']
         trace['host_input_mode']='platform_stt_events' if synthetic else 'simulated_recognized_text'
         if not synthetic:
             trace['scope']='Real platform with raw text; known utterance injected as simulated recognition before actual host MCP; virtual clock/range; no ASR, microphone/speaker/board IO'

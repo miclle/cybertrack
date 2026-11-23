@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exercise stop-v1 against a prepared firmware's control code, without board IO."""
+"""Exercise the applicable stop matrix against a prepared firmware's control code, without board IO."""
 import argparse
 import hashlib
 import json
@@ -8,7 +8,7 @@ import re
 import subprocess
 import tempfile
 
-from analyze_stop_trials import CASES
+from analyze_stop_trials import CURRENT_MATRIX, MATRICES
 
 ROOT = Path(__file__).resolve().parents[1]
 HARNESS = ROOT / 'firmware/esp32-audio/tests/stop_matrix.cc'
@@ -53,27 +53,31 @@ def exercise(binary, case, offset):
 
 
 def run(source):
-    current_cases = [c for c in CASES if not (c.id.startswith('sequence_') and 'web' in c.sources.values())]
     board = source / 'main/boards/bread-compact-wifi'
     version = re.search(r'set\(PROJECT_VER "([^"]+)"\)', (source/'CMakeLists.txt').read_text()).group(1)
     flags = ['-fsanitize=address,undefined', '-Wall', '-Wextra', '-Werror', '-I', str(board)]
+    web_drafts = ' WebConfirm(' in (board/'control_sessions.h').read_text()
+    matrix = 'stop-v1' if web_drafts else CURRENT_MATRIX
+    sources = ('web', 'voice') if web_drafts else ('voice',)
+    if web_drafts:
+        flags.append('-DSTOP_REPLAY_WEB_DRAFT')
     with tempfile.TemporaryDirectory() as temp:
         obj, binary = Path(temp)/'water.o', Path(temp)/'stop-matrix'
         subprocess.run(['cc', '-std=c11', *flags, '-c', board/'water_policy.c', '-o', obj], check=True)
         subprocess.run(['c++', '-std=c++17', *flags, HARNESS, obj, '-o', binary], check=True)
-        for source_kind in ('voice',):
+        for source_kind in sources:
             control = samples(binary, 'sequence_control', source_kind, 'active', 100)
             if control[1200//5][3] != source_kind or control[-1][5:7] != ['completed', '3']:
                 raise ValueError(f'{source_kind} no-stop control did not run the second step')
-        for case in current_cases:
+        for case in MATRICES[matrix]:
             for offset in OFFSETS:
                 exercise(binary, case, offset)
     inputs = ['control_sessions.h', 'action_guard.h', 'action_plan.h',
               'water_guard.h', 'water_policy.c', 'water_policy.h']
-    return {'matrix': 'stop-v1', 'source_version': version, 'evidence_kind': 'host_control_replay',
-            'passed_cases': [c.id for c in current_cases], 'trigger_offsets_ms': OFFSETS, 'tick_ms': 5,
+    return {'matrix': matrix, 'source_version': version, 'evidence_kind': 'host_control_replay',
+            'passed_cases': [c.id for c in MATRICES[matrix]], 'trigger_offsets_ms': OFFSETS, 'tick_ms': 5,
             'reconnected_at_ms_after_trigger': 2500, 'observed_ms_after_reconnect': 6000,
-            'second_step_without_stop': ['voice'], 'physical_trials_added': 0,
+            'second_step_without_stop': list(sources), 'physical_trials_added': 0,
             'prepared_source_sha256': {name: hashlib.sha256((board/name).read_bytes()).hexdigest() for name in inputs}}
 
 

@@ -30,6 +30,10 @@ public:
     }
     void NewVoiceSession() { count_ = 0; Cancel(All); }
     void CancelPending(Target target = All) { Cancel(target); }
+    void InvalidatePendingForward() {
+        // Direction and plan contents arrive in the callback after admission.
+        for (auto& request : requests_) if (request.pending) request.forward_invalidated = true;
+    }
     static const char* Validate(Target target, int move_ms, int water_ms, const char* value, int bubbles_ms = 0, int speed_percent = 100) {
         int a = 0, b = 0;
         if (target != MoveOnly && target != WaterOnly && target != Both && target != BubblesOnly) return "invalid_request";
@@ -54,9 +58,9 @@ public:
         FinishLane(spray, now, watering);
         FinishLane(bubbles, now, bubbling);
     }
-    void StopMove(uint64_t now) {
+    void StopMove(uint64_t now, bool cancel_pending = true) {
         const bool moving = Moving();
-        Cancel(MoveOnly);
+        if (cancel_pending) Cancel(MoveOnly);
         water_stop(&motion, now);
         FinishLane(motion, now, moving);
     }
@@ -73,8 +77,8 @@ public:
         FinishLane(bubbles, now, bubbling);
     }
     bool PlanReady(uint64_t now) const { return Ready(now, PlanMode); }
-    const char* ClaimPlan(uint64_t now, int ticket) {
-        return Request(now, ticket, PlanMode, 0, 0, nullptr);
+    const char* ClaimPlan(uint64_t now, int ticket, bool includes_forward = false) {
+        return Request(now, ticket, PlanMode, 0, 0, includes_forward ? "forward" : nullptr);
     }
     bool RenewWebMove(uint64_t now, unsigned lease_ms) {
         if (!motion.active || !motion.online || motion.held || motion.clock_fault ||
@@ -97,7 +101,7 @@ public:
         for (unsigned i = 0; i < count_; ++i) if (requests_[i].rpc == rpc) return 0;
         if (count_ == requests_.size() || next_ticket_ == INT_MAX) return 0;
         auto& r = requests_[count_++];
-        r = {rpc, ++next_ticket_, now, target, false, motion.starts};
+        r = {rpc, ++next_ticket_, now, target, false, motion.starts, forward_blocked};
         if (!Ready(now, target)) return 0;
         r.pending = true;
         return r.ticket;
@@ -152,7 +156,7 @@ public:
         return p.active && p.ends_at > now ? p.ends_at - now : 0;
     }
 private:
-    struct RequestRecord { int rpc = 0, ticket = 0; uint64_t received = 0; Target target = All; bool pending = false; unsigned motion_start = 0; };
+    struct RequestRecord { int rpc = 0, ticket = 0; uint64_t received = 0; Target target = All; bool pending = false; unsigned motion_start = 0; bool forward_invalidated = false; };
     std::array<RequestRecord, 128> requests_{};
     unsigned count_ = 0;
     int next_ticket_ = 0;
@@ -180,6 +184,7 @@ private:
         if (!r || !r->pending) return "cancelled_or_duplicate";
         r->pending = false;
         if (r->target != target) return "ticket_target_mismatch";
+        if (r->forward_invalidated && value && !std::strcmp(value, "forward")) return "obstacle_blocked";
         if (now < r->received || now - r->received >= 5000) return "stale_request";
         if (target == SpeedMode) return r->motion_start == motion.starts && Ready(now, SpeedMode) ? "accepted" : "not_ready_or_busy";
         if (target == PlanMode) return Ready(now, PlanMode) ? "accepted" : "not_ready_or_busy";

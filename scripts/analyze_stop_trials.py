@@ -44,6 +44,11 @@ CASES = tuple(
     for source in ("web", "voice")
     for phase in ("active", "waiting")
 )
+CURRENT_MATRIX = "stop-v2"
+MATRICES = {
+    "stop-v1": CASES,
+    CURRENT_MATRIX: tuple(c for c in CASES if not (c.id.startswith("sequence_") and "web" in c.sources.values())),
+}
 CASE_BY_ID = {case.id: case for case in CASES}
 
 
@@ -84,11 +89,16 @@ def stats(values: list[float]) -> dict:
 
 def analyze(data: dict) -> dict:
     """Check per-profile coverage and report known violations separately."""
-    fields(data, {"schema_version", "profiles", "trials"}, "input")
-    if type(data["schema_version"]) is not int or data["schema_version"] not in (1, 2):
+    version = data.get("schema_version")
+    fields(data, {"schema_version", "profiles", "trials"} | ({"matrix_id"} if version == 3 else set()), "input")
+    if type(data["schema_version"]) is not int or data["schema_version"] not in (1, 2, 3):
         raise ValueError("unsupported schema")
     if not isinstance(data["profiles"], list) or not isinstance(data["trials"], list):
         raise ValueError("profiles and trials must be arrays")
+    matrix = data.get("matrix_id", "stop-v1")
+    if matrix not in MATRICES:
+        raise ValueError("unknown stop matrix")
+    required = MATRICES[matrix]
     profiles = {}
     for profile in data["profiles"]:
         fields(profile, {"id", "evidence_kind", "firmware_sha256", "battery", "load", "ground_surface",
@@ -108,10 +118,10 @@ def analyze(data: dict) -> dict:
         if number(profile["observation_window_ms"], f"{name}.observation_window_ms") <= 0:
             raise ValueError(f"{name}: positive recovery observation window required")
         profiles[name] = profile
-    rows = {name: {case.id: [] for case in CASES} for name in profiles}
+    rows = {name: {case.id: [] for case in required} for name in profiles}
     seen_ids, seen_repeats, seen_events = set(), set(), set()
     for trial in data["trials"]:
-        times = {"device_event_ms", "recovered_ms", "observed_until_ms"} if data["schema_version"] == 2 else set()
+        times = {"device_event_ms", "recovered_ms", "observed_until_ms"} if data["schema_version"] >= 2 else set()
         fields(trial, times | {"id", "profile_id", "case_id", "repeat", "evidence_ref", "event_ms", "channels",
                        "recovery_observed", "stale_action_resumed"}, "trial")
         trial_id = text(trial["id"], "trial.id")
@@ -121,7 +131,7 @@ def analyze(data: dict) -> dict:
         profile_id, case_id = trial["profile_id"], trial["case_id"]
         text(profile_id, "trial.profile_id")
         text(case_id, "trial.case_id")
-        if profile_id not in profiles or case_id not in CASE_BY_ID:
+        if profile_id not in profiles or case_id not in rows[profile_id]:
             raise ValueError(f"{trial_id}: unknown profile or case")
         if type(trial["repeat"]) is not int or trial["repeat"] < 1:
             raise ValueError(f"{trial_id}: positive integer repeat required")
@@ -158,7 +168,7 @@ def analyze(data: dict) -> dict:
             missing.append("insufficient timed observation after recovery")
         for channel, source in case.sources.items():
             row = trial["channels"][channel]
-            deadline_field = {"normal_end"} if data["schema_version"] == 2 else set()
+            deadline_field = {"normal_end"} if data["schema_version"] >= 2 else set()
             fields(row, deadline_field | {"source", "output_off_ms", "mechanical_stop_ms", "stopping_distance_mm",
                          "continued_until_own_deadline"}, f"{trial_id}.{channel}")
             if row["source"] != source:
@@ -239,9 +249,9 @@ def analyze(data: dict) -> dict:
         summaries.append({"profile": profiles[name], "cases": case_reports,
                           "coverage_complete": all(c["status"] == "records_complete" for c in case_reports)})
     physical = [s for s in summaries if s["profile"]["evidence_kind"] == "physical_observation"]
-    return {"schema_version": 2, "matrix_id": "stop-v1", "required_repeats_per_case": REPEATS,
+    return {"schema_version": 2, "matrix_id": matrix, "required_repeats_per_case": REPEATS,
             "required_cases": [{"id": c.id, "event": c.event, "phase": c.phase, "source_by_channel": c.sources,
-                                "stop_channels": c.stop, "continue_channels": c.keep} for c in CASES],
+                                "stop_channels": c.stop, "continue_channels": c.keep} for c in required],
             "profiles": summaries, "physical_profiles_with_complete_records": [s["profile"]["id"] for s in physical if s["coverage_complete"]],
             "physical_acceptance": "not_established",
             "limitations": ["source files and clocks are declared by the recorder, not independently authenticated",
@@ -261,11 +271,11 @@ def unique_fields(pairs: list[tuple[str, object]]) -> dict:
     return result
 
 
-def initialize(profile: dict) -> dict:
+def initialize(profile: dict, matrix: str = CURRENT_MATRIX) -> dict:
     """Generate unobserved rows for a declared configuration, never measurements."""
-    data = {"schema_version": 2, "profiles": [profile], "trials": []}
+    data = {"schema_version": 3, "matrix_id": matrix, "profiles": [profile], "trials": []}
     analyze(data)  # Validate the declared configuration before creating records.
-    for case in CASES:
+    for case in MATRICES[matrix]:
         for repeat in range(1, REPEATS + 1):
             data["trials"].append({
                 "id": f"{profile['id']}-{case.id}-{repeat}", "profile_id": profile["id"],
@@ -285,6 +295,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("input", type=Path, nargs="?")
     parser.add_argument("--init-profile", type=Path, help="generate unobserved rows from one profile JSON object")
+    parser.add_argument("--matrix", choices=MATRICES, default=CURRENT_MATRIX, help="matrix for a new observation sheet")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     try:
@@ -292,7 +303,7 @@ def main() -> None:
             if args.input or not args.output:
                 raise ValueError("--init-profile requires --output and no observations input")
             profile = json.loads(args.init_profile.read_bytes(), object_pairs_hook=unique_fields)
-            data = initialize(profile)
+            data = initialize(profile, args.matrix)
             args.output.parent.mkdir(parents=True, exist_ok=True)
             with args.output.open("x") as stream:
                 stream.write(json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False) + "\n")

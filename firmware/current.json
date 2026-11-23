@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "source_version": "2.0.3-ct79",
+  "source_version": "2.0.3-ct80",
   "last_recorded_deployment": "esp32-audio/startup-ct78.json",
-  "software_evidence": "esp32-audio/verification-ct79.json",
+  "software_evidence": "esp32-audio/verification-ct80.json",
   "role_sha256": "6186beb47f1845ab5a0553be34131430032c32f8a130c178fd4dedebcf0258e0",
   "deployment_relation": "candidate_not_deployed",
   "physical_acceptance": "incomplete",
-  "deployment_note": "ct79 removes ignition and frenzy. Last recorded firmware is ct78. The v2 application and role have not been deployed."
+  "deployment_note": "ct80 adds an A1-specific actuator interlock and corrects pending obstacle handling. Last recorded application is ct78. The v2 application and role have not been deployed."
 }

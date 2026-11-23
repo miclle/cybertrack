@@ -36,6 +36,17 @@ class SpokenCasesTests(unittest.TestCase):
         row["evidence_ref"] = " "
         self.assertEqual(review(self.sheet)["calls_scored"], 0)
 
+    def test_sequence_schema_follows_recorded_firmware(self):
+        for version, other in (("ct79", "ct78"), ("ct78", "ct79")):
+            self.sheet["firmware"] = "2.0.3-" + version
+            for row in self.sheet["results"]:
+                if row["id"] in ("V031", "V033", "V035"):
+                    row.update(actual_utterance=row["input_text"], evidence_ref="fixture", completed=True,
+                               calls=corpus(version)[row["id"]]["expected_calls"])
+            self.assertEqual(review(self.sheet)["calls_match"], 3)
+            self.sheet["firmware"] = other
+            self.assertEqual(review(self.sheet)["calls_match"], 0)
+
     def test_forbidden_request_on_incomplete_run(self):
         row = next(r for r in self.sheet["results"] if r["id"] == "V067")
         row.update(

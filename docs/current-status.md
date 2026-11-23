@@ -2,7 +2,7 @@
 
 | 项目 | 最近可核对的记录 |
 |---|---|
-| 固件候选 | v2 源码为 **2.0.3-ct79**。已构建 ESP-IDF 镜像，保留行走、喷水和泡泡三路控制，退役点火和狂暴模式。应用尚待部署。[构建与回归记录](../firmware/esp32-audio/verification-ct79.json) |
+| 固件候选 | v2 源码为 **2.0.3-ct80**。面包板与 A1 各有独立构建。A1 通过硬件锁存处理 SW2 断开，避障保留待处理的后退和转向请求。应用尚待部署。[构建与回归记录](../firmware/esp32-audio/verification-ct80.json) |
 | 样机应用 | **2.0.3-ct78** 于 2026-11-03 仅更新应用。配置保持，两次启动联网、二十条输出全关的状态回读通过。[部署记录](validation/ct78-deployment.md) |
 | 语音角色 | 仓库的 ct79 角色为 5002 字符，尚待同步。平台最近一次回读为 2026-11-01 恢复的旧 5991 字符角色。[角色源](../firmware/esp32-audio/role-prompt.txt) · [平台回读](validation/evidence/ct78-stop-duration/platform-restored.json) |
 | CAD 与打印 | 清水瓶、泡泡液瓶直接放入背包。Lean 24 件、Ready 26 件，各六盘。CAD 已检查取瓶路径，实际抓握、行走稳定性和密封待验。[模型与切片入口](../hardware/model/README.md) |
@@ -20,10 +20,10 @@
 
 ```sh
 python3 scripts/check_firmware_current.py \
-  --source-bin build/firmware-ct79/xiaozhi.bin \
+  --source-bin build/firmware-ct80-breadboard/xiaozhi.bin \
   --deployed-bin build/firmware-ct78/xiaozhi.bin
 ```
 
-准备好同版上游源码后，按[固件主机验证](validation/firmware-host.md)运行 ct79 的退役请求、停止与恢复检查。
+准备好同版上游源码后，按[固件主机验证](validation/firmware-host.md)运行当前固件的退役请求、停止与恢复检查。
 
 ct79 记录包含 9 个工具、28 个拒绝与停止案例，以及 13 类场景各 5 个触发时刻的停止回放。软件回执、输出关断和机械停止分别验收。[版本清单](../firmware/current.json) · [整机验收](verification-plan.md)

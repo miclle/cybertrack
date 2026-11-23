@@ -52,11 +52,11 @@ public:
         if (!guard.Bubbling()) web_targets_ &= ~AudioActionGuard::BubblesOnly;
     }
     void SetForwardBlocked(uint64_t now, bool blocked) {
-        if (blocked && !guard.forward_blocked) guard.CancelPending(AudioActionGuard::MoveOnly);
+        if (blocked && !guard.forward_blocked) guard.InvalidatePendingForward();
         guard.forward_blocked = blocked;
         if (!blocked || !guard.Moving() || std::strcmp(guard.direction, "forward")) return;
         if (plan_active) { plan_active = false; plan_result = "obstacle_blocked"; }
-        guard.StopMove(now);
+        guard.StopMove(now, false);
         web_targets_ &= ~AudioActionGuard::MoveOnly;
         drive_id = drive_renewal = 0;
         window_valid_ = false;
@@ -68,6 +68,11 @@ public:
         window_valid_ = false;
         drive_id = drive_renewal = 0;
         water_hold = {}; bubbles_hold = {};
+    }
+    void InvalidatePowerSession(uint64_t now) {
+        Stop(now);
+        owner = 0;
+        AdvanceVoiceTurn(false);
     }
     void VoiceLink(uint64_t now, bool online) {
         if (online != voice) AdvanceVoiceTurn(false);
@@ -195,7 +200,10 @@ public:
     const char* VoicePlan(uint64_t now, int ticket, const ActionPlan& plan) {
         if (!plan.Valid()) return "invalid_plan";
         if (!wifi || !voice || shutdown || plan_active || web_targets_) return "not_ready_or_busy";
-        const char* result = guard.ClaimPlan(now, ticket);
+        bool includes_forward = false;
+        for (unsigned i = 0; i < plan.count; ++i)
+            if (!std::strcmp(plan.steps[i].direction, "forward")) includes_forward = true;
+        const char* result = guard.ClaimPlan(now, ticket, includes_forward);
         if (std::strcmp(result, "accepted")) return result;
         plan_ = plan;
         plan_step = 1; plan_count = plan.count; plan_active = true;

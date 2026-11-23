@@ -22,6 +22,7 @@ def main():
     parser.add_argument("upstream", type=Path)
     parser.add_argument("--target", type=Path, default=ROOT / "build/xiaozhi-audio-src")
     parser.add_argument("--wifi", type=Path, help="Local ordinary Wi-Fi JSON; embedded in private firmware")
+    parser.add_argument("--mainboard-a1", action="store_true", help="enable the A1 SW2 hardware interlock")
     args = parser.parse_args()
     try:
         networks = load_config(args.wifi) if args.wifi else None
@@ -57,7 +58,7 @@ def main():
             raise RuntimeError(f"Original component cache hash mismatch: {name}")
         manifest["dependencies"][name] = {"override_path": f"../locked_components/{directory}"}
     manifest_path.write_text(yaml.safe_dump(manifest, sort_keys=False))
-    subprocess.run(["python3", str(HERE / "apply_overlay.py"), str(target)], check=True)
+    subprocess.run(["python3", str(HERE / "apply_overlay.py"), str(target), *(["--mainboard-a1"] if args.mainboard_a1 else [])], check=True)
     if networks is not None:
         apply_config(target, networks)
     else:

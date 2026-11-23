@@ -1,0 +1,389 @@
+{
+  "revision": "CyberTrack A1 engineering sample",
+  "editor": "嘉立创 EDA 专业版 4.1.105",
+  "date_local": "2026-11-24",
+  "netlist": {
+    "compared": "All reference designators, electrical pin numbers (including unassigned pins), net names, unique IDs, library identifiers and assembly exclusion flags in native schematic and PCB exports. Assigned connections also compared against design pin map.",
+    "independent_5v_ports": {
+      "J13": {
+        "name": "WATER",
+        "gpio": 18,
+        "module_pad": "11",
+        "pin_1": "WATER_5V_OUT",
+        "pin_2": "GND_SYS",
+        "high_side_switch": "U7",
+        "fuse": "F5",
+        "enable_pulldown_ohm": 10000,
+        "current_limit_resistor_ohm": 45300,
+        "nominal_limit_A": 1.217
+      },
+      "J14": {
+        "name": "BUBBLE",
+        "gpio": 17,
+        "module_pad": "10",
+        "pin_1": "BUBBLE_5V_OUT",
+        "pin_2": "GND_SYS",
+        "high_side_switch": "U8",
+        "fuse": "F6",
+        "enable_pulldown_ohm": 10000,
+        "current_limit_resistor_ohm": 45300,
+        "nominal_limit_A": 1.217
+      },
+      "J15": {
+        "name": "AUX",
+        "gpio": 14,
+        "module_pad": "22",
+        "pin_1": "AUX_5V_OUT",
+        "pin_2": "GND_SYS",
+        "high_side_switch": "U9",
+        "fuse": "F7",
+        "enable_pulldown_ohm": 10000,
+        "current_limit_resistor_ohm": 100000,
+        "nominal_limit_A": 0.549
+      }
+    },
+    "schematic_sheets": 6,
+    "components": 119,
+    "connections_assigned": 373,
+    "named_connected_nets": 79,
+    "differences": 0,
+    "actuation_and_peripheral_gpio_compared_with_A3": [
+      [
+        "IO4",
+        "4",
+        "MIC_WS"
+      ],
+      [
+        "IO5",
+        "5",
+        "MIC_SCK"
+      ],
+      [
+        "IO6",
+        "6",
+        "MIC_DATA"
+      ],
+      [
+        "IO7",
+        "7",
+        "AMP_DATA"
+      ],
+      [
+        "IO15",
+        "8",
+        "AMP_BCLK"
+      ],
+      [
+        "IO16",
+        "9",
+        "AMP_LRCK"
+      ],
+      [
+        "IO17",
+        "10",
+        "BUBBLE_EN"
+      ],
+      [
+        "IO18",
+        "11",
+        "WATER_EN"
+      ],
+      [
+        "IO8",
+        "12",
+        "MOTOR_A_EN"
+      ],
+      [
+        "IO9",
+        "17",
+        "MOTOR_A_IN1"
+      ],
+      [
+        "IO10",
+        "18",
+        "MOTOR_A_IN2"
+      ],
+      [
+        "IO11",
+        "19",
+        "MOTOR_B_EN"
+      ],
+      [
+        "IO12",
+        "20",
+        "MOTOR_B_IN1"
+      ],
+      [
+        "IO13",
+        "21",
+        "MOTOR_B_IN2"
+      ],
+      [
+        "IO47",
+        "24",
+        "TALK"
+      ],
+      [
+        "IO0",
+        "27",
+        "BOOT_STOP_N"
+      ],
+      [
+        "IO39",
+        "32",
+        "VOL_DN"
+      ],
+      [
+        "IO40",
+        "33",
+        "VOL_UP"
+      ],
+      [
+        "IO41",
+        "34",
+        "OLED_SDA"
+      ],
+      [
+        "IO42",
+        "35",
+        "OLED_SCL"
+      ],
+      [
+        "IO2",
+        "38",
+        "US_ECHO"
+      ],
+      [
+        "IO1",
+        "39",
+        "US_TRIG"
+      ]
+    ],
+    "excluded_fuse_positions": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "sw2_interlock": {
+      "power_contact": {
+        "J10": {
+          "1": "ACT_FEED",
+          "2": "5V_ACT"
+        }
+      },
+      "run_contact": {
+        "J16": {
+          "1": "ACT_POR_N",
+          "2": "ACT_CLR_N"
+        }
+      },
+      "clock": {
+        "gpio": 45,
+        "module_pad": 26,
+        "net": "ARM_CLK"
+      },
+      "feedback": {
+        "gpio": 38,
+        "module_pad": 31,
+        "net": "ACT_ARMED"
+      },
+      "pin_nets": {
+        "U10": {
+          "1": "ARM_CLK",
+          "2": "3V3_CTRL",
+          "4": "GND_SYS",
+          "5": "ACT_ARMED",
+          "6": "ACT_CLR_N",
+          "7": "3V3_CTRL",
+          "8": "3V3_CTRL"
+        },
+        "U11": {
+          "3": "GND_SYS",
+          "2": "3V3_CTRL",
+          "1": "ACT_POR_N"
+        },
+        "Q5": {
+          "1": "ACT_FUSED",
+          "2": "ACT_FUSED",
+          "3": "ACT_FUSED",
+          "4": "ACT_GATE",
+          "5": "ACT_FEED",
+          "6": "ACT_FEED",
+          "7": "ACT_FEED",
+          "8": "ACT_FEED"
+        },
+        "Q6": {
+          "1": "ACT_ARMED",
+          "2": "GND_SYS",
+          "3": "ACT_GATE"
+        },
+        "R41": {
+          "1": "ACT_GATE",
+          "2": "ACT_FUSED"
+        },
+        "R42": {
+          "1": "ACT_CLR_N",
+          "2": "GND_SYS"
+        },
+        "R43": {
+          "1": "ARM_CLK",
+          "2": "GND_SYS"
+        },
+        "R44": {
+          "1": "ACT_ARMED",
+          "2": "GND_SYS"
+        }
+      }
+    }
+  },
+  "native_pcb_checks": {
+    "rat": {
+      "items": [],
+      "hasMore": false,
+      "total": 0
+    },
+    "drc": {
+      "state": "passed",
+      "totalCount": 0,
+      "failedItems": 0,
+      "violations": [],
+      "checkedAt": 1795452353731
+    }
+  },
+  "layout": {
+    "eda_nominal_stack_mm": 1.6937,
+    "layer_order_top_to_bottom": [
+      "Top",
+      "Inner1",
+      "Inner2",
+      "Bottom"
+    ],
+    "target_manufactured_board_thickness_mm": 1.6,
+    "routed_line_segments": 1400,
+    "board_routing_vias_excluding_package_vias": 153,
+    "rebuilt_pours": [
+      {
+        "net": "GND_SYS",
+        "layer": "inner1"
+      },
+      {
+        "net": "FUSED",
+        "layer": "top"
+      },
+      {
+        "net": "PROTECTED",
+        "layer": "top"
+      },
+      {
+        "net": "5V_SYS",
+        "layer": "top"
+      }
+    ]
+  },
+  "gerber": {
+    "flying_probe_connections_compared": 373,
+    "one_to_one_probe_nets": 79,
+    "copper_layers": [
+      "Gerber_TopLayer.GTL",
+      "Gerber_InnerLayer1.G1",
+      "Gerber_InnerLayer2.G2",
+      "Gerber_BottomLayer.GBL"
+    ],
+    "closed_outline_vertices_mm": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        73.3
+      ],
+      [
+        30.0,
+        73.3
+      ],
+      [
+        30.0,
+        80.0
+      ],
+      [
+        96.0,
+        80.0
+      ],
+      [
+        96.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "mounting_holes_npth_2.8_mm": [
+      [
+        3.5,
+        3.5
+      ],
+      [
+        92.5,
+        3.5
+      ],
+      [
+        92.5,
+        76.5
+      ],
+      [
+        3.50012,
+        55.0
+      ]
+    ],
+    "plated_and_nonplated_drills_present": true
+  },
+  "cad": {
+    "assembly": "hardware/model/CyberTrack.FCStd",
+    "sha256": "70f4f080fbf51e4c71ef725dfdbd90b2390a6a2606f315258916e2d9b8b39466",
+    "transform": "X=x-48, Y=y-67.5, board bottom Z=178 mm",
+    "step_solid_count": 656,
+    "assembly_bbox_mm": [
+      -48.422,
+      -67.487,
+      175.394,
+      47.987,
+      12.487,
+      193.794
+    ],
+    "tray_overlap_mm3": 0,
+    "lower_solid_to_tray_min_mm": 1.3937,
+    "intersections_mm3": {
+      "PrintHeadShell": 0,
+      "WaterHoseRoute": 0,
+      "BubbleGunHoseRoute": 0,
+      "PowerCableRoute": 0,
+      "StopSignalRoute": 0
+    }
+  },
+  "pending": [
+    "电池持续及峰值输出能力、两路效果负载启动及运行电流",
+    "七处保险选型、SW2 和线束直流额定",
+    "带载压降、开关与驱动温升、启动和断电行为",
+    "装配支柱、插头与线束、天线和麦克风声道实物试配",
+    "SW2 联动触点时序、快速重合与 J16 断线时的实际输出波形"
+  ],
+  "sha256": {
+    "CyberTrack-A1/CyberTrack-A1.eprj3": "bd22f27714da202e33ae451f9c7cd49b8e0241554ad9b5e3e46d09c13481c12d",
+    "CyberTrack-A1/pcb/PCB1.epcb2": "84e8ce381b80059daab7df321885439e6d45764e2cf2c52fb5a1245fa90b5b44",
+    "CyberTrack-A1/sch/Schematic1/Actuator rearm.esch2": "e10ff144412474bd0a75398fb7e303b178729a9d838e225379e8279cfb64f9c2",
+    "CyberTrack-A1/sch/Schematic1/Input and logic supply.esch2": "bd71369a1c47de93655000988e9f942eccf1947a5d9564b965909d4a82d66a31",
+    "CyberTrack-A1/sch/Schematic1/Logic and audio.esch2": "fa1caa9f719df64d2481c9ec095f3d4d27904595a9e9d398fae9a879cd420ea7",
+    "CyberTrack-A1/sch/Schematic1/Motor boost.esch2": "ec9819d235b423320bb898c437efa8f55dbfb2efc837e52b6286f2686619e835",
+    "CyberTrack-A1/sch/Schematic1/Track driver.esch2": "32cb3805b0b6d1ede61df8dedce1fae6d8a95329b70986a6aa51cd4539e172ee",
+    "CyberTrack-A1/sch/Schematic1/Water and bubbles.esch2": "c0e74871438b25fcce398ba8327383f490415d458d3e32e4564075d4fa56e525",
+    "CyberTrack-A1-Gerber.zip": "6a68e5cd65d954732f7dc4437d0b32fc2ef0e47a7def2e41373b6a5d1a2d577d",
+    "CyberTrack-A1-STEP.zip": "984adc51db2d52e7ca9f0f4916f95a5dd08b8db7963ab9364abfae9809f7badf",
+    "CyberTrack-A1.png": "89533778d75076985094512357202f495c86b8be71533f30306cf85b74e27a57"
+  }
+}

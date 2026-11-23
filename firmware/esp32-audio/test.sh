@@ -65,11 +65,18 @@ source = Path('firmware/esp32-audio/cybertrack_tools.cc').read_text()
 start = source.index('void TickLocked(')
 end = source.index('\n}', start) + 2
 Path('build/audio-host/proximity_tick.inc').write_text(source[start:end])
+start = source.index('auto now = Now();', source.index('void SafetyTask('))
+end = source.index('xSemaphoreGive(lock);', start)
+Path('build/audio-host/safety_tick.inc').write_text(source[start:end])
 PYCODE
 c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ibuild/audio-host -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/proximity_test.cc \
   build/audio-host/water_policy.o -o build/audio-host/proximity_test
 build/audio-host/proximity_test
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror -DCYBERTRACK_MAINBOARD_A1 \
+  -Ibuild/audio-host -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/sw2_test.cc \
+  build/audio-host/water_policy.o -o build/audio-host/sw2_test
+build/audio-host/sw2_test
 c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ifirmware/esp32-audio firmware/esp32-audio/tests/recent_command_test.cc -o build/audio-host/recent_command_test
 build/audio-host/recent_command_test

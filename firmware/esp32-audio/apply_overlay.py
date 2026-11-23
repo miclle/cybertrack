@@ -104,17 +104,21 @@ def replace_once(path, old, new):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
+    parser.add_argument("--mainboard-a1", action="store_true")
     args = parser.parse_args()
     source = args.source.resolve()
     if not source.is_relative_to(ROOT / "build") or (source / ".git").exists():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct79")')
+                 'set(PROJECT_VER "2.0.3-ct80")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
                  'InitializeCyberTrackTools();')
+    if args.mainboard_a1:
+        with (source / "main/CMakeLists.txt").open("a") as cmake:
+            cmake.write("\ntarget_compile_definitions(${COMPONENT_LIB} PRIVATE CYBERTRACK_MAINBOARD_A1=1)\n")
     # Restrict schemas and validation to CyberTrack tools.
     replace_once(source / "main/mcp_server.h",
                  'cJSON_AddItemToObject(input_schema, "properties", properties);',

@@ -1,4 +1,4 @@
-// Controlled-clock adapter for the stop-v1 field matrix. No board I/O.
+// Controlled-clock adapter for the field stop matrices. No board I/O.
 #include "control_sessions.h"
 #include <cassert>
 #include <cstdio>
@@ -24,8 +24,19 @@ int main(int argc, char** argv) {
         plan.count = 2;
         plan.steps[0] = {"forward", 1000, 0, 1000};
         plan.steps[1] = {"none", 0, 0, 4000};
-        assert(source == "voice");
-        assert(!std::strcmp(s.VoicePlan(0, s.VoiceClaim(0, 1, G::PlanMode), plan), "accepted"));
+#ifdef STOP_REPLAY_WEB_DRAFT
+        if (source == "web") {
+            ShowDraft::Command draft;
+            draft.plan = plan;
+            assert(!std::strcmp(s.WebDraft(0, owner, 1, s.window, draft), "draft_saved"));
+            assert(s.Heartbeat(0, owner));
+            assert(!std::strcmp(s.WebConfirm(0, owner, 2, s.window, s.draft.revision), "accepted"));
+        } else
+#endif
+        {
+            assert(source == "voice");
+            assert(!std::strcmp(s.VoicePlan(0, s.VoiceClaim(0, 1, G::PlanMode), plan), "accepted"));
+        }
     } else if (event == "pointer_release") {
         const auto result = source == "move" ? s.DriveStart(0, owner, 1, s.window, "forward", 0)
             : s.EffectStart(0, owner, 1, s.window, source == "water" ? G::WaterOnly : G::BubblesOnly);

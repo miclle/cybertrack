@@ -43,7 +43,8 @@ def dataset():
 class StopTrialsTest(unittest.TestCase):
     def test_initialized_rows_are_all_unknown_and_do_not_count(self):
         data = stop.initialize(profile())
-        self.assertEqual(len(data["trials"]), 85)
+        self.assertEqual(len(data["trials"]), 65)
+        self.assertEqual(len(stop.initialize(profile(), "stop-v1")["trials"]), 85)
         report = stop.analyze(data)
         self.assertFalse(report["profiles"][0]["coverage_complete"])
         self.assertEqual(report["physical_profiles_with_complete_records"], [])
@@ -52,9 +53,18 @@ class StopTrialsTest(unittest.TestCase):
             self.assertEqual(row["additional_complete_records_needed"], 5)
             self.assertTrue(all(t["missing"] for t in row["trials"]))
 
+    def test_current_complete_without_web_sequences(self):
+        data = stop.initialize(profile())
+        data["trials"] = [trial(c, n) for c in stop.MATRICES[stop.CURRENT_MATRIX] for n in range(1, 6)]
+        self.assertTrue(stop.analyze(data)["profiles"][0]["coverage_complete"])
+        data["trials"].append(trial(stop.CASE_BY_ID["sequence_cancel_web_waiting"]))
+        with self.assertRaises(ValueError):
+            stop.analyze(data)
+
     def test_empty_is_not_physical_coverage(self):
         report = stop.analyze(json.loads((ROOT / "docs/validation/stop-trials.json").read_text()))
-        self.assertEqual(len(report["required_cases"]), 17)
+        self.assertEqual(report["matrix_id"], "stop-v2")
+        self.assertEqual(len(report["required_cases"]), 13)
         self.assertEqual(report["physical_profiles_with_complete_records"], [])
         self.assertEqual(report["physical_acceptance"], "not_established")
 

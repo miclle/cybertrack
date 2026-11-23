@@ -37,19 +37,21 @@ GPIO4 由麦克风占用。BOOT 按下即停止，松开后需要新指令。GPI
 在仓库根目录操作，先加载 ESP-IDF v5.5.1 环境。源码准备需要包含原始 ELF、sdkconfig 和锁定组件缓存的上游工作区，以及支持 tarfile data filter 的 Python 和 PyYAML。导出目标须是 `build/` 下尚不存在的目录。
 
 ```sh
-python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct79-rebuild-src
+python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct80-rebuild-src
 sh firmware/esp32-audio/test.sh
 node firmware/esp32-audio/tests/web_ui_test.mjs
-python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct79-rebuild-src
-python firmware/esp32-audio/tests/run_display_tests.py --source build/xiaozhi-ct79-rebuild-src
-idf.py -C build/xiaozhi-ct79-rebuild-src -B "$PWD/build/firmware-ct79-rebuild" build
+python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct80-rebuild-src
+python firmware/esp32-audio/tests/run_display_tests.py --source build/xiaozhi-ct80-rebuild-src
+idf.py -C build/xiaozhi-ct80-rebuild-src -B "$PWD/build/firmware-ct80-rebuild" build
 ```
+
+上例默认生成面包板固件。为 A1 构建时，在准备命令加 `--mainboard-a1`，并使用独立的源码目录和构建目录。A1 通过 GPIO38 读取断电锁存状态，通过 GPIO45 重新使能执行器，GPIO14 保持扩展口关闭。[A1 断电与恢复](../../hardware/pcb/README.md#sw2-断电与恢复)
 
 应用版本由 `apply_overlay.py` 设置。历史部署只写入核对过的应用分区，保留引导、NVS、OTA 选择与资源区。设备版本、备份及镜像回读见[ct78 应用部署记录](../../docs/validation/ct78-deployment.md)。
 
 ## 验证与观察
 
-[ct79 检查记录](verification-ct79.json)涵盖本地构建、实际 MCP／HTTP 处理、音频、网页与停止矩阵回放。需要对齐现场日志时，`monitor.py --port <设备串口> --log build/audio-private/session.jsonl` 只读筛选回执和状态。真人拾音、扬声器、动作与机械停止按[现场记录方法](../../docs/validation/README.md)分别观察。
+[ct80 检查记录](verification-ct80.json)给出两个镜像的 SHA-256、SW2 主机测试及当前停止矩阵结果。[ct79 检查记录](verification-ct79.json)涵盖本地构建、实际 MCP／HTTP 处理、音频、网页与停止矩阵回放。需要对齐现场日志时，`monitor.py --port <设备串口> --log build/audio-private/session.jsonl` 只读筛选回执和状态。真人拾音、扬声器、动作与机械停止按[现场记录方法](../../docs/validation/README.md)分别观察。
 
 ## 平台角色配置
 

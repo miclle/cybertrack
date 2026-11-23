@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 
@@ -63,7 +64,8 @@ def build(source, idf, output, sanitize=False):
     if formats[0]=="unknown": raise ValueError("unknown/inconsistent step contract")
     catalog_file=output/"tool-catalog.json"
     catalog_file.write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+"\n")
-    manifest = dict(scope="Full MCP dispatcher and actual callbacks; immediate or explicitly deferred host schedule; simulated input/time/distance; zero board IO",
+    version, = re.findall(r'set\(PROJECT_VER "([^"]+)"\)', (source/"CMakeLists.txt").read_text())
+    manifest = dict(firmware=version, scope="Full MCP dispatcher and actual callbacks; immediate or explicitly deferred host schedule; simulated input/time/distance; zero board IO",
                     step_argument_format=formats[0],tool_catalog_sha256=hashlib.sha256(catalog_file.read_bytes()).hexdigest(),
                     sanitizers=sanitize,
                     executable_sha256=hashlib.sha256(executable.read_bytes()).hexdigest(),

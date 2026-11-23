@@ -1,0 +1,275 @@
+{
+  "revision": "CyberTrack A0 engineering sample",
+  "editor": "嘉立创 EDA 专业版 4.1.105",
+  "date_local": "2026-11-24",
+  "netlist": {
+    "compared": "All reference designators, electrical pin numbers (including unassigned pins), net names, unique IDs, library identifiers and assembly exclusion flags in native schematic and PCB exports. Assigned connections also compared against design pin map.",
+    "schematic_sheets": 5,
+    "components": 114,
+    "connections_assigned": 348,
+    "named_connected_nets": 74,
+    "differences": 0,
+    "actuation_and_peripheral_gpio_compared_with_A3": [
+      [
+        "IO4",
+        "4",
+        "MIC_WS"
+      ],
+      [
+        "IO5",
+        "5",
+        "MIC_SCK"
+      ],
+      [
+        "IO6",
+        "6",
+        "MIC_DATA"
+      ],
+      [
+        "IO7",
+        "7",
+        "AMP_DATA"
+      ],
+      [
+        "IO15",
+        "8",
+        "AMP_BCLK"
+      ],
+      [
+        "IO16",
+        "9",
+        "AMP_LRCK"
+      ],
+      [
+        "IO17",
+        "10",
+        "BUBBLE_EN"
+      ],
+      [
+        "IO18",
+        "11",
+        "WATER_EN"
+      ],
+      [
+        "IO8",
+        "12",
+        "MOTOR_A_EN"
+      ],
+      [
+        "IO9",
+        "17",
+        "MOTOR_A_IN1"
+      ],
+      [
+        "IO10",
+        "18",
+        "MOTOR_A_IN2"
+      ],
+      [
+        "IO11",
+        "19",
+        "MOTOR_B_EN"
+      ],
+      [
+        "IO12",
+        "20",
+        "MOTOR_B_IN1"
+      ],
+      [
+        "IO13",
+        "21",
+        "MOTOR_B_IN2"
+      ],
+      [
+        "IO47",
+        "24",
+        "TALK"
+      ],
+      [
+        "IO0",
+        "27",
+        "BOOT_STOP_N"
+      ],
+      [
+        "IO39",
+        "32",
+        "VOL_DN"
+      ],
+      [
+        "IO40",
+        "33",
+        "VOL_UP"
+      ],
+      [
+        "IO41",
+        "34",
+        "OLED_SDA"
+      ],
+      [
+        "IO42",
+        "35",
+        "OLED_SCL"
+      ],
+      [
+        "IO2",
+        "38",
+        "US_ECHO"
+      ],
+      [
+        "IO1",
+        "39",
+        "US_TRIG"
+      ]
+    ],
+    "excluded_fuse_positions": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ]
+  },
+  "native_pcb_checks": {
+    "drc": {
+      "state": "passed",
+      "totalCount": 0,
+      "failedItems": 0,
+      "violations": [],
+      "checkedAt": 1795449917779
+    },
+    "rat": {
+      "items": [],
+      "hasMore": false,
+      "total": 0
+    }
+  },
+  "layout": {
+    "eda_nominal_stack_mm": 1.6937,
+    "layer_order_top_to_bottom": [
+      "Top",
+      "Inner1",
+      "Inner2",
+      "Bottom"
+    ],
+    "target_manufactured_board_thickness_mm": 1.6,
+    "routed_line_segments": 1205,
+    "board_routing_vias_excluding_package_vias": 124,
+    "rebuilt_pours": [
+      {
+        "net": "GND_SYS",
+        "layer": "inner1"
+      },
+      {
+        "net": "FUSED",
+        "layer": "top"
+      },
+      {
+        "net": "PROTECTED",
+        "layer": "top"
+      },
+      {
+        "net": "5V_SYS",
+        "layer": "top"
+      }
+    ]
+  },
+  "gerber": {
+    "copper_layers": [
+      "Gerber_TopLayer.GTL",
+      "Gerber_InnerLayer1.G1",
+      "Gerber_InnerLayer2.G2",
+      "Gerber_BottomLayer.GBL"
+    ],
+    "closed_outline_vertices_mm": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        73.3
+      ],
+      [
+        30.0,
+        73.3
+      ],
+      [
+        30.0,
+        80.0
+      ],
+      [
+        96.0,
+        80.0
+      ],
+      [
+        96.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "mounting_holes_npth_2.8_mm": [
+      [
+        3.5,
+        3.5
+      ],
+      [
+        92.5,
+        3.5
+      ],
+      [
+        92.5,
+        76.5
+      ],
+      [
+        3.50012,
+        55.0
+      ]
+    ],
+    "plated_and_nonplated_drills_present": true
+  },
+  "cad": {
+    "assembly": "hardware/model/CyberTrack.FCStd",
+    "sha256": "70f4f080fbf51e4c71ef725dfdbd90b2390a6a2606f315258916e2d9b8b39466",
+    "transform": "X=x-48, Y=y-67.5, board bottom Z=178 mm",
+    "step_solid_count": 617,
+    "assembly_bbox_mm": [
+      -48.422,
+      -67.487,
+      175.394,
+      47.987,
+      12.487,
+      193.794
+    ],
+    "tray_overlap_mm3": 0,
+    "lower_solid_to_tray_min_mm": 1.3937,
+    "intersections_mm3": {
+      "PrintHeadShell": 0,
+      "WaterHoseRoute": 0,
+      "BubbleGunHoseRoute": 0,
+      "PowerCableRoute": 0,
+      "StopSignalRoute": 0
+    }
+  },
+  "pending": [
+    "电池持续及峰值输出能力、两路效果负载启动及运行电流",
+    "六处保险选型、SW2 和线束直流额定",
+    "带载压降、开关与驱动温升、启动和断电行为",
+    "装配支柱、插头与线束、天线和麦克风声道实物试配"
+  ],
+  "sha256": {
+    "CyberTrack-A0-Gerber.zip": "058a31934befa57d45ac2c0e23b91e162afbf24cad636adbe03c5763dc89595a",
+    "CyberTrack-A0-STEP.zip": "d190ec5706a2e9d024730d3b1033303ec75203fa1e6a2ea1932a4682aed46163",
+    "CyberTrack-A0.png": "45b466bdafae2b3fd0b6fdf5602f0b2369b818e3e72f5aa51a2fde056d1030a7",
+    "CyberTrack-Mainboard/CyberTrack-Mainboard.eprj3": "eb1b58051df299b6b126d2ffab70b943c8111a5eee96cde692910cbd8397238a",
+    "CyberTrack-Mainboard/pcb/PCB1.epcb2": "73a9cc874956f13a0ef75ae41ead39021d9b5e64fb28dd52d251812606c900de",
+    "CyberTrack-Mainboard/sch/Schematic1/Input and logic supply.esch2": "473693ec2f76db0cbc4092284096dfbe33bbe252e0cb9ee73c2261f67d7fe0bb",
+    "CyberTrack-Mainboard/sch/Schematic1/Logic and audio.esch2": "9bf0aee7ee1b5ad147ef4d1dc51617bc4d03616c327f67182d7d3eccc40a0881",
+    "CyberTrack-Mainboard/sch/Schematic1/Motor boost.esch2": "ec9819d235b423320bb898c437efa8f55dbfb2efc837e52b6286f2686619e835",
+    "CyberTrack-Mainboard/sch/Schematic1/Track driver.esch2": "32cb3805b0b6d1ede61df8dedce1fae6d8a95329b70986a6aa51cd4539e172ee",
+    "CyberTrack-Mainboard/sch/Schematic1/Water and bubbles.esch2": "56b30df4272a839b493bca5caa60313b0819b88c083cfb99ebf7d79102f4ff9a"
+  }
+}

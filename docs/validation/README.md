@@ -8,7 +8,7 @@ ct79 的本地回归覆盖三个动作通道、停止和退役请求拒绝。先
 
 `voice-cases.json` 和 `compose-cases.json` 是历史 80／8 固定集，供[参考包](../../tools/lingxi-solution/README.md)离线复算。旧版部署和角色记录中的文档路径可在[清理前的验证目录](https://github.com/miclle/cybertrack/tree/90e11bdbf12c749f61eb9a5f89af69634973d3ad/docs/validation)按原名查阅。真人观察单引用 `spoken-cases.json`，实际采集应注明受测版本和工况。
 
-每种真人条件分别生成空白观察单，按实际听到的原话、平台转写、工具调用、回执及扬声器回复填写。空白字段保留为 `null`。确认无调用填 `[]`，现场确认静默填空字符串。每条有效观察需要匿名证据编号与本次运行信息。未观察的用例单列，无法从回执推断扬声器听感。
+每种真人条件分别生成空白观察单，按实际听到的原话、平台转写、工具调用、回执及扬声器回复填写。空白字段保留为 `null`。确认无调用填 `[]`，现场确认静默填空字符串。每条有效观察需要匿名证据编号与本次运行信息。`firmware` 填受测版本，例如 `2.0.3-ct80`。ct79 起序列评分使用退役后的字段，旧记录仍按原契约评分。未观察的用例单列，无法从回执推断扬声器听感。
 
 ```sh
 python3 scripts/review_spoken_cases.py --new-sheet 安静 > quiet.json
@@ -17,7 +17,7 @@ python3 scripts/review_spoken_cases.py --capture quiet.json
 
 ## 低压故障矩阵
 
-历史采集工具提供[17 案例采集契约与分析说明](stop-trials.md)、[空记录入口](stop-trials.json)及 `scripts/analyze_stop_trials.py`。具体记录格式以该契约为准；旧 `templates.json` 的 fault 字段只作采集概览。分析器拒绝混来源、重复计数及无效数值，并按配置分别给出缺项、违例和输出／机械停止统计。命令成功不代表实物验收。
+采集工具提供[当前 13 类与历史 17 类案例的采集契约](stop-trials.md)、[空记录入口](stop-trials.json)及 `scripts/analyze_stop_trials.py`。具体记录格式以该契约为准；旧 `templates.json` 的 fault 字段只作采集概览。分析器拒绝混来源、重复计数及无效数值，并按配置分别给出缺项、违例和输出／机械停止统计。命令成功不代表实物验收。
 
 每种条件至少 5 次：松手、BOOT、网页后台、网页网络中断、Wi-Fi 断开、语音连接关闭、序列执行／等待时取消、重连。分别记录 web／voice 来源以及活动通道。网页失效只停网页动作、语音失效只停语音动作，BOOT／统一停止／Wi-Fi 断开全停；序列后续步骤不得恢复。
 

@@ -22,12 +22,23 @@ def normalized(text):
     return "".join(c for c in text if not c.isspace() and c not in "。,，!?！？“”「」")
 
 
-def corpus():
+def corpus(firmware=None):
     selection = json.loads(INDEX.read_bytes())["case_ids"]
     all_cases = {c["id"]: c for c in json.loads(VOICE.read_bytes())["cases"]}
     if len(selection) != 20 or len(set(selection)) != 20:
         raise ValueError("Expected 20 unique spoken cases")
-    return {cid: all_cases[cid] for cid in selection}
+    selected = {cid: all_cases[cid] for cid in selection}
+    revision = re.search(r"\bct(\d+)\b", firmware or "")
+    if revision and int(revision[1]) >= 79:
+        for case in selected.values():
+            for call in case["expected_calls"]:
+                if call["name"] == "self.tank.sequence":
+                    steps = json.loads(call["arguments"]["steps_json"])
+                    for step in steps:
+                        if step.get("ignition_ms") == 0:
+                            del step["ignition_ms"]
+                    call["arguments"]["steps_json"] = json.dumps(steps, ensure_ascii=False)
+    return selected
 
 
 def new_sheet(condition):
@@ -59,7 +70,7 @@ def new_sheet(condition):
 
 
 def review(trace):
-    cases = corpus()
+    cases = corpus(trace.get("firmware"))
     mode = trace["input_mode"]
     if mode not in ("synthetic_opus", "human_microphone"):
         raise ValueError("Text diagnostics cannot be scored as speech")

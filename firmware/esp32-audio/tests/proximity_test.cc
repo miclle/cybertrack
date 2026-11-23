@@ -226,6 +226,33 @@ int main() {
         assert(is(s.guard.Move(0,s.VoiceClaim(0,1,G::MoveOnly),1000,d),"accepted"));
         s.SetForwardBlocked(1,true); s.Tick(1,false); assert(s.guard.Moving());
     }
+    // A near reading between admission and execution invalidates only forward travel.
+    for (auto mode : {G::MoveOnly, G::Both, G::PlanMode}) {
+        for (const char* direction : {"forward", "backward", "left", "right"}) {
+            for (bool obstacle_clears : {false, true}) {
+                auto s = ready();
+                int ticket = s.VoiceClaim(0, 1, mode);
+                assert(ticket > 0);
+                s.SetForwardBlocked(1, true);
+                if (obstacle_clears) s.SetForwardBlocked(2, false);
+                const char* result;
+                if (mode == G::PlanMode) {
+                    ActionPlan plan;
+                    plan.count = 2;
+                    plan.steps[0] = {"none", 0, 0, 1000};
+                    plan.steps[1] = {direction, 1000, 0, 0};
+                    result = s.VoicePlan(3, ticket, plan);
+                } else if (mode == G::Both) {
+                    result = s.guard.MoveAndWater(3, ticket, 1000, 1000, direction);
+                } else {
+                    result = s.guard.Move(3, ticket, 1000, direction);
+                }
+                bool forward = is(direction, "forward");
+                assert(is(result, forward ? "obstacle_blocked" : "accepted"));
+                assert((s.guard.Starts() == 0) == forward);
+            }
+        }
+    }
     { // No partial startup of a blocked forward + spray command, even with an older ticket.
         auto s=ready(); int ticket=s.VoiceClaim(0,1,G::Both);
         s.SetForwardBlocked(1,true);

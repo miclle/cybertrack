@@ -49,6 +49,11 @@ void Token(char (&token)[33]) {
     for (unsigned i = 0; i < 16; ++i) { token[2*i] = hex[bytes[i] >> 4]; token[2*i+1] = hex[bytes[i] & 15]; }
     token[32] = 0;
 }
+#ifdef CYBERTRACK_MAINBOARD_A1
+// U10 retains an asynchronous SW2 trip even between two safety ticks.
+constexpr gpio_num_t arm_clock = GPIO_NUM_45, arm_feedback = GPIO_NUM_38;
+bool actuator_armed = false;
+#endif
 void TickLocked(uint64_t now) {
     const bool pressed = gpio_get_level(stop_pin) == 0;
     const bool forward = guard.Moving() && !std::strcmp(guard.direction, "forward") &&
@@ -56,7 +61,14 @@ void TickLocked(uint64_t now) {
     auto alert = proximity.Update(CyberTrackDistanceSnapshot(), now, forward, sessions.auto_avoidance_enabled);
     // Update the interlock before Tick can start another sequence step/effect.
     sessions.SetForwardBlocked(now, proximity.blocked);
-    sessions.Tick(now, pressed, outputs.fault);
+    bool inhibit = outputs.fault;
+#ifdef CYBERTRACK_MAINBOARD_A1
+    const bool armed = gpio_get_level(arm_feedback) != 0;
+    if (armed != actuator_armed) sessions.InvalidatePowerSession(now);
+    actuator_armed = armed;
+    inhibit |= !armed;
+#endif
+    sessions.Tick(now, pressed, inhibit);
     CyberTrackProximityAlert(alert, proximity.beeping);
 }
 struct OffEvent {
@@ -110,6 +122,16 @@ void SafetyTask(void*) {
     for (;;) {
         xSemaphoreTake(lock, portMAX_DELAY);
         auto now = Now(); TickLocked(now); ApplyLocked(now);
+#ifdef CYBERTRACK_MAINBOARD_A1
+        // Re-arm only from this locked task, after the disabled output levels
+        // have been applied. An open auxiliary contact holds U10 in clear.
+        if (!actuator_armed && !outputs.fault && !guard.Moving() &&
+            !guard.Watering() && !guard.Bubbling() && !sessions.shutdown) {
+            if (gpio_set_level(GPIO_NUM_14, 0) != ESP_OK ||
+                gpio_set_level(arm_clock, 1) != ESP_OK ||
+                gpio_set_level(arm_clock, 0) != ESP_OK) outputs.fault = true;
+        }
+#endif
         xSemaphoreGive(lock);
         // No serial, display, network or allocation here, even when one lane
         // stops while the other stays active. Logging uses a nonblocking queue.
@@ -418,6 +440,16 @@ std::string CyberTrackWebCall(uint32_t session, const char* operation, const Web
 void InitializeCyberTrackTools() {
     // Initialization errors latch an unavailable backend; never reboot into a retry.
     (void)outputs.Init();
+#ifdef CYBERTRACK_MAINBOARD_A1
+    gpio_config_t arm_in{};
+    arm_in.pin_bit_mask = 1ULL << arm_feedback;
+    arm_in.mode = GPIO_MODE_INPUT;
+    gpio_config_t arm_out{};
+    arm_out.pin_bit_mask = (1ULL << arm_clock) | (1ULL << GPIO_NUM_14);
+    arm_out.mode = GPIO_MODE_OUTPUT;
+    if (gpio_set_level(arm_clock, 0) != ESP_OK || gpio_set_level(GPIO_NUM_14, 0) != ESP_OK ||
+        gpio_config(&arm_in) != ESP_OK || gpio_config(&arm_out) != ESP_OK) outputs.fault = true;
+#endif
     ESP_LOGI("CT_AUDIO", "WATER_PAD_READY pin=18 level=%d output_fault=%s sample=after_apply nominal_tick_ms=5",
              outputs.WaterPadLevel(), outputs.fault ? "true" : "false");
     gpio_config_t input{}; input.pin_bit_mask = 1ULL << stop_pin;
