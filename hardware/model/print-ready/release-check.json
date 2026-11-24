@@ -4,21 +4,18 @@
   "projects": [
     {
       "path": "hardware/model/lean-print/CyberTrack-Lean-6plates.3mf",
-      "before_sha256": "aa4afca971e7fb6bf5b30d746f926aee81bc24c579d882bdf73567077e155def",
-      "sha256": "b045ca42877010f5153919aa5423d74bb30a002e08734e16b2e552bf96300987",
+      "before_sha256": "b045ca42877010f5153919aa5423d74bb30a002e08734e16b2e552bf96300987",
+      "sha256": "acab158aed5d6d6e9851a98ebc7e7fa930289aa2198793aec795d96e8bf1c95e",
       "removed": [
-        "WaterPod",
-        "WaterLidMark",
-        "BubblePod",
-        "BubbleLidMark"
-      ],
-      "updated": [
-        "PP04-LowerTub.stl",
-        "PP03-base"
-      ],
-      "part_names": [
         "LC02-TopRetainer-flat",
         "LC01-Carrier-upright",
+        "EffectTray"
+      ],
+      "updated": [
+        "PP07-upright.stl",
+        "PP07-Tray.stl"
+      ],
+      "part_names": [
         "ShoulderRailL",
         "ShoulderRailR",
         "NeckCableBridge",
@@ -35,67 +32,78 @@
         "LC04-flipped",
         "PP01-base",
         "PP02-base",
-        "EffectTray",
         "ChestAudioPanel",
         "PrintChestGuardL",
         "PrintChestGuardR",
         "LowerChin",
         "ChestBadge"
       ],
-      "print_parts": 24,
+      "print_parts": 21,
       "requires_reslice_plates": [
         1,
+        2,
         3,
         4,
+        5,
         6
       ],
-      "unchanged_archive_entries": 43,
+      "unchanged_archive_entries": 27,
       "changed_or_removed_entries": [
+        "Metadata/plate_5.png",
+        "Metadata/plate_no_light_2.png",
+        "Metadata/top_2.png",
+        "Metadata/pick_2.png",
         "3D/3dmodel.model",
         "3D/_rels/3dmodel.model.rels",
-        "3D/Objects/object_1.model",
+        "3D/Objects/object_8.model",
+        "3D/Objects/object_7.model",
+        "3D/Objects/object_18.model",
+        "3D/Objects/object_16.model",
         "Metadata/model_settings.config",
-        "3D/Objects/remaining_1.model",
-        "3D/Objects/completion_1.model",
-        "3D/Objects/completion_11.model",
-        "3D/Objects/v2-liquid-BubblePod.model",
-        "3D/Objects/v2-liquid-BubbleLidMark.model"
+        "Metadata/slice_info.config",
+        "Metadata/plate_2.json",
+        "Metadata/plate_5.json",
+        "Metadata/plate_5.gcode.md5",
+        "Metadata/plate_5.gcode",
+        "Metadata/_rels/model_settings.config.rels",
+        "3D/Objects/completion_3.model",
+        "Metadata/plate_2.gcode",
+        "Metadata/plate_2.gcode.md5",
+        "Metadata/plate_2.png"
       ],
       "process_settings_unchanged": true,
       "placed_bottom_change_mm": {
-        "PP04-LowerTub.stl": 0.0,
-        "PP03-base": 0.0
+        "PP07-upright.stl": 0.0,
+        "PP07-Tray.stl": 0.0
       },
       "mesh_local_translation_mm": {
-        "PP04-LowerTub.stl": [
+        "PP07-upright.stl": [
           0.0,
           0.0,
-          -33.00000000000001
+          -27.549999299999993
         ],
-        "PP03-base": [
+        "PP07-Tray.stl": [
           0.0,
           0.0,
-          5.000000413701855e-08
+          -2.75
         ]
       },
-      "sliced": false,
-      "cached_plates": [
-        2,
-        5
-      ]
+      "sliced": false
     },
     {
       "path": "hardware/model/print-ready/CyberTrack-Ready-6plates.3mf",
-      "before_sha256": "4593d31aa250a97787fc14bb0c6c6342a3e83ff6e818460b78848996208117e9",
-      "sha256": "9e6050af1da41ca7cf046284973f9e14f46f2dad2e5b29929776835cb8d7a0e5",
+      "before_sha256": "9e6050af1da41ca7cf046284973f9e14f46f2dad2e5b29929776835cb8d7a0e5",
+      "sha256": "b314d8e77e6d079f26c9124e6518bb85362cb54b63ba42f7a02820b428f97538",
       "removed": [
-        "WaterLidMark",
-        "BubblePod",
-        "BubbleLidMark"
+        "LC01-Carrier-upright",
+        "EffectRetainerLBuck",
+        "EffectRetainerLMOS",
+        "EffectRetainerRBuck",
+        "EffectRetainerRMOS",
+        "LC02-TopRetainer-flat"
       ],
       "updated": [
-        "PP04-LowerTub.stl",
-        "PP03-base"
+        "PP07-upright.stl"
       ],
       "part_names": [
         "BatteryHatch",
@@ -104,16 +112,10 @@
         "LowerChin",
         "LC03-BottomServiceCover-flipped",
         "KeelSideFrameL",
-        "LC01-Carrier-upright",
         "ShoulderRailR",
-        "EffectRetainerLBuck",
-        "EffectRetainerLMOS",
-        "EffectRetainerRBuck",
         "ShoulderRailL",
         "NeckCableBridge",
-        "EffectRetainerRMOS",
         "PrintNeck",
-        "LC02-TopRetainer-flat",
         "PrintChestGuardR",
         "PP04-LowerTub.stl",
         "PP01-base",
@@ -125,7 +127,7 @@
         "PP07-Crown.stl",
         "PP03-base"
       ],
-      "print_parts": 26,
+      "print_parts": 20,
       "requires_reslice_plates": [
         1,
         2,
@@ -134,36 +136,39 @@
         5,
         6
       ],
-      "unchanged_archive_entries": 44,
+      "unchanged_archive_entries": 31,
       "changed_or_removed_entries": [
+        "Metadata/plate_2.png",
+        "Metadata/plate_4.png",
+        "Metadata/plate_no_light_2.png",
+        "Metadata/plate_no_light_4.png",
+        "Metadata/top_2.png",
+        "Metadata/pick_2.png",
+        "Metadata/top_4.png",
+        "Metadata/pick_4.png",
         "3D/3dmodel.model",
         "3D/_rels/3dmodel.model.rels",
-        "3D/Objects/object_33.model",
-        "3D/Objects/object_19.model",
-        "3D/Objects/object_1.model",
-        "Metadata/model_settings.config",
-        "3D/Objects/v2-liquid-BubblePod.model",
-        "3D/Objects/v2-liquid-BubbleLidMark.model"
+        "3D/Objects/object_14.model",
+        "3D/Objects/object_12.model",
+        "3D/Objects/object_15.model",
+        "3D/Objects/object_13.model",
+        "3D/Objects/object_7.model",
+        "3D/Objects/object_8.model",
+        "3D/Objects/object_16.model",
+        "Metadata/model_settings.config"
       ],
       "process_settings_unchanged": true,
       "placed_bottom_change_mm": {
-        "PP04-LowerTub.stl": 0.0,
-        "PP03-base": 0.0
+        "PP07-upright.stl": 0.0
       },
       "mesh_local_translation_mm": {
-        "PP04-LowerTub.stl": [
+        "PP07-upright.stl": [
           0.0,
           0.0,
-          -33.00000000000001
-        ],
-        "PP03-base": [
-          0.0,
-          0.0,
-          -45.0
+          -27.549999299999993
         ]
       },
-      "sliced": false,
-      "cached_plates": []
+      "sliced": false
     }
   ],
   "slicing_validated": false,

@@ -53,13 +53,12 @@ def restore(path, snapshot):
     objects={o.get('name'):o.get('type') for o in document.findall('./Objects/Object')}
     providers=root.find('ViewProviderData')
     lookup={v.get('name'):v for v in providers}
-    shape_template=lookup['PrintBackpack'];group_template=lookup['Drive']
     for v in list(providers):
         if v.get('name') not in objects:providers.remove(v)
     for name,kind in objects.items():
         if name in lookup:continue
         is_group='DocumentObjectGroup' in kind
-        v=copy.deepcopy(group_template if is_group else shape_template)
+        v=copy.deepcopy(lookup['Drive' if is_group else 'PrintBackpack'])
         v.set('name',name);v.set('treeRank','-1');v.set('expanded','0')
         v.find("./Properties/Property[@name='Visibility']/Bool").set('value','true' if is_group else 'false')
         providers.append(v)

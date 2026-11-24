@@ -1,10 +1,12 @@
 # 可编辑设计源档
 
-v2 设计源档包含直接落在湿舱底面的清水瓶与泡泡液瓶、两根顶部软管和更新后的取瓶检查空间。[现行几何回读](../bottle-backpack-direct-fit.json)
+v2 设计源档含 A1 主板、开框托架和左右扬声器、紧固件及 PP07 耳罩内侧安装座；冠盖与外侧格栅保留原始造型。[头舱回读](../pcb-speaker-fit.json)
+
+双瓶部分包含直接落在湿舱底面的清水瓶与泡泡液瓶、两根顶部软管和更新后的取瓶检查空间。[现行几何回读](../bottle-backpack-direct-fit.json)
 
 `CyberTrack-design.FCStd` 保存融合输入、设计特征、组织分组及检查空间，供局部更新和几何追溯；它会随主模型继续维护，并非冻结的 0.51 原字节副本。现已接续 0.57 L298N 支架、0.58 头壳、PP02／LC04 修正及 Lean 精简。
 
-日常查看使用 [CyberTrack.FCStd](../CyberTrack.FCStd)，打印使用 [24 件 Lean 六盘项目](../lean-print/README.md)。设计源档中的融合输入、设备占位与检查空间不要重复打印。样机已有[实拍与运行视频](../../../artifact/README.md)，实物验收按[装配指南](../../../docs/assembly.md)执行。
+日常查看使用 [CyberTrack.FCStd](../CyberTrack.FCStd)，打印使用 [21 件 Lean 六盘项目](../lean-print/README.md)。设计源档中的融合输入、设备占位与检查空间不要重复打印。样机已有[实拍与运行视频](../../../artifact/README.md)，实物验收按[装配指南](../../../docs/assembly.md)执行。
 
 [树结构审计](../model-tree-audit.json)记录 0.51 阶段的 58 个源特征、59 个检查空间及当时两份文件哈希；后续更新改变了对象清单，旧数量和哈希不作为当前源档证明。现行增量几何与清单检查见 [Lean 证据](../lean-print/README.md#验证与复现)，其他局部修订按各自专项追溯。
 

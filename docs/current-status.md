@@ -6,7 +6,7 @@
 | 固件候选 | **2.0.3-ct80** 提供 A1 主板和旧面包板两种构建，A2 专用固件待开发。A1 通过硬件锁存处理 SW2 断开，避障保留待处理的后退和转向请求。应用尚待部署。[构建与回归记录](../firmware/esp32-audio/verification-ct80.json) |
 | 旧版样机应用 | **2.0.3-ct78** 于 2026-11-03 仅更新应用。配置保持，两次启动联网、二十条输出全关的状态回读通过。[部署记录](validation/ct78-deployment.md) |
 | 语音角色 | 仓库的 ct79 角色为 5002 字符，尚待同步。平台最近一次回读为 2026-11-01 恢复的旧 5991 字符角色。[角色源](../firmware/esp32-audio/role-prompt.txt) · [平台回读](validation/evidence/ct78-stop-duration/platform-restored.json) |
-| CAD 与打印 | 清水瓶、泡泡液瓶直接放入背包。Lean 24 件、Ready 26 件，各六盘。CAD 已检查取瓶路径，实际抓握、行走稳定性和密封待验。[模型与切片入口](../hardware/model/README.md) |
+| CAD 与打印 | 整机已装入 A1 STEP、四柱托架及左右各一只常规喇叭。Lean 21 件、Ready 20 件，各六盘。4 Ω 带载表现与闭盖声像待验。清水瓶、泡泡液瓶直接放入背包。CAD 已检查取瓶路径，实际抓握、行走稳定性和密封待验。[模型与切片入口](../hardware/model/README.md) |
 | 电源 | 辰克 5 V 电池包供电，电机支路升压至 12 V。当前整机的持续负载、电流、温升和续航待测。[电源与预算](../hardware/architecture/README.md) |
 
 ## 现场与语音

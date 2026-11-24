@@ -1,0 +1,270 @@
+{
+  "board": "A1",
+  "speaker_candidate": "PUI ASE02808MR-LW150-R",
+  "physical_fit_verified": false,
+  "slicing_validated": false,
+  "byte_identical_retained_shapes": {
+    "source/CyberTrack-design.FCStd": 255,
+    "CyberTrack.FCStd": 133
+  },
+  "original_exterior_brep_sha256": {
+    "source/CyberTrack-design.FCStd": {
+      "PrintCrown": "1007f272d4ccbae890d3b0a15f786327a1541a30ff8be026eaab34d68285cfce"
+    },
+    "CyberTrack.FCStd": {
+      "PrintCrown": "b42b1b7b4d84081ef6cc7fd9359db64df53430cc409319376c10cc08d0c74427"
+    }
+  },
+  "speakers": 2,
+  "mono_parallel_nominal_ohms": 4,
+  "per_side_clearances_mm": {
+    "L": {
+      "PowerCableRoute": 2.004,
+      "StopSignalRoute": 5.604,
+      "PrintCrown": 1.801,
+      "ElectronicsTray": 0.7,
+      "MainboardA1": 13.213,
+      "MainboardA2": 13.213,
+      "CameraBody": 92.766,
+      "Ribbon": 85.95,
+      "FPCWithdrawn": 85.95,
+      "LatchTool": 86.9,
+      "TailTool": 85.2
+    },
+    "R": {
+      "PowerCableRoute": 58.463,
+      "StopSignalRoute": 61.023,
+      "PrintCrown": 1.801,
+      "ElectronicsTray": 1.2,
+      "MainboardA1": 12.778,
+      "MainboardA2": 12.778,
+      "CameraBody": 39.289,
+      "Ribbon": 23.95,
+      "FPCWithdrawn": 23.95,
+      "LatchTool": 24.9,
+      "TailTool": 23.2
+    }
+  },
+  "allowance_each_side_mm": 0.5,
+  "hidden_ports_per_ear": 3,
+  "hidden_port_dimensions_mm": [
+    8,
+    1.8
+  ],
+  "existing_grille_paths_checked_per_ear": 3,
+  "outer_grilles_unchanged": true,
+  "board_frame_intersection_mm3": 0,
+  "board_fastener_intersection_mm3": 0,
+  "listening_test_distances_m": [
+    0.3,
+    0.5
+  ],
+  "listening_test_completed": false,
+  "step_solids": 1402,
+  "print_exports": {
+    "PP07-HeadShell": {
+      "facets": 23148,
+      "step_volume_delta_mm3": 0.13042022445006296
+    },
+    "Head-ElectronicsTray": {
+      "facets": 5168,
+      "step_volume_delta_mm3": 0.0
+    }
+  },
+  "projects": [
+    {
+      "path": "hardware/model/lean-print/CyberTrack-Lean-6plates.3mf",
+      "before_sha256": "b045ca42877010f5153919aa5423d74bb30a002e08734e16b2e552bf96300987",
+      "sha256": "acab158aed5d6d6e9851a98ebc7e7fa930289aa2198793aec795d96e8bf1c95e",
+      "removed": [
+        "LC02-TopRetainer-flat",
+        "LC01-Carrier-upright",
+        "EffectTray"
+      ],
+      "updated": [
+        "PP07-upright.stl",
+        "PP07-Tray.stl"
+      ],
+      "part_names": [
+        "ShoulderRailL",
+        "ShoulderRailR",
+        "NeckCableBridge",
+        "PP07-upright.stl",
+        "PP07-Crown.stl",
+        "PP07-Tray.stl",
+        "BatteryHatch",
+        "KeelSideFrameL",
+        "KeelSideFrameR",
+        "PrintNeck",
+        "PP04-LowerTub.stl",
+        "LC03-BottomServiceCover-flipped",
+        "PP03-base",
+        "LC04-flipped",
+        "PP01-base",
+        "PP02-base",
+        "ChestAudioPanel",
+        "PrintChestGuardL",
+        "PrintChestGuardR",
+        "LowerChin",
+        "ChestBadge"
+      ],
+      "print_parts": 21,
+      "requires_reslice_plates": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "unchanged_archive_entries": 27,
+      "changed_or_removed_entries": [
+        "Metadata/plate_5.png",
+        "Metadata/plate_no_light_2.png",
+        "Metadata/top_2.png",
+        "Metadata/pick_2.png",
+        "3D/3dmodel.model",
+        "3D/_rels/3dmodel.model.rels",
+        "3D/Objects/object_8.model",
+        "3D/Objects/object_7.model",
+        "3D/Objects/object_18.model",
+        "3D/Objects/object_16.model",
+        "Metadata/model_settings.config",
+        "Metadata/slice_info.config",
+        "Metadata/plate_2.json",
+        "Metadata/plate_5.json",
+        "Metadata/plate_5.gcode.md5",
+        "Metadata/plate_5.gcode",
+        "Metadata/_rels/model_settings.config.rels",
+        "3D/Objects/completion_3.model",
+        "Metadata/plate_2.gcode",
+        "Metadata/plate_2.gcode.md5",
+        "Metadata/plate_2.png"
+      ],
+      "process_settings_unchanged": true,
+      "placed_bottom_change_mm": {
+        "PP07-upright.stl": 0.0,
+        "PP07-Tray.stl": 0.0
+      },
+      "mesh_local_translation_mm": {
+        "PP07-upright.stl": [
+          0.0,
+          0.0,
+          -27.549999299999993
+        ],
+        "PP07-Tray.stl": [
+          0.0,
+          0.0,
+          -2.75
+        ]
+      },
+      "sliced": false
+    },
+    {
+      "path": "hardware/model/print-ready/CyberTrack-Ready-6plates.3mf",
+      "before_sha256": "9e6050af1da41ca7cf046284973f9e14f46f2dad2e5b29929776835cb8d7a0e5",
+      "sha256": "b314d8e77e6d079f26c9124e6518bb85362cb54b63ba42f7a02820b428f97538",
+      "removed": [
+        "LC01-Carrier-upright",
+        "EffectRetainerLBuck",
+        "EffectRetainerLMOS",
+        "EffectRetainerRBuck",
+        "EffectRetainerRMOS",
+        "LC02-TopRetainer-flat"
+      ],
+      "updated": [
+        "PP07-upright.stl"
+      ],
+      "part_names": [
+        "BatteryHatch",
+        "ChestBadge",
+        "KeelSideFrameR",
+        "LowerChin",
+        "LC03-BottomServiceCover-flipped",
+        "KeelSideFrameL",
+        "ShoulderRailR",
+        "ShoulderRailL",
+        "NeckCableBridge",
+        "PrintNeck",
+        "PrintChestGuardR",
+        "PP04-LowerTub.stl",
+        "PP01-base",
+        "PP07-upright.stl",
+        "PP02-base",
+        "ChestAudioPanel",
+        "PrintChestGuardL",
+        "LC04-flipped",
+        "PP07-Crown.stl",
+        "PP03-base"
+      ],
+      "print_parts": 20,
+      "requires_reslice_plates": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "unchanged_archive_entries": 31,
+      "changed_or_removed_entries": [
+        "Metadata/plate_2.png",
+        "Metadata/plate_4.png",
+        "Metadata/plate_no_light_2.png",
+        "Metadata/plate_no_light_4.png",
+        "Metadata/top_2.png",
+        "Metadata/pick_2.png",
+        "Metadata/top_4.png",
+        "Metadata/pick_4.png",
+        "3D/3dmodel.model",
+        "3D/_rels/3dmodel.model.rels",
+        "3D/Objects/object_14.model",
+        "3D/Objects/object_12.model",
+        "3D/Objects/object_15.model",
+        "3D/Objects/object_13.model",
+        "3D/Objects/object_7.model",
+        "3D/Objects/object_8.model",
+        "3D/Objects/object_16.model",
+        "Metadata/model_settings.config"
+      ],
+      "process_settings_unchanged": true,
+      "placed_bottom_change_mm": {
+        "PP07-upright.stl": 0.0
+      },
+      "mesh_local_translation_mm": {
+        "PP07-upright.stl": [
+          0.0,
+          0.0,
+          -27.549999299999993
+        ]
+      },
+      "sliced": false
+    }
+  ],
+  "saved_reopened": true,
+  "files_sha256": {
+    "CyberTrack.FCStd": "e536f5d8e4f9c2ca642b74baeea9120ac9051cc033ef8392bcc869f57427ad0a",
+    "CyberTrack.step": "b32966283edb99163453e20678302984f594029bb7873da9dfa8baa0a7577084",
+    "lean-print/CyberTrack-Lean-6plates.3mf": "acab158aed5d6d6e9851a98ebc7e7fa930289aa2198793aec795d96e8bf1c95e",
+    "print-parts/Head-ElectronicsTray.step": "66667e1fbf85934a416c8f4b90e0ce3d45af4582cd530eaf27d31e6a36f07704",
+    "print-parts/Head-ElectronicsTray.stl": "3efc318db8f5616f12fe0f192ba3ab059e81e7dd5cd9d80c3ab39cac82a4e7cd",
+    "print-parts/PP07-HeadShell.FCStd": "93b85fe5bc4ae311d5f1b1a591ae4884569dae37151ac8110650a2819da4deda",
+    "print-parts/PP07-HeadShell.step": "3b317c99e36cc154a66ec69f51b8fb2c50cb8143c93b753b5f2f4c1451b75e88",
+    "print-parts/PP07-HeadShell.stl": "2229b1b2ef91d59fe208497a99f3c526194071e3ab3466cb075b7db48f4854f7",
+    "print-ready/CyberTrack-Ready-6plates.3mf": "b314d8e77e6d079f26c9124e6518bb85362cb54b63ba42f7a02820b428f97538",
+    "source/CyberTrack-design.FCStd": "508bf30843de243b9c391e4fb3147dc9e1bd9ea59a303957f173671cef36c6ce"
+  },
+  "top_firing_alternative": {
+    "front_centre_xyz_mm": [
+      0,
+      -20,
+      213
+    ],
+    "expanded_envelope_clearance_to_crown_mm": 2.943,
+    "expanded_envelope_clearance_to_A1_mm": 10.915,
+    "solid_above_diaphragm_z_range_mm": [
+      217.0,
+      226.0
+    ]
+  }
+}

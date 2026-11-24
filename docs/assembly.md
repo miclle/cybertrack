@@ -3,7 +3,7 @@
 A2 的右前脸安装沿用 PP07 固定座。装好小散热片与后压片，开冠盖，从上方竖直插入原装 FPC，露铜面朝前，转动 J17 锁扣。维修时先开锁，夹住补强端上提。[A2 插拔模型、工序与净距](../hardware/model/studies/front-camera/README.md#a2-主板插拔检查)
 
 
-先核对手里的打印件属于哪套排盘。Lean 为 24 件、6 盘，Ready 为 26 件、6 盘，盘号和切片缓存各自独立。Lean 第 1、3、4、6 盘需重切，Ready 六盘均需切片。装配时以保存的 FreeCAD 整机为几何依据，坐标 X 向左、Y 向后、Z 向上，前方为 −Y。[整机模型](../hardware/model/README.md) · [Lean](../hardware/model/lean-print/README.md) · [Ready](../hardware/model/print-ready/README.md)
+Lean 21 件、Ready 20 件，各六盘。使用 Ready 时另打 A1 主板托架。整机坐标 +X 向左、+Y 向后、+Z 向上，前方为 −Y。[整机模型](../hardware/model/README.md) · [Lean](../hardware/model/lean-print/README.md) · [Ready](../hardware/model/print-ready/README.md)
 
 ## 底盘与动力
 
@@ -19,7 +19,13 @@ v2 使用 A1 板载 L298P；旧样机的独立 L298N 与底盖支架见历史装
 
 ## 头舱与穿线
 
-v2 以 96 × 80 mm A1 定制板为装配基线，板孔、支柱、底面避空、外设连接器与维护行程须按实板固定。前摄试装使用 A1 STEP，开窗与装配次序见[右前脸试装](../hardware/model/studies/front-camera/README.md)。原浅托盘、100 × 85 mm 占位和以下历史工序来自旧版头舱。拆冠盖后先断开 USB、收置超声波和跨舱线束，再取托盘。冠盖和托盘各用四颗螺丝，Ø2.1 mm 导孔需结合实际打印材料试拧。[头壳、配套冠盖及试拧件](head-shell-print.md)
+整机采用 A1 主板，板底 Z178 mm。四个 Ø2.8 mm 安装孔落在框架的四根支柱上，候选固定件为 Ø2.5 × 5 mm 螺钉。框架通过四个侧耳锁到 PP07，冠盖单独拆装。板底焊点、插头高度、螺纹保持力和麦克风声道需用首板核对。[主板与托架](../hardware/model/README.md#v2-头舱电子装配)
+
+**左右各装一只同型号常规喇叭。** 断电、开盖，先装扬声器，再装 A1 托架。振膜朝外，原厂耳片对准 PP07 内侧的两个盲孔柱，在硬质前框与支承唇之间放闭孔泡棉（设计压缩厚度 1 mm）。每只用两颗 ST2.9 × 8 mm 候选螺钉配垫圈压住耳片。先用打印件试拧，确认两侧密封均匀、振膜和出声通路留空。[喇叭图纸](https://puiaudio.com/file/specs-ASE02808MR-LW150-R.pdf) · [头舱模型](../hardware/model/README.md#v2-头舱电子装配)
+
+两只 8 Ω 喇叭用 Y 形线束同相并联到 J5。J5-1（SPK_P）分到两个正端，J5-2（SPK_N）分到两个负端，额定负载合计 4 Ω。两条引线分别固定在头舱内侧，留出拔插余量，避开麦克风声孔、摄像头排线和螺丝柱。检修时先拔 J5、移开托架，再拆目标喇叭。
+
+首件从低音量开始，先逐只检查极性与出声，再同音量合播。在正前方 30 cm、50 cm 检查人声是否居中、左右响度是否接近；闭盖复测履带噪声、自播回声、失真、5 V 压降及功放温升后再确定音量上限。[CAD 回读](../hardware/model/pcb-speaker-fit.json)
 
 旧版颈部按 15 根导线、净径 10 mm 规划，已计入 BOOT 两线。主束经过中央限位桥，在托盘下方转向头舱左侧。独立上下护口已取消，穿线前需修整孔缘，核对实物束径、连接器、转弯和抽盘余量。[通道检查](../hardware/model/cable-passage-audit.json) · [颈部路线图](../hardware/model/cable-passage-layout.png)
 

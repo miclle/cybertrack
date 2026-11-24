@@ -1,6 +1,6 @@
 # 第 6 盘补齐记录（历史 34 件排盘）
 
-v2 现行打印使用 [24 件 Lean](../lean-print/README.md) 或 [26 件 Ready](../print-ready/README.md)。本目录的两件前侧甲已更新为封闭出线孔的 STL、STEP 和 BRep。双瓶直接放入背包，瓶托和识别条已移除。[现行几何回读](../bottle-backpack-direct-fit.json)
+v2 现行打印使用 [21 件 Lean](../lean-print/README.md) 或 [20 件 Ready](../print-ready/README.md)。本目录的两件前侧甲已更新为封闭出线孔的 STL、STEP 和 BRep。双瓶直接放入背包，瓶托和识别条已移除。[现行几何回读](../bottle-backpack-direct-fit.json)
 
 2026-10-26 的补齐工作将 12 个零件追加到第 6 盘，原五盘 G-code 保持一致。当时的 Bambu Studio 切片估算为 **1 小时 30 分、59.87 g**。最终候选通过 56 个关键截面的路径检查。支撑清理、装配公差、承载和层间强度仍需实物验证。[历史基线](../archive/print-baselines/README.md)
 

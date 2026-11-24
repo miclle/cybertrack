@@ -15,21 +15,21 @@ def sha(path):
 
 
 def check():
-    latest = MODEL / 'bottle-backpack-direct-fit.json'
-    if latest.exists():
-        cad = json.loads(latest.read_text())
-        print_report = cad['projects']
-        for relative, digest in cad['files_sha256'].items():
-            assert sha(MODEL / relative) == digest, relative
-        assert all(not (MODEL / relative).exists() for relative in cad['retired_exports'])
-        assert all(row['pass'] for row in cad['bottle_service'].values())
-    else:
-        cad = json.loads((MODEL / 'v2-cad-readback.json').read_text())
-        print_report = json.loads((MODEL / 'v2-print-readback.json').read_text())
-        for relative in ('CyberTrack.FCStd', 'source/CyberTrack-design.FCStd', 'CyberTrack.step'):
-            path = MODEL / relative
-            assert sha(path) == cad['files_sha256'][path.name], relative
-    assert cad['saved_reopened']
+    bottles = json.loads((MODEL / 'bottle-backpack-direct-fit.json').read_text())
+    head = json.loads((MODEL / 'pcb-speaker-fit.json').read_text())
+    files = {**bottles['files_sha256'], **head['files_sha256']}
+    for relative, digest in files.items():
+        assert sha(MODEL / relative) == digest, relative
+    assert all(not (MODEL / relative).exists() for relative in bottles['retired_exports'])
+    assert all(row['pass'] for row in bottles['bottle_service'].values())
+    assert bottles['saved_reopened'] and head['saved_reopened']
+    for relative in ('CyberTrack.FCStd', 'source/CyberTrack-design.FCStd'):
+        with zipfile.ZipFile(MODEL / relative) as archive:
+            objects = E.fromstring(archive.read('Document.xml')).findall('./Objects/Object')
+            names = {obj.get('name') for obj in objects}
+            assert {'MainboardA1', 'ElectronicsTray', 'SpeakerL', 'SpeakerR', 'SpeakerFasteners'} <= names
+            assert not any(n.startswith(('Breadboard', 'L298N', 'EffectMOS', 'MT3608')) for n in names)
+    print_report = head['projects']
     for row in print_report:
         path = ROOT / row['path']
         assert sha(path) == row['sha256'], path
@@ -39,6 +39,7 @@ def check():
             names = [obj.find("metadata[@key='name']").get('value') for obj in settings.findall('object')]
             assert names == row['part_names']
             assert 'IgnitionMOSCarrier' not in names
+            assert not any(name in names for name in ('WaterPod', 'BubblePod', 'WaterLidMark', 'BubbleLidMark'))
             assert not set(row['removed']).intersection(names)
             assert len(names) == len(set(names)) == row['print_parts']
             assert len(settings.findall('plate')) == 6

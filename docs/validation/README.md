@@ -31,7 +31,7 @@ python3 scripts/review_spoken_cases.py --capture quiet.json
 
 先完成短时基线与异常检查，再确定连续运行时长；相同典型使用流程实际重复 3 次。万用表读数不能冒充瞬态峰值。成本关联 `hardware/BOM.md` 的物料 ID，分别记录实际单价、数量、来源、打印克重与料价、装配工时；样机成本和未来批量估算分列。
 
-历史 Lean 27 件排盘的切片估算为 920.28 g PLA。现行 24 件排盘的总耗材待重新切片估算，实打称重、重打及修整另记。[历史切片数据与复核方法](../../hardware/model/lean-print/README.md#历史-27-件排盘耗材)
+历史 Lean 27 件排盘的切片估算为 920.28 g PLA。现行 21 件 Lean 排盘的总耗材待重新切片估算，实打称重、重打及修整另记。[历史切片数据与复核方法](../../hardware/model/lean-print/README.md#历史-27-件排盘耗材)
 
 用 `python3 scripts/summarize_parts_cost.py docs/validation/templates.json` 汇总采购记录。将模板复制到本地填写，每行关联一个 H 编号。`source` 填脱敏凭据代号和行号，同一来源行只入账一次。样机行填用在这一台的数量、实付单价、购买日期及 `estimate_only: false`。报价行填 `estimate_only: true`、`estimated_unit_cny` 和 `scenario`，用场景名区分采购数量和报价版本；同一场景统一按一台或整批计量。没有可核对的单价就留空。工具分列已知采购小计、各报价场景小计、缺凭据的 BOM 项和不完整记录。BOM 含待选部件，缺凭据清单供逐项核对；样机总成本还需计入实际打印消耗、报废和装配工时，同一笔料费只计一次。
 

@@ -4,21 +4,24 @@
 
 ## v2 头舱电子装配
 
-v2 按定制主 PCB 设计。打开[右前脸摄像头试装](studies/front-camera/README.md)可同时检查 A1 实板 STEP、镜头开窗、固定件、散热与排线。整机模型与现有打印包中的面包板、独立驱动板和对应支架属于早期装配占位；试装件尚待实物确认后再并入制造版。
+A1 定制主 PCB 安装在四柱托架上。左右各一只 PUI ASE02808MR-LW150-R，振膜朝向各自的耳罩。每侧声音由三个被原格栅实体遮住的内声口进入格栅后方空隙，再从原条缝出声。冠盖、前脸、外耳环及格栅造型沿用原版。[装配](../../docs/assembly.md#头舱与穿线) · [CAD 回读](pcb-speaker-fit.json)
+
+顶部也核过一只常规喇叭的平放空间。振膜中心在（0，−20，213）mm 且朝上，按最大包络每面放宽 0.5 mm 后，至冠盖 2.94 mm、至 A1 主板 10.92 mm。该位置的正上方为 Z217–226 mm 实体，直接朝上出声需要另设声口。本版采用两侧原条缝，正面声像待闭盖试听。
+
+![原前脸与左右扬声器横剖面](pcb-speaker-fit.png)
 
 ## v2 装配与打印
 
 清水瓶与泡泡液瓶直接放入背包，由 PP04 湿舱底面承托。去掉两瓶的绑带、搭接片、底托、底垫、侧垫、识别条及专用螺钉／嵌件，共 22 件。PP03 封平两处绑带缺口，PP04 填平四个嵌件孔。两只瓶下移 6 mm，顶部软管随瓶口接长。拔下目标吸管后，任一瓶均可沿 +Z 独立上提 150 mm，已通过 CAD 扫掠检查。实物抓握、行走稳定性和密封待验。[装配说明](../../docs/assembly.md#双枪与背包) · [CAD 与排盘回读](bottle-backpack-direct-fit.json)
 
-现行 Lean 为 24 件、6 盘，第 1、3、4、6 盘需重切。Ready 为 26 件、6 盘，均需切片。可在上一版 v2 双瓶模型与排盘上运行 [FreeCAD 简化脚本](../../scripts/simplify_bottle_backpack.py)，在指定目录生成本次交付。v2 点火退役与旧双瓶布局的证据见[点火退役回读](v2-cad-readback.json)及[旧双瓶回读](liquid-supply-readback.json)。
+Lean 21 件、Ready 20 件，各六盘。Lean 含 A1 托架，使用 Ready 时需单独打印托架。从前一版双瓶直放 CAD 和打印项目可复现此次内部装配调整。[修订脚本](../../scripts/fit_pcb_speaker.py) · [文件与排盘回读](pcb-speaker-fit.json)
 
 | 工程 | 适用任务 |
 |---|---|
-| [Lean 排盘](lean-print/README.md) | 按当前清单打印或补打。第 2、5 盘保留缓存。 |
+| [Lean 排盘](lean-print/README.md) | 含 A1 主板托架及原 PP05 和内置双喇叭支座的 PP07。 |
 | [Ready 排盘](print-ready/README.md) | 沿用用户排盘与工艺，盘号与 Lean 分开。 |
 | [整机装配](../../docs/assembly.md) | 确认动力、开关、托盘、穿线、双枪和双瓶取放顺序。 |
-| [头壳打印](../../docs/head-shell-print.md) | PP07 整体打印，冠盖与原托盘分别拆装，导孔需试拧。 |
-| [L298N 支架](l298n-compact/README.md) | 旧模块样机的底盖承载件，按 28.5 mm 插线包络核对实物与紧固件。 |
+| [头壳打印](../../docs/head-shell-print.md) | PP07 整体打印，冠盖与主板框架分别拆装。 |
 | [原始部件资料](../components/) | 核对实测外形、厂商资料和接口假设。 |
 
 在仓库根目录运行 `python3 scripts/check_print_release.py` 可复核现行 CAD 与两个 3MF 的文件哈希、六盘清单和需重切盘的缓存状态。

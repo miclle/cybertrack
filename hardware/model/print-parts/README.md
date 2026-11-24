@@ -6,7 +6,11 @@ v2 的 PP03 已封平绑带缺口，PP04 已填平底托安装孔。当前 STL�
 
 **四件几何修正记录：** PP02 与 LC04 已修复；PP01、PP02、PP03、LC04 曾组成新增第 5 盘，现分入 Lean 第 3、6 盘，见[独立 STL／STEP、方向与检查](../remaining-print/README.md)。PP02 本目录 STL／STEP 已同步为底板贴床方向，原 PP02.png 和旧图册保留历史孔形。
 
-## 当前头部打印：0.58
+## 头舱试装件
+
+[PP07 头壳](PP07-HeadShell.stl)集成双耳内声口和喇叭支座，请使用本版头壳打印件；PP05 冠盖可沿用。A1 四柱托架提供 [STL](Head-ElectronicsTray.stl) 和 [STEP](Head-ElectronicsTray.step)。[头舱回读](../pcb-speaker-fit.json)
+
+## 0.58 头部打印记录
 
 新增 [PP07 头部下壳 STL](PP07-HeadShell.stl)，34 个原特征＋14 处连接整体打印，开口向上；配套更新 [PP05 冠盖 STL](PP05-Crown.stl)。用户现有 Ø2.5、含帽总长8.6、帽Ø3.9×1 mm 螺丝用于冠盖和托盘，共8颗，Ø2.1导孔先试拧。先打印 [导孔试件](Head-ScrewFitCoupon.stl)，详见[头部打印说明](../../../docs/head-shell-print.md)及[切片配置](PP07-slicing/README.md)。底盘未改。下文六件基线的“无朝向”“PP05几何保持”及旧图册均不覆盖本次更新；旧合并报告哈希保留历史状态，当前 PP05／PP07 使用[新报告](../head-shell-print-audit.json)。
 
