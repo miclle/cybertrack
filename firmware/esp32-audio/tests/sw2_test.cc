@@ -26,6 +26,7 @@ ultrasonic::Reading CyberTrackDistanceSnapshot() { return {}; }
 void CyberTrackProximityAlert(ProximityGuard::Alert, bool) {}
 void ApplyLocked(uint64_t) { active_pads = guard.Moving() || guard.Watering() || guard.Bubbling(); }
 #include "proximity_tick.inc"
+#include "off_reason.inc"
 void safety_tick() {
     tick_ms += 5;
 #include "safety_tick.inc"
@@ -58,6 +59,8 @@ int main() {
     assert(!latch && active_pads);
     safety_tick();
     assert(latch && !active_pads && !sessions.Owns(owner) && !sessions.VoiceTurnReady(turn));
+    assert(!std::strcmp(OffReason("move", guard.motion), "actuator_disarmed"));
+    assert(!std::strcmp(OffReason("water", guard.spray), "actuator_disarmed"));
     safety_tick();
     assert(actuator_armed && !active_pads);
     assert(std::strcmp(guard.Bubbles(tick_ms, ticket, 1000), "accepted"));
@@ -67,4 +70,11 @@ int main() {
     outputs.fault = true;
     safety_tick();
     assert(!latch && !active_pads);
+    assert(!std::strcmp(OffReason("bubbles", guard.bubbles), "output_fault"));
+    outputs.fault = false;
+    safety_tick();
+    safety_tick();
+    sessions.WifiLink(tick_ms, false);
+    safety_tick();
+    assert(actuator_armed && !std::strcmp(OffReason("move", guard.motion), "link_lost"));
 }

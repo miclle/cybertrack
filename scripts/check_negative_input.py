@@ -37,6 +37,11 @@ def check(executable):
         run('no_substitute_'+tool,[text(prohibition),call(tool,args)],lambda r,s:r[0]['result']=='input_negated' and s['starts_this_boot']==0 and off(s))
     for tool,args in [('set_speed',dict(speed_percent=100)),('adjust_speed',dict(delta_percent=10))]:
         run('no_speed_'+tool,[text('不要前进'),call(tool,args)],lambda r,s:r[0]['result']=='input_negated' and s['move_speed_percent']==70,'corpus_forward70')
+    for phrase,tool,args in [('不要加速','adjust_speed',dict(delta_percent=10)),
+                             ('别减速','adjust_speed',dict(delta_percent=-10)),
+                             ('别加速到80%','set_speed',dict(speed_percent=80))]:
+        run('running_speed_'+phrase,[text(phrase),call(tool,args)],
+            lambda r,s:r[0]['result']=='input_negated' and s['move_speed_percent']==70,'corpus_forward70')
     for phrase in ('不要停止当前序列','不要停','别取消序列'):
         # No original-input ID exists on MCP stop. Keep the stop path even
         # when it may be a model mistake; do not disguise that semantic gap.

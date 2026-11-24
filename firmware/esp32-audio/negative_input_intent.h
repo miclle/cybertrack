@@ -1,4 +1,5 @@
 #pragma once
+#include "spoken_duration.h"
 #include <string_view>
 #include <initializer_list>
 
@@ -33,7 +34,9 @@ inline Kind Clause(std::string_view text) {
         if (text==body) return Kind::PreserveExisting;
     for (auto prefix : {"开启","启动","打开","执行"})
         if (TakePrefix(text,prefix)) break;
-    for (auto body : {"前进","后退","左转","右转","喷水","吹泡泡","泡泡","点火","放电","饭店",
+    if (SpokenSpeedTarget(text)) return Kind::NoNewAction;
+    for (auto body : {"前进","后退","左转","右转","加速","减速","加快速度","减慢速度",
+                      "快一点","慢一点","全速","最快","最大速度","调到全速","喷水","吹泡泡","泡泡","点火","放电","饭店",
                       "开枪","开炮","射击","发射","电击","护盾","打火","狂暴模式"})
         if (text==body) return Kind::NoNewAction;
     return Kind::None;

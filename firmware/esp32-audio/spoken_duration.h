@@ -1,4 +1,5 @@
 #pragma once
+#include <initializer_list>
 #include <string_view>
 
 // Consume one Arabic or Chinese digit from a recognized duration.
@@ -45,6 +46,34 @@ inline int SpokenWhole(std::string_view text) {
     }
     int digit = SpokenDigit(text);
     return text.empty() ? digit : -1;
+}
+
+// Match the complete target, so qualifiers and questions stay outside the grammar.
+inline int SpokenSpeedTarget(std::string_view text) {
+    auto trim = [](std::string_view value) {
+        while (!value.empty() && value.front() == ' ') value.remove_prefix(1);
+        while (!value.empty() && value.back() == ' ') value.remove_suffix(1);
+        return value;
+    };
+    text = trim(text);
+    for (std::string_view prefix : {"速度调到", "调到", "减速到", "加速到", "掉到", "速度"}) {
+        if (text.substr(0, prefix.size()) != prefix) continue;
+        auto value = trim(text.substr(prefix.size()));
+        constexpr std::string_view percent = "百分之";
+        const bool spoken_unit = value.substr(0, percent.size()) == percent;
+        if (spoken_unit) value = trim(value.substr(percent.size()));
+        bool has_unit = spoken_unit;
+        for (std::string_view unit : {"%", "％"}) {
+            if (value.size() >= unit.size() && value.substr(value.size() - unit.size()) == unit) {
+                value = trim(value.substr(0, value.size() - unit.size()));
+                has_unit = true;
+                break;
+            }
+        }
+        const int target = value == "一百" ? 100 : SpokenWhole(value);
+        if (target >= 60 && target <= 100 && (prefix != "掉到" || has_unit)) return target;
+    }
+    return 0;
 }
 
 // Playback whitelist only. Unknown syntax stays audible; this never starts actions.

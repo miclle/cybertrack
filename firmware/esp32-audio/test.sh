@@ -65,6 +65,9 @@ source = Path('firmware/esp32-audio/cybertrack_tools.cc').read_text()
 start = source.index('void TickLocked(')
 end = source.index('\n}', start) + 2
 Path('build/audio-host/proximity_tick.inc').write_text(source[start:end])
+start = source.index('const char* OffReason(')
+end = source.index('\n}', start) + 2
+Path('build/audio-host/off_reason.inc').write_text(source[start:end])
 start = source.index('auto now = Now();', source.index('void SafetyTask('))
 end = source.index('xSemaphoreGive(lock);', start)
 Path('build/audio-host/safety_tick.inc').write_text(source[start:end])

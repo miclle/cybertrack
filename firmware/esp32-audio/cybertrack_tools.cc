@@ -85,9 +85,19 @@ QueueHandle_t event_queue = xQueueCreateStatic(16, sizeof(OffEvent), event_queue
 unsigned dropped_events = 0;
 bool applied_move = false, applied_water = false, applied_bubbles = false;
 uint64_t move_started = 0, water_started = 0, bubbles_started = 0;
+const char* OffReason(const char* channel, const water_policy& policy) {
+    if (outputs.fault) return "output_fault";
+    if (policy.held) return "BOOT";
+#ifdef CYBERTRACK_MAINBOARD_A1
+    if (!actuator_armed) return "actuator_disarmed";
+#endif
+    if (!policy.online) return "link_lost";
+    if (policy.clock_fault) return "clock_fault";
+    if (!std::strcmp(channel, "move") && guard.forward_blocked) return "obstacle";
+    return policy.stopped ? "stop" : "deadline";
+}
 void OffRecord(const char* channel, uint64_t started, uint64_t now, const water_policy& policy) {
-    OffEvent event{channel, outputs.fault ? "output_fault" : policy.held ? "BOOT" :
-        !policy.online ? "link_lost" : policy.clock_fault ? "clock_fault" : (!std::strcmp(channel, "move") && guard.forward_blocked) ? "obstacle" : policy.stopped ? "stop" : "deadline",
+    OffEvent event{channel, OffReason(channel, policy),
         now - started, guard.Starts(), guard.Moving(), guard.Watering(), guard.Bubbling(), outputs.water_pad};
     if (xQueueSend(event_queue, &event, 0) != pdTRUE) ++dropped_events;
 }

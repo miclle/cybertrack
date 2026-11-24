@@ -47,19 +47,7 @@ struct SpokenPlayback {
         *this = {};
         if (text.empty() || text.size() > 1024) return false;
         Trim(text);
-        for (auto prefix : {"速度调到", "调到", "减速到", "加速到", "掉到", "速度"}) {
-            auto value = text;
-            if (!Take(value, prefix)) continue;
-            const bool percent = Take(value, "百分之");
-            Trim(value);
-            bool suffix = false;
-            for (auto unit : {std::string_view("%"), std::string_view("％")})
-                if (value.size() >= unit.size() && value.substr(value.size()-unit.size()) == unit) {
-                    value.remove_suffix(unit.size()); suffix = true; break;
-                }
-            Trim(value);
-            const int target = value == "一百" ? 100 : SpokenWhole(value);
-            if (target < 60 || target > 100 || (std::string_view(prefix) == "掉到" && !percent && !suffix)) return false;
+        if (const int target = SpokenSpeedTarget(text)) {
             tool = "set_speed"; speed = target; return true;
         }
         Take(text, "先");
