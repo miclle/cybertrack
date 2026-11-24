@@ -1,0 +1,139 @@
+{
+  "revision": "CyberTrack A2 camera engineering board",
+  "date_local": "2026-11-24",
+  "editor": "嘉立创 EDA 专业版 4.1.105",
+  "schematic_pages": 8,
+  "native_schematic_pcb_checks": {
+    "reference_designators": 150,
+    "assigned_connections": 528,
+    "named_nets": 116,
+    "differing_assigned_pin_nets": 0,
+    "gerber_flying_probe_equivalence_classes": 116,
+    "gerber_flying_probe_connections_compared": 528,
+    "component_attributes_compared": [
+      "Unique ID",
+      "Manufacturer Part",
+      "Footprint",
+      "Device",
+      "Supplier Part",
+      "Add into BOM"
+    ]
+  },
+  "native_drc": {
+    "rat": {
+      "items": [],
+      "hasMore": false,
+      "total": 0
+    },
+    "drc": {
+      "state": "passed",
+      "totalCount": 0,
+      "failedItems": 0,
+      "violations": [],
+      "checkedAt": 1795502726224
+    }
+  },
+  "board": {
+    "layers": [
+      "Top",
+      "Inner1",
+      "Inner2",
+      "Bottom"
+    ],
+    "nominal_xy_mm": [
+      96,
+      80
+    ],
+    "routed_segments": 3730,
+    "routing_vias": 404,
+    "clock_segments": {
+      "CAM_PCLK": {
+        "track_length_sum_mm": 11.1,
+        "vias": 0
+      },
+      "PCLK_1V8": {
+        "track_length_sum_mm": 59.69,
+        "vias": 5
+      },
+      "PCLK_FPC": {
+        "track_length_sum_mm": 14.33,
+        "vias": 0
+      },
+      "CAM_XCLK": {
+        "track_length_sum_mm": 28.79,
+        "vias": 2
+      },
+      "XCLK_1V8": {
+        "track_length_sum_mm": 2.18,
+        "vias": 0
+      },
+      "XCLK_FPC": {
+        "track_length_sum_mm": 76.29,
+        "vias": 8
+      }
+    },
+    "via_holes_intersecting_smd_pads": 50,
+    "via_in_pad_fabrication": "Resin fill, cap and planarize at SMD pads. Confirm board-house process and pricing."
+  },
+  "J17": {
+    "manufacturer_part": "FH12-24S-0.5SVA(54)",
+    "order_code": "C3169218",
+    "board_top_xy_mm": [
+      17,
+      27
+    ],
+    "rotation_deg": 180,
+    "module_contact_to_board_pad": "J17 pad = 25 - module contact",
+    "NC_pad": "24",
+    "mechanical_pads": [
+      25,
+      26,
+      27,
+      28
+    ],
+    "paste_signal_mm": [
+      0.5,
+      1.5
+    ],
+    "paste_hold_down_mm": [
+      0.65,
+      1.75
+    ],
+    "native_gerber_paste_flashes_individually_checked": 28,
+    "paste_read_from_gerber_mm": {
+      "1": [
+        0.5,
+        1.5
+      ],
+      "25": [
+        0.65,
+        1.75
+      ]
+    }
+  },
+  "mcad_service_check": "../model/studies/front-camera/a2-service-check.json",
+  "pending": [
+    "FPC terminal geometry and mating force on production lot",
+    "Hardware power sequence, leakage, PCLK timing and source termination",
+    "VGA stream with PDM audio, tracks and ultrasonic ranging; thermal and brownout measurements",
+    "A2 board-specific firmware, DFM and first-article inspection"
+  ],
+  "sha256": {
+    "CyberTrack-A2/CyberTrack-A2.eprj3": "147d75b2c8e47e1cdeaed7ed83477349d45503e65695bce700ba0de035375864",
+    "CyberTrack-A2/pcb/PCB1.epcb2": "57f9ae723ccab4031589fc440943322b5de01e5338f58215aec3dac9b3ce9c5f",
+    "CyberTrack-A2/sch/Schematic1/Actuator rearm.esch2": "e10ff144412474bd0a75398fb7e303b178729a9d838e225379e8279cfb64f9c2",
+    "CyberTrack-A2/sch/Schematic1/Camera DVP and control.esch2": "a924e6ca7d55e91f8fb8de038a97590e3b884cd5d4afab54bf043898898f832c",
+    "CyberTrack-A2/sch/Schematic1/Camera power and bias.esch2": "487b4ae73438cdd750ffac140881df261b67dc292e32b7a888a82dc6fa0aaf0c",
+    "CyberTrack-A2/sch/Schematic1/Input and logic supply.esch2": "bd71369a1c47de93655000988e9f942eccf1947a5d9564b965909d4a82d66a31",
+    "CyberTrack-A2/sch/Schematic1/Logic and audio.esch2": "1c0f9740436a89d1050b76e5445aad3b8f07a8b4d65a926f3781ef474849b0c3",
+    "CyberTrack-A2/sch/Schematic1/Motor boost.esch2": "ec9819d235b423320bb898c437efa8f55dbfb2efc837e52b6286f2686619e835",
+    "CyberTrack-A2/sch/Schematic1/Track driver.esch2": "32cb3805b0b6d1ede61df8dedce1fae6d8a95329b70986a6aa51cd4539e172ee",
+    "CyberTrack-A2/sch/Schematic1/Water and bubbles.esch2": "c0e74871438b25fcce398ba8327383f490415d458d3e32e4564075d4fa56e525",
+    "CyberTrack-A2-Gerber.zip": "e30a34a64817b79788fd3a284104339436186b9941238161a2ef9d8589b6de6f",
+    "CyberTrack-A2-STEP.zip": "924f32b097f9a67bd43dd6e9257b4b7bf525222798c6636a09b27556c1c8a252"
+  },
+  "mcad_sha256": {
+    "CyberTrack-A2-front-camera.FCStd": "01594b3952e07691b4615972ee4feefa0fe0fb7e0769231e5ee96d7bb9668617",
+    "a2-service-check.json": "44c81f6deafd4fe4c6051203c3b92371dd7bef0c1ed7a684697a296186eec1f0"
+  }
+}

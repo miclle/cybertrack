@@ -1,0 +1,137 @@
+{
+  "units": "mm",
+  "source_STEP_components_or_groups_excluding_J17": 150,
+  "package_envelopes_for_reference_cubes": [
+    "U1",
+    "U12",
+    "U13",
+    "U14",
+    "U15"
+  ],
+  "connector": "FH12-24S-0.5SVA(54)",
+  "board_xy": [
+    17,
+    27
+  ],
+  "board_rotation_deg": 180,
+  "J17_pin1_direction": "-X",
+  "module_pin1_direction": "+X",
+  "module_pin_to_socket_pin": "25 minus module pin",
+  "optical_axis_xyz": [
+    -31.0,
+    -80.0,
+    190.0
+  ],
+  "board_top_z": 179.69369,
+  "slot_y_estimate": -41.12,
+  "seated_tip_z_estimate": 181.44369,
+  "fpc_free_length": 62,
+  "stiffener_length": 4,
+  "static_bend_radius_assumption": 4,
+  "seated_apex_z": 203.79365969282043,
+  "withdrawal": 6.0,
+  "min_clearances_mm_and_neighbor": {
+    "J17Housing": [
+      1.1951,
+      "R49"
+    ],
+    "LatchSweep": [
+      0.7486,
+      "F5"
+    ],
+    "LatchTool": [
+      2.4791,
+      "J6"
+    ],
+    "TailTool": [
+      4.3047,
+      "F5"
+    ],
+    "seated_FPC_to_crown": [
+      6.0385,
+      "PrintCrown"
+    ],
+    "withdrawn_FPC_to_crown": [
+      4.2834,
+      "PrintCrown"
+    ],
+    "withdrawn_tip_above_latch_envelope": 2.05,
+    "seated_FPC_overlap_open_STEP_mm3": 0.0,
+    "grip_to_upright": [
+      0.5972,
+      "J17Upright"
+    ],
+    "sink_to_A2_components": [
+      2.5966,
+      "J13"
+    ]
+  },
+  "withdrawal_step_mm_clearance_neighbor": [
+    [
+      0.0,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      0.5,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      1.0,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      1.5,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      2.0,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      2.5,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      3.0,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      3.5,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      4.0,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      4.5,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      5.0,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      5.5,
+      0.53,
+      "TrialPP07"
+    ],
+    [
+      6.0,
+      0.53,
+      "TrialPP07"
+    ]
+  ],
+  "method": "Saved and reopened FCStd; access from above with crown removed. Drawing-based connector envelope; tool shapes are design allowances. Step samples maintain developed length, with fixed camera end. No physical insertion-force or contact qualification."
+}

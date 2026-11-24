@@ -16,9 +16,9 @@
 
 小D 是一台可以用语音和手机控制的双履带机器人。说“左转一秒，同时吹泡泡三秒”，两路动作可以同时开始、分别结束。手机连入同一网络即可遥控，本机 BOOT 和网页“全部停止”都可以中止动作。
 
-**当前维护分支为 v2。** 源码保留行走、喷水与泡泡，已移除点火和狂暴模式。ct80 固件与配套角色待部署，最近一次样机应用部署为 ct78。已有样机演示和分项现场记录，整机负载、机械停止和儿童使用仍待验收。[当前状态](docs/current-status.md) · [早期样机分支](https://github.com/miclle/cybertrack/tree/main)
+**v2 按一块定制 PCB 进行量产设计，当前工程版为 A1。** [主板设计](hardware/pcb/README.md) · [前置摄像头试装](hardware/model/studies/front-camera/README.md)。 源码保留行走、喷水与泡泡，已移除点火和狂暴模式。ct80 固件与配套角色待部署，旧面包板样机最近一次应用部署为 ct78。已有样机演示和分项现场记录，整机负载、机械停止和儿童使用仍待验收。[当前状态](docs/current-status.md) · [早期样机分支](https://github.com/miclle/cybertrack/tree/main)
 
-## 样机演示
+## 旧版样机演示
 
 ### 最新样机演示 · 2 分 46 秒
 
@@ -46,7 +46,7 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 |---|---|
 | 使用样机 | [首次互动与停止](docs/quick-start.md) · [手机控制](docs/lan-control.md) · [网络配置](docs/wifi-configuration.md) |
 | 打印和装配 | [整机 CAD 与排盘](hardware/model/README.md) · [装配顺序](docs/assembly.md) · [BOM](hardware/BOM.md) · [接线表](docs/wiring.md) |
-| 开发固件或验证动作 | [面包板工程](firmware/esp32-audio/README.md) · [控制接口](firmware/CAPABILITIES.md) · [通用核心构建](firmware/README.md#本地编译与验证) |
+| 开发固件或验证动作 | [固件工程与 A1 构建](firmware/esp32-audio/README.md) · [控制接口](firmware/CAPABILITIES.md) · [通用核心构建](firmware/README.md#本地编译与验证) |
 | 了解项目进度 | [文档目录](docs/README.md) · [项目待办](docs/TODO.md) · [验收矩阵](docs/verification-plan.md) |
 
 ### 在浏览器中查看文档和三维模型
@@ -57,7 +57,7 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 
 ## 灵矽实体机器人方案
 
-面包板通过同一设备会话与灵矽交换音频和工具调用。灵矽理解语音、选择工具，固件检查参数与控制来源，并执行计时、互斥和停止。网页控制走局域网，无需电脑转发。亲子互动、创客教学与展览是拟验证的使用场景。[方案与应用场景](docs/lingxi-solution.md) · [参考材料包](tools/lingxi-solution/README.md) · [语音角色维护](docs/agent-role.md)
+旧版样机通过同一设备会话与灵矽交换音频和工具调用。灵矽理解语音、选择工具，固件检查参数与控制来源，并执行计时、互斥和停止。网页控制走局域网，无需电脑转发。亲子互动、创客教学与展览是拟验证的使用场景。[方案与应用场景](docs/lingxi-solution.md) · [参考材料包](tools/lingxi-solution/README.md) · [语音角色维护](docs/agent-role.md)
 
 ## 在完整机器人上，直接说出修改想法
 

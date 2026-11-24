@@ -1,0 +1,68 @@
+{
+  "units": "mm",
+  "model": "procurement envelope, supplier tolerances unverified",
+  "lens_xyz": [
+    -31.0,
+    -80.0,
+    190.0
+  ],
+  "head_envelope": [
+    9.0,
+    9.0,
+    6.0
+  ],
+  "pocket": 9.5,
+  "module_developed_length_assumed": 75,
+  "neck_width_assumed": 8,
+  "bend_radius_assumed": 4,
+  "zif_envelope": [
+    15.4,
+    5.5,
+    4.85
+  ],
+  "tip_xyz": [
+    -31.0,
+    -39.226,
+    180.9
+  ],
+  "optical_cone_full_angle_deg": 66,
+  "checked_parts": [
+    "CameraBody",
+    "HeatSink",
+    "ThermalPad",
+    "Keeper",
+    "KeeperScrews",
+    "Ribbon",
+    "TailBacking",
+    "FutureZIF",
+    "OpticalCone"
+  ],
+  "checked_context": [
+    "PrintCrown",
+    "ElectronicsTray",
+    "UltrasonicPCBEnvelope",
+    "UltrasonicRearEnvelope",
+    "UltrasonicTopConnector",
+    "UltrasonicWireSpace",
+    "UltrasonicRingL",
+    "UltrasonicRingR",
+    "UltrasonicFaceL",
+    "UltrasonicFaceR",
+    "CrownScrewRFront",
+    "WaterHoseRoute",
+    "BubbleGunHoseRoute",
+    "PowerCableRoute",
+    "StopSignalRoute",
+    "MainboardA1",
+    "TrialPP07"
+  ],
+  "clearance_mm": {
+    "Ribbon/PrintCrown": 5.804,
+    "OpticalCone/UltrasonicRingR": 0.961,
+    "Keeper/UltrasonicRearEnvelope": 3.2,
+    "FutureZIF/adjacent_A1_components": 0.05
+  },
+  "overlap_mm3": {
+    "KeeperScrews/TrialPP07": 7.23823
+  }
+}

@@ -1,6 +1,6 @@
-# CyberTrack 面包板固件
+# CyberTrack ESP32-S3 固件
 
-ESP32-S3 面包板负责唤醒、音频、OLED 和本地控制。v2 使用三路输出，分别驱动履带、喷水与泡泡。网页与灵矽语音共享设备端的互斥、计时和停止规则。[控制接口](../CAPABILITIES.md) · [网页控制](../../docs/lan-control.md) · [当前版本与部署](../../docs/current-status.md)
+v2 的 A1 定制主板使用 `--mainboard-a1` 构建，负责唤醒、音频、OLED 和本地控制。原面包板构建保留用于旧设备回归。v2 使用三路输出，分别驱动履带、喷水与泡泡。网页与灵矽语音共享设备端的互斥、计时和停止规则。[控制接口](../CAPABILITIES.md) · [网页控制](../../docs/lan-control.md) · [当前版本与部署](../../docs/current-status.md)
 
 ## 来源与配置证据
 
@@ -13,7 +13,7 @@ ESP32-S3 面包板负责唤醒、音频、OLED 和本地控制。v2 使用三路
 
 ## GPIO 配置
 
-音频引脚来自原镜像对应的板级源码与配置，执行器引脚来自当前输出驱动；桥身份和完整接线未独立逐线测量，不能以软件配置代替电气验收。
+v2 的引脚和电路以 [A1 接口表](../../hardware/pcb/README.md#外接接口) 为准。下表用于旧面包板固件回归。音频引脚来自原镜像对应的板级源码与配置，执行器引脚来自当前输出驱动；桥身份和完整接线未独立逐线测量，不能以软件配置代替电气验收。
 
 | 用途 | GPIO |
 |---|---|
@@ -34,7 +34,14 @@ GPIO4 由麦克风占用。BOOT 按下即停止，松开后需要新指令。GPI
 
 ## 重现构建
 
-在仓库根目录操作，先加载 ESP-IDF v5.5.1 环境。源码准备需要包含原始 ELF、sdkconfig 和锁定组件缓存的上游工作区，以及支持 tarfile data filter 的 Python 和 PyYAML。导出目标须是 `build/` 下尚不存在的目录。
+在仓库根目录操作，先加载 ESP-IDF v5.5.1 环境。源码准备需要包含原始 ELF、sdkconfig 和锁定组件缓存的上游工作区，以及支持 tarfile data filter 的 Python 和 PyYAML。导出目标须是 `build/` 下尚不存在的目录。v2 使用 A1 配置。
+
+```sh
+python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --mainboard-a1 --target build/xiaozhi-ct80-a1-src
+idf.py -C build/xiaozhi-ct80-a1-src -B "$PWD/build/firmware-ct80-a1" build
+```
+
+旧面包板回归使用独立目录。
 
 ```sh
 python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct80-rebuild-src
@@ -45,7 +52,7 @@ python firmware/esp32-audio/tests/run_display_tests.py --source build/xiaozhi-ct
 idf.py -C build/xiaozhi-ct80-rebuild-src -B "$PWD/build/firmware-ct80-rebuild" build
 ```
 
-上例默认生成面包板固件。为 A1 构建时，在准备命令加 `--mainboard-a1`，并使用独立的源码目录和构建目录。A1 通过 GPIO38 读取断电锁存状态，通过 GPIO45 重新使能执行器，GPIO14 保持扩展口关闭。[A1 断电与恢复](../../hardware/pcb/README.md#sw2-断电与恢复)
+A1 通过 GPIO38 读取断电锁存状态，通过 GPIO45 重新使能执行器，GPIO14 保持扩展口关闭。[A1 断电与恢复](../../hardware/pcb/README.md#sw2-断电与恢复)
 
 应用版本由 `apply_overlay.py` 设置。历史部署只写入核对过的应用分区，保留引导、NVS、OTA 选择与资源区。设备版本、备份及镜像回读见[ct78 应用部署记录](../../docs/validation/ct78-deployment.md)。
 

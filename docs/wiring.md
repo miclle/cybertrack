@@ -1,6 +1,6 @@
 # 整机接线总表
 
-工程样板 A1 的 J1–J16 连接器针序见[一体主板接口表](../hardware/pcb/README.md#外接接口)。A1 的喷水、泡泡、扩展口均为受控正极和公共地。SW2 的功率触点接 J10，机械联动的 RUN 辅助干接点接 J16。下文是现有模块样机的接线。
+工程样板 A1 的 J1–J16 连接器针序见[一体主板接口表](../hardware/pcb/README.md#外接接口)。A1 的喷水、泡泡、扩展口均为受控正极和公共地。SW2 的功率触点接 J10，机械联动的 RUN 辅助干接点接 J16。v2 以一体板为准，摄像头接口缺口见 [DVP 核对](../hardware/pcb/camera-dvp.md)。以下接线和针位仅用于旧版面包板样机。
 
 面包板端点按 GPIO 丝印和固件分配记录，连接器针序需对照实物。A3 的第五页给出头部超声波 VCC／GND、IO1 → TRIG、IO2 ← ECHO。3.3 V 电流余量、实际 ECHO 电平与整机回流仍待量测。[五页原理图](../hardware/schematic/CyberTrack-schematic.pdf) · [A3 审图资料](../hardware/schematic/README.md) · [端点待确认表](../hardware/schematic/parameter-confirmation.md)
 

@@ -1,0 +1,63 @@
+{
+  "units": "mm",
+  "lens_center_xyz": [
+    -31.0,
+    -80.0,
+    190.0
+  ],
+  "fov_full_angle_deg": 69,
+  "lens_recess_from_original_wall": 1.0,
+  "window_throat_diameter": 8.3,
+  "window_diameter_at_outer_wall_plane": 9.675,
+  "fpc_developed_module_length": 70.5,
+  "fpc_exposed_length": 62.0,
+  "fpc_neutral_bend_radius": 4.0,
+  "assumed_future_zif_tip_xyz": [
+    -31.0,
+    -41.076,
+    180.9
+  ],
+  "pcb_solid_count": 656,
+  "clearances_mm": {
+    "Keeper/UltrasonicRearEnvelope": 3.2,
+    "Ribbon/PrintCrown": 6.229,
+    "HeatSink/UltrasonicRearEnvelope": 5.0,
+    "OpticalCone/UltrasonicRingR": 0.7,
+    "HeatSink/MainboardA1": 2.597,
+    "FutureZIF/adjacent_A1_components": 0.2
+  },
+  "checked_shapes": [
+    "CameraBody",
+    "HeatSink",
+    "ThermalPad",
+    "Keeper",
+    "KeeperScrews",
+    "Ribbon",
+    "TailBacking",
+    "FutureZIF"
+  ],
+  "checked_context": [
+    "PrintCrown",
+    "ElectronicsTray",
+    "UltrasonicPCBEnvelope",
+    "UltrasonicRearEnvelope",
+    "UltrasonicTopConnector",
+    "UltrasonicWireSpace",
+    "UltrasonicRingL",
+    "UltrasonicRingR",
+    "UltrasonicFaceL",
+    "UltrasonicFaceR",
+    "CrownScrewRFront",
+    "WaterHoseRoute",
+    "BubbleGunHoseRoute",
+    "PowerCableRoute",
+    "StopSignalRoute",
+    "MainboardA1"
+  ],
+  "overlap_mm3": {
+    "KeeperScrews/TrialPP07": 7.23823
+  },
+  "optical_cone_shell_overlap_mm3": 0.0,
+  "pp07_solid_count": 1,
+  "keeper_solid_count": 1
+}

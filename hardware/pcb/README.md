@@ -1,10 +1,16 @@
-# CyberTrack 一体主板 A1
+# CyberTrack 一体主板
+
+[A2 摄像头主板原生工程](CyberTrack-A2/CyberTrack-A2.eprj3)收录右前脸 Seeed 114993115 的 DVP 总线、供电及电平转换。复制时保留整个 CyberTrack-A2 目录。[电路与排线针序](camera-revision/README.md) · [A2 样板 Gerber、钢网与钻孔](CyberTrack-A2-Gerber.zip) · [A2 检查记录](verification-A2.json) · [FreeCAD 插拔试装](../model/studies/front-camera/CyberTrack-A2-front-camera.FCStd)
+
+## A1 工程样板
 
 用嘉立创 EDA 专业版打开 [CyberTrack-A1.eprj3](CyberTrack-A1/CyberTrack-A1.eprj3)，在工程树中选择 PCB1。复制时保留整个 `CyberTrack-A1/` 目录。A1 为 96 × 80 mm 四层工程样板，集成 ESP32-S3-WROOM-1-N16R8、音频、3.3 V 主控电源、12 V 升压、L298P 双履带驱动及三路受控 5 V 电源输出。
 
 [布板预览](CyberTrack-A1.png) · [样板 Gerber 与钻孔](CyberTrack-A1-Gerber.zip) · [装配 STEP](CyberTrack-A1-STEP.zip) · [BOM](BOM-A1.md) · [校验记录](verification-A1.json) · [A0 旧版接口与文件](A0.md)
 
 六页原理图与 PCB 共 119 个器件位号、79 个已连接网络。373 个已分配引脚均经网表比对，并核对了 Gerber 包飞针测试数据中的网络分组。嘉立创 EDA 原生 DRC 违规 0 项，未布通飞线 0 条。
+
+前置 Seeed 摄像头的 DVP 时序线、电压和可用引脚见[逐组核对](camera-dvp.md)。下一版的[完整引脚分配](camera-revision/README.md)和[整机单台成本](camera-revision/unit-cost.md)供改板评审。
 
 ## 三路受控 5 V
 

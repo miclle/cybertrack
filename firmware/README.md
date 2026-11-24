@@ -1,10 +1,10 @@
 # 固件
 
-样机使用 [ESP32-S3 面包板工程](esp32-audio/README.md)，通过灵矽语音或局域网网页控制行走、喷水与泡泡。三路独立计时，BOOT 与全部停止取消剩余步骤。源码、最近部署和平台角色分别见[当前状态](../docs/current-status.md)与[版本清单](current.json)。
+v2 定制主板使用 [ESP32-S3 应用的 A1 构建](esp32-audio/README.md)，通过灵矽语音或局域网网页控制行走、喷水与泡泡。三路独立计时，BOOT 与全部停止取消剩余步骤。源码、最近部署和平台角色分别见[当前状态](../docs/current-status.md)与[版本清单](current.json)。
 
 | 工程 | 用途 |
 |---|---|
-| [面包板应用](esp32-audio/README.md) | 音频、OLED、联网、MCP 工具与本地执行器。[接口手册](CAPABILITIES.md) |
+| [ESP32-S3 应用](esp32-audio/README.md) | 音频、OLED、联网、MCP 工具与本地执行器。[接口手册](CAPABILITIES.md) |
 | [通用 C11 核心](src/) | 离线协议、受限动作和运行层，使用虚拟时间及假板卡测试。[实施计划](PLAN.md) · [协议契约](PROTOCOL.md) |
 | [联网台架](esp32-linx/README.md) · [电机台架](esp32-motor-bench/README.md) | 分项测试有各自的接线、固件与供电记录，按原工况查阅。[台架记录](../docs/validation/bench.md) |
 

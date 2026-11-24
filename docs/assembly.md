@@ -1,12 +1,15 @@
 # 机械装配与维护
 
+A2 的右前脸安装沿用 PP07 固定座。装好小散热片与后压片，开冠盖，从上方竖直插入原装 FPC，露铜面朝前，转动 J17 锁扣。维修时先开锁，夹住补强端上提。[A2 插拔模型、工序与净距](../hardware/model/studies/front-camera/README.md#a2-主板插拔检查)
+
+
 先核对手里的打印件属于哪套排盘。Lean 为 24 件、6 盘，Ready 为 26 件、6 盘，盘号和切片缓存各自独立。Lean 第 1、3、4、6 盘需重切，Ready 六盘均需切片。装配时以保存的 FreeCAD 整机为几何依据，坐标 X 向左、Y 向后、Z 向上，前方为 −Y。[整机模型](../hardware/model/README.md) · [Lean](../hardware/model/lean-print/README.md) · [Ready](../hardware/model/print-ready/README.md)
 
 ## 底盘与动力
 
 37R-520 电机经联轴器驱动两侧履带。维护一侧电机前，先释放联轴器、移开电源内托架及本侧履带，再按模型路径下取。VF01 已有双侧静态试配反馈，实际螺钉牙深、带线操作空间、底盖承载和反复拆装仍需核对。[VF01 试配](../hardware/model/drive-fit-fixture/README.md) · [动力接口](../hardware/components/drive-interface/README.md)
 
-L298N 的现行支架由底盖承载，拆卸前要给端子和线尾留出空间。辰克 5 V 电池包低位平放，外形 116 × 70.5 × 19.5 mm。核对插头、线材弯曲和板上最高点后再盖合。[驱动板安装](../hardware/model/l298n-compact/README.md) · [电源与接口](../hardware/architecture/README.md)
+v2 使用 A1 板载 L298P；旧样机的独立 L298N 与底盖支架见历史装配记录。辰克 5 V 电池包低位平放，外形 116 × 70.5 × 19.5 mm。核对插头、线材弯曲和板上最高点后再盖合。[驱动板安装](../hardware/model/l298n-compact/README.md) · [电源与接口](../hardware/architecture/README.md)
 
 ## 电源开关与停止按钮
 
@@ -16,9 +19,9 @@ L298N 的现行支架由底盖承载，拆卸前要给端子和线尾留出空�
 
 ## 头舱与穿线
 
-面包板、音频与屏幕作为一组装在独立浅托盘内。100 × 85 mm 是面包板平面尺寸，36 mm 是规划高度。拆冠盖后先断开 USB、收置超声波和跨舱线束，再取托盘。冠盖和托盘各用四颗螺丝，Ø2.1 mm 导孔需结合实际打印材料试拧。[头壳、配套冠盖及试拧件](head-shell-print.md)
+v2 以 96 × 80 mm A1 定制板为装配基线，板孔、支柱、底面避空、外设连接器与维护行程须按实板固定。前摄试装使用 A1 STEP，开窗与装配次序见[右前脸试装](../hardware/model/studies/front-camera/README.md)。原浅托盘、100 × 85 mm 占位和以下历史工序来自旧版头舱。拆冠盖后先断开 USB、收置超声波和跨舱线束，再取托盘。冠盖和托盘各用四颗螺丝，Ø2.1 mm 导孔需结合实际打印材料试拧。[头壳、配套冠盖及试拧件](head-shell-print.md)
 
-颈部按 15 根导线、净径 10 mm 规划，已计入 BOOT 两线。主束经过中央限位桥，在托盘下方转向头舱左侧。独立上下护口已取消，穿线前需修整孔缘，核对实物束径、连接器、转弯和抽盘余量。[通道检查](../hardware/model/cable-passage-audit.json) · [颈部路线图](../hardware/model/cable-passage-layout.png)
+旧版颈部按 15 根导线、净径 10 mm 规划，已计入 BOOT 两线。主束经过中央限位桥，在托盘下方转向头舱左侧。独立上下护口已取消，穿线前需修整孔缘，核对实物束径、连接器、转弯和抽盘余量。[通道检查](../hardware/model/cable-passage-audit.json) · [颈部路线图](../hardware/model/cable-passage-layout.png)
 
 超声波前脸并入 PP07，探头孔 Ø16.6 mm，中心距 26 mm。拆冠盖和托盘、收置线束并释放模块后，CAD 中的候选路径为后退 11 mm、上提 70 mm。仍需核对实际 PCB、针座、固定方式及装壳后的测距表现。[固定与空间记录](../hardware/model/ultrasonic-integration-audit.json) · [测距与前进保护](ultrasonic-ranging.md)
 

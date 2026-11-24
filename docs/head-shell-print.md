@@ -1,5 +1,7 @@
 # 0.58 头部整体打印与现有螺丝适配
 
+v2 单主板的头部摄像头安装见[右前脸试装](../hardware/model/studies/front-camera/README.md)。本页记录早期 PP07、冠盖和托盘的打印条件。
+
 **2026-10-27 状态：** 已有[样机实拍与运行视频](../artifact/README.md)，进入联调与整机验证阶段。0.58 是本页头部局部修订；当前打印使用 [Lean 六盘项目](../hardware/model/lean-print/README.md)第 4 盘冠盖／托盘、第 5 盘头壳。下文保留设计与切片检查，导孔、重复拆装、层间强度等未验证项继续保留。
 
 2026-10-26。按用户最新要求，将头部下壳、固定装饰及超声波传感器面板合成一个大件，冠盖和面包板托盘保持独立；本任务不改底盘。原生几何以 `hardware/model/CyberTrack.FCStd` 和设计源档为准，本轮局部证据见[专项报告](../hardware/model/head-shell-print-audit.json)。

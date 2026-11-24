@@ -2,6 +2,10 @@
 
 日常查看打开 [CyberTrack.FCStd](CyberTrack.FCStd)。修改融合输入、特征或检查空间时，打开[可编辑设计源档](source/CyberTrack-design.FCStd)。[STEP](CyberTrack.step) 用于交换。坐标单位为 mm，+X 向左、+Y 向后、+Z 向上，前方为 −Y。
 
+## v2 头舱电子装配
+
+v2 按定制主 PCB 设计。打开[右前脸摄像头试装](studies/front-camera/README.md)可同时检查 A1 实板 STEP、镜头开窗、固定件、散热与排线。整机模型与现有打印包中的面包板、独立驱动板和对应支架属于早期装配占位；试装件尚待实物确认后再并入制造版。
+
 ## v2 装配与打印
 
 清水瓶与泡泡液瓶直接放入背包，由 PP04 湿舱底面承托。去掉两瓶的绑带、搭接片、底托、底垫、侧垫、识别条及专用螺钉／嵌件，共 22 件。PP03 封平两处绑带缺口，PP04 填平四个嵌件孔。两只瓶下移 6 mm，顶部软管随瓶口接长。拔下目标吸管后，任一瓶均可沿 +Z 独立上提 150 mm，已通过 CAD 扫掠检查。实物抓握、行走稳定性和密封待验。[装配说明](../../docs/assembly.md#双枪与背包) · [CAD 与排盘回读](bottle-backpack-direct-fit.json)
@@ -12,9 +16,9 @@
 |---|---|
 | [Lean 排盘](lean-print/README.md) | 按当前清单打印或补打。第 2、5 盘保留缓存。 |
 | [Ready 排盘](print-ready/README.md) | 沿用用户排盘与工艺，盘号与 Lean 分开。 |
-| [整机装配](../../docs/assembly.md) | 确认动力、开关、面包板托盘、穿线、双枪和双瓶取放顺序。 |
-| [头壳打印](../../docs/head-shell-print.md) | PP07 整体打印，冠盖与面包板托盘分别拆装，导孔需试拧。 |
-| [L298N 支架](l298n-compact/README.md) | 底盖承载，按 28.5 mm 插线包络核对实物与紧固件。 |
+| [整机装配](../../docs/assembly.md) | 确认动力、开关、托盘、穿线、双枪和双瓶取放顺序。 |
+| [头壳打印](../../docs/head-shell-print.md) | PP07 整体打印，冠盖与原托盘分别拆装，导孔需试拧。 |
+| [L298N 支架](l298n-compact/README.md) | 旧模块样机的底盖承载件，按 28.5 mm 插线包络核对实物与紧固件。 |
 | [原始部件资料](../components/) | 核对实测外形、厂商资料和接口假设。 |
 
 在仓库根目录运行 `python3 scripts/check_print_release.py` 可复核现行 CAD 与两个 3MF 的文件哈希、六盘清单和需重切盘的缓存状态。
