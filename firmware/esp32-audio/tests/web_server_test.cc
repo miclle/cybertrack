@@ -4,11 +4,11 @@
 #include <iostream>
 static unsigned calls=0,acquires=0;
 static bool busy=false;
-static std::string response="{\"result\":\"ok\"}";
+static WebReply response{R"({"result":"ok"})", false};
 static std::string last_operation;
 uint32_t CyberTrackWebAcquire() { ++acquires; return busy?0:acquires; }
 void CyberTrackWifiLink(bool) {}
-std::string CyberTrackWebCall(uint32_t,const char* operation,const WebCommand*) {
+WebReply CyberTrackWebCall(uint32_t,const char* operation,const WebCommand*) {
     ++calls; last_operation=operation; return response;
 }
 // Exercise the actual HTTP handlers; only ESP transport/display calls are stubbed.
@@ -114,7 +114,11 @@ int main() {
     r=api("/api/release"); assert(Api(&r)==ESP_OK); assert(!session && !bearer[0]);
     r=api("/api/state"); assert(Api(&r)==ESP_FAIL);
     r=login(); assert(Pair(&r)==ESP_OK); assert(token!=bearer); token=bearer;
-    response="{\"result\":\"session_expired\"}";
+    response={R"({"result":"session_expired"})", true};
     r=api("/api/state"); assert(Api(&r)==ESP_OK); assert(r.status=="401 Unauthorized" && !session && !bearer[0]);
+    r=login(); assert(Pair(&r)==ESP_OK && token!=bearer); token=bearer;
+    response={R"({"result":"ok","recent_command":{"result":"session_expired"}})", false};
+    r=api("/api/state"); assert(Api(&r)==ESP_OK && r.status=="200 OK" && r.sent==response.body);
+    r=api("/api/stop"); assert(Api(&r)==ESP_OK && r.status=="200 OK" && token==bearer);
     std::cout << "PASS: actual HTTP handlers, Host/Origin/auth, no-PIN acquire throttle/ownership, token rotation/revocation, bounded/partial bodies, raw and escaped zero rejection, escape parity, legal Unicode/status/stop, invalid JSON, send failure release\n";
 }

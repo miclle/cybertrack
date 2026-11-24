@@ -68,5 +68,17 @@ int main() {
     auto* expired_status = cJSON_Parse(Reply("get_status").c_str());
     assert(field(expired_status, "status_facts").find("长按") == std::string::npos);
     cJSON_Delete(expired_status);
+
+    sessions.Release(clock_ms, session);
+    bool session_expired = false;
+    Reply("move", 0, 1000, "forward", 0, session, &command, nullptr, 100, &session_expired);
+    assert(session_expired);
+    const auto next_session = sessions.Acquire(clock_ms);
+    assert(next_session && next_session != session);
+    auto repaired = Reply("get_status", 0, 0, nullptr, 0, next_session, nullptr, nullptr, 100, &session_expired);
+    auto* current = cJSON_Parse(repaired.c_str());
+    assert(!session_expired && field(current, "result") == "ok");
+    assert(field(cJSON_GetObjectItemCaseSensitive(current, "recent_command"), "result") == "session_expired");
+    cJSON_Delete(current);
     std::puts("PASS: actual Reply JSON acceptance/rejection/query/stop persistence with real guards and no hardware");
 }

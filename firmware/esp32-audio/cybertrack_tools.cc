@@ -140,7 +140,8 @@ void SafetyTask(void*) {
     }
 }
 std::string Reply(int voice_turn, const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
-                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100) {
+                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100,
+                  bool* session_expired = nullptr) {
     // A validated stop runs synchronously. Apply it before receipt allocation;
     // a later input or reporting failure must never defer the output shutdown.
     bool negative_stop = false;
@@ -242,6 +243,7 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
     }
     ApplyLocked(now);
     if (outputs.fault) outcome = "output_fault";
+    if (session_expired) *session_expired = !strcmp(outcome, "session_expired");
     if (voice_turn >= 0 && strcmp(outcome, "ok") && strcmp(outcome, "accepted"))
         sessions.FailVoiceTurn(voice_turn);
     const bool watering = guard.Watering(), moving = guard.Moving(), bubbling = guard.Bubbling();
@@ -341,9 +343,10 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
 
 }
 std::string Reply(const char* operation, int ticket = 0, int duration = 0, const char* direction = nullptr, int water_duration = 0,
-                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100) {
+                  uint32_t web_session = 0, const WebCommand* command = nullptr, const ActionPlan* plan = nullptr, int speed_percent = 100,
+                  bool* session_expired = nullptr) {
     // Trusted board/web calls have no remote input token. MCP always passes one.
-    return Reply(-1, operation, ticket, duration, direction, water_duration, web_session, command, plan, speed_percent);
+    return Reply(-1, operation, ticket, duration, direction, water_duration, web_session, command, plan, speed_percent, session_expired);
 }
 }
 
@@ -432,10 +435,13 @@ uint32_t CyberTrackWebAcquire() {
     xSemaphoreGive(lock);
     return session;
 }
-std::string CyberTrackWebCall(uint32_t session, const char* operation, const WebCommand* command) {
-    if (!session) return "{\"result\":\"session_expired\"}";
-    return Reply(operation, 0, command ? command->move_ms : 0,
-                 command ? command->direction : nullptr, command ? command->water_ms : 0, session, command);
+WebReply CyberTrackWebCall(uint32_t session, const char* operation, const WebCommand* command) {
+    if (!session) return {R"({"result":"session_expired"})", true};
+    WebReply reply;
+    reply.body = Reply(operation, 0, command ? command->move_ms : 0,
+                       command ? command->direction : nullptr, command ? command->water_ms : 0,
+                       session, command, nullptr, 100, &reply.session_expired);
+    return reply;
 }
 void InitializeCyberTrackTools() {
     // Initialization errors latch an unavailable backend; never reboot into a retry.

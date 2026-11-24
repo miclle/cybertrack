@@ -118,9 +118,8 @@ esp_err_t Api(httpd_req_t* req) {
                             !strcmp(req->uri, "/api/stop") ? "stop" : "release";
     auto reply = CyberTrackWebCall(session, operation, action ? &command : nullptr);
     cJSON_Delete(body);
-    bool expired = reply.find("\"result\":\"session_expired\"") != std::string::npos;
-    if (expired || !strcmp(operation, "release")) { bearer[0] = 0; session = 0; }
-    const auto result = Send(req, expired ? "401 Unauthorized" : "200 OK", reply.c_str());
+    if (reply.session_expired || !strcmp(operation, "release")) { bearer[0] = 0; session = 0; }
+    const auto result = Send(req, reply.session_expired ? "401 Unauthorized" : "200 OK", reply.body.c_str());
     if (result != ESP_OK && session) CyberTrackWebCall(session, "release");
     return result;
 }

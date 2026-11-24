@@ -7,20 +7,21 @@
   "esp_idf_build": {
     "version": "v5.5.1",
     "path": "build/firmware-ct80-breadboard/xiaozhi.bin",
-    "bytes": 2681312,
-    "sha256": "69d8fcb5457b513284e4f8017bd6f1559cc9b60dd59a364763bf3422d2038d7a"
+    "bytes": 2681680,
+    "sha256": "9cfa7f534fe05a30a7d13ce53b5c9239dc91e9bf846f7e9d985d5a47a2cbf768"
   },
   "mainboard_a1_build": {
     "version": "v5.5.1",
     "path": "build/firmware-ct80-a1/xiaozhi.bin",
-    "bytes": 2681744,
-    "sha256": "15e8947e414cec0f500a2f775ef2ad90a166b9ac8bb1d3af4b0000e728f2a3f4"
+    "bytes": 2682000,
+    "sha256": "e18d52d593cf4ed526266d567d7ed3983da4c0bcdc4347bcde8860db9732041c"
   },
   "role_sha256": "6186beb47f1845ab5a0553be34131430032c32f8a130c178fd4dedebcf0258e0",
   "checks": {
     "sanitized_native_suite": "pass",
     "sw2_host_model": "Production safety-task iteration with simulated contacts and asynchronous latch. Open contact, fast open/close, output clearing, stale web/voice work and output fault covered.",
     "prepared_mcp_and_actual_http_handlers": "pass",
+    "web_session_repair": "Expired action revokes the old token. After pairing again, an OK status carrying the previous expired command preserves the new token.",
     "web_vm": "pass",
     "synthetic_device_mcp_retirement": {
       "passed": true,

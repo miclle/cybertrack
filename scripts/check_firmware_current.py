@@ -21,7 +21,15 @@ def image_identity(record, image=None):
     return {"bytes": size, "sha256": digest}
 
 
-def check(root=ROOT, source_bin=None, deployed_bin=None):
+def source_record(evidence, board):
+    if board == "a1" and "mainboard_a1_build" in evidence:
+        return evidence["mainboard_a1_build"]
+    if board == "breadboard":
+        return evidence.get("esp_idf_build") or evidence["artifact"]
+    raise ValueError(f"no source build recorded for board: {board}")
+
+
+def check(root=ROOT, source_bin=None, deployed_bin=None, board=None):
     firmware = root / "firmware"
     current = json.loads((firmware / "current.json").read_text())
     overlay = (firmware / "esp32-audio/apply_overlay.py").read_text()
@@ -43,17 +51,21 @@ def check(root=ROOT, source_bin=None, deployed_bin=None):
         raise ValueError("software evidence version does not match source_version")
     if role_sync["version"] != deployment["version"]:
         raise ValueError("role differs from last recorded deployment version")
-    source_image = image_identity(evidence.get("esp_idf_build") or evidence["artifact"], source_bin)
+    if board is None:
+        board = "a1" if "mainboard_a1_build" in evidence else "breadboard"
+    source_image = image_identity(source_record(evidence, board), source_bin)
     deployed_image = image_identity(deployment["flash"], deployed_bin)
     if relation == "matches_recorded_version":
-        if deployment["version"] != current["source_version"] or source_image != deployed_image:
+        deployed_board = deployment.get("source_board", "breadboard")
+        if (deployment["version"] != current["source_version"] or
+                image_identity(source_record(evidence, deployed_board)) != deployed_image):
             raise ValueError("declared source/deployment/evidence versions disagree")
         if synced_role_hash != role_hash:
             raise ValueError("role differs from recorded platform synchronization")
     if current["physical_acceptance"] != "incomplete":
         raise ValueError("physical acceptance requires a separately reviewed evidence contract")
     return {"source_version": current["source_version"], "recorded_deployment": deployment["version"],
-            "source_image": source_image, "deployed_image": deployed_image,
+            "source_board": board, "source_image": source_image, "deployed_image": deployed_image,
             "local_source_image_checked": source_bin is not None, "local_deployed_image_checked": deployed_bin is not None,
             "physical_acceptance": current["physical_acceptance"], "deployment_relation": relation, "role_sha256": role_hash,
             "recorded_platform_role_sha256": synced_role_hash, "role_matches_recorded_sync": role_hash == synced_role_hash,
@@ -62,11 +74,13 @@ def check(root=ROOT, source_bin=None, deployed_bin=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--board", choices=("a1", "breadboard"),
+                        help="source board (defaults to A1 when recorded, otherwise breadboard)")
     parser.add_argument("--source-bin", type=Path, help="compare a local application image to the source build record")
     parser.add_argument("--deployed-bin", type=Path, help="compare a local application image to the last flash record")
     args = parser.parse_args()
     try:
-        result = check(source_bin=args.source_bin, deployed_bin=args.deployed_bin)
+        result = check(source_bin=args.source_bin, deployed_bin=args.deployed_bin, board=args.board)
     except (OSError, ValueError, KeyError) as error:
         parser.exit(1, f"{error}\n")
     print(json.dumps(result, ensure_ascii=False, indent=2))

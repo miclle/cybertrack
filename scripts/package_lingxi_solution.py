@@ -39,7 +39,7 @@ def read_inputs(root, paths):
 
 def build_archive(root, paths, head, dirty):
     contents = read_inputs(root, paths)
-    firmware = check(root)
+    firmware = check(root, board="breadboard")
     current = json.loads(contents["firmware/current.json"])
     if "firmware/" + current["software_evidence"] not in contents:
         raise ValueError("current candidate build evidence must be included in the bundle")

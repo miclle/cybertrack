@@ -3,7 +3,7 @@
 | 项目 | 最近可核对的记录 |
 |---|---|
 | v2 硬件 | 单一量产主 PCB，A2 工程接入右前脸 Seeed 114993115、双电源与 DVP 转换。首板电气、同批 FPC 接触及整机预览待验。[主板](../hardware/pcb/README.md) · [摄像头](../hardware/model/studies/front-camera/README.md) |
-| 固件候选 | v2 源码为 **2.0.3-ct80**。v2 采用 A1 构建，面包板构建用于旧设备。A1 通过硬件锁存处理 SW2 断开，避障保留待处理的后退和转向请求。应用尚待部署。[构建与回归记录](../firmware/esp32-audio/verification-ct80.json) |
+| 固件候选 | **2.0.3-ct80** 提供 A1 主板和旧面包板两种构建，A2 专用固件待开发。A1 通过硬件锁存处理 SW2 断开，避障保留待处理的后退和转向请求。应用尚待部署。[构建与回归记录](../firmware/esp32-audio/verification-ct80.json) |
 | 旧版样机应用 | **2.0.3-ct78** 于 2026-11-03 仅更新应用。配置保持，两次启动联网、二十条输出全关的状态回读通过。[部署记录](validation/ct78-deployment.md) |
 | 语音角色 | 仓库的 ct79 角色为 5002 字符，尚待同步。平台最近一次回读为 2026-11-01 恢复的旧 5991 字符角色。[角色源](../firmware/esp32-audio/role-prompt.txt) · [平台回读](validation/evidence/ct78-stop-duration/platform-restored.json) |
 | CAD 与打印 | 清水瓶、泡泡液瓶直接放入背包。Lean 24 件、Ready 26 件，各六盘。CAD 已检查取瓶路径，实际抓握、行走稳定性和密封待验。[模型与切片入口](../hardware/model/README.md) |
@@ -20,10 +20,12 @@
 在仓库根目录运行 `python3 scripts/check_firmware_current.py`，可核对源码版本、角色哈希与记录中的应用身份。有本地镜像时可同时核对文件字节数与 SHA-256。
 
 ```sh
-python3 scripts/check_firmware_current.py \
-  --source-bin build/firmware-ct80-breadboard/xiaozhi.bin \
+python3 scripts/check_firmware_current.py --board a1 \
+  --source-bin build/firmware-ct80-a1/xiaozhi.bin \
   --deployed-bin build/firmware-ct78/xiaozhi.bin
 ```
+
+当前默认核对 A1。核对旧设备的候选镜像时使用 `--board breadboard --source-bin build/firmware-ct80-breadboard/xiaozhi.bin`。`--deployed-bin` 始终与最近一次实机刷写记录比对。
 
 准备好同版上游源码后，按[固件主机验证](validation/firmware-host.md)运行当前固件的退役请求、停止与恢复检查。
 

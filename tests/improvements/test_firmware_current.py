@@ -53,6 +53,43 @@ class FirmwareCurrentTests(unittest.TestCase):
                 module.check(root)
             (fw/'software.json').write_text(json.dumps({'version':'2.0.3-ct45','esp_idf_build':image}))
             self.assertEqual(module.check(root)['source_image'],image)
+            with self.assertRaisesRegex(ValueError, 'no source build recorded for board: a1'):
+                module.check(root, board='a1')
             (fw/'role-sync.json').write_text(json.dumps({'version':'2.0.3-ct44','platform_role':{'sha256':digest}}))
             with self.assertRaisesRegex(ValueError,'deployment version'):
                 module.check(root)
+
+    def test_each_board_checks_its_own_image_and_the_recorded_deployment(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            fw = root / 'firmware'
+            audio = fw / 'esp32-audio'
+            audio.mkdir(parents=True)
+            version = '2.0.3-ct80'
+            (audio/'apply_overlay.py').write_text(f'set(PROJECT_VER "{version}")')
+            (audio/'role-prompt.txt').write_bytes(b'role')
+            role_hash = hashlib.sha256(b'role').hexdigest()
+            images = {}
+            for board in ('a1', 'breadboard'):
+                data = board.encode()
+                (root/board).write_bytes(data)
+                images[board] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+            (fw/'current.json').write_text(json.dumps({
+                'source_version': version, 'role_sha256': role_hash,
+                'last_recorded_deployment': 'deployment.json', 'software_evidence': 'software.json',
+                'deployment_relation': 'matches_recorded_version', 'physical_acceptance': 'incomplete',
+            }))
+            (fw/'deployment.json').write_text(json.dumps({
+                'version': version, 'flash': images['breadboard'], 'platform_role': {'sha256': role_hash},
+            }))
+            (fw/'software.json').write_text(json.dumps({
+                'version': version, 'esp_idf_build': images['breadboard'], 'mainboard_a1_build': images['a1'],
+            }))
+            self.assertEqual(module.check(root)['source_board'], 'a1')
+            for board, other in [('a1', 'breadboard'), ('breadboard', 'a1')]:
+                with self.subTest(board=board):
+                    verified = module.check(root, root/board, root/'breadboard', board=board)
+                    self.assertEqual(verified['source_image'], images[board])
+                    self.assertEqual(verified['deployed_image'], images['breadboard'])
+                    with self.assertRaisesRegex(ValueError, 'application image does not match'):
+                        module.check(root, source_bin=root/other, board=board)
