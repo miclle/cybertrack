@@ -1,0 +1,68 @@
+{
+  "version": "2.0.3-ct81",
+  "date": "2026-11-26",
+  "last_recorded_application": "2.0.3-ct78",
+  "flashed": false,
+  "platform_role_synced": false,
+  "role_sha256": "6186beb47f1845ab5a0553be34131430032c32f8a130c178fd4dedebcf0258e0",
+  "mainboard_a1_build": {
+    "version": "v5.5.1",
+    "path": "build/firmware-ct81-a1/xiaozhi.bin",
+    "bytes": 2682576,
+    "sha256": "30c269eed4918e6b7f295f403f874dcedb1c0d785562f585e2eabcfc834f91db"
+  },
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "path": "build/firmware-ct81-breadboard/xiaozhi.bin",
+    "bytes": 2682336,
+    "sha256": "1dfcea84a82214ec53f8eff2e2d7f924264d6bd3b7a2df2e4e093122cbd3d0c3"
+  },
+  "checks": {
+    "sanitized_native_suite": "pass",
+    "obstacle": "Timed, held and combined forward requests with windows issued before/during block, new post-release windows, backwards movement and delayed plan steps. Active independent effects finish normally.",
+    "a4_interlock_model": "Existing safety-task output clearing and feedback protocol exercised with two simulated latches. Each nFAULT and a motor-rail dip clears motor permission between samples; stale session cannot restart. No A4 board image or hardware test.",
+    "prepared_mcp_and_actual_http_handlers": "pass",
+    "synthetic_stop_matrix": {
+      "matrix": "stop-v2",
+      "source_version": "2.0.3-ct81",
+      "evidence_kind": "host_control_replay",
+      "passed_cases": [
+        "release_move",
+        "release_water",
+        "release_bubbles",
+        "boot_mixed",
+        "stop_mixed",
+        "page_hidden_mixed",
+        "web_loss_mixed",
+        "wifi_loss_mixed",
+        "voice_loss_mixed",
+        "sequence_cancel_voice_active",
+        "sequence_cancel_voice_waiting",
+        "sequence_source_disconnect_voice_active",
+        "sequence_source_disconnect_voice_waiting"
+      ],
+      "trigger_offsets_ms": [
+        5,
+        55,
+        100,
+        150,
+        195
+      ],
+      "tick_ms": 5,
+      "reconnected_at_ms_after_trigger": 2500,
+      "observed_ms_after_reconnect": 6000,
+      "second_step_without_stop": [
+        "voice"
+      ],
+      "physical_trials_added": 0,
+      "prepared_source_sha256": {
+        "control_sessions.h": "e6e94e8bf8c2f2d5e3f2f26f6c59e23ee15909c7d393d1592a71c69981750679",
+        "action_guard.h": "258c96bcf37939683b4a560b33954fc73a87e9477ea86d965bccf5c6ac6e841d",
+        "action_plan.h": "01c617ed3609e4b80c8a6e052a91a97c64fa01c84266731b91195f715a739261",
+        "water_guard.h": "088309c542a1e06dbfc3d49994ad0b8793c5e6868fef2e5c238b6cf0deec5379",
+        "water_policy.c": "6398f30393a06e0fb9081e16adf9cfd5b8bf723234604e960f6c8656cb4f050a",
+        "water_policy.h": "a4a13f7be957e989a2edcea152dbaff1b9bd180bf98d4a6e950c043a1128b3ab"
+      }
+    }
+  }
+}

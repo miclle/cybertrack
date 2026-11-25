@@ -292,5 +292,41 @@ int main() {
         s.SetForwardBlocked(100,true); s.Tick(1000,false); s.Tick(1200,false);
         assert(!s.plan_active && is(s.plan_result,"obstacle_blocked") && s.guard.Starts()==1);
     }
+    for (bool held : {false, true}) {
+        for (bool issued_while_blocked : {false, true}) {
+            auto s = ready();
+            auto owner = s.Acquire(0);
+            assert(s.Heartbeat(0, owner));
+            s.SetForwardBlocked(100, true);
+            if (issued_while_blocked) assert(s.Heartbeat(150, owner));
+            s.SetForwardBlocked(200, false);
+            const char* res = held ? s.DriveStart(210, owner, 1, s.window, "forward", 0)
+                                   : s.WebAction(210, owner, 1, s.window, G::Both, 500, 500, "forward");
+            assert(is(res, "stale_request") && !s.guard.Moving() && !s.guard.Watering());
+            assert(s.Heartbeat(215, owner));
+            assert(is(s.DriveStart(215, owner, 2, s.window, "forward", 0), "accepted"));
+        }
+    }
+    {
+        auto s = ready();
+        auto owner = s.Acquire(0);
+        assert(s.Heartbeat(0, owner));
+        s.SetForwardBlocked(10, true);
+        assert(is(s.DriveStart(11, owner, 1, s.window, "backward", 0), "accepted"));
+    }
+    {
+        auto s = ready();
+        ActionPlan plan;
+        plan.count = 2;
+        plan.steps[0] = {"none", 0, 500, 0};
+        plan.steps[1] = {"forward", 500, 0, 0};
+        assert(is(s.VoicePlan(0, s.VoiceClaim(0, 1, G::PlanMode), plan), "accepted"));
+        s.SetForwardBlocked(100, true);
+        assert(!s.plan_active && s.guard.Watering());
+        s.SetForwardBlocked(200, false);
+        s.Tick(500, false);
+        s.Tick(2500, false);
+        assert(is(s.plan_result, "obstacle_blocked") && s.guard.Starts() == 1 && !s.guard.Moving());
+    }
     std::cout << "three-sample audio confirmation, spike rejection, cadence, freshness, immediate voice/web/sequence stops and no-resume: PASS\n";
 }

@@ -37,19 +37,19 @@ GPIO4 由麦克风占用。BOOT 按下即停止，松开后需要新指令。GPI
 在仓库根目录操作，先加载 ESP-IDF v5.5.1 环境。源码准备需要包含原始 ELF、sdkconfig 和锁定组件缓存的上游工作区，以及支持 tarfile data filter 的 Python 和 PyYAML。导出目标须是 `build/` 下尚不存在的目录。v2 使用 A1 配置。
 
 ```sh
-python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --mainboard-a1 --target build/xiaozhi-ct80-a1-src
-idf.py -C build/xiaozhi-ct80-a1-src -B "$PWD/build/firmware-ct80-a1" build
+python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --mainboard-a1 --target build/xiaozhi-ct81-a1-src
+idf.py -C build/xiaozhi-ct81-a1-src -B "$PWD/build/firmware-ct81-a1" build
 ```
 
 旧面包板回归使用独立目录。
 
 ```sh
-python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct80-rebuild-src
+python firmware/esp32-audio/prepare.py /path/to/original/xiaozhi-esp32 --target build/xiaozhi-ct81-rebuild-src
 sh firmware/esp32-audio/test.sh
 node firmware/esp32-audio/tests/web_ui_test.mjs
-python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct80-rebuild-src
-python firmware/esp32-audio/tests/run_display_tests.py --source build/xiaozhi-ct80-rebuild-src
-idf.py -C build/xiaozhi-ct80-rebuild-src -B "$PWD/build/firmware-ct80-rebuild" build
+python firmware/esp32-audio/tests/run_mcp_tests.py --source build/xiaozhi-ct81-rebuild-src
+python firmware/esp32-audio/tests/run_display_tests.py --source build/xiaozhi-ct81-rebuild-src
+idf.py -C build/xiaozhi-ct81-rebuild-src -B "$PWD/build/firmware-ct81-rebuild" build
 ```
 
 A1 通过 GPIO38 读取断电锁存状态，通过 GPIO45 重新使能执行器，GPIO14 保持扩展口关闭。[A1 断电与恢复](../../hardware/pcb/README.md#sw2-断电与恢复)
@@ -58,7 +58,7 @@ A1 通过 GPIO38 读取断电锁存状态，通过 GPIO45 重新使能执行器�
 
 ## 验证与观察
 
-[ct80 检查记录](verification-ct80.json)给出两个镜像的 SHA-256、SW2 主机测试及当前停止矩阵结果。[ct79 检查记录](verification-ct79.json)涵盖本地构建、实际 MCP／HTTP 处理、音频、网页与停止矩阵回放。需要对齐现场日志时，`monitor.py --port <设备串口> --log build/audio-private/session.jsonl` 只读筛选回执和状态。真人拾音、扬声器、动作与机械停止按[现场记录方法](../../docs/validation/README.md)分别观察。
+[ct81 检查记录](verification-ct81.json)包含两种板型的构建摘要和跨避障闭锁的回归结果。[ct80 检查记录](verification-ct80.json)给出两个镜像的 SHA-256、SW2 主机测试及该版本停止矩阵结果。[ct79 检查记录](verification-ct79.json)涵盖本地构建、实际 MCP／HTTP 处理、音频、网页与停止矩阵回放。需要对齐现场日志时，`monitor.py --port <设备串口> --log build/audio-private/session.jsonl` 只读筛选回执和状态。真人拾音、扬声器、动作与机械停止按[现场记录方法](../../docs/validation/README.md)分别观察。
 
 ## 平台角色配置
 

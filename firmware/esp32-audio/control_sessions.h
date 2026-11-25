@@ -55,14 +55,24 @@ public:
         if (!guard.Bubbling()) web_targets_ &= ~AudioActionGuard::BubblesOnly;
     }
     void SetForwardBlocked(uint64_t now, bool blocked) {
-        if (blocked && !guard.forward_blocked) guard.InvalidatePendingForward();
+        if (blocked == guard.forward_blocked) return;
         guard.forward_blocked = blocked;
-        if (!blocked || !guard.Moving() || std::strcmp(guard.direction, "forward")) return;
+        if (!blocked) return;
+        guard.InvalidatePendingForward();
+        forward_window_valid_ = false;
+        // plan_step is one-based. A later forward step must not survive this trip,
+        // even when the active step is an effect or is already cooling down.
+        for (unsigned i = plan_step; plan_active && i < plan_count; ++i) {
+            if (guard.BlocksForward(plan_.steps[i].direction)) {
+                plan_active = false;
+                plan_result = "obstacle_blocked";
+            }
+        }
+        if (!guard.Moving() || !guard.BlocksForward(guard.direction)) return;
         if (plan_active) { plan_active = false; plan_result = "obstacle_blocked"; }
         guard.StopMove(now, false);
         web_targets_ &= ~AudioActionGuard::MoveOnly;
         drive_id = drive_renewal = 0;
-        window_valid_ = false;
     }
     void Stop(uint64_t now) {
         if (plan_active) { plan_active = false; plan_result = "cancelled"; }
@@ -117,6 +127,7 @@ public:
         ++window;
         window_issued_ = now;
         window_valid_ = guard.motion.online && !guard.motion.held && !guard.motion.clock_fault && !guard.spray.clock_fault && !guard.bubbles.clock_fault;
+        forward_window_valid_ = !guard.forward_blocked;
         return true;
     }
     bool Release(uint64_t now, uint32_t session) {
@@ -352,6 +363,8 @@ private:
     }
     const char* StartWeb(uint64_t now, AudioActionGuard::Target target, int move_ms, int water_ms, const char* direction, int bubbles_ms = 0) {
         if ((target & AudioActionGuard::MoveOnly) && guard.BlocksForward(direction)) return "obstacle_blocked";
+        if ((target & AudioActionGuard::MoveOnly) && direction && !std::strcmp(direction, "forward") && !forward_window_valid_)
+            return "stale_request";
         if (plan_active) { Stop(now); return "voice_preempted"; }
         if (const char* error = AudioActionGuard::Validate(target, move_ms, water_ms, direction, bubbles_ms)) return error;
         // Cancel only conflicting queued voice work. Never resume it after web control ends.
@@ -383,5 +396,5 @@ private:
     }
     uint64_t heartbeat_ = 0, window_issued_ = 0, drive_until_ = 0, drive_started_ = 0;
     uint32_t generation_ = 0, sequence_ = 0;
-    bool pressed_ = false, window_valid_ = false;
+    bool pressed_ = false, window_valid_ = false, forward_window_valid_ = false;
 };
