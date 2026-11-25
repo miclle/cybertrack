@@ -205,6 +205,7 @@ function modelView(model, asset) {
 const sha256 = file => createHash("sha256").update(fs.readFileSync(file)).digest("hex");
 const exporter = path.join(root, "scripts/export_web_model.py");
 const exporterHash = sha256(exporter);
+const materialReaderHash = sha256(path.join(root, "scripts/cad_gui_state.py"));
 const bundledPython = "/Applications/FreeCAD.app/Contents/Resources/bin/python";
 
 function readModel(file, fingerprint) {
@@ -214,7 +215,8 @@ function readModel(file, fingerprint) {
     const glb = gunzipSync(bytes);
     if (glb.toString("ascii", 0, 4) !== "glTF" || glb.readUInt32LE(8) !== glb.length) return null;
     const { asset, meshes } = JSON.parse(glb.toString("utf8", 20, 20 + glb.readUInt32LE(12)));
-    if (meshes.length && asset.extras.sourceSha256 === fingerprint && asset.extras.exporterSha256 === exporterHash) {
+    if (meshes.length && asset.extras.sourceSha256 === fingerprint && asset.extras.exporterSha256 === exporterHash
+        && asset.extras.materialReaderSha256 === materialReaderHash) {
       return bytes;
     }
   } catch {

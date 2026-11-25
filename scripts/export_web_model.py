@@ -21,6 +21,8 @@ if sys.platform == "darwin" and MAC_LIB.is_dir():
 
 import FreeCAD as App
 
+from cad_gui_state import read_material_list
+
 
 def saved_styles(source):
     """Read face colors and visibility from the saved GUI state without a GUI."""
@@ -34,14 +36,11 @@ def saved_styles(source):
             colors = [0xAAB5BDFF]
             if material is not None and material.get("file"):
                 data = archive.read(material.get("file"))
-                count, = struct.unpack_from("<I", data)
-                # The two saved v3 layouts share the diffuse RGBA offset.
-                stride = (len(data) - 4) // count if count else 0
-                if (material.get("version") != "3" or len(data) != 4 + stride * count
-                        or (count and stride not in (36, 72))):
+                if material.get("version") != "3":
                     raise ValueError(f"Unsupported saved material on {view.get('name')}")
-                if count:
-                    colors = [struct.unpack_from("<I", data, 8 + stride * i)[0] for i in range(count)]
+                records = read_material_list(data)
+                if records:
+                    colors = [struct.unpack_from("<I", numeric, 4)[0] for numeric, _ in records]
             transparency = props.find("Property[@name='Transparency']/Integer")
             if transparency is not None:
                 opacity = 1 - int(transparency.get("value")) / 100
@@ -67,6 +66,7 @@ class Model:
             "asset": {"version": "2.0", "generator": "CyberTrack FreeCAD export", "extras": {
                 "sourceSha256": hashlib.sha256(source.read_bytes()).hexdigest(),
                 "exporterSha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                "materialReaderSha256": hashlib.sha256(Path(__file__).with_name("cad_gui_state.py").read_bytes()).hexdigest(),
             }},
             "scene": 0, "scenes": [{"nodes": [0]}],
             "nodes": [{
