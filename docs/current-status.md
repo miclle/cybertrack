@@ -4,11 +4,11 @@
 |---|---|
 | A2 前摄主板 | 工程已接入右前脸 Seeed 114993115、双电源与 DVP 转换。首板电气、同批 FPC 接触及整机预览待验。[主板](../hardware/pcb/README.md) · [摄像头](../hardware/model/studies/front-camera/README.md) |
 | A3 运动反馈 | 已有独立 A3 原理图、PCB、计数 MCU 与 S3 首件采样程序、26 芯线束与五个 Ø14.5 mm 通道改件。头下壳已合入 A2 前摄安装座，光路与 Ø14 mm 通规均已做 CAD 检查。编码器电气核实、实物试装和整车闭环待验。[A3 工程](../hardware/pcb/motion-feedback/README.md) · [改件与检查记录](../hardware/model/studies/a3-harness/README.md) |
-| 固件候选 | **2.0.3-ct80** 提供 A1 主板和旧面包板两种构建，A2 专用固件待开发。A1 通过硬件锁存处理 SW2 断开，避障保留待处理的后退和转向请求。应用尚待部署。[构建与回归记录](../firmware/esp32-audio/verification-ct80.json) |
+| 固件候选 | **2.0.3-ct81** 提供 A1 主板和旧面包板两种构建，A2–A4 的专用整机固件待开发。A1 通过硬件锁存处理 SW2 断开，避障取消旧网页前进授权和序列中的待执行前进，保留后退、转向及独立效果。应用尚待部署。[构建与回归记录](../firmware/esp32-audio/verification-ct81.json) |
 | 旧版样机应用 | **2.0.3-ct78** 于 2026-11-03 仅更新应用。配置保持，两次启动联网、二十条输出全关的状态回读通过。[部署记录](validation/ct78-deployment.md) |
 | 语音角色 | 仓库的 ct79 角色为 5002 字符，尚待同步。平台最近一次回读为 2026-11-01 恢复的旧 5991 字符角色。[角色源](../firmware/esp32-audio/role-prompt.txt) · [平台回读](validation/evidence/ct78-stop-duration/platform-restored.json) |
 | CAD 与打印 | 整机已装入 A1 STEP、四柱托架及左右各一只常规喇叭。Lean 21 件、Ready 20 件，各六盘。4 Ω 带载表现与闭盖声像待验。清水瓶、泡泡液瓶直接放入背包。CAD 已检查取瓶路径，实际抓握、行走稳定性和密封待验。[模型与切片入口](../hardware/model/README.md) |
-| 电源 | 辰克 5 V 电池包供电，电机支路升压至 12 V。当前整机的持续负载、电流、温升和续航待测。[电源与预算](../hardware/architecture/README.md) |
+| 电源 | A1–A3 的 J8 为 5 V 输入，板上升至 12 V 驱动电机。A4 采用 4S 成品包、三路降压和双 H 桥，布线已完成，原生 DRC 通过，已导出工程样板文件。BTO US1202 已做包络试配，电池定型及双履带带载零复位待首件验证。[A4 主板](../hardware/pcb/power-revision/README.md)。[供电改版](../hardware/architecture/v2-power.md) |
 
 ## 现场与语音
 
@@ -22,11 +22,11 @@
 
 ```sh
 python3 scripts/check_firmware_current.py --board a1 \
-  --source-bin build/firmware-ct80-a1/xiaozhi.bin \
+  --source-bin build/firmware-ct81-a1/xiaozhi.bin \
   --deployed-bin build/firmware-ct78/xiaozhi.bin
 ```
 
-当前默认核对 A1。核对旧设备的候选镜像时使用 `--board breadboard --source-bin build/firmware-ct80-breadboard/xiaozhi.bin`。`--deployed-bin` 始终与最近一次实机刷写记录比对。
+当前默认核对 A1。核对旧设备的候选镜像时使用 `--board breadboard --source-bin build/firmware-ct81-breadboard/xiaozhi.bin`。`--deployed-bin` 始终与最近一次实机刷写记录比对。
 
 准备好同版上游源码后，按[固件主机验证](validation/firmware-host.md)运行当前固件的退役请求、停止与恢复检查。
 

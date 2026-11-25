@@ -6,6 +6,16 @@ v2 使用一块定制 PCB，主控、电源、音频与驱动的当前工程选�
 
 A2 前摄版的百台试产单机预算见[整机成本与假设](pcb/camera-revision/unit-cost.md)，对应的元件数量及公开价格见[计价明细](pcb/camera-revision/board-prices.csv)。
 
+## A4 供电物料
+
+| 物料 | 选型依据 |
+|---|---|
+| 4S 成品电池包（含 BMS）与配套充电器 | 各一件。BTO US1202 为询样候选，板侧用 VH 配对线束，整包及充电器型号待确认。取得持续／脉冲放电曲线、保护时序、可用 Wh、尺寸、质量和配对接头后询价。 |
+| 板上电源与电机驱动 | 3 × LMR51450SDRRR、2 × DRV8874PWPR、1 × SN74LVC08APWR、1 × TPS3700DDCR，配套电感、电容、保护和反馈件随 A4 工程核对。 |
+| 总开关、SW2、线束与固定件 | J8 为 JST B2P-VH(LF)(SN)，核对配对壳、压接端子、总开关和 SW2 的满充直流分断能力及新包取出路径。[板级接口](pcb/power-revision/README.md) |
+
+[A4 板级 BOM](pcb/power-revision/BOM.md)记录已落图的工程料号。保险定值、电池及线束按实测冻结，成本单独核价。[电机负载预算与验证](architecture/v2-power.md)
+
 ## v2 扬声器与线束
 
 | 器件 | 每机用量 | 选型与安装依据 |

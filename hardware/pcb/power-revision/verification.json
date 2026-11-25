@@ -1,0 +1,332 @@
+{
+  "revision": "A4",
+  "editor": "JLCEDA Pro 4.1.105",
+  "status": "engineering prototype fabrication files exported",
+  "native_sheets": 12,
+  "board_outline_mm": [
+    96,
+    80
+  ],
+  "copper_layers": 4,
+  "references": 218,
+  "nets": 158,
+  "assigned_pin_connections": 756,
+  "schematic_pcb_pin_differences": 0,
+  "unchanged_A3_pinmaps": 129,
+  "schematic_pcb_attributes_compared": [
+    "Unique ID",
+    "Device",
+    "Footprint",
+    "Manufacturer Part",
+    "Supplier Part",
+    "Add into BOM"
+  ],
+  "rail_endpoints": {
+    "J8": {
+      "1": "PACK_4S",
+      "2": "GND_SYS"
+    },
+    "J9": {
+      "1": "MAIN_SWITCH",
+      "2": "GND_SYS"
+    },
+    "J10": {
+      "1": "ACT_FEED",
+      "2": "VBAT_ACT"
+    },
+    "J16": {
+      "1": "RUN_SOURCE",
+      "2": "ACT_CLR_N"
+    },
+    "F1": {
+      "1": "PACK_4S",
+      "2": "FUSED"
+    },
+    "F2": {
+      "1": "VBAT_SYS",
+      "2": "CTRL_FUSED"
+    },
+    "F3": {
+      "1": "VBAT_SYS",
+      "2": "ACT_FUSED"
+    },
+    "F4": {
+      "1": "VBAT_ACT",
+      "2": "DRIVE_FUSED"
+    },
+    "U5": {
+      "1": "DRIVE_SW",
+      "2": "DRIVE_SW",
+      "3": "DRIVE_SW",
+      "4": "DRIVE_BST",
+      "7": "DRIVE_FB",
+      "8": "GND_SYS",
+      "9": "DRIVE_FUSED",
+      "10": "DRIVE_FUSED",
+      "11": "DRIVE_FUSED",
+      "12": "DRIVE_FUSED",
+      "13": "GND_SYS"
+    },
+    "U22": {
+      "1": "CTRL_SW",
+      "2": "CTRL_SW",
+      "3": "CTRL_SW",
+      "4": "CTRL_BST",
+      "7": "CTRL_FB",
+      "8": "GND_SYS",
+      "9": "CTRL_FUSED",
+      "10": "CTRL_FUSED",
+      "11": "CTRL_FUSED",
+      "12": "CTRL_FUSED",
+      "13": "GND_SYS"
+    },
+    "U23": {
+      "1": "EFFECT_SW",
+      "2": "EFFECT_SW",
+      "3": "EFFECT_SW",
+      "4": "EFFECT_BST",
+      "7": "EFFECT_FB",
+      "8": "GND_SYS",
+      "9": "VBAT_ACT",
+      "10": "VBAT_ACT",
+      "11": "VBAT_ACT",
+      "12": "VBAT_ACT",
+      "13": "GND_SYS"
+    },
+    "U25": {
+      "1": "ACT_CLR_N",
+      "2": "GND_SYS",
+      "3": "PACK_SENSE",
+      "4": "VM_SENSE",
+      "5": "3V3_CTRL",
+      "6": "VM_GOOD_N"
+    },
+    "U10": {
+      "1": "ARM_CLK",
+      "2": "3V3_CTRL",
+      "4": "GND_SYS",
+      "5": "ACT_ARMED",
+      "6": "ACT_CLR_N",
+      "7": "3V3_CTRL",
+      "8": "3V3_CTRL"
+    },
+    "U6": {
+      "1": "MA_IN1",
+      "2": "MA_IN2",
+      "3": "ACT_ARMED",
+      "4": "TRACK_CLR_N",
+      "5": "3V3_CTRL",
+      "6": "MA_IP",
+      "8": "MA1",
+      "9": "GND_SYS",
+      "10": "MA2",
+      "11": "12V_MOTOR",
+      "12": "MA_VCP",
+      "13": "MA_CPH",
+      "14": "MA_CPL",
+      "15": "GND_SYS",
+      "16": "3V3_CTRL",
+      "17": "GND_SYS"
+    },
+    "U24": {
+      "1": "MB_IN1",
+      "2": "MB_IN2",
+      "3": "ACT_ARMED",
+      "4": "TRACK_CLR_N",
+      "5": "3V3_CTRL",
+      "6": "MB_IP",
+      "8": "MB1",
+      "9": "GND_SYS",
+      "10": "MB2",
+      "11": "12V_MOTOR",
+      "12": "MB_VCP",
+      "13": "MB_CPH",
+      "14": "MB_CPL",
+      "15": "GND_SYS",
+      "16": "3V3_CTRL",
+      "17": "GND_SYS"
+    },
+    "U26": {
+      "1": "PWM_A_SAFE",
+      "2": "MOTOR_A_IN1",
+      "3": "MA_IN1",
+      "4": "PWM_A_SAFE",
+      "5": "MOTOR_A_IN2",
+      "6": "MA_IN2",
+      "7": "GND_SYS",
+      "8": "MB_IN1",
+      "9": "PWM_B_SAFE",
+      "10": "MOTOR_B_IN1",
+      "11": "MB_IN2",
+      "12": "PWM_B_SAFE",
+      "13": "MOTOR_B_IN2",
+      "14": "3V3_CTRL"
+    },
+    "J11": {
+      "1": "MA1",
+      "2": "MA2"
+    },
+    "J12": {
+      "1": "MB1",
+      "2": "MB2"
+    },
+    "U27": {
+      "1": "ARM_CLK",
+      "2": "ACT_ARMED",
+      "4": "GND_SYS",
+      "5": "DRIVE_ARMED",
+      "6": "TRACK_CLR_N",
+      "7": "3V3_CTRL",
+      "8": "3V3_CTRL"
+    },
+    "U28": {
+      "1": "MOTOR_A_EN",
+      "2": "DRIVE_ARMED",
+      "3": "PWM_A_SAFE",
+      "4": "MOTOR_B_EN",
+      "5": "DRIVE_ARMED",
+      "6": "PWM_B_SAFE",
+      "7": "GND_SYS",
+      "8": "TRACK_READY",
+      "9": "VM_GOOD",
+      "10": "ACT_ARMED",
+      "12": "GND_SYS",
+      "13": "GND_SYS",
+      "14": "3V3_CTRL"
+    },
+    "U21": {
+      "1": "ENC_A1",
+      "2": "T1_CH1",
+      "3": "ENC_A2",
+      "4": "T1_CH2",
+      "5": "ENC_B1",
+      "6": "T3_CH1",
+      "7": "GND_SYS",
+      "8": "T3_CH2",
+      "9": "ENC_B2",
+      "11": "VM_GOOD_N",
+      "13": "GND_SYS",
+      "14": "3V3_CTRL",
+      "10": "VM_GOOD"
+    },
+    "R78": {
+      "1": "TRACK_CLR_N",
+      "2": "TRACK_READY"
+    },
+    "R80": {
+      "1": "TRACK_CLR_N",
+      "2": "TRACK_READY"
+    },
+    "R81": {
+      "1": "3V3_CTRL",
+      "2": "VM_GOOD_N"
+    },
+    "R82": {
+      "1": "12V_MOTOR",
+      "2": "VM_SENSE"
+    },
+    "R83": {
+      "1": "VM_SENSE",
+      "2": "GND_SYS"
+    }
+  },
+  "ratlines": 0,
+  "drc_state": "passed",
+  "drc_violations_by_type": {},
+  "physical_validation": {
+    "battery_sample": false,
+    "motor_current_waveform": false,
+    "zero_resets_under_load": false,
+    "thermal": false,
+    "runtime": false
+  },
+  "fabrication_release": true,
+  "native_file_sha256": {
+    "CyberTrack-A4.eprj3": "1e4edbe71665e077627c5c3a4d3e36ebfd92ebb05a364ce100bea04fe5eb50ea",
+    "panel/Panel1.epan2": "b797ecc2a905ad5b919bafe0a44ed85a9727d4455058eaa98c08f64ee7c34d60",
+    "pcb/PCB1.epcb2": "b9976f82ca96ef39a2ca76a9ce7810bc3c1890f932442e9c3a4d022b2c4e25e6",
+    "sch/Schematic1/Actuator 5V buck.esch2": "fd0867edbd823a513d698c81d0d97f67258546e1ec2c666e81353dc684a96819",
+    "sch/Schematic1/Actuator rearm.esch2": "e200fb5f060df8eb07394ef65ef5f660d73ad80394ca5c0d455b53cabe09211c",
+    "sch/Schematic1/Camera DVP and control.esch2": "a924e6ca7d55e91f8fb8de038a97590e3b884cd5d4afab54bf043898898f832c",
+    "sch/Schematic1/Camera power and bias.esch2": "487b4ae73438cdd750ffac140881df261b67dc292e32b7a888a82dc6fa0aaf0c",
+    "sch/Schematic1/Control 5V buck.esch2": "0adbac91dcf3c2b2cb6b2b183948e9ae57d8a5e2e7c4e6558d0d8897faf8e765",
+    "sch/Schematic1/Input and logic supply.esch2": "3e334f941b43024141fffa171e8a4171a7bc679fe50a1daf3d6a7790900f5d3f",
+    "sch/Schematic1/Logic and audio.esch2": "367bba5d8e71d9e3ff0b78811295952e00cc5b9c2eba45c99f980adbbfe5aa8f",
+    "sch/Schematic1/Motion feedback.esch2": "2b911aba21125c2f19b23d6ffcf01c2ada45bc98aac026a16a69048d42654f4c",
+    "sch/Schematic1/Schematic1.ecfg": "4081d3c3cb1fa1a839cc491765f89c9ecc294b8ab85fe25b12edf477f376a015",
+    "sch/Schematic1/Track driver.esch2": "50bd5a8c69b9a8fc0302d648f0ecff74cedf1f721d63daf2e498ad4c839bf94d",
+    "sch/Schematic1/Track fault interlock.esch2": "42e5afa7eda2561932de9155394bb6a5734065e8084ff645e91f9cff38a17de0",
+    "sch/Schematic1/Traction 12V buck.esch2": "8e4a4fcb8300d5726652c6e9234b962c11853cfcd47dc1b94e9937c47f08373a",
+    "sch/Schematic1/Water and bubbles.esch2": "c0e74871438b25fcce398ba8327383f490415d458d3e32e4564075d4fa56e525"
+  },
+  "date": "2026-11-26",
+  "drc_total_count": 0,
+  "native_reopened": true,
+  "routing_baseline_comparison": {
+    "original_and_final_rule_sha256": "8792d3706866cb551fd38e33c26a5067e230d0661d0e45883b1844364757a1fa",
+    "unchanged_rule_entries": 22,
+    "unchanged_component_placements": 211,
+    "unchanged_pours": 3
+  },
+  "native_drc": {
+    "state": "passed",
+    "totalCount": 0,
+    "failedItems": 0,
+    "violations": [],
+    "checkedAt": 1795625375988
+  },
+  "release_scope": "bare-board engineering prototype",
+  "production_release": false,
+  "fabrication_file_sha256": {
+    "CyberTrack-A4-Gerber.zip": "a57ee03fc0963b544da3defa6a62d25fd3fac90b42e201864725e4451a580c28",
+    "CyberTrack-A4-Assembly.zip": "3e245fc101b974df526e288395f36ab46bb3c7843af36be2481fdaf672676cf2"
+  },
+  "gerber_members": [
+    "Gerber_TopLayer.GTL",
+    "Gerber_BottomLayer.GBL",
+    "Gerber_TopSilkscreenLayer.GTO",
+    "Gerber_BottomSilkscreenLayer.GBO",
+    "Gerber_TopSolderMaskLayer.GTS",
+    "Gerber_BottomSolderMaskLayer.GBS",
+    "Gerber_TopPasteMaskLayer.GTP",
+    "Gerber_BottomPasteMaskLayer.GBP",
+    "Gerber_BoardOutlineLayer.GKO",
+    "Gerber_DocumentLayer.GDL",
+    "Gerber_InnerLayer1.G1",
+    "Gerber_InnerLayer2.G2",
+    "Gerber_DrillDrawingLayer.GDD",
+    "Drill_PTH_Through.DRL",
+    "Drill_NPTH_Through.DRL",
+    "Drill_PTH_Through_Via.DRL",
+    "FlyingProbeTesting.json",
+    "PCB下单必读.txt"
+  ],
+  "gerber_probe_equivalence_classes": 158,
+  "gerber_probe_assigned_pins": 756,
+  "copper_order": [
+    "Top Layer",
+    "Inner1",
+    "Inner2",
+    "Bottom Layer"
+  ],
+  "J17_verified_paste_apertures": 28,
+  "assembly": {
+    "BOM_references": 211,
+    "placement_references": 211,
+    "DNP": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "placement_unit": "mm"
+  },
+  "interlock_probe_check": {
+    "groups": 20,
+    "passed": true,
+    "hardware_fault_injection": false
+  }
+}

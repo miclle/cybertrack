@@ -10,7 +10,7 @@ A1 的 Lean 21 件、Ready 20 件，各六盘。使用 Ready 时另打 A1 主板
 
 37R-520 电机经联轴器驱动两侧履带。维护一侧电机前，先释放联轴器、移开电源内托架及本侧履带，再按模型路径下取。VF01 已有双侧静态试配反馈，实际螺钉牙深、带线操作空间、底盖承载和反复拆装仍需核对。[VF01 试配](../hardware/model/drive-fit-fixture/README.md) · [动力接口](../hardware/components/drive-interface/README.md)
 
-v2 使用 A1 板载 L298P；旧样机的独立 L298N 与底盖支架见历史装配记录。辰克 5 V 电池包低位平放，外形 116 × 70.5 × 19.5 mm。核对插头、线材弯曲和板上最高点后再盖合。[驱动板安装](../hardware/model/l298n-compact/README.md) · [电源与接口](../hardware/architecture/README.md)
+v2 使用 A1 板载 L298P；旧样机的独立 L298N 与底盖支架见历史装配记录。现有模型中的辰克 5 V 电池包低位平放，外形 116 × 70.5 × 19.5 mm。A4 的 J8 使用 VH 两针线束，SW2 主触点须按 4S 重新选型，J16 保持干接点。[A4 单独试配模型](../hardware/model/studies/a4-battery/A4-battery-fit.FCStd)使用 BTO US1202 的近似包络，舱盖和拉带处仅有 0.2 mm 名义间距。试样需重新核对固定、取出路径、质量与重心，以及插头、线材弯曲和板上最高点。[供电改版](../hardware/architecture/v2-power.md)[驱动板安装](../hardware/model/l298n-compact/README.md) · [电源与接口](../hardware/architecture/README.md)
 
 ## 电源开关与停止按钮
 

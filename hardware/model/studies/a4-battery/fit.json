@@ -1,0 +1,38 @@
+{
+  "candidate": "BTO US1202",
+  "source_assembly": "hardware/model/CyberTrack.FCStd",
+  "approximate_body_mm": [
+    82,
+    70,
+    21
+  ],
+  "origin_xyz_mm": [
+    -41.0,
+    -94.5,
+    33.0
+  ],
+  "scope": "Visible neighboring A1 solids within a 3 mm bounding-box margin; candidate body only; cable, retention and extraction unverified.",
+  "nearby_object_volume_overlap_mm3_and_distance_mm": [
+    [
+      "Drive",
+      0.0,
+      8.5
+    ],
+    [
+      "BatteryHatch",
+      0.0,
+      0.2
+    ],
+    [
+      "BatteryPullStrap",
+      0.0,
+      0.2
+    ],
+    [
+      "PrintLowerTub",
+      0.0,
+      3.202
+    ]
+  ],
+  "physical_fit_verified": false
+}

@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "supply": {
+    "name": "A4 4S 输入，最低牵引电压附近的筛选工况",
+    "voltage_v": {
+      "value": 13.5,
+      "kind": "assumption",
+      "source": "A4 首件初筛假设，需在最低允许运动电压、相应负载和闭壳温度下测得。"
+    },
+    "continuous_a": {
+      "value": null,
+      "kind": "unknown",
+      "source": "待取得样件及包厂对持续输出条件、线束和温升的确认。"
+    }
+  },
+  "branches": {
+    "traction": {
+      "stall_proxy": {
+        "output_power_w": {
+          "value": 33.6,
+          "kind": "derived",
+          "source": "两台电机各按 12 V × 1.4 A 的供应商堵转数据，仅用于阶跃负载估算。"
+        },
+        "efficiency": {
+          "value": 0.85,
+          "kind": "assumption",
+          "source": "A4 首件初筛假设，需在最低允许运动电压、相应负载和闭壳温度下测得。"
+        }
+      },
+      "measured_start": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "包侧电机域电流的峰值与脉宽待测。"
+        }
+      }
+    },
+    "controller": {
+      "budget": {
+        "output_power_w": {
+          "value": 10,
+          "kind": "assumption",
+          "source": "5 V × 2 A，含 3.3 V、音频和前摄的控制域预估。"
+        },
+        "efficiency": {
+          "value": 0.85,
+          "kind": "assumption",
+          "source": "A4 首件初筛假设，需在最低允许运动电压、相应负载和闭壳温度下测得。"
+        }
+      },
+      "measured_concurrent": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "包侧控制域音视频并发电流待测。"
+        }
+      }
+    },
+    "effects": {
+      "budget": {
+        "output_power_w": {
+          "value": 16.25,
+          "kind": "assumption",
+          "source": "5 V × 3.25 A，三路高侧开关限流点上界求和的预算场景。"
+        },
+        "efficiency": {
+          "value": 0.85,
+          "kind": "assumption",
+          "source": "A4 首件初筛假设，需在最低允许运动电压、相应负载和闭壳温度下测得。"
+        }
+      },
+      "measured_concurrent": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "包侧效果支路同时启动电流待测。"
+        }
+      }
+    },
+    "additional_loss": {
+      "omitted": {
+        "input_current_a": {
+          "value": 0,
+          "kind": "assumption",
+          "source": "仅复算正文的部分功率和：此场景有意略去桥损、线缆和输入保护损耗。"
+        }
+      },
+      "actual": {
+        "input_current_a": {
+          "value": null,
+          "kind": "unknown",
+          "source": "实际附加损耗须在相同测量边界下核对，避免与分支电流重复计入。"
+        }
+      }
+    }
+  },
+  "scenarios": [
+    {
+      "id": "screening_subtotal_without_bridge_or_wiring_loss",
+      "kind": "startup",
+      "modes": {
+        "traction": "stall_proxy",
+        "controller": "budget",
+        "effects": "budget",
+        "additional_loss": "omitted"
+      }
+    },
+    {
+      "id": "concurrent_start_measured",
+      "kind": "startup",
+      "modes": {
+        "traction": "measured_start",
+        "controller": "measured_concurrent",
+        "effects": "measured_concurrent",
+        "additional_loss": "actual"
+      }
+    }
+  ]
+}
