@@ -1,5 +1,7 @@
 # CyberTrack 一体主板
 
+[A3 运动反馈主板](motion-feedback/README.md)在 A2 基础上增加双 AB 编码器硬件计数、六轴 IMU 和 J18–J21；沿用原有前摄与停止路径。[九页原理图与 PCB](CyberTrack-A3/CyberTrack-A3.eprj3) · [线束与颈部改件](../model/studies/a3-harness/README.md)
+
 [A2 摄像头主板原生工程](CyberTrack-A2/CyberTrack-A2.eprj3)收录右前脸 Seeed 114993115 的 DVP 总线、供电及电平转换。复制时保留整个 CyberTrack-A2 目录。[电路与排线针序](camera-revision/README.md) · [A2 样板 Gerber、钢网与钻孔](CyberTrack-A2-Gerber.zip) · [A2 检查记录](verification-A2.json) · [FreeCAD 插拔试装](../model/studies/front-camera/CyberTrack-A2-front-camera.FCStd)
 
 ## A1 工程样板

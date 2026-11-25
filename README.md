@@ -16,7 +16,7 @@
 
 小D 是一台可以用语音和手机控制的双履带机器人。说“左转一秒，同时吹泡泡三秒”，两路动作可以同时开始、分别结束。手机连入同一网络即可遥控，本机 BOOT 和网页“全部停止”都可以中止动作。
 
-**v2 按一块定制 PCB 进行量产设计，当前工程版为 A1。** [主板设计](hardware/pcb/README.md) · [前置摄像头试装](hardware/model/studies/front-camera/README.md)。 源码保留行走、喷水与泡泡，已移除点火和狂暴模式。ct80 固件与配套角色待部署，旧面包板样机最近一次应用部署为 ct78。已有样机演示和分项现场记录，整机负载、机械停止和儿童使用仍待验收。[当前状态](docs/current-status.md) · [早期样机分支](https://github.com/miclle/cybertrack/tree/main)
+**v2 按一块定制 PCB 进行量产设计，A1 对应现行整机装配，A2 增加前摄，A3 增加运动反馈。** [A3 双编码器与 IMU 修订](hardware/pcb/motion-feedback/README.md) · [主板设计](hardware/pcb/README.md) · [前置摄像头试装](hardware/model/studies/front-camera/README.md)。 源码保留行走、喷水与泡泡，已移除点火和狂暴模式。ct80 固件与配套角色待部署，旧面包板样机最近一次应用部署为 ct78。已有样机演示和分项现场记录，整机负载、机械停止和儿童使用仍待验收。[当前状态](docs/current-status.md) · [早期样机分支](https://github.com/miclle/cybertrack/tree/main)
 
 ## 旧版样机演示
 

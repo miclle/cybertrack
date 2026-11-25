@@ -1,0 +1,273 @@
+{
+  "revision": "A3",
+  "editor": "嘉立创 EDA 专业版 4.1.105",
+  "date": "2026-11-25",
+  "native_sheets": 9,
+  "board_mm": [
+    96,
+    80
+  ],
+  "copper_layers": 4,
+  "references": 169,
+  "same_A2_pinmaps": 150,
+  "assigned_pad_connections": 605,
+  "nets": 129,
+  "schematic_pcb_assigned_pin_differences": 0,
+  "compared_component_attributes": [
+    "Unique ID",
+    "Manufacturer Part",
+    "Footprint",
+    "Device",
+    "Supplier Part",
+    "Add into BOM"
+  ],
+  "gerber_probe_equivalence_classes": 129,
+  "drc": {
+    "rat": {
+      "items": [],
+      "hasMore": false,
+      "total": 0
+    },
+    "drc": {
+      "state": "passed",
+      "totalCount": 0,
+      "failedItems": 0,
+      "violations": [],
+      "checkedAt": 1795588787880
+    }
+  },
+  "new_devices": {
+    "U19": {
+      "part": "STM32F030K6T6",
+      "lcsc": "C46830",
+      "pins": {
+        "1": "3V3_CTRL",
+        "5": "3V3_CTRL",
+        "17": "3V3_CTRL",
+        "16": "GND_SYS",
+        "32": "GND_SYS",
+        "31": "ENC_BOOT0",
+        "4": "ENC_RST_N",
+        "18": "T1_CH1",
+        "19": "T1_CH2",
+        "12": "T3_CH1",
+        "13": "T3_CH2",
+        "29": "OLED_SCL",
+        "30": "OLED_SDA",
+        "23": "ENC_SWDIO",
+        "24": "ENC_SWCLK"
+      }
+    },
+    "U20": {
+      "part": "LSM6DSOTR",
+      "lcsc": "C2655100",
+      "pins": {
+        "1": "GND_SYS",
+        "2": "GND_SYS",
+        "3": "GND_SYS",
+        "5": "3V3_CTRL",
+        "6": "GND_SYS",
+        "7": "GND_SYS",
+        "8": "3V3_CTRL",
+        "12": "3V3_CTRL",
+        "13": "OLED_SCL",
+        "14": "OLED_SDA"
+      }
+    },
+    "U21": {
+      "part": "SN74LVC14APWR",
+      "lcsc": "C7663",
+      "pins": {
+        "1": "ENC_A1",
+        "2": "T1_CH1",
+        "3": "ENC_A2",
+        "4": "T1_CH2",
+        "5": "ENC_B1",
+        "6": "T3_CH1",
+        "7": "GND_SYS",
+        "8": "T3_CH2",
+        "9": "ENC_B2",
+        "11": "GND_SYS",
+        "13": "GND_SYS",
+        "14": "3V3_CTRL"
+      }
+    },
+    "J18": {
+      "part": "BM04B-SRSS-TB(LF)(SN)",
+      "lcsc": "C160390",
+      "pins": {
+        "1": "ENC_VCC",
+        "2": "GND_SYS",
+        "3": "ENC_A1",
+        "4": "ENC_A2"
+      }
+    },
+    "J19": {
+      "part": "BM04B-SRSS-TB(LF)(SN)",
+      "lcsc": "C160390",
+      "pins": {
+        "1": "ENC_VCC",
+        "2": "GND_SYS",
+        "3": "ENC_B1",
+        "4": "ENC_B2"
+      }
+    },
+    "J20": {
+      "part": "BM05B-SRSS-TB(LF)(SN)",
+      "lcsc": "C5306059",
+      "pins": {
+        "1": "3V3_CTRL",
+        "2": "GND_SYS",
+        "3": "ENC_SWDIO",
+        "4": "ENC_SWCLK",
+        "5": "ENC_RST_N"
+      }
+    },
+    "J21": {
+      "part": "B3B-XH-A-BK(LF)(SN)",
+      "lcsc": "C493416",
+      "pins": {
+        "1": "3V3_CTRL",
+        "2": "ENC_VCC",
+        "3": "5V_CTRL"
+      }
+    },
+    "C60": {
+      "part": "CC0603KRX7R9BB104",
+      "lcsc": "C14663",
+      "pins": {
+        "1": "3V3_CTRL",
+        "2": "GND_SYS"
+      }
+    },
+    "C61": {
+      "part": "CC0603KRX7R9BB104",
+      "lcsc": "C14663",
+      "pins": {
+        "1": "3V3_CTRL",
+        "2": "GND_SYS"
+      }
+    },
+    "C62": {
+      "part": "CC0603KRX7R9BB104",
+      "lcsc": "C14663",
+      "pins": {
+        "1": "3V3_CTRL",
+        "2": "GND_SYS"
+      }
+    },
+    "C63": {
+      "part": "CC0603KRX7R9BB104",
+      "lcsc": "C14663",
+      "pins": {
+        "1": "3V3_CTRL",
+        "2": "GND_SYS"
+      }
+    },
+    "C64": {
+      "part": "CL10A105KB8NNNC",
+      "lcsc": "C15849",
+      "pins": {
+        "1": "3V3_CTRL",
+        "2": "GND_SYS"
+      }
+    },
+    "C65": {
+      "part": "CC0603KRX7R9BB104",
+      "lcsc": "C14663",
+      "pins": {
+        "1": "3V3_CTRL",
+        "2": "GND_SYS"
+      }
+    },
+    "C66": {
+      "part": "CC0603KRX7R9BB104",
+      "lcsc": "C14663",
+      "pins": {
+        "1": "ENC_RST_N",
+        "2": "GND_SYS"
+      }
+    },
+    "R55": {
+      "part": "0603WAF4701T5E",
+      "lcsc": "C23162",
+      "pins": {
+        "1": "ENC_A1",
+        "2": "ENC_VCC"
+      }
+    },
+    "R56": {
+      "part": "0603WAF4701T5E",
+      "lcsc": "C23162",
+      "pins": {
+        "1": "ENC_A2",
+        "2": "ENC_VCC"
+      }
+    },
+    "R57": {
+      "part": "0603WAF4701T5E",
+      "lcsc": "C23162",
+      "pins": {
+        "1": "ENC_B1",
+        "2": "ENC_VCC"
+      }
+    },
+    "R58": {
+      "part": "0603WAF4701T5E",
+      "lcsc": "C23162",
+      "pins": {
+        "1": "ENC_B2",
+        "2": "ENC_VCC"
+      }
+    },
+    "R59": {
+      "part": "0603WAF1002T5E",
+      "lcsc": "C25804",
+      "pins": {
+        "1": "ENC_BOOT0",
+        "2": "GND_SYS"
+      }
+    }
+  },
+  "sha256": {
+    "CyberTrack-A3/CyberTrack-A3.eprj3": "0f37ca41249e30d90aa88a2d3901027621aad3d86cb4f5da95b9ca07df6d8e69",
+    "CyberTrack-A3/panel/Panel1.epan2": "b797ecc2a905ad5b919bafe0a44ed85a9727d4455058eaa98c08f64ee7c34d60",
+    "CyberTrack-A3/pcb/PCB1.epcb2": "b89095636968310a00259a7083c51f132f823c1f56e9c307ece038eb7d3c1357",
+    "CyberTrack-A3/sch/Schematic1/Actuator rearm.esch2": "e10ff144412474bd0a75398fb7e303b178729a9d838e225379e8279cfb64f9c2",
+    "CyberTrack-A3/sch/Schematic1/Camera DVP and control.esch2": "a924e6ca7d55e91f8fb8de038a97590e3b884cd5d4afab54bf043898898f832c",
+    "CyberTrack-A3/sch/Schematic1/Camera power and bias.esch2": "487b4ae73438cdd750ffac140881df261b67dc292e32b7a888a82dc6fa0aaf0c",
+    "CyberTrack-A3/sch/Schematic1/Input and logic supply.esch2": "bd71369a1c47de93655000988e9f942eccf1947a5d9564b965909d4a82d66a31",
+    "CyberTrack-A3/sch/Schematic1/Logic and audio.esch2": "1c0f9740436a89d1050b76e5445aad3b8f07a8b4d65a926f3781ef474849b0c3",
+    "CyberTrack-A3/sch/Schematic1/Motion feedback.esch2": "ff8d955313dfa474539d0b5aa75a099ee5892667d6e45222b052c193025d7a2e",
+    "CyberTrack-A3/sch/Schematic1/Motor boost.esch2": "ec9819d235b423320bb898c437efa8f55dbfb2efc837e52b6286f2686619e835",
+    "CyberTrack-A3/sch/Schematic1/Schematic1.ecfg": "4081d3c3cb1fa1a839cc491765f89c9ecc294b8ab85fe25b12edf477f376a015",
+    "CyberTrack-A3/sch/Schematic1/Track driver.esch2": "32cb3805b0b6d1ede61df8dedce1fae6d8a95329b70986a6aa51cd4539e172ee",
+    "CyberTrack-A3/sch/Schematic1/Water and bubbles.esch2": "c0e74871438b25fcce398ba8327383f490415d458d3e32e4564075d4fa56e525",
+    "CyberTrack-A3-STEP.zip": "9221720f8f146a0f85c358b16be3fcd7b635f04d59689e3b95c1c4da812c1f6c",
+    "CyberTrack-A3-Gerber.zip": "a3634c808aed537b0ee33b3d60e4f715331367698f1669b84b507e96ec135b0d"
+  },
+  "camera_paste_apertures_verified_in_gerber": 28,
+  "preserved_copper_geometry_from_A2": {
+    "5V_ACT": true,
+    "PROTECTED": true,
+    "CAM_PCLK": true,
+    "CAM_XCLK": true,
+    "PCLK_FPC": true,
+    "XCLK_FPC": true
+  },
+  "sensor_firmware_builds": {
+    "STM32F030K6T6": {
+      "size_bytes": 1720,
+      "sha256": "a25569edb14c1d43e673b6250cb140bff885b354da455c4881d9ee435b0fa99e"
+    },
+    "ESP32-S3": {
+      "size_bytes": 204528,
+      "sha256": "45b1a7072b850688eb02f04d87d399fa18d283a316c6309e4502dcdf0f2a065a"
+    }
+  },
+  "pending": [
+    "Motor six-pin pinout, encoder supply and logic levels, counts per output revolution",
+    "Fabrication process, assembled first-article measurements and connector access with real harness",
+    "Encoder/IMU calibration, A3 application integration and closed-loop accuracy on both floor types"
+  ]
+}

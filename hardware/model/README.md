@@ -1,5 +1,7 @@
 # CyberTrack 整机模型
 
+[A3 线束和头舱单板试装](studies/a3-harness/README.md)含颈部五个改件及 Ø14 mm 通规回读。当前整机源档和 Lean／Ready 排盘对应下述 A1 装配。
+
 日常查看打开 [CyberTrack.FCStd](CyberTrack.FCStd)。修改融合输入、特征或检查空间时，打开[可编辑设计源档](source/CyberTrack-design.FCStd)。[STEP](CyberTrack.step) 用于交换。坐标单位为 mm，+X 向左、+Y 向后、+Z 向上，前方为 −Y。
 
 ## v2 头舱电子装配

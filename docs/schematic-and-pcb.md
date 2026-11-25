@@ -1,13 +1,14 @@
 # 原理图与 PCB 制板条件
 
-v2 使用一块 96 × 80 mm 的四层主板。带右前脸 Seeed 114993115 摄像头的版本为 **A2**。用嘉立创 EDA 专业版打开对应的 `.eprj3`，复制工程时保留同目录的原理图、PCB 和工程配置。两个修订的生产包、针序和固件需分别核对。
+v2 使用一块 96 × 80 mm 的四层主板。A2 接入右前脸 Seeed 114993115，A3 在此基础上接入两台电机编码器与六轴 IMU。用嘉立创 EDA 专业版打开对应的 `.eprj3`，复制工程时保留同目录的原理图、PCB 和工程配置。各修订的生产包、针序和固件需分别核对。
 
 | 修订 | 设计及制造文件 | 装配及验证 |
 |---|---|---|
+| A3 运动反馈主板 | [九页原理图与 PCB](../hardware/pcb/CyberTrack-A3/CyberTrack-A3.eprj3) · [Gerber](../hardware/pcb/CyberTrack-A3-Gerber.zip) · [装配 STEP](../hardware/pcb/CyberTrack-A3-STEP.zip) | [网表与 DRC](../hardware/pcb/verification-A3.json) · [编码器与 IMU](../hardware/pcb/motion-feedback/README.md) · [穿颈试装](../hardware/model/studies/a3-harness/README.md) |
 | A2 摄像头主板 | [八页原理图与 PCB](../hardware/pcb/CyberTrack-A2/CyberTrack-A2.eprj3) · [Gerber、钢网及钻孔](../hardware/pcb/CyberTrack-A2-Gerber.zip) · [装配 STEP](../hardware/pcb/CyberTrack-A2-STEP.zip) | [原理图、布线与生产文件校验](../hardware/pcb/verification-A2.json) · [GPIO、供电与 J17 针序](../hardware/pcb/camera-revision/README.md) · [右前脸 FreeCAD 试装](../hardware/model/studies/front-camera/README.md) |
 | A1 主板 | [六页原理图与 PCB](../hardware/pcb/CyberTrack-A1/CyberTrack-A1.eprj3) · [Gerber 及钻孔](../hardware/pcb/CyberTrack-A1-Gerber.zip) · [装配 STEP](../hardware/pcb/CyberTrack-A1-STEP.zip) | [BOM](../hardware/pcb/BOM-A1.md) · [网表、DRC 及校验记录](../hardware/pcb/verification-A1.json) · [接口与 SW2 恢复检查](../hardware/pcb/README.md) |
 
-此前的五页 KiCad A3 原理图记录了面包板、L298N 和外接模块的接线，用于追溯旧样机。[历史原理图与 PDF](../hardware/schematic/README.md)
+另有旧面包板方案的五页 KiCad A3 原理图记录了面包板、L298N 和外接模块的接线，用于追溯旧样机。[历史原理图与 PDF](../hardware/schematic/README.md)
 
 ## 下单前核对
 

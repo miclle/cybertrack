@@ -1,0 +1,179 @@
+{
+  "source_sha256": "e536f5d8e4f9c2ca642b74baeea9120ac9051cc033ef8392bcc869f57427ad0a",
+  "frame": "+X left, +Y aft, +Z up",
+  "upper_trunk_wires": [
+    [
+      "J8/J10",
+      4,
+      2.1
+    ],
+    [
+      "J11/J12",
+      4,
+      1.6
+    ],
+    [
+      "J13/J14",
+      4,
+      1.42
+    ],
+    [
+      "J6/J9/J16",
+      6,
+      1.2
+    ],
+    [
+      "J18/J19",
+      8,
+      0.8
+    ]
+  ],
+  "count": 26,
+  "stock_intersections_mm3": {
+    "10": {},
+    "12": {
+      "ElectronicsTray": 58.373,
+      "NeckCableBridge": 69.115
+    },
+    "14": {
+      "KeelLid": 87.745,
+      "ElectronicsTray": 292.905,
+      "NeckCableBridge": 103.864,
+      "PrintNeck": 223.747,
+      "PrintHeadShell": 341.096
+    }
+  },
+  "sizing": [
+    {
+      "packing": 0.55,
+      "bare_bundle_mm": 9.51,
+      "jacketed_mm": 10.31,
+      "minimum_service_bore_mm": 11.81
+    },
+    {
+      "packing": 0.65,
+      "bare_bundle_mm": 8.74,
+      "jacketed_mm": 9.54,
+      "minimum_service_bore_mm": 11.04
+    },
+    {
+      "packing": 0.75,
+      "bare_bundle_mm": 8.14,
+      "jacketed_mm": 8.94,
+      "minimum_service_bore_mm": 10.44
+    }
+  ],
+  "chassis_box_trials_mm3": {
+    "center_xy_0_-57_bottom_z_54": {
+      "KeelLid": 3807.866,
+      "PrintLowerTub": 19.162
+    },
+    "center_xy_0_-35_bottom_z_69.5": {
+      "KeelLid": 17450.873,
+      "ShoulderRailL": 3083.775,
+      "ShoulderRailR": 2729.661,
+      "BubbleGunBaseInsert2": 39.396,
+      "BubbleGunBaseScrew2": 49.136,
+      "PowerSwitchBody": 561.525,
+      "PowerSwitchLever": 29.435,
+      "PowerSwitchScrew0": 28.35,
+      "PowerSwitchScrew1": 28.35,
+      "PrintBubbleCradle": 258.548,
+      "PrintLowerTub": 2881.635
+    }
+  },
+  "proposed_path_xyz": [
+    [
+      0,
+      6,
+      84
+    ],
+    [
+      0,
+      6,
+      159
+    ],
+    [
+      63,
+      9,
+      159
+    ],
+    [
+      63,
+      9,
+      197
+    ]
+  ],
+  "centerline_bend_radius_mm": 28,
+  "bore_mm": 14.5,
+  "gauge_mm": 14,
+  "before_changes_mm3": {
+    "KeelLid": 87.745,
+    "ElectronicsTray": 3.183,
+    "NeckCableBridge": 103.864,
+    "PrintNeck": 821.86,
+    "PrintHeadShell": 403.887
+  },
+  "removed_detached_saddle_tip_mm3": 1.327,
+  "revised_parts": {
+    "KeelLid": {
+      "solids": 1,
+      "net_volume_change_mm3": -121.32
+    },
+    "NeckCableBridge": {
+      "solids": 1,
+      "net_volume_change_mm3": 38.74
+    },
+    "PrintNeck": {
+      "solids": 1,
+      "net_volume_change_mm3": -926.29
+    },
+    "PrintHeadShell": {
+      "solids": 1,
+      "net_volume_change_mm3": -333.32
+    },
+    "ElectronicsTray": {
+      "solids": 1,
+      "net_volume_change_mm3": -5.93
+    }
+  },
+  "after_changes_mm3": {},
+  "minimum_to_board_hardware_mm": {
+    "MainboardA1": 5.76,
+    "BoardFasteners": 4.68,
+    "SpeakerL": 5.26,
+    "SpeakerR": 65.64
+  },
+  "a3_step_sha256": "9221720f8f146a0f85c358b16be3fcd7b635f04d59689e3b95c1c4da812c1f6c",
+  "a3_new_and_moved_parts_contact_mm3": {},
+  "gauge_to_a3_board_contacts_mm3": {},
+  "encoder_plug_checks": {
+    "J18": {
+      "envelope_xyz_mm": [
+        5,
+        8,
+        12
+      ],
+      "contacts_mm3": {}
+    },
+    "J19": {
+      "envelope_xyz_mm": [
+        5,
+        8,
+        12
+      ],
+      "contacts_mm3": {}
+    }
+  },
+  "a2_camera_service_contacts_with_new_parts_mm3": {
+    "J17Housing": {},
+    "LatchSweep": {},
+    "LatchTool": {},
+    "TailTool": {},
+    "Ribbon": {},
+    "TailBacking": {},
+    "FPCWithdrawn": {}
+  },
+  "camera_mount_difference_from_a2_mm3": 0.0,
+  "camera_shell_contacts_mm3": {}
+}

@@ -1,5 +1,7 @@
 # 硬件清单
 
+A3 沿用 A2 的前摄与执行器电路，增加 STM32F030K6T6、LSM6DSOTR、SN74LVC14APWR、J18–J21 及压接线束。增量位号、料号、数量和板外配对件见 [A3 物料与接口表](pcb/motion-feedback/README.md#接口与装配物料)。
+
 v2 使用一块定制 PCB，主控、电源、音频与驱动的当前工程选型见 [A1 板级 BOM](pcb/BOM-A1.md)。系统还需配套电池、履带与电机、液路、音频外设、线束、开关和机械件。A1 的 SW2 需带联动辅助干接点，分别连接 J10 功率线束与 J16 信号线束。
 
 下一版带前摄的百台试产单机预算见[整机成本与假设](pcb/camera-revision/unit-cost.md)，对应的元件数量及公开价格见[计价明细](pcb/camera-revision/board-prices.csv)。

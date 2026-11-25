@@ -1,0 +1,151 @@
+{
+  "name": "CyberTrack-A3",
+  "format": "folder",
+  "profile": {
+    "boards": {
+      "068c56162982e35c": {
+        "uuid": "068c56162982e35c",
+        "title": "Board1",
+        "zIndex": 1
+      }
+    },
+    "schematics": {
+      "384cbdcea8ab6723": {
+        "uuid": "384cbdcea8ab6723",
+        "name": "Schematic1",
+        "board": "068c56162982e35c",
+        "source": "",
+        "version": "1795588089272",
+        "updateTime": 1795588089272
+      }
+    },
+    "sheets": {
+      "5d787aa2c375bcf1": {
+        "uuid": "5d787aa2c375bcf1",
+        "title": "Actuator rearm",
+        "schematic_uuid": "384cbdcea8ab6723",
+        "zIndex": 6,
+        "source": "",
+        "version": "1795451947200",
+        "updateTime": 1795451947200
+      },
+      "0abbb0b059bf1eb9": {
+        "uuid": "0abbb0b059bf1eb9",
+        "title": "Camera DVP and control",
+        "schematic_uuid": "384cbdcea8ab6723",
+        "zIndex": 7,
+        "source": "",
+        "version": "1795501544762",
+        "updateTime": 1795501544762
+      },
+      "86e15b266b152e07": {
+        "uuid": "86e15b266b152e07",
+        "title": "Camera power and bias",
+        "schematic_uuid": "384cbdcea8ab6723",
+        "zIndex": 8,
+        "source": "",
+        "version": "1795500464030",
+        "updateTime": 1795500464030
+      },
+      "9e3a3a0339867d16": {
+        "uuid": "9e3a3a0339867d16",
+        "title": "Input and logic supply",
+        "schematic_uuid": "384cbdcea8ab6723",
+        "zIndex": 2,
+        "source": "",
+        "version": "1795451917557",
+        "updateTime": 1795451917557
+      },
+      "c36a7095529b6ebb": {
+        "uuid": "c36a7095529b6ebb",
+        "title": "Logic and audio",
+        "schematic_uuid": "384cbdcea8ab6723",
+        "zIndex": 1,
+        "source": "",
+        "version": "1795500443084",
+        "updateTime": 1795500443084
+      },
+      "4b666326093bb3e8": {
+        "uuid": "4b666326093bb3e8",
+        "title": "Motion feedback",
+        "schematic_uuid": "384cbdcea8ab6723",
+        "zIndex": 9,
+        "source": "",
+        "version": "1795588089272",
+        "updateTime": 1795588089272
+      },
+      "bf60a2d7a48e5f10": {
+        "uuid": "bf60a2d7a48e5f10",
+        "title": "Motor boost",
+        "schematic_uuid": "384cbdcea8ab6723",
+        "zIndex": 3,
+        "source": "",
+        "version": "1795448699281",
+        "updateTime": 1795448699281
+      },
+      "ea1fe5a5581679b0": {
+        "uuid": "ea1fe5a5581679b0",
+        "title": "Track driver",
+        "schematic_uuid": "384cbdcea8ab6723",
+        "zIndex": 4,
+        "source": "",
+        "version": "1795448699925",
+        "updateTime": 1795448699925
+      },
+      "c2d8b15be93223b7": {
+        "uuid": "c2d8b15be93223b7",
+        "title": "Water and bubbles",
+        "schematic_uuid": "384cbdcea8ab6723",
+        "zIndex": 5,
+        "source": "",
+        "version": "1795450637913",
+        "updateTime": 1795450637913
+      }
+    },
+    "pcbs": {
+      "224d43ae7df801ff": {
+        "uuid": "224d43ae7df801ff",
+        "title": "PCB1",
+        "board": "068c56162982e35c",
+        "parent_uuid": "",
+        "source": "",
+        "version": "1795588775304",
+        "updateTime": 1795588775304
+      }
+    },
+    "panels": {
+      "7229806ebbeda8a8": {
+        "uuid": "7229806ebbeda8a8",
+        "title": "Panel1",
+        "zIndex": null
+      }
+    },
+    "blockSymbols": {},
+    "owner": {},
+    "simSchematics": {},
+    "simulations": {}
+  },
+  "config": {
+    "defaultSheet": "c36a7095529b6ebb",
+    "settings": {
+      "UNIVERSAL": {
+        "dataType": "UNIVERSAL",
+        "data": {
+          "allowLibRename": true,
+          "defaultNetName": true,
+          "wireMultipleNet": true,
+          "netFlagCrossLayerConnection": true,
+          "netLabelCrossPageConnection": true,
+          "busGenerateNetClass": true,
+          "relevanceDisplayRow": "SINGLE",
+          "relevanceBelongSchPage": "NAME",
+          "relevanceLocation": "ZONE",
+          "multipartCrossLayer": true,
+          "nonElectronicAddIntoBom": false,
+          "nonElectronicUpdatePcb": false
+        }
+      }
+    }
+  },
+  "default_sheet": "c36a7095529b6ebb"
+}

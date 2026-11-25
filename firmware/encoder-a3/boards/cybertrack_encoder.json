@@ -1,0 +1,15 @@
+{
+  "name": "CyberTrack A3 encoder counter",
+  "vendor": "CyberTrack",
+  "url": "https://www.st.com/en/microcontrollers-microprocessors/stm32f030k6.html",
+  "build": {
+    "cpu": "cortex-m0",
+    "extra_flags": "-DSTM32F0 -DSTM32F030x6",
+    "f_cpu": "8000000L",
+    "mcu": "stm32f030k6t6",
+    "product_line": "STM32F030x6"
+  },
+  "debug": {"openocd_target": "stm32f0x", "svd_path": "STM32F030.svd"},
+  "frameworks": ["cmsis"],
+  "upload": {"maximum_ram_size": 4096, "maximum_size": 32768, "protocol": "stlink", "protocols": ["stlink", "cmsis-dap"]}
+}

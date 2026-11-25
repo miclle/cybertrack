@@ -1,5 +1,7 @@
 # 机械装配与维护
 
+A3 将主板和 IMU 留在固定头舱，从两侧电机分别引出动力两芯、编码器四芯。A3 配套的 Ø14.5 mm 通道涉及顶盖、桥、颈架、头下壳和托架五件。按[A3 线束与改件模型](../hardware/model/studies/a3-harness/README.md)进行试装。
+
 A2 的右前脸安装沿用 PP07 固定座。装好小散热片与后压片，开冠盖，从上方竖直插入原装 FPC，露铜面朝前，转动 J17 锁扣。维修时先开锁，夹住补强端上提。[A2 插拔模型、工序与净距](../hardware/model/studies/front-camera/README.md#a2-主板插拔检查)
 
 

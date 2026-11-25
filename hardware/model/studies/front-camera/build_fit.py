@@ -9,7 +9,6 @@ import zipfile
 from pathlib import Path
 
 import FreeCAD as App
-import FreeCADGui as Gui
 import Part
 
 HERE = Path(__file__).resolve().parent
@@ -25,6 +24,9 @@ APEX = 203.5
 RADIUS = 4.0
 TIP_Z = 180.9
 BOARD_TOP = 179.69369
+BOSSES = [(X - 8.4, Z + 1.0), (X + 2.3, Z - 7.4)]
+# The drawing does not specify which axis its 69° field describes.
+FOV_SLOPE = math.tan(math.radians(69 / 2))
 
 
 def box(x, y, z, width, depth, height):
@@ -33,6 +35,25 @@ def box(x, y, z, width, depth, height):
 
 def axial(radius, y, length, x=X, z=Z):
     return Part.makeCylinder(radius, length, V(x, y, z), Y)
+
+
+def camera_shell(shell):
+    # The shell receives the seat on its existing inner wall. The front shoulder
+    # captures the fixed frame, leaving the motor/lens nose free in the aperture.
+    seat = box(X - 6, -79.9, Z - 6.3, 12, 5.55, 12.6)
+    seat = seat.multiFuse(
+        [axial(2.3, -79.9, 5.55, x, z) for x, z in BOSSES]
+        + [box(X - 8.4, -79.9, Z - 0.6, 3.5, 5.55, 3.2)]
+    )
+    socket = box(X - 4.48, -79.0, Z - 4.48, 8.96, 8.0, 8.96)
+    exit_slot = box(X - 3.65, BACK - 0.65, Z + 3.5, 7.3, 2, 4)
+    bore = Part.makeCone(4.15 + 12 * FOV_SLOPE, 4.15, 12, V(X, FACE - 12, Z), Y)
+    window = bore.fuse(axial(4.15, FACE, 2.0))
+    pilots = [axial(0.8, -77.9, 4.1, x, z) for x, z in BOSSES]
+    cut_tools = window.multiFuse([socket, exit_slot] + pilots)
+    formed = shell.fuse(seat).cut(cut_tools).removeSplitter()
+    # Relieve the seat to the fixed rear face of the camera and the screw bosses.
+    return formed.cut(box(X - 11, BACK, Z - 10, 18, 2.1, 16.4)).removeSplitter()
 
 
 def flex_geometry(length=70.5, head=8.5, flex_y=FLEX_Y, apex=APEX, width=6.0,
@@ -133,6 +154,8 @@ def calculate():
 
 
 def build():
+    import FreeCADGui as Gui
+
     Gui.showMainWindow()
     refs = calculate()
     doc = App.newDocument("FrontCamera")
@@ -180,29 +203,13 @@ def build():
                 "UltrasonicWireSpace",
             ),
         )
-    # The shell receives the seat on its existing inner wall. The front shoulder
-    # captures the fixed frame, leaving the motor/lens nose free in the aperture.
-    bosses = [(X - 8.4, Z + 1.0), (X + 2.3, Z - 7.4)]
-    seat = box(X - 6, -79.9, Z - 6.3, 12, 5.55, 12.6)
-    seat = seat.multiFuse(
-        [axial(2.3, -79.9, 5.55, x, z) for x, z in bosses]
-        + [box(X - 8.4, -79.9, Z - 0.6, 3.5, 5.55, 3.2)]
-    )
-    socket = box(X - 4.48, -79.0, Z - 4.48, 8.96, 8.0, 8.96)
-    exit_slot = box(X - 3.65, BACK - 0.65, Z + 3.5, 7.3, 2, 4)
-    # The drawing does not specify which axis its 69° field describes.
-    slope = math.tan(math.radians(69 / 2))
-    bore = Part.makeCone(4.15 + 12 * slope, 4.15, 12, V(X, FACE - 12, Z), Y)
-    window = bore.fuse(axial(4.15, FACE, 2.0))
-    pilots = [axial(0.8, -77.9, 4.1, x, z) for x, z in bosses]
-    cut_tools = window.multiFuse([socket, exit_slot] + pilots)
-    formed = shell.fuse(seat).cut(cut_tools).removeSplitter()
+    formed = camera_shell(shell)
     shell_obj = feature(
         mount, "TrialPP07", "PP07 试装版 · 喇叭口与一体座", formed, slate
     )
     shell_obj.ViewObject.Transparency = 55
     feature(guides, "UncutPP07", "原 PP07 对照", shell, slate, False)
-    fov = Part.makeCone(3.9 + 14 * slope, 3.9, 14, V(X, FACE - 14, Z), Y)
+    fov = Part.makeCone(3.9 + 14 * FOV_SLOPE, 3.9, 14, V(X, FACE - 14, Z), Y)
     feature(guides, "OpticalCone", "69° 光路检查体", fov, (0.99, 0.8, 0.2), False)
     body = box(X - 4.25, -79.0, Z - 4.25, 8.5, 4.4, 8.5).fuse(axial(3.8, FACE, 1))
     feature(
@@ -216,21 +223,18 @@ def build():
     # The two arms stay clear of the small sink and the upward FPC exit.
     cap = box(X - 8.4, BACK, Z - 5.6, 13.7, 1.8, 11.2)
     cap = cap.multiFuse(
-        [axial(2.3, BACK, 1.8, x, z) for x, z in bosses]
+        [axial(2.3, BACK, 1.8, x, z) for x, z in BOSSES]
         + [box(X + 0.7, BACK, Z - 7.4, 3.2, 1.8, 2.2)]
     )
     cap = cap.cut(box(X - 3.7, BACK - 0.1, Z - 3.7, 7.4, 2.0, 10))
     cap = cap.cut(
-        Part.makeCompound([axial(1.1, BACK - 0.1, 2, x, z) for x, z in bosses])
+        Part.makeCompound([axial(1.1, BACK - 0.1, 2, x, z) for x, z in BOSSES])
     ).removeSplitter()
-    # Relieve the seat to the fixed rear face of the camera and the screw bosses.
-    formed = formed.cut(box(X - 11, BACK, Z - 10, 18, 2.1, 16.4)).removeSplitter()
-    shell_obj.Shape = formed
     feature(mount, "Keeper", "可拆后压片 · FPC 上出槽", cap, (0.23, 0.65, 0.69))
     screws = Part.makeCompound(
         [
             axial(1.0, BACK - 3.2, 5, x, z).fuse(axial(1.75, BACK + 1.8, 1.2, x, z))
-            for x, z in bosses
+            for x, z in BOSSES
         ]
     )
     feature(
