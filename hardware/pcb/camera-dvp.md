@@ -4,7 +4,7 @@
 
 ## A1 已布板的引脚
 
-核对 PCB1 的 U1 PAD_NET 与生产包内 FlyingProbeTesting.json 的 U1 焊盘分组。模组为 ESP32-S3-WROOM-1-N16R8。下表按模组焊盘编号，GPIO 编号另列。[PCB1 原生板文件](CyberTrack-A1/PCB/PCB1.epcb2) · [A1 飞针网络](CyberTrack-A1-Gerber.zip) · [乐鑫模组资料](https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf)
+核对 PCB1 的 U1 PAD_NET 与生产包内 FlyingProbeTesting.json 的 U1 焊盘分组。模组为 ESP32-S3-WROOM-1-N16R8。下表按模组焊盘编号，GPIO 编号另列。[PCB1 原生板文件](CyberTrack-A1/pcb/PCB1.epcb2) · [A1 飞针网络](CyberTrack-A1-Gerber.zip) · [乐鑫模组资料](https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf)
 
 | U1 焊盘 | GPIO | A1 用途 |
 |---|---|---|

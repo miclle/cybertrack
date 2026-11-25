@@ -6,7 +6,7 @@ export const models = [
   {
     id: "cybertrack",
     title: "CyberTrack v2 整机",
-    description: "查看双履带、头舱、底盘与双瓶背包的装配关系。",
+    description: "查看 A1 主板对应的头舱、底盘与双瓶背包装配。",
     source: "hardware/model/CyberTrack.FCStd",
     document: "hardware/model/README.md",
   },
@@ -30,7 +30,10 @@ export const sections = [
     ["hardware/BOM.md", "物料清单"],
     ["docs/schematic-and-pcb.md", "原理图与制板"],
     ["hardware/architecture/README.md", "供电与接口"],
-    ["hardware/schematic/README.md", "原理图文件"],
+    ["hardware/pcb/README.md", "定制主板与 A1 接口"],
+    ["hardware/pcb/camera-revision/README.md", "A2 前摄接口"],
+    ["hardware/pcb/motion-feedback/README.md", "A3 编码器与 IMU"],
+    ["hardware/model/studies/a3-harness/README.md", "A3 线束与颈部改件"],
     ["hardware/model/lean-print/README.md", "Lean 打印排盘"],
   ]],
   ["交互与固件", [
@@ -44,7 +47,7 @@ export const sections = [
     ["docs/ultrasonic-ranging.md", "测距与前进保护"],
     ["firmware/README.md", "固件工程"],
     ["firmware/CAPABILITIES.md", "设备接口"],
-    ["firmware/esp32-audio/README.md", "面包板固件"],
+    ["firmware/esp32-audio/README.md", "A1 与面包板固件"],
   ]],
   ["验证", [
     ["docs/verification-plan.md", "验收矩阵"],
@@ -56,6 +59,7 @@ export const sections = [
     ["docs/validation/engineering-log.md", "工程修改记录"],
   ]],
   ["样机记录", [
+    ["hardware/schematic/README.md", "旧面包板原理图"],
     ["docs/validation/bench.md", "台架实测"],
     ["docs/validation/ct73-deployment.md", "首次行走与 BOOT 停止"],
     ["docs/validation/ct74-deployment.md", "测距提示听感"],

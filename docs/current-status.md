@@ -2,8 +2,8 @@
 
 | 项目 | 最近可核对的记录 |
 |---|---|
-| v2 硬件 | 单一量产主 PCB，A2 工程接入右前脸 Seeed 114993115、双电源与 DVP 转换。首板电气、同批 FPC 接触及整机预览待验。[主板](../hardware/pcb/README.md) · [摄像头](../hardware/model/studies/front-camera/README.md) |
-| A3 运动反馈 | 已有独立 A3 原理图、PCB、计数 MCU 与 S3 首件采样程序、26 芯穿颈改件模型。编码器电气核实、实物试装和整车闭环待验。[A3 工程](../hardware/pcb/motion-feedback/README.md) |
+| A2 前摄主板 | 工程已接入右前脸 Seeed 114993115、双电源与 DVP 转换。首板电气、同批 FPC 接触及整机预览待验。[主板](../hardware/pcb/README.md) · [摄像头](../hardware/model/studies/front-camera/README.md) |
+| A3 运动反馈 | 已有独立 A3 原理图、PCB、计数 MCU 与 S3 首件采样程序、26 芯线束与五个 Ø14.5 mm 通道改件。头下壳已合入 A2 前摄安装座，光路与 Ø14 mm 通规均已做 CAD 检查。编码器电气核实、实物试装和整车闭环待验。[A3 工程](../hardware/pcb/motion-feedback/README.md) · [改件与检查记录](../hardware/model/studies/a3-harness/README.md) |
 | 固件候选 | **2.0.3-ct80** 提供 A1 主板和旧面包板两种构建，A2 专用固件待开发。A1 通过硬件锁存处理 SW2 断开，避障保留待处理的后退和转向请求。应用尚待部署。[构建与回归记录](../firmware/esp32-audio/verification-ct80.json) |
 | 旧版样机应用 | **2.0.3-ct78** 于 2026-11-03 仅更新应用。配置保持，两次启动联网、二十条输出全关的状态回读通过。[部署记录](validation/ct78-deployment.md) |
 | 语音角色 | 仓库的 ct79 角色为 5002 字符，尚待同步。平台最近一次回读为 2026-11-01 恢复的旧 5991 字符角色。[角色源](../firmware/esp32-audio/role-prompt.txt) · [平台回读](validation/evidence/ct78-stop-duration/platform-restored.json) |

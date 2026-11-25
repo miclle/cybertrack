@@ -1,8 +1,8 @@
 {
-  "date": "2026-11-24",
+  "date": "2026-11-25",
   "passed": true,
   "revision": "A3",
-  "scope": "A3 regenerated five-sheet schematic, ERC, PDF and current source assignments",
+  "scope": "Readback of saved five-sheet KiCad A3 exports, connectivity and current source hashes",
   "historical_A1_revision": "fb680faac6ae51d6e30dd7520f47db2aa6d621e7",
   "historical_report_sha256": "dd2420a4942a0483b8f06d868894a6c25ddda45fedbc1d7b41a96380f5dd7ee0",
   "historical_report_byte_preserved": true,
@@ -32,7 +32,7 @@
       "matches_A1": false
     },
     "README.md": {
-      "sha256": "38e6b7b364dd99061200e8f57609ded77f77e5b9ac787bb64a22b5fb6630d551",
+      "sha256": "8069e8a510ce60cc7a1f2a604c1521f45ac457e5aca2afb2d12dd39d90dedcd4",
       "matches_A1": false
     },
     "checks/CyberTrack.net.xml": {
@@ -90,7 +90,7 @@
       "matches_A1": false
     },
     "firmware/esp32-audio/cybertrack_tools.cc": {
-      "sha256": "20974d80daacc3a6f16543351c230734969f952ad29c2286877ac9963efa8d19",
+      "sha256": "3ab7eb129c44b78a404abbf3f669ecc3a35f83083f55413e7125ef197ee06e27",
       "matches_A1": false
     },
     "hardware/components/ESP32-S3-N16R8/ESP32-S3-SCH-V1.4.pdf": {
@@ -122,7 +122,7 @@
       "matches_A1": false
     },
     "docs/schematic-and-pcb.md": {
-      "sha256": "1754bde8027ae16f77f7b1b2574bf500a5080618c98082f7d95a916d09583699",
+      "sha256": "2840199bd003ccc60f903f03bcb0c7cb89ea467f81b316ef6964d1598831afb3",
       "matches_A1": false
     }
   },
@@ -605,10 +605,10 @@
     "evidence": "KiCad-exported electrical netlist; not a physical wiring or power test"
   },
   "export_check_sha256": "a3aea09688661f566cba6709cbfc1723f1716087b8a94a243ad1dd89ec9c002f",
-  "erc_rerun": true,
+  "erc_rerun": false,
   "erc_violations": 0,
-  "pdf_render_review_rerun": true,
-  "netlist_reexported": true,
+  "pdf_render_review_rerun": false,
+  "netlist_reexported": false,
   "physical_test_performed": false,
   "manufacturing_ready": false,
   "limits": "A3 removes the ignition circuit and preserves connectivity for all retained A1 terminals. Physical wiring, electrical levels, current margin and acceptance remain unverified."

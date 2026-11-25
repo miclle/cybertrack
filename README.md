@@ -16,7 +16,9 @@
 
 小D 是一台可以用语音和手机控制的双履带机器人。说“左转一秒，同时吹泡泡三秒”，两路动作可以同时开始、分别结束。手机连入同一网络即可遥控，本机 BOOT 和网页“全部停止”都可以中止动作。
 
-**v2 按一块定制 PCB 进行量产设计，A1 对应现行整机装配，A2 增加前摄，A3 增加运动反馈。** [A3 双编码器与 IMU 修订](hardware/pcb/motion-feedback/README.md) · [主板设计](hardware/pcb/README.md) · [前置摄像头试装](hardware/model/studies/front-camera/README.md)。 源码保留行走、喷水与泡泡，已移除点火和狂暴模式。ct80 固件与配套角色待部署，旧面包板样机最近一次应用部署为 ct78。已有样机演示和分项现场记录，整机负载、机械停止和儿童使用仍待验收。[当前状态](docs/current-status.md) · [早期样机分支](https://github.com/miclle/cybertrack/tree/main)
+v2 使用一块定制主板。**打印整机选 A1，前摄试装选 A2，双编码器和六轴 IMU 试装选 A3。** A3 已有主板和五个穿线改件，整机总装与 Lean／Ready 排盘仍对应 A1。[按版次选择工程](docs/schematic-and-pcb.md) · [A3 线束与改件](hardware/model/studies/a3-harness/README.md)
+
+旧面包板样机最近部署的是 ct78，ct80 固件和配套角色待部署。视频记录了早期样机的实际表现；v2 整机带载、机械停止和儿童使用仍待验收。[当前状态](docs/current-status.md) · [早期样机分支](https://github.com/miclle/cybertrack/tree/main)
 
 ## 旧版样机演示
 
@@ -37,8 +39,6 @@ https://github.com/user-attachments/assets/127dc3f1-0a8f-4abf-b4e5-f43b6fe16fb7
 [在 B 站观看](https://www.bilibili.com/video/BV1rLxM6sEF6/) · [下载原始视频](artifact/cybertrack-prototype-demo-6min.mp4)
 
 [浏览全部制作记录 → 33 张照片与 3 段视频](artifact/README.md)
-
-以上视频记录的是 v2 之前的样机。
 
 ## 从这里开始
 

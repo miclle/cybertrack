@@ -7,6 +7,6 @@
 | 遥控与排查 | [手机控制](lan-control.md) · [Wi-Fi](wifi-configuration.md) · [状态解释](status-explanation.md) |
 | 改变动作或语音体验 | [软件架构](architecture.md) · [角色维护](agent-role.md) · [动作序列](action-sequences.md) · [调速](action-sequences.md#速度与时长) · [测距保护](ultrasonic-ranging.md) |
 | 打印、装配和检修 | [机械装配](assembly.md) · [头壳打印](head-shell-print.md) · [双瓶取放](assembly.md#两只瓶怎么取) · [整机 CAD](../hardware/model/README.md) |
-| 核对电气设计 | [接线表](wiring.md) · [供电与接口](../hardware/architecture/README.md) · [效果控制](effects-control.md) · [A3 原理图与制板条件](schematic-and-pcb.md) · [嘉立创 EDA 一体主板 A1](../hardware/pcb/README.md) |
+| 核对电气设计 | [接线表](wiring.md) · [供电与接口](../hardware/architecture/README.md) · [效果控制](effects-control.md) · [各版主板与制板条件](schematic-and-pcb.md) · [A3 编码器与 IMU 接口](../hardware/pcb/motion-feedback/README.md) |
 | 理解需求与设计取舍 | [产品需求](requirements.md) · [设计决策与待补参数](decisions.md) · [灵矽方案](lingxi-solution.md) · [技术资料](references.md) |
 | 开展验证 | [验收矩阵](verification-plan.md) · [评测用例与实测记录](validation/README.md) · [台架结果](validation/bench.md) |

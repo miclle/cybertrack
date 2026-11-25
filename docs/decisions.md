@@ -7,7 +7,7 @@
 | v2 以定制主 PCB 作为唯一电子装配基线 | 现行整机与排盘以 A1 为基线。A2 前摄和 A3 运动反馈各有对应的板级工程与装配研究，以选用版次的 STEP 和接口表设计。旧面包板仅保留历史记录。 |
 | 沿用 A1，左右常规喇叭同播人声 | 两只相同的 8 Ω 喇叭同相并联在 J5，向原耳罩条缝出声。首件检查正面声像、两侧响度与带载表现。[装配](assembly.md#头舱与穿线) · [物料](../hardware/BOM.md#v2-扬声器与线束) |
 | A3 保留头舱单板，增加两侧 AB 与六轴 IMU | 同板独立计数 MCU 用 TIM1/TIM3，沿用 A2 总线和停止路径；采用 Ø14.5 mm 颈部候选。底盘单板受原装前摄排线长度限制，双板作为实测触发的备选。[电气设计](../hardware/pcb/motion-feedback/README.md) · [三种布局比较](../hardware/model/studies/a3-harness/README.md#单板放在哪里) |
-| 前置摄像头按需预览 | v2 下一版选定 Seeed 114993115（OV5640 自动对焦、70.5 mm 原排线、随件小散热片），固定在右前脸，用一颗 ESP32-S3 和一块主板接 DVP。依据是可按固定料号采购、有带公差的模组图纸，以及自动对焦能力（图纸对焦范围 1 m 至无穷远）。按两只 PUI ASE02808MR-LW150-R 候选和 96% 良率估算，约 ¥1,066.57／合格整机，原单喇叭基准为 ¥995.46。首板验证手机端 VGA 预览、语音并发和闭壳热表现。[模组及供货](../hardware/components/seeed-114993115/README.md) · [结构试装](../hardware/model/studies/front-camera/README.md) · [下一版引脚](../hardware/pcb/camera-revision/README.md) · [成本](../hardware/pcb/camera-revision/unit-cost.md) |
+| 前置摄像头按需预览 | A2、A3 采用 Seeed 114993115（OV5640 自动对焦、70.5 mm 原排线、随件小散热片），固定在右前脸，用一颗 ESP32-S3 和一块主板接 DVP。依据是可按固定料号采购、有带公差的模组图纸，以及自动对焦能力（图纸对焦范围 1 m 至无穷远）。按两只 PUI ASE02808MR-LW150-R 候选和 96% 良率估算，约 ¥1,066.57／合格整机，原单喇叭基准为 ¥995.46。首板验证手机端 VGA 预览、语音并发和闭壳热表现。[模组及供货](../hardware/components/seeed-114993115/README.md) · [结构试装](../hardware/model/studies/front-camera/README.md) · [A2 引脚分配](../hardware/pcb/camera-revision/README.md) · [成本](../hardware/pcb/camera-revision/unit-cost.md) |
 | 辰克 5 V 主供电，电机单独升压至 12 V | 主控与执行器分域，水枪和泡泡分别从受控支路降至 3.7 V。电流、温升、保护值和独立切断能力需实测。 |
 | 云端理解意图，本地处理动作 | 灵矽通过受限 MCP 工具请求动作。网页同通道优先，本地 BOOT 与全停可中止，重连后需新指令。明确执行请求才调用动作工具；仅讨论或预览不启动。 |
 | 普通测距提示连续确认（2026-11-01） | 用户选择保留滴声、过滤偶发跳值；连续 3 个有效近距样本才开放普通提示，重复控制 tick 不累加；远距、无效、过期或采样间隔超过 500 ms 后重新确认。停车仍使用单个新鲜读数。[ct77 修正与部署](ultrasonic-ranging.md#距离提示音) |

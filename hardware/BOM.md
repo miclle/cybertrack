@@ -4,7 +4,7 @@ A3 沿用 A2 的前摄与执行器电路，增加 STM32F030K6T6、LSM6DSOTR、SN
 
 v2 使用一块定制 PCB，主控、电源、音频与驱动的当前工程选型见 [A1 板级 BOM](pcb/BOM-A1.md)。系统还需配套电池、履带与电机、液路、音频外设、线束、开关和机械件。A1 的 SW2 需带联动辅助干接点，分别连接 J10 功率线束与 J16 信号线束。
 
-下一版带前摄的百台试产单机预算见[整机成本与假设](pcb/camera-revision/unit-cost.md)，对应的元件数量及公开价格见[计价明细](pcb/camera-revision/board-prices.csv)。
+A2 前摄版的百台试产单机预算见[整机成本与假设](pcb/camera-revision/unit-cost.md)，对应的元件数量及公开价格见[计价明细](pcb/camera-revision/board-prices.csv)。
 
 ## v2 扬声器与线束
 
@@ -16,7 +16,7 @@ v2 使用一块定制 PCB，主控、电源、音频与驱动的当前工程选�
 
 A1 板载 MAX98357A 经 J5 输出一路音频。两只喇叭并联的标称负载为 4 Ω。数据手册在 5 V、4 Ω、1% THD+N 测试条件下给出典型 2.5 W 总输出，同阻抗时每只约 1.25 W。整机最大可用音量、温升、压降和响度需实测。[功放数据手册](https://www.analog.com/media/en/technical-documentation/data-sheets/MAX98357A-MAX98357B.pdf)
 
-## 下一版前置摄像头用料
+## A2 与 A3 前置摄像头用料
 
 | 器件 | 每机用量 | 状态 |
 |---|---:|---|

@@ -4,8 +4,7 @@ A3 将主板和 IMU 留在固定头舱，从两侧电机分别引出动力两芯
 
 A2 的右前脸安装沿用 PP07 固定座。装好小散热片与后压片，开冠盖，从上方竖直插入原装 FPC，露铜面朝前，转动 J17 锁扣。维修时先开锁，夹住补强端上提。[A2 插拔模型、工序与净距](../hardware/model/studies/front-camera/README.md#a2-主板插拔检查)
 
-
-Lean 21 件、Ready 20 件，各六盘。使用 Ready 时另打 A1 主板托架。整机坐标 +X 向左、+Y 向后、+Z 向上，前方为 −Y。[整机模型](../hardware/model/README.md) · [Lean](../hardware/model/lean-print/README.md) · [Ready](../hardware/model/print-ready/README.md)
+A1 的 Lean 21 件、Ready 20 件，各六盘。使用 Ready 时另打 A1 主板托架。整机坐标 +X 向左、+Y 向后、+Z 向上，前方为 −Y。[整机模型](../hardware/model/README.md) · [Lean](../hardware/model/lean-print/README.md) · [Ready](../hardware/model/print-ready/README.md)
 
 ## 底盘与动力
 
@@ -35,7 +34,7 @@ v2 使用 A1 板载 L298P；旧样机的独立 L298N 与底盖支架见历史装
 
 ## 双枪与背包
 
-从正面看，泡泡枪在左、水枪在右。两枪的降压模块各在枪体内，MOS 板按现行 Lean 方案胶固。PP02 泡泡枪底座采用复合孔口，装枪时需检查实物轮廓、软管、胶合保持与拆卸空间。测试供液时另记吸程、低液位、滴液、倒流与湿区隔离。[枪座修正](../hardware/model/remaining-print/README.md) · [低压效果控制](effects-control.md)
+从正面看，泡泡枪在左、水枪在右。两枪的降压模块各在枪体内。水枪的 5 V 输入接主板 J13，泡泡枪接 J14。PP02 泡泡枪底座采用复合孔口，装枪时需检查实物轮廓、软管、胶合保持与拆卸空间。测试供液时另记吸程、低液位、滴液、倒流与湿区隔离。[枪座修正](../hardware/model/remaining-print/README.md) · [低压效果控制](effects-control.md)
 
 清水和泡泡液各用一只 150 mL 候选瓶，直接放进 PP03 背包，瓶底落在 PP04 湿舱底面。PP03 封平原绑带缺口，PP04 填平原底托嵌件孔。两根软管从瓶顶接向各自的前枪，瓶口端各向下延长 6 mm。水管外径 5 mm 来自实测，泡泡管外径 4 mm 是 CAD 候选。[双瓶与软管回读](../hardware/model/bottle-backpack-direct-fit.json)
 

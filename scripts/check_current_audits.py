@@ -111,7 +111,7 @@ def check_schematic(date):
     outputs['ultrasonic.kicad_sch'] = {'sha256': sha(SCHEMATIC / 'ultrasonic.kicad_sch'), 'matches_A1': False}
     return {'date': date, 'passed': True,
             'revision': 'A3',
-            'scope': 'A3 regenerated five-sheet schematic, ERC, PDF and current source assignments',
+            'scope': 'Readback of saved five-sheet KiCad A3 exports, connectivity and current source hashes',
             'historical_A1_revision': A1, 'historical_report_sha256': sha(original),
             'historical_report_byte_preserved': True,
             'historical_package_sha256': sha(package),
@@ -124,8 +124,8 @@ def check_schematic(date):
                 'firmware/esp32-audio/ultrasonic.cc': sha(ROOT / 'firmware/esp32-audio/ultrasonic.cc')},
             'connectivity': connectivity,
             'export_check_sha256': sha(export_path),
-            'erc_rerun': True, 'erc_violations': 0, 'pdf_render_review_rerun': True,
-            'netlist_reexported': True, 'physical_test_performed': False,
+            'erc_rerun': False, 'erc_violations': 0, 'pdf_render_review_rerun': False,
+            'netlist_reexported': False, 'physical_test_performed': False,
             'manufacturing_ready': False,
             'limits': 'A3 removes the ignition circuit and preserves connectivity for all retained A1 terminals. Physical wiring, electrical levels, current margin and acceptance remain unverified.'}
 

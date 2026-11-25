@@ -2,9 +2,9 @@
 
 **A3 定制主板**使用 J11/J18 和 J12/J19 分别连接两台电机的动力与编码器，J20 为计数 MCU 调试口，J21 选择已核实的编码器电压。底盘至头舱上段按 26 芯设计。[A3 接口表](../hardware/pcb/motion-feedback/README.md) · [线束分支与装配顺序](../hardware/model/studies/a3-harness/README.md)
 
-工程样板 A1 的 J1–J16 连接器针序见[一体主板接口表](../hardware/pcb/README.md#外接接口)。A1 的喷水、泡泡、扩展口均为受控正极和公共地。SW2 的功率触点接 J10，机械联动的 RUN 辅助干接点接 J16。v2 以一体板为准，摄像头接口缺口见 [DVP 核对](../hardware/pcb/camera-dvp.md)。J5 为 2.50 mm XH 两芯扬声器口，1 脚 SPK_P、2 脚 SPK_N；两线均由功放驱动，均不得接地。J5-1 分到左右两只 8 Ω 喇叭的正端，J5-2 分到两只负端，两路同相并联为 4 Ω。
+工程样板 A1 的 J1–J16 连接器针序见[一体主板接口表](../hardware/pcb/README.md#外接接口)。A1 的喷水、泡泡、扩展口均为受控正极和公共地。SW2 的功率触点接 J10，机械联动的 RUN 辅助干接点接 J16。A2 和 A3 使用 J17 连接前摄，J1–J16 的主控引脚分配请按板次核对。[A2 引脚与 J17 针序](../hardware/pcb/camera-revision/README.md) J5 为 2.50 mm XH 两芯扬声器口，1 脚 SPK_P、2 脚 SPK_N；两线均由功放驱动，均不得接地。J5-1 分到左右两只 8 Ω 喇叭的正端，J5-2 分到两只负端，两路同相并联为 4 Ω。
 
-以下接线和针位仅用于旧版面包板样机。
+**以下为旧面包板样机接线。** 下文中的 A3 指五页 KiCad 模块接线图的修订号。定制主板 A3 使用页首链接中的九页嘉立创 EDA 工程。
 
 面包板端点按 GPIO 丝印和固件分配记录，连接器针序需对照实物。A3 的第五页给出头部超声波 VCC／GND、IO1 → TRIG、IO2 ← ECHO。3.3 V 电流余量、实际 ECHO 电平与整机回流仍待量测。[五页原理图](../hardware/schematic/CyberTrack-schematic.pdf) · [A3 审图资料](../hardware/schematic/README.md) · [端点待确认表](../hardware/schematic/parameter-confirmation.md)
 
