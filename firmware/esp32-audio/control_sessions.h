@@ -35,7 +35,10 @@ public:
             owner = 0;
             StopWeb(now);
         }
-        if (pressed && !pressed_) Stop(now);
+        if (pressed && !pressed_) {
+            Stop(now);
+            AdvanceVoiceTurn(false);
+        }
         if (drive_id && (now >= drive_until_ || now < drive_started_)) StopWeb(now);
         for (auto target : {AudioActionGuard::WaterOnly, AudioActionGuard::BubblesOnly}) {
             auto& h = Hold(target);
@@ -134,7 +137,7 @@ public:
     void AdvanceVoiceTurn(bool open) {
         const bool advanced = voice_turn < INT_MAX;
         if (advanced) ++voice_turn;
-        voice_turn_open = advanced && open && wifi && voice && !shutdown;
+        voice_turn_open = advanced && open && wifi && voice && !shutdown && !pressed_;
         voice_turn_failed = false;
         voice_non_execution = false;
         voice_action_unspecified = false;

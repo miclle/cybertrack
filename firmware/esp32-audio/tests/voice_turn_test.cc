@@ -2,7 +2,31 @@
 #include <cassert>
 #include <cstring>
 
+static void local_stop_requires_fresh_voice_input() {
+    ControlSessions s;
+    s.WifiLink(0, true);
+    s.VoiceLink(0, true);
+    s.Tick(0, false);
+    s.AdvanceVoiceTurn(true);
+    const int before_stop = s.voice_turn;
+    assert(s.VoiceTurnReady(before_stop));
+    s.Tick(10, true);
+    assert(!s.VoiceTurnReady(before_stop));
+    s.AdvanceVoiceTurn(true); // Another transcript arrives while BOOT is held.
+    const int while_held = s.voice_turn;
+    s.Tick(20, false);
+    s.Tick(2000, false);
+    for (int turn : {before_stop, while_held}) {
+        assert(!s.VoiceClaim(2000, 1, AudioActionGuard::MoveOnly, turn));
+    }
+    assert(!s.guard.Starts());
+    s.AdvanceVoiceTurn(true);
+    int ticket = s.VoiceClaim(2000, 2, AudioActionGuard::MoveOnly, s.voice_turn);
+    assert(ticket && !std::strcmp(s.guard.Move(2000, ticket, 500, "forward"), "accepted"));
+}
+
 int main() {
+    local_stop_requires_fresh_voice_input();
     ControlSessions s;
     s.WifiLink(0, true); s.VoiceLink(0, true); s.Tick(0, false);
     assert(!s.VoiceTurnReady(s.voice_turn));
