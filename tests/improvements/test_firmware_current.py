@@ -70,7 +70,7 @@ class FirmwareCurrentTests(unittest.TestCase):
             (audio/'role-prompt.txt').write_bytes(b'role')
             role_hash = hashlib.sha256(b'role').hexdigest()
             images = {}
-            for board in ('a1', 'breadboard'):
+            for board in ('a1', 'a4', 'breadboard'):
                 data = board.encode()
                 (root/board).write_bytes(data)
                 images[board] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
@@ -84,9 +84,10 @@ class FirmwareCurrentTests(unittest.TestCase):
             }))
             (fw/'software.json').write_text(json.dumps({
                 'version': version, 'esp_idf_build': images['breadboard'], 'mainboard_a1_build': images['a1'],
+                'mainboard_a4_build': images['a4'],
             }))
             self.assertEqual(module.check(root)['source_board'], 'a1')
-            for board, other in [('a1', 'breadboard'), ('breadboard', 'a1')]:
+            for board, other in [('a1', 'breadboard'), ('breadboard', 'a1'), ('a4', 'a1'), ('a1', 'a4')]:
                 with self.subTest(board=board):
                     verified = module.check(root, root/board, root/'breadboard', board=board)
                     self.assertEqual(verified['source_image'], images[board])

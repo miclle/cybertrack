@@ -24,7 +24,7 @@ constexpr int portMAX_DELAY = 0;
 void xSemaphoreTake(int, int) {}
 void xSemaphoreGive(int) {}
 void TickLocked(uint64_t now) { sessions.Tick(now, false); }
-void ApplyLocked(uint64_t) {} // No device output is linked in this host harness.
+bool ApplyLocked(uint64_t) { return true; } // No device output is linked in this host harness.
 unsigned host_distance_mm = 0;
 int CyberTrackDistanceSnapshot() { return host_distance_mm; }
 namespace ultrasonic {

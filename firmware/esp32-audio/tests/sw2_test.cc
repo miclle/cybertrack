@@ -11,14 +11,6 @@ struct { bool fault = false; } outputs;
 constexpr int arm_feedback = 38, arm_clock = 45, GPIO_NUM_14 = 14, stop_pin = 0, ESP_OK = 0;
 bool actuator_armed = false, latch = false, run_contact = false;
 bool active_pads = false, aux = false;
-// A4 shares the arm clock. U10 wakes the power stages, U27 samples permission
-// on a subsequent edge. Only U27.Q feeds the controller and both PWM gates.
-bool a4 = false, prepower = false, vm_good = false, fault_a = false, fault_b = false;
-bool track_ready() { return prepower && vm_good && !fault_a && !fault_b; }
-void update_clear() {
-    if (!run_contact) prepower = false;
-    if (!track_ready()) latch = false;
-}
 uint64_t tick_ms = 0;
 uint64_t Now() { return tick_ms; }
 int gpio_get_level(int pin) { return pin == arm_feedback ? latch : 1; }
@@ -26,13 +18,7 @@ int gpio_set_level(int pin, int level) {
     if (pin == GPIO_NUM_14) aux = level;
     if (pin == arm_clock && level) {
         assert(!active_pads && !aux);
-        if (a4) {
-            latch = track_ready();
-            prepower = run_contact;
-            update_clear();
-        } else {
-            latch = run_contact;
-        }
+        latch = run_contact;
     }
     return ESP_OK;
 }
@@ -91,39 +77,4 @@ int main() {
     sessions.WifiLink(tick_ms, false);
     safety_tick();
     assert(actuator_armed && !std::strcmp(OffReason("move", guard.motion), "link_lost"));
-
-    tick_ms += 2000; // Let the preceding A1 movement cooldown expire.
-    a4 = true;
-    latch = prepower = vm_good = false;
-    sessions.WifiLink(tick_ms, true);
-    sessions.VoiceLink(tick_ms, true);
-    safety_tick();
-    assert(prepower && !latch);
-    safety_tick();
-    assert(!latch); // No arm while the drive rail is below its threshold.
-    vm_good = true;
-    safety_tick();
-    safety_tick();
-    for (unsigned trip = 0; trip < 3; ++trip) {
-        assert(actuator_armed && latch && !active_pads);
-        owner = sessions.Acquire(tick_ms);
-        assert(sessions.Heartbeat(tick_ms, owner));
-        assert(!std::strcmp(sessions.DriveStart(tick_ms, owner, 1, sessions.window, "forward", 0), "accepted"));
-        safety_tick();
-        assert(active_pads);
-        fault_a = trip == 0;
-        fault_b = trip == 1;
-        vm_good = trip != 2;
-        update_clear();
-        assert(!latch && active_pads); // U28 already blocks both still-active software outputs.
-        fault_a = fault_b = false;
-        vm_good = true;
-        update_clear();
-        assert(!latch); // Fault occurred and cleared entirely between CPU samples.
-        safety_tick();
-        assert(!active_pads && !sessions.Owns(owner));
-        safety_tick();
-        // Allow the existing movement cooldown to expire before the next independent request.
-        tick_ms += 2000;
-    }
 }

@@ -1,8 +1,8 @@
 # 固件能力与接口手册
 
-ct80 是 v2 的未部署固件候选。点火与狂暴模式已退役，旧网页操作及含旧字段的序列会被拒绝。
+ct82 提供 A4、A1 和旧面包板三个候选构建。点火与狂暴模式已退役，旧网页操作及含旧字段的序列会被拒绝。
 
-现用工程为 [ESP32-S3 面包板](esp32-audio/README.md)。版本与最近一次设备部署见[当前状态](../docs/current-status.md)。
+共用的 ESP32-S3 应用按板型选择[引脚及输出驱动](esp32-audio/README.md)。版本与最近一次设备部署见[当前状态](../docs/current-status.md)。
 
 <a id="当前面包板-ct21-接口"></a>
 <a id="当前面包板-ct22-接口"></a>
@@ -22,6 +22,8 @@ ct80 是 v2 的未部署固件候选。点火与狂暴模式已退役，旧网�
 | `sequence` | `steps_json`，1–16 步 JSON 数组字符串；每步 `direction/move_ms/water_ms/bubbles_ms`，可选速度；不用通道填 0，无行走填 `none` |
 | `adjust_speed` | 运行中相对调速，具体字段与来源规则见[速度接口](../docs/action-sequences.md#速度与时长)；不启动或续时 |
 | `set_speed` | 运行中绝对目标 60–100%，具体字段见[速度接口](../docs/action-sequences.md#速度与时长)；不自动换向或续时 |
+
+A4 的 `get_status` 返回 `actuator_backend="a4_dual_drv8874"` 和 `drive_armed`。后者是 GPIO38 经稳定时间确认后的行走许可。许可失效时两侧停止，`fault="actuator_disarmed"`；扩展器通信或方向回读失败时报告 `output_fault`。许可一项无法区分左右驱动、母线欠压和 SW2，也无法证明履带实际在转。[A4 停机与恢复](esp32-audio/README.md#a4-履带与故障恢复)
 
 语音未说时长时：全速左右转 880 ms，其他普通动作 1000 ms。显式／同一步共享时长优先；否定、查询、引用和含糊表达不套用默认启动。规则唯一维护源为 [role-prompt.txt](esp32-audio/role-prompt.txt)。
 

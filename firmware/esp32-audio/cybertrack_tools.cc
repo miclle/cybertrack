@@ -25,6 +25,9 @@
 #include <esp_wifi.h>
 #include <esp_task_wdt.h>
 #include <driver/gpio.h>
+#ifdef CYBERTRACK_MAINBOARD_A4
+#include "a4_interlock.h"
+#endif
 
 namespace {
 constexpr gpio_num_t stop_pin = GPIO_NUM_0;
@@ -49,10 +52,19 @@ void Token(char (&token)[33]) {
     for (unsigned i = 0; i < 16; ++i) { token[2*i] = hex[bytes[i] >> 4]; token[2*i+1] = hex[bytes[i] & 15]; }
     token[32] = 0;
 }
-#ifdef CYBERTRACK_MAINBOARD_A1
-// U10 retains an asynchronous SW2 trip even between two safety ticks.
+#if defined(CYBERTRACK_MAINBOARD_A1) || defined(CYBERTRACK_MAINBOARD_A4)
+// A1 reads U10.Q. A4 reads U27.Q, which retains either bridge fault or rail loss.
 constexpr gpio_num_t arm_clock = GPIO_NUM_45, arm_feedback = GPIO_NUM_38;
 bool actuator_armed = false;
+#ifdef CYBERTRACK_MAINBOARD_A4
+A4Interlock interlock;
+void PollA4Port(void*) {
+    for (;;) {
+        a4_io::Poll();
+        vTaskDelay(pdMS_TO_TICKS(20));
+    }
+}
+#endif
 #endif
 void TickLocked(uint64_t now) {
     const bool pressed = gpio_get_level(stop_pin) == 0;
@@ -61,9 +73,18 @@ void TickLocked(uint64_t now) {
     auto alert = proximity.Update(CyberTrackDistanceSnapshot(), now, forward, sessions.auto_avoidance_enabled);
     // Update the interlock before Tick can start another sequence step/effect.
     sessions.SetForwardBlocked(now, proximity.blocked);
+#ifdef CYBERTRACK_MAINBOARD_A4
+    if (!outputs.fault && !a4_io::Healthy()) {
+        outputs.fault = true;
+        sessions.InvalidatePowerSession(now);
+    }
+#endif
     bool inhibit = outputs.fault;
-#ifdef CYBERTRACK_MAINBOARD_A1
-    const bool armed = gpio_get_level(arm_feedback) != 0;
+#if defined(CYBERTRACK_MAINBOARD_A1) || defined(CYBERTRACK_MAINBOARD_A4)
+    bool armed = gpio_get_level(arm_feedback) != 0;
+#ifdef CYBERTRACK_MAINBOARD_A4
+    armed = interlock.Sample(armed, now);
+#endif
     if (armed != actuator_armed) sessions.InvalidatePowerSession(now);
     actuator_armed = armed;
     inhibit |= !armed;
@@ -88,7 +109,7 @@ uint64_t move_started = 0, water_started = 0, bubbles_started = 0;
 const char* OffReason(const char* channel, const water_policy& policy) {
     if (outputs.fault) return "output_fault";
     if (policy.held) return "BOOT";
-#ifdef CYBERTRACK_MAINBOARD_A1
+#if defined(CYBERTRACK_MAINBOARD_A1) || defined(CYBERTRACK_MAINBOARD_A4)
     if (!actuator_armed) return "actuator_disarmed";
 #endif
     if (!policy.online) return "link_lost";
@@ -101,9 +122,19 @@ void OffRecord(const char* channel, uint64_t started, uint64_t now, const water_
         now - started, guard.Starts(), guard.Moving(), guard.Watering(), guard.Bubbling(), outputs.water_pad};
     if (xQueueSend(event_queue, &event, 0) != pdTRUE) ++dropped_events;
 }
-void ApplyLocked(uint64_t now) {
-    if (!outputs.Apply(guard.Watering(), guard.Moving() ? guard.left : 0,
-                       guard.Moving() ? guard.right : 0, guard.Bubbling())) sessions.Stop(now);
+bool ApplyLocked(uint64_t now) {
+#ifdef CYBERTRACK_MAINBOARD_A4
+    const bool was_fault = outputs.fault;
+#endif
+    const bool applied = outputs.Apply(guard.Watering(), guard.Moving() ? guard.left : 0,
+                                       guard.Moving() ? guard.right : 0, guard.Bubbling());
+    if (!applied) {
+#ifdef CYBERTRACK_MAINBOARD_A4
+        if (!was_fault) sessions.InvalidatePowerSession(now);
+        else
+#endif
+            sessions.Stop(now);
+    }
     const bool moving = guard.Moving(), watering = guard.Watering(), bubbling = guard.Bubbling();
     if (moving && !applied_move) move_started = now;
     if (watering && !applied_water) water_started = now;
@@ -112,6 +143,7 @@ void ApplyLocked(uint64_t now) {
     if (bubbling && !applied_bubbles) bubbles_started = now;
     if (!bubbling && applied_bubbles) OffRecord("bubbles", bubbles_started, now, guard.bubbles);
     applied_move = moving; applied_water = watering; applied_bubbles = bubbling;
+    return applied;
 }
 void LogTask(void*) {
     OffEvent event{};
@@ -132,11 +164,19 @@ void SafetyTask(void*) {
     for (;;) {
         xSemaphoreTake(lock, portMAX_DELAY);
         auto now = Now(); TickLocked(now); ApplyLocked(now);
-#ifdef CYBERTRACK_MAINBOARD_A1
-        // Re-arm only from this locked task, after the disabled output levels
-        // have been applied. An open auxiliary contact holds U10 in clear.
-        if (!actuator_armed && !outputs.fault && !guard.Moving() &&
-            !guard.Watering() && !guard.Bubbling() && !sessions.shutdown) {
+#if defined(CYBERTRACK_MAINBOARD_A1) || defined(CYBERTRACK_MAINBOARD_A4)
+        bool can_clock = !actuator_armed && !guard.Moving() && !guard.Watering() &&
+                         !guard.Bubbling() && !sessions.shutdown;
+#ifdef CYBERTRACK_MAINBOARD_A4
+        can_clock = can_clock && interlock.ClockDue(now) && gpio_get_level(stop_pin);
+        if (can_clock && !outputs.fault) {
+            interlock.ClockIssued(now);
+            // Verify physical directions even if Apply cached the idle state.
+            if (a4_io::Set(0, 0) != ESP_OK) outputs.fault = true;
+            can_clock = gpio_get_level(stop_pin) != 0;
+        }
+#endif
+        if (can_clock && !outputs.fault) {
             if (gpio_set_level(GPIO_NUM_14, 0) != ESP_OK ||
                 gpio_set_level(arm_clock, 1) != ESP_OK ||
                 gpio_set_level(arm_clock, 0) != ESP_OK) outputs.fault = true;
@@ -251,7 +291,10 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
         if (plan) sessions.plan_result = "cancelled";
         outcome = "cancelled_before_output";
     }
-    ApplyLocked(now);
+    if (!ApplyLocked(now) && !outputs.fault) {
+        TickLocked(now);
+        outcome = "cancelled_before_output";
+    }
     if (outputs.fault) outcome = "output_fault";
     if (session_expired) *session_expired = !strcmp(outcome, "session_expired");
     if (voice_turn >= 0 && strcmp(outcome, "ok") && strcmp(outcome, "accepted"))
@@ -288,12 +331,24 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
     const char* plan_result = sessions.plan_result;
     recent_command.Record(now, operation, outcome, web_session != 0);
     const auto recent = recent_command;
+#ifdef CYBERTRACK_MAINBOARD_A4
+    const bool drive_armed = actuator_armed;
+    constexpr auto backend = "a4_dual_drv8874";
+#else
+    constexpr auto backend = "concurrent_motor_effects_bench";
+#endif
     const auto plan_source = (sessions.plan_active ? "voice" : "none");
     xSemaphoreGive(lock);
     const auto uptime = Decimal(now);
     const auto recent_age = recent.valid && now >= recent.at ? Decimal(now - recent.at) : "null";
     const char* state = (fault || clock_fault) ? "FAULT" : (moving || watering || bubbling || plan_active) ? "ACTIVE" : stopped ? "STOPPED" : "DISARMED";
     const char* reason = fault ? "output_fault" : clock_fault ? "clock_fault" : stopped ? "stopped" : "none";
+#ifdef CYBERTRACK_MAINBOARD_A4
+    if (!drive_armed && !fault && !clock_fault) {
+        state = "DISARMED";
+        reason = "actuator_disarmed";
+    }
+#endif
     char json[3600];
     // Snapshot outside the action mutex; status/voice never wait for an echo.
     const auto reading = CyberTrackDistanceSnapshot();
@@ -316,7 +371,7 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
         "\"sequence_active\":%s,\"sequence_step\":%u,\"sequence_steps\":%u,\"sequence_result\":\"%s\",\"sequence_max_steps\":16,"
         "\"proximity\":{\"auto_avoidance_enabled\":%s,\"forward_blocked\":%s,\"warn_below_mm\":500,\"stop_below_mm\":150,\"release_mm\":200},"
         "\"recent_command\":{\"valid\":%s,\"operation\":\"%s\",\"result\":\"%s\",\"source\":\"%s\",\"age_ms\":%s},"
-        "\"distance\":%s,\"actuator_backend\":\"concurrent_motor_effects_bench\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
+        "\"distance\":%s,\"actuator_backend\":\"%s\",\"physical_feedback\":false,\"source\":\"cybertrack_audio_board\"}",
         device_id.c_str(), boot_id.c_str(), seq, operation, outcome, state, reason, uptime.c_str(),
         left, right, watering ? "true" : "false", bubbling ? "true" : "false",
         starts, last_duration, std::max({move_remaining, water_remaining, bubbles_remaining}),
@@ -325,9 +380,12 @@ std::string Reply(int voice_turn, const char* operation, int ticket = 0, int dur
         static_cast<unsigned>(water_hold.id), static_cast<unsigned>(water_hold.renewal),
         static_cast<unsigned>(bubbles_hold.id), static_cast<unsigned>(bubbles_hold.renewal),
         bubbles_ms, bubbles_remaining, bubbles_cooldown, bubbles_source, plan_active ? "true" : "false", plan_step, plan_count, plan_result, auto_avoidance_enabled ? "true" : "false", forward_blocked ? "true" : "false", recent.valid ? "true" : "false", recent.operation, recent.result,
-        recent.valid ? (recent.web ? "web" : "voice") : "none", recent_age.c_str(), distance.c_str());
+        recent.valid ? (recent.web ? "web" : "voice") : "none", recent_age.c_str(), distance.c_str(), backend);
     result.assign(json);
     result.pop_back();
+#ifdef CYBERTRACK_MAINBOARD_A4
+    result += drive_armed ? ",\"drive_armed\":true" : ",\"drive_armed\":false";
+#endif
     if (!strcmp(outcome, "execution_not_requested"))
         result += ",\"clarification_facts\":\"本轮识别为预览、编辑或暂不执行的请求，没有启动或调整动作。设备不提供表演编辑与预览；说明当前不支持，不改用动作工具补做。\"";
     if (!strcmp(outcome, "action_unspecified"))
@@ -456,7 +514,11 @@ WebReply CyberTrackWebCall(uint32_t session, const char* operation, const WebCom
 void InitializeCyberTrackTools() {
     // Initialization errors latch an unavailable backend; never reboot into a retry.
     (void)outputs.Init();
-#ifdef CYBERTRACK_MAINBOARD_A1
+#ifdef CYBERTRACK_MAINBOARD_A4
+    if (!outputs.fault && xTaskCreate(PollA4Port, "a4_port", 3072, nullptr, 9, nullptr) != pdPASS)
+        outputs.fault = true;
+#endif
+#if defined(CYBERTRACK_MAINBOARD_A1) || defined(CYBERTRACK_MAINBOARD_A4)
     gpio_config_t arm_in{};
     arm_in.pin_bit_mask = 1ULL << arm_feedback;
     arm_in.mode = GPIO_MODE_INPUT;

@@ -4,6 +4,7 @@ using esp_err_t = int;
 using gpio_num_t = int;
 using ledc_channel_t = int;
 constexpr int ESP_OK=0, GPIO_MODE_OUTPUT=1, GPIO_PULLDOWN_ENABLE=1;
+constexpr int GPIO_NUM_0=0, GPIO_NUM_38=38;
 constexpr int GPIO_NUM_8=8, GPIO_NUM_9=9, GPIO_NUM_10=10, GPIO_NUM_11=11,
               GPIO_NUM_12=12, GPIO_NUM_13=13, GPIO_NUM_18=18, GPIO_NUM_17=17, GPIO_NUM_21=21;
 constexpr int LEDC_LOW_SPEED_MODE=0, LEDC_TIMER_8_BIT=8, LEDC_TIMER_2=2,

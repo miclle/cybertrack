@@ -101,17 +101,45 @@ def replace_once(path, old, new):
     path.write_text(text.replace(old, new, 1))
 
 
+def configure_a4(source, board):
+    # Source selection uses the pinned compact board directory. Advertise the
+    # actual hardware identity to the platform after CMake collects its sources.
+    replace_once(source / "main/CMakeLists.txt", "if(NOT BOARD_NAME)",
+                 'set(BOARD_TYPE "cybertrack-a4")\nset(BOARD_NAME "cybertrack-a4")\nif(NOT BOARD_NAME)')
+    implementation = board / "compact_wifi_board.cc"
+    replace_once(implementation, '#include "led/single_led.h"', '#include "a4_buttons.h"')
+    for name, bit in (("TOUCH_BUTTON_GPIO", 4), ("VOLUME_DOWN_BUTTON_GPIO", 5), ("VOLUME_UP_BUTTON_GPIO", 6)):
+        replace_once(implementation, f"({name})", f"(A4Button<{bit}>())")
+    replace_once(implementation, "static SingleLed led(BUILTIN_LED_GPIO);\n        return &led;", "return Board::GetLed();")
+    replace_once(implementation, ".dev_addr = 0x3C", ".dev_addr = 0x3D")
+    replace_once(implementation, "static NoAudioCodecSimplex audio_codec", "static NoAudioCodecSimplexPdm audio_codec")
+    replace_once(implementation, "AUDIO_I2S_MIC_GPIO_SCK, AUDIO_I2S_MIC_GPIO_WS, AUDIO_I2S_MIC_GPIO_DIN",
+                 "AUDIO_I2S_MIC_GPIO_SCK, AUDIO_I2S_MIC_GPIO_DIN")
+    codec = source / "main/audio/codecs/no_audio_codec.cc"
+    replace_once(codec, "    ESP_ERROR_CHECK(i2s_channel_init_pdm_rx_mode(rx_handle_, &pdm_rx_cfg));",
+                 "    pdm_rx_cfg.clk_cfg.dn_sample_mode = I2S_PDM_DSR_16S;\n"
+                 "    ESP_ERROR_CHECK(i2s_channel_init_pdm_rx_mode(rx_handle_, &pdm_rx_cfg));")
+    # GPIO43/44 are camera signals. Keep app and second-stage boot console on USB.
+    config = source / "sdkconfig"
+    replace_once(config, "CONFIG_ESP_CONSOLE_UART_DEFAULT=y", "# CONFIG_ESP_CONSOLE_UART_DEFAULT is not set")
+    replace_once(config, "# CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG is not set", "CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y")
+    for name in ("a4_io.h", "a4_buttons.h", "a4_interlock.h"):
+        shutil.copy2(HERE / name, board / name)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
-    parser.add_argument("--mainboard-a1", action="store_true")
+    boards = parser.add_mutually_exclusive_group()
+    boards.add_argument("--mainboard-a4", action="store_true")
+    boards.add_argument("--mainboard-a1", action="store_true")
     args = parser.parse_args()
     source = args.source.resolve()
     if not source.is_relative_to(ROOT / "build") or (source / ".git").exists():
         parser.error("source must be a disposable non-Git directory inside this project's build/")
     board = source / "main/boards/bread-compact-wifi"
     replace_once(source / "CMakeLists.txt", 'set(PROJECT_VER "2.0.3")',
-                 'set(PROJECT_VER "2.0.3-ct81")')
+                 'set(PROJECT_VER "2.0.3-ct82")')
     replace_once(board / "compact_wifi_board.cc", '#include "lamp_controller.h"',
                  '#include "cybertrack_tools.h"')
     replace_once(board / "compact_wifi_board.cc", 'static LampController lamp(LAMP_GPIO);',
@@ -119,6 +147,9 @@ def main():
     if args.mainboard_a1:
         with (source / "main/CMakeLists.txt").open("a") as cmake:
             cmake.write("\ntarget_compile_definitions(${COMPONENT_LIB} PRIVATE CYBERTRACK_MAINBOARD_A1=1)\n")
+    if args.mainboard_a4:
+        with (source / "main/CMakeLists.txt").open("a") as cmake:
+            cmake.write("\ntarget_compile_definitions(${COMPONENT_LIB} PRIVATE CYBERTRACK_MAINBOARD_A4=1)\n")
     # Restrict schemas and validation to CyberTrack tools.
     replace_once(source / "main/mcp_server.h",
                  'cJSON_AddItemToObject(input_schema, "properties", properties);',
@@ -201,7 +232,9 @@ def main():
     replace_once(config, 'CONFIG_FREERTOS_HZ=100\n', 'CONFIG_FREERTOS_HZ=1000\n')
     replace_once(config, '# CONFIG_ESP_TASK_WDT_PANIC is not set', 'CONFIG_ESP_TASK_WDT_PANIC=y')
     replace_once(config, 'CONFIG_ESP_TASK_WDT_TIMEOUT_S=10', 'CONFIG_ESP_TASK_WDT_TIMEOUT_S=2')
-    print("Applied bounded motor + water/bubbles bench; BOOT stops all; audio/display pins unchanged")
+    if args.mainboard_a4:
+        configure_a4(source, board)
+    print("Applied CyberTrack board and local action controls")
 
 
 if __name__ == "__main__":

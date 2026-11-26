@@ -31,6 +31,21 @@ GROUPS = {
 }
 
 
+# Further board signals used by the dedicated ESP32-S3 image. The exporter
+# may rename nets to NET_n; compare component-pad equivalence classes.
+FIRMWARE_GROUPS = {
+    'MOTOR_A_IN1': 'U12_4 U26_2', 'MOTOR_A_IN2': 'U12_5 U26_5',
+    'MOTOR_B_IN1': 'U12_6 U26_10', 'MOTOR_B_IN2': 'U12_7 U26_13',
+    'BOOT_STOP_N': 'U1_27 J6_1', 'AUX_EN': 'U1_22 R38_1',
+    'WATER_EN': 'U1_11 R32_1', 'BUBBLE_EN': 'U1_10 R35_1',
+    'TALK': 'U12_8 J4_2', 'VOL_DN': 'U12_9 J4_4', 'VOL_UP': 'U12_10 J4_3',
+    'OLED_SCL': 'U1_35 U12_22 J2_3', 'OLED_SDA': 'U1_34 U12_23 J2_4',
+    'MIC_SCK': 'U1_5 U18_2', 'MIC_DATA': 'U1_6 U18_3',
+    'AMP_DATA': 'U1_7 U2_1', 'AMP_BCLK': 'U1_8 U2_16', 'AMP_LRCK': 'U1_9 U2_14',
+    'US_TRIG': 'U1_39 J3_2', 'US_ECHO': 'U1_38 J3_3',
+}
+
+
 def check(archive):
     with ZipFile(archive) as gerber:
         rows = json.loads(gerber.read('FlyingProbeTesting.json'))['pins']['rows']
@@ -38,7 +53,7 @@ def check(archive):
     for row in rows:
         pins.setdefault(row[1], set()).add(row[6])
     occupied = {}
-    for net, members in GROUPS.items():
+    for net, members in (GROUPS | FIRMWARE_GROUPS).items():
         groups = set()
         for pin in members.split():
             if len(pins.get(pin, ())) != 1:
@@ -54,4 +69,4 @@ def check(archive):
 
 if __name__ == '__main__':
     check(GERBER)
-    print(f'PASS: {len(GROUPS)} distinct A4 interlock and drive pin groups')
+    print(f'PASS: {len(GROUPS)} interlock groups and {len(FIRMWARE_GROUPS)} additional firmware pin groups')

@@ -18,7 +18,7 @@
 
 v2 使用一块定制主板。**打印整机选 A1，前摄试装选 A2，双编码器和六轴 IMU 试装选 A3，4S 分域供电设计选 A4。** A3 已有主板和五个穿线改件，整机总装与 Lean／Ready 排盘仍对应 A1。[按版次选择工程](docs/schematic-and-pcb.md) · [A3 线束与改件](hardware/model/studies/a3-harness/README.md) · [A4 电源与电池仓试配](hardware/pcb/power-revision/README.md)
 
-旧面包板样机最近部署的是 ct78，ct81 候选固件和配套角色待部署。视频记录了早期样机的实际表现；v2 整机带载、机械停止和儿童使用仍待验收。[当前状态](docs/current-status.md) · [早期样机分支](https://github.com/miclle/cybertrack/tree/main)
+旧面包板样机最近部署的是 ct78，ct82 候选固件和配套角色待部署。视频记录了早期样机的实际表现；v2 整机带载、机械停止和儿童使用仍待验收。[当前状态](docs/current-status.md) · [早期样机分支](https://github.com/miclle/cybertrack/tree/main)
 
 ## 旧版样机演示
 

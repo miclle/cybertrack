@@ -1,0 +1,116 @@
+{
+  "version": "2.0.3-ct82",
+  "date": "2026-11-26",
+  "upstream_revision": "e8ed16bb42ed9b199cbc9376011653e5037de8d8",
+  "role_sha256": "6186beb47f1845ab5a0553be34131430032c32f8a130c178fd4dedebcf0258e0",
+  "last_recorded_application": "2.0.3-ct78",
+  "flashed": false,
+  "platform_role_synced": false,
+  "mainboard_a4_build": {
+    "version": "v5.5.1",
+    "path": "build/firmware-ct82-a4/xiaozhi.bin",
+    "bytes": 2659520,
+    "sha256": "ac6b935d034d21aedf57634317bad4e7fd314eb5508de3dd6da8aa1c4804416b"
+  },
+  "mainboard_a1_build": {
+    "version": "v5.5.1",
+    "path": "build/firmware-ct82-a1/xiaozhi.bin",
+    "bytes": 2682608,
+    "sha256": "d48e999fb12e77cdab7d4e2bbbc0d4885205f8579c8ff5a96649240423b49452"
+  },
+  "esp_idf_build": {
+    "version": "v5.5.1",
+    "path": "build/firmware-ct82-breadboard/xiaozhi.bin",
+    "bytes": 2682240,
+    "sha256": "87ce0595d1cfaad94e8f150dd4f00eb2a2781cb2e4684c54d74cbae253a08480"
+  },
+  "checks": {
+    "manufacturing_pin_groups": {
+      "interlock": 20,
+      "additional_board_io": 20,
+      "gerber_sha256": "a57ee03fc0963b544da3defa6a62d25fd3fac90b42e201864725e4451a580c28"
+    },
+    "a4_host_hardware_model": {
+      "passed": true,
+      "cases": [
+        "cold start and delayed motor rail",
+        "U6 fault",
+        "U24 fault",
+        "12 V rail drop",
+        "SW2 reclosure",
+        "BOOT held during recovery",
+        "fault between safety samples",
+        "fault during direction write",
+        "stale web renew and cancelled voice sequence",
+        "TCA9539 NACK, configuration reset, mismatched output and stale sampling",
+        "fresh movement after permission returns"
+      ],
+      "clock_spacing_ms": 100,
+      "feedback_qualification_ms": 5,
+      "port_poll_delay_ms": 20,
+      "port_sample_expiry_ms": 100
+    },
+    "sanitized_host_suite": "pass",
+    "mcp_http_and_a4_receipts": "pass",
+    "web_ui": "pass",
+    "oled_methods": "pass",
+    "refusal_regression": {
+      "passed": true,
+      "tool_count": 9,
+      "refusal_and_stop_cases": 28,
+      "retired_tool_rejected": true,
+      "ignition_commands_and_legacy_plan_rejected": true,
+      "retired_voice_turns_checked": 4,
+      "new_input_recovers": true,
+      "concurrent_then_sequential_completed": true,
+      "scope": "Actual MCP/guards with synthetic recognized text and virtual clock; no model, device or physical acceptance"
+    },
+    "synthetic_stop_matrix": {
+      "matrix": "stop-v2",
+      "source_version": "2.0.3-ct82",
+      "evidence_kind": "host_control_replay",
+      "passed_cases": [
+        "release_move",
+        "release_water",
+        "release_bubbles",
+        "boot_mixed",
+        "stop_mixed",
+        "page_hidden_mixed",
+        "web_loss_mixed",
+        "wifi_loss_mixed",
+        "voice_loss_mixed",
+        "sequence_cancel_voice_active",
+        "sequence_cancel_voice_waiting",
+        "sequence_source_disconnect_voice_active",
+        "sequence_source_disconnect_voice_waiting"
+      ],
+      "trigger_offsets_ms": [
+        5,
+        55,
+        100,
+        150,
+        195
+      ],
+      "tick_ms": 5,
+      "reconnected_at_ms_after_trigger": 2500,
+      "observed_ms_after_reconnect": 6000,
+      "second_step_without_stop": [
+        "voice"
+      ],
+      "physical_trials_added": 0,
+      "prepared_source_sha256": {
+        "control_sessions.h": "e6e94e8bf8c2f2d5e3f2f26f6c59e23ee15909c7d393d1592a71c69981750679",
+        "action_guard.h": "258c96bcf37939683b4a560b33954fc73a87e9477ea86d965bccf5c6ac6e841d",
+        "action_plan.h": "01c617ed3609e4b80c8a6e052a91a97c64fa01c84266731b91195f715a739261",
+        "water_guard.h": "088309c542a1e06dbfc3d49994ad0b8793c5e6868fef2e5c238b6cf0deec5379",
+        "water_policy.c": "6398f30393a06e0fb9081e16adf9cfd5b8bf723234604e960f6c8656cb4f050a",
+        "water_policy.h": "a4a13f7be957e989a2edcea152dbaff1b9bd180bf98d4a6e950c043a1128b3ab"
+      }
+    }
+  },
+  "physical_verification_pending": [
+    "Inject both nFAULT pins separately and capture PWM_SAFE, bridge inputs, ARM_CLK and GPIO38.",
+    "Measure rail slew, wake time, loaded reset margin and temperature.",
+    "Check track side and polarity, OLED and shared bus latency, PDM capture."
+  ]
+}

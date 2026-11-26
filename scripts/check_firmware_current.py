@@ -22,8 +22,8 @@ def image_identity(record, image=None):
 
 
 def source_record(evidence, board):
-    if board == "a1" and "mainboard_a1_build" in evidence:
-        return evidence["mainboard_a1_build"]
+    if board in ("a1", "a4") and f"mainboard_{board}_build" in evidence:
+        return evidence[f"mainboard_{board}_build"]
     if board == "breadboard":
         return evidence.get("esp_idf_build") or evidence["artifact"]
     raise ValueError(f"no source build recorded for board: {board}")
@@ -74,7 +74,7 @@ def check(root=ROOT, source_bin=None, deployed_bin=None, board=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--board", choices=("a1", "breadboard"),
+    parser.add_argument("--board", choices=("a4", "a1", "breadboard"),
                         help="source board (defaults to A1 when recorded, otherwise breadboard)")
     parser.add_argument("--source-bin", type=Path, help="compare a local application image to the source build record")
     parser.add_argument("--deployed-bin", type=Path, help="compare a local application image to the last flash record")

@@ -1,6 +1,6 @@
 # 固件
 
-v2 定制主板使用 [ESP32-S3 应用的 A1 构建](esp32-audio/README.md)，通过灵矽语音或局域网网页控制行走、喷水与泡泡。三路独立计时，BOOT 与全部停止取消剩余步骤。源码、最近部署和平台角色分别见[当前状态](../docs/current-status.md)与[版本清单](current.json)。
+A4 与 A1 定制主板分别使用[对应的 ESP32-S3 应用构建](esp32-audio/README.md)，通过灵矽语音或局域网网页控制行走、喷水与泡泡。三路独立计时，BOOT 与全部停止取消剩余步骤。源码、最近部署和平台角色分别见[当前状态](../docs/current-status.md)与[版本清单](current.json)。
 
 | 工程 | 用途 |
 |---|---|

@@ -2,6 +2,9 @@
 #include <driver/gpio.h>
 #include <driver/ledc.h>
 #include <climits>
+#ifdef CYBERTRACK_MAINBOARD_A4
+#include "a4_io.h"
+#endif
 
 // Serialized by the adapter's priority-inheriting mutex, never a spinlock:
 // LEDC driver APIs may acquire their own RTOS locks.
@@ -29,9 +32,13 @@ public:
     bool Init() {
         uint64_t mask = (1ULL << WaterPin) | (1ULL << BubblesPin);
         for (const auto& b : bridges) {
-            mask |= (1ULL << b.enable) | (1ULL << b.in1) | (1ULL << b.in2);
-            if (!Check(gpio_set_level(b.enable, 0)) || !Check(gpio_set_level(b.in1, 0)) ||
+            mask |= 1ULL << b.enable;
+            if (!Check(gpio_set_level(b.enable, 0))) return false;
+#ifndef CYBERTRACK_MAINBOARD_A4
+            mask |= (1ULL << b.in1) | (1ULL << b.in2);
+            if (!Check(gpio_set_level(b.in1, 0)) ||
                 !Check(gpio_set_level(b.in2, 0))) return false;
+#endif
         }
         if (!Check(gpio_set_level(WaterPin, 0)) || !Check(gpio_set_level(BubblesPin, 0))) return false;
         gpio_config_t pins{};
@@ -53,6 +60,9 @@ public:
             ready_mask |= 1u << i;
             if (!Check(ledc_channel_config(&channel))) return false;
         }
+        #ifdef CYBERTRACK_MAINBOARD_A4
+        if (!Check(a4_io::Init())) return false;
+#endif
         return Apply(false, 0, 0);
     }
     bool Apply(bool water, int left, int right, bool bubbles = false) {
@@ -72,11 +82,29 @@ public:
                 bool ok = true;
                 for (const auto& b : bridges) ok = (ledc_stop(LEDC_LOW_SPEED_MODE, b.channel, 0) == ESP_OK) && ok;
                 if (!ok) return Check(-1);
+#ifdef CYBERTRACK_MAINBOARD_A4
+                // Drop all requested direct outputs before touching the shared bus.
+                if (!water && water_on && !Check(gpio_set_level(WaterPin, 0))) return false;
+                if (!bubbles && bubbles_on && !Check(gpio_set_level(BubblesPin, 0))) return false;
+                if (!water) water_on = false;
+                if (!bubbles) bubbles_on = false;
+                if (!Check(a4_io::Set(left, right))) return false;
+#endif
             }
+#ifdef CYBERTRACK_MAINBOARD_A4
+            // SW2/VM/nFAULT or BOOT may change during the I2C readback.
+            if ((left || right) && (!gpio_get_level(GPIO_NUM_38) || !gpio_get_level(GPIO_NUM_0))) {
+                applied = false;
+                Apply(false, 0, 0);
+                return false;
+            }
+#endif
             for (unsigned i = 0; i < 2; ++i) {
                 const auto& b = bridges[i];
+#ifndef CYBERTRACK_MAINBOARD_A4
                 if (direction_change && (!Check(gpio_set_level(b.in1, values[i] > 0)) ||
                     !Check(gpio_set_level(b.in2, values[i] < 0)))) return false;
+#endif
                 if (values[i] && (direction_change || values[i] != previous[i]) &&
                     !Check(ledc_set_duty(LEDC_LOW_SPEED_MODE, b.channel, SpeedDuty(values[i])))) return false;
             }
@@ -96,6 +124,10 @@ public:
         return true;
     }
 private:
+#ifdef CYBERTRACK_MAINBOARD_A4
+    struct Bridge { gpio_num_t enable; ledc_channel_t channel; };
+    static constexpr Bridge bridges[] = {{GPIO_NUM_11, LEDC_CHANNEL_3}, {GPIO_NUM_8, LEDC_CHANNEL_2}};
+#else
     struct Bridge { gpio_num_t enable, in1, in2; ledc_channel_t channel; };
     // Logical left/right order. Assembly feedback: forward/backward work,
     // but turns are reversed with the former A/left, B/right assignment.
@@ -103,6 +135,7 @@ private:
         {GPIO_NUM_11, GPIO_NUM_12, GPIO_NUM_13, LEDC_CHANNEL_3}, // B / left
         {GPIO_NUM_8, GPIO_NUM_9, GPIO_NUM_10, LEDC_CHANNEL_2},  // A / right
     };
+#endif
     unsigned ready_mask = 0;
     bool water_input_ready = false;
     bool water_on = false, bubbles_on = false, applied = false;
@@ -121,8 +154,10 @@ private:
         for (const auto& b : bridges) {
             (void)gpio_set_level(b.enable, 0);
             (void)gpio_set_direction(b.enable, GPIO_MODE_OUTPUT);
+#ifndef CYBERTRACK_MAINBOARD_A4
             (void)gpio_set_level(b.in1, 0);
             (void)gpio_set_level(b.in2, 0);
+#endif
         }
         water_pad.off = WaterPadLevel();
     }

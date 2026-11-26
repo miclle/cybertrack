@@ -80,6 +80,17 @@ c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror -DCYBERTRAC
   -Ibuild/audio-host -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio firmware/esp32-audio/tests/sw2_test.cc \
   build/audio-host/water_policy.o -o build/audio-host/sw2_test
 build/audio-host/sw2_test
+mkdir -p build/audio-host/stubs/freertos
+for header in driver/i2c_master.h freertos/FreeRTOS.h freertos/semphr.h esp_timer.h; do
+  echo '#include "a4_i2c_stub.h"' > "build/audio-host/stubs/$header"
+done
+c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror -DCYBERTRACK_MAINBOARD_A4 \
+  -Ibuild/audio-host/stubs -Ibuild/audio-host -Ifirmware/esp32-audio/tests -Ifirmware/esp32-linx/main -Ifirmware/esp32-audio \
+  firmware/esp32-audio/tests/a4_drive_test.cc build/audio-host/water_policy.o -o build/audio-host/a4_drive_test
+for scenario in nack reset mismatch stalled; do
+  build/audio-host/a4_drive_test "$scenario"
+done
+echo "PASS: A4 drive interlock, delayed rearm, stale actions, port readback and stalled polling"
 c++ -std=c++17 -g -fsanitize=address,undefined -Wall -Wextra -Werror \
   -Ifirmware/esp32-audio firmware/esp32-audio/tests/recent_command_test.cc -o build/audio-host/recent_command_test
 build/audio-host/recent_command_test
